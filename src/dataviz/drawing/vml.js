@@ -26,7 +26,8 @@
         defined = util.defined,
         deg = util.deg,
         renderTemplate = util.renderTemplate,
-        round = util.round;
+        round = util.round,
+        valueOrDefault = util.valueOrDefault;
 
     // Constants ==============================================================
     var NONE = "none",
@@ -77,42 +78,41 @@
             this.element._kendoNode = this;
         },
 
-        load: function(elements, transform) {
-            var node = this,
-                element = node.element,
-                childNode,
-                srcElement,
-                children,
-                combinedTransform,
-                i;
+        load: function(elements, transform, opacity) {
+            opacity = valueOrDefault(opacity, 1);
+            if (this.srcElement) {
+                opacity *= valueOrDefault(this.srcElement.options.opacity, 1);
+            }
 
-            for (i = 0; i < elements.length; i++) {
-                srcElement = elements[i];
-                children = srcElement.children;
-                combinedTransform = srcElement.currentTransform(transform);
+            for (var i = 0; i < elements.length; i++) {
+                var srcElement = elements[i];
+                var children = srcElement.children;
+                var combinedTransform = srcElement.currentTransform(transform);
+                var currentOpacity = opacity * valueOrDefault(srcElement.options.opacity, 1);
 
+                var childNode;
                 if (srcElement instanceof d.Group) {
                     childNode = new GroupNode(srcElement);
                 } else if (srcElement instanceof d.Text) {
-                    childNode = new TextNode(srcElement, combinedTransform);
+                    childNode = new TextNode(srcElement, combinedTransform, currentOpacity);
                 } else if (srcElement instanceof d.Path) {
-                    childNode = new PathNode(srcElement, combinedTransform);
+                    childNode = new PathNode(srcElement, combinedTransform, currentOpacity);
                 } else if (srcElement instanceof d.MultiPath) {
-                    childNode = new MultiPathNode(srcElement, combinedTransform);
+                    childNode = new MultiPathNode(srcElement, combinedTransform, currentOpacity);
                 } else if (srcElement instanceof d.Circle) {
-                    childNode = new CircleNode(srcElement, combinedTransform);
+                    childNode = new CircleNode(srcElement, combinedTransform, currentOpacity);
                 } else if (srcElement instanceof d.Arc) {
-                    childNode = new ArcNode(srcElement, combinedTransform);
+                    childNode = new ArcNode(srcElement, combinedTransform, currentOpacity);
                 } else if (srcElement instanceof d.Image) {
-                    childNode = new ImageNode(srcElement, combinedTransform);
+                    childNode = new ImageNode(srcElement, combinedTransform, currentOpacity);
                 }
 
                 if (children && children.length > 0) {
-                    childNode.load(children, combinedTransform);
+                    childNode.load(children, combinedTransform, opacity);
                 }
 
-                node.append(childNode);
-                childNode.attachTo(element);
+                this.append(childNode);
+                childNode.attachTo(this.element);
             }
         },
 
@@ -147,6 +147,15 @@
             }
 
             return style;
+        },
+
+        mapOpacityTo: function(attrs, multiplier) {
+            var opacity = valueOrDefault(this.opacity, 1);
+
+            opacity *= valueOrDefault(multiplier, 1);
+            if (opacity !== 1) {
+                attrs.push(["opacity", opacity]);
+            }
         },
 
         attr: function(name, value) {
@@ -329,6 +338,10 @@
                 this.refreshTransform();
             }
 
+            if (e.field === "opacity") {
+                this.refreshOpacity();
+            }
+
             ObserverNode.fn.optionsChange.call(this, e);
         },
 
@@ -343,12 +356,38 @@
             }
         },
 
+        currentOpacity: function() {
+            var opacity = valueOrDefault(this.srcElement.options.opacity, 1);
+
+            if (this.parent && this.parent.currentOpacity) {
+                opacity *= this.parent.currentOpacity();
+            }
+
+            return opacity;
+        },
+
+        refreshOpacity: function() {
+            var children = this.childNodes,
+                length = children.length,
+                i;
+
+            var opacity = this.currentOpacity();
+            for (i = 0; i < length; i++) {
+                children[i].refreshOpacity(opacity);
+            }
+        },
+
         clipBBox: function(clip) {
             return clip.bbox(this.srcElement.currentTransform());
         }
     });
 
     var StrokeNode = Node.extend({
+        init: function(srcElement, opacity) {
+            this.opacity = opacity;
+            Node.fn.init.call(this, srcElement);
+        },
+
         createElement: function() {
             this.element = createElementVML("stroke");
             this.setStroke();
@@ -358,6 +397,11 @@
             if (e.field.indexOf("stroke") === 0) {
                 this.setStroke();
             }
+        },
+
+        refreshOpacity: function(opacity) {
+            this.opacity = opacity;
+            this.setStroke();
         },
 
         setStroke: function() {
@@ -373,9 +417,7 @@
                 attrs.push(["color", stroke.color]);
                 attrs.push(["weight", (stroke.width || 1) + "px"]);
 
-                if (defined(stroke.opacity)) {
-                    attrs.push(["opacity", stroke.opacity]);
-                }
+                this.mapOpacityTo(attrs, stroke.opacity);
 
                 if (defined(stroke.dashType)) {
                     attrs.push(["dashstyle", stroke.dashType]);
@@ -401,6 +443,11 @@
     });
 
     var FillNode = Node.extend({
+        init: function(srcElement, transform, opacity) {
+            this.opacity = opacity;
+            Node.fn.init.call(this, srcElement);
+        },
+
         createElement: function() {
             this.element = createElementVML("fill");
             this.setFill();
@@ -410,6 +457,11 @@
             if (e.field.indexOf("fill") === 0) {
                 this.setFill();
             }
+        },
+
+        refreshOpacity: function(opacity) {
+            this.opacity = opacity;
+            this.setFill();
         },
 
         setFill: function() {
@@ -424,9 +476,7 @@
                 attrs.push(["on", "true"]);
                 attrs.push(["color", fill.color]);
 
-                if (defined(fill.opacity)) {
-                    attrs.push(["opacity", fill.opacity]);
-                }
+                this.mapOpacityTo(attrs, fill.opacity);
             } else {
                 attrs.push(["on", "false"]);
             }
@@ -490,9 +540,9 @@
     });
 
     var ShapeNode = ObserverNode.extend({
-        init: function(srcElement, transform) {
-            this.fill = this.createFillNode(srcElement, transform);
-            this.stroke = new StrokeNode(srcElement);
+        init: function(srcElement, transform, opacity) {
+            this.fill = this.createFillNode(srcElement, transform, opacity);
+            this.stroke = new StrokeNode(srcElement, opacity);
             this.transform = this.createTransformNode(srcElement, transform);
 
             ObserverNode.fn.init.call(this, srcElement);
@@ -506,8 +556,8 @@
             Node.fn.attachTo.call(this, domElement);
         },
 
-        createFillNode: function(srcElement) {
-            return new FillNode(srcElement);
+        createFillNode: function(srcElement, transform, opacity) {
+            return new FillNode(srcElement, transform, opacity);
         },
 
         createTransformNode: function(srcElement, transform) {
@@ -534,6 +584,13 @@
 
         refreshTransform: function(transform) {
             this.transform.refresh(this.srcElement.currentTransform(transform));
+        },
+
+        refreshOpacity: function(opacity) {
+            opacity *= valueOrDefault(this.srcElement.options.opacity, 1);
+
+            this.fill.refreshOpacity(opacity);
+            this.stroke.refreshOpacity(opacity);
         },
 
         mapStyle: function(width, height) {
@@ -585,10 +642,10 @@
     });
 
     var PathNode = ShapeNode.extend({
-        init: function(srcElement, transform) {
+        init: function(srcElement, transform, opacity) {
             this.pathData = this.createDataNode(srcElement);
 
-            ShapeNode.fn.init.call(this, srcElement, transform);
+            ShapeNode.fn.init.call(this, srcElement, transform, opacity);
         },
 
         attachTo: function(domElement) {
@@ -732,10 +789,10 @@
     });
 
     var TextNode = PathNode.extend({
-        init: function(srcElement, transform) {
+        init: function(srcElement, transform, opacity) {
             this.path = new TextPathNode(srcElement);
 
-            PathNode.fn.init.call(this, srcElement, transform);
+            PathNode.fn.init.call(this, srcElement, transform, opacity);
         },
 
         createDataNode: function(srcElement) {
@@ -771,11 +828,17 @@
     });
 
     var ImageFillNode = TransformNode.extend({
+        init: function(srcElement, transform, opacity) {
+            this.opacity = opacity;
+            TransformNode.fn.init.call(this, srcElement, transform);
+        },
+
         createElement: function() {
             this.element = createElementVML("fill");
 
             this.attr("type", "frame");
             this.attr("rotate", true);
+            this.setOpacity();
             this.setSrc();
             this.setTransform();
         },
@@ -790,6 +853,17 @@
 
         geometryChange: function() {
             this.refresh();
+        },
+
+        refreshOpacity: function(opacity) {
+            this.opacity = opacity;
+            this.setOpacity();
+        },
+
+        setOpacity: function() {
+            var attrs = [];
+            this.mapOpacityTo(attrs, this.srcElement.options.opacity);
+            this.allAttr(attrs);
         },
 
         setSrc: function() {
@@ -851,8 +925,8 @@
     });
 
     var ImageNode = PathNode.extend({
-        createFillNode: function(srcElement, transform) {
-            return new ImageFillNode(srcElement, transform);
+        createFillNode: function(srcElement, transform, opacity) {
+            return new ImageFillNode(srcElement, transform, opacity);
         },
 
         createDataNode: function(srcElement) {

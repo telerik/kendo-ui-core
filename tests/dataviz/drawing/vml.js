@@ -26,6 +26,13 @@
         TransformNode = vml.TransformNode;
 
     // ------------------------------------------------------------
+    function expect(value) {
+        return function(actual) {
+            equal(actual, value);
+        };
+    }
+
+    // ------------------------------------------------------------
     (function() {
         var container,
             surface;
@@ -180,7 +187,6 @@
             };
             srcElement.visible(false);
         });
-
     }
 
     function nodeLoadTests(name, TNode, createElement) {
@@ -343,7 +349,7 @@
 
         module("GroupNode", {
             setup: function() {
-                groupNode = new GroupNode();
+                groupNode = new GroupNode(new d.Group());
             }
         });
 
@@ -357,6 +363,23 @@
 
         test("renders nowrap", function() {
             equal(groupNode.element.style["white-space"], "nowrap");
+        });
+
+        test("load appends child nodes", function() {
+            var parentGroup = new Group();
+            var childGroup = new Group();
+            parentGroup.append(childGroup);
+
+            groupNode.load([parentGroup]);
+
+            ok(groupNode.childNodes[0].childNodes[0] instanceof GroupNode);
+        });
+
+        test("load attaches child nodes", function() {
+            groupNode.attachTo(document.createElement("div"));
+            groupNode.load([new Group()]);
+
+            equal(groupNode.childNodes[0].element.parentNode, groupNode.element);
         });
 
         test("refreshTransform method calls childNodes refreshTransform method", function() {
@@ -481,7 +504,82 @@
             group.transform(g.transform().translate(100, 100));
             compareBoundingBox(groupNode.clipBBox(clip), [210, 210, 310, 310]);
         });
+    })();
 
+    // ------------------------------------------------------------
+    (function() {
+        var group;
+        var groupNode;
+
+        module("GroupNode / Opacity", {
+            setup: function() {
+                group = new Group();
+                groupNode = new GroupNode(group);
+            }
+        });
+
+        test("load sets group opacity on child groups", function() {
+            var childGroup = new d.Group({ opacity: 0.5 });
+            childGroup.append(new d.Path());
+
+            group.opacity(0.5);
+            groupNode.load([childGroup]);
+
+            equal(groupNode.childNodes[0].childNodes[0].fill.opacity, 0.25);
+        });
+
+        test("load sets group opacity on children", function() {
+            group.opacity(0.5);
+            groupNode.load([new d.Path()]);
+
+            equal(groupNode.childNodes[0].fill.opacity, 0.5);
+        });
+
+        test("load multiplies group opacity with child opacity", function() {
+            group.opacity(0.5);
+            groupNode.load([new d.Path({ opacity: 0.5 })]);
+
+            equal(groupNode.childNodes[0].fill.opacity, 0.25);
+        });
+    })();
+
+    // ------------------------------------------------------------
+    (function() {
+        var rootGroup;
+        var rootGroupNode;
+
+        var childGroup;
+        var childGroupNode;
+
+        var childNode;
+
+        module("GroupNode / Opacity / Refresh", {
+            setup: function() {
+                rootGroup = new d.Group();
+                rootGroupNode = new GroupNode(rootGroup);
+
+                childGroup = new d.Group();
+                childGroupNode = new GroupNode(childGroup);
+                rootGroupNode.append(childGroupNode);
+
+                childNode = new vml.Node();
+                childGroupNode.append(childNode);
+            }
+        });
+
+        test("sets child opacity", function() {
+            childNode.refreshOpacity = expect(0.5);
+
+            rootGroup.opacity(0.5);
+        });
+
+        test("multiplies with child group opacity", function() {
+            childNode.refreshOpacity = $.noop;
+            childGroup.opacity(0.5);
+            childNode.refreshOpacity = expect(0.25);
+
+            rootGroup.opacity(0.5);
+        });
     })();
 
     // ------------------------------------------------------------
@@ -782,7 +880,30 @@
                 equal(value, "false");
             };
 
+            path.fill("red");
             updateOption("fill", null);
+        });
+
+        test("refreshOpacity sets opacity", function() {
+            fillNode.attr = function(name, value) {
+                if (name === "opacity") {
+                    equal(value, 0.5);
+                }
+            };
+
+            path.fill("red");
+            fillNode.refreshOpacity(0.5);
+        });
+
+        test("refreshOpacity multiplies with fill opacity", function() {
+            fillNode.attr = function(name, value) {
+                if (name === "opacity") {
+                    equal(value, 0.25);
+                }
+            };
+
+            path.fill("red", 0.5);
+            fillNode.refreshOpacity(0.5);
         });
     })();
 
@@ -1169,6 +1290,30 @@
             };
 
             path.lineTo(10, 10);
+        });
+
+        test("refreshOpacity is forwarded to fill node", function() {
+            pathNode.fill.refreshOpacity = expect(0.5);
+            pathNode.refreshOpacity(0.5);
+        });
+
+        test("refreshOpacity is forwarded to stroke node", function() {
+            pathNode.stroke.refreshOpacity = expect(0.5);
+            pathNode.refreshOpacity(0.5);
+        });
+
+        test("refreshOpacity multiplies with own opacity for fill", function() {
+            pathNode.fill.refreshOpacity = expect(0.25);
+
+            path.opacity(0.5);
+            pathNode.refreshOpacity(0.5);
+        });
+
+        test("refreshOpacity multiplies with own opacity for stroke", function() {
+            pathNode.stroke.refreshOpacity = expect(0.25);
+
+            path.opacity(0.5);
+            pathNode.refreshOpacity(0.5);
         });
     })();
 
@@ -1621,7 +1766,7 @@
 
         module("ImageFillNode", {
             setup: function() {
-                image = new d.Image("foo", new g.Rect([10, 20], [90, 80]));
+                image = new d.Image("foo", new g.Rect([10, 20], [90, 80]), { opacity: 0.5 });
                 fillNode = new vml.ImageFillNode(image);
             }
         });
@@ -1644,6 +1789,10 @@
 
         test("renders fill relative center position", function() {
             equal(fillNode.element.position, "0.05,0.1");
+        });
+
+        test("renders opacity", function() {
+            equal(fillNode.element.opacity, "0.5");
         });
 
         test("renders default angle of rotation", function() {
@@ -1717,6 +1866,16 @@
 
             image.rect().setSize([200, 200]);
             fillNode.geometryChange();
+        });
+
+        test("refreshOpacity multiplies with image opacity", function() {
+            fillNode.attr = function(name, value) {
+                if (name === "opacity") {
+                    equal(value, 0.25);
+                }
+            };
+
+            fillNode.refreshOpacity(0.5);
         });
     })();
 
