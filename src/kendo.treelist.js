@@ -1139,8 +1139,6 @@ var __meta__ = {
             };
 
             if (model && !this.trigger(REMOVE, args)) {
-                row.hide();
-
                 this.dataSource.remove(model);
 
                 this.dataSource.sync();
