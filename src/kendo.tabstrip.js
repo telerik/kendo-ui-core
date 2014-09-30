@@ -635,9 +635,9 @@ var __meta__ = {
         },
 
         remove: function (elements) {
-            var that = this,
-                type = typeof elements,
-                contents = $();
+            var that = this;
+            var type = typeof elements;
+            var contents;
 
             if (type === "string") {
                 elements = that.tabGroup.find(elements);
@@ -645,9 +645,12 @@ var __meta__ = {
                 elements = that.tabGroup.children().eq(elements);
             }
 
-            elements.each(function () {
-                contents.push(that.contentElement($(this).index()));
+            contents = elements.map(function () {
+                var content = that.contentElement($(this).index());
+                kendo.destroy(content);
+                return content;
             });
+
             elements.remove();
             contents.remove();
 
