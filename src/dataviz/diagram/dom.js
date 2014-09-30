@@ -924,16 +924,21 @@
                 selectable: true
             },
 
-            updateOptionsFromModel: function(model) {
+            updateOptionsFromModel: function(model, from, to) {
                 var fields = ["from", "to", "text", "type"];
+                this.options = deepExtend({}, this.options,
+                    filterDataItem(fields, model || this.dataItem));
 
                 if (model) {
-                    this.redraw(filterDataItem(fields, model));
-                } else if (this.dataItem) {
-                    this.options = deepExtend({},
-                        this.options,
-                        filterDataItem(fields, this.dataItem)
-                    );
+                    if (from) {
+                        this.source(from);
+                    }
+
+                    if (to) {
+                        this.target(to);
+                    }
+
+                    this.redraw(this.options);
                 }
             },
 
@@ -1076,6 +1081,7 @@
             },
 
             content: function(content) {
+                content = content || {};
                 if (defined(this.options.text)) {
                     content.text = this.options.text;
                 }
@@ -1229,7 +1235,7 @@
 
                     var points = this.options.points;
 
-                    if (options && options.content) {
+                    if ((options && options.content) || options.text) {
                         this.content(options.content);
                     }
 
@@ -3079,7 +3085,7 @@
 
             _refreshConnections: function(e) {
                 if (e.action === "remove") {
-                    // remove connections
+                    this._removeConnections(e.items);
                 } else if (e.action === "itemchange") {
                     if (this._shouldRefresh) {
                         this._updateConnections(e.items);
@@ -3089,10 +3095,26 @@
                 }
             },
 
+            _removeConnections: function(items) {
+                for (var i = 0; i < items.length; i++) {
+                    var dataItem = items[i];
+
+                    var connection = this._connectionsDataMap[dataItem.id];
+                    this._remove(connection, false);
+                    this._connectionsDataMap[dataItem.id] = null;
+                }
+            },
+
             _updateConnections: function(items) {
                 for (var i = 0; i < items.length; i++) {
-                    var item = items[i];
+                    var dataItem = items[i];
 
+                    var connection = this._connectionsDataMap[dataItem.id];
+                    if (dataItem.from !== dataItem.to) {
+                        var from = this._validateConnector(dataItem.from);
+                        var to = this._validateConnector(dataItem.to);
+                    }
+                    connection.updateOptionsFromModel(dataItem, from, to);
                 }
             },
 
@@ -3108,9 +3130,8 @@
                         var to = this._validateConnector(conn.to);
 
                         if (from && to) {
-                            var id = conn.from + "-" + conn.to;
                             var connection = new Connection(from, to, defaults, conn);
-                            this._connectionsDataMap[id] = connection;
+                            this._connectionsDataMap[conn.id] = connection;
                             this.addConnection(connection);
                         }
                     }
