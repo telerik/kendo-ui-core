@@ -559,6 +559,30 @@ var __meta__ = {
         return $(elements).map(function() { return this.toArray(); });
     }
 
+    function columnPosition(column, columns, row, cellCounts) {
+        var result;
+        var idx;
+
+        row = row || 0;
+        cellCounts = cellCounts || {};
+        cellCounts[row] = cellCounts[row] || 0;
+
+        for (idx = 0; idx < columns.length; idx++) {
+           if (columns[idx] == column) {
+                result = { cell: cellCounts[row], row: row };
+                break;
+           } else if (columns[idx].columns) {
+               result = columnPosition(column, columns[idx].columns, row + 1, cellCounts);
+               if (result) {
+                    break;
+               }
+           }
+
+           cellCounts[row]++;
+        }
+        return result;
+    }
+
     function columnVisiblePosition(column, columns, row, cellCounts) {
         var result;
         var idx;
@@ -5337,6 +5361,7 @@ var __meta__ = {
                 position,
                 row,
                 width = 0,
+                parents = [],
                 headerCellIndex,
                 length,
                 footer = that.footer || that.wrapper.find(".k-grid-footer"),
@@ -5456,6 +5481,8 @@ var __meta__ = {
             var parents = [];
             var parent;
             var position;
+            var cell;
+            var colSpan;
 
             var predicate = visible ?
                 function(p) { return visibleColumns(p.columns).length && p.hidden; } :
@@ -5465,15 +5492,20 @@ var __meta__ = {
             if (columnParents(column, columns, parents) && parents.length) {
                 for (idx = parents.length - 1; idx >= 0; idx--) {
                     parent = parents[idx];
+                    position = columnPosition(parent, columns);
+                    cell = elements($(">table>thead", this.lockedHeader), this.thead, ">tr:eq(" + position.row + ")>th").eq(position.cell);
+
                     if (predicate(parent)) {
-                        position = columnVisiblePosition(parent, columns);
                         setColumnVisibility(parent, visible);
-                        setCellVisibility(elements($(">table>thead", this.lockedHeader), this.thead, ">tr:eq(" + position.row + ")>th"), position.cell, visible);
+                        cell[0].style.display = visible ? "" : "none";
+                    }
+
+                    if (cell.filter("[" + kendo.attr("colspan") + "]").length) {
+                        colSpan = parseInt(cell.attr(kendo.attr("colspan")), 10);
+                        cell[0].colSpan = (colSpan - hiddenLeafColumnsCount(parent.columns)) || 1;
                     }
                 }
             }
-
-
         },
 
         showColumn: function(column) {

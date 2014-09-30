@@ -223,6 +223,42 @@
         ok(!rows.eq(2).find("th").eq(0).is(":visible"));
     });
 
+    test("hide parents th colspan is updated when child multirow column is hidden in not scrollable grid - multiline headers", function() {
+        var grid = setup({
+            scrollable: false,
+            columns: [
+                { title: "master", width: 10 },
+                { title: "master1", columns: [{ title: "master1-child", columns: [{ title: "master1-child-child", width: 20 }] }, { title: "master1-child1", width: 30 }] },
+                { title: "master2", columns: [{ title: "master2-child", width: 40 }, { title: "master2-child1", width: 50 }] }
+            ]
+        });
+
+        grid.hideColumn(grid.columns[1].columns[0].columns[0]);
+
+        var rows = grid.thead.find("tr");
+
+        equal(rows.eq(0).find("th")[1].colSpan, 1);
+        equal(rows.eq(1).find("th")[0].colSpan, 1);
+    });
+
+    test("show parents th colspan is updated when child multirow column is hidden in not scrollable grid - multiline headers", function() {
+        var grid = setup({
+            scrollable: false,
+            columns: [
+                { title: "master", width: 10 },
+                { title: "master1", columns: [{ title: "master1-child", columns: [{ title: "master1-child-child", width: 20 }] }, { title: "master1-child1", width: 30 }] },
+                { title: "master2", columns: [{ title: "master2-child", width: 40 }, { title: "master2-child1", width: 50 }] }
+            ]
+        });
+
+        grid.hideColumn(grid.columns[1].columns[0].columns[0]);
+        grid.showColumn(grid.columns[1].columns[0].columns[0]);
+
+        var rows = grid.thead.find("tr");
+
+        equal(rows.eq(0).find("th")[1].colSpan, 2);
+        equal(rows.eq(1).find("th")[0].colSpan, 1);
+    });
     test("hide cols for all child multirow column in not scrollable grid - multiline headers", function() {
         var grid = setup({
             scrollable: false,
