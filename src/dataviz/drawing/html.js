@@ -1,3 +1,10 @@
+(function(f, define){
+    define([
+        "./shapes",
+        "./pdf" // XXX: for parseColor.  we shouldn't otherwise depend on this
+    ], f);
+})(function(){
+
 (function(parseFloat, Math, $){
 
     "use strict";
@@ -28,7 +35,7 @@
         cont(group);
     };
 
-    // seriously, that's it.
+    // only function definitions after this line.
     return;
 
     function getComputedStyle(element) {
@@ -81,7 +88,9 @@
 
     function getTransform(style) {
         var transform = getPropertyValue(style, "transform");
-        if (transform == "none") return null;
+        if (transform == "none") {
+            return null;
+        }
         var origin = getPropertyValue(style, "transform-origin");
         var matrix = /^\s*matrix\(\s*(.*?)\s*\)\s*$/.exec(transform)[1]
             .split(/\s*,\s*/g).map(parseFloat);
@@ -215,7 +224,7 @@
 
         var bgColor = getPropertyValue(style, "background-color");
         bgColor = pdf.parseColor(bgColor);
-        if (bgColor && bgColor.a == 0) {
+        if (bgColor && bgColor.a === 0) {
             bgColor = null;     // opacity zero
         }
 
@@ -248,7 +257,7 @@
 
         var boxes = element.getClientRects();
         for (var i = 0; i < boxes.length; ++i) {
-            drawOne(boxes[i], i == 0, i == boxes.length - 1);
+            drawOne(boxes[i], i === 0, i == boxes.length - 1);
         }
 
         // overflow: hidden/auto - if present, replace the group with
@@ -281,13 +290,13 @@
         //      (objects containing x and y, for horiz/vertical radius)
         //
         function drawEdge(color, len, Wtop, Wleft, Wright, rl, rr) {
-            var group = new drawing.Group();
+            var path, group = new drawing.Group();
 
             sanitizeRadius(rl);
             sanitizeRadius(rr);
 
             // draw main border.  this is the area without the rounded corners
-            var path = new drawing.Path({
+            path = new drawing.Path({
                 fill: { color: color },
                 stroke: null
             });
@@ -299,13 +308,13 @@
                 .close();
 
             if (rl.x) {
-                var path = drawRoundCorner(Wleft, rl);
+                path = drawRoundCorner(Wleft, rl);
                 setTransform(path, [ -1, 0, 0, 1, rl.x, 0 ]);
                 group.append(path);
             }
 
             if (rr.x) {
-                var path = drawRoundCorner(Wright, rr);
+                path = drawRoundCorner(Wright, rr);
                 setTransform(path, [ 1, 0, 0, 1, len - rr.x, 0 ]);
                 group.append(path);
             }
@@ -367,7 +376,7 @@
         // draws a single border box
         function drawOne(box, isFirst, isLast) {
             // background
-            var background;
+            var background, path;
             if (bgColor) {
                 // XXX: background image-s TODO.
                 // XXX: clip to content path (possibly rounded)
@@ -386,28 +395,28 @@
 
             // top border
             if (top.width > 0) {
-                var path = drawEdge(top.color, box.width, top.width, left.width, right.width, rTL, rTR);
+                path = drawEdge(top.color, box.width, top.width, left.width, right.width, rTL, rTR);
                 setTransform(path, [ 1, 0, 0, 1, box.left, box.top ]);
                 group.append(path);
             }
 
             // bottom border
             if (bottom.width > 0) {
-                var path = drawEdge(bottom.color, box.width, bottom.width, right.width, left.width, rBR, rBL);
+                path = drawEdge(bottom.color, box.width, bottom.width, right.width, left.width, rBR, rBL);
                 setTransform(path, [ -1, 0, 0, -1, box.right, box.bottom ]);
                 group.append(path);
             }
 
             // left border
             if (left.width > 0 && ((isFirst && dir == "ltr") || (isLast && dir == "rtl"))) {
-                var path = drawEdge(left.color, box.height, left.width, bottom.width, top.width, inv(rBL), inv(rTL));
+                path = drawEdge(left.color, box.height, left.width, bottom.width, top.width, inv(rBL), inv(rTL));
                 setTransform(path, [ 0, -1, 1, 0, box.left, box.bottom ]);
                 group.append(path);
             }
 
             // right border
             if (right.width > 0 && ((isLast && dir == "ltr") || (isFirst && dir == "rtl"))) {
-                var path = drawEdge(right.color, box.height, right.width, top.width, bottom.width, inv(rTR), inv(rBR));
+                path = drawEdge(right.color, box.height, right.width, top.width, bottom.width, inv(rTR), inv(rBR));
                 setTransform(path, [ 0, 1, -1, 0, box.right, box.top ]);
                 group.append(path);
             }
@@ -433,8 +442,12 @@
             if (pa == "static" && pb == "static") {
                 return 0;
             }
-            if (pa == "static") return -1;
-            if (pb == "static") return 1;
+            if (pa == "static") {
+                return -1;
+            }
+            if (pb == "static") {
+                return 1;
+            }
             return 0;
         }
         if (isNaN(za)) {
@@ -503,8 +516,7 @@
                 // space has variable width.  otherwise we can
                 // optimize and split only at end of line (i.e. when a
                 // new rectangle would be created).
-                if ((isJustified && /\s/.test(text.charAt(start - 1)))
-                    || range.getClientRects().length > 1) {
+                if ((isJustified && /\s/.test(text.charAt(start - 1))) || range.getClientRects().length > 1) {
                     range.setEnd(node, --start);
                     break;
                 }
@@ -534,7 +546,7 @@
             group.append(text);
         }
 
-        while (!doChunk());
+        while (!doChunk()) {}
         // range.detach(); // seems this is deprecated
     }
 
@@ -544,7 +556,9 @@
         }
         var style = getComputedStyle(element);
         var opacity = parseFloat(getPropertyValue(style, "opacity"));
-        if (opacity == 0) return;
+        if (opacity === 0) {
+            return;
+        }
 
         var group = new drawing.Group();
         container.append(group);
@@ -553,9 +567,9 @@
             group.opacity(opacity);
         }
 
-        var t = getTransform(style);
+        var prevTransform, t = getTransform(style);
         if (t) {
-            var prevTransform = element.style.transform;
+            prevTransform = element.style.transform;
             //element.style.setProperty("transform", "none", "important");
             element.style.transform = "none";
 
@@ -588,3 +602,5 @@
     }
 
 })(parseFloat, Math, kendo.jQuery);
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

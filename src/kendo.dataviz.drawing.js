@@ -9,7 +9,8 @@
         "./dataviz/drawing/svg",
         "./dataviz/drawing/canvas",
         "./dataviz/drawing/vml",
-        "./dataviz/drawing/pdf"
+        "./dataviz/drawing/pdf",
+        "./dataviz/drawing/html"
     ], f);
 })(function(){
 
