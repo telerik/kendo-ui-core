@@ -62,38 +62,6 @@ var __meta__ = {
                 '#}#' +
                 '</div>';
 
-    function times(rowLevels, rowCount) {
-        var rows = new Array(rowCount).join().split(",");
-        var rowHeaderRows = [];
-        var rowIndex;
-
-        for (var rowLevelIndex = 0; rowLevelIndex < rowLevels.length; rowLevelIndex++) {
-            var level = rowLevels[rowLevelIndex];
-            var rowspan = rowCount / level.length;
-            var className;
-
-            for (rowIndex = 0; rowIndex < level.length; rowIndex++) {
-                className = level[rowIndex].className || "";
-
-                if (level[rowIndex].allDay) {
-                    className = "k-scheduler-times-all-day";
-                }
-
-                rows[rowspan * rowIndex] += '<th class="' + className + '" rowspan="' + rowspan + '">' + level[rowIndex].text + "</th>";
-            }
-        }
-
-        for (rowIndex = 0; rowIndex < rowCount; rowIndex++) {
-            rowHeaderRows.push(rows[rowIndex]);
-        }
-
-        if (rowCount < 1) {
-            return $();
-        }
-
-        return $('<div class="k-scheduler-times">' + table(rowHeaderRows) + '</div>');
-    }
-
     function toInvariantTime(date) {
         var staticDate = new Date(1980, 1, 1, 0, 0, 0);
         setTime(staticDate, getMilliseconds(date));
@@ -102,11 +70,6 @@ var __meta__ = {
 
     function isInDateRange(value, min, max) {
         return value >= min && value <= max;
-    }
-
-    function isInTimeRange(value, min, max, overlaps) {
-        overlaps = overlaps ? value <= max : value < max;
-        return value > min && overlaps;
     }
 
     var TimelineView = SchedulerView.extend({
@@ -282,7 +245,7 @@ var __meta__ = {
                 columnCount = (msMax - msMin) / msMajorInterval;
             }
 
-            this._columnCount = Math.round(columnCount)
+            this._columnCount = Math.round(columnCount);
        },
 
         options: {
@@ -559,7 +522,7 @@ var __meta__ = {
 
         _timeSlotInterval: function() {
             var options = this.options;
-            return msMajorInterval = options.majorTick * kendo.date.MS_PER_MINUTE;
+            return options.majorTick * kendo.date.MS_PER_MINUTE;
         },
 
         nextDate: function () {
@@ -922,7 +885,7 @@ var __meta__ = {
             var resources = this.groupedResources;
 
             if (resources.length) {
-                isVerticalGroupped = this._groupOrientation() === "vertical";
+                var isVerticalGroupped = this._groupOrientation() === "vertical";
                 if (isVerticalGroupped) {
                     return this._rowCountForLevel(this.rowLevels.length - 1);
                 }
