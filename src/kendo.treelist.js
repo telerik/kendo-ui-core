@@ -49,13 +49,18 @@ var __meta__ = {
         gridHeaderWrap: "k-grid-header-wrap",
         gridContent: "k-grid-content",
         gridContentWrap: "k-grid-content",
+        gridFilter: "k-grid-filter",
         footerTemplate: "k-footer-template",
         loading: "k-loading",
         refresh: "k-i-refresh",
         retry: "k-request-retry",
         selected: "k-state-selected",
         status: "k-status",
+        link: "k-link",
+        withIcon: "k-with-icon",
+        filterable: "k-filterable",
         icon: "k-icon",
+        iconFilter: "k-filter",
         iconCollapse: "k-i-collapse",
         iconExpand: "k-i-expand",
         iconHidden: "k-i-none",
@@ -724,19 +729,14 @@ var __meta__ = {
 
         _ths: function() {
             var columns = this.columns;
-            var column;
-            var title;
-            var attr;
+            var filterable = this.options.filterable;
             var ths = [];
+            var column, title, children, cellClasses;
 
             for (var i = 0, length = columns.length; i < length; i++) {
                 column = columns[i];
-                attr = {
-                    "data-field": column.field,
-                    "data-title": column.title,
-                    className: classNames.header,
-                    "role": "columnheader"
-                };
+                children = [];
+                cellClasses = [classNames.header];
 
                 if (column.headerTemplate) {
                     title = column.headerTemplate({});
@@ -744,7 +744,34 @@ var __meta__ = {
                     title = column.title || column.field || "";
                 }
 
-                ths.push(kendoDomElement("th", attr, [kendoTextElement(title)]));
+                if (filterable) {
+                    cellClasses.push(classNames.withIcon, classNames.filterable);
+
+                    children.push(
+                        kendoDomElement("a", {
+                            href: "#",
+                            tabindex: "-1",
+                            className: classNames.gridFilter
+                        }, [kendoDomElement("span", {
+                            className: [ classNames.icon, classNames.iconFilter ].join(" ")
+                        })])
+                    );
+                }
+
+                if (column.sortable) {
+                    children.push(kendoDomElement("a", { href: "#", className: classNames.link }, [
+                        kendoTextElement(title)
+                    ]));
+                } else {
+                    children.push(kendoTextElement(title));
+                }
+
+                ths.push(kendoDomElement("th", {
+                    "data-field": column.field,
+                    "data-title": column.title,
+                    className: cellClasses.join(" "),
+                    "role": "columnheader"
+                }, children));
             }
 
             return ths;
@@ -971,9 +998,9 @@ var __meta__ = {
             var column;
             var sortableInstance;
             var cells = this.header.find("th");
-            var cell;
+            var cell, idx, length;
 
-            for (var idx = 0, length = cells.length; idx < length; idx++) {
+            for (idx = 0, length = cells.length; idx < length; idx++) {
                 column = columns[idx];
 
                 if (column.sortable) {
@@ -989,6 +1016,7 @@ var __meta__ = {
                         .kendoColumnSorter({ dataSource: this.dataSource });
                 }
             }
+
             cells = null;
         },
 

@@ -589,4 +589,38 @@
         equal(toolbar.find(".k-grid-save-changes").length, 1);
         equal(toolbar.find(".k-grid-cancel-changes").length, 1);
     });
+
+    test("filterable option renders filter icons", function() {
+        createTreeList({
+            filterable: true,
+            dataSouce: [ { id: 1 } ],
+            columns: [ { field: "id" } ]
+        });
+
+        var filterButton = dom.find("th.k-header a.k-grid-filter");
+        equal(filterButton.length, 1);
+        equal(filterButton.find("span.k-icon.k-filter").length, 1);
+    });
+
+    test("links for filtering and sorting are rendered independent", function() {
+        createTreeList({
+            filterable: true,
+            dataSouce: [ { id: 1 } ],
+            columns: [ { field: "id", sortable: true } ]
+        });
+
+        equal(dom.find("th.k-header a a").length, 0);
+    });
+
+    test("filterable option adds classes to header cell", function() {
+        createTreeList({
+            filterable: true,
+            dataSouce: [ { id: 1 } ],
+            columns: [ { field: "id" } ]
+        });
+
+        var headerCell = dom.find("th.k-header");
+        ok(headerCell.hasClass("k-with-icon"));
+        ok(headerCell.hasClass("k-filterable"));
+    });
 })();
