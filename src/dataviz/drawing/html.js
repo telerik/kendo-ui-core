@@ -436,8 +436,56 @@
             } else {
                 pos.y = parseFloat(pos.y);
             }
+
             var rect = new geo.Rect([ orgBox.left + pos.x, orgBox.top + pos.y ], [ img.width, img.height ]);
-            group.append(new drawing.Image(url, rect));
+
+            // XXX: background-repeat could be implemented more
+            //      efficiently as a fill pattern (at least for PDF
+            //      output, probably SVG too).
+
+            function rewX() {
+                while (rect.origin.x > box.left) {
+                    rect.origin.x -= img.width;
+                }
+            }
+
+            function rewY() {
+                while (rect.origin.y > box.top) {
+                    rect.origin.y -= img.height;
+                }
+            }
+
+            function repeatX() {
+                while (rect.origin.x < box.right) {
+                    group.append(new drawing.Image(url, rect.clone()));
+                    rect.origin.x += img.width;
+                }
+            }
+
+            if (backgroundRepeat == "no-repeat") {
+                group.append(new drawing.Image(url, rect));
+            }
+            else if (backgroundRepeat == "repeat-x") {
+                rewX();
+                repeatX();
+            }
+            else if (backgroundRepeat == "repeat-y") {
+                rewY();
+                while (rect.origin.y < box.bottom) {
+                    group.append(new drawing.Image(url, rect.clone()));
+                    rect.origin.y += img.height;
+                }
+            }
+            else if (backgroundRepeat == "repeat") {
+                rewX();
+                rewY();
+                var origin = rect.origin.clone();
+                while (rect.origin.y < box.bottom) {
+                    rect.origin.x = origin.x;
+                    repeatX();
+                    rect.origin.y += img.height;
+                }
+            }
         }
 
         // draws a single border box
@@ -634,7 +682,6 @@
         }
 
         while (!doChunk()) {}
-        // range.detach(); // seems this is deprecated
     }
 
     function renderElement(element, container) {
@@ -657,7 +704,6 @@
         var prevTransform, t = getTransform(style);
         if (t) {
             prevTransform = element.style.transform;
-            //element.style.setProperty("transform", "none", "important");
             element.style.transform = "none";
 
             // must translate to origin before applying the CSS
