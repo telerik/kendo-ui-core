@@ -336,4 +336,50 @@ test('select method ignores nested TabStrips', function() {
 
     equal(idx, 1);
 });
+
+function createTabStrip(options) {
+    if ($.isArray(options)) {
+        options = { dataSource: options };
+    }
+
+    return $("<div />").appendTo(QUnit.fixture).kendoTabStrip($.extend({
+        dataTextField: "text",
+        dataContentField: "content"
+    }, options)).data("kendoTabStrip");
+}
+
+test("remove method calls kendo.destroy on removed contentElements", 2, function() {
+    var tabStrip = createTabStrip([ { text: "foo" }, { text: "bar" } ]);
+    var destroy = kendo.destroy;
+
+    try {
+        kendo.destroy = function() { ok(true); }
+
+        tabStrip.remove("li");
+    } finally {
+        kendo.destroy = destroy;
+    }
+});
+
+test("remove method removes the specified tab", function() {
+    var tabStrip = createTabStrip([ { text: "foo" }, { text: "bar" } ]);
+
+    tabStrip.remove("li:eq(0)");
+
+    var items = tabStrip.element.find("li");
+    equal(items.length, 1);
+    equal(items.text(), "bar");
+});
+
+test("remove method removes the content of the tab", function() {
+    var tabStrip = createTabStrip([
+        { text: "foo", content: "fcontent" },
+        { text: "bar", content: "bcontent" }
+    ]);
+
+    tabStrip.remove("li:eq(1)");
+
+    var items = tabStrip.element.find("div");
+    equal(items.text(), "fcontent");
+});
 })();
