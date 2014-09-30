@@ -6,12 +6,18 @@
 
 "use strict";
 
+// WARNING: removing the following jshint declaration and turning
+// == into === to make JSHint happy will break functionality.
+/* jshint eqnull:true */
+/* jshint loopfunc:true */
+/* jshint newcap:false */
+
 function hasOwnProperty(obj, key) {
     return Object.prototype.hasOwnProperty.call(obj, key);
 }
 
 function sortedKeys(obj) {
-    return Object.keys(obj).sort(function(a, b){ return a - b }).map(parseFloat);
+    return Object.keys(obj).sort(function(a, b){ return a - b; }).map(parseFloat);
 }
 
 var PDF = global.kendo.PDF;
@@ -43,9 +49,10 @@ Directory.prototype = {
 
     readTable: function(name, Ctor) {
         var def = this.tables[name];
-        if (!def)
+        if (!def) {
             throw new Error("Table " + name + " not found in directory");
-        return this[name] = def.table = new Ctor(this, def);
+        }
+        return (this[name] = def.table = new Ctor(this, def));
     },
 
     render: function(tables) {
@@ -78,7 +85,9 @@ Directory.prototype = {
                 out.writeLong(table.length);
 
                 tableData.write(table);
-                if (tag == "head") headOffset = offset;
+                if (tag == "head") {
+                    headOffset = offset;
+                }
                 offset += table.length;
 
                 while (offset % 4) {
@@ -98,13 +107,17 @@ Directory.prototype = {
     },
 
     checksum: function(data) {
-        while (data.length % 4) data += "\x00";
+        while (data.length % 4) {
+            data += "\x00";
+        }
         data = BinaryStream(data);
         var sum = 0;
-        while (!data.eof()) sum += data.readLong();
+        while (!data.eof()) {
+            sum += data.readLong();
+        }
         return sum & 0xFFFFFFFF;
     }
-}
+};
 
 function deftable(methods) {
     function Ctor(file, def) {
@@ -176,7 +189,7 @@ var LocaTable = deftable({
     parse: function(data) {
         data.offset(this.offset);
         var format = this.file.head.indexToLocFormat;
-        if (format == 0) {
+        if (format === 0) {
             this.offsets = data.times(this.length / 2, function(){
                 return 2 * data.readShort();
             });
@@ -306,8 +319,9 @@ var HmtxTable = deftable({
     forGlyph: function(id) {
         var metrics = this.metrics;
         var n = metrics.length;
-        if (id < n)
+        if (id < n) {
             return metrics[id];
+        }
         return {
             advance: metrics[n - 1].advance,
             lsb: this.leftSideBearings[id - n]
@@ -336,12 +350,12 @@ var GlyfTable = (function(){
         }
     };
 
-    var ARG_1_AND_2_ARE_WORDS     = 0x0001
-    var WE_HAVE_A_SCALE           = 0x0008
-    var MORE_COMPONENTS           = 0x0020
-    var WE_HAVE_AN_X_AND_Y_SCALE  = 0x0040
-    var WE_HAVE_A_TWO_BY_TWO      = 0x0080
-    var WE_HAVE_INSTRUCTIONS      = 0x0100
+    var ARG_1_AND_2_ARE_WORDS     = 0x0001;
+    var WE_HAVE_A_SCALE           = 0x0008;
+    var MORE_COMPONENTS           = 0x0020;
+    var WE_HAVE_AN_X_AND_Y_SCALE  = 0x0040;
+    var WE_HAVE_A_TWO_BY_TWO      = 0x0080;
+    var WE_HAVE_INSTRUCTIONS      = 0x0100;
 
     function CompoundGlyph(data) {
         this.raw = data;
@@ -352,8 +366,9 @@ var GlyfTable = (function(){
             offsets.push(data.offset());
             ids.push(data.readShort());
 
-            if (!(flags & MORE_COMPONENTS))
+            if (!(flags & MORE_COMPONENTS)) {
                 break;
+            }
 
             data.skip(flags & ARG_1_AND_2_ARE_WORDS ? 4 : 2);
 
@@ -386,14 +401,16 @@ var GlyfTable = (function(){
         },
         glyphFor: function(id) {
             var cache = this.cache;
-            if (hasOwnProperty(cache, id))
+            if (hasOwnProperty(cache, id)) {
                 return cache[id];
+            }
 
             var loca = this.file.loca;
             var length = loca.lengthOf(id);
 
-            if (length == 0)
-                return cache[id] = null;
+            if (length === 0) {
+                return (cache[id] = null);
+            }
 
             var data = this.rawData;
             var offset = this.offset + loca.offsetOf(id);
@@ -405,9 +422,7 @@ var GlyfTable = (function(){
             var xMax = raw.readShort_();
             var yMax = raw.readShort_();
 
-            var glyph = cache[id] = numberOfContours == -1
-                ? new CompoundGlyph(raw)
-                : new SimpleGlyph(raw);
+            var glyph = cache[id] = numberOfContours == -1 ? new CompoundGlyph(raw) : new SimpleGlyph(raw);
 
             glyph.numberOfContours = numberOfContours;
             glyph.xMin = xMin;
@@ -469,8 +484,9 @@ var NameTable = (function(){
                 var rec = nameRecords[i];
                 data.offset(rec.offset);
                 var text = data.readString(rec.length);
-                if (!strings[rec.nameID])
+                if (!strings[rec.nameID]) {
                     strings[rec.nameID] = [];
+                }
                 strings[rec.nameID].push(new NameEntry(text, rec));
             }
             this.postscriptEntry = strings[6][0];
@@ -492,7 +508,7 @@ var NameTable = (function(){
             out.writeShort(strCount);
             out.writeShort(6 + 12 * strCount); // stringOffset
 
-            for (var i in strings) {
+            for (i in strings) {
                 if (hasOwnProperty(strings, i)) {
                     var list = i == 6 ? [
                         new NameEntry(psName, this.postscriptEntry)
@@ -537,13 +553,15 @@ var PostTable = (function(){
             this.minMemType1 = data.readLong();
             this.maxMemType1 = data.readLong();
 
+            var numberOfGlyphs;
+
             switch (this.format) {
               case 0x00010000:
               case 0x00030000:
                 break;
 
               case 0x00020000:
-                var numberOfGlyphs = data.readShort();
+                numberOfGlyphs = data.readShort();
                 this.glyphNameIndex = data.times(numberOfGlyphs, data.readShort);
                 this.names = [];
                 var limit = this.offset + this.length;
@@ -553,7 +571,7 @@ var PostTable = (function(){
                 break;
 
               case 0x00025000:
-                var numberOfGlyphs = data.readShort();
+                numberOfGlyphs = data.readShort();
                 this.offsets = data.read(numberOfGlyphs);
                 break;
 
@@ -569,8 +587,9 @@ var PostTable = (function(){
 
               case 0x00020000:
                 var index = this.glyphNameIndex[code];
-                if (index < POSTSCRIPT_GLYPHS.length)
+                if (index < POSTSCRIPT_GLYPHS.length) {
                     return POSTSCRIPT_GLYPHS[index];
+                }
                 return this.names[index - POSTSCRIPT_GLYPHS.length] || ".notdef";
 
               case 0x00025000:
@@ -583,8 +602,9 @@ var PostTable = (function(){
             }
         },
         render: function(mapping) {
-            if (this.format == 0x00030000)
+            if (this.format == 0x00030000) {
                 return this.raw();
+            }
 
             // keep original header, but set format to 2.0
             var out = BinaryStream(this.rawData.slice(this.offset, 32));
@@ -608,11 +628,11 @@ var PostTable = (function(){
 
             out.writeShort(mapping.length);
 
-            for (var i = 0; i < indexes.length; ++i) {
+            for (i = 0; i < indexes.length; ++i) {
                 out.writeShort(indexes[i]);
             }
 
-            for (var i = 0; i < strings.length; ++i) {
+            for (i = 0; i < strings.length; ++i) {
                 out.writeByte(strings[i].length);
                 out.writeString(strings[i]);
             }
@@ -639,7 +659,7 @@ var CmapTable = (function(){
             self.isUnicode = (
                 self.platformID == 3 && self.platformSpecificID == 1 && self.format == 4
             ) || (
-                self.platformID == 0 && self.format == 4
+                self.platformID === 0 && self.format == 4
             );
 
             self.codeMap = {};
@@ -663,11 +683,11 @@ var CmapTable = (function(){
                 var count = (self.length + self.offset - data.offset()) / 2;
                 var glyphIds = data.times(count, data.readShort);
 
-                for (var i = 0; i < segCount; ++i) {
+                for (i = 0; i < segCount; ++i) {
                     var start = startCode[i], end = endCode[i];
                     for (var code = start; code <= end; ++code) {
                         var glyphId;
-                        if (idRangeOffset[i] == 0) {
+                        if (idRangeOffset[i] === 0) {
                             glyphId = code + idDelta[i];
                         } else {
                             ///
@@ -690,7 +710,9 @@ var CmapTable = (function(){
                             ///
                             var index = idRangeOffset[i] / 2 - (segCount - i) + (code - start);
                             glyphId = glyphIds[index] || 0;
-                            if (glyphId != 0) glyphId += idDelta[i];
+                            if (glyphId !== 0) {
+                                glyphId += idDelta[i];
+                            }
                         }
                         self.codeMap[code] = glyphId & 0xFFFF;
                     }
@@ -715,14 +737,18 @@ var CmapTable = (function(){
             var gid = new_gid(code);
             var delta = gid - code;
             if (last == null || delta !== diff) {
-                if (last) endCodes.push(last);
+                if (last) {
+                    endCodes.push(last);
+                }
                 startCodes.push(code);
                 diff = delta;
             }
             last = code;
         }
 
-        if (last) endCodes.push(last);
+        if (last) {
+            endCodes.push(last);
+        }
         endCodes.push(0xFFFF);
         startCodes.push(0xFFFF);
 
@@ -736,7 +762,7 @@ var CmapTable = (function(){
         var rangeOffsets = [];
         var glyphIds = [];
 
-        for (var i = 0; i < segCount; ++i) {
+        for (i = 0; i < segCount; ++i) {
             var startCode = startCodes[i];
             var endCode = endCodes[i];
             if (startCode == 0xFFFF) {
@@ -791,7 +817,9 @@ var CmapTable = (function(){
             self.unicodeEntry = null;
             self.tables = data.times(tableCount, function(){
                 var entry = new CmapEntry(data, offset);
-                if (entry.isUnicode) self.unicodeEntry = entry;
+                if (entry.isUnicode) {
+                    self.unicodeEntry = entry;
+                }
                 return entry;
             });
         },
@@ -866,8 +894,9 @@ var subsetTag = 100000;
 
 function nextSubsetTag() {
     var ret = "", n = subsetTag+"";
-    for (var i = 0; i < n.length; ++i)
+    for (var i = 0; i < n.length; ++i) {
         ret += String.fromCharCode(n.charCodeAt(i) - 48 + 65);
+    }
     ++subsetTag;
     return ret;
 }
@@ -886,15 +915,16 @@ function Subfont(font) {
 
 Subfont.prototype = {
     use: function(ch) {
+        var code;
         if (typeof ch == "string") {
             var ret = "";
             for (var i = 0; i < ch.length; ++i) {
-                var code = this.use(ch.charCodeAt(i));
+                code = this.use(ch.charCodeAt(i));
                 ret += String.fromCharCode(code);
             }
             return ret;
         }
-        var code = this.unicodes[ch];
+        code = this.unicodes[ch];
         if (!code) {
             code = this.next++;
             this.subset[code] = ch;
@@ -921,7 +951,9 @@ Subfont.prototype = {
         return sortedKeys(this.ogid2ngid);
     },
     glyphsFor: function(glyphIds, result) {
-        if (!result) result = {};
+        if (!result) {
+            result = {};
+        }
         for (var i = 0; i < glyphIds.length; ++i) {
             var id = glyphIds[i];
             if (!result[id]) {
@@ -1011,7 +1043,9 @@ function TTFFont(rawData, name) {
                 data.offset(offset);
                 self.parse();
             });
-            if (self.psName == name) return;
+            if (self.psName == name) {
+                return;
+            }
         }
         throw new Error("Font " + name + " not found in collection");
     } else {
@@ -1051,6 +1085,6 @@ TTFFont.prototype = {
 
 PDF.TTFFont = TTFFont;
 
-})(Function("return this")());
+})(this);
 
 }, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

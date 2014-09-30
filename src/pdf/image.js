@@ -4,6 +4,12 @@
 
     "use strict";
 
+    // WARNING: removing the following jshint declaration and turning
+    // == into === to make JSHint happy will break functionality.
+    /* jshint eqnull:true */
+    /* jshint loopfunc:true */
+    /* jshint newcap:false */
+
     var PDF = global.kendo.PDF;
     var BinaryStream = PDF.BinaryStream;
 
@@ -28,8 +34,9 @@
         OUT: {
             while (!data.eof()) {
                 var marker = data.readShort();
-                if (JPEG_SOF_MARKERS.indexOf(marker) >= 0)
+                if (JPEG_SOF_MARKERS.indexOf(marker) >= 0) {
                     break OUT;
+                }
                 data.skip(data.readShort() - 2);
             }
             throw new Error("Invalid JPEG");
@@ -43,5 +50,5 @@
 
     PDF.JPEG = JPEG;
 
-})(Function("return this")());
+})(this);
 }, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

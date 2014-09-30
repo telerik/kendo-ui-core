@@ -9,6 +9,10 @@
 
     "use strict";
 
+    // WARNING: removing the following jshint declaration and turning
+    // == into === to make JSHint happy will break functionality.
+    /*jshint eqnull:true  */
+
     var kendo       = window.kendo;
     var dataviz     = kendo.dataviz;
     var PDF         = kendo.PDF;
@@ -56,7 +60,9 @@
         });
 
         function doIt() {
-            if (--count > 0) return;
+            if (--count > 0) {
+                return;
+            }
             var pdf = new PDF();
             var page = pdf.addPage();
             drawElement(group, page, pdf);
@@ -119,7 +125,9 @@
         var color = stroke.color;
         if (color) {
             color = parseColor(color);
-            if (color == null) return; // no stroke
+            if (color == null) {
+                return; // no stroke
+            }
             page.setStrokeColor(color.r, color.g, color.b);
             if (color.a != 1) {
                 page.setStrokeOpacity(color.a);
@@ -128,7 +136,9 @@
 
         var width = stroke.width;
         if (width != null) {
-            if (width == 0) return; // no stroke
+            if (width === 0) {
+                return; // no stroke
+            }
             page.setLineWidth(width);
         }
 
@@ -185,10 +195,10 @@
 
     function maybeFillStroke(element, page, pdf) {
         function should(thing) {
-            return thing
-                && !/^(none|transparent)$/i.test(thing.color)
-                && (thing.width == null || thing.width > 0)
-                && (thing.opacity == null || thing.opacity > 0);
+            return thing &&
+                !/^(none|transparent)$/i.test(thing.color) &&
+                (thing.width == null || thing.width > 0) &&
+                (thing.opacity == null || thing.opacity > 0);
         }
         if (should(element.fill()) && should(element.stroke())) {
             page.fillStroke();
@@ -201,7 +211,7 @@
 
     function drawPath(element, page, pdf) {
         var segments = element.segments;
-        if (segments.length == 0) {
+        if (segments.length === 0) {
             return;
         }
         for (var prev, i = 0; i < segments.length; ++i) {

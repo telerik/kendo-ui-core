@@ -6,7 +6,10 @@
 
     "use strict";
 
+    // WARNING: removing the following jshint declaration and turning
+    // == into === to make JSHint happy will break functionality.
     /* jshint eqnull:true */
+    /* jshint loopfunc:true */
     /* global console,require */ // temporary
 
     var NL = "\n";
@@ -82,7 +85,9 @@
             --indentLevel;
         };
         out.indent = function() {
-            if (offset > 0) out(NL);
+            if (offset > 0) {
+                out(NL);
+            }
             out(pad("", indentLevel * 2, " "));
             out.apply(null, arguments);
         };
@@ -246,7 +251,7 @@
                 });
                 return;
             }
-            var img = new Image();
+            img = new Image();
             img.src = url;
             img.onload = function() {
                 withCanvas(img.width, img.height, function(ctx, canvas){
@@ -263,12 +268,12 @@
     function manyLoader(loadOne) {
         return function(urls, callback) {
             var n = urls.length, i = n;
-            if (n == 0) {
+            if (n === 0) {
                 return callback();
             }
             while (i-- > 0) {
                 loadOne(urls[i], function(){
-                    if (--n == 0) {
+                    if (--n === 0) {
                         callback();
                     }
                 });
@@ -509,7 +514,9 @@
                     }
                 }
             });
-            if (!empty) out.indent();
+            if (!empty) {
+                out.indent();
+            }
             out(">>");
         }
     });
@@ -634,7 +641,7 @@
         this.flags = ((font.post.isFixedPitch ? 1 : 0) |
                       (this.isSerif ? 1 << 1 : 0) |
                       (this.isScript ? 1 << 3 : 0) |
-                      (this.italicAngle != 0 ? 1 << 6 : 0) |
+                      (this.italicAngle !== 0 ? 1 << 6 : 0) |
                       (1 << 5));
     }, {
         encodeText: function(text) {
@@ -679,7 +686,9 @@
                     if (gid == null) {
                         loop(i + 1);
                     } else {
-                        if (!chunk) charWidths.push(i, chunk = []);
+                        if (!chunk) {
+                            charWidths.push(i, chunk = []);
+                        }
                         chunk.push(self._font.widthOfGlyph(gid));
                         loop(i + 1, chunk);
                     }
@@ -927,33 +936,33 @@
             this._out(x, " ", y, " ", w, " ", h, " re", NL);
         },
         ellipse: function(x, y, rx, ry) {
-            function X(v) { return x + v; }
-            function Y(v) { return y + v; }
+            function _X(v) { return x + v; }
+            function _Y(v) { return y + v; }
 
             // how to get to the "magic number" is explained here:
             // http://www.whizkidtech.redprince.net/bezier/circle/kappa/
             var k = 0.5522847498307936;
 
-            this.moveTo(X(0), Y(ry));
+            this.moveTo(_X(0), _Y(ry));
             this.bezier(
-                X(rx * k) , Y(ry),
-                X(rx)     , Y(ry * k),
-                X(rx)     , Y(0)
+                _X(rx * k) , _Y(ry),
+                _X(rx)     , _Y(ry * k),
+                _X(rx)     , _Y(0)
             );
             this.bezier(
-                X(rx)     , Y(-ry * k),
-                X(rx * k) , Y(-ry),
-                X(0)      , Y(-ry)
+                _X(rx)     , _Y(-ry * k),
+                _X(rx * k) , _Y(-ry),
+                _X(0)      , _Y(-ry)
             );
             this.bezier(
-                X(-rx * k) , Y(-ry),
-                X(-rx)     , Y(-ry * k),
-                X(-rx)     , Y(0)
+                _X(-rx * k) , _Y(-ry),
+                _X(-rx)     , _Y(-ry * k),
+                _X(-rx)     , _Y(0)
             );
             this.bezier(
-                X(-rx)     , Y(ry * k),
-                X(-rx * k) , Y(ry),
-                X(0)       , Y(ry)
+                _X(-rx)     , _Y(ry * k),
+                _X(-rx * k) , _Y(ry),
+                _X(0)       , _Y(ry)
             );
         },
         circle: function(x, y, r) {
@@ -994,7 +1003,9 @@
 
     function BinaryStream(data) {
         var offset = 0;
-        if (data == null) data = "";
+        if (data == null) {
+            data = "";
+        }
 
         function eof() {
             return !data.charAt(offset);
@@ -1054,13 +1065,15 @@
         }
         function read(len) {
             var ret = [];
-            while (len-- > 0)
+            while (len-- > 0) {
                 ret.push(readByte());
+            }
             return ret;
         }
         function write(bytes) {
-            if (typeof bytes == "string")
+            if (typeof bytes == "string") {
                 return writeString(bytes);
+            }
             for (var i = 0; i < bytes.length; ++i) {
                 writeByte(bytes[i]);
             }
@@ -1102,7 +1115,9 @@
             writeString : writeString,
 
             offset: function(pos) {
-                if (pos != null) offset = pos;
+                if (pos != null) {
+                    offset = pos;
+                }
                 return offset;
             },
 
@@ -1110,19 +1125,20 @@
                 offset += nbytes;
             },
 
-            get: function() { return data },
+            get: function() { return data; },
 
-            toString: function() { return data },
+            toString: function() { return data; },
 
-            length: function() { return data.length },
+            length: function() { return data.length; },
 
             slice: function(start, length) {
                 return data.substr(start, length);
             },
 
             times: function(n, reader) {
-                for (var ret = []; n > 0; --n)
+                for (var ret = []; n > 0; --n) {
                     ret.push(reader());
+                }
                 return ret;
             },
 
@@ -1157,8 +1173,12 @@
 
     function getFontURL(style) {
         function mkFamily(name) {
-            if (style.bold) name += "|bold";
-            if (style.italic) name += "|italic";
+            if (style.bold) {
+                name += "|bold";
+            }
+            if (style.italic) {
+                name += "|italic";
+            }
             return name.toLowerCase();
         }
         var fontFamily = style.fontFamily;
@@ -1167,12 +1187,16 @@
             for (var i = 0; i < fontFamily.length; ++i) {
                 name = mkFamily(fontFamily[i]);
                 url = FONT_MAPPINGS[name];
-                if (url) return url;
+                if (url) {
+                    return url;
+                }
             }
         } else {
             url = FONT_MAPPINGS[fontFamily.toLowerCase()];
         }
-        if (!url) url = "Times-Roman";
+        if (!url) {
+            url = "Times-Roman";
+        }
         return url;
     }
 
@@ -1188,7 +1212,7 @@
         "monospace"              : "Courier",
         "monospace|bold"         : "Courier-Bold",
         "monospace|italic"       : "Courier-Oblique",
-        "monospace|bold|italic"  : "Courier-BoldOblique",
+        "monospace|bold|italic"  : "Courier-BoldOblique"
     };
 
     function defineFont(name, url) {
@@ -1212,6 +1236,6 @@
 
     global.kendo.PDF = PDF;
 
-})(Function("return this")());
+})(this);
 
 }, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });
