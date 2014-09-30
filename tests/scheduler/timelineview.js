@@ -752,6 +752,63 @@
         equal(view.content.find("div.k-event").length, 0);
     });
 
+    test("all day recurring event is rendered correctly", function() {
+        var view = setup({
+            date: new Date(2013, 1, 2),
+            startTime: new Date(2013, 1, 2, 10, 0, 0, 0),
+            endTime: new Date(2013, 1, 2, 18, 0, 0, 0),
+            numberOfDays: 2
+        });
+
+        var start = new Date(2013, 1, 2, 0, 0, 0);
+        var end = new Date(2013, 1, 2, 0, 0, 0)
+        view.render([new SchedulerEvent({
+            uid: "foo",
+            title: "",
+            start: start,
+            startTime: kendo.date.toUtcTime(start),
+            end: end,
+            endTime: kendo.date.toUtcTime(end),
+            recurrenceRule: "FREQ=DAILY",
+            isAllDay: true,
+            id: "2"
+        })]);
+
+        equal(view.groups[0].getTimeSlotCollection(0).events()[0].start, 0);
+        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 7);
+
+        equal(view.element.find(".k-event").length, 1);
+    });
+
+    test("recurring event is rendered correctly", function() {
+        var view = setup({
+            date: new Date(2013, 1, 2),
+            startTime: new Date(2013, 1, 2, 10, 0, 0, 0),
+            endTime: new Date(2013, 1, 2, 18, 0, 0, 0),
+            numberOfDays: 2
+        });
+
+        var start =  new Date(2013, 1, 2, 10, 0, 0);
+        var end = new Date(2013, 1, 2, 12, 0, 0);
+
+        view.render([new SchedulerEvent({
+            uid: "foo",
+            title: "",
+            start: start,
+            startTime: kendo.date.toUtcTime(start),
+            end: end,
+            endTime: kendo.date.toUtcTime(end),
+            recurrenceRule: "FREQ=DAILY",
+            isAllDay: false,
+            id: "2"
+        })]);
+
+        equal(view.groups[0].getTimeSlotCollection(0).events()[0].start, 0);
+        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 1);
+
+        equal(view.element.find(".k-event").length, 1);
+    });
+
     module("Timeline View rendering icons", {
         setup: function() {
             container = $('<div class="k-scheduler" style="width:1000px;height:800px">');
