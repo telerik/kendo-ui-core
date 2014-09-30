@@ -471,15 +471,12 @@
             options: diagram.shapeDefaults(),
 
             updateOptionsFromModel: function(model) {
-                var fields = ["text", "x", "y", "width", "height", "type", "visual"];
+                var modelOptions = filterShapeDataItem(model || this.dataItem);
 
                 if (model) {
-                    this.redraw(filterDataItem(fields, model));
-                } else if (this.dataItem) {
-                    this.options = deepExtend({},
-                        this.options,
-                        filterDataItem(fields, this.dataItem)
-                    );
+                    this.redraw(modelOptions);
+                } else {
+                    this.options = deepExtend({}, this.options, modelOptions);
                 }
             },
 
@@ -925,9 +922,7 @@
             },
 
             updateOptionsFromModel: function(model, from, to) {
-                var fields = ["from", "to", "text", "type"];
-                this.options = deepExtend({}, this.options,
-                    filterDataItem(fields, model || this.dataItem));
+                var connectionOptions = filterConnectionDataItem(model || this.dataItem);
 
                 if (model) {
                     if (from) {
@@ -939,6 +934,8 @@
                     }
 
                     this.redraw(this.options);
+                } else {
+                    this.options = deepExtend({}, this.options, connectionOptions);
                 }
             },
 
@@ -3306,15 +3303,53 @@
             ShapeModel: ShapeModel
         });
 
-        function filterDataItem(fields, dataItem) {
+        function filterShapeDataItem(dataItem) {
             var result = {};
-            for (var i = 0; i < fields.length; i++) {
-                var field = fields[i];
-                var value = dataItem[field];
 
-                if (value !== null && value !== undefined) {
-                    result[field] = value;
-                }
+            if (!defined(dataItem.text)) {
+                result.content = dataItem.text;
+            }
+
+            if (!defined(dataItem.x)) {
+                result.x = dataItem.x;
+            }
+
+            if (!defined(dataItem.y)) {
+                result.y = dataItem.y;
+            }
+
+            if (!defined(dataItem.width)) {
+                result.width = dataItem.width;
+            }
+
+            if (!defined(dataItem.height)) {
+                result.height = dataItem.height;
+            }
+
+            if (!defined(dataItem.type)) {
+                result.type = dataItem.type;
+            }
+
+            return result;
+        }
+
+        function filterConnectionDataItem(dataItem) {
+            var result = {};
+
+            if (!defined(dataItem.text)) {
+                result.content = dataItem.text;
+            }
+
+            if (!defined(dataItem.type)) {
+                result.type = dataItem.type;
+            }
+
+            if (!defined(dataItem.from)) {
+                result.from = dataItem.from;
+            }
+
+            if (!defined(dataItem.to)) {
+                result.to = dataItem.to;
             }
 
             return result;
