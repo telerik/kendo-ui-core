@@ -9,6 +9,8 @@
 
     "use strict";
 
+    /* global console */ // XXX: temporary
+
     /* -----[ local vars ]----- */
 
     var dataviz = kendo.dataviz;
@@ -222,11 +224,16 @@
 
         var dir = getPropertyValue(style, "direction");
 
-        var bgColor = getPropertyValue(style, "background-color");
-        bgColor = pdf.parseColor(bgColor);
-        if (bgColor && bgColor.a === 0) {
-            bgColor = null;     // opacity zero
+        var backgroundColor = getPropertyValue(style, "background-color");
+        backgroundColor = pdf.parseColor(backgroundColor);
+        if (backgroundColor && backgroundColor.a === 0) {
+            backgroundColor = null;     // opacity zero
         }
+
+        var backgroundImage = getPropertyValue(style, "background-image");
+        var backgroundRepeat = getPropertyValue(style, "background-repeat");
+        var backgroundPosition = getPropertyValue(style, "background-position");
+        var backgroundOrigin = getPropertyValue(style, "background-origin");
 
         var innerbox = innerBox(element.getBoundingClientRect(), element, "border-*-width");
 
@@ -373,25 +380,70 @@
             return { x: p.y, y: p.x };
         }
 
+        function drawBackground(box) {
+            if (!backgroundColor && (!backgroundImage || (backgroundImage == "none"))) {
+                return;
+            }
+
+            var background = new drawing.Group();
+            setClipping(background, roundBox(box, rTL, rTR, rBR, rBL));
+            group.append(background);
+
+            if (backgroundColor) {
+                background.append(
+                    new drawing.Path({
+                        fill: { color: backgroundColor.toCssRgba() },
+                        stroke: null
+                    })
+                        .moveTo(box.left, box.top)
+                        .lineTo(box.right, box.top)
+                        .lineTo(box.right, box.bottom)
+                        .lineTo(box.left, box.bottom)
+                        .close());
+            }
+
+            var m = /^\s*url\((['"]?)(.*?)\1\)\s*$/i.exec(backgroundImage);
+            if (m) {
+                drawBackgroundImage(background, box, m[2]);
+            }
+        }
+
+        function drawBackgroundImage(group, box, url) {
+            var img = new Image();
+            var pos = backgroundPosition.split(/\s+/g);
+
+            // for background-origin: border-box the box is already appropriate
+            var orgBox = box;
+            if (backgroundOrigin == "content-box") {
+                orgBox = innerBox(orgBox, element, "border-*-width");
+                orgBox = innerBox(orgBox, element, "padding-*");
+            } else if (backgroundOrigin == "padding-box") {
+                orgBox = innerBox(orgBox, element, "border-*-width");
+            }
+
+            // XXX: this really assumes the image is in cache.
+            //      position won't be correctly computed otherwise.
+            img.src = url;
+            pos = { x: pos[0], y: pos[1] };
+
+            if (/%$/.test(pos.x)) {
+                pos.x = parseFloat(pos.x) / 100 * (orgBox.width - img.width);
+            } else {
+                pos.x = parseFloat(pos.x);
+            }
+            if (/%$/.test(pos.y)) {
+                pos.y = parseFloat(pos.y) / 100 * (orgBox.height - img.height);
+            } else {
+                pos.y = parseFloat(pos.y);
+            }
+            var rect = new geo.Rect([ orgBox.left + pos.x, orgBox.top + pos.y ], [ img.width, img.height ]);
+            group.append(new drawing.Image(url, rect));
+        }
+
         // draws a single border box
         function drawOne(box, isFirst, isLast) {
-            // background
-            var background, path;
-            if (bgColor) {
-                // XXX: background image-s TODO.
-                // XXX: clip to content path (possibly rounded)
-                background = new drawing.Path({
-                    fill: { color: bgColor.toCssRgba() },
-                    stroke: null
-                })
-                    .moveTo(box.left, box.top)
-                    .lineTo(box.right, box.top)
-                    .lineTo(box.right, box.bottom)
-                    .lineTo(box.left, box.bottom)
-                    .close();
-                group.append(background);
-                setClipping(background, roundBox(box, rTL, rTR, rBR, rBL));
-            }
+            var path;
+            drawBackground(box);
 
             // top border
             if (top.width > 0) {
