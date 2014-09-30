@@ -283,6 +283,48 @@
         equal(roots[1].id, 2);
     });
 
+    test("rootNodes returns added item", function() {
+         var ds = new TreeListDataSource({
+            data: [
+                { id: 1, parentId: null }
+            ],
+            schema: {
+                model: {
+                    fields: {
+                        parentId: { type: "number", nullable: true }
+                    }
+                }
+            }
+        });
+
+        ds.read();
+        ds.add({});
+
+        var roots = ds.rootNodes();
+        equal(roots.length, 2);
+        equal(roots[0].id, 1);
+        equal(roots[1].id, 0);
+    });
+
+    test("rootNodes check parentId strictly", function() {
+         var ds = new TreeListDataSource({
+            data: [
+                { id: 1, parentId: 0 }
+            ],
+            schema: {
+                model: {
+                    fields: {
+                        parentId: { type: "number" }
+                    }
+                }
+            }
+        });
+
+        ds.read();
+
+        equal(ds.rootNodes().length, 1);
+    });
+
     test("node is considered loaded if it has children", function() {
         var ds = new TreeListDataSource({
             data: [

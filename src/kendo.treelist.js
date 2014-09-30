@@ -121,7 +121,7 @@ var __meta__ = {
 
         fields: {
             id: { type: "number" },
-            parentId: { type: "number", defaultValue: null }
+            parentId: { type: "number", nullable: true }
         },
 
         init: function(value) {
@@ -186,7 +186,7 @@ var __meta__ = {
         },
 
         _subtree: function(map, id) {
-            var result = (id ? map[id] : map[null]) || [];
+            var result = map[id] || [];
 
             for (var i = 0, len = result.length; i < len; i++) {
                 result = result.concat(this._subtree(map, result[i].id));
@@ -321,7 +321,7 @@ var __meta__ = {
 
         rootNodes: function() {
             var model = this.reader.model;
-            return this._byParentId(model.fields.parentId.defaultValue);
+            return this._byParentId(model.fn.defaults.parentId);
         },
 
         parentNode: function(model) {

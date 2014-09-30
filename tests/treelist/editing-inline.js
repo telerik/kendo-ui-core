@@ -323,8 +323,6 @@
             schema: {
                 model: {
                     fields: {
-                        id: { editable: false },
-                        parentId: { editable: false },
                         text: { validation: { required: true } }
                     }
                 }
@@ -360,7 +358,7 @@
         instance.saveRow();
     });
 
-    test("save event doesn't trigger if there isn't editable", function() {
+    test("save event doesn't trigger if there is no editable row", function() {
         var wasCalled = false;
         createTreeList({
             save: function() {
@@ -383,8 +381,6 @@
             schema: {
                 model: {
                     fields: {
-                        id: { editable: false },
-                        parentId: { editable: false },
                         text: { validation: { required: true } }
                     }
                 }
