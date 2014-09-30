@@ -551,10 +551,10 @@
             return 0;
         }
         if (isNaN(za)) {
-            return zb >= 0 ? -1 : 1;
+            return zb === 0 ? 0 : zb > 0 ? -1 : 1;
         }
         if (isNaN(zb)) {
-            return za >= 0 ? 1 : -1;
+            return za === 0 ? 0 : za > 0 ? 1 : -1;
         }
         return parseFloat(za) - parseFloat(zb);
     }
