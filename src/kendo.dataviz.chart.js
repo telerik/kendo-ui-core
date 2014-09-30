@@ -3572,7 +3572,7 @@ var __meta__ = {
         },
 
         evalPointOptions: function(options, value, category, categoryIx, series, seriesIx) {
-            var state = { defaults: series._defaults, excluded: ["data", "aggregate", "_events", "tooltip"] };
+            var state = { defaults: series._defaults, excluded: ["data", "aggregate", "_events", "tooltip", "template"] };
 
             var doEval = this._evalSeries[seriesIx];
             if (!defined(doEval)) {
@@ -5582,7 +5582,7 @@ var __meta__ = {
                 value: value,
                 series: series,
                 dataItem: fields.dataItem
-            }, { defaults: series._defaults, excluded: ["data", "tooltip"] });
+            }, { defaults: series._defaults, excluded: ["data", "tooltip", "tempate"] });
         },
 
         createPoint: function(value, fields) {
@@ -7108,7 +7108,7 @@ var __meta__ = {
                 dataItem: fields.dataItem,
                 category: fields.category,
                 percentage: fields.percentage
-            }, { defaults: series._defaults, excluded: ["data"] });
+            }, { defaults: series._defaults, excluded: ["data", "template"] });
         },
 
         addValue: function(value, sector, fields) {
