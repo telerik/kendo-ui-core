@@ -96,9 +96,11 @@ columnMenu: true,
                     columns: [{
                         field: "CompanyName",
                         title: "Company Name",
-                    //    width: 200
+
+                        width: 200
                         },
                     {
+locked: true,
                         title: "Contact Info",
                         hidden: false,
                         columns: [
@@ -107,21 +109,21 @@ columnMenu: true,
                                 hidden: false,
                                 field: "ContactTitle",
                                 title: "Contact Title",
-                                footerTemplate: "foo"
-                                //width: 200
+                                footerTemplate: "foo",
+                                width: 200
                             }]
                         },
-                            { field: "ContactName", hidden: false, /*width: 100 */},
+                            { field: "ContactName", hidden: false, width: 100 },
 ]
                         },  {  title: "foo title", columns:  [
                         {
                             field: "Country",
 hidden: false,
-                            //width: 150
+                            width: 150
                     },{
                             field: "Country1",
 hidden: false,
-                            //width: 150
+                            width: 150
                     }] }]
 //                   columns: [
 //                   { title: "master", width: 100 },

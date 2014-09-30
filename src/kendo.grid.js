@@ -132,6 +132,7 @@ var __meta__ = {
         templateHashRegExp = /#/ig,
         whitespaceRegExp = "[\\x20\\t\\r\\n\\f]",
         nonDataCellsRegExp = new RegExp("(^|" + whitespaceRegExp + ")" + "(k-group-cell|k-hierarchy-cell)" + "(" + whitespaceRegExp + "|$)"),
+        filterRowRegExp = new RegExp("(^|" + whitespaceRegExp + ")" + "(k-filter-row)" + "(" + whitespaceRegExp + "|$)"),
         COMMANDBUTTONTMPL = '<a class="k-button k-button-icontext #=className#" #=attr# href="\\#"><span class="#=iconClass# #=imageClass#"></span>#=text#</a>',
         isRtl = false,
         browser = kendo.support.browser,
@@ -5888,9 +5889,19 @@ var __meta__ = {
            var diff;
            if (lockedHeigth > tableHeigth) {
                row = table2.rows[table2.rows.length - 1];
+
+               if (filterRowRegExp.test(row.className)) {
+                   row = table2.rows[table2.rows.length - 2];
+               }
+
                diff = lockedHeigth - tableHeigth;
            } else {
                row = table1.rows[table1.rows.length - 1];
+
+               if (filterRowRegExp.test(row.className)) {
+                   row = table1.rows[table1.rows.length - 2];
+               }
+
                diff = tableHeigth - lockedHeigth;
            }
            row.style.height = row.offsetHeight + diff + "px";
