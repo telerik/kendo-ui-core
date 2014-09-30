@@ -181,4 +181,108 @@ test("locked columns set the freezePane", function() {
     });
 });
 
+test("creates group rows", function() {
+    dataSource = new DataSource({
+       data: [
+           { foo: "foo", bar: "bar" },
+           { foo: "boo", bar: "baz" }
+       ],
+       group: { field: "foo" }
+    });
+
+    testWorkbook({ columns: [ { field: "foo" }, { field: "bar" } ], dataSource: dataSource }, function(book) {
+        equal(book.sheets[0].rows[1].type, "group");
+    });
+});
+
+test("sets the value of the group cell to the group field and value", function() {
+    dataSource = new DataSource({
+       data: [
+           { foo: "foo", bar: "bar" },
+           { foo: "boo", bar: "baz" }
+       ],
+       group: { field: "foo" }
+    });
+
+    testWorkbook({ columns: [ { field: "foo" }, { field: "bar" } ], dataSource: dataSource }, function(book) {
+        equal(book.sheets[0].rows[1].cells[0].value, "foo: boo");
+        equal(book.sheets[0].rows[3].cells[0].value, "foo: foo");
+    });
+});
+
+test("sets colSpan of the group cell to the number of columns", function() {
+    dataSource = new DataSource({
+       data: [
+           { foo: "foo", bar: "bar" },
+           { foo: "boo", bar: "baz" }
+       ],
+       group: { field: "foo" }
+    });
+
+    testWorkbook({ columns: [ { field: "foo" }, { field: "bar" } ], dataSource: dataSource }, function(book) {
+        equal(book.sheets[0].rows[1].cells[0].colSpan, 3);
+    });
+});
+
+test("creates data rows for the group items", function() {
+    dataSource = new DataSource({
+       data: [
+           { foo: "foo", bar: "bar" },
+           { foo: "boo", bar: "baz" }
+       ],
+       group: { field: "foo" }
+    });
+
+    testWorkbook({ columns: [ { field: "foo" }, { field: "bar" } ], dataSource: dataSource }, function(book) {
+        equal(book.sheets[0].rows[2].type, "data");
+    });
+});
+
+test("creates group rows for nested group items", function() {
+    dataSource = new DataSource({
+       data: [
+           { foo: "foo", bar: "bar" },
+           { foo: "boo", bar: "baz" }
+       ],
+       group: [{ field: "foo" }, { field: "bar" }]
+    });
+
+    testWorkbook({ columns: [ { field: "foo" }, { field: "bar" } ], dataSource: dataSource }, function(book) {
+        equal(book.sheets[0].rows[1].type, "group");
+        equal(book.sheets[0].rows[2].type, "group");
+        equal(book.sheets[0].rows[3].type, "data");
+    });
+});
+
+test("creates padding cells for groups", function() {
+    dataSource = new DataSource({
+       data: [
+           { foo: "foo", bar: "bar" },
+           { foo: "boo", bar: "baz" }
+       ],
+       group: [{ field: "foo" }, { field: "bar" }]
+    });
+
+    testWorkbook({ columns: [ { field: "foo" }, { field: "bar" } ], dataSource: dataSource }, function(book) {
+        equal(book.sheets[0].rows[0].cells.length, 4);
+        equal(book.sheets[0].rows[1].cells.length, 1);
+        equal(book.sheets[0].rows[2].cells.length, 2);
+        equal(book.sheets[0].rows[3].cells.length, 4);
+    });
+});
+
+test("creates a column for every group", function() {
+    dataSource = new DataSource({
+       data: [
+           { foo: "foo", bar: "bar" },
+           { foo: "boo", bar: "baz" }
+       ],
+       group: [{ field: "foo" }, { field: "bar" }]
+    });
+
+    testWorkbook({ columns: [ { field: "foo" }, { field: "bar" } ], dataSource: dataSource }, function(book) {
+        equal(book.sheets[0].columns.length, 4);
+    });
+});
+
 }());

@@ -31,8 +31,7 @@
               transport: {
                   read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
               },
-              pageSize: 10,
-              serverPaging: true
+              pageSize: 1
           },
           sortable: true,
           pageable: {
@@ -44,7 +43,7 @@
               field: "ContactName",
               title: "Contact Name",
               width: 200,
-              locked: true
+              locked: false
           }, {
               field: "ContactTitle",
               title: "Contact Title",
@@ -53,11 +52,10 @@
               field: "CompanyName",
               title: "Company Name",
               width: 500
-          }, {
-              field: "Country",
-              width: 150
-          }],
+          }
+          ],
           columnMenu: true,
+          groupable: true,
           resizable: true,
           reorderable: true
       })
@@ -70,7 +68,7 @@
         var exporter = new kendo.data.ExcelExporter({
             columns: grid.columns,
             dataSource: grid.dataSource,
-            filter: true
+            filter: false
         });
 
         exporter.workbook().then(function(book) {
