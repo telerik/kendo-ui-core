@@ -19,15 +19,15 @@
 @link-text-color: #428bca;
 
 /* Headers */
-@header-text-color: @widget-text-color;
-@header-background-color: #f5f5f5;
+@header-text-color: #fff;
+@header-background-color: #3f51b5;
 
 /* Buttons */
 @button-text-color: @widget-text-color;
 @button-background-color: #f5f5f5;
 
 /* Group Base Styles */
-@group-background-color: #f5f5f5;
+@group-background-color: #3f51b5;
 @group-border-color: rgba(0, 0, 0, 0.2);
 
 /* Content */
@@ -46,19 +46,19 @@
 /* Selects, Dropdowns */
 @select-background-color: #ebebeb;
 @select-border-color: @hover-border-color;
-@select-hover-background-color: #ebebeb;
+@select-hover-background-color: #fff;
 @select-group-background-color: #ffffff;
 
 /* Selected State */
-@selected-text-color: #ffffff;
+@selected-text-color: #3f51b5;
 @selected-gradient: none;
-@selected-background-color: #428bca;
-@selected-border-color: #428bca;
+@selected-background-color: #fff;
+@selected-border-color: #fff;
 @selected-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
 
 /*Focused State*/
 @focused-border-color: #67afe9;
-@focused-shadow: 0 0 7px 0 #67afe9;
+@focused-shadow: 0 6px 17px 0 #c4c4c4;
 @focused-item-shadow: inset 0 0 7px 0 #67afe9;
 @focused-active-item-shadow: inset 0 0 10px 3px darken(#428bca, 8%);
 
@@ -174,13 +174,13 @@
 @tabstrip-active-background: @widget-background-color;
 @tabstrip-tabs-color: #428bca;
 @form-widget-color: @widget-text-color;
-@drop-down-border-color: @widget-border-color;
-@drop-down-hover-border-color: #adadad;
-@drop-down-focused-border-color: #67afe9;
-@drop-down-background: #ffffff;
+@drop-down-border-color: @drop-down-background;
+@drop-down-hover-border-color: #f4f4f4;
+@drop-down-focused-border-color: #f4f4f4;
+@drop-down-background: #f5f5f5;
 @drop-down-text-color: @widget-text-color;
 @secondary-border-color: #cccccc;
-@secondary-text-color: @widget-text-color;
+@secondary-text-color: #fff;
 @numeric-selected-background: #ebebeb;
 @panelbar-items-border: @widget-border-color;
 @panelbar-content-background: @content-background-color;
@@ -203,7 +203,7 @@
 @multiselect-buttons-hover-background: #3276b1;
 @multiselect-buttons-hover-border-color: #295f8e;
 @slider-selection-background-color: #ebebeb;
-@form-widgets-border-color: #cccccc;
+@form-widgets-border-color: #e7e7e7;
 @pager-text-color: #a5a5a5;
 @draghandle-selected-background: #cccccc;
 @upload-status-color: #f0ad4e;
@@ -275,4 +275,49 @@
     color: @primary-hover-text-color;
     border-color: @primary-hover-border-color;
     background-color: @primary-hover-background-color;
+}
+
+.k-textbox:focus,
+.k-autocomplete.k-state-focused,
+.k-picker-wrap.k-state-focused,
+.k-numeric-wrap.k-state-focused,
+.k-dropdown-wrap.k-state-focused,
+.k-multiselect.k-header.k-state-focused
+{
+    //background-color: @widget-background-color;
+    //.composite-background(@hover-gradient);
+    //background-position: 50% 50%;
+    border-color: @drop-down-focused-border-color;
+    .box-shadow(@focused-shadow);
+}
+
+.k-textbox:hover,
+.k-autocomplete.k-state-hover,
+.k-picker-wrap.k-state-hover,
+.k-numeric-wrap.k-state-hover,
+.k-dropdown-wrap.k-state-hover
+{
+    //background-color: @select-hover-background-color;
+    //.composite-background(@hover-gradient);
+    //background-position: 50% 50%;
+    border-color: @drop-down-hover-border-color;
+    .box-shadow(@focused-shadow);
+}
+
+.k-list>.k-state-selected {
+    //color: @selected-text-color;
+    background-color: @selected-background-color;
+    border-color: @selected-border-color;
+}
+
+.k-list>.k-state-hover,
+.k-list>.k-state-selected.k-state-hover
+{
+   background-color: @hover-background-color;
+   border-color: @hover-background-color;
+}
+
+.k-list-container
+{
+    border-color: @form-widgets-border-color;
 }
