@@ -1993,6 +1993,68 @@
             });
             gradient.start(new Point());
         });
+    })();
+
+    // ------------------------------------------------------------
+    (function() {
+        var RadialGradient = d.RadialGradient;
+        var gradient;
+        var center;
+
+        gradientBaseTests("RadialGradient", RadialGradient);
+
+        module("RadialGradient", {
+            setup: function() {
+                center = new Point(1, 1);
+                gradient = new RadialGradient({
+                    center: center,
+                    radius: 0.5
+                });
+            }
+        });
+
+        test("inits center point", function() {
+            equal(gradient.center(), center);
+        });
+
+        test("inits radius", function() {
+            equal(gradient.radius(), 0.5);
+        });
+
+        test("inits default center and radius if not passed", function() {
+            gradient = new RadialGradient();
+            center = gradient.center();
+            equal(center.x, 0);
+            equal(center.y, 0);
+            equal(gradient.radius(), 1);
+        });
+
+        test("changing center field triggers options change", function() {
+            gradient.addObserver({
+                optionsChange: function(e) {
+                    equal(e.field, "gradient");
+                }
+            });
+            center.setX(0);
+        });
+
+        test("changing center triggers options change", function() {
+            gradient.addObserver({
+                optionsChange: function(e) {
+                    equal(e.field, "gradient");
+                }
+            });
+            gradient.center(new Point());
+        });
+
+        test("changing radius triggers options change", function() {
+            gradient.addObserver({
+                optionsChange: function(e) {
+                    equal(e.field, "gradient");
+                }
+            });
+            gradient.radius(1);
+        });
 
     })();
 })();

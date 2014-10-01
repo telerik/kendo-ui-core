@@ -875,6 +875,28 @@
 
     definePointAccessors(LinearGradient.fn, ["start", "end"]);
 
+    var RadialGradient = Gradient.extend({
+        init: function(options) {
+            options = options || {};
+            Gradient.fn.init.call(this, options.stops);
+
+            this.center(options.center  || new Point());
+            this._radius = defined(options.radius) ? options.radius : 1;
+        },
+
+        radius: function(value) {
+            if (defined(value)) {
+                this._radius = value;
+                this.geometryChange();
+                return this;
+            } else {
+                return this._radius;
+            }
+        }
+    });
+
+    definePointAccessors(RadialGradient.fn, ["center"]);
+
     // Helper functions ===========================================
     function elementsBoundingBox(elements, applyTransform, transformation) {
         var boundingBox;
@@ -997,6 +1019,7 @@
         LinearGradient: LinearGradient,
         MultiPath: MultiPath,
         Path: Path,
+        RadialGradient: RadialGradient,
         Segment: Segment,
         Text: Text
     });
