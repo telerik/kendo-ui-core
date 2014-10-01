@@ -820,6 +820,21 @@
     defineOptionsAccessors(GradientStop.fn, ["offset", "color", "opacity"]);
     deepExtend(GradientStop.fn, ObserversMixin);
 
+    GradientStop.create = function(arg) {
+        if (defined(arg)) {
+            var stop;
+            if (arg instanceof GradientStop) {
+                stop = arg;
+            } else if (arg.length > 1) {
+                stop = new GradientStop(arg[0], arg[1], arg[2]);
+            } else {
+                stop = new GradientStop(arg.offset, arg.color, arg.opacity);
+            }
+
+            return stop;
+        }
+    };
+
     var StopsArray = ElementsArray.extend({
         _change: function() {
             this.optionsChange({
@@ -832,9 +847,20 @@
         nodeType: "gradient",
 
         init: function(stops) {
-            this.stops = new StopsArray(stops);
+            this.stops = new StopsArray(this._createStops(stops));
             this.stops.addObserver(this);
             this.id = kendo.guid();
+        },
+
+        _createStops: function(stops) {
+            var result = [];
+            var idx;
+            stops = stops || [];
+            for (idx = 0; idx < stops.length; idx++) {
+                result.push(GradientStop.create(stops[idx]));
+            }
+
+            return result;
         },
 
         addStop: function(offset, color, opacity) {

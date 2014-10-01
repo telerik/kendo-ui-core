@@ -1883,8 +1883,34 @@
             stop.opacity(0.1);
         });
 
+        module("GradientStop / create");
+
+        test("returns existing instance", function() {
+            stop = new GradientStop();
+            equal(GradientStop.create(stop), stop);
+        });
+
+        test("creates stop from array", function() {
+            stop = GradientStop.create([0.5, "red", 0.1]);
+            equal(stop.offset(), 0.5);
+            equal(stop.color(), "red");
+            equal(stop.opacity(), 0.1);
+        });
+
+        test("creates stop from object", function() {
+            stop = GradientStop.create({
+                color: "red",
+                offset: 0.5,
+                opacity: 0.1
+            });
+            equal(stop.offset(), 0.5);
+            equal(stop.color(), "red");
+            equal(stop.opacity(), 0.1);
+        });
+
     })();
 
+    // ------------------------------------------------------------
     function gradientBaseTests(name, type) {
         var GradientStop = d.GradientStop;
         var gradient;
@@ -1902,6 +1928,29 @@
         test("inits stops", function() {
             equal(gradient.stops.length, 2);
         });
+
+        test("inits stops from array of arrays", function() {
+            gradient = new type({
+                stops: [[0.5, "red"]]
+            });
+            var stop = gradient.stops[0];
+            ok(stop instanceof GradientStop);
+            equal(stop.offset(), 0.5);
+            equal(stop.color(), "red");
+        });
+
+        test("inits stops from array of plain objects", function() {
+            gradient = new type({
+                stops: [{
+                    offset: 0.5,
+                    color: "red"
+                }]
+            });
+            var stop = gradient.stops[0];
+            ok(stop instanceof GradientStop);
+            equal(stop.offset(), 0.5);
+            equal(stop.color(), "red");
+        })
 
         test("inits id", function() {
             ok(gradient.id);
