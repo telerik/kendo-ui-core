@@ -197,6 +197,7 @@
 
     // ------------------------------------------------------------
     function shapeBaseTests(TShape, name) {
+        var Gradient = d.Gradient;
         var shape;
 
         module("Shape base tests / " + name, {
@@ -205,11 +206,34 @@
             }
         });
 
-        test("fill sets fill", function() {
+        test("fill sets color and opacity", function() {
             shape.fill("red", 1);
 
             equal(shape.options.fill.color, "red");
             equal(shape.options.fill.opacity, 1);
+        });
+
+        test("fill sets gradient", function() {
+            var gradient = new Gradient();
+            shape.fill(gradient);
+
+            equal(shape.options.fill, gradient);
+        });
+
+        test("fill sets color and opacity if current fill is gradient", function() {
+            shape.fill(new Gradient());
+            shape.fill("red", 1);
+
+            equal(shape.options.fill.color, "red");
+            equal(shape.options.fill.opacity, 1);
+        });
+
+        test("fill sets gradient if current field is not", function() {
+            var gradient = new Gradient();
+            shape.fill("red", 1);
+            shape.fill(gradient);
+
+            equal(shape.options.fill, gradient);
         });
 
         test("fill triggers optionsChange", function() {
