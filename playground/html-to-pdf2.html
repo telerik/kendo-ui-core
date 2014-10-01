@@ -45,6 +45,12 @@
       <button onclick="draw('#calendar')">Draw</button>
     </div>
 
+    <div style="width: 30em; margin: 1em">
+      <textarea id="editor"></textarea>
+      <button onclick="getPDF('#calendar')">Get PDF</button>
+      <button onclick="draw('#calendar')">Draw</button>
+    </div>
+
     <div style="width: 10em; text-align: center; border-radius: 5px; border: 2px solid black; padding: 2em; background: url('images/2.jpg') no-repeat 50% 50%">Rounded border</div>
     <img src="images/2.jpg" width="100" />
 
@@ -89,6 +95,9 @@
       });
 
       $("#calendar").kendoCalendar();
+
+      $("#editor").kendoEditor();
+
     </script>
   </body>
 </html>

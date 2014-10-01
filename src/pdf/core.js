@@ -10,7 +10,8 @@
     // == into === to make JSHint happy will break functionality.
     /* jshint eqnull:true */
     /* jshint loopfunc:true */
-    /* global console,require */ // temporary
+    /* jshint newcap:false */
+    /* global console,require,alert */ // XXX: temporary
 
     var NL = "\n";
 
@@ -247,7 +248,7 @@
         } else {
             if (global.process) { // XXX: temporary
                 require("fs").readFile(url, { encoding: "binary" }, function(err, data){
-                    cont(IMAGE_CACHE[url] = new PDF.JPEG(data));
+                    cont(IMAGE_CACHE[url] = new PDFJpegImage(data));
                 });
                 return;
             }
@@ -256,10 +257,40 @@
             img.onload = function() {
                 withCanvas(img.width, img.height, function(ctx, canvas){
                     ctx.drawImage(img, 0, 0);
-                    var data = canvas.toDataURL("image/jpeg");
-                    data = data.substr(data.indexOf(";base64,") + 8);
-                    data = global.atob(data);
-                    cont(IMAGE_CACHE[url] = new PDF.JPEG(data));
+
+                    // in case it contains transparency, we must separate rgb data from the alpha
+                    // channel and create a PDFRawImage image with opacity.  otherwise we can use a
+                    // PDFJpegImage.
+                    //
+                    // to do this in one step, we create the rgb and alpha streams anyway, even if
+                    // we might end up not using them if hasAlpha remains false.
+
+                    var hasAlpha = false, rgb = BinaryStream(), alpha = BinaryStream();
+                    var imgdata = ctx.getImageData(0, 0, img.width, img.height);
+                    var rawbytes = imgdata.data;
+                    var i = 0;
+                    while (i < rawbytes.length) {
+                        rgb.writeByte(rawbytes[i++]);
+                        rgb.writeByte(rawbytes[i++]);
+                        rgb.writeByte(rawbytes[i++]);
+                        var a = rawbytes[i++];
+                        if (a < 255) {
+                            hasAlpha = true;
+                        }
+                        alpha.writeByte(a);
+                    }
+
+                    if (hasAlpha) {
+                        img = new PDFRawImage(img.width, img.height, rgb, alpha);
+                    } else {
+                        // jpeg.
+                        var data = canvas.toDataURL("image/jpeg");
+                        data = data.substr(data.indexOf(";base64,") + 8);
+                        data = global.atob(data);
+                        img = new PDFJpegImage(data);
+                    }
+
+                    cont(IMAGE_CACHE[url] = img);
                 });
             };
         }
@@ -312,7 +343,7 @@
                 if (!img) {
                     throw new Error("Image " + url + " has not been loaded");
                 }
-                img = this.IMAGES[url] = this.attach(new PDFImage(img));
+                img = this.IMAGES[url] = this.attach(img.asStream(this));
             }
             return img;
         },
@@ -569,23 +600,88 @@
 
     /// images
 
-    var PDFImage = defclass(function PDFImage(img){
-        this.data = img.data;
-        this.props = {
-            Type             : PDFName.get("XObject"),
-            Subtype          : PDFName.get("Image"),
-            BitsPerComponent : img.bits,
-            Height           : img.height,
-            Width            : img.width,
-            Filter           : PDFName.get("DCTDecode"),
-            ColorSpace       : PDFName.get({
-                1: "DeviceGray",
-                3: "DeviceRGB",
-                4: "DeviceCMYK"
-            }[img.channels])
+    // JPEG
+
+    function PDFJpegImage(data) {
+        var JPEG_SOF_MARKERS = [
+            0xFFC0, 0xFFC1, 0xFFC2, 0xFFC3, 0xFFC5, 0xFFC6, 0xFFC7,
+            0xFFC8, 0xFFC9, 0xFFCA, 0xFFCB, 0xFFCC, 0xFFCD, 0xFFCE, 0xFFCF
+        ];
+
+        if (typeof data == "string") {
+            data = BinaryStream(data);
+        }
+
+        // sanitize data (make sure we don't have chars with code > 0xFF)
+        data.offset(0);
+        data = BinaryStream(data.readString(data.length()));
+
+        data.offset(0);
+        if (data.readShort() != 0xFFD8) {
+            throw new Error("Invalid JPEG");
+        }
+        OUT: {
+            while (!data.eof()) {
+                var marker = data.readShort();
+                if (JPEG_SOF_MARKERS.indexOf(marker) >= 0) {
+                    break OUT;
+                }
+                data.skip(data.readShort() - 2);
+            }
+            throw new Error("Invalid JPEG");
+        }
+        data.skip(2);
+        var bits = data.readByte();
+        var height = data.readShort();
+        var width = data.readShort();
+        var channels = data.readByte();
+
+        var colorSpace = PDFName.get({
+            1: "DeviceGray",
+            3: "DeviceRGB",
+            4: "DeviceCMYK"
+        }[channels]);
+
+        this.asStream = function() {
+            var stream = new PDFStream(data, {
+                Type             : PDFName.get("XObject"),
+                Subtype          : PDFName.get("Image"),
+                Width            : width,
+                Height           : height,
+                BitsPerComponent : bits,
+                ColorSpace       : colorSpace,
+                Filter           : PDFName.get("DCTDecode")
+            });
+            stream._resourceName = PDFName.get("I" + (++RESOURCE_COUNTER));
+            return stream;
         };
-        this._resourceName = PDFName.get("I" + (++RESOURCE_COUNTER));
-    }, {}, PDFStream);
+    }
+
+    // PDFRawImage will be used for images with transparency (PNG)
+
+    function PDFRawImage(width, height, rgb, alpha) {
+        this.asStream = function(pdf) {
+            var mask = new PDFStream(alpha, {
+                Type             : PDFName.get("XObject"),
+                Subtype          : PDFName.get("Image"),
+                Width            : width,
+                Height           : height,
+                BitsPerComponent : 8,
+                ColorSpace       : PDFName.get("DeviceGray")
+            });
+            var stream = new PDFStream(rgb, {
+                Type             : PDFName.get("XObject"),
+                Subtype          : PDFName.get("Image"),
+                Width            : width,
+                Height           : height,
+                BitsPerComponent : 8,
+                ColorSpace       : PDFName.get("DeviceRGB"),
+                SMask            : pdf.attach(mask)
+            });
+            stream._resourceName = PDFName.get("I" + (++RESOURCE_COUNTER));
+            return stream;
+        };
+    }
 
     /// standard fonts
 
