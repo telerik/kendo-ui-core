@@ -203,6 +203,15 @@
             ok(node.render().indexOf("display") === -1);
         });
 
+        test("renders opacity", function() {
+            shape.opacity(0.5);
+            ok(node.render().indexOf("opacity='0.5'") !== -1);
+        });
+
+        test("does not render opacity if not set", function() {
+            ok(node.render().indexOf("opacity") === -1);
+        });
+
         test("optionsChange sets visibility to hidden", function() {
             node.css = function(name, value) {
                 equal(name, "display");
@@ -219,6 +228,15 @@
             };
 
             shape.visible(true);
+        });
+
+        test("optionsChange sets opacity", function() {
+            node.attr = function(name, value) {
+                equal(name, "opacity");
+                equal(value, 0.5);
+            };
+
+            shape.opacity(0.5);
         });
 
         // ------------------------------------------------------------

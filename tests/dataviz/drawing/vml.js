@@ -26,6 +26,13 @@
         TransformNode = vml.TransformNode;
 
     // ------------------------------------------------------------
+    function expect(value) {
+        return function(actual) {
+            equal(actual, value);
+        };
+    }
+
+    // ------------------------------------------------------------
     (function() {
         var container,
             surface;
@@ -163,36 +170,6 @@
             equal(node.element.children.length, 0);
         });
 
-        test("load appends child nodes", function() {
-            var parentGroup = new Group();
-            var childGroup = new Group();
-            parentGroup.append(childGroup);
-
-            node.load([parentGroup]);
-
-            ok(node.childNodes[0].childNodes[0] instanceof GroupNode);
-        });
-
-        test("load appends child DOM nodes", function() {
-            var parentGroup = new Group();
-            var childGroup = new Group();
-            parentGroup.append(childGroup);
-
-            node.load([parentGroup]);
-
-            equal(node.element.children[0].children[0],
-                  node.childNodes[0].childNodes[0].element);
-        });
-
-        test("load attaches node", function() {
-            node.attachTo(document.createElement("div"));
-
-            var group = new Group();
-            node.load([group]);
-
-            equal(node.childNodes[0].element.parentNode, node.element);
-        });
-
         test("renders visibility", function() {
             srcElement.visible(false);
             node = new TNode(srcElement);
@@ -210,14 +187,97 @@
             };
             srcElement.visible(false);
         });
+    }
 
+    function nodeLoadTests(name, TNode, createElement) {
+        var node;
+        var element;
+
+        module("Node / Load / " + name, {
+            setup: function() {
+                node = new Node();
+                element = createElement();
+            }
+        });
+
+        test("appends node", function() {
+            node.append = function(child) {
+                ok(child instanceof TNode);
+            };
+
+            node.load([element]);
+        });
+
+        test("load appends PathNode with srcElement transformation", function() {
+            var matrix = new Matrix(2,2,2,2,2,2),
+                element = createElement({ transform: matrix });
+
+            node.append = function(child) {
+                compareMatrices(child.transform.transform.matrix(), matrix);
+            };
+
+            node.load([element]);
+        });
+
+        test("load appends node with current transformation", function() {
+            var transform = g.transform();
+            node.append = function(child) {
+                ok(child.transform.transform.matrix().equals(transform.matrix()));
+            };
+
+            node.load([element], transform);
+        });
+
+        test("load appends node with combined transformation", function() {
+            var matrix = new Matrix(3,3,3,3,3,3),
+                currentMatrix = new Matrix(2,2,2,2,2,2),
+                combinedMatrix = currentMatrix.multiplyCopy(matrix),
+                element = createElement({ transform: matrix });
+
+            node.append = function(child) {
+                compareMatrices(child.transform.transform.matrix(), combinedMatrix);
+            };
+
+            node.load([element], currentMatrix);
+        });
     }
 
     // ------------------------------------------------------------
     (function() {
         var node;
 
-        module("Node", {
+        module("RootNode", {
+            setup: function() {
+                node = new vml.RootNode();
+            }
+        });
+
+        test("sets size", function() {
+            equal(node.element.style.width, "100%");
+            equal(node.element.style.height, "100%");
+        });
+
+        test("sets position", function() {
+            equal(node.element.style.position, "relative");
+        });
+
+        test("doesn't attach _kendoNode", function() {
+            ok(!node.element._kendoNode);
+        });
+
+        test("clear cleans up content", function() {
+            node.load([new Group()]);
+            node.clear();
+
+            equal(node.element.innerHTML, "");
+        });
+    })();
+
+    // ------------------------------------------------------------
+    (function() {
+        var node;
+
+        module("Node / Group load", {
             setup: function() {
                 node = new Node();
             }
@@ -231,125 +291,10 @@
             node.load([new Group()]);
         });
 
-        test("load appends PathNode", function() {
-            node.append = function(child) {
-                ok(child instanceof PathNode);
-            };
-
-            node.load([new Path()]);
-        });
-
-        test("load appends PathNode with srcElement transformation", function() {
-            var matrix = new Matrix(2,2,2,2,2,2),
-                path = new Path({transform: matrix});
-            node.append = function(child) {
-                compareMatrices(child.transform.transform.matrix(), matrix);
-            };
-            node.load([path]);
-        });
-
-        test("load appends PathNode with current transformation", function() {
-            var matrix = new Matrix(2,2,2,2,2,2),
-                path = new Path();
-            node.append = function(child) {
-                compareMatrices(child.transform.transform.matrix(), matrix);
-            };
-            node.load([path], matrix);
-        });
-
-        test("load appends PathNode with combined transformation", function() {
-            var matrix = new Matrix(3,3,3,3,3,3),
-                currentMatrix = new Matrix(2,2,2,2,2,2),
-                combinedMatrix = currentMatrix.multiplyCopy(matrix),
-                path = new Path({transform: matrix});
-
-            node.append = function(child) {
-                compareMatrices(child.transform.transform.matrix(), combinedMatrix);
-            };
-
-            node.load([path], currentMatrix);
-        });
-
-        test("load appends MultiPathNode", function() {
-            node.append = function(child) {
-                ok(child instanceof MultiPathNode);
-            };
-
-            node.load([new MultiPath()]);
-        });
-
-        test("load appends CircleNode", function() {
-            node.append = function(child) {
-                ok(child instanceof CircleNode);
-            };
-
-            node.load([new Circle(new g.Circle())]);
-        });
-
-        test("load appends TextNode", function() {
-            node.append = function(child) {
-                ok(child instanceof vml.TextNode);
-            };
-
-            node.load([new d.Text("foo", new g.Point())]);
-        });
-
-        test("load appends TextNode with current transformation", function() {
-            var transform = g.transform();
-            node.append = function(child) {
-                ok(child.transform.transform.matrix().equals(transform.matrix()));
-            };
-            node.load([new d.Text("foo", new g.Point())], transform);
-        });
-
-        test("load appends TextNode with combined transformation", function() {
-            var matrix = new Matrix(3,3,3,3,3,3),
-                currentMatrix = new Matrix(2,2,2,2,2,2),
-                combinedMatrix = currentMatrix.multiplyCopy(matrix),
-                text = new d.Text("foo", new g.Point(), {transform: matrix});
-
-            node.append = function(child) {
-                compareMatrices(child.transform.transform.matrix(), combinedMatrix);
-            };
-
-            node.load([text], currentMatrix);
-        });
-
-        test("load appends ImageNode", function() {
-            node.append = function(child) {
-                ok(child instanceof vml.ImageNode);
-            };
-
-            node.load([new d.Image("foo", new g.Rect())]);
-        });
-
-        test("load appends ImageNode with current transformation", function() {
-            var transform = g.transform();
-            node.append = function(child) {
-                ok(child.transform.transform.matrix().equals(transform.matrix()));
-            };
-            node.load([new d.Image("foo", new g.Rect())], transform);
-        });
-
-        test("load appends ImageNode with combined transformation", function() {
-            var matrix = new Matrix(3,3,3,3,3,3),
-                currentMatrix = new Matrix(2,2,2,2,2,2),
-                combinedMatrix = currentMatrix.multiplyCopy(matrix),
-                image = new d.Image("foo", new g.Rect(), {transform: matrix});
-
-            node.append = function(child) {
-                compareMatrices(child.transform.transform.matrix(), combinedMatrix);
-            };
-            node.load([image], currentMatrix);
-        });
-    })();
-
-    // ------------------------------------------------------------
-    (function() {
-        var node;
+        // ------------------------------------------------------------
         var groupLoad = GroupNode.fn.load;
 
-        module("Node / group load transformations", {
+        module("Node / Group load / Transformations", {
             setup: function() {
                 node = new Node();
             },
@@ -396,37 +341,6 @@
 
     // ------------------------------------------------------------
     (function() {
-        var node;
-
-        module("RootNode", {
-            setup: function() {
-                node = new vml.RootNode();
-            }
-        });
-
-        test("sets size", function() {
-            equal(node.element.style.width, "100%");
-            equal(node.element.style.height, "100%");
-        });
-
-        test("sets position", function() {
-            equal(node.element.style.position, "relative");
-        });
-
-        test("doesn't attach _kendoNode", function() {
-            ok(!node.element._kendoNode);
-        });
-
-        test("clear cleans up content", function() {
-            node.load([new Group()]);
-            node.clear();
-
-            equal(node.element.innerHTML, "");
-        });
-    })();
-
-    // ------------------------------------------------------------
-    (function() {
         var group;
         var groupNode;
 
@@ -435,7 +349,7 @@
 
         module("GroupNode", {
             setup: function() {
-                groupNode = new GroupNode();
+                groupNode = new GroupNode(new d.Group());
             }
         });
 
@@ -449,6 +363,23 @@
 
         test("renders nowrap", function() {
             equal(groupNode.element.style["white-space"], "nowrap");
+        });
+
+        test("load appends child nodes", function() {
+            var parentGroup = new Group();
+            var childGroup = new Group();
+            parentGroup.append(childGroup);
+
+            groupNode.load([parentGroup]);
+
+            ok(groupNode.childNodes[0].childNodes[0] instanceof GroupNode);
+        });
+
+        test("load attaches child nodes", function() {
+            groupNode.attachTo(document.createElement("div"));
+            groupNode.load([new Group()]);
+
+            equal(groupNode.childNodes[0].element.parentNode, groupNode.element);
         });
 
         test("refreshTransform method calls childNodes refreshTransform method", function() {
@@ -573,7 +504,82 @@
             group.transform(g.transform().translate(100, 100));
             compareBoundingBox(groupNode.clipBBox(clip), [210, 210, 310, 310]);
         });
+    })();
 
+    // ------------------------------------------------------------
+    (function() {
+        var group;
+        var groupNode;
+
+        module("GroupNode / Opacity", {
+            setup: function() {
+                group = new Group();
+                groupNode = new GroupNode(group);
+            }
+        });
+
+        test("load sets group opacity on child groups", function() {
+            var childGroup = new d.Group({ opacity: 0.5 });
+            childGroup.append(new d.Path());
+
+            group.opacity(0.5);
+            groupNode.load([childGroup]);
+
+            equal(groupNode.childNodes[0].childNodes[0].fill.opacity, 0.25);
+        });
+
+        test("load sets group opacity on children", function() {
+            group.opacity(0.5);
+            groupNode.load([new d.Path()]);
+
+            equal(groupNode.childNodes[0].fill.opacity, 0.5);
+        });
+
+        test("load multiplies group opacity with child opacity", function() {
+            group.opacity(0.5);
+            groupNode.load([new d.Path({ opacity: 0.5 })]);
+
+            equal(groupNode.childNodes[0].fill.opacity, 0.25);
+        });
+    })();
+
+    // ------------------------------------------------------------
+    (function() {
+        var rootGroup;
+        var rootGroupNode;
+
+        var childGroup;
+        var childGroupNode;
+
+        var childNode;
+
+        module("GroupNode / Opacity / Refresh", {
+            setup: function() {
+                rootGroup = new d.Group();
+                rootGroupNode = new GroupNode(rootGroup);
+
+                childGroup = new d.Group();
+                childGroupNode = new GroupNode(childGroup);
+                rootGroupNode.append(childGroupNode);
+
+                childNode = new vml.Node();
+                childGroupNode.append(childNode);
+            }
+        });
+
+        test("sets child opacity", function() {
+            childNode.refreshOpacity = expect(0.5);
+
+            rootGroup.opacity(0.5);
+        });
+
+        test("multiplies with child group opacity", function() {
+            childNode.refreshOpacity = $.noop;
+            childGroup.opacity(0.5);
+            childNode.refreshOpacity = expect(0.25);
+
+            rootGroup.opacity(0.5);
+        });
     })();
 
     // ------------------------------------------------------------
@@ -874,7 +880,30 @@
                 equal(value, "false");
             };
 
+            path.fill("red");
             updateOption("fill", null);
+        });
+
+        test("refreshOpacity sets opacity", function() {
+            fillNode.attr = function(name, value) {
+                if (name === "opacity") {
+                    equal(value, 0.5);
+                }
+            };
+
+            path.fill("red");
+            fillNode.refreshOpacity(0.5);
+        });
+
+        test("refreshOpacity multiplies with fill opacity", function() {
+            fillNode.attr = function(name, value) {
+                if (name === "opacity") {
+                    equal(value, 0.25);
+                }
+            };
+
+            path.fill("red", 0.5);
+            fillNode.refreshOpacity(0.5);
         });
     })();
 
@@ -1223,6 +1252,11 @@
 
         baseClipTests("PathNode", vml.PathNode, d.Path);
 
+        nodeLoadTests("PathNode", vml.PathNode, function (options) {
+                return new d.Path(options);
+            }
+        );
+
         module("PathNode", {
             setup: function() {
                 path = new Path();
@@ -1256,6 +1290,30 @@
             };
 
             path.lineTo(10, 10);
+        });
+
+        test("refreshOpacity is forwarded to fill node", function() {
+            pathNode.fill.refreshOpacity = expect(0.5);
+            pathNode.refreshOpacity(0.5);
+        });
+
+        test("refreshOpacity is forwarded to stroke node", function() {
+            pathNode.stroke.refreshOpacity = expect(0.5);
+            pathNode.refreshOpacity(0.5);
+        });
+
+        test("refreshOpacity multiplies with own opacity for fill", function() {
+            pathNode.fill.refreshOpacity = expect(0.25);
+
+            path.opacity(0.5);
+            pathNode.refreshOpacity(0.5);
+        });
+
+        test("refreshOpacity multiplies with own opacity for stroke", function() {
+            pathNode.stroke.refreshOpacity = expect(0.25);
+
+            path.opacity(0.5);
+            pathNode.refreshOpacity(0.5);
         });
     })();
 
@@ -1294,6 +1352,11 @@
             multiPathNode;
 
         baseClipTests("MultiPathNode", vml.MultiPathNode, d.MultiPath);
+
+        nodeLoadTests("MultiPathNode", vml.MultiPathNode, function (options) {
+                return new d.MultiPath(options);
+            }
+        );
 
         module("MultiPathNode", {
             setup: function() {
@@ -1374,6 +1437,12 @@
             circleNode;
 
         baseClipTests("CircleNode", vml.CircleNode, d.Circle);
+
+        nodeLoadTests("CircleNode", vml.CircleNode, function (options) {
+                var geometry = new g.Circle(new Point(10, 20), 30);
+                return new d.Circle(geometry, options);
+            }
+        );
 
         module("CircleNode", {
             setup: function() {
@@ -1627,6 +1696,11 @@
 
         baseClipTests("TextNode", vml.TextNode, d.Text);
 
+        nodeLoadTests("TextNode", vml.TextNode, function (options) {
+                return new d.Text("Foo", new g.Point(), options);
+            }
+        );
+
         module("TextNode", {
             setup: function() {
                 text = new d.Text("Foo", new g.Point());
@@ -1692,7 +1766,7 @@
 
         module("ImageFillNode", {
             setup: function() {
-                image = new d.Image("foo", new g.Rect([10, 20], [90, 80]));
+                image = new d.Image("foo", new g.Rect([10, 20], [90, 80]), { opacity: 0.5 });
                 fillNode = new vml.ImageFillNode(image);
             }
         });
@@ -1715,6 +1789,10 @@
 
         test("renders fill relative center position", function() {
             equal(fillNode.element.position, "0.05,0.1");
+        });
+
+        test("renders opacity", function() {
+            equal(fillNode.element.opacity, "0.5");
         });
 
         test("renders default angle of rotation", function() {
@@ -1789,6 +1867,16 @@
             image.rect().setSize([200, 200]);
             fillNode.geometryChange();
         });
+
+        test("refreshOpacity multiplies with image opacity", function() {
+            fillNode.attr = function(name, value) {
+                if (name === "opacity") {
+                    equal(value, 0.25);
+                }
+            };
+
+            fillNode.refreshOpacity(0.5);
+        });
     })();
 
     // ------------------------------------------------------------
@@ -1797,6 +1885,11 @@
         var imageNode;
 
         baseClipTests("ImageNode", vml.ImageNode, d.Image);
+
+        nodeLoadTests("ImageNode", vml.ImageNode, function (options) {
+                return new d.Image("foo", new g.Rect(), options);
+            }
+        );
 
         module("ImageNode", {
             setup: function() {

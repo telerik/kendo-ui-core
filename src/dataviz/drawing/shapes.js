@@ -128,6 +128,15 @@
             } else {
                 return options.get("clip");
             }
+        },
+
+        opacity: function(value) {
+            if (defined(value)) {
+                this.options.set("opacity", value);
+                return this;
+            } else {
+                return this.options.get("opacity");
+            }
         }
     });
 

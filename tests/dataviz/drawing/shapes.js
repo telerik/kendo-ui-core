@@ -45,6 +45,24 @@
             equal(element.visible(), false);
         });
 
+        test("opacity sets opacity option", function() {
+            element.opacity(0.5);
+            equal(element.options.opacity, 0.5);
+        });
+
+        test("opacity setter is chainable", function() {
+            equal(element.opacity(0.5), element);
+        });
+
+        test("opacity returns undefined if opacity is not defined", function() {
+            equal(element.opacity(), undefined);
+        });
+
+        test("opacity returns opacity option value", function() {
+            element.options.opacity = 0.5;
+            equal(element.opacity(), 0.5);
+        });
+
         test("constructor sets transformation when a matrix is passed through the options", function() {
             element = new Element({transform: Matrix.unit()});
             compareMatrices(element.options.transform.matrix(), Matrix.unit());

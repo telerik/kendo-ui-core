@@ -199,10 +199,13 @@
         optionsChange: function(e) {
             var field = e.field;
             var value = e.value;
+
             if (field === "visible") {
                 this.css("display", value ? "" : NONE);
             } else if (DefinitionMap[field]) {
                 this.updateDefinition(field, value);
+            } else if (field === "opacity") {
+                this.attr("opacity", value);
             }
 
             BaseNode.fn.optionsChange.call(this, e);
@@ -283,9 +286,10 @@
         },
 
         mapStyle: function() {
-            var style = [["cursor", this.srcElement.options.cursor]];
+            var options = this.srcElement.options;
+            var style = [["cursor", options.cursor]];
 
-            if (this.srcElement.options.visible === false) {
+            if (options.visible === false) {
                 style.push(["display", NONE]);
             }
 
@@ -294,6 +298,10 @@
 
         renderStyle: function() {
             return renderAttr("style", util.renderStyle(this.mapStyle()));
+        },
+
+        renderOpacity: function() {
+            return renderAttr("opacity", this.srcElement.options.opacity);
         },
 
         createDefinitions: function() {
@@ -506,7 +514,7 @@
 
     var GroupNode = Node.extend({
         template: renderTemplate(
-            "<g#= d.renderTransform() + d.renderStyle() + d.renderDefinitions()#>#= d.renderChildren() #</g>"
+            "<g#= d.renderTransform() + d.renderStyle() + d.renderOpacity() + d.renderDefinitions()#>#= d.renderChildren() #</g>"
         ),
 
         optionsChange: function(e) {
@@ -703,7 +711,7 @@
         },
 
         template: renderTemplate(
-            "<path #= d.renderStyle() # " +
+            "<path #= d.renderStyle() # #= d.renderOpacity() # " +
             "#= kendo.dataviz.util.renderAttr('d', d.renderData()) # " +
             "#= d.renderStroke() # " +
             "#= d.renderFill() # " +
@@ -753,7 +761,7 @@
         },
 
         template: renderTemplate(
-            "<circle #= d.renderStyle() # " +
+            "<circle #= d.renderStyle() # #= d.renderOpacity() # " +
             "cx='#= d.center().x #' cy='#= d.center().y #' " +
             "r='#= d.radius() #' " +
             "#= d.renderStroke() # " +
@@ -796,7 +804,7 @@
         },
 
         template: renderTemplate(
-            "<text #= d.renderStyle() # " +
+            "<text #= d.renderStyle() # #= d.renderOpacity() # " +
             "x='#= this.pos().x #' y='#= this.pos().y #' " +
             "#= d.renderStroke() # " +
             "#=  d.renderTransform() # " +
@@ -844,7 +852,7 @@
         },
 
         template: renderTemplate(
-            "<image #= d.renderStyle() # #= d.renderTransform()# " +
+            "<image #= d.renderStyle() # #= d.renderTransform()# #= d.renderOpacity() # " +
             "#= d.renderPosition() # #= d.renderSource() # #= d.renderDefinitions()#>" +
             "</image>"
         )

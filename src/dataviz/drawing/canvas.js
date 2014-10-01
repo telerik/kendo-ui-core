@@ -139,21 +139,6 @@
             BaseNode.fn.optionsChange.call(this, e);
         },
 
-        renderTo: function(ctx) {
-            var childNodes = this.childNodes,
-                i;
-
-            ctx.save();
-            this.setTransform(ctx);
-            this.setClip(ctx);
-
-            for (i = 0; i < childNodes.length; i++) {
-                childNodes[i].renderTo(ctx);
-            }
-
-            ctx.restore();
-        },
-
         setTransform: function(ctx) {
             if (this.srcElement) {
                 var transform = this.srcElement.transform();
@@ -187,8 +172,8 @@
                     childNode = new TextNode(srcElement);
                 } else if (srcElement instanceof d.Image) {
                     childNode = new ImageNode(srcElement);
-                } else {
-                    childNode = new Node(srcElement);
+                } else if (srcElement instanceof d.Group) {
+                    childNode = new GroupNode(srcElement);
                 }
 
                 if (children && children.length > 0) {
@@ -199,12 +184,47 @@
             }
 
             node.invalidate();
+        },
+
+        setOpacity: function(ctx) {
+            if (this.srcElement) {
+                var opacity = this.srcElement.opacity();
+                if (defined(opacity)) {
+                    this.globalAlpha(ctx, opacity);
+                }
+            }
+        },
+
+        globalAlpha: function(ctx, value) {
+            if (value && ctx.globalAlpha) {
+                value *= ctx.globalAlpha;
+            }
+            ctx.globalAlpha = value;
         }
     });
 
-    var RootNode = Node.extend({
+    var GroupNode = Node.extend({
+        renderTo: function(ctx) {
+            var childNodes = this.childNodes,
+                i;
+
+            ctx.save();
+
+            this.setTransform(ctx);
+            this.setClip(ctx);
+            this.setOpacity(ctx);
+
+            for (i = 0; i < childNodes.length; i++) {
+                childNodes[i].renderTo(ctx);
+            }
+
+            ctx.restore();
+        }
+    });
+
+    var RootNode = GroupNode.extend({
         init: function(canvas) {
-            Node.fn.init.call(this);
+            GroupNode.fn.init.call(this);
 
             this.canvas = canvas;
             this.ctx = canvas.getContext("2d");
@@ -216,7 +236,7 @@
         },
 
         destroy: function() {
-            Node.fn.destroy.call(this);
+            GroupNode.fn.destroy.call(this);
             this.canvas = null;
             this.ctx = null;
         },
@@ -237,6 +257,7 @@
 
             this.setTransform(ctx);
             this.setClip(ctx);
+            this.setOpacity(ctx);
 
             ctx.beginPath();
 
@@ -256,8 +277,11 @@
             var fill = this.srcElement.options.fill;
             if (fill && !isTransparent(fill.color)) {
                 ctx.fillStyle = fill.color;
-                ctx.globalAlpha = fill.opacity;
+
+                ctx.save();
+                this.globalAlpha(ctx, fill.opacity);
                 ctx.fill();
+                ctx.restore();
 
                 return true;
             }
@@ -268,8 +292,11 @@
             if (stroke && !isTransparent(stroke.color)) {
                 ctx.strokeStyle = stroke.color;
                 ctx.lineWidth = valueOrDefault(stroke.width, 1);
-                ctx.globalAlpha = stroke.opacity;
+
+                ctx.save();
+                this.globalAlpha(ctx, stroke.opacity);
                 ctx.stroke();
+                ctx.restore();
 
                 return true;
             }
@@ -382,11 +409,11 @@
 
             this.setTransform(ctx);
             this.setClip(ctx);
+            this.setOpacity(ctx);
 
             ctx.beginPath();
 
             ctx.font = text.options.font;
-
             if (this.setFill(ctx)) {
                 ctx.fillText(text.content(), pos.x, pos.y + size.baseline);
             }
@@ -468,6 +495,7 @@
         canvas: {
             ArcNode: ArcNode,
             CircleNode: CircleNode,
+            GroupNode: GroupNode,
             ImageNode: ImageNode,
             MultiPathNode: MultiPathNode,
             Node: Node,
