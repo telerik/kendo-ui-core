@@ -155,6 +155,12 @@
         equal(options.obj.observers()[0], options);
     });
 
+    test("clears previous field observer", function() {
+        var previous = options.obj;
+        options.set("obj", new ObserverClass());
+        equal(previous.observers().length, 0);
+    });
+
     test("set", function() {
         options.set("baz", true);
         equal(options.baz, true);
