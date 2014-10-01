@@ -90,4 +90,26 @@
         var events = $._data(content[0], "events");
         ok(!events || !events.click || !events.click.length);
     });
+
+    test("items returns item rows", function() {
+        createTreeList({
+            dataSource: [
+                { id: 1, parentId: null, expanded: true },
+                { id: 2, parentId: 1 }
+            ]
+        });
+
+        equal(instance.items().length, 2);
+    });
+
+    test("items does not return footer templates", function() {
+        createTreeList({
+            columns: [
+                "id",
+                { field: "parentId", footerTemplate: "foo" }
+            ]
+        });
+
+        equal(instance.items().length, 1);
+    });
 })()

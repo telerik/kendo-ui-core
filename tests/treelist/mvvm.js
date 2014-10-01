@@ -43,4 +43,19 @@
         equal(rows.eq(0).text(), "foo 1");
         equal(rows.eq(1).text(), "foo 2");
     });
+
+    var mvvmTemplate = kendo.htmlEncode("<span class='content' data-bind='text: text'></span>");
+
+    test("bind MVVM template", function() {
+        var observable = kendo.observable({ items: rootItems.slice() });
+
+        bindHtml("<div data-role='treelist' " +
+                 "data-columns='[{ field: \"id\", template: \"" + mvvmTemplate + "\" }]' " +
+                 "data-bind='source:items' />", observable);
+
+        observable.items[0].set("text", "bar");
+
+        var rows = instance.content.find("tr");
+        equal(rows.eq(0).find(".content").text(), "bar");
+    });
 })();

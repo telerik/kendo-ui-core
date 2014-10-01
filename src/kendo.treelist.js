@@ -36,6 +36,8 @@ var __meta__ = {
     var EDIT = "edit";
     var SAVE = "save";
     var REMOVE = "remove";
+    var DATABINDING = "dataBinding";
+    var DATABOUND = "dataBound";
 
     var classNames = {
         wrapper: "k-treelist k-grid k-widget",
@@ -458,9 +460,21 @@ var __meta__ = {
                 return;
             }
 
+            if (this.trigger(DATABINDING)) {
+                return;
+            }
+
             this._cancelEditor();
 
             this._render();
+
+            this.trigger(DATABOUND);
+        },
+
+        items: function() {
+            return this.content.find("tr").filter(function() {
+                return !$(this).hasClass(classNames.footerTemplate);
+            });
         },
 
         _showStatus: function(message) {
@@ -519,7 +533,9 @@ var __meta__ = {
         events: [
             EDIT,
             SAVE,
-            REMOVE
+            REMOVE,
+            DATABINDING,
+            DATABOUND
         ],
 
         _toggleChildren: function(e) {
