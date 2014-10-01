@@ -503,6 +503,7 @@ var __meta__ = {
 
         options: {
             name: "TreeList",
+            columns: [],
             autoBind: true,
             scrollable: true,
             messages: {
@@ -511,6 +512,7 @@ var __meta__ = {
                 requestFailed: "Request failed.",
                 retry: "Retry"
             },
+            filterable: false,
             editable: false
         },
 
@@ -963,10 +965,10 @@ var __meta__ = {
                     } else {
                         children = $.map(column.command, this._button);
                     }
-                } else if (column.encoded) {
-                    children.push(kendoTextElement(value));
-                } else {
+                } else if (column.template || !column.encoded) {
                     children.push(kendoHtmlElement(value));
+                } else {
+                    children.push(kendoTextElement(value));
                 }
             }
 

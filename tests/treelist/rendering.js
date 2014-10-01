@@ -164,7 +164,7 @@
         createTreeList({
             columns: [
                 "id",
-                { field: "parentId", template: templateFunction },
+                { field: "parentId", template: templateFunction }
             ],
             dataSource: {
                 data: [
@@ -176,15 +176,28 @@
         equal(instance.content.find("tr>td:last").text(), "Template 1");
     });
 
-    test("column without field is rendered empty", function() {
+    test("column template is not rendered encoded", function() {
         createTreeList({
             columns: [
                 "id",
-                { title: "foo" },
+                { field: "parentId", template: "<div>foo</div>" },
             ],
             dataSource: {
                 data: [
-                    { id: 1, parentId: null },
+                    { id: 1, parentId: null }
+                ]
+            }
+        });
+
+        equal(instance.content.find("tr>td:last").text(), "foo");
+    });
+
+    test("column without field is rendered empty", function() {
+        createTreeList({
+            columns: [ "id", { title: "foo" } ],
+            dataSource: {
+                data: [
+                    { id: 1, parentId: null }
                 ]
             }
         });
@@ -194,10 +207,7 @@
 
     test("render empty cell if column field is undefined in the model", function() {
         createTreeList({
-            columns: [
-                "id",
-                "text"
-            ],
+            columns: [ "id", "text" ],
             dataSource: {
                 data: [
                     { id: 1, text: "foo",  parentId: null },
@@ -230,7 +240,7 @@
         createTreeList({
             dataSource: {
                 data: [
-                    { id: 1, parentId: null, text: "<div>foo</div>" },
+                    { id: 1, parentId: null, text: "<div>foo</div>" }
                 ]
             },
             columns: [ "id", "text"]
@@ -243,7 +253,7 @@
         createTreeList({
             dataSource: {
                 data: [
-                    { id: 1, parentId: null, text: "<div>foo</div>" },
+                    { id: 1, parentId: null, text: "<div>foo</div>" }
                 ]
             },
             columns: [
@@ -259,11 +269,11 @@
         createTreeList({
             columns: [
                 "id",
-                { field: "parentId", title: "foo" },
+                { field: "parentId", title: "foo" }
             ],
             dataSource: {
                 data: [
-                    { id: 1, parentId: null },
+                    { id: 1, parentId: null }
                 ]
             }
         });
@@ -275,11 +285,11 @@
         createTreeList({
             columns: [
                 "id",
-                { field: "parentId", title: "foo" },
+                { field: "parentId", title: "foo" }
             ],
             dataSource: {
                 data: [
-                    { id: 1, parentId: null },
+                    { id: 1, parentId: null }
                 ]
             }
         });
@@ -291,11 +301,11 @@
         createTreeList({
             columns: [
                 { template: "foo" },
-                { field: "parentId", title: "foo" },
+                { field: "parentId", title: "foo" }
             ],
             dataSource: {
                 data: [
-                    { id: 1, parentId: null },
+                    { id: 1, parentId: null }
                 ]
             }
         });
@@ -307,11 +317,11 @@
         createTreeList({
             columns: [
                 "id",
-                { field: "parentId", headerTemplate: "Header template" },
+                { field: "parentId", headerTemplate: "Header template" }
             ],
             dataSource: {
                 data: [
-                    { id: 1, parentId: null },
+                    { id: 1, parentId: null }
                 ]
             }
         });
@@ -327,11 +337,11 @@
         createTreeList({
             columns: [
                 "id",
-                { field: "parentId", headerTemplate: templateFunction },
+                { field: "parentId", headerTemplate: templateFunction }
             ],
             dataSource: {
                 data: [
-                    { id: 1, parentId: null },
+                    { id: 1, parentId: null }
                 ]
             }
         });
@@ -351,7 +361,7 @@
             ],
             dataSource: {
                 data: [
-                    { id: 1, parentId: null },
+                    { id: 1, parentId: null }
                 ]
             }
         });
