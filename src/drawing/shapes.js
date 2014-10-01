@@ -820,6 +820,61 @@
     defineOptionsAccessors(GradientStop.fn, ["offset", "color", "opacity"]);
     deepExtend(GradientStop.fn, ObserversMixin);
 
+    var StopsArray = ElementsArray.extend({
+        _change: function() {
+            this.optionsChange({
+                field: "stops"
+            });
+        }
+    });
+
+    var Gradient = Class.extend({
+        nodeType: "gradient",
+
+        init: function(stops) {
+            this.stops = new StopsArray(stops);
+            this.stops.addObserver(this);
+            this.id = kendo.guid();
+        },
+
+        addStop: function(offset, color, opacity) {
+            this.stops.push(new GradientStop(offset, color, opacity));
+        },
+
+        removeStop: function(stop) {
+            var index = this.stops.indexOf(stop);
+            if (index >= 0) {
+                this.stops.splice(index, 1);
+            }
+        }
+    });
+
+    deepExtend(Gradient.fn, ObserversMixin, {
+        optionsChange: function(e) {
+            this.trigger("optionsChange", {
+                field: "gradient" + (e ? "." + e.field : ""),
+                value: this
+            });
+        },
+
+        geometryChange: function() {
+            this.optionsChange();
+        }
+    });
+
+    var LinearGradient = Gradient.extend({
+        init: function(options) {
+            options = options || {};
+            Gradient.fn.init.call(this, options.stops);
+
+            this.start(options.start || new Point());
+
+            this.end(options.end || new Point(1, 0));
+        }
+    });
+
+    definePointAccessors(LinearGradient.fn, ["start", "end"]);
+
     // Helper functions ===========================================
     function elementsBoundingBox(elements, applyTransform, transformation) {
         var boundingBox;
@@ -935,9 +990,11 @@
         Circle: Circle,
         Element: Element,
         ElementsArray: ElementsArray,
+        Gradient: Gradient,
         GradientStop: GradientStop,
         Group: Group,
         Image: Image,
+        LinearGradient: LinearGradient,
         MultiPath: MultiPath,
         Path: Path,
         Segment: Segment,

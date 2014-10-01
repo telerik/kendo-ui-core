@@ -1861,4 +1861,138 @@
 
     })();
 
+    function gradientBaseTests(name, type) {
+        var GradientStop = d.GradientStop;
+        var gradient;
+        var stops;
+
+        module(name + " base tests", {
+            setup: function() {
+                stops = [new GradientStop(), new GradientStop()];
+                gradient = new type({
+                    stops: stops
+                });
+            }
+        });
+
+        test("inits stops", function() {
+            equal(gradient.stops.length, 2);
+        });
+
+        test("inits id", function() {
+            ok(gradient.id);
+        });
+
+        test("modifying stops array triggers options change", function() {
+            gradient.addObserver({
+                optionsChange: function(e) {
+                    equal(e.field, "gradient.stops");
+                }
+            });
+            gradient.stops.pop();
+        });
+
+        test("addStop adds new stop", function() {
+            gradient.addStop(1, "foo", 0.5);
+            var stop = gradient.stops[2];
+
+            ok(stop instanceof GradientStop);
+            equal(stop.offset(), 1);
+            equal(stop.color(), "foo");
+            equal(stop.opacity(), 0.5);
+        });
+
+        test("addStop triggers options change", function() {
+            gradient.addObserver({
+                optionsChange: function(e) {
+                    equal(e.field, "gradient.stops");
+                }
+            });
+            gradient.addStop(1, "foo", 0.5);
+        });
+
+        test("removeStop removes stop", function() {
+            gradient.removeStop(gradient.stops[1]);
+
+            equal(gradient.stops.length, 1);
+        });
+
+        test("removeStop triggers options change", function() {
+            gradient.addObserver({
+                optionsChange: function(e) {
+                    equal(e.field, "gradient.stops");
+                }
+            });
+            gradient.removeStop(gradient.stops[1]);
+        });
+
+        test("removeStop does not remove stop if passed instance is not from the gradient stops", 1, function() {
+            gradient.addObserver({
+                optionsChange: function(e) {
+                    ok(false);
+                }
+            });
+            gradient.removeStop(new GradientStop())
+
+            equal(gradient.stops.length, 2);
+        });
+    }
+
+    // ------------------------------------------------------------
+    (function() {
+        var LinearGradient = d.LinearGradient;
+        var gradient;
+        var start;
+        var end;
+
+        gradientBaseTests("LinearGradient", LinearGradient);
+
+        module("LinearGradient", {
+            setup: function() {
+                start = new Point();
+                end = new Point();
+                gradient = new LinearGradient({
+                    start: start,
+                    end: end
+                });
+            }
+        });
+
+        test("inits start point", function() {
+            equal(gradient.start(), start);
+        });
+
+        test("inits end point", function() {
+            equal(gradient.end(), end);
+        });
+
+        test("inits default start and end point if not passed", function() {
+            gradient = new LinearGradient();
+            start = gradient.start();
+            end = gradient.end();
+            equal(start.x, 0);
+            equal(start.y, 0);
+            equal(end.x, 1);
+            equal(end.y, 0);
+        });
+
+        test("changing point field triggers options change", function() {
+            gradient.addObserver({
+                optionsChange: function(e) {
+                    equal(e.field, "gradient");
+                }
+            });
+            start.setX(1);
+        });
+
+        test("changing point triggers options change", function() {
+            gradient.addObserver({
+                optionsChange: function(e) {
+                    equal(e.field, "gradient");
+                }
+            });
+            gradient.start(new Point());
+        });
+
+    })();
 })();
