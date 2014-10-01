@@ -18,10 +18,6 @@
     var geo = dataviz.geometry;
     var pdf = drawing.pdf; // XXX: should not really depend on this.  needed for parseColor
 
-    var PI = Math.PI;
-    var cos = Math.cos;
-    var sin = Math.sin;
-    var min = Math.min;
     var max = Math.max;
 
     /* -----[ exports ]----- */
@@ -104,7 +100,7 @@
     }
 
     function toDegrees(radians) {
-        return ((180 * radians) / PI) % 360;
+        return ((180 * radians) / Math.PI) % 360;
     }
 
     function setTransform(shape, m) {
@@ -295,9 +291,12 @@
         //    - `Wright` the width of the right edge
         //    - `rl` and `rl` -- the border radius on the left and right
         //      (objects containing x and y, for horiz/vertical radius)
+        //    - `transform` -- transformation to apply
         //
-        function drawEdge(color, len, Wtop, Wleft, Wright, rl, rr) {
-            var path, group = new drawing.Group();
+        function drawEdge(color, len, Wtop, Wleft, Wright, rl, rr, transform) {
+            var path, edge = new drawing.Group();
+            setTransform(edge, transform);
+            group.append(edge);
 
             sanitizeRadius(rl);
             sanitizeRadius(rr);
@@ -307,7 +306,7 @@
                 fill: { color: color },
                 stroke: null
             });
-            group.append(path);
+            edge.append(path);
             path.moveTo(rl.x ? max(rl.x, Wleft) : 0, 0)
                 .lineTo(len - (rr.x ? max(rr.x, Wright) : 0), 0)
                 .lineTo(len - max(rr.x, Wright), Wtop)
@@ -317,19 +316,19 @@
             if (rl.x) {
                 path = drawRoundCorner(Wleft, rl);
                 setTransform(path, [ -1, 0, 0, 1, rl.x, 0 ]);
-                group.append(path);
+                edge.append(path);
             }
 
             if (rr.x) {
                 path = drawRoundCorner(Wright, rr);
                 setTransform(path, [ 1, 0, 0, 1, len - rr.x, 0 ]);
-                group.append(path);
+                edge.append(path);
             }
 
             // draws one round corner, starting at origin (needs to be
             // translated/rotated to be placed properly).
             function drawRoundCorner(Wright, r) {
-                var angle = PI/2 * Wright / (Wright + Wtop);
+                var angle = Math.PI/2 * Wright / (Wright + Wtop);
 
                 // not sanitizing this one, because negative values
                 // are useful to fill the box correctly.
@@ -351,7 +350,7 @@
                 });
 
                 if (ri.x > 0 && ri.y > 0) {
-                    path.lineTo(ri.x * cos(angle), r.y - ri.y * sin(angle));
+                    path.lineTo(ri.x * Math.cos(angle), r.y - ri.y * Math.sin(angle));
                     addArcToPath(path, 0, r.y, {
                         startAngle: -toDegrees(angle),
                         endAngle: -90,
@@ -372,7 +371,7 @@
                 return path.close();
             }
 
-            return group;
+            return edge;
         }
 
         // for left/right borders we need to invert the border-radiuses
@@ -490,35 +489,38 @@
 
         // draws a single border box
         function drawOne(box, isFirst, isLast) {
-            var path;
             drawBackground(box);
 
             // top border
             if (top.width > 0) {
-                path = drawEdge(top.color, box.width, top.width, left.width, right.width, rTL, rTR);
-                setTransform(path, [ 1, 0, 0, 1, box.left, box.top ]);
-                group.append(path);
+                drawEdge(top.color,
+                         box.width, top.width, left.width, right.width,
+                         rTL, rTR,
+                         [ 1, 0, 0, 1, box.left, box.top ]);
             }
 
             // bottom border
             if (bottom.width > 0) {
-                path = drawEdge(bottom.color, box.width, bottom.width, right.width, left.width, rBR, rBL);
-                setTransform(path, [ -1, 0, 0, -1, box.right, box.bottom ]);
-                group.append(path);
+                drawEdge(bottom.color,
+                         box.width, bottom.width, right.width, left.width,
+                         rBR, rBL,
+                         [ -1, 0, 0, -1, box.right, box.bottom ]);
             }
 
             // left border
             if (left.width > 0 && ((isFirst && dir == "ltr") || (isLast && dir == "rtl"))) {
-                path = drawEdge(left.color, box.height, left.width, bottom.width, top.width, inv(rBL), inv(rTL));
-                setTransform(path, [ 0, -1, 1, 0, box.left, box.bottom ]);
-                group.append(path);
+                drawEdge(left.color,
+                         box.height, left.width, bottom.width, top.width,
+                         inv(rBL), inv(rTL),
+                         [ 0, -1, 1, 0, box.left, box.bottom ]);
             }
 
             // right border
             if (right.width > 0 && ((isLast && dir == "ltr") || (isFirst && dir == "rtl"))) {
-                path = drawEdge(right.color, box.height, right.width, top.width, bottom.width, inv(rTR), inv(rBR));
-                setTransform(path, [ 0, 1, -1, 0, box.right, box.top ]);
-                group.append(path);
+                drawEdge(right.color,
+                         box.height, right.width, top.width, bottom.width,
+                         inv(rTR), inv(rBR),
+                         [ 0, 1, -1, 0, box.right, box.top ]);
             }
         }
     }
@@ -642,7 +644,6 @@
         var color = getPropertyValue(style, "color");
 
         function drawText(str, box) {
-            var path;
             str = str.replace(/[\r\n ]+/g, " ");
             var text = new drawing.Text(str, new geo.Point(box.left, box.top), {
                 font: font,
