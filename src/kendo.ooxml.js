@@ -139,10 +139,10 @@ var WORKSHEET = kendo.template(
    '<sheetData>' +
    '# for (var ri = 0; ri < data.length; ri++) { #' +
        '# var row = data[ri]; #' +
-       '<row r="r${ri + 1}">' +
+       '<row r="${ri + 1}">' +
        '# for (var ci = 0; ci < row.data.length; ci++) { #' +
            '# var cell = row.data[ci];#' +
-           '<c r="${cell.ref}" # if (cell.style) { # s="${cell.style}" # } # # if (cell.type) { # t="${cell.type}"# } #>' +
+           '<c r="${cell.ref}"# if (cell.style) { # s="${cell.style}" # } ## if (cell.type) { # t="${cell.type}"# } #>' +
            '# if (cell.value != null) { #' +
                '<v>${cell.value}</v>' +
            '# } #' +
@@ -151,15 +151,15 @@ var WORKSHEET = kendo.template(
        '</row>' +
    '# } #' +
    '</sheetData>' +
+   '# if (filter) { #' +
+   '<autoFilter ref="${filter.from}:${filter.to}"/>' +
+   '# } #' +
    '# if (mergeCells.length) { #' +
    '<mergeCells count="${mergeCells.length}">' +
        '# for (var ci = 0; ci < mergeCells.length; ci++) { #' +
        '<mergeCell ref="${mergeCells[ci]}"/>' +
        '# } #' +
    '</mergeCells>' +
-   '# } #' +
-   '# if (autoFilter) { #' +
-   '<autoFilter ref="${autoFilter}"/>' +
    '# } #' +
    '<pageMargins left="0.7" right="0.7" top="0.75" bottom="0.75" header="0.3" footer="0.3" />' +
 '</worksheet>');
@@ -306,13 +306,14 @@ var Worksheet = kendo.Class.extend({
     },
     toXML: function() {
         var rows = this.options.rows || [];
+        var filter = this.options.filter;
 
         return WORKSHEET({
             freezePane: this.options.freezePane,
             columns: this.options.columns,
             data: $.map(rows, $.proxy(this._row, this, rows)),
             mergeCells: this._mergeCells,
-            autoFilter: this.options.filter ? "A1:" + ref(0, this.options.columns.length - 1) : null
+            filter: filter ? { from: ref(0, filter.from), to: ref(0, filter.to) } : null
         });
     },
     _row: function(rows, row, rowIndex) {

@@ -259,7 +259,7 @@ test("toXML sets the 'r' attribute to index plus one", function() {
 
     var dom = $(worksheet.toXML());
 
-    equal(dom.find("row").attr("r"), "r1");
+    equal(dom.find("row").attr("r"), "1");
 });
 
 test("toXML renders cells as children elements", function() {
@@ -543,13 +543,13 @@ test("toXML creates one mergeCell for a cell with both colSpan and rowSpan set",
 
 test("toXML creates 'autoFilter' element when the filter option is set", function() {
     var worksheet = Worksheet({
-        columns: [ {}, {} ],
-        filter: true
+        columns: [ {}, {}, {} ],
+        filter: { from: 1, to: 2 }
     });
 
     var dom = $(worksheet.toXML());
 
-    equal(dom.find("autoFilter").attr("ref"), "A1:B1");
+    equal(dom.find("autoFilter").attr("ref"), "B1:C1");
 });
 
 }());
