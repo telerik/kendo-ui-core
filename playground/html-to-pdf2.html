@@ -33,45 +33,64 @@
     </style>
   </head>
   <body>
-    <div style="width: 20em; margin: 1em">
-      <div id="grid"></div>
-      <button onclick="getPDF('#grid')">Get PDF</button>
-      <button onclick="draw('#grid')">Draw</button>
-    </div>
+    <table cellspacing="0" cellpadding="0"><tr><td>
+      <div style="width: 20em; margin: 1em">
+        <div id="grid"></div>
+        <button onclick="getPDF('#grid')">Get PDF</button>
+        <button onclick="draw('#grid')">Draw</button>
+      </div>
+    </td><td>
+      <div style="width: 20em; margin: 1em">
+        <div id="tree"></div>
+        <button onclick="getPDF('#tree')">Get PDF</button>
+        <button onclick="draw('#tree')">Draw</button>
+      </div>
+    </td></tr></table>
 
-    <div style="width: 20em; margin: 1em">
-      <div id="calendar"></div>
-      <button onclick="getPDF('#calendar')">Get PDF</button>
-      <button onclick="draw('#calendar')">Draw</button>
-    </div>
+    <table cellspacing="0" cellpadding="0"><tr><td>
+      <div style="width: 20em; margin: 1em">
+        <div id="calendar"></div>
+        <button onclick="getPDF('#calendar')">Get PDF</button>
+        <button onclick="draw('#calendar')">Draw</button>
+      </div>
+    </td><td>
+      Won't work (no gradients; no &lt;input&gt;):<br />
+      <div style="width: 30em; margin: 1em">
+        <div id="flatcolorpicker"></div><br/>
+        <button onclick="getPDF('#flatcolorpicker')">Get PDF</button>
+        <button onclick="draw('#flatcolorpicker')">Draw</button>
+      </div>
+    </td></tr></table>
 
-    <div style="width: 30em; margin: 1em">
-      <textarea id="editor"></textarea>
-      <button onclick="getPDF('#calendar')">Get PDF</button>
-      <button onclick="draw('#calendar')">Draw</button>
-    </div>
-
-    <div style="width: 10em; text-align: center; border-radius: 5px; border: 2px solid black; padding: 2em; background: url('images/2.jpg') no-repeat 50% 50%">Rounded border</div>
-    <img src="images/2.jpg" width="100" />
+    <table cellspacing="0" cellpadding="0"><tr><td>
+      <div style="width: 30em; margin: 1em">
+        <textarea id="editor"></textarea>
+        <button onclick="getPDF('#editor')">Get PDF</button>
+        <button onclick="draw('#editor')">Draw</button>
+      </div>
+    </td><td>
+      <input id="slider" />
+    </td></tr></table>
 
     <button onclick="getPDF('body')">PDF all</button>
     <button onclick="draw('body')">Draw all</button>
 
     <script>
-      function translation(sel) {
-        var pos = $(sel).offset();
-        return new kendo.dataviz.geometry.Matrix(1, 0, 0, 1, -pos.left, -pos.top);
+      function getEl(sel) {
+        var widget = kendo.widgetInstance($(sel));
+        if (widget) return widget.wrapper || widget.element;
+        return $(sel);
       }
 
       function getPDF(sel) {
-        var el = $(sel)[0];
+        var el = getEl(sel)[0];
         kendo.dataviz.drawing.drawDOM(el, function(root){
           kendo.dataviz.drawing.pdf.toDataURL(root, window.open);
         });
       }
 
       function draw(sel) {
-        var el = $(sel)[0];
+        var el = getEl(sel)[0];
         kendo.dataviz.drawing.drawDOM(el, function(root){
           var el = $("<div class='surface' style='position: absolute; background: white; right: 1em; top: 1em; bottom: 1em; border: 1px solid #000; width: 600px'></div>").appendTo(document.body);
           var surface = kendo.dataviz.drawing.Surface.create(el);
@@ -97,6 +116,22 @@
       $("#calendar").kendoCalendar();
 
       $("#editor").kendoEditor();
+
+      $("#tree").kendoTreeView({
+        dataSource: [
+          { text: "This is a" },
+          { text: "TreeView", expanded: true, items: [
+            { text: "Subitem" },
+            { text: "Foo bar" }
+          ] }
+        ]
+      });
+
+      $("#flatcolorpicker").kendoFlatColorPicker();
+
+      $("button").kendoButton();
+
+      $("#slider").kendoSlider({ orientation: "vertical" });
 
     </script>
   </body>
