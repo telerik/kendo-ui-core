@@ -3,11 +3,31 @@
     <head>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" >
         <title>Spline</title>
-        <link href="../styles/dataviz/kendo.dataviz.min.css" rel="stylesheet" />
+        <link href="http://cdn.kendostatic.com/2014.2.903/styles/kendo.common.min.css" rel="stylesheet" />
+        <link href="http://cdn.kendostatic.com/2014.2.903/styles/kendo.rtl.min.css" rel="stylesheet" />
+        <link href="http://cdn.kendostatic.com/2014.2.903/styles/kendo.silver.min.css" rel="stylesheet" />
+        <link href="http://cdn.kendostatic.com/2014.2.903/styles/kendo.silver.mobile.min.css" rel="stylesheet" />
+        <link href="http://cdn.kendostatic.com/2014.2.903/styles/kendo.dataviz.min.css" rel="stylesheet" />
+        <link href="http://cdn.kendostatic.com/2014.2.903/styles/kendo.dataviz.silver.min.css" rel="stylesheet" />
+
         <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+
         <script src="../src/kendo.core.js"></script>
         <script src="../src/kendo.data.js"></script>
         <script src="../src/kendo.binder.js"></script>
+
+        <script src="../src/kendo.popup.js"></script>
+        <script src="../src/kendo.userevents.js"></script>
+        <script src="../src/kendo.draganddrop.js"></script>
+        <script src="../src/kendo.slider.js"></script>
+        <script src="../src/kendo.colorpicker.js"></script>
+        <script src="../src/kendo.button.js"></script>
+        <script src="../src/kendo.numerictextbox.js"></script>
+        <script src="../src/kendo.list.js"></script>
+        <script src="../src/kendo.dropdownlist.js"></script>
+
+
         <script src="../src/kendo.dataviz.core.js"></script>
 
          <script src="../src/dataviz/util.js"></script>
@@ -21,12 +41,74 @@
          <script src="../src/dataviz/drawing/vml.js"></script>
     </head>
     <body >
-        <--
+        <style>
+            .defaultMargin {
+                margin: 5px;
+            }
+        </style>
+        <script type="text/kendo" id="stopEditor">
+            <div class = "defaultMargin">
+               <h4>Stops</h4>
+               <div>
+                    <button type="button" data-role="button" data-bind="click:addStop">Add At</button>
+                    <input data-role="numerictextbox" data-decimals="0" data-format="n0" style="width:80px" data-bind="value:newStopIndex" />
+                </div>
+                <div data-bind="source:stops" data-template="stopTemplate"></div>
+            </div>
+        </script>
+        <script type="text/kendo" id="pointTemplate">
+            <div class = "defaultMargin">
+                <label data-bind="text:label"></label>
+                ( <input data-role="numerictextbox" min="0" max="1" data-spinners="false" data-format="n1" style="width:50px" data-bind="value:x, events: {change: pointChange}" />,
+                <input data-role="numerictextbox" min="0" max="1" data-spinners="false" data-format="n1" style="width:50px" data-bind="value:y, events: {change: pointChange}" /> )
+            </div>
+        </script>
+
+        <script type="text/kendo" id="stopTemplate">
+            <div class = "defaultMargin">
+                <label>Color</label>
+                <input data-role="colorpicker" data-bind="value:color, events: {change: colorChange}" />
+                <label style="margin-left:10px;">Offset</label>
+                <input data-role="numerictextbox" min="0" max="1" data-spinners="false" data-format="n1" style="width:50px" data-bind="value:offset, events: {change: offsetChange}" />
+                <label style="margin-left:10px;">Opacity</label>
+                <input data-role="numerictextbox" min="0" max="1" data-spinners="false" data-format="n1" style="width:50px" data-bind="value:opacity, events: {change: opacityChange}" />
+                <button type="button" data-role="button" data-bind="click:removeStop">Remove</button>
+            </div>
+        </script>
+        <script type="text/kendo" id="fillTemplate">
+            <div class = "defaultMargin">
+               #if (type == "linear") {#
+                    <h3>Linear Gradient</h3>
+                    <div data-bind="source:start" data-template="pointTemplate"></div>
+                    <div data-bind="source:end" data-template="pointTemplate"></div>
+                    #= $("\#stopEditor").html()#
+               #} else if (type == "radial") {#
+                    <h3>Radial Gradient</h3>
+                    <div class = "defaultMargin">
+                        <label>Radius</label>
+                        <input data-role="numerictextbox" min="0" max="1" data-bind="value:radius, events: {change: radiusChange}"  />
+                    </div>
+                    <div data-bind="source:center" data-template="pointTemplate"></div>
+                    #= $("\#stopEditor").html()#
+               # } else {#
+                    <label>Color</label>
+                    <input data-role="colorpicker" data-bind="value:color, events: {change: fillColorChange}" />
+               #}#
+            </div>
+        </script>
+
+        <div id="fillContainer" style="float:left;margin-right:100px;">
+            <label>Fill type</label>
+            <input data-role="dropdownlist" data-bind="value: fillType, source: types, events: {change: fillChange}" data-value-field="type" data-text-field="type"/>
+            </hr>
+            <div data-bind="source: fillType" data-template="fillTemplate"></div>
+        </div>
+        <!--
             <textarea id="pathString" cols="40" rows="5" data-bind="value:path"></textarea>
             <div data-bind="text:drawPath"></div>
 
          -->
-          <div id="container" style="top:100px;"></div>
+          <div id="container" style="float:left;"></div>
        <!--
         <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1200px" height="1200px" style="position:absolute;">
             <g>
@@ -80,7 +162,7 @@
                 MultiPath = drawing.MultiPath,
                 Segment = drawing.Segment,
                 Surface = drawing.Surface,
-                surface = Surface.create(document.getElementById("container"), {width: 1000, height: 1000, type: "svg"}),
+                surface = Surface.create(document.getElementById("container"), {width: 400, height: 400, type: "svg"}),
                 circleGeometry = new Circle(Point.create(150, 400), 100),
                 circle = new drawing.Circle(circleGeometry, {fill: {color: "red"} }),
                // boundingRect = circle.bbox(),
@@ -119,56 +201,207 @@
                 }
             });
 
-            clipTest();
+            gradientTest();
+
+            function gradientTest() {
+                var circleGeometry = new Circle(Point.create(200, 200), 100);
+                circle = new drawing.Circle(circleGeometry);
+                //circle = Path.fromRect(new geometry.Rect([200, 200], [200, 200]));
+                surface.draw(circle);
+                var viewModel = kendo.observable({
+                    types: [{
+                        type: "linear",
+                        stops: [{
+                            offset: 0.3,
+                            color: "#FFFB2B",
+                            opacity: 1
+                        }, {
+                            offset: 0.7,
+                            color: "#3A58FF",
+                            opacity: 1
+                        }],
+                        start: {
+                            label: "Start",
+                            x: 0,
+                            y: 0.2
+                        },
+                        end: {
+                            label: "End",
+                            x: 0.9,
+                            y:  0.8
+                        },
+                        newStopIndex: 0
+                    }, {
+                        type: "radial",
+                        stops: [{
+                            offset: 0.3,
+                            color: "#FFFB2B",
+                            opacity: 1
+                        }, {
+                            offset: 0.7,
+                            color: "#3A58FF",
+                            opacity: 1
+                        }],
+                        center: {
+                            label: "Center",
+                            x: 0.3,
+                            y: 0.3
+                        },
+                        radius: 1,
+                        newStopIndex: 0
+                    }, {
+                        type: "color",
+                        color: "#FF3328"
+                    }],
+
+                    setLinearGradient: function() {
+                        var linear = this.get("fillType");
+                        var start = linear.start;
+                        var end = linear.end;
+                        circle.fill(new drawing.LinearGradient({
+                            stops: this.get("fillType.stops").toJSON(),
+                            start: [start.x, start.y],
+                            end: [end.x, end.y]
+                        }));
+                    },
+
+                    setRadialGradient: function() {
+                        var radial = this.get("fillType");
+                        var center = radial.center;
+                        var radius = radial.radius;
+                        circle.fill(new drawing.RadialGradient({
+                            stops: this.get("fillType.stops").toJSON(),
+                            center: [center.x, center.y],
+                            radius: radius
+                        }));
+                    },
+
+                    setFill: function() {
+                        circle.fill(this.get("fillType.color"));
+                    },
+
+                    createStop: function(stop) {
+                        return new drawing.GradientStop(stop.offset, stop.color, stop.opacity);
+                    },
+
+                    fillChange: function() {
+                        var fill = this.get("fillType.type");
+                        if (fill == "linear") {
+                            this.setLinearGradient();
+                        } else if (fill == "radial") {
+                            this.setRadialGradient();
+                        } else {
+                            this.setFill();
+                        }
+                    },
+
+                    addStop: function() {
+                        var index = this.get("fillType.newStopIndex") || 0;
+                        var gradient = circle.fill();
+                        var stops = this.get("fillType.stops");
+                        var stop = {
+                            color: "fff",
+                            offset: 0,
+                            opacity: 1
+                        };
+                        stops.splice(index, 0, stop);
+                        gradient.stops.splice(index, 0, this.createStop(stop));
+                    },
+
+                    removeStop: function(e) {
+                        var gradient = circle.fill();
+                        var stops = this.get("fillType.stops");
+                        var index = stops.indexOf(e.data);
+                        stops.splice(index, 1);
+                        gradient.stops.splice(index, 1);
+                    },
+
+                    pointChange: function(e) {
+                        var gradient = circle.fill();
+                        var item = e.data;
+                        var fieldName = item.label.toLowerCase();
+
+                        gradient[fieldName]([item.x, item.y]);
+                    },
+
+                    radiusChange: function(e) {
+                        var gradient = circle.fill();
+                        gradient.radius(e.data.radius);
+                    },
+
+                    offsetChange: function(e) {
+                        var gradient = circle.fill();
+                        var item = e.data;
+                        var index = e.data.parent().indexOf(e.data);
+                        gradient.stops[index].offset(item.offset);
+                    },
+
+                    colorChange: function(e) {
+                        var gradient = circle.fill();
+                        var item = e.data;
+                        var index = e.data.parent().indexOf(e.data);
+
+                        gradient.stops[index].color(item.color);
+                    },
+
+                    opacityChange: function(e) {
+                        var gradient = circle.fill();
+                        var item = e.data;
+                        var index = e.data.parent().indexOf(e.data);
+                        gradient.stops[index].opacity(item.opacity);
+                    },
+
+                    fillColorChange: function(e) {
+                        circle.fill(e.data.color);
+                    }
+                });
+
+                viewModel.set("fillType", viewModel.types[0]);
+                viewModel.fillChange();
+                kendo.bind($("#fillContainer"),  viewModel);
+            }
+
+            function updateGradient() {
+                linearGradient.stops.push(new drawing.GradientStop(0.9, "red"));
+                // radialGradient.center().translate(0.3, 0.2);
+                // radialGradient.setRadius(0.8);
+
+                // radialGradient.stops[1].color("red");
+                circle2.fill("red");
+                debugger;
+                //circle3.fill(linearGradient);
+                circle3.fill("none");
+            }
+
+            //clipTest();
             function clipTest() {
-                clip = Path.fromRect(new geometry.Rect(new Point(100, 100), new geometry.Size(150, 150)));
-                clipPath = new Path();
-                clipPath.moveTo(200, 100);
-                clipPath.lineTo(400, 300);
-                clipPath.lineTo(0, 300);
-                clipPath.close();
-                //clipPath.clip(clip);
-
+                clip = new geometry.ClipRect(new Point(100, 100), new geometry.Size(150, 150));
                 var circleGeometry = new Circle(Point.create(250, 200), 100);
-                circle = new drawing.Circle(circleGeometry, {stroke: {color: "red", width: 3}, 
-                     //clip: clip
+                circle = new drawing.Circle(circleGeometry, {stroke: {color: "red", width: 3},
+                     clip: clip
                 });
-
                 circle.transform(transform().translate(100, 100));
-                var circleGeometry2 = new Circle(Point.create(300, 300), 100);
+                var circleGeometry2 = new Circle(Point.create(300, 200), 100);
                 circle2 = new drawing.Circle(circleGeometry2, {stroke: {color: "red", width: 3}});
-                //circle2.clip(clip);
+                circle2.clip(clip);
 
-                baseGroup= new drawing.Group({
-                    transform: transform().translate(100, 100)
-                });
-
-                clipGroup = new drawing.Group({
-                    clip: clip,
-                    transform: transform().translate(100, 100)
-                });
-
-                clipGroup.append(circle);
-                clipGroup.append(circle2);
-                //clipGroup.append(clip);
-                clipGroup.append(clipPath);
-                baseGroup.append(clipGroup);
+                var group = new drawing.Group({});
+                group.append(circle);
+                group.append(circle2);
                 // surface.clear();
                 setTimeout(function() {
-                    surface.draw(baseGroup);
-                });                
+                    surface.draw(group);
+                });
             }
 
             function updateRect() {
-                // circle.clip(null);                
+                // circle.clip(null);
                 // setTimeout(function() {
                     // circle.clip(new geometry.ClipRect(new Point(100, 100), new geometry.Size(150, 150)));
                 // }, 500);
-                //circle2.clip(null);
+                // circle2.clip(null);
                 //circle.clip(null);
-
-                circle.clip(Path.fromRect(new geometry.Rect(new Point(50, 50), new geometry.Size(250, 250))));
-                //clipPath.clip(null);
+                circle.clip(new geometry.ClipRect(new Point(100, 100), new geometry.Size(250, 150)));
                 //clip.size.setHeight(200);
             }
 
@@ -267,7 +500,7 @@
                 surface.clear();
                 surface.draw(mainGroup);
             }
-            
+
             function testChange() {
                 circleGeometry.setRadius(20);
             }
