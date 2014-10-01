@@ -1386,7 +1386,7 @@ var __meta__ = {
                 }
 
                 if (groups > 0) {
-                    left += this.thead.find(".k-group-cell:first").outerWidth() * groups;
+                    left += container.find(".k-group-cell:first").outerWidth() * groups;
                 }
 
            } else {
