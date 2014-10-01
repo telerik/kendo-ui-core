@@ -93,7 +93,7 @@ var __meta__ = {
 
     function createWidget(scope, element, attrs, widget, origAttr) {
         var role = widget.replace(/^kendo/, '');
-        var options = angular.extend({}, scope.$eval(attrs.kOptions || attrs.options));
+        var options = angular.extend({}, attrs.defaultOptions, scope.$eval(attrs.kOptions || attrs.options));
         var ctor = $(element)[widget];
 
         if (!ctor) {
@@ -911,7 +911,14 @@ var __meta__ = {
     }).directive('kendoMobileView', function() {
         return {
             link: function(scope, element, attrs, controllers) {
+                attrs.defaultOptions = scope.viewOptions;
                 createWidget(scope, element, attrs, 'kendoMobileView', 'kendoMobileView');
+            }
+        };
+    }).directive('kendoMobileLayout', function() {
+        return {
+            link: function(scope, element, attrs, controllers) {
+                createWidget(scope, element, attrs, 'kendoMobileLayout', 'kendoMobileLayout');
             }
         };
     });

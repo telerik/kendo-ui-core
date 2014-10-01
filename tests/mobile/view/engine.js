@@ -392,7 +392,7 @@
           viewEngine = new kendo.mobile.ViewEngine({ container: root, layout: "foo" });
 
         viewEngine.bind("viewShow", function(e) {
-            equal(e.view.layout, "");
+            equal(e.view.layout, null);
         });
 
         viewEngine.showView("");

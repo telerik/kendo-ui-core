@@ -39,6 +39,19 @@ var __meta__ = {
         return directives.replace(/(\S+)/g, "kendo-mobile-$1,").slice(0, -1);
     }
 
+    function compileToWidget(element, scopeSetup) {
+        angular.element(element).injector().invoke(function($compile) {
+            var scope = angular.element(element).scope();
+            if (scopeSetup) {
+                scopeSetup(scope);
+            }
+            $compile(element)(scope);
+            scope.$digest();
+        });
+
+        return kendo.widgetInstance(element, ui);
+    }
+
     function initPopOvers(element) {
         var popovers = element.find(roleSelector("popover")),
             idx, length,
@@ -89,6 +102,8 @@ var __meta__ = {
         options: {
             name: "View",
             title: "",
+            layout: null,
+            getLayout: $.noop,
             reload: false,
             transition: "",
             defaultTransition: "",
@@ -280,27 +295,28 @@ var __meta__ = {
         },
 
         _layout: function() {
-            var that = this,
-                contentSelector = roleSelector("content"),
-                element = that.element;
+            var contentSelector = roleSelector("content"),
+                element = this.element;
 
             element.addClass("km-view");
 
-            that.header = element.children(roleSelector("header")).addClass("km-header");
-            that.footer = element.children(roleSelector("footer")).addClass("km-footer");
+            this.header = element.children(roleSelector("header")).addClass("km-header");
+            this.footer = element.children(roleSelector("footer")).addClass("km-footer");
 
             if (!element.children(contentSelector)[0]) {
               element.wrapInner("<div " + attr("role") + '="content"></div>');
             }
 
-            that.content = element.children(roleSelector("content"))
+            this.content = element.children(roleSelector("content"))
                                 .addClass("km-content");
 
-            that.element.prepend(that.header).append(that.footer);
+            this.element.prepend(this.header).append(this.footer);
 
 
-            if (that.layout) {
-                that.layout.setup(that);
+            this.layout = this.options.getLayout(this.layout);
+
+            if (this.layout) {
+                this.layout.setup(this);
             }
         },
 
@@ -317,24 +333,31 @@ var __meta__ = {
 
     var Layout = Widget.extend({
         init: function(element, options) {
-            var that = this;
-            Widget.fn.init.call(that, element, options);
+            Widget.fn.init.call(this, element, options);
 
-            element = that.element;
+            element = this.element;
 
-            that.header = element.children(roleSelector("header")).addClass("km-header");
-            that.footer = element.children(roleSelector("footer")).addClass("km-footer");
-            that.elements = that.header.add(that.footer);
+            this.header = element.children(this._locate("header")).addClass("km-header");
+            this.footer = element.children(this._locate("footer")).addClass("km-footer");
+            this.elements = this.header.add(this.footer);
 
             initPopOvers(element);
 
-            kendo.mobile.init(that.element.children());
-            that.element.detach();
-            that.trigger(INIT, {layout: that});
+            if (!this.options.$angular) {
+                kendo.mobile.init(this.element.children());
+            }
+            this.element.detach();
+            this.trigger(INIT, {layout: this});
+        },
+
+        _locate: function(selectors) {
+            return this.options.$angular ? byDirective(selectors) : roleSelector(selectors);
         },
 
         options: {
-            name: "Layout"
+            name: "Layout",
+            id: null,
+            platform: null
         },
 
         events: [
@@ -435,6 +458,7 @@ var __meta__ = {
                 that.trigger(AFTER);
             });
 
+            this.getLayoutProxy = $.proxy(this, "_getLayout");
             that._setupLayouts(container);
 
             initWidgets(container.children(that._locate("modalview drawer")));
@@ -572,40 +596,37 @@ var __meta__ = {
         },
 
         _createView: function(element) {
-            var layout = attrValue(element, "layout");
-
-            if (typeof layout === "undefined") {
-                layout = this.layout;
-            }
-
-            if (layout) {
-                layout = this.layouts[layout];
-            }
-
-            var options = {
-                defaultTransition: this.transition,
-                loader: this.loader,
-                container: this.container,
-                layout: layout,
-                modelScope: this.modelScope,
-                reload: attrValue(element, "reload")
-            }
-
             if (this.$angular) {
                 element.attr("data-role", element[0].tagName.toLowerCase().replace('kendo-mobile-', ''));
 
-                angular.element(element).injector().invoke(function($compile) {
-                    var scope = angular.element(element).scope();
-                    scope.viewOptions = options;
-                    $compile(element)(scope);
-                    scope.$digest();
-                });
+                var that = this;
 
-                return kendo.widgetInstance(element, ui);
+                return compileToWidget(element, function(scope) {
+                    scope.viewOptions = {
+                        defaultTransition: that.transition,
+                        loader: that.loader,
+                        container: that.container,
+                        getLayout: that.getLayoutProxy,
+                    };
+                });
             } else {
-                return kendo.initWidget(element, options, ui.roles);
+                return kendo.initWidget(element, {
+                    defaultTransition: this.transition,
+                    loader: this.loader,
+                    container: this.container,
+                    getLayout: this.getLayoutProxy,
+                    modelScope: this.modelScope,
+                    reload: attrValue(element, "reload")
+                }, ui.roles);
+            }
+        },
+
+        _getLayout: function(name) {
+            if (name === "") {
+                return null;
             }
 
+            return name ? this.layouts[name] : this.layouts[this.layout];
         },
 
         _loadView: function(url, callback) {
@@ -642,13 +663,21 @@ var __meta__ = {
             var that = this;
 
             element.children(that._locate("layout")).each(function() {
-                var layout = $(this),
-                    platform = attrValue(layout,  "platform");
+                if (that.$angular) {
+                    var layout = compileToWidget($(this));
+                } else {
+                    var layout = kendo.initWidget($(this), {}, ui.roles);
+                }
 
-                if (platform === undefined || platform === mobile.application.os.name) {
-                    that.layouts[kendo.attrValue(layout, "id")] = kendo.initWidget(layout, {}, ui.roles);
+                var platform = layout.options.platform;
+
+                if (!platform || platform === mobile.application.os.name) {
+                    that.layouts[layout.options.id] = layout;
+                } else {
+                    layout.destroy();
                 }
             });
+
         }
     });
 

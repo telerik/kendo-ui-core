@@ -50,5 +50,22 @@
         app.navigate("#/");
         equal(app.view().scrollerContent.text(), "2");
     });
+
+    ngTest("understands the layout configuration",
+    1,
+    function() {
+        var i = 0;
+        angular.module('kendo.tests').controller('foo', [ '$parse', '$scope', function($parse, $scope) {
+            i ++;
+            $scope.foo = i;
+        }])
+        QUnit.fixture.html("<div kendo-mobile-application><kendo-mobile-view k-layout='\"lay\"'>{}</kendo-mobile-view>" +
+        "<kendo-mobile-layout k-id='\"lay\"'><kendo-mobile-header>Foo</kendo-mobile-header></kendo-mobile-layout>" +
+        "</div>");
+    },
+    function() {
+        var app = kendo.mobile.application;
+        equal(app.view().header.text(), "Foo");
+    });
 }());
 

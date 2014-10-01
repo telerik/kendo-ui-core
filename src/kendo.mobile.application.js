@@ -153,15 +153,17 @@ var __meta__ = {
             this._attachHideBarHandlers();
             var paneOptions = $.extend({}, this.options);
             delete paneOptions.name;
-            this.pane = new Pane(this.element, paneOptions);
-            this.pane.navigateToInitial();
 
-            if (this.options.updateDocumentTitle) {
-                this._setupDocumentTitle();
-            }
 
             var that = this,
                 startHistory = function() {
+                    that.pane = new Pane(that.element, paneOptions);
+                    that.pane.navigateToInitial();
+
+                    if (that.options.updateDocumentTitle) {
+                        that._setupDocumentTitle();
+                    }
+
                     that._startHistory();
                     that.trigger(INIT);
                 }
