@@ -426,15 +426,6 @@
         equal(syncSpy.calls("sync"), 0);
     });
 
-    test("removeRow hides target row", function() {
-        createTreeList();
-
-        var row = instance.content.find("tr:first");
-        instance.removeRow(row);
-
-        ok(!row.is(":visible"));
-    });
-
     test("removeRow row model from data source", function() {
         createTreeList();
 
@@ -519,5 +510,68 @@
 
         ok(!instance.content.find("tr:first").data("kendoEditable"));
         ok(!instance.editable);
+    });
+
+    test("addRow adds model as first item in the view", function() {
+        createTreeList();
+
+        instance.addRow();
+
+        var model = instance.dataSource.view()[0];
+        ok(model);
+        ok(model.isNew());
+    });
+
+    test("addRow puts the new item in edit mode", function() {
+        createTreeList();
+
+        instance.addRow();
+
+        ok(instance.content.find("tr:first").data("kendoEditable"));
+    });
+
+    test("addRow with row as argument add child item", function() {
+        createTreeList();
+
+        instance.addRow(instance.content.find("tr:first"));
+
+        var row = instance.content.find("tr").eq(1);
+        ok(instance.dataItem(row).isNew());
+        ok(row.data("kendoEditable"));
+    });
+
+    test("addRow with model as argument add child item", function() {
+        createTreeList();
+
+        var model = instance.dataItem(instance.content.find("tr:first"));
+        instance.addRow(model);
+
+        var row = instance.content.find("tr").eq(1);
+        ok(instance.dataItem(row).isNew());
+        ok(row.data("kendoEditable"));
+    });
+
+    test("addRow creates new model with default value for parentId", function() {
+        var ds = new TreeListDataSource({
+            schema: {
+                model: {
+                    fields: {
+                        parentId: { defaultValue: 0, type: "number" }
+                    }
+                }
+            },
+            data: [
+                { id: 1, parentId: 0 }
+            ]
+        });
+
+        createTreeList({
+            dataSource: ds
+        });
+
+        instance.addRow();
+
+        var model = instance.dataItem(instance.content.find("tr:first"));
+        equal(model.parentId, 0);
     });
 })();

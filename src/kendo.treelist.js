@@ -1146,6 +1146,27 @@ var __meta__ = {
             }
         },
 
+        addRow: function(parent) {
+            var index = 0;
+            var model;
+            var row;
+
+            if (parent) {
+                if (!(parent instanceof TreeListModel)) {
+                    parent = this.dataItem(parent);
+                }
+
+                index = this.dataSource.indexOf(parent) + 1;
+                model = this.dataSource.insert(index, {});
+            } else {
+                model = this.dataSource.insert(index, {});
+            }
+
+            row = this.content.find("[" + kendo.attr("uid") + "=" + model.uid + "]");
+
+            this.editRow(row);
+        },
+
         removeRow: function(row) {
             var model = this.dataItem(row);
             var args = {
