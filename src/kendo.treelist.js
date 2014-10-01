@@ -1023,7 +1023,9 @@ var __meta__ = {
                     continue;
                 }
 
-                cells.eq(idx).kendoFilterMenu({ dataSource: this.dataSource });
+                cells.eq(idx).kendoFilterMenu(extend(true, {}, filterable, {
+                    dataSource: this.dataSource
+                }));
             }
         },
 

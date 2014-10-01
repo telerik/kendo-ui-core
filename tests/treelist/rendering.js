@@ -653,4 +653,21 @@
 
         equal(dom.find(".k-grid-filter").length, 1);
     });
+
+    test("filtering is passed filtering options", function() {
+        var filterMenu = $.fn.kendoFilterMenu;
+
+        try {
+            $.fn.kendoFilterMenu = function(options) {
+                ok(options.foo);
+            };
+
+            createTreeList({
+                filterable: { foo: true },
+                columns: [ { field: "id" } ]
+            });
+        } finally {
+            $.fn.kendoFilterMenu = filterMenu;
+        }
+    });
 })();
