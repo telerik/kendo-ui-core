@@ -4829,7 +4829,10 @@ var __meta__ = {
                 skipHiddenCount = 0,
                 cols = $(),
                 hasFilterRow = that._hasFilterRow(),
+                filterCellOffset = 0,
                 filterCells = $(),
+                cell,
+                leafColumnsCount = 0,
                 cells = $();
 
             colgroup = that.thead.prev().find("col:not(.k-group-col,.k-hierarchy-col)");
@@ -4839,13 +4842,14 @@ var __meta__ = {
             var colOffset = 0;
             for (idx = 0, length = columns.length; idx < length; idx++) {
                 if (columns[idx].locked) {
-                    var cell = header.eq(idx);
+                    cell = header.eq(idx);
+                    leafColumnsCount = leafColumns(columns[idx].columns || []).length;
 
                     if (isVisible(columns[idx])) {
                         var colSpan;
 
                         if (columns[idx].columns) {
-                            colSpan = leafColumns(columns[idx].columns).length - hiddenLeafColumnsCount(columns[idx].columns);
+                            colSpan = leafColumnsCount - hiddenLeafColumnsCount(columns[idx].columns);
                         }
 
                         colSpan = colSpan || 1;
@@ -4857,7 +4861,11 @@ var __meta__ = {
 
                     mapColumnToCellRows([columns[idx]], that._childColumns(cell), 0, rows, 0);
 
-                    filterCells = filterCells.add(filtercellCells.eq(idx));
+                    leafColumnsCount = leafColumnsCount || 1;
+                    for (var j = 0; j < leafColumnsCount; j++) {
+                        filterCells = filterCells.add(filtercellCells.eq(filterCellOffset + j));
+                    }
+                    filterCellOffset += leafColumnsCount;
                 }
 
                 if (columns[idx].columns) {

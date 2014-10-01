@@ -85,6 +85,21 @@
         equal(header.find("tr.k-filter-row").length, 1);
     });
 
+    test("filtercell tr is append to locked header for multiline column when filtercell is enabled", function() {
+        var grid = setup({
+            scrollable: true,
+            filterable: {
+                mode: "row"
+            },
+            columns: ["bar", { columns: [{ field: "foo"}, {field: "moo"}], locked: true }, "baz"]
+        });
+
+        var header = grid.lockedHeader;
+        equal(header.find("tr").length, 3);
+        equal(header.find("tr.k-filter-row").length, 1);
+        equal(header.find("tr.k-filter-row th").length, 2);
+    });
+
     test("th elements are added to the locked header table", function() {
         var grid = setup({
             columns: [{ field: "foo", locked: true }, "bar", "baz"]

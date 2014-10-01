@@ -259,6 +259,7 @@
         equal(rows.eq(0).find("th")[1].colSpan, 2);
         equal(rows.eq(1).find("th")[0].colSpan, 1);
     });
+
     test("hide cols for all child multirow column in not scrollable grid - multiline headers", function() {
         var grid = setup({
             scrollable: false,
