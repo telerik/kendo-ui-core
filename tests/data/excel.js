@@ -225,6 +225,20 @@ test("uses the column title for the group cell value", function() {
     });
 });
 
+test("uses groupHeaderTemplate for the group cell value", function() {
+    dataSource = new DataSource({
+       data: [
+           { foo: "foo", bar: "bar" },
+           { foo: "boo", bar: "baz" }
+       ],
+       group: { field: "foo", aggregates: [ { field: "foo", aggregate: "count" }]  }
+    });
+
+    testWorkbook({ columns: [ { title: "Foo", field: "foo", groupHeaderTemplate: "Foo=#=value#,count=#=count#" }, { field: "bar" } ], dataSource: dataSource }, function(book) {
+        equal(book.sheets[0].rows[1].cells[0].value, "Foo=boo,count=1");
+    });
+});
+
 test("sets colSpan of the group cell to the number of columns", function() {
     dataSource = new DataSource({
        data: [

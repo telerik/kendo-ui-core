@@ -16,9 +16,12 @@ var __meta__ = {
 
 kendo.data.ExcelExporter = kendo.Class.extend({
     init: function(options) {
-        this.columns = options.columns || [];
+        this.columns = $.map(options.columns || [], this._prepareColumn);
+
         this.options = options;
+
         var dataSource = options.dataSource;
+
         if (dataSource instanceof kendo.data.DataSource) {
             this.dataSource = new dataSource.constructor($.extend(
                 {},
@@ -50,6 +53,11 @@ kendo.data.ExcelExporter = kendo.Class.extend({
             });
         }, this));
     },
+    _prepareColumn: function(column) {
+        return $.extend({}, column, {
+            groupHeaderTemplate: kendo.template(column.groupHeaderTemplate || "${title}: ${value}")
+        });
+    },
     _filter: function() {
         if (!this.options.filter) {
             return null;
@@ -79,9 +87,20 @@ kendo.data.ExcelExporter = kendo.Class.extend({
                 })[0];
 
                 var title = column && column.title ? column.title : dataItem.field;
+                var template = column ? column.groupHeaderTemplate : null;
+                var value = title + ": " + dataItem.value;
+
+                if (template) {
+                    value = template($.extend({}, {
+                            title: title,
+                            field: dataItem.field,
+                            value: dataItem.value
+                        }, dataItem.aggregates[dataItem.field]
+                    ));
+                }
 
                 cells.push( {
-                    value: title + ": " + dataItem.value,
+                    value: value,
                     background: "#dfdfdf",
                     color: "#333",
                     colSpan: this.columns.length + groups.length - level
