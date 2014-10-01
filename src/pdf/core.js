@@ -11,7 +11,6 @@
     /* jshint eqnull:true */
     /* jshint loopfunc:true */
     /* jshint newcap:false */
-    /* global console,require,alert */ // XXX: temporary
 
     var NL = "\n";
 
@@ -203,13 +202,6 @@
     });
 
     function loadBinary(url, cont) {
-        if (global.process) { // XXX: temporary
-            require("fs").readFile(url, { encoding: "binary" }, function(err, data){
-                data = data.toString("binary");
-                cont(data);
-            });
-            return;
-        }
         var req = new XMLHttpRequest();
         req.open('GET', url, true);
         req.overrideMimeType("text/plain; charset=x-user-defined");
@@ -246,12 +238,6 @@
         if (img) {
             cont(img);
         } else {
-            if (global.process) { // XXX: temporary
-                require("fs").readFile(url, { encoding: "binary" }, function(err, data){
-                    cont(IMAGE_CACHE[url] = new PDFJpegImage(data));
-                });
-                return;
-            }
             img = new Image();
             img.src = url;
             img.onload = function() {
@@ -753,10 +739,6 @@
             var fontStream = new PDFStream(data, {
                 Length1: data.length
             });
-
-            if (global.process) { // XXX: temporary
-                require("fs").writeFileSync("/tmp/x.ttf", data, { encoding: "binary" });
-            }
 
             var descriptor = self._pdf.attach(new PDFDictionary({
                 Type         : PDFName.get("FontDescriptor"),
