@@ -193,9 +193,12 @@ var __meta__ = {
 
         _subtree: function(map, id) {
             var result = map[id] || [];
+            var defaultParentId = this._defaultParentId();
 
             for (var i = 0, len = result.length; i < len; i++) {
-                result = result.concat(this._subtree(map, result[i].id));
+                if (result[i].id !== defaultParentId) {
+                    result = result.concat(this._subtree(map, result[i].id));
+                }
             }
 
             return result;
@@ -229,7 +232,7 @@ var __meta__ = {
             }
 
             // calculate aggregates for each subtree
-            result[null] = new Query(this._subtree(map, null)).aggregate(options.aggregate);
+            result[this._defaultParentId()] = new Query(this._subtree(map, this._defaultParentId())).aggregate(options.aggregate);
 
             for (i = 0; i < data.length; i++) {
                 item = data[i];
@@ -308,26 +311,36 @@ var __meta__ = {
             );
         },
 
-        _byParentId: function(id) {
+        _byParentId: function(id, defaultId) {
             var result = [];
             var view = this.view();
+            var current;
+
+            if (id === defaultId) {
+                return [];
+            }
 
             for (var i = 0; i < view.length; i++) {
-                if (view[i].parentId == id) {
-                    result.push(view[i]);
+                current = view[i];
+
+                if (current.parentId == id) {
+                    result.push(current);
                 }
             }
 
             return result;
         },
 
+        _defaultParentId: function() {
+            return this.reader.model.fn.defaults.parentId;
+        },
+
         childNodes: function(model) {
-            return this._byParentId(model.id);
+            return this._byParentId(model.id, this._defaultParentId());
         },
 
         rootNodes: function() {
-            var model = this.reader.model;
-            return this._byParentId(model.fn.defaults.parentId);
+            return this._byParentId(this._defaultParentId());
         },
 
         parentNode: function(model) {

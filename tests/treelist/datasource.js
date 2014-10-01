@@ -814,4 +814,70 @@
         equal(ds.data().length, 1);
     });
 
+    test("add new item with equal id and parentId", function() {
+        var ds = new TreeListDataSource({
+            schema: {
+                model: {
+                    fields: {
+                        parentId: { defaultValue: 0, type: "number" }
+                    }
+                }
+            },
+            data: [
+                { id: 1, parentId: 0 }
+            ]
+        });
+
+        ds.read();
+
+        var model = ds.insert(0, {});
+
+        equal(model.parentId, 0);
+        equal(model.id, 0);
+    });
+
+    test("adding new root item", function() {
+        var ds = new TreeListDataSource({
+            schema: {
+                model: {
+                    fields: {
+                        parentId: { defaultValue: 0, type: "number" }
+                    }
+                }
+            },
+            data: [
+                { id: 1, parentId: 0 }
+            ]
+        });
+
+        ds.read();
+        ds.insert(0, {});
+
+        equal(ds.rootNodes().length, 2);
+        equal(ds.childNodes(ds.get(1)).length, 0, "child nodes for id=1");
+        equal(ds.childNodes(ds.get(0)).length, 0, "child nodes for id=0");
+    });
+
+    test("adding new child item", function() {
+        var ds = new TreeListDataSource({
+            schema: {
+                model: {
+                    fields: {
+                        parentId: { defaultValue: 0, type: "number" }
+                    }
+                }
+            },
+            data: [
+                { id: 1, parentId: 0 }
+            ]
+        });
+
+        ds.read();
+        ds.add({ parentId: 1 });
+
+        equal(ds.rootNodes().length, 1);
+        equal(ds.childNodes(ds.get(1)).length, 1);
+        equal(ds.childNodes(ds.get(0)).length, 0);
+    });
+
 })();
