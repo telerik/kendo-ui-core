@@ -688,9 +688,13 @@
         if (/^(style|script|link|meta|iframe|svg)$/i.test(element.tagName)) {
             return;
         }
+
         var style = getComputedStyle(element);
         var opacity = parseFloat(getPropertyValue(style, "opacity"));
-        if (opacity === 0) {
+        var visibility = getPropertyValue(style, "visibility");
+        var display = getPropertyValue(style, "display");
+
+        if (opacity === 0 || visibility == "hidden" || display == "none") {
             return;
         }
 
