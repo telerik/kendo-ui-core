@@ -44,20 +44,46 @@ kendo.data.ExcelExporter = kendo.Class.extend({
                        columns: this._columns(),
                        rows: this._rows(),
                        freezePane: this._freezePane(),
-                       filter: this.options.filter
+                       filter: this._filter()
                     }
                 ]
             });
         }, this));
     },
+    _filter: function() {
+        if (!this.options.filter) {
+            return null;
+        }
+
+        var groups = this.dataSource.group();
+
+        return {
+            from: groups.length,
+            to: groups.length + this.columns.length - 1
+        };
+    },
     _dataRows: function(dataItems, level) {
         var rows = $.map(dataItems, $.proxy(function(dataItem) {
-            var cells = new Array(level);
+            var cells = $.map(new Array(level), function() {
+                return {
+                    background: "#dfdfdf",
+                    color: "#333"
+                };
+            });
+
             var groups = this.dataSource.group();
 
             if (groups.length && dataItem.items) {
+                var column = $.grep(this.columns, function(column) {
+                    return column.field == dataItem.field;
+                })[0];
+
+                var title = column && column.title ? column.title : dataItem.field;
+
                 cells.push( {
-                    value: dataItem.field + ": " + dataItem.value,
+                    value: title + ": " + dataItem.value,
+                    background: "#dfdfdf",
+                    color: "#333",
                     colSpan: this.columns.length + groups.length - level
                 } );
 
@@ -87,8 +113,15 @@ kendo.data.ExcelExporter = kendo.Class.extend({
         if (this.columns.length) {
             rows.unshift({
                 type: "header",
-                cells: new Array(groups.length).concat($.map(this.columns, function(column) {
+                cells: $.map(new Array(groups.length), function() {
                     return {
+                        background: "#7a7a7a",
+                        color: "#fff"
+                    };
+                }).concat($.map(this.columns, function(column) {
+                    return {
+                        background: "#7a7a7a",
+                        color: "#fff",
                         value: column.title || column.field
                     };
                 }))
@@ -116,7 +149,7 @@ kendo.data.ExcelExporter = kendo.Class.extend({
     },
     _columns: function() {
         var columns = $.map(new Array(this.dataSource.group().length), function() {
-            return { width: 10 };
+            return { width: 20 };
         });
 
         return columns.concat($.map(this.columns, function(column) {

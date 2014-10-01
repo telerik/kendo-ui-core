@@ -171,7 +171,8 @@ test("freezes first row", function() {
 
 test("enables filtering", function() {
     testWorkbook({ filter: true, columns: [ { field: "foo" } ], dataSource: [ {} ] }, function(book) {
-        equal(book.sheets[0].filter, true);
+        equal(book.sheets[0].filter.from, 0);
+        equal(book.sheets[0].filter.to, 0);
     });
 });
 
@@ -207,6 +208,20 @@ test("sets the value of the group cell to the group field and value", function()
     testWorkbook({ columns: [ { field: "foo" }, { field: "bar" } ], dataSource: dataSource }, function(book) {
         equal(book.sheets[0].rows[1].cells[0].value, "foo: boo");
         equal(book.sheets[0].rows[3].cells[0].value, "foo: foo");
+    });
+});
+
+test("uses the column title for the group cell value", function() {
+    dataSource = new DataSource({
+       data: [
+           { foo: "foo", bar: "bar" },
+           { foo: "boo", bar: "baz" }
+       ],
+       group: { field: "foo" }
+    });
+
+    testWorkbook({ columns: [ { title: "Foo", field: "foo" }, { field: "bar" } ], dataSource: dataSource }, function(book) {
+        equal(book.sheets[0].rows[1].cells[0].value, "Foo: boo");
     });
 });
 
@@ -282,6 +297,21 @@ test("creates a column for every group", function() {
 
     testWorkbook({ columns: [ { field: "foo" }, { field: "bar" } ], dataSource: dataSource }, function(book) {
         equal(book.sheets[0].columns.length, 4);
+    });
+});
+
+test("filtering skips the groups", function() {
+    dataSource = new DataSource({
+       data: [
+           { foo: "foo", bar: "bar" },
+           { foo: "boo", bar: "baz" }
+       ],
+       group: [{ field: "foo" }, { field: "bar" }]
+    });
+
+    testWorkbook({ filter: true, columns: [ { field: "foo" }, { field: "bar" } ], dataSource: dataSource }, function(book) {
+        equal(book.sheets[0].filter.from, 2);
+        equal(book.sheets[0].filter.to, 3);
     });
 });
 

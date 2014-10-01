@@ -22,7 +22,7 @@
       <li>Firefox</li>
       <li>IE10+</li>
     </ul>
-    <div id="grid" style="height: 365px;width: 800px"></div>
+    <div id="grid" style="height: 500px;width: 900px"></div>
     <script>
         $("#grid").kendoGrid({
           toolbar: '<button id="export" class="k-button">Export</button>',
@@ -31,7 +31,8 @@
               transport: {
                   read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
               },
-              pageSize: 1
+              pageSize: 10,
+              group: [ { field: "CompanyName" }, { field: "ContactTitle" } ]
           },
           sortable: true,
           pageable: {
@@ -42,8 +43,8 @@
           columns: [{
               field: "ContactName",
               title: "Contact Name",
-              width: 200,
-              locked: false
+              width: 300,
+              locked: true
           }, {
               field: "ContactTitle",
               title: "Contact Title",
@@ -54,7 +55,7 @@
               width: 500
           }
           ],
-          columnMenu: true,
+          columnMenu: false,
           groupable: true,
           resizable: true,
           reorderable: true
@@ -68,7 +69,7 @@
         var exporter = new kendo.data.ExcelExporter({
             columns: grid.columns,
             dataSource: grid.dataSource,
-            filter: false
+            filter: true
         });
 
         exporter.workbook().then(function(book) {
