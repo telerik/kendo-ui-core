@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "../../kendo.core" ], f);
+    define([ "../../kendo.core", "../../kendo.dataviz.core" ], f);
 })(function(){
 
 (function ($) {
