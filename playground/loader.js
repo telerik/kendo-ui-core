@@ -1,14 +1,14 @@
 (function(){
 
     var LOADED = {};
+    var MODULES = {};
+
+    var ID = 0;
+
+    var HOP = Object.prototype.hasOwnProperty;
 
     function basedir(url) {
         return url.replace(/\/*[^\/]+$/, "/");
-    }
-
-    function foreach(a, f) {
-        for (var i = 0; i < a.length; ++i)
-            f(a[i], i);
     }
 
     function map(a, f) {
@@ -22,7 +22,7 @@
         if (!m) throw new Error("Cannot normalize url: " + url);
         var scheme = m[1], path = m[2].split("/");
         var normal = [];
-        foreach(path, function(x){
+        map(path, function(x){
             if (x == "." || x == "") return;
             else if (x == "..") normal.pop();
             else normal.push(x);
@@ -32,16 +32,20 @@
 
     function sync_require(filename) {
         if (filename instanceof Array) {
-            foreach(filename, sync_require);
+            map(filename, sync_require);
         } else {
             load(basedir(window.location + ""), filename);
         }
+        document.write("<script>requireSync.execAll()</script>");
     }
 
-    sync_require.LOADED = LOADED;
+    sync_require.execAll = function() {
+        for (var i in MODULES) if (HOP.call(MODULES, i)) {
+            execute(i);
+        }
+    };
 
-    var LOADING = [];
-    function load(path, file) {
+    function geturl(path, file) {
         var url;
         file = file.replace(/\.js$/, "") + ".js";
         if (/^(https?:|\/\/)/.test(file)) {
@@ -49,53 +53,86 @@
         } else {
             url = normalize(path + file);
         }
-        if (LOADED[url]) {
-            return LOADED[url].value;
-        }
-        if (LOADING.indexOf(url) >= 0) {
-            console.error("Circular dependency: %s.  Ignoring the issue and hope for the best, but please fix that.", url);
-            console.log(LOADING.join("\n -> "));
-            return null;
-        }
-        LOADING.push(url);
-        var start = new Date().getTime();
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", url, false);
-        xhr.send(null);
-        var stop = new Date().getTime();
-        var time = stop - start;
-        if (xhr.status == 200) {
-            var code = xhr.responseText;
-            var define = make_define(path, file);
-            try {
-                var exported = new Function("define", code)(define);
-                LOADED[url] = { value: exported, start: start, stop: stop, time: time };
-                var pos = LOADING.indexOf(url);
-                if (pos >= 0) LOADING.splice(pos, pos + 1);
-                return exported;
-            } catch(ex) {
-                console.error("Caught error when evaluating " + url);
-                console.error(ex);
-                return null;
-            }
-        } else {
-            throw new Error("Cannot load: " + url);
+        return url;
+    }
+
+    function load(path, file) {
+        var url = geturl(path, file);
+        if (!LOADED[url]) {
+            LOADED[url] = true;
+            document.write("<script>window.define = " + make_define(path, file, url) + "</script>");
+            document.write("<script src='" + url + "'></script>");
         }
     }
 
-    function make_define(path, file) {
+    var STACK = [];
+
+    function execute(url) {
+        var module = MODULES[url];
+        if (!module.executed) {
+            var circular = STACK.indexOf(module) >= 0;
+            STACK.push(module);
+            if (circular) {
+                console.error("Circular dependency:");
+                map(STACK, function(m, i){
+                    console.log(Array(i + 1).join("  ") + "->", m.url);
+                });
+            } else {
+                var args = map(module.deps, execute);
+                module.value = module.factory.apply(null, args);
+                module.executed = true;
+            }
+            STACK.pop();
+        }
+        return module.value;
+    }
+
+    function make_define(path, file, url) {
         var base = file.charAt(0) == "."
             ? basedir(path + file)
             : basedir(window.location + "");
-        function define(deps, factory) {
-            deps = randomize(deps); // RequireJS loads them in no specified order.
+        function define() {
+            var name, deps, factory;
+            switch (arguments.length) {
+              case 1:
+                deps = [];
+                factory = arguments[0];
+                break;
+              case 2:
+                deps = arguments[0];
+                factory = arguments[1];
+                break;
+              case 3:
+                deps = arguments[1];
+                factory = arguments[2];
+                break;
+            }
+
+            var ready = true;
             deps = map(deps, function(file){
-                return load(base, file);
+                var url = geturl(base, file);
+                if (!MODULES[url] || !MODULES[url].executed) {
+                    ready = false;
+                    load(base, file);
+                }
+                return url;
             });
-            return factory.apply(window, deps);
-        };
-        define.amd = true;
-        return define;
+
+            MODULES[url] = {
+                url     : url,
+                factory : factory,
+                deps    : deps
+            };
+
+            if (ready) {
+                execute(url);
+            }
+        }
+        define.amd = { jQuery: true };
+        var id = ++ID;
+        var defname = "$$$define_" + id;
+        window[defname] = define;
+        return defname;
     }
 
     function randomize(lst) {
