@@ -1370,6 +1370,12 @@ var __meta__ = {
             that._setContentWidthHandler = null;
         },
 
+        getOptions: function() {
+            return extend(true, {}, {
+                columns: this.columns
+            });
+        },
+
         setOptions: function(options) {
             var that = this;
 
