@@ -1041,7 +1041,7 @@ var __meta__ = {
         _filterable: function() {
             var cells = this.header.find("th");
             var filterable = this.options.filterable;
-            var idx, length;
+            var idx, length, column;
 
             if (!filterable) {
                 return;
