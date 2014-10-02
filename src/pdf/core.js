@@ -11,6 +11,7 @@
     /* jshint eqnull:true */
     /* jshint loopfunc:true */
     /* jshint newcap:false */
+    /* global pako */
 
     var NL = "\n";
 
@@ -141,7 +142,7 @@
         catalog.setPages(pageTree);
 
         self.addPage = function() {
-            var content = new PDFStream(makeOutput());
+            var content = new PDFStream(makeOutput(), null, true);
             var page = new PDFPage(self, {
                 Contents : self.attach(content),
                 Parent   : pageTree
@@ -540,18 +541,33 @@
 
     /// streams
 
-    var PDFStream = defclass(function PDFStream(data, props) {
+    var PDFStream = defclass(function PDFStream(data, props, compress) {
         this.data = data || "";
         this.props = props || {};
+        this.compress = compress;
     }, {
         render: function(out) {
-            this.data += "";
+            var data = this.data + "";
+            if (global.pako && this.compress) {
+                var tmp = new Array(data.length);
+                for (var i = 0; i < data.length; ++i) {
+                    tmp[i] = data.charCodeAt(i) & 0xFF;
+                }
+                data = tmp;
+                if (!this.props.Filter) {
+                    this.props.Filter = [];
+                } else if (!(this.props.Filter instanceof Array)) {
+                    this.props.Filter = [ this.props.Filter ];
+                }
+                this.props.Filter.unshift(PDFName.get("FlateDecode"));
+                data = pako.deflate(data, { to: "string" });
+            }
             if (this.props.Length == null) {
-                this.props.Length = this.data.length;
+                this.props.Length = data.length;
             }
             out(new PDFDictionary(this.props),
                 " stream", NL,
-                this.data, NL,
+                data, NL,
                 "endstream");
         }
     });
@@ -654,7 +670,7 @@
                 Height           : height,
                 BitsPerComponent : 8,
                 ColorSpace       : PDFName.get("DeviceGray")
-            });
+            }, true);
             var stream = new PDFStream(rgb, {
                 Type             : PDFName.get("XObject"),
                 Subtype          : PDFName.get("Image"),
@@ -663,7 +679,7 @@
                 BitsPerComponent : 8,
                 ColorSpace       : PDFName.get("DeviceRGB"),
                 SMask            : pdf.attach(mask)
-            });
+            }, true);
             stream._resourceName = PDFName.get("I" + (++RESOURCE_COUNTER));
             return stream;
         };
@@ -738,7 +754,7 @@
             var data = sub.render();
             var fontStream = new PDFStream(data, {
                 Length1: data.length
-            });
+            }, true);
 
             var descriptor = self._pdf.attach(new PDFDictionary({
                 Type         : PDFName.get("FontDescriptor"),
@@ -803,12 +819,12 @@
             // Compute the ToUnicode map so that apps can extract
             // meaningful text from the PDF.
             var unimap = new PDFToUnicodeCmap(firstChar, lastChar, sub.subset);
-            var unimapStream = new PDFStream(makeOutput());
+            var unimapStream = new PDFStream(makeOutput(), null, true);
             unimapStream.data(unimap);
             dict.ToUnicode = self._pdf.attach(unimapStream);
         },
         _makeCidToGidMap: function() {
-            return new PDFStream(this._sub.cidToGidMap());
+            return new PDFStream(this._sub.cidToGidMap(), null, true);
         }
     }, PDFDictionary);
 
@@ -903,7 +919,7 @@
         },
         endText: function() {
             this._textMode = false;
-            this._out(NL, "ET", NL);
+            this._out("ET", NL);
         },
         _requireTextMode: function() {
             if (!this._textMode) {
