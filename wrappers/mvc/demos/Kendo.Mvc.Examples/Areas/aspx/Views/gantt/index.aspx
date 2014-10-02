@@ -1,7 +1,9 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/Web.Master" %>
 
+<%@ Import Namespace="Kendo.Mvc.Examples.Models.Gantt" %>
+
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
-    <%: Html.Kendo().Gantt<Kendo.Mvc.Examples.Models.Gantt.TaskViewModel, Kendo.Mvc.Examples.Models.Gantt.DependencyViewModel>()
+    <%: Html.Kendo().Gantt<TaskViewModel, DependencyViewModel>()
         .Name("gantt")
         .Columns(columns =>
         {
