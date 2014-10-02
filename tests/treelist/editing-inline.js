@@ -18,8 +18,8 @@
         dom.kendoTreeList($.extend(true, {}, {
             dataSource: {
                 data: [
-                    { id: 1, parentId: null },
-                    { id: 3, parentId: null },
+                    { id: 1, parentId: null, expanded: true },
+                    { id: 3, parentId: null, expanded: true },
                     { id: 2, parentId: 1 }
                 ]
             },
@@ -573,5 +573,30 @@
 
         var model = instance.dataItem(instance.content.find("tr:first"));
         equal(model.parentId, 0);
+    });
+
+    test("addRow creates new model with parentId set", function() {
+        var ds = new TreeListDataSource({
+            schema: {
+                model: {
+                    fields: {
+                        parentId: { defaultValue: 0, type: "number" }
+                    }
+                }
+            },
+            data: [
+                { id: 1, parentId: 0, expanded: true }
+            ]
+        });
+
+        createTreeList({
+            dataSource: ds
+        });
+
+        instance.addRow(ds.get(1));
+
+        var row = instance.content.find("tr").eq(1);
+        equal(instance.dataItem(row).parentId, 1);
+        ok(row.data("kendoEditable"));
     });
 })();

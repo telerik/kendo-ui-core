@@ -1126,6 +1126,11 @@ var __meta__ = {
             }
 
             model = this.dataItem(row);
+
+            if (!model) {
+                return;
+            }
+
             model._edit = true;
 
             this._cancelEditor();
@@ -1166,7 +1171,7 @@ var __meta__ = {
 
         addRow: function(parent) {
             var index = 0;
-            var model;
+            var model = {};
             var row;
 
             if (parent) {
@@ -1174,12 +1179,11 @@ var __meta__ = {
                     parent = this.dataItem(parent);
                 }
 
+                model.parentId = parent.id;
                 index = this.dataSource.indexOf(parent) + 1;
-                model = this.dataSource.insert(index, {});
-            } else {
-                model = this.dataSource.insert(index, {});
             }
 
+            model = this.dataSource.insert(index, model);
             row = this.content.find("[" + kendo.attr("uid") + "=" + model.uid + "]");
 
             this.editRow(row);
