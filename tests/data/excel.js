@@ -34,12 +34,6 @@ test("clones the data source option", function() {
     ok(exporter.dataSource !== dataSource);
 });
 
-test("resolves the promise with a workbook as the argument", 1, function() {
-    testWorkbook({ dataSource: [] }, function(book) {
-       ok(book instanceof kendo.ooxml.Workbook) ;
-    });
-});
-
 test("sets the columns option of the workbook", 1, function() {
     testWorkbook({ columns: [ { width: 100 } ], dataSource: [] }, function(book) {
         equal(book.sheets[0].columns[0].width, 100);

@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.data", "./kendo.ooxml" ], f);
+    define([ "./kendo.data" ], f);
 })(function(){
 
 /* global JSZip */
@@ -9,7 +9,7 @@ var __meta__ = {
     name: "Excel export",
     category: "framework",
     advanced: true,
-    depends: [ "ooxml", "data" ]
+    depends: [ "data" ]
 };
 
 (function($, kendo){
@@ -41,7 +41,7 @@ kendo.data.ExcelExporter = kendo.Class.extend({
         var promise = this.dataSource.fetch();
 
         return promise.then($.proxy(function() {
-            return new kendo.ooxml.Workbook({
+            return {
                 sheets: [
                     {
                        columns: this._columns(),
@@ -50,7 +50,7 @@ kendo.data.ExcelExporter = kendo.Class.extend({
                        filter: this._filter()
                     }
                 ]
-            });
+            };
         }, this));
     },
     _prepareColumn: function(column) {

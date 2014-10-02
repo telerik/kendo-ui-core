@@ -9,6 +9,7 @@
     <script>
         requireSync([
             "../src/jquery",
+            "../src/kendo.ooxml",
             "../src/kendo.excel",
             "../src/kendo.grid"
         ]);
@@ -52,7 +53,7 @@
           }, {
               field: "CompanyName",
               title: "Company Name",
-              groupHeaderTemplate: "<strong>CompanyName</strong>: #: value# Total(#: count #)",
+              groupHeaderTemplate: "Company Name: #: value# Total(#: count #)",
               width: 500
           }
           ],
@@ -74,7 +75,7 @@
         });
 
         exporter.workbook().then(function(book) {
-            kendo.saveAs(book.toDataURL(), "Export.xlsx", "http://korchev:88/filesaver");
+            kendo.saveAs(new kendo.ooxml.Workbook(book).toDataURL(), "Export.xlsx", "http://korchev:88/filesaver");
         });
       }
 

@@ -506,18 +506,13 @@ var Workbook = kendo.Class.extend({
             count: 0,
             uniqueCount: 0
         };
-        this.sheets = this.options.sheets || [];
         this._styles = [];
 
-    },
-    addSheet: function(options) {
-        this._sheets.push(new Worksheet(options, this._strings, this._styles));
-    },
-    toDataURL: function() {
-        this._sheets = $.map(this.sheets, $.proxy(function(options) {
+        this._sheets = $.map(this.options.sheets || [], $.proxy(function(options) {
             return new Worksheet(options, this._strings, this._styles);
         }, this));
-
+    },
+    toDataURL: function() {
         var zip = new JSZip();
 
         var docProps = zip.folder("docProps");
