@@ -7,6 +7,8 @@
 
     var HOP = Object.prototype.hasOwnProperty;
 
+    window.$$$define = window.define;
+
     function basedir(url) {
         return url.replace(/\/*[^\/]+$/, "/");
     }
@@ -36,7 +38,7 @@
         } else {
             load(basedir(window.location + ""), filename);
         }
-        document.write("<script>requireSync.execAll()</script>");
+        document.write("<script> requireSync.execAll(); define = $$$define; </script>");
     }
 
     sync_require.execAll = function() {
@@ -79,7 +81,7 @@
                 });
             } else {
                 var args = map(module.deps, execute);
-                module.value = module.factory.apply(null, args);
+                module.value = module.factory.apply(window, args);
                 module.executed = true;
             }
             STACK.pop();
