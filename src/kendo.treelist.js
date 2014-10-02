@@ -1173,6 +1173,11 @@ var __meta__ = {
             var index = 0;
             var model = {};
             var row;
+            var editable = this.editable;
+
+            if (editable && !editable.end()) {
+                return;
+            }
 
             if (parent) {
                 if (!(parent instanceof TreeListModel)) {

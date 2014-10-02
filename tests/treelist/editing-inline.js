@@ -599,4 +599,52 @@
         equal(instance.dataItem(row).parentId, 1);
         ok(row.data("kendoEditable"));
     });
+
+    test("doesn't create new item if there are is editable with validation errors", function() {
+        var ds = new TreeListDataSource({
+            data: [
+                { id: 1, text: "foo", parentId: null }
+            ],
+            schema: {
+                model: {
+                    fields: {
+                        text: { validation: { required: true } }
+                    }
+                }
+            }
+        });
+
+        createTreeList({
+            dataSource: ds,
+            columns: [ "id", "text" ]
+        });
+
+        instance.editRow("tr:first");
+        instance.content.find("tr:first input").val("");
+        instance.addRow();
+
+        equal(ds.view().length, 1);
+        ok(!ds.view()[0].isNew());
+    });
+
+    test("addRow reverts edited item", function() {
+        var ds = new TreeListDataSource({
+            data: [
+                { id: 1, text: "foo", parentId: null }
+            ]
+        });
+
+        createTreeList({
+            dataSource: ds,
+            columns: [ "id", "text" ]
+        });
+
+        instance.editRow("tr:first");
+        ds.view()[0].set("text", "baz");
+        instance.addRow();
+
+        equal(ds.view().length, 2);
+        ok(ds.view()[0].isNew());
+        equal(ds.view()[1].text, "foo");
+    });
 })();
