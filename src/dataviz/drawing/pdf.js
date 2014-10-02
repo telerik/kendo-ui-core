@@ -172,6 +172,9 @@
         var color = fill.color;
         if (color) {
             color = parseColor(color);
+            if (color == null) {
+                return; // no fill
+            }
             page.setFillColor(color.r, color.g, color.b);
             if (color.a != 1) {
                 page.setFillOpacity(color.a);
