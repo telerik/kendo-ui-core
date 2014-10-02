@@ -3396,6 +3396,13 @@
         ]
       },
       {
+        "text": "Server binding",
+        "url": "gantt/serverbinding",
+        "packages": [
+          "mvc-offline"
+        ]
+      },
+      {
         "text": "AngularJS",
         "url": "gantt/angular",
         "title": {
