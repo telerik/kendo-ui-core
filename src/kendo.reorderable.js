@@ -64,7 +64,7 @@ var __meta__ = {
                         if (options.inSameContainer && !options.inSameContainer(dropTarget, that._draggable)) {
                             that._dropTarget = dropTarget;
                         } else {
-                            if (that._elements.index(dropTarget) > that._elements.index(that._draggable)) {
+                            if (that._index(dropTarget) > that._index(that._draggable)) {
                                 left += dropTarget.outerWidth();
                             }
                         }
@@ -94,8 +94,8 @@ var __meta__ = {
                     if (that._dropTargetAllowed(dropTarget) && !that._isLastDraggable()) {
                         that.trigger(CHANGE, {
                             element: that._draggable,
-                            oldIndex: that._elements.index(draggable),
-                            newIndex: that._elements.index(dropTarget),
+                            oldIndex: that._index(draggable),
+                            newIndex: that._index(dropTarget),
                             position: getOffset(that.reorderDropCue).left > getOffset(dropTarget).left ? "after" : "before"
                         });
                     }
@@ -181,7 +181,15 @@ var __meta__ = {
                 return true;
             }
 
-            return dragOverContainers(this._elements.index(draggable));
+            return dragOverContainers(this._index(draggable));
+        },
+
+        _index: function(element) {
+            var indexAttr = kendo.attr("index");
+            if (element.filter("[" + indexAttr + "]").length) {
+               return parseInt(element.attr(indexAttr), 10);
+            }
+            return this._elements.index(element);
         },
 
         destroy: function() {
