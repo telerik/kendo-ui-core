@@ -562,15 +562,18 @@ var __meta__ = {
 
         // <kendo-numerictextbox>-type directives
         var dashed = name.replace(/([A-Z])/g, "-$1");
-        module.directive(shortcut, function(){
-            return {
-                restrict : "E",
-                replace  : true,
-                template : function(element, attributes) {
-                    var tag = TAGNAMES[className] || "div";
-                    return "<" + tag + " " + dashed + ">" + element.html() + "</" + tag + ">";
-                }
-            };
+
+        angular.forEach([name, shortcut], function(directiveName) {
+            module.directive(directiveName, function(){
+                return {
+                    restrict : "E",
+                    replace  : true,
+                    template : function(element, attributes) {
+                        var tag = TAGNAMES[className] || "div";
+                        return "<" + tag + " " + dashed + ">" + element.html() + "</" + tag + ">";
+                    }
+                };
+            });
         });
     }
 
