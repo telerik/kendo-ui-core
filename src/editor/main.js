@@ -553,7 +553,8 @@
             encoded: true,
             domain: null,
             serialization: {
-                entities: true
+                entities: true,
+                scripts: true
             },
             stylesheets: [],
             dialogOptions: {
