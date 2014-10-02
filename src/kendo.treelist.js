@@ -605,6 +605,8 @@ var __meta__ = {
             var command = this._commandByName(commandName);
             var row = button.closest("tr");
 
+            row = row.length ? row : undefined;
+
             if (command) {
                 if (command.methodName) {
                     this[command.methodName](row);
