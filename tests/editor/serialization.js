@@ -121,20 +121,13 @@ test('font converted to span', function() {
     equal(editor.value(), '<span style="color:#ff0000;font-face:verdana;font-size:x-large;">foo</span>');
 });
 
-test('script tag preserved', function() {
-    editor.value('<script>var answer=42;<\/script>');
-    equal(editor.value(), '<script>var answer=42;<\/script>');
+test('script tag is removed', function() {
+    equal(serializeCycle('<script>var answer=42;<\/script>', { scripts: false }), "");
 });
 
 test('script tag not executed', function() {
     editor.value('<script>var answer=42;<\/script>');
     ok(undefined === window.answer);
-});
-
-test("script tag contents are not HTML-encoded", function() {
-    var originalValue = '<script>$.load("foo?bar=1&baz=2");</script>';
-    editor.value(originalValue);
-    equal(editor.value(), originalValue);
 });
 
 test('br moz dirty removed', function() {
@@ -157,9 +150,8 @@ test('multiple attributes sorted alphabetically', function() {
     equal(editor.value(), '<input class="k-button" style="display:none;" type="button" />');
 });
 
-test('javascript attributes', function() {
-    editor.value('<input type="button" onclick="alert(1)" />');
-    equal(editor.value(), '<input onclick="alert(1)" type="button" />');
+test('javascript attributes are stripped', function() {
+    equal(serializeCycle('<input type="button" onclick="alert(1)" />'), '<input type="button" />');
 });
 
 test('value attribute', function() {
@@ -458,7 +450,7 @@ test("absolute background-image values are properly serialized", function() {
 
 module("editor content parsing");
 
-test("removes onerror attribute to prevent XSS", function() {
+test("removes onerror attribute", function() {
     equal(Serializer.toEditableHtml('<img src="foo" onerror="alert(1)">'), '<img src="foo">');
 });
 
@@ -491,8 +483,8 @@ function serializeCycle(html, options) {
     return Serializer.domToXhtml(Serializer.htmlToDom(html, QUnit.fixture[0]), options);
 }
 
-function verifyCycle(html) {
-    equal(serializeCycle(html), html);
+function verifyCycle(html, options) {
+    equal(serializeCycle(html, options), html);
 }
 
 test("does not convert relative href/src URLs to absolute", function() {
@@ -500,7 +492,7 @@ test("does not convert relative href/src URLs to absolute", function() {
     verifyCycle('<a href="foo">a</a>');
     verifyCycle('<link href="foo" />');
     verifyCycle('<img src="foo" />');
-    verifyCycle('<script src="foo"><\/script>');
+    verifyCycle('<script src="foo"><\/script>', { scripts: true });
 });
 
 test("filling empty elements does not trigger errors", function() {
@@ -519,6 +511,19 @@ test("does not remove empty elements from content", function() {
     ok(fixture.find("input").length);
 });
 
+test("suppresses script execution", function() {
+    var fixture = QUnit.fixture;
+
+    Serializer.htmlToDom('<span onclick="alert(1)">foo</span>', fixture[0]);
+    ok(!fixture.find("[onclick]").length);
+
+    Serializer.htmlToDom('<div onmouseover="alert(1)">foo</div>', fixture[0]);
+    ok(!fixture.find("[onmouseover]").length);
+
+    Serializer.htmlToDom('<script>foo=1</script>', fixture[0]);
+    ok(!fixture.find("script").length);
+});
+
 test("removes k-paste-container elements from content", function() {
     equal(serializeCycle('foo<p class="k-paste-container">bar</p>baz'), "foobaz");
 });
@@ -528,8 +533,19 @@ test("removes k-marker elements from content", function() {
 });
 
 test("encoding of entities can be prevented", function() {
-    equal(serializeCycle('foo ä bar', { entities: false }), "foo ä bar");
-    equal(serializeCycle('<p>foo ä bar</p>', { entities: false }), "<p>foo ä bar</p>");
+    verifyCycle('foo ä bar', { entities: false });
+    verifyCycle('<p>foo ä bar</p>', { entities: false });
 });
+
+test("scripts can be permitted through serialization options", function() {
+    verifyCycle('<input onclick="alert(1)" />', { scripts: true });
+    verifyCycle('<span onmousedown="confirm()"></span>', { scripts: true });
+    verifyCycle('<script>var answer=42;<\/script>', { scripts: true });
+});
+
+test("script contents are not HTML-encoded", function() {
+    verifyCycle('<script>$.load("foo?bar=1&baz=2");</script>', { scripts: true });
+});
+
 
 }());

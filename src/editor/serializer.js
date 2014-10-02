@@ -17,6 +17,7 @@ var pixelRe = /^\d+(\.\d*)?(px)?$/i;
 var emptyPRe = /<p><\/p>/i;
 var cssDeclaration = /([\w|\-]+)\s*:\s*([^;]+);?/i;
 var sizzleAttr = /^sizzle-\d+/i;
+var scriptAttr = /^k-script-/i;
 var onerrorRe = /\s*onerror\s*=\s*(?:'|")?([^'">\s]*)(?:'|")?/i;
 
 var div = document.createElement("div");
@@ -81,6 +82,23 @@ var Serializer = {
         }
     },
 
+    _preventScriptExecution: function(root) {
+        $(root).find("*").each(function() {
+            var attributes = this.attributes;
+            var attribute, i, l, name;
+
+            for (i = 0, l = attributes.length; i < l; i++) {
+                attribute = attributes[i];
+                name = attribute.nodeName;
+
+                if (attribute.specified && /^on/i.test(name)) {
+                    this.removeAttribute(name);
+                    this.setAttribute("k-script-" + name, attribute.nodeValue);
+                }
+            }
+        });
+    },
+
     htmlToDom: function(html, root) {
         var browser = kendo.support.browser;
         var msie = browser.msie;
@@ -123,6 +141,8 @@ var Serializer = {
 
             Serializer._resetOrderedLists(root);
         }
+
+        Serializer._preventScriptExecution(root);
 
         Serializer._fillEmptyElements(root);
 
@@ -191,6 +211,7 @@ var Serializer = {
                 }
             }
         };
+        options = options || {};
 
         function styleAttr(cssText) {
             // In IE < 8 the style attribute does not return proper nodeValue
@@ -280,6 +301,8 @@ var Serializer = {
                     specified = false;
                 } else if (name.indexOf('_moz') >= 0) {
                     specified = false;
+                } else if (scriptAttr.test(name)) {
+                    specified = !!options.scripts;
                 }
 
                 if (specified) {
@@ -303,6 +326,8 @@ var Serializer = {
                 if (name == "class" && value == "k-table") {
                     continue;
                 }
+
+                name = name.replace(scriptAttr, "");
 
                 result.push(' ');
                 result.push(name);
@@ -343,6 +368,10 @@ var Serializer = {
                 }
 
                 if (dom.isInline(node) && node.childNodes.length == 1 && node.firstChild.nodeType == 3&&  !text(node.firstChild)) {
+                    return;
+                }
+
+                if (!options.scripts && tagName == "telerik:script") {
                     return;
                 }
 
