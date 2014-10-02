@@ -34,6 +34,14 @@
         ok(typeof m.toJSON()._loaded === "undefined");
     });
 
+    test("toJSON does not serialize _edit flag", function() {
+        var m = new TreeListModel();
+
+        m._edit = true;
+
+        ok(typeof m.toJSON()._edit === "undefined");
+    });
+
     module("TreeListDataSource");
 
     function controlledRead() {
