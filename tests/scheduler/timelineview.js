@@ -335,6 +335,39 @@
         ok(view.element.find(".k-event").length);
     });
 
+    test("all day event and regular event starting in same slot are rendered correctly", function() {
+        var view = setup({
+            date: new Date(2013, 1, 2),
+            startTime: new Date(2013, 1, 2, 10, 0, 0, 0),
+            endTime: new Date(2013, 1, 2, 18, 0, 0, 0),
+            numberOfDays: 1
+        });
+
+        view.render([new SchedulerEvent({
+            uid: "foo",
+            title: "",
+            start: new Date(2013, 1, 2, 0, 0, 0),
+            end: new Date(2013, 1, 2, 0, 0, 0),
+            isAllDay: true,
+            id: "1"
+        }), new SchedulerEvent({
+            uid: "bar",
+            title: "",
+            start: new Date(2013, 1, 2, 10, 0, 0),
+            end: new Date(2013, 1, 2, 12, 0, 0),
+            isAllDay: false,
+            id: "2"
+        })]);
+
+        equal(view.groups[0].getTimeSlotCollection(0).events()[0].start, 0);
+        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 7);
+
+        equal(view.groups[0].getTimeSlotCollection(0).events()[1].start, 0);
+        equal(view.groups[0].getTimeSlotCollection(0).events()[1].end, 1);
+
+        equal(view.element.find(".k-event").length, 2);
+    });
+
     test("all day event is rendered correctly when times are different than zero", function() {
         var view = setup({
             date: new Date(2013, 1, 2),

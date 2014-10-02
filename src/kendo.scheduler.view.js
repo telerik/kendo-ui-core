@@ -682,9 +682,12 @@ var __meta__ = {
                 end = kendo.date.toUtcTime(end);
             }
 
+            //implement totally custom _rect function for timeline, to support snap
             if (snap) {
                 top = startSlot.offsetTop;
                 bottom = endSlot.offsetTop + endSlot[property + "Height"];
+                left = startSlot.offsetLeft;
+                right = endSlot.offsetLeft + endSlot[property + "Width"];
             } else {
                 var startOffset = start - startSlot.start;
 

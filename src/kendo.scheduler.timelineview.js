@@ -76,7 +76,6 @@ var __meta__ = {
         init: function(element, options) {
             var that = this;
             //only vertical grouping is supported = ignore orientation?
-
             SchedulerView.fn.init.call(that, element, options);
 
             that.title = that.options.title || that.options.name;
@@ -250,8 +249,8 @@ var __meta__ = {
 
         options: {
             name: "TimelineView",
-            selectedDateFormat: "{0:D}",
             title: "",
+            selectedDateFormat: "{0:D} - {1:D}",
             date: kendo.date.today(),
             startTime: kendo.date.today(),
             endTime: kendo.date.today(),
@@ -282,9 +281,7 @@ var __meta__ = {
 
         _render: function(dates) {
             var that = this;
-
             dates = dates || [];
-
             //dates are considered as resource for creating columns
             //in current case they are not
             that._dates = dates;
@@ -343,18 +340,28 @@ var __meta__ = {
             var columnTimeFormat;
             var msMajorInterval = that._timeSlotInterval();
 
+            //need update, as major iterval may not be required
             if (msMajorInterval >= MS_PER_DAY) {
                 columnTimeFormat = "{0:M}";
             } else {
-                //use :
-                //columnTimeFormat = "{0:t}";
                 columnTimeFormat = "{0:HH:mm}";
             }
             
             for (var idx = 0; idx < dates.length; idx++) {
                 for (var columnIndex = 0; columnIndex < columnCount; columnIndex++) { 
                     var column = {};
-                    var columnOffset = (+options.startTime) + (msMajorInterval * columnIndex);
+
+                    //incorrect => should be
+                    var startDate = kendo.date.getDate(options.date);
+                    kendo.date.setTime(startDate, kendo.date.getMilliseconds(options.startTime));
+                    var columnOffset;
+                    if (msMajorInterval >= MS_PER_DAY) {
+                        columnOffset = (+startDate) + (msMajorInterval * idx);
+                    } else {
+                        columnOffset = (+options.startTime) + (msMajorInterval * columnIndex);
+                    }
+
+                    //var columnOffset = (+options.startTime) + (msMajorInterval * columnIndex);
                     
                      column.text = kendo.format(columnTimeFormat, new Date(columnOffset));
                      columns.push(column);
@@ -648,7 +655,7 @@ var __meta__ = {
             var event;
             var idx;
             var length;
-       
+
             for (idx = 0, length = events.length; idx < length; idx++) {
                 event = events[idx];
 
@@ -657,61 +664,61 @@ var __meta__ = {
                     var container = this.content;
 
                     if (isMultiDayEvent || this._isInTimeSlot(event)) {
-                        var start = event.start;
-                        var end = event.end;
-                        var startTime = getMilliseconds(this.startTime());
-                        var endTime = getMilliseconds(this.endTime());
-                        var eventStartTime = event._time("start");
-                        var eventEndTime = event._time("end");
                         var tail = false;
                         var head = false;
-                        var eventStartDate;
-                        var eventEndDate;
                         var occurrence;
+                        var start = event.start;
+                        var end = event.end;
+                        var eventStartTime = event._time("start");
+                        var eventEndTime = event._time("end");
+                        var startTime = getMilliseconds(this.startTime());
+                        var endTime = getMilliseconds(this.endTime());
+                        var adjustedStartDate = null;
+                        var adjustedEndDate = null;
 
                         if (event.isAllDay) {
-                            eventStartDate = getDate(start);
+                            adjustedStartDate = getDate(start);
                             if (startTime > eventStartTime) {
-                                setTime(eventStartDate, startTime);
+                                setTime(adjustedStartDate, startTime);
                                 tail = true;
                             }
 
-                            eventEndDate = getDate(end);
+                            adjustedEndDate = getDate(end);
                             if (endTime === getMilliseconds(getDate(this.endTime()))) {
-                                eventEndDate = kendo.date.addDays(eventEndDate, 1);
+                                adjustedEndDate = kendo.date.addDays(adjustedEndDate, 1);
                             } else {
-                                setTime(eventEndDate, endTime);
+                                setTime(adjustedEndDate, endTime);
                                 head = true;
                             }
                         } else {
                             if (startTime > eventStartTime) {
-                                eventStartDate = getDate(start);
-                                setTime(eventStartDate, startTime);
+                                adjustedStartDate = getDate(start);
+                                setTime(adjustedStartDate, startTime);
                                 tail = true;
                             } else if ((endTime === 0 ? MS_PER_DAY : endTime ) < eventStartTime) {
-                                eventStartDate = getDate(start);
-                                eventStartDate = kendo.date.addDays(eventStartDate,1);
-                                setTime(eventStartDate, startTime);
+                                adjustedStartDate = getDate(start);
+                                adjustedStartDate = kendo.date.addDays(adjustedStartDate,1);
+                                setTime(adjustedStartDate, startTime);
                                 tail = true;
                             }
 
                             if ((endTime === 0 ? MS_PER_DAY : endTime ) < eventEndTime) {
-                                eventEndDate = getDate(end);
-                                setTime(eventEndDate, endTime);
+                                adjustedEndDate = getDate(end);
+                                setTime(adjustedEndDate, endTime);
                                 head = true;
                             } else if ((endTime === 0 ? MS_PER_DAY : endTime ) < startTime) {
-                                eventEndDate = getDate(end);
-                                eventEndDate = kendo.date.addDays(eventEndDate,-1);
-                                setTime(eventEndDate, endTime);
+                                adjustedEndDate = getDate(end);
+                                adjustedEndDate = kendo.date.addDays(adjustedEndDate,-1);
+                                setTime(adjustedEndDate, endTime);
                                 head = true;
                             }
                         }
 
                         occurrence = event.clone({
-                            start: eventStartDate ? eventStartDate : start,
-                            end: eventEndDate ? eventEndDate : end,
-                            startTime: eventStartDate ? kendo.date.toUtcTime(eventStartDate) : event.startTime,
-                            endTime:  eventEndDate ? kendo.date.toUtcTime(eventEndDate) : event.endTime,
+                            start: adjustedStartDate ? adjustedStartDate : start,
+                            end: adjustedEndDate ? adjustedEndDate : end,
+                            startTime: adjustedStartDate ? kendo.date.toUtcTime(adjustedStartDate) : event.startTime,
+                            endTime:  adjustedEndDate ? kendo.date.toUtcTime(adjustedEndDate) : event.endTime,
                             isAllDay: false
                         });
 
@@ -722,6 +729,7 @@ var __meta__ = {
 
                             if (rangeCount > 0) {
                                 var element;
+                                //support horizontal grouping?
                                 var range = ranges[0];
 
                                 element = this._createEventElement(occurrence, event, true, range.head || head, range.tail || tail);
@@ -784,101 +792,57 @@ var __meta__ = {
         },
 
         _positionEvent: function(event, element, slotRange) {
-            //todo
-            //var slotWidth = slotRange.innerWidth();
-            var slotWidth = slotRange.start.clientWidth;
-            var startIndex = slotRange.start.index;
-            var endIndex = slotRange.end.index;
-
-            var allDayEvents = SchedulerView.collidingEvents(slotRange.events(), startIndex, endIndex);
-
-            var currentColumnCount = this._headerColumnCount || 0;
-
-            var leftOffset = 2;
-
-            var rightOffset = startIndex !== endIndex ? 5 : 4;
-
             var start = event.startTime || event.start;
             var end = event.endTime || event.end;
 
             var rect = slotRange.outerRect(start, end, false);
             rect.top = slotRange.start.offsetTop;
 
-            var height = rect.bottom - rect.top - 2; /* two times border width */
             var width = rect.right - rect.left -2;
-            //console.log(width);
 
             if (width < 0) {
                 width = 0;
             }
 
-            if (height < 0) {
-                height = 0;
-            }
-
-            //console.log(kendo.format("width: {0}, height: {1}", width, height));
-            var eventHeight = height;
-
             element
                 .css({
                     left: rect.left,
-                    width: width,
-                    height: "20px"
+                    width: width
                 });
 
+            this._arrangeRows(element, slotRange);
+        },
+
+        _arrangeRows: function (element, slotRange) {
+            var startIndex = slotRange.start.index;
+            var endIndex = slotRange.end.index;
+            var events = SchedulerView.collidingEvents(slotRange.events(), startIndex, endIndex);
+            var currentColumnCount = this._headerColumnCount || 0;
+
             slotRange.addEvent({ slotIndex: startIndex, start: startIndex, end: endIndex, element: element });
+            events.push({ slotIndex: startIndex, start: startIndex, end: endIndex, element: element });
 
-            //allday events only ?
-            allDayEvents.push({ slotIndex: startIndex, start: startIndex, end: endIndex, element: element });
-
-            var rows = SchedulerView.createRows(allDayEvents);
+            var rows = SchedulerView.createRows(events);
 
             if (rows.length && rows.length > currentColumnCount) {
                 this._headerColumnCount = rows.length;
             }
 
-            var top = slotRange.start.offsetTop;
-            //console.log("row length " + rows.length);
+            var slotHeight = slotRange.start.element.clientHeight;
+
+            var eventBottomOffset = slotHeight * 0.10;
+            var rowHeight = (slotHeight - eventBottomOffset) / rows.length;
+
             for (var idx = 0, length = rows.length; idx < length; idx++) {
                 var rowEvents = rows[idx].events;
-                var date = new Date();
 
                 for (var j = 0, eventLength = rowEvents.length; j < eventLength; j++) {
                     $(rowEvents[j].element).css({
-                        //need update
-                        top: top + idx * eventHeight
+                        top:  slotRange.start.offsetTop + idx * rowHeight + 2,
+                        height: rowHeight - 4
                     });
                 }
             }
-
-            //var start = event.startTime || event.start;
-            //var end = event.endTime || event.end;
-            //
-            //var rect = slotRange.innerRect(start, end, false);
-            //rect.top = slotRange.start.offsetTop;
-            //
-            //var height = rect.bottom - rect.top - 2; /* two times border width */
-            //var width = rect.right - rect.left -2;
-            //
-            //if (width < 0) {
-            //    width = 0;
-            //}
-            //
-            //if (height < 0) {
-            //    height = 0;
-            //}
-            //
-            ////need update
-            //element.css( {
-            //    top:rect.top,
-            //    height: height,
-            //    width: width,
-            //    left: rect.left,
-            //    "min-height": 10 //update?
-            //} );
-            //
-            ////JUST ADDED - > need update as it should align the events by rows not by columns
-            //this._arrangeColumns(element, rect.top, element[0].clientHeight, slotRange);
         },
 
         _groupCount: function() {
