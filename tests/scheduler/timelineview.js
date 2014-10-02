@@ -527,6 +527,29 @@
         ok(view.element.find(".k-event").length);
     });
 
+    test("event is rendered correctly when starts at day start and end at day end", function() {
+        var view = setup({
+            date: new Date(2013, 1, 2),
+            startTime: new Date(2013, 1, 2, 10, 0, 0, 0),
+            endTime: new Date(2013, 1, 2, 18, 0, 0, 0),
+            numberOfDays: 2
+        });
+
+        view.render([new SchedulerEvent({
+            uid: "foo",
+            title: "",
+            start: new Date(2013, 1, 2, 0, 0, 0),
+            end: new Date(2013, 1, 3, 0, 0, 0),
+            isAllDay: false,
+            id: "2"
+        })]);
+
+        equal(view.groups[0].getTimeSlotCollection(0).events()[0].start, 0);
+        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 7);
+
+        ok(view.element.find(".k-event").length);
+    });
+
     test("event between two dates is rendered correctly", function() {
         var view = setup({
             date: new Date(2013, 1, 2),

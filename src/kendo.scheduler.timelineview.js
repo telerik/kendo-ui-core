@@ -691,26 +691,28 @@ var __meta__ = {
                                 head = true;
                             }
                         } else {
+                            endTime = endTime === 0 ? MS_PER_DAY : endTime;
+
                             if (startTime > eventStartTime) {
                                 adjustedStartDate = getDate(start);
                                 setTime(adjustedStartDate, startTime);
                                 tail = true;
-                            } else if ((endTime === 0 ? MS_PER_DAY : endTime ) < eventStartTime) {
+                            } else if (endTime < eventStartTime) {
                                 adjustedStartDate = getDate(start);
-                                adjustedStartDate = kendo.date.addDays(adjustedStartDate,1);
+                                adjustedStartDate = kendo.date.addDays(adjustedStartDate, 1);
                                 setTime(adjustedStartDate, startTime);
                                 tail = true;
                             }
 
-                            if ((endTime === 0 ? MS_PER_DAY : endTime ) < eventEndTime) {
+                            if (endTime < eventEndTime) {
                                 adjustedEndDate = getDate(end);
                                 setTime(adjustedEndDate, endTime);
                                 head = true;
-                            } else if ((endTime === 0 ? MS_PER_DAY : endTime ) < startTime) {
+                            } else if (eventEndTime < startTime) {
                                 adjustedEndDate = getDate(end);
                                 adjustedEndDate = kendo.date.addDays(adjustedEndDate,-1);
                                 setTime(adjustedEndDate, endTime);
-                                head = true;
+                                head = eventEndTime === 0 ? false : true;
                             }
                         }
 
