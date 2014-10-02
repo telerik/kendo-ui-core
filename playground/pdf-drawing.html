@@ -114,7 +114,7 @@
           .moveTo(100, 200).curveTo([100, 100], [250, 100], [250, 200]).close()
           .moveTo(150, 150).lineTo(200, 150).close();
       multiPath.stroke().dashType = "dash";
-      multiPath.opacity = 0.3;
+      multiPath.opacity(0.3);
       main.append(multiPath);
 
       var group = new d.Group();

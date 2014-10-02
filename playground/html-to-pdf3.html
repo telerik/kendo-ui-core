@@ -46,12 +46,16 @@
         border-bottom-right-radius: 50px 25px;
         border-color: rgba(255, 0, 0, 0.5) rgba(0, 255, 0, 0.5) rgba(0, 0, 255, 0.5) rgba(0, 0, 0, 0.5);
         border-style: solid;
-        padding: 1em;
         margin: 1em;
         color: #000;
         box-sizing: border-box;
         transform: rotate(5deg);
         text-align: justify;
+      }
+
+      .test .inner {
+        padding: 1em;
+        background: rgba(200, 200, 40, 0.7);
       }
 
       .test span {
@@ -107,7 +111,8 @@
                   border-bottom-right-radius: 60px 40px;
                   background: yellow;" />
 
-      <div style="width: 30em; font: 14px/24px verdana; position: relative; z-index: 10; direction: ltr; text-indent: 4em" class="test">
+      <div style="width: 30em; font: 14px/24px verdana; position: relative; z-index: 10; direction: ltr; text-indent: 4em; overflow: hidden" class="test">
+        <div class="inner">
         <span>
           This is a <u style="color: red">nonsensical</u> <strike style="color: green">document, but syntactically</strike> valid HTML 4.0. All
           100% conformant CSS1 agents should be able to render the document
@@ -118,6 +123,7 @@
           return to the <A HREF="sec5526c.htm"
           style="text-decoration:none">parent page</A>.
         </span>
+        </div>
       </div>
 
       <h1><u>Underline</u> <strike>line-through</strike></h1>

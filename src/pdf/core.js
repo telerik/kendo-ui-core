@@ -70,7 +70,7 @@
                         }
                         // make sure it doesn't end up in exponent notation.
                         if (x != Math.floor(x)) {
-                            x = x.toFixed(7).replace(/0+$/, "");
+                            x = x.toFixed(7).replace(/\.?0+$/, "");
                         }
                     }
                     x += "";
