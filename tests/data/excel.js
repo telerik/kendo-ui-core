@@ -186,7 +186,7 @@ test("creates group rows", function() {
     });
 
     testWorkbook({ columns: [ { field: "foo" }, { field: "bar" } ], dataSource: dataSource }, function(book) {
-        equal(book.sheets[0].rows[1].type, "group");
+        equal(book.sheets[0].rows[1].type, "group-header");
     });
 });
 
@@ -233,6 +233,45 @@ test("uses groupHeaderTemplate for the group cell value", function() {
     });
 });
 
+test("creates row when groupFooterTemplate is set", function() {
+    dataSource = new DataSource({
+       data: [
+           { foo: "foo", bar: "bar" }
+       ],
+       group: { field: "foo", aggregates: [ { field: "foo", aggregate: "count" }]  }
+    });
+
+    testWorkbook({ columns: [ { field: "foo", groupFooterTemplate: "#=count#" }, { field: "bar" } ], dataSource: dataSource }, function(book) {
+        equal(book.sheets[0].rows.length, 4);
+    });
+});
+
+test("sets row type to 'group-footer' when groupFooterTemplate is set", function() {
+    dataSource = new DataSource({
+       data: [
+           { foo: "foo", bar: "bar" }
+       ],
+       group: { field: "foo", aggregates: [ { field: "foo", aggregate: "count" }]  }
+    });
+
+    testWorkbook({ columns: [ { title: "Foo", field: "foo", groupFooterTemplate: "#=count#" }, { field: "bar" } ], dataSource: dataSource }, function(book) {
+        equal(book.sheets[0].rows[3].type, "group-footer");
+    });
+});
+
+test("uses groupFooterTemplate", function() {
+    dataSource = new DataSource({
+       data: [
+           { foo: "foo", bar: "bar" }
+       ],
+       group: { field: "foo", aggregates: [ { field: "foo", aggregate: "count" }]  }
+    });
+
+    testWorkbook({ columns: [ { title: "Foo", field: "foo", groupFooterTemplate: "#=count#" }, { field: "bar" } ], dataSource: dataSource }, function(book) {
+        equal(book.sheets[0].rows[3].cells[1].value, 1);
+    });
+});
+
 test("sets colSpan of the group cell to the number of columns", function() {
     dataSource = new DataSource({
        data: [
@@ -271,8 +310,8 @@ test("creates group rows for nested group items", function() {
     });
 
     testWorkbook({ columns: [ { field: "foo" }, { field: "bar" } ], dataSource: dataSource }, function(book) {
-        equal(book.sheets[0].rows[1].type, "group");
-        equal(book.sheets[0].rows[2].type, "group");
+        equal(book.sheets[0].rows[1].type, "group-header");
+        equal(book.sheets[0].rows[2].type, "group-header");
         equal(book.sheets[0].rows[3].type, "data");
     });
 });

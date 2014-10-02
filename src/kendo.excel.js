@@ -42,20 +42,19 @@ kendo.data.ExcelExporter = kendo.Class.extend({
 
         return promise.then($.proxy(function() {
             return {
-                sheets: [
-                    {
-                       columns: this._columns(),
-                       rows: this._rows(),
-                       freezePane: this._freezePane(),
-                       filter: this._filter()
-                    }
-                ]
+                sheets: [ {
+                   columns: this._columns(),
+                   rows: this._rows(),
+                   freezePane: this._freezePane(),
+                   filter: this._filter()
+                } ]
             };
         }, this));
     },
     _prepareColumn: function(column) {
         return $.extend({}, column, {
-            groupHeaderTemplate: kendo.template(column.groupHeaderTemplate || "${title}: ${value}")
+            groupHeaderTemplate: kendo.template(column.groupHeaderTemplate || "${title}: ${value}"),
+            groupFooterTemplate: column.groupFooterTemplate ? kendo.template(column.groupFooterTemplate) : null
         });
     },
     _filter: function() {
@@ -89,14 +88,15 @@ kendo.data.ExcelExporter = kendo.Class.extend({
                 var title = column && column.title ? column.title : dataItem.field;
                 var template = column ? column.groupHeaderTemplate : null;
                 var value = title + ": " + dataItem.value;
+                var group = $.extend({}, {
+                        title: title,
+                        field: dataItem.field,
+                        value: dataItem.value,
+                        aggregates: dataItem.aggregates,
+                    }, dataItem.aggregates[dataItem.field]);
 
                 if (template) {
-                    value = template($.extend({}, {
-                            title: title,
-                            field: dataItem.field,
-                            value: dataItem.value
-                        }, dataItem.aggregates[dataItem.field]
-                    ));
+                    value = template(group);
                 }
 
                 cells.push( {
@@ -109,11 +109,11 @@ kendo.data.ExcelExporter = kendo.Class.extend({
                 var rows = this._dataRows(dataItem.items, level + 1);
 
                 rows.unshift({
-                    type: "group",
+                    type: "group-header",
                     cells: cells
                 });
 
-                return rows;
+                return rows.concat(this._footer(dataItem, level+1));
             } else {
                 return {
                     type: "data",
@@ -121,6 +121,40 @@ kendo.data.ExcelExporter = kendo.Class.extend({
                 };
             }
         }, this));
+
+        return rows;
+    },
+    _footer: function(dataItem, level) {
+        var rows = [];
+        var footer = false;
+
+        var cells = $.map(this.columns, function(column) {
+            if (column.groupFooterTemplate) {
+                footer = true;
+                return {
+                    background: "#dfdfdf",
+                    color: "#333",
+                    value: column.groupFooterTemplate(dataItem.aggregates[column.field])
+                }
+            } else {
+                return {
+                    background: "#dfdfdf",
+                    color: "#333"
+                };
+            }
+        });
+
+        if (footer) {
+            rows.push({
+                type: "group-footer",
+                cells: $.map(new Array(level), function() {
+                    return {
+                        background: "#dfdfdf",
+                        color: "#333",
+                    };
+                }).concat(cells)
+            });
+        }
 
         return rows;
     },
