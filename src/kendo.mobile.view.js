@@ -40,6 +40,8 @@ var __meta__ = {
     }
 
     function compileToWidget(element, scopeSetup) {
+        element.attr("data-role", element[0].tagName.toLowerCase().replace('kendo-mobile-', ''));
+
         angular.element(element).injector().invoke(function($compile) {
             var scope = angular.element(element).scope();
             if (scopeSetup) {
@@ -597,8 +599,6 @@ var __meta__ = {
 
         _createView: function(element) {
             if (this.$angular) {
-                element.attr("data-role", element[0].tagName.toLowerCase().replace('kendo-mobile-', ''));
-
                 var that = this;
 
                 return compileToWidget(element, function(scope) {

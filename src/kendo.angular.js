@@ -528,7 +528,9 @@ var __meta__ = {
 
     var MANUAL_DIRECTIVES = [
         'MobileApplication',
-        'MobileView'
+        'MobileView',
+        'MobileLayout',
+        'MobileNavBar',
     ];
 
     function createDirectives(klass, isMobile) {
@@ -920,8 +922,16 @@ var __meta__ = {
         };
     }).directive('kendoMobileLayout', function() {
         return {
+            link: {
+                pre: function (scope, element, attrs, controllers) {
+                    createWidget(scope, element, attrs, 'kendoMobileLayout', 'kendoMobileLayout');
+                }
+            }
+        };
+    }).directive('kendoMobileNavBar', function() {
+        return {
             link: function(scope, element, attrs, controllers) {
-                createWidget(scope, element, attrs, 'kendoMobileLayout', 'kendoMobileLayout');
+                createWidget(scope, element, attrs, 'kendoMobileNavBar', 'kendoMobileNavBar');
             }
         };
     });
