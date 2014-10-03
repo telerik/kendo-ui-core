@@ -332,4 +332,13 @@ test("window title can be localized", function() {
     equal($('.k-window .k-window-title').text(), "bar");
 });
 
+test("quotes are html encoded", function() {
+    var range = createRangeFromText(editor, '|foo|');
+    execImageCommandOnRange(range);
+
+    $('#k-editor-image-url').val('foo.jpg"onmousemove="foo();');
+    $('.k-dialog-insert').click();
+    equal(editor.value(), '<img alt="" src="foo.jpg&quot;onmousemove=&quot;foo();" />');
+});
+
 }());

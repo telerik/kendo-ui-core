@@ -336,7 +336,7 @@ var Serializer = {
                 if (name == 'style') {
                     styleAttr(value || node.style.cssText);
                 } else if (name == 'src' || name == 'href') {
-                    result.push(node.getAttribute(name, 2));
+                    result.push(kendo.htmlEncode(node.getAttribute(name, 2)));
                 } else {
                     result.push(dom.fillAttrs[name] ? name : value);
                 }
