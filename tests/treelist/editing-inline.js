@@ -29,21 +29,21 @@
         instance = dom.data("kendoTreeList");
     }
 
-    test("editRow initializes Editable", function() {
+    test("editRow initializes editor", function() {
         createTreeList();
 
         instance.editRow(instance.content.find("tr").first());
 
-        ok(instance.editable instanceof kendo.ui.Editable);
+        ok(instance.editor.editable instanceof kendo.ui.Editable);
         ok(instance.content.find("tr").first().data("kendoEditable"));
     });
 
-    test("editRow initializes Editable from jQuery selector", function() {
+    test("editRow initializes editor from jQuery selector", function() {
         createTreeList();
 
         instance.editRow("tr:first");
 
-        ok(instance.editable instanceof kendo.ui.Editable);
+        ok(instance.editor.editable instanceof kendo.ui.Editable);
         ok(instance.content.find("tr").first().data("kendoEditable"));
     });
 
@@ -55,7 +55,7 @@
         ok(instance.content.find("tr").first().hasClass("k-grid-edit-row"));
     });
 
-    test("editRow sets model to Editable", function() {
+    test("editRow sets model to editor", function() {
         createTreeList();
 
         var row = instance.content.find("tr").first();
@@ -63,32 +63,32 @@
 
         instance.editRow(row);
 
-        strictEqual(instance.editable.options.model, dataItem);
+        strictEqual(instance.editor.model, dataItem);
     });
 
-    test("editRow destroys previous Editable", function() {
+    test("editRow destroys previous editor", function() {
         createTreeList();
 
         instance.editRow(instance.content.find("tr").first());
         instance.editRow(instance.content.find("tr").last());
 
-        ok(!instance.content.find("tr").first().data("kendoEditable"), "first Editable is not destroyed");
-        ok(instance.content.find("tr").last().data("kendoEditable"), "second Editable is not created");
+        ok(!instance.content.find("tr").first().data("kendoEditable"), "first editor is not destroyed");
+        ok(instance.content.find("tr").last().data("kendoEditable"), "second editor is not created");
     });
 
-    test("editing row passes fields to Editable", function() {
+    test("editing row passes fields to editor", function() {
         createTreeList();
 
         instance.editRow(instance.content.find("tr").first());
 
-        var fields = instance.editable.options.fields;
+        var fields = instance.editor.fields;
 
         equal(fields.length, 2);
         equal(fields[0].field, "id");
         equal(fields[1].field, "parentId");
     });
 
-    test("editing row passes column format to Editable", function() {
+    test("editing row passes column format to editor", function() {
         createTreeList({
             columns: [
                 { field: "id", format: "{0}" },
@@ -98,12 +98,12 @@
 
         instance.editRow(instance.content.find("tr").first());
 
-        var fields = instance.editable.options.fields;
+        var fields = instance.editor.fields;
 
         equal(fields[0].format, "{0}");
     });
 
-    test("editing row passes column editor to Editable", function() {
+    test("editing row passes column editor to editor", function() {
         createTreeList({
             columns: [
                 { field: "id", editor: $.noop },
@@ -113,7 +113,7 @@
 
         instance.editRow(instance.content.find("tr").first());
 
-        var fields = instance.editable.options.fields;
+        var fields = instance.editor.fields;
 
         ok(fields[0].editor);
     });
@@ -128,13 +128,13 @@
 
         instance.editRow(instance.content.find("tr").first());
 
-        var fields = instance.editable.options.fields;
+        var fields = instance.editor.fields;
 
         equal(fields.length, 1);
         equal(fields[0].field, "parentId");
     });
 
-    test("read-only fields are not passed to Editable", function() {
+    test("read-only fields are not passed to editor", function() {
         createTreeList({
             dataSource: {
                 schema: {
@@ -150,7 +150,7 @@
 
         instance.editRow(instance.content.find("tr").first());
 
-        var fields = instance.editable.options.fields;
+        var fields = instance.editor.fields;
 
         equal(fields.length, 1);
         equal(fields[0].field, "parentId");
@@ -161,10 +161,10 @@
 
         instance.editRow(instance.content.find("tr").first());
 
-        strictEqual(instance.editable.options.clearContainer, false);
+        strictEqual(instance.editor.options.clearContainer, false);
     });
 
-    test("editable cells are prepared for editors", function() {
+    test("editor cells are prepared for editors", function() {
         createTreeList();
 
         var row = instance.content.find("tr").first();
@@ -197,13 +197,13 @@
         instance.editRow(instance.content.find("tr").first());
     });
 
-    test("cancelRow destroy current editable", function() {
+    test("cancelRow destroy current editor", function() {
         createTreeList();
 
         instance.editRow("tr:first");
         instance.cancelRow();
 
-        ok(!instance.editable);
+        ok(!instance.editor);
         ok(!instance.content.find("tr:first").data("kendoEditable"));
     });
 
@@ -260,17 +260,17 @@
         instance.editRow("tr:first");
         instance.destroy();
 
-        ok(!instance.editable);
+        ok(!instance.editor);
         ok(!dom.find("tbody>tr:first").data("kendoEditable"));
     });
 
-    test("widget refresh destroys editable", function() {
+    test("widget refresh destroys editor", function() {
         createTreeList();
 
         instance.editRow("tr:first");
         instance.refresh();
 
-        ok(!instance.editable);
+        ok(!instance.editor);
         ok(!dom.find("tbody>tr:first").data("kendoEditable"));
         equal(dom.find(".k-grid-edit-row").length, 0);
     });
@@ -287,11 +287,11 @@
 
         instance.editRow("tr:first");
 
-        var editable = instance.editable;
+        var editor = instance.editor;
 
         instance.dataSource.at(0).set("text", "baz");
 
-        strictEqual(editable, instance.editable);
+        strictEqual(editor, instance.editor);
     });
 
     test("saveRow calls data source sync method", function() {
@@ -358,7 +358,7 @@
         instance.saveRow();
     });
 
-    test("save event doesn't trigger if there is no editable row", function() {
+    test("save event doesn't trigger if there is no editor row", function() {
         var wasCalled = false;
         createTreeList({
             save: function() {
@@ -509,7 +509,7 @@
         instance.removeRow(instance.content.find("tr:last"));
 
         ok(!instance.content.find("tr:first").data("kendoEditable"));
-        ok(!instance.editable);
+        ok(!instance.editor);
     });
 
     test("addRow adds model as first item in the view", function() {
@@ -600,7 +600,7 @@
         ok(row.data("kendoEditable"));
     });
 
-    test("doesn't create new item if there are is editable with validation errors", function() {
+    test("doesn't create new item if there are is editor with validation errors", function() {
         var ds = new TreeListDataSource({
             data: [
                 { id: 1, text: "foo", parentId: null }

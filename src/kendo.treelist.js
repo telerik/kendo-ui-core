@@ -396,6 +396,63 @@ var __meta__ = {
         return spans;
     }
 
+    var Editor = kendo.Observable.extend({
+        init: function(element, options) {
+            kendo.Observable.fn.init.call(this);
+
+            this.element = element;
+
+            this.options = extend(true, {}, this.options, options);
+
+            this.model = this.options.model;
+
+            this.fields = this.fields(this.options.columns);
+
+            this.createEditable();
+        },
+
+        createEditable: function() {
+            var options = this.options;
+
+            this.editable = new ui.Editable(this.element, {
+                fields: this.fields,
+                target: options.target,
+                clearContainer: options.clearContainer,
+                model: this.model
+            });
+        },
+
+        fields: function(columns) {
+            var fields = [];
+            var idx, length, field, column;
+
+            for (idx = 0, length = columns.length; idx < length; idx++) {
+                column = columns[idx];
+                field = column.field;
+
+                if (field && this.model.editable(field)) {
+                    fields.push({
+                        field: field,
+                        format: column.format,
+                        editor: column.editor
+                    });
+                }
+            }
+
+            return fields;
+        },
+
+        end: function() {
+            return this.editable.end();
+        },
+
+        destroy: function() {
+            this.editable.destroy();
+            this.editable.element.find("[" + kendo.attr("container-for") + "]").empty();
+            this.model = this.element = this.columns = this.editable = null;
+        }
+    });
+
     var TreeList = Widget.extend({
         init: function(element, options) {
             Widget.fn.init.call(this, element, options);
@@ -456,7 +513,7 @@ var __meta__ = {
         refresh: function(e) {
             e = e || {};
 
-            if (e.action == "itemchange" && this.editable) {
+            if (e.action == "itemchange" && this.editor) {
                 return;
             }
 
@@ -506,7 +563,7 @@ var __meta__ = {
             dataSource.unbind(ERROR, this._errorHandler);
             dataSource.unbind(PROGRESS, this._progressHandler);
 
-            this._destroyEditable();
+            this._destroyEditor();
 
             this.element.off(NS);
 
@@ -1142,7 +1199,7 @@ var __meta__ = {
             this._createEditor(model);
 
             this.trigger(EDIT, {
-                container: this.editable.element,
+                container: this.editor.element,
                 model: model
             });
         },
@@ -1154,19 +1211,19 @@ var __meta__ = {
         },
 
         saveRow: function() {
-            var editable = this.editable;
+            var editor = this.editor;
             var args;
 
-            if (!editable) {
+            if (!editor) {
                 return ;
             }
 
             args = {
-                model: this.dataItem(editable.element),
-                container: editable.element
+                model: editor.model,
+                container: editor.element
             };
 
-            if (editable.end() && !this.trigger(SAVE, args)) {
+            if (editor.end() && !this.trigger(SAVE, args)) {
                 this.dataSource.sync();
             }
         },
@@ -1175,9 +1232,9 @@ var __meta__ = {
             var index = 0;
             var model = {};
             var row;
-            var editable = this.editable;
+            var editor = this.editor;
 
-            if (editable && !editable.end()) {
+            if (editor && !editor.end()) {
                 return;
             }
 
@@ -1212,12 +1269,12 @@ var __meta__ = {
 
         _cancelEditor: function() {
             var model;
-            var editable = this.editable;
+            var editor = this.editor;
 
-            if (editable) {
-                model = this.dataItem(editable.element);
+            if (editor) {
+                model = editor.model;
 
-                this._destroyEditable();
+                this._destroyEditor();
 
                 this.dataSource.cancelChanges(model);
 
@@ -1225,46 +1282,24 @@ var __meta__ = {
             }
         },
 
-        _destroyEditable: function() {
-            if (!this.editable) {
+        _destroyEditor: function() {
+            if (!this.editor) {
                 return;
             }
 
-            this.editable.destroy();
-            this.editable.element.find("[" + kendo.attr("container-for") + "]").empty();
-            this.editable = null;
+            this.editor.destroy();
+            this.editor = null;
         },
 
         _createEditor: function(model) {
             var row = this.content.find("[" + kendo.attr("uid") + "=" + model.uid + "]");
 
-            this.editable = new ui.Editable(row, {
-                fields: this._editableFields(model),
+            this.editor = new Editor(row, {
+                columns: this.columns,
+                model: model,
                 target: this,
-                clearContainer: false,
-                model: model
+                clearContainer: false
             });
-        },
-
-        _editableFields: function(model) {
-            var fields = [];
-            var columns = this.columns;
-            var idx, length, field, column;
-
-            for (idx = 0, length = columns.length; idx < length; idx++) {
-                column = columns[idx];
-                field = column.field;
-
-                if (field && model.editable(field)) {
-                    fields.push({
-                        field: field,
-                        format: column.format,
-                        editor: column.editor
-                    });
-                }
-            }
-
-            return fields;
         }
     });
 
