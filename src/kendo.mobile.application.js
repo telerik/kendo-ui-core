@@ -154,7 +154,6 @@ var __meta__ = {
             var paneOptions = $.extend({}, this.options);
             delete paneOptions.name;
 
-
             var that = this,
                 startHistory = function() {
                     that.pane = new Pane(that.element, paneOptions);
@@ -166,7 +165,7 @@ var __meta__ = {
 
                     that._startHistory();
                     that.trigger(INIT);
-                }
+                };
 
             if (this.options.$angular) {
                 setTimeout(startHistory);

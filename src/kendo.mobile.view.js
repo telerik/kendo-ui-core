@@ -15,6 +15,7 @@ var __meta__ = {
 
 (function($, undefined) {
     var kendo = window.kendo,
+        angular = window.angular,
         mobile = kendo.mobile,
         ui = mobile.ui,
         attr = kendo.attr,
@@ -606,7 +607,7 @@ var __meta__ = {
                         defaultTransition: that.transition,
                         loader: that.loader,
                         container: that.container,
-                        getLayout: that.getLayoutProxy,
+                        getLayout: that.getLayoutProxy
                     };
                 });
             } else {
@@ -644,7 +645,7 @@ var __meta__ = {
             var success = true;
 
             if (typeof response === "object") {
-                success = response.status == 0 && response.responseText.length > 0;
+                success = response.status === 0 && response.responseText.length > 0;
                 response = response.responseText;
             }
 
@@ -660,13 +661,14 @@ var __meta__ = {
         },
 
         _setupLayouts: function(element) {
-            var that = this;
+            var that = this,
+                layout;
 
             element.children(that._locate("layout")).each(function() {
                 if (that.$angular) {
-                    var layout = compileToWidget($(this));
+                    layout = compileToWidget($(this));
                 } else {
-                    var layout = kendo.initWidget($(this), {}, ui.roles);
+                    layout = kendo.initWidget($(this), {}, ui.roles);
                 }
 
                 var platform = layout.options.platform;
