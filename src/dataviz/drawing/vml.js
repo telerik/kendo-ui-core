@@ -53,7 +53,7 @@
         type: "vml",
 
         draw: function(element) {
-            this._root.load([element], null, 1);
+            this._root.load([element], null);
         },
 
         clear: function() {
@@ -544,7 +544,6 @@
             this.fill = this.createFillNode(srcElement, transform, opacity);
             this.stroke = new StrokeNode(srcElement, opacity);
             this.transform = this.createTransformNode(srcElement, transform);
-            this.opacity = opacity;
 
             ObserverNode.fn.init.call(this, srcElement);
         },
