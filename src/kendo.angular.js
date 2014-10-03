@@ -530,7 +530,7 @@ var __meta__ = {
         'MobileApplication',
         'MobileView',
         'MobileLayout',
-        'MobileNavBar',
+        'MobileNavBar'
     ];
 
     function createDirectives(klass, isMobile) {
@@ -915,9 +915,17 @@ var __meta__ = {
         };
     }).directive('kendoMobileView', function() {
         return {
-            link: function(scope, element, attrs, controllers) {
-                attrs.defaultOptions = scope.viewOptions;
-                createWidget(scope, element, attrs, 'kendoMobileView', 'kendoMobileView');
+            link: {
+                scope: true,
+                pre: function(scope, element, attrs, controllers) {
+                    attrs.defaultOptions = scope.viewOptions;
+                    scope.view = createWidget(scope, element, attrs, 'kendoMobileView', 'kendoMobileView');
+                },
+
+                post: function(scope) {
+                    scope.view._layout();
+                    scope.view._scroller();
+                }
             }
         };
     }).directive('kendoMobileLayout', function() {
@@ -934,8 +942,44 @@ var __meta__ = {
                 createWidget(scope, element, attrs, 'kendoMobileNavBar', 'kendoMobileNavBar');
             }
         };
-    });
+    }).directive('kendoViewTitle', function(){
+        return {
+            restrict : "E",
+            replace  : true,
+            template : function(element, attributes) {
+                return "<span data-" + kendo.ns + "role='view-title'>" + element.html() + "</span>";
+            }
+        };
+    }).directive('kendoMobileHeader', function() {
+            return {
+                restrict: "E",
+                link: function(scope, element, attrs, controllers) {
+                    element.addClass("km-header").attr("data-role", "header");
+                }
+            };
+      })
+      .directive('kendoMobileFooter', function() {
+            return {
+                restrict: 'E',
+                link: function(scope, element, attrs, controllers) {
+                    element.addClass("km-footer").attr("data-role", "footer");
+                }
+            };
+      });
 
+    angular.forEach(['align', 'icon', 'rel', 'transition'], function(attr) {
+          var kAttr = "k" + attr.slice(0, 1).toUpperCase() + attr.slice(1);
+
+          module.directive(kAttr, function() {
+              return {
+                  restrict: 'A',
+                  priority: 2,
+                  link: function(scope, element, attrs) {
+                      element.attr(kendo.attr(attr), scope.$eval(attrs[kAttr]));
+                  }
+              };
+          });
+    });
 
 })(window.kendo.jQuery, window.angular);
 

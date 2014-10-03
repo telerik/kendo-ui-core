@@ -81,12 +81,14 @@ var __meta__ = {
             this.transition = this.transition || this.defaultTransition;
 
             this._id();
-            this._layout();
-            this._overlay();
-            this._scroller();
 
             if (!this.options.$angular) {
+                this._layout();
+                this._overlay();
+                this._scroller();
                 this._model();
+            } else {
+                this._overlay();
             }
         },
 
