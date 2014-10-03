@@ -19,6 +19,8 @@ namespace Kendo.Mvc.UI
         
         public bool? Entities { get; set; }
         
+        public bool? Scripts { get; set; }
+        
         //<< Fields
 
         protected override void Serialize(IDictionary<string, object> json)
@@ -28,6 +30,11 @@ namespace Kendo.Mvc.UI
             if (Entities.HasValue)
             {
                 json["entities"] = Entities;
+            }
+                
+            if (Scripts.HasValue)
+            {
+                json["scripts"] = Scripts;
             }
                 
         //<< Serialization

@@ -565,7 +565,7 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Fields
         
         /// <summary>
-        /// Sets the field of the data item that provides the image URL of the treeview nodes.
+        /// Sets the field of the data item that provides the image URL of the TreeView nodes.
         /// </summary>
         /// <param name="value">The value that configures the dataimageurlfield.</param>
         public TreeViewBuilder DataImageUrlField(string value)

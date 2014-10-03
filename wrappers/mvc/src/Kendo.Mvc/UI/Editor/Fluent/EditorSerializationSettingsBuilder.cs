@@ -30,6 +30,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
         
+        /// <summary>
+        /// Indicates whether inline scripts will be serialized and posted to the server.
+        /// </summary>
+        /// <param name="value">The value that configures the scripts.</param>
+        public EditorSerializationSettingsBuilder Scripts(bool value)
+        {
+            container.Scripts = value;
+
+            return this;
+        }
+        
         //<< Fields
     }
 }
