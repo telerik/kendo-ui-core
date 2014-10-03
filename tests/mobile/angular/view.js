@@ -67,5 +67,45 @@
         var app = kendo.mobile.application;
         equal(app.view().header.text(), "Foo");
     });
+
+    ngTest("reloads remote view if reload attr is set",
+    1,
+    function() {
+        $.mockjax({
+            url: "page2.html",
+            responseText: '<kendo-mobile-view reload=true>Page 2</kendo-mobile-view>'
+        });
+
+        QUnit.fixture.html("<div kendo-mobile-application><kendo-mobile-view></kendo-mobile-view></div>");
+    },
+    function() {
+        var app = kendo.mobile.application;
+
+        var view,
+            callback3 = function(e) {
+                start();
+                notEqual(view, e.view);
+            },
+            callback2 = function(e) {
+                app.pane.one("viewShow", callback3);
+
+                setTimeout(function() {
+                    app.navigate("page2.html");
+                });
+            },
+            callback1 = function(e) {
+                view = e.view;
+                app.pane.one("viewShow", callback2);
+
+                setTimeout(function() {
+                    app.navigate("#/");
+                });
+            };
+
+        stop();
+        app.pane.one("viewShow", callback1);
+        app.navigate("page2.html");
+    });
+
 }());
 
