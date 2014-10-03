@@ -148,6 +148,10 @@ var __meta__ = {
                 return this.element.val();
             }
 
+            if (value === null) {
+                value = "";
+            }
+
             if (!emptyMask) {
                 element.val(value);
                 return;
