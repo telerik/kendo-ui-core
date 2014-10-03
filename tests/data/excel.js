@@ -130,6 +130,27 @@ test("exports current page", 2, function() {
     });
 });
 
+test("exports all pages if allPages is set", 1, function() {
+    var options = {
+        columns: [ { field: "foo" } ],
+        allPages: true,
+        dataSource: new kendo.data.DataSource({
+            data: [
+               { foo: "foo" },
+               { foo: "bar" }
+            ],
+            pageSize: 1
+        })
+    };
+
+    options.dataSource.read();
+    options.dataSource.page(2);
+
+    testWorkbook(options, function(book) {
+        equal(book.sheets[0].rows.length, 3);
+    });
+});
+
 test("exports current pageSize", 2, function() {
     var options = {
         columns: [ { field: "foo" } ],

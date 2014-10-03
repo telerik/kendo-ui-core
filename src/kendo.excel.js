@@ -27,9 +27,9 @@ kendo.data.ExcelExporter = kendo.Class.extend({
                 {},
                 dataSource.options,
                 {
-                    page: dataSource.page(),
+                    page: options.allPages ? 0 : dataSource.page(),
                     filter: dataSource.filter(),
-                    pageSize: dataSource.pageSize(),
+                    pageSize: options.allPages ? dataSource.total() : dataSource.pageSize(),
                     sort: dataSource.sort(),
                     group: dataSource.group(),
                     aggregate: dataSource.aggregate()
