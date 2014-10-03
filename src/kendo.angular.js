@@ -919,12 +919,12 @@ var __meta__ = {
                 scope: true,
                 pre: function(scope, element, attrs, controllers) {
                     attrs.defaultOptions = scope.viewOptions;
-                    scope.view = createWidget(scope, element, attrs, 'kendoMobileView', 'kendoMobileView');
+                    scope._view = createWidget(scope, element, attrs, 'kendoMobileView', 'kendoMobileView');
                 },
 
                 post: function(scope) {
-                    scope.view._layout();
-                    scope.view._scroller();
+                    scope._view._layout();
+                    scope._view._scroller();
                 }
             }
         };
