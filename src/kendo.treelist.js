@@ -1230,7 +1230,7 @@ var __meta__ = {
 
         addRow: function(parent) {
             var index = 0;
-            var model = {};
+            var model = new this.dataSource.reader.model({});
             var row;
             var editor = this.editor;
 
@@ -1245,8 +1245,17 @@ var __meta__ = {
 
                 model.parentId = parent.id;
                 index = this.dataSource.indexOf(parent) + 1;
+                parent.set("expanded", true);
+
+                this.dataSource.load(parent).then(proxy(this._insertAt, this, model, index));
+
+                return;
             }
 
+            this._insertAt(model, index);
+        },
+
+        _insertAt: function(model, index) {
             model = this.dataSource.insert(index, model);
             row = this.content.find("[" + kendo.attr("uid") + "=" + model.uid + "]");
 

@@ -45,10 +45,10 @@
                     read: {
                         url: function(parent) {
                              // load only root nodes
-                             //var filter = "?$filter=(ReportsTo eq null)";
+                             var filter = "?$filter=(ReportsTo eq null)";
 
                              // ... or load multiple levels at the same time
-                             var filter = "";
+                             //var filter = "";
 
                              if (parent.id) {
                                  filter = "?$filter=(ReportsTo eq " + parent.id + ")"
@@ -65,7 +65,8 @@
                             parentId: { field: "ReportsTo",  nullable: true },
                             EmployeeID: { field: "EmployeeID", type: "number" }
                         },
-                        expanded: true
+                        hasChildren: true,
+                        //expanded: true
                     }
                 }
             };
@@ -79,9 +80,16 @@
                 columns: [
                     { field: "FirstName", title: "First Name" },
                     { field: "LastName", title: "Last Name", sortable: true },
-                    { command: ["edit", "destroy"] }
+                    { command: ["edit", "destroy", { name: "addChild", text: "Add Child", click: cmd }] }
                 ]
             });
+
+            function cmd(e) {
+                var treeList = $("#list").data("kendoTreeList");
+                var row = $(e.target).closest("tr");
+
+                treeList.addRow(row);
+            }
 
             $(".filter").click(function() {
                 listDS.filter({ field: "FirstName", operator: "eq", value: "Anne" });

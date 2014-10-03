@@ -647,4 +647,64 @@
         ok(ds.view()[0].isNew());
         equal(ds.view()[1].text, "foo");
     });
+
+    test("adding child item to parent loaded, but not expanded", function() {
+        var ds = new TreeListDataSource({
+            schema: {
+                model: {
+                    fields: {
+                        parentId: { defaultValue: 0, type: "number" }
+                    }
+                }
+            },
+            data: [
+                { id: 1, parentId: 0, expanded: false },
+                { id: 2, parentId: 1 }
+            ]
+        });
+
+        createTreeList({
+            dataSource: ds
+        });
+
+        instance.addRow(ds.get(1));
+
+        var row = instance.content.find("tr").eq(1);
+        ok(row.data("kendoEditable"));
+    });
+
+    test("adding child item to not loaded parent", function() {
+        var data = [
+            { id: 1, parentId: 0, expanded: false, hasChildren: true },
+            { id: 2, parentId: 1 }
+        ];
+
+        var ds = new TreeListDataSource({
+            schema: {
+                model: {
+                    fields: {
+                        parentId: { defaultValue: 0, type: "number" }
+                    }
+                }
+            },
+            transport: {
+                read: function(options) {
+                    options.success([ data.shift() ]);
+                }
+            }
+        });
+
+        createTreeList({
+            dataSource: ds
+        });
+
+        instance.addRow(ds.get(1));
+
+        var row = instance.content.find("tr").eq(1);
+
+        equal(ds.view().length, 3);
+        ok(ds.view()[0].loaded());
+        ok(ds.view()[1].isNew());
+        ok(row.data("kendoEditable"));
+    });
 })();
