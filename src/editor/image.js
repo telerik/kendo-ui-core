@@ -31,7 +31,7 @@ var ImageCommand = Command.extend({
     insertImage: function(img, range) {
         var attributes = this.attributes;
         var doc = RangeUtils.documentFromRange(range);
-        
+
         if (attributes.src && attributes.src != "http://") {
 
             var removeIEAttributes = function() {
