@@ -593,10 +593,10 @@ var __meta__ = {
             if (isDigesting) {
                 func();
             } else {
-                scope.$apply(func);
+                root.$apply(func);
             }
         } else if (!isDigesting) {
-            scope.$digest();
+            root.$digest();
         }
     }
 
