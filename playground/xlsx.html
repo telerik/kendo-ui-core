@@ -33,7 +33,8 @@
                   read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
               },
               pageSize: 10,
-              group: [ { field: "CompanyName", aggregates: [{ field: "CompanyName", aggregate: "count" }] } ]
+              group: [ { field: "CompanyName", aggregates: [{ field: "CompanyName", aggregate: "count" }] } ],
+              aggregate: [  { field: "CompanyName", aggregate: "count" } ]
           },
           sortable: true,
           pageable: {
@@ -55,6 +56,7 @@
               title: "Company Name",
               groupHeaderTemplate: "Company Name: #: value# Total(#: count #)",
               groupFooterTemplate: "Total(#: count #)",
+              footerTemplate: "Total(#: count #)",
               width: 500
           }
           ],

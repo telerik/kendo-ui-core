@@ -31,7 +31,8 @@ kendo.data.ExcelExporter = kendo.Class.extend({
                     filter: dataSource.filter(),
                     pageSize: dataSource.pageSize(),
                     sort: dataSource.sort(),
-                    group: dataSource.group()
+                    group: dataSource.group(),
+                    aggregate: dataSource.aggregate()
                 }));
         } else {
             this.dataSource = kendo.data.DataSource.create(dataSource);
@@ -58,7 +59,8 @@ kendo.data.ExcelExporter = kendo.Class.extend({
 
         return $.extend({}, column, {
             groupHeaderTemplate: kendo.template(column.groupHeaderTemplate || "${title}: ${value}"),
-            groupFooterTemplate: column.groupFooterTemplate ? kendo.template(column.groupFooterTemplate) : null
+            groupFooterTemplate: column.groupFooterTemplate ? kendo.template(column.groupFooterTemplate) : null,
+            footerTemplate: column.footerTemplate ? kendo.template(column.footerTemplate) : null
         });
     },
     _filter: function() {
@@ -183,6 +185,36 @@ kendo.data.ExcelExporter = kendo.Class.extend({
                     };
                 }))
             });
+
+            var footer = false;
+            1
+            var cells = $.map(this.columns, $.proxy(function(column) {
+                if (column.footerTemplate) {
+                    footer = true;
+                    return {
+                        background: "#dfdfdf",
+                        color: "#333",
+                        value: column.footerTemplate(this.dataSource.aggregates()[column.field])
+                    }
+                } else {
+                    return {
+                        background: "#dfdfdf",
+                        color: "#333"
+                    };
+                }
+            }, this));
+
+            if (footer) {
+                rows.push({
+                    type: "footer",
+                    cells: $.map(new Array(groups.length), function() {
+                        return {
+                            background: "#dfdfdf",
+                            color: "#333",
+                        };
+                    }).concat(cells)
+                });
+            }
         }
 
         return rows;

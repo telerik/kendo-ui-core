@@ -258,6 +258,36 @@ test("creates row when groupFooterTemplate is set", function() {
     });
 });
 
+test("creates row at the end when footerTemplate is set", function() {
+    dataSource = new DataSource({
+       data: [
+           { foo: "foo", bar: "bar" }
+       ],
+       aggregate: [
+           { field: "foo", aggregate: "count" }
+       ]
+    });
+
+    testWorkbook({ columns: [ { field: "foo", footerTemplate: "#=count#" }, { field: "bar" } ], dataSource: dataSource }, function(book) {
+        equal(book.sheets[0].rows.length, 3);
+    });
+});
+
+test("sets row type to 'footer' when footerTemplate is set", function() {
+    dataSource = new DataSource({
+       data: [
+           { foo: "foo", bar: "bar" }
+       ],
+       aggregate: [
+           { field: "foo", aggregate: "count" }
+       ]
+    });
+
+    testWorkbook({ columns: [ { field: "foo", footerTemplate: "#=count#" }, { field: "bar" } ], dataSource: dataSource }, function(book) {
+        equal(book.sheets[0].rows[2].type, "footer");
+    });
+});
+
 test("sets row type to 'group-footer' when groupFooterTemplate is set", function() {
     dataSource = new DataSource({
        data: [
@@ -280,6 +310,22 @@ test("uses groupFooterTemplate", function() {
     });
 
     testWorkbook({ columns: [ { title: "Foo", field: "foo", groupFooterTemplate: "#=count#" }, { field: "bar" } ], dataSource: dataSource }, function(book) {
+        equal(book.sheets[0].rows[3].cells[1].value, 1);
+    });
+});
+
+test("sets row type to 'footer' when footerTemplate is set", function() {
+    dataSource = new DataSource({
+       data: [
+           { foo: "foo", bar: "bar" }
+       ],
+       group: { field: "foo" },
+       aggregate: [
+           { field: "foo", aggregate: "count" }
+       ]
+    });
+
+    testWorkbook({ columns: [ { field: "foo", footerTemplate: "#=count#" }, { field: "bar" } ], dataSource: dataSource }, function(book) {
         equal(book.sheets[0].rows[3].cells[1].value, 1);
     });
 });
