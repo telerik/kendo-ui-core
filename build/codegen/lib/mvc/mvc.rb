@@ -18,7 +18,8 @@ module CodeGen::MVC::Wrappers
     FIELD_TYPES = {
         'map.layers.extent' => 'double[]',
         'map.markers.location' => 'double[]',
-        'treemap.colors' => 'string[]'
+        'treemap.colors' => 'string[]',
+        'editor.stylesheets' => 'string[]'
     }
 
     SERIALIZATION_SKIP_LIST = [
@@ -88,6 +89,14 @@ module CodeGen::MVC::Wrappers
         'treeview.datasource',
         'treeview.checkboxes',
         'treeview.template',
+        'editor.filebrowser',
+        'editor.imagebrowser',
+        'editor.messages',
+        'editor.tag',
+        'editor.tools',
+        'editor.encoded',
+        'editor.stylesheets',
+        'editor.content',
         'colorpicker.palette',
         'colorpicker.tilesize',
 		'diagram.shapedefaults.visual',
@@ -246,13 +255,19 @@ module CodeGen::MVC::Wrappers
         include Options
 
         def csharp_type
+            return_type = ""
+
             if enum_type
-                enum_type
+                return_type = enum_type
             elsif values
-                "#{owner.csharp_class.gsub(/Settings/, "")}#{csharp_name}"
+                return_type = "#{owner.csharp_class.gsub(/Settings/, "")}#{csharp_name}"
             else
-                FIELD_TYPES[full_name] || TYPES[type[0]]
+                return_type = FIELD_TYPES[full_name] || TYPES[type[0]]
             end
+
+            $stderr.puts("Unknown type for #{full_name}") if return_type.empty?
+
+            return_type
         end
 
         def declaration_template
@@ -469,7 +484,7 @@ module CodeGen::MVC::Wrappers
             matches = csharp.match(/\/\/>> Fields(.|\n)*\/\/<< Fields/)
 
             if matches.nil?
-                puts "Field markers not found in #{charp_builder_class}, skipping..." if VERBOSE
+                puts "Field markers not found in #{csharp_builder_class}, skipping..." if VERBOSE
                 return csharp
             end
 
@@ -527,7 +542,6 @@ module CodeGen::MVC::Wrappers
         end
 
         def editing_widget
-            puts name
             name.include?('Picker')
         end
 

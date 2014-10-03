@@ -7,9 +7,12 @@ namespace Kendo.Mvc.UI.Fluent
     /// </summary>
     public class EditorBuilder : WidgetBuilderBase<Editor, EditorBuilder>, IHideObjectMembers
     {
+        private Editor container;
+
         public EditorBuilder(Editor component)
             : base(component)
         {
+            container = component;
         }
 
         /// <summary>
@@ -88,25 +91,6 @@ namespace Kendo.Mvc.UI.Fluent
         public EditorBuilder Events(Action<EditorEventBuilder> configurator)
         {
             configurator(new EditorEventBuilder(Component.Events));
-
-            return this;
-        }
-
-        /// <summary>
-        /// Configure the serialization options.
-        /// </summary>
-        /// <param name="configurator">An action that configures the serialization options.</param>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().Editor()
-        ///             .Name("Editor")
-        ///             .Serialization(serialization => serialization
-        ///                 .Entities(false)
-        ///             )
-        /// %&gt;
-        /// </code>
-        public EditorBuilder Serialization(Action<EditorSerializationOptionsBuilder> configurator)
-        {
-            configurator(new EditorSerializationOptionsBuilder(Component.SerializationOptions));
 
             return this;
         }
@@ -241,5 +225,34 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+
+        //>> Fields
+        
+        /// <summary>
+        /// Relaxes the same-origin policy when using the iframe-based editor.
+		/// This is done automatically for all cases except when the policy is relaxed by document.domain = document.domain.
+		/// In that case, this property must be used to allow the editor to function properly across browsers.
+		/// This property has been introduced in internal builds after 2014.1.319.
+        /// </summary>
+        /// <param name="value">The value that configures the domain.</param>
+        public EditorBuilder Domain(string value)
+        {
+            container.Domain = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// Allows setting of serialization options.
+        /// </summary>
+        /// <param name="configurator">The action that configures the serialization.</param>
+        public EditorBuilder Serialization(Action<EditorSerializationSettingsBuilder> configurator)
+        {
+            configurator(new EditorSerializationSettingsBuilder(container.Serialization));
+            return this;
+        }
+        
+        //<< Fields
     }
 }

@@ -112,6 +112,7 @@ namespace :generate do
                     'docs/api/javascript/dataviz/ui/diagram.md',
                     'docs/api/javascript/dataviz/ui/treemap.md',
                     'docs/api/javascript/ui/colorpicker.md',
+                    'docs/api/javascript/ui/editor.md',
                     'docs/api/javascript/ui/gantt.md',
                     'docs/api/javascript/ui/toolbar.md',
                     'docs/api/javascript/ui/treeview.md'

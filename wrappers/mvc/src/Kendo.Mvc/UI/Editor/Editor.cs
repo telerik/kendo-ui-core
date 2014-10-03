@@ -6,6 +6,7 @@ namespace Kendo.Mvc.UI
     using System.Linq;
     using System.Web.Mvc;
     using System.Web.UI;
+    using Extensions;
     using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.UI.Fluent;
     using Kendo.Mvc.UI.Html;
@@ -21,7 +22,6 @@ namespace Kendo.Mvc.UI
 
             Template = new HtmlTemplate();
             Messages = new EditorMessages();
-            SerializationOptions = new EditorSerializationOptions();
             StyleSheets = new List<string>();
 
             new EditorToolFactory(DefaultToolGroup)
@@ -38,7 +38,25 @@ namespace Kendo.Mvc.UI
 
             ImageBrowserSettings = new EditorImageBrowserSettings(Messages.ImageBrowserMessages);
             FileBrowserSettings = new EditorFileBrowserSettings(Messages.FileBrowserMessages);
+
+            //>> Initialization
+        
+            Serialization = new EditorSerializationSettings();
+                
+        //<< Initialization
         }
+
+        //>> Fields
+        
+        public string Domain { get; set; }
+        
+        public EditorSerializationSettings Serialization
+        {
+            get;
+            set;
+        }
+        
+        //<< Fields
 
         internal IUrlGenerator UrlGenerator
         {
@@ -59,12 +77,6 @@ namespace Kendo.Mvc.UI
         }
 
         public EditorMessages Messages
-        {
-            get;
-            private set;
-        }
-
-        public EditorSerializationOptions SerializationOptions
         {
             get;
             private set;
@@ -127,9 +139,24 @@ namespace Kendo.Mvc.UI
 
         public override void WriteInitializationScript(TextWriter writer)
         {
-            var options = new Dictionary<string, object>(Events);
+            var json = new Dictionary<string, object>(Events);
 
-            options["tools"] = DefaultToolGroup.Tools.Select(tool =>
+            //>> Serialization
+        
+            if (Domain.HasValue())
+            {
+                json["domain"] = Domain;
+            }
+            
+            var serialization = Serialization.ToJson();
+            if (serialization.Any())
+            {
+                json["serialization"] = serialization;
+            }
+                
+        //<< Serialization
+
+            json["tools"] = DefaultToolGroup.Tools.Select(tool =>
             {
                 var customButtonTool = tool as EditorCustomButtonTool;
                 var customTemplateTool = tool as EditorCustomTemplateTool;
@@ -191,7 +218,7 @@ namespace Kendo.Mvc.UI
 
             if (snippetOptions.Any())
             {
-                options["insertHtml"] = snippetOptions;
+                json["insertHtml"] = snippetOptions;
             }
 
             var styleOptions = DefaultToolGroup.Tools.OfType<EditorListTool>()
@@ -200,46 +227,39 @@ namespace Kendo.Mvc.UI
 
             if (styleOptions.Any())
             {
-                options["style"] = styleOptions;
+                json["style"] = styleOptions;
             }
 
             if (Encode.HasValue && !Encode.Value)
             {
-                options["encoded"] = Encode.Value;
-            }
-
-            var serializationOptions = SerializationOptions.ToJson();
-
-            if (serializationOptions.Any())
-            {
-                options["serialization"] = serializationOptions;
+                json["encoded"] = Encode.Value;
             }
 
             var messages = Messages.ToJson();
 
             if (messages.Any())
             {
-                options["messages"] = messages;
+                json["messages"] = messages;
             }
 
             if (StyleSheets.Count > 0)
             {
-                options["stylesheets"] = StyleSheets;
+                json["stylesheets"] = StyleSheets;
             }
 
             var imageSettings = ImageBrowserSettings.ToJson();
             if (imageSettings.Any())
             {
-                options["imageBrowser"] = imageSettings;
+                json["imageBrowser"] = imageSettings;
             }
 
             var fileSettings = FileBrowserSettings.ToJson();
             if (fileSettings.Any())
             {
-                options["fileBrowser"] = fileSettings;
+                json["fileBrowser"] = fileSettings;
             }
 
-            writer.Write(Initializer.Initialize(Selector, "Editor", options));
+            writer.Write(Initializer.Initialize(Selector, "Editor", json));
 
             base.WriteInitializationScript(writer);
         }
