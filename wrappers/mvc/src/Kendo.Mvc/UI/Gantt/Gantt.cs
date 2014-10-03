@@ -129,13 +129,20 @@ namespace Kendo.Mvc.UI
             {
                 json["autoBind"] = AutoBind;
             }
-                
-            var editable = Editable.ToJson();
-            if (editable.Any())
+
+            if (Editable.Enabled.HasValue && !Editable.Enabled.Value)
             {
-                json["editable"] = editable;
+                json["editable"] = false;
             }
-                
+            else
+            {
+                var editable = Editable.ToJson();
+                if (editable.Any())
+                {
+                    json["editable"] = editable;
+                }
+            }
+
             if (Navigatable.HasValue)
             {
                 json["navigatable"] = Navigatable;

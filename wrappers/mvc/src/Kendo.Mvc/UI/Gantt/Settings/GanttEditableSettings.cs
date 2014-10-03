@@ -22,18 +22,20 @@ namespace Kendo.Mvc.UI
         public string Template { get; set; }
 
         public string TemplateId { get; set; }
+
+        public bool? Enabled { get; set; }
         
         //<< Fields
 
         protected override void Serialize(IDictionary<string, object> json)
         {
             //>> Serialization
-        
+
             if (Confirmation.HasValue)
             {
                 json["confirmation"] = Confirmation;
             }
-                
+
             if (!string.IsNullOrEmpty(TemplateId))
             {
                 json["template"] = new ClientHandlerDescriptor {
@@ -47,7 +49,7 @@ namespace Kendo.Mvc.UI
             {
                 json["template"] = Template;
             }
-                
+
         //<< Serialization
         }
     }

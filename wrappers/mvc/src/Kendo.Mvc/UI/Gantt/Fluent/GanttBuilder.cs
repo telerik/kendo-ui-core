@@ -29,17 +29,17 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <param name="configurator">The DataSource configurator action.</param>
         /// <example>
-        /// <code lang="ASPX">
-        ///  &lt;%= Html.Kendo().Gantt&lt;Task&gt;()
-        ///             .Name("Gantt")
-        ///             .DataSource(source =&gt;
-        ///             {
-        ///                 source.Read(read =&gt;
-        ///                 {
-        ///                     read.Action("Read", "Gantt");
-        ///                 });
-        ///             })
-        /// %&gt;
+        /// <code lang="Razor">
+        ///  @(Html.Kendo().Gantt&lt;TaskViewModel, DependencyViewModel&gt;()
+        ///     .Name("Gantt")
+        ///     .DataSource(source =&gt;
+        ///     {
+        ///         source.Read(read =&gt;
+        ///         {
+        ///             read.Action("Read", "Gantt");
+        ///         });
+        ///     })
+        /// )
         /// </code>
         /// </example>
         public GanttBuilder<TTaskModel, TDependenciesModel> DataSource(Action<GanttDataSourceBuilder<TTaskModel>> configurator)
@@ -54,17 +54,17 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <param name="configurator">The DataSource configurator action.</param>
         /// <example>
-        /// <code lang="ASPX">
-        ///  &lt;%= Html.Kendo().Gantt&lt;Task&gt;()
-        ///             .Name("Gantt")
-        ///             .DependenciesDataSource(source =&gt;
-        ///             {
-        ///                 source.Read(read =&gt;
-        ///                 {
-        ///                     read.Action("Read", "Gantt");
-        ///                 });
-        ///             })
-        /// %&gt;
+        /// <code lang="Razor">
+        /// @(Html.Kendo().Gantt&lt;TaskViewModel, DependencyViewModel&gt;()
+        ///     .Name("Gantt")
+        ///     .DependenciesDataSource(source =&gt;
+        ///     {
+        ///         source.Read(read =&gt;
+        ///         {
+        ///             read.Action("Read", "Gantt");
+        ///         });
+        ///     })
+        ///  )
         /// </code>
         /// </example>
         public GanttBuilder<TTaskModel, TDependenciesModel> DependenciesDataSource(Action<GanttDependenciesDataSourceBuilder<TDependenciesModel>> configurator)
@@ -98,11 +98,64 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
-        
+
         /// <summary>
         /// If set to false the user won't be able to create, modify or delete tasks and dependencies.
         /// </summary>
-        /// <param name="configurator">The action that configures the editable.</param>
+        /// <param name="isEditable">The isEditable</param>
+        /// <example>
+        /// <code lang="Razor">
+        /// @(Html.Kendo().Gantt&lt;TaskViewModel, DependencyViewModel&gt;()
+        ///     .Name("gantt")
+        ///     .Editable(false)
+        ///     .DataSource(d =&gt; d
+        ///        .Model(m =&gt;
+        ///        {
+        ///            m.Id(f =&gt; f.TaskID);
+        ///            m.ParentId(f =&gt; f.ParentID);
+        ///            m.OrderId(f =&gt; f.OrderId);
+        ///            m.Field(f =&gt; f.Expanded).DefaultValue(true);
+        ///        })
+        ///        .Read(&quot;ReadTasks&quot;, &quot;Gantt&quot;)
+        ///    )
+        /// )
+        /// </code>
+        /// </example>
+        public GanttBuilder<TTaskModel, TDependenciesModel> Editable(bool isEditable)
+        {
+            Component.Editable.Enabled = isEditable;
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the editing configuration of the gantt.
+        /// </summary>
+        /// <param name="configurator">The lambda which configures the editing</param>
+        /// <example>
+        /// <code lang="Razor">
+        ///@(Html.Kendo().Gantt&lt;TaskViewModel, DependencyViewModel&gt;()
+        ///    .Name("gantt")
+        ///    .Editable(editable =&gt;
+        ///    {
+        ///        editable.Confirmation(false);
+        ///        editable.TemplateId(&quot;customEditTemplate&quot;);
+        ///    })
+        ///    .DataSource(d =&gt; d
+        ///        .Model(m =&gt;
+        ///        {
+        ///            m.Id(f =&gt; f.TaskID);
+        ///            m.ParentId(f =&gt; f.ParentID);
+        ///            m.OrderId(f =&gt; f.OrderId);
+        ///            m.Field(f =&gt; f.Expanded).DefaultValue(true);
+        ///        })
+        ///        .Read(&quot;ReadTasks&quot;, &quot;Gantt&quot;)
+        ///        .Create(&quot;CreateTask&quot;, &quot;Gantt&quot;)
+        ///        .Destroy(&quot;DestroyTask&quot;, &quot;Gantt&quot;)
+        ///        .Update(&quot;UpdateTask&quot;, &quot;Gantt&quot;)
+        ///    )
+        ///)
+        /// </code>
+        /// </example>
         public GanttBuilder<TTaskModel,TDependenciesModel> Editable(Action<GanttEditableSettingsBuilder> configurator)
         {
             configurator(new GanttEditableSettingsBuilder(container.Editable));
@@ -271,13 +324,13 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <param name="configurator">The client events action.</param>
         /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().Gantt()
-        ///             .Name("Gantt")
-        ///             .Events(events => events
-        ///                 .DataBinding("onDataBinding")
-        ///             )
-        /// %&gt;
+        /// <code lang="Razor">
+        /// @(Html.Kendo().Gantt()
+        ///     .Name("Gantt")
+        ///     .Events(events => events
+        ///         .DataBinding("onDataBinding")
+        ///     )
+        /// )
         /// </code>
         /// </example>
         public GanttBuilder<TTaskModel, TDependenciesModel> Events(Action<GanttEventBuilder> configurator)
