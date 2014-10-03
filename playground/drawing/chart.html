@@ -17,18 +17,42 @@
               "kendo.dataviz.chart" ], function(){
 
         $("#chart").kendoChart({
+            title: {
+                text: "Foo\nBar"
+            },
             series: [{
                 type: "column",
                 data: [1, 2, 3]
             }],
             categoryAxis: {
                 categories: ["Fooooooo", "Baaaaaaaaaar\nBar", "Baz"],
+                minorTicks: {
+                    visible: true
+                },
+                background: "blue",
                 labels: {
                     rotation: 45,
                     border: {
                         width: 1,
                         color: "#cf0"
                     }
+                },
+                plotBands: [{
+                    from: 1,
+                    to: 2,
+                    color: "red",
+                    opacity: 0.5
+                    }],
+                notes: {
+                    line: {
+                        length: 200
+                    },
+                    data: [{
+                        value: 1,
+                        label: {
+                            text: "Foo"
+                        }
+                    }]
                 }
             }
         });
