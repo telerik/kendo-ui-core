@@ -1144,6 +1144,16 @@
             ok(definitionNode.childNodes[0] instanceof svg.LinearGradientNode);
         });
 
+        test("add creates RadialGradientNode", function() {
+            definitionNode.definitionChange({
+                action: "add",
+                definitions: {
+                    fill: new d.RadialGradient()
+                }
+            });
+            ok(definitionNode.childNodes[0] instanceof svg.RadialGradientNode);
+        });
+
         test("add does not create another node if definition has the same id", function() {
             definitionNode.definitionChange({
                 action: "add",
@@ -1384,6 +1394,56 @@
                 equal(attrs[0][1], 0.5);
             };
             gradient.start().setX(0.5);
+        });
+
+    })();
+
+    // ------------------------------------------------------------
+    (function() {
+        var RadialGradientNode = svg.RadialGradientNode;
+        var RadialGradient = d.RadialGradient;
+        var gradientNode;
+        var gradient;
+
+        gradientBaseTests("RadialGradientNode", RadialGradientNode, RadialGradient);
+
+        function renders(value) {
+            ok(gradientNode.render().indexOf(value) != -1);
+        }
+
+        module("RadialGradientNode", {
+            setup: function() {
+                gradient = new RadialGradient({
+                    center: [0, 0.5],
+                    radius: 0.7
+                });
+                gradientNode = new RadialGradientNode(gradient);
+            }
+        });
+
+        test("renders center", function() {
+            renders("cx='0'");
+            renders("cy='0.5'");
+        });
+
+        test("renders radius", function() {
+            renders("r='0.7'");
+        });
+
+        test("changing center updates coordinates", function() {
+            gradientNode.allAttr = function(attrs) {
+                equal(attrs[0][0], "cx");
+                equal(attrs[0][1], 0.5);
+            };
+            gradient.center().setX(0.5);
+        });
+
+        test("changing radius updates coordinates", function() {
+            gradientNode.allAttr = function(attrs) {
+                equal(attrs[2][0], "r");
+                equal(attrs[2][1], 0.9);
+            };
+            gradient.radius(0.9);
         });
 
     })();

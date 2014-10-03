@@ -465,6 +465,8 @@
             } else if (type == "fill") {
                 if (item instanceof d.LinearGradient) {
                     nodeType = LinearGradientNode;
+                } else if (item instanceof d.RadialGradient) {
+                    nodeType = RadialGradientNode;
                 }
             }
             return new nodeType(item);
@@ -980,6 +982,26 @@
         }
     });
 
+    var RadialGradientNode = GradientNode.extend({
+        template: renderTemplate(
+            "<radialGradient id='#=d.id#' #=d.renderCoordinates()#>" +
+                "#= d.renderChildren()#" +
+            "</radialGradient>"
+        ),
+
+        mapCoordinates: function() {
+            var srcElement = this.srcElement;
+            var center = srcElement.center();
+            var radius = srcElement.radius();
+            var attrs = [
+                ["cx", center.x],
+                ["cy", center.y],
+                ["r", radius]
+            ];
+            return attrs;
+        }
+    });
+
     // Helpers ================================================================
     var renderSVG = function(container, svg) {
         container.innerHTML = svg;
@@ -1100,6 +1122,7 @@
             MultiPathNode: MultiPathNode,
             Node: Node,
             PathNode: PathNode,
+            RadialGradientNode: RadialGradientNode,
             RootNode: RootNode,
             Surface: Surface,
             TextNode: TextNode
