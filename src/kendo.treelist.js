@@ -668,7 +668,7 @@ var __meta__ = {
                 if (command.methodName) {
                     this[command.methodName](row);
                 } else if (command.click) {
-                    command.click();
+                    command.click(e);
                 }
             }
         },

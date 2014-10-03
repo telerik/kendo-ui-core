@@ -445,4 +445,18 @@
 
         instance.content.find(".foo").click();
     });
+
+    test("clicking custom command buttons passes events arguments", function() {
+        createTreeList({
+            dataSource: [ { id: 1 } ],
+            columns: [
+                { field: "id" },
+                { command: [
+                    { name: "foo", className: "foo", click: function(e) { ok(e); } }
+                ] }
+            ]
+        });
+
+        instance.content.find(".foo").click();
+    });
 })();
