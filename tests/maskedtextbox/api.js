@@ -124,6 +124,16 @@
         equal(maskedtextbox.value(), "10");
     });
 
+    test("value method converts null to empty string", function() {
+        var maskedtextbox = new MaskedTextBox(input, {
+            mask: "(LL-00)"
+        });
+
+        maskedtextbox.value(null);
+
+        equal(input.val(), "");
+    });
+
     test("enable method with false disables widget", function() {
         var maskedtextbox = new MaskedTextBox(input, {
             mask: "(00-00)"
