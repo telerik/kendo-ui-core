@@ -554,7 +554,7 @@
             domain: null,
             serialization: {
                 entities: true,
-                scripts: true
+                scripts: false
             },
             stylesheets: [],
             dialogOptions: {
