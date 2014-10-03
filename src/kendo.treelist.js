@@ -214,6 +214,24 @@ var __meta__ = {
             return result;
         },
 
+        // builds hash id -> children
+        _childrenMap: function(data) {
+            var map = {};
+            var i, item, id, parentId;
+
+            for (i = 0; i < data.length; i++) {
+                item = data[i];
+                id = item.id;
+                parentId = item.parentId;
+
+                map[id] = map[id] || [];
+                map[parentId] = map[parentId] || [];
+                map[parentId].push(item);
+            }
+
+            return map;
+        },
+
         _calculateAggregates: function (data, options) {
             options = options || {};
 
@@ -228,18 +246,7 @@ var __meta__ = {
                 }).data;
             }
 
-            // build hash id -> children
-            var map = {};
-
-            for (i = 0; i < data.length; i++) {
-                item = data[i];
-                id = item.id;
-                parentId = item.parentId;
-
-                map[id] = map[id] || [];
-                map[parentId] = map[parentId] || [];
-                map[parentId].push(item);
-            }
+            var map = this._childrenMap(data);
 
             // calculate aggregates for each subtree
             result[this._defaultParentId()] = new Query(this._subtree(map, this._defaultParentId())).aggregate(options.aggregate);
@@ -260,23 +267,35 @@ var __meta__ = {
             options.filterCallback = proxy(this._filterCallback, this);
 
             var result = Query.process(data, options);
-            var length, hasChildren, i, flag, item;
+            var defaultParentId = this._defaultParentId();
+            var length, hasChildren, i, item, children, map;
 
             data = result.data;
 
             length = data.length;
-            hasChildren = new Array(length);
 
-            for (i = 0; i < length; i++) {
-                hasChildren[data[i].parentId] = true;
-            }
+            map = this._childrenMap(data);
+
+            data = map[defaultParentId] || [];
 
             for (i = 0; i < length; i++) {
                 item = data[i];
-                flag = !!hasChildren[item.id];
-                item.loaded(flag);
+
+                if (item.id === defaultParentId) {
+                    continue;
+                }
+
+                children = map[item.id];
+                hasChildren = !!(children && children.length);
+
+                item.loaded(hasChildren);
+
                 if (item.hasChildren !== true) {
-                    item.hasChildren = flag;
+                    item.hasChildren = hasChildren;
+                }
+
+                if (hasChildren) {
+                    data.splice.apply(data, [i+1, 0].concat(children));
                 }
             }
 

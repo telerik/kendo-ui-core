@@ -471,26 +471,25 @@
         var ds = new TreeListDataSource({
             data: [
                 { id: 1, text: "c", parentId: null },
-                { id: 2, text: "e", parentId: null },
-                { id: 3, text: "a", parentId: 1 },
-                { id: 4, text: "d", parentId: 2 },
-                { id: 5, text: "b", parentId: 3 }
+                { id: 2, text: "b", parentId: 1 },
+                { id: 3, text: "a", parentId: 1 }
             ]
         });
 
         ds.read();
 
         ds.query({
-            filter: { field: "id", operator: "eq", value: 5 },
+            filter: { field: "parentId", operator: "eq", value: 1 },
             sort: { field: "text", dir: "asc" }
         });
+
 
         var view = ds.view();
 
         equal(view.length, 3, "length differs");
-        equal(view[0].text, "a");
-        equal(view[1].text, "b");
-        equal(view[2].text, "c");
+        equal(view[0].text, "c");
+        equal(view[1].text, "a");
+        equal(view[2].text, "b");
     });
 
     test("filter returns parent once when matched by multiple children", function() {
@@ -907,6 +906,26 @@
         equal(ds.rootNodes().length, 1);
         equal(ds.childNodes(ds.get(1)).length, 1);
         equal(ds.childNodes(ds.get(0)).length, 0);
+    });
+
+    var pluck = function(array, property) {
+        return $.map(array, function(x) {
+            return x[property];
+        });
+    };
+
+    test("view returns items in proper order", function() {
+        var ds = new TreeListDataSource({
+            data: [
+                { id: 3, parentId: 2 },
+                { id: 2, parentId: 1 },
+                { id: 1, parentId: null }
+            ]
+        });
+
+        ds.read();
+
+        deepEqual(pluck(ds.view(), "id"), [1, 2, 3]);
     });
 
 })();
