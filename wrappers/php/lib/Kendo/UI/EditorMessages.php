@@ -33,7 +33,7 @@ class EditorMessages extends \Kendo\SerializableObject {
     }
 
     /**
-    * The title of the tool that stirkes through text.
+    * The title of the tool that strikes through text.
     * @param string $value
     * @return \Kendo\UI\EditorMessages
     */
@@ -420,7 +420,7 @@ class EditorMessages extends \Kendo\SerializableObject {
     }
 
     /**
-    * The caption for the link tooltip in the createLink dialog.
+    * The caption for the link Tooltip in the createLink dialog.
     * @param string $value
     * @return \Kendo\UI\EditorMessages
     */
