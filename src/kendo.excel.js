@@ -52,6 +52,10 @@ kendo.data.ExcelExporter = kendo.Class.extend({
         }, this));
     },
     _prepareColumn: function(column) {
+        if (!column.field || column.hidden) {
+            return;
+        }
+
         return $.extend({}, column, {
             groupHeaderTemplate: kendo.template(column.groupHeaderTemplate || "${title}: ${value}"),
             groupFooterTemplate: column.groupFooterTemplate ? kendo.template(column.groupFooterTemplate) : null

@@ -35,19 +35,31 @@ test("clones the data source option", function() {
 });
 
 test("sets the columns option of the workbook", 1, function() {
-    testWorkbook({ columns: [ { width: 100 } ], dataSource: [] }, function(book) {
+    testWorkbook({ columns: [ { field: "foo", width: 100 } ], dataSource: [] }, function(book) {
         equal(book.sheets[0].columns[0].width, 100);
     });
 });
 
+test("skips columns that don't have a field", function() {
+    testWorkbook({ columns: [ { }, { field: "foo"} ], dataSource: [] }, function(book) {
+        equal(book.sheets[0].columns.length, 1);
+    });
+});
+
+test("skips hidden columns", function() {
+    testWorkbook({ columns: [ { field: "bar", hidden: true }, { field: "foo"} ], dataSource: [] }, function(book) {
+        equal(book.sheets[0].columns.length, 1);
+    });
+});
+
 test("sets autoWidth if the column width isn't set", 1, function() {
-    testWorkbook({ columns: [ { } ], dataSource: [] }, function(book) {
+    testWorkbook({ columns: [ { field: "foo" } ], dataSource: [] }, function(book) {
         equal(book.sheets[0].columns[0].autoWidth, true);
     });
 });
 
 test("the first row contains the column titles", 2, function() {
-    testWorkbook({ columns: [ { title: "foo" }, { title: "bar"} ], dataSource: [] }, function(book) {
+    testWorkbook({ columns: [ { title: "foo", field: "foo" }, { field: "bar", title: "bar"} ], dataSource: [] }, function(book) {
         equal(book.sheets[0].rows[0].cells[0].value, "foo");
         equal(book.sheets[0].rows[0].cells[1].value, "bar");
     });
@@ -171,7 +183,7 @@ test("enables filtering", function() {
 });
 
 test("locked columns set the freezePane", function() {
-    testWorkbook({ columns: [ { field: "foo", locked: true }, { locked: true } ], dataSource: [ {} ] }, function(book) {
+    testWorkbook({ columns: [ { field: "foo", locked: true }, { field: "bar", locked: true } ], dataSource: [ {} ] }, function(book) {
         equal(book.sheets[0].freezePane.colSplit, 2);
     });
 });
