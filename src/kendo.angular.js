@@ -530,7 +530,8 @@ var __meta__ = {
         'MobileApplication',
         'MobileView',
         'MobileLayout',
-        'MobileNavBar'
+        'MobileNavBar',
+        'MobileTabStrip'
     ];
 
     function createDirectives(klass, isMobile) {
@@ -942,6 +943,12 @@ var __meta__ = {
                 createWidget(scope, element, attrs, 'kendoMobileNavBar', 'kendoMobileNavBar');
             }
         };
+    }).directive('kendoMobileTabStrip', function() {
+        return {
+            link: function(scope, element, attrs, controllers) {
+                createWidget(scope, element, attrs, 'kendoMobileTabStrip', 'kendoMobileTabStrip');
+            }
+        };
     }).directive('kendoViewTitle', function(){
         return {
             restrict : "E",
@@ -957,8 +964,7 @@ var __meta__ = {
                     element.addClass("km-header").attr("data-role", "header");
                 }
             };
-      })
-      .directive('kendoMobileFooter', function() {
+    }).directive('kendoMobileFooter', function() {
             return {
                 restrict: 'E',
                 link: function(scope, element, attrs, controllers) {
