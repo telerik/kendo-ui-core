@@ -161,8 +161,16 @@ var __meta__ = {
             }, options));
         },
 
-        _readData: function(data) {
-            return this.data().toJSON().concat(DataSource.fn._readData.call(this, data));
+        _readData: function(newData) {
+            var result = [];
+            var data = this.data();
+            var i, length;
+
+            for (i = 0, length = data.length; i < length; i++) {
+                result.push(data[i]);
+            }
+
+            return result.concat(DataSource.fn._readData.call(this, newData));
         },
 
         _filterCallback: function(query) {
@@ -1229,10 +1237,9 @@ var __meta__ = {
         },
 
         addRow: function(parent) {
-            var index = 0;
-            var model = new this.dataSource.reader.model({});
-            var row;
             var editor = this.editor;
+            var index = 0;
+            var model = {};
 
             if (editor && !editor.end()) {
                 return;
@@ -1257,7 +1264,8 @@ var __meta__ = {
 
         _insertAt: function(model, index) {
             model = this.dataSource.insert(index, model);
-            row = this.content.find("[" + kendo.attr("uid") + "=" + model.uid + "]");
+
+            var row = this.content.find("[" + kendo.attr("uid") + "=" + model.uid + "]");
 
             this.editRow(row);
         },

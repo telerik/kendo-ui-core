@@ -131,6 +131,27 @@
         equal(ds.data().length, 2);
     });
 
+    test("load doesn't change existing models", function() {
+        var calls = 0;
+
+        var ds = new TreeListDataSource({
+            transport: {
+                read: function(options) {
+                    options.success([
+                        { id: ++calls }
+                    ]);
+                }
+            }
+        });
+
+        ds.read();
+
+        var uid = ds.at(0).uid;
+        ds.load(ds.at(0));
+
+        equal(ds.data()[0].uid, uid);
+    });
+
     test("load does not call transport.read when model is loaded", function() {
         var calls = 0;
 
