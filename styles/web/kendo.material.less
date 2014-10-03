@@ -250,6 +250,8 @@
 @button-focused-active-shadow: 0 6px 17px 0 #66afe9;
 
 
+//new var-s
+@secondary-background-color: #f9f9f9;
 
 
 @import "theme-template.less";
@@ -365,4 +367,21 @@ td.k-state-focused.k-state-selected,
 .k-menu .k-group {
     color: @widget-text-color;
     background-color: @widget-background-color;
+}
+
+//Toolbar
+.k-toolbar {
+    background-color: @drop-down-background;
+}
+
+//Grid
+.k-grouping-row td,
+td.k-group-cell, 
+.k-resize-handle-inner {
+    color: @widget-text-color;
+    background-color: @alt-background-color;
+}
+
+.k-grid-header .k-header {
+    background-color: @secondary-background-color;
 }
