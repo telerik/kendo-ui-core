@@ -20,5 +20,11 @@ namespace Kendo.Mvc.UI.Fluent
             serialization.Entities = encode;
             return this;
         }
+
+        public EditorSerializationOptionsBuilder Scripts(bool scripts)
+        {
+            serialization.Scripts = scripts;
+            return this;
+        }
     }
 }
