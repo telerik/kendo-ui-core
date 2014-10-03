@@ -359,18 +359,13 @@
                 viewModel.set("fillType", viewModel.types[0]);
                 viewModel.fillChange();
                 kendo.bind($("#fillContainer"),  viewModel);
+                
+                
             }
 
             function updateGradient() {
-                linearGradient.stops.push(new drawing.GradientStop(0.9, "red"));
-                // radialGradient.center().translate(0.3, 0.2);
-                // radialGradient.setRadius(0.8);
-
-                // radialGradient.stops[1].color("red");
-                circle2.fill("red");
                 debugger;
-                //circle3.fill(linearGradient);
-                circle3.fill("none");
+                circle.fill(null);
             }
 
             //clipTest();

@@ -236,6 +236,12 @@
             equal(shape.options.fill, gradient);
         });
 
+        test("fill sets null", function() {
+            shape.fill(null);
+
+            equal(shape.options.fill, null);
+        });
+
         test("fill triggers optionsChange", function() {
             shape.addObserver({
                 optionsChange: function() {
@@ -1950,7 +1956,7 @@
             ok(stop instanceof GradientStop);
             equal(stop.offset(), 0.5);
             equal(stop.color(), "red");
-        })
+        });
 
         test("inits id", function() {
             ok(gradient.id);
@@ -2005,7 +2011,7 @@
                     ok(false);
                 }
             });
-            gradient.removeStop(new GradientStop())
+            gradient.removeStop(new GradientStop());
 
             equal(gradient.stops.length, 2);
         });

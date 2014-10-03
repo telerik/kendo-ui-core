@@ -23,7 +23,7 @@
             var options = this.options;
 
             if (defined(color)) {
-                if (color.nodeType != GRADIENT) {
+                if (color && color.nodeType != GRADIENT) {
                     var newFill = {
                         color: color
                     };

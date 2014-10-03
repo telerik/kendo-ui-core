@@ -652,6 +652,12 @@
             ok(svg.indexOf("fill-opacity='0.5'") !== -1);
         });
 
+        test("renders fill gradient", function() {
+            var gradient = new d.LinearGradient();
+            path.fill(gradient);
+            ok(pathNode.render().indexOf("fill='url(#" + gradient.id + ")'") != -1);
+        });
+
         test("renders empty fill if not set", function() {
             ok(pathNode.render().indexOf("fill='none'") !== -1);
         });
@@ -724,6 +730,17 @@
             };
 
             path.options.set("fill.opacity", 0.4);
+        });
+
+        test("optionsChange sets fill gradient", function() {
+            var gradient = new d.LinearGradient();
+
+            pathNode.attr = function(key, value) {
+                equal(key, "fill");
+                equal(value, "url(#" + gradient.id + ")");
+            };
+
+            path.options.set("fill", gradient);
         });
 
         test("optionsChange sets fill color to none for 'transparent'", function() {
@@ -1117,6 +1134,16 @@
             ok(definitionNode.childNodes[0] instanceof svg.ClipNode);
         });
 
+        test("add creates LinearGradientNode", function() {
+            definitionNode.definitionChange({
+                action: "add",
+                definitions: {
+                    fill: new d.LinearGradient()
+                }
+            });
+            ok(definitionNode.childNodes[0] instanceof svg.LinearGradientNode);
+        });
+
         test("add does not create another node if definition has the same id", function() {
             definitionNode.definitionChange({
                 action: "add",
@@ -1193,4 +1220,172 @@
             });
         });
     })();
+
+    // ------------------------------------------------------------
+    (function() {
+        var GradientStopNode = svg.GradientStopNode;
+        var GradientStop = d.GradientStop;
+        var stopNode;
+        var stop;
+
+        function rendersStyle(style) {
+            ok(new RegExp("style='.*?" + style + ";.*?'", "g"));
+        }
+
+        module("GradientStopNode", {
+            setup: function() {
+                stop = new GradientStop(0.3, "red", 0.5);
+                stopNode = new GradientStopNode(stop);
+            }
+        });
+
+        test("renders stop element", function() {
+            equal(stopNode.render().indexOf("<stop"), 0);
+        });
+
+        test("renders offset", function() {
+            ok(stopNode.render().indexOf("offset='0.3'") !== -1);
+        });
+
+        test("renders stop-color style", function() {
+            rendersStyle("stop-color:red");
+        });
+
+        test("renders stop-opacity style", function() {
+            rendersStyle("stop-opacity:0.5");
+        });
+
+        test("changing offset updates offset attribute", function() {
+            stopNode.attr = function(key, value) {
+                equal(key, "offset");
+                equal(value, 1);
+            };
+            stop.offset(1);
+        });
+
+        test("changing color updates stop-color style", function() {
+            stopNode.css = function(key, value) {
+                equal(key, "stop-color");
+                equal(value, "blue");
+            };
+            stop.color("blue");
+        });
+
+        test("changing opacity updates stop-opacity style", function() {
+            stopNode.css = function(key, value) {
+                equal(key, "stop-opacity");
+                equal(value, 1);
+            };
+            stop.opacity(1);
+        });
+
+    })();
+
+    // ------------------------------------------------------------
+    function gradientBaseTests(name, type, gradientType) {
+        var gradient;
+        var gradientNode;
+        var element;
+        var stopNode;
+
+        function createdStopNodes() {
+            var stops = gradient.stops;
+            var childNodes = gradientNode.childNodes;
+            equal(stops.length, childNodes.length);
+
+            for (var idx = 0; idx < stops.length; idx++) {
+                ok(childNodes[idx] instanceof svg.GradientStopNode);
+                equal(childNodes[idx].srcElement, stops[idx]);
+            }
+        }
+
+        module(name + " / stops", {
+            setup: function() {
+                gradient = new gradientType({
+                    stops: [[0.5, "red"]]
+                });
+                gradientNode = new type(gradient);
+                stopNode = gradientNode.childNodes[0];
+            }
+        });
+
+        test("renders id", function() {
+            ok(gradientNode.render().indexOf("id='" + gradient.id + "'") != -1);
+        });
+
+        test("renders children", function() {
+            gradientNode.renderChildren = function() {
+                ok(true);
+            };
+            gradientNode.render();
+        });
+
+        test("creates stop nodes", function() {
+            createdStopNodes();
+        });
+
+        test("changing gradient stops clears previous stop nodes", function() {
+            stopNode.clear = function() {
+                ok(true);
+            };
+            gradient.stops.pop();
+        });
+
+        test("changing gradient stops creates new stop nodes", function() {
+            gradient.addStop(1, "red");
+            createdStopNodes();
+        });
+
+        test("attaches stops to element", function() {
+            gradientNode.element = document.createElement("div");
+            gradient.addStop(1, "red");
+            equal(gradientNode.element.children.length, 2);
+            ok(gradientNode.childNodes[0].element);
+            ok(gradientNode.childNodes[1].element);
+        });
+    }
+
+    // ------------------------------------------------------------
+    (function() {
+        var LinearGradientNode = svg.LinearGradientNode;
+        var LinearGradient = d.LinearGradient;
+        var gradientNode;
+        var gradient;
+
+        gradientBaseTests("LinearGradientNode", LinearGradientNode, LinearGradient);
+
+        function renders(value) {
+            ok(gradientNode.render().indexOf(value) != -1);
+        }
+
+        module("LinearGradientNode", {
+            setup: function() {
+                gradient = new LinearGradient({
+                    start: [0, 0.5],
+                    end: [0.3, 0.7]
+                });
+                gradientNode = new LinearGradientNode(gradient);
+            }
+        });
+
+        test("renders start point", function() {
+            renders("x1='0'");
+            renders("y1='0.5'");
+        });
+
+        test("renders end point", function() {
+            renders("x2='0.3'");
+            renders("y2='0.7'");
+        });
+
+        test("changing point updates coordinates", function() {
+            gradientNode.allAttr = function(attrs) {
+                equal(attrs[0][0], "x1");
+                equal(attrs[0][1], 0.5);
+            };
+            gradient.start().setX(0.5);
+        });
+
+    })();
+
 })();

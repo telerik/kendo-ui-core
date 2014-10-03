@@ -26,6 +26,7 @@
     // Constants ==============================================================
     var BUTT = "butt",
         DASH_ARRAYS = d.DASH_ARRAYS,
+        GRADIENT = "gradient",
         NONE = "none",
         SOLID = "solid",
         SPACE = " ",
@@ -219,7 +220,7 @@
 
             if (field === "visible") {
                 this.css("display", value ? "" : NONE);
-            } else if (DefinitionMap[field]) {
+            } else if (DefinitionMap[field] && isDefinition(field, value)) {
                 this.updateDefinition(field, value);
             } else if (field === "opacity") {
                 this.attr("opacity", value);
@@ -330,7 +331,7 @@
 
                 for (field in DefinitionMap) {
                     definition = options.get(field);
-                    if (definition) {
+                    if (definition && isDefinition(field, definition)) {
                         definitions[field] = definition;
                         hasDefinitions = true;
                     }
@@ -458,11 +459,15 @@
         },
 
         createDefinition: function(type, item) {
-            var node;
+            var nodeType;
             if (type == "clip") {
-                node = new ClipNode(item);
+                nodeType = ClipNode;
+            } else if (type == "fill") {
+                if (item instanceof d.LinearGradient) {
+                    nodeType = LinearGradientNode;
+                }
             }
-            return node;
+            return new nodeType(item);
         },
 
         addDefinitions: function(definitions) {
@@ -708,15 +713,16 @@
 
         mapFill: function(fill) {
             var attrs = [];
+            if (!(fill && fill.nodeType == GRADIENT)) {
+                if (fill && !isTransparent(fill.color)) {
+                    attrs.push(["fill", fill.color]);
 
-            if (fill && !isTransparent(fill.color)) {
-                attrs.push(["fill", fill.color]);
-
-                if (defined(fill.opacity)) {
-                    attrs.push(["fill-opacity", fill.opacity]);
+                    if (defined(fill.opacity)) {
+                        attrs.push(["fill-opacity", fill.opacity]);
+                    }
+                } else {
+                    attrs.push(["fill", NONE]);
                 }
-            } else {
-                attrs.push(["fill", NONE]);
             }
 
             return attrs;
@@ -888,6 +894,92 @@
         )
     });
 
+    var GradientStopNode = Node.extend({
+        template: renderTemplate(
+            "<stop #=d.renderOffset()# #=d.renderStyle()# />"
+        ),
+
+        renderOffset: function() {
+            return renderAttr("offset", this.srcElement.offset());
+        },
+
+        mapStyle: function() {
+            var srcElement = this.srcElement;
+            return [
+                ["stop-color", srcElement.color()],
+                ["stop-opacity", srcElement.opacity()]
+            ];
+        },
+
+        optionsChange: function(e) {
+            if (e.field == "offset") {
+                this.attr(e.field, e.value);
+            } else if (e.field == "color" || e.field == "opacity") {
+                this.css("stop-" + e.field, e.value);
+            }
+        }
+    });
+
+    var GradientNode = Node.extend({
+        init: function(srcElement) {
+            Node.fn.init.call(this, srcElement);
+
+            this.id = srcElement.id;
+
+            this.loadStops();
+        },
+
+        loadStops: function() {
+            var srcElement = this.srcElement;
+            var stops = srcElement.stops;
+            var element = this.element;
+            var stopNode;
+            var idx;
+            for (idx = 0; idx < stops.length; idx++) {
+                stopNode = new GradientStopNode(stops[idx]);
+                this.append(stopNode);
+                if (element) {
+                    stopNode.attachTo(element);
+                }
+            }
+        },
+
+        optionsChange: function(e) {
+            if (e.field == "gradient.stops") {
+                BaseNode.fn.clear.call(this);
+                this.loadStops();
+            } else if (e.field == GRADIENT){
+                this.allAttr(this.mapCoordinates());
+            }
+        },
+
+        renderCoordinates: function() {
+            return renderAllAttr(this.mapCoordinates());
+        }
+    });
+
+    var LinearGradientNode = GradientNode.extend({
+        template: renderTemplate(
+            "<linearGradient id='#=d.id#' #=d.renderCoordinates()#>" +
+                "#= d.renderChildren()#" +
+            "</linearGradient>"
+        ),
+
+        mapCoordinates: function() {
+            var srcElement = this.srcElement;
+            var start = srcElement.start();
+            var end = srcElement.end();
+            var attrs = [
+                ["x1", start.x],
+                ["y1", start.y],
+                ["x2", end.x],
+                ["y2", end.y]
+            ];
+
+            return attrs;
+        }
+    });
+
     // Helpers ================================================================
     var renderSVG = function(container, svg) {
         container.innerHTML = svg;
@@ -959,6 +1051,12 @@
         return $.Deferred().resolve(surface.svg()).promise();
     }
 
+    function isDefinition(type, value) {
+        return type == "clip" || (type == "fill" && (!value || value.nodeType == GRADIENT));
+    }
+
+    // Mappings ===============================================================
+
     function decodeEntities(text) {
         if (!text || !text.indexOf || text.indexOf("&") < 0) {
             return text;
@@ -973,7 +1071,8 @@
 
     // Mappings ===============================================================
     var DefinitionMap = {
-        clip: "clip-path"
+        clip: "clip-path",
+        fill: "fill"
     };
 
     // Exports ================================================================
@@ -994,8 +1093,10 @@
             CircleNode: CircleNode,
             ClipNode: ClipNode,
             DefinitionNode: DefinitionNode,
+            GradientStopNode: GradientStopNode,
             GroupNode: GroupNode,
             ImageNode: ImageNode,
+            LinearGradientNode: LinearGradientNode,
             MultiPathNode: MultiPathNode,
             Node: Node,
             PathNode: PathNode,
