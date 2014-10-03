@@ -15,7 +15,7 @@
 
     var kendo       = window.kendo;
     var dataviz     = kendo.dataviz;
-    var PDF         = kendo.PDF;
+    var PDF         = kendo.pdf;
 
     var DASH_PATTERNS = {
         dash           : [ 4 ],
@@ -63,7 +63,7 @@
             if (--count > 0) {
                 return;
             }
-            var pdf = new PDF();
+            var pdf = new PDF.Document();
             var page = pdf.addPage();
             drawElement(group, page, pdf);
             var binary = pdf.render();
@@ -321,7 +321,6 @@
 
     kendo.deepExtend(dataviz.drawing, {
         pdf: {
-            defineFont: PDF.defineFont,
             parseColor: parseColor,
             toDataURL: toDataURL
         }

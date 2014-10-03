@@ -34,15 +34,45 @@
         "ZapfDingbats"
     ];
 
-    PDF.TEXT_RENDERING_MODE = {
-        fill           : 0,
-        stroke         : 1,
-        fillAndStroke  : 2,
-        invisible      : 3,
-        fillAndClip    : 4,
-        strokeAndClip  : 5,
-        fillStrokeClip : 6,
-        clip           : 7
+    var PAPER_SIZE = {
+        a0        : [ 2383.94 , 3370.39 ],
+        a1        : [ 1683.78 , 2383.94 ],
+        a2        : [ 1190.55 , 1683.78 ],
+        a3        : [ 841.89  , 1190.55 ],
+        a4        : [ 595.28  , 841.89  ],
+        a5        : [ 419.53  , 595.28  ],
+        a6        : [ 297.64  , 419.53  ],
+        a7        : [ 209.76  , 297.64  ],
+        a8        : [ 147.40  , 209.76  ],
+        a9        : [ 104.88  , 147.40  ],
+        a10       : [ 73.70   , 104.88  ],
+        b0        : [ 2834.65 , 4008.19 ],
+        b1        : [ 2004.09 , 2834.65 ],
+        b2        : [ 1417.32 , 2004.09 ],
+        b3        : [ 1000.63 , 1417.32 ],
+        b4        : [ 708.66  , 1000.63 ],
+        b5        : [ 498.90  , 708.66  ],
+        b6        : [ 354.33  , 498.90  ],
+        b7        : [ 249.45  , 354.33  ],
+        b8        : [ 175.75  , 249.45  ],
+        b9        : [ 124.72  , 175.75  ],
+        b10       : [ 87.87   , 124.72  ],
+        c0        : [ 2599.37 , 3676.54 ],
+        c1        : [ 1836.85 , 2599.37 ],
+        c2        : [ 1298.27 , 1836.85 ],
+        c3        : [ 918.43  , 1298.27 ],
+        c4        : [ 649.13  , 918.43  ],
+        c5        : [ 459.21  , 649.13  ],
+        c6        : [ 323.15  , 459.21  ],
+        c7        : [ 229.61  , 323.15  ],
+        c8        : [ 161.57  , 229.61  ],
+        c9        : [ 113.39  , 161.57  ],
+        c10       : [ 79.37   , 113.39  ],
+        executive : [ 521.86  , 756.00  ],
+        folio     : [ 612.00  , 936.00  ],
+        legal     : [ 612.00  , 1008.00 ],
+        letter    : [ 612.00  , 792.00  ],
+        tabloid   : [ 792.00  , 1224.00 ]
     };
 
     function makeOutput() {
@@ -120,11 +150,17 @@
         };
     }
 
-    function PDF() {
+    function PDFDocument(options) {
         var self = this;
         var out = makeOutput();
         var objcount = 0;
         var objects = [];
+
+        function getOption(name, defval) {
+            return (options && name in options) ? options[name] : defval;
+        }
+
+        self.getOption = getOption;
 
         self.attach = function(value) {
             if (objects.indexOf(value) < 0) {
@@ -137,8 +173,16 @@
         self.FONTS = {};
         self.IMAGES = {};
 
+        var paperSize = getOption("paperSize", PAPER_SIZE.a4);
+        if (typeof paperSize == "string") {
+            paperSize = PAPER_SIZE[paperSize.toLowerCase()];
+            if (paperSize == null) {
+                throw new Error("Unknown paper size");
+            }
+        }
+
         var catalog = self.attach(new PDFCatalog());
-        var pageTree = self.attach(new PDFPageTree());
+        var pageTree = self.attach(new PDFPageTree([ 0, 0, paperSize[0], paperSize[1] ]));
         catalog.setPages(pageTree);
 
         self.addPage = function() {
@@ -153,7 +197,7 @@
             // canvas-like coord. system.  (0,0) is upper-left.
             // text must be vertically mirorred before drawing.
             // XXX: configurable page size.
-            page.transform(1, 0, 0, -1, 0, mm2pt(297));
+            page.transform(1, 0, 0, -1, 0, paperSize[1]);
 
             return page;
         };
@@ -218,7 +262,7 @@
             cont(font);
         } else {
             loadBinary(url, function(data){
-                var font = new PDF.TTFFont(data);
+                var font = new global.kendo.pdf.TTFFont(data);
                 FONT_CACHE[url] = font;
                 cont(font);
             });
@@ -299,12 +343,12 @@
         };
     }
 
-    PDF.loadFonts = manyLoader(loadFont);
-    PDF.loadImages = manyLoader(loadImage);
+    var loadFonts = manyLoader(loadFont);
+    var loadImages = manyLoader(loadImage);
 
-    PDF.prototype = {
-        loadFonts: PDF.loadFonts,
-        loadImages: PDF.loadImages,
+    PDFDocument.prototype = {
+        loadFonts: loadFonts,
+        loadImages: loadImages,
 
         getFont: function(url) {
             var font = this.FONTS[url];
@@ -585,13 +629,13 @@
 
     /// page tree
 
-    var PDFPageTree = defclass(function PDFPageTree(){
+    var PDFPageTree = defclass(function PDFPageTree(mediabox){
         this.props = {
             Type  : PDFName.get("Pages"),
             Kids  : [],
             Count : 0,
 
-            MediaBox : [ 0, 0, mm2pt(210), mm2pt(297) ]
+            MediaBox : mediabox
         };
     }, {
         addPage: function(pageObj) {
@@ -1322,13 +1366,27 @@
 
     /// exports.
 
-    PDF.BinaryStream = BinaryStream;
-    PDF.defineFont = defineFont;
-    PDF.parseFontDef = parseFontDef;
-    PDF.getFontURL = getFontURL;
-    PDF.withCanvas = withCanvas;
+    global.kendo.pdf = {
+        Document      : PDFDocument,
+        BinaryStream  : BinaryStream,
+        defineFont    : defineFont,
+        parseFontDef  : parseFontDef,
+        getFontURL    : getFontURL,
+        withCanvas    : withCanvas,
+        loadFonts     : loadFonts,
+        loadImages    : loadImages,
 
-    global.kendo.PDF = PDF;
+        TEXT_RENDERING_MODE : {
+            fill           : 0,
+            stroke         : 1,
+            fillAndStroke  : 2,
+            invisible      : 3,
+            fillAndClip    : 4,
+            strokeAndClip  : 5,
+            fillStrokeClip : 6,
+            clip           : 7
+        }
+    };
 
 })(this);
 

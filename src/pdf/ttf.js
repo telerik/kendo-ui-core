@@ -20,7 +20,7 @@ function sortedKeys(obj) {
     return Object.keys(obj).sort(function(a, b){ return a - b; }).map(parseFloat);
 }
 
-var PDF = global.kendo.PDF;
+var PDF = global.kendo.pdf;
 var BinaryStream = PDF.BinaryStream;
 
 ///
