@@ -61,6 +61,14 @@ public class SerializationTag extends  BaseTag  /* interfaces */ /* interfaces *
         setProperty("entities", value);
     }
 
+    public boolean getScripts() {
+        return (boolean)getProperty("scripts");
+    }
+
+    public void setScripts(boolean value) {
+        setProperty("scripts", value);
+    }
+
 //<< Attributes
 
 }
