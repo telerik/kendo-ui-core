@@ -1167,6 +1167,31 @@
             compareBoundingBox(path.rawBBox(), [10, 20, 110, 220]);
         });
 
+        test("constructs path from points", function() {
+            var p0 = new g.Point(10, 20);
+            var p1 = new g.Point(100, 200);
+            path = Path.fromPoints([p0, p1]);
+
+            ok(path.segments[0].anchor().equals(p0));
+            ok(path.segments[1].anchor().equals(p1));
+            equal(path.segments.length, 2);
+        });
+
+        test("constructs path from point arrays", function() {
+            path = Path.fromPoints([[10, 20], [100, 200]]);
+            equal(path.segments.length, 2);
+        });
+
+        test("constructs empty path from empty point list", function() {
+            path = Path.fromPoints([]);
+            equal(path.segments.length, 0);
+        });
+
+        test("returns undefined for undefined point list", function() {
+            path = Path.fromPoints();
+            equal(path, undefined);
+        });
+
         test("moveTo adds segment", function() {
             path.moveTo(0, 0);
             equal(path.segments.length, 1);

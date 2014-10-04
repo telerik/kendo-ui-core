@@ -702,6 +702,25 @@
             .close();
     };
 
+    Path.fromPoints = function(points, options) {
+        if (points) {
+            var path = new Path(options);
+
+            for (var i = 0; i < points.length; i++) {
+                var pt = Point.create(points[i]);
+                if (pt) {
+                    if (i === 0) {
+                        path.moveTo(pt);
+                    } else {
+                        path.lineTo(pt);
+                    }
+                }
+            }
+
+            return path;
+        }
+    };
+
     var MultiPath = Element.extend({
         nodeType: "MultiPath",
 
