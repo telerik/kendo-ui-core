@@ -937,6 +937,40 @@ var __meta__ = {
             return options.border.width || options.background;
         },
 
+        createVisual: function() {
+            ChartElement.fn.createVisual.call(this);
+
+            var options = this.options;
+            if (options.visible && this.hasBox()) {
+                this.visual.append(draw.Path.fromRect(
+                    this.paddingBox.toRect(), this.visualStyle()
+                ));
+            }
+        },
+
+        visualStyle: function() {
+            var boxElement = this,
+                options = boxElement.options,
+                border = options.border || {};
+
+            return {
+                stroke: {
+                    width: border.width,
+                    color: border.color,
+                    opacity: valueOrDefault(border.opacity, options.opacity),
+                    dashType: border.dashType
+                },
+                fill: {
+                    color: options.background,
+                    opacity: options.opacity
+                },
+                // TODO: zIndex
+                // zIndex: options.zIndex,
+                // animation: options.animation,
+                cursor: options.cursor
+            };
+        },
+
         getViewElements: function(view, renderOptions) {
             var boxElement = this,
                 options = boxElement.options,
@@ -945,7 +979,6 @@ var __meta__ = {
             if (!options.visible) {
                 return [];
             }
-
 
             if (boxElement.hasBox()) {
                 elements.push(
@@ -978,28 +1011,6 @@ var __meta__ = {
                 zIndex: options.zIndex,
                 cursor: options.cursor,
                 data: { modelId: boxElement.modelId }
-            };
-        },
-
-        visualStyle: function() {
-            var boxElement = this,
-                options = boxElement.options,
-                border = options.border || {};
-
-            return {
-                stroke: {
-                    width: border.width,
-                    color: border.color,
-                    opacity: valueOrDefault(border.opacity, options.opacity),
-                    dashType: border.dashType
-                },
-                fill: {
-                    color: options.background,
-                    opacity: options.opacity
-                },
-                // TODO: zIndex
-                //zIndex: options.zIndex,
-                cursor: options.cursor
             };
         }
     });
