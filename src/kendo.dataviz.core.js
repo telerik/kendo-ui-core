@@ -2365,69 +2365,56 @@ var __meta__ = {
             vAlign: CENTER
         },
 
-        getViewElements: function(view, renderOptions) {
+        createVisual: function(view) {
             var marker = this,
                 options = marker.options,
                 type = options.type,
                 rotation = options.rotation,
                 box = marker.paddingBox,
                 element,
-                elementOptions,
                 center = box.center(),
                 halfWidth = box.width() / 2,
                 points,
                 i;
 
-            // Make sure that this element will be added in the model map.
-            ChartElement.fn.getViewElements.call(this, view);
+            ChartElement.fn.createVisual.call(this);
 
-            if ((renderOptions || {}).visible !== true) {
-                if (!options.visible || !marker.hasBox())  {
-                    return [];
-                }
+            if (!options.visible || !marker.hasBox())  {
+                return;
             }
 
-            elementOptions = deepExtend(marker.elementStyle(), renderOptions);
+            var style = marker.visualStyle();
 
             if (type === CIRCLE) {
-                element = view.createCircle(Point2D(
-                    round(box.x1 + halfWidth, COORD_PRECISION),
-                    round(box.y1 + box.height() / 2, COORD_PRECISION)
-                ), halfWidth, elementOptions);
+                element = new draw.Circle(
+                    new geom.Circle([
+                        round(box.x1 + halfWidth, COORD_PRECISION),
+                        round(box.y1 + box.height() / 2, COORD_PRECISION)
+                    ], halfWidth),
+                    style
+                );
             }  else if (type === TRIANGLE) {
-                points = [
-                    Point2D(box.x1 + halfWidth, box.y1),
-                    Point2D(box.x1, box.y2),
-                    Point2D(box.x2, box.y2)
-                ];
+                element = draw.Path.fromPoints([
+                    [box.x1 + halfWidth, box.y1],
+                    [box.x1, box.y2],
+                    [box.x2, box.y2]
+                ], style).close();
             } else if (type === CROSS) {
-                element = view.createGroup({
-                    zIndex: elementOptions.zIndex
-                });
+                element = new draw.MultiPath(style);
 
-                element.children.push(view.createPolyline(
-                    [Point2D(box.x1, box.y1), Point2D(box.x2, box.y2)], true, elementOptions
-                ));
-                element.children.push(view.createPolyline(
-                    [Point2D(box.x1, box.y2), Point2D(box.x2, box.y1)], true, elementOptions
-                ));
+                element.moveTo(box.x1, box.y1).lineTo(box.x2, box.y2);
+                element.moveTo(box.x1, box.y2).lineTo(box.x2, box.y1);
             } else {
-                points = box.points();
+                element = draw.Path.fromRect(box.toRect(), style);
             }
 
-            if (points) {
-                if (rotation) {
-                    for (i = 0; i < points.length; i++) {
-                        points[i].rotate(center, rotation);
-                    }
-                }
-
-                element = view.createPolyline(
-                    points, true, elementOptions
+            if (rotation) {
+                element.transform(geom.transform()
+                    .rotate(rotation, [center.x, center.y])
                 );
             }
 
-            return [ element ];
+            this.visual.append(element);
         }
     });
 

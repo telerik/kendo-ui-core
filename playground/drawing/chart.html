@@ -24,6 +24,11 @@
                 type: "column",
                 data: [1, 2, 3]
             }],
+            valueAxis: {
+                title: {
+                    text: "Foo"
+                }
+            },
             categoryAxis: {
                 categories: ["Fooooooo", "Baaaaaaaaaar\nBar", "Baz"],
                 minorTicks: {
@@ -46,6 +51,10 @@
                 notes: {
                     line: {
                         length: 200
+                    },
+                    icon: {
+                        type: "triangle",
+                        rotation: 10
                     },
                     data: [{
                         value: 1,
