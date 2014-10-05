@@ -759,6 +759,8 @@ var __meta__ = {
             for (var i = 0; i < children.length; i++) {
                 children[i].renderVisual();
             }
+
+            this.renderComplete();
         },
 
         createVisual: function() {
@@ -773,7 +775,9 @@ var __meta__ = {
                 // pass through child visuals
                 this.parent.appendVisual(childVisual);
             }
-        }
+        },
+
+        renderComplete: $.noop
     });
 
     var RootElement = ChartElement.extend({
@@ -1502,28 +1506,29 @@ var __meta__ = {
         return tick;
     }
 
-    function createAxisGridLine(view, options, gridLine) {
+    function createAxisGridLine(options, gridLine) {
         var lineStart = options.lineStart,
             lineEnd = options.lineEnd,
             position = options.position,
             start, end;
 
+        var line = new draw.Path({
+            stroke: {
+                width: gridLine.width,
+                color: gridLine.color,
+                dashType: gridLine.dashType
+            }
+        });
+
         if (options.vertical) {
-            start = Point2D(lineStart, position);
-            end = Point2D(lineEnd, position);
+            line.moveTo(lineStart, position)
+                .lineTo(lineEnd, position);
         } else {
-            start = Point2D(position, lineStart);
-            end = Point2D(position, lineEnd);
+            line.moveTo(position, lineStart)
+                .lineTo(position, lineEnd);
         }
-        return view.createLine(
-            start.x, start.y,
-            end.x, end.y, {
-                data: { modelId: options.modelId },
-                strokeWidth: gridLine.width,
-                stroke: gridLine.color,
-                dashType: gridLine.dashType,
-                zIndex: -1
-            });
+
+        return line;
     }
 
     var Axis = ChartElement.extend({
@@ -1897,9 +1902,8 @@ var __meta__ = {
             }
         },
 
-        renderGridLines: function(view, altAxis) {
+        createGridLines: function(altAxis) {
             var axis = this,
-                items = [],
                 options = axis.options,
                 axisLineVisible = altAxis.options.line.visible,
                 majorGridLines = options.majorGridLines,
@@ -1915,7 +1919,7 @@ var __meta__ = {
                 },
                 pos, majorTicks = [];
 
-            function render(tickPositions, gridLine) {
+            function render(tickPositions, gridLine, skipUnit) {
                 var count = tickPositions.length,
                     i;
 
@@ -1923,9 +1927,9 @@ var __meta__ = {
                     for (i = gridLine.skip; i < count; i += gridLine.step) {
                         pos = round(tickPositions[i]);
                         if (!inArray(pos, majorTicks)) {
-                            if (i % gridLine.skipUnit !== 0 && (!axisLineVisible || linePos !== pos)) {
+                            if (i % skipUnit !== 0 && (!axisLineVisible || linePos !== pos)) {
                                 lineOptions.position = pos;
-                                items.push(createAxisGridLine(view, lineOptions, gridLine));
+                                axis.visual.append(createAxisGridLine(lineOptions, gridLine));
 
                                 majorTicks.push(pos);
                             }
@@ -1935,11 +1939,7 @@ var __meta__ = {
             }
 
             render(axis.getMajorTickPositions(), options.majorGridLines);
-            render(axis.getMinorTickPositions(), deepExtend({}, {
-                    skipUnit: majorUnit / options.minorUnit
-                }, options.minorGridLines));
-
-            return items;
+            render(axis.getMinorTickPositions(), options.minorGridLines, majorUnit / options.minorUnit);
         },
 
         reflow: function(box) {
@@ -2970,6 +2970,7 @@ var __meta__ = {
                 },
                 start, end;
 
+            // TODO: Review
             function render(tickPosition, tickOptions) {
                 tickLineOptions.tickX = mirror ? lineBox.x2 : lineBox.x2 - tickOptions.size;
                 tickLineOptions.tickY = mirror ? lineBox.y1 - tickOptions.size : lineBox.y1;

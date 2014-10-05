@@ -7865,28 +7865,13 @@ var __meta__ = {
             }
         },
 
-        getViewElements: function(view) {
-            var pane = this,
-                elements = BoxElement.fn.getViewElements.call(pane, view),
-                group = view.createGroup({
-                    id: pane.id
-                }),
-                result = [];
-
-            group.children = elements.concat(
-                pane.renderGridLines(view)
-            );
-
-            pane.view = view;
-
-            if (pane.options.visible) {
-                result = [group];
+        renderComplete: function() {
+            if (this.options.visible) {
+                this.createGridLines();
             }
-
-            return result;
         },
 
-        renderGridLines: function(view) {
+        createGridLines: function() {
             var pane = this,
                 axes = pane.axes,
                 allAxes = axes.concat(pane.parent.axes),
@@ -7895,6 +7880,8 @@ var __meta__ = {
                 gridLines, i, j, axis,
                 vertical, altAxis;
 
+            // TODO
+            // Is full combination really necessary?
             for (i = 0; i < axes.length; i++) {
                 axis = axes[i];
                 vertical = axis.options.vertical;
@@ -7904,13 +7891,11 @@ var __meta__ = {
                     if (gridLines.length === 0) {
                         altAxis = allAxes[j];
                         if (vertical !== altAxis.options.vertical) {
-                            append(gridLines, axis.renderGridLines(view, altAxis, axis));
+                            append(gridLines, axis.createGridLines(altAxis, axis));
                         }
                     }
                 }
             }
-
-            return vGridLines.concat(hGridLines);
         },
 
         refresh: function() {
