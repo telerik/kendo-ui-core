@@ -1452,7 +1452,7 @@ var __meta__ = {
                         this.root = this.wrapper.html(groupHtml).children("ul");
                     }
 
-                    this.root.attr("role", "tree")
+                    this.root.attr("role", "tree");
 
                     this._angularItems("compile");
                 }
