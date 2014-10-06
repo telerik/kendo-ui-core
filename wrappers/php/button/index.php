@@ -3,67 +3,87 @@ require_once '../include/header.php';
 require_once '../lib/Kendo/Autoload.php';
 ?>
 
-<p>
-  
-<?php
+<div class="demo-section k-header">
+    <div>
+        <h4>Basic Button</h4>
+        <p>
+            <?php
+                echo (new \Kendo\UI\Button('primaryTextButton'))
+                    ->attr('class', 'k-primary')
+                    ->content('Primary button')
+                    ->render();
+            ?>
 
-$textButton = new \Kendo\UI\Button('textButton');
-$textButton->attr('type', 'button')
-           ->content('Text button');
+            <?php
+                echo (new \Kendo\UI\Button('textButton'))
+                    ->content('Button')
+                    ->render();
+            ?>
+        </p>
+    </div>
 
-echo $textButton->render();
+     <div>
+        <h4>Disabled buttons</h4>
+        <p>
+            <?php
+                echo (new \Kendo\UI\Button('primaryDisabledButton'))
+                    ->tag('a')
+                    ->enable(false)
+                    ->attr('class', 'k-primary')
+                    ->content('Disabled primary button')
+                    ->render();
+            ?>
 
-echo " ";
+            <?php
+                echo (new \Kendo\UI\Button('disabledButton'))
+                    ->enable(false)
+                    ->content('Disabled Button')
+                    ->render();
+            ?>
+        </p>
+    </div>
 
-$iconTextButton = new \Kendo\UI\Button('iconTextButton');
-$iconTextButton->tag('a')
-               ->spriteCssClass('k-icon k-i-ungroup')
-               ->content('Icon and text');
+    <div>
+       <h4>Buttons with icons</h4>
+        <p>
+            <?php
+                echo (new \Kendo\UI\Button('iconTextButton'))
+                    ->tag('a')
+                    ->spriteCssClass('k-icon k-i-funnel')
+                    ->content('Filter')
+                    ->render();
+            ?>
 
-echo $iconTextButton->render();
+            <?php
+                echo (new \Kendo\UI\Button('kendoIconTextButton'))
+                    ->tag('a')
+                    ->icon('funnel-clear')
+                    ->content('Clear Filter')
+                    ->render();
+            ?>
 
-echo " ";
+            <?php
+                echo (new \Kendo\UI\Button('iconButton'))
+                    ->tag('em')
+                    ->spriteCssClass('k-icon k-i-refresh')
+                    ->render();
+            ?>
+        </p>
+    </div>
 
-$kendoIconTextButton = new \Kendo\UI\Button('kendoIconTextButton');
-$kendoIconTextButton->tag('a')
-               ->icon('plus')
-               ->content('Kendo UI Icon');
 
-echo $kendoIconTextButton->render();
-
-echo " ";
-
-$iconButton = new \Kendo\UI\Button('iconButton');
-$iconButton->tag('em')
-           ->spriteCssClass('k-icon k-i-refresh')
-           ->content('<span class="k-sprite">Refresh</span>');
-
-echo $iconButton->render();
-
-?>
-
-</p><p>
-
-<?php
-
-$disabledButton1 = new \Kendo\UI\Button('disabledButton1');
-$disabledButton1->tag('span')
-                ->enable(false)
-                ->content('Disabled via configuration');
-
-echo $disabledButton1->render();
-
-echo " ";
-
-$disabledButton2 = new \Kendo\UI\Button('disabledButton2');
-$disabledButton2->tag('span')
-                ->attr('disabled', 'disabled')
-                ->content('Disabled via HTML attribute');
-
-echo $disabledButton2->render();
-
-?>
-
-</p>
+    <style scoped>
+        .demo-section {
+            width: 400px;
+        }
+        .demo-section p {
+            margin: 0 0 30px;
+            line-height: 40px;
+        }
+        .k-primary {
+            width: 150px;
+        }
+    </style>
+</div>
 
 <?php require_once '../include/footer.php'; ?>
