@@ -1,5 +1,41 @@
 
 
+/* Filter cell operator messages */
+
+if (kendo.ui.FilterCell) {
+kendo.ui.FilterCell.prototype.options.operators =
+$.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
+  "date": {
+    "eq": "Igual",
+    "gte": "Maior ou igual que",
+    "gt": "Maior que",
+    "lte": "Menor ou igual que",
+    "lt": "Menor que",
+    "neq": "Diferente"
+  },
+  "enum": {
+    "eq": "Igual",
+    "neq": "Diferente"
+  },
+  "number": {
+    "eq": "Igual",
+    "gte": "Maior ou igual que",
+    "gt": "Maior que",
+    "lte": "Menor ou igual que",
+    "lt": "Menor que",
+    "neq": "Diferente"
+  },
+  "string": {
+    "endswith": "A acabar em",
+    "eq": "Igual",
+    "neq": "Diferente",
+    "startswith": "A comecar com",
+    "contains": "Contem",
+    "doesnotcontain": "Does not contain"
+  }
+});
+}
+
 /* Filter menu operator messages */
 
 if (kendo.ui.FilterMenu) {
@@ -146,6 +182,19 @@ $.extend(true, kendo.ui.Pager.prototype.options.messages,{
   "next": "Ir para a próxima página",
   "previous": "Vá para a página anterior",
   "morePages": "Mais páginas"
+});
+}
+
+/* FilterCell messages */
+
+if (kendo.ui.FilterCell) {
+kendo.ui.FilterCell.prototype.options.messages =
+$.extend(true, kendo.ui.FilterCell.prototype.options.messages,{
+  "filter": "Filtro",
+  "clear": "Limpar",
+  "operator": "Operador",
+  "isFalse": "is false",
+  "isTrue": "is true"
 });
 }
 

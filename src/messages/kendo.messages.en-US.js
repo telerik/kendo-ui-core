@@ -120,6 +120,19 @@ $.extend(true, kendo.ui.FileBrowser.prototype.options.messages,{
 });
 }
 
+/* FilterCell messages */
+
+if (kendo.ui.FilterCell) {
+kendo.ui.FilterCell.prototype.options.messages =
+$.extend(true, kendo.ui.FilterCell.prototype.options.messages,{
+  "isTrue": "is true",
+  "isFalse": "is false",
+  "filter": "Filter",
+  "clear": "Clear",
+  "operator": "Operator"
+});
+}
+
 /* FilterMenu messages */
 
 if (kendo.ui.FilterMenu) {

@@ -1,5 +1,41 @@
 
 
+/* Filter cell operator messages */
+
+if (kendo.ui.FilterCell) {
+kendo.ui.FilterCell.prototype.options.operators =
+$.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
+  "date": {
+    "eq": "рівними",
+    "gte": "після або рівна",
+    "gt": "після",
+    "lte": "до або рівними",
+    "lt": "до",
+    "neq": "не рівна"
+  },
+  "number": {
+    "eq": "рівне",
+    "gte": "більше або рівними",
+    "gt": "більше",
+    "lte": "менше або рівними",
+    "lt": "менше",
+    "neq": "не рівними"
+  },
+  "string": {
+    "endswith": "закінчуються на",
+    "eq": "рівні",
+    "neq": "не рівні",
+    "startswith": "починаються на",
+    "contains": "містять",
+    "doesnotcontain": "Does not contain"
+  },
+  "enum": {
+    "eq": "рівними",
+    "neq": "не рівними"
+  }
+});
+}
+
 /* Filter menu operator messages */
 
 if (kendo.ui.FilterMenu) {
@@ -146,6 +182,19 @@ $.extend(true, kendo.ui.Pager.prototype.options.messages,{
   "next": "Перейдіть на наступну сторінку",
   "previous": "Перейти на попередню сторінку",
   "morePages": "Більше сторінок"
+});
+}
+
+/* FilterCell messages */
+
+if (kendo.ui.FilterCell) {
+kendo.ui.FilterCell.prototype.options.messages =
+$.extend(true, kendo.ui.FilterCell.prototype.options.messages,{
+  "filter": "фільтрувати",
+  "clear": "очистити фільтр",
+  "isFalse": "хиба",
+  "isTrue": "істина",
+  "operator": "Oператор"
 });
 }
 

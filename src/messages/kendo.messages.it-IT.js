@@ -1,5 +1,41 @@
 
 
+/* Filter cell operator messages */
+
+if (kendo.ui.FilterCell) {
+kendo.ui.FilterCell.prototype.options.operators =
+$.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
+  "date": {
+    "eq": "È uguale a",
+    "gt": "È dopo",
+    "gte": "È dopo o uguale a",
+    "lt": "È prima",
+    "lte": "È prima o uguale a",
+    "neq": "Non è uguale a"
+  },
+  "number": {
+    "eq": "È uguale a",
+    "gt": "È più grande di",
+    "gte": "È più grande o uguale a",
+    "lt": "È più piccolo di",
+    "lte": "È più piccolo o uguale a",
+    "neq": "Non è uguale a"
+  },
+  "string": {
+    "contains": "Contiene",
+    "doesnotcontain": "Non contiene",
+    "endswith": "Finisce con",
+    "eq": "È uguale a",
+    "neq": "Non è uguale a",
+    "startswith": "Inizia con"
+  },
+  "enum": {
+    "eq": "È uguale a",
+    "neq": "Non è uguale a"
+  }
+});
+}
+
 /* Filter menu operator messages */
 
 if (kendo.ui.FilterMenu) {
@@ -104,6 +140,19 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "weekday": "giorno della settimana",
     "weekend": "giorno finesettimana"
   }
+});
+}
+
+/* FilterCenn messages */
+
+if (kendo.ui.FilterCenn) {
+kendo.ui.FilterCenn.prototype.options.messages =
+$.extend(true, kendo.ui.FilterCenn.prototype.options.messages,{
+  "clear": "Rimuovi",
+  "filter": "Filtro",
+  "isFalse": "è falso",
+  "isTrue": "è vero",
+  "operator": "Operatore"
 });
 }
 
