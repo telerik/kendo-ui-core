@@ -160,6 +160,42 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
 });
 }
 
+/* Filter cell operator messages */
+
+if (kendo.ui.FilterCell) {
+kendo.ui.FilterCell.prototype.options.operators =
+$.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
+  "string": {
+    "eq": "Е равно на",
+    "neq": "Не е равно на",
+    "startswith": "Започва с",
+    "contains": "Съдържа",
+    "doesnotcontain": "Не съдържа",
+    "endswith": "Завършва на"
+  },
+  "number": {
+    "eq": "Е равно на",
+    "neq": "Не е равно на",
+    "gte": "Е по-голяма или равно на",
+    "gt": "Е по-голямо от",
+    "lte": "Е по-малко или равно на",
+    "lt": "Е по-малко от"
+  },
+  "date": {
+    "eq": "Е равно на",
+    "neq": "Не е равно на",
+    "gte": "Е след или равно на",
+    "gt": "Е след",
+    "lte": "Е преди или равно на",
+    "lt": "Е преди"
+  },
+  "enums": {
+    "eq": "E равно на",
+    "neq": "Не е равно на"
+  }
+});
+}
+
 /* ColumnMenu messages */
 
 if (kendo.ui.ColumnMenu) {
@@ -290,6 +326,19 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "cancel": "Откажи",
   "operator": "Оператор",
   "value": "Стойност"
+});
+}
+
+/* FilterCell messages */
+
+if (kendo.ui.FilterCell) {
+kendo.ui.FilterCell.prototype.options.messages =
+$.extend(true, kendo.ui.FilterCell.prototype.options.messages,{
+  "filter": "Филтрирай",
+  "clear": "Премахни филтър",
+  "isFalse": "не е вярно",
+  "isTrue": "е вярно",
+  "operator": "Оператор",
 });
 }
 
