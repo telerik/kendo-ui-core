@@ -611,19 +611,42 @@
                 start++;
             }
             range.setStart(node, start);
+            var len = 0;
             while (++start <= end) {
+                ++len;
                 range.setEnd(node, start);
 
                 // for justified text we must split at each space, as
                 // space has variable width.  otherwise we can
                 // optimize and split only at end of line (i.e. when a
                 // new rectangle would be created).
-                if ((isJustified && /\s/.test(text.charAt(start - 1))) || range.getClientRects().length > 1) {
+                if (len > 1 && ((isJustified && /\s/.test(text.charAt(start - 1))) || range.getClientRects().length > 1)) {
+                    //
+                    // In IE, getClientRects for a <li> element will return an additional rectangle for the bullet, but
+                    // *only* when only the first char in the LI is selected.  Checking if len > 1 above appears to be a
+                    // good workaround.
+                    //
+                    //// DEBUG
+                    // Array.prototype.slice.call(range.getClientRects()).concat([ range.getBoundingClientRect() ]).forEach(function(r){
+                    //     $("<div>").css({
+                    //         position  : "absolute",
+                    //         left      : r.left + "px",
+                    //         top       : r.top + "px",
+                    //         width     : r.right - r.left + "px",
+                    //         height    : r.bottom - r.top + "px",
+                    //         boxSizing : "border-box",
+                    //         border    : "1px solid red"
+                    //     }).appendTo(document.body);
+                    // });
                     range.setEnd(node, --start);
                     break;
                 }
             }
-            var box = range.getBoundingClientRect();
+
+            // another workaround for IE: if we rely on getBoundingClientRect() we'll overlap with the bullet for LI
+            // elements.  Calling getClientRects() and using the *first* rect appears to give us the correct location.
+            var box = range.getClientRects()[0];
+
             var str = range.toString().replace(/\s+$/, "");
             drawText(str, box);
         }
