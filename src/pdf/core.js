@@ -321,8 +321,7 @@
                     if (hasAlpha) {
                         img = new PDFRawImage(img.width, img.height, rgb, alpha);
                     } else {
-                        // XXX: fix PDFJpegImage for new BinaryStream
-                        // jpeg.
+                        // no transparency, encode as JPEG.
                         var data = canvas.toDataURL("image/jpeg");
                         data = data.substr(data.indexOf(";base64,") + 8);
                         data = global.atob(data);
