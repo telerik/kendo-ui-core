@@ -440,23 +440,6 @@
         ];
     }
 
-    function utf16_be_encode(string) {
-        var i = string.length, k = 0, c, ret = "";
-        function add(c) {
-            ret += String.fromCharCode(c >> 8) + String.fromCharCode(c & 0xFF);
-        }
-        while (--i >= 0) {
-            c = string.charCodeAt(k++);
-            if (c <= 0xFFFF) {
-                add(c);
-            } else {
-                add( ((c - 0x10000) >> 10) + 0xD800 );
-                add( ((c - 0x10000) & 0x3FF) + 0xD800 );
-            }
-        }
-        return ret;
-    }
-
     var isArray = Array.isArray || function(obj) {
         return obj instanceof Array;
     };
