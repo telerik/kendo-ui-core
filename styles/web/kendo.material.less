@@ -8,7 +8,7 @@
 @inverse-text-color: #fff;
 @widget-gradient: none;
 @widget-background-color: #fff;
-@widget-border-color: #ccc;
+@widget-border-color: #e5e5e5;
 @widget-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
 
 /* Inputs */
@@ -40,7 +40,7 @@
 @hover-text-color: @widget-text-color;
 @hover-gradient: none;
 @hover-background-color: #ebebeb;
-@hover-border-color: #adadad;
+@hover-border-color: #ebebeb;
 @hover-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
 
 /* Selects, Dropdowns */
@@ -252,6 +252,9 @@
 
 //new var-s
 @secondary-background-color: #f9f9f9;
+@secondary-hover-background-color: #5c6bc0;
+@selection-background-color: #00b0ff;
+@header-button-background-color: #283593;
 
 
 @import "theme-template.less";
@@ -281,6 +284,7 @@
     border-color: @primary-hover-border-color;
     background-color: @primary-hover-background-color;
 }
+
 
 .k-textbox:focus,
 .k-autocomplete.k-state-focused,
@@ -359,7 +363,11 @@ td.k-state-focused.k-state-selected,
 
 .k-tabstrip-items .k-item.k-state-hover
 {
-    background: @hover-background-color;
+    background: @secondary-hover-background-color;
+}
+
+.k-tabstrip-items .k-state-hover .k-link {
+    color: @header-text-color;
 }
 
 //Menu
@@ -369,9 +377,31 @@ td.k-state-focused.k-state-selected,
     background-color: @widget-background-color;
 }
 
+.k-menu .k-group {
+    border-color: @widget-border-color;
+}
+
+.k-menu.k-header,
+.k-menu .k-item,
+.k-widget.k-menu-horizontal > .k-item {
+    .box-shadow(none);
+}
+
 //Toolbar
 .k-toolbar {
     background-color: @drop-down-background;
+}
+
+.k-grid .k-button {
+    color: @header-text-color;
+    background-color: @header-button-background-color;
+    border-color: @header-button-background-color;
+    .box-shadow(none);
+}
+
+.k-grid .k-button:hover {
+    background-color: @secondary-hover-background-color;
+    border-color: @secondary-hover-background-color;
 }
 
 //Grid
@@ -382,6 +412,68 @@ td.k-group-cell,
     background-color: @alt-background-color;
 }
 
-.k-grid-header .k-header {
+.k-grid-header .k-header,
+.k-pager-wrap,
+.k-pager-numbers .k-state-selected {
     background-color: @secondary-background-color;
+}
+
+.k-grid tr.k-state-selected,
+.k-marquee-color {
+    background-color: @selection-background-color; 
+}
+
+.k-grid tr.k-state-selected {
+    color: @inverse-text-color;
+}
+
+.k-grid-header .k-header,
+.k-grid-header .k-link:link,
+.k-grid-pager .k-link:link  {
+    color: @widget-text-color;
+}
+
+.k-pager-numbers .k-link,
+.k-pager-wrap > .k-link {
+    border-radius: 0;
+}
+
+.k-pager-numbers .k-state-selected {
+    border-color: @selected-text-color;
+    border-radius: 0;
+    .box-shadow(none);
+}
+
+.k-pager-wrap .k-link {
+    border-color: @secondary-background-color;
+}
+
+//PanelBar
+.k-panelbar,
+.k-panelbar .k-header,
+.k-panelbar .k-content,
+.k-panel > li.k-item,
+.k-panelbar .k-state-selected {
+    background-color: @secondary-background-color;
+}
+
+.k-panelbar > li.k-state-default > .k-link {
+    color: @widget-text-color;
+}
+
+.k-panelbar .k-state-hover {
+    background-color: @hover-background-color;
+}
+
+.k-panelbar > .k-item > .k-link,
+.k-panelbar.k-header,
+.k-panelbar .k-content, .k-panelbar .k-panel, .k-panelbar .k-item {
+    border-color: @widget-border-color;
+}
+
+//Splitter
+.k-splitbar.k-state-focused {
+    background-color: @widget-background-color;
+    border-color: @selected-border-color;
+    .box-shadow(none);
 }
