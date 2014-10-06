@@ -1,5 +1,41 @@
 
 
+/* Filter cell operator messages */
+
+if (kendo.ui.FilterCell) {
+kendo.ui.FilterCell.prototype.options.operators =
+$.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
+  "date": {
+    "eq": "Is gelijk aan",
+    "gt": "Is na",
+    "gte": "Is op of na",
+    "lt": "Is voor",
+    "lte": "Is op of voor",
+    "neq": "Is ongelijk aan"
+  },
+  "enum": {
+    "eq": "Is gelijk aan",
+    "neq": "Is ongelijk aan"
+  },
+  "number": {
+    "eq": "Is gelijk aan",
+    "gt": "Is groter dan",
+    "gte": "Is groter of gelijk aan",
+    "lt": "Is kleiner dan",
+    "lte": "Is kleiner of gelijk aan",
+    "neq": "Is ongelijk aan"
+  },
+  "string": {
+    "contains": "Bevat",
+    "doesnotcontain": "Bevat niet",
+    "endswith": "Eindigt op",
+    "eq": "Is gelijk aan",
+    "neq": "Is ongelijk aan",
+    "startswith": "Begint met"
+  }
+});
+}
+
 /* Filter menu operator messages */
 
 if (kendo.ui.FilterMenu) {
@@ -169,6 +205,19 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "viewHtml": "View HTML",
   "dialogUpdate": "Update",
   "insertFile": "Insert file"
+});
+}
+
+/* Filter cell messages */
+
+if (kendo.ui.FilterCell) {
+kendo.ui.FilterCell.prototype.options.messages =
+$.extend(true, kendo.ui.FilterCell.prototype.options.messages,{
+  "clear": "Filter wissen",
+  "filter": "Filter",
+  "isFalse": "is niet waar",
+  "isTrue": "is waar",
+  "operator": "Operator"
 });
 }
 
