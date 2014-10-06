@@ -12,6 +12,8 @@
     /* jshint loopfunc:true */
     /* jshint newcap:false */
     /* global pako */
+    /* global UInt8Array */
+    /* global ArrayBuffer */
 
     var NL = "\n";
 
@@ -76,7 +78,7 @@
     };
 
     function makeOutput() {
-        var offset = 0, indentLevel = 0, output = "";
+        var indentLevel = 0, output = BinaryStream();
         function out() {
             for (var i = 0; i < arguments.length; ++i) {
                 var x = arguments[i];
@@ -93,40 +95,44 @@
                 else if (isDate(x)) {
                     renderDate(x, out);
                 }
-                else {
-                    if (typeof x == "number") {
-                        if (isNaN(x)) {
-                            throw new Error("Cannot output NaN to PDF");
-                        }
-                        // make sure it doesn't end up in exponent notation.
-                        if (x != Math.floor(x)) {
-                            x = x.toFixed(7).replace(/\.?0+$/, "");
-                        }
+                else if (typeof x == "number") {
+                    if (isNaN(x)) {
+                        throw new Error("Cannot output NaN to PDF");
                     }
-                    x += "";
-                    output += x;
-                    offset += x.length;
+                    // make sure it doesn't end up in exponent notation.
+                    if (x != Math.floor(x)) {
+                        x = x.toFixed(7).replace(/\.?0+$/, "");
+                    }
+                    output.writeString(x+"");
+                }
+                else if (typeof x == "string") {
+                    output.writeString(x);
+                }
+                else if (typeof x.get == "function") {
+                    output.write(x.get());
                 }
             }
-            return output;
         }
+        out.writeData = function(data) {
+            output.write(data);
+        };
         out.withIndent = function(f) {
             ++indentLevel;
             f(out);
             --indentLevel;
         };
         out.indent = function() {
-            if (offset > 0) {
-                out(NL);
-            }
-            out(pad("", indentLevel * 2, " "));
+            out(NL, pad("", indentLevel * 2, " "));
             out.apply(null, arguments);
         };
         out.offset = function() {
-            return offset;
+            return output.offset();
         };
         out.toString = function() {
-            return output;
+            throw new Error("FIX CALLER");
+        };
+        out.get = function() {
+            return output.get();
         };
         return out;
     }
@@ -237,7 +243,7 @@
             out("startxref", NL, xrefOffset, NL);
             out("%%EOF", NL);
 
-            return out+"";
+            return out.get();
         };
     }
 
@@ -249,9 +255,10 @@
     function loadBinary(url, cont) {
         var req = new XMLHttpRequest();
         req.open('GET', url, true);
-        req.overrideMimeType("text/plain; charset=x-user-defined");
+        req.responseType = "arraybuffer";
+        //req.overrideMimeType("text/plain; charset=x-user-defined");
         req.onload = function() {
-            cont(req.responseText);
+            cont(new Uint8Array(req.response));
         };
         req.send(null);
     }
@@ -311,9 +318,10 @@
                         alpha.writeByte(a);
                     }
 
-                    if (hasAlpha) {
+                    if (true||hasAlpha) {
                         img = new PDFRawImage(img.width, img.height, rgb, alpha);
                     } else {
+                        // XXX: fix PDFJpegImage for new BinaryStream
                         // jpeg.
                         var data = canvas.toDataURL("image/jpeg");
                         data = data.substr(data.indexOf(";base64,") + 8);
@@ -586,18 +594,13 @@
     /// streams
 
     var PDFStream = defclass(function PDFStream(data, props, compress) {
-        this.data = data || "";
+        this.data = data;
         this.props = props || {};
         this.compress = compress;
     }, {
         render: function(out) {
-            var data = this.data + "";
+            var data = this.data.get();
             if (global.pako && this.compress) {
-                var tmp = new Array(data.length);
-                for (var i = 0; i < data.length; ++i) {
-                    tmp[i] = data.charCodeAt(i) & 0xFF;
-                }
-                data = tmp;
                 if (!this.props.Filter) {
                     this.props.Filter = [];
                 } else if (!(this.props.Filter instanceof Array)) {
@@ -609,10 +612,9 @@
             if (this.props.Length == null) {
                 this.props.Length = data.length;
             }
-            out(new PDFDictionary(this.props),
-                " stream", NL,
-                data, NL,
-                "endstream");
+            out(new PDFDictionary(this.props), " stream", NL);
+            out.writeData(data);
+            out(NL, "endstream");
         }
     });
 
@@ -796,7 +798,7 @@
 
             // write the TTF data
             var data = sub.render();
-            var fontStream = new PDFStream(data, {
+            var fontStream = new PDFStream(BinaryStream(data), {
                 Length1: data.length
             }, true);
 
@@ -868,7 +870,7 @@
             dict.ToUnicode = self._pdf.attach(unimapStream);
         },
         _makeCidToGidMap: function() {
-            return new PDFStream(this._sub.cidToGidMap(), null, true);
+            return new PDFStream(BinaryStream(this._sub.cidToGidMap()), null, true);
         }
     }, PDFDictionary);
 
@@ -1140,26 +1142,33 @@
     }, PDFDictionary);
 
     function BinaryStream(data) {
-        var offset = 0;
+        var offset = 0, length = 0;
         if (data == null) {
-            data = "";
+            data = new Uint8Array(256);
+        } else {
+            length = data.length;
         }
 
         function eof() {
-            return !data.charAt(offset);
+            return offset >= length;
         }
         function readByte() {
-            return data.charCodeAt(offset++) & 0xFF;
+            return data[offset++];
         }
         function writeByte(b) {
-            var ch = String.fromCharCode(b & 0xFF);
-            if (offset < data.length) {
-                // overwrite
-                data = data.substr(0, offset) + ch + data.substr(offset + 1);
+            if (offset >= data.length) {
+                // must re-allocate
+                // XXX: not sure it's a good idea to double the size each time.
+                var tmp = new Uint8Array(data.length * 2);
+                tmp.set(data, 0);
+                data = tmp;
+                writeByte(b);
             } else {
-                data += ch;
+                data[offset++] = b;
+                if (offset > length) {
+                    length = offset;
+                }
             }
-            offset++;
         }
         function readShort() {
             return (readByte() << 8) | readByte();
@@ -1212,16 +1221,14 @@
             if (typeof bytes == "string") {
                 return writeString(bytes);
             }
+            // XXX: could optimize by checking length, reallocating if
+            // needed and data.set(bytes, offset).
             for (var i = 0; i < bytes.length; ++i) {
                 writeByte(bytes[i]);
             }
         }
         function readString(len) {
-            var ret = "";
-            while (len-- > 0) {
-                ret += String.fromCharCode(readByte());
-            }
-            return ret;
+            return String.fromCharCode.apply(String, read(len));
         }
         function writeString(str) {
             for (var i = 0; i < str.length; ++i) {
@@ -1263,14 +1270,16 @@
                 offset += nbytes;
             },
 
-            get: function() { return data; },
+            get: function() { return new Uint8Array(data.buffer, 0, length); },
 
-            toString: function() { return data; },
+            toString: function() {
+                throw new Error("FIX CALLER.  BinaryStream is no longer convertible to string!");
+            },
 
-            length: function() { return data.length; },
+            length: function() { return length; },
 
             slice: function(start, length) {
-                return data.substr(start, length);
+                return new Uint8Array(data.buffer.slice(start, start + length));
             },
 
             times: function(n, reader) {
