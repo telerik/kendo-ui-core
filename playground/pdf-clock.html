@@ -9,7 +9,8 @@
   <script>
     requireSync([
       "../src/jquery.js",
-      "../src/kendo.all.js"
+      "../src/kendo.all.js",
+      "./saveas.js"
     ]);
   </script>
 </head>
@@ -250,7 +251,7 @@
 
     function getPDF() {
       drawing.pdf.toDataURL(root, function(url){
-        window.open(url);
+        saveAs(url, "kendo.pdf");
       });
     }
     </script>
