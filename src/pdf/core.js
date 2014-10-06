@@ -286,63 +286,59 @@
 
     var IMAGE_CACHE = {};
 
-    function withCanvas(width, height, cont) {
-        var canvas = document.createElement("canvas");
-        canvas.width = width;
-        canvas.height = height;
-        cont(canvas.getContext("2d"), canvas);
-    }
-
     function loadImage(url, cont) {
         var img = IMAGE_CACHE[url];
         if (img) {
             cont(img);
         } else {
             img = new Image();
-            img.src = url;
             img.onload = function() {
-                withCanvas(img.width, img.height, function(ctx, canvas){
-                    ctx.drawImage(img, 0, 0);
+                var canvas = document.createElement("canvas");
+                canvas.width = img.width;
+                canvas.height = img.height;
+                var ctx = canvas.getContext("2d");
 
-                    // in case it contains transparency, we must separate rgb data from the alpha
-                    // channel and create a PDFRawImage image with opacity.  otherwise we can use a
-                    // PDFJpegImage.
-                    //
-                    // to do this in one step, we create the rgb and alpha streams anyway, even if
-                    // we might end up not using them if hasAlpha remains false.
+                ctx.drawImage(img, 0, 0);
 
-                    var hasAlpha = false, rgb = BinaryStream(), alpha = BinaryStream();
-                    var imgdata = ctx.getImageData(0, 0, img.width, img.height);
-                    var rawbytes = imgdata.data;
-                    var i = 0;
-                    while (i < rawbytes.length) {
-                        rgb.writeByte(rawbytes[i++]);
-                        rgb.writeByte(rawbytes[i++]);
-                        rgb.writeByte(rawbytes[i++]);
-                        var a = rawbytes[i++];
-                        if (a < 255) {
-                            hasAlpha = true;
-                        }
-                        alpha.writeByte(a);
+                // in case it contains transparency, we must separate rgb data from the alpha
+                // channel and create a PDFRawImage image with opacity.  otherwise we can use a
+                // PDFJpegImage.
+                //
+                // to do this in one step, we create the rgb and alpha streams anyway, even if
+                // we might end up not using them if hasAlpha remains false.
+
+                var hasAlpha = false, rgb = BinaryStream(), alpha = BinaryStream();
+                var imgdata = ctx.getImageData(0, 0, img.width, img.height);
+                var rawbytes = imgdata.data;
+                var i = 0;
+                while (i < rawbytes.length) {
+                    rgb.writeByte(rawbytes[i++]);
+                    rgb.writeByte(rawbytes[i++]);
+                    rgb.writeByte(rawbytes[i++]);
+                    var a = rawbytes[i++];
+                    if (a < 255) {
+                        hasAlpha = true;
                     }
+                    alpha.writeByte(a);
+                }
 
-                    if (hasAlpha) {
-                        img = new PDFRawImage(img.width, img.height, rgb, alpha);
-                    } else {
-                        // no transparency, encode as JPEG.
-                        var data = canvas.toDataURL("image/jpeg");
-                        data = data.substr(data.indexOf(";base64,") + 8);
-                        data = global.atob(data);
+                if (hasAlpha) {
+                    img = new PDFRawImage(img.width, img.height, rgb, alpha);
+                } else {
+                    // no transparency, encode as JPEG.
+                    var data = canvas.toDataURL("image/jpeg");
+                    data = data.substr(data.indexOf(";base64,") + 8);
+                    data = global.atob(data);
 
-                        var stream = BinaryStream();
-                        stream.writeString(data);
-                        stream.offset(0);
-                        img = new PDFJpegImage(img.width, img.height, stream);
-                    }
+                    var stream = BinaryStream();
+                    stream.writeString(data);
+                    stream.offset(0);
+                    img = new PDFJpegImage(img.width, img.height, stream);
+                }
 
-                    cont(IMAGE_CACHE[url] = img);
-                });
+                cont(IMAGE_CACHE[url] = img);
             };
+            img.src = url;
         }
     }
 
@@ -1094,10 +1090,12 @@
             length = data.length;
         }
 
-        var realloc = HAS_TYPED_ARRAYS ? function(len) {
-            var tmp = new Uint8Array(len);
-            tmp.set(data, 0);
-            data = tmp;
+        var ensure = HAS_TYPED_ARRAYS ? function(len) {
+            if (len >= data.length) {
+                var tmp = new Uint8Array(Math.max(len + 256, data.length * 2));
+                tmp.set(data, 0);
+                data = tmp;
+            }
         } : function() {};
 
         var get = HAS_TYPED_ARRAYS ? function() {
@@ -1111,9 +1109,7 @@
                 return writeString(bytes);
             }
             var len = bytes.length;
-            if (offset + len >= data.length) {
-                realloc(offset + len + 256);
-            }
+            ensure(offset + len);
             data.set(bytes, offset);
             offset += len;
             if (offset > length) {
@@ -1141,11 +1137,7 @@
             return offset < length ? data[offset++] : 0;
         }
         function writeByte(b) {
-            if (offset >= data.length) {
-                // must re-allocate
-                // XXX: not sure it's a good idea to double the size each time.
-                realloc(Math.max(offset + 256, data.length * 2));
-            }
+            ensure(offset);
             data[offset++] = b;
             if (offset > length) {
                 length = offset;
@@ -1346,7 +1338,6 @@
         defineFont    : defineFont,
         parseFontDef  : parseFontDef,
         getFontURL    : getFontURL,
-        withCanvas    : withCanvas,
         loadFonts     : loadFonts,
         loadImages    : loadImages,
 

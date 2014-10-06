@@ -18,8 +18,6 @@
     var geo = dataviz.geometry;
     var pdf = drawing.pdf; // XXX: should not really depend on this.  needed for parseColor
 
-    var max = Math.max;
-
     /* -----[ exports ]----- */
 
     drawing.drawDOM = function(element, cont) {
@@ -307,10 +305,10 @@
                 stroke: null
             });
             edge.append(path);
-            path.moveTo(rl.x ? max(rl.x, Wleft) : 0, 0)
-                .lineTo(len - (rr.x ? max(rr.x, Wright) : 0), 0)
-                .lineTo(len - max(rr.x, Wright), Wtop)
-                .lineTo(max(rl.x, Wleft), Wtop)
+            path.moveTo(rl.x ? Math.max(rl.x, Wleft) : 0, 0)
+                .lineTo(len - (rr.x ? Math.max(rr.x, Wright) : 0), 0)
+                .lineTo(len - Math.max(rr.x, Wright), Wtop)
+                .lineTo(Math.max(rl.x, Wleft), Wtop)
                 .close();
 
             if (rl.x) {
