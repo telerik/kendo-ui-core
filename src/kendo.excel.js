@@ -64,7 +64,7 @@ kendo.data.ExcelExporter = kendo.Class.extend({
         });
     },
     _filter: function() {
-        if (!this.options.filter) {
+        if (!this.options.filterable) {
             return null;
         }
 

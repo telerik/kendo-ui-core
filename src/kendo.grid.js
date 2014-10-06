@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.data", "./kendo.columnsorter", "./kendo.editable", "./kendo.window", "./kendo.filtermenu", "./kendo.columnmenu", "./kendo.groupable", "./kendo.pager", "./kendo.selectable", "./kendo.sortable", "./kendo.reorderable", "./kendo.resizable", "./kendo.mobile.actionsheet", "./kendo.mobile.pane" ], f);
+    define([ "./kendo.data", "./kendo.columnsorter", "./kendo.editable", "./kendo.window", "./kendo.filtermenu", "./kendo.columnmenu", "./kendo.groupable", "./kendo.pager", "./kendo.selectable", "./kendo.sortable", "./kendo.reorderable", "./kendo.resizable", "./kendo.mobile.actionsheet", "./kendo.mobile.pane", "./kendo.ooxml", "./kendo.excel" ], f);
 })(function(){
 
 var __meta__ = {
@@ -58,6 +58,11 @@ var __meta__ = {
         name: "Grid adaptive rendering",
         description: "Support for adaptive rendering",
         depends: [ "mobile.actionsheet", "mobile.pane" ]
+    }, {
+        id: "grid-excel-export",
+        name: "Excel export",
+        description: "Export grid data as Excel spreadsheet",
+        depends: [ "ooxml", "excel" ]
     } ]
 };
 
@@ -401,6 +406,12 @@ var __meta__ = {
             text: "Cancel",
             imageClass: "k-cancel",
             className: "k-grid-cancel",
+            iconClass: "k-icon"
+        },
+        excel: {
+            text: "Export to Excel",
+            imageClass: "k-excel",
+            className: "k-grid-excel",
             iconClass: "k-icon"
         }
     };
@@ -772,6 +783,7 @@ var __meta__ = {
            CHANGE,
            "dataBinding",
            "cancel",
+           "excelExport",
            DATABOUND,
            DETAILEXPAND,
            DETAILCOLLAPSE,
@@ -869,6 +881,12 @@ var __meta__ = {
                     update: defaultCommands.update.text,
                     canceledit: defaultCommands.canceledit.text
                 }
+            },
+            excel: {
+                proxyURL: "",
+                allPages: false,
+                filterable: false,
+                fileName: "Export.xlsx"
             }
         },
 
@@ -2463,6 +2481,12 @@ var __meta__ = {
                         .on(CLICK + NS, ".k-grid-cancel-changes", function(e) { e.preventDefault(); that.cancelChanges(); })
                         .on(CLICK + NS, ".k-grid-save-changes", function(e) { e.preventDefault(); that.saveChanges(); });
                 }
+
+                container.on(CLICK + NS, ".k-grid-excel", function(e) {
+                    e.preventDefault();
+
+                    that.exportToExcel();
+                });
             }
         },
 
@@ -5290,6 +5314,27 @@ var __meta__ = {
           for (idx = 0; idx < containersLength; idx++) {
               containers[idx].style.display = "";
           }
+       },
+       exportToExcel: function() {
+          var excel = this.options.excel || {};
+
+          var exporter = new kendo.data.ExcelExporter({
+              columns: this.columns,
+              dataSource: this.dataSource,
+              allPages: excel.allPages,
+              filterable: excel.filterable
+          });
+
+          exporter.workbook().then($.proxy(function(book) {
+              if (!this.trigger("excelExport", { workbook: book })) {
+                  var workbook = new kendo.ooxml.Workbook(book);
+
+                  kendo.saveAs(workbook.toDataURL(),
+                      book.fileName || excel.fileName,
+                      excel.proxyURL
+                  );
+              }
+          }, this));
        }
    });
 

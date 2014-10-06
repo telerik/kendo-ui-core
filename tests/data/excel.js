@@ -197,7 +197,7 @@ test("freezes first row", function() {
 });
 
 test("enables filtering", function() {
-    testWorkbook({ filter: true, columns: [ { field: "foo" } ], dataSource: [ {} ] }, function(book) {
+    testWorkbook({ filterable: true, columns: [ { field: "foo" } ], dataSource: [ {} ] }, function(book) {
         equal(book.sheets[0].filter.from, 0);
         equal(book.sheets[0].filter.to, 0);
     });
@@ -435,7 +435,7 @@ test("filtering skips the groups", function() {
        group: [{ field: "foo" }, { field: "bar" }]
     });
 
-    testWorkbook({ filter: true, columns: [ { field: "foo" }, { field: "bar" } ], dataSource: dataSource }, function(book) {
+    testWorkbook({ filterable: true, columns: [ { field: "foo" }, { field: "bar" } ], dataSource: dataSource }, function(book) {
         equal(book.sheets[0].filter.from, 2);
         equal(book.sheets[0].filter.to, 3);
     });

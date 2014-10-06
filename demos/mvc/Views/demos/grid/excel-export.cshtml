@@ -2,7 +2,12 @@
     <div id="grid" style="width: 900px"></div>
     <script>
         $("#grid").kendoGrid({
-            toolbar: '<button id="export" class="k-button">Export to Excel</button>',
+            toolbar: ["excel"],
+            excel: {
+                fileName: "Kendo UI Grid Export.xlsx",
+                proxyURL: "http://demos.telerik.com/kendo-ui/service/export",
+                filterable: true
+            },
             dataSource: {
                 type: "odata",
                 transport: {
@@ -28,7 +33,6 @@
                         { field: "UnitsInStock", aggregate: "count" }
                     ]
                 },
-
                 aggregate: [
                     { field: "ProductName", aggregate: "count" },
                     { field: "UnitPrice", aggregate: "sum" },
@@ -38,33 +42,21 @@
                 ]
             },
             sortable: true,
-            scrollable: false,
             pageable: true,
+            groupable: true,
+            filterable: true,
+            columnMenu: true,
+            reorderable: true,
+            resizable: true,
             columns: [
-                { field: "ProductName", title: "Product Name", aggregates: ["count"], footerTemplate: "Total Count: #=count#", groupFooterTemplate: "Count: #=count#" },
-                { field: "UnitPrice", title: "Unit Price", aggregates: ["sum"] },
-                { field: "UnitsOnOrder", title: "Units On Order", aggregates: ["average"], footerTemplate: "Average: #=average#",
+                { width: 300, locked: true, field: "ProductName", title: "Product Name", aggregates: ["count"], footerTemplate: "Total Count: #=count#", groupFooterTemplate: "Count: #=count#" },
+                { width: 300, field: "UnitPrice", title: "Unit Price", aggregates: ["sum"] },
+                { width: 300, field: "UnitsOnOrder", title: "Units On Order", aggregates: ["average"], footerTemplate: "Average: #=average#",
                     groupFooterTemplate: "Average: #=average#" },
-                { field: "UnitsInStock", title: "Units In Stock", aggregates: ["min", "max", "count"], footerTemplate: "<div>Min: #= min #</div><div>Max: #= max #</div>",
+                { width: 300, field: "UnitsInStock", title: "Units In Stock", aggregates: ["min", "max", "count"], footerTemplate: "Min: #= min # Max: #= max #",
                 groupHeaderTemplate: "Units In Stock: #= value # (Count: #= count#)" }
             ]
         });
 
-        $("#export").on("click", excel);
-
-        function excel() {
-            var grid = $("#grid").data("kendoGrid");
-
-            var exporter = new kendo.data.ExcelExporter({
-                columns: grid.columns,
-                dataSource: grid.dataSource,
-                allPages: true,
-                filter: true
-            });
-
-            exporter.workbook().then(function(book) {
-                kendo.saveAs(new kendo.ooxml.Workbook(book).toDataURL(), "Export.xlsx", "http://korchev:88/filesaver");
-            });
-        }
     </script>
 </div>
