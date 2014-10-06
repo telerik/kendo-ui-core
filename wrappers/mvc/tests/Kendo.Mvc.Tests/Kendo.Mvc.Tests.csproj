@@ -170,6 +170,30 @@
     <Compile Include="UI\DataSource\WebApiDataSourceBuilderBaseTests.cs" />
     <Compile Include="UI\DataSource\WebApiDataSourceBuilderTests.cs" />
     <Compile Include="UI\DatePicker\DatePickerClientEventsBuilderTests.cs" />
+    <Compile Include="UI\Gantt\GanttBuilderTests.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\Gantt\GanttDependency.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\Gantt\GanttEditableBuilderTests.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\Gantt\GanttEventBuilderTests.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\Gantt\GanttTask.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\Gantt\GanttTestHelper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\Gantt\GanttViewBuilderTests.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\Gantt\GanttViewFactoryTests.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="UI\HierarchicalDataSource\HierarchicalDataSourceBuilderTests.cs" />
     <Compile Include="UI\HierarchicalDataSource\HierarchicalDataSourceTests.cs" />
     <Compile Include="UI\HierarchicalDataSource\HierarchicalModelDescriptorBuilderTests.cs" />
