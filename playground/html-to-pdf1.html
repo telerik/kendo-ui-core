@@ -201,6 +201,7 @@
       requireSync([
         "../src/jquery.js",
         "../src/kendo.dataviz.js",
+        "./saveas.js"
       ]);
     </script>
 
@@ -220,7 +221,9 @@
         <!--     } -->
         <!-- }); -->
         kendo.dataviz.drawing.drawDOM(document.body, function(root){
-          kendo.dataviz.drawing.pdf.toDataURL(root, window.open);
+          kendo.dataviz.drawing.pdf.toDataURL(root, function(url){
+            saveAs(url, "html-to-pdf1.pdf");
+          });
         });
     </script>
   </body>

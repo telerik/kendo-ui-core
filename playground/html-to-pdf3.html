@@ -8,7 +8,8 @@
     <script>
       requireSync([
         "../src/jquery.js",
-        "../src/kendo.dataviz.drawing.js"
+        "../src/kendo.dataviz.drawing.js",
+        "./saveas.js"
       ]);
     </script>
 
@@ -138,12 +139,14 @@
           Implement clipping!
         </div>
       </div>
+
       <ul>
         <li>Render</li>
         <li>List</li>
         <li>Bullets</li>
         <li>Or numbers</li>
       </ul>
+
       <div style="width: 200px; height: 200px; border: 1px solid black; border-radius: 50px;
                   background: url('./diagram/Generic/telerik-logo.png') repeat 50% 50%"></div>
     </div>
@@ -170,7 +173,7 @@
         kendo.dataviz.drawing.drawDOM(el, function(root){
           kendo.dataviz.drawing.pdf.toDataURL(root, function(url){
             console.timeEnd("pdf");
-            window.open(url);
+            saveAs(url, "html-to-pdf3.pdf");
           });
         });
       }
