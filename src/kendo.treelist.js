@@ -44,6 +44,7 @@ var __meta__ = {
         header: "k-header",
         button: "k-button",
         alt: "k-alt",
+        hidden: "k-hidden",
         editCell: "k-edit-cell",
         group: "k-treelist-group",
         gridToolbar: "k-grid-toolbar",
@@ -266,19 +267,14 @@ var __meta__ = {
 
             options.filterCallback = proxy(this._filterCallback, this);
 
-            var result = Query.process(data, options);
             var defaultParentId = this._defaultParentId();
-            var length, hasChildren, i, item, children, map;
-
-            data = result.data;
-
-            length = data.length;
-
-            map = this._childrenMap(data);
+            var result = Query.process(data, options);
+            var map = this._childrenMap(result.data);
+            var hasChildren, i, item, children;
 
             data = map[defaultParentId] || [];
 
-            for (i = 0; i < length; i++) {
+            for (i = 0; i < data.length; i++) {
                 item = data[i];
 
                 if (item.id === defaultParentId) {
@@ -840,6 +836,7 @@ var __meta__ = {
                 this._contentTree.render(this._trs({
                     aggregates: options.aggregates,
                     data: data,
+                    visible: true,
                     level: 0
                 }));
             }
@@ -924,18 +921,22 @@ var __meta__ = {
 
                 attr = {
                     "data-uid": model.uid,
-                    "data-level": level,
                     "role": "row"
                 };
 
                 if (hasChildren) {
-                    attr["aria-expanded"] = model.expanded;
+                    attr["aria-expanded"] = !!model.expanded;
                 }
 
                 if (this._absoluteIndex % 2 !== 0) {
                     className.push(classNames.alt);
                 }
-                this._absoluteIndex++;
+
+                if (options.visible) {
+                    this._absoluteIndex++;
+                } else {
+                    className.push(classNames.hidden);
+                }
 
                 if (hasChildren) {
                     className.push(classNames.group);
@@ -955,10 +956,11 @@ var __meta__ = {
                     level: level
                 }, proxy(this._td, this)));
 
-                if (model.expanded && hasChildren) {
+                if (hasChildren) {
                     rows = rows.concat(this._trs({
                         parentId: model.id,
                         aggregates: aggregates,
+                        visible: options.visible && !!model.expanded,
                         data: childNodes,
                         level: level + 1
                     }));

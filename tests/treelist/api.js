@@ -110,6 +110,17 @@
             ]
         });
 
-        equal(instance.items().length, 1);
+        equal(instance.items().length, 2);
+    });
+
+    test("items returns collapsed rows", function() {
+        createTreeList({
+            dataSource: [
+                { id: 1, parentId: null },
+                { id: 2, parentId: 1 }
+            ]
+        });
+
+        equal(instance.items().length, 2);
     });
 })()

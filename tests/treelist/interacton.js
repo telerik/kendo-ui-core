@@ -41,7 +41,7 @@
 
         instance.content.find(".k-i-collapse").click();
 
-        equal(instance.content.find("tr").length, 1);
+        equal(instance.content.find("tr.k-hidden").length, 1);
     });
 
     test("click on expand arrow loads items from remote", function() {

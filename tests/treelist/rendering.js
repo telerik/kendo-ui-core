@@ -45,7 +45,7 @@
     test("renders dataSource items initially", function() {
         createTreeList();
 
-        equal(instance.content.find("tr").length, 1);
+        equal(instance.content.find("tr").length, 2);
     });
 
     test("renders header cells for every column", function() {
@@ -481,7 +481,7 @@
     test("scrollable:false renders one table", function() {
         createTreeList({
             scrollable: false,
-            dataSouce: [ { id: 1 } ],
+            dataSource: [ { id: 1 } ],
             columns: [ { field: "id" } ]
         });
 
@@ -490,7 +490,7 @@
 
     test("renders colgroup elements in all tables", function() {
         createTreeList({
-            dataSouce: [ { id: 1 } ],
+            dataSource: [ { id: 1 } ],
             columns: [ { field: "id" } ]
         });
 
@@ -500,7 +500,7 @@
     test("renders single colgroup in non-scrollable grid", function() {
         createTreeList({
             scrollable: false,
-            dataSouce: [ { id: 1 } ],
+            dataSource: [ { id: 1 } ],
             columns: [ { field: "id" } ]
         });
 
@@ -514,7 +514,7 @@
 
     test("command column renders default buttons", function() {
         createTreeList({
-            dataSouce: [ { id: 1 } ],
+            dataSource: [ { id: 1 } ],
             columns: [
                 { field: "id" },
                 { command: ["edit"] }
@@ -529,7 +529,7 @@
 
     test("command column with multiple buttons renders them all", function() {
         createTreeList({
-            dataSouce: [ { id: 1 } ],
+            dataSource: [ { id: 1 } ],
             columns: [
                 { field: "id" },
                 { command: ["edit", "destroy"] }
@@ -542,7 +542,7 @@
 
     test("command column allows command customization", function() {
         createTreeList({
-            dataSouce: [ { id: 1 } ],
+            dataSource: [ { id: 1 } ],
             columns: [
                 { field: "id" },
                 { command: [ { name: "edit", text: "Change" } ] }
@@ -556,7 +556,7 @@
 
     test("custom commands render button without icon", function() {
         createTreeList({
-            dataSouce: [ { id: 1 } ],
+            dataSource: [ { id: 1 } ],
             columns: [
                 { field: "id" },
                 { command: [ { name: "foo", text: "Bar" } ] }
@@ -679,5 +679,17 @@
         } finally {
             $.fn.kendoFilterMenu = filterMenu;
         }
+    });
+
+    test("children of hidden row are rendered hidden", function() {
+        createTreeList({
+            dataSource: [
+                { id: 1, parentId: null, expanded: false },
+                { id: 2, parentId: 1, expanded: true },
+                { id: 3, parentId: 2 }
+            ]
+        });
+
+        equal(instance.content.find("tr.k-hidden").length, 2);
     });
 })();
