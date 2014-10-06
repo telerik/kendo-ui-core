@@ -146,6 +146,9 @@ var __meta__ = {
                 this.scroller.destroy();
             }
 
+            if (this.options.$angular) {
+                this.element.scope().$destroy();
+            }
 
             kendo.destroy(this.element);
         },

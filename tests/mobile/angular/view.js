@@ -68,6 +68,19 @@
         equal(app.view().header.text(), "Foo");
     });
 
+    ngTest("destroys scope on destroy", 1,
+    function() {
+        QUnit.fixture.html("<div kendo-mobile-application><kendo-mobile-view id=foo></kendo-mobile-view></div>");
+    },
+    function() {
+        var view = kendo.mobile.application.view();
+        view.element.scope().$on("$destroy", function() {
+            ok(true);
+        });
+
+        view.destroy();
+    });
+
     ngTest("reloads remote view if reload attr is set",
     1,
     function() {
