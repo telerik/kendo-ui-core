@@ -12,6 +12,9 @@
     /* jshint loopfunc:true */
     /* jshint newcap:false */
 
+    // XXX: remove this junk (assume `true`) when we no longer have to support IE < 10
+    var HAS_TYPED_ARRAYS = !!global.Uint8Array;
+
     var NL = "\n";
 
     var RESOURCE_COUNTER = 0;
@@ -245,16 +248,30 @@
         FONT_CACHE[name] = true;
     });
 
-    function loadBinary(url, cont) {
+    // XXX: error handling in loadBinary?
+    var loadBinary = HAS_TYPED_ARRAYS ? function loadBinary(url, cont) {
         var req = new XMLHttpRequest();
         req.open('GET', url, true);
         req.responseType = "arraybuffer";
-        //req.overrideMimeType("text/plain; charset=x-user-defined");
         req.onload = function() {
             cont(new Uint8Array(req.response));
         };
         req.send(null);
-    }
+    } : function loadBinary(url, cont) {
+        var req = new XMLHttpRequest();
+        req.open('GET', url, true);
+        req.overrideMimeType("text/plain; charset=x-user-defined");
+        req.onreadystatechange = function() {
+            if (req.readyState == 4) {
+                if (req.status == 200 || req.status == 304) {
+                    var data = BinaryStream();
+                    data.writeString(req.responseText);
+                    cont(data.get());
+                }
+            }
+        };
+        req.send(null);
+    };
 
     function loadFont(url, cont) {
         var font = FONT_CACHE[url];
@@ -1104,16 +1121,51 @@
     function BinaryStream(data) {
         var offset = 0, length = 0;
         if (data == null) {
-            data = new Uint8Array(256);
+            data = HAS_TYPED_ARRAYS ? new Uint8Array(256) : [];
         } else {
             length = data.length;
         }
 
-        function realloc(len) {
+        var realloc = HAS_TYPED_ARRAYS ? function(len) {
             var tmp = new Uint8Array(len);
             tmp.set(data, 0);
             data = tmp;
-        }
+        } : function() {};
+
+        var get = HAS_TYPED_ARRAYS ? function() {
+            return new Uint8Array(data.buffer, 0, length);
+        } : function() {
+            return data;
+        };
+
+        var write = HAS_TYPED_ARRAYS ? function(bytes) {
+            if (typeof bytes == "string") {
+                return writeString(bytes);
+            }
+            var len = bytes.length;
+            if (offset + len >= data.length) {
+                realloc(offset + len + 256);
+            }
+            data.set(bytes, offset);
+            offset += len;
+            if (offset > length) {
+                length = offset;
+            }
+        } : function(bytes) {
+            if (typeof bytes == "string") {
+                return writeString(bytes);
+            }
+            for (var i = 0; i < bytes.length; ++i) {
+                writeByte(bytes[i]);
+            }
+        };
+
+        var slice = HAS_TYPED_ARRAYS ? function(start, length) {
+            return new Uint8Array(data.buffer.slice(start, start + length));
+        } : function(start, length) {
+            return data.slice(start, start + length);
+        };
+
         function eof() {
             return offset >= length;
         }
@@ -1174,20 +1226,6 @@
         function read(len) {
             return times(len, readByte);
         }
-        function write(bytes) {
-            if (typeof bytes == "string") {
-                return writeString(bytes);
-            }
-            var len = bytes.length;
-            if (offset + len >= data.length) {
-                realloc(offset + len + 256);
-            }
-            data.set(bytes, offset);
-            offset += len;
-            if (offset > length) {
-                length = offset;
-            }
-        }
         function readString(len) {
             return String.fromCharCode.apply(String, read(len));
         }
@@ -1202,6 +1240,7 @@
             }
             return ret;
         }
+
         return {
             eof         : eof,
             readByte    : readByte,
@@ -1227,6 +1266,8 @@
             writeString : writeString,
 
             times       : times,
+            get         : get,
+            slice       : slice,
 
             offset: function(pos) {
                 if (pos != null) {
@@ -1239,17 +1280,11 @@
                 offset += nbytes;
             },
 
-            get: function() { return new Uint8Array(data.buffer, 0, length); },
-
             toString: function() {
                 throw new Error("FIX CALLER.  BinaryStream is no longer convertible to string!");
             },
 
             length: function() { return length; },
-
-            slice: function(start, length) {
-                return new Uint8Array(data.buffer.slice(start, start + length));
-            },
 
             saveExcursion: function(f) {
                 var pos = offset;
