@@ -1126,6 +1126,11 @@
             length = data.length;
         }
 
+        function realloc(len) {
+            var tmp = new Uint8Array(len);
+            tmp.set(data, 0);
+            data = tmp;
+        }
         function eof() {
             return offset >= length;
         }
@@ -1136,15 +1141,11 @@
             if (offset >= data.length) {
                 // must re-allocate
                 // XXX: not sure it's a good idea to double the size each time.
-                var tmp = new Uint8Array(data.length * 2);
-                tmp.set(data, 0);
-                data = tmp;
-                writeByte(b);
-            } else {
-                data[offset++] = b;
-                if (offset > length) {
-                    length = offset;
-                }
+                realloc(Math.max(offset + 256, data.length * 2));
+            }
+            data[offset++] = b;
+            if (offset > length) {
+                length = offset;
             }
         }
         function readShort() {
@@ -1188,20 +1189,20 @@
             writeLong_(Math.round(f * 0x10000));
         }
         function read(len) {
-            var ret = [];
-            while (len-- > 0) {
-                ret.push(readByte());
-            }
-            return ret;
+            return times(len, readByte);
         }
         function write(bytes) {
             if (typeof bytes == "string") {
                 return writeString(bytes);
             }
-            // XXX: could optimize by checking length, reallocating if
-            // needed and data.set(bytes, offset).
-            for (var i = 0; i < bytes.length; ++i) {
-                writeByte(bytes[i]);
+            var len = bytes.length;
+            if (offset + len >= data.length) {
+                realloc(offset + len + 256);
+            }
+            data.set(bytes, offset);
+            offset += len;
+            if (offset > length) {
+                length = offset;
             }
         }
         function readString(len) {
@@ -1211,6 +1212,12 @@
             for (var i = 0; i < str.length; ++i) {
                 writeByte(str.charCodeAt(i) & 0xFF);
             }
+        }
+        function times(n, reader) {
+            for (var ret = new Array(n), i = 0; i < n; ++i) {
+                ret[i] = reader();
+            }
+            return ret;
         }
         return {
             eof         : eof,
@@ -1236,6 +1243,8 @@
             readString  : readString,
             writeString : writeString,
 
+            times       : times,
+
             offset: function(pos) {
                 if (pos != null) {
                     offset = pos;
@@ -1257,13 +1266,6 @@
 
             slice: function(start, length) {
                 return new Uint8Array(data.buffer.slice(start, start + length));
-            },
-
-            times: function(n, reader) {
-                for (var ret = []; n > 0; --n) {
-                    ret.push(reader());
-                }
-                return ret;
             },
 
             saveExcursion: function(f) {
