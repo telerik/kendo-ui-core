@@ -211,11 +211,7 @@
         self.render = function() {
             var i;
             /// file header
-            out("%PDF-1.4", NL);
-
-            // the spec recommends outputting 4 bytes >= 128
-            // so that various apps recognize it as a binary file.
-            out("%\x80\x81\x82\x83", NL);
+            out("%PDF-1.4", NL, "%\xc2\xc1\xda\xcf\xce", NL, NL);
 
             /// file body
             for (i = 0; i < objects.length; ++i) {
@@ -428,16 +424,6 @@
 
     function hasOwnProperty(obj, key) {
         return Object.prototype.hasOwnProperty.call(obj, key);
-    }
-
-    function mmul(a, b) {
-        var a1 = a[0], b1 = a[1], c1 = a[2], d1 = a[3], e1 = a[4], f1 = a[5];
-        var a2 = b[0], b2 = b[1], c2 = b[2], d2 = b[3], e2 = b[4], f2 = b[5];
-        return [
-            a1*a2 + b1*c2,          a1*b2 + b1*d2,
-            c1*a2 + d1*c2,          c1*b2 + d1*d2,
-            e1*a2 + f1*c2 + e2,     e1*b2 + f1*d2 + f2
-        ];
     }
 
     var isArray = Array.isArray || function(obj) {
