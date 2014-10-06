@@ -31,7 +31,7 @@ test("color tools react to palette definition", function() {
         ]
     });
 
-    var colorpicker = $("[data-role=colorpicker]");
+    var colorpicker = $("[data-role=colorpicker]").eq(0);
 
     equal(colorpicker.length, 1);
     deepEqual(colorpicker.data("kendoColorPicker").options.palette, [customColor]);
