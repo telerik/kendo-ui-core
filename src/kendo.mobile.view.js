@@ -43,14 +43,14 @@ var __meta__ = {
     function compileToWidget(element, scopeSetup) {
         element.attr("data-role", element[0].tagName.toLowerCase().replace('kendo-mobile-', ''));
 
-        angular.element(element).injector().invoke(function($compile) {
+        angular.element(element).injector().invoke(["$compile", function($compile) {
             var scope = angular.element(element).scope();
             if (scopeSetup) {
                 scopeSetup(scope);
             }
             $compile(element)(scope);
             scope.$digest();
-        });
+        }]);
 
         return kendo.widgetInstance(element, ui);
     }
