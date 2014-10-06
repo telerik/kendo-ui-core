@@ -98,7 +98,7 @@ kendo.data.ExcelExporter = kendo.Class.extend({
                         title: title,
                         field: dataItem.field,
                         value: dataItem.value,
-                        aggregates: dataItem.aggregates,
+                        aggregates: dataItem.aggregates
                     }, dataItem.aggregates[dataItem.field]);
 
                 if (template) {
@@ -141,7 +141,7 @@ kendo.data.ExcelExporter = kendo.Class.extend({
                     background: "#dfdfdf",
                     color: "#333",
                     value: column.groupFooterTemplate(dataItem.aggregates[column.field])
-                }
+                };
             } else {
                 return {
                     background: "#dfdfdf",
@@ -156,7 +156,7 @@ kendo.data.ExcelExporter = kendo.Class.extend({
                 cells: $.map(new Array(level), function() {
                     return {
                         background: "#dfdfdf",
-                        color: "#333",
+                        color: "#333"
                     };
                 }).concat(cells)
             });
@@ -187,7 +187,7 @@ kendo.data.ExcelExporter = kendo.Class.extend({
             });
 
             var footer = false;
-            1
+
             var cells = $.map(this.columns, $.proxy(function(column) {
                 if (column.footerTemplate) {
                     footer = true;
@@ -195,7 +195,7 @@ kendo.data.ExcelExporter = kendo.Class.extend({
                         background: "#dfdfdf",
                         color: "#333",
                         value: column.footerTemplate(this.dataSource.aggregates()[column.field])
-                    }
+                    };
                 } else {
                     return {
                         background: "#dfdfdf",
@@ -210,7 +210,7 @@ kendo.data.ExcelExporter = kendo.Class.extend({
                     cells: $.map(new Array(groups.length), function() {
                         return {
                             background: "#dfdfdf",
-                            color: "#333",
+                            color: "#333"
                         };
                     }).concat(cells)
                 });
