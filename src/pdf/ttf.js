@@ -107,9 +107,6 @@ Directory.prototype = {
     },
 
     checksum: function(data) {
-        while (data.length % 4) {
-            data += "\x00";
-        }
         data = BinaryStream(data);
         var sum = 0;
         while (!data.eof()) {

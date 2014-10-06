@@ -1148,7 +1148,7 @@
             return offset >= length;
         }
         function readByte() {
-            return data[offset++];
+            return offset < length ? data[offset++] : 0;
         }
         function writeByte(b) {
             if (offset >= data.length) {
