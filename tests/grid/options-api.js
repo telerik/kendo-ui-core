@@ -36,4 +36,47 @@
        equal(options.columns[2].width, 30);
     });
 
+    test("getOptions retrieves the filterable options", function() {
+       var options = setup({
+           filterable: {
+               mode: "row"
+           }
+       }).getOptions();
+       equal(options.filterable.mode, "row");
+    });
+
+    test("getOptions retrieves the groupable options", function() {
+       var options = setup({
+           groupable: {
+               messages: {
+                   empty: "foo"
+               }
+           }
+       }).getOptions();
+       equal(options.groupable.messages.empty, "foo");
+    });
+
+    test("getOptions retrieves the AutoBind option", function() {
+       var options = setup({
+           autoBind: false
+       }).getOptions();
+       equal(options.autoBind, false);
+    });
+
+    test("getOptions retrieves the rowTemplate/altRowTemplate", function() {
+       var options = setup({
+           rowTemplate: "foo",
+           altRowTemplate: "bar"
+       }).getOptions();
+       equal(options.rowTemplate, "foo");
+       equal(options.altRowTemplate, "bar");
+    });
+
+    test("getOptions retrieves the mobile option", function() {
+       var options = setup({
+           mobile: true
+       }).getOptions();
+       equal(options.mobile, true);
+    });
+
 })();
