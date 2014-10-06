@@ -5,46 +5,74 @@
 
 <demo:header />
 
-<p>
+<div class="demo-section k-header">
+    <div>
+        <h4>Basic Button</h4>
+        <p>
+            <kendo:button name="primaryTextButton" class="k-primary">
+                <kendo:button-content>
+                    Primary button
+                </kendo:button-content>
+            </kendo:button>
 
-<kendo:button name="textButton" type="button">
-    <kendo:button-content>
-        Text button
-    </kendo:button-content>
-</kendo:button>
+            <kendo:button name="textButton">
+                <kendo:button-content>
+                    Button
+                </kendo:button-content>
+            </kendo:button>
+        </p>
+    </div>
 
-<kendo:button name="iconTextButton" tag="a" spriteCssClass="k-icon k-i-ungroup">
-    <kendo:button-content>
-        Icon and text
-    </kendo:button-content>
-</kendo:button>
+     <div>
+        <h4>Disabled buttons</h4>
+        <p>
+            <kendo:button name="primaryDisabledButton" tag="a" enable="false" class="k-primary">
+                <kendo:button-content>
+                    Disabled primary button
+                </kendo:button-content>
+            </kendo:button>
 
-<kendo:button name="kendoIconTextButton" tag="a" icon="plus">
-    <kendo:button-content>
-        Kendo UI Icon
-    </kendo:button-content>
-</kendo:button>
+            <kendo:button name="disabledButton" enable="false">
+                <kendo:button-content>
+                    Disabled button
+                </kendo:button-content>
+            </kendo:button>
+        </p>
+    </div>
 
-<kendo:button name="iconButton" tag="em" spriteCssClass="k-icon k-i-refresh">
-    <kendo:button-content>
-        <span class='k-sprite'>Refresh</span>
-    </kendo:button-content>
-</kendo:button>
+    <div>
+       <h4>Buttons with icons</h4>
+        <p>
+            <kendo:button name="iconTextButton" tag="a" spriteCssClass="k-icon k-i-funnel">
+                <kendo:button-content>
+                    Filter
+                </kendo:button-content>
+            </kendo:button>
 
-</p><p>
+            <kendo:button name="kendoIconTextButton" tag="a" icon="funnel-clear">
+                <kendo:button-content>
+                    Clear Filter
+                </kendo:button-content>
+            </kendo:button>
 
-<kendo:button name="disabledButton1" tag="span" enable="false">
-    <kendo:button-content>
-        Disabled via configuration
-    </kendo:button-content>
-</kendo:button>
+            <kendo:button name="iconButton" tag="em" spriteCssClass="k-icon k-i-refresh">
+            </kendo:button>
+        </p>
+    </div>
 
-<kendo:button name="disabledButton2" disabled="disabled">
-    <kendo:button-content>
-        Disabled via HTML attribute
-    </kendo:button-content>
-</kendo:button>
 
-</p>
+    <style scoped>
+        .demo-section {
+            width: 400px;
+        }
+        .demo-section p {
+            margin: 0 0 30px;
+            line-height: 40px;
+        }
+        .k-primary {
+            width: 150px;
+        }
+    </style>
+</div>
 
 <demo:footer />
