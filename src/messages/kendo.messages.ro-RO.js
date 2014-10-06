@@ -1,5 +1,41 @@
 
 
+/* Filter cell operator messages */
+
+if (kendo.ui.FilterCell) {
+kendo.ui.FilterCell.prototype.options.operators =
+$.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
+  "date": {
+    "eq": "Egal cu",
+    "gt": "După",
+    "gte": "După sau egal cu",
+    "lt": "Inainte de",
+    "lte": "Inainte sau egal cu",
+    "neq": "Diferit de"
+  },
+  "enum": {
+    "eq": "Egal cu",
+    "neq": "Diferit de"
+  },
+  "number": {
+    "eq": "Egal cu",
+    "gt": "Mai mare decât",
+    "gte": "Mai mare sau egal cu",
+    "lt": "Mai mic decât",
+    "lte": "Mai mic sau egal cu",
+    "neq": "Diferit de"
+  },
+  "string": {
+    "contains": "Conține",
+    "doesnotcontain": "Nu conține",
+    "endswith": "Se termină cu",
+    "eq": "Egal cu",
+    "neq": "Diferit de",
+    "startswith": "Incepe cu"
+  }
+});
+}
+
 /* Filter menu operator messages */
 
 if (kendo.ui.FilterMenu) {
@@ -169,6 +205,19 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "viewHtml": "View HTML",
   "dialogUpdate": "Update",
   "insertFile": "Insert file"
+});
+}
+
+/* FilterCell messages */
+
+if (kendo.ui.FilterCell) {
+kendo.ui.FilterCell.prototype.options.messages =
+$.extend(true, kendo.ui.FilterCell.prototype.options.messages,{
+  "clear": "Șterge",
+  "filter": "Filtrează",
+  "isFalse": "este fals",
+  "isTrue": "este adevărat",
+  "operator": "Operator"
 });
 }
 

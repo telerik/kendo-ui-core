@@ -1,5 +1,41 @@
 
 
+/* Filter cell operator messages */
+
+if (kendo.ui.FilterCell) {
+kendo.ui.FilterCell.prototype.options.operators =
+$.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
+  "date": {
+    "eq": "Er lig med",
+    "gte": "Er senere end eller lig med",
+    "gt": "Er senere end",
+    "lte": "Er før eller lig med",
+    "lt": "Er før",
+    "neq": "Er ikke lig med"
+  },
+  "number": {
+    "eq": "Er lig med",
+    "gte": "Er større end eller lig med",
+    "gt": "Er større end",
+    "lte": "Er mindre end eller lig med",
+    "lt": "Er mindre end",
+    "neq": "Er forskellig fra"
+  },
+  "string": {
+    "endswith": "Slutter med",
+    "eq": "Er lig med",
+    "neq": "Er forskellig fra",
+    "startswith": "Begynder med",
+    "contains": "Indeholder",
+    "doesnotcontain": "Does not contain"
+  },
+  "enum": {
+    "eq": "Er lig med",
+    "neq": "Er ikke lig med"
+  }
+});
+}
+
 /* Filter menu operator messages */
 
 if (kendo.ui.FilterMenu) {
@@ -146,6 +182,19 @@ $.extend(true, kendo.ui.Pager.prototype.options.messages,{
   "next": "Gå til næste side",
   "previous": "Gå til forrige side",
   "morePages": "Flere sider"
+});
+}
+
+/* FilterCell messages */
+
+if (kendo.ui.FilterCell) {
+kendo.ui.FilterCell.prototype.options.messages =
+$.extend(true, kendo.ui.FilterCell.prototype.options.messages,{
+  "filter": "Filter",
+  "clear": "Fjern filter",
+  "isFalse": "er falskt",
+  "isTrue": "er sandt",
+  "operator": "Operatør"
 });
 }
 

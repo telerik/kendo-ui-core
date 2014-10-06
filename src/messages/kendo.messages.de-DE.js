@@ -1,5 +1,41 @@
 
 
+/* Filter cell operator messages */
+
+if (kendo.ui.FilterCell) {
+kendo.ui.FilterCell.prototype.options.operators =
+$.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
+  "date": {
+    "eq": "Ist gleich",
+    "gt": "Ist nach",
+    "gte": "Ist nach oder gleich",
+    "lt": "Ist vor",
+    "lte": "Ist vor oder gleich",
+    "neq": "Ist nicht gleich"
+  },
+  "enum": {
+    "eq": "Ist gleich",
+    "neq": "Ist nicht gleich"
+  },
+  "number": {
+    "eq": "Ist gleich",
+    "gt": "Ist größer als",
+    "gte": "Ist größer als oder gleich",
+    "lt": "Ist kleiner",
+    "lte": "Ist kleiner als oder gleich",
+    "neq": "Ist nicht gleich"
+  },
+  "string": {
+    "contains": "Beinhaltet",
+    "doesnotcontain": "Beinhaltet nicht",
+    "endswith": "Endet mit",
+    "eq": "Ist gleich",
+    "neq": "Ist nicht gleich",
+    "startswith": "Beginnt mit"
+  }
+});
+}
+
 /* Filter menu operator messages */
 
 if (kendo.ui.FilterMenu) {
@@ -173,6 +209,18 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
 });
 }
 
+/* FilterCell messages */
+
+if (kendo.ui.FilterCell) {
+kendo.ui.FilterCell.prototype.options.messages =
+$.extend(true, kendo.ui.FilterCell.prototype.options.messages,{
+  "clear": "Löschen",
+  "filter": "Filter",
+  "isFalse": "ist falsch",
+  "isTrue": "ist richtig",
+  "operator": "Operator"
+});
+}
 /* FilterMenu messages */
 
 if (kendo.ui.FilterMenu) {
