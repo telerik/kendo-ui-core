@@ -221,9 +221,7 @@ var __meta__ = {
 
             that._tabindex();
 
-            if (!that.wrapper.filter("[role=tree]").length) {
-                that.wrapper.attr("role", "tree");
-            }
+            that.root.attr("role", "tree");
 
             that._dataSource(inferred);
 
@@ -430,7 +428,13 @@ var __meta__ = {
                     return result;
                 },
                 groupAttributes: function(group) {
-                    return group.expanded !== true ? " style='display:none'" : "";
+                    var attributes = "";
+
+                    if (!group.firstLevel) {
+                        attributes = "role='group'";
+                    }
+
+                    return attributes + (group.expanded !== true ? " style='display:none'" : "");
                 },
                 groupCssClass: function(group) {
                     var cssClass = "k-group";
@@ -448,7 +452,7 @@ var __meta__ = {
                     "</div>"
                 ),
                 group: templateNoWith(
-                    "<ul class='#= data.r.groupCssClass(data.group) #'#= data.r.groupAttributes(data.group) # role='group'>" +
+                    "<ul class='#= data.r.groupCssClass(data.group) #'#= data.r.groupAttributes(data.group) #>" +
                         "#= data.renderItems(data) #" +
                     "</ul>"
                 ),
@@ -489,9 +493,9 @@ var __meta__ = {
                 ),
                 item: templateNoWith(
                     "# var item = data.item, r = data.r; #" +
-                    "<li role='treeitem' class='#= r.wrapperCssClass(data.group, item) #'" +
-                        " " + kendo.attr("uid") + "='#= item.uid #'" +
-                        "#=item.selected ? \"aria-selected='true'\" : ''#" +
+                    "<li role='treeitem' class='#= r.wrapperCssClass(data.group, item) #' " +
+                        kendo.attr("uid") + "='#= item.uid #' " +
+                        "aria-selected='#= item.selected ? \"true\" : \"false \" #' " +
                         "#=item.enabled === false ? \"aria-disabled='true'\" : ''#" +
                     ">" +
                         "#= r.itemElement(data) #" +
@@ -1332,7 +1336,7 @@ var __meta__ = {
                             }
 
                             isCollapsed = true;
-                            node.removeAttr(ARIASELECTED)
+                            node.attr(ARIASELECTED, false)
                                 .attr(ARIADISABLED, true);
                         }
 
@@ -1432,11 +1436,12 @@ var __meta__ = {
 
                         this.root
                             .attr("class", group.attr("class"))
-                            .attr("role", group.attr("role"))
                             .html(group.html());
                     } else {
                         this.root = this.wrapper.html(groupHtml).children("ul");
                     }
+
+                    this.root.attr("role", "tree")
 
                     this._angularItems("compile");
                 }

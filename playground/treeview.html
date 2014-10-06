@@ -4,11 +4,9 @@
     <style>html { font-size: 12px; font-family: Arial, Helvetica, sans-serif; }</style>
     <title>TreeView / Nested MVVM</title>
 
-    <link rel="stylesheet/less" href="../styles/web/kendo.common.less"/>
-    <link rel="stylesheet/less" href="../styles/web/kendo.default.less"/>
+    <link rel="stylesheet" href="../dist/styles/web/kendo.common.css"/>
+    <link rel="stylesheet" href="../dist/styles/web/kendo.default.css"/>
     <link rel="stylesheet" href="../demos/mvc/content/shared/styles/examples.css"></link>
-
-    <script src="../demos/mvc/content/shared/js/less.js"></script>
 
     <script src="../src/jquery.js"></script>
     <script src="../src/kendo.core.js"></script>
@@ -21,57 +19,25 @@
     <script src="../src/kendo.treeview.js"></script>
   </head>
   <body>
-    <div data-role="treeview"
-         data-template="itemTemplate"
-         data-bind="source: files, events: { dataBound: onDataBound }"></div>
-
-    <script id="itemTemplate" type="text/x-kendo-template">
-         #: item.text #
-         <span data-bind="events: { click: deleteClick }" class='delete-link'></span>
-    </script>
+    <div id="tree"></div>
 
     <script>
-      var viewModel = kendo.observable({
-        onDataBound: function(e) {
-          // should this be required?
-          //kendo.bind(e.node, this);
-        },
-        files: kendo.observableHierarchy([
-          { text: "My Web Site", expanded: true, items: [
-            { text: "images", expanded: true, items: [
-              { text: "logo.png" },
-              { text: "my-photo.jpg" }
-            ] },
-            { text: "about.html" },
-            { text: "index.html" }
-          ] }
-        ]),
+        $("#tree").kendoTreeView({
+            dataSource: [
+              { text: "My Web Site", expanded: true, items: [
+                { text: "images", expanded: true, items: [
+                  { text: "logo.png" },
+                  { text: "my-photo.jpg" }
+                ] },
+                { text: "about.html" },
+                { text: "index.html" }
+              ] }
+            ]
+        });
 
-        deleteClick: function () {
-          alert("Delete fired;");
-        }
-      });
-
-      kendo.bind("body", viewModel);
+        $("#tree").focus();
     </script>
 
-    <style scoped>
-
-      .delete-link {
-        width: 12px;
-        height: 12px;
-        background: transparent url("http://demos.telerik.com/kendo-ui/content/web/treeview/close.png") no-repeat 50% 50%;
-        overflow: hidden;
-        display: inline-block;
-        font-size: 0;
-        line-height: 0;
-        vertical-align: top;
-        margin: 2px 0 0 3px;
-        -webkit-border-radius: 5px;
-        -mox-border-radius: 5px;
-        border-radius: 5px;
-      }
-    </style>
 
 
   </body>
