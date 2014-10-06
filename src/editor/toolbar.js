@@ -111,7 +111,7 @@
 
             // detach from editor that was previously listened to
             if (that._editor) {
-                that._editor.unbind("select", proxy(that._updateTool, that));
+                that._editor.unbind("select", proxy(that.refreshTools, that));
             }
 
             that._editor = editor;
@@ -165,7 +165,7 @@
                 ui.closest(".k-colorpicker", that.element).next(".k-colorpicker").addClass("k-editor-widget");
             });
 
-            editor.bind("select", proxy(that._updateTool, that));
+            editor.bind("select", proxy(that.refreshTools, that));
 
             that.update();
 
@@ -535,7 +535,7 @@
             return tool[0] ? tool[0].substring(tool[0].lastIndexOf("-") + 1) : "custom";
         },
 
-        _updateTool: function() {
+        refreshTools: function() {
             var that = this,
                 editor = that._editor,
                 range = editor.getRange(),

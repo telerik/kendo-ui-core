@@ -519,7 +519,7 @@ var Dom = {
     },
 
     editableParent: function(node) {
-        while (node.nodeType == 3 || node.contentEditable !== 'true') {
+        while (node && (node.nodeType == 3 || node.contentEditable !== 'true')) {
             node = node.parentNode;
         }
 

@@ -665,6 +665,8 @@
 
             this.selectionRestorePoint = null;
             this.update();
+
+            this.toolbar.refreshTools();
         },
 
         saveSelection: function(range) {

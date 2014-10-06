@@ -76,6 +76,15 @@ test("value adds line breaks where necessary", function() {
     ok(kendo.ui.editor.Dom.insignificant(editor.body.firstChild.lastChild));
 });
 
+test("value method refreshes toolbar tools", function() {
+    var editor = new kendo.ui.Editor("#editor");
+    var refreshSpy = spy(editor.toolbar, "refreshTools")
+
+    editor.value("<p>content change</p>");
+
+    equal(refreshSpy.calls("refreshTools"), 1);
+});
+
 test("restoreSelection restores element selection", function() {
     var editor = new kendo.ui.Editor("#inline");
 
