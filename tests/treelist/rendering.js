@@ -590,14 +590,12 @@
 
     test("toolbar as an array of commands", function() {
         createTreeList({
-            toolbar: ["create", "save", "cancel"]
+            toolbar: ["create", "create"]
         });
 
         var toolbar = dom.find(".k-header.k-grid-toolbar");
-        equal(toolbar.find("button").length, 3);
-        equal(toolbar.find(".k-grid-add").length, 1);
-        equal(toolbar.find(".k-grid-save-changes").length, 1);
-        equal(toolbar.find(".k-grid-cancel-changes").length, 1);
+        equal(toolbar.find("button").length, 2);
+        equal(toolbar.find(".k-grid-add").length, 2);
     });
 
     test("filterable option renders filter icons", function() {

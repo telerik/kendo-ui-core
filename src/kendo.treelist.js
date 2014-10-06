@@ -87,18 +87,6 @@ var __meta__ = {
             className: "k-grid-add",
             methodName: "addRow"
         },
-        cancel: {
-            text: "Cancel changes",
-            imageClass: "k-cancel",
-            className: "k-grid-cancel-changes",
-            methodName: "cancelChanges"
-        },
-        save: {
-            text: "Save changes",
-            imageClass: "k-update",
-            className: "k-grid-save-changes",
-            methodName: "saveChanges"
-        },
         destroy: {
             text: "Delete",
             imageClass: "k-delete",
