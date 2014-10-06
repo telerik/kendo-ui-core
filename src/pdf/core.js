@@ -11,9 +11,6 @@
     /* jshint eqnull:true */
     /* jshint loopfunc:true */
     /* jshint newcap:false */
-    /* global pako */
-    /* global UInt8Array */
-    /* global ArrayBuffer */
 
     var NL = "\n";
 
@@ -579,7 +576,7 @@
                     this.props.Filter = [ this.props.Filter ];
                 }
                 this.props.Filter.unshift(PDFName.get("FlateDecode"));
-                data = pako.deflate(data, { to: "string" });
+                data = global.pako.deflate(data);
             }
             if (this.props.Length == null) {
                 this.props.Length = data.length;
