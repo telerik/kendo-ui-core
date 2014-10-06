@@ -46,7 +46,7 @@
 
     var mvvmTemplate = kendo.htmlEncode("<span class='content' data-bind='text: text'></span>");
 
-    test("bind MVVM template", function() {
+    test("bind and update template", function() {
         var observable = kendo.observable({ items: rootItems.slice() });
 
         bindHtml("<div data-role='treelist' " +
@@ -57,5 +57,22 @@
 
         var rows = instance.content.find("tr");
         equal(rows.eq(0).find(".content").text(), "bar");
+    });
+
+    test("template is updated on correct row", function() {
+        var observable = kendo.observable({ items: [
+            { id: 1, text: "foo", parentId: null },
+            { id: 2, text: "bar", parentId: null },
+            { id: 3, text: "baz", parentId: 1 }
+        ] });
+
+        bindHtml("<div data-role='treelist' " +
+                 "data-columns='[{ field: \"id\", template: \"" + mvvmTemplate + "\" }]' " +
+                 "data-bind='source:items' />", observable);
+
+        observable.items[2].set("text", "qux");
+
+        var rows = instance.content.find("tr");
+        equal(rows.eq(1).find(".content").text(), "qux");
     });
 })();
