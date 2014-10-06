@@ -786,11 +786,6 @@ var __meta__ = {
             }
         },
 
-        _iconMousedown: function(e) {
-            this.wrapper.focusin();
-            e.preventDefault();
-        },
-
         _span: function() {
             var that = this,
                 wrapper = that.wrapper,
@@ -808,8 +803,7 @@ var __meta__ = {
 
             that.span = span;
             that._inputWrapper = $(wrapper[0].firstChild);
-            that._arrow = wrapper.find(".k-icon")
-                                 .mousedown(proxy(that._iconMousedown, that));
+            that._arrow = wrapper.find(".k-icon");
         },
 
         _wrapper: function() {
