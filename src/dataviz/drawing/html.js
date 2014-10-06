@@ -664,6 +664,10 @@
 
         fontSize = parseFloat(fontSize);
 
+        if (fontSize === 0) {
+            return;
+        }
+
         var color = getPropertyValue(style, "color");
 
         function drawText(str, box) {
