@@ -430,20 +430,20 @@
 
     module("aria generation", moduleOptions);
 
-    test("treeview role is added to the wrapper", function() {
+    test("treeview role is added to the root list", function() {
         treeview.kendoTreeView({
             dataSource: [
                 { id: 1, text: "foo" }
             ]
         });
 
-        equal(treeview.attr("role"), "tree");
+        equal(treeview.find("ul").attr("role"), "tree");
     });
 
     test("treeview role is added if created from html", function() {
         var element = $("<div class=\"k-treeview\"><ul><li>item</li></ul></div>").appendTo(QUnit.fixture).kendoTreeView();
 
-        equal(element.attr("role"), "tree");
+        equal(element.find("ul").attr("role"), "tree");
     });
 
     test("treeviewitem role is assigned to the nodes", function() {
@@ -490,22 +490,6 @@
 
         equal(treeview.find("li:first").attr("aria-selected"), "false");
     });
-
-    test("aria-selected false is render for selected node which are disabled", function() {
-        var widget = treeview.kendoTreeView({
-                dataSource: [
-                    { text: "foo" }
-                ]
-            }).data("kendoTreeView"),
-            node = widget.dataSource.at(0);
-
-        node.set("selected", true);
-
-        widget.enable(treeview.find("li:first"), false);
-
-        ok(!treeview.find("li[aria-selected]").length);
-    });
-
 
     test("aria-disabled true is rendered for disabled nodes", function() {
         var widget = treeview.kendoTreeView({

@@ -1136,8 +1136,8 @@
 
         treeview.press(keys.DOWN);
 
-        ok(treeview.data("kendoTreeView")._ariaId);
-        equal(treeview.attr("aria-activedescendant"), treeview.data("kendoTreeView")._ariaId);
+        var activeDescendantId = treeview.attr("aria-activedescendant");
+        equal(treeview.find("#" + activeDescendantId).text(), "baz");
     });
 
     test("focusing node sets its id", function() {
@@ -1153,7 +1153,7 @@
 
         treeview.press(keys.DOWN);
 
-        ok(treeview.find("#" + treeview.data("kendoTreeView")._ariaId).length);
+        ok(treeview.find("#" + treeview.attr("aria-activedescendant")).length, 1);
     });
 
     test("focusing node does not set its id if treeview does not have id", function() {
@@ -1169,7 +1169,7 @@
 
         treeview.press(keys.DOWN);
 
-        ok(!treeview.find("#" + treeview.data("kendoTreeView")._ariaId).length);
+        ok(!treeview.find("[id]").length);
     });
 
     test("aria-activedescendant is not set if id is not set", function() {
