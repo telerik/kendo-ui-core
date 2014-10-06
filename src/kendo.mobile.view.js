@@ -41,7 +41,7 @@ var __meta__ = {
     }
 
     function compileToWidget(element, scopeSetup) {
-        element.attr("data-role", element[0].tagName.toLowerCase().replace('kendo-mobile-', ''));
+        element.attr("data-" + kendo.ns + "role", element[0].tagName.toLowerCase().replace('kendo-mobile-', ''));
 
         angular.element(element).injector().invoke(["$compile", function($compile) {
             var scope = angular.element(element).scope();
