@@ -318,7 +318,7 @@
                         alpha.writeByte(a);
                     }
 
-                    if (true||hasAlpha) {
+                    if (hasAlpha) {
                         img = new PDFRawImage(img.width, img.height, rgb, alpha);
                     } else {
                         // XXX: fix PDFJpegImage for new BinaryStream
@@ -326,7 +326,11 @@
                         var data = canvas.toDataURL("image/jpeg");
                         data = data.substr(data.indexOf(";base64,") + 8);
                         data = global.atob(data);
-                        img = new PDFJpegImage(data);
+
+                        var stream = BinaryStream();
+                        stream.writeString(data);
+                        stream.offset(0);
+                        img = new PDFJpegImage(stream);
                     }
 
                     cont(IMAGE_CACHE[url] = img);
@@ -656,15 +660,6 @@
             0xFFC8, 0xFFC9, 0xFFCA, 0xFFCB, 0xFFCC, 0xFFCD, 0xFFCE, 0xFFCF
         ];
 
-        if (typeof data == "string") {
-            data = BinaryStream(data);
-        }
-
-        // sanitize data (make sure we don't have chars with code > 0xFF)
-        data.offset(0);
-        data = BinaryStream(data.readString(data.length()));
-
-        data.offset(0);
         if (data.readShort() != 0xFFD8) {
             throw new Error("Invalid JPEG");
         }
@@ -1232,7 +1227,7 @@
         }
         function writeString(str) {
             for (var i = 0; i < str.length; ++i) {
-                writeByte(str.charCodeAt(i));
+                writeByte(str.charCodeAt(i) & 0xFF);
             }
         }
         return {
