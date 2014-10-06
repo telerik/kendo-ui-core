@@ -120,6 +120,19 @@ $.extend(true, kendo.ui.FileBrowser.prototype.options.messages,{
 });
 }
 
+/* FilterCell messages */
+
+if (kendo.ui.FilterCell) {
+kendo.ui.FilterCell.prototype.options.messages =
+$.extend(true, kendo.ui.FilterCell.prototype.options.messages,{
+  "isTrue": "為真",
+  "isFalse": "為假",
+  "filter": "過濾",
+  "clear": "清除",
+  "operator": "運算符"
+});
+}
+
 /* FilterMenu messages */
 
 if (kendo.ui.FilterMenu) {
@@ -136,6 +149,42 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "operator": "運算符",
   "value": "值",
   "cancel": "取消"
+});
+}
+
+/* Filter cell operator messages */
+
+if (kendo.ui.FilterCell) {
+kendo.ui.FilterCell.prototype.options.operators =
+$.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
+  "string": {
+    "eq": "等於",
+    "neq": "不等於",
+    "startswith": "開頭為",
+    "contains": "包含",
+    "doesnotcontain": "不包含",
+    "endswith": "結尾為"
+  },
+  "number": {
+    "eq": "等於",
+    "neq": "不等於",
+    "gte": "大於等於",
+    "gt": "大於",
+    "lte": "小於等於",
+    "lt": "小於"
+  },
+  "date": {
+    "eq": "等於",
+    "neq": "不等於",
+    "gte": "大於等於",
+    "gt": "大於",
+    "lte": "小於等於",
+    "lt": "小於"
+  },
+  "enum": {
+    "eq": "等於",
+    "neq": "不等於"
+  }
 });
 }
 

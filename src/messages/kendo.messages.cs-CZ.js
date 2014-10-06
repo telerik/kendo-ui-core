@@ -151,7 +151,7 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.messages,{
   "filter": "Filtrovat",
   "isFalse": "není pravda",
   "isTrue": "je pravda",
-  "operator": "Operátor",
+  "operator": "Operátor"
 });
 }
 /* FilterMenu messages */
