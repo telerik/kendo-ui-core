@@ -781,4 +781,55 @@
         ok(checkboxes.eq(3).prop("disabled"), "fourth column is not disabled");
     });
 
+    test("destroy should not detach owner's columnShow event handlers", 1, function() {
+        var owner = new kendo.ui.Widget($(), {
+                columns: [
+                    { field: "foo"},
+                    { field: "bar" },
+                    { field: "baz" },
+                    { field: "bax" }
+                ],
+            });
+
+        owner.columns = {};
+
+        owner.bind("columnShow", function() {
+            ok(true);
+        });
+
+        var menu = new ColumnMenu($(), {
+            owner: owner,
+            columns: {}
+        });
+
+        menu.destroy();
+
+        owner.trigger("columnShow");
+    });
+
+    test("destroy should not detach owner's columnHide event handlers", 1, function() {
+        var owner = new kendo.ui.Widget($(), {
+                columns: [
+                    { field: "foo"},
+                    { field: "bar" },
+                    { field: "baz" },
+                    { field: "bax" }
+                ],
+            });
+
+        owner.columns = {};
+
+        owner.bind("columnHide", function() {
+            ok(true);
+        });
+
+        var menu = new ColumnMenu($(), {
+            owner: owner,
+            columns: {}
+        });
+
+        menu.destroy();
+
+        owner.trigger("columnHide");
+    });
 })();

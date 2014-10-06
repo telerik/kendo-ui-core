@@ -220,7 +220,7 @@ var __meta__ = {
                 that.dataSource.unbind(CHANGE, that._refreshHandler);
             }
 
-            if (that.options.columns && that.owner) {
+            if (that.options.columns && that.owner && that._updateColumnsMenuHandler) {
                 that.owner.unbind("columnShow", that._updateColumnsMenuHandler);
                 that.owner.unbind("columnHide", that._updateColumnsMenuHandler);
             }
