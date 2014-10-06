@@ -2,7 +2,7 @@
     define([ "../kendo.core" ], f);
 })(function(){
 
-(function(global, undefined){
+(function(global, parseFloat, undefined){
 
     "use strict";
 
@@ -99,11 +99,9 @@
                     if (isNaN(x)) {
                         throw new Error("Cannot output NaN to PDF");
                     }
-                    // make sure it doesn't end up in exponent notation.
-                    if (x != Math.floor(x)) {
-                        x = x.toFixed(7).replace(/\.?0+$/, "");
-                    }
-                    output.writeString(x+"");
+                    // toFixed() to make sure it doesn't end up in exponent
+                    // notation, then parseFloat to remove trailing zeros.
+                    output.writeString(parseFloat(x.toFixed(7))+"");
                 }
                 else if (typeof x == "string") {
                     output.writeString(x);
@@ -339,7 +337,7 @@
                         var stream = BinaryStream();
                         stream.writeString(data);
                         stream.offset(0);
-                        img = new PDFJpegImage(stream);
+                        img = new PDFJpegImage(img.width, img.height, stream);
                     }
 
                     cont(IMAGE_CACHE[url] = img);
@@ -636,45 +634,15 @@
 
     // JPEG
 
-    function PDFJpegImage(data) {
-        var JPEG_SOF_MARKERS = [
-            0xFFC0, 0xFFC1, 0xFFC2, 0xFFC3, 0xFFC5, 0xFFC6, 0xFFC7,
-            0xFFC8, 0xFFC9, 0xFFCA, 0xFFCB, 0xFFCC, 0xFFCD, 0xFFCE, 0xFFCF
-        ];
-
-        if (data.readShort() != 0xFFD8) {
-            throw new Error("Invalid JPEG");
-        }
-        OUT: {
-            while (!data.eof()) {
-                var marker = data.readShort();
-                if (JPEG_SOF_MARKERS.indexOf(marker) >= 0) {
-                    break OUT;
-                }
-                data.skip(data.readShort() - 2);
-            }
-            throw new Error("Invalid JPEG");
-        }
-        data.skip(2);
-        var bits = data.readByte();
-        var height = data.readShort();
-        var width = data.readShort();
-        var channels = data.readByte();
-
-        var colorSpace = PDFName.get({
-            1: "DeviceGray",
-            3: "DeviceRGB",
-            4: "DeviceCMYK"
-        }[channels]);
-
+    function PDFJpegImage(width, height, data) {
         this.asStream = function() {
             var stream = new PDFStream(data, {
                 Type             : PDFName.get("XObject"),
                 Subtype          : PDFName.get("Image"),
                 Width            : width,
                 Height           : height,
-                BitsPerComponent : bits,
-                ColorSpace       : colorSpace,
+                BitsPerComponent : 8,
+                ColorSpace       : PDFName.get("DeviceRGB"),
                 Filter           : PDFName.get("DCTDecode")
             });
             stream._resourceName = PDFName.get("I" + (++RESOURCE_COUNTER));
@@ -1394,6 +1362,6 @@
         }
     };
 
-})(this);
+})(this, parseFloat);
 
 }, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });
