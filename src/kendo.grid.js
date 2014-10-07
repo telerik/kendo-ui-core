@@ -1371,9 +1371,22 @@ var __meta__ = {
         },
 
         getOptions: function() {
-            return extend(true, {}, {
-                columns: this.columns
-            });
+            var result = extend(true, {}, this.options);
+            result.columns = extend(true, [], this.columns);
+            var dataSource = this.dataSource;
+
+            result.dataSource = extend(true,
+                {},
+                dataSource.options, {
+                    page: dataSource.page(),
+                    filter: dataSource.filter(),
+                    pageSize: dataSource.pageSize(),
+                    sort: dataSource.sort(),
+                    group: dataSource.group(),
+                    aggregate: dataSource.aggregate()
+                });
+
+            return result;
         },
 
         setOptions: function(options) {

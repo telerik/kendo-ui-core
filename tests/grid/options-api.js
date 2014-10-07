@@ -79,4 +79,28 @@
        equal(options.mobile, true);
     });
 
+    test("getOptions retrieves the dynamically set group option", function() {
+        var grid = setup({
+           mobile: true
+        });
+        grid.dataSource.group({ field: "foo" });
+
+
+        var options = grid.getOptions();
+        equal(options.dataSource.group.length, 1);
+        equal(options.dataSource.group[0].field, "foo");
+    });
+
+    test("getOptions retrieves the dynamically set group option", function() {
+        var grid = setup({
+           mobile: true
+        });
+        grid.dataSource.sort({ field: "foo", dir: "desc" });
+
+
+        var options = grid.getOptions();
+        equal(options.dataSource.sort.length, 1);
+        equal(options.dataSource.sort[0].field, "foo");
+        equal(options.dataSource.sort[0].dir, "desc");
+    });
 })();
