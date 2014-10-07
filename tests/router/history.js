@@ -289,6 +289,14 @@
         history.replace("foo");
     });
 
+    test("replace does NOT create items with NaN index in the locations array", 1, function() {
+        stub(adapter, { replace: $.noop });
+        history.start();
+
+        history.replace("foo");
+        ok(!history.locations[NaN]);
+    });
+
     test("ignores null results", 1, function() {
         history.start();
         var called = false;

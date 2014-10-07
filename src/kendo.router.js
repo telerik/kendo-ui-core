@@ -263,7 +263,7 @@ var __meta__ = {
 
             this._navigate(to, silent, function(adapter) {
                 adapter.replace(to);
-                this.locations[this.locations - 1] = this.current;
+                this.locations[this.locations.length - 1] = this.current;
             });
         },
 
