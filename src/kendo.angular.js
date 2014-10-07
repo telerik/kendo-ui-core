@@ -533,7 +533,10 @@ var __meta__ = {
         'MobileLayout',
         'MobileNavBar',
         'MobileTabStrip',
-        'MobileActionSheet'
+        'MobileActionSheet',
+        'MobileButton',
+        'MobileBackButton',
+        'MobileDetailButton'
     ];
 
     function createDirectives(klass, isMobile) {
@@ -954,18 +957,6 @@ var __meta__ = {
                 }
             }
         };
-    }).directive('kendoMobileNavBar', function() {
-        return {
-            link: function(scope, element, attrs, controllers) {
-                createWidget(scope, element, attrs, 'kendoMobileNavBar', 'kendoMobileNavBar');
-            }
-        };
-    }).directive('kendoMobileTabStrip', function() {
-        return {
-            link: function(scope, element, attrs, controllers) {
-                createWidget(scope, element, attrs, 'kendoMobileTabStrip', 'kendoMobileTabStrip');
-            }
-        };
     }).directive('kendoMobileActionSheet', function() {
         return {
             link: function(scope, element, attrs, controllers) {
@@ -999,7 +990,18 @@ var __meta__ = {
                     element.addClass("km-footer").attr("data-role", "footer");
                 }
             };
-      });
+    });
+
+
+    angular.forEach(['kendoMobileNavBar', 'kendoMobileButton', 'kendoMobileBackButton', 'kendoMobileDetailButton', 'kendoMobileTabStrip'], function(widget) {
+        module.directive(widget, function() {
+            return {
+                link: function(scope, element, attrs, controllers) {
+                    createWidget(scope, element, attrs, widget, widget);
+                }
+            };
+        });
+    });
 
     angular.forEach(['align', 'icon', 'rel', 'transition', 'actionsheetContext'], function(attr) {
           var kAttr = "k" + attr.slice(0, 1).toUpperCase() + attr.slice(1);
