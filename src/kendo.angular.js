@@ -685,7 +685,7 @@ var __meta__ = {
                       case "cleanup":
                         angular.forEach(elements, function(el){
                             var itemScope = angular.element(el).scope();
-                            if (itemScope && itemScope !== scope) {
+                            if (itemScope && itemScope !== scope && itemScope.$$kendoScope) {
                                 destroyScope(itemScope, el);
                             }
                         });
@@ -700,6 +700,7 @@ var __meta__ = {
                                 var vars = data && data[i];
                                 if (vars !== undefined) {
                                     itemScope = $.extend(scope.$new(), vars);
+                                    itemScope.$$kendoScope = true;
                                 }
                             }
 
