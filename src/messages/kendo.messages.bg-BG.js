@@ -338,7 +338,7 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.messages,{
   "clear": "Премахни филтър",
   "isFalse": "не е вярно",
   "isTrue": "е вярно",
-  "operator": "Оператор",
+  "operator": "Оператор"
 });
 }
 
