@@ -88,13 +88,15 @@
             return null;
         }
         var origin = getPropertyValue(style, "transform-origin");
-        var matrix = /^\s*matrix\(\s*(.*?)\s*\)\s*$/.exec(transform)[1]
-            .split(/\s*,\s*/g).map(parseFloat);
-        origin = origin.split(/\s+/g).map(parseFloat);
-        return {
-            matrix: matrix,
-            origin: origin
-        };
+        var matrix = /^\s*matrix\(\s*(.*?)\s*\)\s*$/.exec(transform);
+        if (matrix) { // IE9 doesn't support CSS transforms
+            matrix = matrix[1].split(/\s*,\s*/g).map(parseFloat);
+            origin = origin.split(/\s+/g).map(parseFloat);
+            return {
+                matrix: matrix,
+                origin: origin
+            };
+        }
     }
 
     function toDegrees(radians) {
@@ -228,6 +230,23 @@
         var backgroundRepeat = getPropertyValue(style, "background-repeat");
         var backgroundPosition = getPropertyValue(style, "background-position");
         var backgroundOrigin = getPropertyValue(style, "background-origin");
+
+        if (element.currentStyle) {
+            // IE9 hacks.  getPropertyValue won't return the correct
+            // value.  Sucks that we have to do it here, I'd prefer to
+            // move it in getPropertyValue, but we don't have the
+            // element.
+            backgroundPosition = element.currentStyle.backgroundPosition;
+
+            // gradients rendered as SVG (for instance in the colorpicker)
+            // cannot be displayed.
+            if (/^url\(\"data:image\/svg/i.test(backgroundImage)) {
+                // this will taint the canvas in IE9 for some reason
+                // and we get a DOM security exception when we try to
+                // retrieve the image from it.  ditch it.
+                backgroundImage = null;
+            }
+        }
 
         var innerbox = innerBox(element.getBoundingClientRect(), element, "border-*-width");
 
