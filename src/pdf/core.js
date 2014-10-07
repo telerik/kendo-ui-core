@@ -1196,7 +1196,7 @@
         }
         function writeByte(b) {
             ensure(offset);
-            data[offset++] = b;
+            data[offset++] = b & 0xFF;
             if (offset > length) {
                 length = offset;
             }
@@ -1249,7 +1249,7 @@
         }
         function writeString(str) {
             for (var i = 0; i < str.length; ++i) {
-                writeByte(str.charCodeAt(i) & 0xFF);
+                writeByte(str.charCodeAt(i));
             }
         }
         function times(n, reader) {

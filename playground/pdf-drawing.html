@@ -8,8 +8,7 @@
     <script>
       requireSync([
         "../src/jquery.js",
-        "../src/kendo.dataviz.js",
-        "./saveas.js"
+        "../src/kendo.dataviz.js"
       ]);
     </script>
   </head>
@@ -22,7 +21,7 @@
 
       function getPDF() {
         d.pdf.toDataURL(main, function(url){
-          saveAs(url, "kendo.pdf");
+          kendo.saveAs(url, "kendo.pdf", "http://kendo.local:7569/");
         });
       }
 
