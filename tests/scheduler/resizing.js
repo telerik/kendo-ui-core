@@ -208,6 +208,82 @@
         equal(div.find(".k-event:last .k-resize-w").length, 0);
     });
 
+    test("timeline view renders east resize handle for events which end in the current day", function() {
+        var scheduler = new kendo.ui.Scheduler(div, {
+            date: new Date("2013/6/6"),
+            views: ["timeline"],
+            dataSource: [
+                { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 11:00"), title: "" }
+            ]
+        });
+
+        equal(div.find(".k-event > .k-resize-e").length, 1);
+    });
+
+    test("timeline view does not render east resize handle for events which end in next day", function() {
+        var scheduler = new kendo.ui.Scheduler(div, {
+            date: new Date("2013/6/6"),
+            views: ["timeline"],
+            dataSource: [
+                { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/7 11:00"), title: "" }
+            ]
+        });
+
+        equal(div.find(".k-event > .k-resize-e").length, 0);
+    });
+
+    test("timeline view renders west resize handle for events which start in the current day", function() {
+        var scheduler = new kendo.ui.Scheduler(div, {
+            date: new Date("2013/6/6"),
+            views: ["timeline"],
+            dataSource: [
+                { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 11:00"), title: "" }
+            ]
+        });
+
+        equal(div.find(".k-event > .k-resize-w").length, 1);
+    });
+
+    test("timeline view does not render west resize handle for events which start in previous day", function() {
+        var scheduler = new kendo.ui.Scheduler(div, {
+            date: new Date("2013/6/6"),
+            views: ["timeline"],
+            dataSource: [
+                { start: new Date("2013/6/5 10:00"), end: new Date("2013/6/6 11:00"), title: "" }
+            ]
+        });
+
+        equal(div.find(".k-event > .k-resize-w").length, 0);
+    });
+
+    test("timeline view does not render resize handles when editable is set to false", function() {
+        var scheduler = new kendo.ui.Scheduler(div, {
+            date: new Date("2013/6/6"),
+            editable: false,
+            views: ["timeline"],
+            dataSource: [
+                { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 11:00"), isAllDay: true, title: "" },
+                { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 11:00"), title: "" }
+            ]
+        });
+
+        equal(div.find(".k-resize-e,.k-resize-w,.k-resize-s,.k-resize-n").length, 0);
+    });
+
+    test("timeline view does not render resize handles when editable.resize is set to false", function() {
+        var scheduler = new kendo.ui.Scheduler(div, {
+            date: new Date("2013/6/6"),
+            editable: { resize: false },
+            views: ["timeline"],
+            dataSource: [
+                { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 11:00"), isAllDay: true, title: "" },
+                { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 11:00"), title: "" }
+            ]
+        });
+
+        equal(div.find(".k-resize-e,.k-resize-w,.k-resize-s,.k-resize-n").length, 0);
+    });
+
     module("scheduler resizing live dom", {
         setup: function() {
             kendo.effects.disable();
