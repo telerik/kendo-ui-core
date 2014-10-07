@@ -243,7 +243,7 @@ kendo.data.ExcelExporter = kendo.Class.extend({
 
         return columns.concat($.map(this.columns, function(column) {
             return {
-                width: column.width,
+                width: parseInt(column.width, 10),
                 autoWidth: column.width ? false : true
             };
         }));
