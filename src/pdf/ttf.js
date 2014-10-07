@@ -4,6 +4,16 @@
 
 (function(global){
 
+/*****************************************************************************\
+ *
+ * The code in this file, although written from scratch, is shaped after the
+ * TrueType parser/encoder in PDFKit -- http://pdfkit.org/ (a CoffeeScript
+ * library for producing PDF files).
+ *
+ * PDFKit is (c) Devon Govett 2014 and released under the MIT License.
+ *
+\*****************************************************************************/
+
 "use strict";
 
 // WARNING: removing the following jshint declaration and turning
