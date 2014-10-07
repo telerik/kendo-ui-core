@@ -529,6 +529,7 @@ var __meta__ = {
     var MANUAL_DIRECTIVES = [
         'MobileApplication',
         'MobileView',
+        'MobileModalView',
         'MobileLayout',
         'MobileNavBar',
         'MobileTabStrip',
@@ -927,6 +928,24 @@ var __meta__ = {
                 post: function(scope) {
                     scope._view._layout();
                     scope._view._scroller();
+                }
+            }
+        };
+    }).directive('kendoMobileModalView', function() {
+        return {
+            scope: true,
+            link: {
+                pre: function(scope, element, attrs, controllers) {
+                    console.log("pre");
+                    attrs.defaultOptions = scope.viewOptions;
+                    scope._modalView = createWidget(scope, element, attrs, 'kendoMobileModalView', 'kendoMobileModalView');
+                },
+
+                post: function(scope) {
+                    console.log("post");
+
+                    scope._modalView._layout();
+                    scope._modalView._scroller();
                 }
             }
         };
