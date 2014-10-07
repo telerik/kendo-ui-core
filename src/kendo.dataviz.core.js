@@ -816,24 +816,29 @@ var __meta__ = {
             }
         },
 
-        getViewElements: function(view) {
-            var root = this,
-                options = root.options,
-                border = options.border || {},
-                box = root.box.clone().pad(options.margin).unpad(border.width),
-                elements = [
-                        view.createRect(box, {
-                            stroke: border.width ? border.color : "",
-                            strokeWidth: border.width,
-                            dashType: border.dashType,
-                            fill: options.background,
-                            fillOpacity: options.opacity,
-                            zIndex: options.zIndex })
-                    ];
+        createVisual: function() {
+            this.visual = new draw.Group();
+            this.createBackground();
+        },
 
-            return elements.concat(
-                ChartElement.fn.getViewElements.call(root, view)
-            );
+        createBackground: function() {
+            var options = this.options;
+            var border = options.border || {};
+            var box = this.box.clone().pad(options.margin).unpad(border.width);
+
+            var background = draw.Path.fromRect(box.toRect(), {
+                stroke: {
+                    color: border.width ? border.color : "",
+                    width: border.width,
+                    dashType: border.dashType
+                },
+                fill: {
+                    color: options.background,
+                    opacity: options.opacity
+                }
+            });
+
+            this.visual.append(background);
         },
 
         getRoot: function() {
