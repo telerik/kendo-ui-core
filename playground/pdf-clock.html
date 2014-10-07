@@ -10,7 +10,6 @@
     requireSync([
       "../src/jquery.js",
       "../src/kendo.all.js",
-      "./saveas.js"
     ]);
   </script>
 </head>
@@ -251,7 +250,7 @@
 
     function getPDF() {
       drawing.pdf.toDataURL(root, function(url){
-        saveAs(url, "kendo.pdf");
+        kendo.saveAs(url, "kendo.pdf", "http://kendo.local:7569/");
       });
     }
     </script>

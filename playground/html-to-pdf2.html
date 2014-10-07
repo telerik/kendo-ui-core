@@ -8,7 +8,7 @@
       requireSync([
         "../src/jquery.js",
         "../src/kendo.all.js",
-        "./saveas.js"
+        "./console.time.js"
       ]);
     </script>
 
@@ -89,7 +89,7 @@
         var el = getEl(sel)[0];
         kendo.dataviz.drawing.drawDOM(el, function(root){
           kendo.dataviz.drawing.pdf.toDataURL(root, function(url){
-            saveAs(url, "html-to-pdf2.pdf");
+            kendo.saveAs(url, "html-to-pdf2.pdf", "http://kendo.local:7569/");
           });
         });
       }
