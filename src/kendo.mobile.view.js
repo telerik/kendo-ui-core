@@ -179,13 +179,7 @@ var __meta__ = {
                 this.layout.attach(this);
             }
 
-            if (this.options.$angular) {
-                var controller = element.controller();
-
-                if (controller) {
-                    element.injector().invoke(controller.constructor, null, { $scope: element.scope() });
-                }
-            }
+            this._invokeNgController();
 
             this._padIfNativeScrolling();
             this.trigger(SHOW, {view: this});
@@ -330,6 +324,19 @@ var __meta__ = {
 
         _overlay: function() {
             this.overlay = $(UI_OVERLAY).appendTo(this.element);
+        },
+
+        _invokeNgController: function() {
+            var element = this.element,
+                controller;
+
+            if (this.options.$angular) {
+                controller = element.controller();
+
+                if (controller) {
+                    element.injector().invoke(controller.constructor, null, { $scope: element.scope() });
+                }
+            }
         }
     });
 
@@ -476,7 +483,7 @@ var __meta__ = {
                     compileToWidget($(element), function(scope) {
                         console.log("scope");
                     });
-                })
+                });
             } else {
                 initWidgets(collection);
             }

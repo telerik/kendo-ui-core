@@ -66,13 +66,7 @@ var __meta__ = {
             that.target = $(target);
             that.shim.show();
 
-            if (this.options.$angular) {
-                var controller = that.element.controller();
-
-                if (controller) {
-                    that.element.injector().invoke(controller.constructor, null, { $scope: that.element.scope() });
-                }
-            }
+            that._invokeNgController();
 
             // necessary for the mobile view interface
             that.trigger("show", { view: that });
