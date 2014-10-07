@@ -7,6 +7,14 @@
 
     var HOP = Object.prototype.hasOwnProperty;
 
+    var ALLSCRIPTS = window.ALLSCRIPTS = [];
+
+    ALLSCRIPTS.html = function() {
+        return map(ALLSCRIPTS, function(el){
+            return "<script src=\"" + el + "\"></script>";
+        }).join("\n");
+    };
+
     window.$$$define = window.define;
 
     function basedir(url) {
@@ -34,7 +42,9 @@
 
     function sync_require(filename) {
         if (filename instanceof Array) {
-            map(filename, sync_require);
+            map(filename, function(filename){
+                load(basedir(window.location + ""), filename);
+            });
         } else {
             load(basedir(window.location + ""), filename);
         }
@@ -94,6 +104,7 @@
                     console.log(Array(i + 1).join("  ") + "->", m.url);
                 });
             } else {
+                ALLSCRIPTS.push(url);
                 var args = map(module.deps, execute);
                 module.value = module.factory.apply(window, args);
                 module.executed = true;
