@@ -361,7 +361,7 @@ var ngTestModule, ngTest, ngScope;
             setTimeout(function() {
                 start();
                 check();
-            }, 50);
+            }, 100);
         });
     }
 })();

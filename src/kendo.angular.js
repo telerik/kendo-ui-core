@@ -531,7 +531,8 @@ var __meta__ = {
         'MobileView',
         'MobileLayout',
         'MobileNavBar',
-        'MobileTabStrip'
+        'MobileTabStrip',
+        'MobileActionSheet'
     ];
 
     function createDirectives(klass, isMobile) {
@@ -949,6 +950,17 @@ var __meta__ = {
                 createWidget(scope, element, attrs, 'kendoMobileTabStrip', 'kendoMobileTabStrip');
             }
         };
+    }).directive('kendoMobileActionSheet', function() {
+        return {
+            link: function(scope, element, attrs, controllers) {
+
+                element.find("a[k-action]").each(function() {
+                    $(this).attr("data-" + kendo.ns + "action", $(this).attr("k-action"));
+                });
+
+                createWidget(scope, element, attrs, 'kendoMobileActionSheet', 'kendoMobileActionSheet');
+            }
+        };
     }).directive('kendoViewTitle', function(){
         return {
             restrict : "E",
@@ -973,7 +985,7 @@ var __meta__ = {
             };
       });
 
-    angular.forEach(['align', 'icon', 'rel', 'transition'], function(attr) {
+    angular.forEach(['align', 'icon', 'rel', 'transition', 'actionsheetContext'], function(attr) {
           var kAttr = "k" + attr.slice(0, 1).toUpperCase() + attr.slice(1);
 
           module.directive(kAttr, function() {
@@ -981,7 +993,7 @@ var __meta__ = {
                   restrict: 'A',
                   priority: 2,
                   link: function(scope, element, attrs) {
-                      element.attr(kendo.attr(attr), scope.$eval(attrs[kAttr]));
+                      element.attr(kendo.attr(kendo.toHyphens(attr)), scope.$eval(attrs[kAttr]));
                   }
               };
           });
