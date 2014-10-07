@@ -381,7 +381,7 @@
                     alpha.writeByte(a);
                 }
 
-                if (hasAlpha) { // XXX: write global.atob for IE9
+                if (hasAlpha) {
                     img = new PDFRawImage(img.width, img.height, rgb, alpha);
                 } else {
                     // no transparency, encode as JPEG.
