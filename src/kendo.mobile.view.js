@@ -37,11 +37,11 @@ var __meta__ = {
         roleSelector = kendo.roleSelector;
 
     function byDirective(directives) {
-        return directives.replace(/(\S+)/g, "kendo-mobile-$1,").slice(0, -1);
+        return directives.replace("modalview", "modal-view").replace(/(\S+)/g, "kendo-mobile-$1,").slice(0, -1);
     }
 
     function compileToWidget(element, scopeSetup) {
-        element.attr("data-" + kendo.ns + "role", element[0].tagName.toLowerCase().replace('kendo-mobile-', ''));
+        element.attr("data-" + kendo.ns + "role", element[0].tagName.toLowerCase().replace('kendo-mobile-', '').replace('-', ''));
 
         angular.element(element).injector().invoke(["$compile", function($compile) {
             var scope = angular.element(element).scope();
@@ -430,7 +430,8 @@ var __meta__ = {
             var that = this,
                 views,
                 errorMessage,
-                container;
+                container,
+                collection;
 
             Observable.fn.init.call(that);
 
@@ -469,7 +470,17 @@ var __meta__ = {
             this.getLayoutProxy = $.proxy(this, "_getLayout");
             that._setupLayouts(container);
 
-            initWidgets(container.children(that._locate("modalview drawer")));
+            collection = container.children(that._locate("modalview drawer"));
+            if (that.$angular) {
+                collection.each(function(idx, element) {
+                    compileToWidget($(element), function(scope) {
+                        console.log("scope");
+                    });
+                })
+            } else {
+                initWidgets(collection);
+            }
+
             this.bind(this.events, options);
         },
 
