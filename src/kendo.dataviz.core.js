@@ -2418,7 +2418,7 @@ var __meta__ = {
 
             if (rotation) {
                 element.transform(geom.transform()
-                    .rotate(rotation, [center.x, center.y])
+                    .rotate(-rotation, [center.x, center.y])
                 );
             }
 
