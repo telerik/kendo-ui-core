@@ -1235,7 +1235,7 @@
         });
 
         test("renders width", function() {
-            ok(clipRect.render().indexOf("width:100px") > -1);
+            ok(clipRect.render().indexOf("width:110px") > -1);
         });
 
         test("renders height", function() {
