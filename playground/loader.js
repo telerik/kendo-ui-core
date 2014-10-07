@@ -60,10 +60,24 @@
 
     function load(path, file) {
         var url = geturl(path, file);
+        var def = make_define(path, file, url);
         if (!LOADED[url]) {
-            LOADED[url] = true;
-            document.write("<script>window.define = " + make_define(path, file, url) + "</script>");
-            document.write("<script src='" + url + "'></script>");
+            if (/MSIE\s*[89]/.test(navigator.userAgent)) {
+                var req = new XMLHttpRequest();
+                req.open("GET", url, false);
+                req.onreadystatechange = function() {
+                    if (req.readyState == 4) {
+                        if (req.status == 200 || req.status == 304) {
+                            new Function("define", req.responseText)(window[def]);
+                        }
+                    }
+                };
+                req.send(null);
+            } else {
+                LOADED[url] = true;
+                document.write("<script>window.define = " + def + "</script>");
+                document.write("<script src='" + url + "'></script>");
+            }
         }
     }
 
