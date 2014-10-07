@@ -929,6 +929,11 @@
                   new Date("2013/10/20 01:00:00"));
     });
 
+    tzTest("Moscow", "Adding years skips", function() {
+        deepEqual(addDuration(new Date("2002/01/10"), 1, "years"),
+                  new Date("2003/01/01 00:00:00"));
+    });
+
     // ------------------------------------------------------------
     var toDate = dataviz.toDate;
 

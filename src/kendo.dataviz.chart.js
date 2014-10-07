@@ -11587,6 +11587,7 @@ var __meta__ = {
 
             if (unit === YEARS) {
                 result = new Date(date.getFullYear() + value, 0, 1);
+                kendo.date.adjustDST(result, 0);
             } else if (unit === MONTHS) {
                 result = new Date(date.getFullYear(), date.getMonth() + value, 1);
                 kendo.date.adjustDST(result, hours);

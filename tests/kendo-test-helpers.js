@@ -82,7 +82,8 @@ function arrayClose(a, b, tolerance) {
 function tzTest(tzAlias, testName, expected, callback ) {
     var TZ_NAMES = {
         "Brazil": ["BRST", "BRT", "South America Daylight Time", "South America Standard Time"],
-        "Sofia": ["EET", "EEST", "Eastern European Time", "Eastern European Summer Time"]
+        "Sofia": ["EET", "EEST", "Eastern European Time", "Eastern European Summer Time"],
+        "Moscow": ["MSK", "RTZ2", "Russia TZ 2 Standard Time"]
     };
 
     function tzMatch(alias) {
