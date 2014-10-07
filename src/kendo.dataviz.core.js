@@ -1491,8 +1491,6 @@ var __meta__ = {
                 width: tickOptions.width,
                 color: tickOptions.color
             }
-            // TODO
-            // align: options._alignLines
         });
 
         if (options.vertical) {
@@ -1502,6 +1500,8 @@ var __meta__ = {
             tick.moveTo(position, tickY)
                 .lineTo(position, tickY + tickOptions.size);
         }
+
+        alignPathToPixel(tick);
 
         return tick;
     }
@@ -1527,6 +1527,8 @@ var __meta__ = {
             line.moveTo(position, lineStart)
                 .lineTo(position, lineEnd);
         }
+
+        alignPathToPixel(line);
 
         return line;
     }
@@ -1761,7 +1763,7 @@ var __meta__ = {
             this.createLine();
         },
 
-        createTicks: function(view) {
+        createTicks: function(lineGroup) {
             var axis = this,
                 options = axis.options,
                 lineBox = axis.lineBox(),
@@ -1787,7 +1789,7 @@ var __meta__ = {
                         tickLineOptions.tickY = mirror ? lineBox.y1 - tickOptions.size : lineBox.y1;
                         tickLineOptions.position = tickPositions[i];
 
-                        axis.visual.append(createAxisTick(tickLineOptions, tickOptions));
+                        lineGroup.append(createAxisTick(tickLineOptions, tickOptions));
                     }
                 }
             }
@@ -1813,15 +1815,21 @@ var __meta__ = {
 
                     /* TODO
                     zIndex: line.zIndex,
-                    align: options._alignLines
                     */
                 });
 
                 path.moveTo(lineBox.x1, lineBox.y1)
                     .lineTo(lineBox.x2, lineBox.y2);
 
-                this.visual.append(path);
-                this.createTicks();
+                if (options._alignLines) {
+                    alignPathToPixel(path);
+                }
+
+                var group = new draw.Group();
+                group.append(path);
+
+                this.visual.append(group);
+                this.createTicks(group);
             }
         },
 
@@ -4658,6 +4666,12 @@ var __meta__ = {
 
     function isInRange(value, range) {
         return value >= range.min && value <= range.max;
+    }
+
+    function alignPathToPixel(path) {
+        for (var i = 0; i < path.segments.length; i++) {
+            path.segments[i].anchor().round(0).translate(0.5, 0.5);
+        }
     }
 
     decodeEntities._element = document.createElement("span");
