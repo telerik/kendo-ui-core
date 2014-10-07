@@ -171,11 +171,7 @@ var __meta__ = {
             element.toggleClass(DISABLEDSTATE, !enable)
                    .attr("aria-disabled", !enable)
                    .attr(DISABLED, !enable);
-            // prevent 'Unspecified error' in IE when button is inside iframe
-            try {
-                element.blur();
-            } catch(err) {
-            }
+            element.blur();
         }
     });
 
