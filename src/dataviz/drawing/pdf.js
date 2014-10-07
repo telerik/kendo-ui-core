@@ -67,8 +67,8 @@
             var page = pdf.addPage();
             drawElement(group, page, pdf);
             var binary = pdf.render();
-            var blob = new Blob([ binary ], { type: "application/pdf" });
-            callback(blob);
+            var dataurl = "data:application/pdf;base64," + binary.base64();
+            callback(dataurl);
         }
 
         var count = 2;

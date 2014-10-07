@@ -11,6 +11,7 @@
     /* jshint eqnull:true */
     /* jshint loopfunc:true */
     /* jshint newcap:false */
+    /* global VBArray */
 
     // XXX: remove this junk (assume `true`) when we no longer have to support IE < 10
     var HAS_TYPED_ARRAYS = !!global.Uint8Array;
@@ -35,6 +36,60 @@
         "Symbol",
         "ZapfDingbats"
     ];
+
+    var BASE64 = (function(){
+        var keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+        return {
+            decode: function(str) {
+                var input = str.replace(/[^A-Za-z0-9\+\/\=]/g, ""), i = 0, n = input.length, output = [];
+
+	        while (i < n) {
+		    var enc1 = keyStr.indexOf(input.charAt(i++));
+		    var enc2 = keyStr.indexOf(input.charAt(i++));
+		    var enc3 = keyStr.indexOf(input.charAt(i++));
+		    var enc4 = keyStr.indexOf(input.charAt(i++));
+
+		    var chr1 = (enc1 << 2) | (enc2 >>> 4);
+		    var chr2 = ((enc2 & 15) << 4) | (enc3 >>> 2);
+		    var chr3 = ((enc3 & 3) << 6) | enc4;
+
+		    output.push(chr1);
+		    if (enc3 != 64) {
+                        output.push(chr2);
+                    }
+		    if (enc4 != 64) {
+                        output.push(chr3);
+                    }
+	        }
+
+	        return output;
+            },
+            encode: function(bytes) {
+                var i = 0, n = bytes.length;
+                var output = "";
+
+	        while (i < n) {
+		    var chr1 = bytes[i++];
+		    var chr2 = bytes[i++];
+		    var chr3 = bytes[i++];
+
+		    var enc1 = chr1 >>> 2;
+		    var enc2 = ((chr1 & 3) << 4) | (chr2 >>> 4);
+		    var enc3 = ((chr2 & 15) << 2) | (chr3 >>> 6);
+		    var enc4 = chr3 & 63;
+
+		    if (i - n == 2) {
+			enc3 = enc4 = 64;
+		    } else if (i - n == 1) {
+			enc4 = 64;
+		    }
+
+		    output += keyStr.charAt(enc1) + keyStr.charAt(enc2) + keyStr.charAt(enc3) + keyStr.charAt(enc4);
+                }
+                return output;
+            }
+        };
+    }());
 
     var PAPER_SIZE = {
         a0        : [ 2383.94 , 3370.39 ],
@@ -131,6 +186,9 @@
         };
         out.get = function() {
             return output.get();
+        };
+        out.base64 = function() {
+            return output.base64();
         };
         return out;
     }
@@ -237,7 +295,7 @@
             out("startxref", NL, xrefOffset, NL);
             out("%%EOF", NL);
 
-            return out.get();
+            return out;
         };
     }
 
@@ -256,15 +314,16 @@
         };
         req.send(null);
     } : function loadBinary(url, cont) {
+        // these days we should only get here for IE<10, so this
+        // function is IE-specific (works only on IE9 actually).
         var req = new XMLHttpRequest();
         req.open('GET', url, true);
-        req.overrideMimeType("text/plain; charset=x-user-defined");
         req.onreadystatechange = function() {
             if (req.readyState == 4) {
                 if (req.status == 200 || req.status == 304) {
-                    var data = BinaryStream();
-                    data.writeString(req.responseText);
-                    cont(data.get());
+                    // the following line works in IE9 only.
+                    var bytes = new VBArray(req.responseBody).toArray();
+                    cont(bytes);
                 }
             }
         };
@@ -322,16 +381,15 @@
                     alpha.writeByte(a);
                 }
 
-                if (hasAlpha) {
+                if (hasAlpha) { // XXX: write global.atob for IE9
                     img = new PDFRawImage(img.width, img.height, rgb, alpha);
                 } else {
                     // no transparency, encode as JPEG.
                     var data = canvas.toDataURL("image/jpeg");
                     data = data.substr(data.indexOf(";base64,") + 8);
-                    data = global.atob(data);
 
                     var stream = BinaryStream();
-                    stream.writeString(data);
+                    stream.writeBase64(data);
                     stream.offset(0);
                     img = new PDFJpegImage(img.width, img.height, stream);
                 }
@@ -1253,6 +1311,13 @@
                 } finally {
                     offset = pos;
                 }
+            },
+
+            writeBase64: function(base64) {
+                write(BASE64.decode(base64));
+            },
+            base64: function() {
+                return BASE64.encode(get());
             }
         };
     }
