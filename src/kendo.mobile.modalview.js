@@ -89,7 +89,8 @@ var __meta__ = {
         _wrap: function() {
             var that = this,
                 element = that.element,
-                options = that.options;
+                options = that.options,
+                width, height;
 
             width = element[0].style.width || "auto";
             height = element[0].style.height || "auto";

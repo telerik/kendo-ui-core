@@ -936,14 +936,11 @@ var __meta__ = {
             scope: true,
             link: {
                 pre: function(scope, element, attrs, controllers) {
-                    console.log("pre");
                     attrs.defaultOptions = scope.viewOptions;
                     scope._modalView = createWidget(scope, element, attrs, 'kendoMobileModalView', 'kendoMobileModalView');
                 },
 
                 post: function(scope) {
-                    console.log("post");
-
                     scope._modalView._layout();
                     scope._modalView._scroller();
                 }

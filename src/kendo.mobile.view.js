@@ -140,6 +140,7 @@ var __meta__ = {
 
             this.trigger(DESTROY);
 
+
             Widget.fn.destroy.call(this);
 
             if (this.scroller) {
@@ -481,7 +482,7 @@ var __meta__ = {
             if (that.$angular) {
                 collection.each(function(idx, element) {
                     compileToWidget($(element), function(scope) {
-                        console.log("scope");
+                        //pass the options?
                     });
                 });
             } else {
