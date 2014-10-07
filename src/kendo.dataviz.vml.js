@@ -806,7 +806,7 @@ var __meta__ = {
                 clipRect.template = VMLClipRect.template = renderTemplate(
                     "<#= d.tagName # #= d.renderId() #" +
                         "style='position:absolute;" +
-                        "width:#= d.box.width() #px; height:#= d.box.height() + d.box.y1#px; " +
+                        "width:#= d.box.width() + d.box.x1 #px; height:#= d.box.height() + d.box.y1 #px; " +
                         "top:0px; " +
                         "left:0px; " +
                         "clip:#= d._renderClip() #;' >" +
