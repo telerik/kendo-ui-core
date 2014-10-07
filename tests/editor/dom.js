@@ -223,11 +223,20 @@ test("adds line break to element", function() {
 });
 
 test("does not add redundant breaks", function() {
-    var dom = $("<p>foo<br /></p>");
+    var dom = $("<p>foo<br class='k-br' /></p>");
 
     Dom.ensureTrailingBreak(dom[0]);
 
     equal(dom.find("br").length, 1);
+});
+
+test("adds breaks to content that ends with non-system line break", function() {
+    var dom = $("<p>foo<br /></p>");
+
+    Dom.ensureTrailingBreak(dom[0]);
+
+    equal(dom.find("br").length, 2);
+    equal(dom.find("br.k-br").length, 1);
 });
 
 test("adds break to empty paragraph", function() {

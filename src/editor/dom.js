@@ -755,10 +755,13 @@ var Dom = {
     },
 
     ensureTrailingBreak: function(node) {
-        var name = node.lastChild && Dom.name(node.lastChild);
+        var lastChild = node.lastChild;
+        var name = lastChild && Dom.name(lastChild);
         var br;
 
-        if (!name || name != "br" && name != "img") {
+        if (!name ||
+            (name != "br" && name != "img") ||
+            (name == "br" && lastChild.className != "k-br")) {
             br = node.ownerDocument.createElement("br");
             br.className = "k-br";
             node.appendChild(br);
