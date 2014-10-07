@@ -4837,7 +4837,7 @@ var __meta__ = {
 
             colgroup = that.thead.prev().find("col:not(.k-group-col,.k-hierarchy-col)");
             header = that.thead.find("tr:first .k-header:not(.k-group-cell,.k-hierarchy-cell)");
-            filtercellCells = that.thead.find(".k-filter-row").find("th");
+            filtercellCells = that.thead.find(".k-filter-row").find("th:not(.k-group-cell,.k-hierarchy-cell)");
 
             var colOffset = 0;
             for (idx = 0, length = columns.length; idx < length; idx++) {
@@ -5312,7 +5312,7 @@ var __meta__ = {
                 });
 
             if(groups > length) {
-                $(new Array(groups - length + 1).join('<th class="k-group-cell k-header">&nbsp;</th>')).prependTo(container.find("tr"));
+                $(new Array(groups - length + 1).join('<th class="k-group-cell k-header">&nbsp;</th>')).prependTo(container.find("tr:not(.k-filter-row)"));
                 rows.find("th.k-group-cell").hide();
             } else if(groups < length) {
                 container.find("tr").each(function() {
