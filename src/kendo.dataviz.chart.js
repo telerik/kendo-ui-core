@@ -80,7 +80,7 @@ var __meta__ = {
         uniqueId = dataviz.uniqueId,
         valueOrDefault = dataviz.valueOrDefault,
 
-        geo = dataviz.geometry,
+        geom = dataviz.geometry,
         draw = dataviz.drawing;
 
     // Constants ==============================================================
@@ -7865,6 +7865,13 @@ var __meta__ = {
             }
         },
 
+        createVisual: function() {
+            this.visual = new draw.Group();
+
+            this._gridLines = new draw.Group();
+            this.visual.append(this._gridLines);
+        },
+
         renderComplete: function() {
             if (this.options.visible) {
                 this.createGridLines();
@@ -7891,7 +7898,8 @@ var __meta__ = {
                     if (gridLines.length === 0) {
                         altAxis = allAxes[j];
                         if (vertical !== altAxis.options.vertical) {
-                            append(gridLines, axis.createGridLines(altAxis, axis));
+                            // TODO: gridLines seems to be empty... always?
+                            append(gridLines, axis.appendGridLines(this._gridLines, altAxis));
                         }
                     }
                 }

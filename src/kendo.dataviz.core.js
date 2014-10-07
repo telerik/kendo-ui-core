@@ -1910,7 +1910,7 @@ var __meta__ = {
             }
         },
 
-        createGridLines: function(altAxis) {
+        appendGridLines: function(container, altAxis) {
             var axis = this,
                 options = axis.options,
                 axisLineVisible = altAxis.options.line.visible,
@@ -1937,7 +1937,7 @@ var __meta__ = {
                         if (!inArray(pos, majorTicks)) {
                             if (i % skipUnit !== 0 && (!axisLineVisible || linePos !== pos)) {
                                 lineOptions.position = pos;
-                                axis.visual.append(createAxisGridLine(lineOptions, gridLine));
+                                container.append(createAxisGridLine(lineOptions, gridLine));
 
                                 majorTicks.push(pos);
                             }
