@@ -3934,6 +3934,35 @@ function pad(number, digits, end) {
         return start;
     };
 
+    kendo.postToProxy = function(dataURI, fileName, proxyURL) {
+        var form = $("<form>").attr({
+            action: proxyURL,
+            method: "POST"
+        });
+
+        var parts = dataURI.split(";base64,");
+
+        $('<input>').attr({
+            value: parts[0].replace("data:", ""),
+            name: "contentType",
+            type: "hidden"
+        }).appendTo(form);
+
+        $('<input>').attr({
+            value: parts[1],
+            name: "base64",
+            type: "hidden"
+        }).appendTo(form);
+
+        $('<input>').attr({
+            value: fileName,
+            name: "fileName",
+            type: "hidden"
+        }).appendTo(form);
+
+        form.appendTo("body").submit().remove();
+    };
+
     var fileSaver = document.createElement("a");
     var downloadAttribute = "download" in fileSaver;
 
@@ -3962,35 +3991,7 @@ function pad(number, digits, end) {
             navigator.msSaveBlob(new Blob([array.buffer], { type: contentType }), fileName);
         };
     } else {
-        kendo.saveAs = function(dataURI, fileName, proxyURL) {
-            var form = document.createElement("form");
-            form.action = proxyURL;
-            form.method = "POST";
-
-            var parts = dataURI.split(";base64,");
-
-            var contentTypeElement = document.createElement("input");
-            contentTypeElement.value = parts[0];
-            contentTypeElement.name = "contentType";
-            contentTypeElement.type = "hidden";
-            form.appendChild(contentTypeElement);
-
-            var base64Element = document.createElement("input");
-            base64Element.value = parts[1];
-            base64Element.name = "base64";
-            base64Element.type = "hidden";
-            form.appendChild(base64Element);
-
-            var filenameElement = document.createElement("input");
-            filenameElement.value = fileName;
-            filenameElement.name = "fileName";
-            filenameElement.type = "hidden";
-            form.appendChild(filenameElement);
-
-            document.body.appendChild(form);
-            form.submit();
-            document.body.removeChild(form);
-        };
+        kendo.saveAs = kendo.postToProxy;
     }
 
 })(jQuery);
