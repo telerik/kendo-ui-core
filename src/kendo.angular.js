@@ -531,12 +531,7 @@ var __meta__ = {
         'MobileView',
         'MobileModalView',
         'MobileLayout',
-        'MobileNavBar',
-        'MobileTabStrip',
-        'MobileActionSheet',
-        'MobileButton',
-        'MobileBackButton',
-        'MobileDetailButton'
+        'MobileActionSheet'
     ];
 
     function createDirectives(klass, isMobile) {
@@ -993,7 +988,9 @@ var __meta__ = {
     });
 
 
-    angular.forEach(['kendoMobileNavBar', 'kendoMobileButton', 'kendoMobileBackButton', 'kendoMobileDetailButton', 'kendoMobileTabStrip'], function(widget) {
+    angular.forEach(['MobileNavBar', 'MobileButton', 'MobileBackButton', 'MobileDetailButton', 'MobileTabStrip'], function(widget) {
+        MANUAL_DIRECTIVES.push(widget);
+        widget = "kendo" + widget;
         module.directive(widget, function() {
             return {
                 link: function(scope, element, attrs, controllers) {
