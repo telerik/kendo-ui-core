@@ -608,13 +608,16 @@
              * @returns {Shape}
              */
             clone: function () {
-                var json = this.serialize();
-                json.options.id = diagram.randomId();
-                var clone = new Shape(json.options);
-                clone.diagram = this.diagram;
-                /*clone.visual.native.id = clone.id;
-                 clone.visual.id = clone.id;
-                 clone.options.id = clone.id;*/
+                var json = this.serialize(),
+                    clone;
+
+                if (this.dataItem) {
+                    clone = this.diagram._addDataItem(filterShapeDataItem(this.dataItem), json.options);
+                } else {
+                    json.options.id = diagram.randomId();
+                    clone = new Shape(json.options);
+                }
+
                 return clone;
             },
             select: function (value) {
@@ -1396,10 +1399,6 @@
                 that.canvas.draw();
                 this._shouldRefresh = true;
                 this._initMobile();
-
-                this._toolBar = new DiagramToolBar(this, {
-                    tools: this.options.shapeDefaults.editable.tools
-                });
             },
             options: {
                 name: "Diagram",
@@ -2841,21 +2840,19 @@
                 }
             },
 
-            _addDataItem: function(dataItem) {
+            _addDataItem: function(dataItem, options) {
                 if (!defined(dataItem)) {
                     return;
                 }
-                var shape = this._dataMap[dataItem.uid];
+                var shape = this._dataMap[dataItem.id];
                 if (shape) {
                     return shape;
                 }
 
-                var options = deepExtend({}, this.options.shapeDefaults, {
-                    dataItem: dataItem
-                });
+                options = deepExtend({}, this.options.shapeDefaults, options);
                 shape = new Shape(options, dataItem);
                 this.addShape(shape);
-                this._dataMap[dataItem.uid] = shape;
+                this._dataMap[dataItem.id] = shape;
                 return shape;
             },
 
@@ -3036,10 +3033,15 @@
             _refreshShapes: function(e) {
                 if (e.action === "remove") {
                     // remove shapes
-                } if (e.action === "itemchange") {
+                } else if (e.action === "itemchange") {
                     if (this._shouldRefresh) {
                         this._updateShapes(e.items);
                     }
+                } else if (e.action === "add") {
+
+                    this.inactiveShapes.push();
+                } else if (e.action === "sync") {
+
                 } else {
                     this.clear();
                     this._addShapes(e.sender.view());
@@ -3067,16 +3069,7 @@
 
                 for (var i = 0; i < length; i++) {
                     var dataItem = dataItems[i];
-
-                    var shape = this._dataMap[dataItem.id];
-
-                    if (shape) {
-                        continue;
-                    }
-
-                    shape = new Shape(this.options.shapeDefaults, dataItem);
-                    this.addShape(shape);
-                    this._dataMap[dataItem.id] = shape;
+                    this._addDataItem(dataItem);
                 }
             },
 
@@ -3306,27 +3299,27 @@
         function filterShapeDataItem(dataItem) {
             var result = {};
 
-            if (!defined(dataItem.text)) {
-                result.content = dataItem.text;
+            if (defined(dataItem.text) && dataItem.text !== null) {
+                result.text = dataItem.text;
             }
 
-            if (!defined(dataItem.x)) {
+            if (defined(dataItem.x) && dataItem.x !== null) {
                 result.x = dataItem.x;
             }
 
-            if (!defined(dataItem.y)) {
+            if (defined(dataItem.y) && dataItem.y !== null) {
                 result.y = dataItem.y;
             }
 
-            if (!defined(dataItem.width)) {
+            if (defined(dataItem.width) && dataItem.width !== null) {
                 result.width = dataItem.width;
             }
 
-            if (!defined(dataItem.height)) {
+            if (defined(dataItem.height) && dataItem.height !== null) {
                 result.height = dataItem.height;
             }
 
-            if (!defined(dataItem.type)) {
+            if (defined(dataItem.type) && dataItem.type !== null) {
                 result.type = dataItem.type;
             }
 
@@ -3336,19 +3329,19 @@
         function filterConnectionDataItem(dataItem) {
             var result = {};
 
-            if (!defined(dataItem.text)) {
+            if (defined(dataItem.text) && dataItem.text !== null) {
                 result.content = dataItem.text;
             }
 
-            if (!defined(dataItem.type)) {
+            if (defined(dataItem.type) && dataItem.type !== null) {
                 result.type = dataItem.type;
             }
 
-            if (!defined(dataItem.from)) {
+            if (defined(dataItem.from) && dataItem.from !== null) {
                 result.from = dataItem.from;
             }
 
-            if (!defined(dataItem.to)) {
+            if (defined(dataItem.to) && dataItem.to !== null) {
                 result.to = dataItem.to;
             }
 
