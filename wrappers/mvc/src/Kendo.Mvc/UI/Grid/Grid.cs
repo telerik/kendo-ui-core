@@ -1307,7 +1307,12 @@ namespace Kendo.Mvc.UI
             if (!DataKeys.Any() && (Editable.Enabled || (Selectable.Enabled && !IsClientBinding)))
             {
                 throw new NotSupportedException(Exceptions.DataKeysEmpty);
-            }          
+            }
+
+            if (HasCommandOfType<GridToolBarExcelCommand<T>>() && !IsClientBinding)
+            {
+                throw new NotSupportedException(Exceptions.ExcelExportNotSupportedInServerBinding);
+            }
 
             if (Editable.Enabled)
             {

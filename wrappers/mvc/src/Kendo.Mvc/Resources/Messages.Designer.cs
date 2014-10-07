@@ -952,6 +952,15 @@ namespace Kendo.Mvc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Export to Excel.
+        /// </summary>
+        public static string Grid_Excel {
+            get {
+                return ResourceManager.GetString("Grid_Excel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Lock.
         /// </summary>
         public static string Grid_Lock {

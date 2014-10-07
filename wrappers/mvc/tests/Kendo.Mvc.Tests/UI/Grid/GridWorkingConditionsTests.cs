@@ -79,6 +79,16 @@ namespace Kendo.Mvc.UI.Tests.Grid
         }        
 
         [Fact]
+        public void Should_throw_if_excel_command_is_used_with_server_grid()
+        {
+            ConfigureEditing(g =>
+            {
+                g.DataSource.Type = DataSourceType.Server;
+                g.ToolBar.Commands.Add(new GridToolBarExcelCommand<Customer>());
+            });
+        }        
+
+        [Fact]
         public void Should_throw_if_data_binding_is_not_configured_for_edit_command_server()
         {
             ConfigureEditing(g =>
