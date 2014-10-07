@@ -1668,19 +1668,6 @@ var __meta__ = {
             }
         },
 
-        // TODO: Redundant - labels are child elements
-        destroy: function() {
-            var axis = this,
-                labels = axis.labels,
-                i;
-
-            for (i = 0; i < labels.length; i++) {
-                labels[i].destroy();
-            }
-
-            ChartElement.fn.destroy.call(axis);
-        },
-
         lineBox: function() {
             var axis = this,
                 options = axis.options,
@@ -2329,7 +2316,7 @@ var __meta__ = {
                 stroke: {
                     color: options.color,
                     width: options.width,
-                    dashType: options.dashType,
+                    dashType: options.dashType
                 }
             });
 

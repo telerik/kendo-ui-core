@@ -1660,15 +1660,6 @@ var __meta__ = {
 
                 this.reflow(targetBox);
             }
-        },
-
-        getViewElements: function(view) {
-            var barLabel = this,
-                elements = [];
-            if (barLabel.options.visible !== false) {
-                elements = ChartElement.fn.getViewElements.call(barLabel, view);
-            }
-            return elements;
         }
     });
 
@@ -3059,44 +3050,35 @@ var __meta__ = {
             }
         },
 
-        getViewElements: function(view) {
-            var bar = this,
-                options = bar.options,
-                vertical = options.vertical,
-                border = options.border.width > 0 ? {
-                    stroke: bar.getBorderColor(),
-                    strokeWidth: options.border.width,
-                    strokeOpacity: options.border.opacity,
-                    dashType: options.border.dashType
-                } : {},
-                box = bar.box,
-                rectStyle = deepExtend({
-                    id: bar.id,
-                    fill: bar.color,
-                    fillOpacity: options.opacity,
-                    strokeOpacity: options.opacity,
-                    vertical: options.vertical,
-                    aboveAxis: bar.aboveAxis,
-                    stackBase: options.stackBase,
-                    animation: options.animation,
-                    data: { modelId: bar.modelId }
-                }, border),
-                elements = [];
-            if (bar.visible !== false) {
-                if (box.width() > 0 && box.height() > 0) {
-                    if (options.overlay) {
-                        rectStyle.overlay = deepExtend({
-                            rotation: vertical ? 0 : 90
-                        }, options.overlay);
-                    }
+        createVisual: function() {
+            this.visual = new draw.Group();
 
-                    elements.push(view.createRect(box, rectStyle));
-                }
-
-                append(elements, ChartElement.fn.getViewElements.call(bar, view));
+            var box = this.box;
+            if (this.visible !== false && box.width() > 0 && box.height() > 0) {
+                this.createRect();
             }
+        },
 
-            return elements;
+        createRect: function(view) {
+            var options = this.options;
+            var rect = draw.Path.fromRect(this.box.toRect(), {
+                fill: {
+                    color: this.color,
+                    opacity: options.opacity
+                },
+                stroke: {
+                    color: this.getBorderColor(),
+                    width: options.border.width,
+                    opacity: options.border.opacity,
+                    dashType: options.border.dashType
+                }
+            });
+
+            // TODO: Animation
+            // TODO: Overlay
+            //     rotation: vertical ? 0 : 90
+
+            this.visual.append(rect);
         },
 
         highlightOverlay: function(view, options) {
@@ -7932,6 +7914,7 @@ var __meta__ = {
                 children = container.children,
                 length = children.length,
                 i;
+
             for (i = 0; i < length; i++) {
                 if (children[i].options.clip === true) {
                     return true;
