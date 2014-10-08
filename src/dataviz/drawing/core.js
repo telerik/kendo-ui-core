@@ -79,7 +79,7 @@
             var surface = this;
 
             return function(e) {
-                var node = e.target._kendoNode;
+                var node = $(e.target).data("kendoNode");
                 if (node) {
                     surface.trigger(event, {
                         element: node.srcElement,

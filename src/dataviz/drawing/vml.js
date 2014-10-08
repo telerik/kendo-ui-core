@@ -75,7 +75,7 @@
         },
 
         attachReference: function() {
-            this.element._kendoNode = this;
+            $(this.element).data("kendoNode", this);
         },
 
         load: function(elements, transform, opacity) {

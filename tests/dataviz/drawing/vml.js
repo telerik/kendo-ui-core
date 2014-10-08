@@ -152,8 +152,8 @@
             ok(node.element);
         });
 
-        test("sets _kendoNode expando", function() {
-            deepEqual(node.element._kendoNode, node);
+        test("sets kendoNode data", function() {
+            deepEqual($(node.element).data("kendoNode"), node);
         });
 
         test("attachTo attaches DOM element", function() {
@@ -261,8 +261,8 @@
             equal(node.element.style.position, "relative");
         });
 
-        test("doesn't attach _kendoNode", function() {
-            ok(!node.element._kendoNode);
+        test("doesn't attach kendoNode", function() {
+            ok(!$(node.element).data("kendoNode"));
         });
 
         test("clear cleans up content", function() {

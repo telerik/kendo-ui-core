@@ -164,11 +164,11 @@
                 i;
 
             if (this.element) {
-                this.element._kendoNode = null;
+                $(this.element).data("kendoNode", null);
             }
 
             this.element = element;
-            element._kendoNode = this;
+            $(element).data("kendoNode", this);
 
             for (i = 0; i < nodes.length; i++) {
                 childElement = element.childNodes[i];

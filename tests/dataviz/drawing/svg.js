@@ -420,21 +420,21 @@
             ok(grandChild.element);
         });
 
-        test("attachTo sets _kendoNode expando", function() {
+        test("attachTo sets kendoNode data", function() {
             groupNode.attachTo(document.createElement("div"));
 
-            deepEqual(groupNode.element._kendoNode, groupNode);
+            deepEqual($(groupNode.element).data("kendoNode"), groupNode);
         });
 
-        test("attachTo sets _kendoNode expando on child elements", function() {
+        test("attachTo sets kendoNode data on child elements", function() {
             var childGroup = new GroupNode(new Group());
             groupNode.append(childGroup);
             groupNode.attachTo(document.createElement("div"));
 
-            deepEqual(childGroup.element._kendoNode, childGroup);
+            deepEqual($(childGroup.element).data("kendoNode"), childGroup);
         });
 
-        test("attachTo sets _kendoNode expando for grandchild nodes", function() {
+        test("attachTo sets kendoNode data for grandchild nodes", function() {
             var child = new GroupNode(new Group());
             var grandChild = new GroupNode(new Group());
 
@@ -443,7 +443,7 @@
 
             groupNode.attachTo(document.createElement("div"));
 
-            deepEqual(grandChild.element._kendoNode, grandChild);
+            deepEqual($(grandChild.element).data("kendoNode"), grandChild);
         });
 
         test("clear removes element", function() {
@@ -453,12 +453,12 @@
             ok(!groupNode.element);
         });
 
-        test("clear removes _kendoNode expando from element", function() {
+        test("clear removes kendoNode data from element", function() {
             var container = document.createElement("div");
             groupNode.attachTo(container);
             groupNode.clear();
 
-            ok(!container._kendoNode);
+            ok(!$(container).data("kendoNode"));
         });
 
         test("load attaches node", function() {
