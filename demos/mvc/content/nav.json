@@ -4328,6 +4328,21 @@
         }
       },
       {
+        "text": "MVVM",
+        "url": "treelist/mvvm",
+        "title": {
+            "kendo-ui": "MVVM support in Kendo UI TreeList"
+        },
+        "meta": {
+            "kendo-ui": "MVVM support for Kendo UI TreeList"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
+      },
+      {
         "text": "AngularJS",
         "url": "treelist/angular",
         "title": {

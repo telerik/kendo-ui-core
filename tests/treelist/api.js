@@ -1,4 +1,6 @@
 (function() {
+    var TreeListDataSource = kendo.data.TreeListDataSource;
+
     module("TreeList API", {
         setup: function() {
            dom = $("<div />").appendTo(QUnit.fixture);
@@ -114,13 +116,59 @@
     });
 
     test("items returns collapsed rows", function() {
-        createTreeList({
-            dataSource: [
-                { id: 1, parentId: null },
-                { id: 2, parentId: 1 }
+        createTreeList();
+
+        equal(instance.items().length, 2);
+    });
+
+    test("setDataSource changes dataSource", function() {
+        createTreeList();
+
+        var ds = new TreeListDataSource({
+            data: [
+                { id: 3, parentId: null }
             ]
         });
 
-        equal(instance.items().length, 2);
+        instance.setDataSource(ds);
+
+        equal(instance.dataSource, ds);
+    });
+
+    test("setDataSource binds refresh handler", function() {
+        createTreeList();
+
+        var ds = TreeListDataSource.create([ { id: 3, parentId: null } ]);
+
+        instance.setDataSource(ds);
+
+        equal(instance.content.find("tr").length, 1);
+    });
+
+    test("setDataSource unbinds handlers", function() {
+        createTreeList();
+
+        var previousDs = instance.dataSource;
+
+        instance.setDataSource(TreeListDataSource.create([ { id: 3, parentId: null } ]));
+
+        previousDs.trigger("change");
+        previousDs.trigger("error");
+        previousDs.trigger("progress");
+
+        equal(dom.find(".k-status").length, 0);
+        equal(instance.content.find("tr").length, 1);
+    });
+
+    test("setDataSource does not fetch dataSource if autoBind is false", function() {
+        createTreeList({
+            autoBind: false
+        });
+
+        var ds = TreeListDataSource.create([ { id: 3, parentId: null } ]);
+
+        instance.setDataSource(ds);
+
+        equal(ds.data().length, 0);
     });
 })()

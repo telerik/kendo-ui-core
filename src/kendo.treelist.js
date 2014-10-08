@@ -460,7 +460,7 @@ var __meta__ = {
         destroy: function() {
             this.editable.destroy();
             this.editable.element.find("[" + kendo.attr("container-for") + "]").empty();
-            this.model = this.element = this.columns = this.editable = null;
+            this.model = this.wrapper = this.element = this.columns = this.editable = null;
         }
     });
 
@@ -468,7 +468,8 @@ var __meta__ = {
         init: function(element, options) {
             DataBoundWidget.fn.init.call(this, element, options);
 
-            this._dataSource();
+            this._dataSource(this.options.dataSource);
+
             this._columns();
             this._layout();
             this._sortable();
@@ -477,27 +478,13 @@ var __meta__ = {
             this._attachEvents();
             this._toolbar();
 
-            //this._adjustHeight();
+            this._adjustHeight();
 
             if (this.options.autoBind) {
                 this.dataSource.fetch();
             }
 
-            //kendo.notify(this);
-        },
-
-        _dataSource: function() {
-            var dataSource = this.options.dataSource;
-
-            this._refreshHandler = proxy(this.refresh, this);
-            this._errorHandler = proxy(this._error, this);
-            this._progressHandler = proxy(this._progress, this);
-
-            this.dataSource = TreeListDataSource.create(dataSource);
-
-            this.dataSource.bind(CHANGE, this._refreshHandler);
-            this.dataSource.bind(ERROR, this._errorHandler);
-            this.dataSource.bind(PROGRESS, this._progressHandler);
+            kendo.notify(this);
         },
 
         _progress: function() {
@@ -566,7 +553,10 @@ var __meta__ = {
         },
 
         _adjustHeight: function() {
-            //this.content.height(this.element.height() - this.header.parent().outerHeight());
+            var element = this.element;
+            var contentWrap = element.find(DOT + classNames.gridContentWrap);
+            var header = element.find(DOT + classNames.gridHeader);
+            contentWrap.height(element.height() - header.outerHeight());
         },
 
         destroy: function() {
@@ -733,7 +723,7 @@ var __meta__ = {
             var colgroup = this._colgroup();
             var layout = "";
 
-            element.addClass(classNames.wrapper);
+            this.wrapper = element.addClass(classNames.wrapper);
 
             layout =
                 "<div class='#= gridHeader #'>" +
@@ -881,8 +871,9 @@ var __meta__ = {
                 width = columns[i].width;
 
                 if (width && parseInt(width, 10) !== 0) {
-                    cols.push("style='width:'");
+                    cols.push("style='width:");
                     cols.push(typeof width === "string" ? width : width + "px");
+                    cols.push("'");
                 }
 
                 cols.push("/>");
@@ -1187,8 +1178,32 @@ var __meta__ = {
             }
         },
 
-        _setDataSource: function(dataSource) {
-            this.dataSource = dataSource;
+        _dataSource: function(dataSource) {
+            var ds = this.dataSource;
+
+            if (ds) {
+                ds.unbind(CHANGE, this._refreshHandler);
+                ds.unbind(ERROR, this._errorHandler);
+                ds.unbind(PROGRESS, this._progressHandler);
+            }
+
+            this._refreshHandler = proxy(this.refresh, this);
+            this._errorHandler = proxy(this._error, this);
+            this._progressHandler = proxy(this._progress, this);
+
+            ds = this.dataSource = TreeListDataSource.create(dataSource);
+
+            ds.bind(CHANGE, this._refreshHandler);
+            ds.bind(ERROR, this._errorHandler);
+            ds.bind(PROGRESS, this._progressHandler);
+        },
+
+        setDataSource: function(dataSource) {
+            this._dataSource(dataSource);
+
+            if (this.options.autoBind) {
+                this.dataSource.fetch();
+            }
         },
 
         dataItem: function(element) {

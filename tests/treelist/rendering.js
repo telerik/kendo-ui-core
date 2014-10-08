@@ -690,4 +690,13 @@
 
         equal(instance.content.find("tr.k-hidden").length, 2);
     });
+
+    test("adjusts scrollable content height based on wrapper height", function() {
+        dom.height(200);
+
+        createTreeList();
+
+        var height = parseInt(dom.find(".k-grid-content").height(), 10);
+        ok(height > 100);
+    });
 })();
