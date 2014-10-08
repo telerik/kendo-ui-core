@@ -484,14 +484,16 @@
                 if (this.diagram) {
                     var bounds = this._bounds;
                     var model = this.diagram.dataSource.getByUid(this.dataItem.uid);
-                    this.diagram._shouldRefresh = false;
-                    model._set("x", bounds.x);
-                    model._set("y", bounds.y);
-                    model._set("width", bounds.width);
-                    model._set("height", bounds.height);
+                    if (model) {
+                        this.diagram._shouldRefresh = false;
+                        model._set("x", bounds.x);
+                        model._set("y", bounds.y);
+                        model._set("width", bounds.width);
+                        model._set("height", bounds.height);
 
-                    this.diagram._shouldRefresh = true;
-                    model.trigger("change");
+                        this.diagram._shouldRefresh = true;
+                        model.trigger("change");
+                    }
                 }
             },
 
@@ -609,12 +611,17 @@
              */
             clone: function () {
                 var json = this.serialize(),
-                    clone;
+                    clone, dataItem = {};
+
+                json.options.id = diagram.randomId();
 
                 if (this.dataItem) {
-                    clone = this.diagram._addDataItem(filterShapeDataItem(this.dataItem), json.options);
+                    dataItem = this.diagram.dataSource.add(
+                        filterShapeDataItem(this.dataItem)
+                    );
+                    clone = this.diagram._addDataItem(dataItem, json.options);
+                    this.diagram.dataSource.sync();
                 } else {
-                    json.options.id = diagram.randomId();
                     clone = new Shape(json.options);
                 }
 
@@ -2979,6 +2986,7 @@
                 this._selectedItems = [];
                 this.connections = [];
                 this._dataMap = {};
+                this._inactiveShapeItems = [];
                 this._connectionsDataMap = {};
                 this.undoRedoService = new UndoRedoService();
                 this.id = diagram.randomId();
@@ -3038,10 +3046,9 @@
                         this._updateShapes(e.items);
                     }
                 } else if (e.action === "add") {
-
-                    this.inactiveShapes.push();
+                    this._inactiveShapeItems = this._inactiveShapeItems.concat(e.items);
                 } else if (e.action === "sync") {
-
+                    this._syncShapes(e.items);
                 } else {
                     this.clear();
                     this._addShapes(e.sender.view());
@@ -3053,6 +3060,28 @@
                         this.layout(this.options.layout);
                     }
                 }
+            },
+
+            _syncShapes: function(items) {
+                var inactiveItems = [],
+                    i, y, item, inactiveShapeItem, isActive = false;
+
+                for (y = 0; y < this._inactiveShapeItems.length; y++) {
+                    inactiveShapeItem = this._inactiveShapeItems[y];
+                    for (i = 0; i < items.length; i++) {
+                        item = items[i];
+                        if (inactiveShapeItem.uid === item.uid) {
+                            isActive = true;
+                            break;
+                        }
+                    }
+
+                    if (!isActive) {
+                        inactiveItems.push(inactiveShapeItem);
+                        isActive = false;
+                    }
+                }
+                this._inactiveShapeItems = inactiveItems;
             },
 
             _updateShapes: function(items) {
