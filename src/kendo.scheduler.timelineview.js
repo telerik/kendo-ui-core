@@ -350,19 +350,16 @@ var __meta__ = {
             for (var idx = 0; idx < dates.length; idx++) {
                 for (var columnIndex = 0; columnIndex < columnCount; columnIndex++) { 
                     var column = {};
-
-                    //incorrect => should be
+                    var columnOffset = 0;
                     var startDate = kendo.date.getDate(options.date);
                     kendo.date.setTime(startDate, kendo.date.getMilliseconds(options.startTime));
-                    var columnOffset;
+
                     if (msMajorInterval >= MS_PER_DAY) {
                         columnOffset = (+startDate) + (msMajorInterval * idx);
                     } else {
                         columnOffset = (+options.startTime) + (msMajorInterval * columnIndex);
                     }
 
-                    //var columnOffset = (+options.startTime) + (msMajorInterval * columnIndex);
-                    
                      column.text = kendo.format(columnTimeFormat, new Date(columnOffset));
                      columns.push(column);
                 }
@@ -485,8 +482,8 @@ var __meta__ = {
                 }
 
                 //two possible slot creation approaches:
-                //1) current - loop throught the dates - this way the current date is available directly by index
-                //2) another - loop throught all cells for given row and get date from deviding index by column index
+                //1) current - loop through the dates - this way the current date is available directly by index
+                //2) another - loop through all cells for given row and get date from dividing index by column index
                 for (var dateIndex = 0; dateIndex < datesCount; dateIndex++) {
                     var dayColumnCount = Math.floor(columnCount / datesCount);
                     time = getMilliseconds(new Date(+this.options.startTime));
@@ -651,6 +648,74 @@ var __meta__ = {
             return false;
         },
 
+        _adjustEvent: function(event) {
+            var start = event.start;
+            var end = event.end;
+            var eventStartTime = event._time("start");
+            var eventEndTime = event._time("end");
+            var startTime = getMilliseconds(this.startTime());
+            var endTime = getMilliseconds(this.endTime());
+            var adjustedStartDate = null;
+            var adjustedEndDate = null;
+            var occurrence;
+            var head = false;
+            var tail = false;
+
+            if (event.isAllDay) {
+                adjustedStartDate = getDate(start);
+                if (startTime > eventStartTime) {
+                    setTime(adjustedStartDate, startTime);
+                    tail = true;
+                }
+
+                adjustedEndDate = getDate(end);
+                if (endTime === getMilliseconds(getDate(this.endTime()))) {
+                    adjustedEndDate = kendo.date.addDays(adjustedEndDate, 1);
+                } else {
+                    setTime(adjustedEndDate, endTime);
+                    head = true;
+                }
+            } else {
+                endTime = endTime === 0 ? MS_PER_DAY : endTime;
+
+                if (startTime > eventStartTime) {
+                    adjustedStartDate = getDate(start);
+                    setTime(adjustedStartDate, startTime);
+                    tail = true;
+                } else if (endTime < eventStartTime) {
+                    adjustedStartDate = getDate(start);
+                    adjustedStartDate = kendo.date.addDays(adjustedStartDate, 1);
+                    setTime(adjustedStartDate, startTime);
+                    tail = true;
+                }
+
+                if (endTime < eventEndTime) {
+                    adjustedEndDate = getDate(end);
+                    setTime(adjustedEndDate, endTime);
+                    head = true;
+                } else if (startTime > eventEndTime) {
+                    adjustedEndDate = getDate(end);
+                    adjustedEndDate = kendo.date.addDays(adjustedEndDate,-1);
+                    setTime(adjustedEndDate, endTime);
+                    head = eventEndTime === 0 ? false : true;
+                }
+            }
+
+            occurrence = event.clone({
+                start: adjustedStartDate ? adjustedStartDate : start,
+                end: adjustedEndDate ? adjustedEndDate : end,
+                startTime: adjustedStartDate ? kendo.date.toUtcTime(adjustedStartDate) : event.startTime,
+                endTime:  adjustedEndDate ? kendo.date.toUtcTime(adjustedEndDate) : event.endTime,
+                isAllDay: false
+            });
+
+            return {
+                occurrence: occurrence,
+                head: head,
+                tail: tail
+            };
+        },
+
         _renderEvents: function(events, groupIndex) {
             var event;
             var idx;
@@ -664,69 +729,11 @@ var __meta__ = {
                     var container = this.content;
 
                     if (isMultiDayEvent || this._isInTimeSlot(event)) {
-                        var tail = false;
-                        var head = false;
-                        var occurrence;
-                        var start = event.start;
-                        var end = event.end;
-                        var eventStartTime = event._time("start");
-                        var eventEndTime = event._time("end");
-                        var startTime = getMilliseconds(this.startTime());
-                        var endTime = getMilliseconds(this.endTime());
-                        var adjustedStartDate = null;
-                        var adjustedEndDate = null;
+                        var adjustedEvent = this._adjustEvent(event);
 
-                        if (event.isAllDay) {
-                            adjustedStartDate = getDate(start);
-                            if (startTime > eventStartTime) {
-                                setTime(adjustedStartDate, startTime);
-                                tail = true;
-                            }
-
-                            adjustedEndDate = getDate(end);
-                            if (endTime === getMilliseconds(getDate(this.endTime()))) {
-                                adjustedEndDate = kendo.date.addDays(adjustedEndDate, 1);
-                            } else {
-                                setTime(adjustedEndDate, endTime);
-                                head = true;
-                            }
-                        } else {
-                            endTime = endTime === 0 ? MS_PER_DAY : endTime;
-
-                            if (startTime > eventStartTime) {
-                                adjustedStartDate = getDate(start);
-                                setTime(adjustedStartDate, startTime);
-                                tail = true;
-                            } else if (endTime < eventStartTime) {
-                                adjustedStartDate = getDate(start);
-                                adjustedStartDate = kendo.date.addDays(adjustedStartDate, 1);
-                                setTime(adjustedStartDate, startTime);
-                                tail = true;
-                            }
-
-                            if (endTime < eventEndTime) {
-                                adjustedEndDate = getDate(end);
-                                setTime(adjustedEndDate, endTime);
-                                head = true;
-                            } else if (eventEndTime < startTime) {
-                                adjustedEndDate = getDate(end);
-                                adjustedEndDate = kendo.date.addDays(adjustedEndDate,-1);
-                                setTime(adjustedEndDate, endTime);
-                                head = eventEndTime === 0 ? false : true;
-                            }
-                        }
-
-                        occurrence = event.clone({
-                            start: adjustedStartDate ? adjustedStartDate : start,
-                            end: adjustedEndDate ? adjustedEndDate : end,
-                            startTime: adjustedStartDate ? kendo.date.toUtcTime(adjustedStartDate) : event.startTime,
-                            endTime:  adjustedEndDate ? kendo.date.toUtcTime(adjustedEndDate) : event.endTime,
-                            isAllDay: false
-                        });
-
-                        if (this._isInTimeSlot(occurrence)) {
+                        if (this._isInTimeSlot(adjustedEvent.occurrence)) {
                             var group = this.groups[groupIndex];
-                            var ranges = group.slotRanges(occurrence, false);
+                            var ranges = group.slotRanges(adjustedEvent.occurrence, false);
                             var rangeCount = ranges.length;
 
                             if (rangeCount > 0) {
@@ -734,9 +741,9 @@ var __meta__ = {
                                 //support horizontal grouping?
                                 var range = ranges[0];
 
-                                element = this._createEventElement(occurrence, event, true, range.head || head, range.tail || tail);
+                                element = this._createEventElement(adjustedEvent.occurrence, event, true, range.head || adjustedEvent.head, range.tail || adjustedEvent.tail);
                                 element.appendTo(container);
-                                this._positionEvent(occurrence, element, range);
+                                this._positionEvent(adjustedEvent.occurrence, element, range);
                             }
                         }
                     }
@@ -797,10 +804,9 @@ var __meta__ = {
             var start = event.startTime || event.start;
             var end = event.endTime || event.end;
 
-            var rect = slotRange.outerRect(start, end, false);
+            var rect = slotRange.innerRect(start, end, false);
             rect.top = slotRange.start.offsetTop;
-
-            var width = rect.right - rect.left -2;
+            var width = rect.right - rect.left - 2;
 
             if (width < 0) {
                 width = 0;
@@ -862,6 +868,91 @@ var __meta__ = {
         _rowCountForLevel: function(level) {
             var rowLevel = this.rowLevels[level];
             return rowLevel ? rowLevel.length : 0;
+        },
+
+        _updateMoveHint: function(event, groupIndex, distance) {
+            var multiday = event.isMultiDay();
+
+            var group = this.groups[groupIndex];
+
+           // var start = kendo.date.toUtcTime(event.start) + distance;
+            var start = new Date(event.start.getTime() + distance);
+
+            var end = new Date(start + event.duration());
+
+            //start = kendo.timezone.toLocalDate(start);
+
+            //end = kendo.timezone.toLocalDate(end);
+
+            var adjustedEvent = this._adjustEvent(event.clone({ start: start, end: end }));
+
+            var ranges = group.ranges(adjustedEvent.occurrence.start, adjustedEvent.occurrence.end, false, false);
+
+            this._removeMoveHint();
+
+            if (!multiday && (getMilliseconds(end) === 0 || getMilliseconds(end) < getMilliseconds(this.startTime()))) {
+                if (ranges.length > 1) {
+                    ranges.pop();
+                }
+            }
+
+            for (var rangeIndex = 0; rangeIndex < ranges.length; rangeIndex++) {
+                var range = ranges[rangeIndex];
+                var startSlot = range.start;
+
+
+                console.log("occurance start: ", adjustedEvent.occurrence.start, " occurrence end: ", adjustedEvent.occurrence.end);
+                var hint = this._createEventElement(adjustedEvent.occurrence ,event, !multiday, false, false);
+
+                hint.addClass("k-event-drag-hint");
+
+
+
+                //if (multiday) {
+                 ///   css.width = range.innerWidth() - 4;
+                //} else {
+               //var start = event.startTime || event.start;
+               //var end = event.endTime || event.end;
+
+               //var rect = slotRange.outerRect(start, end, false);
+               //rect.top = slotRange.start.offsetTop;
+               var rect = range.outerRect(adjustedEvent.occurrence.start, adjustedEvent.occurrence.end, this.options.snap);
+               var width = rect.right - rect.left -2;
+
+               if (width < 0) {
+                   width = 0;
+               }
+
+               //element
+               //    .css({
+               //        left: rect.left,
+               //        width: width
+               //    });
+
+                var css = {
+                    left: rect.left,
+                    top: startSlot.offsetTop
+                };
+                    css.top = rect.top;
+                    css.height = rect.bottom - rect.top;
+                    css.width = width;
+               // }
+
+                hint.css(css);
+
+                this._moveHint = this._moveHint.add(hint);
+            }
+
+            var content = this.content;
+
+            if (multiday) {
+                content = this.element.find(".k-scheduler-header-wrap:has(.k-scheduler-header-all-day) > div");
+                if (!content.length) {
+                    content = this.content;
+                }
+            }
+
+            this._moveHint.appendTo(content);
         },
 
         _updateResizeHint: function(event, groupIndex, startTime, endTime) {
