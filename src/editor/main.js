@@ -617,6 +617,9 @@
             $(document).off("mousedown", proxy(that._endTyping, that))
                        .off("mouseup", proxy(that._mouseup, that));
 
+            // move focus to containing frame, see https://github.com/telerik/kendo/issues/3673
+            window.focus();
+
             that.toolbar.destroy();
 
             kendo.destroy(that.wrapper);
