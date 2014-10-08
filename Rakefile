@@ -565,7 +565,8 @@ bundle :name => 'aspnetmvc.hotfix.trial',
             'wrappers/aspnetmvc/LegacyThemes' => FileList['wrappers/mvc/legacy-themes/**/*']
        }.merge(MVC_BINARIES),
        :prerequisites => [
-           'mvc:assets'
+           'mvc:assets',
+           'type_script:master:test'
        ]
 
 bundle :name => 'aspnetmvc.commercial',
@@ -645,6 +646,7 @@ bundle :name => 'aspnetmvc.commercial',
        }.merge(MVC_CONTENT),
        :prerequisites => [
            'mvc:assets',
+           'type_script:master:test',
            'dist/bundles/aspnetmvc.commercial/src/Kendo.Mvc/Kendo.Mvc.sln',
            'dist/bundles/aspnetmvc.commercial/src/Kendo.Mvc/Kendo.Mvc/Kendo.snk',
            'dist/bundles/aspnetmvc.commercial/src/Kendo.Mvc/Kendo.Mvc/CommonAssemblyInfo.cs',
@@ -684,6 +686,7 @@ bundle :name => 'aspnetmvc.internal.commercial',
        }.merge(MVC_BINARIES),
        :prerequisites => [
            'mvc:assets',
+           'type_script:master:test',
            'dist/bundles/aspnetmvc.internal.commercial/src/Kendo.Mvc/Kendo.Mvc.sln',
            'dist/bundles/aspnetmvc.internal.commercial/src/Kendo.Mvc/Kendo.Mvc/Kendo.snk',
            'dist/bundles/aspnetmvc.internal.commercial/src/Kendo.Mvc/Kendo.Mvc/CommonAssemblyInfo.cs',
@@ -723,7 +726,11 @@ bundle :name => 'aspnetmvc.hotfix.commercial',
             'wrappers/aspnetmvc/EditorTemplates/ascx' => MVC_ASCX_EDITOR_TEMPLATES,
             'wrappers/aspnetmvc/EditorTemplates/razor' => MVC_RAZOR_EDITOR_TEMPLATES,
             'wrappers/aspnetmvc/LegacyThemes' => FileList['wrappers/mvc/legacy-themes/**/*']
-       }.merge(MVC_BINARIES)
+       }.merge(MVC_BINARIES),
+       :prerequisites => [
+           'mvc:assets',
+           'type_script:master:test'
+       ]
 
 
 bundle :name => 'cdn.commercial',
