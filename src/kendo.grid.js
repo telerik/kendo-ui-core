@@ -879,7 +879,8 @@ var __meta__ = {
                     destroy: defaultCommands.destroy.text,
                     edit: defaultCommands.edit.text,
                     update: defaultCommands.update.text,
-                    canceledit: defaultCommands.canceledit.text
+                    canceledit: defaultCommands.canceledit.text,
+                    excel: defaultCommands.excel.text
                 }
             },
             excel: {
