@@ -2198,7 +2198,7 @@ var __meta__ = {
 
                     event = that.occurrenceByUid(uid);
 
-                    slot = that.view()._slotByPosition(e.x.location, e.y.location);
+                    slot = that.view()._slotByPosition(e.x.startLocation, e.y.startLocation);
 
                     if (that.trigger("resizeStart", { event: event })) {
                         e.preventDefault();
@@ -2302,7 +2302,7 @@ var __meta__ = {
                             start.setHours(0);
                             start.setMinutes(0);
                         } else {
-                            //update needed
+                            //update needed => event.isAllDay => set hours/ mins as well
                             start = kendo.timezone.toLocalDate(startTime);
                         }
                     }
