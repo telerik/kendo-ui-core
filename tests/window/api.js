@@ -336,7 +336,7 @@
 
         dialog.content("bar");
 
-        equal($(".k-popup").length, 0);
+        ok(!ddl.data("kendoDropDownList"));
     });
 
     test("toFront() raises window z-index above other windows", function() {
