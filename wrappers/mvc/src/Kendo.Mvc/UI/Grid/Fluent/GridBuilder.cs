@@ -71,6 +71,13 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        public GridBuilder<T> Excel(Action<GridExcelBuilder> configurator)
+        {
+            configurator(new GridExcelBuilder(Component.Excel));
+
+            return this;
+        }
+
         /// <summary>
         /// Sets the server-side detail template of the grid in ASPX views.
         /// </summary>

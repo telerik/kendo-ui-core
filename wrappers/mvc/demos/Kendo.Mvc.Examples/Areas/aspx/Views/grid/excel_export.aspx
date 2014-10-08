@@ -1,6 +1,10 @@
+<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/Web.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+    
+<asp:Content ContentPlaceHolderID="MainContent" runat="server">
+
 <script src="//cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.min.js"></script>
 
-@(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()    
+<%: Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()    
     .Name("grid")    
     .HtmlAttributes( new { style = "width: 900px" } )
     .Columns(columns => {
@@ -41,4 +45,5 @@
         })
         .Read(read => read.Action("Excel_Export_Read", "Grid"))
     )
-)
+%>
+</asp:Content>

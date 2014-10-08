@@ -714,7 +714,9 @@
     <Compile Include="UI\Gantt\DependencyType.cs" />
     <Compile Include="UI\Grid\Commands\GridToolBarExcelCommand.cs" />
     <Compile Include="UI\Grid\Fluent\GridColumnFilterableCellSettingsBuilder.cs" />
+    <Compile Include="UI\Grid\Fluent\GridExcelBuilder.cs" />
     <Compile Include="UI\Grid\GridFilterMode.cs" />
+    <Compile Include="UI\Grid\Settings\GridExcelSettings.cs" />
     <Compile Include="UI\Grid\Settings\GridColumnFilterableCellSettings.cs" />
     <Compile Include="UI\PivotConfigurator\Fluent\PivotConfiguratorBuilder.cs" />
     <Compile Include="UI\PivotConfigurator\Fluent\PivotConfiguratorMessagesBuilder.cs" />
