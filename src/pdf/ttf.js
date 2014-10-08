@@ -6,7 +6,7 @@
 
 /*****************************************************************************\
  *
- * The code in this file, although written from scratch, is shaped after the
+ * The code in this file, although written from scratch, is influenced by the
  * TrueType parser/encoder in PDFKit -- http://pdfkit.org/ (a CoffeeScript
  * library for producing PDF files).
  *

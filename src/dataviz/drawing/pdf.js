@@ -39,7 +39,7 @@
         bevel : 2
     };
 
-    function toDataURL(group, callback) {
+    function render(group, callback) {
         var fonts = [], images = [];
 
         group.traverse(function(element){
@@ -66,14 +66,42 @@
             var pdf = new PDF.Document();
             var page = pdf.addPage();
             drawElement(group, page, pdf);
-            var binary = pdf.render();
-            var dataurl = "data:application/pdf;base64," + binary.base64();
-            callback(dataurl);
+            callback(pdf.render());
         }
 
         var count = 2;
         PDF.loadFonts(fonts, doIt);
         PDF.loadImages(images, doIt);
+    }
+
+    function toDataURL(group, callback) {
+        render(group, function(data){
+            callback("data:application/pdf;base64," + data.base64());
+        });
+    }
+
+    function toBlob(group, callback) {
+        render(group, function(data){
+            callback(new Blob([ data.get() ], { type: "application/pdf" }));
+        });
+    }
+
+    function saveAs(group, filename, proxy, callback) {
+        if (window.Blob) {
+            toBlob(group, function(blob){
+                kendo.saveAs(blob, filename);
+                if (callback) {
+                    callback(blob);
+                }
+            });
+        } else {
+            toDataURL(group, function(dataURL){
+                kendo.saveAs(dataURL, filename, proxy);
+                if (callback) {
+                    callback(dataURL);
+                }
+            });
+        }
     }
 
     function dispatch(handlers, element) {
@@ -320,8 +348,10 @@
 
     kendo.deepExtend(dataviz.drawing, {
         pdf: {
-            parseColor: parseColor,
-            toDataURL: toDataURL
+            parseColor : parseColor,
+            toDataURL  : toDataURL,
+            toBlob     : toBlob,
+            saveAs     : saveAs
         }
     });
 

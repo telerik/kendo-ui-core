@@ -171,9 +171,8 @@
         var el = $(sel)[0];
         console.time("pdf");
         kendo.dataviz.drawing.drawDOM(el, function(root){
-          kendo.dataviz.drawing.pdf.toDataURL(root, function(url){
+          kendo.dataviz.drawing.pdf.saveAs(root, "html-to-pdf3.pdf", "http://kendo.local:7569/", function(){
             console.timeEnd("pdf");
-            kendo.saveAs(url, "html-to-pdf3.pdf", "http://kendo.local:7569/");
           });
         });
       }

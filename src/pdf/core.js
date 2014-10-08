@@ -187,8 +187,8 @@
         out.get = function() {
             return output.get();
         };
-        out.base64 = function() {
-            return output.base64();
+        out.stream = function() {
+            return output;
         };
         return out;
     }
@@ -295,7 +295,7 @@
             out("startxref", NL, xrefOffset, NL);
             out("%%EOF", NL);
 
-            return out;
+            return out.stream();
         };
     }
 
@@ -1314,7 +1314,11 @@
             },
 
             writeBase64: function(base64) {
-                write(BASE64.decode(base64));
+                if (window.atob) {
+                    writeString(window.atob(base64));
+                } else {
+                    write(BASE64.decode(base64));
+                }
             },
             base64: function() {
                 return BASE64.encode(get());
