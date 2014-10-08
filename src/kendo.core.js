@@ -2537,6 +2537,14 @@ function pad(number, digits, end) {
             return role.replace(/(\S+)/g, "[" + kendo.attr("role") + "=$1],").slice(0, -1);
         },
 
+        directiveSelector: function(directives) {
+            return directives
+                    .replace("modalview", "modal-view")
+                    .replace("splitview", "split-view")
+                    .replace(/(\S+)/g, "kendo-mobile-$1,")
+                    .slice(0, -1);
+        }
+
         triggeredByInput: function(e) {
             return (/^(label|input|textarea|select)$/i).test(e.target.tagName);
         },

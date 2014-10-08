@@ -34,11 +34,8 @@ var __meta__ = {
         DESTROY = "destroy",
         Z_INDEX = "z-index",
         attrValue = kendo.attrValue,
-        roleSelector = kendo.roleSelector;
-
-    function byDirective(directives) {
-        return directives.replace("modalview", "modal-view").replace(/(\S+)/g, "kendo-mobile-$1,").slice(0, -1);
-    }
+        roleSelector = kendo.roleSelector,
+        directiveSelector = kendo.directiveSelector;
 
     function compileToWidget(element, scopeSetup) {
         element.attr("data-" + kendo.ns + "role", element[0].tagName.toLowerCase().replace('kendo-mobile-', '').replace('-', ''));
@@ -371,7 +368,7 @@ var __meta__ = {
         },
 
         _locate: function(selectors) {
-            return this.options.$angular ? byDirective(selectors) : roleSelector(selectors);
+            return this.options.$angular ? directiveSelector(selectors) : roleSelector(selectors);
         },
 
         options: {
@@ -605,7 +602,7 @@ var __meta__ = {
         },
 
         _locate: function(selectors) {
-            return this.$angular ? byDirective(selectors) : roleSelector(selectors);
+            return this.$angular ? directiveSelector(selectors) : roleSelector(selectors);
         },
 
         _findViewElement: function(url) {
