@@ -24,6 +24,11 @@ namespace Kendo.Mvc.Examples.Models
                 foreach (var packageName in Packages)
                 {
                     var name = packageName;
+
+                    if (name == "!mvc" || name == "!mvc-offline") {
+                        return false;
+                    }
+
                     if (name[0] == '!')
                     {
                         invert = true;
