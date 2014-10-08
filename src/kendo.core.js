@@ -10,7 +10,7 @@ var __meta__ = {
 };
 
 /*jshint eqnull: true, loopfunc: true, evil: true, boss: true, freeze: false*/
-(function($, undefined) {
+(function($, window, undefined) {
     var kendo = window.kendo = window.kendo || { cultures: {} },
         extend = $.extend,
         each = $.each,
@@ -3968,6 +3968,9 @@ function pad(number, digits, end) {
 
     if (downloadAttribute) {
         kendo.saveAs = function(dataURI, fileName) {
+            if (window.Blob && dataURI instanceof Blob) {
+                dataURI = URL.createObjectURL(dataURI);
+            }
             fileSaver.download = fileName;
             fileSaver.href = dataURI;
 
@@ -3979,6 +3982,9 @@ function pad(number, digits, end) {
         };
     } else if (navigator.msSaveBlob) {
         kendo.saveAs = function(dataURI, fileName) {
+            var blob = dataURI; // could be a Blob object
+
+            if (typeof dataURI == "string") {
             var parts = dataURI.split(";base64,");
             var contentType = parts[0];
             var base64 = atob(parts[1]);
@@ -3987,14 +3993,16 @@ function pad(number, digits, end) {
             for (var idx = 0; idx < base64.length; idx++) {
                 array[idx] = base64.charCodeAt(idx);
             }
+                blob = new Blob([array.buffer], { type: contentType });
+            }
 
-            navigator.msSaveBlob(new Blob([array.buffer], { type: contentType }), fileName);
+            navigator.msSaveBlob(blob, fileName);
         };
     } else {
         kendo.saveAs = kendo.postToProxy;
     }
 
-})(jQuery);
+})(jQuery, window);
 
 return window.kendo;
 
