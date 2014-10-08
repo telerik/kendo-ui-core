@@ -81,7 +81,8 @@ var __meta__ = {
     var ignoredOwnProperties = {
         // XXX: other names to ignore here?
         name    : true,
-        title   : true
+        title   : true,
+        style   : true
     };
 
     function addOption(scope, options, name, value) {
@@ -532,7 +533,9 @@ var __meta__ = {
         'MobileModalView',
         'MobileLayout',
         'MobileActionSheet',
-        'MobileDrawer'
+        'MobileDrawer',
+        'MobileSplitView',
+        'MobilePane'
     ];
 
     angular.forEach(['MobileNavBar', 'MobileButton', 'MobileBackButton', 'MobileDetailButton', 'MobileTabStrip'], function(widget) {
@@ -969,6 +972,22 @@ var __meta__ = {
                 post: function(scope, element, attrs) {
                     attrs._instance._layout();
                     attrs._instance._scroller();
+                }
+            }
+        };
+    }).directive('kendoMobileSplitView', function() {
+        return {
+            terminal: true,
+            link: {
+                pre: function(scope, element, attrs, controllers) {
+                    console.log("split view pre");
+                    attrs.defaultOptions = scope.viewOptions;
+                    scope._splitView = createWidget(scope, element, attrs, 'kendoMobileSplitView', 'kendoMobileSplitView');
+                },
+
+                post: function(scope) {
+                    console.log("split view post");
+                    scope._splitView.layout();
                 }
             }
         };
