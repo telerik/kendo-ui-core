@@ -2,7 +2,7 @@
     var createTreeView = TreeViewHelpers.fromOptions;
 
     function check(node, checked) {
-        node = $(node || ".k-state-selected");
+        node = treeview.find(node || ".k-state-selected")
 
         if (!node.hasClass("k-item")) {
             node = node.parentsUntil(".k-treeview", ".k-item").eq(0);
@@ -338,7 +338,7 @@
     test("checking root node items does not propagate state outside of treeview", function() {
         var dom = $('<div class="k-item"><div><input type="checkbox" /></div><div class="t"></div></div>').appendTo(QUnit.fixture);
 
-        var tree = dom.find(".t").kendoTreeView({
+        treeview = dom.find(".t").kendoTreeView({
             checkboxes: {
                 checkChildren: true
             },
@@ -456,9 +456,11 @@
             }
         });
 
-        treeviewObject.dataItem(".k-item:first").set("checked", true);
+        var ds = treeviewObject.dataSource;
 
-        ok(treeviewObject.dataItem(".k-item:last").checked);
+        ds.get(1).set("checked", true);
+
+        ok(ds.get(2).checked);
     });
 
     test("checkChildren with sparse checkboxes", function() {
@@ -477,15 +479,17 @@
             }
         });
 
-        treeview.find(":checkbox:first").prop("checked", true).trigger("change");
+        var ds = treeviewObject.dataSource;
 
-        ok(treeviewObject.dataItem(".k-item:last").checked);
+        ds.get(1).set("checked", true);
+
+        ok(ds.get(3).checked);
     });
 
     test("checkChildren checks root dataItem upon initial load", function() {
         createTreeView({
             dataSource: [
-                { text: "foo", items: [
+                { id: 1, text: "foo", items: [
                     { text: "bar", checked: true },
                     { text: "baz", checked: true }
                 ] }
@@ -493,7 +497,7 @@
             checkboxes: { checkChildren: true }
         });
 
-        ok(treeviewObject.dataItem(".k-item:first").checked);
+        ok(treeviewObject.dataSource.get(1).checked);
     });
 
     asyncTest("indeterminate state is updated when fetching remote nodes", function() {
