@@ -129,8 +129,9 @@
           "overflow: hidden;' />")[0];
 
     TextMetrics.fn._measureBox =
-        $("<div style='position: absolute; top: -4000px; width: auto; height: auto;" +
-                      "line-height: normal; visibility: hidden; white-space:nowrap;' />")[0];
+        $("<div style='position: absolute !important; top: -4000px !important; width: auto !important; height: auto !important;" +
+                      "padding: 0 !important; margin: 0 !important; border: 0 !important;" +
+                      "line-height: normal !important; visibility: hidden !important; white-space:nowrap !important;' />")[0];
 
     TextMetrics.current = new TextMetrics();
 
