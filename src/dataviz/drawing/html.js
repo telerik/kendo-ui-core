@@ -1,6 +1,7 @@
 (function(f, define){
     define([
         "./shapes",
+        "../text-metrics",      // XXX: needed to measure text in IE
         "./pdf" // XXX: for parseColor.  we shouldn't otherwise depend on this
     ], f);
 })(function(){
@@ -669,17 +670,19 @@
         }
 
         var fontSize = getPropertyValue(style, "font-size");
+        var lineHeight = getPropertyValue(style, "line-height");
 
         // simply getPropertyValue("font") doesn't work in Firefox :-\
         var font = [
             getPropertyValue(style, "font-style"),
             getPropertyValue(style, "font-variant"),
             getPropertyValue(style, "font-weight"),
-            fontSize + "/" + getPropertyValue(style, "line-height"),
+            fontSize + "/" + lineHeight,
             getPropertyValue(style, "font-family")
         ].join(" ");
 
         fontSize = parseFloat(fontSize);
+        lineHeight = parseFloat(lineHeight);
 
         if (fontSize === 0) {
             return;
@@ -689,6 +692,38 @@
 
         function drawText(str, box) {
             str = str.replace(/[\r\n ]+/g, " ");
+
+            // In IE the box height will be approximately lineHeight, while in
+            // other browsers it'll (correctly) be the height of the bounding
+            // box for the current text/font.  Which is to say, IE sucks again.
+            // The only good solution I can think of is to measure the text
+            // ourselves and center the bounding box.
+            if (kendo.support.browser.msie && !isNaN(lineHeight)) {
+                var size = dataviz.util.measureText(str, { font: font });
+                var top = (box.top + box.bottom - size.height) / 2;
+                box = {
+                    top    : top,
+                    right  : box.right,
+                    bottom : top + size.height,
+                    left   : box.left,
+                    height : size.height,
+                    width  : box.right - box.left
+                };
+            }
+
+            // var path = new drawing.Path({ stroke: { color: "red" }});
+            // path.moveTo(box.left, box.top)
+            //     .lineTo(box.right, box.top)
+            //     .lineTo(box.right, box.bottom)
+            //     .lineTo(box.left, box.bottom)
+            //     .close();
+            // group.append(path);
+
+            // if (str == "This") {
+            //     console.log(fontSize, lineHeight, box.height);
+            //     console.log(box.top, box.bottom, box.bottom - box.top);
+            // }
+
             var text = new drawing.Text(str, new geo.Point(box.left, box.top), {
                 font: font,
                 fill: { color: color }
@@ -701,12 +736,6 @@
                     width: width,
                     color: getPropertyValue(style, "color")
                 }});
-
-                // path.moveTo(box.left, box.top)
-                //     .lineTo(box.right, box.top)
-                //     .lineTo(box.right, box.bottom)
-                //     .lineTo(box.left, box.bottom)
-                //     .close();
 
                 ypos -= width;
                 path.moveTo(box.left, ypos)
