@@ -35,22 +35,8 @@ var __meta__ = {
         Z_INDEX = "z-index",
         attrValue = kendo.attrValue,
         roleSelector = kendo.roleSelector,
-        directiveSelector = kendo.directiveSelector;
-
-    function compileToWidget(element, scopeSetup) {
-        element.attr("data-" + kendo.ns + "role", element[0].tagName.toLowerCase().replace('kendo-mobile-', '').replace('-', ''));
-
-        angular.element(element).injector().invoke(["$compile", function($compile) {
-            var scope = angular.element(element).scope();
-            if (scopeSetup) {
-                scopeSetup(scope);
-            }
-            $compile(element)(scope);
-            scope.$digest();
-        }]);
-
-        return kendo.widgetInstance(element, ui);
-    }
+        directiveSelector = kendo.directiveSelector,
+        compileMobileDirective = kendo.compileMobileDirective;
 
     function initPopOvers(element) {
         var popovers = element.find(roleSelector("popover")),
@@ -482,7 +468,7 @@ var __meta__ = {
             collection = container.children(that._locate("modalview drawer"));
             if (that.$angular) {
                 collection.each(function(idx, element) {
-                    compileToWidget($(element), function(scope) {
+                    compileMobileDirective($(element), function(scope) {
                         //pass the options?
                     });
                 });
@@ -627,7 +613,7 @@ var __meta__ = {
             if (this.$angular) {
                 var that = this;
 
-                return compileToWidget(element, function(scope) {
+                return compileMobileDirective(element, function(scope) {
                     scope.viewOptions = {
                         defaultTransition: that.transition,
                         loader: that.loader,
@@ -691,7 +677,7 @@ var __meta__ = {
 
             element.children(that._locate("layout")).each(function() {
                 if (that.$angular) {
-                    layout = compileToWidget($(this));
+                    layout = compileMobileDirective($(this));
                 } else {
                     layout = kendo.initWidget($(this), {}, ui.roles);
                 }

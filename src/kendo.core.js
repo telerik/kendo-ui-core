@@ -2543,7 +2543,7 @@ function pad(number, digits, end) {
                     .replace("splitview", "split-view")
                     .replace(/(\S+)/g, "kendo-mobile-$1,")
                     .slice(0, -1);
-        }
+        },
 
         triggeredByInput: function(e) {
             return (/^(label|input|textarea|select)$/i).test(e.target.tagName);
@@ -3958,6 +3958,23 @@ function pad(number, digits, end) {
 
         return start;
     };
+
+    kendo.compileMobileDirective = function(element, scopeSetup) {
+        var angular = window.angular;
+
+        element.attr("data-" + kendo.ns + "role", element[0].tagName.toLowerCase().replace('kendo-mobile-', '').replace('-', ''));
+
+        angular.element(element).injector().invoke(["$compile", function($compile) {
+            var scope = angular.element(element).scope();
+            if (scopeSetup) {
+                scopeSetup(scope);
+            }
+            $compile(element)(scope);
+            scope.$digest();
+        }]);
+
+        return kendo.widgetInstance(element, ui);
+    }
 
 })(jQuery, window);
 
