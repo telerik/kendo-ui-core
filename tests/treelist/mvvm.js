@@ -1,5 +1,5 @@
 (function() {
-    var dom;
+    var dom, instance;
     var rootItems = [ { id: 1, parentId: null }, { id: 2, parentId: null } ];
 
     module("TreeList MVVM", {

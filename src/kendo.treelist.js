@@ -18,7 +18,7 @@ var __meta__ = {
     var kendoTextElement = kendoDom.text;
     var kendoHtmlElement = kendoDom.html;
     var ui = kendo.ui;
-    var Widget = ui.Widget;
+    var DataBoundWidget = ui.DataBoundWidget;
     var DataSource = data.DataSource;
     var ObservableArray = data.ObservableArray;
     var Query = data.Query;
@@ -464,9 +464,9 @@ var __meta__ = {
         }
     });
 
-    var TreeList = Widget.extend({
+    var TreeList = DataBoundWidget.extend({
         init: function(element, options) {
-            Widget.fn.init.call(this, element, options);
+            DataBoundWidget.fn.init.call(this, element, options);
 
             this._dataSource();
             this._columns();
@@ -532,9 +532,13 @@ var __meta__ = {
                 return;
             }
 
+            this._angularItems("cleanup");
+
             this._cancelEditor();
 
             this._render();
+
+            this._angularItems("compile");
 
             this.trigger(DATABOUND);
         },
@@ -566,7 +570,7 @@ var __meta__ = {
         },
 
         destroy: function() {
-            Widget.fn.destroy.call(this);
+            DataBoundWidget.fn.destroy.call(this);
 
             var dataSource = this.dataSource;
 
