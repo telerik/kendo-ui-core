@@ -295,6 +295,156 @@
         }
     });
 
+    //=============TIMELINE
+    test("timeline dragging and dropping the east resize handle changes the end time of the event", function() {
+        var scheduler = new kendo.ui.Scheduler(div, {
+            date: new Date("2013/6/6"),
+            startTime: new Date("2013/6/6 10:00"),
+            views: ["timeline"],
+            dataSource: [
+                { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 11:00"), title: "" }
+            ]
+        });
+
+        var handle = div.find(".k-resize-e");
+        var slots = div.find(".k-scheduler-content td");
+
+        dragdrop(scheduler, handle, slots.eq(2));
+
+        equal(scheduler.dataSource.at(0).end.getHours(), 13);
+        equal(scheduler.dataSource.at(0).end.getMinutes(), 00);
+    });
+
+    test("timeline dragging and dropping the west resize handle changes the start time of the event", function() {
+        var scheduler = new kendo.ui.Scheduler(div, {
+            date: new Date("2013/6/6"),
+            startTime: new Date("2013/6/6 10:00"),
+            views: ["timeline"],
+            dataSource: [
+                { start: new Date("2013/6/6 11:00"), end: new Date("2013/6/6 12:00"), title: "" }
+            ]
+        });
+
+        var handle = div.find(".k-resize-w");
+        var slots = div.find(".k-scheduler-content td");
+
+        dragdrop(scheduler, handle, slots.eq(0));
+
+        equal(scheduler.dataSource.at(0).start.getHours(), 10);
+        equal(scheduler.dataSource.at(0).start.getMinutes(), 00);
+    });
+
+    test("timeline resize event till the end of the day", function() {
+        var scheduler = new kendo.ui.Scheduler(div, {
+            date: new Date("2013/6/6"),
+            startTime: new Date("2013/6/6 17:00"),
+            views: ["timeline"],
+            dataSource: [
+                { start: new Date("2013/6/6 10:30 PM"), end: new Date("2013/6/6 11:00 PM"), title: "" }
+            ]
+        });
+
+        var handle = div.find(".k-resize-e");
+
+        var slots = div.find(".k-scheduler-content td");
+
+        dragdrop(scheduler, handle, slots.last());
+
+        equal(scheduler.dataSource.at(0).end.getHours(), 0);
+        equal(scheduler.dataSource.at(0).end.getMinutes(), 0);
+        equal(scheduler.dataSource.at(0).end.getDate(), 7);
+    });
+
+    test("timeline resize event till the last but one slot", function() {
+        var scheduler = new kendo.ui.Scheduler(div, {
+            date: new Date("2013/6/6"),
+            startTime: new Date("2013/6/6 17:00"),
+            views: ["timeline"],
+            dataSource: [
+                { start: new Date("2013/6/6 10:30 PM"), end: new Date("2013/6/6 11:00 PM"), title: "" }
+            ]
+        });
+
+        var handle = div.find(".k-resize-e");
+
+        var slots = div.find(".k-scheduler-content td");
+
+        dragdrop(scheduler, handle, slots.eq(slots.length - 2));
+
+        equal(scheduler.dataSource.at(0).end.getHours(), 23);
+        equal(scheduler.dataSource.at(0).end.getMinutes(), 0);
+    });
+
+    test("resize event till outside the scheduler", function() {
+        var scheduler = new kendo.ui.Scheduler(div, {
+            date: new Date("2013/6/6"),
+            startTime: new Date("2013/6/6 10:00"),
+            endTime: new Date("2013/6/6 17:00"),
+            dataSource: [
+                { start: new Date("2013/6/6 03:00 PM"), end: new Date("2013/6/6 05:00 PM"), title: "" }
+            ]
+        });
+
+        var handle = div.find(".k-resize-s");
+        var handleOffset = handle.offset();
+        var helperElement = kendo.format("<div id='resizeEnd' style='position: absolute;top:{0}px;left: {1}px'>resize end</div>",
+            handleOffset.top + 10,
+            handleOffset.left);
+        var resizeEnd = $(helperElement).appendTo(div.parent());
+
+
+
+        var slots = div.find(".k-scheduler-content td");
+        debugger;
+        dragdrop(scheduler, handle, resizeEnd);
+
+        equal(scheduler.dataSource.at(0).end.getHours(), 17);
+        equal(scheduler.dataSource.at(0).end.getMinutes(), 0);
+    });
+
+    test("timeline dragging and dropping doesn't change the event time if editable is set to false", function() {
+        var scheduler = new kendo.ui.Scheduler(div, {
+            date: new Date("2013/6/6"),
+            startTime: new Date("2013/6/6 10:00"),
+            editable: false,
+            views: ["timeline"],
+            dataSource: [
+                { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 11:00"), title: "" }
+            ]
+        });
+
+        var handle = div.find(".k-resize-e");
+
+        var slots = div.find(".k-scheduler-content td");
+
+        dragdrop(scheduler, handle, slots.eq(2));
+
+        equal(scheduler.dataSource.at(0).end.getHours(), 11);
+        equal(scheduler.dataSource.at(0).end.getMinutes(), 0);
+    });
+
+    test("timeline dragging and dropping doesn't change the event time if editable.resize is set to false", function() {
+        var scheduler = new kendo.ui.Scheduler(div, {
+            date: new Date("2013/6/6"),
+            startTime: new Date("2013/6/6 10:00"),
+            editable: { resize: false },
+            views: ["timeline"],
+            dataSource: [
+                { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 11:00"), title: "" }
+            ]
+        });
+
+        var handle = div.find(".k-resize-e");
+
+        var slots = div.find(".k-scheduler-content td");
+
+        dragdrop(scheduler, handle, slots.eq(2));
+
+        equal(scheduler.dataSource.at(0).end.getHours(), 11);
+        equal(scheduler.dataSource.at(0).end.getMinutes(), 0);
+    });
+    //=============END TIMELINE
+
     test("dragging and dropping the south resize handle changes the end time of the event", function() {
         var scheduler = new kendo.ui.Scheduler(div, {
             date: new Date("2013/6/6"),
