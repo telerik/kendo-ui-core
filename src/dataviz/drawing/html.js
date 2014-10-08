@@ -207,7 +207,7 @@
         return path.close();
     }
 
-    function renderBorderAndBackground(element, group) {
+    function _renderElement(element, group) {
         var style = getComputedStyle(element);
         var top = getBorder(style, "top");
         var right = getBorder(style, "right");
@@ -231,6 +231,7 @@
         var backgroundRepeat = getPropertyValue(style, "background-repeat");
         var backgroundPosition = getPropertyValue(style, "background-position");
         var backgroundOrigin = getPropertyValue(style, "background-origin");
+        var fontSize = parseFloat(getPropertyValue(style, "font-size"));
 
         if (element.currentStyle) {
             // IE9 hacks.  getPropertyValue won't return the correct
@@ -294,7 +295,14 @@
             }
         })();
 
-        // the contents will be drawn in this group which is possibly clipped.
+        renderContents(element, group);
+
+        // underline / strike-through should happen after the contents
+        // has been rendered.
+        for (i = 0; i < boxes.length; ++i) {
+            decorate(boxes[i]);
+        }
+
         return group; // only utility functions after this line.
 
         // this function will be called to draw each border.  it
@@ -502,6 +510,29 @@
                     repeatX();
                     rect.origin.y += img.height;
                 }
+            }
+        }
+
+        function decorate(box) {
+            switch (getPropertyValue(style, "text-decoration")) {
+              case "underline":
+                line(box.bottom);
+                break;
+              case "line-through":
+                line(box.bottom - box.height / 2.7);
+                break;
+            }
+            function line(ypos) {
+                var width = fontSize / 12;
+                var path = new drawing.Path({ stroke: {
+                    width: width,
+                    color: getPropertyValue(style, "color")
+                }});
+
+                ypos -= width;
+                path.moveTo(box.left, ypos)
+                    .lineTo(box.right, ypos);
+                group.append(path);
             }
         }
 
@@ -719,40 +750,11 @@
             //     .close();
             // group.append(path);
 
-            // if (str == "This") {
-            //     console.log(fontSize, lineHeight, box.height);
-            //     console.log(box.top, box.bottom, box.bottom - box.top);
-            // }
-
             var text = new drawing.Text(str, new geo.Point(box.left, box.top), {
                 font: font,
                 fill: { color: color }
             });
             group.append(text);
-
-            function decorate(ypos) {
-                var width = fontSize / 12; // XXX: seems to be a good value
-                var path = new drawing.Path({ stroke: {
-                    width: width,
-                    color: getPropertyValue(style, "color")
-                }});
-
-                ypos -= width;
-                path.moveTo(box.left, ypos)
-                    .lineTo(box.right, ypos);
-                group.append(path);
-            }
-
-            switch (getPropertyValue(style, "text-decoration")) {
-              case "underline":
-                decorate(box.bottom);
-                break;
-
-              case "line-through":
-                // XXX: seems to be a good value but not sure how to determine it precisely
-                decorate(box.bottom - box.height / 3);
-                break;
-            }
         }
 
         while (!doChunk()) {}
@@ -795,8 +797,8 @@
             setTransform(group, m);
         }
 
-        group = renderBorderAndBackground(element, group);
-        renderContents(element, group);
+        _renderElement(element, group);
+
         if (t) {
             element.style.transform = prevTransform;
         }

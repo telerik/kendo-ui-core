@@ -175,7 +175,7 @@
             --indentLevel;
         };
         out.indent = function() {
-            out(NL, pad("", indentLevel * 2, " "));
+            out(NL, pad("", indentLevel * 2, "  "));
             out.apply(null, arguments);
         };
         out.offset = function() {
