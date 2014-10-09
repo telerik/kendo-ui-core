@@ -174,13 +174,13 @@ var __meta__ = {
             if (!this.inited) {
                 this.inited = true;
                 this.trigger(INIT, {view: this});
+            } else { // skip the initial controller update
+                this._invokeNgController();
             }
 
             if (this.layout) {
                 this.layout.attach(this);
             }
-
-            this._invokeNgController();
 
             this._padIfNativeScrolling();
             this.trigger(SHOW, {view: this});
@@ -329,13 +329,17 @@ var __meta__ = {
 
         _invokeNgController: function() {
             var element = this.element,
-                controller;
+                controller,
+                scope;
 
             if (this.options.$angular) {
-                controller = element.controller();
+                controller = element.controller(),
+                scope = element.scope();
 
                 if (controller) {
-                    element.injector().invoke(controller.constructor, null, { $scope: element.scope() });
+                    scope.$apply(function() {
+                        element.injector().invoke(controller.constructor, null, { $scope: scope });
+                    });
                 }
             }
         }

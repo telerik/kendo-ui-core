@@ -531,7 +531,8 @@ var __meta__ = {
         'MobileView',
         'MobileModalView',
         'MobileLayout',
-        'MobileActionSheet'
+        'MobileActionSheet',
+        'MobileDrawer'
     ];
 
     function createDirectives(klass, isMobile) {
@@ -920,12 +921,27 @@ var __meta__ = {
                 scope: true,
                 pre: function(scope, element, attrs, controllers) {
                     attrs.defaultOptions = scope.viewOptions;
-                    scope._view = createWidget(scope, element, attrs, 'kendoMobileView', 'kendoMobileView');
+                    attrs._instance = createWidget(scope, element, attrs, 'kendoMobileView', 'kendoMobileView');
                 },
 
-                post: function(scope) {
-                    scope._view._layout();
-                    scope._view._scroller();
+                post: function(scope, element, attrs) {
+                    attrs._instance._layout();
+                    attrs._instance._scroller();
+                }
+            }
+        };
+    }).directive('kendoMobileDrawer', function() {
+        return {
+            scope: true,
+            link: {
+                pre: function(scope, element, attrs, controllers) {
+                    attrs.defaultOptions = scope.viewOptions;
+                    attrs._instance = createWidget(scope, element, attrs, 'kendoMobileDrawer', 'kendoMobileDrawer');
+                },
+
+                post: function(scope, element, attrs) {
+                    attrs._instance._layout();
+                    attrs._instance._scroller();
                 }
             }
         };
@@ -935,12 +951,12 @@ var __meta__ = {
             link: {
                 pre: function(scope, element, attrs, controllers) {
                     attrs.defaultOptions = scope.viewOptions;
-                    scope._modalView = createWidget(scope, element, attrs, 'kendoMobileModalView', 'kendoMobileModalView');
+                    attrs._instance = createWidget(scope, element, attrs, 'kendoMobileModalView', 'kendoMobileModalView');
                 },
 
-                post: function(scope) {
-                    scope._modalView._layout();
-                    scope._modalView._scroller();
+                post: function(scope, element, attrs) {
+                    attrs._instance._layout();
+                    attrs._instance._scroller();
                 }
             }
         };
