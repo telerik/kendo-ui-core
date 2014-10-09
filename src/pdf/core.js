@@ -265,6 +265,9 @@
             }
         }
 
+        var contentWidth = paperSize[0] - margins.left - margins.right;
+        var contentHeight = paperSize[1] - margins.top - margins.bottom;
+
         var catalog = self.attach(new PDFCatalog());
         var pageTree = self.attach(new PDFPageTree([ 0, 0, paperSize[0], paperSize[1] ]));
         catalog.setPages(pageTree);
@@ -285,7 +288,9 @@
 
             if (margins) {
                 page.transform(1, 0, 0, 1, margins.left, margins.top);
-                // XXX: clip to right/bottom margin?
+                // XXX: clip to right/bottom margin.  Make this optional?
+                page.rect(0, 0, contentWidth, contentHeight);
+                page.clip();
             }
 
             return page;

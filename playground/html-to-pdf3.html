@@ -81,7 +81,7 @@
     <button onclick="draw('#test1', 'canvas')">Canvas</button>
     |
     <button onclick="h2c('#test1')">html2canvas</button>
-    <div id="test1" style="padding: 2em">
+    <div id="test1" style="padding: 2em; background: #ffc">
 
       <!-- <img src="images/4.jpg" width="200px" -->
       <!--      style="margin-left: 1em; -->
@@ -169,6 +169,15 @@
         var el = $(sel)[0];
         console.time("pdf");
         kendo.dataviz.drawing.drawDOM(el, function(root){
+          root.options.set("pdf", {
+            paperSize: "auto",
+            margins: {
+              left: "10mm",
+              top: "10mm",
+              right: "10mm",
+              bottom: "10mm"
+            }
+          });
           kendo.dataviz.drawing.pdf.saveAs(root, "html-to-pdf3.pdf", "http://kendo.local:7569/", function(){
             console.timeEnd("pdf");
           });
