@@ -447,7 +447,7 @@
         });
 
         test("traverse traverses children", function() {
-            var child = new Group();
+            var child = new Element();
             group.append(child);
 
             group.traverse(function(item) {
@@ -455,10 +455,10 @@
             });
         });
 
-        test("traverse traverses child groups", 2, function() {
+        test("traverse traverses child groups", function() {
             var childGroup = new Group();
             group.append(childGroup);
-            var child = new Group();
+            var child = new Element();
             childGroup.append(child);
 
             group.traverse(function(item) {
