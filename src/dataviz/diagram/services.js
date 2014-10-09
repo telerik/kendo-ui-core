@@ -740,13 +740,16 @@
                 return true;
             },
             end: function () {
-                var nc = this.toolService.activeConnection, hi = this.toolService.hoveredItem, connector = this.toolService._hoveredConnector;
+                var nc = this.toolService.activeConnection,
+                    hi = this.toolService.hoveredItem,
+                    connector = this.toolService._hoveredConnector;
+
                 if (connector && connector._c != nc.sourceConnector) {
                     nc.target(connector._c);
-                }
-                else if (hi) {
+                } else if (hi) {
                     nc.target(hi);
                 }
+
                 this.toolService._connectionManipulation();
             },
             getCursor: function () {
@@ -1281,10 +1284,10 @@
                     target = ts._hoveredConnector._c;
                 } else if (item && !item.line) {
                     target = item;
-                }
-                else {
+                } else {
                     target = p;
                 }
+
                 if (this.handle !== undefined) {
                     switch (this.handle) {
                         case -1:

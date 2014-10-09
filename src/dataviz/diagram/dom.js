@@ -904,7 +904,7 @@
         var Connection = DiagramElement.extend({
             init: function (from, to, options, dataItem) {
                 var that = this;
-                DiagramElement.fn.init.call(that, options, dataItem);
+                DiagramElement.fn.init.call(that, options, dataItem || {});
                 this.updateOptionsFromModel();
                 that._router = new PolylineRouter(this);
                 that.path = new diagram.Polyline(that.options);
@@ -2079,7 +2079,7 @@
              * @param items DiagramElement, Array of Items.
              * @param undoable.
              */
-            remove: function(item) {
+            remove: function(item, undoable) {
                 var dataSource = this.dataSource;
 
                 if (item instanceof Connection) {
@@ -2087,11 +2087,12 @@
                 }
 
                 if (item.length) {
-                    this._remove(item, true);
                     this.destroyToolBar();
                 } else {
                     dataSource.remove(item.dataItem);
                 }
+
+                this._remove(item, undoable);
             },
 
             _remove: function (items, undoable) {
