@@ -535,6 +535,18 @@ var __meta__ = {
         'MobileDrawer'
     ];
 
+    angular.forEach(['MobileNavBar', 'MobileButton', 'MobileBackButton', 'MobileDetailButton', 'MobileTabStrip'], function(widget) {
+        MANUAL_DIRECTIVES.push(widget);
+        widget = "kendo" + widget;
+        module.directive(widget, function() {
+            return {
+                link: function(scope, element, attrs, controllers) {
+                    createWidget(scope, element, attrs, widget, widget);
+                }
+            };
+        });
+    });
+
     function createDirectives(klass, isMobile) {
         function make(directiveName, widgetName) {
             module.directive(directiveName, [
@@ -1001,19 +1013,6 @@ var __meta__ = {
                     element.addClass("km-footer").attr("data-role", "footer");
                 }
             };
-    });
-
-
-    angular.forEach(['MobileNavBar', 'MobileButton', 'MobileBackButton', 'MobileDetailButton', 'MobileTabStrip'], function(widget) {
-        MANUAL_DIRECTIVES.push(widget);
-        widget = "kendo" + widget;
-        module.directive(widget, function() {
-            return {
-                link: function(scope, element, attrs, controllers) {
-                    createWidget(scope, element, attrs, widget, widget);
-                }
-            };
-        });
     });
 
     angular.forEach(['align', 'icon', 'rel', 'transition', 'actionsheetContext'], function(attr) {
