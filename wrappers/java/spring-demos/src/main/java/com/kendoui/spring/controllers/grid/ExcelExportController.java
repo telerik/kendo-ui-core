@@ -3,8 +3,8 @@ package com.kendoui.spring.controllers.grid;
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.bind.DatatypeConverter;
 
-import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -43,7 +43,7 @@ public class ExcelExportController {
                 + fileName);
         response.setContentType(contentType);
 
-        byte[] data = Base64.decodeBase64(base64);
+        byte[] data = DatatypeConverter.parseBase64Binary(base64);
 
         response.setContentLength(data.length);
         response.getOutputStream().write(data);
