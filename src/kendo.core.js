@@ -3973,7 +3973,7 @@ function pad(number, digits, end) {
             scope.$digest();
         }]);
 
-        return kendo.widgetInstance(element, ui);
+        return kendo.widgetInstance(element, kendo.mobile.ui);
     }
 
 })(jQuery, window);
