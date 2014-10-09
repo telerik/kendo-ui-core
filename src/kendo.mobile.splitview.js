@@ -19,7 +19,8 @@ var __meta__ = {
 
     var SplitView = View.extend({
         init: function(element, options) {
-            var that = this, pane;
+            var that = this,
+            pane, modalViews;
 
             Widget.fn.init.call(that, element, options);
             element = that.element;
@@ -27,18 +28,40 @@ var __meta__ = {
             $.extend(that, options);
 
             that._id();
-            that._layout();
-            that._overlay();
+
+            if (!that.options.$angular) {
+                that._layout();
+                that._overlay();
+            } else {
+                that._overlay();
+            }
+
             that._style();
-            kendo.mobile.init(element.children(kendo.roleSelector("modalview")));
+
+            modalViews = element.children(that._locate("modalview"));
+
+            if (!that.options.$angular) {
+                kendo.mobile.init(modalViews);
+            } else {
+                modalViews.each(function(idx, element) {
+                    kendo.compileMobileDirective($(element));
+                });
+            }
 
             that.panes = [];
             that._paramsHistory = [];
 
-            that.content.children(kendo.roleSelector("pane")).each(function() {
-                pane = kendo.initWidget(this, {}, ui.roles);
-                that.panes.push(pane);
-            });
+            if (!that.options.$angular) {
+                that.content.children(kendo.roleSelector("pane")).each(function() {
+                    pane = kendo.initWidget(this, {}, ui.roles);
+                    that.panes.push(pane);
+                });
+            } else {
+                that.element.children(kendo.directiveSelector("pane")).each(function() {
+                    pane = kendo.compileMobileDirective($(this));
+                    that.panes.push(pane);
+                });
+            }
 
             that.expandedPaneShim = $(EXPANED_PANE_SHIM).appendTo(that.element);
 
@@ -47,6 +70,10 @@ var __meta__ = {
                     that.collapsePanes();
                 }
             });
+        },
+
+        _locate: function(selectors) {
+            return this.options.$angular ? kendo.directiveSelector(selectors) : kendo.roleSelector(selectors);
         },
 
         options: {
