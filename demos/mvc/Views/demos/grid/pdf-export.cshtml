@@ -36,7 +36,11 @@
     </script>
     <script>
          $("#grid").kendoGrid({
-            toolbar: "<button class='k-button' id='pdf'>Export to PDF</button>",
+            toolbar: ["pdf"],
+            pdf: {
+                fileName: "Kendo UI Grid Export.pdf",
+                proxyURL: "http://demos.telerik.com/kendo-ui/service/export"
+            },
             dataSource: {
               type: "odata",
               transport: {
@@ -55,25 +59,6 @@
             altRowTemplate: kendo.template($("#altRowTemplate").html()),
             scrollable: false
         });
-
-        $("#pdf").click(function() {
-            kendo.dataviz.drawing.drawDOM($("#grid")[0], function(root){
-                root.options.set("pdf", {
-                    paperSize: "auto",
-                    margins: {
-                        left: "10mm",
-                        top: "10mm",
-                        right: "10mm",
-                        bottom: "10mm"
-                    }
-                });
-                kendo.dataviz.drawing.pdf.toDataURL(root, function(url){
-                    kendo.saveAs(url, "html-to-pdf2.pdf", "http://kendo.local:7569/");
-                });
-            });
-        });
-
-
     </script>
     <style scoped>
         .name {

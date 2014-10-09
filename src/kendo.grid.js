@@ -413,6 +413,12 @@ var __meta__ = {
             imageClass: "k-excel",
             className: "k-grid-excel",
             iconClass: "k-icon"
+        },
+        pdf: {
+            text: "Export to PDF",
+            imageClass: "k-pdf",
+            className: "k-grid-pdf",
+            iconClass: "k-icon"
         }
     };
 
@@ -784,6 +790,7 @@ var __meta__ = {
            "dataBinding",
            "cancel",
            "excelExport",
+           "pdfExport",
            DATABOUND,
            DETAILEXPAND,
            DETAILCOLLAPSE,
@@ -880,7 +887,8 @@ var __meta__ = {
                     edit: defaultCommands.edit.text,
                     update: defaultCommands.update.text,
                     canceledit: defaultCommands.canceledit.text,
-                    excel: defaultCommands.excel.text
+                    excel: defaultCommands.excel.text,
+                    pdf: defaultCommands.pdf.text
                 }
             },
             excel: {
@@ -888,6 +896,11 @@ var __meta__ = {
                 allPages: false,
                 filterable: false,
                 fileName: "Export.xlsx"
+            },
+            pdf: {
+                fileName: "Export.pdf",
+                proxyURL: "",
+                paperSize: "auto"
             }
         },
 
@@ -2487,6 +2500,12 @@ var __meta__ = {
                     e.preventDefault();
 
                     that.exportToExcel();
+                });
+
+                container.on(CLICK + NS, ".k-grid-pdf", function(e) {
+                    e.preventDefault();
+
+                    that.exportToPDF();
                 });
             }
         },
@@ -5336,6 +5355,21 @@ var __meta__ = {
                   );
               }
           }, this));
+       },
+       exportToPDF: function() {
+           if (this.trigger("pdfExport")) {
+               return;
+           }
+
+           var options = this.options.pdf;
+
+           kendo.dataviz.drawing.drawDOM(this.wrapper[0], function(root) {
+               root.options.set("pdf", options);
+
+               kendo.dataviz.drawing.pdf.toDataURL(root, function(dataURI) {
+                   kendo.saveAs(dataURI, options.fileName, options.proxyURL);
+               });
+           });
        }
    });
 
