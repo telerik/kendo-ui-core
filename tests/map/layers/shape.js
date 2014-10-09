@@ -167,7 +167,7 @@
             count++;
         });
 
-        equal(count, 2);
+        equal(count, 1);
     });
 
     test("sets the dataSource", function() {
