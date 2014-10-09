@@ -111,7 +111,7 @@ all data items which begin with the current widget value are displayed in the su
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Spcifies the value binding behavior for the widget when the initial model value is null. If set to true, the View-Model field will be updated with the selected item text field. If set to false, the View-Model field will be updated with the selected item.</description>
+            <description>Specifies the value binding behavior for the widget when the initial model value is null. If set to true, the View-Model field will be updated with the selected item text field. If set to false, the View-Model field will be updated with the selected item.</description>
             <name>valuePrimitive</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -10804,7 +10804,7 @@ Help topic showing how cascading functionality works</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Defines the field to be used to filter the data source. If not defiend the parent's dataValueField option will be used.
+            <description>Defines the field to be used to filter the data source. If not defined the parent's dataValueField option will be used.
 Help topic showing how cascading functionality works</description>
             <name>cascadeFromField</name>
             <rtexprvalue>true</rtexprvalue>
@@ -11076,7 +11076,7 @@ Refer to the example below for a list of the supported properties.</description>
             <type>java.lang.Object</type>
         </attribute>
         <attribute>
-            <description>Specifies ContextMenu sub menu opening direction. Can be "top", "bottom", "left", "right".
+            <description>Specifies ContextMenu's sub menu opening direction. Can be "top", "bottom", "left", "right".
 The example below will initialize the sub menus to open to the left.</description>
             <name>direction</name>
             <rtexprvalue>true</rtexprvalue>
@@ -12063,7 +12063,7 @@ settings are available for the depth value:</description>
             <type>java.util.Date</type>
         </attribute>
         <attribute>
-            <description>Specifies a lis of date formats used to parse the value set with value() method or by direct user input. If not set the value of the format will be used.
+            <description>Specifies a list of date formats used to parse the value set with value() method or by direct user input. If not set the value of the format will be used.
  Note that format option is always used parsing process.</description>
             <name>parseFormats</name>
             <rtexprvalue>true</rtexprvalue>
@@ -13891,14 +13891,14 @@ See visual.</description>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Use it to set the Id of the parent dropdownlist widget.
+            <description>Use it to set the Id of the parent DropDownList widget.
 Help topic showing how cascading functionality works</description>
             <name>cascadeFrom</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Defines the field to be used to filter the data source. If not defiend the parent's dataValueField option will be used.
+            <description>Defines the field to be used to filter the data source. If not defined the parent's dataValueField option will be used.
 Help topic showing how cascading functionality works</description>
             <name>cascadeFromField</name>
             <rtexprvalue>true</rtexprvalue>
@@ -13998,7 +13998,7 @@ The supported filter values are startswith, endswith and contains.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Spcifies the value binding behavior for the widget when the initial model value is null. If set to true, the View-Model field will be updated with the selected item value field. If set to false, the View-Model field will be updated with the selected item.</description>
+            <description>Specifies the value binding behavior for the widget when the initial model value is null. If set to true, the View-Model field will be updated with the selected item value field. If set to false, the View-Model field will be updated with the selected item.</description>
             <name>valuePrimitive</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -15393,7 +15393,7 @@ If function is assigned, the current path and image name will be provided.</desc
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The caption for the link tooltip in the createLink dialog.</description>
+            <description>The caption for the link Tooltip in the createLink dialog.</description>
             <name>linkToolTip</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -15435,7 +15435,7 @@ If function is assigned, the current path and image name will be provided.</desc
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The title of the tool that stirkes through text.</description>
+            <description>The title of the tool that strikes through text.</description>
             <name>strikethrough</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -15496,6 +15496,12 @@ If function is assigned, the current path and image name will be provided.</desc
         <attribute>
             <description>Indicates whether the characters outside the ASCII range will be encoded as HTML entities. By default, they are encoded.</description>
             <name>entities</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Indicates whether inline scripts will be serialized and posted to the server.</description>
+            <name>scripts</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
@@ -15756,13 +15762,13 @@ instance.If the dependencies option is set to a JavaScript object or array the w
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>If set to false the user won't be able to select tasks in the gantt. By default selection is enabled and triggers the change event.</description>
+            <description>If set to false the user won't be able to select tasks in the Gantt. By default selection is enabled and triggers the change event.</description>
             <name>selectable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>If set to false, gantt views will show all days of the week. By default the views display only business days.</description>
+            <description>If set to false, Gantt views will show all days of the week. By default the views display only business days.</description>
             <name>showWorkDays</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -15774,7 +15780,7 @@ instance.If the dependencies option is set to a JavaScript object or array the w
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>If set to true the gantt will snap tasks to the nearest slot during dragging (resizing or moving). Set it to false to allow free moving and resizing of tasks.</description>
+            <description>If set to true the Gantt will snap tasks to the nearest slot during dragging (resizing or moving). Set it to false to allow free moving and resizing of tasks.</description>
             <name>snap</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -15839,12 +15845,12 @@ instance.If the dependencies option is set to a JavaScript object or array the w
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fired when the user selects a task in the gantt.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+            <description>Fired when the user selects a task in the Gantt.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>change</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fired when the user changes the selected view of the gantt.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+            <description>Fired when the user changes the selected view of the Gantt.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>navigate</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
@@ -15882,16 +15888,16 @@ instance.If the dependencies option is set to a JavaScript object or array the w
     </tag>
 
     <tag>
-        <description>The configuration of the gantt columns. An array of JavaScript objects or strings. A JavaScript objects are interpreted as column configurations. Strings are interpreted as the
-field to which the column is bound. The gantt will create a column for every item of the array.</description>
+        <description>The configuration of the Gantt columns. An array of JavaScript objects or strings. A JavaScript objects are interpreted as column configurations. Strings are interpreted as the
+field to which the column is bound. The Gantt will create a column for every item of the array.</description>
         <name>gantt-columns</name>
         <tag-class>com.kendoui.taglib.gantt.ColumnsTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
     <tag>
-        <description>The configuration of the gantt columns. An array of JavaScript objects or strings. A JavaScript objects are interpreted as column configurations. Strings are interpreted as the
-field to which the column is bound. The gantt will create a column for every item of the array.</description>
+        <description>The configuration of the Gantt columns. An array of JavaScript objects or strings. A JavaScript objects are interpreted as column configurations. Strings are interpreted as the
+field to which the column is bound. The Gantt will create a column for every item of the array.</description>
         <name>gantt-column</name>
         <tag-class>com.kendoui.taglib.gantt.ColumnTag</tag-class>
 
@@ -15945,7 +15951,7 @@ custom number format, standard date format or a custom date format.</description
         <body-content>JSP</body-content>
 
         <attribute>
-            <description>If set to true the gantt will display a confirmation dialog when the user deletes a task or a dependency.</description>
+            <description>If set to true the Gantt will display a confirmation dialog when the user deletes a task or a dependency.</description>
             <name>confirmation</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -15970,7 +15976,7 @@ which field to update. The other option is to use MVVM bindings in order to bind
     </tag>
 
     <tag>
-        <description>The configuration of the gantt messages. Use this option to customize or localize the gantt messages.</description>
+        <description>The configuration of the Gantt messages. Use this option to customize or localize the Gantt messages.</description>
         <name>gantt-messages</name>
         <tag-class>com.kendoui.taglib.gantt.MessagesTag</tag-class>
         <body-content>JSP</body-content>
@@ -15979,31 +15985,31 @@ which field to update. The other option is to use MVVM bindings in order to bind
     </tag>
 
     <tag>
-        <description>The configuration of the gantt action messages. Use this option to customize or localize the gantt action messages.</description>
+        <description>The configuration of the Gantt action messages. Use this option to customize or localize the Gantt action messages.</description>
         <name>gantt-messages-actions</name>
         <tag-class>com.kendoui.taglib.gantt.MessagesActionsTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>The text similar to "Add child" displayed as gantt "add child" buttons.</description>
+            <description>The text similar to "Add child" displayed as Gantt "add child" buttons.</description>
             <name>addChild</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The text similar to "Append" displayed as gantt "append" buttons.</description>
+            <description>The text similar to "Append" displayed as Gantt "append" buttons.</description>
             <name>append</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The text similar to "Add below" displayed as gantt "add below" buttons.</description>
+            <description>The text similar to "Add below" displayed as Gantt "add below" buttons.</description>
             <name>insertAfter</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The text similar to "Add above" displayed as gantt "add above" buttons.</description>
+            <description>The text similar to "Add above" displayed as Gantt "add above" buttons.</description>
             <name>insertBefore</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -16013,25 +16019,25 @@ which field to update. The other option is to use MVVM bindings in order to bind
 
 
     <tag>
-        <description>The configuration of the gantt view messages. Use this option to customize or localize the gantt view messages.</description>
+        <description>The configuration of the Gantt view messages. Use this option to customize or localize the Gantt view messages.</description>
         <name>gantt-messages-views</name>
         <tag-class>com.kendoui.taglib.gantt.MessagesViewsTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>The text similar to "Day" displayed as gantt "day" view title.</description>
+            <description>The text similar to "Day" displayed as Gantt "day" view title.</description>
             <name>day</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The text similar to "Month" displayed as gantt "month" view title.</description>
+            <description>The text similar to "Month" displayed as Gantt "month" view title.</description>
             <name>month</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The text similar to "Week" displayed as gantt "week" view title.</description>
+            <description>The text similar to "Week" displayed as Gantt "week" view title.</description>
             <name>week</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -16043,7 +16049,7 @@ which field to update. The other option is to use MVVM bindings in order to bind
 
 
     <tag>
-        <description>The views displayed by the gantt and their configuration. The array items can be either objects specifying the view configuration or strings representing the view types (assuming default configuration).
+        <description>The views displayed by the Gantt and their configuration. The array items can be either objects specifying the view configuration or strings representing the view types (assuming default configuration).
 By default the Kendo UI Gantt widget displays all three ("day", "week", and "month") views.</description>
         <name>gantt-views</name>
         <tag-class>com.kendoui.taglib.gantt.ViewsTag</tag-class>
@@ -16051,7 +16057,7 @@ By default the Kendo UI Gantt widget displays all three ("day", "week", and "mon
     </tag>
 
     <tag>
-        <description>The views displayed by the gantt and their configuration. The array items can be either objects specifying the view configuration or strings representing the view types (assuming default configuration).
+        <description>The views displayed by the Gantt and their configuration. The array items can be either objects specifying the view configuration or strings representing the view types (assuming default configuration).
 By default the Kendo UI Gantt widget displays all three ("day", "week", and "month") views.</description>
         <name>gantt-view</name>
         <tag-class>com.kendoui.taglib.gantt.ViewTag</tag-class>
@@ -16070,7 +16076,7 @@ By default the Kendo UI Gantt widget displays all three ("day", "week", and "mon
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>If set to true the view will be initially selected by the gantt widget. The default selected view is "day".</description>
+            <description>If set to true the view will be initially selected by the Gantt widget. The default selected view is "day".</description>
             <name>selected</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -16182,13 +16188,13 @@ By default the Kendo UI Gantt widget displays all three ("day", "week", and "mon
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fired when the user selects a task in the gantt.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+        <description>Fired when the user selects a task in the Gantt.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>gantt-change</name>
         <tag-class>com.kendoui.taglib.gantt.ChangeFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fired when the user changes the selected view of the gantt.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+        <description>Fired when the user changes the selected view of the Gantt.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>gantt-navigate</name>
         <tag-class>com.kendoui.taglib.gantt.NavigateFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -16360,8 +16366,8 @@ The grid uses same layout for both phone and tablet.</description>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>If a String value is assigned to the toolbar configuration option, it will be treated as a single string template for the whole Grid toolbar,
-and the string value will be passed as an argument to a kendo.template() function.If a Function value is assigned (it may be a kendo.template() function call or a generic function reference), then the return value of the function will be used to render the Grid toolbar contents.If an Array value is assigned, it will be treated as the list of commands displayed in the grid toolbar. Commands can be custom or built-in ("cancel", "create", "save").The "cancel" built-in command reverts any data changes done by the end user.The "create" command adds an empty data item to the grid.The "save" command persists any data changes done by the end user.</description>
+            <description>If a String value is assigned to the toolbar configuration option, it will be treated as a single string template for the whole Grid Toolbar,
+and the string value will be passed as an argument to a kendo.template() function.If a Function value is assigned (it may be a kendo.template() function call or a generic function reference), then the return value of the function will be used to render the Grid Toolbar contents.If an Array value is assigned, it will be treated as the list of commands displayed in the Grid Toolbar. Commands can be custom or built-in ("cancel", "create", "save", "excel").The "cancel" built-in command reverts any data changes done by the end user.The "create" command adds an empty data item to the grid.The "save" command persists any data changes done by the end user.The "excel" command exports the grid data in MS Excel format.</description>
             <name>toolbar</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -16429,6 +16435,11 @@ and the string value will be passed as an argument to a kendo.template() functio
         <attribute>
             <description>Fired when the user edits or creates a data item.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>edit</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fired when the user clicks the "Export to Excel" toolbar button.</description>
+            <name>excelExport</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
@@ -16639,7 +16650,7 @@ and the current group value is displayed.The fields which can be used in the tem
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>If set to false the column will not be groupable (requires Grid groupable property to be enabled). By default all columns are groupable</description>
+            <description>If set to false the column will not be groupable (requires Grid groupable property to be enabled). By default all columns are groupable.</description>
             <name>groupable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -17002,6 +17013,42 @@ which field to update. The other option is to use MVVM bindings in order to bind
     </tag>
 
     <tag>
+        <description>Configures the Kendo UI Grid export settings.</description>
+        <name>grid-excel</name>
+        <tag-class>com.kendoui.taglib.grid.ExcelTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>If set to true the grid will export all pages of data. By default the grid exports only the current page.</description>
+            <name>allPages</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the file name of the exported Excel file.</description>
+            <name>fileName</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Enables or disables column filtering in the Excel file. Not to be mistaken with the grid filtering feature.</description>
+            <name>filterable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The URL of the server side proxy which will stream the Excel file to the end user. Used when the browser isn't capable of saving files from JavaScript. Such browsers are IE&lt;10 and Safari.
+The developer is responsible for implementing the server-side proxy. Implementation instructions are available here.</description>
+            <name>proxyURL</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
         <description>If set to true the user can filter the data source using the grid filter menu. Filtering is disabled by default.Can be set to a JavaScript object which represents the filter menu configuration.</description>
         <name>grid-filterable</name>
         <tag-class>com.kendoui.taglib.grid.FilterableTag</tag-class>
@@ -17083,7 +17130,7 @@ which field to update. The other option is to use MVVM bindings in order to bind
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The text of the dropdownlist displayed in the filter menu for columns whose values option is set.</description>
+            <description>The text of the DropDownList displayed in the filter menu for columns whose values option is set.</description>
             <name>selectValue</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -17283,7 +17330,7 @@ which field to update. The other option is to use MVVM bindings in order to bind
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>When enabled the group footer rows will remain visible when the corresponding gruop is collapsed.</description>
+            <description>When enabled the group footer rows will remain visible when the corresponding group is collapsed.</description>
             <name>showFooter</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -17355,6 +17402,12 @@ which field to update. The other option is to use MVVM bindings in order to bind
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>Defines the text of "Export to Excel" button of the grid toolbar.</description>
+            <name>excel</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>Defines the text of "Save Changes" button located in the ToolBar of the widget.</description>
             <name>save</name>
             <rtexprvalue>true</rtexprvalue>
@@ -17409,7 +17462,7 @@ which field to update. The other option is to use MVVM bindings in order to bind
             <type>float</type>
         </attribute>
         <attribute>
-            <description>If set to true the pager will display a dropdown list which allows the user to pick a page size. By default the page size dropdown list is not displayed.Can be set to an array with the available page sizes.</description>
+            <description>If set to true the pager will display a DropDownList which allows the user to pick a page size. By default the page size DropDownList is not displayed.Can be set to an array with the available page sizes.</description>
             <name>pageSizes</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
@@ -17457,7 +17510,7 @@ which field to update. The other option is to use MVVM bindings in order to bind
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The label displayed after the page size dropdown list.</description>
+            <description>The label displayed after the page size DropDownList.</description>
             <name>itemsPerPage</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -17469,13 +17522,13 @@ which field to update. The other option is to use MVVM bindings in order to bind
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The tooltip of the ellipsis ("...") button, which appears when the number of pages is greater than the buttonCount.</description>
+            <description>The Tooltip of the ellipsis ("...") button, which appears when the number of pages is greater than the buttonCount.</description>
             <name>morePages</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The tooltip of the button which goes to the next page.</description>
+            <description>The Tooltip of the button which goes to the next page.</description>
             <name>next</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -17493,13 +17546,13 @@ which field to update. The other option is to use MVVM bindings in order to bind
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The tooltip of the button which goes to the previous page.</description>
+            <description>The Tooltip of the button which goes to the previous page.</description>
             <name>previous</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The tooltip of the refresh button.</description>
+            <description>The Tooltip of the refresh button.</description>
             <name>refresh</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -17551,22 +17604,22 @@ which field to update. The other option is to use MVVM bindings in order to bind
 
 
     <tag>
-        <description>If a String value is assigned to the toolbar configuration option, it will be treated as a single string template for the whole Grid toolbar,
-and the string value will be passed as an argument to a kendo.template() function.If a Function value is assigned (it may be a kendo.template() function call or a generic function reference), then the return value of the function will be used to render the Grid toolbar contents.If an Array value is assigned, it will be treated as the list of commands displayed in the grid toolbar. Commands can be custom or built-in ("cancel", "create", "save").The "cancel" built-in command reverts any data changes done by the end user.The "create" command adds an empty data item to the grid.The "save" command persists any data changes done by the end user.</description>
+        <description>If a String value is assigned to the toolbar configuration option, it will be treated as a single string template for the whole Grid Toolbar,
+and the string value will be passed as an argument to a kendo.template() function.If a Function value is assigned (it may be a kendo.template() function call or a generic function reference), then the return value of the function will be used to render the Grid Toolbar contents.If an Array value is assigned, it will be treated as the list of commands displayed in the Grid Toolbar. Commands can be custom or built-in ("cancel", "create", "save", "excel").The "cancel" built-in command reverts any data changes done by the end user.The "create" command adds an empty data item to the grid.The "save" command persists any data changes done by the end user.The "excel" command exports the grid data in MS Excel format.</description>
         <name>grid-toolbar</name>
         <tag-class>com.kendoui.taglib.grid.ToolbarTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
     <tag>
-        <description>If a String value is assigned to the toolbar configuration option, it will be treated as a single string template for the whole Grid toolbar,
-and the string value will be passed as an argument to a kendo.template() function.If a Function value is assigned (it may be a kendo.template() function call or a generic function reference), then the return value of the function will be used to render the Grid toolbar contents.If an Array value is assigned, it will be treated as the list of commands displayed in the grid toolbar. Commands can be custom or built-in ("cancel", "create", "save").The "cancel" built-in command reverts any data changes done by the end user.The "create" command adds an empty data item to the grid.The "save" command persists any data changes done by the end user.</description>
+        <description>If a String value is assigned to the toolbar configuration option, it will be treated as a single string template for the whole Grid Toolbar,
+and the string value will be passed as an argument to a kendo.template() function.If a Function value is assigned (it may be a kendo.template() function call or a generic function reference), then the return value of the function will be used to render the Grid Toolbar contents.If an Array value is assigned, it will be treated as the list of commands displayed in the Grid Toolbar. Commands can be custom or built-in ("cancel", "create", "save", "excel").The "cancel" built-in command reverts any data changes done by the end user.The "create" command adds an empty data item to the grid.The "save" command persists any data changes done by the end user.The "excel" command exports the grid data in MS Excel format.</description>
         <name>grid-toolbarItem</name>
         <tag-class>com.kendoui.taglib.grid.ToolbarItemTag</tag-class>
 
         <body-content>JSP</body-content>
         <attribute>
-            <description>The name of the toolbar command. Either a built-in ("cancel", "create" and "save") or custom. The name is reflected in one of the CSS classes, which is applied to the button - k-grid-name.
+            <description>The name of the toolbar command. Either a built-in ("cancel", "create", "save" and "excel") or custom. The name is reflected in one of the CSS classes, which is applied to the button - k-grid-name.
 This class can be used to obtain reference to the button after Grid initialization and attach click handlers.</description>
             <name>name</name>
             <rtexprvalue>true</rtexprvalue>
@@ -17670,6 +17723,12 @@ This class can be used to obtain reference to the button after Grid initializati
         <description>Fired when the user edits or creates a data item.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>grid-edit</name>
         <tag-class>com.kendoui.taglib.grid.EditFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the user clicks the "Export to Excel" toolbar button.</description>
+        <name>grid-excelExport</name>
+        <tag-class>com.kendoui.taglib.grid.ExcelExportFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
@@ -20205,7 +20264,7 @@ instance.If the dataSource option is set to a JavaScript object or array the wid
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Specifies the delay in milliseconds after which the multiselect will start filtering dataSource.</description>
+            <description>Specifies the delay in milliseconds after which the MultiSelect will start filtering dataSource.</description>
             <name>delay</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -20784,7 +20843,7 @@ top takes precedence over bottom and left takes precedence over right.</descript
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The label displayed after the page size dropdown list.</description>
+            <description>The label displayed after the page size DropDownList.</description>
             <name>itemsPerPage</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -21189,7 +21248,7 @@ instance.If the dataSource option is set to a JavaScript object the widget will 
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The text of the ok button in the include fields dialog.</description>
+            <description>The text of the OK button in the include fields dialog.</description>
             <name>ok</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -21304,7 +21363,7 @@ instance.If the dataSource option is set to a JavaScript object the widget will 
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>The height of the pivotgrid. Numeric values are treated as pixels.</description>
+            <description>The height of the PivotGrid. Numeric values are treated as pixels.</description>
             <name>height</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
@@ -21332,7 +21391,7 @@ instance.If the dataSource option is set to a JavaScript object the widget will 
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fired before column or row field is expaneded.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+            <description>Fired before column or row field is expanded.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>expandMember</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
@@ -21414,7 +21473,7 @@ instance.If the dataSource option is set to a JavaScript object the widget will 
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The text of the ok button in the include fields dialog.</description>
+            <description>The text of the OK button in the include fields dialog.</description>
             <name>ok</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -21490,7 +21549,7 @@ instance.If the dataSource option is set to a JavaScript object the widget will 
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fired before column or row field is expaneded.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+        <description>Fired before column or row field is expanded.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>pivotGrid-expandMember</name>
         <tag-class>com.kendoui.taglib.pivotgrid.ExpandMemberFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -22194,7 +22253,7 @@ arrow keys (the drag handle must be focused), or (3) drags the drag handle.</des
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Fires when the rangeSlider value changes as a result of selecting a new value with one of the drag handles or the keyboard.</description>
+            <description>Fires when the RangeSlider value changes as a result of selecting a new value with one of the drag handles or the keyboard.</description>
             <name>change</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
@@ -22237,7 +22296,7 @@ the RangeSlider tick labels.</description>
 
 
     <tag>
-        <description>Fires when the rangeSlider value changes as a result of selecting a new value with one of the drag handles or the keyboard.</description>
+        <description>Fires when the RangeSlider value changes as a result of selecting a new value with one of the drag handles or the keyboard.</description>
         <name>rangeSlider-change</name>
         <tag-class>com.kendoui.taglib.rangeslider.ChangeFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -22385,7 +22444,7 @@ If the developer wants to control the day and month order then one needs to defi
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>If set to true the view will be initially shown in business hours mode. By default view is displyed in full day mode.</description>
+            <description>If set to true the view will be initially shown in business hours mode. By default view is displayed in full day mode.</description>
             <name>showWorkHours</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -22441,7 +22500,7 @@ That way all users would see the same dates and times no matter their configured
             <type>float</type>
         </attribute>
         <attribute>
-            <description>Fired when the a new event is about to be added.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+            <description>Fired when a new event is about to be added.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>add</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
@@ -22609,7 +22668,7 @@ which field to update. The other option is to use MVVM bindings in order to bind
         <body-content>empty</body-content>
 
         <attribute>
-            <description>Sets the command which will be displayed in the scheduler footer. Currently only "workDay" option is supported. If the option is set  to false, the "workDay" button will be removed from the footer.</description>
+            <description>Sets the command which will be displayed in the scheduler footer. Currently only "workDay" option is supported. If the option is set to false, the "workDay" button will be removed from the footer.</description>
             <name>command</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
@@ -22651,6 +22710,18 @@ which field to update. The other option is to use MVVM bindings in order to bind
         <attribute>
             <description>The text similar to "all day" displayed in day,week and agenda views.</description>
             <name>allDay</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the format string used to populate the aria-label attribute value of the selected event element.The arguments which can be used in the format string are:</description>
+            <name>ariaEventLabel</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the format string used to populate the aria-label attribute value of the selected slot element.The arguments which can be used in the format string are:</description>
+            <name>ariaSlotLabel</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -23235,7 +23306,7 @@ By default only one resource instance can be assigned to an event.</description>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Tha name of the resource used to distinguish resource. If not set the value of the field option is used.</description>
+            <description>The name of the resource used to distinguish resource. If not set the value of the field option is used.</description>
             <name>name</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -23369,7 +23440,7 @@ By default the Kendo UI Scheduler widget displays "day" and "week" view.</descri
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>If set to true the view will be initially shown in business hours mode. By default view is displyed in full day mode.</description>
+            <description>If set to true the view will be initially shown in business hours mode. By default view is displayed in full day mode.</description>
             <name>showWorkHours</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -23513,7 +23584,7 @@ By default the Kendo UI Scheduler widget displays "day" and "week" view.</descri
     </tag>
 
     <tag>
-        <description>Fired when the a new event is about to be added.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+        <description>Fired when a new event is about to be added.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>scheduler-add</name>
         <tag-class>com.kendoui.taglib.scheduler.AddFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -35049,29 +35120,25 @@ user interactions. Setting this option to false will disable all animations.</de
             <type>java.lang.Object</type>
         </attribute>
         <attribute>
-            <description>Sets the field of the data item that provides the text content of
-the tab content element.</description>
+            <description>Sets the field of the data item that provides the text content of the tab content element.</description>
             <name>dataContentField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Sets the field of the data item that provides the URL for
-the ajax loaded tab content.</description>
+            <description>Sets the field of the data item that provides the URL for the Ajax loaded tab content.</description>
             <name>dataContentUrlField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Sets the field of the data item that provides the image URL of
-the tab.</description>
+            <description>Sets the field of the data item that provides the image URL of the tab.</description>
             <name>dataImageUrlField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Sets the field of the data item that provides the CSS class of
-the tab.</description>
+            <description>Sets the field of the data item that provides the CSS class of the tab.</description>
             <name>dataSpriteCssClass</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -35083,8 +35150,7 @@ the tab.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Sets the field of the data item that provides the link URL for the
-tab.</description>
+            <description>Sets the field of the data item that provides the link URL for the tab.</description>
             <name>dataUrlField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -35864,25 +35930,25 @@ is closed. By default not specified - uses the opening animation with reverse.</
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Specifies if the tooltip will be hidden when mouse leaves the target element. If set to false a close button will be shown within tooltip. If set to false, showAfter is specified and the showOn is set to "mouseenter" the Tooltip will be displayed after the given timeout even if the element is no longer hovered.</description>
+            <description>Specifies if the Tooltip will be hidden when mouse leaves the target element. If set to false a close button will be shown within Tooltip. If set to false, showAfter is specified and the showOn is set to "mouseenter" the Tooltip will be displayed after the given timeout even if the element is no longer hovered.</description>
             <name>autoHide</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Specifies if the tooltip callout will be displayed.</description>
+            <description>Specifies if the Tooltip callout will be displayed.</description>
             <name>callout</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Specifies a selector for elements, within the container, for which the tooltip will be displayed.</description>
+            <description>Specifies a selector for elements, within the container, for which the Tooltip will be displayed.</description>
             <name>filter</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The height (in pixels) of the tooltip.</description>
+            <description>The height (in pixels) of the Tooltip.</description>
             <name>height</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -35894,25 +35960,25 @@ is closed. By default not specified - uses the opening animation with reverse.</
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>The position relative to the target element, at which the tooltip will be shown. Predefined values are "bottom", "top", "left", "right", "center".</description>
+            <description>The position relative to the target element, at which the Tooltip will be shown. Predefined values are "bottom", "top", "left", "right", "center".</description>
             <name>position</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Specify the delay in milliseconds before the tooltip is shown. This option is ignored if showOn is set to "click" or "focus".</description>
+            <description>Specify the delay in milliseconds before the Tooltip is shown. This option is ignored if showOn is set to "click" or "focus".</description>
             <name>showAfter</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>The event on which the tooltip will be shown. Predefined values are "mouseenter", "click" and "focus".</description>
+            <description>The event on which the Tooltip will be shown. Predefined values are "mouseenter", "click" and "focus".</description>
             <name>showOn</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The width (in pixels) of the tooltip.</description>
+            <description>The width (in pixels) of the Tooltip.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -35968,7 +36034,7 @@ will disable all animations in the widget.</description>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>Effect to be used for closing of the tooltip.</description>
+            <description>Effect to be used for closing of the Tooltip.</description>
             <name>effects</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -36158,7 +36224,7 @@ data source is fired. By default the widget will bind to the data source specifi
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Sets the field of the data item that provides the image URL of the treeview nodes.</description>
+            <description>Sets the field of the data item that provides the image URL of the TreeView nodes.</description>
             <name>dataImageUrlField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -36196,8 +36262,8 @@ If an array, each level uses the field that is at the same index in the array, o
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Indicates whether the child datasources should be fetched lazily when parent groups get expanded.
-Setting this to false causes all child dataSources to be loaded at initialization time.
+            <description>Indicates whether the child DataSources should be fetched lazily when parent groups get expanded.
+Setting this to false causes all child DataSources to be loaded at initialization time.
 Note: when initializing the widget from an array (rather than from a HierarchicalDataSource instance), this option defaults to false, rather than true.</description>
             <name>loadOnDemand</name>
             <rtexprvalue>true</rtexprvalue>
@@ -36361,7 +36427,7 @@ also enables tri-state checkboxes with an indeterminate state.</description>
         </attribute>
         <attribute>
             <description>The template which renders the checkboxes. Can be used to allow posting of
-additional information along the treeview checkboxes.The fields which can be used in the template are:</description>
+additional information along the TreeView checkboxes.The fields which can be used in the template are:</description>
             <name>template</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -36372,7 +36438,7 @@ additional information along the treeview checkboxes.The fields which can be use
 
     <tag>
         <description>The template which renders the checkboxes. Can be used to allow posting of
-additional information along the treeview checkboxes.The fields which can be used in the template are:</description>
+additional information along the TreeView checkboxes.The fields which can be used in the template are:</description>
         <name>treeView-checkboxes-template</name>
         <tag-class>com.kendoui.taglib.treeview.CheckboxesTemplateFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -36649,8 +36715,7 @@ for more details.</description>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>The selected files will be uploaded immediately by default. You can change this behavior by setting
-autoUpload to false.</description>
+            <description>The selected files will be uploaded immediately by default. You can change this behavior by setting autoUpload to false.</description>
             <name>autoUpload</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
