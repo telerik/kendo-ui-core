@@ -17,6 +17,8 @@
     var dataviz     = kendo.dataviz;
     var PDF         = kendo.pdf;
 
+    var TEXT_RENDERING_MODE = PDF.TEXT_RENDERING_MODE;
+
     var DASH_PATTERNS = {
         dash           : [ 4 ],
         dashDot        : [ 4, 2, 1, 2 ],
@@ -301,20 +303,19 @@
     function drawText(element, page, pdf) {
         var style = PDF.parseFontDef(element.options.font);
         var pos = element._position;
+        var mode;
+        if (element.fill() && element.stroke()) {
+            mode = TEXT_RENDERING_MODE.fillAndStroke;
+        } else if (element.fill()) {
+            mode = TEXT_RENDERING_MODE.fill;
+        } else if (element.stroke()) {
+            mode = TEXT_RENDERING_MODE.stroke;
+        }
+
         page.transform(1, 0, 0, -1, pos.x, pos.y + style.fontSize);
         page.beginText();
         page.setFont(PDF.getFontURL(style), style.fontSize);
-
-        var mode;
-        if (element.fill() && element.stroke()) {
-            mode = PDF.TEXT_RENDERING_MODE.fillAndStroke;
-        } else if (element.fill()) {
-            mode = PDF.TEXT_RENDERING_MODE.fill;
-        } else if (element.stroke()) {
-            mode = PDF.TEXT_RENDERING_MODE.stroke;
-        }
         page.setTextRenderingMode(mode);
-
         page.showText(element.content());
         page.endText();
     }
