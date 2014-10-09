@@ -45,7 +45,7 @@ class GridPageableMessages extends \Kendo\SerializableObject {
     }
 
     /**
-    * The label displayed after the page size dropdown list.
+    * The label displayed after the page size DropDownList.
     * @param string $value
     * @return \Kendo\UI\GridPageableMessages
     */
@@ -72,7 +72,7 @@ class GridPageableMessages extends \Kendo\SerializableObject {
     }
 
     /**
-    * The tooltip of the button which goes to the next page.
+    * The Tooltip of the button which goes to the next page.
     * @param string $value
     * @return \Kendo\UI\GridPageableMessages
     */
@@ -81,7 +81,7 @@ class GridPageableMessages extends \Kendo\SerializableObject {
     }
 
     /**
-    * The tooltip of the button which goes to the previous page.
+    * The Tooltip of the button which goes to the previous page.
     * @param string $value
     * @return \Kendo\UI\GridPageableMessages
     */
@@ -90,7 +90,7 @@ class GridPageableMessages extends \Kendo\SerializableObject {
     }
 
     /**
-    * The tooltip of the refresh button.
+    * The Tooltip of the refresh button.
     * @param string $value
     * @return \Kendo\UI\GridPageableMessages
     */
@@ -99,7 +99,7 @@ class GridPageableMessages extends \Kendo\SerializableObject {
     }
 
     /**
-    * The tooltip of the ellipsis ("...") button, which appears when the number of pages is greater than the buttonCount.
+    * The Tooltip of the ellipsis ("...") button, which appears when the number of pages is greater than the buttonCount.
     * @param string $value
     * @return \Kendo\UI\GridPageableMessages
     */

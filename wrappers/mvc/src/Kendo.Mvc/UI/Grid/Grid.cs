@@ -69,6 +69,7 @@ namespace Kendo.Mvc.UI
             Grouping = new GridGroupableSettings();
             Resizable = new GridResizableSettings();
             Reorderable = new GridReorderableSettings();
+            Excel = new GridExcelSettings();
 
             TableHtmlAttributes = new RouteValueDictionary();
             
@@ -156,6 +157,12 @@ namespace Kendo.Mvc.UI
         /// Gets the selection configuration
         /// </summary>
         public GridSelectableSettings Selectable
+        {
+            get;
+            private set;
+        }
+
+        public GridExcelSettings Excel
         {
             get;
             private set;
@@ -747,6 +754,13 @@ namespace Kendo.Mvc.UI
                 options["filterable"] = filtering.Any() ? (object)filtering : true;
             }
 
+            var excel = Excel.ToJson();
+
+            if (excel.Any())
+            {
+                options["excel"] = excel;
+            }
+
             if (ColumnMenu.Enabled)
             {
                 var menu = ColumnMenu.ToJson();
@@ -1307,7 +1321,12 @@ namespace Kendo.Mvc.UI
             if (!DataKeys.Any() && (Editable.Enabled || (Selectable.Enabled && !IsClientBinding)))
             {
                 throw new NotSupportedException(Exceptions.DataKeysEmpty);
-            }          
+            }
+
+            if (HasCommandOfType<GridToolBarExcelCommand<T>>() && !IsClientBinding)
+            {
+                throw new NotSupportedException(Exceptions.ExcelExportNotSupportedInServerBinding);
+            }
 
             if (Editable.Enabled)
             {

@@ -3934,6 +3934,66 @@ function pad(number, digits, end) {
         return start;
     };
 
+    kendo.postToProxy = function(dataURI, fileName, proxyURL) {
+        var form = $("<form>").attr({
+            action: proxyURL,
+            method: "POST"
+        });
+
+        var parts = dataURI.split(";base64,");
+
+        $('<input>').attr({
+            value: parts[0].replace("data:", ""),
+            name: "contentType",
+            type: "hidden"
+        }).appendTo(form);
+
+        $('<input>').attr({
+            value: parts[1],
+            name: "base64",
+            type: "hidden"
+        }).appendTo(form);
+
+        $('<input>').attr({
+            value: fileName,
+            name: "fileName",
+            type: "hidden"
+        }).appendTo(form);
+
+        form.appendTo("body").submit().remove();
+    };
+
+    var fileSaver = document.createElement("a");
+    var downloadAttribute = "download" in fileSaver;
+
+    if (downloadAttribute) {
+        kendo.saveAs = function(dataURI, fileName) {
+            fileSaver.download = fileName;
+            fileSaver.href = dataURI;
+
+            var e = document.createEvent("MouseEvents");
+            e.initMouseEvent("click", true, false, window,
+                0, 0, 0, 0, 0, false, false, false, false, 0, null);
+
+            fileSaver.dispatchEvent(e);
+        };
+    } else if (navigator.msSaveBlob) {
+        kendo.saveAs = function(dataURI, fileName) {
+            var parts = dataURI.split(";base64,");
+            var contentType = parts[0];
+            var base64 = atob(parts[1]);
+            var array = new Uint8Array(base64.length);
+
+            for (var idx = 0; idx < base64.length; idx++) {
+                array[idx] = base64.charCodeAt(idx);
+            }
+
+            navigator.msSaveBlob(new Blob([array.buffer], { type: contentType }), fileName);
+        };
+    } else {
+        kendo.saveAs = kendo.postToProxy;
+    }
+
 })(jQuery);
 
 return window.kendo;

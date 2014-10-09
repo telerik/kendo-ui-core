@@ -26,6 +26,11 @@
             continue;
         }
 
+        if (scriptName.Contains("jszip") && ViewBag.CurrentExample != null
+        && !ViewBag.CurrentExample.Text.Contains("Excel")) {
+            continue;
+        }
+
         <script src="@Url.Script(scriptName)"></script>
     }
     <script src="@Url.Content("~/content/shared/js/kendo-dojo.js")"></script>

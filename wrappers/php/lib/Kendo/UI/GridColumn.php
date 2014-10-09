@@ -109,7 +109,7 @@ custom number format, standard date format or a custom date format.
     }
 
     /**
-    * If set to false the column will not be groupable (requires Grid groupable property to be enabled). By default all columns are groupable
+    * If set to false the column will not be groupable (requires Grid groupable property to be enabled). By default all columns are groupable.
     * @param boolean $value
     * @return \Kendo\UI\GridColumn
     */

@@ -337,4 +337,7 @@ The request for '{0}' has found the following matching controllers:{2}</value>
   <data name="CannotUseLockedColumnsAndServerBinding" xml:space="preserve">
     <value>Locked columns are not supported in server binding mode</value>
   </data>
+  <data name="ExcelExportNotSupportedInServerBinding" xml:space="preserve">
+    <value>Excel export is not supported in server binding mode.</value>
+  </data>
 </root>

@@ -69,7 +69,7 @@ class GridFilterableMessages extends \Kendo\SerializableObject {
     }
 
     /**
-    * The text of the dropdownlist displayed in the filter menu for columns whose values option is set.
+    * The text of the DropDownList displayed in the filter menu for columns whose values option is set.
     * @param string $value
     * @return \Kendo\UI\GridFilterableMessages
     */

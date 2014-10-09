@@ -51,6 +51,15 @@ class GridMessagesCommands extends \Kendo\SerializableObject {
     }
 
     /**
+    * Defines the text of "Export to Excel" button of the grid toolbar.
+    * @param string $value
+    * @return \Kendo\UI\GridMessagesCommands
+    */
+    public function excel($value) {
+        return $this->setProperty('excel', $value);
+    }
+
+    /**
     * Defines the text of "Save Changes" button located in the ToolBar of the widget.
     * @param string $value
     * @return \Kendo\UI\GridMessagesCommands

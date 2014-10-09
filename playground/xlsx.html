@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Export to Excel via XLSX.js</title>
+    <link href="http://cdn.kendostatic.com/2014.1.416/styles/kendo.common.min.css" rel="stylesheet" />
+    <link href="http://cdn.kendostatic.com/2014.1.416/styles/kendo.default.min.css" rel="stylesheet" />
+    <script src="loader.js"></script>
+    <script src="../src/jszip.min.js"></script>
+    <script>
+        requireSync([
+            "../src/jquery",
+            "../src/kendo.ooxml",
+            "../src/kendo.excel",
+            "../src/kendo.grid"
+        ]);
+    </script>
+</head>
+<body>
+    <h1>JavaScript-only export to Excel</h1>
+    <h2>Supported browsers</h2>
+    <ul>
+      <li>Google Chrome</li>
+      <li>Firefox</li>
+      <li>IE10+</li>
+    </ul>
+    <div id="grid" style="height: 500px;width: 900px"></div>
+    <script>
+        $("#grid").kendoGrid({
+          toolbar: '<button id="export" class="k-button">Export</button>',
+          dataSource: {
+              type: "odata",
+              transport: {
+                  read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+              },
+              pageSize: 10,
+              group: [ { field: "CompanyName", aggregates: [{ field: "CompanyName", aggregate: "count" }] } ],
+              aggregate: [  { field: "CompanyName", aggregate: "count" } ]
+          },
+          sortable: true,
+          pageable: {
+              refresh: true,
+              pageSizes: true,
+              buttonCount: 5
+          },
+          columns: [{
+              field: "ContactName",
+              title: "Contact Name",
+              width: 300,
+              locked: true
+          }, {
+              field: "ContactTitle",
+              title: "Contact Title",
+              width: 250
+          }, {
+              field: "CompanyName",
+              title: "Company Name",
+              groupHeaderTemplate: "Company Name: #: value# Total(#: count #)",
+              groupFooterTemplate: "Total(#: count #)",
+              footerTemplate: "Total(#: count #)",
+              width: 500
+          }
+          ],
+          columnMenu: false,
+          groupable: true,
+          resizable: true,
+          reorderable: true
+      })
+
+      $("#export").on("click", excel);
+
+      function excel() {
+        var grid = $("#grid").data("kendoGrid");
+
+        var exporter = new kendo.data.ExcelExporter({
+            columns: grid.columns,
+            dataSource: grid.dataSource,
+            allPages: true,
+            filter: true
+        });
+
+        exporter.workbook().then(function(book) {
+            kendo.saveAs(new kendo.ooxml.Workbook(book).toDataURL(), "Export.xlsx", "http://korchev:88/filesaver");
+        });
+      }
+
+    </script>
+</body>
+</html>

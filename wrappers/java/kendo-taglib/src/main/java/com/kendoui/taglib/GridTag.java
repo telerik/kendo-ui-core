@@ -78,6 +78,10 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
         setProperty("editable", value);
     }
 
+    public void setExcel(com.kendoui.taglib.grid.ExcelTag value) {
+        setProperty("excel", value);
+    }
+
     public void setFilterable(com.kendoui.taglib.grid.FilterableTag value) {
         setProperty("filterable", value);
     }
@@ -166,6 +170,10 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
 
     public void setEdit(EditFunctionTag value) {
         setEvent("edit", value.getBody());
+    }
+
+    public void setExcelExport(ExcelExportFunctionTag value) {
+        setEvent("excelExport", value.getBody());
     }
 
     public void setFilterMenuInit(FilterMenuInitFunctionTag value) {
@@ -518,6 +526,18 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
 
     public void setEdit(String value) {
         setProperty("edit", new Function(value));
+    }
+
+    public String getExcelExport() {
+        Function property = ((Function)getProperty("excelExport"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setExcelExport(String value) {
+        setProperty("excelExport", new Function(value));
     }
 
     public String getFilterMenuInit() {

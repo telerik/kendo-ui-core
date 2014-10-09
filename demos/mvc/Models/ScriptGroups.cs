@@ -24,11 +24,13 @@ namespace Kendo.Models
             ConfigurationManager.AppSettings["ANGULAR_VERSION"]
         );
 
+        private static readonly string JSZipPath = "jszip.min.js";
 
         public static IList<string> All = new string[]
         {
             jQueryPath,
             AngularPath,
+            JSZipPath,
             "kendo.all.min.js",
             "kendo.timezones.min.js"
         };

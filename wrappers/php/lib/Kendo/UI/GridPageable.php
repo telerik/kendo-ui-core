@@ -51,7 +51,7 @@ class GridPageable extends \Kendo\SerializableObject {
     }
 
     /**
-    * If set to true the pager will display a dropdown list which allows the user to pick a page size. By default the page size dropdown list is not displayed.Can be set to an array with the available page sizes.
+    * If set to true the pager will display a DropDownList which allows the user to pick a page size. By default the page size DropDownList is not displayed.Can be set to an array with the available page sizes.
     * @param boolean|array $value
     * @return \Kendo\UI\GridPageable
     */

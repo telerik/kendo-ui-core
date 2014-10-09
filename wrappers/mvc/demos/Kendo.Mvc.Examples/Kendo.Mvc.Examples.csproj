@@ -192,6 +192,7 @@
     <Compile Include="Controllers\Gantt\EventsController.cs" />
     <Compile Include="Controllers\Gantt\Keyboard_NavigationController.cs" />
     <Compile Include="Controllers\Gantt\ServerBindingController.cs" />
+    <Compile Include="Controllers\Grid\Excel_ExportController.cs" />
     <Compile Include="Controllers\Grid\Filter_Row_Controller.cs" />
     <Compile Include="Controllers\Menu\Context_MenuController.cs" />
     <Compile Include="Controllers\PivotGrid\TemplatesController.cs" />
@@ -3304,6 +3305,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\razor\Views\gantt\serverbinding.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\grid\excel_export.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\aspx\Views\grid\excel_export.aspx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

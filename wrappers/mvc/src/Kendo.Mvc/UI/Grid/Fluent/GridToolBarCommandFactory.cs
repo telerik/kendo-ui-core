@@ -4,7 +4,7 @@ namespace Kendo.Mvc.UI.Fluent
     using Kendo.Mvc.Infrastructure;
 
     /// <summary>
-    /// Defines the fluent interface for configuring toolbar command.
+    /// Defines the fluent interface for configuring toolbar commands.
     /// </summary>
     /// <typeparam name="T">The type of the model</typeparam>    
     public class GridToolBarCommandFactory<T> : IHideObjectMembers where T : class
@@ -35,6 +35,19 @@ namespace Kendo.Mvc.UI.Fluent
             settings.Commands.Add(command);
 
             settings.Grid.Editable.Enabled = true;
+
+            return new GridToolBarCommandBuilder<T>(command);
+        }
+
+        /// <summary>
+        /// Represents a command which exports the current grid data to Excel.
+        /// </summary>
+        /// <returns></returns>
+        public GridToolBarCommandBuilder<T> Excel()
+        {
+            var command = new GridToolBarExcelCommand<T>();
+
+            settings.Commands.Add(command);
 
             return new GridToolBarCommandBuilder<T>(command);
         }

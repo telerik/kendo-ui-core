@@ -91,6 +91,14 @@ public class MessagesCommandsTag extends  BaseTag  /* interfaces */ /* interface
         setProperty("edit", value);
     }
 
+    public java.lang.String getExcel() {
+        return (java.lang.String)getProperty("excel");
+    }
+
+    public void setExcel(java.lang.String value) {
+        setProperty("excel", value);
+    }
+
     public java.lang.String getSave() {
         return (java.lang.String)getProperty("save");
     }

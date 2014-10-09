@@ -1428,6 +1428,20 @@
         ]
       },
       {
+          "text": "Export to Excel",
+          "url": "grid/excel-export",
+          "new": true,
+          "title": {
+              "kendo-ui": "Exporting to MS Excel"
+          },
+          "meta": {
+              "kendo-ui": "Export Kendo UI grid as Microsoft Excel file"
+          },
+          "packages": [
+              "!offline"
+          ]
+      },
+      {
         "text": "Working Offline",
         "url": "grid/offline",
         "new": true,

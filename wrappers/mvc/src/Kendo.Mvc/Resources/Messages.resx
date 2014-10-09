@@ -762,4 +762,7 @@
   <data name="PivotFieldMenu_Title" xml:space="preserve">
     <value>Fields to include</value>
   </data>
+  <data name="Grid_Excel" xml:space="preserve">
+    <value>Export to Excel</value>
+  </data>
 </root>

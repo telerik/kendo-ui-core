@@ -2149,7 +2149,7 @@ var __meta__ = {
         },
 
         options: {
-            data: [],
+            data: null,
             schema: {
                modelBase: Model
             },
@@ -3629,7 +3629,7 @@ var __meta__ = {
                 transport = isFunction(transportOptions.read) ? transportOptions : new RemoteTransport(transportOptions);
             }
         } else {
-            transport = new LocalTransport({ data: options.data });
+            transport = new LocalTransport({ data: options.data || [] });
         }
         return transport;
     };
