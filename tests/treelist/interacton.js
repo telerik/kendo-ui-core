@@ -459,4 +459,15 @@
 
         instance.content.find(".foo").click();
     });
+
+    test("selects row on click", function() {
+        createTreeList({
+            selectable: true
+        });
+
+        var row = instance.content.find("tr:first");
+        tap(row);
+
+        ok(row.hasClass("k-state-selected"));
+    });
 })();

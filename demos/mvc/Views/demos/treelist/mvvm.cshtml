@@ -1,8 +1,9 @@
 <div id="example">
     <div class="demo-section k-header">
         <div class="box-col">
-            <h4>Add or update a record</h4>
+            <h4>Select a record</h4>
             <div data-role="treelist"
+                 data-selectable="true"
                  data-columns="[
                                  { 'field': 'Name' },
                                  { 'field': 'Position', 'width': 270 },
@@ -10,7 +11,7 @@
                  data-bind="source: employees,
                             visible: isVisible,
                             events: {
-                              save: onSave
+                              select: onSelect
                             }"
                  style="width: 480px; height: 200px"></div>
         </div>
@@ -37,8 +38,10 @@
 <script>
     var viewModel = kendo.observable({
         isVisible: true,
-        onSave: function(e) {
-            kendoConsole.log("event :: save(" + kendo.stringify(e.values, null, 4) + ")");
+        onSelect: function(e) {
+            var widget = e.sender;
+            var dataItem = widget.dataItem(widget.select());
+            kendoConsole.log("event :: select(" + kendo.stringify(dataItem, null, 4) + ")");
         },
         employees: new kendo.data.TreeListDataSource({
             data: [

@@ -474,7 +474,7 @@ var __meta__ = {
             this._layout();
             this._sortable();
             this._filterable();
-            //this._selectable();
+            this._selectable();
             this._attachEvents();
             this._toolbar();
 
@@ -582,6 +582,8 @@ var __meta__ = {
             columns: [],
             autoBind: true,
             scrollable: true,
+            selectable: false,
+            toolbar: null,
             messages: {
                 noRows: "No records to display",
                 loading: "Loading...",
@@ -593,6 +595,7 @@ var __meta__ = {
         },
 
         events: [
+            CHANGE,
             EDIT,
             SAVE,
             REMOVE,
@@ -1131,41 +1134,19 @@ var __meta__ = {
             }
         },
 
-        _rowClick: function(e) {
-           var element = $(e.currentTarget);
-
-           if (!e.ctrlKey) {
-               this.select(element);
-           } else {
-               this.clearSelection();
-           }
-       },
+        _change: function() {
+            this.trigger(CHANGE);
+        },
 
         _selectable: function() {
-            if (this.options.selectable) {
-                this.content.on(CLICK + NS, "tr", proxy(this._rowClick, this));
-            }
+            this.selectable = new kendo.ui.Selectable(this.content, {
+                filter: "tr",
+                aria: true,
+                change: proxy(this._change, this)
+            });
         },
 
         select: function(value) {
-            var element = this.content.find(value);
-            var selectedClassName = classNames.selected;
-
-            if (element.length) {
-                element
-                    .siblings(DOT + selectedClassName)
-                    .removeClass(selectedClassName)
-                    .attr("aria-selected", false)
-                    .end()
-                    .addClass(selectedClassName)
-                    .attr("aria-selected", true);
-
-                this.trigger(CHANGE);
-
-                return;
-            }
-
-            return this.content.find(DOT + selectedClassName);
         },
 
         clearSelection: function() {
