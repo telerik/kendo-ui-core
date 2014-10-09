@@ -750,6 +750,7 @@ var __meta__ = {
 
         renderVisual: function() {
             this.createVisual();
+            this.visual.chartElement = this;
 
             if (this.visual && this.parent) {
                 this.parent.appendVisual(this.visual);
