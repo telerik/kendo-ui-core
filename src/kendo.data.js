@@ -2755,6 +2755,8 @@ var __meta__ = {
 
                 data = that._readData(data);
             } else {
+                data = that._readData(data);
+
                 var items = [];
 
                 for (var idx = 0; idx < data.length; idx++) {
