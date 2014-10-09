@@ -243,6 +243,28 @@
             }
         }
 
+        paperSize[0] = unitsToPoints(paperSize[0]);
+        paperSize[1] = unitsToPoints(paperSize[1]);
+
+        if (getOption("landscape", false)) {
+            paperSize = [
+                Math.max(paperSize[0], paperSize[1]),
+                Math.min(paperSize[0], paperSize[1])
+            ];
+        }
+
+        var margins = getOption("margins");
+        if (margins) {
+            margins.left = unitsToPoints(margins.left, 0);
+            margins.top = unitsToPoints(margins.top, 0);
+            margins.right = unitsToPoints(margins.right, 0);
+            margins.bottom = unitsToPoints(margins.bottom, 0);
+            if (getOption("addMargins")) {
+                paperSize[0] += margins.left + margins.right;
+                paperSize[1] += margins.top + margins.bottom;
+            }
+        }
+
         var catalog = self.attach(new PDFCatalog());
         var pageTree = self.attach(new PDFPageTree([ 0, 0, paperSize[0], paperSize[1] ]));
         catalog.setPages(pageTree);
@@ -260,6 +282,11 @@
             // text must be vertically mirorred before drawing.
             // XXX: configurable page size.
             page.transform(1, 0, 0, -1, 0, paperSize[1]);
+
+            if (margins) {
+                page.transform(1, 0, 0, 1, margins.left, margins.top);
+                // XXX: clip to right/bottom margin?
+            }
 
             return page;
         };
@@ -526,6 +553,22 @@
 
     function mm2pt(mm) {
         return mm * (72/25.4);
+    }
+
+    function unitsToPoints(x, def) {
+        if (typeof x == "number") {
+            return x;
+        }
+        if (typeof x == "string") {
+            var m = /^\s*([0-9.]+)\s*mm$/.exec(x);
+            if (m) {
+                return mm2pt(parseFloat(m[1]));
+            }
+        }
+        if (def != null) {
+            return def;
+        }
+        throw new Error("Can't parse unit: " + x);
     }
 
     /* -----[ PDF basic objects ]----- */

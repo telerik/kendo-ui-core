@@ -61,11 +61,29 @@
             }, element);
         });
 
+        function getOption(name, defval) {
+            if (group.options.pdf && name in group.options.pdf) {
+                return group.options.pdf[name];
+            }
+            return defval;
+        }
+
         function doIt() {
             if (--count > 0) {
                 return;
             }
-            var pdf = new PDF.Document();
+            var paperSize = getOption("paperSize", "auto"), addMargins = false;
+            if (paperSize == "auto") {
+                var size = group.bbox().getSize();
+                paperSize = [ size.width, size.height ];
+                addMargins = true;
+            }
+            var pdf = new PDF.Document({
+                paperSize  : paperSize,
+                landscape  : getOption("landscape", false),
+                margins    : getOption("margins"),
+                addMargins : addMargins
+            });
             var page = pdf.addPage();
             drawElement(group, page, pdf);
             callback(pdf.render());
