@@ -980,14 +980,22 @@ var __meta__ = {
             terminal: true,
             link: {
                 pre: function(scope, element, attrs, controllers) {
-                    console.log("split view pre");
-                    attrs.defaultOptions = scope.viewOptions;
+                    scope.defaultOptions = scope.viewOptions;
                     scope._splitView = createWidget(scope, element, attrs, 'kendoMobileSplitView', 'kendoMobileSplitView');
                 },
 
-                post: function(scope) {
-                    console.log("split view post");
-                    scope._splitView.layout();
+                post: function(scope, element, attrs, controllers) {
+                    scope._splitView._layout();
+                }
+            }
+        };
+    }).directive('kendoMobilePane', function() {
+        return {
+            terminal: true,
+            link: {
+                pre: function(scope, element, attrs, controllers) {
+                    scope.defaultOptions = scope.viewOptions;
+                    scope._pane = createWidget(scope, element, attrs, 'kendoMobilePane', 'kendoMobilePane');
                 }
             }
         };
