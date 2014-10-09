@@ -14,6 +14,7 @@ namespace Kendo.Mvc.UI.Fluent
     using System.Collections;
     using System.Text;
     using System.Collections.Specialized;
+    using System.Text.RegularExpressions;
 
     /// <summary>
     /// Creates the fluent API builders of the Kendo UI widgets
@@ -1712,6 +1713,7 @@ namespace Kendo.Mvc.UI.Fluent
 
     public class WidgetFactory<TModel> : WidgetFactory
     {
+        private static readonly Regex StringFormatExpression = new Regex(@"(?<=\{\d:)(.)*(?=\})", RegexOptions.Compiled);
         private readonly string minimumValidator;
         private readonly string maximumValidator;
 
@@ -1762,7 +1764,7 @@ namespace Kendo.Mvc.UI.Fluent
             return NumericTextBox<TValue>()
                     .Name(GetName(expression))
                     .ModelMetadata(metadata)
-                    .Format(metadata.EditFormatString)
+                    .Format(ExtractEditFormat(metadata.EditFormatString))
                     .Value((Nullable<TValue>)metadata.Model)
                     .Min(GetRangeValidationParameter<TValue>(validators, minimumValidator))
                     .Max(GetRangeValidationParameter<TValue>(validators, maximumValidator));
@@ -1785,7 +1787,7 @@ namespace Kendo.Mvc.UI.Fluent
             return NumericTextBox<TValue>()
                     .Name(GetName(expression))
                     .ModelMetadata(metadata)
-                    .Format(metadata.EditFormatString)
+                    .Format(ExtractEditFormat(metadata.EditFormatString))
                     .Value((Nullable<TValue>)ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model)
                     .Min(GetRangeValidationParameter<TValue>(validators, minimumValidator))
                     .Max(GetRangeValidationParameter<TValue>(validators, maximumValidator));
@@ -1945,7 +1947,7 @@ namespace Kendo.Mvc.UI.Fluent
             return DateTimePicker()
                     .Name(GetName(expression))
                     .ModelMetadata(metadata)
-                    .Format(metadata.EditFormatString)
+                    .Format(ExtractEditFormat(metadata.EditFormatString))
                     .Value(metadata.Model as DateTime?)
                     .Min(GetRangeValidationParameter<DateTime>(validators, minimumValidator) ?? Kendo.Mvc.UI.DateTimePicker.defaultMinDate)
                     .Max(GetRangeValidationParameter<DateTime>(validators, maximumValidator) ?? Kendo.Mvc.UI.DateTimePicker.defaultMaxDate);
@@ -1967,7 +1969,7 @@ namespace Kendo.Mvc.UI.Fluent
             return DateTimePicker()
                     .Name(GetName(expression))
                     .ModelMetadata(metadata)
-                    .Format(metadata.EditFormatString)
+                    .Format(ExtractEditFormat(metadata.EditFormatString))
                     .Value(metadata.Model as DateTime?)
                     .Min(GetRangeValidationParameter<DateTime>(validators, minimumValidator) ?? Kendo.Mvc.UI.DateTimePicker.defaultMinDate)
                     .Max(GetRangeValidationParameter<DateTime>(validators, maximumValidator) ?? Kendo.Mvc.UI.DateTimePicker.defaultMaxDate);
@@ -2008,7 +2010,7 @@ namespace Kendo.Mvc.UI.Fluent
             return DatePicker()
                     .Name(GetName(expression))
                     .ModelMetadata(metadata)
-                    .Format(metadata.EditFormatString)
+                    .Format(ExtractEditFormat(metadata.EditFormatString))
                     .Value(metadata.Model as DateTime?)
                     .Min(GetRangeValidationParameter<DateTime>(validators, minimumValidator) ?? Kendo.Mvc.UI.DatePicker.defaultMinDate)
                     .Max(GetRangeValidationParameter<DateTime>(validators, maximumValidator) ?? Kendo.Mvc.UI.DatePicker.defaultMaxDate);
@@ -2030,7 +2032,7 @@ namespace Kendo.Mvc.UI.Fluent
             return DatePicker()
                     .Name(GetName(expression))
                     .ModelMetadata(metadata)
-                    .Format(metadata.EditFormatString)
+                    .Format(ExtractEditFormat(metadata.EditFormatString))
                     .Value(metadata.Model as DateTime?)
                     .Min(GetRangeValidationParameter<DateTime>(validators, minimumValidator) ?? Kendo.Mvc.UI.DatePicker.defaultMinDate)
                     .Max(GetRangeValidationParameter<DateTime>(validators, maximumValidator) ?? Kendo.Mvc.UI.DatePicker.defaultMaxDate);
@@ -2052,7 +2054,7 @@ namespace Kendo.Mvc.UI.Fluent
             return TimePicker()
                     .Name(GetName(expression))
                     .ModelMetadata(metadata)
-                    .Format(metadata.EditFormatString)
+                    .Format(ExtractEditFormat(metadata.EditFormatString))
                     .Value(metadata.Model as DateTime?)
                     .Min(GetRangeValidationParameter<DateTime>(validators, minimumValidator) ?? DateTime.Today)
                     .Max(GetRangeValidationParameter<DateTime>(validators, maximumValidator) ?? DateTime.Today);
@@ -2074,7 +2076,7 @@ namespace Kendo.Mvc.UI.Fluent
             return TimePicker()
                     .Name(GetName(expression))
                     .ModelMetadata(metadata)
-                    .Format(metadata.EditFormatString)
+                    .Format(ExtractEditFormat(metadata.EditFormatString))
                     .Value(metadata.Model as DateTime?)
                     .Min(GetRangeValidationParameter<DateTime>(validators, minimumValidator) ?? DateTime.Today)
                     .Max(GetRangeValidationParameter<DateTime>(validators, maximumValidator) ?? DateTime.Today);
@@ -2099,7 +2101,7 @@ namespace Kendo.Mvc.UI.Fluent
             return TimePicker()
                     .Name(GetName(expression))
                     .ModelMetadata(metadata)
-                    .Format(metadata.EditFormatString)
+                    .Format(ExtractEditFormat(metadata.EditFormatString))
                     .Value(metadata.Model as TimeSpan?)
                     .Min(minimum.HasValue ? new DateTime(minimum.Value.Ticks) : DateTime.Today)
                     .Max(maximum.HasValue ? new DateTime(maximum.Value.Ticks) : DateTime.Today);
@@ -2124,7 +2126,7 @@ namespace Kendo.Mvc.UI.Fluent
             return TimePicker()
                     .Name(GetName(expression))
                     .ModelMetadata(metadata)
-                    .Format(metadata.EditFormatString)
+                    .Format(ExtractEditFormat(metadata.EditFormatString))
                     .Value(metadata.Model as TimeSpan?)
                     .Min(minimum.HasValue ? new DateTime(minimum.Value.Ticks) : DateTime.Today)
                     .Max(maximum.HasValue ? new DateTime(maximum.Value.Ticks) : DateTime.Today);
@@ -2481,6 +2483,16 @@ namespace Kendo.Mvc.UI.Fluent
                 }
             }
             return null;
+        }
+
+        private string ExtractEditFormat(string format)
+        {
+            if (string.IsNullOrEmpty(format))
+            {
+                return string.Empty;
+            }
+            
+            return StringFormatExpression.Match(format).ToString();
         }
     }
 }
