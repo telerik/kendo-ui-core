@@ -255,7 +255,6 @@
         var backgroundRepeat = getPropertyValue(style, "background-repeat");
         var backgroundPosition = getPropertyValue(style, "background-position");
         var backgroundOrigin = getPropertyValue(style, "background-origin");
-        var fontSize = parseFloat(getPropertyValue(style, "font-size"));
 
         if (element.currentStyle) {
             // IE9 hacks.  getPropertyValue won't return the correct
@@ -632,8 +631,7 @@
                 break;
             }
         }
-        children = children.sort(zIndexSort);
-        children.forEach(function(el){
+        children.sort(zIndexSort).forEach(function(el){
             renderElement(el, group);
         });
 

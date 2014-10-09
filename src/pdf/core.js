@@ -690,20 +690,18 @@
         this.compress = compress;
     }, {
         render: function(out) {
-            var data = this.data.get();
-            if (global.pako && this.compress) {
-                if (!this.props.Filter) {
-                    this.props.Filter = [];
-                } else if (!(this.props.Filter instanceof Array)) {
-                    this.props.Filter = [ this.props.Filter ];
+            var data = this.data.get(), props = this.props;
+            if (this.compress && global.pako) {
+                if (!props.Filter) {
+                    props.Filter = [];
+                } else if (!(props.Filter instanceof Array)) {
+                    props.Filter = [ props.Filter ];
                 }
-                this.props.Filter.unshift(PDFName.get("FlateDecode"));
+                props.Filter.unshift(PDFName.get("FlateDecode"));
                 data = global.pako.deflate(data);
             }
-            if (this.props.Length == null) {
-                this.props.Length = data.length;
-            }
-            out(new PDFDictionary(this.props), " stream", NL);
+            props.Length = data.length;
+            out(new PDFDictionary(props), " stream", NL);
             out.writeData(data);
             out(NL, "endstream");
         }
