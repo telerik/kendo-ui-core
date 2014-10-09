@@ -708,7 +708,7 @@
             getPropertyValue(style, "font-style"),
             getPropertyValue(style, "font-variant"),
             getPropertyValue(style, "font-weight"),
-            fontSize + "/" + lineHeight,
+            fontSize, // no need for line height here; it breaks layout in FF
             getPropertyValue(style, "font-family")
         ].join(" ");
 
