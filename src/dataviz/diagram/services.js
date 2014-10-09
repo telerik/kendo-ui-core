@@ -879,6 +879,7 @@
                     }
                 } else if (key === 46 || key === 8) {// del: deletion
                     diagram.remove(diagram.select(), true);
+                    diagram.destroyToolBar();
                     return true;
                 } else if (key === 27) {// ESC: stop any action
                     this._discardNewConnection();
