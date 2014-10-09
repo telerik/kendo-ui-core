@@ -498,7 +498,7 @@ var __meta__ = {
                         cell.setAttribute("role", "gridcell");
                         cell.setAttribute("aria-selected", false);
 
-                        collection.addTimeSlot(cell, start, end);
+                        collection.addTimeSlot(cell, start, end, true);
 
                         time += interval;
                     }
@@ -875,18 +875,13 @@ var __meta__ = {
 
             var group = this.groups[groupIndex];
 
-           // var start = kendo.date.toUtcTime(event.start) + distance;
             var start = new Date(event.start.getTime() + distance);
 
-            var end = new Date(start + event.duration());
-
-            //start = kendo.timezone.toLocalDate(start);
-
-            //end = kendo.timezone.toLocalDate(end);
+            var end = new Date(+start + event.duration());
 
             var adjustedEvent = this._adjustEvent(event.clone({ start: start, end: end }));
 
-            var ranges = group.ranges(adjustedEvent.occurrence.start, adjustedEvent.occurrence.end, false, false);
+            var ranges = group.slotRanges(adjustedEvent.occurrence, false);
 
             this._removeMoveHint();
 
@@ -900,43 +895,23 @@ var __meta__ = {
                 var range = ranges[rangeIndex];
                 var startSlot = range.start;
 
-
-                console.log("occurance start: ", adjustedEvent.occurrence.start, " occurrence end: ", adjustedEvent.occurrence.end);
-                var hint = this._createEventElement(adjustedEvent.occurrence ,event, !multiday, false, false);
+                var hint = this._createEventElement(adjustedEvent.occurrence ,event, true, false, false);
 
                 hint.addClass("k-event-drag-hint");
 
+                var rect = range.innerRect(adjustedEvent.occurrence.start, adjustedEvent.occurrence.end, this.options.snap);
+                var width = rect.right - rect.left - 2;
 
-
-                //if (multiday) {
-                 ///   css.width = range.innerWidth() - 4;
-                //} else {
-               //var start = event.startTime || event.start;
-               //var end = event.endTime || event.end;
-
-               //var rect = slotRange.outerRect(start, end, false);
-               //rect.top = slotRange.start.offsetTop;
-               var rect = range.outerRect(adjustedEvent.occurrence.start, adjustedEvent.occurrence.end, this.options.snap);
-               var width = rect.right - rect.left -2;
-
-               if (width < 0) {
+                if (width < 0) {
                    width = 0;
-               }
-
-               //element
-               //    .css({
-               //        left: rect.left,
-               //        width: width
-               //    });
+                }
 
                 var css = {
                     left: rect.left,
-                    top: startSlot.offsetTop
+                    top: startSlot.offsetTop,
+                    height: startSlot.offsetHeight - 2,
+                    width: width
                 };
-                    css.top = rect.top;
-                    css.height = rect.bottom - rect.top;
-                    css.width = width;
-               // }
 
                 hint.css(css);
 

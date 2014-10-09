@@ -1608,8 +1608,8 @@
 
         draggable.trigger("dragstart", {
             currentTarget: target,
-            x: { location: offset.left },
-            y: { location: offset.top }
+            x: { startLocation: offset.left },
+            y: { startLocation: offset.top }
         });
     }
 
@@ -1636,8 +1636,8 @@
 
         draggable.trigger("dragend", {
             currentTarget: target,
-            x: { location: offset.left },
-            y: { location: offset.top }
+            x: { startLocation: offset.left },
+            y: { startLocation: offset.top }
         });
     }
 })();

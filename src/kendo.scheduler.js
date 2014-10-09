@@ -2072,9 +2072,9 @@ var __meta__ = {
 
                         event = that.occurrenceByUid(eventElement.attr(kendo.attr("uid")));
 
-                        startSlot = view._slotByPosition(e.x.location, e.y.location);
+                        startSlot = view._slotByPosition(e.x.startLocation, e.y.startLocation);
 
-                        startTime = startSlot.startOffset(e.x.location, e.y.location, that.options.snap);
+                        startTime = startSlot.startOffset(e.x.startLocation, e.y.startLocation, that.options.snap);
 
                         endSlot = startSlot;
 
@@ -2252,14 +2252,14 @@ var __meta__ = {
                             }
                         } else if (!slot.isDaySlot && slot.end - kendo.date.toUtcTime(event.start) >= view._timeSlotInterval()) {
                             //update needed
-                            endTime = slot.horizontalEndOffset(e.x.location, e.y.location, that.options.snap);
+                            endTime = slot.endOffset(e.x.location, e.y.location, that.options.snap);
                         }
                     } else if (dir == "west") {
                         if (slot.isDaySlot && kendo.date.toUtcTime(kendo.date.getDate(event.end)) >= kendo.date.toUtcTime(kendo.date.getDate(slot.startDate()))) {
                             startTime = slot.startOffset(e.x.location, e.y.location, that.options.snap);
                         } else if (!slot.isDaySlot && kendo.date.toUtcTime(event.end) - slot.start >= view._timeSlotInterval()) {
                             //update needed
-                            startTime = slot.horizontalStartOffset(e.x.location, e.y.location, that.options.snap);
+                            startTime = slot.startOffset(e.x.location, e.y.location, that.options.snap);
                         }
                     }
 

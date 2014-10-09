@@ -826,8 +826,8 @@ var __meta__ = {
         events: function() {
             return this._events;
         },
-        addTimeSlot: function(element, start, end) {
-            var slot = new TimeSlot(element, start, end, this._groupIndex, this._collectionIndex, this._slots.length);
+        addTimeSlot: function(element, start, end, isHorizontal) {
+            var slot = new TimeSlot(element, start, end, this._groupIndex, this._collectionIndex, this._slots.length, isHorizontal);
 
             this._slots.push(slot);
         },
@@ -891,6 +891,12 @@ var __meta__ = {
     });
 
     var TimeSlot = Slot.extend({
+        init: function(element, start, end, groupIndex, collectionIndex, index, isHorizontal) {
+            Slot.fn.init.apply(this, arguments);
+
+            this.isHorizontal = isHorizontal ? true : false;
+        },
+
         refresh: function() {
             this.offsetTop = this.element.offsetTop;
         },
@@ -918,11 +924,18 @@ var __meta__ = {
 
             var offset = $(this.element).offset();
 
-            var difference = y - offset.top;
-
             var duration = this.end - this.start;
+            var difference;
+            var time;
 
-            var time = Math.floor(duration * ( difference / this.offsetHeight));
+            if (this.isHorizontal) {
+                //need update
+                difference =  x - offset.left;
+                time = Math.floor(duration * ( difference / this.offsetWidth));
+            } else {
+                difference = y - offset.top;
+                time = Math.floor(duration * ( difference / this.offsetHeight));
+            }
 
             return this.start + time;
         },
@@ -934,44 +947,19 @@ var __meta__ = {
 
             var offset = $(this.element).offset();
 
-            var difference = y - offset.top;
-
             var duration = this.end - this.start;
+            var difference;
+            var time;
 
-            var time = Math.floor(duration * ( difference / this.offsetHeight));
 
-            return this.start + time;
-        },
-
-        //need update
-        horizontalStartOffset: function(x, y, snap) {
-            if (snap) {
-                return this.start;
+            if (this.isHorizontal) {
+                //need update
+                difference = x - offset.left;
+                time = Math.floor(duration * ( difference / this.offsetWidth));
+            } else {
+                difference = y - offset.top;
+                time = Math.floor(duration * ( difference / this.offsetHeight));
             }
-
-            var offset = $(this.element).offset();
-
-            var difference = x - offset.left;
-
-            var duration = this.end - this.start;
-
-            var time = Math.floor(duration * ( difference / this.offsetWidth));
-
-            return this.start + time;
-        },
-        //need update
-        horizontalEndOffset: function(x, y, snap) {
-            if (snap) {
-                return this.end;
-            }
-
-            var offset = $(this.element).offset();
-
-            var difference = x - offset.left;
-
-            var duration = this.end - this.start;
-
-            var time = Math.floor(duration * ( difference / this.offsetWidth));
 
             return this.start + time;
         }
