@@ -253,20 +253,25 @@
             ];
         }
 
-        var margins = getOption("margins");
-        if (margins) {
-            margins.left = unitsToPoints(margins.left, 0);
-            margins.top = unitsToPoints(margins.top, 0);
-            margins.right = unitsToPoints(margins.right, 0);
-            margins.bottom = unitsToPoints(margins.bottom, 0);
-            if (getOption("addMargins")) {
-                paperSize[0] += margins.left + margins.right;
-                paperSize[1] += margins.top + margins.bottom;
+        var margin = getOption("margin");
+        if (margin) {
+            margin.left = unitsToPoints(margin.left, 0);
+            margin.top = unitsToPoints(margin.top, 0);
+            margin.right = unitsToPoints(margin.right, 0);
+            margin.bottom = unitsToPoints(margin.bottom, 0);
+            if (getOption("addMargin")) {
+                paperSize[0] += margin.left + margin.right;
+                paperSize[1] += margin.top + margin.bottom;
             }
         }
 
-        var contentWidth = paperSize[0] - margins.left - margins.right;
-        var contentHeight = paperSize[1] - margins.top - margins.bottom;
+        var contentWidth = paperSize[0];
+        var contentHeight = paperSize[1];
+
+        if (margin) {
+            contentWidth -= margin.left + margin.right;
+            contentHeight -= margin.top + margin.bottom;
+        }
 
         var catalog = self.attach(new PDFCatalog());
         var pageTree = self.attach(new PDFPageTree([ 0, 0, paperSize[0], paperSize[1] ]));
@@ -286,8 +291,8 @@
             // XXX: configurable page size.
             page.transform(1, 0, 0, -1, 0, paperSize[1]);
 
-            if (margins) {
-                page.transform(1, 0, 0, 1, margins.left, margins.top);
+            if (margin) {
+                page.transform(1, 0, 0, 1, margin.left, margin.top);
                 // XXX: clip to right/bottom margin.  Make this optional?
                 page.rect(0, 0, contentWidth, contentHeight);
                 page.clip();

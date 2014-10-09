@@ -73,17 +73,17 @@
             if (--count > 0) {
                 return;
             }
-            var paperSize = getOption("paperSize", "auto"), addMargins = false;
+            var paperSize = getOption("paperSize", "auto"), addMargin = false;
             if (paperSize == "auto") {
                 var size = group.bbox().getSize();
                 paperSize = [ size.width, size.height ];
-                addMargins = true;
+                addMargin = true;
             }
             var pdf = new PDF.Document({
                 paperSize  : paperSize,
                 landscape  : getOption("landscape", false),
-                margins    : getOption("margins"),
-                addMargins : addMargins
+                margin     : getOption("margin"),
+                addMargin  : addMargin
             });
             var page = pdf.addPage();
             drawElement(group, page, pdf);
