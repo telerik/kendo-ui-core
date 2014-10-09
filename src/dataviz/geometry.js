@@ -322,6 +322,29 @@
         );
     };
 
+    Rect.intersect = function(a, b) {
+        a = { left   : a.topLeft().x,
+              top    : a.topLeft().y,
+              right  : a.bottomRight().x,
+              bottom : a.bottomRight().y };
+
+        b = { left   : b.topLeft().x,
+              top    : b.topLeft().y,
+              right  : b.bottomRight().x,
+              bottom : b.bottomRight().y };
+
+        if (a.left <= b.right &&
+            b.left <= a.right &&
+            a.top <= b.bottom &&
+            b.top <= a.bottom)
+        {
+            return Rect.fromPoints(
+                new Point(math.max(a.left, b.left), math.max(a.top, b.top)),
+                new Point(math.min(a.right, b.right), math.min(a.bottom, b.bottom))
+            );
+        }
+    };
+
     var Circle = Class.extend({
         init: function(center, radius) {
             this.setCenter(center || new Point());

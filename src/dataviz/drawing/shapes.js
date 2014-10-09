@@ -139,6 +139,22 @@
             } else {
                 return this.options.get("opacity");
             }
+        },
+
+        bbox: function(transformation) {
+            var box = this._bbox(transformation);
+            if (box) {
+                var clip = this.clip();
+                return clip ? Rect.intersect(box, clip.rawBBox()) : box;
+            }
+        },
+
+        rawBBox: function() {
+            var box = this._rawBBox();
+            if (box) {
+                var clip = this.clip();
+                return clip ? Rect.intersect(box, clip.rawBBox()) : box;
+            }
         }
     });
 
@@ -217,11 +233,11 @@
             return this;
         },
 
-        bbox: function(transformation) {
+        _bbox: function(transformation) {
             return elementsBoundingBox(this.children, true, this.currentTransform(transformation));
         },
 
-        rawBBox: function() {
+        _rawBBox: function() {
             return elementsBoundingBox(this.children, false);
         },
 
@@ -271,12 +287,12 @@
             return new g.Rect(pos, [size.width, size.height]);
         },
 
-        bbox: function(transformation) {
+        _bbox: function(transformation) {
             var combinedMatrix = toMatrix(this.currentTransform(transformation));
             return this.rect().bbox(combinedMatrix);
         },
 
-        rawBBox: function() {
+        _rawBBox: function() {
             return this.rect().bbox();
         }
     });
@@ -295,7 +311,7 @@
             }
         },
 
-        bbox: function(transformation) {
+        _bbox: function(transformation) {
             var combinedMatrix = toMatrix(this.currentTransform(transformation));
             var rect = this._geometry.bbox(combinedMatrix);
             var strokeWidth = this.options.get("stroke.width");
@@ -306,7 +322,7 @@
             return rect;
         },
 
-        rawBBox: function() {
+        _rawBBox: function() {
             return this._geometry.bbox();
         }
     });
@@ -325,7 +341,7 @@
             }
         },
 
-        bbox: function(transformation) {
+        _bbox: function(transformation) {
             var combinedMatrix = toMatrix(this.currentTransform(transformation));
             var rect = this.geometry().bbox(combinedMatrix);
             var strokeWidth = this.options.get("stroke.width");
@@ -337,7 +353,7 @@
             return rect;
         },
 
-        rawBBox: function() {
+        _rawBBox: function() {
             return this.geometry().bbox();
         },
 
@@ -517,9 +533,9 @@
             return this;
         },
 
-        bbox: function(transformation) {
+        _bbox: function(transformation) {
             var combinedMatrix = toMatrix(this.currentTransform(transformation));
-            var boundingBox = this._bbox(combinedMatrix);
+            var boundingBox = this._computeBbox(combinedMatrix);
             var strokeWidth = this.options.get("stroke.width");
             if (strokeWidth) {
                 expandRect(boundingBox, strokeWidth / 2);
@@ -527,11 +543,11 @@
             return boundingBox;
         },
 
-        rawBBox: function() {
-            return this._bbox();
+        _rawBBox: function() {
+            return this._computeBbox();
         },
 
-        _bbox: function(matrix) {
+        _computeBbox: function(matrix) {
             var segments = this.segments;
             var length = segments.length;
             var boundingBox;
@@ -610,11 +626,11 @@
             return this;
         },
 
-        bbox: function(transformation) {
+        _bbox: function(transformation) {
             return elementsBoundingBox(this.paths, true, this.currentTransform(transformation));
         },
 
-        rawBBox: function() {
+        _rawBBox: function() {
             return elementsBoundingBox(this.paths, false);
         }
     });
@@ -639,12 +655,12 @@
             }
         },
 
-        bbox: function(transformation) {
+        _bbox: function(transformation) {
             var combinedMatrix = toMatrix(this.currentTransform(transformation));
             return this._rect.bbox(combinedMatrix);
         },
 
-        rawBBox: function() {
+        _rawBBox: function() {
             return this._rect.bbox();
         }
     });
