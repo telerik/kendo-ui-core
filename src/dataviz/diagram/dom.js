@@ -2031,6 +2031,15 @@
 
                 return connection;
             },
+            _addConnection: function (connection, undoable) {
+                if (this.connectionsDataSource) {
+                    this.connectionsDataSource.add(connection.dataItem);
+                    this.connectionsDataSource.sync();
+                    this._connectionsDataMap[connection.dataItem.id] = connection;
+                }
+
+                return this.addConnection(connection, undoable);
+            },
             /**
              * Adds shape to the diagram.
              * @param item Shape, Point. If point is passed it will be created new Shape and positioned at that point.
@@ -2074,28 +2083,22 @@
 
                 return shape;
             },
+
+            _addShape: function (shape, options) {
+                if (this.dataSource) {
+                    this.dataSource.add(shape.dataItem);
+                    this.dataSource.sync();
+                    this._dataMap[shape.dataItem.id] = shape;
+                }
+
+                return this.addShape(shape, options);
+            },
             /**
              * Removes items (or single item) from the diagram.
              * @param items DiagramElement, Array of Items.
              * @param undoable.
              */
-            remove: function(item, undoable) {
-                var dataSource = this.dataSource;
-
-                if (item instanceof Connection) {
-                    dataSource = this.connectionsDataSource;
-                }
-
-                if (item.length) {
-                    this.destroyToolBar();
-                } else {
-                    dataSource.remove(item.dataItem);
-                }
-
-                this._remove(item, undoable);
-            },
-
-            _remove: function (items, undoable) {
+            remove: function (items, undoable) {
                 var isMultiple = isArray(items);
 
                 if (isUndefined(undoable)) {
@@ -2121,6 +2124,26 @@
                     removed: isMultiple ? items : [items]
                 });
             },
+
+            _remove: function(item, undoable) {
+                var dataSource = this.dataSource;
+
+                if (item instanceof Connection) {
+                    dataSource = this.connectionsDataSource;
+                }
+
+                if (item.length) {
+                    this.destroyToolBar();
+                } else {
+                    dataSource.remove(item.dataItem);
+                    dataSource.sync();
+                }
+
+                if (defined(this.dataSource)) {
+                    this.remove(item, undoable);
+                }
+            },
+
             /**
              * Executes the next undoable action on top of the undo stack if any.
              */
@@ -2987,8 +3010,9 @@
                 this._selectedItems = [];
                 this.connections = [];
                 this._dataMap = {};
-                this._inactiveShapeItems = [];
                 this._connectionsDataMap = {};
+                this._inactiveShapeItems = [];
+                this._inactiveConnectionItems = [];
                 this.undoRedoService = new UndoRedoService();
                 this.id = diagram.randomId();
             },
@@ -3041,7 +3065,7 @@
 
             _refreshShapes: function(e) {
                 if (e.action === "remove") {
-                    // remove shapes
+                    this._removeShapes(e.items);
                 } else if (e.action === "itemchange") {
                     if (this._shouldRefresh) {
                         this._updateShapes(e.items);
@@ -3060,6 +3084,13 @@
                     if (this.options.layout) {
                         this.layout(this.options.layout);
                     }
+                }
+            },
+
+            _removeShapes: function(items) {
+                for (var i = 0; i < items.length; i++) {
+                    var dataItem = items[i];
+                    this._dataMap[dataItem.id] = null;
                 }
             },
 
@@ -3106,6 +3137,10 @@
             _refreshConnections: function(e) {
                 if (e.action === "remove") {
                     this._removeConnections(e.items);
+                } else if (e.action === "add") {
+                    this._inactiveConnectionItems = this._inactiveConnectionItems.concat(e.items);
+                } else if (e.action === "sync") {
+                    this._syncShapes(e.items);
                 } else if (e.action === "itemchange") {
                     if (this._shouldRefresh) {
                         this._updateConnections(e.items);
@@ -3118,11 +3153,30 @@
             _removeConnections: function(items) {
                 for (var i = 0; i < items.length; i++) {
                     var dataItem = items[i];
-
-                    var connection = this._connectionsDataMap[dataItem.id];
-                    this._remove(connection, false);
                     this._connectionsDataMap[dataItem.id] = null;
                 }
+            },
+
+            _syncConnections: function(items) {
+                var inactiveItems = [],
+                    i, y, item, inactiveConnectionDataMap, isActive = false;
+
+                for (y = 0; y < this._inactiveConnectionItems.length; y++) {
+                    inactiveConnectionDataMap = this._inactiveConnectionItems[y];
+                    for (i = 0; i < items.length; i++) {
+                        item = items[i];
+                        if (inactiveConnectionDataMap.uid === item.uid) {
+                            isActive = true;
+                            break;
+                        }
+                    }
+
+                    if (!isActive) {
+                        inactiveItems.push(inactiveConnectionDataMap);
+                        isActive = false;
+                    }
+                }
+                this._inactiveConnectionDataMaps = inactiveItems;
             },
 
             _updateConnections: function(items) {
@@ -3482,7 +3536,7 @@
                 this.diagram = diagram;
             },
             "delete": function() {
-                this.diagram.remove(this.selectedElement());
+                this.diagram._remove(this.selectedElement(), true);
                 this.diagram.destroyToolBar();
             },
             edit: function() {

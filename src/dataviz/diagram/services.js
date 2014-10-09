@@ -241,10 +241,10 @@
                 this.title = "Delete connection";
             },
             undo: function () {
-                this.diagram.addConnection(this.connection, false);
+                this.diagram._addConnection(this.connection, false);
             },
             redo: function () {
-                this.diagram.remove(this.connection, false);
+                this.diagram._remove(this.connection, false);
             }
         });
 
@@ -255,12 +255,12 @@
                 this.title = "Deletion";
             },
             undo: function () {
-                this.diagram.addShape(this.shape, {undoable: false});
+                this.diagram._addShape(this.shape, { undoable: false });
                 this.shape.select(false);
             },
             redo: function () {
                 this.shape.select(false);
-                this.diagram.remove(this.shape, false);
+                this.diagram._remove(this.shape, false);
             }
         });
         /**
