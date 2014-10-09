@@ -38,18 +38,20 @@
     return;
 
     function pushTextDecoration(style) {
-        function Tmp(parent){
-            this._up = parent;
-        }
-        Tmp.prototype = textDecorations;
-        textDecorations = new Tmp(textDecorations);
         var decoration = getPropertyValue(style, "text-decoration");
-        if (decoration) {
-            decoration = decoration.split(/\s+/g);
+        if (decoration && decoration != "none") {
+            var Tmp = function(parent) {
+                this._up = parent;
+            };
+            Tmp.prototype = textDecorations;
+            textDecorations = new Tmp(textDecorations);
             var color = getPropertyValue(style, "color");
-            decoration.forEach(function(name){
-                textDecorations[name] = color;
+            decoration.split(/\s+/g).forEach(function(name){
+                if (!textDecorations[name]) {
+                    textDecorations[name] = color;
+                }
             });
+            return true;
         }
     }
 
@@ -110,9 +112,9 @@
         if (transform == "none") {
             return null;
         }
-        var origin = getPropertyValue(style, "transform-origin");
         var matrix = /^\s*matrix\(\s*(.*?)\s*\)\s*$/.exec(transform);
         if (matrix) { // IE9 doesn't support CSS transforms
+            var origin = getPropertyValue(style, "transform-origin");
             matrix = matrix[1].split(/\s*,\s*/g).map(parseFloat);
             origin = origin.split(/\s+/g).map(parseFloat);
             return {
@@ -317,9 +319,7 @@
             }
         })();
 
-        pushTextDecoration(style);
-        renderContents(element, group);
-        popTextDecoration();
+        renderContents(element, style, group);
 
         return group; // only utility functions after this line.
 
@@ -605,12 +605,14 @@
         return parseFloat(za) - parseFloat(zb);
     }
 
-    function renderContents(element, group) {
+    function renderContents(element, style, group) {
         switch (element.tagName.toLowerCase()) {
           case "img":
             renderImage(element, group);
             return;
         }
+
+        var hasDecoration = pushTextDecoration(style);
 
         var children = [];
         for (var i = element.firstChild; i; i = i.nextSibling) {
@@ -634,6 +636,10 @@
         children.forEach(function(el){
             renderElement(el, group);
         });
+
+        if (hasDecoration) {
+            popTextDecoration();
+        }
     }
 
     function renderText(element, node, group) {
