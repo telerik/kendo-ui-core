@@ -32,8 +32,30 @@
         cont(group);
     };
 
+    var textDecorations = {};
+
     // only function definitions after this line.
     return;
+
+    function pushTextDecoration(style) {
+        function Tmp(parent){
+            this._up = parent;
+        }
+        Tmp.prototype = textDecorations;
+        textDecorations = new Tmp(textDecorations);
+        var decoration = getPropertyValue(style, "text-decoration");
+        if (decoration) {
+            decoration = decoration.split(/\s+/g);
+            var color = getPropertyValue(style, "color");
+            decoration.forEach(function(name){
+                textDecorations[name] = color;
+            });
+        }
+    }
+
+    function popTextDecoration() {
+        textDecorations = textDecorations._up;
+    }
 
     function getComputedStyle(element) {
         return window.getComputedStyle(element);
@@ -295,13 +317,9 @@
             }
         })();
 
+        pushTextDecoration(style);
         renderContents(element, group);
-
-        // underline / strike-through should happen after the contents
-        // has been rendered.
-        for (i = 0; i < boxes.length; ++i) {
-            decorate(boxes[i]);
-        }
+        popTextDecoration();
 
         return group; // only utility functions after this line.
 
@@ -510,29 +528,6 @@
                     repeatX();
                     rect.origin.y += img.height;
                 }
-            }
-        }
-
-        function decorate(box) {
-            switch (getPropertyValue(style, "text-decoration")) {
-              case "underline":
-                line(box.bottom);
-                break;
-              case "line-through":
-                line(box.bottom - box.height / 2.7);
-                break;
-            }
-            function line(ypos) {
-                var width = fontSize / 12;
-                var path = new drawing.Path({ stroke: {
-                    width: width,
-                    color: getPropertyValue(style, "color")
-                }});
-
-                ypos -= width;
-                path.moveTo(box.left, ypos)
-                    .lineTo(box.right, ypos);
-                group.append(path);
             }
         }
 
@@ -755,6 +750,28 @@
                 fill: { color: color }
             });
             group.append(text);
+            decorate(box);
+        }
+
+        function decorate(box) {
+            /*jshint -W069 */// aaaaargh!  JSHate.
+            line(textDecorations["underline"], box.bottom);
+            line(textDecorations["line-through"], box.bottom - box.height / 2.7);
+            line(textDecorations["overline"], box.top);
+            function line(color, ypos) {
+                if (color) {
+                    var width = fontSize / 12;
+                    var path = new drawing.Path({ stroke: {
+                        width: width,
+                        color: color
+                    }});
+
+                    ypos -= width;
+                    path.moveTo(box.left, ypos)
+                        .lineTo(box.right, ypos);
+                    group.append(path);
+                }
+            }
         }
 
         while (!doChunk()) {}
