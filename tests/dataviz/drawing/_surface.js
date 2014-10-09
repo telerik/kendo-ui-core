@@ -134,4 +134,50 @@ function baseSurfaceEventTests(name, TSurface) {
         $(surface._root.childNodes[0].element)
             .trigger("click", { toElement: surface._root.childNodes[0].element });
     });
+
+    // ------------------------------------------------------------
+    var node;
+
+    module("Surface Base Tests / " + name + " / Events / eventTarget", {
+        setup: function() {
+            container = $("<div>").appendTo(QUnit.fixture);
+            surface = new TSurface(container);
+            surface.draw(new Group());
+            node = surface._root.childNodes[0];
+        },
+        teardown: function() {
+            container.remove();
+        }
+    });
+
+    test("eventTarget locates node", function() {
+        var e = { target: node.element };
+        equal(surface.eventTarget(e), node);
+    });
+
+    test("eventTarget locates node from nested element", function() {
+        var nested = $("<div>").appendTo(node.element);
+        var e = { target: nested[0] };
+        equal(surface.eventTarget(e), node);
+    });
+
+    test("eventTarget locates node for touch events", function() {
+        var e = { touch: { initialTouch : node.element } };
+        equal(surface.eventTarget(e), node);
+    });
+
+    test("evetTarget returns undefined for root element", function() {
+        var e = { target: surface._root.element };
+        equal(surface.eventTarget(e), undefined);
+    });
+
+    test("evetTarget returns undefined for surface element", function() {
+        var e = { target: surface.element };
+        equal(surface.eventTarget(e), undefined);
+    });
+
+    test("evetTarget returns undefined for external elements", function() {
+        var e = { target: document.body };
+        equal(surface.eventTarget(e), undefined);
+    });
 }

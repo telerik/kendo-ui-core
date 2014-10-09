@@ -73,13 +73,29 @@
             this._resize();
         },
 
+        eventTarget: function(e) {
+            var domNode = $(e.touch ? e.touch.initialTouch : e.target);
+            var node;
+
+            while (!node) {
+                node = domNode.data("kendoNode");
+                if (domNode.is(this.element) || domNode.length === 0) {
+                    break;
+                }
+
+                domNode = domNode.parent();
+            }
+
+            return node;
+        },
+
         _resize: noop,
 
         _handler: function(event) {
             var surface = this;
 
             return function(e) {
-                var node = $(e.target).data("kendoNode");
+                var node = surface.eventTarget(e);
                 if (node) {
                     surface.trigger(event, {
                         element: node.srcElement,
