@@ -181,7 +181,7 @@ def set_fields_data(bot, productName)
     end 
     bot.execute_script("$('[id$=\"_ReleaseVersionTb\"]').val('#{VERSION}')") 
 
-    date = DateTime.now.strftime('%m/%d/%Y')
+    date = DateTime.now.strftime('%d/%m/%Y')
     bot.execute_script("$find($telerik.$('[id$=\"_ReleaseDateDatePicker_dateInput\"]').attr('id')).set_value('#{date}')")
 
     option_select = bot.get_select("Product")
