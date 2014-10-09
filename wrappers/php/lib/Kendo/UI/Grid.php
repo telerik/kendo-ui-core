@@ -65,6 +65,15 @@ By default the column menu is not enabled.Can be set to a JavaScript object whic
     }
 
     /**
+    * Configures the Kendo UI Grid export settings.
+    * @param \Kendo\UI\GridExcel|array $value
+    * @return \Kendo\UI\Grid
+    */
+    public function excel($value) {
+        return $this->setProperty('excel', $value);
+    }
+
+    /**
     * If set to true the user can filter the data source using the grid filter menu. Filtering is disabled by default.Can be set to a JavaScript object which represents the filter menu configuration.
     * @param boolean|\Kendo\UI\GridFilterable|array $value
     * @return \Kendo\UI\Grid
@@ -428,6 +437,20 @@ The grid uses same layout for both phone and tablet.
         }
 
         return $this->setProperty('edit', $value);
+    }
+
+    /**
+    * Sets the excelExport event of the Grid.
+    * Fired when the user clicks the "Export to Excel" toolbar button.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\UI\Grid
+    */
+    public function excelExport($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('excelExport', $value);
     }
 
     /**

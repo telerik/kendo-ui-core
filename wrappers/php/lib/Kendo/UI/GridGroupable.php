@@ -15,7 +15,7 @@ class GridGroupable extends \Kendo\SerializableObject {
     }
 
     /**
-    * When enabled the group footer rows will remain visible when the corresponding gruop is collapsed.
+    * When enabled the group footer rows will remain visible when the corresponding group is collapsed.
     * @param boolean $value
     * @return \Kendo\UI\GridGroupable
     */
