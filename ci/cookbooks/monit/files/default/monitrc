@@ -31,11 +31,3 @@ check process tomcat7 with pidfile /var/run/tomcat7.pid
 check process screenshot with pidfile /run/screenshot.pid
     start program = "/usr/local/bin/thin -C /var/www/screenshot/current/config.yml start" with timeout 60 seconds
     stop program = "/usr/local/bin/thin -C /var/www/screenshot/current/config.yml stop"
-
-check process dojo with pidfile /var/run/dojo.pid
-    start program = "/usr/sbin/service dojo{,-runner} start" with timeout 60 seconds
-    stop program = "/usr/sbin/service dojo{,-runner} stop"
-    if failed url http://localhost/dojo-staging/
-        CONTENT == "Kendo UI Dojo"
-        TIMEOUT 60 SECONDS
-        then restart
