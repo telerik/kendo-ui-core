@@ -1,0 +1,78 @@
+<div id="example">
+    <div id="grid" style="width: 900px"></div>
+    <script>
+        $("#grid").kendoGrid({
+            toolbar: "<button class='k-button' id='pdf'>Export to PDF</button>",
+            pdf: {
+                fileName: "Kendo UI Grid Export.pdf",
+                proxyURL: "http://demos.telerik.com/kendo-ui/service/export"
+            },
+            dataSource: {
+                type: "odata",
+                transport: {
+                    read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                },
+                schema:{
+                    model: {
+                        fields: {
+                            UnitsInStock: { type: "number" },
+                            ProductName: { type: "string" },
+                            UnitPrice: { type: "number" },
+                            UnitsOnOrder: { type: "number" },
+                            UnitsInStock: { type: "number" }
+                        }
+                    }
+                },
+                pageSize: 7,
+                group: {
+                    field: "UnitsInStock", aggregates: [
+                        { field: "ProductName", aggregate: "count" },
+                        { field: "UnitPrice", aggregate: "sum"},
+                        { field: "UnitsOnOrder", aggregate: "average" },
+                        { field: "UnitsInStock", aggregate: "count" }
+                    ]
+                },
+                aggregate: [
+                    { field: "ProductName", aggregate: "count" },
+                    { field: "UnitPrice", aggregate: "sum" },
+                    { field: "UnitsOnOrder", aggregate: "average" },
+                    { field: "UnitsInStock", aggregate: "min" },
+                    { field: "UnitsInStock", aggregate: "max" }
+                ]
+            },
+            sortable: true,
+            pageable: true,
+            groupable: true,
+            filterable: true,
+            columnMenu: true,
+            reorderable: true,
+            resizable: true,
+            columns: [
+                { width: 300, locked: true, field: "ProductName", title: "Product Name", aggregates: ["count"], footerTemplate: "Total Count: #=count#", groupFooterTemplate: "Count: #=count#" },
+                { width: 300, field: "UnitPrice", title: "Unit Price", aggregates: ["sum"] },
+                { width: 300, field: "UnitsOnOrder", title: "Units On Order", aggregates: ["average"], footerTemplate: "Average: #=average#",
+                    groupFooterTemplate: "Average: #=average#" },
+                { width: 300, field: "UnitsInStock", title: "Units In Stock", aggregates: ["min", "max", "count"], footerTemplate: "Min: #= min # Max: #= max #",
+                groupHeaderTemplate: "Units In Stock: #= value # (Count: #= count#)" }
+            ]
+        });
+
+        $("#pdf").click(function() {
+            kendo.dataviz.drawing.drawDOM($("#grid")[0], function(root){
+                root.options.set("pdf", {
+                    paperSize: "auto",
+                    margins: {
+                        left: "10mm",
+                        top: "10mm",
+                        right: "10mm",
+                        bottom: "10mm"
+                    }
+                });
+                kendo.dataviz.drawing.pdf.toDataURL(root, function(url){
+                    kendo.saveAs(url, "html-to-pdf2.pdf", "http://kendo.local:7569/");
+                });
+        });
+        });
+
+    </script>
+</div>

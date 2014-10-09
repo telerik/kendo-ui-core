@@ -1442,6 +1442,20 @@
           ]
       },
       {
+          "text": "Export to PDF",
+          "url": "grid/pdf-export",
+          "new": true,
+          "title": {
+              "kendo-ui": "Exporting to PDF"
+          },
+          "meta": {
+              "kendo-ui": "Export Kendo UI grid as PDF file"
+          },
+          "packages": [
+              "!offline"
+          ]
+      },
+      {
         "text": "Working Offline",
         "url": "grid/offline",
         "new": true,
