@@ -9,7 +9,7 @@
         "./kendo.data.xml",
         "./kendo.data",
         "./kendo.ooxml.js",
-        "./kendo.excel.js",
+        "./kendo.data.excel.js",
         "./kendo.data.signalr",
         "./kendo.binder",
         "./kendo.validator",
