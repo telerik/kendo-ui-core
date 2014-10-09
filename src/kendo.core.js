@@ -3974,7 +3974,7 @@ function pad(number, digits, end) {
         }]);
 
         return kendo.widgetInstance(element, kendo.mobile.ui);
-    }
+    };
 
 })(jQuery, window);
 

@@ -316,7 +316,7 @@ var __meta__ = {
                 scope;
 
             if (this.options.$angular) {
-                controller = element.controller(),
+                controller = element.controller();
                 scope = element.scope();
 
                 if (controller) {
