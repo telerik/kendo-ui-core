@@ -32,7 +32,7 @@
         equal(state.foo, "foo");
     });
 
-    test("changes are persisted even when online", function() {
+    test("changes are persisted when online", function() {
         var dataSource = new DataSource({
             offlineStorage: "key",
             schema: {
@@ -64,6 +64,27 @@
         dataSource.read();
 
         equal(dataSource.at(0).foo, "foo");
+    });
+
+    test("parses dates in offline data", function() {
+        var dataSource = new DataSource({
+            offlineStorage: "key",
+            schema: {
+                model: {
+                    fields: {
+                        foo: { type: "date" }
+                    }
+                }
+            }
+        });
+
+        var date = new Date();
+
+        dataSource.data([ { foo: date }]);
+        dataSource.online(false);
+        dataSource.read();
+
+        equal(dataSource.at(0).foo.getTime(), date.getTime());
     });
 
     test("state uses custom storage to save", 1, function() {
