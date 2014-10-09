@@ -88,7 +88,17 @@
       function getPDF(sel) {
         var el = getEl(sel)[0];
         kendo.dataviz.drawing.drawDOM(el, function(root){
+          root.options.set("pdf", {
+            paperSize: "auto",
+            margins: {
+              left: "10mm",
+              top: "10mm",
+              right: "10mm",
+              bottom: "10mm"
+            }
+          });
           kendo.dataviz.drawing.pdf.toDataURL(root, function(url){
+            window.x = root;
             kendo.saveAs(url, "html-to-pdf2.pdf", "http://kendo.local:7569/");
           });
         });
@@ -97,6 +107,7 @@
       function draw(sel) {
         var el = getEl(sel)[0];
         kendo.dataviz.drawing.drawDOM(el, function(root){
+          window.x = root;
           var el = $("<div class='surface' style='position: absolute; background: white; right: 1em; top: 1em; bottom: 1em; border: 1px solid #000; width: 600px'></div>").appendTo(document.body);
           var surface = kendo.dataviz.drawing.Surface.create(el);
           surface.draw(root);
