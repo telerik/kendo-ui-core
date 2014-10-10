@@ -542,6 +542,14 @@
         equal(grid.table.find(".k-grouping-row a").attr("tabindex"), -1);
     });
 
+    test("group item is not focused when group icon is clicked", function() {
+        var grid = setup({selectable: true, columns: [ { field: "foo", groupFooterTemplate: "foo" }] });
+        grid.dataSource.group({ field: "foo" });
+        grid.element.find(".k-grouping-row:first a.k-icon").mousedown().mouseup();
+
+        ok(!grid.element.find(".k-state-focused").length);
+    });
+
     test("group footer row is not selected when clicked", function() {
         var grid = setup({selectable: true, columns: [ { field: "foo", groupFooterTemplate: "foo" }] });
         grid.dataSource.group({ field: "foo" });

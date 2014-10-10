@@ -5461,6 +5461,10 @@ var __meta__ = {
            return;
        }
 
+       if ($(e.target).is("a.k-i-collapse, a.k-i-expand")) {
+           return;
+       }
+
        this.current(currentTarget);
 
        if (isHeader || !isInput) {
