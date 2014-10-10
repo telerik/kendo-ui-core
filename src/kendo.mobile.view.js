@@ -2,8 +2,6 @@
     define([ "./kendo.core", "./kendo.fx", "./kendo.mobile.scroller", "./kendo.view" ], f);
 })(function(){
 
-"use strict";
-
 var __meta__ = {
     id: "mobile.view",
     name: "View",
