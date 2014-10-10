@@ -1139,11 +1139,24 @@ var __meta__ = {
         },
 
         _selectable: function() {
-            this.selectable = new kendo.ui.Selectable(this.content, {
-                filter: "tr",
-                aria: true,
-                change: proxy(this._change, this)
-            });
+            var selectable = this.options.selectable;
+            var filter;
+
+            if (selectable) {
+                selectable = kendo.ui.Selectable.parseOptions(selectable);
+
+                filter = "tr";
+
+                if (selectable.cell) {
+                    filter = "td";
+                }
+
+                this.selectable = new kendo.ui.Selectable(this.content, {
+                    filter: filter,
+                    aria: true,
+                    change: proxy(this._change, this)
+                });
+            }
         },
 
         select: function(value) {

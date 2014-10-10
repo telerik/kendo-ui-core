@@ -273,11 +273,7 @@ var __meta__ = {
                 navigatable = that.options.navigatable;
 
             if (selectable) {
-                multi = typeof selectable === STRING && selectable.toLowerCase().indexOf("multiple") > -1;
-
-                if (multi) {
-                    that.element.attr("aria-multiselectable", true);
-                }
+                multi = kendo.ui.Selectable.parseOptions(selectable).multiple;
 
                 that.selectable = new kendo.ui.Selectable(that.element, {
                     aria: true,

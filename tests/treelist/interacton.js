@@ -470,4 +470,26 @@
 
         ok(row.hasClass("k-state-selected"));
     });
+
+    test("does not select row if selectable is false", function() {
+        createTreeList({
+            selectable: false
+        });
+
+        var row = instance.content.find("tr:first");
+        tap(row);
+
+        ok(!row.hasClass("k-state-selected"));
+    });
+
+    test("selects cell if selectable is 'cell'", function() {
+        createTreeList({
+            selectable: "cell"
+        });
+
+        var cell = instance.content.find("td:first");
+        tap(cell);
+
+        ok(cell.hasClass("k-state-selected"));
+    });
 })();
