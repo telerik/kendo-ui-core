@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./pdf/core", "./kendo.saveas" ], f);
+    define([ "./pdf/core", "./pdf/ttf", "./kendo.saveas" ], f);
 }) (function(){
 
 var __meta__ = {
