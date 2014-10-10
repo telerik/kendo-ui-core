@@ -62,14 +62,14 @@ var __meta__ = {
             var blob = dataURI; // could be a Blob object
 
             if (typeof dataURI == "string") {
-            var parts = dataURI.split(";base64,");
-            var contentType = parts[0];
-            var base64 = atob(parts[1]);
-            var array = new Uint8Array(base64.length);
+                var parts = dataURI.split(";base64,");
+                var contentType = parts[0];
+                var base64 = atob(parts[1]);
+                var array = new Uint8Array(base64.length);
 
-            for (var idx = 0; idx < base64.length; idx++) {
-                array[idx] = base64.charCodeAt(idx);
-            }
+                for (var idx = 0; idx < base64.length; idx++) {
+                    array[idx] = base64.charCodeAt(idx);
+                }
                 blob = new Blob([array.buffer], { type: contentType });
             }
 
