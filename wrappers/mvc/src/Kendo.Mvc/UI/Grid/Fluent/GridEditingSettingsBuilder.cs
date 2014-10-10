@@ -126,6 +126,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        public GridEditingSettingsBuilder<T> DisplayDeleteConfirmation(Func<object, object> handler)
+        {
+            settings.ConfirmationHandler = new ClientHandlerDescriptor()
+                {
+                     TemplateDelegate = handler
+                };
+            settings.DisplayDeleteConfirmation = true;
+
+            return this;
+        }
+
         /// <summary>
         /// Change default text for confirm delete button. Note: Available only on mobile devices.
         /// </summary>

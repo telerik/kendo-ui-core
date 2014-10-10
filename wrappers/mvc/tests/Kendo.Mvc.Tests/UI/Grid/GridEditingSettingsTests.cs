@@ -28,6 +28,20 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
+        public void Should_serialize_ConfirmationHandler_if_set()
+        {
+            var grid = GridTestHelper.CreateGrid<Customer>();
+            grid.Editable.Enabled = true;
+
+            grid.Editable.DisplayDeleteConfirmation = true;
+            grid.Editable.ConfirmationHandler = new ClientHandlerDescriptor();
+
+            var result = grid.Editable.ToJson();
+
+            result["confirmation"].ShouldBeSameAs(grid.Editable.ConfirmationHandler);
+        }
+
+        [Fact]
         public void Should_serialize_create_at_if_bottom()
         {
             var grid = GridTestHelper.CreateGrid<Customer>();

@@ -66,6 +66,12 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        public ClientHandlerDescriptor ConfirmationHandler
+        {
+            get;
+            set;
+        }
+
         public string ConfirmDelete
         {
             get;
@@ -225,10 +231,21 @@ namespace Kendo.Mvc.UI
                                 .Replace("</script>", "<\\/script>")
                                 .Replace("jQuery(\"#", "jQuery(\"\\\\#")
                                 .Replace("#", "\\#");                
-            }            
+            }
+
+            if (DisplayDeleteConfirmation)
+            {
+                if (ConfirmationHandler != null)
+                {
+                    json["confirmation"] = ConfirmationHandler;
+                }
+                else
+                {
+                    json["confirmation"] = Confirmation;
+                }
+            }
 
             FluentDictionary.For(json)
-                .Add("confirmation", Confirmation, () => DisplayDeleteConfirmation)
                 .Add("confirmDelete", ConfirmDelete)
                 .Add("cancelDelete", CancelDelete)
                 .Add("mode", Mode.ToString().ToLowerInvariant())
