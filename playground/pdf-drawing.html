@@ -21,7 +21,7 @@
 
       function getPDF() {
         d.pdf.toDataURL(main, function(url){
-          kendo.saveAs(url, "kendo.pdf", "http://kendo.local:7569/");
+          kendo.saveAs({ dataURI: url, fileName: "kendo.pdf", proxyURL: "http://kendo.local:7569/" });
         });
       }
 

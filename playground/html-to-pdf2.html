@@ -99,7 +99,7 @@
           });
           kendo.dataviz.drawing.pdf.toDataURL(root, function(url){
             window.x = root;
-            kendo.saveAs(url, "html-to-pdf2.pdf", "http://kendo.local:7569/");
+            kendo.saveAs({ dataURI: url, fileName: "html-to-pdf2.pdf", proxyURL: "http://kendo.local:7569/" });
           });
         });
       }

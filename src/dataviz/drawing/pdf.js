@@ -111,14 +111,14 @@
     function saveAs(group, filename, proxy, callback) {
         if (window.Blob) {
             toBlob(group, function(blob){
-                kendo.saveAs(blob, filename);
+                kendo.saveAs({ dataURI: blob, fileName: filename });
                 if (callback) {
                     callback(blob);
                 }
             });
         } else {
             toDataURL(group, function(dataURL){
-                kendo.saveAs(dataURL, filename, proxy);
+                kendo.saveAs({ dataURI: dataURL, fileName: filename, proxyURL: proxy });
                 if (callback) {
                     callback(dataURL);
                 }
