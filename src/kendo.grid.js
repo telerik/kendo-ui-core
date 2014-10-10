@@ -1390,11 +1390,21 @@ var __meta__ = {
         },
 
         setOptions: function(options) {
-            var that = this;
+            var currentOptions = this.getOptions();
+            extend(true, currentOptions, options);
+            var wrapper = this.wrapper;
+            var events = this._events;
 
-            Widget.fn.setOptions.call(this, options);
+            this.destroy();
+            wrapper.empty();
 
-            that._templates();
+            this.init(wrapper, currentOptions);
+            for (var ev in events) {
+                for (var i = 0; i < events[ev].length; i++) {
+                    this.bind(ev, events[ev][i]);
+                }
+            }
+
         },
 
         items: function() {

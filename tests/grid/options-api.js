@@ -73,16 +73,14 @@
     });
 
     test("getOptions retrieves the mobile option", function() {
-       var options = setup({
+       var options = setup({ 
            mobile: true
        }).getOptions();
        equal(options.mobile, true);
     });
 
     test("getOptions retrieves the dynamically set group option", function() {
-        var grid = setup({
-           mobile: true
-        });
+        var grid = setup({ });
         grid.dataSource.group({ field: "foo" });
 
 
@@ -91,10 +89,21 @@
         equal(options.dataSource.group[0].field, "foo");
     });
 
-    test("getOptions retrieves the dynamically set group option", function() {
+    test("getOptions retrieves the initial set sort option", function() {
         var grid = setup({
-           mobile: true
+            dataSource: {
+                sort: { field: "foo", dir: "desc" }
+            }
         });
+
+        var options = grid.getOptions();
+        equal(options.dataSource.sort.length, 1);
+        equal(options.dataSource.sort[0].field, "foo");
+        equal(options.dataSource.sort[0].dir, "desc");
+    });
+
+    test("getOptions retrieves the dynamically set sort option", function() {
+        var grid = setup({ });
         grid.dataSource.sort({ field: "foo", dir: "desc" });
 
 
@@ -103,4 +112,70 @@
         equal(options.dataSource.sort[0].field, "foo");
         equal(options.dataSource.sort[0].dir, "desc");
     });
+
+    test("getOptions retrieves the dynamically set sort option when there is initial sort", function() {
+        var grid = setup({
+            dataSource: {
+                sort: {
+                    field: "foo",
+                    dir: "asc"
+                }
+            }
+        });
+        grid.dataSource.sort({ field: "foo", dir: "desc" });
+
+        var options = grid.getOptions();
+        equal(options.dataSource.sort.length, 1);
+        equal(options.dataSource.sort[0].field, "foo");
+        equal(options.dataSource.sort[0].dir, "desc");
+    });
+
+    test("setOptions sets the new Options and persists the current", function() {
+        var grid = setup({
+            dataSource: {
+                sort: [{
+                    field: "foo",
+                    dir: "asc"
+                }, {
+                    field: "bar",
+                    dir: "asc"
+                }]
+            }
+        });
+
+        var options = grid.setOptions({
+            dataSource: {
+                sort: {
+                    field: "foo",
+                    dir: "desc"
+                }
+            }
+        });
+
+        equal(grid.dataSource.sort().length, 1);
+        equal(grid.dataSource.sort()[0].field, "foo");
+        equal(grid.dataSource.sort()[0].dir, "desc");
+    });
+
+    test("preservs initial set events", function() {
+        var invoked = false;
+        var grid = setup({
+            dataBound: function() { invoked = true; }
+        });
+        grid.setOptions({ sortable:true });
+
+        grid.dataSource.read();
+        equal(invoked, true);
+    });
+
+    test("preservs dynamically set events", function() {
+        var invoked = false;
+        var grid = setup({ });
+        grid.bind("dataBound", function() { invoked = true; });
+
+        grid.setOptions({ sortable:true });
+        grid.dataSource.read();
+        equal(invoked, true);
+    });
+
 })();
