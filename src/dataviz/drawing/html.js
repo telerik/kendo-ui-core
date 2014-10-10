@@ -627,10 +627,10 @@
                     // if same widths too, we can draw the whole border by stroking a single path.
                     if (top.width == right.width && top.width == bottom.width && top.width == left.width)
                     {
-                        // reduce box by half the border width, so we can draw it by stroking.
-                        box = innerBox(box, top.width/2);
-
                         if (shouldDrawLeft && shouldDrawRight) {
+                            // reduce box by half the border width, so we can draw it by stroking.
+                            box = innerBox(box, top.width/2);
+
                             // adjust the border radiuses, again by top.width/2, and make the path element.
                             var path = elementRoundBox(element, box, top.width/2);
                             path.options.stroke = {
