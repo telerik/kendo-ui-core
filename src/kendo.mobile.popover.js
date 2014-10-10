@@ -201,7 +201,8 @@ var __meta__ = {
     var PopOver = Widget.extend({
         init: function(element, options) {
             var that = this,
-                popupOptions;
+                popupOptions,
+                paneOptions;
 
             that.initialOpen = false;
 
@@ -219,7 +220,7 @@ var __meta__ = {
                 }
             });
 
-            that.pane = new ui.Pane(that.element, this.options.pane);
+            that.pane = new ui.Pane(that.element, $.extend(this.options.pane, { $angular: this.options.$angular }));
             that.pane.navigateToInitial();
 
             kendo.notify(that, ui);
