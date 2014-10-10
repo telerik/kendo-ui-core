@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="../dist/styles/web/kendo.common.css" />
+    <link rel="stylesheet" href="../dist/styles/web/kendo.default.css" />
+    <script src="html2canvas.min.js"></script>
+    <script src="loader.js"></script>
+    <script>
+      requireSync([
+        "../src/jquery.js",
+        "../src/kendo.dataviz.drawing.js",
+        "./console.time.js",
+        "./test-pdf-helpers.js"
+      ]);
+    </script>
+
+    <script src="./pako.min.js"></script>
+    <script src="./html2canvas.min.js"></script>
+
+    <script>
+        kendo.pdf.defineFont({
+            "Verdana"             : "./Verdana/Verdana.ttf",
+            "Verdana|Bold"        : "./Verdana/Verdana_Bold.ttf",
+            "Verdana|Bold|Italic" : "./Verdana/Verdana_Bold_Italic.ttf",
+            "Verdana|Italic"      : "./Verdana/Verdana_Italic.ttf"
+        });
+    </script>
+
+    <style>
+      body {
+        margin: 0; padding: 1em;
+        font-size: 12px;
+        font-family: Verdana;
+      }
+      .k-widget, button {
+        font-family: Verdana !important;
+      }
+      table {
+        margin-top: 1em;
+      }
+      table.collapse {
+        border-collapse: collapse;
+        //border-spacing: 5px;
+        border-top: 1px solid red;
+        border-left: 1px solid red;
+        background: #ddd;
+      }
+      table.collapse td {
+        border-right: 1px solid #0c0;
+        border-bottom: 1px solid #00c;
+        padding: 5px 10px;
+      }
+      table.collapse thead td {
+        background: white;
+      }
+
+      table.collapse2 {
+        border: 1px solid red;
+      }
+      table.collapse2 td {
+        border: 1px solid #000;
+        border-color: #0c0 #00c #cc0 #999;
+      }
+    </style>
+  </head>
+
+  <body>
+    <button onclick="pdf('#test1')">PDF</button>
+    <button onclick="draw('#test1', 'svg')">SVG</button>
+    <button onclick="draw('#test1', 'canvas')">Canvas</button>
+    <button onclick="h2c('#test1')">html2canvas</button>
+    <div id="test1">
+      <table class="collapse">
+        <thead>
+          <tr>
+            <td>Title</td>
+            <td>Foo</td>
+            <td>Bar</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>123</td><td>456</td><td>789</td></tr>
+        </tbody>
+      </table>
+
+      <table class="collapse collapse2">
+        <thead>
+          <tr>
+            <td>Title</td>
+            <td>Foo</td>
+            <td>Bar</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>123</td><td>456</td><td>789</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+
+</html>
