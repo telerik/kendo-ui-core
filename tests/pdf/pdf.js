@@ -91,8 +91,8 @@ test("saveAsPDF calls kendo.saveAs", 1, function() {
         callback("foo");
     };
 
-    kendo.saveAs = function(dataURI) {
-       equal(dataURI, "foo");
+    kendo.saveAs = function(options) {
+       equal(options.dataURI, "foo");
     };
 
     widget.saveAsPDF();
@@ -105,8 +105,8 @@ test("saveAsPDF calls kendo.saveAs and passes the fileName option", function() {
         }
     }).data("kendoPDF");
 
-    kendo.saveAs = function(dataURI, fileName) {
-       equal(fileName, "foo");
+    kendo.saveAs = function(options) {
+       equal(options.fileName, "foo");
     };
 
     widget.saveAsPDF();
@@ -116,8 +116,8 @@ test("saveAsPDF uses 'Export.pdf' as default file name", function() {
     var widget = dom.kendoPDF({
     }).data("kendoPDF");
 
-    kendo.saveAs = function(dataURI, fileName) {
-       equal(fileName, "Export.pdf");
+    kendo.saveAs = function(options) {
+       equal(options.fileName, "Export.pdf");
     };
 
     widget.saveAsPDF();
@@ -130,8 +130,8 @@ test("saveAsPDF uses the pdf.proxyURL option", function() {
         }
     }).data("kendoPDF");
 
-    kendo.saveAs = function(dataURI, fileName, proxyURL) {
-       equal(proxyURL, "foo");
+    kendo.saveAs = function(options) {
+       equal(options.proxyURL, "foo");
     };
 
     widget.saveAsPDF();

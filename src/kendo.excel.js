@@ -276,7 +276,11 @@ kendo.ExcelMixin = {
             if (!this.trigger("excelExport", { workbook: book })) {
                 var workbook = new kendo.ooxml.Workbook(book);
 
-                kendo.saveAs(workbook.toDataURL(), book.fileName || excel.fileName, excel.proxyURL);
+                kendo.saveAs({
+                    dataURI: workbook.toDataURL(),
+                    fileName: book.fileName || excel.fileName,
+                    proxyURL: excel.proxyURL
+                });
             }
         }, this));
     }

@@ -32,7 +32,14 @@ kendo.PDFMixin = {
 
         kendo.dataviz.drawing.drawDOM(this.wrapper[0], function(root) {
             root.options.set("pdf", options);
-            kendo.dataviz.drawing.pdf.saveAs(root, options.fileName, options.proxyURL);
+
+            kendo.dataviz.drawing.pdf.toDataURL(root, function(dataURI) {
+                kendo.saveAs({
+                    dataURI: dataURI,
+                    fileName: options.fileName,
+                    proxyURL: options.proxyURL
+                });
+            });
         });
     }
 };

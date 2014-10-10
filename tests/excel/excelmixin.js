@@ -42,35 +42,6 @@ module("excel mixin",  {
         kendo.saveAs = saveAs;
     }
 });
-/*
-test("renders button for excel command", function() {
-    dom.kendoExcel({
-        toolbar: [ { name: "excel" }]
-    });
-
-    equal(dom.find(".k-widget-excel").length, 1);
-});
-
-test("sets the default text of the excel command", function() {
-    dom.kendoExcel({
-        toolbar: [ { name: "excel" }]
-    });
-
-    equal(dom.find(".k-widget-excel").text(), "Export to Excel");
-});
-
-test("clicking the excel button calls the excel export method", 1, function() {
-    var widget = dom.kendoExcel({
-        toolbar: [ { name: "excel" }]
-    }).data("kendoExcel");
-
-    widget.saveAsExcel = function() {
-        ok(true);
-    };
-
-    dom.find(".k-widget-excel").trigger("click");
-});
-*/
 
 test("saveAsExcel fires the excelExport event", function() {
     var widget = dom.kendoExcel({
@@ -192,8 +163,8 @@ test("saveAsExcel calls kendo.saveAs", 1, function() {
         }
     };
 
-    kendo.saveAs = function(dataURI) {
-       equal(dataURI, "foo");
+    kendo.saveAs = function(options) {
+       equal(options.dataURI, "foo");
     };
 
     widget.saveAsExcel();
@@ -206,8 +177,8 @@ test("saveAsExcel calls kendo.saveAs and passes the fileName option of the workb
         }
     }).data("kendoExcel");
 
-    kendo.saveAs = function(dataURI, fileName) {
-       equal(fileName, "foo");
+    kendo.saveAs = function(options) {
+       equal(options.fileName, "foo");
     };
 
     widget.saveAsExcel();
@@ -217,8 +188,8 @@ test("saveAsExcel uses 'Export.xlsx' as default file name", function() {
     var widget = dom.kendoExcel({
     }).data("kendoExcel");
 
-    kendo.saveAs = function(dataURI, fileName) {
-       equal(fileName, "Export.xlsx");
+    kendo.saveAs = function(options) {
+       equal(options.fileName, "Export.xlsx");
     };
 
     widget.saveAsExcel();
@@ -231,8 +202,8 @@ test("saveAsExcel uses the excel.proxyURL option", function() {
         }
     }).data("kendoExcel");
 
-    kendo.saveAs = function(dataURI, fileName, proxyURL) {
-       equal(proxyURL, "foo");
+    kendo.saveAs = function(options) {
+       equal(options.proxyURL, "foo");
     };
 
     widget.saveAsExcel();
