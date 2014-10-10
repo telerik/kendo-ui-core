@@ -14,7 +14,7 @@
       ]);
     </script>
 
-    <script src="./pako.min.js"></script>
+    <!-- <script src="./pako.min.js"></script> -->
     <script src="./html2canvas.min.js"></script>
 
     <script>
@@ -61,6 +61,34 @@
         border: 1px solid #000;
         border-color: #0c0 #00c #cc0 #999;
       }
+
+      table.collapse3 {
+        border: 0;
+        background: yellow;
+      }
+
+      .divborder {
+        padding: 5px 10px;
+        width: 200px;
+        text-align: center;
+        background: #ccc;
+        border-bottom: 1px solid #999;
+      }
+
+      .simple-border {
+        border: 3px solid rgba(255, 0, 0, 0.5);
+        border-radius: 10px;
+        width: 200px;
+        padding: 10px 5px;
+        background: yellow;
+      }
+
+      .measure-me {
+        width: 100px;
+        height: 100px;
+        border: 15px solid;
+        border-color: red green blue orange;
+      }
     </style>
   </head>
 
@@ -95,6 +123,29 @@
           <tr><td>123</td><td>456</td><td>789</td></tr>
         </tbody>
       </table>
+
+      <table class="collapse collapse3">
+        <thead>
+          <tr>
+            <td>Title</td>
+            <td>Foo</td>
+            <td>Bar</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>123</td><td>456</td><td>789</td></tr>
+        </tbody>
+      </table>
+
+      <div class="measure-me" style="margin-top: 1em"></div>
+
+      <div class="divborder" style="margin-top: 1em">Foo bar</div>
+      <div class="divborder">Foo bar</div>
+
+      <div class="simple-border" style="margin-top: 1em">Foo</div>
+      <div class="simple-border" style="margin-top: 1em; border-radius: 5px 10px 15px 20px;">Foo</div>
+      <div class="simple-border" style="margin-top: 1em; border-top-left-radius: 40px 20px; border-bottom-right-radius: 40px 20px">Foo</div>
+      <div class="simple-border" style="margin-top: 1em; border-top-left-radius: 40px 20px; border-bottom-right-radius: 40px 20px; border-color: red green blue black;">Foo</div>
     </div>
   </body>
 
