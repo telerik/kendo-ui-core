@@ -614,16 +614,12 @@
                     clone, dataItem = {};
 
                 json.options.id = diagram.randomId();
-
-                if (this.dataItem) {
-                    dataItem = this.diagram.dataSource.add(
-                        filterShapeDataItem(this.dataItem)
-                    );
-                    clone = this.diagram._addDataItem(dataItem, json.options);
-                    this.diagram.dataSource.sync();
-                } else {
-                    clone = new Shape(json.options);
+                if (defined(this.dataItem)) {
+                    dataItem = this.dataItem.toJSON();
+                    dataItem[this.dataItem.idField] = this.dataItem._defaultId;
                 }
+
+                clone = new Shape(json.options, dataItem);
 
                 return clone;
             },
@@ -2046,7 +2042,7 @@
              * @param options. The options to be passed to the newly created Shape.
              * @returns The newly created shape.
              */
-            addShape: function (item, options) {
+            addShape: function(item, options) {
                 var shape,
                     shapeDefaults = this.options.shapeDefaults;
 
@@ -2062,19 +2058,17 @@
                 }
 
                 if (shapeDefaults.undoable) {
-                    this.undoRedoService.add(new diagram.AddShapeUnit(shape, this));
-                } else {
-                    this.shapes.push(shape);
-                    shape.diagram = this;
-                    this.mainLayer.append(shape.visual);
+                    this.undoRedoService.add(new diagram.AddShapeUnit(shape, this), "apply");
                 }
+
+                this.shapes.push(shape);
+                shape.diagram = this;
+                this.mainLayer.append(shape.visual);
 
                 this.trigger(CHANGE, {
                     added: [shape],
                     removed: []
                 });
-
-                shape.redraw();
 
                 // for shapes which have their own internal layout mechanism
                 if (shape.hasOwnProperty("layout")) {
@@ -2084,11 +2078,13 @@
                 return shape;
             },
 
-            _addShape: function (shape, options) {
+            _addShape: function(shape, options) {
                 if (this.dataSource) {
-                    this.dataSource.add(shape.dataItem);
+                    var dataItem = this.dataSource.add(shape.dataItem);
                     this.dataSource.sync();
                     this._dataMap[shape.dataItem.id] = shape;
+                    // refresh shape.dataitem in order to get uid in copy/paste scenario
+                    shape.dataItem = dataItem;
                 }
 
                 return this.addShape(shape, options);
@@ -2098,15 +2094,17 @@
              * @param items DiagramElement, Array of Items.
              * @param undoable.
              */
-            remove: function (items, undoable) {
+            remove: function(items, undoable) {
                 var isMultiple = isArray(items);
 
                 if (isUndefined(undoable)) {
                     undoable = true;
                 }
+
                 if (undoable) {
                     this.undoRedoService.begin();
                 }
+
                 if (isMultiple) {
                     items = items.slice(0);
                     for (var i = 0; i < items.length; i++) {
@@ -2115,6 +2113,7 @@
                 } else if (items instanceof Shape || items instanceof Connection) {
                     this._removeItem(items, undoable);
                 }
+
                 if (undoable) {
                     this.undoRedoService.commit();
                 }
@@ -2255,6 +2254,7 @@
                 if (!items) {
                     items = this._selectedItems.slice();
                 }
+
                 var result = this._getDiagramItems(items), indices;
                 if (!defined(undoable) || undoable) {
                     indices = indicesOfItems(this.mainLayer, result.visuals);
@@ -2274,13 +2274,13 @@
                 if (!items) {
                     items = this._selectedItems.slice();
                 }
+
                 var result = this._getDiagramItems(items), indices;
                 if (!defined(undoable) || undoable) {
                     indices = indicesOfItems(this.mainLayer, result.visuals);
                     var unit = new ToBackUnit(this, items, indices);
                     this.undoRedoService.add(unit);
-                }
-                else {
+                } else {
                     this.mainLayer.toBack(result.visuals);
                     this._fixOrdering(result, false);
                 }
@@ -2322,6 +2322,7 @@
                     this._zoom = this._getValidZoom(math.min(viewport.width / original.width, viewport.height / original.height));
                     rect = original.clone().zoom(this._zoom);
                 }
+
                 this._zoomMainLayer();
 
                 current = rect.clone();
@@ -2491,7 +2492,7 @@
                         }
                         copied = item.clone();
                         mapping.set(item.id, copied.id);
-                        this._addItem(copied);
+                        this._addShape(copied);
                         copied.position(new Point(item.options.x + offsetX, item.options.y + offsetY));
                         copied.select(true);
                     }

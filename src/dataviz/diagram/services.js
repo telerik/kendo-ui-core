@@ -315,10 +315,10 @@
                 this.title = "New connection";
             },
             undo: function () {
-                this.diagram.remove(this.connection, false);
+                this.diagram._remove(this.connection, false);
             },
             redo: function () {
-                this.diagram.addConnection(this.connection, false);
+                this.diagram._addConnection(this.connection, false);
             }
         });
 
@@ -329,10 +329,10 @@
                 this.title = "New shape";
             },
             undo: function () {
-                this.diagram.remove(this.shape, false);
+                this.diagram._remove(this.shape, false);
             },
             redo: function () {
-                this.diagram.addShape(this.shape, {undoable: false});
+                this.diagram._addShape(this.shape, false);
             }
         });
 
@@ -515,8 +515,7 @@
                 this.stack.push(composite);
                 if (isUndefined(execute) || (execute && (execute === true))) {
                     this.redo();
-                }
-                else {
+                } else {
                     this.index++;
                 }
                 // check the capacity
@@ -858,22 +857,30 @@
                 if ((meta.ctrlKey || meta.metaKey) && !meta.altKey) {// ctrl or option
                     if (testKey(key, "a")) {// A: select all
                         diagram.selectAll();
+                        diagram.destroyToolBar();
                         return true;
                     } else if (testKey(key, "z")) {// Z: undo
                         diagram.undo();
+                        diagram.destroyToolBar();
                         return true;
                     } else if (testKey(key, "y")) {// y: redo
                         diagram.redo();
+                        diagram.destroyToolBar();
                         return true;
                     } else if (testKey(key, "c")) {
                         diagram.copy();
+                        diagram.destroyToolBar();
                     } else if (testKey(key, "x")) {
                         diagram.cut();
+                        diagram.destroyToolBar();
                     } else if (testKey(key, "v")) {
                         diagram.paste();
+                        diagram.destroyToolBar();
                     } else if (testKey(key, "l")) {
                         diagram.layout();
+                        diagram.destroyToolBar();
                     } else if (testKey(key, "d")) {
+                        diagram.destroyToolBar();
                         diagram.copy();
                         diagram.paste();
                     }
@@ -884,8 +891,10 @@
                 } else if (key === 27) {// ESC: stop any action
                     this._discardNewConnection();
                     diagram.deselect();
+                    diagram.destroyToolBar();
                     return true;
                 }
+
             },
             wheel: function (p, meta) {
                 var diagram = this.diagram,
