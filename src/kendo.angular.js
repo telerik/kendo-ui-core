@@ -535,10 +535,12 @@ var __meta__ = {
         'MobileActionSheet',
         'MobileDrawer',
         'MobileSplitView',
-        'MobilePane'
+        'MobilePane',
+        'MobileScrollView',
+        'MobilePopOver'
     ];
 
-    angular.forEach(['MobileNavBar', 'MobileButton', 'MobileBackButton', 'MobileDetailButton', 'MobileTabStrip'], function(widget) {
+    angular.forEach(['MobileNavBar', 'MobileButton', 'MobileBackButton', 'MobileDetailButton', 'MobileTabStrip', 'MobileScrollView'], function(widget) {
         MANUAL_DIRECTIVES.push(widget);
         widget = "kendo" + widget;
         module.directive(widget, function() {
@@ -1016,6 +1018,16 @@ var __meta__ = {
                 });
 
                 createWidget(scope, element, attrs, 'kendoMobileActionSheet', 'kendoMobileActionSheet');
+            }
+        };
+    }).directive('kendoMobilePopOver', function() {
+        return {
+            terminal: true,
+            link: {
+                pre: function(scope, element, attrs, controllers) {
+                    attrs.defaultOptions = scope.viewOptions;
+                    createWidget(scope, element, attrs, 'kendoMobilePopOver', 'kendoMobilePopOver');
+                }
             }
         };
     }).directive('kendoViewTitle', function(){
