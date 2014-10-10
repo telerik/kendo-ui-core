@@ -17,6 +17,7 @@
     var dataviz = kendo.dataviz;
     var drawing = dataviz.drawing;
     var geo = dataviz.geometry;
+    var slice = Array.prototype.slice;
     var pdf = drawing.pdf; // XXX: should not really depend on this.  needed for parseColor
 
     /* -----[ exports ]----- */
@@ -32,31 +33,35 @@
         cont(group);
     };
 
-    var textDecorations = {};
+    var nodeInfo = {};
 
     // only function definitions after this line.
     return;
 
-    function pushTextDecoration(style) {
+    function pushNodeInfo(element, style) {
+        var Tmp = function(parent) {
+            this._up = parent;
+        };
+        Tmp.prototype = nodeInfo;
+        nodeInfo = new Tmp(nodeInfo);
+        nodeInfo[element.tagName.toLowerCase()] = {
+            element: element,
+            style: style
+        };
         var decoration = getPropertyValue(style, "text-decoration");
         if (decoration && decoration != "none") {
-            var Tmp = function(parent) {
-                this._up = parent;
-            };
-            Tmp.prototype = textDecorations;
-            textDecorations = new Tmp(textDecorations);
             var color = getPropertyValue(style, "color");
             decoration.split(/\s+/g).forEach(function(name){
-                if (!textDecorations[name]) {
-                    textDecorations[name] = color;
+                if (!nodeInfo[name]) {
+                    nodeInfo[name] = color;
                 }
             });
             return true;
         }
     }
 
-    function popTextDecoration() {
-        textDecorations = textDecorations._up;
+    function popNodeInfo() {
+        nodeInfo = nodeInfo._up;
     }
 
     function getComputedStyle(element) {
@@ -81,22 +86,28 @@
         if (r.length == 1) {
             r.push(r[0]);
         }
-        return { x: r[0], y: r[1] };
+        return sanitizeRadius({ x: r[0], y: r[1] });
     }
 
     function getContentBox(element) {
         var box = element.getBoundingClientRect();
-        box = innerBox(box, element, "border-*-width");
-        box = innerBox(box, element, "padding-*");
+        box = innerBox(box, "border-*-width", element);
+        box = innerBox(box, "padding-*", element);
         return box;
     }
 
-    function innerBox(box, element, prop) {
-        var style = getComputedStyle(element);
-        var wt = parseFloat(getPropertyValue(style, prop.replace("*", "top")));
-        var wr = parseFloat(getPropertyValue(style, prop.replace("*", "right")));
-        var wb = parseFloat(getPropertyValue(style, prop.replace("*", "bottom")));
-        var wl = parseFloat(getPropertyValue(style, prop.replace("*", "left")));
+    function innerBox(box, prop, element) {
+        var style, wt, wr, wb, wl;
+        if (typeof prop == "string") {
+            style = getComputedStyle(element);
+            wt = parseFloat(getPropertyValue(style, prop.replace("*", "top")));
+            wr = parseFloat(getPropertyValue(style, prop.replace("*", "right")));
+            wb = parseFloat(getPropertyValue(style, prop.replace("*", "bottom")));
+            wl = parseFloat(getPropertyValue(style, prop.replace("*", "left")));
+        }
+        else if (typeof prop == "number") {
+            wt = wr = wb = wl = prop;
+        }
         return {
             top    : box.top + wt,
             right  : box.right - wr,
@@ -147,6 +158,7 @@
         if (r.x <= 0 || r.y <= 0) {
             r.x = r.y = 0;
         }
+        return r;
     }
 
     function elementRoundBox(element, box, type) {
@@ -157,7 +169,7 @@
         var rBL = getBorderRadius(style, "bottom-left");
         var rBR = getBorderRadius(style, "bottom-right");
 
-        if (type > 0) {
+        if (type == "padding" || type == "content") {
             var bt = getBorder(style, "top");
             var br = getBorder(style, "right");
             var bb = getBorder(style, "bottom");
@@ -166,17 +178,23 @@
             rTR.x -= br.width; rTR.y -= bt.width;
             rBR.x -= br.width; rBR.y -= bb.width;
             rBL.x -= bl.width; rBL.y -= bb.width;
+            if (type == "content") {
+                var pt = parseFloat(getPropertyValue(style, "padding-top"));
+                var pr = parseFloat(getPropertyValue(style, "padding-right"));
+                var pb = parseFloat(getPropertyValue(style, "padding-bottom"));
+                var pl = parseFloat(getPropertyValue(style, "padding-left"));
+                rTL.x -= pl; rTL.y -= pt;
+                rTR.x -= pr; rTR.y -= pt;
+                rBR.x -= pr; rBR.y -= pb;
+                rBL.x -= pl; rBL.y -= pb;
+            }
         }
 
-        if (type > 1) {
-            var pt = parseFloat(getPropertyValue(style, "padding-top"));
-            var pr = parseFloat(getPropertyValue(style, "padding-right"));
-            var pb = parseFloat(getPropertyValue(style, "padding-bottom"));
-            var pl = parseFloat(getPropertyValue(style, "padding-left"));
-            rTL.x -= pl; rTL.y -= pt;
-            rTR.x -= pr; rTR.y -= pt;
-            rBR.x -= pr; rBR.y -= pb;
-            rBL.x -= pl; rBL.y -= pb;
+        if (typeof type == "number") {
+            rTL.x -= type; rTL.y -= type;
+            rTR.x -= type; rTR.y -= type;
+            rBR.x -= type; rBR.y -= type;
+            rBL.x -= type; rBL.y -= type;
         }
 
         return roundBox(box, rTL, rTR, rBR, rBL);
@@ -273,7 +291,7 @@
             }
         }
 
-        var innerbox = innerBox(element.getBoundingClientRect(), element, "border-*-width");
+        var innerbox = innerBox(element.getBoundingClientRect(), "border-*-width", element);
 
         // CSS "clip" property - if present, replace the group with a
         // new one which is clipped.  This must happen before drawing
@@ -301,6 +319,19 @@
         })();
 
         var boxes = element.getClientRects();
+        if (boxes.length == 1) {
+            // Workaround the missing borders in Chrome!  getClientRects() boxes contains values
+            // rounded to integer.  getBoundingClientRect() appears to work fine.  We still need
+            // getClientRects() to support cases where there are more boxes (continued inline
+            // elements that might have border/background).
+            boxes = [ element.getBoundingClientRect() ];
+        }
+
+        // This function workarounds another Chrome bug, where boxes returned for a table with
+        // border-collapse: collapse will overlap the table border.  Our rendering is not perfect in
+        // such case anyway, but with this is better than without it.
+        boxes = adjustBoxes(boxes);
+
         for (var i = 0; i < boxes.length; ++i) {
             drawOne(boxes[i], i === 0, i == boxes.length - 1);
         }
@@ -310,7 +341,7 @@
         (function(){
             var overflow = getPropertyValue(style, "overflow");
             if (/^(hidden|auto)$/.test(overflow)) {
-                var clipPath = elementRoundBox(element, innerbox, 1);
+                var clipPath = elementRoundBox(element, innerbox, "padding");
                 var tmp = new drawing.Group();
                 setClipping(tmp, clipPath);
                 group.append(tmp);
@@ -321,6 +352,36 @@
         renderContents(element, style, group);
 
         return group; // only utility functions after this line.
+
+        function adjustBoxes(boxes) {
+            if (/^td$/i.test(element.tagName)) {
+                var table = nodeInfo.table;
+                if (table && getPropertyValue(table.style, "border-collapse") == "collapse") {
+                    var tableBorderLeft = getBorder(table.style, "left").width;
+                    var tableBorderTop = getBorder(table.style, "top").width;
+                    // check if we need to adjust
+                    if (tableBorderLeft === 0 && tableBorderTop === 0) {
+                        return boxes; // nope
+                    }
+                    var tableBox = table.element.getBoundingClientRect();
+                    var firstCell = table.element.rows[0].cells[0];
+                    var firstCellBox = firstCell.getBoundingClientRect();
+                    if (firstCellBox.top == tableBox.top || firstCellBox.left == tableBox.left) {
+                        return slice.call(boxes).map(function(box){
+                            return {
+                                left   : box.left + tableBorderLeft,
+                                top    : box.top + tableBorderTop,
+                                right  : box.right + tableBorderLeft,
+                                bottom : box.bottom + tableBorderTop,
+                                height : box.height,
+                                width  : box.width
+                            };
+                        });
+                    }
+                }
+            }
+            return boxes;
+        }
 
         // this function will be called to draw each border.  it
         // draws starting at origin and the resulted path must be
@@ -457,10 +518,10 @@
             // for background-origin: border-box the box is already appropriate
             var orgBox = box;
             if (backgroundOrigin == "content-box") {
-                orgBox = innerBox(orgBox, element, "border-*-width");
-                orgBox = innerBox(orgBox, element, "padding-*");
+                orgBox = innerBox(orgBox, "border-*-width", element);
+                orgBox = innerBox(orgBox, "padding-*", element);
             } else if (backgroundOrigin == "padding-box") {
-                orgBox = innerBox(orgBox, element, "border-*-width");
+                orgBox = innerBox(orgBox, "border-*-width", element);
             }
 
             // XXX: this really assumes the image is in cache.
@@ -532,7 +593,111 @@
 
         // draws a single border box
         function drawOne(box, isFirst, isLast) {
+            if (box.width === 0 || box.height === 0) {
+                return;
+            }
+
             drawBackground(box);
+
+            var shouldDrawLeft = (left.width > 0 && ((isFirst && dir == "ltr") || (isLast && dir == "rtl")));
+            var shouldDrawRight = (right.width > 0 && ((isLast && dir == "ltr") || (isFirst && dir == "rtl")));
+
+            // The most general case is that the 4 borders have different widths and border
+            // radiuses.  The way that is handled is by drawing 3 Paths for each border: the
+            // straight line, and two round corners which represent half of the entire rounded
+            // corner.  To simplify code those shapes are drawed at origin (by the drawEdge
+            // function), then translated/rotated into the right position.
+            //
+            // However, this leads to poor results due to rounding in the simpler cases where
+            // borders are straight lines.  Therefore we handle a few such cases separately with
+            // straight lines. C^wC^wC^w -- nope, scratch that.  poor rendering was because of a bug
+            // in Chrome (getClientRects() returns rounded integer values rather than exact floats.
+            // web dev is still a ghetto.)
+
+            // first, just in case there is no border...
+            if (top.width === 0 && left.width === 0 && right.width === 0 && bottom.width === 0) {
+                return;
+            }
+
+            if (true) { // so that it's easy to comment out..  uglifyjs will drop the spurious if.
+
+                // if all borders have equal colors...
+                if (top.color == right.color && top.color == bottom.color && top.color == left.color) {
+
+                    // if same widths too, we can draw the whole border by stroking a single path.
+                    if (top.width == right.width && top.width == bottom.width && top.width == left.width)
+                    {
+                        // reduce box by half the border width, so we can draw it by stroking.
+                        box = innerBox(box, top.width/2);
+
+                        if (shouldDrawLeft && shouldDrawRight) {
+                            // adjust the border radiuses, again by top.width/2, and make the path element.
+                            var path = elementRoundBox(element, box, top.width/2);
+                            path.options.stroke = {
+                                color: top.color,
+                                width: top.width
+                            };
+                            group.append(path);
+                            return;
+                        }
+                    }
+                }
+
+                // if border radiuses are zero and widths are at most one pixel, we can again use simple
+                // paths.
+                if (rTL.x === 0 && rTR.x === 0 && rBR.x === 0 && rBL.x === 0) {
+                    // alright, 1.9px will do as well.  the difference in color blending should not be
+                    // noticeable.
+                    if (top.width < 2 && left.width < 2 && right.width < 2 && bottom.width < 2) {
+                        // top border
+                        if (top.width > 0) {
+                            group.append(
+                                new drawing.Path({
+                                    stroke: { width: top.width, color: top.color }
+                                })
+                                    .moveTo(box.left, box.top + top.width/2)
+                                    .lineTo(box.right, box.top + top.width/2)
+                            );
+                        }
+
+                        // bottom border
+                        if (bottom.width > 0) {
+                            group.append(
+                                new drawing.Path({
+                                    stroke: { width: bottom.width, color: bottom.color }
+                                })
+                                    .moveTo(box.left, box.bottom - bottom.width/2)
+                                    .lineTo(box.right, box.bottom - bottom.width/2)
+                            );
+                        }
+
+                        // left border
+                        if (shouldDrawLeft) {
+                            group.append(
+                                new drawing.Path({
+                                    stroke: { width: left.width, color: left.color }
+                                })
+                                    .moveTo(box.left + left.width/2, box.top)
+                                    .lineTo(box.left + left.width/2, box.bottom)
+                            );
+                        }
+
+                        // right border
+                        if (shouldDrawRight) {
+                            group.append(
+                                new drawing.Path({
+                                    stroke: { width: right.width, color: right.color }
+                                })
+                                    .moveTo(box.right - right.width/2, box.top)
+                                    .lineTo(box.right - right.width/2, box.bottom)
+                            );
+                        }
+
+                        return;
+                    }
+                }
+
+            }
 
             // top border
             if (top.width > 0) {
@@ -551,7 +716,7 @@
             }
 
             // left border
-            if (left.width > 0 && ((isFirst && dir == "ltr") || (isLast && dir == "rtl"))) {
+            if (shouldDrawLeft) {
                 drawEdge(left.color,
                          box.height, left.width, bottom.width, top.width,
                          inv(rBL), inv(rTL),
@@ -559,7 +724,7 @@
             }
 
             // right border
-            if (right.width > 0 && ((isLast && dir == "ltr") || (isFirst && dir == "rtl"))) {
+            if (shouldDrawRight) {
                 drawEdge(right.color,
                          box.height, right.width, top.width, bottom.width,
                          inv(rTR), inv(rBR),
@@ -572,7 +737,7 @@
         var box = getContentBox(element);
         var rect = new geo.Rect([ box.left, box.top ], [ box.width, box.height ]);
         var image = new drawing.Image(element.src, rect);
-        setClipping(image, elementRoundBox(element, box, 2));
+        setClipping(image, elementRoundBox(element, box, "content"));
         group.append(image);
     }
 
@@ -611,7 +776,7 @@
             return;
         }
 
-        var hasDecoration = pushTextDecoration(style);
+        pushNodeInfo(element, style);
 
         var children = [];
         for (var i = element.firstChild; i; i = i.nextSibling) {
@@ -635,9 +800,7 @@
             renderElement(el, group);
         });
 
-        if (hasDecoration) {
-            popTextDecoration();
-        }
+        popNodeInfo();
     }
 
     function renderText(element, node, group) {
@@ -759,9 +922,9 @@
 
         function decorate(box) {
             /*jshint -W069 */// aaaaargh!  JSHate.
-            line(textDecorations["underline"], box.bottom);
-            line(textDecorations["line-through"], box.bottom - box.height / 2.7);
-            line(textDecorations["overline"], box.top);
+            line(nodeInfo["underline"], box.bottom);
+            line(nodeInfo["line-through"], box.bottom - box.height / 2.7);
+            line(nodeInfo["overline"], box.top);
             function line(color, ypos) {
                 if (color) {
                     var width = fontSize / 12;
