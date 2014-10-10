@@ -2,8 +2,9 @@
     define([
         "./shapes",
         "../../kendo.pdf",
-        "../../kendo.colorpicker", // for kendo.parseColor
-        "../../kendo.dataviz.core"
+        "../../kendo.saveas",
+        "../../kendo.colorpicker", // XXX: for kendo.parseColor
+        "../../kendo.dataviz.core" // XXX: for dataviz.Color.namedColors
     ], f);
 })(function(){
 
