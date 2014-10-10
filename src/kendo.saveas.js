@@ -10,7 +10,7 @@ var __meta__ = {
     depends: [ "core" ]
 };
 
-(function(kendo, $) {
+(function($, kendo) {
     function postToProxy(dataURI, fileName, proxyURL) {
         var form = $("<form>").attr({
             action: proxyURL,
@@ -78,7 +78,7 @@ var __meta__ = {
     } else {
         kendo.saveAs = postToProxy;
     }
-})(kendo, kendo.jQuery);
+})(kendo.jQuery, kendo);
 
 return kendo;
 

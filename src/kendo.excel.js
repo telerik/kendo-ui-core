@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.data" ], f);
+    define([ "./kendo.data", "./kendo.saveas" ], f);
 })(function(){
 
 /* global JSZip */
@@ -9,12 +9,12 @@ var __meta__ = {
     name: "Excel export",
     category: "framework",
     advanced: true,
-    depends: [ "data" ]
+    depends: [ "saveas", "data" ]
 };
 
 (function($, kendo){
 
-kendo.data.ExcelExporter = kendo.Class.extend({
+kendo.ExcelExporter = kendo.Class.extend({
     init: function(options) {
         this.columns = $.map(options.columns || [], this._prepareColumn);
 
@@ -249,6 +249,38 @@ kendo.data.ExcelExporter = kendo.Class.extend({
         }));
     }
 });
+
+kendo.ExcelMixin = {
+    extend: function(proto) {
+       proto.events.push("excelExport");
+       proto.options.excel = this.options;
+       proto.saveAsExcel = this.saveAsExcel;
+    },
+    options: {
+        proxyURL: "",
+        allPages: false,
+        filterable: false,
+        fileName: "Export.xlsx"
+    },
+    saveAsExcel: function() {
+        var excel = this.options.excel || {};
+
+        var exporter = new kendo.ExcelExporter({
+            columns: this.columns,
+            dataSource: this.dataSource,
+            allPages: excel.allPages,
+            filterable: excel.filterable
+        });
+
+        exporter.workbook().then($.proxy(function(book) {
+            if (!this.trigger("excelExport", { workbook: book })) {
+                var workbook = new kendo.ooxml.Workbook(book);
+
+                kendo.saveAs(workbook.toDataURL(), book.fileName || excel.fileName, excel.proxyURL);
+            }
+        }, this));
+    }
+};
 
 })(kendo.jQuery, kendo);
 

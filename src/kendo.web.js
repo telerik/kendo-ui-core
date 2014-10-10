@@ -10,7 +10,7 @@
         "./kendo.data",
         "./kendo.saveas.js",
         "./kendo.ooxml.js",
-        "./kendo.data.excel.js",
+        "./kendo.excel.js",
         "./kendo.data.signalr",
         "./kendo.binder",
         "./kendo.validator",

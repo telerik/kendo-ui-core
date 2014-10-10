@@ -1,6 +1,6 @@
 (function(){
 
-var Exporter = kendo.data.ExcelExporter;
+var Exporter = kendo.ExcelExporter;
 var DataSource = kendo.data.DataSource;
 var exporter;
 var dataSource;

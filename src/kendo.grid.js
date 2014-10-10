@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.data", "./kendo.columnsorter", "./kendo.editable", "./kendo.window", "./kendo.filtermenu", "./kendo.columnmenu", "./kendo.groupable", "./kendo.pager", "./kendo.selectable", "./kendo.sortable", "./kendo.reorderable", "./kendo.resizable", "./kendo.mobile.actionsheet", "./kendo.mobile.pane", "./kendo.ooxml", "./kendo.data.excel" ], f);
+    define([ "./kendo.data", "./kendo.columnsorter", "./kendo.editable", "./kendo.window", "./kendo.filtermenu", "./kendo.columnmenu", "./kendo.groupable", "./kendo.pager", "./kendo.selectable", "./kendo.sortable", "./kendo.reorderable", "./kendo.resizable", "./kendo.mobile.actionsheet", "./kendo.mobile.pane", "./kendo.ooxml", "./kendo.excel" ], f);
 })(function(){
 
 var __meta__ = {
@@ -62,7 +62,7 @@ var __meta__ = {
         id: "grid-excel-export",
         name: "Excel export",
         description: "Export grid data as Excel spreadsheet",
-        depends: [ "ooxml", "data.excel" ]
+        depends: [ "excel" ]
     } ]
 };
 
@@ -789,7 +789,6 @@ var __meta__ = {
            CHANGE,
            "dataBinding",
            "cancel",
-           "excelExport",
            "pdfExport",
            DATABOUND,
            DETAILEXPAND,
@@ -890,12 +889,6 @@ var __meta__ = {
                     excel: defaultCommands.excel.text,
                     pdf: defaultCommands.pdf.text
                 }
-            },
-            excel: {
-                proxyURL: "",
-                allPages: false,
-                filterable: false,
-                fileName: "Export.xlsx"
             },
             pdf: {
                 fileName: "Export.pdf",
@@ -2499,7 +2492,7 @@ var __meta__ = {
                 container.on(CLICK + NS, ".k-grid-excel", function(e) {
                     e.preventDefault();
 
-                    that.exportToExcel();
+                    that.saveAsExcel();
                 });
 
                 container.on(CLICK + NS, ".k-grid-pdf", function(e) {
@@ -5335,27 +5328,6 @@ var __meta__ = {
               containers[idx].style.display = "";
           }
        },
-       exportToExcel: function() {
-          var excel = this.options.excel || {};
-
-          var exporter = new kendo.data.ExcelExporter({
-              columns: this.columns,
-              dataSource: this.dataSource,
-              allPages: excel.allPages,
-              filterable: excel.filterable
-          });
-
-          exporter.workbook().then($.proxy(function(book) {
-              if (!this.trigger("excelExport", { workbook: book })) {
-                  var workbook = new kendo.ooxml.Workbook(book);
-
-                  kendo.saveAs(workbook.toDataURL(),
-                      book.fileName || excel.fileName,
-                      excel.proxyURL
-                  );
-              }
-          }, this));
-       },
        exportToPDF: function() {
            if (this.trigger("pdfExport")) {
                return;
@@ -5372,6 +5344,10 @@ var __meta__ = {
            });
        }
    });
+
+   if (kendo.ExcelMixin) {
+       kendo.ExcelMixin.extend(Grid.prototype);
+   }
 
    function adjustRowHeight(row1, row2) {
        var height;
@@ -5458,10 +5434,6 @@ var __meta__ = {
        }
 
        if (currentTable !== table[0] && currentTable !== table[1] && currentTable !== headerTable[0] && currentTable !== headerTable[1]) {
-           return;
-       }
-
-       if ($(e.target).is("a.k-i-collapse, a.k-i-expand")) {
            return;
        }
 
