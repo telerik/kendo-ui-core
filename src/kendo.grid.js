@@ -462,8 +462,13 @@ var __meta__ = {
             return fieldsMap;
     }
 
-    function reorder(selector, source, dest, before) {
-        source = selector.eq(source);
+    function reorder(selector, source, dest, before, count) {
+        var sourceIndex = source;
+        source = $();
+        count = count || 1;
+        for (var idx = 0; idx < count; idx++) {
+            source = source.add(selector.eq(sourceIndex + idx));
+        }
 
         if (typeof dest == "number") {
             source[before ? "insertBefore" : "insertAfter"](selector.eq(dest));
@@ -513,6 +518,12 @@ var __meta__ = {
 
             return extend({ encoded: encoded, hidden: hidden }, column);
         });
+    }
+
+    function columnParent(column, columns) {
+        var parents = [];
+        columnParents(column, columns, parents);
+        return parents[0];
     }
 
     function columnParents(column, columns, parents) {
@@ -1699,9 +1710,29 @@ var __meta__ = {
             }
         },
 
+        _reorderHeader: function(sources, targets, before) {
+            var that = this;
+            var sourcePosition = columnVisiblePosition(sources[0], that.columns);
+            var destPosition = columnVisiblePosition(targets, that.columns);
+
+            var leafs = [];
+            for (var idx = 0; idx < sources.length; idx++) {
+                if (sources[idx].columns) {
+                    leafs = leafs.concat(sources[idx].columns);
+                }
+            }
+
+            if (leafs.length && targets.columns) {
+                that._reorderHeader(leafs, targets.columns[before ? 0 : targets.columns.length - 1], before);
+            }
+
+            reorder(elements(that.lockedHeader, that.thead, "tr:eq(" + sourcePosition.row + ")>th.k-header:not(.k-group-cell,.k-hierarchy-cell)"), sourcePosition.cell, destPosition.cell, before, sources.length);
+        },
+
         reorderColumn: function(destIndex, column, before) {
             var that = this,
-                columns = that.columns,
+                parent = columnParent(column, that.columns),
+                columns = parent ? parent.columns : that.columns,
                 sourceIndex = inArray(column, columns),
                 destColumn = columns[destIndex],
                 colSourceIndex = inArray(column, visibleColumns(columns)),
@@ -1751,47 +1782,89 @@ var __meta__ = {
                 before = destIndex < sourceIndex;
             }
 
-            columns.splice(before ? destIndex : destIndex + 1, 0, column);
-            columns.splice(sourceIndex < destIndex ? sourceIndex : sourceIndex + 1, 1);
-            that._templates();
+            that._reorderHeader([column], destColumn, before);
 
-            reorder(elements(that.lockedHeader, that.thead.prev(), "col:not(.k-group-col,.k-hierarchy-col)"), colSourceIndex, headerCol, before);
-            if (that.options.scrollable) {
-                reorder(elements(that.lockedTable, that.tbody.prev(), "col:not(.k-group-col,.k-hierarchy-col)"), colSourceIndex, colDest, before);
-            }
+            var reorderContent = function(source, destination) {
+                var lockedRows = $();
+                var sourceIndex = inArray(source, leafColumns(that.columns));
+                var destIndex = inArray(destination, leafColumns(that.columns));
 
-            reorder(elements(that.lockedHeader, that.thead, "th.k-header:not(.k-group-cell,.k-hierarchy-cell)"), sourceIndex, destIndex, before);
-            if (that._hasFilterRow()) {
-                reorder(that.wrapper.find(".k-filter-row th:not(.k-group-cell,.k-hierarchy-cell)"), sourceIndex, destIndex, before);
-            }
+                var colSourceIndex = inArray(source, visibleLeafColumns(that.columns));
+                var colDest = inArray(destination, visibleLeafColumns(that.columns));
 
-            if (footer && footer.length) {
-                reorder(elements(that.lockedFooter, footer.find(".k-grid-footer-wrap"), ">table>colgroup>col:not(.k-group-col,.k-hierarchy-col)"), colSourceIndex, footerCol, before);
-                reorder(footer.find(".k-footer-template>td:not(.k-group-cell,.k-hierarchy-cell)"), sourceIndex, destIndex, before);
-            }
+                var headerCol, footerCol;
+                headerCol = footerCol = colDest;
 
-            rows = that.tbody.children(":not(.k-grouping-row,.k-detail-row)");
-            if (that.lockedTable) {
-                if (lockedCount > destIndex) {
-                    if (lockedCount <= sourceIndex) {
-                        updateColspan(
-                            that.lockedTable.find(">tbody>tr.k-grouping-row"),
-                            that.table.find(">tbody>tr.k-grouping-row")
-                        );
+                if (destination.hidden) {
+                    if (isLocked) {
+                        colDest = that.lockedTable.find("colgroup");
+                        headerCol = that.lockedHeader.find("colgroup");
+                        footerCol = $(that.lockedFooter).find(">table>colgroup");
+                    } else {
+                        colDest = that.tbody.prev();
+                        headerCol = that.thead.prev();
+                        footerCol = footer.find(".k-grid-footer-wrap").find(">table>colgroup");
                     }
-                } else if (lockedCount > sourceIndex) {
-                    updateColspan(
-                        that.table.find(">tbody>tr.k-grouping-row"),
-                        that.lockedTable.find(">tbody>tr.k-grouping-row")
-                    );
                 }
 
-                lockedRows = that.lockedTable.find(">tbody>tr:not(.k-grouping-row,.k-detail-row)");
+                if (that._hasFilterRow()) {
+                    reorder(that.wrapper.find(".k-filter-row th:not(.k-group-cell,.k-hierarchy-cell)"), sourceIndex, destIndex, before);
+                }
+
+                reorder(elements(that.lockedHeader, that.thead.prev(), "col:not(.k-group-col,.k-hierarchy-col)"), colSourceIndex, headerCol, before);
+
+                if (that.options.scrollable) {
+                    reorder(elements(that.lockedTable, that.tbody.prev(), "col:not(.k-group-col,.k-hierarchy-col)"), colSourceIndex, colDest, before);
+                }
+
+                if (footer && footer.length) {
+                    reorder(elements(that.lockedFooter, footer.find(".k-grid-footer-wrap"), ">table>colgroup>col:not(.k-group-col,.k-hierarchy-col)"), colSourceIndex, footerCol, before);
+                    reorder(footer.find(".k-footer-template>td:not(.k-group-cell,.k-hierarchy-cell)"), sourceIndex, destIndex, before);
+                }
+
+                var rows = that.tbody.children(":not(.k-grouping-row,.k-detail-row)");
+                if (that.lockedTable) {
+                    if (lockedCount > destIndex) {
+                        if (lockedCount <= sourceIndex) {
+                            updateColspan(
+                                that.lockedTable.find(">tbody>tr.k-grouping-row"),
+                                that.table.find(">tbody>tr.k-grouping-row")
+                            );
+                        }
+                    } else if (lockedCount > sourceIndex) {
+                        updateColspan(
+                            that.table.find(">tbody>tr.k-grouping-row"),
+                            that.lockedTable.find(">tbody>tr.k-grouping-row")
+                        );
+                    }
+
+                    lockedRows = that.lockedTable.find(">tbody>tr:not(.k-grouping-row,.k-detail-row)");
+                }
+
+                for (var idx = 0, length = rows.length; idx < length; idx += 1) {
+                    reorder(elements(lockedRows[idx], rows[idx], ">td:not(.k-group-cell,.k-hierarchy-cell)"), sourceIndex, destIndex, before);
+                }
             }
 
-            for (idx = 0, length = rows.length; idx < length; idx += 1) {
-                reorder(elements(lockedRows[idx], rows[idx], ">td:not(.k-group-cell,.k-hierarchy-cell)"), sourceIndex, destIndex, before);
-            }
+            //if (column.columns || destColumn.columns) {
+            //    if (column.columns) {
+            //        if (destColumn.columns) {
+            //            destColumn = leafColumns(destColumn.columns)[0];
+            //        }
+
+            //        var dataColumns = leafColumns(column.columns);
+            //        for (idx = dataColumns.length - 1; idx >= 0; idx--) {
+            //            reorderContent(dataColumns[idx], destColumn);
+            //        }
+            //    }
+            //} else {
+                reorderContent(column, destColumn);
+            //}
+
+            columns.splice(before ? destIndex : destIndex + 1, 0, column);
+            columns.splice(sourceIndex < destIndex ? sourceIndex : sourceIndex + 1, 1);
+
+            that._templates();
 
             that._updateTablesWidth();
             that._applyLockedContainersWidth();

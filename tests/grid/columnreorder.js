@@ -969,6 +969,462 @@
         equal(grid.table.find(".k-grouping-row:eq(1)>td:not(.k-group-cell)").attr("colspan"), 3, "colspan in non-locked table");
     });
 
+    test("reorder second level header with single columns", function() {
+        var grid = new Grid(div, {
+            columns: [
+                { title: "master", width: 10 },
+                { title: "master1",
+                    columns: [
+                        { title: "master1-child", columns: [{ title: "master1-child-child", width: 20 }] },
+                        { title: "master1-child1", columns: [{ title: "master1-child1-child", width: 20 }] },
+                ] }
+            ],
+            dataSource: {
+                data: data
+            }
+        });
+
+        grid.reorderColumn(1, grid.columns[1].columns[0]);
+
+        var rows = grid.thead.find("tr");
+
+        equal(rows.eq(0).find("th").eq(0).text(), "master");
+        equal(rows.eq(0).find("th").eq(1).text(), "master1");
+        equal(rows.eq(1).find("th").eq(0).text(), "master1-child1");
+        equal(rows.eq(1).find("th").eq(1).text(), "master1-child");
+        equal(rows.eq(2).find("th").eq(0).text(), "master1-child1-child");
+        equal(rows.eq(2).find("th").eq(1).text(), "master1-child-child");
+    });
+
+    test("reorder second level header with single columns - insert before", function() {
+        var grid = new Grid(div, {
+            columns: [
+                { title: "master", width: 10 },
+                { title: "master1",
+                    columns: [
+                        { title: "master1-child", columns: [{ title: "master1-child-child", width: 20 }] },
+                        { title: "master1-child1", columns: [{ title: "master1-child1-child", width: 20 }] },
+                ] }
+            ],
+            dataSource: {
+                data: data
+            }
+        });
+
+        grid.reorderColumn(0, grid.columns[1].columns[1], true);
+
+        var rows = grid.thead.find("tr");
+
+        equal(rows.eq(0).find("th").eq(0).text(), "master");
+        equal(rows.eq(0).find("th").eq(1).text(), "master1");
+        equal(rows.eq(1).find("th").eq(0).text(), "master1-child1");
+        equal(rows.eq(1).find("th").eq(1).text(), "master1-child");
+        equal(rows.eq(2).find("th").eq(0).text(), "master1-child1-child");
+        equal(rows.eq(2).find("th").eq(1).text(), "master1-child-child");
+    });
+
+    test("reorder second level header with single columns - columns collection is updated", function() {
+        var grid = new Grid(div, {
+            columns: [
+                { title: "master", width: 10 },
+                { title: "master1",
+                    columns: [
+                        { title: "master1-child", columns: [{ title: "master1-child-child", width: 20 }] },
+                        { title: "master1-child1", columns: [{ title: "master1-child1-child", width: 20 }] },
+                ] }
+            ],
+            dataSource: {
+                data: data
+            }
+        });
+
+        grid.reorderColumn(0, grid.columns[1].columns[1], true);
+
+        equal(grid.columns[1].columns.length, 2);
+
+        equal(grid.columns[1].columns[0].title, "master1-child1");
+        equal(grid.columns[1].columns[1].title, "master1-child");
+        equal(grid.columns[1].columns[0].columns[0].title, "master1-child1-child");
+        equal(grid.columns[1].columns[1].columns[0].title, "master1-child-child");
+    });
+
+    test("reorder second level header with single columns - not beside of each other", function() {
+        var grid = new Grid(div, {
+            columns: [
+                { title: "master", width: 10 },
+                { title: "master1",
+                    columns: [
+                        { title: "master1-child", columns: [{ title: "master1-child-child", width: 20 }] },
+                        { title: "master1-child1", columns: [{ title: "master1-child1-child", width: 20 }] },
+                        { title: "master1-child2", columns: [{ title: "master1-child2-child", width: 20 }] }
+                ] }
+            ],
+            dataSource: {
+                data: data
+            }
+        });
+
+        grid.reorderColumn(2, grid.columns[1].columns[0]);
+
+        var rows = grid.thead.find("tr");
+
+        equal(rows.eq(0).find("th").eq(0).text(), "master");
+        equal(rows.eq(0).find("th").eq(1).text(), "master1");
+
+        equal(rows.eq(1).find("th").eq(0).text(), "master1-child1");
+        equal(rows.eq(1).find("th").eq(1).text(), "master1-child2");
+        equal(rows.eq(1).find("th").eq(2).text(), "master1-child");
+
+        equal(rows.eq(2).find("th").eq(0).text(), "master1-child1-child");
+        equal(rows.eq(2).find("th").eq(1).text(), "master1-child2-child");
+        equal(rows.eq(2).find("th").eq(2).text(), "master1-child-child");
+    });
+
+    test("reorder second level header with single columns - not beside of each other - insert before", function() {
+        var grid = new Grid(div, {
+            columns: [
+                { title: "master", width: 10 },
+                { title: "master1",
+                    columns: [
+                        { title: "master1-child", columns: [{ title: "master1-child-child", width: 20 }] },
+                        { title: "master1-child1", columns: [{ title: "master1-child1-child", width: 20 }] },
+                        { title: "master1-child2", columns: [{ title: "master1-child2-child", width: 20 }] }
+                ] }
+            ],
+            dataSource: {
+                data: data
+            }
+        });
+
+        grid.reorderColumn(0, grid.columns[1].columns[2], true);
+
+        var rows = grid.thead.find("tr");
+
+        equal(rows.eq(0).find("th").eq(0).text(), "master");
+        equal(rows.eq(0).find("th").eq(1).text(), "master1");
+
+        equal(rows.eq(1).find("th").eq(0).text(), "master1-child2");
+        equal(rows.eq(1).find("th").eq(1).text(), "master1-child");
+        equal(rows.eq(1).find("th").eq(2).text(), "master1-child1");
+
+        equal(rows.eq(2).find("th").eq(0).text(), "master1-child2-child");
+        equal(rows.eq(2).find("th").eq(1).text(), "master1-child-child");
+        equal(rows.eq(2).find("th").eq(2).text(), "master1-child1-child");
+    });
+
+    test("reorder second level header with single columns - not beside of each other - insert before ltr", function() {
+        var grid = new Grid(div, {
+            columns: [
+                { title: "master", width: 10 },
+                { title: "master1",
+                    columns: [
+                        { title: "master1-child", columns: [{ title: "master1-child-child", width: 20 }] },
+                        { title: "master1-child1", columns: [{ title: "master1-child1-child", width: 20 }] },
+                        { title: "master1-child2", columns: [{ title: "master1-child2-child", width: 20 }] }
+                ] }
+            ],
+            dataSource: {
+                data: data
+            }
+        });
+
+        grid.reorderColumn(2, grid.columns[1].columns[0], true);
+
+        var rows = grid.thead.find("tr");
+
+        equal(rows.eq(0).find("th").eq(0).text(), "master");
+        equal(rows.eq(0).find("th").eq(1).text(), "master1");
+
+        equal(rows.eq(1).find("th").eq(0).text(), "master1-child1");
+        equal(rows.eq(1).find("th").eq(1).text(), "master1-child");
+        equal(rows.eq(1).find("th").eq(2).text(), "master1-child2");
+
+        equal(rows.eq(2).find("th").eq(0).text(), "master1-child1-child");
+        equal(rows.eq(2).find("th").eq(1).text(), "master1-child-child");
+        equal(rows.eq(2).find("th").eq(2).text(), "master1-child2-child");
+    });
+
+    test("reorder second level header with two source child columns - rtl with insert before", function() {
+        var grid = new Grid(div, {
+            columns: [
+                { title: "master", width: 10 },
+                { title: "master1",
+                    columns: [
+                        { title: "master1-child", columns: [{ title: "master1-child-child", width: 20 }] },
+                        { title: "master1-child1", columns: [{ title: "master1-child1-child", width: 20 }, { title: "master1-child1-child2", width: 20 }] }
+                ] }
+            ],
+            dataSource: {
+                data: data
+            }
+        });
+
+        grid.reorderColumn(0, grid.columns[1].columns[1], true);
+
+        var rows = grid.thead.find("tr");
+
+        equal(rows.eq(0).find("th").eq(0).text(), "master");
+        equal(rows.eq(0).find("th").eq(1).text(), "master1");
+
+        equal(rows.eq(1).find("th").eq(0).text(), "master1-child1");
+        equal(rows.eq(1).find("th").eq(1).text(), "master1-child");
+
+        equal(rows.eq(2).find("th").eq(0).text(), "master1-child1-child");
+        equal(rows.eq(2).find("th").eq(1).text(), "master1-child1-child2");
+        equal(rows.eq(2).find("th").eq(2).text(), "master1-child-child");
+    });
+
+    test("reorder second level header with two source child columns - ltr", function() {
+        var grid = new Grid(div, {
+            columns: [
+                { title: "master", width: 10 },
+                { title: "master1",
+                    columns: [
+                        { title: "master1-child", columns: [{ title: "master1-child-child", width: 20 }, { title: "master1-child-child2", width: 20 }] },
+                        { title: "master1-child1", columns: [{ title: "master1-child1-child", width: 20 }] }
+                ] }
+            ],
+            dataSource: {
+                data: data
+            }
+        });
+
+        grid.reorderColumn(1, grid.columns[1].columns[0]);
+
+        var rows = grid.thead.find("tr");
+
+        equal(rows.eq(0).find("th").eq(0).text(), "master");
+        equal(rows.eq(0).find("th").eq(1).text(), "master1");
+
+        equal(rows.eq(1).find("th").eq(0).text(), "master1-child1");
+        equal(rows.eq(1).find("th").eq(1).text(), "master1-child");
+
+        equal(rows.eq(2).find("th").eq(0).text(), "master1-child1-child");
+        equal(rows.eq(2).find("th").eq(1).text(), "master1-child-child");
+        equal(rows.eq(2).find("th").eq(2).text(), "master1-child-child2");
+    });
+
+    test("reorder second level header with two source child columns - skip one - ltr", function() {
+        var grid = new Grid(div, {
+            columns: [
+                { title: "master", width: 10 },
+                { title: "master1",
+                    columns: [
+                        { title: "master1-child", columns: [{ title: "master1-child-child", width: 20 }, { title: "master1-child-child2", width: 20 }] },
+                        { title: "master1-child2", columns: [{ title: "master1-child2-child", width: 20 }, { title: "master1-child2-child2", width: 20 }] },
+                        { title: "master1-child3", columns: [{ title: "master1-child3-child", width: 20 }] }
+                ] }
+            ],
+            dataSource: {
+                data: data
+            }
+        });
+
+        grid.reorderColumn(2, grid.columns[1].columns[0]);
+
+        var rows = grid.thead.find("tr");
+
+        equal(rows.eq(0).find("th").eq(0).text(), "master");
+        equal(rows.eq(0).find("th").eq(1).text(), "master1");
+
+        equal(rows.eq(1).find("th").eq(0).text(), "master1-child2");
+        equal(rows.eq(1).find("th").eq(1).text(), "master1-child3");
+        equal(rows.eq(1).find("th").eq(2).text(), "master1-child");
+
+        equal(rows.eq(2).find("th").eq(0).text(), "master1-child2-child");
+        equal(rows.eq(2).find("th").eq(1).text(), "master1-child2-child2");
+        equal(rows.eq(2).find("th").eq(2).text(), "master1-child3-child");
+        equal(rows.eq(2).find("th").eq(3).text(), "master1-child-child");
+        equal(rows.eq(2).find("th").eq(4).text(), "master1-child-child2");
+    });
+
+    test("reorder second level header with two source child columns - skip one - ltr with before", function() {
+        var grid = new Grid(div, {
+            columns: [
+                { title: "master", width: 10 },
+                { title: "master1",
+                    columns: [
+                        { title: "master1-child", columns: [{ title: "master1-child-child", width: 20 }, { title: "master1-child-child2", width: 20 }] },
+                        { title: "master1-child2", columns: [{ title: "master1-child2-child", width: 20 }, { title: "master1-child2-child2", width: 20 }] },
+                        { title: "master1-child3", columns: [{ title: "master1-child3-child", width: 20 }] }
+                ] }
+            ],
+            dataSource: {
+                data: data
+            }
+        });
+
+        grid.reorderColumn(2, grid.columns[1].columns[0], true);
+
+        var rows = grid.thead.find("tr");
+
+        equal(rows.eq(0).find("th").eq(0).text(), "master");
+        equal(rows.eq(0).find("th").eq(1).text(), "master1");
+
+        equal(rows.eq(1).find("th").eq(0).text(), "master1-child2");
+        equal(rows.eq(1).find("th").eq(1).text(), "master1-child");
+        equal(rows.eq(1).find("th").eq(2).text(), "master1-child3");
+
+        equal(rows.eq(2).find("th").eq(0).text(), "master1-child2-child");
+        equal(rows.eq(2).find("th").eq(1).text(), "master1-child2-child2");
+        equal(rows.eq(2).find("th").eq(2).text(), "master1-child-child");
+        equal(rows.eq(2).find("th").eq(3).text(), "master1-child-child2");
+        equal(rows.eq(2).find("th").eq(4).text(), "master1-child3-child");
+    });
+
+    test("reorder second level header with two target child columns - rtl with insert before", function() {
+        var grid = new Grid(div, {
+            columns: [
+                { title: "master", width: 10 },
+                { title: "master1",
+                    columns: [
+                        { title: "master1-child", columns: [{ title: "master1-child-child", width: 20 }, { title: "master1-child-child2", width: 20 }] },
+                        { title: "master1-child1", columns: [{ title: "master1-child1-child", width: 20 }] }
+                ] }
+            ],
+            dataSource: {
+                data: data
+            }
+        });
+
+        grid.reorderColumn(0, grid.columns[1].columns[1], true);
+
+        var rows = grid.thead.find("tr");
+
+        equal(rows.eq(0).find("th").eq(0).text(), "master");
+        equal(rows.eq(0).find("th").eq(1).text(), "master1");
+
+        equal(rows.eq(1).find("th").eq(0).text(), "master1-child1");
+        equal(rows.eq(1).find("th").eq(1).text(), "master1-child");
+
+        equal(rows.eq(2).find("th").eq(0).text(), "master1-child1-child");
+        equal(rows.eq(2).find("th").eq(1).text(), "master1-child-child");
+        equal(rows.eq(2).find("th").eq(2).text(), "master1-child-child2");
+    });
+
+    test("reorder second level header with two target child columns - ltr", function() {
+        var grid = new Grid(div, {
+            columns: [
+                { title: "master", width: 10 },
+                { title: "master1",
+                    columns: [
+                        { title: "master1-child", columns: [{ title: "master1-child-child", width: 20 }] },
+                        { title: "master1-child1", columns: [{ title: "master1-child1-child", width: 20 }, { title: "master1-child1-child2", width: 20 }] }
+                ] }
+            ],
+            dataSource: {
+                data: data
+            }
+        });
+
+        grid.reorderColumn(1, grid.columns[1].columns[0]);
+
+        var rows = grid.thead.find("tr");
+
+        equal(rows.eq(0).find("th").eq(0).text(), "master");
+        equal(rows.eq(0).find("th").eq(1).text(), "master1");
+
+        equal(rows.eq(1).find("th").eq(0).text(), "master1-child1");
+        equal(rows.eq(1).find("th").eq(1).text(), "master1-child");
+
+        equal(rows.eq(2).find("th").eq(0).text(), "master1-child1-child");
+        equal(rows.eq(2).find("th").eq(1).text(), "master1-child1-child2");
+        equal(rows.eq(2).find("th").eq(2).text(), "master1-child-child");
+    });
+
+    test("reorder second level header with two target child columns - ltr insert between", function() {
+        var grid = new Grid(div, {
+            columns: [
+                { title: "master", width: 10 },
+                { title: "master1",
+                    columns: [
+                        { title: "master1-child", columns: [{ title: "master1-child-child", width: 20 }] },
+                        { title: "master1-child1", columns: [{ title: "master1-child1-child", width: 20 }, { title: "master1-child1-child2", width: 20 }] },
+                        { title: "master1-child2", columns: [{ title: "master1-child2-child", width: 20 }, { title: "master1-child2-child2", width: 20 }] }
+                ] }
+            ],
+            dataSource: {
+                data: data
+            }
+        });
+
+        grid.reorderColumn(2, grid.columns[1].columns[0], true);
+
+        var rows = grid.thead.find("tr");
+
+        equal(rows.eq(0).find("th").eq(0).text(), "master");
+        equal(rows.eq(0).find("th").eq(1).text(), "master1");
+
+        equal(rows.eq(1).find("th").eq(0).text(), "master1-child1");
+        equal(rows.eq(1).find("th").eq(1).text(), "master1-child");
+        equal(rows.eq(1).find("th").eq(2).text(), "master1-child2");
+
+        equal(rows.eq(2).find("th").eq(0).text(), "master1-child1-child");
+        equal(rows.eq(2).find("th").eq(1).text(), "master1-child1-child2");
+        equal(rows.eq(2).find("th").eq(2).text(), "master1-child-child");
+        equal(rows.eq(2).find("th").eq(3).text(), "master1-child2-child");
+        equal(rows.eq(2).find("th").eq(4).text(), "master1-child2-child2");
+    });
+
+    test("reorder second level header with two target child columns - ltr multiple columns insert after", function() {
+        var grid = new Grid(div, {
+            columns: [
+                { title: "master", width: 10 },
+                { title: "master1",
+                    columns: [
+                        { title: "master1-child", columns: [{ title: "master1-child-child", width: 20 }] },
+                        { title: "master1-child1", columns: [{ title: "master1-child1-child", width: 20 }, { title: "master1-child1-child2", width: 20 }] },
+                        { title: "master1-child2", columns: [{ title: "master1-child2-child", width: 20 }, { title: "master1-child2-child2", width: 20 }] }
+                ] }
+            ],
+            dataSource: {
+                data: data
+            }
+        });
+
+        grid.reorderColumn(2, grid.columns[1].columns[0]);
+
+        var rows = grid.thead.find("tr");
+
+        equal(rows.eq(0).find("th").eq(0).text(), "master");
+        equal(rows.eq(0).find("th").eq(1).text(), "master1");
+
+        equal(rows.eq(1).find("th").eq(0).text(), "master1-child1");
+        equal(rows.eq(1).find("th").eq(1).text(), "master1-child2");
+        equal(rows.eq(1).find("th").eq(2).text(), "master1-child");
+
+        equal(rows.eq(2).find("th").eq(0).text(), "master1-child1-child");
+        equal(rows.eq(2).find("th").eq(1).text(), "master1-child1-child2");
+        equal(rows.eq(2).find("th").eq(2).text(), "master1-child2-child");
+        equal(rows.eq(2).find("th").eq(3).text(), "master1-child2-child2");
+        equal(rows.eq(2).find("th").eq(4).text(), "master1-child-child");
+    });
+
+    test("reorder cols second level header with single columns", function() {
+        var grid = new Grid(div, {
+            columns: [
+                { title: "master", width: 10 },
+                { title: "master1",
+                    columns: [
+                        { title: "master1-child", columns: [{ title: "master1-child-child", width: 20 }] },
+                        { title: "master1-child1", columns: [{ title: "master1-child1-child", width: 30 }] },
+                ] }
+            ],
+            dataSource: {
+                data: data
+            }
+        });
+
+        grid.reorderColumn(1, grid.columns[1].columns[0]);
+
+        var cols = grid.thead.parent().find("col");
+
+        equal(cols[0].style.width, "10px");
+        equal(cols[1].style.width, "30px");
+        equal(cols[2].style.width, "20px");
+    });
+
+
     function moveOverDropTarget(draggable, dropTarget) {
         var position = dropTarget.position();
 

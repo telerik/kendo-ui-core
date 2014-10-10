@@ -92,39 +92,45 @@
                     filterable: { mode: "row" },
                     scrollable: true,
                     groupable: true,
-columnMenu: true,
+                    columnMenu: true,
                     columns: [{
                         field: "CompanyName",
                         title: "Company Name",
-
                         width: 200
-                        },
-                    {
-locked: true,
+                    },{
+//locked: true,
                         title: "Contact Info",
                         hidden: false,
-                        columns: [
-                            { columns: [
-                            {
+                        columns: [{
+                            title: "header1",
+                            columns: [{
                                 hidden: false,
                                 field: "ContactTitle",
                                 title: "Contact Title",
                                 footerTemplate: "foo",
                                 width: 200
+                            },{
+                                hidden: false,
+                                field: "CompanyName",
+                                title: "Contact Title 2",
+                                footerTemplate: "baz",
+                                width: 200
                             }]
-                        },
-                            { field: "ContactName", hidden: false, width: 100 },
-]
-                        },  {  title: "foo title", columns:  [
-                        {
-                            field: "Country",
-hidden: false,
-                            width: 150
+                        }, {
+                            //title: "header 2",
+                            //columns: [
+                            //{
+                                field: "ContactName", hidden: false, width: 100
+                            //}
+                             //   ]
+                        }]
                     },{
-                            field: "Country1",
-hidden: false,
-                            width: 150
-                    }] }]
+                        title: "foo title",
+                        columns:  [
+                            { title: "foo child",  columns: [{ field: "Country", hidden: false, width: 150 }]},{ field: "Country1", hidden: false, width: 150 }
+                            //{ title: "foo child2", columns: [{ field: "Country1", hidden: false, width: 150 }]}
+                        ]
+                    }]
 //                   columns: [
 //                   { title: "master", width: 100 },
 //                   { title: "master1", width: 200, locked: true,  field: "foo", groupFooterTemplate: "baz",
