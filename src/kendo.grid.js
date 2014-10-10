@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.data", "./kendo.columnsorter", "./kendo.editable", "./kendo.window", "./kendo.filtermenu", "./kendo.columnmenu", "./kendo.groupable", "./kendo.pager", "./kendo.selectable", "./kendo.sortable", "./kendo.reorderable", "./kendo.resizable", "./kendo.mobile.actionsheet", "./kendo.mobile.pane", "./kendo.ooxml", "./kendo.excel" ], f);
+    define([ "./kendo.data", "./kendo.columnsorter", "./kendo.editable", "./kendo.window", "./kendo.filtermenu", "./kendo.columnmenu", "./kendo.groupable", "./kendo.pager", "./kendo.selectable", "./kendo.sortable", "./kendo.reorderable", "./kendo.resizable", "./kendo.mobile.actionsheet", "./kendo.mobile.pane", "./kendo.ooxml", "./kendo.excel", "./kendo.pdf" ], f);
 })(function(){
 
 var __meta__ = {
@@ -63,6 +63,11 @@ var __meta__ = {
         name: "Excel export",
         description: "Export grid data as Excel spreadsheet",
         depends: [ "excel" ]
+    }, {
+        id: "grid-pdf-export",
+        name: "PDF export",
+        description: "Export grid data as PDF",
+        depends: [ "pdf" ]
     } ]
 };
 
@@ -889,11 +894,6 @@ var __meta__ = {
                     excel: defaultCommands.excel.text,
                     pdf: defaultCommands.pdf.text
                 }
-            },
-            pdf: {
-                fileName: "Export.pdf",
-                proxyURL: "",
-                paperSize: "auto"
             }
         },
 
@@ -2498,7 +2498,7 @@ var __meta__ = {
                 container.on(CLICK + NS, ".k-grid-pdf", function(e) {
                     e.preventDefault();
 
-                    that.exportToPDF();
+                    that.saveAsPDF();
                 });
             }
         },
@@ -5327,26 +5327,15 @@ var __meta__ = {
           for (idx = 0; idx < containersLength; idx++) {
               containers[idx].style.display = "";
           }
-       },
-       exportToPDF: function() {
-           if (this.trigger("pdfExport")) {
-               return;
-           }
-
-           var options = this.options.pdf;
-
-           kendo.dataviz.drawing.drawDOM(this.wrapper[0], function(root) {
-               root.options.set("pdf", options);
-
-               kendo.dataviz.drawing.pdf.toDataURL(root, function(dataURI) {
-                   kendo.saveAs(dataURI, options.fileName, options.proxyURL);
-               });
-           });
        }
    });
 
    if (kendo.ExcelMixin) {
        kendo.ExcelMixin.extend(Grid.prototype);
+   }
+
+   if (kendo.PDFMixin) {
+       kendo.PDFMixin.extend(Grid.prototype);
    }
 
    function adjustRowHeight(row1, row2) {
