@@ -556,7 +556,26 @@ var __meta__ = {
             var element = this.element;
             var contentWrap = element.find(DOT + classNames.gridContentWrap);
             var header = element.find(DOT + classNames.gridHeader);
-            contentWrap.height(element.height() - header.outerHeight());
+
+            // identical code found in grid & splitter :(
+            var isHeightSet = function(el) {
+                var initialHeight, newHeight;
+                if (el[0].style.height) {
+                    return true;
+                } else {
+                    initialHeight = el.height();
+                }
+
+                el.height("auto");
+                newHeight = el.height();
+                el.height("");
+
+                return (initialHeight != newHeight);
+            };
+
+            if (isHeightSet(element)) {
+                contentWrap.height(element.height() - header.outerHeight());
+            }
         },
 
         destroy: function() {
@@ -1145,28 +1164,30 @@ var __meta__ = {
             if (selectable) {
                 selectable = kendo.ui.Selectable.parseOptions(selectable);
 
-                filter = "tr";
+                filter = ">tr:not(.k-footer-template)";
 
                 if (selectable.cell) {
-                    filter = "td";
+                    filter = filter + ">td";
                 }
 
                 this.selectable = new kendo.ui.Selectable(this.content, {
                     filter: filter,
                     aria: true,
+                    multiple: selectable.multiple,
                     change: proxy(this._change, this)
                 });
             }
         },
 
         select: function(value) {
+            return this.selectable.value(value);
         },
 
         clearSelection: function() {
             var selected = this.select();
 
             if (selected.length) {
-                selected.removeClass(classNames.selected);
+                this.selectable.clear();
 
                 this.trigger(CHANGE);
             }

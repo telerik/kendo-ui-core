@@ -492,4 +492,30 @@
 
         ok(cell.hasClass("k-state-selected"));
     });
+
+    test("does not select footer row if selectable is false", function() {
+        createTreeList({
+            columns: [ { field: "id", footerTemplate: "foo" } ],
+            selectable: true
+        });
+
+        var footer = instance.content.find("tr.k-footer-template");
+
+        tap(footer);
+
+        ok(!footer.hasClass("k-state-selected"));
+    });
+
+    test("does not select footer cells", function() {
+        createTreeList({
+            columns: [ { field: "id", footerTemplate: "foo" } ],
+            selectable: "cell"
+        });
+
+        var footerCells = instance.content.find(".k-footer-template td");
+
+        tap(footerCells.eq(0));
+
+        ok(!footerCells.hasClass("k-state-selected"));
+    });
 })();

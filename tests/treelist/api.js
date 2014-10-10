@@ -171,4 +171,67 @@
 
         equal(ds.data().length, 0);
     });
+
+    test("select calls selectable.value as getter", function() {
+        createTreeList({ selectable: true });
+
+        spy(instance.selectable, "value");
+
+        instance.select();
+
+        equal(instance.selectable.calls("value"), 1);
+        ok(typeof instance.selectable.args("value")[0] == "undefined");
+    });
+
+    test("select calls selectable.value as setter", function() {
+        createTreeList({ selectable: true });
+
+        spy(instance.selectable, "value");
+
+        var row = instance.content.find("tr").eq(0);
+        instance.select(row);
+
+        equal(instance.selectable.calls("value"), 1);
+        equal(instance.selectable.args("value")[0][0], row[0]);
+    });
+
+    test("clearSelection calls selectable.clear", function() {
+        createTreeList({ selectable: true });
+
+        spy(instance.selectable, "clear");
+
+        var row = instance.content.find("tr").eq(0);
+        instance.select(row);
+
+        instance.clearSelection();
+
+        equal(instance.selectable.calls("clear"), 1);
+    });
+
+    test("clearSelection triggers change", function() {
+        var handler = spy();
+
+        createTreeList({ selectable: true });
+
+        var row = instance.content.find("tr").eq(0);
+        instance.select(row);
+
+        instance.bind("change", handler);
+
+        instance.clearSelection();
+
+        equal(handler.calls, 1);
+    });
+
+    test("clearSelection does not trigger change if no items were selected", function() {
+        var handler = spy();
+
+        createTreeList({ selectable: true });
+
+        instance.bind("change", handler);
+
+        instance.clearSelection();
+
+        ok(!handler.calls);
+    });
 })()

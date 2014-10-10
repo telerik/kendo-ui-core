@@ -41,7 +41,6 @@ function spy(that, methods) {
     if (!arguments.length) {
         var callback = function() {
             if (!callback.calls) {
-                callback.calls = 0;
                 callback.args = [];
             }
 
@@ -50,6 +49,8 @@ function spy(that, methods) {
             callback.args.push(args);
             callback.lastArgs = args;
         };
+
+        callback.calls = 0;
 
         return callback;
     }
