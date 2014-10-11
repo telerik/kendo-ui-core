@@ -72,6 +72,7 @@
         var url = geturl(path, file);
         var def = make_define(path, file, url);
         if (!LOADED[url]) {
+            LOADED[url] = true;
             if (/MSIE\s*[89]/.test(navigator.userAgent)) {
                 var req = new XMLHttpRequest();
                 req.open("GET", url, false);
@@ -84,7 +85,6 @@
                 };
                 req.send(null);
             } else {
-                LOADED[url] = true;
                 document.write("<script>window.define = " + def + "</script>");
                 document.write("<script src='" + url + "'></script>");
             }
