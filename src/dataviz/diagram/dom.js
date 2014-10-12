@@ -1084,23 +1084,23 @@
                                 this._clearTargetConnector();
                             }
                         } else if (target instanceof Connector) {
-                            if (source.shape.dataItem) {
-                                this.options.to = source.shape.to;
+                            if (target.shape.dataItem) {
+                                this.options.to = target.shape.to;
                                 this.options.toX = null;
                                 this.options.toY = null;
                             }
                             this.targetConnector = target;
                             this.targetConnector.connections.push(this);
                         } else if (target instanceof Point) {
-                            this.options.toX = source.x;
-                            this.options.toY = source.y;
+                            this.options.toX = target.x;
+                            this.options.toY = target.y;
                             this.options.to = null;
                             this._targetPoint = target;
                             if (this.targetConnector) {
                                 this._clearTargetConnector();
                             }
                         } else if (target instanceof Shape) {
-                            this.options.to = source.dataItem.id;
+                            this.options.to = target.dataItem.id;
                             this.options.toX = null;
                             this.options.toY = null;
                             this.targetConnector = target.getConnector(AUTO);// target.getConnector(this.sourcePoint());
@@ -2065,17 +2065,14 @@
              * @returns The newly created connection.
              */
             addConnection: function (connection, undoable) {
-                if (undoable === undefined) {
-                    undoable = true;
+                if (undoable !== false) {
+                    this.undoRedoService.add(
+                        new diagram.AddConnectionUnit(connection, this), false);
                 }
-                if (undoable) {
-                    var unit = new diagram.AddConnectionUnit(connection, this);
-                    this.undoRedoService.add(unit);
-                } else {
-                    connection.diagram = this;
-                    this.mainLayer.append(connection.visual);
-                    this.connections.push(connection);
-                }
+
+                connection.diagram = this;
+                this.mainLayer.append(connection.visual);
+                this.connections.push(connection);
 
                 return connection;
             },
