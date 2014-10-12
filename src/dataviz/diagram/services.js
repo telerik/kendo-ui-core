@@ -200,17 +200,23 @@
                 if (this._undoSource !== undefined) {
                     this.item.source(this._undoSource, false);
                 }
+
                 if (this._undoTarget !== undefined) {
                     this.item.target(this._undoTarget, false);
                 }
+
+                this.item.updateModel(this._undoSource, this._undoTarget);
             },
             redo: function () {
                 if (this._redoSource !== undefined) {
                     this.item.source(this._redoSource, false);
                 }
+
                 if (this._redoTarget !== undefined) {
                     this.item.target(this._redoTarget, false);
                 }
+
+                this.item.updateModel(this._undoSource, this._undoTarget);
             }
         });
 
@@ -226,10 +232,12 @@
             undo: function () {
                 this.item.source(this._undoSource, false);
                 this.item.target(this._undoTarget, false);
+                this.item.updateModel(this._undoSource, this._undoTarget);
             },
             redo: function () {
                 this.item.source(this._redoSource, false);
                 this.item.target(this._redoTarget, false);
+                this.item.updateModel(this._undoSource, this._undoTarget);
             }
         });
 
@@ -1292,21 +1300,23 @@
                 var ts = this.diagram.toolService, item = ts.hoveredItem, target;
                 if (ts._hoveredConnector) {
                     target = ts._hoveredConnector._c;
-                } else if (item && !item.line) {
+                } else if (item && item instanceof diagram.Shape) {
                     target = item;
                 } else {
                     target = p;
                 }
 
-                if (this.handle !== undefined) {
-                    switch (this.handle) {
-                        case -1:
-                            this.connection.source(target);
-                            break;
-                        case 1:
-                            this.connection.target(target);
-                            break;
-                    }
+                switch (this.handle) {
+                    case -1:
+                        this.connection.source(target);
+                        break;
+                    case 1:
+                        this.connection.target(target);
+                        break;
+                }
+
+                if (this.handle) {
+                    this.connection.updateModel();
                 }
 
                 this.handle = undefined;

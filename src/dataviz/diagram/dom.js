@@ -927,21 +927,52 @@
                 selectable: true
             },
 
-            updateOptionsFromModel: function(model, from, to) {
+            updateOptionsFromModel: function(model, options) {
                 var connectionOptions = filterConnectionDataItem(model || this.dataItem);
 
                 if (model) {
-                    if (from) {
+                    if (defined(options.from)) {
                         this.source(from);
+                    } else if (defined(options.fromX) && defined(options.fromY)) {
+                        this.source(new Point(options.fromX, options.fromY));
                     }
 
-                    if (to) {
+                    if (defined(options.to)) {
                         this.target(to);
+                    } else if (defined(options.toX) && defined(options.toY)) {
+                        this.source(new Point(options.toX, options.toY));
                     }
 
                     this.redraw(this.options);
                 } else {
                     this.options = deepExtend({}, this.options, connectionOptions);
+                }
+            },
+
+            updateModel: function() {
+                var from = this.options.from, to = this.options.to;
+                if (this.diagram) {
+                    var model = this.diagram.connectionsDataSource.getByUid(this.dataItem.uid);
+                    if (model) {
+                        this.diagram._shouldRefresh = false;
+                        if (defined(this.options.fromX) && defined(this.options.fromY)) {
+                            from = null
+                            model._set("fromX", this.options.fromX);
+                            model._set("fromY", this.options.fromY);
+                        }
+
+                        if (defined(this.options.toX) && defined(this.options.toY)) {
+                            to = null;
+                            model._set("toX", this.options.toX);
+                            model._set("toY", this.options.toY);
+                        }
+
+                        model._set("from", from);
+                        model._set("to", to);
+
+                        this.diagram._shouldRefresh = true;
+                        model.trigger("change");
+                    }
                 }
             },
 
@@ -960,6 +991,7 @@
              * @param undoable Whether the change or assignment should be undoable.
              */
             source: function (source, undoable) {
+                var shape = source;
                 if (isDefined(source)) {
                     if (undoable && this.diagram) {
                         this.diagram.undoRedoService.addCompositeItem(new diagram.ConnectionEditUnit(this, source));
@@ -975,18 +1007,23 @@
                         } else if (source instanceof Connector) {
                             this.sourceConnector = source;
                             this.sourceConnector.connections.push(this);
-                            this.refresh();
+
                         } else if (source instanceof Point) {
                             this._sourcePoint = source;
                             if (this.sourceConnector) {
                                 this._clearSourceConnector();
                             }
-                            this.refresh();
+
                         } else if (source instanceof Shape) {
                             this.sourceConnector = source.getConnector(AUTO);// source.getConnector(this.targetPoint());
                             this.sourceConnector.connections.push(this);
-                            this.refresh();
                         }
+
+                        if (shape.dataItem) {
+                            this.options.from = shape.dataItem.id;
+                        }
+
+                        this.refresh();
                     }
                 }
                 return this.sourceConnector ? this.sourceConnector : this._sourcePoint;
@@ -1033,6 +1070,9 @@
                     } else {
                         if (target !== undefined) {
                             this.to = target;
+                            if (target instanceof Shape && target.dataItem) {
+                                this.options.to = target.dataItem.id;
+                            }
                         }
                         if (target === null) { // detach
                             if (this.targetConnector) {
@@ -2058,7 +2098,7 @@
                 }
 
                 if (shapeDefaults.undoable) {
-                    this.undoRedoService.add(new diagram.AddShapeUnit(shape, this), "apply");
+                    this.undoRedoService.add(new diagram.AddShapeUnit(shape, this), false);
                 }
 
                 this.shapes.push(shape);
@@ -2961,10 +3001,12 @@
                             tools: this.options.shapeDefaults.editable.tools
                         });
                         var shape = this.toolService.hoveredItem;
-                        var shapeBounds = shape.bounds();
-                        var toolBarElement = this.toolBar.element;
-                        var point = new Point(shapeBounds.x, shapeBounds.y - this.toolBar._popup.element.outerHeight());
-                        this.toolBar.show(point);
+                        if (shape) {
+                            var shapeBounds = shape.bounds();
+                            var toolBarElement = this.toolBar.element;
+                            var point = new Point(shapeBounds.x, shapeBounds.y - this.toolBar._popup.element.outerHeight());
+                            this.toolBar.show(point);
+                        }
                     }
                     e.preventDefault();
                 }
@@ -3339,7 +3381,11 @@
                 text: { type: "string" },
                 from: { type: "number" },
                 to: { type: "number" },
-                type: { type: "string" }
+                type: { type: "string" },
+                fromX: { type: "number" },
+                fromY: { type: "number" },
+                toX: { type: "number" },
+                toY: { type: "number" }
             }
         });
 
