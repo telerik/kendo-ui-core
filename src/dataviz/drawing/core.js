@@ -86,7 +86,9 @@
                 domNode = domNode.parent();
             }
 
-            return node;
+            if (node) {
+                return node.srcElement;
+            }
         },
 
         _resize: noop,
@@ -98,7 +100,7 @@
                 var node = surface.eventTarget(e);
                 if (node) {
                     surface.trigger(event, {
-                        element: node.srcElement,
+                        element: node,
                         originalEvent: e
                     });
                 }

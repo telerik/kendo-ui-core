@@ -152,18 +152,18 @@ function baseSurfaceEventTests(name, TSurface) {
 
     test("eventTarget locates node", function() {
         var e = { target: node.element };
-        equal(surface.eventTarget(e), node);
+        equal(surface.eventTarget(e), node.srcElement);
     });
 
     test("eventTarget locates node from nested element", function() {
         var nested = $("<div>").appendTo(node.element);
         var e = { target: nested[0] };
-        equal(surface.eventTarget(e), node);
+        equal(surface.eventTarget(e), node.srcElement);
     });
 
     test("eventTarget locates node for touch events", function() {
         var e = { touch: { initialTouch : node.element } };
-        equal(surface.eventTarget(e), node);
+        equal(surface.eventTarget(e), node.srcElement);
     });
 
     test("evetTarget returns undefined for root element", function() {
