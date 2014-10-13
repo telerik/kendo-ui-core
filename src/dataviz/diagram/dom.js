@@ -3278,11 +3278,11 @@
 
                     if (!this._connectionsDataMap[conn.id]) {
                         var from = this._validateConnector(conn.from);
-                        if (!defined(from)) {
+                        if (!defined(from) || from === null) {
                             from = new Point(conn.fromX, conn.fromY);
                         }
                         var to = this._validateConnector(conn.to);
-                        if (!defined(to)) {
+                        if (!defined(to) || to === null) {
                             to = new Point(conn.toX, conn.toY);
                         }
 
