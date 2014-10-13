@@ -20,10 +20,11 @@ var __meta__ = {
 
     /*jshint eqnull:true,loopfunc:true,-W052,-W028  */
 
-    var module = angular.module('kendo.directives', []);
-    var $parse = angular.injector(['ng']).get('$parse'),
+    var module = angular.module('kendo.directives', []),
+        $injector = angular.injector(['ng']),
+        $parse = $injector.get('$parse'),
+        $compile = $injector.get('$compile'),
         $timeout,
-        $compile,
         $log;
 
     function withoutTimeout(f) {
@@ -183,10 +184,9 @@ var __meta__ = {
         }
     }
 
-    module.factory('directiveFactory', ['$timeout', '$parse', '$compile', '$log', function(timeout, $parse, compile, log) {
+    module.factory('directiveFactory', ['$timeout', '$parse', '$log', function(timeout, $parse, log) {
 
         $timeout = timeout;
-        $compile = compile;
         $log = log;
 
         var KENDO_COUNT = 0;
@@ -1052,6 +1052,14 @@ var __meta__ = {
                     element.addClass("km-footer").attr("data-role", "footer");
                 }
             };
+    }).directive('kendoMobileScrollViewPage', function(){
+        return {
+            restrict : "E",
+            replace  : true,
+            template : function(element, attributes) {
+                return "<div data-" + kendo.ns + "role='page'>" + element.html() + "</div>";
+            }
+        };
     });
 
     angular.forEach(['align', 'icon', 'rel', 'transition', 'actionsheetContext'], function(attr) {
