@@ -1417,6 +1417,10 @@
         };
     }
 
+    function unquote(str) {
+        return str.replace(/^\s*(['"])(.*)\1\s*$/, "$2");
+    }
+
     function parseFontDef(fontdef) {
         // XXX: this is very crude for now and buggy.  Proper parsing is quite involved.
         var rx = /^\s*((normal|italic)\s+)?((normal|small-caps)\s+)?((normal|bold|\d+)\s+)?(([0-9.]+)(px|pt))(\/(([0-9.]+)(px|pt)|normal))?\s+(.*?)\s*$/i;
@@ -1431,7 +1435,7 @@
             bold       : m[6] && /bold|700/i.test(m[6]),
             fontSize   : fontSize,
             lineHeight : m[12] ? m[12] == "normal" ? fontSize : parseInt(m[12], 10) : null,
-            fontFamily : m[14].split(/\s*,\s*/g)
+            fontFamily : m[14].split(/\s*,\s*/g).map(unquote)
         };
     }
 
