@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+    <head>
+        <link href="http://cdn.kendostatic.com/2014.2.1008/styles/kendo.common.min.css" rel="stylesheet" />
+        <link href="http://cdn.kendostatic.com/2014.2.1008/styles/kendo.rtl.min.css" rel="stylesheet" />
+        <link href="http://cdn.kendostatic.com/2014.2.1008/styles/kendo.uniform.min.css" rel="stylesheet" />
+        <link href="http://demos.telerik.com/kendo-ui/content/shared/styles/examples.css">
+        <script src="loader.js"></script>
+        <script>
+            requireSync([
+            "../src/jquery.js",
+            "../src/kendo.grid.js"
+            ]);
+        </script>
+
+    </head>
+    <body>
+
+        <script src="../demos/mvc/content/shared/js/people.js"></script>
+
+        <div id="example">
+            <div class="box">
+                <p>
+                Initialization time: <span id="init">Pending ...</span>ms
+                </p>
+                <p>
+                Rendering time: <span id="render">Pending ...</span>ms
+                </p>
+            </div>
+
+            <div id="loading" class="demo-section k-header" style="text-align:center">
+                Generating test data...
+            </div>
+
+            <div id="grid"></div>
+
+            <script>
+                $(function() {
+                    generatePeople(500000, function(data) {
+                        var initStart;
+                        var renderStart;
+
+                        $("#loading").hide();
+
+                        initStart = new Date();
+
+                        var counter = 0;
+                        $("#grid").kendoGrid({
+                            dataSource: {
+                                data: data,
+                                pageSize: 20
+                            },
+                            height: 543,
+                            scrollable: {
+                                virtual: true
+                            },
+                            dataBinding: function(e) {
+                                renderStart = new Date();
+                            },
+                            dataBound: function(e) {
+                                renderEnd = new Date();
+                                $("#render").text(renderEnd - renderStart);
+                            },
+                            sortable: true,
+                            pageable: {
+                                info: true,
+                                numeric: false,
+                                previousNext: false
+                            },
+                            columns: [
+                                { field: "Id", title: "ID", width: "70px" },
+                                { field: "FirstName", title: "First Name", width: "130px" },
+                                { field: "LastName", title: "Last Name", width: "130px" },
+                                { field: "City", title: "City", width: "130px" },
+                                "Title"
+                            ]
+                        });
+                        initEnd = new Date();
+
+                        $("#init").text(initEnd - initStart);
+                    });
+                });
+            </script>
+        </div>
+    </body>
+</html>

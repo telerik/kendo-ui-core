@@ -1,6 +1,15 @@
         <script src="../content/shared/js/people.js"></script>
 
         <div id="example">
+            <div class="box">
+                <p>
+                    Initialization time: <span id="init">Pending ...</span>ms
+                </p>
+                <p>
+                   Rendering time: <span id="render">Pending ...</span>ms
+                </p>
+            </div>
+
             <div id="loading" class="demo-section k-header" style="text-align:center">
                 Generating test data...
             </div>
@@ -8,9 +17,14 @@
             <div id="grid"></div>
 
             <script>
-                $(document).ready(function() {
-                    generatePeople(100000, function(data) {
+                $(function() {
+                    generatePeople(200000, function(data) {
+                        var initStart;
+                        var renderStart;
+
                         $("#loading").hide();
+
+                        initStart = new Date();
 
                         $("#grid").kendoGrid({
                             dataSource: {
@@ -21,6 +35,18 @@
                             scrollable: {
                                 virtual: true
                             },
+                            dataBinding: function(e) {
+                                renderStart = new Date();
+                            },
+                            dataBound: function(e) {
+                                renderEnd = new Date();
+                                $("#render").text(renderEnd - renderStart);
+                            },
+                            pageable: {
+                                info: true,
+                                numeric: false,
+                                previousNext: false
+                            },
                             columns: [ { field: "Id", title: "ID", width: "70px" },
                                 { field: "FirstName", title: "First Name", width: "130px" },
                                 { field: "LastName", title: "Last Name", width: "130px" },
@@ -28,6 +54,10 @@
                                 "Title"
                             ]
                         });
+
+                        initEnd = new Date();
+
+                        $("#init").text(initEnd - initStart);
                     });
                 });
             </script>
