@@ -29,6 +29,17 @@
     margin: 0;
 }
 
+.k-tabstrip-items .k-tab-on-top,
+.k-tabstrip-items .k-state-active {
+    margin-bottom: -2px;
+    padding-bottom: 0;
+}
+
+.k-tabstrip-items > .k-item {
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+}
+
 .k-slider-track
 {
     border-width: 1px;
@@ -91,4 +102,16 @@
 .k-menu .k-item,
 .k-widget.k-menu-horizontal > .k-item {
     border-width: 0;
+}
+.k-editor-toolbar .k-tool,
+.k-editor-toolbar .k-button-group .k-tool.k-group-end {
+    border-width: 0;
+}
+
+.k-editor-toolbar .k-state-selected {
+    font-weight: bold;  
+}
+
+.k-editor-toolbar .k-tool.k-state-hover {
+    border-radius: 50%;
 }

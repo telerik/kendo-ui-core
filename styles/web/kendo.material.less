@@ -182,7 +182,7 @@
 @secondary-border-color: #cccccc;
 @secondary-text-color: #fff;
 @numeric-selected-background: #ebebeb;
-@panelbar-items-border: @widget-border-color;
+@panelbar-items-border: #e5e5e5;
 @panelbar-content-background: @content-background-color;
 @panelbar-content-color: @widget-text-color;
 @window-shadow-style: 1px 1px 7px 1px;
@@ -202,7 +202,7 @@
 @multiselect-buttons-background: #428bca;
 @multiselect-buttons-hover-background: #3276b1;
 @multiselect-buttons-hover-border-color: #295f8e;
-@slider-selection-background-color: #ebebeb;
+@slider-selection-background-color: #3f51b5;
 @form-widgets-border-color: #e7e7e7;
 @pager-text-color: #a5a5a5;
 @draghandle-selected-background: #cccccc;
@@ -293,6 +293,25 @@ background-color: @primary-hover-background-color;
     .composite-background(@primary-hover-gradient);
     background-color: @primary-hover-background-color;
     .box-shadow(@primary-hover-shadow);
+}
+
+.k-widget .k-button:active, 
+.k-widget .k-button.k-state-active {
+	color: @button-text-color;
+	background-color: @button-active-background;
+	border-color: @hover-border-color;
+}
+
+.k-toolbar .k-overflow-anchor.k-state-active,
+.k-toolbar .k-overflow-anchor.k-state-border-down {
+	background-color: @active-background-color;
+}
+
+.k-widget .k-button:active:hover, 
+.k-widget .k-button.k-state-active:hover {
+	color: @button-hover-text-color;
+    border-color: @button-hover-border-color;
+    background-color: @button-hover-background-color;
 }
 
 .k-dropdown,
@@ -466,16 +485,27 @@ border-radius: 0;
 .box-shadow(none);
 }
 
+.k-window-titlebar .k-state-hover {
+	background-color: @secondary-hover-background-color;
+	border-color: @secondary-hover-background-color;
+}
+
 //TabStrip
+.k-tabstrip-items > .k-item {
+	border-bottom-color: @header-background-color;
+}
+
 .k-tabstrip-items .k-state-active {
 background-color: @header-background-color;
 .composite-background(@active-gradient);
 border-color: @header-background-color;
+border-bottom-color: @accent-color;
 }
 
 .k-tabstrip-items .k-item.k-state-hover
 {
 background: @secondary-hover-background-color;
+border-color: @secondary-hover-background-color;
 }
 
 .k-tabstrip-items .k-state-hover .k-link {
@@ -503,6 +533,11 @@ border-color: @widget-border-color;
 //Toolbar
 .k-toolbar {
 background-color: @drop-down-background;
+border-color: @panelbar-items-border;
+}
+
+.k-toolbar .k-button {
+	.box-shadow(none);
 }
 
 .k-grid .k-button,
@@ -633,7 +668,7 @@ background-color: @hover-background-color;
 .k-panelbar > .k-item > .k-link,
 .k-panelbar.k-header,
 .k-panelbar .k-content, .k-panelbar .k-panel, .k-panelbar .k-item {
-border-color: @widget-border-color;
+border-color: @panelbar-items-border;
 }
 
 //Splitter
@@ -674,7 +709,8 @@ background-color: @accent-color;
 border-color: @accent-color;
 }
 
-.k-multiselect .k-button:focus:active:not(.k-state-disabled):not([disabled])
+.k-multiselect .k-button:focus:active:not(.k-state-disabled):not([disabled]),
+.k-toolbar .k-button:focus:active:not(.k-state-disabled):not([disabled])
 {
     .box-shadow(none);
 }
@@ -683,4 +719,34 @@ border-color: @accent-color;
 	color: @widget-text-color;
 	background-color: @button-active-background;
 	border-color: @button-active-background;
+}
+
+//Editor
+.k-editor.k-header {
+	background-color: @alt-background-color;
+	.box-shadow(none);
+}
+
+.k-editor-toolbar .k-dropdown-wrap.k-state-default,
+.k-toolbar .k-dropdown-wrap.k-state-default,
+.k-toolbar .k-overflow-anchor.k-state-border-down
+{
+    border-color: @alt-background-color;
+}
+
+.k-editor-toolbar .k-tool.k-state-hover,
+.k-editor-toolbar .k-dropdown-wrap.k-state-hover,
+.k-toolbar .k-tool.k-state-hover,
+.k-toolbar .k-dropdown-wrap.k-state-hover
+{
+    color: @hover-text-color;
+    border-color: @hover-border-color;
+    background-color: @hover-background-color;
+    .box-shadow(none);
+}
+
+.k-editor-toolbar .k-state-selected,
+.k-toolbar .k-state-selected{
+	.box-shadow(none);	
+	background-color: transparent;
 }
