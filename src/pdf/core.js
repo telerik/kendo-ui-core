@@ -219,7 +219,7 @@
         var objects = [];
 
         function getOption(name, defval) {
-            return (options && name in options) ? options[name] : defval;
+            return (options && hasOwnProperty(options, name)) ? options[name] : defval;
         }
 
         self.getOption = getOption;
@@ -325,7 +325,16 @@
             out("trailer", NL);
             out(new PDFDictionary({
                 Size: objects.length,
-                Root: catalog
+                Root: catalog,
+                Info: new PDFDictionary({
+                    Producer     : new PDFString("Kendo UI PDF Generator"),
+                    Title        : new PDFString(getOption("title", "")),
+                    Author       : new PDFString(getOption("author", "")),
+                    Subject      : new PDFString(getOption("subject", "")),
+                    Keywords     : new PDFString(getOption("keywords", "")),
+                    Creator      : new PDFString(getOption("creator", "Kendo UI PDF Generator")),
+                    CreationDate : getOption("date", new Date())
+                })
             }), NL, NL);
 
             /// end
@@ -565,14 +574,33 @@
         return mm * (72/25.4);
     }
 
+    function cm2pt(cm) {
+        return mm2pt(cm * 10);
+    }
+
+    function in2pt(inch)  {
+        return inch * 72;
+    }
+
     function unitsToPoints(x, def) {
         if (typeof x == "number") {
             return x;
         }
         if (typeof x == "string") {
-            var m = /^\s*([0-9.]+)\s*mm$/.exec(x);
+            var m;
+            m = /^\s*([0-9.]+)\s*(mm|cm|in|pt)\s*$/.exec(x);
             if (m) {
-                return mm2pt(parseFloat(m[1]));
+                var num = parseFloat(m[1]);
+                if (!isNaN(num)) {
+                    if (m[2] == "pt") {
+                        return num;
+                    }
+                    return {
+                        "mm": mm2pt,
+                        "cm": cm2pt,
+                        "in": in2pt
+                    }[m[2]](num);
+                }
             }
         }
         if (def != null) {
