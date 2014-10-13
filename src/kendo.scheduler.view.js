@@ -1862,6 +1862,10 @@ var __meta__ = {
 
         _updateEventForMove: function (event) {
             return;
+        },
+
+        _updateEventForResize: function (event) {
+            return;
         }
     });
 

@@ -315,6 +315,50 @@
         equal(scheduler.dataSource.at(0).end.getMinutes(), 00);
     });
 
+    test("timeline dragging and dropping the east resize handle changes allDay event to regular one", function() {
+        var scheduler = new kendo.ui.Scheduler(div, {
+            date: new Date("2013/6/6"),
+            numberOfDays: 2,
+            views: ["timeline"],
+            dataSource: [
+                { start: new Date("2013/6/6 00:00"), end: new Date("2013/6/6 00:00"), title: "", isAllDay: true }
+            ]
+        });
+
+        var handle = div.find(".k-resize-e");
+        var slots = div.find(".k-scheduler-content td");
+
+        dragdrop(scheduler, handle, slots.eq(1));
+
+        equal(scheduler.dataSource.at(0).isAllDay, false);
+        equal(scheduler.dataSource.at(0).start.getHours(), 0);
+        equal(scheduler.dataSource.at(0).start.getMinutes(), 0);
+        equal(scheduler.dataSource.at(0).end.getHours(), 2);
+        equal(scheduler.dataSource.at(0).end.getMinutes(), 0);
+    });
+
+    test("timeline dragging and dropping the west resize handle changes allDay event to regular one", function() {
+        var scheduler = new kendo.ui.Scheduler(div, {
+            date: new Date("2013/6/6"),
+            numberOfDays: 2,
+            views: ["timeline"],
+            dataSource: [
+                { start: new Date("2013/6/6 00:00"), end: new Date("2013/6/6 00:00"), title: "", isAllDay: true }
+            ]
+        });
+
+        var handle = div.find(".k-resize-w");
+        var slots = div.find(".k-scheduler-content td");
+
+        dragdrop(scheduler, handle, slots.eq(2));
+
+        equal(scheduler.dataSource.at(0).isAllDay, false);
+        equal(scheduler.dataSource.at(0).start.getHours(), 2);
+        equal(scheduler.dataSource.at(0).start.getMinutes(), 0);
+        equal(scheduler.dataSource.at(0).end.getHours(), 0);
+        equal(scheduler.dataSource.at(0).end.getMinutes(), 0);
+    });
+
     test("timeline dragging and dropping the west resize handle changes the start time of the event", function() {
         var scheduler = new kendo.ui.Scheduler(div, {
             date: new Date("2013/6/6"),

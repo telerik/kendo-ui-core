@@ -876,6 +876,12 @@ var __meta__ = {
            }
         },
 
+        _updateEventForResize: function(event) {
+            if (event.isAllDay) {
+                event.set("isAllDay", false);
+            }
+        },
+
         _updateMoveHint: function(event, groupIndex, distance) {
             var group = this.groups[groupIndex];
 
