@@ -265,8 +265,6 @@ var __meta__ = {
                 .addClass(CSS_PREFIX + this.options.name.toLowerCase())
                 .css("position", "relative");
 
-            chart.surface = draw.Surface.create(chart.element);
-
             if (userOptions) {
                 dataSource = userOptions.dataSource;
                 userOptions.dataSource = undefined;
@@ -275,6 +273,10 @@ var __meta__ = {
             options = deepExtend({}, chart.options, userOptions);
             chart._originalOptions = deepExtend({}, options);
             chart._initTheme(options);
+
+            chart.surface = draw.Surface.create(chart.element, {
+                type: options.renderAs
+            });
 
             chart.bind(chart.events, chart.options);
 
