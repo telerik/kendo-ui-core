@@ -209,7 +209,7 @@
                 }
             });
 
-            equal(chart._plotArea.axes[2].options.maxDateGroups, 100);
+            equal(chart._plotArea.axes[0].options.maxDateGroups, 100);
         });
 
         test("extends valueAxis options", function() {
@@ -221,7 +221,7 @@
                 }
             });
 
-            equal(chart._plotArea.axes[5].options.min, 100);
+            equal(chart._plotArea.axes[3].options.min, 100);
         });
 
         // ------------------------------------------------------------

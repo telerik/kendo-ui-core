@@ -185,9 +185,9 @@ var __meta__ = {
                 navigator = chart._navigator = new Navigator(chart);
             }
 
-            navigator.filterAxes();
             Chart.fn._redraw.call(chart);
             navigator.redraw();
+            navigator.redrawSlaves();
         },
 
         _onDataChanged: function() {
@@ -352,8 +352,11 @@ var __meta__ = {
                 range = axis.range(),
                 min = range.min,
                 max = range.max,
-                from = select.from || min,
-                to = select.to || max;
+                from = toDate(select.from) || min,
+                to = toDate(select.to) || max;
+
+            if (from < min) { from = min; }
+            if (to > max) { to = max; }
 
             if (groups.length > 0) {
                 if (selection) {
@@ -386,6 +389,9 @@ var __meta__ = {
                         format: options.hint.format
                     });
                 }
+
+                navi.readSelection();
+                navi.filterAxes();
             }
         },
 

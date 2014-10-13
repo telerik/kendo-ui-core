@@ -11,25 +11,32 @@
             defaultOptions = {
                 dataSource: {
                     data: [{
-                            date: new Date("2012/09/01"),
-                            sales: 100
-                        }, {
-                            date: new Date("2012/09/02"),
-                            sales: 110
-                        }, {
-                            date: new Date("2012/09/03"),
-                            sales: 105
-                        }, {
-                            date: new Date("2012/09/04"),
-                            sales: 100
-                        }, {
-                            date: new Date("2012/09/05"),
-                            sales: 110
-                        }, {
-                            date: new Date("2012/09/06"),
-                            sales: 105
-                        }],
-                        serverFiltering: true
+                        date: new Date("2012/09/01"),
+                        sales: 100
+                    }, {
+                        date: new Date("2012/09/02"),
+                        sales: 110
+                    }, {
+                        date: new Date("2012/09/03"),
+                        sales: 105
+                    }, {
+                        date: new Date("2012/09/04"),
+                        sales: 100
+                    }, {
+                        date: new Date("2012/09/05"),
+                        sales: 110
+                    }, {
+                        date: new Date("2012/09/06"),
+                        sales: 105
+                    }],
+                    serverFiltering: true,
+                    schema: {
+                        model: {
+                            fields: {
+                                date: { type: "date" }
+                            }
+                        }
+                    }
                 },
                 dateField: "date",
                 navigator: {
@@ -136,6 +143,31 @@
                     }
                 });
                 chart.dataSource.fetch();
+            });
+        });
+
+        test("slave axis range is set to data range", function() {
+            createStockChart({
+                navigator: {
+                    dataSource: null,
+                    select: {
+                        from: new Date("2012/09/01"),
+                        to: new Date("2012/09/06")
+                    }
+                }
+            });
+
+            stubMethod(Navigator.fn, "redrawSlaves", function() {
+                deepEqual(chart.options.categoryAxis[0].min, new Date("2012/09/02 00:00:00"), "min");
+                deepEqual(chart.options.categoryAxis[0].max, new Date("2012/09/03 01:00:00"), "max");
+            }, function() {
+                chart.dataSource.data([{
+                    date: new Date("2012/09/02"),
+                    sales: 110
+                }, {
+                    date: new Date("2012/09/03"),
+                    sales: 110
+                }]);
             });
         });
 
@@ -281,12 +313,12 @@
         });
 
         test("slave panes are redrawn on main DS change", 1, function() {
+            createStockChart({
+                autoBind: false
+            });
             stubMethod(Navigator.fn, "redrawSlaves", function() {
                 ok(true);
             }, function() {
-                createStockChart({
-                    autoBind: false
-                });
                 chart.dataSource.fetch();
             });
         });
