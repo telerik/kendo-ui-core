@@ -631,13 +631,12 @@ var __meta__ = {
                 element.on(MOUSEMOVE_NS, chart._mousemove);
             }
 
-            chart.surface.bind("tap", proxy(chart._tap, chart));
-
             if (kendo.UserEvents) {
                 chart._userEvents = new kendo.UserEvents(element, {
                     global: true,
                     filter: ":not(.k-selector)",
                     multiTouch: false,
+                    tap: proxy(chart._tap, chart),
                     start: proxy(chart._start, chart),
                     move: proxy(chart._move, chart),
                     end: proxy(chart._end, chart)
@@ -807,9 +806,12 @@ var __meta__ = {
         },
 
         _getChartElement: function(e) {
-            var element = e.element;
-            var chartElement;
+            var element = this.surface.eventTarget(e);
+            if (!element) {
+                return;
+            }
 
+            var chartElement;
             while (!chartElement) {
                 chartElement = element.chartElement;
                 element = element.parent;
