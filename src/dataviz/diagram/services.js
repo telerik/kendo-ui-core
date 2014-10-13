@@ -309,6 +309,7 @@
                         shape.layout(shape, this.undoStates[i], this.redoStates[i]);
                     }
                 }
+
                 if (this.adorner) {
                     this.adorner.refreshBounds();
                     this.adorner.refresh();
@@ -322,9 +323,11 @@
                 this.diagram = diagram;
                 this.title = "New connection";
             },
+
             undo: function () {
                 this.diagram._remove(this.connection, false);
             },
+
             redo: function () {
                 this.diagram._addConnection(this.connection, false);
             }
@@ -336,9 +339,11 @@
                 this.diagram = diagram;
                 this.title = "New shape";
             },
+
             undo: function () {
                 this.diagram._remove(this.shape, false);
             },
+
             redo: function () {
                 this.diagram._addShape(this.shape, false);
             }
@@ -1250,12 +1255,15 @@
                 that.visual.append(that.spVisual);
                 that.visual.append(that.epVisual);
             },
+
             options: {
                 handles: {}
             },
+
             _getCursor: function () {
                 return Cursors.move;
             },
+
             start: function (p) {
                 this.handle = this._hitTest(p);
                 this.startPoint = p;
@@ -1274,6 +1282,7 @@
                         break;
                 }
             },
+
             move: function (handle, p) {
                 switch (handle) {
                     case -1:
@@ -1296,6 +1305,7 @@
                 this.refresh();
                 return true;
             },
+
             stop: function (p) {
                 var ts = this.diagram.toolService, item = ts.hoveredItem, target;
                 if (ts._hoveredConnector) {
@@ -1320,6 +1330,7 @@
                 this._ts._connectionManipulation();
                 return new ConnectionEditUndoUnit(this.connection, this._initialSource, this._initialTarget);
             },
+
             _hitTest: function (p) {
                 var sp = this.connection.sourcePoint(),
                     tp = this.connection.targetPoint(),
@@ -1327,8 +1338,10 @@
                     ry = this.options.handles.height / 2,
                     sb = new Rect(sp.x, sp.y).inflate(rx, ry),
                     tb = new Rect(tp.x, tp.y).inflate(rx, ry);
+
                 return sb.contains(p) ? -1 : (tb.contains(p) ? 1 : 0);
             },
+
             refresh: function () {
                 this.spVisual.redraw({ center: this.diagram.modelToLayer(this.connection.sourcePoint()) });
                 this.epVisual.redraw({ center: this.diagram.modelToLayer(this.connection.targetPoint()) });
@@ -1345,6 +1358,7 @@
                     }
                 };
             },
+
             show: function (shape) {
                 var that = this, len, i, ctr;
                 that._visible = true;
@@ -1361,6 +1375,7 @@
                 that.visual.visible(true);
                 that.refresh();
             },
+
             destroy: function () {
                 var that = this;
                 that.diagram.unbind(ITEMBOUNDSCHANGE, that._refreshHandler);
@@ -1368,6 +1383,7 @@
                 that._visible = undefined;
                 that.visual.visible(false);
             },
+
             _hitTest: function (p) {
                 var ctr, i;
                 for (i = 0; i < this.connectors.length; i++) {
@@ -1379,6 +1395,7 @@
                     }
                 }
             },
+
             refresh: function () {
                 if (this.shape) {
                     var bounds = this.shape.bounds();
@@ -1449,6 +1466,7 @@
                 that.refreshBounds();
                 that.refresh();
             },
+
             options: {
                 editable: {
                     rotate: {

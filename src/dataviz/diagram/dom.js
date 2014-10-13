@@ -924,7 +924,7 @@
         var Connection = DiagramElement.extend({
             init: function (from, to, options, dataItem) {
                 var that = this;
-                DiagramElement.fn.init.call(that, options, dataItem || {});
+                DiagramElement.fn.init.call(that, options, dataItem);
                 this.updateOptionsFromModel();
                 that._router = new PolylineRouter(this);
                 that.path = new diagram.Polyline(that.options);
@@ -974,25 +974,29 @@
             },
 
             updateModel: function() {
-                var from = this.options.from, to = this.options.to;
                 if (this.diagram) {
                     var model = this.diagram.connectionsDataSource.getByUid(this.dataItem.uid);
                     if (model) {
                         this.diagram._shouldRefresh = false;
                         if (defined(this.options.fromX) && this.options.fromX !== null) {
-                            from = null
+                            model._set("from", null);
                             model._set("fromX", this.options.fromX);
                             model._set("fromY", this.options.fromY);
+                        } else  {
+                            model._set("from", this.options.from);
+                            model._set("fromX", null);
+                            model._set("fromY", null);
                         }
 
                         if (defined(this.options.toX) && this.options.toX !== null) {
-                            to = null;
+                            model._set("to", null);
                             model._set("toX", this.options.toX);
                             model._set("toY", this.options.toY);
+                        } else {
+                            model._set("to", this.options.to);
+                            model._set("toX", null);
+                            model._set("toY", null);
                         }
-
-                        model._set("from", from);
-                        model._set("to", to);
 
                         this.diagram._shouldRefresh = true;
                         model.trigger("change");
@@ -1029,7 +1033,7 @@
                             }
                         } else if (source instanceof Connector) {
                             if (source.shape.dataItem) {
-                                this.options.from = source.shape.dataItem;
+                                this.options.from = source.shape.dataItem.id;
                                 this.options.fromX = null;
                                 this.options.fromY = null;
                             }
@@ -1109,7 +1113,7 @@
                             }
                         } else if (target instanceof Connector) {
                             if (target.shape.dataItem) {
-                                this.options.to = target.shape.to;
+                                this.options.to = target.shape.dataItem.id;
                                 this.options.toX = null;
                                 this.options.toY = null;
                             }
@@ -2065,7 +2069,10 @@
             connect: function (source, target, options) {
                 var conOptions = deepExtend({}, this.options.connectionDefaults, options),
                     connection = new Connection(source, target, conOptions);
-                return this.addConnection(connection);
+
+                connection.diagram = this;
+
+                return this._addConnection(connection);
             },
             /**
              * Determines whether the the two items are connected.
@@ -2080,6 +2087,7 @@
                         return true;
                     }
                 }
+
                 return false;
             },
             /**
@@ -2100,11 +2108,16 @@
 
                 return connection;
             },
+
             _addConnection: function (connection, undoable) {
                 if (this.connectionsDataSource) {
-                    this.connectionsDataSource.add(connection.dataItem);
+                    var dataItem = this.connectionsDataSource.add(connection.dataItem);
                     this.connectionsDataSource.sync();
+                    if (!connection.dataItem) {
+                        connection.dataItem = dataItem;
+                    }
                     this._connectionsDataMap[connection.dataItem.id] = connection;
+                    connection.updateModel();
                 }
 
                 return this.addConnection(connection, undoable);
@@ -3281,6 +3294,7 @@
                         if (!defined(from) || from === null) {
                             from = new Point(conn.fromX, conn.fromY);
                         }
+
                         var to = this._validateConnector(conn.to);
                         if (!defined(to) || to === null) {
                             to = new Point(conn.toX, conn.toY);
@@ -3499,6 +3513,8 @@
 
         function filterConnectionDataItem(dataItem) {
             var result = {};
+
+            dataItem = dataItem || {};
 
             if (defined(dataItem.text) && dataItem.text !== null) {
                 result.content = dataItem.text;
