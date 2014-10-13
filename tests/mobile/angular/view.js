@@ -84,7 +84,8 @@
     function() {
         $.mockjax({
             url: "page2.html",
-            responseText: '<kendo-mobile-view reload=true>Page 2</kendo-mobile-view>'
+            responseText: '<kendo-mobile-view reload=true>Page 2</kendo-mobile-view>',
+            responseTime: 0
         });
 
         QUnit.fixture.html("<div kendo-mobile-application><kendo-mobile-view></kendo-mobile-view></div>");
