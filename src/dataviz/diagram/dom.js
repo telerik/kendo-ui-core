@@ -313,19 +313,20 @@
                 hover: {},
                 cursor: Cursors.grip,
                 content: {
-                    align: "center middle",
-                    text: ""
+                    align: "center middle"
                 },
                 selectable: true,
                 serializable: true,
                 enable: true
             },
+
             _getCursor: function (point) {
                 if (this.adorner) {
                     return this.adorner._getCursor(point);
                 }
                 return this.options.cursor;
             },
+
             visible: function (value) {
                 if (isUndefined(value)) {
                     return this.visual.visible();
@@ -333,19 +334,24 @@
                     this.visual.visible(value);
                 }
             },
+
             bounds: function () {
             },
+
             refresh: function () {
                 this.visual.redraw();
             },
+
             position: function (point) {
                 this.options.x = point.x;
                 this.options.y = point.y;
                 this.visual.position(point);
             },
+
             toString: function () {
                 return this.options.id;
             },
+
             serialize: function () {
                 // the options json object describes the shape perfectly. So this object can serve as shape serialization.
                 var json = deepExtend({}, {options: this.options});
@@ -354,7 +360,8 @@
                 }
                 return json;
             },
-            content: function (content) {
+
+            _content: function (content) {
                 if (content !== undefined) {
                     var options = this.options;
                     var bounds = this.bounds();
@@ -384,6 +391,7 @@
                 var bounds = this.bounds();
                 return this.visible() && bounds.contains(point) && this.options.enable;
             },
+
             _template: function () {
                 var that = this;
                 if (that.options.content.template) {
@@ -395,6 +403,7 @@
                     that.options.content.text = elementTemplate(data);
                 }
             },
+
             _canSelect: function () {
                 return this.options.selectable !== false;
             }
@@ -506,13 +515,11 @@
             },
 
             content: function(content) {
-                if (defined(content)) {
-                    DiagramElement.fn.content.call(this, content);
-                    this._alignContent();
-                    return this;
-                } else {
-                    return this.options.content.text;
-                }
+                var result = this._content(content);
+
+                this._alignContent();
+
+                return result;
             },
 
             _alignContent: function() {
@@ -967,7 +974,7 @@
 
                     this.redraw(this.options);
                 } else {
-                    this.options = deepExtend({}, this.options, options);
+                    this.options = deepExtend({}, options, this.options);
                 }
             },
 
@@ -1164,17 +1171,7 @@
             },
 
             content: function(content) {
-                content = content || {};
-                if (defined(this.options.text)) {
-                    content.text = this.options.text;
-                }
-
-                var result = DiagramElement.fn.content.call(this, content);
-                if (defined(content)) {
-                    this.refresh();
-                }
-
-                return result;
+                return this._content(content);
             },
 
             /**
