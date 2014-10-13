@@ -21,7 +21,7 @@
 
         g = dataviz.geometry,
 
-        d = dataviz.drawing,
+        d = kendo.drawing,
         Group = d.Group,
 
         map = dataviz.map,

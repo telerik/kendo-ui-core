@@ -1,6 +1,6 @@
 function baseSurfaceTests(name, TSurface) {
     var dataviz = kendo.dataviz,
-        d = dataviz.drawing,
+        d = kendo.drawing,
         Group = d.Group;
 
     var container;
@@ -94,7 +94,7 @@ function baseSurfaceTests(name, TSurface) {
 
 function baseSurfaceEventTests(name, TSurface) {
     var dataviz = kendo.dataviz,
-        d = dataviz.drawing,
+        d = kendo.drawing,
         Group = d.Group;
 
     var container;

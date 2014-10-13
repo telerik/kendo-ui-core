@@ -15,7 +15,7 @@
     /* -----[ local vars ]----- */
 
     var dataviz = kendo.dataviz;
-    var drawing = dataviz.drawing;
+    var drawing = kendo.drawing;
     var geo = dataviz.geometry;
     var slice = Array.prototype.slice;
     var pdf = drawing.pdf; // XXX: should not really depend on this.  needed for parseColor

@@ -5,7 +5,7 @@
         deepExtend = kendo.deepExtend,
 
         g = dataviz.geometry,
-        d = dataviz.drawing,
+        d = kendo.drawing,
 
         Point = diagram.Point,
         Rect = diagram.Rect,

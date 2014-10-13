@@ -299,7 +299,7 @@
     SurfaceFactory.current = new SurfaceFactory();
 
     // Exports ================================================================
-    deepExtend(dataviz, {
+    deepExtend(kendo, {
         drawing: {
             DASH_ARRAYS: {
                 dot: [1.5, 3.5],

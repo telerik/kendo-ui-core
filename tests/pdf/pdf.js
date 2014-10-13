@@ -3,8 +3,8 @@
 var dom;
 
 var saveAs = kendo.saveAs;
-var drawDOM = kendo.dataviz.drawing.drawDOM;
-var toDataURL = kendo.dataviz.drawing.pdf.toDataURL;
+var drawDOM = kendo.drawing.drawDOM;
+var toDataURL = kendo.drawing.pdf.toDataURL;
 
 var PDF = kendo.ui.Widget.extend({
     init: function(element, options) {
@@ -26,7 +26,7 @@ module("pdf mixin",  {
 
         QUnit.fixture.append(dom);
 
-        kendo.dataviz.drawing.drawDOM = function(element, callback) {
+        kendo.drawing.drawDOM = function(element, callback) {
             callback({
                 options: {
                     set: $.noop
@@ -34,7 +34,7 @@ module("pdf mixin",  {
             });
         };
 
-        kendo.dataviz.drawing.pdf.toDataURL = function(root, callback) {
+        kendo.drawing.pdf.toDataURL = function(root, callback) {
             callback("");
         };
 
@@ -43,8 +43,8 @@ module("pdf mixin",  {
     teardown: function() {
         kendo.destroy(QUnit.fixture);
         kendo.saveAs = saveAs;
-        kendo.dataviz.drawing.drawDOM = drawDOM;
-        kendo.dataviz.drawing.pdf.toDataURL = toDataURL;
+        kendo.drawing.drawDOM = drawDOM;
+        kendo.drawing.pdf.toDataURL = toDataURL;
     }
 });
 
@@ -64,7 +64,7 @@ test("saveAsPDF calls drawDOM with the widget wrapper", 1, function() {
     }).data("kendoPDF");
 
 
-    kendo.dataviz.drawing.drawDOM = function(element) {
+    kendo.drawing.drawDOM = function(element) {
         strictEqual(element, widget.wrapper[0]);
     };
 
@@ -76,7 +76,7 @@ test("saveAsPDF calls pdf.toDataURL", 1, function() {
     }).data("kendoPDF");
 
 
-    kendo.dataviz.drawing.pdf.toDataURL = function() {
+    kendo.drawing.pdf.toDataURL = function() {
         ok(true)
     };
 
@@ -87,7 +87,7 @@ test("saveAsPDF calls kendo.saveAs", 1, function() {
     var widget = dom.kendoPDF({
     }).data("kendoPDF");
 
-    kendo.dataviz.drawing.pdf.toDataURL = function(root, callback) {
+    kendo.drawing.pdf.toDataURL = function(root, callback) {
         callback("foo");
     };
 
@@ -149,7 +149,7 @@ test("saveAsPDF uses 'auto' as default paperSize", 1, function() {
         }
     };
 
-    kendo.dataviz.drawing.drawDOM = function(element, callback) {
+    kendo.drawing.drawDOM = function(element, callback) {
         callback(root);
     }
 
@@ -171,7 +171,7 @@ test("saveAsPDF passes the paperSize option", 1, function() {
         }
     };
 
-    kendo.dataviz.drawing.drawDOM = function(element, callback) {
+    kendo.drawing.drawDOM = function(element, callback) {
         callback(root);
     }
 

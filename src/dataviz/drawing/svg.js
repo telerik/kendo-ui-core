@@ -12,7 +12,7 @@
 
         dataviz = kendo.dataviz,
         g = dataviz.geometry,
-        d = dataviz.drawing,
+        d = kendo.drawing,
         BaseNode = d.BaseNode,
 
         util = dataviz.util,

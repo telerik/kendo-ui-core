@@ -367,7 +367,7 @@
         return kendo.parseColor(color).toRGB();
     }
 
-    kendo.deepExtend(dataviz.drawing, {
+    kendo.deepExtend(kendo.drawing, {
         pdf: {
             parseColor : parseColor,
             toDataURL  : toDataURL,

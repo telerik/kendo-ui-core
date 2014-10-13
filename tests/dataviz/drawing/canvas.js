@@ -6,7 +6,7 @@
         Point = g.Point,
         Matrix = g.Matrix,
 
-        d = dataviz.drawing,
+        d = kendo.drawing,
         canv = d.canvas,
         Surface = canv.Surface;
 

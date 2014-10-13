@@ -18,7 +18,7 @@
         Matrix = g.Matrix,
         toMatrix = g.toMatrix,
 
-        drawing = dataviz.drawing,
+        drawing = kendo.drawing,
         OptionsStore = drawing.OptionsStore,
 
         math = Math,

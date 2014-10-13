@@ -28,7 +28,7 @@
         renderTemplate = util.renderTemplate,
         valueOrDefault = util.valueOrDefault,
 
-        d = dataviz.drawing,
+        d = kendo.drawing,
         BaseNode = d.BaseNode,
         Group = d.Group,
         Box2D = dataviz.Box2D,
@@ -491,7 +491,7 @@
         d.SurfaceFactory.current.register("canvas", Surface, 20);
     }
 
-    deepExtend(dataviz.drawing, {
+    deepExtend(kendo.drawing, {
         canvas: {
             ArcNode: ArcNode,
             CircleNode: CircleNode,

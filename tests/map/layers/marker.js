@@ -4,7 +4,7 @@
         dataviz = kendo.dataviz,
         deepExtend = kendo.deepExtend,
         g = dataviz.geometry,
-        d = dataviz.drawing,
+        d = kendo.drawing,
 
         map = dataviz.map,
         Marker = map.Marker,

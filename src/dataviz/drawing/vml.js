@@ -15,7 +15,7 @@
 
         dataviz = kendo.dataviz,
 
-        d = dataviz.drawing,
+        d = kendo.drawing,
         BaseNode = d.BaseNode,
 
         g = dataviz.geometry,

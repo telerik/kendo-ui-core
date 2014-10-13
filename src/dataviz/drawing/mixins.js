@@ -49,11 +49,9 @@
     };
 
     // Exports ================================================================
-    deepExtend(dataviz, {
-        drawing: {
-            mixins: {
-                Paintable: Paintable
-            }
+    deepExtend(kendo.drawing, {
+        mixins: {
+            Paintable: Paintable
         }
     });
 

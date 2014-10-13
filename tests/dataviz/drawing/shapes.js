@@ -7,7 +7,7 @@
 
         util = dataviz.util,
 
-        d = dataviz.drawing,
+        d = kendo.drawing,
         Element = d.Element,
         Group = d.Group,
         Segment = d.Segment,

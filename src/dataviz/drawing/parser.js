@@ -6,7 +6,7 @@
 
     var kendo = window.kendo,
         dataviz = kendo.dataviz,
-        drawing = dataviz.drawing,
+        drawing = kendo.drawing,
         geometry = dataviz.geometry,
 
         Class = kendo.Class,

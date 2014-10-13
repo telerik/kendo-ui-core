@@ -17,7 +17,7 @@
         isNumber = util.isNumber,
 
         g = dataviz.geometry,
-        d = dataviz.drawing,
+        d = kendo.drawing,
 
         map = dataviz.map,
         Location = map.Location,

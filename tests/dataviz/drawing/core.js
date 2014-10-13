@@ -1,7 +1,7 @@
 (function() {
     var dataviz = kendo.dataviz,
 
-        d = dataviz.drawing,
+        d = kendo.drawing,
         BaseNode = d.BaseNode,
         OptionsStore = d.OptionsStore;
 

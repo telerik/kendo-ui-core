@@ -21,7 +21,7 @@
         MatrixVector = diagram.MatrixVector,
 
         g = dataviz.geometry,
-        d = dataviz.drawing,
+        d = kendo.drawing,
 
         defined = dataviz.defined,
 

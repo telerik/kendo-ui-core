@@ -1,7 +1,7 @@
 (function() {
     var dataviz = kendo.dataviz,
         g = dataviz.geometry,
-        d = dataviz.drawing,
+        d = kendo.drawing,
         m = dataviz.map,
         BubbleLayer = m.layers.BubbleLayer,
         Location = m.Location;

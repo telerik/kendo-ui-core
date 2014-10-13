@@ -6,7 +6,7 @@
         Point = g.Point,
         Matrix = g.Matrix,
 
-        d = dataviz.drawing,
+        d = kendo.drawing,
         Circle = d.Circle,
         Group = d.Group,
         MultiPath = d.MultiPath,

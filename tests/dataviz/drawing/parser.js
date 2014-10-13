@@ -1,6 +1,6 @@
 (function() {
     var dataviz = kendo.dataviz,
-        d = dataviz.drawing,
+        d = kendo.drawing,
         g = dataviz.geometry,
         Point = g.Point,
         parser = d.PathParser.current,
