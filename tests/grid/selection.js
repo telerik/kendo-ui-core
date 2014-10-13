@@ -164,6 +164,30 @@
         ok(grid.table.find("tbody tr:eq(0)").find("td:eq(0)").hasClass("k-state-focused"));
     });
 
+    test("right arrow moves to next visible cell", function() {
+        var grid = setup({
+            columns: [ "foo", { field: "bar", hidden: true }, "baz" ],
+            dataSource: {
+                data: [{ foo: "foo", bar: "bar", baz: "baz" }]
+            }
+        });
+
+        grid.table.focus().press(kendo.keys.RIGHT);
+        ok(grid.table.find("tbody tr:eq(0)").find("td:eq(2)").hasClass("k-state-focused"));
+    });
+
+    test("left arrow moves to prev visible cell", function() {
+        var grid = setup({
+            columns: [ "foo", { field: "bar", hidden: true }, "baz" ],
+            dataSource: {
+                data: [{ foo: "foo", bar: "bar", baz: "baz" }]
+            }
+        });
+
+        grid.table.focus().press(kendo.keys.RIGHT).press(kendo.keys.LEFT);
+        ok(grid.table.find("tbody tr:eq(0)").find("td:eq(0)").hasClass("k-state-focused"));
+    });
+
     test("up arrow moves focus on the prev row same cell", function() {
         var grid = setup();
         grid.table.focus().press(kendo.keys.DOWN).press(kendo.keys.UP);

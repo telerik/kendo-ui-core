@@ -5490,7 +5490,7 @@ var __meta__ = {
        var isLocked = dataTable.length > 1;
 
        if (current) {
-           if (current.prev(":visible")[0]) {
+           if (current.prevAll(":visible")[0]) {
                current = current.prevAll(DATA_CELL).first();
            } else if (isLocked) {
                if (currentTable == dataTable[1]) {
@@ -5512,7 +5512,7 @@ var __meta__ = {
        var isLocked = dataTable.length > 1;
 
        if (current) {
-           if (current.next(":visible")[0]) {
+           if (current.nextAll(":visible")[0]) {
                current = current.nextAll(DATA_CELL).first();
            } else if (isLocked) {
                if (currentTable == dataTable[0]) {
