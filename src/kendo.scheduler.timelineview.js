@@ -24,7 +24,8 @@ var __meta__ = {
         NS = ".kendoTimelineView";
 
     var EVENT_TEMPLATE = kendo.template('<div>' +
-                '<div class="k-event-template">${title}</div></div>'),
+        '<div class="k-event-template k-event-time">#:kendo.format("{0:t} - {1:t}", start, end)#</div>' +
+        '<div class="k-event-template">${title}</div></div>'),
         DATA_HEADER_TEMPLATE = kendo.template("<span class='k-link k-nav-day'>#=kendo.toString(date, 'ddd M/dd')#</span>"),
         EVENT_WRAPPER_STRING = '<div role="gridcell" aria-selected="false" ' +
                 'data-#=ns#uid="#=uid#"' +
@@ -907,7 +908,7 @@ var __meta__ = {
                 var range = ranges[rangeIndex];
                 var startSlot = range.start;
 
-                var hint = this._createEventElement(adjustedEvent.occurrence ,event, false, false);
+                var hint = this._createEventElement(adjustedEvent.occurrence ,adjustedEvent.occurrence, false, false);
 
                 hint.addClass("k-event-drag-hint");
 

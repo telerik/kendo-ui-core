@@ -487,6 +487,28 @@
         equal(scheduler.dataSource.at(0).end.getHours(), 11);
         equal(scheduler.dataSource.at(0).end.getMinutes(), 0);
     });
+
+    tzTest("Sofia", "resizing event in timeline view honours DST", function() {
+        var scheduler = new kendo.ui.Scheduler(div, {
+            date: new Date("2014/3/30"),
+            views: ["timeline"],
+            dataSource: [
+                { start: new Date("2014/3/30"), end: new Date("2014/3/30 1:00"), title: "" }
+            ]
+        });
+
+        var handle = div.find(".k-resize-e");
+
+        var slots = div.find(".k-scheduler-content td");
+
+        dragdrop(scheduler, handle, slots.eq(3));
+
+        equal(scheduler.dataSource.at(0).start.getHours(), 0);
+        equal(scheduler.dataSource.at(0).start.getMinutes(), 0);
+
+        equal(scheduler.dataSource.at(0).end.getHours(), 4);
+        equal(scheduler.dataSource.at(0).end.getMinutes(), 00);
+    });
     //=============END TIMELINE
 
     test("dragging and dropping the south resize handle changes the end time of the event", function() {
