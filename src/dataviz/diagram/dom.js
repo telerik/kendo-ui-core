@@ -462,7 +462,7 @@
                 that.isCollapsed = false;
                 that.id = that.visual.id;
 
-                if (options.hasOwnProperty("layout") && options.layout!==undefined) {
+                if (options.hasOwnProperty("layout") && options.layout !== undefined) {
                     // pass the defined shape layout, it overtakes the default resizing
                     that.layout = options.layout.bind(options);
                 }
@@ -614,6 +614,7 @@
                     clone, dataItem = {};
 
                 json.options.id = diagram.randomId();
+
                 if (defined(this.dataItem)) {
                     dataItem = this.dataItem.toJSON();
                     dataItem[this.dataItem.idField] = this.dataItem._defaultId;
@@ -623,11 +624,13 @@
 
                 return clone;
             },
+
             select: function (value) {
                 var diagram = this.diagram, selected, deselected;
                 if (isUndefined(value)) {
                     value = true;
                 }
+
                 if (this._canSelect()) {
                     if (this.isSelected != value) {
                         selected = [];
@@ -640,9 +643,11 @@
                             Utils.remove(diagram._selectedItems, this);
                             deselected.push(this);
                         }
+
                         if (!diagram._internalSelection) {
                             diagram._selectionChanged(selected, deselected);
                         }
+
                         return true;
                     }
                 }
@@ -662,15 +667,18 @@
                         this._rotationOffset = this._rotationOffset.plus(newPosition.minus(b.topLeft()));
                         this.position(newPosition);
                     }
+
                     this.visual.rotate(angle, sc);
                     this.options.rotation.angle = angle;
 
                     if (this.diagram && this.diagram._connectorsAdorner) {
                         this.diagram._connectorsAdorner.refresh();
                     }
+
                     this.refreshConnections();
+
                     if (this.diagram) {
-                        this.diagram.trigger(ITEMROTATE, {item: this});
+                        this.diagram.trigger(ITEMROTATE, { item: this });
                     }
                 }
 
@@ -700,8 +708,10 @@
                         }
                     }
                 }
+
                 return result;
             },
+
             refreshConnections: function () {
                 $.each(this.connections(), function () {
                     this.refresh();
@@ -729,12 +739,15 @@
                     return this.connectors.length ? this.connectors[0] : null;
                 }
             },
+
             getPosition: function (side) {
                 var b = this.bounds(),
                     fnName = side.charAt(0).toLowerCase() + side.slice(1);
+
                 if (isFunction(b[fnName])) {
                     return this._transformPoint(b[fnName]());
                 }
+
                 return b.center();
             },
 
@@ -781,6 +794,7 @@
                     this.diagram.trigger(ITEMBOUNDSCHANGE, {item: this, bounds: this._bounds.clone()}); // the trigger modifies the arguments internally.
                 }
             },
+
             _transformPoint: function (point) {
                 var rotate = this.rotate(),
                     bounds = this.bounds(),
@@ -789,14 +803,18 @@
                 if (rotate.angle) {
                     point.rotate(rotate.center().plus(tl), 360 - rotate.angle);
                 }
+
                 return point;
             },
+
             _transformedBounds: function () {
                 var bounds = this.bounds(),
                     tl = bounds.topLeft(),
                     br = bounds.bottomRight();
+
                 return Rect.fromPoints(this.diagram.modelToView(tl), this.diagram.modelToView(br));
             },
+
             _rotatedBounds: function () {
                 var bounds = this.bounds().rotatedBounds(this.rotate().angle),
                     tl = bounds.topLeft(),
@@ -804,13 +822,17 @@
 
                 return Rect.fromPoints(tl, br);
             },
+
             _rotate: function () {
                 var rotation = this.options.rotation;
+
                 if (rotation && rotation.angle) {
                     this.rotate(rotation.angle);
                 }
+
                 this._rotationOffset = new Point();
             },
+
             _hover: function (value) {
                 var options = this.options,
                     hover = options.hover,
@@ -829,10 +851,12 @@
                     stroke: stroke,
                     fill: fill
                 });
+
                 if (options.editable && options.editable.connect) {
                     this.diagram._showConnectors(this, value);
                 }
             },
+
             _hitTest: function (value) {
                 if (this.visible()) {
                     var bounds = this.bounds(), rotatedPoint,
@@ -955,13 +979,13 @@
                     var model = this.diagram.connectionsDataSource.getByUid(this.dataItem.uid);
                     if (model) {
                         this.diagram._shouldRefresh = false;
-                        if (defined(this.options.fromX) && defined(this.options.fromY)) {
+                        if (defined(this.options.fromX) && this.options.fromX !== null) {
                             from = null
                             model._set("fromX", this.options.fromX);
                             model._set("fromY", this.options.fromY);
                         }
 
-                        if (defined(this.options.toX) && defined(this.options.toY)) {
+                        if (defined(this.options.toX) && this.options.toX !== null) {
                             to = null;
                             model._set("toX", this.options.toX);
                             model._set("toY", this.options.toY);
@@ -3035,6 +3059,7 @@
                     e.preventDefault();
                 }
             },
+
             _wheel: function (e) {
                 var delta = mwDelta(e),
                     p = this._calculatePosition(e),
@@ -3044,9 +3069,11 @@
                     e.preventDefault();
                 }
             },
+
             _meta: function (e) {
                 return { ctrlKey: e.ctrlKey, metaKey: e.metaKey, altKey: e.altKey };
             },
+
             _calculatePosition: function (e) {
                 var pointEvent = (e.pageX === undefined ? e.originalEvent : e),
                     point = new Point(pointEvent.pageX, pointEvent.pageY),
@@ -3054,9 +3081,11 @@
 
                 return offset;
             },
+
             _normalizePointZoom: function (point) {
                 return point.times(1 / this.zoom());
             },
+
             _initialize: function () {
                 this.shapes = [];
                 this._selectedItems = [];
@@ -3249,9 +3278,15 @@
 
                     if (!this._connectionsDataMap[conn.id]) {
                         var from = this._validateConnector(conn.from);
+                        if (!defined(from)) {
+                            from = new Point(conn.fromX, conn.fromY);
+                        }
                         var to = this._validateConnector(conn.to);
+                        if (!defined(to)) {
+                            to = new Point(conn.toX, conn.toY);
+                        }
 
-                        if (from && to) {
+                        if (defined(from) && defined(to)) {
                             var connection = new Connection(from, to, defaults, conn);
                             this._connectionsDataMap[conn.id] = connection;
                             this.addConnection(connection);

@@ -1306,13 +1306,10 @@
                     target = p;
                 }
 
-                switch (this.handle) {
-                    case -1:
-                        this.connection.source(target);
-                        break;
-                    case 1:
-                        this.connection.target(target);
-                        break;
+                if (this.handle === -1) {
+                    this.connection.source(target);
+                } else if (this.handle === 1) {
+                    this.connection.target(target);
                 }
 
                 if (this.handle) {
