@@ -65,17 +65,22 @@
         } else {
             url = normalize(path + file);
         }
-        return url;
+        var m = /^(.*?)([^\/]*)$/.exec(url);
+        return {
+            url  : url,
+            path : m[1],
+            file : m[2]
+        };
     }
 
     function load(path, file) {
-        var url = geturl(path, file);
-        var def = make_define(path, file, url);
-        if (!LOADED[url]) {
-            LOADED[url] = true;
+        var x = geturl(path, file);
+        var def = make_define(x.url, x.path, x.file);
+        if (!LOADED[x.url]) {
+            LOADED[x.url] = true;
             if (/MSIE\s*[89]/.test(navigator.userAgent)) {
                 var req = new XMLHttpRequest();
-                req.open("GET", url, false);
+                req.open("GET", x.url, false);
                 req.onreadystatechange = function() {
                     if (req.readyState == 4) {
                         if (req.status == 200 || req.status == 304) {
@@ -86,7 +91,7 @@
                 req.send(null);
             } else {
                 document.write("<script>window.define = " + def + "</script>");
-                document.write("<script src='" + url + "'></script>");
+                document.write("<script src='" + x.url + "'></script>");
             }
         }
     }
@@ -114,10 +119,7 @@
         return module.value;
     }
 
-    function make_define(path, file, url) {
-        var base = file.charAt(0) == "."
-            ? basedir(path + file)
-            : basedir(window.location + "");
+    function make_define(url, base, file) {
         function define() {
             var name, deps, factory;
             switch (arguments.length) {
@@ -137,7 +139,8 @@
 
             var ready = true;
             deps = map(deps, function(file){
-                var url = geturl(base, file);
+                var x = geturl(base, file);
+                var url = x.url;
                 if (!MODULES[url] || !MODULES[url].executed) {
                     ready = false;
                     load(base, file);
