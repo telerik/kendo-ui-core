@@ -405,6 +405,14 @@
 
                 ctx.drawImage(img, 0, 0);
 
+                var imgdata;
+                try {
+                    imgdata = ctx.getImageData(0, 0, img.width, img.height);
+                } catch(ex) {
+                    // it tainted the canvas -- can't draw it.
+                    return cont(IMAGE_CACHE[url] = "TAINTED");
+                }
+
                 // in case it contains transparency, we must separate rgb data from the alpha
                 // channel and create a PDFRawImage image with opacity.  otherwise we can use a
                 // PDFJpegImage.
@@ -413,7 +421,6 @@
                 // we might end up not using them if hasAlpha remains false.
 
                 var hasAlpha = false, rgb = BinaryStream(), alpha = BinaryStream();
-                var imgdata = ctx.getImageData(0, 0, img.width, img.height);
                 var rawbytes = imgdata.data;
                 var i = 0;
                 while (i < rawbytes.length) {
@@ -492,6 +499,9 @@
                 img = IMAGE_CACHE[url];
                 if (!img) {
                     throw new Error("Image " + url + " has not been loaded");
+                }
+                if (img === "TAINTED") {
+                    return null;
                 }
                 img = this.IMAGES[url] = this.attach(img.asStream(this));
             }
@@ -1203,8 +1213,10 @@
         },
         drawImage: function(url) {
             var img = this._pdf.getImage(url);
-            this._xResources[img._resourceName] = img;
-            this._out(img._resourceName, " Do", NL);
+            if (img) { // the result can be null for a cross-domain image
+                this._xResources[img._resourceName] = img;
+                this._out(img._resourceName, " Do", NL);
+            }
         },
 
         // internal
