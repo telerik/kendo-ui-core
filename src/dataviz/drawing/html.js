@@ -733,10 +733,10 @@
         }
     }
 
-    function renderImage(element, group) {
+    function renderImage(element, url, group) {
         var box = getContentBox(element);
         var rect = new geo.Rect([ box.left, box.top ], [ box.width, box.height ]);
-        var image = new drawing.Image(element.src, rect);
+        var image = new drawing.Image(url, rect);
         setClipping(image, elementRoundBox(element, box, "content"));
         group.append(image);
     }
@@ -772,7 +772,14 @@
     function renderContents(element, style, group) {
         switch (element.tagName.toLowerCase()) {
           case "img":
-            renderImage(element, group);
+            renderImage(element, element.src, group);
+            return;
+          case "canvas":
+            try {
+                renderImage(element, element.toDataURL("image/jpeg"), group);
+            } catch(ex) {
+                // tainted; can't draw it, ignore.
+            }
             return;
         }
 
