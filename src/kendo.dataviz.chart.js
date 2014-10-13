@@ -3439,24 +3439,33 @@ var __meta__ = {
         },
 
         updateStackRange: function() {
-            var chart = this,
-                isStacked = chart.options.isStacked,
-                limits;
+            var chart = this;
+            var chartSeries = chart.options.series;
+            var isStacked = chart.options.isStacked;
+            var limits;
+            var limitsCache = {};
 
             if (isStacked) {
-                for (var i = 0; i < chart.options.series.length; i++) {
-                    var series = chart.options.series[i];
+                for (var i = 0; i < chartSeries.length; i++) {
+                    var series = chartSeries[i];
                     var axisName = series.axis;
-                    var errorTotals = chart.errorTotals;
+                    var key = axisName + series.stack;
 
-                    limits = chart.stackLimits(axisName, series.stack);
-                    if (errorTotals) {
-                        if (errorTotals.negative.length) {
-                            limits.min = math.min(limits.min, sparseArrayMin(errorTotals.negative));
+                    limits = limitsCache[key];
+                    if (!limits) {
+                        limits = chart.stackLimits(axisName, series.stack);
+
+                        var errorTotals = chart.errorTotals;
+                        if (errorTotals) {
+                            if (errorTotals.negative.length) {
+                                limits.min = math.min(limits.min, sparseArrayMin(errorTotals.negative));
+                            }
+                            if (errorTotals.positive.length) {
+                                limits.max = math.max(limits.max, sparseArrayMax(errorTotals.positive));
+                            }
                         }
-                        if (errorTotals.positive.length) {
-                            limits.max = math.max(limits.max, sparseArrayMax(errorTotals.positive));
-                        }
+
+                        limitsCache[key] = limits;
                     }
 
                     chart.valueAxisRanges[axisName] = limits;
