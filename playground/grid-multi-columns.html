@@ -36,7 +36,7 @@
         <script src="../demos/mvc/content/shared/js/less.js"></script>
   </head>
     <body>
-        <div id="grid" style="width: 800px"></div>
+        <div id="grid" style="width: 100%"></div>
 
         <script>
             $(document).ready(function () {
@@ -117,6 +117,21 @@
                                 width: 200
                             }]
                         }, {
+                            title: "header2",
+                            columns: [{
+                                hidden: false,
+                                field: "ContactTitle",
+                                title: "Contact Title 3",
+                                footerTemplate: "foo1",
+                                width: 200
+                            },{
+                                hidden: false,
+                                field: "CompanyName",
+                                title: "Contact Title 4",
+                                footerTemplate: "baz2",
+                                width: 200
+                            }]
+                        },{
                             //title: "header 2",
                             //columns: [
                             //{
