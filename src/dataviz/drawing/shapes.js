@@ -139,6 +139,18 @@
             } else {
                 return this.options.get("opacity");
             }
+        },
+
+        clippedBBox: function(transformation) {
+            var box = this._clippedBBox(transformation);
+            if (box) {
+                var clip = this.clip();
+                return clip ? Rect.intersect(box, clip.bbox(transformation)) : box;
+            }
+        },
+
+        _clippedBBox: function(transformation) {
+            return this.bbox(transformation);
         }
     });
 
@@ -223,6 +235,10 @@
 
         rawBBox: function() {
             return elementsBoundingBox(this.children, false);
+        },
+
+        _clippedBBox: function(transformation) {
+            return elementsClippedBoundingBox(this.children, this.currentTransform(transformation));
         },
 
         currentTransform: function(transformation) {
@@ -616,6 +632,10 @@
 
         rawBBox: function() {
             return elementsBoundingBox(this.paths, false);
+        },
+
+        _clippedBBox: function(transformation) {
+            return elementsClippedBoundingBox(this.paths, this.currentTransform(transformation));
         }
     });
     deepExtend(MultiPath.fn, drawing.mixins.Paintable);
@@ -658,6 +678,26 @@
             var element = elements[i];
             if (element.visible()) {
                 var elementBoundingBox = applyTransform ? element.bbox(transformation) : element.rawBBox();
+                if (elementBoundingBox) {
+                    if (boundingBox) {
+                        boundingBox = Rect.union(boundingBox, elementBoundingBox);
+                    } else {
+                        boundingBox = elementBoundingBox;
+                    }
+                }
+            }
+        }
+
+        return boundingBox;
+    }
+
+    function elementsClippedBoundingBox(elements, applyTransform, transformation) {
+        var boundingBox;
+
+        for (var i = 0; i < elements.length; i++) {
+            var element = elements[i];
+            if (element.visible()) {
+                var elementBoundingBox = applyTransform ? element.clippedBBox(transformation) : element.rawBBox();
                 if (elementBoundingBox) {
                     if (boundingBox) {
                         boundingBox = Rect.union(boundingBox, elementBoundingBox);
