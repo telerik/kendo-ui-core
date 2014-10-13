@@ -17,7 +17,7 @@
         name: "Diagram",
         category: "dataviz",
         description: "The Kendo DataViz Diagram ",
-        depends: [ "data", "userevents", "mobile.scroller", "draganddrop", "dataviz.core", "dataviz.drawing" ]
+        depends: [ "data", "userevents", "mobile.scroller", "draganddrop", "dataviz.core", "drawing" ]
     };
 
 }, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

@@ -15,7 +15,7 @@
 })(function(){
 
     var __meta__ = {
-        id: "dataviz.drawing",
+        id: "drawing",
         name: "Drawing API",
         category: "dataviz",
         description: "The Kendo DataViz low-level drawing API",
