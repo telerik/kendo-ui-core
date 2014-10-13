@@ -76,7 +76,7 @@
             }
             var paperSize = getOption("paperSize", "auto"), addMargin = false;
             if (paperSize == "auto") {
-                var size = group.bbox().getSize();
+                var size = group.clippedBBox().getSize();
                 paperSize = [ size.width, size.height ];
                 addMargin = true;
             }
