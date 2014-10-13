@@ -611,7 +611,7 @@
              */
             clone: function () {
                 var json = this.serialize(),
-                    clone, dataItem = {};
+                    dataItem = {};
 
                 json.options.id = diagram.randomId();
 
@@ -620,9 +620,7 @@
                     dataItem[this.dataItem.idField] = this.dataItem._defaultId;
                 }
 
-                clone = new Shape(json.options, dataItem);
-
-                return clone;
+                return new Shape(json.options, dataItem);
             },
 
             select: function (value) {
@@ -964,7 +962,7 @@
                     if (defined(options.to)) {
                         this.target(options.to);
                     } else if (defined(options.toX) && defined(options.toY)) {
-                        this.source(new Point(options.toX, options.toY));
+                        this.target(new Point(options.toX, options.toY));
                     }
 
                     this.redraw(this.options);
@@ -973,7 +971,7 @@
                 }
             },
 
-            updateModel: function() {
+            updateModel: function(shouldRefresh) {
                 if (this.diagram) {
                     var model = this.diagram.connectionsDataSource.getByUid(this.dataItem.uid);
                     if (model) {
@@ -998,8 +996,10 @@
                             model._set("toY", null);
                         }
 
-                        this.diagram._shouldRefresh = true;
-                        model.trigger("change");
+                        if (shouldRefresh !== false) {
+                            this.diagram._shouldRefresh = true;
+                            model.trigger("change");
+                        }
                     }
                 }
             },
@@ -1340,10 +1340,14 @@
              */
             clone: function () {
                 var json = this.serialize(),
-                    clone = new Connection(this.from, this.to, json.options);
-                clone.diagram = this.diagram;
+                    dataItem;
 
-                return clone;
+                if (defined(this.dataItem)) {
+                    dataItem = this.dataItem.toJSON();
+                    dataItem[this.dataItem.idField] = this.dataItem._defaultId;
+                }
+
+                return new Connection(this.from, this.to, json.options, dataItem);
             },
             /**
              * Returns a serialized connection in json format. Consist of the options and the dataItem.
@@ -2112,12 +2116,10 @@
             _addConnection: function (connection, undoable) {
                 if (this.connectionsDataSource) {
                     var dataItem = this.connectionsDataSource.add(connection.dataItem);
+                    connection.dataItem = dataItem;
+                    connection.updateModel(false);
                     this.connectionsDataSource.sync();
-                    if (!connection.dataItem) {
-                        connection.dataItem = dataItem;
-                    }
                     this._connectionsDataMap[connection.dataItem.id] = connection;
-                    connection.updateModel();
                 }
 
                 return this.addConnection(connection, undoable);
@@ -2581,6 +2583,7 @@
                         this._addShape(copied);
                         copied.position(new Point(item.options.x + offsetX, item.options.y + offsetY));
                         copied.select(true);
+                        copied.updateModel();
                     }
                     // then the connections
                     for (i = 0; i < this._clipboard.length; i++) {
@@ -2603,15 +2606,17 @@
                             if (mapping.containsKey(connector.shape.id)) {
                                 shape = this.getShapeById(mapping.get(connector.shape.id));
                                 copied.target(shape.getConnector(connector.options.name));
-                            }
-                            else {
+                            } else {
                                 copied.target(new Point(item.targetPoint().x + offsetX, item.targetPoint().y + offsetY));
                             }
                         }
-                        this._addItem(copied);
+                        this._addConnection(copied);
                         copied.position(new Point(item.options.x + offsetX, item.options.y + offsetY));
                         copied.select(true);
+                        debugger;
+                        copied.updateModel();
                     }
+
                     this._copyOffset += 1;
                 }
             },
