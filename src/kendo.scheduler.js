@@ -2039,6 +2039,7 @@ var __meta__ = {
             var startTime;
             var endTime;
             var event;
+            var clonedEvent;
             var that = this;
 
             var isMobile = that._isMobile();
@@ -2071,6 +2072,9 @@ var __meta__ = {
                         }
 
                         event = that.occurrenceByUid(eventElement.attr(kendo.attr("uid")));
+                        clonedEvent = event.clone();
+
+                        view._updateEventForMove(clonedEvent);
 
                         startSlot = view._slotByPosition(e.x.startLocation, e.y.startLocation);
 
@@ -2095,9 +2099,9 @@ var __meta__ = {
 
                         var distance = endTime - startTime;
 
-                        view._updateMoveHint(event, slot.groupIndex, distance);
+                        view._updateMoveHint(clonedEvent, slot.groupIndex, distance);
 
-                        var range = moveEventRange(event, distance);
+                        var range = moveEventRange(clonedEvent, distance);
 
                         if (!that.trigger("move", {
                             event: event,
@@ -2110,14 +2114,14 @@ var __meta__ = {
                             endSlot = slot;
 
                         } else {
-                            view._updateMoveHint(event, slot.groupIndex, distance);
+                            view._updateMoveHint(clonedEvent, slot.groupIndex, distance);
                         }
                     })
                     .bind("dragend", function(e) {
                         that.view()._removeMoveHint();
 
                         var distance = endTime - startTime;
-                        var range = moveEventRange(event, distance);
+                        var range = moveEventRange(clonedEvent, distance);
 
                         var start = range.start;
                         var end = range.end;
@@ -2133,10 +2137,10 @@ var __meta__ = {
                             resources: endResources
                         });
 
-                        if (!prevented && (event.start.getTime() != start.getTime() ||
-                        event.end.getTime() != end.getTime() || kendo.stringify(endResources) != kendo.stringify(startResources)))  {
-
-                            that._updateEvent(null, event, $.extend({ start: start, end: end }, endResources));
+                        if (!prevented && (clonedEvent.start.getTime() != start.getTime() ||
+                        clonedEvent.end.getTime() != end.getTime() || kendo.stringify(endResources) != kendo.stringify(startResources)))  {
+                            that.view()._updateEventForMove(event);
+                            that._updateEvent(null, event, $.extend({ start: start, end: end}, endResources));
                         }
 
                         e.currentTarget.removeClass("k-event-active");
@@ -2272,7 +2276,6 @@ var __meta__ = {
                     })) {
                         view._updateResizeHint(event, slot.groupIndex, startTime, endTime);
                     } else {
-                    console.log("prevent changes");
                         startTime = originalStart;
                         endTime = originalEnd;
                     }

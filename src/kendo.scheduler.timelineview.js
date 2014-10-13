@@ -741,7 +741,7 @@ var __meta__ = {
                                 //support horizontal grouping?
                                 var range = ranges[0];
 
-                                element = this._createEventElement(adjustedEvent.occurrence, event, true, range.head || adjustedEvent.head, range.tail || adjustedEvent.tail);
+                                element = this._createEventElement(adjustedEvent.occurrence, event, range.head || adjustedEvent.head, range.tail || adjustedEvent.tail);
                                 element.appendTo(container);
                                 this._positionEvent(adjustedEvent.occurrence, element, range);
                             }
@@ -751,7 +751,7 @@ var __meta__ = {
             }
         },
 
-        _createEventElement: function(occurrence, event, isOneDayEvent, head, tail) {
+        _createEventElement: function(occurrence, event, head, tail) {
             var template = this.eventTemplate;
             var editable = this.options.editable;
             var isMobile = this._isMobile();
@@ -870,32 +870,38 @@ var __meta__ = {
             return rowLevel ? rowLevel.length : 0;
         },
 
-        _updateMoveHint: function(event, groupIndex, distance) {
-            var multiday = event.isMultiDay();
+        _updateEventForMove: function(event) {
+           if (event.isAllDay) {
+               event.set("isAllDay", false);
+           }
+        },
 
+        _updateMoveHint: function(event, groupIndex, distance) {
             var group = this.groups[groupIndex];
 
-            var start = new Date(event.start.getTime() + distance);
+            var clonedEvent = event.clone({ start: event.start, end: event.end});
 
-            var end = new Date(+start + event.duration());
+            var eventDuraton =  clonedEvent.duration();
+            clonedEvent.start = new Date(clonedEvent.start.getTime() + distance);
+            clonedEvent.end = new Date(+clonedEvent.start + eventDuraton);
 
-            var adjustedEvent = this._adjustEvent(event.clone({ start: start, end: end }));
+            var adjustedEvent = this._adjustEvent(clonedEvent);
 
             var ranges = group.slotRanges(adjustedEvent.occurrence, false);
 
             this._removeMoveHint();
 
-            if (!multiday && (getMilliseconds(end) === 0 || getMilliseconds(end) < getMilliseconds(this.startTime()))) {
-                if (ranges.length > 1) {
-                    ranges.pop();
-                }
-            }
+            //if (!multiday && (getMilliseconds(end) === 0 || getMilliseconds(end) < getMilliseconds(this.startTime()))) {
+            //    if (ranges.length > 1) {
+            //        ranges.pop();
+            //    }
+            //}
 
             for (var rangeIndex = 0; rangeIndex < ranges.length; rangeIndex++) {
                 var range = ranges[rangeIndex];
                 var startSlot = range.start;
 
-                var hint = this._createEventElement(adjustedEvent.occurrence ,event, true, false, false);
+                var hint = this._createEventElement(adjustedEvent.occurrence ,event, false, false);
 
                 hint.addClass("k-event-drag-hint");
 
@@ -919,13 +925,6 @@ var __meta__ = {
             }
 
             var content = this.content;
-
-            if (multiday) {
-                content = this.element.find(".k-scheduler-header-wrap:has(.k-scheduler-header-all-day) > div");
-                if (!content.length) {
-                    content = this.content;
-                }
-            }
 
             this._moveHint.appendTo(content);
         },

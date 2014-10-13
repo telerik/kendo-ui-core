@@ -1858,6 +1858,10 @@ var __meta__ = {
                     return isDay ? collection.first() : collection.at(slot.index);
                 }
             }
+        },
+
+        _updateEventForMove: function (event) {
+            return;
         }
     });
 
