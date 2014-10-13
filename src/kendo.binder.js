@@ -1222,6 +1222,29 @@ var __meta__ = {
                 }
 
             })
+        },
+        scheduler: {
+            source: dataSourceBinding("source", "dataSource", "setDataSource").extend({
+                dataBound: function(e) {
+                    var idx;
+                    var length;
+                    var widget = this.widget;
+                    var view = widget.view();
+                    var items = e.addedItems || widget.items();
+                    var dataSource = widget.dataSource;
+                    var groups = dataSource.group() || [];
+                    var data, parents;
+
+                    if (items.length) {
+                        data = e.addedDataItems || dataSource.expand(view.startDate(), view.endDate());
+                        parents = this.bindings.source._parents();
+
+                        for (idx = 0, length = data.length; idx < length; idx++) {
+                            bindElement(items[idx], data[idx], this._ns(e.ns), [data[idx]].concat(parents));
+                        }
+                    }
+                }
+            })
         }
     };
 
