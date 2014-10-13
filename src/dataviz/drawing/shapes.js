@@ -11,7 +11,7 @@
 
         dataviz = kendo.dataviz,
 
-        g = dataviz.geometry,
+        g = kendo.geometry,
         Point = g.Point,
         Rect = g.Rect,
         Size = g.Size,

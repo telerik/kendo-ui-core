@@ -1,6 +1,6 @@
 (function() {
     var dataviz = kendo.dataviz,
-        g = dataviz.geometry,
+        g = kendo.geometry,
         d = kendo.drawing,
         m = dataviz.map,
         ShapeLayer = m.layers.ShapeLayer,

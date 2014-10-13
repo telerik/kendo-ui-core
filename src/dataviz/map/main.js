@@ -19,7 +19,7 @@
         ui = dataviz.ui,
         defined = dataviz.defined,
 
-        g = dataviz.geometry,
+        g = kendo.geometry,
         Point = g.Point,
 
         map = dataviz.map,

@@ -16,7 +16,7 @@
         round = dataviz.round,
         deepExtend = kendo.deepExtend,
 
-        g = dataviz.geometry,
+        g = kendo.geometry,
         Point = g.Point,
 
         Layer = dataviz.map.layers.Layer,

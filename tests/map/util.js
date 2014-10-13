@@ -3,7 +3,7 @@
         Observable = kendo.Observable,
 
         dataviz = kendo.dataviz,
-        g = dataviz.geometry,
+        g = kendo.geometry,
         m = dataviz.map;
 
     var MapMock = Observable.extend({

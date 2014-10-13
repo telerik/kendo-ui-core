@@ -3,7 +3,7 @@
 
         dataviz = kendo.dataviz,
         deepExtend = kendo.deepExtend,
-        g = dataviz.geometry,
+        g = kendo.geometry,
         d = kendo.drawing,
 
         map = dataviz.map,

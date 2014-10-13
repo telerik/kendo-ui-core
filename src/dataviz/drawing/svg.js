@@ -11,7 +11,7 @@
         deepExtend = kendo.deepExtend,
 
         dataviz = kendo.dataviz,
-        g = dataviz.geometry,
+        g = kendo.geometry,
         d = kendo.drawing,
         BaseNode = d.BaseNode,
 

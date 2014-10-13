@@ -18,7 +18,7 @@
         d = kendo.drawing,
         BaseNode = d.BaseNode,
 
-        g = dataviz.geometry,
+        g = kendo.geometry,
         toMatrix = g.toMatrix,
 
         util = dataviz.util,

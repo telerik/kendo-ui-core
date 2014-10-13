@@ -19,7 +19,7 @@
         Matrix = dataviz.Matrix,
         deepExtend = kendo.deepExtend,
 
-        g = dataviz.geometry,
+        g = kendo.geometry,
         Point = g.Point,
 
         map = dataviz.map,

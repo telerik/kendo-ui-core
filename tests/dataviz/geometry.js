@@ -1,7 +1,7 @@
 (function() {
     var dataviz = kendo.dataviz,
 
-        g = dataviz.geometry,
+        g = kendo.geometry,
         Circle = g.Circle,
         Point = g.Point,
         Rect = g.Rect,

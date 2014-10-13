@@ -790,7 +790,7 @@
     }
 
     // Exports ================================================================
-    deepExtend(dataviz, {
+    deepExtend(kendo, {
         geometry: {
             Arc: Arc,
             Circle: Circle,

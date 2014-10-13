@@ -16,7 +16,7 @@
         defined = util.defined,
         isNumber = util.isNumber,
 
-        g = dataviz.geometry,
+        g = kendo.geometry,
         d = kendo.drawing,
 
         map = dataviz.map,

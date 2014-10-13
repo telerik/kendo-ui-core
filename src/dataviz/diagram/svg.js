@@ -20,7 +20,7 @@
         isString = Utils.isString,
         MatrixVector = diagram.MatrixVector,
 
-        g = dataviz.geometry,
+        g = kendo.geometry,
         d = kendo.drawing,
 
         defined = dataviz.defined,

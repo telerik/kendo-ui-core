@@ -1,7 +1,7 @@
 (function() {
     var dataviz = kendo.dataviz,
         d = kendo.drawing,
-        g = dataviz.geometry,
+        g = kendo.geometry,
         Point = g.Point,
         parser = d.PathParser.current,
         multiPath,

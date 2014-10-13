@@ -2,7 +2,7 @@
     var dataviz = kendo.dataviz,
         deepExtend = kendo.deepExtend,
 
-        g = dataviz.geometry,
+        g = kendo.geometry,
         Point = g.Point,
         Matrix = g.Matrix,
 

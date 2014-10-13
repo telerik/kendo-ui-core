@@ -19,7 +19,7 @@
         last = dataviz.last,
         defined = dataviz.util.defined,
 
-        g = dataviz.geometry,
+        g = kendo.geometry,
 
         d = kendo.drawing,
         Group = d.Group,

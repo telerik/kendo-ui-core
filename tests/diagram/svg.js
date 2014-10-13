@@ -4,7 +4,7 @@
         diagram = dataviz.diagram,
         deepExtend = kendo.deepExtend,
 
-        g = dataviz.geometry,
+        g = kendo.geometry,
         d = kendo.drawing,
 
         Point = diagram.Point,
