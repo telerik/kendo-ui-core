@@ -50,7 +50,7 @@
             }
         }
         (function dive(element){
-            var bg = backgroundImageURL(getPropertyValue(element.style, "background-image"));
+            var bg = backgroundImageURL(getPropertyValue(getComputedStyle(element), "background-image"));
             if (/^img$/i.test(element.tagName)) {
                 add(element.src);
             }
