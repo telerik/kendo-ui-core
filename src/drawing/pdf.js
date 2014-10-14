@@ -16,6 +16,7 @@
     // == into === to make JSHint happy will break functionality.
     /*jshint eqnull:true  */
 
+    var Color       = kendo.drawing.Color;
     var PDF         = kendo.pdf;
 
     var TEXT_RENDERING_MODE = PDF.TEXT_RENDERING_MODE;
@@ -360,8 +361,8 @@
         if (/^(none|transparent)$/.test(color)) {
             return null;
         }
-        if (drawing.Color.namedColors.hasOwnProperty(color)) {
-            color = drawing.Color.namedColors[color];
+        if (Color.namedColors.hasOwnProperty(color)) {
+            color = Color.namedColors[color];
         }
         return kendo.parseColor(color).toRGB();
     }
