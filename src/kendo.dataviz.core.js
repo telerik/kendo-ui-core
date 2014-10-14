@@ -4574,18 +4574,6 @@ var __meta__ = {
 
     // Exports ================================================================
     deepExtend(kendo.dataviz, {
-        init: function(element) {
-            kendo.init(element, kendo.dataviz.ui);
-        },
-        ui: {
-            roles: {},
-            themes: {},
-            views: [],
-            plugin: function(widget) {
-                kendo.ui.plugin(widget, dataviz.ui);
-            }
-        },
-
         AXIS_LABEL_CLICK: AXIS_LABEL_CLICK,
         COORD_PRECISION: COORD_PRECISION,
         DEFAULT_PRECISION: DEFAULT_PRECISION,

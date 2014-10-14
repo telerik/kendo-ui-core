@@ -2426,7 +2426,7 @@ function pad(number, digits, end) {
         effects: kendo.effects || effects,
         mobile: kendo.mobile || { },
         data: kendo.data || {},
-        dataviz: kendo.dataviz || {ui: { roles: {}}},
+        dataviz: kendo.dataviz || {},
         keys: {
             INSERT: 45,
             DELETE: 46,
@@ -3038,6 +3038,21 @@ function pad(number, digits, end) {
                 kendo.ui.plugin(widget, kendo.mobile.ui, "Mobile");
             }
         }
+    });
+
+    deepExtend(kendo.dataviz, {
+        init: function(element) {
+            kendo.init(element, kendo.dataviz.ui);
+        },
+        ui: {
+            roles: {},
+            themes: {},
+            views: [],
+            plugin: function(widget) {
+                kendo.ui.plugin(widget, kendo.dataviz.ui);
+            }
+        },
+        roles: {}
     });
 
     kendo.touchScroller = function(elements, options) {
