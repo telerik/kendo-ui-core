@@ -2,7 +2,7 @@
     define([
         "./kendo.util",
         "./mixins/observers",
-        "./kendo.geometry",
+        "./geometry/main",
         "./drawing/core",
         "./drawing/color",
         "./drawing/mixins",
@@ -21,7 +21,7 @@
         name: "Drawing API",
         category: "framework",
         description: "The Kendo UI low-level drawing API",
-        depends: [ "core", "util", "mixins", "geometry" ]
+        depends: [ "core", "util" ]
     };
 
 }, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

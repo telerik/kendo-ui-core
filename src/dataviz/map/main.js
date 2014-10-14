@@ -1,5 +1,5 @@
 (function(f, define){
-    define(["../../kendo.geometry", "./crs", "./location"], f);
+    define(["../../geometry/main", "./crs", "./location"], f);
 })(function(){
 
 (function ($, undefined) {

@@ -1,5 +1,5 @@
 (function(f, define){
-    define(["./base", "../location", "../../../kendo.geometry", "../../../kendo.util",
+    define(["./base", "../location", "../../../geometry/main", "../../../kendo.util",
             "../../../kendo.drawing",
             "../../../kendo.data",
             "../../../kendo.draganddrop"
