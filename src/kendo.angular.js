@@ -197,16 +197,86 @@ var __meta__ = {
         return formRegExp.test(element[0].tagName);
     }
 
-    function valueGetter(element, widget) {
+    function bindToNgModel(widget, scope, ngModel, element) {
+        if (!widget.value) {
+            return;
+        }
+
+        var value;
+
         if (isForm(element)) {
-            return function() {
+            value = function() {
                 return formValue(element);
             }
         } else {
-            return function() {
+            value = function() {
                 return widget.value();
             }
         }
+
+        // Angular will invoke $render when the view needs to be updated with the view value.
+        ngModel.$render = function() {
+            // Update the widget with the view value.
+
+            // delaying with setTimout for cases where the datasource is set thereafter.
+            // https://github.com/kendo-labs/angular-kendo/issues/304
+            var val = ngModel.$viewValue;
+            if (val === undefined) {
+                val = ngModel.$modelValue;
+            }
+            setTimeout(function(){
+                if (widget) { // might have been destroyed in between. :-(
+                    widget.value(val);
+                }
+            }, 0);
+        };
+
+        // Some widgets trigger "change" on the input field
+        // and this would result in two events sent (#135)
+        var haveChangeOnElement = false;
+
+        if (isForm(element)) {
+            element.on("change", function() {
+                haveChangeOnElement = true;
+            });
+        }
+
+        var onChange = function(pristine) {
+            return function() {
+                var formPristine;
+                if (haveChangeOnElement) {
+                    return;
+                }
+                haveChangeOnElement = false;
+                if (pristine && ngForm) {
+                    formPristine = ngForm.$pristine;
+                }
+                ngModel.$setViewValue(value());
+                if (pristine) {
+                    ngModel.$setPristine();
+                    if (formPristine) {
+                        ngForm.$setPristine();
+                    }
+                }
+                digest(scope);
+            };
+        };
+
+        widget.first("change", onChange(false));
+        widget.first("dataBound", onChange(true));
+
+        var currentVal = value();
+
+        // if the model value is undefined, then we set the widget value to match ( == null/undefined )
+        if (currentVal != ngModel.$viewValue) {
+            if (!ngModel.$isEmpty(ngModel.$viewValue)) {
+                widget.value(ngModel.$viewValue);
+            } else if (currentVal != null && currentVal !== "" && currentVal != ngModel.$viewValue) {
+                ngModel.$setViewValue(currentVal);
+            }
+        }
+
+        ngModel.$setPristine();
     }
 
     function bindToKNgModel(widget, scope, kNgModel) {
@@ -245,6 +315,23 @@ var __meta__ = {
             });
             updating = false;
         });
+    }
+
+    function destroyWidgetOnScopeDestroy(scope, widget) {
+        var deregister = scope.$on("$destroy", function() {
+            deregister();
+            if (widget) {
+                if (widget.element) {
+                    widget = kendoWidgetInstance(widget.element);
+                    if (widget) {
+                        widget.destroy();
+                    }
+                }
+                widget = null;
+            }
+        });
+
+        return deregister;
     }
 
     module.factory('directiveFactory', function() {
@@ -301,6 +388,7 @@ var __meta__ = {
                             })();
                         }
 
+
                         // if k-rebind attribute is provided, rebind the kendo widget when
                         // the watched value changes
                         if (attrs.kRebind) {
@@ -322,9 +410,11 @@ var __meta__ = {
                                     var _wrapper = $(widget.wrapper)[0];
                                     var _element = $(widget.element)[0];
                                     widget.destroy();
-                                    if (dropDestroyHandler) {
-                                        dropDestroyHandler();
+
+                                    if (destroyRegister) {
+                                        destroyRegister();
                                     }
+
                                     widget = null;
                                     if (_wrapper && _element) {
                                         _wrapper.parentNode.replaceChild(_element, _wrapper);
@@ -338,100 +428,17 @@ var __meta__ = {
                         }
 
                         var widget = createWidget(scope, element, attrs, role, origAttr);
-                        setupBindings();
 
-                        var dropDestroyHandler;
+                        var destroyRegister = destroyWidgetOnScopeDestroy(scope, widget);
 
-                        function setupBindings() {
-                            var value = valueGetter(element, widget);
+                        // 2 way binding: ngModel <-> widget.value()
+                        if (ngModel) {
+                            bindToNgModel(widget, scope, ngModel, element);
+                        }
 
-                            dropDestroyHandler = scope.$on("$destroy", function() {
-                                dropDestroyHandler();
-                                if (widget) {
-                                    if (widget.element) {
-                                        widget = kendoWidgetInstance(widget.element);
-                                        if (widget) {
-                                            widget.destroy();
-                                        }
-                                    }
-                                    widget = null;
-                                }
-                            });
-
-                            // 2 way binding: ngModel <-> widget.value()
-                            OUT: if (ngModel) {
-                                if (!widget.value) {
-                                    break OUT;
-                                }
-
-                                // Angular will invoke $render when the view needs to be updated with the view value.
-                                ngModel.$render = function() {
-                                    // Update the widget with the view value.
-
-                                    // delaying with setTimout for cases where the datasource is set thereafter.
-                                    // https://github.com/kendo-labs/angular-kendo/issues/304
-                                    var val = ngModel.$viewValue;
-                                    if (val === undefined) {
-                                        val = ngModel.$modelValue;
-                                    }
-                                    setTimeout(function(){
-                                        if (widget) { // might have been destroyed in between. :-(
-                                            widget.value(val);
-                                        }
-                                    }, 0);
-                                };
-
-                                // Some widgets trigger "change" on the input field
-                                // and this would result in two events sent (#135)
-                                var haveChangeOnElement = false;
-                                if (isForm(element)) {
-                                    element.on("change", function(){
-                                        haveChangeOnElement = true;
-                                    });
-                                }
-
-                                var onChange = function(pristine){
-                                    return function(){
-                                        var formPristine;
-                                        if (haveChangeOnElement) {
-                                            return;
-                                        }
-                                        haveChangeOnElement = false;
-                                        if (pristine && ngForm) {
-                                            formPristine = ngForm.$pristine;
-                                        }
-                                        ngModel.$setViewValue(value());
-                                        if (pristine) {
-                                            ngModel.$setPristine();
-                                            if (formPristine) {
-                                                ngForm.$setPristine();
-                                            }
-                                        }
-                                        digest(scope);
-                                    };
-                                };
-
-                                widget.first("change", onChange(false));
-                                widget.first("dataBound", onChange(true));
-
-                                var currentVal = value();
-
-                                // if the model value is undefined, then we set the widget value to match ( == null/undefined )
-                                if (currentVal != ngModel.$viewValue) {
-                                    if (!ngModel.$isEmpty(ngModel.$viewValue)) {
-                                        widget.value(ngModel.$viewValue);
-                                    } else if (currentVal != null && currentVal !== "" && currentVal != ngModel.$viewValue) {
-                                        ngModel.$setViewValue(currentVal);
-                                    }
-                                }
-
-                                ngModel.$setPristine();
-                            }
-
-                            // kNgModel is used for the "logical" value
-                            if (attrs.kNgModel) {
-                                bindToKNgModel(widget, scope, attrs.kNgModel);
-                            }
+                        // kNgModel is used for the "logical" value
+                        if (attrs.kNgModel) {
+                            bindToKNgModel(widget, scope, attrs.kNgModel);
                         }
 
                         // mutation observers — propagate the original
