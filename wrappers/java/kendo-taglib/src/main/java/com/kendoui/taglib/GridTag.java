@@ -98,6 +98,10 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
         setProperty("pageable", value);
     }
 
+    public void setPdf(com.kendoui.taglib.grid.PdfTag value) {
+        setProperty("pdf", value);
+    }
+
     public void setScrollable(com.kendoui.taglib.grid.ScrollableTag value) {
         setProperty("scrollable", value);
     }
@@ -178,6 +182,10 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
 
     public void setFilterMenuInit(FilterMenuInitFunctionTag value) {
         setEvent("filterMenuInit", value.getBody());
+    }
+
+    public void setPdfExport(PdfExportFunctionTag value) {
+        setEvent("pdfExport", value.getBody());
     }
 
     public void setRemove(RemoveFunctionTag value) {
@@ -550,6 +558,18 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
 
     public void setFilterMenuInit(String value) {
         setProperty("filterMenuInit", new Function(value));
+    }
+
+    public String getPdfExport() {
+        Function property = ((Function)getProperty("pdfExport"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setPdfExport(String value) {
+        setProperty("pdfExport", new Function(value));
     }
 
     public String getRemove() {
