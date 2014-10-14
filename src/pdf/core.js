@@ -1297,7 +1297,14 @@
         };
 
         var slice = HAS_TYPED_ARRAYS ? function(start, length) {
-            return new Uint8Array(data.buffer.slice(start, start + length));
+            if (data.buffer.slice) {
+                return new Uint8Array(data.buffer.slice(start, start + length));
+            } else {
+                // IE10
+                var x = new Uint8Array(length);
+                x.set(new Uint8Array(data.buffer, start, length));
+                return x;
+            }
         } : function(start, length) {
             return data.slice(start, start + length);
         };
