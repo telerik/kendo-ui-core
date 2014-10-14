@@ -1600,6 +1600,35 @@
         equal(cols[4].style.width, "30px");
     });
 
+    test("reorder data cells index is updated", function() {
+        var grid = new Grid(div, {
+            columns: [
+                { title: "master", width: 10 },
+                { title: "master1",
+                    columns: [
+                        { title: "master1-child", columns: [{ title: "master1-child-child", width: 20 }] },
+                        { title: "master1-child1", columns: [{ title: "master1-child1-child", width: 30 }, { title: "master1-child1-child2", width: 40 } ] },
+                        { title: "master1-child2", columns: [{ title: "master1-child2-child", width: 50 }, { title: "master1-child2-child2", width: 60 } ] }
+                ] }
+            ],
+            dataSource: {
+                data: data
+            }
+        });
+
+        grid.reorderColumn(2, grid.columns[1].columns[1]);
+
+        var rows = grid.thead.find("tr");
+
+        equal(rows.eq(0).find("th").eq(0).attr("data-index"), 0);
+        equal(rows.eq(2).find("th").eq(0).attr("data-index"), 1);
+        equal(rows.eq(2).find("th").eq(1).attr("data-index"), 2);
+        equal(rows.eq(2).find("th").eq(2).attr("data-index"), 3);
+        equal(rows.eq(2).find("th").eq(3).attr("data-index"), 4);
+        equal(rows.eq(2).find("th").eq(4).attr("data-index"), 5);
+
+    });
+
     function moveOverDropTarget(draggable, dropTarget) {
         var position = dropTarget.position();
 

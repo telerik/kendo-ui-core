@@ -595,6 +595,38 @@ var __meta__ = {
         return result;
     }
 
+    function findReorderTarget(columns, target, source, before) {
+        if (target.columns) {
+            target = target.columns;
+            return target[before ? 0 : target.length - 1]
+        } else {
+            var parent = columnParent(target, columns);
+            var parentColumns;
+
+            if (parent) {
+                parentColumns = parent.columns;
+            } else {
+                parentColumns = columns;
+            }
+
+            var index = inArray(target, parentColumns);
+            if (index == 0 && before) {
+                index++;
+            } else if (index == parentColumns.length - 1 && !before) {
+                index--;
+            } else if (index > 0 || (index == 0 && !before)) {
+                index += before ? -1 : 1;
+            }
+
+            target = parentColumns[Math.max(index, 0)];
+            if (target && target != source) {
+                return findReorderTarget(columns, target, source, before);
+            }
+        }
+        return null;
+    }
+
+
     function columnVisiblePosition(column, columns, row, cellCounts) {
         var result;
         var idx;
@@ -1724,35 +1756,7 @@ var __meta__ = {
                 }
             }
             if (leafs.length) {
-                var findTarget = function(columns, target, source, before) {
-                    if (target.columns) {
-                        target = target.columns;
-                        return target[before ? 0 : target.length - 1]
-                    } else {
-                        var parent = columnParent(target, columns);
-
-                        if (parent) {
-                            parent = parent.columns;
-                        } else {
-                            parent = columns;
-                        }
-
-                        var index = inArray(target, parent);
-                        if (index == 0 && before) {
-                            index++;
-                        } else if (index > 0 || (index == 0 && !before)) {
-                           index += before ? -1 : 1;
-                        }
-
-                        target = parent[Math.max(index, 0)];
-                        if (target && target != source) {
-                            return findTarget(columns, target, source, before);
-                        }
-                    }
-                    return null;
-                }
-
-                target = findTarget(that.columns, target, sources[0], before);
+                target = findReorderTarget(that.columns, target, sources[0], before);
                 if (target) {
                     that._reorderHeader(leafs, target, before);
                 }
@@ -1879,6 +1883,8 @@ var __meta__ = {
 
             that._templates();
 
+            that._updateColumnCellIndex();
+
             that._updateTablesWidth();
             that._applyLockedContainersWidth();
             that._syncLockedContentHeight();
@@ -1895,6 +1901,16 @@ var __meta__ = {
                 that.trigger(COLUMNUNLOCK, {
                     column: column
                 });
+            }
+        },
+
+        _updateColumnCellIndex: function() {
+            var columns = leafColumns(this.columns);
+            var header = this.thead.add(this.lockedTable);
+            for (var idx = 0, length = columns.length; idx < length; idx++) {
+                var position = columnPosition(columns[idx], this.columns);
+                cell = header.find("tr").eq(position.row).find(".k-header:not(.k-group-cell,.k-hierarchy-cell)").eq(position.cell);
+                cell.attr(kendo.attr("index"), idx);
             }
         },
 
