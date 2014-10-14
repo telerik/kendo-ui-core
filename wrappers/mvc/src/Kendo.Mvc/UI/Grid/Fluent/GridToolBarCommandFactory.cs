@@ -53,6 +53,19 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Represents a command which exports the current grid data to PDF.
+        /// </summary>
+        /// <returns></returns>
+        public GridToolBarCommandBuilder<T> Pdf()
+        {
+            var command = new GridToolBarPdfCommand<T>();
+
+            settings.Commands.Add(command);
+
+            return new GridToolBarCommandBuilder<T>(command);
+        }
+
+        /// <summary>
         /// Defines a save command.
         /// </summary>
         public GridToolBarSaveCommandBuilder<T> Save()

@@ -970,6 +970,15 @@ namespace Kendo.Mvc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Export to PDF.
+        /// </summary>
+        public static string Grid_Pdf {
+            get {
+                return ResourceManager.GetString("Grid_Pdf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save changes.
         /// </summary>
         public static string Grid_SaveChanges {

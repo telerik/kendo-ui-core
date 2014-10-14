@@ -70,6 +70,7 @@ namespace Kendo.Mvc.UI
             Resizable = new GridResizableSettings();
             Reorderable = new GridReorderableSettings();
             Excel = new GridExcelSettings();
+            Pdf = new GridPdfSettings();
 
             TableHtmlAttributes = new RouteValueDictionary();
             
@@ -163,6 +164,12 @@ namespace Kendo.Mvc.UI
         }
 
         public GridExcelSettings Excel
+        {
+            get;
+            private set;
+        }
+
+        public GridPdfSettings Pdf
         {
             get;
             private set;
@@ -759,6 +766,13 @@ namespace Kendo.Mvc.UI
             if (excel.Any())
             {
                 options["excel"] = excel;
+            }
+
+            var pdf = Pdf.ToJson();
+
+            if (pdf.Any())
+            {
+                options["pdf"] = pdf;
             }
 
             if (ColumnMenu.Enabled)

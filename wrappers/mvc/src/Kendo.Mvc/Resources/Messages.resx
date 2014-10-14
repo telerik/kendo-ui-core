@@ -765,4 +765,7 @@
   <data name="Grid_Excel" xml:space="preserve">
     <value>Export to Excel</value>
   </data>
+  <data name="Grid_Pdf" xml:space="preserve">
+    <value>Export to PDF</value>
+  </data>
 </root>
