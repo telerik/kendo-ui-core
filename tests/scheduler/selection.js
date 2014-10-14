@@ -297,7 +297,7 @@
         deepEqual(kendo.date.getDate(scheduler.date()), kendo.date.getDate(scheduler._selection.start));
     });
 
-    test("scheduler sets selectedDate when selection.start is bigger than view.endDate()", 1, function() {
+    tzTest("Sofia", "scheduler sets selectedDate when selection.start is bigger than view.endDate()", 1, function() {
         var view = scheduler.view(),
             start = kendo.date.addDays(view.endDate(), 1);
 
