@@ -106,4 +106,23 @@
         equal(items.eq(1).text(), "2/Bar");
     });
 
+    ngTest("custom tag is replaced with a <div>", 1,
+    function(){
+        angular.module('kendo.tests').controller('myController', function($scope) {
+            $scope.data = [{id: 1, text: "Foo"}, {id: 2, text: "Bar"}];
+            $scope.scrollViewOptions = {
+                dataSource: $scope.data,
+                template: "<div class='my-item'>#= text #</div>"
+            };
+        });
+        QUnit.fixture.html("<div kendo-mobile-application id='app'>" +
+            "<kendo-mobile-view id='home' ng-controller='myController'>" +
+                "<kendo-mobile-scroll-view id='scrollview' k-options='scrollViewOptions'></kendo-mobile-scroll-view>" +
+            "</kendo-mobile-view>" + 
+        "</div>");
+    },
+    function() {
+        equal($("#scrollview").get(0).tagName, "DIV");
+    });
+
 }());

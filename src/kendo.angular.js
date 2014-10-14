@@ -546,6 +546,10 @@ var __meta__ = {
         ContextMenu    : "ul"
     };
 
+    var SKIP_SHORTCUTS = [
+        'MobileView'
+    ];
+
     var MANUAL_DIRECTIVES = [
         'MobileApplication',
         'MobileView',
@@ -564,7 +568,9 @@ var __meta__ = {
         widget = "kendo" + widget;
         module.directive(widget, function() {
             return {
+                restrict: "A",
                 link: function(scope, element, attrs, controllers) {
+                    debugger;
                     createWidget(scope, element, attrs, widget, widget);
                 }
             };
@@ -584,13 +590,31 @@ var __meta__ = {
         var name = isMobile ? "Mobile" : "";
         name += klass.fn.options.name;
 
-        if (MANUAL_DIRECTIVES.indexOf(name) > -1) {
-            return;
-        }
-
         var className = name;
         var shortcut = "kendo" + name.charAt(0) + name.substr(1).toLowerCase();
         name = "kendo" + name;
+
+        // <kendo-numerictextbox>-type directives
+        var dashed = name.replace(/([A-Z])/g, "-$1");
+
+        if (SKIP_SHORTCUTS.indexOf(name.replace("kendo", "")) == -1) {
+            angular.forEach([name, shortcut], function(directiveName) {
+                module.directive(directiveName, function(){
+                    return {
+                        restrict : "E",
+                        replace  : true,
+                        template : function(element, attributes) {
+                            var tag = TAGNAMES[className] || "div";
+                            return "<" + tag + " " + dashed + ">" + element.html() + "</" + tag + ">";
+                        }
+                    };
+                });
+            });
+        }
+
+        if (MANUAL_DIRECTIVES.indexOf(name.replace("kendo", "")) > -1) {
+            return;
+        }
 
         // here name should be like kendoMobileListView so kendo-mobile-list-view works,
         // and shortcut like kendoMobilelistview, for kendo-mobilelistview
@@ -600,21 +624,6 @@ var __meta__ = {
             make(shortcut, name);
         }
 
-        // <kendo-numerictextbox>-type directives
-        var dashed = name.replace(/([A-Z])/g, "-$1");
-
-        angular.forEach([name, shortcut], function(directiveName) {
-            module.directive(directiveName, function(){
-                return {
-                    restrict : "E",
-                    replace  : true,
-                    template : function(element, attributes) {
-                        var tag = TAGNAMES[className] || "div";
-                        return "<" + tag + " " + dashed + ">" + element.html() + "</" + tag + ">";
-                    }
-                };
-            });
-        });
     }
 
     (function(){
