@@ -404,6 +404,41 @@ var __meta__ = {
         widget.first("destroy", suspend);
     }
 
+    function setupRebind(widget, scope, originalElement, rebindAttr, destroyRegister) {
+        // watch for changes on the expression passed in the k-rebind attribute
+        var unregister = scope.$watch(rebindAttr, function(newValue, oldValue) {
+            if (newValue !== oldValue) {
+                unregister(); // this watcher will be re-added if we compile again!
+
+                /****************************************************************
+                // XXX: this is a gross hack that might not even work with all
+                // widgets.  we need to destroy the current widget and get its
+                // wrapper element out of the DOM, then make the original element
+                // visible so we can initialize a new widget on it.
+                //
+                // kRebind is probably impossible to get right at the moment.
+                ****************************************************************/
+
+                var _wrapper = $(widget.wrapper)[0];
+                var _element = $(widget.element)[0];
+                widget.destroy();
+
+                if (destroyRegister) {
+                    destroyRegister();
+                }
+
+                widget = null;
+                if (_wrapper && _element) {
+                    _wrapper.parentNode.replaceChild(_element, _wrapper);
+                    var clone = originalElement.cloneNode(true);
+                    $(element).replaceWith(clone);
+                    element = $(clone);
+                }
+                $compile(element)(scope);
+            }
+        }, true); // watch for object equality. Use native or simple values.
+    }
+
     module.factory('directiveFactory', function() {
         var KENDO_COUNT = 0;
         var RENDERED = false;
@@ -458,47 +493,21 @@ var __meta__ = {
                             })();
                         }
 
+                        var originalElement;
+
                         // if k-rebind attribute is provided, rebind the kendo widget when
                         // the watched value changes
                         if (attrs.kRebind) {
-                            var originalElement = attrs.$kendoOrigElement || $(element)[0].cloneNode(true);
-                            // watch for changes on the expression passed in the k-rebind attribute
-                            var unregister = scope.$watch(attrs.kRebind, function(newValue, oldValue) {
-                                if (newValue !== oldValue) {
-                                    unregister(); // this watcher will be re-added if we compile again!
-
-                                    /****************************************************************
-                                     // XXX: this is a gross hack that might not even work with all
-                                     // widgets.  we need to destroy the current widget and get its
-                                     // wrapper element out of the DOM, then make the original element
-                                     // visible so we can initialize a new widget on it.
-                                     //
-                                     // kRebind is probably impossible to get right at the moment.
-                                     ****************************************************************/
-
-                                    var _wrapper = $(widget.wrapper)[0];
-                                    var _element = $(widget.element)[0];
-                                    widget.destroy();
-
-                                    if (destroyRegister) {
-                                        destroyRegister();
-                                    }
-
-                                    widget = null;
-                                    if (_wrapper && _element) {
-                                        _wrapper.parentNode.replaceChild(_element, _wrapper);
-                                        var clone = originalElement.cloneNode(true);
-                                        $(element).replaceWith(clone);
-                                        element = $(clone);
-                                    }
-                                    $compile(element)(scope);
-                                }
-                            }, true); // watch for object equality. Use native or simple values.
+                            originalElement = $(element)[0].cloneNode(true);
                         }
 
                         var widget = createWidget(scope, element, attrs, role, origAttr);
 
                         var destroyRegister = destroyWidgetOnScopeDestroy(scope, widget);
+
+                        if (attrs.kRebind) {
+                            setupRebind(widget, scope, originalElement, attrs.kRebind, destroyRegister);
+                        }
 
                         // 2 way binding: ngModel <-> widget.value()
                         if (ngModel) {
