@@ -24,8 +24,8 @@ var __meta__ = {
         $injector = angular.injector(['ng']),
         $parse = $injector.get('$parse'),
         $compile = $injector.get('$compile'),
-        $timeout,
-        $log;
+        $timeout = $injector.get('$timeout'),
+        $log = $injector.get('$log');
 
     function withoutTimeout(f) {
         var save = $timeout;
@@ -184,11 +184,7 @@ var __meta__ = {
         }
     }
 
-    module.factory('directiveFactory', ['$timeout', '$parse', '$log', function(timeout, $parse, log) {
-
-        $timeout = timeout;
-        $log = log;
-
+    module.factory('directiveFactory', function() {
         var KENDO_COUNT = 0;
         var RENDERED = false;
 
@@ -506,7 +502,7 @@ var __meta__ = {
         return {
             create: create
         };
-    }]);
+    });
 
     var TAGNAMES = {
         Editor         : "textarea",
