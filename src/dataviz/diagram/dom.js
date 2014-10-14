@@ -3076,7 +3076,9 @@
                                                     popupHeight
                                                 ));
                             }
+
                             if (point) {
+                                point = Point(math.max(point.x, 0), math.max(point.y, 0));
                                 this.toolBar.show(point);
                             }
                         }
