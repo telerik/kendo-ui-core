@@ -397,7 +397,6 @@
             cont(img);
         } else {
             img = new Image();
-            img.crossOrigin = "Anonymous";
             img.onload = function() {
                 var canvas = document.createElement("canvas");
                 canvas.width = img.width;
@@ -450,6 +449,12 @@
 
                 cont(IMAGE_CACHE[url] = img);
             };
+
+            img.onerror = function() {
+                cont(IMAGE_CACHE[url] = "TAINTED");
+            };
+
+            img.crossOrigin = "Anonymous";
             img.src = url;
 
             // hack from https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image
