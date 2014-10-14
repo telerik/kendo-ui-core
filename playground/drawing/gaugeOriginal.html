@@ -19,103 +19,16 @@
     <script src="../../src/dataviz/drawing/vml.js"></script>
     <script src="../../src/dataviz/drawing/svg.js"></script>
     <script src="../../src/dataviz/drawing/canvas.js"></script>
-    <!--<script src="../../src/kendo.dataviz.gauge.js"></script>-->
-     <script src="../../src/gauge.js"></script> 
+    <script src="../../src/kendo.dataviz.gauge.js"></script>
+<style>
 
+</style>
 </head>
 <body>
  
-<div id="gauge" style="width: 270px"></div>
+  <div id="gauge" style="width: 270px"></div>
   <script>
-    var dataviz = kendo.dataviz;
-    var geo = dataviz.geometry;
-    var draw = dataviz.drawing;
-
-    var Point = geo.Point;
-    var Circle = draw.Circle;
-    var Group = draw.Group;
-    var Path = draw.Path;
-    var Text = draw.Text;
-    var Arc = draw.Arc;
-    var Rect = geo.Rect;
-
-    var Pointer = dataviz.Pointer;
-    var RadialPointer = dataviz.RadialPointer;
-    var RadialScale = dataviz.RadialScale;
-    var RadialGauge = dataviz.RadialGauge;
-
-    // var surface = draw.Surface.create($("#surface"));
-    // var rect = new Rect([0, 0], [500, 500]);
-
-    // var root = new Group();
-
-    // var scale = new RadialScale({
-    //     minorUnit: 5,
-    //     majorUnit: 10,
-    //     startAngle: 0,
-    //     endAngle: 270,
-    //     max: 180,
-    //     minorTicks: {
-    //         size: 10
-    //         //visible: false
-    //     },
-    //     majorTicks: {
-    //         size: 30
-    //     },
-    //     labels: {
-    //         visible: true,
-    //         position: "inside"
-    //     },
-    //     ranges: [{
-    //         from: 10,
-    //         to: 20,
-    //         color: "green"
-    //     },{
-    //         from: 30,
-    //         to: 100,
-    //         color: "blue"
-    //     }],
-    //     //reverse: true
-    // });
-
-    // var center = new geo.Point(250, 250);
-    // scale.render(root, center, 200);
-    // //scale.reflow(rect);
-
-    // var pointer = new RadialPointer({
-    //     cap: {
-    //         size: 0.05,
-    //         color: "blue"
-    //     },
-    //     color: "green"
-    // });
-    // pointer.render(root, center, 180);
-
-    // var pointer2 = new RadialPointer({
-    //     cap: {
-    //         size: 0.05,
-    //         color: "blue"
-    //     },
-    //     color: "blue"
-    // });
-    // pointer2.render(root, center, 180);
-    // pointer2.setAngle(90);
-
-    // var pointer3 = new RadialPointer({
-    //     cap: {
-    //         size: 0.05,
-    //         color: "yellow"
-    //     },
-    //     color: "yellow"
-    // });
-    // pointer3.render(root, center, 180);
-    // pointer3.setAngle(130);
-
-    // surface.draw(root);
-
-var elem = $("#gauge");
-
-var gauge = elem.kendoRadialGauge2({
+    $("#gauge").kendoRadialGauge({
                     gaugeArea: {
                        
                     },

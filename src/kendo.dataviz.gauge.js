@@ -593,7 +593,7 @@ var __meta__ = {
                 scale = plotArea.scale,
                 pointer = plotArea.pointer,
                 plotBox;
-
+debugger;
             scale.reflow(box);
             plotBox = scale.box.clone();
             pointer.scale = scale;
@@ -601,6 +601,7 @@ var __meta__ = {
             plotBox.wrap(pointer.box);
 
             plotArea.box = plotBox;
+            debugger;
             plotArea.fitScale(box);
             plotArea.alignScale(box);
         },
@@ -624,6 +625,7 @@ var __meta__ = {
         },
 
         fitScale: function(box) {
+            debugger;
             var plotArea = this,
                 scale = plotArea.scale,
                 ring = scale.ring,
