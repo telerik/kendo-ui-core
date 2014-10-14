@@ -65,7 +65,7 @@ By default the column menu is not enabled.Can be set to a JavaScript object whic
     }
 
     /**
-    * Configures the Kendo UI Grid export settings.
+    * Configures the Kendo UI Grid Excel export settings.
     * @param \Kendo\UI\GridExcel|array $value
     * @return \Kendo\UI\Grid
     */
@@ -135,6 +135,15 @@ The grid uses same layout for both phone and tablet.
     */
     public function pageable($value) {
         return $this->setProperty('pageable', $value);
+    }
+
+    /**
+    * Configures the Kendo UI Grid PDF export settings.
+    * @param \Kendo\UI\GridPdf|array $value
+    * @return \Kendo\UI\Grid
+    */
+    public function pdf($value) {
+        return $this->setProperty('pdf', $value);
     }
 
     /**
@@ -451,6 +460,20 @@ The grid uses same layout for both phone and tablet.
         }
 
         return $this->setProperty('excelExport', $value);
+    }
+
+    /**
+    * Sets the pdfExport event of the Grid.
+    * Fired when the user clicks the "Export to PDF" toolbar button.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\UI\Grid
+    */
+    public function pdfExport($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('pdfExport', $value);
     }
 
     /**

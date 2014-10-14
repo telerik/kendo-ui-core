@@ -135,16 +135,10 @@ $grid->addColumn($productName, $unitPrice, $unitsOnOrder, $unitsInStock)
      ->resizable(true)
      ->reorderable(true)
      ->filterable(true)
-     ->excelExport('excelExport')
      ->pageable(true);
 
 echo $grid->render();
 ?>
 
-<script>
-function excelExport(e) {
-    console.log(e.workbook);
-}
-</script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.min.js"></script>
 <?php require_once '../include/footer.php'; ?>
