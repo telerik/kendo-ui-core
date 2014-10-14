@@ -411,21 +411,27 @@ var __meta__ = {
         init: function(element, options) {
             kendo.Observable.fn.init.call(this);
 
-            this.element = element;
-
             this.options = extend(true, {}, this.options, options);
+
+            this.element = element;
 
             this.model = this.options.model;
 
-            this.fields = this.fields(this.options.columns);
+            this._initContainer();
+
+            this.fields = this._fields(this.options.columns);
 
             this.createEditable();
+        },
+
+        _initContainer: function() {
+            this.wrapper = this.element;
         },
 
         createEditable: function() {
             var options = this.options;
 
-            this.editable = new ui.Editable(this.element, {
+            this.editable = new ui.Editable(this.wrapper, {
                 fields: this.fields,
                 target: options.target,
                 clearContainer: options.clearContainer,
@@ -433,17 +439,20 @@ var __meta__ = {
             });
         },
 
-        fields: function(columns) {
+        _isEditable: function(column) {
+            return column.field && this.model.editable(column.field);
+        },
+
+        _fields: function(columns) {
             var fields = [];
-            var idx, length, field, column;
+            var idx, length, column;
 
             for (idx = 0, length = columns.length; idx < length; idx++) {
                 column = columns[idx];
-                field = column.field;
 
-                if (field && this.model.editable(field)) {
+                if (this._isEditable(column)) {
                     fields.push({
-                        field: field,
+                        field: column.field,
                         format: column.format,
                         editor: column.editor
                     });
@@ -461,6 +470,82 @@ var __meta__ = {
             this.editable.destroy();
             this.editable.element.find("[" + kendo.attr("container-for") + "]").empty();
             this.model = this.wrapper = this.element = this.columns = this.editable = null;
+        }
+    });
+
+    var PopupEditor = Editor.extend({
+        init: function(element, options) {
+            Editor.fn.init.call(this, element, options);
+
+            this.open();
+        },
+
+        options: {
+            window: {
+                modal: true,
+                resizable: false,
+                draggable: true,
+                title: "Edit",
+                visible: false
+            }
+        },
+
+        _initContainer: function() {
+            this.wrapper = $('<div class="k-popup-edit-form"/>')
+                .attr(kendo.attr("uid"), this.model.uid)
+                .append('<div class="k-edit-form-container"/>');
+
+            var formContent = [];
+
+            this._appendFields(formContent);
+            this._appendButtons(formContent);
+
+            new kendoDom.Tree(this.wrapper.children()[0]).render(formContent);
+
+            this.window = new ui.Window(this.wrapper, this.options.window);
+        },
+
+        _appendFields: function(form) {
+            var idx, length, column;
+            var model = this.model;
+            var columns = this.options.columns;
+
+            for (idx = 0, length = columns.length; idx < length; idx++) {
+                column = columns[idx];
+
+                if (column.command) {
+                    continue;
+                }
+
+                form.push(kendoHtmlElement('<div class="k-edit-label"><label for="' + column.field + '">' + (column.title || column.field || "") + '</label></div>'));
+
+                if (this._isEditable(column)) {
+                    form.push(kendoHtmlElement('<div ' + kendo.attr("container-for") + '="' + column.field +
+                                '" class="k-edit-field"></div>'));
+                } else {
+                    form.push(kendoDomElement("div", {
+                            "class": "k-edit-field"
+                        },
+                        [ this.options.fieldRenderer(column, this.model) ]));
+                }
+            }
+        },
+
+        _appendButtons: function(form) {
+            form.push(kendoDomElement("div", {
+                "class": "k-edit-buttons k-state-default"
+            }, this.options.commandRenderer()));
+        },
+
+        open: function() {
+            this.window.center().open();
+        },
+
+        destroy: function() {
+            this.window.close().destroy();
+            this.window = null;
+
+            Editor.fn.destroy.call(this);
         }
     });
 
@@ -1029,22 +1114,8 @@ var __meta__ = {
             var children = [];
             var model = options.model;
             var column = options.column;
-            var value;
             var iconClass;
             var attr = { "role": "gridcell" };
-
-            if (column.template) {
-                value = column.template(model);
-            } else if (column.field) {
-                value = model.get(column.field);
-                if (column.format) {
-                    value = kendo.format(column.format, value);
-                }
-            }
-
-            if (typeof value == "undefined") {
-                value = "";
-            }
 
             if (model._edit && column.field && model.editable(column.field)) {
                 attr[kendo.attr("container-for")] = column.field;
@@ -1074,14 +1145,35 @@ var __meta__ = {
                     } else {
                         children = $.map(column.command, this._button);
                     }
-                } else if (column.template || !column.encoded) {
-                    children.push(kendoHtmlElement(value));
-                } else {
-                    children.push(kendoTextElement(value));
+                } else  {
+                    children.push(this._cellContent(column, model));
                 }
             }
 
             return kendoDomElement("td", attr, children);
+        },
+
+        _cellContent: function(column, model) {
+            var value;
+
+            if (column.template) {
+                value = column.template(model);
+            } else if (column.field) {
+                value = model.get(column.field);
+                if (column.format) {
+                    value = kendo.format(column.format, value);
+                }
+            }
+
+            if (typeof value == "undefined") {
+                value = "";
+            }
+
+            if (column.template || !column.encoded) {
+                return kendoHtmlElement(value);
+            } else {
+                return kendoTextElement(value);
+            }
         },
 
         _button: function(command) {
@@ -1354,12 +1446,41 @@ var __meta__ = {
         _createEditor: function(model) {
             var row = this.content.find("[" + kendo.attr("uid") + "=" + model.uid + "]");
 
-            this.editor = new Editor(row, {
+            var mode = this._editMode();
+
+            var options = {
                 columns: this.columns,
                 model: model,
                 target: this,
                 clearContainer: false
-            });
+            };
+
+            if (mode == "inline") {
+                this.editor = new Editor(row, options);
+            } else {
+                options.window = this.options.editable.window;
+                options.commandRenderer = proxy(function () {
+                    return $.map(["update", "canceledit"], this._button);
+                }, this);
+                options.fieldRenderer = this._cellContent;
+
+                this.editor = new PopupEditor(row, options);
+            }
+        },
+
+        _editMode: function() {
+            var mode = "inline",
+                editable = this.options.editable;
+
+            if (editable !== true) {
+                if (typeof editable == "string") {
+                    mode = editable;
+                } else {
+                    mode = editable.mode || mode;
+                }
+            }
+
+            return mode;
         }
     });
 

@@ -23,6 +23,8 @@
         <script src="../src/kendo.list.js"></script>
         <script src="../src/kendo.dropdownlist.js"></script>
         <script src="../src/kendo.filtermenu.js"></script>
+        <script src="../src/kendo.draganddrop.js"></script>
+        <script src="../src/kendo.window.js"></script>
         <link rel="stylesheet/less" href="../styles/web/kendo.common.less"/>
         <link rel="stylesheet/less" href="../styles/web/kendo.blueopal.less"/>
         <script>window.less = { env: "development", logLevel: 1 };</script>
@@ -63,7 +65,8 @@
                         id: "EmployeeID",
                         fields: {
                             parentId: { field: "ReportsTo",  nullable: true },
-                            EmployeeID: { field: "EmployeeID", type: "number" }
+                            EmployeeID: { field: "EmployeeID", type: "number" },
+                            FirstName: { editable: false }
                         },
                         hasChildren: true,
                         //expanded: true
@@ -77,6 +80,7 @@
                 toolbar: ["create"],
                 dataSource: listDS,
                 filterable: true,
+                editable: "popup",
                 columns: [
                     { field: "FirstName", title: "First Name" },
                     { field: "LastName", title: "Last Name", sortable: true },
