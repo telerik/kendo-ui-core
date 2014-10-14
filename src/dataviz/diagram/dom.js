@@ -3051,18 +3051,34 @@
                         var element = this.toolService.hoveredItem;
                         if (element) {
                             var toolBarElement = this.toolBar.element;
+                            var popupWidth = this.toolBar._popup.element.outerWidth();
+                            var popupHeight = this.toolBar._popup.element.outerHeight();
                             if (element instanceof Shape) {
                                 var selectionBounds = this._resizingAdorner.bounds();
                                 var shapeBounds = element._transformedBounds();
-                                var popupWidth = this.toolBar._popup.element.outerWidth();
-                                var popupHeight = this.toolBar._popup.element.outerHeight();
                                 var point = Point(shapeBounds.x, shapeBounds.y)
                                                 .minus(Point(
                                                     (popupWidth - selectionBounds.width) / 2,
                                                     popupHeight
                                                 ));
+                            } else if (element instanceof Connection) {
+                                var connectionBounds = element.bounds();
+                                var topLeft = connectionBounds.topLeft();
+                                var bottomRight = connectionBounds.bottomRight();
+                                var rect = Rect.fromPoints(
+                                    this.modelToView(topLeft),
+                                    this.modelToView(bottomRight)
+                                );
+
+                                var point = Point(rect.x, rect.y)
+                                                .minus(Point(
+                                                    (popupWidth - connectionBounds.width - 20) / 2,
+                                                    popupHeight
+                                                ));
                             }
-                            this.toolBar.show(point);
+                            if (point) {
+                                this.toolBar.show(point);
+                            }
                         }
                     }
                     e.preventDefault();
