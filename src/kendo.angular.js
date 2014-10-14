@@ -197,7 +197,7 @@ var __meta__ = {
         return formRegExp.test(element[0].tagName);
     }
 
-    function bindToNgModel(widget, scope, ngModel, element) {
+    function bindToNgModel(widget, scope, element, ngModel, ngForm) {
         if (!widget.value) {
             return;
         }
@@ -460,7 +460,6 @@ var __meta__ = {
                 }],
 
                 link: function(scope, element, attrs, controllers) {
-
                     var ngModel = controllers[0];
                     var ngForm = controllers[1];
 
@@ -511,7 +510,7 @@ var __meta__ = {
 
                         // 2 way binding: ngModel <-> widget.value()
                         if (ngModel) {
-                            bindToNgModel(widget, scope, ngModel, element);
+                            bindToNgModel(widget, scope, element, ngModel, ngForm);
                         }
 
                         // kNgModel is used for the "logical" value
