@@ -21,6 +21,7 @@ ASPNET_MVC = File.join(DIST_JS_ROOT, 'kendo.aspnetmvc.js')
 JS_BUNDLES = in_dist FileList[ 'kendo.web.js', 'kendo.dataviz.js', 'kendo.mobile.js', 'kendo.all.js', 'kendo.winjs.js', 'kendo.dataviz.mobile.js' ]
 
 JQUERY = File.join(DIST_JS_ROOT, "jquery.min.js")
+JSZIP = File.join(DIST_JS_ROOT, "jszip.min.js")
 ANGULAR = File.join(DIST_JS_ROOT, "angular.min.js")
 JQUERY_MAP = FileList[File.join(DIST_JS_ROOT, 'jquery.min.map')]
 
@@ -30,7 +31,7 @@ COMPLETE_JS = dependencies("all").include('dist/js/kendo.dataviz.mobile.js')
 MIN_JS = FileList[COMPLETE_JS - JS_BUNDLES - CULTURES_AND_TIMEZONES].include(ASPNET_MVC).ext('min.js')
 
 WEB_SRC_JS = dependencies("web")
-WEB_MIN_JS = WEB_SRC_JS.ext('min.js').include(JQUERY).include(ANGULAR)
+WEB_MIN_JS = WEB_SRC_JS.ext('min.js').include(JQUERY).include(ANGULAR).include(JSZIP)
 WEB_MIN_JS_MAP = maps(WEB_SRC_JS)
 
 DATAVIZ_SRC_JS = dependencies("dataviz")
@@ -42,7 +43,7 @@ MOBILE_MIN_JS = MOBILE_SRC_JS.ext('min.js').include(JQUERY).include(ANGULAR)
 MOBILE_MIN_JS_MAP = maps(MOBILE_SRC_JS)
 
 COMPLETE_SRC_JS = FileList[COMPLETE_JS]
-COMPLETE_MIN_JS = COMPLETE_JS.ext('min.js').include(JQUERY).include(ANGULAR)
+COMPLETE_MIN_JS = COMPLETE_JS.ext('min.js').include(JQUERY).include(ANGULAR).include(JSZIP)
 COMPLETE_MIN_JS_MAP = maps(COMPLETE_JS)
 
 MVC_SRC_JS = FileList[COMPLETE_JS].include(ASPNET_MVC)

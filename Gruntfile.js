@@ -165,6 +165,14 @@ module.exports = function(grunt) {
                     dest: '<%= kendo.options.jsDestDir %>/',
                 }]
             },
+            jszip: {
+                files: [{
+                    expand: true,
+                    cwd: "src/",
+                    src: [ "jszip.*" ],
+                    dest: '<%= kendo.options.jsDestDir %>/',
+                }]
+            },
             timezones: {
                 files: [{
                     expand: true,
@@ -253,7 +261,7 @@ module.exports = function(grunt) {
     grunt.registerTask('default', ['karma:unit']);
     grunt.registerTask('tests', [ 'styles', 'karma:unit' ]);
     grunt.registerTask('styles', [ 'copy:css_assets', 'less' ]);
-    grunt.registerTask('all', [ 'kendo', 'download_builder', 'copy:jquery', 'copy:angular', 'copy:timezones' ]);
+    grunt.registerTask('all', [ 'kendo', 'download_builder', 'copy:jquery', 'copy:angular', 'copy:jszip', 'copy:timezones' ]);
     grunt.registerTask('build', [ 'kendo', 'copy:jquery', 'copy:angular', 'styles', 'license' ]);
 
     grunt.registerTask('ci', [ "all", 'styles', 'karma:jenkins' ]);
