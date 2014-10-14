@@ -1571,24 +1571,30 @@ var __meta__ = {
         },
 
         _toggle: function(node, dataItem, expand) {
-            var that = this,
-                options = that.options,
-                contents = nodeContents(node),
-                direction = expand ? "expand" : "collapse",
-                animation = options.animation[direction],
-                loaded;
+            var options = this.options;
+            var contents = nodeContents(node);
+            var direction = expand ? "expand" : "collapse";
+            var loaded, empty;
 
             if (contents.data("animating")) {
                 return;
             }
 
-            if (!that._trigger(direction, node)) {
-                that._expanded(node, expand);
+            if (!this._trigger(direction, node)) {
+                this._expanded(node, expand);
 
                 loaded = dataItem && dataItem.loaded();
+                empty = !contents.children().length;
 
-                if (loaded && contents.children().length > 0) {
-                    that._updateNodeClasses(node, {}, { expanded: expand });
+                if (expand && (!loaded || empty)) {
+                    if (options.loadOnDemand) {
+                        this._progress(node, true);
+                    }
+
+                    contents.remove();
+                    dataItem.load();
+                } else {
+                    this._updateNodeClasses(node, {}, { expanded: expand });
 
                     if (contents.css("display") == (expand ? "block" : "none")) {
                         return;
@@ -1598,20 +1604,17 @@ var __meta__ = {
                         contents.css("height", contents.height()).css("height");
                     }
 
-                    contents.kendoStop(true, true).kendoAnimate(extend({ reset: true }, animation, {
-                        complete: function() {
-                            if (expand) {
-                                contents.css("height", "");
-                            }
-                        }
-                    }));
-                } else if (expand) {
-                    if (options.loadOnDemand) {
-                        that._progress(node, true);
-                    }
-
-                    contents.remove();
-                    dataItem.load();
+                    contents
+                        .kendoStop(true, true)
+                        .kendoAnimate(extend(
+                            { reset: true },
+                            options.animation[direction],
+                            { complete: function() {
+                                if (expand) {
+                                    contents.css("height", "");
+                                }
+                            } }
+                        ));
                 }
             }
         },

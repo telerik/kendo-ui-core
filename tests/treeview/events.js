@@ -276,6 +276,32 @@
         equal(calls, 2);
    });
 
+   test("setting Node.loaded to false in collapse handler allows nodes to be collapsed", function() {
+       createTreeView({
+           animation: false,
+           dataSource: {
+               transport: {
+                   read: function(options) {
+                       options.success([ { text: "foo" } ]);
+                   }
+               },
+               schema: {
+                   model: {
+                       hasChildren: true
+                   }
+               }
+            },
+            collapse: function(e) {
+                this.dataItem(e.node).loaded(false);
+            }
+        });
+
+        treeviewObject.expand(".k-item:first");
+        treeviewObject.collapse(".k-item:first");
+
+        equal(treeview.find(".k-item:visible").length, 1);
+   });
+
    test("dataBound event is triggered after dataSource changes", function() {
        createTreeView({
            dataSource: {
