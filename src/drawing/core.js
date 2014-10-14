@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "../geometry" ], f);
+    define([ "../kendo.geometry" ], f);
 })(function(){
 
 (function ($) {
@@ -247,7 +247,7 @@
             return object;
         }
     });
-    deepExtend(OptionsStore.fn, util.ObserversMixin);
+    deepExtend(OptionsStore.fn, kendo.mixins.ObserversMixin);
 
     var SurfaceFactory = function() {
         this._items = [];

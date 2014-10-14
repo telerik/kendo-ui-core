@@ -110,7 +110,7 @@
     // ------------------------------------------------------------
     var options;
     var ObserverClass = kendo.Class.extend({});
-    kendo.deepExtend(ObserverClass.fn, dataviz.util.ObserversMixin);
+    kendo.deepExtend(ObserverClass.fn, kendo.mixins.ObserversMixin);
 
     module("Options Store", {
         setup: function() {

@@ -13,6 +13,7 @@
         "./kendo.excel.js",
         "./kendo.data.signalr",
         "./kendo.binder",
+        "./kendo.drawing",
         "./kendo.validator",
         "./kendo.userevents",
         "./kendo.draganddrop",

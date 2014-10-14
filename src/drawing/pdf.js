@@ -1,10 +1,10 @@
 (function(f, define){
     define([
         "./shapes",
-        "../../kendo.pdf",
-        "../../kendo.saveas",
-        "../../kendo.colorpicker", // XXX: for kendo.parseColor
-        "../../kendo.dataviz.core" // XXX: for dataviz.Color.namedColors
+        "../kendo.pdf",
+        "../kendo.saveas",
+        "../kendo.colorpicker", // XXX: for kendo.parseColor
+        "../kendo.dataviz.core" // XXX: for dataviz.Color.namedColors
     ], f);
 })(function(){
 

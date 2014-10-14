@@ -1,6 +1,6 @@
 (function(f, define) {
     define([
-        "./util"
+        "../kendo.util", "../kendo.mixins"
     ], f);
 })(function() {
 
@@ -12,13 +12,13 @@
         kendo = window.kendo,
         Class = kendo.Class,
         deepExtend = kendo.deepExtend,
+        ObserversMixin = kendo.mixins.ObserversMixin
 
         util = kendo.util,
         defined = util.defined,
         rad = util.rad,
         deg = util.deg,
-        round = util.round,
-        ObserversMixin = util.ObserversMixin;
+        round = util.round;
 
     var PI_DIV_2 = math.PI / 2,
         MIN_NUM = util.MIN_NUM,

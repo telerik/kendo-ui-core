@@ -1,6 +1,6 @@
 (function(f, define){
-    define(["./base", "../location", "../../geometry", "../../util",
-            "../../../kendo.dataviz.drawing",
+    define(["./base", "../location", "../../../kendo.geometry", "../../../kendo.util",
+            "../../../kendo.drawing",
             "../../../kendo.data",
             "../../../kendo.draganddrop"
     ], f);

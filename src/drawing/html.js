@@ -1,7 +1,7 @@
 (function(f, define){
     define([
         "./shapes",
-        "../text-metrics",      // XXX: needed to measure text in IE
+        "./text-metrics",      // XXX: needed to measure text in IE
         "./pdf" // XXX: for parseColor.  we shouldn't otherwise depend on this
     ], f);
 })(function(){
@@ -964,7 +964,7 @@
             // The only good solution I can think of is to measure the text
             // ourselves and center the bounding box.
             if (kendo.support.browser.msie && !isNaN(lineHeight)) {
-                var size = kendo.util.measureText(str, { font: font });
+                var size = drawing.util.measureText(str, { font: font });
                 var top = (box.top + box.bottom - size.height) / 2;
                 box = {
                     top    : top,

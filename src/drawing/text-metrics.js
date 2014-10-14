@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./util" ], f);
+    define([ "../kendo.util" ], f);
 })(function(){
 
 (function ($) {
@@ -139,7 +139,7 @@
     }
 
     // Exports ================================================================
-    deepExtend(kendo, {
+    deepExtend(kendo.drawing, {
         util: {
             TextMetrics: TextMetrics,
             LRUCache: LRUCache,

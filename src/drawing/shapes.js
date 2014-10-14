@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./core", "./mixins", "../text-metrics" ], f);
+    define([ "./core", "./mixins", "./text-metrics", "../kendo.mixins" ], f);
 })(function(){
 
 (function ($) {
@@ -27,10 +27,15 @@
         arrayLimits = util.arrayLimits,
         defined = util.defined,
         last = util.last,
-        ObserversMixin = util.ObserversMixin,
-        ElementsArray = util.ElementsArray,
+        ObserversMixin = kendo.mixins.ObserversMixin,
 
-        inArray = $.inArray;
+        inArray = $.inArray,
+        push = [].push,
+        pop = [].pop,
+        splice = [].splice,
+        shift = [].shift,
+        slice = [].slice,
+        unshift = [].unshift;
 
     // Drawing primitives =====================================================
     var Element = Class.extend({
@@ -154,6 +159,125 @@
 
     deepExtend(Element.fn, ObserversMixin);
 
+    var ElementsArray = Class.extend({
+        init: function(array) {
+            array = array || [];
+
+            this.length = 0;
+            this._splice(0, array.length, array);
+        },
+
+        elements: function(elements) {
+            if (elements) {
+                this._splice(0, this.length, elements);
+
+                this._change();
+                return this;
+            } else {
+                return this.slice(0);
+            }
+        },
+
+        push: function() {
+            var elements = arguments;
+            var result = push.apply(this, elements);
+
+            this._add(elements);
+
+            return result;
+        },
+
+        slice: slice,
+
+        pop: function() {
+            var length = this.length;
+            var result = pop.apply(this);
+
+            if (length) {
+                this._remove([result]);
+            }
+
+            return result;
+        },
+
+        splice: function(index, howMany) {
+            var elements = slice.call(arguments, 2);
+            var result = this._splice(index, howMany, elements);
+
+            this._change();
+
+            return result;
+        },
+
+        shift: function() {
+            var length = this.length;
+            var result = shift.apply(this);
+
+            if (length) {
+                this._remove([result]);
+            }
+
+            return result;
+        },
+
+        unshift: function() {
+            var elements = arguments;
+            var result = unshift.apply(this, elements);
+
+            this._add(elements);
+
+            return result;
+        },
+
+        indexOf: function(element) {
+            var that = this;
+            var idx;
+            var length;
+
+            for (idx = 0, length = that.length; idx < length; idx++) {
+                if (that[idx] === element) {
+                    return idx;
+                }
+            }
+            return -1;
+        },
+
+        _splice: function(index, howMany, elements) {
+            var result = splice.apply(this, [index, howMany].concat(elements));
+
+            this._clearObserver(result);
+            this._setObserver(elements);
+
+            return result;
+        },
+
+        _add: function(elements) {
+            this._setObserver(elements);
+            this._change();
+        },
+
+        _remove: function(elements) {
+            this._clearObserver(elements);
+            this._change();
+        },
+
+        _setObserver: function(elements) {
+            for (var idx = 0; idx < elements.length; idx++) {
+                elements[idx].addObserver(this);
+            }
+        },
+
+        _clearObserver: function(elements) {
+            for (var idx = 0; idx < elements.length; idx++) {
+                elements[idx].removeObserver(this);
+            }
+        },
+
+        _change: function() {}
+    });
+
+    deepExtend(ElementsArray.fn, ObserversMixin);
+
     var Group = Element.extend({
         nodeType: "Group",
 
@@ -272,7 +396,7 @@
         },
 
         measure: function() {
-            var metrics = util.measureText(this.content(), {
+            var metrics = drawing.util.measureText(this.content(), {
                 font: this.options.get("font")
             });
 
@@ -765,6 +889,7 @@
         Arc: Arc,
         Circle: Circle,
         Element: Element,
+        ElementsArray: ElementsArray,
         Group: Group,
         Image: Image,
         MultiPath: MultiPath,

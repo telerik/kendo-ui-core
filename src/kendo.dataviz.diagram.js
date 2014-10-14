@@ -1,7 +1,7 @@
 (function(f, define){
     define([
         "./kendo.data", "./kendo.draganddrop", "./kendo.userevents", "./kendo.mobile.scroller",
-        "./kendo.dataviz.drawing",
+        "./kendo.drawing",
 
        "./dataviz/diagram/utils",
        "./dataviz/diagram/math",
