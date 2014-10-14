@@ -1,5 +1,5 @@
 (function(f, define) {
-    define([ "./tile" ], f);
+    define([ "./tile", "../../../kendo.util" ], f);
 })(function() {
 
 (function ($, undefined) {
@@ -14,7 +14,7 @@
 
         dataviz = kendo.dataviz,
         deepExtend = kendo.deepExtend,
-        defined = dataviz.defined,
+        defined = kendo.util.defined,
 
         Extent = dataviz.map.Extent,
         Location = dataviz.map.Location,

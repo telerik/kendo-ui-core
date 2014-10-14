@@ -16,7 +16,6 @@
         Class = kendo.Class,
 
         dataviz = kendo.dataviz,
-        Matrix = dataviz.Matrix,
         deepExtend = kendo.deepExtend,
 
         g = kendo.geometry,
@@ -171,10 +170,10 @@
             var c = this.c = 2 * PI * proj.options.datum.a;
 
             // Scale circumference to 1, mirror Y and shift origin to top left
-            this._tm = Matrix.translate(0.5, 0.5).times(Matrix.scale(1/c, -1/c));
+            this._tm = g.transform().translate(0.5, 0.5).scale(1/c, -1/c);
 
             // Inverse transform matrix
-            this._itm = Matrix.scale(c, -c).times(Matrix.translate(-0.5, -0.5));
+            this._itm = g.transform().scale(c, -c).translate(-0.5, -0.5);
         },
 
         // Location <-> Point (screen coordinates for a given scale)
