@@ -510,4 +510,145 @@
         equal(grid.lockedTable.find("tr:first >td:first").text(), "bar");
     });
 
+    test("cancel model persist row selection", function() {
+        var grid = setup({
+            selectable: true,
+            columns: [{ field: "foo" }, "name"],
+            editable: "popup"
+        }),
+        row = table.find("tr:first");
+
+        grid.select(row);
+
+        grid.editRow(row);
+
+        var container = grid._editContainer;
+        var model = container.data("kendoEditable").options.model;
+
+        grid.cancelRow();
+
+        ok(grid.table.find("tr:first").hasClass("k-state-selected"));
+    });
+
+    test("cancel model persist row selection with multiple selection", function() {
+        var grid = setup({
+            selectable: "multiple row",
+            columns: [{ field: "foo" }, "name"],
+            editable: "popup"
+        }),
+        row = table.find("tr:first");
+
+        grid.select(row);
+        grid.select(table.find("tr:last"));
+
+        grid.editRow(row);
+
+        var container = grid._editContainer;
+        var model = container.data("kendoEditable").options.model;
+
+        grid.cancelRow();
+
+        equal(grid.table.find("tr.k-state-selected").length, 2);
+    });
+
+    test("cancel model persist row selection for locked row", function() {
+        var grid = setup({
+            selectable: true,
+            columns: [{ locked: true, field: "foo" }, "name"],
+            editable: "popup"
+        }),
+        row = table.find("tr:first");
+
+        grid.select(row);
+
+        grid.editRow(row);
+
+        var container = grid._editContainer;
+        var model = container.data("kendoEditable").options.model;
+
+        grid.cancelRow();
+
+        ok(grid.lockedTable.find("tr:first").hasClass("k-state-selected"));
+    });
+
+    test("updating model field persist row selection", function() {
+        var grid = setup({
+            selectable: true,
+            columns: [{ field: "foo" }, "name"],
+            editable: "popup"
+        }),
+        row = table.find("tr:first");
+
+        grid.select(row);
+
+        grid.editRow(row);
+
+        var container = grid._editContainer;
+        var model = container.data("kendoEditable").options.model;
+
+        model.set("foo", "12");
+
+        ok(grid.table.find("tr:first").hasClass("k-state-selected"));
+    });
+
+    test("updating model field persist cell selection", function() {
+        var grid = setup({
+            selectable: "cell",
+            columns: [{ field: "foo" }, "name"],
+            editable: "popup"
+        }),
+        row = table.find("tr:first");
+
+        grid.select(row.find("td:first"));
+
+        grid.editRow(row);
+
+        var container = grid._editContainer;
+        var model = container.data("kendoEditable").options.model;
+
+        model.set("foo", "12");
+
+        ok(grid.table.find("tr:first td:first").hasClass("k-state-selected"));
+    });
+
+    test("updating model field persist cell selection with locked columns", function() {
+        var grid = setup({
+            selectable: "cell",
+            columns: [{ locked: true, field: "foo" }, "name"],
+            editable: "popup"
+        }),
+        row = table.find("tr:first");
+
+        grid.select(grid.lockedTable.find("tr:first td:first"));
+
+        grid.editRow(row);
+
+        var container = grid._editContainer;
+        var model = container.data("kendoEditable").options.model;
+
+        model.set("foo", "12");
+
+        ok(grid.lockedTable.find("tr:first td:first").hasClass("k-state-selected"));
+    });
+
+    test("updating model field persist cell selection - updated field is not selected one", function() {
+        var grid = setup({
+            selectable: "cell",
+            columns: [{ field: "foo" }, "name"],
+            editable: "popup"
+        }),
+        row = table.find("tr:first");
+
+        grid.select(row.find("td:first"));
+
+        grid.editRow(row);
+
+        var container = grid._editContainer;
+        var model = container.data("kendoEditable").options.model;
+
+        model.set("bar", "12");
+
+        ok(grid.table.find("tr:first td:first").hasClass("k-state-selected"));
+    });
+
 })();

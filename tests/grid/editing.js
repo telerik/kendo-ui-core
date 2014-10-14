@@ -957,4 +957,85 @@
 
         ok(!wasCalled);
     });
+
+    test("updating model field persist row selection", function() {
+        var grid = setup({
+            selectable: true,
+            columns: [{ field: "foo" }, "name"],
+            editable: true
+        }),
+        row = table.find("tr:first");
+
+        grid.select(row);
+
+        grid.editCell(row.find("td:first"));
+
+        var container = grid._editContainer;
+        var model = container.data("kendoEditable").options.model;
+
+        model.set("foo", "12");
+
+        ok(grid.table.find("tr:first").hasClass("k-state-selected"));
+    });
+
+    test("updating model field persist cell selection", function() {
+        var grid = setup({
+            selectable: "cell",
+            columns: [{ field: "foo" }, "name"],
+            editable: true
+        }),
+        row = table.find("tr:first");
+
+        grid.select(row.find("td:first"));
+
+        grid.editCell(row.find("td:first"));
+
+        var container = grid._editContainer;
+        var model = container.data("kendoEditable").options.model;
+
+        model.set("foo", "12");
+
+        ok(grid.table.find("tr:first td:first").hasClass("k-state-selected"));
+    });
+
+    test("updating model field persist cell selection with locked columns", function() {
+        var grid = setup({
+            selectable: "cell",
+            columns: [{ locked: true, field: "foo" }, "name"],
+            editable: true
+        }),
+        row = table.find("tr:first");
+
+        grid.select(grid.lockedTable.find("tr:first td:first"));
+
+        grid.editCell(grid.lockedTable.find("tr:first td:first"));
+
+        var container = grid._editContainer;
+        var model = container.data("kendoEditable").options.model;
+
+        model.set("foo", "12");
+
+        ok(grid.lockedTable.find("tr:first td:first").hasClass("k-state-selected"));
+    });
+
+    test("updating model field persist cell selection - updated field is not selected one", function() {
+        var grid = setup({
+            selectable: "cell",
+            columns: [{ field: "foo" }, "name"],
+            editable: true
+        }),
+        row = table.find("tr:first");
+
+        grid.select(row.find("td:first"));
+
+        grid.editCell(row.find("td:last"));
+
+        var container = grid._editContainer;
+        var model = container.data("kendoEditable").options.model;
+
+        model.set("bar", "12");
+
+        ok(grid.table.find("tr:first td:first").hasClass("k-state-selected"));
+    });
+
 })();

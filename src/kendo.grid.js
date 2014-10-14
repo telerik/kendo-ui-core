@@ -923,7 +923,7 @@ var __meta__ = {
                 that.wrapper.data("kendoReorderable").destroy();
             }
 
-            if (that.selectable) {
+            if (that.selectable && that.selectable.element) {
                 that.selectable.destroy();
             }
 
@@ -2286,6 +2286,7 @@ var __meta__ = {
                 related,
                 newRow,
                 nextRow,
+                isSelected = row.hasClass("k-state-selected"),
                 isAlt = row.hasClass("k-alt");
 
             if (model) {
@@ -2306,6 +2307,10 @@ var __meta__ = {
                         data: [ { dataItem: model } ]
                     };
                 });
+
+                if (isSelected && that.options.selectable) {
+                    that.select(newRow.add(related));
+                }
 
                 if (related) {
                     adjustRowHeight(newRow[0], related[0]);
@@ -3502,6 +3507,10 @@ var __meta__ = {
                 tmp,
                 idx = that._items(tbody).index(row),
                 isLocked = that.lockedContent,
+                selectable,
+                selectableRow,
+                childCells,
+                originalCells,
                 length;
 
             if (isLocked) {
@@ -3525,8 +3534,12 @@ var __meta__ = {
 
             } else if (!row.hasClass("k-grid-edit-row")) {
 
+                selectableRow = $().add(row);
+
                 if (isLocked) {
                     tmp = (isAlt ? that.lockedAltRowTemplate : that.lockedRowTemplate)(model);
+
+                    selectableRow = selectableRow.add(relatedRow);
 
                     relatedRow.replaceWith(tmp);
                 }
@@ -3538,24 +3551,37 @@ var __meta__ = {
                 tmp = that._items(tbody).eq(idx);
 
                 if (isLocked) {
+                    row = row.add(relatedRow);
+
                     relatedRow = that._relatedRow(tmp)[0];
                     adjustRowHeight(tmp[0], relatedRow);
 
                     tmp = tmp.add(relatedRow);
                 }
 
+                selectable = that.options.selectable;
+                if (selectable && row.hasClass("k-state-selected")) {
+                   that.select(tmp);
+                }
+
+                originalCells = selectableRow.children(":not(.k-group-cell,.k-hierarchy-cell)");
+                childCells = tmp.children(":not(.k-group-cell,.k-hierarchy-cell)");
+
                 for (idx = 0, length = that.columns.length; idx < length; idx++) {
                     column = that.columns[idx];
 
+                    cell = childCells.eq(idx);
+                    if (selectable && originalCells.eq(idx).hasClass("k-state-selected")) {
+                        cell.addClass("k-state-selected");
+                    }
+
                     if (column.field === e.field) {
-                        cell = tmp.children(":not(.k-group-cell,.k-hierarchy-cell)").eq(idx);
-                        $('<span class="k-dirty"/>').prependTo(cell);
+                       $('<span class="k-dirty"/>').prependTo(cell);
                     }
                 }
 
                 that.trigger("itemChange", { item: tmp, data: model, ns: ui });
             }
-
         },
 
         _pageable: function() {
