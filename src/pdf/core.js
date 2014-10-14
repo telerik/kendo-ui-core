@@ -12,6 +12,7 @@
     /* jshint loopfunc:true */
     /* jshint newcap:false */
     /* global VBArray */
+    /* global console */
 
     // XXX: remove this junk (assume `true`) when we no longer have to support IE < 10
     var HAS_TYPED_ARRAYS = !!global.Uint8Array;
@@ -350,31 +351,36 @@
         FONT_CACHE[name] = true;
     });
 
-    // XXX: error handling in loadBinary?
-    var loadBinary = HAS_TYPED_ARRAYS ? function loadBinary(url, cont) {
-        var req = new XMLHttpRequest();
-        req.open('GET', url, true);
-        req.responseType = "arraybuffer";
-        req.onload = function() {
-            cont(new Uint8Array(req.response));
-        };
-        req.send(null);
-    } : function loadBinary(url, cont) {
-        // these days we should only get here for IE<10, so this
-        // function is IE-specific (works only on IE9 actually).
-        var req = new XMLHttpRequest();
-        req.open('GET', url, true);
-        req.onreadystatechange = function() {
-            if (req.readyState == 4) {
-                if (req.status == 200 || req.status == 304) {
-                    // the following line works in IE9 only.
-                    var bytes = new VBArray(req.responseBody).toArray();
-                    cont(bytes);
+    function loadBinary(url, cont) {
+        function error() {
+            if (global.console) {
+                if (console.error) {
+                    console.error("Cannot load URL: %s", url);
+                } else {
+                    console.log("Cannot load URL: %s", url);
                 }
             }
+            cont(null);
+        }
+        var req = new XMLHttpRequest();
+        req.open('GET', url, true);
+        if (HAS_TYPED_ARRAYS) {
+            req.responseType = "arraybuffer";
+        }
+        req.onload = function() {
+            if (req.status == 200 || req.status == 304) {
+                if (HAS_TYPED_ARRAYS) {
+                    cont(new Uint8Array(req.response));
+                } else {
+                    cont(new VBArray(req.responseBody).toArray()); // IE9 only
+                }
+            } else {
+                error();
+            }
         };
+        req.onerror = error;
         req.send(null);
-    };
+    }
 
     function loadFont(url, cont) {
         var font = FONT_CACHE[url];
@@ -382,9 +388,13 @@
             cont(font);
         } else {
             loadBinary(url, function(data){
-                var font = new global.kendo.pdf.TTFFont(data);
-                FONT_CACHE[url] = font;
-                cont(font);
+                if (data == null) {
+                    throw new Error("Cannot load font from " + url);
+                } else {
+                    var font = new global.kendo.pdf.TTFFont(data);
+                    FONT_CACHE[url] = font;
+                    cont(font);
+                }
             });
         }
     }
