@@ -3048,11 +3048,20 @@
                         this.toolBar = new DiagramToolBar(diagram, {
                             tools: this.options.shapeDefaults.editable.tools
                         });
-                        var shape = this.toolService.hoveredItem;
-                        if (shape) {
-                            var shapeBounds = shape.bounds();
+                        var element = this.toolService.hoveredItem;
+                        if (element) {
                             var toolBarElement = this.toolBar.element;
-                            var point = new Point(shapeBounds.x, shapeBounds.y - this.toolBar._popup.element.outerHeight());
+                            if (element instanceof Shape) {
+                                var selectionBounds = this._resizingAdorner.bounds();
+                                var shapeBounds = element._transformedBounds();
+                                var popupWidth = this.toolBar._popup.element.outerWidth();
+                                var popupHeight = this.toolBar._popup.element.outerHeight();
+                                var point = Point(shapeBounds.x, shapeBounds.y)
+                                                .minus(Point(
+                                                    (popupWidth - selectionBounds.width) / 2,
+                                                    popupHeight
+                                                ));
+                            }
                             this.toolBar.show(point);
                         }
                     }
