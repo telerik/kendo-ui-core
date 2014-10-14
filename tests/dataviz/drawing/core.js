@@ -251,4 +251,13 @@
         });
 
     })();
+
+    // ------------------------------------------------------------
+    (function() {
+        module("Namespaces");
+
+        test("kendo.drawing is aliased as kendo.dataviz.drawing", function() {
+            deepEqual(kendo.drawing, kendo.dataviz.drawing);
+        });
+    })();
 })();

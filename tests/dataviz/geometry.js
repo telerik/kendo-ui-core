@@ -1366,4 +1366,13 @@
         });
     })();
 
+    // ------------------------------------------------------------
+    (function() {
+        module("Namespaces");
+
+        test("kendo.geometry is aliased as kendo.dataviz.geometry", function() {
+            deepEqual(kendo.geometry, kendo.dataviz.geometry);
+        });
+    })();
+
 })();

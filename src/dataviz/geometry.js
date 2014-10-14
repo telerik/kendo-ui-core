@@ -803,6 +803,9 @@
             toMatrix: toMatrix
         }
     });
+
+    kendo.dataviz.geometry = kendo.geometry;
+
 })(window.kendo.jQuery);
 
 return window.kendo;
