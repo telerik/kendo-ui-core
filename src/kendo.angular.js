@@ -184,6 +184,31 @@ var __meta__ = {
         }
     }
 
+    function formValue(element) {
+        if (/checkbox|radio/i.test(element.attr("type"))) {
+            return element.prop("checked");
+        }
+        return element.val();
+    }
+
+    var formRegExp = /^(input|select|textarea)$/i;
+
+    function isForm(element) {
+        return formRegExp.test(element[0].tagName);
+    }
+
+    function valueGetter(element, widget) {
+        if (isForm(element)) {
+            return function() {
+                return formValue(element);
+            }
+        } else {
+            return function() {
+                return widget.value();
+            }
+        }
+    }
+
     module.factory('directiveFactory', function() {
         var KENDO_COUNT = 0;
         var RENDERED = false;
@@ -278,18 +303,9 @@ var __meta__ = {
                         setupBindings();
 
                         var dropDestroyHandler;
-                        function setupBindings() {
 
-                            var isFormField = /^(input|select|textarea)$/i.test(element[0].tagName);
-                            function formValue(element) {
-                                if (/checkbox|radio/i.test(element.attr("type"))) {
-                                    return element.prop("checked");
-                                }
-                                return element.val();
-                            }
-                            function value() {
-                                return isFormField ? formValue(element) : widget.value();
-                            }
+                        function setupBindings() {
+                            var value = valueGetter(element, widget);
 
                             dropDestroyHandler = scope.$on("$destroy", function() {
                                 dropDestroyHandler();
@@ -330,7 +346,7 @@ var __meta__ = {
                                 // Some widgets trigger "change" on the input field
                                 // and this would result in two events sent (#135)
                                 var haveChangeOnElement = false;
-                                if (isFormField) {
+                                if (isForm(element)) {
                                     element.on("change", function(){
                                         haveChangeOnElement = true;
                                     });
