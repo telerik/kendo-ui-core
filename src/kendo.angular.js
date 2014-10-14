@@ -334,6 +334,76 @@ var __meta__ = {
         return deregister;
     }
 
+    // mutation observers — propagate the original
+    // element's class to the widget wrapper.
+    function propagateClassToWidgetWrapper(widget, element) {
+        if (!(window.MutationObserver && widget.wrapper)) {
+            return;
+        }
+
+        var prevClassList = [].slice.call($(element)[0].classList);
+
+        var mo = new MutationObserver(function(changes){
+            suspend();    // make sure we don't trigger a loop
+            if (!widget) {
+                return;
+            }
+
+            changes.forEach(function(chg){
+                var w = $(widget.wrapper)[0];
+                switch (chg.attributeName) {
+
+                    case "class":
+                        // sync classes to the wrapper element
+                        var currClassList = [].slice.call(chg.target.classList);
+                        currClassList.forEach(function(cls){
+                            if (prevClassList.indexOf(cls) < 0) {
+                                w.classList.add(cls);
+                                if (widget instanceof kendo.ui.ComboBox) { // https://github.com/kendo-labs/angular-kendo/issues/356
+                                    widget.input[0].classList.add(cls);
+                                }
+                            }
+                        });
+                        prevClassList.forEach(function(cls){
+                            if (currClassList.indexOf(cls) < 0) {
+                                w.classList.remove(cls);
+                                if (widget instanceof kendo.ui.ComboBox) { // https://github.com/kendo-labs/angular-kendo/issues/356
+                                    widget.input[0].classList.remove(cls);
+                                }
+                            }
+                        });
+                        prevClassList = currClassList;
+                        break;
+
+                    case "disabled":
+                        if (typeof widget.enable == "function") {
+                            widget.enable(!$(chg.target).attr("disabled"));
+                        }
+                        break;
+
+                    case "readonly":
+                        if (typeof widget.readonly == "function") {
+                            widget.readonly(!!$(chg.target).attr("readonly"));
+                        }
+                        break;
+                }
+            });
+
+            resume();
+        });
+
+        function suspend() {
+            mo.disconnect();
+        }
+
+        function resume() {
+            mo.observe($(element)[0], { attributes: true });
+        }
+
+        resume();
+        widget.first("destroy", suspend);
+    }
+
     module.factory('directiveFactory', function() {
         var KENDO_COUNT = 0;
         var RENDERED = false;
@@ -388,7 +458,6 @@ var __meta__ = {
                             })();
                         }
 
-
                         // if k-rebind attribute is provided, rebind the kendo widget when
                         // the watched value changes
                         if (attrs.kRebind) {
@@ -441,74 +510,7 @@ var __meta__ = {
                             bindToKNgModel(widget, scope, attrs.kNgModel);
                         }
 
-                        // mutation observers — propagate the original
-                        // element's class to the widget wrapper.
-                        (function(){
-
-                            if (!(window.MutationObserver && widget.wrapper)) {
-                                return;
-                            }
-
-                            var prevClassList = [].slice.call($(element)[0].classList);
-
-                            var mo = new MutationObserver(function(changes){
-                                suspend();    // make sure we don't trigger a loop
-                                if (!widget) {
-                                    return;
-                                }
-
-                                changes.forEach(function(chg){
-                                    var w = $(widget.wrapper)[0];
-                                    switch (chg.attributeName) {
-
-                                      case "class":
-                                        // sync classes to the wrapper element
-                                        var currClassList = [].slice.call(chg.target.classList);
-                                        currClassList.forEach(function(cls){
-                                            if (prevClassList.indexOf(cls) < 0) {
-                                                w.classList.add(cls);
-                                                if (kendo.ui.ComboBox && widget instanceof kendo.ui.ComboBox) { // https://github.com/kendo-labs/angular-kendo/issues/356
-                                                    widget.input[0].classList.add(cls);
-                                                }
-                                            }
-                                        });
-                                        prevClassList.forEach(function(cls){
-                                            if (currClassList.indexOf(cls) < 0) {
-                                                w.classList.remove(cls);
-                                                if (kendo.ui.ComboBox && widget instanceof kendo.ui.ComboBox) { // https://github.com/kendo-labs/angular-kendo/issues/356
-                                                    widget.input[0].classList.remove(cls);
-                                                }
-                                            }
-                                        });
-                                        prevClassList = currClassList;
-                                        break;
-
-                                      case "disabled":
-                                        if (typeof widget.enable == "function") {
-                                            widget.enable(!$(chg.target).attr("disabled"));
-                                        }
-                                        break;
-
-                                      case "readonly":
-                                        if (typeof widget.readonly == "function") {
-                                            widget.readonly(!!$(chg.target).attr("readonly"));
-                                        }
-                                        break;
-                                    }
-                                });
-
-                                resume();
-                            });
-
-                            function suspend() {
-                                mo.disconnect();
-                            }
-                            function resume() {
-                                mo.observe($(element)[0], { attributes: true });
-                            }
-                            resume();
-                            widget.first("destroy", suspend);
-                        })();
+                        propagateClassToWidgetWrapper(widget, element);
 
                         --KENDO_COUNT;
                         if (KENDO_COUNT === 0) {
@@ -523,7 +525,6 @@ var __meta__ = {
                                 });
                             }
                         }
-
                     });
                 }
             };
