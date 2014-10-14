@@ -209,6 +209,44 @@ var __meta__ = {
         }
     }
 
+    function bindToKNgModel(widget, scope, kNgModel) {
+        if (typeof widget.value != "function") {
+            $log.warn("k-ng-model specified on a widget that does not have the value() method: " + (widget.options.name));
+            return;
+        }
+
+        var getter = $parse(kNgModel);
+        var setter = getter.assign;
+        var updating = false;
+
+        widget.$angular_setLogicValue(getter(scope));
+
+        // keep in sync
+        scope.$watch(kNgModel, function(newValue, oldValue){
+            if (newValue === undefined) {
+                // because widget's value() method usually checks if the new value is undefined,
+                // in which case it returns the current value rather than clearing the field.
+                // https://github.com/telerik/kendo-ui-core/issues/299
+                newValue = null;
+            }
+            if (updating) {
+                return;
+            }
+            if (newValue === oldValue) {
+                return;
+            }
+            widget.$angular_setLogicValue(newValue);
+        });
+
+        widget.first("change", function(){
+            updating = true;
+            scope.$apply(function(){
+                setter(scope, widget.$angular_getLogicValue());
+            });
+            updating = false;
+        });
+    }
+
     module.factory('directiveFactory', function() {
         var KENDO_COUNT = 0;
         var RENDERED = false;
@@ -391,39 +429,8 @@ var __meta__ = {
                             }
 
                             // kNgModel is used for the "logical" value
-                            OUT2: if (attrs.kNgModel) {
-                                if (typeof widget.value != "function") {
-                                    $log.warn("k-ng-model specified on a widget that does not have the value() method: " + (widget.options.name));
-                                    break OUT2;
-                                }
-                                var getter = $parse(attrs.kNgModel);
-                                var setter = getter.assign;
-                                var updating = false;
-                                widget.$angular_setLogicValue(getter(scope));
-
-                                // keep in sync
-                                scope.$watch(attrs.kNgModel, function(newValue, oldValue){
-                                    if (newValue === undefined) {
-                                        // because widget's value() method usually checks if the new value is undefined,
-                                        // in which case it returns the current value rather than clearing the field.
-                                        // https://github.com/telerik/kendo-ui-core/issues/299
-                                        newValue = null;
-                                    }
-                                    if (updating) {
-                                        return;
-                                    }
-                                    if (newValue === oldValue) {
-                                        return;
-                                    }
-                                    widget.$angular_setLogicValue(newValue);
-                                });
-                                widget.first("change", function(){
-                                    updating = true;
-                                    scope.$apply(function(){
-                                        setter(scope, widget.$angular_getLogicValue());
-                                    });
-                                    updating = false;
-                                });
+                            if (attrs.kNgModel) {
+                                bindToKNgModel(widget, scope, attrs.kNgModel);
                             }
                         }
 
