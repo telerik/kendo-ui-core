@@ -13,7 +13,6 @@
         template = kendo.template,
 
         dataviz = kendo.dataviz,
-        round = dataviz.round,
         deepExtend = kendo.deepExtend,
 
         g = kendo.geometry,
@@ -21,7 +20,8 @@
 
         Layer = dataviz.map.layers.Layer,
 
-        util = dataviz.util,
+        util = kendo.util,
+        round = util.round,
         renderSize = util.renderSize,
         limit = util.limitValue;
 

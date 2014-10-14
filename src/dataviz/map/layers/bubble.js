@@ -12,7 +12,7 @@
         dataviz = kendo.dataviz,
         deepExtend = kendo.deepExtend,
 
-        util = dataviz.util,
+        util = kendo.util,
         defined = util.defined,
         isNumber = util.isNumber,
 

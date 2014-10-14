@@ -16,8 +16,8 @@
 
         dataviz = kendo.dataviz,
         deepExtend = kendo.deepExtend,
-        last = dataviz.last,
-        defined = dataviz.util.defined,
+        last = kendo.util.last,
+        defined = kendo.util.defined,
 
         g = kendo.geometry,
 

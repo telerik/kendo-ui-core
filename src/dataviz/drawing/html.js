@@ -14,7 +14,6 @@
 
     /* -----[ local vars ]----- */
 
-    var dataviz = kendo.dataviz;
     var drawing = kendo.drawing;
     var geo = kendo.geometry;
     var slice = Array.prototype.slice;
@@ -965,7 +964,7 @@
             // The only good solution I can think of is to measure the text
             // ourselves and center the bounding box.
             if (kendo.support.browser.msie && !isNaN(lineHeight)) {
-                var size = dataviz.util.measureText(str, { font: font });
+                var size = kendo.util.measureText(str, { font: font });
                 var top = (box.top + box.bottom - size.height) / 2;
                 box = {
                     top    : top,

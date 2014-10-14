@@ -8,8 +8,8 @@
         template = kendo.template,
 
         dataviz = kendo.dataviz,
-        valueOrDefault = dataviz.util.valueOrDefault,
-        defined = dataviz.util.defined;
+        valueOrDefault = kendo.util.valueOrDefault,
+        defined = kendo.util.defined;
 
     var Attribution = Widget.extend({
         init: function(element, options) {

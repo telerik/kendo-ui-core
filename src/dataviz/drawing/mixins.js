@@ -7,11 +7,7 @@
     // Imports ================================================================
     var kendo = window.kendo,
         deepExtend = kendo.deepExtend,
-
-        dataviz = kendo.dataviz,
-
-        util = dataviz.util,
-        defined = util.defined;
+        defined = kendo.util.defined;
 
     // Mixins =================================================================
     var Paintable = {

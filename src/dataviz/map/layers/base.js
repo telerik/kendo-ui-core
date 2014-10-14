@@ -12,11 +12,11 @@
 
         dataviz = kendo.dataviz,
         deepExtend = kendo.deepExtend,
-        defined = dataviz.defined,
 
         Extent = dataviz.map.Extent,
 
-        util = dataviz.util,
+        util = kendo.util,
+        defined = util.defined,
         valueOrDefault = util.valueOrDefault;
 
     // Implementation =========================================================

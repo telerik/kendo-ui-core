@@ -412,7 +412,7 @@
     }
 
     // Exports ================================================================
-    deepExtend(dataviz, {
+    deepExtend(kendo, {
         util: {
             MAX_NUM: MAX_NUM,
             MIN_NUM: MIN_NUM,
@@ -452,6 +452,9 @@
             valueOrDefault: valueOrDefault
         }
     });
+
+    kendo.dataviz.util = kendo.util;
+
 })(window.kendo.jQuery);
 
 return window.kendo;

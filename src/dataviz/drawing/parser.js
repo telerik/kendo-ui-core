@@ -5,7 +5,6 @@
 (function ($) {
 
     var kendo = window.kendo,
-        dataviz = kendo.dataviz,
         drawing = kendo.drawing,
         geometry = kendo.geometry,
 
@@ -15,7 +14,7 @@
         trim = $.trim,
         math = Math,
         pow = math.pow,
-        util = dataviz.util,
+        util = kendo.util,
         deg = util.deg,
         last = util.last,
         round = util.round;

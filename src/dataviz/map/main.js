@@ -17,7 +17,6 @@
 
         dataviz = kendo.dataviz,
         ui = dataviz.ui,
-        defined = dataviz.defined,
 
         g = kendo.geometry,
         Point = g.Point,
@@ -27,7 +26,8 @@
         Location = map.Location,
         EPSG3857 = map.crs.EPSG3857,
 
-        util = dataviz.util,
+        util = kendo.util,
+        defined = util.defined,
         limit = util.limitValue,
         renderPos = util.renderPos,
         valueOrDefault = util.valueOrDefault;

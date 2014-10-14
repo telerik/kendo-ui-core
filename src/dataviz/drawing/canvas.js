@@ -17,9 +17,7 @@
         getter = kendo.getter,
         deepExtend = kendo.deepExtend,
 
-        dataviz = kendo.dataviz,
-
-        util = dataviz.util,
+        util = kendo.util,
         alignToPixel = util.alignToPixel,
         append = util.append,
         defined = util.defined,
@@ -31,8 +29,6 @@
         d = kendo.drawing,
         BaseNode = d.BaseNode,
         Group = d.Group,
-        Box2D = dataviz.Box2D,
-        Color = dataviz.Color,
         Path = d.Path;
 
     // Constants ==============================================================

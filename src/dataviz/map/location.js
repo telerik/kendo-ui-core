@@ -20,7 +20,7 @@
         dataviz = kendo.dataviz,
         deepExtend = kendo.deepExtend,
 
-        util = dataviz.util,
+        util = kendo.util,
         defined = util.defined,
         deg = util.deg,
         rad = util.rad,

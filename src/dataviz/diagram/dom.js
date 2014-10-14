@@ -45,7 +45,7 @@
             CascadingRouter = diagram.CascadingRouter,
             isUndefined = Utils.isUndefined,
             isDefined = Utils.isDefined,
-            defined = dataviz.util.defined,
+            defined = kendo.util.defined,
             isArray = $.isArray,
             isFunction = kendo.isFunction,
             isString = Utils.isString,

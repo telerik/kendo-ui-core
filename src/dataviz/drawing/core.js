@@ -14,8 +14,7 @@
         Widget = kendo.ui.Widget,
         deepExtend = kendo.deepExtend,
 
-        dataviz = kendo.dataviz,
-        util = dataviz.util;
+        util = kendo.util;
 
     // Base drawing surface ==================================================
     var Surface = kendo.Observable.extend({

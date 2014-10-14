@@ -9,8 +9,6 @@
         Class = kendo.Class,
         deepExtend = kendo.deepExtend,
 
-        dataviz = kendo.dataviz,
-
         g = kendo.geometry,
         Point = g.Point,
         Rect = g.Rect,
@@ -24,7 +22,7 @@
         math = Math,
         pow = math.pow,
 
-        util = dataviz.util,
+        util = kendo.util,
         append = util.append,
         arrayLimits = util.arrayLimits,
         defined = util.defined,
