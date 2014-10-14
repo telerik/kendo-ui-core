@@ -220,7 +220,7 @@
         var objects = [];
 
         function getOption(name, defval) {
-            return (options && hasOwnProperty(options, name)) ? options[name] : defval;
+            return (options && options[name] != null) ? options[name] : defval;
         }
 
         self.getOption = getOption;
