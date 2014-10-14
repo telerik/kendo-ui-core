@@ -876,4 +876,14 @@
         dialog.close();
         secondDialog.open();
     });
+
+    test("setOptions allows changing of window actions", function() {
+        var dialog = createWindow();
+
+        dialog.setOptions({
+            actions: [ "Minimize", "Close" ]
+        });
+
+        equal(dialog.wrapper.find(".k-i-minimize").length, 1);
+    });
 })();
