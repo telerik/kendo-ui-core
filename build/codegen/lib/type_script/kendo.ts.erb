@@ -1394,14 +1394,19 @@ declare module kendo.dataviz.map.layer {
     }
 }
 
-declare module kendo.dataviz.drawing {
-    class Shape {
-    }
-}
-
 % end
 % namespaces.keys.each do |key|
 declare module <%= key %> {
+%   namespaces[key].each do |component|
+<%= component.type_script_class %>
+
+%   end
+}
+% end
+
+% drawing_aliases = namespaces.select {|ns| ns == 'kendo.drawing' || ns == 'kendo.geometry'}
+% drawing_aliases.keys.each do |key|
+declare module <%= key.sub('kendo', 'kendo.dataviz') %> {
 %   namespaces[key].each do |component|
 <%= component.type_script_class %>
 
