@@ -1,7 +1,7 @@
 (function(f, define){
     define([
         "./kendo.util",
-        "./kendo.mixins",
+        "./mixins/observers",
         "./kendo.geometry",
         "./drawing/core",
         "./drawing/color",

@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./core", "./mixins", "./text-metrics", "../kendo.mixins" ], f);
+    define([ "./core", "./mixins", "./text-metrics", "../mixins/observers" ], f);
 })(function(){
 
 (function ($) {
