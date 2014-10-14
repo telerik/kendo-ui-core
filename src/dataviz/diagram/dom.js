@@ -1,5 +1,5 @@
 (function (f, define) {
-    define(["../../kendo.data", "../../kendo.draganddrop", "../../kendo.dataviz.themes", "../util",
+    define(["../../kendo.data", "../../kendo.draganddrop", "../../kendo.dataviz.themes", "../../kendo.util",
            "./svg",
            "./services",
            "./layout" ], f);
@@ -45,7 +45,7 @@
             CascadingRouter = diagram.CascadingRouter,
             isUndefined = Utils.isUndefined,
             isDefined = Utils.isDefined,
-            defined = dataviz.util.defined,
+            defined = kendo.util.defined,
             isArray = $.isArray,
             isFunction = kendo.isFunction,
             isString = Utils.isString,

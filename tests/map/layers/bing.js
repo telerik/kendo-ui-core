@@ -6,7 +6,7 @@
         Location = map.Location,
 
         deepExtend = kendo.deepExtend,
-        Point = dataviz.geometry.Point;
+        Point = kendo.geometry.Point;
 
     var BingLayerDouble = BingLayer.extend({
         _fetchMetadata: $.noop

@@ -100,77 +100,6 @@
         return hashKey(objectKey(object));
     }
 
-    // Mixins =================================================================
-    function geometryChange() {
-        if (this.observer) {
-            this.observer.geometryChange();
-        }
-    }
-
-    var ObserversMixin = {
-        observers: function() {
-            this._observers = this._observers || [];
-            return this._observers;
-        },
-
-        addObserver: function(element) {
-            var observers = this.observers();
-            observers.push(element);
-            return this;
-        },
-
-        removeObserver: function(element) {
-            var observers = this.observers();
-            var index = inArray(element, observers);
-            if (index != -1) {
-                observers.splice(index, 1);
-            }
-            return this;
-        },
-
-        trigger: function(methodName, event) {
-            var observers = this._observers;
-            var observer;
-            var idx;
-
-            if (observers && !this._suspended) {
-                for (idx = 0; idx < observers.length; idx++) {
-                    observer = observers[idx];
-                    if (observer[methodName]) {
-                        observer[methodName](event);
-                    }
-                }
-            }
-            return this;
-        },
-
-        optionsChange: function(e) {
-            this.trigger("optionsChange", e);
-        },
-
-        geometryChange: function(e) {
-            this.trigger("geometryChange", e);
-        },
-
-        suspend: function() {
-            this._suspended = (this._suspended || 0) + 1;
-            return this;
-        },
-
-        resume: function() {
-            this._suspended = math.max((this._suspended || 0) - 1, 0);
-            return this;
-        },
-
-        _observerField: function(field, value) {
-            if (this[field]) {
-                this[field].removeObserver(this);
-            }
-            this[field] = value;
-            value.addObserver(this);
-        }
-    };
-
     // Array helpers ==========================================================
     function arrayLimits(arr) {
         var length = arr.length,
@@ -234,125 +163,6 @@
         return first;
     }
 
-    var ElementsArray = kendo.Class.extend({
-        init: function(array) {
-            array = array || [];
-
-            this.length = 0;
-            this._splice(0, array.length, array);
-        },
-
-        elements: function(elements) {
-            if (elements) {
-                this._splice(0, this.length, elements);
-
-                this._change();
-                return this;
-            } else {
-                return this.slice(0);
-            }
-        },
-
-        push: function() {
-            var elements = arguments;
-            var result = push.apply(this, elements);
-
-            this._add(elements);
-
-            return result;
-        },
-
-        slice: slice,
-
-        pop: function() {
-            var length = this.length;
-            var result = pop.apply(this);
-
-            if (length) {
-                this._remove([result]);
-            }
-
-            return result;
-        },
-
-        splice: function(index, howMany) {
-            var elements = slice.call(arguments, 2);
-            var result = this._splice(index, howMany, elements);
-
-            this._change();
-
-            return result;
-        },
-
-        shift: function() {
-            var length = this.length;
-            var result = shift.apply(this);
-
-            if (length) {
-                this._remove([result]);
-            }
-
-            return result;
-        },
-
-        unshift: function() {
-            var elements = arguments;
-            var result = unshift.apply(this, elements);
-
-            this._add(elements);
-
-            return result;
-        },
-
-        indexOf: function(element) {
-            var that = this;
-            var idx;
-            var length;
-
-            for (idx = 0, length = that.length; idx < length; idx++) {
-                if (that[idx] === element) {
-                    return idx;
-                }
-            }
-            return -1;
-        },
-
-        _splice: function(index, howMany, elements) {
-            var result = splice.apply(this, [index, howMany].concat(elements));
-
-            this._clearObserver(result);
-            this._setObserver(elements);
-
-            return result;
-        },
-
-        _add: function(elements) {
-            this._setObserver(elements);
-            this._change();
-        },
-
-        _remove: function(elements) {
-            this._clearObserver(elements);
-            this._change();
-        },
-
-        _setObserver: function(elements) {
-            for (var idx = 0; idx < elements.length; idx++) {
-                elements[idx].addObserver(this);
-            }
-        },
-
-        _clearObserver: function(elements) {
-            for (var idx = 0; idx < elements.length; idx++) {
-                elements[idx].removeObserver(this);
-            }
-        },
-
-        _change: function() {}
-    });
-
-    deepExtend(ElementsArray.fn, ObserversMixin);
-
     // Template helpers =======================================================
     function renderTemplate(text) {
         return kendo.template(text, { useWithBlock: false, paramName: "d" });
@@ -412,14 +222,10 @@
     }
 
     // Exports ================================================================
-    deepExtend(dataviz, {
+    deepExtend(kendo, {
         util: {
             MAX_NUM: MAX_NUM,
             MIN_NUM: MIN_NUM,
-
-            mixins: {
-                geometryChange: geometryChange
-            },
 
             alignToPixel: alignToPixel,
             append: append,
@@ -428,7 +234,6 @@
             arrayMax: arrayMax,
             defined: defined,
             deg: deg,
-            ElementsArray: ElementsArray,
             hashKey: hashKey,
             hashObject: hashObject,
             isNumber: isNumber,
@@ -436,7 +241,6 @@
             last: last,
             limitValue: limitValue,
             objectKey: objectKey,
-            ObserversMixin: ObserversMixin,
             round: round,
             rad: rad,
             renderAttr: renderAttr,
@@ -452,6 +256,9 @@
             valueOrDefault: valueOrDefault
         }
     });
+
+    kendo.dataviz.util = kendo.util;
+
 })(window.kendo.jQuery);
 
 return window.kendo;

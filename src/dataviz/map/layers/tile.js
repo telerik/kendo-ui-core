@@ -1,5 +1,5 @@
 (function(f, define) {
-    define([ "./base", "../location", "../../geometry" ], f);
+    define([ "./base", "../location", "../../../geometry/main" ], f);
 })(function() {
 
 (function ($, undefined) {
@@ -13,15 +13,15 @@
         template = kendo.template,
 
         dataviz = kendo.dataviz,
-        round = dataviz.round,
         deepExtend = kendo.deepExtend,
 
-        g = dataviz.geometry,
+        g = kendo.geometry,
         Point = g.Point,
 
         Layer = dataviz.map.layers.Layer,
 
-        util = dataviz.util,
+        util = kendo.util,
+        round = util.round,
         renderSize = util.renderSize,
         limit = util.limitValue;
 

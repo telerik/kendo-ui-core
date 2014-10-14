@@ -2,7 +2,7 @@
     var TOLERANCE = 1e-9;
 
     var dataviz = kendo.dataviz,
-        Point = dataviz.geometry.Point,
+        Point = kendo.geometry.Point,
 
         map = dataviz.map,
         Location = map.Location;

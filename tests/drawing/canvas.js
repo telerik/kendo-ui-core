@@ -2,11 +2,11 @@
     var dataviz = kendo.dataviz,
         deepExtend = kendo.deepExtend,
 
-        g = dataviz.geometry,
+        g = kendo.geometry,
         Point = g.Point,
         Matrix = g.Matrix,
 
-        d = dataviz.drawing,
+        d = kendo.drawing,
         canv = d.canvas,
         Surface = canv.Surface;
 

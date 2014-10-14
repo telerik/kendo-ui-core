@@ -1,7 +1,7 @@
 (function() {
     var dataviz = kendo.dataviz,
 
-        g = dataviz.geometry,
+        g = kendo.geometry,
         Circle = g.Circle,
         Point = g.Point,
         Rect = g.Rect,
@@ -1363,6 +1363,15 @@
                 }
             });
             transformation.multiply(new Matrix(3,3,3,3,3,3));
+        });
+    })();
+
+    // ------------------------------------------------------------
+    (function() {
+        module("Namespaces");
+
+        test("kendo.geometry is aliased as kendo.dataviz.geometry", function() {
+            deepEqual(kendo.geometry, kendo.dataviz.geometry);
         });
     })();
 

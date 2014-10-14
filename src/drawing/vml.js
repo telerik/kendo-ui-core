@@ -13,15 +13,13 @@
         deepExtend = kendo.deepExtend,
         noop = $.noop,
 
-        dataviz = kendo.dataviz,
-
-        d = dataviz.drawing,
+        d = kendo.drawing,
         BaseNode = d.BaseNode,
 
-        g = dataviz.geometry,
+        g = kendo.geometry,
         toMatrix = g.toMatrix,
 
-        util = dataviz.util,
+        util = kendo.util,
         isTransparent = util.isTransparent,
         defined = util.defined,
         deg = util.deg,

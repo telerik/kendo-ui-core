@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "../geometry" ], f);
+    define([ "../geometry/main" ], f);
 })(function(){
 
 (function ($) {
@@ -14,8 +14,7 @@
         Widget = kendo.ui.Widget,
         deepExtend = kendo.deepExtend,
 
-        dataviz = kendo.dataviz,
-        util = dataviz.util;
+        util = kendo.util;
 
     // Base drawing surface ==================================================
     var Surface = kendo.Observable.extend({
@@ -248,7 +247,7 @@
             return object;
         }
     });
-    deepExtend(OptionsStore.fn, util.ObserversMixin);
+    deepExtend(OptionsStore.fn, kendo.mixins.ObserversMixin);
 
     var SurfaceFactory = function() {
         this._items = [];
@@ -299,7 +298,7 @@
     SurfaceFactory.current = new SurfaceFactory();
 
     // Exports ================================================================
-    deepExtend(dataviz, {
+    deepExtend(kendo, {
         drawing: {
             DASH_ARRAYS: {
                 dot: [1.5, 3.5],
@@ -316,6 +315,8 @@
             SurfaceFactory: SurfaceFactory
         }
     });
+
+    kendo.dataviz.drawing = kendo.drawing;
 
 })(window.kendo.jQuery);
 

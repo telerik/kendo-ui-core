@@ -8,7 +8,7 @@
         TileView = map.layers.TileView,
         Location = map.Location,
 
-        Point = dataviz.geometry.Point;
+        Point = kendo.geometry.Point;
 
     (function() {
         var map,

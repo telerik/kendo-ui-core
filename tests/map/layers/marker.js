@@ -3,8 +3,8 @@
 
         dataviz = kendo.dataviz,
         deepExtend = kendo.deepExtend,
-        g = dataviz.geometry,
-        d = dataviz.drawing,
+        g = kendo.geometry,
+        d = kendo.drawing,
 
         map = dataviz.map,
         Marker = map.Marker,

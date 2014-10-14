@@ -51,10 +51,10 @@ kendo.PDFMixin = {
 
         var options = this.options.pdf;
 
-        kendo.dataviz.drawing.drawDOM(this.wrapper[0], function(root) {
+        kendo.drawing.drawDOM(this.wrapper[0], function(root) {
             root.options.set("pdf", options);
 
-            kendo.dataviz.drawing.pdf.toDataURL(root, function(dataURI) {
+            kendo.drawing.pdf.toDataURL(root, function(dataURI) {
                 kendo.saveAs({
                     dataURI: dataURI,
                     fileName: options.fileName,

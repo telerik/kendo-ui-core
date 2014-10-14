@@ -1,10 +1,10 @@
 (function(f, define){
     define([
         "./shapes",
-        "../../kendo.pdf",
-        "../../kendo.saveas",
-        "../../kendo.colorpicker", // XXX: for kendo.parseColor
-        "../../kendo.dataviz.core" // XXX: for dataviz.Color.namedColors
+        "./color",
+        "../kendo.pdf",
+        "../kendo.saveas",
+        "../kendo.colorpicker" // XXX: for kendo.parseColor
     ], f);
 })(function(){
 
@@ -16,7 +16,7 @@
     // == into === to make JSHint happy will break functionality.
     /*jshint eqnull:true  */
 
-    var dataviz     = kendo.dataviz;
+    var Color       = kendo.drawing.Color;
     var PDF         = kendo.pdf;
 
     var TEXT_RENDERING_MODE = PDF.TEXT_RENDERING_MODE;
@@ -361,13 +361,13 @@
         if (/^(none|transparent)$/.test(color)) {
             return null;
         }
-        if (dataviz.Color.namedColors.hasOwnProperty(color)) {
-            color = dataviz.Color.namedColors[color];
+        if (Color.namedColors.hasOwnProperty(color)) {
+            color = Color.namedColors[color];
         }
         return kendo.parseColor(color).toRGB();
     }
 
-    kendo.deepExtend(dataviz.drawing, {
+    kendo.deepExtend(kendo.drawing, {
         pdf: {
             parseColor : parseColor,
             toDataURL  : toDataURL,

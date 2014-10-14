@@ -4,8 +4,8 @@
         diagram = dataviz.diagram,
         deepExtend = kendo.deepExtend,
 
-        g = dataviz.geometry,
-        d = dataviz.drawing,
+        g = kendo.geometry,
+        d = kendo.drawing,
 
         Point = diagram.Point,
         Rect = diagram.Rect,
@@ -193,8 +193,8 @@
         var drawingElement;
         var RED = "red";
         var GREEN = "green";
-        var redHex = new dataviz.Color(RED).toHex();
-        var greenHex = new dataviz.Color(GREEN).toHex();
+        var redHex = new d.Color(RED).toHex();
+        var greenHex = new d.Color(GREEN).toHex();
 
         module(name + " / VisualBase", {
             setup: function() {

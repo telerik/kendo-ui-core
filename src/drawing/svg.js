@@ -10,12 +10,11 @@
         kendo = window.kendo,
         deepExtend = kendo.deepExtend,
 
-        dataviz = kendo.dataviz,
-        g = dataviz.geometry,
-        d = dataviz.drawing,
+        g = kendo.geometry,
+        d = kendo.drawing,
         BaseNode = d.BaseNode,
 
-        util = dataviz.util,
+        util = kendo.util,
         defined = util.defined,
         isTransparent = util.isTransparent,
         renderAttr = util.renderAttr,
@@ -712,7 +711,7 @@
 
         template: renderTemplate(
             "<path #= d.renderStyle() # #= d.renderOpacity() # " +
-            "#= kendo.dataviz.util.renderAttr('d', d.renderData()) # " +
+            "#= kendo.util.renderAttr('d', d.renderData()) # " +
             "#= d.renderStroke() # " +
             "#= d.renderFill() # " +
             "#= d.renderDefinitions() # " +

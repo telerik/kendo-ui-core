@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "../util" ], f);
+    define([ "../../kendo.util" ], f);
 })(function(){
 
 (function ($, undefined) {
@@ -20,7 +20,7 @@
         dataviz = kendo.dataviz,
         deepExtend = kendo.deepExtend,
 
-        util = dataviz.util,
+        util = kendo.util,
         defined = util.defined,
         deg = util.deg,
         rad = util.rad,

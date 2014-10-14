@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "../../kendo.dataviz.drawing", "./math" ], f);
+    define([ "../../kendo.drawing", "./math" ], f);
 })(function(){
 
 (function ($, undefined) {
@@ -20,8 +20,8 @@
         isString = Utils.isString,
         MatrixVector = diagram.MatrixVector,
 
-        g = dataviz.geometry,
-        d = dataviz.drawing,
+        g = kendo.geometry,
+        d = kendo.drawing,
 
         defined = dataviz.defined,
 
@@ -1340,7 +1340,7 @@
     function getColor(value) {
         var color;
         if (value != TRANSPARENT) {
-            color = new dataviz.Color(value).toHex();
+            color = new d.Color(value).toHex();
         } else {
             color = value;
         }
@@ -1350,7 +1350,7 @@
     function lineAngle(p1, p2) {
         var xDiff = p2.x - p1.x;
         var yDiff = p2.y - p1.y;
-        var angle = dataviz.util.deg(Math.atan2(yDiff, xDiff));
+        var angle = kendo.util.deg(Math.atan2(yDiff, xDiff));
         return angle;
     }
 

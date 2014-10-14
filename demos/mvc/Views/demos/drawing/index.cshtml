@@ -15,13 +15,13 @@
     </div>
     <script>
     var dataviz = kendo.dataviz;
-    var geo = dataviz.geometry;
-    var Point = geo.Point;
-    var drawing = dataviz.drawing;
-    var Circle = drawing.Circle;
-    var Group = drawing.Group;
-    var Path = drawing.Path;
-    var Text = drawing.Text;
+    var geom = kendo.geometry;
+    var Point = geom.Point;
+    var draw = kendo.drawing;
+    var Circle = draw.Circle;
+    var Group = draw.Group;
+    var Path = draw.Path;
+    var Text = draw.Text;
 
     var Clock = kendo.Class.extend({
         init: function(container, options) {
@@ -47,13 +47,13 @@
             seconds += (this.options.offset + date.getHours()) * 60 * 60;
 
             var angle = (360 / 60) * seconds;
-            this._seconds.transform(geo.transform().rotate(angle, center));
+            this._seconds.transform(geom.transform().rotate(angle, center));
 
             angle = (360 / (60 * 60)) * seconds;
-            this._minutes.transform(geo.transform().rotate(angle, center));
+            this._minutes.transform(geom.transform().rotate(angle, center));
 
             angle = (360 / (12 * 60 * 60)) * seconds;
-            this._hours.transform(geo.transform().rotate(angle, center));
+            this._hours.transform(geom.transform().rotate(angle, center));
         },
 
         _render: function(container) {
@@ -146,8 +146,8 @@
             var frame = new Group();
             var size = this.options.size;
 
-            var outerCircle = new geo.Circle(this._center, (size / 2) - 4);
-            var innerCircle = new geo.Circle(this._center, size * 0.01);
+            var outerCircle = new geom.Circle(this._center, (size / 2) - 4);
+            var innerCircle = new geom.Circle(this._center, size * 0.01);
 
             frame.append(
                 new Circle(outerCircle, {
@@ -195,7 +195,7 @@
     });
 
     function initSurface(type) {
-        return drawing.Surface.create($("#surface"), { type: type });
+        return draw.Surface.create($("#surface"), { type: type });
     }
 
     function initClocks(container) {

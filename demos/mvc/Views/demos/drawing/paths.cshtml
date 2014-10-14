@@ -15,16 +15,16 @@
     </div>
     <script>
     var dataviz = kendo.dataviz;
-    var geo = dataviz.geometry;
-    var Point = geo.Point;
-    var drawing = dataviz.drawing;
-    var Path = drawing.Path;
+    var geom = kendo.geometry;
+    var Point = geom.Point;
+    var draw = kendo.drawing;
+    var Path = draw.Path;
 
     var points = 15;
     var distance = 40;
 
     function initSurface(type) {
-        return drawing.Surface.create($("#surface"), { type: type });
+        return draw.Surface.create($("#surface"), { type: type });
     }
 
     // Based on Follow3 example by Processing

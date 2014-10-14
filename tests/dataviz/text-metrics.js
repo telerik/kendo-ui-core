@@ -1,6 +1,5 @@
 (function() {
-    var dataviz = kendo.dataviz,
-        util = dataviz.util;
+    var util = kendo.drawing.util;
 
     // ------------------------------------------------------------
     var metrics;
@@ -92,7 +91,7 @@
     });
 
     test("get retrieves single value", function() {
-        lru = new dataviz.LRUCache(1);
+        lru = new util.LRUCache(1);
         lru.put("a", 1);
         equal(lru.get("a"), 1);
     });

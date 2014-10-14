@@ -1,7 +1,7 @@
 (function() {
     var dataviz = kendo.dataviz,
 
-        d = dataviz.drawing,
+        d = kendo.drawing,
         BaseNode = d.BaseNode,
         OptionsStore = d.OptionsStore;
 
@@ -110,7 +110,7 @@
     // ------------------------------------------------------------
     var options;
     var ObserverClass = kendo.Class.extend({});
-    kendo.deepExtend(ObserverClass.fn, dataviz.util.ObserversMixin);
+    kendo.deepExtend(ObserverClass.fn, kendo.mixins.ObserversMixin);
 
     module("Options Store", {
         setup: function() {
@@ -250,5 +250,14 @@
             });
         });
 
+    })();
+
+    // ------------------------------------------------------------
+    (function() {
+        module("Namespaces");
+
+        test("kendo.drawing is aliased as kendo.dataviz.drawing", function() {
+            deepEqual(kendo.drawing, kendo.dataviz.drawing);
+        });
     })();
 })();

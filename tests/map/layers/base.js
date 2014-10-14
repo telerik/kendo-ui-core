@@ -1,6 +1,6 @@
 function baseLayerTests(name, TLayer) {
     var dataviz = kendo.dataviz,
-        d = dataviz.drawing,
+        d = kendo.drawing,
         m = dataviz.map;
 
     function assertUnbind() {

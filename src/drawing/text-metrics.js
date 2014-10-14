@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./util" ], f);
+    define([ "../kendo.util" ], f);
 })(function(){
 
 (function ($) {
@@ -11,8 +11,7 @@
         Class = kendo.Class,
         deepExtend = kendo.deepExtend,
 
-        dataviz = kendo.dataviz,
-        util = dataviz.util,
+        util = kendo.util,
         defined = util.defined;
 
     // Constants ===============================================================
@@ -140,7 +139,7 @@
     }
 
     // Exports ================================================================
-    deepExtend(dataviz, {
+    deepExtend(kendo.drawing, {
         util: {
             TextMetrics: TextMetrics,
             LRUCache: LRUCache,

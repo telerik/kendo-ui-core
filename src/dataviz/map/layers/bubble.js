@@ -12,12 +12,12 @@
         dataviz = kendo.dataviz,
         deepExtend = kendo.deepExtend,
 
-        util = dataviz.util,
+        util = kendo.util,
         defined = util.defined,
         isNumber = util.isNumber,
 
-        g = dataviz.geometry,
-        d = dataviz.drawing,
+        g = kendo.geometry,
+        d = kendo.drawing,
 
         map = dataviz.map,
         Location = map.Location,

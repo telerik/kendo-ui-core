@@ -1,6 +1,6 @@
 (function(f, define){
-    define(["./base", "../location", "../../geometry", "../../util",
-            "../../../kendo.dataviz.drawing",
+    define(["./base", "../location", "../../../geometry/main", "../../../kendo.util",
+            "../../../kendo.drawing",
             "../../../kendo.data",
             "../../../kendo.draganddrop"
     ], f);
@@ -16,12 +16,12 @@
 
         dataviz = kendo.dataviz,
         deepExtend = kendo.deepExtend,
-        last = dataviz.last,
-        defined = dataviz.util.defined,
+        last = kendo.util.last,
+        defined = kendo.util.defined,
 
-        g = dataviz.geometry,
+        g = kendo.geometry,
 
-        d = dataviz.drawing,
+        d = kendo.drawing,
         Group = d.Group,
 
         map = dataviz.map,

@@ -7,11 +7,7 @@
     // Imports ================================================================
     var kendo = window.kendo,
         deepExtend = kendo.deepExtend,
-
-        dataviz = kendo.dataviz,
-
-        util = dataviz.util,
-        defined = util.defined;
+        defined = kendo.util.defined;
 
     // Mixins =================================================================
     var Paintable = {
@@ -49,11 +45,9 @@
     };
 
     // Exports ================================================================
-    deepExtend(dataviz, {
-        drawing: {
-            mixins: {
-                Paintable: Paintable
-            }
+    deepExtend(kendo.drawing, {
+        mixins: {
+            Paintable: Paintable
         }
     });
 

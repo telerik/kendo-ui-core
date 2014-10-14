@@ -1,13 +1,13 @@
 (function() {
     var dataviz = kendo.dataviz,
 
-        g = dataviz.geometry,
+        g = kendo.geometry,
         Point = g.Point,
         Matrix = g.Matrix,
 
         util = dataviz.util,
 
-        d = dataviz.drawing,
+        d = kendo.drawing,
         Element = d.Element,
         Group = d.Group,
         Segment = d.Segment,
@@ -707,13 +707,13 @@
             compareBoundingBox(text.rawBBox(), [100, 100, 120, 110]);
         });
 
-        test("measure returns text metrics", function() {
-            deepEqual(text.measure(), util.measureText("Foo"));
+        test("measure returns text metrics with default font", function() {
+            deepEqual(text.measure(), d.util.measureText("Foo", { font: "12px sans-serif" }));
         });
 
-        test("measure takes font in consideration", function() {
+        test("measure returns text metrics with custom font", function() {
             text.options.set("font", "15px sans-serif");
-            deepEqual(text.measure(), util.measureText("Foo", { font: "15px sans-serif" }));
+            deepEqual(text.measure(), d.util.measureText("Foo", { font: "15px sans-serif" }));
         });
 
         shapeBaseTests(Text, "Text");

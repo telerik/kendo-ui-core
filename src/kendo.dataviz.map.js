@@ -1,7 +1,7 @@
 (function(f, define){
     define([
         "./kendo.data", "./kendo.userevents", "./kendo.tooltip", "./kendo.dataviz.core", "./kendo.mobile.scroller",
-        "./kendo.dataviz.drawing",
+        "./kendo.drawing",
 
         "./dataviz/map/location",
         "./dataviz/map/attribution",
@@ -23,7 +23,7 @@
         name: "Map",
         category: "dataviz",
         description: "The Kendo DataViz Map displays spatial data",
-        depends: [ "data", "userevents", "tooltip", "dataviz.core", "dataviz.drawing", "mobile.scroller" ]
+        depends: [ "data", "userevents", "tooltip", "dataviz.core", "drawing", "mobile.scroller" ]
     };
 
 }, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

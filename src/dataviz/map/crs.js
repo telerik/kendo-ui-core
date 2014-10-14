@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./location", "../../kendo.dataviz.drawing" ], f);
+    define([ "./location", "../../kendo.drawing" ], f);
 })(function(){
 
 (function ($, undefined) {
@@ -19,13 +19,13 @@
         Matrix = dataviz.Matrix,
         deepExtend = kendo.deepExtend,
 
-        g = dataviz.geometry,
+        g = kendo.geometry,
         Point = g.Point,
 
         map = dataviz.map,
         Location = map.Location,
 
-        util = dataviz.util,
+        util = kendo.util,
         rad = util.rad,
         deg = util.deg,
         limit = util.limitValue;
