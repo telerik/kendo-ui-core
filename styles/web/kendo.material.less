@@ -130,9 +130,9 @@
 @resize-background-color: #fff;
 
 /* Upload */
-@upload-progress-background-color: #d0f8ff;
+@upload-progress-background-color: #3f51b5;
 @upload-progress-text-color: #06c;
-@upload-success-background-color: #f0ad4e;
+@upload-success-background-color: #fce68d;
 @upload-success-text-color: @widget-text-color;
 @upload-error-background-color: #fce68d;
 @upload-error-text-color: @widget-text-color;
@@ -221,7 +221,7 @@
 @primary-hover-background-color: #5c6bc0;
 @primary-hover-border-color: #5c6bc0;
 @primary-hover-gradient: none;
-@primary-hover-shadow:none;
+@primary-hover-shadow: none;
 
 @primary-focused-color: @primary-button-text-color; 
 @primary-focused-border-color: #eff8ff;
@@ -243,11 +243,11 @@
 @button-hover-background-color: #ebebeb;
 @button-hover-border-color: #ebebeb;
 
-@button-active-background: #d6d6d6;
-@button-active-border-color: @selected-border-color;
-@button-focused-border-color: #f0f0f0;
+@button-active-background: #dbdbdb;
+@button-active-border-color: #dbdbdb;
+@button-focused-border-color: #dbdbdb;
 @button-focused-shadow: 0 6px 17px 0 #c4c4c4;
-@button-focused-active-shadow: 0 6px 17px 0 #66afe9;
+@button-focused-active-shadow: 0 6px 17px 0 #c7c7c7;
 
 
 //new var-s
@@ -265,7 +265,7 @@
 {
 color: @button-text-color;
 background-color: @button-active-background;
-border-color: @hover-border-color;
+border-color: @button-active-background;
 }
 
 .k-primary.k-state-focused,
@@ -281,6 +281,16 @@ background-color: @primary-active-background-color;
 .k-button:active:hover,
 .k-button.k-state-active:hover
 {
+
+color: @hover-text-color;
+border-color: @button-active-border-color;
+background-color: @button-active-background;
+.box-shadow(@button-focused-active-shadow);
+}
+
+.k-primary:active:hover,
+.k-primary.k-state-active:hover
+{
 color: @primary-hover-text-color;
 border-color: @primary-hover-border-color;
 background-color: @primary-hover-background-color;
@@ -292,6 +302,16 @@ background-color: @primary-hover-background-color;
     border-color: @primary-hover-border-color;
     .composite-background(@primary-hover-gradient);
     background-color: @primary-hover-background-color;
+    .box-shadow(@primary-active-shadow);
+}
+
+.k-primary:focus:not(.k-state-disabled):not([disabled])
+{
+    .box-shadow(@primary-hover-shadow);
+}
+
+.k-primary:focus:active:not(.k-state-disabled):not([disabled])
+{
     .box-shadow(@primary-hover-shadow);
 }
 
@@ -314,7 +334,23 @@ background-color: @primary-hover-background-color;
     background-color: @button-hover-background-color;
 }
 
+.k-dropdown .k-state-default
+{
+    border-color: @button-border-color;
+    .composite-background(@widget-gradient);
+    background-position: 50% 50%;
+    background-color: @button-background-color;
+}
+
 .k-dropdown,
+span.k-colorpicker {
+	background-color: @button-background-color;
+}
+
+.k-textbox {
+	border-color: @drop-down-border-color;
+}
+
 .k-combobox,
 .k-datepicker,
 .k-timepicker,
@@ -355,9 +391,7 @@ border-color: @drop-down-background;
 .k-numeric-wrap.k-state-hover,
 .k-dropdown-wrap.k-state-hover
 {
-//background-color: @select-hover-background-color;
-//.composite-background(@hover-gradient);
-//background-position: 50% 50%;
+background-color: @select-hover-background-color;
 border-color: @drop-down-hover-border-color;
 .box-shadow(@focused-shadow);
 }
@@ -390,7 +424,7 @@ border-color: @hover-background-color;
 background-color: @select-background-color;
 .composite-background(@hover-gradient);
 background-position: 50% 50%;
-border-color: @hover-background-color;
+border-color: @drop-down-focused-border-color;
 .box-shadow(@focused-shadow);
 }
 
