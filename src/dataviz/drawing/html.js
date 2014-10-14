@@ -20,23 +20,82 @@
     var slice = Array.prototype.slice;
     var pdf = drawing.pdf; // XXX: should not really depend on this.  needed for parseColor
 
+    var IMAGE_CACHE = {};
+
     /* -----[ exports ]----- */
 
     drawing.drawDOM = function(element, cont) {
-        var group = new drawing.Group();
+        cacheImages(element, function(){
+            var group = new drawing.Group();
 
-        // translate to start of page
-        var pos = element.getBoundingClientRect();
-        setTransform(group, [ 1, 0, 0, 1, -pos.left, -pos.top ]);
+            // translate to start of page
+            var pos = element.getBoundingClientRect();
+            setTransform(group, [ 1, 0, 0, 1, -pos.left, -pos.top ]);
 
-        renderElement(element, group);
-        cont(group);
+            renderElement(element, group);
+            cont(group);
+        });
     };
 
     var nodeInfo = {};
 
     // only function definitions after this line.
     return;
+
+    function cacheImages(element, callback) {
+        var urls = [];
+        function add(url) {
+            if (!IMAGE_CACHE[url]) {
+                IMAGE_CACHE[url] = true;
+                urls.push(url);
+            }
+        }
+        (function dive(element){
+            var bg = backgroundImageURL(getPropertyValue(element.style, "background-image"));
+            if (/^img$/i.test(element.tagName)) {
+                add(element.src);
+            }
+            if (bg) {
+                add(bg);
+            }
+            for (var i = element.firstChild; i; i = i.nextSibling) {
+                if (i.nodeType == 1) {
+                    dive(i);
+                }
+            }
+        })(element);
+        var count = urls.length;
+        function next() {
+            if (--count <= 0) {
+                callback();
+            }
+        }
+        if (count === 0) {
+            next();
+        }
+        urls.forEach(function(url){
+            var img = IMAGE_CACHE[url] = new Image();
+            img.onload = next;
+            img.onerror = function() {
+                IMAGE_CACHE[url] = null;
+                next();
+            };
+            img.src = url;
+            // hack from https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image
+            // make sure the load event fires for cached images too
+            if (img.complete || img.complete === undefined) {
+                img.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
+                img.src = url;
+            }
+        });
+    }
+
+    function backgroundImageURL(backgroundImage) {
+        var m = /^\s*url\((['"]?)(.*?)\1\)\s*$/i.exec(backgroundImage);
+        if (m) {
+            return m[2];
+        }
+    }
 
     function pushNodeInfo(element, style) {
         var Tmp = function(parent) {
@@ -505,14 +564,19 @@
                         .close());
             }
 
-            var m = /^\s*url\((['"]?)(.*?)\1\)\s*$/i.exec(backgroundImage);
-            if (m) {
-                drawBackgroundImage(background, box, m[2]);
+            var url = backgroundImageURL(backgroundImage);
+            if (url) {
+                drawBackgroundImage(background, box, url);
             }
         }
 
         function drawBackgroundImage(group, box, url) {
-            var img = new Image();
+            var img = IMAGE_CACHE[url];
+
+            if (!(img && img.width > 0 && img.height > 0)) {
+                return;
+            }
+
             var pos = backgroundPosition.split(/\s+/g);
 
             // for background-origin: border-box the box is already appropriate
@@ -524,9 +588,6 @@
                 orgBox = innerBox(orgBox, "border-*-width", element);
             }
 
-            // XXX: this really assumes the image is in cache.
-            //      position won't be correctly computed otherwise.
-            img.src = url;
             pos = { x: pos[0], y: pos[1] };
 
             if (/%$/.test(pos.x)) {
