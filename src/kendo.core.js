@@ -10,7 +10,7 @@ var __meta__ = {
 };
 
 /*jshint eqnull: true, loopfunc: true, evil: true, boss: true, freeze: false*/
-(function($, undefined) {
+(function($, window, undefined) {
     var kendo = window.kendo = window.kendo || { cultures: {} },
         extend = $.extend,
         each = $.each,
@@ -3934,7 +3934,7 @@ function pad(number, digits, end) {
         return start;
     };
 
-})(jQuery);
+})(jQuery, window);
 
 return window.kendo;
 
