@@ -4,6 +4,7 @@
         "./kendo.mixins",
         "./kendo.geometry",
         "./drawing/core",
+        "./drawing/color",
         "./drawing/mixins",
         "./drawing/shapes",
         "./drawing/parser",

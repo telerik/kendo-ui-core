@@ -20,7 +20,7 @@ var __meta__ = {
         template = kendo.template,
 
         dataviz = kendo.dataviz,
-        Color = dataviz.Color,
+        Color = kendo.drawing.Color,
         ChartElement = dataviz.ChartElement,
         PieChartMixin = dataviz.PieChartMixin,
         PlotAreaBase = dataviz.PlotAreaBase,

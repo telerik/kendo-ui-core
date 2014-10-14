@@ -21,7 +21,7 @@ var __meta__ = {
         deepExtend = kendo.deepExtend,
 
         dataviz = kendo.dataviz,
-        Color = dataviz.Color,
+        Color = kendo.drawing.Color,
         Box2D = dataviz.Box2D,
         Point2D = dataviz.Point2D,
         ExpandAnimation = dataviz.ExpandAnimation,

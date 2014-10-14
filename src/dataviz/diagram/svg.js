@@ -1340,7 +1340,7 @@
     function getColor(value) {
         var color;
         if (value != TRANSPARENT) {
-            color = new dataviz.Color(value).toHex();
+            color = new d.Color(value).toHex();
         } else {
             color = value;
         }
