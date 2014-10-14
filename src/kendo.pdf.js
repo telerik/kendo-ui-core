@@ -28,7 +28,7 @@ kendo.PDFMixin = {
         // by content.
         paperSize : "auto",
 
-        // pass true to reverse the paper dimensions if needed such that width is the larder edge.
+        // pass true to reverse the paper dimensions if needed such that width is the larger edge.
         // doesn't make much sense with "auto" paperSize.
         landscape : false,
 
