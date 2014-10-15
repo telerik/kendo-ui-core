@@ -93,99 +93,116 @@ var __meta__ = {
     }
 
     function createWidget(scope, element, attrs, widget, origAttr) {
+        var kNgDelay = attrs.kNgDelay;
 
-        var originalElement;
+        if (kNgDelay) {
+            var unregister = scope.$watch(kNgDelay, function(newValue, oldValue){
+                if (newValue !== oldValue) {
+                    unregister();
+                    kNgDelay = null;
+                    $timeout(createIt); // XXX: won't work without `timeout` ;-\
+                }
+            });
 
-        if (attrs.kRebind) {
-            originalElement = $($(element)[0].cloneNode(true));
+            return;
+        } else {
+            return createIt();
         }
 
+        function createIt() {
+            var originalElement;
 
-        var role = widget.replace(/^kendo/, '');
-        var options = angular.extend({}, attrs.defaultOptions, scope.$eval(attrs.kOptions || attrs.options));
-        var ctor = $(element)[widget];
-
-        if (!ctor) {
-            window.console.error("Could not find: " + widget);
-            return null;
-        }
-
-        var widgetOptions = ctor.widget.prototype.options;
-        var widgetEvents = ctor.widget.prototype.events;
-
-        $.each(attrs, function(name, value) {
-            if (name === "source" || name === "kDataSource") {
-                return;
+            if (attrs.kRebind) {
+                originalElement = $($(element)[0].cloneNode(true));
             }
 
-            var dataName = "data" + name.charAt(0).toUpperCase() + name.slice(1);
 
-            if (name.indexOf("on") === 0) { // let's search for such event.
-                var eventKey = name.replace(/^on./, function(prefix) {
-                    return prefix.charAt(2).toLowerCase();
-                });
+            var role = widget.replace(/^kendo/, '');
+            var options = angular.extend({}, attrs.defaultOptions, scope.$eval(attrs.kOptions || attrs.options));
+            var ctor = $(element)[widget];
 
-                if (widgetEvents.indexOf(eventKey) > -1) {
-                    options[eventKey] = value;
+            if (!ctor) {
+                window.console.error("Could not find: " + widget);
+                return null;
+            }
+
+            var widgetOptions = ctor.widget.prototype.options;
+            var widgetEvents = ctor.widget.prototype.events;
+
+            $.each(attrs, function(name, value) {
+                if (name === "source" || name === "kDataSource") {
+                    return;
                 }
-            } // don't elsif here - there are on* options
 
-            if (widgetOptions.hasOwnProperty(dataName)) {
-                addOption(scope, options, dataName, value);
-            } else if (widgetOptions.hasOwnProperty(name) && !ignoredOwnProperties[name]) {
-                addOption(scope, options, name, value);
-            } else if (!ignoredAttributes[name]) {
-                var match = name.match(/^k(On)?([A-Z].*)/);
-                if (match) {
-                    var optionName = match[2].charAt(0).toLowerCase() + match[2].slice(1);
-                    if (match[1] && name != "kOnLabel" // XXX: k-on-label can be used on MobileSwitch :-\
-                       ) {
-                        options[optionName] = value;
-                    } else {
-                        if (name == "kOnLabel") {
-                            optionName = "onLabel"; // XXX: that's awful.
+                var dataName = "data" + name.charAt(0).toUpperCase() + name.slice(1);
+
+                if (name.indexOf("on") === 0) { // let's search for such event.
+                    var eventKey = name.replace(/^on./, function(prefix) {
+                        return prefix.charAt(2).toLowerCase();
+                    });
+
+                    if (widgetEvents.indexOf(eventKey) > -1) {
+                        options[eventKey] = value;
+                    }
+                } // don't elsif here - there are on* options
+
+                if (widgetOptions.hasOwnProperty(dataName)) {
+                    addOption(scope, options, dataName, value);
+                } else if (widgetOptions.hasOwnProperty(name) && !ignoredOwnProperties[name]) {
+                    addOption(scope, options, name, value);
+                } else if (!ignoredAttributes[name]) {
+                    var match = name.match(/^k(On)?([A-Z].*)/);
+                    if (match) {
+                        var optionName = match[2].charAt(0).toLowerCase() + match[2].slice(1);
+                        if (match[1] && name != "kOnLabel" // XXX: k-on-label can be used on MobileSwitch :-\
+                        ) {
+                            options[optionName] = value;
+                        } else {
+                            if (name == "kOnLabel") {
+                                optionName = "onLabel"; // XXX: that's awful.
+                            }
+                            addOption(scope, options, optionName, value);
                         }
-                        addOption(scope, options, optionName, value);
                     }
                 }
+            });
+
+            // parse the datasource attribute
+            var dataSource = attrs.kDataSource || attrs.source;
+
+            if (dataSource) {
+                options.dataSource = createDataSource(scope, element, role, dataSource);
             }
-        });
 
-        // parse the datasource attribute
-        var dataSource = attrs.kDataSource || attrs.source;
+            // deepExtend in kendo.core (used in Editor) will fail with stack
+            // overflow if we don't put it in an array :-\
+                options.$angular = [ scope ];
 
-        if (dataSource) {
-            options.dataSource = createDataSource(scope, element, role, dataSource);
-        }
-
-        // deepExtend in kendo.core (used in Editor) will fail with stack
-        // overflow if we don't put it in an array :-\
-        options.$angular = [ scope ];
-
-        if (element.is("select")) {
-            (function(options){
-                if (options.length > 0) {
-                    var first = $(options[0]);
-                    if (!/\S/.test(first.text()) && /^\?/.test(first.val())) {
-                        first.remove();
+            if (element.is("select")) {
+                (function(options){
+                    if (options.length > 0) {
+                        var first = $(options[0]);
+                        if (!/\S/.test(first.text()) && /^\?/.test(first.val())) {
+                            first.remove();
+                        }
                     }
-                }
-            }(element[0].options));
+                }(element[0].options));
+            }
+
+            var object = ctor.call(element, OPTIONS_NOW = options).data(widget);
+
+            exposeWidget(object, scope, attrs, widget, origAttr);
+
+            scope.$emit("kendoWidgetCreated", object);
+
+            var destroyRegister = destroyWidgetOnScopeDestroy(scope, object);
+
+            if (attrs.kRebind) {
+                setupRebind(object, scope, element, originalElement, attrs.kRebind, destroyRegister);
+            }
+
+            return object;
         }
-
-        var object = ctor.call(element, OPTIONS_NOW = options).data(widget);
-
-        exposeWidget(object, scope, attrs, widget, origAttr);
-
-        scope.$emit("kendoWidgetCreated", object);
-
-        var destroyRegister = destroyWidgetOnScopeDestroy(scope, object);
-
-        if (attrs.kRebind) {
-            setupRebind(object, scope, element, originalElement, attrs.kRebind, destroyRegister);
-        }
-
-        return object;
     }
 
     function exposeWidget(widget, scope, attrs, kendoWidget, origAttr) {
@@ -494,22 +511,12 @@ var __meta__ = {
 
                     ++KENDO_COUNT;
 
-                    var kNgDelay = attrs.kNgDelay;
-
-                    $timeout(function createIt() {
-                        if (kNgDelay) {
-                            return (function(){
-                                var unregister = scope.$watch(kNgDelay, function(newValue, oldValue){
-                                    if (newValue !== oldValue) {
-                                        unregister();
-                                        kNgDelay = null;
-                                        $timeout(createIt); // XXX: won't work without `timeout` ;-\
-                                    }
-                                });
-                            })();
-                        }
-
+                    $timeout(function() {
                         var widget = createWidget(scope, element, attrs, role, origAttr);
+
+                        if (!widget) {
+                            return;
+                        }
 
                         // 2 way binding: ngModel <-> widget.value()
                         if (ngModel) {
