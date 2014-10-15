@@ -8,7 +8,7 @@
 @inverse-text-color: #fff;
 @widget-gradient: none;
 @widget-background-color: #fff;
-@widget-border-color: pink; //#e5e5e5
+@widget-border-color: #e5e5e5;
 @widget-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
 
 /* Inputs */
@@ -78,40 +78,40 @@
 @disabled-text-color: #999999;
 
 /* Notification */
-@notification-info-background-color: #e5f5fa;
-@notification-info-text-color: #0487c4;
-@notification-info-border-color: #b7e1f0;
-@notification-success-background-color: #eaf7ec;
-@notification-success-text-color: #349946;
-@notification-success-border-color: #c3e8ca;
-@notification-warning-background-color: #fff4d9;
-@notification-warning-text-color: #0487c4;
-@notification-warning-border-color: #fff0c8;
-@notification-error-background-color: #ffe0d9;
-@notification-error-text-color: #ef470a;
-@notification-error-border-color: #ffb7a8;
+@notification-info-background-color: #bbdefb;
+@notification-info-text-color: #1976d2;
+@notification-info-border-color: #bbdefb;
+@notification-success-background-color: #c8e6c9;
+@notification-success-text-color: #43a047;
+@notification-success-border-color: #c8e6c9;
+@notification-warning-background-color: #fdefba;
+@notification-warning-text-color: #f2953f;
+@notification-warning-border-color: #fdefba;
+@notification-error-background-color: #ffcdd2;
+@notification-error-text-color: #f44336;
+@notification-error-border-color: #ffcdd2;
 
 /* ToolTip */
 @tooltip-text-color: #fff;
-@tooltip-background-color: #737373;
-@tooltip-border-color: #737373;
+@tooltip-background-color: rgba(100,100,100,.9);
+@tooltip-border-color: rgba(100,100,100,.9);
 
 /* Validation Message */
-@validation-text-color: #c09853;
-@validation-background-color: #fcf8e3;
-@validation-border-color: #fbeed5;
+@validation-text-color: #f2953f;
+@validation-background-color: #fdefba;
+@validation-border-color: #fdefba;
 
 /* Splitter */
-@splitbar-background-color: @header-background-color;
+@splitbar-background-color: @button-background-color;
 
 /* Slider */
 @draghandle-border-radius: 13px;
-@draghandle-border-color: #ffffff;
-@draghandle-background-color: @widget-background-color;
+@draghandle-border-color: #cccccc;
+@draghandle-background-color: @secondary-background-color;
 @draghandle-shadow: 0 0 0 1px #c4c4c4;
 @draghandle-hover-border-color: @hover-border-color;
 @draghandle-hover-background-color: @hover-background-color;
-@draghandle-hover-shadow: none;
+@draghandle-hover-shadow: 0 0 8px 0 rgba(100,100,100,.9);
 
 /* Grid */
 @alt-background-color: #f5f5f5;
@@ -123,10 +123,10 @@
 /* Scheduler */
 @scheduler-background-color: @widget-background-color;
 @current-time-color: @error-border-color;
-@event-background-color: #0187cb;
-@event-text-color: @selected-text-color;
+@event-background-color: @header-background-color;
+@event-text-color: @header-text-color;
 @event-inverse-text-color: @widget-text-color;
-@scheduler-nonwork-background-color: #f5f5f5;
+@scheduler-nonwork-background-color: @secondary-background-color;
 @resize-background-color: #fff;
 
 /* Upload */
@@ -182,7 +182,7 @@
 @secondary-border-color: #cccccc;
 @secondary-text-color: #fff;
 @numeric-selected-background: #ebebeb;
-@panelbar-items-border: #e5e5e5;
+@panelbar-items-border: @widget-border-color;
 @panelbar-content-background: @content-background-color;
 @panelbar-content-color: @widget-text-color;
 @window-shadow-style: 1px 1px 7px 1px;
@@ -588,7 +588,7 @@ border-color: @header-background-color;
 .k-grid .k-button:hover,
 .k-scheduler .k-scheduler-toolbar .k-scheduler-views li.k-state-hover,
 .k-scheduler .k-scheduler-toolbar .k-scheduler-views li.k-state-hover .k-link,
-.k-gantt-toolbar .k-state-hover
+.k-gantt .k-gantt-views li.k-state-hover .k-link
 {
 background-color: @secondary-hover-background-color;
 border-color: @secondary-hover-background-color;
@@ -625,7 +625,10 @@ border-color: @secondary-header-background-color;
 .k-grid-header .k-header,
 .k-pager-wrap,
 .k-pager-numbers .k-state-selected,
+.k-grid-footer,
+.k-grid-footer td,
 .k-scheduler .k-scheduler-toolbar .k-state-selected {
+color: @widget-text-color;
 background-color: @secondary-background-color;
 }
 
@@ -720,9 +723,13 @@ border-color: @panelbar-items-border;
 }
 
 //Splitter
+.k-splitbar {
+	border-color: @button-border-color;
+}
+
 .k-splitbar.k-state-focused {
-background-color: @widget-background-color;
-border-color: @selected-border-color;
+background-color: @primary-button-background-color;
+border-color: @primary-button-border-color;
 .box-shadow(none);
 }
 
@@ -811,4 +818,73 @@ table.k-editor {
 .k-toolbar .k-state-selected{
 	.box-shadow(none);	
 	background-color: transparent;
+}
+
+//Progressbar
+.k-progressbar {
+	background-color: @button-background-color;
+	border-color: @button-border-color
+}
+
+.k-progressbar .k-item,
+.k-progressbar .k-item.k-state-selected {
+	border-color: @widget-background-color;
+}
+
+.k-progressbar .k-state-selected {
+	background-color: @primary-button-background-color;
+	border-color: @primary-button-border-color;
+}
+
+.k-widget.k-tooltip-validation {
+	.box-shadow(none);
+}
+
+//Pivot
+.k-grid.k-alt {
+	background-color: @secondary-background-color;
+}
+
+.k-list > .k-state-hover {
+	color: @primary-button-text-color;
+	background-color: @primary-hover-background-color;
+	border-color: @primary-hover-border-color;
+}
+
+//Slider
+.k-slider-track
+{
+    background-color: @secondary-border-color;
+    border-color: @secondary-border-color;
+}
+
+.k-slider-selection
+{
+    background-color: @primary-button-background-color;
+	border-color: @primary-button-border-color;
+}
+
+.k-slider .k-button,
+.k-slider .k-button.k-state-hover,
+.k-slider .k-button:focus,
+.k-slider .k-button:active {
+	background: none;
+	border: none;
+	.box-shadow(none);
+}
+
+.k-draghandle.k-state-selected,
+.k-draghandle.k-state-selected:link,
+.k-draghandle.k-state-selected:hover
+{
+   background-color: @draghandle-selected-background;
+   border-color: @draghandle-selected-background;
+}
+
+.k-draghandle.k-state-focused,
+.k-draghandle.k-state-focused:link
+{
+    .box-shadow(@focused-shadow);
+	border-color: @drop-down-focused-border-color;
+	background-color: @widget-background-color;
 }
