@@ -361,7 +361,18 @@
         page.drawImage(url);
     }
 
+    function exportPDF(group, options) {
+        var promise = new $.Deferred();
+
+        group.options.set("pdf", options);
+        kendo.drawing.pdf.toDataURL(group, promise.resolve);
+
+        return promise;
+    }
+
     kendo.deepExtend(kendo.drawing, {
+        exportPDF: exportPDF,
+
         pdf: {
             toDataURL  : toDataURL,
             toBlob     : toBlob,
