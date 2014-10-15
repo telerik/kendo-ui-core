@@ -38,6 +38,7 @@ var __meta__ = {
     var REMOVE = "remove";
     var DATABINDING = "dataBinding";
     var DATABOUND = "dataBound";
+    var CANCEL = "cancel";
 
     var classNames = {
         wrapper: "k-treelist k-grid k-widget",
@@ -109,7 +110,7 @@ var __meta__ = {
             text: "Cancel",
             imageClass: "k-cancel",
             className: "k-grid-cancel",
-            methodName: "cancelRow"
+            methodName: "_cancelEdit"
         }
     };
 
@@ -712,7 +713,8 @@ var __meta__ = {
             SAVE,
             REMOVE,
             DATABINDING,
-            DATABOUND
+            DATABOUND,
+            CANCEL
         ],
 
         _toggleChildren: function(e) {
@@ -1353,6 +1355,19 @@ var __meta__ = {
                 container: this.editor.element,
                 model: model
             });
+        },
+
+        _cancelEdit: function() {
+            var args = {
+                container: this.editor.wrapper,
+                model: this.editor.model
+            };
+
+            if (this.trigger(CANCEL, args)) {
+                return;
+            }
+
+            this.cancelRow();
         },
 
         cancelRow: function() {

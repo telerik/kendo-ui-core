@@ -707,4 +707,31 @@
         ok(ds.view()[1].isNew());
         ok(row.data("kendoEditable"));
     });
+
+    test("click of cancel button triggers cancel event", 2, function() {
+        createTreeList({
+            cancel: function(e) {
+                equal(e.model, this.editor.model);
+                equal(e.container[0], this.editor.element[0]);
+            },
+            columns: [ "id", "parentId", { command: [ "edit" ] } ]
+        });
+
+        instance.editRow("tr:first");
+        instance.element.find(".k-grid-cancel").click();
+    });
+
+    test("cancel event is prevented", function() {
+        createTreeList({
+            cancel: function(e) {
+                e.preventDefault();
+            },
+            columns: [ "id", "parentId", { command: [ "edit" ] } ]
+        });
+
+        instance.editRow("tr:first");
+        instance.element.find(".k-grid-cancel").click();
+
+        ok(instance.editor);
+    });
 })();
