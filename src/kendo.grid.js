@@ -1104,12 +1104,16 @@ var __meta__ = {
     }
 
     var Grid = kendo.ui.DataBoundWidget.extend({
-        init: function(element, options) {
+        init: function(element, options, events) {
             var that = this;
 
             options = isArray(options) ? { dataSource: options } : options;
 
             Widget.fn.init.call(that, element, options);
+
+            if (events) {
+                that._events = events;
+            }
 
             isRtl = kendo.support.isRtl(element);
 
@@ -1372,10 +1376,10 @@ var __meta__ = {
 
         getOptions: function() {
             var result = extend(true, {}, this.options);
-            result.columns = extend(true, [], this.columns);
+            result.columns = kendo.deepExtend([], this.columns);
             var dataSource = this.dataSource;
 
-            result.dataSource = extend(true,
+            result.dataSource = kendo.deepExtend(
                 {},
                 dataSource.options, {
                     page: dataSource.page(),
@@ -1391,20 +1395,15 @@ var __meta__ = {
 
         setOptions: function(options) {
             var currentOptions = this.getOptions();
-            extend(true, currentOptions, options);
+            kendo.deepExtend(currentOptions, options);
             var wrapper = this.wrapper;
             var events = this._events;
 
             this.destroy();
+            this.options = null;
             wrapper.empty();
 
-            this.init(wrapper, currentOptions);
-            for (var ev in events) {
-                for (var i = 0; i < events[ev].length; i++) {
-                    this.bind(ev, events[ev][i]);
-                }
-            }
-
+            this.init(wrapper, currentOptions, events);
         },
 
         items: function() {

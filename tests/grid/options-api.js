@@ -1,11 +1,13 @@
 (function() {
    var Grid = kendo.ui.Grid,
         div,
+        invoked,
         data = [{ foo: "foo", bar: "bar", baz: "baz" }],
         DataSource = kendo.data.DataSource;
 
     module("grid options api", {
         setup: function() {
+            invoked = 0;
             div = $("<div></div>").appendTo(QUnit.fixture);
         },
         teardown: function() {
@@ -143,12 +145,12 @@
             }
         });
 
-        var options = grid.setOptions({
+        grid.setOptions({
             dataSource: {
-                sort: {
+                sort: [{
                     field: "foo",
                     dir: "desc"
-                }
+                }]
             }
         });
 
@@ -158,24 +160,33 @@
     });
 
     test("preservs initial set events", function() {
-        var invoked = false;
         var grid = setup({
-            dataBound: function() { invoked = true; }
+            dataBound: function() { invoked++; }
         });
-        grid.setOptions({ sortable:true });
+        invoked = 0;
+        grid.setOptions({ sortable: true });
 
-        grid.dataSource.read();
-        equal(invoked, true);
+        equal(invoked, 1);
     });
 
     test("preservs dynamically set events", function() {
-        var invoked = false;
         var grid = setup({ });
-        grid.bind("dataBound", function() { invoked = true; });
+        grid.bind("dataBound", function() { invoked++; });
 
-        grid.setOptions({ sortable:true });
-        grid.dataSource.read();
-        equal(invoked, true);
+        invoked = 0;
+        grid.setOptions({ sortable: true });
+        equal(invoked, 1);
+    });
+
+    test("preservs initial and dynamically set events", function() {
+        var grid = setup({
+            dataBound: function() { invoked++; }
+        });
+        grid.bind("dataBound", function() { invoked++; });
+        invoked = 0;
+        grid.setOptions({ sortable: true });
+
+        equal(invoked, 2);
     });
 
 })();
