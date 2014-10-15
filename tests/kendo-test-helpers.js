@@ -41,13 +41,14 @@ function spy(that, methods) {
     if (!arguments.length) {
         var callback = function() {
             if (!callback.calls) {
-                callback.calls = 0;
                 callback.args = [];
             }
 
             callback.calls++;
             callback.args.push(Array.prototype.splice.call(arguments));
         };
+
+        callback.calls = 0;
 
         return callback;
     }

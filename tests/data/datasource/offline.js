@@ -584,4 +584,16 @@
         equal(dataSource.total(), 1);
         equal(dataSource.at(0).foo, "foo");
     });
+
+    test("read resolves promise when pushing data to offline storage", function() {
+        var dataSource = new kendo.data.DataSource({
+            offlineStorage: "key"
+        });
+
+        dataSource.online(false);
+        dataSource.read()
+            .then(function() {
+                ok(true);
+            });
+    });
 }());

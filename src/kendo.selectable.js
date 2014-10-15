@@ -54,6 +54,11 @@ var __meta__ = {
             that.relatedTarget = that.options.relatedTarget;
 
             multiple = that.options.multiple;
+
+            if (this.options.aria && multiple) {
+                that.element.attr("aria-multiselectable", true);
+            }
+
             that.userEvents = new kendo.UserEvents(that.element, {
                 global: true,
                 allowSelection: true,
@@ -381,6 +386,15 @@ var __meta__ = {
             that._marquee = that._lastActive = that.element = that.userEvents = null;
         }
     });
+
+    Selectable.parseOptions = function(selectable) {
+        var asLowerString = typeof selectable === "string" && selectable.toLowerCase();
+
+        return {
+            multiple: asLowerString && asLowerString.indexOf("multiple") > -1,
+            cell: asLowerString && asLowerString.indexOf("cell") > -1
+        };
+    };
 
     function collision(element, position) {
         var elementPosition = kendo.getOffset(element),
