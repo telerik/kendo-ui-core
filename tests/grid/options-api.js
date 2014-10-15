@@ -132,6 +132,14 @@
         equal(options.dataSource.sort[0].dir, "desc");
     });
 
+    test("getOptions retrieves the columns", function() {
+        var grid = setup();
+        equal(grid.columns.length, 3);
+        grid.setOptions({columns:[{field:"bar"}]});
+        equal(grid.columns.length, 1);
+        equal(grid.columns[0].field, "bar");
+    });
+
     test("setOptions sets the new Options and persists the current", function() {
         var grid = setup({
             dataSource: {
