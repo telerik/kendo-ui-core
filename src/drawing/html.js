@@ -1,8 +1,7 @@
 (function(f, define){
     define([
         "./shapes",
-        "./text-metrics",      // XXX: needed to measure text in IE
-        "./pdf" // XXX: for parseColor.  we shouldn't otherwise depend on this
+        "./text-metrics"
     ], f);
 })(function(){
 
@@ -17,7 +16,6 @@
     var drawing = kendo.drawing;
     var geo = kendo.geometry;
     var slice = Array.prototype.slice;
-    var pdf = drawing.pdf; // XXX: should not really depend on this.  needed for parseColor
 
     var IMAGE_CACHE = {};
 
@@ -322,7 +320,7 @@
         var dir = getPropertyValue(style, "direction");
 
         var backgroundColor = getPropertyValue(style, "background-color");
-        backgroundColor = pdf.parseColor(backgroundColor);
+        backgroundColor = kendo.parseColor(backgroundColor).toRGB();
         if (backgroundColor && backgroundColor.a === 0) {
             backgroundColor = null;     // opacity zero
         }

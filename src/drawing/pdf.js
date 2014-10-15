@@ -1,10 +1,9 @@
 (function(f, define){
     define([
         "./shapes",
-        "./color",
+        "../kendo.color",
         "../kendo.pdf",
-        "../kendo.saveas",
-        "../kendo.colorpicker" // XXX: for kendo.parseColor
+        "../kendo.saveas"
     ], f);
 })(function(){
 
@@ -18,6 +17,7 @@
 
     var Color       = kendo.drawing.Color;
     var PDF         = kendo.pdf;
+    var parseColor  = kendo.parseColor;
 
     var TEXT_RENDERING_MODE = PDF.TEXT_RENDERING_MODE;
 
@@ -173,7 +173,7 @@
 
         var color = stroke.color;
         if (color) {
-            color = parseColor(color);
+            color = parseColor(color).toRGB();
             if (color == null) {
                 return; // no stroke
             }
@@ -220,7 +220,7 @@
 
         var color = fill.color;
         if (color) {
-            color = parseColor(color);
+            color = parseColor(color).toRGB();
             if (color == null) {
                 return; // no fill
             }
@@ -356,20 +356,8 @@
         page.drawImage(url);
     }
 
-    function parseColor(color) {
-        color = color.toLowerCase();
-        if (/^(none|transparent)$/.test(color)) {
-            return null;
-        }
-        if (Color.namedColors.hasOwnProperty(color)) {
-            color = Color.namedColors[color];
-        }
-        return kendo.parseColor(color).toRGB();
-    }
-
     kendo.deepExtend(kendo.drawing, {
         pdf: {
-            parseColor : parseColor,
             toDataURL  : toDataURL,
             toBlob     : toBlob,
             saveAs     : saveAs

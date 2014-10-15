@@ -309,6 +309,7 @@
                 longdashdotdot: [8, 3.5, 1.5, 3.5, 1.5, 3.5]
             },
 
+            Color: kendo.Color,
             BaseNode: BaseNode,
             OptionsStore: OptionsStore,
             Surface: Surface,

@@ -1,10 +1,10 @@
 (function(f, define){
     define([
+        "./kendo.color",
         "./kendo.util",
         "./mixins/observers",
         "./geometry/main",
         "./drawing/core",
-        "./drawing/color",
         "./drawing/mixins",
         "./drawing/shapes",
         "./drawing/parser",
