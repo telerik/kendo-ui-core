@@ -1,0 +1,73 @@
+<div id="example">
+    <div class="demo-section k-header">
+        <div class="box-col">
+            <h4>Select a record</h4>
+            <div data-role="treelist"
+                 data-selectable="true"
+                 data-columns="[
+                                 { 'field': 'Name' },
+                                 { 'field': 'Position', 'width': 270 },
+                              ]"
+                 data-bind="source: employees,
+                            visible: isVisible,
+                            events: {
+                              select: onSelect
+                            }"
+                 style="width: 480px; height: 200px"></div>
+        </div>
+        <div class="box-col console-section">
+            <h4>Console</h4>
+            <div class="console"></div>
+        </div>
+    </div>
+    <div class="box">
+        <div class="box-col" style="width: 480px">
+            <h4>Configuration</h4>
+            <div>
+                <label><input type="checkbox" data-bind="checked: isVisible">Visible</label>
+            </div>
+        </div>
+        <div class="box-col">
+            <h4>Information</h4>
+            Kendo UI TreeList supports the
+            <a href="http://docs.telerik.com/kendo-ui/getting-started/framework/mvvm/bindings/events">events</a>,
+            <a href="http://docs.telerik.com/kendo-ui/getting-started/framework/mvvm/bindings/source">source</a> and
+            <a href="http://docs.telerik.com/kendo-ui/getting-started/framework/mvvm/bindings/visible">visible</a> bindings.
+        </div>
+    </div>
+<script>
+    var viewModel = kendo.observable({
+        isVisible: true,
+        onSelect: function(e) {
+            var widget = e.sender;
+            var dataItem = widget.dataItem(widget.select());
+            kendoConsole.log("event :: select(" + kendo.stringify(dataItem, null, 4) + ")");
+        },
+        employees: new kendo.data.TreeListDataSource({
+            data: [
+                { EmployeeID: 1, ReportsTo: null, Name: "Andrew Fuller", Position: "CEO" },
+                { EmployeeID: 2, ReportsTo: 1, Name: "Andrew Hopkins", Position: "Sales" },
+                { EmployeeID: 3, ReportsTo: 1, Name: "Betty Stewart", Position: "Legal advisor" },
+                { EmployeeID: 4, ReportsTo: 1, Name: "Jon Michaels", Position: "Product team lead" },
+                { EmployeeID: 5, ReportsTo: 1, Name: "Rebecca Williams", Position: "Software developer" },
+                { EmployeeID: 6, ReportsTo: 4, Name: "John Smith", Position: "Marketing associate" },
+                { EmployeeID: 7, ReportsTo: 4, Name: "Natasha Andrews", Position: "System administrator" },
+                { EmployeeID: 8, ReportsTo: 4, Name: "Victoria Belmont", Position: "Designer" },
+                { EmployeeID: 9, ReportsTo: 4, Name: "Emma Watkins", Position: "Software developer" }
+            ],
+            schema: {
+                model: {
+                    id: "EmployeeID",
+                    fields: {
+                        parentId: { field: "ReportsTo",  nullable: true },
+                        EmployeeID: { field: "EmployeeID", type: "number" },
+                        Name: { field: "Name", type: "string" },
+                        Position: { field: "Position", type: "string" }
+                    }
+                }
+            }
+        })
+    });
+    kendo.bind($("#example"), viewModel);
+</script>
+</div>

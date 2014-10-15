@@ -2669,8 +2669,10 @@ var __meta__ = {
                     that.selectable.destroy();
                 }
 
-                multi = typeof selectable === STRING && selectable.toLowerCase().indexOf("multiple") > -1;
-                cell = typeof selectable === STRING && selectable.toLowerCase().indexOf("cell") > -1;
+                selectable = kendo.ui.Selectable.parseOptions(selectable);
+
+                multi = selectable.multiple;
+                cell = selectable.cell;
 
                 if (that._hasDetails()) {
                     notString[notString.length] = ".k-detail-row";

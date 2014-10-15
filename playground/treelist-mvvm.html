@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title></title>
+        <script src="../src/jquery.min.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.data.odata.js"></script>
+        <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.validator.js"></script>
+        <script src="../src/kendo.binder.js"></script>
+        <script src="../src/kendo.editable.js"></script>
+        <script src="../src/kendo.dom.js"></script>
+        <script src="../src/kendo.treeview.js"></script>
+        <script src="../src/kendo.userevents.js"></script>
+        <script src="../src/kendo.selectable.js"></script>
+        <script src="../src/kendo.columnsorter.js"></script>
+        <script src="../src/kendo.treelist.js"></script>
+        <script src="../src/kendo.pager.js"></script>
+        <script src="../src/kendo.numerictextbox.js"></script>
+        <script src="../src/kendo.popup.js"></script>
+        <script src="../src/kendo.fx.js"></script>
+        <script src="../src/kendo.list.js"></script>
+        <script src="../src/kendo.dropdownlist.js"></script>
+        <script src="../src/kendo.filtermenu.js"></script>
+        <link rel="stylesheet/less" href="../styles/web/kendo.common.less"/>
+        <link rel="stylesheet/less" href="../styles/web/kendo.blueopal.less"/>
+        <script>window.less = { env: "development", logLevel: 1 };</script>
+        <script src="../demos/mvc/content/shared/js/less.js"></script>
+        <style> body { font-size: 14px; font-family: Tahoma, sans-serif; }</style>
+    </head>
+    <body>
+
+        <h3>TreeList</h3>
+        <script type="text/template" id="foo">
+            <span data-bind="text: text"></span>
+        </script>
+        <div id="list" data-role="treelist"
+            data-columns="[ { field: 'id', template: $('#foo').html() } ]"
+            data-bind="source: items"></div>
+
+        <script>
+            var viewModel = kendo.observable({
+                items: [
+                    { id: 2, parentId: 1, text: "foo" },
+                    { id: 1, parentId: null, expanded: true, text: "bar" }
+                ]
+            });
+
+            kendo.bind("body", viewModel);
+            console.log($("[data-role=treelist]").data("kendoTreeList").dataSource.data());
+        </script>
+    </body>
+</html>
+

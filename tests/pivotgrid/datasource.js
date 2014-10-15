@@ -741,6 +741,27 @@
         equal(dataSource.measures().length, 0);
     });
 
+    test("query returns promise for remote data", function() {
+        var dataSource = new PivotDataSource({
+            columns: [{ name:"[foo]", expand: true}, "[bar]"],
+            measures: ["baz"],
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    options.success({
+                        axes: { },
+                        data: []
+                    });
+                }
+            }
+        });
+
+        ok($.isFunction(dataSource.query().then));
+    });
+
     test("fetch pass measures", 2, function() {
         var callback = $.noop;
 

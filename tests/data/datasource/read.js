@@ -743,4 +743,110 @@ test("group info is not passed to the transport if servergrouping is false", 1, 
     dataSource.read();
 });
 
+test("read returns promise", function() {
+    var dataSource = new DataSource({
+        transport: {
+            read: function(options) {
+                options.success([]);
+            }
+        }
+    });
+
+    ok($.isFunction(dataSource.read().then));
+});
+
+test("read resolves promise upon success", function() {
+    var deferred = $.Deferred();
+    var dataSource = new DataSource({
+        transport: {
+            read: function(options) {
+                deferred.then(function() {
+                    options.success([]);
+                });
+            }
+        }
+    });
+
+    var readPromise = dataSource.read();
+    equal(readPromise.state(), "pending");
+
+    deferred.resolve();
+
+    equal(readPromise.state(), "resolved");
+});
+
+test("read resolves promise after data was processed", function() {
+    var deferred = $.Deferred();
+    var dataSource = new DataSource({
+        transport: {
+            read: function(options) {
+                deferred.then(function() {
+                    options.success([ { id: 1 } ]);
+                });
+            }
+        }
+    });
+
+    dataSource.read()
+        .then(function() {
+            ok(dataSource.get(1));
+        });
+
+    deferred.resolve();
+});
+
+test("read rejects promise upon error", function() {
+    var deferred = $.Deferred();
+    var dataSource = new DataSource({
+        transport: {
+            read: function(options) {
+                deferred.then(function() {
+                    options.error({});
+                });
+            }
+        }
+    });
+
+    var readPromise = dataSource.read();
+    equal(readPromise.state(), "pending");
+
+    deferred.resolve();
+
+    equal(readPromise.state(), "rejected");
+});
+
+test("read rejects promise with error arguments", function() {
+    var errorArgs = { foo: 1 };
+    var dataSource = new DataSource({
+        transport: {
+            read: function(options) {
+                options.error(errorArgs);
+            }
+        }
+    });
+
+    dataSource.read()
+        .fail(function(e) {
+            strictEqual(e, errorArgs);
+        });
+});
+
+test("read resolves promise when requestStart is prevented", 1, function() {
+    var dataSource = new DataSource({
+        transport: {
+            read: function(options) {
+                options.success([]);
+            }
+        },
+        requestStart: function(e) {
+            e.preventDefault();
+        }
+    });
+
+    dataSource.read()
+        .then(function() {
+            ok(true);
+        });
+});
+
 }());

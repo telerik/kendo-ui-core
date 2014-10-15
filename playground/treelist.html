@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title></title>
+        <script src="../src/jquery.min.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.data.odata.js"></script>
+        <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.validator.js"></script>
+        <script src="../src/kendo.binder.js"></script>
+        <script src="../src/kendo.editable.js"></script>
+        <script src="../src/kendo.dom.js"></script>
+        <script src="../src/kendo.treeview.js"></script>
+        <script src="../src/kendo.userevents.js"></script>
+        <script src="../src/kendo.selectable.js"></script>
+        <script src="../src/kendo.columnsorter.js"></script>
+        <script src="../src/kendo.treelist.js"></script>
+        <script src="../src/kendo.pager.js"></script>
+        <script src="../src/kendo.numerictextbox.js"></script>
+        <script src="../src/kendo.popup.js"></script>
+        <script src="../src/kendo.fx.js"></script>
+        <script src="../src/kendo.list.js"></script>
+        <script src="../src/kendo.dropdownlist.js"></script>
+        <script src="../src/kendo.filtermenu.js"></script>
+        <script src="../src/kendo.draganddrop.js"></script>
+        <script src="../src/kendo.window.js"></script>
+        <link rel="stylesheet/less" href="../styles/web/kendo.common.less"/>
+        <link rel="stylesheet/less" href="../styles/web/kendo.blueopal.less"/>
+        <script>window.less = { env: "development", logLevel: 1 };</script>
+        <script src="../demos/mvc/content/shared/js/less.js"></script>
+        <style> body { font-size: 14px; font-family: Tahoma, sans-serif; }</style>
+    </head>
+    <body>
+    <button class="filter">Filter on `Anne`</button>
+    <button class="clear">Clear</button>
+
+    <h3>TreeList</h3>
+    <div id="list"></div>
+        <script>
+            var service = "http://demos.telerik.com/kendo-ui/service/Northwind.svc";
+
+            var empl = {
+                type: "odata",
+                page: 1,
+                transport: {
+                    read: {
+                        url: function(parent) {
+                             // load only root nodes
+                             var filter = "?$filter=(ReportsTo eq null)";
+
+                             // ... or load multiple levels at the same time
+                             //var filter = "";
+
+                             if (parent.id) {
+                                 filter = "?$filter=(ReportsTo eq " + parent.id + ")"
+                             }
+                             return service + "/Employees" + filter;
+                         }
+                    },
+                },
+                //sort: { field: "FirstName", dir: "desc" },
+                schema: {
+                    model: {
+                        id: "EmployeeID",
+                        fields: {
+                            parentId: { field: "ReportsTo",  nullable: true },
+                            EmployeeID: { field: "EmployeeID", type: "number" },
+                            FirstName: { editable: false }
+                        },
+                        hasChildren: true,
+                        //expanded: true
+                    }
+                }
+            };
+
+            var listDS = new kendo.data.TreeListDataSource(empl);
+
+            $("#list").kendoTreeList({
+                toolbar: ["create"],
+                dataSource: listDS,
+                filterable: true,
+                editable: "popup",
+                columns: [
+                    { field: "FirstName", title: "First Name" },
+                    { field: "LastName", title: "Last Name", sortable: true },
+                    { command: ["edit", "destroy", { name: "addChild", text: "Add Child", click: cmd }] }
+                ]
+            });
+
+            function cmd(e) {
+                var treeList = $("#list").data("kendoTreeList");
+                var row = $(e.target).closest("tr");
+
+                treeList.addRow(row);
+            }
+
+            $(".filter").click(function() {
+                listDS.filter({ field: "FirstName", operator: "eq", value: "Anne" });
+            });
+
+            $(".clear").click(function() {
+                listDS.filter({});
+            });
+        </script>
+    </body>
+</html>
+

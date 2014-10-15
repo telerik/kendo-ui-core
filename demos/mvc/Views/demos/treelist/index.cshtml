@@ -1,0 +1,36 @@
+<div id="example">
+        <div class="demo-section k-header">
+            <div id="treelist"></div>
+        </div>
+
+        <script>
+            $(document).ready(function() {
+                var service = "http://demos.telerik.com/kendo-ui/service/Northwind.svc";
+
+                $("#treelist").kendoTreeList({
+                    dataSource: {
+                        type: "odata",
+                        transport: {
+                            read: {
+                                url: service + "/Employees"
+                            }
+                        },
+                        schema: {
+                            model: {
+                                id: "EmployeeID",
+                                fields: {
+                                    parentId: { field: "ReportsTo",  nullable: true },
+                                    EmployeeID: { field: "EmployeeID", type: "number" }
+                                }
+                            }
+                        }
+                    },
+                    filterable: true,
+                    columns: [
+                        { field: "FirstName", title: "First Name" },
+                        { field: "LastName", title: "Last Name", sortable: true }
+                    ]
+                });
+            });
+        </script>
+    </div>

@@ -912,7 +912,7 @@ var __meta__ = {
                 this._clearAxesData = true;
             }
 
-            that.query(extend({}, {
+            return that.query(extend({}, {
                 page: that.page(),
                 pageSize: that.pageSize(),
                 sort: that.sort(),
@@ -927,12 +927,15 @@ var __meta__ = {
 
         query: function(options) {
             var state = this._mergeState(options);
+
             if (this._data.length && this.cubeBuilder) {
                 this._params(state);
                 this._updateLocalData(this._pristineData);
-            } else {
-                this.read(state);
+
+                return $.Deferred().resolve().promise();
             }
+
+            return this.read(state);
         },
 
         _mergeState: function(options) {

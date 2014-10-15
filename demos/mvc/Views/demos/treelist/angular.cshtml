@@ -1,0 +1,47 @@
+<div id="example" ng-app="KendoDemos">
+    <div ng-controller="MyCtrl">
+        <kendo-treelist options="treelistOptions"></kendo-treelist>
+    </div>
+</div>
+
+<script>
+    angular.module("KendoDemos", [ "kendo.directives" ]);
+    function MyCtrl($scope) {
+        $scope.treelistOptions = {
+            dataSource: {
+                type: "odata",
+                transport: {
+                    read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
+                },
+                schema: {
+                    model: {
+                        id: "EmployeeID",
+                        fields: {
+                            parentId: { field: "ReportsTo",  nullable: true },
+                            EmployeeID: { field: "EmployeeID", type: "number" }
+                        }
+                    }
+                }
+            },
+            columns: [{
+                field: "FirstName",
+                title: "First Name",
+                width: "120px",
+                sortable: true
+            },{
+                field: "LastName",
+                title: "Last Name",
+                width: "120px",
+                sortable: true
+            },{
+                field: "Country",
+                width: "120px"
+            },{
+                field: "City",
+                width: "120px"
+            },{
+                field: "Title"
+            }]
+        };
+    }
+</script>

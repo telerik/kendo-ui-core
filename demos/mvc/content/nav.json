@@ -4292,6 +4292,75 @@
     "category": "Layout"
   },
   {
+    "text": "TreeList",
+    "name": "treelist",
+    "pro": "true",
+    "new": "true",
+    "api": "web/treelist",
+    "documentation": {
+       "kendo-ui": "getting-started/web/treelist/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/treelist/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/treelist/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/treelist/overview"
+    },
+    "forum": {
+       "kendo-ui": "kendo-ui/treelist",
+       "aspnet-mvc": "aspnet-mvc/treelist",
+       "jsp-ui": "jsp/treelist",
+       "php-ui": "php/treelist"
+    },
+    "codelibrary": {
+       "kendo-ui": "kendo-ui/treelist",
+       "aspnet-mvc": "aspnet-mvc/treelist",
+       "jsp-ui": "jsp/treelist",
+       "php-ui": "php/treelist"
+    },
+    "spriteCssClass": "treeListIcon",
+    "items": [
+      {
+        "text": "Basic usage",
+        "url": "treelist/index",
+        "title": {
+            "kendo-ui": "Kendo UI TreeList widget | Kendo UI Web demo"
+        },
+        "meta": {
+            "kendo-ui": "This demo illustrates the basic usage and functionality of Kendo UI jQuery TreeList widget which represents items in a hierarchical tree structure."
+        }
+      },
+      {
+        "text": "MVVM",
+        "url": "treelist/mvvm",
+        "title": {
+            "kendo-ui": "MVVM support in Kendo UI TreeList"
+        },
+        "meta": {
+            "kendo-ui": "MVVM support for Kendo UI TreeList"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
+      },
+      {
+        "text": "AngularJS",
+        "url": "treelist/angular",
+        "title": {
+            "kendo-ui": "AngularJS support in Kendo UI TreeList"
+        },
+        "meta": {
+            "kendo-ui": "AngularJS directive support for Kendo UI TreeList"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
+      }
+    ],
+    "category": "Data Management"
+  },
+  {
     "text": "TreeView",
     "name": "treeview",
     "pro": "true",
