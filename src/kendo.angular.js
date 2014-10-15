@@ -23,7 +23,6 @@ var __meta__ = {
     var module = angular.module('kendo.directives', []),
         $injector = angular.injector(['ng']),
         $parse = $injector.get('$parse'),
-        $compile = $injector.get('$compile'),
         $timeout = $injector.get('$timeout'),
         $log = $injector.get('$log');
 
@@ -94,6 +93,14 @@ var __meta__ = {
     }
 
     function createWidget(scope, element, attrs, widget, origAttr) {
+
+        var originalElement;
+
+        if (attrs.kRebind) {
+            originalElement = $($(element)[0].cloneNode(true));
+        }
+
+
         var role = widget.replace(/^kendo/, '');
         var options = angular.extend({}, attrs.defaultOptions, scope.$eval(attrs.kOptions || attrs.options));
         var ctor = $(element)[widget];
@@ -167,8 +174,17 @@ var __meta__ = {
         }
 
         var object = ctor.call(element, OPTIONS_NOW = options).data(widget);
+
         exposeWidget(object, scope, attrs, widget, origAttr);
+
         scope.$emit("kendoWidgetCreated", object);
+
+        var destroyRegister = destroyWidgetOnScopeDestroy(scope, object);
+
+        if (attrs.kRebind) {
+            setupRebind(object, scope, element, originalElement, attrs.kRebind, destroyRegister);
+        }
+
         return object;
     }
 
@@ -324,6 +340,7 @@ var __meta__ = {
                 if (widget.element) {
                     widget = kendoWidgetInstance(widget.element);
                     if (widget) {
+                        debugger;
                         widget.destroy();
                     }
                 }
@@ -404,7 +421,7 @@ var __meta__ = {
         widget.first("destroy", suspend);
     }
 
-    function setupRebind(widget, scope, originalElement, rebindAttr, destroyRegister) {
+    function setupRebind(widget, scope, element, originalElement, rebindAttr, destroyRegister) {
         // watch for changes on the expression passed in the k-rebind attribute
         var unregister = scope.$watch(rebindAttr, function(newValue, oldValue) {
             if (newValue !== oldValue) {
@@ -421,6 +438,7 @@ var __meta__ = {
 
                 var _wrapper = $(widget.wrapper)[0];
                 var _element = $(widget.element)[0];
+                var compile = element.injector().get("$compile");
                 widget.destroy();
 
                 if (destroyRegister) {
@@ -428,13 +446,13 @@ var __meta__ = {
                 }
 
                 widget = null;
+
                 if (_wrapper && _element) {
                     _wrapper.parentNode.replaceChild(_element, _wrapper);
-                    var clone = originalElement.cloneNode(true);
-                    $(element).replaceWith(clone);
-                    element = $(clone);
+                    $(element).replaceWith(originalElement);
                 }
-                $compile(element)(scope);
+
+                compile(originalElement)(scope);
             }
         }, true); // watch for object equality. Use native or simple values.
     }
@@ -492,21 +510,7 @@ var __meta__ = {
                             })();
                         }
 
-                        var originalElement;
-
-                        // if k-rebind attribute is provided, rebind the kendo widget when
-                        // the watched value changes
-                        if (attrs.kRebind) {
-                            originalElement = $(element)[0].cloneNode(true);
-                        }
-
                         var widget = createWidget(scope, element, attrs, role, origAttr);
-
-                        var destroyRegister = destroyWidgetOnScopeDestroy(scope, widget);
-
-                        if (attrs.kRebind) {
-                            setupRebind(widget, scope, originalElement, attrs.kRebind, destroyRegister);
-                        }
 
                         // 2 way binding: ngModel <-> widget.value()
                         if (ngModel) {
@@ -563,7 +567,11 @@ var __meta__ = {
     };
 
     var SKIP_SHORTCUTS = [
-        'MobileView'
+        'MobileView',
+        'MobileLayout',
+        'MobileSplitView',
+        'MobilePane',
+        'MobileModalView'
     ];
 
     var MANUAL_DIRECTIVES = [
@@ -753,8 +761,10 @@ var __meta__ = {
             }
             return;
         }
-        var scope = self.$angular_scope || angular.element(self.element).scope();
-        if (scope && $compile) {
+        var scope = self.$angular_scope || angular.element(self.element).scope(),
+            compile = $injector.get("$compile");
+
+        if (scope && compile) {
             withoutTimeout(function(){
                 var x = arg(), elements = x.elements, data = x.data;
                 if (elements.length > 0) {
@@ -782,7 +792,7 @@ var __meta__ = {
                                 }
                             }
 
-                            $compile(el)(itemScope || scope);
+                            compile(el)(itemScope || scope);
                         });
                         digest(scope);
                         break;
@@ -977,8 +987,8 @@ var __meta__ = {
         };
     }).directive('kendoMobileView', function() {
         return {
+            scope: true,
             link: {
-                scope: true,
                 pre: function(scope, element, attrs, controllers) {
                     attrs.defaultOptions = scope.viewOptions;
                     attrs._instance = createWidget(scope, element, attrs, 'kendoMobileView', 'kendoMobileView');
