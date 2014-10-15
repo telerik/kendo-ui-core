@@ -3852,17 +3852,12 @@ var __meta__ = {
 
                 that._updateChildrenField();
             }
-
-            if (this.__items && this.__items.length) {
-                this.loaded(true);
-                this.children.data(this.__items);
-            }
         },
 
         append: function(model) {
             this._initChildren();
             this.loaded(true);
-            return this.children.add(model);
+            this.children.add(model);
         },
 
         hasChildren: false,
@@ -3880,9 +3875,9 @@ var __meta__ = {
         },
 
         _updateChildrenField: function() {
-            var fieldName = this._childrenOptions.schema.data || "items";
+            var fieldName = this._childrenOptions.schema.data;
 
-            this[fieldName] = this.children.data();
+            this[fieldName || "items"] = this.children.data();
         },
 
         _childrenLoaded: function() {
@@ -3897,7 +3892,6 @@ var __meta__ = {
             var children;
 
             if (this.hasChildren) {
-
                 this._initChildren();
 
                 children = this.children;
@@ -3925,9 +3919,6 @@ var __meta__ = {
         loaded: function(value) {
             if (value !== undefined) {
                 this._loaded = value;
-                if (!value) {
-                    this.__items = undefined;
-                }
             } else {
                 return this._loaded;
             }
@@ -3966,41 +3957,6 @@ var __meta__ = {
             this._attachBubbleHandlers();
         },
 
-        _readData: function(data) {
-            data = DataSource.fn._readData.call(this, data);
-
-            return this._preprocessFlatData(data, {
-                id: this.options.schema.model.id,
-                parentId: this.options.schema.model.parentId
-            });
-        },
-
-        _preprocessFlatData: function(data, options) {
-            var idField = options.id;
-            var parentField = options.parentId;
-
-            if (data && parentField) {
-                var hash = {};
-
-                for (var i = 0; i < data.length; i++) {
-                    var item = data[i];
-                    var id = item[idField];
-                    var parentId = item[parentField];
-
-                    hash[id] = hash[id] || [];
-                    hash[parentId] = hash[parentId] || [];
-
-                    item.__items = hash[id];
-                    item.hasChildren = true;
-                    hash[parentId].push(item);
-                }
-
-                return hash[null] || hash[0] || data;
-            }
-
-            return data;
-        },
-
         _attachBubbleHandlers: function() {
             var that = this;
 
@@ -4031,25 +3987,6 @@ var __meta__ = {
 
         data: dataMethod("data"),
 
-        _parentId: function() {
-            return kendo.getter("schema.model.parentId", true)(this.options);
-        },
-
-        _addParentId: function(model) {
-            var parentNode = this.parent();
-            var parentIdField = this._parentId();
-
-            if (parentIdField) {
-                if (parentNode && parentNode._initChildren) {
-                    model[parentIdField] = parentNode.id;
-                } else {
-                    model[parentIdField] = 0;
-                }
-            }
-
-            return model;
-        },
-
         insert: function(index, model) {
             var parentNode = this.parent();
 
@@ -4058,7 +3995,7 @@ var __meta__ = {
                 parentNode._initChildren();
             }
 
-            return DataSource.fn.insert.call(this, index, this._addParentId(model));
+            return DataSource.fn.insert.call(this, index, model);
         },
 
         _find: function(method, value) {
