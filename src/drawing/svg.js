@@ -921,8 +921,16 @@
         return "url(" + baseUrl() + "#"  + id + ")";
     }
 
-    // Mappings ===============================================================
+    function exportSVG(group, options) {
+        var surface = new Surface($("<div />"), options);
+        surface.draw(group);
 
+        var promise = new $.Deferred();
+        promise.resolve(surface.svg());
+        return promise;
+    }
+
+    // Mappings ===============================================================
     var DefinitionMap = {
         clip: "clip-path"
     };
@@ -938,6 +946,8 @@
     }
 
     deepExtend(d, {
+        exportSVG: exportSVG,
+
         svg: {
             ArcNode: ArcNode,
             CircleNode: CircleNode,
