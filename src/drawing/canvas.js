@@ -473,6 +473,19 @@
         }
     });
 
+    function exportCanvas(group, options) {
+        var container = $("<div />").appendTo(document.body);
+        var surface = new Surface(container, options);
+        surface.draw(group);
+
+        var promise = new $.Deferred();
+        promise.resolve(surface.image());
+
+        container.remove();
+
+        return promise;
+    }
+
     // Helpers ================================================================
     function timestamp() {
         return new Date().getTime();
@@ -488,6 +501,8 @@
     }
 
     deepExtend(kendo.drawing, {
+        exportCanvas: exportCanvas,
+
         canvas: {
             ArcNode: ArcNode,
             CircleNode: CircleNode,

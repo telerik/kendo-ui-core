@@ -93,15 +93,6 @@
 
             surface.destroy();
         });
-
-        test("image returns base64 encoded image", function() {
-            var path = new d.Path();
-            path.moveTo(0, 0).lineTo(100, 100);
-            surface.draw(path);
-
-            var image = surface.image();
-            equal(image.indexOf("data:image/png;base64,"), 0);
-        });
     })();
 
     // ------------------------------------------------------------
@@ -1135,6 +1126,23 @@
             });
 
             imageNode.renderTo(ctx);
+        });
+    })();
+
+    // ------------------------------------------------------------
+    (function() {
+        var group;
+
+        module("exportCanvas", {
+            setup: function() {
+                group = new d.Group();
+            }
+        });
+
+        test("exports group", function() {
+            d.exportCanvas(group).done(function(data) {
+                contains(data, "data:image/png;base64,");
+            });
         });
     })();
 })();
