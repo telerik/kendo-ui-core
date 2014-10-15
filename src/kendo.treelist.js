@@ -482,8 +482,15 @@ var __meta__ = {
         init: function(element, options) {
             Editor.fn.init.call(this, element, options);
 
+            this._attachHandlers();
+
             this.open();
         },
+
+        events: [
+            CANCEL,
+            SAVE
+        ],
 
         options: {
             window: {
@@ -542,6 +549,34 @@ var __meta__ = {
             }, this.options.commandRenderer()));
         },
 
+        _attachHandlers: function() {
+            var closeHandler = this._cancelProxy = proxy(this._cancel, this);
+            this.wrapper.on(CLICK + NS, ".k-grid-cancel", this._cancelProxy);
+
+            this._saveProxy = proxy(this._save, this);
+            this.wrapper.on(CLICK + NS, ".k-grid-update", this._saveProxy);
+
+            this.window.bind("close", function(e) {
+                if (e.userTriggered) {
+                    closeHandler(e);
+                }
+            });
+        },
+
+        _dettachHandlers: function() {
+            this._cancelProxy = null;
+            this._saveProxy = null;
+            this.wrapper.off(NS);
+        },
+
+        _cancel: function(e) {
+            this.trigger(CANCEL, e);
+        },
+
+        _save: function(e) {
+            this.trigger(SAVE);
+        },
+
         open: function() {
             this.window.center().open();
         },
@@ -553,6 +588,7 @@ var __meta__ = {
         destroy: function() {
             this.window.destroy();
             this.window = null;
+            this._dettachHandlers();
 
             Editor.fn.destroy.call(this);
         }
@@ -1357,13 +1393,13 @@ var __meta__ = {
             });
         },
 
-        _cancelEdit: function() {
-            var args = {
+        _cancelEdit: function(e) {
+            e = extend(e, {
                 container: this.editor.wrapper,
                 model: this.editor.model
-            };
+            });
 
-            if (this.trigger(CANCEL, args)) {
+            if (this.trigger(CANCEL, e)) {
                 return;
             }
 
@@ -1488,6 +1524,15 @@ var __meta__ = {
                 options.fieldRenderer = this._cellContent;
 
                 this.editor = new PopupEditor(row, options);
+
+                var that = this;
+                this.editor.bind(CANCEL, function(e) {
+                    that._cancelEdit(e);
+                });
+
+                this.editor.bind(SAVE, function() {
+                    that.saveRow();
+                });
             }
         },
 
