@@ -52,15 +52,15 @@ kendo.PDFMixin = {
         var options = this.options.pdf;
 
         kendo.drawing.drawDOM(this.wrapper[0], function(root) {
-            root.options.set("pdf", options);
-
-            kendo.drawing.pdf.toDataURL(root, function(dataURI) {
-                kendo.saveAs({
-                    dataURI: dataURI,
-                    fileName: options.fileName,
-                    proxyURL: options.proxyURL
+            kendo.drawing
+                .exportPDF(root, options)
+                .done(function(dataURI) {
+                    kendo.saveAs({
+                        dataURI: dataURI,
+                        fileName: options.fileName,
+                        proxyURL: options.proxyURL
+                    });
                 });
-            });
         });
     }
 };

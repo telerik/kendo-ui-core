@@ -27,11 +27,7 @@ module("pdf mixin",  {
         QUnit.fixture.append(dom);
 
         kendo.drawing.drawDOM = function(element, callback) {
-            callback({
-                options: {
-                    set: $.noop
-                }
-            });
+            callback(new kendo.drawing.Group());
         };
 
         kendo.drawing.pdf.toDataURL = function(root, callback) {
@@ -141,13 +137,12 @@ test("saveAsPDF uses 'auto' as default paperSize", 1, function() {
     var widget = dom.kendoPDF({
     }).data("kendoPDF");
 
-    var root = {
-        options: {
-            set: function(key, options) {
-                equal(options.paperSize, "auto");
-            }
+    var root = new kendo.drawing.Group();
+    root.options.addObserver({
+        optionsChange: function(e) {
+            equal(e.value.paperSize, "auto");
         }
-    };
+    });
 
     kendo.drawing.drawDOM = function(element, callback) {
         callback(root);
@@ -159,17 +154,16 @@ test("saveAsPDF uses 'auto' as default paperSize", 1, function() {
 test("saveAsPDF passes the paperSize option", 1, function() {
     var widget = dom.kendoPDF({
         pdf: {
-            paperSize: "foo"
+            paperSize: "A3"
         }
     }).data("kendoPDF");
 
-    var root = {
-        options: {
-            set: function(key, options) {
-                equal(options.paperSize, "foo");
-            }
+    var root = new kendo.drawing.Group();
+    root.options.addObserver({
+        optionsChange: function(e) {
+            equal(e.value.paperSize, "A3");
         }
-    };
+    });
 
     kendo.drawing.drawDOM = function(element, callback) {
         callback(root);
