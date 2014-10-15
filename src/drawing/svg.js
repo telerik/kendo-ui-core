@@ -39,7 +39,7 @@
         init: function(element, options) {
             d.Surface.fn.init.call(this, element, options);
 
-            this._root = new RootNode();
+            this._root = new RootNode(this.options);
 
             renderSVG(this.element[0], this._template(this));
             this._rootElement = this.element[0].firstElementChild;
@@ -140,6 +140,16 @@
                     childNode.attachTo(element);
                 }
             }
+        },
+
+        root: function() {
+            var root = this;
+
+            while (root.parent) {
+                root = root.parent;
+            }
+
+            return root;
         },
 
         attachTo: function(domElement) {
@@ -392,8 +402,9 @@
     });
 
     var RootNode = Node.extend({
-        init: function() {
+        init: function(options) {
             Node.fn.init.call(this);
+            this.options = options;
             this.defs = new DefinitionNode();
         },
 
@@ -802,13 +813,25 @@
             return pos.clone().setY(pos.y + size.baseline);
         },
 
+        content: function() {
+            var content = this.srcElement.content();
+
+            var options = this.root().options;
+            if (options && options.encodeText) {
+                content = decodeEntities(content);
+                content = kendo.htmlEncode(content);
+            }
+
+            return content;
+        },
+
         template: renderTemplate(
             "<text #= d.renderStyle() # #= d.renderOpacity() # " +
             "x='#= this.pos().x #' y='#= this.pos().y #' " +
             "#= d.renderStroke() # " +
             "#=  d.renderTransform() # " +
             "#= d.renderDefinitions() # " +
-            "#= d.renderFill() #><tspan>#= this.srcElement.content() #</tspan></text>"
+            "#= d.renderFill() #><tspan>#= d.content() #</tspan></text>"
         )
     });
 
@@ -921,14 +944,26 @@
         return "url(" + baseUrl() + "#"  + id + ")";
     }
 
-    function exportSVG(group, options) {
-        var surface = new Surface($("<div />"), options);
+    function exportSVG(group) {
+        var surface = new Surface($("<div />"), { encodeText: true });
         surface.draw(group);
 
         var promise = new $.Deferred();
         promise.resolve(surface.svg());
         return promise;
     }
+
+    function decodeEntities(text) {
+        if (!text || !text.indexOf || text.indexOf("&") < 0) {
+            return text;
+        } else {
+            var element = decodeEntities._element;
+            element.innerHTML = text;
+            return element.textContent || element.innerText;
+        }
+    }
+
+    decodeEntities._element = document.createElement("span");
 
     // Mappings ===============================================================
     var DefinitionMap = {
