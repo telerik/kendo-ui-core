@@ -8,7 +8,7 @@
 @inverse-text-color: #fff;
 @widget-gradient: none;
 @widget-background-color: #fff;
-@widget-border-color: #f5f5f5;
+@widget-border-color: pink; //#e5e5e5
 @widget-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
 
 /* Inputs */
@@ -629,6 +629,20 @@ border-color: @secondary-header-background-color;
 background-color: @secondary-background-color;
 }
 
+.k-header,
+.k-grid-header-wrap,
+.k-grid .k-grouping-header,
+.k-grid-header,
+.k-pager-wrap,
+.k-pager-wrap .k-textbox,
+.k-pager-wrap .k-link,
+.k-gantt-toolbar .k-state-default,
+.k-grouping-row td,
+.k-group-footer td,
+.k-grid-footer td {	
+	border-color: @widget-border-color;
+}
+
 .k-pager-wrap {
 color: @widget-text-color;
 }
@@ -756,8 +770,22 @@ border-color: @accent-color;
 }
 
 //Editor
+table.k-editor {
+	border-color: @widget-border-color;
+}
+
 .k-editor.k-header {
 	background-color: @alt-background-color;
+	.box-shadow(none);
+}
+
+.k-editor-toolbar .k-tool,
+.k-group-start.k-group-end.k-tool {
+	border-color: @alt-background-color;
+	border-radius: 50%;
+}
+
+.k-editor-toolbar .k-dropdown {
 	.box-shadow(none);
 }
 
@@ -765,7 +793,7 @@ border-color: @accent-color;
 .k-toolbar .k-dropdown-wrap.k-state-default,
 .k-toolbar .k-overflow-anchor.k-state-border-down
 {
-    border-color: @alt-background-color;
+    border-color: @alt-background-color;    
 }
 
 .k-editor-toolbar .k-tool.k-state-hover,
