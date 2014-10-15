@@ -223,11 +223,11 @@ var __meta__ = {
         if (isForm(element)) {
             value = function() {
                 return formValue(element);
-            }
+            };
         } else {
             value = function() {
                 return widget.value();
-            }
+            };
         }
 
         // Angular will invoke $render when the view needs to be updated with the view value.
@@ -340,7 +340,6 @@ var __meta__ = {
                 if (widget.element) {
                     widget = kendoWidgetInstance(widget.element);
                     if (widget) {
-                        debugger;
                         widget.destroy();
                     }
                 }
