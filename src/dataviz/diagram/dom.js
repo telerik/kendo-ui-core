@@ -3,7 +3,6 @@
            "../../kendo.editable",
            "../../kendo.window",
            "../../kendo.dataviz.themes",
-           "../kendo.util",
            "./svg",
            "./services",
            "./layout" ], f);
