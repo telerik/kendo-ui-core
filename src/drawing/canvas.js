@@ -474,7 +474,16 @@
     });
 
     function exportCanvas(group, options) {
-        var container = $("<div />").appendTo(document.body);
+        options = deepExtend({
+            width: "800px", height: "600px"
+        }, options);
+
+        var container = $("<div />").css({
+            display: "none",
+            width: options.width,
+            height: options.height
+        }).appendTo(document.body);
+
         var surface = new Surface(container, options);
         surface.draw(group);
 

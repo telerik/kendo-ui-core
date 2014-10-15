@@ -1144,5 +1144,13 @@
                 contains(data, "data:image/png;base64,");
             });
         });
+
+        test("exports with set size", function() {
+            d.exportCanvas(group).done(function(small) {
+                d.exportCanvas(group, { width: "1000px", height: "500px" }).done(function(large) {
+                    ok(large.length > small.length);
+                });
+            });
+        });
     })();
 })();
