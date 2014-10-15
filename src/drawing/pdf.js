@@ -76,9 +76,14 @@
             }
             var paperSize = getOption("paperSize", "auto"), addMargin = false;
             if (paperSize == "auto") {
-                var size = group.clippedBBox().getSize();
-                paperSize = [ size.width, size.height ];
-                addMargin = true;
+                var bbox = group.clippedBBox();
+                if (bbox) {
+                    var size = bbox.getSize();
+                    paperSize = [ size.width, size.height ];
+                    addMargin = true;
+                } else {
+                    paperSize = "A4";
+                }
             }
             var pdf = new PDF.Document({
                 paperSize  : paperSize,
