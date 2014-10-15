@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.core", "./kendo.popup", "./kendo.slider", "./kendo.userevents" ], f);
+    define([ "./kendo.core", "./kendo.color", "./kendo.popup", "./kendo.slider", "./kendo.userevents" ], f);
 })(function(){
 
 var __meta__ = {
@@ -15,9 +15,10 @@ var __meta__ = {
     // == into === to make JSHint happy will break functionality.
     /*jshint eqnull:true  */
     var kendo = window.kendo,
-        Class = kendo.Class,
         ui = kendo.ui,
         Widget = ui.Widget,
+        parseColor = kendo.parseColor,
+        Color = kendo.Color,
         KEYS = kendo.keys,
         BACKGROUNDCOLOR = "background-color",
         ITEMSELECTEDCLASS = "k-state-selected",
@@ -41,7 +42,7 @@ var __meta__ = {
             Widget.fn.init.call(that, element, options);
             element = that.element;
             options = that.options;
-            that._value = options.value = parse(options.value);
+            that._value = options.value = parseColor(options.value);
             that._tabIndex = element.attr("tabIndex") || 0;
 
             ariaId = that._ariaId = options.ariaId;
@@ -65,7 +66,7 @@ var __meta__ = {
         ],
         color: function(value) {
             if (value !== undefined) {
-                this._value = parse(value);
+                this._value = parseColor(value);
                 this._updateUI(this._value);
             }
 
@@ -132,7 +133,7 @@ var __meta__ = {
     });
 
     function triggerEvent(self, type, color) {
-        color = parse(color);
+        color = parseColor(color);
         if (color && !color.equals(self.color())) {
             if (type == "change") {
                 // UI is already updated.  setting _value directly
@@ -169,7 +170,7 @@ var __meta__ = {
             }
 
             if ($.isArray(colors)) {
-                colors = $.map(colors, function(x) { return parse(x); });
+                colors = $.map(colors, function(x) { return parseColor(x); });
             }
 
             that._selectedID = (options.ariaId || kendo.guid()) + "_selected";
@@ -249,7 +250,7 @@ var __meta__ = {
                 this._current(selected);
 
                 try {
-                    var color = parse(selected.css(BACKGROUNDCOLOR));
+                    var color = parseColor(selected.css(BACKGROUNDCOLOR));
                     this._triggerSelect(color);
                 } catch(ex) {}
             }
@@ -273,7 +274,7 @@ var __meta__ = {
             var item = null;
 
             this.wrapper.find(".k-item").each(function(){
-                var c = parse($(this).css(BACKGROUNDCOLOR));
+                var c = parseColor($(this).css(BACKGROUNDCOLOR));
 
                 if (c && c.equals(color)) {
                     item = this;
@@ -319,14 +320,14 @@ var __meta__ = {
 
             that._hsvArea();
 
-            that._updateUI(that._value || new _RGB(1, 0, 0, 1));
+            that._updateUI(that._value || parseColor("#f00"));
 
             element
                 .find("input.k-color-value").on(KEYDOWN_NS, function(ev){
                     var input = this;
                     if (ev.keyCode == KEYS.ENTER) {
                         try {
-                            var color = parse(input.value);
+                            var color = parseColor(input.value);
                             var val = that.color();
                             that._select(color, color.equals(val));
                         } catch(ex) {
@@ -334,7 +335,7 @@ var __meta__ = {
                         }
                     } else if (that.options.autoupdate) {
                         setTimeout(function(){
-                            var color = parse(input.value, true);
+                            var color = parseColor(input.value, true);
                             if (color) {
                                 that._updateUI(color, true);
                             }
@@ -543,7 +544,7 @@ var __meta__ = {
             if (a == null) {
                 a = this._opacitySlider ? this._opacitySlider.value() / 100 : 1;
             }
-            return new _HSV(h, s, v, a);
+            return Color.fromHSV(h, s, v, a);
         },
         _svChange: function(s, v) {
             var color = this._getHSV(null, s, v, null);
@@ -573,7 +574,7 @@ var __meta__ = {
                 top: (1 - color.v) * rect.height() + "px"
             });
 
-            that._hueElements.css(BACKGROUNDCOLOR, new _HSV(color.h, 1, 1, 1).toCss());
+            that._hueElements.css(BACKGROUNDCOLOR, Color.fromHSV(color.h, 1, 1, 1).toCss());
             that._hueSlider.value(color.h);
 
             if (that._opacitySlider) {
@@ -597,196 +598,6 @@ var __meta__ = {
             '# } #'
         )
     });
-
-    /* -----[ color utils ]----- */
-
-    function hex(n, width, pad) {
-        if (!pad) { pad = "0"; }
-        n = n.toString(16);
-        while (width > n.length) {
-            n = "0" + n;
-        }
-        return n;
-    }
-
-    function fixed(n) {
-        return parseFloat((+n).toFixed(3));
-    }
-
-    var Color = Class.extend({
-        toHSV: function() { return this; },
-        toRGB: function() { return this; },
-        toHex: function() { return this.toBytes().toHex(); },
-        toBytes: function() { return this; },
-        toCss: function() { return "#" + this.toHex(); },
-        toCssRgba: function() {
-            var rgb = this.toBytes();
-            return "rgba(" + rgb.r + ", " + rgb.g + ", " + rgb.b + ", " + fixed(this.a) + ")";
-        },
-        toDisplay: function() {
-            if (isIE8) {
-                return this.toCss(); // no RGBA support; does it support any opacity in colors?
-            }
-            return this.toCssRgba();
-        },
-        equals: function(c) { return c === this || c !== null && this.toCssRgba() == parse(c).toCssRgba(); },
-        diff: function(c2) {
-            if (c2 == null) {
-                return NaN;
-            }
-            var c1 = this.toBytes();
-            c2 = c2.toBytes();
-            return Math.sqrt(Math.pow((c1.r - c2.r) * 0.30, 2) +
-                             Math.pow((c1.g - c2.g) * 0.59, 2) +
-                             Math.pow((c1.b - c2.b) * 0.11, 2));
-        },
-        clone: function() {
-            var c = this.toBytes();
-            if (c === this) {
-                c = new _Bytes(c.r, c.g, c.b, c.a);
-            }
-            return c;
-        }
-    });
-
-    var _RGB = Color.extend({
-        init: function(r, g, b, a) {
-            this.r = r; this.g = g; this.b = b; this.a = a;
-        },
-        toHSV: function() {
-            var min, max, delta, h, s, v;
-            var r = this.r, g = this.g, b = this.b;
-            min = Math.min(r, g, b);
-            max = Math.max(r, g, b);
-            v = max;
-            delta = max - min;
-            if (delta === 0) {
-                return new _HSV(0, 0, v, this.a);
-            }
-            if (max !== 0) {
-                s = delta / max;
-                if (r == max) {
-                    h = (g - b) / delta;
-                } else if (g == max) {
-                    h = 2 + (b - r) / delta;
-                } else {
-                    h = 4 + (r - g) / delta;
-                }
-                h *= 60;
-                if (h < 0) {
-                    h += 360;
-                }
-            } else {
-                s = 0;
-                h = -1;
-            }
-            return new _HSV(h, s, v, this.a);
-        },
-        toBytes: function() {
-            return new _Bytes(this.r * 255, this.g * 255, this.b * 255, this.a);
-        }
-    });
-
-    var _Bytes = _RGB.extend({
-        init: function(r, g, b, a) {
-            this.r = Math.round(r); this.g = Math.round(g); this.b = Math.round(b); this.a = a;
-        },
-        toRGB: function() {
-            return new _RGB(this.r / 255, this.g / 255, this.b / 255, this.a);
-        },
-        toHSV: function() {
-            return this.toRGB().toHSV();
-        },
-        toHex: function() {
-            return hex(this.r, 2) + hex(this.g, 2) + hex(this.b, 2);
-        },
-        toBytes: function() {
-            return this;
-        }
-    });
-
-    var _HSV = Color.extend({
-        init: function(h, s, v, a) {
-            this.h = h; this.s = s; this.v = v; this.a = a;
-        },
-        toRGB: function() {
-            var h = this.h, s = this.s, v = this.v;
-            var i, r, g, b, f, p, q, t;
-            if (s === 0) {
-                r = g = b = v;
-            } else {
-                h /= 60;
-                i = Math.floor(h);
-                f = h - i;
-                p = v * (1 - s);
-                q = v * (1 - s * f);
-                t = v * (1 - s * (1 - f));
-                switch (i) {
-                  case 0  : r = v; g = t; b = p; break;
-                  case 1  : r = q; g = v; b = p; break;
-                  case 2  : r = p; g = v; b = t; break;
-                  case 3  : r = p; g = q; b = v; break;
-                  case 4  : r = t; g = p; b = v; break;
-                  default : r = v; g = p; b = q; break;
-                }
-            }
-            return new _RGB(r, g, b, this.a);
-        },
-        toBytes: function() {
-            return this.toRGB().toBytes();
-        }
-    });
-
-    function parse(color, nothrow) {
-        if (color == null ||
-            color == "transparent" /* IE8 does this */)
-        {
-            return null;
-        }
-        if (color instanceof Color) {
-            return color;
-        }
-        var m = /^#?([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i.exec(color);
-        if (m) {
-            return new _Bytes(parseInt(m[1], 16),
-                              parseInt(m[2], 16),
-                              parseInt(m[3], 16), 1);
-        }
-        m = /^#?([0-9a-f])([0-9a-f])([0-9a-f])$/i.exec(color);
-        if (m) {
-            return new _Bytes(parseInt(m[1] + m[1], 16),
-                              parseInt(m[2] + m[2], 16),
-                              parseInt(m[3] + m[3], 16), 1);
-        }
-        m = /^rgb\(\s*([0-9]+)\s*,\s*([0-9]+)\s*,\s*([0-9]+)\s*\)/.exec(color);
-        if (m) {
-            return new _Bytes(parseInt(m[1], 10),
-                              parseInt(m[2], 10),
-                              parseInt(m[3], 10), 1);
-        }
-        m = /^rgba\(\s*([0-9]+)\s*,\s*([0-9]+)\s*,\s*([0-9]+)\s*,\s*([0-9.]+)\s*\)/.exec(color);
-        if (m) {
-            return new _Bytes(parseInt(m[1], 10),
-                              parseInt(m[2], 10),
-                              parseInt(m[3], 10), parseFloat(m[4]));
-        }
-        m = /^rgb\(\s*([0-9]*\.?[0-9]+)%\s*,\s*([0-9]*\.?[0-9]+)%\s*,\s*([0-9]*\.?[0-9]+)%\s*\)/.exec(color);
-        if (m) {
-            return new _RGB(parseFloat(m[1]) / 100,
-                            parseFloat(m[2]) / 100,
-                            parseFloat(m[3]) / 100, 1);
-        }
-        m = /^rgba\(\s*([0-9]*\.?[0-9]+)%\s*,\s*([0-9]*\.?[0-9]+)%\s*,\s*([0-9]*\.?[0-9]+)%\s*,\s*([0-9.]+)\s*\)/.exec(color);
-        if (m) {
-            return new _RGB(parseFloat(m[1]) / 100,
-                            parseFloat(m[2]) / 100,
-                            parseFloat(m[3]) / 100, parseFloat(m[4]));
-        }
-        if (!nothrow) {
-            throw new Error("Cannot parse color: " + color);
-        }
-        return undefined;
-    }
 
     function relative(array, element, delta) {
         array = Array.prototype.slice.call(array);
@@ -815,9 +626,9 @@ var __meta__ = {
 
             var value = element.attr("value") || element.val();
             if (value) {
-                value = parse(value, true);
+                value = parseColor(value, true);
             } else {
-                value = parse(options.value, true);
+                value = parseColor(options.value, true);
             }
             that._value = options.value = value;
 
@@ -1025,7 +836,7 @@ var __meta__ = {
 
                 selector.bind({
                     select: function(ev){
-                        that._updateUI(parse(ev.value));
+                        that._updateUI(parseColor(ev.value));
                     },
                     change: function(){
                         that._select(selector.color());
@@ -1079,19 +890,6 @@ var __meta__ = {
     ui.plugin(ColorPalette);
     ui.plugin(FlatColorPicker);
     ui.plugin(ColorPicker);
-
-    kendo.parseColor = parse;
-    kendo.Color = {
-        fromBytes: function(r, g, b, a) {
-            return new _Bytes(r, g, b, a != null ? a : 1);
-        },
-        fromRGB: function(r, g, b, a) {
-            return new _RGB(r, g, b, a != null ? a : 1);
-        },
-        fromHSV: function(h, s, v, a) {
-            return new _HSV(h, s, v, a != null ? a : 1);
-        }
-    };
 
 })(jQuery, parseInt);
 
