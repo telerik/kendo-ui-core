@@ -244,6 +244,8 @@ var __meta__ = {
                 this.pane.navigate("");
                 this.popup.popup._position();
                 this.initialOpen = true;
+            } else {
+                this.pane.view()._invokeNgController();
             }
         },
 
