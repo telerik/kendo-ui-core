@@ -2538,11 +2538,17 @@ function pad(number, digits, end) {
         },
 
         directiveSelector: function(directives) {
-            return directives
-                    .replace("modalview", "modal-view")
-                    .replace("splitview", "split-view")
-                    .replace(/(\S+)/g, "kendo-mobile-$1,")
-                    .slice(0, -1);
+            var selectors = directives.split(" ");
+
+            if (selectors) {
+                for (var i = 0; i < selectors.length; i++) {
+                    if (selectors[i] != "view") {
+                        selectors[i] = selectors[i].replace(/(\w*)(view|bar|strip|over)$/, "$1-$2");
+                    }
+                }
+            }
+
+            return selectors.join(" ").replace(/(\S+)/g, "kendo-mobile-$1,").slice(0, -1);;
         },
 
         triggeredByInput: function(e) {
