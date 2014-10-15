@@ -1109,7 +1109,18 @@ var __meta__ = {
 
             options = isArray(options) ? { dataSource: options } : options;
 
+            var dataSource = options ? options.dataSource : null;
+
+            if (dataSource) {
+                // avoid deep cloning the data source
+                options = extend({}, options, { dataSource: {} });
+            }
+
             Widget.fn.init.call(that, element, options);
+
+            if (dataSource) {
+                that.options.dataSource = dataSource;
+            }
 
             isRtl = kendo.support.isRtl(element);
 
