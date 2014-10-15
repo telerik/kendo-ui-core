@@ -6,11 +6,15 @@
     module("TreeList popup editing", {
         setup: function() {
            dom = $("<div />").appendTo(QUnit.fixture);
+
+            kendo.effects.disable();
         },
         teardown: function() {
             kendo.destroy(QUnit.fixture);
 
             dom = instance = null;
+
+            kendo.effects.enable();
         }
     });
 
@@ -57,7 +61,7 @@
         ok(instance.editor.wrapper.is(":visible"));
     });
 
-    test("destroy of editor destroys the window", function() {
+    test("close of editor destroys the window", function() {
         createTreeList();
 
         instance.editRow(instance.content.find("tr").first());

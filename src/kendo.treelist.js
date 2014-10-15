@@ -466,6 +466,10 @@ var __meta__ = {
             return this.editable.end();
         },
 
+        close: function() {
+            this.destroy();
+        },
+
         destroy: function() {
             this.editable.destroy();
             this.editable.element.find("[" + kendo.attr("container-for") + "]").empty();
@@ -541,8 +545,12 @@ var __meta__ = {
             this.window.center().open();
         },
 
+        close: function() {
+            this.window.bind("deactivate", proxy(this.destroy, this)).close();
+        },
+
         destroy: function() {
-            this.window.close().destroy();
+            this.window.destroy();
             this.window = null;
 
             Editor.fn.destroy.call(this);
@@ -1439,7 +1447,7 @@ var __meta__ = {
                 return;
             }
 
-            this.editor.destroy();
+            this.editor.close();
             this.editor = null;
         },
 
