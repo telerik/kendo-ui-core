@@ -523,7 +523,7 @@ var __meta__ = {
     function columnParent(column, columns) {
         var parents = [];
         columnParents(column, columns, parents);
-        return parents[0];
+        return parents[parents.length - 1];
     }
 
     function columnParents(column, columns, parents) {
@@ -655,12 +655,16 @@ var __meta__ = {
 
     function flatColumns(columns) {
         var result = [];
+        var children = [];
         for (var idx = 0; idx < columns.length; idx++) {
             result.push(columns[idx]);
             if (columns[idx].columns) {
-                result = result.concat(flatColumns(columns[idx].columns));
+                children = children.concat(columns[idx].columns);
             }
 
+        }
+        if (children.length) {
+            result = result.concat(flatColumns(children));
         }
         return result;
     }
@@ -1719,24 +1723,38 @@ var __meta__ = {
                     that.wrapper.data("kendoReorderable").destroy();
                 }
 
+                var targetParentContainerIndex = function(columns, sourceIndex, targetIndex) {
+                    var column = columns[sourceIndex];
+                    var target = columns[targetIndex];
+
+                    var parent = columnParent(column, that.columns);
+                    columns = parent ? parent.columns : that.columns;
+
+                    return inArray(target, columns);
+                }
+
                 that.wrapper.kendoReorderable({
                     draggable: that._draggableInstance,
-                    dragOverContainers: function(index) {
-                        return that.columns[index].lockable !== false;
+                    dragOverContainers: function(sourceIndex, targetIndex) {
+                        var columns = flatColumns(that.columns);
+                        return columns[sourceIndex].lockable !== false && targetParentContainerIndex(columns, sourceIndex, targetIndex) > -1;
                     },
-                    inSameContainer: function(x, y) {
-                        return $(x).parent()[0] === $(y).parent()[0];
+                    inSameContainer: function(e) {
+                        return $(e.source).parent()[0] === $(e.target).parent()[0]
+                            && targetParentContainerIndex(flatColumns(that.columns), e.sourceIndex, e.targetIndex) > -1;
                     },
                     change: function(e) {
-                        var column = that.columns[e.oldIndex];
+                        var columns = flatColumns(that.columns);
+                        var column = columns[e.oldIndex];
+                        var newIndex = targetParentContainerIndex(columns, e.oldIndex, e.newIndex);
 
                         that.trigger(COLUMNREORDER, {
-                            newIndex: e.newIndex,
-                            oldIndex: inArray(column, that.columns),
+                            newIndex: newIndex,
+                            oldIndex: inArray(column, columns),
                             column: column
                         });
 
-                        that.reorderColumn(e.newIndex, column, e.position === "before");
+                        that.reorderColumn(newIndex, column, e.position === "before");
                     }
                 });
             }
@@ -4867,7 +4885,7 @@ var __meta__ = {
             that.lockedFooter = html.prependTo(footer);
         },
 
-        _childColumns: function(cell) {
+        _childColumnsCells: function(cell) {
             var container = this.thead;
             var result = $().add(cell);
 
@@ -4903,7 +4921,7 @@ var __meta__ = {
                 idx = 0;
                 while (idx < colSpan) {
                     child = cells.eq(idx + (offset - 1));
-                    result = result.add(this._childColumns(child));
+                    result = result.add(this._childColumnsCells(child));
                     var value = parseInt(child.attr(colSpanAttr), 10);
                     if (value > 1) {
                         colSpan -= value - 1;
@@ -4961,7 +4979,7 @@ var __meta__ = {
                         colOffset += colSpan - 1;
                     }
 
-                    mapColumnToCellRows([columns[idx]], that._childColumns(cell), 0, rows, 0);
+                    mapColumnToCellRows([columns[idx]], that._childColumnsCells(cell), 0, rows, 0);
 
                     leafColumnsCount = leafColumnsCount || 1;
                     for (var j = 0; j < leafColumnsCount; j++) {

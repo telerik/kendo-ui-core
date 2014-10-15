@@ -227,8 +227,8 @@
         var reorderable = new Reorderable(div, {
             filter: ">div>*",
             hint: $("<div />"),
-            inSameContainer: function(x, y) {
-                return $(x).parent()[0] == $(y).parent()[0];
+            inSameContainer: function(e) {
+                return $(e.source).parent()[0] == $(e.target).parent()[0];
             }
         }),
         target = div.find(">div:eq(0)>div:last");
@@ -247,8 +247,8 @@
         var reorderable = new Reorderable(div, {
             filter: ">div>*",
             hint: $("<div />"),
-            inSameContainer: function(x, y) {
-                return $(x).parent()[0] == $(y).parent()[0];
+            inSameContainer: function(e) {
+                return $(e.source).parent()[0] == $(e.target).parent()[0];
             }
         }),
         target = div.find(">div:eq(0)>div:last");
@@ -330,7 +330,7 @@
             hint: function() {
                 return hint;
             },
-            inSameContainer: function(x, y) {
+            inSameContainer: function(e) {
                 return false;
             },
             dragOverContainers: function() {
@@ -351,7 +351,7 @@
             hint: function() {
                 return hint;
             },
-            inSameContainer: function(x, y) {
+            inSameContainer: function(e) {
                 return true;
             },
             dragOverContainers: function() {
@@ -369,7 +369,7 @@
     test("change event is not triggered when drag over containers is not allowed", function() {
         var wasCalled = false;
         var reorderable = new Reorderable(div, {
-            inSameContainer: function(x, y) {
+            inSameContainer: function(e) {
                 return false;
             },
             dragOverContainers: function() {
@@ -389,8 +389,8 @@
     test("change event is triggered when drag over containers is allowed", function() {
         var wasCalled = false;
         var reorderable = new Reorderable(div, {
-            inSameContainer: function(x, y) {
-                return $(x).parent()[0] == $(y).parent()[0];
+            inSameContainer: function(e) {
+                return $(e.source).parent()[0] == $(e.target).parent()[0];
             },
             dragOverContainers: function() {
                 return true;

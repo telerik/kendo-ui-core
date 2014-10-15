@@ -61,7 +61,12 @@ var __meta__ = {
                         offset = getOffset(dropTarget);
                         var left = offset.left;
 
-                        if (options.inSameContainer && !options.inSameContainer(dropTarget, that._draggable)) {
+                        if (options.inSameContainer && !options.inSameContainer({
+                            source: dropTarget,
+                            target: that._draggable,
+                            sourceIndex: that._index(dropTarget),
+                            targetIndex: that._index(that._draggable)
+                        })) {
                             that._dropTarget = dropTarget;
                         } else {
                             if (that._index(dropTarget) > that._index(that._draggable)) {
@@ -94,6 +99,7 @@ var __meta__ = {
                     if (that._dropTargetAllowed(dropTarget) && !that._isLastDraggable()) {
                         that.trigger(CHANGE, {
                             element: that._draggable,
+                            target: dropTarget,
                             oldIndex: that._index(draggable),
                             newIndex: that._index(dropTarget),
                             position: getOffset(that.reorderDropCue).left > getOffset(dropTarget).left ? "after" : "before"
@@ -158,7 +164,12 @@ var __meta__ = {
 
             while (!found && elements.length > 0) {
                 item = elements.pop();
-                found = draggable !== item && inSameContainer(draggable, item);
+                found = draggable !== item && inSameContainer({
+                    source: draggable,
+                    target: item,
+                    sourceIndex: this._index(draggable),
+                    targetIndex: this._index(item)
+                });
             }
 
             return !found;
@@ -177,18 +188,18 @@ var __meta__ = {
                 return true;
             }
 
-            if (inSameContainer(draggable, dropTarget)) {
+            if (inSameContainer({ source: draggable,
+                target: dropTarget,
+                sourceIndex: this._index(draggable),
+                targetIndex: this._index(dropTarget)
+            })) {
                 return true;
             }
 
-            return dragOverContainers(this._index(draggable));
+            return dragOverContainers(this._index(draggable), this._index(dropTarget));
         },
 
         _index: function(element) {
-            var indexAttr = kendo.attr("index");
-            if (element.filter("[" + indexAttr + "]").length) {
-               return parseInt(element.attr(indexAttr), 10);
-            }
             return this._elements.index(element);
         },
 
