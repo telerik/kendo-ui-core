@@ -1398,12 +1398,19 @@ var __meta__ = {
             kendo.deepExtend(currentOptions, options);
             var wrapper = this.wrapper;
             var events = this._events;
+            var element = this.element;
 
             this.destroy();
             this.options = null;
-            wrapper.empty();
+            if (wrapper[0] !== element[0]) {
+                wrapper.before(element);
+                wrapper.remove();
+            }
+            element.empty();
 
-            this.init(wrapper, currentOptions, events);
+            this.init(element, currentOptions, events);
+            this._setEvents(currentOptions);
+
         },
 
         items: function() {
