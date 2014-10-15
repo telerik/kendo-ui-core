@@ -586,7 +586,6 @@ var __meta__ = {
             return {
                 restrict: "A",
                 link: function(scope, element, attrs, controllers) {
-                    debugger;
                     createWidget(scope, element, attrs, widget, widget);
                 }
             };
