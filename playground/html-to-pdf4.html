@@ -136,7 +136,7 @@ $(function() {
       function draw(sel, type) {
         var el = $(sel)[0];
         console.time("drawing");
-        kendo.dataviz.drawing.drawDOM(el, function(root){
+        kendo.dataviz.drawing.drawDOM(el).done(function(root){
           console.timeEnd("drawing");
           var surface = kendo.dataviz.drawing.Surface.create(container(), { type: type || "svg" });
           surface.draw(root);
@@ -146,7 +146,7 @@ $(function() {
       function pdf(sel) {
         var el = $(sel)[0];
         console.time("pdf");
-        kendo.dataviz.drawing.drawDOM(el, function(root){
+        kendo.dataviz.drawing.drawDOM(el).done(function(root){
           kendo.dataviz.drawing.pdf.saveAs(root, "html-to-pdf4.pdf", "http://kendo.local:7569/", function(){
             console.timeEnd("pdf");
           });

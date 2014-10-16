@@ -26,8 +26,8 @@ module("pdf mixin",  {
 
         QUnit.fixture.append(dom);
 
-        kendo.drawing.drawDOM = function(element, callback) {
-            callback(new kendo.drawing.Group());
+        kendo.drawing.drawDOM = function(element) {
+            return $.Deferred().resolve(new kendo.drawing.Group()).promise();
         };
 
         kendo.drawing.pdf.toDataURL = function(root, callback) {
@@ -62,6 +62,7 @@ test("saveAsPDF calls drawDOM with the widget wrapper", 1, function() {
 
     kendo.drawing.drawDOM = function(element) {
         strictEqual(element, widget.wrapper[0]);
+        return $.Deferred().promise();
     };
 
     widget.saveAsPDF();
@@ -144,8 +145,8 @@ test("saveAsPDF uses 'auto' as default paperSize", 1, function() {
         }
     });
 
-    kendo.drawing.drawDOM = function(element, callback) {
-        callback(root);
+    kendo.drawing.drawDOM = function(element) {
+        return $.Deferred().resolve(root).promise();
     }
 
     widget.saveAsPDF();
@@ -166,7 +167,7 @@ test("saveAsPDF passes the paperSize option", 1, function() {
     });
 
     kendo.drawing.drawDOM = function(element, callback) {
-        callback(root);
+        return $.Deferred().resolve(root).promise();
     }
 
     widget.saveAsPDF();

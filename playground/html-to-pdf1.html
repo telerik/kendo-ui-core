@@ -220,7 +220,7 @@
         <!--         kendo.dataviz.drawing.pdf.toDataURL(root, window.open); -->
         <!--     } -->
         <!-- }); -->
-        kendo.dataviz.drawing.drawDOM(document.body, function(root){
+        kendo.dataviz.drawing.drawDOM(document.body).done(function(root){
           kendo.dataviz.drawing.pdf.toDataURL(root, function(url){
             kendo.saveAs({ dataURI: url, fileName: "html-to-pdf1.pdf", proxyURL: "http://kendo.local:7569/" });
           });

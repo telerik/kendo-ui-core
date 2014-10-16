@@ -108,7 +108,7 @@
         });
 
         $("#pdf").click(function() {
-            kendo.dataviz.drawing.drawDOM($("#grid")[0], function(root){
+            kendo.dataviz.drawing.drawDOM($("#grid")[0]).done(function(root){
                 root.options.set("pdf", {
                     paperSize: "auto",
                     margins: {

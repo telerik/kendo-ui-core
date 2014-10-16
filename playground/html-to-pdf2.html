@@ -87,7 +87,7 @@
 
       function getPDF(sel) {
         var el = getEl(sel)[0];
-        kendo.dataviz.drawing.drawDOM(el, function(root){
+        kendo.dataviz.drawing.drawDOM(el).done(function(root){
           root.options.set("pdf", {
             paperSize: "auto",
             margins: {
@@ -106,7 +106,7 @@
 
       function draw(sel) {
         var el = getEl(sel)[0];
-        kendo.dataviz.drawing.drawDOM(el, function(root){
+        kendo.dataviz.drawing.drawDOM(el).done(function(root){
           window.x = root;
           var el = $("<div class='surface' style='position: absolute; background: white; right: 1em; top: 1em; bottom: 1em; border: 1px solid #000; width: 600px'></div>").appendTo(document.body);
           var surface = kendo.dataviz.drawing.Surface.create(el);

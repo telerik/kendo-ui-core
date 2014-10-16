@@ -51,16 +51,16 @@ kendo.PDFMixin = {
 
         var options = this.options.pdf;
 
-        kendo.drawing.drawDOM(this.wrapper[0], function(root) {
-            kendo.drawing
-                .exportPDF(root, options)
-                .done(function(dataURI) {
-                    kendo.saveAs({
-                        dataURI: dataURI,
-                        fileName: options.fileName,
-                        proxyURL: options.proxyURL
-                    });
-                });
+        kendo.drawing.drawDOM(this.wrapper[0])
+        .then(function(root) {
+            return kendo.drawing.exportPDF(root, options);
+        })
+        .done(function(dataURI) {
+            kendo.saveAs({
+                dataURI: dataURI,
+                fileName: options.fileName,
+                proxyURL: options.proxyURL
+            });
         });
     }
 };

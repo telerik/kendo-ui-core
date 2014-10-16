@@ -6,7 +6,7 @@ function container() {
 window.draw = function draw(sel, type) {
     var el = $(sel)[0];
     console.time("drawing");
-    kendo.dataviz.drawing.drawDOM(el, function(root){
+    kendo.dataviz.drawing.drawDOM(el).done(function(root){
         console.timeEnd("drawing");
         var surface = kendo.dataviz.drawing.Surface.create(container(), { type: type || "svg" });
         surface.draw(root);
@@ -16,7 +16,7 @@ window.draw = function draw(sel, type) {
 window.pdf = function pdf(sel) {
     var el = $(sel)[0];
     console.time("pdf");
-    kendo.dataviz.drawing.drawDOM(el, function(root){
+    kendo.dataviz.drawing.drawDOM(el).done(function(root){
         root.options.set("pdf", {
             paperSize: "auto",
             margin: {

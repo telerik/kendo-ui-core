@@ -14,7 +14,7 @@
 
     test("[drawDOM] simple text node", function(){
         container.html("<span style='font: bold 16px monospace'>Foo bar</span>");
-        drawing.drawDOM(container[0], function(group){
+        drawing.drawDOM(container[0]).done(function(group){
             var text = find(group, function(node){
                 return node instanceof drawing.Text;
             });
@@ -26,7 +26,7 @@
 
     test("[drawDOM] CSS borders", function(){
         container.html("<div style='border: 2px solid red; width: 100px; height: 200px'></div>");
-        drawing.drawDOM(container[0], function(group){
+        drawing.drawDOM(container[0]).done(function(group){
             // a simple border where all edges have the same colors, widths and no corner radiuses
             // will be rendered as a single Path.
             var path = findMany(group, function(node){

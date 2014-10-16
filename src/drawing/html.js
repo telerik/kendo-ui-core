@@ -5,7 +5,7 @@
     ], f);
 })(function(){
 
-(function(parseFloat, Math){
+(function($, parseFloat, Math){
 
     "use strict";
 
@@ -21,7 +21,9 @@
 
     /* -----[ exports ]----- */
 
-    drawing.drawDOM = function(element, cont) {
+    drawing.drawDOM = function(element) {
+        var defer = $.Deferred();
+
         cacheImages(element, function(){
             var group = new drawing.Group();
 
@@ -30,8 +32,10 @@
             setTransform(group, [ 1, 0, 0, 1, -pos.left, -pos.top ]);
 
             renderElement(element, group);
-            cont(group);
+            defer.resolve(group);
         });
+
+        return defer.promise();
     };
 
     var nodeInfo = {};
@@ -1068,6 +1072,6 @@
         ];
     }
 
-})(parseFloat, Math);
+})(window.kendo.jQuery, parseFloat, Math);
 
 }, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });
