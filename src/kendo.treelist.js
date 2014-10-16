@@ -38,6 +38,7 @@ var __meta__ = {
     var REMOVE = "remove";
     var DATABINDING = "dataBinding";
     var DATABOUND = "dataBound";
+    var CANCEL = "cancel";
 
     var classNames = {
         wrapper: "k-treelist k-grid k-widget",
@@ -109,7 +110,7 @@ var __meta__ = {
             text: "Cancel",
             imageClass: "k-cancel",
             className: "k-grid-cancel",
-            methodName: "cancelRow"
+            methodName: "_cancelEdit"
         }
     };
 
@@ -411,18 +412,22 @@ var __meta__ = {
         init: function(element, options) {
             kendo.Observable.fn.init.call(this);
 
-            this.options = extend(true, {}, this.options, options);
+            options = this.options = extend(true, {}, this.options, options);
 
             this.element = element;
 
-            this.model = this.options.model;
+            this.bind(this.events, options);
 
-            this._initContainer();
+            this.model = this.options.model;
 
             this.fields = this._fields(this.options.columns);
 
+            this._initContainer();
+
             this.createEditable();
         },
+
+        events: [],
 
         _initContainer: function() {
             this.wrapper = this.element;
@@ -466,6 +471,10 @@ var __meta__ = {
             return this.editable.end();
         },
 
+        close: function() {
+            this.destroy();
+        },
+
         destroy: function() {
             this.editable.destroy();
             this.editable.element.find("[" + kendo.attr("container-for") + "]").empty();
@@ -477,8 +486,15 @@ var __meta__ = {
         init: function(element, options) {
             Editor.fn.init.call(this, element, options);
 
+            this._attachHandlers();
+
             this.open();
         },
+
+        events: [
+            CANCEL,
+            SAVE
+        ],
 
         options: {
             window: {
@@ -497,12 +513,29 @@ var __meta__ = {
 
             var formContent = [];
 
-            this._appendFields(formContent);
+            if (this.options.template) {
+                this._appendTemplate(formContent);
+                this.fields = [];
+            } else {
+                this._appendFields(formContent);
+            }
             this._appendButtons(formContent);
 
             new kendoDom.Tree(this.wrapper.children()[0]).render(formContent);
 
             this.window = new ui.Window(this.wrapper, this.options.window);
+        },
+
+        _appendTemplate: function(form) {
+            var template = this.options.template;
+
+            if (typeof template === STRING) {
+                template = window.unescape(template);
+            }
+
+            template = kendo.template(template)(this.model);
+
+            form.push(kendoHtmlElement(template));
         },
 
         _appendFields: function(form) {
@@ -537,13 +570,46 @@ var __meta__ = {
             }, this.options.commandRenderer()));
         },
 
+        _attachHandlers: function() {
+            var closeHandler = this._cancelProxy = proxy(this._cancel, this);
+            this.wrapper.on(CLICK + NS, ".k-grid-cancel", this._cancelProxy);
+
+            this._saveProxy = proxy(this._save, this);
+            this.wrapper.on(CLICK + NS, ".k-grid-update", this._saveProxy);
+
+            this.window.bind("close", function(e) {
+                if (e.userTriggered) {
+                    closeHandler(e);
+                }
+            });
+        },
+
+        _dettachHandlers: function() {
+            this._cancelProxy = null;
+            this._saveProxy = null;
+            this.wrapper.off(NS);
+        },
+
+        _cancel: function(e) {
+            this.trigger(CANCEL, e);
+        },
+
+        _save: function(e) {
+            this.trigger(SAVE);
+        },
+
         open: function() {
             this.window.center().open();
         },
 
+        close: function() {
+            this.window.bind("deactivate", proxy(this.destroy, this)).close();
+        },
+
         destroy: function() {
-            this.window.close().destroy();
+            this.window.destroy();
             this.window = null;
+            this._dettachHandlers();
 
             Editor.fn.destroy.call(this);
         }
@@ -704,7 +770,8 @@ var __meta__ = {
             SAVE,
             REMOVE,
             DATABINDING,
-            DATABOUND
+            DATABOUND,
+            CANCEL
         ],
 
         _toggleChildren: function(e) {
@@ -1347,6 +1414,19 @@ var __meta__ = {
             });
         },
 
+        _cancelEdit: function(e) {
+            e = extend(e, {
+                container: this.editor.wrapper,
+                model: this.editor.model
+            });
+
+            if (this.trigger(CANCEL, e)) {
+                return;
+            }
+
+            this.cancelRow();
+        },
+
         cancelRow: function() {
             this._cancelEditor();
 
@@ -1439,7 +1519,7 @@ var __meta__ = {
                 return;
             }
 
-            this.editor.destroy();
+            this.editor.close();
             this.editor = null;
         },
 
@@ -1452,17 +1532,22 @@ var __meta__ = {
                 columns: this.columns,
                 model: model,
                 target: this,
-                clearContainer: false
+                clearContainer: false,
+                template: this.options.editable.template
             };
 
             if (mode == "inline") {
                 this.editor = new Editor(row, options);
             } else {
-                options.window = this.options.editable.window;
-                options.commandRenderer = proxy(function () {
-                    return $.map(["update", "canceledit"], this._button);
-                }, this);
-                options.fieldRenderer = this._cellContent;
+                extend(options, {
+                    window: this.options.editable.window,
+                    commandRenderer: proxy(function () {
+                        return $.map(["update", "canceledit"], this._button);
+                    }, this),
+                    fieldRenderer: this._cellContent,
+                    save: proxy(this.saveRow, this),
+                    cancel: proxy(this._cancelEdit, this)
+                });
 
                 this.editor = new PopupEditor(row, options);
             }
@@ -1480,7 +1565,7 @@ var __meta__ = {
                 }
             }
 
-            return mode;
+            return mode.toLowerCase();
         }
     });
 

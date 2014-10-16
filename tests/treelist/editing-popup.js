@@ -6,11 +6,15 @@
     module("TreeList popup editing", {
         setup: function() {
            dom = $("<div />").appendTo(QUnit.fixture);
+
+            kendo.effects.disable();
         },
         teardown: function() {
             kendo.destroy(QUnit.fixture);
 
             dom = instance = null;
+
+            kendo.effects.enable();
         }
     });
 
@@ -57,7 +61,7 @@
         ok(instance.editor.wrapper.is(":visible"));
     });
 
-    test("destroy of editor destroys the window", function() {
+    test("close of editor destroys the window", function() {
         createTreeList();
 
         instance.editRow(instance.content.find("tr").first());
@@ -138,5 +142,127 @@
         instance.editRow(instance.content.find("tr").first());
 
         equal(instance.editor.wrapper.find(".k-grid-cancel").length, 1);
+    });
+
+    test("click of cancel button triggers cancel event", 2, function() {
+        createTreeList({
+            cancel: function(e) {
+                equal(e.model, this.editor.model);
+                equal(e.container[0], this.editor.wrapper[0]);
+            },
+            columns: [ "id", "parentId", { command: [ "edit" ] } ]
+        });
+
+        instance.editRow("tr:first");
+        instance.editor.wrapper.find(".k-grid-cancel").click();
+    });
+
+    test("cancel event is prevented", function() {
+        createTreeList({
+            cancel: function(e) {
+                e.preventDefault();
+            },
+            columns: [ "id", "parentId", { command: [ "edit" ] } ]
+        });
+
+        instance.editRow("tr:first");
+        instance.editor.wrapper.find(".k-grid-cancel").click();
+
+        ok(instance.editor);
+        ok(instance.editor.window.element.is(":visible"));
+    });
+
+    test("click of update button calls saveRow", function() {
+        createTreeList({
+            columns: [ "id", "parentId", { command: [ "edit" ] } ]
+        });
+
+        var saveRowSpy = spy(instance, "saveRow");
+
+        instance.editRow("tr:first");
+        instance.editor.wrapper.find(".k-grid-update").click();
+
+        equal(saveRowSpy.calls("saveRow"), 1);
+    });
+
+    test("click on window close button triggers cancel event", 1, function() {
+        createTreeList({
+            cancel: function() {
+                ok(true);
+            },
+            columns: [ "id", "parentId", { command: [ "edit" ] } ]
+        });
+
+        instance.editRow("tr:first");
+        instance.editor.window.wrapper.find(".k-i-close").click();
+    });
+
+    test("prevent of cancel event doesn't close the window when close button is clicked", 1, function() {
+        createTreeList({
+            cancel: function(e) {
+                e.preventDefault();
+            },
+            columns: [ "id", "parentId", { command: [ "edit" ] } ]
+        });
+
+        instance.editRow("tr:first");
+        instance.editor.window.wrapper.find(".k-i-close").click();
+
+        ok(instance.editor.window.element.is(":visible"));
+    });
+
+    test("using template for editor", function() {
+        createTreeList({
+            editable: {
+                mode: "popup",
+                template: "<div>foo</div>"
+            }
+        });
+
+        instance.editRow("tr:first");
+
+        var form = instance.editor.wrapper.find(".k-edit-form-container");
+        equal(form.children().first().html(), "foo");
+    });
+
+    test("template is executed agains the model", function() {
+        createTreeList({
+            editable: {
+                mode: "popup",
+                template: "<div>foo #:id#</div>"
+            }
+        });
+
+        instance.editRow("tr:first");
+
+        var form = instance.editor.wrapper.find(".k-edit-form-container");
+        equal(form.children().first().html(), "foo 1");
+    });
+
+    test("using template clears the fields", function() {
+        createTreeList({
+            editable: {
+                mode: "popup",
+                template: "<div>foo</div>"
+            }
+        });
+
+        instance.editRow("tr:first");
+
+        equal(instance.editor.fields.length, 0);
+    });
+
+    test("string templates are unescaped", function() {
+        createTreeList({
+            editable: {
+                mode: "popup",
+                template: window.escape("<div>foo</div>")
+            }
+        });
+
+        instance.editRow("tr:first");
+
+        var form = instance.editor.wrapper.find(".k-edit-form-container");
+        equal(form.children().first().html(), "foo");
     });
 })();
