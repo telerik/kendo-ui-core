@@ -412,9 +412,11 @@ var __meta__ = {
         init: function(element, options) {
             kendo.Observable.fn.init.call(this);
 
-            this.options = extend(true, {}, this.options, options);
+            options = this.options = extend(true, {}, this.options, options);
 
             this.element = element;
+
+            this.bind(this.events, options);
 
             this.model = this.options.model;
 
@@ -424,6 +426,8 @@ var __meta__ = {
 
             this.createEditable();
         },
+
+        events: [],
 
         _initContainer: function() {
             this.wrapper = this.element;
@@ -1535,22 +1539,17 @@ var __meta__ = {
             if (mode == "inline") {
                 this.editor = new Editor(row, options);
             } else {
-                options.window = this.options.editable.window;
-                options.commandRenderer = proxy(function () {
-                    return $.map(["update", "canceledit"], this._button);
-                }, this);
-                options.fieldRenderer = this._cellContent;
+                extend(options, {
+                    window: this.options.editable.window,
+                    commandRenderer: proxy(function () {
+                        return $.map(["update", "canceledit"], this._button);
+                    }, this),
+                    fieldRenderer: this._cellContent,
+                    save: proxy(this.saveRow, this),
+                    cancel: proxy(this._cancelEdit, this)
+                });
 
                 this.editor = new PopupEditor(row, options);
-
-                var that = this;
-                this.editor.bind(CANCEL, function(e) {
-                    that._cancelEdit(e);
-                });
-
-                this.editor.bind(SAVE, function() {
-                    that.saveRow();
-                });
             }
         },
 
@@ -1566,7 +1565,7 @@ var __meta__ = {
                 }
             }
 
-            return mode;
+            return mode.toLowerCase();
         }
     });
 
