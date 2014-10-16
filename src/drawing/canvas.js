@@ -217,6 +217,7 @@
             ctx.restore();
         }
     });
+    d.mixins.Traversable.extend(GroupNode.fn, "childNodes");
 
     var RootNode = GroupNode.extend({
         init: function(canvas) {
@@ -246,6 +247,7 @@
             this.renderTo(this.ctx);
         }
     });
+    d.mixins.Traversable.extend(RootNode.fn, "childNodes");
 
     var PathNode = Node.extend({
         renderTo: function(ctx) {
@@ -428,16 +430,16 @@
             PathNode.fn.init.call(this, srcElement);
 
             this.onLoad = $.proxy(this.onLoad, this);
-            this._loaded = false;
 
             this.img = new Image();
             this.img.onload = this.onLoad;
-
             this.img.src = srcElement.src();
+
+            this.loading = new $.Deferred();
         },
 
         renderTo: function(ctx) {
-            if (this._loaded) {
+            if (this.loading.state() === "resolved") {
                 ctx.save();
 
                 this.setTransform(ctx);
@@ -451,7 +453,7 @@
 
         optionsChange: function(e) {
             if (e.field === "src") {
-                this._loaded = false;
+                this.loading = new $.Deferred();
                 this.img.src = this.srcElement.src();
             } else {
                 PathNode.fn.optionsChange.call(this, e);
@@ -459,7 +461,7 @@
         },
 
         onLoad: function() {
-            this._loaded = true;
+            this.loading.resolve();
             this.invalidate();
         },
 
@@ -472,6 +474,38 @@
             );
         }
     });
+
+    function exportCanvas(group, options) {
+        options = deepExtend({
+            width: "800px", height: "600px"
+        }, options);
+
+        var container = $("<div />").css({
+            display: "none",
+            width: options.width,
+            height: options.height
+        }).appendTo(document.body);
+
+        var surface = new Surface(container, options);
+        surface.draw(group);
+
+        var loadingStates = [];
+        surface._root.traverse(function(childNode) {
+            if (childNode.loading) {
+                loadingStates.push(childNode.loading);
+            }
+        });
+
+        var promise = new $.Deferred();
+        $.when.apply($, loadingStates).done(function() {
+            promise.resolve(surface.image());
+        }).always(function() {
+            surface.destroy();
+            container.remove();
+        });
+
+        return promise;
+    }
 
     // Helpers ================================================================
     function timestamp() {
@@ -488,6 +522,8 @@
     }
 
     deepExtend(kendo.drawing, {
+        exportCanvas: exportCanvas,
+
         canvas: {
             ArcNode: ArcNode,
             CircleNode: CircleNode,

@@ -294,22 +294,6 @@
             });
         },
 
-        traverse: function(callback) {
-            var children = this.children;
-
-            for (var i = 0; i < children.length; i++) {
-                var child = children[i];
-
-                if (child.traverse) {
-                    child.traverse(callback);
-                } else {
-                    callback(child);
-                }
-            }
-
-            return this;
-        },
-
         append: function() {
             append(this.children, arguments);
             updateElementsParent(arguments, this);
@@ -367,6 +351,7 @@
             return Element.fn.currentTransform.call(this, transformation) || null;
         }
     });
+    drawing.mixins.Traversable.extend(Group.fn, "children");
 
     var Text = Element.extend({
         nodeType: "Text",
@@ -418,7 +403,7 @@
             return this.rect().bbox();
         }
     });
-    deepExtend(Text.fn, drawing.mixins.Paintable);
+    drawing.mixins.Paintable.extend(Text.fn);
     definePointAccessors(Text.fn, ["position"]);
 
     var Circle = Element.extend({
@@ -448,7 +433,7 @@
             return this._geometry.bbox();
         }
     });
-    deepExtend(Circle.fn, drawing.mixins.Paintable);
+    drawing.mixins.Paintable.extend(Circle.fn);
     defineGeometryAccessors(Circle.fn, ["geometry"]);
 
     var Arc = Element.extend({
@@ -494,7 +479,7 @@
             return path;
         }
     });
-    deepExtend(Arc.fn, drawing.mixins.Paintable);
+    drawing.mixins.Paintable.extend(Arc.fn);
     defineGeometryAccessors(Arc.fn, ["geometry"]);
 
     var GeometryElementsArray = ElementsArray.extend({
@@ -691,7 +676,7 @@
             return boundingBox;
         }
     });
-    deepExtend(Path.fn, drawing.mixins.Paintable);
+    drawing.mixins.Paintable.extend(Path.fn);
 
     Path.fromRect = function(rect, options) {
         return new Path(options)
@@ -779,7 +764,7 @@
             return elementsClippedBoundingBox(this.paths, this.currentTransform(transformation));
         }
     });
-    deepExtend(MultiPath.fn, drawing.mixins.Paintable);
+    drawing.mixins.Paintable.extend(MultiPath.fn);
 
     var Image = Element.extend({
         nodeType: "Image",

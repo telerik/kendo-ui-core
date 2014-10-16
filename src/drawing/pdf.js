@@ -76,9 +76,14 @@
             }
             var paperSize = getOption("paperSize", "auto"), addMargin = false;
             if (paperSize == "auto") {
-                var size = group.clippedBBox().getSize();
-                paperSize = [ size.width, size.height ];
-                addMargin = true;
+                var bbox = group.clippedBBox();
+                if (bbox) {
+                    var size = bbox.getSize();
+                    paperSize = [ size.width, size.height ];
+                    addMargin = true;
+                } else {
+                    paperSize = "A4";
+                }
             }
             var pdf = new PDF.Document({
                 paperSize  : paperSize,
@@ -356,7 +361,18 @@
         page.drawImage(url);
     }
 
+    function exportPDF(group, options) {
+        var promise = new $.Deferred();
+
+        group.options.set("pdf", options);
+        kendo.drawing.pdf.toDataURL(group, promise.resolve);
+
+        return promise;
+    }
+
     kendo.deepExtend(kendo.drawing, {
+        exportPDF: exportPDF,
+
         pdf: {
             toDataURL  : toDataURL,
             toBlob     : toBlob,

@@ -93,15 +93,6 @@
 
             surface.destroy();
         });
-
-        test("image returns base64 encoded image", function() {
-            var path = new d.Path();
-            path.moveTo(0, 0).lineTo(100, 100);
-            surface.draw(path);
-
-            var image = surface.image();
-            equal(image.indexOf("data:image/png;base64,"), 0);
-        });
     })();
 
     // ------------------------------------------------------------
@@ -165,6 +156,31 @@
             root.invalidate();
             root.invalidate();
             root.destroy();
+        });
+
+        test("traverse traverses children", function() {
+            var child = new canv.Node();
+            root.append(child);
+
+            root.traverse(function(item) {
+                deepEqual(item, child);
+            });
+        });
+
+        test("traverse traverses child group nodes", function() {
+            var childGroup = new canv.GroupNode();
+            root.append(childGroup);
+
+            var child = new canv.Node();
+            childGroup.append(child);
+
+            root.traverse(function(item) {
+                ok(true);
+            });
+        });
+
+        test("traverse is chainable", function() {
+            equal(root.traverse($.noop), root);
         });
     })();
 
@@ -1059,7 +1075,7 @@
         var LoadedImageNode = canv.ImageNode.extend({
             init: function(srcElement) {
                 canv.ImageNode.fn.init.call(this, srcElement);
-                this._loaded = true;
+                this.loading.resolve();
             }
         });
 
@@ -1069,7 +1085,7 @@
             setup: function() {
                 image = new d.Image("Foo", new g.Rect(new Point(10, 20), [90, 80]));
                 imageNode = new canv.ImageNode(image);
-                imageNode._loaded = true;
+                imageNode.loading.resolve();
             }
         });
 
@@ -1089,14 +1105,14 @@
             }));
         });
 
-        test("setting src resets loaded state", function() {
+        test("setting src resets loading state", function() {
             image.src("Bar");
-            ok(!imageNode._loaded);
+            equal(imageNode.loading.state(), "pending");
         });
 
-        test("load handler sets loaded state", function() {
+        test("load handler resolves loading state", function() {
             imageNode.onLoad();
-            ok(imageNode._loaded);
+            equal(imageNode.loading.state(), "resolved");
         });
 
         test("load handler invalidates node", function() {
@@ -1135,6 +1151,44 @@
             });
 
             imageNode.renderTo(ctx);
+        });
+    })();
+
+    // ------------------------------------------------------------
+    (function() {
+        var group;
+
+        module("exportCanvas", {
+            setup: function() {
+                group = new d.Group();
+            }
+        });
+
+        test("exports group", function() {
+            d.exportCanvas(group).done(function(data) {
+                contains(data, "data:image/png;base64,");
+            });
+        });
+
+        test("exports with set size", function() {
+            d.exportCanvas(group).done(function(small) {
+                d.exportCanvas(group, { width: "1000px", height: "500px" }).done(function(large) {
+                    ok(large.length > small.length);
+                });
+            });
+        });
+
+        test("waits for images to load", function() {
+            var image = new d.Image("foo", new g.Rect([0, 0], [100, 100]));
+            group.append(image);
+
+            var loaded = false;
+            d.exportCanvas(group).done(function(small) {
+                ok(loaded);
+            });
+
+            loaded = true;
+            image._observers[0].loading.resolve();
         });
     })();
 })();

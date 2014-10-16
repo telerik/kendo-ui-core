@@ -11,6 +11,11 @@
 
     // Mixins =================================================================
     var Paintable = {
+        extend: function(proto) {
+            proto.fill = this.fill;
+            proto.stroke = this.stroke;
+        },
+
         fill: function(color, opacity) {
             if (defined(color)) {
                 this.options.set("fill.color", color);
@@ -44,10 +49,31 @@
         }
     };
 
+    var Traversable = {
+        extend: function(proto, childrenField) {
+            proto.traverse = function(callback) {
+                var children = this[childrenField];
+
+                for (var i = 0; i < children.length; i++) {
+                    var child = children[i];
+
+                    if (child.traverse) {
+                        child.traverse(callback);
+                    } else {
+                        callback(child);
+                    }
+                }
+
+                return this;
+            };
+        }
+    };
+
     // Exports ================================================================
     deepExtend(kendo.drawing, {
         mixins: {
-            Paintable: Paintable
+            Paintable: Paintable,
+            Traversable: Traversable
         }
     });
 

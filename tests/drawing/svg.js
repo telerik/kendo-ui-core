@@ -49,13 +49,6 @@
             equal(QUnit.fixture.find("svg").length, 1);
         });
 
-        test("svg returns current markup", function() {
-            surface.draw(new Group());
-
-            var svg = surface.svg();
-            equal(svg.indexOf("<?xml version='1.0' ?><svg"), 0);
-        });
-
         test("size updates translate", function() {
             surface.translate({ x: 10, y: 10 });
             surface.size({ width: 100, height: 100 });
@@ -1150,4 +1143,34 @@
 
     })();
 
+    // ------------------------------------------------------------
+    (function() {
+        var element;
+
+        module("exportSVG", {
+            setup: function() {
+                element = new d.Group();
+            }
+        });
+
+        test("exports element", function() {
+            d.exportSVG(element).done(function(svg) {
+                contains(svg, "<?xml version='1.0' ?><svg");
+            });
+        });
+
+        test("encodes entities", function() {
+            element = new d.Text("Foo & Bar", [0, 0]);
+            d.exportSVG(element).done(function(svg) {
+                contains(svg, "Foo &amp; Bar");
+            });
+        });
+
+        test("preserves encoded entities", function() {
+            element = new d.Text("Foo &amp; Bar", [0, 0]);
+            d.exportSVG(element).done(function(svg) {
+                contains(svg, "Foo &amp; Bar");
+            });
+        });
+    })();
 })();
