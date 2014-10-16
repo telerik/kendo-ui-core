@@ -32,6 +32,7 @@ module CodeGen::TypeScript
         'jqXHR' => 'JQueryXHR',
         'jQueryEvent' => 'JQueryEventObject',
         'jQuery.Event' => 'JQueryEventObject',
+        'Promise' => 'JQueryPromise<any>',
         'Selector' => 'string',
         'TouchEvent' => 'kendo.mobile.ui.TouchEventOptions',
         'Point' => 'kendo.mobile.ui.Point'
