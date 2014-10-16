@@ -75,7 +75,7 @@
     });
 
     test("getOptions retrieves the mobile option", function() {
-       var options = setup({ 
+       var options = setup({
            mobile: true
        }).getOptions();
        equal(options.mobile, true);
@@ -195,6 +195,51 @@
         grid.setOptions({ sortable: true });
 
         equal(invoked, 2);
+    });
+
+    test("preserves the structure when using div", function() {
+        div.before("<div id='before' />");
+        div.after("<div id='after' />");
+        var grid = setup();
+        ok(div.prev()[0] === $("#before")[0]);
+        ok(div.next()[0] === $("#after")[0]);
+        grid.setOptions({scrollable: true});
+        ok(div.prev()[0] === $("#before")[0]);
+        ok(div.next()[0] === $("#after")[0]);
+    });
+
+    test("preserves the structure when using table for initialization", function() {
+        var table = $("<table id='table' />").appendTo(QUnit.fixture);
+        table.before("<div id='before' />");
+        table.after("<div id='after' />");
+
+        grid = table.kendoGrid({ scrollable: true }).data("kendoGrid");
+        ok(table.parent().parent().prev()[0] === $("#before")[0]);
+        ok(table.parent().parent().next()[0] === $("#after")[0]);
+        grid.setOptions({ scrollable: false });
+        ok(table.parent().prev()[0] === $("#before")[0]);
+        ok(table.parent().next()[0] === $("#after")[0]);
+        ok(grid.wrapper.next()[0] === $("#after")[0]);
+        ok(grid.wrapper.prev()[0] === $("#before")[0]);
+    });
+
+    test("even when new DS instance is passed it gets options from it and preserves older one", function() {
+
+        var grid = setup({
+            dataSource: {
+                pageSize: 22
+            }
+        });
+
+        grid.setOptions({
+            dataSource: new kendo.data.DataSource({
+                data: [{ foo: "faz" }],
+                pageSize: 33
+            })
+        });
+
+        equal(grid.dataSource.pageSize(), 33);
+        equal(grid.dataSource.at(0).foo, "faz")
     });
 
 })();
