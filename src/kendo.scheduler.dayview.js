@@ -215,7 +215,8 @@ var __meta__ = {
 
             for(var groupIndex = 0; groupIndex < groupsCount; groupIndex++) {
                 var currentGroup = this.groups[groupIndex];
-                var ranges = currentGroup.timeSlotRanges(currentTime, new Date(currentTime.getTime() + 1));
+                var utcCurrentTime = kendo.date.toUtcTime(currentTime);
+                var ranges = currentGroup.timeSlotRanges(utcCurrentTime, utcCurrentTime + 1);
                 if(ranges.length === 0) {
                     return;
                 }
