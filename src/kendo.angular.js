@@ -771,18 +771,10 @@ var __meta__ = {
             }
             return;
         }
-        var scope, compile, injector;
 
-        scope = self.$angular_scope || angular.element(self.element).scope();
-        injector = self.element.injector();
+        var scope = self.$angular_scope || angular.element(self.element).scope();
 
-        if (injector) {
-            compile = injector.get("$compile");
-        } else {
-            compile = $defaultCompile;
-        }
-
-        if (scope && compile) {
+        if (scope) {
             withoutTimeout(function(){
                 var x = arg(), elements = x.elements, data = x.data;
                 if (elements.length > 0) {
@@ -798,6 +790,10 @@ var __meta__ = {
                         break;
 
                       case "compile":
+                        var injector = self.element.injector();
+                        // gross gross gross hack :(. Works for popups that may be out of the ng-app directive.
+                        // they don't have injectors. Same thing happens in our tests, too.
+                        var compile = injector ? injector.get("$compile") : $defaultCompile;
 
                         angular.forEach(elements, function(el, i){
                             var itemScope;
