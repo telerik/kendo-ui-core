@@ -12,6 +12,13 @@
         }
     });
 
+    test("[drawDOM] jQuery element", function(){
+        container.html("<span style='font: bold 16px monospace'>Foo bar</span>");
+        drawing.drawDOM(container).done(function(group){
+            ok(true);
+        });
+    });
+
     test("[drawDOM] simple text node", function(){
         container.html("<span style='font: bold 16px monospace'>Foo bar</span>");
         drawing.drawDOM(container[0]).done(function(group){

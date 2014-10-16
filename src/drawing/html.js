@@ -24,6 +24,7 @@
 
     drawing.drawDOM = function(element) {
         var defer = $.Deferred();
+        element = $(element)[0];
 
         cacheImages(element, function(){
             var group = new drawing.Group();
