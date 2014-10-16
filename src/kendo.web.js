@@ -8,7 +8,6 @@
         "./kendo.data.odata",
         "./kendo.data.xml",
         "./kendo.data",
-        "./kendo.saveas.js",
         "./kendo.ooxml.js",
         "./kendo.excel.js",
         "./kendo.data.signalr",

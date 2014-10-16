@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.data", "./kendo.saveas" ], f);
+    define([ "./kendo.core", "./kendo.data" ], f);
 })(function(){
 
 /* global JSZip */
@@ -9,7 +9,7 @@ var __meta__ = {
     name: "Excel export",
     category: "framework",
     advanced: true,
-    depends: [ "saveas", "data" ]
+    depends: [ "data" ]
 };
 
 (function($, kendo){

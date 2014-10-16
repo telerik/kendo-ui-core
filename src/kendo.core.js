@@ -3982,6 +3982,85 @@ function pad(number, digits, end) {
         return kendo.widgetInstance(element, kendo.mobile.ui);
     };
 
+    // kendo.saveAs -----------------------------------------------
+    (function() {
+        function postToProxy(dataURI, fileName, proxyURL) {
+            var form = $("<form>").attr({
+                action: proxyURL,
+                method: "POST"
+            });
+
+            var parts = dataURI.split(";base64,");
+
+            $('<input>').attr({
+                value: parts[0].replace("data:", ""),
+                name: "contentType",
+                type: "hidden"
+            }).appendTo(form);
+
+            $('<input>').attr({
+                value: parts[1],
+                name: "base64",
+                type: "hidden"
+            }).appendTo(form);
+
+            $('<input>').attr({
+                value: fileName,
+                name: "fileName",
+                type: "hidden"
+            }).appendTo(form);
+
+            form.appendTo("body").submit().remove();
+        }
+
+        var fileSaver = document.createElement("a");
+        var downloadAttribute = "download" in fileSaver;
+
+        function saveAsBlob(dataURI, fileName) {
+            var blob = dataURI; // could be a Blob object
+
+            if (typeof dataURI == "string") {
+                var parts = dataURI.split(";base64,");
+                var contentType = parts[0];
+                var base64 = atob(parts[1]);
+                var array = new Uint8Array(base64.length);
+
+                for (var idx = 0; idx < base64.length; idx++) {
+                    array[idx] = base64.charCodeAt(idx);
+                }
+                blob = new Blob([array.buffer], { type: contentType });
+            }
+
+            navigator.msSaveBlob(blob, fileName);
+        }
+
+        function saveAsDataURI(dataURI, fileName) {
+            if (window.Blob && dataURI instanceof Blob) {
+                dataURI = URL.createObjectURL(dataURI);
+            }
+
+            fileSaver.download = fileName;
+            fileSaver.href = dataURI;
+
+            var e = document.createEvent("MouseEvents");
+            e.initMouseEvent("click", true, false, window,
+                0, 0, 0, 0, 0, false, false, false, false, 0, null);
+
+            fileSaver.dispatchEvent(e);
+        }
+
+        kendo.saveAs = function(options) {
+            var save = postToProxy;
+
+            if (downloadAttribute) {
+                save = saveAsDataURI;
+            } else if (navigator.msSaveBlob) {
+                save = saveAsBlob;
+            }
+
+            save(options.dataURI, options.fileName, options.proxyURL);
+        };
+    })();
 })(jQuery, window);
 
 return window.kendo;
