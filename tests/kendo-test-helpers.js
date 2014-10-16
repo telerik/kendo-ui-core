@@ -330,3 +330,46 @@ function withAngularTests(moduleName, func) {
     func(runTest);
 
 }
+
+var ngTestModule, ngTest, ngScope;
+
+(function() {
+    var $injector, $scope, $compile;
+
+    ngScope = function() {
+        return angular.element(QUnit.fixture.children()[0]).scope();
+    }
+
+    var app = angular.module('kendo.tests', [ 'kendo.directives' ]);
+
+    ngTestModule = function(name, config) {
+        if (!config) {
+            config = {};
+        }
+
+        var setup = config.setup || $.noop;
+        var teardown = config.teardown || $.noop;
+
+        config.setup = function() {
+            setup();
+        }
+
+        config.teardown = function() {
+            teardown();
+            kendo.destroy(QUnit.fixture);
+        }
+
+        module(name, config);
+    }
+
+    ngTest = function(name, assertions, setup, check) {
+        asyncTest(name, assertions, function() {
+            setup();
+            angular.bootstrap(QUnit.fixture.children()[0], [ 'kendo.tests' ]);
+            setTimeout(function() {
+                start();
+                check();
+            }, 100);
+        });
+    }
+})();

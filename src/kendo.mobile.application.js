@@ -14,6 +14,7 @@ var __meta__ = {
     var kendo = window.kendo,
         mobile = kendo.mobile,
         support = kendo.support,
+        Widget = mobile.ui.Widget,
         Pane = mobile.ui.Pane,
 
         DEFAULT_OS = "ios7",
@@ -130,42 +131,58 @@ var __meta__ = {
         }));
     }
 
-    var Application = kendo.Observable.extend({
+    var Application = Widget.extend({
         init: function(element, options) {
-            var that = this;
+            element = $(element);
 
-            mobile.application = that; // global reference to current application
+            if (!element[0]) {
+                element = $(document.body);
+            }
 
-            that.options = $.extend({
-                hideAddressBar: true,
-                useNativeScrolling: false,
-                statusBarStyle: "black",
-                transition: "",
-                historyTransition: HISTORY_TRANSITION,
-                modelScope: window,
-                updateDocumentTitle: true
-            }, options);
+            // global reference to current application
+            mobile.application = this;
+            Widget.fn.init.call(this, element, options);
+            this.element.removeAttr("data-" + kendo.ns + "role");
+            $($.proxy(this, 'bootstrap'));
+        },
 
-            kendo.Observable.fn.init.call(that, that.options);
-            that.bind(that.events, that.options);
+        bootstrap: function() {
+            this._setupPlatform();
+            this._attachMeta();
+            this._setupElementClass();
+            this._attachHideBarHandlers();
+            var paneOptions = $.extend({}, this.options);
+            delete paneOptions.name;
 
-            $(function(){
-                element = $(element);
-                that.element = element[0] ? element : $(document.body);
-                that._setupPlatform();
-                that._attachMeta();
-                that._setupElementClass();
-                that._attachHideBarHandlers();
-                that.pane = new Pane(that.element, that.options);
-                that.pane.navigateToInitial();
+            var that = this,
+                startHistory = function() {
+                    that.pane = new Pane(that.element, paneOptions);
+                    that.pane.navigateToInitial();
 
-                if (that.options.updateDocumentTitle) {
-                    that._setupDocumentTitle();
-                }
+                    if (that.options.updateDocumentTitle) {
+                        that._setupDocumentTitle();
+                    }
 
-                that._startHistory();
-                that.trigger(INIT);
-            });
+                    that._startHistory();
+                    that.trigger(INIT);
+                };
+
+            if (this.options.$angular) {
+                setTimeout(startHistory);
+            } else {
+                startHistory();
+            }
+        },
+
+        options: {
+            name: "Application",
+            hideAddressBar: true,
+            historyTransition: HISTORY_TRANSITION,
+            modelScope: window,
+            statusBarStyle: "black",
+            transition: "",
+            updateDocumentTitle: true,
+            useNativeScrolling: false
         },
 
         events: [
@@ -228,6 +245,7 @@ var __meta__ = {
         },
 
         destroy: function() {
+            Widget.fn.destroy.call(this);
             this.pane.destroy();
             this.router.destroy();
         },
@@ -456,6 +474,7 @@ var __meta__ = {
     });
 
     kendo.mobile.Application = Application;
+    kendo.ui.plugin(Application, kendo.mobile, 'Mobile');
 })(window.kendo.jQuery);
 
 return window.kendo;

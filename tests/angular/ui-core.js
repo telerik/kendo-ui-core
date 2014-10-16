@@ -336,21 +336,6 @@ withAngularTests("Angular (UI Core)", function(runTest){
         });
     });
 
-    runTest("Mobile ScrollView -- compiles templates in data source", function(dom, $scope){
-        expect(2);
-        $scope.options = {
-            template   : "<div class='my-item'>{{ dataItem.id }}/{{ dataItem.text }}</div>",
-            dataSource : $scope.data
-        };
-        $("<ul kendo-mobilescrollview='list' k-options='options'></ul>").appendTo(dom);
-        $scope.whenRendered(function(){
-            var items = $scope.list.element.find(".my-item");
-            equal(items.eq(0).text(), "1/Foo");
-            equal(items.eq(1).text(), "2/Bar");
-            start();
-        });
-    });
-
     runTest("No `? undefined:undefined ?` option in dropdown (kendo-ui-core#248)", function(dom, $scope){
         expect(2);
         $("<select kendo-dropdownlist='dropDown' ng-model='item'><option value='1'>Foo</option></select>").appendTo(dom);

@@ -8,7 +8,7 @@
     function setup(viewHtml, layoutHtml) {
         root = $(viewHtml);
         layout = kendo.initWidget($(layoutHtml), {}, kendo.mobile.ui.roles);
-        view = kendo.initWidget(root, {layout: layout}, kendo.mobile.ui.roles);
+        view = kendo.initWidget(root, {getLayout: function() { return layout; } }, kendo.mobile.ui.roles);
         view.showStart();
     }
 

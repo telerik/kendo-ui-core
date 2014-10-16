@@ -101,39 +101,41 @@ var __meta__ = {
                 serverNavigation: options.serverNavigation,
                 remoteViewURLPrefix: options.root || "",
                 layout: options.layout,
-                loader: that.loader
-            });
+                $angular: options.$angular,
+                loader: that.loader,
 
-            that.viewEngine.bind("showStart", function() {
-                that.loader.transition();
-                that.closeActiveDialogs();
-            });
+                showStart: function() {
+                    that.loader.transition();
+                    that.closeActiveDialogs();
+                },
 
-            that.viewEngine.bind("after", function(e) {
-                that.loader.transitionDone();
-            });
+                after: function(e) {
+                    that.loader.transitionDone();
+                },
 
-            that.viewEngine.bind(VIEW_SHOW, function(e) {
-                that.trigger(VIEW_SHOW, e);
-            });
+                viewShow: function(e) {
+                    that.trigger(VIEW_SHOW, e);
+                },
 
-            that.viewEngine.bind("loadStart", function() {
-                that.loader.show();
-            });
+                loadStart: function() {
+                    that.loader.show();
+                },
 
-            that.viewEngine.bind("loadComplete", function() {
-                that.loader.hide();
-            });
+                loadComplete: function() {
+                    that.loader.hide();
+                },
 
-            that.viewEngine.bind(SAME_VIEW_REQUESTED, function() {
-                that.trigger(SAME_VIEW_REQUESTED);
-            });
+                sameViewRequested: function() {
+                    that.trigger(SAME_VIEW_REQUESTED);
+                },
 
-            that.viewEngine.bind("viewTypeDetermined", function(e) {
-                if (!e.remote || !that.options.serverNavigation)  {
-                    that.trigger(NAVIGATE, { url: e.url });
+                viewTypeDetermined: function(e) {
+                    if (!e.remote || !that.options.serverNavigation)  {
+                        that.trigger(NAVIGATE, { url: e.url });
+                    }
                 }
             });
+
 
             this._setPortraitWidth();
 

@@ -33,8 +33,11 @@ var __meta__ = {
 
             mobile.ui.Widget.fn.init.call(this, element, options);
 
-            this._layout();
-            this._scroller();
+            if (!this.options.$angular) {
+                this._layout();
+                this._scroller();
+            }
+
             this._model();
 
             var pane = this.element.closest(roleSelector("pane")).data("kendoMobilePane"),
@@ -159,6 +162,7 @@ var __meta__ = {
             this.element.show();
 
             this.trigger(SHOW, { view: this });
+            this._invokeNgController();
             return true;
         },
 

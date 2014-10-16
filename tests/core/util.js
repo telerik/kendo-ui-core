@@ -42,4 +42,20 @@ test("widgetInstance supports array of namespaces as an argument", function() {
     kendo.destroy(testbed);
 });
 
+var directiveSelector = kendo.directiveSelector;
+
+test("puts hyphens before 'view', 'bar', 'strip', 'over' words in the widget names", 3, function() {
+    equal(directiveSelector("modalview"), "kendo-mobile-modal-view");
+    equal(directiveSelector("tabstrip"), "kendo-mobile-tab-strip");
+    equal(directiveSelector("popover"), "kendo-mobile-pop-over");
+});
+
+test("works with multiple selectors", 1, function() {
+    equal(directiveSelector("modalview drawer"), "kendo-mobile-modal-view, kendo-mobile-drawer");
+});
+
+test("works with 'view' selector", 1, function() {
+    equal(directiveSelector("view"), "kendo-mobile-view");
+});
+
 }());

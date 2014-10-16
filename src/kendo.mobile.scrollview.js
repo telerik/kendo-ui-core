@@ -304,7 +304,7 @@ var __meta__ = {
         },
 
         _getPages: function() {
-            this.pageElements = this.element.find("[data-role=page]");
+            this.pageElements = this.element.find(kendo.roleSelector("page"));
             this._paged = this.pageElements.length > 0;
         }
     });
