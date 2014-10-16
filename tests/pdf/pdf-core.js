@@ -8,37 +8,12 @@
 
     });
 
-    function infoOK(text, header, content) {
-        var rx = new RegExp("\\/" + header + "\\s*\\(" + content + "\\)");
-        ok(rx.test(text));
-    }
-
-    function commandsOK(text, sequence, msg) {
-        if (sequence instanceof Array) {
-            sequence = sequence.join(" ");
-        }
-        sequence = sequence.replace(/^\s+|\s+$/g, "").split(/\s+/g).join("\\s+");
-        sequence = sequence.replace(/%DEC/g, "[0-9.]*");
-        var rx = new RegExp("(?:^|\\s)" + sequence + "(?:$|\\s)");
-        var pass = rx.test(text);
-        ok(pass);
-        if (!pass && msg) {
-            console.error(msg);
-        }
-    }
-
-    function getPageText(page) {
-        var pageText = PDF.BinaryStream(page._content.data.stream().get());
-        pageText = pageText.readString(pageText.length());
-        return pageText;
-    }
-
     test("[PDF] basic sanity checking", function(){
         var pdf = new PDF.Document();
         pdf.addPage();
         var data = pdf.render();
         var text = data.readString(data.length());
-        ok(/^%PDF-1\.[4567]/.test(text));
+        checkDocumentStructure(data);
         infoOK(text, "Producer", "Kendo UI PDF Generator");
     });
 
@@ -58,6 +33,8 @@
         var page = pdf.addPage();
         var data = pdf.render();
         var text = data.readString(data.length());
+
+        checkDocumentStructure(data);
 
         ok(/\/MediaBox\s*\[\s*0\s+0\s+300\s+200\s*\]/.test(text));
         infoOK(text, "Title", "The Title");
@@ -93,6 +70,8 @@
             "\\(Foo bar baz\\) Tj",
             "ET"
         ], "basic text drawing");
+
+        checkDocumentStructure(pdf.render());
     });
 
     test("[PDF] basic drawing primitives", function(){
@@ -148,6 +127,8 @@
             "0 77%DEC 22%DEC 100 50 100 c",
             "S"
         ], "draw a circle");
+
+        checkDocumentStructure(pdf.render());
     });
 
     // can't load binary file.
@@ -172,6 +153,7 @@
             group.append(shape)
         });
         kendo.drawing.pdf.toStream(group, function(data, pdf, page){
+            checkDocumentStructure(data);
             asserts(getPageText(page), data, pdf);
         });
     }
@@ -243,5 +225,67 @@
             commandsOK(text, "BT[^]*? \\(Foo\\) Tj [^]*?ET", "draw text");
         });
     });
+
+    /* -----[ utils ]----- */
+
+    function checkDocumentStructure(stream) {
+        stream.saveExcursion(function(){
+            stream.offset(0);
+            var text = stream.readString(stream.length());
+            ok(/^%PDF-1\.[4567]/.test(text));
+
+            // startxref present
+            var m = /startxref\r?\n([0-9]+)\r?\n%%EOF\r?\n$/.exec(text);
+            ok(m);
+            var pos = parseFloat(m[1]);
+            stream.offset(pos);
+
+            // xref can be located
+            var xref = stream.readString(4);
+            equal(xref, "xref");
+
+            var m = /\r?\n([0-9]+)\s+([0-9]+)\r?\n/.exec(text.substr(stream.offset()));
+            ok(m);
+            equal(m[1], "0");
+            var objCount = parseFloat(m[2]);
+            stream.skip(m[0].length);
+            for (var i = 0; i < objCount; ++i) {
+                var line = stream.readString(20);
+                if (i == 0) {
+                    ok(/^0000000000 65535 f[\r ]\n$/.test(line));
+                } else {
+                    var m = /^([0-9]{10}) 00000 n[\r ]\n$/.exec(line);
+                    ok(m);
+                    var pos = parseFloat(m[1]);
+                    ok(text.substr(pos).indexOf(i + " 0 ") == 0);
+                }
+            }
+        });
+    }
+
+    function infoOK(text, header, content) {
+        var rx = new RegExp("\\/" + header + "\\s*\\(" + content + "\\)");
+        ok(rx.test(text));
+    }
+
+    function commandsOK(text, sequence, msg) {
+        if (sequence instanceof Array) {
+            sequence = sequence.join(" ");
+        }
+        sequence = sequence.replace(/^\s+|\s+$/g, "").split(/\s+/g).join("\\s+");
+        sequence = sequence.replace(/%DEC/g, "[0-9.]*");
+        var rx = new RegExp("(?:^|\\s)" + sequence + "(?:$|\\s)");
+        var pass = rx.test(text);
+        ok(pass);
+        if (!pass && msg) {
+            console.error(msg);
+        }
+    }
+
+    function getPageText(page) {
+        var pageText = PDF.BinaryStream(page._content.data.stream().get());
+        pageText = pageText.readString(pageText.length());
+        return pageText;
+    }
 
 })();
