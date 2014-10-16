@@ -418,9 +418,9 @@ var __meta__ = {
 
             this.model = this.options.model;
 
-            this._initContainer();
-
             this.fields = this._fields(this.options.columns);
+
+            this._initContainer();
 
             this.createEditable();
         },
@@ -509,12 +509,29 @@ var __meta__ = {
 
             var formContent = [];
 
-            this._appendFields(formContent);
+            if (this.options.template) {
+                this._appendTemplate(formContent);
+                this.fields = [];
+            } else {
+                this._appendFields(formContent);
+            }
             this._appendButtons(formContent);
 
             new kendoDom.Tree(this.wrapper.children()[0]).render(formContent);
 
             this.window = new ui.Window(this.wrapper, this.options.window);
+        },
+
+        _appendTemplate: function(form) {
+            var template = this.options.template;
+
+            if (typeof template === STRING) {
+                template = window.unescape(template);
+            }
+
+            template = kendo.template(template)(this.model);
+
+            form.push(kendoHtmlElement(template));
         },
 
         _appendFields: function(form) {
@@ -1511,7 +1528,8 @@ var __meta__ = {
                 columns: this.columns,
                 model: model,
                 target: this,
-                clearContainer: false
+                clearContainer: false,
+                template: this.options.editable.template
             };
 
             if (mode == "inline") {

@@ -210,4 +210,59 @@
 
         ok(instance.editor.window.element.is(":visible"));
     });
+
+    test("using template for editor", function() {
+        createTreeList({
+            editable: {
+                mode: "popup",
+                template: "<div>foo</div>"
+            }
+        });
+
+        instance.editRow("tr:first");
+
+        var form = instance.editor.wrapper.find(".k-edit-form-container");
+        equal(form.children().first().html(), "foo");
+    });
+
+    test("template is executed agains the model", function() {
+        createTreeList({
+            editable: {
+                mode: "popup",
+                template: "<div>foo #:id#</div>"
+            }
+        });
+
+        instance.editRow("tr:first");
+
+        var form = instance.editor.wrapper.find(".k-edit-form-container");
+        equal(form.children().first().html(), "foo 1");
+    });
+
+    test("using template clears the fields", function() {
+        createTreeList({
+            editable: {
+                mode: "popup",
+                template: "<div>foo</div>"
+            }
+        });
+
+        instance.editRow("tr:first");
+
+        equal(instance.editor.fields.length, 0);
+    });
+
+    test("string templates are unescaped", function() {
+        createTreeList({
+            editable: {
+                mode: "popup",
+                template: window.escape("<div>foo</div>")
+            }
+        });
+
+        instance.editRow("tr:first");
+
+        var form = instance.editor.wrapper.find(".k-edit-form-container");
+        equal(form.children().first().html(), "foo");
+    });
 })();
