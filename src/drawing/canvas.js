@@ -78,7 +78,7 @@
                 }
             });
 
-            var defer = new $.Deferred();
+            var defer = $.Deferred();
             $.when.apply($, loadingStates).done(function() {
                 root.invalidate();
 
@@ -457,7 +457,7 @@
             this.img.onload = this.onLoad;
             this.img.src = srcElement.src();
 
-            this.loading = new $.Deferred();
+            this.loading = $.Deferred();
         },
 
         renderTo: function(ctx) {
@@ -475,7 +475,7 @@
 
         optionsChange: function(e) {
             if (e.field === "src") {
-                this.loading = new $.Deferred();
+                this.loading = $.Deferred();
                 this.img.src = this.srcElement.src();
             } else {
                 PathNode.fn.optionsChange.call(this, e);

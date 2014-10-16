@@ -948,9 +948,7 @@
         var surface = new Surface($("<div />"), { encodeText: true });
         surface.draw(group);
 
-        var defer = new $.Deferred();
-        defer.resolve(surface.svg());
-        return defer.promise();
+        return $.Deferred().resolve(surface.svg()).promise();
     }
 
     function decodeEntities(text) {

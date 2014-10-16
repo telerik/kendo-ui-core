@@ -7,7 +7,7 @@
     ], f);
 })(function(){
 
-(function(kendo){
+(function(kendo, $){
 
     "use strict";
 
@@ -362,7 +362,7 @@
     }
 
     function exportPDF(group, options) {
-        var defer = new $.Deferred();
+        var defer = $.Deferred();
 
         group.options.set("pdf", options);
         kendo.drawing.pdf.toDataURL(group, defer.resolve);
@@ -381,6 +381,6 @@
         }
     });
 
-})(window.kendo);
+})(window.kendo, window.kendo.jQuery);
 
 }, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });
