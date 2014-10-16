@@ -2842,41 +2842,44 @@
                     var diagram = this.toolService.diagram;
 
                     if (!this.toolBar && diagram.select().length === 1) {
-                        this.toolBar = new DiagramToolBar(diagram, {
-                            tools: this.options.shapeDefaults.editable.tools
-                        });
-                        var element = this.toolService.hoveredItem;
-                        if (element) {
-                            var toolBarElement = this.toolBar.element;
-                            var popupWidth = this.toolBar._popup.element.outerWidth();
-                            var popupHeight = this.toolBar._popup.element.outerHeight();
-                            if (element instanceof Shape) {
-                                var selectionBounds = this._resizingAdorner.bounds();
-                                var shapeBounds = element._transformedBounds();
-                                var point = Point(shapeBounds.x, shapeBounds.y)
-                                                .minus(Point(
-                                                    (popupWidth - selectionBounds.width) / 2,
-                                                    popupHeight
-                                                ));
-                            } else if (element instanceof Connection) {
-                                var connectionBounds = element.bounds();
-                                var topLeft = connectionBounds.topLeft();
-                                var bottomRight = connectionBounds.bottomRight();
-                                var rect = Rect.fromPoints(
-                                    this.modelToView(topLeft),
-                                    this.modelToView(bottomRight)
-                                );
+                        var tools = this.toolService.hoveredItem.options.editable.tools;
+                        if (tools) {
+                            this.toolBar = new DiagramToolBar(diagram, {
+                                tools: tools
+                            });
+                            var element = this.toolService.hoveredItem;
+                            if (element) {
+                                var toolBarElement = this.toolBar.element;
+                                var popupWidth = this.toolBar._popup.element.outerWidth();
+                                var popupHeight = this.toolBar._popup.element.outerHeight();
+                                if (element instanceof Shape) {
+                                    var selectionBounds = this._resizingAdorner.bounds();
+                                    var shapeBounds = element._transformedBounds();
+                                    var point = Point(shapeBounds.x, shapeBounds.y)
+                                                    .minus(Point(
+                                                        (popupWidth - selectionBounds.width) / 2,
+                                                        popupHeight
+                                                    ));
+                                } else if (element instanceof Connection) {
+                                    var connectionBounds = element.bounds();
+                                    var topLeft = connectionBounds.topLeft();
+                                    var bottomRight = connectionBounds.bottomRight();
+                                    var rect = Rect.fromPoints(
+                                        this.modelToView(topLeft),
+                                        this.modelToView(bottomRight)
+                                    );
 
-                                var point = Point(rect.x, rect.y)
-                                                .minus(Point(
-                                                    (popupWidth - connectionBounds.width - 20) / 2,
-                                                    popupHeight
-                                                ));
-                            }
+                                    var point = Point(rect.x, rect.y)
+                                                    .minus(Point(
+                                                        (popupWidth - connectionBounds.width - 20) / 2,
+                                                        popupHeight
+                                                    ));
+                                }
 
-                            if (point) {
-                                point = Point(math.max(point.x, 0), math.max(point.y, 0));
-                                this.toolBar.show(point);
+                                if (point) {
+                                    point = Point(math.max(point.x, 0), math.max(point.y, 0));
+                                    this.toolBar.show(point);
+                                }
                             }
                         }
                     }
@@ -3396,8 +3399,7 @@
                 this.createPopup();
             },
 
-            options: {
-            },
+            options: { },
 
             createPopup: function() {
                 this.container = $("<div></div>").append(this.element);
@@ -3445,7 +3447,7 @@
                 this._popup.close();
             },
 
-            editTool: function(options) {
+            editTool: function() {
                 this._toolBar.add({
                     spriteCssClass: "k-icon k-i-pencil",
                     type: "button",
@@ -3455,13 +3457,23 @@
                 });
             },
 
-            deleteTool: function(options) {
+            deleteTool: function() {
                 this._toolBar.add({
                     spriteCssClass: "k-icon k-i-close",
                     showText: "overflow",
                     type: "button",
                     text: "delete",
                     id: "delete"
+                });
+            },
+
+            rotateTool: function() {
+                this._toolBar.add({
+                    type: "buttonGroup",
+                    buttons: [
+                        { spriteCssClass: "k-icon k-i-seek-w", id: "rotateAnticlockwise", showText: "overflow", text: "rotateAnticlockwise", group: "rotate" },
+                        { spriteCssClass: "k-icon k-i-seek-e", id: "rotateClockwise", showText: "overflow", text: "rotateClockwise", group: "rotate" }
+                    ]
                 });
             },
 
@@ -3484,14 +3496,29 @@
             init: function(diagram) {
                 this.diagram = diagram;
             },
+
             "delete": function() {
                 this.diagram._remove(this.selectedElement(), true);
                 this.diagram.destroyToolBar();
             },
+
             edit: function() {
                 this.diagram.edit(this.selectedElement());
                 this.diagram.destroyToolBar();
             },
+
+            rotateClockwise: function() {
+                var element = this.selectedElement();
+                var currentAngle = element.rotate().angle;
+                element.rotate(currentAngle + 90);
+            },
+
+            rotateAnticlockwise: function() {
+                var element = this.selectedElement();
+                var currentAngle = element.rotate().angle;
+                element.rotate(currentAngle - 90);
+            },
+
             selectedElement: function() {
                 return this.diagram.select()[0];
             },
