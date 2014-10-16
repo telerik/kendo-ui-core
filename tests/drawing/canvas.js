@@ -1170,6 +1170,17 @@
             });
         });
 
+        test("exports with auto size", function() {
+            var rect = new g.Rect([0, 0], [100, 100]);
+            group.append(d.Path.fromRect(rect));
+
+            d.exportImage(group).done(function(auto) {
+                d.exportImage(group, { width: "100px", height: "100px" }).done(function(manual) {
+                    equal(auto, manual);
+                });
+            });
+        });
+
         test("exports with set size", function() {
             d.exportImage(group).done(function(small) {
                 d.exportImage(group, { width: "1000px", height: "500px" }).done(function(large) {

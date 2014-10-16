@@ -498,9 +498,18 @@
     });
 
     function exportImage(group, options) {
-        options = deepExtend({
+        var defaults = {
             width: "800px", height: "600px"
-        }, options);
+        };
+
+        var bbox = group.clippedBBox();
+        if (bbox) {
+            var size = bbox.getSize();
+            defaults.width = size.width + "px";
+            defaults.height = size.height + "px";
+        };
+
+        options = deepExtend(defaults, options);
 
         var container = $("<div />").css({
             display: "none",
