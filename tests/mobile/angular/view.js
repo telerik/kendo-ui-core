@@ -85,6 +85,7 @@
         $.mockjax({
             url: "page2.html",
             responseText: '<kendo-mobile-view reload=true>Page 2</kendo-mobile-view>',
+            contentType: "text/html",
             responseTime: 0
         });
 
