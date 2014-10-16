@@ -362,12 +362,12 @@
     }
 
     function exportPDF(group, options) {
-        var promise = new $.Deferred();
+        var defer = new $.Deferred();
 
         group.options.set("pdf", options);
-        kendo.drawing.pdf.toDataURL(group, promise.resolve);
+        kendo.drawing.pdf.toDataURL(group, defer.resolve);
 
-        return promise;
+        return defer.promise();
     }
 
     kendo.deepExtend(kendo.drawing, {
