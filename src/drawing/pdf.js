@@ -17,7 +17,6 @@
 
     var Color       = kendo.drawing.Color;
     var PDF         = kendo.pdf;
-    var parseColor  = kendo.parseColor;
 
     var TEXT_RENDERING_MODE = PDF.TEXT_RENDERING_MODE;
 
@@ -178,7 +177,7 @@
 
         var color = stroke.color;
         if (color) {
-            color = parseColor(color).toRGB();
+            color = parseColor(color);
             if (color == null) {
                 return; // no stroke
             }
@@ -225,7 +224,7 @@
 
         var color = fill.color;
         if (color) {
-            color = parseColor(color).toRGB();
+            color = parseColor(color);
             if (color == null) {
                 return; // no fill
             }
@@ -368,6 +367,11 @@
         kendo.drawing.pdf.toDataURL(group, defer.resolve);
 
         return defer.promise();
+    }
+
+    function parseColor(x) {
+        var color = kendo.parseColor(x, true);
+        return color ? color.toRGB() : null;
     }
 
     kendo.deepExtend(kendo.drawing, {
