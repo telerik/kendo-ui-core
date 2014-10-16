@@ -1177,5 +1177,18 @@
                 });
             });
         });
+
+        test("waits for images to load", function() {
+            var image = new d.Image("foo", new g.Rect([0, 0], [100, 100]));
+            group.append(image);
+
+            var loaded = false;
+            d.exportCanvas(group).done(function(small) {
+                ok(loaded);
+            });
+
+            loaded = true;
+            image._observers[0].loading.resolve();
+        });
     })();
 })();

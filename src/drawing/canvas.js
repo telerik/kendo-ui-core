@@ -489,10 +489,20 @@
         var surface = new Surface(container, options);
         surface.draw(group);
 
-        var promise = new $.Deferred();
-        promise.resolve(surface.image());
+        var loadingStates = [];
+        surface._root.traverse(function(childNode) {
+            if (childNode.loading) {
+                loadingStates.push(childNode.loading);
+            }
+        });
 
-        container.remove();
+        var promise = new $.Deferred();
+        $.when.apply($, loadingStates).done(function() {
+            promise.resolve(surface.image());
+        }).always(function() {
+            surface.destroy();
+            container.remove();
+        });
 
         return promise;
     }
