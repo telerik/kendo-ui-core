@@ -63,7 +63,7 @@ test("kendo.support checks for datetime-local type", function() {
 
 test("kendo.support.scrollbar() returns a number", function () {
     var scrollbar = kendo.support.scrollbar();
-    ok(!!scrollbar && !isNaN(scrollbar));
+    ok(!isNaN(scrollbar));
 });
 
 test("kendo.support.scrollbar(true) refreshes the cached value", function () {
