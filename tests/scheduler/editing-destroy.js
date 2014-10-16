@@ -266,7 +266,7 @@
         });
 
         scheduler.editEvent(scheduler.dataSource.view()[0].uid);
-        scheduler._editor.container.removeAttr("data-uid");
+     //   scheduler._editor.container.removeAttr("data-uid");
 
         scheduler.cancelEvent();
     })

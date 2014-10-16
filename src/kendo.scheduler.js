@@ -1284,8 +1284,88 @@ var __meta__ = {
         },
 
         editEvent: function(model) {
-            this.editable = this._createPopupEditor(model);
-            return this.editable;
+            var that = this;
+            var editable = that.options.editable;
+            var html = '<div ' + kendo.attr("uid") + '="' + model.uid + '" class="k-popup-edit-form k-scheduler-edit-form"><div class="k-edit-form-container">';
+            var messages = that.options.messages;
+            var updateText = messages.save;
+            var cancelText = messages.cancel;
+            var deleteText = messages.destroy;
+
+            var fields = this.fields(editors.desktop, model);
+
+            var editableFields = [];
+
+            html += this._buildEditTemplate(model, fields, editableFields);
+
+            var attr;
+            var options = isPlainObject(editable) ? editable.window : {};
+
+            html += '<div class="k-edit-buttons k-state-default">';
+            html += this.createButton({ name: "update", text: updateText, attr: attr }) + this.createButton({ name: "canceledit", text: cancelText, attr: attr });
+
+            if (!model.isNew() && editable.destroy !== false) {
+                html += this.createButton({ name: "delete", text: deleteText, attr: attr });
+            }
+
+            html += '</div></div></div>';
+
+            var container = this.container = $(html)
+                .appendTo(that.element).eq(0)
+                .kendoWindow(extend({
+                    modal: true,
+                    resizable: false,
+                    draggable: true,
+                    title: messages.editor.editorTitle,
+                    visible: false,
+                    close: function(e) {
+                        if (e.userTriggered) {
+                            if (that.trigger(CANCEL, { container: container, model: model })) {
+                                e.preventDefault();
+                            }
+                        }
+                    }
+                }, options));
+
+            that.editable = container.kendoEditable({
+                fields: editableFields,
+                model: model,
+                clearContainer: false,
+                validateOnBlur: true,
+                target: that.options.target
+            }).data("kendoEditable");
+
+            if (!that.trigger(EDIT, { container: container, model: model })) {
+
+                container.data("kendoWindow").center().open();
+
+                container.on(CLICK + NS, "a.k-scheduler-cancel", function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    that.trigger(CANCEL, { container: container, model: model });
+                });
+
+                container.on(CLICK + NS, "a.k-scheduler-update", function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    that.trigger("save", { container: container, model: model });
+                });
+
+                container.on(CLICK + NS, "a.k-scheduler-delete", function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    that.trigger(REMOVE, { container: container, model: model });
+                });
+
+                model.bind("change", that.toggleDateValidationHandler);
+            } else {
+                that.trigger(CANCEL, { container: container, model: model });
+            }
+
+            return that.editable;
         },
 
         close: function() {
@@ -1373,91 +1453,6 @@ var __meta__ = {
                                .getKendoWindow();
 
             popup.center().open();
-        },
-
-        _createPopupEditor: function(model) {
-            var that = this;
-            var editable = that.options.editable;
-            var html = '<div ' + kendo.attr("uid") + '="' + model.uid + '" class="k-popup-edit-form k-scheduler-edit-form"><div class="k-edit-form-container">';
-            var messages = that.options.messages;
-            var updateText = messages.save;
-            var cancelText = messages.cancel;
-            var deleteText = messages.destroy;
-
-            var fields = this.fields(editors.desktop, model);
-
-            var editableFields = [];
-
-            html += this._buildEditTemplate(model, fields, editableFields);
-
-            var attr;
-            var options = isPlainObject(editable) ? editable.window : {};
-
-            html += '<div class="k-edit-buttons k-state-default">';
-            html += this.createButton({ name: "update", text: updateText, attr: attr }) + this.createButton({ name: "canceledit", text: cancelText, attr: attr });
-
-            if (!model.isNew() && editable.destroy !== false) {
-                html += this.createButton({ name: "delete", text: deleteText, attr: attr });
-            }
-
-            html += '</div></div></div>';
-
-            var container = this.container = $(html)
-                .appendTo(that.element).eq(0)
-                .kendoWindow(extend({
-                    modal: true,
-                    resizable: false,
-                    draggable: true,
-                    title: messages.editor.editorTitle,
-                    visible: false,
-                    close: function(e) {
-                        if (e.userTriggered) {
-                            if (that.trigger(CANCEL, { container: container, model: model })) {
-                                e.preventDefault();
-                            }
-                        }
-                    }
-                }, options));
-
-            var editableWidget = container.kendoEditable({
-                fields: editableFields,
-                model: model,
-                clearContainer: false,
-                validateOnBlur: true,
-                target: that.options.target
-            }).data("kendoEditable");
-
-            if (!that.trigger(EDIT, { container: container, model: model })) {
-
-                container.data("kendoWindow").center().open();
-
-                container.on(CLICK + NS, "a.k-scheduler-cancel", function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-
-                    that.trigger(CANCEL, { container: container, model: model });
-                });
-
-                container.on(CLICK + NS, "a.k-scheduler-update", function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-
-                    that.trigger("save", { container: container, model: model });
-                });
-
-                container.on(CLICK + NS, "a.k-scheduler-delete", function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-
-                    that.trigger(REMOVE, { container: container, model: model });
-                });
-
-                model.bind("change", that.toggleDateValidationHandler);
-            } else {
-                that.trigger(CANCEL, { container: container, model: model });
-            }
-
-            return editableWidget;
         },
 
         _initTimezoneEditor: function(model, activator) {

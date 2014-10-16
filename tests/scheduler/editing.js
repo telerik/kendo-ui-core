@@ -216,7 +216,7 @@
         scheduler.editEvent(scheduler.dataSource.at(0).uid);
     });
 
-    test("the popup window is not shown if the edit event is prevented", 1, function() {
+    test("editor is destroyed if the edit event is prevented", 1, function() {
         var scheduler = setup({
             edit: function(e) {
                 e.preventDefault();
@@ -224,7 +224,7 @@
         });
 
         scheduler.editEvent(scheduler.dataSource.at(0).uid);
-        equal(scheduler._editor.container.find(".k-edit-form-container:visible").length, 0);
+        ok(!scheduler._editor.editable);
     });
 
     test("the new event is removed if the edit event is prevented", 1, function() {
