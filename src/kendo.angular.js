@@ -773,8 +773,8 @@ var __meta__ = {
         }
         var scope, compile, injector;
 
-        var scope = self.$angular_scope || angular.element(self.element).scope();
-        var injector = self.element.injector();
+        scope = self.$angular_scope || angular.element(self.element).scope();
+        injector = self.element.injector();
 
         if (injector) {
             compile = injector.get("$compile");
