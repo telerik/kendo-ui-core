@@ -157,6 +157,31 @@
             root.invalidate();
             root.destroy();
         });
+
+        test("traverse traverses children", function() {
+            var child = new canv.Node();
+            root.append(child);
+
+            root.traverse(function(item) {
+                deepEqual(item, child);
+            });
+        });
+
+        test("traverse traverses child group nodes", function() {
+            var childGroup = new canv.GroupNode();
+            root.append(childGroup);
+
+            var child = new canv.Node();
+            childGroup.append(child);
+
+            root.traverse(function(item) {
+                ok(true);
+            });
+        });
+
+        test("traverse is chainable", function() {
+            equal(root.traverse($.noop), root);
+        });
     })();
 
     function clipTests(TShape, TNode, nodeName) {

@@ -217,6 +217,7 @@
             ctx.restore();
         }
     });
+    d.mixins.Traversable.extend(GroupNode.fn, "childNodes");
 
     var RootNode = GroupNode.extend({
         init: function(canvas) {
@@ -246,6 +247,7 @@
             this.renderTo(this.ctx);
         }
     });
+    d.mixins.Traversable.extend(RootNode.fn, "childNodes");
 
     var PathNode = Node.extend({
         renderTo: function(ctx) {
