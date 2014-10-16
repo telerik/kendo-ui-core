@@ -88,7 +88,7 @@
             });
             var page = pdf.addPage();
             drawElement(group, page, pdf);
-            callback(pdf.render());
+            callback(pdf.render(), pdf, page);
         }
 
         var count = 2;
@@ -360,7 +360,8 @@
         pdf: {
             toDataURL  : toDataURL,
             toBlob     : toBlob,
-            saveAs     : saveAs
+            saveAs     : saveAs,
+            toStream   : render
         }
     });
 

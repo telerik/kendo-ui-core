@@ -1,6 +1,8 @@
 (function(){
 
     var PDF = kendo.pdf;
+    var drawing = kendo.drawing;
+    var geo = kendo.geometry;
 
     module("pdf-core", {
 
@@ -16,7 +18,8 @@
             sequence = sequence.join(" ");
         }
         sequence = sequence.replace(/^\s+|\s+$/g, "").split(/\s+/g).join("\\s+");
-        var rx = new RegExp(sequence);
+        sequence = sequence.replace(/%DEC/g, "[0-9.]*");
+        var rx = new RegExp("(?:^|\\s)" + sequence + "(?:$|\\s)");
         var pass = rx.test(text);
         ok(pass);
         if (!pass && msg) {
@@ -139,12 +142,106 @@
         // should be the same though.
         commandsOK(text, [
             "50 100 m",
-            "77[0-9.]* 100 100 77[0-9.]* 100 50 c",
-            "100 22[0-9.]* 77[0-9.]* 0 50 0 c",
-            "22[0-9.]* 0 0 22[0-9.]* 0 50 c",
-            "0 77[0-9.]* 22[0-9.]* 100 50 100 c",
+            "77%DEC 100 100 77%DEC 100 50 c",
+            "100 22%DEC 77%DEC 0 50 0 c",
+            "22%DEC 0 0 22%DEC 0 50 c",
+            "0 77%DEC 22%DEC 100 50 100 c",
             "S"
         ], "draw a circle");
+    });
+
+    // can't load binary file.
+    // test("[PDF] loading a TTF font", 1, function(){
+    //     var fonturl = "/base/tests/pdf/CharisSILLiteracy-R.ttf";
+    //     PDF.defineFont({ CharisSI: fonturl });
+    //     PDF.loadFonts([ fonturl ], function(){
+    //         var pdf = new PDF.Document();
+    //         var page = pdf.addPage();
+    //         page.beginText();
+    //         page.setFont("CharisSI", 12);
+    //         page.showText("Foo");
+    //         page.endText();
+    //     });
+    // });
+
+    /* -----[ drawing -> PDF ]----- */
+
+    function draw(func, asserts) {
+        var group = new drawing.Group();
+        func(function(shape){
+            group.append(shape)
+        });
+        kendo.drawing.pdf.toStream(group, function(data, pdf, page){
+            asserts(getPageText(page), data, pdf);
+        });
+    }
+
+    test("[PDF] drawing.Arc", function(){
+        draw(function(add){
+            var arcGeometry = new geo.Arc([ 100, 100 ], {
+                radiusX: 50,
+                radiusY: 50,
+                startAngle: 0,
+                endAngle: 180
+            });
+            var arc = new drawing.Arc(arcGeometry, {
+                stroke: { width: 2, color: "#00f" }
+            });
+            add(arc);
+        }, function(text){
+            commandsOK(text, "0 0 1 RG", "stroke color");
+            commandsOK(text, "2 w", "stroke width");
+            // %DEC means don't care about decimals
+            commandsOK(text, [
+                "150 100 m",
+                "150 126%DEC 126%DEC 150 100 150 c",
+                "73%DEC 150 50 126%DEC 50 100 c",
+                "S"
+            ], "draw arc and stroke");
+        });
+    });
+
+    test("[PDF] drawing.Path", function(){
+        draw(function(add){
+            var path = new drawing.Path({
+                fill: { color: "#f00" },
+                stroke: { width: 2, color: "#00f" },
+            });
+            path.moveTo(10, 10)
+                .lineTo(100, 10)
+                .lineTo(100, 100)
+                .lineTo(10, 100)
+                .close();
+            add(path);
+        }, function(text){
+            commandsOK(text, "0 0 1 RG", "stroke color");
+            commandsOK(text, "2 w", "stroke width");
+            commandsOK(text, "1 0 0 rg", "fill color");
+            commandsOK(text, [
+                "10 10 m",
+                "100 10 l",
+                "100 100 l",
+                "10 100 l",
+                "h",
+                "B"
+            ], "draw path and close/fill/stroke");
+        });
+    });
+
+    test("[PDF] drawing.Text", function(){
+        draw(function(add){
+            var pos = new geo.Point(10, 10);
+            var text = new drawing.Text("Foo", pos).fill("#f00").stroke("#00f", 2);
+            text.options.set("font", "serif 12");
+            add(text);
+        }, function(text, data){
+            commandsOK(text, "0 0 1 RG", "stroke color");
+            commandsOK(text, "2 w", "stroke width");
+            commandsOK(text, "1 0 0 rg", "fill color");
+            commandsOK(text, "BT[^]*? /F[0-9]+ 12 Tf [^]*?ET", "font and size"); // too hard to check whether it's the right font though.
+            commandsOK(text, "BT[^]*? 2 Tr [^]*?ET", "stroke+fill text rendering mode");
+            commandsOK(text, "BT[^]*? \\(Foo\\) Tj [^]*?ET", "draw text");
+        });
     });
 
 })();
