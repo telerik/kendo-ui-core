@@ -2548,7 +2548,7 @@ function pad(number, digits, end) {
                 }
             }
 
-            return selectors.join(" ").replace(/(\S+)/g, "kendo-mobile-$1,").slice(0, -1);;
+            return selectors.join(" ").replace(/(\S+)/g, "kendo-mobile-$1,").slice(0, -1);
         },
 
         triggeredByInput: function(e) {
