@@ -658,9 +658,14 @@
                 }
             },
 
-            rotate: function (angle, center) { // we assume the center is always the center of the shape.
+            rotate: function (angle, center, undoable) { // we assume the center is always the center of the shape.
                 var rotate = this.visual.rotate();
                 if (angle !== undefined) {
+                    if (undoable !== false) {
+                        this.diagram.undoRedoService.add(
+                            new diagram.RotateUnit(this.diagram._resizingAdorner, [this], [rotate.angle]), false);
+                    }
+
                     var b = this.bounds(),
                         sc = new Point(b.width / 2, b.height / 2),
                         deltaAngle,
@@ -2842,43 +2847,45 @@
                     var diagram = this.toolService.diagram;
 
                     if (!this.toolBar && diagram.select().length === 1) {
+                        if (this.toolService.hoveredItem) {
                         var tools = this.toolService.hoveredItem.options.editable.tools;
-                        if (tools) {
-                            this.toolBar = new DiagramToolBar(diagram, {
-                                tools: tools
-                            });
-                            var element = this.toolService.hoveredItem;
-                            if (element) {
-                                var toolBarElement = this.toolBar.element;
-                                var popupWidth = this.toolBar._popup.element.outerWidth();
-                                var popupHeight = this.toolBar._popup.element.outerHeight();
-                                if (element instanceof Shape) {
-                                    var selectionBounds = this._resizingAdorner.bounds();
-                                    var shapeBounds = element._transformedBounds();
-                                    var point = Point(shapeBounds.x, shapeBounds.y)
-                                                    .minus(Point(
-                                                        (popupWidth - selectionBounds.width) / 2,
-                                                        popupHeight
-                                                    ));
-                                } else if (element instanceof Connection) {
-                                    var connectionBounds = element.bounds();
-                                    var topLeft = connectionBounds.topLeft();
-                                    var bottomRight = connectionBounds.bottomRight();
-                                    var rect = Rect.fromPoints(
-                                        this.modelToView(topLeft),
-                                        this.modelToView(bottomRight)
-                                    );
+                            if (tools) {
+                                this.toolBar = new DiagramToolBar(diagram, {
+                                    tools: tools
+                                });
+                                var element = this.toolService.hoveredItem;
+                                if (element) {
+                                    var toolBarElement = this.toolBar.element;
+                                    var popupWidth = this.toolBar._popup.element.outerWidth();
+                                    var popupHeight = this.toolBar._popup.element.outerHeight();
+                                    if (element instanceof Shape) {
+                                        var selectionBounds = this._resizingAdorner.bounds();
+                                        var shapeBounds = element._transformedBounds();
+                                        var point = Point(shapeBounds.x, shapeBounds.y)
+                                                        .minus(Point(
+                                                            (popupWidth - selectionBounds.width) / 2,
+                                                            popupHeight
+                                                        ));
+                                    } else if (element instanceof Connection) {
+                                        var connectionBounds = element.bounds();
+                                        var topLeft = connectionBounds.topLeft();
+                                        var bottomRight = connectionBounds.bottomRight();
+                                        var rect = Rect.fromPoints(
+                                            this.modelToView(topLeft),
+                                            this.modelToView(bottomRight)
+                                        );
 
-                                    var point = Point(rect.x, rect.y)
-                                                    .minus(Point(
-                                                        (popupWidth - connectionBounds.width - 20) / 2,
-                                                        popupHeight
-                                                    ));
-                                }
+                                        var point = Point(rect.x, rect.y)
+                                                        .minus(Point(
+                                                            (popupWidth - connectionBounds.width - 20) / 2,
+                                                            popupHeight
+                                                        ));
+                                    }
 
-                                if (point) {
-                                    point = Point(math.max(point.x, 0), math.max(point.y, 0));
-                                    this.toolBar.show(point);
+                                    if (point) {
+                                        point = Point(math.max(point.x, 0), math.max(point.y, 0));
+                                        this.toolBar.show(point);
+                                    }
                                 }
                             }
                         }

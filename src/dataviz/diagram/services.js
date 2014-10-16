@@ -378,29 +378,33 @@
                     this.redoRotates.push(shape.rotate().angle);
                 }
             },
+
             undo: function () {
                 var i, shape;
                 for (i = 0; i < this.shapes.length; i++) {
                     shape = this.shapes[i];
-                    shape.rotate(this.undoRotates[i], this.center);
+                    shape.rotate(this.undoRotates[i], this.center, false);
                     if (shape.hasOwnProperty("layout")) {
                         shape.layout(shape);
                     }
                 }
+
                 if (this.adorner) {
                     this.adorner._initialize();
                     this.adorner.refresh();
                 }
             },
+
             redo: function () {
                 var i, shape;
                 for (i = 0; i < this.shapes.length; i++) {
                     shape = this.shapes[i];
-                    shape.rotate(this.redoRotates[i], this.center);
+                    shape.rotate(this.redoRotates[i], this.center, false);
                     if (shape.hasOwnProperty("layout")) {
                         shape.layout(shape);
                     }
                 }
+
                 if (this.adorner) {
                     this.adorner._initialize();
                     this.adorner.refresh();
@@ -684,9 +688,11 @@
                         diagram.undoRedoService.add(unit, false);
                     }
                 }
-                if(service.hoveredItem) {
+
+                if (service.hoveredItem) {
                     this.toolService.triggerClick({item: service.hoveredItem, point: p, meta: meta});
                 }
+
                 this.adorner = undefined;
                 this.handle = undefined;
             },
@@ -1442,7 +1448,6 @@
 
                 that._initSelection();
                 that._createHandles();
-                that._createThumb();
                 that.redraw();
                 that.diagram.bind("select", function (e) {
                     that._initialize(e.selected);
@@ -1455,27 +1460,13 @@
                     }
                 };
 
-                that._rotatedHandler = function () {
-                    if (that.shapes.length == 1) {
-                        that._angle = that.shapes[0].rotate().angle;
-                    }
-                    that._refreshHandler();
-                };
-
-                that.diagram.bind(ITEMBOUNDSCHANGE, that._refreshHandler).bind(ITEMROTATE, that._rotatedHandler);
+                that.diagram.bind(ITEMBOUNDSCHANGE, that._refreshHandler);
                 that.refreshBounds();
                 that.refresh();
             },
 
             options: {
-                editable: {
-                    rotate: {
-                        thumb: {
-                            data: "M7.115,16C3.186,16,0,12.814,0,8.885C0,5.3,2.65,2.336,6.099,1.843V0l4.85,2.801l-4.85,2.8V3.758 c-2.399,0.473-4.21,2.588-4.21,5.126c0,2.886,2.34,5.226,5.226,5.226s5.226-2.34,5.226-5.226c0-1.351-0.513-2.582-1.354-3.51 l1.664-0.961c0.988,1.222,1.581,2.777,1.581,4.472C14.23,12.814,11.045,16,7.115,16L7.115,16z",
-                            y: -30
-                        }
-                    }
-                },
+                editable: { },
                 selectable: {
                     stroke: {
                         color: "#778899",
@@ -1496,17 +1487,6 @@
                 var options = deepExtend({}, that.options.selectable, selectable);
                 that.rect = new Rectangle(options);
                 that.visual.append(that.rect);
-            },
-
-            _createThumb: function() {
-                var that = this,
-                    editable = that.options.editable,
-                    rotate = editable.rotate;
-
-                if (editable && rotate) {
-                    that.rotationThumb = new Path(rotate.thumb);
-                    that.visual.append(that.rotationThumb);
-                }
             },
 
             _createHandles: function() {
@@ -1541,16 +1521,6 @@
                 var tp = this.diagram.modelToLayer(p),
                     editable = this.options.editable,
                     i, hit, handleBounds, handlesCount = this.map.length, handle;
-
-                if (this._angle) {
-                    tp = tp.clone().rotate(this._bounds.center(), this._angle);
-                }
-
-                if (editable && editable.rotate && this._rotationThumbBounds) {
-                    if (this._rotationThumbBounds.contains(tp)) {
-                        return new Point(-1, -2);
-                    }
-                }
 
                 if (editable && editable.resize) {
                     for (i = 0; i < handlesCount; i++) {
@@ -1597,14 +1567,8 @@
 
             _getCursor: function (point) {
                 var hit = this._hitTest(point);
-                if (hit && (hit.x >= -1) && (hit.x <= 1) && (hit.y >= -1) && (hit.y <= 1) && this.options.editable && this.options.editable.resize) {
-                    var angle = this._angle;
-                    if (angle) {
-                        angle = 360 - angle;
-                        hit.rotate(new Point(0, 0), angle);
-                        hit = new Point(Math.round(hit.x), Math.round(hit.y));
-                    }
 
+                if (hit && (hit.x >= -1) && (hit.x <= 1) && (hit.y >= -1) && (hit.y <= 1) && this.options.editable && this.options.editable.resize) {
                     if (hit.x == -1 && hit.y == -1) {
                         return "nw-resize";
                     }
@@ -1630,6 +1594,7 @@
                         return "w-resize";
                     }
                 }
+
                 return this._manipulating ? Cursors.move : Cursors.select;
             },
 
@@ -1642,26 +1607,13 @@
                     item = items[i];
                     if (item instanceof diagram.Shape) {
                         that.shapes.push(item);
-                        item._rotationOffset = new Point();
                     }
                 }
 
-                that._angle = that.shapes.length == 1 ? that.shapes[0].rotate().angle : 0;
-                that._startAngle = that._angle;
-                that._rotates();
                 that._positions();
                 that.refreshBounds();
                 that.refresh();
                 that.redraw();
-            },
-
-            _rotates: function () {
-                var that = this, i, shape;
-                that.initialRotates = [];
-                for (i = 0; i < that.shapes.length; i++) {
-                    shape = that.shapes[i];
-                    that.initialRotates.push(shape.rotate().angle);
-                }
             },
 
             _positions: function () {
@@ -1710,16 +1662,11 @@
                 var that = this, i, handle,
                     editable = that.options.editable,
                     resize = editable.resize,
-                    rotate = editable.rotate,
-                    visibleHandles = editable && resize ? true : false,
-                    visibleThumb = editable && rotate ? true : false;
+                    visibleHandles = editable && resize ? true : false;
 
                 for (i = 0; i < this.map.length; i++) {
                     handle = this.map[i];
                     handle.visual.visible(visibleHandles);
-                }
-                if (that.rotationThumb) {
-                    that.rotationThumb.visible(visibleThumb);
                 }
             },
 
@@ -1728,23 +1675,11 @@
                     dtl = new Point(),
                     dbr = new Point(),
                     bounds, center, shape,
-                    i, angle, newBounds,
+                    i, newBounds,
                     changed = 0, staticPoint,
                     scaleX, scaleY;
 
                 if (handle.y === -2 && handle.x === -1) {
-                    center = this._innerBounds.center();
-                    this._angle = this._truncateAngle(Utils.findAngle(center, p));
-                    for (i = 0; i < this.shapes.length; i++) {
-                        shape = this.shapes[i];
-                        angle = (this._angle + this.initialRotates[i] - this._startAngle) % 360;
-                        shape.rotate(angle, center);
-                        if (shape.hasOwnProperty("layout")) {
-                            shape.layout(shape);
-                        }
-                        this._rotating = true;
-                    }
-                    this.refresh();
                 } else {
                     if (this.diagram.options.snap.enabled === true) {
                         var thr = this._truncateDistance(p.minus(this._lp));
@@ -1763,9 +1698,6 @@
                         dbr = dtl = delta; // dragging
                         dragging = true;
                     } else {
-                        if (this._angle) { // adjust the delta so that resizers resize in the correct direction after rotation.
-                            delta.rotate(new Point(0, 0), this._angle);
-                        }
                         if (handle.x == -1) {
                             dtl.x = delta.x;
                         } else if (handle.x == 1) {
@@ -1793,7 +1725,6 @@
                             newBounds = bounds.clone();
                             newBounds.scale(scaleX, scaleY, staticPoint, this._innerBounds.center(), shape.rotate().angle);
                             var newCenter = newBounds.center(); // fixes the new rotation center.
-                            newCenter.rotate(bounds.center(), -this._angle);
                             newBounds = new Rect(newCenter.x - newBounds.width / 2, newCenter.y - newBounds.height / 2, newBounds.width, newBounds.height);
                         }
                         if (newBounds.width >= shape.options.minWidth && newBounds.height >= shape.options.minHeight) { // if we up-size very small shape
@@ -1802,7 +1733,6 @@
                             if (shape.hasOwnProperty("layout")) {
                                 shape.layout(shape, oldBounds, newBounds);
                             }
-                            shape.rotate(shape.rotate().angle); // forces the rotation to update it's rotation center
                             changed += 1;
                         }
                     }
@@ -1865,7 +1795,6 @@
                 if (this._cp != this._sp) {
                     if (this._rotating) {
                         unit = new RotateUnit(this, this.shapes, this.initialRotates);
-                        this._rotating = false;
                     } else {
                         if (this.diagram.ruler) {
                             for (i = 0; i < this.shapes.length; i++) {
@@ -2035,7 +1964,8 @@
             CascadingRouter: CascadingRouter,
             SelectionTool: SelectionTool,
             PointerTool: PointerTool,
-            ConnectionEditTool: ConnectionEditTool
+            ConnectionEditTool: ConnectionEditTool,
+            RotateUnit: RotateUnit
         });
 })(window.kendo.jQuery);
 
