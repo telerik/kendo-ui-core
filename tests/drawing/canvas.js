@@ -1158,21 +1158,21 @@
     (function() {
         var group;
 
-        module("exportCanvas", {
+        module("exportImage", {
             setup: function() {
                 group = new d.Group();
             }
         });
 
         test("exports group", function() {
-            d.exportCanvas(group).done(function(data) {
+            d.exportImage(group).done(function(data) {
                 contains(data, "data:image/png;base64,");
             });
         });
 
         test("exports with set size", function() {
-            d.exportCanvas(group).done(function(small) {
-                d.exportCanvas(group, { width: "1000px", height: "500px" }).done(function(large) {
+            d.exportImage(group).done(function(small) {
+                d.exportImage(group, { width: "1000px", height: "500px" }).done(function(large) {
                     ok(large.length > small.length);
                 });
             });
@@ -1183,7 +1183,7 @@
             group.append(image);
 
             var loaded = false;
-            d.exportCanvas(group).done(function(small) {
+            d.exportImage(group).done(function(small) {
                 ok(loaded);
             });
 

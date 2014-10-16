@@ -475,7 +475,7 @@
         }
     });
 
-    function exportCanvas(group, options) {
+    function exportImage(group, options) {
         options = deepExtend({
             width: "800px", height: "600px"
         }, options);
@@ -522,7 +522,7 @@
     }
 
     deepExtend(kendo.drawing, {
-        exportCanvas: exportCanvas,
+        exportImage: exportImage,
 
         canvas: {
             ArcNode: ArcNode,
