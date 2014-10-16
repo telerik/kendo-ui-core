@@ -342,7 +342,7 @@
             out("startxref", NL, xrefOffset, NL);
             out("%%EOF", NL);
 
-            return out.stream();
+            return out.stream().offset(0);
         };
     }
 
@@ -1380,7 +1380,7 @@
             return ret;
         }
 
-        return {
+        var stream = {
             eof         : eof,
             readByte    : readByte,
             writeByte   : writeByte,
@@ -1411,6 +1411,7 @@
             offset: function(pos) {
                 if (pos != null) {
                     offset = pos;
+                    return stream;
                 }
                 return offset;
             },
@@ -1445,6 +1446,8 @@
                 return BASE64.encode(get());
             }
         };
+
+        return stream;
     }
 
     function unquote(str) {
