@@ -68,7 +68,29 @@
         },
 
         image: function() {
-            return this._rootElement.toDataURL();
+            var root = this._root;
+            var rootElement = this._rootElement;
+
+            var loadingStates = [];
+            root.traverse(function(childNode) {
+                if (childNode.loading) {
+                    loadingStates.push(childNode.loading);
+                }
+            });
+
+            var defer = new $.Deferred();
+            $.when.apply($, loadingStates).done(function() {
+                root.invalidate();
+
+                try {
+                    var data = rootElement.toDataURL();
+                    defer.resolve(data);
+                } catch (e) {
+                    defer.rejectWith(e);
+                }
+            });
+
+            return defer.promise();
         },
 
         _resize: function() {
@@ -489,17 +511,8 @@
         var surface = new Surface(container, options);
         surface.draw(group);
 
-        var loadingStates = [];
-        surface._root.traverse(function(childNode) {
-            if (childNode.loading) {
-                loadingStates.push(childNode.loading);
-            }
-        });
-
-        var promise = new $.Deferred();
-        $.when.apply($, loadingStates).done(function() {
-            promise.resolve(surface.image());
-        }).always(function() {
+        var promise = surface.image();
+        promise.always(function() {
             surface.destroy();
             container.remove();
         });

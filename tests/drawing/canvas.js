@@ -1190,5 +1190,18 @@
             loaded = true;
             image._observers[0].loading.resolve();
         });
+
+        asyncTest("throws an error if the canvas becomes tainted", function() {
+            var image = new d.Image("http://goo.gl/6ov8Gw", new g.Rect([0, 0], [100, 100]));
+            group.append(image);
+
+            d.exportImage(group).done(function() {
+                ok(false, "Should fail");
+            }).fail(function(small) {
+                ok(true);
+            }).always(function() {
+                start();
+            });
+        });
     })();
 })();
