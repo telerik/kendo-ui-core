@@ -1050,7 +1050,7 @@
         var LoadedImageNode = canv.ImageNode.extend({
             init: function(srcElement) {
                 canv.ImageNode.fn.init.call(this, srcElement);
-                this._loaded = true;
+                this.loading.resolve();
             }
         });
 
@@ -1060,7 +1060,7 @@
             setup: function() {
                 image = new d.Image("Foo", new g.Rect(new Point(10, 20), [90, 80]));
                 imageNode = new canv.ImageNode(image);
-                imageNode._loaded = true;
+                imageNode.loading.resolve();
             }
         });
 
@@ -1080,14 +1080,14 @@
             }));
         });
 
-        test("setting src resets loaded state", function() {
+        test("setting src resets loading state", function() {
             image.src("Bar");
-            ok(!imageNode._loaded);
+            equal(imageNode.loading.state(), "pending");
         });
 
-        test("load handler sets loaded state", function() {
+        test("load handler resolves loading state", function() {
             imageNode.onLoad();
-            ok(imageNode._loaded);
+            equal(imageNode.loading.state(), "resolved");
         });
 
         test("load handler invalidates node", function() {

@@ -428,16 +428,16 @@
             PathNode.fn.init.call(this, srcElement);
 
             this.onLoad = $.proxy(this.onLoad, this);
-            this._loaded = false;
 
             this.img = new Image();
             this.img.onload = this.onLoad;
-
             this.img.src = srcElement.src();
+
+            this.loading = new $.Deferred();
         },
 
         renderTo: function(ctx) {
-            if (this._loaded) {
+            if (this.loading.state() === "resolved") {
                 ctx.save();
 
                 this.setTransform(ctx);
@@ -451,7 +451,7 @@
 
         optionsChange: function(e) {
             if (e.field === "src") {
-                this._loaded = false;
+                this.loading = new $.Deferred();
                 this.img.src = this.srcElement.src();
             } else {
                 PathNode.fn.optionsChange.call(this, e);
@@ -459,7 +459,7 @@
         },
 
         onLoad: function() {
-            this._loaded = true;
+            this.loading.resolve();
             this.invalidate();
         },
 
