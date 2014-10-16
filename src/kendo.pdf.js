@@ -1,13 +1,13 @@
 (function(f, define){
-    define([ "./pdf/core", "./pdf/ttf", "./kendo.saveas" ], f);
+    define([ "./kendo.core", "./pdf/core", "./pdf/ttf" ], f);
 }) (function(){
 
 var __meta__ = {
-    id: "ooxml",
+    id: "pdf-export",
     name: "PDF export",
     category: "framework",
     advanced: true,
-    depends: [ "saveas" ]
+    depends: [ "drawing" ]
 };
 
 (function(kendo){

@@ -1,9 +1,9 @@
 (function(f, define){
     define([
-        "./shapes",
+        "../kendo.core",
         "../kendo.color",
         "../kendo.pdf",
-        "../kendo.saveas"
+        "./shapes"
     ], f);
 })(function(){
 
