@@ -80,6 +80,7 @@
         setTimeout(function() {
             start();
             equal(application.view().id, "/");
+            application.destroy();
         }, 400);
     });
 

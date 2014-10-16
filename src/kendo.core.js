@@ -2537,6 +2537,20 @@ function pad(number, digits, end) {
             return role.replace(/(\S+)/g, "[" + kendo.attr("role") + "=$1],").slice(0, -1);
         },
 
+        directiveSelector: function(directives) {
+            var selectors = directives.split(" ");
+
+            if (selectors) {
+                for (var i = 0; i < selectors.length; i++) {
+                    if (selectors[i] != "view") {
+                        selectors[i] = selectors[i].replace(/(\w*)(view|bar|strip|over)$/, "$1-$2");
+                    }
+                }
+            }
+
+            return selectors.join(" ").replace(/(\S+)/g, "kendo-mobile-$1,").slice(0, -1);
+        },
+
         triggeredByInput: function(e) {
             return (/^(label|input|textarea|select)$/i).test(e.target.tagName);
         },
@@ -3029,6 +3043,8 @@ function pad(number, digits, end) {
         appLevelNativeScrolling: function() {
             return kendo.mobile.application && kendo.mobile.application.options && kendo.mobile.application.options.useNativeScrolling;
         },
+
+        roles: {},
 
         ui: {
             Widget: MobileWidget,
@@ -3947,6 +3963,23 @@ function pad(number, digits, end) {
         }
 
         return start;
+    };
+
+    kendo.compileMobileDirective = function(element, scopeSetup) {
+        var angular = window.angular;
+
+        element.attr("data-" + kendo.ns + "role", element[0].tagName.toLowerCase().replace('kendo-mobile-', '').replace('-', ''));
+
+        angular.element(element).injector().invoke(["$compile", function($compile) {
+            var scope = angular.element(element).scope();
+            if (scopeSetup) {
+                scopeSetup(scope);
+            }
+            $compile(element)(scope);
+            scope.$digest();
+        }]);
+
+        return kendo.widgetInstance(element, kendo.mobile.ui);
     };
 
 })(jQuery, window);
