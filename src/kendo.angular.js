@@ -24,6 +24,7 @@ var __meta__ = {
         $injector = angular.injector(['ng']),
         $parse = $injector.get('$parse'),
         $timeout = $injector.get('$timeout'),
+        $defaultCompile,
         $log = $injector.get('$log');
 
     function withoutTimeout(f) {
@@ -473,9 +474,12 @@ var __meta__ = {
         }, true); // watch for object equality. Use native or simple values.
     }
 
-    module.factory('directiveFactory', function() {
+    module.factory('directiveFactory', [ '$compile', function(compile) {
         var KENDO_COUNT = 0;
         var RENDERED = false;
+
+        // caching $compile for the dirty hack upstairs. This is awful, but we happen to have elements outside of the bootstrapped root :(.
+        $defaultCompile = compile;
 
         var create = function(role, origAttr) {
 
@@ -551,7 +555,7 @@ var __meta__ = {
         return {
             create: create
         };
-    });
+    }]);
 
     var TAGNAMES = {
         Editor         : "textarea",
@@ -767,8 +771,16 @@ var __meta__ = {
             }
             return;
         }
-        var scope = self.$angular_scope || angular.element(self.element).scope(),
-            compile = $injector.get("$compile");
+        var scope, compile, injector;
+
+        var scope = self.$angular_scope || angular.element(self.element).scope();
+        var injector = self.element.injector();
+
+        if (injector) {
+            compile = injector.get("$compile");
+        } else {
+            compile = $defaultCompile;
+        }
 
         if (scope && compile) {
             withoutTimeout(function(){
@@ -786,6 +798,7 @@ var __meta__ = {
                         break;
 
                       case "compile":
+
                         angular.forEach(elements, function(el, i){
                             var itemScope;
                             if (x.scopeFrom) {
