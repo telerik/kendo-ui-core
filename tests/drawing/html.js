@@ -20,7 +20,9 @@
             });
             ok(text instanceof drawing.Text);
             equal(text.content(), "Foo bar");
-            equal(text.options.font, "normal normal bold 16px monospace");
+
+            var font = text.options.font.replace("700", "bold");
+            equal(font, "normal normal bold 16px monospace");
         });
     });
 

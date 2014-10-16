@@ -325,8 +325,8 @@
         var dir = getPropertyValue(style, "direction");
 
         var backgroundColor = getPropertyValue(style, "background-color");
-        backgroundColor = kendo.parseColor(backgroundColor).toRGB();
-        if (backgroundColor && backgroundColor.a === 0) {
+        backgroundColor = kendo.parseColor(backgroundColor);
+        if (backgroundColor && backgroundColor.toRGB().a === 0) {
             backgroundColor = null;     // opacity zero
         }
 
