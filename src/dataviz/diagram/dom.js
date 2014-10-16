@@ -1530,9 +1530,9 @@
                 var editorType;
 
                 if (item instanceof Shape) {
-                    var editorType = "shape";
+                    editorType = "shape";
                 } else if (item instanceof Connection) {
-                    var editorType = "connection";
+                    editorType = "connection";
                 } else {
                     return;
                 }
@@ -1560,7 +1560,7 @@
                 }
             },
 
-            save: function() {
+            saveEdit: function() {
                 if (this.editor && this.editor.end() &&
                     !this.trigger("save", this._editArgs())) {
                     this._getEditDataSource().sync();
@@ -2412,7 +2412,6 @@
                         this._addConnection(copied);
                         copied.position(new Point(item.options.x + offsetX, item.options.y + offsetY));
                         copied.select(true);
-                        debugger;
                         copied.updateModel();
                     }
 
@@ -2855,13 +2854,14 @@
                                 });
                                 var element = this.toolService.hoveredItem;
                                 if (element) {
+                                    var point;
                                     var toolBarElement = this.toolBar.element;
                                     var popupWidth = this.toolBar._popup.element.outerWidth();
                                     var popupHeight = this.toolBar._popup.element.outerHeight();
                                     if (element instanceof Shape) {
                                         var selectionBounds = this._resizingAdorner.bounds();
                                         var shapeBounds = element._transformedBounds();
-                                        var point = Point(shapeBounds.x, shapeBounds.y)
+                                        point = Point(shapeBounds.x, shapeBounds.y)
                                                         .minus(Point(
                                                             (popupWidth - selectionBounds.width) / 2,
                                                             popupHeight
@@ -2875,7 +2875,7 @@
                                             this.modelToView(bottomRight)
                                         );
 
-                                        var point = Point(rect.x, rect.y)
+                                        point = Point(rect.x, rect.y)
                                                         .minus(Point(
                                                             (popupWidth - connectionBounds.width - 20) / 2,
                                                             popupHeight
@@ -2961,6 +2961,13 @@
                 var dsOptions = this.options.dataSource || {};
                 var ds = isArray(dsOptions) ? { data: dsOptions } : dsOptions;
 
+                ds = deepExtend({}, {
+                    schema: {
+                        modelBase: ShapeModel,
+                        model: ShapeModel
+                    }
+                }, ds)
+
                 if (this.dataSource && this._shapesRefreshHandler) {
                     this.dataSource
                         .unbind("change", this._shapesRefreshHandler)
@@ -2970,7 +2977,7 @@
                     this._shapesErrorHandler = proxy(this._error, this);
                 }
 
-                this.dataSource = kendo.data.DiagramDataSource.create(ds)
+                this.dataSource = kendo.data.DataSource.create(ds)
                     .bind("change", this._shapesRefreshHandler)
                     .bind("error", this._shapesErrorHandler);
             },
@@ -2978,6 +2985,13 @@
             _connectionDataSource: function() {
                 var dsOptions = this.options.connectionsDataSource || {};
                 var ds = isArray(dsOptions) ? { data: dsOptions } : dsOptions;
+
+                ds = deepExtend({}, {
+                    schema: {
+                        modelBase: ConnectionModel,
+                        model: ConnectionModel
+                    }
+                }, ds)
 
                 if (this.connectionsDataSource && this._connectionsRefreshHandler) {
                     this.connectionsDataSource
@@ -2988,7 +3002,7 @@
                     this._connectionsErrorHandler = proxy(this._error, this);
                 }
 
-                this.connectionsDataSource = kendo.data.DiagramConnectionDataSource.create(ds)
+                this.connectionsDataSource = kendo.data.DataSource.create(ds)
                     .bind("change", this._connectionsRefreshHandler)
                     .bind("error", this._connectionsErrorHandler);
             },
@@ -3256,17 +3270,6 @@
             }
         });
 
-        var DiagramDataSource = kendo.data.DataSource.extend({
-            init: function(options) {
-                kendo.data.DataSource.fn.init.call(this, deepExtend({}, {
-                    schema: {
-                        modelBase: ShapeModel,
-                        model: ShapeModel
-                    }
-                }, options));
-            }
-        });
-
         var ConnectionModel = kendo.data.Model.define({
             id: "id",
 
@@ -3283,40 +3286,7 @@
             }
         });
 
-        var DiagramConnectionDataSource = kendo.data.DataSource.extend({
-            init: function(options) {
-                kendo.data.DataSource.fn.init.call(this, deepExtend({}, {
-                    schema: {
-                        modelBase: ConnectionModel,
-                        model: ConnectionModel
-                    }
-                }, options));
-            }
-        });
-
-        var createDataSource = function(type, name) {
-            return function(options) {
-                options = isArray(dataSource) ? { data: options } : options;
-
-                var dataSource = options || {};
-                var data = dataSource.data;
-
-                dataSource.data = data;
-
-                if (!(dataSource instanceof type) && dataSource instanceof kendo.data.DataSource) {
-                    throw new Error("Incorrect DataSource type. Only " + name + " instances are supported");
-                }
-
-                return dataSource instanceof type ? dataSource : new type(dataSource);
-            };
-        };
-
-        DiagramDataSource.create = createDataSource(DiagramDataSource, "DiagramDataSource");
-        DiagramConnectionDataSource.create = createDataSource(DiagramConnectionDataSource, "DiagramConnectionDataSource");
-
         deepExtend(kendo.data, {
-            DiagramDataSource: DiagramDataSource,
-            DiagramConnectionDataSource: DiagramConnectionDataSource,
             ConnectionModel: ConnectionModel,
             ShapeModel: ShapeModel
         });
