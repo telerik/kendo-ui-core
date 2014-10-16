@@ -734,6 +734,10 @@ var __meta__ = {
 
                         if (this._isInTimeSlot(adjustedEvent.occurrence)) {
                             var group = this.groups[groupIndex];
+                            if (!group._continuousEvents) {
+                                group._continuousEvents = [];
+                            }
+
                             var ranges = group.slotRanges(adjustedEvent.occurrence, false);
                             var rangeCount = ranges.length;
 
@@ -743,6 +747,7 @@ var __meta__ = {
                                 var range = ranges[0];
 
                                 element = this._createEventElement(adjustedEvent.occurrence, event, range.head || adjustedEvent.head, range.tail || adjustedEvent.tail);
+                                this.addContinuousEvent(group, range, element, event.isAllDay);
                                 element.appendTo(container);
                                 this._positionEvent(adjustedEvent.occurrence, element, range);
                             }
@@ -750,6 +755,18 @@ var __meta__ = {
                     }
                 }
             }
+        },
+
+        addContinuousEvent: function(group, range, element, isAllDay) {
+            var events = group._continuousEvents;
+
+            events.push({
+                element: element,
+                isAllDay: isAllDay,
+                uid: element.attr(kendo.attr("uid")),
+                start: range.start,
+                end: range.end
+            });
         },
 
         _createEventElement: function(occurrence, event, head, tail) {
@@ -858,8 +875,7 @@ var __meta__ = {
             var resources = this.groupedResources;
 
             if (resources.length) {
-                var isVerticalGroupped = this._groupOrientation() === "vertical";
-                if (isVerticalGroupped) {
+                if (this._groupOrientation() === "vertical") {
                     return this._rowCountForLevel(this.rowLevels.length - 1);
                 }
             }
@@ -976,6 +992,183 @@ var __meta__ = {
 
             this._resizeHint.last().addClass("k-last").find(".k-label-bottom").text(kendo.toString(kendo.timezone.toLocalDate(endTime), format));
         },
+
+        selectionByElement: function(cell) {
+            var offset = cell.offset();
+            return this._slotByPosition(offset.left, offset.top);
+        },
+
+        _updateDirection: function(selection, ranges, multiple, reverse, vertical) {
+
+            var startSlot = ranges[0].start;
+            var endSlot = ranges[ranges.length - 1].end;
+            if (multiple && !vertical) {
+                if (startSlot.index === endSlot.index &&
+                    startSlot.collectionIndex === endSlot.collectionIndex) {
+                    selection.backward = reverse;
+                }
+            }
+        },
+
+        _changeGroup: function(selection, previous) {
+            var method = previous ? "prevGroupSlot" : "nextGroupSlot";
+
+            var slot = this[method](selection.start, selection.groupIndex, false);
+
+            if (slot) {
+                selection.groupIndex += previous ? -1 : 1;
+            }
+
+            return slot;
+        },
+
+        prevGroupSlot: function(date, groupIndex, isDay) {
+            var group = this.groups[groupIndex];
+            var slot = group.ranges(date, date, isDay, false)[0].start;
+
+            if (groupIndex <= 0) {
+                return;
+            }
+
+            if (this._isVerticallyGrouped()) {
+                return slot;
+            } else {
+                //horizontal grouping
+            }
+        },
+
+        nextGroupSlot: function(date, groupIndex, isDay) {
+            var group = this.groups[groupIndex];
+            var slot = group.ranges(date, date, isDay, false)[0].start;
+
+            if (groupIndex >= this.groups.length - 1) {
+                return;
+            }
+
+            if (this._isVerticallyGrouped()) {
+                return slot;
+            } else {
+                //horizontal grouping
+            }
+        },
+
+        _verticalSlots: function (selection, ranges, multiple, reverse) {
+            var method = reverse ? "leftSlot" : "rightSlot";
+            var startSlot = ranges[0].start;
+            var endSlot = ranges[ranges.length - 1].end;
+            var group = this.groups[selection.groupIndex];
+
+            startSlot = group[method](startSlot);
+            endSlot = group[method](endSlot);
+
+            if (!multiple && this._isVerticallyGrouped() && (!startSlot || !endSlot)) {
+                startSlot = endSlot = this._changeGroup(selection, reverse);
+            }
+
+            return {
+                startSlot: startSlot,
+                endSlot: endSlot
+            };
+        },
+
+        _horizontalSlots: function (selection, ranges, multiple, reverse) {
+            var method = reverse ? "upSlot" : "downSlot";
+            var startSlot = ranges[0].start;
+            var endSlot = ranges[ranges.length - 1].end;
+            var group = this.groups[selection.groupIndex];
+
+            startSlot = group[method](startSlot);
+            endSlot = group[method](endSlot);
+
+            return {
+                startSlot: startSlot,
+                endSlot: endSlot
+            };
+        },
+
+        _changeViewPeriod: function(selection, reverse, vertical) {
+            var date = reverse ? this.previousDate() : this.nextDate();
+            var start = selection.start;
+            var end = selection.end;
+
+            selection.start = new Date(date);
+            selection.end = new Date(date);
+
+            if (!this._isVerticallyGrouped()) {
+                selection.groupIndex = reverse ? this.groups.length - 1 : 0;
+            }
+
+            var duration = end - start;
+
+            if (reverse) {
+                end = getMilliseconds(this.endTime());
+                end = end === 0 ? MS_PER_DAY : 0 ;
+
+                setTime(selection.start, end-duration);
+                setTime(selection.end,  end);
+            } else {
+                start = getMilliseconds(this.startTime());
+
+                setTime(selection.start, start);
+                setTime(selection.end, start + duration);
+            }
+
+            selection.events = [];
+
+            return true;
+        },
+
+        move: function(selection, key, shift) {
+            var handled = false;
+            var group = this.groups[selection.groupIndex];
+            var keys = kendo.keys;
+
+            var ranges = group.ranges(selection.start, selection.end, false, false);
+            var startSlot, endSlot, reverse, slots;
+
+            if (key === keys.DOWN || key === keys.UP) {
+                handled = true;
+                reverse = key === keys.UP;
+
+                this._updateDirection(selection, ranges, shift, reverse, true);
+
+                slots = this._verticalSlots(selection, ranges, shift, reverse);
+            } else if (key === keys.LEFT || key === keys.RIGHT) {
+                handled = true;
+                reverse = key === keys.LEFT;
+
+                this._updateDirection(selection, ranges, shift, reverse, false);
+
+                slots = this._horizontalSlots(selection, ranges, shift, reverse);
+
+                if ((!slots.startSlot ||!slots.endSlot ) && !shift && this._changeViewPeriod(selection, reverse, false)) {
+                    return handled;
+                }
+            }
+
+           if (handled) {
+               startSlot = slots.startSlot;
+               endSlot = slots.endSlot;
+
+               if (shift) {
+                   var backward = selection.backward;
+
+                   if (backward && startSlot) {
+                       selection.start = startSlot.startDate();
+                   } else if (!backward && endSlot) {
+                       selection.end = endSlot.endDate();
+                   }
+               } else if (startSlot && endSlot) {
+                   selection.start = startSlot.startDate();
+                   selection.end = endSlot.endDate();
+               }
+
+               selection.events = [];
+           }
+
+            return handled;
+        },
+
 
         destroy: function() {
             var that = this;
