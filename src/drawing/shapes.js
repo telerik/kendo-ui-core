@@ -403,7 +403,7 @@
             return this.rect().bbox();
         }
     });
-    deepExtend(Text.fn, drawing.mixins.Paintable);
+    drawing.mixins.Paintable.extend(Text.fn);
     definePointAccessors(Text.fn, ["position"]);
 
     var Circle = Element.extend({
@@ -433,7 +433,7 @@
             return this._geometry.bbox();
         }
     });
-    deepExtend(Circle.fn, drawing.mixins.Paintable);
+    drawing.mixins.Paintable.extend(Circle.fn);
     defineGeometryAccessors(Circle.fn, ["geometry"]);
 
     var Arc = Element.extend({
@@ -479,7 +479,7 @@
             return path;
         }
     });
-    deepExtend(Arc.fn, drawing.mixins.Paintable);
+    drawing.mixins.Paintable.extend(Arc.fn);
     defineGeometryAccessors(Arc.fn, ["geometry"]);
 
     var GeometryElementsArray = ElementsArray.extend({
@@ -676,7 +676,7 @@
             return boundingBox;
         }
     });
-    deepExtend(Path.fn, drawing.mixins.Paintable);
+    drawing.mixins.Paintable.extend(Path.fn);
 
     Path.fromRect = function(rect, options) {
         return new Path(options)
@@ -764,7 +764,7 @@
             return elementsClippedBoundingBox(this.paths, this.currentTransform(transformation));
         }
     });
-    deepExtend(MultiPath.fn, drawing.mixins.Paintable);
+    drawing.mixins.Paintable.extend(MultiPath.fn);
 
     var Image = Element.extend({
         nodeType: "Image",

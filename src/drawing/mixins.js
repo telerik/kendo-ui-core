@@ -11,6 +11,11 @@
 
     // Mixins =================================================================
     var Paintable = {
+        extend: function(proto) {
+            proto.fill = this.fill;
+            proto.stroke = this.stroke;
+        },
+
         fill: function(color, opacity) {
             if (defined(color)) {
                 this.options.set("fill.color", color);
