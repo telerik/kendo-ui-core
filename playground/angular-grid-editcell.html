@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="../dist/styles/web/kendo.common.css" />
+    <link rel="stylesheet" href="../dist/styles/web/kendo.default.css" />
+    <script src="loader.js"></script>
+    <script>
+      requireSync([
+        "../src/jquery.js",
+        "../src/angular.js",
+        "../src/kendo.web.js"
+      ]);
+    </script>
+  </head>
+  <body ng-app="myapp" ng-controller="myctrl">
+    <div kendo-grid k-options="gridOptions"></div>
+    <script>
+      angular.module("myapp", [ "kendo.directives" ])
+      .controller("myctrl", function($scope) {
+        $scope.data = new kendo.data.ObservableArray([
+            { text: "Foo", id: 1 },
+            { text: "Bar", id: 2 }
+        ]);
+        $scope.gridOptions = {
+            dataSource: $scope.data,
+            editable: true,
+            columns: [ { field: "text" }, { field: "id", editor: createEditor } ]
+        };
+        function createEditor(container, options) {
+            $("<input name='" + options.field + "' kendo-numerictextbox='ns.numericTextBox' k-ng-bind='dataItem.id' />")
+                .appendTo(container);
+        }
+      });
+    </script>
+  </body>
+</html>
