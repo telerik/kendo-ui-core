@@ -54,8 +54,8 @@
             equal(element.opacity(0.5), element);
         });
 
-        test("opacity returns undefined if opacity is not defined", function() {
-            equal(element.opacity(), undefined);
+        test("opacity returns 1 if opacity is not defined", function() {
+            equal(element.opacity(), 1);
         });
 
         test("opacity returns opacity option value", function() {

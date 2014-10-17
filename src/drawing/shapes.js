@@ -27,6 +27,7 @@
         arrayLimits = util.arrayLimits,
         defined = util.defined,
         last = util.last,
+        valueOrDefault = util.valueOrDefault,
         ObserversMixin = kendo.mixins.ObserversMixin,
 
         inArray = $.inArray,
@@ -140,7 +141,7 @@
                 this.options.set("opacity", value);
                 return this;
             } else {
-                return this.options.get("opacity");
+                return valueOrDefault(this.options.get("opacity"), 1);
             }
         },
 
