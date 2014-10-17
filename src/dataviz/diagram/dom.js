@@ -1550,7 +1550,8 @@
                         model: item.dataItem,
                         type: editorType,
                         target: this,
-                        editors: editable.editors
+                        editors: editable.editors,
+                        template: editable.template
                     });
 
                     this.editor.open();
@@ -3628,7 +3629,12 @@
 
                 var formContent = "";
 
-                formContent += this._appendFields();
+                if (this.options.template) {
+                    formContent += this._renderTemplate();
+                    this.fields = [];
+                } else {
+                    formContent += this._appendFields();
+                }
 
                 formContent += this._appendButtons();
 
@@ -3645,6 +3651,18 @@
                 });
 
                 this._attachButtonEvents();
+            },
+
+            _renderTemplate: function() {
+                var template = this.options.template;
+
+                if (typeof template === "string") {
+                    template = window.unescape(template);
+                }
+
+                template = kendo.template(template)(this.model);
+
+                return template;
             },
 
             _appendFields: function() {
