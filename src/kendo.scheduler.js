@@ -2767,6 +2767,11 @@ var __meta__ = {
         },
 
         _unbindView: function(view) {
+            var that = this;
+            that.angular("cleanup", function(){
+                return { elements: that.items() };
+            });
+
             view.destroy();
         },
 

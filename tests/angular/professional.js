@@ -393,7 +393,7 @@
             equal(el.text(), "6");
     });
 
-    ngTest("Scheduler -- compile customizable templates", 6, function() {
+    ngTest("Scheduler -- compile customizable templates", 8, function() {
         angular.module("kendo.tests").controller("mine", function($scope) {
             $scope.options = {
                 date: new Date("2013/6/6"),
@@ -437,7 +437,6 @@
 
         $("<div ng-controller=mine><div kendo-scheduler='scheduler' k-options='options'></div></div>").appendTo(QUnit.fixture);
         }, function() {
-            console.warn("onDestroy does not work, reducing the expects");
             stop();
             var scheduler = QUnit.fixture.find('[data-role=scheduler]').getKendoScheduler();
 
