@@ -656,6 +656,35 @@
         equal(instance.wrapper.find(".k-grid-toolbar .k-grid-add").text(), "foo");
     });
 
+    test("defeault text for createchild command button", function() {
+        createTreeList({
+            dataSource: [ { id: 1 } ],
+            columns: [
+                { field: "id" },
+                { command: [ { name: "createchild" } ] }
+            ]
+        });
+
+        equal(button("add").text(), "Add child record");
+    });
+
+    test("change default text of createchild command button", function() {
+        createTreeList({
+            dataSource: [ { id: 1 } ],
+            columns: [
+                { field: "id" },
+                { command: [ { name: "createchild" } ] }
+            ],
+            messages: {
+                commands: {
+                    createchild: "foo"
+                }
+            }
+        });
+
+        equal(button("add").text(), "foo");
+    });
+
     test("toolbar as a string template", function() {
         createTreeList({
             toolbar: "<p class='foo'>bar</p>"

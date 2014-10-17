@@ -87,6 +87,11 @@ var __meta__ = {
             className: "k-grid-add",
             methodName: "addRow"
         },
+        createchild: {
+            imageClass: "k-add",
+            className: "k-grid-add",
+            methodName: "addRow"
+        },
         destroy: {
             imageClass: "k-delete",
             className: "k-grid-delete",
@@ -759,6 +764,7 @@ var __meta__ = {
                     update: "Update",
                     canceledit: "Cancel",
                     create: "Add new record",
+                    createchild: "Add child record",
                     destroy: "Delete"
                 }
             },

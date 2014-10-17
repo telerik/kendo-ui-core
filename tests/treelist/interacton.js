@@ -347,6 +347,22 @@
         instance.content.find(".k-grid-edit").click();
     });
 
+    test("clicking create child button triggers edit mode", function() {
+        createTreeList({
+            dataSource: [ { id: 1 } ],
+            columns: [
+                { field: "id" },
+                { command: ["createchild"] }
+            ]
+        });
+
+        instance.editRow = function() {
+            ok(true);
+        };
+
+        instance.content.find(".k-grid-add").click();
+    });
+
     test("editing row shows update and cancel buttons", function() {
         createTreeList({
             dataSource: [ { id: 1 } ],
