@@ -1209,7 +1209,7 @@
             d.exportImage(group).done(function() {
                 ok(false, "Should fail");
             }).fail(function(e) {
-                contains(e.message, "Tainted");
+                ok(e.message.indexOf("Tainted") + e.message.indexOf("insecure") >= 0);
             }).always(function() {
                 start();
             });
