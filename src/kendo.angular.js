@@ -571,9 +571,11 @@ var __meta__ = {
         Validator      : "form",
         Button         : "button",
         ListView       : "ul",
+        MobileListView : "ul",
         TreeView       : "ul",
         Menu           : "ul",
-        ContextMenu    : "ul"
+        ContextMenu    : "ul",
+        ActionSheet    : "ul"
     };
 
     var SKIP_SHORTCUTS = [
