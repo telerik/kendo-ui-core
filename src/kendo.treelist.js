@@ -1419,7 +1419,9 @@ var __meta__ = {
                 return;
             }
 
-            model._edit = true;
+            if (this._editMode() != "popup") {
+                model._edit = true;
+            }
 
             this._cancelEditor();
 

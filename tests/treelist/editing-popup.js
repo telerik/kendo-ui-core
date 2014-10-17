@@ -265,4 +265,13 @@
         var form = instance.editor.wrapper.find(".k-edit-form-container");
         equal(form.children().first().html(), "foo");
     });
+
+    test("edit row does not put orignal row in edit mode", function() {
+        var attr = "[" + kendo.attr("container-for") + "]";
+        createTreeList();
+
+        instance.editRow(instance.content.find("tr").first());
+
+        equal(instance.content.find(attr).length, 0);
+    });
 })();
