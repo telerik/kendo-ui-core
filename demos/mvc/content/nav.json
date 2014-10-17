@@ -8124,6 +8124,7 @@
       {
         "text": "AngularJS",
         "new": true,
+        "mobile": true,
         "disableInMobile": true,
         "url": "actionsheet/angular",
         "title": {

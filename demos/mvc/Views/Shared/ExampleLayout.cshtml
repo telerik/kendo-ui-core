@@ -117,6 +117,7 @@
             <div id="device-wrapper">
                 <div id="mobile-application-container">
                     @RenderBody()
+                    @if (!ViewBag.MobileAngular) {
                     <div data-role="layout" data-id="examples">
                         <header data-role="header">
                             <div data-role="navbar">
@@ -126,6 +127,7 @@
                             </div>
                         </header>
                     </div>
+                    }
                 </div>
             </div>
 
@@ -229,7 +231,7 @@
         <h2>JSP source</h2>
                 break;
         }
-              
+
         @if (html || php || jsp || mvc)
         {
             <div class="other-source">
@@ -409,9 +411,15 @@
                     options.platform = mobileTheme;
                 }
 
+                window.mobileAppOptions;
+
+@if (!ViewBag.MobileAngular) {
+    <text>
                 if (!(kendo.support.browser.msie && kendo.support.browser.version < 10) && !kendo.support.browser.opera) {
                     window.app = new kendo.mobile.Application($("#mobile-application-container"), options);
                 }
+    </text>
+}
             });
         </text>
     }
