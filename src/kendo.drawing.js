@@ -12,7 +12,8 @@
         "./drawing/canvas",
         "./drawing/vml",
         "./drawing/pdf",
-        "./drawing/html"
+        "./drawing/html",
+        "./drawing/animation"
     ], f);
 })(function(){
 
