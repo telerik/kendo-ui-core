@@ -785,9 +785,8 @@ var __meta__ = {
             CANCEL
         ],
 
-        _toggleChildren: function(e) {
-            var icon = $(e.currentTarget);
-            var model = this.dataItem(icon);
+        _toggle: function(row, expand) {
+            var model = this.dataItem(row);
             var loaded = model.loaded();
 
             // reset error state
@@ -796,13 +795,17 @@ var __meta__ = {
                 model._error = undefined;
             }
 
-            // do not trigger load twice
+            // do not load items that are currently loading
             if (!loaded && model.expanded) {
                 return;
             }
 
             // toggle expanded state
-            model.expanded = !model.expanded;
+            if (typeof expand == "undefined") {
+                expand = !model.expanded;
+            }
+
+            model.expanded = expand;
 
             if (!loaded) {
                 this.dataSource.load(model)
@@ -810,6 +813,20 @@ var __meta__ = {
             }
 
             this.refresh();
+        },
+
+        expand: function(row) {
+            this._toggle(row, true);
+        },
+
+        collapse: function(row) {
+            this._toggle(row, false);
+        },
+
+        _toggleChildren: function(e) {
+            var icon = $(e.currentTarget);
+
+            this._toggle(icon);
         },
 
         _attachEvents: function() {
@@ -1361,7 +1378,15 @@ var __meta__ = {
         },
 
         select: function(value) {
-            return this.selectable.value(value);
+            var selectable = this.selectable;
+
+            if (typeof value !== "undefined" && !selectable.options.multiple) {
+                selectable.clear();
+
+                value = value.first();
+            }
+
+            return selectable.value(value);
         },
 
         clearSelection: function() {

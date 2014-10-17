@@ -4349,6 +4349,36 @@
         }
       },
       {
+        "text": "Popup editing",
+        "url": "treelist/editing-popup",
+        "title": {
+            "kendo-ui": "Popup data editing example for Kendo UI TreeList widget"
+        },
+        "meta": {
+            "kendo-ui": "This demo illustrates how the records in KendoTreeList can be easily modified in a pop-up dialog."
+        }
+      },
+      {
+        "text": "Events",
+        "url": "treelist/events",
+        "title": {
+            "kendo-ui": "Example of using events in Kendo UI TreeList control"
+        },
+        "meta": {
+            "kendo-ui": "This example demonstrates different events which are available in KendoTreeList widget and the code explains how you can use them for  your project."
+        }
+      },
+      {
+        "text": "API",
+        "url": "treelist/api",
+        "title": {
+            "kendo-ui": "KendoTreeList API Demo"
+        },
+        "meta": {
+            "kendo-ui": "This demo shows how API Functions can manipulate the contents and behavior of Kendo UI TreeList widget."
+        }
+      },
+      {
         "text": "MVVM",
         "url": "treelist/mvvm",
         "title": {
