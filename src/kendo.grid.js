@@ -598,7 +598,7 @@ var __meta__ = {
     function findReorderTarget(columns, target, source, before) {
         if (target.columns) {
             target = target.columns;
-            return target[before ? 0 : target.length - 1]
+            return target[before ? 0 : target.length - 1];
         } else {
             var parent = columnParent(target, columns);
             var parentColumns;
@@ -610,11 +610,11 @@ var __meta__ = {
             }
 
             var index = inArray(target, parentColumns);
-            if (index == 0 && before) {
+            if (index === 0 && before) {
                 index++;
             } else if (index == parentColumns.length - 1 && !before) {
                 index--;
-            } else if (index > 0 || (index == 0 && !before)) {
+            } else if (index > 0 || (index === 0 && !before)) {
                 index += before ? -1 : 1;
             }
 
@@ -1725,7 +1725,7 @@ var __meta__ = {
                     columns = parent ? parent.columns : that.columns;
 
                     return inArray(target, columns);
-                }
+                };
 
                 that.wrapper.kendoReorderable({
                     draggable: that._draggableInstance,
@@ -1734,8 +1734,7 @@ var __meta__ = {
                         return columns[sourceIndex].lockable !== false && targetParentContainerIndex(columns, sourceIndex, targetIndex) > -1;
                     },
                     inSameContainer: function(e) {
-                        return $(e.source).parent()[0] === $(e.target).parent()[0]
-                            && targetParentContainerIndex(flatColumns(that.columns), e.sourceIndex, e.targetIndex) > -1;
+                        return $(e.source).parent()[0] === $(e.target).parent()[0] && targetParentContainerIndex(flatColumns(that.columns), e.sourceIndex, e.targetIndex) > -1;
                     },
                     change: function(e) {
                         var columns = flatColumns(that.columns);
@@ -1876,7 +1875,7 @@ var __meta__ = {
             if (column.columns || destColumn.columns) {
                 if (column.columns) {
                     if (destColumn.columns) {
-                        destColumn = leafColumns(destColumn.columns)
+                        destColumn = leafColumns(destColumn.columns);
                         destColumn = destColumn[before ? 0 : destColumn.length - 1];
                     }
 
@@ -1921,7 +1920,7 @@ var __meta__ = {
             var header = this.thead.add(this.lockedTable);
             for (var idx = 0, length = columns.length; idx < length; idx++) {
                 var position = columnPosition(columns[idx], this.columns);
-                cell = header.find("tr").eq(position.row).find(".k-header:not(.k-group-cell,.k-hierarchy-cell)").eq(position.cell);
+                var cell = header.find("tr").eq(position.row).find(".k-header:not(.k-group-cell,.k-hierarchy-cell)").eq(position.cell);
                 cell.attr(kendo.attr("index"), idx);
             }
         },
