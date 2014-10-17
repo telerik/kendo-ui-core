@@ -83,31 +83,26 @@ var __meta__ = {
 
     var defaultCommands = {
         create: {
-            text: "Add new record",
             imageClass: "k-add",
             className: "k-grid-add",
             methodName: "addRow"
         },
         destroy: {
-            text: "Delete",
             imageClass: "k-delete",
             className: "k-grid-delete",
             methodName: "removeRow"
         },
         edit: {
-            text: "Edit",
             imageClass: "k-edit",
             className: "k-grid-edit",
             methodName: "editRow"
         },
         update: {
-            text: "Update",
             imageClass: "k-update",
             className: "k-primary k-grid-update",
             methodName: "saveRow"
         },
         canceledit: {
-            text: "Cancel",
             imageClass: "k-cancel",
             className: "k-grid-cancel",
             methodName: "_cancelEdit"
@@ -758,7 +753,14 @@ var __meta__ = {
                 noRows: "No records to display",
                 loading: "Loading...",
                 requestFailed: "Request failed.",
-                retry: "Retry"
+                retry: "Retry",
+                commands: {
+                    edit: "Edit",
+                    update: "Update",
+                    canceledit: "Cancel",
+                    create: "Add new record",
+                    destroy: "Delete"
+                }
             },
             filterable: false,
             editable: false
@@ -958,7 +960,7 @@ var __meta__ = {
             }
 
             if ($.isArray(options)) {
-                var buttons = $.map(options, this._button);
+                var buttons = this._buildCommands(options);
                 new kendoDom.Tree(this.toolbar[0]).render(buttons);
             } else {
                 this.toolbar.append(kendo.template(options)({}));
@@ -1208,9 +1210,9 @@ var __meta__ = {
 
                 if (column.command) {
                     if (model._edit) {
-                        children = $.map(["update", "canceledit"], this._button);
+                        children = this._buildCommands(["update", "canceledit"]);
                     } else {
-                        children = $.map(column.command, this._button);
+                        children = this._buildCommands(column.command);
                     }
                 } else  {
                     children.push(this._cellContent(column, model));
@@ -1243,11 +1245,22 @@ var __meta__ = {
             }
         },
 
+        _buildCommands: function(commands) {
+            var i, result = [];
+
+            for (i = 0; i < commands.length; i++) {
+                result.push(this._button(commands[i]));
+            }
+
+            return result;
+        },
+
         _button: function(command) {
             var name = command.name || command;
+            var text = this.options.messages.commands[name];
             var icon = [];
 
-            command = extend({} , defaultCommands[name], command);
+            command = extend({} , defaultCommands[name], { text: text }, command);
 
             if (command.imageClass) {
                 icon.push(kendoDomElement("span", {
@@ -1542,7 +1555,7 @@ var __meta__ = {
                 extend(options, {
                     window: this.options.editable.window,
                     commandRenderer: proxy(function () {
-                        return $.map(["update", "canceledit"], this._button);
+                        return this._buildCommands(["update", "canceledit"]);
                     }, this),
                     fieldRenderer: this._cellContent,
                     save: proxy(this.saveRow, this),

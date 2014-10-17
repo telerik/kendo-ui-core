@@ -569,6 +569,93 @@
         equal(fooButton.find(".k-icon").length, 0);
     });
 
+    test("change default text of edit command button", function() {
+        createTreeList({
+            dataSource: [ { id: 1 } ],
+            columns: [
+                { field: "id" },
+                { command: [ { name: "edit" } ] }
+            ],
+            messages: {
+                commands: {
+                    edit: "foo"
+                }
+            }
+        });
+
+        equal(button("edit").text(), "foo");
+    });
+
+    test("change default text of destroy command button", function() {
+        createTreeList({
+            dataSource: [ { id: 1 } ],
+            columns: [
+                { field: "id" },
+                { command: [ { name: "destroy" } ] }
+            ],
+            messages: {
+                commands: {
+                    destroy: "foo"
+                }
+            }
+        });
+
+        equal(button("delete").text(), "foo");
+    });
+
+    test("change default text of update command button", function() {
+        createTreeList({
+            dataSource: [ { id: 1 } ],
+            columns: [
+                { field: "id" },
+                { command: [ { name: "edit" } ] }
+            ],
+            messages: {
+                commands: {
+                    update: "foo"
+                }
+            }
+        });
+
+        instance.editRow("tr:first");
+        equal(button("update").text(), "foo");
+    });
+
+    test("change default text of cancel command button", function() {
+        createTreeList({
+            dataSource: [ { id: 1 } ],
+            columns: [
+                { field: "id" },
+                { command: [ { name: "edit" } ] }
+            ],
+            messages: {
+                commands: {
+                    canceledit: "foo"
+                }
+            }
+        });
+
+        instance.editRow("tr:first");
+        equal(button("cancel").text(), "foo");
+    });
+
+    test("change default text of create command button", function() {
+        createTreeList({
+            dataSource: [ { id: 1 } ],
+            columns: [
+                { field: "id" }
+            ],
+            toolbar: [ "create" ],
+            messages: {
+                commands: {
+                    create: "foo"
+                }
+            }
+        });
+
+        equal(instance.wrapper.find(".k-grid-toolbar .k-grid-add").text(), "foo");
+    });
+
     test("toolbar as a string template", function() {
         createTreeList({
             toolbar: "<p class='foo'>bar</p>"
