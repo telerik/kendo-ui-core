@@ -1543,13 +1543,14 @@
                 }
 
                 if (item.dataItem) {
+                    var editable = item.options.editable;
                     this.editor = new PopupEditor(this.element, {
                         updateEditor: proxy(this._update, this),
                         cancelEditor: proxy(this._cancel, this),
                         model: item.dataItem,
                         type: editorType,
                         target: this,
-                        editors: item.editable.editors
+                        editors: editable.editors
                     });
 
                     this.editor.open();
@@ -2887,7 +2888,7 @@
                                 tools: tools
                             });
                             var element = this.toolService.hoveredItem;
-                            var padding = 5;
+                            var padding = 10;
                             if (element) {
                                 var point;
                                 var toolBarElement = this.toolBar.element;
@@ -3577,6 +3578,10 @@
                 for (var field in modelFields) {
                     var result = {};
                     if (this._isEditable(field)) {
+                        var editor = this.options.editors[field];
+                        if (editor) {
+                            result.editor = editor;
+                        }
                         result.field = field;
                         fields.push(result);
                     }
@@ -3624,6 +3629,7 @@
                 var formContent = "";
 
                 formContent += this._appendFields();
+
                 formContent += this._appendButtons();
 
                 this.wrapper.append(
