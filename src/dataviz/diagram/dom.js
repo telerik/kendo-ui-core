@@ -1688,6 +1688,7 @@
                 var pan = center.minus(zoomedPoint);
                 if (updateZoom || this._pan.distanceTo(pan) >= MOBILE_PAN_DISTANCE) {
                     this._panTransform(pan);
+                    this._updateAdorners();
                 }
 
                 e.preventDefault();
