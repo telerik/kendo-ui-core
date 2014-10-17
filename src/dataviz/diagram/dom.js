@@ -2019,7 +2019,7 @@
                 }
 
                 if (item.length) {
-                    this.destroyToolBar();
+                    this._destroyToolBar();
                 } else {
                     dataSource.remove(item.dataItem);
                     dataSource.sync();
@@ -2826,7 +2826,7 @@
                 }
                 var p = this._calculatePosition(e);
                 if (e.which == 1 && this.toolService.start(p, this._meta(e))) {
-                    this.destroyToolBar();
+                    this._destroyToolBar();
                     e.preventDefault();
                 }
             },
@@ -2843,56 +2843,61 @@
                 }
                 var p = this._calculatePosition(e);
                 if (e.which == 1 && this.toolService.end(p, this._meta(e))) {
-                    var diagram = this.toolService.diagram;
+                    this._createToolBar();
+                    e.preventDefault();
+                }
+            },
 
-                    if (!this.toolBar && diagram.select().length === 1) {
-                        if (this.toolService.hoveredItem) {
-                        var tools = this.toolService.hoveredItem.options.editable.tools;
-                            if (tools) {
-                                this.toolBar = new DiagramToolBar(diagram, {
-                                    tools: tools
-                                });
-                                var element = this.toolService.hoveredItem;
-                                if (element) {
-                                    var point;
-                                    var toolBarElement = this.toolBar.element;
-                                    var popupWidth = this.toolBar._popup.element.outerWidth();
-                                    var popupHeight = this.toolBar._popup.element.outerHeight();
-                                    if (element instanceof Shape) {
-                                        var selectionBounds = this._resizingAdorner.bounds();
-                                        var shapeBounds = element._transformedBounds();
-                                        point = Point(shapeBounds.x, shapeBounds.y)
-                                                        .minus(Point(
-                                                            (popupWidth - selectionBounds.width) / 2,
-                                                            popupHeight
-                                                        ));
-                                    } else if (element instanceof Connection) {
-                                        var connectionBounds = element.bounds();
-                                        var topLeft = connectionBounds.topLeft();
-                                        var bottomRight = connectionBounds.bottomRight();
-                                        var rect = Rect.fromPoints(
-                                            this.modelToView(topLeft),
-                                            this.modelToView(bottomRight)
-                                        );
+            _createToolBar: function() {
+                var diagram = this.toolService.diagram;
 
-                                        point = Point(rect.x, rect.y)
-                                                        .minus(Point(
-                                                            (popupWidth - connectionBounds.width - 20) / 2,
-                                                            popupHeight
-                                                        ));
-                                    }
+                if (!this.toolBar && diagram.select().length === 1) {
+                    if (this.toolService.hoveredItem) {
+                    var tools = this.toolService.hoveredItem.options.editable.tools;
+                        if (tools) {
+                            this.toolBar = new DiagramToolBar(diagram, {
+                                tools: tools
+                            });
+                            var element = this.toolService.hoveredItem;
+                            if (element) {
+                                var point;
+                                var toolBarElement = this.toolBar.element;
+                                var popupWidth = this.toolBar._popup.element.outerWidth();
+                                var popupHeight = this.toolBar._popup.element.outerHeight();
+                                if (element instanceof Shape) {
+                                    var selectionBounds = this._resizingAdorner.bounds();
+                                    var shapeBounds = element._transformedBounds();
+                                    point = Point(shapeBounds.x, shapeBounds.y)
+                                                    .minus(Point(
+                                                        (popupWidth - selectionBounds.width) / 2,
+                                                        popupHeight
+                                                    ));
+                                } else if (element instanceof Connection) {
+                                    var connectionBounds = element.bounds();
+                                    var topLeft = connectionBounds.topLeft();
+                                    var bottomRight = connectionBounds.bottomRight();
+                                    var rect = Rect.fromPoints(
+                                        this.modelToView(topLeft),
+                                        this.modelToView(bottomRight)
+                                    );
 
-                                    if (point) {
-                                        point = Point(math.max(point.x, 0), math.max(point.y, 0));
-                                        this.toolBar.show(point);
-                                    }
+                                    point = Point(rect.x, rect.y)
+                                                    .minus(Point(
+                                                        (popupWidth - connectionBounds.width - 20) / 2,
+                                                        popupHeight
+                                                    ));
+                                }
+
+                                if (point) {
+                                    point = Point(math.max(point.x, 0), math.max(point.y, 0));
+                                    this.toolBar.show(point);
                                 }
                             }
                         }
                     }
-                    e.preventDefault();
                 }
             },
+
             _mouseMove: function (e) {
                 if (this.pauseMouseHandlers) {
                     return;
@@ -3247,7 +3252,7 @@
                 }
             },
 
-            destroyToolBar: function() {
+            _destroyToolBar: function() {
                 if (this.toolBar) {
                     this.toolBar.hide();
                     this.toolBar.destroy();
@@ -3476,12 +3481,12 @@
 
             "delete": function() {
                 this.diagram._remove(this.selectedElement(), true);
-                this.diagram.destroyToolBar();
+                this.diagram._destroyToolBar();
             },
 
             edit: function() {
                 this.diagram.edit(this.selectedElement());
-                this.diagram.destroyToolBar();
+                this.diagram._destroyToolBar();
             },
 
             rotateClockwise: function() {
