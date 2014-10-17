@@ -22,11 +22,21 @@
             },
             series: [{
                 type: "column",
-                data: [1, 2, 3],
+                stack: true,
+                data: [1, 2, -3],
                 labels: {
                     visible: true,
-                    position: "insideEnd"
+                    position: "insideend"
                 }
+            }, {
+                type: "column",
+                data: [1, 2, 3]
+            }, {
+                type: "line",
+                data: [1, 2, 3]
+            }, {
+                type: "area",
+                data: [-1, -2, -3]
             }],
             valueAxis: {
                 title: {
@@ -83,16 +93,36 @@
             }
         });
 
+
+        var geom = kendo.geometry;
+        var draw = kendo.drawing;
+
+        var rect = new geom.Rect([100, 200], [80, 200]);
+        var path = draw.Path.fromRect(rect);
+
+        var surface = draw.Surface.create($("#surface"));
+
+        $("button").click(function() {
+            $("#chart").getKendoChart().redraw();
+        });
     });
     </script>
     <style>
         #chart {
             width: 800px;
             height: 500px;
+            float: left;
+        }
+        #surface {
+            width: 400px;
+            height: 500px;
+            float: left;
         }
     </style>
   </head>
   <body>
       <div id="chart"></div>
+      <div id="surface"></div>
+      <button>redraw</button>
   </body>
 </html>
