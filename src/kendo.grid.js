@@ -4800,6 +4800,10 @@ var __meta__ = {
                 } else {
                     html += "<th" + stringifyAttributes(th.headerAttributes);
 
+                    if (rowSpan && !columns[idx].colSpan) {
+                        html += " rowspan='" + rowSpan + "'";
+                    }
+
                     if (index > -1) {
                         html += kendo.attr("index") + "='" + index + "'";
                     }

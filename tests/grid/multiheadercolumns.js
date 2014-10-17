@@ -318,4 +318,13 @@
         equal(grid.tbody.find("tr.k-detail-row td.k-detail-cell").attr("colspan"), 5);
     });
 
+    test("render rowspan for the command column", function() {
+        var grid = new Grid(table, {
+            columns: [{ title: "master", columns: [{ title: "child" }] }, { command: "foo" } ]
+        });
+
+        var ths = grid.thead.find("tr:first th");
+
+        equal(ths[1].rowSpan, 2);
+    });
 })();
