@@ -1,0 +1,65 @@
+
+        <div id="example">
+            <a href="#" class="k-button" id="save">Save State</a>
+            <a href="#" class="k-button" id="load">Load State</a>
+            <div id="grid"></div>
+
+            <script>
+                $(document).ready(function () {
+                    $("#grid").kendoGrid({
+                        dataSource: {
+                            type: "odata",
+                            transport: {
+                                read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                            },
+                            pageSize: 20
+                        },
+                        height: 550,
+                        groupable: true,
+                        sortable: true,
+                        reorderable: true,
+                        resizable: true,
+                        columnMenu: true,
+                        filterable: {
+                            mode: "row"
+                        },
+                        
+                        pageable: {
+                            refresh: true,
+                            pageSizes: true,
+                            buttonCount: 5
+                        },
+                        columns: [{
+                            field: "ContactName",
+                            title: "Contact Name",
+                            width: 250,
+                            locked: true
+                        }, {
+                            field: "ContactTitle",
+                            title: "Contact Title",
+                            width: 350
+                        }, {
+                            field: "CompanyName",
+                            title: "Company Name",
+                            width: 350
+                        }, {
+                            field: "Country",
+                            width: 450
+                        }]
+                    });
+
+                    var grid = $("#grid").data("kendoGrid");
+
+                    $("#save").click(function () {
+                        localStorage["kendo-grid-options"] = kendo.stringify(grid.getOptions());
+                    });
+
+                    $("#load").click(function () {
+                        var options = localStorage["kendo-grid-options"];
+                        if (options) {
+                            grid.setOptions(JSON.parse(options));
+                        }
+                    });
+                });
+            </script>
+        </div>

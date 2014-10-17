@@ -1854,6 +1854,17 @@
             "kendo-ui": "This demo shows how API Functions can manipulate the contents and behavior of Kendo UI Grid widget."
         }
       },
+       {
+        "text": "State API",
+        "url": "grid/state-api",
+        "new": true,
+        "title": {
+            "kendo-ui": "KendoGrid State API Demo"
+        },
+        "meta": {
+            "kendo-ui": "This demo shows how setOptions and getOptions methods can manipulate the state of Kendo UI Grid widget."
+        }
+      },
       {
         "text": "Globalization",
         "url": "grid/globalization",

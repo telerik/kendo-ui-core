@@ -24,6 +24,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <MvcProjectUpgradeChecked>true</MvcProjectUpgradeChecked>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -1153,6 +1154,7 @@
     <Content Include="Views\demos\gantt\mvvm.cshtml" />
     <Content Include="Views\demos\gantt\keyboard-navigation.cshtml" />
     <Content Include="Views\demos\diagram\mvvm.cshtml" />
+    <Content Include="Views\demos\grid\state-api.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="content\integration\diagram\js\" />
