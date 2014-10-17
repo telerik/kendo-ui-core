@@ -26,7 +26,9 @@ var __meta__ = {
         defined = dataviz.defined,
         isArray = $.isArray,
         
+        getSpacing = dataviz.getSpacing,
         round = dataviz.round,
+        uniqueId = dataviz.uniqueId,
         geo = dataviz.geometry,
         draw = dataviz.drawing,
         Point = geo.Point,
@@ -61,10 +63,27 @@ var __meta__ = {
         ROTATION_ORIGIN = 90;
 
     var Pointer = Class.extend({
-        init: function(options) {  
+        init: function(scale, options) {  
             var pointer = this;
+            var scaleOptions = scale.options;
+
+            //ChartElement.fn.init.call(pointer, options);
+
+            if (!options.id) {
+                options.id = uniqueId();
+            }
+
+            options.fill = options.color;
+
+            pointer.scale = scale;
 
             options = pointer.options;
+
+            if (defined(options.value)){
+                options.value = math.min(math.max(options.value, scaleOptions.min), scaleOptions.max);
+            } else {
+                options.value = scaleOptions.min;
+            }
         },
 
         options: { 
@@ -87,12 +106,6 @@ var __meta__ = {
     });
 
     var RadialPointer = Pointer.extend({
-        init: function(options) {
-            var that = this;
-
-            that.options = deepExtend({}, that.options, options);
-        },
-
         options: {
             shape: NEEDLE,
             cap: {
@@ -129,7 +142,7 @@ var __meta__ = {
             var that = this;
             var options = that.options;
             var elements = new Group();
-debugger;
+
             that.center = center;
             that.radius = radius;
 
@@ -160,8 +173,6 @@ debugger;
 
             if (that.elements !== undefined) {
                 that.center = center;
-            } else {
-                
             }
 
             return that.render(center, radius);
@@ -170,7 +181,7 @@ debugger;
         _renderNeedle: function() {
             var that = this;
             var options = that.options;
-            var capSize = that.radius * options.cap.size;
+            var minorTickSize = that.scale.options.minorTicks.size;
             var center = that.center;
             var needleColor = options.color;
 
@@ -179,9 +190,9 @@ debugger;
                 stroke: { color: needleColor }
             });
 
-            needlePath.moveTo(center.x + that.radius, center.y)
-                      .lineTo(center.x, center.y - (capSize / 2))
-                      .lineTo(center.x, center.y + (capSize / 2))
+            needlePath.moveTo(center.x + that.radius - minorTickSize, center.y)
+                      .lineTo(center.x, center.y - (that.capSize / 2))
+                      .lineTo(center.x, center.y + (that.capSize / 2))
                       .close();
 
             return needlePath;
@@ -195,7 +206,7 @@ debugger;
 
             var cap = new draw.Circle(circle, {
                fill: { color: capColor },
-               stroke: { color: capColor }
+               //stroke: { color: capColor }
             });
 
             return cap;
@@ -251,7 +262,7 @@ debugger;
             var options = that.options;
             var group = that.elements = new Group();
             var arc = that.renderArc(center, radius);
-debugger;
+
             that.bbox = arc.bbox();
             that.labelElements = that.renderLabels();
             that.ticks = that.renderTicks();
@@ -266,29 +277,17 @@ debugger;
         reflow: function(bbox) {
             var that = this;
             var options = that.options;
-            //var majorTickSize = options.majorTicks.size,
             var center = bbox.center();
             var radius = math.min(bbox.height(), bbox.width()) / 2;
 
             if (that.elements !== undefined) {
-                debugger;
                 that.bbox = that.arc.bbox();
                 that.radius(that.arc.getRadiusX());
+                that.repositionRanges();
                 that.renderLabels();
             } else {
                 return that.render(center, radius);
             }
-
-            // var arc = that.arc || new geo.Arc(center, {
-            //         radiusX: radius,
-            //         radiusY: radius,
-            //         startAngle: 180 + options.startAngle,
-            //         endAngle: 180 + options.endAngle
-            //     });
-
-            //     that.arc = arc;
-            //     that.box = arc.bbox();
-            //     //that.arrangeLabels();
         },
 
         slotAngle: function(value) {
@@ -337,7 +336,7 @@ debugger;
             if (labelsOptions.position === INSIDE) {
                 radius -= majorTickSize;
 
-                if (ranges.length) {
+                if (ranges.length && that.labelElements === undefined) {
                     radius -= rangeSize + rangeDistance;
                 }
                 arc.setRadiusX(radius).setRadiusY(radius);
@@ -399,6 +398,31 @@ debugger;
 
         // },
 
+        repositionRanges: function() {
+            var that = this;
+            var arc = that.arc;
+            var ranges = that.ranges.children;
+            var rangeSize = that.options.rangeSize;
+            var rangeDistance = that.options.rangeDistance;
+            var rangeRadius, newRadius;
+
+            if (ranges.length > 0) {
+                rangeRadius = that.getRangeRadius();
+
+                if (that.options.labels.position === INSIDE) {
+                    rangeRadius += rangeSize + rangeDistance;
+                }
+
+                newRadius = rangeRadius + (rangeSize / 2);
+
+                for (var i = 0; i < ranges.length; i++) {
+                    ranges[i]._geometry.setRadiusX(newRadius).setRadiusY(newRadius);
+                }
+
+                that.bbox = Rect.union(that.bbox, that.ranges.bbox());
+            }
+        },
+
         renderRanges: function() {
             var that = this;
             var arc = that.arc;
@@ -407,11 +431,16 @@ debugger;
             var segments = that.rangeSegments();
             var segmentsCount = segments.length;
             var reverse = that.options.reverse;
+            var radius = that.radius();
             var rangeSize = that.options.rangeSize;
-            var segment, ringRadius, rangeGeom, i;
+            var rangeDistance = options.rangeDistance;
+            var segment, rangeRadius, rangeGeom, i;
 
             if (segmentsCount) {
-                ringRadius = that.getRangeRadius();
+                rangeRadius = that.getRangeRadius();
+
+                // move the ticks with a range distance and a range size
+                that.radius(that.radius() - rangeSize - rangeDistance);
 
                 for (i = 0; i < segmentsCount; i++) {
                     segment = segments[i];
@@ -420,8 +449,8 @@ debugger;
 
                     if (to - from !== 0) {
                         rangeGeom = new geo.Arc(arc.center, {
-                            radiusX: ringRadius.inner + (rangeSize / 2),
-                            radiusY: ringRadius.inner + (rangeSize / 2),
+                            radiusX: rangeRadius + (rangeSize / 2),
+                            radiusY: rangeRadius + (rangeSize / 2),
                             startAngle: 180 + from,
                             endAngle: 180 + to
                         });
@@ -489,27 +518,20 @@ debugger;
             var rangeSize = options.rangeSize;
             var rangeDistance = options.rangeDistance;
             var arc = that.arc;
-            var radius = that.radius();
-            var ir;
             var r;
 
             if (options.labels.position === OUTSIDE) {
-                r = arc.getRadiusX() - majorTickSize - rangeDistance;
-                ir = r - rangeSize;
+                r = arc.getRadiusX() - majorTickSize - rangeDistance - rangeSize;
             } else {
-                r = arc.getRadiusX();
-                ir = r - rangeSize;
-
-                // move the ticks with a range distance and a range size
-                that.radius(radius - rangeSize - rangeDistance);
+                r = arc.getRadiusX() - rangeSize;
             }
 
-            return { inner: ir, outer: r };
+            return r;
         },
 
         renderArc: function(center, radius) {
-            var that = this,
-                options = that.options;
+            var that = this;
+            var options = that.options;
 
             var arc = that.arc = new geo.Arc(center, {
                     radiusX: radius,
@@ -561,8 +583,8 @@ debugger;
             that.majorTicks = drawTicks(tickArc, that.majorTickAngles, options.majorUnit, options.majorTicks);
             allTicks.append(that.majorTicks);
 
+            that._tickDifference = majorTickSize - minorTickSize;
             if (labelsPosition === OUTSIDE) {
-                that._tickDifference = majorTickSize - minorTickSize;
                 tickArc.setRadiusX(radius - majorTickSize + minorTickSize)
                        .setRadiusY(radius - majorTickSize + minorTickSize);    
             }
@@ -623,9 +645,7 @@ debugger;
             var center = that.arc.center;
 
             if(radius) {
-                that.arc.setRadiusX(radius)
-                        .setRadiusY(radius);
-//reposition ranges?
+                that.arc.setRadiusX(radius).setRadiusY(radius);
                 that.repositionTicks(that.majorTicks.children, that.majorTickAngles);
                 that.repositionTicks(that.minorTicks.children, that.minorTickAngles, true);
             } else {
@@ -639,7 +659,7 @@ debugger;
             var tickArc = that.arc;
             var radius = tickArc.getRadiusX();
 
-            if (minor && diff != 0) {
+            if (minor && that.options.labels.position === OUTSIDE && diff !== 0) {
                 tickArc = that.arc.clone();
                 tickArc.setRadiusX(radius - diff).setRadiusY(radius - diff);
             }
@@ -679,7 +699,7 @@ debugger;
 
             gauge.element.addClass("k-gauge");
 
-            gauge.render();
+            gauge.redraw();
         },
 
         options: {
@@ -695,24 +715,45 @@ debugger;
 
         },
 
-        render: function() {
+        redraw: function() {
             var that = this;
-            //var element = that.element;
-
-            //that._model = that._getModel();
-            
-            var view;
 
             that.surface = that._createSurface();
+            that.gaugeArea = that._createGaugeArea();
             that._createModel();
             that.reflow();
+        },
+
+        _createGaugeArea: function() {
+            var that = this;
+            var options = that.options.gaugeArea;
+            var size = that.surface.size();
+            var margin = that._gaugeAreaMargin = options.margin || DEFAULT_MARGIN;
+            var border = options.border || {};
+            var areaGeometry =  new geo.Rect([0, 0], [size.width, size.height]);
+            areaGeometry = _unpad(areaGeometry, border.width);
+
+            var gaugeArea = Path.fromRect(areaGeometry, {
+                stroke: {
+                    color: border.width ? border.color : "",
+                    width: border.width,
+                    dashType: border.dashType,
+                    lineJoin: "round",
+                    lineCap: "round"
+                },
+                fill: {
+                    color: options.background
+                }
+            });
+
+            return gaugeArea;
         },
 
         _createSurface: function() {
             var that = this;
             var options = that.options;
             var size = that._getSize();
-            //var surfaceSize = options.gaugeArea ? deepExtend(size, options.gaugeArea) : size;
+            size = options.gaugeArea ? deepExtend(size, options.gaugeArea) : size;
 
             return new draw.Surface.create(that.element, {
                 type: options.renderAs,
@@ -766,12 +807,10 @@ debugger;
             var pointers = that.pointers;
             var size = that._getSize();
             var wrapper = new geo.Rect([0, 0], [size.width, size.height]);
-            var bbox = _unpadMargin(wrapper.bbox());
+            var bbox = _unpad(wrapper.bbox(), that._gaugeAreaMargin);
             var scaleElements = that.scale.reflow(bbox);
-
-            that.plotBox = that.scale.bbox;
-
-            that.tempPlotBbox = bbox.clone();
+            that.plotArea = that.scale.bbox;
+            
             //Todo testing only
             surface.draw(scaleElements);
 
@@ -780,13 +819,14 @@ debugger;
                 var pointerElement = pointers[i].reflow(that.scale.arc);
                 surface.draw(pointerElement);
 
-                that.plotBox = Rect.union(that.plotBox, pointers[i].bbox);
-                that.tempPlotBbox = Rect.union(that.tempPlotBbox, scaleElements.bbox());
+                that.plotArea = Rect.union(that.plotArea, pointers[i].bbox);
             };
 
             that.fitScale(bbox);
             that.alignScale(bbox);
-surface.clear();
+
+            surface.clear();
+            surface.draw(that.gaugeArea);
             surface.draw(scaleElements);
 
             for (var i = 0; i < pointers.length; i++) {
@@ -794,11 +834,21 @@ surface.clear();
             };
         },
 
+        // getPointerArc: function() {
+        //     var that = this;
+        //     var arc = that.scale.arc.clone();
+        //     var radius = arc.getRadiusX();
+        //     var diff = that.scale._tickDifference;
+
+        //     arc.setRadiusX(radius - diff).setRadiusY(radius - diff);
+        //     return arc;
+        // },
+
         fitScale: function(bbox) {
             var that = this;
             var scale = that.scale;
             var arc = scale.arc;
-            var plotAreaBox = that.plotBox;
+            var plotAreaBox = that.plotArea;
             var step = math.abs(that.getDiff(plotAreaBox, bbox));
             var min = round(step, COORD_PRECISION);
             var max = round(-step, COORD_PRECISION);
@@ -855,11 +905,11 @@ surface.clear();
 
             scale.arc = arc;
             scale.reflow(bbox);
+            that.plotBbox = scale.bbox;
 
             for (var i = 0; i < pointers.length; i++) {
                 pointers[i].reflow(arc);
-                that.plotBbox = Rect.union(scale.bbox, pointers[i].bbox);
-                //that.tempPlotBbox = Rect.union(scale.bbox, pointers[i].bbox);
+                that.plotBbox = Rect.union(that.plotBbox, pointers[i].bbox);
             }
 
             return that.getDiff(that.plotBbox, bbox);
@@ -900,7 +950,7 @@ surface.clear();
 
             pointers = $.isArray(pointers) ? pointers : [pointers];
             for (var i = 0; i < pointers.length; i++) {
-                current = new RadialPointer(pointers[i]);
+                current = new RadialPointer(scale, pointers[i]);
                 that.pointers.push(current);
             }
         }
@@ -922,15 +972,36 @@ surface.clear();
         return range;
     }
 
-    function _unpadMargin(bbox) {
+    function _pad(bbox, value) {
         var origin = bbox.getOrigin();
         var size = bbox.getSize();
+        var spacing = getSpacing(value);
 
-        bbox.setOrigin([origin.x + DEFAULT_MARGIN, origin.y + DEFAULT_MARGIN]);
-        bbox.setSize([size.width - (2 * DEFAULT_MARGIN), size.height - (2 * DEFAULT_MARGIN)]);
+        bbox.setOrigin([origin.x - spacing.left, origin.y - spacing.top]);
+        bbox.setSize([size.width + (spacing.left + spacing.right),
+                      size.height + (spacing.top + spacing.bottom)]);
 
         return bbox;
     }
+
+    function _unpad(bbox, value) {
+        var spacing = getSpacing(value);
+
+        spacing.left = -spacing.left; spacing.top = -spacing.top;
+        spacing.right = -spacing.right; spacing.bottom = -spacing.bottom;
+
+        return _pad(bbox, spacing);
+    }
+
+    // function _unpad(bbox, value) {
+    //     var origin = bbox.getOrigin();
+    //     var size = bbox.getSize();
+
+    //     bbox.setOrigin([origin.x + value, origin.y + value]);
+    //     bbox.setSize([size.width - (2 * value), size.height - (2 * value)]);
+
+    //     return bbox;
+    // }
 
     dataviz.ui.plugin(RadialGauge);
 

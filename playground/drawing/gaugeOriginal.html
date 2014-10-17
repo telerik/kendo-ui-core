@@ -29,51 +29,50 @@
   <div id="gauge" style="width: 270px"></div>
   <script>
     $("#gauge").kendoRadialGauge({
-                    gaugeArea: {
-                       
-                    },
-                        pointer: {
-                            //value: 50,
-                          shape: "needle",
-                          cap: {
-                            size: 0.05
-                          }
-                        },
-                        scale: {
-                            labels: {
-                       // set the format to currency
-                       format: "C"
-                   },
-
-        //                   ranges: [{
-        //     from: 10,
-        //     to: 20,
-        //     color: "green"
-        // },{
-        //     from: 30,
-        //     to: 60,
-        //     color: "red"
-        // }],
-          rangeSize: 55,
-          rangeDistance: 0,
-            minorUnit: 5,
-            startAngle: 0,
-            endAngle: 40,
-            max: 180,
+        gaugeArea: {
+            margin: 50,
+            width: 500,
+            //background: "blue",
+            border: {
+                color: "yellow",
+                //dashType: "dot",
+                width: 25
+            }
+        },
+        pointer: {
+            cap: {
+                size: 0.05
+            }
+        },
+        scale: {
+            minorTicks: {
+                size: 10
+            },
+            majorTicks: {
+                size: 25
+            },
             labels: {
-            //visible: false,
-         position: "inside",
-         format: "C",
-         font: "15px Arial,Helvetica,sans-serif",
-            //template:"asdfasdfasdfasdf"
-      },
-          minorTicks: {
-            size: 15
-          },
-          majorTicks: {
-            size: 25
-          }
-        }
+                position: "outside",
+                format: "C",
+                font: "15px Arial,Helvetica,sans-serif"
+            },
+            minorUnit: 10,
+            majorUnit: 40,
+            startAngle: 0,
+            endAngle: 180,
+            max: 180,
+                          ranges: [{
+            from: 10,
+            to: 20,
+            color: "green"
+        },{
+            from: 30,
+            to: 60,
+            color: "red"
+        }],
+          rangeSize: 15,
+          //rangeDistance: 0,
+      }
     });
   </script>
 </body>
