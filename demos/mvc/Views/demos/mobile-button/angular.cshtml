@@ -1,19 +1,83 @@
-<div id="example" ng-app="KendoDemos">
-    <div class="demo-section k-content" ng-controller="MyCtrl" style="width: 500px;">
-        <h4>Mobile buttons</h4>
-        <p>
-            <button kendo-mobile-button k-on-click="click()">Regular button</button> 
-            <button kendo-mobile-button k-icon="'home'" k-on-click="click()">Icon button</button>
-        </p>
-    </div>
-</div>
+<kendo-mobile-application k-layout="'default'" ng-app="kendoDemo">
+
+<kendo-mobile-view id="button-home" k-title="'Sports Academy'">
+    <div class="home head">&nbsp;</div>
+
+    <a class="button selected-button" kendo-mobile-button>Home</a><a class="button" kendo-mobile-button href="#facility">Facility</a>
+
+    <kendo-mobile-list-view k-style="'inset'">
+        <li>
+            <p>Our Sports Academy provides a venue for outdoor and indoor sports and activities for children and adults of all ages.</p>
+        </li>
+    </kendo-mobile-list-view>
+</kendo-mobile-view>
+
+<kendo-mobile-view id="facility" k-title="'Facility'">
+    <div class="facility head">&nbsp;</div>
+
+    <a class="button" kendo-mobile-button href="#:back">Home</a><a class="button selected-button" kendo-mobile-button href="#facility">Facility</a>
+
+    <kendo-mobile-list-view k-style="'inset'">
+        <li>
+            <p>The facility has two indoor basketball fields, olympic size swimming pool, outdoor soccer field, baseball field, golf club and more.</p>
+        </li>
+    </kendo-mobile-list-view>
+</kendo-mobile-view>
+
+<kendo-mobile-layout k-id="'default'">
+    <kendo-mobile-header>
+        <kendo-mobile-nav-bar>
+            <kendo-view-title></kendo-view-title>
+        </kendo-mobile-nav-bar>
+    </kendo-mobile-header>
+</kendo-mobile-layout>
+
+</kendo-mobile-application>
 
 <script>
-  angular.module("KendoDemos", [ "kendo.directives" ]);
-function MyCtrl($scope) {
-  $scope.click = function() {
-    alert("Clicked");
-  };
-}
-
+    angular.module('kendoDemo', ['kendo.directives']);
 </script>
+
+<style>
+.button {
+    margin-left: .5em;
+    text-align: center;
+}
+.km-root .selected-button
+{
+    color: #fff;
+    background-color: #f60;
+}
+/* solid filled buttons in iOS7 should override the border-color */
+.km-ios7 .selected-button
+{
+    border-color: transparent;
+}
+.button:first-of-type {
+    margin-left: 1em;
+}
+.home {
+    background: url(../content/mobile/shared/sports-home.jpg) no-repeat center center;
+}
+.facility {
+    background: url(../content/mobile/shared/sports-facility.jpg) no-repeat center center;
+}
+.sports {
+    background: url(../content/mobile/shared/sports.jpg) no-repeat center center;
+}
+#button-home .head,
+#facility .head,
+#sports .head {
+	display: block;
+	margin: 1em;
+	height: 120px;
+    -webkit-background-size: 100% auto;
+    background-size: 100% auto;
+}
+.km-ios .head,
+.km-blackberry .head {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+</style>
+

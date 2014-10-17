@@ -8235,6 +8235,7 @@
       },
       {
         "text": "AngularJS",
+        "mobile": true,
         "disableInMobile": true,
         "url": "mobile-button/angular",
         "title": {
