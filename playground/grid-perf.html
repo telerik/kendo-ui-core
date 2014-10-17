@@ -43,45 +43,47 @@
 
                         $("#loading").hide();
 
-                        initStart = new Date();
+                        setTimeout(function() {
+                            initStart = new Date();
 
-                        var counter = 0;
-                        $("#grid").kendoGrid({
-                            dataSource: {
-                                data: data,
-                                pageSize: 20
-                            },
-                            height: 543,
-                            scrollable: {
-                                virtual: true
-                            },
-                            dataBinding: function(e) {
-                                renderStart = new Date();
-                            },
-                            dataBound: function(e) {
-                                renderEnd = new Date();
-                                $("#render").text(renderEnd - renderStart);
-                            },
-                            sortable: true,
-                            pageable: {
-                                info: true,
-                                numeric: false,
-                                previousNext: false
-                            },
-                            columns: [
+                            var counter = 0;
+                            $("#grid").kendoGrid({
+                                dataSource: {
+                                    data: data,
+                                    pageSize: 20
+                                },
+                                height: 543,
+                                scrollable: {
+                                    virtual: true
+                                },
+                                dataBinding: function(e) {
+                                    renderStart = new Date();
+                                },
+                                dataBound: function(e) {
+                                    renderEnd = new Date();
+                                    $("#render").text(renderEnd - renderStart);
+                                },
+                                sortable: true,
+                                pageable: {
+                                    info: true,
+                                    numeric: false,
+                                    previousNext: false
+                                },
+                                columns: [
                                 { field: "Id", title: "ID", width: "70px" },
                                 { field: "FirstName", title: "First Name", width: "130px" },
                                 { field: "LastName", title: "Last Name", width: "130px" },
                                 { field: "City", title: "City", width: "130px" },
                                 "Title"
-                            ]
-                        });
-                        initEnd = new Date();
+                                ]
+                            });
+                            initEnd = new Date();
 
-                        $("#init").text(initEnd - initStart);
+                            $("#init").text(initEnd - initStart);
+                        });
                     });
                 });
-            </script>
-        </div>
-    </body>
-</html>
+                </script>
+            </div>
+        </body>
+    </html>

@@ -875,7 +875,7 @@ test("range data is same as the range if remote paging is enabled", function() {
     var dataSource = remoteDataSource();
     dataSource.read();
     dataSource.range(30,16);
-    deepEqual(dataSource.data(), dataSource.view());
+    equal(dataSource.data().length, dataSource.view().length);
 });
 
 test("getByUid returns the item after remote range from a diffrent page is retrieved", function() {

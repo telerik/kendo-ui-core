@@ -208,6 +208,8 @@ var __meta__ = {
             var map = {};
             var i, item, id, parentId;
 
+            data = this._observeView(data);
+
             for (i = 0; i < data.length; i++) {
                 item = data[i];
                 id = item.id;

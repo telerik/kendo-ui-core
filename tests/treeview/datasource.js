@@ -645,6 +645,7 @@
     test("items without children do not initialize empty datasource", function() {
         var root = new Node({ text: "foo" });
 
+debugger;
         createTreeView({
             dataSource: {
                 data: [root]
