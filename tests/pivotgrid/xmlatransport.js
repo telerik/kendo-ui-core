@@ -79,7 +79,7 @@
     });
 
     test("parameterMap columns are expanded", function() {
-        var transport = new kendo.data.XmlaTransport({ });
+       var transport = new kendo.data.XmlaTransport({ });
        var params = transport.parameterMap({ connection: { catalog: "catalogName", cube: "cubeName" }, columns: [{ name: "[foo]", expand: true }] }, "read");
 
        ok(params.indexOf('SELECT NON EMPTY {[foo],[foo].Children} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS FROM [cubeName]') > -1);
@@ -246,6 +246,21 @@
 
         ok(params.indexOf('SELECT NON EMPTY {CROSSJOIN({[foo].&amp;[baz]},{[bar]}),' +
             'CROSSJOIN({[foo].&amp;[baz].Children},{[bar]})} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS ' +
+            'FROM [cubeName]') > -1);
+    });
+
+    test("parameterMap leaf is cross joined with expanded second dimension", function() {
+        var transport = new kendo.data.XmlaTransport({ });
+
+        var params = transport.parameterMap({
+            connection: { catalog: "catalogName", cube: "cubeName" },
+            columns: [{ name: "[foo]", expand: true }, { name: "[bar]" }, { name: ["[foo].&[bax]", "[bar]"], expand: true }]
+        }, "read");
+
+        ok(params.indexOf('SELECT NON EMPTY {' +
+            'CROSSJOIN({[foo]},{[bar]}),' +
+            'CROSSJOIN({[foo].Children},{[bar]}),' +
+            'CROSSJOIN({[foo].&amp;[bax]},{[bar].Children})} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS ' +
             'FROM [cubeName]') > -1);
     });
 
@@ -502,6 +517,23 @@
 
         ok(params.indexOf('CROSSJOIN({ORDER([foo].Children,[foo].CurrentMember.MEMBER_CAPTION,asc)},{{[bar],[baz]}})') > -1);
         ok(params.indexOf('NON EMPTY {[qux],ORDER([qux].Children,[qux].CurrentMember.MEMBER_CAPTION,desc)}') > -1);
+    });
+
+    test("parameterMap generate sort expression for second dimension under a leaf tuple", function() {
+        var transport = new kendo.data.XmlaTransport({ });
+
+        var params = transport.parameterMap({
+            connection: { catalog: "catalogName", cube: "cubeName" },
+            columns: [{ name: "[foo]", expand: true }, { name: "[bar]" }, { name: ["[foo].&[bax]", "[bar]"], expand: true }],
+            sort: [{ field: "[bar]", dir: "desc" }]
+        }, "read");
+
+        ok(params.indexOf('SELECT NON EMPTY {' +
+            'CROSSJOIN({[foo]},{[bar]}),' +
+            'CROSSJOIN({[foo].Children},{[bar]}),' +
+            'CROSSJOIN({[foo].&amp;[bax]},{ORDER([bar].Children,[bar].CurrentMember.MEMBER_CAPTION,desc)})} ' +
+            'DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS ' +
+            'FROM [cubeName]') > -1);
     });
 
     test("parameterMap create empty discover statment wrap", function() {

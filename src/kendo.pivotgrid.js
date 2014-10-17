@@ -60,51 +60,79 @@ var __meta__ = {
                         '</table>';
 
     function normalizeMembers(member) {
-        var descriptor = typeof member === "string" ? { name: member, expand: false } : member,
-            descriptors = toString.call(descriptor) === "[object Array]" ? descriptor : (descriptor !== undefined ? [descriptor] : []);
+        var descriptor = typeof member === "string" ? [{ name: [member], expand: false }] : member;
+        var descriptors = toString.call(descriptor) === "[object Array]" ? descriptor : (descriptor !== undefined ? [descriptor] : []);
 
         return map(descriptors, function(d) {
             if (typeof d === "string") {
-                return { name: d, expand: false };
+                return { name: [d], expand: false };
             }
-            return { name: d.name, expand: d.expand };
+            return { name: (toString.call(d.name) === "[object Array]" ? d.name.slice() : [d.name]), expand: d.expand };
         });
     }
 
-    function accumulateMembers(accumulator, tuples, level) {
+    function parentName(tuple, level) {
+        var member = tuple.members[level];
+        var parentName = buildPath(tuple, level - 1);
+
+        if (member.parentName) {
+            parentName.push(member.parentName);
+        }
+
+        if (!parentName.length) {
+            parentName = "";
+        }
+
+        return kendo.stringify(parentName);
+    }
+
+    function accumulateMembers(accumulator, rootTuple, tuple, level) {
+        var idx, length;
+        var children;
         var member;
-        var name;
-        var parentName;
 
-        for (var idx = 0; idx < tuples.length; idx++) {
-            member = tuples[idx].members[level];
-            name = member.name;
-            parentName = member.parentName || "";
+        if (!tuple) {
+            tuple = rootTuple;
+        }
 
-            if (member.children.length > 0) {
-                accumulator[name] = true;
-                accumulateMembers(accumulator, member.children, level);
-            } else if (!(parentName in accumulator)) {
-                accumulator[name] = false;
+        if (!level) {
+            level = 0;
+        }
+
+        member = tuple.members[level];
+
+        if (!member || member.measure) { //return if no member or measure
+            return;
+        }
+
+        children = member.children;
+        length = children.length
+
+        if (tuple === rootTuple) {
+            accumulator[kendo.stringify([member.name])] = !!length;
+        } else if (length) {
+            accumulator[kendo.stringify(buildPath(tuple, level))] = true;
+        }
+
+        if (length) {
+            for (idx = 0; idx < length; idx++) {
+                accumulateMembers(accumulator, rootTuple, children[idx], level);
             }
         }
+
+        accumulateMembers(accumulator, rootTuple, tuple, level + 1);
     }
 
     function descriptorsForAxes(tuples) {
         var result = {};
 
         if (tuples.length) {
-            var members = tuples[0].members || [];
-            for (var idx = 0; idx < members.length; idx++) {
-                if (!members[idx].measure) {
-                    accumulateMembers(result, tuples, idx);
-                }
-            }
+            accumulateMembers(result, tuples[0]);
         }
 
         var descriptors = [];
         for (var k in result) {
-            descriptors.push({ name: k, expand: result[k] });
+            descriptors.push({ name: $.parseJSON(k), expand: result[k] });
         }
 
         return descriptors;
@@ -124,14 +152,14 @@ var __meta__ = {
 
                 var found = false;
                 for (var j = 0; j < members.length; j++) {
-                    if (members[j].name.indexOf(tupleMembers[idx].hierarchy) === 0) {
+                    if (getName(members[j]).indexOf(tupleMembers[idx].hierarchy) === 0) {
                         found = true;
                         break;
                     }
                 }
 
                 if (!found) {
-                    members.push(tupleMembers[idx]);
+                    members.push({ name: [tupleMembers[idx].name], expand: false }); //calling normalize here to make name from string to array
                 }
             }
         }
@@ -145,7 +173,9 @@ var __meta__ = {
             if (members[idx].measure) {
                 continue;
             }
-            result.push({ name: members[idx].name, expand: members[idx].children.length > 0});
+
+            //make tuple name an array
+            result.push({ name: [members[idx].name], expand: members[idx].children.length > 0});
         }
 
         return result;
@@ -298,6 +328,7 @@ var __meta__ = {
             var length;
             var measureIdx;
             var tuple;
+            var name;
             var aggregatorsLength = measureAggregators.length || 1;
 
             if (descriptors.length || measureAggregators.length) {
@@ -306,15 +337,17 @@ var __meta__ = {
                     root = { members: [] };
 
                     for (idx = 0, length = descriptors.length; idx < length; idx++) {
+                        name = getName(descriptors[idx].name);
+
                         root.members[root.members.length] = {
                             children: [],
-                            caption: (dimensionsSchema[descriptors[idx].name] || {}).caption || "All",
-                            name: descriptors[idx].name,
-                            levelName: descriptors[idx].name,
+                            caption: (dimensionsSchema[name] || {}).caption || "All",
+                            name: name,
+                            levelName: name,
                             levelNum: "0",
                             hasChildren: true,
                             parentName: undefined,
-                            hierarchy: descriptors[idx].name
+                            hierarchy: name
                         };
                     }
 
@@ -338,7 +371,9 @@ var __meta__ = {
                 for (measureIdx = 0; measureIdx < aggregatorsLength; measureIdx++) {
                     tuple = { members: [] };
                     for (idx = 0, length = descriptors.length; idx < length; idx++) {
-                        if (map[key].parentName.indexOf(descriptors[idx].name) === 0) {
+                        name = getName(descriptors[idx].name);
+
+                        if (map[key].parentName.indexOf(name) === 0) {
                             tuple.members[tuple.members.length] = {
                                 children: [],
                                 caption: map[key].value,
@@ -346,19 +381,19 @@ var __meta__ = {
                                 levelName: map[key].name,
                                 levelNum: 1,
                                 hasChildren: false,
-                                parentName: descriptors[idx].name,
-                                hierarchy: descriptors[idx].name
+                                parentName: name,
+                                hierarchy: name
                             };
                         } else {
                             tuple.members[tuple.members.length] = {
                                 children: [],
-                                caption: (dimensionsSchema[descriptors[idx].name] || {}).caption || "All",
-                                name: descriptors[idx].name,
-                                levelName: descriptors[idx].name,
+                                caption: (dimensionsSchema[name] || {}).caption || "All",
+                                name: name,
+                                levelName: name,
                                 levelNum: "0",
                                 hasChildren: true,
                                 parentName: undefined,
-                                hierarchy: descriptors[idx].name
+                                hierarchy: name
                             };
                         }
                     }
@@ -423,7 +458,7 @@ var __meta__ = {
 
             while (idx > 0) {
                 descriptor = descriptors[--idx];
-                parts = descriptor.name.split("&");
+                parts = getName(descriptor).split("&");
                 if (parts.length > 1) {
                     parentField = parts[0];
                     expectedValue = parts[1];
@@ -475,15 +510,17 @@ var __meta__ = {
                         continue;
                     }
 
-                    value = getters[descriptor.name](dataItem);
+                    var name = getName(descriptor);
+
+                    value = getters[name](dataItem);
                     value = value !== undefined ? value.toString() : value;
 
-                    name = descriptor.name + "&" + value;
+                    name = name + "&" + value;
 
                     column = columns[name] || {
                         index: state.columnIndex,
                         name: name,
-                        parentName: descriptor.name,
+                        parentName: name,
                         value: value
                     };
 
@@ -540,15 +577,19 @@ var __meta__ = {
             var result = {};
             var descriptor;
             var parts;
+            var name;
 
             for (var idx = 0, length = descriptors.length; idx < length; idx++) {
                 descriptor = descriptors[idx];
-                parts = descriptor.name.split("&");
+
+                name = getName(descriptor);
+
+                parts = name.split("&");
 
                 if (parts.length > 1) {
                     result[parts[0]] = kendo.getter(parts[0], true);
                 } else {
-                    result[descriptor.name] = kendo.getter(descriptor.name, true);
+                    result[name] = kendo.getter(name, true);
                 }
             }
 
@@ -617,11 +658,13 @@ var __meta__ = {
                                 continue;
                             }
 
-                            rowValue = rowGetters[rowDescriptor.name](data[idx]);
+                            var rowName = getName(rowDescriptor);
+
+                            rowValue = rowGetters[rowName](data[idx]);
                             rowValue = rowValue !== undefined ? rowValue.toString() : rowValue;
                             rows[rowValue] = {
-                                name: rowDescriptor.name + "&" + rowValue,
-                                parentName: rowDescriptor.name,
+                                name: rowName + "&" + rowValue,
+                                parentName: rowName,
                                 value: rowValue
                             };
 
@@ -854,14 +897,16 @@ var __meta__ = {
             var other = axis === "columns" ? "rows" : "columns";
 
             var members = normalizeMembers(path);
-            var memberToExpand = members[members.length - 1].name;
+            var memberToExpand = getName(members[members.length - 1]);
 
             this._lastExpanded = origin;
 
             members = descriptorsForMembers(this.axes()[origin], members, this.measures());
 
             for (var idx = 0; idx < members.length; idx++) {
-                if (members[idx].name === memberToExpand) {
+                var memberName = getName(members[idx]);
+
+                if (memberName === memberToExpand) {
                     if (members[idx].expand) {
                         return;
                     }
@@ -923,6 +968,23 @@ var __meta__ = {
                 rows: this.rowsAxisDescriptors(),
                 measures: this.measures()
             }, options));
+        },
+
+        sort: function(val) {
+            var that = this;
+
+            if(val !== undefined) {
+                that._query({ sort: val });
+                return;
+            }
+
+            return that._sort;
+
+            var descriptors = {};
+            descriptors[origin] = members;
+            descriptors[other] = this._descriptorsForAxis(other);
+
+            this._query(descriptors);
         },
 
         query: function(options) {
@@ -1575,6 +1637,7 @@ var __meta__ = {
     function equalTuples(first, second) {
         var equal = true;
         var idx, length;
+        var name;
 
         first = first.members;
         second = second.members;
@@ -1583,7 +1646,8 @@ var __meta__ = {
             if (first[idx].measure || second[idx].measure) {
                 continue;
             }
-            equal = equal && (first[idx].name === second[idx].name);
+
+            equal = equal && (getName(first[idx]) === getName(second[idx]));
         }
 
         return equal;
@@ -1846,90 +1910,22 @@ var __meta__ = {
         return memberName;
     }
 
-    function trimSameHierarchyChildDescriptors(members) {
-        var result = members.slice(0);
+    function expandMemberDescriptor(names, sort) {
+        var idx = names.length - 1;
+        var name = names[idx];
+        var sortDescriptor;
 
-        for (var idx = 0; idx < members.length; idx++) {
-            var hierarchyName = baseHierarchyPath(members[idx].name);
+        sortDescriptor = sortDescriptorForMember(sort, name);
 
-            var j = idx + 1;
-            while(j < result.length) {
-                if (result[j].name.indexOf(hierarchyName) === 0) {
-                    result.splice(j, 1);
-                } else {
-                    j++;
-                }
-            }
+        if (sortDescriptor && sortDescriptor.dir) {
+            name = "ORDER(" + name + ".Children," + sortDescriptor.field + ".CurrentMember.MEMBER_CAPTION," + sortDescriptor.dir + ")";
+        } else {
+            name += ".Children";
         }
 
-        return result;
-    }
+        names[idx] = name;
 
-    function trimSameHierarchyChildDescriptorsForName(members, memberName) {
-        var result = [];
-
-        for (var idx = 0; idx < members.length; idx++) {
-            var name = members[idx].name;
-            var hierarchyName = baseHierarchyPath(memberName);
-
-            if (memberName == name || name.indexOf(hierarchyName) !== 0) {
-                result.push(members[idx]);
-            }
-        }
-
-        return result;
-    }
-
-    function sameHierarchyDescriptors(members) {
-        var same = {};
-
-        for (var idx = 0; idx < members.length; idx++) {
-            var name = members[idx].name;
-            var hierarchyName = baseHierarchyPath(name);
-
-            for (var j = 0; j < members.length; j++) {
-                var memberName = members[j].name;
-                if (memberName.indexOf(hierarchyName) === 0 && memberName !== name) {
-                    same[name] = members[idx];
-                }
-            }
-        }
-
-        var result = [];
-
-        for (var key in same) {
-            result.push(same[key]);
-        }
-
-        return result;
-    }
-
-
-    function expandMemberDescriptor(members, memberNames, sort) {
-        return transformDescriptors(members, function(member) {
-            var name = member.name;
-
-            var found = false;
-
-            for (var idx = 0; idx < memberNames.length; idx++) {
-                if (name === memberNames[idx]) {
-                    found = true;
-                    break;
-                }
-            }
-
-            if (member.expand && found) {
-
-                var sortDescriptor = sortDescriptorForMember(sort, name);
-                if (sortDescriptor && sortDescriptor.dir) {
-                    name = "ORDER(" + name + ".Children," + sortDescriptor.field + ".CurrentMember.MEMBER_CAPTION," + sortDescriptor.dir + ")";
-                } else {
-                    name += ".Children";
-                }
-            }
-
-            return name;
-        });
+        return names;
     }
 
     function sortDescriptorForMember(sort, member) {
@@ -1941,31 +1937,16 @@ var __meta__ = {
         return null;
     }
 
-    function expandDescriptors(members, sort) {
-        return transformDescriptors(members, function(member) {
-            var name = member.name;
-
-            if (member.expand) {
-                var sortDescriptor = sortDescriptorForMember(sort, name);
-                if (sortDescriptor && sortDescriptor.dir) {
-                    name = "ORDER(" + name + ".Children," + sortDescriptor.field + ".CurrentMember.MEMBER_CAPTION," + sortDescriptor.dir + ")";
-                } else {
-                    name += ".Children";
-                }
-            }
-            return name;
-        });
-    }
-
     function convertMemberDescriptors(members) {
         return transformDescriptors(members, function(member) {
-            return member.name;
+            return member.name[0];
         });
     }
 
     function crossJoin(names) {
         var result = "CROSSJOIN({";
         var r;
+
         if (names.length > 2) {
             r = names.pop();
             result += crossJoin(names);
@@ -1973,6 +1954,7 @@ var __meta__ = {
             result += names.shift();
             r = names.pop();
         }
+
         result += "},{";
         result += r;
         result += "})";
@@ -1980,9 +1962,9 @@ var __meta__ = {
     }
 
     function crossJoinCommand(members, measures) {
-        var tmp = members;
+        var tmp = members.slice(0);
         if (measures.length > 1) {
-            tmp.push("{" + measures.join(",") + "}");
+            tmp.push("{" + measures.join(",") + "}"); //TODO: remove curly braces!
         }
         return crossJoin(tmp);
     }
@@ -1999,57 +1981,139 @@ var __meta__ = {
         return result;
     }
 
+    function getName(name) {
+        name = name.name || name;
+
+        if (toString.call(name) === "[object Array]") {
+            name = name[name.length - 1];
+        }
+
+        return name;
+    }
+
+    function mapNames(names, rootNames) {
+        var name;
+        var rootName;
+
+        var j;
+        var idx = 0;
+        var length = names.length;
+        var rootLength = rootNames.length;
+
+        rootNames = rootNames.slice(0);
+
+        for (; idx < length; idx++) {
+            name = names[idx];
+
+            for (j = 0; j < rootLength; j++) {
+                rootName = baseHierarchyPath(rootNames[j]); //convert once and then use here!
+
+                if (name.indexOf(rootName) !== -1) { //was === 0! Check if current check is enough
+                    rootNames[j] = name;
+                    break;
+                }
+            }
+        }
+
+        return rootNames;
+    }
+
+    //TODO: refactor more
+    function parseDescriptors(members) {
+        var descriptors = [];
+        var child = [];
+        var root = [];
+        var member;
+
+        var idx = 0;
+        var length = members.length;
+        var name;
+
+        for (; idx < length; idx++) {
+            member = members[idx];
+            name = member.name;
+
+            if (toString.call(name) !== "[object Array]") {
+                member.name = name = [name];
+            }
+
+            if (name.length > 1) {
+                child.push(member);
+            } else {
+                descriptors.push(member);
+            }
+        }
+
+        var hierarchyName;
+        var found;
+        var j, l;
+
+        for (idx = 0, length = descriptors.length; idx < length; idx++) {
+            hierarchyName = baseHierarchyPath(descriptors[idx].name[0]);
+            found = false;
+
+            for (j = 0, l = root.length; j < l; j++) {
+                if (root[j].name[0].indexOf(hierarchyName) === 0) {
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found) {
+                root.push(descriptors.splice(idx, 1)[0]);
+                length -= 1;
+                idx -= 1;
+            }
+        }
+
+        descriptors = descriptors.concat(child);
+
+        return {
+            root: root,
+            descriptors: descriptors
+        }
+    }
+
+    //TODO: refactor more
     function serializeMembers(members, measures, sort) {
         var command = "";
 
         members = members || [];
 
-        var memberNames = convertMemberDescriptors(trimSameHierarchyChildDescriptors(members));
-        var expandedColumns = expandedMembers(members);
+        //debugger;
+        var descriptors = parseDescriptors(members); //rename descriptors to expanded and root
+        var root = descriptors.root;
 
-        if (memberNames.length > 1 || measures.length > 1) {
-            command += crossJoinCommand(memberNames, measures);
+        descriptors = descriptors.descriptors;
 
-            if (expandedColumns.length) {
-                var start = 0;
-                var idx;
-                var j;
-                var name;
+        var rootNames = convertMemberDescriptors(root); //use modified mapNames function instead
+        var crossJoinCommands = [];
 
-                var expandedMemberNames = [];
-                var sameHierarchyMembers = sameHierarchyDescriptors(members);
+        var expanded = expandedMembers(root).concat(descriptors); //move that logic into parseDescriptors
+        var length = expanded.length;
+        var idx = 0;
 
-                var generatedMembers = [];
+        var memberName;
+        var names = [];
 
-                for (idx = 0; idx < expandedColumns.length; idx++) {
+        if (rootNames.length > 1 || measures.length > 1) {
+            crossJoinCommands.push(crossJoinCommand(rootNames, measures));
 
-                    for (j=start; j < expandedColumns.length; j++) {
-                        name = expandedColumns[j].name;
+            for (; idx < length; idx++) {
+                memberName = expandMemberDescriptor(expanded[idx].name, sort);
+                names = mapNames(memberName, rootNames);
 
-                        var tmpMembers = trimSameHierarchyChildDescriptors(members);
-
-                        if ($.inArray(expandedColumns[j], sameHierarchyMembers) > -1) {
-                            tmpMembers = trimSameHierarchyChildDescriptorsForName(members, name);
-                        }
-
-                        var tmp = crossJoinCommand(expandMemberDescriptor(tmpMembers, expandedMemberNames.concat(name), sort), measures);
-                        if ($.inArray(tmp, generatedMembers) == -1) {
-                            command += ",";
-                            command += tmp;
-                            generatedMembers.push(tmp);
-                        }
-                    }
-                    start++;
-
-                    expandedMemberNames.push(expandedColumns[idx].name);
-                    expandedMemberNames.shift();
-                }
+                crossJoinCommands.push(crossJoinCommand(names, measures));
             }
+
+            command += crossJoinCommands.join(",");
         } else {
-            if (expandedColumns.length) {
-                memberNames = memberNames.concat(expandDescriptors(members, sort));
+            for (; idx < length; idx++) {
+                memberName = expandMemberDescriptor(expanded[idx].name, sort);
+                names.push(memberName[0]); //check if this is ok
             }
-            command += memberNames.join(",");
+
+            command += rootNames.concat(names).join(",");
         }
 
         return command;
@@ -2608,7 +2672,7 @@ var __meta__ = {
             var idx, length, index = -1;
 
             for (idx = 0, length = items.length; idx < length; idx++) {
-                if (items[idx].name === name || items[idx] === name) {
+                if (getName(items[idx]) === name) {
                     index = idx;
                     break;
                 }
@@ -2731,7 +2795,7 @@ var __meta__ = {
 
         _sortIcon: function(name) {
             var expressions = this.dataSource.sort();
-            var expr = sortExpr(expressions, name);
+            var expr = sortExpr(expressions, getName(name));
             var icon = "";
 
             if (expr) {

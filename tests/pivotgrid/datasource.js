@@ -788,7 +788,7 @@
         dataSource.fetch();
     });
 
-    test("fetch pass current columns and rows state", 6, function() {
+    test("fetch pass current columns and rows state", 14, function() {
         var callback = $.noop;
 
         var dataSource = new PivotDataSource({
@@ -807,20 +807,18 @@
                         axes: {
                             columns: {
                                 tuples: [
-                                    { members: [ { name: "level 0", children: [] }, { name: "level 0", children: [] } ] },
-                                    { members: [ { name: "level 1", parentName: "level 0", children: [] }, { name: "level 0", children: [] } ] },
-                                    { members: [ { name: "level 1", parentName: "level 0", children: [] }, { name: "level 1", parentName: "level 0", children: [] } ] },
-                                    { members: [ { name: "level 2", parentName: "level 1", children: [] }, { name: "level 1", children: [] } ] },
-                                    { members: [ { name: "level 2", parentName: "level 1", children: [] }, { name: "level 2", parentName: "level 1", children: [] } ] }
+                                    { members: [ { name: "[foo]", children: [] }, { name: "[bar]", children: [] } ] },
+                                    { members: [ { name: "[foo].1", parentName: "[foo]", children: [] }, { name: "[bar]", children: [] } ] },
+                                    { members: [ { name: "[foo].1", parentName: "[foo]", children: [] }, { name: "[bar].1", parentName: "[bar]", children: [] } ] },
+                                    { members: [ { name: "[foo].2", parentName: "[foo].1", children: [] }, { name: "[bar].1", children: [] } ] },
+                                    { members: [ { name: "[foo].2", parentName: "[foo].1", children: [] }, { name: "[bar].2", parentName: "[bar].1", children: [] } ] }
                                 ]
                             },
                             rows: {
                                 tuples: [
-                                    { members: [ { name: "row level 0", children: [] }, { name: "row level 0", children: [] } ] },
-                                    { members: [ { name: "row level 1", parentName: "row level 0", children: [] }, { name: "row level 0", children: [] } ] },
-                                    { members: [ { name: "row level 1", parentName: "row level 0", children: [] }, { name: "row level 1", parentName: "row level 0", children: [] } ] },
-                                    { members: [ { name: "row level 2", parentName: "row level 1", children: [] }, { name: "row level 1", children: [] } ] },
-                                    { members: [ { name: "row level 2", parentName: "row level 1", children: [] }, { name: "row level 2", parentName: "row level 1", children: [] } ] }
+                                    { members: [ { name: "[baz]", children: [] } ] },
+                                    { members: [ { name: "[baz].1", parentName: "[baz]", children: [] } ] },
+                                    { members: [ { name: "[baz].2", parentName: "[baz].1", children: [] } ] }
                                 ]
                             }
                         },
@@ -833,13 +831,26 @@
         dataSource.read();
 
         callback = function(e) {
-            equal(e.columns.length, 2);
-            equal(e.columns[0].name, "level 0");
-            equal(e.columns[1].name, "level 1");
+            equal(e.columns.length, 5);
+
+            ok(e.columns[0].expand);
+            equal(e.columns[0].name.join(","), "[foo]");
+
+            ok(e.columns[1].expand);
+            equal(e.columns[1].name.join(","), "[foo].1");
+
+            ok(e.columns[2].expand);
+            equal(e.columns[2].name.join(","), "[foo].2,[bar].1");
+
+            ok(e.columns[3].expand);
+            equal(e.columns[3].name.join(","), "[foo].1,[bar]");
+
+            ok(!e.columns[4].expand);
+            equal(e.columns[4].name.join(","), "[bar]");
 
             equal(e.rows.length, 2);
-            equal(e.rows[0].name, "row level 0");
-            equal(e.rows[1].name, "row level 1");
+            equal(e.rows[0].name.join(","), "[baz]");
+            equal(e.rows[1].name.join(","), "[baz].1");
         };
 
         dataSource.fetch();
@@ -1107,7 +1118,7 @@
         equal(descriptors[2].name, "[level 1]");
     });
 
-    test("columnsAxisDescriptors returns columns state for expanded dimention child", 4, function() {
+    test("columnsAxisDescriptors returns columns state for expanded dimention child", 7, function() {
         var dataSource = new PivotDataSource({
             columns: ["[level 0]", "[level 1]"],
             schema: {
@@ -1121,11 +1132,9 @@
                             columns: {
                                 tuples: [
                                     { members: [ { name: "[level 0]", children: [] }, { name: "[level 1]", children: [] } ] },
-                                    //{ members: [ { name: "[level 0].[level 1]", parentName: "[level 0]", children: [] }, { name: "[level 1]", children: [] } ] },
-                                    //{ members: [ { name: "[level 0].[level 2]", parentName: "[level 0]", children: [] }, { name: "[level 1]", children: [] } ] },
-                                    { members: [ { name: "[level 0]", parentName: "[level 0]", children: [] }, { name: "[level 1].[level 0]", parentName: "[level 1]", children: [] } ] },
-                                    { members: [ { name: "[level 0]", parentName: "[level 0]", children: [] }, { name: "[level 1].[level 1]", parentName: "[level 1]", children: [] } ] },
-                                    { members: [ { name: "[level 0]", parentName: "[level 0]", children: [] }, { name: "[level 1].[level 1].[level 1]", parentName: "[level 1].[level 1]", children: [] } ] },
+                                    { members: [ { name: "[level 0]", children: [] }, { name: "[level 1].[level 0]", parentName: "[level 1]", children: [] } ] },
+                                    { members: [ { name: "[level 0]", children: [] }, { name: "[level 1].[level 1]", parentName: "[level 1]", children: [] } ] },
+                                    { members: [ { name: "[level 0]", children: [] }, { name: "[level 1].[level 1].[level 1]", parentName: "[level 1].[level 1]", children: [] } ] },
                                 ]
                             }
                         },
@@ -1140,9 +1149,15 @@
         var descriptors = dataSource.columnsAxisDescriptors();
 
         equal(descriptors.length, 3);
-        equal(descriptors[0].name, "[level 0]");
-        equal(descriptors[1].name, "[level 1]");
-        equal(descriptors[2].name, "[level 1].[level 1]");
+
+        ok(!descriptors[0].expand);
+        equal(descriptors[0].name.join(","), "[level 0]");
+
+        ok(descriptors[1].expand);
+        equal(descriptors[1].name.join(","), "[level 1]");
+
+        ok(descriptors[2].expand);
+        equal(descriptors[2].name.join(","), "[level 0],[level 1].[level 1]");
     });
 
     test("columnsAxisDescriptors returns columns if no request is made", 2, function() {
@@ -1293,9 +1308,9 @@
         equal(descriptors[1].name, "[level 0].[level 2]");
     });
 
-    test("rowsAxisDescriptors returns rows state", 3, function() {
+    test("rowsAxisDescriptors returns rows state for expanded dimention child", 7, function() {
         var dataSource = new PivotDataSource({
-            rows: ["level 0"],
+            rows: ["[level 0]", "[level 1]"],
             schema: {
                 axes: "axes",
                 data: "data"
@@ -1304,14 +1319,12 @@
                 read: function(options) {
                     options.success({
                         axes: {
-                            columns: {},
                             rows: {
                                 tuples: [
-                                    { members: [ { name: "level 0", children: [] }, { name: "level 0", children: [] } ] },
-                                    { members: [ { name: "level 1", parentName: "level 0", children: [] }, { name: "level 0", children: [] } ] },
-                                    { members: [ { name: "level 1", parentName: "level 0", children: [] }, { name: "level 1", parentName: "level 0", children: [] } ] },
-                                    { members: [ { name: "level 2", parentName: "level 1", children: [] }, { name: "level 1", children: [] } ] },
-                                    { members: [ { name: "level 2", parentName: "level 1", children: [] }, { name: "level 2", parentName: "level 1", children: [] } ] }
+                                    { members: [ { name: "[level 0]", children: [] }, { name: "[level 1]", children: [] } ] },
+                                    { members: [ { name: "[level 0]", children: [] }, { name: "[level 1].[level 0]", parentName: "[level 1]", children: [] } ] },
+                                    { members: [ { name: "[level 0]", children: [] }, { name: "[level 1].[level 1]", parentName: "[level 1]", children: [] } ] },
+                                    { members: [ { name: "[level 0]", children: [] }, { name: "[level 1].[level 1].[level 1]", parentName: "[level 1].[level 1]", children: [] } ] },
                                 ]
                             }
                         },
@@ -1325,9 +1338,16 @@
 
         var descriptors = dataSource.rowsAxisDescriptors();
 
-        equal(descriptors.length, 2);
-        equal(descriptors[0].name, "level 0");
-        equal(descriptors[1].name, "level 1");
+        equal(descriptors.length, 3);
+
+        ok(!descriptors[0].expand);
+        equal(descriptors[0].name.join(","), "[level 0]");
+
+        ok(descriptors[1].expand);
+        equal(descriptors[1].name.join(","), "[level 1]");
+
+        ok(descriptors[2].expand);
+        equal(descriptors[2].name.join(","), "[level 0],[level 1].[level 1]");
     });
 
     test("rowsAxisDescriptors returns columns if no request is made", 2, function() {
