@@ -1079,8 +1079,8 @@ var __meta__ = {
         };
     }).directive('kendoMobileActionSheet', function() {
         return {
+            restrict: "A",
             link: function(scope, element, attrs, controllers) {
-
                 element.find("a[k-action]").each(function() {
                     $(this).attr("data-" + kendo.ns + "action", $(this).attr("k-action"));
                 });
