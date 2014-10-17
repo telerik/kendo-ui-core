@@ -1643,7 +1643,8 @@
                     element.on("keydown" + NS, proxy(that._keydown, that));
                 } else {
                     that._userEvents = new kendo.UserEvents(element, {
-                        multiTouch: true
+                        multiTouch: true,
+                        tap: proxy(that._tap, that)
                     });
 
                     that._userEvents.bind(["gesturestart", "gesturechange", "gestureend"], {
@@ -1657,9 +1658,30 @@
 
                 that._resizeHandler = proxy(that.resize, that);
                 kendo.onResize(that._resizeHandler);
+                this.bind("zoom", proxy(that._destroyToolBar, that));
+                this.bind("pan", proxy(that._destroyToolBar, that));
+            },
+
+            _tap: function(e) {
+                var p = this._caculateMobilePosition(e);
+                var meta = this._meta(e);
+                if (this.toolService.start(p, meta)) {
+                    this._destroyToolBar();
+                    if (this.toolService.end(p, meta)) {
+                        this._createToolBar();
+                        e.preventDefault();
+                    }
+                }
+            },
+
+            _caculateMobilePosition: function(e) {
+                return this.documentToModel(
+                    Point(e.x.location, e.y.location)
+                );
             },
 
             _gestureStart: function(e) {
+                this._destroyToolBar();
                 this.scroller.disable();
                 this._gesture = e;
                 this._initialCenter = this.documentToModel(new Point(e.center.x, e.center.y));
@@ -1785,6 +1807,7 @@
 
                 that.destroyScroller();
             },
+
             destroyScroller: function () {
                 var scroller = this.scroller;
 
@@ -1796,6 +1819,7 @@
                 scroller.element.remove();
                 this.scroller = null;
             },
+
             save: function () {
                 var json = {}, i;
 
@@ -2821,16 +2845,15 @@
                     that.layout(options.layout);
                 }
             },
+
             _mouseDown: function (e) {
-                if (this.pauseMouseHandlers) {
-                    return;
-                }
                 var p = this._calculatePosition(e);
                 if (e.which == 1 && this.toolService.start(p, this._meta(e))) {
                     this._destroyToolBar();
                     e.preventDefault();
                 }
             },
+
             _addItem: function (item) {
                 if (item instanceof Shape) {
                     this.addShape(item);
@@ -2838,10 +2861,8 @@
                     this.addConnection(item);
                 }
             },
+
             _mouseUp: function (e) {
-                if (this.pauseMouseHandlers) {
-                    return;
-                }
                 var p = this._calculatePosition(e);
                 if (e.which == 1 && this.toolService.end(p, this._meta(e))) {
                     this._createToolBar();
