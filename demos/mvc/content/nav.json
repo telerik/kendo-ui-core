@@ -1855,11 +1855,11 @@
         }
       },
        {
-        "text": "State API",
-        "url": "grid/state-api",
+        "text": "Persist state",
+        "url": "grid/persist-state",
         "new": true,
         "title": {
-            "kendo-ui": "KendoGrid State API Demo"
+            "kendo-ui": "KendoGrid Persist State API Demo"
         },
         "meta": {
             "kendo-ui": "This demo shows how setOptions and getOptions methods can manipulate the state of Kendo UI Grid widget."
