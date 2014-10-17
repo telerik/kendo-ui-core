@@ -1,34 +1,80 @@
-<div id="example" ng-app="KendoDemos">
-    <div ng-controller="MyCtrl" class="demo-section k-content">
-  <ul kendo-mobile-button-group k-on-select="selected(kendoEvent.index)">
-    <li>
-      Month
-    </li>
-    <li>
-      Quarter
-    </li>
-    <li>
-      Year
-    </li>
-  </ul>
-</div>
-<style>
-  .demo-section {
-    width: 500px;
-    text-align: center;
-  }
-  .demo-section .km-buttongroup {
-    margin: 0 auto;
-  }
-</style>
+<div kendo-mobile-mobile-application ng-app="kendoDemo">
+     <kendo-mobile-view id="buttongroup-home" ng-controller="MyCtrl">
+        <div class="head">&nbsp;</div>
+
+        <kendo-mobile-button-group id="select-period" k-options="buttonGroupOptions">
+            <li>Month</li>
+            <li>Quarter</li>
+            <li>Year</li>
+        </kendo-mobile-button-group>
+
+        <kendo-mobile-list-view k-style="'inset'">
+        <li>January <span class="sales-up">&uarr; $ 35,000</span></li>
+        <li>February <span class="sales-down">&darr; $ 25,000</span></li>
+        <li>March <span class="sales-down">&darr; $ 23,000</span></li>
+        <li>April <span class="sales-up">&uarr; $ 30,000</span></li>
+        <li>May <span class="sales-up">&uarr; $ 31,000</span></li>
+        <li>June <span class="sales-down">&darr; $ 29,000</span></li>
+        <li>July <span class="sales-up">&uarr; $ 35,000</span></li>
+        <li>August <span class="sales-up">&uarr; $ 37,000</span></li>
+        <li>September <span class="sales-hold">&rarr; $ 37,000</span></li>
+        <li>October <span class="sales-hold">&rarr; $ 37,000</span></li>
+        <li>November <span class="sales-up">&uarr; $ 38,000</span></li>
+        <li>December <span class="sales-up">&uarr; $ 40,000</span></li>
+        </kendo-mobile-list-view>
+        <kendo-mobile-list-view k-style="'inset'" style="display:none">
+        <li>1st Quarter <span class="sales-up">&uarr; $ 83,000</span></li>
+        <li>2nd Quarter <span class="sales-up">&uarr; $ 90,000</span></li>
+        <li>3rd Quarter <span class="sales-up">&uarr; $ 109,000</span></li>
+        <li>4th Quarter <span class="sales-up">&uarr; $ 115,000</span></li>
+        </kendo-mobile-list-view>
+        <kendo-mobile-list-view data-role="listview" k-style="'inset'" style="display:none">
+        <li>2009 <span class="sales-up">&uarr; $ 120,000</span></li>
+        <li>2010 <span class="sales-down">&darr; $ 109,000</span></li>
+        <li>2011 <span class="sales-hold">&rarr; $ 109,000</span></li>
+        </kendo-mobile-list-view>
+    </kendo-mobile-view>
 </div>
 
 <script>
-  angular.module("KendoDemos", [ "kendo.directives" ]);
-function MyCtrl($scope) {
-  $scope.selected = function(index) {
-    alert("Selected index: " + index);
-  };
-}
+    angular.module("kendoDemo", [ "kendo.directives" ]).controller("MyCtrl", function($scope) {
 
+      $scope.buttonGroupOptions = {
+          select: function(e) {
+              $("[data-role=listview]").hide().eq(e.index).show();
+          },
+          index: 0
+      };
+   });
 </script>
+
+<style scoped>
+#buttongroup-home .head {
+	display: block;
+    margin: 1em;
+	height: 110px;
+	background: url(../content/mobile/shared/sales.jpg) no-repeat center center;
+    -webkit-background-size: 100% auto;
+    background-size: 100% auto;
+}
+.km-ios .head,
+.km-blackberry .head {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+#select-period {
+    margin: 1em auto .4em auto;
+}
+#buttongroup-home .km-list span {
+	float: right;
+}
+#buttongroup-home .sales-up {
+	color: green;
+}
+#buttongroup-home .sales-down {
+	color: red;
+}
+#buttongroup-home .sales-hold {
+	color: blue;
+}
+</style>

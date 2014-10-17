@@ -8359,6 +8359,7 @@
         "text": "AngularJS",
         "new": true,
         "disableInMobile": true,
+        "mobile": true,
         "url": "buttongroup/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI Mobile ButtonGroup"
