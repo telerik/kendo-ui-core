@@ -159,7 +159,8 @@
                 hover: {},
                 editable: {
                     connect: true,
-                    tools: ["edit", "delete", "rotate"]
+                    tools: ["edit", "delete", "rotate"],
+                    editors: {}
                 },
                 connectors: diagram.DefaultConnectors,
                 rotation: {
@@ -1521,7 +1522,8 @@
                 shapeDefaults: diagram.shapeDefaults({ undoable: true }),
                 connectionDefaults: {
                     editable: {
-                        tools: ["edit", "delete"]
+                        tools: ["edit", "delete"],
+                        editors: {}
                     }
                 },
                 shapes: [],
@@ -3633,10 +3635,10 @@
                     formContent += this._renderTemplate();
                     this.fields = [];
                 } else {
-                    formContent += this._appendFields();
+                    formContent += this._renderFields();
                 }
 
-                formContent += this._appendButtons();
+                formContent += this._renderButtons();
 
                 this.wrapper.append(
                     $('<div class="k-edit-form-container"/>').append(formContent));
@@ -3665,7 +3667,7 @@
                 return template;
             },
 
-            _appendFields: function() {
+            _renderFields: function() {
                 var form = "";
                 for (var i = 0; i < this.fields.length; i++) {
                     var field = this.fields[i];
@@ -3681,7 +3683,7 @@
                 return form;
             },
 
-            _appendButtons: function() {
+            _renderButtons: function() {
                 var form = '<div class="k-edit-buttons k-state-default">';
                 form += this._createButton("update");
                 form += this._createButton("cancel");
