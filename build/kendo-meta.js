@@ -150,8 +150,7 @@ var getKendoFile = (function() {
                         });
                         return true;
                     }
-                    if (node instanceof U2.AST_Return &&
-                        (/^return (window\.)?kendo/.test(node.print_to_string()))) {
+                    if (isReturnKendo(node)) {
                         replacements.push({
                             begin : node.start.pos,
                             end   : node.end.endpos,
@@ -255,18 +254,19 @@ var getKendoFile = (function() {
             ast.transform(new U2.TreeTransformer(function(node, descend){
                 if (node === ast) {
                     descend(node, this);
-                    var stats = [];
                     deps.forEach(function(f){
                         var comp = getKendoFile(f);
                         var f = comp.getAMDFactory().factory;
-                        stats.push.apply(stats, f.body);
+                        f.body.forEach(function(stat){
+                            if (!isReturnKendo(stat))
+                                node.body.unshift(stat);
+                        });
                     });
-                    node.body.unshift.apply(node.body, stats);
                     return node;
                 }
                 if (isMetaNode(node))
                     return U2.MAP.skip;
-                if (node instanceof U2.AST_Return && (/^return (window\.)?kendo/.test(node.print_to_string())))
+                if (isReturnKendo(node))
                     return U2.MAP.skip;
                 if (node instanceof U2.AST_Statement)
                     return node;
@@ -297,9 +297,7 @@ var getKendoFile = (function() {
         }),
 
         getMainCode: cachedProperty("getMainCode", function(){
-            var ast = this.getAMDFactory().factory;
-            if (ast.body.length == 0) return "";
-            return this.getOrigCode().substring(ast.body[0].start.pos, ast.body[ast.body.length - 1].end.endpos);
+            return this.buildOwnSource();
         }),
 
         // return true if this is a "subfile", i.e. editor/main.js
@@ -308,6 +306,11 @@ var getKendoFile = (function() {
             return !(dir == "." || dir == "");
         }
     };
+
+    function isReturnKendo(node) {
+        return node instanceof U2.AST_Return
+            && (/^return (window\.)?kendo/.test(node.print_to_string()));
+    }
 
     function unwrapFunction(code) {
         return code.replace(/^[^\{]*?{|}[^\}]*?$/g, "").trim();
