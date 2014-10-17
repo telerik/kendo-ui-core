@@ -86,7 +86,7 @@
                     var data = rootElement.toDataURL();
                     defer.resolve(data);
                 } catch (e) {
-                    defer.rejectWith(e);
+                    defer.reject(e);
                 }
             });
 

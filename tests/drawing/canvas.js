@@ -1208,8 +1208,8 @@
 
             d.exportImage(group).done(function() {
                 ok(false, "Should fail");
-            }).fail(function(small) {
-                ok(true);
+            }).fail(function(e) {
+                contains(e.message, "Tainted");
             }).always(function() {
                 start();
             });
