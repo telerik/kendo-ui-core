@@ -619,7 +619,7 @@ var __meta__ = {
             }
 
             target = parentColumns[Math.max(index, 0)];
-            if (target && target != source) {
+            if (target && target != source && target.columns) {
                 return findReorderTarget(columns, target, source, before);
             }
         }
@@ -698,18 +698,12 @@ var __meta__ = {
         return width;
     }
 
-    function updateRowSpan(container) {
-        var rows = container.find("tr:not(.k-filter-row)");
-
-        var emptyRowsCount = rows.filter(function() {
-            return !$(this).children(":visible").length;
-        }).length;
-
-        var cells = rows.find("th:not(.k-group-cell,.k-hierarchy-cell)");
+    function updateRowSpan(container, count) {
+        var cells = container.find("tr:not(.k-filter-row) th:not(.k-group-cell,.k-hierarchy-cell)");
 
         for (var idx = 0; idx < cells.length; idx++) {
             if (cells[idx].rowSpan > 1) {
-                cells[idx].rowSpan -= emptyRowsCount;
+                cells[idx].rowSpan -= count;
             }
         }
     }
@@ -728,8 +722,8 @@ var __meta__ = {
                 cells[idx].rowSpan -= emptyRowsCount;
             }
         }
+        return rows.length - emptyRowsCount;
     }
-
 
     function mapColumnToCellRows(columns, cells, rowIndex, rows, cellIndex) {
         var idx, row, length;
@@ -5013,7 +5007,10 @@ var __meta__ = {
                     tr.eq(idx).append(that.thead.find("tr:eq(" + idx + ") .k-group-cell").add(cells));
                 }
 
-                removeEmptyRows(this.thead);
+                var count = removeEmptyRows(this.thead);
+                if (rows.length < count) {
+                    updateRowSpan(table);
+                }
 
                 trFilter = table.find(".k-filter-row");
                 trFilter.append(that.thead.find(".k-filter-row .k-group-cell").add(filterCells));
