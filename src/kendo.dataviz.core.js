@@ -765,11 +765,23 @@ var __meta__ = {
                 children[i].renderVisual();
             }
 
+            this.createAnimation();
+
             this.renderComplete();
         },
 
         createVisual: function() {
             this.visual = new dataviz.drawing.Group();
+        },
+
+        createAnimation: function() {
+            this.animation = draw.Animation.create(
+                this.visual, this.options.animation
+            );
+
+            if (this.animation) {
+                this.animation.setup();
+            }
         },
 
         appendVisual: function(childVisual) {

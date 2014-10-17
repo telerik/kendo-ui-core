@@ -147,6 +147,7 @@ var __meta__ = {
         LEGEND_ITEM_HOVER = "legendItemHover",
         LINE = "line",
         LINE_MARKER_SIZE = 8,
+        LINEAR = "linear",
         LOGARITHMIC = "log",
         MAX = "max",
         MAX_EXPAND_DEPTH = 5,
@@ -3086,19 +3087,24 @@ var __meta__ = {
                 }
             });
 
-            var animOptions = deepExtend(options.animation, {
-                aboveAxis: this.aboveAxis,
-                vertical: options.vertical,
-                stackBase: options.stackBase
-            });
-
-            this.animation = draw.Animation.create(rect, options.animation);
-            this.animation.setup();
-
             // TODO: Overlay
             //     rotation: vertical ? 0 : 90
 
             this.visual.append(rect);
+        },
+
+        createAnimation: function() {
+            var options = this.options;
+
+            deepExtend(options, {
+                animation: {
+                    aboveAxis: this.aboveAxis,
+                    vertical: options.vertical,
+                    stackBase: options.stackBase
+                }
+            });
+
+            ChartElement.fn.createAnimation.call(this);
         },
 
         highlightOverlay: function(view, options) {
@@ -3194,7 +3200,26 @@ var __meta__ = {
             );
         }
     });
-    draw.AnimationFactory.current.register("bar", BarAnimation);
+    draw.AnimationFactory.current.register(BAR, BarAnimation);
+
+    var FadeInAnimation = draw.Animation.extend({
+        options: {
+            duration: 200,
+            easing: LINEAR
+        },
+
+        setup: function() {
+            this.fadeTo = this.element.opacity();
+            this.element.opacity(0);
+        },
+
+        step: function(pos) {
+            this.element.opacity(pos * this.fadeTo);
+            console.log(pos * this.fadeTo);
+        }
+    });
+    draw.AnimationFactory.current.register(FADEIN, FadeInAnimation);
+
 
     var ErrorRangeCalculator = function(errorValue, series, field) {
         var that = this;
