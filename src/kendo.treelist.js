@@ -273,7 +273,9 @@ var __meta__ = {
                 children = map[item.id];
                 hasChildren = !!(children && children.length);
 
-                item.loaded(hasChildren);
+                if (!item.loaded()) {
+                    item.loaded(hasChildren);
+                }
 
                 if (item.hasChildren !== true) {
                     item.hasChildren = hasChildren;

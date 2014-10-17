@@ -928,4 +928,21 @@
         deepEqual(pluck(ds.view(), "id"), [1, 2, 3]);
     });
 
+    test("loaded flag is persisted", function() {
+        var ds = new TreeListDataSource({
+            data: [
+                { id: 1, parentId: null }
+            ]
+        });
+
+        ds.read();
+
+        var root = ds.view()[0];
+        root.loaded(true);
+
+        var child = ds.add({ parentId: root.id });
+        ds.cancelChanges(child);
+
+        ok(root.loaded(), "root item must stay loaded");
+    });
 })();
