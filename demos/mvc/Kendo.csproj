@@ -1154,7 +1154,7 @@
     <Content Include="Views\demos\gantt\mvvm.cshtml" />
     <Content Include="Views\demos\gantt\keyboard-navigation.cshtml" />
     <Content Include="Views\demos\diagram\mvvm.cshtml" />
-    <Content Include="Views\demos\grid\state-api.cshtml" />
+    <Content Include="Views\demos\grid\persist-state.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="content\integration\diagram\js\" />
