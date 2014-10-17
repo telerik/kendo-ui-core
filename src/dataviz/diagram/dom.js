@@ -158,7 +158,8 @@
                 height: DEFAULT_SHAPE_HEIGHT,
                 hover: {},
                 editable: {
-                    connect: true
+                    connect: true,
+                    tools: ["edit", "delete", "rotate"]
                 },
                 connectors: diagram.DefaultConnectors,
                 rotation: {
@@ -1518,7 +1519,11 @@
                     angle: 10
                 },
                 shapeDefaults: diagram.shapeDefaults({ undoable: true }),
-                connectionDefaults: {},
+                connectionDefaults: {
+                    editable: {
+                        tools: ["edit", "delete"]
+                    }
+                },
                 shapes: [],
                 connections: []
             },
@@ -3429,16 +3434,16 @@
             createTool: function(tool) {
                 if (isPlainObject(tool)) {
                     if (tool.type) {
-                        this[tool.type + "Tool"](tool);
+                        this[tool.type + "Tool"]();
                     } else if (tool.template) {
                         this._toolBar.add({
                             template: tool.template
                         });
                     }
                 } else {
-                    tool = this[tool + "Tool"];
+                    tool = this[tool + "Tool"]();
                     if (tool) {
-                        this[tool]({ });
+                        tool.call(this);
                     }
                 }
             },
