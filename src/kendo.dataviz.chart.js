@@ -10224,7 +10224,7 @@ var __meta__ = {
             var tooltip = this,
                 options = deepExtend({}, tooltip.options, point.options.tooltip);
 
-            if (!point || !point.tooltipAnchor) {
+            if (!point || !point.tooltipAnchor || !tooltip.element) {
                 return;
             }
 
@@ -10506,11 +10506,13 @@ var __meta__ = {
             var tooltip = this,
                 element = tooltip.element;
 
-            tooltip.point = point;
-            tooltip.element.html(tooltip.content(point));
-            tooltip.anchor = tooltip.getAnchor();
+            if (element) {
+                tooltip.point = point;
+                tooltip.element.html(tooltip.content(point));
+                tooltip.anchor = tooltip.getAnchor();
 
-            tooltip.move();
+                tooltip.move();
+            }
         },
 
         move: function() {
