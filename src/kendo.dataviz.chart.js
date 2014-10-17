@@ -45,7 +45,6 @@ var __meta__ = {
         dataviz = kendo.dataviz,
         Axis = dataviz.Axis,
         AxisLabel = dataviz.AxisLabel,
-        BarAnimation = dataviz.BarAnimation,
         Box2D = dataviz.Box2D,
         BoxElement = dataviz.BoxElement,
         ChartElement = dataviz.ChartElement,
@@ -71,7 +70,7 @@ var __meta__ = {
         getElement = dataviz.getElement,
         getSpacing = dataviz.getSpacing,
         inArray = dataviz.inArray,
-        interpolateValue = dataviz.interpolateValue,
+        interpolate = dataviz.interpolateValue,
         last = dataviz.last,
         limitValue = dataviz.limitValue,
         mwDelta = dataviz.mwDelta,
@@ -472,6 +471,12 @@ var __meta__ = {
 
             chart.surface.clear();
             chart.surface.draw(model.visual);
+
+            model.traverse(function(element) {
+                if (element.animation) {
+                    element.animation.play();
+                }
+            });
 
             /*
                 chart._tooltip = chart._createTooltip();
@@ -3081,7 +3086,15 @@ var __meta__ = {
                 }
             });
 
-            // TODO: Animation
+            var animOptions = deepExtend(options.animation, {
+                aboveAxis: this.aboveAxis,
+                vertical: options.vertical,
+                stackBase: options.stackBase
+            });
+
+            this.animation = draw.Animation.create(rect, options.animation);
+            this.animation.setup();
+
             // TODO: Overlay
             //     rotation: vertical ? 0 : 90
 
@@ -3142,6 +3155,46 @@ var __meta__ = {
     });
     deepExtend(Bar.fn, PointEventsMixin);
     deepExtend(Bar.fn, NoteMixin);
+
+    var BarAnimation = draw.Animation.extend({
+        options: {
+            duration: INITIAL_ANIMATION_DURATION
+        },
+
+        setup: function() {
+            var element = this.element;
+            var options = this.options;
+
+            var bbox = element.bbox();
+            var origin = this.origin = options.aboveAxis ?
+                bbox.bottomLeft() : bbox.topRight();
+
+            var axis = options.vertical ? Y : X;
+            var stackBase = options.stackBase;
+            var fromOffset = this.fromOffset = new geom.Point();
+            fromOffset[axis] = valueOrDefault(stackBase, origin[axis]) - origin[axis];
+
+            var fromScale = this.fromScale = new geom.Point(1, 1);
+            fromScale[axis] = 0;
+
+            element.transform(geom.transform()
+                .scale(fromScale.x, fromScale.y)
+            );
+        },
+
+        step: function(pos) {
+            var scaleX = interpolate(this.fromScale.x, 1, pos);
+            var scaleY = interpolate(this.fromScale.y, 1, pos);
+            var translateX = interpolate(this.fromOffset.x, 0, pos);
+            var translateY = interpolate(this.fromOffset.y, 0, pos);
+
+            this.element.transform(geom.transform()
+                .translate(translateX, translateY)
+                .scale(scaleX, scaleY, this.origin)
+            );
+        }
+    });
+    draw.AnimationFactory.current.register("bar", BarAnimation);
 
     var ErrorRangeCalculator = function(errorValue, series, field) {
         var that = this;
@@ -9822,7 +9875,7 @@ var __meta__ = {
                 sector = element;
             }
 
-            sector.r = interpolateValue(startRadius, endRadius, pos);
+            sector.r = interpolate(startRadius, endRadius, pos);
         }
     });
 
@@ -9843,7 +9896,7 @@ var __meta__ = {
             var circle = this.element,
                 endRadius = circle.endRadius;
 
-            circle.radius = interpolateValue(0, endRadius, pos);
+            circle.radius = interpolate(0, endRadius, pos);
         }
     });
 
