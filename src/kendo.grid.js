@@ -1350,7 +1350,7 @@ var __meta__ = {
 
         _attachCustomCommandsEvent: function() {
             var that = this,
-                columns = that.columns || [],
+                columns = leafColumns(that.columns || []),
                 command,
                 idx,
                 length;
@@ -2073,7 +2073,7 @@ var __meta__ = {
             cell = $(cell);
 
             var that = this,
-                column = that.columns[that.cellIndex(cell)],
+            column = leafColumns(that.columns)[that.cellIndex(cell)],
                 model = that._modelForContainer(cell);
 
             that.closeCell();
@@ -2220,7 +2220,7 @@ var __meta__ = {
             }
 
             cell.removeClass("k-edit-cell");
-            column = that.columns[that.cellIndex(cell)];
+            column = leafColumns(that.columns)[that.cellIndex(cell)];
 
             tr = cell.parent().removeClass("k-grid-edit-row");
 
@@ -2335,7 +2335,7 @@ var __meta__ = {
                 } else if (mode === "incell") {
                     $(row).children(DATA_CELL).each(function() {
                         var cell = $(this);
-                        var column = that.columns[cell.index()];
+                        var column = leafColumns(that.columns)[cell.index()];
 
                         model = that._modelForContainer(cell);
 
@@ -2404,6 +2404,7 @@ var __meta__ = {
                 updateText,
                 cancelText,
                 tempCommand,
+                columns = leafColumns(that.columns),
                 attr,
                 editable = that.options.editable,
                 template = editable.template,
@@ -2419,8 +2420,8 @@ var __meta__ = {
 
                 html += (kendo.template(template, settings))(model);
 
-                for (idx = 0, length = that.columns.length; idx < length; idx++) {
-                    column = that.columns[idx];
+                for (idx = 0, length = columns.length; idx < length; idx++) {
+                    column = columns[idx];
                     if (column.command) {
                         tempCommand = getCommand(column.command, "edit");
                         if (tempCommand) {
@@ -2429,8 +2430,8 @@ var __meta__ = {
                     }
                 }
             } else {
-                for (idx = 0, length = that.columns.length; idx < length; idx++) {
-                    column = that.columns[idx];
+                for (idx = 0, length = columns.length; idx < length; idx++) {
+                    column = columns[idx];
 
                     if (!column.command) {
                         html += '<div class="k-edit-label"><label for="' + column.field + '">' + (column.title || column.field || "") + '</label></div>';
@@ -2566,7 +2567,7 @@ var __meta__ = {
 
             row.children(":not(.k-group-cell,.k-hierarchy-cell)").each(function() {
                 cell = $(this);
-                column = that.columns[that.cellIndex(cell)];
+                column = leafColumns(that.columns)[that.cellIndex(cell)];
 
                 if (!column.command && column.field && (!model.editable || model.editable(column.field))) {
                     fields.push({ field: column.field, format: column.format, editor: column.editor, values: column.values });
@@ -2819,7 +2820,7 @@ var __meta__ = {
         _firstEditableColumnIndex: function(container) {
             var that = this,
                 column,
-                columns = that.columns,
+                columns = leafColumns(that.columns),
                 idx,
                 length,
                 model = that._modelForContainer(container);
@@ -3893,7 +3894,7 @@ var __meta__ = {
             if (row.add(relatedRow).children(".k-edit-cell").length && !that.options.rowTemplate) {
                 row.add(relatedRow).children(":not(.k-group-cell,.k-hierarchy-cell)").each(function() {
                     cell = $(this);
-                    column = that.columns[that.cellIndex(cell)];
+                    column = leafColumns(that.columns)[that.cellIndex(cell)];
 
                     if (column.field === e.field) {
                         if (!cell.hasClass("k-edit-cell")) {

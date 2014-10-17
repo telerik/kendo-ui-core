@@ -1636,6 +1636,24 @@
         grid.items().first().find("td:first a").click();
     });
 
+    test("custom command click handler is called - multiline headers", 1, function() {
+        var grid = new Grid(table, {
+            dataSource: [{ foo: 1, bar: "bar"}],
+            columns: [
+            {
+                title: "foo",
+                columns: [{
+                    command: {
+                        name: "bar",
+                        click: function() {
+                            ok(true);
+                        }
+                    } }]
+            }]
+        });
+        grid.items().first().find("td:first a").click();
+    });
+
     test("custom command click handler is called if multiple commands", 1, function() {
         var grid = new Grid(table, {
             dataSource: [{ foo: 1, bar: "bar"}],

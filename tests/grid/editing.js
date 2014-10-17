@@ -1038,4 +1038,15 @@
         ok(grid.table.find("tr:first td:first").hasClass("k-state-selected"));
     });
 
+    test("cell click enters edit mode - multiline headers", function() {
+        setup({ columns: [
+            { title: "master", columns: [ { field: "foo" } ] },
+            { field: "name" }
+        ]});
+
+        var cell = table.find("td:first").click();
+
+        ok(cell.find(":input").length);
+    });
+
 })();
