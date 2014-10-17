@@ -1548,7 +1548,8 @@
                         cancelEditor: proxy(this._cancel, this),
                         model: item.dataItem,
                         type: editorType,
-                        target: this
+                        target: this,
+                        editors: item.editable.editors
                     });
 
                     this.editor.open();
@@ -2886,6 +2887,7 @@
                                 tools: tools
                             });
                             var element = this.toolService.hoveredItem;
+                            var padding = 5;
                             if (element) {
                                 var point;
                                 var toolBarElement = this.toolBar.element;
@@ -2897,7 +2899,7 @@
                                     point = Point(shapeBounds.x, shapeBounds.y)
                                                     .minus(Point(
                                                         (popupWidth - selectionBounds.width) / 2,
-                                                        popupHeight
+                                                        popupHeight + padding
                                                     ));
                                 } else if (element instanceof Connection) {
                                     var connectionBounds = element.bounds();
@@ -2911,7 +2913,7 @@
                                     point = Point(rect.x, rect.y)
                                                     .minus(Point(
                                                         (popupWidth - connectionBounds.width - 20) / 2,
-                                                        popupHeight
+                                                        popupHeight + padding
                                                     ));
                                 }
 
@@ -3573,10 +3575,10 @@
                 var modelFields = this.model.fields;
 
                 for (var field in modelFields) {
+                    var result = {};
                     if (this._isEditable(field)) {
-                        fields.push({
-                            field: field
-                        });
+                        result.field = field;
+                        fields.push(result);
                     }
                 }
 
@@ -3618,7 +3620,6 @@
                 var that = this;
                 this.wrapper = $('<div class="k-popup-edit-form"/>')
                     .attr(kendo.attr("uid"), this.model.uid);
-
 
                 var formContent = "";
 
