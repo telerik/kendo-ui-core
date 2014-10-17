@@ -1,10 +1,25 @@
 (function() {
-    var TimelineView = kendo.ui.TimelineView,
-        SchedulerEvent = kendo.data.SchedulerEvent,
-        container;
+    var TimelineView = kendo.ui.TimelineView;
+    var SchedulerEvent = kendo.data.SchedulerEvent;
+    var Scheduler = kendo.ui.Scheduler;
+    var container;
+    var scheduler;
 
     function setup(options) {
         return new TimelineView(container, $.extend({ majorTick: 60 }, options));
+    }
+
+    function setupScheduler(options) {
+        options = options || {};
+
+        options = $.extend({
+            views: [
+                "timeline"
+            ],
+            dataSource: []
+        }, options);
+
+        scheduler = new Scheduler(container, options);
     }
 
     module("Timeline View rendering", {
@@ -23,6 +38,57 @@
     test("title is read from the options", function () {
         var view = setup({ title: "the title", date: new Date("2013/6/6") });
         equal(view.title, "the title");
+    });
+
+    tzTest("Sofia", "Current time marker is rendered correctly", function() {
+        var view = setup({ date: new Date() });
+
+        var timeElementsCount = view.element.find(".k-current-time").length;
+        equal(timeElementsCount,1);
+    });
+
+    test("Current time marker is rendered correctly", function() {
+        var view = setup({ date: new Date() });
+
+        var timeElementsCount = view.element.find(".k-current-time").length;
+        equal(timeElementsCount,1);
+    });
+
+    test("Current time marker is not rendered when the option is set to false", function() {
+        var view = setup({ date: new Date(), currentTimeMarker: false });
+
+        var timeElementsCount = view.element.find(".k-current-time").length;
+        equal(timeElementsCount,0);
+    });
+
+    test("Current time marker is not rendered when the currentTimeMarker option is not object", function() {
+        var view = setup({ date: new Date(), currentTimeMarker: true });
+
+        var timeElementsCount = view.element.find(".k-current-time").length;
+        equal(timeElementsCount,0);
+    });
+
+    test("Current time marker is rendered when vertical grouping is applied", function() {
+        setupScheduler({
+            group: {
+                resources: ["Rooms"],
+                orientation: "vertical"
+            },
+            resources: [
+                {
+                    field: "roomId",
+                    name: "Rooms",
+                    dataSource: [
+                        { text: "Meeting Room 101", value: 1, color: "#6eb3fa" },
+                        { text: "Meeting Room 201", value: 2, color: "#f58a8a" }
+                    ],
+                    title: "Room"
+                }]
+
+        });
+
+        var timeElementsCount = scheduler.view().element.find(".k-current-time").length;
+        equal(timeElementsCount,1);
     });
 
     module("Timeline View rendering without slot holes", {

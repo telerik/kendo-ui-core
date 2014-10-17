@@ -88,8 +88,68 @@ var __meta__ = {
             that.calculateDateRange();
 
             that._groups();
+
+            that._currentTime();
         },
         name: "timeline",
+
+        _currentTimeMarkerUpdater: function() {
+            var currentTime = new Date();
+            var options = this.options;
+
+            this.datesHeader.find(".k-current-time").remove();
+
+            if (!this._isInDateSlot({start: currentTime, end:currentTime })) {
+                return;
+            }
+
+            if(options.currentTimeMarker.useLocalTimezone === false) {
+                var timezone = options.dataSource.options.schema.timezone;
+
+                if(options.dataSource && timezone) {
+                    var timezoneOffset = kendo.timezone.offset(currentTime, timezone);
+                    currentTime = kendo.timezone.convert(currentTime, currentTime.getTimezoneOffset(), timezoneOffset);
+                }
+            }
+
+            var groupsCount = !options.group || options.group.orientation == "vertical" ? 1 : this.groups.length;
+
+            for(var groupIndex = 0; groupIndex < groupsCount; groupIndex++) {
+                var currentGroup = this.groups[groupIndex];
+                var utcCurrentTime = kendo.date.toUtcTime(currentTime);
+                var ranges = currentGroup.timeSlotRanges(utcCurrentTime, utcCurrentTime + 1);
+                if(ranges.length === 0) {
+                    return;
+                }
+                var collection = ranges[0].collection;
+                var slotElement = collection.slotByStartDate(currentTime);
+
+                if(slotElement) {
+                    var element = $("<div class='k-current-time'></div>");
+                    var innerRect = ranges[0].innerRect(currentTime, new Date(currentTime.getTime() + 1), false);
+                    var datesHeader = this.datesHeader;
+
+                    element.appendTo(datesHeader.find(".k-scheduler-header-wrap")).css({
+                        left: Math.round(innerRect.left) + datesHeader.offset().left,
+                        width: "1px",
+                        bottom: "1px",
+                        top: 0
+                    });
+                }
+            }
+        },
+
+        _currentTime: function() {
+            var that = this;
+            var markerOptions = that.options.currentTimeMarker;
+
+            if (markerOptions !== false && markerOptions.updateInterval !== undefined) {
+                var updateInterval = markerOptions.updateInterval;
+
+                that._currentTimeMarkerUpdater();
+                that._currentTimeUpdateTimer = setInterval(proxy(this._currentTimeMarkerUpdater, that), updateInterval);
+            }
+        },
 
         _editable: function() {
             if (this.options.editable) {
@@ -264,7 +324,11 @@ var __meta__ = {
             minorTimeHeaderTemplate: "&nbsp;",
             slotTemplate: "&nbsp;",
             eventTemplate: EVENT_TEMPLATE,
-            dateHeaderTemplate: DATA_HEADER_TEMPLATE
+            dateHeaderTemplate: DATA_HEADER_TEMPLATE,
+            currentTimeMarker: {
+                updateInterval: 10000,
+                useLocalTimezone: true
+            }
         },
 
         events: ["remove", "add", "edit"],
@@ -1175,6 +1239,10 @@ var __meta__ = {
 
             if (that.element) {
                 that.element.off(NS);
+            }
+
+            if (that._currentTimeUpdateTimer) {
+                clearInterval(that._currentTimeUpdateTimer);
             }
 
             SchedulerView.fn.destroy.call(this);
