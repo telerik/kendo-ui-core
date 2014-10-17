@@ -372,7 +372,7 @@ var __meta__ = {
 
             return item;
         }
-    })
+    });
 
     function eventHandler(context, type, field, prefix) {
         return function(e) {
@@ -1989,7 +1989,7 @@ var __meta__ = {
         }
     }
 
-    function replaceWithObservable(view, data, ranges, type) {
+    function replaceWithObservable(view, data, ranges) {
         for (var viewIndex = 0, length = view.length; viewIndex < length; viewIndex++) {
             var item = view[viewIndex];
 
@@ -1998,7 +1998,7 @@ var __meta__ = {
             }
 
             if (item.hasSubgroups !== undefined) {
-                replaceWithObservable(item.items, data, ranges, type);
+                replaceWithObservable(item.items, data, ranges);
             } else {
                 for (var idx = 0; idx < data.length; idx++) {
                     if (data[idx] === item) {
