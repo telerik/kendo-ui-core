@@ -3215,7 +3215,6 @@ var __meta__ = {
 
         step: function(pos) {
             this.element.opacity(pos * this.fadeTo);
-            console.log(pos * this.fadeTo);
         }
     });
     draw.AnimationFactory.current.register(FADEIN, FadeInAnimation);
@@ -4888,39 +4887,38 @@ var __meta__ = {
 
             for (var i = 0, length = linePoints.length; i < length; i++) {
                 if (linePoints[i].visible !== false) {
-                    points[i] = linePoints[i]._childBox.center();
+                    points[i] = linePoints[i]._childBox.toRect().center();
                 }
             }
 
             return points;
         },
 
-        getViewElements: function(view) {
-            var segment = this,
-                options = segment.options,
-                series = segment.series,
-                defaults = series._defaults,
-                color = series.color;
-
-            ChartElement.fn.getViewElements.call(segment, view);
+        createVisual: function() {
+            var options = this.options;
+            var series = this.series;
+            var defaults = series._defaults;
+            var color = series.color;
 
             if (isFn(color) && defaults) {
                 color = defaults.color;
             }
 
-            return [
-                view.createPolyline(segment.points(), options.closed, {
-                    id: segment.id,
-                    stroke: color,
-                    strokeWidth: series.width,
-                    strokeOpacity: series.opacity,
-                    fill: "",
-                    dashType: series.dashType,
-                    data: { modelId: segment.modelId },
-                    zIndex: -1,
-                    align: false
-                })
-            ];
+            var line = draw.Path.fromPoints(this.points(), {
+                stroke: {
+                    color: color,
+                    width: series.width,
+                    opacity: series.opacity,
+                    dashType: series.dashType
+                }
+            });
+
+            if (options.closed) {
+                line.close();
+            }
+
+            this.visual = new draw.Group();
+            this.visual.append(line);
         },
 
         aliasFor: function(e, coords) {
@@ -5258,78 +5256,81 @@ var __meta__ = {
                 lastPoint = last(points);
 
                 if (invertAxes) {
-                    points.unshift(Point2D(end, firstPoint.y));
-                    points.push(Point2D(end, lastPoint.y));
+                    points.unshift(new geom.Point(end, firstPoint.y));
+                    points.push(new geom.Point(end, lastPoint.y));
                 } else {
-                    points.unshift(Point2D(firstPoint.x, end));
-                    points.push(Point2D(lastPoint.x, end));
+                    points.unshift(new geom.Point(firstPoint.x, end));
+                    points.push(new geom.Point(lastPoint.x, end));
                 }
             }
 
             return points;
         },
 
-        getViewElements: function(view) {
-            var segment = this,
-                series = segment.series,
-                defaults = series._defaults,
-                color = series.color,
-                elements = [],
-                line;
-
-            ChartElement.fn.getViewElements.call(segment, view);
+        createVisual: function() {
+            var options = this.options;
+            var series = this.series;
+            var defaults = series._defaults;
+            var color = series.color;
 
             if (isFn(color) && defaults) {
                 color = defaults.color;
             }
 
-            elements.push(this.createArea(view, color));
-            line = this.createLine(view, color);
-            if (line) {
-                elements.push(line);
+            var line = draw.Path.fromPoints(this.points(), {
+                stroke: {
+                    color: color,
+                    width: series.width,
+                    opacity: series.opacity,
+                    dashType: series.dashType
+                }
+            });
+
+            if (options.closed) {
+                line.close();
             }
 
-            return elements;
+            this.visual = new draw.Group();
+
+            this.createArea(color);
+            this.createLine(color);
         },
 
-        createLine: function(view, color) {
-            var segment = this,
-                series = segment.series,
-                lineOptions = deepExtend({
+        createLine: function(color) {
+            var series = this.series;
+            var lineOptions = deepExtend({
                         color: color,
                         opacity: series.opacity
                     }, series.line
-                ),
-                element;
+                );
 
             if (lineOptions.visible !== false && lineOptions.width > 0) {
-                element = view.createPolyline(segment._linePoints(), false, {
-                    stroke: lineOptions.color,
-                    strokeWidth: lineOptions.width,
-                    strokeOpacity: lineOptions.opacity,
-                    dashType: lineOptions.dashType,
-                    data: { modelId: segment.modelId },
-                    strokeLineCap: "butt",
-                    zIndex: -1,
-                    align: false
+                var line = draw.Path.fromPoints(this._linePoints(), {
+                    stroke: {
+                        color: lineOptions.color,
+                        width: lineOptions.width,
+                        opacity: lineOptions.opacity,
+                        dashType: lineOptions.dashType,
+                        lineCap: "butt"
+                    }
                 });
-            }
 
-            return element;
+                this.visual.append(line);
+            }
         },
 
-        createArea: function(view, color) {
-            var segment = this,
-                series = segment.series;
+        createArea: function(color) {
+            var series = this.series;
 
-            return view.createPolyline(segment.points(), false, {
-                id: segment.id,
-                fillOpacity: series.opacity,
-                fill: color,
-                stack: series.stack,
-                data: { modelId: segment.modelId },
-                zIndex: -1
+            var area = draw.Path.fromPoints(this.points(), {
+                fill: {
+                    color: color,
+                    opacity: series.opacity
+                },
+                stroke: null
             });
+
+            this.visual.append(area);
         }
     };
 

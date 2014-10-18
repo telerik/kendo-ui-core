@@ -766,7 +766,6 @@ var __meta__ = {
             }
 
             this.createAnimation();
-
             this.renderComplete();
         },
 
