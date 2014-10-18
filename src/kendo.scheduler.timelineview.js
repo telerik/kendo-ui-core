@@ -126,11 +126,10 @@ var __meta__ = {
 
                 if(slotElement) {
                     var element = $("<div class='k-current-time'></div>");
-                    var innerRect = ranges[0].innerRect(currentTime, new Date(currentTime.getTime() + 1), false);
                     var datesHeader = this.datesHeader;
 
                     element.appendTo(datesHeader.find(".k-scheduler-header-wrap")).css({
-                        left: Math.round(innerRect.left) + datesHeader.offset().left,
+                        left: Math.round(ranges[0].innerRect(currentTime, new Date(currentTime.getTime() + 1), false).left),
                         width: "1px",
                         bottom: "1px",
                         top: 0
@@ -310,15 +309,17 @@ var __meta__ = {
 
         options: {
             name: "TimelineView",
-            title: "",
-            selectedDateFormat: "{0:D} - {1:D}",
+            title: "Timeline",
+            selectedDateFormat: "{0:D}",
             date: kendo.date.today(),
             startTime: kendo.date.today(),
             endTime: kendo.date.today(),
             minorTickCount: 2,
             editable: true,
-            //new option
-            numberOfDays: 1,
+            workDayStart: new Date(1980, 1, 1, 8, 0, 0),
+            workDayEnd: new Date(1980, 1, 1, 17, 0, 0),
+            workWeekStart: 1,
+            workWeekEnd: 5,
             majorTick: 60,
             majorTimeHeaderTemplate: "#=kendo.toString(date, 't')#",
             minorTimeHeaderTemplate: "&nbsp;",
@@ -598,25 +599,11 @@ var __meta__ = {
             return kendo.date.nextDay(this.endDate());
         },
         previousDate: function () {
-            var daysToSubstract = -Math.abs(this.options.numberOfDays); //get the negative value of numberOfDays
-            var startDate = kendo.date.addDays(this.startDate(), daysToSubstract); //substract the dates
-            return startDate;
+            return kendo.date.previousDay(this.startDate());
         },
 
         calculateDateRange: function() {
-            //add support for different intervals - day, week, month
-            var numberOfDays = Math.abs(this.options.numberOfDays);
-            var start = this.options.date;
-            var idx;
-            var length;
-            var dates = [];
-
-            for (idx = 0, length = numberOfDays; idx < length; idx++) {
-                dates.push(start);
-                start = kendo.date.nextDay(start);
-            }
-            this._render(dates);
-            //this._render([this.options.date, kendo.date.addDays(this.options.date, 1)]);
+            this._render([this.options.date]);
         },
 
         render: function(events) {
@@ -1168,6 +1155,7 @@ var __meta__ = {
                 end = getMilliseconds(this.endTime());
                 end = end === 0 ? MS_PER_DAY : 0 ;
 
+                //calculate previous range based on calculate dateRange:
                 setTime(selection.start, end-duration);
                 setTime(selection.end,  end);
             } else {
@@ -1250,7 +1238,56 @@ var __meta__ = {
     });
     
     extend(true, ui, {
-        TimelineView: TimelineView
+        TimelineView: TimelineView,
+        TimelineWeekView: TimelineView.extend({
+            options: {
+                name: "TimelineWeekView",
+                title: "Timeline Week",
+                selectedDateFormat: "{0:D} - {1:D}",
+                majorTick: 240
+            },
+            name: "timelineWeek",
+            calculateDateRange: function() {
+                var selectedDate = this.options.date,
+                    start = kendo.date.dayOfWeek(selectedDate, this.calendarInfo().firstDay, -1),
+                    idx, length,
+                    dates = [];
+
+                for (idx = 0, length = 7; idx < length; idx++) {
+                    dates.push(start);
+                    start = kendo.date.nextDay(start);
+                }
+                this._render(dates);
+            }
+        }),
+        TimelineWorkWeekView: TimelineView.extend({
+            options: {
+                name: "TimelineWorkWeekView",
+                title: "Timeline Work Week",
+                selectedDateFormat: "{0:D} - {1:D}",
+                majorTick: 240
+            },
+            name: "timelineWorkWeek",
+            nextDate: function() {
+                return kendo.date.dayOfWeek(kendo.date.nextDay(this.endDate()), this.options.workWeekStart, 1);
+            },
+            previousDate: function() {
+                return kendo.date.previousDay(this.startDate());
+            },
+            calculateDateRange: function() {
+                var selectedDate = this.options.date,
+                    start = kendo.date.dayOfWeek(selectedDate, this.options.workWeekStart, -1),
+                    end = kendo.date.dayOfWeek(start, this.options.workWeekEnd, 1),
+                    dates = [];
+
+                while (start <= end) {
+                    dates.push(start);
+                    start = kendo.date.nextDay(start);
+                }
+                debugger;
+                this._render(dates);
+            }
+        })
     });
 
 })(window.kendo.jQuery);

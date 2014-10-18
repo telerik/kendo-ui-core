@@ -1911,7 +1911,10 @@ var __meta__ = {
                     week: "Week",
                     workWeek: "Work Week",
                     agenda: "Agenda",
-                    month: "Month"
+                    month: "Month",
+                    timeline: "Timeline",
+                    timelineWeek: "Timeline Week",
+                    timelineWorkWeek: "Timeline Work Week"
                 },
                 recurrenceMessages: {
                     deleteWindowTitle: "Delete Recurring Item",
@@ -3003,6 +3006,7 @@ var __meta__ = {
                 defaultView = defaultViews[name];
 
                 if (defaultView && !hasType) {
+
                     view.type = defaultView.type;
                     defaultView.title = this.options.messages.views[name];
                     if (defaultView.type === "day") {
@@ -3345,6 +3349,12 @@ var __meta__ = {
         },
         timeline: {
             type: "kendo.ui.TimelineView"
+        },
+        timelineWeek: {
+            type: "kendo.ui.TimelineWeekView"
+        },
+        timelineWorkWeek: {
+            type: "kendo.ui.TimelineWorkWeekView"
         }
     };
 
