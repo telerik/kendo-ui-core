@@ -4,7 +4,7 @@
     var keys = kendo.keys;
     var scheduler;
     var container;
-    var today;
+    var startDate;
     var view;
 
     module("Selection timeline", {
@@ -19,19 +19,20 @@
     });
 
     function setupWidget(options) {
-        today = kendo.date.today();
+        startDate = new Date(2013, 1, 3, 0, 0, 0, 0);
         options = options || {};
 
-        var end = new Date(today);
+        var end = new Date(startDate);
         end.setHours(1);
 
         options = $.extend({
             selectable: true,
+            date: new Date(2013, 1, 3, 0, 0, 0, 0),
             views: [
                 "timeline"
             ],
             dataSource: [
-                { start: today, end: end, title: "Test", roomId: 2}
+                { start: startDate, end: end, title: "Test", roomId: 2}
             ]
         }, options);
 
@@ -187,8 +188,8 @@
     test("pressing TAB key moves to next event element", function() {
         setupWidget({
             dataSource: [
-                { start: today, end: addHours(today, 2), title: "Test", roomId: 1},
-                { start: addHours(today, 4), end: addHours(today, 6), title: "Test 2", roomId: 1}
+                { start: startDate, end: addHours(startDate, 2), title: "Test", roomId: 1},
+                { start: addHours(startDate, 4), end: addHours(startDate, 6), title: "Test 2", roomId: 1}
             ]
         });
 
@@ -203,17 +204,74 @@
         notEqual(oldSelection.data("uid"), currentSelection.data("uid"));
     });
 
+    test("pressing TAB key on allDay event moves to next event element", function() {
+        setupWidget({
+            startTime: new Date(2013, 1, 2, 10, 0, 0, 0),
+            endTime: new Date(2013, 1, 2, 18, 0, 0, 0),
+            dataSource: [
+                { start: startDate, end: addHours(startDate, 2), isAllDay: true, title: "Test", roomId: 1},
+                { start: addHours(startDate, 4), end: addHours(startDate, 6), isAllDay: true, title: "Test 2", roomId: 1}
+            ]
+        });
+
+        var eventElement = $(container.find(".k-event")[0]);
+        eventElement.trigger({
+            type: "mousedown",
+            currentTarget: event
+        });
+
+        var oldSelection = $(".k-scheduler-content .k-state-selected");
+        keydown(keys.TAB);
+        var currentSelection = $(".k-scheduler-content .k-state-selected");
+
+        ok(oldSelection.hasClass("k-event"));
+        ok(currentSelection.hasClass("k-event"));
+
+        notEqual(oldSelection.data("uid"), currentSelection.data("uid"));
+    });
+
+    test("pressing RIGHT key on allDay event moves to next element", function() {
+        setupWidget({
+            startTime: new Date(2013, 1, 3, 10, 0, 0, 0),
+            endTime: new Date(2013, 1, 3, 18, 0, 0, 0),
+            views: ["timelineWeek"],
+            dataSource: [
+                { start: startDate, end: addHours(startDate, 2), isAllDay: true, title: "Test", roomId: 1},
+            ]
+        });
+
+        var oldStartDate = scheduler.view().startDate();
+
+        var eventElement = $(container.find(".k-event")[0]);
+
+        eventElement.trigger({
+            type: "mousedown",
+            currentTarget: event
+        });
+
+        var oldSelection = $(".k-scheduler-content .k-state-selected");
+
+        keydown(keys.RIGHT);
+
+        equal(+oldStartDate, +scheduler.view().startDate());
+
+        var currentSelection = $(".k-scheduler-content .k-state-selected");
+
+        ok(oldSelection.hasClass("k-event"));
+        ok(!currentSelection.hasClass("k-event"));
+    });
+
     test("continues events collection is populated with events", function() {
         setupWidget();
 
         var event1 = new SchedulerEvent({
-            start: today,
-            end: addHours(today, 2),
+            start: startDate,
+            end: addHours(startDate, 2),
             title: "Test"
         });
         var event2 = new SchedulerEvent({
-            start: addHours(today, 4),
-            end: addHours(today, 6),
+            start: addHours(startDate, 4),
+            end: addHours(startDate, 6),
             title: "Test"
         });
 
@@ -232,14 +290,14 @@
         setupWidget();
 
         var event1 = new SchedulerEvent({
-            start: today,
-            end: today,
+            start: startDate,
+            end: startDate,
             isAllDay: true,
             title: "Test"
         });
         var event2 = new SchedulerEvent({
-            start: addHours(today, 6),
-            end: addHours(today, 11),
+            start: addHours(startDate, 6),
+            end: addHours(startDate, 11),
             isAllDay: true,
             title: "Test"
         });
@@ -261,20 +319,20 @@
         setupWidget();
 
         var allDayEvent1 = new SchedulerEvent({
-            start: today,
-            end: today,
+            start: startDate,
+            end: startDate,
             isAllDay: true,
             title: "Test"
         });
         var allDayEvent2 = new SchedulerEvent({
-            start: addHours(today, 6),
-            end: addHours(today, 11),
+            start: addHours(startDate, 6),
+            end: addHours(startDate, 11),
             isAllDay: true,
             title: "Test"
         });
         var event = new SchedulerEvent({
-            start: addHours(today, 6),
-            end: addHours(today, 11),
+            start: addHours(startDate, 6),
+            end: addHours(startDate, 11),
             title: "Test"
         });
 

@@ -1857,10 +1857,16 @@ var __meta__ = {
         _updateSelection: function(dataItem, events) {
             var selection = this._selection;
 
+
             if (dataItem && selection) {
+                var view =  this.view();
+
+                if (dataItem.uid) {
+                    dataItem = view._updateEventForSelection(dataItem);
+                }
+
                 if (this._shiftKey && selection.start && selection.end) {
-                    var backward = dataItem.end < selection.end,
-                        view = this.view();
+                    var backward = dataItem.end < selection.end;
 
                     selection.end = dataItem.endDate ? dataItem.endDate() : dataItem.end;
 

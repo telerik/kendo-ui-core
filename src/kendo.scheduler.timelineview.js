@@ -938,6 +938,11 @@ var __meta__ = {
             return rowLevel ? rowLevel.length : 0;
         },
 
+        _updateEventForSelection: function(event) {
+            var adjustedEvent = this._adjustEvent(event.clone());
+            return adjustedEvent.occurrence;
+        },
+
         _updateEventForMove: function(event) {
            if (event.isAllDay) {
                event.set("isAllDay", false);

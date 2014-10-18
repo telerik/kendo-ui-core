@@ -1265,6 +1265,7 @@ var __meta__ = {
 
         moveToEvent: function(selection, prev) {
             var groupIndex = selection.groupIndex;
+
             var group = this.groups[groupIndex];
             var slot = group.ranges(selection.start, selection.end, selection.isAllDay, false)[0].start;
 
@@ -1866,6 +1867,10 @@ var __meta__ = {
 
         _updateEventForResize: function (event) {
             return;
+        },
+
+        _updateEventForSelection: function (event) {
+            return event;
         }
     });
 
