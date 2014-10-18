@@ -1776,8 +1776,8 @@ var __meta__ = {
 
         createVisual: function() {
             this.visual = new draw.Group();
-            this.createBackground();
             this.createPlotBands();
+            this.createBackground();
             this.createLine();
         },
 
