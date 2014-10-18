@@ -693,7 +693,7 @@ var __meta__ = {
             }
 
             for (var slotIndex = 0; slotIndex < slotRanges.length; slotIndex++) {
-                if (startTime <= slotRanges[slotIndex].end && slotRanges[slotIndex].start < endTime) {
+                if (startTime < slotRanges[slotIndex].end && slotRanges[slotIndex].start < endTime) {
                     return true;
                 }
             }

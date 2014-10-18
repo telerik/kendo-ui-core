@@ -746,6 +746,25 @@
         ok(!view.element.find(".k-event").length);
     });
 
+    test("event between two dates is not rendered when starts at end date and ends in next date", function() {
+        var view = setupWeek({
+            date: new Date(2013, 1, 2),
+            startTime: new Date(2013, 1, 2, 10, 0, 0, 0),
+            endTime: new Date(2013, 1, 2, 18, 0, 0, 0)
+        });
+
+        view.render([new SchedulerEvent({
+            uid: "foo",
+            title: "",
+            start: new Date(2013, 1, 2, 18, 0, 0),
+            end: new Date(2013, 1, 3, 10, 0, 0),
+            isAllDay: false,
+            id: "2"
+        })]);
+
+        ok(!view.element.find(".k-event").length);
+    });
+
     //normal events with slot holes (border cases):
     test("event is rendered correctly when starts after end time and ends in available slots in next day", function() {
         var view = setupWeek({
