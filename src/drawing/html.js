@@ -143,6 +143,29 @@
         };
     }
 
+    // not currently used, but could be handy.
+    // function saveProperties(element, props, func) {
+    //     props = props.map(function(name){
+    //         return {
+    //             name: name,
+    //             value: element.style.getPropertyValue(name),
+    //             prio: element.style.getPropertyPriority(name)
+    //         };
+    //     });
+    //     var result = func();
+    //     props.forEach(function(prop){
+    //         element.style.setProperty(prop.name, prop.value, prop.prio);
+    //     });
+    //     return result;
+    // }
+
+    function saveStyle(element, func) {
+        var prev = element.style.cssText;
+        var result = func();
+        element.style.cssText = prev;
+        return result;
+    }
+
     function getBorderRadius(style, side) {
         var r = getPropertyValue(style, "border-" + side + "-radius").split(/\s+/g).map(parseFloat);
         if (r.length == 1) {
@@ -1041,26 +1064,29 @@
             group.opacity(opacity);
         }
 
-        var prevTransform, t = getTransform(style);
-        if (t) {
-            prevTransform = element.style.transform;
-            element.style.transform = "none";
-
-            // must translate to origin before applying the CSS
-            // transformation, then translate back.
-            var bbox = element.getBoundingClientRect();
-            var x = bbox.left + t.origin[0];
-            var y = bbox.top + t.origin[1];
-            var m = [ 1, 0, 0, 1, -x, -y ];
-            m = mmul(m, t.matrix);
-            m = mmul(m, [ 1, 0, 0, 1, x, y ]);
-            setTransform(group, m);
+        var tr = getTransform(style);
+        if (!tr) {
+            _renderElement(element, group);
         }
+        else {
+            // must clear transform, so getBoundingClientRect returns correct values.
+            // must also clear transitions, so correct values are returned *immediately*
+            saveStyle(element, function(){
+                element.style.setProperty("transition", "none", "important");
+                element.style.setProperty("transform", "none", "important");
 
-        _renderElement(element, group);
+                // must translate to origin before applying the CSS
+                // transformation, then translate back.
+                var bbox = element.getBoundingClientRect();
+                var x = bbox.left + tr.origin[0];
+                var y = bbox.top + tr.origin[1];
+                var m = [ 1, 0, 0, 1, -x, -y ];
+                m = mmul(m, tr.matrix);
+                m = mmul(m, [ 1, 0, 0, 1, x, y ]);
+                setTransform(group, m);
 
-        if (t) {
-            element.style.transform = prevTransform;
+                _renderElement(element, group);
+            });
         }
     }
 
