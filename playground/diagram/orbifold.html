@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kendo Diagramming</title>
+    <link rel="stylesheet/less" type="text/css" href="../../styles/web/kendo.common.less"/>
+    <link rel="stylesheet/less" type="text/css" href="../../styles/web/kendo.default.less"/>
+    <link rel="stylesheet/less" type="text/css" href="../../styles/dataviz/kendo.dataviz.less"/>
+    <link rel="stylesheet/less" type="text/css" href="../../styles/dataviz/kendo.dataviz.default.less"/>
+    <script type="text/javascript" src="../../demos/mvc/content/shared/js/less.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="styles.css"/>
+
+    <script src="../require.js"></script>
+    <script>
+        require.config({
+            baseUrl: "../../src/"
+        });
+    </script>
+</head>
+<body>
+<button id="drawButton">Draw</button>
+<button id="pdfButton">PDF</button>
+<div id="diagram"></div>
+<script>
+    require([
+        "jquery.min", "kendo.dataviz.diagram", "kendo.menu", "kendo.splitter",
+        "kendo.panelbar", "kendo.colorpicker", "kendo.dropdownlist", "kendo.numerictextbox" ], function () {
+
+        var Shape = kendo.dataviz.diagram.Shape,
+                Connection = kendo.dataviz.diagram.Connection,
+                Rect = kendo.dataviz.diagram.Rect;
+        var drawing = kendo.dataviz.drawing;
+
+        var diagram = $("#diagram").kendoDiagram({
+            theme: "default",
+
+            shapeDefaults: {
+                width: 120,
+                height: 80
+            }
+            //select: diagramSelect
+        }).getKendoDiagram();
+
+        var s1 = diagram.addShape({
+            x: 100,
+            y: 100,
+            content: {text: "Agraphia"}
+        });
+        var s2 = diagram.addShape({
+            x: 500,
+            y: 100,
+            content: {text: "Bradykinesia"}
+        });
+        var con = diagram.connect(s1, s2);
+        kendo.pdf.defineFont({
+            "Verdana": "./Verdana/Verdana.ttf",
+            "Verdana|Bold": "./Verdana/Verdana_Bold.ttf",
+            "Verdana|Bold|Italic": "./Verdana/Verdana_Bold_Italic.ttf",
+            "Verdana|Italic": "./Verdana/Verdana_Italic.ttf"
+        });
+        function container() {
+            $(".surface").remove();
+            return $("<div class='surface' style='position: absolute; background: white; right: 1em; top: 1em; bottom: 1em; width: 600px'></div>").appendTo(document.body);
+        }
+
+        window.draw = function draw(sel, type) {
+            var surface = kendo.dataviz.drawing.Surface.create(container(), { type: type || "svg" });
+            var root = diagram.canvas.drawingElement;
+            surface.draw(root);
+        };
+
+        window.pdf = function pdf(sel) {
+            var root = diagram.canvas.drawingElement;
+            root.options.set("pdf", { paperSize: "a3" });
+            kendo.drawing.pdf.saveAs(root, "diagram.pdf");
+        };
+        $("#drawButton").click(function () {
+            draw("#diagram","svg");
+        });
+        $("#pdfButton").click(function () {
+            pdf("#diagram");
+        });
+    });
+</script>
+</body>
+</html>
