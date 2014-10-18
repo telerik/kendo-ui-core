@@ -1892,16 +1892,6 @@ var __meta__ = {
         return dataSource instanceof PivotDataSource ? dataSource : new PivotDataSource(dataSource);
     };
 
-    function transformDescriptors(members, mapFunction) {
-        var result = [];
-
-        for (var idx = 0; idx < members.length; idx++) {
-            result.push(mapFunction(members[idx]));
-        }
-
-        return result;
-    }
-
     function baseHierarchyPath(memberName) {
         var parts = memberName.split(".");
         if (parts.length > 2) {
@@ -1937,12 +1927,6 @@ var __meta__ = {
         return null;
     }
 
-    function convertMemberDescriptors(members) {
-        return transformDescriptors(members, function(member) {
-            return member.name[0];
-        });
-    }
-
     function crossJoin(names) {
         var result = "CROSSJOIN({";
         var r;
@@ -1964,7 +1948,7 @@ var __meta__ = {
     function crossJoinCommand(members, measures) {
         var tmp = members.slice(0);
         if (measures.length > 1) {
-            tmp.push("{" + measures.join(",") + "}"); //TODO: remove curly braces!
+            tmp.push("{" + measures.join(",") + "}");
         }
         return crossJoin(tmp);
     }
@@ -1991,6 +1975,18 @@ var __meta__ = {
         return name;
     }
 
+    function getRootNames(members) {
+        var length = members.length;
+        var names = [];
+        var idx = 0;
+
+        for (; idx < length; idx++) {
+            names.push(members[idx].name[0]);
+        }
+
+        return names;
+    }
+
     function mapNames(names, rootNames) {
         var name;
         var rootName;
@@ -2006,9 +2002,9 @@ var __meta__ = {
             name = names[idx];
 
             for (j = 0; j < rootLength; j++) {
-                rootName = baseHierarchyPath(rootNames[j]); //convert once and then use here!
+                rootName = baseHierarchyPath(rootNames[j]);
 
-                if (name.indexOf(rootName) !== -1) { //was === 0! Check if current check is enough
+                if (name.indexOf(rootName) !== -1) {
                     rootNames[j] = name;
                     break;
                 }
@@ -2018,20 +2014,25 @@ var __meta__ = {
         return rootNames;
     }
 
-    //TODO: refactor more
     function parseDescriptors(members) {
-        var descriptors = [];
+        var expanded = [];
         var child = [];
         var root = [];
         var member;
 
+        var j, l;
         var idx = 0;
         var length = members.length;
+
         var name;
+        var hierarchyName;
+
+        var found;
 
         for (; idx < length; idx++) {
             member = members[idx];
             name = member.name;
+            found = false;
 
             if (toString.call(name) !== "[object Array]") {
                 member.name = name = [name];
@@ -2040,56 +2041,46 @@ var __meta__ = {
             if (name.length > 1) {
                 child.push(member);
             } else {
-                descriptors.push(member);
-            }
-        }
+                hierarchyName = baseHierarchyPath(name[0]);
 
-        var hierarchyName;
-        var found;
-        var j, l;
+                for (j = 0, l = root.length; j < l; j++) {
+                    if (root[j].name[0].indexOf(hierarchyName) === 0) {
+                        found = true;
+                        break;
+                    }
+                }
 
-        for (idx = 0, length = descriptors.length; idx < length; idx++) {
-            hierarchyName = baseHierarchyPath(descriptors[idx].name[0]);
-            found = false;
+                if (!found) {
+                    root.push(member);
+                }
 
-            for (j = 0, l = root.length; j < l; j++) {
-                if (root[j].name[0].indexOf(hierarchyName) === 0) {
-                    found = true;
-                    break;
+                if (member.expand) {
+                    expanded.push(member);
                 }
             }
-
-            if (!found) {
-                root.push(descriptors.splice(idx, 1)[0]);
-                length -= 1;
-                idx -= 1;
-            }
         }
 
-        descriptors = descriptors.concat(child);
+        expanded = expanded.concat(child);
 
         return {
             root: root,
-            descriptors: descriptors
+            expanded: expanded
         }
     }
 
-    //TODO: refactor more
     function serializeMembers(members, measures, sort) {
         var command = "";
 
         members = members || [];
 
-        //debugger;
-        var descriptors = parseDescriptors(members); //rename descriptors to expanded and root
-        var root = descriptors.root;
+        var expanded = parseDescriptors(members);
+        var root = expanded.root;
 
-        descriptors = descriptors.descriptors;
-
-        var rootNames = convertMemberDescriptors(root); //use modified mapNames function instead
+        var rootNames = getRootNames(root);
         var crossJoinCommands = [];
 
-        var expanded = expandedMembers(root).concat(descriptors); //move that logic into parseDescriptors
+        expanded = expanded.expanded;
+
         var length = expanded.length;
         var idx = 0;
 
