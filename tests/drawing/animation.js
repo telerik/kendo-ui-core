@@ -54,4 +54,57 @@
             equal(anim.options.foo, true)
         });
     })();
+
+    // ------------------------------------------------------------
+    (function() {
+        var animation;
+
+        module("Animation", {
+            setup: function() {
+            animation = new draw.Animation(null, { duration: 0 });
+            }
+        });
+
+        test("sets element", function() {
+            var element = {};
+            animation = new draw.Animation(element);
+
+            equal(animation.element, element);
+        });
+
+        test("sets options", function() {
+            animation = new draw.Animation(null, {
+                foo: true
+            });
+
+            ok(animation.options.foo);
+        });
+
+        asyncTest("play calls step", function() {
+            animation.step = function() {
+                ok(true);
+                start();
+            };
+
+            animation.play();
+        });
+
+        asyncTest("aborting stops animation", 0, function() {
+            animation.step = function() {
+                ok(false);
+            };
+
+            animation.play();
+            animation.abort();
+
+            setTimeout(function() {
+                start();
+            }, 0);
+        });
+
+        test("destroy aborts animation", function() {
+            animation.abort = function() { ok(true); };
+            animation.destroy();
+        });
+    })();
 })();
