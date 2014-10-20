@@ -8888,6 +8888,7 @@
       {
         "text": "AngularJS",
         "new": true,
+        "mobile": true,
         "disableInMobile": true,
         "url": "popover/angular",
         "title": {
