@@ -1,0 +1,39 @@
+        <div id="example">
+            <div id="treelist"></div>
+
+            <script>
+                $(document).ready(function () {
+                    var crudServiceBaseUrl = "http://demos.telerik.com/kendo-ui/service";
+                    var crudServiceBaseUrl = "http://gyoshev.telerik.com:8080/KendoCRUDService";
+
+                    var dataSource = new kendo.data.TreeListDataSource({
+                            transport: {
+                                read: {
+                                    url: crudServiceBaseUrl + "/EmployeeDirectory",
+                                    dataType: "jsonp"
+                                }
+                            },
+                            schema: {
+                                model: {
+                                    id: "EmployeeId",
+                                    fields: {
+                                        EmployeeId: { type: "number", nullable: false },
+                                        parentId: { field: "ReportsTo", nullable: true }
+                                    }
+                                }
+                            }
+                        });
+
+                    $("#treelist").kendoTreeList({
+                        dataSource: dataSource,
+                        columns: [
+                            { field: "FirstName", expandable: true, title: "First Name", width: 250 },
+                            { field: "LastName", title: "Last Name" },
+                            { field: "Position" },
+                            { field: "Extension", title: "Ext", format: "{0:#}" }
+                        ]
+                    });
+                });
+            </script>
+        </div>
+

@@ -4339,6 +4339,26 @@
         }
       },
       {
+        "text": "Binding to local data",
+        "url": "treelist/local-data-binding",
+        "title": {
+            "kendo-ui": "Binding Kendo UI TreeList component to local data"
+        },
+        "meta": {
+            "kendo-ui": "This example illustrates how the treelist can be bound to local data, so that all information is available."
+        }
+      },
+      {
+        "text": "Binding to remote data",
+        "url": "treelist/remote-data-binding",
+        "title": {
+            "kendo-ui": "Binding Kendo UI TreeList component to remote data"
+        },
+        "meta": {
+            "kendo-ui": "This example illustrates how the treelist can be bound to remote data and each level is requested asynchronously."
+        }
+      },
+      {
         "text": "Editing",
         "url": "treelist/editing",
         "title": {

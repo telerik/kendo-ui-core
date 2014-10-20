@@ -9,7 +9,7 @@
                     var dataSource = new kendo.data.TreeListDataSource({
                             transport: {
                                 read:  {
-                                    url: crudServiceBaseUrl + "/EmployeeDirectory",
+                                    url: crudServiceBaseUrl + "/EmployeeDirectory/All",
                                     dataType: "jsonp"
                                 },
                                 update: {
@@ -56,11 +56,8 @@
                         toolbar: [ "create" ],
                         editable: true,
                         columns: [
-                            { field: "EmployeeId", title: "ID", width: 100 },
-                            { field: "parentId", title: "Parent", width: 100 },
                             { field: "FirstName", expandable: true, title: "First Name", width: 250 },
                             { field: "LastName", title: "Last Name" },
-                            { field: "BirthDate", title: "Birthday", format: "{0:MMMM d, yyyy}" },
                             { field: "HireDate", title: "Hire Date", format: "{0:MMMM d, yyyy}" },
                             { field: "Phone", title: "Phone" },
                             { field: "Extension", title: "Ext", format: "{0:#}" },

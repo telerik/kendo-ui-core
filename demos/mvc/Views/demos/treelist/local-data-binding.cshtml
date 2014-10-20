@@ -1,0 +1,70 @@
+        <div id="example">
+            <div id="treelist" style="height: 400px;"></div>
+
+            <script>
+                $(document).ready(function () {
+                    var dataSource = new kendo.data.TreeListDataSource({
+                        data: [
+                          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+                          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 },
+                          { id: 32, Name: "Buffy Weber", Position: "VP, Engineering", parentId: 2 },
+                          { id: 11, Name: "Hyacinth Hood", Position: "Team Lead", parentId: 32 },
+                          { id: 60, Name: "Akeem Carr", Position: "Junior Software Developer", parentId: 11 },
+                          { id: 78, Name: "Rinah Simon", Position: "Software Developer", parentId: 11 },
+                          { id: 42, Name: "Gage Daniels", Position: "Software Architect", parentId: 32 },
+                          { id: 43, Name: "Constance Vazquez", Position: "Director, Engineering", parentId: 32 },
+                          { id: 46, Name: "Darrel Solis", Position: "Team Lead", parentId: 43 },
+                          { id: 47, Name: "Brian Yang", Position: "Senior Software Developer", parentId: 46 },
+                          { id: 50, Name: "Lillian Bradshaw", Position: "Software Developer", parentId: 46 },
+                          { id: 51, Name: "Christian Palmer", Position: "Technical Lead", parentId: 46 },
+                          { id: 55, Name: "Summer Mosley", Position: "QA Engineer", parentId: 46 },
+                          { id: 56, Name: "Barry Ayers", Position: "Software Developer", parentId: 46 },
+                          { id: 59, Name: "Keiko Espinoza", Position: "Junior QA Engineer", parentId: 46 },
+                          { id: 61, Name: "Candace Pickett", Position: "Support Officer", parentId: 46 },
+                          { id: 63, Name: "Mia Caldwell", Position: "Team Lead", parentId: 43 },
+                          { id: 65, Name: "Thomas Terry", Position: "Senior Enterprise Support Officer", parentId: 63 },
+                          { id: 67, Name: "Ruth Downs", Position: "Senior Software Developer", parentId: 63 },
+                          { id: 70, Name: "Yasir Wilder", Position: "Senior QA Enginner", parentId: 63 },
+                          { id: 71, Name: "Flavia Short", Position: "Support Officer", parentId: 63 },
+                          { id: 74, Name: "Aaron Roach", Position: "Junior Software Developer", parentId: 63 },
+                          { id: 75, Name: "Eric Russell", Position: "Software Developer", parentId: 63 },
+                          { id: 76, Name: "Cheyenne Olson", Position: "Software Developer", parentId: 63 },
+                          { id: 77, Name: "Shaine Avila", Position: "UI Designer", parentId: 63 },
+                          { id: 81, Name: "Chantale Long", Position: "Senior QA Enginner", parentId: 63 },
+                          { id: 83, Name: "Dane Cruz", Position: "Junior Software Developer", parentId: 63 },
+                          { id: 84, Name: "Regan Patterson", Position: "Technical Writer", parentId: 63 },
+                          { id: 85, Name: "Drew Mckay", Position: "Senior Software Developer", parentId: 63 },
+                          { id: 88, Name: "Bevis Miller", Position: "Senior Software Developer", parentId: 63 },
+                          { id: 89, Name: "Bruce Mccarty", Position: "Support Officer", parentId: 63 },
+                          { id: 90, Name: "Ocean Blair", Position: "Team Lead", parentId: 43 },
+                          { id: 91, Name: "Guinevere Osborn", Position: "Software Developer", parentId: 90 },
+                          { id: 92, Name: "Olga Strong", Position: "Graphic Designer", parentId: 90 },
+                          { id: 93, Name: "Robert Orr", Position: "Support Officer", parentId: 90 },
+                          { id: 95, Name: "Odette Sears", Position: "Senior Software Developer", parentId: 90 },
+                          { id: 45, Name: "Zelda Medina", Position: "QA Architect", parentId: 32 },
+                          { id: 3, Name: "Priscilla Frank", Position: "Chief Product Officer", parentId: 1 },
+                          { id: 4, Name: "Ursula Holmes", Position: "EVP, Product Strategy", parentId: 3 },
+                          { id: 24, Name: "Melvin Carrillo", Position: "Director, Developer Relations", parentId: 3 },
+                          { id: 29, Name: "Martha Chavez", Position: "Developer Advocate", parentId: 24 },
+                          { id: 30, Name: "Oren Fox", Position: "Developer Advocate", parentId: 24 },
+                          { id: 41, Name: "Amos Barr", Position: "Developer Advocate", parentId: 24 }
+                        ],
+
+                        schema: {
+                            model: {
+                                id: "id",
+                                expanded: true
+                            }
+                        }
+                    });
+
+                    $("#treelist").kendoTreeList({
+                        dataSource: dataSource,
+                        columns: [
+                            { field: "Name", width: 350 },
+                            { field: "Position" }
+                        ]
+                    });
+                });
+            </script>
+        </div>
