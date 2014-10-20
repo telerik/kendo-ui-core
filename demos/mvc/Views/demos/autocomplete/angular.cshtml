@@ -16,9 +16,8 @@
 </div>
 
 <script>
-  angular.module("KendoDemos", [ "kendo.directives" ]);
-  function MyCtrl($scope){
-      $scope.countryNames = [
+  angular.module("KendoDemos", [ "kendo.directives" ]).controller("MyCtrl", function($scope){
+          $scope.countryNames = [
           "Albania",
           "Andorra",
           "Armenia",
@@ -70,5 +69,5 @@
           "United Kingdom",
           "Vatican City"
               ];
-  }
+  })
 </script>
