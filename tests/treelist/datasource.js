@@ -697,6 +697,21 @@
         equal(ds.get(1).hasChildren, true);
     });
 
+    test("hasChildren flag is updated when children are removed", function() {
+        var ds = new TreeListDataSource({
+            data: [
+                { id: 1, parentId: null, hasChildren: false },
+                { id: 2, parentId: 1 }
+            ]
+        });
+
+        ds.read();
+        ds.remove(ds.get(2));
+
+        equal(ds.get(1).hasChildren, false, "hasChildren is not updated");
+        equal(ds.get(1).loaded(), true, "item should be loaded");
+    });
+
     test("create with options object instantiates TreeListDataSource", function() {
         var ds = TreeListDataSource.create({});
 

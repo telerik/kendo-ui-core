@@ -277,7 +277,7 @@ var __meta__ = {
                     item.loaded(hasChildren);
                 }
 
-                if (item.hasChildren !== true) {
+                if (item.loaded() || item.hasChildren !== true) {
                     item.hasChildren = hasChildren;
                 }
 
