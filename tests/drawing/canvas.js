@@ -261,6 +261,14 @@
             node.load([new d.Group()]);
         });
 
+        test("load append Node at position", function() {
+            node.insertAt = function(child, pos) {
+                equal(pos, 1);
+            };
+
+            node.load([new d.Group()], 1);
+        });
+
         test("load appends PathNode", function() {
             node.append = function(child) {
                 ok(child instanceof canv.PathNode);

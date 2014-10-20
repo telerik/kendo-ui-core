@@ -166,7 +166,7 @@
             }
         },
 
-        load: function(elements) {
+        load: function(elements, pos) {
             var node = this,
                 childNode,
                 srcElement,
@@ -198,7 +198,11 @@
                     childNode.load(children);
                 }
 
-                node.append(childNode);
+                if (defined(pos)) {
+                    node.insertAt(childNode, pos);
+                } else {
+                    node.append(childNode);
+                }
             }
 
             node.invalidate();
