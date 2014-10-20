@@ -1,27 +1,109 @@
-<div id="example" ng-app="KendoDemos">
-    <div ng-controller="MyCtrl">
-  <div class="demo-section k-content">
-    <div kendo-mobile-nav-bar>
-      <button kendo-mobile-button data-align="left">Index</button>
-      <span data-role="view-title">NavBar title</span>
-      <button kendo-mobile-button data-align="right">Save</button>
-    </div>
-  </div>
+<div kendo-mobile-application ng-app="kendoDemo">
+<kendo-mobile-view id="navbar-home" k-title="'Contacts'">
+    <kendo-mobile-header>
+        <kendo-mobile-nav-bar>
+            <kendo-view-title></kendo-view-title>
+            <kendo-mobile-button k-align="'right'" k-icon="'organize'" href="#navbar-grouped">Group</kendo-mobile-button>
+        </kendo-mobile-nav-bar>
+    </kendo-mobile-header>
+    <kendo-mobile-list-view>
+        <li><h2>Francisco Chang</h2><img src="../content/mobile/overview/francisco.jpg" /></li>
+        <li><h2>Daniel Tonini</h2><img src="../content/mobile/overview/daniel.jpg" /></li>
+        <li><h2>Annette Roulet</h2><img src="../content/mobile/overview/annette.jpg" /></li>
+        <li><h2>Carine Schmitt</h2><img src="../content/mobile/overview/carine.jpg" /></li>
+        <li><h2>Ann Devon</h2><img src="../content/mobile/overview/ann.jpg" /></li>
+        <li><h2>Catherine Dewey</h2><img src="../content/mobile/overview/catherine.jpg" /></li>
+        <li><h2>Diego Roel</h2><img src="../content/mobile/overview/diego.jpg" /></li>
+        <li><h2>Elizabeth Brown</h2><img src="../content/mobile/overview/elizabeth.jpg" /></li>
+        <li><h2>Eduardo Saavedra</h2><img src="../content/mobile/overview/eduardo.jpg" /></li>
+        <li><h2>Antonio Moreno</h2><img src="../content/mobile/overview/antonio.jpg" /></li>
+        <li><h2>Felipe Izquierdo</h2><img src="../content/mobile/overview/felipe.jpg" /></li>
+        <li><h2>Fran Wilson</h2><img src="../content/mobile/overview/fran.jpg" /></li>
+    </kendo-mobile-list-view>
+</kendo-mobile-view>
 
-  <style scoped>
-        .demo-section {
-            width: 400px;
-            height: 200px;
-            margin-top: 50px;
-            padding: 0;
-            text-align: center;
-        }
-  </style>
-</div>
-</div>
+<kendo-mobile-view id="navbar-grouped" k-title="'Contacts'">
+    <kendo-mobile-header>
+        <kendo-mobile-nav-bar>
+            <kendo-view-title></kendo-view-title>
+            <kendo-mobile-button k-align="'right'" k-icon="'stop'" href="#:back">Ungroup</kendo-mobile-button>
+        </kendo-mobile-nav-bar>
+    </kendo-mobile-header>
+
+    <kendo-mobile-list-view k-type="'group'">
+        <li>
+            A
+            <ul>
+                <li><h2>Ann Devon</h2><img src="../content/mobile/overview/ann.jpg" /></li>
+                <li><h2>Annette Roulet</h2><img src="../content/mobile/overview/annette.jpg" /></li>
+                <li><h2>Antonio Moreno</h2><img src="../content/mobile/overview/antonio.jpg" /></li>
+            </ul>
+        </li>
+        <li>
+            C
+            <ul>
+                <li><h2>Carine Schmitt</h2><img src="../content/mobile/overview/carine.jpg" /></li>
+                <li><h2>Catherine Dewey</h2><img src="../content/mobile/overview/catherine.jpg" /></li>
+            </ul>
+        </li>
+        <li>
+           D
+            <ul>
+                <li><h2>Daniel Tonini</h2><img src="../content/mobile/overview/daniel.jpg" /></li>
+                <li><h2>Diego Roel</h2><img src="../content/mobile/overview/diego.jpg" /></li>
+            </ul>
+        </li>
+        <li>
+            E
+            <ul>
+                <li><h2>Eduardo Saavedra</h2><img src="../content/mobile/overview/eduardo.jpg" /></li>
+                <li><h2>Elizabeth Brown</h2><img src="../content/mobile/overview/elizabeth.jpg" /></li>
+            </ul>
+        </li>
+        <li>
+            F
+            <ul>
+                <li><h2>Felipe Izquierdo</h2><img src="../content/mobile/overview/felipe.jpg" /></li>
+                <li><h2>Fran Wilson</h2><img src="../content/mobile/overview/fran.jpg" /></li>
+                <li><h2>Francisco Chang</h2><img src="../content/mobile/overview/francisco.jpg" /></li>
+            </ul>
+        </li>
+    </kendo-mobile-list-view>
+</kendo-mobile-view>
 
 <script>
-  angular.module("KendoDemos", [ "kendo.directives" ]);
-  function MyCtrl($scope){
-  }
+    angular.module("kendoDemo", [ 'kendo.directives' ]);
 </script>
+<style scoped>
+
+#navbar-home h2,
+#navbar-grouped h2 {
+    display: inline-block;
+    font-size: 1.1em;
+    margin: 1em 0 1.5em 1em;
+}
+
+#navbar-home img,
+#navbar-grouped img {
+    float: left;
+    width: 4em;
+    height: 4em;
+    margin: 0;
+    border: 1px solid rgba(0,0,0,.2);
+    -webkit-border-radius: 4em;
+    border-radius: 4em;
+}
+
+.km-flat #navbar-home img,
+.km-flat #navbar-grouped img {
+    -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,.1);
+    box-shadow: 0 0 0 1px rgba(0,0,0,.1);
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.km-ios #navbar-home .km-listview,
+.km-ios #navbar-grouped .km-list {
+    background-color: #eaf1f5;
+}
+</style>

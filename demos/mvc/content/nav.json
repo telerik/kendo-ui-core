@@ -8820,6 +8820,7 @@
       {
         "text": "AngularJS",
         "new": true,
+        "mobile": true,
         "disableInMobile": true,
         "url": "navbar/angular",
         "title": {
