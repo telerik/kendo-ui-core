@@ -1,56 +1,51 @@
-<div id="example" ng-app="KendoDemos">
-    <div ng-controller="MyCtrl">
-  <div class="demo-section k-content">
-    <div class="settings-head"></div>
-    <dl>
-      <dt>Notifications</dt><dd><input kendo-mobile-switch type="checkbox" checked="checked" /></dd>
-      <dt>Send notifications via mail</dt><dd><input kendo-mobile-switch k-on-label="'YES'" k-off-label="'NO'" /></dd>
-      <dt>Always visible to everyone</dt><dd><input kendo-mobile-switch k-checked="true" /></dd>
-      <dt>Display real name</dt><dd><input kendo-mobile-switch /></dd>
-    </dl>
-  </div>
+<div kendo-mobile-application ng-app="kendoDemo">
+<kendo-mobile-view>
+    <kendo-mobile-list-view k-style="'inset'" k-type="'group'">
+        <li>Profile
+            <ul>
+                <li><h2>Eduardo <span>Saavedra</span></h2><img src="../content/mobile/overview/eduardo.jpg" /></li>
+                <li>Brand Manager at Marketing Team</li>
+            </ul>
+        </li>
 
-  <style scoped>
-    .demo-section dl {
-      margin: 0;
-      padding: 0;
-    }
-    .demo-section dl dt,
-    .demo-section dl dd {
-      display: inline-block;
-      margin: 0;
-      padding: 0 0 0 20px;
-      height: 40px;
-      line-height: 40px;
-      vertical-align: middle;
-      border-top: 1px solid rgba(128,128,128,.5);
-    }
-    .demo-section dl dt {
-      width: 185px;
-      clear: left;
-      text-align: left;
-    }
-    .demo-section dl dd {
-      width: 80px;
-      text-align: right;
-      padding-right: 10px;
-    }
-    .demo-section {
-      width: 315px;
-      margin-top: 50px;
-      padding: 0;
-      text-align: center;
-    }
-    .settings-head {
-      height: 66px;
-      background: url("http://demos.telerik.com/kendo-ui/content/web/switch/settings-title.png") no-repeat 20px 50% #2db245;
-    }
-  </style>
-</div>
-</div>
+        <li>Password
+            <ul>
+                <li>User cannot change pasword <kendo-mobile-switch id="email-switch" checked="true"></li>
+                <li>Password never expires <kendo-mobile-switch id="wink-switch" checked="false"></li>
+            </ul>
+        </li>
+
+        <li>Newsletter Subscription
+            <ul>
+                <li>Subscribed <kendo-mobile-switch id="email-switch" checked="true" k-on-label="'yes'" k-off-label="'no'"></li>
+            </ul>
+        </li>
+    </kendo-mobile-list-view>
+</kendo-mobile-view>
 
 <script>
-  angular.module("KendoDemos", [ "kendo.directives" ]);
-  function MyCtrl($scope){
-  }
+    angular.module("kendoDemo", [ 'kendo.directives' ]);
 </script>
+
+<style scoped>
+#switch-home h2 {
+    display: inline-block;
+    font-size: 1.1em;
+    margin: 1.5em 0 0 .7em;
+}
+#switch-home h2 span {
+    display: block;
+    clear: both;
+    font-size: 1.8em;
+    margin: .1em 0 0 0;
+}
+#switch-home img {
+    width: 5em;
+    height: 5em;
+    float: left;
+    margin: 1em;
+    border: 1px solid rgba(0,0,0,.2);
+    -webkit-border-radius: 4em;
+    border-radius: 4em;
+}
+</style>
