@@ -151,7 +151,7 @@
 
         page.save();
 
-        if (opacity != null) {
+        if (opacity != null && opacity < 1) {
             page.setOpacity(opacity);
         }
 
