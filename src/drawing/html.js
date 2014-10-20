@@ -17,6 +17,7 @@
     var drawing = kendo.drawing;
     var geo = kendo.geometry;
     var slice = Array.prototype.slice;
+    var browser = kendo.support.browser;
 
     var IMAGE_CACHE = {};
 
@@ -131,7 +132,25 @@
     }
 
     function getPropertyValue(style, prop) {
-        return style.getPropertyValue(prop);
+        return style.getPropertyValue(prop) ||
+            ( browser.webkit && style.getPropertyValue("-webkit-" + prop )) ||
+            ( browser.firefox && style.getPropertyValue("-moz-" + prop )) ||
+            ( browser.opera && style.getPropertyValue("-o-" + prop)) ||
+            ( browser.ie && style.getPropertyValue("-ms-" + prop))
+        ;
+    }
+
+    function pleaseSetPropertyValue(style, prop, value, important) {
+        style.setProperty(prop, value, important);
+        if (browser.webkit) {
+            style.setProperty("-webkit-" + prop, value, important);
+        } else if (browser.firefox) {
+            style.setProperty("-moz-" + prop, value, important);
+        } else if (browser.opera) {
+            style.setProperty("-o-" + prop, value, important);
+        } else if (browser.ie) {
+            style.setProperty("-ms-" + prop, value, important);
+        }
     }
 
     function getBorder(style, side) {
@@ -1095,8 +1114,8 @@
             // must clear transform, so getBoundingClientRect returns correct values.
             // must also clear transitions, so correct values are returned *immediately*
             saveStyle(element, function(){
-                element.style.setProperty("transition", "none", "important");
-                element.style.setProperty("transform", "none", "important");
+                pleaseSetPropertyValue(element.style, "transition", "none", "important");
+                pleaseSetPropertyValue(element.style, "transform", "none", "important");
 
                 // must translate to origin before applying the CSS
                 // transformation, then translate back.
