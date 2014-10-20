@@ -67,6 +67,7 @@ test("query sets sort", function() {
     ok($.isArray(dataSource.sort()));
     equal(dataSource.sort()[0].field, "foo");
     equal(dataSource.sort()[0].dir, "asc");
+
 });
 
 test("query sets custom comparer", function() {
@@ -1044,6 +1045,8 @@ test("query should filter if filter is set", function() {
     var view = dataSource.view();
     equal(view.length, 1);
     equal(view[0].bar, "baz");
+
+    ok(dataSource.view()[0] instanceof kendo.data.ObservableObject);
 });
 
 test("filter first page is shown", function() {
