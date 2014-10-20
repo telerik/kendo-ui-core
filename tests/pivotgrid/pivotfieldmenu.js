@@ -65,6 +65,56 @@
         equal(fieldmenu.menu, fieldmenu.wrapper.data("kendoContextMenu"));
     });
 
+    test("context menu shows filter fields", function() {
+        var fieldmenu = createMenu();
+
+        var include = fieldmenu.menu.element.find(".k-include-item");
+        var filter = fieldmenu.menu.element.find(".k-filter-item");
+
+        ok(include[0]);
+        ok(filter[0]);
+    });
+
+    test("context menu skips filter fields", function() {
+        var fieldmenu = createMenu({
+            filterable: false
+        });
+
+        var include = fieldmenu.menu.element.find(".k-include-item");
+        var filter = fieldmenu.menu.element.find(".k-filter-item");
+
+        ok(!include[0]);
+        ok(!filter[0]);
+    });
+
+    test("context menu shows sort fields", function() {
+        var fieldmenu = createMenu();
+
+        var asc = fieldmenu.menu.element.find(".k-sort-asc");
+        var desc = fieldmenu.menu.element.find(".k-sort-desc");
+
+        ok(asc[0]);
+        ok(desc[0]);
+
+        ok(asc.find(".k-i-sort-asc")[0]);
+        ok(desc.find(".k-i-sort-desc")[0]);
+
+        equal(asc.find(".k-link").text(), "Sort Ascending");
+        equal(desc.find(".k-link").text(), "Sort Descending");
+    });
+
+    test("context menu skips sort fields", function() {
+        var fieldmenu = createMenu({
+            sortable: false
+        });
+
+        var asc = fieldmenu.menu.element.find(".k-sort-asc");
+        var desc = fieldmenu.menu.element.find(".k-sort-desc");
+
+        ok(!asc[0]);
+        ok(!desc[0]);
+    });
+
     test("window is initialized", function() {
         var fieldmenu = createMenu();
 
@@ -788,5 +838,59 @@
         filterItem.find(".k-button-clear").click();
 
         ok(fieldmenu.menu.calls("close"));
+    });
+
+    test("sort ascending button sorts pivotgrid", function() {
+        var dataSource = createDataSource();
+        var fieldmenu = createMenu({ dataSource: dataSource });
+        var sortAscItem = fieldmenu.menu.element.find(".k-sort-asc");
+
+        sortAscItem.click();
+
+        var sort = dataSource.sort();
+
+        equal(sort.length, 1);
+        equal(sort[0].field, fieldmenu.currentMember);
+        equal(sort[0].dir, "asc");
+    });
+
+    test("sort descending button sorts pivotgrid", function() {
+        var dataSource = createDataSource();
+        var fieldmenu = createMenu({ dataSource: dataSource });
+        var sortAscItem = fieldmenu.menu.element.find(".k-sort-desc");
+
+        sortAscItem.click();
+
+        var sort = dataSource.sort();
+
+        equal(sort.length, 1);
+        equal(sort[0].field, fieldmenu.currentMember);
+        equal(sort[0].dir, "desc");
+    });
+
+    test("sort button removes only current sort expression", function() {
+        var dataSource = createDataSource();
+        var fieldmenu = createMenu({ dataSource: dataSource });
+        var sortAscItem = fieldmenu.menu.element.find(".k-sort-asc");
+
+        dataSource.sort([{
+            field: "test",
+            dir: "desc"
+        }, {
+            field: fieldmenu.currentMember,
+            dir: "desc"
+        }]);
+
+        sortAscItem.click();
+
+        var sort = dataSource.sort();
+
+        equal(sort.length, 2);
+
+        equal(sort[0].field, "test");
+        equal(sort[0].dir, "desc");
+
+        equal(sort[1].field, fieldmenu.currentMember);
+        equal(sort[1].dir, "asc");
     });
 })();
