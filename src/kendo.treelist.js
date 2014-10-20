@@ -711,6 +711,8 @@ var __meta__ = {
             var contentWrap = element.find(DOT + classNames.gridContentWrap);
             var header = element.find(DOT + classNames.gridHeader);
 
+            element.height(this.options.height);
+
             // identical code found in grid & splitter :(
             var isHeightSet = function(el) {
                 var initialHeight, newHeight;
@@ -757,6 +759,7 @@ var __meta__ = {
             scrollable: true,
             selectable: false,
             toolbar: null,
+            height: null,
             messages: {
                 noRows: "No records to display",
                 loading: "Loading...",

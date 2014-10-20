@@ -827,4 +827,11 @@
         var height = dom.find(".k-grid-content")[0].style.height;
         ok(!height);
     });
+
+    test("sets wrapper height based on height configuration option", function() {
+        createTreeList({ height: 200 });
+
+        var height = parseInt(dom.find(".k-grid-content").height(), 10);
+        ok(height > 100);
+    });
 })();
