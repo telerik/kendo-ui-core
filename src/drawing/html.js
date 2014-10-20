@@ -136,7 +136,7 @@
             ( browser.webkit && style.getPropertyValue("-webkit-" + prop )) ||
             ( browser.firefox && style.getPropertyValue("-moz-" + prop )) ||
             ( browser.opera && style.getPropertyValue("-o-" + prop)) ||
-            ( browser.ie && style.getPropertyValue("-ms-" + prop))
+            ( browser.msie && style.getPropertyValue("-ms-" + prop))
         ;
     }
 
@@ -148,7 +148,7 @@
             style.setProperty("-moz-" + prop, value, important);
         } else if (browser.opera) {
             style.setProperty("-o-" + prop, value, important);
-        } else if (browser.ie) {
+        } else if (browser.msie) {
             style.setProperty("-ms-" + prop, value, important);
         }
     }
@@ -1032,7 +1032,7 @@
             // box for the current text/font.  Which is to say, IE sucks again.
             // The only good solution I can think of is to measure the text
             // ourselves and center the bounding box.
-            if (kendo.support.browser.msie && !isNaN(lineHeight)) {
+            if (browser.msie && !isNaN(lineHeight)) {
                 var size = drawing.util.measureText(str, { font: font });
                 var top = (box.top + box.bottom - size.height) / 2;
                 box = {
