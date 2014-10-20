@@ -130,6 +130,11 @@
             node.parent = this;
         },
 
+        insertAt: function(node, pos) {
+            this.childNodes.splice(pos, 0, node);
+            node.parent = this;
+        },
+
         remove: function(index, count) {
             var end = index + count;
             for (var i = index; i < end; i++) {
@@ -159,7 +164,7 @@
 
         childrenChange: function(e) {
             if (e.action === "add") {
-                this.load(e.items);
+                this.load(e.items, e.index);
             } else if (e.action === "remove") {
                 this.remove(e.index, e.items.length);
             }

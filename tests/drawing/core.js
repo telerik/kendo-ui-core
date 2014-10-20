@@ -25,6 +25,20 @@
         deepEqual(child.parent, node);
     });
 
+    test("insertAt adds child node at position", function() {
+        var child = new BaseNode();
+        node.insertAt(child, 0);
+
+        deepEqual(node.childNodes[0], child);
+    });
+
+    test("insertAt sets parent", function() {
+        var child = new BaseNode();
+        node.insertAt(child, 0);
+
+        deepEqual(child.parent, node);
+    });
+
     test("clear removes all child nodes", function() {
         node.append(new BaseNode());
         node.remove = function(i, c) {

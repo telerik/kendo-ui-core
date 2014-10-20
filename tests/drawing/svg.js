@@ -75,6 +75,14 @@
             node.load([new Group()]);
         });
 
+        test("load appends GroupNode at position", function() {
+            node.insertAt = function(child, pos) {
+                equal(pos, 1);
+            };
+
+            node.load([new Group()], 1);
+        });
+
         test("load appends PathNode", function() {
             node.append = function(child) {
                 ok(child instanceof PathNode);
@@ -461,6 +469,18 @@
             groupNode.load([group]);
 
             ok(groupNode.childNodes[0].element);
+        });
+
+        test("load attaches node at position", function() {
+            groupNode.attachTo(document.createElement("div"));
+
+            var group1 = new Group();
+            groupNode.load([group1]);
+
+            var group2 = new Group();
+            groupNode.load([group2], 0);
+
+            equal(groupNode.element.childNodes[0], group2._observers[0].element);
         });
 
         test("renders group tag", function() {

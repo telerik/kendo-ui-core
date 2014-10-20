@@ -100,7 +100,7 @@
             }
         },
 
-        load: function(elements) {
+        load: function(elements, pos) {
             var node = this,
                 element = node.element,
                 childNode,
@@ -128,7 +128,11 @@
                     childNode = new ImageNode(srcElement);
                 }
 
-                node.append(childNode);
+                if (defined(pos)) {
+                    node.insertAt(childNode, pos);
+                } else {
+                    node.append(childNode);
+                }
 
                 childNode.createDefinitions();
 
@@ -137,7 +141,7 @@
                 }
 
                 if (element) {
-                    childNode.attachTo(element);
+                    childNode.attachTo(element, pos);
                 }
             }
         },
@@ -152,7 +156,7 @@
             return root;
         },
 
-        attachTo: function(domElement) {
+        attachTo: function(domElement, pos) {
             var container = doc.createElement("div");
             renderSVG(container,
                 "<svg xmlns='" + SVG_NS + "' version='1.1'>" +
@@ -162,7 +166,11 @@
 
             var element = container.firstChild.firstChild;
             if (element) {
-                domElement.appendChild(element);
+                if (defined(pos)) {
+                    domElement.insertBefore(element, domElement.childNodes[pos]);
+                } else {
+                    domElement.appendChild(element);
+                }
                 this.setElement(element);
             }
         },

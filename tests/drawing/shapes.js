@@ -553,6 +553,67 @@
         test("currentTransform returns null if group has no matrix and there is no parent matrix", function() {
             ok(group.currentTransform() === null);
         });
+
+        // ------------------------------------------------------------
+        module("Group / insertAt", {
+            setup: function() {
+                group = new Group();
+                group.append(new Element(), new Element());
+            }
+        });
+
+        test("insertAt adds child at beginning", function() {
+            var child = new Element();
+            group.insertAt(child, 0);
+
+            deepEqual(group.children[0], child);
+        });
+
+        test("insertAt doesn't alter existing elements", function() {
+            var child = new Element();
+            group.insertAt(child, 0);
+
+            equal(group.children.length, 3);
+        });
+
+        test("insertAt adds child at middle", function() {
+            var child = new Element();
+            group.insertAt(child, 1);
+
+            deepEqual(group.children[1], child);
+        });
+
+        test("insertAt adds child at end", function() {
+            var child = new Element();
+            group.insertAt(child, 2);
+
+            deepEqual(group.children[2], child);
+        });
+
+        test("insertAt sets child parent", function() {
+            var child = new Element();
+            group.append(child);
+
+            ok(child.parent === group);
+        });
+
+        test("insertAt triggers childrenChange", function() {
+            var child = new Element();
+
+            group.addObserver({
+                childrenChange: function(e) {
+                    equal(e.action, "add");
+                    equal(e.items[0], child);
+                    equal(e.index, 1);
+                }
+            });
+
+            group.insertAt(child, 1);
+        });
+
+        test("insertAt is chainable", function() {
+            equal(group.insertAt(new Element()), group);
+        });
     })();
 
     // ------------------------------------------------------------
