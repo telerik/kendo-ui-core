@@ -66,7 +66,7 @@
         // OTOH we might change the way text is displayed.
         commandsOK(text, [
             "BT",
-            "/F1 12 Tf",
+            "/F[0-9]+ 12 Tf",
             "\\(Foo bar baz\\) Tj",
             "ET"
         ], "basic text drawing");
