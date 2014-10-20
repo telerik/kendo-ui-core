@@ -14,10 +14,10 @@
     }
 
     function addShapes() {
-        d.addShape(new Point(10, 20), { data: "Rectangle" });
-        d.addShape(new Point(50, 100), { data: "Rectangle" });
-        d.addShape(new Point(30, 200), { data: "Rectangle" });
-        d.addShape(new Point(500, 100), { data: "Rectangle" });
+        d.addShape({ x: 10, y: 20, data: "Rectangle", dataItem: {} });
+        d.addShape({ x: 50, y: 100, data: "Rectangle", dataItem: {} });
+        d.addShape({ x: 30, y: 200, data: "Rectangle", dataItem: {} });
+        d.addShape({ x: 500, y: 100, data: "Rectangle", dataItem: {} });
     }
 
     function setupDiagram(options) {
@@ -129,14 +129,6 @@
             }
         });
 
-        test("creates rotation thumb", function() {
-            ok(adorner.rotationThumb instanceof diagram.Path);
-        });
-
-        test("adds rotation thumb to visual group", function() {
-            ok($.inArray(adorner.rotationThumb.drawingContainer(), drawingContainer.children) >= 0);
-        });
-
         // ------------------------------------------------------------
         module("Resizing/Selection adorner / editable", {
             setup: function() {
@@ -155,10 +147,6 @@
 
         test("does not create handles if resizing is disabled", function() {
             equal(adorner.map.length, 0);
-        });
-
-        test("does not create rotation thumb if rotation is disabled", function() {
-            ok(!adorner.rotationThumb);
         });
 
         // ------------------------------------------------------------
@@ -186,19 +174,6 @@
 
             equal(adorner._getCursor(testP), "se-resize", "Cursor is correct.");
         });
-
-        test("correct cursor after rotation - 50", function () {
-            var last = d.shapes[d.shapes.length - 1];
-
-            last.select(true);
-            last.rotate(50);
-            var delta = new Point(adorner.options.offset + 4, adorner.options.offset + 4);
-            var testP = last.bounds().bottomRight().plus(delta);
-            testP.rotate(last.bounds().center(), 360 - 50);
-
-            equal(adorner._getCursor(testP), "s-resize", "Cursor is correct.");
-        });
-
     })();
 
     (function() {
@@ -208,7 +183,7 @@
         var shape;
         function setupTool(options) {
             setupDiagram(options);
-            shape = d.addShape(new Point(10, 20), { data: "Rectangle" });
+            shape = d.addShape({ x: 10, y: 20, data: "Rectangle", dataItem: {} });
             toolservice = d.toolService;
             for (var i = 0; i < toolservice.tools.length; i++) {
                 if (toolservice.tools[i] instanceof PointerTool) {
@@ -373,7 +348,7 @@
 
     test("ConnectionTool - create connection", function () {
         d.clear();
-        d.addShape(new Point(0, 0));
+        d.addShape({ x: 0, y: 0, dataItem: {} });
         var s1 = d.shapes[0];
         var s1c = s1.bounds().center();
         d.toolService.start(s1c);

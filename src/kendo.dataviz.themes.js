@@ -320,16 +320,15 @@ var __meta__ = {
                 width: 0
             },
             editable: {
-                resize: {
-                    handles: {
-                        width: 7,
-                        height: 7
-                    }
-                },
-                handles: {
-                    type: "rectangle"
-                },
                 tools: ["edit", "delete", "rotate"]
+            }
+        },
+        editable: {
+            resize: {
+                handles: {
+                    width: 7,
+                    height: 7
+                }
             }
         },
         selectable: {

@@ -455,6 +455,7 @@
         var Shape = DiagramElement.extend({
             init: function (options, dataItem) {
                 var that = this;
+                dataItem = dataItem || {};
                 DiagramElement.fn.init.call(that, options, dataItem);
                 this.updateOptionsFromModel();
                 options = that.options;
@@ -481,17 +482,19 @@
             options: diagram.shapeDefaults(),
 
             updateOptionsFromModel: function(model) {
-                var modelOptions = filterShapeDataItem(model || this.dataItem);
+                if (this.diagram && this.diagram._editing) {
+                    var modelOptions = filterShapeDataItem(model || this.dataItem);
 
-                if (model) {
-                    this.redraw(modelOptions);
-                } else {
-                    this.options = deepExtend({}, this.options, modelOptions);
+                    if (model) {
+                        this.redraw(modelOptions);
+                    } else {
+                        this.options = deepExtend({}, this.options, modelOptions);
+                    }
                 }
             },
 
             updateModel: function() {
-                if (this.diagram) {
+                if (this.diagram && this.diagram._editing) {
                     var bounds = this._bounds;
                     var model = this.diagram.dataSource.getByUid(this.dataItem.uid);
                     if (model) {
@@ -623,7 +626,7 @@
 
                 json.options.id = diagram.randomId();
 
-                if (defined(this.dataItem)) {
+                if (this.diagram && this.diagram._editing && defined(this.dataItem)) {
                     dataItem = this.dataItem.toJSON();
                     dataItem[this.dataItem.idField] = this.dataItem._defaultId;
                 }
@@ -935,6 +938,7 @@
         var Connection = DiagramElement.extend({
             init: function (from, to, options, dataItem) {
                 var that = this;
+                dataItem = dataItem || {};
                 DiagramElement.fn.init.call(that, options, dataItem);
                 this.updateOptionsFromModel();
                 that._router = new PolylineRouter(this);
@@ -963,55 +967,59 @@
             },
 
             updateOptionsFromModel: function(model) {
-                var options = filterConnectionDataItem(model || this.dataItem);
+                if (this.diagram && this.diagram._editing) {
+                    var options = filterConnectionDataItem(model || this.dataItem);
 
-                if (model) {
-                    if (defined(options.from)) {
-                        this.source(options.from);
-                    } else if (defined(options.fromX) && defined(options.fromY)) {
-                        this.source(new Point(options.fromX, options.fromY));
+                    if (model) {
+                        if (defined(options.from)) {
+                            this.source(options.from);
+                        } else if (defined(options.fromX) && defined(options.fromY)) {
+                            this.source(new Point(options.fromX, options.fromY));
+                        }
+
+                        if (defined(options.to)) {
+                            this.target(options.to);
+                        } else if (defined(options.toX) && defined(options.toY)) {
+                            this.target(new Point(options.toX, options.toY));
+                        }
+
+                        this.redraw(this.options);
+                    } else {
+                        this.options = deepExtend({}, options, this.options);
                     }
-
-                    if (defined(options.to)) {
-                        this.target(options.to);
-                    } else if (defined(options.toX) && defined(options.toY)) {
-                        this.target(new Point(options.toX, options.toY));
-                    }
-
-                    this.redraw(this.options);
-                } else {
-                    this.options = deepExtend({}, options, this.options);
                 }
             },
 
             updateModel: function(shouldRefresh) {
-                if (this.diagram) {
-                    var model = this.diagram.connectionsDataSource.getByUid(this.dataItem.uid);
-                    if (model) {
-                        this.diagram._shouldRefresh = false;
-                        if (defined(this.options.fromX) && this.options.fromX !== null) {
-                            model._set("from", null);
-                            model._set("fromX", this.options.fromX);
-                            model._set("fromY", this.options.fromY);
-                        } else  {
-                            model._set("from", this.options.from);
-                            model._set("fromX", null);
-                            model._set("fromY", null);
-                        }
+                if (this.diagram && this.diagram._editing) {
+                    if (this.diagram.ConnectionsDataSource) {
+                        var model = this.diagram.connectionsDataSource.getByUid(this.dataItem.uid);
+                        if (model) {
+                            this.diagram._shouldRefresh = false;
+                            if (defined(this.options.fromX) && this.options.fromX !== null) {
+                                model._set("from", null);
+                                model._set("fromX", this.options.fromX);
+                                model._set("fromY", this.options.fromY);
+                            } else  {
+                                model._set("from", this.options.from);
+                                model._set("fromX", null);
+                                model._set("fromY", null);
+                            }
 
-                        if (defined(this.options.toX) && this.options.toX !== null) {
-                            model._set("to", null);
-                            model._set("toX", this.options.toX);
-                            model._set("toY", this.options.toY);
-                        } else {
-                            model._set("to", this.options.to);
-                            model._set("toX", null);
-                            model._set("toY", null);
-                        }
+                            if (defined(this.options.toX) && this.options.toX !== null) {
+                                model._set("to", null);
+                                model._set("toX", this.options.toX);
+                                model._set("toY", this.options.toY);
+                            } else {
+                                model._set("to", this.options.to);
+                                model._set("toX", null);
+                                model._set("toY", null);
+                            }
 
-                        if (shouldRefresh !== false) {
-                            this.diagram._shouldRefresh = true;
-                            model.trigger("change");
+                            if (shouldRefresh !== false) {
+                                this.diagram._shouldRefresh = true;
+                                model.trigger("change");
+                            }
                         }
                     }
                 }
@@ -1343,9 +1351,9 @@
              */
             clone: function () {
                 var json = this.serialize(),
-                    dataItem;
+                    dataItem = {};
 
-                if (defined(this.dataItem)) {
+                if (this.diagram && this.diagram._editing && defined(this.dataItem)) {
                     dataItem = this.dataItem.toJSON();
                     dataItem[this.dataItem.idField] = this.dataItem._defaultId;
                 }
@@ -1946,7 +1954,7 @@
             },
 
             _addConnection: function (connection, undoable) {
-                if (this.connectionsDataSource) {
+                if (this.connectionsDataSource && this._editing) {
                     var dataItem = this.connectionsDataSource.add(connection.dataItem);
                     connection.dataItem = dataItem;
                     connection.updateModel(false);
@@ -1999,7 +2007,7 @@
             },
 
             _addShape: function(shape, options) {
-                if (this.dataSource) {
+                if (this.dataSource && this._editing) {
                     var dataItem = this.dataSource.add(shape.dataItem);
                     this.dataSource.sync();
                     this._dataMap[shape.dataItem.id] = shape;
@@ -2047,20 +2055,20 @@
             _remove: function(item, undoable) {
                 var dataSource = this.dataSource;
 
-                if (item instanceof Connection) {
-                    dataSource = this.connectionsDataSource;
+                if (this._editing) {
+                    if (item instanceof Connection) {
+                        dataSource = this.connectionsDataSource;
+                    }
+
+                    if (item.length) {
+                        this._destroyToolBar();
+                    } else {
+                        dataSource.remove(item.dataItem);
+                        dataSource.sync();
+                    }
                 }
 
-                if (item.length) {
-                    this._destroyToolBar();
-                } else {
-                    dataSource.remove(item.dataItem);
-                    dataSource.sync();
-                }
-
-                if (defined(this.dataSource)) {
-                    this.remove(item, undoable);
-                }
+                this.remove(item, undoable);
             },
 
             /**
@@ -2992,14 +3000,27 @@
             _fetchFreshData: function () {
                 this._dataSource();
 
-                this._connectionDataSource();
+                if (this._editing) {
+                    this._connectionDataSource();
+                }
+
                 if (this.options.autoBind) {
                     this.dataSource.fetch();
-                    this.connectionsDataSource.fetch();
+                    if (this._editing) {
+                        if (this.connectionsDataSource) {
+                            this.connectionsDataSource.fetch();
+                        }
+                    }
                 }
             },
 
             _dataSource: function() {
+                if (this._isTreeDataSource()) {
+                    this._treeDataSource();
+                    this._editing = false;
+                    return;
+                }
+                this._editing = true;
                 var dsOptions = this.options.dataSource || {};
                 var ds = isArray(dsOptions) ? { data: dsOptions } : dsOptions;
 
@@ -3024,29 +3045,37 @@
                     .bind("error", this._shapesErrorHandler);
             },
 
+            _isTreeDataSource: function() {
+                var options = this.options.dataSource || {};
+                return options instanceof kendo.data.HierarchicalDataSource ||
+                    (options.scheme && options.scheme.model && defined(options.scheme.model.children))
+            },
+
             _connectionDataSource: function() {
-                var dsOptions = this.options.connectionsDataSource || {};
-                var ds = isArray(dsOptions) ? { data: dsOptions } : dsOptions;
+                var dsOptions = this.options.connectionsDataSource;
+                if (dsOptions) {
+                    var ds = isArray(dsOptions) ? { data: dsOptions } : dsOptions;
 
-                ds = deepExtend({}, {
-                    schema: {
-                        modelBase: ConnectionModel,
-                        model: ConnectionModel
+                    ds = deepExtend({}, {
+                        schema: {
+                            modelBase: ConnectionModel,
+                            model: ConnectionModel
+                        }
+                    }, ds);
+
+                    if (this.connectionsDataSource && this._connectionsRefreshHandler) {
+                        this.connectionsDataSource
+                            .unbind("change", this._connectionsRefreshHandler)
+                            .unbind("error", this._connectionsErrorHandler);
+                    } else {
+                        this._connectionsRefreshHandler = proxy(this._refreshConnections, this);
+                        this._connectionsErrorHandler = proxy(this._error, this);
                     }
-                }, ds);
 
-                if (this.connectionsDataSource && this._connectionsRefreshHandler) {
-                    this.connectionsDataSource
-                        .unbind("change", this._connectionsRefreshHandler)
-                        .unbind("error", this._connectionsErrorHandler);
-                } else {
-                    this._connectionsRefreshHandler = proxy(this._refreshConnections, this);
-                    this._connectionsErrorHandler = proxy(this._error, this);
+                    this.connectionsDataSource = kendo.data.DataSource.create(ds)
+                        .bind("change", this._connectionsRefreshHandler)
+                        .bind("error", this._connectionsErrorHandler);
                 }
-
-                this.connectionsDataSource = kendo.data.DataSource.create(ds)
-                    .bind("change", this._connectionsRefreshHandler)
-                    .bind("error", this._connectionsErrorHandler);
             },
 
             _refreshShapes: function(e) {
@@ -3215,32 +3244,32 @@
                 return connector;
             },
 
-            //_dataSource: function () {
-            //    var that = this,
-            //        options = that.options,
-            //        dataSource = options.dataSource;
+            _treeDataSource: function () {
+                var that = this,
+                    options = that.options,
+                    dataSource = options.dataSource;
 
-            //    dataSource = isArray(dataSource) ? { data: dataSource } : dataSource;
+                dataSource = isArray(dataSource) ? { data: dataSource } : dataSource;
 
-            //    if (!dataSource.fields) {
-            //        dataSource.fields = [
-            //            { field: "text" },
-            //            { field: "url" },
-            //            { field: "spriteCssClass" },
-            //            { field: "imageUrl" }
-            //        ];
-            //    }
-            //    if (that.dataSource && that._refreshHandler) {
-            //        that._unbindDataSource();
-            //    }
+                if (!dataSource.fields) {
+                    dataSource.fields = [
+                        { field: "text" },
+                        { field: "url" },
+                        { field: "spriteCssClass" },
+                        { field: "imageUrl" }
+                    ];
+                }
+                if (that.dataSource && that._refreshHandler) {
+                    that._unbindDataSource();
+                }
 
-            //    that._refreshHandler = proxy(that._refreshSource, that);
-            //    that._errorHandler = proxy(that._error, that);
+                that._refreshHandler = proxy(that._refreshSource, that);
+                that._errorHandler = proxy(that._error, that);
 
-            //    that.dataSource = HierarchicalDataSource.create(dataSource)
-            //        .bind(CHANGE, that._refreshHandler)
-            //        .bind(ERROR, that._errorHandler);
-            //},
+                that.dataSource = HierarchicalDataSource.create(dataSource)
+                    .bind(CHANGE, that._refreshHandler)
+                    .bind(ERROR, that._errorHandler);
+            },
 
             _unbindDataSource: function () {
                 var that = this;
@@ -3335,6 +3364,8 @@
 
         function filterShapeDataItem(dataItem) {
             var result = {};
+
+            dataItem = dataItem || {};
 
             if (defined(dataItem.text) && dataItem.text !== null) {
                 result.text = dataItem.text;
