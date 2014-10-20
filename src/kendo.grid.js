@@ -815,6 +815,97 @@ var __meta__ = {
         return cells;
     }
 
+    function parentColumnsCells(cell) {
+        var container = cell.closest("table");
+        var result = $().add(cell);
+
+        var row = cell.closest("tr");
+        var headerRows = container.find("tr:not(.k-filter-row)");
+        var level = headerRows.index(row);
+        if (level > 0) {
+            var parent = headerRows.eq(level - 1);
+            var parentCellsWithChildren = parent.find("th:not(.k-group-cell,.k-hierarchy-cell)").filter(function() {
+                return !$(this).attr("rowspan");
+            });
+
+            var offset = 0;
+            var index = row.find("th:not(.k-group-cell,.k-hierarchy-cell)").index(cell);
+
+            var prevCells = cell.prevAll(":not(.k-group-cell,.k-hierarchy-cell)").filter(function() {
+                return this.colSpan > 1;
+            });
+
+            for (idx = 0; idx < prevCells.length; idx++) {
+                offset += prevCells[idx].colSpan || 1;
+            }
+
+            index += Math.max(offset - 1, 0);
+
+            offset = 0;
+            for (var idx = 0; idx < parentCellsWithChildren.length; idx++) {
+                var parentCell = parentCellsWithChildren.eq(idx);
+                if (parentCell.attr("colSpan")) {
+                    offset += parentCell[0].colSpan;
+                } else {
+                    offset += 1;
+                }
+                if (index >= idx && index < offset) {
+                    result = parentColumnsCells(parentCell).add(result);
+                    break;
+                }
+            }
+        }
+        return result;
+    }
+
+    function childColumnsCells(cell) {
+        var container = cell.closest("table");
+        var result = $().add(cell);
+
+        var row = cell.closest("tr");
+        var headerRows = container.find("tr:not(.k-filter-row)");
+        var level = headerRows.index(row) + cell[0].rowSpan;
+        var colSpanAttr = kendo.attr("colspan");
+
+        if (level <= headerRows.length - 1) {
+            var child = row.next();
+            var index = row.find("th:not(.k-group-cell,.k-hierarchy-cell)").index(cell);
+            var prevCells = cell.prevAll(":not(.k-group-cell,.k-hierarchy-cell)");
+
+            var offset = index - prevCells.filter(function() {
+                return this.rowSpan > 1;
+            }).length;
+
+            var idx;
+
+            prevCells = prevCells.filter(function() {
+                return parseInt($(this).attr(colSpanAttr), 10) > 1;
+            });
+
+            for (idx = 0; idx < prevCells.length; idx++) {
+                offset += parseInt(prevCells.eq(idx).attr(colSpanAttr), 10) || 1;
+            }
+
+            var cells = child.find("th:not(.k-group-cell,.k-hierarchy-cell)");
+
+            offset = offset || 1;
+
+            var colSpan = parseInt(cell.attr(colSpanAttr), 10) || 1;
+            idx = 0;
+            while (idx < colSpan) {
+                child = cells.eq(idx + (offset - 1));
+                result = result.add(childColumnsCells(child));
+                var value = parseInt(child.attr(colSpanAttr), 10);
+                if (value > 1) {
+                    colSpan -= value - 1;
+                }
+                idx++;
+            }
+        }
+
+        return result;
+    }
+
     function appendContent(tbody, table, html) {
         var placeholder,
             tmp = tbody;
@@ -4883,54 +4974,6 @@ var __meta__ = {
             that.lockedFooter = html.prependTo(footer);
         },
 
-        _childColumnsCells: function(cell) {
-            var container = this.thead;
-            var result = $().add(cell);
-
-            var row = cell.closest("tr");
-            var headerRows = container.find("tr:not(.k-filter-row)");
-            var level = headerRows.index(row) + cell[0].rowSpan;
-            var colSpanAttr = kendo.attr("colspan");
-
-            if (level <= headerRows.length - 1) {
-                var child = row.next();
-                var index = row.find("th:not(.k-group-cell,.k-hierarchy-cell)").index(cell);
-                var prevCells = cell.prevAll(":not(.k-group-cell,.k-hierarchy-cell)");
-
-                var offset = index - prevCells.filter(function() {
-                    return this.rowSpan > 1;
-                }).length;
-
-                var idx;
-
-                prevCells = prevCells.filter(function() {
-                    return parseInt($(this).attr(colSpanAttr), 10) > 1;
-                });
-
-                for (idx = 0; idx < prevCells.length; idx++) {
-                    offset += parseInt(prevCells.eq(idx).attr(colSpanAttr), 10) || 1;
-                }
-
-                var cells = child.find("th:not(.k-group-cell,.k-hierarchy-cell)");
-
-                offset = offset || 1;
-
-                var colSpan = parseInt(cell.attr(colSpanAttr), 10) || 1;
-                idx = 0;
-                while (idx < colSpan) {
-                    child = cells.eq(idx + (offset - 1));
-                    result = result.add(this._childColumnsCells(child));
-                    var value = parseInt(child.attr(colSpanAttr), 10);
-                    if (value > 1) {
-                        colSpan -= value - 1;
-                    }
-                    idx++;
-                }
-            }
-
-            return result;
-        },
-
         _appendLockedColumnHeader: function(container) {
             var that = this,
                 columns = this.columns,
@@ -4977,7 +5020,7 @@ var __meta__ = {
                         colOffset += colSpan - 1;
                     }
 
-                    mapColumnToCellRows([columns[idx]], that._childColumnsCells(cell), 0, rows, 0);
+                    mapColumnToCellRows([columns[idx]], childColumnsCells(cell), 0, rows, 0);
 
                     leafColumnsCount = leafColumnsCount || 1;
                     for (var j = 0; j < leafColumnsCount; j++) {
@@ -6168,13 +6211,30 @@ var __meta__ = {
 
        if (current) {
            row = current.parent()[nextFn](NAVROW).first();
-           if (!row[0] && (up || current.is("th"))) {
+           if (!row[0] && (up || current.is("th")) || (!up && current[0].rowSpan > 1)) {
                currentTable = verticalTable(currentTable, dataTable, headerTable, up);
                focusTable(currentTable);
+               if (up && !current.is(".k-header")) {
+                   return leafDataCells(currentTable).eq(current.index());
+               }
                row = currentTable.find((up ? ">thead>" : ">tbody>") + NAVROW).first();
            }
-           index = current.index();
-           current = row.children().eq(index);
+
+           if (!up && current[0].colSpan > 1 && current.is(".k-header")) { // is not leaf header column
+               current = childColumnsCells(current).eq(1);
+           } else {
+               if (current.is(".k-header") && up) {
+                   var parents = parentColumnsCells(current);
+                   current = parents.eq(parents.length - 2);
+               } else {
+                   index = current.attr(kendo.attr("index"));
+                   if (index === undefined || up) {
+                       index = current.index();
+                   }
+                   current = row.children().eq(index);
+               }
+           }
+
            if (!current[0] || !current.is(NAVCELL)) {
                current = row.children(NAVCELL).first();
            }
