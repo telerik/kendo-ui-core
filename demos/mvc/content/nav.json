@@ -8424,7 +8424,7 @@
             "kendo-ui": "Mobile Drawer widget demo | Kendo UI Demos"
         },
         "meta": {
-            "kendo-ui": "This example demonstrates how the Mobile Drawer may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
+            "kendo-ui": "This example demonstrates how the Mobile Drawer may be used outside of a Kendo UI mobile application alongside Kendo UI web Widgets"
         },
         "packages": [
           "!mvc",
@@ -8435,6 +8435,7 @@
       {
         "text": "AngularJS",
         "new": true,
+        "mobile": true,
         "disableInMobile": true,
         "url": "drawer/angular",
         "title": {

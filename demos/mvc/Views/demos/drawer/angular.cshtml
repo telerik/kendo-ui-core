@@ -1,119 +1,161 @@
-<div id="example" ng-app="KendoDemos">
-    <div ng-controller="MyCtrl" class="demo-section">
-  <div id="drawer" kendo-mobile-drawer="drawer" k-container="'#content-container'">
-    <h3>Sports</h3>
-    <a ng-click="show($event, 'baseball')" class="drawer-link active">Baseball</a>
-    <a ng-click="show($event, 'golf')" class="drawer-link">Golf</a>
-    <a ng-click="show($event, 'swimming')" class="drawer-link">Swimming</a>
-    <a ng-click="show($event, 'snowboarding')" class="drawer-link">Snowboarding</a>
-  </div>
+<div kendo-mobile-application ng-app="kendoDemo">
+<kendo-mobile-view id="two-drawer-home" k-title="'Friends'">
+    <kendo-mobile-header>
+        <kendo-mobile-nav-bar>
+            <kendo-mobile-back-button id="back-button" class="nav-button" k-align="'left'">Back</kendo-mobile-back-button>
+            <kendo-view-title></kendo-view-title>
+            <kendo-mobile-button k-rel="'drawer'" href="#right-drawer" k-icon="'share'" k-align="'right'" ></a>
+        </kendo-mobile-nav-bar>
+    </kendo-mobile-header>
 
-  <div id="content-container">
-    <a id="drawer-trigger" ng-click="drawer.show()"><span>Show drawer</span></a>
-    <div id="baseball" class="inner-content">
-      <h3>Baseball</h3>
-      <p>
-        Baseball is a bat-and-ball sport played between two teams of nine players each. The aim is to score runs by hitting a thrown ball with a bat and touching a series of four bases arranged at the corners of a ninety-foot diamond. Players on the batting team take turns hitting against the pitcher of the fielding team, which tries to stop them from scoring runs by getting hitters out in any of several ways. A player on the batting team can stop at any of the bases and later advance via a teammate's hit or other means. The teams switch between batting and fielding whenever the fielding team records three outs. One turn at bat for each team constitutes an inning and nine innings make up a professional game. The team with the most runs at the end of the game wins.
-      </p>
-    </div>
-    <div id="golf" class="inner-content">
-      <h3>Golf</h3>
-      <p>
-        Golf is a precision club and ball sport, in which competing players (or golfers) use many types of clubs to hit balls into a series of holes on a golf course using the fewest number of strokes. It is one of the few ball games that does not require a standardized playing area. Instead, the game is played on golf courses, each of which features a unique design, although courses typically consist of either nine or 18 holes. Golf is defined, in the rules of golf, as playing a ball with a club from the teeing ground into the hole by a stroke or successive strokes in accordance with the Rules.
-      </p>
-    </div>
-    <div id="swimming" class="inner-content">
-      <h3>Swimming</h3>
-      <p>
-        Swimming has been recorded since prehistoric times; the earliest recording of swimming dates back to Stone Age paintings from around 7,000 years ago. Written references date from 2000 BC. Some of the earliest references to swimming include the Gilgamesh, the Iliad, the Odyssey, the Bible, Beowulf, and other sagas. In 1578, Nikolaus Wynmann, a German professor of languages, wrote the first swimming book, The Swimmer or A Dialogue on the Art of Swimming (Der Schwimmer oder ein ZwiegesprÃƒÂ¤ch ÃƒÂ¼ber die Schwimmkunst). Competitive swimming in Europe started around 1800, mostly using breaststroke.
-      </p>
-    </div>
-    <div id="snowboarding" class="inner-content">
-      <h3>Snowboarding</h3>
-      <p>
-        Snowboarding is a sport that involves descending a slope that is covered with snow on a snowboard attached to a rider's feet using a special boot set onto a mounted binding. The development of snowboarding was inspired by skateboarding, sledding, surfing and skiing. It was developed in the U.S.A. in the 1960s to 1970s and became a Winter Olympic Sport in 1998.
-      </p>
-    </div>
-  </div>
+    <kendo-mobile-list-view k-type="'group'">
+        <li>
+            A
+            <ul>
+                <li><h2>Ann Devon</h2><img src="../content/mobile/overview/ann.jpg" /></li>
+                <li><h2>Annette Roulet</h2><img src="../content/mobile/overview/annette.jpg" /></li>
+                <li><h2>Antonio Moreno</h2><img src="../content/mobile/overview/antonio.jpg" /></li>
+            </ul>
+        </li>
+        <li>
+            C
+            <ul>
+                <li><h2>Carine Schmitt</h2><img src="../content/mobile/overview/carine.jpg" /></li>
+                <li><h2>Catherine Dewey</h2><img src="../content/mobile/overview/catherine.jpg" /></li>
+            </ul>
+        </li>
+        <li>
+           D
+            <ul>
+                <li><h2>Daniel Tonini</h2><img src="../content/mobile/overview/daniel.jpg" /></li>
+                <li><h2>Diego Roel</h2><img src="../content/mobile/overview/diego.jpg" /></li>
+            </ul>
+        </li>
+        <li>
+            E
+            <ul>
+                <li><h2>Eduardo Saavedra</h2><img src="../content/mobile/overview/eduardo.jpg" /></li>
+                <li><h2>Elizabeth Brown</h2><img src="../content/mobile/overview/elizabeth.jpg" /></li>
+            </ul>
+        </li>
+        <li>
+            F
+            <ul>
+                <li><h2>Felipe Izquierdo</h2><img src="../content/mobile/overview/felipe.jpg" /></li>
+                <li><h2>Fran Wilson</h2><img src="../content/mobile/overview/fran.jpg" /></li>
+                <li><h2>Francisco Chang</h2><img src="../content/mobile/overview/francisco.jpg" /></li>
+            </ul>
+        </li>
+    </kendo-mobile-list-view>
+</kendo-mobile-view>
 
-  <style>
-    #content-container {
-      height: 100%;
-      background-color: #fcfcfc;
-      padding-top: 10px;
-      border-left: 3px solid #359cf3;
-    }
 
-    .demo-section {
-      position: relative;
-      overflow: hidden;
-      width: 500px;
-      height: 270px;
-      padding: 0;
-    }
-    #drawer-trigger {
-      display: block;
-      width: 36px;
-      height: 36px;
-      background: url("http://demos.telerik.com/kendo-ui/content/web/drawer/menu.png") no-repeat 50% 50% #359cf3;
-    }
-    #drawer .km-widget {
-      background-color: #212834;
-      padding: 20px;
-    }
-    #drawer h3 {
-      margin: 0 0 10px;
-      padding: 0 0 10px 5px;
-      color: #fff;
-      border-bottom: 1px solid #454545;
-    }
-    #drawer a {
-      display: block;
-      text-decoration: none;
-      color: #68baff;
-      font-weight: bold;
-      font-size: 1.1em;
-      padding: 0 5px;
-      height: 30px;
-      line-height: 30px;
-      vertical-align: middle;
-      border-radius: 2px;
-    }
-    #drawer a:hover,
-    #drawer a.active:hover {
-      color: #212834;
-      background-color: #68baff;
-    }
-    #drawer a.active {
-      color: #45719a;
-    }
-    #drawer-trigger span {
-      display: none;
-    }
-    .inner-content {
-      padding: 20px 36px;
-      color: #000;
-    }
-    .inner-content h3 {
-      margin-bottom: 5px;
-    }
-    .drawer-link {
-      cursor: pointer;
-    }
-  </style>
-</div>
+<kendo-mobile-drawer id="right-drawer" style="width: 80px" k-title="'Share'" k-position="'right'" k-views="['two-drawer-home']">
+    <kendo-mobile-header>
+        <kendo-mobile-nav-bar>
+            <kendo-view-title></kendo-view-title>
+        </kendo-mobile-nav-bar>
+    </kendo-mobile-header>
 
-</div>
+    <img src="../content/mobile/shared/share.png" width="100%"/>
+</kendo-mobile-drawer>
 
 <script>
-  angular.module("KendoDemos", [ "kendo.directives" ]);
-  function MyCtrl($scope) {
-  $scope.show = function(event, section) {
-    $scope.drawer.hide();
-    $(".drawer-link").removeClass("active");
-    $(event.target).addClass("active");
-    $(".inner-content").hide();
-    $("#" + section).show();
-  };
-}
+    angular.module("kendoDemo", [ "kendo.directives" ]);
 </script>
+
+<style>
+    .km-root .left-btn
+    {
+        position: absolute;
+        z-index: 9999;
+        top: 7em;
+        left: -1em;
+        padding-right: 0;
+        padding-left: 0;
+        width: 5em;
+        line-height: 4em;
+        border-radius: 10em;
+        -webkit-border-radius: 10em;
+        border: 1px solid rgba(255,255,255,.8);
+        background: rgba(0,0,0,.8);
+        color: #fff;
+        box-shadow: 0 0 .5em #000;
+        -webkit-box-shadow: 0 0 .6em #222;
+    }
+
+    .mobileExample .km-wp-light .km-button.left-btn
+    {
+        background: rgba(0,0,0,.8);
+        text-align: center;
+    }
+
+    .km-root .left-btn .km-icon.km-notext
+    {
+        display: block;
+        margin: 1em auto;
+    }
+
+    .km-ios #left-drawer .km-content, .km-ios7 #left-drawer .km-content, .km-android #left-drawer .km-content, .km-blackberry #left-drawer .km-content,
+    .km-ios #left-drawer .km-list > li, .km-ios7 #left-drawer .km-list > li, .km-android #left-drawer .km-list > li, .km-blackberry #left-drawer .km-list > li,
+    .km-ios #left-drawer .km-listview-link > .km-icon, .km-ios7 #left-drawer .km-listview-link > .km-icon, .km-android #left-drawer .km-listview-link > .km-icon, .km-blackberry #left-drawer .km-listview-link > .km-icon,
+    .km-ios #left-drawer .km-list li > .km-icon, .km-ios7 #left-drawer .km-list li > .km-icon, .km-android #left-drawer .km-list li > .km-icon, .km-blackberry #left-drawer .km-list li > .km-icon,
+    #right-drawer .km-content
+    {
+        background-color: #4e4e4e;
+        color: #fff;
+    }
+
+    .km-ios #left-drawer .km-group-title,
+    .km-ios7 #left-drawer .km-group-title,
+    .km-blackberry #left-drawer .km-group-title
+    {
+        background-color: #6e6e6e;
+        color: #fff;
+    }
+
+    #left-drawer .km-navbar, #right-drawer .km-navbar,
+    .km-tablet .km-ios #left-drawer .km-view-title,
+    .km-tablet .km-ios #right-drawer .km-view-title,
+    .km-ios7 #left-drawer .km-view-title,
+    .km-ios7 #right-drawer .km-view-title,
+    .km-tablet .km-ios7 #left-drawer .km-view-title,
+    .km-tablet .km-ios7 #right-drawer .km-view-title
+    {
+	background-color: #2e2e2e;
+        color: #fff;
+        text-shadow: 0 -1px rgba(0,0,0,.5);
+    }
+
+    .km-drawer-button:before, .km-drawer-button:after { content: "\E077"; }
+    .km-contacts:before, .km-contacts:after { content: "\E0E4"; }
+    .km-camera:before, .km-camera:after { content: "\E0D0"; }
+    .km-printer:before, .km-printer:after { content: "\E07E"; }
+    .km-comments:before, .km-comments:after { content: "\E093"; }
+    .km-graph:before, .km-graph:after { content: "\E04B"; }
+
+
+    #two-drawer-home h2
+    {
+        display: inline-block;
+        font-size: 1em;
+        line-height: 3em;
+        margin: 0 0 0 1em;
+    }
+
+    #two-drawer-home img
+    {
+        float: left;
+        width: 3em;
+        height: 3em;
+        margin: 0;
+        border: 1px solid rgba(0,0,0,.2);
+        -webkit-border-radius: 4em;
+        border-radius: 4em;
+    }
+
+    .km-ios #two-drawer-home .km-listview
+    {
+        background-color: #eaf1f5;
+    }
+</style>
