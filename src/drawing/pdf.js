@@ -63,7 +63,7 @@
         });
 
         function getOption(name, defval) {
-            if (group.options.pdf && name in group.options.pdf) {
+            if (group.options.pdf && group.options.pdf[name] != null) {
                 return group.options.pdf[name];
             }
             return defval;
@@ -85,10 +85,16 @@
                 }
             }
             var pdf = new PDF.Document({
-                paperSize  : paperSize,
-                landscape  : getOption("landscape", false),
-                margin     : getOption("margin"),
-                addMargin  : addMargin
+                paperSize : paperSize,
+                landscape : getOption("landscape", false),
+                margin    : getOption("margin"),
+                addMargin : addMargin,
+                title     : getOption("title"),
+                author    : getOption("author"),
+                subject   : getOption("subject"),
+                keywords  : getOption("keywords"),
+                creator   : getOption("creator"),
+                date      : getOption("date")
             });
             var page = pdf.addPage();
             drawElement(group, page, pdf);
