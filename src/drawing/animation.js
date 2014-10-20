@@ -99,7 +99,7 @@
             if (options && options.type) {
                 var type = options.type.toLowerCase();
                 for (var i = 0; i < items.length; i++) {
-                    if (items[i].name === type) {
+                    if (items[i].name.toLowerCase() === type) {
                         match = items[i];
                         break;
                     }

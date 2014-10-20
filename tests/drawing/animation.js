@@ -30,6 +30,15 @@
             }) instanceof FooAnimation);
         });
 
+        test("retrieves type by type (case insensitive registration)", function() {
+            factory = new draw.AnimationFactory();
+            factory.register("FOO", FooAnimation);
+
+            ok(factory.create(null, {
+                type: "foo"
+            }) instanceof FooAnimation);
+        });
+
         test("returns undefined for unknown type", function() {
             equal(factory.create(null, {
                 type: "bar"
