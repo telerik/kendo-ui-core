@@ -313,6 +313,13 @@
             return this;
         },
 
+        insertAt: function(element, index) {
+            this.children.splice(index, 0, element);
+            element.parent = this;
+
+            this.childrenChange("add", [element], index);
+        },
+
         remove: function(element) {
             var index = inArray(element, this.children);
             if (index >= 0) {
