@@ -392,7 +392,7 @@ test("pushDestroy fires the push event", 5, function() {
         push: function(e) {
             equal(e.items.length, 2);
             equal(e.type, "destroy");
-            equal(e.items[0] instanceof kendo.data.ObservableObject, true);
+            ok(e.items[0] instanceof kendo.data.ObservableObject);
             equal(e.items[0].foo, "foo");
             equal(e.items[1].foo, "foo");
         },

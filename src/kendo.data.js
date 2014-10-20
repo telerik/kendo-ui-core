@@ -81,6 +81,10 @@ var __meta__ = {
             that.wrapAll(array, that);
         },
 
+        at: function(index) {
+            return this[index];
+        },
+
         toJSON: function() {
             var idx, length = this.length, value, json = new Array(length);
 
@@ -341,6 +345,32 @@ var __meta__ = {
 
         empty: function() {
             this.splice(0, this.length);
+        }
+    });
+
+    var LazyObservableArray = ObservableArray.extend({
+        init: function(data, type) {
+            Observable.fn.init.call(this);
+
+            this.type = type || ObservableObject;
+
+            for (var idx = 0; idx < data.length; idx++) {
+                this[idx] = data[idx];
+            }
+
+            this.length = idx;
+            this._parent = proxy(function() { return this; }, this);
+        },
+        at: function(index) {
+            var item = this[index];
+
+            if (!(item instanceof this.type)) {
+                item = this[index] = this.wrap(item, this._parent);
+            } else {
+                item.parent = this._parent;
+            }
+
+            return item;
         }
     });
 
@@ -1256,6 +1286,7 @@ var __meta__ = {
                 };
             }
 
+
             for (idx = 0, length = data.length; idx < length; idx++) {
                 current = data[idx];
 
@@ -1263,6 +1294,7 @@ var __meta__ = {
                     result.push(current);
                 }
             }
+
             return new Query(result);
         },
 
@@ -1898,12 +1930,13 @@ var __meta__ = {
             itemIndex;
 
         for (idx = 0, length = data.length; idx < length; idx++) {
-            if (data[idx].hasSubgroups) {
-                result = result.concat(flattenGroups(data[idx].items));
+            var group = data.at(idx);
+            if (group.hasSubgroups) {
+                result = result.concat(flattenGroups(group.items));
             } else {
-                items = data[idx].items;
+                items = group.items;
                 for (itemIndex = 0; itemIndex < items.length; itemIndex++) {
-                    result.push(items[itemIndex]);
+                    result.push(items.at(itemIndex));
                 }
             }
         }
@@ -1914,23 +1947,19 @@ var __meta__ = {
         var idx, length, group, items;
         if (model) {
             for (idx = 0, length = data.length; idx < length; idx++) {
-                group = data[idx];
-                items = group.items;
+                group = data.at(idx);
 
                 if (group.hasSubgroups) {
-                    wrapGroupItems(items, model);
-                } else if (items.length && !(items[0] instanceof model)) {
-                    items.type = model;
-                    items.wrapAll(items, items);
+                    wrapGroupItems(group.items, model);
+                } else {
+                    group.items = new LazyObservableArray(group.items, model);
                 }
             }
         }
     }
 
     function eachGroupItems(data, func) {
-        var idx, length;
-
-        for (idx = 0, length = data.length; idx < length; idx++) {
+        for (var idx = 0, length = data.length; idx < length; idx++) {
             if (data[idx].hasSubgroups) {
                 if (eachGroupItems(data[idx].items, func)) {
                     return true;
@@ -1941,14 +1970,55 @@ var __meta__ = {
         }
     }
 
+    function replaceInRanges(ranges, item, observable) {
+        for (var idx = 0; idx < ranges.length; idx++) {
+            if (replaceInRange(ranges[idx].data, item, observable)) {
+                break;
+            }
+        }
+    }
+
+    function replaceInRange(items, item, observable) {
+        for (var idx = 0, length = items.length; idx < length; idx++) {
+            if (items[idx] && items[idx].hasSubgroups) {
+                replaceInRange(items[idx].data, item, observable);
+            } else if (items[idx] === item) {
+               items[idx] = observable;
+               return true;
+            }
+        }
+    }
+
+    function replaceWithObservable(view, data, ranges) {
+        for (var viewIndex = 0, length = view.length; viewIndex < length; viewIndex++) {
+            var item = view[viewIndex];
+
+            if (!item) {
+                continue;
+            }
+
+            if (item.hasSubgroups !== undefined) {
+                replaceWithObservable(item.items, data, ranges);
+            } else {
+                for (var idx = 0; idx < data.length; idx++) {
+                    if (data[idx] === item) {
+                        view[viewIndex] = data.at(idx);
+                        replaceInRanges(ranges, item, view[viewIndex]);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
     function removeModel(data, model) {
         var idx, length;
 
         for (idx = 0, length = data.length; idx < length; idx++) {
-            if (data[idx].uid == model.uid) {
-                model = data[idx];
+            var dataItem = data.at(idx);
+            if (dataItem.uid == model.uid) {
                 data.splice(idx, 1);
-                return model;
+                return dataItem;
             }
         }
     }
@@ -2209,10 +2279,19 @@ var __meta__ = {
             this[operation](data);
         },
 
-        _flatData: function(data) {
-            if (this._isServerGrouped()) {
-                return flattenGroups(data);
+        _flatData: function(data, skip) {
+            if (data) {
+                if (this._isServerGrouped()) {
+                    return flattenGroups(data);
+                }
+
+                if (!skip) {
+                    for (var idx = 0; idx < data.length; idx++) {
+                        data.at(idx);
+                    }
+                }
             }
+
             return data;
         },
 
@@ -2247,7 +2326,7 @@ var __meta__ = {
         },
 
         at: function(index) {
-            return this._data[index];
+            return this._data.at(index);
         },
 
         data: function(value) {
@@ -2269,12 +2348,28 @@ var __meta__ = {
 
                 that._process(that._data);
             } else {
+                if (that._data) {
+                    for (var idx = 0; idx < that._data.length; idx++) {
+                        that._data.at(idx);
+                    }
+                }
+
                 return that._data;
             }
         },
 
-        view: function() {
-            return this._view;
+        view: function(value) {
+            if (value === undefined) {
+                return this._view;
+            } else {
+                this._view = this._observeView(value);
+            }
+        },
+
+        _observeView: function(data) {
+            replaceWithObservable(data, this._data, this._ranges);
+
+            return new LazyObservableArray(data, this.reader.model);
         },
 
         flatView: function() {
@@ -2409,8 +2504,9 @@ var __meta__ = {
 
                     this._eachItem(this._data, function(items){
                         for (var idx = 0; idx < items.length; idx++) {
-                            if (items[idx].id === model.id) {
-                                pushed.push(items[idx]);
+                            var item = items.at(idx);
+                            if (item.id === model.id) {
+                                pushed.push(item);
                                 items.splice(idx, 1);
                                 found = true;
                                 break;
@@ -2802,8 +2898,9 @@ var __meta__ = {
             if (that.options.offlineStorage != null) {
                 that._eachItem(that._data, function(items) {
                     for (var idx = 0; idx < items.length; idx++) {
-                        if (items[idx].__state__ == "update") {
-                            items[idx].dirty = true;
+                        var item = items.at(idx);
+                        if (item.__state__ == "update") {
+                            item.dirty = true;
                         }
                     }
                 });
@@ -2827,20 +2924,25 @@ var __meta__ = {
         },
 
         _storeData: function(updatePristine) {
+            var serverGrouping = this._isServerGrouped();
+            var model = this.reader.model;
+
             function items(data) {
                 var state = [];
 
                 for (var idx = 0; idx < data.length; idx++) {
-                    var item = data[idx].toJSON();
+                    var dataItem = data.at(idx);
+                    var item = dataItem.toJSON();
 
-                    if (serverGrouping && data[idx].items) {
-                        item.items = items(data[idx].items);
+                    if (serverGrouping && dataItem.items) {
+                        item.items = items(dataItem.items);
                     } else {
-                        item.uid = data[idx].uid;
+                        item.uid = dataItem.uid;
+
                         if (model) {
-                            if (data[idx].isNew()) {
+                            if (dataItem.isNew()) {
                                 item.__state__ = "create";
-                            } else if (data[idx].dirty) {
+                            } else if (dataItem.dirty) {
                                 item.__state__ = "update";
                             }
                         }
@@ -2850,11 +2952,8 @@ var __meta__ = {
 
                 return state;
             }
+
             if (this.options.offlineStorage != null) {
-                var model = this.reader.model;
-                var serverGrouping = this._isServerGrouped();
-
-
                 var state = items(this._data);
 
                 for (var idx = 0; idx < this._destroyed.length; idx++) {
@@ -2874,7 +2973,7 @@ var __meta__ = {
         _addRange: function(data) {
             var that = this,
                 start = that._skip || 0,
-                end = start + that._flatData(data).length;
+                end = start + that._flatData(data, true).length;
 
             that._ranges.push({ start: start, end: end, data: data });
             that._ranges.sort( function(x, y) { return x.start - y.start; } );
@@ -2977,7 +3076,7 @@ var __meta__ = {
                     data.wrapAll(data, data);
                 }
             } else {
-                data = new ObservableArray(data, that.reader.model);
+                data = new LazyObservableArray(data, that.reader.model);
                 data.parent = function() { return that.parent(); };
             }
 
@@ -3075,7 +3174,7 @@ var __meta__ = {
 
             result = that._queryProcess(data, options);
 
-            that._view = result.data;
+            that.view(result.data);
 
             if (result.total !== undefined && !that.options.serverFiltering) {
                 that._total = result.total;
@@ -3154,8 +3253,8 @@ var __meta__ = {
                     }
                 }
 
-                this._view = result.data;
                 this._aggregateResult = this._calculateAggregates(this._data, options);
+                this.view(result.data);
                 this.trigger(REQUESTEND, { });
                 this.trigger(CHANGE, { items: result.data });
             }
@@ -3422,7 +3521,7 @@ var __meta__ = {
 
                     for (takeIdx = skipIdx; takeIdx < length; takeIdx++) {
                         range = ranges[takeIdx];
-                        flatData = that._flatData(range.data);
+                        flatData = that._flatData(range.data, true);
 
                         if (flatData.length && start + count >= range.start) {
                             rangeData = range.data;
@@ -3521,7 +3620,7 @@ var __meta__ = {
                 }
 
                 range.data = that._observe(temp);
-                range.end = range.start + that._flatData(range.data).length;
+                range.end = range.start + that._flatData(range.data, true).length;
                 that._ranges.sort( function(x, y) { return x.start - y.start; } );
                 that._total = that.reader.total(data);
 
@@ -3613,7 +3712,7 @@ var __meta__ = {
                 range = this._ranges[idx];
                 range.start = range.start - startOffset;
 
-                rangeLength = this._flatData(range.data).length;
+                rangeLength = this._flatData(range.data, true).length;
                 startOffset = range.end - rangeLength;
                 range.end = range.start + rangeLength;
             }
@@ -4007,7 +4106,7 @@ var __meta__ = {
                 return node;
             }
 
-            data = this._flatData(this.data());
+            data = this._flatData(this._data);
 
             if (!data) {
                 return;
