@@ -51,7 +51,7 @@
         type: "vml",
 
         draw: function(element) {
-            this._root.load([element], null);
+            this._root.load([element], undefined, null);
         },
 
         clear: function() {
@@ -76,7 +76,7 @@
             $(this.element).data("kendoNode", this);
         },
 
-        load: function(elements, transform, opacity) {
+        load: function(elements, pos, transform, opacity) {
             opacity = valueOrDefault(opacity, 1);
             if (this.srcElement) {
                 opacity *= valueOrDefault(this.srcElement.options.opacity, 1);
@@ -106,16 +106,25 @@
                 }
 
                 if (children && children.length > 0) {
-                    childNode.load(children, combinedTransform, opacity);
+                    childNode.load(children, pos, combinedTransform, opacity);
                 }
 
-                this.append(childNode);
-                childNode.attachTo(this.element);
+                if (defined(pos)) {
+                    this.insertAt(childNode, pos);
+                } else {
+                    this.append(childNode);
+                }
+
+                childNode.attachTo(this.element, pos);
             }
         },
 
-        attachTo: function(domElement) {
-            domElement.appendChild(this.element);
+        attachTo: function(domElement, pos) {
+            if (defined(pos)) {
+                domElement.insertBefore(this.element, domElement.children[pos]);
+            } else {
+                domElement.appendChild(this.element);
+            }
         },
 
         clear: function() {
@@ -306,10 +315,10 @@
             this.setStyle();
         },
 
-        attachTo: function(domElement) {
+        attachTo: function(domElement, pos) {
             this.css("display", NONE);
 
-            Node.fn.attachTo.call(this, domElement);
+            Node.fn.attachTo.call(this, domElement, pos);
 
             if (this.srcElement.options.visible !== false) {
                 this.css("display", "");
@@ -546,12 +555,12 @@
             ObserverNode.fn.init.call(this, srcElement);
         },
 
-        attachTo: function(domElement) {
+        attachTo: function(domElement, pos) {
             this.fill.attachTo(this.element);
             this.stroke.attachTo(this.element);
             this.transform.attachTo(this.element);
 
-            Node.fn.attachTo.call(this, domElement);
+            Node.fn.attachTo.call(this, domElement, pos);
         },
 
         createFillNode: function(srcElement, transform, opacity) {
@@ -646,9 +655,9 @@
             ShapeNode.fn.init.call(this, srcElement, transform, opacity);
         },
 
-        attachTo: function(domElement) {
+        attachTo: function(domElement, pos) {
             this.pathData.attachTo(this.element);
-            ShapeNode.fn.attachTo.call(this, domElement);
+            ShapeNode.fn.attachTo.call(this, domElement, pos);
         },
 
         createDataNode: function(srcElement) {
@@ -797,9 +806,9 @@
             return new TextPathDataNode(srcElement);
         },
 
-        attachTo: function(domElement) {
+        attachTo: function(domElement, pos) {
             this.path.attachTo(this.element);
-            PathNode.fn.attachTo.call(this, domElement);
+            PathNode.fn.attachTo.call(this, domElement, pos);
         },
 
         optionsChange: function(e) {

@@ -62,7 +62,7 @@
         test("draw passes null to root load method", function() {
             var group = new Group();
 
-            surface._root.load = function(elements, matrix) {
+            surface._root.load = function(elements, pos, matrix) {
                 ok(matrix === null);
             };
 
@@ -208,6 +208,14 @@
             node.load([element]);
         });
 
+        test("inserts node at position", function() {
+            node.insertAt = function(child, pos) {
+                equal(pos, 1);
+            };
+
+            node.load([element], 1);
+        });
+
         test("load appends PathNode with srcElement transformation", function() {
             var matrix = new Matrix(2,2,2,2,2,2),
                 element = createElement({ transform: matrix });
@@ -225,7 +233,7 @@
                 ok(child.transform.transform.matrix().equals(transform.matrix()));
             };
 
-            node.load([element], transform);
+            node.load([element], undefined, transform);
         });
 
         test("load appends node with combined transformation", function() {
@@ -238,7 +246,7 @@
                 compareMatrices(child.transform.transform.matrix(), combinedMatrix);
             };
 
-            node.load([element], currentMatrix);
+            node.load([element], undefined, currentMatrix);
         });
     }
 
@@ -308,7 +316,7 @@
                 group = new Group({transform: g.transform(matrix)});
 
             group.append(new Group());
-            GroupNode.fn.load = function(children, transform) {
+            GroupNode.fn.load = function(children, pos, transform) {
                 compareMatrices(transform.matrix(), matrix);
             };
             node.load([group]);
@@ -319,10 +327,10 @@
                 group = new Group();
 
             group.append(new Group());
-            GroupNode.fn.load = function(children, transform) {
+            GroupNode.fn.load = function(children, pos, transform) {
                 compareMatrices(transform.matrix(), matrix);
             };
-            node.load([group], g.transform(matrix));
+            node.load([group], undefined, g.transform(matrix));
         });
 
         test("load passes combined transformation", function() {
@@ -332,10 +340,10 @@
                 group = new Group({transform: g.transform(matrix)});
 
             group.append(new Group());
-            GroupNode.fn.load = function(children, transform) {
+            GroupNode.fn.load = function(children, pos, transform) {
                 compareMatrices(transform.matrix(), combinedMatrix);
             };
-            node.load([group], g.transform(currentMatrix));
+            node.load([group], undefined, g.transform(currentMatrix));
         });
     })();
 
@@ -380,6 +388,18 @@
             groupNode.load([new Group()]);
 
             equal(groupNode.childNodes[0].element.parentNode, groupNode.element);
+        });
+
+        test("load attaches child node at position", function() {
+            groupNode.attachTo(document.createElement("div"));
+
+            var group1 = new Group();
+            groupNode.load([group1]);
+
+            var group2 = new Group();
+            groupNode.load([group2], 0);
+
+            equal(groupNode.element.childNodes[0], group2._observers[0].element);
         });
 
         test("refreshTransform method calls childNodes refreshTransform method", function() {
