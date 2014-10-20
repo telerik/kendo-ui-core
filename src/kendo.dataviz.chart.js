@@ -5174,30 +5174,30 @@ var __meta__ = {
                 prevMarkerBoxCenter = prevPoint.markerBox().center();
                 markerBoxCenter = point.markerBox().center();
                 if (categoryAxis.options.justified) {
-                    result.push(Point2D(prevMarkerBoxCenter.x, prevMarkerBoxCenter.y));
+                    result.push(new geom.Point(prevMarkerBoxCenter.x, prevMarkerBoxCenter.y));
                     if (vertical) {
-                        result.push(Point2D(prevMarkerBoxCenter.x, markerBoxCenter.y));
+                        result.push(new geom.Point(prevMarkerBoxCenter.x, markerBoxCenter.y));
                     } else {
-                        result.push(Point2D(markerBoxCenter.x, prevMarkerBoxCenter.y));
+                        result.push(new geom.Point(markerBoxCenter.x, prevMarkerBoxCenter.y));
                     }
-                    result.push(Point2D(markerBoxCenter.x, markerBoxCenter.y));
+                    result.push(new geom.Point(markerBoxCenter.x, markerBoxCenter.y));
                 } else {
                     if (vertical) {
-                        result.push(Point2D(prevMarkerBoxCenter.x, prevPoint.box[Y + dir]));
-                        result.push(Point2D(prevMarkerBoxCenter.x, prevPoint.box[Y + revDir]));
+                        result.push(new geom.Point(prevMarkerBoxCenter.x, prevPoint.box[Y + dir]));
+                        result.push(new geom.Point(prevMarkerBoxCenter.x, prevPoint.box[Y + revDir]));
                         if (isInterpolate) {
-                            result.push(Point2D(prevMarkerBoxCenter.x, point.box[Y + dir]));
+                            result.push(new geom.Point(prevMarkerBoxCenter.x, point.box[Y + dir]));
                         }
-                        result.push(Point2D(markerBoxCenter.x, point.box[Y + dir]));
-                        result.push(Point2D(markerBoxCenter.x, point.box[Y + revDir]));
+                        result.push(new geom.Point(markerBoxCenter.x, point.box[Y + dir]));
+                        result.push(new geom.Point(markerBoxCenter.x, point.box[Y + revDir]));
                     } else {
-                        result.push(Point2D(prevPoint.box[X + dir], prevMarkerBoxCenter.y));
-                        result.push(Point2D(prevPoint.box[X + revDir], prevMarkerBoxCenter.y));
+                        result.push(new geom.Point(prevPoint.box[X + dir], prevMarkerBoxCenter.y));
+                        result.push(new geom.Point(prevPoint.box[X + revDir], prevMarkerBoxCenter.y));
                         if (isInterpolate) {
-                            result.push(Point2D(point.box[X + dir], prevMarkerBoxCenter.y));
+                            result.push(new geom.Point(point.box[X + dir], prevMarkerBoxCenter.y));
                         }
-                        result.push(Point2D(point.box[X + dir], markerBoxCenter.y));
-                        result.push(Point2D(point.box[X + revDir], markerBoxCenter.y));
+                        result.push(new geom.Point(point.box[X + dir], markerBoxCenter.y));
+                        result.push(new geom.Point(point.box[X + revDir], markerBoxCenter.y));
                     }
                 }
             }
@@ -5506,52 +5506,6 @@ var __meta__ = {
 
                 this.visual.append(stroke);
             }
-        },
-
-        getViewElements: function(view) {
-            var segment = this,
-                series = segment.series,
-                defaults = series._defaults,
-                color = series.color,
-                lineOptions,
-                curvePoints = segment.points(),
-                areaPoints = segment.areaPoints(curvePoints),
-                viewElements = [];
-
-            ChartElement.fn.getViewElements.call(segment, view);
-
-            if (isFn(color) && defaults) {
-                color = defaults.color;
-            }
-
-            lineOptions = deepExtend({
-                    color: color,
-                    opacity: series.opacity
-                }, series.line
-            );
-
-           viewElements.push(view.createCubicCurve(curvePoints,{
-                    id: segment.id,
-                    fillOpacity: series.opacity,
-                    fill: color,
-                    stack: series.stack,
-                    data: { modelId: segment.modelId },
-                    zIndex: -1
-                }, areaPoints));
-
-            if (lineOptions.width > 0) {
-                viewElements.push(view.createCubicCurve(segment.curvePoints, {
-                    stroke: lineOptions.color,
-                    strokeWidth: lineOptions.width,
-                    strokeOpacity: lineOptions.opacity,
-                    dashType: lineOptions.dashType,
-                    data: { modelId: segment.modelId },
-                    strokeLineCap: "butt",
-                    zIndex: -1
-                }));
-            }
-
-            return viewElements;
         }
     });
 
