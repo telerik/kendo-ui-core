@@ -79,7 +79,7 @@
     // Exports ================================================================
     deepExtend(kendo, {
         mixins: {
-            ObserversMixin: ObserversMixin,
+            ObserversMixin: ObserversMixin
         }
     });
 
