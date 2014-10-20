@@ -671,12 +671,40 @@
         ok(!setting.validate({ defaultHierarchy: "bar" }));
     });
 
-    test("field menu is initialized", function() {
+    test("field menu is initialized if filterable", function() {
         var setting  = new PivotSettingTarget($(div), {
             filterable: true
         });
 
         ok(setting.fieldMenu instanceof kendo.ui.PivotFieldMenu);
+        ok(setting.fieldMenu.options.filterable);
+    });
+
+    test("field menu is initialized if sortable", function() {
+        var setting  = new PivotSettingTarget($(div), {
+            sortable: true
+        });
+
+        ok(setting.fieldMenu instanceof kendo.ui.PivotFieldMenu);
+        ok(setting.fieldMenu.options.sortable);
+    });
+
+    test("setting target passes filterable option to fieldMenu", function() {
+        var setting  = new PivotSettingTarget($(div), {
+            sortable: true,
+            filterable: false
+        });
+
+        equal(setting.fieldMenu.options.filterable, false);
+    });
+
+    test("setting target passes sortable option to fieldMenu", function() {
+        var setting  = new PivotSettingTarget($(div), {
+            sortable: false,
+            filterable: true
+        });
+
+        equal(setting.fieldMenu.options.sortable, false);
     });
 
     test("setDataSource changes the dataSource instance", function() {

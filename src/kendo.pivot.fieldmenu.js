@@ -174,6 +174,7 @@ var __meta__ = {
             });
 
             this.dataSource.sort(expressions);
+            this.menu.close();
         },
 
         setDataSource: function(dataSource) {
@@ -317,7 +318,10 @@ var __meta__ = {
             var expression;
 
             this.currentMember = $(e.event.target).closest("[" + attr + "]").attr(attr);
-            this._setFilterForm(findFilters(this.dataSource.filter(), this.currentMember)[0]);
+
+            if (this.options.filterable) {
+                this._setFilterForm(findFilters(this.dataSource.filter(), this.currentMember)[0]);
+            }
         },
 
         _select: function(e) {
@@ -464,6 +468,9 @@ var __meta__ = {
                                 '${messages.sortDescending}'+
                             '</span>'+
                         '</li>'+
+                            '# if (filterable) {#'+
+                            '<li class="k-separator"></li>'+
+                            '# } #'+
                         '# } #'+
                         '# if (filterable) {#'+
                         '<li class="k-item k-include-item">'+

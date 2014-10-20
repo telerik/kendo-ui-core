@@ -2597,10 +2597,12 @@ var __meta__ = {
                 }
             });
 
-            if (options.filterable) {
+            if (options.filterable || options.sortable) {
                 that.fieldMenu = new ui.PivotFieldMenu(that.element, {
                     messages: that.options.messages.fieldMenu,
-                    filter: ".k-setting-filter",
+                    filter: ".k-setting-fieldmenu",
+                    filterable: options.filterable,
+                    sortable: options.sortable,
                     dataSource: that.dataSource
                 });
             }
@@ -3022,16 +3024,17 @@ var __meta__ = {
 
         _createSettingTarget: function(element, options) {
             var template = '<span tabindex="0" class="k-button" data-' + kendo.ns + 'name="${data.name || data}">${data.name || data}';
+            var sortable = options.sortable;
             var icons = "";
 
-            if (options.sortable) {
+            if (sortable) {
                 icons += '#if (data.sortIcon) {#';
                 icons += '<span class="k-icon ${data.sortIcon} k-setting-sort"></span>';
                 icons += '#}#';
             }
 
-            if (options.filterable) {
-                icons += '<span class="k-icon k-filter k-setting-filter"></span>';
+            if (options.filterable || sortable) {
+                icons += '<span class="k-icon k-i-arrowhead-s k-setting-fieldmenu"></span>';
             }
             if (this.options.reorderable) {
                 icons += '<span class="k-icon k-si-close k-setting-delete"></span>';

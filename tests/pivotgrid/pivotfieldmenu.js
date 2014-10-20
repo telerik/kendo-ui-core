@@ -868,6 +868,20 @@
         equal(sort[0].dir, "desc");
     });
 
+    test("sort button closes the menu", 1, function() {
+        var dataSource = createDataSource();
+        var fieldmenu = createMenu({ dataSource: dataSource });
+        var sortAscItem = fieldmenu.menu.element.find(".k-sort-desc");
+
+        fieldmenu.menu.open();
+
+        fieldmenu.menu.bind("close", function() {
+            ok(true);
+        });
+
+        sortAscItem.click();
+    });
+
     test("sort button removes only current sort expression", function() {
         var dataSource = createDataSource();
         var fieldmenu = createMenu({ dataSource: dataSource });
