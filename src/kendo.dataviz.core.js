@@ -770,7 +770,9 @@ var __meta__ = {
         },
 
         createVisual: function() {
-            this.visual = new dataviz.drawing.Group();
+            this.visual = new dataviz.drawing.Group({
+                zIndex: this.options.zIndex
+            });
         },
 
         createAnimation: function() {
@@ -784,13 +786,37 @@ var __meta__ = {
         },
 
         appendVisual: function(childVisual) {
-            if (this.visual) {
+            if (childVisual.options.zIndex) {
+                this.stackRoot().stackVisual(childVisual);
+            } else if (this.visual) {
                 this.visual.append(childVisual);
             } else {
                 // Allow chart elements without visuals to
                 // pass through child visuals
                 this.parent.appendVisual(childVisual);
             }
+        },
+
+        stackRoot: function() {
+            if (this.parent) {
+                return this.parent.stackRoot();
+            }
+
+            return this;
+        },
+
+        stackVisual: function(childVisual) {
+            var zIndex = childVisual.options.zIndex || 0;
+            var visuals = this.visual.children;
+            for (var pos = 0; pos < visuals.length; pos++) {
+                var sibling = visuals[pos];
+                var here = valueOrDefault(sibling.options.zIndex, 0);
+                if (here > zIndex) {
+                    break;
+                }
+            }
+
+            this.visual.insertAt(childVisual, pos);
         },
 
         traverse: function(callback) {
@@ -1391,11 +1417,9 @@ var __meta__ = {
             }
 
             this.visual = new dataviz.drawing.Group({
-                transform: this.rotationTransform()
+                transform: this.rotationTransform(),
+                zIndex: options.zIndex
             });
-
-            // TODO Z-INDEX
-            //var zIndex = boxOptions.zIndex;
 
             if (this.hasBox()) {
                 var box = draw.Path.fromRect(this.paddingBox.toRect(), this.visualStyle());
@@ -1672,8 +1696,8 @@ var __meta__ = {
                 options = axis.options,
                 align = options.vertical ? RIGHT : CENTER,
                 labelOptions = deepExtend({ }, options.labels, {
-                    align: align, zIndex: options.zIndex,
-                    modelId: axis.modelId
+                    align: align,
+                    zIndex: options.zIndex
                 }),
                 step = labelOptions.step;
 
@@ -2167,23 +2191,21 @@ var __meta__ = {
 
         options: {
             icon: {
-                zIndex: 1,
                 visible: true,
                 type: CIRCLE
             },
             label: {
-                zIndex: 2,
                 position: INSIDE,
                 visible: true,
                 align: CENTER,
                 vAlign: CENTER
             },
             line: {
-                visible: true,
-                zIndex: 2
+                visible: true
             },
             visible: true,
-            position: TOP
+            position: TOP,
+            zIndex: 2
         },
 
         hide: function() {

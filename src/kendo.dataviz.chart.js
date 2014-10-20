@@ -4593,7 +4593,8 @@ var __meta__ = {
                 markers: {
                     border: {}
                 }
-            }
+            },
+            zIndex: 2
         },
 
         render: function() {
@@ -7946,6 +7947,10 @@ var __meta__ = {
             }
         },
 
+        stackRoot: function() {
+            return this;
+        },
+
         createGridLines: function() {
             var pane = this,
                 axes = pane.axes,
@@ -8027,6 +8032,12 @@ var __meta__ = {
             }
 
             return clipBox;
+        },
+
+        createVisual: function() {
+            this.visual = new draw.Group({
+                zIndex: 0
+            });
         },
 
         getViewElements: function (view) {
