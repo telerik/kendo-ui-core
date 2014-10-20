@@ -1530,7 +1530,7 @@
                 connections: []
             },
 
-            events: [ZOOM_END, ZOOM_START, PAN, SELECT, ITEMROTATE, ITEMBOUNDSCHANGE, CHANGE, CLICK],
+            events: [ZOOM_END, ZOOM_START, PAN, SELECT, ITEMROTATE, ITEMBOUNDSCHANGE, CHANGE, CLICK, "toolBarClick"],
 
             edit: function(item) {
                 this.cancelEdit();
@@ -3407,14 +3407,11 @@
             init: function(diagram, options) {
                 this.diagram = diagram;
                 this.options = deepExtend({}, this.options, options);
-                this.toolBarActions = new ToolBarActions(diagram);
                 this.createToolBar();
                 this.createTools(this.options.tools);
 
                 this.createPopup();
             },
-
-            options: { },
 
             createPopup: function() {
                 this.container = $("<div></div>").append(this.element);
@@ -3468,7 +3465,7 @@
                     type: "button",
                     showText: "overflow",
                     text: "Edit",
-                    id: "edit"
+                    attributes: this._getAttribute("edit")
                 });
             },
 
@@ -3478,7 +3475,7 @@
                     showText: "overflow",
                     type: "button",
                     text: "delete",
-                    id: "delete"
+                    attributes: this._getAttribute("delete")
                 });
             },
 
@@ -3486,30 +3483,49 @@
                 this._toolBar.add({
                     type: "buttonGroup",
                     buttons: [
-                        { spriteCssClass: "k-icon k-i-seek-w", id: "rotateAnticlockwise", showText: "overflow", text: "rotateAnticlockwise", group: "rotate" },
-                        { spriteCssClass: "k-icon k-i-seek-e", id: "rotateClockwise", showText: "overflow", text: "rotateClockwise", group: "rotate" }
+                        { spriteCssClass: "k-icon k-i-seek-w", attributes: this._getAttribute("rotateAnticlockwise"), showText: "overflow", text: "rotateAnticlockwise", group: "rotate" },
+                        { spriteCssClass: "k-icon k-i-seek-e", attributes: this._getAttribute("rotateClockwise"), showText: "overflow", text: "rotateClockwise", group: "rotate" }
                     ]
                 });
             },
 
-            click: function(e) {
-                this.toolBarActions[e.id]();
+            _getAttribute: function(action) {
+                var result = {};
+
+                result[kendo.attr("action")] = action;
+
+                return result;
             },
 
-            destroy: function() {
-                this.diagram = null;
-                this.element = null;
-                this.options = null;
+            _getActionFromElement: function(element) {
+                return element.attr(kendo.attr("action"));
+            },
 
-                this._toolBar.destroy();
-                this._popup.destroy();
-                this.toolBarActions.destroy();
-            }
-        });
+            click: function(e) {
+                var action = this._getActionFromElement($(e.target));
 
-        var ToolBarActions = Class.extend({
-            init: function(diagram) {
-                this.diagram = diagram;
+                if (this[action]) {
+                    this[action]();
+                }
+
+                this.diagram.trigger("toolBarClick", this.eventData(action));
+            },
+
+            eventData: function(action) {
+                var element = this.selectedElement(),
+                    shapes = [], connections = [];
+
+                if (element instanceof Shape) {
+                    shapes.push(element);
+                } else {
+                    connections.push(element);
+                }
+
+                return {
+                    shapes: shapes,
+                    connections: connections,
+                    action: action
+                }
             },
 
             "delete": function() {
@@ -3540,6 +3556,11 @@
 
             destroy: function() {
                 this.diagram = null;
+                this.element = null;
+                this.options = null;
+
+                this._toolBar.destroy();
+                this._popup.destroy();
             }
         });
 

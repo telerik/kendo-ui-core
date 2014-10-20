@@ -876,41 +876,41 @@
                 if ((meta.ctrlKey || meta.metaKey) && !meta.altKey) {// ctrl or option
                     if (testKey(key, "a")) {// A: select all
                         diagram.selectAll();
-                        diagram.destroyToolBar();
+                        diagram._destroyToolBar();
                         return true;
                     } else if (testKey(key, "z")) {// Z: undo
                         diagram.undo();
-                        diagram.destroyToolBar();
+                        diagram._destroyToolBar();
                         return true;
                     } else if (testKey(key, "y")) {// y: redo
                         diagram.redo();
-                        diagram.destroyToolBar();
+                        diagram._destroyToolBar();
                         return true;
                     } else if (testKey(key, "c")) {
                         diagram.copy();
-                        diagram.destroyToolBar();
+                        diagram._destroyToolBar();
                     } else if (testKey(key, "x")) {
                         diagram.cut();
-                        diagram.destroyToolBar();
+                        diagram._destroyToolBar();
                     } else if (testKey(key, "v")) {
                         diagram.paste();
-                        diagram.destroyToolBar();
+                        diagram._destroyToolBar();
                     } else if (testKey(key, "l")) {
                         diagram.layout();
-                        diagram.destroyToolBar();
+                        diagram._destroyToolBar();
                     } else if (testKey(key, "d")) {
-                        diagram.destroyToolBar();
+                        diagram._destroyToolBar();
                         diagram.copy();
                         diagram.paste();
                     }
                 } else if (key === 46 || key === 8) {// del: deletion
                     diagram.remove(diagram.select(), true);
-                    diagram.destroyToolBar();
+                    diagram._destroyToolBar();
                     return true;
                 } else if (key === 27) {// ESC: stop any action
                     this._discardNewConnection();
                     diagram.deselect();
-                    diagram.destroyToolBar();
+                    diagram._destroyToolBar();
                     return true;
                 }
 
