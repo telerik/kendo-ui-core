@@ -1,17 +1,17 @@
 <div id="example">
         <div class="demo-section k-header">
-            <div id="treelist" style="height: 400px;"></div>
+            <div id="treelist"></div>
         </div>
 
         <script>
             $(document).ready(function() {
-                var service = "http://demos.telerik.com/kendo-ui/service/Northwind.svc";
+                var service = "http://demos.telerik.com/kendo-ui/service";
 
                 $("#treelist").kendoTreeList({
                     dataSource: {
                         transport: {
                             read: {
-                                url: crudServiceBaseUrl + "/EmployeeDirectory/All",
+                                url: service + "/EmployeeDirectory/All",
                                 dataType: "jsonp"
                             }
                         },
@@ -26,6 +26,7 @@
                             }
                         }
                     },
+                    height: 400,
                     filterable: true,
                     columns: [
                         { field: "FirstName", title: "First Name", width: 250 },

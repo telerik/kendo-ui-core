@@ -1,5 +1,5 @@
         <div id="example">
-            <div id="treelist" style="height: 400px;"></div>
+            <div id="treelist"></div>
 
             <script>
                 $(document).ready(function () {
@@ -60,6 +60,7 @@
 
                     $("#treelist").kendoTreeList({
                         dataSource: dataSource,
+                        height: 400,
                         columns: [
                             { field: "Name", width: 350 },
                             { field: "Position" }
