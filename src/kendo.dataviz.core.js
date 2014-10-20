@@ -786,7 +786,9 @@ var __meta__ = {
         },
 
         appendVisual: function(childVisual) {
-            if (childVisual.options.zIndex) {
+            if (childVisual.options.noclip) {
+                this.getRoot().visual.append(childVisual);
+            } else if (childVisual.options.zIndex) {
                 this.stackRoot().stackVisual(childVisual);
             } else if (this.visual) {
                 this.visual.append(childVisual);
@@ -1418,7 +1420,8 @@ var __meta__ = {
 
             this.visual = new dataviz.drawing.Group({
                 transform: this.rotationTransform(),
-                zIndex: options.zIndex
+                zIndex: options.zIndex,
+                noclip: options.noclip
             });
 
             if (this.hasBox()) {

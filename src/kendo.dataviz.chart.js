@@ -1561,7 +1561,8 @@ var __meta__ = {
             var barLabel = this;
             ChartElement.fn.init.call(barLabel, options);
 
-            barLabel.append(new TextBox(content, barLabel.options));
+            this.textBox = new TextBox(content, barLabel.options);
+            barLabel.append(this.textBox);
         },
 
         options: {
@@ -1581,6 +1582,11 @@ var __meta__ = {
                 delay: INITIAL_ANIMATION_DURATION
             },
             zIndex: 2
+        },
+
+        createVisual: function() {
+            this.textBox.options.noclip = this.options.noclip;
+            ChartElement.fn.createVisual.call(this);
         },
 
         reflow: function(targetBox) {
@@ -8040,9 +8046,13 @@ var __meta__ = {
             });
 
             if (this.shouldClip()) {
-                var clipRect = this._clipBox().toRect();
+                var clipBox = this.clipBox = this._clipBox();
+
+                var clipRect = clipBox.toRect();
                 var clipPath = draw.Path.fromRect(clipRect);
                 this.visual.clip(clipPath);
+
+                this.unclipLabels();
             }
         },
 
@@ -8079,10 +8089,9 @@ var __meta__ = {
             return result;
         },
 
-        labelViewElements: function(view) {
+        unclipLabels: function() {
             var container = this,
                 charts = container.children,
-                elements = [],
                 clipBox = container.clipBox,
                 points, point,
                 i, j, length;
@@ -8092,20 +8101,16 @@ var __meta__ = {
 
                 for (j = 0; j < length; j++) {
                     point = points[j];
-                    if (point && point.label && point.label.options.visible) {
+                    if (point && point.label) {
                         if (point.box.overlaps(clipBox)) {
                             if (point.label.alignToClipBox) {
                                 point.label.alignToClipBox(clipBox);
                             }
-                            point.label.modelId = point.modelId;
-                            append(elements, point.label.getViewElements(view));
+                            point.label.options.noclip = true;
                         }
-                        point.label.options.visible = false;
                     }
                 }
             }
-
-            return elements;
         },
 
         destroy: function() {
