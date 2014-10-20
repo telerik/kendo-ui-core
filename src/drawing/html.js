@@ -358,6 +358,7 @@
         var backgroundRepeat = getPropertyValue(style, "background-repeat");
         var backgroundPosition = getPropertyValue(style, "background-position");
         var backgroundOrigin = getPropertyValue(style, "background-origin");
+        var backgroundSize = getPropertyValue(style, "background-size");
 
         if (element.currentStyle) {
             // IE9 hacks.  getPropertyValue won't return the correct
@@ -603,7 +604,9 @@
                 return;
             }
 
-            var pos = backgroundPosition.split(/\s+/g);
+            var img_width = img.width;
+            var img_height = img.height;
+            var aspect_ratio = img_width / img_height;
 
             // for background-origin: border-box the box is already appropriate
             var orgBox = box;
@@ -614,20 +617,40 @@
                 orgBox = innerBox(orgBox, "border-*-width", element);
             }
 
+            if (backgroundSize != "auto") {
+                var size = backgroundSize.split(/\s+/g);
+                var single = size.length == 1 || size[1] == "auto";
+                // compute width
+                if (/%$/.test(size[0])) {
+                    img_width = orgBox.width * parseFloat(size[0]) / 100;
+                } else {
+                    img_width = parseFloat(size[0]);
+                }
+                // compute height
+                if (single) {
+                    img_height = img_width / aspect_ratio;
+                } else if (/%$/.test(size[1])) {
+                    img_height = orgBox.height * parseFloat(size[1]) / 100;
+                } else {
+                    img_height = parseFloat(size[1]);
+                }
+            }
+
+            var pos = backgroundPosition.split(/\s+/g);
             pos = { x: pos[0], y: pos[1] };
 
             if (/%$/.test(pos.x)) {
-                pos.x = parseFloat(pos.x) / 100 * (orgBox.width - img.width);
+                pos.x = parseFloat(pos.x) / 100 * (orgBox.width - img_width);
             } else {
                 pos.x = parseFloat(pos.x);
             }
             if (/%$/.test(pos.y)) {
-                pos.y = parseFloat(pos.y) / 100 * (orgBox.height - img.height);
+                pos.y = parseFloat(pos.y) / 100 * (orgBox.height - img_height);
             } else {
                 pos.y = parseFloat(pos.y);
             }
 
-            var rect = new geo.Rect([ orgBox.left + pos.x, orgBox.top + pos.y ], [ img.width, img.height ]);
+            var rect = new geo.Rect([ orgBox.left + pos.x, orgBox.top + pos.y ], [ img_width, img_height ]);
 
             // XXX: background-repeat could be implemented more
             //      efficiently as a fill pattern (at least for PDF
@@ -635,20 +658,20 @@
 
             function rewX() {
                 while (rect.origin.x > box.left) {
-                    rect.origin.x -= img.width;
+                    rect.origin.x -= img_width;
                 }
             }
 
             function rewY() {
                 while (rect.origin.y > box.top) {
-                    rect.origin.y -= img.height;
+                    rect.origin.y -= img_height;
                 }
             }
 
             function repeatX() {
                 while (rect.origin.x < box.right) {
                     group.append(new drawing.Image(url, rect.clone()));
-                    rect.origin.x += img.width;
+                    rect.origin.x += img_width;
                 }
             }
 
@@ -663,7 +686,7 @@
                 rewY();
                 while (rect.origin.y < box.bottom) {
                     group.append(new drawing.Image(url, rect.clone()));
-                    rect.origin.y += img.height;
+                    rect.origin.y += img_height;
                 }
             }
             else if (backgroundRepeat == "repeat") {
@@ -673,7 +696,7 @@
                 while (rect.origin.y < box.bottom) {
                     rect.origin.x = origin.x;
                     repeatX();
-                    rect.origin.y += img.height;
+                    rect.origin.y += img_height;
                 }
             }
         }
