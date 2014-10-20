@@ -1041,15 +1041,6 @@ var __meta__ = {
                         listView.trigger(ITEM_CHANGE, { item: items.eq(i), data: dataItems[i], ns: ui });
                     }
                 }
-
-                listView.angular("compile", function(){
-                    return {
-                        elements: items,
-                        data: dataItems.map(function(data){
-                            return { dataItem: data };
-                        })
-                    };
-                });
             });
         },
 
@@ -1116,6 +1107,16 @@ var __meta__ = {
 
         _renderItems: function(dataItems, callback) {
             var items = $(kendo.render(this.template, dataItems));
+
+            this.angular("compile", function(){
+                return {
+                    elements: items,
+                    data: dataItems.map(function(data){
+                        return { dataItem: data };
+                    })
+                };
+            });
+
             callback(items);
             mobile.init(items);
             this._enhanceItems(items);
