@@ -85,6 +85,21 @@
         equal(header.find("tr.k-filter-row").length, 1);
     });
 
+    test("filtercell tr is append to locked header for multiline column when filtercell is enabled", function() {
+        var grid = setup({
+            scrollable: true,
+            filterable: {
+                mode: "row"
+            },
+            columns: ["bar", { columns: [{ field: "foo"}, {field: "moo"}], locked: true }, "baz"]
+        });
+
+        var header = grid.lockedHeader;
+        equal(header.find("tr").length, 3);
+        equal(header.find("tr.k-filter-row").length, 1);
+        equal(header.find("tr.k-filter-row th").length, 2);
+    });
+
     test("th elements are added to the locked header table", function() {
         var grid = setup({
             columns: [{ field: "foo", locked: true }, "bar", "baz"]
@@ -1284,4 +1299,229 @@
 
         ok(!wasCalled);
     });
+
+    test("tr elements are created in locked table for multi header locked columns", function() {
+        var grid = setup({
+            columns: [
+                { title: "master" },
+                { title: "master1", locked: true, columns: [{ title: "master1-child" }, { title: "master1-child1" }] },
+                { title: "master2", columns: [{ title: "master2-child" }, { title: "master2-child1" }] }
+            ]
+        });
+
+        equal(grid.lockedHeader.find("tr").length, 2);
+        equal(grid.thead.find("tr").length, 2);
+    });
+
+    test("tr elements are created in locked table for multi header locked columns with row filter", function() {
+        var grid = setup({
+            filterable: {
+                mode: "row"
+            },
+            columns: [
+                { title: "master" },
+                { title: "master1", locked: true, columns: [{ title: "master1-child" }, { title: "master1-child1" }] },
+                { title: "master2", columns: [{ title: "master2-child" }, { title: "master2-child1" }] }
+            ]
+        });
+
+        equal(grid.lockedHeader.find("tr").length, 3);
+        equal(grid.thead.find("tr").length, 3);
+    });
+
+    test("th elements are created in locked table for multi header locked columns", function() {
+        var grid = setup({
+            columns: [
+                { title: "master" },
+                { title: "master1", locked: true, columns: [{ title: "master1-child" }, { title: "master1-child1" }] },
+                { title: "master2", columns: [{ title: "master2-child" }, { title: "master2-child1" }] }
+            ]
+        });
+
+        equal(grid.lockedHeader.find("tr:first th").length, 1);
+        equal(grid.lockedHeader.find("tr:last th").length, 2);
+
+        equal(grid.thead.find("tr:first th").length, 2);
+        equal(grid.thead.find("tr:last th").length, 2);
+    });
+
+    test("th elements are created in locked table for multi header locked columns - two locked columns", function() {
+        var grid = setup({
+            columns: [
+                { title: "master", locked: true },
+                { title: "master1", locked: true, columns: [{ title: "master1-child" }, { title: "master1-child1" }] },
+                { title: "master2", columns: [{ title: "master2-child" }, { title: "master2-child1" }] }
+            ]
+        });
+
+        equal(grid.lockedHeader.find("tr").length, 2);
+
+        equal(grid.lockedHeader.find("tr:first th").length, 2);
+        equal(grid.lockedHeader.find("tr:last th").length, 2);
+
+        equal(grid.thead.find("tr:first th").length, 1);
+        equal(grid.thead.find("tr:last th").length, 2);
+    });
+
+    test("th elements in locked table with multiple headers and grouping", function() {
+        var grid = setup({
+            columns: [
+                { title: "master" },
+                { title: "master1", locked: true, columns: [{ title: "master1-child" }, { title: "master1-child1" }] },
+                { title: "master2", columns: [{ title: "master2-child" }, { title: "master2-child1" }] }
+            ]
+        });
+
+        grid.dataSource.group({ field: "foo" });
+
+        equal(grid.lockedHeader.find("tr:first th").length, 2);
+        ok(grid.lockedHeader.find("tr:first th:first").hasClass("k-group-cell"));
+        equal(grid.lockedHeader.find("tr:last th").length, 3);
+        ok(grid.lockedHeader.find("tr:last th:first").hasClass("k-group-cell"));
+
+        equal(grid.thead.find("tr:first th").length, 2);
+        equal(grid.thead.find("tr:last th").length, 2);
+    });
+
+    test("col elements are move to the locked container with muliple headers", function() {
+        var grid = setup({
+            columns: [
+                { title: "master" },
+                { title: "master1", locked: true, columns: [{ title: "master1-child" }, { title: "master1-child1" }] },
+                { title: "master2", columns: [{ title: "master2-child" }, { title: "master2-child1" }] }
+            ]
+        });
+
+        equal(grid.lockedHeader.find("col").length, 2);
+        equal(grid.thead.parent().find("col").length, 3);
+    });
+
+    test("col elements are move to the locked container with multiple headers and grouping", function() {
+        var grid = setup({
+            columns: [
+                { title: "master" },
+                { title: "master1", locked: true, columns: [{ title: "master1-child" }, { title: "master1-child1" }] },
+                { title: "master2", columns: [{ title: "master2-child" }, { title: "master2-child1" }] }
+            ]
+        });
+
+        grid.dataSource.group({ field: "foo" });
+
+        equal(grid.lockedHeader.find("col").length, 3, "locked container");
+        equal(grid.thead.parent().find("col").length, 3, "non locked container");
+    });
+
+    test("empty rows are removed when multiple header column is locked", function() {
+        var grid = setup({
+            columns: [
+                { title: "master" },
+                { title: "master1", locked: true, columns: [{ title: "master1-child" }, { title: "master1-child1" }] }
+            ]
+        });
+
+        equal(grid.lockedHeader.find("tr").length, 2);
+        equal(grid.thead.find("tr").length, 1);
+    });
+
+    test("rowspan is recalculated when empty rows are removed - multiple header column is locked", function() {
+        var grid = setup({
+            columns: [
+                { title: "master" },
+                { title: "master1", locked: true, columns: [{ title: "master1-child" }, { title: "master1-child1" }] }
+            ]
+        });
+
+        equal(grid.thead.find("tr th")[0].rowSpan, 1);
+    });
+
+    test("rowspan is recalculated when empty rows are removed - two level non locked column", function() {
+        var grid = setup({
+            columns: [
+                { title: "master", columns: [{ title: "master1-child" }] },
+                { title: "master1", locked: true, columns: [{ title: "master1-child", columns: [ "foo" ] }, { title: "master1-child1" }] }
+            ]
+        });
+
+        equal(grid.thead.find("tr:first th")[0].rowSpan, 1);
+        equal(grid.thead.find("tr:last th")[0].rowSpan, 1);
+    });
+
+    test("footer col elements are move to the locked container with multiple headers", function() {
+        var grid = setup({
+            autoBind: false,
+            columns: [
+                { title: "master" },
+                { title: "master1", locked: true, columns: [{ title: "master1-child", footerTemplate: "foo" }, { title: "master1-child1" }] },
+                { title: "master2", columns: [{ title: "master2-child" }, { title: "master2-child1" }] }
+            ]
+        });
+
+        equal(grid.lockedFooter.find("col").length, 2);
+        equal(grid.lockedFooter.find("td").length, 2);
+        equal(grid.footer.find("table:last td").length, 3);
+        equal(grid.footer.find("table:last col").length, 3);
+    });
+
+    test("group row in locked content has correct colspan - with multiline headers", function() {
+        var grid = setup({
+            dataSource: {
+                group: "foo"
+            },
+            columns: [
+                { title: "master" },
+                { title: "master1", locked: true, columns: [{ title: "master1-child", footerTemplate: "foo" }, { title: "master1-child1" }] },
+                { title: "master2", columns: [{ title: "master2-child" }, { title: "master2-child1" }] }
+            ]
+        });
+
+        equal(grid.lockedTable.find(".k-grouping-row > td:first").attr("colspan"), 3); // groupcell + two locked column
+    });
+
+    test("group row in non locked content has correct colspan - with multiline headers", function() {
+        var grid = setup({
+            dataSource: {
+                group: "foo"
+            },
+            columns: [
+                { title: "master" },
+                { title: "master1", locked: true, columns: [{ title: "master1-child", footerTemplate: "foo" }, { title: "master1-child1" }] },
+                { title: "master2", columns: [{ title: "master2-child" }, { title: "master2-child1" }] }
+            ]
+        });
+
+        equal(grid.table.find(".k-grouping-row > td:first").attr("colspan"), 3); // three non locked columns
+    });
+
+    test("group row in non locked content has correct colspan with multiple groups - with multiline headers", function() {
+        var grid = setup({
+            dataSource: {
+                group: [ {field: "foo" }, { field: "bar" }]
+            },
+            columns: [
+                { title: "master" },
+                { title: "master1", locked: true, columns: [{ title: "master1-child", footerTemplate: "foo" }, { title: "master1-child1" }] },
+                { title: "master2", columns: [{ title: "master2-child" }, { title: "master2-child1" }] }
+            ]
+        });
+
+        equal(grid.table.find(".k-grouping-row:first > td:first").attr("colspan"), 3); // two non locked columns
+        equal(grid.table.find(".k-grouping-row:eq(1) > td:first").attr("colspan"), 3); // two non locked columns
+    });
+
+    test("group row in locked content has correct colspan with multiple groups - with multiline headers", function() {
+        var grid = setup({
+            dataSource: {
+                group: [ {field: "foo" }, { field: "bar" }]
+            },
+            columns: [
+                { title: "master" },
+                { title: "master1", locked: true, columns: [{ title: "master1-child", footerTemplate: "foo" }, { title: "master1-child1" }] },
+                { title: "master2", columns: [{ title: "master2-child" }, { title: "master2-child1" }] }
+            ]
+        });
+
+        equal(grid.lockedTable.find(".k-grouping-row:first > td:first").attr("colspan"), 4); // two groupcells + locked column
+        equal(grid.lockedTable.find(".k-grouping-row:eq(1) > td:eq(1)").attr("colspan"), 3); // single groupcell + locked column
+    });
+
 })();

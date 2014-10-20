@@ -221,9 +221,9 @@
                         }
                     ]
                 }),
-                hideColumn: function(index) {
+                hideColumn: function(column) {
                     ok(true);
-                    equal(index, 0);
+                    equal(column, menu.owner.columns[0]);
                 }
             }
         });
@@ -401,12 +401,12 @@
     });
 
     test("hiding column after reorder", function() {
-        var colIndex;
+        var col;
         var menu = setup({
             owner: {
                 columns: [{ field: "foo", hidden: false }, { field: "bar", hidden: false }],
                 hideColumn: function() {
-                    colIndex = arguments[0];
+                    col = arguments[0];
                 }
             }
         });
@@ -418,7 +418,7 @@
 
         menu.wrapper.find("[type=checkbox]:first").click();
 
-        strictEqual(colIndex, 1);
+        equal(col, owner.columns[1]);
     });
 
     test("hiding column by title after reorder", function() {
@@ -439,7 +439,7 @@
 
         menu.wrapper.find("[type=checkbox]:last").click();
 
-        strictEqual(colIndex, 0);
+        equal(colIndex, owner.columns[0]);
     });
 
     test("on open menu element is focused", function() {

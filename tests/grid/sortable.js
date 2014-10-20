@@ -51,7 +51,7 @@
     });
 
     test("sortable passes options to the individual sorters", function() {
-        var element = append("<table><thead><tr><th/><tr></thead></table>"),
+        var element = append("<table><thead><tr><th/></tr></thead></table>"),
             grid = new Grid(element, {
             data: [],
             columns: [{ field: "foo" }],
@@ -66,7 +66,7 @@
     });
 
     test("column sortable options are passed to the sorters", function() {
-        var element = append("<table><thead><tr><th/><tr></thead></table>"),
+        var element = append("<table><thead><tr><th/></tr></thead></table>"),
             grid = new Grid(element, {
             data: [],
             columns: [ { field: "foo", sortable: { compare: $.noop } } ],
@@ -140,4 +140,20 @@
 
        ok(!grid.thead.find("th:first").data("kendoColumnSorter"));
     });
+
+    test("sortable is attached to the th elements with multi-line headers", function() {
+        var element = append("<table></table>"),
+            grid = new Grid(element, {
+                sortable: true,
+                data: [],
+                columns: [{ title: "group", columns: [{ field: "foo" }, { field: "bar" }] }]
+            });
+
+        ok(!grid.thead.find("tr:first th").data("kendoColumnSorter"));
+
+        var row = grid.thead.find("tr:last");
+        ok(row.find("th:first").data("kendoColumnSorter"));
+        ok(row.find("th:last").data("kendoColumnSorter"));
+    });
+
 })();

@@ -278,6 +278,16 @@
         equal(container.find("a.k-grid-cancel").text(), "myCancel");
     });
 
+    test("Update and cancel button custom text if template is set - multiline headers", function() {
+        var grid = setup({columns: [ { columns: [{ command: { name: "edit", text: { update: "myUpdate", cancel: "myCancel", edit: "MyEdit" } } }] } ]});
+
+        grid.editRow(table.find("tr:first"));
+
+        var container = grid._editContainer.children("div.k-edit-form-container");
+        equal(container.find("a.k-grid-update").text(), "myUpdate");
+        equal(container.find("a.k-grid-cancel").text(), "myCancel");
+    });
+
     test("clicking update buttons calls update row", function() {
         var grid = setup(),
             saveRow = stub(grid, "saveRow");

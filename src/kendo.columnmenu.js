@@ -44,6 +44,20 @@ var __meta__ = {
         return result;
     }
 
+    function leafColumns(columns) {
+        var result = [];
+
+        for (var idx = 0; idx < columns.length; idx++) {
+            if (!columns[idx].columns) {
+                result.push(columns[idx]);
+                continue;
+            }
+            result = result.concat(leafColumns(columns[idx].columns));
+        }
+
+        return result;
+    }
+
     var ColumnMenu = Widget.extend({
         init: function(element, options) {
             var that = this,
@@ -296,7 +310,7 @@ var __meta__ = {
         },
 
         _ownerColumns: function() {
-            var columns = this.owner.columns,
+            var columns = leafColumns(this.owner.columns),
                 menuColumns = grep(columns, function(col) {
                     var result = true,
                         title = trim(col.title || "");
@@ -401,7 +415,7 @@ var __meta__ = {
                         input,
                         index,
                         column,
-                        columns = that.owner.columns,
+                        columns = leafColumns(that.owner.columns),
                         field;
 
                     if (that._isMobile) {
@@ -422,12 +436,11 @@ var __meta__ = {
                     column = grep(columns, function(column) {
                         return column.field == field || column.title == field;
                     })[0];
-                    index = inArray(column, columns);
 
                     if (column.hidden === true) {
-                        that.owner.showColumn(index);
+                        that.owner.showColumn(column);
                     } else {
-                        that.owner.hideColumn(index);
+                        that.owner.hideColumn(column);
                     }
                 });
             }

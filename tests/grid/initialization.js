@@ -1636,6 +1636,24 @@
         grid.items().first().find("td:first a").click();
     });
 
+    test("custom command click handler is called - multiline headers", 1, function() {
+        var grid = new Grid(table, {
+            dataSource: [{ foo: 1, bar: "bar"}],
+            columns: [
+            {
+                title: "foo",
+                columns: [{
+                    command: {
+                        name: "bar",
+                        click: function() {
+                            ok(true);
+                        }
+                    } }]
+            }]
+        });
+        grid.items().first().find("td:first a").click();
+    });
+
     test("custom command click handler is called if multiple commands", 1, function() {
         var grid = new Grid(table, {
             dataSource: [{ foo: 1, bar: "bar"}],
@@ -1776,6 +1794,32 @@
         equal(grid.tbody.prev().find("col").length, 1);
     });
 
+    test("hidden group column does not render cols - multiline headers", function() {
+        var grid = new Grid(table, {
+            dataSource: [{ foo: 1, bar: "bar"}],
+            columns: [
+                { hidden: true, columns: [ "foo" ] },
+                { field: "bar" }
+            ]
+        });
+
+        equal(grid.thead.prev().find("col").length, 1);
+        equal(grid.tbody.prev().find("col").length, 1);
+    });
+
+    test("hidden child column does not render cols - multiline headers", function() {
+        var grid = new Grid(table, {
+            dataSource: [{ foo: 1, bar: "bar"}],
+            columns: [
+                { columns: [ { field: "foo", hidden: true } ] },
+                { field: "bar" }
+            ]
+        });
+
+        equal(grid.thead.prev().find("col").length, 1);
+        equal(grid.tbody.prev().find("col").length, 1);
+    });
+
     test("hidden column set hidden attribute for header cell", function() {
         var grid = new Grid(table, {
             dataSource: [{ foo: 1, bar: "bar"}],
@@ -1786,6 +1830,62 @@
         });
 
         equal(grid.columns[0].headerAttributes.style, "display:none");
+    });
+
+    test("hidden group column set hidden attribute for child columns header cell - multiline headers", function() {
+        var grid = new Grid(table, {
+            dataSource: [{ foo: 1, bar: "bar"}],
+            columns: [
+                { columns: ["foo", "baz"], hidden: true },
+                { field: "bar" }
+            ]
+        });
+
+        equal(grid.columns[0].headerAttributes.style, "display:none");
+        equal(grid.columns[0].columns[0].headerAttributes.style, "display:none");
+        equal(grid.columns[0].columns[1].headerAttributes.style, "display:none");
+    });
+
+    test("hidden group column set hidden for child columns - multiline headers", function() {
+        var grid = new Grid(table, {
+            dataSource: [{ foo: 1, bar: "bar"}],
+            columns: [
+                { columns: ["foo", "baz"], hidden: true },
+                { field: "bar" }
+            ]
+        });
+
+        ok(grid.columns[0].hidden);
+        ok(grid.columns[0].columns[0].hidden);
+        ok(grid.columns[0].columns[1].hidden);
+    });
+
+    test("hidden child columns set parent as hidden - multiline headers", function() {
+        var grid = new Grid(table, {
+            dataSource: [{ foo: 1, bar: "bar"}],
+            columns: [
+                { columns: ["foo", { columns: [{ field: "boo", hidden: true }, { field: "moo", hidden: true }], field: "baz" }] },
+                { field: "bar" }
+            ]
+        });
+
+        ok(!grid.columns[0].hidden);
+        ok(!grid.columns[0].columns[0].hidden);
+        ok(grid.columns[0].columns[1].hidden);
+    });
+
+    test("hidden all child columns set parent as hidden - multiline headers", function() {
+        var grid = new Grid(table, {
+            dataSource: [{ foo: 1, bar: "bar"}],
+            columns: [
+                { columns: [{ field: "foo", hidden: true }, { columns: [{ field: "boo", hidden: true }, { field: "moo", hidden: true }], field: "baz" }]},
+                { field: "bar" }
+            ]
+        });
+
+        ok(grid.columns[0].hidden);
+        ok(grid.columns[0].columns[0].hidden);
+        ok(grid.columns[0].columns[1].hidden);
     });
 
     test("hidden column set hidden attribute for footer cell", function() {
@@ -1825,6 +1925,59 @@
         grid.expandRow(grid.items()[0]);
 
         equal(grid.tbody.find(".k-detail-row>.k-detail-cell").attr("colspan"), "1");
+    });
+
+    test("detail cell colspan depends on visible columns - multiline headers", function() {
+        var grid = new Grid(table, {
+            dataSource: [{ foo: 1, bar: "bar"}],
+            detailTemplate: "foo",
+            columns: [
+                { columns: [{ field: "foo", hidden: true }, { field: "foo", hidden: false }] },
+                { field: "bar" },
+                { columns: [ { title: "bar", hidden: true }] }
+            ]
+        });
+
+        grid.expandRow(grid.items()[0]);
+
+        equal(grid.tbody.find(".k-detail-row>.k-detail-cell").attr("colspan"), "2");
+    });
+
+    test("group cell colspan depends on visible columns - multiline headers", function() {
+        var grid = new Grid(table, {
+            dataSource: {
+                data: [{ foo: 1, bar: "bar"}],
+                group: { field: "bar" }
+            },
+            columns: [
+                { columns: [{ field: "foo", hidden: true }, { field: "foo", hidden: false }] },
+                { field: "bar" },
+                { columns: [ { title: "bar", hidden: true }] }
+            ]
+        });
+
+        equal(grid.table.find("col").length, 3);
+        equal(grid.tbody.find(".k-grouping-row>td")[0].colSpan, 3);
+    });
+
+    test("group cell colspan depends on visible columns - locked columns with multiline headers", function() {
+        var grid = new Grid(table, {
+            dataSource: {
+                data: [{ foo: 1, bar: "bar"}],
+                group: { field: "bar" }
+            },
+            columns: [
+                { columns: [{ field: "foo", hidden: true }, { field: "foo", hidden: false }] },
+                { field: "bar", locked: true },
+                { columns: [ { title: "bar", hidden: true }] }
+            ]
+        });
+
+        equal(grid.lockedTable.find("col").length, 2);
+        equal(grid.lockedTable.find(".k-grouping-row>td")[0].colSpan, 2);
+
+        equal(grid.table.find("col").length, 1);
+        equal(grid.table.find(".k-grouping-row>td")[0].colSpan, 1);
     });
 
     test("group cell colspan depends on visible columns", function() {

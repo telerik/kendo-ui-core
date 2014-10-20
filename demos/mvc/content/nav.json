@@ -1760,6 +1760,17 @@
         }
       },
       {
+        "text": "Multi-column headers",
+        "url": "grid/multicolumnheaders",
+        "new": true,
+        "title": {
+            "kendo-ui": "Multiple column headers in Kendo UI Grid control | Kendo UI Web demo"
+        },
+        "meta": {
+            "kendo-ui": "This demo shows multiple column headers feature of KendoGrid control."
+        }
+      },
+      {
         "text": "Column reordering",
         "url": "grid/column-reordering",
         "title": {

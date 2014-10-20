@@ -1,0 +1,315 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>multi-header columns</title>
+        <script src="../src/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.userevents.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.draganddrop.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.resizable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.reorderable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.selectable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.groupable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.columnsorter.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.pager.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.data.odata.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.data.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.binder.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.validator.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.editable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.list.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.dropdownlist.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.autocomplete.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.menu.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.calendar.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.datepicker.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.numerictextbox.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.window.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.filtermenu.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.columnmenu.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.filtercell.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.grid.js" type="text/javascript" charset="utf-8"></script>
+        <link rel="stylesheet" href="../dist/styles/web/kendo.common.css"/>
+        <link rel="stylesheet/less" type="text/css" href="../dist/styles/web/kendo.default.less"/>
+        <script src="../demos/mvc/content/shared/js/less.js"></script>
+  </head>
+    <body>
+        <div id="grid" style="width: 100%"></div>
+
+        <script>
+            $(document).ready(function () {
+//                var grid = new kendo.ui.Grid($("#grid"), {
+//                    dataSource: {
+//                        data: [{ foo: 1, bar: "bar"}],
+//                        // group: { field: "bar" }
+//                    },
+//                    height: 400,
+//                    scrollable: true,
+//                    columns:[
+//                    { title: "master", width: 100 },
+//                    { title: "master1",locked: true, columns: [{ title: "master1-child", columns: [{ title: "master1-child-child", width: 200 }] }, { title: "master1-child1", width: 300 }] },
+//                    { title: "master2", locked: false, columns: [{ title: "master2-child", width: 40 }, { title: "master2-child1", width: 50 }] }
+//                    ]
+//
+//                    // columns: [
+//                    //     { title: "foo", locked: true, columns: [{ field: "foo", width: 100, hidden: true }, { field: "foo", width:100, hidden: false }] },
+//                    //     { field: "bar",  width: 100 },
+//                    //     { columns: [ { title: "bar", hidden: false, width: 100 }] }
+//                    // ]
+//                });
+//                return;
+
+                $("#grid").kendoGrid({
+                    dataSource: {
+                        type: "odata",
+                     //   group: "foo",
+                        transport: {
+                            read: "http://demos.kendoui.com/service/Northwind.svc/Customers"
+                        },
+                        pageSize: 5,
+                        schema: {
+                            model: {
+                                id: "CustomerID",
+                                fields: {
+                                    CustomerID: { type: "number" },
+                                    ContactName: { type: "string" },
+                                    ContactTitle: { type: "string"},
+                                    CompanyName: { type: "string"},
+                                    Country: { type: "string"}
+                                }
+                            }
+                        }
+                    },
+                    height: 400,
+                                        autoBind: true,
+                    pageable: true,
+                    resizable: true,
+                    reorderable: true,
+                    toolbar: ["create"],
+                    sortable: true,
+                    filterable: { mode: "row" },
+                    scrollable: true,
+                    groupable: true,
+                    columnMenu: true,
+                    columns: [{
+                        field: "CompanyName",
+                        title: "Company Name",
+                        width: 200
+                    },{
+//locked: true,
+                        title: "Contact Info",
+                        hidden: false,
+                        columns: [{
+                            title: "header1",
+                            columns: [{
+                                hidden: false,
+                                field: "ContactTitle",
+                                title: "Contact Title",
+                                footerTemplate: "foo",
+                                width: 200
+                            },{
+                                hidden: false,
+                                field: "CompanyName",
+                                title: "Contact Title 2",
+                                footerTemplate: "baz",
+                                width: 200
+                            }]
+                        }, {
+                            title: "header2",
+                            columns: [{
+                                hidden: false,
+                                field: "ContactTitle",
+                                title: "Contact Title 3",
+                                footerTemplate: "foo1",
+                                width: 200
+                            },{
+                                hidden: false,
+                                field: "CompanyName",
+                                title: "Contact Title 4",
+                                footerTemplate: "baz2",
+                                width: 200
+                            }]
+                        },{
+                            //title: "header 2",
+                            //columns: [
+                            //{
+                                field: "ContactName", hidden: false, width: 100
+                            //}
+                             //   ]
+                        }]
+                    },{
+                        title: "foo title",
+                        columns:  [
+                            { title: "foo child",  columns: [{ field: "Country", hidden: false, width: 150 }]},{ field: "Country1", hidden: false, width: 150 }
+                            //{ title: "foo child2", columns: [{ field: "Country1", hidden: false, width: 150 }]}
+                        ]
+                    }]
+//                   columns: [
+//                   { title: "master", width: 100 },
+//                   { title: "master1", width: 200, locked: true,  field: "foo", groupFooterTemplate: "baz",
+//                       columns: [{
+//                           title: "master1-child",
+//                           columns: [{ title: "master1-child-child", groupFooterTemplate: "foo", footerTemplate: "foo", width: 100}, { title: "master1-child-child", width: 100}]
+//                       },
+//                       // { title: "master1-child1", width: 100/*, columns: [{ title: "master1-child-child"},{ title: "master1-child-child"}] */ }
+//                       ] },
+//                { title: "master", width: 100 , locked: true},
+//              { title: "master2", columns: [{ title: "master2-child", width: 100 }, { title: "master2-child1", width: 100 }] },
+//                { title: "master1", footerTemplate: "foo", field: "foo", groupFooterTemplate: "baz",
+//                    columns: [{
+//                        title: "master1-child", width: 100
+//                  //      columns: [{ title: "master1-child-child"},{ title: "master1-child-child", width: 100}]
+//                    },
+//                    { title: "master1-child1", width: 100//, columns: [{ title: "master1-child-child"}/*,{ title: "master1-child-child"}*/]
+//                    }] }
+//                ]
+               });
+
+/*
+                var header = $(".k-grid-header");
+
+                header.on("click", "th:not(.k-group-cell,.k-hierarchy-cell)", function(e) {
+                    var cell = $(this);
+
+                    header.find(".highlight, .highlight-children").removeClass("highlight").removeClass("highlight-children");
+
+                   // var p = parents(cell, header);
+                    //var c = children(cell, header);
+                    //$(p).map(function() { return this.toArray(); }).addClass("highlight");
+                    //$(c).map(function() { return this.toArray(); }).addClass("highlight-children");
+
+
+                    //var cols = $(header).next().find("tr:not(.k-grouping-row)").first().find("td:not(.k-group-cell,.k-hierarchy-cell)")
+                    var masterCells = $(header).find("tr:first").find("th:not(.k-group-cell,.k-hierarchy-cell)");
+
+                    var d = getDataCells(header);
+
+                    var grid = $("#grid").data("kendoGrid");
+
+                    for (var idx = 0; idx < d.length; idx++) {
+                        var p = parents(d.eq(idx), header);
+                        console.log(grid.columns[masterCells.index(p[p.length - 1])]);
+                     //   break;
+                    }
+
+                    $(d).map(function() { return this }).addClass("highlight-children");
+                });*/
+             });
+
+             function getDataCells(container) {
+                 var rows = container.find("tr");
+                 var cells = rows.find("th:not(.k-group-cell,.k-hierarchy-cell)")
+                     .filter(function() {
+                         return this.rowSpan > 1;
+                     });
+
+                 cells = cells.add(rows.last().find("th:not(.k-group-cell,.k-hierarchy-cell)"));
+
+                 return cells;
+             }
+
+             function children(cell, container) {
+                 var result = [cell];
+
+                 var row = cell.closest("tr");
+                 var headerRows = container.find("tr:not(.k-filter-row)");
+                 var level = headerRows.index(row) + cell[0].rowSpan;
+                 if (level <= headerRows.length - 1) {
+                     var child = row.next();
+                     var index = row.find("th:not(.k-group-cell,.k-hierarchy-cell)").index(cell);
+                     var prevCells = cell.prevAll(":not(.k-group-cell,.k-hierarchy-cell)");
+
+                     var offset = index - prevCells.filter(function() {
+                         return this.rowSpan > 1;
+                     }).length;
+
+                     var idx;
+
+                     prevCells = prevCells.filter(function() {
+                         return this.colSpan > 1;
+                     });
+
+                     for (idx = 0; idx < prevCells.length; idx++) {
+                         offset += prevCells[idx].colSpan || 1;
+                     }
+
+                     var cells = child.find("th:not(.k-group-cell,.k-hierarchy-cell)");
+
+                     offset = offset || 1;
+
+                     var colSpan = cell[0].colSpan ? cell[0].colSpan : 1;
+
+                     idx = 0;
+                     while (idx < colSpan) {
+                         var child = cells.eq(idx + (offset - 1));
+                         result = result.concat(children(child, container));
+                         if (child[0].colSpan > 1) {
+                            colSpan -= child[0].colSpan - 1;
+                         }
+                         idx++;
+                     }
+                 }
+
+                 return result;
+             }
+
+
+             function parents(cell, container) {
+                 var result = [cell];
+
+                 var row = cell.closest("tr");
+                 var headerRows = container.find("tr:not(.k-filter-row)");
+                 var level = headerRows.index(row);
+                 if (level > 0) {
+                     var parent = headerRows.eq(level - 1);
+                     var parentCellsWithChildren = parent.find("th:not(.k-group-cell,.k-hierarchy-cell)").filter(function() {
+                         return !$(this).attr("rowspan");
+                     });
+
+                     var offset = 0;
+                     var index = row.find("th:not(.k-group-cell,.k-hierarchy-cell)").index(cell);
+
+                     prevCells = cell.prevAll(":not(.k-group-cell,.k-hierarchy-cell)").filter(function() {
+                         return this.colSpan > 1;
+                     });
+
+                     for (idx = 0; idx < prevCells.length; idx++) {
+                         offset += prevCells[idx].colSpan || 1;
+                     }
+
+                     index += Math.max(offset - 1, 0);
+
+                     offset = 0;
+                     for (var idx = 0; idx < parentCellsWithChildren.length; idx++) {
+                         var parentCell = parentCellsWithChildren.eq(idx);
+                         if (parentCell.attr("colSpan")) {
+                             offset += parentCell[0].colSpan;
+                             } else {
+                             offset += 1;
+                         }
+                         if (index >= idx && index < offset) {
+                             result = result.concat(parents(parentCell, container));
+                             break;
+                         }
+                     }
+                 }
+                 return result;
+             }
+
+            </script>
+
+            <style>
+                .highlight {
+                    background: red;
+                }
+                .highlight-children {
+                    background: green;
+                }
+                .k-resize-handle {
+                    background: red;
+                }
+            </style>
+    </body>
+</html>
