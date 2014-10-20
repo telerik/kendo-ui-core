@@ -5207,37 +5207,31 @@ var __meta__ = {
     });
 
     var SplineSegment = LineSegment.extend({
-        points: function(){
-            var segment = this,
-                curveProcessor = new CurveProcessor(segment.options.closed),
-                points = LineSegment.fn.points.call(this);
-
-            return curveProcessor.process(points);
-        },
-        getViewElements: function(view) {
-            var segment = this,
-                series = segment.series,
-                defaults = series._defaults,
-                color = series.color;
-
-            ChartElement.fn.getViewElements.call(segment, view);
+        createVisual: function() {
+            var options = this.options;
+            var series = this.series;
+            var defaults = series._defaults;
+            var color = series.color;
 
             if (isFn(color) && defaults) {
                 color = defaults.color;
             }
 
-            return [
-                view.createCubicCurve(segment.points(), {
-                    id: segment.id,
-                    stroke: color,
-                    strokeWidth: series.width,
-                    strokeOpacity: series.opacity,
-                    fill: "",
-                    dashType: series.dashType,
-                    data: { modelId: segment.modelId },
-                    zIndex: -1
-                })
-            ];
+            var curveProcessor = new CurveProcessor(this.options.closed);
+            var segments = curveProcessor.process(this.points());
+            var curve = new draw.Path({
+                stroke: {
+                    color: color,
+                    width: series.width,
+                    opacity: series.opacity,
+                    dashType: series.dashType
+                }
+            });
+
+            curve.segments.push.apply(curve.segments, segments);
+
+            this.visual = new draw.Group();
+            this.visual.append(curve);
         }
     });
 
@@ -5396,32 +5390,88 @@ var __meta__ = {
             LineSegment.fn.init.call(segment, linePoints, currentSeries, seriesIx);
         },
 
-        points: function() {
-            var segment = this,
-                prevSegment = segment.prevSegment,
-                curveProcessor = new CurveProcessor(segment.options.closed),
-                linePoints = LineSegment.fn.points.call(this),
-                curvePoints = curveProcessor.process(linePoints),
-                previousPoints,
-                points;
+        strokeSegments: function() {
+            var segments = this._strokeSegments;
 
-            segment.curvePoints = curvePoints;
-
-            if (segment.isStacked && prevSegment) {
-                points = curvePoints.slice(0);
-                points.push(last(curvePoints));
-                previousPoints = prevSegment.curvePoints.slice(0).reverse();
-                previousPoints.unshift(previousPoints[0]);
-                points = points.concat(previousPoints);
-                points.push(last(previousPoints), points[0], points[0]);
-            } else {
-                points = segment.curvePoints;
+            if (!segments) {
+                var curveProcessor = new CurveProcessor(this.options.closed);
+                var linePoints = LineSegment.fn.points.call(this);
+                segments = this._strokeSegments = curveProcessor.process(linePoints);
             }
 
-            return points;
+            return segments;
         },
 
-        areaPoints: function(points) {
+        createVisual: function() {
+            var options = this.options;
+            var series = this.series;
+            var defaults = series._defaults;
+            var color = series.color;
+
+            if (isFn(color) && defaults) {
+                color = defaults.color;
+            }
+
+            this.visual = new draw.Group();
+
+            this.createFill({
+                fill: {
+                    color: color,
+                    opacity: series.opacity
+                },
+                stroke: null
+            });
+
+            this.createStroke({
+                stroke: deepExtend({
+                    color: color,
+                    opacity: series.opacity,
+                    lineCap: "butt"
+                }, series.line)
+            });
+        },
+
+        createFill: function(style) {
+            var strokeSegments = this.strokeSegments();
+            var fillSegments = strokeSegments.slice(0);
+            var prevSegment = this.prevSegment;
+
+            if (this.isStacked && prevSegment) {
+                var prevStrokeSegments = prevSegment.strokeSegments();
+                var prevAnchor = last(prevStrokeSegments).anchor();
+
+                fillSegments.push(new draw.Segment(
+                    prevAnchor,
+                    prevAnchor,
+                    last(strokeSegments).anchor()
+                ));
+
+                var stackSegments = $.map(prevStrokeSegments, function(segment) {
+                    return new draw.Segment(
+                        segment.anchor(),
+                        segment.controlOut(),
+                        segment.controlIn()
+                    );
+                }).reverse();
+
+                append(fillSegments, stackSegments);
+
+                var firstAnchor = fillSegments[0].anchor();
+                fillSegments.push(new draw.Segment(
+                    firstAnchor,
+                    firstAnchor,
+                    last(stackSegments).anchor()
+                ));
+            }
+
+            var fill = new draw.Path(style);
+            fill.segments.push.apply(fill.segments, fillSegments);
+            this.closeFill(fill);
+
+            this.visual.append(fill);
+        },
+
+        closeFill: function(fillPath) {
             var segment = this,
                 chart = segment.parent,
                 prevSegment = segment.prevSegment,
@@ -5433,23 +5483,29 @@ var __meta__ = {
                 categoryAxisLineBox = categoryAxis.lineBox(),
                 end = invertAxes ? categoryAxisLineBox.x1 : categoryAxisLineBox.y1,
                 pos = invertAxes ? X : Y,
-                firstPoint = points[0],
-                lastPoint = last(points),
-                areaPoints = [];
+                segments = segment.strokeSegments(),
+                firstPoint = segments[0].anchor(),
+                lastPoint = last(segments).anchor();
 
             end = limitValue(end, valueAxisLineBox[pos + 1], valueAxisLineBox[pos + 2]);
-            if (!(chart.options.isStacked && prevSegment) && points.length > 1) {
-
+            if (!(chart.options.isStacked && prevSegment) && segments.length > 1) {
                 if (invertAxes) {
-                    areaPoints.push(Point2D(end, firstPoint.y));
-                    areaPoints.unshift(Point2D(end, lastPoint.y));
+                    fillPath.lineTo(end, lastPoint.y)
+                            .lineTo(end, firstPoint.y);
                 } else {
-                    areaPoints.push(Point2D(firstPoint.x, end));
-                    areaPoints.unshift(Point2D(lastPoint.x, end));
+                    fillPath.lineTo(lastPoint.x, end)
+                            .lineTo(firstPoint.x, end);
                 }
             }
+        },
 
-            return areaPoints;
+        createStroke: function(style) {
+            if (style.stroke.width > 0) {
+                var stroke = new draw.Path(style);
+                stroke.segments.push.apply(stroke.segments, this.strokeSegments());
+
+                this.visual.append(stroke);
+            }
         },
 
         getViewElements: function(view) {
