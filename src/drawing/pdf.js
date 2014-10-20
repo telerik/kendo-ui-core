@@ -113,7 +113,9 @@
     }
 
     function saveAs(group, filename, proxy, callback) {
-        if (window.Blob) {
+        // XXX: Safari has Blob, but does not support the download attribute
+        //      so we'd end up converting to dataURL and using the proxy anyway.
+        if (window.Blob && !kendo.support.browser.safari) {
             toBlob(group, function(blob){
                 kendo.saveAs({ dataURI: blob, fileName: filename });
                 if (callback) {
