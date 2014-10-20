@@ -355,7 +355,7 @@ var FontTool = DelayedExecutionTool.extend({
            }];
         }
 
-        dataSource = defaultValue.concat(options.items ? options.items : editor.options[toolName]);
+        dataSource = defaultValue.concat(options.items ? options.items : (editor.options[toolName] || [] ));
 
         ui[this.type]({
             dataTextField: "text",

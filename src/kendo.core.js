@@ -2574,7 +2574,18 @@ function pad(number, digits, end) {
 
             Observable.fn.init.call(that);
 
+            var dataSource = options ? options.dataSource : null;
+
+            if (dataSource) {
+                // avoid deep cloning the data source
+                options = extend({}, options, { dataSource: {} });
+            }
+
             options = that.options = extend(true, {}, that.options, options);
+
+            if (dataSource) {
+                options.dataSource = dataSource;
+            }
 
             if (!that.element.attr(kendo.attr("role"))) {
                 that.element.attr(kendo.attr("role"), (options.name || "").toLowerCase());
