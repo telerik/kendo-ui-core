@@ -164,7 +164,7 @@
 
         childrenChange: function(e) {
             if (e.action === "add") {
-                this.load(e.items);
+                this.load(e.items, e.index);
             } else if (e.action === "remove") {
                 this.remove(e.index, e.items.length);
             }
