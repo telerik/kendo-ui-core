@@ -383,12 +383,13 @@
         var backgroundOrigin = getPropertyValue(style, "background-origin");
         var backgroundSize = getPropertyValue(style, "background-size");
 
-        if (element.currentStyle) {
+        if (browser.msie && browser.version < 10) {
             // IE9 hacks.  getPropertyValue won't return the correct
             // value.  Sucks that we have to do it here, I'd prefer to
             // move it in getPropertyValue, but we don't have the
             // element.
             backgroundPosition = element.currentStyle.backgroundPosition;
+            // backgroundSize = element.currentStyle.backgroundSize;
 
             // gradients rendered as SVG (for instance in the colorpicker)
             // cannot be displayed.
@@ -642,7 +643,6 @@
 
             if (backgroundSize != "auto") {
                 var size = backgroundSize.split(/\s+/g);
-                var single = size.length == 1 || size[1] == "auto";
                 // compute width
                 if (/%$/.test(size[0])) {
                     img_width = orgBox.width * parseFloat(size[0]) / 100;
@@ -650,7 +650,7 @@
                     img_width = parseFloat(size[0]);
                 }
                 // compute height
-                if (single) {
+                if (size.length == 1 || size[1] == "auto") {
                     img_height = img_width / aspect_ratio;
                 } else if (/%$/.test(size[1])) {
                     img_height = orgBox.height * parseFloat(size[1]) / 100;
@@ -660,20 +660,22 @@
             }
 
             var pos = backgroundPosition.split(/\s+/g);
-            pos = { x: pos[0], y: pos[1] };
-
-            if (/%$/.test(pos.x)) {
-                pos.x = parseFloat(pos.x) / 100 * (orgBox.width - img_width);
-            } else {
-                pos.x = parseFloat(pos.x);
-            }
-            if (/%$/.test(pos.y)) {
-                pos.y = parseFloat(pos.y) / 100 * (orgBox.height - img_height);
-            } else {
-                pos.y = parseFloat(pos.y);
+            if (pos.length == 1) {
+                pos[1] = "50%";
             }
 
-            var rect = new geo.Rect([ orgBox.left + pos.x, orgBox.top + pos.y ], [ img_width, img_height ]);
+            if (/%$/.test(pos[0])) {
+                pos[0] = parseFloat(pos[0]) / 100 * (orgBox.width - img_width);
+            } else {
+                pos[0] = parseFloat(pos[0]);
+            }
+            if (/%$/.test(pos[1])) {
+                pos[1] = parseFloat(pos[1]) / 100 * (orgBox.height - img_height);
+            } else {
+                pos[1] = parseFloat(pos[1]);
+            }
+
+            var rect = new geo.Rect([ orgBox.left + pos[0], orgBox.top + pos[1] ], [ img_width, img_height ]);
 
             // XXX: background-repeat could be implemented more
             //      efficiently as a fill pattern (at least for PDF
