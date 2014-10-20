@@ -479,11 +479,9 @@ var __meta__ = {
                 }
             });
 
-            /*
-                chart._tooltip = chart._createTooltip();
-                chart._highlight = new Highlight(view, chart._viewElement);
-                chart._setupSelection();
-            */
+            chart._tooltip = chart._createTooltip();
+            chart._highlight = new Highlight(view, chart._viewElement);
+            //chart._setupSelection();
         },
 
         _sharedTooltip: function() {
@@ -830,7 +828,7 @@ var __meta__ = {
             }
 
             if (chartElement.aliasFor) {
-                chartElement = chartElement.aliasFor(e, chart._eventCoordinates(e));
+                chartElement = chartElement.aliasFor(e, this._eventCoordinates(e));
             }
 
             return chartElement;
