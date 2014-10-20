@@ -166,6 +166,8 @@ var __meta__ = {
 
         slice: slice,
 
+        sort: [].sort,
+
         join: join,
 
         pop: function() {
