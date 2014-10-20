@@ -150,6 +150,10 @@
             style.setProperty("-o-" + prop, value, important);
         } else if (browser.msie) {
             style.setProperty("-ms-" + prop, value, important);
+            prop = "ms" + prop.replace(/(^|-)([a-z])/g, function(s, p1, p2){
+                return p1 + p2.toUpperCase();
+            });
+            style[prop] = value;
         }
     }
 
