@@ -1128,17 +1128,21 @@
             this._opacity *= opacity;
         },
         setStrokeOpacity: function(opacity) {
-            var gs = this._pdf.getOpacityGS(this._opacity * opacity, true);
-            this._gsResources[gs._resourceName] = gs;
-            this._out(gs._resourceName, " gs", NL);
+            if (opacity < 1) {
+                var gs = this._pdf.getOpacityGS(this._opacity * opacity, true);
+                this._gsResources[gs._resourceName] = gs;
+                this._out(gs._resourceName, " gs", NL);
+            }
         },
         setFillColor: function(r, g, b) {
             this._out(r, " ", g, " ", b, " rg", NL);
         },
         setFillOpacity: function(opacity) {
-            var gs = this._pdf.getOpacityGS(this._opacity * opacity, false);
-            this._gsResources[gs._resourceName] = gs;
-            this._out(gs._resourceName, " gs", NL);
+            if (opacity < 1) {
+                var gs = this._pdf.getOpacityGS(this._opacity * opacity, false);
+                this._gsResources[gs._resourceName] = gs;
+                this._out(gs._resourceName, " gs", NL);
+            }
         },
         setDashPattern: function(dashArray, dashPhase) {
             this._out(dashArray, " ", dashPhase, " d", NL);
