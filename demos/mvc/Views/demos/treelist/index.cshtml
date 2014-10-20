@@ -1,6 +1,6 @@
 <div id="example">
         <div class="demo-section k-header">
-            <div id="treelist"></div>
+            <div id="treelist" style="height: 400px;"></div>
         </div>
 
         <script>
@@ -9,10 +9,10 @@
 
                 $("#treelist").kendoTreeList({
                     dataSource: {
-                        type: "odata",
                         transport: {
                             read: {
-                                url: service + "/Employees"
+                                url: crudServiceBaseUrl + "/EmployeeDirectory/All",
+                                dataType: "jsonp"
                             }
                         },
                         schema: {
@@ -20,15 +20,18 @@
                                 id: "EmployeeID",
                                 fields: {
                                     parentId: { field: "ReportsTo",  nullable: true },
-                                    EmployeeID: { field: "EmployeeID", type: "number" }
-                                }
+                                    EmployeeID: { field: "EmployeeId", type: "number" }
+                                },
+                                expanded: true
                             }
                         }
                     },
                     filterable: true,
                     columns: [
-                        { field: "FirstName", title: "First Name" },
-                        { field: "LastName", title: "Last Name", sortable: true }
+                        { field: "FirstName", title: "First Name", width: 250 },
+                        { field: "LastName", title: "Last Name", sortable: true },
+                        { field: "Position", sortable: true },
+                        { field: "Extension", sortable: true }
                     ]
                 });
             });

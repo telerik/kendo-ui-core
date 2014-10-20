@@ -195,13 +195,43 @@
         equal(instance.selectable.args("value")[0][0], row[0]);
     });
 
+    test("select clears selection before selecting new row", function() {
+        createTreeList({ selectable: true });
+
+        var rows = instance.content.find("tr");
+        instance.select(rows.eq(0));
+        instance.select(rows.eq(1));
+
+        equal(instance.content.find("tr.k-state-selected").length, 1);
+    });
+
+    test("select does not clear selection when multi-select is enabled", function() {
+        createTreeList({ selectable: "multiple" });
+
+        var rows = instance.content.find("tr");
+        instance.select(rows.eq(0));
+        instance.select(rows.eq(1));
+
+        equal(instance.content.find("tr.k-state-selected").length, 2);
+    });
+
+    test("select on single-row selection does not allow selecting multiple rows", function() {
+        createTreeList({ selectable: true });
+
+        instance.select(instance.content.find("tr"));
+
+        var selectedRows = instance.content.find("tr.k-state-selected");
+        equal(selectedRows.length, 1);
+        equal(selectedRows.index(), 0);
+    });
+
     test("clearSelection calls selectable.clear", function() {
         createTreeList({ selectable: true });
 
-        spy(instance.selectable, "clear");
-
         var row = instance.content.find("tr").eq(0);
         instance.select(row);
+
+        spy(instance.selectable, "clear");
 
         instance.clearSelection();
 
@@ -234,4 +264,43 @@
 
         ok(!handler.calls);
     });
+
+    test("expand shows row children", function() {
+        createTreeList();
+
+        var row = instance.content.find("tr:first");
+
+        instance.expand(row);
+
+        equal(instance.content.find(".k-i-collapse").length, 1);
+    });
+
+    test("collapse hides row children", function() {
+        createTreeList({
+            dataSource: [
+                { id: 1, parentId: null, expanded: true },
+                { id: 2, parentId: 1 }
+            ]
+        });
+
+        var row = instance.content.find("tr:first");
+
+        instance.collapse(row);
+
+        equal(instance.content.find(".k-i-expand").length, 1);
+    });
+
+    //test("expand on item without children", function() {
+        //createTreeList({
+            //dataSource: [
+                //{ id: 1, parentId: null }
+            //]
+        //});
+
+        //var row = instance.content.find("tr:first");
+
+        //instance.expand(row);
+
+        //equal(instance.content.find("tr").length, 1);
+    //});
 })()

@@ -1,0 +1,137 @@
+        <div id="example">
+
+            <div class="box">
+                <div class="box-col">
+                <h4>Selection</h4>
+                <ul class="options">
+                    <li>
+                        <input type="text" value="0" id="selectRow" class="k-textbox"/>
+                        <button class="selectRow k-button">Select row</button>
+                    </li>
+                    <li>
+                        <button class="clearSelection k-button">Clear selected rows</button>
+                    </li>
+                </ul>
+                </div>
+                <div class="box-col">
+                <h4>Expand / Collapse</h4>
+                <ul class="options">
+                    <li>
+                        <input type="text" value="0" id="groupRow" class="k-textbox"/>
+                        <button class="toggleGroup k-button">Collapse/Expand group</button>
+                    </li>
+                </ul>
+                </div>
+            </div>
+
+            <div id="treelist"></div>
+
+            <script>
+                $(document).ready(function () {
+                    $(".clearSelection").click(function () {
+                        $("#treelist").data("kendoTreeList").clearSelection();
+                    });
+
+                    var selectRow = function (e) {
+                        if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode) {
+                            var treelist = $("#treelist").data("kendoTreeList"),
+                                rowIndex = $("#selectRow").val(),
+                                row = treelist.content.find("tr:visible").eq(rowIndex);
+
+                            treelist.select(row);
+                        }
+                    };
+
+                    var toggleGroup = function (e) {
+                        if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode) {
+                            var treelist = $("#treelist").data("kendoTreeList"),
+                                rowIndex = $("#groupRow").val(),
+                                row = treelist.content.find("tr:visible").eq(rowIndex);
+
+                            if (row.has(".k-i-collapse").length) {
+                                treelist.collapse(row);
+                            } else {
+                                treelist.expand(row);
+                            }
+                        }
+                    };
+
+
+                    $(".selectRow").click(selectRow);
+                    $("#selectRow").keypress(selectRow);
+
+                    $(".toggleGroup").click(toggleGroup);
+                    $("#groupRow").keypress(toggleGroup);
+
+                    /* TreeList definition */
+
+                    var crudServiceBaseUrl = "http://demos.telerik.com/kendo-ui/service";
+
+                    var dataSource = new kendo.data.TreeListDataSource({
+                        transport: {
+                            read:  {
+                                url: crudServiceBaseUrl + "/EmployeeDirectory/All",
+                                dataType: "jsonp"
+                            },
+                            update: {
+                                url: crudServiceBaseUrl + "/EmployeeDirectory/Update",
+                                dataType: "jsonp"
+                            },
+                            destroy: {
+                                url: crudServiceBaseUrl + "/EmployeeDirectory/Destroy",
+                                dataType: "jsonp"
+                            },
+                            create: {
+                                url: crudServiceBaseUrl + "/EmployeeDirectory/Create",
+                                dataType: "jsonp"
+                            },
+                            parameterMap: function(options, operation) {
+                                if (operation !== "read" && options.models) {
+                                    return {models: kendo.stringify(options.models)};
+                                }
+                            }
+                        },
+                        batch: true,
+                        schema: {
+                            model: {
+                                id: "EmployeeId",
+                                fields: {
+                                    EmployeeId: { type: "number", editable: false, nullable: false },
+                                    parentId: { field: "ReportsTo", nullable: true },
+                                    FirstName: { validation: { required: true } },
+                                    LastName: { validation: { required: true } },
+                                    HireDate: { type: "date" },
+                                    Phone: { type: "string" },
+                                    HireDate: { type: "date" },
+                                    BirthDate: { type: "date" },
+                                    Extension: { type: "number", validation: { min: 0, required: true } },
+                                    Position: { type: "string" }
+                                }
+                            }
+                        }
+                    });
+
+                    $("#treelist").kendoTreeList({
+                        dataSource: dataSource,
+
+                        selectable: true,
+                        columns: [
+                            { field: "FirstName", expandable: true, title: "First Name", width: 250 },
+                            { field: "LastName", title: "Last Name" },
+                            { field: "HireDate", title: "Hire Date", format: "{0:MMMM d, yyyy}" },
+                            { field: "Extension", title: "Ext", format: "{0:#}" },
+                            { command: [ "edit", "destroy" ] }
+                        ]
+                    });
+
+                });
+            </script>
+
+            <style scoped>
+                .configuration .k-textbox
+                {
+                    width: 23px;
+                }
+            </style>
+
+        </div>
