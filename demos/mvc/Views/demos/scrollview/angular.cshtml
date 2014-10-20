@@ -1,111 +1,105 @@
-<div id="example" ng-app="KendoDemos">
-    <div ng-controller="MyCtrl">
-  <div class="demo-section">
-    <div kendo-mobile-scroll-view="scrollview"
-         k-data-source="photos"
-         k-content-height="'440px'"
-         k-enable-pager="false"
-         k-template="template"></div>
-    <a id="prev-img" title="Previous Image" ng-click="scrollview.prev()"></a>
-    <a id="next-img" title="Next Image" ng-click="scrollview.next()"></a>
-    <p>Photos via <a href="http://www.500px.com">500px.com</a></p>
-  </div>
-  <style scoped>
-    .demo-section {
-      width: 600px;
-      position: relative;
-    }
-    .demo-section > p {
-      text-align: right;
-      margin-top: 10px;
-      font-size: .8em;
-    }
-    #prev-img,
-    #next-img {
-      display: block;
-      position: absolute;
-      top: 36px;
-      z-idex: 1;
-      height: 400px;
-      width: 100px;
-      opacity: 0.2;
-    }
-    #prev-img {
-      left: 36px;
-      background: url("http://demos.telerik.com/kendo-ui/content/web/scrollview/arrow-left.png") no-repeat 50% 50%;
-    }
-    #next-img {
-      left: auto;
-      right: 36px;
-      background: url("http://demos.telerik.com/kendo-ui/content/web/scrollview/arrow-right.png") no-repeat 50% 50%;
-    }
-    a#prev-img:hover {
-      background: url("http://demos.telerik.com/kendo-ui/content/web/scrollview/arrow-left.png") no-repeat 50% 50% rgba(0,0,0,.3);
-      opacity: 1;
-    }
-    a#next-img:hover  {
-      background: url("http://demos.telerik.com/kendo-ui/content/web/scrollview/arrow-right.png") no-repeat 50% 50% rgba(0,0,0,.3);
-      opacity: 1;
-    }
-    .title {
-      font-weight: bold;
-      text-transform: uppercase;
-      text-align: center;
-      margin: 0;
-      padding: 1em;
-      background-color: #222;
-      color: #fff;
-    }
-    .image {
-      display: block;
-      height: 400px;
-      width: 600px;
-      background-size: cover;
-    }
-  </style>
-  <script id="template" type="text/x-kendo-template">
-    <div>
-      <div class="image" style="background-image: url({{dataItem.image_url}});"></div>
-      <p class="title">{{dataItem.name}}</p>
-    </div>
-  </script>
+<div kendo-mobile-application ng-app="kendoDemo">
+    <kendo-mobile-view id="scrollview-home">
+        <div id="scrollview-container">
+            <kendo-mobile-scroll-view k-page="2">
+                <div class="photo photo1" data-role="page">
+                    </div><div class="photo photo2" data-role="page">
+                    </div><div class="photo photo3" data-role="page">
+                    </div><div class="photo photo4" data-role="page">
+                    </div><div class="photo photo5" data-role="page">
+                    </div><div class="photo photo6" data-role="page">
+                    </div><div class="photo photo7" data-role="page">
+                    </div><div class="photo photo8" data-role="page">
+                    </div><div class="photo photo9" data-role="page">
+                    </div><div class="photo photo10" data-role="page">
+                </div>
+            </kendo-mobile-scroll-view>
+        </div>
+    </kendo-mobile-view>
 </div>
-
-</div>
-
-<script src="../content/spa/aeroviewr/js/500px.js"></script>
 
 <script>
-  angular.module("KendoDemos", [ "kendo.directives" ]);
-
-  _500px.init({
-      sdk_key: 'a3be03a8a98d6e05af17f60d2cf4bf696eb47555'
-  });
-
-  function MyCtrl($scope) {
-      $scope.photos = new kendo.data.DataSource({
-        transport: {
-          read: function(options) {
-            var params = {
-              feature: "popular",
-              exclude: "Nude",
-              image_size: 4,
-              page: options.data.page,
-              rpp: options.data.pageSize
-            };
-
-            _500px.api("/photos", params, function(response) {
-              options.success(response.data);
-            });
-          }
-        },
-        serverPaging: true,
-        pageSize: 30,
-        schema: {
-          data: "photos",
-          total: "total_items"
-        }
-      });
-      $scope.template = $("#template").html();
-  }
+    angular.module("kendoDemo", [ "kendo.directives" ]);
 </script>
+
+<style>
+    #scrollview-home .photo {
+        margin: 0;
+        height: 220px;
+        display: inline-block;
+        -webkit-background-size: auto 100%;
+        background-size: auto 100%;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
+
+    .km-wp #scrollview-home .photo {
+        height: 15em;
+    }
+
+    .photo1 {background-image: url("../content/mobile/cities/220/sydney.jpg");}
+    .photo2 {background-image: url("../content/mobile/cities/220/bonn.jpg");}
+    .photo3 {background-image: url("../content/mobile/cities/220/boston.jpg");}
+    .photo4 {background-image: url("../content/mobile/cities/220/cairo.jpg");}
+    .photo5 {background-image: url("../content/mobile/cities/220/cancun.jpg");}
+    .photo6 {background-image: url("../content/mobile/cities/220/cape-town.jpg");}
+    .photo7 {background-image: url("../content/mobile/cities/220/liverpool.jpg");}
+    .photo8 {background-image: url("../content/mobile/cities/220/london.jpg");}
+    .photo9 {background-image: url("../content/mobile/cities/220/melbourne.jpg");}
+    .photo10 {background-image: url("../content/mobile/cities/220/san-francisco.jpg");}
+
+    #scrollview-container {
+        margin: 60px 0 1em 0;
+        padding-bottom: 20px;
+        padding-top: 20px;
+        background: rgba(0,0,0,.1);
+        border: 1px solid rgba(0,0,0,.3);
+        border-width: 1px 0;
+        box-shadow: 0 1px 1px rgba(255,255,255,.3);
+    }
+
+    .km-flat #scrollview-container {
+        background: transparent;
+        border-width: 0;
+        box-shadow: none;
+    }
+
+    .km-ios #scrollview-container {
+        background: url(../content/shared/images/patterns/pattern1.png);
+        box-shadow: 0 0 2px rgba(255,255,255,.5), inset 0 0 7px #000;
+    }
+
+    #scrollview-home .km-ios .km-content {
+        background: #bbb;
+    }
+    .km-android .km-list .album-set a {
+    	background-color: #277692;
+    }
+    .km-ios .km-list .album-set a {
+    	background-color: #bbb;
+    }
+    .km-ios #scrollview-home .km-navbar {
+        background: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(255,255,255,.5)), color-stop(.06, rgba(255,255,255,.45)), color-stop(.5, rgba(255,255,255,.2)), color-stop(.5, rgba(255,255,255,.15)), color-stop(1, rgba(100,100,100,0))), url(../content/shared/images/patterns/pattern5.png);
+        background: -moz-linear-gradient(top, rgba(255,255,255,.5), rgba(255,255,255,.45) 6%, rgba(255,255,255,.2) 50%, rgba(255,255,255,.15) 50%, rgba(100,100,100,0)), url(../content/shared/images/patterns/pattern5.png);
+	}
+    .km-ios #scrollview-home .km-navbar .km-button
+    {
+        background-color: #000;
+    }
+	.km-ios #scrollview-home .km-content {
+        background: url(../content/shared/images/patterns/pattern6.png);
+        box-shadow: inset 0 0 30px #000;
+	}
+
+	.km-ios #scrollview-container .km-pages .km-current-page {
+		background-color: #ff009c;
+	}
+	.km-ios #scrollview-container .km-pages {
+		padding-top: 18px;
+	}
+    .km-ios #scrollview-home .km-view-title
+    {
+        color: #fff;
+        text-shadow: 0 -1px rgba(0,0,0,.5);
+    }
+</style>

@@ -9058,6 +9058,7 @@
       {
         "text": "AngularJS",
         "new": true,
+        "mobile": true,
         "disableInMobile": true,
         "url": "scrollview/angular",
         "title": {
