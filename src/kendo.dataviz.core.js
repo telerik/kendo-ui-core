@@ -4368,7 +4368,7 @@ var __meta__ = {
                 closed = that.closed,
                 points = dataPoints.slice(0),
                 length = points.length,
-                curve = [],
+                segments = [],
                 p0,p1,p2,
                 controlPoints,
                 initialControlPoint,
@@ -4381,11 +4381,11 @@ var __meta__ = {
             }
 
             if (length < 2 || (length == 2 && points[0].equals(points[1]))) {
-                return curve;
+                return segments;
             }
 
             p0 = points[0]; p1 = points[1]; p2 = points[2];
-            curve.push(p0);
+            segments.push(new draw.Segment(p0));
 
             while (p0.equals(points[length - 1])) {
                 closed = true;
@@ -4395,10 +4395,17 @@ var __meta__ = {
 
             if (length == 2) {
                 tangent = that.tangent(p0,p1, X,Y);
-                curve.push(that.firstControlPoint(tangent, p0, p1, X, Y),
-                    that.secondControlPoint(tangent, p0, p1, X, Y),
-                    p1);
-                return curve;
+
+                last(segments).controlOut(
+                    that.firstControlPoint(tangent, p0, p1, X, Y)
+                );
+
+                segments.push(new draw.Segment(
+                    p1,
+                    that.secondControlPoint(tangent, p0, p1, X, Y)
+                ));
+
+                return segments;
             }
 
             if (closed) {
@@ -4411,29 +4418,48 @@ var __meta__ = {
                 initialControlPoint = that.firstControlPoint(tangent, p0, p1, X, Y);
             }
 
-            curve.push(initialControlPoint);
-
+            var cp0 = initialControlPoint;
             for (var idx = 0; idx <= length - 3; idx++) {
                 that.removeDuplicates(idx, points);
                 length = points.length;
                 if (idx + 3 <= length) {
                     p0 = points[idx]; p1 = points[idx + 1]; p2 = points[idx + 2];
-
                     controlPoints = that.controlPoints(p0,p1,p2);
-                    curve.push(controlPoints[0], p1, controlPoints[1]);
+
+                    last(segments).controlOut(cp0);
+                    cp0 = controlPoints[1];
+
+                    var cp1 = controlPoints[0];
+                    segments.push(new draw.Segment(p1, cp1));
                 }
             }
 
             if (closed) {
                 p0 = points[length - 2]; p1 = points[length - 1]; p2 = points[0];
                 controlPoints = that.controlPoints(p0, p1, p2);
-                curve.push(controlPoints[0], p1, controlPoints[1], lastControlPoint, p2);
+
+                last(segments).controlOut(cp0);
+                segments.push(new draw.Segment(
+                    p1,
+                    controlPoints[0]
+                ));
+
+                last(segments).controlOut(controlPoints[1]);
+                segments.push(new draw.Segment(
+                    p2,
+                    lastControlPoint
+                ));
             } else {
                 tangent = that.tangent(p1, p2, X, Y);
-                curve.push(that.secondControlPoint(tangent, p1, p2, X, Y), p2);
+
+                last(segments).controlOut(cp0);
+                segments.push(new draw.Segment(
+                    p2,
+                    that.secondControlPoint(tangent, p1, p2, X, Y)
+                ));
             }
 
-            return curve;
+            return segments;
         },
 
         removeDuplicates: function(idx, points) {
@@ -4604,7 +4630,7 @@ var __meta__ = {
         },
 
         point: function (xValue, yValue, xField, yField) {
-            var controlPoint = Point2D();
+            var controlPoint = new geom.Point();
             controlPoint[xField] = xValue;
             controlPoint[yField] = yValue;
 
