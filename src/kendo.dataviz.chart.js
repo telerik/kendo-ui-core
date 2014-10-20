@@ -1580,7 +1580,7 @@ var __meta__ = {
                 type: FADEIN,
                 delay: INITIAL_ANIMATION_DURATION
             },
-            zIndex: 1
+            zIndex: 2
         },
 
         reflow: function(targetBox) {
@@ -8038,6 +8038,16 @@ var __meta__ = {
             this.visual = new draw.Group({
                 zIndex: 0
             });
+
+            if (this.shouldClip()) {
+                var clipRect = this._clipBox().toRect();
+                var clipPath = draw.Path.fromRect(clipRect);
+                this.visual.clip(clipPath);
+            }
+        },
+
+        stackRoot: function() {
+            return this;
         },
 
         getViewElements: function (view) {
