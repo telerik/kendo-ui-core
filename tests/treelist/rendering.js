@@ -804,7 +804,12 @@
             ]
         });
 
-        equal(instance.content.find("tr.k-hidden").length, 2);
+        var rows = instance.content.find("tr");
+
+        equal(rows.length, 3);
+        ok(rows.eq(0).is(":visible"));
+        ok(!rows.eq(1).is(":visible"));
+        ok(!rows.eq(2).is(":visible"));
     });
 
     test("adjusts scrollable content height based on wrapper height", function() {

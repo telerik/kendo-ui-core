@@ -45,7 +45,6 @@ var __meta__ = {
         header: "k-header",
         button: "k-button",
         alt: "k-alt",
-        hidden: "k-hidden",
         editCell: "k-edit-cell",
         group: "k-treelist-group",
         gridToolbar: "k-grid-toolbar",
@@ -1102,7 +1101,7 @@ var __meta__ = {
                 if (options.visible) {
                     this._absoluteIndex++;
                 } else {
-                    className.push(classNames.hidden);
+                    attr.style = { display: "none" };
                 }
 
                 if (hasChildren) {
