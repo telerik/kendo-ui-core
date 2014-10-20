@@ -13,7 +13,7 @@ namespace KendoCRUDService.Controllers
         public ActionResult Index()
         {
             return this.Jsonp(TasksRepository.All());
-        }                       
+        }
         
         public JsonResult Update()
         {
@@ -59,6 +59,5 @@ namespace KendoCRUDService.Controllers
 
             return this.Jsonp(tasks);
         }
-
     }
 }

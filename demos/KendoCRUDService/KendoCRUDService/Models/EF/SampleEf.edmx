@@ -10,6 +10,7 @@
           <EntitySet Name="CustomerCustomerDemo" EntityType="SampleModel.Store.CustomerCustomerDemo" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="CustomerDemographics" EntityType="SampleModel.Store.CustomerDemographics" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Customers" EntityType="SampleModel.Store.Customers" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="EmployeeDirectory" EntityType="SampleModel.Store.EmployeeDirectory" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Employees" EntityType="SampleModel.Store.Employees" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="EmployeeTerritories" EntityType="SampleModel.Store.EmployeeTerritories" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="GanttDependencies" EntityType="SampleModel.Store.GanttDependencies" store:Type="Tables" Schema="dbo" />
@@ -46,6 +47,10 @@
           <AssociationSet Name="FK_CustomerCustomerDemo_Customers" Association="SampleModel.Store.FK_CustomerCustomerDemo_Customers">
             <End Role="Customers" EntitySet="Customers" />
             <End Role="CustomerCustomerDemo" EntitySet="CustomerCustomerDemo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeDirectory_EmployeeDirectory" Association="SampleModel.Store.FK_EmployeeDirectory_EmployeeDirectory">
+            <End Role="EmployeeDirectory" EntitySet="EmployeeDirectory" />
+            <End Role="EmployeeDirectory1" EntitySet="EmployeeDirectory" />
           </AssociationSet>
           <AssociationSet Name="FK_Employees_Employees" Association="SampleModel.Store.FK_Employees_Employees">
             <End Role="Employees" EntitySet="Employees" />
@@ -148,6 +153,23 @@
           <Property Name="Phone" Type="nvarchar" MaxLength="24" />
           <Property Name="Fax" Type="nvarchar" MaxLength="24" />
           <Property Name="Bool" Type="bit" />
+        </EntityType>
+        <EntityType Name="EmployeeDirectory">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="varchar" MaxLength="255" />
+          <Property Name="LastName" Type="varchar" MaxLength="255" />
+          <Property Name="ReportsTo" Type="int" />
+          <Property Name="Address" Type="varchar" MaxLength="255" />
+          <Property Name="City" Type="varchar" MaxLength="255" />
+          <Property Name="Country" Type="varchar" MaxLength="100" />
+          <Property Name="Phone" Type="varchar" MaxLength="100" />
+          <Property Name="Extension" Type="int" />
+          <Property Name="BirthDate" Type="datetime" />
+          <Property Name="HireDate" Type="datetime" />
+          <Property Name="Position" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="Employees">
           <Key>
@@ -388,6 +410,18 @@
             </Principal>
             <Dependent Role="CustomerCustomerDemo">
               <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeDirectory_EmployeeDirectory">
+          <End Role="EmployeeDirectory" Type="SampleModel.Store.EmployeeDirectory" Multiplicity="0..1" />
+          <End Role="EmployeeDirectory1" Type="SampleModel.Store.EmployeeDirectory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeeDirectory">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="EmployeeDirectory1">
+              <PropertyRef Name="ReportsTo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -653,6 +687,11 @@
           <AssociationSet Name="FK_GanttTasks_GanttTasks" Association="SampleModel.FK_GanttTasks_GanttTasks">
             <End Role="GanttTask" EntitySet="GanttTasks" />
             <End Role="GanttTask1" EntitySet="GanttTasks" />
+          </AssociationSet>
+          <EntitySet Name="EmployeeDirectory" EntityType="SampleModel.EmployeeDirectory" />
+          <AssociationSet Name="FK_EmployeeDirectory_EmployeeDirectory" Association="SampleModel.FK_EmployeeDirectory_EmployeeDirectory">
+            <End Role="EmployeeDirectory" EntitySet="EmployeeDirectory" />
+            <End Role="EmployeeDirectory1" EntitySet="EmployeeDirectory" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Category">
@@ -1089,6 +1128,37 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="EmployeeDirectory">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Type="Int32" Name="EmployeeID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="FirstName" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="LastName" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="ReportsTo" />
+          <Property Type="String" Name="Address" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="City" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Country" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Phone" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Extension" />
+          <Property Type="DateTime" Name="BirthDate" Precision="3" />
+          <Property Type="DateTime" Name="HireDate" Precision="3" />
+          <Property Type="String" Name="Position" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EmployeeDirectory1" Relationship="SampleModel.FK_EmployeeDirectory_EmployeeDirectory" FromRole="EmployeeDirectory" ToRole="EmployeeDirectory1" />
+          <NavigationProperty Name="EmployeeDirectory2" Relationship="SampleModel.FK_EmployeeDirectory_EmployeeDirectory" FromRole="EmployeeDirectory1" ToRole="EmployeeDirectory" />
+        </EntityType>
+        <Association Name="FK_EmployeeDirectory_EmployeeDirectory">
+          <End Type="SampleModel.EmployeeDirectory" Role="EmployeeDirectory" Multiplicity="0..1" />
+          <End Type="SampleModel.EmployeeDirectory" Role="EmployeeDirectory1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeeDirectory">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="EmployeeDirectory1">
+              <PropertyRef Name="ReportsTo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1361,6 +1431,24 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeDirectory">
+            <EntityTypeMapping TypeName="SampleModel.EmployeeDirectory">
+              <MappingFragment StoreEntitySet="EmployeeDirectory">
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="HireDate" ColumnName="HireDate" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="Extension" ColumnName="Extension" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="ReportsTo" ColumnName="ReportsTo" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1375,7 +1463,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
       </DesignerInfoPropertySet>
     </Options>
@@ -1477,6 +1565,8 @@
         <EntityTypeShape EntityType="SampleModel.GanttDependency" Width="1.5" PointX="8.625" PointY="20.5" />
         <EntityTypeShape EntityType="SampleModel.GanttTask" Width="1.5" PointX="10.875" PointY="20.5" />
         <AssociationConnector Association="SampleModel.FK_GanttTasks_GanttTasks" />
+        <EntityTypeShape EntityType="SampleModel.EmployeeDirectory" Width="1.5" PointX="0.5" PointY="6" />
+        <AssociationConnector Association="SampleModel.FK_EmployeeDirectory_EmployeeDirectory" />
         </Diagram>
     </Diagrams>
   </Designer>

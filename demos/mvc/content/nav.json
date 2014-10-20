@@ -4339,6 +4339,16 @@
         }
       },
       {
+        "text": "Editing",
+        "url": "treelist/editing",
+        "title": {
+            "kendo-ui": "Kendo UI TreeList widget | Kendo UI Web demo"
+        },
+        "meta": {
+            "kendo-ui": "This demo illustrates how editing works within the Kendo UI jQuery TreeList widget which represents items in a hierarchical tree structure."
+        }
+      },
+      {
         "text": "MVVM",
         "url": "treelist/mvvm",
         "title": {
