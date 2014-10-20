@@ -1,4 +1,4 @@
-@image-folder: "Bootstrap";
+@image-folder: "Material";
 @texture: none;
 @tooltip-texture: none;
 @fallback-texture: none;
@@ -697,6 +697,21 @@ border-color: @secondary-background-color;
 .k-gantt-toolbar li:last-child, 
 .k-gantt-toolbar li:last-child > .k-link {
 border-radius: 0;
+}
+
+.k-popup .k-textbox:focus,
+.k-popup  .k-autocomplete.k-state-focused,
+.k-popup  .k-picker-wrap.k-state-focused,
+.k-popup  .k-numeric-wrap.k-state-focused,
+.k-popup  .k-dropdown-wrap.k-state-focused,
+.k-popup .k-multiselect.k-header.k-state-focused,
+.k-popup .k-textbox:hover,
+.k-popup .k-autocomplete.k-state-hover,
+.k-popup .k-picker-wrap.k-state-hover,
+.k-popup .k-numeric-wrap.k-state-hover,
+.k-popup .k-dropdown-wrap.k-state-hover
+{
+.box-shadow(none);
 }
 
 //PanelBar
