@@ -8965,6 +8965,7 @@
       {
         "text": "AngularJS",
         "new": true,
+        "mobile": true,
         "disableInMobile": true,
         "url": "scroller/angular",
         "title": {
