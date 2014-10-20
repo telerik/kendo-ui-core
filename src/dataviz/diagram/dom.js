@@ -159,7 +159,6 @@
                 hover: {},
                 editable: {
                     connect: true,
-                    tools: ["edit", "delete", "rotate"],
                     editors: {}
                 },
                 connectors: diagram.DefaultConnectors,
@@ -1522,7 +1521,6 @@
                 shapeDefaults: diagram.shapeDefaults({ undoable: true }),
                 connectionDefaults: {
                     editable: {
-                        tools: ["edit", "delete"],
                         editors: {}
                     }
                 },
@@ -2884,51 +2882,57 @@
                 var diagram = this.toolService.diagram;
 
                 if (!this.toolBar && diagram.select().length === 1) {
-                    if (this.toolService.hoveredItem) {
-                    var tools = this.toolService.hoveredItem.options.editable.tools;
+                    var element = this.toolService.hoveredItem;
+                    if (element) {
+                        var tools = element.options.editable.tools;
                         if (tools) {
-                            this.toolBar = new DiagramToolBar(diagram, {
-                                tools: tools
-                            });
-                            var element = this.toolService.hoveredItem;
                             var padding = 10;
-                            if (element) {
-                                var point;
-                                var toolBarElement = this.toolBar.element;
-                                var popupWidth = this.toolBar._popup.element.outerWidth();
-                                var popupHeight = this.toolBar._popup.element.outerHeight();
-                                if (element instanceof Shape) {
-                                    var selectionBounds = this._resizingAdorner.bounds();
-                                    var shapeBounds = element._transformedBounds();
-                                    point = Point(shapeBounds.x, shapeBounds.y)
-                                                    .minus(Point(
-                                                        (popupWidth - selectionBounds.width) / 2,
-                                                        popupHeight + padding
-                                                    ));
-                                } else if (element instanceof Connection) {
-                                    var connectionBounds = element.bounds();
-                                    var topLeft = connectionBounds.topLeft();
-                                    var bottomRight = connectionBounds.bottomRight();
-                                    var rect = Rect.fromPoints(
-                                        this.modelToView(topLeft),
-                                        this.modelToView(bottomRight)
-                                    );
+                            var point;
+                            this.toolBar = new DiagramToolBar(diagram, {
+                                tools: tools,
+                                click: proxy(this._toolBarClick, this)
+                            });
+                            var toolBarElement = this.toolBar.element;
+                            var popupWidth = this.toolBar._popup.element.outerWidth();
+                            var popupHeight = this.toolBar._popup.element.outerHeight();
+                            if (element instanceof Shape) {
+                                var selectionBounds = this._resizingAdorner.bounds();
+                                var shapeBounds = element._transformedBounds();
+                                point = Point(shapeBounds.x, shapeBounds.y)
+                                                .minus(Point(
+                                                    (popupWidth - selectionBounds.width) / 2,
+                                                    popupHeight + padding
+                                                ));
+                            } else if (element instanceof Connection) {
+                                var connectionBounds = element.bounds();
+                                var topLeft = connectionBounds.topLeft();
+                                var bottomRight = connectionBounds.bottomRight();
+                                var rect = Rect.fromPoints(
+                                    this.modelToView(topLeft),
+                                    this.modelToView(bottomRight)
+                                );
 
-                                    point = Point(rect.x, rect.y)
-                                                    .minus(Point(
-                                                        (popupWidth - connectionBounds.width - 20) / 2,
-                                                        popupHeight + padding
-                                                    ));
-                                }
+                                point = Point(rect.x, rect.y)
+                                                .minus(Point(
+                                                    (popupWidth - connectionBounds.width - 20) / 2,
+                                                    popupHeight + padding
+                                                ));
+                            }
 
-                                if (point) {
-                                    point = Point(math.max(point.x, 0), math.max(point.y, 0));
-                                    this.toolBar.show(point);
-                                }
+                            if (point) {
+                                point = Point(math.max(point.x, 0), math.max(point.y, 0));
+                                this.toolBar.show(point);
+                            } else {
+                                this._destroyToolBar();
                             }
                         }
                     }
                 }
+            },
+
+            _toolBarClick: function(e) {
+                this.trigger("toolBarClick", e);
+                this._destroyToolBar();
             },
 
             _mouseMove: function (e) {
@@ -3004,7 +3008,7 @@
                         modelBase: ShapeModel,
                         model: ShapeModel
                     }
-                }, ds)
+                }, ds);
 
                 if (this.dataSource && this._shapesRefreshHandler) {
                     this.dataSource
@@ -3029,7 +3033,7 @@
                         modelBase: ConnectionModel,
                         model: ConnectionModel
                     }
-                }, ds)
+                }, ds);
 
                 if (this.connectionsDataSource && this._connectionsRefreshHandler) {
                     this.connectionsDataSource
@@ -3403,15 +3407,20 @@
             return typeof val === "number" && !isNaN(val);
         }
 
-        var DiagramToolBar = Class.extend({
+        var DiagramToolBar = kendo.Observable.extend({
             init: function(diagram, options) {
+                kendo.Observable.fn.init.call(this);
                 this.diagram = diagram;
                 this.options = deepExtend({}, this.options, options);
                 this.createToolBar();
                 this.createTools(this.options.tools);
 
                 this.createPopup();
+
+                this.bind(this.events, options);
             },
+
+            events: ["click"],
 
             createPopup: function() {
                 this.container = $("<div></div>").append(this.element);
@@ -3508,7 +3517,7 @@
                     this[action]();
                 }
 
-                this.diagram.trigger("toolBarClick", this.eventData(action));
+                this.trigger("click", this.eventData(action));
             },
 
             eventData: function(action) {
@@ -3525,12 +3534,11 @@
                     shapes: shapes,
                     connections: connections,
                     action: action
-                }
+                };
             },
 
             "delete": function() {
                 this.diagram._remove(this.selectedElement(), true);
-                this.diagram._destroyToolBar();
             },
 
             edit: function() {
