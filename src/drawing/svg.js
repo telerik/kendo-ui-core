@@ -874,7 +874,7 @@
         },
 
         template: renderTemplate(
-            "<image #= d.renderStyle() # #= d.renderTransform()# #= d.renderOpacity() # " +
+            "<image preserveAspectRatio='none' #= d.renderStyle() # #= d.renderTransform()# #= d.renderOpacity() # " +
             "#= d.renderPosition() # #= d.renderSource() # #= d.renderDefinitions()#>" +
             "</image>"
         )
