@@ -297,12 +297,11 @@
         }
 
         var DiagramElement = Observable.extend({
-            init: function (options, dataItem) {
+            init: function (options) {
                 var that = this;
                 Observable.fn.init.call(that);
                 that.options = deepExtend({ id: diagram.randomId() }, that.options, options);
                 that.isSelected = false;
-                that.dataItem = dataItem;
                 that.visual = new Group({
                     id: that.options.id,
                     autoSize: that.options.autoSize
@@ -356,8 +355,8 @@
             serialize: function () {
                 // the options json object describes the shape perfectly. So this object can serve as shape serialization.
                 var json = deepExtend({}, {options: this.options});
-                if (this.dataItem) {
-                    json.dataItem = this.dataItem.toString();
+                if (this.options.dataItem) {
+                    json.dataItem = this.options.dataItem.toString();
                 }
                 return json;
             },
@@ -396,7 +395,7 @@
             _template: function () {
                 var that = this;
                 if (that.options.content.template) {
-                    var data = that.dataItem || {},
+                    var data = that.options.dataItem || {},
                         elementTemplate = kendo.template(that.options.content.template, {
                             paramName: "item"
                         });
@@ -453,10 +452,9 @@
         };
 
         var Shape = DiagramElement.extend({
-            init: function (options, dataItem) {
+            init: function (options) {
                 var that = this;
-                dataItem = dataItem || {};
-                DiagramElement.fn.init.call(that, options, dataItem);
+                DiagramElement.fn.init.call(that, options);
                 this.updateOptionsFromModel();
                 options = that.options;
                 that.connectors = [];
@@ -483,7 +481,7 @@
 
             updateOptionsFromModel: function(model) {
                 if (this.diagram && this.diagram._editing) {
-                    var modelOptions = filterShapeDataItem(model || this.dataItem);
+                    var modelOptions = filterShapeDataItem(model || this.options.dataItem);
 
                     if (model) {
                         this.redraw(modelOptions);
@@ -496,7 +494,7 @@
             updateModel: function() {
                 if (this.diagram && this.diagram._editing) {
                     var bounds = this._bounds;
-                    var model = this.diagram.dataSource.getByUid(this.dataItem.uid);
+                    var model = this.diagram.dataSource.getByUid(this.options.dataItem.uid);
                     if (model) {
                         this.diagram._shouldRefresh = false;
                         model._set("x", bounds.x);
@@ -621,17 +619,15 @@
              * @returns {Shape}
              */
             clone: function () {
-                var json = this.serialize(),
-                    dataItem = {};
+                var json = this.serialize();
 
                 json.options.id = diagram.randomId();
 
-                if (this.diagram && this.diagram._editing && defined(this.dataItem)) {
-                    dataItem = this.dataItem.toJSON();
-                    dataItem[this.dataItem.idField] = this.dataItem._defaultId;
+                if (this.diagram && this.diagram._editing && defined(this.options.dataItem)) {
+                    this.options.dataItem[this.options.dataItem.idField] = this.options.dataItem._defaultId;
                 }
 
-                return new Shape(json.options, dataItem);
+                return new Shape(json.options);
             },
 
             select: function (value) {
@@ -936,10 +932,9 @@
          * The visual link between two Shapes through the intermediate of Connectors.
          */
         var Connection = DiagramElement.extend({
-            init: function (from, to, options, dataItem) {
+            init: function (from, to, options) {
                 var that = this;
-                dataItem = dataItem || {};
-                DiagramElement.fn.init.call(that, options, dataItem);
+                DiagramElement.fn.init.call(that, options);
                 this.updateOptionsFromModel();
                 that._router = new PolylineRouter(this);
                 that.path = new diagram.Polyline(that.options);
@@ -968,7 +963,7 @@
 
             updateOptionsFromModel: function(model) {
                 if (this.diagram && this.diagram._editing) {
-                    var options = filterConnectionDataItem(model || this.dataItem);
+                    var options = filterConnectionDataItem(model || this.options.dataItem);
 
                     if (model) {
                         if (defined(options.from)) {
@@ -993,7 +988,7 @@
             updateModel: function(shouldRefresh) {
                 if (this.diagram && this.diagram._editing) {
                     if (this.diagram.ConnectionsDataSource) {
-                        var model = this.diagram.connectionsDataSource.getByUid(this.dataItem.uid);
+                        var model = this.diagram.connectionsDataSource.getByUid(this.options.dataItem.uid);
                         if (model) {
                             this.diagram._shouldRefresh = false;
                             if (defined(this.options.fromX) && this.options.fromX !== null) {
@@ -1053,8 +1048,9 @@
                                 this._clearSourceConnector();
                             }
                         } else if (source instanceof Connector) {
-                            if (source.shape.dataItem) {
-                                this.options.from = source.shape.dataItem.id;
+                            var dataItem = source.shape.options.dataItem
+                            if (dataItem) {
+                                this.options.from = dataItem.id;
                                 this.options.fromX = null;
                                 this.options.fromY = null;
                             }
@@ -1071,7 +1067,7 @@
                             }
 
                         } else if (source instanceof Shape) {
-                            this.options.from = source.dataItem.id;
+                            this.options.from = source.options.dataItem.id;
                             this.options.fromX = null;
                             this.options.fromY = null;
                             this.sourceConnector = source.getConnector(AUTO);// source.getConnector(this.targetPoint());
@@ -1133,8 +1129,9 @@
                                 this._clearTargetConnector();
                             }
                         } else if (target instanceof Connector) {
-                            if (target.shape.dataItem) {
-                                this.options.to = target.shape.dataItem.id;
+                            var dataItem = target.shape.options.dataItem;
+                            if (dataItem) {
+                                this.options.to = dataItem.id;
                                 this.options.toX = null;
                                 this.options.toY = null;
                             }
@@ -1149,7 +1146,7 @@
                                 this._clearTargetConnector();
                             }
                         } else if (target instanceof Shape) {
-                            this.options.to = target.dataItem.id;
+                            this.options.to = target.options.dataItem.id;
                             this.options.toX = null;
                             this.options.toY = null;
                             this.targetConnector = target.getConnector(AUTO);// target.getConnector(this.sourcePoint());
@@ -1353,12 +1350,11 @@
                 var json = this.serialize(),
                     dataItem = {};
 
-                if (this.diagram && this.diagram._editing && defined(this.dataItem)) {
-                    dataItem = this.dataItem.toJSON();
-                    dataItem[this.dataItem.idField] = this.dataItem._defaultId;
+                if (this.diagram && this.diagram._editing && defined(this.options.dataItem)) {
+                    this.options.dataItem[this.options.dataItem.idField] = this.options.dataItem._defaultId;
                 }
 
-                return new Connection(this.from, this.to, json.options, dataItem);
+                return new Connection(this.from, this.to, json.options);
             },
             /**
              * Returns a serialized connection in json format. Consist of the options and the dataItem.
@@ -1373,8 +1369,9 @@
                     from: from,
                     to: to
                 });
-                if (this.dataItem) {
-                    json.dataItem = this.dataItem.toString();
+
+                if (this.options.dataItem) {
+                    json.dataItem = this.optins.dataItem.toString();
                 }
                 json.options.points = this.points();
                 return json;
@@ -1550,12 +1547,12 @@
                     return;
                 }
 
-                if (item.dataItem) {
+                if (item.options.dataItem) {
                     var editable = item.options.editable;
                     this.editor = new PopupEditor(this.element, {
                         updateEditor: proxy(this._update, this),
                         cancelEditor: proxy(this._cancel, this),
-                        model: item.dataItem,
+                        model: item.options.dataItem,
                         type: editorType,
                         target: this,
                         editors: editable.editors,
@@ -1955,11 +1952,11 @@
 
             _addConnection: function (connection, undoable) {
                 if (this.connectionsDataSource && this._editing) {
-                    var dataItem = this.connectionsDataSource.add(connection.dataItem);
-                    connection.dataItem = dataItem;
+                    var dataItem = this.connectionsDataSource.add(connection.options.dataItem);
+                    connection.options.dataItem = dataItem;
                     connection.updateModel(false);
                     this.connectionsDataSource.sync();
-                    this._connectionsDataMap[connection.dataItem.id] = connection;
+                    this._connectionsDataMap[connection.options.dataItem.id] = connection;
                 }
 
                 return this.addConnection(connection, undoable);
@@ -2008,11 +2005,11 @@
 
             _addShape: function(shape, options) {
                 if (this.dataSource && this._editing) {
-                    var dataItem = this.dataSource.add(shape.dataItem);
+                    var dataItem = this.dataSource.add(shape.option.dataItem);
                     this.dataSource.sync();
-                    this._dataMap[shape.dataItem.id] = shape;
+                    this._dataMap[shape.options.dataItem.id] = shape;
                     // refresh shape.dataitem in order to get uid in copy/paste scenario
-                    shape.dataItem = dataItem;
+                    shape.options.dataItem = dataItem;
                 }
 
                 return this.addShape(shape, options);
@@ -2063,7 +2060,7 @@
                     if (item.length) {
                         this._destroyToolBar();
                     } else {
-                        dataSource.remove(item.dataItem);
+                        dataSource.remove(item.options.dataItem);
                         dataSource.sync();
                     }
                 }
@@ -2806,15 +2803,35 @@
                 if (!defined(dataItem)) {
                     return;
                 }
+
                 var shape = this._dataMap[dataItem.id];
                 if (shape) {
                     return shape;
                 }
 
                 options = deepExtend({}, this.options.shapeDefaults, options);
-                shape = new Shape(options, dataItem);
+                options.dataItem = dataItem;
+                shape = new Shape(options);
                 this.addShape(shape);
                 this._dataMap[dataItem.id] = shape;
+                return shape;
+            },
+
+            _addDataItemByUid: function(dataItem) {
+                if (!defined(dataItem)) {
+                    return;
+                }
+
+                var shape = this._dataMap[dataItem.uid];
+                if (shape) {
+                    return shape;
+                }
+
+                var options = deepExtend({}, this.options.shapeDefaults);
+                options.dataItem = dataItem;
+                shape = new Shape(options);
+                this.addShape(shape);
+                this._dataMap[dataItem.uid] = shape;
                 return shape;
             },
 
@@ -2822,8 +2839,8 @@
                 var item, idx, shape, parentShape, connection;
                 for (idx = 0; idx < items.length; idx++) {
                     item = items[idx];
-                    shape = this._addDataItem(item);
-                    parentShape = this._addDataItem(parent);
+                    shape = this._addDataItemByUid(item);
+                    parentShape = this._addDataItemByUid(parent);
                     if (parentShape && !this.connected(parentShape, shape)) { // check if connected to not duplicate connections.
                         connection = this.connect(parentShape, shape);
                         connection.type(CASCADING);
@@ -2881,7 +2898,9 @@
             _mouseUp: function (e) {
                 var p = this._calculatePosition(e);
                 if (e.which == 1 && this.toolService.end(p, this._meta(e))) {
-                    this._createToolBar();
+                    if (this._editing) {
+                        this._createToolBar();
+                    }
                     e.preventDefault();
                 }
             },
@@ -3106,8 +3125,7 @@
 
             _removeShapes: function(items) {
                 for (var i = 0; i < items.length; i++) {
-                    var dataItem = items[i];
-                    this._dataMap[dataItem.id] = null;
+                    this._dataMap[items[i].id] = null;
                 }
             },
 
@@ -3143,11 +3161,8 @@
             },
 
             _addShapes: function(dataItems) {
-                var length = dataItems.length;
-
-                for (var i = 0; i < length; i++) {
-                    var dataItem = dataItems[i];
-                    this._addDataItem(dataItem);
+                for (var i = 0; i < dataItems.length; i++) {
+                    this._addDataItem(dataItems[i]);
                 }
             },
 
@@ -3171,8 +3186,7 @@
 
             _removeConnections: function(items) {
                 for (var i = 0; i < items.length; i++) {
-                    var dataItem = items[i];
-                    this._connectionsDataMap[dataItem.id] = null;
+                    this._connectionsDataMap[items[i].id] = null;
                 }
             },
 
