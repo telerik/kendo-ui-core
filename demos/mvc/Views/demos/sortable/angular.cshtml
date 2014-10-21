@@ -65,13 +65,13 @@
 </div>
 
 <script>
-    angular.module("KendoDemos", [ "kendo.directives" ]);
-    function MyCtrl($scope){
-        $scope.placeholder = function(element) {
-            return element.clone().addClass("placeholder").text("drop here");
-        };
-        $scope.hint = function(element) {
-            return element.clone().addClass("hint");
-        };
-    }
+    angular.module("KendoDemos", [ "kendo.directives" ])
+        .controller("MyCtrl", function($scope){
+            $scope.placeholder = function(element) {
+                return element.clone().addClass("placeholder").text("drop here");
+            };
+            $scope.hint = function(element) {
+                return element.clone().addClass("hint");
+            };
+        })
 </script>
