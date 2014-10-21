@@ -14,29 +14,14 @@
     /* global VBArray */
     /* global console */
 
+    var kendo = global.kendo;
+
     // XXX: remove this junk (assume `true`) when we no longer have to support IE < 10
     var HAS_TYPED_ARRAYS = !!global.Uint8Array;
 
     var NL = "\n";
 
     var RESOURCE_COUNTER = 0;
-
-    var STANDARD_FONTS = [
-        "Times-Roman",
-        "Times-Bold",
-        "Times-Italic",
-        "Times-BoldItalic",
-        "Helvetica",
-        "Helvetica-Bold",
-        "Helvetica-Oblique",
-        "Helvetica-BoldOblique",
-        "Courier",
-        "Courier-Bold",
-        "Courier-Oblique",
-        "Courier-BoldOblique",
-        "Symbol",
-        "ZapfDingbats"
-    ];
 
     var BASE64 = (function(){
         var keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
@@ -346,10 +331,22 @@
         };
     }
 
-    var FONT_CACHE = {};
-    STANDARD_FONTS.forEach(function(name){
-        FONT_CACHE[name] = true;
-    });
+    var FONT_CACHE = {
+        "Times-Roman"           : true,
+        "Times-Bold"            : true,
+        "Times-Italic"          : true,
+        "Times-BoldItalic"      : true,
+        "Helvetica"             : true,
+        "Helvetica-Bold"        : true,
+        "Helvetica-Oblique"     : true,
+        "Helvetica-BoldOblique" : true,
+        "Courier"               : true,
+        "Courier-Bold"          : true,
+        "Courier-Oblique"       : true,
+        "Courier-BoldOblique"   : true,
+        "Symbol"                : true,
+        "ZapfDingbats"          : true
+    };
 
     function loadBinary(url, cont) {
         function error() {
@@ -391,7 +388,7 @@
                 if (data == null) {
                     throw new Error("Cannot load font from " + url);
                 } else {
-                    var font = new global.kendo.pdf.TTFFont(data);
+                    var font = new kendo.pdf.TTFFont(data);
                     FONT_CACHE[url] = font;
                     cont(font);
                 }
@@ -502,13 +499,13 @@
         getFont: function(url) {
             var font = this.FONTS[url];
             if (!font) {
-                if (STANDARD_FONTS.indexOf(url) >= 0) {
+                font = FONT_CACHE[url];
+                if (!font) {
+                    throw new Error("Font " + url + " has not been loaded");
+                }
+                if (font === true) {
                     font = this.attach(new PDFStandardFont(url));
                 } else {
-                    font = FONT_CACHE[url];
-                    if (!font) {
-                        throw new Error("Font " + url + " has not been loaded");
-                    }
                     font = this.attach(new PDFFont(this, font));
                 }
                 this.FONTS[url] = font;
@@ -1533,7 +1530,7 @@
 
     /// exports.
 
-    global.kendo.pdf = {
+    kendo.pdf = {
         Document      : PDFDocument,
         BinaryStream  : BinaryStream,
         defineFont    : defineFont,
