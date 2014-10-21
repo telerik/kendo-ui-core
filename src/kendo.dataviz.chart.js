@@ -470,18 +470,28 @@ var __meta__ = {
 
             model.renderVisual();
 
+            if (this.options.transitions !== false) {
+                model.traverse(function(element) {
+                    if (element.animation) {
+                        element.animation.setup();
+                    }
+                });
+            }
+
             chart.surface.clear();
             chart.surface.draw(model.visual);
 
-            model.traverse(function(element) {
-                if (element.animation) {
-                    element.animation.play();
-                }
-            });
+            if (this.options.transitions !== false) {
+                model.traverse(function(element) {
+                    if (element.animation) {
+                        element.animation.play();
+                    }
+                });
+            }
 
             chart._tooltip = chart._createTooltip();
             chart._highlight = new Highlight(view, chart._viewElement);
-            //chart._setupSelection();
+            chart._setupSelection();
         },
 
         _sharedTooltip: function() {

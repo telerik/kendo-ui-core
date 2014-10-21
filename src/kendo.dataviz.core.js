@@ -780,10 +780,6 @@ var __meta__ = {
             this.animation = draw.Animation.create(
                 this.visual, this.options.animation
             );
-
-            if (this.animation) {
-                this.animation.setup();
-            }
         },
 
         appendVisual: function(childVisual) {
