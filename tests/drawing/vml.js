@@ -856,6 +856,20 @@
             equal(element.type, "gradient");
         });
 
+        test("renders linear gradient with base color", function() {
+            var linearGradient = new LinearGradient({
+                stops: [[0.3, "#fff", 0.5], [1, "#fff", 1]]
+            });
+            linearGradient.baseColor = "red";
+            path = new Path({fill: linearGradient});
+            fillNode = new FillNodeMock(path);
+            var element = fillNode.element;
+
+            equal(element.color, "#ff8080");
+            equal(element.color2, "#ffffff");
+            equal(element.colors.value, "30% #ff8080,100% #ffffff");
+        });
+
         test("renders on for RadialGradient", function() {
             createNode({ fill: new RadialGradient() });
             equal(fillNode.element.on, "false");
