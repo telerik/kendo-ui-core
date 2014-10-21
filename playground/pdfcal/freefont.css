@@ -1,0 +1,62 @@
+@font-face {
+  font-family: "FreeMono";
+  src: url("../freefont/FreeMono.ttf"), local("FreeMono");
+}
+@font-face {
+  font-family: "FreeMono";
+  font-weight: bold;
+  src: url("../freefont/FreeMonoBold.ttf"), local("FreeMonoBold");
+}
+@font-face {
+  font-family: "FreeMono";
+  font-style: italic;
+  src: url("../freefont/FreeMonoOblique.ttf"), local("FreeMonoOblique");
+}
+@font-face {
+  font-family: "FreeMono";
+  font-weight: bold;
+  font-style: italic;
+  src: url("../freefont/FreeMonoBoldOblique.ttf"), local("FreeMonoBoldOblique");
+}
+
+@font-face {
+  font-family: "FreeSans";
+  src: url("../freefont/FreeSans.ttf"), local("FreeSans");
+}
+@font-face {
+  font-family: "FreeSans";
+  font-weight: bold;
+  src: url("../freefont/FreeSansBold.ttf"), local("FreeSansBold");
+}
+@font-face {
+  font-family: "FreeSans";
+  font-style: italic;
+  src: url("../freefont/FreeSansOblique.ttf"), local("FreeSansOblique");
+}
+@font-face {
+  font-family: "FreeSans";
+  font-weight: bold;
+  font-style: italic;
+  src: url("../freefont/FreeSansBoldOblique.ttf"), local("FreeSansBoldOblique");
+}
+
+@font-face {
+  font-family: "FreeSerif";
+  src: url("../freefont/FreeSerif.ttf"), local("FreeSerif");
+}
+@font-face {
+  font-family: "FreeSerif";
+  font-weight: bold;
+  src: url("../freefont/FreeSerifBold.ttf"), local("FreeSerifBold");
+}
+@font-face {
+  font-family: "FreeSerif";
+  font-style: italic;
+  src: url("../freefont/FreeSerifItalic.ttf"), local("FreeSerifItalic");
+}
+@font-face {
+  font-family: "FreeSerif";
+  font-weight: bold;
+  font-style: italic;
+  src: url("../freefont/FreeSerifBoldItalic.ttf"), local("FreeSerifBoldItalic");
+}

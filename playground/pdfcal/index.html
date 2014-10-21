@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="stylesheet" href="../../dist/styles/web/kendo.common.css" />
+    <link rel="stylesheet" href="../../dist/styles/web/kendo.default.css" />
+
+    <script src="http://kendo.local/playground/loader.js"></script>
+    <script>
+      requireSync([
+        "../../src/jquery.js",
+        "../../src/kendo.all.js",
+      ]);
+    </script>
+
+    <script src="../../dist/js/cultures/kendo.culture.bg.min.js"></script>
+    <script src="../../dist/js/cultures/kendo.culture.de.min.js"></script>
+    <script src="../../dist/js/cultures/kendo.culture.el.min.js"></script>
+    <script src="../../dist/js/cultures/kendo.culture.es.min.js"></script>
+    <script src="../../dist/js/cultures/kendo.culture.fr.min.js"></script>
+    <script src="../../dist/js/cultures/kendo.culture.it.min.js"></script>
+    <script src="../../dist/js/cultures/kendo.culture.nl.min.js"></script>
+    <script src="../../dist/js/cultures/kendo.culture.no.min.js"></script>
+    <script src="../../dist/js/cultures/kendo.culture.pt.min.js"></script>
+    <script src="../../dist/js/cultures/kendo.culture.ro.min.js"></script>
+    <script src="../../dist/js/cultures/kendo.culture.ru.min.js"></script>
+    <script src="../../dist/js/cultures/kendo.culture.se.min.js"></script>
+
+    <script src="../pako.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+
+    <div class="page-display">
+      <table id="page-content" class="calendar-container" cellspacing="0" cellpadding="0"><tr><td>
+        <table align="center" cellspacing="0" cellpadding="0"><tr><td id="target">
+        </td></tr></table>
+      </td></tr></table>
+    </div>
+
+    <div class="controls">
+      <button class="k-button" onclick="pdf()">Get PDF</button>
+      <button class="k-button" onclick="svg()">Get SVG</button>
+      <button class="k-button" onclick="image()">Get PNG</button>
+
+      <div style="float: right">
+        Using browser's <code>localStorage</code> →
+        <button class="k-button" id="the-save">Save</button>
+        <button class="k-button" id="the-load">Load</button>
+      </div>
+
+      <div class="options">
+        <div class="opt">
+          <label>
+            <span class="label">Title:</span>
+            <input id="the-title" style="width: 30em" class="k-textbox" value="So much to do, so little time..." />
+          </label>
+        </div>
+        <div class="opt">
+          <label>
+            <span class="label">Calendar language:</span>
+            <select id="the-lang"></select>
+          </label>
+        </div>
+        <div class="opt">
+          <label>
+            <span class="label">First month:</span>
+            <input id="the-start-month" />
+          </label>
+        </div>
+        <div class="opt">
+          <label>
+            <span class="label">Weeks start on:</span>
+            <select id="the-start-fdow">
+              <option selected value="0">Sunday</option>
+              <option value="1">Monday</option>
+              <option value="2">Tuesday</option>
+              <option value="3">Wednesday</option>
+              <option value="4">Thursday</option>
+              <option value="5">Friday</option>
+              <option value="6">Saturday</option>
+            </select>
+          </label>
+        </div>
+        <div class="opt">
+          <span class="label">Highlight:</span>
+          <label>
+            <input checked type="checkbox" class="the-weekend" value="6" /> Saturday
+          </label>
+          <label>
+            <input checked type="checkbox" class="the-weekend" value="0" /> Sunday
+          </label>
+          <p style="margin-left: 11em">
+            Bonus: click dates to toggle between 3 highlighting colors, or
+            right-click to quickly remove highlighting.
+          </p>
+        </div>
+      </div>
+
+      <div style="text-align: right">
+        <button class="the-rotate k-button">Disorder</button>
+      </div>
+
+      <div class="footer">
+        <hr />
+        <p>
+          PDF/SVG/PNG generation
+          by <a href="http://www.telerik.com/kendo-ui">Kendo UI</a>.
+        </p>
+        <p>
+          Compression by <a href="http://nodeca.github.io/pako/">Pako</a>.
+        </p>
+        <p>
+          This page
+          uses <a href="https://www.gnu.org/software/freefont/">GNU
+          FreeFont</a>.<br />A subset of it will be embedded in the
+          generated PDF file.
+        </p>
+        <hr />
+        <p>
+          Humbly brought to you by <a href="http://lisperator.net/">Mihai
+          Bazon</a>.
+        </p>
+      </div>
+    </div>
+
+    <div id="load-dialog"></div>
+
+    <script src="pdfcal.js"></script>
+  </body>
+</html>
