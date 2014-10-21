@@ -197,6 +197,7 @@
 
     // ------------------------------------------------------------
     function shapeBaseTests(TShape, name) {
+        var Gradient = d.Gradient;
         var shape;
 
         module("Shape base tests / " + name, {
@@ -205,11 +206,40 @@
             }
         });
 
-        test("fill sets fill", function() {
+        test("fill sets color and opacity", function() {
             shape.fill("red", 1);
 
             equal(shape.options.fill.color, "red");
             equal(shape.options.fill.opacity, 1);
+        });
+
+        test("fill sets gradient", function() {
+            var gradient = new Gradient();
+            shape.fill(gradient);
+
+            equal(shape.options.fill, gradient);
+        });
+
+        test("fill sets color and opacity if current fill is gradient", function() {
+            shape.fill(new Gradient());
+            shape.fill("red", 1);
+
+            equal(shape.options.fill.color, "red");
+            equal(shape.options.fill.opacity, 1);
+        });
+
+        test("fill sets gradient if current field is not", function() {
+            var gradient = new Gradient();
+            shape.fill("red", 1);
+            shape.fill(gradient);
+
+            equal(shape.options.fill, gradient);
+        });
+
+        test("fill sets null", function() {
+            shape.fill(null);
+
+            equal(shape.options.fill, null);
         });
 
         test("fill triggers optionsChange", function() {
@@ -1786,4 +1816,334 @@
         });
     })();
 
+    // ------------------------------------------------------------
+    (function() {
+        var GradientStop = d.GradientStop;
+        var stop;
+
+        module("GradientStop", {
+            setup: function() {
+                stop = new GradientStop(0.5, "foo", 0.7);
+            }
+        });
+
+        test("inits offset", function() {
+            equal(stop.options.offset, 0.5);
+        });
+
+        test("inits color", function() {
+            equal(stop.options.color, "foo");
+        });
+
+        test("inits opacity", function() {
+            equal(stop.options.opacity, 0.7);
+        });
+
+        test("sets opacity to one if not specified", function() {
+            stop = new GradientStop(0.5, "foo");
+            equal(stop.options.opacity, 1);
+        });
+
+        test("offset sets offset", function() {
+            stop.offset(1);
+            equal(stop.options.offset, 1);
+        });
+
+        test("offset triggers options change", function() {
+            stop.addObserver({
+                optionsChange: function(e) {
+                    equal(e.field, "offset");
+                    equal(e.value, 1);
+                }
+            });
+            stop.offset(1);
+        });
+
+        test("color sets color", function() {
+            stop.color("bar");
+            equal(stop.options.color, "bar");
+        });
+
+        test("color triggers options change", function() {
+            stop.addObserver({
+                optionsChange: function(e) {
+                    equal(e.field, "color");
+                    equal(e.value, "bar");
+                }
+            });
+            stop.color("bar");
+        });
+
+        test("opacity sets opacity", function() {
+            stop.opacity(0.1);
+            equal(stop.options.opacity, 0.1);
+        });
+
+        test("opacity triggers options change", function() {
+            stop.addObserver({
+                optionsChange: function(e) {
+                    equal(e.field, "opacity");
+                    equal(e.value, 0.1);
+                }
+            });
+            stop.opacity(0.1);
+        });
+
+        module("GradientStop / create");
+
+        test("returns existing instance", function() {
+            stop = new GradientStop();
+            equal(GradientStop.create(stop), stop);
+        });
+
+        test("creates stop from array", function() {
+            stop = GradientStop.create([0.5, "red", 0.1]);
+            equal(stop.offset(), 0.5);
+            equal(stop.color(), "red");
+            equal(stop.opacity(), 0.1);
+        });
+
+        test("creates stop from object", function() {
+            stop = GradientStop.create({
+                color: "red",
+                offset: 0.5,
+                opacity: 0.1
+            });
+            equal(stop.offset(), 0.5);
+            equal(stop.color(), "red");
+            equal(stop.opacity(), 0.1);
+        });
+
+    })();
+
+    // ------------------------------------------------------------
+    function gradientBaseTests(name, type) {
+        var GradientStop = d.GradientStop;
+        var gradient;
+        var stops;
+
+        module(name + " base tests", {
+            setup: function() {
+                stops = [new GradientStop(), new GradientStop()];
+                gradient = new type({
+                    stops: stops
+                });
+            }
+        });
+
+        test("inits stops", function() {
+            equal(gradient.stops.length, 2);
+        });
+
+        test("inits stops from array of arrays", function() {
+            gradient = new type({
+                stops: [[0.5, "red"]]
+            });
+            var stop = gradient.stops[0];
+            ok(stop instanceof GradientStop);
+            equal(stop.offset(), 0.5);
+            equal(stop.color(), "red");
+        });
+
+        test("inits stops from array of plain objects", function() {
+            gradient = new type({
+                stops: [{
+                    offset: 0.5,
+                    color: "red"
+                }]
+            });
+            var stop = gradient.stops[0];
+            ok(stop instanceof GradientStop);
+            equal(stop.offset(), 0.5);
+            equal(stop.color(), "red");
+        });
+
+        test("inits id", function() {
+            ok(gradient.id);
+        });
+
+        test("modifying stops array triggers options change", function() {
+            gradient.addObserver({
+                optionsChange: function(e) {
+                    equal(e.field, "gradient.stops");
+                }
+            });
+            gradient.stops.pop();
+        });
+
+        test("addStop adds new stop", function() {
+            gradient.addStop(1, "foo", 0.5);
+            var stop = gradient.stops[2];
+
+            ok(stop instanceof GradientStop);
+            equal(stop.offset(), 1);
+            equal(stop.color(), "foo");
+            equal(stop.opacity(), 0.5);
+        });
+
+        test("addStop triggers options change", function() {
+            gradient.addObserver({
+                optionsChange: function(e) {
+                    equal(e.field, "gradient.stops");
+                }
+            });
+            gradient.addStop(1, "foo", 0.5);
+        });
+
+        test("removeStop removes stop", function() {
+            gradient.removeStop(gradient.stops[1]);
+
+            equal(gradient.stops.length, 1);
+        });
+
+        test("removeStop triggers options change", function() {
+            gradient.addObserver({
+                optionsChange: function(e) {
+                    equal(e.field, "gradient.stops");
+                }
+            });
+            gradient.removeStop(gradient.stops[1]);
+        });
+
+        test("removeStop does not remove stop if passed instance is not from the gradient stops", 1, function() {
+            gradient.addObserver({
+                optionsChange: function(e) {
+                    ok(false);
+                }
+            });
+            gradient.removeStop(new GradientStop());
+
+            equal(gradient.stops.length, 2);
+        });
+    }
+
+    // ------------------------------------------------------------
+    (function() {
+        var LinearGradient = d.LinearGradient;
+        var gradient;
+        var start;
+        var end;
+
+        gradientBaseTests("LinearGradient", LinearGradient);
+
+        module("LinearGradient", {
+            setup: function() {
+                start = new Point();
+                end = new Point();
+                gradient = new LinearGradient({
+                    start: start,
+                    end: end
+                });
+            }
+        });
+
+        test("inits start point", function() {
+            equal(gradient.start(), start);
+        });
+
+        test("inits end point", function() {
+            equal(gradient.end(), end);
+        });
+
+        test("inits default start and end point if not passed", function() {
+            gradient = new LinearGradient();
+            start = gradient.start();
+            end = gradient.end();
+            equal(start.x, 0);
+            equal(start.y, 0);
+            equal(end.x, 1);
+            equal(end.y, 0);
+        });
+
+        test("changing point field triggers options change", function() {
+            gradient.addObserver({
+                optionsChange: function(e) {
+                    equal(e.field, "gradient");
+                }
+            });
+            start.setX(1);
+        });
+
+        test("changing point triggers options change", function() {
+            gradient.addObserver({
+                optionsChange: function(e) {
+                    equal(e.field, "gradient");
+                }
+            });
+            gradient.start(new Point());
+        });
+    })();
+
+    // ------------------------------------------------------------
+    (function() {
+        var RadialGradient = d.RadialGradient;
+        var gradient;
+        var center;
+
+        gradientBaseTests("RadialGradient", RadialGradient);
+
+        module("RadialGradient", {
+            setup: function() {
+                center = new Point(1, 1);
+                gradient = new RadialGradient({
+                    center: center,
+                    radius: 0.5,
+                    fallbackFill: {
+                        color: "red",
+                        opacity: 0.1
+                    }
+                });
+            }
+        });
+
+        test("inits center point", function() {
+            equal(gradient.center(), center);
+        });
+
+        test("inits radius", function() {
+            equal(gradient.radius(), 0.5);
+        });
+
+        test("inits fallbackFill", function() {
+            var fill = gradient.fallbackFill();
+            equal(fill.color, "red");
+            equal(fill.opacity, 0.1);
+        });
+
+        test("inits default center and radius if not passed", function() {
+            gradient = new RadialGradient();
+            center = gradient.center();
+            equal(center.x, 0);
+            equal(center.y, 0);
+            equal(gradient.radius(), 1);
+        });
+
+        test("changing center field triggers options change", function() {
+            gradient.addObserver({
+                optionsChange: function(e) {
+                    equal(e.field, "gradient");
+                }
+            });
+            center.setX(0);
+        });
+
+        test("changing center triggers options change", function() {
+            gradient.addObserver({
+                optionsChange: function(e) {
+                    equal(e.field, "gradient");
+                }
+            });
+            gradient.center(new Point());
+        });
+
+        test("changing radius triggers options change", function() {
+            gradient.addObserver({
+                optionsChange: function(e) {
+                    equal(e.field, "gradient");
+                }
+            });
+            gradient.radius(1);
+        });
+
+    })();
 })();

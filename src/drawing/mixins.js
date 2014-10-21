@@ -9,6 +9,9 @@
         deepExtend = kendo.deepExtend,
         defined = kendo.util.defined;
 
+    // Constants ==============================================================
+        var GRADIENT = "gradient";
+
     // Mixins =================================================================
     var Paintable = {
         extend: function(proto) {
@@ -17,16 +20,24 @@
         },
 
         fill: function(color, opacity) {
-            if (defined(color)) {
-                this.options.set("fill.color", color);
+            var options = this.options;
 
-                if (defined(opacity)) {
-                    this.options.set("fill.opacity", opacity);
+            if (defined(color)) {
+                if (color && color.nodeType != GRADIENT) {
+                    var newFill = {
+                        color: color
+                    };
+                    if (defined(opacity)) {
+                        newFill.opacity = opacity;
+                    }
+                    options.set("fill", newFill);
+                } else {
+                    options.set("fill", color);
                 }
 
                 return this;
             } else {
-                return this.options.get("fill");
+                return options.get("fill");
             }
         },
 

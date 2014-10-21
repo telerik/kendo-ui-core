@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./shapes" ], f);
+    define([ "./shapes", "../kendo.color" ], f);
 })(function(){
 
 (function ($) {
@@ -28,7 +28,8 @@
 
         d = kendo.drawing,
         BaseNode = d.BaseNode,
-        Group = d.Group,
+        Color = kendo.Color,
+        Group = d.Group,        
         Path = d.Path;
 
     // Constants ==============================================================
@@ -299,16 +300,50 @@
 
         setFill: function(ctx) {
             var fill = this.srcElement.options.fill;
-            if (fill && !isTransparent(fill.color)) {
-                ctx.fillStyle = fill.color;
+            var hasFill = false;
 
-                ctx.save();
-                this.globalAlpha(ctx, fill.opacity);
-                ctx.fill();
-                ctx.restore();
+            if (fill) {
+                if (fill.nodeType == "gradient") {
+                    this.setGradientFill(ctx, fill);
+                    hasFill = true;
+                } else if (!isTransparent(fill.color)) {
+                    ctx.fillStyle = fill.color;
 
-                return true;
+                    ctx.save();
+                    this.globalAlpha(ctx, fill.opacity);
+                    ctx.fill();
+                    ctx.restore();
+
+                    hasFill = true;
+                }
             }
+
+            return hasFill;
+        },
+
+        setGradientFill: function(ctx, fill) {
+            var bbox = this.srcElement.rawBBox();
+            var gradient;
+
+            if (fill instanceof d.LinearGradient) {
+                var start = fill.start();
+                var end = fill.end();
+                gradient = ctx.createLinearGradient(start.x, start.y, end.x, end.y);
+            } else if (fill instanceof d.RadialGradient) {
+                var center = fill.center();
+                gradient = ctx.createRadialGradient(center.x, center.y, 0, center.x, center.y, fill.radius());
+            }
+
+            addGradientStops(gradient, fill.stops);
+
+            ctx.save();
+
+            ctx.transform(bbox.width(), 0, 0, bbox.height(), bbox.origin.x, bbox.origin.y);
+
+            ctx.fillStyle = gradient;
+            ctx.fill();
+
+            ctx.restore();
         },
 
         setStroke: function(ctx) {
@@ -536,6 +571,17 @@
     // Helpers ================================================================
     function timestamp() {
         return new Date().getTime();
+    }
+
+    function addGradientStops(gradient, stops) {
+        var color, stop, idx;
+
+        for (idx = 0; idx < stops.length; idx++) {
+            stop = stops[idx];
+            color = new Color(stop.color());
+            gradient.addColorStop(stop.offset(),
+                "rgba(" + color.r + "," + color.g + "," + color.b + "," + stop.opacity() + ")");
+        }
     }
 
     // Exports ================================================================

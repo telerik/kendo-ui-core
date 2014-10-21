@@ -233,9 +233,17 @@
                 }
             }
 
+            this._clear(field);
             kendo.setter(field)(this, value);
 
             return composite;
+        },
+
+        _clear: function(field) {
+            var current = kendo.getter(field, true)(this);
+            if (current && current.removeObserver) {
+                current.removeObserver(this);
+            }
         },
 
         _wrap: function(object, field) {

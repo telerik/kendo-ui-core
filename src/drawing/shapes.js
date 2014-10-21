@@ -806,6 +806,134 @@
     });
     defineGeometryAccessors(Image.fn, ["rect"]);
 
+    var GradientStop = Class.extend({
+        init: function(offset, color, opacity) {
+            this.options = new OptionsStore({
+                offset: offset,
+                color: color,
+                opacity: opacity || 1
+            });
+            this.options.addObserver(this);
+        }
+    });
+
+    defineOptionsAccessors(GradientStop.fn, ["offset", "color", "opacity"]);
+    deepExtend(GradientStop.fn, ObserversMixin);
+
+    GradientStop.create = function(arg) {
+        if (defined(arg)) {
+            var stop;
+            if (arg instanceof GradientStop) {
+                stop = arg;
+            } else if (arg.length > 1) {
+                stop = new GradientStop(arg[0], arg[1], arg[2]);
+            } else {
+                stop = new GradientStop(arg.offset, arg.color, arg.opacity);
+            }
+
+            return stop;
+        }
+    };
+
+    var StopsArray = ElementsArray.extend({
+        _change: function() {
+            this.optionsChange({
+                field: "stops"
+            });
+        }
+    });
+
+    var Gradient = Class.extend({
+        nodeType: "gradient",
+
+        init: function(stops) {
+            this.stops = new StopsArray(this._createStops(stops));
+            this.stops.addObserver(this);
+            this.id = kendo.guid();
+        },
+
+        _createStops: function(stops) {
+            var result = [];
+            var idx;
+            stops = stops || [];
+            for (idx = 0; idx < stops.length; idx++) {
+                result.push(GradientStop.create(stops[idx]));
+            }
+
+            return result;
+        },
+
+        addStop: function(offset, color, opacity) {
+            this.stops.push(new GradientStop(offset, color, opacity));
+        },
+
+        removeStop: function(stop) {
+            var index = this.stops.indexOf(stop);
+            if (index >= 0) {
+                this.stops.splice(index, 1);
+            }
+        }
+    });
+
+    deepExtend(Gradient.fn, ObserversMixin, {
+        optionsChange: function(e) {
+            this.trigger("optionsChange", {
+                field: "gradient" + (e ? "." + e.field : ""),
+                value: this
+            });
+        },
+
+        geometryChange: function() {
+            this.optionsChange();
+        }
+    });
+
+    var LinearGradient = Gradient.extend({
+        init: function(options) {
+            options = options || {};
+            Gradient.fn.init.call(this, options.stops);
+
+            this.start(options.start || new Point());
+
+            this.end(options.end || new Point(1, 0));
+        }
+    });
+
+    definePointAccessors(LinearGradient.fn, ["start", "end"]);
+
+    var RadialGradient = Gradient.extend({
+        init: function(options) {
+            options = options || {};
+            Gradient.fn.init.call(this, options.stops);
+
+            this.center(options.center  || new Point());
+            this._radius = defined(options.radius) ? options.radius : 1;
+            this._fallbackFill = options.fallbackFill;
+        },
+
+        radius: function(value) {
+            if (defined(value)) {
+                this._radius = value;
+                this.geometryChange();
+                return this;
+            } else {
+                return this._radius;
+            }
+        },
+
+        fallbackFill: function(value) {
+            if (defined(value)) {
+                this._fallbackFill = value;
+                this.optionsChange();
+                return this;
+            } else {
+                return this._fallbackFill;
+            }
+        }
+    });
+
+    definePointAccessors(RadialGradient.fn, ["center"]);
+
     // Helper functions ===========================================
     function elementsBoundingBox(elements, applyTransform, transformation) {
         var boundingBox;
@@ -898,16 +1026,37 @@
         };
     }
 
+    function defineOptionsAccessors(fn, names) {
+        for (var i = 0; i < names.length; i++) {
+            fn[names[i]] = optionsAccessor(names[i]);
+        }
+    }
+
+    function optionsAccessor(name) {
+        return function(value) {
+            if (defined(value)) {
+                this.options.set(name, value);
+                return this;
+            } else {
+                return this.options.get(name);
+            }
+        };
+    }
+
     // Exports ================================================================
     deepExtend(drawing, {
         Arc: Arc,
         Circle: Circle,
         Element: Element,
         ElementsArray: ElementsArray,
+        Gradient: Gradient,
+        GradientStop: GradientStop,
         Group: Group,
         Image: Image,
+        LinearGradient: LinearGradient,
         MultiPath: MultiPath,
         Path: Path,
+        RadialGradient: RadialGradient,
         Segment: Segment,
         Text: Text
     });
