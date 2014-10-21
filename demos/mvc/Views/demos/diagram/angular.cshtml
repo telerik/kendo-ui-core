@@ -5,9 +5,7 @@
 </div>
 
 <script>
-    angular.module("KendoDemos", ["kendo.directives"]);
-
-    function MyCtrl($scope) {
+    angular.module("KendoDemos", ["kendo.directives"]).controller("MyCtrl", function($scope){
         $scope.options = {
             dataSource: {
                 data: diagramNodes(),
@@ -28,7 +26,7 @@
                 height: 40
             }
         };
-    }
+    })
 
     function diagramNodes() {
         var root = { name: "0", items: [] };
