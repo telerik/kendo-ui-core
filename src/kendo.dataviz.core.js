@@ -3004,7 +3004,7 @@ var __meta__ = {
             return ticks;
         },
 
-        renderTicks: function(view) {
+        createTicks: function(lineGroup) {
             var axis = this,
                 ticks = [],
                 options = axis.options,
@@ -3013,18 +3013,18 @@ var __meta__ = {
                 majorTicks = options.majorTicks,
                 minorTicks = options.minorTicks,
                 tickLineOptions= {
-                    _alignLines: options._alignLines,
+                    // TODO
+                    // _alignLines: options._alignLines,
                     vertical: options.vertical
                 },
                 start, end;
 
-            // TODO: Review
             function render(tickPosition, tickOptions) {
                 tickLineOptions.tickX = mirror ? lineBox.x2 : lineBox.x2 - tickOptions.size;
                 tickLineOptions.tickY = mirror ? lineBox.y1 - tickOptions.size : lineBox.y1;
                 tickLineOptions.position = tickPosition;
 
-                ticks.push(createAxisTick(view, tickLineOptions, tickOptions));
+                lineGroup.append(createAxisTick(tickLineOptions, tickOptions));
             }
 
             if (majorTicks.visible) {
@@ -3038,11 +3038,11 @@ var __meta__ = {
             return ticks;
         },
 
-        renderGridLines: function(view, altAxis) {
+        appendGridLines: function(container, altAxis) {
             var axis = this,
                 items = [],
                 options = axis.options,
-                axisLineVisible = altAxis.options.line.visible,//check
+                axisLineVisible = altAxis.options.line.visible,
                 majorGridLines = options.majorGridLines,
                 minorGridLines = options.minorGridLines,
                 vertical = options.vertical,
@@ -3058,7 +3058,7 @@ var __meta__ = {
             function render(tickPosition, gridLine) {
                 if (!inArray(tickPosition, majorTicks)) {
                     lineOptions.position = tickPosition;
-                    items.push(createAxisGridLine(view, lineOptions, gridLine));
+                    container.append(createAxisGridLine(lineOptions, gridLine));
 
                     majorTicks.push(tickPosition);
                 }
