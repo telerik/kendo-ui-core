@@ -5,42 +5,42 @@
 </div>
 
 <script>
-    angular.module("KendoDemos", [ "kendo.directives" ]);
-    function MyCtrl($scope) {
-        $scope.treelistOptions = {
-            dataSource: {
-                type: "odata",
-                transport: {
-                    read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
-                },
-                schema: {
-                    model: {
-                        id: "EmployeeID",
-                        fields: {
-                            parentId: { field: "ReportsTo",  nullable: true },
-                            EmployeeID: { field: "EmployeeID", type: "number" }
+    angular.module("KendoDemos", [ "kendo.directives" ])
+        .controller("MyCtrl", function($scope){
+            $scope.treelistOptions = {
+                dataSource: {
+                    type: "odata",
+                    transport: {
+                        read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
+                    },
+                    schema: {
+                        model: {
+                            id: "EmployeeID",
+                            fields: {
+                                parentId: { field: "ReportsTo",  nullable: true },
+                                EmployeeID: { field: "EmployeeID", type: "number" }
+                            }
                         }
                     }
-                }
-            },
-            sortable: true,
-            columns: [{
-                field: "FirstName",
-                title: "First Name",
-                width: "120px"
-            },{
-                field: "LastName",
-                title: "Last Name",
-                width: "120px"
-            },{
-                field: "Country",
-                width: "120px"
-            },{
-                field: "City",
-                width: "120px"
-            },{
-                field: "Title"
-            }]
-        };
-    }
+                },
+                sortable: true,
+                columns: [{
+                    field: "FirstName",
+                    title: "First Name",
+                    width: "120px"
+                },{
+                    field: "LastName",
+                    title: "Last Name",
+                    width: "120px"
+                },{
+                    field: "Country",
+                    width: "120px"
+                },{
+                    field: "City",
+                    width: "120px"
+                },{
+                    field: "Title"
+                }]
+            };    
+        })
 </script>
