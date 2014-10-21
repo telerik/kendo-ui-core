@@ -142,9 +142,8 @@
 </div>
 
 <script>
-  angular.module("KendoDemos", [ "kendo.directives" ]);
-  function MyCtrl($scope) {
-    $scope.productsDataSource = {
+  angular.module("KendoDemos", [ "kendo.directives" ]).controller("MyCtrl", function($scope){
+      $scope.productsDataSource = {
         type: "odata",
         serverFiltering: true,
         transport: {
@@ -178,6 +177,6 @@
 
         template: '<span class="k-state-default"><img src=\"http://demos.telerik.com/kendo-ui/content/web/Customers/{{dataItem.CustomerID}}.jpg\" alt=\"{{dataItem.CustomerID}}\" /></span>' +
             '<span class="k-state-default"><h3>{{dataItem.ContactName}}</h3><p>{{dataItem.CompanyName}}</p></span>',
-    };
-}
+    };    
+  })
 </script>
