@@ -3223,7 +3223,6 @@
 
             _addConnections: function(connections) {
                 var length = connections.length;
-                var defaults = this.options.connectionDefaults;
 
                 for (var i = 0; i < length; i++) {
                     var conn = connections[i];
@@ -3238,9 +3237,10 @@
                         if (!defined(to) || to === null) {
                             to = new Point(conn.toX, conn.toY);
                         }
-
                         if (defined(from) && defined(to)) {
-                            var connection = new Connection(from, to, defaults, conn);
+                            var options = deepExtend({}, this.options.connectionDefaults);
+                            options.dataItem = conn;
+                            var connection = new Connection(from, to, options);
                             this._connectionsDataMap[conn.id] = connection;
                             this.addConnection(connection);
                         }
