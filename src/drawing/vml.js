@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./shapes" ], f);
+    define([ "./shapes", "./color" ], f);
 })(function(){
 
 (function ($) {
