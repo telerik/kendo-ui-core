@@ -29,24 +29,23 @@
 
     </div>
 <script>
-    angular.module("KendoDemos", [ "kendo.directives" ]);
-    function MyCtrl($scope) {
-
-            $scope.onSeriesHover = function(e) {
-                 kendoConsole.log(kendo.format("event :: seriesHover ({0} : {1})", e.value.x, e.value.y));
-            },
-            $scope.pricePerformance = new kendo.data.DataSource({
-                transport: {
-                    read: {
-                        url: "../content/dataviz/js/price-performance.json",
-                        dataType: "json"
-                    }
+    angular.module("KendoDemos", [ "kendo.directives" ])
+         .controller("MyCtrl", function(){
+             $scope.onSeriesHover = function(e) {
+                     kendoConsole.log(kendo.format("event :: seriesHover ({0} : {1})", e.value.x, e.value.y));
                 },
-                sort: {
-                    field: "year",
-                    dir: "asc"
-                }
-            });
-    }
+                $scope.pricePerformance = new kendo.data.DataSource({
+                    transport: {
+                        read: {
+                            url: "../content/dataviz/js/price-performance.json",
+                            dataType: "json"
+                        }
+                    },
+                    sort: {
+                        field: "year",
+                        dir: "asc"
+                    }
+            });           
+        })
 </script>
 </div>
