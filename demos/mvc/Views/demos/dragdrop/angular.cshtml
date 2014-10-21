@@ -8,9 +8,7 @@
     </div>
 
     <script>
-        angular.module("KendoDemos", [ "kendo.directives" ]);
-
-        function MyCtrl($scope) {
+        angular.module("KendoDemos", [ "kendo.directives" ]).controller("MyCtrl", function($scope){
             $scope.dropTargetText = "Drag here";
 
             $scope.draggableHint = function() {
@@ -53,7 +51,7 @@
                     $scope.draggableClass = "";
                 });
             }
-        }
+        })
 </script>
 
 <style scoped>
