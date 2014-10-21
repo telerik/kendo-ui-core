@@ -908,6 +908,7 @@
 
             this.center(options.center  || new Point());
             this._radius = defined(options.radius) ? options.radius : 1;
+            this._fallbackFill = options.fallbackFill;
         },
 
         radius: function(value) {
@@ -917,6 +918,16 @@
                 return this;
             } else {
                 return this._radius;
+            }
+        },
+
+        fallbackFill: function(value) {
+            if (defined(value)) {
+                this._fallbackFill = value;
+                this.optionsChange();
+                return this;
+            } else {
+                return this._fallbackFill;
             }
         }
     });

@@ -2087,7 +2087,11 @@
                 center = new Point(1, 1);
                 gradient = new RadialGradient({
                     center: center,
-                    radius: 0.5
+                    radius: 0.5,
+                    fallbackFill: {
+                        color: "red",
+                        opacity: 0.1
+                    }
                 });
             }
         });
@@ -2098,6 +2102,12 @@
 
         test("inits radius", function() {
             equal(gradient.radius(), 0.5);
+        });
+
+        test("inits fallbackFill", function() {
+            var fill = gradient.fallbackFill();
+            equal(fill.color, "red");
+            equal(fill.opacity, 0.1);
         });
 
         test("inits default center and radius if not passed", function() {
