@@ -2,7 +2,7 @@
   <div class="demo-section k-content" ng-controller="MyCtrl" style="width: 700px;">
     <div class="box-col">
       <h4>Orientation:</h4>
-      <select kendo-drop-down-list k-ng-model="orientation">
+      <select kendo-drop-down-list ng-model="orientation">
         <option value="horizontal">Horizontal</option>
         <option value="vertical">Vertical</option>
       </select>
@@ -27,10 +27,9 @@
 </div>
 
 <script>
-  angular.module("KendoDemos", [ "kendo.directives" ]);
-
-  function MyCtrl($scope) {
-      $scope.orientation = "horizontal";
-      $scope.hello = "Hello from Controller!";
-  }
+  angular.module("KendoDemos", [ "kendo.directives" ])
+      .controller("MyCtrl", function($scope){
+          $scope.orientation = "horizontal";
+          $scope.hello = "Hello from Controller!";
+      })
 </script>
