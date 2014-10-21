@@ -26,12 +26,11 @@
 </div>
 
 <script>
-  angular.module("KendoDemos", [ "kendo.directives" ]);
-
-  function MyCtrl($scope){
-      $scope.menuOpen = 0;
-      $scope.onSelect = function(e) {
-          $scope.selected = $(e.item).children(".k-link").text();
-      };
-  };
+  angular.module("KendoDemos", [ "kendo.directives" ])
+      .controller("MyCtrl", function($scope){
+          $scope.menuOpen = 0;
+          $scope.onSelect = function(e) {
+              $scope.selected = $(e.item).children(".k-link").text();
+          };
+      })
 </script>
