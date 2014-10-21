@@ -5,9 +5,7 @@
 </div>
 
 <script>
-  angular.module("KendoDemo", [ "kendo.directives" ]);
-
-  function MyCtrl($scope) {
+  angular.module("KendoDemo", [ "kendo.directives" ]).controller("MyCtrl", function($scope){
       var serviceRoot = "http://demos.telerik.com/kendo-ui/service";
       var tasksDataSource = new kendo.data.GanttDataSource({
           batch: false,
@@ -107,5 +105,5 @@
           showWorkHours: false,
           showWorkDays: false
       };
-  }
+  })
 </script>
