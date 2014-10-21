@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.dom", "./kendo.data" ], f);
+    define([ "./kendo.dom", "./kendo.data", "./kendo.columnsorter", "./kendo.editable", "./kendo.window", "./kendo.filtermenu", "./kendo.selectable" ], f);
 })(function(){
 
 var __meta__ = {
