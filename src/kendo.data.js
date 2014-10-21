@@ -3081,7 +3081,8 @@ var __meta__ = {
                     data.wrapAll(data, data);
                 }
             } else {
-                data = new (that.pageSize() ? LazyObservableArray : ObservableArray)(data, that.reader.model);
+                var arrayType = that.pageSize() ? LazyObservableArray : ObservableArray;
+                data = new arrayType(data, that.reader.model);
                 data.parent = function() { return that.parent(); };
             }
 
