@@ -519,6 +519,19 @@
             var grid = QUnit.fixture.find('[data-role=grid]').getKendoGrid();
             grid.select(grid.items());
     });
+
+    ngTest("uses TreeListDataSource for TreeList", 1, function () {
+        angular.module("kendo.tests").controller("treelist", function($scope) {
+            $scope.data = [ { id: 1, parentId: null } ];
+        });
+
+        $("<div ng-controller=treelist><div kendo-treelist k-data-source='data'/></div>")
+            .appendTo(QUnit.fixture);
+
+    }, function() {
+        var treelist = QUnit.fixture.find('[data-role=treelist]').getKendoTreeList();
+        ok(treelist.dataSource instanceof kendo.data.TreeListDataSource);
+    });
 })();
 
 /*
