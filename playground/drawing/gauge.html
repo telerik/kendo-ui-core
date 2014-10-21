@@ -22,7 +22,7 @@
     <script src="../../src/drawing/vml.js"></script>
     <script src="../../src/drawing/canvas.js"></script>
     <!--<script src="../../src/kendo.dataviz.gauge.js"></script>-->
-    <script src="../../src/gauge.js"></script> 
+    <script src="../../src/kendo.dataviz.gauge2.js"></script> 
 
 </head>
 <body>
@@ -41,97 +41,24 @@
     var Arc = draw.Arc;
     var Rect = geo.Rect;
 
-    var Pointer = dataviz.Pointer;
-    var RadialPointer = dataviz.RadialPointer;
-    var RadialScale = dataviz.RadialScale;
-    var RadialGauge = dataviz.RadialGauge;
-
-    // var surface = draw.Surface.create($("#surface"));
-    // var rect = new Rect([0, 0], [500, 500]);
-
-    // var root = new Group();
-
-    // var scale = new RadialScale({
-    //     minorUnit: 5,
-    //     majorUnit: 10,
-    //     startAngle: 0,
-    //     endAngle: 270,
-    //     max: 180,
-    //     minorTicks: {
-    //         size: 10
-    //         //visible: false
-    //     },
-    //     majorTicks: {
-    //         size: 30
-    //     },
-    //     labels: {
-    //         visible: true,
-    //         position: "inside"
-    //     },
-    //     ranges: [{
-    //         from: 10,
-    //         to: 20,
-    //         color: "green"
-    //     },{
-    //         from: 30,
-    //         to: 100,
-    //         color: "blue"
-    //     }],
-    //     //reverse: true
-    // });
-
-    // var center = new geo.Point(250, 250);
-    // scale.render(root, center, 200);
-    // //scale.reflow(rect);
-
-    // var pointer = new RadialPointer({
-    //     cap: {
-    //         size: 0.05,
-    //         color: "blue"
-    //     },
-    //     color: "green"
-    // });
-    // pointer.render(root, center, 180);
-
-    // var pointer2 = new RadialPointer({
-    //     cap: {
-    //         size: 0.05,
-    //         color: "blue"
-    //     },
-    //     color: "blue"
-    // });
-    // pointer2.render(root, center, 180);
-    // pointer2.setAngle(90);
-
-    // var pointer3 = new RadialPointer({
-    //     cap: {
-    //         size: 0.05,
-    //         color: "yellow"
-    //     },
-    //     color: "yellow"
-    // });
-    // pointer3.render(root, center, 180);
-    // pointer3.setAngle(130);
-
-    // surface.draw(root);
-
 var elem = $("#gauge");
 
 var gauge = elem.kendoRadialGauge2({
-        gaugeArea: {
-            margin: 50,
-            width: 500,
-            //background: "blue",
-            border: {
-                color: "yellow",
-                dashType: "dot",
-                width: 25
-            }
-        },
+        // gaugeArea: {
+        //     margin: 50,
+        //     width: 500,
+        //     //background: "blue",
+        //     // border: {
+        //     //     color: "yellow",
+        //     //     dashType: "dot",
+        //     //     width: 25
+        //     // }
+        // },
         pointer: {
             cap: {
                 size: 0.05
-            }
+            },
+            value: -2
         },
         scale: {
             minorTicks: {
@@ -141,24 +68,26 @@ var gauge = elem.kendoRadialGauge2({
                 size: 25
             },
             labels: {
-                position: "outside",
-                format: "C",
-                font: "15px Arial,Helvetica,sans-serif"
+                visible: true,
+                position: "inside",
+                //margin: 20
+                //format: "C",
+                //font: "15px Arial,Helvetica,sans-serif"
             },
             minorUnit: 10,
             majorUnit: 40,
             startAngle: 0,
-            endAngle: 180,
+            endAngle: 165,
             max: 180,
-                          ranges: [{
-            from: 10,
-            to: 20,
-            color: "green"
-        },{
-            from: 30,
-            to: 60,
-            color: "red"
-        }],
+        // ranges: [{
+        //     from: 10,
+        //     to: 20,
+        //     color: "green"
+        // },{
+        //     from: 30,
+        //     to: 60,
+        //     color: "red"
+        // }],
           rangeSize: 15,
           //rangeDistance: 0,
       }

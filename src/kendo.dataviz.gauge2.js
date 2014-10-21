@@ -67,7 +67,9 @@ var __meta__ = {
             var pointer = this;
             var scaleOptions = scale.options;
 
-            //ChartElement.fn.init.call(pointer, options);
+            ChartElement.fn.init.call(pointer, options);
+
+            options = pointer.options;
 
             if (!options.id) {
                 options.id = uniqueId();
@@ -76,8 +78,6 @@ var __meta__ = {
             options.fill = options.color;
 
             pointer.scale = scale;
-
-            options = pointer.options;
 
             if (defined(options.value)){
                 options.value = math.min(math.max(options.value, scaleOptions.min), scaleOptions.max);
@@ -91,17 +91,19 @@ var __meta__ = {
         },
 
         value: function(newValue) {
-            var pointer = this,
-                options = pointer.options,
-                value = options.value,
-                scaleOptions = pointer.scale.options;
+            var pointer = this;
+            var options = pointer.options;
+            var value = options.value;
+            var scaleOptions = pointer.scale.options;
 
             if (arguments.length === 0) {
                 return value;
             }
 
+            options._oldValue = options.value;
             options.value = math.min(math.max(newValue, scaleOptions.min), scaleOptions.max);
 
+            pointer.repaint();
         }
     });
 
@@ -138,13 +140,14 @@ var __meta__ = {
             that.elements.transform(geo.transform().rotate(angle, that.center))
         },
 
-        render: function(center, radius) {
+        repaint: function() {
+
+        },
+
+        render: function() {
             var that = this;
             var options = that.options;
             var elements = new Group();
-
-            that.center = center;
-            that.radius = radius;
 
             if (options.shape === NEEDLE) {
                 elements.append(
@@ -164,18 +167,12 @@ var __meta__ = {
 
         reflow: function(arc) {
             var that = this;
-            var center = arc.center;
-            var radius = arc.getRadiusX();
+            var center = that.center = arc.center;
+            var radius = that.radius = arc.getRadiusX();
             var capSize = that.capSize = radius * that.options.cap.size;
 
             that.bbox = Rect.fromPoints(new Point(center.x - capSize, center.y - capSize),
                                         new Point(center.x + capSize, center.y + capSize));
-
-            if (that.elements !== undefined) {
-                that.center = center;
-            }
-
-            return that.render(center, radius);
         },
 
         _renderNeedle: function() {
@@ -291,13 +288,14 @@ var __meta__ = {
         },
 
         slotAngle: function(value) {
-            var options = this.options,
-                startAngle = options.startAngle,
-                reverse = options.reverse,
-                angle = options.endAngle - startAngle,
-                min = options.min,
-                max = options.max,
-                result;
+            var options = this.options;
+            var startAngle = options.startAngle;
+            var reverse = options.reverse;
+            var angle = options.endAngle - startAngle;
+            var min = options.min;
+            var max = options.max;
+            var geoArcAdjustAngle = 180;
+            var result;
 
             if (reverse) {
                 result = options.endAngle - (value - min) / (max - min) * angle;
@@ -305,7 +303,7 @@ var __meta__ = {
                 result = ((value - min) / (max - min) * angle) + startAngle;
             }
 
-            return result;
+            return result + geoArcAdjustAngle;
         },
 
         renderLabels: function() {
@@ -451,8 +449,8 @@ var __meta__ = {
                         rangeGeom = new geo.Arc(arc.center, {
                             radiusX: rangeRadius + (rangeSize / 2),
                             radiusY: rangeRadius + (rangeSize / 2),
-                            startAngle: 180 + from,
-                            endAngle: 180 + to
+                            startAngle: from,
+                            endAngle: to
                         });
 
                         result.append(new draw.Arc(rangeGeom, {
@@ -731,7 +729,10 @@ var __meta__ = {
             var margin = that._gaugeAreaMargin = options.margin || DEFAULT_MARGIN;
             var border = options.border || {};
             var areaGeometry =  new geo.Rect([0, 0], [size.width, size.height]);
-            areaGeometry = _unpad(areaGeometry, border.width);
+
+            if (border.width > 0) {
+                areaGeometry = _unpad(areaGeometry, border.width);
+            }
 
             var gaugeArea = Path.fromRect(areaGeometry, {
                 stroke: {
@@ -817,7 +818,7 @@ var __meta__ = {
             for (var i = 0; i < pointers.length; i++) {
                 //Todo testing only
                 var pointerElement = pointers[i].reflow(that.scale.arc);
-                surface.draw(pointerElement);
+                //surface.draw(pointerElement);
 
                 that.plotArea = Rect.union(that.plotArea, pointers[i].bbox);
             };
@@ -830,19 +831,10 @@ var __meta__ = {
             surface.draw(scaleElements);
 
             for (var i = 0; i < pointers.length; i++) {
+                pointers[i].render();
                 surface.draw(pointers[i].elements);
             };
         },
-
-        // getPointerArc: function() {
-        //     var that = this;
-        //     var arc = that.scale.arc.clone();
-        //     var radius = arc.getRadiusX();
-        //     var diff = that.scale._tickDifference;
-
-        //     arc.setRadiusX(radius - diff).setRadiusY(radius - diff);
-        //     return arc;
-        // },
 
         fitScale: function(bbox) {
             var that = this;
@@ -950,7 +942,12 @@ var __meta__ = {
 
             pointers = $.isArray(pointers) ? pointers : [pointers];
             for (var i = 0; i < pointers.length; i++) {
-                current = new RadialPointer(scale, pointers[i]);
+                current = new RadialPointer(scale, 
+                    deepExtend({}, options.pointer, {
+                        animation: {
+                            transitions: options.transitions
+                        }
+                }));
                 that.pointers.push(current);
             }
         }
