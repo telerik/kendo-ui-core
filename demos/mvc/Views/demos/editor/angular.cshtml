@@ -13,9 +13,10 @@
 </div>
 
 <script>
-  angular.module("KendoDemos", [ "kendo.directives", "ngSanitize" ]).controller("MyCtrl", function($scope){
-      $scope.html = "<h1>Kendo Editor</h1>\n\n" +
-      "<p>Note that 'change' is triggered when the editor loses focus.\n" +
-          "<br /> That's when the Angular scope gets updated.</p>";
-  })
+  angular.module("KendoDemos", [ "kendo.directives", "ngSanitize" ])
+      .controller("MyCtrl", function($scope){
+          $scope.html = "<h1>Kendo Editor</h1>\n\n" +
+          "<p>Note that 'change' is triggered when the editor loses focus.\n" +
+              "<br /> That's when the Angular scope gets updated.</p>";
+      })
 </script>

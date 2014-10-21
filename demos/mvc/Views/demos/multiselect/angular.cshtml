@@ -7,22 +7,23 @@
 </div>
 
 <script>
-  angular.module("KendoDemos", [ "kendo.directives" ]).controller("MyCtrl", function($scope){
-    $scope.selectOptions = {
-        placeholder: "Select products...",
-        dataTextField: "ProductName",
-        dataValueField: "ProductID",
-        autoBind: false,
-        dataSource: {
-            type: "odata",
-            serverFiltering: true,
-            transport: {
-                read: {
-                    url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
+  angular.module("KendoDemos", [ "kendo.directives" ])
+    .controller("MyCtrl", function($scope){
+        $scope.selectOptions = {
+            placeholder: "Select products...",
+            dataTextField: "ProductName",
+            dataValueField: "ProductID",
+            autoBind: false,
+            dataSource: {
+                type: "odata",
+                serverFiltering: true,
+                transport: {
+                    read: {
+                        url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
+                    }
                 }
             }
-        }
-    };
-    $scope.selectedIds = [ 4, 7 ];
-  })
+        };
+        $scope.selectedIds = [ 4, 7 ];
+      })
 </script>

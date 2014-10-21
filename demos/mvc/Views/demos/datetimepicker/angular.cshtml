@@ -14,12 +14,13 @@
 </div>
 
 <script>
-  angular.module("KendoDemos", [ "kendo.directives" ]).controller("MyCtrl", function($scope){
-      $scope.getType = function(x) {
-          return typeof x;
-      };
-      $scope.isDate = function(x) {
-          return x instanceof Date;
-      };
-  })
+  angular.module("KendoDemos", [ "kendo.directives" ])
+      .controller("MyCtrl", function($scope){
+          $scope.getType = function(x) {
+              return typeof x;
+          };
+          $scope.isDate = function(x) {
+              return x instanceof Date;
+          };
+      })
 </script>

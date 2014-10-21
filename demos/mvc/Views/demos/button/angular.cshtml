@@ -37,12 +37,13 @@
 </div>
 
 <script>
-  angular.module("KendoDemos", [ "kendo.directives" ]).controller("MyCtrl", function($scope){
-      $scope.onClick1 = function() {
-        alert("Primary button click");
-      };
-      $scope.onClick2 = function() {
-        alert("Second button click");
-      };
-  })
+  angular.module("KendoDemos", [ "kendo.directives" ])
+      .controller("MyCtrl", function($scope){
+          $scope.onClick1 = function() {
+            alert("Primary button click");
+          };
+          $scope.onClick2 = function() {
+            alert("Second button click");
+          };
+      })
 </script>

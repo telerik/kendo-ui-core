@@ -5,43 +5,44 @@
 </div>
 
 <script>
-    angular.module("KendoDemos", ["kendo.directives"]).controller("MyCtrl", function($scope){
-        $scope.options = {
-            dataSource: {
-                data: diagramNodes(),
-                schema: {
-                    model: {
-                        children: "items"
+    angular.module("KendoDemos", ["kendo.directives"])
+        .controller("MyCtrl", function($scope){
+            $scope.options = {
+                dataSource: {
+                    data: diagramNodes(),
+                    schema: {
+                        model: {
+                            children: "items"
+                        }
                     }
+                },
+                layout: {
+                    type: "tree",
+                    subtype: "down",
+                    horizontalSeparation: 30,
+                    verticalSeparation: 20
+                },
+                shapeDefaults: {
+                    width: 40,
+                    height: 40
                 }
-            },
-            layout: {
-                type: "tree",
-                subtype: "down",
-                horizontalSeparation: 30,
-                verticalSeparation: 20
-            },
-            shapeDefaults: {
-                width: 40,
-                height: 40
-            }
-        };
-    })
-
-    function diagramNodes() {
-        var root = { name: "0", items: [] };
-        addNodes(root, [3, 2, 2]);
-        return [root];
-    }
-
-    function addNodes(root, levels) {
-        if (levels.length > 0) {
-            for (var i = 0; i < levels[0]; i++) {
-                var node = { name: "0", items: [] };
-                root.items.push(node);
-
-                addNodes(node, levels.slice(1));
+            };
+        })
+    
+        function diagramNodes() {
+            var root = { name: "0", items: [] };
+            addNodes(root, [3, 2, 2]);
+            return [root];
+        }
+    
+        function addNodes(root, levels) {
+            if (levels.length > 0) {
+                for (var i = 0; i < levels[0]; i++) {
+                    var node = { name: "0", items: [] };
+                    root.items.push(node);
+    
+                    addNodes(node, levels.slice(1));
+                }
             }
         }
-    }
 </script>

@@ -23,24 +23,25 @@
 
     </div>
 <script>
-    angular.module("KendoDemos", [ "kendo.directives" ]).controller("MyCtrl", function($scope){
-        $scope.onSeriesHover = function (e) {
-            kendoConsole.log(kendo.format("event :: seriesHover ({0} : {1})", e.category, e.value));
-        };
-
-        $scope.screenResolution = new kendo.data.DataSource({
-            transport: {
-                read: {
-                    url: "../content/dataviz/js/screen_resolution.json",
-                    dataType: "json"
+    angular.module("KendoDemos", [ "kendo.directives" ])
+        .controller("MyCtrl", function($scope){
+            $scope.onSeriesHover = function (e) {
+                kendoConsole.log(kendo.format("event :: seriesHover ({0} : {1})", e.category, e.value));
+            };
+    
+            $scope.screenResolution = new kendo.data.DataSource({
+                transport: {
+                    read: {
+                        url: "../content/dataviz/js/screen_resolution.json",
+                        dataType: "json"
+                    }
+                },
+                filter: {
+                    field: "year",
+                    operator: "eq",
+                    value: 2009
                 }
-            },
-            filter: {
-                field: "year",
-                operator: "eq",
-                value: 2009
-            }
-        });
-    })
+            });
+        })
 </script>
 </div>

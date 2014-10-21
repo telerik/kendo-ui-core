@@ -6,32 +6,33 @@
 </div>
 
 <script>
-  angular.module("KendoDemo", [ "kendo.directives" ]).controller("MyCtrl", function($scope){
-      $scope.dataSource = new kendo.data.PivotDataSource({
-          type: "xmla",
-          columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Product].[Category]" } ],
-          rows: [{ name: "[Geography].[City]" }],
-          measures: ["[Measures].[Internet Sales Amount]"],
-          transport: {
-              connection: {
-                  catalog: "Adventure Works DW 2008R2",
-                  cube: "Adventure Works"
+  angular.module("KendoDemo", [ "kendo.directives" ])
+      .controller("MyCtrl", function($scope){
+          $scope.dataSource = new kendo.data.PivotDataSource({
+              type: "xmla",
+              columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Product].[Category]" } ],
+              rows: [{ name: "[Geography].[City]" }],
+              measures: ["[Measures].[Internet Sales Amount]"],
+              transport: {
+                  connection: {
+                      catalog: "Adventure Works DW 2008R2",
+                      cube: "Adventure Works"
+                  },
+                  read: "http://demos.telerik.com/olap/msmdpump.dll"
               },
-              read: "http://demos.telerik.com/olap/msmdpump.dll"
-          },
-          schema: {
-              type: "xmla"
-          },
-          error: function (e) {
-              alert("error: " + kendo.stringify(e.errors[0]));
-          }
-      });
-      $scope.options = {
-          columnWidth: 200,
-          height: 580,
-          dataSource: $scope.dataSource
-      };
-  })
+              schema: {
+                  type: "xmla"
+              },
+              error: function (e) {
+                  alert("error: " + kendo.stringify(e.errors[0]));
+              }
+          });
+          $scope.options = {
+              columnWidth: 200,
+              height: 580,
+              dataSource: $scope.dataSource
+          };
+      })
 </script>
 
 <style>
