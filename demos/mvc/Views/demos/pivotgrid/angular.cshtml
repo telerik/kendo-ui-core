@@ -6,9 +6,7 @@
 </div>
 
 <script>
-  angular.module("KendoDemo", [ "kendo.directives" ]);
-
-  function MyCtrl($scope) {
+  angular.module("KendoDemo", [ "kendo.directives" ]).controller("MyCtrl", function($scope){
       $scope.dataSource = new kendo.data.PivotDataSource({
           type: "xmla",
           columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Product].[Category]" } ],
@@ -33,7 +31,7 @@
           height: 580,
           dataSource: $scope.dataSource
       };
-  }
+  })
 </script>
 
 <style>
