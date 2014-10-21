@@ -545,7 +545,7 @@ var __meta__ = {
                 model = new RootElement(chart._modelOptions()),
                 plotArea;
 
-            //model.parent = chart;
+            model.chart = chart;
 
             Title.buildTitle(options.title, model);
 
@@ -10405,17 +10405,10 @@ var __meta__ = {
 
     var Crosshair = ChartElement.extend({
         init: function(axis, options) {
-            var crosshair = this;
+            ChartElement.fn.init.call(this, options);
 
-            ChartElement.fn.init.call(crosshair, options);
-            crosshair.axis = axis;
-
-            if (!crosshair.id) {
-                crosshair.id = uniqueId();
-            }
-            crosshair._visible = false;
-            crosshair.stickyMode = axis instanceof CategoryAxis;
-            crosshair.enableDiscovery();
+            this.axis = axis;
+            this.stickyMode = axis instanceof CategoryAxis;
         },
 
         options: {
@@ -10427,46 +10420,33 @@ var __meta__ = {
             }
         },
 
-        repaint: function() {
-            var crosshair = this,
-                element = crosshair.element;
-
-            crosshair.getViewElements(crosshair._view);
-            element = crosshair.element;
-            element.refresh(getElement(crosshair.id));
-        },
-
         showAt: function(point) {
             var crosshair = this;
 
-            crosshair._visible = true;
-            crosshair.point = point;
-            crosshair.repaint();
+            this.point = point;
+            this.moveLine();
+            this.line.visible(true);
 
-            if (crosshair.options.tooltip.visible) {
-                if (!crosshair.tooltip) {
-                    crosshair.tooltip = new CrosshairTooltip(
-                        crosshair,
-                        deepExtend({}, crosshair.options.tooltip, { stickyMode: crosshair.stickyMode })
+            var tooltipOptions = this.options.tooltip;
+            if (tooltipOptions.visible) {
+                if (!this.tooltip) {
+                    this.tooltip = new CrosshairTooltip(this,
+                        deepExtend({}, tooltipOptions, { stickyMode: this.stickyMode })
                     );
                 }
-                crosshair.tooltip.showAt(point);
+                this.tooltip.showAt(point);
             }
         },
 
         hide: function() {
-            var crosshair = this;
+            this.line.visible(false)
 
-            if (crosshair._visible) {
-                crosshair._visible = false;
-                crosshair.repaint();
-                if (crosshair.tooltip) {
-                    crosshair.tooltip.hide();
-                }
+            if (this.tooltip) {
+                this.tooltip.hide();
             }
         },
 
-        linePoints: function() {
+        moveLine: function() {
             var crosshair = this,
                 axis = crosshair.axis,
                 vertical = axis.options.vertical,
@@ -10475,11 +10455,11 @@ var __meta__ = {
                 dim = vertical ? Y : X,
                 slot, lineStart, lineEnd;
 
-            lineStart = Point2D(box.x1, box.y1);
+            lineStart = new geom.Point(box.x1, box.y1);
             if (vertical) {
-                lineEnd = Point2D(box.x2, box.y1);
+                lineEnd = new geom.Point(box.x2, box.y1);
             } else {
-                lineEnd = Point2D(box.x1, box.y2);
+                lineEnd = new geom.Point(box.x1, box.y2);
             }
 
             if (point) {
@@ -10493,7 +10473,7 @@ var __meta__ = {
 
             crosshair.box = box;
 
-            return [lineStart, lineEnd];
+            this.line.moveTo(lineStart).lineTo(lineEnd);
         },
 
         getBox: function() {
@@ -10523,29 +10503,22 @@ var __meta__ = {
             return box;
         },
 
-        getViewElements: function(view) {
-            var crosshair = this,
-                options = crosshair.options,
-                elements = [];
+        createVisual: function() {
+            ChartElement.fn.createVisual.call(this);
 
-            crosshair.points = crosshair.linePoints();
-            crosshair.element = view.createPolyline(crosshair.points, false, {
-                data: { modelId: crosshair.modelId },
-                id: crosshair.id,
-                stroke: options.color,
-                strokeWidth: options.width,
-                strokeOpacity: options.opacity,
-                dashType: options.dashType,
-                zIndex: options.zIndex,
-                visible: crosshair._visible
+            var options = this.options;
+            this.line = new draw.Path({
+                stroke: {
+                    color: options.color,
+                    width: options.width,
+                    opacity: options.opacity,
+                    dashType: options.dashType
+                },
+                visible: false
             });
 
-            elements.push(crosshair.element);
-            crosshair._view = view;
-
-            append(elements, ChartElement.fn.getViewElements.call(crosshair, view));
-
-            return elements;
+            this.moveLine();
+            this.visual.append(this.line);
         },
 
         destroy: function() {
@@ -10561,7 +10534,7 @@ var __meta__ = {
     var CrosshairTooltip = BaseTooltip.extend({
         init: function(crosshair, options) {
             var tooltip = this,
-                chartElement = crosshair.axis.getRoot().parent.element;
+                chartElement = crosshair.axis.getRoot().chart.element;
 
             tooltip.crosshair = crosshair;
 
@@ -10629,35 +10602,34 @@ var __meta__ = {
             var tooltip = this,
                 options = tooltip.options,
                 position = options.position,
-                vertical = tooltip.crosshair.axis.options.vertical,
-                points = tooltip.crosshair.points,
-                fPoint = points[0],
-                sPoint = points[1],
+                crosshair = this.crosshair,
+                vertical = !crosshair.axis.options.vertical,
+                lineBox = crosshair.line.bbox(),
                 size = this._measure(),
                 halfWidth = size.width / 2,
                 halfHeight = size.height / 2,
                 padding = options.padding,
-                x, y;
+                anchor;
 
             if (vertical) {
-                if (position === LEFT) {
-                    x = fPoint.x - size.width - padding;
-                    y = fPoint.y - halfHeight;
+                if (position === BOTTOM) {
+                    anchor = lineBox.bottomLeft()
+                        .translate(-halfWidth, padding);
                 } else {
-                    x = sPoint.x + padding;
-                    y = sPoint.y - halfHeight;
+                    anchor = lineBox.topLeft()
+                        .translate(-halfWidth, -size.height - padding);
                 }
             } else {
-                if (position === BOTTOM) {
-                    x = sPoint.x - halfWidth;
-                    y = sPoint.y + padding;
+                if (position === LEFT) {
+                    anchor = lineBox.topLeft()
+                        .translate(-size.width - padding, -halfHeight);
                 } else {
-                    x = fPoint.x - halfWidth;
-                    y = fPoint.y - size.height - padding;
+                    anchor = lineBox.topRight()
+                        .translate(padding, -halfHeight);
                 }
             }
 
-            return Point2D(x, y);
+            return anchor;
         },
 
         hide: function() {
