@@ -26,8 +26,7 @@
 </div>
 
 <script>
-    angular.module("KendoDemos", [ "kendo.directives" ]);
-    function MyCtrl($scope) {
+    angular.module("KendoDemos", [ "kendo.directives" ]).controller("MyCtrl", function($scope){
         $scope.mainGridOptions = {
             dataSource: {
                 type: "odata",
@@ -87,5 +86,5 @@
                 ]
             };
         };
-    }
+    })
 </script>
