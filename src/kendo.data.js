@@ -412,7 +412,7 @@ var __meta__ = {
             for (field in value) {
                 member = value[field];
 
-                if (field.charAt(0) != "_") {
+                if (typeof member === "object" && member && !member.getTime && field.charAt(0) != "_") {
                     member = that.wrap(member, field, parent);
                 }
 
@@ -1972,8 +1972,11 @@ var __meta__ = {
         }
     }
 
-    function replaceInRanges(ranges, item, observable) {
+    function replaceInRanges(ranges, data, item, observable) {
         for (var idx = 0; idx < ranges.length; idx++) {
+            if (ranges[idx].data === data) {
+                break;
+            }
             if (replaceInRange(ranges[idx].data, item, observable)) {
                 break;
             }
@@ -1983,29 +1986,29 @@ var __meta__ = {
     function replaceInRange(items, item, observable) {
         for (var idx = 0, length = items.length; idx < length; idx++) {
             if (items[idx] && items[idx].hasSubgroups) {
-                replaceInRange(items[idx].data, item, observable);
-            } else if (items[idx] === item) {
+                return replaceInRange(items[idx].items, item, observable);
+            } else if (items[idx] === item || items[idx] === observable) {
                items[idx] = observable;
                return true;
             }
         }
     }
 
-    function replaceWithObservable(view, data, ranges) {
+    function replaceWithObservable(view, data, ranges, type) {
         for (var viewIndex = 0, length = view.length; viewIndex < length; viewIndex++) {
             var item = view[viewIndex];
 
-            if (!item) {
+            if (!item || item instanceof type) {
                 continue;
             }
 
             if (item.hasSubgroups !== undefined) {
-                replaceWithObservable(item.items, data, ranges);
+                replaceWithObservable(item.items, data, ranges, type);
             } else {
                 for (var idx = 0; idx < data.length; idx++) {
                     if (data[idx] === item) {
                         view[viewIndex] = data.at(idx);
-                        replaceInRanges(ranges, item, view[viewIndex]);
+                        replaceInRanges(ranges, data, item, view[viewIndex]);
                         break;
                     }
                 }
@@ -2369,7 +2372,7 @@ var __meta__ = {
         },
 
         _observeView: function(data) {
-            replaceWithObservable(data, this._data, this._ranges);
+            replaceWithObservable(data, this._data, this._ranges, this.reader.model || ObservableObject);
 
             return new LazyObservableArray(data, this.reader.model);
         },
@@ -3078,7 +3081,7 @@ var __meta__ = {
                     data.wrapAll(data, data);
                 }
             } else {
-                data = new LazyObservableArray(data, that.reader.model);
+                data = new (that.pageSize() ? LazyObservableArray : ObservableArray)(data, that.reader.model);
                 data.parent = function() { return that.parent(); };
             }
 
