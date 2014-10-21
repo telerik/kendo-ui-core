@@ -6,7 +6,8 @@
 
     // Constants ==============================================================
     var BLACK = "#000",
-        SWING = "swing";
+        SWING = "swing",
+        math = Math;
 
     var Color = function(value) {
         var color = this,

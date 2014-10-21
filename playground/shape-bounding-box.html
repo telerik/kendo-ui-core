@@ -162,7 +162,7 @@
                 MultiPath = drawing.MultiPath,
                 Segment = drawing.Segment,
                 Surface = drawing.Surface,
-                surface = Surface.create(document.getElementById("container"), {width: 400, height: 400, type: "svg"}),
+                surface = Surface.create(document.getElementById("container"), {width: 400, height: 400, type: "canvas"}),
                 circleGeometry = new Circle(Point.create(150, 400), 100),
                 circle = new drawing.Circle(circleGeometry, {fill: {color: "red"} }),
                // boundingRect = circle.bbox(),
@@ -205,8 +205,8 @@
 
             function gradientTest() {
                 var circleGeometry = new Circle(Point.create(200, 200), 100);
-                circle = new drawing.Circle(circleGeometry);
-                //circle = Path.fromRect(new geometry.Rect([200, 200], [200, 200]));
+                //circle = new drawing.Circle(circleGeometry);
+                circle = Path.fromRect(new geometry.Rect([50, 50], [200, 400]));
                 surface.draw(circle);
                 var viewModel = kendo.observable({
                     types: [{

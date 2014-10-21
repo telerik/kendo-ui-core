@@ -30,7 +30,9 @@
             this._state.push(deepExtend({}, this));
         },
         stroke: $.noop,
-        strokeText: $.noop
+        strokeText: $.noop,
+        createLinearGradient: $.noop,
+        createRadialGradient: $.noop
     });
 
     function mockContext(members) {
@@ -644,6 +646,114 @@
             });
 
             node.renderTo(ctx);
+        });
+
+        // ------------------------------------------------------------
+        function MockGradient() {
+            this.stops = [];
+        }
+
+        MockGradient.prototype = {
+            addColorStop: function(offset, color) {
+                this.stops.push({
+                    offset: offset,
+                    color: color
+                });
+            }
+        };
+
+        function createGradient() {
+           var gradientFill = new MockGradient();
+           gradientFill.params = arguments;
+           return gradientFill;
+        }
+
+        function renderGradient(gradient) {
+            var fillsContext = false;
+            var transformation;
+            var ctx = mockContext({
+                transform: function() {
+                    transformation = new g.Matrix();
+                    transformation.init.apply(transformation, arguments);
+                },
+                fill: function() {
+                    fillsContext = true;
+                },
+                createLinearGradient: createGradient,
+                createRadialGradient: createGradient
+            });
+
+            shape.fill(gradient);
+            node.renderTo(ctx);
+            return {
+                fillsContext: fillsContext,
+                transformation: transformation,
+                gradient: ctx.fillStyle
+            };
+        }
+
+        module("Paint Tests / " + nodeName + " / gradient fill", {
+            setup: function() {
+                shape = new TShape();
+                shape.rawBBox = function() {
+                    return new g.Rect([10, 20], [100, 200]);
+                };
+                node = new TNode(shape);
+            }
+        });
+
+        test("renders linear gradient", function() {
+            var result = renderGradient(new d.LinearGradient({
+                start: [0.1, 0.2],
+                end: [0.5, 0.6]
+            }));
+            var params = result.gradient.params;
+            ok(result.fillsContext);
+            ok(result.gradient);
+            equal(params[0], 0.1);
+            equal(params[1], 0.2);
+            equal(params[2], 0.5);
+            equal(params[3], 0.6);
+        });
+
+        test("renders radial gradient", function() {
+            var result = renderGradient(new d.RadialGradient({
+                center: [10, 20],
+                radius: 0.5
+            }));
+            var params = result.gradient.params;
+            ok(result.fillsContext);
+            ok(result.gradient);
+            equal(params[0], 10);
+            equal(params[1], 20);
+            equal(params[2], 0);
+            equal(params[3], 10);
+            equal(params[4], 20);
+            equal(params[5], 0.5);
+        });
+
+        test("sets transformation based on raw bounding box", function() {
+            var result = renderGradient(new d.LinearGradient());
+            compareMatrices(result.transformation, new g.Matrix(100, 0, 0, 200, 10, 20));
+        });
+
+        test("adds gradient stops", function() {
+            var result = renderGradient(new d.LinearGradient({
+                stops: [[
+                    0.1, "red", 0.5
+                ], [
+                    0.7, "blue", 1
+                ]]
+            }));
+
+            var expectedStops = [{
+                color: "rgba(255,0,0,0.5)",
+                offset: 0.1
+            }, {
+                color: "rgba(0,0,255,1)",
+                offset: 0.7
+            }];
+            deepEqual(result.gradient.stops, expectedStops);
         });
     }
 
