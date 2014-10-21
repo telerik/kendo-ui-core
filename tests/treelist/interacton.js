@@ -452,6 +452,34 @@
         instance.content.find(".k-grid-delete").click();
     });
 
+    test("clicking excel button calls saveAsExcel", function() {
+        createTreeList({
+            toolbar: ["excel"],
+            dataSource: [ { id: 1 } ],
+            columns: [ { field: "id" } ]
+        });
+
+        instance.saveAsExcel = function(arg) {
+            ok(true);
+        };
+
+        dom.find(".k-grid-excel").click();
+    });
+
+    test("clicking pdf button calls saveAsPDF", function() {
+        createTreeList({
+            toolbar: ["pdf"],
+            dataSource: [ { id: 1 } ],
+            columns: [ { field: "id" } ]
+        });
+
+        instance.saveAsPDF = function(arg) {
+            ok(true);
+        };
+
+        dom.find(".k-grid-pdf").click();
+    });
+
     test("custom command renders button with passed className", function() {
         createTreeList({
             dataSource: [ { id: 1 } ],

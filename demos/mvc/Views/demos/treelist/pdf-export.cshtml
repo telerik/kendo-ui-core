@@ -1,0 +1,47 @@
+<div id="example">
+        <div class="demo-section k-header">
+            <div id="treelist"></div>
+        </div>
+
+        <script>
+            $(document).ready(function() {
+                var service = "http://demos.telerik.com/kendo-ui/service";
+
+                $("#treelist").kendoTreeList({
+                    toolbar: [ "pdf" ],
+                    pdf: {
+                        fileName: "Kendo UI TreeList Export.pdf",
+                        proxyURL: "http://demos.telerik.com/kendo-ui/service/export",
+                    },
+
+                    dataSource: {
+                        transport: {
+                            read: {
+                                url: service + "/EmployeeDirectory/All",
+                                dataType: "jsonp"
+                            }
+                        },
+                        schema: {
+                            model: {
+                                id: "EmployeeID",
+                                fields: {
+                                    parentId: { field: "ReportsTo",  nullable: true },
+                                    EmployeeID: { field: "EmployeeId", type: "number" }
+                                },
+                                expanded: true
+                            }
+                        }
+                    },
+                    scrollable: false,
+                    filterable: true,
+                    sortable: true,
+                    columns: [
+                        { field: "FirstName", title: "First Name", width: 250 },
+                        { field: "LastName", title: "Last Name" },
+                        { field: "Position" },
+                        { field: "Extension" }
+                    ]
+                });
+            });
+        </script>
+    </div>

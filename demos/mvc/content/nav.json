@@ -4379,6 +4379,32 @@
         }
       },
       {
+        "text": "Export to Excel",
+        "url": "treelist/excel-export",
+        "title": {
+            "kendo-ui": "Exporting to MS Excel"
+        },
+        "meta": {
+            "kendo-ui": "Export Kendo UI TreeList as Microsoft Excel file"
+        },
+        "packages": [
+            "!offline"
+        ]
+      },
+      {
+        "text": "Export to PDF",
+        "url": "treelist/pdf-export",
+        "title": {
+            "kendo-ui": "Exporting to PDF"
+        },
+        "meta": {
+            "kendo-ui": "Export Kendo UI TreeList as PDF file"
+        },
+        "packages": [
+            "!offline"
+        ]
+      },
+      {
         "text": "Events",
         "url": "treelist/events",
         "title": {

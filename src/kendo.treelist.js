@@ -28,6 +28,16 @@ var __meta__ = {
         name: "Selection",
         description: "Support for row selection",
         depends: [ "selectable" ]
+    }, {
+        id: "treelist-excel-export",
+        name: "Excel export",
+        description: "Export data as Excel spreadsheet",
+        depends: [ "excel" ]
+    }, {
+        id: "treelist-pdf-export",
+        name: "PDF export",
+        description: "Export data as PDF",
+        depends: [ "pdf" ]
     } ]
 };
 
@@ -131,6 +141,16 @@ var __meta__ = {
             imageClass: "k-cancel",
             className: "k-grid-cancel",
             methodName: "_cancelEdit"
+        },
+        excel: {
+            imageClass: "k-excel",
+            className: "k-grid-excel",
+            methodName: "saveAsExcel"
+        },
+        pdf: {
+            imageClass: "k-pdf",
+            className: "k-grid-pdf",
+            methodName: "saveAsPDF"
         }
     };
 
@@ -734,10 +754,11 @@ var __meta__ = {
             var element = this.element;
             var contentWrap = element.find(DOT + classNames.gridContentWrap);
             var header = element.find(DOT + classNames.gridHeader);
+            var toolbar = element.find(DOT + classNames.gridToolbar);
 
             element.height(this.options.height);
 
-            // identical code found in grid & splitter :(
+            // identical code found in grid & scheduler :(
             var isHeightSet = function(el) {
                 var initialHeight, newHeight;
                 if (el[0].style.height) {
@@ -754,7 +775,7 @@ var __meta__ = {
             };
 
             if (isHeightSet(element)) {
-                contentWrap.height(element.height() - header.outerHeight());
+                contentWrap.height(element.height() - header.outerHeight() - toolbar.outerHeight());
             }
         },
 
@@ -796,7 +817,9 @@ var __meta__ = {
                     canceledit: "Cancel",
                     create: "Add new record",
                     createchild: "Add child record",
-                    destroy: "Delete"
+                    destroy: "Delete",
+                    excel: "Export to Excel",
+                    pdf: "Export to PDF"
                 }
             },
             filterable: false,
@@ -1652,6 +1675,15 @@ var __meta__ = {
             return mode.toLowerCase();
         }
     });
+
+    if (kendo.ExcelMixin) {
+        kendo.ExcelMixin.extend(TreeList.prototype);
+    }
+
+    if (kendo.PDFMixin) {
+        kendo.PDFMixin.extend(TreeList.prototype);
+    }
+
 
     extend(true, kendo.data, {
         TreeListDataSource: TreeListDataSource,
