@@ -7998,13 +7998,6 @@ var __meta__ = {
             }
         },
 
-        createVisual: function() {
-            this.visual = new draw.Group();
-
-            this._gridLines = new draw.Group();
-            this.visual.append(this._gridLines);
-        },
-
         renderComplete: function() {
             if (this.options.visible) {
                 this.createGridLines();
@@ -8036,7 +8029,7 @@ var __meta__ = {
                         altAxis = allAxes[j];
                         if (vertical !== altAxis.options.vertical) {
                             // TODO: gridLines seems to be empty... always?
-                            append(gridLines, axis.appendGridLines(this._gridLines, altAxis));
+                            append(gridLines, axis.createGridLines(altAxis));
                         }
                     }
                 }

@@ -889,7 +889,8 @@ var __meta__ = {
                 fill: {
                     color: options.background,
                     opacity: options.opacity
-                }
+                },
+                zIndex: -10
             });
 
             this.visual.append(background);
@@ -1800,6 +1801,12 @@ var __meta__ = {
 
         createVisual: function() {
             this.visual = new draw.Group();
+
+            this._gridLines = new draw.Group({
+                zIndex: -1
+            });
+            this.appendVisual(this._gridLines);
+
             this.createPlotBands();
             this.createBackground();
             this.createLine();
@@ -1952,7 +1959,7 @@ var __meta__ = {
             }
         },
 
-        appendGridLines: function(container, altAxis) {
+        createGridLines: function(altAxis) {
             var axis = this,
                 options = axis.options,
                 axisLineVisible = altAxis.options.line.visible,
@@ -1969,6 +1976,7 @@ var __meta__ = {
                 },
                 pos, majorTicks = [];
 
+            var container = this._gridLines;
             function render(tickPositions, gridLine, skipUnit) {
                 var count = tickPositions.length,
                     i;
@@ -3038,7 +3046,7 @@ var __meta__ = {
             return ticks;
         },
 
-        appendGridLines: function(container, altAxis) {
+        createGridLines: function(altAxis) {
             var axis = this,
                 items = [],
                 options = axis.options,
@@ -3055,6 +3063,7 @@ var __meta__ = {
                 },
                 pos, majorTicks = [];
 
+            var container = this._gridLines;
             function render(tickPosition, gridLine) {
                 if (!inArray(tickPosition, majorTicks)) {
                     lineOptions.position = tickPosition;
