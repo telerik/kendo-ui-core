@@ -8028,7 +8028,6 @@ var __meta__ = {
                     if (gridLines.length === 0) {
                         altAxis = allAxes[j];
                         if (vertical !== altAxis.options.vertical) {
-                            // TODO: gridLines seems to be empty... always?
                             append(gridLines, axis.createGridLines(altAxis));
                         }
                     }

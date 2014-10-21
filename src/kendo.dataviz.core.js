@@ -1989,6 +1989,7 @@ var __meta__ = {
                                 lineOptions.position = pos;
                                 container.append(createAxisGridLine(lineOptions, gridLine));
 
+                                rendered = true;
                                 majorTicks.push(pos);
                             }
                         }
@@ -1998,6 +1999,8 @@ var __meta__ = {
 
             render(axis.getMajorTickPositions(), options.majorGridLines);
             render(axis.getMinorTickPositions(), options.minorGridLines, majorUnit / options.minorUnit);
+
+            return container.children;
         },
 
         reflow: function(box) {
@@ -3048,7 +3051,6 @@ var __meta__ = {
 
         createGridLines: function(altAxis) {
             var axis = this,
-                items = [],
                 options = axis.options,
                 axisLineVisible = altAxis.options.line.visible,
                 majorGridLines = options.majorGridLines,
@@ -3081,7 +3083,7 @@ var __meta__ = {
                 axis.traverseMinorTicksPositions(render, minorGridLines);
             }
 
-            return items;
+            return container.children;
         },
 
         traverseMajorTicksPositions: function(callback, tickOptions) {
