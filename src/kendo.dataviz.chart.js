@@ -4777,28 +4777,38 @@ var __meta__ = {
             }
         },
 
-        highlightOverlay: function(view, options) {
-            var element = this,
-                highlight = element.options.highlight,
-                markers = highlight.markers,
-                defaultColor = element.markerBorder().color;
+        toggleHighlight: function(show) {
+            var highlight = this.options.highlight;
+            var overlay = this._overlay;
+            if (!overlay) {
+                var markers = highlight.markers;
+                var defaultColor = this.markerBorder().color;
 
-            options = deepExtend({ data: { modelId: element.modelId } }, options, {
-                fill: markers.color || defaultColor,
-                stroke: markers.border.color,
-                strokeWidth: markers.border.width,
-                strokeOpacity: markers.border.opacity || 0,
-                fillOpacity: markers.opacity || 1,
-                visible: markers.visible
-            });
+                var options = this.options.markers;
+                var shadow = new ShapeElement({
+                    type: options.type,
+                    width: options.size,
+                    height: options.size,
+                    rotation: options.rotation,
+                    background: markers.color || defaultColor,
+                    border: {
+                        color: markers.border.color,
+                        width: markers.border.width,
+                        opacity: markers.border.opacity || 0
+                    },
+                    fillOpacity: markers.opacity || 1
+                });
+                shadow.reflow(this._childBox);
 
-            var marker = this.marker;
-            if (!marker) {
-                marker = this.createMarker();
-                marker.reflow(this._childBox);
+                shadow.createVisual();
+                overlay = this._overlay = shadow.visual;
+                this.visual.append(overlay);
             }
 
-            return marker.getViewElements(view, options)[0];
+            var highlight = this.options.highlight;
+            if (highlight && highlight.visible) {
+                overlay.visible(show);
+            }
         },
 
         tooltipAnchor: function(tooltipWidth, tooltipHeight) {
