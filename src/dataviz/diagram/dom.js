@@ -1567,16 +1567,14 @@
                 if (item.options.dataItem) {
                     var editable = item.options.editable;
                     this.editor = new PopupEditor(this.element, {
-                        updateEditor: proxy(this._update, this),
-                        cancelEditor: proxy(this._cancel, this),
+                        update: proxy(this._update, this),
+                        cancel: proxy(this._cancel, this),
                         model: item.options.dataItem,
                         type: editorType,
                         target: this,
                         editors: editable.editors,
                         template: editable.template
                     });
-
-                    this.editor.open();
 
                     this.trigger("edit", this._editArgs());
                 }
@@ -1598,8 +1596,10 @@
             },
 
             _update: function() {
-                if (this.editor && this.editor.end() && !this.trigger("save", this._editArgs())) {
+                if (this.editor && this.editor.end() &&
+                    !this.trigger("save", this._editArgs())) {
                     this._getEditDataSource().sync();
+                    this._destroyEditor();
                 }
             },
 
@@ -3144,8 +3144,6 @@
                         this.layout(this.options.layout);
                     }
                 }
-
-                this._destroyEditor();
             },
 
             _removeShapes: function(items) {
@@ -3205,8 +3203,6 @@
                 } else {
                     this._addConnections(e.sender.view());
                 }
-
-                this._destroyEditor();
             },
 
             _removeConnections: function(items) {
@@ -3241,8 +3237,18 @@
                 for (var i = 0; i < items.length; i++) {
                     var dataItem = items[i];
 
-                    this._connectionsDataMap[dataItem.id]
-                        .updateOptionsFromModel(dataItem);
+                    var connection = this._connectionsDataMap[dataItem.id];
+                    connection.updateOptionsFromModel(dataItem);
+
+                    var from = this._validateConnector(dataItem.from);
+                    if (from) {
+                        connection.source(from);
+                    }
+
+                    var to = this._validateConnector(dataItem.to);
+                    if (to) {
+                        connection.target(to);
+                    }
                 }
             },
 
@@ -3275,7 +3281,7 @@
             },
 
             _validateConnector: function(value) {
-                var connector = value;
+                var connector;
 
                 if (isNumber(value)) {
                     connector = this._dataMap[value];
@@ -3711,7 +3717,7 @@
                 this.open();
             },
 
-            events: [ "updateEditor", "cancelEditor" ],
+            events: [ "update", "cancel" ],
 
             options: {
                 window: {
@@ -3803,11 +3809,11 @@
             },
 
             _updateClick: function() {
-                this.trigger("updateEditor");
+                this.trigger("update");
             },
 
             _cancelClick: function () {
-                this.trigger("cancelEditor");
+                this.trigger("cancel");
             },
 
             open: function() {
