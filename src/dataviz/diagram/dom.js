@@ -507,6 +507,7 @@
                         model._set("height", bounds.height);
 
                         this.diagram._shouldRefresh = true;
+                        this.options.dataItem = model;
                         model.trigger("change");
                     }
                 }
@@ -1016,6 +1017,8 @@
                                 model._set("toX", null);
                                 model._set("toY", null);
                             }
+
+                            this.options.dataItem = model;
 
                             if (shouldRefresh !== false) {
                                 this.diagram._shouldRefresh = true;
