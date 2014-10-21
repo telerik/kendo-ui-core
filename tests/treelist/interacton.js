@@ -181,6 +181,20 @@
         ok(statusHTML().indexOf(message) >= 0);
     });
 
+    test("hides content when showing status", function() {
+        var read = controlledRead();
+
+        createTreeList({
+            dataSource: { transport: { read: read } }
+        });
+
+        ok(!instance.content.is(":visible"));
+
+        read.resolve([ { id: 1 } ]);
+
+        ok(instance.content.is(":visible"));
+    });
+
     test("shows no rows message when no rows have been fetched", function() {
         var read = controlledRead();
 

@@ -720,11 +720,14 @@ var __meta__ = {
 
             this._contentTree.render([]);
 
+            this.content.closest(DOT + classNames.gridContent).hide();
+
             status.html(message);
         },
 
         _hideStatus: function() {
             this.element.find(".k-status").remove();
+            this.content.closest(DOT + classNames.gridContent).show();
         },
 
         _adjustHeight: function() {
