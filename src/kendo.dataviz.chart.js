@@ -274,9 +274,7 @@ var __meta__ = {
             chart._originalOptions = deepExtend({}, options);
             chart._initTheme(options);
 
-            chart.surface = draw.Surface.create(chart.element, {
-                type: options.renderAs
-            });
+            chart._initSurface();
 
             chart.bind(chart.events, chart.options);
 
@@ -460,6 +458,21 @@ var __meta__ = {
             }
         },
 
+        _initSurface: function() {
+            var surface = this.surface;
+            if (!surface || surface.options.type !== this.options.renderAs) {
+                if (surface) {
+                    surface.destroy();
+                }
+
+                this.surface = draw.Surface.create(this.element, {
+                    type: this.options.renderAs
+                });
+            } else {
+                this.surface.clear();
+            }
+        },
+
         _redraw: function() {
             var chart = this,
                 model = chart._getModel(),
@@ -478,7 +491,7 @@ var __meta__ = {
                 });
             }
 
-            chart.surface.clear();
+            chart._initSurface();
             chart.surface.draw(model.visual);
 
             if (this.options.transitions !== false) {
