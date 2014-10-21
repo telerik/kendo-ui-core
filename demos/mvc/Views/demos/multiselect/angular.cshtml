@@ -7,8 +7,7 @@
 </div>
 
 <script>
-  angular.module("KendoDemos", [ "kendo.directives" ]);
-  function MyCtrl($scope) {
+  angular.module("KendoDemos", [ "kendo.directives" ]).controller("MyCtrl", function($scope){
     $scope.selectOptions = {
         placeholder: "Select products...",
         dataTextField: "ProductName",
@@ -25,5 +24,5 @@
         }
     };
     $scope.selectedIds = [ 4, 7 ];
-  }
+  })
 </script>
