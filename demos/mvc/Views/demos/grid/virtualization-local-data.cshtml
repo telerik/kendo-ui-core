@@ -1,64 +1,61 @@
-        <script src="../content/shared/js/people.js"></script>
+<script src="../content/shared/js/people.js"></script>
 
-        <div id="example">
-            <div class="box">
-                <p>
-                    Initialization time: <span id="init">Pending ...</span>ms
-                </p>
-                <p>
-                   Rendering time: <span id="render">Pending ...</span>ms
-                </p>
-            </div>
+<div id="example">
+    <div id="message" class="demo-section k-header" style="text-align:center"></div>
 
-            <div id="loading" class="demo-section k-header" style="text-align:center">
-                Generating test data...
-            </div>
+    <div id="grid"></div>
 
-            <div id="grid"></div>
+    <script>
+        $(function() {
+            var count = 500000;
 
-            <script>
-                $(function() {
-                    generatePeople(200000, function(data) {
-                        var initStart;
-                        var renderStart;
+            if (kendo.support.browser.msie) {
+                if (kendo.support.browser.version < 10) {
+                    count = 100000;
+                } else {
+                    count = 200000;
+                }
+            }
 
-                        $("#loading").hide();
+            $("#message").text(kendo.format("Generating {0} items", count));
 
-                        initStart = new Date();
+            generatePeople(count, function(data) {
+                var initStart;
+                var renderStart;
 
-                        $("#grid").kendoGrid({
-                            dataSource: {
-                                data: data,
-                                pageSize: 50
-                            },
-                            height: 543,
-                            scrollable: {
-                                virtual: true
-                            },
-                            dataBinding: function(e) {
-                                renderStart = new Date();
-                            },
-                            dataBound: function(e) {
-                                renderEnd = new Date();
-                                $("#render").text(renderEnd - renderStart);
-                            },
-                            pageable: {
-                                info: true,
-                                numeric: false,
-                                previousNext: false
-                            },
-                            columns: [ { field: "Id", title: "ID", width: "70px" },
-                                { field: "FirstName", title: "First Name", width: "130px" },
-                                { field: "LastName", title: "Last Name", width: "130px" },
-                                { field: "City", title: "City", width: "130px" },
-                                "Title"
-                            ]
-                        });
+                $("#message").text("");
 
-                        initEnd = new Date();
+                setTimeout(function() {
+                    initStart = new Date();
 
-                        $("#init").text(initEnd - initStart);
+                    $("#grid").kendoGrid({
+                        dataSource: {
+                            data: data,
+                            pageSize: 20
+                        },
+                        height: 543,
+                        scrollable: {
+                            virtual: true
+                        },
+                        pageable: {
+                            info: true,
+                            numeric: false,
+                            previousNext: false
+                        },
+                        columns: [
+                            { field: "Id", title: "ID", width: "70px" },
+                            { field: "FirstName", title: "First Name", width: "130px" },
+                            { field: "LastName", title: "Last Name", width: "130px" },
+                            { field: "City", title: "City", width: "130px" },
+                            { field: "Title" }
+                        ]
                     });
+
+                    initEnd = new Date();
+
+                    $("#message").text(kendo.format("Kendo UI Grid bound to {0} items in {1} milliseconds", count, initEnd - initStart));
                 });
-            </script>
-        </div>
+            });
+        });
+    </script>
+</div>
