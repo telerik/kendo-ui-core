@@ -38,8 +38,7 @@
 </div>
 
 <script>
-  angular.module("KendoDemos", [ "kendo.directives" ]);
-  function MyCtrl($scope) {
+  angular.module("KendoDemos", [ "kendo.directives" ]).controller("MyCtrl", function($scope){
       $scope.showInContainer = function() {
           var date = new Date();
           date = kendo.toString(date, "HH:MM:ss.") + kendo.toString(date.getMilliseconds(), "000");
@@ -49,5 +48,5 @@
           $scope.notf1.hide();
           $scope.notf2.hide();
       };
-  }
+  })
 </script>
