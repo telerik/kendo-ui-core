@@ -728,7 +728,8 @@
     test("links for filtering and sorting are rendered independent", function() {
         createTreeList({
             filterable: true,
-            columns: [ { field: "id", sortable: true } ]
+            sortable: true,
+            columns: [ { field: "id" } ]
         });
 
         equal(dom.find("th.k-header a a").length, 0);

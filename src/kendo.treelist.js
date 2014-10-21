@@ -779,6 +779,7 @@ var __meta__ = {
             autoBind: true,
             scrollable: true,
             selectable: false,
+            sortable: false,
             toolbar: null,
             height: null,
             messages: {
@@ -1332,25 +1333,32 @@ var __meta__ = {
             var sortableInstance;
             var cells = this.header.find("th");
             var cell, idx, length;
+            var fieldAttr = kendo.attr("field");
+            var sortable = this.options.sortable;
+
+            if (!sortable) {
+                return;
+            }
 
             for (idx = 0, length = cells.length; idx < length; idx++) {
                 column = columns[idx];
 
-                if (column.sortable) {
+                if (column.sortable !== false && !column.command && column.field) {
                     cell = cells.eq(idx);
 
                     sortableInstance = cell.data("kendoColumnSorter");
-
                     if (sortableInstance) {
                         sortableInstance.destroy();
                     }
 
-                    cell.attr("data-" + kendo.ns + "field", column.field)
-                        .kendoColumnSorter({ dataSource: this.dataSource });
+                    cell.attr(fieldAttr, column.field)
+                        .kendoColumnSorter(
+                            extend({}, sortable, column.sortable, {
+                                dataSource: this.dataSource
+                            })
+                        );
                 }
             }
-
-            cells = null;
         },
 
         _filterable: function() {
