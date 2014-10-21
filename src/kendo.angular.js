@@ -473,6 +473,7 @@ var __meta__ = {
                 compile(originalElement)(scope);
             }
         }, true); // watch for object equality. Use native or simple values.
+        digest(scope);
     }
 
     module.factory('directiveFactory', [ '$compile', function(compile) {
