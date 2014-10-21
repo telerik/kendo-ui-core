@@ -4484,6 +4484,18 @@ var __meta__ = {
             ChartElement.fn.init.call(errorBar, options);
         },
 
+        options: {
+            animation: {
+                type: FADEIN,
+                delay: INITIAL_ANIMATION_DURATION
+            },
+            endCaps: true,
+            line: {
+                width: 1
+            },
+            zIndex: 1
+        },
+
         getAxis: function(){},
 
         reflow: function(targetBox) {
@@ -4533,39 +4545,28 @@ var __meta__ = {
             return capsWidth;
         },
 
-        getViewElements: function(view) {
+        createVisual: function() {
             var errorBar = this,
                 options = errorBar.options,
                 parent = errorBar.parent,
                 line = options.line,
                 lineOptions = {
-                    stroke: options.color,
-                    strokeWidth: line.width,
-                    zIndex: line.zIndex,
-                    align: false,
-                    dashType: line.dashType
+                    stroke: {
+                        color: options.color,
+                        width: line.width,
+                        dashType: line.dashType
+                    }
                 },
-                linePoints = errorBar.linePoints,
-                elements = [],
-                idx;
+                linePoints = errorBar.linePoints;
 
-            for (idx = 0; idx < linePoints.length; idx+=2) {
-                elements.push(view.createLine(linePoints[idx].x, linePoints[idx].y,
-                    linePoints[idx + 1].x, linePoints[idx + 1].y, lineOptions));
-            }
+            ChartElement.fn.createVisual.call(this);
 
-            return elements;
-        },
+            for (var idx = 0; idx < linePoints.length; idx+=2) {
+                var line = new draw.Path(lineOptions)
+                    .moveTo(linePoints[idx].x, linePoints[idx].y)
+                    .lineTo(linePoints[idx + 1].x, linePoints[idx + 1].y);
 
-        options: {
-            animation: {
-                type: FADEIN,
-                delay: INITIAL_ANIMATION_DURATION
-            },
-            endCaps: true,
-            line: {
-                width: 1,
-                zIndex: 1
+                this.visual.append(line);
             }
         }
     });
