@@ -107,33 +107,32 @@
     </style>
 
     <script>
-        angular.module("KendoDemos", [ "kendo.directives" ]);
-
-        function MyCtrl($scope) {
-            $scope.data = [
-                "12 Angry Men",
-                "Il buono, il brutto, il cattivo.",
-                "Inception",
-                "One Flew Over the Cuckoo's Nest",
-                "Pulp Fiction",
-                "Schindler's List",
-                "The Dark Knight",
-                "The Godfather",
-                "The Godfather: Part II",
-                "The Shawshank Redemption"
-            ];
-
-            $scope.validate = function(event) {
-                event.preventDefault();
-
-                if ($scope.validator.validate()) {
-                    $scope.validationMessage = "Hooray! Your tickets has been booked!";
-                    $scope.validationClass = "valid";
-                } else {
-                    $scope.validationMessage = "Oops! There is invalid data in the form.";
-                    $scope.validationClass = "invalid";
+        angular.module("KendoDemos", [ "kendo.directives" ])
+            .controller("MyCtrl", function($scope){
+                $scope.data = [
+                    "12 Angry Men",
+                    "Il buono, il brutto, il cattivo.",
+                    "Inception",
+                    "One Flew Over the Cuckoo's Nest",
+                    "Pulp Fiction",
+                    "Schindler's List",
+                    "The Dark Knight",
+                    "The Godfather",
+                    "The Godfather: Part II",
+                    "The Shawshank Redemption"
+                ];
+    
+                $scope.validate = function(event) {
+                    event.preventDefault();
+    
+                    if ($scope.validator.validate()) {
+                        $scope.validationMessage = "Hooray! Your tickets has been booked!";
+                        $scope.validationClass = "valid";
+                    } else {
+                        $scope.validationMessage = "Oops! There is invalid data in the form.";
+                        $scope.validationClass = "invalid";
+                    }
                 }
-            }
-        }
+            })
     </script>
 </div>
