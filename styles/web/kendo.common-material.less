@@ -1,17 +1,18 @@
 @input-height: 2.071em;
 @input-indent: .8em;
 @editor-icon-size: 32px;
-@menu-link-padding: 1.2em 1.2em 1.1em;
+@menu-link-padding: 1.071em;
 @button-padding: 10px 14px;
 @treeview-inner-padding: 0.4167em 0.6667em 0.3333em 0.5833em;
 @treeview-inner-margin: 1px 0 1px 0.3333em;
 @scheduler-link-padding: .16666em 1.1em;
-@grid-header-padding: .75em .2em .8333em 1em;
+@grid-header-padding: .429em .2em .429em 1em;
 
 @import "common/all.less";
 
 .k-button {
-    line-height: 1em;
+    line-height: 1.143em;
+    padding: 9px 14px;
 }
 
 .k-widget.k-tabstrip
@@ -55,6 +56,36 @@
     margin-top: 10px;
 }
 
+.k-grid-header th.k-header,
+.k-filter-row th
+{
+    padding: .786em .6em .714em .6em;
+}
+
+.k-grouping-header .k-group-indicator
+{
+    padding: .5em .15em .429em .4em;
+}
+
+.k-grid .k-grouping-row td {
+    padding: .6em .6em 0.643em;
+}
+
+.k-grouping-header a,
+.k-grouping-header .k-button
+{
+    vertical-align: baseline;
+}
+
+.k-grid td {
+    padding: 0.929em .6em;
+}
+
+.k-grouping-header
+{
+    line-height: 2.6;
+}
+
 .k-grid tr td
 {
     border-width: 1px 0 0 1px;
@@ -63,30 +94,45 @@
 
 .k-pager-numbers .k-state-selected {
     line-height: 2em;
-    border-width: 1px 0 0;
     cursor: pointer;
 }
 
 .k-pager-wrap {
-    padding: 1px 0 0;
+    padding: 0;
 }
 
 .k-pager-wrap .k-link,
 .k-pager-wrap .k-pager-numbers .k-state-selected,
 .k-pager-sizes{
-    padding: 0.35em 0 0.35em 0.250em;
+    padding: .643em 0 .643em 0.250em;
 }
 
 .k-pager-info {
-    padding: 0.35em 1.333em 0.35em 1.333em;
+    padding: .714em 1.333em .643em 1.333em;
 }
 
 .k-calendar {
     width: 19em;
 }
 
+.k-calendar td {
+    padding: 0;
+}
+
+.k-calendar .k-content {
+    padding: 5px;
+}
+
+.k-calendar .k-content .k-link {
+    min-height: 2.571em;
+    line-height: 2.571em;
+    padding: 0;
+    text-align: center;
+}
+
 .k-calendar th {
     border-bottom-width: 0;
+    padding: .714em .45em .714em 0;
 }
 
 .k-calendar .k-state-hover > .k-link {
@@ -96,6 +142,11 @@
 .k-calendar .k-footer {
     border-top-width: 1px;
     border-top-style: solid;
+}
+
+.k-popup.k-list-container,
+.k-popup.k-calendar-container {
+    padding: 0;
 }
 
 .k-button,
@@ -147,8 +198,14 @@
     padding: 1.357em 0 1.071em;
 }
 
+.k-multiselect-wrap .k-input {
+    height: @input-height;
+}
+
 .k-multiselect-wrap li {
     border-radius: 1.071em;
+    margin: 3px;
+    padding: 0 .15em 0 .4em;
 }
 
 .k-menu.k-header,
@@ -174,11 +231,22 @@
     border-width: 2px;
 }
 
+/*.k-toolbar
+{
+    line-height: 3.429em;
+}*/
+
+span.k-tooltip
+{
+    padding: 9px 17px;
+}
+
+
 //New icons positions
 //.k-i-arrow-s { background-position: 0px -32px !important; }
 
 // outputs background-position
-.sprite-position(@row, @column) when (ispixel(@column)) {
+/*.sprite-position(@row, @column) when (ispixel(@column)) {
     background: @row @column;
 }
 
@@ -194,4 +262,4 @@
     .k-button:active & {
         .sprite-position(@row - @size, @column);
     }
-}
+}*/

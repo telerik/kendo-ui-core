@@ -448,12 +448,9 @@ background-color: @widget-background-color;
 border-color: @widget-background-color;
 }
 
-
-
 .k-list > .k-state-selected {
-//color: @selected-text-color;
 background-color: @selected-background-color;
-border-color: @selected-border-color;
+border-color: @selected-background-color;
 .box-shadow(none);
 }
 
@@ -574,7 +571,7 @@ border-color: @panelbar-items-border;
 	.box-shadow(none);
 }
 
-.k-grid .k-button,
+.k-grid .k-header .k-button,
 .k-scheduler .k-header li,
 .k-scheduler .k-header .k-link,
 .k-gantt .k-header li,
@@ -585,7 +582,7 @@ border-color: @header-background-color;
 .box-shadow(none);
 }
 
-.k-grid .k-button:hover,
+.k-grid .k-header .k-button:hover,
 .k-scheduler .k-scheduler-toolbar .k-scheduler-views li.k-state-hover,
 .k-scheduler .k-scheduler-toolbar .k-scheduler-views li.k-state-hover .k-link,
 .k-gantt .k-gantt-views li.k-state-hover .k-link
@@ -606,6 +603,10 @@ border-bottom: 1px solid @accent-color;
 }
 
 //Grid
+.k-grid .k-alt {
+	background-color: @widget-background-color;
+}
+
 .k-grouping-row td,
 td.k-group-cell, 
 .k-resize-handle-inner {
@@ -666,7 +667,9 @@ color: @inverse-text-color;
 }
 
 .k-grid-header .k-header,
+.k-grid-header .k-link,
 .k-grid-header .k-link:link,
+.k-grid-pager .k-link,
 .k-grid-pager .k-link:link  {
 color: @widget-text-color;
 }
@@ -677,13 +680,20 @@ border-radius: 0;
 }
 
 .k-pager-numbers .k-state-selected {
-border-color: @selected-text-color;
+border-color: @selected-text-color transparent transparent;
 border-radius: 0;
 .box-shadow(none);
+color: @selected-text-color;
 }
 
 .k-pager-wrap .k-link {
 border-color: @secondary-background-color;
+cursor: pointer;
+}
+
+.k-pager-wrap .k-link:hover {
+	background-color: transparent;
+	border-color: transparent;
 }
 
 .k-scheduler-toolbar > ul li:first-child, 
@@ -780,9 +790,12 @@ border-color: @accent-color;
 }
 
 .k-multiselect .k-button:focus:active:not(.k-state-disabled):not([disabled]),
-.k-toolbar .k-button:focus:active:not(.k-state-disabled):not([disabled])
+.k-toolbar .k-button:focus:active:not(.k-state-disabled):not([disabled]),
+.k-group-indicator .k-button,
+.k-group-indicator .k-button:focus:active:not(.k-state-disabled):not([disabled]),
+.k-group-indicator .k-button:focus:not(.k-state-disabled):not([disabled])
 {
-    .box-shadow(none);
+    .box-shadow(none) !important;
 }
 
 .k-multiselect .k-button:active:hover {
@@ -861,9 +874,9 @@ table.k-editor {
 }
 
 .k-list > .k-state-hover {
-	color: @primary-button-text-color;
-	background-color: @primary-hover-background-color;
-	border-color: @primary-hover-border-color;
+	color: @widget-text-color;
+	background-color: @hover-background-color;
+	border-color: @hover-background-color;
 }
 
 //Slider
