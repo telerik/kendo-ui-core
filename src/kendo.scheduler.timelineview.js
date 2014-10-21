@@ -21,6 +21,7 @@ var __meta__ = {
         getDate = kendo.date.getDate,
         getMilliseconds = kendo.date.getMilliseconds,
         MS_PER_DAY = kendo.date.MS_PER_DAY,
+        MS_PER_MINUTE = kendo.date.MS_PER_MINUTE,
         NS = ".kendoTimelineView";
 
     var EVENT_TEMPLATE = kendo.template('<div>' +
@@ -73,6 +74,23 @@ var __meta__ = {
         return value >= min && value <= max;
     }
 
+    function getWorkDays(options) {
+        var workDays = [];
+        var dayIndex = options.workWeekStart;
+
+        workDays.push(dayIndex);
+
+        while(options.workWeekEnd != dayIndex) {
+            if(dayIndex > 6 ) {
+                dayIndex -= 7;
+            } else {
+                dayIndex++;
+            }
+            workDays.push(dayIndex);
+        }
+        return workDays;
+    }
+
     var TimelineView = SchedulerView.extend({
         init: function(element, options) {
             var that = this;
@@ -80,6 +98,8 @@ var __meta__ = {
             SchedulerView.fn.init.call(that, element, options);
 
             that.title = that.options.title || that.options.name;
+
+            that._workDays = getWorkDays(that.options);
 
             that._templates();
 
@@ -225,42 +245,9 @@ var __meta__ = {
 
        _slotByPosition: function(x, y) {
            var slot;
-
            var offset;
-
-           if (this._isVerticallyGrouped()) {
-               offset = this.content.offset();
-               y += this.content[0].scrollTop;
-               x += this.content[0].scrollLeft;
-           } else {
-               offset = this.element.find(".k-scheduler-header-wrap:has(.k-scheduler-header-all-day)").find(">div").offset();
-           }
-
-           if (offset) {
-               x -= offset.left;
-               y -= offset.top;
-           }
-
-           x = Math.ceil(x);
-           y = Math.ceil(y);
-
            var group;
            var groupIndex;
-
-           for (groupIndex = 0; groupIndex < this.groups.length; groupIndex++) {
-                group = this.groups[groupIndex];
-
-                slot = group.daySlotByPosition(x, y);
-
-                if (slot) {
-                    return slot;
-                }
-           }
-
-           if (offset) {
-               x += offset.left;
-               y += offset.top;
-           }
 
            offset = this.content.offset();
 
@@ -362,7 +349,7 @@ var __meta__ = {
 
             that.createLayout(that._layout(dates));
 
-            that._content(that._columnCount * that._dates.length);
+            that._content(dates);
 
             that.refreshLayout();
         },
@@ -397,51 +384,95 @@ var __meta__ = {
             this._slotRanges = slotRanges;
         },
 
-        _layout: function(dates) {
-            var columns = [];
-            var rows = [];
-            var that = this;
-            var options = that.options;
-            var columnCount = that._columnCount;
-            var columnTimeFormat;
-            var msMajorInterval = that._timeSlotInterval();
+        _forTimeRange: function(min, max, action, after) {
+            min = toInvariantTime(min); //convert the date to 1/2/1980 and sets the time
+            max = toInvariantTime(max);
 
-            //need update, as major iterval may not be required
-            if (msMajorInterval >= MS_PER_DAY) {
-                columnTimeFormat = "{0:M}";
-            } else {
-                columnTimeFormat = "{0:HH:mm}";
+            var that = this,
+                msMin = getMilliseconds(min),
+                msMax = getMilliseconds(max),
+                minorTickCount = that.options.minorTickCount,
+                msMajorInterval = that.options.majorTick * MS_PER_MINUTE,
+                msInterval = msMajorInterval / minorTickCount || 1,
+                start = new Date(+min),
+                startDay = start.getDate(),
+                msStart,
+                idx = 0, length,
+                html = "";
+
+            length = MS_PER_DAY / msInterval;
+
+            if (msMin != msMax) {
+                if (msMin > msMax) {
+                    msMax += MS_PER_DAY;
+                }
+
+                length = ((msMax - msMin) / msInterval);
             }
-            
-            for (var idx = 0; idx < dates.length; idx++) {
-                for (var columnIndex = 0; columnIndex < columnCount; columnIndex++) { 
-                    var column = {};
-                    var columnOffset = 0;
-                    var startDate = kendo.date.getDate(options.date);
-                    kendo.date.setTime(startDate, kendo.date.getMilliseconds(options.startTime));
 
-                    if (msMajorInterval >= MS_PER_DAY) {
-                        columnOffset = (+startDate) + (msMajorInterval * idx);
-                    } else {
-                        columnOffset = (+options.startTime) + (msMajorInterval * columnIndex);
-                    }
+            length = Math.round(length);
 
-                     column.text = kendo.format(columnTimeFormat, new Date(columnOffset));
-                     columns.push(column);
+            for (; idx < length; idx++) {
+                var majorTickDivider = idx % (msMajorInterval/msInterval),
+                    isMajorTickColumn = majorTickDivider === 0,
+                    isMiddleColumn = majorTickDivider < minorTickCount - 1,
+                    isLastSlotColumn = majorTickDivider === minorTickCount - 1;
+
+                html += action(start, isMajorTickColumn, isMiddleColumn, isLastSlotColumn);
+
+                setTime(start, msInterval, false);
+            }
+
+            if (msMax) {
+                msStart = getMilliseconds(start);
+                if (startDay < start.getDate()) {
+                    msStart += MS_PER_DAY;
+                }
+
+                if (msStart > msMax) {
+                    start = new Date(+max);
                 }
             }
 
-            var resources = this.groupedResources;
+            if (after) {
+                html += after(start);
+            }
 
-            if (resources.length && this._isGrouped()) {
-                //horizontal grouping is not supported
-                //is correct to always render vertical grouping?
-                rows = this._createRowsLayout(resources, null);
-            } else {
-                rows = [{
-                    //add template here
-                    text: "All events"
-                }];
+            return html;
+        },
+
+        _layout: function(dates) {
+            var timeColumns = [];
+            var columns = [];
+            //make this option?
+            var rows = [{ text: "All events"}];
+            var that = this;
+
+            this._forTimeRange(this.startTime(), this.endTime(), function(date, majorTick, middleColumn, lastSlotColumn) {
+                var template = majorTick ? that.majorTimeHeaderTemplate : that.minorTimeHeaderTemplate;
+                var timeColumn = {
+                    text: template({ date: date }),
+                    className: lastSlotColumn ? "k-slot-cell" : ""
+                };
+
+                timeColumns.push(timeColumn);
+            });
+
+            for (var idx = 0; idx < dates.length; idx++) {
+                columns.push({
+                    text: kendo.format("{0:m}",dates[idx]),
+                    className:  "k-slot-cell",
+                    columns: timeColumns.slice(0)
+                });
+            }
+
+            var resources = this.groupedResources;
+            if (resources.length) {
+                if (this._groupOrientation() === "vertical") {
+                    rows = this._createRowsLayout(resources, null);
+                } else {
+                    columns = this._createColumnsLayout(resources, columns);
+                }
             }
 
             return {
@@ -450,43 +481,96 @@ var __meta__ = {
             };
         },
 
-        _content: function(columnCount) {
+        //optional methods
+        _columnCountForLevel: function(level) {
+            var columnLevel = this.columnLevels[level];
+            return columnLevel ? columnLevel.length : 0;
+        },
+
+        _rowCountForLevel: function(level) {
+            var rowLevel = this.rowLevels[level];
+            return rowLevel ? rowLevel.length : 0;
+        },
+
+        _isWorkDay: function(date) {
+            var day = date.getDay();
+            var workDays =  this._workDays;
+
+            for (var i = 0; i < workDays.length; i++) {
+                if (workDays[i] === day) {
+                    return true;
+                }
+            }
+            return false;
+        },
+
+        _content: function(dates) {
             var that = this;
             var options = that.options;
-            var isVerticalGroupped = false;
-
+            var start = that.startTime();
+            var end = this.endTime();
             var groupsCount = 1;
-            var rowCount;
-
-            rowCount = this._groupCount();
-
+            var rowCount = 1;
+            var columnCount = dates.length;
             var html = '';
+            var resources = this.groupedResources;
+            var slotTemplate = this.slotTemplate;
+            var isVerticalGrouped = false;
+
+            if (resources.length) {
+                isVerticalGrouped = that._groupOrientation() === "vertical";
+
+                if (isVerticalGrouped) {
+                    rowCount = this._rowCountForLevel(this.rowLevels.length - 1);
+                } else {
+                    groupsCount = this._columnCountForLevel(this.columnLevels.length - 3);
+                }
+            }
 
             html += '<tbody>';
 
-            var appendRow = function() {
+            var appendRow = function(date, majorTick) {
                 var content = "";
-                var idx;
-                var length;
-                var groupIdx = 0;
+                var classes = "";
+                var tmplDate;
 
-                content = '<tr>';
+                var resources = function(groupIndex) {
+                    return function() {
+                        return that._resourceBySlot({ groupIndex: groupIndex });
+                    };
+                };
 
-                for (; groupIdx < groupsCount; groupIdx++) {
-                    for (idx = 0, length = columnCount; idx < length; idx++) {
-
-                        content += '<td>';
-                        content += "</td>";
-                    }
+                if (kendo.date.isToday(dates[idx])) {
+                    classes += "k-today";
                 }
 
-                content += "</tr>";
+                if (kendo.date.getMilliseconds(date) < kendo.date.getMilliseconds(options.workDayStart) ||
+                    kendo.date.getMilliseconds(date) >= kendo.date.getMilliseconds(options.workDayEnd) ||
+                    !that._isWorkDay(dates[idx])) {
+                    classes += " k-nonwork-hour";
+                }
+
+                content += '<td' + (classes !== "" ? ' class="' + classes + '"' : "") + ">";
+                tmplDate = kendo.date.getDate(dates[idx]);
+                kendo.date.setTime(tmplDate, kendo.date.getMilliseconds(date));
+
+                content += slotTemplate({ date: tmplDate, resources: resources(isVerticalGrouped ? rowIdx : groupIdx) });
+                content += "</td>";
 
                 return content;
             };
 
+
             for (var rowIdx = 0; rowIdx < rowCount; rowIdx++) {
-                html += appendRow();
+                html += '<tr>';
+
+                for (var groupIdx = 0 ; groupIdx < groupsCount; groupIdx++) {
+                    for (var idx = 0, length = columnCount; idx < length; idx++) {
+                        html += this._forTimeRange(start, end, appendRow);
+                    }
+                }
+
+                html += "</tr>";
             }
 
             html += '</tbody>';
@@ -496,13 +580,14 @@ var __meta__ = {
 
         _groups: function() {
             var groupCount = this._groupCount();
-            var columnCount = this._columnCount * this._dates.length;
+            var dates = this._dates;
+            var columnCount = dates.length;
 
             this.groups = [];
 
             for (var idx = 0; idx < groupCount; idx++) {
                 var view = this._addResourceView(idx);
-                var dates = this._dates;
+
                 var start = dates[0];
                 var end = dates[(dates.length - 1) || 0];
                 view.addTimeSlotCollection(start, kendo.date.addDays(end, 1));
@@ -511,61 +596,57 @@ var __meta__ = {
             this._timeSlotGroups(groupCount, columnCount);
         },
 
-        _isGrouped: function () {
-            return !!this.groupedResources.length;
+        _isVerticallyGrouped: function() {
+            return this.groupedResources.length && this._groupOrientation() === "vertical";
         },
 
-        _timeSlotGroups: function (groupCount, columnCount) {
-            //example logic
+        _timeSlotGroups: function (groupCount, datesCount) {
             var interval = this._timeSlotInterval();
-            var isGrouped = this._isGrouped();
+            var isVerticallyGrouped = this._isVerticallyGrouped();
             var tableRows = this.content.find("tr");
             var rowCount = tableRows.length;
 
             tableRows.attr("role", "row");
 
-            if (isGrouped) {
+            if (isVerticallyGrouped) {
                 rowCount = Math.floor(rowCount / groupCount);
             }
 
             for (var groupIndex = 0; groupIndex < groupCount; groupIndex++) {
                 var rowMultiplier = 0;
-                var cells = tableRows[groupIndex].children;
                 var group = this.groups[groupIndex];
-                var datesCount = this._dates.length;
                 var time;
 
-                if (isGrouped) {
+                if (isVerticallyGrouped) {
                     rowMultiplier = groupIndex;
                 }
 
                 var rowIndex = rowMultiplier * rowCount;
-
                 var cellMultiplier = 0;
 
-                if (!isGrouped) {
+                if (!isVerticallyGrouped) {
                     cellMultiplier = groupIndex;
                 }
 
-                //two possible slot creation approaches:
-                //1) current - loop through the dates - this way the current date is available directly by index
-                //2) another - loop through all cells for given row and get date from dividing index by column index
+                var cells = tableRows[rowIndex].children;
+                var cellsPerGroup = cells.length / (!isVerticallyGrouped ? groupCount : 1);
+                var cellsPerDay = cellsPerGroup / datesCount;
+
                 for (var dateIndex = 0; dateIndex < datesCount; dateIndex++) {
-                    var dayColumnCount = Math.floor(columnCount / datesCount);
-                    time = getMilliseconds(new Date(+this.options.startTime));
-                    for (var cellIndex = cellMultiplier * columnCount; cellIndex < columnCount / datesCount ; cellIndex++) {
-                        var cell = cells[cellIndex + (dateIndex * dayColumnCount)];
+                    var cellOffset = dateIndex * cellsPerDay + (cellsPerGroup * cellMultiplier);
+                    time = getMilliseconds(new Date(+this.startTime()));
+
+                    for (var cellIndex = 0; cellIndex < cellsPerDay ; cellIndex++) {
+                        var cell = cells[cellIndex+cellOffset];
                         var collection = group.getTimeSlotCollection(0);
                         var currentDate = this._dates[dateIndex];
                         var currentTime = Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
                         var start = currentTime + time;
                         var end = start + interval;
-
                         cell.setAttribute("role", "gridcell");
                         cell.setAttribute("aria-selected", false);
 
                         collection.addTimeSlot(cell, start, end, true);
-
                         time += interval;
                     }
                 }
@@ -592,7 +673,7 @@ var __meta__ = {
 
         _timeSlotInterval: function() {
             var options = this.options;
-            return options.majorTick * kendo.date.MS_PER_MINUTE;
+            return (options.majorTick/options.minorTickCount) * MS_PER_MINUTE;
         },
 
         nextDate: function () {
@@ -620,8 +701,6 @@ var __meta__ = {
             var eventsByResource = [];
 
             this._eventsByResource(events, this.groupedResources, eventsByResource);
-
-            var that = this;
      
             var eventsPerDate = $.map(this._dates, function(date) {
                 return Math.max.apply(null,
@@ -633,22 +712,16 @@ var __meta__ = {
                 );
             });
 
-            var height = Math.max.apply(null, eventsPerDate);
-
-            //this._updateAllDayHeaderHeight((height + 1) * this._allDayHeaderHeight);
+            //var height = Math.max.apply(null, eventsPerDate);
 
             for (var groupIndex = 0; groupIndex < eventsByResource.length; groupIndex++) {
                 this._renderEvents(eventsByResource[groupIndex], groupIndex);
             }
             
             this.trigger("activate");
-        
-              //To be implemented
-            //throw "render is not implemented";
         },
 
         _eventsByResource: function(events, resources, result) {
-            //todo
             var resource = resources[0];
 
             if (resource) {
@@ -749,7 +822,7 @@ var __meta__ = {
                     adjustedEndDate = getDate(end);
                     adjustedEndDate = kendo.date.addDays(adjustedEndDate,-1);
                     setTime(adjustedEndDate, endTime);
-                    head = eventEndTime === 0 ? false : true;
+                    head = true;
                 }
             }
 
@@ -782,26 +855,21 @@ var __meta__ = {
 
                     if (isMultiDayEvent || this._isInTimeSlot(event)) {
                         var adjustedEvent = this._adjustEvent(event);
+                        var group = this.groups[groupIndex];
+
+                        if (!group._continuousEvents) {
+                            group._continuousEvents = [];
+                        }
+
+                        var ranges = group.slotRanges(adjustedEvent.occurrence, false);
+                        var range = ranges[0];
+                        var element;
 
                         if (this._isInTimeSlot(adjustedEvent.occurrence)) {
-                            var group = this.groups[groupIndex];
-                            if (!group._continuousEvents) {
-                                group._continuousEvents = [];
-                            }
-
-                            var ranges = group.slotRanges(adjustedEvent.occurrence, false);
-                            var rangeCount = ranges.length;
-
-                            if (rangeCount > 0) {
-                                var element;
-                                //support horizontal grouping?
-                                var range = ranges[0];
-
-                                element = this._createEventElement(adjustedEvent.occurrence, event, range.head || adjustedEvent.head, range.tail || adjustedEvent.tail);
-                                this.addContinuousEvent(group, range, element, event.isAllDay);
-                                element.appendTo(container);
-                                this._positionEvent(adjustedEvent.occurrence, element, range);
-                            }
+                            element = this._createEventElement(adjustedEvent.occurrence, event, range.head || adjustedEvent.head, range.tail || adjustedEvent.tail);
+                            this.addContinuousEvent(group, range, element, event.isAllDay);
+                            element.appendTo(container);
+                            this._positionEvent(adjustedEvent.occurrence, element, range);
                         }
                     }
                 }
@@ -928,6 +996,9 @@ var __meta__ = {
             if (resources.length) {
                 if (this._groupOrientation() === "vertical") {
                     return this._rowCountForLevel(this.rowLevels.length - 1);
+                } else {
+                    //update this if date headers is option
+                    return this._columnCountForLevel(this.columnLevels.length - 3);
                 }
             }
             return 1;
@@ -1289,7 +1360,6 @@ var __meta__ = {
                     dates.push(start);
                     start = kendo.date.nextDay(start);
                 }
-                debugger;
                 this._render(dates);
             }
         })

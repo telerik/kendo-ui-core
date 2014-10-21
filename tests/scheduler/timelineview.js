@@ -116,7 +116,7 @@
         })]);
 
         equal(view.groups[0].getTimeSlotCollection(0).events()[0].start, 0);
-        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 11);
+        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 23);
 
         ok(view.element.find(".k-event").length);
     });
@@ -134,7 +134,7 @@
         })]);
 
         equal(view.groups[0].getTimeSlotCollection(0).events()[0].start, 0);
-        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 23);
+        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 47);
 
         ok(view.element.find(".k-event").length);
     });
@@ -152,7 +152,7 @@
         })]);
 
         equal(view.groups[0].getTimeSlotCollection(0).events()[0].start, 0);
-        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 23);
+        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 47);
 
         ok(view.element.find(".k-event").length);
     });
@@ -170,7 +170,7 @@
         })]);
 
         equal(view.groups[0].getTimeSlotCollection(0).events()[0].start, 0);
-        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 23);
+        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 47);
 
         ok(view.element.find(".k-event").length);
     });
@@ -217,8 +217,8 @@
             id: "2"
         })]);
 
-        equal(view.groups[0].getTimeSlotCollection(0).events()[0].start, 6);
-        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 11);
+        equal(view.groups[0].getTimeSlotCollection(0).events()[0].start, 12);
+        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 23);
 
         ok(view.element.find(".k-event").length);
     });
@@ -255,8 +255,8 @@
             id: "2"
         })]);
 
-        equal(view.groups[0].getTimeSlotCollection(0).events()[0].start, 2);
-        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 3);
+        equal(view.groups[0].getTimeSlotCollection(0).events()[0].start, 4);
+        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 7);
 
         ok(view.element.find(".k-event").length);
     });
@@ -273,8 +273,8 @@
             id: "2"
         })]);
 
-        equal(view.groups[0].getTimeSlotCollection(0).events()[0].start, 4);
-        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 8);
+        equal(view.groups[0].getTimeSlotCollection(0).events()[0].start, 9);
+        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 16);
 
         ok(view.element.find(".k-event").length);
     });
@@ -292,7 +292,7 @@
         })]);
 
         equal(view.groups[0].getTimeSlotCollection(0).events()[0].start, 0);
-        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 5);
+        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 11);
 
         ok(view.element.find(".k-event").length);
     });
@@ -309,8 +309,8 @@
             id: "2"
         })]);
 
-        equal(view.groups[0].getTimeSlotCollection(0).events()[0].start, 18);
-        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 23);
+        equal(view.groups[0].getTimeSlotCollection(0).events()[0].start, 36);
+        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 47);
 
         ok(view.element.find(".k-event").length);
     });
@@ -328,7 +328,7 @@
         })]);
 
         equal(view.groups[0].getTimeSlotCollection(0).events()[0].start, 0);
-        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 23);
+        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 47);
 
         ok(view.element.find(".k-event").length);
     });
@@ -390,7 +390,7 @@
         })]);
 
         equal(view.groups[0].getTimeSlotCollection(0).events()[0].start, 0);
-        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 3);
+        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 7);
 
         ok(view.element.find(".k-event").length);
     });
@@ -419,10 +419,10 @@
         })]);
 
         equal(view.groups[0].getTimeSlotCollection(0).events()[0].start, 0);
-        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 7);
+        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 15);
 
         equal(view.groups[0].getTimeSlotCollection(0).events()[1].start, 0);
-        equal(view.groups[0].getTimeSlotCollection(0).events()[1].end, 1);
+        equal(view.groups[0].getTimeSlotCollection(0).events()[1].end, 3);
 
         equal(view.element.find(".k-event").length, 2);
     });
@@ -444,7 +444,7 @@
         })]);
 
         equal(view.groups[0].getTimeSlotCollection(0).events()[0].start, 0);
-        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 1);
+        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 3);
 
         ok(view.element.find(".k-event").length);
     });
@@ -466,7 +466,7 @@
         })]);
 
         equal(view.groups[0].getTimeSlotCollection(0).events()[0].start, 0);
-        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 7);
+        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 15);
 
         ok(view.element.find(".k-event").length);
     });
@@ -488,7 +488,7 @@
         })]);
 
         equal(view.groups[0].getTimeSlotCollection(0).events()[0].start, 0);
-        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 7);
+        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 15);
 
         ok(view.element.find(".k-event").length);
     });
@@ -510,7 +510,7 @@
         })]);
 
         equal(view.groups[0].getTimeSlotCollection(0).events()[0].start, 0);
-        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 7);
+        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 15);
 
         ok(view.element.find(".k-event").length);
     });
@@ -550,8 +550,8 @@
             id: "2"
         })]);
 
-        equal(view.groups[0].getTimeSlotCollection(0).events()[0].start, 2);
-        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 3);
+        equal(view.groups[0].getTimeSlotCollection(0).events()[0].start, 4);
+        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 7);
 
         ok(view.element.find(".k-event").length);
     });
@@ -573,8 +573,8 @@
             id: "2"
         })]);
 
-        equal(view.groups[0].getTimeSlotCollection(0).events()[0].start, 1);
-        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 1);
+        equal(view.groups[0].getTimeSlotCollection(0).events()[0].start, 2);
+        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 3);
 
         ok(view.element.find(".k-event").length);
     });
@@ -596,7 +596,7 @@
         })]);
 
         equal(view.groups[0].getTimeSlotCollection(0).events()[0].start, 0);
-        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 1);
+        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 3);
 
         ok(view.element.find(".k-event").length);
     });
@@ -617,8 +617,8 @@
             id: "2"
         })]);
 
-        equal(view.groups[0].getTimeSlotCollection(0).events()[0].start, 1);
-        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 2);
+        equal(view.groups[0].getTimeSlotCollection(0).events()[0].start, 3);
+        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 4);
 
         ok(view.element.find(".k-event").length);
     });
@@ -640,7 +640,7 @@
         })]);
 
         equal(view.groups[0].getTimeSlotCollection(0).events()[0].start, 0);
-        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 3);
+        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 7);
 
         ok(view.element.find(".k-event").length);
     });
@@ -661,8 +661,8 @@
             id: "2"
         })]);
 
-        equal(view.groups[0].getTimeSlotCollection(0).events()[0].start, 7);
-        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 7);
+        equal(view.groups[0].getTimeSlotCollection(0).events()[0].start, 14);
+        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 15);
 
         ok(view.element.find(".k-event").length);
     });
@@ -684,7 +684,7 @@
         })]);
 
         equal(view.groups[0].getTimeSlotCollection(0).events()[0].start, 0);
-        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 7);
+        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 15);
 
         ok(view.element.find(".k-event").length);
     });
@@ -782,8 +782,8 @@
             id: "2"
         })]);
 
-        equal(view.groups[0].getTimeSlotCollection(0).events()[0].start, 2);
-        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 2);
+        equal(view.groups[0].getTimeSlotCollection(0).events()[0].start, 4);
+        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 4);
 
         ok(view.element.find(".k-event").length);
     });
@@ -804,8 +804,8 @@
             id: "2"
         })]);
 
-        equal(view.groups[0].getTimeSlotCollection(0).events()[0].start, 2);
-        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 3);
+        equal(view.groups[0].getTimeSlotCollection(0).events()[0].start, 4);
+        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 7);
 
         ok(view.element.find(".k-event").length);
     });
@@ -888,7 +888,7 @@
         })]);
 
         equal(view.groups[0].getTimeSlotCollection(0).events()[0].start, 0);
-        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 1);
+        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 3);
 
         equal(view.element.find(".k-event").length, 1);
     });

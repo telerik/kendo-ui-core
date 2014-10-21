@@ -309,7 +309,7 @@
         var handle = div.find(".k-resize-e");
         var slots = div.find(".k-scheduler-content td");
 
-        dragdrop(scheduler, handle, slots.eq(2));
+        dragdrop(scheduler, handle, slots.eq(5));
 
         equal(scheduler.dataSource.at(0).end.getHours(), 13);
         equal(scheduler.dataSource.at(0).end.getMinutes(), 00);
@@ -327,7 +327,7 @@
         var handle = div.find(".k-resize-e");
         var slots = div.find(".k-scheduler-content td");
 
-        dragdrop(scheduler, handle, slots.eq(1));
+        dragdrop(scheduler, handle, slots.eq(3));
 
         equal(scheduler.dataSource.at(0).isAllDay, false);
         equal(scheduler.dataSource.at(0).start.getHours(), 0);
@@ -348,7 +348,7 @@
         var handle = div.find(".k-resize-w");
         var slots = div.find(".k-scheduler-content td");
 
-        dragdrop(scheduler, handle, slots.eq(2));
+        dragdrop(scheduler, handle, slots.eq(4));
 
         equal(scheduler.dataSource.at(0).isAllDay, false);
         equal(scheduler.dataSource.at(0).start.getHours(), 8);
@@ -414,7 +414,7 @@
         dragdrop(scheduler, handle, slots.eq(slots.length - 2));
 
         equal(scheduler.dataSource.at(0).end.getHours(), 23);
-        equal(scheduler.dataSource.at(0).end.getMinutes(), 0);
+        equal(scheduler.dataSource.at(0).end.getMinutes(), 30);
     });
 
     test("resize event till outside the scheduler", function() {

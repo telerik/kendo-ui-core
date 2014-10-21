@@ -1621,7 +1621,7 @@
         var slots = div.find(".k-scheduler-content td");
 
         dragstart(scheduler, handle, handle.offset());
-        drag(scheduler, handle, slots.eq(1).offset());
+        drag(scheduler, handle, slots.eq(2).offset());
 
         equal($(".k-event-drag-hint .k-event-time").text(), "11:00 AM - 12:00 PM");
     });
