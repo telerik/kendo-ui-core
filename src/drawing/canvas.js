@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./shapes", "./color" ], f);
+    define([ "./shapes", "../kendo.color" ], f);
 })(function(){
 
 (function ($) {
@@ -28,9 +28,8 @@
 
         d = kendo.drawing,
         BaseNode = d.BaseNode,
-        Color = dataviz.Color,
-        Group = d.Group,
-        Box2D = dataviz.Box2D,
+        Color = kendo.Color,
+        Group = d.Group,        
         Path = d.Path;
 
     // Constants ==============================================================

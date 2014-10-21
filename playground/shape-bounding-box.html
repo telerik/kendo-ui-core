@@ -12,8 +12,8 @@
 
         <script src="../src/jquery.js"></script>
         <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.color.js"></script>
 
-        <script src="../src/kendo.core.js"></script>
         <script src="../src/kendo.data.js"></script>
         <script src="../src/kendo.binder.js"></script>
 
@@ -30,15 +30,16 @@
 
         <script src="../src/kendo.dataviz.core.js"></script>
 
-         <script src="../src/dataviz/util.js"></script>
-         <script src="../src/dataviz/geometry.js"></script>
-         <script src="../src/dataviz/drawing/core.js"></script>
-         <script src="../src/dataviz/drawing/mixins.js"></script>
-         <script src="../src/dataviz/drawing/shapes.js"></script>
-         <script src="../src/dataviz/drawing/parser.js"></script>
-         <script src="../src/dataviz/drawing/svg.js"></script>
-         <script src="../src/dataviz/drawing/canvas.js"></script>
-         <script src="../src/dataviz/drawing/vml.js"></script>
+         <script src="../src/util/main.js"></script>
+         <script src="../src/mixins/observers.js"></script>
+         <script src="../src/geometry/main.js"></script>
+         <script src="../src/drawing/core.js"></script>
+         <script src="../src/drawing/mixins.js"></script>
+         <script src="../src/drawing/shapes.js"></script>
+         <script src="../src/drawing/parser.js"></script>
+         <script src="../src/drawing/svg.js"></script>
+         <script src="../src/drawing/canvas.js"></script>
+         <script src="../src/drawing/vml.js"></script>
     </head>
     <body >
         <style>
@@ -151,18 +152,18 @@
             //test curve M100 100 c 50 50 100 0 200 0 200 10 0 100 -50 100
             //test arc M275 386.6 A 50 100 0 0 0 350 300
             var dataviz = kendo.dataviz,
-                geometry = dataviz.geometry,
+                geometry = kendo.geometry,
                 transform = geometry.transform,
                 Point = geometry.Point,
                 Circle = geometry.Circle,
-                drawing = dataviz.drawing,
+                drawing = kendo.drawing,
                 Path = drawing.Path,
                 Group = drawing.Group,
                 Rect = geometry.Rect,
                 MultiPath = drawing.MultiPath,
                 Segment = drawing.Segment,
                 Surface = drawing.Surface,
-                surface = Surface.create(document.getElementById("container"), {width: 400, height: 400, type: "canvas"}),
+                surface = Surface.create(document.getElementById("container"), {width: 400, height: 400, type: "svg"}),
                 circleGeometry = new Circle(Point.create(150, 400), 100),
                 circle = new drawing.Circle(circleGeometry, {fill: {color: "red"} }),
                // boundingRect = circle.bbox(),
@@ -300,7 +301,7 @@
                         var gradient = circle.fill();
                         var stops = this.get("fillType.stops");
                         var stop = {
-                            color: "fff",
+                            color: "#fff",
                             offset: 0,
                             opacity: 1
                         };
@@ -359,8 +360,8 @@
                 viewModel.set("fillType", viewModel.types[0]);
                 viewModel.fillChange();
                 kendo.bind($("#fillContainer"),  viewModel);
-                
-                
+
+
             }
 
             function updateGradient() {
