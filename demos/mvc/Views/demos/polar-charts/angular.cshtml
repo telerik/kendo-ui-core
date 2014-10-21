@@ -23,8 +23,7 @@
 
     </div>
 <script>
-    angular.module("KendoDemos", [ "kendo.directives" ]);
-    function MyCtrl($scope) {
+    angular.module("KendoDemos", [ "kendo.directives" ]).controller("MyCtrl", function($scope){
         $scope.onSeriesHover = function(e) {
             kendoConsole.log(kendo.format("event :: seriesHover ({0} : {1})", e.value.x, e.value.y));
         };
@@ -37,6 +36,6 @@
                     }
                 }
         });
-    }
+    })
 </script>
 </div>
