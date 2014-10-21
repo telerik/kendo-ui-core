@@ -24,13 +24,13 @@
 </div>
 
 <script>
-    angular.module("KendoDemos", [ "kendo.directives" ]);
-    function MyCtrl($scope, $timeout) {
-        function updateTime() {
-            $scope.time = kendo.toString(new Date(), "H:mm:ss.fff tt");
-            $timeout(updateTime, 78);
-        };
-        $scope.theContent = "The <b>tooltip</b><br />Time is: {{time}}";
-        updateTime();
-    }
+    angular.module("KendoDemos", [ "kendo.directives" ])
+        .controller("MyCtrl", function($scope, $timeout){
+            function updateTime() {
+                $scope.time = kendo.toString(new Date(), "H:mm:ss.fff tt");
+                $timeout(updateTime, 78);
+            };
+            $scope.theContent = "The <b>tooltip</b><br />Time is: {{time}}";
+            updateTime();
+        })
 </script>
