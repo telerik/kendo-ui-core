@@ -132,7 +132,7 @@
             }
         });
 
-        ok(diagram.shapes[1].dataItem.foo);
+        ok(diagram.shapes[1].options.dataItem.foo);
     });
 
     // ------------------------------------------------------------
@@ -178,7 +178,7 @@
     test("binding adds dataItem uids to dataMap", function() {
         for (var idx = 0; idx < shapes.length; idx++) {
             shape = shapes[idx];
-            ok(dataMap[shape.dataItem.uid] === shape);
+            ok(dataMap[shape.options.dataItem.uid] === shape);
         }
     });
 
@@ -248,7 +248,6 @@
         dataMap = diagram._dataMap;
         var mapCount = 0;
         var existingItemsUids = true;
-
         for(var uid in dataMap) {
             mapCount++;
             existingItemsUids = existingItemsUids && !!dataSource.getByUid(uid);

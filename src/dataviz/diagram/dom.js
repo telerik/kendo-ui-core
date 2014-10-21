@@ -494,7 +494,11 @@
             updateModel: function() {
                 if (this.diagram && this.diagram._editing) {
                     var bounds = this._bounds;
-                    var model = this.diagram.dataSource.getByUid(this.options.dataItem.uid);
+                    var model;
+                    if (this.options.dataItem) {
+                        model = this.diagram.dataSource.getByUid(this.options.dataItem.uid);
+                    }
+
                     if (model) {
                         this.diagram._shouldRefresh = false;
                         model._set("x", bounds.x);
@@ -662,8 +666,10 @@
                 var rotate = this.visual.rotate();
                 if (angle !== undefined) {
                     if (undoable !== false) {
-                        this.diagram.undoRedoService.add(
-                            new diagram.RotateUnit(this.diagram._resizingAdorner, [this], [rotate.angle]), false);
+                        if (this.diagram && this.diagram.undoRedoService) {
+                            this.diagram.undoRedoService.add(
+                                new diagram.RotateUnit(this.diagram._resizingAdorner, [this], [rotate.angle]), false);
+                        }
                     }
 
                     var b = this.bounds(),
@@ -1035,6 +1041,7 @@
              * @param undoable Whether the change or assignment should be undoable.
              */
             source: function (source, undoable) {
+                var dataItem;
                 if (isDefined(source)) {
                     if (undoable && this.diagram) {
                         this.diagram.undoRedoService.addCompositeItem(new diagram.ConnectionEditUnit(this, source));
@@ -1048,7 +1055,7 @@
                                 this._clearSourceConnector();
                             }
                         } else if (source instanceof Connector) {
-                            var dataItem = source.shape.options.dataItem
+                            dataItem = source.shape.options.dataItem;
                             if (dataItem) {
                                 this.options.from = dataItem.id;
                                 this.options.fromX = null;
@@ -1067,9 +1074,12 @@
                             }
 
                         } else if (source instanceof Shape) {
-                            this.options.from = source.options.dataItem.id;
-                            this.options.fromX = null;
-                            this.options.fromY = null;
+                            dataItem = source.options.dataItem;
+                            if (dataItem) {
+                                this.options.from = dataItem.id;
+                                this.options.fromX = null;
+                                this.options.fromY = null;
+                            }
                             this.sourceConnector = source.getConnector(AUTO);// source.getConnector(this.targetPoint());
                             this.sourceConnector.connections.push(this);
                         }
@@ -1115,6 +1125,7 @@
              * @param undoable  Whether the change or assignment should be undoable.
              */
             target: function (target, undoable) {
+                var dataItem;
                 if (isDefined(target)) {
                     if (undoable && this.diagram) {
                         this.diagram.undoRedoService.addCompositeItem(new diagram.ConnectionEditUnit(this, target));
@@ -1129,7 +1140,7 @@
                                 this._clearTargetConnector();
                             }
                         } else if (target instanceof Connector) {
-                            var dataItem = target.shape.options.dataItem;
+                            dataItem = target.shape.options.dataItem;
                             if (dataItem) {
                                 this.options.to = dataItem.id;
                                 this.options.toX = null;
@@ -1146,9 +1157,12 @@
                                 this._clearTargetConnector();
                             }
                         } else if (target instanceof Shape) {
-                            this.options.to = target.options.dataItem.id;
-                            this.options.toX = null;
-                            this.options.toY = null;
+                            dataItem = target.options.dataItem;
+                            if (dataItem) {
+                                this.options.to = dataItem.id;
+                                this.options.toX = null;
+                                this.options.toY = null;
+                            }
                             this.targetConnector = target.getConnector(AUTO);// target.getConnector(this.sourcePoint());
                             this.targetConnector.connections.push(this);
                         }
@@ -2005,11 +2019,13 @@
 
             _addShape: function(shape, options) {
                 if (this.dataSource && this._editing) {
-                    var dataItem = this.dataSource.add(shape.option.dataItem);
+                    var dataItem = this.dataSource.add(shape.options.dataItem);
                     this.dataSource.sync();
-                    this._dataMap[shape.options.dataItem.id] = shape;
-                    // refresh shape.dataitem in order to get uid in copy/paste scenario
-                    shape.options.dataItem = dataItem;
+                    if (shape.options.dataItem) {
+                        this._dataMap[shape.options.dataItem.id] = shape;
+                        // refresh shape.dataitem in order to get uid in copy/paste scenario
+                        shape.options.dataItem = dataItem;
+                    }
                 }
 
                 return this.addShape(shape, options);
@@ -2060,8 +2076,10 @@
                     if (item.length) {
                         this._destroyToolBar();
                     } else {
-                        dataSource.remove(item.options.dataItem);
-                        dataSource.sync();
+                        if (dataSource) {
+                            dataSource.remove(item.options.dataItem);
+                            dataSource.sync();
+                        }
                     }
                 }
 
@@ -3037,37 +3055,41 @@
                 if (this._isTreeDataSource()) {
                     this._treeDataSource();
                     this._editing = false;
-                    return;
-                }
-                this._editing = true;
-                var dsOptions = this.options.dataSource || {};
-                var ds = isArray(dsOptions) ? { data: dsOptions } : dsOptions;
-
-                ds = deepExtend({}, {
-                    schema: {
-                        modelBase: ShapeModel,
-                        model: ShapeModel
-                    }
-                }, ds);
-
-                if (this.dataSource && this._shapesRefreshHandler) {
-                    this.dataSource
-                        .unbind("change", this._shapesRefreshHandler)
-                        .unbind("error", this._shapesErrorHandler);
                 } else {
-                    this._shapesRefreshHandler = proxy(this._refreshShapes, this);
-                    this._shapesErrorHandler = proxy(this._error, this);
-                }
+                    this._editing = true;
+                    var dsOptions = this.options.dataSource || {};
+                    var ds = isArray(dsOptions) ? { data: dsOptions } : dsOptions;
 
-                this.dataSource = kendo.data.DataSource.create(ds)
-                    .bind("change", this._shapesRefreshHandler)
-                    .bind("error", this._shapesErrorHandler);
+                    ds = deepExtend({}, {
+                        schema: {
+                            modelBase: ShapeModel,
+                            model: ShapeModel
+                        }
+                    }, ds);
+
+                    if (this.dataSource && this._shapesRefreshHandler) {
+                        this.dataSource
+                            .unbind("change", this._shapesRefreshHandler)
+                            .unbind("error", this._shapesErrorHandler);
+                    } else {
+                        this._shapesRefreshHandler = proxy(this._refreshShapes, this);
+                        this._shapesErrorHandler = proxy(this._error, this);
+                    }
+
+                    this.dataSource = kendo.data.DataSource.create(ds)
+                        .bind("change", this._shapesRefreshHandler)
+                        .bind("error", this._shapesErrorHandler);
+                    }
             },
 
             _isTreeDataSource: function() {
                 var options = this.options.dataSource || {};
-                return options instanceof kendo.data.HierarchicalDataSource ||
-                    (options.scheme && options.scheme.model && defined(options.scheme.model.children))
+                var isDsChildrenDefined =
+                    defined(options.schema) &&
+                    defined(options.schema.model) &&
+                    defined(options.schema.model.children);
+
+                return options instanceof kendo.data.HierarchicalDataSource || isDsChildrenDefined;
             },
 
             _connectionDataSource: function() {
@@ -3237,6 +3259,7 @@
                         if (!defined(to) || to === null) {
                             to = new Point(conn.toX, conn.toY);
                         }
+
                         if (defined(from) && defined(to)) {
                             var options = deepExtend({}, this.options.connectionDefaults);
                             options.dataItem = conn;
@@ -3588,7 +3611,6 @@
 
             edit: function() {
                 this.diagram.edit(this.selectedElement());
-                this.diagram._destroyToolBar();
             },
 
             rotateClockwise: function() {
