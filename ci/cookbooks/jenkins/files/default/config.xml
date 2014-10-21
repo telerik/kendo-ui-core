@@ -49,6 +49,22 @@
       <nodeProperties/>
       <userId>anonymous</userId>
     </slave>
+    <slave>
+      <name>kendobuild-slave2</name>
+      <description>Slave #1</description>
+      <remoteFS>/var/lib/jenkins/</remoteFS>
+      <numExecutors>3</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>kendobuild-slave2</host>
+        <port>22</port>
+        <credentialsId>5c87bc89-008e-409a-bae7-85d270f6681b</credentialsId>
+      </launcher>
+      <label>slave</label>
+      <nodeProperties/>
+      <userId>anonymous</userId>
+    </slave>
   </slaves>
   <quietPeriod>5</quietPeriod>
   <scmCheckoutRetryCount>0</scmCheckoutRetryCount>
@@ -90,9 +106,11 @@
       <properties class="hudson.model.View$PropertyList"/>
       <jobNames>
         <comparator class="hudson.util.CaseInsensitiveComparator"/>
+        <string>documentation-next</string>
         <string>production-upload-appbuilder</string>
         <string>stable-upload-release</string>
         <string>sync-from-core-production</string>
+        <string>TreeList-CI</string>
         <string>update-demos</string>
       </jobNames>
       <jobFilters/>
