@@ -993,7 +993,7 @@
 
             updateModel: function(shouldRefresh) {
                 if (this.diagram && this.diagram._isEditable) {
-                    if (this.diagram.ConnectionsDataSource) {
+                    if (this.diagram.connectionsDataSource) {
                         var model = this.diagram.connectionsDataSource.getByUid(this.options.dataItem.uid);
                         if (model) {
                             this.diagram._shouldRefresh = false;
