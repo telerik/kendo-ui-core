@@ -6,8 +6,29 @@ var __meta__ = {
     id: "treelist",
     name: "TreeList",
     category: "web",
-    description: "",
-    depends: [ "dom", "data" ]
+    description: "The TreeList widget displays self-referencing data and offers rich support for interacting with data, sorting, filtering, and selection.",
+    depends: [ "dom", "data" ],
+    features: [ {
+        id: "treelist-sorting",
+        name: "Sorting",
+        description: "Support for column sorting",
+        depends: [ "columnsorter" ]
+    }, {
+        id: "treelist-filtering",
+        name: "Filtering",
+        description: "Support for record filtering",
+        depends: [ "filtermenu" ]
+    }, {
+        id: "treelist-editing",
+        name: "Editing",
+        description: "Support for record editing",
+        depends: [ "editable", "window" ]
+    }, {
+        id: "treelist-selection",
+        name: "Selection",
+        description: "Support for row selection",
+        depends: [ "selectable" ]
+    } ]
 };
 
 (function($, undefined) {
