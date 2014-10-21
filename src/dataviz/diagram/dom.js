@@ -480,7 +480,7 @@
             options: diagram.shapeDefaults(),
 
             updateOptionsFromModel: function(model) {
-                if (this.diagram && this.diagram._editing) {
+                if (this.diagram && this.diagram._isEditable) {
                     var modelOptions = filterShapeDataItem(model || this.options.dataItem);
 
                     if (model) {
@@ -492,7 +492,7 @@
             },
 
             updateModel: function() {
-                if (this.diagram && this.diagram._editing) {
+                if (this.diagram && this.diagram._isEditable) {
                     var bounds = this._bounds;
                     var model;
                     if (this.options.dataItem) {
@@ -627,7 +627,7 @@
 
                 json.options.id = diagram.randomId();
 
-                if (this.diagram && this.diagram._editing && defined(this.options.dataItem)) {
+                if (this.diagram && this.diagram._isEditable && defined(this.options.dataItem)) {
                     this.options.dataItem[this.options.dataItem.idField] = this.options.dataItem._defaultId;
                 }
 
@@ -968,7 +968,7 @@
             },
 
             updateOptionsFromModel: function(model) {
-                if (this.diagram && this.diagram._editing) {
+                if (this.diagram && this.diagram._isEditable) {
                     var options = filterConnectionDataItem(model || this.options.dataItem);
 
                     if (model) {
@@ -992,7 +992,7 @@
             },
 
             updateModel: function(shouldRefresh) {
-                if (this.diagram && this.diagram._editing) {
+                if (this.diagram && this.diagram._isEditable) {
                     if (this.diagram.ConnectionsDataSource) {
                         var model = this.diagram.connectionsDataSource.getByUid(this.options.dataItem.uid);
                         if (model) {
@@ -1364,7 +1364,7 @@
                 var json = this.serialize(),
                     dataItem = {};
 
-                if (this.diagram && this.diagram._editing && defined(this.options.dataItem)) {
+                if (this.diagram && this.diagram._isEditable && defined(this.options.dataItem)) {
                     this.options.dataItem[this.options.dataItem.idField] = this.options.dataItem._defaultId;
                 }
 
@@ -1965,7 +1965,7 @@
             },
 
             _addConnection: function (connection, undoable) {
-                if (this.connectionsDataSource && this._editing) {
+                if (this.connectionsDataSource && this._isEditable) {
                     var dataItem = this.connectionsDataSource.add(connection.options.dataItem);
                     connection.options.dataItem = dataItem;
                     connection.updateModel(false);
@@ -2018,7 +2018,7 @@
             },
 
             _addShape: function(shape, options) {
-                if (this.dataSource && this._editing) {
+                if (this.dataSource && this._isEditable) {
                     var dataItem = this.dataSource.add(shape.options.dataItem);
                     this.dataSource.sync();
                     if (shape.options.dataItem) {
@@ -2068,7 +2068,7 @@
             _remove: function(item, undoable) {
                 var dataSource = this.dataSource;
 
-                if (this._editing) {
+                if (this._isEditable) {
                     if (item instanceof Connection) {
                         dataSource = this.connectionsDataSource;
                     }
@@ -2916,7 +2916,7 @@
             _mouseUp: function (e) {
                 var p = this._calculatePosition(e);
                 if (e.which == 1 && this.toolService.end(p, this._meta(e))) {
-                    if (this._editing) {
+                    if (this._isEditable) {
                         this._createToolBar();
                     }
                     e.preventDefault();
@@ -3037,13 +3037,13 @@
             _fetchFreshData: function () {
                 this._dataSource();
 
-                if (this._editing) {
+                if (this._isEditable) {
                     this._connectionDataSource();
                 }
 
                 if (this.options.autoBind) {
                     this.dataSource.fetch();
-                    if (this._editing) {
+                    if (this._isEditable) {
                         if (this.connectionsDataSource) {
                             this.connectionsDataSource.fetch();
                         }
@@ -3054,9 +3054,9 @@
             _dataSource: function() {
                 if (this._isTreeDataSource()) {
                     this._treeDataSource();
-                    this._editing = false;
+                    this._isEditable = false;
                 } else {
-                    this._editing = true;
+                    this._isEditable = true;
                     var dsOptions = this.options.dataSource || {};
                     var ds = isArray(dsOptions) ? { data: dsOptions } : dsOptions;
 
@@ -3079,7 +3079,7 @@
                     this.dataSource = kendo.data.DataSource.create(ds)
                         .bind("change", this._shapesRefreshHandler)
                         .bind("error", this._shapesErrorHandler);
-                    }
+                }
             },
 
             _isTreeDataSource: function() {

@@ -274,4 +274,109 @@
        equal(shapes.length, shapesCount);
     });
 
+    // ------------------------------------------------------------
+    module("Diagram / Shapes / Data Binding", {
+        setup: function() {
+            diagram = createDiagram({
+                dataSource: {
+                    data: [{
+                        id: 1
+                    },{
+                        id: 2
+                    },{
+                        id: 3
+                    }]
+                }
+            });
+        },
+        teardown: destroyDiagram
+    });
+
+    test("binds to flat data", function() {
+        equal(diagram.shapes.length, 3);
+    });
+
+    test("initial binding should add shapes in dataMap", function() {
+        var count = 0;
+
+        for (var item in diagram._dataMap) {
+            count++;
+            ok(diagram._dataMap[item] instanceof kendo.dataviz.diagram.Shape);
+        }
+
+        equal(count, 3);
+    });
+
+    test("remove should remove shape", function() {
+        var item = diagram.dataSource.at(0);
+        var id = item.id;
+        diagram.dataSource.remove(item);
+        ok(!dataMap[id]);
+    });
+
+    test("itemchange should change the shape dataItem", function() {
+        var item = diagram.dataSource.at(0);
+        item.set("foo", "bar");
+        var shape = diagram._dataMap[item.id];
+        ok(!shape.options.dataItem.foo, "bar");
+    });
+
+    // ------------------------------------------------------------
+    module("Diagram / Connections / Data Binding", {
+        setup: function() {
+            diagram = createDiagram({
+                dataSource: {
+                    data: [{
+                        id: 1
+                    },{
+                        id: 2
+                    },{
+                        id: 3
+                    }]
+                },
+                connectionsDataSource: {
+                    data: [{
+                        id: 1,
+                        from: 1,
+                        to: 2
+                    },{
+                        id: 2,
+                        from: 2,
+                        to: 3
+                    }]
+                }
+            });
+        },
+        teardown: destroyDiagram
+    });
+
+    test("binds to flat data", function() {
+        equal(diagram.connections.length, 2);
+    });
+
+    test("initial binding should add shapes in connectionsDataMap", function() {
+        var count = 0;
+
+        for (var item in diagram._connectionsDataMap) {
+            count++;
+            ok(diagram._connectionsDataMap[item] instanceof kendo.dataviz.diagram.Connection);
+        }
+
+        equal(count, 2);
+    });
+
+    test("remove should remove connection", function() {
+        var item = diagram.connectionsDataSource.at(0);
+        var id = item.id;
+        diagram.connectionsDataSource.remove(item);
+        ok(!diagram._connectionsDataMap[id]);
+    });
+
+    test("itemchange should change the shape dataItem", function() {
+        var item = diagram.connectionsDataSource.at(0);
+        item.set("foo", "bar");
+        var connection = diagram._connectionsDataMap[item.id];
+        ok(!connection.options.dataItem.foo, "bar");
+    });
+
 })();
