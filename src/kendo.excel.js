@@ -77,6 +77,10 @@ kendo.ExcelExporter = kendo.Class.extend({
     },
     _dataRows: function(dataItems, level) {
         var rows = $.map(dataItems, $.proxy(function(dataItem) {
+            if (this.dataSource.level) {
+                level = this.dataSource.level(dataItem) + 1;
+            }
+
             var cells = $.map(new Array(level), function() {
                 return {
                     background: "#dfdfdf",
@@ -236,8 +240,31 @@ kendo.ExcelExporter = kendo.Class.extend({
             };
         }
     },
+    _depth: function() {
+        var dataSource = this.dataSource;
+        var depth = 0;
+        var view, i, level;
+
+        if (dataSource.level) {
+            view = dataSource.view();
+
+            for (i = 0; i < view.length; i++) {
+                level = dataSource.level(view[i]);
+
+                if (level > depth) {
+                    depth = level;
+                }
+            }
+
+            depth++;
+        } else {
+            depth = dataSource.group().length;
+        }
+
+        return depth;
+    },
     _columns: function() {
-        var columns = $.map(new Array(this.dataSource.group().length), function() {
+        var columns = $.map(new Array(this._depth()), function() {
             return { width: 20 };
         });
 

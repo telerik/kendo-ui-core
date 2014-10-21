@@ -1,5 +1,5 @@
 (function() {
-    module("TreeList interaction", {
+    var cleanup = {
         setup: function() {
            dom = $("<div />").appendTo(QUnit.fixture);
         },
@@ -9,7 +9,9 @@
 
             dom = instance = null;
         }
-    });
+    };
+
+    module("TreeList interaction", cleanup);
 
     function createTreeList(options) {
         dom.kendoTreeList($.extend({
@@ -579,5 +581,42 @@
         tap(footerCells.eq(0));
 
         ok(!footerCells.hasClass("k-state-selected"));
+    });
+
+    module("TreeList Excel export", cleanup);
+
+    function exportToExcel(options, callback) {
+        createTreeList($.extend({
+            excelExport: function(e) {
+                e.preventDefault();
+
+                callback(e);
+            }
+        }, options));
+
+        instance.saveAsExcel();
+    }
+
+    test("indents columns based on level", function() {
+        exportToExcel(
+            { columns: [ "id", "parentId" ] },
+            function(e) {
+                var sheet = e.workbook.sheets[0];
+
+                equal(sheet.columns.length, 4); // 2 cols for data + 2 for levels
+            }
+        );
+    });
+
+    test("indents rows based on level", function() {
+        exportToExcel(
+            { columns: [ "id", "parentId" ] },
+            function(e) {
+                var sheet = e.workbook.sheets[0];
+
+                var firstRow = sheet.rows[1]
+                equal(firstRow.cells.length, 3);
+            }
+        );
     });
 })();
