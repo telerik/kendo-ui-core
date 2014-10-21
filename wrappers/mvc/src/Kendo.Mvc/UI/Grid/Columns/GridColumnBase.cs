@@ -259,7 +259,7 @@ namespace Kendo.Mvc.UI
         {
             get
             {
-                return Settings.Hidden;
+                return Settings.Hidden || Grid.Columns.ColumnParents(this).Any(c => c.Hidden);
             }
             set
             {                
@@ -348,7 +348,7 @@ namespace Kendo.Mvc.UI
         /// <remarks>
         /// Invisible columns are not output in the HTML.
         /// </remarks>
-        public bool Visible
+        public virtual bool Visible
         {
             get
             {
@@ -406,7 +406,7 @@ namespace Kendo.Mvc.UI
         {
             get
             {
-                return Grid.Columns.LeafColumns().IndexOf(this);
+                return Grid.Columns.LeafColumns().Where(c => c.Visible).IndexOf(this);
             }
         }
 

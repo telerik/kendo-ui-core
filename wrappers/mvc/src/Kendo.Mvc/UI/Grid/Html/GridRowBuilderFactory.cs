@@ -76,6 +76,13 @@ namespace Kendo.Mvc.UI.Html
         private IEnumerable<GridRowBuilder> GetHeaderRows(IEnumerable<IGridColumn> columns)
         {
             var rows = new List<GridRowBuilder>();
+
+            columns = columns.Where(c => c.Visible);
+            if (!columns.Any())
+            {
+                return rows;
+            }
+
             rows.Add(new GridRowBuilder(columns.Select(cellBuilderFactory.CreateHeaderCellBuilder)));
 
             var children = columns.SelectMany(GetChildColumns); 

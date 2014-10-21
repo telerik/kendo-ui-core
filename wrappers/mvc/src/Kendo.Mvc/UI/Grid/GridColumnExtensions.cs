@@ -17,8 +17,45 @@ namespace Kendo.Mvc.UI
             return memberName.AsTitle();
         }
 
+        public static IEnumerable<IGridColumn> ColumnParents(this IEnumerable<IGridColumn> columns, IGridColumn column)
+        {
+            return columns.ColumnParentsAndSelf(column).Where(c => c != column);
+        }
+
+        public static IEnumerable<IGridColumn> ColumnParentsAndSelf(this IEnumerable<IGridColumn> columns, IGridColumn column)
+        {
+            var parents = new List<IGridColumn>();
+
+            if (columns.Any(c => c == column))
+            {
+                parents.Add(column);
+
+                return parents;
+            }
+
+            foreach (var c in columns.OfType<IGridColumnGroup>())
+            {
+                var result = c.Columns.ColumnParentsAndSelf(column);
+                if (result.Any())
+                {
+                    parents.Add(c);
+                    parents = parents.Concat(result).ToList();
+                    break;
+                }
+            }
+
+            return parents;
+        }
+
         public static int ColumnLevel(this IEnumerable<IGridColumn> columns, IGridColumn column)
         {
+            columns = columns.Where(c => c.Visible);
+
+            if (!columns.Any())
+            {
+                return 0;
+            }
+
             var counter = 1;
 
             if (columns.Any(c => c == column))
@@ -56,6 +93,13 @@ namespace Kendo.Mvc.UI
 
         public static int HeaderRowsCount(this IEnumerable<IGridColumn> columns)
         {
+            columns = columns.Where(c => c.Visible);
+
+            if (!columns.Any())
+            {
+                return 0;
+            }
+
             var counter = 1;
 
             var children = columns.SelectMany(GetChildColumnsForLevel);
