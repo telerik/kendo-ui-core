@@ -2,14 +2,6 @@
     <div id="treelist"></div>
 
     <script>
-        function onChange(arg) {
-            var selected = $.map(this.select(), function(item) {
-                return $(item).text();
-            });
-
-            kendoConsole.log("Selected: " + selected.length + " item(s), [" + selected.join(", ") + "]");
-        }
-
         function onEdit(arg) {
             var model = arg.model;
 
@@ -83,7 +75,6 @@
                 dataSource: dataSource,
                 toolbar: [ "create" ],
                 editable: true,
-                selectable: "multiple cell",
                 columns: [
                     { field: "FirstName", expandable: true, title: "First Name", width: 250 },
                     { field: "LastName", title: "Last Name" },
@@ -92,7 +83,6 @@
                     { command: [ "edit", "destroy" ] }
                 ],
 
-                change: onChange,
                 edit: onEdit,
                 save: onSave,
                 remove: onRemove,
