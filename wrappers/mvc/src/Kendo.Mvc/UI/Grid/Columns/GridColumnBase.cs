@@ -406,7 +406,7 @@ namespace Kendo.Mvc.UI
         {
             get
             {
-                return Grid.Columns.LeafColumns().Where(c => c.Visible).IndexOf(this);
+                return Grid.Columns.LeafColumns().Where(c => c.Visible).OrderByDescending(c => c.Locked).IndexOf(this);
             }
         }
 

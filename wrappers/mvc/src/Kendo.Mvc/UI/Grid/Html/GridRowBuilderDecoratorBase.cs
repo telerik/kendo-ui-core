@@ -1,5 +1,7 @@
 namespace Kendo.Mvc.UI.Html
 {
+    using Extensions;
+
     public abstract class GridRowBuilderDecoratorBase : IGridRowBuilderDecorator
     {
         protected IGridRowBuilder DecoratedRowBuilder
@@ -40,7 +42,14 @@ namespace Kendo.Mvc.UI.Html
 
             if (ShouldDecorate(CurrentGridItem))
             {
-                ApplyDecoration(htmlNode);
+                if (htmlNode is HtmlFragment)
+                {
+                    htmlNode.Children.Each(ApplyDecoration);
+                }
+                else
+                {
+                    ApplyDecoration(htmlNode);
+                }
             }
             return htmlNode;
         }

@@ -7,18 +7,6 @@ namespace Kendo.Mvc.UI.Html
     {
         protected override void ApplyDecoration(IHtmlNode htmlNode)
         {
-            if (htmlNode is HtmlFragment)
-            {
-                htmlNode.Children.Each(ApplyDecorationToNode);
-            }
-            else
-            {
-                ApplyDecorationToNode(htmlNode);
-            }
-        }
-
-        private void ApplyDecorationToNode(IHtmlNode htmlNode)
-        {
             for (int i = 0; i < CurrentGridItem.GroupLevel; i++)
             {
                 var td = CreateCell();
