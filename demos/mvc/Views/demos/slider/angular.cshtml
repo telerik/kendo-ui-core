@@ -24,9 +24,9 @@
 </div>
 
 <script>
-  angular.module("KendoDemos", [ "kendo.directives" ]);
-  function MyCtrl($scope) {
-      $scope.width = 0;
-      $scope.height = 0;
-  }
+  angular.module("KendoDemos", [ "kendo.directives" ])
+      .controller("MyCtrl", function($scope){
+          $scope.width = 0;
+          $scope.height = 0;
+      })
 </script>
