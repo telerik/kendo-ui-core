@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link type="text/css" href="../../styles/web/kendo.common.less" rel="stylesheet"/>
-    <link type="text/css" href="../../styles/web/kendo.blueopal.less" rel="stylesheet/less"/>
+    <link type="text/css" href="../../styles/web/kendo.common.less" rel="stylesheet/less"/>
+    <link type="text/css" href="../../styles/web/kendo.silver.less" rel="stylesheet/less"/>
+    <link type="text/css" href="../../styles/dataviz/kendo.dataviz.less" rel="stylesheet/less"/>
+    <link type="text/css" href="../../styles/dataviz/kendo.dataviz.silver.css" rel="stylesheet"/>
     <script type="text/javascript" src="../../build/less-js/dist/less-1.6.0.min.js"></script>
     <script src="../require.js"></script>
     <script>
@@ -90,6 +92,9 @@
             },
             plotAreaClick: function(e) {
                 console.log("plotAreaClick", e);
+                },
+            tooltip: {
+                visible: true
             }
         });
 
