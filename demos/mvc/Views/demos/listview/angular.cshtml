@@ -84,14 +84,12 @@
 </div>
 
 <script>
-    angular.module("KendoDemos", [ "kendo.directives" ]);
-
-    function MyCtrl($scope) {
+    angular.module("KendoDemos", [ "kendo.directives" ]).controller("MyCtrl", function($scope){
         $scope.listViewTemplate = $("#template").html();
 
         $scope.source = new kendo.data.DataSource({
             data: products,
             pageSize: 21
         });
-    }
+    })
 </script>
