@@ -43,11 +43,10 @@
 </div>
 
 <script>
-  angular.module("KendoDemos", [ "kendo.directives" ]);
-  function MyCtrl($scope) {
-  $scope.panelBarOptions = {
-    contentUrls: [ null, null, "../content/web/loremIpsum.html" ]
-  };
-  $scope.hello = "Hello from controller";
-}
+  angular.module("KendoDemos", [ "kendo.directives" ]).controller("MyCtrl", function($scope){
+      $scope.panelBarOptions = {
+        contentUrls: [ null, null, "../content/web/loremIpsum.html" ]
+      };
+      $scope.hello = "Hello from controller";
+  })
 </script>
