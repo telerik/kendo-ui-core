@@ -8021,12 +8021,8 @@ var __meta__ = {
         },
 
         refresh: function() {
-            var pane = this,
-                view = pane.view;
-
-            if (view) {
-                view.replace(pane);
-            }
+            this.visual.clear();
+            this.renderVisual();
         },
 
         clipBox: function() {
