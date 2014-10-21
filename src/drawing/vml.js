@@ -6,8 +6,9 @@
 
     // Imports ================================================================
     var doc = document,
-        atan2 = Math.atan2,
-        sqrt = Math.sqrt,
+        math = Math,
+        atan2 = math.atan2,
+        sqrt = math.sqrt,
 
         kendo = window.kendo,
         deepExtend = kendo.deepExtend,
@@ -18,6 +19,8 @@
 
         g = kendo.geometry,
         toMatrix = g.toMatrix,
+
+        Color = kendo.Color,
 
         util = kendo.util,
         isTransparent = util.isTransparent,
@@ -31,6 +34,7 @@
     var NONE = "none",
         COORDINATE_MULTIPLE = 100,
         COORDINATE_SIZE = COORDINATE_MULTIPLE * COORDINATE_MULTIPLE,
+        GRADIENT = "gradient",
         TRANSFORM_PRECISION = 4;
 
     // VML rendering surface ==================================================
@@ -461,7 +465,7 @@
         },
 
         optionsChange: function(e) {
-            if (e.field.indexOf("fill") === 0) {
+            if (fillField(e.field)) {
                 this.setFill();
             }
         },
@@ -475,20 +479,94 @@
             this.allAttr(this.mapFill());
         },
 
+        attr: function(name, value) {
+            var element = this.element;
+            if (element) {
+                var fields = name.split(".");
+
+                while (fields.length > 1) {
+                    element = element[fields.shift()];
+                }
+                element[fields[0]] = value;
+            }
+        },
+
         mapFill: function() {
-            var fill = this.srcElement.options.fill;
-            var attrs = [];
+            var fill = this.srcElement.fill();
+            var attrs = [
+                ["on", "false"]
+            ];
 
-            if (fill && !isTransparent(fill.color)) {
-                attrs.push(["on", "true"]);
-                attrs.push(["color", fill.color]);
-
-                this.mapOpacityTo(attrs, fill.opacity);
-            } else {
-                attrs.push(["on", "false"]);
+            if (fill) {
+                if (fill.nodeType == GRADIENT) {
+                    attrs = this.mapGradient(fill);
+                } else if (!isTransparent(fill.color)) {
+                    attrs = this.mapFillColor(fill);
+                }
             }
 
             return attrs;
+        },
+
+        mapFillColor: function(fill) {
+            var attrs = [
+                ["on", "true"],
+                ["color", fill.color]
+            ];
+
+            this.mapOpacityTo(attrs, fill.opacity);
+
+            return attrs;
+        },
+
+        mapGradient: function(fill) {
+            var attrs;
+            if (fill instanceof d.LinearGradient) {
+                attrs = this.mapLinearGradient(fill);
+            } else if (fill instanceof d.RadialGradient && fill.fallbackFill()) {
+                attrs = this.mapFillColor(fill.fallbackFill());
+            } else {
+                attrs = [["on", "false"]];
+            }
+
+            return attrs;
+        },
+
+        mapLinearGradient: function(fill) {
+            var start = fill.start();
+            var end = fill.end();
+            var stops = fill.stops;
+            var angle = util.deg(atan2(end.y - start.y, end.x - start.x));
+
+            var attrs = [
+                ["on", "true"],
+                ["type", GRADIENT],
+                ["color", stopColor(fill.baseColor, stops[0])],
+                ["color2", stopColor(fill.baseColor, stops[stops.length - 1])],
+                ["focus", 0],
+                ["method", "none"],
+                ["angle", 270 - angle],
+                ["colors.value", this.colors(fill)]
+            ];
+
+            return attrs;
+        },
+
+        colors: function(fill) {
+            var stopColors = [];
+            var stops = fill.stops;
+            var stop;
+
+            for (var idx = 0; idx < stops.length; idx++) {
+                stop = stops[idx];
+
+                stopColors.push(
+                    math.round(stop.offset() * 100) + "% " +
+                    stopColor(fill.baseColor, stop)
+                );
+            }
+
+            return stopColors.join(",");
         }
     });
 
@@ -578,7 +656,7 @@
         },
 
         optionsChange: function(e) {
-            if (e.field.indexOf("fill") === 0) {
+            if (fillField(e.field)) {
                 this.fill.optionsChange(e);
             } else if (e.field.indexOf("stroke") === 0) {
                 this.stroke.optionsChange(e);
@@ -1034,6 +1112,34 @@
 
     function segmentType(segmentStart, segmentEnd) {
         return segmentStart.controlOut() && segmentEnd.controlIn() ? "c" : "l";
+    }
+
+    function fillField(field) {
+        return field.indexOf("fill") === 0 || field.indexOf(GRADIENT) === 0;
+    }
+
+    function stopColor(baseColor, stop) {
+        var color;
+        if (baseColor) {
+            color = blendColors(baseColor, stop.color(), stop.opacity());
+        } else {
+            color = blendColors(stop.color(), "#fff", 1 - stop.opacity());
+        }
+        return color;
+    }
+
+    function blendColors(base, overlay, alpha) {
+        var baseColor = new Color(base),
+            overlayColor = new Color(overlay),
+            r = blendChannel(baseColor.r, overlayColor.r, alpha),
+            g = blendChannel(baseColor.g, overlayColor.g, alpha),
+            b = blendChannel(baseColor.b, overlayColor.b, alpha);
+
+        return new Color(r, g, b).toHex();
+    }
+
+    function blendChannel(a, b, alpha) {
+        return math.round(alpha * b + (1 - alpha) * a);
     }
 
     // Exports ================================================================

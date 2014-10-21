@@ -772,8 +772,17 @@
 
     // ------------------------------------------------------------
     (function() {
-        var path,
-            fillNode;
+        var LinearGradient = d.LinearGradient,
+            RadialGradient = d.RadialGradient,
+            FillNodeMock = FillNode.extend({
+                createElement: function() {
+                    this.element = {
+                        colors: {}
+                    };
+                    this.setFill();
+                }
+            }),
+            path, fillNode;
 
         function createNode(pathOptions) {
             path = new Path(pathOptions);
@@ -826,6 +835,43 @@
         test("renders opacity", function() {
             createNode({ fill: { opacity: 0.5 } });
             equal(fillNode.element.opacity, "0.5");
+        });
+
+        test("renders linear gradient", function() {
+            var linearGradient = new LinearGradient({
+                stops: [[0.3, "blue", 0.5], [1, "blue", 1]],
+                start: [0.1, 0.2],
+                end: [0.5, 0.6]
+            });
+            path = new Path({fill: linearGradient});
+            fillNode = new FillNodeMock(path);
+            var element = fillNode.element;
+            equal(element.angle, 225);
+            equal(element.color, "#8080ff");
+            equal(element.color2, "#0000ff");
+            equal(element.colors.value, "30% #8080ff,100% #0000ff");
+            equal(element.focus, 0);
+            equal(element.method, "none");
+            equal(element.on, "true");
+            equal(element.type, "gradient");
+        });
+
+        test("renders on for RadialGradient", function() {
+            createNode({ fill: new RadialGradient() });
+            equal(fillNode.element.on, "false");
+        });
+
+        test("renders fallbackFill for RadialGradient if set", function() {
+            createNode({
+                fill: new RadialGradient({
+                    fallbackFill: {
+                        color: "red",
+                        opacity: 0.1
+                    }
+                })
+            });
+            equal(fillNode.element.color, "red");
+            equal(fillNode.element.opacity, 0.1);
         });
 
         test("optionsChange sets fill color", function() {
