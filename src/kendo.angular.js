@@ -41,6 +41,7 @@ var __meta__ = {
 
     var createDataSource = (function() {
         var types = {
+            TreeList    : 'TreeListDataSource',
             TreeView    : 'HierarchicalDataSource',
             Scheduler   : 'SchedulerDataSource',
             PanelBar    : '$PLAIN',
