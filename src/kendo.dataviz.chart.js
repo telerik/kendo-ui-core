@@ -3069,7 +3069,7 @@ var __meta__ = {
         },
 
         createVisual: function() {
-            this.visual = new draw.Group();
+            ChartElement.fn.createVisual.call(this);
 
             var box = this.box;
             if (this.visible !== false && box.width() > 0 && box.height() > 0) {
@@ -3112,12 +3112,28 @@ var __meta__ = {
             ChartElement.fn.createAnimation.call(this);
         },
 
-        highlightOverlay: function(view, options) {
-            var bar = this,
-                box = bar.box;
+        toggleHighlight: function(show) {
+            var overlay = this._overlay;
+            if (!overlay) {
+                overlay = this._overlay = draw.Path.fromRect(this.box.toRect(), {
+                    fill: {
+                        color: WHITE,
+                        opacity: 0.2
+                    },
+                    stroke : {
+                        color: WHITE,
+                        width: 1,
+                        opacity: 0.2
+                    }
+                });
 
-            options = deepExtend({ data: { modelId: bar.modelId } }, options);
-            return view.createRect(box, options);
+                this.visual.append(overlay);
+            }
+
+            var options = this.options.highlight;
+            if (options && options.visible) {
+                overlay.visible(show);
+            }
         },
 
         getBorderColor: function() {

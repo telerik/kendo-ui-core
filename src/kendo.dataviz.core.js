@@ -771,7 +771,8 @@ var __meta__ = {
 
         createVisual: function() {
             this.visual = new dataviz.drawing.Group({
-                zIndex: this.options.zIndex
+                zIndex: this.options.zIndex,
+                visible: valueOrDefault(this.options.visible, true)
             });
         },
 
