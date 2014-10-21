@@ -4533,6 +4533,7 @@ var __meta__ = {
         Node: Node,
         ObservableObject: ObservableObject,
         ObservableArray: ObservableArray,
+        LazyObservableArray: LazyObservableArray,
         LocalTransport: LocalTransport,
         RemoteTransport: RemoteTransport,
         Cache: Cache,
