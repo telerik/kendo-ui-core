@@ -886,12 +886,13 @@ var __meta__ = {
 
         _startHover: function(e) {
             var chart = this,
+                element = chart._getChartElement(e),
                 tooltip = chart._tooltip,
                 highlight = chart._highlight,
                 tooltipOptions = chart.options.tooltip,
                 point;
 
-            if (chart._suppressHover || !highlight || highlight.isOverlay(e.target) || chart._sharedTooltip()) {
+            if (chart._suppressHover || !highlight || highlight.isOverlay(element) || chart._sharedTooltip()) {
                 return;
             }
 
@@ -9966,105 +9967,39 @@ var __meta__ = {
 
     var Highlight = Class.extend({
         init: function(view, viewElement) {
-            var highlight = this;
-
-            highlight.view = view;
-            highlight.viewElement = viewElement;
-            highlight._overlays = [];
-        },
-
-        options: {
-            fill: WHITE,
-            fillOpacity: 0.2,
-            stroke: WHITE,
-            strokeWidth: 1,
-            strokeOpacity: 0.2
+            this._points = [];
         },
 
         destroy: function() {
-            this.viewElement = null;
-            this.view = null;
-            this._overlays = null;
+            this._points = [];
         },
 
         show: function(points) {
-            var highlight = this,
-                view = highlight.view,
-                container,
-                overlay,
-                overlays = highlight._overlays,
-                overlayElement, i, point,
-                pointOptions;
+            points = [].concat(points);
+            this.hide();
 
-            highlight.hide();
-            highlight._points = points = [].concat(points);
-
-            for (i = 0; i < points.length; i++) {
-                point = points[i];
-                if (point) {
-                    pointOptions = point.options;
-
-                    if (!pointOptions || (pointOptions.highlight || {}).visible) {
-                        if (point.highlightOverlay && point.visible !== false) {
-                            overlay = point.highlightOverlay(view, highlight.options);
-
-                            if (overlay) {
-                                overlayElement = view.renderElement(overlay);
-                                overlays.push(overlayElement);
-
-                                if (point.owner && point.owner.id) {
-                                    container = getElement(point.owner.id);
-                                }
-
-                                (container || highlight.viewElement).appendChild(overlayElement);
-                            }
-                        }
-
-                        if (point.toggleHighlight) {
-                            point.toggleHighlight(view);
-                        }
-                    }
+            for (var i = 0; i < points.length; i++) {
+                var point = points[i];
+                if (point && point.toggleHighlight) {
+                    point.toggleHighlight(true);
+                    this._points.push(point);
                 }
             }
         },
 
         hide: function() {
-            var highlight = this,
-                points = highlight._points,
-                overlays = highlight._overlays,
-                overlay, i, point, pointOptions;
-
-            while (overlays.length) {
-                overlay = highlight._overlays.pop();
-                if (overlay.parentNode) {
-                    overlay.parentNode.removeChild(overlay);
-                }
+            var points = this._points;
+            while (points.length) {
+                points.pop().toggleHighlight(false);
             }
-
-            if (points) {
-                for (i = 0; i < points.length; i++) {
-                    point = points[i];
-                    if (point) {
-                        pointOptions = point.options;
-
-                        if (!pointOptions || (pointOptions.highlight || {}).visible) {
-                            if (point.toggleHighlight) {
-                                point.toggleHighlight(highlight.view);
-                            }
-                        }
-                    }
-                }
-            }
-
-            highlight._points = [];
         },
 
         isOverlay: function(element) {
-            var overlays = this._overlays;
+            var points = this._points;
 
-            for (var i = 0; i < overlays.length; i++) {
-                var current = overlays[i];
-                if (element == current || $.contains(current, element)) {
+            for (var i = 0; i < points.length; i++) {
+                var point = points[i];
+                if (element == point) {
                     return true;
                 }
             }
