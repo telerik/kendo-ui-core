@@ -15,13 +15,12 @@
         </div>
     </div>
 <script>
-    angular.module("KendoDemos", ["kendo.directives"]);
-
-    function MyCtrl($scope) {
-        $scope.onSelect = function(e) {
-            var message = $.map(e.files, function(file) { return file.name; }).join(", ");
-            kendoConsole.log("event :: select (" + message + ")");
-        }
-    }
+    angular.module("KendoDemos", ["kendo.directives"])
+        .controller("MyCtrl", function($scope){
+            $scope.onSelect = function(e) {
+                    var message = $.map(e.files, function(file) { return file.name; }).join(", ");
+                    kendoConsole.log("event :: select (" + message + ")");
+                }
+        })
 </script>
 </div>
