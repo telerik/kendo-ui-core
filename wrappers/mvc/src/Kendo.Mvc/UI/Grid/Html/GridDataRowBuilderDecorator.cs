@@ -9,7 +9,17 @@ namespace Kendo.Mvc.UI.Html
 
         protected override void ApplyDecoration(IHtmlNode htmlNode)
         {
-            htmlNode.Attributes(CurrentGridItem.HtmlAttributes);
+            if (htmlNode is HtmlFragment)
+            {
+                foreach (var node in htmlNode.Children)
+                {
+                    node.Attributes(CurrentGridItem.HtmlAttributes);
+                }
+            }
+            else
+            {
+                htmlNode.Attributes(CurrentGridItem.HtmlAttributes);
+            }
         }
     }
 }

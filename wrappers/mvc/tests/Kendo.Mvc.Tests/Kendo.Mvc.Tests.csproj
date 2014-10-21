@@ -194,6 +194,8 @@
     <Compile Include="UI\Gantt\GanttViewFactoryTests.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="UI\Grid\GridColumnGroupTests.cs" />
+    <Compile Include="UI\Grid\Html\GridHeaderRowBuilderTests.cs" />
     <Compile Include="UI\HierarchicalDataSource\HierarchicalDataSourceBuilderTests.cs" />
     <Compile Include="UI\HierarchicalDataSource\HierarchicalDataSourceTests.cs" />
     <Compile Include="UI\HierarchicalDataSource\HierarchicalModelDescriptorBuilderTests.cs" />

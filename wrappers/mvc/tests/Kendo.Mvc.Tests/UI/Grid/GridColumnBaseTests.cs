@@ -131,5 +131,29 @@ namespace Kendo.Mvc.UI.Tests
         {
             return cell.Children[0];
         }
+
+        [Fact]
+        public void Should_render_data_index_attribute()
+        {
+            grid.Columns.Add(column.Object);
+
+            var cell = column.Object.CreateHeaderBuilder().CreateCell();
+
+            cell.Attributes().ContainsKey("data-index").ShouldBeTrue();
+            cell.Attribute("data-index").ShouldEqual("0");
+        }
+
+        [Fact]
+        public void Should_render_data_index_matching_the_column_order()
+        {
+            grid.Columns.Add(new Mock<GridColumnBase<Customer>>(grid) { CallBase = true }.Object);
+
+            grid.Columns.Add(column.Object);
+
+            var cell = column.Object.CreateHeaderBuilder().CreateCell();
+
+            cell.Attributes().ContainsKey("data-index").ShouldBeTrue();
+            cell.Attribute("data-index").ShouldEqual("1");
+        }
     }
 }

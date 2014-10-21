@@ -86,10 +86,10 @@ namespace Kendo.Mvc.UI.Html.Tests
         }
 
         [Fact]
-        public void Should_return_row_builder_for_header_item()
+        public void Should_return_header_row_builder_for_header_item()
         {
             var builder = factory.CreateHeaderBuilder(renderingData);
-            builder.ShouldBeType<GridRowBuilder>();
+            builder.ShouldBeType<GridHeaderRowBuilder>();
         }
 
         [Fact]
@@ -103,7 +103,7 @@ namespace Kendo.Mvc.UI.Html.Tests
         public void Should_call_decorator_provider_for_header_items()
         {
             factory.CreateHeaderBuilder(renderingData);
-            decoratorsProvider.Verify(dp => dp.ApplyDecorators(It.IsAny<GridRowBuilder>(), It.IsAny<GridItem>(),It.IsAny<bool>()), Times.Once());
+            decoratorsProvider.Verify(dp => dp.ApplyDecorators(It.IsAny<GridHeaderRowBuilder>(), It.IsAny<GridItem>(),It.IsAny<bool>()), Times.Once());
         }
 
         [Fact]

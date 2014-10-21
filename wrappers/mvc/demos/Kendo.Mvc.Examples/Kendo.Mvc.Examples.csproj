@@ -192,6 +192,7 @@
     <Compile Include="Controllers\Gantt\EventsController.cs" />
     <Compile Include="Controllers\Gantt\Keyboard_NavigationController.cs" />
     <Compile Include="Controllers\Gantt\ServerBindingController.cs" />
+    <Compile Include="Controllers\Grid\Multicolumnheaders.cs" />
     <Compile Include="Controllers\Grid\Pdf_ExportController.cs" />
     <Compile Include="Controllers\Grid\Excel_ExportController.cs" />
     <Compile Include="Controllers\Grid\Filter_Row_Controller.cs" />
@@ -827,6 +828,7 @@
     <Content Include="Areas\aspx\Views\gantt\index.aspx" />
     <Content Include="Areas\aspx\Views\gantt\keyboard_navigation.aspx" />
     <Content Include="Areas\aspx\Views\gantt\serverbinding.aspx" />
+    <Content Include="Areas\aspx\Views\grid\multicolumnheaders.aspx" />
     <Content Include="Areas\aspx\Views\menu\context_menu.aspx" />
     <Content Include="Areas\aspx\Views\pivotgrid\local_flat_data_binding.aspx" />
     <Content Include="Areas\aspx\Views\pivotgrid\remote_flat_data_binding.aspx" />
@@ -3318,6 +3320,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\aspx\Views\grid\pdf_export.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\grid\multicolumnheaders.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

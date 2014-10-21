@@ -62,7 +62,7 @@ namespace Kendo.Mvc.UI.Html
 
         public virtual IGridRowBuilder CreateHeaderBuilder(GridRenderingData renderingData)
         {
-            var builder = new GridRowBuilder(renderingData.Columns.Select(cellBuilderFactory.CreateHeaderCellBuilder));
+            var builder = new GridHeaderRowBuilder(GetHeaderRows(renderingData.Columns));
 
             var item = new GridItem
             {
@@ -71,6 +71,29 @@ namespace Kendo.Mvc.UI.Html
             };
 
             return decoratorProvider.ApplyDecorators(builder, item, renderingData.HasDetailTemplate);
+        }
+
+        private IEnumerable<GridRowBuilder> GetHeaderRows(IEnumerable<IGridColumn> columns)
+        {
+            var rows = new List<GridRowBuilder>();
+            rows.Add(new GridRowBuilder(columns.Select(cellBuilderFactory.CreateHeaderCellBuilder)));
+
+            var children = columns.SelectMany(GetChildColumns); 
+            if (children.Any())
+            {
+                return rows.Concat(GetHeaderRows(children));
+            }
+
+            return rows;
+        }
+
+        private IEnumerable<IGridColumn> GetChildColumns(IGridColumn column)
+        {
+            if (column is IGridColumnGroup)
+            {
+                return ((IGridColumnGroup)column).Columns;
+            }
+            return new IGridColumn[0];
         }
 
         protected virtual IGridRowBuilder CreateDataRowBuilder(GridRenderingData renderingData, GridItem item)

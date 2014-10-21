@@ -1,0 +1,35 @@
+
+@(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.CustomerViewModel>()
+    .Name("grid")
+    .Columns(columns =>
+    {
+        columns.Bound(c => c.CompanyName).Width(420);
+        columns.Group(group => group
+            .Title("Contact Info")
+            .Columns(info => { 
+                info.Bound(x => x.ContactTitle).Width(200);
+                info.Bound(x => x.ContactName).Width(200);
+                info.Group(g => g.Title("Location")
+                    .Columns(location =>
+                    {
+                        location.Bound(c => c.Country).Width(200);
+                        location.Bound(c => c.City).Width(200);
+                    })
+                );
+                info.Bound(x => x.Phone);
+            })
+        );
+    })
+    .ColumnMenu()
+    .Resizable(resizable => resizable.Columns(true))
+    .Reorderable(reorderable => reorderable.Columns(true))
+    .HtmlAttributes(new { style = "height: 550px;" })
+    .Scrollable()
+    .Groupable()
+    .Sortable()
+    .Pageable()
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .Read(read => read.Action("Customers_Read", "Grid"))
+    )
+)

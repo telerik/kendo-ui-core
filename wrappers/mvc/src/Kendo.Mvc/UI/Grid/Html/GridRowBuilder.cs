@@ -4,7 +4,7 @@ namespace Kendo.Mvc.UI.Html
     
     public class GridRowBuilder : IGridRowBuilder
     {
-        private readonly IEnumerable<IGridCellBuilder> cellBuilders;
+        protected readonly IEnumerable<IGridCellBuilder> cellBuilders;
 
         public GridRowBuilder(IEnumerable<IGridCellBuilder> cellBuilders)
         {

@@ -394,11 +394,32 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        private int HeaderLevel
+        {
+            get
+            {
+                return Grid.Columns.ColumnLevel(this);
+            }
+        }
+
+        private int HeaderDataIndex
+        {
+            get
+            {
+                return Grid.Columns.LeafColumns().IndexOf(this);
+            }
+        }
+
         protected void Decorate(IGridDecoratableCellBuilder cellBuilder)
         {            
             if (Hidden)
             {
                 cellBuilder.Decorators.Add(new GridHiddenCellBuilderDecorator());
+            }
+
+            if (cellBuilder is GridHeaderCellBuilder && !(this is IGridColumnGroup))
+            {
+                cellBuilder.Decorators.Add(new GridHeaderCellBuilderDecorator((Grid.Columns.HeaderRowsCount() - HeaderLevel) + 1, HeaderDataIndex));
             }
         }
 
@@ -503,7 +524,7 @@ namespace Kendo.Mvc.UI
         }
 
         protected virtual IGridCellBuilder CreateHeaderBuilderCore()
-        {            
+        {
             return new GridHeaderCellBuilder(HeaderHtmlAttributes, AppendHeaderContent, HeaderTemplate.HasValue());
         }
 

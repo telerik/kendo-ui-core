@@ -19,18 +19,29 @@ namespace Kendo.Mvc.UI.Fluent
         private IUrlGenerator urlGenerator;
         private ViewContext viewContext;
 
+        public GridColumnFactory(Grid<TModel> container, ViewContext viewContext, IUrlGenerator urlGenerator) 
+            : this(container, viewContext, urlGenerator, container)
+        { }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="GridColumnFactory{TModel}"/> class.
         /// </summary>
         /// <param name="container">The container.</param>
-        public GridColumnFactory(Grid<TModel> container, ViewContext viewContext, IUrlGenerator urlGenerator)
+        public GridColumnFactory(Grid<TModel> container, ViewContext viewContext, IUrlGenerator urlGenerator, IGridColumnContainer<TModel> columnsContainer)
         {
             Container = container;
+            ColumnsContainer = columnsContainer;
             this.viewContext = viewContext;
             this.urlGenerator = urlGenerator;
         }
 
         public Grid<TModel> Container
+        {
+            get;
+            private set;
+        }
+
+        public IGridColumnContainer<TModel> ColumnsContainer
         {
             get;
             private set;
@@ -42,7 +53,7 @@ namespace Kendo.Mvc.UI.Fluent
 
             foreach (var setting in settings)
             {
-                Container.Columns.Add(generator.CreateColumn(setting));
+                ColumnsContainer.Columns.Add(generator.CreateColumn(setting));
             }
         }
 
@@ -56,7 +67,7 @@ namespace Kendo.Mvc.UI.Fluent
         {
             GridBoundColumn<TModel, TValue> column = new GridBoundColumn<TModel, TValue>(Container, expression);
 
-            Container.Columns.Add(column);
+            ColumnsContainer.Columns.Add(column);
 
             return new GridBoundColumnBuilder<TModel>(column, this.viewContext, this.urlGenerator);
         }
@@ -67,6 +78,18 @@ namespace Kendo.Mvc.UI.Fluent
         public virtual GridBoundColumnBuilder<TModel> Bound(string memberName)
         {
             return Bound(null, memberName);
+        }
+
+        public GridColumnFactory<TModel> Group(Action<GridColumnGroupBuilder<TModel>> configurator)
+        {
+            var group = new GridColumnGroup<TModel>(Container);
+            ColumnsContainer.Columns.Add(group);
+
+            var factory = new GridColumnGroupBuilder<TModel>(group, Container, viewContext, urlGenerator);
+
+            configurator(factory);
+
+            return this;
         }
 
         /// <summary>
@@ -100,7 +123,7 @@ namespace Kendo.Mvc.UI.Fluent
                 column.MemberType = memberType;
             }
 
-            Container.Columns.Add((GridColumnBase<TModel>)column);
+            ColumnsContainer.Columns.Add((GridColumnBase<TModel>)column);
 
             return new GridBoundColumnBuilder<TModel>(column, this.viewContext, this.urlGenerator);
         }
@@ -133,7 +156,7 @@ namespace Kendo.Mvc.UI.Fluent
 
             column.Data = data;
 
-            Container.Columns.Add(column);
+            ColumnsContainer.Columns.Add(column);
 
             return new GridBoundColumnBuilder<TModel>(column, this.viewContext, this.urlGenerator);
         }
@@ -184,7 +207,7 @@ namespace Kendo.Mvc.UI.Fluent
                 column.MemberType = memberType;
             }
 
-            Container.Columns.Add((GridColumnBase<TModel>)column);
+            ColumnsContainer.Columns.Add((GridColumnBase<TModel>)column);
 
             return new GridBoundColumnBuilder<TModel>(column, this.viewContext, this.urlGenerator);
         }
@@ -203,7 +226,7 @@ namespace Kendo.Mvc.UI.Fluent
                                   {
                                       columnAction(c);
                                   }
-                                  Container.Columns.Add(c);
+                                  ColumnsContainer.Columns.Add(c);
                               });
                 hasGeneratedColumn = true;
             }
@@ -236,7 +259,7 @@ namespace Kendo.Mvc.UI.Fluent
         public virtual GridTemplateColumnBuilder<TModel> Template(Action<TModel> templateAction)
         {
             GridTemplateColumn<TModel> column = new GridTemplateColumn<TModel>(Container, templateAction);
-            Container.Columns.Add(column);
+            ColumnsContainer.Columns.Add(column);
 
             return new GridTemplateColumnBuilder<TModel>(column);
         }
@@ -244,7 +267,7 @@ namespace Kendo.Mvc.UI.Fluent
         public virtual GridTemplateColumnBuilder<TModel> Template(Func<TModel, object> template)
         {
             GridTemplateColumn<TModel> column = new GridTemplateColumn<TModel>(Container, template);
-            Container.Columns.Add(column);
+            ColumnsContainer.Columns.Add(column);
 
             return new GridTemplateColumnBuilder<TModel>(column);
         }
@@ -260,7 +283,7 @@ namespace Kendo.Mvc.UI.Fluent
             
             commandAction(new GridActionCommandFactory<TModel>(column));
 
-            Container.Columns.Add(column);
+            ColumnsContainer.Columns.Add(column);
 
             return new GridActionColumnBuilder(column);
         }
