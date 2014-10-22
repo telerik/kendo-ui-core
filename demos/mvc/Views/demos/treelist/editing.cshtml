@@ -54,14 +54,19 @@
                         dataSource: dataSource,
                         toolbar: [ "create" ],
                         editable: true,
+                        height: 540,
                         columns: [
-                            { field: "FirstName", expandable: true, title: "First Name", width: 250 },
-                            { field: "LastName", title: "Last Name" },
+                            { field: "FirstName", expandable: true, title: "First Name", width: 220 },
+                            { field: "LastName", title: "Last Name", width: 100 },
+                            { field: "Position" },
                             { field: "HireDate", title: "Hire Date", format: "{0:MMMM d, yyyy}" },
                             { field: "Phone", title: "Phone" },
                             { field: "Extension", title: "Ext", format: "{0:#}" },
-                            { field: "Position" },
-                            { command: [ "edit", "destroy" ] }
+                            { title: "Edit", command: [ "edit", "destroy" ], width: 200,
+                                attributes: {
+                                    style: "text-align: center;"
+                                }
+                            }
                         ]
                     });
                 });
