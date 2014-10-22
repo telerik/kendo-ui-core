@@ -2,6 +2,7 @@
     define(["../../kendo.data", "../../kendo.draganddrop", "../../kendo.popup", "../../kendo.toolbar",
            "../../kendo.editable",
            "../../kendo.window",
+           "../../kendo.dropdownlist",
            "../../kendo.dataviz.themes",
            "./svg",
            "./services",
@@ -1559,24 +1560,27 @@
             edit: function(item) {
                 this.cancelEdit();
                 var editorType;
+                var editable = item.options.editable;
+                var editors = editable.editors;
 
                 if (item instanceof Shape) {
                     editorType = "shape";
                 } else if (item instanceof Connection) {
                     editorType = "connection";
+                    var shapeSelectorHandler = proxy(shapeSelector, this)
+                    editors = deepExtend({}, { from: shapeSelectorHandler, to: shapeSelectorHandler }, editors);
                 } else {
                     return;
                 }
 
                 if (item.options.dataItem) {
-                    var editable = item.options.editable;
                     this.editor = new PopupEditor(this.element, {
                         update: proxy(this._update, this),
                         cancel: proxy(this._cancel, this),
                         model: item.options.dataItem,
                         type: editorType,
                         target: this,
-                        editors: editable.editors,
+                        editors: editors,
                         template: editable.template
                     });
 
@@ -1615,7 +1619,7 @@
             },
 
             _getEditDataSource: function() {
-                return this.editor.options.type === "shape" ? this.dataSource : this.connectionsDataSource;
+                return this.editor.model === "shape" ? this.dataSource : this.connectionsDataSource;
             },
 
             _editArgs: function() {
@@ -3293,7 +3297,7 @@
             _validateConnector: function(value) {
                 var connector;
 
-                if (isNumber(value)) {
+                if (defined(value) && value !== null) {
                     connector = this._dataMap[value];
                 }
 
@@ -3842,6 +3846,19 @@
                 Editor.fn.destroy.call(this);
             }
         });
+
+        function shapeSelector(container, options) {
+            var type = options.model.fields[options.field];
+            var model = this.dataSource.reader.model;
+            var textField = model.fn.fields.text ? "text": "id";
+            $("<input name='" + options.field + "' />")
+            .appendTo(container).kendoDropDownList({
+                dataValueField: "id",
+                dataTextField: textField,
+                dataSource: this.dataSource.data().toJSON(),
+                optionLabel: " "
+            });
+        }
 
         dataviz.ui.plugin(Diagram);
 
