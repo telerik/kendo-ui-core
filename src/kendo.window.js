@@ -619,7 +619,7 @@ var __meta__ = {
                 options = that.options,
                 titleBar = wrapper.children(KWINDOWTITLEBAR),
                 title = titleBar.children(KWINDOWTITLE),
-                titleBarHeight = titleBar.outerHeight();
+                titleBarHeight;
 
             if (!arguments.length) {
                 return title.text();
@@ -632,13 +632,17 @@ var __meta__ = {
                 if (!titleBar.length) {
                     wrapper.prepend(templates.titlebar(options));
                     that._actions();
+                    titleBar = wrapper.children(KWINDOWTITLEBAR);
+                } else {
+                    title.text(text);
                 }
+
+                titleBarHeight = titleBar.outerHeight();
 
                 wrapper.css("padding-top", titleBarHeight);
                 titleBar.css("margin-top", -titleBarHeight);
             }
 
-            title.text(text);
             that.options.title = text;
 
             return that;
