@@ -1808,7 +1808,7 @@ var __meta__ = {
             this.visual = new draw.Group();
 
             this._gridLines = new draw.Group({
-                zIndex: -1
+                zIndex: -2
             });
             this.appendVisual(this._gridLines);
 
@@ -1929,39 +1929,47 @@ var __meta__ = {
                 plotArea = axis.plotArea,
                 slotX, slotY, from, to;
 
-            if (plotBands.length) {
-                var range = this.range();
-                $.each(plotBands, function(i, item) {
-                    from = valueOrDefault(item.from, MIN_VALUE);
-                    to = valueOrDefault(item.to, MAX_VALUE);
-                    var element = [];
-
-                    if (isInRange(from, range) || isInRange(to, range)) {
-                        if (vertical) {
-                            slotX = plotArea.axisX.lineBox();
-                            slotY = axis.getSlot(item.from, item.to, true);
-                        } else {
-                            slotX = axis.getSlot(item.from, item.to, true);
-                            slotY = plotArea.axisY.lineBox();
-                        }
-
-                        var bandRect = new geom.Rect(
-                            [slotX.x1, slotY.y1],
-                            [slotX.width(), slotY.height()]
-                        );
-
-                        var path = draw.Path.fromRect(bandRect, {
-                            fill: {
-                                color: item.color,
-                                opacity: item.opacity
-                            },
-                            stroke: null
-                        });
-
-                        axis.visual.append(path);
-                    }
-                });
+            if (plotBands.length === 0) {
+                return;
             }
+
+            var group = new draw.Group({
+                zIndex: -1
+            });
+
+            var range = this.range();
+            $.each(plotBands, function(i, item) {
+                from = valueOrDefault(item.from, MIN_VALUE);
+                to = valueOrDefault(item.to, MAX_VALUE);
+                var element = [];
+
+                if (isInRange(from, range) || isInRange(to, range)) {
+                    if (vertical) {
+                        slotX = plotArea.axisX.lineBox();
+                        slotY = axis.getSlot(item.from, item.to, true);
+                    } else {
+                        slotX = axis.getSlot(item.from, item.to, true);
+                        slotY = plotArea.axisY.lineBox();
+                    }
+
+                    var bandRect = new geom.Rect(
+                        [slotX.x1, slotY.y1],
+                        [slotX.width(), slotY.height()]
+                    );
+
+                    var path = draw.Path.fromRect(bandRect, {
+                        fill: {
+                            color: item.color,
+                            opacity: item.opacity
+                        },
+                        stroke: null
+                    });
+
+                    group.append(path);
+                }
+            });
+
+            axis.appendVisual(group);
         },
 
         createGridLines: function(altAxis) {
