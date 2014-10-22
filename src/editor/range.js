@@ -1044,26 +1044,44 @@ var RangeUtils = {
         partition(false);
     },
 
-    getMarkers: function(range) {
-        var markers = [];
+    mapAll: function(range, map) {
+        var nodes = [];
 
-        new RangeIterator(range).traverse(function (node) {
-            if (node.className == 'k-marker') {
-                markers.push(node);
+        new RangeIterator(range).traverse(function(node) {
+            var mapped = map(node);
+
+            if (mapped && $.inArray(mapped, nodes) < 0) {
+                nodes.push(mapped);
             }
         });
 
-        return markers;
+        return nodes;
+    },
+
+    getAll: function(range, predicate) {
+        var selector = predicate;
+
+        if (typeof predicate == "string") {
+            predicate = function(node) {
+                return dom.is(node, selector);
+            };
+        }
+
+        return RangeUtils.mapAll(range, function (node) {
+            if (predicate(node)) {
+                return node;
+            }
+        });
+    },
+
+    getMarkers: function(range) {
+        return RangeUtils.getAll(range, function(node) {
+            return node.className == 'k-marker';
+        });
     },
 
     image: function (range) {
-        var nodes = [];
-
-        new RangeIterator(range).traverse(function (node) {
-            if (dom.is(node, 'img')) {
-                nodes.push(node);
-            }
-        });
+        var nodes = RangeUtils.getAll(range, "img");
 
         if (nodes.length == 1) {
             return nodes[0];

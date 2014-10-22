@@ -10,6 +10,7 @@ var kendo = window.kendo,
     Editor = kendo.ui.editor,
     dom = Editor.Dom,
     EditorUtils = Editor.EditorUtils,
+    RangeUtils = Editor.RangeUtils,
     Command = Editor.Command,
     NS = ".kendoEditor",
     ACTIVESTATE = "k-state-active",
@@ -334,13 +335,14 @@ var InsertColumnCommand = Command.extend({
 
 var DeleteRowCommand = Command.extend({
     exec: function () {
-        var range = this.lockRange(),
-            row = dom.closest(range.endContainer, "tr"),
-            table = dom.closest(row, "table"),
-            rowCount = table.rows.length,
-            focusElement;
+        var range = this.lockRange();
+        var rows = RangeUtils.mapAll(range, function(node) {
+            return $(node).closest("tr")[0];
+        });
+        var table = dom.closest(rows[0], "table");
+        var focusElement;
 
-        if (rowCount == 1) {
+        if (table.rows.length <= rows.length) {
             focusElement = dom.next(table);
             if (!focusElement || dom.insignificant(focusElement)) {
                 focusElement = dom.prev(table);
@@ -348,12 +350,15 @@ var DeleteRowCommand = Command.extend({
 
             dom.remove(table);
         } else {
-            dom.removeTextSiblings(row);
+            for (var i = 0; i < rows.length; i++) {
+                var row = rows[i];
+                dom.removeTextSiblings(row);
 
-            focusElement = dom.next(row) || dom.prev(row);
-            focusElement = focusElement.cells[0];
+                focusElement = dom.next(row) || dom.prev(row);
+                focusElement = focusElement.cells[0];
 
-            dom.remove(row);
+                dom.remove(row);
+            }
         }
 
         if (focusElement) {

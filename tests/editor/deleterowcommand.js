@@ -24,7 +24,7 @@ function execDeleteRowCommand(options) {
 
 var range;
 
-test("exec creates row below cursor", function() {
+test("exec removes row below cursor", function() {
     range = createRangeFromText(editor, "<table><tr><td>f||oo</td></tr><tr><td>bar</td></tr></table>");
 
     execDeleteRowCommand({ range:range });
@@ -98,6 +98,20 @@ test("selection algorithm skips whitespace nodes", function() {
     range.insertNode(editor.document.createElement("a"));
 
     equal(editor.value(), "<table><tbody><tr><td><a></a>foo</td></tr></tbody></table>");
+});
+
+test("exec upon multiple rows", function() {
+    range = createRangeFromText(editor,
+        "<table>" +
+            "<tr><td>f|oo</td></tr>" +
+            "<tr><td>bar</td></tr>" +
+        "</table>" +
+        "<p>|baz</p>"
+    );
+
+    execDeleteRowCommand({ range:range });
+
+    equal(editor.value(), "<p>baz</p>");
 });
 
 }());
