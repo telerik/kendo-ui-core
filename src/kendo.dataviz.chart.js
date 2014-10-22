@@ -834,7 +834,7 @@ var __meta__ = {
             }
         },
 
-        _getChartElement: function(e) {
+        _getChartElement: function(e, match) {
             var element = this.surface.eventTarget(e);
             if (!element) {
                 return;
@@ -852,6 +852,10 @@ var __meta__ = {
 
             if (chartElement.aliasFor) {
                 chartElement = chartElement.aliasFor(e, this._eventCoordinates(e));
+            }
+
+            if (match) {
+                chartElement = chartElement.closest(match);
             }
 
             return chartElement;
@@ -919,20 +923,21 @@ var __meta__ = {
                 return;
             }
 
-            point = chart._getChartElement(e);
-            if (point && point.hover) {
-                if (!point.hover(chart, e)) {
-                    chart._activePoint = point;
+            point = chart._getChartElement(e, function(element) {
+                return element.hover;
+            });
 
-                    tooltipOptions = deepExtend({}, tooltipOptions, point.options.tooltip);
-                    if (tooltipOptions.visible) {
-                        tooltip.show(point);
-                    }
+            if (point && !point.hover(chart, e)) {
+                chart._activePoint = point;
 
-                    highlight.show(point);
-
-                    return true;
+                tooltipOptions = deepExtend({}, tooltipOptions, point.options.tooltip);
+                if (tooltipOptions.visible) {
+                    tooltip.show(point);
                 }
+
+                highlight.show(point);
+
+                return true;
             }
         },
 
