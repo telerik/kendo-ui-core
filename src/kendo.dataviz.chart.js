@@ -6114,7 +6114,7 @@ var __meta__ = {
             points.push([ [mid, lhSlot.y1], [mid, ocSlot.y1] ]);
             points.push([ [mid, ocSlot.y2], [mid, lhSlot.y2] ]);
 
-            point.linePoints = points;
+            point.lines = points;
 
             point.box = lhSlot.clone().wrap(ocSlot);
 
@@ -6176,10 +6176,10 @@ var __meta__ = {
         },
 
         createLines: function(container, options) {
-            this.drawLines(container, options, this.linePoints, options.line);
+            this.drawLines(container, options, this.lines, options.line);
         },
 
-        drawLines: function(container, options, linePoints, lineOptions) {
+        drawLines: function(container, options, lines, lineOptions) {
             var lineStyle = {
                 stroke: {
                     color: lineOptions.color || this.color,
@@ -6190,8 +6190,8 @@ var __meta__ = {
                 }
             };
 
-            for (var i = 0; i < linePoints.length; i++) {
-                var line = draw.Path.fromPoints(linePoints[i], lineStyle);
+            for (var i = 0; i < lines.length; i++) {
+                var line = draw.Path.fromPoints(lines[i], lineStyle);
                 dataviz.alignPathToPixel(line);
                 container.append(line);
             }
@@ -6434,7 +6434,7 @@ var __meta__ = {
             lhPoints.push([mid, lhSlot.y1]);
             lhPoints.push([mid, lhSlot.y2]);
 
-            point.linePoints = [
+            point.lines = [
                 oPoints, cPoints, lhPoints
             ];
 
