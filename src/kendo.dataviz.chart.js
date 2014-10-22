@@ -6054,12 +6054,8 @@ var __meta__ = {
 
     var Candlestick = ChartElement.extend({
         init: function(value, options) {
-            var point = this;
-
-            ChartElement.fn.init.call(point, options);
-            point.value = value;
-            point.id = uniqueId();
-            point.enableDiscovery();
+            ChartElement.fn.init.call(this, options);
+            this.value = value;
         },
 
         options: {
@@ -6115,10 +6111,10 @@ var __meta__ = {
             point.realBody = ocSlot;
 
             mid = lhSlot.center().x;
-            points.push([ Point2D(mid, lhSlot.y1), Point2D(mid, ocSlot.y1) ]);
-            points.push([ Point2D(mid, ocSlot.y2), Point2D(mid, lhSlot.y2) ]);
+            points.push([ [mid, lhSlot.y1], [mid, ocSlot.y1] ]);
+            points.push([ [mid, ocSlot.y2], [mid, lhSlot.y2] ]);
 
-            point.lowHighLinePoints = points;
+            point.linePoints = points;
 
             point.box = lhSlot.clone().wrap(ocSlot);
 
@@ -6138,44 +6134,58 @@ var __meta__ = {
             }
         },
 
-        getViewElements: function(view) {
-            var point = this,
-                options = point.options,
-                elements = [],
-                border = options.border.width > 0 ? {
-                    stroke: point.getBorderColor(),
-                    strokeWidth: options.border.width,
-                    dashType: options.border.dashType,
-                    strokeOpacity: valueOrDefault(options.border.opacity, options.opacity)
-                } : {},
-                rectStyle = deepExtend({
-                    fill: point.color,
-                    fillOpacity: options.opacity
-                }, border),
-                lineStyle = {
-                    strokeOpacity: valueOrDefault(options.line.opacity, options.opacity),
-                    strokeWidth: options.line.width,
-                    stroke: options.line.color || point.color,
-                    dashType: options.line.dashType,
-                    strokeLineCap: "butt"
-                };
+        createVisual: function() {
+            ChartElement.fn.createVisual.call(this);
 
-            if (options.overlay) {
-                rectStyle.overlay = deepExtend({
-                    rotation: 0
-                }, options.overlay);
+            this.createBody();
+            this.createLines();
+            this.createOverlay();
+        },
+
+        createBody: function() {
+            var options = this.options;
+            var body = draw.Path.fromRect(this.realBody.toRect(), {
+                fill: {
+                    color: this.color,
+                    opacity: options.opacity
+                },
+                stroke: null
+            });
+
+            if (options.border.width > 0) {
+                body.options.set("stroke", {
+                    color: this.getBorderColor(),
+                    width: options.border.width,
+                    dashType: options.border.dashType,
+                    opacity: valueOrDefault(options.border.opacity, options.opacity)
+                });
             }
 
-            elements.push(view.createRect(point.realBody, rectStyle));
-            elements.push(view.createPolyline(point.lowHighLinePoints[0], false, lineStyle));
-            elements.push(view.createPolyline(point.lowHighLinePoints[1], false, lineStyle));
-            elements.push(point.createOverlayRect(view, options));
+            dataviz.alignPathToPixel(body);
+            this.visual.append(body);
+        },
 
-            append(elements,
-                ChartElement.fn.getViewElements.call(point, view)
-            );
+        createLines: function() {
+            this.drawLines(this.linePoints, this.options.line);
+        },
 
-            return elements;
+        drawLines: function(linePoints, lineOptions) {
+            var options = this.options;
+            var lineStyle = {
+                stroke: {
+                    color: lineOptions.color || this.color,
+                    opacity: valueOrDefault(lineOptions.opacity, options.opacity),
+                    width: lineOptions.width,
+                    dashType: lineOptions.dashType,
+                    lineCap: "butt"
+                }
+            };
+
+            for (var i = 0; i < linePoints.length; i++) {
+                var line = draw.Path.fromPoints(linePoints[i], lineStyle);
+                dataviz.alignPathToPixel(line);
+                this.visual.append(line);
+            }
         },
 
         getBorderColor: function() {
@@ -6192,14 +6202,16 @@ var __meta__ = {
             return borderColor;
         },
 
-        createOverlayRect: function(view) {
-            var point = this;
-            return view.createRect(point.box, {
-                data: { modelId: point.modelId },
-                fill: "#fff",
-                id: point.id,
-                fillOpacity: 0
+        createOverlay: function(view) {
+            var overlay = draw.Path.fromRect(this.box.toRect(), {
+                fill: {
+                    color: WHITE,
+                    opacity: 0
+                },
+                stroke: null
             });
+
+            this.visual.append(overlay);
         },
 
         highlightOverlay: function(view, options) {
@@ -6668,7 +6680,7 @@ var __meta__ = {
                 chart = point.owner,
                 value = point.value,
                 valueAxis = chart.seriesValueAxis(options),
-                points = [], mid, whiskerSlot, boxSlot, medianSlot, meanSlot;
+                mid, whiskerSlot, boxSlot, medianSlot, meanSlot;
 
             boxSlot = valueAxis.getSlot(value.q1, value.q3);
             point.boxSlot = boxSlot;
@@ -6679,32 +6691,39 @@ var __meta__ = {
             boxSlot.x1 = whiskerSlot.x1 = box.x1;
             boxSlot.x2 = whiskerSlot.x2 = box.x2;
 
+            point.realBody = boxSlot;
+
             if (value.mean) {
                 meanSlot = valueAxis.getSlot(value.mean);
-                point.meanPoints = [ Point2D(box.x1, meanSlot.y1), Point2D(box.x2, meanSlot.y1) ];
+                point.meanPoints = [
+                    [[box.x1, meanSlot.y1], [box.x2, meanSlot.y1]]
+                ];
             }
 
             mid = whiskerSlot.center().x;
-            points.push([
-                [ Point2D(mid - 5, whiskerSlot.y1), Point2D(mid + 5, whiskerSlot.y1) ],
-                [ Point2D(mid, whiskerSlot.y1), Point2D(mid, boxSlot.y1) ]
-            ]);
-            points.push([
-                [ Point2D(mid - 5, whiskerSlot.y2), Point2D(mid + 5, whiskerSlot.y2) ],
-                [ Point2D(mid, boxSlot.y2), Point2D(mid, whiskerSlot.y2) ]
-            ]);
+            point.whiskerPoints = [[
+                [mid - 5, whiskerSlot.y1], [mid + 5, whiskerSlot.y1],
+                [mid, whiskerSlot.y1], [mid, boxSlot.y1]
+            ], [
+                [mid - 5, whiskerSlot.y2], [mid + 5, whiskerSlot.y2],
+                [mid, whiskerSlot.y2], [mid, boxSlot.y2]
+            ]];
 
-            point.whiskerPoints = points;
-
-            point.medianPoints = [ Point2D(box.x1, medianSlot.y1), Point2D(box.x2, medianSlot.y1) ];
+            point.medianPoints = [
+                [[box.x1, medianSlot.y1], [box.x2, medianSlot.y1]]
+            ];
 
             point.box = whiskerSlot.clone().wrap(boxSlot);
-            point.createOutliers();
 
+            if (!point.outliers) {
+                point.renderOutliers();
+            }
+
+            point.reflowOutliers();
             point.reflowNote();
         },
 
-        createOutliers: function() {
+        renderOutliers: function() {
             var point = this,
                 options = point.options,
                 markers = options.markers || {},
@@ -6735,7 +6754,6 @@ var __meta__ = {
                 }
 
                 element = new ShapeElement({
-                    id: point.id,
                     type: markers.type,
                     width: markers.size,
                     height: markers.size,
@@ -6745,114 +6763,39 @@ var __meta__ = {
                     opacity: markers.opacity
                 });
 
-                markerBox = valueAxis.getSlot(outlierValue).move(point.box.center().x);
-                point.box = point.box.wrap(markerBox);
-                element.reflow(markerBox);
+                element.value = outlierValue;
+
+                point.append(element);
                 point.outliers.push(element);
             }
         },
 
-        getViewElements: function(view) {
-            var point = this,
-                group = view.createGroup({
-                    animation: {
-                        type: CLIP
-                    }
-                }),
-                elements = point.render(view, point.options);
+        reflowOutliers: function() {
+            var valueAxis = this.owner.seriesValueAxis(this.options);
+            var outliers = this.outliers;
+            var centerX = this.box.center().x;
 
-            append(elements,
-                ChartElement.fn.getViewElements.call(point, view)
-            );
+            for (var i = 0; i < outliers.length; i++) {
+                var outlierValue = outliers[i].value;
+                var markerBox = valueAxis.getSlot(outlierValue).move(centerX);
 
-            group.children = elements;
-
-            return [ group ];
+                this.box = this.box.wrap(markerBox);
+                outliers[i].reflow(markerBox);
+            }
         },
 
-        render: function(view, renderOptions) {
-            var point = this,
-                elements = [],
-                i, element;
+        createLines: function() {
+            this.drawLines(this.whiskerPoints, this.options.line);
+            this.drawLines(this.medianPoints, this.options.median);
+            this.drawLines(this.meanPoints, this.options.mean);
+        },
 
-            elements.push(point.createBody(view, renderOptions));
-            elements.push(point.createWhisker(view, point.whiskerPoints[0], renderOptions));
-            elements.push(point.createWhisker(view, point.whiskerPoints[1], renderOptions));
-            elements.push(point.createMedian(view, renderOptions));
-            if (point.meanPoints) {
-                elements.push(point.createMean(view, renderOptions));
-            }
-            elements.push(point.createOverlayRect(view, renderOptions));
-            if (point.outliers.length) {
-                for (i = 0; i < point.outliers.length; i++) {
-                    element = point.outliers[i];
-                    elements.push(element.getViewElements(view)[0]);
-                }
+        getBorderColor: function() {
+            if (this.color) {
+                return this.color;
             }
 
-            return elements;
-        },
-
-        createWhisker: function(view, points, options) {
-            return view.createMultiLine(points, {
-                    strokeOpacity: valueOrDefault(options.line.opacity, options.opacity),
-                    strokeWidth: options.line.width,
-                    stroke: options.line.color || this.color,
-                    dashType: options.line.dashType,
-                    strokeLineCap: "butt",
-                    data: { data: { modelId: this.modelId } }
-                });
-        },
-
-        createMedian: function(view) {
-            var point = this,
-                options = point.options;
-
-            return view.createPolyline(point.medianPoints, false, {
-                    strokeOpacity: valueOrDefault(options.median.opacity, options.opacity),
-                    strokeWidth: options.median.width,
-                    stroke: options.median.color || point.color,
-                    dashType: options.median.dashType,
-                    strokeLineCap: "butt",
-                    data: { data: { modelId: this.modelId } }
-                });
-        },
-
-        createBody: function(view, options) {
-            var point = this,
-                border = options.border.width > 0 ? {
-                    stroke: point.color || point.getBorderColor(),
-                    strokeWidth: options.border.width,
-                    dashType: options.border.dashType,
-                    strokeOpacity: valueOrDefault(options.border.opacity, options.opacity)
-                } : {},
-                body = deepExtend({
-                    fill: point.color,
-                    fillOpacity: options.opacity,
-                    data: { data: { modelId: this.modelId } }
-                }, border);
-
-            if (options.overlay) {
-                body.overlay = deepExtend({
-                    rotation: 0
-                }, options.overlay);
-            }
-
-            return view.createRect(point.boxSlot, body);
-        },
-
-        createMean: function(view) {
-            var point = this,
-                options = point.options;
-
-            return view.createPolyline(point.meanPoints, false, {
-                    strokeOpacity: valueOrDefault(options.mean.opacity, options.opacity),
-                    strokeWidth: options.mean.width,
-                    stroke: options.mean.color || point.color,
-                    dashType: options.mean.dashType,
-                    strokeLineCap: "butt",
-                    data: { data: { modelId: this.modelId } }
-                });
+            return Candlestick.getBorderColor.call(this);
         },
 
         highlightOverlay: function(view) {

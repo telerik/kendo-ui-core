@@ -4765,6 +4765,7 @@ var __meta__ = {
         ViewElement: ViewElement,
         ViewFactory: ViewFactory,
 
+        alignPathToPixel: alignPathToPixel,
         animationDecorator: animationDecorator,
         append: append,
         autoFormat: autoFormat,
