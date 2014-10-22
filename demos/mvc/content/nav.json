@@ -9398,7 +9398,7 @@
     "name": "mobile-forms",
     "spriteCssClass": "mobileAppIcon",
     "mobile": true,
-    "packages": [ "!jsp", "!php" ],
+    "packages": ["!mvc", "!jsp", "!php" ],
     "items": [
       {
         "text": "Overview",
