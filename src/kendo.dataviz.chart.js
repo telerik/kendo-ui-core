@@ -6427,65 +6427,23 @@ var __meta__ = {
 
             mid = lhSlot.center().x;
 
-            oPoints.push(Point2D(oSlot.x1, oSlot.y1));
-            oPoints.push(Point2D(mid, oSlot.y1));
-            cPoints.push(Point2D(mid, cSlot.y1));
-            cPoints.push(Point2D(cSlot.x2, cSlot.y1));
-            lhPoints.push(Point2D(mid, lhSlot.y1));
-            lhPoints.push(Point2D(mid, lhSlot.y2));
+            oPoints.push([oSlot.x1, oSlot.y1]);
+            oPoints.push([mid, oSlot.y1]);
+            cPoints.push([mid, cSlot.y1]);
+            cPoints.push([cSlot.x2, cSlot.y1]);
+            lhPoints.push([mid, lhSlot.y1]);
+            lhPoints.push([mid, lhSlot.y2]);
 
-            point.oPoints = oPoints;
-            point.cPoints = cPoints;
-            point.lhPoints = lhPoints;
+            point.linePoints = [
+                oPoints, cPoints, lhPoints
+            ];
 
             point.box = lhSlot.clone().wrap(oSlot.clone().wrap(cSlot));
 
             point.reflowNote();
         },
 
-        getViewElements: function(view) {
-            var point = this,
-                options = point.options,
-                elements = [],
-                lineOptions = options.line,
-                lineStyle = {
-                    strokeOpacity: lineOptions.opacity || options.opacity,
-                    zIndex: -1,
-                    strokeWidth: lineOptions.width,
-                    stroke: point.color || lineOptions.color,
-                    dashType: lineOptions.dashType
-                };
-
-            elements.push(point.createOverlayRect(view, options));
-            elements.push(view.createPolyline(point.oPoints, true, lineStyle));
-            elements.push(view.createPolyline(point.cPoints, true, lineStyle));
-            elements.push(view.createPolyline(point.lhPoints, true, lineStyle));
-
-            append(elements,
-                ChartElement.fn.getViewElements.call(point, view)
-            );
-
-            return elements;
-        },
-
-        highlightOverlay: function(view) {
-            var point = this,
-                pointOptions = point.options,
-                highlight = pointOptions.highlight,
-                data = { data: { modelId: pointOptions.modelId } },
-                lineStyle = deepExtend(data, {
-                    strokeWidth: highlight.line.width,
-                    strokeOpacity: highlight.line.opacity,
-                    stroke: highlight.line.color || point.color
-                }),
-                group = view.createGroup();
-
-            group.children.push(view.createPolyline(point.oPoints, true, lineStyle));
-            group.children.push(view.createPolyline(point.cPoints, true, lineStyle));
-            group.children.push(view.createPolyline(point.lhPoints, true, lineStyle));
-
-            return group;
-        }
+        createBody: $.noop
     });
 
     var OHLCChart = CandlestickChart.extend({
