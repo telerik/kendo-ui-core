@@ -9472,7 +9472,26 @@
         "meta": {
             "kendo-ui": "Play with this Kendo UI Mobile demo to explore the touch events in Kendo UI Mobile advanced mobile app framework."
         }
+      },
+      {
+        "text": "AngularJS",
+        "mobile": true,
+        "new": true,
+        "disableInMobile": true,
+        "url": "touchevents/angular",
+        "title": {
+            "kendo-ui": "AngularJS support in Kendo UI Touch Events"
+        },
+        "meta": {
+            "kendo-ui": "AngularJS directive support for Kendo UI Touch Events"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
       }
+
     ],
     "category": "Mobile"
   },

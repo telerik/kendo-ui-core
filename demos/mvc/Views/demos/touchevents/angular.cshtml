@@ -1,0 +1,43 @@
+<div kendo-mobile-application ng-app="kendoDemo">
+    <kendo-mobile-view ng-controller="mine">
+        <div
+            id="touchSurface"
+            kendo-touch
+            k-enable-swipe="true"
+            k-on-touchstart="myTouch.touchstart()"
+            k-on-swipe="myTouch.swipe(kendoEvent)"
+            k-on-tap="myTouch.tap()"
+            k-on-doubletap="myTouch.doubletap()"
+            k-on-hold="myTouch.hold()"
+            >
+        Touch, swipe, double-tap, tap, and hold me
+        </div>
+    <div class="console" style="width: 200px; min-width: 200px;"></div>
+    </kendo-mobile-view>
+</div>
+
+<script>
+    angular.module("kendoDemo", [ 'kendo.directives' ]).
+    controller("mine", function($scope) {
+        $scope.myTouch = {
+            touchstart: function(e) { kendoConsole.log("touch start"); },
+            swipe: function(e) { kendoConsole.log("swipe " + e.direction); },
+            tap: function(e) { kendoConsole.log("tap"); },
+            doubletap: function(e) { kendoConsole.log("double tap"); },
+            hold: function(e) { kendoConsole.log("hold"); }
+        }
+    });
+
+</script>
+
+<style scoped>
+    #touchSurface {
+        background: black;
+        color: white;
+        padding: 20px;
+        line-height: 20em;
+        text-align: center;
+        font-style: italic;
+        font-size: .9em;
+    }
+</style>
