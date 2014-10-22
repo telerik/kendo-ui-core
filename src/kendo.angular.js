@@ -638,7 +638,8 @@ var __meta__ = {
         var dashed = name.replace(/([A-Z])/g, "-$1");
 
         if (SKIP_SHORTCUTS.indexOf(name.replace("kendo", "")) == -1) {
-            angular.forEach([name, shortcut], function(directiveName) {
+            var names = name === shortcut ? [ name ] : [ name, shortcut ];
+            angular.forEach(names, function(directiveName) {
                 module.directive(directiveName, function(){
                     return {
                         restrict : "E",
