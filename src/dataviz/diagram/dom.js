@@ -301,6 +301,8 @@
                 var that = this;
                 Observable.fn.init.call(that);
                 that.options = deepExtend({ id: diagram.randomId() }, that.options, options);
+                // Update dataItem after deepExtend in order to fix editing model wrapping
+                that.options.dataItem = options.dataItem;
                 that.isSelected = false;
                 that.visual = new Group({
                     id: that.options.id,
