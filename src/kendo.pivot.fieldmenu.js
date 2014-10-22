@@ -36,8 +36,12 @@ var __meta__ = {
         options: {
             name: "PivotFieldMenu",
             filter: null,
+            filterable: true,
+            sortable: true,
             messages: {
                 info: "Show items with value that:",
+                sortAscending: "Sort Ascending",
+                sortDescending: "Sort Descending",
                 filterFields: "Fields Filter",
                 filter: "Filter",
                 include: "Include Fields...",
@@ -61,6 +65,8 @@ var __meta__ = {
 
             this.wrapper = $(kendo.template(MENUTEMPLATE)({
                 ns: kendo.ns,
+                filterable: options.filterable,
+                sortable: options.sortable,
                 messages: options.messages
             }));
 
@@ -77,7 +83,9 @@ var __meta__ = {
 
             this._createWindow();
 
-            this._initFilterForm();
+            if (options.filterable) {
+                this._initFilterForm();
+            }
         },
 
         _initFilterForm: function() {
@@ -153,6 +161,20 @@ var __meta__ = {
             that.dataSource.filter(filter);
             that._setFilterForm(null);
             that.menu.close();
+        },
+
+        _sort: function(dir) {
+            var field = this.currentMember;
+            var expressions = (this.dataSource.sort() || []);
+
+            expressions = removeExpr(expressions, field);
+            expressions.push({
+                field: field,
+                dir: dir
+            });
+
+            this.dataSource.sort(expressions);
+            this.menu.close();
         },
 
         setDataSource: function(dataSource) {
@@ -296,7 +318,10 @@ var __meta__ = {
             var expression;
 
             this.currentMember = $(e.event.target).closest("[" + attr + "]").attr(attr);
-            this._setFilterForm(findFilters(this.dataSource.filter(), this.currentMember)[0]);
+
+            if (this.options.filterable) {
+                this._setFilterForm(findFilters(this.dataSource.filter(), this.currentMember)[0]);
+            }
         },
 
         _select: function(e) {
@@ -306,6 +331,10 @@ var __meta__ = {
 
             if (item.hasClass("k-include-item")) {
                 this.includeWindow.center().open();
+            } else if (item.hasClass("k-sort-asc")) {
+                this._sort("asc");
+            } else if (item.hasClass("k-sort-desc")) {
+                this._sort("desc");
             }
         },
 
@@ -340,6 +369,18 @@ var __meta__ = {
             this.element = null;
         }
     });
+
+    function removeExpr(expressions, name) {
+        var result = [];
+
+        for (var idx = 0, length = expressions.length; idx < length; idx++) {
+            if (expressions[idx].field !== name) {
+                result.push(expressions[idx]);
+            }
+        }
+
+        return result;
+    }
 
     function findFilters(filter, member, operator) {
         if (!filter) {
@@ -414,6 +455,24 @@ var __meta__ = {
         '</div>';
 
     var MENUTEMPLATE = '<ul class="k-pivot-fieldmenu">'+
+                        '# if (sortable) {#'+
+                        '<li class="k-item k-sort-asc">'+
+                            '<span class="k-link">'+
+                                '<span class="k-icon k-i-sort-asc"></span>'+
+                                '${messages.sortAscending}'+
+                            '</span>'+
+                        '</li>'+
+                        '<li class="k-item k-sort-desc">'+
+                            '<span class="k-link">'+
+                                '<span class="k-icon k-i-sort-desc"></span>'+
+                                '${messages.sortDescending}'+
+                            '</span>'+
+                        '</li>'+
+                            '# if (filterable) {#'+
+                            '<li class="k-separator"></li>'+
+                            '# } #'+
+                        '# } #'+
+                        '# if (filterable) {#'+
                         '<li class="k-item k-include-item">'+
                             '<span class="k-link">'+
                                 '<span class="k-icon k-filter"></span>'+
@@ -430,6 +489,7 @@ var __meta__ = {
                                 '<li>' + LABELMENUTEMPLATE + '</li>'+
                             '</ul>'+
                         '</li>'+
+                        '# } #'+
                     '</ul>';
 
     var WINDOWTEMPLATE = '<div class="k-popup-edit-form k-pivot-filter-window"><div class="k-edit-form-container">'+

@@ -18,6 +18,19 @@
         }
     });
 
+    function settingTemplateWithSort() {
+        var template = '<span class="k-button" data-name="${data.name || data}">${data.name || data}';
+
+        var icons = '#if (data.sortIcon) {#';
+            icons += '<span class="k-icon ${data.sortIcon} k-setting-sort"></span>';
+            icons += '#}#';
+
+        template += '<span class="k-field-actions">' + icons + '</span>';
+        template += '</span>';
+
+        return template;
+    }
+
     test("pivotsettingtarget object is attached", function() {
         new PivotSettingTarget($(div), {});
 
@@ -442,6 +455,145 @@
         equal(dataSource.columns()[0].name, "bar");
     });
 
+    test("clicking setting button sorts pivotgrid", function() {
+        var dataSource = new kendo.data.PivotDataSource({
+            columns: ["foo", "bar"],
+            sortable: true
+        });
+
+        var setting = new PivotSettingTarget($(div), {
+            dataSource: dataSource,
+            sortable: true
+        });
+
+        stub(dataSource, {
+            sort: dataSource.sort
+        });
+
+        $(div).children().find(".k-button:first").click();
+
+        ok(dataSource.calls("sort"));
+    });
+
+    test("setting button persists sort expressions", function() {
+        var dataSource = new kendo.data.PivotDataSource({
+            columns: ["foo", "bar"],
+            sortable: true,
+            sort: [{ field: "bar", dir: "desc"}]
+        });
+
+        var setting = new PivotSettingTarget($(div), {
+            dataSource: dataSource,
+            sortable: true
+        });
+
+        setting.sort({
+            field: "foo",
+            dir: "asc"
+        });
+
+        var sort = dataSource.sort();
+
+
+        equal(sort.length, 2);
+
+        equal(sort[0].field, "bar");
+        equal(sort[0].dir, "desc");
+
+        equal(sort[1].field, "foo");
+        equal(sort[1].dir, "asc");
+    });
+
+    test("setting button removes last sort expr with same name", function() {
+        var dataSource = new kendo.data.PivotDataSource({
+            columns: ["foo", "bar"],
+            sortable: true,
+            sort: [{ field: "foo", dir: "asc"}, { field: "bar", dir: "desc"}]
+        });
+
+        var setting = new PivotSettingTarget($(div), {
+            dataSource: dataSource,
+            sortable: true
+        });
+
+        setting.sort({
+            field: "foo",
+            dir: "desc"
+        });
+
+        var sort = dataSource.sort();
+
+
+        equal(sort.length, 2);
+
+        equal(sort[0].field, "bar");
+        equal(sort[0].dir, "desc");
+
+        equal(sort[1].field, "foo");
+        equal(sort[1].dir, "desc");
+    });
+
+    test("clicking setting button adds 'ASC' sort icon", function() {
+        var dataSource = new kendo.data.PivotDataSource({
+            columns: ["foo", "bar"],
+            sort: [{ field: "foo", dir: "asc"}]
+        });
+
+        var setting = new PivotSettingTarget($(div), {
+            sortable: true,
+            dataSource: dataSource,
+            template: settingTemplateWithSort()
+        });
+
+        var button = $(div).find(".k-button:first");
+        var sort = button.find(".k-field-actions").children(".k-icon:first");
+
+        ok(sort.hasClass("k-i-sort-asc"));
+    });
+
+    test("clicking setting button adds 'DESC' sort icon", function() {
+        var dataSource = new kendo.data.PivotDataSource({
+            columns: ["foo", "bar"],
+            sort: [{ field: "foo", dir: "desc"}]
+        });
+
+        var setting = new PivotSettingTarget($(div), {
+            sortable: true,
+            dataSource: dataSource,
+            template: settingTemplateWithSort()
+        });
+
+        var button = $(div).find(".k-button:first");
+        var sort = button.find(".k-field-actions").children(".k-icon:first");
+
+        ok(sort.hasClass("k-i-sort-desc"));
+    });
+
+    test("remove sort icon if allowUnsort is enabled", function() {
+        var dataSource = new kendo.data.PivotDataSource({
+            columns: ["foo", "bar"],
+            sort: [{ field: "foo", dir: "desc"}]
+        });
+
+        var setting = new PivotSettingTarget($(div), {
+            sortable: {
+                allowUnsort: true
+            },
+            dataSource: dataSource,
+            template: settingTemplateWithSort()
+        });
+
+        setting.sort({
+            field: "foo",
+            dir: "asc"
+        });
+
+        var button = $(div).find(".k-button:first");
+        var sort = button.find(".k-field-actions").children(".k-icon:first");
+
+        ok(!sort[0]);
+    });
+
     test("validate returns true for measures setting and measure(dimension)", function() {
         var setting = new PivotSettingTarget($(div), {
             setting: "measures"
@@ -519,12 +671,40 @@
         ok(!setting.validate({ defaultHierarchy: "bar" }));
     });
 
-    test("field menu is initialized", function() {
+    test("field menu is initialized if filterable", function() {
         var setting  = new PivotSettingTarget($(div), {
             filterable: true
         });
 
         ok(setting.fieldMenu instanceof kendo.ui.PivotFieldMenu);
+        ok(setting.fieldMenu.options.filterable);
+    });
+
+    test("field menu is initialized if sortable", function() {
+        var setting  = new PivotSettingTarget($(div), {
+            sortable: true
+        });
+
+        ok(setting.fieldMenu instanceof kendo.ui.PivotFieldMenu);
+        ok(setting.fieldMenu.options.sortable);
+    });
+
+    test("setting target passes filterable option to fieldMenu", function() {
+        var setting  = new PivotSettingTarget($(div), {
+            sortable: true,
+            filterable: false
+        });
+
+        equal(setting.fieldMenu.options.filterable, false);
+    });
+
+    test("setting target passes sortable option to fieldMenu", function() {
+        var setting  = new PivotSettingTarget($(div), {
+            sortable: false,
+            filterable: true
+        });
+
+        equal(setting.fieldMenu.options.sortable, false);
     });
 
     test("setDataSource changes the dataSource instance", function() {
