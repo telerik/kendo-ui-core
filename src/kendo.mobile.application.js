@@ -181,6 +181,8 @@ var __meta__ = {
             modelScope: window,
             statusBarStyle: "black",
             transition: "",
+            platform: null,
+            skin: null,
             updateDocumentTitle: true,
             useNativeScrolling: false
         },
