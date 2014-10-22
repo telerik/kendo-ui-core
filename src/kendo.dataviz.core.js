@@ -853,7 +853,36 @@ var __meta__ = {
             }
         },
 
-        renderComplete: $.noop
+        renderComplete: $.noop,
+
+        toggleHighlight: function(show) {
+            if (!this.createHighlight) {
+                return;
+            }
+
+            var overlay = this._overlay;
+            var highlight = this.options.highlight;
+
+            if (!overlay) {
+                overlay = this._overlay = this.createHighlight({
+                    fill: {
+                        color: WHITE,
+                        opacity: 0.2
+                    },
+                    stroke : {
+                        color: WHITE,
+                        width: 1,
+                        opacity: 0.2
+                    }
+                });
+
+                this.visual.append(overlay);
+            }
+
+            if (highlight && highlight.visible) {
+                overlay.visible(show);
+            }
+        }
     });
 
     var RootElement = ChartElement.extend({

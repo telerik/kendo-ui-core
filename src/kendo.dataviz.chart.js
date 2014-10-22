@@ -3138,29 +3138,8 @@ var __meta__ = {
             ChartElement.fn.createAnimation.call(this);
         },
 
-        toggleHighlight: function(show) {
-            var overlay = this._overlay;
-            var highlight = this.options.highlight;
-
-            if (!overlay) {
-                overlay = this._overlay = draw.Path.fromRect(this.box.toRect(), {
-                    fill: {
-                        color: WHITE,
-                        opacity: 0.2
-                    },
-                    stroke : {
-                        color: WHITE,
-                        width: 1,
-                        opacity: 0.2
-                    }
-                });
-
-                this.visual.append(overlay);
-            }
-
-            if (highlight && highlight.visible) {
-                overlay.visible(show);
-            }
+        createHighlight: function(style) {
+            return draw.Path.fromRect(this.box.toRect(), style);
         },
 
         getBorderColor: function() {
@@ -4454,7 +4433,9 @@ var __meta__ = {
             return new Point2D(x, y);
         },
 
-        toggleHighlight: Bar.fn.toggleHighlight,
+        createHighlight: function(style) {
+            return draw.Path.fromRect(this.box.toRect(), style);
+        },
 
         formatValue: function(format) {
             var bullet = this;
@@ -4796,37 +4777,28 @@ var __meta__ = {
             }
         },
 
-        toggleHighlight: function(show) {
+        createHighlight: function() {
             var highlight = this.options.highlight;
-            var overlay = this._overlay;
-            if (!overlay) {
-                var markers = highlight.markers;
-                var defaultColor = this.markerBorder().color;
+            var markers = highlight.markers;
+            var defaultColor = this.markerBorder().color;
+            var options = this.options.markers;
 
-                var options = this.options.markers;
-                var shadow = new ShapeElement({
-                    type: options.type,
-                    width: options.size,
-                    height: options.size,
-                    rotation: options.rotation,
-                    background: markers.color || defaultColor,
-                    border: {
-                        color: markers.border.color,
-                        width: markers.border.width,
-                        opacity: markers.border.opacity || 0
-                    },
-                    fillOpacity: markers.opacity || 1
-                });
-                shadow.reflow(this._childBox);
+            var shadow = new ShapeElement({
+                type: options.type,
+                width: options.size,
+                height: options.size,
+                rotation: options.rotation,
+                background: markers.color || defaultColor,
+                border: {
+                    color: markers.border.color,
+                    width: markers.border.width,
+                    opacity: markers.border.opacity || 0
+                },
+                fillOpacity: markers.opacity || 1
+            });
+            shadow.reflow(this._childBox);
 
-                shadow.createVisual();
-                overlay = this._overlay = shadow.visual;
-                this.visual.append(overlay);
-            }
-
-            if (highlight && highlight.visible) {
-                overlay.visible(show);
-            }
+            return shadow.getElement();
         },
 
         tooltipAnchor: function(tooltipWidth, tooltipHeight) {
@@ -4877,27 +4849,20 @@ var __meta__ = {
             }
         },
 
-        toggleHighlight: function(show) {
-            var overlay = this._overlay;
+        createHighlight: function() {
             var highlight = this.options.highlight;
-            if (!overlay) {
-                overlay = this._overlay = this.marker.getElement();
+            var overlay = this.marker.getElement();
 
-                var markers = this.options.markers;
-                var border = highlight.border;
-                overlay.options.set("stroke", {
-                    color: border.color ||
-                        new Color(markers.background).brightness(BAR_BORDER_BRIGHTNESS).toHex(),
-                    width: border.width,
-                    opacity:border.opacity
-                });
+            var markers = this.options.markers;
+            var border = highlight.border;
+            overlay.options.set("stroke", {
+                color: border.color ||
+                    new Color(markers.background).brightness(BAR_BORDER_BRIGHTNESS).toHex(),
+                width: border.width,
+                opacity:border.opacity
+            });
 
-                this.visual.append(overlay);
-            }
-
-            if (highlight && highlight.visible) {
-                overlay.visible(show);
-            }
+            return overlay;
         }
     });
 
@@ -6210,26 +6175,17 @@ var __meta__ = {
             this.visual.append(overlay);
         },
 
-        toggleHighlight: function(show) {
+        createHighlight: function() {
             var highlight = this.options.highlight;
+            var normalColor = this.color;
 
-            var overlay = this._overlay;
-            if (!overlay) {
-                var normalColor = this.color;
-                this.color = highlight.color || this.color;
+            this.color = highlight.color || this.color;
+            var overlay = this._overlay = this.mainVisual(
+                deepExtend({}, this.options, highlight)
+            );
+            this.color = normalColor;
 
-                overlay = this._overlay = this.mainVisual(
-                    deepExtend({}, this.options, highlight)
-                );
-
-                this.color = normalColor;
-
-                this.visual.append(overlay);
-            }
-
-            if (highlight && highlight.visible) {
-                overlay.visible(show);
-            }
+            return overlay;
         },
 
         tooltipAnchor: function() {
