@@ -486,6 +486,7 @@
                     var modelOptions = filterShapeDataItem(model || this.options.dataItem);
 
                     if (model) {
+                        this._template();
                         this.redraw(modelOptions);
                     } else {
                         this.options = deepExtend({}, this.options, modelOptions);
@@ -788,8 +789,8 @@
                         this._rotate();
                     }
 
-                    if (options.content) {
-                        this.content(options.content);
+                    if (shapeOptions.content) {
+                        this.content(shapeOptions.content);
                     }
                 }
             },
@@ -987,6 +988,7 @@
                             this.target(new Point(options.toX, options.toY));
                         }
 
+                        this._template();
                         this.redraw(this.options);
                     } else {
                         this.options = deepExtend({}, options, this.options);
