@@ -202,7 +202,7 @@
                 }
             });
 
-            gradientTest();
+            //gradientTest();
 
             function gradientTest() {
                 var circleGeometry = new Circle(Point.create(200, 200), 100);
@@ -429,6 +429,16 @@
                 };
             }
 
+pathArcTest();
+
+function pathArcTest() {
+    var path = new Path();
+    path.moveTo(200, 100);      
+ 
+    path.arc(30, 180, 100, 100);
+    surface.draw(path);
+}
+            
             //arcTransformTest();
             function arcTransformTest() {
                 arcGeometry = new geometry.Arc(Point.create(200, 500), {

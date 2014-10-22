@@ -650,6 +650,35 @@
             return this;
         },
 
+        arc: function(startAngle, endAngle, radiusX, radiusY, anticlockwise) {
+            if (this.segments.length > 0) {
+                var lastSegment = last(this.segments);
+                var anchor = lastSegment.anchor();
+                var start = util.rad(startAngle);
+                var center = new Point(anchor.x - radiusX * math.cos(start),
+                    anchor.y - radiusY * math.sin(start));
+                var arc = new g.Arc(center, {
+                    startAngle: startAngle,
+                    endAngle: endAngle,
+                    radiusX: radiusX,
+                    radiusY: radiusY,
+                    anticlockwise: anticlockwise
+                });
+
+                this._addArcSegments(arc);
+            }
+        },
+
+        _addArcSegments: function(arc) {
+            this.suspend();
+            var curvePoints = arc.curvePoints();
+            for (var i = 1; i < curvePoints.length; i+=3) {
+                this.curveTo(curvePoints[i], curvePoints[i + 1], curvePoints[i + 2]);
+            }
+            this.resume();
+            this.geometryChange();
+        },
+
         close: function() {
             this.options.closed = true;
             this.geometryChange();
