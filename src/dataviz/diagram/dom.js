@@ -3377,13 +3377,12 @@
             id: "id",
 
             fields: {
-                id: { type: "number" },
+                id: { type: "number", editable: false },
                 text: { type: "string" },
                 width: { type: "number" },
                 height: { type: "number" },
                 x: { type: "number" },
-                y: { type: "number" },
-                type: { type: "string" }
+                y: { type: "number" }
             }
         });
 
@@ -3391,11 +3390,10 @@
             id: "id",
 
             fields: {
-                id: { type: "number" },
+                id: { type: "number", editable: false },
                 text: { type: "string" },
                 from: { type: "number" },
                 to: { type: "number" },
-                type: { type: "string" },
                 fromX: { type: "number" },
                 fromY: { type: "number" },
                 toX: { type: "number" },
