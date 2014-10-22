@@ -4884,38 +4884,27 @@ var __meta__ = {
             }
         },
 
-        highlightOverlay: function(view) {
-            var element = this,
-                options = element.options,
-                highlight = options.highlight,
-                borderWidth = highlight.border.width,
-                markers = options.markers,
-                center = element.box.center(),
-                radius = markers.size / 2 - borderWidth / 2,
-                borderColor =
-                    highlight.border.color ||
-                    new Color(markers.background).brightness(BAR_BORDER_BRIGHTNESS).toHex();
+        toggleHighlight: function(show) {
+            var overlay = this._overlay;
+            var highlight = this.options.highlight;
+            if (!overlay) {
+                overlay = this._overlay = this.marker.getElement();
 
-            return view.createCircle(center, radius, {
-                id: null,
-                data: { modelId: element.modelId },
-                stroke: borderColor,
-                strokeWidth: borderWidth,
-                strokeOpacity: highlight.border.opacity
-            });
-        },
+                var markers = this.options.markers;
+                var border = highlight.border;
+                overlay.options.set("stroke", {
+                    color: border.color ||
+                        new Color(markers.background).brightness(BAR_BORDER_BRIGHTNESS).toHex(),
+                    width: border.width,
+                    opacity:border.opacity
+                });
 
-        toggleHighlight: function(view) {
-            var element = this,
-                opacity = element.options.highlight.opacity;
+                this.visual.append(overlay);
+            }
 
-            element.highlighted = !element.highlighted;
-
-            var marker = element.marker.getViewElements(view, {
-                fillOpacity: element.highlighted ? opacity : undefined
-            })[0];
-
-            marker.refresh(getElement(this.id));
+            if (highlight && highlight.visible) {
+                overlay.visible(show);
+            }
         }
     });
 
