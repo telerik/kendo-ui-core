@@ -9322,6 +9322,7 @@
       },
       {
         "text": "AngularJS",
+        "mobile": true,
         "new": true,
         "disableInMobile": true,
         "url": "mobile-tabstrip/angular",
