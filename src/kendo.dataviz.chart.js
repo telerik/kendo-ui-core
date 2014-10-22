@@ -3092,10 +3092,8 @@ var __meta__ = {
         },
 
         createVisual: function() {
-            ChartElement.fn.createVisual.call(this);
-
-            var box = this.box;
-            if (this.visible !== false && box.width() > 0 && box.height() > 0) {
+            if (this.visible !== false) {
+                ChartElement.fn.createVisual.call(this);
                 this.createRect();
             }
         },
