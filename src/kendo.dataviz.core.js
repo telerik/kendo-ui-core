@@ -2436,7 +2436,7 @@ var __meta__ = {
             vAlign: CENTER
         },
 
-        createVisual: function(view) {
+        getElement: function() {
             var marker = this,
                 options = marker.options,
                 type = options.type,
@@ -2447,8 +2447,6 @@ var __meta__ = {
                 halfWidth = box.width() / 2,
                 points,
                 i;
-
-            ChartElement.fn.createVisual.call(this);
 
             if (!options.visible || !marker.hasBox())  {
                 return;
@@ -2485,7 +2483,15 @@ var __meta__ = {
                 );
             }
 
-            this.visual.append(element);
+            return element;
+        },
+
+        createVisual: function() {
+            ChartElement.fn.createVisual.call(this);
+            var element = this.getElement()
+            if (element) {
+                this.visual.append(element);
+            }
         }
     });
 
