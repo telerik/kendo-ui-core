@@ -218,12 +218,6 @@ var __meta__ = {
                         whiskers: {
                             width: 2
                         },
-                        mean: {
-                            width: 2
-                        },
-                        median: {
-                            width: 2
-                        },
                         border: {
                             width: 2,
                             opacity: 1

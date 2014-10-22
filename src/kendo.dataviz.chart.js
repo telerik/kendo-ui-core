@@ -6180,7 +6180,6 @@ var __meta__ = {
         },
 
         drawLines: function(container, options, linePoints, lineOptions) {
-            var options = this.options;
             var lineStyle = {
                 stroke: {
                     color: lineOptions.color || this.color,
@@ -6229,9 +6228,14 @@ var __meta__ = {
 
             var overlay = this._overlay;
             if (!overlay) {
+                var normalColor = this.color;
+                this.color = highlight.color || this.color;
+
                 overlay = this._overlay = this.mainVisual(
                     deepExtend({}, this.options, highlight)
                 );
+
+                this.color = normalColor;
 
                 this.visual.append(overlay);
             }
@@ -6714,25 +6718,19 @@ var __meta__ = {
 
             point.box = whiskerSlot.clone().wrap(boxSlot);
 
-            if (!point.outliers) {
-                point.renderOutliers();
-            }
-
-            point.reflowOutliers();
             point.reflowNote();
         },
 
-        renderOutliers: function() {
+        renderOutliers: function(options) {
             var point = this,
-                options = point.options,
                 markers = options.markers || {},
                 value = point.value,
                 outliers = value.outliers || [],
                 valueAxis = point.owner.seriesValueAxis(options),
                 outerFence = math.abs(value.q3 - value.q1) * 3,
-                markersBorder, markerBox, element, outlierValue, i;
+                markersBorder, markerBox, shape, outlierValue, i;
 
-            point.outliers = [];
+            var elements = [];
 
             for (i = 0; i < outliers.length; i++) {
                 outlierValue = outliers[i];
@@ -6752,7 +6750,7 @@ var __meta__ = {
                     }
                 }
 
-                element = new ShapeElement({
+                shape = new ShapeElement({
                     type: markers.type,
                     width: markers.size,
                     height: markers.size,
@@ -6762,15 +6760,17 @@ var __meta__ = {
                     opacity: markers.opacity
                 });
 
-                element.value = outlierValue;
+                shape.value = outlierValue;
 
-                point.outliers.push(element);
+                elements.push(shape);
             }
+
+            this.reflowOutliers(elements);
+            return elements;
         },
 
-        reflowOutliers: function() {
+        reflowOutliers: function(outliers) {
             var valueAxis = this.owner.seriesValueAxis(this.options);
-            var outliers = this.outliers;
             var centerX = this.box.center().x;
 
             for (var i = 0; i < outliers.length; i++) {
@@ -6785,7 +6785,7 @@ var __meta__ = {
         mainVisual: function(options) {
             var group = Candlestick.fn.mainVisual.call(this, options);
 
-            var outliers = this.outliers;
+            var outliers = this.renderOutliers(options);
             for (var i = 0; i < outliers.length; i++) {
                 var element = outliers[i].getElement();
                 if (element) {
@@ -6797,9 +6797,9 @@ var __meta__ = {
         },
 
         createLines: function(container, options) {
-            this.drawLines(container, options, this.whiskerPoints, this.options.line);
-            this.drawLines(container, options, this.medianPoints, this.options.median);
-            this.drawLines(container, options, this.meanPoints, this.options.mean);
+            this.drawLines(container, options, this.whiskerPoints, options.line);
+            this.drawLines(container, options, this.medianPoints, options.median);
+            this.drawLines(container, options, this.meanPoints, options.mean);
         },
 
         getBorderColor: function() {
