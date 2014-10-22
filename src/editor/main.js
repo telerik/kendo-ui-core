@@ -868,6 +868,15 @@
     // Exports ================================================================
 
     var bomFill = browser.msie && browser.version < 9 ? '\ufeff' : '';
+    var emptyElementContent = '<br class="k-br" />';
+
+    if (browser.msie) {
+        if (browser.version < 10) {
+            emptyElementContent = '\ufeff';
+        } else if (browser.version < 11) {
+            emptyElementContent = ' '; // allow up/down arrows to focus empty rows
+        }
+    }
 
     extend(kendo.ui, {
         editor: {
@@ -876,7 +885,7 @@
             Tool: Tool,
             FormatTool: FormatTool,
             _bomFill: bomFill,
-            emptyElementContent: (browser.msie && browser.version < 11) ? '\ufeff' : '<br class="k-br" />'
+            emptyElementContent: emptyElementContent
         }
     });
 
