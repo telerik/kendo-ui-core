@@ -265,14 +265,25 @@
         equal(grid.thead.find("th").text(), "bar");
     });
 
-    test("thead initialization when there are nested g thead > tr > th", function() {
+    test("thead initialization when there are nested thead > tr > th", function() {
         var element = $("<table><thead><tr><th>bar</th></tr></thead><tbody><tr><td><table><thead><tr><th/></tr></thead></table></td></tr></tbody></table>").appendTo(QUnit.fixture);
         var grid = new Grid(element, { columns: [ { field: "foo" } ] });
 
         equal(grid.wrapper.find("thead").length, 2);
         equal(grid.thead.find("tr").length, 1);
-        equal(grid.thead.find("th").length, 1);
+        equal(grid.thead.find("th.k-header").length, 1);
         equal(grid.thead.find("th").text(), "bar");
+    });
+
+    test("thead initialization when there are multiple header rows", function() {
+        var element = $("<table><thead><tr><th>bar</th></tr><tr><th>baz</th></tr></thead></table>").appendTo(QUnit.fixture);
+        var grid = new Grid(element, { columns: [ { field: "foo" } ] });
+
+        equal(grid.wrapper.find("thead").length, 1);
+        equal(grid.thead.find("tr").length, 2);
+        equal(grid.thead.find("th").length, 2);
+        equal(grid.thead.find("th").first().text(), "bar");
+        equal(grid.thead.find("th").last().text(), "baz");
     });
 
     test("thead initialization when there is no thead but th exists", function() {

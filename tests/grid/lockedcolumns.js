@@ -177,6 +177,7 @@
         $('<div class="k-grid-header"><div class="k-grid-header-wrap"><table><tr>' +
             '<th class="k-group-cell"></th><th>foo</th><th>bar</th><th>baz</th></div></div>')
             .appendTo(div);
+
         var grid = setup({
             columns: [
                 { field: "foo", locked: true },

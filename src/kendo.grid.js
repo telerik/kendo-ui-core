@@ -5088,6 +5088,7 @@ var __meta__ = {
                 length,
                 html = "",
                 thead = that.table.find(">thead"),
+                hasTHead = that.element.find("thead:first").length > 0,
                 tr,
                 text,
                 th;
@@ -5097,10 +5098,11 @@ var __meta__ = {
             }
 
             if (that.lockedHeader && that.thead) {
-                tr = that.thead.find("tr:has(th):first").html("");
+                tr = that.thead.find("tr:has(th):not(.k-filter-row)").html("");
 
                 that._removeLockedContainers();
-
+            } else if (hasTHead) {
+                tr = that.element.find("thead:first tr:has(th):not(.k-filter-row)");
             } else {
                 tr = that.element.find("tr:has(th):first");
             }
