@@ -1,0 +1,95 @@
+<div kendo-mobile-application ng-app="kendoDemo" ng-controller="appController" k-options="appOptions">
+    <kendo-mobile-view k-layout="'layout'" id="layoutView">
+        <p>
+            This examples shows the platform specific layouts. Change the OS and reload the page to see how the header and footer changes.
+        </p>
+    </kendo-mobile-view>
+
+    <kendo-mobile-layout k-id="'layout'" k-platform="'ios'">
+        <kendo-mobile-header>
+            <kendo-mobile-nav-bar>
+                <kendo-view-title>iOS Platform</kendo-view-title>
+            </kendo-mobile-nav-bar>
+        </kendo-mobile-header>
+        <kendo-mobile-footer>
+            <kendo-mobile-tab-strip>
+                <a k-icon="'contacts'">Profile
+                </a><a k-icon="'settings'">Settings</a>
+            </kendo-mobile-tab-strip>
+        </kendo-mobile-footer>
+    </kendo-mobile-layout>
+
+    <kendo-mobile-layout k-id="'layout'" k-platform="'android'">
+        <kendo-mobile-header>
+            <kendo-mobile-nav-bar>
+                <kendo-view-title>Android  Platform</kendo-view-title>
+            </kendo-mobile-nav-bar>
+        </kendo-mobile-header>
+
+        <kendo-mobile-footer>
+            <kendo-mobile-tab-strip>
+                <a k-icon="history">Sales</a>
+                <a k-icon="settings">Settings</a>
+            </kendo-mobile-tab-strip>
+        </kendo-mobile-footer>
+    </kendo-mobile-layout>
+
+    <kendo-mobile-layout k-id="'layout'" k-platform="'blackberry'">
+        <kendo-mobile-header>
+            <kendo-mobile-nav-bar>
+                <kendo-view-title>BlackBerry platform</kendo-view-title>
+                </kendo-mobile-nav-bar>
+        </kendo-mobile-header>
+
+        <kendo-mobile-footer>
+            <kendo-mobile-tab-strip>
+                <a k-icon="'favorites'">Rating</a>
+                <a k-icon="'settings'">Settings</a>
+            </kendo-mobile-tab-strip>
+        </kendo-mobile-footer>
+    </kendo-mobile-layout>
+
+    <kendo-mobile-layout k-id="'layout'" k-platform="'wp'">
+        <kendo-mobile-header>
+            <kendo-mobile-nav-bar>
+                <kendo-view-title>Windows Phone platform</kendo-view-title>
+            </kendo-mobile-nav-bar>
+        </kendo-mobile-header>
+
+        <kendo-mobile-footer>
+            <kendo-mobile-tab-strip>
+                <a k-icon="'home'">Home</a>
+                <a k-icon="'globe'">Global</a>
+            </kendo-mobile-tab-strip>
+        </kendo-mobile-footer>
+    </kendo-mobile-layout>
+</div>
+
+<script>
+    angular.module("kendoDemo", [ 'kendo.directives' ]).controller("appController", function($scope) {
+        var mobileTheme = window.kendoMobileTheme;
+
+        var options = { hideAddressBar: false };
+
+        if (mobileTheme === "flat") {
+            options.skin = "flat";
+            } else {
+            options.platform = mobileTheme;
+        }
+
+        $scope.appOptions = options;
+    });
+</script>
+
+<style scoped>
+    #layoutView .km-view-title
+    {
+        visibility: inherit;
+    }
+
+    .km-android #layoutView .km-view-title
+    {
+        display: block;
+        position: static;
+    }
+</style>

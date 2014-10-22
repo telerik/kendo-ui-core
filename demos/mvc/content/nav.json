@@ -9611,6 +9611,24 @@
         "meta": {
             "kendo-ui": "This sample shows how Kendo UI Mobile Layout is used to share headers and footers between multiple views on different mobile devices."
         }
+      },
+      {
+        "text": "AngularJS",
+        "mobile": true,
+        "new": true,
+        "disableInMobile": true,
+        "url": "mobile-layout/angular",
+        "title": {
+            "kendo-ui": "AngularJS support in Kendo UI Layout"
+        },
+        "meta": {
+            "kendo-ui": "AngularJS directive support for Kendo UI Layout"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
       }
     ],
     "category": "Mobile"
