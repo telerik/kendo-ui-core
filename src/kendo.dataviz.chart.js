@@ -6137,13 +6137,23 @@ var __meta__ = {
         createVisual: function() {
             ChartElement.fn.createVisual.call(this);
 
-            this.createBody();
-            this.createLines();
+            this.visual.append(
+                this.mainVisual(this.options)
+            );
+
             this.createOverlay();
         },
 
-        createBody: function() {
-            var options = this.options;
+        mainVisual: function(options) {
+            var group = new draw.Group();
+
+            this.createBody(group, options);
+            this.createLines(group, options);
+
+            return group;
+        },
+
+        createBody: function(container, options) {
             var body = draw.Path.fromRect(this.realBody.toRect(), {
                 fill: {
                     color: this.color,
@@ -6162,14 +6172,14 @@ var __meta__ = {
             }
 
             dataviz.alignPathToPixel(body);
-            this.visual.append(body);
+            container.append(body);
         },
 
-        createLines: function() {
-            this.drawLines(this.linePoints, this.options.line);
+        createLines: function(container, options) {
+            this.drawLines(container, options, this.linePoints, options.line);
         },
 
-        drawLines: function(linePoints, lineOptions) {
+        drawLines: function(container, options, linePoints, lineOptions) {
             var options = this.options;
             var lineStyle = {
                 stroke: {
@@ -6184,7 +6194,7 @@ var __meta__ = {
             for (var i = 0; i < linePoints.length; i++) {
                 var line = draw.Path.fromPoints(linePoints[i], lineStyle);
                 dataviz.alignPathToPixel(line);
-                this.visual.append(line);
+                container.append(line);
             }
         },
 
@@ -6202,7 +6212,7 @@ var __meta__ = {
             return borderColor;
         },
 
-        createOverlay: function(view) {
+        createOverlay: function() {
             var overlay = draw.Path.fromRect(this.box.toRect(), {
                 fill: {
                     color: WHITE,
@@ -6214,32 +6224,21 @@ var __meta__ = {
             this.visual.append(overlay);
         },
 
-        highlightOverlay: function(view, options) {
-            var point = this,
-                pointOptions = point.options,
-                highlight = pointOptions.highlight,
-                border = highlight.border,
-                borderColor = point.getBorderColor(),
-                line = highlight.line,
-                data = { data: { modelId: point.modelId } },
-                rectStyle = deepExtend({}, data, options, {
-                    stroke: borderColor,
-                    strokeOpacity: border.opacity,
-                    strokeWidth: border.width
-                }),
-                lineStyle = deepExtend({}, data, {
-                    stroke: line.color || borderColor,
-                    strokeWidth: line.width,
-                    strokeOpacity: line.opacity,
-                    strokeLineCap: "butt"
-                }),
-                group = view.createGroup();
+        toggleHighlight: function(show) {
+            var highlight = this.options.highlight;
 
-            group.children.push(view.createRect(point.realBody, rectStyle));
-            group.children.push(view.createPolyline(point.lowHighLinePoints[0], false, lineStyle));
-            group.children.push(view.createPolyline(point.lowHighLinePoints[1], false, lineStyle));
+            var overlay = this._overlay;
+            if (!overlay) {
+                overlay = this._overlay = this.mainVisual(
+                    deepExtend({}, this.options, highlight)
+                );
 
-            return group;
+                this.visual.append(overlay);
+            }
+
+            if (highlight && highlight.visible) {
+                overlay.visible(show);
+            }
         },
 
         tooltipAnchor: function() {
@@ -6765,7 +6764,6 @@ var __meta__ = {
 
                 element.value = outlierValue;
 
-                point.append(element);
                 point.outliers.push(element);
             }
         },
@@ -6784,10 +6782,24 @@ var __meta__ = {
             }
         },
 
-        createLines: function() {
-            this.drawLines(this.whiskerPoints, this.options.line);
-            this.drawLines(this.medianPoints, this.options.median);
-            this.drawLines(this.meanPoints, this.options.mean);
+        mainVisual: function(options) {
+            var group = Candlestick.fn.mainVisual.call(this, options);
+
+            var outliers = this.outliers;
+            for (var i = 0; i < outliers.length; i++) {
+                var element = outliers[i].getElement();
+                if (element) {
+                    group.append(element);
+                }
+            }
+
+            return group;
+        },
+
+        createLines: function(container, options) {
+            this.drawLines(container, options, this.whiskerPoints, this.options.line);
+            this.drawLines(container, options, this.medianPoints, this.options.median);
+            this.drawLines(container, options, this.meanPoints, this.options.mean);
         },
 
         getBorderColor: function() {
@@ -6796,20 +6808,6 @@ var __meta__ = {
             }
 
             return Candlestick.getBorderColor.call(this);
-        },
-
-        highlightOverlay: function(view) {
-            var point = this,
-                group = view.createGroup();
-
-            group.children = point.render(view, deepExtend({},
-                point.options.highlight, {
-                border: {
-                    color: point.getBorderColor()
-                }
-            }));
-
-            return group;
         }
     });
     deepExtend(BoxPlot.fn, PointEventsMixin);
