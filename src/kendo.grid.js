@@ -416,13 +416,13 @@ var __meta__ = {
         },
         excel: {
             text: "Export to Excel",
-            imageClass: "k-excel",
+            imageClass: "k-i-excel",
             className: "k-grid-excel",
             iconClass: "k-icon"
         },
         pdf: {
             text: "Export to PDF",
-            imageClass: "k-pdf",
+            imageClass: "k-i-pdf",
             className: "k-grid-pdf",
             iconClass: "k-icon"
         }
