@@ -1610,6 +1610,8 @@
                     }
                 }
 
+                that._angle = that.shapes.length == 1 ? that.shapes[0].rotate().angle : 0;
+
                 that._positions();
                 that.refreshBounds();
                 that.refresh();
@@ -1725,6 +1727,7 @@
                             newBounds = bounds.clone();
                             newBounds.scale(scaleX, scaleY, staticPoint, this._innerBounds.center(), shape.rotate().angle);
                             var newCenter = newBounds.center(); // fixes the new rotation center.
+                            newCenter.rotate(bounds.center(), -this._angle);
                             newBounds = new Rect(newCenter.x - newBounds.width / 2, newCenter.y - newBounds.height / 2, newBounds.width, newBounds.height);
                         }
                         if (newBounds.width >= shape.options.minWidth && newBounds.height >= shape.options.minHeight) { // if we up-size very small shape
