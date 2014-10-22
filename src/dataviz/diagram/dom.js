@@ -3165,6 +3165,7 @@
                     for (i = 0; i < items.length; i++) {
                         item = items[i];
                         if (inactiveShapeItem.uid === item.uid) {
+                            this._addDataItem(item);
                             isActive = true;
                             break;
                         }
@@ -3199,7 +3200,7 @@
                 } else if (e.action === "add") {
                     this._inactiveConnectionItems = this._inactiveConnectionItems.concat(e.items);
                 } else if (e.action === "sync") {
-                    this._syncShapes(e.items);
+                    this._syncConnections(e.items);
                 } else if (e.action === "itemchange") {
                     if (this._shouldRefresh) {
                         this._updateConnections(e.items);
@@ -3224,6 +3225,7 @@
                     for (i = 0; i < items.length; i++) {
                         item = items[i];
                         if (inactiveConnectionDataMap.uid === item.uid) {
+                            this._addConnectionDataItem(item);
                             isActive = true;
                             break;
                         }
@@ -3260,26 +3262,29 @@
                 var length = connections.length;
 
                 for (var i = 0; i < length; i++) {
-                    var conn = connections[i];
+                    var dataItem = connections[i];
+                    this._addConnectionDataItem(dataItem);
+                }
+            },
 
-                    if (!this._connectionsDataMap[conn.id]) {
-                        var from = this._validateConnector(conn.from);
-                        if (!defined(from) || from === null) {
-                            from = new Point(conn.fromX, conn.fromY);
-                        }
+            _addConnectionDataItem: function(dataItem) {
+                if (!this._connectionsDataMap[dataItem.id]) {
+                    var from = this._validateConnector(dataItem.from);
+                    if (!defined(from) || from === null) {
+                        from = new Point(dataItem.fromX, dataItem.fromY);
+                    }
 
-                        var to = this._validateConnector(conn.to);
-                        if (!defined(to) || to === null) {
-                            to = new Point(conn.toX, conn.toY);
-                        }
+                    var to = this._validateConnector(dataItem.to);
+                    if (!defined(to) || to === null) {
+                        to = new Point(dataItem.toX, dataItem.toY);
+                    }
 
-                        if (defined(from) && defined(to)) {
-                            var options = deepExtend({}, this.options.connectionDefaults);
-                            options.dataItem = conn;
-                            var connection = new Connection(from, to, options);
-                            this._connectionsDataMap[conn.id] = connection;
-                            this.addConnection(connection);
-                        }
+                    if (defined(from) && defined(to)) {
+                        var options = deepExtend({}, this.options.connectionDefaults);
+                        options.dataItem = dataItem;
+                        var connection = new Connection(from, to, options);
+                        this._connectionsDataMap[dataItem.id] = connection;
+                        this.addConnection(connection);
                     }
                 }
             },
