@@ -1859,7 +1859,7 @@ var __meta__ = {
                     stroke: {
                         width: line.width,
                         color: line.color,
-                        dashType: line.dashType,
+                        dashType: line.dashType
                     }
 
                     /* TODO
@@ -1989,7 +1989,6 @@ var __meta__ = {
                                 lineOptions.position = pos;
                                 container.append(createAxisGridLine(lineOptions, gridLine));
 
-                                rendered = true;
                                 majorTicks.push(pos);
                             }
                         }

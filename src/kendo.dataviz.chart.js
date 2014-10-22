@@ -4549,12 +4549,11 @@ var __meta__ = {
             var errorBar = this,
                 options = errorBar.options,
                 parent = errorBar.parent,
-                line = options.line,
                 lineOptions = {
                     stroke: {
                         color: options.color,
-                        width: line.width,
-                        dashType: line.dashType
+                        width: options.line.width,
+                        dashType: options.line.dashType
                     }
                 },
                 linePoints = errorBar.linePoints;
@@ -4829,7 +4828,6 @@ var __meta__ = {
                 this.visual.append(overlay);
             }
 
-            var highlight = this.options.highlight;
             if (highlight && highlight.visible) {
                 overlay.visible(show);
             }
@@ -10439,7 +10437,7 @@ var __meta__ = {
         },
 
         hide: function() {
-            this.line.visible(false)
+            this.line.visible(false);
 
             if (this.tooltip) {
                 this.tooltip.hide();
