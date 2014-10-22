@@ -9390,6 +9390,24 @@
         "meta": {
             "kendo-ui": "This example shows which transition needs to be applied when navigating in Kendo UI Mobile Application."
         }
+      },
+      {
+        "text": "AngularJS",
+        "mobile": true,
+        "new": true,
+        "disableInMobile": true,
+        "url": "application/angular",
+        "title": {
+            "kendo-ui": "AngularJS support in Kendo UI Mobile Application"
+        },
+        "meta": {
+            "kendo-ui": "AngularJS directive support for Kendo UI Mobile Application"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
       }
     ],
     "category": "Mobile"
