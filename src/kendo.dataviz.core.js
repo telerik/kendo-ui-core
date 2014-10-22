@@ -754,10 +754,13 @@ var __meta__ = {
 
         renderVisual: function() {
             this.createVisual();
-            this.visual.chartElement = this;
 
-            if (this.visual && this.parent) {
-                this.parent.appendVisual(this.visual);
+            if (this.visual) {
+                this.visual.chartElement = this;
+
+                if (this.parent) {
+                    this.parent.appendVisual(this.visual);
+                }
             }
 
             var children = this.children;
@@ -777,9 +780,11 @@ var __meta__ = {
         },
 
         createAnimation: function() {
-            this.animation = draw.Animation.create(
-                this.visual, this.options.animation
-            );
+            if (this.visual) {
+                this.animation = draw.Animation.create(
+                    this.visual, this.options.animation
+                );
+            }
         },
 
         appendVisual: function(childVisual) {
