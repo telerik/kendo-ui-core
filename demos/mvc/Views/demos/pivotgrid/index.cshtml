@@ -9,13 +9,14 @@
 
                     var pivotgrid = $("#pivotgrid").kendoPivotGrid({
                         filterable: true,
+                        sortable: true,
                         columnWidth: 200,
                         height: 580,
                         dataSource: {
                             type: "xmla",
                             columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Product].[Category]" } ],
                             rows: [{ name: "[Geography].[City]" }],
-//                            measures: ["[Measures].[Internet Sales Amount]"],
+                            measures: ["[Measures].[Internet Sales Amount]"],
                             transport: {
                                 connection: {
                                     catalog: "Adventure Works DW 2008R2",

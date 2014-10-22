@@ -53,6 +53,7 @@
 
                 var pivot = $("#pivotgrid").kendoPivotGrid({
                     filterable: true,
+                    sortable: true,
                     dataSource: {
                         type: "xmla",
                         columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
