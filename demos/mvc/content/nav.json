@@ -9542,6 +9542,24 @@
           "!jsp",
           "!php"
         ]
+      },
+      {
+        "text": "AngularJS",
+        "mobile": true,
+        "new": true,
+        "disableInMobile": true,
+        "url": "mobile-view/angular",
+        "title": {
+            "kendo-ui": "AngularJS support in Kendo UI Mobile View"
+        },
+        "meta": {
+            "kendo-ui": "AngularJS directive support for Kendo UI Mobile View"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
       }
     ],
     "category": "Mobile"

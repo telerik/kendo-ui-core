@@ -1,0 +1,12 @@
+<div kendo-mobile-application ng-app="kendoDemo">
+    <kendo-mobile-view ng-controller="main">
+        {{hello}}
+    </kendo-mobile-view>
+</div>
+
+<script>
+    angular.module("kendoDemo", [ "kendo.directives" ])
+        .controller("main", function($scope) {
+            $scope.hello = "Kendo UI Loves AngularJS!";
+        });
+</script>
