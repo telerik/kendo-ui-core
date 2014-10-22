@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.dataviz.chart" ], f);
+    define([ "./kendo.dataviz.chart", "./kendo.drawing", "./kendo.geometry" ], f);
 })(function(){
 
 var __meta__ = {
@@ -17,6 +17,8 @@ var __meta__ = {
         kendo = window.kendo,
         deepExtend = kendo.deepExtend,
 
+        draw = kendo.drawing,
+        geom = kendo.geometry,
         dataviz = kendo.dataviz,
         AreaSegment = dataviz.AreaSegment,
         Axis = dataviz.Axis,

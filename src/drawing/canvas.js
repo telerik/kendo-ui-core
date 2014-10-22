@@ -29,7 +29,7 @@
         d = kendo.drawing,
         BaseNode = d.BaseNode,
         Color = kendo.Color,
-        Group = d.Group,        
+        Group = d.Group,
         Path = d.Path;
 
     // Constants ==============================================================
