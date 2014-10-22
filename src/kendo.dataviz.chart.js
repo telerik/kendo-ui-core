@@ -465,7 +465,8 @@ var __meta__ = {
                     surface.destroy();
                 }
 
-                this.surface = draw.Surface.create(this.element, {
+                var wrap = this._surfaceWrap();
+                this.surface = draw.Surface.create(wrap, {
                     type: this.options.renderAs
                 });
             } else {
@@ -473,10 +474,16 @@ var __meta__ = {
             }
         },
 
+        _surfaceWrap: function() {
+            return this.element;
+        },
+
         _redraw: function() {
             var chart = this,
                 model = chart._getModel(),
                 view;
+
+            chart._destroyView();
 
             chart._model = model;
             chart._plotArea = model._plotArea;
@@ -527,11 +534,6 @@ var __meta__ = {
             }
 
             return tooltip;
-        },
-
-        _renderView: function() {
-            var chart = this;
-            return chart._view.renderTo(chart.element[0]);
         },
 
         _applyDefaults: function(options, themeOptions) {
@@ -1366,17 +1368,11 @@ var __meta__ = {
         _destroyView: function() {
             var chart = this,
                 model = chart._model,
-                view = chart._view,
                 selections = chart._selections;
 
             if (model) {
                 model.destroy();
                 chart._model = null;
-            }
-
-            if (view) {
-                view.destroy();
-                chart._view = null;
             }
 
             if (selections) {
@@ -1394,8 +1390,6 @@ var __meta__ = {
             if (chart._highlight) {
                 chart._highlight.destroy();
             }
-
-            chart._viewElement = null;
         }
     });
     deepExtend(Chart.fn, dataviz.ExportMixin);

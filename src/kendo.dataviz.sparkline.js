@@ -164,7 +164,10 @@ var __meta__ = {
                 width = chart._initialWidth,
                 stage = chart.stage;
 
-            chart.stage[0].innerHTML = "&nbsp;";
+            chart.stage.children().hide();
+
+            var space = $("<span>&nbsp;</span>");
+            chart.stage.append(space);
 
             options = deepExtend({
                 width: width ? width : chart._autoWidth(),
@@ -179,6 +182,11 @@ var __meta__ = {
                 width: options.width,
                 height: options.height
             });
+
+            space.remove();
+
+            chart.stage.children().show();
+            chart.surface.resize();
 
             return options;
         },
@@ -198,10 +206,9 @@ var __meta__ = {
             return tooltip;
         },
 
-        _renderView: function() {
-            var chart = this;
-            chart.element.empty().append(chart.stage);
-            return chart._view.renderTo(chart.stage[0]);
+        _surfaceWrap: function() {
+            console.log(this.stage)
+            return this.stage;
         },
 
         _autoWidth: function() {
