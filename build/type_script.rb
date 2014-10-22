@@ -8,7 +8,7 @@ TYPE_SCRIPT = ERB.new(File.read("build/codegen/lib/type_script/kendo.ts.erb"), 0
 module CodeGen::TypeScript
     EXCLUDE = FileList[
         "docs/api/javascript/{kendo,class,router,view,layout,observable}.md",
-        'docs/api/javascript/data/{node,binder,datasource,observableobject,observablearray,model,pivotdatasource,ganttdatasource,gantttask,ganttdependencydatasource,ganttdependency,hierarchicaldatasource,schedulerdatasource,schedulerevent}.md',
+        'docs/api/javascript/data/{node,binder,datasource,observableobject,observablearray,model,treelistmodel,treelistdatasource,pivotdatasource,ganttdatasource,gantttask,ganttdependencydatasource,ganttdependency,hierarchicaldatasource,schedulerdatasource,schedulerevent}.md',
         'docs/api/javascript/ui/{widget,draggable,droptarget,droptargetarea}.md',
         'docs/api/javascript/mobile/application.md',
         'docs/api/javascript/mobile/ui/mobilewidget.md',

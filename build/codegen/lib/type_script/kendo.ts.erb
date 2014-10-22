@@ -601,6 +601,12 @@ declare module kendo.data {
         toOccurrence(options: any): SchedulerEvent;
     }
 
+    class TreeListModel extends Model {
+    }
+
+    class TreeListDataSource extends DataSource {
+    }
+
     class GanttTask extends Model {
         constructor(data?: any);
         init(data?: any): void;
