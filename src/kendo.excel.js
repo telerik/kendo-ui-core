@@ -68,14 +68,15 @@ kendo.ExcelExporter = kendo.Class.extend({
             return null;
         }
 
-        var groups = this.dataSource.group();
+        var depth = this._depth();
 
         return {
-            from: groups.length,
-            to: groups.length + this.columns.length - 1
+            from: depth,
+            to: depth + this.columns.length - 1
         };
     },
     _dataRows: function(dataItems, level) {
+        var depth = this._depth();
         var rows = $.map(dataItems, $.proxy(function(dataItem) {
             if (this.dataSource.level) {
                 level = this.dataSource.level(dataItem) + 1;
@@ -88,9 +89,8 @@ kendo.ExcelExporter = kendo.Class.extend({
                 };
             });
 
-            var groups = this.dataSource.group();
-
-            if (groups.length && dataItem.items) {
+            // grouped
+            if (depth && dataItem.items) {
                 var column = $.grep(this.columns, function(column) {
                     return column.field == dataItem.field;
                 })[0];
@@ -98,7 +98,7 @@ kendo.ExcelExporter = kendo.Class.extend({
                 var title = column && column.title ? column.title : dataItem.field;
                 var template = column ? column.groupHeaderTemplate : null;
                 var value = title + ": " + dataItem.value;
-                var group = $.extend({}, {
+                var group = $.extend({
                         title: title,
                         field: dataItem.field,
                         value: dataItem.value,
@@ -113,7 +113,7 @@ kendo.ExcelExporter = kendo.Class.extend({
                     value: value,
                     background: "#dfdfdf",
                     color: "#333",
-                    colSpan: this.columns.length + groups.length - level
+                    colSpan: this.columns.length + depth - level
                 } );
 
                 var rows = this._dataRows(dataItem.items, level + 1);
@@ -125,9 +125,13 @@ kendo.ExcelExporter = kendo.Class.extend({
 
                 return rows.concat(this._footer(dataItem, level+1));
             } else {
+                var dataCells = $.map(this.columns, $.proxy(this._cell, this, dataItem));
+
+                dataCells[0].colSpan = depth - level + 1;
+
                 return {
                     type: "data",
-                    cells: cells.concat($.map(this.columns, $.proxy(this._cell, this, dataItem)))
+                    cells: cells.concat(dataCells)
                 };
             }
         }, this));
@@ -174,6 +178,16 @@ kendo.ExcelExporter = kendo.Class.extend({
         var rows = this._dataRows(this.dataSource.view(), 0);
 
         if (this.columns.length) {
+            var headers = $.map(this.columns, function(column) {
+                return {
+                    background: "#7a7a7a",
+                    color: "#fff",
+                    value: column.title || column.field
+                };
+            });
+
+            headers[0].colSpan = this._depth() + 1;
+
             rows.unshift({
                 type: "header",
                 cells: $.map(new Array(groups.length), function() {
@@ -181,13 +195,7 @@ kendo.ExcelExporter = kendo.Class.extend({
                         background: "#7a7a7a",
                         color: "#fff"
                     };
-                }).concat($.map(this.columns, function(column) {
-                    return {
-                        background: "#7a7a7a",
-                        color: "#fff",
-                        value: column.title || column.field
-                    };
-                }))
+                }).concat(headers)
             });
 
             var footer = false;
@@ -264,7 +272,8 @@ kendo.ExcelExporter = kendo.Class.extend({
         return depth;
     },
     _columns: function() {
-        var columns = $.map(new Array(this._depth()), function() {
+        var groups = this.dataSource.group();
+        var columns = $.map(new Array(groups.length), function() {
             return { width: 20 };
         });
 

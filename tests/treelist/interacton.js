@@ -603,7 +603,8 @@
             function(e) {
                 var sheet = e.workbook.sheets[0];
 
-                equal(sheet.columns.length, 4); // 2 cols for data + 2 for levels
+                var headerRow = sheet.rows[0]
+                equal(headerRow.cells[0].colSpan, 3); // 2 for depth + 1 for column
             }
         );
     });
@@ -614,8 +615,12 @@
             function(e) {
                 var sheet = e.workbook.sheets[0];
 
-                var firstRow = sheet.rows[1]
+                var firstRow = sheet.rows[1];
+                var secondRow = sheet.rows[2];
                 equal(firstRow.cells.length, 3);
+                equal(firstRow.cells[1].colSpan, 2);
+                equal(secondRow.cells.length, 4);
+                equal(secondRow.cells[2].colSpan, 1);
             }
         );
     });
