@@ -510,7 +510,7 @@ var __meta__ = {
             }
 
             chart._tooltip = chart._createTooltip();
-            chart._highlight = new Highlight(view, chart._viewElement);
+            chart._highlight = new Highlight(view);
             chart._setupSelection();
         },
 
@@ -9836,7 +9836,7 @@ var __meta__ = {
         BubbleAnimationDecorator = animationDecorator(BUBBLE, BubbleAnimation);
 
     var Highlight = Class.extend({
-        init: function(view, viewElement) {
+        init: function(view) {
             this._points = [];
         },
 
@@ -10719,6 +10719,8 @@ var __meta__ = {
             if (userEvents) {
                 userEvents.destroy();
             }
+
+            this.wrapper.remove();
         },
 
         _rangeEventArgs: function(range) {
