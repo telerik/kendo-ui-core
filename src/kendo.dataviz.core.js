@@ -836,6 +836,23 @@ var __meta__ = {
             }
         },
 
+        closest: function(match) {
+            var element = this;
+            var matched = false;
+
+            while (element && !matched) {
+                matched = match(element);
+
+                if (!matched) {
+                    element = element.parent;
+                }
+            }
+
+            if (matched) {
+                return element;
+            }
+        },
+
         renderComplete: $.noop
     });
 
