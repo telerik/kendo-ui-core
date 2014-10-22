@@ -1977,7 +1977,7 @@
                     connection.options.dataItem = dataItem;
                     connection.updateModel(false);
                     this.connectionsDataSource.sync();
-                    this._connectionsDataMap[connection.options.dataItem.id] = connection;
+                    this._connectionsDataMap[connection.options.dataItem.uid] = connection;
                 }
 
                 return this.addConnection(connection, undoable);
@@ -3199,6 +3199,7 @@
                     this._removeConnections(e.items);
                 } else if (e.action === "add") {
                     this._inactiveConnectionItems = this._inactiveConnectionItems.concat(e.items);
+                    this._addConnections(e.items);
                 } else if (e.action === "sync") {
                     this._syncConnections(e.items);
                 } else if (e.action === "itemchange") {
@@ -3212,7 +3213,7 @@
 
             _removeConnections: function(items) {
                 for (var i = 0; i < items.length; i++) {
-                    this._connectionsDataMap[items[i].id] = null;
+                    this._connectionsDataMap[items[i].uid] = null;
                 }
             },
 
@@ -3243,7 +3244,7 @@
                 for (var i = 0; i < items.length; i++) {
                     var dataItem = items[i];
 
-                    var connection = this._connectionsDataMap[dataItem.id];
+                    var connection = this._connectionsDataMap[dataItem.uid];
                     connection.updateOptionsFromModel(dataItem);
 
                     var from = this._validateConnector(dataItem.from);
@@ -3268,7 +3269,7 @@
             },
 
             _addConnectionDataItem: function(dataItem) {
-                if (!this._connectionsDataMap[dataItem.id]) {
+                if (!this._connectionsDataMap[dataItem.uid]) {
                     var from = this._validateConnector(dataItem.from);
                     if (!defined(from) || from === null) {
                         from = new Point(dataItem.fromX, dataItem.fromY);
@@ -3283,7 +3284,7 @@
                         var options = deepExtend({}, this.options.connectionDefaults);
                         options.dataItem = dataItem;
                         var connection = new Connection(from, to, options);
-                        this._connectionsDataMap[dataItem.id] = connection;
+                        this._connectionsDataMap[dataItem.uid] = connection;
                         this.addConnection(connection);
                     }
                 }
