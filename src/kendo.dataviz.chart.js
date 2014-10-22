@@ -3140,6 +3140,8 @@ var __meta__ = {
 
         toggleHighlight: function(show) {
             var overlay = this._overlay;
+            var highlight = this.options.highlight;
+
             if (!overlay) {
                 overlay = this._overlay = draw.Path.fromRect(this.box.toRect(), {
                     fill: {
@@ -3156,8 +3158,7 @@ var __meta__ = {
                 this.visual.append(overlay);
             }
 
-            var options = this.options.highlight;
-            if (options && options.visible) {
+            if (highlight && highlight.visible) {
                 overlay.visible(show);
             }
         },
@@ -4306,8 +4307,6 @@ var __meta__ = {
 
             bullet.value = value;
             bullet.aboveAxis = bullet.options.aboveAxis;
-            bullet.id = uniqueId();
-            bullet.enableDiscovery();
         },
 
         options: {
@@ -4393,41 +4392,42 @@ var __meta__ = {
             bullet.box = box;
         },
 
-        getViewElements: function(view) {
-            var bullet = this,
-                options = bullet.options,
-                vertical = options.vertical,
-                border = options.border.width > 0 ? {
-                    stroke: options.border.color || options.color,
-                    strokeWidth: options.border.width,
-                    dashType: options.border.dashType
-                } : {},
-                box = bullet.box,
-                rectStyle = deepExtend({
-                    id: bullet.id,
-                    fill: options.color,
-                    fillOpacity: options.opacity,
-                    strokeOpacity: options.opacity,
-                    vertical: options.vertical,
-                    aboveAxis: bullet.aboveAxis,
-                    animation: options.animation,
-                    data: { modelId: bullet.modelId }
-                }, border),
-                elements = [];
+        createVisual: function() {
+            ChartElement.fn.createVisual.call(this);
 
-            if (box.width() > 0 && box.height() > 0) {
-                if (options.overlay) {
-                    rectStyle.overlay = deepExtend({
-                        rotation: vertical ? 0 : 90
-                    }, options.overlay);
-                }
+            var options = this.options;
+            var body = draw.Path.fromRect(this.box.toRect(), {
+                fill: {
+                    color: options.color,
+                    opacity: options.opacity
+                },
+                stroke: null
+            });
 
-                elements.push(view.createRect(box, rectStyle));
+            if (options.border.width > 0) {
+                body.options.set("stroke", {
+                    color: options.border.color || options.color,
+                    width: options.border.width,
+                    dashType: options.border.dashType,
+                    opacity: valueOrDefault(options.border.opacity, options.opacity)
+                });
             }
 
-            append(elements, ChartElement.fn.getViewElements.call(bullet, view));
+            dataviz.alignPathToPixel(body);
+            this.visual.append(body);
+        },
 
-            return elements;
+        createAnimation: function() {
+            var options = this.options;
+
+            deepExtend(options, {
+                animation: {
+                    aboveAxis: this.aboveAxis,
+                    vertical: options.vertical
+                }
+            });
+
+            ChartElement.fn.createAnimation.call(this);
         },
 
         tooltipAnchor: function(tooltipWidth, tooltipHeight) {
@@ -4454,14 +4454,7 @@ var __meta__ = {
             return new Point2D(x, y);
         },
 
-        highlightOverlay: function(view, options){
-            var bullet = this,
-                box = bullet.box;
-
-            options = deepExtend({ data: { modelId: bullet.modelId } }, options);
-
-            return view.createRect(box, options);
-        },
+        toggleHighlight: Bar.fn.toggleHighlight,
 
         formatValue: function(format) {
             var bullet = this;
