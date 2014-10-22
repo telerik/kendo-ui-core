@@ -1437,6 +1437,52 @@
             path.arc(30, 180, 100, 100);
         });
 
+        test("arcTo adds arc curvePoints to path", function() {
+            path.moveTo(400, 300);
+            path.arcTo(new Point(250, 256.7), 100, 50, true, true);
+            var closePoints = function(p1, p2) {
+                close(p1.x, p2.x, 0.1);
+                close(p1.y, p2.y, 0.1);
+            };
+            var expectedArc = new g.Arc([300, 300],{
+                startAngle: 0,
+                endAngle: -120,
+                radiusX: 100,
+                radiusY: 50,
+                anticlockwise: false
+            });
+            var arcCurvePoints = expectedArc.curvePoints();
+            var segments = path.segments;
+            var segment;
+            for (var idx = 0, pointIdx = 0; idx < segments.length; idx++) {
+                segment = segments[idx];
+                if (segment.controlIn()) {
+                    closePoints(segment.controlIn(), arcCurvePoints[pointIdx++]);
+                }
+                closePoints(segment.anchor(),arcCurvePoints[pointIdx++]);
+                if (segment.controlOut()) {
+                    closePoints(segment.controlOut(), arcCurvePoints[pointIdx++]);
+                }
+            }
+        });
+
+        test("arcTo does nothing if move segment has not been set", function() {
+            path.arcTo(new Point(250, 256.7), 100, 50, true, true);
+            equal(path.segments.length, 0);
+        });
+
+        test("arcTo triggers geometry change once", 1, function() {
+            path.moveTo(400, 300);
+            path.addObserver({
+                geometryChange: function() {
+                    ok(true)
+                }
+            });
+
+            path.arcTo(new Point(250, 256.7), 100, 50, true, true);
+        });
+
+
         test("changing the control points triggers geometryChange", 2, function() {
             var controlOut = Point.create(10, 10),
                 controlIn = Point.create(40, 20);
@@ -1681,6 +1727,41 @@
 
         test("curveTo returns multiPath", function() {
             deepEqual(multiPath.moveTo(0, 0).curveTo(new Point(), new Point(), new Point()), multiPath);
+        });
+
+        test("arc does nothing if there are no paths", function() {
+            multiPath.arc(30, 180, 100, 100);
+            equal(multiPath.paths.length, 0);
+        });
+
+        test("arc adds arc to last path", function() {
+            multiPath.moveTo(200, 100);
+            multiPath.paths[0].arc = function(start, end, rx, ry, anticlockwise) {
+                equal(start, 30);
+                equal(end, 180);
+                equal(rx, 100);
+                equal(ry, 100);
+                equal(anticlockwise, true);
+            };
+            multiPath.arc(30, 180, 100, 100, true);
+        });
+
+        test("arcTo does nothing if there are no paths", function() {
+            multiPath.arcTo(new Point(250, 256.7), 100, 50, true, true);
+            equal(multiPath.paths.length, 0);
+        });
+
+        test("arcTo adds arc to last path", function() {
+            multiPath.moveTo(400, 300);
+            multiPath.paths[0].arcTo = function(end, rx, ry, largeArc, swipe) {
+                equal(end.x, 250);
+                equal(end.y, 256.7);
+                equal(rx, 100);
+                equal(ry, 50);
+                ok(largeArc);
+                ok(swipe);
+            };
+            multiPath.arcTo(new Point(250, 256.7), 100, 50, true, true);
         });
 
         test("changing the control points triggers geometryChange", 2, function() {

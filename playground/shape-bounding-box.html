@@ -132,7 +132,7 @@
             </g>
         </svg>
          -->
-        <!--
+        <--
             <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="400px" height="400px" style="position:absolute;">
                 <g>
                     <path d="M400 300 A 100 50 0 1 1 250 256.7" stroke="red" stroke-width="2" stroke-linecap="square" fill="none" stroke-linejoin="round"></path>
@@ -429,16 +429,40 @@
                 };
             }
 
-pathArcTest();
+            //pathArcTest();
 
-function pathArcTest() {
-    var path = new Path();
-    path.moveTo(200, 100);      
- 
-    path.arc(30, 180, 100, 100);
-    surface.draw(path);
-}
-            
+            function pathArcTest() {
+                var path = new Path();
+                path.moveTo(200, 100);      
+             
+                path.arc(30, 180, 100, 100);
+                surface.draw(path);
+            }
+
+            arcRotation();
+            function arcRotation() {
+                // var path = new Path();
+                // path.moveTo()
+                //var multiPath = Path.parse("M400 300 A 100 50 90 1 1 250 256.7", strokeOptions);
+                    // multiPathGroup =  new drawing.Group(),
+                    // multiPathBoundingRect = multiPath.bbox();
+                var path = new Path(strokeOptions);
+                path.moveTo(400, 300);
+                path.arcTo(new Point(250, 256.7), 100, 50, true, true);
+               // multiPathGroup.append(multiPath);//, rectPath(multiPathBoundingRect, strokeOptions));
+               // surface.clear();
+                surface.draw(path);
+                // arcGeometry = new geometry.Arc(Point.create( 324.9999998796655, 278.35000166745266), {
+                    // startAngle: -81.78702757281499,
+                    // endAngle: 180.00000147877932,
+                    // radiusX: 151.55435493577875,
+                    // radiusY: 75.77717746788937,
+                    // anticlockwise: false,
+                    // xAxisRotation: 90
+                // });
+                // arc = new drawing.Arc(arcGeometry, strokeOptions);
+                // surface.draw(arc);
+            }
             //arcTransformTest();
             function arcTransformTest() {
                 arcGeometry = new geometry.Arc(Point.create(200, 500), {

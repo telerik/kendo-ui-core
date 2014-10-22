@@ -667,6 +667,19 @@
 
                 this._addArcSegments(arc);
             }
+
+            return this;
+        },
+
+        arcTo: function(end, rx, ry, largeArc, swipe) {
+            if (this.segments.length > 0) {
+                var lastSegment = last(this.segments);
+                var anchor = lastSegment.anchor();
+                var arc = g.Arc.fromPoints(anchor, end, rx, ry, largeArc, swipe);
+
+                this._addArcSegments(arc);
+            }
+            return this;
         },
 
         _addArcSegments: function(arc) {
@@ -785,6 +798,22 @@
         curveTo: function(controlOut, controlIn, point) {
             if (this.paths.length > 0) {
                 last(this.paths).curveTo(controlOut, controlIn, point);
+            }
+
+            return this;
+        },
+
+        arc: function(startAngle, endAngle, radiusX, radiusY, anticlockwise) {
+            if (this.paths.length > 0) {
+                last(this.paths).arc(startAngle, endAngle, radiusX, radiusY, anticlockwise);
+            }
+
+            return this;
+        },
+
+        arcTo: function(end, rx, ry, largeArc, swipe) {
+            if (this.paths.length > 0) {
+                last(this.paths).arcTo(end, rx, ry, largeArc, swipe);
             }
 
             return this;

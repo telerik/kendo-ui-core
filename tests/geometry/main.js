@@ -1022,6 +1022,17 @@
         }
     });
 
+    test("Arc.fromPoints returns Arc", function() {
+        var arc = Arc.fromPoints(new Point(400, 300), new Point(250, 256.7), 100, 50, true, true);
+        close(arc.center.x, 300, 0.1);
+        close(arc.center.y, 300, 0.1);
+        equal(arc.getRadiusX(), 100);
+        equal(arc.getRadiusY(), 50);
+        equal(arc.getStartAngle(), 0);
+        equal(arc.getEndAngle(), -120);
+        equal(arc.getAnticlockwise(), false);
+    });
+
     // ------------------------------------------------------------
     (function() {
         var matrix,
