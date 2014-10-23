@@ -1,5 +1,5 @@
 (function() {
-    module("TreeList interaction", {
+    var cleanup = {
         setup: function() {
            dom = $("<div />").appendTo(QUnit.fixture);
         },
@@ -9,7 +9,9 @@
 
             dom = instance = null;
         }
-    });
+    };
+
+    module("TreeList interaction", cleanup);
 
     function createTreeList(options) {
         dom.kendoTreeList($.extend({
@@ -579,5 +581,84 @@
         tap(footerCells.eq(0));
 
         ok(!footerCells.hasClass("k-state-selected"));
+    });
+
+    module("TreeList Excel export", cleanup);
+
+    function exportToExcel(options, callback) {
+        createTreeList($.extend({
+            excelExport: function(e) {
+                e.preventDefault();
+
+                callback(e);
+            }
+        }, options));
+
+        instance.saveAsExcel();
+    }
+
+    test("indents headers based on level", function() {
+        exportToExcel(
+            { columns: [ "id", "parentId" ] },
+            function(e) {
+                var sheet = e.workbook.sheets[0];
+
+                var headerRow = sheet.rows[0]
+                equal(headerRow.cells[0].colSpan, 3); // 2 for depth + 1 for column
+            }
+        );
+    });
+
+    test("sets column width for hierarchical columns", function() {
+        exportToExcel(
+            { columns: [
+                { field: "id", width: 42 },
+                "parentId"
+            ] },
+            function(e) {
+                var sheet = e.workbook.sheets[0];
+                var columns = sheet.columns;
+
+                equal(columns[0].width, 20);
+                equal(columns[1].width, 20);
+                equal(columns[2].width, 42);
+            }
+        );
+    });
+
+    test("indents rows based on level", function() {
+        exportToExcel(
+            { columns: [ "id", "parentId" ] },
+            function(e) {
+                var sheet = e.workbook.sheets[0];
+
+                var firstRow = sheet.rows[1];
+                var secondRow = sheet.rows[2];
+                equal(firstRow.cells.length, 3);
+                equal(firstRow.cells[1].colSpan, 2);
+                equal(secondRow.cells.length, 4);
+                equal(secondRow.cells[2].colSpan, 1);
+            }
+        );
+    });
+
+    test("disabling hierarchy does not indent rows", function() {
+        exportToExcel(
+            {
+              columns: [ "id", "parentId" ],
+              excel: { hierarchy: false }
+            },
+            function(e) {
+                var sheet = e.workbook.sheets[0];
+
+                var firstRow = sheet.rows[1];
+                equal(firstRow.cells.length, 2);
+                ok(!firstRow.cells[0].colSpan);
+
+                var secondRow = sheet.rows[2];
+                equal(secondRow.cells.length, 2);
+                ok(!secondRow.cells[1].colSpan);
+            }
+        );
     });
 })();
