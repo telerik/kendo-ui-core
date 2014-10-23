@@ -844,24 +844,22 @@ var __meta__ = {
             }
 
             var chartElement;
-            while (!chartElement) {
+            while (element && !chartElement) {
                 chartElement = element.chartElement;
                 element = element.parent;
+            }
 
-                if (!element) {
-                    return;
+            if (chartElement) {
+                if (chartElement.aliasFor) {
+                    chartElement = chartElement.aliasFor(e, this._eventCoordinates(e));
                 }
-            }
 
-            if (chartElement.aliasFor) {
-                chartElement = chartElement.aliasFor(e, this._eventCoordinates(e));
-            }
+                if (match) {
+                    chartElement = chartElement.closest(match);
+                }
 
-            if (match) {
-                chartElement = chartElement.closest(match);
+                return chartElement;
             }
-
-            return chartElement;
         },
 
         _eventCoordinates: function(e) {
