@@ -300,6 +300,7 @@
         var DiagramElement = Observable.extend({
             init: function (options) {
                 var that = this;
+                that.dataItem = options.dataItem;
                 Observable.fn.init.call(that);
                 that.options = deepExtend({ id: diagram.randomId() }, that.options, options);
                 // Update dataItem after deepExtend in order to fix editing model wrapping
@@ -482,17 +483,29 @@
 
             options: diagram.shapeDefaults(),
 
-            updateOptionsFromModel: function(model) {
+            updateOptionsFromModel: function(model, field) {
                 if (this.diagram && this.diagram._isEditable) {
                     var modelOptions = filterShapeDataItem(model || this.options.dataItem);
 
                     if (model) {
                         this._template();
+
+                        if (!dataviz.inArray(field, ["x", "y", "width", "height"])) {
+                            this.redrawVisual();
+                        }
+
                         this.redraw(modelOptions);
                     } else {
                         this.options = deepExtend({}, this.options, modelOptions);
                     }
                 }
+            },
+
+            redrawVisual: function() {
+                this.visual.clear();
+                this.shapeVisual = Shape.createShapeVisual(this.options);
+                this.visual.append(this.shapeVisual);
+                this.updateBounds();
             },
 
             updateModel: function() {
@@ -504,15 +517,23 @@
                     }
 
                     if (model) {
-                        this.diagram._shouldRefresh = false;
-                        model._set("x", bounds.x);
-                        model._set("y", bounds.y);
-                        model._set("width", bounds.width);
-                        model._set("height", bounds.height);
+                        if (bounds.x !== model.x) {
+                            model.set("x", bounds.x);
+                        }
 
-                        this.diagram._shouldRefresh = true;
-                        this.options.dataItem = model;
-                        model.trigger("change");
+                        if (bounds.y !== model.y) {
+                            model.set("y", bounds.y);
+                        }
+
+                        if (bounds.width !== model.width) {
+                            model.set("width", bounds.width);
+                        }
+
+                        if (bounds.height !== model.height) {
+                            model.set("height", bounds.height);
+                        }
+
+                        this.dataItem = this.options.dataItem = model;
                     }
                 }
             },
@@ -1023,7 +1044,7 @@
                                 model._set("toY", null);
                             }
 
-                            this.options.dataItem = model;
+                            this.dataItem = this.options.dataItem = model;
 
                             if (shouldRefresh !== false) {
                                 this.diagram._shouldRefresh = true;
@@ -1577,7 +1598,7 @@
                     this.editor = new PopupEditor(this.element, {
                         update: proxy(this._update, this),
                         cancel: proxy(this._cancel, this),
-                        model: item.options.dataItem,
+                        model: item.dataItem,
                         type: editorType,
                         target: this,
                         editors: editors,
@@ -1978,7 +1999,7 @@
             _addConnection: function (connection, undoable) {
                 if (this.connectionsDataSource && this._isEditable) {
                     var dataItem = this.connectionsDataSource.add(connection.options.dataItem);
-                    connection.options.dataItem = dataItem;
+                    connection.dataItem = connection.options.dataItem = dataItem;
                     connection.updateModel(false);
                     this.connectionsDataSource.sync();
                     this._connectionsDataMap[connection.options.dataItem.uid] = connection;
@@ -3134,9 +3155,7 @@
                 if (e.action === "remove") {
                     this._removeShapes(e.items);
                 } else if (e.action === "itemchange") {
-                    if (this._shouldRefresh) {
-                        this._updateShapes(e.items);
-                    }
+                    this._updateShapes(e.items, e.field);
                 } else if (e.action === "add") {
                     this._inactiveShapeItems = this._inactiveShapeItems.concat(e.items);
                 } else if (e.action === "sync") {
