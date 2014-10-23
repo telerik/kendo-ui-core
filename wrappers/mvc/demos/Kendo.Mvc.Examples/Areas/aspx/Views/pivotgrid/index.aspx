@@ -21,12 +21,14 @@
     <%= Html.Kendo().PivotConfigurator()
         .Name("configurator")
         .Filterable(true)
+        .Sortable()
     %>
 
     <%= Html.Kendo().PivotGrid()
         .Name("pivotgrid")
         .ColumnWidth(200)
         .Filterable(true)
+        .Sortable()
         .Height(494)
         .Configurator("#configurator")
         .DataSource(dataSource => dataSource.

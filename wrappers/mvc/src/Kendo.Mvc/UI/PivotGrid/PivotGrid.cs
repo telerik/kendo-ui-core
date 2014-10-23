@@ -2,6 +2,7 @@
 {
     using Kendo.Mvc.Infrastructure;
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using System.IO;
     using System.Text.RegularExpressions;
@@ -28,6 +29,7 @@
             AutoBind = true;
             Reorderable = true;
             Messages = new PivotGridMessages();
+            Sortable = new PivotGridSortableSettings();
         }
 
         public PivotDataSource DataSource
@@ -40,6 +42,16 @@
         {
             get;
             private set;
+        }
+
+        /// <summary>
+        /// Gets the sorting configuration.
+        /// </summary>
+        /// <value>The sorting.</value>
+        public PivotGridSortableSettings Sortable
+        {
+            get;
+            internal set;
         }
 
         public string Configurator
@@ -148,6 +160,12 @@
             if (Filterable == true)
             {
                 options["filterable"] = Filterable;
+            }
+            
+            if (Sortable.Enabled)
+            {
+                var sorting = Sortable.ToJson();
+                options["sortable"] = sorting.Any() ? (object)sorting : true;
             }
 
             var messages = Messages.ToJson();

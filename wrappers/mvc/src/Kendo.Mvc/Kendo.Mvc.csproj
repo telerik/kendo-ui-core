@@ -727,8 +727,10 @@
     <Compile Include="UI\Grid\Settings\GridColumnFilterableCellSettings.cs" />
     <Compile Include="UI\PivotConfigurator\Fluent\PivotConfiguratorBuilder.cs" />
     <Compile Include="UI\PivotConfigurator\Fluent\PivotConfiguratorMessagesBuilder.cs" />
+    <Compile Include="UI\PivotConfigurator\Fluent\PivotConfiguratorSortSettingsBuilder.cs" />
     <Compile Include="UI\PivotConfigurator\Html\PivotConfiguratorHtmlBuilder.cs" />
     <Compile Include="UI\PivotConfigurator\PivotConfiguratorMessages.cs" />
+    <Compile Include="UI\PivotConfigurator\PivotConfiguratorSortableSettings.cs" />
     <Compile Include="UI\PivotDataSource\Fluent\PivotAjaxDataSourceBuilder.cs" />
     <Compile Include="UI\PivotDataSource\Fluent\PivotAjaxDataSourceSchemaBuilder.cs" />
     <Compile Include="UI\PivotDataSource\Fluent\PivotAjaxDataSourceSchemaCubeBuilder.cs" />
@@ -1339,6 +1341,8 @@
     <Compile Include="UI\PivotDataSource\PivotDataSourceSchemaCube.cs" />
     <Compile Include="UI\PivotDataSource\PivotDataSourceSchemaDimensionDescriptor.cs" />
     <Compile Include="UI\PivotDataSource\PivotDataSourceSchemaMeasureDescriptor.cs" />
+    <Compile Include="UI\PivotGrid\Fluent\PivotGridSortSettingsBuilder.cs" />
+    <Compile Include="UI\PivotGrid\PivotGridSortableSettings.cs" />
     <Compile Include="UI\PivotGrid\Fluent\PivotFieldMenuMessagesBuilder.cs" />
     <Compile Include="UI\PivotGrid\Fluent\PivotGridBuilder.cs" />
     <Compile Include="UI\PivotDataSource\Fluent\PivotDataSourceColumnBuilder.cs" />

@@ -2,6 +2,7 @@
 {
     using Kendo.Mvc.Infrastructure;
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using System.IO;
     using System.Text.RegularExpressions;
@@ -20,6 +21,7 @@
         {
             UrlGenerator = urlGenerator;
             Messages = new PivotConfiguratorMessages();
+            Sortable = new PivotConfiguratorSortableSettings();
         }
 
         public IUrlGenerator UrlGenerator
@@ -32,6 +34,16 @@
         {
             get;
             set;
+        }
+
+        /// <summary>
+        /// Gets the sorting configuration.
+        /// </summary>
+        /// <value>The sorting.</value>
+        public PivotConfiguratorSortableSettings Sortable
+        {
+            get;
+            internal set;
         }
 
         public PivotConfiguratorMessages Messages
@@ -47,6 +59,12 @@
             if (Filterable == true)
             {
                 options["filterable"] = Filterable;
+            }
+
+            if (Sortable.Enabled)
+            {
+                var sorting = Sortable.ToJson();
+                options["sortable"] = sorting.Any() ? (object)sorting : true;
             }
 
             var messages = Messages.ToJson();

@@ -85,6 +85,125 @@
         }
 
         /// <summary>
+        /// Enables grid column sorting.
+        /// </summary>
+        /// <example>
+        /// <code lang="ASPX">
+        /// &lt;%:Html.Kendo().PivotGrid()
+        ///     .Name(&quot;pivotgrid&quot;)
+        ///     .Sortable()
+        ///     .DataSource(dataSource =&gt;
+        ///         dataSource.Xmla()
+        ///            .Columns(columns =&gt; columns.Add(&quot;[Date].[Calendar]&quot;).Expand(true))
+        ///            .Rows(rows =&gt; rows.Add(&quot;[Geography].[City]&quot;))
+        ///            .Measures(measures =&gt; measures.Values(new string[]{&quot;[Measures].[Internet Sales Amount]&quot;}))
+        ///            .Transport(transport =&gt; transport
+        ///                .Connection(connection =&gt; connection
+        ///                    .Catalog(&quot;Adventure Works DW 2008R2&quot;)
+        ///                    .Cube(&quot;Adventure Works&quot;))
+        ///                .Read(read =&gt; read
+        ///                    .Url(&quot;http://demos.telerik.com/olap/msmdpump.dll&quot;)
+        ///                    .DataType(&quot;text&quot;)
+        ///                    .ContentType(&quot;text/xml&quot;)
+        ///                    .Type(HttpVerbs.Post)
+        ///                )
+        ///            )
+        ///     )
+        /// %&gt;
+        /// </code>
+        /// <code lang="Razor">
+        /// @(Html.Kendo().PivotGrid()
+        ///       .Name(&quot;pivotgrid&quot;)
+        ///       .Sortable()
+        ///       .DataSource(dataSource =&gt;
+        ///         dataSource.Xmla()
+        ///            .Columns(columns =&gt; columns.Add(&quot;[Date].[Calendar]&quot;).Expand(true))
+        ///            .Rows(rows =&gt; rows.Add(&quot;[Geography].[City]&quot;))
+        ///            .Measures(measures =&gt; measures.Values(new string[]{&quot;[Measures].[Internet Sales Amount]&quot;}))
+        ///            .Transport(transport =&gt; transport
+        ///                .Connection(connection =&gt; connection
+        ///                    .Catalog(&quot;Adventure Works DW 2008R2&quot;)
+        ///                    .Cube(&quot;Adventure Works&quot;))
+        ///                .Read(read =&gt; read
+        ///                    .Url(&quot;http://demos.telerik.com/olap/msmdpump.dll&quot;)
+        ///                    .DataType(&quot;text&quot;)
+        ///                    .ContentType(&quot;text/xml&quot;)
+        ///                    .Type(HttpVerbs.Post)
+        ///                )
+        ///            )
+        ///       )
+        /// )
+        /// </code>
+        /// </example>
+        public PivotGridBuilder<TModel> Sortable()
+        {
+            Component.Sortable.Enabled = true;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the sorting configuration of the pivotgrid.
+        /// </summary>
+        /// <param name="configurator">The lambda which configures the sorting</param>
+        /// <example>
+        /// <code lang="ASPX">
+        /// &lt;%:Html.Kendo().PivotGrid()
+        ///     .Name(&quot;pivotgrid&quot;)
+        ///     .Sortable(sorting =&gt; sorting.AllowUnsort(true))
+        ///     .DataSource(dataSource =&gt;
+        ///         dataSource.Xmla()
+        ///            .Columns(columns =&gt; columns.Add(&quot;[Date].[Calendar]&quot;).Expand(true))
+        ///            .Rows(rows =&gt; rows.Add(&quot;[Geography].[City]&quot;))
+        ///            .Measures(measures =&gt; measures.Values(new string[]{&quot;[Measures].[Internet Sales Amount]&quot;}))
+        ///            .Transport(transport =&gt; transport
+        ///                .Connection(connection =&gt; connection
+        ///                    .Catalog(&quot;Adventure Works DW 2008R2&quot;)
+        ///                    .Cube(&quot;Adventure Works&quot;))
+        ///                .Read(read =&gt; read
+        ///                    .Url(&quot;http://demos.telerik.com/olap/msmdpump.dll&quot;)
+        ///                    .DataType(&quot;text&quot;)
+        ///                    .ContentType(&quot;text/xml&quot;)
+        ///                    .Type(HttpVerbs.Post)
+        ///                )
+        ///            )
+        ///     )
+        /// %&gt;
+        /// </code>
+        /// <code lang="Razor">
+        /// @(Html.Kendo().PivotGrid()
+        ///       .Name(&quot;pivotgrid&quot;)
+        ///       .Sortable(sorting =&gt; sorting.AllowUnsort(true))
+        ///       .DataSource(dataSource =&gt;
+        ///         dataSource.Xmla()
+        ///            .Columns(columns =&gt; columns.Add(&quot;[Date].[Calendar]&quot;).Expand(true))
+        ///            .Rows(rows =&gt; rows.Add(&quot;[Geography].[City]&quot;))
+        ///            .Measures(measures =&gt; measures.Values(new string[]{&quot;[Measures].[Internet Sales Amount]&quot;}))
+        ///            .Transport(transport =&gt; transport
+        ///                .Connection(connection =&gt; connection
+        ///                    .Catalog(&quot;Adventure Works DW 2008R2&quot;)
+        ///                    .Cube(&quot;Adventure Works&quot;))
+        ///                .Read(read =&gt; read
+        ///                    .Url(&quot;http://demos.telerik.com/olap/msmdpump.dll&quot;)
+        ///                    .DataType(&quot;text&quot;)
+        ///                    .ContentType(&quot;text/xml&quot;)
+        ///                    .Type(HttpVerbs.Post)
+        ///                )
+        ///            )
+        ///       )
+        /// )
+        /// </code>
+        /// </example>
+        public PivotGridBuilder<TModel> Sortable(Action<PivotGridSortSettingsBuilder> configurator)
+        {
+            Component.Sortable.Enabled = true;
+
+            configurator(new PivotGridSortSettingsBuilder(Component.Sortable));
+
+            return this;
+        }
+
+        /// <summary>
         /// Configures the client-side events
         /// </summary>
         public PivotGridBuilder<TModel> Events(Action<PivotGridEventBuilder> configurator)
