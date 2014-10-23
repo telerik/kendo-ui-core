@@ -232,6 +232,22 @@
         equal(th.eq(1).data("kendoColumnMenu").options.lockedColumns, false);
     });
 
+    test("column menu lockedColumns is not set when multicolumn headers are enabled", function() {
+        var grid = setup({
+            columns: [
+                { columns: [
+                    { field: "foo", locked: true },
+                    { field: "bar" }
+                ]}
+            ]
+        });
+
+        var th = grid.wrapper.find("th");
+        equal(th.eq(1).data("kendoColumnMenu").options.lockedColumns, false);
+        equal(th.eq(2).data("kendoColumnMenu").options.lockedColumns, false);
+    });
+
+
     test("column menu lockedColumns when lockable is disabled", function() {
         var grid = setup({
             columns: [

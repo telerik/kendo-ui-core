@@ -561,6 +561,10 @@ var __meta__ = {
                 return column.field == field || column.title == field;
             })[0];
 
+            if (!column) {
+                return;
+            }
+
             var locked = column.locked === true;
             var length = grep(columns, function(column) {
                 return !column.hidden && ((column.locked && locked) || (!column.locked && !locked));

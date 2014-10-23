@@ -4176,6 +4176,9 @@ var __meta__ = {
                 sortable,
                 filterable,
                 cells,
+                hasMultiColumnHeaders = grep(that.columns, function(item) {
+                    return item.columns !== undefined;
+                }).length > 0,
                 isMobile = this._isMobile,
                 initCallback = function(e) {
                     that.trigger(COLUMNMENUINIT, { field: e.field, container: e.container });
@@ -4218,7 +4221,7 @@ var __meta__ = {
                             init: initCallback,
                             pane: that.pane,
                             filter: isMobile ? ":not(.k-column-active)" : "",
-                            lockedColumns: column.lockable !== false && lockedColumns(columns).length > 0
+                            lockedColumns: !hasMultiColumnHeaders && column.lockable !== false && lockedColumns(columns).length > 0
                         };
 
                         cell.kendoColumnMenu(menuOptions);
