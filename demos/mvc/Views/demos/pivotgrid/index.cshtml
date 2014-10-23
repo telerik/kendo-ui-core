@@ -34,8 +34,9 @@
                     }).data("kendoPivotGrid");
 
                     $("#configurator").kendoPivotConfigurator({
+                        dataSource: pivotgrid.dataSource,
                         filterable: true,
-                        dataSource: pivotgrid.dataSource
+                        sortable: true
                     });
             </script>
             <style>
