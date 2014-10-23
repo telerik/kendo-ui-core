@@ -2569,7 +2569,7 @@ var __meta__ = {
 
         createVisual: function() {
             ChartElement.fn.createVisual.call(this);
-            var element = this.getElement()
+            var element = this.getElement();
             if (element) {
                 this.visual.append(element);
             }

@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.dataviz.chart", "./kendo.drawing", "./kendo.geometry" ], f);
+    define([ "./kendo.dataviz.chart", "./kendo.drawing" ], f);
 })(function(){
 
 var __meta__ = {
@@ -277,7 +277,7 @@ var __meta__ = {
                 var ring = ShapeBuilder.current.createRing(slot, {
                     fill: {
                         color: band.color,
-                        opacity: band.opacity,
+                        opacity: band.opacity
                     },
                     stroke: {
                         opacity: band.opacity
@@ -380,7 +380,7 @@ var __meta__ = {
                 bandStyle = {
                     fill: {
                         color: band.color,
-                        opacity: band.opacity,
+                        opacity: band.opacity
                     },
                     stroke: {
                         opacity: band.opacity

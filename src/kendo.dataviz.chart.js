@@ -2012,7 +2012,7 @@ var __meta__ = {
                 color: BLACK
             },
             labels: {
-                zIndex: 1,
+                zIndex: 1
             },
             justified: false
         },

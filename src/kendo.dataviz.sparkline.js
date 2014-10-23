@@ -207,7 +207,6 @@ var __meta__ = {
         },
 
         _surfaceWrap: function() {
-            console.log(this.stage)
             return this.stage;
         },
 
