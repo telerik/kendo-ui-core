@@ -37,27 +37,6 @@
                         filterable: true,
                         dataSource: pivotgrid.dataSource
                     });
-
-                    $(".k-pivot-setting").on("click", ".k-button", function() {
-                        var dataSource = pivotgrid.dataSource;
-                        var name = $(this).data("name");
-                        var sort = dataSource.sort() || [];
-                        var dir;
-
-                        for (var idx = 0; idx < sort.length; idx++) {
-                            if (sort[idx].field == name) {
-                                dir = sort[idx].dir;
-                            }
-                        }
-
-                        if (dir === "asc") {
-                            dir = "desc";
-                        } else {
-                            dir = "asc";
-                        }
-                        dataSource.sort({ field: name, dir: dir });
-                    });
-                });
             </script>
             <style>
                 #pivotgrid
