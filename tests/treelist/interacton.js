@@ -510,6 +510,26 @@
         instance.content.find(".foo").click();
     });
 
+    test("`this` in custom command click action is referencing to the widget", function() {
+        createTreeList({
+            dataSource: [ { id: 1 } ],
+            columns: [
+                { field: "id" },
+                { command: [
+                    {
+                        name: "foo",
+                        className: "foo",
+                        click: function() {
+                            equal(this, instance, "`this` is not the widget instance");
+                        }
+                    }
+                ] }
+            ]
+        });
+
+        instance.content.find(".foo").click();
+    });
+
     test("clicking custom command buttons passes events arguments", function() {
         createTreeList({
             dataSource: [ { id: 1 } ],
