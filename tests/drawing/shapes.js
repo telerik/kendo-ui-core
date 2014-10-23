@@ -214,14 +214,14 @@
         });
 
         test("fill sets gradient", function() {
-            var gradient = new Gradient();
+            var gradient = new Gradient({});
             shape.fill(gradient);
 
             equal(shape.options.fill, gradient);
         });
 
         test("fill sets color and opacity if current fill is gradient", function() {
-            shape.fill(new Gradient());
+            shape.fill(new Gradient({}));
             shape.fill("red", 1);
 
             equal(shape.options.fill.color, "red");
@@ -229,7 +229,7 @@
         });
 
         test("fill sets gradient if current field is not", function() {
-            var gradient = new Gradient();
+            var gradient = new Gradient({});
             shape.fill("red", 1);
             shape.fill(gradient);
 
@@ -2057,13 +2057,32 @@
             setup: function() {
                 stops = [new GradientStop(), new GradientStop()];
                 gradient = new type({
-                    stops: stops
+                    stops: stops,
+                    userSpace: true
                 });
             }
         });
 
         test("inits stops", function() {
             equal(gradient.stops.length, 2);
+        });
+
+        test("inits userSpace", function() {
+            ok(gradient.userSpace());
+        });
+
+        test("userSpace is false by default", function() {
+            gradient = new type({});
+            ok(!gradient.userSpace());
+        });
+
+        test("changing userSpace triggers optionsChange", function() {
+            gradient.addObserver({
+                optionsChange: function(e) {
+                    equal(e.field, "gradient");
+                }
+            });
+            gradient.userSpace(false);
         });
 
         test("inits stops from array of arrays", function() {

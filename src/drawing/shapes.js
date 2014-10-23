@@ -911,10 +911,21 @@
     var Gradient = Class.extend({
         nodeType: "gradient",
 
-        init: function(stops) {
-            this.stops = new StopsArray(this._createStops(stops));
+        init: function(options) {
+            this.stops = new StopsArray(this._createStops(options.stops));
             this.stops.addObserver(this);
+            this._userSpace = options.userSpace;
             this.id = kendo.guid();
+        },
+
+        userSpace: function(value) {
+            if (defined(value)) {
+                this._userSpace = value;
+                this.optionsChange();
+                return this;
+            } else {
+                return this._userSpace;
+            }
         },
 
         _createStops: function(stops) {
@@ -956,7 +967,7 @@
     var LinearGradient = Gradient.extend({
         init: function(options) {
             options = options || {};
-            Gradient.fn.init.call(this, options.stops);
+            Gradient.fn.init.call(this, options);
 
             this.start(options.start || new Point());
 
@@ -969,7 +980,7 @@
     var RadialGradient = Gradient.extend({
         init: function(options) {
             options = options || {};
-            Gradient.fn.init.call(this, options.stops);
+            Gradient.fn.init.call(this, options);
 
             this.center(options.center  || new Point());
             this._radius = defined(options.radius) ? options.radius : 1;

@@ -163,7 +163,7 @@
                 MultiPath = drawing.MultiPath,
                 Segment = drawing.Segment,
                 Surface = drawing.Surface,
-                surface = Surface.create(document.getElementById("container"), {width: 400, height: 400, type: "svg"}),
+                surface = Surface.create(document.getElementById("container"), {width: 600, height: 600, type: "svg"}),
                 circleGeometry = new Circle(Point.create(150, 400), 100),
                 circle = new drawing.Circle(circleGeometry, {fill: {color: "red"} }),
                // boundingRect = circle.bbox(),
@@ -202,7 +202,7 @@
                 }
             });
 
-            //gradientTest();
+            gradientTest();
 
             function gradientTest() {
                 var circleGeometry = new Circle(Point.create(200, 200), 100);
@@ -223,14 +223,15 @@
                         }],
                         start: {
                             label: "Start",
-                            x: 0,
-                            y: 0
+                            x: 150,
+                            y: 300
                         },
                         end: {
                             label: "End",
-                            x: 1,
-                            y: 0
+                            x: 200,
+                            y: 400
                         },
+                        userSpace: true,
                         newStopIndex: 0
                     }, {
                         type: "radial",
@@ -262,7 +263,8 @@
                         circle.fill(new drawing.LinearGradient({
                             stops: this.get("fillType.stops").toJSON(),
                             start: [start.x, start.y],
-                            end: [end.x, end.y]
+                            end: [end.x, end.y],
+                            userSpace: this.get("fillType.userSpace")
                         }));
                     },
 
@@ -439,7 +441,7 @@
                 surface.draw(path);
             }
 
-            arcRotation();
+            //arcRotation();
             function arcRotation() {
                 // var path = new Path();
                 // path.moveTo()
