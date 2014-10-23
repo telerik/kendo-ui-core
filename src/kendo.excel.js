@@ -78,7 +78,7 @@ kendo.ExcelExporter = kendo.Class.extend({
     _dataRows: function(dataItems, level) {
         var depth = this._depth();
         var rows = $.map(dataItems, $.proxy(function(dataItem) {
-            if (this.dataSource.level) {
+            if (this._hierarchical()) {
                 level = this.dataSource.level(dataItem) + 1;
             }
 
@@ -127,7 +127,9 @@ kendo.ExcelExporter = kendo.Class.extend({
             } else {
                 var dataCells = $.map(this.columns, $.proxy(this._cell, this, dataItem));
 
-                dataCells[0].colSpan = depth - level + 1;
+                if (this._hierarchical()) {
+                    dataCells[0].colSpan = depth - level + 1;
+                }
 
                 return {
                     type: "data",
@@ -248,12 +250,15 @@ kendo.ExcelExporter = kendo.Class.extend({
             };
         }
     },
+    _hierarchical: function() {
+        return this.options.hierarchy && this.dataSource.level;
+    },
     _depth: function() {
         var dataSource = this.dataSource;
         var depth = 0;
         var view, i, level;
 
-        if (this.options.hierarchy && dataSource.level) {
+        if (this._hierarchical()) {
             view = dataSource.view();
 
             for (i = 0; i < view.length; i++) {

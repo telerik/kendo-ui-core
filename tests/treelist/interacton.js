@@ -641,4 +641,24 @@
             }
         );
     });
+
+    test("disabling hierarchy does not indent rows", function() {
+        exportToExcel(
+            {
+              columns: [ "id", "parentId" ],
+              excel: { hierarchy: false }
+            },
+            function(e) {
+                var sheet = e.workbook.sheets[0];
+
+                var firstRow = sheet.rows[1];
+                equal(firstRow.cells.length, 2);
+                ok(!firstRow.cells[0].colSpan);
+
+                var secondRow = sheet.rows[2];
+                equal(secondRow.cells.length, 2);
+                ok(!secondRow.cells[1].colSpan);
+            }
+        );
+    });
 })();
