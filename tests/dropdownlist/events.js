@@ -557,4 +557,90 @@
 
         dropdownlist.filterInput.focus().val("b").keydown();
     });
+
+    asyncTest("DropDownList triggers filtering event on data source filter", 3, function() {
+        var dropdownlist = input.kendoDropDownList({
+            delay: 0,
+            dataSource: ["foo", "bar"],
+            filter: "contains",
+            filtering: function(e) {
+                start();
+
+                var filter = e.filter;
+
+                equal(filter.field, "");
+                equal(filter.operator, "contains");
+                equal(filter.value, "baz");
+            }
+        }).data("kendoDropDownList");
+
+        dropdownlist.open();
+        dropdownlist.filterInput.focus().val("baz").keydown();
+    });
+
+    asyncTest("modifying filter expression in filtering event changes datasource result", 2, function() {
+        var dropdownlist = input.kendoDropDownList({
+            delay: 0,
+            dataSource: ["foo", "bar"],
+            filter: "contains",
+            filtering: function(e) {
+                e.filter.value = "foo";
+            }
+        }).data("kendoDropDownList");
+
+        dropdownlist.open();
+        dropdownlist.filterInput.focus().val("baz").keydown();
+
+        setTimeout(function() {
+            start();
+            var data = dropdownlist.dataSource.view();
+
+            equal(data.length, 1);
+            equal(data[0], "foo");
+        });
+    });
+
+    asyncTest("DropDownList filtering event can be prevented", 1, function() {
+        var dropdownlist = input.kendoDropDownList({
+            delay: 0,
+            dataSource: ["foo", "bar"],
+            filter: "contains",
+            filtering: function(e) {
+                e.preventDefault();
+            }
+        }).data("kendoDropDownList");
+
+        dropdownlist.dataSource.bind("change", function() {
+            ok(false);
+        });
+
+        dropdownlist.open();
+        dropdownlist.filterInput.focus().val("baz").keydown();
+
+        setTimeout(function() {
+            start();
+            ok(true);
+        });
+    });
+
+    asyncTest("DropDownList triggers filtering when filter is cleared", 1, function() {
+        var dropdownlist = input.kendoDropDownList({
+            delay: 0,
+            dataSource: ["foo", "bar"],
+            filter: "contains"
+        }).data("kendoDropDownList");
+
+        dropdownlist.dataSource.one("change", function() {
+            dropdownlist.bind("filtering", function(e) {
+                start();
+                equal(e.filter, undefined);
+            });
+
+            dropdownlist.ul.children("li").first().click();
+            dropdownlist.open();
+        });
+
+        dropdownlist.open();
+        dropdownlist.filterInput.focus().val("bar").keydown();
+    });
 })();
