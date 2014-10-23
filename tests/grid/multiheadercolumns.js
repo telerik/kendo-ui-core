@@ -327,4 +327,45 @@
 
         equal(ths[1].rowSpan, 2);
     });
+
+    test("cellIndex return correct index", function() {
+        var grid = new Grid(table, {
+            dataSource: {
+                data: [{ foo: "foo1", foo1: "foo1", foo2: "foo1", foo3: "foo1", foo4: "foo1"}]
+            },
+            columns: [{ title: "master", columns: [{ title: "child" }, { title: "child2" }] }, { title: "master2" }]
+        });
+
+        var cell = grid.tbody.find("tr:first td:eq(2)");
+
+        equal(grid.cellIndex(cell), 2);
+    });
+
+    test("cellIndex return correct index for non locked column - with locked columns", function() {
+        var grid = new Grid(table, {
+            dataSource: {
+                data: [{ foo: "foo1", foo1: "foo1", foo2: "foo1", foo3: "foo1", foo4: "foo1"}]
+            },
+            columns: [{ title: "master", locked: true, columns: [{ title: "child" }, { title: "child2" }] }, { title: "master2" }]
+        });
+
+        var cell = grid.tbody.find("tr:first td:eq(0)");
+
+        equal(grid.cellIndex(cell), 2);
+    });
+
+    test("cellIndex return correct index for locked column - with locked columns", function() {
+        var grid = new Grid(table, {
+            dataSource: {
+                data: [{ foo: "foo1", foo1: "foo1", foo2: "foo1", foo3: "foo1", foo4: "foo1"}]
+            },
+            columns: [{ title: "master", locked: true, columns: [{ title: "child" }, { title: "child2" }] }, { title: "master2" }]
+        });
+
+        var cells = grid.lockedTable.find("tr:first td");
+
+        equal(grid.cellIndex(cells.eq(0)), 0);
+        equal(grid.cellIndex(cells.eq(1)), 1);
+    });
+
 })();

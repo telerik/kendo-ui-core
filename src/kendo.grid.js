@@ -2058,7 +2058,7 @@ var __meta__ = {
             var lockedColumnOffset = 0;
 
             if (this.lockedTable && !$.contains(this.lockedTable[0], td[0])) {
-                lockedColumnOffset = lockedColumns(this.columns).length;
+                lockedColumnOffset = leafColumns(lockedColumns(this.columns)).length;
             }
 
             return $(td).parent().children('td:not(.k-group-cell,.k-hierarchy-cell)').index(td) + lockedColumnOffset;
