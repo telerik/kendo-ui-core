@@ -6157,7 +6157,7 @@ var __meta__ = {
             var normalColor = this.color;
 
             this.color = highlight.color || this.color;
-            var overlay = this._overlay = this.mainVisual(
+            var overlay = this.mainVisual(
                 deepExtend({}, this.options, highlight)
             );
             this.color = normalColor;

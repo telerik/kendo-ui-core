@@ -895,11 +895,11 @@ var __meta__ = {
                 return;
             }
 
-            var overlay = this._overlay;
-            var highlight = this.options.highlight;
+            var highlight = this._highlight;
+            var options = this.options.highlight;
 
-            if (!overlay) {
-                overlay = this._overlay = this.createHighlight({
+            if (!highlight) {
+                highlight = this._highlight = this.createHighlight({
                     fill: {
                         color: WHITE,
                         opacity: 0.2
@@ -911,11 +911,11 @@ var __meta__ = {
                     }
                 });
 
-                this.visual.append(overlay);
+                this.visual.append(highlight);
             }
 
-            if (highlight && highlight.visible) {
-                overlay.visible(show);
+            if (options && options.visible) {
+                highlight.visible(show);
             }
         }
     });
