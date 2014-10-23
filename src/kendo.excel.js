@@ -253,7 +253,7 @@ kendo.ExcelExporter = kendo.Class.extend({
         var depth = 0;
         var view, i, level;
 
-        if (dataSource.level) {
+        if (this.options.hierarchy && dataSource.level) {
             view = dataSource.view();
 
             for (i = 0; i < view.length; i++) {
@@ -272,8 +272,8 @@ kendo.ExcelExporter = kendo.Class.extend({
         return depth;
     },
     _columns: function() {
-        var groups = this.dataSource.group();
-        var columns = $.map(new Array(groups.length), function() {
+        var depth = this._depth();
+        var columns = $.map(new Array(depth), function() {
             return { width: 20 };
         });
 
@@ -289,7 +289,7 @@ kendo.ExcelExporter = kendo.Class.extend({
 kendo.ExcelMixin = {
     extend: function(proto) {
        proto.events.push("excelExport");
-       proto.options.excel = this.options;
+       proto.options.excel = $.extend(proto.options.excel, this.options);
        proto.saveAsExcel = this.saveAsExcel;
     },
     options: {
@@ -305,7 +305,8 @@ kendo.ExcelMixin = {
             columns: this.columns,
             dataSource: this.dataSource,
             allPages: excel.allPages,
-            filterable: excel.filterable
+            filterable: excel.filterable,
+            hierarchy: excel.hierarchy
         });
 
         exporter.workbook().then($.proxy(function(book) {

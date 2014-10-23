@@ -822,6 +822,9 @@ var __meta__ = {
                     pdf: "Export to PDF"
                 }
             },
+            excel: {
+                hierarchy: true
+            },
             filterable: false,
             editable: false
         },

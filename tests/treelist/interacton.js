@@ -597,7 +597,7 @@
         instance.saveAsExcel();
     }
 
-    test("indents columns based on level", function() {
+    test("indents headers based on level", function() {
         exportToExcel(
             { columns: [ "id", "parentId" ] },
             function(e) {
@@ -605,6 +605,23 @@
 
                 var headerRow = sheet.rows[0]
                 equal(headerRow.cells[0].colSpan, 3); // 2 for depth + 1 for column
+            }
+        );
+    });
+
+    test("sets column width for hierarchical columns", function() {
+        exportToExcel(
+            { columns: [
+                { field: "id", width: 42 },
+                "parentId"
+            ] },
+            function(e) {
+                var sheet = e.workbook.sheets[0];
+                var columns = sheet.columns;
+
+                equal(columns[0].width, 20);
+                equal(columns[1].width, 20);
+                equal(columns[2].width, 42);
             }
         );
     });
