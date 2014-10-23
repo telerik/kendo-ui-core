@@ -15,6 +15,24 @@ class PivotConfiguratorMessagesFieldMenu extends \Kendo\SerializableObject {
     }
 
     /**
+    * The text message displayed for the menu item which performs ascending sort.
+    * @param string $value
+    * @return \Kendo\UI\PivotConfiguratorMessagesFieldMenu
+    */
+    public function sortAscending($value) {
+        return $this->setProperty('sortAscending', $value);
+    }
+
+    /**
+    * The text message displayed for the menu item which performs descending sort.
+    * @param string $value
+    * @return \Kendo\UI\PivotConfiguratorMessagesFieldMenu
+    */
+    public function sortDescending($value) {
+        return $this->setProperty('sortDescending', $value);
+    }
+
+    /**
     * The text messages of the fields filter menu item.
     * @param string $value
     * @return \Kendo\UI\PivotConfiguratorMessagesFieldMenu
@@ -60,7 +78,7 @@ class PivotConfiguratorMessagesFieldMenu extends \Kendo\SerializableObject {
     }
 
     /**
-    * The text of the ok button in the include fields dialog.
+    * The text of the OK button in the include fields dialog.
     * @param string $value
     * @return \Kendo\UI\PivotConfiguratorMessagesFieldMenu
     */

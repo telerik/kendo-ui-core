@@ -46,6 +46,15 @@ data source is fired. By default the widget will bind to the data source specifi
     }
 
     /**
+    * If set to true the user could sort the pivotgrid by clicking the dimension fields. By default sorting is disabled.Can be set to a JavaScript object which represents the sorting configuration.
+    * @param boolean|\Kendo\UI\PivotGridSortable|array $value
+    * @return \Kendo\UI\PivotGrid
+    */
+    public function sortable($value) {
+        return $this->setProperty('sortable', $value);
+    }
+
+    /**
     * The width of the table columns. Value is treated as pixels.
     * @param float $value
     * @return \Kendo\UI\PivotGrid
@@ -55,7 +64,7 @@ data source is fired. By default the widget will bind to the data source specifi
     }
 
     /**
-    * The height of the pivotgrid. Numeric values are treated as pixels.
+    * The height of the PivotGrid. Numeric values are treated as pixels.
     * @param float|string $value
     * @return \Kendo\UI\PivotGrid
     */
@@ -170,7 +179,7 @@ About the data item structure review this help topic.
 
     /**
     * Sets the expandMember event of the PivotGrid.
-    * Fired before column or row field is expaneded.The event handler function context (available via the this keyword) will be set to the widget instance.
+    * Fired before column or row field is expanded.The event handler function context (available via the this keyword) will be set to the widget instance.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\UI\PivotGrid
     */

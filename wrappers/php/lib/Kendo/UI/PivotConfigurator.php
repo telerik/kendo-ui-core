@@ -27,6 +27,15 @@ class PivotConfigurator extends \Kendo\UI\Widget {
     }
 
     /**
+    * If set to true the user could sort the widget by clicking the dimension fields. By default sorting is disabled.Can be set to a JavaScript object which represents the sorting configuration.
+    * @param boolean|\Kendo\UI\PivotConfiguratorSortable|array $value
+    * @return \Kendo\UI\PivotConfigurator
+    */
+    public function sortable($value) {
+        return $this->setProperty('sortable', $value);
+    }
+
+    /**
     * The text messages displayed in the fields sections.
     * @param \Kendo\UI\PivotConfiguratorMessages|array $value
     * @return \Kendo\UI\PivotConfigurator
