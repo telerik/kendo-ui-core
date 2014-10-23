@@ -143,12 +143,12 @@ var __meta__ = {
             methodName: "_cancelEdit"
         },
         excel: {
-            imageClass: "k-excel",
+            imageClass: "k-i-excel",
             className: "k-grid-excel",
             methodName: "saveAsExcel"
         },
         pdf: {
-            imageClass: "k-pdf",
+            imageClass: "k-i-pdf",
             className: "k-grid-pdf",
             methodName: "saveAsPDF"
         }
