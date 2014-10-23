@@ -796,6 +796,28 @@
         }
     });
 
+    test("column filtering is passed filtering options", function() {
+        var filterMenu = $.fn.kendoFilterMenu;
+
+        try {
+            $.fn.kendoFilterMenu = function(options) {
+                equal(options.foo, "baz");
+            };
+
+            createTreeList({
+                filterable: { foo: "foo" },
+                columns: [ {
+                    field: "id",
+                    filterable: {
+                        foo: "baz"
+                    }
+                } ]
+            });
+        } finally {
+            $.fn.kendoFilterMenu = filterMenu;
+        }
+    });
+
     test("children of hidden row are rendered hidden", function() {
         createTreeList({
             dataSource: [

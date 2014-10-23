@@ -1412,7 +1412,7 @@ var __meta__ = {
                     continue;
                 }
 
-                cells.eq(idx).kendoFilterMenu(extend(true, {}, filterable, {
+                cells.eq(idx).kendoFilterMenu(extend(true, {}, filterable, column.filterable, {
                     dataSource: this.dataSource,
                     init: filterInit
                 }));
