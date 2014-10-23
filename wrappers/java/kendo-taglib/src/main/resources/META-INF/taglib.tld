@@ -21271,6 +21271,12 @@ instance.If the dataSource option is set to a JavaScript object the widget will 
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
+        <attribute>
+            <description>If set to true the user could sort the widget by clicking the dimension fields. By default sorting is disabled.Can be set to a JavaScript object which represents the sorting configuration.</description>
+            <name>sortable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
         <dynamic-attributes>true</dynamic-attributes>
     </tag>
 
@@ -21374,6 +21380,18 @@ instance.If the dataSource option is set to a JavaScript object the widget will 
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>The text message displayed for the menu item which performs ascending sort.</description>
+            <name>sortAscending</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text message displayed for the menu item which performs descending sort.</description>
+            <name>sortDescending</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>The title of the include fields dialog.</description>
             <name>title</name>
             <rtexprvalue>true</rtexprvalue>
@@ -21428,6 +21446,23 @@ instance.If the dataSource option is set to a JavaScript object the widget will 
     </tag>
 
 
+
+
+
+    <tag>
+        <description>If set to true the user could sort the widget by clicking the dimension fields. By default sorting is disabled.Can be set to a JavaScript object which represents the sorting configuration.</description>
+        <name>pivotConfigurator-sortable</name>
+        <tag-class>com.kendoui.taglib.pivotconfigurator.SortableTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>If set to true the user can get the widget in unsorted state by clicking the sorted dimension field.</description>
+            <name>allowUnsort</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
 
 
 
@@ -21499,6 +21534,12 @@ instance.If the dataSource option is set to a JavaScript object the widget will 
             <name>rowHeaderTemplate</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>If set to true the user could sort the pivotgrid by clicking the dimension fields. By default sorting is disabled.Can be set to a JavaScript object which represents the sorting configuration.</description>
+            <name>sortable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
         </attribute>
         <attribute>
             <description>Fired before the widget binds to its data source.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
@@ -21599,6 +21640,18 @@ instance.If the dataSource option is set to a JavaScript object the widget will 
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>The text message displayed for the menu item which performs ascending sort.</description>
+            <name>sortAscending</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text message displayed for the menu item which performs descending sort.</description>
+            <name>sortDescending</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>The title of the include fields dialog.</description>
             <name>title</name>
             <rtexprvalue>true</rtexprvalue>
@@ -21653,6 +21706,23 @@ instance.If the dataSource option is set to a JavaScript object the widget will 
     </tag>
 
 
+
+
+
+    <tag>
+        <description>If set to true the user could sort the pivotgrid by clicking the dimension fields. By default sorting is disabled.Can be set to a JavaScript object which represents the sorting configuration.</description>
+        <name>pivotGrid-sortable</name>
+        <tag-class>com.kendoui.taglib.pivotgrid.SortableTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>If set to true the user can get the pivotgrid in unsorted state by clicking the sorted dimension field.</description>
+            <name>allowUnsort</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
 
 
 

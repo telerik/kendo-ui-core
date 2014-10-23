@@ -111,6 +111,22 @@ public class MessagesFieldMenuTag extends  BaseTag  /* interfaces */ /* interfac
         setProperty("ok", value);
     }
 
+    public java.lang.String getSortAscending() {
+        return (java.lang.String)getProperty("sortAscending");
+    }
+
+    public void setSortAscending(java.lang.String value) {
+        setProperty("sortAscending", value);
+    }
+
+    public java.lang.String getSortDescending() {
+        return (java.lang.String)getProperty("sortDescending");
+    }
+
+    public void setSortDescending(java.lang.String value) {
+        setProperty("sortDescending", value);
+    }
+
     public java.lang.String getTitle() {
         return (java.lang.String)getProperty("title");
     }

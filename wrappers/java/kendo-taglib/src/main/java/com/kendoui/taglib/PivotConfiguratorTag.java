@@ -49,6 +49,10 @@ public class PivotConfiguratorTag extends WidgetTag /* interfaces */implements D
         setProperty("messages", value);
     }
 
+    public void setSortable(com.kendoui.taglib.pivotconfigurator.SortableTag value) {
+        setProperty("sortable", value);
+    }
+
     public void setDataSource(DataSourceTag dataSource) {
         setProperty("dataSource", dataSource);
     }
@@ -59,6 +63,14 @@ public class PivotConfiguratorTag extends WidgetTag /* interfaces */implements D
 
     public void setFilterable(boolean value) {
         setProperty("filterable", value);
+    }
+
+    public boolean getSortable() {
+        return (boolean)getProperty("sortable");
+    }
+
+    public void setSortable(boolean value) {
+        setProperty("sortable", value);
     }
 
 //<< Attributes

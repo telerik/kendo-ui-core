@@ -51,6 +51,10 @@ public class PivotGridTag extends WidgetTag /* interfaces */implements DataBound
         setProperty("messages", value);
     }
 
+    public void setSortable(com.kendoui.taglib.pivotgrid.SortableTag value) {
+        setProperty("sortable", value);
+    }
+
     public void setCollapseMember(CollapseMemberFunctionTag value) {
         setEvent("collapseMember", value.getBody());
     }
@@ -133,6 +137,14 @@ public class PivotGridTag extends WidgetTag /* interfaces */implements DataBound
 
     public void setRowHeaderTemplate(java.lang.String value) {
         setProperty("rowHeaderTemplate", value);
+    }
+
+    public boolean getSortable() {
+        return (boolean)getProperty("sortable");
+    }
+
+    public void setSortable(boolean value) {
+        setProperty("sortable", value);
     }
 
     public String getCollapseMember() {
