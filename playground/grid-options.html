@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <link href="../styles/web/kendo.common.less" rel="stylesheet/less" />
+        <link href="../styles/web/kendo.silver.less" rel="stylesheet/less" />
+        <script src="../demos/mvc/content/shared/js/less.js"></script>"
+
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.columnsorter.js"></script>
+        <script src="../src/kendo.userevents.js"></script>
+        <script src="../src/kendo.draganddrop.js"></script>
+        <script src="../src/kendo.groupable.js"></script>
+        <script src="../src/kendo.resizable.js"></script>
+        <script src="../src/kendo.grid.js"></script>
+        <script src="../src/kendo.popup.js"></script>
+        <script src="../src/kendo.list.js"></script>
+        <script src="../src/kendo.autocomplete.js"></script>
+        <script src="../src/kendo.combobox.js"></script>
+        <script src="../src/kendo.dropdownlist.js"></script>
+
+        <script src="../src/kendo.calendar.js"></script>
+        <script src="../src/kendo.popup.js"></script>
+        <script src="../src/kendo.datepicker.js"></script>
+        <script src="../src/kendo.numerictextbox.js"></script>
+
+
+        <script src="../src/kendo.filtermenu.js"></script>
+        <script src="../src/kendo.pager.js"></script>
+        <script src="../src/kendo.reorderable.js"></script>
+        <script src="../src/kendo.binder.js"></script>
+        <script src="../src/kendo.filtercell.js"></script>
+        <script src="../src/kendo.menu.js"></script>
+        <script src="../src/kendo.columnmenu.js"></script>
+
+        <style>
+            html {
+                font: 12px sans-serif;
+            }
+        </style>
+    </head>
+    <body>
+        <h3>feature grid</h3>
+        <div id="feature"></div>
+        <script>
+            $(function() {
+                var feature = $("#feature").kendoGrid({
+                    filterable: {
+                        mode: "row menu",
+                        operators: {
+                            date: {
+                                eq: "IS EQUAL"
+                            }
+                        }
+                    },
+                    columns: [
+                        { field: "Id", locked: false, width: 300 },
+                        {
+                            field: "Name",
+                            locked: true,
+                            width: 300
+                        },
+                        {
+                            field: "Name",
+                            locked: true,
+                            width: 300,
+                            filterable: {
+                                cell : {
+                                    dataSource: {
+                                        data: [
+                                            { someField:"aaa" },
+                                            { someField:"aab" },
+                                            { someField:"aac" },
+                                            { someField:"aad" }
+                                        ]
+                                    },
+                                    operator: "contains",
+                                    showOperators: true,
+                                    dataTextField: "someField"
+                                }
+                            }
+                        },
+                        {
+                            field: "Male",
+                            locked: false,
+                            width: 300,
+                            filterable: {
+                                cell: {
+                                    //template: function(input) {
+                                        //input.attr("type", "checkbox");
+                                    //}
+                                }
+                            }
+                        },
+                        { field: "Position", filterable: { cell: { enabled: true } }, locked: true, width: 300 },
+                        {
+                            field: "Grade",
+                            values: [
+                                {
+                                    text: "Grade 2",
+                                    value: 2
+                                },
+                                {
+                                    text: "Greid 3",
+                                    value: 3
+                                },
+                                {
+                                    text: "Grade 4",
+                                    value: 4
+                                },
+                                {
+                                    text: "GREID 1",
+                                    value: 1
+                                },
+                            ],
+                            width: 300
+                        },
+                        {
+                            field: "ContractDate",
+                            width: 400,
+                            format: "{0:MM/dd/yyyy}",
+                            filterable: {
+                                operators: {
+                                    date: {
+                                        eq: "col level equal"
+                                    }
+
+                                }
+                            }
+                        },
+                        { field: "ContractDate", width: 400, format: "{0:MM/dd/yyyy}" }
+                    ],
+                    groupable:true,
+                    resizable: true,
+                    navigatable: true,
+                    reorderable: true,
+                    columnMenu: true,
+                    scrollable:true,
+                    //detailTemplate: "foo",
+                    dataSource: {
+                        requestStart: function() {
+                            console.log("RS")
+                        },
+                        //pageSize:2,
+                        transport: {
+                            read: function(options) {
+                                options.success({ dd:[
+                                    {
+                                        Id: 1,
+                                        Name: "foo",
+                                        Position: 1 ,
+                                        Grade: 1 ,
+                                        Male: false,
+                                        ContractDate : new Date('1996/12/12')
+                                    },
+                                    {
+                                        Id: 2,
+                                        Name: "bar",
+                                        Position: 2 ,
+                                        Grade: 1 ,
+                                        Male: true,
+                                        ContractDate : new Date('2012/5/4')
+                                    },
+                                    {
+                                        Id: 3,
+                                        Name: "baz",
+                                        Position: 3 ,
+                                        Grade: 2 ,
+                                        Male: false,
+                                        ContractDate : new Date()
+                                    },
+                                    {
+                                        Id: 4,
+                                        Name: "baz",
+                                        Position: 3 ,
+                                        Grade: 3 ,
+                                        Male: true,
+                                        ContractDate : new Date()
+                                    },
+                                    {
+                                        Id: 4,
+                                        Name: "bat",
+                                        Position: 3 ,
+                                        Grade: 3 ,
+                                        ContractDate : new Date()
+                                    },
+                                    {
+                                        Id: 5,
+                                        Name: "vat",
+                                        Position: 3 ,
+                                        Grade: 2 ,
+                                        Male: false,
+                                        ContractDate : new Date('2012/5/4')
+                                    }
+                                ] })
+                            }
+                        },
+                        schema: {
+                            data: "dd",
+                            model: {
+                                fields: {
+                                    Id: {
+                                        type : "number"
+                                    },
+                                    Position: {
+                                        type : "number"
+                                    },
+                                    Grade: {
+                                        type : "number"
+                                    },
+                                    Name: {
+                                        type : "string"
+                                    },
+                                    Male: {
+                                        type : "boolean"
+                                    },
+                                    ContractDate: {
+                                        type : "date"
+                                    }
+                                }
+                            }
+                        },
+                        group: {
+                            field: "Name"
+                        }
+
+                    }
+                }).data("kendoGrid");
+            });
+        </script>
+        </body>
+    </html>

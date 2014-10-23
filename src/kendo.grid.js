@@ -1104,12 +1104,16 @@ var __meta__ = {
     }
 
     var Grid = kendo.ui.DataBoundWidget.extend({
-        init: function(element, options) {
+        init: function(element, options, events) {
             var that = this;
 
             options = isArray(options) ? { dataSource: options } : options;
 
             Widget.fn.init.call(that, element, options);
+
+            if (events) {
+                that._events = events;
+            }
 
             isRtl = kendo.support.isRtl(element);
 
@@ -1370,12 +1374,43 @@ var __meta__ = {
             that._setContentWidthHandler = null;
         },
 
+        getOptions: function() {
+            var result = extend(true, {}, this.options);
+            result.columns = kendo.deepExtend([], this.columns);
+            var dataSource = this.dataSource;
+
+            result.dataSource = kendo.deepExtend(
+                {},
+                dataSource.options, {
+                    page: dataSource.page(),
+                    filter: dataSource.filter(),
+                    pageSize: dataSource.pageSize(),
+                    sort: dataSource.sort(),
+                    group: dataSource.group(),
+                    aggregate: dataSource.aggregate()
+                });
+
+            return result;
+        },
+
         setOptions: function(options) {
-            var that = this;
+            var currentOptions = this.getOptions();
+            kendo.deepExtend(currentOptions, options);
+            var wrapper = this.wrapper;
+            var events = this._events;
+            var element = this.element;
 
-            Widget.fn.setOptions.call(this, options);
+            this.destroy();
+            this.options = null;
+            if (wrapper[0] !== element[0]) {
+                wrapper.before(element);
+                wrapper.remove();
+            }
+            element.empty();
 
-            that._templates();
+            this.init(element, currentOptions, events);
+            this._setEvents(currentOptions);
+
         },
 
         items: function() {

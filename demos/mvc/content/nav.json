@@ -1854,6 +1854,17 @@
             "kendo-ui": "This demo shows how API Functions can manipulate the contents and behavior of Kendo UI Grid widget."
         }
       },
+       {
+        "text": "Persist state",
+        "url": "grid/persist-state",
+        "new": true,
+        "title": {
+            "kendo-ui": "KendoGrid Persist State API Demo"
+        },
+        "meta": {
+            "kendo-ui": "This demo shows how setOptions and getOptions methods can manipulate the state of Kendo UI Grid widget."
+        }
+      },
       {
         "text": "Globalization",
         "url": "grid/globalization",
