@@ -119,20 +119,28 @@ var __meta__ = {
             }
         },
 
-        _filterSource: function(filter) {
-            var that = this,
-                options = that.options,
-                dataSource = that.dataSource,
-                expression = dataSource.filter() || {};
+        _filterSource: function(filter, force) {
+            var that = this;
+            var options = that.options;
+            var dataSource = that.dataSource;
+            var expression = extend({}, dataSource.filter() || {});
 
-            removeFiltersForField(expression, options.dataTextField);
+            var removed = removeFiltersForField(expression, options.dataTextField);
+
+            if ((filter || removed) && that.trigger("filtering", { filter: filter })) {
+                return;
+            }
 
             if (filter) {
                 expression = expression.filters || [];
                 expression.push(filter);
             }
 
-            dataSource.filter(expression);
+            if (!force) {
+                dataSource.filter(expression);
+            } else {
+                dataSource.read(expression);
+            }
         },
 
         _header: function() {
@@ -1086,16 +1094,27 @@ var __meta__ = {
     });
 
     function removeFiltersForField(expression, field) {
+        var filters;
+        var found = false;
+
         if (expression.filters) {
-            expression.filters = $.grep(expression.filters, function(filter) {
-                removeFiltersForField(filter, field);
+            filters = $.grep(expression.filters, function(filter) {
+                found = removeFiltersForField(filter, field);
                 if (filter.filters) {
                     return filter.filters.length;
                 } else {
                     return filter.field != field;
                 }
             });
+
+            if (!found && expression.filters.length !== filters.length) {
+                found = true;
+            }
+
+            expression.filters = filters;
         }
+
+        return found;
     }
 })(window.kendo.jQuery);
 

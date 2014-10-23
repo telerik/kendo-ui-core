@@ -82,7 +82,7 @@ var __meta__ = {
             that._aria();
 
             if (options.autoBind) {
-                that._filterSource();
+                that._filterSource(); //TODO: diff when just bind and actually filter
             } else {
                 text = options.text;
 
@@ -131,6 +131,7 @@ var __meta__ = {
             "close",
             CHANGE,
             "select",
+            "filtering",
             "dataBinding",
             "dataBound",
             "cascade"

@@ -467,4 +467,55 @@ test("ComboBox trigger change on blur after filtration", 1, function() {
     combobox.input.focusout();
 });
 
+test("ComboBox triggers filtering event on data source filter", 3, function() {
+    var combobox = input.kendoComboBox({
+        autoBind: false,
+        dataSource: ["foo", "bar"],
+        filter: "contains",
+        filtering: function(e) {
+            var filter = e.filter;
+
+            equal(filter.field, "");
+            equal(filter.operator, "contains");
+            equal(filter.value, "baz");
+        }
+    }).data("kendoComboBox");
+
+    combobox.search("baz");
+});
+
+test("modifying filter expression in filtering event changes datasource result", 2, function() {
+    var combobox = input.kendoComboBox({
+        autoBind: false,
+        dataSource: ["foo", "bar"],
+        filter: "contains",
+        filtering: function(e) {
+            e.filter.value = "foo";
+        }
+    }).data("kendoComboBox");
+
+    combobox.search("baz");
+
+    var data = combobox.dataSource.view();
+
+    equal(data.length, 1);
+    equal(data[0], "foo");
+});
+
+test("ComboBox filtering event can be prevented", 0, function() {
+    var combobox = input.kendoComboBox({
+        dataSource: ["foo", "bar"],
+        filter: "contains",
+        filtering: function(e) {
+            e.preventDefault();
+        }
+    }).data("kendoComboBox");
+
+    combobox.dataSource.bind("change", function() {
+        ok(false);
+    });
+
+    combobox.search("baz");
+});
+
 })();

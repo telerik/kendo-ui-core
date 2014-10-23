@@ -233,5 +233,21 @@ asyncTest("Prevent filtration after item is selected", 0, function() {
     }, 100);
 });
 
+asyncTest("remove input value clears filter even with minLength option", 2, function() {
+    var autocomplete = new AutoComplete(input, {
+        dataSource: ["foo", "bar"],
+        minLenght: 2
+    });
+
+    input.val("ba").press("a".charCodeAt(0));
+
+    autocomplete.dataSource.bind("change", function() {
+        equal(this.view().length, 2);
+        equal(this.view()[0], "foo");
+        start();
+    });
+
+    input.val("").trigger({ type: "keydown", keyCode: kendo.keys.BACKSPACE });
+});
 
 }());
