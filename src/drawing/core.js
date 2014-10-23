@@ -14,7 +14,8 @@
         Widget = kendo.ui.Widget,
         deepExtend = kendo.deepExtend,
 
-        util = kendo.util;
+        util = kendo.util,
+        defined = util.defined;
 
     // Base drawing surface ==================================================
     var Surface = kendo.Observable.extend({
@@ -249,7 +250,7 @@
         _wrap: function(object, field) {
             var type = toString.call(object);
 
-            if (object !== null && type === "[object Object]") {
+            if (object !== null && defined(object) && type === "[object Object]") {
                 if (!(object instanceof OptionsStore) && !(object instanceof Class)) {
                     object = new OptionsStore(object, this.prefix + field + ".");
                 }
