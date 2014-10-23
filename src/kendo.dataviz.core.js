@@ -819,6 +819,10 @@ var __meta__ = {
         },
 
         appendVisual: function(childVisual) {
+            if (!childVisual.chartElement) {
+                childVisual.chartElement = this;
+            }
+
             if (childVisual.options.noclip) {
                 this.getRoot().visual.append(childVisual);
             } else if (childVisual.options.zIndex) {
