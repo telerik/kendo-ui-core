@@ -57,4 +57,17 @@
 
         equal(handler.calls, 1);
     });
+
+    test("filterMenuInit is fired upon filter menu initialization", function() {
+        var handler = spy();
+
+        createTreeList({
+            filterable: true,
+            filterMenuInit: handler
+        });
+
+        instance.header.find(".k-grid-filter:first").click();
+
+        equal(handler.calls, 1);
+    });
 })();

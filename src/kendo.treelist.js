@@ -70,6 +70,7 @@ var __meta__ = {
     var DATABINDING = "dataBinding";
     var DATABOUND = "dataBound";
     var CANCEL = "cancel";
+    var FILTERMENUINIT = "filterMenuInit";
 
     var classNames = {
         wrapper: "k-treelist k-grid k-widget",
@@ -836,7 +837,8 @@ var __meta__ = {
             REMOVE,
             DATABINDING,
             DATABOUND,
-            CANCEL
+            CANCEL,
+            FILTERMENUINIT
         ],
 
         _toggle: function(row, expand) {
@@ -1399,6 +1401,10 @@ var __meta__ = {
                 return;
             }
 
+            var filterInit = proxy(function(e) {
+                this.trigger(FILTERMENUINIT, { field: e.field, container: e.container });
+            }, this);
+
             for (idx = 0, length = cells.length; idx < length; idx++) {
                 column = this.columns[idx];
 
@@ -1407,7 +1413,8 @@ var __meta__ = {
                 }
 
                 cells.eq(idx).kendoFilterMenu(extend(true, {}, filterable, {
-                    dataSource: this.dataSource
+                    dataSource: this.dataSource,
+                    init: filterInit
                 }));
             }
         },
