@@ -59,6 +59,7 @@ var __meta__ = {
         RootElement = dataviz.RootElement,
         Ring = dataviz.Ring,
         ShapeElement = dataviz.ShapeElement,
+        ShapeBuilder = dataviz.ShapeBuilder,
         Text = dataviz.Text,
         TextBox = dataviz.TextBox,
         Title = dataviz.Title,
@@ -6833,7 +6834,7 @@ var __meta__ = {
                 }
             }
         },
-
+        //TO DO: remove
         getViewElements: function(view) {
             var segment = this,
                 sector = segment.sector,
@@ -6881,11 +6882,52 @@ var __meta__ = {
             return elements;
         },
 
-        createSegment: function(view, sector, options) {
+        createVisual: function() {
+            var segment = this,
+                sector = segment.sector,
+                options = segment.options,
+                borderOptions = options.border || {},
+                border = borderOptions.width > 0 ? {
+                    stroke: {
+                        color: borderOptions.color,
+                        width: borderOptions.width,
+                        opacity: borderOptions.opacity,
+                        dashType: borderOptions.dashType
+                    }
+                } : {},
+                elements = [],
+                overlay = options.overlay;
+
+            if (overlay) {
+                overlay = deepExtend({}, options.overlay, {
+                    r: sector.r,
+                    ir: sector.ir,
+                    cx: sector.c.x,
+                    cy: sector.c.y,
+                    bbox: sector.getBBox()
+                });
+            }
+
+            if (segment.value) {
+                this.visual = segment.createSegment(sector, deepExtend({
+                    id: segment.id,
+                    fill: {
+                        color: options.color,
+                        opacity: options.opacity
+                    },
+                    stroke: {
+                        opacity: options.opacity
+                    },
+                    zIndex: options.zIndex
+                }, border));
+            }
+        },
+
+        createSegment: function(sector, options) {
             if (options.singleSegment) {
-                return view.createCircle(sector.c, sector.r, options);
+                return new draw.Circle(new geom.Circle(new geom.Point(sector.c.x, sector.c.y), sector.r), options);
             } else {
-                return view.createSector(sector, options);
+                return ShapeBuilder.current.createRing(sector, options);
             }
         },
 
@@ -7469,8 +7511,8 @@ var __meta__ = {
             }
         },
 
-        createSegment: function(view, sector, options) {
-            return view.createRing(sector, options);
+        createSegment: function(sector, options) {
+            return ShapeBuilder.current.createRing(sector, options);
         }
     });
     deepExtend(DonutSegment.fn, PointEventsMixin);
