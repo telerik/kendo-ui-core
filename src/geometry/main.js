@@ -429,7 +429,7 @@
             return this.center;
         },
 
-        MAX_INTERVAL: 90,
+        MAX_INTERVAL: 45,
 
         pointAt: function(angle) {
             var center = this.center;
