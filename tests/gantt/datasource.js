@@ -893,8 +893,18 @@
                         start: new Date("2014/03/31"),
                         end: new Date("2014/04/06"),
                         percentComplete: 40,
-                        summary: false
-                    }],
+                        summary: true
+                    },
+                        {
+                            id: 8,
+                            title: "GrandChild1",
+                            parentId: 7,
+                            orderId: 0,
+                            start: new Date("2014/03/31"),
+                            end: new Date("2014/04/06"),
+                            percentComplete: 40,
+                            summary: false
+                        }],
                 schema: {
                     model: {
                         id: "id"
@@ -977,6 +987,25 @@
         dataSource.remove(task);
 
         equal(dataSource.get(1).get("percentComplete"), 30);
+    });
+
+    test("remove() parent removes child items", 2, function(e) {
+        var task = dataSource.get(7);
+
+        dataSource.remove(task);
+        
+        equal(dataSource.total(), 6);
+        equal(dataSource.get(8), undefined);
+    });
+    
+    test("remove() parent removes child items recursively", 3, function(e) {
+        var task = dataSource.get(6);
+
+        dataSource.remove(task);
+        
+        equal(dataSource.total(), 5);
+        equal(dataSource.get(8), undefined);
+        equal(dataSource.get(7), undefined);
     });
 
 

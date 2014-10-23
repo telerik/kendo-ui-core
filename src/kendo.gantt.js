@@ -553,9 +553,12 @@ var __meta__ = {
 
         remove: function(task) {
             var parentId = task.get("parentId");
+            var children = this.taskAllChildren(task);
+
+            this._removeItems(children);
 
             task = DataSource.fn.remove.call(this, task);
-            
+
             this._childRemoved(parentId, task.get("orderId"));
 
             return task;
