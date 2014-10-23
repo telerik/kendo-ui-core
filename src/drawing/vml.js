@@ -338,7 +338,6 @@
 
         mapStyle: function() {
             var style = ObserverNode.fn.mapStyle.call(this);
-            style.push(["position", "absolute"]);
             style.push(["white-space", "nowrap"]);
 
             return style;
