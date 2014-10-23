@@ -1965,6 +1965,11 @@
             equal(stop.options.opacity, 0.7);
         });
 
+        test("inits zero opacity", function() {
+            stop = new GradientStop(0.5, "foo", 0);
+            equal(stop.options.opacity, 0);
+        });
+
         test("sets opacity to one if not specified", function() {
             stop = new GradientStop(0.5, "foo");
             equal(stop.options.opacity, 1);

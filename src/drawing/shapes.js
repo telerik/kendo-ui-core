@@ -876,7 +876,7 @@
             this.options = new OptionsStore({
                 offset: offset,
                 color: color,
-                opacity: opacity || 1
+                opacity: defined(opacity) ? opacity : 1
             });
             this.options.addObserver(this);
         }
