@@ -1748,22 +1748,20 @@ var __meta__ = {
             item.container.append(new TextBox(options.text, labelOptions));
         },
 
-        getViewElements: function(view) {
-            var item = this,
-                options = item.options,
-                overlayRect = view.createRect(item.container.box, {
-                    data: { modelId: item.modelId },
-                    zIndex: options.zIndex,
-                    cursor: options.cursor,
-                    fill: "#fff",
-                    fillOpacity: 0
-                }),
-                elements = [];
+        renderComplete: function() {
+            ChartElement.fn.renderComplete.call(this);
 
-            append(elements, ChartElement.fn.getViewElements.call(this,  view));
-            elements.push(overlayRect);
+            var cursor = this.options.cursor || {};
+            var eventSink = draw.Path.fromRect(this.container.box.toRect(), {
+                fill: {
+                    color: WHITE,
+                    opacity: 0
+                },
+                stroke: null,
+                cursor: cursor.style
+            });
 
-            return elements;
+            this.visual.append(eventSink);
         },
 
         click: function(widget, e) {
@@ -1989,21 +1987,6 @@ var __meta__ = {
                 offsetX, offsetY,
                 offsetX + containerBox.width(), offsetY + containerBox.height()
             ));
-        },
-
-        getViewElements: function(view) {
-            var legend = this,
-                elements = [],
-                group;
-
-            if (legend.hasItems()) {
-                group = view.createGroup({ zIndex: legend.options.zIndex });
-                append(group.children, ChartElement.fn.getViewElements.call(legend, view));
-
-                elements.push(group);
-            }
-
-            return elements;
         }
     });
 
