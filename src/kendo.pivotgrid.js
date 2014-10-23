@@ -2715,7 +2715,8 @@ var __meta__ = {
 
         sort: function(expr) {
             var sortable = this.options.sortable;
-            var skipExpr = sortable && sortable.allowUnsort && expr.dir === "asc";
+            var allowUnsort = sortable === true || sortable.allowUnsort;
+            var skipExpr = allowUnsort && expr.dir === "asc";
 
             var expressions = (this.dataSource.sort() || []);
             var result = removeExpr(expressions, expr.field);
