@@ -1328,6 +1328,12 @@
             ok(gradientNode.render().indexOf("id='" + gradient.id + "'") != -1);
         });
 
+        test("renders gradientUnits based on userSpace", function() {
+            ok(gradientNode.render().indexOf("gradientUnits='objectBoundingBox'") != -1);
+            gradient.userSpace(true);
+            ok(gradientNode.render().indexOf("gradientUnits='userSpaceOnUse'") != -1);
+        });
+
         test("renders children", function() {
             gradientNode.renderChildren = function() {
                 ok(true);

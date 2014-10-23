@@ -957,6 +957,10 @@
 
         renderCoordinates: function() {
             return renderAllAttr(this.mapCoordinates());
+        },
+
+        mapSpace: function() {
+            return ["gradientUnits", this.srcElement.userSpace() ? "userSpaceOnUse" : "objectBoundingBox"]
         }
     });
 
@@ -975,7 +979,8 @@
                 ["x1", start.x],
                 ["y1", start.y],
                 ["x2", end.x],
-                ["y2", end.y]
+                ["y2", end.y],
+                this.mapSpace()
             ];
 
             return attrs;
@@ -996,7 +1001,8 @@
             var attrs = [
                 ["cx", center.x],
                 ["cy", center.y],
-                ["r", radius]
+                ["r", radius],
+                this.mapSpace()
             ];
             return attrs;
         }
