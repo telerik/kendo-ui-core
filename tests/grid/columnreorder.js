@@ -1629,25 +1629,4 @@
 
     });
 
-    function moveOverDropTarget(draggable, dropTarget) {
-        var position = dropTarget.position();
-
-        draggable.trigger({ type: "mousedown", pageX: 1, pageY: 1 });
-
-        $(document.documentElement).trigger({
-            type: "mousemove",
-            pageX: position.left,
-            pageY: position.top,
-            clientX: position.left,
-            clientY: position.top
-        });
-
-        $(document.documentElement).trigger({
-            type: "mouseup",
-            pageX: position.left,
-            pageY: position.top,
-            clientX: position.left,
-            clientY: position.top
-        });
-    }
 })();

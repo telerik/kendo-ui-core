@@ -653,6 +653,11 @@ var __meta__ = {
         return result;
     }
 
+    function flatColumnsInDomOrder(columns) {
+        var result = flatColumns(lockedColumns(columns));
+        return result.concat(flatColumns(nonLockedColumns(columns)));
+    }
+
     function flatColumns(columns) {
         var result = [];
         var children = [];
@@ -1856,14 +1861,14 @@ var __meta__ = {
                 that.wrapper.kendoReorderable({
                     draggable: that._draggableInstance,
                     dragOverContainers: function(sourceIndex, targetIndex) {
-                        var columns = flatColumns(that.columns);
+                        var columns = flatColumnsInDomOrder(that.columns);
                         return columns[sourceIndex].lockable !== false && targetParentContainerIndex(columns, sourceIndex, targetIndex) > -1;
                     },
                     inSameContainer: function(e) {
-                        return $(e.source).parent()[0] === $(e.target).parent()[0] && targetParentContainerIndex(flatColumns(that.columns), e.sourceIndex, e.targetIndex) > -1;
+                        return $(e.source).parent()[0] === $(e.target).parent()[0] && targetParentContainerIndex(flatColumnsInDomOrder(that.columns), e.sourceIndex, e.targetIndex) > -1;
                     },
                     change: function(e) {
-                        var columns = flatColumns(that.columns);
+                        var columns = flatColumnsInDomOrder(that.columns);
                         var column = columns[e.oldIndex];
                         var newIndex = targetParentContainerIndex(columns, e.oldIndex, e.newIndex);
 
