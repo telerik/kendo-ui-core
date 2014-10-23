@@ -737,6 +737,13 @@
             compareMatrices(result.transformation, new g.Matrix(100, 0, 0, 200, 10, 20));
         });
 
+        test("does not set transformation if userSpace is true", function() {
+            var result = renderGradient(new d.LinearGradient({
+                userSpace: true
+            }));
+            ok(!result.transformation);
+        });
+
         test("adds gradient stops", function() {
             var result = renderGradient(new d.LinearGradient({
                 stops: [[

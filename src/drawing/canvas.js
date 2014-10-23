@@ -338,8 +338,9 @@
 
             ctx.save();
 
-            ctx.transform(bbox.width(), 0, 0, bbox.height(), bbox.origin.x, bbox.origin.y);
-
+            if (!fill.userSpace()) {
+                ctx.transform(bbox.width(), 0, 0, bbox.height(), bbox.origin.x, bbox.origin.y);
+            }
             ctx.fillStyle = gradient;
             ctx.fill();
 
