@@ -1851,7 +1851,7 @@ var __meta__ = {
         },
 
         createVisual: function() {
-            this.visual = new draw.Group();
+            ChartElement.fn.createVisual.call(this);
 
             this._gridLines = new draw.Group({
                 zIndex: -2
