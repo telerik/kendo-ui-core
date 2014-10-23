@@ -1827,8 +1827,7 @@ var __meta__ = {
             labels: {
                 margin: {
                     left: 6
-                },
-                zIndex: 1
+                }
             },
             offsetX: 0,
             offsetY: 0,
@@ -2031,7 +2030,9 @@ var __meta__ = {
                 width: 1,
                 color: BLACK
             },
-            zIndex: 1,
+            labels: {
+                zIndex: 1,
+            },
             justified: false
         },
 
