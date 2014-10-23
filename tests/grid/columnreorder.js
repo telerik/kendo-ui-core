@@ -1629,4 +1629,34 @@
 
     });
 
+    test("reorder data cells index is updated - locked columns", function() {
+        var grid = new Grid(div, {
+            columns: [
+                { title: "master", width: 10 },
+                { title: "master1",
+                    locked: true,
+                    columns: [
+                        { title: "master1-child" },
+                        { title: "master1-child1", columns: [{ title: "master1-child1-child", width: 30 }, { title: "master1-child1-child2", width: 40 } ] },
+                        { title: "master1-child2", columns: [{ title: "master1-child2-child", width: 50 }, { title: "master1-child2-child2", width: 60 } ] }
+                ] }
+            ],
+            dataSource: {
+                data: data
+            }
+        });
+
+        grid.reorderColumn(2, grid.columns[0].columns[0]);
+
+        var rows = grid.lockedHeader.find("tr");
+
+        equal(rows.eq(2).find("th").eq(0).attr("data-index"), 0);
+        equal(rows.eq(2).find("th").eq(1).attr("data-index"), 1);
+        equal(rows.eq(2).find("th").eq(2).attr("data-index"), 2);
+        equal(rows.eq(2).find("th").eq(3).attr("data-index"), 3);
+        equal(rows.eq(1).find("th").eq(2).attr("data-index"), 4);
+
+        equal(grid.thead.find("tr").first().find("th").eq(0).attr("data-index"), 5);
+    });
+
 })();

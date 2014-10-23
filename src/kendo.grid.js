@@ -730,17 +730,21 @@ var __meta__ = {
         return rows.length - emptyRowsCount;
     }
 
-    function mapColumnToCellRows(columns, cells, rowIndex, rows, cellIndex) {
-        var idx, row, length;
+    function mapColumnToCellRows(columns, cells, rows, rowIndex, offset) {
+        var idx, row, length, children = [];
 
         for (idx = 0, length = columns.length; idx < length; idx++) {
             row = rows[rowIndex] || [];
-            row.push(cells.eq(cellIndex + idx));
+            row.push(cells.eq(offset + idx));
             rows[rowIndex] = row;
 
             if (columns[idx].columns) {
-                mapColumnToCellRows(columns[idx].columns, cells, rowIndex + 1, rows, cellIndex + columns.length);
+                children = children.concat(columns[idx].columns);
             }
+        }
+
+        if (children.length) {
+            mapColumnToCellRows(children, cells, rows, rowIndex + 1, offset + columns.length);
         }
     }
 
@@ -877,28 +881,25 @@ var __meta__ = {
             var index = row.find("th:not(.k-group-cell,.k-hierarchy-cell)").index(cell);
             var prevCells = cell.prevAll(":not(.k-group-cell,.k-hierarchy-cell)");
 
-            var offset = index - prevCells.filter(function() {
-                return this.rowSpan > 1;
-            }).length;
-
             var idx;
 
             prevCells = prevCells.filter(function() {
-                return parseInt($(this).attr(colSpanAttr), 10) > 1;
+                return !this.rowSpan || this.rowSpan === 1;
             });
+
+            var offset = 0;
 
             for (idx = 0; idx < prevCells.length; idx++) {
                 offset += parseInt(prevCells.eq(idx).attr(colSpanAttr), 10) || 1;
             }
 
             var cells = child.find("th:not(.k-group-cell,.k-hierarchy-cell)");
-
-            offset = offset || 1;
-
             var colSpan = parseInt(cell.attr(colSpanAttr), 10) || 1;
+
             idx = 0;
+
             while (idx < colSpan) {
-                child = cells.eq(idx + (offset - 1));
+                child = cells.eq(idx + offset);
                 result = result.add(childColumnsCells(child));
                 var value = parseInt(child.attr(colSpanAttr), 10);
                 if (value > 1) {
@@ -2048,7 +2049,7 @@ var __meta__ = {
 
         _updateColumnCellIndex: function() {
             var columns = leafColumns(this.columns);
-            var header = this.thead.add(this.lockedTable);
+            var header = this.thead.add(this.lockedHeader);
             for (var idx = 0, length = columns.length; idx < length; idx++) {
                 var position = columnPosition(columns[idx], this.columns);
                 var cell = header.find("tr").eq(position.row).find(".k-header:not(.k-group-cell,.k-hierarchy-cell)").eq(position.cell);
@@ -5063,7 +5064,7 @@ var __meta__ = {
                         colOffset += colSpan - 1;
                     }
 
-                    mapColumnToCellRows([columns[idx]], childColumnsCells(cell), 0, rows, 0);
+                    mapColumnToCellRows([columns[idx]], childColumnsCells(cell), rows, 0, 0);
 
                     leafColumnsCount = leafColumnsCount || 1;
                     for (var j = 0; j < leafColumnsCount; j++) {
