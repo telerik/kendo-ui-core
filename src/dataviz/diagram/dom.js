@@ -1954,12 +1954,21 @@
              * @returns The newly created connection.
              */
             connect: function (source, target, options) {
-                var conOptions = deepExtend({}, this.options.connectionDefaults, options),
-                    connection = new Connection(source, target, conOptions);
+                var connection;
+                if (this.connectionsDataSource && this._isEditable) {
+                    var dataItem = this.connectionsDataSource.add({});
+                    connection = this._connectionsDataMap[dataItem.uid];
+                    connection.source(source);
+                    connection.target(target);
+                    this.connectionsDataSource.sync();
+                } else {
+                    connection = new Connection(source, target,
+                        deepExtend({ }, this.options.connectionDefaults, options));
 
-                connection.diagram = this;
+                    this.addConnection(connection);
+                }
 
-                return this._addConnection(connection);
+                return connection;
             },
             /**
              * Determines whether the the two items are connected.
@@ -1992,6 +2001,7 @@
                 connection.diagram = this;
                 this.mainLayer.append(connection.visual);
                 this.connections.push(connection);
+                connection.updateOptionsFromModel();
 
                 return connection;
             },
@@ -2007,6 +2017,7 @@
 
                 return this.addConnection(connection, undoable);
             },
+
             /**
              * Adds shape to the diagram.
              * @param item Shape, Point. If point is passed it will be created new Shape and positioned at that point.
@@ -3222,6 +3233,7 @@
 
             _removeConnections: function(items) {
                 for (var i = 0; i < items.length; i++) {
+                    this.remove(this._connectionsDataMap[items[i].uid], false);
                     this._connectionsDataMap[items[i].uid] = null;
                 }
             },
