@@ -2494,11 +2494,22 @@ var __meta__ = {
         },
 
         pushDestroy: function(items) {
+            var pushed = this._removeItems(items);
+
+            if (pushed.length) {
+                this.trigger("push", {
+                    type: "destroy",
+                    items: pushed
+                });
+            }
+        },
+
+        _removeItems: function(items) {
             if (!isArray(items)) {
                 items = [items];
             }
 
-            var pushed = [];
+            var destroyed = [];
             var autoSync = this.options.autoSync;
             this.options.autoSync = false;
             try {
@@ -2511,7 +2522,7 @@ var __meta__ = {
                         for (var idx = 0; idx < items.length; idx++) {
                             var item = items.at(idx);
                             if (item.id === model.id) {
-                                pushed.push(item);
+                                destroyed.push(item);
                                 items.splice(idx, 1);
                                 found = true;
                                 break;
@@ -2528,12 +2539,7 @@ var __meta__ = {
                 this.options.autoSync = autoSync;
             }
 
-            if (pushed.length) {
-                this.trigger("push", {
-                    type: "destroy",
-                    items: pushed
-                });
-            }
+            return destroyed;
         },
 
         remove: function(model) {

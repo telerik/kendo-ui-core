@@ -204,6 +204,14 @@ var __meta__ = {
             return result.concat(DataSource.fn._readData.call(this, newData));
         },
 
+        remove: function(root) {
+            var items = this._subtree(this._childrenMap(this.data()), root.id);
+
+            this._removeItems(items);
+
+            DataSource.fn.remove.call(this, root);
+        },
+
         _filterCallback: function(query) {
             var result = [];
             var data = query.toArray();
@@ -380,7 +388,7 @@ var __meta__ = {
             }
 
             for (var i = 0; i < view.length; i++) {
-                current = view[i];
+                current = view.at(i);
 
                 if (current.parentId == id) {
                     result.push(current);

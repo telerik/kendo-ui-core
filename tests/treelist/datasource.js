@@ -725,6 +725,21 @@
         equal(ds.get(1).loaded(), true, "item should be loaded");
     });
 
+    test("removing item removes all its children", function() {
+        var ds = new TreeListDataSource({
+            data: [
+                { id: 1, parentId: null },
+                { id: 2, parentId: 1 }
+            ]
+        });
+
+        ds.read();
+        ds.remove(ds.get(1));
+
+        equal(ds.data().length, 0);
+        equal(ds.view().length, 0);
+    });
+
     test("create with options object instantiates TreeListDataSource", function() {
         var ds = TreeListDataSource.create({});
 
