@@ -52,10 +52,12 @@ $pivotgrid->dataSource($dataSource)
     ->columnWidth(200)
     ->configurator("#configurator")
     ->filterable(true)
+    ->sortable(true)
     ->height(494);
 
 $configurator = new \Kendo\UI\PivotConfigurator('configurator');
-$configurator->filterable(true);
+$configurator->filterable(true)
+             ->sortable(true);
 
 ?>
 
