@@ -631,6 +631,37 @@ var __meta__ = {
         }
     });
 
+    var ShapeBuilder = function() {};
+    ShapeBuilder.fn = ShapeBuilder.prototype = {
+        createRing: function (sector, options) {
+            var startAngle = sector.startAngle + 180;
+            var endAngle = sector.angle + startAngle;
+            var center = new geom.Point(sector.c.x, sector.c.y);
+            var radius = math.max(sector.r, 0);
+            var innerRadius = math.max(sector.ir, 0);
+            var arc = new geom.Arc(center, {
+                startAngle: startAngle,
+                endAngle: endAngle,
+                radiusX: radius,
+                radiusY: radius
+            });
+            var path = draw.Path.fromArc(arc, options).close();
+
+            if (innerRadius)  {
+                arc.radiusX = arc.radiusY = innerRadius;
+                var innerEnd = arc.pointAt(endAngle);
+                path.lineTo(innerEnd.x, innerEnd.y);
+                path.arc(endAngle, startAngle, innerRadius, innerRadius, true);
+            } else {
+                path.lineTo(center.x, center.y);
+            }
+
+            return path;
+        }
+    };
+
+    ShapeBuilder.current = new ShapeBuilder();
+
     // View-Model primitives ==================================================
     var ChartElement = Class.extend({
         init: function(options) {
@@ -4808,6 +4839,7 @@ var __meta__ = {
         RootElement: RootElement,
         RotationAnimation: RotationAnimation,
         Sector: Sector,
+        ShapeBuilder: ShapeBuilder,
         ShapeElement: ShapeElement,
         Text: Text,
         TextMetrics: TextMetrics,
