@@ -937,8 +937,8 @@ var __meta__ = {
                 stackPoints = segment.stackPoints,
                 points = LineSegment.fn.points.call(segment, stackPoints);
 
-            points.unshift(center);
-            points.push(center);
+            points.unshift([center.x, center.y]);
+            points.push([center.x, center.y]);
 
             return points;
         }
