@@ -42,6 +42,7 @@ var __meta__ = {
         ScatterChart = dataviz.ScatterChart,
         ScatterLineChart = dataviz.ScatterLineChart,
         SeriesBinder = dataviz.SeriesBinder,
+        ShapeBuilder = dataviz.ShapeBuilder,
         SplineSegment = dataviz.SplineSegment,
         SplineAreaSegment = dataviz.SplineAreaSegment,
         append = dataviz.append,
@@ -247,17 +248,20 @@ var __meta__ = {
             return this.gridLineAngles(altAxis, 0.5, skipMajor ? 1 : 0);
         },
 
-        renderPlotBands: function(view) {
+        createPlotBands: function() {
             var axis = this,
                 options = axis.options,
                 plotBands = options.plotBands || [],
-                elements = [],
                 i,
                 band,
                 slot,
                 singleSlot,
                 head,
                 tail;
+
+            var group = new draw.Group({
+                zIndex: -1
+            });
 
             for (i = 0; i < plotBands.length; i++) {
                 band = plotBands[i];
@@ -270,15 +274,19 @@ var __meta__ = {
                 tail = math.ceil(band.to) - band.to;
                 slot.angle -= (tail + head) * singleSlot.angle;
 
-                elements.push(view.createSector(slot, {
-                    fill: band.color,
-                    fillOpacity: band.opacity,
-                    strokeOpacity: band.opacity,
-                    zIndex: -1
-                }));
+                var ring = ShapeBuilder.current.createRing(slot, {
+                    fill: {
+                        color: band.color,
+                        opacity: band.opacity,
+                    },
+                    stroke: {
+                        opacity: band.opacity
+                    }
+                });
+                group.append(ring);
             }
 
-            return elements;
+            axis.appendVisual(group);
         },
 
         plotBandSlot: function(band) {
@@ -349,11 +357,10 @@ var __meta__ = {
             }
         },
 
-        renderPlotBands: function(view) {
+        createPlotBands: function() {
             var axis = this,
                 options = axis.options,
                 plotBands = options.plotBands || [],
-                elements = [],
                 type = options.majorGridLines.type,
                 altAxis = axis.plotArea.polarAxis,
                 majorAngles = altAxis.majorAngles(),
@@ -364,37 +371,51 @@ var __meta__ = {
                 slot,
                 ring;
 
+            var group = new draw.Group({
+                zIndex: -1
+            });
+
             for (i = 0; i < plotBands.length; i++) {
                 band = plotBands[i];
                 bandStyle = {
-                    fill: band.color,
-                    fillOpacity: band.opacity,
-                    strokeOpacity: band.opacity,
-                    zIndex: -1
+                    fill: {
+                        color: band.color,
+                        opacity: band.opacity,
+                    },
+                    stroke: {
+                        opacity: band.opacity
+                    }
                 };
 
                 slot = axis.getSlot(band.from, band.to, true);
                 ring = new Ring(center, center.y - slot.y2, center.y - slot.y1, 0, 360);
 
-                elements.push(type === ARC ?
-                    view.createRing(ring, bandStyle) :
-                    view.createPolyline(
-                        axis.plotBandPoints(ring, majorAngles), true, bandStyle
-                    )
-                );
+                var shape;
+                if (type === ARC) {
+                    shape = ShapeBuilder.current.createRing(ring, bandStyle);
+                } else {
+                    shape = draw.Path.fromPoints(
+                            axis.plotBandPoints(ring, majorAngles), bandStyle
+                    ).close();
+                }
+
+                group.append(shape);
             }
 
-            return elements;
+            axis.appendVisual(group);
         },
 
         plotBandPoints: function(ring, angles) {
             var innerPoints = [],
-                outerPoints = [],
-                i;
+                outerPoints = [];
 
-            for (i = 0; i < angles.length; i++) {
-                innerPoints.push(Point2D.onCircle(ring.c, angles[i], ring.ir));
-                outerPoints.push(Point2D.onCircle(ring.c, angles[i], ring.r));
+            var center = [ring.c.x, ring.c.y];
+            var innerCircle = new geom.Circle(center, ring.ir);
+            var outerCircle = new geom.Circle(center, ring.r);
+
+            for (var i = 0; i < angles.length; i++) {
+                innerPoints.push(innerCircle.pointAt(angles[i]));
+                outerPoints.push(outerCircle.pointAt(angles[i]));
             }
 
             innerPoints.reverse();
@@ -664,7 +685,7 @@ var __meta__ = {
                       skipMajor ? this.options.majorUnit : 0);
         },
 
-        renderPlotBands: RadarCategoryAxis.fn.renderPlotBands,
+        createPlotBands: RadarCategoryAxis.fn.createPlotBands,
 
         plotBandSlot: function(band) {
             return this.getSlot(band.from, band.to);
