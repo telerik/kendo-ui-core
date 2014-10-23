@@ -106,12 +106,12 @@
 
 /* Slider */
 @draghandle-border-radius: 13px;
-@draghandle-border-color: #cccccc;
-@draghandle-background-color: @secondary-background-color;
+@draghandle-border-color: #3f51b5;
+@draghandle-background-color: #3f51b5;
 @draghandle-shadow: 0 0 0 1px #c4c4c4;
-@draghandle-hover-border-color: @hover-border-color;
-@draghandle-hover-background-color: @hover-background-color;
-@draghandle-hover-shadow: 0 0 8px 0 rgba(100,100,100,.9);
+@draghandle-hover-border-color: @draghandle-border-color;
+@draghandle-hover-background-color: @draghandle-background-color;
+@draghandle-hover-shadow: 0 0 0 8px RGBA(63, 81, 181, 0.3);
 
 /* Grid */
 @alt-background-color: #f5f5f5;
@@ -524,6 +524,7 @@ border-radius: 0;
 //TabStrip
 .k-tabstrip-items > .k-item {
 	border-bottom-color: @header-background-color;
+	border-radius: 0;
 }
 
 .k-tabstrip-items .k-state-active {
@@ -531,6 +532,10 @@ background-color: @header-background-color;
 .composite-background(@active-gradient);
 border-color: @header-background-color;
 border-bottom-color: @accent-color;
+}
+
+.k-tabstrip .k-content.k-state-active {
+	border-color: transparent;
 }
 
 .k-tabstrip-items .k-item.k-state-hover
@@ -723,6 +728,7 @@ border-radius: 0;
 
 .k-grid,
 .k-panelbar,
+.k-notification,
 .k-popup .k-textbox:focus,
 .k-popup  .k-autocomplete.k-state-focused,
 .k-popup  .k-picker-wrap.k-state-focused,
@@ -809,7 +815,11 @@ border-color: @accent-color;
 .k-group-indicator .k-button:focus:active:not(.k-state-disabled):not([disabled]),
 .k-group-indicator .k-button:focus:not(.k-state-disabled):not([disabled]),
 .k-gantt-toolbar .k-button:focus:not(.k-state-disabled):not([disabled]),
-.k-gantt-toolbar.k-button:focus:active:not(.k-state-disabled):not([disabled])
+.k-gantt-toolbar .k-button:focus:active:not(.k-state-disabled):not([disabled]),
+.k-toolbar .k-button:focus:not(.k-state-disabled):not([disabled]),
+.k-toolbar .k-button:focus:active:not(.k-state-disabled):not([disabled]),
+.k-toolbar .k-button:active:hover, 
+.k-toolbar .k-button.k-state-active:hover
 {
     .box-shadow(none);
 }
@@ -906,8 +916,7 @@ table.k-editor {
 //Slider
 .k-slider-track
 {
-    background-color: @secondary-border-color;
-    border-color: @secondary-border-color;
+    background-color: @secondary-border-color;  
 }
 
 .k-slider-selection
@@ -925,6 +934,10 @@ table.k-editor {
 	.box-shadow(none);
 }
 
+.k-draghandle {
+	.box-shadow(none);
+}
+
 .k-draghandle.k-state-selected,
 .k-draghandle.k-state-selected:link,
 .k-draghandle.k-state-selected:hover
@@ -936,7 +949,7 @@ table.k-editor {
 .k-draghandle.k-state-focused,
 .k-draghandle.k-state-focused:link
 {
-    .box-shadow(@focused-shadow);
-	border-color: @drop-down-focused-border-color;
-	background-color: @widget-background-color;
+    .box-shadow(none);
+	border-color: @draghandle-background-color;
+	background-color: @draghandle-background-color;
 }
