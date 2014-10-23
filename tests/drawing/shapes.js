@@ -1224,6 +1224,11 @@
     (function() {
         var path;
 
+        function closePoints(p1, p2, tolerance) {
+            close(p1.x, p2.x, tolerance);
+            close(p1.y, p2.y, tolerance);
+        };
+
         module("Path", {
             setup: function() {
                 path = new Path();
@@ -1395,10 +1400,6 @@
         test("arc adds arc curvePoints to path", function() {
             path.moveTo(200, 100);
             path.arc(30, 180, 100, 100);
-            var closePoints = function(p1, p2) {
-                close(p1.x, p2.x, 0.1);
-                close(p1.y, p2.y, 0.1);
-            };
             var expectedArc = new g.Arc([113.4, 50],{
                 startAngle: 30,
                 endAngle: 180,
@@ -1412,11 +1413,11 @@
             for (var idx = 0, pointIdx = 0; idx < segments.length; idx++) {
                 segment = segments[idx];
                 if (segment.controlIn()) {
-                    closePoints(segment.controlIn(), arcCurvePoints[pointIdx++]);
+                    closePoints(segment.controlIn(), arcCurvePoints[pointIdx++], 0.1);
                 }
-                closePoints(segment.anchor(),arcCurvePoints[pointIdx++]);
+                closePoints(segment.anchor(),arcCurvePoints[pointIdx++], 0.1);
                 if (segment.controlOut()) {
-                    closePoints(segment.controlOut(), arcCurvePoints[pointIdx++]);
+                    closePoints(segment.controlOut(), arcCurvePoints[pointIdx++], 0.1);
                 }
             }
         });
@@ -1440,10 +1441,6 @@
         test("arcTo adds arc curvePoints to path", function() {
             path.moveTo(400, 300);
             path.arcTo(new Point(250, 256.7), 100, 50, true, true);
-            var closePoints = function(p1, p2) {
-                close(p1.x, p2.x, 0.1);
-                close(p1.y, p2.y, 0.1);
-            };
             var expectedArc = new g.Arc([300, 300],{
                 startAngle: 0,
                 endAngle: -120,
@@ -1457,11 +1454,11 @@
             for (var idx = 0, pointIdx = 0; idx < segments.length; idx++) {
                 segment = segments[idx];
                 if (segment.controlIn()) {
-                    closePoints(segment.controlIn(), arcCurvePoints[pointIdx++]);
+                    closePoints(segment.controlIn(), arcCurvePoints[pointIdx++], 0.1);
                 }
-                closePoints(segment.anchor(),arcCurvePoints[pointIdx++]);
+                closePoints(segment.anchor(),arcCurvePoints[pointIdx++], 0.1);
                 if (segment.controlOut()) {
-                    closePoints(segment.controlOut(), arcCurvePoints[pointIdx++]);
+                    closePoints(segment.controlOut(), arcCurvePoints[pointIdx++], 0.1);
                 }
             }
         });
@@ -1637,6 +1634,33 @@
             });
 
             equal(path.options.get("foo"), "bar");
+        });
+
+        test("fromArc adds creates path from arc", function() {
+            var arc = new g.Arc([113.4, 50],{
+                startAngle: 30,
+                endAngle: 180,
+                radiusX: 100,
+                radiusY: 100,
+                anticlockwise: false
+            });
+            var arcPath = Path.fromArc(arc);
+
+            path.moveTo(200, 100);
+            path.arc(30, 180, 100, 100);
+
+            var arcSegments = arcPath.segments;
+            var segments = path.segments;
+            equal(arcSegments.length, segments.length);
+            for (var idx = 0; idx < segments.length; idx++) {
+                if (segments[idx].controlIn()) {
+                    closePoints(segments[idx].controlIn(), arcSegments[idx].controlIn(), 0.1);
+                }
+                closePoints(segments[idx].anchor(), arcSegments[idx].anchor(), 0.1);
+                if (segments[idx].controlOut()) {
+                    closePoints(segments[idx].controlOut(), arcSegments[idx].controlOut(), 0.1);
+                }
+            }
         });
     })();
 

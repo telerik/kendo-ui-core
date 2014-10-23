@@ -765,6 +765,15 @@
         }
     };
 
+    Path.fromArc = function(arc, options) {
+        var path = new Path(options);
+        var startAngle = arc.startAngle;
+        var start = arc.pointAt(startAngle);
+        path.moveTo(start.x, start.y);
+        path.arc(startAngle, arc.endAngle, arc.radiusX, arc.radiusY, arc.anticlockwise);
+        return path;
+    };
+
     var MultiPath = Element.extend({
         nodeType: "MultiPath",
 
