@@ -2963,7 +2963,219 @@ var __meta__ = {
     
     
      registerTheme("material", {
-       
+       chart: {
+            title: {
+                color: "#444444"
+            },
+            legend: {
+                labels: {
+                    color: "#444444"
+                },
+                inactiveItems: {
+                    labels: {
+                        color: "#CBCBCB"
+                    },
+                    markers: {
+                        color: "#CBCBCB"
+                    }
+                }
+            },
+            seriesDefaults: {
+                labels: {
+                    color: "#444444"
+                },
+                errorBars: {
+                    color: "#444444"
+                },
+                notes: {
+                    icon: {
+                        background: "transparent",
+                        border: {
+                            color: "#e5e5e5"
+                        }
+                    },
+                    label: {
+                        color: "#444444"
+                    },
+                    line: {
+                        color: "#e5e5e5"
+                    }
+                },
+                candlestick: {
+                    downColor: "#c7c7c7",
+                    line: {
+                        color: "#787878"
+                    }
+                },
+                area: {
+                    opacity: 0.9
+                },
+                waterfall: {
+                    line: {
+                        color: "#e5e5e5"
+                    }
+                },
+                horizontalWaterfall: {
+                    line: {
+                        color: "#e5e5e5"
+                    }
+                },
+                overlay: {
+                    gradient: "none"
+                },
+                border: {
+                    _brightness: 1
+                }
+            },
+            seriesColors: ["#3f51b5", "#03a9f4", "#4caf50", "#f9ce1d", "#ff9800", "#ff5722"],
+            axisDefaults: {
+                line: {
+                    color: "#e5e5e5"
+                },
+                labels: {
+                    color: "#444444"
+                },
+                minorGridLines: {
+                    color: "#e5e5e5"
+                },
+                majorGridLines: {
+                    color: "#e5e5e5"
+                },
+                title: {
+                    color: "#444444"
+                },
+                crosshair: {
+                    color: "#7f7f7f"
+                },
+                notes: {
+                    icon: {
+                        background: "transparent",
+                        border: {
+                            color: "#e5e5e5"
+                        }
+                    },
+                    label: {
+                        color: "#444444"
+                    },
+                    line: {
+                        color: "#e5e5e5"
+                    }
+                }
+            }
+        },
+        gauge: {
+            pointer: {
+                color: "#3f51b5"
+            },
+            scale: {
+                rangePlaceholderColor: "#e5e5e5",
+
+                labels: {
+                    color: "#444444"
+                },
+                minorTicks: {
+                    color: "#444444"
+                },
+                majorTicks: {
+                    color: "#444444"
+                },
+                line: {
+                    color: "#444444"
+                }
+            }
+        },
+        diagram: {
+            shapeDefaults: {
+                fill: {
+                    color: "#3f51b5"
+                },
+                connectorDefaults: {
+                    fill: {
+                        color: "#7f7f7f"
+                    },
+                    stroke: {
+                        color: WHITE
+                    },
+                    hover: {
+                        fill: {
+                            color: WHITE
+                        },
+                        stroke: {
+                            color: "#7f7f7f"
+                        }
+                    }
+                },
+                content: {
+                    color: "#444444"
+                }
+            },
+            editable: {
+                resize: {
+                    handles: {
+                        fill: {
+                            color: WHITE
+                        },
+                        stroke: {
+                            color: "#444444"
+                        },
+                        hover: {
+                            fill: {
+                                color: "#444444"
+                            },
+                            stroke: {
+                                color: "#444444"
+                            }
+                        }
+                    }
+                },
+                rotate: {
+                    thumb: {
+                        stroke: {
+                            color: "#444444"
+                        },
+                        fill: {
+                            color: "#444444"
+                        }
+                    }
+                }
+            },
+            selectable: {
+                stroke: {
+                    color: "#444444"
+                }
+            },
+            connectionDefaults: {
+                stroke: {
+                    color: "#7f7f7f"
+                },
+                content: {
+                    color: "#444444"
+                },
+                selection: {
+                    handles: {
+                        fill: {
+                            color: WHITE
+                        },
+                        stroke: {
+                            color: "#444444"
+                        }
+                    },
+                    stroke: {
+                        color: "#444444"
+                    }
+                }
+            }
+        },
+        treeMap: {
+            colors: [
+                ["#3f51b5", "#cff3f0"],
+                ["#03a9f4", "#e5f6fe"],
+                ["#4caf50", "#edf7ed"],
+                ["#f9ce1d", "#fefae8"],
+                ["#ff9800", "#fff4e5"],
+                ["#ff5722", "#ffeee8"]
+            ]
+        }
     })
     
 
