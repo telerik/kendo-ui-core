@@ -73,17 +73,17 @@ var __meta__ = {
 
     function parentName(tuple, level) {
         var member = tuple.members[level];
-        var parentName = buildPath(tuple, level - 1);
+        var parentNameValue = buildPath(tuple, level - 1);
 
         if (member.parentName) {
-            parentName.push(member.parentName);
+            parentNameValue.push(member.parentName);
         }
 
-        if (!parentName.length) {
-            parentName = "";
+        if (!parentNameValue.length) {
+            parentNameValue = "";
         }
 
-        return kendo.stringify(parentName);
+        return kendo.stringify(parentNameValue);
     }
 
     function accumulateMembers(accumulator, rootTuple, tuple, level) {
@@ -106,7 +106,7 @@ var __meta__ = {
         }
 
         children = member.children;
-        length = children.length
+        length = children.length;
 
         if (tuple === rootTuple) {
             accumulator[kendo.stringify([member.name])] = !!length;
@@ -510,7 +510,7 @@ var __meta__ = {
                         continue;
                     }
 
-                    var name = getName(descriptor);
+                    name = getName(descriptor);
 
                     value = getters[name](dataItem);
                     value = value !== undefined ? value.toString() : value;
@@ -968,23 +968,6 @@ var __meta__ = {
                 rows: this.rowsAxisDescriptors(),
                 measures: this.measures()
             }, options));
-        },
-
-        sort: function(val) {
-            var that = this;
-
-            if(val !== undefined) {
-                that._query({ sort: val });
-                return;
-            }
-
-            return that._sort;
-
-            var descriptors = {};
-            descriptors[origin] = members;
-            descriptors[other] = this._descriptorsForAxis(other);
-
-            this._query(descriptors);
         },
 
         query: function(options) {
@@ -2065,7 +2048,7 @@ var __meta__ = {
         return {
             root: root,
             expanded: expanded
-        }
+        };
     }
 
     function serializeMembers(members, measures, sort) {
@@ -2738,7 +2721,7 @@ var __meta__ = {
             var result = removeExpr(expressions, expr.field);
 
             if (skipExpr && expressions.length !== result.length) {
-                expr = null
+                expr = null;
             }
 
             if (expr) {
@@ -2762,7 +2745,7 @@ var __meta__ = {
                     html += this.template(extend({ sortIcon: this._sortIcon(item.name || item) }, item));
                 }
             } else {
-                html = this.emptyTemplate(this.options.messages.empty)
+                html = this.emptyTemplate(this.options.messages.empty);
             }
 
             this.element.html(html);
@@ -2796,7 +2779,7 @@ var __meta__ = {
             }
 
             return icon;
-        },
+        }
     });
 
     var PivotGrid = Widget.extend({
