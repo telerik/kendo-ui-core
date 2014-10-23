@@ -9816,7 +9816,7 @@ var __meta__ = {
     var PieAnimation = draw.Animation.extend({
         options: {
             easing: "easeOutElastic",
-            duration: INITIAL_ANIMATION_DURATION * 2
+            duration: INITIAL_ANIMATION_DURATION
         },
 
         setup: function() {
