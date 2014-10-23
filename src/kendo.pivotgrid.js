@@ -2561,7 +2561,7 @@ var __meta__ = {
 
             that._sortable();
 
-            that.element.on("click" + NS, ".k-button", function(e) {
+            that.element.on("click" + NS, ".k-button,.k-item", function(e) {
                 var target = $(e.target);
                 var name = target.closest("[" + kendo.attr("name") + "]")
                                  .attr(kendo.attr("name"));
@@ -2572,7 +2572,7 @@ var __meta__ = {
 
                 if (target.hasClass("k-setting-delete")) {
                     that.remove(name);
-                } else if (that.options.sortable && target.hasClass("k-button")) {
+                } else if (that.options.sortable && target[0] === e.currentTarget) {
                     that.sort({
                         field: name,
                         dir: target.find(".k-i-sort-asc")[0] ? "desc" : "asc"

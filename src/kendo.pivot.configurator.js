@@ -56,6 +56,7 @@ var __meta__ = {
         options: {
             name: "PivotConfigurator",
             filterable: false,
+            sortable: false,
             messages: {
                 measures: "Drop Data Fields Here",
                 columns: "Drop Column Fields Here",
@@ -183,7 +184,23 @@ var __meta__ = {
         },
 
         _createTarget: function(element, options) {
-            var filter = options.filterable ? '<span class="k-icon k-filter k-setting-filter"></span>' : '';
+            var template = '<li class="k-item k-header" data-' + kendo.ns + 'name="${data.name || data}">${data.name || data}';
+            var sortable = options.sortable;
+            var icons = "";
+
+            if (sortable) {
+                icons += '#if (data.sortIcon) {#';
+                icons += '<span class="k-icon ${data.sortIcon} k-setting-sort"></span>';
+                icons += '#}#';
+            }
+
+            if (options.filterable || sortable) {
+                icons += '<span class="k-icon k-i-arrowhead-s k-setting-fieldmenu"></span>';
+            }
+
+            icons += '<span class="k-icon k-si-close k-setting-delete"></span>';
+            template += '<span class="k-field-actions">' + icons + '</span></li>';
+
             return new kendo.ui.PivotSettingTarget(element, $.extend({
                 dataSource: this.dataSource,
                 hint: function(element) {
@@ -193,8 +210,7 @@ var __meta__ = {
 
                     return wrapper;
                 },
-                template: '<li class="k-item k-header" data-' + kendo.ns + 'name="${data.name || data}">${data.name || data}<span class="k-field-actions">' +
-                            filter + '<span class="k-icon k-si-close k-setting-delete"></span></span></li>',
+                template: template,
                 emptyTemplate: '<li class="k-item k-empty">${data}</li>'
             }, options));
         },
@@ -211,17 +227,20 @@ var __meta__ = {
             var measuresContainer = $(SETTING_CONTAINER_TEMPLATE({ name: this.options.messages.measuresLabel, icon: "k-i-sum"})).appendTo(container);
             var measures = $('<ul class="k-pivot-configurator-settings k-list k-reset" />').appendTo(measuresContainer.last());
 
+            var options = this.options;
+
             this.columns = this._createTarget(columns, {
-                filterable: this.options.filterable,
+                filterable: options.filterable,
+                sortable: options.sortable,
                 connectWith: rows,
                 messages: {
-                    empty: this.options.messages.columns,
-                    fieldMenu: this.options.messages.fieldMenu
+                    empty: options.messages.columns,
+                    fieldMenu: options.messages.fieldMenu
                 }
             });
 
             this.rows = this._createTarget(rows, {
-                filterable: this.options.filterable,
+                filterable: options.filterable,
                 setting: "rows",
                 connectWith: columns,
                 messages: {
@@ -233,7 +252,7 @@ var __meta__ = {
             this.measures = this._createTarget(measures, {
                 setting: "measures",
                 messages: {
-                    empty: this.options.messages.measures
+                    empty: options.messages.measures
                 }
             });
 
