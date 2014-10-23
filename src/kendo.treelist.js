@@ -350,7 +350,7 @@ var __meta__ = {
 
         read: function(data) {
             if (!data || !data.id) {
-                this._data.length = 0;
+                this._data = this._observe([]);
             }
 
             return DataSource.fn.read.call(this, data);
@@ -359,7 +359,7 @@ var __meta__ = {
         load: function(model) {
             var method = "_query";
 
-            if (!model.loaded()) {
+            if (!model.loaded() && model.hasChildren) {
                 method = "read";
             }
 

@@ -97,7 +97,7 @@
                 read: function(options) {
                     calls++;
 
-                    options.success([ { id: calls } ]);
+                    options.success([ { id: calls, hasChildren: true } ]);
                 }
             }
         });
@@ -118,7 +118,7 @@
             transport: {
                 read: function(options) {
                     options.success([
-                        { id: ++calls }
+                        { id: ++calls, hasChildren: true }
                     ]);
                 }
             }
@@ -159,7 +159,7 @@
             transport: {
                 read: function(options) {
                     options.success([
-                        { id: ++calls }
+                        { id: ++calls, hasChildren: true }
                     ]);
                 }
             }
@@ -200,7 +200,7 @@
                     var id = options.data.id;
 
                     if (!id) {
-                        options.success([ { id: 42 } ]);
+                        options.success([ { id: 42, hasChildren: true } ]);
                     } else {
                         equal(id, 42);
                     }
@@ -211,6 +211,19 @@
         ds.read();
 
         ds.load(ds.at(0));
+    });
+
+    test("load model with local data", function() {
+        var ds = new TreeListDataSource({
+            data: [ { id: 1, parentId: null } ]
+        });
+
+        ds.read();
+
+        ds.load(ds.at(0));
+
+        equal(ds.view().length, 1);
+        ok(ds.at(0).loaded());
     });
 
     test("childNodes returns child items", function() {
@@ -855,6 +868,7 @@
         ds.read();
 
         equal(ds.data().length, 1);
+        ok(ds.data() instanceof kendo.data.ObservableArray);
     });
 
     test("add new item with equal id and parentId", function() {
