@@ -6890,18 +6890,19 @@ var __meta__ = {
                 });
             }
 
+            ChartElement.fn.createVisual.call(this);
             if (segment.value) {
-                this.visual = segment.createSegment(sector, deepExtend({
-                    id: segment.id,
-                    fill: {
-                        color: options.color,
-                        opacity: options.opacity
-                    },
-                    stroke: {
-                        opacity: options.opacity
-                    },
-                    zIndex: options.zIndex
-                }, border));
+                this.visual.append(segment.createSegment(sector, deepExtend({
+                        fill: {
+                            color: options.color,
+                            opacity: options.opacity
+                        },
+                        stroke: {
+                            opacity: options.opacity
+                        },
+                        zIndex: options.zIndex
+                    }, border))
+                );
             }
         },
 
@@ -6927,28 +6928,22 @@ var __meta__ = {
             ChartElement.fn.createAnimation.call(this);
         },
 
-        highlightOverlay: function(view, options) {
+        createHighlight: function(options) {
             var segment = this,
                 highlight = segment.options.highlight || {},
-                border = highlight.border || {},
-                outlineId = segment.id + OUTLINE_SUFFIX,
-                element;
+                border = highlight.border || {};
 
-            options = deepExtend({}, options, { id: outlineId });
-
-            if (segment.value !== 0) {
-                element = segment.createSegment(view, segment.sector, deepExtend({}, options, {
-                    fill: highlight.color,
-                    fillOpacity: highlight.opacity,
-                    strokeOpacity: border.opacity,
-                    strokeWidth: border.width,
-                    stroke: border.color,
-                    id: null,
-                    data: { modelId: segment.modelId }
-                }));
-            }
-
-            return element;
+            return segment.createSegment(segment.sector, deepExtend({}, options, {
+                fill: {
+                    color: highlight.color,
+                    opacity: highlight.opacity
+                },
+                stroke: {
+                    opacity: border.opacity,
+                    width: border.width,
+                    color: border.color
+                }
+            }));
         },
 
         tooltipAnchor: function(width, height) {
