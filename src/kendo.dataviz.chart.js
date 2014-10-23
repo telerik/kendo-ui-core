@@ -6913,6 +6913,20 @@ var __meta__ = {
             }
         },
 
+        createAnimation: function() {
+            var options = this.options;
+
+            var center = this.sector.c;
+            deepExtend(options, {
+                animation: {
+                    center: [center.x, center.y],
+                    delay: this.animationDelay
+                }
+            });
+
+            ChartElement.fn.createAnimation.call(this);
+        },
+
         highlightOverlay: function(view, options) {
             var segment = this,
                 highlight = segment.options.highlight || {},
@@ -9799,40 +9813,25 @@ var __meta__ = {
         }
     });
 
-    var PieAnimation = ElementAnimation.extend({
+    var PieAnimation = draw.Animation.extend({
         options: {
             easing: "easeOutElastic",
-            duration: INITIAL_ANIMATION_DURATION
+            duration: INITIAL_ANIMATION_DURATION * 2
         },
 
         setup: function() {
-            var element = this.element,
-                sector = element.config,
-                startRadius;
-
-            if (element.options.singleSegment) {
-                sector = element;
-            }
-
-            this.endRadius = sector.r;
-            startRadius = this.startRadius = sector.ir || 0;
-            sector.r = startRadius;
+            this.element.transform(geom.transform()
+                .scale(0, 0, this.options.center)
+            );
         },
 
         step: function(pos) {
-            var animation = this,
-                element = animation.element,
-                endRadius = animation.endRadius,
-                sector = element.config,
-                startRadius = animation.startRadius;
-
-            if (element.options.singleSegment) {
-                sector = element;
-            }
-
-            sector.r = interpolate(startRadius, endRadius, pos);
+            this.element.transform(geom.transform()
+                .scale(pos, pos, this.options.center)
+            );
         }
     });
+    draw.AnimationFactory.current.register(PIE, PieAnimation);
 
     var BubbleAnimation = ElementAnimation.extend({
         options: {
