@@ -3092,13 +3092,6 @@
                     var dsOptions = this.options.dataSource || {};
                     var ds = isArray(dsOptions) ? { data: dsOptions } : dsOptions;
 
-                    ds = deepExtend({}, {
-                        schema: {
-                            modelBase: ShapeModel,
-                            model: ShapeModel
-                        }
-                    }, ds);
-
                     if (this.dataSource && this._shapesRefreshHandler) {
                         this.dataSource
                             .unbind("change", this._shapesRefreshHandler)
@@ -3128,13 +3121,6 @@
                 var dsOptions = this.options.connectionsDataSource;
                 if (dsOptions) {
                     var ds = isArray(dsOptions) ? { data: dsOptions } : dsOptions;
-
-                    ds = deepExtend({}, {
-                        schema: {
-                            modelBase: ConnectionModel,
-                            model: ConnectionModel
-                        }
-                    }, ds);
 
                     if (this.connectionsDataSource && this._connectionsRefreshHandler) {
                         this.connectionsDataSource
@@ -3404,39 +3390,6 @@
                     this.toolBar = null;
                 }
             }
-        });
-
-        var ShapeModel = kendo.data.Model.define({
-            id: "id",
-
-            fields: {
-                id: { type: "number", editable: false },
-                text: { type: "string" },
-                width: { type: "number" },
-                height: { type: "number" },
-                x: { type: "number" },
-                y: { type: "number" }
-            }
-        });
-
-        var ConnectionModel = kendo.data.Model.define({
-            id: "id",
-
-            fields: {
-                id: { type: "number", editable: false },
-                text: { type: "string" },
-                from: { type: "number" },
-                to: { type: "number" },
-                fromX: { type: "number" },
-                fromY: { type: "number" },
-                toX: { type: "number" },
-                toY: { type: "number" }
-            }
-        });
-
-        deepExtend(kendo.data, {
-            ConnectionModel: ConnectionModel,
-            ShapeModel: ShapeModel
         });
 
         function filterShapeDataItem(dataItem) {
