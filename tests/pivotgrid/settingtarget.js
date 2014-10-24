@@ -94,9 +94,30 @@
 
         equal(children.length, 2);
         ok(children.eq(0).is("span"));
-        ok(children.eq(0).text(), "foo");
+        equal(children.eq(0).text(), "foo");
         ok(children.eq(1).is("span"));
-        ok(children.eq(1).text(), "bar");
+        equal(children.eq(1).text(), "bar");
+    });
+
+    test("renders the datasource measure setting using the template", function() {
+        var dataSource = new kendo.data.PivotDataSource({
+            columns: ["foo", "bar"],
+            measures: ["baz"]
+        });
+
+        var setting = new PivotSettingTarget($(div), {
+            dataSource: dataSource,
+            setting: "measures",
+            template: "<span>${data.name || data}</span>"
+        });
+
+        dataSource.fetch();
+
+        var children = $(div).children();
+
+        equal(children.length, 1);
+        ok(children.eq(0).is("span"));
+        equal(children.eq(0).text(), "baz");
     });
 
     test("renders the columns by default", function() {

@@ -184,7 +184,7 @@ var __meta__ = {
         },
 
         _createTarget: function(element, options) {
-            var template = '<li class="k-item k-header" data-' + kendo.ns + 'name="${data.name || data}">${data.name || data}';
+            var template = '<li class="k-item k-header" data-' + kendo.ns + 'name="${data.name}">${data.name}';
             var sortable = options.sortable;
             var icons = "";
 

@@ -2739,11 +2739,12 @@ var __meta__ = {
             var idx = 0;
             var item;
 
-
             if (length) {
                 for (; idx < length; idx++) {
                     item = items[idx];
-                    html += this.template(extend({ sortIcon: this._sortIcon(item.name || item) }, item));
+                    item = item.name === undefined ? { name: item } : item;
+
+                    html += this.template(extend({ sortIcon: this._sortIcon(item.name) }, item));
                 }
             } else {
                 html = this.emptyTemplate(this.options.messages.empty);
@@ -3007,7 +3008,7 @@ var __meta__ = {
         },
 
         _createSettingTarget: function(element, options) {
-            var template = '<span tabindex="0" class="k-button" data-' + kendo.ns + 'name="${data.name || data}">${data.name || data}';
+            var template = '<span tabindex="0" class="k-button" data-' + kendo.ns + 'name="${data.name}">${data.name}';
             var sortable = options.sortable;
             var icons = "";
 
