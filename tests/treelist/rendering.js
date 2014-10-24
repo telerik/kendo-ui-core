@@ -569,6 +569,20 @@
         equal(fooButton.find(".k-icon").length, 0);
     });
 
+    test("custom commands render name as text", function() {
+        createTreeList({
+            dataSource: [ { id: 1 } ],
+            columns: [
+                { field: "id" },
+                { command: [ { name: "foo" } ] }
+            ]
+        });
+
+        var fooButton = button();
+        equal(fooButton.length, 1);
+        equal(fooButton.text(), "foo");
+    });
+
     test("change default text of edit command button", function() {
         createTreeList({
             dataSource: [ { id: 1 } ],

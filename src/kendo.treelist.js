@@ -1362,7 +1362,7 @@ var __meta__ = {
                 "button", {
                     "data-command": name,
                     className: [ "k-button", "k-button-icontext", command.className ].join(" ")
-                }, icon.concat([ kendoTextElement(command.text) ])
+                }, icon.concat([ kendoTextElement(command.text || command.name) ])
             );
         },
 
