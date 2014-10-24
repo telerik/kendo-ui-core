@@ -41,6 +41,12 @@
                         }
                     };
 
+                    function onFiltering(e) {
+                        if ("kendoConsole" in window) {
+                            kendoConsole.log("event :: filtering");
+                        }
+                    }
+
                     var data = [
                         { text: "Item 1", value:"1" },
                         { text: "Item 2", value:"2" },
@@ -50,11 +56,13 @@
                     $("#combobox").kendoComboBox({
                         dataTextField: "text",
                         dataValueField: "value",
+                        filter: "startswith",
                         dataSource: data,
                         select: onSelect,
                         change: onChange,
                         close: onClose,
                         open: onOpen,
+                        filtering: onFiltering,
                         dataBound:onDataBound
                     });
                 });
@@ -63,6 +71,6 @@
                 .demo-section {
                     width: 400px;
                 }
-            </style>                        
+            </style>
         </div>
-        
+

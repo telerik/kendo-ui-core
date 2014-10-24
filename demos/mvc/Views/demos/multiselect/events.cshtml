@@ -36,6 +36,12 @@
                 }
             };
 
+            function onFiltering(e) {
+                if ("kendoConsole" in window) {
+                    kendoConsole.log("event :: filtering");
+                }
+            }
+
             var data = [
                 { text: "Africa", value:"1" },
                 { text: "Europe", value:"2" },
@@ -51,6 +57,7 @@
                 dataValueField: "value",
                 dataSource: data,
                 dataBound: onDataBound,
+                filtering: onFiltering,
                 select: onSelect,
                 change: onChange,
                 close: onClose,
@@ -66,5 +73,5 @@
         .demo-section {
             width: 400px;
         }
-    </style> 
+    </style>
 </div>

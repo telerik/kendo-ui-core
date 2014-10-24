@@ -29,6 +29,18 @@
                         }
                     };
 
+                    function onDataBound(e) {
+                        if ("kendoConsole" in window) {                            
+                            kendoConsole.log("event :: dataBound");
+                        }
+                    };
+
+                    function onFiltering(e) {
+                        if ("kendoConsole" in window) {
+                            kendoConsole.log("event :: filtering");
+                        }
+                    }
+
                     var data = [
                         {text: "Item1", value:"1"},
                         {text: "Item2", value:"2"},
@@ -39,10 +51,13 @@
                         dataTextField: "text",
                         dataValueField: "value",
                         dataSource: data,
+                        filter: "startswith",
                         select: onSelect,
                         change: onChange,
                         close: onClose,
-                        open: onOpen
+                        open: onOpen,
+                        filtering: onFiltering,
+                        dataBound:onDataBound
                     });
                 });
             </script>            
@@ -50,5 +65,5 @@
                 .demo-section {
                     width: 400px;
                 }
-            </style>   
+            </style>
         </div>

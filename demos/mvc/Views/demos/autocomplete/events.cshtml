@@ -41,6 +41,12 @@
                         }
                     }
 
+                    function onFiltering(e) {
+                        if ("kendoConsole" in window) {
+                            kendoConsole.log("event :: filtering");
+                        }
+                    }
+
                     var data = [
                             "Alabama",
                             "Alaska",
@@ -106,6 +112,7 @@
                         change: onChange,
                         close: onClose,
                         open: onOpen,
+                        filtering: onFiltering,
                         dataBound: onDataBound
                     });
                 });
