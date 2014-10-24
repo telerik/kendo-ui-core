@@ -1062,8 +1062,14 @@
                     deepEqual([x, y], [20, 20]);
                 },
                 bezierCurveTo: function(cp1x, cp1y, cp2x, cp2y, x, y) {
-                    equal(order++, 1, "#");
-                    arrayClose([cp1x, cp1y, cp2x, cp2y, x, y], [20, 25, 15, 30, 10, 30], 0.3);
+                    var expected;
+                    if (order++ === 1) {
+                        expected = [20, 22.6, 18.9, 25.2, 17, 27];
+                    } else {
+                        expected = [15.2, 28.9, 12.6, 30, 10, 30];
+                    }
+
+                    arrayClose([cp1x, cp1y, cp2x, cp2y, x, y], expected, 0.3);
                 }
             }));
         });
