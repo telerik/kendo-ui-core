@@ -568,14 +568,11 @@
             var attrs = [
                 ["on", "true"],
                 ["type", GRADIENT],
-                ["color", stopColor(fill.baseColor, stops[0])],
-                ["color2", stopColor(fill.baseColor, stops[stops.length - 1])],
                 ["focus", 0],
                 ["method", "none"],
-                ["angle", 270 - angle],
-                this.colors(fill)
+                ["angle", 270 - angle]
             ];
-
+            this.addColors(attrs);
             return attrs;
         },
 
@@ -588,21 +585,23 @@
             var attrs = [
                 ["on", "true"],
                 ["type", "gradienttitle"],
-                ["color", stopColor(fill.baseColor, stops[0])],
-                ["color2", stopColor(fill.baseColor, stops[stops.length - 1])],
                 ["focus", "100%"],
                 ["focusposition", focusx + " " + focusy],
-                ["method", "none"],
-                this.colors(fill)
+                ["method", "none"]
             ];
+            this.addColors(attrs);
 
             return attrs;
         },
 
-        colors: function(fill) {
-            var fillField = this.element.colors ? "colors.value" : "colors";
+        addColors: function(attrs) {
+            var options = this.srcElement.options;
             var stopColors = [];
-            var stops = fill.stops;
+            var stops = options.fill.stops;
+            var baseColor = options.baseColor;
+            var colorsField = this.element.colors ? "colors.value" : "colors";
+            var color = stopColor(baseColor, stops[0]);
+            var color2 = stopColor(baseColor, stops[stops.length - 1]);
             var stop;
 
             for (var idx = 0; idx < stops.length; idx++) {
@@ -610,11 +609,14 @@
 
                 stopColors.push(
                     math.round(stop.offset() * 100) + "% " +
-                    stopColor(fill.baseColor, stop)
+                    stopColor(baseColor, stop)
                 );
             }
 
-            return [fillField, stopColors.join(",")]
+            attrs.push([colorsField, stopColors.join(",")],
+                ["color", color],
+                ["color2", color2]
+            );
         }
     });
 

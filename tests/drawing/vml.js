@@ -880,8 +880,11 @@
             var linearGradient = new LinearGradient({
                 stops: [[0.3, "#fff", 0.5], [1, "#fff", 1]]
             });
-            linearGradient.baseColor = "red";
-            createNode({fill: linearGradient});
+
+            createNode({
+                fill: linearGradient,
+                baseColor: "red"
+            });
             var element = fillNode.element;
 
             equal(element.color, "#ff8080");
