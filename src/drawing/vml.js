@@ -422,7 +422,7 @@
             var stroke = this.srcElement.options.stroke;
             var attrs = [];
 
-            if (stroke && stroke.width !== 0) {
+            if (stroke && !isTransparent(stroke.color) && stroke.width !== 0) {
                 attrs.push(["on", "true"]);
                 attrs.push(["color", stroke.color]);
                 attrs.push(["weight", (stroke.width || 1) + "px"]);

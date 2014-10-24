@@ -649,6 +649,21 @@
             equal(strokeNode.element.on, "false");
         });
 
+        test("renders on attribute when stroke color is 'transparent'", function() {
+            createNode({ stroke: { color: "transparent", width: 0 } });
+            equal(strokeNode.element.on, "false");
+        });
+
+        test("renders on attribute when stroke color is 'none'", function() {
+            createNode({ stroke: { color: "transparent", width: 0 } });
+            equal(strokeNode.element.on, "false");
+        });
+
+        test("renders on attribute when stroke color is ''", function() {
+            createNode({ stroke: { color: "", width: 0 } });
+            equal(strokeNode.element.on, "false");
+        });
+
         test("renders color", function() {
             createNode({ stroke: { color: "red" } });
             equal(strokeNode.element.color, "red");
