@@ -256,8 +256,7 @@
             if (e.field == "clip") {
                 this.clearClip();
                 this.initClip();
-
-                this.css(e.field, this.clipRect());
+                this.setClip();
             }
 
             Node.fn.optionsChange.call(this, e);
@@ -284,12 +283,19 @@
         clearClip: function() {
             if (this.clip) {
                 this.clip.clear();
-                delete this.clip;
+                this.clip = null;
+                this.css("clip", this.clipRect());
+            }
+        },
+
+        setClip: function() {
+            if (this.clip) {
+                this.css("clip", this.clipRect());
             }
         },
 
         clipRect: function() {
-            var clipRect = "rect(auto auto auto auto)";
+            var clipRect = EMPTY_CLIP;
             var clip = this.srcElement.clip();
             if (clip) {
                 var bbox = this.clipBBox(clip);
@@ -338,6 +344,7 @@
 
         mapStyle: function() {
             var style = ObserverNode.fn.mapStyle.call(this);
+            style.push(["position", "absolute"]);
             style.push(["white-space", "nowrap"]);
 
             return style;
@@ -361,6 +368,7 @@
                 length = children.length,
                 i;
 
+            this.setClip();
             for (i = 0; i < length; i++) {
                 children[i].refreshTransform(currentTransform);
             }
@@ -387,8 +395,24 @@
             }
         },
 
+        initClip: function() {
+            ObserverNode.fn.initClip.call(this);
+
+            if (this.clip) {
+                var bbox = this.clip.srcElement.bbox(this.srcElement.currentTransform());
+                if (bbox) {
+                    this.css("width", bbox.width() + bbox.origin.x);
+                    this.css("height", bbox.height() + bbox.origin.y);
+                }
+            }
+        },
+
         clipBBox: function(clip) {
             return clip.bbox(this.srcElement.currentTransform());
+        },
+
+        clearClip: function() {
+            ObserverNode.fn.clearClip.call(this);
         }
     });
 
@@ -1146,6 +1170,12 @@
         var browser = kendo.support.browser;
         return browser.msie && browser.version < 9;
     })();
+
+
+    var EMPTY_CLIP = "inherit";
+    if (kendo.support.browser.version < 8) {
+        EMPTY_CLIP = "rect(auto auto auto auto)";
+    }
 
     if (kendo.support.vml) {
         d.SurfaceFactory.current.register("vml", Surface, 30);

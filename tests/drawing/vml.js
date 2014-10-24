@@ -117,7 +117,7 @@
         test("clearing element clip option updates clip style", function() {
             srcElement.clip(null);
 
-            compareClipStyle(node, "rect(auto auto auto auto)");
+            compareClipStyle(node, "inherit");
         });
 
         test("changing element clip path updates clip style", function() {
@@ -357,7 +357,8 @@
 
         module("GroupNode", {
             setup: function() {
-                groupNode = new GroupNode(new d.Group());
+                group = new d.Group();
+                groupNode = new GroupNode(group);
             }
         });
 
@@ -371,6 +372,19 @@
 
         test("renders nowrap", function() {
             equal(groupNode.element.style["white-space"], "nowrap");
+        });
+
+        test("changing clip sets dimensions", function() {
+            groupNode.css = function(name, value) {
+                if (name === "width") {
+                    equal(value, 120);
+                } else if (name === "height") {
+                    equal(value, 130);
+                }
+            };
+
+            var clipRect = new g.Rect([20, 30], [100, 100]);
+            group.clip(d.Path.fromRect(clipRect));
         });
 
         test("load appends child nodes", function() {
