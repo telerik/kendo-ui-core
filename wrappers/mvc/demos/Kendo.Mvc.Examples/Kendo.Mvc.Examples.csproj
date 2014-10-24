@@ -201,6 +201,7 @@
     <Compile Include="Controllers\PivotGrid\Local_Flat_Data_BindingController.cs" />
     <Compile Include="Controllers\PivotGrid\Remote_Flat_Data_BindingController.cs" />
     <Compile Include="Controllers\Scheduler\TimelineController.cs" />
+    <Compile Include="Controllers\TreeList\IndexController.cs" />
     <Compile Include="Controllers\TreeMap\EventsController.cs" />
     <Compile Include="Controllers\TreeMap\IndexController.cs" />
     <Compile Include="Controllers\Map\BubbleLayerController.cs" />
@@ -624,6 +625,11 @@
       <DependentUpon>Sample.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CategoryItem.cs" />
+    <Compile Include="Models\EmployeeDirectory.cs">
+      <DependentUpon>Sample.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TreeList\EmployeeDirectoryModel.cs" />
+    <Compile Include="Models\TreeList\EmployeeDirectoryService.cs" />
     <Compile Include="Models\WebMail.cs" />
     <Compile Include="Models\WebMailDataRepository.cs" />
     <Compile Include="Models\Chart\AntennaGainItem.cs" />

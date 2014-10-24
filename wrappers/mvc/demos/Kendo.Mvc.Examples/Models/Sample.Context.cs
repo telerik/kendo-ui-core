@@ -45,5 +45,6 @@ namespace Kendo.Mvc.Examples.Models
         public DbSet<GanttDependency> GanttDependencies { get; set; }
         public DbSet<GanttTask> GanttTasks { get; set; }
         public DbSet<UrbanArea> UrbanAreas { get; set; }
+        public DbSet<EmployeeDirectory> EmployeeDirectory { get; set; }
     }
 }
