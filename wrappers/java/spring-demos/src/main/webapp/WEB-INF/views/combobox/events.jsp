@@ -6,7 +6,7 @@
         <h3 class="title">Select item
         </h3>
         <kendo:comboBox name="combobox" open="onOpen" close="onClose" change="onChange" dataBound="onDataBound" select="onSelect"
-            dataTextField="text" dataValueField="value">
+            filtering="onFiltering" dataTextField="text" dataValueField="value" filter="startswith">
             <kendo:dataSource data="${items}">
             </kendo:dataSource>
         </kendo:comboBox>
@@ -38,6 +38,12 @@
         function onDataBound() {
             if ("kendoConsole" in window) {
                 kendoConsole.log("event :: dataBound");
+            }
+        }
+        
+        function onFiltering(e) {
+            if ("kendoConsole" in window) {
+                kendoConsole.log("event :: filtering");
             }
         }
 

@@ -5,7 +5,7 @@
 	<div class="demo-section">
         <h3 class="title">DropDownList</h3>
         <kendo:dropDownList name="dropdownlist" open="onOpen" close="onClose" change="onChange" select="onSelect"
-            dataTextField="text" dataValueField="value">
+            filtering="onFiltering" dataTextField="text" dataValueField="value" filter="startswith">
             <kendo:dataSource data="${items}">
             </kendo:dataSource>
         </kendo:dropDownList>
@@ -32,6 +32,12 @@
         function onChange() {
             if ("kendoConsole" in window) {
                 kendoConsole.log("event : change");
+            }
+        }
+        
+        function onFiltering(e) {
+            if ("kendoConsole" in window) {
+                kendoConsole.log("event :: filtering");
             }
         }
 

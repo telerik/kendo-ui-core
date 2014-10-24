@@ -5,7 +5,7 @@
     <div class="demo-section">
         <h3 class="title">Select Continents</h3>
         <kendo:multiSelect name="select" open="onOpen" close="onClose" change="onChange" dataBound="onDataBound" select="onSelect"
-            dataTextField="text" dataValueField="value">
+            filtering="onFiltering" dataTextField="text" dataValueField="value">
             <kendo:dataSource data="${items}">
             </kendo:dataSource>
         </kendo:multiSelect>
@@ -48,6 +48,12 @@
         function onDataBound() {
             if ("kendoConsole" in window) {
                 kendoConsole.log("event :: dataBound");
+            }
+        }
+        
+        function onFiltering(e) {
+            if ("kendoConsole" in window) {
+                kendoConsole.log("event :: filtering");
             }
         }
 

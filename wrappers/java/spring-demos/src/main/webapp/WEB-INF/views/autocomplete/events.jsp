@@ -9,7 +9,9 @@
 
 	<div id="taxi">
 		<label for="states">Select a state in USA:</label>
-		<kendo:autoComplete name="states" open="onOpen" close="onClose" change="onChange" select="onSelect" dataBound="onDataBound">
+		<kendo:autoComplete name="states" open="onOpen" close="onClose" 
+							change="onChange" select="onSelect" 
+							dataBound="onDataBound" filtering="onFiltering">
 			<kendo:dataSource data="${states}">
 			</kendo:dataSource>
 		</kendo:autoComplete>
@@ -37,6 +39,12 @@
         function onChange() {
             if ("kendoConsole" in window) {
                 kendoConsole.log("event :: change");
+            }
+        }
+        
+        function onFiltering(e) {
+            if ("kendoConsole" in window) {
+                kendoConsole.log("event :: filtering");
             }
         }
 
