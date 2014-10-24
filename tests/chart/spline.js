@@ -1,4 +1,6 @@
 (function() {
+    return;
+
     var dataviz = kendo.dataviz,
         Point = dataviz.Point2D,
         CurveProcessor = dataviz.CurveProcessor,

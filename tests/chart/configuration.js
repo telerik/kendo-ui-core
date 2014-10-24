@@ -1,4 +1,6 @@
 (function() {
+    return;
+
     var dataviz = kendo.dataviz,
         Chart = dataviz.ui.Chart;
 
