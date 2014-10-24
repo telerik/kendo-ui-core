@@ -3176,7 +3176,7 @@ var __meta__ = {
                 ["#ff5722", "#ffeee8"]
             ]
         }
-    })
+    });
     
 
 })(window.kendo.jQuery);
