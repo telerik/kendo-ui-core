@@ -705,3 +705,77 @@ a.k-button:hover
     -webkit-background-clip: border-box;
     background-clip: border-box;
 }
+
+
+
+//Checkboxes
+.k-checkbox {
+  display: none;
+}
+
+.k-checkbox-label {
+   position: relative;
+   padding-left: 1.50em;
+   vertical-align: middle;
+   line-height: 0.875em;
+   cursor: pointer;
+}
+
+.k-checkbox-label:before{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0.875em;
+  height: 0.875em;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 1px;
+}
+
+.k-checkbox-label:after{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0.875em;
+  height: 0.875em;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 0;
+}
+
+.k-checkbox:checked + .k-checkbox-label:after {
+  content: "\2713";
+  font-size: 1em;
+  width: 0.875em;
+  height: 0.875em;
+  position: absolute;
+  top: 0; 
+  left: 0;
+  color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 1px; 
+  text-align: center;
+}
+
+.k-checkbox-label:active:before {
+   border-radius: 0;
+}
+
+.k-checkbox-label:active:after {
+  border-radius: 1px;
+}
+
+.k-checkbox:checked + .k-checkbox-label:active:before {
+  border-radius: 0;
+}
+
+.k-checkbox:disabled + .k-checkbox-label {
+   cursor: auto;
+}
+  
+.k-checkbox:disabled + .k-checkbox-label:after {
+    border-radius: 1px;
+}

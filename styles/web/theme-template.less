@@ -2052,6 +2052,68 @@ html .km-pane-wrapper .km-widget,
    .box-shadow(@button-focused-shadow);
 }
 
+.k-checkbox-label:before{
+   border-color: @checkbox-border-color-before;
+}
+
+.k-checkbox-label:hover:before,
+.k-checkbox:checked + .k-checkbox-label:hover:after  {
+   border-color: @checkbox-hover-border-color;
+}
+
+.k-checkbox-label:after{
+  border-color: @checkbox-border-color-after;
+}
+
+.k-checkbox:checked + .k-checkbox-label:after {
+  background-color: @checkbox-checked-background-color;
+  border-color: @checkbox-checked-border-color; 
+  color: @checkbox-checked-color;
+}
+
+.k-checkbox-label:active:before {
+   box-shadow: @checkbox-active-shadow;
+}
+
+.k-checkbox-label:active:after {
+   border-color: @checkbox-active-border-color-after;
+   background-color: @checkbox-active-background-color;
+}
+
+.k-checkbox:checked + .k-checkbox-label:active:after {
+    border-color: @checkbox-checked-after-border-color-after;
+}   
+
+.k-checkbox:checked + .k-checkbox-label:active:before {
+  box-shadow: @checkbox-checked-active-shadow; 
+}
+
+.k-checkbox:disabled + .k-checkbox-label {
+   color: @checkbox-disabled-color;
+}
+
+.k-checkbox:disabled + .k-checkbox-label:before {       
+   border-color: @checkbox-disabled-border-color;
+}
+
+.k-checkbox:disabled + .k-checkbox-label:active:before {
+  box-shadow: @checkbox-disabled-shadow;
+  background: @checkbox-disabled-background-color;
+}
+ 
+.k-checkbox:disabled + .k-checkbox-label:after,
+.k-checkbox:checked:disabled + .k-checkbox-label:active:after,
+.k-checkbox:disabled + .k-checkbox-label:hover:before,
+.k-checkbox:checked:disabled + .k-checkbox-label:hover:after  {
+    background: @checkbox-disabled-background-color;
+    border-color: @checkbox-disabled-color;
+}
+
+.k-checkbox:checked:disabled + .k-checkbox-label:after {
+    background: @checkbox-disabled-background-color;
+    color: @checkbox-checked-disabled-color;
+}
+
 // Retina sprite
 @media only screen and (-webkit-min-device-pixel-ratio: 2),
        only screen and (min-device-pixel-ratio: 2) {
