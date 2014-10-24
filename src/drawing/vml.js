@@ -44,6 +44,8 @@
 
             enableVML();
 
+            this.element.empty();
+
             this._root = new RootNode();
             this._root.attachTo(this.element[0]);
 
