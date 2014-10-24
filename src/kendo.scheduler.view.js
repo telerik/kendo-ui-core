@@ -898,7 +898,14 @@ var __meta__ = {
         },
 
         refresh: function() {
-            this.offsetTop = this.element.offsetTop;
+            var element = this.element;
+
+            this.clientWidth = element.clientWidth;
+            this.clientHeight = element.clientHeight;
+            this.offsetWidth = element.offsetWidth;
+            this.offsetHeight = element.offsetHeight;
+            this.offsetTop = element.offsetTop;
+            this.offsetLeft = element.offsetLeft;
         },
 
         offsetX: function(rtl, offset) {

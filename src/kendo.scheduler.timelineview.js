@@ -94,7 +94,7 @@ var __meta__ = {
     var TimelineView = SchedulerView.extend({
         init: function(element, options) {
             var that = this;
-            //only vertical grouping is supported = ignore orientation?
+
             SchedulerView.fn.init.call(that, element, options);
 
             that.title = that.options.title || that.options.name;
@@ -254,10 +254,10 @@ var __meta__ = {
            x -= offset.left;
            y -= offset.top;
 
-           if (!this._isVerticallyGrouped()) {
-               y += this.content[0].scrollTop;
-               x += this.content[0].scrollLeft;
-           }
+           //if (!this._isVerticallyGrouped()) {
+           y += this.content[0].scrollTop;
+           x += this.content[0].scrollLeft;
+           //}
 
            x = Math.ceil(x);
            y = Math.ceil(y);
@@ -308,6 +308,7 @@ var __meta__ = {
             workWeekStart: 1,
             workWeekEnd: 5,
             majorTick: 60,
+            eventHeight: 25,
             majorTimeHeaderTemplate: "#=kendo.toString(date, 't')#",
             minorTimeHeaderTemplate: "&nbsp;",
             slotTemplate: "&nbsp;",
@@ -348,6 +349,14 @@ var __meta__ = {
             that._calculateSlotRanges();
 
             that.createLayout(that._layout(dates));
+
+            /* Option? ((40+16+1)*80)-1 for first cell without borders*/
+            //var width = ((40+16+1)*80)-1;
+            // that.datesHeader.css({width: (width - 15)  +"px", "padding-right":"16px" })//.find("th:not([colspan])").css({width: "40px"});
+            // that.content.css({width: width + "px"});
+
+            //that.table.css({"table-layout": "fixed"});
+            //that.table.find("> tbody > tr > td:first-child").css({width: "180px"});
 
             that._content(dates);
 
@@ -712,13 +721,19 @@ var __meta__ = {
                 );
             });
 
-            //var height = Math.max.apply(null, eventsPerDate);
-
             for (var groupIndex = 0; groupIndex < eventsByResource.length; groupIndex++) {
                 this._renderEvents(eventsByResource[groupIndex], groupIndex);
             }
+
+            this._refreshSlots();
             
             this.trigger("activate");
+        },
+
+        _refreshSlots: function() {
+            for (var groupIndex = 0; groupIndex < this.groups.length; groupIndex++) {
+                this.groups[groupIndex].refresh();
+            }
         },
 
         _eventsByResource: function(events, resources, result) {
@@ -940,6 +955,7 @@ var __meta__ = {
         _positionEvent: function(event, element, slotRange) {
             var start = event.startTime || event.start;
             var end = event.endTime || event.end;
+            var eventHeight = this.options.eventHeight;
 
             var rect = slotRange.innerRect(start, end, false);
             rect.top = slotRange.start.offsetTop;
@@ -952,7 +968,8 @@ var __meta__ = {
             element
                 .css({
                     left: rect.left,
-                    width: width
+                    width: width,
+                    height: eventHeight
                 });
 
             this._arrangeRows(element, slotRange);
@@ -962,29 +979,36 @@ var __meta__ = {
             var startIndex = slotRange.start.index;
             var endIndex = slotRange.end.index;
             var events = SchedulerView.collidingEvents(slotRange.events(), startIndex, endIndex);
-            var currentColumnCount = this._headerColumnCount || 0;
+            var eventHeight = this.options.eventHeight + 2;/* two times border width */
 
             slotRange.addEvent({ slotIndex: startIndex, start: startIndex, end: endIndex, element: element });
             events.push({ slotIndex: startIndex, start: startIndex, end: endIndex, element: element });
 
             var rows = SchedulerView.createRows(events);
 
-            if (rows.length && rows.length > currentColumnCount) {
-                this._headerColumnCount = rows.length;
-            }
+            slotRange.start.refresh();
 
-            var slotHeight = slotRange.start.element.clientHeight;
+            var eventBottomOffset = eventHeight * 0.10;
 
-            var eventBottomOffset = slotHeight * 0.10;
-            var rowHeight = (slotHeight - eventBottomOffset) / rows.length;
+            var rowHeight = (eventHeight + eventBottomOffset) * rows.length;
 
             for (var idx = 0, length = rows.length; idx < length; idx++) {
                 var rowEvents = rows[idx].events;
 
+                var row = $(slotRange.start.element).closest("tr");
+
+                if (row.height() < rowHeight) {
+                    var rowIndex = row.index();
+                    var timesRow = this.times.find(kendo.format("tr:nth-child({0})",  rowIndex+1));
+
+                    row.height(rowHeight);
+                    timesRow.height(rowHeight);
+                    slotRange.start.refresh();
+                }
+
                 for (var j = 0, eventLength = rowEvents.length; j < eventLength; j++) {
                     $(rowEvents[j].element).css({
-                        top:  slotRange.start.offsetTop + idx * rowHeight + 2,
-                        height: rowHeight - 4
+                        top:  slotRange.start.offsetTop + idx * (eventHeight + 2) + "px"
                     });
                 }
             }
