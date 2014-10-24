@@ -21,6 +21,7 @@
     <script src="../../src/drawing/svg.js"></script>
     <script src="../../src/drawing/vml.js"></script>
     <script src="../../src/drawing/canvas.js"></script>
+    <script src="../../src/drawing/animation.js"></script>
     <!--<script src="../../src/kendo.dataviz.gauge.js"></script>-->
     <script src="../../src/kendo.dataviz.gauge2.js"></script> 
 
@@ -54,42 +55,61 @@ var gauge = elem.kendoRadialGauge2({
         //     //     width: 25
         //     // }
         // },
+
         pointer: {
             cap: {
                 size: 0.05
             },
-            value: -2
+            value: 55
         },
         scale: {
             minorTicks: {
-                size: 10
+                size: 10,
+                width: 2
+                //visible: false
             },
             majorTicks: {
-                size: 25
+                size: 25,
+                width: 2
+                //visible: false
             },
             labels: {
-                visible: true,
+                color: "yellow",
+                //padding: 5,
+                //visible: false,
+                background: "purple",
+                border: {
+                    width: 5,
+                    color: "green",
+                    //dashType: "dot"
+                },
                 position: "inside",
-                //margin: 20
-                //format: "C",
+                //template: "asdf"
+                margin: 10,
+                format: "C",
                 //font: "15px Arial,Helvetica,sans-serif"
             },
             minorUnit: 10,
-            majorUnit: 40,
+            majorUnit: 20,
             startAngle: 0,
-            endAngle: 165,
-            max: 180,
+            endAngle: 160,
+            min: 0,
+            max: 100,
+            //reverse: true,
+            //rangePlaceholderColor: "yellow",
         // ranges: [{
         //     from: 10,
         //     to: 20,
-        //     color: "green"
+        //     color: "green",
+        //     //opacity: 0.5
         // },{
         //     from: 30,
         //     to: 60,
-        //     color: "red"
+        //     color: "red",
+        //     //opacity: 0,2
         // }],
-          rangeSize: 15,
-          //rangeDistance: 0,
+          rangeSize: 25,
+          rangeDistance: 0,
       }
     }).data("kendoRadialGauge2");
   </script>

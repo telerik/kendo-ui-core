@@ -25,7 +25,8 @@ var __meta__ = {
         Class = kendo.Class,
         defined = dataviz.defined,
         isArray = $.isArray,
-        
+        interpolateValue = dataviz.interpolateValue,
+
         getSpacing = dataviz.getSpacing,
         round = dataviz.round,
         uniqueId = dataviz.uniqueId,
@@ -57,10 +58,12 @@ var __meta__ = {
         DEFAULT_MARGIN = 5,
         DEGREE = math.PI / 180,
         INSIDE = "inside",
+        LINEAR = "linear",
         NEEDLE = "needle",
         OUTSIDE = "outside",
         RADIAL_POINTER = "radialPointer",
-        ROTATION_ORIGIN = 90;
+        ROTATION_ORIGIN = 90,
+        GEO_ARC_ADJUST_ANGLE = 180;
 
     var Pointer = Class.extend({
         init: function(scale, options) {  
@@ -91,19 +94,19 @@ var __meta__ = {
         },
 
         value: function(newValue) {
-            var pointer = this;
-            var options = pointer.options;
+            var that = this;
+            var options = that.options;
             var value = options.value;
-            var scaleOptions = pointer.scale.options;
+            var scaleOptions = that.scale.options;
 
             if (arguments.length === 0) {
                 return value;
             }
 
-            options._oldValue = options.value;
+            options._oldValue = (options._oldValue !== undefined)? options.value : scaleOptions.min;
             options.value = math.min(math.max(newValue, scaleOptions.min), scaleOptions.max);
 
-            pointer.repaint();
+            that.repaint();
         }
     });
 
@@ -134,20 +137,47 @@ var __meta__ = {
 
         setAngle: function(angle) {
             var that = this;
-
-            angle += 180;
+            angle += GEO_ARC_ADJUST_ANGLE;
 
             that.elements.transform(geo.transform().rotate(angle, that.center))
         },
 
         repaint: function() {
+            var that = this;
+            var scale = that.scale;
+            var options = that.options;
+            var oldAngle = scale.slotAngle(options._oldValue);
+            var newAngle = scale.slotAngle(options.value);
 
+            new RadialPointerAnimation(that.elements, deepExtend(options.animation, {
+                oldAngle: oldAngle,
+                newAngle: newAngle
+            })).play();
         },
 
         render: function() {
             var that = this;
+            var scale = that.scale;
+            var center = scale.arc.center;
             var options = that.options;
+            var minAngle = scale.slotAngle(scale.options.min);
             var elements = new Group();
+
+            if (options.animation !== false) {
+                deepExtend(options.animation, {
+                    startAngle: 0,
+                    center: center,
+                    reverse: scale.options.reverse
+                });
+            }
+
+            //TODO check if needed
+            deepExtend(options, {
+                rotation: [
+                    scale.slotAngle(options.value) - minAngle,
+                    center.x, center.y
+                ]
+            });
 
             if (options.shape === NEEDLE) {
                 elements.append(
@@ -184,7 +214,7 @@ var __meta__ = {
 
             var needlePath = new draw.Path({
                 fill: { color: needleColor },
-                stroke: { color: needleColor }
+                stroke: { color: needleColor, width: 0.5 }
             });
 
             needlePath.moveTo(center.x + that.radius - minorTickSize, center.y)
@@ -203,7 +233,7 @@ var __meta__ = {
 
             var cap = new draw.Circle(circle, {
                fill: { color: capColor },
-               //stroke: { color: capColor }
+               stroke: { color: capColor }
             });
 
             return cap;
@@ -220,9 +250,6 @@ var __meta__ = {
             scale.options.minorUnit = scale.options.minorUnit || scale.options.majorUnit / 10;
 
             Axis.fn.init.call(scale, scale.options);
-            //TODO remove
-            //scale.options.rangeSize = 5;
-            //scale.options.rangeDistance = 5;
         },
 
         options: {
@@ -294,7 +321,6 @@ var __meta__ = {
             var angle = options.endAngle - startAngle;
             var min = options.min;
             var max = options.max;
-            var geoArcAdjustAngle = 180;
             var result;
 
             if (reverse) {
@@ -303,7 +329,7 @@ var __meta__ = {
                 result = ((value - min) / (max - min) * angle) + startAngle;
             }
 
-            return result + geoArcAdjustAngle;
+            return result + GEO_ARC_ADJUST_ANGLE;
         },
 
         renderLabels: function() {
@@ -312,7 +338,7 @@ var __meta__ = {
             var majorTickSize = options.majorTicks.size;
             var arc = that.arc.clone();
             var radius = arc.getRadiusX();
-            var tickAngels = that.tickAngles(arc, options.majorUnit);
+            var tickAngles = that.tickAngles(arc, options.majorUnit);
             var labels = that.labels;
             var count = labels.length;
             var labelsOptions = options.labels;
@@ -344,16 +370,19 @@ var __meta__ = {
                 label = labels[i];
                 halfWidth = label.box.width() / 2;
                 halfHeight = label.box.height() / 2;
-                angle = tickAngels[i];
-                labelAngle = (angle - 180) * DEGREE;
+                angle = tickAngles[i];
+                labelAngle = (angle - GEO_ARC_ADJUST_ANGLE) * DEGREE;
                 isInside = labelsOptions.position === INSIDE;
                 lp = arc.pointAt(angle);
                 cx = lp.x + (math.cos(labelAngle) * (halfWidth + padding) * (isInside ? 1 : -1));
                 cy = lp.y + (math.sin(labelAngle) * (halfHeight + padding) * (isInside ? 1 : -1));
-                labelPos = new Point(cx - halfWidth, cy - halfHeight);
+
+                label.reflow(new dataviz.Box2D(cx - halfWidth, cy - halfHeight,
+                                               cx + halfWidth, cy + halfHeight));
+                labelPos = new Point(label.box.x1, label.box.y1);
 
                 if (that.labelElements === undefined) {
-                    lbl = that.buildLabel(label, labelPos);
+                    lbl = that.buildLabel(label);
                     labelsGroup.append(lbl);
                 } else {
                     lbl = that.labelElements.children[i];
@@ -370,31 +399,46 @@ var __meta__ = {
             return labelsGroup;
         },
 
-        buildLabel: function(label, position) {
+        buildLabel: function(label) {
             var that = this;
             var options = that.options.labels;
+            var labelBox = label.box;
+            var textBox = label.children[0].box;
+            var border = options.border || {};
+            var background = options.background || "";
             var elements = new Group();
-            //var styleRect = new Rect();
+            var styleBox, styleGeometry, wrapper;
 
-            var text = new Text(label.text, position, {
+            wrapper = Path.fromRect(new geo.Rect([labelBox.x1, labelBox.y1], [labelBox.width(), labelBox.height()]), {
+                stroke: {}
+            });
+
+            var text = new Text(label.text, new Point(textBox.x1, textBox.y1), {
                 font: options.font,
                 fill: { color: options.color }
             });
 
-            elements.append(text); //styleRect
+            styleGeometry = _pad(text.bbox().clone(), options.padding);
+
+            styleBox = Path.fromRect(styleGeometry, {
+                stroke: {
+                    color: border.width ? border.color : "",
+                    width: border.width,
+                    dashType: border.dashType,
+                    lineJoin: "round",
+                    lineCap: "round"
+                },
+                fill: {
+                    color: background
+                }
+            });
+
+            elements.append(wrapper);
+            elements.append(styleBox);
+            elements.append(text);
 
             return elements;
         },
-
-        // wrapScaleBox: function(targetBox) {
-        //     var that = this;
-        //     var box = that.bbox;
-        //     var newX1= math.min(box.x1, targetBox.x1);
-        //     var newY1 = math.min(box.y1, targetBox.y1);
-
-        //     box.setOrigin([newX1, newY1]);
-
-        // },
 
         repositionRanges: function() {
             var that = this;
@@ -534,8 +578,8 @@ var __meta__ = {
             var arc = that.arc = new geo.Arc(center, {
                     radiusX: radius,
                     radiusY: radius,
-                    startAngle: 180 + options.startAngle,
-                    endAngle: 180 + options.endAngle
+                    startAngle: options.startAngle + GEO_ARC_ADJUST_ANGLE,
+                    endAngle: options.endAngle + GEO_ARC_ADJUST_ANGLE
                 });
 
             return arc;
@@ -662,7 +706,7 @@ var __meta__ = {
                 tickArc.setRadiusX(radius - diff).setRadiusY(radius - diff);
             }
 
-            for (var i = 0; i < tickAngles.length; i++) {
+            for (var i = 0; i < ticks.length; i++) { //tickAngles.length
                 var newPoint = tickArc.pointAt(tickAngles[i]);
                 var segments = ticks[i].segments;
                 var xDiff = newPoint.x - segments[0].anchor().x;
@@ -710,7 +754,25 @@ var __meta__ = {
         },
 
         value: function(value) {
+            var that = this;
+            var pointer = that.pointers[0];
 
+            if (arguments.length === 0) {
+                return pointer.value();
+            }
+
+            gauge.options.pointer.value = value;
+
+            pointer.value(value);
+        },
+
+        _resize: function() {
+            var that = this;
+            var t = that.options.transitions;
+
+            that.options.transitions = false;
+            that.redraw();
+            that.options.transitions = t;
         },
 
         redraw: function() {
@@ -791,7 +853,7 @@ var __meta__ = {
 
             Gauge.fn.init.call(radialGauge, element, options);
 
-            //kendo.notify(radialGauge, dataviz.ui);
+            kendo.notify(radialGauge, dataviz.ui);
         },
 
         options: {
@@ -833,7 +895,10 @@ var __meta__ = {
             for (var i = 0; i < pointers.length; i++) {
                 pointers[i].render();
                 surface.draw(pointers[i].elements);
+                pointers[i].value(pointers[i].options.value);
             };
+
+            
         },
 
         fitScale: function(bbox) {
@@ -943,13 +1008,74 @@ var __meta__ = {
             pointers = $.isArray(pointers) ? pointers : [pointers];
             for (var i = 0; i < pointers.length; i++) {
                 current = new RadialPointer(scale, 
-                    deepExtend({}, options.pointer, {
+                    deepExtend({}, pointers[i], {
                         animation: {
                             transitions: options.transitions
                         }
                 }));
                 that.pointers.push(current);
             }
+        }
+    });
+
+    var RadialPointerAnimation = draw.Animation.extend({
+        init: function(element, options){
+            draw.Animation.fn.init.call(this, element, options);
+
+            options = this.options;
+
+            options.duration = math.max((math.abs(options.newAngle - options.oldAngle) / options.speed) * 1000, 1);
+        },
+
+        options: {
+            easing: LINEAR,
+            speed: ANGULAR_SPEED
+        },
+
+        step: function(pos) {
+            var anim = this;
+            var options = anim.options;
+            var angle = interpolateValue(options.oldAngle, options.newAngle, pos);
+
+            anim.element.transform(geo.transform().rotate(angle, options.center));
+        }
+    });
+    draw.AnimationFactory.current.register(RADIAL_POINTER, RadialPointerAnimation);
+
+    var LinearGauge = Gauge.extend({
+        init: function(element, options) {
+            var linearGauge = this;
+            Gauge.fn.init.call(linearGauge, element, options);
+            kendo.notify(linearGauge, dataviz.ui);
+        },
+
+        options: {
+            name: "LinearGauge",
+            transitions: true,
+            gaugeArea: {
+                background: ""
+            },
+            scale: {
+                vertical: true
+            }
+        },
+
+        _getSize: function() {
+            var gauge = this;
+            var element = gauge.element;
+            var width = element.width();
+            var height = element.height();
+            var vertical = gauge.options.scale.vertical;
+
+            if (!width) {
+                width = vertical ? DEFAULT_MIN_WIDTH : DEFAULT_WIDTH;
+            }
+
+            if (!height) {
+                height = vertical ? DEFAULT_HEIGHT : DEFAULT_MIN_HEIGHT;
+            }
+
+            return { width: width, height: height };
         }
     });
 
@@ -1005,13 +1131,12 @@ var __meta__ = {
     deepExtend(dataviz, {
         newGauge: {
             Gauge: Gauge,
-            //RadialGaugePlotArea: RadialGaugePlotArea,
-            //LinearGaugePlotArea: LinearGaugePlotArea,
             RadialPointer: RadialPointer,
             LinearPointer: LinearPointer,
             //LinearScale: LinearScale,
             RadialScale: RadialScale,
-            RadialGauge: RadialGauge
+            RadialGauge: RadialGauge,
+            LinearGauge: LinearGauge
         }
     });
 
