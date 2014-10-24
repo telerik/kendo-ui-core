@@ -803,14 +803,6 @@
     (function() {
         var LinearGradient = d.LinearGradient,
             RadialGradient = d.RadialGradient,
-            FillNodeMock = FillNode.extend({
-                createElement: function() {
-                    this.element = {
-                        colors: {}
-                    };
-                    this.setFill();
-                }
-            }),
             path, fillNode;
 
         function createNode(pathOptions) {
@@ -872,13 +864,12 @@
                 start: [0.1, 0.2],
                 end: [0.5, 0.6]
             });
-            path = new Path({fill: linearGradient});
-            fillNode = new FillNodeMock(path);
+            createNode({fill: linearGradient});
             var element = fillNode.element;
             equal(element.angle, 225);
             equal(element.color, "#8080ff");
             equal(element.color2, "#0000ff");
-            equal(element.colors.value, "30% #8080ff,100% #0000ff");
+            equal(element.colors, "30% #8080ff,100% #0000ff");
             equal(element.focus, 0);
             equal(element.method, "none");
             equal(element.on, "true");
@@ -890,13 +881,12 @@
                 stops: [[0.3, "#fff", 0.5], [1, "#fff", 1]]
             });
             linearGradient.baseColor = "red";
-            path = new Path({fill: linearGradient});
-            fillNode = new FillNodeMock(path);
+            createNode({fill: linearGradient});
             var element = fillNode.element;
 
             equal(element.color, "#ff8080");
             equal(element.color2, "#ffffff");
-            equal(element.colors.value, "30% #ff8080,100% #ffffff");
+            equal(element.colors, "30% #ff8080,100% #ffffff");
         });
 
         test("renders on for RadialGradient", function() {
@@ -904,7 +894,7 @@
             equal(fillNode.element.on, "false");
         });
 
-        test("renders fallbackFill for RadialGradient if set", function() {
+        test("renders gradient fallbackFill for RadialGradient if set", function() {
             createNode({
                 fill: new RadialGradient({
                     fallbackFill: {
@@ -915,6 +905,77 @@
             });
             equal(fillNode.element.color, "red");
             equal(fillNode.element.opacity, 0.1);
+        });
+
+        test("renders element fallbackFill if set for RadialGradient", function() {
+            createNode({
+                fill: new RadialGradient(),
+                fallbackFill: {
+                    color: "red",
+                    opacity: 0.1
+                }
+            });
+            equal(fillNode.element.color, "red");
+            equal(fillNode.element.opacity, 0.1);
+        });
+
+        test("renders element fallbackFill if both RadialGradient fallbackFill and element fallbackFill are set", function() {
+            createNode({
+                fill: new RadialGradient({
+                    fallbackFill: {
+                        color: "green",
+                        opacity: 0.5
+                    }
+                }),
+                fallbackFill: {
+                    color: "red",
+                    opacity: 0.1
+                }
+            });
+            equal(fillNode.element.color, "red");
+            equal(fillNode.element.opacity, 0.1);
+        });
+
+        test("renders RadialGradient if it has supportVML set to true", function() {
+            var radialGradient = new RadialGradient({
+                stops: [{
+                    color: "red",
+                    offset: 0.3
+                }, {
+                    color: "green",
+                    offset: 0.7
+                }],
+                center: [100, 200]
+            });
+            radialGradient.supportVML = true;
+            path = new Path({
+                fill: radialGradient
+            });
+            path.segments.elements(Path.fromRect(new g.Rect([50, 60], [50, 100])).segments.elements());
+            fillNode = new FillNode(path);
+            var element = fillNode.element;
+            equal(element.color, "#ff0000");
+            equal(element.color2, "#008000");
+            equal(element.colors, "30% #ff0000,70% #008000");
+            equal(element.focus, "100%");
+            equal(element.method, "none");
+            equal(element.on, "true");
+            equal(element.type, "gradienttitle");
+            equal(element.focusposition, "1 1.4");
+        });
+
+        test("sets colors to colors.value if colors is already set", function() {
+            var linearGradient = new LinearGradient({
+                stops: [[0.3, "blue", 0.5], [1, "blue", 1]],
+                start: [0.1, 0.2],
+                end: [0.5, 0.6]
+            });
+            createNode({fill: linearGradient});
+            var element = fillNode.element;
+            element.colors = {};
+            updateOption("fill", linearGradient);
+
+            equal(element.colors.value, "30% #8080ff,100% #0000ff");
         });
 
         test("optionsChange sets fill color", function() {

@@ -543,11 +543,15 @@
         },
 
         mapGradient: function(fill) {
+            var options = this.srcElement.options;
+            var fallbackFill = options.fallbackFill || (fill.fallbackFill && fill.fallbackFill());
             var attrs;
             if (fill instanceof d.LinearGradient) {
                 attrs = this.mapLinearGradient(fill);
-            } else if (fill instanceof d.RadialGradient && fill.fallbackFill()) {
-                attrs = this.mapFillColor(fill.fallbackFill());
+            } else if (fill instanceof d.RadialGradient && fill.supportVML) {
+                attrs = this.mapRadialGradient(fill);
+            } else if (fallbackFill) {
+                attrs = this.mapFillColor(fallbackFill);
             } else {
                 attrs = [["on", "false"]];
             }
@@ -569,13 +573,34 @@
                 ["focus", 0],
                 ["method", "none"],
                 ["angle", 270 - angle],
-                ["colors.value", this.colors(fill)]
+                this.colors(fill)
+            ];
+
+            return attrs;
+        },
+
+        mapRadialGradient: function(fill) {
+            var bbox = this.srcElement.rawBBox();
+            var center = fill.center();
+            var stops = fill.stops;
+            var focusx = (center.x - bbox.origin.x) / bbox.width();
+            var focusy = (center.y - bbox.origin.y) / bbox.height();
+            var attrs = [
+                ["on", "true"],
+                ["type", "gradienttitle"],
+                ["color", stopColor(fill.baseColor, stops[0])],
+                ["color2", stopColor(fill.baseColor, stops[stops.length - 1])],
+                ["focus", "100%"],
+                ["focusposition", focusx + " " + focusy],
+                ["method", "none"],
+                this.colors(fill)
             ];
 
             return attrs;
         },
 
         colors: function(fill) {
+            var fillField = this.element.colors ? "colors.value" : "colors";
             var stopColors = [];
             var stops = fill.stops;
             var stop;
@@ -589,7 +614,7 @@
                 );
             }
 
-            return stopColors.join(",");
+            return [fillField, stopColors.join(",")]
         }
     });
 
