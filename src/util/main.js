@@ -218,7 +218,7 @@
     }
 
     function isTransparent(color) {
-        return color === "" || color === "none" || color === "transparent";
+        return color === "" || color === null || color === "none" || color === "transparent" || !defined(color);
     }
 
     // Exports ================================================================

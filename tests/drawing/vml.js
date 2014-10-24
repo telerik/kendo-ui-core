@@ -624,7 +624,8 @@
         function createNode(pathOptions) {
             path = new Path(deepExtend({
                 stroke: {
-                    width: 1
+                    width: 1,
+                    color: "black"
                 }
             }, pathOptions));
             strokeNode = new StrokeNode(path);
