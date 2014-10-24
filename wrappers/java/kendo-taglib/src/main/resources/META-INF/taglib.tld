@@ -132,6 +132,11 @@ all data items which begin with the current widget value are displayed in the su
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
+            <description>Fired when the widget is about to filter the data source.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+            <name>filtering</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
             <description>Fired when the suggestion popup of the widget is opened by the user.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>open</name>
             <rtexprvalue>true</rtexprvalue>
@@ -215,6 +220,12 @@ all data items which begin with the current widget value are displayed in the su
         <description>Fired when the widget is bound to data from its data source.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>autoComplete-dataBound</name>
         <tag-class>com.kendoui.taglib.autocomplete.DataBoundFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the widget is about to filter the data source.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+        <name>autoComplete-filtering</name>
+        <tag-class>com.kendoui.taglib.autocomplete.FilteringFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
@@ -10936,6 +10947,11 @@ The supported filter values are startswith, endswith and contains.</description>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
+            <description>Fired when the widget is about to filter the data source.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+            <name>filtering</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
             <description>Fired when the popup of the widget is opened by the user.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>open</name>
             <rtexprvalue>true</rtexprvalue>
@@ -11024,6 +11040,12 @@ The supported filter values are startswith, endswith and contains.</description>
         <description>Fired when the widget is bound to data from its data source.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>comboBox-dataBound</name>
         <tag-class>com.kendoui.taglib.combobox.DataBoundFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the widget is about to filter the data source.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+        <name>comboBox-filtering</name>
+        <tag-class>com.kendoui.taglib.combobox.FilteringFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
@@ -14025,6 +14047,11 @@ The supported filter values are startswith, endswith and contains.</description>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
+            <description>Fired when the widget is about to filter the data source.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+            <name>filtering</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
             <description>Fired when the popup of the widget is opened by the user.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>open</name>
             <rtexprvalue>true</rtexprvalue>
@@ -14113,6 +14140,12 @@ The supported filter values are startswith, endswith and contains.</description>
         <description>Fired when the widget is bound to data from its data source.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>dropDownList-dataBound</name>
         <tag-class>com.kendoui.taglib.dropdownlist.DataBoundFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the widget is about to filter the data source.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+        <name>dropDownList-filtering</name>
+        <tag-class>com.kendoui.taglib.dropdownlist.FilteringFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
@@ -20484,6 +20517,11 @@ The supported filter values are startswith, endswith and contains.</description>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
+            <description>Fired when the widget is about to filter the data source.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+            <name>filtering</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
             <description>Fired when the popup of the widget is opened by the user.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>open</name>
             <rtexprvalue>true</rtexprvalue>
@@ -20567,6 +20605,12 @@ The supported filter values are startswith, endswith and contains.</description>
         <description>Fired when the widget is bound to data from its data source.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>multiSelect-dataBound</name>
         <tag-class>com.kendoui.taglib.multiselect.DataBoundFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the widget is about to filter the data source.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+        <name>multiSelect-filtering</name>
+        <tag-class>com.kendoui.taglib.multiselect.FilteringFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>

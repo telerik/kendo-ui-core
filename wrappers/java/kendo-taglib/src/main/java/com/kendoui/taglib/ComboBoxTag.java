@@ -74,6 +74,10 @@ public class ComboBoxTag extends WidgetTag /* interfaces */implements DataBoundW
         setEvent("dataBound", value.getBody());
     }
 
+    public void setFiltering(FilteringFunctionTag value) {
+        setEvent("filtering", value.getBody());
+    }
+
     public void setOpen(OpenFunctionTag value) {
         setEvent("open", value.getBody());
     }
@@ -292,6 +296,18 @@ public class ComboBoxTag extends WidgetTag /* interfaces */implements DataBoundW
 
     public void setDataBound(String value) {
         setProperty("dataBound", new Function(value));
+    }
+
+    public String getFiltering() {
+        Function property = ((Function)getProperty("filtering"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setFiltering(String value) {
+        setProperty("filtering", new Function(value));
     }
 
     public String getOpen() {
