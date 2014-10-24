@@ -146,6 +146,9 @@
     }
 
     function drawElement(element, page, pdf) {
+        if (element.DEBUG) {
+            page.comment(element.DEBUG);
+        }
         var transform = element.transform();
         var opacity = element.opacity();
 

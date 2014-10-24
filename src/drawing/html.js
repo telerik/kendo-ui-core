@@ -34,6 +34,11 @@
             var pos = element.getBoundingClientRect();
             setTransform(group, [ 1, 0, 0, 1, -pos.left, -pos.top ]);
 
+            nodeInfo._stackingContext = {
+                element: element,
+                group: group
+            };
+
             renderElement(element, group);
             defer.resolve(group);
         });
@@ -101,7 +106,7 @@
         }
     }
 
-    function pushNodeInfo(element, style) {
+    function pushNodeInfo(element, style, group) {
         var Tmp = function(parent) {
             this._up = parent;
         };
@@ -119,12 +124,28 @@
                     nodeInfo[name] = color;
                 }
             });
-            return true;
+        }
+
+        if (createsStackingContext(element)) {
+            nodeInfo._stackingContext = {
+                element: element,
+                group: group
+            };
         }
     }
 
     function popNodeInfo() {
         nodeInfo = nodeInfo._up;
+    }
+
+    function createsStackingContext(element) {
+        var style = getComputedStyle(element);
+        function prop(name) { return getPropertyValue(style, name); }
+        if (prop("transform") != "none" ||
+            (prop("position") != "static" && prop("z-index") != "auto") ||
+            (prop("opacity") < 1)) {
+            return true;
+        }
     }
 
     function getComputedStyle(element) {
@@ -357,8 +378,24 @@
         return path.close();
     }
 
+    var LOGGING;
+    function log() {
+        if (LOGGING) {
+            console.log.apply(console, arguments);
+        }
+    }
+
     function _renderElement(element, group) {
         var style = getComputedStyle(element);
+
+        var zIndex = getPropertyValue(style, "z-index");
+        if (zIndex != "auto") {
+            console.log("Using stacking context of", nodeInfo._stackingContext.element, "for", element);
+            group = nodeInfo._stackingContext.group;
+        }
+
+        pushNodeInfo(element, style, group);
+
         var top = getBorder(style, "top");
         var right = getBorder(style, "right");
         var bottom = getBorder(style, "bottom");
@@ -459,7 +496,9 @@
             }
         })();
 
-        renderContents(element, style, group);
+        renderContents(element, group);
+
+        popNodeInfo();
 
         return group; // only utility functions after this line.
 
@@ -603,16 +642,16 @@
             group.append(background);
 
             if (backgroundColor) {
-                background.append(
-                    new drawing.Path({
-                        fill: { color: backgroundColor.toCssRgba() },
-                        stroke: null
-                    })
-                        .moveTo(box.left, box.top)
-                        .lineTo(box.right, box.top)
-                        .lineTo(box.right, box.bottom)
-                        .lineTo(box.left, box.bottom)
-                        .close());
+                var path = new drawing.Path({
+                    fill: { color: backgroundColor.toCssRgba() },
+                    stroke: null
+                });
+                path.moveTo(box.left, box.top)
+                    .lineTo(box.right, box.top)
+                    .lineTo(box.right, box.bottom)
+                    .lineTo(box.left, box.bottom)
+                    .close();
+                background.append(path);
             }
 
             var url = backgroundImageURL(backgroundImage);
@@ -884,7 +923,7 @@
         var pa = getPropertyValue(sa, "position");
         var pb = getPropertyValue(sb, "position");
         if (isNaN(za) && isNaN(zb)) {
-            if (pa == "static" && pb == "static") {
+            if ((/static|absolute/.test(pa)) && (/static|absolute/.test(pb))) {
                 return 0;
             }
             if (pa == "static") {
@@ -904,11 +943,11 @@
         return parseFloat(za) - parseFloat(zb);
     }
 
-    function renderContents(element, style, group) {
+    function renderContents(element, group) {
         switch (element.tagName.toLowerCase()) {
           case "img":
             renderImage(element, element.src, group);
-            return;
+            break;
 
           case "canvas":
             try {
@@ -916,38 +955,48 @@
             } catch(ex) {
                 // tainted; can't draw it, ignore.
             }
-            return;
+            break;
 
           case "textarea":
           case "input":
-            return;
-        }
+            break;
 
-        pushNodeInfo(element, style);
-
-        var children = [];
-        for (var i = element.firstChild; i; i = i.nextSibling) {
-            switch (i.nodeType) {
-              case 1:         // Element
-                var pos = getPropertyValue(getComputedStyle(i), "position");
-                if (pos == "static") {
-                    renderElement(i, group);
-                } else {
-                    children.push(i);
+          default:
+            var blocks = [], floats = [], inline = [], positioned = [];
+            for (var i = element.firstChild; i; i = i.nextSibling) {
+                switch (i.nodeType) {
+                  case 3:         // Text
+                    if (/\S/.test(i.data)) {
+                        renderText(element, i, group);
+                    }
+                    break;
+                  case 1:         // Element
+                    var style = getComputedStyle(i);
+                    var display = getPropertyValue(style, "display");
+                    var floating = getPropertyValue(style, "float");
+                    var position = getPropertyValue(style, "position");
+                    if (position != "static") {
+                        positioned.push(i);
+                    }
+                    else if (display != "inline") {
+                        if (floating != "none") {
+                            floats.push(i);
+                        } else {
+                            blocks.push(i);
+                        }
+                    }
+                    else {
+                        inline.push(i);
+                    }
+                    break;
                 }
-                break;
-              case 3:         // Text
-                if (/\S/.test(i.data)) {
-                    renderText(element, i, group);
-                }
-                break;
             }
-        }
-        children.sort(zIndexSort).forEach(function(el){
-            renderElement(el, group);
-        });
 
-        popNodeInfo();
+            blocks.sort(zIndexSort).forEach(function(el){ renderElement(el, group); });
+            floats.sort(zIndexSort).forEach(function(el){ renderElement(el, group); });
+            inline.sort(zIndexSort).forEach(function(el){ renderElement(el, group); });
+            positioned.sort(zIndexSort).forEach(function(el){ renderElement(el, group); });
+        }
     }
 
     function renderText(element, node, group) {
