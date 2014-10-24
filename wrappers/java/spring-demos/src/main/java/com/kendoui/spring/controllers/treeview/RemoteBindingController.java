@@ -19,12 +19,12 @@ public class RemoteBindingController {
     @Autowired 
     private EmployeeDao employee;
 
-    @RequestMapping(value = "/remote-data", method = RequestMethod.GET)
+    @RequestMapping(value = "/remote-data-binding", method = RequestMethod.GET)
     public String index() {
-        return "treeview/remote-data";
+        return "treeview/remote-data-binding";
     }
     
-    @RequestMapping(value = "/remote-data/read", method = RequestMethod.POST)
+    @RequestMapping(value = "/remote-data-binding/read", method = RequestMethod.POST)
     public @ResponseBody List<DetailedEmployee> read(@RequestBody Map<String, Object> model) {
         return employee.getDetailedListByEmployeeId((Integer)model.get("employeeId"));
     }
