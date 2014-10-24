@@ -70,6 +70,7 @@
 				<beans:value>com.kendoui.spring.models.Intraday</beans:value>	
 				<beans:value>com.kendoui.spring.models.Weather</beans:value>
 				<beans:value>com.kendoui.spring.models.UrbanArea</beans:value>
+				<beans:value>com.kendoui.spring.models.EmployeeDirectory</beans:value>
 			</beans:list>
 		</beans:property>
 		<beans:property name="hibernateProperties">
