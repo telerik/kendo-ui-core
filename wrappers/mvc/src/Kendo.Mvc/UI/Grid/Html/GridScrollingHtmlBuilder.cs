@@ -50,7 +50,7 @@ namespace Kendo.Mvc.UI.Html
 
             var thead = new HtmlElement("thead").AddClass("k-grid-header");
 
-            thead.AppendTo(DataSectionBuilder.CreateHeader(renderingData));
+            DataSectionBuilder.CreateHeader(renderingData).AppendTo(thead);
 
             thead.AppendTo(table);
 
