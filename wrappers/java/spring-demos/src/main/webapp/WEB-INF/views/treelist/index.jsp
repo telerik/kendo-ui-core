@@ -26,6 +26,7 @@
                     	<kendo:dataSource-schema-model-field name="parentId" from="reportsTo" type="number" nullable="true"/>
                         <kendo:dataSource-schema-model-field name="firstName" type="string" />
                         <kendo:dataSource-schema-model-field name="lastName" type="string" />
+                        <kendo:dataSource-schema-model-field name="position" type="string" />
                         <kendo:dataSource-schema-model-field name="phone" type="string" />
                         <kendo:dataSource-schema-model-field name="address" type="string" />
                         <kendo:dataSource-schema-model-field name="extension" type="number" />
