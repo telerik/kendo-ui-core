@@ -176,8 +176,10 @@
             // %DEC means don't care about decimals
             commandsOK(text, [
                 "150 100 m",
-                "150 126%DEC 126%DEC 150 100 150 c",
-                "73%DEC 150 50 126%DEC 50 100 c",
+                "150 113%DEC 144%DEC 126%DEC 135%DEC 135%DEC c",
+                "126%DEC 144%DEC 113%DEC 150 100 150 c",
+                "86%DEC 150 73%DEC 144%DEC 64%DEC 135%DEC c",
+                "55%DEC 126%DEC 50 113%DEC 50 100 c",
                 "S"
             ], "draw arc and stroke");
         });
@@ -275,11 +277,8 @@
         sequence = sequence.replace(/^\s+|\s+$/g, "").split(/\s+/g).join("\\s+");
         sequence = sequence.replace(/%DEC/g, "[0-9.]*");
         var rx = new RegExp("(?:^|\\s)" + sequence + "(?:$|\\s)");
-        var pass = rx.test(text);
-        ok(pass);
-        if (!pass && msg) {
-            console.error(msg);
-        }
+
+        ok(rx.test(text), msg);
     }
 
     function getPageText(page) {
