@@ -11,6 +11,7 @@
     "use strict";
 
     /* global console */ // XXX: temporary
+    /* jshint eqnull:true */
 
     /* -----[ local vars ]----- */
 
@@ -388,14 +389,6 @@
     function _renderElement(element, group) {
         var style = getComputedStyle(element);
 
-        var zIndex = getPropertyValue(style, "z-index");
-        if (zIndex != "auto") {
-            console.log("Using stacking context of", nodeInfo._stackingContext.element, "for", element);
-            group = nodeInfo._stackingContext.group;
-        }
-
-        pushNodeInfo(element, style, group);
-
         var top = getBorder(style, "top");
         var right = getBorder(style, "right");
         var bottom = getBorder(style, "bottom");
@@ -497,8 +490,6 @@
         })();
 
         renderContents(element, group);
-
-        popNodeInfo();
 
         return group; // only utility functions after this line.
 
@@ -1140,6 +1131,37 @@
         while (!doChunk()) {}
     }
 
+    function groupInStackingContext(group, zIndex) {
+        var main = nodeInfo._stackingContext.group;
+        var a = main.children;
+        for (var i = 0; i < a.length; ++i) {
+            if (a[i]._dom_zIndex != null && a[i]._dom_zIndex > zIndex) {
+                break;
+            }
+        }
+
+        var tmp = new drawing.Group();
+        main.insertAt(tmp, i);
+        tmp._dom_zIndex = zIndex;
+
+        // must apply any clipping from current group or parents to the new one.
+        for (i = group; i; i = i.parent) {
+            if (i.clip()) {
+                setClipping(tmp, i.clip());
+                break;
+            }
+        }
+
+        // must apply the combined opacity of current group to the new one.
+        var alpha = 1;
+        for (i = group; i; i = i.parent) {
+            alpha *= i.opacity();
+        }
+        tmp.opacity(alpha);
+
+        return tmp;
+    }
+
     function renderElement(element, container) {
         if (/^(style|script|link|meta|iframe|svg)$/i.test(element.tagName)) {
             return;
@@ -1154,12 +1176,21 @@
             return;
         }
 
-        var group = new drawing.Group();
-        container.append(group);
+        var group;
+
+        var zIndex = getPropertyValue(style, "z-index");
+        if (zIndex != "auto") {
+            group = groupInStackingContext(container, zIndex);
+        } else {
+            group = new drawing.Group();
+            container.append(group);
+        }
 
         if (opacity < 1) {
             group.opacity(opacity);
         }
+
+        pushNodeInfo(element, style, group);
 
         var tr = getTransform(style);
         if (!tr) {
@@ -1185,6 +1216,8 @@
                 _renderElement(element, group);
             });
         }
+
+        popNodeInfo();
     }
 
     function mmul(a, b) {

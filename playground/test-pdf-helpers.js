@@ -1,6 +1,6 @@
 function container() {
     $(".surface").remove();
-    return $("<div class='surface' style='position: absolute; background: white; right: 1em; top: 1em; bottom: 1em; width: 600px'></div>").appendTo(document.body);
+    return $("<div class='surface' style='position: absolute; z-index: 30000; background: white; right: 0; top: 0; bottom: 0; width: 600px'></div>").appendTo(document.body);
 }
 
 window.draw = function draw(sel, type) {
