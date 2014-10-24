@@ -1590,7 +1590,7 @@
                     editorType = "shape";
                 } else if (item instanceof Connection) {
                     editorType = "connection";
-                    var shapeSelectorHandler = proxy(shapeSelector, this)
+                    var shapeSelectorHandler = proxy(shapeSelector, this);
                     editors = deepExtend({}, { from: shapeSelectorHandler, to: shapeSelectorHandler }, editors);
                 } else {
                     return;
