@@ -986,11 +986,10 @@
         });
 
         test("optionsChange sets content", function() {
-            textNode.content = function(value) {
-                equal(value, "Bar");
-            };
+            textNode.element = {};
 
             text.content("Bar");
+            equal(textNode.element.textContent, "Bar");
         });
     })();
 
