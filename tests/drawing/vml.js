@@ -699,8 +699,8 @@
             equal(strokeNode.element.opacity, "0.5");
         });
 
-        test("does not render stroke opacity if not set", function() {
-            ok(!strokeNode.element.opacity);
+        test("renders default stroke opacity if not set", function() {
+            equal(strokeNode.element.opacity, 1);
         });
 
         test("renders stroke dashType", function() {
@@ -857,6 +857,11 @@
         test("renders opacity", function() {
             createNode({ fill: { color: "white", opacity: 0.5 } });
             equal(fillNode.element.opacity, "0.5");
+        });
+
+        test("renders default opacity if not set", function() {
+            createNode({ fill: { color: "white" } });
+            equal(fillNode.element.opacity, 1);
         });
 
         test("renders linear gradient", function() {

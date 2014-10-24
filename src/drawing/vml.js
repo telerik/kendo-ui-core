@@ -199,9 +199,7 @@
             var opacity = valueOrDefault(this.opacity, 1);
 
             opacity *= valueOrDefault(multiplier, 1);
-            if (opacity !== 1) {
-                attrs.push(["opacity", opacity]);
-            }
+            attrs.push(["opacity", opacity]);
         },
 
         attr: function(name, value) {
