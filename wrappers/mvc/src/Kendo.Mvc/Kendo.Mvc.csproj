@@ -710,6 +710,9 @@
     <Compile Include="UI\ContextMenu\ContextMenuDirection.cs" />
     <Compile Include="UI\ContextMenu\ContextMenuOrientation.cs" />
     <Compile Include="UI\DataSource\Fluent\DataSourceTreeListModelDescriptorFactory.cs" />
+    <Compile Include="UI\CheckBox\Fluent\CheckBoxBuilder.cs" />
+    <Compile Include="UI\CheckBox\Html\CheckBoxHtmlBuilder.cs" />
+    <Compile Include="UI\CheckBox\CheckBox.cs" />
     <Compile Include="UI\DataSource\Fluent\DataSourceSortDescriptorFactoryBase.cs" />
     <Compile Include="UI\DataSource\Fluent\FilterableAjaxDataSourceBuilder.cs" />
     <Compile Include="UI\Diagram\DiagramViewDataContainer.cs" />
