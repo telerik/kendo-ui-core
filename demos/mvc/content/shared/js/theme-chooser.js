@@ -124,7 +124,7 @@
             { value: "moonlight", name: "Moonlight", colors: [ "#ee9f05", "#40444f", "#212a33" ]  },
             { value: "flat", name: "Flat", colors: [ "#363940", "#2eb3a6", "#fff" ]  },
             { value: "material", name: "Material", colors: [ "#3f51b5", "#283593", "#fff" ]  },
-           // { value: "materialblack", name: "Material Black", colors: [ "red", "green", "blue" ]  }
+            { value: "materialblack", name: "Material Black", colors: [ "#eeff41", "#3f51b5", "#363636" ]  }
         ],
         mobileThemes: [
             { name: "iOS7", value:"ios7", colors: [ "#007aff", "#f5f5f5", "#ffffff" ]  },
