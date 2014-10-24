@@ -671,7 +671,7 @@
                 orgBox = innerBox(orgBox, "border-*-width", element);
             }
 
-            if (backgroundSize != "auto") {
+            if (!/^\s*auto(\s+auto)\s*$/.test(backgroundSize)) {
                 var size = backgroundSize.split(/\s+/g);
                 // compute width
                 if (/%$/.test(size[0])) {
