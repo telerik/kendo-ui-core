@@ -108,7 +108,11 @@ var __meta__ = {
                         }
 
                     } else if (type === "date") {
-                        format = "datetime'{1:yyyy-MM-ddTHH:mm:ss}'";
+                        if (useOdataFour) {
+                            format = "{1:yyyy-MM-ddTHH:mm:ss+00:00}"
+                        } else {
+                            format = "datetime'{1:yyyy-MM-ddTHH:mm:ss}'";
+                        }
                     } else {
                         format = "{1}";
                     }
