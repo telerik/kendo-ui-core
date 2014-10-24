@@ -59,6 +59,7 @@
     test("value() calls repaint()", function() {
         var called = false;
 
+        pointer.elements = {};
         pointer.repaint = function() {
             called = true;
         };

@@ -46,13 +46,14 @@ var elem = $("#gauge");
 
 var gauge = elem.kendoRadialGauge2({
         gaugeArea: {
-            width: 500,
-            background: "blue",
-            border: {
-                color: "yellow",
-                dashType: "solid",
-                width: 25
-            }
+            width: 200,
+            height: 200
+            // background: "blue",
+            // border: {
+            //     color: "yellow",
+            //     dashType: "solid",
+            //     width: 25
+            // }
         },
 
         pointer: {
@@ -91,7 +92,7 @@ var gauge = elem.kendoRadialGauge2({
             minorUnit: 10,
             majorUnit: 20,
             startAngle: 0,
-            endAngle: 160,
+            endAngle: 90,
             min: 0,
             max: 100,
             //reverse: true,

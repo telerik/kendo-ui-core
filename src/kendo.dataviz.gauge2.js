@@ -106,7 +106,9 @@ var __meta__ = {
             options._oldValue = (options._oldValue !== undefined)? options.value : scaleOptions.min;
             options.value = math.min(math.max(newValue, scaleOptions.min), scaleOptions.max);
 
-            that.repaint();
+            if (that.elements) {
+                that.repaint();
+            }
         }
     });
 
@@ -872,8 +874,8 @@ var __meta__ = {
             var wrapper = new geo.Rect([0, 0], [size.width, size.height]);
             var bbox = _unpad(wrapper.bbox(), that._gaugeAreaMargin);
             var scaleElements = that.scale.reflow(bbox);
-            that.plotArea = that.scale.bbox;
-            
+            that._initialPlotArea = that.scale.bbox;
+
             //Todo testing only
             surface.draw(scaleElements);
 
@@ -882,7 +884,7 @@ var __meta__ = {
                 var pointerElement = pointers[i].reflow(that.scale.arc);
                 //surface.draw(pointerElement);
 
-                that.plotArea = Rect.union(that.plotArea, pointers[i].bbox);
+                that._initialPlotArea = Rect.union(that._initialPlotArea, pointers[i].bbox);
             };
 
             that.fitScale(bbox);
@@ -904,7 +906,7 @@ var __meta__ = {
             var that = this;
             var scale = that.scale;
             var arc = scale.arc;
-            var plotAreaBox = that.plotArea;
+            var plotAreaBox = that._initialPlotArea;
             var step = math.abs(that.getDiff(plotAreaBox, bbox));
             var min = round(step, COORD_PRECISION);
             var max = round(-step, COORD_PRECISION);

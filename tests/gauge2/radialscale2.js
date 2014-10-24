@@ -304,7 +304,7 @@
         equal(radialScale.options.majorUnit, 10);
     });
 
-    test("sets auto minorUnit", function() {
+    test("sets minorUnit", function() {
         createScale({
             min: 0,
             max: 1000,
