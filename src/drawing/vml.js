@@ -127,7 +127,7 @@
 
         attachTo: function(domElement, pos) {
             if (defined(pos)) {
-                domElement.insertBefore(this.element, domElement.children[pos]);
+                domElement.insertBefore(this.element, domElement.children[pos] || null);
             } else {
                 domElement.appendChild(this.element);
             }
