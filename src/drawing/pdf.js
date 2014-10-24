@@ -15,7 +15,8 @@
     // == into === to make JSHint happy will break functionality.
     /*jshint eqnull:true  */
 
-    var Color       = kendo.drawing.Color;
+    var drawing     = kendo.drawing;
+    var Color       = drawing.Color;
     var PDF         = kendo.pdf;
 
     var TEXT_RENDERING_MODE = PDF.TEXT_RENDERING_MODE;
@@ -146,9 +147,20 @@
     }
 
     function drawElement(element, page, pdf) {
+        if (element instanceof drawing.Group && element.children.length === 0) {
+            return;
+        }
+        if (element instanceof drawing.MultiPath && element.children.length === 0) {
+            return;
+        }
+        if (element instanceof drawing.Path && element.segments.length === 0) {
+            return;
+        }
+
         if (element.DEBUG) {
             page.comment(element.DEBUG);
         }
+
         var transform = element.transform();
         var opacity = element.opacity();
 
@@ -375,7 +387,7 @@
         var defer = $.Deferred();
 
         group.options.set("pdf", options);
-        kendo.drawing.pdf.toDataURL(group, defer.resolve);
+        drawing.pdf.toDataURL(group, defer.resolve);
 
         return defer.promise();
     }
@@ -385,7 +397,7 @@
         return color ? color.toRGB() : null;
     }
 
-    kendo.deepExtend(kendo.drawing, {
+    kendo.deepExtend(drawing, {
         exportPDF: exportPDF,
 
         pdf: {
