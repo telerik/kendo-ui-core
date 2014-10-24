@@ -1270,6 +1270,14 @@
             shape.options.set("stroke", { width: 1 });
         });
 
+        test("optionsChange for opacity is forwarded to stroke", function() {
+            node.stroke.setOpacity = function() {
+                ok(true);
+            };
+
+            shape.options.set("opacity", 1);
+        });
+
         test("optionsChange is not forwarded to stroke", 0, function() {
             node.stroke.optionsChange = function() {
                 ok(true);
@@ -1284,6 +1292,14 @@
             };
 
             shape.options.set("fill", { color: "red" });
+        });
+
+        test("optionsChange for opacity is forwarded to fill", function() {
+            node.fill.setOpacity = function() {
+                ok(true);
+            };
+
+            shape.options.set("opacity", 1);
         });
 
         test("optionsChange is not forwarded to fill", 0, function() {

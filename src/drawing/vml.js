@@ -426,7 +426,7 @@
 
         createElement: function() {
             this.element = createElementVML("stroke");
-            this.setStroke();
+            this.setOpacity();
         },
 
         optionsChange: function(e) {
@@ -442,6 +442,10 @@
 
         setStroke: function() {
             this.allAttr(this.mapStroke());
+        },
+
+        setOpacity: function() {
+            this.setStroke();
         },
 
         mapStroke: function() {
@@ -497,11 +501,15 @@
 
         refreshOpacity: function(opacity) {
             this.opacity = opacity;
-            this.setFill();
+            this.setOpacity();
         },
 
         setFill: function() {
             this.allAttr(this.mapFill());
+        },
+
+        setOpacity: function() {
+            this.setFill();
         },
 
         attr: function(name, value) {
@@ -714,6 +722,9 @@
                 this.stroke.optionsChange(e);
             } else if (e.field === "transform") {
                 this.transform.optionsChange(e);
+            } else if (e.field === "opacity") {
+                this.fill.setOpacity();
+                this.stroke.setOpacity();
             }
 
             ObserverNode.fn.optionsChange.call(this, e);
