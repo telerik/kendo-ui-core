@@ -175,7 +175,7 @@ all data items which begin with the current widget value are displayed in the su
     }
 
     /**
-    * Spcifies the value binding behavior for the widget when the initial model value is null. If set to true, the View-Model field will be updated with the selected item text field. If set to false, the View-Model field will be updated with the selected item.
+    * Specifies the value binding behavior for the widget when the initial model value is null. If set to true, the View-Model field will be updated with the selected item text field. If set to false, the View-Model field will be updated with the selected item.
     * @param boolean $value
     * @return \Kendo\UI\AutoComplete
     */
@@ -223,6 +223,20 @@ all data items which begin with the current widget value are displayed in the su
         }
 
         return $this->setProperty('dataBound', $value);
+    }
+
+    /**
+    * Sets the filtering event of the AutoComplete.
+    * Fired when the widget is about to filter the data source.The event handler function context (available via the this keyword) will be set to the widget instance.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\UI\AutoComplete
+    */
+    public function filtering($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('filtering', $value);
     }
 
     /**

@@ -67,7 +67,7 @@ class MultiSelect extends \Kendo\UI\Widget {
     }
 
     /**
-    * Specifies the delay in milliseconds after which the multiselect will start filtering dataSource.
+    * Specifies the delay in milliseconds after which the MultiSelect will start filtering dataSource.
     * @param float $value
     * @return \Kendo\UI\MultiSelect
     */
@@ -122,7 +122,8 @@ The supported filter values are startswith, endswith and contains.
     }
 
     /**
-    * The minimum number of characters the user must type before a search is performed. Set to higher value than 1 if the search could match a lot of items.
+    * The minimum number of characters the user must type before a search is performed. Set to a higher value if the search could match a lot of items.
+A zero value means that a request will be made as soon as the user focuses the widget.
     * @param float $value
     * @return \Kendo\UI\MultiSelect
     */
@@ -272,6 +273,20 @@ The supported filter values are startswith, endswith and contains.
         }
 
         return $this->setProperty('dataBound', $value);
+    }
+
+    /**
+    * Sets the filtering event of the MultiSelect.
+    * Fired when the widget is about to filter the data source.The event handler function context (available via the this keyword) will be set to the widget instance.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\UI\MultiSelect
+    */
+    public function filtering($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('filtering', $value);
     }
 
     /**

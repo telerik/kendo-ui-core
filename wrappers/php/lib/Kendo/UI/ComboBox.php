@@ -42,7 +42,7 @@ Help topic showing how cascading functionality works
     }
 
     /**
-    * Defines the field to be used to filter the data source. If not defiend the parent's dataValueField option will be used.
+    * Defines the field to be used to filter the data source. If not defined the parent's dataValueField option will be used.
 Help topic showing how cascading functionality works
     * @param string $value
     * @return \Kendo\UI\ComboBox
@@ -280,6 +280,20 @@ The supported filter values are startswith, endswith and contains.
         }
 
         return $this->setProperty('dataBound', $value);
+    }
+
+    /**
+    * Sets the filtering event of the ComboBox.
+    * Fired when the widget is about to filter the data source.The event handler function context (available via the this keyword) will be set to the widget instance.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\UI\ComboBox
+    */
+    public function filtering($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('filtering', $value);
     }
 
     /**

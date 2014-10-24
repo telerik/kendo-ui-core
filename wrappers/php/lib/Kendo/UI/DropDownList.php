@@ -31,7 +31,7 @@ class DropDownList extends \Kendo\UI\Widget {
     }
 
     /**
-    * Use it to set the Id of the parent dropdownlist widget.
+    * Use it to set the Id of the parent DropDownList widget.
 Help topic showing how cascading functionality works
     * @param string $value
     * @return \Kendo\UI\DropDownList
@@ -41,7 +41,7 @@ Help topic showing how cascading functionality works
     }
 
     /**
-    * Defines the field to be used to filter the data source. If not defiend the parent's dataValueField option will be used.
+    * Defines the field to be used to filter the data source. If not defined the parent's dataValueField option will be used.
 Help topic showing how cascading functionality works
     * @param string $value
     * @return \Kendo\UI\DropDownList
@@ -236,7 +236,7 @@ The supported filter values are startswith, endswith and contains.
     }
 
     /**
-    * Spcifies the value binding behavior for the widget when the initial model value is null. If set to true, the View-Model field will be updated with the selected item value field. If set to false, the View-Model field will be updated with the selected item.
+    * Specifies the value binding behavior for the widget when the initial model value is null. If set to true, the View-Model field will be updated with the selected item value field. If set to false, the View-Model field will be updated with the selected item.
     * @param boolean $value
     * @return \Kendo\UI\DropDownList
     */
@@ -284,6 +284,20 @@ The supported filter values are startswith, endswith and contains.
         }
 
         return $this->setProperty('dataBound', $value);
+    }
+
+    /**
+    * Sets the filtering event of the DropDownList.
+    * Fired when the widget is about to filter the data source.The event handler function context (available via the this keyword) will be set to the widget instance.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\UI\DropDownList
+    */
+    public function filtering($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('filtering', $value);
     }
 
     /**
