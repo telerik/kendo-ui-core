@@ -1,0 +1,114 @@
+@texture: none;
+@tooltip-texture: none;
+@widget-gradient: none;
+@widget-shadow: none;
+@hover-shadow: none;
+@selected-gradient: none;
+@selected-shadow: none;
+@active-gradient: none;
+@active-shadow: none;
+@selected-border-color: @selected-background-color;
+@focused-border-color: @hover-border-color;
+@focused-shadow: none;
+@focused-item-shadow: inset 0 0 0 1px @hover-border-color;
+@focused-active-item-shadow: inset 0 0 3px 1px darken(@selected-border-color, 15%);
+@main-border-radius: 0;
+@list-border-radius: 0;
+@inner-border-radius: 0;
+@slider-border-radius: 13px;
+@draghandle-border-radius: 0;
+@default-icon-opacity: 1;
+
+@header-background-color: @widget-background-color;
+@header-text-color: @widget-text-color;
+@button-background-color: @widget-background-color;
+@button-text-color: @widget-text-color;
+@group-background-color: @widget-background-color;
+@group-border-color: @widget-border-color;
+@content-background-color: @widget-background-color;
+@select-border-color: @widget-border-color;
+@select-background-color: @widget-background-color;
+@select-group-background-color: @widget-background-color;
+@select-hover-background-color: @hover-border-color;
+@hover-background-color: @hover-border-color;
+@shadow-inset-color: transparent;
+@input-text-color: @widget-text-color;
+@link-text-color: @widget-text-color;
+@cell-border-color: @widget-border-color;
+@scheduler-background-color: @widget-background-color;
+@current-time-color: @error-border-color;
+@tooltip-border-color: @tooltip-background-color;
+@tooltip-text-color: #ffffff;
+@draghandle-background-color: @draghandle-border-color;
+@draghandle-hover-background-color: @draghandle-hover-border-color;
+
+@calendar-border-radius: 0;
+@calendar-content-text-color: @widget-text-color;
+@calendar-footer-background: @widget-background-color;
+@calendar-footer-text-decoration: none;
+@calendar-footer-hover-text-decoration: underline;
+@calendar-footer-hover-background: @widget-background-color;
+@calendar-header-hover-text-decoration: none;
+@calendar-header-hover-background: @hover-background-color;
+@calendar-footer-active-background: @widget-background-color;
+@calendar-group-background-color: @group-background-color;
+@button-border-color: @widget-border-color;
+@menu-border-color: @widget-border-color;
+@tabstrip-items-border: @widget-border-color;
+@tabstrip-tabs-color: @widget-text-color;
+@form-widget-color: @widget-text-color;
+@drop-down-border-color: @widget-border-color;
+@drop-down-hover-border-color: @widget-border-color;
+@drop-down-focused-border-color: @widget-border-color;
+@drop-down-background: @input-background-color;
+@drop-down-text-color: @widget-text-color;
+@secondary-border-color: @widget-border-color;
+@secondary-text-color: @widget-text-color;
+@numeric-selected-background: @selected-background-color;
+@panelbar-items-border: @widget-border-color;
+@panelbar-content-background: @content-background-color;
+@panelbar-content-color: @widget-text-color;
+@window-shadow-style: 1px 1px 7px 1px;
+@filter-menu-content-background: @content-background-color;
+@icon-background-color: transparent;
+
+@primary-gradient: none;
+@primary-hover-gradient: none;
+@primary-focused-gradient: none;
+@primary-active-text-color: @primary-button-text-color;
+@primary-active-gradient: none;
+@primary-focused-active-item-shadow: none;
+@primary-active-border-color: @primary-active-background-color;
+@primary-disabled-gradient: none;
+@primary-active-shadow:none;
+@primary-shadow:none;
+
+@button-hover-text-color: @hover-text-color;
+@button-hover-background-color: @hover-background-color;
+@button-hover-border-color: @hover-border-color;
+
+@button-active-background: @selected-background-color;
+@button-active-border-color: @selected-border-color;
+@button-focused-border-color: @button-border-color;
+@button-focused-shadow: @focused-item-shadow;
+@button-focused-active-shadow: @focused-active-item-shadow;
+
+.k-progressbar,
+.k-progressbar-horizontal > .k-state-selected,
+.k-rtl .k-progressbar-horizontal.k-progressbar-reverse > .k-state-selected,
+.k-progressbar-horizontal.k-progressbar-reverse > .k-state-selected,
+.k-rtl .k-progressbar-horizontal > .k-state-selected,
+.k-progressbar-vertical > .k-state-selected,
+.k-progressbar-vertical.k-progressbar-reverse > .k-state-selected,
+.k-progressbar > .k-state-selected.k-complete,
+.k-rtl .k-progressbar > .k-state-selected.k-complete,
+.k-progressbar-horizontal .k-first,
+.k-rtl .k-progressbar-horizontal .k-last,
+.k-rtl .k-progressbar-horizontal.k-progressbar-reverse .k-last,
+.k-progressbar-horizontal .k-last,
+.k-rtl .k-progressbar-horizontal .k-first,
+.k-progressbar-vertical .k-first,
+.k-progressbar-vertical .k-last
+{
+    border-radius: 0;
+}

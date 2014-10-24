@@ -818,6 +818,11 @@ td.k-state-focused.k-state-selected
     border-color: @hover-border-color;
 }
 
+.k-pager-wrap>a.k-state-disabled:hover {
+    border-color: @disabled-border-color;
+}
+
+
 /* this selector should be used separately, otherwise old IEs ignore the whole rule */
 .k-mobile-list .k-scheduler-timezones .k-edit-field:nth-child(2):active
 {
@@ -2087,3 +2092,5 @@ html .km-pane-wrapper .km-widget,
         border-color: #fff;
     }
 }
+
+.demo-section {background: transparent !important}
