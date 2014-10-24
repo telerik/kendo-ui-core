@@ -294,6 +294,14 @@ Each table row consists of table cells (<td>) which represent the grid columns. 
     }
 
 //<< Properties
+
+    /**
+    * The columns which should be rendered as child columns under this group column header.**Note that group column cannot be data bound and supports limited number of bound column settings - such as title, headerTemplate, locked
+    * @param \Kendo\UI\GridColumn|array,... $value one or more GridColumn to add.
+    */
+    public function addColumns($value) {
+        return $this->add('columns', func_get_args());
+    }
 }
 
 ?>

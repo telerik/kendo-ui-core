@@ -4,7 +4,8 @@ module CodeGen::PHP
         'Button' => ['content'],
         'Editor' => ['content'],
         'Tooltip' => ['content'],
-        'Window' => ['content']
+        'Window' => ['content'],
+        'column' => ['columns']
     }
 
     MANUALLY_GENERATED_EVENTS = {
