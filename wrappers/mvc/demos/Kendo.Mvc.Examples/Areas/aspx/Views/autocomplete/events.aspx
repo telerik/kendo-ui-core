@@ -69,7 +69,7 @@
         })
         .Events(e =>
         {
-            e.Change("onChange").Select("onSelect").Open("onOpen").Close("onClose").DataBound("onDataBound");
+            e.Change("onChange").Select("onSelect").Open("onOpen").Close("onClose").DataBound("onDataBound").Filtering("onFiltering");
         })
     %>
 </div>
@@ -106,6 +106,12 @@
     function onDataBound(e) {
         if ("kendoConsole" in window) {
             kendoConsole.log("event :: dataBound");
+        }
+    }
+
+    function onFiltering() {
+        if ("kendoConsole" in window) {
+            kendoConsole.log("event: filtering");
         }
     }
 </script>

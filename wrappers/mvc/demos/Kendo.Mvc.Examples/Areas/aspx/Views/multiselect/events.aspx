@@ -39,34 +39,38 @@
             .BindTo(continents)
             .Events(e =>
             {
-                e.Change("change").Select("select").Open("open").Close("close").DataBound("dataBound");
+                e.Change("onChange").Select("onSelect").Open("onOpen").Close("onClose").DataBound("onDataBound").Filtering("onFiltering");
             })
     %>
 </div>
 
 <script>
-    function open() {
+    function onOpen() {
         kendoConsole.log("event: open");
-    };
+    }
 
-    function close() {
+    function onClose() {
         kendoConsole.log("event: close");
-    };
+    }
 
-    function change() {
+    function onChange() {
         kendoConsole.log("event: change");
-    };
+    }
 
-    function dataBound() {
+    function onDataBound() {
         kendoConsole.log("event: dataBound");
-    };
+    }
 
-    function select(e) {
+    function onFiltering() {
+        kendoConsole.log("event: filtering");
+    }
+
+    function onSelect(e) {
         if ("kendoConsole" in window) {
             var dataItem = this.dataSource.view()[e.item.index()];
             kendoConsole.log("event :: select (" + dataItem.Text + " : " + dataItem.Value + ")");
         }
-    };
+    }
 </script>
 <div class="demo-section">
     <h3 class="title">Console log</h3>

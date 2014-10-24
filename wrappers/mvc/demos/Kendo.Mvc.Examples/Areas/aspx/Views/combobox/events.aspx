@@ -11,6 +11,7 @@
             .Name("combobox")
             .DataTextField("Text")
             .DataValueField("Value")
+            .Filter("startswith")
             .BindTo(new List<SelectListItem>()
             {
                 new SelectListItem() {
@@ -25,7 +26,7 @@
             })
             .Events(e =>
             {
-                e.Change("onChange").Select("onSelect").Open("onOpen").Close("onClose").DataBound("onDataBound");
+                e.Change("onChange").Select("onSelect").Open("onOpen").Close("onClose").DataBound("onDataBound").Filtering("onFiltering");
             })
     %>
 </div>
@@ -37,26 +38,32 @@
 <script>
     function onOpen() {
         kendoConsole.log("event: open");
-    };
+    }
 
     function onClose() {
         kendoConsole.log("event: close");
-    };
+    }
 
     function onChange() {
         kendoConsole.log("event: change");
-    };
+    }
 
     function onDataBound() {
         kendoConsole.log("event: dataBound");
-    };
+    }
+
+    function onFiltering() {
+        if ("kendoConsole" in window) {
+            kendoConsole.log("event: filtering");
+        }
+    }
 
     function onSelect(e) {
         if ("kendoConsole" in window) {
             var dataItem = this.dataItem(e.item.index());
             kendoConsole.log("event :: select (" + dataItem.Text + " : " + dataItem.Value + ")");
         }
-    };
+    }
 </script>
 <style scoped>
     .demo-section {

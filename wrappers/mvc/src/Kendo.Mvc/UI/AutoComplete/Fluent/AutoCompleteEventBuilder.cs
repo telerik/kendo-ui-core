@@ -150,6 +150,50 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Defines the inline handler of the Filtering client-side event
+        /// </summary>
+        /// <param name="handler">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  @(Html.Kendo().AutoComplete()
+        ///            .Name("AutoComplete")
+        ///            .Events(events => events.Filtering(
+        ///                 @&lt;text&gt;
+        ///                 function(e) {
+        ///                     //event handling code
+        ///                 }
+        ///                 &lt;/text&gt;
+        ///            ))
+        /// )
+        /// </code>
+        /// </example>
+        public AutoCompleteEventBuilder Filtering(Func<object, object> handler)
+        {
+            Handler("filtering", handler);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Defines the name of the JavaScript function that will handle the the Filtering client-side event.
+        /// </summary>
+        /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().AutoComplete()
+        ///             .Name("AutoComplete")
+        ///             .Events(events => events.Filtering("filtering"))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public AutoCompleteEventBuilder Filtering(string handler)
+        {
+            Handler("filtering", handler);
+
+            return this;
+        }
+
+        /// <summary>
         ///  Defines the name of the JavaScript function that will handle the the Open client-side event.
         /// </summary>
         /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
