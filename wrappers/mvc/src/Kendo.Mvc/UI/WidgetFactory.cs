@@ -1398,6 +1398,21 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
+        /// Creates a <see cref="TreeList"/>
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().TreeList()
+        ///             .Name("TreeList")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual TreeListBuilder<T> TreeList<T>() where T : class
+        {
+            return new TreeListBuilder<T>(new TreeList<T>(ViewContext, Initializer, UrlGenerator));
+        }
+        
+        /// <summary>
         /// Creates a <see cref="TreeMap"/>
         /// </summary>
         /// <example>

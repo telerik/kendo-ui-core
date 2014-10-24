@@ -115,6 +115,7 @@ namespace :generate do
                     'docs/api/javascript/ui/editor.md',
                     'docs/api/javascript/ui/gantt.md',
                     'docs/api/javascript/ui/toolbar.md',
+                    'docs/api/javascript/ui/treelist.md',
                     'docs/api/javascript/ui/treeview.md'
                 ]
 

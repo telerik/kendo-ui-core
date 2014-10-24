@@ -81,6 +81,8 @@ module CodeGen::MVC::Wrappers
         'gantt.datasource',
         'gantt.dependencies',
         'gantt.columns',
+        'treelist.datasource',
+        'treelist.editable.window',
         'treeview.items',
         'treeview.autobind',
         'treeview.animation',
@@ -389,9 +391,12 @@ module CodeGen::MVC::Wrappers
             'TTaskModel' => 'class, IGanttTask',
             'TDependenciesModel' => 'class, IGanttDependency'
         },
-	'diagram' => {
+        'diagram' => {
             'TShapeModel' => 'class',
             'TConnectionModel' => 'class'
+        },
+        'treelist' => {
+            'T' => 'class'
         }
     }
 
