@@ -1010,6 +1010,8 @@
                             this.target(new Point(options.toX, options.toY));
                         }
 
+                        this.options.dataItem = model;
+
                         this._template();
                         this.redraw(this.options);
                     } else {
