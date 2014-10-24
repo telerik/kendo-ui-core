@@ -189,8 +189,9 @@
         var grid = new Grid(table, {
             dataSource: [ { foo: "foo", bar: "bar" } ],
             resizable: true,
-            columns: [{ locked: true, columns: [{ width: 100, field: "foo" }, { width: 200, field: "bar" } ] }, "foo"]
+            columns: [{ locked: true, title: "master", columns: [{ width: 100, field: "foo" }, { width: 200, field: "bar" } ] }, { width: 100, field: "foo" }]
         });
+
         var firstColumn = grid.thead.find("tr:last th:first");
 
         $(firstColumn).trigger({ type: "mousemove", clientX: firstColumn.offset().left + firstColumn.outerWidth(), clientY: 0});
