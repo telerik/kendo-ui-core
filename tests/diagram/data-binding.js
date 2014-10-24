@@ -318,7 +318,7 @@
         var item = diagram.dataSource.at(0);
         item.set("foo", "bar");
         var shape = diagram._dataMap[item.id];
-        ok(!shape.options.dataItem.foo, "bar");
+        equal(shape.dataItem.foo, "bar");
     });
 
     // ------------------------------------------------------------
@@ -375,8 +375,8 @@
     test("itemchange should change the shape dataItem", function() {
         var item = diagram.connectionsDataSource.at(0);
         item.set("foo", "bar");
-        var connection = diagram._connectionsDataMap[item.id];
-        ok(!connection.options.dataItem.foo, "bar");
+        var connection = diagram._connectionsDataMap[item.uid];
+        equal(connection.dataItem.foo, "bar");
     });
 
 })();

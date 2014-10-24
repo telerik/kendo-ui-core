@@ -300,11 +300,13 @@
         var DiagramElement = Observable.extend({
             init: function (options) {
                 var that = this;
-                that.dataItem = options.dataItem;
+                that.dataItem = (options || {}).dataItem;
                 Observable.fn.init.call(that);
                 that.options = deepExtend({ id: diagram.randomId() }, that.options, options);
                 // Update dataItem after deepExtend in order to fix editing model wrapping
-                that.options.dataItem = options.dataItem;
+                if (that.dataItem) {
+                    that.options.dataItem = that.dataItem;
+                }
                 that.isSelected = false;
                 that.visual = new Group({
                     id: that.options.id,
@@ -1392,11 +1394,10 @@
              * @returns {Connection}
              */
             clone: function () {
-                var json = this.serialize(),
-                    dataItem = {};
+                var json = this.serialize();
 
-                if (this.diagram && this.diagram._isEditable && defined(this.options.dataItem)) {
-                    this.options.dataItem[this.options.dataItem.idField] = this.options.dataItem._defaultId;
+                if (this.diagram && this.diagram._isEditable && defined(this.dataItem)) {
+                    this.dataItem[this.dataItem.idField] = this.dataItem._defaultId;
                 }
 
                 return new Connection(this.from, this.to, json.options);
@@ -1415,9 +1416,10 @@
                     to: to
                 });
 
-                if (this.options.dataItem) {
-                    json.dataItem = this.optins.dataItem.toString();
+                if (defined(this.dataItem)) {
+                    json.dataItem = this.dataItem.toString();
                 }
+
                 json.options.points = this.points();
                 return json;
             },
