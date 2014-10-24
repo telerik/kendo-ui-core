@@ -1469,7 +1469,7 @@ var __meta__ = {
             var id = options.id;
             var rows = (textbox.content + "").split(textbox.ROWS_SPLIT_REGEX);
             var floatElement = new FloatElement({vertical: true, align: options.align, wrap: false});
-            var textOptions = deepExtend({ }, options, { opacity: 1 });
+            var textOptions = deepExtend({ }, options, { opacity: 1, animation: null });
             var hasBox = textbox.hasBox();
             var text;
             var rowIdx;
