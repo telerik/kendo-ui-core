@@ -7429,6 +7429,105 @@ var __meta__ = {
             return lines;
         },
 
+        createVisual: function() {
+            var chart = this,
+                options = chart.options,
+                connectors = options.connectors,
+                points = chart.points,
+                connectorLine,
+                count = points.length,
+                space = 4,
+                sector, angle, segment,
+                seriesIx, label, i;
+
+            ChartElement.fn.createVisual.call(this);
+
+            for (i = 0; i < count; i++) {
+                segment = points[i];
+                sector = segment.sector;
+                angle = sector.middle();
+                label = segment.label;
+                seriesIx = { seriesId: segment.seriesIx };
+
+                if (label) {
+                    connectorLine = new draw.Path({
+                        stroke: {
+                            color:  connectors.color,
+                            width: connectors.width
+                        },
+                        animation: {
+                            type: FADEIN,
+                            delay: segment.animationDelay
+                        }
+                    });
+                    if (label.options.position === OUTSIDE_END && segment.value !== 0) {
+                        var box = label.box,
+                            centerPoint = sector.c,
+                            start = sector.point(angle),
+                            middle = Point2D(box.x1, box.center().y),
+                            sr, end, crossing;
+
+                        start = sector.clone().expand(connectors.padding).point(angle);
+                        connectorLine.moveTo(start.x, start.y);
+                        // TODO: Extract into a method to remove duplication
+                        if (label.orientation == RIGHT) {
+                            end = Point2D(box.x1 - connectors.padding, box.center().y);
+                            crossing = intersection(centerPoint, start, middle, end);
+                            middle = Point2D(end.x - space, end.y);
+                            crossing = crossing || middle;
+                            crossing.x = math.min(crossing.x, middle.x);
+
+                            if (chart.pointInCircle(crossing, sector.c, sector.r + space) ||
+                                crossing.x < sector.c.x) {
+                                sr = sector.c.x + sector.r + space;
+                                if (segment.options.labels.align !== COLUMN) {
+                                    if (sr < middle.x) {
+                                        connectorLine.lineTo(sr, start.y);
+                                    } else {
+                                        connectorLine.lineTo(start.x + space * 2, start.y);
+                                    }
+                                } else {
+                                    connectorLine.lineTo(sr, start.y);
+                                }
+                                connectorLine.lineTo(middle.x, end.y);
+                            } else {
+                                crossing.y = end.y;
+                                connectorLine.lineTo(crossing.x, crossing.y);
+                            }
+                        } else {
+                            end = Point2D(box.x2 + connectors.padding, box.center().y);
+                            crossing = intersection(centerPoint, start, middle, end);
+                            middle = Point2D(end.x + space, end.y);
+                            crossing = crossing || middle;
+                            crossing.x = math.max(crossing.x, middle.x);
+
+                            if (chart.pointInCircle(crossing, sector.c, sector.r + space) ||
+                                crossing.x > sector.c.x) {
+                                sr = sector.c.x - sector.r - space;
+                                if (segment.options.labels.align !== COLUMN) {
+                                    if (sr > middle.x) {
+                                        connectorLine.lineTo(sr, start.y);
+                                    } else {
+                                        connectorLine.lineTo(start.x - space * 2, start.y);
+                                    }
+                                } else {
+                                    connectorLine.lineTo(sr, start.y);
+                                }
+                                connectorLine.lineTo(middle.x, end.y);
+                            } else {
+                                crossing.y = end.y;
+                                connectorLine.lineTo(crossing.x, crossing.y);
+                            }
+                        }
+
+                        connectorLine.lineTo(end.x, end.y);
+
+                        this.visual.append(connectorLine);
+                    }
+                }
+            }
+        },
+
         labelComparator: function (reverse) {
             reverse = (reverse) ? -1 : 1;
 
