@@ -919,6 +919,18 @@ var __meta__ = {
             }
         },
 
+        createGradientOverlay: function(element, options, gradientOptions) {
+            var overlay = new draw.Path(deepExtend({
+                stroke: {
+                    color: NONE
+                },
+                fill: this.createGradient(gradientOptions)
+            }, options));
+            overlay.segments.elements(element.segments.elements());
+
+            return overlay;
+        },
+
         createGradient: function(options) {
             if (this.parent) {
                 return this.parent.createGradient(options);

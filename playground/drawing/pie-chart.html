@@ -15,9 +15,9 @@
     });
 
     require([ "jquery.min",
-              "kendo.dataviz.chart" ], function(){
+              "kendo.dataviz.stock" ], function(){
 
-       $("#chart").kendoChart({
+       $("#pie").kendoChart({
             title: {
                 position: "bottom",
                 text: "Share of Internet Population Growth, 2007 - 2012"
@@ -70,7 +70,7 @@
             }
         });
         
-        $("#chart2").kendoChart({
+        $("#donut").kendoChart({
             title: {
                 position: "bottom",
                 text: "Share of Internet Population Growth"
@@ -151,10 +151,266 @@
                 template: "#= category # (#= series.name #): #= value #%"
             }
         });
+        
+         $("#column").kendoChart({
+                title: {
+                    text: "Site Visitors Stats \n /thousands/"
+                },
+                legend: {
+                    visible: false
+                },
+                seriesDefaults: {
+                    type: "column"
+                },
+                series: [{
+                    name: "Total Visits",
+                    data: [56000]
+                }, {
+                    name: "Unique visitors",
+                    data: [52000]
+                }],
+                valueAxis: {                   
+                    line: {
+                        visible: false
+                    },
+                    minorGridLines: {
+                        visible: true
+                    }
+                },
+                categoryAxis: {
+                    categories: ["Jan"],
+                    majorGridLines: {
+                        visible: false
+                    }
+                },
+                tooltip: {
+                    visible: true,
+                    template: "#= series.name #: #= value #"
+                }
+            });
+                   
+         $("#bar").kendoChart({
+                title: {
+                    text: "Site Visitors Stats \n /thousands/"
+                },
+                legend: {
+                    visible: false
+                },
+                seriesDefaults: {
+                    type: "bar"
+                },
+                series: [{
+                    name: "Total Visits",
+                    data: [56000]
+                }, {
+                    name: "Unique visitors",
+                    data: [52000]
+                }],
+                valueAxis: {                   
+                    line: {
+                        visible: false
+                    },
+                    minorGridLines: {
+                        visible: true
+                    }
+                },
+                categoryAxis: {
+                    categories: ["Jan"],
+                    majorGridLines: {
+                        visible: false
+                    }
+                },
+                tooltip: {
+                    visible: true,
+                    template: "#= series.name #: #= value #"
+                }
+            });
+            
+             $("#boxplot").kendoChart({
+                title: {
+                    text: "Monthly Mean Temperatures (&deg;F)"
+                },
+                legend: {
+                    visible: false
+                },
+                series: [{
+                    type: "boxPlot",
+                    data: [
+                        [26.2,38.3,51,61.45,68.9,49.0,[18.3, 20, 70, 72,5]],
+                        [26.4,38.125,46.8,60.425,66.8,47.3,[18, 69, 71.3, 71.5]],
+                        [31.6,41.725,52.35,62.175,70.8,52.3,[14, 16.4, 74]],
+                        [34.4,39.375,49.9,61.425,69.2,50.3,[16, 18, 72, 72.5]],
+                        [29.9,38.35,50.4,60.875,69.7,49.9,[19, 20, 76, 78]],
+                        [22.3,36.875,48.9,62.65,70.3,49.0,[16.5, 17, 74, 75, 78]],
+                        [32.3,39.5,54.1,61.175,67.3,50.8,[13, 14, 15, 74.3, 75.2, 76]],
+                        [28.5,36.075,50.5,64.2,70.4,49.6,[18, 22, 73.4, 75]],
+                        [33.6,40.65,49.55,62.8,69.2,51.1,[17, 73]],
+                        [33.6,38.6,47.9,60.825,67,49.7,[12, 13.5, 16, 73, 74.6, 77]],
+                        [31.9,36.425,49.3,61.825,69.7,49.4,[17, 76]],
+                        [34,41.225,51.15,62.4,68.8,51.6,[14.6, 17.3, 72.3, 74]]
+                   ]
+                }],
+                categoryAxis: {
+                    categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                    majorGridLines: {
+                        visible: false
+                    }
+                }
+            });
+            
+            $("#stock-chart").kendoStockChart({
+                dataSource: {
+                    transport: {
+                        read: {
+                            url: "../boeing-stock.json",
+                            dataType: "json"
+                        }
+                    }
+                },
+                title: {
+                    text: "The Boeing Company \n (NYSE:BA)"
+                },
+                dateField: "Date",
+                series: [{
+                    type: "candlestick",
+                    openField: "Open",
+                    highField: "High",
+                    lowField: "Low",
+                    closeField: "Close"
+                }],
+                navigator: {
+                    series: {
+                        type: "area",
+                        field: "Close"
+                    },
+                    select: {
+                        from: "2009/02/05",
+                        to: "2011/10/07"
+                    }
+                },
+                categoryAxis: {
+                    notes: {
+                        data: [{
+                            value: "2001/01/01",
+                            label: {
+                                text: "01"
+                            }
+                        }, {
+                            value: "2002/01/01",
+                            label: {
+                                text: "02"
+                            }
+                        }, {
+                            value: "2003/01/01",
+                            label: {
+                                text: "03"
+                            }
+                        }, {
+                            value: "2004/01/01",
+                            label: {
+                                text: "04"
+                            }
+                        }, {
+                            value: "2005/01/01",
+                            label: {
+                                text: "05"
+                            }
+                        }, {
+                            value: "2006/01/01",
+                            label: {
+                                text: "06"
+                            }
+                        }, {
+                            value: "2007/01/01",
+                            label: {
+                                text: "07"
+                            }
+                        }, {
+                            value: "2008/01/01",
+                            label: {
+                                text: "08"
+                            }
+                        }, {
+                            value: "2009/01/01",
+                            label: {
+                                text: "09"
+                            }
+                        }, {
+                            value: "2010/01/01",
+                            label: {
+                                text: "10"
+                            }
+                        }, {
+                            value: "2011/01/01",
+                            label: {
+                                text: "11"
+                            }
+                        }, {
+                            value: "2012/01/01",
+                            label: {
+                                text: "12"
+                            }
+                        }]
+                    }
+                }
+            });
+            $("#water").kendoChart({
+                title: {
+                    text: "Inventory"
+                },
+                legend: {
+                    visible: false
+                },
+                series: [{
+                    type: "waterfall",
+                    data: [180, -60, -20, 10, 30],
+                    labels: {
+                        visible: true
+                    }
+                }],
+                categoryAxis: {
+                    categories: ["In stock", "Damaged", "Reserved", "In transit", "Refurbished"]
+                },
+                axisDefaults: {
+                    majorGridLines: {
+                        visible: false
+                    }
+                }
+            });   
+            $("#range").kendoChart({
+                title: {
+                    text: "Average Weather Conditions"
+                },
+                series: [{
+                    type: "rangeColumn",
+                    data: [[5, 11], [5, 13], [7, 15], [10, 19], [13, 23], [17, 28],
+                           [20, 30], [20, 30], [17, 26], [13, 22], [9, 16], [6, 13]]
+                }],
+                seriesDefaults: {
+                    labels: {
+                        visible: true,
+                        from: {
+                            template: "#=value.from# °C",
+                        },
+                        to: {
+                            template: "#=value.to# °C",
+                        }
+                    }
+                },
+                categoryAxis: {
+                    categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                                 "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                },
+                tooltip: {
+                    visible: true,
+                    template: "Avg Min Temp : #= value.from # °C <br>" +
+                              "Avg Max Temp : #= value.to # °C"
+                }
+            });
     });
     </script>
     <style>
-        #chart, #chart2 {
+        .k-chart {
             width: 800px;
             height: 500px;
             float: left;
@@ -167,9 +423,15 @@
     </style>
   </head>
   <body>
-      
-      <div id="chart2"></div>
-      <div id="chart"></div>
+      <div id="donut"></div>
+      <div id="pie"></div>
+      <div id="bar"></div>
+      <div id="column"></div>
+      <div id="boxplot"></div>
+      <div id="stock-chart"></div>
+      <div id="water"></div>
+      <div id="range"></div>
+      <div id="bullet"></div>
       <button>redraw</button>
   </body>
 </html>

@@ -3095,10 +3095,16 @@ var __meta__ = {
                 }
             });
 
-            // TODO: Overlay
-            //     rotation: vertical ? 0 : 90
-
             this.visual.append(rect);
+
+            if (options.overlay) {
+                this.visual.append(this.createGradientOverlay(rect, {
+                        baseColor: this.color,
+                    }, deepExtend({
+                         end: !options.vertical ? [0, 1] : undefined
+                    }, options.overlay)
+                ));
+            }
         },
 
         createAnimation: function() {
@@ -6102,6 +6108,13 @@ var __meta__ = {
 
             dataviz.alignPathToPixel(body);
             container.append(body);
+            if (options.overlay) {
+                container.append(this.createGradientOverlay(body, {
+                        baseColor: this.color,
+                    },
+                    deepExtend({}, options.overlay)
+                ));
+            }
         },
 
         createLines: function(container, options) {
@@ -6878,31 +6891,38 @@ var __meta__ = {
                     }
                 } : {},
                 elements = [],
-                overlay = options.overlay;
-
-            if (overlay) {
-                overlay = deepExtend({}, options.overlay, {
-                    r: sector.r,
-                    ir: sector.ir,
-                    cx: sector.c.x,
-                    cy: sector.c.y,
-                    bbox: sector.getBBox()
-                });
-            }
+                overlay = options.overlay,
+                color = options.color,
+                fill = {
+                    color: color,
+                    opacity: options.opacity
+                },
+                visual;
 
             ChartElement.fn.createVisual.call(this);
             if (segment.value) {
-                this.visual.append(segment.createSegment(sector, deepExtend({
-                        fill: {
-                            color: options.color,
-                            opacity: options.opacity
-                        },
-                        stroke: {
-                            opacity: options.opacity
-                        },
-                        zIndex: options.zIndex
-                    }, border))
-                );
+                visual = segment.createSegment(sector, deepExtend({
+                    fill: fill,
+                    stroke: {
+                        opacity: options.opacity
+                    },
+                    zIndex: options.zIndex
+                }, border));
+
+                this.visual.append(visual);
+
+                if (overlay) {
+                    this.visual.append(this.createGradientOverlay(visual, {
+                            baseColor: color,
+                            fallbackFill: fill
+                        }, deepExtend({
+                            center: [sector.c.x, sector.c.y],
+                            innerRadius: sector.ir,
+                            radius: sector.r,
+                            userSpace: true
+                        }, overlay)
+                    ));
+                }
             }
         },
 
