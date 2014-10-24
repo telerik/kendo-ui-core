@@ -9,7 +9,9 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.Extensions;
 
-    public class Diagram : WidgetBase
+    public class Diagram<TShapeModel, TConnectionModel> : WidgetBase
+        where TShapeModel : class
+        where TConnectionModel : class
     {
         public IUrlGenerator urlGenerator;
 
@@ -218,7 +220,7 @@ namespace Kendo.Mvc.UI
 
         protected override void WriteHtml(HtmlTextWriter writer)
         {
-            var html = new DiagramHtmlBuilder(this).Build();
+            var html = new DiagramHtmlBuilder<TShapeModel, TConnectionModel>(this).Build();
 
             html.WriteTo(writer);
 

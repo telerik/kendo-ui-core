@@ -4,15 +4,17 @@ namespace Kendo.Mvc.UI
     using System.Collections.Generic;
     using Kendo.Mvc.Extensions;
 
-    public class DiagramHtmlBuilder
+    public class DiagramHtmlBuilder<TShapeModel, TConnectionModel>
+        where TShapeModel : class
+        where TConnectionModel : class
     {
-        private readonly Diagram component;
+        private readonly Diagram<TShapeModel, TConnectionModel> component;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DiagramHtmlBuilder" /> class.
         /// </summary>
         /// <param name="component">The Diagram component.</param>
-        public DiagramHtmlBuilder(Diagram component)
+        public DiagramHtmlBuilder(Diagram<TShapeModel, TConnectionModel> component)
         {
             this.component = component;
         }

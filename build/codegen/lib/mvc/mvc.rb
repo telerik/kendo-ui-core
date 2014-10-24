@@ -388,6 +388,10 @@ module CodeGen::MVC::Wrappers
         'gantt' => {
             'TTaskModel' => 'class, IGanttTask',
             'TDependenciesModel' => 'class, IGanttDependency'
+        },
+	'diagram' => {
+            'TShapeModel' => 'class',
+            'TConnectionModel' => 'class'
         }
     }
 
