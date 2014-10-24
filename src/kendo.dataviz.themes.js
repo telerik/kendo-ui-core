@@ -318,6 +318,9 @@ var __meta__ = {
             },
             stroke: {
                 width: 0
+            },
+            editable: {
+                tools: ["edit", "delete", "rotate"]
             }
         },
         editable: {
@@ -326,14 +329,6 @@ var __meta__ = {
                     width: 7,
                     height: 7
                 }
-            },
-            rotate: {
-                thumb: {
-                    width: 14
-                }
-            },
-            handles: {
-                type: "rectangle"
             }
         },
         selectable: {
@@ -351,6 +346,9 @@ var __meta__ = {
                     width: 8,
                     height: 8
                 }
+            },
+            editable: {
+                tools: ["edit", "delete"]
             }
         }
     };

@@ -200,17 +200,23 @@
                 if (this._undoSource !== undefined) {
                     this.item.source(this._undoSource, false);
                 }
+
                 if (this._undoTarget !== undefined) {
                     this.item.target(this._undoTarget, false);
                 }
+
+                this.item.updateModel(this._undoSource, this._undoTarget);
             },
             redo: function () {
                 if (this._redoSource !== undefined) {
                     this.item.source(this._redoSource, false);
                 }
+
                 if (this._redoTarget !== undefined) {
                     this.item.target(this._redoTarget, false);
                 }
+
+                this.item.updateModel(this._undoSource, this._undoTarget);
             }
         });
 
@@ -226,10 +232,12 @@
             undo: function () {
                 this.item.source(this._undoSource, false);
                 this.item.target(this._undoTarget, false);
+                this.item.updateModel(this._undoSource, this._undoTarget);
             },
             redo: function () {
                 this.item.source(this._redoSource, false);
                 this.item.target(this._redoTarget, false);
+                this.item.updateModel(this._undoSource, this._undoTarget);
             }
         });
 
@@ -241,10 +249,10 @@
                 this.title = "Delete connection";
             },
             undo: function () {
-                this.diagram.addConnection(this.connection, false);
+                this.diagram._addConnection(this.connection, false);
             },
             redo: function () {
-                this.diagram.remove(this.connection, false);
+                this.diagram._remove(this.connection, false);
             }
         });
 
@@ -255,12 +263,12 @@
                 this.title = "Deletion";
             },
             undo: function () {
-                this.diagram.addShape(this.shape, {undoable: false});
+                this.diagram._addShape(this.shape, { undoable: false });
                 this.shape.select(false);
             },
             redo: function () {
                 this.shape.select(false);
-                this.diagram.remove(this.shape, false);
+                this.diagram._remove(this.shape, false);
             }
         });
         /**
@@ -301,6 +309,7 @@
                         shape.layout(shape, this.undoStates[i], this.redoStates[i]);
                     }
                 }
+
                 if (this.adorner) {
                     this.adorner.refreshBounds();
                     this.adorner.refresh();
@@ -314,11 +323,13 @@
                 this.diagram = diagram;
                 this.title = "New connection";
             },
+
             undo: function () {
-                this.diagram.remove(this.connection, false);
+                this.diagram._remove(this.connection, false);
             },
+
             redo: function () {
-                this.diagram.addConnection(this.connection, false);
+                this.diagram._addConnection(this.connection, false);
             }
         });
 
@@ -328,11 +339,13 @@
                 this.diagram = diagram;
                 this.title = "New shape";
             },
+
             undo: function () {
-                this.diagram.remove(this.shape, false);
+                this.diagram._remove(this.shape, false);
             },
+
             redo: function () {
-                this.diagram.addShape(this.shape, {undoable: false});
+                this.diagram._addShape(this.shape, false);
             }
         });
 
@@ -365,29 +378,33 @@
                     this.redoRotates.push(shape.rotate().angle);
                 }
             },
+
             undo: function () {
                 var i, shape;
                 for (i = 0; i < this.shapes.length; i++) {
                     shape = this.shapes[i];
-                    shape.rotate(this.undoRotates[i], this.center);
+                    shape.rotate(this.undoRotates[i], this.center, false);
                     if (shape.hasOwnProperty("layout")) {
                         shape.layout(shape);
                     }
                 }
+
                 if (this.adorner) {
                     this.adorner._initialize();
                     this.adorner.refresh();
                 }
             },
+
             redo: function () {
                 var i, shape;
                 for (i = 0; i < this.shapes.length; i++) {
                     shape = this.shapes[i];
-                    shape.rotate(this.redoRotates[i], this.center);
+                    shape.rotate(this.redoRotates[i], this.center, false);
                     if (shape.hasOwnProperty("layout")) {
                         shape.layout(shape);
                     }
                 }
+
                 if (this.adorner) {
                     this.adorner._initialize();
                     this.adorner.refresh();
@@ -515,8 +532,7 @@
                 this.stack.push(composite);
                 if (isUndefined(execute) || (execute && (execute === true))) {
                     this.redo();
-                }
-                else {
+                } else {
                     this.index++;
                 }
                 // check the capacity
@@ -643,12 +659,14 @@
                         this.handle = this.adorner._hitTest(p);
                     }
                 }
+
                 if (!this.handle) {
                     this.handle = diagram._resizingAdorner._hitTest(p);
                     if (this.handle) {
                         this.adorner = diagram._resizingAdorner;
                     }
                 }
+
                 if (this.adorner) {
                     this.adorner.start(p);
                 }
@@ -670,9 +688,11 @@
                         diagram.undoRedoService.add(unit, false);
                     }
                 }
-                if(service.hoveredItem) {
+
+                if (service.hoveredItem) {
                     this.toolService.triggerClick({item: service.hoveredItem, point: p, meta: meta});
                 }
+
                 this.adorner = undefined;
                 this.handle = undefined;
             },
@@ -738,13 +758,18 @@
                 return true;
             },
             end: function () {
-                var nc = this.toolService.activeConnection, hi = this.toolService.hoveredItem, connector = this.toolService._hoveredConnector;
+                var nc = this.toolService.activeConnection,
+                    hi = this.toolService.hoveredItem,
+                    connector = this.toolService._hoveredConnector;
+
                 if (connector && connector._c != nc.sourceConnector) {
                     nc.target(connector._c);
-                }
-                else if (hi) {
+                } else if (hi) {
                     nc.target(hi);
                 }
+
+                nc.updateModel();
+
                 this.toolService._connectionManipulation();
             },
             getCursor: function () {
@@ -853,33 +878,44 @@
                 if ((meta.ctrlKey || meta.metaKey) && !meta.altKey) {// ctrl or option
                     if (testKey(key, "a")) {// A: select all
                         diagram.selectAll();
+                        diagram._destroyToolBar();
                         return true;
                     } else if (testKey(key, "z")) {// Z: undo
                         diagram.undo();
+                        diagram._destroyToolBar();
                         return true;
                     } else if (testKey(key, "y")) {// y: redo
                         diagram.redo();
+                        diagram._destroyToolBar();
                         return true;
                     } else if (testKey(key, "c")) {
                         diagram.copy();
+                        diagram._destroyToolBar();
                     } else if (testKey(key, "x")) {
                         diagram.cut();
+                        diagram._destroyToolBar();
                     } else if (testKey(key, "v")) {
                         diagram.paste();
+                        diagram._destroyToolBar();
                     } else if (testKey(key, "l")) {
                         diagram.layout();
+                        diagram._destroyToolBar();
                     } else if (testKey(key, "d")) {
+                        diagram._destroyToolBar();
                         diagram.copy();
                         diagram.paste();
                     }
                 } else if (key === 46 || key === 8) {// del: deletion
                     diagram.remove(diagram.select(), true);
+                    diagram._destroyToolBar();
                     return true;
                 } else if (key === 27) {// ESC: stop any action
                     this._discardNewConnection();
                     diagram.deselect();
+                    diagram._destroyToolBar();
                     return true;
                 }
+
             },
             wheel: function (p, meta) {
                 var diagram = this.diagram,
@@ -910,7 +946,7 @@
                 this.tools[index] = tool;
             },
             triggerClick: function(data) {
-                if(this.startPoint.equals(data.point)) {
+                if (this.startPoint.equals(data.point)) {
                     this.diagram.trigger("click", data);
                 }
 
@@ -1227,12 +1263,15 @@
                 that.visual.append(that.spVisual);
                 that.visual.append(that.epVisual);
             },
+
             options: {
                 handles: {}
             },
+
             _getCursor: function () {
                 return Cursors.move;
             },
+
             start: function (p) {
                 this.handle = this._hitTest(p);
                 this.startPoint = p;
@@ -1251,6 +1290,7 @@
                         break;
                 }
             },
+
             move: function (handle, p) {
                 switch (handle) {
                     case -1:
@@ -1273,31 +1313,32 @@
                 this.refresh();
                 return true;
             },
+
             stop: function (p) {
                 var ts = this.diagram.toolService, item = ts.hoveredItem, target;
                 if (ts._hoveredConnector) {
                     target = ts._hoveredConnector._c;
-                } else if (item && !item.line) {
+                } else if (item && item instanceof diagram.Shape) {
                     target = item;
-                }
-                else {
+                } else {
                     target = p;
                 }
-                if (this.handle !== undefined) {
-                    switch (this.handle) {
-                        case -1:
-                            this.connection.source(target);
-                            break;
-                        case 1:
-                            this.connection.target(target);
-                            break;
-                    }
+
+                if (this.handle === -1) {
+                    this.connection.source(target);
+                } else if (this.handle === 1) {
+                    this.connection.target(target);
+                }
+
+                if (this.handle) {
+                    this.connection.updateModel();
                 }
 
                 this.handle = undefined;
                 this._ts._connectionManipulation();
                 return new ConnectionEditUndoUnit(this.connection, this._initialSource, this._initialTarget);
             },
+
             _hitTest: function (p) {
                 var sp = this.connection.sourcePoint(),
                     tp = this.connection.targetPoint(),
@@ -1305,8 +1346,10 @@
                     ry = this.options.handles.height / 2,
                     sb = new Rect(sp.x, sp.y).inflate(rx, ry),
                     tb = new Rect(tp.x, tp.y).inflate(rx, ry);
+
                 return sb.contains(p) ? -1 : (tb.contains(p) ? 1 : 0);
             },
+
             refresh: function () {
                 this.spVisual.redraw({ center: this.diagram.modelToLayer(this.connection.sourcePoint()) });
                 this.epVisual.redraw({ center: this.diagram.modelToLayer(this.connection.targetPoint()) });
@@ -1323,6 +1366,7 @@
                     }
                 };
             },
+
             show: function (shape) {
                 var that = this, len, i, ctr;
                 that._visible = true;
@@ -1339,6 +1383,7 @@
                 that.visual.visible(true);
                 that.refresh();
             },
+
             destroy: function () {
                 var that = this;
                 that.diagram.unbind(ITEMBOUNDSCHANGE, that._refreshHandler);
@@ -1346,6 +1391,7 @@
                 that._visible = undefined;
                 that.visual.visible(false);
             },
+
             _hitTest: function (p) {
                 var ctr, i;
                 for (i = 0; i < this.connectors.length; i++) {
@@ -1357,6 +1403,7 @@
                     }
                 }
             },
+
             refresh: function () {
                 if (this.shape) {
                     var bounds = this.shape.bounds();
@@ -1403,7 +1450,6 @@
 
                 that._initSelection();
                 that._createHandles();
-                that._createThumb();
                 that.redraw();
                 that.diagram.bind("select", function (e) {
                     that._initialize(e.selected);
@@ -1416,26 +1462,13 @@
                     }
                 };
 
-                that._rotatedHandler = function () {
-                    if (that.shapes.length == 1) {
-                        that._angle = that.shapes[0].rotate().angle;
-                    }
-                    that._refreshHandler();
-                };
-
-                that.diagram.bind(ITEMBOUNDSCHANGE, that._refreshHandler).bind(ITEMROTATE, that._rotatedHandler);
+                that.diagram.bind(ITEMBOUNDSCHANGE, that._refreshHandler);
                 that.refreshBounds();
                 that.refresh();
             },
+
             options: {
-                editable: {
-                    rotate: {
-                        thumb: {
-                            data: "M7.115,16C3.186,16,0,12.814,0,8.885C0,5.3,2.65,2.336,6.099,1.843V0l4.85,2.801l-4.85,2.8V3.758 c-2.399,0.473-4.21,2.588-4.21,5.126c0,2.886,2.34,5.226,5.226,5.226s5.226-2.34,5.226-5.226c0-1.351-0.513-2.582-1.354-3.51 l1.664-0.961c0.988,1.222,1.581,2.777,1.581,4.472C14.23,12.814,11.045,16,7.115,16L7.115,16z",
-                            y: -30
-                        }
-                    }
-                },
+                editable: { },
                 selectable: {
                     stroke: {
                         color: "#778899",
@@ -1456,17 +1489,6 @@
                 var options = deepExtend({}, that.options.selectable, selectable);
                 that.rect = new Rectangle(options);
                 that.visual.append(that.rect);
-            },
-
-            _createThumb: function() {
-                var that = this,
-                    editable = that.options.editable,
-                    rotate = editable.rotate;
-
-                if (editable && rotate) {
-                    that.rotationThumb = new Path(rotate.thumb);
-                    that.visual.append(that.rotationThumb);
-                }
             },
 
             _createHandles: function() {
@@ -1501,16 +1523,6 @@
                 var tp = this.diagram.modelToLayer(p),
                     editable = this.options.editable,
                     i, hit, handleBounds, handlesCount = this.map.length, handle;
-
-                if (this._angle) {
-                    tp = tp.clone().rotate(this._bounds.center(), this._angle);
-                }
-
-                if (editable && editable.rotate && this._rotationThumbBounds) {
-                    if (this._rotationThumbBounds.contains(tp)) {
-                        return new Point(-1, -2);
-                    }
-                }
 
                 if (editable && editable.resize) {
                     for (i = 0; i < handlesCount; i++) {
@@ -1557,14 +1569,8 @@
 
             _getCursor: function (point) {
                 var hit = this._hitTest(point);
-                if (hit && (hit.x >= -1) && (hit.x <= 1) && (hit.y >= -1) && (hit.y <= 1) && this.options.editable && this.options.editable.resize) {
-                    var angle = this._angle;
-                    if (angle) {
-                        angle = 360 - angle;
-                        hit.rotate(new Point(0, 0), angle);
-                        hit = new Point(Math.round(hit.x), Math.round(hit.y));
-                    }
 
+                if (hit && (hit.x >= -1) && (hit.x <= 1) && (hit.y >= -1) && (hit.y <= 1) && this.options.editable && this.options.editable.resize) {
                     if (hit.x == -1 && hit.y == -1) {
                         return "nw-resize";
                     }
@@ -1590,6 +1596,7 @@
                         return "w-resize";
                     }
                 }
+
                 return this._manipulating ? Cursors.move : Cursors.select;
             },
 
@@ -1602,26 +1609,15 @@
                     item = items[i];
                     if (item instanceof diagram.Shape) {
                         that.shapes.push(item);
-                        item._rotationOffset = new Point();
                     }
                 }
 
                 that._angle = that.shapes.length == 1 ? that.shapes[0].rotate().angle : 0;
-                that._startAngle = that._angle;
-                that._rotates();
+
                 that._positions();
                 that.refreshBounds();
                 that.refresh();
                 that.redraw();
-            },
-
-            _rotates: function () {
-                var that = this, i, shape;
-                that.initialRotates = [];
-                for (i = 0; i < that.shapes.length; i++) {
-                    shape = that.shapes[i];
-                    that.initialRotates.push(shape.rotate().angle);
-                }
             },
 
             _positions: function () {
@@ -1670,16 +1666,11 @@
                 var that = this, i, handle,
                     editable = that.options.editable,
                     resize = editable.resize,
-                    rotate = editable.rotate,
-                    visibleHandles = editable && resize ? true : false,
-                    visibleThumb = editable && rotate ? true : false;
+                    visibleHandles = editable && resize ? true : false;
 
                 for (i = 0; i < this.map.length; i++) {
                     handle = this.map[i];
                     handle.visual.visible(visibleHandles);
-                }
-                if (that.rotationThumb) {
-                    that.rotationThumb.visible(visibleThumb);
                 }
             },
 
@@ -1688,23 +1679,11 @@
                     dtl = new Point(),
                     dbr = new Point(),
                     bounds, center, shape,
-                    i, angle, newBounds,
+                    i, newBounds,
                     changed = 0, staticPoint,
                     scaleX, scaleY;
 
                 if (handle.y === -2 && handle.x === -1) {
-                    center = this._innerBounds.center();
-                    this._angle = this._truncateAngle(Utils.findAngle(center, p));
-                    for (i = 0; i < this.shapes.length; i++) {
-                        shape = this.shapes[i];
-                        angle = (this._angle + this.initialRotates[i] - this._startAngle) % 360;
-                        shape.rotate(angle, center);
-                        if (shape.hasOwnProperty("layout")) {
-                            shape.layout(shape);
-                        }
-                        this._rotating = true;
-                    }
-                    this.refresh();
                 } else {
                     if (this.diagram.options.snap.enabled === true) {
                         var thr = this._truncateDistance(p.minus(this._lp));
@@ -1723,9 +1702,6 @@
                         dbr = dtl = delta; // dragging
                         dragging = true;
                     } else {
-                        if (this._angle) { // adjust the delta so that resizers resize in the correct direction after rotation.
-                            delta.rotate(new Point(0, 0), this._angle);
-                        }
                         if (handle.x == -1) {
                             dtl.x = delta.x;
                         } else if (handle.x == 1) {
@@ -1762,7 +1738,6 @@
                             if (shape.hasOwnProperty("layout")) {
                                 shape.layout(shape, oldBounds, newBounds);
                             }
-                            shape.rotate(shape.rotate().angle); // forces the rotation to update it's rotation center
                             changed += 1;
                         }
                     }
@@ -1821,21 +1796,24 @@
             },
 
             stop: function () {
-                var unit;
+                var unit, i, shape;
                 if (this._cp != this._sp) {
                     if (this._rotating) {
                         unit = new RotateUnit(this, this.shapes, this.initialRotates);
-                        this._rotating = false;
                     } else {
                         if (this.diagram.ruler) {
-                            for (var i = 0; i < this.shapes.length; i++) {
-                                var shape = this.shapes[i];
+                            for (i = 0; i < this.shapes.length; i++) {
+                                shape = this.shapes[i];
                                 var bounds = shape.bounds();
                                 bounds = this._truncateSizeToGuides(this._truncatePositionToGuides(bounds));
                                 shape.bounds(bounds);
                                 this.refreshBounds();
                                 this.refresh();
                             }
+                        }
+                        for (i = 0; i < this.shapes.length; i++) {
+                            shape = this.shapes[i];
+                            shape.updateModel();
                         }
                         unit = new TransformUnit(this.shapes, this.shapeStates, this);
                     }
@@ -1991,7 +1969,8 @@
             CascadingRouter: CascadingRouter,
             SelectionTool: SelectionTool,
             PointerTool: PointerTool,
-            ConnectionEditTool: ConnectionEditTool
+            ConnectionEditTool: ConnectionEditTool,
+            RotateUnit: RotateUnit
         });
 })(window.kendo.jQuery);
 

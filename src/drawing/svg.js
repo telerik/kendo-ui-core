@@ -810,7 +810,7 @@
                 this.attr("style", util.renderStyle(this.mapStyle()));
                 this.geometryChange();
             } else if (e.field === "content") {
-                this.content(this.srcElement.content());
+                PathNode.fn.content.call(this, this.srcElement.content());
             }
 
             PathNode.fn.optionsChange.call(this, e);

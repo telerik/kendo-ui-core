@@ -132,7 +132,7 @@
             }
         });
 
-        ok(diagram.shapes[1].dataItem.foo);
+        ok(diagram.shapes[1].options.dataItem.foo);
     });
 
     // ------------------------------------------------------------
@@ -178,7 +178,7 @@
     test("binding adds dataItem uids to dataMap", function() {
         for (var idx = 0; idx < shapes.length; idx++) {
             shape = shapes[idx];
-            ok(dataMap[shape.dataItem.uid] === shape);
+            ok(dataMap[shape.options.dataItem.uid] === shape);
         }
     });
 
@@ -248,7 +248,6 @@
         dataMap = diagram._dataMap;
         var mapCount = 0;
         var existingItemsUids = true;
-
         for(var uid in dataMap) {
             mapCount++;
             existingItemsUids = existingItemsUids && !!dataSource.getByUid(uid);
@@ -273,6 +272,111 @@
        item.set("foo", "bar");
        equal(connections.length, connectionsCount);
        equal(shapes.length, shapesCount);
+    });
+
+    // ------------------------------------------------------------
+    module("Diagram / Shapes / Data Binding", {
+        setup: function() {
+            diagram = createDiagram({
+                dataSource: {
+                    data: [{
+                        id: 1
+                    },{
+                        id: 2
+                    },{
+                        id: 3
+                    }]
+                }
+            });
+        },
+        teardown: destroyDiagram
+    });
+
+    test("binds to flat data", function() {
+        equal(diagram.shapes.length, 3);
+    });
+
+    test("initial binding should add shapes in dataMap", function() {
+        var count = 0;
+
+        for (var item in diagram._dataMap) {
+            count++;
+            ok(diagram._dataMap[item] instanceof kendo.dataviz.diagram.Shape);
+        }
+
+        equal(count, 3);
+    });
+
+    test("remove should remove shape", function() {
+        var item = diagram.dataSource.at(0);
+        var id = item.id;
+        diagram.dataSource.remove(item);
+        ok(!dataMap[id]);
+    });
+
+    test("itemchange should change the shape dataItem", function() {
+        var item = diagram.dataSource.at(0);
+        item.set("foo", "bar");
+        var shape = diagram._dataMap[item.id];
+        equal(shape.dataItem.foo, "bar");
+    });
+
+    // ------------------------------------------------------------
+    module("Diagram / Connections / Data Binding", {
+        setup: function() {
+            diagram = createDiagram({
+                dataSource: {
+                    data: [{
+                        id: 1
+                    },{
+                        id: 2
+                    },{
+                        id: 3
+                    }]
+                },
+                connectionsDataSource: {
+                    data: [{
+                        id: 1,
+                        from: 1,
+                        to: 2
+                    },{
+                        id: 2,
+                        from: 2,
+                        to: 3
+                    }]
+                }
+            });
+        },
+        teardown: destroyDiagram
+    });
+
+    test("binds to flat data", function() {
+        equal(diagram.connections.length, 2);
+    });
+
+    test("initial binding should add shapes in connectionsDataMap", function() {
+        var count = 0;
+
+        for (var item in diagram._connectionsDataMap) {
+            count++;
+            ok(diagram._connectionsDataMap[item] instanceof kendo.dataviz.diagram.Connection);
+        }
+
+        equal(count, 2);
+    });
+
+    test("remove should remove connection", function() {
+        var item = diagram.connectionsDataSource.at(0);
+        var id = item.id;
+        diagram.connectionsDataSource.remove(item);
+        ok(!diagram._connectionsDataMap[id]);
+    });
+
+    test("itemchange should change the shape dataItem", function() {
+        var item = diagram.connectionsDataSource.at(0);
+        item.set("foo", "bar");
+        var connection = diagram._connectionsDataMap[item.uid];
+        equal(connection.dataItem.foo, "bar");
     });
 
 })();
