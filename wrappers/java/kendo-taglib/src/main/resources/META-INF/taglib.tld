@@ -38886,4 +38886,59 @@ The supported values are "odata" which supports the OData v.2 protocol and "sign
             <rtexprvalue>true</rtexprvalue>
         </attribute>
     </tag>
+    
+    
+    <tag>
+        <description>The configuration of the grid column group columns for building multi-column headers. An array of JavaScript objects or strings. A JavaScript objects are interpreted as column configurations. Strings are interpreted as the
+field to which the column is bound. The grid will create a column for every item of the array.</description>
+        <name>grid-column-group-columns</name>
+        <tag-class>com.kendoui.taglib.grid.ColumnGroupColumnsTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+    <tag>
+        <description>The configuration of the grid column group. An array of JavaScript objects or strings.</description>
+        <name>grid-column-group</name>
+        <tag-class>com.kendoui.taglib.grid.ColumnGroupTag</tag-class>
+
+        <body-content>JSP</body-content>
+        
+        <attribute>
+            <description>HTML attributes of the column header. The grid renders a table header cell (&lt;th&gt;) for every column. The headerAttributes option can be used to set the HTML attributes of that th.</description>
+            <name>headerAttributes</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The template which renders the column header content. By default the value of the title column option
+is displayed in the column header cell.</description>
+            <name>headerTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>If set to true the column will not be displayed in the grid. By default all columns are displayed.</description>
+            <name>hidden</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>If set to false the column will remain in the side of the grid into which its own locked configuration placed it.</description>
+            <name>lockable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>If set to true the column will be displayed as locked in the grid. Also see Frozen Columns.</description>
+            <name>locked</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>        
+        <attribute>
+            <description>The text that is displayed in the column header cell. If not set the field is used.</description>
+            <name>title</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>        
+    </tag>
 </taglib>

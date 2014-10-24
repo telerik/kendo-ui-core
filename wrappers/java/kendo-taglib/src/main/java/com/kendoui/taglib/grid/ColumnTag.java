@@ -3,6 +3,7 @@ package com.kendoui.taglib.grid;
 
 
 import com.kendoui.taglib.BaseTag;
+import com.kendoui.taglib.GridColumnContainer;
 
 import com.kendoui.taglib.json.Function;
 
@@ -15,11 +16,10 @@ public class ColumnTag extends  BaseTag  /* interfaces *//* interfaces */ {
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
+        
+       GridColumnContainer parent = (GridColumnContainer)findParentWithClass(GridColumnContainer.class);
 
-        ColumnsTag parent = (ColumnsTag)findParentWithClass(ColumnsTag.class);
-
-        parent.addColumn(this);
-
+       parent.addColumn(this);
 //<< doEndTag
 
         return super.doEndTag();

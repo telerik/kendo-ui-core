@@ -18,7 +18,7 @@ module CodeGen::Java
                   'layers.tooltip.content', 'layerDefaults.marker.tooltip.content'],
         'filteritem' => ['filters'],
         'transport' => ['signalr'],
-        'column' => ['values']
+        'column' => ['values', 'columns']
     }
 
     def self.ignored?(component, option)

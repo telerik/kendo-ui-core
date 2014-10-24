@@ -14,15 +14,13 @@ import java.util.List;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class ColumnsTag extends BaseTag /* interfaces *//* interfaces */ implements GridColumnContainer {
+public class ColumnGroupColumnsTag extends BaseTag /* interfaces *//* interfaces */ implements GridColumnContainer {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
-
-        GridTag parent = (GridTag)findParentWithClass(GridTag.class);
-
+        ColumnGroupTag parent = (ColumnGroupTag)findParentWithClass(ColumnGroupTag.class);
 
         parent.setColumns(this);
 
@@ -62,7 +60,7 @@ public class ColumnsTag extends BaseTag /* interfaces *//* interfaces */ impleme
     }
 
     public static String tagName() {
-        return "grid-columns";
+        return "grid-column-group-columns";
     }
 
     public void addColumn(ColumnTag value) {
