@@ -890,7 +890,6 @@ var __meta__ = {
 
             surface.clear();
             surface.draw(that.gaugeArea);
-            surface.draw(scaleElements);
 
             for (var i = 0; i < pointers.length; i++) {
                 pointers[i].render();
@@ -898,7 +897,7 @@ var __meta__ = {
                 pointers[i].value(pointers[i].options.value);
             };
 
-            
+            surface.draw(scaleElements);
         },
 
         fitScale: function(bbox) {

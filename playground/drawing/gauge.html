@@ -45,16 +45,15 @@
 var elem = $("#gauge");
 
 var gauge = elem.kendoRadialGauge2({
-        // gaugeArea: {
-        //     margin: 50,
-        //     width: 500,
-        //     //background: "blue",
-        //     // border: {
-        //     //     color: "yellow",
-        //     //     dashType: "dot",
-        //     //     width: 25
-        //     // }
-        // },
+        gaugeArea: {
+            width: 500,
+            background: "blue",
+            border: {
+                color: "yellow",
+                dashType: "solid",
+                width: 25
+            }
+        },
 
         pointer: {
             cap: {
@@ -87,7 +86,7 @@ var gauge = elem.kendoRadialGauge2({
                 //template: "asdf"
                 margin: 10,
                 format: "C",
-                //font: "15px Arial,Helvetica,sans-serif"
+                font: "15px Arial,Helvetica,sans-serif"
             },
             minorUnit: 10,
             majorUnit: 20,
