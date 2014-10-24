@@ -3567,8 +3567,8 @@
                 this._toolBar.add({
                     type: "buttonGroup",
                     buttons: [
-                        { spriteCssClass: "k-icon k-i-seek-w", attributes: this._getAttribute("rotateAnticlockwise"), showText: "overflow", text: "rotateAnticlockwise", group: "rotate" },
-                        { spriteCssClass: "k-icon k-i-seek-e", attributes: this._getAttribute("rotateClockwise"), showText: "overflow", text: "rotateClockwise", group: "rotate" }
+                        { spriteCssClass: "k-icon k-i-rotateccw", attributes: this._getAttribute("rotateAnticlockwise"), showText: "overflow", text: "rotateAnticlockwise", group: "rotate" },
+                        { spriteCssClass: "k-icon k-i-rotatecw", attributes: this._getAttribute("rotateClockwise"), showText: "overflow", text: "rotateClockwise", group: "rotate" }
                     ]
                 });
             },
