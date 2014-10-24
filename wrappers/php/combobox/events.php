@@ -14,7 +14,9 @@ $comboBox->dataTextField('text')
             array('text' => 'Item 2', 'value' => '2'),
             array('text' => 'Item 3', 'value' => '3')
          ))
+         ->filter('startswith')
          ->dataBound('onDataBound')
+         ->filtering('onFiltering')
          ->select('onSelect')
          ->change('onChange')
          ->close('onClose')
@@ -51,6 +53,10 @@ echo $comboBox->render();
         if ("kendoConsole" in window) {
             kendoConsole.log("event: dataBound");
         }
+    };
+
+    function onFiltering() {
+        kendoConsole.log("event :: filtering");
     };
 
     function onSelect(e) {

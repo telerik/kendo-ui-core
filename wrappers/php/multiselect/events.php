@@ -20,6 +20,7 @@ $multiselect->dataTextField('text')
          ))
          ->select('onSelect')
          ->dataBound('onDataBound')
+         ->filtering('onFiltering')
          ->change('onChange')
          ->close('onClose')
          ->open('onOpen');
@@ -44,6 +45,10 @@ echo $multiselect->render();
             kendoConsole.log("event: dataBound");
         }
     }
+
+    function onFiltering() {
+        kendoConsole.log("event :: filtering");
+    };
 
     function onClose() {
         if ("kendoConsole" in window) {

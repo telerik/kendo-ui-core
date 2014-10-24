@@ -13,7 +13,9 @@ $dropDownList->dataTextField('text')
                 array('text' => 'Item2', 'value' => '2'),
                 array('text' => 'Item3', 'value' => '3')
              ))
+             ->filter('startswith')
              ->dataBound('onDataBound')
+             ->filtering('onFiltering')
              ->select('onSelect')
              ->change('onChange')
              ->close('onClose')
@@ -55,6 +57,10 @@ echo $dropDownList->render();
             kendoConsole.log("event: dataBound");
         }
     }
+
+    function onFiltering() {
+        kendoConsole.log("event :: filtering");
+    };
 
     function onSelect(e) {
         if ("kendoConsole" in window) {

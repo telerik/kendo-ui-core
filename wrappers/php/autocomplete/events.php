@@ -23,6 +23,7 @@ $autoComplete->dataSource($dataSource)
     ->select('select')
     ->open('open')
     ->close('close')
+    ->filtering('filtering')
     ->dataBound('dataBound');
 
 ?>
@@ -52,6 +53,10 @@ echo $autoComplete->render();
 
     function dataBound() {
         kendoConsole.log("event :: dataBound");
+    };
+
+    function filtering() {
+        kendoConsole.log("event :: filtering");
     };
 
     function select(e) {
