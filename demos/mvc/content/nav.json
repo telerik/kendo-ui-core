@@ -9615,6 +9615,24 @@
         "meta": {
             "kendo-ui": "This demo shows how the appearance of Kendo UI SplitView widget can be easily customized."
         }
+      },
+      {
+        "text": "AngularJS",
+        "new": true,
+        "mobile": true,
+        "disableInMobile": true,
+        "url": "splitview/angular",
+        "title": {
+            "kendo-ui": "AngularJS support in Kendo UI Mobile SplitView"
+        },
+        "meta": {
+            "kendo-ui": "AngularJS directive support for Kendo UI Mobile SplitView"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
       }
     ],
     "category": "Mobile"

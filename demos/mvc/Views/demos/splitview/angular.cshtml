@@ -1,0 +1,192 @@
+<div kendo-mobile-application ng-app="kendoDemo">
+
+    <kendo-mobile-split-view>
+        <kendo-mobile-pane id="side-pane" k-layout="'side-default'" k-transition="'slide'">
+            <kendo-mobile-view id="side-root" k-title="'Categories'" ng-controller="sideRootController">
+                <kendo-mobile-list-view k-data-source="splitViewCategories" k-template="categoriesTemplate"></kendo-mobile-list-view>
+            </kendo-mobile-view>
+
+            <script id="categoriesTemplate" type="text/x-kendo-template">
+                <a href="\#side-inbox?CategoryID=#: CategoryID #">#: CategoryName #</a>
+            </script>
+
+            <kendo-mobile-view id="side-inbox" k-title="'Products'" k-on-show="filterProducts(kendoEvent)" ng-controller="sideInboxController">
+                <kendo-mobile-list-view k-auto-bind="false" k-data-source="splitViewProducts" k-template="productsTemplate"></kendo-mobile-list-view>
+            </kendo-mobile-view>
+
+            <script id="productsTemplate" type="text/x-kendo-template">
+                <a href="\#orders?ProductID=#: ProductID #" data-target="main-pane">
+                    <span class="date">$#: UnitPrice#</span>
+                    <h3>#: ProductName #</h3>
+                    <span class="excerpt">#: QuantityPerUnit #</span>
+                </a>
+            </script>
+
+            <kendo-mobile-layout k-id="'side-default'" k-on-show="toggleBackButton(kendoEvent)" ng-controller="sideDefaultLayoutController">
+                <kendo-mobile-header>
+                    <kendo-mobile-nav-bar>
+                        <kendo-mobile-back-button k-align="'left'">Back</kendo-mobile-back-button>
+                        <kendo-view-title></kendo-view-title>
+                    </kendo-mobile-nav-bar>
+                </kendo-mobile-header>
+            </kendo-mobile-layout>
+
+        </kendo-mobile-pane>
+
+        <kendo-mobile-pane id="main-pane" k-layout="'main-default'">
+            <kendo-mobile-view k-title="'Orders'">
+                No product selected
+            </kendo-mobile-view>
+
+            <kendo-mobile-view data-title="'Orders'" id="orders" k-on-show="displayOrder(kendoEvent)" ng-controller="ordersController">
+                <div id="product-details">
+                </div>
+            </kendo-mobile-view>
+
+            <script type="text/x-kendo-template" id="ordersTemplate">
+                <dl>
+                    <dt>Discount</dt>
+                    <dd>#: Discount #</dd>
+                    <dt>Quantity</dt>
+                    <dd>#: Quantity #</dd>
+                    <dt>UnitPrice</dt>
+                    <dd>#: UnitPrice #</dd>
+                </dl>
+            </script>
+
+            <kendo-mobile-layout k-id="'main-default'">
+                <kendo-mobile-header>
+                    <kendo-mobile-nav-bar>
+                        <kendo-view-title></kendo-view-title>
+                        <a kendo-mobile-button href="#/" k-align="'right'" k-target="'_top'">Index</a>
+                    </kendo-mobile-nav-bar>
+                </kendo-mobile-header>
+            </kendo-mobile-layout>
+
+        </kendo-mobile-pane>
+    <kendo-mobile-split-view>
+
+</div>
+
+<script>
+    angular.module('kendoDemo', ['kendo.directives'])
+    .controller("sideRootController", function($scope) {
+        $scope.splitViewCategories = new kendo.data.DataSource({
+            type: "odata",
+            transport: {
+                read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
+            }
+        });
+
+        $scope.categoriesTemplate = $("#categoriesTemplate").html();
+    })
+    .controller("sideInboxController", function($scope) {
+        $scope.splitViewProducts= new kendo.data.DataSource({
+            type: "odata",
+            serverFiltering: true,
+            transport: {
+                read: {
+                    url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                }
+            }
+        });
+
+        $scope.filterProducts = function(e) {
+            $scope.splitViewProducts.filter({
+                field: "CategoryID",
+                operator: "eq",
+                value: parseInt(e.view.params.CategoryID)
+            });
+
+            $scope.splitViewProducts.read();
+        };
+
+        $scope.productsTemplate = $("#productsTemplate").html();
+    })
+    .controller("sideDefaultLayoutController", function($scope) {
+        $scope.toggleBackButton = function(e) {
+            if (e.view.id === "#side-root") {
+                e.view.element.find("[data-role=backbutton]").css("visibility", "hidden");
+            } else {
+                e.view.element.find("[data-role=backbutton]").css("visibility", "visible");
+            }
+        }
+    })
+    .controller("ordersController", function($scope) {
+        $scope.splitViewOrderDetails = new kendo.data.DataSource({
+            type: "odata",
+            serverFiltering: true,
+            transport: {
+                read: {
+                    url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Order_Details?$expand=Order"
+                }
+            },
+
+            change: function() {
+                var template = kendo.template($("#ordersTemplate").text());
+                $("#product-details").html(kendo.render(template, this.data()));
+            }
+        });
+
+        $scope.displayOrder = function (e) {
+            $scope.splitViewOrderDetails.filter({
+                field: "ProductID",
+                operator: "eq",
+                value: parseInt(e.view.params.ProductID)
+            });
+
+            $scope.splitViewOrderDetails.read();
+        }
+    });
+
+</script>
+
+<style scoped>
+    #side-inbox .date {
+       float: right;
+       color: rgba(200,200,200,.8);
+       font-size: .7em;
+       font-weight: normal;
+    }
+
+    #side-inbox .excerpt {
+       clear: both;
+       font-size: .7em;
+       font-weight: normal;
+    }
+
+    #side-inbox .km-content h3 {
+       margin-left: 0;
+    }
+    #main-pane .km-content{
+    	padding: 30px;
+    }
+
+    #main-pane dl {
+    	float: left;
+    	margin: 0;
+    	padding: 0 0 20px 0;
+    }
+
+    #main-pane dl:after {
+        visibility: hidden;
+        display: block;
+        font-size: 0;
+        content: " ";
+        clear: both;
+        height: 0;
+    }
+
+    #main-pane dt, #main-pane dd {
+    	display: block;
+    	float: left;
+    	margin: 0;
+    	padding: 0;
+    }
+
+    #main-pane dt {
+    	clear: left;
+    	text-align: right;
+    	padding: 0 10px;
+    }
+</style>
