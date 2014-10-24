@@ -917,6 +917,12 @@ var __meta__ = {
             if (options && options.visible) {
                 highlight.visible(show);
             }
+        },
+
+        createGradient: function(options) {
+            if (this.parent) {
+                return this.parent.createGradient(options);
+            }
         }
     });
 
@@ -926,6 +932,7 @@ var __meta__ = {
 
             // Logical tree ID to element map
             root.modelMap = {};
+            root.gradients = {};
 
             ChartElement.fn.init.call(root, options);
         },
@@ -984,6 +991,29 @@ var __meta__ = {
 
         getRoot: function() {
             return this;
+        },
+
+        createGradient: function(options) {
+            var gradients = this.gradients;
+            var hashCode = util.objectKey(options);
+            var gradient = dataviz.Gradients[options.gradient];
+            var drawingGradient;
+            if (gradients[hashCode]) {
+                drawingGradient = gradients[hashCode];
+            } else {
+                var gradientOptions = deepExtend({}, gradient, options);
+                if (gradient.type == "linear") {
+                    drawingGradient = new draw.LinearGradient(gradientOptions);
+                } else {
+                    if (options.innerRadius) {
+                        gradientOptions.stops = innerRadialStops(gradientOptions);
+                    }
+                    drawingGradient = new draw.RadialGradient(gradientOptions);
+                    drawingGradient.supportVML = gradient.supportVML !== false;
+                }
+                gradients[hashCode] = drawingGradient;
+            }
+            return drawingGradient;
         }
     });
 
@@ -4791,6 +4821,24 @@ var __meta__ = {
         for (var i = 0; i < path.segments.length; i++) {
             path.segments[i].anchor().round(0).translate(0.5, 0.5);
         }
+    }
+
+    function innerRadialStops(options) {
+        var gradient = this,
+            stops = options.stops,
+            usedSpace = ((options.innerRadius / options.radius) * 100),
+            i,
+            length = stops.length,
+            currentStop,
+            currentStops = []
+
+        for (i = 0; i < length; i++) {
+            currentStop = deepExtend({}, stops[i]);
+            currentStop.offset = (currentStop.offset * (100 -  usedSpace) + usedSpace) / 100;
+            currentStops.push(currentStop);
+        }
+
+        return currentStops;
     }
 
     decodeEntities._element = document.createElement("span");
