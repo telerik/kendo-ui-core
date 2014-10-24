@@ -314,6 +314,7 @@ var __meta__ = {
         _tasksTable: function(tasks) {
             var rows = [];
             var row;
+            var cell;
             var position;
             var task;
             var coordinates = this._taskCoordinates = {};
@@ -343,11 +344,20 @@ var __meta__ = {
 
                 position = this._taskPosition(task);
 
-                row = kendoDomElement("tr", null, [
-                    kendoDomElement("td", null, [
-                        this._renderTask(tasks[i], position)
-                    ])
-                ]);
+                row = kendoDomElement("tr", null);
+
+                cell = kendoDomElement("td", null, [this._renderTask(tasks[i], position)]);
+
+                if (task.resources) {
+                    cell.children.push(kendoDomElement("div",
+                        {
+                            className: "k-resources-wrap",
+                            style: { left: (Math.max((position.width - 2), 0) + position.left) + "px" }
+                        },
+                        this._renderResources(task.resources)));
+                }
+
+                row.children.push(cell);
 
                 rows.push(row);
 
@@ -499,6 +509,23 @@ var __meta__ = {
             ]);
 
             return element;
+        },
+
+        _renderResources: function(resources) {
+            var children = [];
+            var resource;
+
+            for (var i = 0, length = resources.length; i < length; i++) {
+                resource = resources[i];
+                children.push(kendoDomElement("span", {
+                    className: "k-resource",
+                    style: {
+                        "color": resource.get("color")
+                    }
+                }, [kendoTextElement(resource.get("name"))]));
+            }
+
+            return children;
         },
 
         _taskPosition: function(task) {

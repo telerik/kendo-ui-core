@@ -341,11 +341,22 @@ var __meta__ = {
 
         _td: function(options) {
             var children = [];
+            var resourceField = this.options.resourceField;
             var listStyles = GanttList.styles;
             var task = options.task;
             var column = options.column;
-            var value = task.get(column.field);
-            var formatedValue = column.format ? kendo.format(column.format, value) : value;
+            var value = task.get(column.field) || [];
+            var formatedValue;
+
+            if (column.field == resourceField) {
+                formatedValue = [];
+                for (var i = 0; i < value.length; i++) {
+                    formatedValue.push(kendo.format("{0} [{1}]", value[i].get("name"), value[i].get("value")));
+                }
+                formatedValue = formatedValue.join(", ");
+            } else {
+                formatedValue = column.format ? kendo.format(column.format, value) : value;
+            }
 
             if (column.field === "title") {
                 children = createPlaceholders({ level: options.level, className: listStyles.iconPlaceHolder });
@@ -382,6 +393,7 @@ var __meta__ = {
         },
 
         _sortable: function() {
+            var resourceField = this.options.resourceField;
             var columns = this.columns;
             var column;
             var sortableInstance;
@@ -391,7 +403,7 @@ var __meta__ = {
             for (var idx = 0, length = cells.length; idx < length; idx++) {
                 column = columns[idx];
 
-                if (column.sortable) {
+                if (column.sortable && column.field !== resourceField) {
                     cell = cells.eq(idx);
 
                     sortableInstance = cell.data("kendoColumnSorter");

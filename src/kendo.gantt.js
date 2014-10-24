@@ -17,6 +17,7 @@ var __meta__ = {
     var Observable = kendo.Observable;
     var Widget = kendo.ui.Widget;
     var DataSource = kendo.data.DataSource;
+    var ObservableObject = kendo.data.ObservableObject;
     var Query = kendo.data.Query;
     var isArray = $.isArray;
     var inArray = $.inArray;
@@ -1178,6 +1179,10 @@ var __meta__ = {
 
             this._dataSource();
 
+            this._resources();
+
+            this._assignments();
+
             this._dropDowns();
 
             this._list();
@@ -1225,6 +1230,8 @@ var __meta__ = {
             views: [],
             dataSource: {},
             dependencies: {},
+            resources: {},
+            assignments: {},
             messages: {
                 save: "Save",
                 cancel: "Cancel",
@@ -1587,7 +1594,8 @@ var __meta__ = {
                 dataSource: this.dataSource,
                 selectable: this.options.selectable,
                 editable: this.options.editable,
-                listWidth: listWrapper.outerWidth()
+                listWidth: listWrapper.outerWidth(),
+                resourceField: this.resources.field
             };
             var restoreFocus = function() {
                 if (navigatable) {
@@ -1774,6 +1782,47 @@ var __meta__ = {
             this.dependencies = kendo.data.GanttDependencyDataSource.create(dataSource)
                 .bind("change", this._dependencyRefreshHandler)
                 .bind("error", this._dependencyErrorHandler);
+        },
+
+        _resources: function() {
+            var resources = this.options.resources;
+            var dataSource = resources.dataSource || {};
+
+            this.resources = {
+                field: "resources",
+                dataTextField: "name",
+                dataColourField: "color",
+                dataBaseUnitField: "format"
+            };
+
+            extend(this.resources, resources);
+
+            this.resources.dataSource = kendo.data.DataSource.create(dataSource);
+        },
+
+        _assignments: function() {
+            var assignments = this.options.assignments;
+            var dataSource = assignments.dataSource || { };
+
+            if (this.assignments) {
+                this.assignments.dataSource
+                    .unbind("change", this._assignmentsRefreshHandler);
+            } else {
+                this._assignmentsRefreshHandler = proxy(this.refresh, this);
+            }
+
+            this.assignments = {
+                dataTaskField: "taskId",
+                dataResourceField: "resourceId",
+                dataValueField: "value"
+            };
+
+            extend(this.assignments, assignments);
+
+            this.assignments.dataSource = kendo.data.DataSource.create(dataSource);
+
+            this.assignments.dataSource.
+                bind("change", this._assignmentsRefreshHandler);
         },
 
         _createEditor: function(command) {
@@ -2094,6 +2143,8 @@ var __meta__ = {
                 return;
             }
 
+            this._assignResources(taskTree);
+
             if (this._editor) {
                 this._editor.close();
             }
@@ -2132,6 +2183,52 @@ var __meta__ = {
             this.timeline._renderDependencies(this.dependencies.view());
 
             this.trigger("dataBound");
+        },
+
+        _assignResources: function(taskTree) {
+            var that = this;
+            var resources = this.resources;
+            var assignments = this.assignments;
+            var groupAssigments = function() {
+                var data = assignments.dataSource.view();
+                var group = {
+                    field: assignments.dataTaskField
+                };
+
+                data = new Query(data).group(group).toArray();
+
+                return data;
+            };
+            var assigments = groupAssigments();
+            var applyTaskResource = function(task, action) {
+                var taskId = task.get("id");
+                for (var i = 0, length = assigments.length; i < length; i++) {
+                    if (assigments[i].value === taskId) {
+                        action(task, assigments[i].items);
+                    }
+                }
+            };
+            var wrapTask = function(task, items) {
+                var taskResources = [];
+                for (var j = 0, length = items.length; j < length; j++) {
+                    var resource = resources.dataSource.get(items[j].get(assignments.dataResourceField));
+                    var resourceValue = items[j].get(assignments.dataValueField);
+                    var valueFormat = resource.get(resources.dataBaseUnitField);
+                    var formatedValue = valueFormat ? kendo.toString(resourceValue, valueFormat) : resourceValue;
+
+                    taskResources.push(new ObservableObject({
+                        name: resource.get(resources.dataTextField),
+                        color: resource.get(resources.dataColourField),
+                        value: formatedValue
+                    }));
+                }
+
+                kendo.setter(resources.field)(task, taskResources);
+            };
+
+            for (var i = 0, length = taskTree.length; i < length; i++) {
+                applyTaskResource(taskTree[i], wrapTask);
+            }
         },
 
         _syncDataSource: function() {
@@ -2460,7 +2557,13 @@ var __meta__ = {
                 this._preventRefresh = true;
                 this._preventDependencyRefresh = true;
 
-                var promises = $.map([this.dataSource, this.dependencies], function(dataSource) {
+                var promises = $.map([
+                    this.dataSource,
+                    this.dependencies,
+                    this.resources.dataSource,
+                    this.assignments.dataSource
+                ],
+                    function(dataSource) {
                     return dataSource.fetch();
                 });
 
