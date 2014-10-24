@@ -291,7 +291,7 @@ test("slider should render large ticks instead of small ticks", function () {
     var slider = newSlider({ smallStep: 1, largeStep: 1 }, $("<input />"));
     slider.wrapper.find(".k-tick-large").each(function() {
         ok($(this).hasClass("k-tick-large"));
-    })
+    });
 });
 
 test("slider should render a small last tick", function () {
@@ -307,6 +307,15 @@ test("slider should not modify input value with bg-BG culture", function () {
     var slider = newSlider({}, $("<input value='5,5' />"));
     equal(slider.element.val(), "5,5");
     kendo.culture("en-US");
+});
+
+test("slider should render large ticks with min value bigger then 0 correctly", 3, function () {
+    var slider = newSlider({ min: 1900, smallStep: 12, largeStep: 60, max: 2020 }, $("<input />"));
+    var largeTicks = slider.wrapper.find(".k-tick-large");
+    var largetTickNumbers = [1900, 1960, 2020];
+    largeTicks.each(function(index) {
+        equal($(this).find("span").text(), largetTickNumbers[index]);
+    });
 });
 
 }());
