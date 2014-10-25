@@ -3097,7 +3097,7 @@ var __meta__ = {
 
             this.visual.append(rect);
 
-            if (options.overlay) {
+            if (hasGradientOverlay(options)) {
                 this.visual.append(this.createGradientOverlay(rect, {
                         baseColor: this.color,
                     }, deepExtend({
@@ -6108,7 +6108,7 @@ var __meta__ = {
 
             dataviz.alignPathToPixel(body);
             container.append(body);
-            if (options.overlay) {
+            if (hasGradientOverlay(options)) {
                 container.append(this.createGradientOverlay(body, {
                         baseColor: this.color,
                     },
@@ -6891,7 +6891,6 @@ var __meta__ = {
                     }
                 } : {},
                 elements = [],
-                overlay = options.overlay,
                 color = options.color,
                 fill = {
                     color: color,
@@ -6911,7 +6910,7 @@ var __meta__ = {
 
                 this.visual.append(visual);
 
-                if (overlay) {
+                if (hasGradientOverlay(options)) {
                     this.visual.append(this.createGradientOverlay(visual, {
                             baseColor: color,
                             fallbackFill: fill
@@ -6920,7 +6919,7 @@ var __meta__ = {
                             innerRadius: sector.ir,
                             radius: sector.r,
                             userSpace: true
-                        }, overlay)
+                        }, options.overlay)
                     ));
                 }
             }
@@ -12053,6 +12052,11 @@ var __meta__ = {
         }
 
         return sum;
+    }
+
+    function hasGradientOverlay(options) {
+        var overlay = options.overlay;
+        return overlay && overlay.gradient && overlay.gradient != "none";
     }
 
     // Exports ================================================================
