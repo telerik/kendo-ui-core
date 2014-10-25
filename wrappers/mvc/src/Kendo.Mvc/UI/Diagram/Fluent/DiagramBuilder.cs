@@ -84,9 +84,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// Specifies the shape editable.
         /// </summary>
         /// <param name="configurator">The action that configures the editable.</param>
-        public DiagramBuilder<TShapeModel,TConnectionModel> Editable(Action<DiagramEditableSettingsBuilder> configurator)
+        public DiagramBuilder<TShapeModel, TConnectionModel> Editable(Action<DiagramEditableSettingsBuilder<TShapeModel, TConnectionModel>> configurator)
         {
-            configurator(new DiagramEditableSettingsBuilder(container.Editable));
+            configurator(new DiagramEditableSettingsBuilder<TShapeModel, TConnectionModel>(container.Editable));
             return this;
         }
         

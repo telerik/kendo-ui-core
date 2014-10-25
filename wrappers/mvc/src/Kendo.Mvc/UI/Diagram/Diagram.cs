@@ -28,8 +28,8 @@ namespace Kendo.Mvc.UI
             ConnectionDefaults = new DiagramConnectionDefaultsSettings();
                 
             Connections = new List<DiagramConnection>();
-                
-            Editable = new DiagramEditableSettings();
+
+            Editable = new DiagramEditableSettings<TShapeModel, TConnectionModel>();
                 
             Layout = new DiagramLayoutSettings();
                 
@@ -59,8 +59,8 @@ namespace Kendo.Mvc.UI
         public double? ZoomMin { get; set; }
         
         public double? ZoomMax { get; set; }
-        
-        public DiagramEditableSettings Editable
+
+        public DiagramEditableSettings<TShapeModel, TConnectionModel> Editable
         {
             get;
             set;

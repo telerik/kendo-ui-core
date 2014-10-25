@@ -8,11 +8,13 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent API for configuring the DiagramEditableSettings settings.
     /// </summary>
-    public class DiagramEditableSettingsBuilder: IHideObjectMembers
+    public class DiagramEditableSettingsBuilder<TShapeModel, TConnectionModel> : IHideObjectMembers
+        where TShapeModel : class
+        where TConnectionModel : class
     {
-        private readonly DiagramEditableSettings container;
+        private readonly DiagramEditableSettings<TShapeModel, TConnectionModel> container;
 
-        public DiagramEditableSettingsBuilder(DiagramEditableSettings settings)
+        public DiagramEditableSettingsBuilder(DiagramEditableSettings<TShapeModel, TConnectionModel> settings)
         {
             container = settings;
         }
@@ -23,7 +25,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Specifies the shape resizing.
         /// </summary>
         /// <param name="configurator">The action that configures the resize.</param>
-        public DiagramEditableSettingsBuilder Resize(Action<DiagramEditableResizeSettingsBuilder> configurator)
+        public DiagramEditableSettingsBuilder<TShapeModel, TConnectionModel> Resize(Action<DiagramEditableResizeSettingsBuilder> configurator)
         {
             configurator(new DiagramEditableResizeSettingsBuilder(container.Resize));
             return this;
@@ -33,7 +35,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Specifyes the rotate style.
         /// </summary>
         /// <param name="configurator">The action that configures the rotate.</param>
-        public DiagramEditableSettingsBuilder Rotate(Action<DiagramEditableRotateSettingsBuilder> configurator)
+        public DiagramEditableSettingsBuilder<TShapeModel, TConnectionModel> Rotate(Action<DiagramEditableRotateSettingsBuilder> configurator)
         {
             configurator(new DiagramEditableRotateSettingsBuilder(container.Rotate));
             return this;
@@ -45,7 +47,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Specifies the shape resizing.
         /// </summary>
         /// <param name="visible">A value indicating if the resizing will be available.</param>
-        public DiagramEditableSettingsBuilder Resize(bool visible)
+        public DiagramEditableSettingsBuilder<TShapeModel, TConnectionModel> Resize(bool visible)
         {
             if (!visible)
             {
@@ -59,7 +61,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Specifyes the rotate style.
         /// </summary>
         /// <param name="visible">A value indicating if the rotation will be available.</param>
-        public DiagramEditableSettingsBuilder Rotate(bool visible)
+        public DiagramEditableSettingsBuilder<TShapeModel, TConnectionModel> Rotate(bool visible)
         {
             if (!visible)
             {

@@ -711,6 +711,7 @@
     <Compile Include="UI\ContextMenu\ContextMenuOrientation.cs" />
     <Compile Include="UI\DataSource\Fluent\DataSourceSortDescriptorFactoryBase.cs" />
     <Compile Include="UI\DataSource\Fluent\FilterableAjaxDataSourceBuilder.cs" />
+    <Compile Include="UI\Diagram\DiagramViewDataContainer.cs" />
     <Compile Include="UI\Gantt\DependencyType.cs" />
     <Compile Include="UI\Grid\Columns\GridColumnGroup.cs" />
     <Compile Include="UI\Grid\Commands\GridToolBarPdfCommand.cs" />
