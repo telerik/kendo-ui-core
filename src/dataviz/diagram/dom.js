@@ -159,8 +159,7 @@
                 height: DEFAULT_SHAPE_HEIGHT,
                 hover: {},
                 editable: {
-                    connect: true,
-                    editors: {}
+                    connect: true
                 },
                 connectors: diagram.DefaultConnectors,
                 rotation: {
@@ -1571,11 +1570,7 @@
                     angle: 10
                 },
                 shapeDefaults: diagram.shapeDefaults({ undoable: true }),
-                connectionDefaults: {
-                    editable: {
-                        editors: {}
-                    }
-                },
+                connectionDefaults: {},
                 shapes: [],
                 connections: []
             },
@@ -1584,16 +1579,18 @@
 
             edit: function(item) {
                 this.cancelEdit();
-                var editorType;
-                var editable = item.options.editable;
-                var editors = editable.editors;
+                var editorType, editors, template;
+                var editable = this.options.editable;
 
                 if (item instanceof Shape) {
                     editorType = "shape";
+                    editors = editable.shapeEditors;
+                    template = editable.shapeTemplate;
                 } else if (item instanceof Connection) {
                     editorType = "connection";
-                    var shapeSelectorHandler = proxy(shapeSelector, this);
-                    editors = deepExtend({}, { from: shapeSelectorHandler, to: shapeSelectorHandler }, editors);
+                    var connectionSelectorHandler = proxy(connectionSelector, this);
+                    editors = deepExtend({}, { from: connectionSelectorHandler, to: connectionSelectorHandler }, editable.connectionEditors);
+                    template = editable.connectionTemplate;
                 } else {
                     return;
                 }
@@ -1606,7 +1603,7 @@
                         type: editorType,
                         target: this,
                         editors: editors,
-                        template: editable.template
+                        template: template
                     });
 
                     this.trigger("edit", this._editArgs());
@@ -3660,6 +3657,10 @@
                 this.createEditable();
             },
 
+            options: {
+                editors: {}
+            },
+
             _initContainer: function() {
                 this.wrapper = this.element;
             },
@@ -3835,17 +3836,17 @@
             }
         });
 
-        function shapeSelector(container, options) {
+        function connectionSelector(container, options) {
             var type = options.model.fields[options.field];
             var model = this.dataSource.reader.model;
             var textField = model.fn.fields.text ? "text": "id";
             $("<input name='" + options.field + "' />")
-            .appendTo(container).kendoDropDownList({
-                dataValueField: "id",
-                dataTextField: textField,
-                dataSource: this.dataSource.data().toJSON(),
-                optionLabel: " "
-            });
+                .appendTo(container).kendoDropDownList({
+                    dataValueField: "id",
+                    dataTextField: textField,
+                    dataSource: this.dataSource.data().toJSON(),
+                    optionLabel: " "
+                });
         }
 
         dataviz.ui.plugin(Diagram);
