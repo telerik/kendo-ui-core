@@ -231,21 +231,36 @@
 @button-focused-active-shadow: @focused-active-item-shadow;
 
 //Checkboxes
-@checkbox-border-color-before: #7f7f7f;
+@checkbox-border-color-before: #c5c5c5;
 @checkbox-border-color-after: transparent;
-@checkbox-checked-color: #fff;
-@checkbox-checked-background-color: #3f51b5;
-@checkbox-checked-border-color: #3f51b5;
-@checkbox-checked-disabled-background-color: #bfbfbf;
-@checkbox-disabled-color: #bfbfbf;
-@checkbox-disabled-background-color: #fff;
-@checkbox-disabled-border-color: #bfbfbf;
-@checkbox-disabled-shadow: none;
-@checkbox-active-background-color: RGBA(235, 235, 235, 0.3);
+@checkbox-border-radius-before: 3px;
+@checkbox-background-color: @widget-background-color;
+
+@checkbox-hover-border-color: #a99f9a;
+@checkbox-hover-box-shadow: none;
+
+@checkbox-checked-border-color-before: #7f7f7f;
+@checkbox-checked-border-color-after: #c5c5c5;
+@checkbox-checked-border-radius-after: 3px;
+@checkbox-checked-background-color-after: #fff;
+@checkbox-checked-color-after: #f36311;
+
 @checkbox-active-border-color-before: transparent;
-@checkbox-active-border-color-after: #7f7f7f;
-@checkbox-active-shadow: 0 0 0 12px RGBA(235, 235, 235, 0.3);
-@checkbox-active-border-color-before: transparent;
-@checkbox-checked-active-shadow: 0 0 0 12px RGBA(63, 81, 181, 0.3);
+@checkbox-active-border-color-after: #a99f9a;
+@checkbox-active-border-radius: 3px;
+@checkbox-active-border-radius-after: 3px;
+@checkbox-active-box-shadow: 0 0 3px 0 @shadow-color;
+@checkbox-active-background-color-after: #fff;
+
+@checkbox-checked-active-border-color-before: #7f7f7f;
+@checkbox-checked-active-border-radius-before: 3px;
+@checkbox-checked-active-box-shadow: @checkbox-active-box-shadow;
+
+@checkbox-checked-disabled-color-after: #909090;
+@checkbox-disabled-background-color-after: #ededed;
+@checkbox-disabled-color: #909090;
+@checkbox-disabled-box-shadow: none;
+@checkbox-disabled-border-color-before: #7f7f7f;
+@checkbox-disabled-background-color-before: #efefef;
 
 @import "theme-template.less";
