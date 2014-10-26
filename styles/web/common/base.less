@@ -765,7 +765,6 @@ a.k-button:hover
   vertical-align: middle;
   line-height: 0.875em;
   cursor: pointer;
-  //font-size: 16px;
 }
 
 .k-radio-label:before {
@@ -773,8 +772,10 @@ a.k-button:hover
   position: absolute;
   top: 0;
   left: 0;
-  width: 14px;
-  height: 14px;
+  min-width: 1em;
+  min-height: 1em;
+  //width: 14px;
+  //height: 14px;
   border-width: 2px;
   border-style: solid;
 }
@@ -783,9 +784,13 @@ a.k-button:hover
   content: "";
   min-width: 0.625em;
   min-height: 0.625em;
+  //width: 10px;
+  //height: 10px;
   position: absolute;
   top: 0.3em; 
   left: 0.3em;
+  //top: 4px; 
+  //left:4px
 }
 
 .k-radio:disabled + .k-radio-label {

@@ -2134,9 +2134,15 @@ html .km-pane-wrapper .km-widget,
 
 //Radio buttons
 .k-radio-label:before {  
-  border-color: : 7f7f7f;
+  border-color: @radio-border-color-before;
   border-radius: 50%;
   background-color: @radio-background-color;
+}
+
+.k-radio-label:hover:before,
+.k-radio:checked + .k-radio-label:hover:before  {
+   border-color: @radio-hover-border-color;
+   box-shadow: @radio-hover-box-shadow;
 }
 
 .k-radio:checked + .k-radio-label:before {
@@ -2151,12 +2157,14 @@ html .km-pane-wrapper .km-widget,
 .k-radio-label:active:before {
   box-shadow: @radio-active-box-shadow; 
   border-radius: 50%;
-  background-color: @radio-active-border-color-before; 
+  border-color: @radio-active-border-color-before;
+  //background-color: @radio-active-background-color-before; 
 }
 
 .k-radio:checked + .k-radio-label:active:before {
   box-shadow: @radio-checked-active-box-shadow; 
   border-radius: 50%;
+  border-color: @radio-checked-active-border-color-before;
 }
 
 .k-radio:disabled + .k-radio-label {
