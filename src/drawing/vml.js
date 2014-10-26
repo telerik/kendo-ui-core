@@ -32,6 +32,7 @@
 
     // Constants ==============================================================
     var NONE = "none",
+        NS = ".kendo",
         COORDINATE_MULTIPLE = 100,
         COORDINATE_SIZE = COORDINATE_MULTIPLE * COORDINATE_MULTIPLE,
         GRADIENT = "gradient",
@@ -49,12 +50,20 @@
             this._root = new RootNode();
             this._root.attachTo(this.element[0]);
 
-            this.element.on("click", this._click);
-            this.element.on("mouseover", this._mouseenter);
-            this.element.on("mouseout", this._mouseleave);
+            this.element.on("click" + NS, this._click);
+            this.element.on("mouseover" + NS, this._mouseenter);
+            this.element.on("mouseout" + NS, this._mouseleave);
         },
 
         type: "vml",
+
+        destroy: function() {
+            this._root.destroy();
+            this._root = null;
+
+            this.element.off(NS);
+            d.Surface.fn.destroy.call(this);
+        },
 
         draw: function(element) {
             this._root.load([element], undefined, null);

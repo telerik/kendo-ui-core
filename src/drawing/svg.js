@@ -28,6 +28,7 @@
         DASH_ARRAYS = d.DASH_ARRAYS,
         GRADIENT = "gradient",
         NONE = "none",
+        NS = ".kendo",
         SOLID = "solid",
         SPACE = " ",
         SQUARE = "square",
@@ -48,14 +49,22 @@
 
             this._root.attachTo(this._rootElement);
 
-            this.element.on("click", this._click);
-            this.element.on("mouseover", this._mouseenter);
-            this.element.on("mouseout", this._mouseleave);
+            this.element.on("click" + NS, this._click);
+            this.element.on("mouseover" + NS, this._mouseenter);
+            this.element.on("mouseout" + NS, this._mouseleave);
 
             this.resize();
         },
 
         type: "svg",
+
+        destroy: function() {
+            this._root.destroy();
+            this._root = null;
+            this._rootElement = null;
+            this.element.off(NS);
+            d.Surface.fn.destroy.call(this);
+        },
 
         translate: function(offset) {
             var viewBox = kendo.format(
