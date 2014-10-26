@@ -86,13 +86,34 @@
         observe: noop,
 
         destroy: function() {
-            var element = this.element;
-            if (element) {
-                $(element).remove();
+            if (this.element) {
+                this.element._kendoNode = null;
                 this.element = null;
             }
 
             BaseNode.fn.destroy.call(this);
+        },
+
+        clear: function() {
+            if (this.element) {
+                this.element.innerHTML = "";
+            }
+
+            var children = this.childNodes;
+            for (var i = 0; i < children.length; i++) {
+                children[i].destroy();
+            }
+
+            this.childNodes = [];
+        },
+
+        removeSelf: function() {
+            if (this.element) {
+                this.element.parentNode.removeChild(this.element);
+                this.element = null;
+            }
+
+            BaseNode.fn.removeSelf.call(this);
         },
 
         createElement: function() {
@@ -100,7 +121,7 @@
         },
 
         attachReference: function() {
-            $(this.element).data("kendoNode", this);
+            this.element._kendoNode = this;
         },
 
         load: function(elements, pos, transform, opacity) {
@@ -218,11 +239,6 @@
                 ["position", "relative"],
                 ["visibility", "visible"]
             ]);
-        },
-
-        clear: function() {
-            BaseNode.fn.clear.call(this);
-            this.element.innerHTML = "";
         },
 
         attachReference: noop

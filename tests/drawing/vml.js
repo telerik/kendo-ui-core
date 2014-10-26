@@ -152,8 +152,8 @@
             ok(node.element);
         });
 
-        test("sets kendoNode data", function() {
-            deepEqual($(node.element).data("kendoNode"), node);
+        test("sets _kendoNode expando", function() {
+            equal(node.element._kendoNode, node);
         });
 
         test("attachTo attaches DOM element", function() {
@@ -161,6 +161,15 @@
             node.attachTo(parent);
 
             equal(node.element.parentNode, parent);
+        });
+
+        test("removeSelf destroys element", function() {
+            var element = document.createElement("div");
+            node.attachTo(element);
+            node.removeSelf();
+
+            equal(element.parentNode, null);
+            equal(node.element, null);
         });
 
         test("clear cleans up child DOM nodes", function() {
@@ -277,8 +286,8 @@
             equal(node.element.style.position, "relative");
         });
 
-        test("doesn't attach kendoNode", function() {
-            ok(!$(node.element).data("kendoNode"));
+        test("doesn't attach _kendoNode expando", function() {
+            ok(!node.element._kendoNode);
         });
 
         test("clear cleans up content", function() {
@@ -1354,9 +1363,9 @@
 
         test("destroy removes element reference", function() {
             node.attachTo($("<div>")[0]);
-            var element = $(node.element);
+            var element = node.element;
             node.destroy();
-            equal(element.data("kendoNode"), null);
+            equal(element._kendoNode, null);
         });
 
         // ------------------------------------------------------------

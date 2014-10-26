@@ -248,6 +248,14 @@
             node.clear();
         });
 
+        test("removeSelf destroys element", function() {
+            var element = node.element;
+            node.removeSelf();
+
+            equal(element.parentNode, null);
+            equal(node.element, null);
+        });
+
         // ------------------------------------------------------------
         module("Base Node tests / " + name + " / observer", {
             setup: function() {
@@ -269,7 +277,7 @@
             node.attachTo($("<div>")[0]);
             var element = $(node.element);
             node.destroy();
-            equal(element.data("kendoNode"), null);
+            equal(element._kendoNode, null);
         });
 
         // ------------------------------------------------------------
@@ -436,21 +444,21 @@
             ok(grandChild.element);
         });
 
-        test("attachTo sets kendoNode data", function() {
+        test("attachTo sets _kendoNode expando", function() {
             groupNode.attachTo(document.createElement("div"));
 
-            deepEqual($(groupNode.element).data("kendoNode"), groupNode);
+            deepEqual(groupNode.element._kendoNode, groupNode);
         });
 
-        test("attachTo sets kendoNode data on child elements", function() {
+        test("attachTo sets _kendoNode expando on child elements", function() {
             var childGroup = new GroupNode(new Group());
             groupNode.append(childGroup);
             groupNode.attachTo(document.createElement("div"));
 
-            deepEqual($(childGroup.element).data("kendoNode"), childGroup);
+            deepEqual(childGroup.element._kendoNode, childGroup);
         });
 
-        test("attachTo sets kendoNode data for grandchild nodes", function() {
+        test("attachTo sets _kendoNode expando for grandchild nodes", function() {
             var child = new GroupNode(new Group());
             var grandChild = new GroupNode(new Group());
 
@@ -459,7 +467,7 @@
 
             groupNode.attachTo(document.createElement("div"));
 
-            deepEqual($(grandChild.element).data("kendoNode"), grandChild);
+            deepEqual(grandChild.element._kendoNode, grandChild);
         });
 
         test("destroy removes element", function() {
@@ -469,12 +477,12 @@
             ok(!groupNode.element);
         });
 
-        test("destroy removes kendoNode data from element", function() {
+        test("destroy removes _kendoNode expando from element", function() {
             var container = document.createElement("div");
             groupNode.attachTo(container);
             groupNode.destroy();
 
-            ok(!$(container).data("kendoNode"));
+            ok(!container._kendoNode);
         });
 
         test("load attaches node", function() {

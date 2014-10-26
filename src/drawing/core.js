@@ -77,8 +77,8 @@
             var domNode = $(e.touch ? e.touch.initialTouch : e.target);
             var node;
 
-            while (!node) {
-                node = domNode.data("kendoNode");
+            while (!node && domNode.length > 0) {
+                node = domNode[0]._kendoNode || domNode.data("kendoNode");
                 if (domNode.is(this.element) || domNode.length === 0) {
                     break;
                 }

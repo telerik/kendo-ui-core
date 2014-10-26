@@ -108,9 +108,8 @@
         },
 
         destroy: function() {
-            var element = this.element;
-            if (element) {
-                $(element).remove();
+            if (this.element) {
+                this.element._kendoNode = null;
                 this.element = null;
             }
 
@@ -199,16 +198,40 @@
                 i;
 
             if (this.element) {
-                $(this.element).data("kendoNode", null);
+                this.element._kendoNode = null;
             }
 
             this.element = element;
-            $(element).data("kendoNode", this);
+            this.element._kendoNode = this;
 
             for (i = 0; i < nodes.length; i++) {
                 childElement = element.childNodes[i];
                 nodes[i].setElement(childElement);
             }
+        },
+
+        clear: function() {
+            this.clearDefinitions();
+
+            if (this.element) {
+                this.element.innerHTML = "";
+            }
+
+            var children = this.childNodes;
+            for (var i = 0; i < children.length; i++) {
+                children[i].destroy();
+            }
+
+            this.childNodes = [];
+        },
+
+        removeSelf: function() {
+            if (this.element) {
+                this.element.parentNode.removeChild(this.element);
+                this.element = null;
+            }
+
+            BaseNode.fn.removeSelf.call(this);
         },
 
         template: renderTemplate(
@@ -421,15 +444,17 @@
             this.defs.attachTo(domElement.firstElementChild);
         },
 
+        clear: function() {
+            BaseNode.fn.clear.call(this);
+        },
+
         template: renderTemplate(
             "#=d.defs.render()##= d.renderChildren() #"
         ),
 
         definitionChange: function(e) {
             this.defs.definitionChange(e);
-        },
-
-        clear: BaseNode.fn.clear
+        }
     });
 
     var DefinitionNode = Node.extend({
