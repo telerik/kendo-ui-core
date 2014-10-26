@@ -256,34 +256,6 @@
         });
 
         // ------------------------------------------------------------
-        module("Scatter Chart / Rendering", {
-            setup: function() {
-                plotArea = new PlotAreaStub();
-                setupScatterChart(plotArea, { series: [ series ] });
-            }
-        });
-
-        test("generates unique id", function() {
-            ok(scatterChart.id);
-        });
-
-        test("renders group with ScatterChart id and no animations", function() {
-            var group = view.findInLog("group", function(item) {
-                return item.options.id === scatterChart.id;
-            });
-
-            ok(group && !group.options.animation);
-            equal(group.options.id, scatterChart.id);
-        });
-
-        test("sets group animation", function() {
-            var group = view.findInLog("group", function(item) {
-                return item.options.animation;
-            });
-            equal(group.options.animation.type, "clip");
-        });
-
-        // ------------------------------------------------------------
         module("Scatter Chart / Labels", {
             setup: function() {
                 plotArea = new PlotAreaStub();

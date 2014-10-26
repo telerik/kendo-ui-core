@@ -151,13 +151,6 @@
             ok(!chart.element.data("dirty") > 0);
         });
 
-        test("redraw removes elements appended to container", function() {
-            chart.element.append("<div id='extra' />");
-            chart.redraw();
-
-            equal(chart.element.find("#extra").length, 0);
-        });
-
         test("redraw sets series defaults", function() {
             setupChart({
                 series: [{
@@ -300,7 +293,11 @@
 
         module("Events", {
             setup: function() {
-                setupChart({series: [{}], valueAxis: { name: "value" }});
+                setupChart({
+                    series: [{}],
+                    valueAxis: { name: "value" },
+                    chartArea: { width: 600, height: 400 }
+                });
             },
             teardown: destroyChart
         });
