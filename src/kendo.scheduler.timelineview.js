@@ -788,7 +788,7 @@ var __meta__ = {
             var rangeStart = getDate(this._startDate);
             var rangeEnd = kendo.date.addDays(getDate(this._endDate),1);
 
-            if (startTime <= rangeEnd && rangeStart <= endTime) {
+            if (startTime < rangeEnd && rangeStart <= endTime) {
                 return true;
             }
             return false;
