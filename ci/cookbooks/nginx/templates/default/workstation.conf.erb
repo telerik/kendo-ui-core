@@ -1,76 +1,48 @@
-user www-data;
-worker_processes 4;
-pid /var/run/nginx.pid;
-
-events {
-    worker_connections 768;
+upstream mono {
+    server 127.0.0.1:9000;
 }
 
-http {
-    sendfile on;
-    tcp_nopush on;
-    tcp_nodelay on;
-    keepalive_timeout 65;
-    types_hash_max_size 2048;
+server {
+    listen   80;
+    server_name localhost;
+    autoindex on;
+    index  index.html index.htm index.php;
+    root  <%= @home_dir %>;
 
-    include /etc/nginx/mime.types;
-    default_type application/octet-stream;
+    expires -1;
 
-    access_log /var/log/nginx/access.log;
-    error_log /var/log/nginx/error.log;
-
-    gzip on;
-    gzip_disable "msie6";
-
-    include /etc/nginx/conf.d/*.conf;
-
-    upstream mono {
-        server 127.0.0.1:9000;
+    location /kendo {
+        alias <%= @kendo_dir %>;
     }
 
-    server {
-        listen   80;
-        server_name localhost;
-        autoindex on;
-        index  index.html index.htm index.php;
-        root  <%= @home_dir %>;
+    location /kendo-ui {
+        alias <%= @kendo_dir %>/docs/_site;
+        try_files $uri.html $uri $uri/ =404;
+    }
 
-        expires -1;
+    location ~ \.php$ {
+        include        fastcgi_params;
+        fastcgi_pass   unix:/run/php-fpm.sock;
+        fastcgi_index  index.php;
+        fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+    }
 
-        location /kendo {
-            alias <%= @kendo_dir %>;
-        }
+    location /demos/ {
+        rewrite ^/demos/src/js/(.*)$ /kendo/src/$1 last;
+        rewrite ^/demos/src/styles/(.*)$ /kendo/styles/$1 last;
 
-        location /kendo-ui {
-            alias <%= @kendo_dir %>/docs/_site;
-            try_files $uri.html $uri $uri/ =404;
-        }
+        fastcgi_param  SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_pass   mono;
+        include        fastcgi_params;
+    }
 
-        location ~ \.php$ {
-            include        fastcgi_params;
-            fastcgi_pass   unix:/run/php-fpm.sock;
-            fastcgi_index  index.php;
-            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
-        }
+    location ~ /demos-(kendo-ui|php-ui|jsp-ui|aspnet-mvc) {
+        rewrite ^/demos-(kendo-ui|php-ui|jsp-ui|aspnet-mvc)/src/js/(.*)$ /kendo/src/$2 last;
+        rewrite ^/demos-(kendo-ui|php-ui|jsp-ui|aspnet-mvc)/src/styles/(.*)$ /kendo/styles/$2 last;
 
-        location /demos/ {
-            rewrite ^/demos/src/js/(.*)$ /kendo/src/$1 last;
-            rewrite ^/demos/src/styles/(.*)$ /kendo/styles/$1 last;
-
-            fastcgi_param  SCRIPT_FILENAME $document_root$fastcgi_script_name;
-            fastcgi_pass   mono;
-            include        fastcgi_params;
-        }
-
-        location ~ /demos-(kendo-ui|php-ui|jsp-ui|aspnet-mvc) {
-            rewrite ^/demos-(kendo-ui|php-ui|jsp-ui|aspnet-mvc)/src/js/(.*)$ /kendo/src/$2 last;
-            rewrite ^/demos-(kendo-ui|php-ui|jsp-ui|aspnet-mvc)/src/styles/(.*)$ /kendo/styles/$2 last;
-
-            fastcgi_param  HTTP_X_KENDO $1;
-            fastcgi_param  SCRIPT_FILENAME $document_root$fastcgi_script_name;
-            fastcgi_pass   mono;
-            include        fastcgi_params;
-        }
-
+        fastcgi_param  HTTP_X_KENDO $1;
+        fastcgi_param  SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_pass   mono;
+        include        fastcgi_params;
     }
 }
