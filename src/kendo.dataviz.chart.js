@@ -515,6 +515,13 @@ var __meta__ = {
             chart._setupSelection();
         },
 
+        exportVisual: function() {
+            var model = this._getModel();
+            model.renderVisual();
+
+            return model.visual;
+        },
+
         _sharedTooltip: function() {
             var chart = this,
                 options = chart.options;
@@ -1391,7 +1398,7 @@ var __meta__ = {
             }
         }
     });
-    deepExtend(Chart.fn, dataviz.ExportMixin);
+    dataviz.ExportMixin.extend(Chart.fn);
 
     var PlotAreaFactory = Class.extend({
         init: function() {

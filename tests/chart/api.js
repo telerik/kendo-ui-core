@@ -1,7 +1,6 @@
 (function() {
-    return;
-
     var dataviz = kendo.dataviz,
+        draw = dataviz.drawing;
         Chart = dataviz.ui.Chart;
 
     (function() {
@@ -372,22 +371,22 @@
         }
 
         // ------------------------------------------------------------
-        var SVGView,
-            CanvasView,
+        var SVGSurface,
+            CanvasSurface,
             supportsCanvas;
 
         module("Export", {
             setup: function() {
                 setupChart();
 
-                SVGView = dataviz.SVGView;
-                CanvasView = dataviz.CanvasView;
-                supportsCanvas = dataviz.supportsCanvas;
+                SVGSurface = draw.svg.Surface;
+                CanvasSurface = draw.canvas.Surface;
+                supportsCanvas = kendo.support.canvas;
             },
             teardown: function() {
-                dataviz.SVGView = SVGView;
-                dataviz.CanvasView = CanvasView;
-                dataviz.supportsCanvas = supportsCanvas;
+                draw.svg.Surface = SVGSurface;
+                draw.canvas.Surface = CanvasSurface;
+                kendo.support.canvas = supportsCanvas;
 
                 destroyChart();
             }
@@ -397,11 +396,11 @@
             ok(chart.svg().match(/<svg.*<\/svg>/));
         });
 
-        test("svg() throws error if SVGView is not loaded", function() {
-            dataviz.SVGView = undefined;
+        test("svg() throws error if SVG Surface is not loaded", function() {
+            draw.svg.Surface = undefined;
 
             throws(function() { chart.svg() },
-                   "Unable to create SVGView. Check that kendo.dataviz.svg.js is loaded.");
+                   "SVG Export failed. Unable to export instantiate kendo.drawing.svg.Surface");
         });
 
         test("svg() does not replace model", function() {
@@ -410,10 +409,10 @@
             ok(oldModel === chart._model);
         });
 
-        test("svg() does not replace view", function() {
-            var oldView = chart._view;
+        test("svg() does not replace surface", function() {
+            var oldSurface = chart.surface;
             chart.svg();
-            ok(oldView === chart._view);
+            ok(oldSurface === chart.surface);
         });
 
         test("svg() encodes entities", function() {
@@ -426,32 +425,52 @@
             ok(chart.svg().indexOf("Foo &amp; Bar") > -1);
         });
 
-        test("imageDataURL() exports image/png", function() {
-            ok(chart.imageDataURL().match(/image\/png/));
+        test("exportVisual returns Group", function() {
+            ok(chart.exportVisual() instanceof draw.Group);
         });
 
-        test("imageDataURL() throws error if CanvasView is not loaded", function() {
-            dataviz.CanvasView = undefined;
+        test("exportSVG forwards visual to drawing.exportSVG", function() {
+            var visual = {};
+            chart.exportVisual = function() { return visual; };
 
-            throws(function() { chart.imageDataURL() },
-                   "Unable to create CanvasView. Check that kendo.dataviz.canvas.js is loaded.");
+            stubMethod(draw, "exportSVG", function(group) {
+                equal(group, visual);
+            }, function() {
+                chart.exportSVG();
+            });
+        });
+
+        test("exportSVG forwards options to drawing.exportSVG", function() {
+            var ref = {};
+
+            stubMethod(draw, "exportSVG", function(group, options) {
+                equal(options, ref);
+            }, function() {
+                chart.exportSVG(ref);
+            });
+        });
+
+        test("exportSVG exports SVG", function() {
+            chart.exportSVG().done(function(svg) {
+                contains(svg, "<?xml version='1.0' ?><svg");
+            });
+        });
+
+        test("imageDataURL() exports image/png", function() {
+            contains(chart.imageDataURL(), "image/png" );
         });
 
         test("imageDataURL() returns null if Canvas is not supported", function() {
-            dataviz.supportsCanvas = function() { return false; }
+            kendo.support.canvas = false;
 
             equal(chart.imageDataURL(), null);
         });
 
-        asyncTest("imageDataURL logs warning if Canvas is not supported", function() {
-            dataviz.supportsCanvas = function() { return false; }
+        test("imageDataURL() throws error if Canvas surface is not loaded", function() {
+            draw.canvas.Surface = undefined;
 
-            stubMethod(kendo, "logToConsole", function(message) {
-                ok(message.indexOf("Warning: Unable to generate image.") > -1);
-                start();
-            }, function() {
-                chart.imageDataURL();
-            });
+            throws(function() { chart.imageDataURL() },
+                   "Image Export failed. Unable to export instantiate kendo.drawing.canvas.Surface");
         });
 
         test("imageDataURL() does not replace model", function() {
@@ -460,10 +479,37 @@
             ok(oldModel === chart._model);
         });
 
-        test("imageDataURL() does not replace view", function() {
-            var oldView = chart._view;
+        test("imageDataURL() does not replace surface", function() {
+            var oldSurface = chart.surface;
             chart.imageDataURL();
-            ok(oldView === chart._view);
+            ok(oldSurface === chart.surface);
+        });
+
+        test("exportImage forwards visual to drawing.exportImage", function() {
+            var visual = {};
+            chart.exportVisual = function() { return visual; };
+
+            stubMethod(draw, "exportImage", function(group) {
+                equal(group, visual);
+            }, function() {
+                chart.exportImage();
+            });
+        });
+
+        test("exportImage forwards options to drawing.exportImage", function() {
+            var ref = {};
+
+            stubMethod(draw, "exportImage", function(group, options) {
+                equal(options, ref);
+            }, function() {
+                chart.exportImage(ref);
+            });
+        });
+
+        test("exportImage exports PNG", function() {
+            chart.exportImage().done(function(svg) {
+                contains(svg, "image/png");
+            });
         });
 
     })();

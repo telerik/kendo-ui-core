@@ -4186,38 +4186,63 @@ var __meta__ = {
     ViewFactory.current = new ViewFactory();
 
     var ExportMixin = {
+        extend: function(proto) {
+            if (!proto.exportVisual) {
+                throw new Error("Mixin target has no exportVisual method defined.");
+            }
+
+            proto.exportSVG = this.exportSVG;
+            proto.exportImage = this.exportImage;
+            proto.svg = this.svg;
+            proto.imageDataURL = this.imageDataURL;
+        },
+
+        exportSVG: function(options) {
+            return draw.exportSVG(this.exportVisual(), options);
+        },
+
+        exportImage: function(options) {
+            return draw.exportImage(this.exportVisual(), options);
+        },
+
         svg: function() {
-            if (dataviz.SVGView) {
-                var model = this._getModel(),
-                    view = new dataviz.SVGView(deepExtend({ encodeText: true }, model.options));
+            if (draw.svg.Surface) {
+                var surface = new draw.svg.Surface($("<div />"), {
+                    encodeText: true
+                });
 
-                view.load(model);
+                surface.draw(this.exportVisual());
+                var svg = surface.svg();
+                surface.destroy();
 
-                return view.render();
+                return svg;
             } else {
-                throw new Error("Unable to create SVGView. Check that kendo.dataviz.svg.js is loaded.");
+                throw new Error("SVG Export failed. Unable to export instantiate kendo.drawing.svg.Surface");
             }
         },
 
         imageDataURL: function() {
-            if (dataviz.CanvasView) {
-                if (dataviz.supportsCanvas()) {
-                    var model = this._getModel(),
-                        container = document.createElement("div"),
-                        view = new dataviz.CanvasView(model.options);
+            if (!kendo.support.canvas) {
+                return null;
+            }
 
-                    view.load(model);
+            if (draw.canvas.Surface) {
+                var container = $("<div />").css({
+                    display: "none",
+                    width: this.element.width(),
+                    height: this.element.height()
+                }).appendTo(document.body);
 
-                    return view.renderTo(container).toDataURL();
-                } else {
-                    kendo.logToConsole(
-                        "Warning: Unable to generate image. The browser does not support Canvas.\n" +
-                        "User agent: " + navigator.userAgent);
+                var surface = new draw.canvas.Surface(container);
+                surface.draw(this.exportVisual());
+                var image = surface._rootElement.toDataURL();
 
-                    return null;
-                }
+                surface.destroy();
+                container.remove();
+
+                return image;
             } else {
-                throw new Error("Unable to create CanvasView. Check that kendo.dataviz.canvas.js is loaded.");
+                throw new Error("Image Export failed. Unable to export instantiate kendo.drawing.canvas.Surface");
             }
         }
     };
