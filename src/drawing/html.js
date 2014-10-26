@@ -1202,8 +1202,11 @@
             container.append(group);
         }
 
+        // XXX: remove at some point
+        group.DEBUG = $(element).data("debug");
+
         if (opacity < 1) {
-            group.opacity(opacity);
+            group.opacity(opacity * group.opacity());
         }
 
         pushNodeInfo(element, style, group);
@@ -1213,11 +1216,17 @@
             _renderElement(element, group);
         }
         else {
-            // must clear transform, so getBoundingClientRect returns correct values.
-            // must also clear transitions, so correct values are returned *immediately*
             saveStyle(element, function(){
-                pleaseSetPropertyValue(element.style, "transition", "none", "important");
+                // must clear transform, so getBoundingClientRect returns correct values.
                 pleaseSetPropertyValue(element.style, "transform", "none", "important");
+
+                // must also clear transitions, so correct values are returned *immediately*
+                pleaseSetPropertyValue(element.style, "transition", "none", "important");
+
+                // the presence of any transform makes it behave like it had position: relative,
+                // because why not.
+                // http://meyerweb.com/eric/thoughts/2011/09/12/un-fixing-fixed-elements-with-css-transforms/
+                pleaseSetPropertyValue(element.style, "position", "relative", "important");
 
                 // must translate to origin before applying the CSS
                 // transformation, then translate back.
