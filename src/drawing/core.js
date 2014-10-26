@@ -158,11 +158,14 @@
         remove: function(index, count) {
             var end = index + count;
             for (var i = index; i < end; i++) {
-                var child = this.childNodes[i];
-                child.clear();
-                child.destroy();
+                this.childNodes[i].removeSelf();
             }
             this.childNodes.splice(index, count);
+        },
+
+        removeSelf: function() {
+            this.clear();
+            this.destroy();
         },
 
         clear: function() {

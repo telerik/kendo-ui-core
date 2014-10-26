@@ -7798,27 +7798,15 @@ var __meta__ = {
         },
 
         refresh: function() {
-            if (!this.visual.parent) {
-                return;
-            }
+            this.visual.clear();
 
-            this.visual.parent.remove(this.visual);
-            this.createVisual();
+            this.content.parent = null;
+            this.content.createGradient = $.proxy(this.createGradient, this);
+            this.content.renderVisual();
+            this.content.parent = this;
 
-            var children = this.children;
-            for (var i = 0; i < children.length; i++) {
-                children[i].renderVisual();
-            }
+            this.visual.append(this.content.visual);
 
-            if (this.visual) {
-                this.visual.chartElement = this;
-
-                if (this.parent) {
-                    this.parent.appendVisual(this.visual);
-                }
-            }
-
-            this.createAnimation();
             this.renderComplete();
         },
 
