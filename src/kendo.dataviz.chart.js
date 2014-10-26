@@ -7845,39 +7845,34 @@ var __meta__ = {
             if (from.isVertical) {
                 var y = from.aboveAxis ? fromBox.y1 : fromBox.y2;
                 points.push(
-                    Point2D(fromBox.x1, y),
-                    Point2D(toBox.x2, y)
+                    [fromBox.x1, y],
+                    [toBox.x2, y]
                 );
             } else {
                 var x = from.aboveAxis ? fromBox.x2 : fromBox.x1;
                 points.push(
-                    Point2D(x, fromBox.y1),
-                    Point2D(x, toBox.y2)
+                    [x, fromBox.y1],
+                    [x, toBox.y2]
                 );
             }
 
             return points;
         },
 
-        getViewElements: function(view) {
-            var segment = this,
-                options = segment.options,
-                series = segment.series;
+        createVisual: function() {
+            ChartElement.fn.createVisual.call(this);
 
-            ChartElement.fn.getViewElements.call(segment, view);
+            var options = this.options;
+            var line = this.series.line || {};
 
-            var line = series.line || {};
-            return [
-                view.createPolyline(segment.linePoints(), false, {
-                    id: segment.id,
-                    animation: options.animation,
-                    stroke: line.color,
-                    strokeWidth: line.width,
-                    strokeOpacity: line.opacity,
-                    fill: "",
+            this.visual.append(draw.Path.fromPoints(this.linePoints(), {
+                stroke: {
+                    color: line.color,
+                    width: line.width,
+                    opacity: line.opacity,
                     dashType: line.dashType
-                })
-            ];
+                }
+            }));
         }
     });
 
