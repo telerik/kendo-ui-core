@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link type="text/css" href="../../dist/styles/web/kendo.common.css" rel="stylesheet/less"/>
+    <link type="text/css" href="../../dist/styles/web/kendo.silver.css" rel="stylesheet/less"/>
+    <link type="text/css" href="../../dist/styles/dataviz/kendo.dataviz.css" rel="stylesheet/less"/>
+    <link type="text/css" href="../../dist/styles/dataviz/kendo.dataviz.silver.css" rel="stylesheet"/>
+    <script src="../require.js"></script>
+    <script>
+    require.config({
+        baseUrl: "../../src",
+        paths: {
+            cultures: "cultures"
+        }
+    });
+
+    require([ "jquery.min",
+              "kendo.dataviz.stock" ], function(){
+
+        $("#chart").kendoStockChart({
+            dataSource: {
+                data: [{
+                    date: new Date("2012/09/01"),
+                    sales: 100
+                }, {
+                    date: new Date("2012/09/02"),
+                    sales: 110
+                }, {
+                    date: new Date("2012/09/03"),
+                    sales: 105
+                }, {
+                    date: new Date("2012/09/04"),
+                    sales: 100
+                }, {
+                    date: new Date("2012/09/05"),
+                    sales: 110
+                }, {
+                    date: new Date("2012/09/06"),
+                    sales: 105
+                }],
+                serverFiltering: true,
+                schema: {
+                    model: {
+                        fields: {
+                            date: { type: "date" }
+                        }
+                    }
+                }
+            },
+            dateField: "date",
+            series: [{
+                field: "sales"
+            }],
+            navigator: {
+                dataSource: null,
+                series: [{
+                    field: "volume"
+                }],
+                select: {
+                    from: new Date("2012/09/04")
+                }
+            }
+        });
+
+        $("button").click(function() {
+            $("#chart").getKendoStockChart().redraw();
+        });
+    });
+    </script>
+    <style>
+        #chart {
+            width: 800px;
+            height: 500px;
+            float: left;
+        }
+    </style>
+  </head>
+  <body>
+      <div id="chart"></div>
+      <button>redraw</button>
+  </body>
+</html>
