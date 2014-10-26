@@ -3,16 +3,18 @@
   <head>
     <link rel="stylesheet" href="../dist/styles/web/kendo.common.css" />
     <link rel="stylesheet" href="../dist/styles/web/kendo.default.css" />
+    <script src="html2canvas.min.js"></script>
     <script src="loader.js"></script>
     <script>
       requireSync([
         "../src/jquery.js",
         "../src/kendo.all.js",
-        "./console.time.js"
+        "./console.time.js",
+        "./test-pdf-helpers.js"
       ]);
     </script>
 
-    <script src="./pako.min.js"></script>
+    <!-- <script src="./pako.min.js"></script> -->
 
     <script>
         kendo.pdf.defineFont({
@@ -39,13 +41,13 @@
     <table cellspacing="0" cellpadding="0"><tr><td>
       <div style="width: 20em; margin: 1em">
         <div id="grid"></div>
-        <button onclick="getPDF('#grid')">Get PDF</button>
+        <button onclick="pdf('#grid')">Get PDF</button>
         <button onclick="draw('#grid')">Draw</button>
       </div>
     </td><td>
       <div style="width: 20em; margin: 1em">
         <div id="tree"></div>
-        <button onclick="getPDF('#tree')">Get PDF</button>
+        <button onclick="pdf('#tree')">Get PDF</button>
         <button onclick="draw('#tree')">Draw</button>
       </div>
     </td></tr></table>
@@ -53,14 +55,14 @@
     <table cellspacing="0" cellpadding="0"><tr><td>
       <div style="width: 20em; margin: 1em">
         <div id="calendar"></div>
-        <button onclick="getPDF('#calendar')">Get PDF</button>
+        <button onclick="pdf('#calendar')">Get PDF</button>
         <button onclick="draw('#calendar')">Draw</button>
       </div>
     </td><td>
       Won't work (no gradients; no &lt;input&gt;):<br />
       <div style="width: 30em; margin: 1em">
         <div id="flatcolorpicker"></div><br/>
-        <button onclick="getPDF('#flatcolorpicker')">Get PDF</button>
+        <button onclick="pdf('#flatcolorpicker')">Get PDF</button>
         <button onclick="draw('#flatcolorpicker')">Draw</button>
       </div>
     </td></tr></table>
@@ -68,51 +70,17 @@
     <table cellspacing="0" cellpadding="0"><tr><td>
       <div style="width: 30em; margin: 1em">
         <textarea id="editor"></textarea>
-        <button onclick="getPDF('#editor')">Get PDF</button>
+        <button onclick="pdf('#editor')">Get PDF</button>
         <button onclick="draw('#editor')">Draw</button>
       </div>
     </td><td>
       <input id="slider" />
     </td></tr></table>
 
-    <button onclick="getPDF('body')">PDF all</button>
+    <button onclick="pdf('body')">PDF all</button>
     <button onclick="draw('body')">Draw all</button>
 
     <script>
-      function getEl(sel) {
-        var widget = kendo.widgetInstance($(sel));
-        if (widget) return widget.wrapper || widget.element;
-        return $(sel);
-      }
-
-      function getPDF(sel) {
-        var el = getEl(sel)[0];
-        kendo.dataviz.drawing.drawDOM(el).done(function(root){
-          root.options.set("pdf", {
-            paperSize: "auto",
-            margins: {
-              left: "10mm",
-              top: "10mm",
-              right: "10mm",
-              bottom: "10mm"
-            }
-          });
-          kendo.dataviz.drawing.pdf.toDataURL(root, function(url){
-            window.x = root;
-            kendo.saveAs({ dataURI: url, fileName: "html-to-pdf2.pdf", proxyURL: "http://kendo.local:7569/" });
-          });
-        });
-      }
-
-      function draw(sel) {
-        var el = getEl(sel)[0];
-        kendo.dataviz.drawing.drawDOM(el).done(function(root){
-          window.x = root;
-          var el = $("<div class='surface' style='position: absolute; background: white; right: 1em; top: 1em; bottom: 1em; border: 1px solid #000; width: 600px'></div>").appendTo(document.body);
-          var surface = kendo.dataviz.drawing.Surface.create(el);
-          surface.draw(root);
-        });
-      }
 
       $("#grid").kendoGrid({
         sortable: true,

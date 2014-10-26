@@ -52,6 +52,19 @@
     // only function definitions after this line.
     return;
 
+    function parseColor(str, css) {
+        var color = kendo.parseColor(str);
+        if (color) {
+            color = color.toRGB();
+            if (css) {
+                color = color.toCssRgba();
+            } else if (color.a === 0) {
+                color = null;
+            }
+        }
+        return color;
+    }
+
     function cacheImages(element, callback) {
         var urls = [];
         function add(url) {
@@ -184,7 +197,7 @@
         return {
             width: parseFloat(getPropertyValue(style, side + "-width")),
             style: getPropertyValue(style, side + "-style"),
-            color: getPropertyValue(style, side + "-color")
+            color: parseColor(getPropertyValue(style, side + "-color"), true)
         };
     }
 
@@ -402,10 +415,7 @@
         var dir = getPropertyValue(style, "direction");
 
         var backgroundColor = getPropertyValue(style, "background-color");
-        backgroundColor = kendo.parseColor(backgroundColor);
-        if (backgroundColor && backgroundColor.toRGB().a === 0) {
-            backgroundColor = null;     // opacity zero
-        }
+        backgroundColor = parseColor(backgroundColor);
 
         var backgroundImage = getPropertyValue(style, "background-image");
         var backgroundRepeat = getPropertyValue(style, "background-repeat");
