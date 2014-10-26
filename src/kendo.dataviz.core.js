@@ -4193,6 +4193,7 @@ var __meta__ = {
 
             proto.exportSVG = this.exportSVG;
             proto.exportImage = this.exportImage;
+            proto.exportPDF = this.exportPDF;
             proto.svg = this.svg;
             proto.imageDataURL = this.imageDataURL;
         },
@@ -4203,6 +4204,10 @@ var __meta__ = {
 
         exportImage: function(options) {
             return draw.exportImage(this.exportVisual(), options);
+        },
+
+        exportPDF: function(options) {
+            return draw.exportPDF(this.exportVisual(), options);
         },
 
         svg: function() {

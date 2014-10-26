@@ -507,8 +507,35 @@
         });
 
         test("exportImage exports PNG", function() {
-            chart.exportImage().done(function(svg) {
-                contains(svg, "image/png");
+            chart.exportImage().done(function(data) {
+                contains(data, "image/png");
+            });
+        });
+
+        test("exportPDF forwards visual to drawing.exportPDF", function() {
+            var visual = {};
+            chart.exportVisual = function() { return visual; };
+
+            stubMethod(draw, "exportPDF", function(group) {
+                equal(group, visual);
+            }, function() {
+                chart.exportPDF();
+            });
+        });
+
+        test("exportPDF forwards options to drawing.exportPDF", function() {
+            var ref = {};
+
+            stubMethod(draw, "exportPDF", function(group, options) {
+                equal(options, ref);
+            }, function() {
+                chart.exportPDF(ref);
+            });
+        });
+
+        test("exportPDF exports PDF", function() {
+            chart.exportPDF().done(function(data) {
+                contains(data, "application/pdf");
             });
         });
 
