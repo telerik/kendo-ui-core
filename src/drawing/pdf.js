@@ -46,6 +46,8 @@
     function render(group, callback) {
         var fonts = [], images = [];
 
+        group = optimize(group);
+
         group.traverse(function(element){
             dispatch({
                 Image: function(element) {
@@ -142,21 +144,12 @@
     function dispatch(handlers, element) {
         var handler = handlers[element.nodeType];
         if (handler) {
-            handler.call.apply(handler, arguments);
+            return handler.call.apply(handler, arguments);
         }
+        return element;
     }
 
     function drawElement(element, page, pdf) {
-        if (element instanceof drawing.Group && element.children.length === 0) {
-            return;
-        }
-        if (element instanceof drawing.MultiPath && element.children.length === 0) {
-            return;
-        }
-        if (element instanceof drawing.Path && element.segments.length === 0) {
-            return;
-        }
-
         if (element.DEBUG) {
             page.comment(element.DEBUG);
         }
@@ -272,18 +265,19 @@
         }
     }
 
-    function maybeFillStroke(element, page, pdf) {
-        function should(thing) {
+    function shouldDraw(thing) {
             return thing &&
                 !/^(none|transparent)$/i.test(thing.color) &&
                 (thing.width == null || thing.width > 0) &&
                 (thing.opacity == null || thing.opacity > 0);
         }
-        if (should(element.fill()) && should(element.stroke())) {
+
+    function maybeFillStroke(element, page, pdf) {
+        if (shouldDraw(element.fill()) && shouldDraw(element.stroke())) {
             page.fillStroke();
-        } else if (should(element.fill())) {
+        } else if (shouldDraw(element.fill())) {
             page.fill();
-        } else if (should(element.stroke())) {
+        } else if (shouldDraw(element.stroke())) {
             page.stroke();
         }
     }
@@ -359,7 +353,6 @@
             page.close();
         }
         }
-
         maybeFillStroke(element, page, pdf);
     }
 
@@ -368,6 +361,7 @@
         for (var i = 0; i < paths.length; ++i) {
             drawPath(paths[i], page, pdf);
         }
+        maybeFillStroke(element, page, pdf);
     }
 
     function drawCircle(element, page, pdf) {
@@ -437,6 +431,91 @@
     function parseColor(x) {
         var color = kendo.parseColor(x, true);
         return color ? color.toRGB() : null;
+    }
+
+    function optimize(root) {
+        var changed;
+        do {
+            changed = false;
+            root = opt(root);
+        } while (root && changed);
+        return root;
+
+        function change(newShape) {
+            changed = true;
+            return newShape;
+        }
+
+        function visible(shape) {
+            return (shape.visible() && shape.opacity() > 0 &&
+                    ( shouldDraw(shape.fill()) ||
+                      shouldDraw(shape.stroke()) ));
+        }
+
+        function optArray(a) {
+            var b = [];
+            for (var i = 0; i < a.length; ++i) {
+                var el = opt(a[i]);
+                if (el != null) {
+                    b.push(el);
+                }
+            }
+            return b;
+        }
+
+        function opt(shape) {
+            return dispatch({
+                Path: function(shape) {
+                    if (shape.segments.length === 0 || !visible(shape)) {
+                        return change(null);
+                    }
+                    return shape;
+                },
+                MultiPath: function(shape) {
+                    if (!visible(shape)) {
+                        return change(null);
+                    }
+                    var el = new drawing.MultiPath(shape.options);
+                    el.paths = optArray(shape.paths);
+                    if (el.paths.length === 0) {
+                        return change(null);
+                    }
+                    return el;
+                },
+                Circle: function(shape) {
+                    if (!visible(shape)) {
+                        return change(null);
+                    }
+                    return shape;
+                },
+                Arc: function(shape) {
+                    if (!visible(shape)) {
+                        return change(null);
+                    }
+                    return shape;
+                },
+                Text: function(shape) {
+                    if (!/\S/.test(shape.content()) || !visible(shape)) {
+                        return change(null);
+                    }
+                    return shape;
+                },
+                Image: function(shape) {
+                    if (!(shape.visible() && shape.opacity() > 0)) {
+                        return change(null);
+                    }
+                    return shape;
+                },
+                Group: function(shape) {
+                    var el = new drawing.Group(shape.options);
+                    el.children = optArray(shape.children);
+                    if (shape !== root && el.children.length === 0) {
+                        return change(null);
+                    }
+                    return el;
+                }
+            }, shape);
+        }
     }
 
     kendo.deepExtend(drawing, {
