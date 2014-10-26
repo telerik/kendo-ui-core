@@ -288,11 +288,53 @@
         }
     }
 
+    function maybeDrawRect(path, page, pdf) {
+        var segments = path.segments;
+        if (segments.length == 4 && path.options.closed) {
+            // detect if this path looks like a rectangle parallel to the axis
+            var a = [], tlpos, min = null;
+            for (var i = 0; i < segments.length; ++i) {
+                if (segments[i].controlIn()) { // has curve?
+                    return false;
+                }
+                var p = a[i] = segments[i].anchor();
+                // find the index of the closest point to origin
+                var dist = p.x * p.x + p.y * p.y;
+                if (min == null || dist < min) {
+                    min = dist;
+                    tlpos = i;
+                }
+            }
+            // by reordering here we still have the same path, but begin drawing
+            // from the closest point to origin.
+            if (tlpos > 0) {
+                a = a.slice(0, tlpos).concat(a.slice(tlpos));
+            }
+            // now it's easy to detect whether it's a rectangle
+            var isRect = (
+                a[0].y == a[1].y && a[1].x == a[2].x && a[2].y == a[3].y && a[3].x == a[0].x
+            ) || (
+                a[0].x == a[1].x && a[1].y == a[2].y && a[2].x == a[3].x && a[3].y == a[0].y
+            );
+            if (!isRect) {
+                return false;
+            }
+            // this saves a bunch of instructions in PDF:
+            // moveTo, lineTo, lineTo, lineTo, close -> rect.
+            page.rect(a[0].x, a[0].y,
+                      a[2].x - a[0].x /*width*/,
+                      a[2].y - a[0].y /*height*/);
+            return true;
+        }
+        return false;
+    }
+
     function drawPath(element, page, pdf) {
         var segments = element.segments;
         if (segments.length === 0) {
             return;
         }
+        if (!maybeDrawRect(element, page, pdf)) {
         for (var prev, i = 0; i < segments.length; ++i) {
             var seg = segments[i];
             var anchor = seg.anchor();
@@ -313,9 +355,9 @@
             }
             prev = seg;
         }
-
         if (element.options.closed) {
             page.close();
+        }
         }
 
         maybeFillStroke(element, page, pdf);
