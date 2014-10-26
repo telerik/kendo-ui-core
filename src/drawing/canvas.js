@@ -570,10 +570,6 @@
     }
 
     // Helpers ================================================================
-    function timestamp() {
-        return new Date().getTime();
-    }
-
     function addGradientStops(gradient, stops) {
         var color, stop, idx;
 
