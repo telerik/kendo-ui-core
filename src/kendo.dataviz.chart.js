@@ -7798,8 +7798,28 @@ var __meta__ = {
         },
 
         refresh: function() {
-            this.visual.clear();
-            this.renderVisual();
+            if (!this.visual.parent) {
+                return;
+            }
+
+            this.visual.parent.remove(this.visual);
+            this.createVisual();
+
+            var children = this.children;
+            for (var i = 0; i < children.length; i++) {
+                children[i].renderVisual();
+            }
+
+            if (this.visual) {
+                this.visual.chartElement = this;
+
+                if (this.parent) {
+                    this.parent.appendVisual(this.visual);
+                }
+            }
+
+            this.createAnimation();
+            this.renderComplete();
         },
 
         clipBox: function() {
