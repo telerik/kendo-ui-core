@@ -232,21 +232,69 @@
 @button-focused-active-shadow: @focused-active-item-shadow;
 
 //Checkboxes
-@checkbox-border-color-before: #7f7f7f;
-@checkbox-border-color-after: transparent;
-@checkbox-checked-color: #fff;
-@checkbox-checked-background-color: #3f51b5;
-@checkbox-checked-border-color: #3f51b5;
-@checkbox-checked-disabled-background-color: #bfbfbf;
-@checkbox-disabled-color: #bfbfbf;
-@checkbox-disabled-background-color: #fff;
-@checkbox-disabled-border-color: #bfbfbf;
-@checkbox-disabled-shadow: none;
-@checkbox-active-background-color: RGBA(235, 235, 235, 0.3);
+@checkbox-border-color-before: transparent;
+@checkbox-border-color-after: #cccccc;
+@checkbox-border-radius-before: 0;
+@checkbox-background-color: @widget-background-color;
+
+@checkbox-hover-border-color: #cccccc;
+@checkbox-hover-box-shadow: 0 0 2px 0 cccccc;
+
+@checkbox-checked-border-color-before: #cccccc;
+@checkbox-checked-border-color-after: #cccccc;
+@checkbox-checked-border-radius-after: 0;
+@checkbox-checked-background-color-after: #fff;
+@checkbox-checked-color-after: #686868;
+
 @checkbox-active-border-color-before: transparent;
-@checkbox-active-border-color-after: #7f7f7f;
-@checkbox-active-shadow: 0 0 0 12px RGBA(235, 235, 235, 0.3);
-@checkbox-active-border-color-before: transparent;
-@checkbox-checked-active-shadow: 0 0 0 12px RGBA(63, 81, 181, 0.3);
+@checkbox-active-border-color-after: #929292;
+@checkbox-active-border-radius: 0;
+@checkbox-active-border-radius-after: 0;
+@checkbox-active-box-shadow: 0 0 2px 0 #c5c5c5;
+@checkbox-active-background-color-after: #fff;
+
+@checkbox-checked-active-border-color-before: #929292;
+@checkbox-checked-active-border-radius-before: 0;
+@checkbox-checked-active-box-shadow: @checkbox-active-box-shadow;
+
+@checkbox-checked-disabled-color-after: #d4d4d4;
+@checkbox-disabled-background-color-after: #fff;
+@checkbox-disabled-color: #b6b6b6;
+@checkbox-disabled-box-shadow: none;
+@checkbox-disabled-border-color-before: #d4d4d4;
+@checkbox-disabled-background-color-before: #fff;
+
+//Radio buttons
+@radio-border-color-before: #cccccc;
+@radio-border-color-after: #cccccc;
+//@radio-border-radius-before: 1px;
+@radio-background-color: @widget-background-color;
+
+@radio-hover-border-color: #cccccc;
+@radio-hover-box-shadow: 0 0 2px 0 #cccccc;
+
+@radio-checked-border-color-before: #cccccc;
+@radio-checked-border-color-after: #cccccc;
+//@radio-checked-border-radius-after: 1px;
+@radio-checked-background-color-after: #686868;
+@radio-checked-color-after: #686868;
+
+@radio-active-border-color-before: #929292;
+@radio-active-border-color-after: #929292;
+@radio-active-border-radius: 50%;
+@radio-active-border-radius-after: 1px;
+@radio-active-box-shadow: 0 0 2px 0 #c5c5c5;
+@radio-active-background-color-after: #686868;
+
+@radio-checked-active-border-color-before: #929292;
+@radio-checked-active-border-radius-before: 50%;
+@radio-checked-active-box-shadow: @radio-active-box-shadow;
+
+@radio-checked-disabled-color-after: #d4d4d4;
+@radio-disabled-background-color-after: #fff;
+@radio-disabled-color: #b6b6b6;
+@radio-disabled-box-shadow: none;
+@radio-disabled-border-color-before: #d4d4d4;
+@radio-disabled-background-color-before: #fff;
 
 @import "theme-template.less";

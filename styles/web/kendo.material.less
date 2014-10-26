@@ -305,19 +305,19 @@
 @radio-checked-background-color-after: #3f51b5;
 @radio-checked-color-after: #fff;
 
-@radio-active-border-color-before: RGBA(235, 235, 235, 0.3);
+@radio-active-border-color-before: #7f7f7f;
 @radio-active-border-color-after: #7f7f7f;
 @radio-active-border-radius: 50%;
 @radio-active-border-radius-after: 1px;
 @radio-active-box-shadow: 0 0 0 0.750em RGBA(235, 235, 235, 0.3);
 @radio-active-background-color-after: #fff;
 
-@radio-checked-active-border-color-before: red;
+@radio-checked-active-border-color-before: #3f51b5;
 @radio-checked-active-border-radius-before: 50%;
 @radio-checked-active-box-shadow: 0 0 0 0.750em RGBA(63, 81, 181, 0.3);
 
 @radio-checked-disabled-color-after: #b3bac7;
-@radio-disabled-background-color-after: #bfbfbf;
+@radio-disabled-background-color-after: #fff;
 @radio-disabled-color: #bfbfbf;
 @radio-disabled-box-shadow: none;
 @radio-disabled-border-color-before: #bfbfbf;
@@ -1021,6 +1021,6 @@ table.k-editor {
 	background-color: @draghandle-background-color;
 }
 
-.k-checkbox:checked + .k-checkbox-label:hover:after {
-    border-color: @checkbox-checked-border-color-after; 
+.k-radio:checked + .k-radio-label:hover:before {
+    border-color: @radio-checked-border-color-before; 
 }

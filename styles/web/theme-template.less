@@ -2094,9 +2094,9 @@ html .km-pane-wrapper .km-widget,
   // background-color: @checkbox-active-background-color;
 }
 
-//.k-checkbox:checked + .k-checkbox-label:active:after {
-  //  border-color: @checkbox-checked-after-border-color-after;
-//}   
+.k-checkbox:checked + .k-checkbox-label:active:after {
+    border-color: @checkbox-active-border-color-after;
+}   
 
 .k-checkbox:checked + .k-checkbox-label:active:before {
  box-shadow: @checkbox-checked-active-box-shadow;
@@ -2180,8 +2180,14 @@ html .km-pane-wrapper .km-widget,
   background: @radio-disabled-background-color-before;
 }
 
-.k-radio:disabled + .k-radio-label:after {
+.k-radio:disabled + .k-radio-label:before {
     background: @radio-disabled-background-color-after;
+}
+
+.k-radio:disabled + .k-radio-label:hover:after,
+.k-radio:disabled + .k-radio-label:hover:before {
+  box-shadow: @radio-disabled-box-shadow;
+  //background: @checkbox-disabled-background-color;
 }
 
 // Retina sprite

@@ -232,8 +232,8 @@
 @button-focused-active-shadow: @focused-active-item-shadow;
 
 //Checkboxes
-@checkbox-border-color-before: #dbdbde;
-@checkbox-border-color-after: transparent;
+@checkbox-border-color-before: transparent;
+@checkbox-border-color-after: #dbdbde;
 @checkbox-border-radius-before: 3px;
 @checkbox-background-color: @widget-background-color;
 
@@ -241,7 +241,7 @@
 @checkbox-hover-box-shadow:none;
 
 @checkbox-checked-border-color-before: #dbdbde;
-@checkbox-checked-border-color-after: #dbdbde;
+@checkbox-checked-border-color-after: #107dc3;
 @checkbox-checked-border-radius-after: 3px;
 @checkbox-checked-background-color-after: #fff;
 @checkbox-checked-color-after: #0a7ac1;
@@ -253,7 +253,7 @@
 @checkbox-active-box-shadow: 0 0 3px 0 #0a7ac1;
 @checkbox-active-background-color-after: #fff;
 
-@checkbox-checked-active-border-color-before: red;
+@checkbox-checked-active-border-color-before: #0a7ac1;
 @checkbox-checked-active-border-radius-before: 3px;
 @checkbox-checked-active-box-shadow: @checkbox-active-box-shadow;
 
@@ -264,4 +264,41 @@
 @checkbox-disabled-border-color-before: #dbdbde;
 @checkbox-disabled-background-color-before: #f4f4f5;
 
+//Radio buttons
+@radio-border-color-before: #dbdbde;
+@radio-border-color-after: #dbdbde;
+//@radio-border-radius-before: 1px;
+@radio-background-color: @widget-background-color;
+
+@radio-hover-border-color: #a6afbe;
+@radio-hover-box-shadow:none;
+
+@radio-checked-border-color-before: #dbdbde;
+@radio-checked-border-color-after: #dbdbde;
+@radio-checked-border-radius-after: 1px;
+@radio-checked-background-color-after: #3f9dd9;
+@radio-checked-color-after: #0a7ac1;
+
+@radio-active-border-color-before: #0a7ac1;
+//@radio-active-border-color-after: #0a7ac1;
+@radio-active-border-radius: 50%;
+@radio-active-border-radius-after: 1px;
+@radio-active-box-shadow: 0 0 3px 0 #0a7ac1;
+@radio-active-background-color-after: #fff;
+
+@radio-checked-active-border-color-before: #0a7ac1;
+@radio-checked-active-border-radius-before: 50%;
+@radio-checked-active-box-shadow: @radio-active-box-shadow;
+
+@radio-checked-disabled-color-after: #b3bac7;
+@radio-disabled-background-color-after: #f4f4f5;
+@radio-disabled-color: #b3bac7;
+@radio-disabled-box-shadow: none;
+@radio-disabled-border-color-before: #dbdbde;
+@radio-disabled-background-color-before: #f4f4f5;
+
 @import "theme-template.less";
+
+.k-checkbox:checked + .k-checkbox-label:hover:after {
+    border-color: @checkbox-checked-border-color-after; 
+}
