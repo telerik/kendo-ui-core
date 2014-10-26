@@ -129,6 +129,11 @@
                 this.srcElement.removeObserver(this);
             }
 
+            var children = this.childNodes;
+            for (var i = 0; i < children.length; i++) {
+                this.childNodes[i].destroy();
+            }
+
             this.parent = null;
         },
 

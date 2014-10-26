@@ -1368,6 +1368,8 @@ var __meta__ = {
 
             chart._destroyView();
 
+            chart.surface.destroy();
+
             Widget.fn.destroy.call(chart);
         },
 
@@ -10594,6 +10596,8 @@ var __meta__ = {
             if (userEvents) {
                 userEvents.destroy();
             }
+
+            that._state = null;
 
             this.wrapper.remove();
         },
