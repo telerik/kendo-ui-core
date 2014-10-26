@@ -8856,34 +8856,26 @@ var __meta__ = {
             return box || plotArea.box;
         },
 
-        getViewElements: function(view) {
-            var plotArea = this,
-                bgBox = plotArea.backgroundBox(),
-                options = plotArea.options,
-                userOptions = options.plotArea,
-                border = userOptions.border || {},
-                elements = ChartElement.fn.getViewElements.call(plotArea, view);
+        createVisual: function() {
+            ChartElement.fn.createVisual.call(this);
 
-            append(elements, [
-                view.createRect(bgBox, {
-                    fill: userOptions.background,
-                    fillOpacity: userOptions.opacity,
-                    zIndex: -2,
-                    strokeWidth: 0.1
-                }),
-                view.createRect(bgBox, {
-                    id: plotArea.id,
-                    data: { modelId: plotArea.modelId },
-                    stroke: border.width ? border.color : "",
-                    strokeWidth: border.width,
-                    fill: WHITE,
-                    fillOpacity: 0,
-                    zIndex: -1,
-                    dashType: border.dashType
-                })
-            ]);
+            var bgBox = this.backgroundBox();
+            var options = this.options.plotArea;
+            var border = options.border || {};
 
-            return elements;
+            var bg = draw.Path.fromRect(bgBox.toRect(), {
+                fill: {
+                    color: options.background,
+                    opacity: options.opacity
+                },
+                stroke: {
+                    color: border.width ? border.color : "",
+                    width: border.width,
+                },
+                zIndex: -1
+            });
+
+            this.appendVisual(bg);
         },
 
         pointsByCategoryIndex: function(categoryIndex) {
