@@ -489,13 +489,19 @@
         // overflow: hidden/auto - if present, replace the group with
         // a new one clipped by the inner box.
         (function(){
-            var overflow = getPropertyValue(style, "overflow");
-            if (/^(hidden|auto)$/.test(overflow)) {
+            function clipit() {
                 var clipPath = elementRoundBox(element, innerbox, "padding");
                 var tmp = new drawing.Group();
                 setClipping(tmp, clipPath);
                 group.append(tmp);
                 group = tmp;
+            }
+            if (/^(hidden|auto|scroll)/.test(getPropertyValue(style, "overflow"))) {
+                clipit();
+            } else if (/^(hidden|auto|scroll)/.test(getPropertyValue(style, "overflow-x"))) {
+                clipit();
+            } else if (/^(hidden|auto|scroll)/.test(getPropertyValue(style, "overflow-y"))) {
+                clipit();
             }
         })();
 
