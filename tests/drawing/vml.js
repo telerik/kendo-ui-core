@@ -855,7 +855,7 @@
         });
 
         test("renders opacity", function() {
-            createNode({ fill: { opacity: 0.5 } });
+            createNode({ fill: { color: "white", opacity: 0.5 } });
             equal(fillNode.element.opacity, "0.5");
         });
 
@@ -993,6 +993,7 @@
         });
 
         test("optionsChange sets fill opacity", function() {
+            createNode({ fill: { color: "white" } });
             fillNode.attr = function(name, value) {
                 if(name === "opacity") {
                     equal(value, 0.4);
