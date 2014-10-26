@@ -5,15 +5,14 @@ when "windows"
         action :install
     end
 else
-
-    apt_repository "node.js" do
-      uri "http://ppa.launchpad.net/chris-lea/node.js/ubuntu"
-      distribution node['lsb']['codename']
-      components ["main"]
-      keyserver "hkp://keyserver.ubuntu.com:80/"
-      key "C7917B12"
+    # See
+    # https://github.com/joyent/node/wiki/installing-node.js-via-package-manager
+    apt_repository "node" do
+        uri "https://deb.nodesource.com/node"
+        key 'nodesource.gpg.key'
+        distribution node['lsb']['codename']
+        components ["main"]
     end
 
     package "nodejs"
-    # package "npm"
 end
