@@ -309,6 +309,7 @@ var __meta__ = {
             workWeekEnd: 5,
             majorTick: 60,
             eventHeight: 25,
+            columnWidth: 100,
             majorTimeHeaderTemplate: "#=kendo.toString(date, 't')#",
             minorTimeHeaderTemplate: "&nbsp;",
             slotTemplate: "&nbsp;",
@@ -359,8 +360,30 @@ var __meta__ = {
             //that.table.find("> tbody > tr > td:first-child").css({width: "180px"});
 
             that._content(dates);
+            //set column width
+            //set column height as well? or at least scroll bar padding
+            //!also - if there is 'height' set, then vertical scrollbar should be always rendered!!!
+            that._setContentWidth();
 
             that.refreshLayout();
+        },
+
+
+        _setContentWidth: function() {
+            var content = this.content;
+            var contentWidth = content.width();
+            var contentTable = this.content.find("table");
+            var columnCount = contentTable.find("tr:first").children().length;
+
+            var minWidth = 100;
+            var calculatedWidth = columnCount * this.options.columnWidth;
+
+            if (contentWidth < calculatedWidth) {
+                minWidth = Math.ceil((calculatedWidth / contentWidth) * 100);
+            }
+
+            contentTable.add(this.datesHeader.find("table"))
+                .css("min-width", minWidth + "%");
         },
 
         _calculateSlotRanges: function () {
@@ -725,6 +748,7 @@ var __meta__ = {
                 this._renderEvents(eventsByResource[groupIndex], groupIndex);
             }
 
+            this._setContentWidth();
             this._refreshSlots();
             
             this.trigger("activate");
@@ -883,7 +907,7 @@ var __meta__ = {
                         if (this._isInTimeSlot(adjustedEvent.occurrence)) {
                             element = this._createEventElement(adjustedEvent.occurrence, event, range.head || adjustedEvent.head, range.tail || adjustedEvent.tail);
                             this.addContinuousEvent(group, range, element, event.isAllDay);
-                            element.appendTo(container);
+                            element.css({top: 0}).appendTo(container);
                             this._positionEvent(adjustedEvent.occurrence, element, range);
                         }
                     }
@@ -1104,10 +1128,7 @@ var __meta__ = {
         },
 
         _updateResizeHint: function(event, groupIndex, startTime, endTime) {
-            var multiday = false;
-
             var group = this.groups[groupIndex];
-
             var ranges = group.ranges(startTime, endTime, false, false);
 
             this._removeResizeHint();
