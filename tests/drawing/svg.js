@@ -1201,30 +1201,36 @@
 
     // ------------------------------------------------------------
     (function() {
-        var element;
+        var group;
 
         module("exportSVG", {
             setup: function() {
-                element = new d.Group();
+                group = new d.Group();
             }
         });
 
-        test("exports element", function() {
-            d.exportSVG(element).done(function(svg) {
-                contains(svg, "<?xml version='1.0' ?><svg");
+        test("exports SVG Data URI", function() {
+            d.exportSVG(group).done(function(svg) {
+                contains(svg, "data:image/svg+xml;chartset=UTF-8,<?xml version='1.0' ?><svg");
+            });
+        });
+
+        test("exports raw SVG", function() {
+            d.exportSVG(group, { raw: true }).done(function(svg) {
+                equal(svg.indexOf("<?xml version='1.0' ?><svg"), 0);
             });
         });
 
         test("encodes entities", function() {
-            element = new d.Text("Foo & Bar", [0, 0]);
-            d.exportSVG(element).done(function(svg) {
+            group = new d.Text("Foo & Bar", [0, 0]);
+            d.exportSVG(group).done(function(svg) {
                 contains(svg, "Foo &amp; Bar");
             });
         });
 
         test("preserves encoded entities", function() {
-            element = new d.Text("Foo &amp; Bar", [0, 0]);
-            d.exportSVG(element).done(function(svg) {
+            group = new d.Text("Foo &amp; Bar", [0, 0]);
+            d.exportSVG(group).done(function(svg) {
                 contains(svg, "Foo &amp; Bar");
             });
         });

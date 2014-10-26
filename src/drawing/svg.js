@@ -1066,11 +1066,16 @@
         return "url(" + baseUrl() + "#"  + id + ")";
     }
 
-    function exportSVG(group) {
+    function exportSVG(group, options) {
         var surface = new Surface($("<div />"), { encodeText: true });
         surface.draw(group);
 
-        return $.Deferred().resolve(surface.svg()).promise();
+        var svg = surface.svg();
+        if (!options || !options.raw) {
+            svg = "data:image/svg+xml;chartset=UTF-8," + svg;
+        }
+
+        return $.Deferred().resolve(svg).promise();
     }
 
     function isDefinition(type, value) {
