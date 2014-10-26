@@ -111,7 +111,6 @@
         init: function(srcElement) {
             BaseNode.fn.init.call(this, srcElement);
             if (srcElement) {
-                srcElement.addObserver(this);
                 this.initClip();
             }
         },

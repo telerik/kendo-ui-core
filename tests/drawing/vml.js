@@ -170,6 +170,14 @@
             equal(node.element.children.length, 0);
         });
 
+        test("clear destroys children", function() {
+            var child = new TNode();
+            child.destroy = function() { ok(true); };
+
+            node.append(child);
+            node.clear();
+        });
+
         test("renders visibility", function() {
             srcElement.visible(false);
             node = new TNode(srcElement);
@@ -501,23 +509,6 @@
                 equal(value, "none");
             };
             group.visible(false);
-        });
-
-        // ------------------------------------------------------------
-        module("GroupNode / source observer", {
-            setup: function() {
-                group = new Group();
-                groupNode = new GroupNode(group);
-            }
-        });
-
-        test("Adds srcElement observer", function() {
-            equal(group.observers()[0], groupNode);
-        });
-
-        test("clear removes srcElement observer", function() {
-            groupNode.clear();
-            equal(group.observers().length, 0);
         });
 
         // ------------------------------------------------------------
@@ -1356,9 +1347,16 @@
             equal(shape.observers()[0], node);
         });
 
-        test("clear removes srcElement observer", function() {
-            node.clear();
+        test("destroy removes srcElement observer", function() {
+            node.destroy();
             equal(shape.observers().length, 0);
+        });
+
+        test("destroy removes element reference", function() {
+            node.attachTo($("<div>")[0]);
+            var element = $(node.element);
+            node.destroy();
+            equal(element.data("kendoNode"), null);
         });
 
         // ------------------------------------------------------------

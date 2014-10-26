@@ -120,11 +120,25 @@
 
             if (srcElement) {
                 this.srcElement = srcElement;
+                this.observe();
             }
         },
 
-        destroy: noop,
+        destroy: function() {
+            if (this.srcElement) {
+                this.srcElement.removeObserver(this);
+            }
+
+            this.parent = null;
+        },
+
         load: noop,
+
+        observe: function() {
+            if (this.srcElement) {
+                this.srcElement.addObserver(this);
+            }
+        },
 
         append: function(node) {
             this.childNodes.push(node);
@@ -139,8 +153,9 @@
         remove: function(index, count) {
             var end = index + count;
             for (var i = index; i < end; i++) {
-                this.childNodes[i].clear();
-                this.childNodes[i].parent = null;
+                var child = this.childNodes[i];
+                child.clear();
+                child.destroy();
             }
             this.childNodes.splice(index, count);
         },

@@ -74,6 +74,18 @@
             this.attachReference();
         },
 
+        observe: noop,
+
+        destroy: function() {
+            var element = this.element;
+            if (element) {
+                $(element).remove();
+                this.element = null;
+            }
+
+            BaseNode.fn.destroy.call(this);
+        },
+
         createElement: function() {
             this.element = doc.createElement("div");
         },
@@ -130,15 +142,6 @@
                 domElement.insertBefore(this.element, domElement.children[pos] || null);
             } else {
                 domElement.appendChild(this.element);
-            }
-        },
-
-        clear: function() {
-            BaseNode.fn.clear.call(this);
-
-            if (this.element && this.element.parentNode) {
-                this.element.parentNode.removeChild(this.element);
-                this.element = null;
             }
         },
 
@@ -241,9 +244,12 @@
             Node.fn.init.call(this, srcElement);
 
             if (srcElement) {
-                srcElement.addObserver(this);
                 this.initClip();
             }
+        },
+
+        observe: function() {
+            BaseNode.fn.observe.call(this);
         },
 
         mapStyle: function() {
@@ -265,11 +271,6 @@
         },
 
         clear: function() {
-            var srcElement = this.srcElement;
-            if (srcElement) {
-                srcElement.removeObserver(this);
-            }
-
             this.clearClip();
 
             Node.fn.clear.call(this);

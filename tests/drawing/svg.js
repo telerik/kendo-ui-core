@@ -240,6 +240,14 @@
             shape.opacity(0.5);
         });
 
+        test("clear destroys children", function() {
+            var child = new TNode();
+            child.destroy = function() { ok(true); };
+
+            node.append(child);
+            node.clear();
+        });
+
         // ------------------------------------------------------------
         module("Base Node tests / " + name + " / observer", {
             setup: function() {
@@ -252,9 +260,16 @@
             equal(shape.observers()[0], node);
         });
 
-        test("clear removes srcElement observer", function() {
-            node.clear();
+        test("destroy removes srcElement observer", function() {
+            node.destroy();
             equal(shape.observers().length, 0);
+        });
+
+        test("destroy removes element reference", function() {
+            node.attachTo($("<div>")[0]);
+            var element = $(node.element);
+            node.destroy();
+            equal(element.data("kendoNode"), null);
         });
 
         // ------------------------------------------------------------
@@ -324,12 +339,12 @@
             shape.clip(newClip);
         });
 
-        test("clear removes definitions", function() {
+        test("destroy removes definitions", function() {
             node.definitionChange = function(e) {
                 equal(e.action, "remove");
                 equal(e.definitions.clip, clip);
             };
-            node.clear();
+            node.destroy();
             for (var definition in node.definitions) {
                 ok(false);
             }
@@ -447,17 +462,17 @@
             deepEqual($(grandChild.element).data("kendoNode"), grandChild);
         });
 
-        test("clear removes element", function() {
+        test("destroy removes element", function() {
             groupNode.attachTo(document.createElement("div"));
-            groupNode.clear();
+            groupNode.destroy();
 
             ok(!groupNode.element);
         });
 
-        test("clear removes kendoNode data from element", function() {
+        test("destroy removes kendoNode data from element", function() {
             var container = document.createElement("div");
             groupNode.attachTo(container);
-            groupNode.clear();
+            groupNode.destroy();
 
             ok(!$(container).data("kendoNode"));
         });

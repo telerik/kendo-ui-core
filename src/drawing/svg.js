@@ -96,9 +96,17 @@
         init: function(srcElement) {
             BaseNode.fn.init.call(this, srcElement);
             this.definitions = {};
-            if (srcElement) {
-                srcElement.addObserver(this);
+        },
+
+        destroy: function() {
+            var element = this.element;
+            if (element) {
+                $(element).remove();
+                this.element = null;
             }
+
+            this.clearDefinitions();
+            BaseNode.fn.destroy.call(this);
         },
 
         load: function(elements, pos) {
@@ -227,24 +235,6 @@
             }
 
             BaseNode.fn.optionsChange.call(this, e);
-        },
-
-        clear: function() {
-            var element = this.element;
-            var srcElement = this.srcElement;
-
-            if (element) {
-                element.parentNode.removeChild(element);
-                this.element = null;
-            }
-
-            if (srcElement) {
-                srcElement.removeObserver(this);
-            }
-
-            this.clearDefinitions();
-
-            BaseNode.fn.clear.call(this);
         },
 
         attr: function(name, value) {
