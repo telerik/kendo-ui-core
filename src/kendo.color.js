@@ -153,8 +153,11 @@
     /*jshint eqnull:true  */
 
     function parseColor(color, nothrow) {
-        if (color == null || color == "none" || color == "transparent") {
+        if (color == null || color == "none") {
             return null;
+        }
+        if (color == "transparent") {
+            return new _RGB(0, 0, 0, 0);
         }
         if (color instanceof _Color) {
             return color;
