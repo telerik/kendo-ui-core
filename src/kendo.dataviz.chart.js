@@ -3853,17 +3853,6 @@ var __meta__ = {
 
         pointValue: function(data) {
             return data.valueFields.value;
-        },
-
-        getViewElements: function(view) {
-            var chart = this,
-                elements = ChartElement.fn.getViewElements.call(chart, view),
-                highlightGroup = view.createGroup({
-                    id: chart.id
-                });
-
-            highlightGroup.children = elements;
-            return [highlightGroup];
         }
     });
 
@@ -5097,24 +5086,6 @@ var __meta__ = {
             }
 
             return new pointType(linePoints, currentSeries, seriesIx);
-        },
-
-        getViewElements: function(view) {
-            var chart = this,
-                elements = CategoricalChart.fn.getViewElements.call(chart, view),
-                group = view.createGroup({
-                    animation: {
-                        type: CLIP
-                    }
-                }),
-                highlightGroup = view.createGroup({
-                    id: chart.id
-                });
-
-            group.children = elements;
-            highlightGroup.children = [group];
-
-            return [highlightGroup];
         }
     });
     deepExtend(LineChart.fn, LineChartMixin);
@@ -5750,23 +5721,6 @@ var __meta__ = {
             return new Box2D(slotX.x1, slotY.y1, slotX.x2, slotY.y2);
         },
 
-        getViewElements: function(view) {
-            var chart = this,
-                elements = ChartElement.fn.getViewElements.call(chart, view),
-                group = view.createGroup({
-                    animation: {
-                        type: CLIP
-                    }
-                }),
-                highlightGroup = view.createGroup({
-                    id: chart.id
-                });
-
-            group.children = elements;
-            highlightGroup.children = [group];
-            return [highlightGroup];
-        },
-
         traverseDataPoints: function(callback) {
             var chart = this,
                 options = chart.options,
@@ -5968,17 +5922,6 @@ var __meta__ = {
             }
 
             return max;
-        },
-
-        getViewElements: function(view) {
-            var chart = this,
-                elements = ChartElement.fn.getViewElements.call(chart, view),
-                group = view.createGroup({
-                     id: chart.id
-                });
-
-            group.children = elements;
-            return [group];
         },
 
         formatPointValue: function(point, format) {
@@ -6320,24 +6263,6 @@ var __meta__ = {
                 value.open, value.high,
                 value.low, value.close, point.category
             );
-        },
-
-        getViewElements: function(view) {
-            var chart = this,
-                elements = ChartElement.fn.getViewElements.call(chart, view),
-                group = view.createGroup({
-                    animation: {
-                        type: CLIP
-                    }
-                }),
-            highlightGroup = view.createGroup({
-                id: chart.id
-            });
-
-            group.children = elements;
-            highlightGroup.children = [group];
-
-            return [highlightGroup];
         }
     });
 
@@ -6829,53 +6754,6 @@ var __meta__ = {
                 }
             }
         },
-        //TO DO: remove
-        getViewElements: function(view) {
-            var segment = this,
-                sector = segment.sector,
-                options = segment.options,
-                borderOptions = options.border || {},
-                border = borderOptions.width > 0 ? {
-                    stroke: borderOptions.color,
-                    strokeWidth: borderOptions.width,
-                    strokeOpacity: borderOptions.opacity,
-                    dashType: borderOptions.dashType
-                } : {},
-                elements = [],
-                overlay = options.overlay;
-
-            if (overlay) {
-                overlay = deepExtend({}, options.overlay, {
-                    r: sector.r,
-                    ir: sector.ir,
-                    cx: sector.c.x,
-                    cy: sector.c.y,
-                    bbox: sector.getBBox()
-                });
-            }
-
-            if (segment.value) {
-                elements.push(segment.createSegment(view, sector, deepExtend({
-                    id: segment.id,
-                    fill: options.color,
-                    overlay: overlay,
-                    fillOpacity: options.opacity,
-                    strokeOpacity: options.opacity,
-                    animation: deepExtend(options.animation, {
-                        delay: segment.animationDelay
-                    }),
-                    data: { modelId: segment.modelId },
-                    zIndex: options.zIndex,
-                    singleSegment: (segment.options.data || []).length === 1
-                }, border)));
-            }
-
-            append(elements,
-                ChartElement.fn.getViewElements.call(segment, view)
-            );
-
-            return elements;
-        },
 
         createVisual: function() {
             var segment = this,
@@ -7342,110 +7220,6 @@ var __meta__ = {
 
                 boxY += box.height();
             }
-        },
-
-        getViewElements: function(view) {
-            var chart = this,
-                options = chart.options,
-                connectors = options.connectors,
-                points = chart.points,
-                connectorLine,
-                lines = [],
-                count = points.length,
-                space = 4,
-                sector, angle, connectorPoints, segment,
-                seriesIx, label, i;
-
-            for (i = 0; i < count; i++) {
-                segment = points[i];
-                sector = segment.sector;
-                angle = sector.middle();
-                label = segment.label;
-                seriesIx = { seriesId: segment.seriesIx };
-
-                if (label) {
-                    connectorPoints = [];
-                    if (label.options.position === OUTSIDE_END && segment.value !== 0) {
-                        var box = label.box,
-                            centerPoint = sector.c,
-                            start = sector.point(angle),
-                            middle = Point2D(box.x1, box.center().y),
-                            sr, end, crossing;
-
-                        start = sector.clone().expand(connectors.padding).point(angle);
-                        connectorPoints.push(start);
-                        // TODO: Extract into a method to remove duplication
-                        if (label.orientation == RIGHT) {
-                            end = Point2D(box.x1 - connectors.padding, box.center().y);
-                            crossing = intersection(centerPoint, start, middle, end);
-                            middle = Point2D(end.x - space, end.y);
-                            crossing = crossing || middle;
-                            crossing.x = math.min(crossing.x, middle.x);
-
-                            if (chart.pointInCircle(crossing, sector.c, sector.r + space) ||
-                                crossing.x < sector.c.x) {
-                                sr = sector.c.x + sector.r + space;
-                                if (segment.options.labels.align !== COLUMN) {
-                                    if (sr < middle.x) {
-                                        connectorPoints.push(Point2D(sr, start.y));
-                                    } else {
-                                        connectorPoints.push(Point2D(start.x + space * 2, start.y));
-                                    }
-                                } else {
-                                    connectorPoints.push(Point2D(sr, start.y));
-                                }
-                                connectorPoints.push(Point2D(middle.x, end.y));
-                            } else {
-                                crossing.y = end.y;
-                                connectorPoints.push(crossing);
-                            }
-                        } else {
-                            end = Point2D(box.x2 + connectors.padding, box.center().y);
-                            crossing = intersection(centerPoint, start, middle, end);
-                            middle = Point2D(end.x + space, end.y);
-                            crossing = crossing || middle;
-                            crossing.x = math.max(crossing.x, middle.x);
-
-                            if (chart.pointInCircle(crossing, sector.c, sector.r + space) ||
-                                crossing.x > sector.c.x) {
-                                sr = sector.c.x - sector.r - space;
-                                if (segment.options.labels.align !== COLUMN) {
-                                    if (sr > middle.x) {
-                                        connectorPoints.push(Point2D(sr, start.y));
-                                    } else {
-                                        connectorPoints.push(Point2D(start.x - space * 2, start.y));
-                                    }
-                                } else {
-                                    connectorPoints.push(Point2D(sr, start.y));
-                                }
-                                connectorPoints.push(Point2D(middle.x, end.y));
-                            } else {
-                                crossing.y = end.y;
-                                connectorPoints.push(crossing);
-                            }
-                        }
-
-                        connectorPoints.push(end);
-                        connectorLine = view.createPolyline(connectorPoints, false, {
-                            id: uniqueId(),
-                            stroke: connectors.color,
-                            strokeWidth: connectors.width,
-                            animation: {
-                                type: FADEIN,
-                                delay: segment.animationDelay
-                            },
-                            data: { modelId: segment.modelId }
-                        });
-
-                        lines.push(connectorLine);
-                    }
-                }
-            }
-
-            append(lines,
-                ChartElement.fn.getViewElements.call(chart, view));
-
-            return lines;
         },
 
         createVisual: function() {
@@ -8083,35 +7857,6 @@ var __meta__ = {
 
         stackRoot: function() {
             return this;
-        },
-
-        getViewElements: function (view) {
-            var container = this,
-                shouldClip = container.shouldClip(),
-                clipPathId,
-                labels = [],
-                group,
-                result;
-
-            if (shouldClip) {
-                container.clipBox = container._clipBox();
-                container.clipPathId = container.clipPathId || uniqueId();
-                clipPathId = container.clipPathId;
-                view.createClipPath(container.clipPathId, container.clipBox);
-
-                labels = container.labelViewElements(view);
-            }
-
-            container.id = uniqueId();
-            group = view.createGroup({
-                id: container.id,
-                clipPathId: clipPathId
-            });
-
-            group.children = group.children.concat(ChartElement.fn.getViewElements.call(container, view));
-            result = [group].concat(labels);
-
-            return result;
         },
 
         unclipLabels: function() {
