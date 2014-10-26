@@ -3108,7 +3108,7 @@ var __meta__ = {
 
             if (hasGradientOverlay(options)) {
                 this.visual.append(this.createGradientOverlay(rect, {
-                        baseColor: this.color,
+                        baseColor: this.color
                     }, deepExtend({
                          end: !options.vertical ? [0, 1] : undefined
                     }, options.overlay)
@@ -6062,7 +6062,7 @@ var __meta__ = {
             container.append(body);
             if (hasGradientOverlay(options)) {
                 container.append(this.createGradientOverlay(body, {
-                        baseColor: this.color,
+                        baseColor: this.color
                     },
                     deepExtend({}, options.overlay)
                 ));
@@ -8624,7 +8624,7 @@ var __meta__ = {
                 },
                 stroke: {
                     color: border.width ? border.color : "",
-                    width: border.width,
+                    width: border.width
                 },
                 zIndex: -1
             });

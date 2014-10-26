@@ -19,6 +19,7 @@ var __meta__ = {
     // Imports ================================================================
     var doc = document,
         kendo = window.kendo,
+        util = kendo.util,
         dataviz = kendo.dataviz,
         geom = dataviz.geometry,
         draw = dataviz.drawing,
@@ -4872,7 +4873,7 @@ var __meta__ = {
             i,
             length = stops.length,
             currentStop,
-            currentStops = []
+            currentStops = [];
 
         for (i = 0; i < length; i++) {
             currentStop = deepExtend({}, stops[i]);

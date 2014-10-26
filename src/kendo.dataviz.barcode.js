@@ -1634,7 +1634,7 @@ var __meta__ = {
 
             this.visual = new draw.Group();
 
-            var contentBox = that.contentBox = contentBox;
+            that.contentBox = contentBox;
             that._createBackground(size);
 
             if (textOptions.visible) {
@@ -1728,7 +1728,7 @@ var __meta__ = {
                 options = that.options,
                 border = options.border || {};
 
-            var box = Box2D(0,0, size.width, size.height).unpad(border.width / 2)
+            var box = Box2D(0,0, size.width, size.height).unpad(border.width / 2);
             var path = draw.Path.fromRect(box.toRect(), {
                 fill: {
                     color: options.background
