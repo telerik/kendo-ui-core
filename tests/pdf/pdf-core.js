@@ -202,11 +202,7 @@
             commandsOK(text, "2 w", "stroke width");
             commandsOK(text, "1 0 0 rg", "fill color");
             commandsOK(text, [
-                "10 10 m",
-                "100 10 l",
-                "100 100 l",
-                "10 100 l",
-                "h",
+                "10 10 90 90 re",
                 "B"
             ], "draw path and close/fill/stroke");
         });
