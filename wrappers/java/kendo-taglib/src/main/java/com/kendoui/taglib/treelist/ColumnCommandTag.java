@@ -3,6 +3,7 @@ package com.kendoui.taglib.treelist;
 
 
 import com.kendoui.taglib.BaseTag;
+import com.kendoui.taglib.treelist.ColumnTag;
 
 
 
@@ -20,6 +21,10 @@ public class ColumnCommandTag extends BaseTag /* interfaces */ /* interfaces */ 
     public int doEndTag() throws JspException {
 //>> doEndTag
 //<< doEndTag
+        
+        ColumnTag parent = (ColumnTag)findParentWithClass(ColumnTag.class);
+
+        parent.setCommand(this);
 
         return super.doEndTag();
     }
