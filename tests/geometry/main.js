@@ -1009,16 +1009,13 @@
 
     test("curvePoints returns points for a curve that approximate the arc", function() {
         var points = arc.curvePoints(),
-            expected = [Point.create(150, 100), Point.create(150, 152.4), Point.create(126.2, 200),
-                Point.create(100, 200), Point.create(73.8, 200), Point.create(50, 152.4), Point.create(50, 100)];
+        expected = [[150, 100], [150, 126.18], [144.61, 152.2], [135.36, 170.71], [126.1, 189.22], [113.09, 200],
+                    [100, 200], [86.91, 200], [73.9, 189.22], [64.64, 170.71], [55.39, 152.2], [50, 126.18], [50, 100]];
 
-        if (points.length !== expected.length) {
-            ok(false);
-        }
+        equal(points.length, expected.length);
 
         for (var i = 0; i < points.length; i++) {
-            close(points[i].x, expected[i].x, ARC_POINT_TOLERANCE);
-            close(points[i].y, expected[i].y, ARC_POINT_TOLERANCE);
+            arrayClose(points[i].toArray(), expected[i], ARC_POINT_TOLERANCE);
         }
     });
 
