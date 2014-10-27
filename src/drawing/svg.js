@@ -59,10 +59,12 @@
         type: "svg",
 
         destroy: function() {
-            this._root.destroy();
-            this._root = null;
-            this._rootElement = null;
-            this.element.off(NS);
+            if (this._root) {
+                this._root.destroy();
+                this._root = null;
+                this._rootElement = null;
+                this.element.off(NS);
+            }
             d.Surface.fn.destroy.call(this);
         },
 
