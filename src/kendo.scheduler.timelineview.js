@@ -1052,11 +1052,6 @@ var __meta__ = {
             return 1;
         },
 
-        _rowCountForLevel: function(level) {
-            var rowLevel = this.rowLevels[level];
-            return rowLevel ? rowLevel.length : 0;
-        },
-
         _updateEventForSelection: function(event) {
             var adjustedEvent = this._adjustEvent(event.clone());
             return adjustedEvent.occurrence;
