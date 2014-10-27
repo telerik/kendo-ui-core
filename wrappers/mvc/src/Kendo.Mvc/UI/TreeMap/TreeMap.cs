@@ -119,7 +119,7 @@ namespace Kendo.Mvc.UI
             {
                 json["colors"] = Colors;
             }
-	    
+            
             if (Type.HasValue)
             {
                 json["type"] = Type;

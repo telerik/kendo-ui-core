@@ -33,6 +33,7 @@ module CodeGen
 
         def to_composite
             type = []
+            toggleable = (@type.include? 'Object') && (@type.include? 'Boolean')
 
             %w{Array Object}.each do |t|
                 if @type.include?(t)
@@ -52,6 +53,8 @@ module CodeGen
                                       :recursive => @recursive,
                                       :content => @content,
                                       :type => type,
+                                      :toggleable => toggleable,
+                                      :default => @default,
                                       :description => @description)
 
             @owner.options.push(parent)

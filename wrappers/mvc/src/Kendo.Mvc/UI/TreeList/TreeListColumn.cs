@@ -72,7 +72,6 @@ namespace Kendo.Mvc.UI
             {
                 json["command"] = command;
             }
-                
             if (Editor.HasValue())
             {
                 json["editor"] = Editor;
@@ -111,8 +110,10 @@ namespace Kendo.Mvc.UI
             if (sortable.Any())
             {
                 json["sortable"] = sortable;
+            } else if (Sortable.Enabled != true) {
+                json["sortable"] = Sortable.Enabled;
             }
-                
+
             if (!string.IsNullOrEmpty(TemplateId))
             {
                 json["template"] = new ClientHandlerDescriptor {
@@ -141,8 +142,10 @@ namespace Kendo.Mvc.UI
             if (filterable.Any())
             {
                 json["filterable"] = filterable;
+            } else if (Filterable.Enabled != true) {
+                json["filterable"] = Filterable.Enabled;
             }
-                
+
         //<< Serialization
         }
     }

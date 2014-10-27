@@ -9,10 +9,14 @@ namespace Kendo.Mvc.UI
     public class <%= self.instance_of?(array_option_class) ? csharp_item_class : csharp_class %> : JsonObject
     {
         public <%= self.instance_of?(array_option_class) ? csharp_item_class : csharp_class %>()
-        {
+        {<% if toggleable %>
+            Enabled = <%= default %>;
+        <% end %>
             //>> Initialization
             //<< Initialization
-        }
+        }<% if toggleable %>
+
+        public bool Enabled { get; set; }<% end %>
 
         //>> Fields
         //<< Fields

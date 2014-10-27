@@ -103,7 +103,6 @@ namespace Kendo.Mvc.UI
             {
                 json["messages"] = messages;
             }
-                
             if (Opacity.HasValue)
             {
                 json["opacity"] = Opacity;

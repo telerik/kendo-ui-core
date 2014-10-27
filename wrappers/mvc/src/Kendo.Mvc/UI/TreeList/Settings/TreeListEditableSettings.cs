@@ -10,10 +10,14 @@ namespace Kendo.Mvc.UI
     {
         public TreeListEditableSettings()
         {
+            Enabled = false;
+        
             //>> Initialization
         
         //<< Initialization
         }
+
+        public bool Enabled { get; set; }
 
         //>> Fields
         

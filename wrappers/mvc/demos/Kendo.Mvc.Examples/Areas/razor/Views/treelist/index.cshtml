@@ -10,6 +10,8 @@
             columns.Add().Field("Extension").Width("140px");
             columns.Add().Field("Address");
         })
+        .Filterable(true)
+        .Sortable(true)
         .DataSource(dataSource => dataSource
             .Read(read => read.Action("All", "TreeList"))
             .Model(m => {

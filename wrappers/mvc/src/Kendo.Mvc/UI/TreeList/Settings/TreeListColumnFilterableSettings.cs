@@ -10,10 +10,14 @@ namespace Kendo.Mvc.UI
     {
         public TreeListColumnFilterableSettings()
         {
+            Enabled = true;
+        
             //>> Initialization
         
         //<< Initialization
         }
+
+        public bool Enabled { get; set; }
 
         //>> Fields
         

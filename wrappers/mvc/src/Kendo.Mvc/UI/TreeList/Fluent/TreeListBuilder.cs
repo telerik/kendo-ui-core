@@ -22,6 +22,7 @@ namespace Kendo.Mvc.UI.Fluent
 
         //>> Fields
         
+        
         /// <summary>
         /// The configuration of the treelist columns. An array of JavaScript objects or strings. A JavaScript objects are interpreted as column configurations. Strings are interpreted as the
 		/// field to which the column is bound. The treelist will create a column for every item of the array.
@@ -67,15 +68,30 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
         
+        
+        /// <summary>
+        /// If set to true the user could sort the treelist by clicking the column header cells. By default sorting is disabled.Can be set to a JavaScript object which represents the sorting configuration.
+        /// </summary>
+        /// <param name="enabled">Enables or disables the sortable option.</param>
+        public TreeListBuilder<T> Sortable(bool enabled)
+        {
+            container.Sortable.Enabled = true;
+            return this;
+        }
+
+        
         /// <summary>
         /// If set to true the user could sort the treelist by clicking the column header cells. By default sorting is disabled.Can be set to a JavaScript object which represents the sorting configuration.
         /// </summary>
         /// <param name="configurator">The action that configures the sortable.</param>
         public TreeListBuilder<T> Sortable(Action<TreeListSortableSettingsBuilder> configurator)
         {
+            container.Sortable.Enabled = true;
+            
             configurator(new TreeListSortableSettingsBuilder(container.Sortable));
             return this;
         }
+        
         
         /// <summary>
         /// If a String value is assigned to the toolbar configuration option, it will be treated as a single string template for the whole treelist Toolbar,
@@ -99,15 +115,41 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
         
+        
+        /// <summary>
+        /// If set to true the user can filter the data source using the grid filter menu. Filtering is disabled by default.Can be set to a JavaScript object which represents the filter menu configuration.
+        /// </summary>
+        /// <param name="enabled">Enables or disables the filterable option.</param>
+        public TreeListBuilder<T> Filterable(bool enabled)
+        {
+            container.Filterable.Enabled = true;
+            return this;
+        }
+
+        
         /// <summary>
         /// If set to true the user can filter the data source using the grid filter menu. Filtering is disabled by default.Can be set to a JavaScript object which represents the filter menu configuration.
         /// </summary>
         /// <param name="configurator">The action that configures the filterable.</param>
         public TreeListBuilder<T> Filterable(Action<TreeListFilterableSettingsBuilder> configurator)
         {
+            container.Filterable.Enabled = true;
+            
             configurator(new TreeListFilterableSettingsBuilder(container.Filterable));
             return this;
         }
+        
+        
+        /// <summary>
+        /// If set to true the user would be able to edit the data to which the treelist is bound to. By default editing is disabled.Can be set to a string ("inline" or "popup") to specify the editing mode. The default editing mode is "inline".Can be set to a JavaScript object which represents the editing configuration.
+        /// </summary>
+        /// <param name="enabled">Enables or disables the editable option.</param>
+        public TreeListBuilder<T> Editable(bool enabled)
+        {
+            container.Editable.Enabled = true;
+            return this;
+        }
+
         
         /// <summary>
         /// If set to true the user would be able to edit the data to which the treelist is bound to. By default editing is disabled.Can be set to a string ("inline" or "popup") to specify the editing mode. The default editing mode is "inline".Can be set to a JavaScript object which represents the editing configuration.
@@ -115,6 +157,8 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="configurator">The action that configures the editable.</param>
         public TreeListBuilder<T> Editable(Action<TreeListEditableSettingsBuilder> configurator)
         {
+            container.Editable.Enabled = true;
+            
             configurator(new TreeListEditableSettingsBuilder(container.Editable));
             return this;
         }

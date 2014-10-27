@@ -165,12 +165,26 @@ module CodeGen::MVC::Wrappers
         })
 
         FLUENT_COMPOSITE_FIELD_DECLARATION = ERB.new(%{
+        <% if toggleable %>
+        /// <summary>
+        /// <%= description.gsub(/\r?\n/, '\n\t\t/// ').html_encode()%>
+        /// </summary>
+        /// <param name="enabled">Enables or disables the <%= csharp_name.downcase %> option.</param>
+        public <%= owner.respond_to?('csharp_item_class') ? owner.csharp_item_class : owner.csharp_class %>Builder<%= owner.csharp_generic_args %> <%= csharp_name%>(bool enabled)
+        {
+            container.<%= csharp_name %>.Enabled = true;
+            return this;
+        }
+
+        <% end %>
         /// <summary>
         /// <%= description.gsub(/\r?\n/, '\n\t\t/// ').html_encode()%>
         /// </summary>
         /// <param name="configurator">The action that configures the <%= csharp_name.downcase %>.</param>
         public <%= owner.respond_to?('csharp_item_class') ? owner.csharp_item_class : owner.csharp_class %>Builder<%= owner.csharp_generic_args %> <%= csharp_name%>(Action<<%= csharp_builder_class %>> configurator)
-        {
+        {<% if toggleable %>
+            container.<%= csharp_name %>.Enabled = true;
+            <% end %>
             configurator(new <%= csharp_builder_class %>(container.<%= csharp_name%>));
             return this;
         }
@@ -308,14 +322,14 @@ module CodeGen::MVC::Wrappers
             }).result(binding)
             end
 
-	    if is_csharp_array
-	    	return ERB.new(%{
+            if is_csharp_array
+                return ERB.new(%{
             if (<%=csharp_name%> != null)
             {
                 json["<%= name %>"] = <%=csharp_name%>;
             }
-	    }).result(binding)
-	    end
+            }).result(binding)
+            end
 
             ERB.new(%{
             if (<%= csharp_name %>.HasValue)
@@ -365,8 +379,10 @@ module CodeGen::MVC::Wrappers
             if (<%= name %>.Any())
             {
                 json["<%= name %>"] = <%= name %>;
+            }<% if toggleable %> else if (<%= csharp_name %>.Enabled != <%= default %>) {
+                json["<%= name %>"] = <%= csharp_name %>.Enabled;
             }
-                }).result(binding)
+<% end %>}).result(binding)
         end
 
         def get_binding

@@ -98,7 +98,6 @@ namespace Kendo.Mvc.UI
             {
                 json["columns"] = columns;
             }
-                
             if (AutoBind.HasValue)
             {
                 json["autoBind"] = AutoBind;
@@ -118,14 +117,15 @@ namespace Kendo.Mvc.UI
             if (sortable.Any())
             {
                 json["sortable"] = sortable;
+            } else if (Sortable.Enabled != false) {
+                json["sortable"] = Sortable.Enabled;
             }
-                
+
             var toolbar = Toolbar.ToJson();
             if (toolbar.Any())
             {
                 json["toolbar"] = toolbar;
             }
-                
             if (Height.HasValue)
             {
                 json["height"] = Height;
@@ -135,14 +135,18 @@ namespace Kendo.Mvc.UI
             if (filterable.Any())
             {
                 json["filterable"] = filterable;
+            } else if (Filterable.Enabled != false) {
+                json["filterable"] = Filterable.Enabled;
             }
-                
+
             var editable = Editable.ToJson();
             if (editable.Any())
             {
                 json["editable"] = editable;
+            } else if (Editable.Enabled != false) {
+                json["editable"] = Editable.Enabled;
             }
-                
+
         //<< Serialization
 
             writer.Write(Initializer.Initialize(Selector, "TreeList", json));

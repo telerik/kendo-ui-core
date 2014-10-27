@@ -153,7 +153,6 @@ namespace Kendo.Mvc.UI
             {
                 json["serialization"] = serialization;
             }
-                
         //<< Serialization
 
             json["tools"] = DefaultToolGroup.Tools.Select(tool =>

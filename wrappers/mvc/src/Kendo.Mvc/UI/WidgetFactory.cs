@@ -1304,9 +1304,9 @@ namespace Kendo.Mvc.UI.Fluent
         {
             return new ColorPickerBuilder(new ColorPicker(ViewContext, Initializer, ViewData));
         }
-
+        
         /// <summary>
-        /// Creates a <see cref="Kendo.Mvc.UI.Diagram{T, T}"/>
+        /// Creates a <see cref="Diagram"/>
         /// </summary>
         /// <example>
         /// <code lang="CS">
@@ -1318,23 +1318,6 @@ namespace Kendo.Mvc.UI.Fluent
         public virtual DiagramBuilder<TShapeModel,TConnectionModel> Diagram<TShapeModel,TConnectionModel>() where TShapeModel : class  where TConnectionModel : class
         {
             return new DiagramBuilder<TShapeModel,TConnectionModel>(new Diagram<TShapeModel,TConnectionModel>(ViewContext, Initializer, UrlGenerator));
-        }
-
-        /// <summary>
-        /// Creates a <see cref="Kendo.Mvc.UI.Diagram"/>
-        /// </summary>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().Diagram()
-        ///             .Name("Diagram")
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public virtual DiagramBuilder<object, object> Diagram()
-        {
-            DiagramBuilder<object, object> builder = Diagram<object, object>();
-
-            return builder;
         }
         
         /// <summary>

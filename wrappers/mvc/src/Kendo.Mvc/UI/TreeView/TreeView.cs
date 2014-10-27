@@ -275,7 +275,6 @@ namespace Kendo.Mvc.UI
             {
                 json["messages"] = messages;
             }
-                
         //<< Serialization
 
             writer.Write(Initializer.Initialize(Selector, "TreeView", json));

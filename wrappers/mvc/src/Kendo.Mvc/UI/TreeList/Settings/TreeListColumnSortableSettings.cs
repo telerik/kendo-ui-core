@@ -10,10 +10,14 @@ namespace Kendo.Mvc.UI
     {
         public TreeListColumnSortableSettings()
         {
+            Enabled = true;
+        
             //>> Initialization
         
         //<< Initialization
         }
+
+        public bool Enabled { get; set; }
 
         //>> Fields
         
