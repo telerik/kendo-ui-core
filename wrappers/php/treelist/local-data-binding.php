@@ -25,20 +25,11 @@ $model = new \Kendo\Data\DataSourceSchemaModel();
 $firstNameField = new \Kendo\Data\DataSourceSchemaModelField('FirstName');
 $firstNameField->type('string');
 
-$lastNameField = new \Kendo\Data\DataSourceSchemaModelField('LastName');
-$lastNameField->type('string');
-
 $positionField = new \Kendo\Data\DataSourceSchemaModelField('Position');
 $positionField->type('string');
 
 $phoneField = new \Kendo\Data\DataSourceSchemaModelField('Phone');
 $phoneField->type('string');
-
-$extentionField = new \Kendo\Data\DataSourceSchemaModelField('Extention');
-$extentionField->type('number');
-
-$addressField = new \Kendo\Data\DataSourceSchemaModelField('Address');
-$addressField->type('string');
 
 $employeeIDField = new \Kendo\Data\DataSourceSchemaModelField('EmployeeID');
 $employeeIDField->type('number');
@@ -52,11 +43,8 @@ $model->id("EmployeeID")
     ->addField($employeeIDField)
     ->addField($parentIdField)
     ->addField($firstNameField)
-    ->addField($lastNameField)
     ->addField($positionField)
-    ->addField($phoneField)
-    ->addField($extentionField)
-    ->addField($addressField);
+    ->addField($phoneField);
 
 $schema = new \Kendo\Data\DataSourceSchema();
 $schema->data('data')
