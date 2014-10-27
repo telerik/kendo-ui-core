@@ -623,7 +623,6 @@
         equal(scheduler.dataSource.at(0).end.getDate(), 3);
     });
 
-
     test("moving event in month view changes its start and end time relatively to the current slot", function() {
         var scheduler = new kendo.ui.Scheduler(div, {
             date: new Date("2013/6/6"),
@@ -1583,6 +1582,48 @@
         equal(scheduler.dataSource.at(1).start.getMinutes(), 30);
     });
 
+    tzTest("Sofia", "moving event in timeline view honours DST", function() {
+        var scheduler = new kendo.ui.Scheduler(div, {
+            date: new Date("2014/3/30"),
+            views: ["timeline"],
+            dataSource: [
+                { start: new Date("2014/3/30"), end: new Date("2014/3/30 1:00"), title: "" }
+            ]
+        });
+
+        var handle = div.find(".k-event");
+
+        var slots = div.find(".k-scheduler-content td");
+
+        dragdrop(scheduler, handle, slots.eq(3));
+
+        equal(scheduler.dataSource.at(0).start.getHours(), 2);
+        equal(scheduler.dataSource.at(0).start.getMinutes(), 0);
+
+        equal(scheduler.dataSource.at(0).end.getHours(), 4);
+        equal(scheduler.dataSource.at(0).end.getMinutes(), 00);
+    });
+
+    test("hint shows start and end time when moving event in timeline view", function() {
+        var scheduler = new kendo.ui.Scheduler(div, {
+            date: new Date("2013/6/6"),
+            startTime: new Date("2013/6/6 10:00"),
+            views: ["timeline"],
+            dataSource: [
+                { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 11:00"), title: "" }
+            ]
+        });
+
+        var handle = div.find(".k-event");
+
+        var slots = div.find(".k-scheduler-content td");
+
+        dragstart(scheduler, handle, handle.offset());
+        drag(scheduler, handle, slots.eq(2).offset());
+
+        equal($(".k-event-drag-hint .k-event-time").text(), "11:00 AM - 12:00 PM");
+    });
+
     function dragcancel(scheduler) {
         var draggable = scheduler._moveDraggable;
         draggable.trigger("dragcancel");
@@ -1608,8 +1649,8 @@
 
         draggable.trigger("dragstart", {
             currentTarget: target,
-            x: { location: offset.left },
-            y: { location: offset.top }
+            x: { startLocation: offset.left },
+            y: { startLocation: offset.top }
         });
     }
 
@@ -1636,8 +1677,8 @@
 
         draggable.trigger("dragend", {
             currentTarget: target,
-            x: { location: offset.left },
-            y: { location: offset.top }
+            x: { startLocation: offset.left },
+            y: { startLocation: offset.top }
         });
     }
 })();

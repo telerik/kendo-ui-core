@@ -669,6 +669,8 @@ var __meta__ = {
         _rect: function(property, start, end, snap) {
             var top;
             var bottom;
+            var left;
+            var right;
             var startSlot = this.start;
             var endSlot = this.end;
 
@@ -683,6 +685,8 @@ var __meta__ = {
             if (snap) {
                 top = startSlot.offsetTop;
                 bottom = endSlot.offsetTop + endSlot[property + "Height"];
+                left = startSlot.offsetLeft;
+                right = endSlot.offsetLeft + endSlot[property + "Width"];
             } else {
                 var startOffset = start - startSlot.start;
 
@@ -703,11 +707,17 @@ var __meta__ = {
                 var endSlotDuration = endSlot.end - endSlot.start;
 
                 bottom = endSlot.offsetTop + endSlot[property + "Height"] - endSlot[property + "Height"] * endOffset / endSlotDuration;
+
+                left = Math.round(startSlot.offsetLeft + startSlot[property + "Width"] * startOffset / startSlotDuration);
+                right = Math.round(endSlot.offsetLeft + endSlot[property + "Width"] - endSlot[property + "Width"] * endOffset / endSlotDuration);
             }
 
             return {
                 top: top,
-                bottom: bottom
+                bottom: bottom,
+                //first column has no left border
+                left: left === 0 ? left : left + 1,
+                right: right
             };
         },
 
@@ -811,8 +821,8 @@ var __meta__ = {
         events: function() {
             return this._events;
         },
-        addTimeSlot: function(element, start, end) {
-            var slot = new TimeSlot(element, start, end, this._groupIndex, this._collectionIndex, this._slots.length);
+        addTimeSlot: function(element, start, end, isHorizontal) {
+            var slot = new TimeSlot(element, start, end, this._groupIndex, this._collectionIndex, this._slots.length, isHorizontal);
 
             this._slots.push(slot);
         },
@@ -876,8 +886,21 @@ var __meta__ = {
     });
 
     var TimeSlot = Slot.extend({
+        init: function(element, start, end, groupIndex, collectionIndex, index, isHorizontal) {
+            Slot.fn.init.apply(this, arguments);
+
+            this.isHorizontal = isHorizontal ? true : false;
+        },
+
         refresh: function() {
-            this.offsetTop = this.element.offsetTop;
+            var element = this.element;
+
+            this.clientWidth = element.clientWidth;
+            this.clientHeight = element.clientHeight;
+            this.offsetWidth = element.offsetWidth;
+            this.offsetHeight = element.offsetHeight;
+            this.offsetTop = element.offsetTop;
+            this.offsetLeft = element.offsetLeft;
         },
 
         offsetX: function(rtl, offset) {
@@ -903,11 +926,18 @@ var __meta__ = {
 
             var offset = $(this.element).offset();
 
-            var difference = y - offset.top;
-
             var duration = this.end - this.start;
+            var difference;
+            var time;
 
-            var time = Math.floor(duration * ( difference / this.offsetHeight));
+            if (this.isHorizontal) {
+                //need update
+                difference =  x - offset.left;
+                time = Math.floor(duration * ( difference / this.offsetWidth));
+            } else {
+                difference = y - offset.top;
+                time = Math.floor(duration * ( difference / this.offsetHeight));
+            }
 
             return this.start + time;
         },
@@ -919,11 +949,19 @@ var __meta__ = {
 
             var offset = $(this.element).offset();
 
-            var difference = y - offset.top;
-
             var duration = this.end - this.start;
+            var difference;
+            var time;
 
-            var time = Math.floor(duration * ( difference / this.offsetHeight));
+
+            if (this.isHorizontal) {
+                //need update
+                difference = x - offset.left;
+                time = Math.floor(duration * ( difference / this.offsetWidth));
+            } else {
+                difference = y - offset.top;
+                time = Math.floor(duration * ( difference / this.offsetHeight));
+            }
 
             return this.start + time;
         }
@@ -1229,6 +1267,7 @@ var __meta__ = {
 
         moveToEvent: function(selection, prev) {
             var groupIndex = selection.groupIndex;
+
             var group = this.groups[groupIndex];
             var slot = group.ranges(selection.start, selection.end, selection.isAllDay, false)[0].start;
 
@@ -1822,6 +1861,18 @@ var __meta__ = {
                     return isDay ? collection.first() : collection.at(slot.index);
                 }
             }
+        },
+
+        _updateEventForMove: function (event) {
+            return;
+        },
+
+        _updateEventForResize: function (event) {
+            return;
+        },
+
+        _updateEventForSelection: function (event) {
+            return event;
         }
     });
 

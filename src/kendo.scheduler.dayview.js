@@ -226,7 +226,10 @@ var __meta__ = {
                 if(slotElement) {
                     var element = $("<div class='k-current-time'></div>");
                     element.appendTo(this.times).css({
-                        top: Math.round(ranges[0].innerRect(currentTime, new Date(currentTime.getTime() + 1), false).top)
+                        top: Math.round(ranges[0].innerRect(currentTime, new Date(currentTime.getTime() + 1), false).top),
+                        height: "1px",
+                        right: "1px",
+                        left: 0
                     });
                 }
             }
