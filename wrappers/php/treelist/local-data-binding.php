@@ -1,20 +1,11 @@
 <?php
 require_once '../lib/DataSourceResult.php';
 require_once '../lib/Kendo/Autoload.php';
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    header('Content-Type: application/json');
-
-    $request = json_decode(file_get_contents('php://input'));
-
-    $result = new DataSourceResult('sqlite:..//sample.db');
-
-    echo json_encode($result->read('EmployeeDirectory', array('EmployeeID', 'ReportsTo', 'FirstName', 'LastName', 'Position', 'Phone', 'Extension', 'Address'), $request));
-
-    exit;
-}
-
 require_once '../include/header.php';
+
+$result = new DataSourceResult('sqlite:..//sample.db');
+
+$data = $result->read('EmployeeDirectory', array('EmployeeID', 'ReportsTo', 'FirstName', 'LastName', 'Position', 'Phone', 'Extension', 'Address'));
 
 $transport = new \Kendo\Data\DataSourceTransport();
 
@@ -73,20 +64,14 @@ $schema->data('data')
 
 $dataSource = new \Kendo\Data\DataSource();
 
-$dataSource->transport($transport)
+$dataSource->data($data)
            ->schema($schema);
 
 $treeList = new \Kendo\UI\TreeList('treelist');
 
 $firstName = new \Kendo\UI\TreeListColumn();
 $firstName->field('FirstName')
-            ->title('First Name')
-            ->width(220);
-
-$lastName = new \Kendo\UI\TreeListColumn();
-$lastName->field('LastName')
-            ->title('Last Name')
-            ->width(160);
+            ->title('Name');
 
 $position = new \Kendo\UI\TreeListColumn();
 $position->field('Position');
@@ -95,25 +80,14 @@ $phone = new \Kendo\UI\TreeListColumn();
 $phone->field('Phone')
             ->width(200);
 
-$extension = new \Kendo\UI\TreeListColumn();
-$extension->field('Extension')
-            ->width(140);
-
-$address = new \Kendo\UI\TreeListColumn();
-$address->field('Address');
-
-$treeList->addColumn($firstName, $lastName, $position, $phone, $extension, $address)
+$treeList->addColumn($position, $firstName, $phone)
      ->dataSource($dataSource)
-     ->sortable(true)
-     ->filterable(true)
      ->attr('style', 'height:540px');
 
 ?>
 
-<div class="demo-section k-header">
 <?php
 echo $treeList->render();
 ?>
-</div>
 
 <?php require_once '../include/footer.php'; ?>
