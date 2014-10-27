@@ -3157,6 +3157,17 @@
         ]
       },
       {
+        "text": "Timeline view",
+        "url": "scheduler/timeline",
+        "disableInMobile": true,
+        "title": {
+            "kendo-ui": "Timeline view in Kendo UI Scheduler"
+        },
+        "meta": {
+            "kendo-ui": "This demo shows the Timeline, Timeline Week and Timeline Work Week views."
+        }
+      },
+      {
         "text": "Binding to Telerik Backend Services",
         "url": "scheduler/backend-services",
         "disableInMobile": true,
