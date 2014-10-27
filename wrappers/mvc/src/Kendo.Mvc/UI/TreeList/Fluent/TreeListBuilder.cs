@@ -121,7 +121,28 @@ namespace Kendo.Mvc.UI.Fluent
         
         //<< Fields
 
+        /// <summary>
+        /// Configure the DataSource of the component
+        /// </summary>
+        /// <param name="configurator">The action that configures the <see cref="DataSource"/>.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().TreeMap()
+        ///     .Name("treeMap")
+        ///     .DataSource(dataSource => dataSource
+        ///         .Read(read => read
+        ///             .Action("_PopulationUS", "TreeMap")
+        ///         )
+        ///     )
+        ///  %&gt;
+        /// </code>
+        /// </example>
+        public TreeListBuilder<T> DataSource(Action<TreeListAjaxDataSourceBuilder<T>> configurator)
+        {
+            configurator(new TreeListAjaxDataSourceBuilder<T>(Component.DataSource, this.Component.ViewContext, this.Component.urlGenerator));
 
+            return this;
+        }
         
         /// <summary>
         /// Configures the client-side events.

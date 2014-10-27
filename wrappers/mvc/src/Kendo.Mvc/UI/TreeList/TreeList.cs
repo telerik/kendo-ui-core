@@ -11,12 +11,17 @@ namespace Kendo.Mvc.UI
 
     public class TreeList<T> : WidgetBase where T : class
     {
-        private readonly IUrlGenerator urlGenerator;
+        public IUrlGenerator urlGenerator;
 
         public TreeList(ViewContext viewContext, IJavaScriptInitializer initializer, IUrlGenerator urlGenerator)
             : base(viewContext, initializer)
         {
             this.urlGenerator = urlGenerator;
+
+            DataSource = new DataSource();
+            DataSource.Type = DataSourceType.Ajax;
+            DataSource.Schema.Model = new TreeListModelDescriptor(typeof(T));
+
 //>> Initialization
         
             Columns = new List<TreeListColumn>();
@@ -30,6 +35,12 @@ namespace Kendo.Mvc.UI
             Toolbar = new List<TreeListToolba>();
                 
         //<< Initialization
+        }
+
+        public DataSource DataSource
+        {
+            get;
+            private set;
         }
 
 //>> Fields
@@ -77,6 +88,8 @@ namespace Kendo.Mvc.UI
         public override void WriteInitializationScript(TextWriter writer)
         {
             var json = new Dictionary<string, object>(Events);
+
+            json["dataSource"] = (Dictionary<string, object>)DataSource.ToJson();
 
 //>> Serialization
         

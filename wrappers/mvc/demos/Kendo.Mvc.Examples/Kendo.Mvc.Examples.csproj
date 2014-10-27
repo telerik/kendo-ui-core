@@ -3335,6 +3335,9 @@
   <ItemGroup>
     <Content Include="Areas\razor\Views\scheduler\timeline.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\treelist\index.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
