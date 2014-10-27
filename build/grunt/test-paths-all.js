@@ -24,6 +24,7 @@ exports.afterTestFiles = [
     'demos/mvc/content/mobilethemebuilder/scripts/colorengine.js',
     'demos/mvc/content/mobilethemebuilder/scripts/gradientengine.js',
 
+    'tests/dv-export-tests.js',
     'tests/chart/util.js',
     'tests/chart/base-line-chart.js',
     'tests/map/util.js',

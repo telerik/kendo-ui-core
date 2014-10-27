@@ -367,37 +367,16 @@
             }, options));
         }
 
-        // ------------------------------------------------------------
-        var SVGSurface,
-            CanvasSurface,
-            supportsCanvas;
+        exportTests("Chart", createChart);
 
+        // ------------------------------------------------------------
         module("Export", {
             setup: function() {
                 setupChart();
-
-                SVGSurface = draw.svg.Surface;
-                CanvasSurface = draw.canvas.Surface;
-                supportsCanvas = kendo.support.canvas;
             },
             teardown: function() {
-                draw.svg.Surface = SVGSurface;
-                draw.canvas.Surface = CanvasSurface;
-                kendo.support.canvas = supportsCanvas;
-
                 destroyChart();
             }
-        });
-
-        test("svg() exports SVG", function() {
-            ok(chart.svg().match(/<svg.*<\/svg>/));
-        });
-
-        test("svg() throws error if SVG Surface is not loaded", function() {
-            draw.svg.Surface = undefined;
-
-            throws(function() { chart.svg() },
-                   "SVG Export failed. Unable to export instantiate kendo.drawing.svg.Surface");
         });
 
         test("svg() does not replace model", function() {
@@ -422,54 +401,6 @@
             ok(chart.svg().indexOf("Foo &amp; Bar") > -1);
         });
 
-        test("exportVisual returns Group", function() {
-            ok(chart.exportVisual() instanceof draw.Group);
-        });
-
-        test("exportSVG forwards visual to drawing.exportSVG", function() {
-            var visual = {};
-            chart.exportVisual = function() { return visual; };
-
-            stubMethod(draw, "exportSVG", function(group) {
-                equal(group, visual);
-            }, function() {
-                chart.exportSVG();
-            });
-        });
-
-        test("exportSVG forwards options to drawing.exportSVG", function() {
-            var ref = {};
-
-            stubMethod(draw, "exportSVG", function(group, options) {
-                equal(options, ref);
-            }, function() {
-                chart.exportSVG(ref);
-            });
-        });
-
-        test("exportSVG exports SVG", function() {
-            chart.exportSVG().done(function(svg) {
-                contains(svg, "<?xml version='1.0' ?><svg");
-            });
-        });
-
-        test("imageDataURL() exports image/png", function() {
-            contains(chart.imageDataURL(), "image/png" );
-        });
-
-        test("imageDataURL() returns null if Canvas is not supported", function() {
-            kendo.support.canvas = false;
-
-            equal(chart.imageDataURL(), null);
-        });
-
-        test("imageDataURL() throws error if Canvas surface is not loaded", function() {
-            draw.canvas.Surface = undefined;
-
-            throws(function() { chart.imageDataURL() },
-                   "Image Export failed. Unable to export instantiate kendo.drawing.canvas.Surface");
-        });
-
         test("imageDataURL() does not replace model", function() {
             var oldModel = chart._model;
             chart.imageDataURL();
@@ -481,61 +412,6 @@
             chart.imageDataURL();
             ok(oldSurface === chart.surface);
         });
-
-        test("exportImage forwards visual to drawing.exportImage", function() {
-            var visual = {};
-            chart.exportVisual = function() { return visual; };
-
-            stubMethod(draw, "exportImage", function(group) {
-                equal(group, visual);
-            }, function() {
-                chart.exportImage();
-            });
-        });
-
-        test("exportImage forwards options to drawing.exportImage", function() {
-            var ref = {};
-
-            stubMethod(draw, "exportImage", function(group, options) {
-                equal(options, ref);
-            }, function() {
-                chart.exportImage(ref);
-            });
-        });
-
-        test("exportImage exports PNG", function() {
-            chart.exportImage().done(function(data) {
-                contains(data, "image/png");
-            });
-        });
-
-        test("exportPDF forwards visual to drawing.exportPDF", function() {
-            var visual = {};
-            chart.exportVisual = function() { return visual; };
-
-            stubMethod(draw, "exportPDF", function(group) {
-                equal(group, visual);
-            }, function() {
-                chart.exportPDF();
-            });
-        });
-
-        test("exportPDF forwards options to drawing.exportPDF", function() {
-            var ref = {};
-
-            stubMethod(draw, "exportPDF", function(group, options) {
-                equal(options, ref);
-            }, function() {
-                chart.exportPDF(ref);
-            });
-        });
-
-        test("exportPDF exports PDF", function() {
-            chart.exportPDF().done(function(data) {
-                contains(data, "application/pdf");
-            });
-        });
-
     })();
 
     (function() {
