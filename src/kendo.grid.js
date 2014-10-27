@@ -2479,17 +2479,19 @@ var __meta__ = {
 
                 container = that.editView ? that.editView.element : that._editContainer;
 
-                if (!this._editCancelClickHandler) {
-                    this._editCancelClickHandler = proxy(this._editCancelClick, this);
+                if (container) {
+                    if (!this._editCancelClickHandler) {
+                        this._editCancelClickHandler = proxy(this._editCancelClick, this);
+                    }
+
+                    container.on(CLICK + NS, "a.k-grid-cancel", this._editCancelClickHandler);
+
+                    if (!this._editUpdateClickHandler) {
+                        this._editUpdateClickHandler = proxy(this._editUpdateClick, this);
+                    }
+
+                    container.on(CLICK + NS, "a.k-grid-update", this._editUpdateClickHandler);
                 }
-
-                container.on(CLICK + NS, "a.k-grid-cancel", this._editCancelClickHandler);
-
-                if (!this._editUpdateClickHandler) {
-                    this._editUpdateClickHandler = proxy(this._editUpdateClick, this);
-                }
-
-                container.on(CLICK + NS, "a.k-grid-update", this._editUpdateClickHandler);
             }
         },
 

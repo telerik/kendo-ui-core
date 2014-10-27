@@ -624,4 +624,17 @@
         ok(!$._data(tr[0], "events"));
     });
 
+    test("calling cancelRow from within the edit event does not throw error", 1, function() {
+        var grid = setup({ columns: ["foo", "name"], editable: "inline" }),
+            tr = table.find("tr:first");
+
+        grid.bind("edit", function() {
+            grid.cancelRow();
+        });
+
+        grid.editRow(tr);
+
+        ok(true);
+    });
+
 })();
