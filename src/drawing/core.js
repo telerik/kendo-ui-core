@@ -78,7 +78,7 @@
             var node;
 
             while (!node && domNode.length > 0) {
-                node = domNode[0]._kendoNode || domNode.data("kendoNode");
+                node = domNode[0]._kendoNode;
                 if (domNode.is(this.element) || domNode.length === 0) {
                     break;
                 }
