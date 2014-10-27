@@ -1237,7 +1237,7 @@
 
 
     var EMPTY_CLIP = "inherit";
-    if (kendo.support.browser.version < 8) {
+    if (kendo.support.browser.msie && kendo.support.browser.version < 8) {
         EMPTY_CLIP = "rect(auto auto auto auto)";
     }
 
