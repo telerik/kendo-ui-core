@@ -13,7 +13,7 @@
         kendo = window.kendo,
         Class = kendo.Class,
         deepExtend = kendo.deepExtend,
-        ObserversMixin = kendo.mixins.ObserversMixin
+        ObserversMixin = kendo.mixins.ObserversMixin,
 
         util = kendo.util,
         defined = util.defined,
