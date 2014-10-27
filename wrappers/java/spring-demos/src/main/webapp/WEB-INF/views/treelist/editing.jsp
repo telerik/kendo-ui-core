@@ -12,6 +12,9 @@
 <demo:header />
 
 <kendo:treeList name="treelist" editable="true" height="540" >
+	<kendo:treeList-toolbar>
+		<kendo:treeList-toolbarItem name="create"/>
+	</kendo:treeList-toolbar>
 	<kendo:treeList-columns>
 		<kendo:treeList-column field="firstName" title="First Name" width="220"></kendo:treeList-column>
 		<kendo:treeList-column field="lastName" title="Last Name" width="100"></kendo:treeList-column>
@@ -21,7 +24,7 @@
 		<kendo:treeList-column field="extension" title="Extension" width="140"></kendo:treeList-column>	
 		<kendo:treeList-column title="Edit" width="200">			
 			<kendo:treeList-column-command>
-				<kendo:treeList-column-commandItem name="edit"></kendo:treeList-column-commandItem>
+				<kendo:treeList-column-commandItem name="edit"></kendo:treeList-column-commandItem>				
 				<kendo:treeList-column-commandItem name="destroy"></kendo:treeList-column-commandItem>
 			</kendo:treeList-column-command>
 		</kendo:treeList-column>	
@@ -32,6 +35,7 @@
                     <kendo:dataSource-schema-model-fields>
                     	<kendo:dataSource-schema-model-field name="employeeId" type="number" editable="false" nullable="false"/>                    	
                     	<kendo:dataSource-schema-model-field name="parentId" from="reportsTo" type="number" nullable="true"/>
+                    	<kendo:dataSource-schema-model-field name="reportsTo" type="number" nullable="true"/>
                         <kendo:dataSource-schema-model-field name="firstName" type="string">
                         	<kendo:dataSource-schema-model-field-validation required="true" />
                         </kendo:dataSource-schema-model-field>
@@ -48,12 +52,10 @@
                 </kendo:dataSource-schema-model>
             </kendo:dataSource-schema>
             <kendo:dataSource-transport>                
-                <kendo:dataSource-transport-read url="${readUrl}" dataType="json" type="POST" contentType="application/json"/>
-                <!--  
+                <kendo:dataSource-transport-read url="${readUrl}" dataType="json" type="POST" contentType="application/json"/>                
                 <kendo:dataSource-transport-create url="${createUrl}" dataType="json" type="POST" contentType="application/json" />
                 <kendo:dataSource-transport-update url="${updateUrl}" dataType="json" type="POST" contentType="application/json" />
-                <kendo:dataSource-transport-destroy url="${destroyUrl}" dataType="json" type="POST" contentType="application/json" />
-                -->
+                <kendo:dataSource-transport-destroy url="${destroyUrl}" dataType="json" type="POST" contentType="application/json" />                
                 <kendo:dataSource-transport-parameterMap>
                 	<script>
 	                	function parameterMap(options,type) { 	                		

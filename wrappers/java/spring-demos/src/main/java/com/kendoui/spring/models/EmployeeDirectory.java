@@ -56,7 +56,7 @@ public class EmployeeDirectory {
         this.lastName = lastName;
     }
     
-    @Column(name="ReportsTo", nullable = true, insertable=false, updatable=false)    
+    @Column(name="ReportsTo", nullable = true)    
     public Integer getReportsTo() {
         return reportsTo;
     }
