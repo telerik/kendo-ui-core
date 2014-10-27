@@ -1007,9 +1007,17 @@
     }
 
     function renderText(element, node, group) {
+        var style = getComputedStyle(element);
+
+        if (parseFloat(getPropertyValue(style, "text-indent")) < -500) {
+            // assume it should not be displayed.  the slider's
+            // draggable handle displays a Drag text for some reason,
+            // having text-indent: -3333px.
+            return;
+        }
+
         var text = node.data;
         var range = element.ownerDocument.createRange();
-        var style = getComputedStyle(element);
         var align = getPropertyValue(style, "text-align");
         var isJustified = align == "justify";
 
