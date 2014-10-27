@@ -5521,15 +5521,15 @@ var __meta__ = {
 
         _updateHeader: function(groups) {
             var that = this,
-                container = that._isLocked() ? that.lockedHeader : that.thead,
+                container = that._isLocked() ? that.lockedHeader.find("thead") : that.thead,
                 filterCells = container.find("tr.k-filter-row").find("th.k-group-cell").length,
                 length = container.find("tr:first").find("th.k-group-cell").length,
-                rows = container.find("tr").filter(function() {
+                rows = container.children("tr").filter(function() {
                     return !$(this).children(":visible").length;
                 });
 
             if(groups > length) {
-                $(new Array(groups - length + 1).join('<th class="k-group-cell k-header">&nbsp;</th>')).prependTo(container.find("tr:not(.k-filter-row)"));
+                $(new Array(groups - length + 1).join('<th class="k-group-cell k-header">&nbsp;</th>')).prependTo(container.children("tr:not(.k-filter-row)"));
                 rows.find("th.k-group-cell").hide();
             } else if(groups < length) {
                 container.find("tr").each(function() {
