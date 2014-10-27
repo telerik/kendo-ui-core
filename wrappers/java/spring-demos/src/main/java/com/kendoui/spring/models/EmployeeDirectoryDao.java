@@ -7,5 +7,5 @@ public interface EmployeeDirectoryDao {
     
     public List<EmployeeDirectory> getList();
     
-    public List<EmployeeDirectory> getByEmployeeId(Integer employeeId);
+    public List<DetailedEmployeeDirectory> getByEmployeeId(Integer employeeId);
 }

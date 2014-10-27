@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.kendoui.spring.models.EmployeeDirectory;
+import com.kendoui.spring.models.DetailedEmployeeDirectory;
 import com.kendoui.spring.models.EmployeeDirectoryDao;
 
 
@@ -27,7 +27,7 @@ public class RemoteDataBindingController {
     }
         
     @RequestMapping(value = "/read", method = RequestMethod.POST)
-    public @ResponseBody List<EmployeeDirectory> read(@RequestBody Map<String, Object> model) {
+    public @ResponseBody List<DetailedEmployeeDirectory> read(@RequestBody Map<String, Object> model) {
         return employeeDirectory.getByEmployeeId((Integer)model.get("id"));
     }   
 }

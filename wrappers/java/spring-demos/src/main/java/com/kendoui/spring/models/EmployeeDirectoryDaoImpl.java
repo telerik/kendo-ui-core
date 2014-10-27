@@ -29,8 +29,8 @@ public class EmployeeDirectoryDaoImpl implements EmployeeDirectoryDao {
     
     @SuppressWarnings("unchecked")
     @Override
-    public List<EmployeeDirectory> getByEmployeeId(Integer employeeId) {
-        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(EmployeeDirectory.class);
+    public List<DetailedEmployeeDirectory> getByEmployeeId(Integer employeeId) {
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(DetailedEmployeeDirectory.class);
         
         if (employeeId == null) {
             criteria.add(Restrictions.isNull("reportsTo"));       
