@@ -14,6 +14,7 @@ var __meta__ = {
 
     // Imports ================================================================
     var math = Math,
+        map = $.map,
 
         kendo = window.kendo,
         Widget = kendo.ui.Widget,
@@ -39,6 +40,7 @@ var __meta__ = {
         rotatePoint = dataviz.rotatePoint,
         Point2D = dataviz.Point2D,
         round = dataviz.round,
+        valueOrDefault = dataviz.valueOrDefault,
         uniqueId = dataviz.uniqueId;
 
     // Constants ==============================================================
@@ -790,15 +792,176 @@ var __meta__ = {
             return result;
         },
 
-        getViewElements: function(view) {
-            var scale = this,
-                elements = NumericAxis.fn.getViewElements.call(scale, view);
+        renderTicks: function(view) {
+            var axis = this,
+                ticks = [],
+                options = axis.options,
+                lineBox = axis.lineBox(),
+                mirror = options.labels.mirror,
+                majorUnit = options.majorTicks.visible ? options.majorUnit : 0,
+                tickLineOptions= {
+                    _alignLines: options._alignLines,
+                    vertical: options.vertical
+                },
+                start, end;
 
-            append(elements, scale.renderRanges(view));
+            function render(tickPositions, tickOptions) {
+                var i, count = tickPositions.length;
+
+                if (tickOptions.visible) {
+                    for (i = tickOptions.skip; i < count; i += tickOptions.step) {
+                        if (i % tickOptions.skipUnit === 0) {
+                            continue;
+                        }
+
+                        tickLineOptions.tickX = mirror ? lineBox.x2 : lineBox.x2 - tickOptions.size;
+                        tickLineOptions.tickY = mirror ? lineBox.y1 - tickOptions.size : lineBox.y1;
+                        tickLineOptions.position = tickPositions[i];
+
+                        ticks.push(createAxisTick(view, tickLineOptions, tickOptions));
+                    }
+                }
+            }
+
+            render(axis.getMajorTickPositions(), options.majorTicks);
+            render(axis.getMinorTickPositions(), deepExtend({}, {
+                    skipUnit: majorUnit / options.minorUnit
+                }, options.minorTicks));
+
+            return ticks;
+        },
+
+        renderLine: function(view) {
+            var axis = this,
+                options = axis.options,
+                line = options.line,
+                lineBox = axis.lineBox(),
+                lineOptions,
+                elements = [];
+
+            if (line.width > 0 && line.visible) {
+                lineOptions = {
+                    strokeWidth: line.width,
+                    stroke: line.color,
+                    dashType: line.dashType,
+                    zIndex: line.zIndex,
+                    align: options._alignLines
+                };
+
+                elements.push(view.createLine(
+                    lineBox.x1, lineBox.y1, lineBox.x2, lineBox.y2,
+                    lineOptions));
+
+                append(elements, axis.renderTicks(view));
+            }
+
+            return elements;
+        },
+
+        renderPlotBands: function(view) {
+            var axis = this,
+                options = axis.options,
+                plotBands = options.plotBands || [],
+                vertical = options.vertical,
+                result = [],
+                plotArea = axis.plotArea,
+                slotX, slotY, from, to;
+
+            if (plotBands.length) {
+                var range = this.range();
+                result = map(plotBands, function(item) {
+                    from = valueOrDefault(item.from, MIN_VALUE);
+                    to = valueOrDefault(item.to, MAX_VALUE);
+                    var element = [];
+
+                    if (isInRange(from, range) || isInRange(to, range)) {
+                        if (vertical) {
+                            slotX = plotArea.axisX.lineBox();
+                            slotY = axis.getSlot(item.from, item.to, true);
+                        } else {
+                            slotX = axis.getSlot(item.from, item.to, true);
+                            slotY = plotArea.axisY.lineBox();
+                        }
+
+                        element = view.createRect(
+                                Box2D(slotX.x1, slotY.y1, slotX.x2, slotY.y2),
+                                { fill: item.color, fillOpacity: item.opacity, zIndex: -1 });
+                    }
+
+                    return element;
+                });
+            }
+
+            return result;
+        },
+
+        renderBackground: function(view) {
+            var axis = this,
+                options = axis.options,
+                background = options.background,
+                box = axis.box,
+                elements = [];
+
+            if (background) {
+                elements.push(
+                    view.createRect(box, {
+                        fill: background, zIndex: -1
+                    })
+                );
+            }
+
+            return elements;
+        },
+
+        getViewElements: function(view) {
+            var axis = this,
+                elements = ChartElement.fn.getViewElements.call(axis, view);
+
+            append(elements, axis.renderLine(view));
+            append(elements, axis.renderPlotBands(view));
+            append(elements, axis.renderBackground(view));
+            append(elements, axis.renderRanges(view));
 
             return elements;
         }
     });
+
+    var LegacyExportMixin = {
+        svg: function() {
+            if (dataviz.SVGView) {
+                var model = this._getModel(),
+                    view = new dataviz.SVGView(deepExtend({ encodeText: true }, model.options));
+
+                view.load(model);
+
+                return view.render();
+            } else {
+                throw new Error("Unable to create SVGView. Check that kendo.dataviz.svg.js is loaded.");
+            }
+        },
+
+        imageDataURL: function() {
+            if (dataviz.CanvasView) {
+                if (dataviz.supportsCanvas()) {
+                    var model = this._getModel(),
+                        container = document.createElement("div"),
+                        view = new dataviz.CanvasView(model.options);
+
+                    view.load(model);
+
+                    return view.renderTo(container).toDataURL();
+                } else {
+                    kendo.logToConsole(
+                        "Warning: Unable to generate image. The browser does not support Canvas.\n" +
+                        "User agent: " + navigator.userAgent);
+
+                    return null;
+                }
+            } else {
+                throw new Error("Unable to create CanvasView. Check that kendo.dataviz.canvas.js is loaded.");
+            }
+        }
+    };
 
     var LinearPointer = Pointer.extend({
         init: function(scale, options) {
@@ -1308,7 +1471,7 @@ var __meta__ = {
             return { width: width, height: height };
         }
     });
-    deepExtend(Gauge.fn, dataviz.ExportMixin);
+    deepExtend(Gauge.fn, LegacyExportMixin);
 
     var RadialGauge = Gauge.extend({
         init: function(element, options) {
@@ -1404,6 +1567,32 @@ var __meta__ = {
         return range;
     }
 
+    function createAxisTick(view, options, tickOptions) {
+        var tickX = options.tickX,
+            tickY = options.tickY,
+            position = options.position,
+            start, end;
+
+        if (options.vertical) {
+            start = Point2D(tickX, position);
+            end = Point2D(tickX + tickOptions.size, position);
+        } else {
+            start = Point2D(position, tickY);
+            end = Point2D(position, tickY + tickOptions.size);
+        }
+
+        return view.createLine(
+            start.x, start.y,
+            end.x, end.y, {
+                strokeWidth: tickOptions.width,
+                stroke: tickOptions.color,
+                align: options._alignLines
+            });
+    }
+
+    function isInRange(value, range) {
+        return value >= range.min && value <= range.max;
+    }
 
     var RadialPointerAnimationDecorator = animationDecorator(RADIAL_POINTER, RotationAnimation);
     var ArrowPointerAnimationDecorator = animationDecorator(ARROW_POINTER, ArrowAnimation);
