@@ -109,7 +109,6 @@
         var slots = div.find(".k-scheduler-content td");
 
         var handle = div.find(".k-resize-s");
-
         resizestart(scheduler, handle, handle.offset());
         resize(scheduler, handle, slots.eq(2).offset());
 
@@ -288,8 +287,8 @@
 
         draggable.trigger("dragstart", {
             currentTarget: target,
-            x: { location: offset.left },
-            y: { location: offset.top }
+            x: { startLocation: offset.left },
+            y: { startLocation: offset.top }
         });
     }
 
@@ -318,8 +317,8 @@
 
         draggable.trigger("dragstart", {
             currentTarget: target,
-            x: { location: offset.left },
-            y: { location: offset.top }
+            x: { startLocation: offset.left },
+            y: { startLocation: offset.top }
         });
     }
 
