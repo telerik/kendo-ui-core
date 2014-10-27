@@ -75,5 +75,13 @@
   <body>
       <div id="chart"></div>
       <button>redraw</button>
+      <button onclick="pdf()">pdf</button>
+      <script>
+        function pdf() {
+          $("#chart").getKendoChart().exportPDF().then(function(data){
+            kendo.saveAs({ dataURI: data, fileName: "kendo.pdf" });
+          });
+        }
+      </script>
   </body>
 </html>

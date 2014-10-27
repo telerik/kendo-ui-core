@@ -266,7 +266,7 @@
         // XXX: only Path supported at the moment.
         var clip = element.clip();
         if (clip) {
-            drawPath(clip, page, pdf);
+            _drawPath(clip, page, pdf);
             page.clip();
             // page.setStrokeColor(Math.random(), Math.random(), Math.random());
             // page.setLineWidth(1);
@@ -276,7 +276,7 @@
 
     function shouldDraw(thing) {
             return thing &&
-                !/^(none|transparent)$/i.test(thing.color) &&
+            thing.color && !/^(none|transparent)$/i.test(thing.color) &&
                 (thing.width == null || thing.width > 0) &&
                 (thing.opacity == null || thing.opacity > 0);
         }
@@ -332,7 +332,7 @@
         return false;
     }
 
-    function drawPath(element, page, pdf) {
+    function _drawPath(element, page, pdf) {
         var segments = element.segments;
         if (segments.length === 0) {
             return;
@@ -362,13 +362,17 @@
             page.close();
         }
         }
+    }
+
+    function drawPath(element, page, pdf) {
+        _drawPath(element, page, pdf);
         maybeFillStroke(element, page, pdf);
     }
 
     function drawMultiPath(element, page, pdf) {
         var paths = element.paths;
         for (var i = 0; i < paths.length; ++i) {
-            drawPath(paths[i], page, pdf);
+            _drawPath(paths[i], page, pdf);
         }
         maybeFillStroke(element, page, pdf);
     }
