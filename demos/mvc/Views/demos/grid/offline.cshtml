@@ -1,10 +1,24 @@
 <div id="example">
-    Online: <input id="online" type="checkbox" checked>
-    <div class="k-header demo-section" style="margin:0.5em auto">
+    
+    <div class="box">
+        <h4>Information</h4>
+        <p>This example demonstrates the offline support of the Kendo DataSource.</p>
+        <ol>
+            <li>1. Use the switch to go in offline mode.</li>
+            <li>2. Create, update or destroy grid items.</li>
+            <li>3. Use the switch to go in online mode. The data source will sync all changes made while offline.</li>
+        </ol>
+    </div>
+    
+    <div class="demo-section" style="margin:0.5em auto">
         <div class="box-col">
             <div style="width: 700px" id="grid"></div>
         </div>
         <div class="box-col console-section">
+            <h4>Online</h4>
+            <div style="padding-bottom: 30px;">
+                <input id="online" type="checkbox" checked>
+            </div>
             <h4>Console</h4>
             <div class="console"></div>
         </div>
@@ -97,13 +111,4 @@
             editable: "inline"
         });
     </script>
-     <div class="box">
-        <h4>Information</h4>
-        <p>This example demonstrates the offline support of the Kendo DataSource.</p>
-        <ol>
-            <li>Use the switch to go in offline mode.</li>
-            <li>Create, update or destroy grid items.</li>
-            <li>Use the switch to go in online mode. The data source will sync all changes made while offline.</li>
-        </ol>
-    </div>
 </div>
