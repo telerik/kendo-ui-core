@@ -607,6 +607,13 @@
         equal(grid.dataSource.sort()[0].dir, "asc");
     });
 
+    test("enter key in input in the header in empty grid should not throw error", 1, function() {
+        var grid = setup({ autoBind: false, columns: [ { field: "foo" }], filterable: { mode: "row" } });
+        grid.thead.find("input").focus().press(kendo.keys.ENTER);
+
+        ok(true);
+    });
+
     test("enter key on button column", function() {
         var grid = setup({
             columns: [ {

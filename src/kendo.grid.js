@@ -3480,6 +3480,11 @@ var __meta__ = {
                     handled = true;
                 } else if (key == keys.ENTER || keys.F2 == key) {
                     current = current ? current : table.find(FIRSTNAVITEM);
+
+                    if (!current.length) {
+                        return;
+                    }
+
                     if (!$(e.target).is("table") && !$.contains(current[0], e.target)) {
                         current = $(e.target).closest("[role=gridcell]");
                     }
