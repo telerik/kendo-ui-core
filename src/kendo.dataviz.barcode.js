@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.dataviz.core", "./kendo.dataviz.svg", "./kendo.dataviz.canvas" ], f);
+    define([ "./kendo.dataviz.core", "./kendo.drawing" ], f);
 })(function(){
 
 var __meta__ = {
@@ -7,19 +7,24 @@ var __meta__ = {
     name: "Barcode",
     category: "dataviz",
     description: "Barcode widget",
-    depends: [ "dataviz.core", "dataviz.svg", "dataviz.canvas" ]
+    depends: [ "dataviz.core", "drawing" ]
 };
 
 (function ($, undefined) {
     var kendo = window.kendo,
+        Widget = kendo.ui.Widget,
+
         extend = $.extend,
         deepExtend = kendo.deepExtend,
         inArray = $.inArray,
         isPlainObject = $.isPlainObject,
+
+        draw = kendo.drawing,
+        geom = kendo.geometry,
+        util = kendo.util,
+        defined = util.defined,
+        append = util.append,
         dataviz = kendo.dataviz,
-        defined = dataviz.defined,
-        append = dataviz.append,
-        Widget = kendo.ui.Widget,
         Box2D = dataviz.Box2D,
         TextBox = dataviz.TextBox,
         DEFAULT_WIDTH = 300,
@@ -27,7 +32,7 @@ var __meta__ = {
         DEFAULT_QUIETZONE_LENGTH = 10,
         numberRegex = /^\d+$/,
         alphanumericRegex = /^[a-z0-9]+$/i,
-        InvalidCharacterErrorTemplate = "Character '{0}'  is not valid for symbology {1}";
+        InvalidCharacterErrorTemplate = "Character '{0}' is not valid for symbology {1}";
 
     function getNext(value, index, count){
         return value.substring(index, index + count);
@@ -1527,8 +1532,11 @@ var __meta__ = {
              Widget.fn.init.call(that, element, options);
              that.element = $(element);
              that.wrapper = that.element;
-             that.element.addClass("k-barcode");
-             that.view = dataviz.ViewFactory.current.create({}, that.options.renderAs);
+             that.element.addClass("k-barcode").css("display", "block");
+             that.surfaceWrap = $("<div />").css("position", "relative").appendTo(this.element);
+             that.surface = draw.Surface.create(that.surfaceWrap, {
+                 type: that.options.renderAs
+             });
              that.setOptions(options);
         },
 
@@ -1556,13 +1564,18 @@ var __meta__ = {
         },
 
         redraw: function () {
-            var that = this,
-                view = that.view;
+            var size = this._getSize();
+            this.surfaceWrap.css({
+                width: size.width,
+                height: size.height
+            });
+            this.surface.clear();
 
-            that._redraw(view);
-            view.renderTo(that.element[0]);
+            this.createVisual();
+            this.surface.draw(this.visual);
         },
 
+        // TODO: Export
         svg: function() {
             if (dataviz.SVGView) {
                 var view = new dataviz.SVGView();
@@ -1575,6 +1588,7 @@ var __meta__ = {
             }
         },
 
+        // TODO: Export
         imageDataURL: function() {
             if (dataviz.CanvasView) {
                 if (dataviz.supportsCanvas()) {
@@ -1604,7 +1618,7 @@ var __meta__ = {
             this.redraw();
         },
 
-        _redraw: function(view) {
+        createVisual: function() {
             var that = this,
                 options = that.options,
                 value = options.value,
@@ -1618,36 +1632,35 @@ var __meta__ = {
                 result, textToDisplay,
                 textHeight;
 
+            this.visual = new draw.Group();
+
             that.contentBox = contentBox;
-            view.children = [];
-            that._renderBackground(view, size);
-
-            if (textOptions.visible) {
-                textHeight = dataviz.measureText(value, { font: textOptions.font }).height;
-                barHeight -= textHeight + textMargin.top + textMargin.bottom;
-            }
-
-            result = encoding.encode(value, contentBox.width(), barHeight);
+            that._createBackground(size);
 
             if (textOptions.visible) {
                 textToDisplay = value;
                 if (options.checksum && defined(encoding.checksum)) {
                     textToDisplay += " " + encoding.checksum;
                 }
-                that._renderTextElement(view, textToDisplay);
+
+                var text = that._getTextElement(textToDisplay);
+                textHeight = text.bbox().height();
+                barHeight -= textHeight + textMargin.top + textMargin.bottom;
+
+                this.visual.append(text);
             }
+
+            result = encoding.encode(value, contentBox.width(), barHeight);
+
             that.barHeight = barHeight;
 
-            view.options.width = size.width;
-            view.options.height = size.height;
-
-            that._renderElements(view, result.pattern, result.baseUnit);
+            that._createElements(result.pattern, result.baseUnit);
         },
 
         _getSize: function() {
             var that = this,
                 element = that.element,
-                size = {width:DEFAULT_WIDTH,height:DEFAULT_HEIGHT};
+                size = new geom.Size(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 
             if (element.width() > 0) {
                 size.width = element.width();
@@ -1674,7 +1687,7 @@ var __meta__ = {
             that.redraw();
         },
 
-        _renderElements: function (view, pattern, baseUnit) {
+        _createElements: function (pattern, baseUnit) {
             var that = this,
                 contentBox = that.contentBox,
                 position = contentBox.x1,
@@ -1683,43 +1696,54 @@ var __meta__ = {
 
             for (var i = 0; i < pattern.length; i++) {
                 item = isPlainObject(pattern[i]) ? pattern[i] : {
-                        width: pattern[i],
-                        y1: 0,
-                        y2: that.barHeight
-                    };
+                    width: pattern[i],
+                    y1: 0,
+                    y2: that.barHeight
+                };
+
                 step = item.width * baseUnit;
+
                 if (i%2) {
-                    view.children.push(view.createRect(
-                        new Box2D(
-                            position,
-                            item.y1 + contentBox.y1,
-                            position + step,
-                            item.y2 + contentBox.y1
-                        ), {
-                            fill: that.options.color
-                        }
-                    ));
+                    var rect = geom.Rect.fromPoints(
+                        new geom.Point(position, item.y1 + contentBox.y1),
+                        new geom.Point(position + step, item.y2 + contentBox.y1)
+                    );
+
+                    var path = draw.Path.fromRect(rect, {
+                        fill: {
+                            color: that.options.color
+                        },
+                        stroke: null
+                    });
+
+                    this.visual.append(path);
                 }
-                position+= step;
+
+                position += step;
             }
         },
 
-        _renderBackground: function (view, size) {
+        _createBackground: function (size) {
             var that = this,
                 options = that.options,
-                border = options.border || {},
-                box = Box2D(0,0, size.width, size.height).unpad(border.width / 2),
-                rect = view.createRect(box, {
-                    fill: options.background,
-                    stroke: border.width ? border.color : "",
-                    strokeWidth: border.width,
-                    dashType: border.dashType
-                });
+                border = options.border || {};
 
-            view.children.push(rect);
+            var box = Box2D(0,0, size.width, size.height).unpad(border.width / 2);
+            var path = draw.Path.fromRect(box.toRect(), {
+                fill: {
+                    color: options.background
+                },
+                stroke: {
+                    color: border.width ? border.color : "",
+                    width: border.width,
+                    dashType: border.dashType
+                }
+            });
+
+            this.visual.append(path);
         },
 
-        _renderTextElement: function (view, value) {
+        _getTextElement: function(value) {
             var that = this,
                 textOptions = that.options.text,
                 text = new TextBox(value, {
@@ -1731,7 +1755,9 @@ var __meta__ = {
                 });
 
             text.reflow(that.contentBox);
-            append(view.children, text.getViewElements(view));
+            text.renderVisual();
+
+            return text.visual;
         },
 
         options: {

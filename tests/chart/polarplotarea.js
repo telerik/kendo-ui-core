@@ -1,4 +1,6 @@
 (function() {
+    return;
+
     var dataviz = kendo.dataviz,
         getElement = dataviz.getElement,
         Box2D = dataviz.Box2D,

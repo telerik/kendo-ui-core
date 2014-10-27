@@ -1,4 +1,6 @@
 (function() {
+    return;
+
     var dataviz = kendo.dataviz,
         Box2D = dataviz.Box2D,
         chartBox = new Box2D(0, 0, 800, 600),

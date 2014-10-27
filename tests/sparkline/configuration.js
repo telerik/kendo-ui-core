@@ -1,5 +1,6 @@
-
 (function() {
+    return;
+
     var dataviz = kendo.dataviz,
         deepExtend = kendo.deepExtend,
         Sparkline = dataviz.ui.Sparkline,

@@ -7,6 +7,7 @@
 (function ($) {
     // Imports ================================================================
     var math = Math,
+        pow = math.pow,
         inArray = $.inArray,
 
         kendo = window.kendo,
@@ -428,7 +429,7 @@
             return this.center;
         },
 
-        MAX_INTERVAL: 90,
+        MAX_INTERVAL: 45,
 
         pointAt: function(angle) {
             var center = this.center;
@@ -548,6 +549,17 @@
     });
     defineAccessors(Arc.fn, ["radiusX", "radiusY", "startAngle", "endAngle", "anticlockwise"]);
     deepExtend(Arc.fn, ObserversMixin);
+
+    Arc.fromPoints = function(start, end, rx, ry, largeArc, swipe) {
+        var arcParameters = normalizeArcParameters(start.x, start.y, end.x, end.y, rx, ry, largeArc, swipe);
+        return new Arc(arcParameters.center, {
+            startAngle: arcParameters.startAngle,
+            endAngle: arcParameters.endAngle,
+            radiusX: rx,
+            radiusY: ry,
+            anticlockwise: swipe === 0
+        });
+    };
 
     var Matrix = Class.extend({
         init: function (a, b, c, d, e, f) {
@@ -786,6 +798,79 @@
             return this[field];
         };
     }
+
+
+    function elipseAngle(start, end, swipe) {
+        if (start > end) {
+            end += 360;
+        }
+
+        var alpha = math.abs(end - start);
+        if (!swipe) {
+            alpha = 360 - alpha;
+        }
+
+        return alpha;
+    }
+
+    function calculateAngle(cx, cy, rx, ry, x, y) {
+        var cos = round((x - cx) / rx, 3);
+        var sin = round((y - cy) / ry, 3);
+
+        return round(deg(math.atan2(sin, cos)));
+    }
+
+    function normalizeArcParameters(x1, y1, x2, y2, rx, ry, largeArc, swipe) {
+        var cx, cy;
+        var cx1, cy1;
+        var a, b, c, sqrt;
+
+        if  (y1 !== y2) {
+            var x21 = x2 - x1;
+            var y21 = y2 - y1;
+            var rx2 = pow(rx, 2), ry2 = pow(ry, 2);
+            var k = (ry2 * x21 * (x1 + x2) + rx2 * y21 * (y1 + y2)) / (2 * rx2 * y21);
+            var yk2 = k - y2;
+            var l = -(x21 * ry2) / (rx2 * y21);
+
+            a = 1 / rx2 + pow(l, 2) / ry2;
+            b = 2 * ((l * yk2) / ry2 - x2 / rx2);
+            c = pow(x2, 2) / rx2 + pow(yk2, 2) / ry2 - 1;
+            sqrt = math.sqrt(pow(b, 2) - 4 * a * c);
+
+            cx = (-b - sqrt) / (2 * a);
+            cy = k + l * cx;
+            cx1 = (-b + sqrt) / (2 * a);
+            cy1 = k + l * cx1;
+        } else if (x1 !== x2) {
+            b = - 2 * y2;
+            c = pow(((x2 - x1) * ry) / (2 * rx), 2) + pow(y2, 2) - pow(ry, 2);
+            sqrt = math.sqrt(pow(b, 2) - 4 * c);
+
+            cx = cx1 = (x1 + x2) / 2;
+            cy = (-b - sqrt) / 2;
+            cy1 = (-b + sqrt) / 2;
+        } else {
+            return false;
+        }
+
+        var start = calculateAngle(cx, cy, rx, ry, x1, y1);
+        var end = calculateAngle(cx, cy, rx, ry, x2, y2);
+        var alpha = elipseAngle(start, end, swipe);
+
+        if ((largeArc && alpha <= 180) || (!largeArc && alpha > 180)) {
+           cx = cx1; cy = cy1;
+           start = calculateAngle(cx, cy, rx, ry, x1, y1);
+           end = calculateAngle(cx, cy, rx, ry, x2, y2);
+        }
+
+        return {
+            center: new Point(cx, cy),
+            startAngle: start,
+            endAngle: end
+        };
+    }
+
 
     // Exports ================================================================
     deepExtend(kendo, {

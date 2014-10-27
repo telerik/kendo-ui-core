@@ -1,4 +1,6 @@
 (function() {
+    return;
+
     var dataviz = kendo.dataviz,
         LogarithmicAxis = dataviz.LogarithmicAxis,
         deepExtend = dataviz.deepExtend,

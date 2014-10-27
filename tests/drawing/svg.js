@@ -240,6 +240,22 @@
             shape.opacity(0.5);
         });
 
+        test("clear destroys children", function() {
+            var child = new TNode();
+            child.destroy = function() { ok(true); };
+
+            node.append(child);
+            node.clear();
+        });
+
+        test("removeSelf destroys element", function() {
+            var element = node.element;
+            node.removeSelf();
+
+            equal(element.parentNode, null);
+            equal(node.element, null);
+        });
+
         // ------------------------------------------------------------
         module("Base Node tests / " + name + " / observer", {
             setup: function() {
@@ -252,9 +268,16 @@
             equal(shape.observers()[0], node);
         });
 
-        test("clear removes srcElement observer", function() {
-            node.clear();
+        test("destroy removes srcElement observer", function() {
+            node.destroy();
             equal(shape.observers().length, 0);
+        });
+
+        test("destroy removes element reference", function() {
+            node.attachTo($("<div>")[0]);
+            var element = $(node.element);
+            node.destroy();
+            equal(element._kendoNode, null);
         });
 
         // ------------------------------------------------------------
@@ -324,12 +347,12 @@
             shape.clip(newClip);
         });
 
-        test("clear removes definitions", function() {
+        test("destroy removes definitions", function() {
             node.definitionChange = function(e) {
                 equal(e.action, "remove");
                 equal(e.definitions.clip, clip);
             };
-            node.clear();
+            node.destroy();
             for (var definition in node.definitions) {
                 ok(false);
             }
@@ -421,21 +444,21 @@
             ok(grandChild.element);
         });
 
-        test("attachTo sets kendoNode data", function() {
+        test("attachTo sets _kendoNode expando", function() {
             groupNode.attachTo(document.createElement("div"));
 
-            deepEqual($(groupNode.element).data("kendoNode"), groupNode);
+            deepEqual(groupNode.element._kendoNode, groupNode);
         });
 
-        test("attachTo sets kendoNode data on child elements", function() {
+        test("attachTo sets _kendoNode expando on child elements", function() {
             var childGroup = new GroupNode(new Group());
             groupNode.append(childGroup);
             groupNode.attachTo(document.createElement("div"));
 
-            deepEqual($(childGroup.element).data("kendoNode"), childGroup);
+            deepEqual(childGroup.element._kendoNode, childGroup);
         });
 
-        test("attachTo sets kendoNode data for grandchild nodes", function() {
+        test("attachTo sets _kendoNode expando for grandchild nodes", function() {
             var child = new GroupNode(new Group());
             var grandChild = new GroupNode(new Group());
 
@@ -444,22 +467,22 @@
 
             groupNode.attachTo(document.createElement("div"));
 
-            deepEqual($(grandChild.element).data("kendoNode"), grandChild);
+            deepEqual(grandChild.element._kendoNode, grandChild);
         });
 
-        test("clear removes element", function() {
+        test("destroy removes element", function() {
             groupNode.attachTo(document.createElement("div"));
-            groupNode.clear();
+            groupNode.destroy();
 
             ok(!groupNode.element);
         });
 
-        test("clear removes kendoNode data from element", function() {
+        test("destroy removes _kendoNode expando from element", function() {
             var container = document.createElement("div");
             groupNode.attachTo(container);
-            groupNode.clear();
+            groupNode.destroy();
 
-            ok(!$(container).data("kendoNode"));
+            ok(!container._kendoNode);
         });
 
         test("load attaches node", function() {
@@ -1326,6 +1349,12 @@
 
         test("renders id", function() {
             ok(gradientNode.render().indexOf("id='" + gradient.id + "'") != -1);
+        });
+
+        test("renders gradientUnits based on userSpace", function() {
+            ok(gradientNode.render().indexOf("gradientUnits='objectBoundingBox'") != -1);
+            gradient.userSpace(true);
+            ok(gradientNode.render().indexOf("gradientUnits='userSpaceOnUse'") != -1);
         });
 
         test("renders children", function() {

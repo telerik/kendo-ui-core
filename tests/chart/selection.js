@@ -1,4 +1,6 @@
 (function() {
+    return; 
+
     var dataviz = kendo.dataviz,
         deepExtend = kendo.deepExtend,
         Selection = dataviz.Selection;

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link type="text/css" href="../../styles/web/kendo.common.less" rel="stylesheet"/>
+    <link type="text/css" href="../../styles/web/kendo.blueopal.less" rel="stylesheet/less"/>
+    <script type="text/javascript" src="../../build/less-js/dist/less-1.6.0.min.js"></script>
+    <script src="../require.js"></script>
+    <script>
+    require.config({
+        baseUrl: "../../src",
+        paths: {
+            cultures: "cultures",
+        }
+    });
+
+    require([ "jquery.min",
+              "kendo.dataviz.chart" ], function(){
+
+          $("#chart").kendoChart({
+            title: {
+              text: "Charge current vs. charge time"
+            },
+            legend: {
+              visible: true
+            },
+            seriesDefaults: {
+              type: "scatterLine",
+              labels: {
+                visible: true
+              }
+            },
+            series: [{
+              name: "0.8C",
+              data: [[10, 10], [15, 20], [20, 25], [32, 40], [43, 50], [55, 60], [60, 70], [70, 80], [90, 100]]
+            }, {
+              name: "1.6C",
+              data: [[10, 40], [17, 50], [18, 70], [35, 90], [47, 95], [60, 100]]
+            }, {
+              name: "3.1C",
+              data: [[10, 70], [13, 90], [25, 100]]
+            }],
+            xAxis: {
+              max: 90,
+              labels: {
+                format: "{0}m"
+              },
+              title: {
+                text: "Time"
+              }
+            },
+            yAxis: {
+              max: 100,
+              labels: {
+                format: "{0}%"
+              },
+              title: {
+                text: "Charge"
+              }
+            },
+            tooltip: {
+              visible: true,
+              format: "{1}% in {0} minutes"
+            }
+          });
+    });
+    </script>
+    <style>
+        #chart {
+            width: 800px;
+            height: 500px;
+            float: left;
+        }
+    </style>
+  </head>
+  <body>
+      <div id="chart"></div>
+      <button>redraw</button>
+  </body>
+</html>

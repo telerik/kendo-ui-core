@@ -431,7 +431,7 @@
     function closePoints(point1, point2, tolerance) {
         if (point1) {
             if (!point2) {
-                ok(false);
+                ok(false, "No second point");
             } else {
                 close(point1.x, point2.x, tolerance);
                 close(point1.y, point2.y, tolerance);
@@ -444,14 +444,15 @@
             segments2 = path2.segments,
             length = segments1.length,
             i;
+
         if (segments1.length !== segments2.length) {
-            ok(false);
+            ok(false, "Expected " + segments2.length + " segments, got " + segments1.length);
         }
 
         for (i = 0; i < length; i++) {
-            closePoints(segments1[i].anchor(), segments2[i].anchor(), tolerance);
-            closePoints(segments1[i].controlOut(), segments2[i].controlOut(), tolerance);
-            closePoints(segments1[i].controlIn(), segments2[i].controlIn(), tolerance);
+            closePoints(segments1[i].anchor(), segments2[i].anchor(), tolerance, "anchor @" + i);
+            closePoints(segments1[i].controlOut(), segments2[i].controlOut(), tolerance, "controlOut @" + i);
+            closePoints(segments1[i].controlIn(), segments2[i].controlIn(), tolerance, "controlIn @" + i);
         }
     }
 
@@ -462,10 +463,13 @@
         path = multiPath.paths[0];
         var expectedPath = new d.Path();
         expectedPath.moveTo(300, 300);
-        expectedPath.curveTo(Point.create(281.1, 278.2), Point.create(271.1, 229.7), Point.create(276.7, 187.5));
-        expectedPath.curveTo(Point.create(282.4, 145.4), Point.create(303.2, 113.4), Point.create(325, 113.4));
-        expectedPath.curveTo(Point.create(346.8, 113.4), Point.create(367.6, 145.4), Point.create(373.3, 187.5));
-        expectedPath.curveTo(Point.create(378.9, 229.7), Point.create(368.9, 278.2), Point.create(350, 300));
+        expectedPath.curveTo([289.2, 287.5], [280.9, 266.7], [277.2, 242.9]);
+        expectedPath.curveTo([273.5, 219] , [274.5, 192.5], [280, 170]);
+        expectedPath.curveTo([285.4, 147.5] , [295.1, 129.4], [306.7, 120.3]);
+        expectedPath.curveTo([318.3, 111.2] , [331.7, 111.2], [343.3, 120.3]);
+        expectedPath.curveTo([354.9, 129.4] , [364.6, 147.5], [370, 170]);
+        expectedPath.curveTo([375.5, 192.5] , [376.5, 219], [372.8, 242.9]);
+        expectedPath.curveTo([369.1, 266.7] , [360.8, 287.5], [350, 300]);
 
         closePaths(path, expectedPath, TOLERANCE);
     });
@@ -474,8 +478,10 @@
         multiPath = parser.parse("M 340 265.4 a 80 40 0 0 1 29.3 54.6");
         path = multiPath.paths[0];
         var expectedPath = new d.Path();
+
         expectedPath.moveTo(340, 265.4);
-        expectedPath.curveTo(Point.create(376.3, 275.9), Point.create(390.2, 301.9), Point.create(369.3, 320));
+        expectedPath.curveTo([358.11, 270.62], [371.83, 279.57], [377.25, 289.68]);
+        expectedPath.curveTo([382.67, 299.79], [379.73, 310.96], [369.26, 320.03]);
 
         closePaths(path, expectedPath, TOLERANCE);
     });

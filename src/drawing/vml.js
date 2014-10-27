@@ -32,6 +32,7 @@
 
     // Constants ==============================================================
     var NONE = "none",
+        NS = ".kendo",
         COORDINATE_MULTIPLE = 100,
         COORDINATE_SIZE = COORDINATE_MULTIPLE * COORDINATE_MULTIPLE,
         GRADIENT = "gradient",
@@ -44,15 +45,28 @@
 
             enableVML();
 
+            this.element.empty();
+
             this._root = new RootNode();
             this._root.attachTo(this.element[0]);
 
-            this.element.on("click", this._click);
-            this.element.on("mouseover", this._mouseenter);
-            this.element.on("mouseout", this._mouseleave);
+            this.element.on("click" + NS, this._click);
+            this.element.on("mouseover" + NS, this._mouseenter);
+            this.element.on("mouseout" + NS, this._mouseleave);
         },
 
         type: "vml",
+
+        destroy: function() {
+            if (this._root) {
+                this._root.destroy();
+                this._root = null;
+
+                this.element.off(NS);
+            }
+
+            d.Surface.fn.destroy.call(this);
+        },
 
         draw: function(element) {
             this._root.load([element], undefined, null);
@@ -72,12 +86,45 @@
             this.attachReference();
         },
 
+        observe: noop,
+
+        destroy: function() {
+            if (this.element) {
+                this.element._kendoNode = null;
+                this.element = null;
+            }
+
+            BaseNode.fn.destroy.call(this);
+        },
+
+        clear: function() {
+            if (this.element) {
+                this.element.innerHTML = "";
+            }
+
+            var children = this.childNodes;
+            for (var i = 0; i < children.length; i++) {
+                children[i].destroy();
+            }
+
+            this.childNodes = [];
+        },
+
+        removeSelf: function() {
+            if (this.element) {
+                this.element.parentNode.removeChild(this.element);
+                this.element = null;
+            }
+
+            BaseNode.fn.removeSelf.call(this);
+        },
+
         createElement: function() {
             this.element = doc.createElement("div");
         },
 
         attachReference: function() {
-            $(this.element).data("kendoNode", this);
+            this.element._kendoNode = this;
         },
 
         load: function(elements, pos, transform, opacity) {
@@ -125,18 +172,9 @@
 
         attachTo: function(domElement, pos) {
             if (defined(pos)) {
-                domElement.insertBefore(this.element, domElement.children[pos]);
+                domElement.insertBefore(this.element, domElement.children[pos] || null);
             } else {
                 domElement.appendChild(this.element);
-            }
-        },
-
-        clear: function() {
-            BaseNode.fn.clear.call(this);
-
-            if (this.element && this.element.parentNode) {
-                this.element.parentNode.removeChild(this.element);
-                this.element = null;
             }
         },
 
@@ -164,9 +202,7 @@
             var opacity = valueOrDefault(this.opacity, 1);
 
             opacity *= valueOrDefault(multiplier, 1);
-            if (opacity !== 1) {
-                attrs.push(["opacity", opacity]);
-            }
+            attrs.push(["opacity", opacity]);
         },
 
         attr: function(name, value) {
@@ -206,11 +242,6 @@
             ]);
         },
 
-        clear: function() {
-            BaseNode.fn.clear.call(this);
-            this.element.innerHTML = "";
-        },
-
         attachReference: noop
     });
 
@@ -239,9 +270,12 @@
             Node.fn.init.call(this, srcElement);
 
             if (srcElement) {
-                srcElement.addObserver(this);
                 this.initClip();
             }
+        },
+
+        observe: function() {
+            BaseNode.fn.observe.call(this);
         },
 
         mapStyle: function() {
@@ -256,19 +290,13 @@
             if (e.field == "clip") {
                 this.clearClip();
                 this.initClip();
-
-                this.css(e.field, this.clipRect());
+                this.setClip();
             }
 
             Node.fn.optionsChange.call(this, e);
         },
 
         clear: function() {
-            var srcElement = this.srcElement;
-            if (srcElement) {
-                srcElement.removeObserver(this);
-            }
-
             this.clearClip();
 
             Node.fn.clear.call(this);
@@ -284,12 +312,19 @@
         clearClip: function() {
             if (this.clip) {
                 this.clip.clear();
-                delete this.clip;
+                this.clip = null;
+                this.css("clip", this.clipRect());
+            }
+        },
+
+        setClip: function() {
+            if (this.clip) {
+                this.css("clip", this.clipRect());
             }
         },
 
         clipRect: function() {
-            var clipRect = "rect(auto auto auto auto)";
+            var clipRect = EMPTY_CLIP;
             var clip = this.srcElement.clip();
             if (clip) {
                 var bbox = this.clipBBox(clip);
@@ -362,6 +397,7 @@
                 length = children.length,
                 i;
 
+            this.setClip();
             for (i = 0; i < length; i++) {
                 children[i].refreshTransform(currentTransform);
             }
@@ -388,8 +424,24 @@
             }
         },
 
+        initClip: function() {
+            ObserverNode.fn.initClip.call(this);
+
+            if (this.clip) {
+                var bbox = this.clip.srcElement.bbox(this.srcElement.currentTransform());
+                if (bbox) {
+                    this.css("width", bbox.width() + bbox.origin.x);
+                    this.css("height", bbox.height() + bbox.origin.y);
+                }
+            }
+        },
+
         clipBBox: function(clip) {
             return clip.bbox(this.srcElement.currentTransform());
+        },
+
+        clearClip: function() {
+            ObserverNode.fn.clearClip.call(this);
         }
     });
 
@@ -401,7 +453,7 @@
 
         createElement: function() {
             this.element = createElementVML("stroke");
-            this.setStroke();
+            this.setOpacity();
         },
 
         optionsChange: function(e) {
@@ -419,11 +471,15 @@
             this.allAttr(this.mapStroke());
         },
 
+        setOpacity: function() {
+            this.setStroke();
+        },
+
         mapStroke: function() {
             var stroke = this.srcElement.options.stroke;
             var attrs = [];
 
-            if (stroke && stroke.width !== 0) {
+            if (stroke && !isTransparent(stroke.color) && stroke.width !== 0) {
                 attrs.push(["on", "true"]);
                 attrs.push(["color", stroke.color]);
                 attrs.push(["weight", (stroke.width || 1) + "px"]);
@@ -472,11 +528,15 @@
 
         refreshOpacity: function(opacity) {
             this.opacity = opacity;
-            this.setFill();
+            this.setOpacity();
         },
 
         setFill: function() {
             this.allAttr(this.mapFill());
+        },
+
+        setOpacity: function() {
+            this.setFill();
         },
 
         attr: function(name, value) {
@@ -520,11 +580,15 @@
         },
 
         mapGradient: function(fill) {
+            var options = this.srcElement.options;
+            var fallbackFill = options.fallbackFill || (fill.fallbackFill && fill.fallbackFill());
             var attrs;
             if (fill instanceof d.LinearGradient) {
                 attrs = this.mapLinearGradient(fill);
-            } else if (fill instanceof d.RadialGradient && fill.fallbackFill()) {
-                attrs = this.mapFillColor(fill.fallbackFill());
+            } else if (fill instanceof d.RadialGradient && fill.supportVML) {
+                attrs = this.mapRadialGradient(fill);
+            } else if (fallbackFill) {
+                attrs = this.mapFillColor(fallbackFill);
             } else {
                 attrs = [["on", "false"]];
             }
@@ -541,20 +605,40 @@
             var attrs = [
                 ["on", "true"],
                 ["type", GRADIENT],
-                ["color", stopColor(fill.baseColor, stops[0])],
-                ["color2", stopColor(fill.baseColor, stops[stops.length - 1])],
                 ["focus", 0],
                 ["method", "none"],
-                ["angle", 270 - angle],
-                ["colors.value", this.colors(fill)]
+                ["angle", 270 - angle]
             ];
+            this.addColors(attrs);
+            return attrs;
+        },
+
+        mapRadialGradient: function(fill) {
+            var bbox = this.srcElement.rawBBox();
+            var center = fill.center();
+            var stops = fill.stops;
+            var focusx = (center.x - bbox.origin.x) / bbox.width();
+            var focusy = (center.y - bbox.origin.y) / bbox.height();
+            var attrs = [
+                ["on", "true"],
+                ["type", "gradienttitle"],
+                ["focus", "100%"],
+                ["focusposition", focusx + " " + focusy],
+                ["method", "none"]
+            ];
+            this.addColors(attrs);
 
             return attrs;
         },
 
-        colors: function(fill) {
+        addColors: function(attrs) {
+            var options = this.srcElement.options;
             var stopColors = [];
-            var stops = fill.stops;
+            var stops = options.fill.stops;
+            var baseColor = options.baseColor;
+            var colorsField = this.element.colors ? "colors.value" : "colors";
+            var color = stopColor(baseColor, stops[0]);
+            var color2 = stopColor(baseColor, stops[stops.length - 1]);
             var stop;
 
             for (var idx = 0; idx < stops.length; idx++) {
@@ -562,11 +646,14 @@
 
                 stopColors.push(
                     math.round(stop.offset() * 100) + "% " +
-                    stopColor(fill.baseColor, stop)
+                    stopColor(baseColor, stop)
                 );
             }
 
-            return stopColors.join(",");
+            attrs.push([colorsField, stopColors.join(",")],
+                ["color", color],
+                ["color2", color2]
+            );
         }
     });
 
@@ -662,6 +749,9 @@
                 this.stroke.optionsChange(e);
             } else if (e.field === "transform") {
                 this.transform.optionsChange(e);
+            } else if (e.field === "opacity") {
+                this.fill.setOpacity();
+                this.stroke.setOpacity();
             }
 
             ObserverNode.fn.optionsChange.call(this, e);
@@ -1147,6 +1237,12 @@
         var browser = kendo.support.browser;
         return browser.msie && browser.version < 9;
     })();
+
+
+    var EMPTY_CLIP = "inherit";
+    if (kendo.support.browser.msie && kendo.support.browser.version < 8) {
+        EMPTY_CLIP = "rect(auto auto auto auto)";
+    }
 
     if (kendo.support.vml) {
         d.SurfaceFactory.current.register("vml", Surface, 30);

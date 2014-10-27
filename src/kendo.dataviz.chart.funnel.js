@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.dataviz.chart" ], f);
+    define([ "./kendo.dataviz.chart", "./kendo.drawing" ], f);
 })(function(){
 
 var __meta__ = {
@@ -19,6 +19,8 @@ var __meta__ = {
         isFn = kendo.isFunction,
         template = kendo.template,
 
+        draw = kendo.drawing,
+        geom = kendo.geometry,
         dataviz = kendo.dataviz,
         Color = kendo.drawing.Color,
         ChartElement = dataviz.ChartElement,
@@ -96,8 +98,8 @@ var __meta__ = {
             segmentSpacing:0,
             labels: {
                 visible: false,
-                align: "center", //right, left
-                position: "center" // top, bottom
+                align: "center",
+                position: "center"
             }
         },
 
@@ -306,10 +308,10 @@ var __meta__ = {
                     offset = (width - lastUpperSide* (nextPercentage / percentage))/2;
                     offset = limitValue(offset, 0, width);
 
-                    points.push(Point2D(box.x1 + previousOffset, box.y1 + previousHeight));
-                    points.push(Point2D(box.x1+width - previousOffset, box.y1 + previousHeight));
-                    points.push(Point2D(box.x1+width - offset, box.y1 + height + previousHeight));
-                    points.push(Point2D(box.x1+ offset,box.y1 + height + previousHeight));
+                    points.push(new geom.Point(box.x1 + previousOffset, box.y1 + previousHeight));
+                    points.push(new geom.Point(box.x1+width - previousOffset, box.y1 + previousHeight));
+                    points.push(new geom.Point(box.x1+width - offset, box.y1 + height + previousHeight));
+                    points.push(new geom.Point(box.x1+ offset,box.y1 + height + previousHeight));
 
                     previousOffset = offset;
                     previousHeight += height + segmentSpacing;
@@ -327,10 +329,10 @@ var __meta__ = {
                     offset = (options.dynamicHeight)? (finalNarrow * percentage): (finalNarrow / count);
                     height = (options.dynamicHeight)? (totalHeight * percentage): (totalHeight / count);
 
-                    points.push(Point2D(box.x1+previousOffset, box.y1 + previousHeight));
-                    points.push(Point2D(box.x1+width - previousOffset, box.y1 + previousHeight));
-                    points.push(Point2D(box.x1+width - previousOffset - offset, box.y1 + height + previousHeight));
-                    points.push(Point2D(box.x1+previousOffset + offset,box.y1 + height + previousHeight));
+                    points.push(new geom.Point(box.x1+previousOffset, box.y1 + previousHeight));
+                    points.push(new geom.Point(box.x1+width - previousOffset, box.y1 + previousHeight));
+                    points.push(new geom.Point(box.x1+width - previousOffset - offset, box.y1 + height + previousHeight));
+                    points.push(new geom.Point(box.x1+previousOffset + offset,box.y1 + height + previousHeight));
                     previousOffset += offset;
                     previousHeight += height + segmentSpacing;
                 }
@@ -375,27 +377,28 @@ var __meta__ = {
             }
         },
 
-        getViewElements: function(view) {
-            var segment = this,
-                options = segment.options,
-                border = options.border,
-                elements = [];
+        createVisual: function() {
+            ChartElement.fn.createVisual.call(this);
 
-            elements.push(
-                view.createPolyline(segment.points, true, {
-                    id: segment.id,
-                    fill: options.color,
-                    fillOpacity:options.opacity,
-                    stroke: border.color,
-                    strokeOpacity: border.opacity,
-                    strokeWidth: border.width,
-                    data: { modelId: segment.modelId }
-                })
-            );
+            var options = this.options;
+            var border = options.border;
+            var path = draw.Path.fromPoints(this.points, {
+                fill: {
+                    color: options.color,
+                    opacity: options.opacity
+                },
+                stroke: {
+                    color: border.color,
+                    opacity: border.opacity,
+                    width: border.width
+                }
+            }).close();
 
-            append(elements, ChartElement.fn.getViewElements.call(segment, view));
+            this.visual.append(path);
+        },
 
-            return elements;
+        createHighlight: function(style) {
+            return draw.Path.fromPoints(this.points, style);
         },
 
         highlightOverlay: function(view, opt) {

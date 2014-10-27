@@ -14,7 +14,8 @@
         Widget = kendo.ui.Widget,
         deepExtend = kendo.deepExtend,
 
-        util = kendo.util;
+        util = kendo.util,
+        defined = util.defined;
 
     // Base drawing surface ==================================================
     var Surface = kendo.Observable.extend({
@@ -76,8 +77,8 @@
             var domNode = $(e.touch ? e.touch.initialTouch : e.target);
             var node;
 
-            while (!node) {
-                node = domNode.data("kendoNode");
+            while (!node && domNode.length > 0) {
+                node = domNode[0]._kendoNode;
                 if (domNode.is(this.element) || domNode.length === 0) {
                     break;
                 }
@@ -119,11 +120,30 @@
 
             if (srcElement) {
                 this.srcElement = srcElement;
+                this.observe();
             }
         },
 
-        destroy: noop,
+        destroy: function() {
+            if (this.srcElement) {
+                this.srcElement.removeObserver(this);
+            }
+
+            var children = this.childNodes;
+            for (var i = 0; i < children.length; i++) {
+                this.childNodes[i].destroy();
+            }
+
+            this.parent = null;
+        },
+
         load: noop,
+
+        observe: function() {
+            if (this.srcElement) {
+                this.srcElement.addObserver(this);
+            }
+        },
 
         append: function(node) {
             this.childNodes.push(node);
@@ -138,10 +158,14 @@
         remove: function(index, count) {
             var end = index + count;
             for (var i = index; i < end; i++) {
-                this.childNodes[i].clear();
-                this.childNodes[i].parent = null;
+                this.childNodes[i].removeSelf();
             }
             this.childNodes.splice(index, count);
+        },
+
+        removeSelf: function() {
+            this.clear();
+            this.destroy();
         },
 
         clear: function() {
@@ -249,7 +273,7 @@
         _wrap: function(object, field) {
             var type = toString.call(object);
 
-            if (object !== null && type === "[object Object]") {
+            if (object !== null && defined(object) && type === "[object Object]") {
                 if (!(object instanceof OptionsStore) && !(object instanceof Class)) {
                     object = new OptionsStore(object, this.prefix + field + ".");
                 }

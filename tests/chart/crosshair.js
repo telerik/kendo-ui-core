@@ -1,4 +1,6 @@
 (function() {
+    return;
+
     var dataviz = kendo.dataviz,
         Box2D = dataviz.Box2D,
         TOLERANCE = 1;

@@ -214,14 +214,14 @@
         });
 
         test("fill sets gradient", function() {
-            var gradient = new Gradient();
+            var gradient = new Gradient({});
             shape.fill(gradient);
 
             equal(shape.options.fill, gradient);
         });
 
         test("fill sets color and opacity if current fill is gradient", function() {
-            shape.fill(new Gradient());
+            shape.fill(new Gradient({}));
             shape.fill("red", 1);
 
             equal(shape.options.fill.color, "red");
@@ -229,7 +229,7 @@
         });
 
         test("fill sets gradient if current field is not", function() {
-            var gradient = new Gradient();
+            var gradient = new Gradient({});
             shape.fill("red", 1);
             shape.fill(gradient);
 
@@ -1224,6 +1224,11 @@
     (function() {
         var path;
 
+        function closePoints(p1, p2, tolerance) {
+            close(p1.x, p2.x, tolerance);
+            close(p1.y, p2.y, tolerance);
+        };
+
         module("Path", {
             setup: function() {
                 path = new Path();
@@ -1392,6 +1397,89 @@
             path.curveTo([10, 10], [40, 20], [30, 30]);
         });
 
+        test("arc adds arc curvePoints to path", function() {
+            path.moveTo(200, 100);
+            path.arc(30, 180, 100, 100);
+            var expectedArc = new g.Arc([113.4, 50],{
+                startAngle: 30,
+                endAngle: 180,
+                radiusX: 100,
+                radiusY: 100,
+                anticlockwise: false
+            });
+            var arcCurvePoints = expectedArc.curvePoints();
+            var segments = path.segments;
+            var segment;
+            for (var idx = 0, pointIdx = 0; idx < segments.length; idx++) {
+                segment = segments[idx];
+                if (segment.controlIn()) {
+                    closePoints(segment.controlIn(), arcCurvePoints[pointIdx++], 0.1);
+                }
+                closePoints(segment.anchor(),arcCurvePoints[pointIdx++], 0.1);
+                if (segment.controlOut()) {
+                    closePoints(segment.controlOut(), arcCurvePoints[pointIdx++], 0.1);
+                }
+            }
+        });
+
+        test("arc does nothing if move segment has not been set", function() {
+            path.arc(30, 180, 100, 100);
+            equal(path.segments.length, 0);
+        });
+
+        test("arc triggers geometry change once", 1, function() {
+            path.moveTo(200, 100);
+            path.addObserver({
+                geometryChange: function() {
+                    ok(true)
+                }
+            });
+
+            path.arc(30, 180, 100, 100);
+        });
+
+        test("arcTo adds arc curvePoints to path", function() {
+            path.moveTo(400, 300);
+            path.arcTo(new Point(250, 256.7), 100, 50, true, true);
+            var expectedArc = new g.Arc([300, 300],{
+                startAngle: 0,
+                endAngle: -120,
+                radiusX: 100,
+                radiusY: 50,
+                anticlockwise: false
+            });
+            var arcCurvePoints = expectedArc.curvePoints();
+            var segments = path.segments;
+            var segment;
+            for (var idx = 0, pointIdx = 0; idx < segments.length; idx++) {
+                segment = segments[idx];
+                if (segment.controlIn()) {
+                    closePoints(segment.controlIn(), arcCurvePoints[pointIdx++], 0.1);
+                }
+                closePoints(segment.anchor(),arcCurvePoints[pointIdx++], 0.1);
+                if (segment.controlOut()) {
+                    closePoints(segment.controlOut(), arcCurvePoints[pointIdx++], 0.1);
+                }
+            }
+        });
+
+        test("arcTo does nothing if move segment has not been set", function() {
+            path.arcTo(new Point(250, 256.7), 100, 50, true, true);
+            equal(path.segments.length, 0);
+        });
+
+        test("arcTo triggers geometry change once", 1, function() {
+            path.moveTo(400, 300);
+            path.addObserver({
+                geometryChange: function() {
+                    ok(true)
+                }
+            });
+
+            path.arcTo(new Point(250, 256.7), 100, 50, true, true);
+        });
+
+
         test("changing the control points triggers geometryChange", 2, function() {
             var controlOut = Point.create(10, 10),
                 controlIn = Point.create(40, 20);
@@ -1547,6 +1635,33 @@
 
             equal(path.options.get("foo"), "bar");
         });
+
+        test("fromArc adds creates path from arc", function() {
+            var arc = new g.Arc([113.4, 50],{
+                startAngle: 30,
+                endAngle: 180,
+                radiusX: 100,
+                radiusY: 100,
+                anticlockwise: false
+            });
+            var arcPath = Path.fromArc(arc);
+
+            path.moveTo(200, 100);
+            path.arc(30, 180, 100, 100);
+
+            var arcSegments = arcPath.segments;
+            var segments = path.segments;
+            equal(arcSegments.length, segments.length);
+            for (var idx = 0; idx < segments.length; idx++) {
+                if (segments[idx].controlIn()) {
+                    closePoints(segments[idx].controlIn(), arcSegments[idx].controlIn(), 0.1);
+                }
+                closePoints(segments[idx].anchor(), arcSegments[idx].anchor(), 0.1);
+                if (segments[idx].controlOut()) {
+                    closePoints(segments[idx].controlOut(), arcSegments[idx].controlOut(), 0.1);
+                }
+            }
+        });
     })();
 
     // ------------------------------------------------------------
@@ -1636,6 +1751,41 @@
 
         test("curveTo returns multiPath", function() {
             deepEqual(multiPath.moveTo(0, 0).curveTo(new Point(), new Point(), new Point()), multiPath);
+        });
+
+        test("arc does nothing if there are no paths", function() {
+            multiPath.arc(30, 180, 100, 100);
+            equal(multiPath.paths.length, 0);
+        });
+
+        test("arc adds arc to last path", function() {
+            multiPath.moveTo(200, 100);
+            multiPath.paths[0].arc = function(start, end, rx, ry, anticlockwise) {
+                equal(start, 30);
+                equal(end, 180);
+                equal(rx, 100);
+                equal(ry, 100);
+                equal(anticlockwise, true);
+            };
+            multiPath.arc(30, 180, 100, 100, true);
+        });
+
+        test("arcTo does nothing if there are no paths", function() {
+            multiPath.arcTo(new Point(250, 256.7), 100, 50, true, true);
+            equal(multiPath.paths.length, 0);
+        });
+
+        test("arcTo adds arc to last path", function() {
+            multiPath.moveTo(400, 300);
+            multiPath.paths[0].arcTo = function(end, rx, ry, largeArc, swipe) {
+                equal(end.x, 250);
+                equal(end.y, 256.7);
+                equal(rx, 100);
+                equal(ry, 50);
+                ok(largeArc);
+                ok(swipe);
+            };
+            multiPath.arcTo(new Point(250, 256.7), 100, 50, true, true);
         });
 
         test("changing the control points triggers geometryChange", 2, function() {
@@ -1839,6 +1989,11 @@
             equal(stop.options.opacity, 0.7);
         });
 
+        test("inits zero opacity", function() {
+            stop = new GradientStop(0.5, "foo", 0);
+            equal(stop.options.opacity, 0);
+        });
+
         test("sets opacity to one if not specified", function() {
             stop = new GradientStop(0.5, "foo");
             equal(stop.options.opacity, 1);
@@ -1926,13 +2081,32 @@
             setup: function() {
                 stops = [new GradientStop(), new GradientStop()];
                 gradient = new type({
-                    stops: stops
+                    stops: stops,
+                    userSpace: true
                 });
             }
         });
 
         test("inits stops", function() {
             equal(gradient.stops.length, 2);
+        });
+
+        test("inits userSpace", function() {
+            ok(gradient.userSpace());
+        });
+
+        test("userSpace is false by default", function() {
+            gradient = new type({});
+            ok(!gradient.userSpace());
+        });
+
+        test("changing userSpace triggers optionsChange", function() {
+            gradient.addObserver({
+                optionsChange: function(e) {
+                    equal(e.field, "gradient");
+                }
+            });
+            gradient.userSpace(false);
         });
 
         test("inits stops from array of arrays", function() {

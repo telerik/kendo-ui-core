@@ -1,4 +1,6 @@
 (function() {
+return;
+
     var barcode;
     var view;
     var encodingStub;

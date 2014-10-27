@@ -10,6 +10,7 @@
 
         kendo = window.kendo,
         Class = kendo.Class,
+        util = kendo.util,
 
         animationFrame = kendo.animationFrame,
         deepExtend = kendo.deepExtend;
@@ -49,7 +50,8 @@
                     }
 
                     wallTime = +new Date();
-                    time = Math.min(wallTime - start, duration);
+
+                    time = util.limitValue(wallTime - start, 0, duration);
                     pos = time / duration;
                     easingPos = easing(pos, time, 0, 1, duration);
 

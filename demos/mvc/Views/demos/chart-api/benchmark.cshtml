@@ -15,7 +15,8 @@
                 var TICKS_PER_DAY = 86400000,
                     POINTS = 20,
                     lastDate = new Date("2000/01/20"),
-                    playInterval,
+                    playing,
+                    frames,
                     fpsUpdateInterval,
                     categoryList = [],
                     stocks = [[], [], []];
@@ -85,32 +86,40 @@
                 }
 
                 function play() {
-                    var frames = 0,
-                        start = new Date();
+                    var start = new Date();
 
-                    playInterval = setInterval(function() {
-                        step();
-                        frames++;
-                    }, 10);
+                    frames = 0;
+                    playing = true;
+                    step();
 
                     fpsUpdateInterval = setInterval(function() {
                         var time = (new Date() - start) / 1000,
-                            fps = Math.round(frames / time),
-                            frameTime = Math.round(1000 / fps);
-                        $("#fpsCount").html(fps + " FPS (" + frameTime + " ms per frame)");
+                            fps = (frames / time),
+                            delay = Math.round(1000 / fps);
+
+                            $("#fpsCount").html(kendo.format(
+                                "FPS: {0:N1} ({1} ms/frame)",
+                                fps, delay
+                            ));
+
+                        start = new Date();
+                        frames = 0;
                     }, 1000);
                 }
 
                 function stop() {
-                    clearInterval(playInterval);
                     clearInterval(fpsUpdateInterval);
-                    playInterval = null;
+                    playing = false;
                     fpsUpdateInterval = null;
                 }
 
                 function step() {
                     addPoint();
                     $("#chart").data("kendoChart").refresh();
+                    frames++;
+                    if (playing) {
+                        kendo.animationFrame(step);
+                    }
                 }
 
                 function addPoint() {
@@ -144,7 +153,7 @@
                 $("#playButton").click(function() {
                     var button = $(this);
 
-                    if (playInterval) {
+                    if (playing) {
                         stop();
                         button.text("Start update");
                     } else {

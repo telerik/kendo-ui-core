@@ -28,6 +28,7 @@
         DASH_ARRAYS = d.DASH_ARRAYS,
         GRADIENT = "gradient",
         NONE = "none",
+        NS = ".kendo",
         SOLID = "solid",
         SPACE = " ",
         SQUARE = "square",
@@ -48,14 +49,24 @@
 
             this._root.attachTo(this._rootElement);
 
-            this.element.on("click", this._click);
-            this.element.on("mouseover", this._mouseenter);
-            this.element.on("mouseout", this._mouseleave);
+            this.element.on("click" + NS, this._click);
+            this.element.on("mouseover" + NS, this._mouseenter);
+            this.element.on("mouseout" + NS, this._mouseleave);
 
             this.resize();
         },
 
         type: "svg",
+
+        destroy: function() {
+            if (this._root) {
+                this._root.destroy();
+                this._root = null;
+                this._rootElement = null;
+                this.element.off(NS);
+            }
+            d.Surface.fn.destroy.call(this);
+        },
 
         translate: function(offset) {
             var viewBox = kendo.format(
@@ -96,9 +107,16 @@
         init: function(srcElement) {
             BaseNode.fn.init.call(this, srcElement);
             this.definitions = {};
-            if (srcElement) {
-                srcElement.addObserver(this);
+        },
+
+        destroy: function() {
+            if (this.element) {
+                this.element._kendoNode = null;
+                this.element = null;
             }
+
+            this.clearDefinitions();
+            BaseNode.fn.destroy.call(this);
         },
 
         load: function(elements, pos) {
@@ -182,16 +200,40 @@
                 i;
 
             if (this.element) {
-                $(this.element).data("kendoNode", null);
+                this.element._kendoNode = null;
             }
 
             this.element = element;
-            $(element).data("kendoNode", this);
+            this.element._kendoNode = this;
 
             for (i = 0; i < nodes.length; i++) {
                 childElement = element.childNodes[i];
                 nodes[i].setElement(childElement);
             }
+        },
+
+        clear: function() {
+            this.clearDefinitions();
+
+            if (this.element) {
+                this.element.innerHTML = "";
+            }
+
+            var children = this.childNodes;
+            for (var i = 0; i < children.length; i++) {
+                children[i].destroy();
+            }
+
+            this.childNodes = [];
+        },
+
+        removeSelf: function() {
+            if (this.element) {
+                this.element.parentNode.removeChild(this.element);
+                this.element = null;
+            }
+
+            BaseNode.fn.removeSelf.call(this);
         },
 
         template: renderTemplate(
@@ -227,24 +269,6 @@
             }
 
             BaseNode.fn.optionsChange.call(this, e);
-        },
-
-        clear: function() {
-            var element = this.element;
-            var srcElement = this.srcElement;
-
-            if (element) {
-                element.parentNode.removeChild(element);
-                this.element = null;
-            }
-
-            if (srcElement) {
-                srcElement.removeObserver(this);
-            }
-
-            this.clearDefinitions();
-
-            BaseNode.fn.clear.call(this);
         },
 
         attr: function(name, value) {
@@ -422,15 +446,17 @@
             this.defs.attachTo(domElement.firstElementChild);
         },
 
+        clear: function() {
+            BaseNode.fn.clear.call(this);
+        },
+
         template: renderTemplate(
             "#=d.defs.render()##= d.renderChildren() #"
         ),
 
         definitionChange: function(e) {
             this.defs.definitionChange(e);
-        },
-
-        clear: BaseNode.fn.clear
+        }
     });
 
     var DefinitionNode = Node.extend({
@@ -957,6 +983,10 @@
 
         renderCoordinates: function() {
             return renderAllAttr(this.mapCoordinates());
+        },
+
+        mapSpace: function() {
+            return ["gradientUnits", this.srcElement.userSpace() ? "userSpaceOnUse" : "objectBoundingBox"]
         }
     });
 
@@ -975,7 +1005,8 @@
                 ["x1", start.x],
                 ["y1", start.y],
                 ["x2", end.x],
-                ["y2", end.y]
+                ["y2", end.y],
+                this.mapSpace()
             ];
 
             return attrs;
@@ -996,7 +1027,8 @@
             var attrs = [
                 ["cx", center.x],
                 ["cy", center.y],
-                ["r", radius]
+                ["r", radius],
+                this.mapSpace()
             ];
             return attrs;
         }

@@ -643,6 +643,48 @@
             return this;
         },
 
+        arc: function(startAngle, endAngle, radiusX, radiusY, anticlockwise) {
+            if (this.segments.length > 0) {
+                var lastSegment = last(this.segments);
+                var anchor = lastSegment.anchor();
+                var start = util.rad(startAngle);
+                var center = new Point(anchor.x - radiusX * math.cos(start),
+                    anchor.y - radiusY * math.sin(start));
+                var arc = new g.Arc(center, {
+                    startAngle: startAngle,
+                    endAngle: endAngle,
+                    radiusX: radiusX,
+                    radiusY: radiusY,
+                    anticlockwise: anticlockwise
+                });
+
+                this._addArcSegments(arc);
+            }
+
+            return this;
+        },
+
+        arcTo: function(end, rx, ry, largeArc, swipe) {
+            if (this.segments.length > 0) {
+                var lastSegment = last(this.segments);
+                var anchor = lastSegment.anchor();
+                var arc = g.Arc.fromPoints(anchor, end, rx, ry, largeArc, swipe);
+
+                this._addArcSegments(arc);
+            }
+            return this;
+        },
+
+        _addArcSegments: function(arc) {
+            this.suspend();
+            var curvePoints = arc.curvePoints();
+            for (var i = 1; i < curvePoints.length; i+=3) {
+                this.curveTo(curvePoints[i], curvePoints[i + 1], curvePoints[i + 2]);
+            }
+            this.resume();
+            this.geometryChange();
+        },
+
         close: function() {
             this.options.closed = true;
             this.geometryChange();
@@ -716,6 +758,15 @@
         }
     };
 
+    Path.fromArc = function(arc, options) {
+        var path = new Path(options);
+        var startAngle = arc.startAngle;
+        var start = arc.pointAt(startAngle);
+        path.moveTo(start.x, start.y);
+        path.arc(startAngle, arc.endAngle, arc.radiusX, arc.radiusY, arc.anticlockwise);
+        return path;
+    };
+
     var MultiPath = Element.extend({
         nodeType: "MultiPath",
 
@@ -749,6 +800,22 @@
         curveTo: function(controlOut, controlIn, point) {
             if (this.paths.length > 0) {
                 last(this.paths).curveTo(controlOut, controlIn, point);
+            }
+
+            return this;
+        },
+
+        arc: function(startAngle, endAngle, radiusX, radiusY, anticlockwise) {
+            if (this.paths.length > 0) {
+                last(this.paths).arc(startAngle, endAngle, radiusX, radiusY, anticlockwise);
+            }
+
+            return this;
+        },
+
+        arcTo: function(end, rx, ry, largeArc, swipe) {
+            if (this.paths.length > 0) {
+                last(this.paths).arcTo(end, rx, ry, largeArc, swipe);
             }
 
             return this;
@@ -811,7 +878,7 @@
             this.options = new OptionsStore({
                 offset: offset,
                 color: color,
-                opacity: opacity || 1
+                opacity: defined(opacity) ? opacity : 1
             });
             this.options.addObserver(this);
         }
@@ -846,10 +913,21 @@
     var Gradient = Class.extend({
         nodeType: "gradient",
 
-        init: function(stops) {
-            this.stops = new StopsArray(this._createStops(stops));
+        init: function(options) {
+            this.stops = new StopsArray(this._createStops(options.stops));
             this.stops.addObserver(this);
+            this._userSpace = options.userSpace;
             this.id = kendo.guid();
+        },
+
+        userSpace: function(value) {
+            if (defined(value)) {
+                this._userSpace = value;
+                this.optionsChange();
+                return this;
+            } else {
+                return this._userSpace;
+            }
         },
 
         _createStops: function(stops) {
@@ -891,7 +969,7 @@
     var LinearGradient = Gradient.extend({
         init: function(options) {
             options = options || {};
-            Gradient.fn.init.call(this, options.stops);
+            Gradient.fn.init.call(this, options);
 
             this.start(options.start || new Point());
 
@@ -904,7 +982,7 @@
     var RadialGradient = Gradient.extend({
         init: function(options) {
             options = options || {};
-            Gradient.fn.init.call(this, options.stops);
+            Gradient.fn.init.call(this, options);
 
             this.center(options.center  || new Point());
             this._radius = defined(options.radius) ? options.radius : 1;

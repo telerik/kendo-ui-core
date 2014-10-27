@@ -19,7 +19,10 @@ var __meta__ = {
     // Imports ================================================================
     var doc = document,
         kendo = window.kendo,
+        util = kendo.util,
         dataviz = kendo.dataviz,
+        geom = dataviz.geometry,
+        draw = dataviz.drawing,
         Class = kendo.Class,
         template = kendo.template,
         map = $.map,
@@ -452,6 +455,10 @@ var __meta__ = {
             box.y2 = box.y1 + height;
 
             return box;
+        },
+
+        toRect: function() {
+            return new geom.Rect([this.x1, this.y1], [this.width(), this.height()]);
         }
     };
 
@@ -625,6 +632,37 @@ var __meta__ = {
         }
     });
 
+    var ShapeBuilder = function() {};
+    ShapeBuilder.fn = ShapeBuilder.prototype = {
+        createRing: function (sector, options) {
+            var startAngle = sector.startAngle + 180;
+            var endAngle = sector.angle + startAngle;
+            var center = new geom.Point(sector.c.x, sector.c.y);
+            var radius = math.max(sector.r, 0);
+            var innerRadius = math.max(sector.ir, 0);
+            var arc = new geom.Arc(center, {
+                startAngle: startAngle,
+                endAngle: endAngle,
+                radiusX: radius,
+                radiusY: radius
+            });
+            var path = draw.Path.fromArc(arc, options).close();
+
+            if (innerRadius)  {
+                arc.radiusX = arc.radiusY = innerRadius;
+                var innerEnd = arc.pointAt(endAngle);
+                path.lineTo(innerEnd.x, innerEnd.y);
+                path.arc(endAngle, startAngle, innerRadius, innerRadius, true);
+            } else {
+                path.lineTo(center.x, center.y);
+            }
+
+            return path;
+        }
+    };
+
+    ShapeBuilder.current = new ShapeBuilder();
+
     // View-Model primitives ==================================================
     var ChartElement = Class.extend({
         init: function(options) {
@@ -712,6 +750,10 @@ var __meta__ = {
                 }
             }
 
+            if (this.animation) {
+                this.animation.destroy();
+            }
+
             for (i = 0; i < children.length; i++) {
                 children[i].destroy();
             }
@@ -735,14 +777,164 @@ var __meta__ = {
         },
 
         append: function() {
-            var element = this,
-                i,
-                length = arguments.length;
+            append(this.children, arguments);
 
-            append(element.children, arguments);
+            for (var i = 0; i < arguments.length; i++) {
+                arguments[i].parent = this;
+            }
+        },
 
-            for (i = 0; i < length; i++) {
-                arguments[i].parent = element;
+        renderVisual: function() {
+            this.createVisual();
+
+            if (this.visual) {
+                this.visual.chartElement = this;
+
+                if (this.parent) {
+                    this.parent.appendVisual(this.visual);
+                }
+            }
+
+            var children = this.children;
+            for (var i = 0; i < children.length; i++) {
+                children[i].renderVisual();
+            }
+
+            this.createAnimation();
+            this.renderComplete();
+        },
+
+        createVisual: function() {
+            this.visual = new dataviz.drawing.Group({
+                zIndex: this.options.zIndex,
+                visible: valueOrDefault(this.options.visible, true)
+            });
+        },
+
+        createAnimation: function() {
+            if (this.visual) {
+                this.animation = draw.Animation.create(
+                    this.visual, this.options.animation
+                );
+            }
+        },
+
+        appendVisual: function(childVisual) {
+            if (!childVisual.chartElement) {
+                childVisual.chartElement = this;
+            }
+
+            if (childVisual.options.noclip) {
+                this.getRoot().visual.append(childVisual);
+            } else if (childVisual.options.zIndex) {
+                this.stackRoot().stackVisual(childVisual);
+            } else if (this.visual) {
+                this.visual.append(childVisual);
+            } else {
+                // Allow chart elements without visuals to
+                // pass through child visuals
+                this.parent.appendVisual(childVisual);
+            }
+        },
+
+        stackRoot: function() {
+            if (this.parent) {
+                return this.parent.stackRoot();
+            }
+
+            return this;
+        },
+
+        stackVisual: function(childVisual) {
+            var zIndex = childVisual.options.zIndex || 0;
+            var visuals = this.visual.children;
+            for (var pos = 0; pos < visuals.length; pos++) {
+                var sibling = visuals[pos];
+                var here = valueOrDefault(sibling.options.zIndex, 0);
+                if (here > zIndex) {
+                    break;
+                }
+            }
+
+            this.visual.insertAt(childVisual, pos);
+        },
+
+        traverse: function(callback) {
+            var children = this.children;
+
+            for (var i = 0; i < children.length; i++) {
+                var child = children[i];
+
+                callback(child);
+                if (child.traverse) {
+                    child.traverse(callback);
+                }
+            }
+        },
+
+        closest: function(match) {
+            var element = this;
+            var matched = false;
+
+            while (element && !matched) {
+                matched = match(element);
+
+                if (!matched) {
+                    element = element.parent;
+                }
+            }
+
+            if (matched) {
+                return element;
+            }
+        },
+
+        renderComplete: $.noop,
+
+        toggleHighlight: function(show) {
+            if (!this.createHighlight) {
+                return;
+            }
+
+            var highlight = this._highlight;
+            var options = this.options.highlight;
+
+            if (!highlight) {
+                highlight = this._highlight = this.createHighlight({
+                    fill: {
+                        color: WHITE,
+                        opacity: 0.2
+                    },
+                    stroke : {
+                        color: WHITE,
+                        width: 1,
+                        opacity: 0.2
+                    }
+                });
+
+                this.visual.append(highlight);
+            }
+
+            if (options && options.visible) {
+                highlight.visible(show);
+            }
+        },
+
+        createGradientOverlay: function(element, options, gradientOptions) {
+            var overlay = new draw.Path(deepExtend({
+                stroke: {
+                    color: NONE
+                },
+                fill: this.createGradient(gradientOptions)
+            }, options));
+            overlay.segments.elements(element.segments.elements());
+
+            return overlay;
+        },
+
+        createGradient: function(options) {
+            if (this.parent) {
+                return this.parent.createGradient(options);
             }
         }
     });
@@ -753,6 +945,7 @@ var __meta__ = {
 
             // Logical tree ID to element map
             root.modelMap = {};
+            root.gradients = {};
 
             ChartElement.fn.init.call(root, options);
         },
@@ -783,28 +976,57 @@ var __meta__ = {
             }
         },
 
-        getViewElements: function(view) {
-            var root = this,
-                options = root.options,
-                border = options.border || {},
-                box = root.box.clone().pad(options.margin).unpad(border.width),
-                elements = [
-                        view.createRect(box, {
-                            stroke: border.width ? border.color : "",
-                            strokeWidth: border.width,
-                            dashType: border.dashType,
-                            fill: options.background,
-                            fillOpacity: options.opacity,
-                            zIndex: options.zIndex })
-                    ];
+        createVisual: function() {
+            this.visual = new draw.Group();
+            this.createBackground();
+        },
 
-            return elements.concat(
-                ChartElement.fn.getViewElements.call(root, view)
-            );
+        createBackground: function() {
+            var options = this.options;
+            var border = options.border || {};
+            var box = this.box.clone().pad(options.margin).unpad(border.width);
+
+            var background = draw.Path.fromRect(box.toRect(), {
+                stroke: {
+                    color: border.width ? border.color : "",
+                    width: border.width,
+                    dashType: border.dashType
+                },
+                fill: {
+                    color: options.background,
+                    opacity: options.opacity
+                },
+                zIndex: -10
+            });
+
+            this.visual.append(background);
         },
 
         getRoot: function() {
             return this;
+        },
+
+        createGradient: function(options) {
+            var gradients = this.gradients;
+            var hashCode = util.objectKey(options);
+            var gradient = dataviz.Gradients[options.gradient];
+            var drawingGradient;
+            if (gradients[hashCode]) {
+                drawingGradient = gradients[hashCode];
+            } else {
+                var gradientOptions = deepExtend({}, gradient, options);
+                if (gradient.type == "linear") {
+                    drawingGradient = new draw.LinearGradient(gradientOptions);
+                } else {
+                    if (options.innerRadius) {
+                        gradientOptions.stops = innerRadialStops(gradientOptions);
+                    }
+                    drawingGradient = new draw.RadialGradient(gradientOptions);
+                    drawingGradient.supportVML = gradient.supportVML !== false;
+                }
+                gradients[hashCode] = drawingGradient;
+            }
+            return drawingGradient;
         }
     });
 
@@ -908,6 +1130,37 @@ var __meta__ = {
             return options.border.width || options.background;
         },
 
+        createVisual: function() {
+            ChartElement.fn.createVisual.call(this);
+
+            var options = this.options;
+            if (options.visible && this.hasBox()) {
+                this.visual.append(draw.Path.fromRect(
+                    this.paddingBox.toRect(), this.visualStyle()
+                ));
+            }
+        },
+
+        visualStyle: function() {
+            var boxElement = this,
+                options = boxElement.options,
+                border = options.border || {};
+
+            return {
+                stroke: {
+                    width: border.width,
+                    color: border.color,
+                    opacity: valueOrDefault(border.opacity, options.opacity),
+                    dashType: border.dashType
+                },
+                fill: {
+                    color: options.background,
+                    opacity: options.opacity
+                },
+                cursor: options.cursor
+            };
+        },
+
         getViewElements: function(view, renderOptions) {
             var boxElement = this,
                 options = boxElement.options,
@@ -916,7 +1169,6 @@ var __meta__ = {
             if (!options.visible) {
                 return [];
             }
-
 
             if (boxElement.hasBox()) {
                 elements.push(
@@ -1003,6 +1255,16 @@ var __meta__ = {
                     })
                 )
             ];
+        },
+
+        createVisual: function() {
+            var opt = this.options;
+
+            this.visual = new draw.Text(this.content, this.box.toRect().topLeft(), {
+                font: opt.font,
+                fill: { color: opt.color, opacity: opt.opacity },
+                cursor: opt.cursor
+            });
         }
     });
 
@@ -1208,7 +1470,7 @@ var __meta__ = {
             var id = options.id;
             var rows = (textbox.content + "").split(textbox.ROWS_SPLIT_REGEX);
             var floatElement = new FloatElement({vertical: true, align: options.align, wrap: false});
-            var textOptions = deepExtend({ }, options);
+            var textOptions = deepExtend({ }, options, { opacity: 1, animation: null });
             var hasBox = textbox.hasBox();
             var text;
             var rowIdx;
@@ -1274,6 +1536,41 @@ var __meta__ = {
             element.children = elements.concat(ChartElement.fn.getViewElements.call(textbox, view));
 
             return [element];
+        },
+
+        createVisual: function() {
+            var options = this.options;
+
+            if (!options.visible) {
+                return;
+            }
+
+            this.visual = new dataviz.drawing.Group({
+                transform: this.rotationTransform(),
+                zIndex: options.zIndex,
+                noclip: options.noclip
+            });
+
+            if (this.hasBox()) {
+                var box = draw.Path.fromRect(this.paddingBox.toRect(), this.visualStyle());
+                this.visual.append(box);
+            }
+        },
+
+        rotationTransform: function() {
+            var rotation = this.options.rotation;
+            if (!rotation) {
+                return null;
+            }
+
+            var center = this.normalBox.center();
+            var cx = center.x;
+            var cy = center.y;
+            var boxCenter = this.box.center();
+
+            return geom.transform()
+                       .translate(boxCenter.x - cx, boxCenter.y - cy)
+                       .rotate(rotation, [cx, cy]);
         },
 
         rotationMatrix: function() {
@@ -1369,51 +1666,56 @@ var __meta__ = {
         }
     });
 
-    function createAxisTick(view, options, tickOptions) {
+    function createAxisTick(options, tickOptions) {
         var tickX = options.tickX,
             tickY = options.tickY,
-            position = options.position,
-            start, end;
+            position = options.position;
+
+        var tick = new draw.Path({
+            stroke: {
+                width: tickOptions.width,
+                color: tickOptions.color
+            }
+        });
 
         if (options.vertical) {
-            start = Point2D(tickX, position);
-            end = Point2D(tickX + tickOptions.size, position);
+            tick.moveTo(tickX, position)
+                .lineTo(tickX + tickOptions.size, position);
         } else {
-            start = Point2D(position, tickY);
-            end = Point2D(position, tickY + tickOptions.size);
+            tick.moveTo(position, tickY)
+                .lineTo(position, tickY + tickOptions.size);
         }
 
-        return view.createLine(
-            start.x, start.y,
-            end.x, end.y, {
-                strokeWidth: tickOptions.width,
-                stroke: tickOptions.color,
-                align: options._alignLines
-            });
+        alignPathToPixel(tick);
+
+        return tick;
     }
 
-    function createAxisGridLine(view, options, gridLine) {
+    function createAxisGridLine(options, gridLine) {
         var lineStart = options.lineStart,
             lineEnd = options.lineEnd,
             position = options.position,
             start, end;
 
+        var line = new draw.Path({
+            stroke: {
+                width: gridLine.width,
+                color: gridLine.color,
+                dashType: gridLine.dashType
+            }
+        });
+
         if (options.vertical) {
-            start = Point2D(lineStart, position);
-            end = Point2D(lineEnd, position);
+            line.moveTo(lineStart, position)
+                .lineTo(lineEnd, position);
         } else {
-            start = Point2D(position, lineStart);
-            end = Point2D(position, lineEnd);
+            line.moveTo(position, lineStart)
+                .lineTo(position, lineEnd);
         }
-        return view.createLine(
-            start.x, start.y,
-            end.x, end.y, {
-                data: { modelId: options.modelId },
-                strokeWidth: gridLine.width,
-                stroke: gridLine.color,
-                dashType: gridLine.dashType,
-                zIndex: -1
-            });
+
+        alignPathToPixel(line);
+
+        return line;
     }
 
     var Axis = ChartElement.extend({
@@ -1524,8 +1826,8 @@ var __meta__ = {
                 options = axis.options,
                 align = options.vertical ? RIGHT : CENTER,
                 labelOptions = deepExtend({ }, options.labels, {
-                    align: align, zIndex: options.zIndex,
-                    modelId: axis.modelId
+                    align: align,
+                    zIndex: options.zIndex
                 }),
                 step = labelOptions.step;
 
@@ -1544,19 +1846,6 @@ var __meta__ = {
                     }
                 }
             }
-        },
-
-        // TODO: Redundant - labels are child elements
-        destroy: function() {
-            var axis = this,
-                labels = axis.labels,
-                i;
-
-            for (i = 0; i < labels.length; i++) {
-                labels[i].destroy();
-            }
-
-            ChartElement.fn.destroy.call(axis);
         },
 
         lineBox: function() {
@@ -1639,25 +1928,38 @@ var __meta__ = {
             return value;
         },
 
-        renderTicks: function(view) {
+        createVisual: function() {
+            ChartElement.fn.createVisual.call(this);
+
+            this._gridLines = new draw.Group({
+                zIndex: -2
+            });
+            this.appendVisual(this._gridLines);
+
+            this.createPlotBands();
+            this.createBackground();
+            this.createLine();
+        },
+
+        createTicks: function(lineGroup) {
             var axis = this,
-                ticks = [],
                 options = axis.options,
                 lineBox = axis.lineBox(),
                 mirror = options.labels.mirror,
                 majorUnit = options.majorTicks.visible ? options.majorUnit : 0,
                 tickLineOptions= {
-                    _alignLines: options._alignLines,
+                    // TODO
+                    // _alignLines: options._alignLines,
                     vertical: options.vertical
                 },
                 start, end;
 
-            function render(tickPositions, tickOptions) {
+            function render(tickPositions, tickOptions, skipUnit) {
                 var i, count = tickPositions.length;
 
                 if (tickOptions.visible) {
                     for (i = tickOptions.skip; i < count; i += tickOptions.step) {
-                        if (i % tickOptions.skipUnit === 0) {
+                        if (defined(skipUnit) && (i % skipUnit === 0)) {
                             continue;
                         }
 
@@ -1665,55 +1967,48 @@ var __meta__ = {
                         tickLineOptions.tickY = mirror ? lineBox.y1 - tickOptions.size : lineBox.y1;
                         tickLineOptions.position = tickPositions[i];
 
-                        ticks.push(createAxisTick(view, tickLineOptions, tickOptions));
+                        lineGroup.append(createAxisTick(tickLineOptions, tickOptions));
                     }
                 }
             }
 
             render(axis.getMajorTickPositions(), options.majorTicks);
-            render(axis.getMinorTickPositions(), deepExtend({}, {
-                    skipUnit: majorUnit / options.minorUnit
-                }, options.minorTicks));
-
-            return ticks;
+            render(axis.getMinorTickPositions(), options.minorTicks, majorUnit / options.minorUnit);
         },
 
-        renderLine: function(view) {
+        createLine: function() {
             var axis = this,
                 options = axis.options,
                 line = options.line,
                 lineBox = axis.lineBox(),
-                lineOptions,
-                elements = [];
+                lineOptions;
 
             if (line.width > 0 && line.visible) {
-                lineOptions = {
-                    strokeWidth: line.width,
-                    stroke: line.color,
-                    dashType: line.dashType,
+                var path = new draw.Path({
+                    stroke: {
+                        width: line.width,
+                        color: line.color,
+                        dashType: line.dashType
+                    }
+
+                    /* TODO
                     zIndex: line.zIndex,
-                    align: options._alignLines
-                };
+                    */
+                });
 
-                elements.push(view.createLine(
-                    lineBox.x1, lineBox.y1, lineBox.x2, lineBox.y2,
-                    lineOptions));
+                path.moveTo(lineBox.x1, lineBox.y1)
+                    .lineTo(lineBox.x2, lineBox.y2);
 
-                append(elements, axis.renderTicks(view));
+                if (options._alignLines) {
+                    alignPathToPixel(path);
+                }
+
+                var group = new draw.Group();
+                group.append(path);
+
+                this.visual.append(group);
+                this.createTicks(group);
             }
-
-            return elements;
-        },
-
-        getViewElements: function(view) {
-            var axis = this,
-                elements = ChartElement.fn.getViewElements.call(axis, view);
-
-            append(elements, axis.renderLine(view));
-            append(elements, axis.renderPlotBands(view));
-            append(elements, axis.renderBackground(view));
-
-            return elements;
         },
 
         getActualTickSize: function () {
@@ -1732,64 +2027,77 @@ var __meta__ = {
             return tickSize;
         },
 
-        renderBackground: function(view) {
+        createBackground: function() {
             var axis = this,
                 options = axis.options,
                 background = options.background,
-                box = axis.box,
-                elements = [];
+                box = axis.box;
 
             if (background) {
-                elements.push(
-                    view.createRect(box, {
-                        fill: background, zIndex: -1
-                    })
-                );
-            }
+                var path = draw.Path.fromRect(box.toRect(), {
+                    fill: {
+                        color: background
+                    },
+                    stroke: null
+                });
 
-            return elements;
+                this.visual.append(path);
+            }
         },
 
-        renderPlotBands: function(view) {
+        createPlotBands: function() {
             var axis = this,
                 options = axis.options,
                 plotBands = options.plotBands || [],
                 vertical = options.vertical,
-                result = [],
                 plotArea = axis.plotArea,
                 slotX, slotY, from, to;
 
-            if (plotBands.length) {
-                var range = this.range();
-                result = map(plotBands, function(item) {
-                    from = valueOrDefault(item.from, MIN_VALUE);
-                    to = valueOrDefault(item.to, MAX_VALUE);
-                    var element = [];
-
-                    if (isInRange(from, range) || isInRange(to, range)) {
-                        if (vertical) {
-                            slotX = plotArea.axisX.lineBox();
-                            slotY = axis.getSlot(item.from, item.to, true);
-                        } else {
-                            slotX = axis.getSlot(item.from, item.to, true);
-                            slotY = plotArea.axisY.lineBox();
-                        }
-
-                        element = view.createRect(
-                                Box2D(slotX.x1, slotY.y1, slotX.x2, slotY.y2),
-                                { fill: item.color, fillOpacity: item.opacity, zIndex: -1 });
-                    }
-
-                    return element;
-                });
+            if (plotBands.length === 0) {
+                return;
             }
 
-            return result;
+            var group = new draw.Group({
+                zIndex: -1
+            });
+
+            var range = this.range();
+            $.each(plotBands, function(i, item) {
+                from = valueOrDefault(item.from, MIN_VALUE);
+                to = valueOrDefault(item.to, MAX_VALUE);
+                var element = [];
+
+                if (isInRange(from, range) || isInRange(to, range)) {
+                    if (vertical) {
+                        slotX = plotArea.axisX.lineBox();
+                        slotY = axis.getSlot(item.from, item.to, true);
+                    } else {
+                        slotX = axis.getSlot(item.from, item.to, true);
+                        slotY = plotArea.axisY.lineBox();
+                    }
+
+                    var bandRect = new geom.Rect(
+                        [slotX.x1, slotY.y1],
+                        [slotX.width(), slotY.height()]
+                    );
+
+                    var path = draw.Path.fromRect(bandRect, {
+                        fill: {
+                            color: item.color,
+                            opacity: item.opacity
+                        },
+                        stroke: null
+                    });
+
+                    group.append(path);
+                }
+            });
+
+            axis.appendVisual(group);
         },
 
-        renderGridLines: function(view, altAxis) {
+        createGridLines: function(altAxis) {
             var axis = this,
-                items = [],
                 options = axis.options,
                 axisLineVisible = altAxis.options.line.visible,
                 majorGridLines = options.majorGridLines,
@@ -1805,7 +2113,8 @@ var __meta__ = {
                 },
                 pos, majorTicks = [];
 
-            function render(tickPositions, gridLine) {
+            var container = this._gridLines;
+            function render(tickPositions, gridLine, skipUnit) {
                 var count = tickPositions.length,
                     i;
 
@@ -1813,9 +2122,9 @@ var __meta__ = {
                     for (i = gridLine.skip; i < count; i += gridLine.step) {
                         pos = round(tickPositions[i]);
                         if (!inArray(pos, majorTicks)) {
-                            if (i % gridLine.skipUnit !== 0 && (!axisLineVisible || linePos !== pos)) {
+                            if (i % skipUnit !== 0 && (!axisLineVisible || linePos !== pos)) {
                                 lineOptions.position = pos;
-                                items.push(createAxisGridLine(view, lineOptions, gridLine));
+                                container.append(createAxisGridLine(lineOptions, gridLine));
 
                                 majorTicks.push(pos);
                             }
@@ -1825,11 +2134,9 @@ var __meta__ = {
             }
 
             render(axis.getMajorTickPositions(), options.majorGridLines);
-            render(axis.getMinorTickPositions(), deepExtend({}, {
-                    skipUnit: majorUnit / options.minorUnit
-                }, options.minorGridLines));
+            render(axis.getMinorTickPositions(), options.minorGridLines, majorUnit / options.minorUnit);
 
-            return items;
+            return container.children;
         },
 
         reflow: function(box) {
@@ -2031,23 +2338,21 @@ var __meta__ = {
 
         options: {
             icon: {
-                zIndex: 1,
                 visible: true,
                 type: CIRCLE
             },
             label: {
-                zIndex: 2,
                 position: INSIDE,
                 visible: true,
                 align: CENTER,
                 vAlign: CENTER
             },
             line: {
-                visible: true,
-                zIndex: 2
+                visible: true
             },
             visible: true,
-            position: TOP
+            position: TOP,
+            zIndex: 2
         },
 
         hide: function() {
@@ -2121,16 +2426,17 @@ var __meta__ = {
                 marker = note.marker,
                 lineStart, box, contentBox;
 
+            // TODO: Review
             if (options.visible) {
                 if (inArray(position, [LEFT, RIGHT])) {
                     if (position === LEFT) {
                         contentBox = wrapperBox.alignTo(targetBox, position).translate(-length, targetBox.center().y - wrapperBox.center().y);
 
                         if (options.line.visible) {
-                            lineStart = Point2D(math.floor(targetBox.x1), center.y);
+                            lineStart = [math.floor(targetBox.x1), center.y];
                             note.linePoints = [
                                 lineStart,
-                                Point2D(math.floor(contentBox.x2), center.y)
+                                [math.floor(contentBox.x2), center.y]
                             ];
                             box = contentBox.clone().wrapPoint(lineStart);
                         }
@@ -2138,10 +2444,10 @@ var __meta__ = {
                         contentBox = wrapperBox.alignTo(targetBox, position).translate(length, targetBox.center().y - wrapperBox.center().y);
 
                         if (options.line.visible) {
-                            lineStart = Point2D(math.floor(targetBox.x2), center.y);
+                            lineStart = [math.floor(targetBox.x2), center.y];
                             note.linePoints = [
                                 lineStart,
-                                Point2D(math.floor(contentBox.x1), center.y)
+                                [math.floor(contentBox.x1), center.y]
                             ];
                             box = contentBox.clone().wrapPoint(lineStart);
                         }
@@ -2151,10 +2457,10 @@ var __meta__ = {
                         contentBox = wrapperBox.alignTo(targetBox, position).translate(targetBox.center().x - wrapperBox.center().x, length);
 
                         if (options.line.visible) {
-                            lineStart = Point2D(math.floor(center.x), math.floor(targetBox.y2));
+                            lineStart = [math.floor(center.x), math.floor(targetBox.y2)];
                             note.linePoints = [
                                 lineStart,
-                                Point2D(math.floor(center.x), math.floor(contentBox.y1))
+                                [math.floor(center.x), math.floor(contentBox.y1)]
                             ];
                             box = contentBox.clone().wrapPoint(lineStart);
                         }
@@ -2162,10 +2468,10 @@ var __meta__ = {
                         contentBox = wrapperBox.alignTo(targetBox, position).translate(targetBox.center().x - wrapperBox.center().x, -length);
 
                         if (options.line.visible) {
-                            lineStart = Point2D(math.floor(center.x), math.floor(targetBox.y1));
+                            lineStart = [math.floor(center.x), math.floor(targetBox.y1)];
                             note.linePoints = [
                                 lineStart,
-                                Point2D(math.floor(center.x), math.floor(contentBox.y2))
+                                [math.floor(center.x), math.floor(contentBox.y2)]
                             ];
                             box = contentBox.clone().wrapPoint(lineStart);
                         }
@@ -2190,35 +2496,26 @@ var __meta__ = {
             }
         },
 
-        getViewElements: function(view) {
-            var note = this,
-                elements = BoxElement.fn.getViewElements.call(note, view),
-                group = view.createGroup({
-                    data: { modelId: note.modelId },
-                    zIndex: 1
-                });
+        createVisual: function() {
+            BoxElement.fn.createVisual.call(this);
 
-            if (note.options.visible) {
-                append(elements, note.createLine(view));
+            if (this.options.visible) {
+                this.createLine();
             }
-
-            group.children = elements;
-
-            return [ group ];
         },
 
-        createLine: function(view) {
-            var note = this,
-                line = note.options.line;
+        createLine: function() {
+            var options = this.options.line;
 
-            return [
-                view.createPolyline(note.linePoints, false, {
-                    stroke: line.color,
-                    strokeWidth: line.width,
-                    dashType: line.dashType,
-                    zIndex: line.zIndex
-                })
-            ];
+            var path = draw.Path.fromPoints(this.linePoints, {
+                stroke: {
+                    color: options.color,
+                    width: options.width,
+                    dashType: options.dashType
+                }
+            });
+
+            this.visual.append(path);
         },
 
         click: function(widget, e) {
@@ -2263,69 +2560,62 @@ var __meta__ = {
             vAlign: CENTER
         },
 
-        getViewElements: function(view, renderOptions) {
+        getElement: function() {
             var marker = this,
                 options = marker.options,
                 type = options.type,
                 rotation = options.rotation,
                 box = marker.paddingBox,
                 element,
-                elementOptions,
                 center = box.center(),
                 halfWidth = box.width() / 2,
                 points,
                 i;
 
-            // Make sure that this element will be added in the model map.
-            ChartElement.fn.getViewElements.call(this, view);
-
-            if ((renderOptions || {}).visible !== true) {
-                if (!options.visible || !marker.hasBox())  {
-                    return [];
-                }
+            if (!options.visible || !marker.hasBox())  {
+                return;
             }
 
-            elementOptions = deepExtend(marker.elementStyle(), renderOptions);
+            var style = marker.visualStyle();
 
             if (type === CIRCLE) {
-                element = view.createCircle(Point2D(
-                    round(box.x1 + halfWidth, COORD_PRECISION),
-                    round(box.y1 + box.height() / 2, COORD_PRECISION)
-                ), halfWidth, elementOptions);
+                element = new draw.Circle(
+                    new geom.Circle([
+                        round(box.x1 + halfWidth, COORD_PRECISION),
+                        round(box.y1 + box.height() / 2, COORD_PRECISION)
+                    ], halfWidth),
+                    style
+                );
             }  else if (type === TRIANGLE) {
-                points = [
-                    Point2D(box.x1 + halfWidth, box.y1),
-                    Point2D(box.x1, box.y2),
-                    Point2D(box.x2, box.y2)
-                ];
+                element = draw.Path.fromPoints([
+                    [box.x1 + halfWidth, box.y1],
+                    [box.x1, box.y2],
+                    [box.x2, box.y2]
+                ], style).close();
             } else if (type === CROSS) {
-                element = view.createGroup({
-                    zIndex: elementOptions.zIndex
-                });
+                element = new draw.MultiPath(style);
 
-                element.children.push(view.createPolyline(
-                    [Point2D(box.x1, box.y1), Point2D(box.x2, box.y2)], true, elementOptions
-                ));
-                element.children.push(view.createPolyline(
-                    [Point2D(box.x1, box.y2), Point2D(box.x2, box.y1)], true, elementOptions
-                ));
+                element.moveTo(box.x1, box.y1).lineTo(box.x2, box.y2);
+                element.moveTo(box.x1, box.y2).lineTo(box.x2, box.y1);
             } else {
-                points = box.points();
+                element = draw.Path.fromRect(box.toRect(), style);
             }
 
-            if (points) {
-                if (rotation) {
-                    for (i = 0; i < points.length; i++) {
-                        points[i].rotate(center, rotation);
-                    }
-                }
-
-                element = view.createPolyline(
-                    points, true, elementOptions
+            if (rotation) {
+                element.transform(geom.transform()
+                    .rotate(-rotation, [center.x, center.y])
                 );
             }
 
-            return [ element ];
+            return element;
+        },
+
+        createVisual: function() {
+            ChartElement.fn.createVisual.call(this);
+            var element = this.getElement();
+            if (element) {
+                this.visual.append(element);
+            }
         }
     });
 
@@ -2867,7 +3157,7 @@ var __meta__ = {
             return ticks;
         },
 
-        renderTicks: function(view) {
+        createTicks: function(lineGroup) {
             var axis = this,
                 ticks = [],
                 options = axis.options,
@@ -2876,7 +3166,8 @@ var __meta__ = {
                 majorTicks = options.majorTicks,
                 minorTicks = options.minorTicks,
                 tickLineOptions= {
-                    _alignLines: options._alignLines,
+                    // TODO
+                    // _alignLines: options._alignLines,
                     vertical: options.vertical
                 },
                 start, end;
@@ -2886,7 +3177,7 @@ var __meta__ = {
                 tickLineOptions.tickY = mirror ? lineBox.y1 - tickOptions.size : lineBox.y1;
                 tickLineOptions.position = tickPosition;
 
-                ticks.push(createAxisTick(view, tickLineOptions, tickOptions));
+                lineGroup.append(createAxisTick(tickLineOptions, tickOptions));
             }
 
             if (majorTicks.visible) {
@@ -2900,11 +3191,10 @@ var __meta__ = {
             return ticks;
         },
 
-        renderGridLines: function(view, altAxis) {
+        createGridLines: function(altAxis) {
             var axis = this,
-                items = [],
                 options = axis.options,
-                axisLineVisible = altAxis.options.line.visible,//check
+                axisLineVisible = altAxis.options.line.visible,
                 majorGridLines = options.majorGridLines,
                 minorGridLines = options.minorGridLines,
                 vertical = options.vertical,
@@ -2917,10 +3207,11 @@ var __meta__ = {
                 },
                 pos, majorTicks = [];
 
+            var container = this._gridLines;
             function render(tickPosition, gridLine) {
                 if (!inArray(tickPosition, majorTicks)) {
                     lineOptions.position = tickPosition;
-                    items.push(createAxisGridLine(view, lineOptions, gridLine));
+                    container.append(createAxisGridLine(lineOptions, gridLine));
 
                     majorTicks.push(tickPosition);
                 }
@@ -2934,7 +3225,7 @@ var __meta__ = {
                 axis.traverseMinorTicksPositions(render, minorGridLines);
             }
 
-            return items;
+            return container.children;
         },
 
         traverseMajorTicksPositions: function(callback, tickOptions) {
@@ -3598,63 +3889,6 @@ var __meta__ = {
         }
     });
 
-    var BarAnimation = ElementAnimation.extend({
-        options: {
-            easing: SWING
-        },
-
-        setup: function() {
-            var anim = this,
-                element = anim.element,
-                points = element.points,
-                options = element.options,
-                axis = options.vertical ? Y : X,
-                stackBase = options.stackBase,
-                aboveAxis = options.aboveAxis,
-                startPosition,
-                endState = anim.endState = {
-                    top: points[0].y,
-                    right: points[1].x,
-                    bottom: points[3].y,
-                    left: points[0].x
-                };
-
-            if (axis === Y) {
-                startPosition = valueOrDefault(stackBase,
-                    endState[aboveAxis ? BOTTOM : TOP]);
-            } else {
-                startPosition = valueOrDefault(stackBase,
-                    endState[aboveAxis ? LEFT : RIGHT]);
-            }
-
-            anim.startPosition = startPosition;
-
-            updateArray(points, axis, startPosition);
-        },
-
-        step: function(pos) {
-            var anim = this,
-                startPosition = anim.startPosition,
-                endState = anim.endState,
-                element = anim.element,
-                points = element.points;
-
-            if (element.options.vertical) {
-                points[0].y = points[1].y =
-                    interpolateValue(startPosition, endState.top, pos);
-
-                points[2].y = points[3].y =
-                    interpolateValue(startPosition, endState.bottom, pos);
-            } else {
-                points[0].x = points[3].x =
-                    interpolateValue(startPosition, endState.left, pos);
-
-                points[1].x = points[2].x =
-                    interpolateValue(startPosition, endState.right, pos);
-            }
-        }
-    });
-
     var BarIndicatorAnimatin = ElementAnimation.extend({
         options: {
             easing: SWING,
@@ -3953,38 +4187,68 @@ var __meta__ = {
     ViewFactory.current = new ViewFactory();
 
     var ExportMixin = {
+        extend: function(proto) {
+            if (!proto.exportVisual) {
+                throw new Error("Mixin target has no exportVisual method defined.");
+            }
+
+            proto.exportSVG = this.exportSVG;
+            proto.exportImage = this.exportImage;
+            proto.exportPDF = this.exportPDF;
+            proto.svg = this.svg;
+            proto.imageDataURL = this.imageDataURL;
+        },
+
+        exportSVG: function(options) {
+            return draw.exportSVG(this.exportVisual(), options);
+        },
+
+        exportImage: function(options) {
+            return draw.exportImage(this.exportVisual(), options);
+        },
+
+        exportPDF: function(options) {
+            return draw.exportPDF(this.exportVisual(), options);
+        },
+
         svg: function() {
-            if (dataviz.SVGView) {
-                var model = this._getModel(),
-                    view = new dataviz.SVGView(deepExtend({ encodeText: true }, model.options));
+            if (draw.svg.Surface) {
+                var surface = new draw.svg.Surface($("<div />"), {
+                    encodeText: true
+                });
 
-                view.load(model);
+                surface.draw(this.exportVisual());
+                var svg = surface.svg();
+                surface.destroy();
 
-                return view.render();
+                return svg;
             } else {
-                throw new Error("Unable to create SVGView. Check that kendo.dataviz.svg.js is loaded.");
+                throw new Error("SVG Export failed. Unable to export instantiate kendo.drawing.svg.Surface");
             }
         },
 
         imageDataURL: function() {
-            if (dataviz.CanvasView) {
-                if (dataviz.supportsCanvas()) {
-                    var model = this._getModel(),
-                        container = document.createElement("div"),
-                        view = new dataviz.CanvasView(model.options);
+            if (!kendo.support.canvas) {
+                return null;
+            }
 
-                    view.load(model);
+            if (draw.canvas.Surface) {
+                var container = $("<div />").css({
+                    display: "none",
+                    width: this.element.width(),
+                    height: this.element.height()
+                }).appendTo(document.body);
 
-                    return view.renderTo(container).toDataURL();
-                } else {
-                    kendo.logToConsole(
-                        "Warning: Unable to generate image. The browser does not support Canvas.\n" +
-                        "User agent: " + navigator.userAgent);
+                var surface = new draw.canvas.Surface(container);
+                surface.draw(this.exportVisual());
+                var image = surface._rootElement.toDataURL();
 
-                    return null;
-                }
+                surface.destroy();
+                container.remove();
+
+                return image;
             } else {
-                throw new Error("Unable to create CanvasView. Check that kendo.dataviz.canvas.js is loaded.");
+                throw new Error("Image Export failed. Unable to export instantiate kendo.drawing.canvas.Surface");
             }
         }
     };
@@ -4284,7 +4548,7 @@ var __meta__ = {
                 closed = that.closed,
                 points = dataPoints.slice(0),
                 length = points.length,
-                curve = [],
+                segments = [],
                 p0,p1,p2,
                 controlPoints,
                 initialControlPoint,
@@ -4297,11 +4561,11 @@ var __meta__ = {
             }
 
             if (length < 2 || (length == 2 && points[0].equals(points[1]))) {
-                return curve;
+                return segments;
             }
 
             p0 = points[0]; p1 = points[1]; p2 = points[2];
-            curve.push(p0);
+            segments.push(new draw.Segment(p0));
 
             while (p0.equals(points[length - 1])) {
                 closed = true;
@@ -4311,10 +4575,17 @@ var __meta__ = {
 
             if (length == 2) {
                 tangent = that.tangent(p0,p1, X,Y);
-                curve.push(that.firstControlPoint(tangent, p0, p1, X, Y),
-                    that.secondControlPoint(tangent, p0, p1, X, Y),
-                    p1);
-                return curve;
+
+                last(segments).controlOut(
+                    that.firstControlPoint(tangent, p0, p1, X, Y)
+                );
+
+                segments.push(new draw.Segment(
+                    p1,
+                    that.secondControlPoint(tangent, p0, p1, X, Y)
+                ));
+
+                return segments;
             }
 
             if (closed) {
@@ -4327,29 +4598,48 @@ var __meta__ = {
                 initialControlPoint = that.firstControlPoint(tangent, p0, p1, X, Y);
             }
 
-            curve.push(initialControlPoint);
-
+            var cp0 = initialControlPoint;
             for (var idx = 0; idx <= length - 3; idx++) {
                 that.removeDuplicates(idx, points);
                 length = points.length;
                 if (idx + 3 <= length) {
                     p0 = points[idx]; p1 = points[idx + 1]; p2 = points[idx + 2];
-
                     controlPoints = that.controlPoints(p0,p1,p2);
-                    curve.push(controlPoints[0], p1, controlPoints[1]);
+
+                    last(segments).controlOut(cp0);
+                    cp0 = controlPoints[1];
+
+                    var cp1 = controlPoints[0];
+                    segments.push(new draw.Segment(p1, cp1));
                 }
             }
 
             if (closed) {
                 p0 = points[length - 2]; p1 = points[length - 1]; p2 = points[0];
                 controlPoints = that.controlPoints(p0, p1, p2);
-                curve.push(controlPoints[0], p1, controlPoints[1], lastControlPoint, p2);
+
+                last(segments).controlOut(cp0);
+                segments.push(new draw.Segment(
+                    p1,
+                    controlPoints[0]
+                ));
+
+                last(segments).controlOut(controlPoints[1]);
+                segments.push(new draw.Segment(
+                    p2,
+                    lastControlPoint
+                ));
             } else {
                 tangent = that.tangent(p1, p2, X, Y);
-                curve.push(that.secondControlPoint(tangent, p1, p2, X, Y), p2);
+
+                last(segments).controlOut(cp0);
+                segments.push(new draw.Segment(
+                    p2,
+                    that.secondControlPoint(tangent, p1, p2, X, Y)
+                ));
             }
 
-            return curve;
+            return segments;
         },
 
         removeDuplicates: function(idx, points) {
@@ -4520,7 +4810,7 @@ var __meta__ = {
         },
 
         point: function (xValue, yValue, xField, yField) {
-            var controlPoint = Point2D();
+            var controlPoint = new geom.Point();
             controlPoint[xField] = xValue;
             controlPoint[yField] = yValue;
 
@@ -4570,6 +4860,32 @@ var __meta__ = {
         return value >= range.min && value <= range.max;
     }
 
+    function alignPathToPixel(path) {
+        if (!kendo.support.vml) {
+            for (var i = 0; i < path.segments.length; i++) {
+                path.segments[i].anchor().round(0).translate(0.5, 0.5);
+            }
+        }
+    }
+
+    function innerRadialStops(options) {
+        var gradient = this,
+            stops = options.stops,
+            usedSpace = ((options.innerRadius / options.radius) * 100),
+            i,
+            length = stops.length,
+            currentStop,
+            currentStops = [];
+
+        for (i = 0; i < length; i++) {
+            currentStop = deepExtend({}, stops[i]);
+            currentStop.offset = (currentStop.offset * (100 -  usedSpace) + usedSpace) / 100;
+            currentStops.push(currentStop);
+        }
+
+        return currentStops;
+    }
+
     decodeEntities._element = document.createElement("span");
 
     // Exports ================================================================
@@ -4603,7 +4919,6 @@ var __meta__ = {
         ExpandAnimation: ExpandAnimation,
         ExportMixin: ExportMixin,
         ArrowAnimation: ArrowAnimation,
-        BarAnimation: BarAnimation,
         BarIndicatorAnimatin: BarIndicatorAnimatin,
         FadeAnimation: FadeAnimation,
         FadeAnimationDecorator: FadeAnimationDecorator,
@@ -4621,6 +4936,7 @@ var __meta__ = {
         RootElement: RootElement,
         RotationAnimation: RotationAnimation,
         Sector: Sector,
+        ShapeBuilder: ShapeBuilder,
         ShapeElement: ShapeElement,
         Text: Text,
         TextMetrics: TextMetrics,
@@ -4630,6 +4946,7 @@ var __meta__ = {
         ViewElement: ViewElement,
         ViewFactory: ViewFactory,
 
+        alignPathToPixel: alignPathToPixel,
         animationDecorator: animationDecorator,
         append: append,
         autoFormat: autoFormat,

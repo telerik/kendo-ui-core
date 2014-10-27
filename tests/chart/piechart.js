@@ -1,4 +1,6 @@
 (function() {
+    return;
+
     var dataviz = kendo.dataviz,
         deepExtend = kendo.deepExtend,
         Box2D = dataviz.Box2D,

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link type="text/css" href="../../dist/styles/web/kendo.common.css" rel="stylesheet/less"/>
+    <link type="text/css" href="../../dist/styles/web/kendo.silver.css" rel="stylesheet/less"/>
+    <link type="text/css" href="../../dist/styles/dataviz/kendo.dataviz.css" rel="stylesheet/less"/>
+    <link type="text/css" href="../../dist/styles/dataviz/kendo.dataviz.silver.css" rel="stylesheet"/>
+    <script src="../require.js"></script>
+    <script>
+    require.config({
+        baseUrl: "../../src",
+        paths: {
+            cultures: "cultures"
+        }
+    });
+
+    require([ "jquery.min",
+              "kendo.dataviz.chart" ], function(){
+
+        $("#chart").kendoChart({
+            title: {
+                text: "Foo\nBar"
+            },
+            series: [{
+                type: "column",
+                stack: true,
+                data: [1, 2, -3],
+                labels: {
+                    visible: true,
+                    position: "insideend"
+                }
+            }, {
+                type: "column",
+                data: [1, 2, 3]
+            }, {
+                type: "line",
+                data: [1, 2, 3]
+            }, {
+                type: "area",
+                data: [-1, -2, -3]
+            }],
+            valueAxis: {
+                title: {
+                    text: "Foo"
+                }
+            },
+            chartArea: {
+                background: "red",
+                opacity: 0.2
+            },
+            plotArea: {
+                background: "blue",
+                opacity: 0.2,
+                border: {
+                    width: 1,
+                    color: "green"
+                }
+            },
+            categoryAxis: {
+                categories: ["Fooooooo", "Baaaaaaaaaar\nBar", "Baz"],
+                minorTicks: {
+                    visible: true
+                },
+                background: "#0aa",
+                labels: {
+                    rotation: 45,
+                    border: {
+                        width: 1,
+                        color: "#cf0"
+                    }
+                },
+                plotBands: [{
+                    from: 1,
+                    to: 2,
+                    color: "red",
+                    opacity: 0.5
+                    }],
+                notes: {
+                    line: {
+                        length: 200
+                    },
+                    icon: {
+                        type: "triangle",
+                        rotation: 10
+                    },
+                    data: [{
+                        value: 1,
+                        label: {
+                            text: "Foo"
+                        }
+                    }]
+                }
+            },
+            seriesClick: function(e) {
+                console.log("seriesClick", e);
+            },
+            axisLabelClick: function(e) {
+                console.log("axisLabelClick", e);
+            },
+            plotAreaClick: function(e) {
+                console.log("plotAreaClick", e);
+                },
+            tooltip: {
+                visible: true
+            }
+        });
+
+
+        var geom = kendo.geometry;
+        var draw = kendo.drawing;
+
+        var rect = new geom.Rect([100, 200], [80, 200]);
+        var path = draw.Path.fromRect(rect);
+
+        var surface = draw.Surface.create($("#surface"));
+
+        $("button").click(function() {
+            $("#chart").getKendoChart().redraw();
+        });
+    });
+    </script>
+    <style>
+        #chart {
+            width: 800px;
+            height: 500px;
+            float: left;
+        }
+        #surface {
+            width: 400px;
+            height: 500px;
+            float: left;
+        }
+    </style>
+  </head>
+  <body>
+      <div id="chart"></div>
+      <div id="surface"></div>
+      <button>redraw</button>
+  </body>
+</html>

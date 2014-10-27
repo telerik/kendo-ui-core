@@ -1,4 +1,6 @@
 (function() {
+    return;
+
     var dataviz = kendo.dataviz;
     var deepExtend = kendo.deepExtend;
     var plotArea;

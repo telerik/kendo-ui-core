@@ -1791,14 +1791,14 @@
             },
 
             _mouseover: function(e) {
-                var node = $(e.target).data("kendoNode");
+                var node = e.target._kendoNode;
                 if (node && node.srcElement._hover) {
                     node.srcElement._hover(true, node.srcElement);
                 }
             },
 
             _mouseout: function(e) {
-                var node = $(e.target).data("kendoNode");
+                var node = e.target._kendoNode;
                 if (node && node.srcElement._hover) {
                     node.srcElement._hover(false, node.srcElement);
                 }

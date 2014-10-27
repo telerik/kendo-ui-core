@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.dataviz.chart" ], f);
+    define([ "./kendo.dataviz.chart", "./kendo.drawing" ], f);
 })(function(){
 
 var __meta__ = {
@@ -17,6 +17,8 @@ var __meta__ = {
         kendo = window.kendo,
         deepExtend = kendo.deepExtend,
 
+        draw = kendo.drawing,
+        geom = kendo.geometry,
         dataviz = kendo.dataviz,
         AreaSegment = dataviz.AreaSegment,
         Axis = dataviz.Axis,
@@ -40,6 +42,7 @@ var __meta__ = {
         ScatterChart = dataviz.ScatterChart,
         ScatterLineChart = dataviz.ScatterLineChart,
         SeriesBinder = dataviz.SeriesBinder,
+        ShapeBuilder = dataviz.ShapeBuilder,
         SplineSegment = dataviz.SplineSegment,
         SplineAreaSegment = dataviz.SplineAreaSegment,
         append = dataviz.append,
@@ -75,7 +78,7 @@ var __meta__ = {
 
     // Polar and radar charts =================================================
     var GridLinesMixin = {
-        renderGridLines: function(view, altAxis) {
+        createGridLines: function(altAxis) {
             var axis = this,
                 options = axis.options,
                 radius = math.abs(axis.box.center().y - altAxis.lineBox().y1),
@@ -88,49 +91,45 @@ var __meta__ = {
                 majorAngles = axis.majorGridLineAngles(altAxis);
                 skipMajor = true;
 
-                gridLines = axis.gridLineElements(
-                    view, majorAngles, radius, options.majorGridLines
+                gridLines = axis.renderGridLines(
+                    majorAngles, radius, options.majorGridLines
                 );
             }
 
             if (options.minorGridLines.visible) {
                 minorAngles = axis.minorGridLineAngles(altAxis, skipMajor);
 
-                append(gridLines, axis.gridLineElements(
-                    view, minorAngles, radius, options.minorGridLines
+                append(gridLines, axis.renderGridLines(
+                    minorAngles, radius, options.minorGridLines
                 ));
             }
 
             return gridLines;
         },
 
-        gridLineElements: function(view, angles, radius, options) {
-            var axis = this,
-                center = axis.box.center(),
-                modelId = axis.plotArea.modelId,
-                i,
-                outerPt,
-                elements = [],
-                lineOptions;
-
-            lineOptions = {
-                data: { modelId: modelId },
-                zIndex: -1,
-                strokeWidth: options.width,
-                stroke: options.color,
-                dashType: options.dashType
+        renderGridLines: function(angles, radius, options) {
+            var style = {
+                stroke: {
+                    Width: options.width,
+                    color: options.color,
+                    dashType: options.dashType
+                }
             };
 
-            for (i = 0; i < angles.length; i++) {
-                outerPt = Point2D.onCircle(center, angles[i], radius);
+            var center = this.box.center();
+            var circle = new geom.Circle([center.x, center.y], radius);
+            var container = this._gridLines;
 
-                elements.push(view.createLine(
-                    center.x, center.y, outerPt.x, outerPt.y,
-                    lineOptions
-                ));
+            for (var i = 0; i < angles.length; i++) {
+                var line = new draw.Path(style);
+
+                line.moveTo(circle.center)
+                    .lineTo(circle.pointAt(angles[i]));
+
+                container.append(line);
             }
 
-            return elements;
+            return container.children;
         },
 
         gridLineAngles: function(altAxis, step, skipStep) {
@@ -237,7 +236,7 @@ var __meta__ = {
             return $.map(this.majorIntervals(), $.proxy(this.intervalAngle, this));
         },
 
-        renderLine: function() {
+        createLine: function() {
             return [];
         },
 
@@ -249,17 +248,20 @@ var __meta__ = {
             return this.gridLineAngles(altAxis, 0.5, skipMajor ? 1 : 0);
         },
 
-        renderPlotBands: function(view) {
+        createPlotBands: function() {
             var axis = this,
                 options = axis.options,
                 plotBands = options.plotBands || [],
-                elements = [],
                 i,
                 band,
                 slot,
                 singleSlot,
                 head,
                 tail;
+
+            var group = new draw.Group({
+                zIndex: -1
+            });
 
             for (i = 0; i < plotBands.length; i++) {
                 band = plotBands[i];
@@ -272,15 +274,19 @@ var __meta__ = {
                 tail = math.ceil(band.to) - band.to;
                 slot.angle -= (tail + head) * singleSlot.angle;
 
-                elements.push(view.createSector(slot, {
-                    fill: band.color,
-                    fillOpacity: band.opacity,
-                    strokeOpacity: band.opacity,
-                    zIndex: -1
-                }));
+                var ring = ShapeBuilder.current.createRing(slot, {
+                    fill: {
+                        color: band.color,
+                        opacity: band.opacity
+                    },
+                    stroke: {
+                        opacity: band.opacity
+                    }
+                });
+                group.append(ring);
             }
 
-            return elements;
+            axis.appendVisual(group);
         },
 
         plotBandSlot: function(band) {
@@ -351,11 +357,10 @@ var __meta__ = {
             }
         },
 
-        renderPlotBands: function(view) {
+        createPlotBands: function() {
             var axis = this,
                 options = axis.options,
                 plotBands = options.plotBands || [],
-                elements = [],
                 type = options.majorGridLines.type,
                 altAxis = axis.plotArea.polarAxis,
                 majorAngles = altAxis.majorAngles(),
@@ -366,37 +371,51 @@ var __meta__ = {
                 slot,
                 ring;
 
+            var group = new draw.Group({
+                zIndex: -1
+            });
+
             for (i = 0; i < plotBands.length; i++) {
                 band = plotBands[i];
                 bandStyle = {
-                    fill: band.color,
-                    fillOpacity: band.opacity,
-                    strokeOpacity: band.opacity,
-                    zIndex: -1
+                    fill: {
+                        color: band.color,
+                        opacity: band.opacity
+                    },
+                    stroke: {
+                        opacity: band.opacity
+                    }
                 };
 
                 slot = axis.getSlot(band.from, band.to, true);
                 ring = new Ring(center, center.y - slot.y2, center.y - slot.y1, 0, 360);
 
-                elements.push(type === ARC ?
-                    view.createRing(ring, bandStyle) :
-                    view.createPolyline(
-                        axis.plotBandPoints(ring, majorAngles), true, bandStyle
-                    )
-                );
+                var shape;
+                if (type === ARC) {
+                    shape = ShapeBuilder.current.createRing(ring, bandStyle);
+                } else {
+                    shape = draw.Path.fromPoints(
+                            axis.plotBandPoints(ring, majorAngles), bandStyle
+                    ).close();
+                }
+
+                group.append(shape);
             }
 
-            return elements;
+            axis.appendVisual(group);
         },
 
         plotBandPoints: function(ring, angles) {
             var innerPoints = [],
-                outerPoints = [],
-                i;
+                outerPoints = [];
 
-            for (i = 0; i < angles.length; i++) {
-                innerPoints.push(Point2D.onCircle(ring.c, angles[i], ring.ir));
-                outerPoints.push(Point2D.onCircle(ring.c, angles[i], ring.r));
+            var center = [ring.c.x, ring.c.y];
+            var innerCircle = new geom.Circle(center, ring.ir);
+            var outerCircle = new geom.Circle(center, ring.r);
+
+            for (var i = 0; i < angles.length; i++) {
+                innerPoints.push(innerCircle.pointAt(angles[i]));
+                outerPoints.push(outerCircle.pointAt(angles[i]));
             }
 
             innerPoints.reverse();
@@ -406,7 +425,7 @@ var __meta__ = {
             return outerPoints.concat(innerPoints);
         },
 
-        renderGridLines: function(view, altAxis) {
+        createGridLines: function(altAxis) {
             var axis = this,
                 options = axis.options,
                 majorTicks = axis.radarMajorGridLinePositions(),
@@ -416,60 +435,56 @@ var __meta__ = {
                 gridLines = [];
 
             if (options.majorGridLines.visible) {
-                gridLines = axis.gridLineElements(
-                    view, center, majorTicks, majorAngles, options.majorGridLines
+                gridLines = axis.renderGridLines(
+                    center, majorTicks, majorAngles, options.majorGridLines
                 );
             }
 
             if (options.minorGridLines.visible) {
                 minorTicks = axis.radarMinorGridLinePositions();
-                append(gridLines, axis.gridLineElements(
-                    view, center, minorTicks, majorAngles, options.minorGridLines
+                append(gridLines, axis.renderGridLines(
+                    center, minorTicks, majorAngles, options.minorGridLines
                 ));
             }
 
             return gridLines;
         },
 
-        gridLineElements: function(view, center, ticks, angles, options) {
+        renderGridLines: function(center, ticks, angles, options) {
             var axis = this,
                 modelId = axis.plotArea.modelId,
-                elements = [],
-                elementOptions,
-                points,
                 tickRadius,
                 tickIx,
                 angleIx;
 
-            elementOptions = {
-                data: { modelId: modelId },
-                zIndex: -1,
-                strokeWidth: options.width,
-                stroke: options.color,
-                dashType: options.dashType
+            var style = {
+                stroke: {
+                    width: options.width,
+                    color: options.color,
+                    dashType: options.dashType
+                }
             };
 
+            var container = this._gridLines;
             for (tickIx = 0; tickIx < ticks.length; tickIx++) {
                 tickRadius = center.y - ticks[tickIx];
                 if(tickRadius > 0) {
+                    var circle = new geom.Circle([center.x, center.y], tickRadius);
                     if (options.type === ARC) {
-                        elements.push(view.createCircle(
-                            center, tickRadius, elementOptions
-                        ));
+                        container.append(new draw.Circle(circle, style));
                     } else {
-                        points = [];
+                        var line = new draw.Path(style);
                         for (angleIx = 0; angleIx < angles.length; angleIx++) {
-                            points.push(
-                                Point2D.onCircle(center, angles[angleIx], tickRadius)
-                            );
+                            line.lineTo(circle.pointAt(angles[angleIx]));
                         }
 
-                        elements.push(view.createPolyline(points, true, elementOptions));
+                        line.close();
+                        container.append(line);
                     }
                 }
             }
 
-            return elements;
+            return container.elements;
         },
 
         getValue: function(point) {
@@ -657,7 +672,7 @@ var __meta__ = {
 
         majorAngles: RadarCategoryAxis.fn.majorAngles,
 
-        renderLine: function() {
+        createLine: function() {
             return [];
         },
 
@@ -670,7 +685,7 @@ var __meta__ = {
                       skipMajor ? this.options.majorUnit : 0);
         },
 
-        renderPlotBands: RadarCategoryAxis.fn.renderPlotBands,
+        createPlotBands: RadarCategoryAxis.fn.createPlotBands,
 
         plotBandSlot: function(band) {
             return this.getSlot(band.from, band.to);
@@ -833,6 +848,7 @@ var __meta__ = {
             point.sector = pointSlot;
             point.reflow();
         },
+
         options: {
             clip: false
         }
@@ -942,8 +958,8 @@ var __meta__ = {
                 stackPoints = segment.stackPoints,
                 points = LineSegment.fn.points.call(segment, stackPoints);
 
-            points.unshift(center);
-            points.push(center);
+            points.unshift([center.x, center.y]);
+            points.push([center.x, center.y]);
 
             return points;
         }

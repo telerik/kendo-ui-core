@@ -1,4 +1,6 @@
 (function() {
+return;
+
     var barcode;
 
     function createBarcode() {

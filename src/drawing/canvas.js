@@ -29,7 +29,7 @@
         d = kendo.drawing,
         BaseNode = d.BaseNode,
         Color = kendo.Color,
-        Group = d.Group,        
+        Group = d.Group,
         Path = d.Path;
 
     // Constants ==============================================================
@@ -55,7 +55,11 @@
 
         destroy: function() {
             d.Surface.fn.destroy.call(this);
-            this._root.destroy();
+
+            if (this._root) {
+                this._root.destroy();
+                this._root = null;
+            }
         },
 
         type: "canvas",
@@ -111,7 +115,6 @@
         init: function(srcElement) {
             BaseNode.fn.init.call(this, srcElement);
             if (srcElement) {
-                srcElement.addObserver(this);
                 this.initClip();
             }
         },
@@ -338,8 +341,9 @@
 
             ctx.save();
 
-            ctx.transform(bbox.width(), 0, 0, bbox.height(), bbox.origin.x, bbox.origin.y);
-
+            if (!fill.userSpace()) {
+                ctx.transform(bbox.width(), 0, 0, bbox.height(), bbox.origin.x, bbox.origin.y);
+            }
             ctx.fillStyle = gradient;
             ctx.fill();
 
@@ -569,10 +573,6 @@
     }
 
     // Helpers ================================================================
-    function timestamp() {
-        return new Date().getTime();
-    }
-
     function addGradientStops(gradient, stops) {
         var color, stop, idx;
 

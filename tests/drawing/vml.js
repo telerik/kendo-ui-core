@@ -117,7 +117,7 @@
         test("clearing element clip option updates clip style", function() {
             srcElement.clip(null);
 
-            compareClipStyle(node, "rect(auto auto auto auto)");
+            compareClipStyle(node, "inherit");
         });
 
         test("changing element clip path updates clip style", function() {
@@ -152,8 +152,8 @@
             ok(node.element);
         });
 
-        test("sets kendoNode data", function() {
-            deepEqual($(node.element).data("kendoNode"), node);
+        test("sets _kendoNode expando", function() {
+            equal(node.element._kendoNode, node);
         });
 
         test("attachTo attaches DOM element", function() {
@@ -163,11 +163,28 @@
             equal(node.element.parentNode, parent);
         });
 
+        test("removeSelf destroys element", function() {
+            var element = document.createElement("div");
+            node.attachTo(element);
+            node.removeSelf();
+
+            equal(element.parentNode, null);
+            equal(node.element, null);
+        });
+
         test("clear cleans up child DOM nodes", function() {
             node.load([new Group()]);
             node.clear();
 
             equal(node.element.children.length, 0);
+        });
+
+        test("clear destroys children", function() {
+            var child = new TNode();
+            child.destroy = function() { ok(true); };
+
+            node.append(child);
+            node.clear();
         });
 
         test("renders visibility", function() {
@@ -269,8 +286,8 @@
             equal(node.element.style.position, "relative");
         });
 
-        test("doesn't attach kendoNode", function() {
-            ok(!$(node.element).data("kendoNode"));
+        test("doesn't attach _kendoNode expando", function() {
+            ok(!node.element._kendoNode);
         });
 
         test("clear cleans up content", function() {
@@ -357,7 +374,8 @@
 
         module("GroupNode", {
             setup: function() {
-                groupNode = new GroupNode(new d.Group());
+                group = new d.Group();
+                groupNode = new GroupNode(group);
             }
         });
 
@@ -371,6 +389,19 @@
 
         test("renders nowrap", function() {
             equal(groupNode.element.style["white-space"], "nowrap");
+        });
+
+        test("changing clip sets dimensions", function() {
+            groupNode.css = function(name, value) {
+                if (name === "width") {
+                    equal(value, 120);
+                } else if (name === "height") {
+                    equal(value, 130);
+                }
+            };
+
+            var clipRect = new g.Rect([20, 30], [100, 100]);
+            group.clip(d.Path.fromRect(clipRect));
         });
 
         test("load appends child nodes", function() {
@@ -490,23 +521,6 @@
         });
 
         // ------------------------------------------------------------
-        module("GroupNode / source observer", {
-            setup: function() {
-                group = new Group();
-                groupNode = new GroupNode(group);
-            }
-        });
-
-        test("Adds srcElement observer", function() {
-            equal(group.observers()[0], groupNode);
-        });
-
-        test("clear removes srcElement observer", function() {
-            groupNode.clear();
-            equal(group.observers().length, 0);
-        });
-
-        // ------------------------------------------------------------
         module("GroupNode / clip", {
             setup: function() {
                 group = new Group();
@@ -610,7 +624,8 @@
         function createNode(pathOptions) {
             path = new Path(deepExtend({
                 stroke: {
-                    width: 1
+                    width: 1,
+                    color: "black"
                 }
             }, pathOptions));
             strokeNode = new StrokeNode(path);
@@ -649,6 +664,21 @@
             equal(strokeNode.element.on, "false");
         });
 
+        test("renders on attribute when stroke color is 'transparent'", function() {
+            createNode({ stroke: { color: "transparent", width: 0 } });
+            equal(strokeNode.element.on, "false");
+        });
+
+        test("renders on attribute when stroke color is 'none'", function() {
+            createNode({ stroke: { color: "transparent", width: 0 } });
+            equal(strokeNode.element.on, "false");
+        });
+
+        test("renders on attribute when stroke color is ''", function() {
+            createNode({ stroke: { color: "", width: 0 } });
+            equal(strokeNode.element.on, "false");
+        });
+
         test("renders color", function() {
             createNode({ stroke: { color: "red" } });
             equal(strokeNode.element.color, "red");
@@ -669,8 +699,8 @@
             equal(strokeNode.element.opacity, "0.5");
         });
 
-        test("does not render stroke opacity if not set", function() {
-            ok(!strokeNode.element.opacity);
+        test("renders default stroke opacity if not set", function() {
+            equal(strokeNode.element.opacity, 1);
         });
 
         test("renders stroke dashType", function() {
@@ -774,14 +804,6 @@
     (function() {
         var LinearGradient = d.LinearGradient,
             RadialGradient = d.RadialGradient,
-            FillNodeMock = FillNode.extend({
-                createElement: function() {
-                    this.element = {
-                        colors: {}
-                    };
-                    this.setFill();
-                }
-            }),
             path, fillNode;
 
         function createNode(pathOptions) {
@@ -833,8 +855,13 @@
         });
 
         test("renders opacity", function() {
-            createNode({ fill: { opacity: 0.5 } });
+            createNode({ fill: { color: "white", opacity: 0.5 } });
             equal(fillNode.element.opacity, "0.5");
+        });
+
+        test("renders default opacity if not set", function() {
+            createNode({ fill: { color: "white" } });
+            equal(fillNode.element.opacity, 1);
         });
 
         test("renders linear gradient", function() {
@@ -843,13 +870,12 @@
                 start: [0.1, 0.2],
                 end: [0.5, 0.6]
             });
-            path = new Path({fill: linearGradient});
-            fillNode = new FillNodeMock(path);
+            createNode({fill: linearGradient});
             var element = fillNode.element;
             equal(element.angle, 225);
             equal(element.color, "#8080ff");
             equal(element.color2, "#0000ff");
-            equal(element.colors.value, "30% #8080ff,100% #0000ff");
+            equal(element.colors, "30% #8080ff,100% #0000ff");
             equal(element.focus, 0);
             equal(element.method, "none");
             equal(element.on, "true");
@@ -860,14 +886,16 @@
             var linearGradient = new LinearGradient({
                 stops: [[0.3, "#fff", 0.5], [1, "#fff", 1]]
             });
-            linearGradient.baseColor = "red";
-            path = new Path({fill: linearGradient});
-            fillNode = new FillNodeMock(path);
+
+            createNode({
+                fill: linearGradient,
+                baseColor: "red"
+            });
             var element = fillNode.element;
 
             equal(element.color, "#ff8080");
             equal(element.color2, "#ffffff");
-            equal(element.colors.value, "30% #ff8080,100% #ffffff");
+            equal(element.colors, "30% #ff8080,100% #ffffff");
         });
 
         test("renders on for RadialGradient", function() {
@@ -875,7 +903,7 @@
             equal(fillNode.element.on, "false");
         });
 
-        test("renders fallbackFill for RadialGradient if set", function() {
+        test("renders gradient fallbackFill for RadialGradient if set", function() {
             createNode({
                 fill: new RadialGradient({
                     fallbackFill: {
@@ -886,6 +914,77 @@
             });
             equal(fillNode.element.color, "red");
             equal(fillNode.element.opacity, 0.1);
+        });
+
+        test("renders element fallbackFill if set for RadialGradient", function() {
+            createNode({
+                fill: new RadialGradient(),
+                fallbackFill: {
+                    color: "red",
+                    opacity: 0.1
+                }
+            });
+            equal(fillNode.element.color, "red");
+            equal(fillNode.element.opacity, 0.1);
+        });
+
+        test("renders element fallbackFill if both RadialGradient fallbackFill and element fallbackFill are set", function() {
+            createNode({
+                fill: new RadialGradient({
+                    fallbackFill: {
+                        color: "green",
+                        opacity: 0.5
+                    }
+                }),
+                fallbackFill: {
+                    color: "red",
+                    opacity: 0.1
+                }
+            });
+            equal(fillNode.element.color, "red");
+            equal(fillNode.element.opacity, 0.1);
+        });
+
+        test("renders RadialGradient if it has supportVML set to true", function() {
+            var radialGradient = new RadialGradient({
+                stops: [{
+                    color: "red",
+                    offset: 0.3
+                }, {
+                    color: "green",
+                    offset: 0.7
+                }],
+                center: [100, 200]
+            });
+            radialGradient.supportVML = true;
+            path = new Path({
+                fill: radialGradient
+            });
+            path.segments.elements(Path.fromRect(new g.Rect([50, 60], [50, 100])).segments.elements());
+            fillNode = new FillNode(path);
+            var element = fillNode.element;
+            equal(element.color, "#ff0000");
+            equal(element.color2, "#008000");
+            equal(element.colors, "30% #ff0000,70% #008000");
+            equal(element.focus, "100%");
+            equal(element.method, "none");
+            equal(element.on, "true");
+            equal(element.type, "gradienttitle");
+            equal(element.focusposition, "1 1.4");
+        });
+
+        test("sets colors to colors.value if colors is already set", function() {
+            var linearGradient = new LinearGradient({
+                stops: [[0.3, "blue", 0.5], [1, "blue", 1]],
+                start: [0.1, 0.2],
+                end: [0.5, 0.6]
+            });
+            createNode({fill: linearGradient});
+            var element = fillNode.element;
+            element.colors = {};
+            updateOption("fill", linearGradient);
+
+            equal(element.colors.value, "30% #8080ff,100% #0000ff");
         });
 
         test("optionsChange sets fill color", function() {
@@ -899,6 +998,7 @@
         });
 
         test("optionsChange sets fill opacity", function() {
+            createNode({ fill: { color: "white" } });
             fillNode.attr = function(name, value) {
                 if(name === "opacity") {
                     equal(value, 0.4);
@@ -1176,6 +1276,14 @@
             shape.options.set("stroke", { width: 1 });
         });
 
+        test("optionsChange for opacity is forwarded to stroke", function() {
+            node.stroke.setOpacity = function() {
+                ok(true);
+            };
+
+            shape.options.set("opacity", 1);
+        });
+
         test("optionsChange is not forwarded to stroke", 0, function() {
             node.stroke.optionsChange = function() {
                 ok(true);
@@ -1190,6 +1298,14 @@
             };
 
             shape.options.set("fill", { color: "red" });
+        });
+
+        test("optionsChange for opacity is forwarded to fill", function() {
+            node.fill.setOpacity = function() {
+                ok(true);
+            };
+
+            shape.options.set("opacity", 1);
         });
 
         test("optionsChange is not forwarded to fill", 0, function() {
@@ -1245,9 +1361,16 @@
             equal(shape.observers()[0], node);
         });
 
-        test("clear removes srcElement observer", function() {
-            node.clear();
+        test("destroy removes srcElement observer", function() {
+            node.destroy();
             equal(shape.observers().length, 0);
+        });
+
+        test("destroy removes element reference", function() {
+            node.attachTo($("<div>")[0]);
+            var element = node.element;
+            node.destroy();
+            equal(element._kendoNode, null);
         });
 
         // ------------------------------------------------------------
@@ -1620,13 +1743,14 @@
 
         test("renders curve path", function() {
             equal(node.element.v,
-                  "m 15000,10000 c 15000,13491 14011,16915 12500,18660 10989,20406 9011,20406 7500,18660 e");
+                "m 15000,10000 c 15000,12327 14578,14645 13830,16428 13082,18211 12014,19444 10868,19848 9722,20252 8508,19824 7500,18660 e"
+            );
         });
 
         test("geometryChange updates path", function() {
             node.attr = function(name, value) {
                 equal(name, "v");
-                equal(value, "m 15000,10000 c 15000,15236 12618,20000 10000,20000 7382,20000 5000,15236 5000,10000 e");
+                equal(value, "m 15000,10000 c 15000,12618 14461,15220 13536,17071 12610,18922 11309,20000 10000,20000 8691,20000 7390,18922 6464,17071 5539,15220 5000,12618 5000,10000 e");
             };
 
             arc.geometry().setEndAngle(180);
