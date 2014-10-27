@@ -259,7 +259,7 @@ var getKendoFile = (function() {
                         var f = comp.getAMDFactory().factory;
                         f.body.forEach(function(stat){
                             if (!isReturnKendo(stat))
-                                node.body.unshift(stat);
+                                node.body.push(stat);
                         });
                     });
                     return node;
