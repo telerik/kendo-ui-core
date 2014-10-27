@@ -59,6 +59,15 @@ class SchedulerView extends \Kendo\SerializableObject {
     }
 
     /**
+    * The width of the table columns in timeline views. Value is treated as pixels.
+    * @param float $value
+    * @return \Kendo\UI\SchedulerView
+    */
+    public function columnWidth($value) {
+        return $this->setProperty('columnWidth', $value);
+    }
+
+    /**
     * Sets the dateHeaderTemplate option of the SchedulerView.
     * The template used to render the date header cells.By default the scheduler renders the date using the current culture date format.The fields which can be used in the template are:
     * @param string $value The id of the element which represents the kendo template.
@@ -121,7 +130,7 @@ class SchedulerView extends \Kendo\SerializableObject {
     }
 
     /**
-    * The height of the scheduler event rendered in month view.
+    * The height of the scheduler event rendered in month and timeline views.
     * @param float $value
     * @return \Kendo\UI\SchedulerView
     */
@@ -263,7 +272,7 @@ class SchedulerView extends \Kendo\SerializableObject {
     }
 
     /**
-    * If set to true the view will be initially shown in business hours mode. By default view is displyed in full day mode.
+    * If set to true the view will be initially shown in business hours mode. By default view is displayed in full day mode.
     * @param boolean $value
     * @return \Kendo\UI\SchedulerView
     */
@@ -312,7 +321,7 @@ class SchedulerView extends \Kendo\SerializableObject {
     }
 
     /**
-    * The type of the view. The built-in views are: "day", "week", "workWeek", "month" and "agenda".
+    * The type of the view. The built-in views are: "day", "week", "workWeek", "month", "agenda", "timeline", "timelineWeek" and "timelineWorkWeek".
     * @param string $value
     * @return \Kendo\UI\SchedulerView
     */
