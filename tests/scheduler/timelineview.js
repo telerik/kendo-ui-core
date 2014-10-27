@@ -46,7 +46,7 @@
         var view = setup({ date: new Date() });
 
         var timeElementsCount = view.element.find(".k-current-time").length;
-        equal(timeElementsCount,1);
+        equal(timeElementsCount,2);
     });
 
     test("Current time marker is rendered correctly", function() {

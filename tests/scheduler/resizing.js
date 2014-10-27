@@ -503,7 +503,7 @@
         equal(scheduler.dataSource.at(0).start.getHours(), 0);
         equal(scheduler.dataSource.at(0).start.getMinutes(), 0);
 
-        equal(scheduler.dataSource.at(0).end.getHours(), 4);
+        equal(scheduler.dataSource.at(0).end.getHours(), 2);
         equal(scheduler.dataSource.at(0).end.getMinutes(), 00);
     });
 
