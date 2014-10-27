@@ -2710,8 +2710,12 @@ var __meta__ = {
             return index;
         },
 
+        _isKPI: function(data) {
+            return data.type === "kpi" || data.measure;
+        },
+
         validate: function(data) {
-            var isMeasure = (data.type == 2 || "aggregator" in data);
+            var isMeasure = (data.type == 2 || "aggregator" in data || this._isKPI(data));
 
             if (isMeasure) {
                 return this.options.setting === "measures";
@@ -2737,10 +2741,21 @@ var __meta__ = {
 
         add: function(name) {
             var items = this.dataSource[this.options.setting]();
-            var idx = this._indexOf(name, items);
+            var i, l;
+            var idx;
 
-            if (idx == -1) {
-                items.push(name);
+            name = $.isArray(name) ? name.slice(0) : [name];
+
+            for (i = 0, l = name.length; i < l; i++) {
+                if (this._indexOf(name[i], items) !== -1) {
+                    name.splice(i, 1);
+                    i -= 1;
+                    l -= 1;
+                }
+            }
+
+            if (name.length) {
+                items = items.concat(name);
                 this.dataSource[this.options.setting](items);
             }
         },
