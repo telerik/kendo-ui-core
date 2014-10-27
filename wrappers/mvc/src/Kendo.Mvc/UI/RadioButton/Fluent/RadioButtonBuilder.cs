@@ -1,20 +1,20 @@
 ﻿namespace Kendo.Mvc.UI.Fluent
 {
     /// <summary>
-    /// Defines the fluent interface for configuring the <see cref="checkbox"/> component.
+    /// Defines the fluent interface for configuring the <see cref="RadioButton"/> component.
     /// </summary>
-    public class CheckBoxBuilder : WidgetBuilderBase<CheckBox, CheckBoxBuilder>
+    public class RadioButtonBuilder : WidgetBuilderBase<RadioButton, RadioButtonBuilder>
     {
-        public CheckBoxBuilder(CheckBox component)
+        public RadioButtonBuilder(RadioButton component)
             : base(component)
         { }
 
         /// <summary>
-        /// Checkes or unchecks the checkbox.
+        /// Checkes or unchecks the radio button.
         /// </summary>
         /// <param name="isChecked"></param>
         /// <returns></returns>
-        public CheckBoxBuilder Checked(bool isChecked)
+        public RadioButtonBuilder Checked(bool isChecked)
         {
             Component.Checked = isChecked;
 
@@ -22,18 +22,18 @@
         }
 
         /// <summary>
-        /// Enables or disables the checkbox.
+        /// Enables or disables the radio button.
         /// </summary>
         /// <param name="isEnabled"></param>
         /// <returns></returns>
-        public CheckBoxBuilder Enable(bool isEnabled)
+        public RadioButtonBuilder Enable(bool isEnabled)
         {
             Component.Enabled = isEnabled;
 
             return this;
         }
 
-        public CheckBoxBuilder Label(string text)
+        public RadioButtonBuilder Label(string text)
         {
             Component.Label = text;
 

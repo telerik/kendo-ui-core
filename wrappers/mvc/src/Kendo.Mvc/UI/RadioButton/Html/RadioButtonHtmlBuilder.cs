@@ -3,14 +3,14 @@
     using Kendo.Mvc.Extensions;
     using System.Web.Mvc;
 
-    public class CheckBoxHtmlBuilder
+    public class RadioButtonHtmlBuilder
     {
-        public CheckBoxHtmlBuilder(CheckBox checkBox)
+        public RadioButtonHtmlBuilder(RadioButton radioButton)
         {
-            Component = checkBox;
+            Component = radioButton;
         }
 
-        public CheckBox Component
+        public RadioButton Component
         {
             get;
             private set;
@@ -20,14 +20,14 @@
         {
             var fragment = new HtmlFragment();
 
-            Checkbox().AppendTo(fragment);
+            RadioButton().AppendTo(fragment);
             Label().AppendTo(fragment);
             HiddenInput().AppendTo(fragment);
 
             return fragment;
         }
 
-        public IHtmlNode Checkbox()
+        public IHtmlNode RadioButton()
         {
             string value = "";
             ModelState state;
@@ -43,30 +43,29 @@
             }
 
             return new HtmlElement("input", TagRenderMode.SelfClosing)
-                        .Attributes(new {
-                            name = Component.Name,
-                            id = Component.Id,
-                            type = "checkbox",
-                            value = "true",
-                            @class = "k-checkbox"
-                        })
-                        .ToggleAttribute("checked", "checked", Component.Checked)
-                        .Attributes(Component.GetUnobtrusiveValidationAttributes())
-                        .ToggleAttribute("disabled", "disabled", !Component.Enabled)
-                        .Attributes(Component.HtmlAttributes)
-                        .ToggleClass("input-validation-error", !Component.IsValid());
+                .Attributes(new {
+                    name = Component.Name,
+                    id = Component.Id,
+                    type = "radio",
+                    value = "true",
+                    @class = "k-radio"
+                })
+                .ToggleAttribute("checked", "checked", Component.Checked)
+                .Attributes(Component.GetUnobtrusiveValidationAttributes())
+                .ToggleAttribute("disabled", "disabled", !Component.Enabled)
+                .Attributes(Component.HtmlAttributes)
+                .ToggleClass("input-validation-error", !Component.IsValid());
         }
 
         public IHtmlNode Label()
         {
             return new HtmlElement("label")
-                        .Attributes(new
-                        {
-                            @for = Component.Id,
-                            @class = "k-checkbox-label"
-                        })
-                        .Text(Component.Label);
-            
+                .Attributes(new
+                {
+                    @for = Component.Id,
+                    @class = "k-radio-label"
+                })
+                .Text(Component.Label);            
         }
 
         public IHtmlNode HiddenInput()

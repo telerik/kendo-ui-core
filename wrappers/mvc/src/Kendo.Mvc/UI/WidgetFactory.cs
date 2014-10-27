@@ -683,33 +683,33 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Creates a new <see cref="TextBox"/>.
+        /// Creates a new <see cref="CheckBox"/>.
         /// </summary>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().CheckBox()
-        ///             .Name("TextBox")
+        ///             .Name("CheckBox")
         /// %&gt;
         /// </code>
         /// </example>
-        public virtual CheckBoxBuilder<string> CheckBox()
+        public virtual CheckBoxBuilder CheckBox()
         {
-            return new CheckBoxBuilder<string>(new CheckBox<string>(ViewContext, Initializer, ViewData));
+            return new CheckBoxBuilder(new CheckBox(ViewContext, Initializer, ViewData));
         }
 
         /// <summary>
-        /// Creates a new <see cref="TextBox{T}"/>.
+        /// Creates a new <see cref="RadioButton"/>.
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().TextBox&lt;double&gt;()
-        ///             .Name("TextBox")
+        ///  &lt;%= Html.Kendo().RadioButton()
+        ///             .Name("RadioButton")
         /// %&gt;
         /// </code>
         /// </example>
-        public virtual CheckBoxBuilder<T> CheckBox<T>()
+        public virtual RadioButtonBuilder RadioButton()
         {
-            return new CheckBoxBuilder<T>(new CheckBox<T>(ViewContext, Initializer, ViewData));
+            return new RadioButtonBuilder(new RadioButton(ViewContext, Initializer, ViewData));
         }
 
         /// <summary>

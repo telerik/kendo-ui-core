@@ -3,9 +3,9 @@
     using Kendo.Mvc.Infrastructure;
     using System.Web.Mvc;
 
-    public class CheckBox : WidgetBase
+    public class RadioButton : WidgetBase
     {
-        public CheckBox(ViewContext viewContext, IJavaScriptInitializer initializer, ViewDataDictionary viewData)
+        public RadioButton(ViewContext viewContext, IJavaScriptInitializer initializer, ViewDataDictionary viewData)
             : base(viewContext, initializer, viewData)
         {
             Enabled = true;
@@ -39,7 +39,7 @@
         {
             VerifySettings();
 
-            var renderer = new CheckBoxHtmlBuilder(this);
+            var renderer = new RadioButtonHtmlBuilder(this);
 
             renderer.Build().WriteTo(writer);
         }
