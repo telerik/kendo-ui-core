@@ -1595,13 +1595,13 @@
 
         var slots = div.find(".k-scheduler-content td");
 
-        dragdrop(scheduler, handle, slots.eq(3));
+        dragdrop(scheduler, handle, slots.eq(2));
 
         equal(scheduler.dataSource.at(0).start.getHours(), 1);
         equal(scheduler.dataSource.at(0).start.getMinutes(), 0);
 
-        equal(scheduler.dataSource.at(0).end.getHours(), 4);
-        equal(scheduler.dataSource.at(0).end.getMinutes(), 00);
+        equal(scheduler.dataSource.at(0).end.getHours(), 2);
+        equal(scheduler.dataSource.at(0).end.getMinutes(), 0);
     });
 
     test("hint shows start and end time when moving event in timeline view", function() {
