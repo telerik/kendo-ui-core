@@ -623,7 +623,6 @@
         equal(scheduler.dataSource.at(0).end.getDate(), 3);
     });
 
-
     test("moving event in month view changes its start and end time relatively to the current slot", function() {
         var scheduler = new kendo.ui.Scheduler(div, {
             date: new Date("2013/6/6"),
@@ -1583,7 +1582,6 @@
         equal(scheduler.dataSource.at(1).start.getMinutes(), 30);
     });
 
-    //=============TIMELINE
     tzTest("Sofia", "moving event in timeline view honours DST", function() {
         var scheduler = new kendo.ui.Scheduler(div, {
             date: new Date("2014/3/30"),
@@ -1625,7 +1623,6 @@
 
         equal($(".k-event-drag-hint .k-event-time").text(), "11:00 AM - 12:00 PM");
     });
-    //=============END TIMELINE
 
     function dragcancel(scheduler) {
         var draggable = scheduler._moveDraggable;

@@ -295,7 +295,6 @@
         }
     });
 
-    //=============TIMELINE
     test("timeline dragging and dropping the east resize handle changes the end time of the event", function() {
         var scheduler = new kendo.ui.Scheduler(div, {
             date: new Date("2013/6/6"),
@@ -507,7 +506,6 @@
         equal(scheduler.dataSource.at(0).end.getHours(), 4);
         equal(scheduler.dataSource.at(0).end.getMinutes(), 00);
     });
-    //=============END TIMELINE
 
     test("dragging and dropping the south resize handle changes the end time of the event", function() {
         var scheduler = new kendo.ui.Scheduler(div, {
