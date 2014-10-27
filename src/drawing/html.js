@@ -1251,6 +1251,14 @@
         }
 
         popNodeInfo();
+
+        //drawDebugBox(element, container);
+    }
+
+    function drawDebugBox(element, group) {
+        var box = element.getBoundingClientRect();
+        var path = drawing.Path.fromRect(new geo.Rect([ box.left, box.top ], [ box.width, box.height ]));
+        group.append(path);
     }
 
     function mmul(a, b) {

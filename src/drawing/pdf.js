@@ -16,6 +16,7 @@
     /*jshint eqnull:true  */
 
     var drawing     = kendo.drawing;
+    var geo         = kendo.geometry;
     var Color       = drawing.Color;
     var PDF         = kendo.pdf;
 
@@ -83,6 +84,11 @@
                     var size = bbox.getSize();
                     paperSize = [ size.width, size.height ];
                     addMargin = true;
+                    // var origin = bbox.getOrigin();
+                    // var tmp = new drawing.Group();
+                    // tmp.transform(new geo.Matrix(1, 0, 0, 1, -origin.x, -origin.y));
+                    // tmp.append(group);
+                    // group = tmp;
                 } else {
                     paperSize = "A4";
                 }
@@ -262,6 +268,9 @@
         if (clip) {
             drawPath(clip, page, pdf);
             page.clip();
+            // page.setStrokeColor(Math.random(), Math.random(), Math.random());
+            // page.setLineWidth(1);
+            // page.stroke();
         }
     }
 
@@ -434,6 +443,8 @@
     }
 
     function optimize(root) {
+        var clipbox = false;
+        var matrix = geo.Matrix.unit();
         var changed;
         do {
             changed = false;
@@ -463,7 +474,49 @@
             return b;
         }
 
+        function withClipping(shape, f) {
+            var saveclipbox = clipbox;
+            var savematrix = matrix;
+
+            if (shape.transform()) {
+                matrix = matrix.multiplyCopy(shape.transform().matrix());
+            }
+
+            var clip = shape.clip();
+            if (clip) {
+                clip = clip.bbox();
+                if (clip) {
+                    clip = clip.bbox(matrix);
+                    clipbox = clipbox ? geo.Rect.intersect(clipbox, clip) : clip;
+                }
+            }
+
+            try {
+                return f();
+            }
+            finally {
+                clipbox = saveclipbox;
+                matrix = savematrix;
+            }
+        }
+
+        function inClipbox(shape) {
+            if (clipbox == null) {
+                return false;
+            }
+            else if (clipbox) {
+                var box = shape.bbox(matrix);
+                return box && geo.Rect.intersect(box, clipbox);
+            }
+            else {
+                return true;
+            }
+        }
+
         function opt(shape) {
+            if (!inClipbox(shape)) {
+                return null;
+            }
             return dispatch({
                 Path: function(shape) {
                     if (shape.segments.length === 0 || !visible(shape)) {
@@ -507,12 +560,14 @@
                     return shape;
                 },
                 Group: function(shape) {
+                    return withClipping(shape, function(){
                     var el = new drawing.Group(shape.options);
                     el.children = optArray(shape.children);
                     if (shape !== root && el.children.length === 0) {
                         return change(null);
                     }
                     return el;
+                    });
                 }
             }, shape);
         }

@@ -38,47 +38,50 @@
     </style>
   </head>
   <body>
-    <table cellspacing="0" cellpadding="0"><tr><td>
-      <div style="width: 20em; margin: 1em">
-        <div id="grid"></div>
-        <button onclick="pdf('#grid')">Get PDF</button>
-        <button onclick="draw('#grid')">Draw</button>
-      </div>
-    </td><td>
-      <div style="width: 20em; margin: 1em">
-        <div id="tree"></div>
-        <button onclick="pdf('#tree')">Get PDF</button>
-        <button onclick="draw('#tree')">Draw</button>
-      </div>
-    </td></tr></table>
 
-    <table cellspacing="0" cellpadding="0"><tr><td>
-      <div style="width: 20em; margin: 1em">
-        <div id="calendar"></div>
-        <button onclick="pdf('#calendar')">Get PDF</button>
-        <button onclick="draw('#calendar')">Draw</button>
-      </div>
-    </td><td>
-      Won't work (no gradients; no &lt;input&gt;):<br />
-      <div style="width: 30em; margin: 1em">
-        <div id="flatcolorpicker"></div><br/>
-        <button onclick="pdf('#flatcolorpicker')">Get PDF</button>
-        <button onclick="draw('#flatcolorpicker')">Draw</button>
-      </div>
-    </td></tr></table>
+    <div id="content">
+      <table cellspacing="0" cellpadding="0"><tr><td>
+        <div style="width: 20em; margin: 1em">
+          <div id="grid"></div>
+          <button onclick="pdf('#grid')">Get PDF</button>
+          <button onclick="draw('#grid')">Draw</button>
+        </div>
+      </td><td>
+        <div style="width: 20em; margin: 1em">
+          <div id="tree"></div>
+          <button onclick="pdf('#tree')">Get PDF</button>
+          <button onclick="draw('#tree')">Draw</button>
+        </div>
+      </td></tr></table>
 
-    <table cellspacing="0" cellpadding="0"><tr><td>
-      <div style="width: 30em; margin: 1em">
-        <textarea id="editor"></textarea>
-        <button onclick="pdf('#editor')">Get PDF</button>
-        <button onclick="draw('#editor')">Draw</button>
-      </div>
-    </td><td>
-      <input id="slider" />
-    </td></tr></table>
+      <table cellspacing="0" cellpadding="0"><tr><td>
+        <div style="width: 20em; margin: 1em">
+          <div id="calendar"></div>
+          <button onclick="pdf('#calendar')">Get PDF</button>
+          <button onclick="draw('#calendar')">Draw</button>
+        </div>
+      </td><td>
+        Won't work (no gradients; no &lt;input&gt;):<br />
+        <div style="width: 30em; margin: 1em">
+          <div id="flatcolorpicker"></div><br/>
+          <button onclick="pdf('#flatcolorpicker')">Get PDF</button>
+          <button onclick="draw('#flatcolorpicker')">Draw</button>
+        </div>
+      </td></tr></table>
 
-    <button onclick="pdf('body')">PDF all</button>
-    <button onclick="draw('body')">Draw all</button>
+      <table cellspacing="0" cellpadding="0"><tr><td>
+        <div style="width: 30em; margin: 1em">
+          <textarea id="editor"></textarea>
+          <button onclick="pdf($('#editor').getKendoEditor().wrapper)">Get PDF</button>
+          <button onclick="draw($('#editor').getKendoEditor().wrapper)">Draw</button>
+        </div>
+      </td><td>
+        <input id="slider" />
+      </td></tr></table>
+    </div>
+
+    <button onclick="pdf('#content')">PDF all</button>
+    <button onclick="draw('#content')">Draw all</button>
 
     <script>
 
