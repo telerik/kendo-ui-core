@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $result = new DataSourceResult('sqlite:..//sample.db');
 
-    echo json_encode($result->read('EmployeeDirectory', array('EmployeeID', 'ReportsTo', 'FirstName', 'LastName', 'Position', 'Phone', 'Extension', 'Address'), $request));
+    echo json_encode($result->read('EmployeeDirectory', array('EmployeeID', 'ReportsTo', 'FirstName', 'LastName', 'Position', 'Phone', 'Extension' => array('type' => 'number'), 'Address'), $request));
 
     exit;
 }
@@ -43,7 +43,7 @@ $positionField->type('string');
 $phoneField = new \Kendo\Data\DataSourceSchemaModelField('Phone');
 $phoneField->type('string');
 
-$extentionField = new \Kendo\Data\DataSourceSchemaModelField('Extention');
+$extentionField = new \Kendo\Data\DataSourceSchemaModelField('Extension');
 $extentionField->type('number');
 
 $addressField = new \Kendo\Data\DataSourceSchemaModelField('Address');
