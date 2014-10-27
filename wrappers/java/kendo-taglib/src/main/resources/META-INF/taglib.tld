@@ -16883,7 +16883,8 @@ If the dataSource options is missing the options of the Grid's dataSource will b
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>JavaScript function which will customize how the input for the filter value is rendered.</description>
+            <description>JavaScript function which will customize how the input for the filter value is rendered.
+The function receives an object argument with two fields:</description>
             <name>template</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -16893,7 +16894,8 @@ If the dataSource options is missing the options of the Grid's dataSource will b
 
 
     <tag>
-        <description>JavaScript function which will customize how the input for the filter value is rendered.</description>
+        <description>JavaScript function which will customize how the input for the filter value is rendered.
+The function receives an object argument with two fields:</description>
         <name>grid-column-filterable-cell-template</name>
         <tag-class>com.kendoui.taglib.grid.ColumnFilterableCellTemplateFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -20472,7 +20474,8 @@ The supported filter values are startswith, endswith and contains.</description>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>The minimum number of characters the user must type before a search is performed. Set to higher value than 1 if the search could match a lot of items.</description>
+            <description>The minimum number of characters the user must type before a search is performed. Set to a higher value if the search could match a lot of items.
+A zero value means that a request will be made as soon as the user focuses the widget.</description>
             <name>minLength</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -23596,6 +23599,12 @@ By default the Kendo UI Scheduler widget displays "day" and "week" view.</descri
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>The width of the table columns in timeline views. Value is treated as pixels.</description>
+            <name>columnWidth</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
             <description>The template used to render the date header cells.By default the scheduler renders the date using the current culture date format.The fields which can be used in the template are:</description>
             <name>dateHeaderTemplate</name>
             <rtexprvalue>true</rtexprvalue>
@@ -23620,7 +23629,7 @@ By default the Kendo UI Scheduler widget displays "day" and "week" view.</descri
             <type>java.util.Date</type>
         </attribute>
         <attribute>
-            <description>The height of the scheduler event rendered in month view.</description>
+            <description>The height of the scheduler event rendered in month and timeline views.</description>
             <name>eventHeight</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -23698,7 +23707,7 @@ By default the Kendo UI Scheduler widget displays "day" and "week" view.</descri
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The type of the view. The built-in views are: "day", "week", "workWeek", "month" and "agenda".</description>
+            <description>The type of the view. The built-in views are: "day", "week", "workWeek", "month", "agenda", "timeline", "timelineWeek" and "timelineWorkWeek".</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>

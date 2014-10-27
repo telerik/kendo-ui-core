@@ -117,6 +117,14 @@ public class ViewTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         setProperty("allDaySlotTemplate", value);
     }
 
+    public float getColumnWidth() {
+        return (float)getProperty("columnWidth");
+    }
+
+    public void setColumnWidth(float value) {
+        setProperty("columnWidth", value);
+    }
+
     public java.lang.String getDateHeaderTemplate() {
         return (java.lang.String)getProperty("dateHeaderTemplate");
     }
