@@ -518,10 +518,10 @@ var Workbook = kendo.Class.extend({
         var docProps = zip.folder("docProps");
 
         docProps.file("core.xml", CORE({
-            creator: "Kendo UI",
-            lastModifiedBy: "Kendo UI",
-            created: new Date().toJSON(),
-            modified: new Date().toJSON()
+            creator: this.options.creator || "Kendo UI",
+            lastModifiedBy: this.options.creator || "Kendo UI",
+            created: this.options.date || new Date().toJSON(),
+            modified: this.options.date || new Date().toJSON()
         }));
 
         var sheetCount = this._sheets.length;
