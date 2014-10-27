@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.dropdownlist", "./kendo.editable", "./kendo.multiselect", "./kendo.window", "./kendo.datetimepicker", "./kendo.scheduler.recurrence", "./kendo.scheduler.view", "./kendo.scheduler.dayview", "./kendo.scheduler.agendaview", "./kendo.scheduler.monthview", "./kendo.mobile.actionsheet", "./kendo.mobile.pane" ], f);
+    define([ "./kendo.dropdownlist", "./kendo.editable", "./kendo.multiselect", "./kendo.window", "./kendo.datetimepicker", "./kendo.scheduler.recurrence", "./kendo.scheduler.view", "./kendo.scheduler.dayview", "./kendo.scheduler.agendaview", "./kendo.scheduler.monthview", "./kendo.scheduler.timelineview", "./kendo.mobile.actionsheet", "./kendo.mobile.pane" ], f);
 })(function(){
 
 var __meta__ = {
@@ -23,6 +23,11 @@ var __meta__ = {
         name: "Scheduler Month View",
         description: "Scheduler Month View",
         depends: [ "scheduler.monthview" ]
+    }, {
+        id: "scheduler-timelineview",
+        name: "Scheduler Timeline View",
+        description: "Scheduler Timeline View",
+        depends: [ "scheduler.timelineview" ]
     }, {
         id: "scheduler-mobile",
         name: "Scheduler adaptive rendering",
