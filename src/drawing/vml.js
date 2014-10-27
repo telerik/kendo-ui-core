@@ -58,10 +58,13 @@
         type: "vml",
 
         destroy: function() {
-            this._root.destroy();
-            this._root = null;
+            if (this._root) {
+                this._root.destroy();
+                this._root = null;
 
-            this.element.off(NS);
+                this.element.off(NS);
+            }
+
             d.Surface.fn.destroy.call(this);
         },
 

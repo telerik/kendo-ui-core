@@ -55,7 +55,11 @@
 
         destroy: function() {
             d.Surface.fn.destroy.call(this);
-            this._root.destroy();
+
+            if (this._root) {
+                this._root.destroy();
+                this._root = null;
+            }
         },
 
         type: "canvas",
