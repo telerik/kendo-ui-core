@@ -2272,14 +2272,12 @@ var __meta__ = {
                                 endTime = slot.endOffset(e.x.location, e.y.location, that.options.snap);
                             }
                         } else if (!slot.isDaySlot && slot.end - kendo.date.toUtcTime(clonedEvent.start) >= view._timeSlotInterval()) {
-                            //update needed
                             endTime = slot.endOffset(e.x.location, e.y.location, that.options.snap);
                         }
                     } else if (dir == "west") {
                         if (slot.isDaySlot && kendo.date.toUtcTime(kendo.date.getDate(clonedEvent.end)) >= kendo.date.toUtcTime(kendo.date.getDate(slot.startDate()))) {
                             startTime = slot.startOffset(e.x.location, e.y.location, that.options.snap);
                         } else if (!slot.isDaySlot && kendo.date.toUtcTime(clonedEvent.end) - slot.start >= view._timeSlotInterval()) {
-                            //update needed
                             startTime = slot.startOffset(e.x.location, e.y.location, that.options.snap);
                         }
                     }
@@ -2313,7 +2311,6 @@ var __meta__ = {
                         if (slot.isDaySlot) {
                             end = kendo.date.getDate(kendo.timezone.toLocalDate(endTime));
                         } else {
-                            //update needed
                             end = kendo.timezone.toLocalDate(endTime);
                         }
                     } else if (dir == "west") {
@@ -2322,7 +2319,6 @@ var __meta__ = {
                             start.setHours(0);
                             start.setMinutes(0);
                         } else {
-                            //update needed => event.isAllDay => set hours/ mins as well
                             start = kendo.timezone.toLocalDate(startTime);
                         }
                     }

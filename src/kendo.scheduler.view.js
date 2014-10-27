@@ -682,7 +682,6 @@ var __meta__ = {
                 end = kendo.date.toUtcTime(end);
             }
 
-            //implement totally custom _rect function for timeline, to support snap
             if (snap) {
                 top = startSlot.offsetTop;
                 bottom = endSlot.offsetTop + endSlot[property + "Height"];
@@ -709,10 +708,6 @@ var __meta__ = {
 
                 bottom = endSlot.offsetTop + endSlot[property + "Height"] - endSlot[property + "Height"] * endOffset / endSlotDuration;
 
-                //update? Custom prop needed for timeline
-                //right need to be calculated by getting the last possible slot.
-                // This most probably can be achieved by having more than one slotCollection for each row or improving this calculation
-                // to support time 'holes'
                 left = Math.round(startSlot.offsetLeft + startSlot[property + "Width"] * startOffset / startSlotDuration);
                 right = Math.round(endSlot.offsetLeft + endSlot[property + "Width"] - endSlot[property + "Width"] * endOffset / endSlotDuration);
             }
@@ -720,7 +715,7 @@ var __meta__ = {
             return {
                 top: top,
                 bottom: bottom,
-                //fix for first column has no left border
+                //first column has no left border
                 left: left === 0 ? left : left + 1,
                 right: right
             };
