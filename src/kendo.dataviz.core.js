@@ -4861,8 +4861,10 @@ var __meta__ = {
     }
 
     function alignPathToPixel(path) {
-        for (var i = 0; i < path.segments.length; i++) {
-            path.segments[i].anchor().round(0).translate(0.5, 0.5);
+        if (!kendo.support.vml) {
+            for (var i = 0; i < path.segments.length; i++) {
+                path.segments[i].anchor().round(0).translate(0.5, 0.5);
+            }
         }
     }
 
