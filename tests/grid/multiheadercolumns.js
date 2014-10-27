@@ -368,4 +368,90 @@
         equal(grid.cellIndex(cells.eq(1)), 1);
     });
 
+    test("k-first class is added to the first header cell of the child rows", function() {
+        var grid = new Grid(table, {
+            dataSource: {
+                data: [{ foo: "foo1", foo1: "foo1", foo2: "foo1", foo3: "foo1", foo4: "foo1"}]
+            },
+            columns: [{ title: "master2" }, { title: "master", columns: [{ title: "child" }, { title: "child2" }] }]
+        });
+
+        var trs = grid.thead.find("tr");
+
+        ok(!trs.first().children().first().hasClass("k-first"), "first row");
+        ok(trs.eq(1).children().first().hasClass("k-first"), "second row");
+        equal(trs.find("th.k-first").length, 1);
+    });
+
+    test("k-first class is added to the first header cell of the child rows with locked columns", function() {
+        var grid = new Grid(table, {
+            dataSource: {
+                data: [{ foo: "foo1", foo1: "foo1", foo2: "foo1", foo3: "foo1", foo4: "foo1"}]
+            },
+            columns: [{ title: "master2", locked: true },
+                { title: "master", locked: true, columns: [{ title: "child" }, { title: "child2" }] },
+                { title: "master2" },
+                { title: "master", columns: [{ title: "child" }, { title: "child2" }] }]
+        });
+
+        var trs = grid.thead.find("tr");
+
+        var lockedTrs = grid.lockedHeader.find("tr");
+
+        ok(!trs.first().children().first().hasClass("k-first"), "first row");
+        ok(trs.eq(1).children().first().hasClass("k-first"), "second row");
+        equal(trs.find("th.k-first").length, 1);
+
+        ok(!lockedTrs.first().children().first().hasClass("k-first"), "first locked row");
+        ok(lockedTrs.eq(1).children().first().hasClass("k-first"), "second locked row");
+        equal(lockedTrs.find("th.k-first").length, 1);
+
+    });
+
+    test("k-first class is not added to the first header cell of the child rows if details are set", function() {
+        var grid = new Grid(table, {
+            detailTemplate: "foo",
+            dataSource: {
+                data: [{ foo: "foo1", foo1: "foo1", foo2: "foo1", foo3: "foo1", foo4: "foo1"}]
+            },
+            columns: [{ title: "master2" }, { title: "master", columns: [{ title: "child" }, { title: "child2" }] }]
+        });
+
+        var trs = grid.thead.find("tr");
+
+        ok(!trs.first().children().first().hasClass("k-first"), "first row");
+        ok(!trs.eq(1).children(":not(.k-hierarchy-cell)").first().hasClass("k-first"), "second row");
+        ok(!trs.find("th.k-first").length);
+    });
+
+    test("k-first class is not added to the first header cell of the child rows with grouping", function() {
+        var grid = new Grid(table, {
+            dataSource: {
+                group: "foo",
+                data: [{ foo: "foo1", foo1: "foo1", foo2: "foo1", foo3: "foo1", foo4: "foo1"}]
+            },
+            columns: [{ title: "master2" }, { title: "master", columns: [{ title: "child" }, { title: "child2" }] }]
+        });
+
+        var trs = grid.thead.find("tr");
+
+        ok(!trs.first().children().first().hasClass("k-first"), "first row");
+        ok(!trs.eq(1).children(":not(.k-hierarchy-cell)").first().hasClass("k-first"), "second row");
+        ok(!trs.find("th.k-first").length);
+    });
+
+    test("k-first class is not added if no multi column headers are used", function() {
+        var grid = new Grid(table, {
+            filterable: { mode: "row" },
+            dataSource: {
+                data: [{ foo: "foo1", foo1: "foo1", foo2: "foo1", foo3: "foo1", foo4: "foo1"}]
+            },
+            columns: [{ title: "master2" }, { title: "master" }]
+        });
+
+        var trs = grid.thead.find("tr");
+
+        ok(!trs.first().children().first().hasClass("k-first"));
+        ok(!trs.find("th.k-first").length);
+    });
 })();

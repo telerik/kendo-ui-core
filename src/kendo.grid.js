@@ -2031,6 +2031,7 @@ var __meta__ = {
             that._updateTablesWidth();
             that._applyLockedContainersWidth();
             that._syncLockedContentHeight();
+            that._updateFirstColumnClass();
 
             if(!lockChanged) {
                 return;
@@ -5208,6 +5209,7 @@ var __meta__ = {
 
             tr.find("script").remove().end().prependTo(thead);
 
+
             if (that.thead) {
                 that._destroyColumnAttachments();
             }
@@ -5250,6 +5252,8 @@ var __meta__ = {
                 that._applyLockedContainersWidth();
             }
 
+            that._updateFirstColumnClass();
+
             that._resizable();
 
             that._draggable();
@@ -5258,6 +5262,38 @@ var __meta__ = {
 
             if (that.groupable) {
                 that._attachGroupable();
+            }
+        },
+
+        _updateFirstColumnClass: function() {
+            var that = this,
+                columns = that.columns || [],
+                hasDetails = that._hasDetails() && columns.length;
+
+            if (!hasDetails && !that._groups()) {
+                var rows = $();
+
+                var tr = that.thead.find(">tr:not(.k-filter-row):not(:first)");
+                columns = nonLockedColumns(columns);
+
+                if (tr.length && columns[0] && !columns[0].columns) {
+                    rows = rows.add(tr);
+                }
+
+                if (that._isLocked()) {
+                    tr = that.lockedHeader.find("thead>tr:not(.k-filter-row):not(:first)");
+                    columns = lockedColumns(that.columns);
+
+                    if (tr.length && columns[0] && !columns[0].columns) {
+                        rows = rows.add(tr);
+                    }
+                }
+
+                rows.each(function() {
+                    var ths = $(this).find("th");
+                    ths.removeClass("k-first");
+                    ths.eq(0).addClass("k-first");
+                });
             }
         },
 
@@ -5698,6 +5734,7 @@ var __meta__ = {
                 }
             }
 
+            that._updateFirstColumnClass();
             that.trigger(COLUMNHIDE, { column: column });
         },
 
@@ -5846,6 +5883,8 @@ var __meta__ = {
                     }
                 }
             }
+
+            that._updateFirstColumnClass();
 
             that.trigger(COLUMNSHOW, { column: column });
         },
