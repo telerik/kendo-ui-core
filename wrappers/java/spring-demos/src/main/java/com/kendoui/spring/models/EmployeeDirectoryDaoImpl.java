@@ -3,6 +3,7 @@ package com.kendoui.spring.models;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Restrictions;
@@ -40,4 +41,16 @@ public class EmployeeDirectoryDaoImpl implements EmployeeDirectoryDao {
         
         return criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY).list();
     } 
+        
+    public void saveOrUpdate(EmployeeDirectory employee) {
+        Session session = sessionFactory.getCurrentSession();
+        
+        session.saveOrUpdate(employee);
+    }
+    
+    public void delete(EmployeeDirectory employee) {
+        Session session = sessionFactory.getCurrentSession();
+        
+        session.delete(session.load(EmployeeDirectory.class, employee.getEmployeeId()));
+    }
 }

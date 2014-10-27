@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
 @Entity
 @Table(name="EmployeeDirectory")
 public class EmployeeDirectory {
@@ -109,6 +111,7 @@ public class EmployeeDirectory {
     }
     
     @Column(name="BirthDate")
+    @JsonSerialize(using=IsoDateJsonSerializer.class)
     public Date getBirthDate() {
         return birthDate;
     }
@@ -118,6 +121,7 @@ public class EmployeeDirectory {
     }
     
     @Column(name="HireDate")
+    @JsonSerialize(using=IsoDateJsonSerializer.class)
     public Date getHireDate() {
         return hireDate;
     }

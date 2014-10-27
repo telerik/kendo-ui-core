@@ -8,4 +8,8 @@ public interface EmployeeDirectoryDao {
     public List<EmployeeDirectory> getList();
     
     public List<DetailedEmployeeDirectory> getByEmployeeId(Integer employeeId);
+    
+    public void saveOrUpdate(EmployeeDirectory employee);
+    
+    public void delete(EmployeeDirectory employee);
 }
