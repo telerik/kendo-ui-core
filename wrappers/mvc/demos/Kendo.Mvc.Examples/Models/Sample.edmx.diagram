@@ -42,6 +42,8 @@
         <EntityTypeShape EntityType="SampleModel.UrbanArea" Width="1.5" PointX="1.4793553787653127" PointY="15.978519208719265" />
         <EntityTypeShape EntityType="SampleModel.EmployeeDirectory" Width="1.5" PointX="8.25" PointY="20.5" />
         <AssociationConnector Association="SampleModel.FK_EmployeeDirectory_EmployeeDirectory" />
+        <EntityTypeShape EntityType="SampleModel.OrgChart" Width="1.5" PointX="9.8276282576041432" PointY="24.301704716077868" />
+        <EntityTypeShape EntityType="SampleModel.OrgChartConnection" Width="1.5" PointX="0.98377165989194615" PointY="19.159078532438297" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

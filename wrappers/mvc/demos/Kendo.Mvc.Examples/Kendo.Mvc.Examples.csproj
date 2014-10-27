@@ -630,6 +630,12 @@
     </Compile>
     <Compile Include="Models\TreeList\EmployeeDirectoryModel.cs" />
     <Compile Include="Models\TreeList\EmployeeDirectoryService.cs" />
+    <Compile Include="Models\OrgChart.cs">
+      <DependentUpon>Sample.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrgChartConnection.cs">
+      <DependentUpon>Sample.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\WebMail.cs" />
     <Compile Include="Models\WebMailDataRepository.cs" />
     <Compile Include="Models\Chart\AntennaGainItem.cs" />
