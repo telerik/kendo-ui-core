@@ -23,6 +23,9 @@ namespace Kendo.Mvc.UI
             DataSource = new DataSource();
             DataSource.ModelType(typeof(object));
 
+            ConnectionsDataSource = new DataSource();
+            ConnectionsDataSource.ModelType(typeof(object));
+
             //>> Initialization
         
             ConnectionDefaults = new DiagramConnectionDefaultsSettings();
@@ -43,6 +46,12 @@ namespace Kendo.Mvc.UI
         }
 
         public DataSource DataSource
+        {
+            get;
+            private set;
+        }
+
+        public DataSource ConnectionsDataSource
         {
             get;
             private set;
@@ -119,6 +128,15 @@ namespace Kendo.Mvc.UI
             else if (DataSource.Data != null)
             {
                 json["dataSource"] = DataSource.Data;
+            }
+
+            if (!string.IsNullOrEmpty(ConnectionsDataSource.Transport.Read.Url) || ConnectionsDataSource.Type == DataSourceType.Custom)
+            {
+                json["connectionsDataSource"] = ConnectionsDataSource.ToJson();
+            }
+            else if (ConnectionsDataSource.Data != null)
+            {
+                json["connectionsDataSource"] = ConnectionsDataSource.Data;
             }
 
 //>> Serialization

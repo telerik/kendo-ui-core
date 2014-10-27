@@ -175,7 +175,7 @@ namespace Kendo.Mvc.UI.Fluent
         //<< Fields
 
         /// <summary>
-        /// Configure the DataSource of the component
+        /// Configure the HierarchicalDataSource of the component
         /// </summary>
         /// <param name="configurator">The action that configures the <see cref="DataSource"/>.</param>
         /// <example>
@@ -193,6 +193,52 @@ namespace Kendo.Mvc.UI.Fluent
         public DiagramBuilder<TShapeModel, TConnectionModel> DataSource(Action<HierarchicalDataSourceBuilder<object>> configurator)
         {
             configurator(new HierarchicalDataSourceBuilder<object>(Component.DataSource, this.Component.ViewContext, this.Component.urlGenerator));
+
+            return this;
+        }
+
+        /// <summary>
+        /// Configure the DataSource of the component
+        /// </summary>
+        /// <param name="configurator">The action that configures the <see cref="DataSource"/>.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Diagram()
+        ///     .Name("diagram")
+        ///     .DataSource(dataSource => dataSource
+        ///         .Read(read => read
+        ///             .Action("_OrgChart", "Diagram")
+        ///         )
+        ///     )
+        ///  %&gt;
+        /// </code>
+        /// </example>
+        public DiagramBuilder<TShapeModel, TConnectionModel> DataSource(Action<DataSourceBuilder<object>> configurator)
+        {
+            configurator(new DataSourceBuilder<object>(Component.DataSource, this.Component.ViewContext, this.Component.urlGenerator));
+
+            return this;
+        }
+
+        /// <summary>
+        /// Configure the DataSource of the component
+        /// </summary>
+        /// <param name="configurator">The action that configures the <see cref="ConnectionsDataSource"/>.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Diagram()
+        ///     .Name("diagram")
+        ///     .DataSource(dataSource => dataSource
+        ///         .Read(read => read
+        ///             .Action("_OrgChart", "Diagram")
+        ///         )
+        ///     )
+        ///  %&gt;
+        /// </code>
+        /// </example>
+        public DiagramBuilder<TShapeModel, TConnectionModel> ConnectionsDataSource(Action<DataSourceBuilder<object>> configurator)
+        {
+            configurator(new DataSourceBuilder<object>(Component.DataSource, this.Component.ViewContext, this.Component.urlGenerator));
 
             return this;
         }
