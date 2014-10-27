@@ -15,6 +15,7 @@
         views.WeekView(weekView => weekView.Selected(true));
         views.MonthView();
         views.AgendaView();
+        views.TimelineView();
     })
     .DataSource(d => d
         .Model(m => { 

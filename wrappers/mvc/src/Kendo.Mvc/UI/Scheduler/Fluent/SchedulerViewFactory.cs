@@ -177,6 +177,39 @@
         }
 
         /// <summary>
+        /// Enables a Scheduler timeline view.
+        /// </summary>
+        /// <returns></returns>
+        public void TimelineView()
+        {
+            SchedulerTimelineView view = new SchedulerTimelineView(container);
+
+            container.Views.Add(view);
+        }
+
+        /// <summary>
+        /// Enables a Scheduler timeline week view.
+        /// </summary>
+        /// <returns></returns>
+        public void TimelineWeekView()
+        {
+            SchedulerTimelineWeekView view = new SchedulerTimelineWeekView(container);
+
+            container.Views.Add(view);
+        }
+
+        /// <summary>
+        /// Enables a Scheduler timeline work week view.
+        /// </summary>
+        /// <returns></returns>
+        public void TimelineWorkWeekView()
+        {
+            SchedulerTimelineWorkWeekView view = new SchedulerTimelineWorkWeekView(container);
+
+            container.Views.Add(view);
+        }
+
+        /// <summary>
         /// Enables a Scheduler agenda view.
         /// </summary>
         /// <returns></returns>

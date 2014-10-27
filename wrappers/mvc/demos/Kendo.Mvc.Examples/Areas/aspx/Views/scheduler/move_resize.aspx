@@ -16,6 +16,7 @@
     {
         views.DayView();
         views.WeekView(weekView => weekView.Selected(true));
+        views.TimelineView();
     })
     .Timezone("Etc/UTC")
     .DataSource(d => d

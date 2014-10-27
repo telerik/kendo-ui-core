@@ -1,25 +1,23 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/Web.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 
-<asp:Content  ContentPlaceHolderID="MainContent" runat="server">
-
+<asp:Content ID="Content1"  ContentPlaceHolderID="MainContent" runat="server">
 <%=Html.Kendo().Scheduler<Kendo.Mvc.Examples.Models.Scheduler.MeetingViewModel>()
     .Name("scheduler")
     .Date(new DateTime(2013,6 ,13))
     .StartTime(new DateTime(2013, 6, 13, 7, 00, 00))
-    .Height(600)
     .Views(views =>
     {
-        views.DayView();
-        views.WeekView(weekView => weekView.Selected(true));
-        views.MonthView();
-        views.AgendaView();
         views.TimelineView();
+        views.TimelineWeekView();
+        views.TimelineWorkWeekView();
     })
     .Timezone("Etc/UTC")
+    .Group(group => group.Resources("Rooms", "Attendees").Orientation(SchedulerGroupOrientation.Vertical))
     .Resources(resource =>
          {
             resource.Add(m => m.RoomID)
                 .Title("Room")
+                .Name("Rooms")
                 .DataTextField("Text")
                 .DataValueField("Value")
                 .DataColorField("Color")
@@ -29,6 +27,7 @@
                 });
             resource.Add(m => m.Attendees)
                 .Title("Attendees")
+                .Name("Attendees")
                 .Multiple(true)
                 .DataTextField("Text")
                 .DataValueField("Value")
@@ -41,14 +40,14 @@
          })
     .DataSource(d => d
             .Model(m => { 
-                m.Id(f => f.MeetingID);        
+                m.Id(f => f.MeetingID);     
                 m.Field(f => f.Title).DefaultValue("No title");
-                m.RecurrenceId(f => f.RecurrenceID);                                         
+                m.RecurrenceId(f => f.RecurrenceID);                                                  
             })
-        .Read("Meetings_Read", "Scheduler")
-        .Create(create => create.Action("Meetings_Create", "Scheduler").Data("serialize"))
-        .Destroy("Meetings_Destroy", "Scheduler")
-        .Update(update => update.Action("Meetings_Update", "Scheduler").Data("serialize"))
+            .Read("Grouping_Vertical_Read", "Scheduler")
+                .Create(create => create.Action("Grouping_Vertical_Create", "Scheduler").Data("serialize"))
+                .Destroy("Grouping_Vertical_Destroy", "Scheduler")
+                .Update(update => update.Action("Grouping_Vertical_Update", "Scheduler").Data("serialize"))
     )
 %>
 

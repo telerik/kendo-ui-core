@@ -10,6 +10,9 @@
         Month,
         Agenda,
         Custom,
-        WorkWeek
+        WorkWeek,
+        Timeline,
+        TimelineWeek,
+        TimelineWorkWeek
     }
 }

@@ -11,7 +11,8 @@
     {
         views.DayView();
         views.WeekView(weekView => weekView.Selected(true));
-        views.MonthView();        
+        views.MonthView();
+        views.TimelineView();
     })
     .Timezone("Etc/UTC")
     .Group(group => group.Resources("Rooms"))
