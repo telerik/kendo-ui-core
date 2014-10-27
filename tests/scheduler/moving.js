@@ -1597,7 +1597,7 @@
 
         dragdrop(scheduler, handle, slots.eq(3));
 
-        equal(scheduler.dataSource.at(0).start.getHours(), 2);
+        equal(scheduler.dataSource.at(0).start.getHours(), 1);
         equal(scheduler.dataSource.at(0).start.getMinutes(), 0);
 
         equal(scheduler.dataSource.at(0).end.getHours(), 4);
