@@ -554,6 +554,10 @@
         //    - `transform` -- transformation to apply
         //
         function drawEdge(color, len, Wtop, Wleft, Wright, rl, rr, transform) {
+            if (Wtop <= 0) {
+                return;
+            }
+
             var path, edge = new drawing.Group();
             setTransform(edge, transform);
             group.append(edge);
@@ -574,20 +578,16 @@
                 .close();
 
             if (rl.x) {
-                path = drawRoundCorner(Wleft, rl);
-                setTransform(path, [ -1, 0, 0, 1, rl.x, 0 ]);
-                edge.append(path);
+                drawRoundCorner(Wleft, rl, [ -1, 0, 0, 1, rl.x, 0 ]);
             }
 
             if (rr.x) {
-                path = drawRoundCorner(Wright, rr);
-                setTransform(path, [ 1, 0, 0, 1, len - rr.x, 0 ]);
-                edge.append(path);
+                drawRoundCorner(Wright, rr, [ 1, 0, 0, 1, len - rr.x, 0 ]);
             }
 
             // draws one round corner, starting at origin (needs to be
             // translated/rotated to be placed properly).
-            function drawRoundCorner(Wright, r) {
+            function drawRoundCorner(Wright, r, transform) {
                 var angle = Math.PI/2 * Wright / (Wright + Wtop);
 
                 // not sanitizing this one, because negative values
@@ -601,6 +601,8 @@
                     fill: { color: color },
                     stroke: null
                 }).moveTo(0, 0);
+
+                setTransform(path, transform);
 
                 addArcToPath(path, 0, r.y, {
                     startAngle: -90,
@@ -628,10 +630,8 @@
                         .lineTo(ri.x, 0);
                 }
 
-                return path.close();
+                edge.append(path.close());
             }
-
-            return edge;
         }
 
         // for left/right borders we need to invert the border-radiuses
@@ -881,36 +881,28 @@
             }
 
             // top border
-            if (top.width > 0) {
-                drawEdge(top.color,
-                         box.width, top.width, left.width, right.width,
-                         rTL, rTR,
-                         [ 1, 0, 0, 1, box.left, box.top ]);
-            }
+            drawEdge(top.color,
+                     box.width, top.width, left.width, right.width,
+                     rTL, rTR,
+                     [ 1, 0, 0, 1, box.left, box.top ]);
 
             // bottom border
-            if (bottom.width > 0) {
-                drawEdge(bottom.color,
-                         box.width, bottom.width, right.width, left.width,
-                         rBR, rBL,
-                         [ -1, 0, 0, -1, box.right, box.bottom ]);
-            }
+            drawEdge(bottom.color,
+                     box.width, bottom.width, right.width, left.width,
+                     rBR, rBL,
+                     [ -1, 0, 0, -1, box.right, box.bottom ]);
 
             // left border
-            if (shouldDrawLeft) {
-                drawEdge(left.color,
-                         box.height, left.width, bottom.width, top.width,
-                         inv(rBL), inv(rTL),
-                         [ 0, -1, 1, 0, box.left, box.bottom ]);
-            }
+            drawEdge(left.color,
+                     box.height, left.width, bottom.width, top.width,
+                     inv(rBL), inv(rTL),
+                     [ 0, -1, 1, 0, box.left, box.bottom ]);
 
             // right border
-            if (shouldDrawRight) {
-                drawEdge(right.color,
-                         box.height, right.width, top.width, bottom.width,
-                         inv(rTR), inv(rBR),
-                         [ 0, 1, -1, 0, box.right, box.top ]);
-            }
+            drawEdge(right.color,
+                     box.height, right.width, top.width, bottom.width,
+                     inv(rTR), inv(rBR),
+                     [ 0, 1, -1, 0, box.right, box.top ]);
         }
     }
 
