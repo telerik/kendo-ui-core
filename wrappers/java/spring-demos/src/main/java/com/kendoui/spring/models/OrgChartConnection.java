@@ -11,10 +11,10 @@ import javax.persistence.Table;
 @Table(name="OrgChartConnections")
 public class OrgChartConnection {
     private int id;
-    private int from;
-    private int to;
+    private Integer from;
+    private Integer to;
     private String text;
-    
+
     @Id
     @Column(name="Id")
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -25,26 +25,26 @@ public class OrgChartConnection {
     public void setId(int id) {
         this.id = id;
     }
-        
-    @Column(name="From")    
-    public int getFrom() {
+
+    @Column(name="[From]")
+    public Integer getFrom() {
         return from;
     }
 
-    public void setFrom(int from) {
+    public void setFrom(Integer from) {
         this.from = from;
     }
 
-    @Column(name="To")    
-    public int getTo() {
+    @Column(name="[To]")
+    public Integer getTo() {
         return to;
     }
 
-    public void setTo(int to) {
+    public void setTo(Integer to) {
         this.to = to;
     }
-    
-    @Column(name="Text")   
+
+    @Column(name="Text")
     public String getText() {
         return text;
     }

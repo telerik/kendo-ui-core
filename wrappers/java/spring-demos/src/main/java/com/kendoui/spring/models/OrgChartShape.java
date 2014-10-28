@@ -16,7 +16,7 @@ public class OrgChartShape {
     private String title;
     private String image;
     private String colorScheme;
-    
+
     @Id
     @Column(name="Id")
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -27,8 +27,8 @@ public class OrgChartShape {
     public void setId(int id) {
         this.id = id;
     }
-    
-    @Column(name="FirstName")   
+
+    @Column(name="FirstName")
     public String getFirstName() {
         return firstName;
     }
@@ -36,8 +36,8 @@ public class OrgChartShape {
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
-    
-    @Column(name="LastName")   
+
+    @Column(name="LastName")
     public String getLastName() {
         return lastName;
     }
@@ -45,8 +45,8 @@ public class OrgChartShape {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-    
-    @Column(name="Title")   
+
+    @Column(name="Title")
     public String getTitle() {
         return title;
     }
@@ -54,8 +54,8 @@ public class OrgChartShape {
     public void setTitle(String title) {
         this.title = title;
     }
-    
-    @Column(name="Image")   
+
+    @Column(name="Image")
     public String getImage() {
         return image;
     }
@@ -63,8 +63,8 @@ public class OrgChartShape {
     public void setImage(String image) {
         this.image = image;
     }
-    
-    @Column(name="ColorScheme")   
+
+    @Column(name="ColorScheme")
     public String getColorScheme() {
         return colorScheme;
     }
