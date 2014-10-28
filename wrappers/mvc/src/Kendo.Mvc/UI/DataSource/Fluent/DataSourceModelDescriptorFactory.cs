@@ -70,7 +70,7 @@ namespace Kendo.Mvc.UI.Fluent
             return AddFieldDescriptor<TValue>(memberName, typeof(TValue));
         }
 
-        private DataSourceModelFieldDescriptorBuilder<TValue> AddFieldDescriptor<TValue>(string memberName, Type memberType)
+        protected DataSourceModelFieldDescriptorBuilder<TValue> AddFieldDescriptor<TValue>(string memberName, Type memberType)
         {
             var descriptor = model.AddDescriptor(memberName);
             

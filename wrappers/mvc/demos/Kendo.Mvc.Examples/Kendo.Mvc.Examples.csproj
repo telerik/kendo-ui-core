@@ -202,6 +202,8 @@
     <Compile Include="Controllers\PivotGrid\Remote_Flat_Data_BindingController.cs" />
     <Compile Include="Controllers\Scheduler\TimelineController.cs" />
     <Compile Include="Controllers\TreeList\EventsController.cs" />
+    <Compile Include="Controllers\TreeList\Remote_Data_BindingController.cs" />
+    <Compile Include="Controllers\TreeList\EventsController.cs" />
     <Compile Include="Controllers\TreeList\Editing_PopupController.cs" />
     <Compile Include="Controllers\TreeList\EmployeeDirectoryController.cs" />
     <Compile Include="Controllers\TreeList\EditingController.cs" />
@@ -3363,6 +3365,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\razor\Views\treelist\events.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\treelist\remote_data_binding.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\treelist\remote_data_binding.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -16,6 +16,13 @@ namespace Kendo.Mvc.Examples.Controllers
             employeeDirectory = new EmployeeDirectoryService(new SampleEntities());
         }
 
+        public JsonResult Index([DataSourceRequest] DataSourceRequest request, int? id)
+        {
+            var result = employeeDirectory.GetEmployees(id);
+
+            return Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult All([DataSourceRequest] DataSourceRequest request)
         {
             return Json(GetDirectory().ToDataSourceResult(request), JsonRequestBehavior.AllowGet);

@@ -4,7 +4,7 @@
 
     public class EmployeeDirectoryModel
     {
-        public int EmployeeId { get; set; }
+        public int? EmployeeId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int? ReportsTo { get; set; }
@@ -14,6 +14,7 @@
         public string Phone { get; set; }
         public int? Extension { get; set; }
         public string Position { get; set; }
+        public bool hasChildren { get; set; }
 
         private DateTime? birthDate;
         public DateTime? BirthDate
@@ -60,7 +61,7 @@
         {
             return new EmployeeDirectory
             {
-                EmployeeID = EmployeeId,
+                EmployeeID = EmployeeId ?? 0,
                 FirstName = FirstName,
                 LastName = LastName,
                 ReportsTo = ReportsTo,

@@ -22,20 +22,24 @@
         /// <summary>
         /// Specify the member used for parentId.
         /// </summary>
-        /// <typeparam name="TValue">Type of the field</typeparam>
         /// <param name="expression">Member access expression which describes the member</param>
-        public void ParentId<TValue>(Expression<Func<TModel, TValue>> expression)
+        public DataSourceModelFieldDescriptorBuilder<TValue> ParentId<TValue>(Expression<Func<TModel, TValue>> expression)
         {
             treelistModel.ParentId = expression.MemberWithoutInstance();
+
+            return AddFieldDescriptor<TValue>(treelistModel.ParentId, typeof(TValue));
         }
 
         /// <summary>
         /// Specify the member used for parentId.
         /// </summary>
         /// <param name="fieldName">The member name.</param>
-        public void ParentId(string fieldName)
+        /// <typeparam name="TValue">Type of the field</typeparam>
+        public virtual DataSourceModelFieldDescriptorBuilder<TValue> ParentId<TValue>(string memberName)
         {
-            treelistModel.ParentId = fieldName;
+            treelistModel.ParentId = memberName;
+
+            return AddFieldDescriptor<TValue>(memberName, typeof(TValue));
         }
     }
 }

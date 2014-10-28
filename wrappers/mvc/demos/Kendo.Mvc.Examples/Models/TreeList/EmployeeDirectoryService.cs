@@ -5,6 +5,30 @@
     using Kendo.Mvc.UI;
     using System;
     using System.Data;
+    using System.Collections.Generic;
+
+    public static class EmployeeDirectoryIEnumerableExtensions
+    {
+        public static IQueryable<EmployeeDirectoryModel> ToEmployeeDirectoryModel(this IEnumerable<EmployeeDirectory> enumerable)
+        {
+            return enumerable.Select(employee => new EmployeeDirectoryModel
+            {
+                EmployeeId = employee.EmployeeID,
+                ReportsTo = employee.ReportsTo,
+                FirstName = employee.FirstName,
+                LastName = employee.LastName,
+                Address = employee.Address,
+                City = employee.City,
+                Country = employee.Country,
+                BirthDate = employee.BirthDate,
+                HireDate = employee.HireDate,
+                Phone = employee.Phone,
+                Position = employee.Position,
+                Extension = employee.Extension,
+                hasChildren = employee.EmployeeDirectory1.Any()
+            }).AsQueryable();
+        }
+    }
 
     public class EmployeeDirectoryService
     {
@@ -20,23 +44,14 @@
         {
         }
 
+        public virtual IQueryable<EmployeeDirectoryModel> GetEmployees(int? employeeId)
+        {
+            return db.EmployeeDirectory.ToList().FindAll(e => e.ReportsTo == employeeId).ToEmployeeDirectoryModel();
+        }
+
         public virtual IQueryable<EmployeeDirectoryModel> GetAll()
         {
-            return db.EmployeeDirectory.ToList().Select(employee => new EmployeeDirectoryModel
-            {
-                EmployeeId = employee.EmployeeID,
-                ReportsTo = employee.ReportsTo,
-                FirstName = employee.FirstName,
-                LastName = employee.LastName,
-                Address = employee.Address,
-                City = employee.City,
-                Country = employee.Country,
-                BirthDate = employee.BirthDate,
-                HireDate = employee.HireDate,
-                Phone = employee.Phone,
-                Position = employee.Position,
-                Extension = employee.Extension
-            }).AsQueryable();  
+            return db.EmployeeDirectory.ToList().ToEmployeeDirectoryModel();
         }
 
         public virtual void Insert(EmployeeDirectoryModel employee, ModelStateDictionary modelState)
