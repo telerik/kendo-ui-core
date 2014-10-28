@@ -47,7 +47,9 @@
     function render(group, callback) {
         var fonts = [], images = [];
 
-        group = optimize(group);
+        var tmp = optimize(group);
+        var bbox = tmp.bbox;
+        group = tmp.root;
 
         group.traverse(function(element){
             dispatch({
@@ -79,16 +81,15 @@
             }
             var paperSize = getOption("paperSize", "auto"), addMargin = false;
             if (paperSize == "auto") {
-                var bbox = group.clippedBBox();
                 if (bbox) {
                     var size = bbox.getSize();
                     paperSize = [ size.width, size.height ];
                     addMargin = true;
-                    // var origin = bbox.getOrigin();
-                    // var tmp = new drawing.Group();
-                    // tmp.transform(new geo.Matrix(1, 0, 0, 1, -origin.x, -origin.y));
-                    // tmp.append(group);
-                    // group = tmp;
+                    var origin = bbox.getOrigin();
+                    var tmp = new drawing.Group();
+                    tmp.transform(new geo.Matrix(1, 0, 0, 1, -origin.x, -origin.y));
+                    tmp.append(group);
+                    group = tmp;
                 } else {
                     paperSize = "A4";
                 }
@@ -449,12 +450,13 @@
     function optimize(root) {
         var clipbox = false;
         var matrix = geo.Matrix.unit();
+        var currentBox = null;
         var changed;
         do {
             changed = false;
             root = opt(root);
         } while (root && changed);
-        return root;
+        return { root: root, bbox: currentBox };
 
         function change(newShape) {
             changed = true;
@@ -508,18 +510,20 @@
             if (clipbox == null) {
                 return false;
             }
-            else if (clipbox) {
-                var box = shape.bbox(matrix);
-                return box && geo.Rect.intersect(box, clipbox);
+            var box = shape.rawBBox().bbox(matrix);
+            if (clipbox && box) {
+                box = geo.Rect.intersect(box, clipbox);
             }
-            else {
-                return true;
-            }
+            return box;
         }
 
         function opt(shape) {
-            if (!inClipbox(shape)) {
-                return null;
+            if (!(shape instanceof drawing.Group || shape instanceof drawing.MultiPath)) {
+                var box = inClipbox(shape);
+                if (!box) {
+                    return change(null);
+                }
+                currentBox = currentBox ? geo.Rect.union(currentBox, box) : box;
             }
             return dispatch({
                 Path: function(shape) {
