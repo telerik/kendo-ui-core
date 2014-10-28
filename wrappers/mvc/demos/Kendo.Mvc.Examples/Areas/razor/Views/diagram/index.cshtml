@@ -43,16 +43,6 @@
 <div class="diagram-wrapper" style="margin: auto;">
     @(Html.Kendo().Diagram<OrgChartShape, OrgChartConnection>()
           .Name("diagram")
-          .Layout(l => l.Type(DiagramLayoutType.Layered))
-          .ShapeDefaults(sd => sd
-              .Visual("visualTemplate")
-          )
-          .ConnectionDefaults(cd => cd
-              .Stroke(s => s
-                  .Color("#979797")
-                  .Width(2)
-              )
-          )
           .DataSource(d => d
               .ShapeDataSource()
               .Model(m => 
@@ -79,6 +69,16 @@
               .Create("CreateConnection", "Diagram")
               .Destroy("DestroyConnection", "Diagram")
               .Update("UpdateConnection", "Diagram")
+          )
+          .Layout(l => l.Type(DiagramLayoutType.Layered))
+          .ShapeDefaults(sd => sd
+              .Visual("visualTemplate")
+          )
+          .ConnectionDefaults(cd => cd
+              .Stroke(s => s
+                  .Color("#979797")
+                  .Width(2)
+              )
           )
     )
 </div>

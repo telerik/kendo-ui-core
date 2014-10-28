@@ -1,4 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/Web.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/Web.Master" %>
+
+<%@ Import Namespace="Kendo.Mvc.Examples.Models" %>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
 
@@ -43,13 +45,34 @@
     }
 </script>
 <div class="diagram-wrapper" style="margin: auto;">
-    <%= Html.Kendo().Diagram()
+    <%= Html.Kendo().Diagram<OrgChartShape, OrgChartConnection>()
             .Name("diagram")
-            .DataSource(dataSource => dataSource
-                .Read(read => read
-                    .Action("_OrgChart", "Diagram")
-                )
-                .Model(m => m.Children("Items"))
+            .DataSource(d => d
+                .ShapeDataSource()
+                .Model(m => 
+                {
+                    m.Id(s => s.Id);
+                    m.Field(s => s.FirstName);
+                    m.Field(s => s.LastName);
+                    m.Field(s => s.Image);
+                    m.Field(s => s.Title);
+                })
+                .Read("ReadShapes", "Diagram")
+                .Create("CreateShape", "Diagram")
+                .Destroy("DestroyShape", "Diagram")
+                .Update("UpdateShape", "Diagram")
+            )
+            .ConnectionsDataSource(d => d
+                .Model(m =>
+                {
+                    m.Id(c => c.Id);
+                    m.From(c => c.From);
+                    m.To(c => c.To);
+                })
+                .Read("ReadConnections", "Diagram")
+                .Create("CreateConnection", "Diagram")
+                .Destroy("DestroyConnection", "Diagram")
+                .Update("UpdateConnection", "Diagram")
             )
             .Layout(l => l.Type(DiagramLayoutType.Layered))
             .ShapeDefaults(sd => sd
