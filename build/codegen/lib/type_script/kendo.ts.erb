@@ -602,9 +602,39 @@ declare module kendo.data {
     }
 
     class TreeListModel extends Model {
+        constructor(data?: any);
+        init(data?: any): void;
+
+        id: any;
+        parentId: any;
+
+        loaded(value: boolean): void;
+        loaded(): boolean;
+
+        static idField: string;
+        static fields: DataSourceSchemaModelFields;
+        static define(options: DataSourceSchemaModelWithFieldsObject): typeof TreeListModel;
+        static define(options: DataSourceSchemaModelWithFieldsArray): typeof TreeListModel;
     }
 
     class TreeListDataSource extends DataSource {
+        load(model: kendo.data.TreeListModel): JQueryPromise<any>;
+        childNodes(model: kendo.data.TreeListModel): kendo.data.TreeListModel[];
+        rootNodes(): kendo.data.TreeListModel[];
+        parentNode(model: kendo.data.TreeListModel): kendo.data.TreeListModel;
+        level(model: kendo.data.TreeListModel): number;
+        level(model: any): number;
+
+        add(model: Object): kendo.data.TreeListModel;
+        add(model: kendo.data.TreeListModel): kendo.data.TreeListModel;
+        at(index: number): kendo.data.TreeListModel;
+        cancelChanges(model?: kendo.data.TreeListModel): void;
+        get(id: any): kendo.data.TreeListModel;
+        getByUid(uid: string): kendo.data.TreeListModel;
+        indexOf(value: kendo.data.TreeListModel): number;
+        insert(index: number, model: kendo.data.TreeListModel): kendo.data.TreeListModel;
+        insert(index: number, model: Object): kendo.data.TreeListModel;
+        remove(model: kendo.data.TreeListModel): void;
     }
 
     class GanttTask extends Model {
