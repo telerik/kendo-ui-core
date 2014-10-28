@@ -193,6 +193,10 @@ function mapPoints(points) {
     return $.map(points, function(p) { return [[p.x, p.y]] });
 }
 
+function mapSegments(segments) {
+    return $.map(segments, function(segment) { return [[segment.anchor().x, segment.anchor().y]] });
+}
+
 function triggerEvent(eventName, element, offsetX, offsetY) {
     var offset = element.position(),
         e = new jQuery.Event(eventName);

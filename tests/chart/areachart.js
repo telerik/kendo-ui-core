@@ -1,27 +1,34 @@
 (function() {
-    return;
-
     var dataviz = kendo.dataviz,
         Box2D = dataviz.Box2D,
         categoriesCount = dataviz.categoriesCount,
         chartBox = new Box2D(0, 0, 800, 600),
         areaChart,
         root,
-        view,
         pointCoordinates,
         TOLERANCE = 1;
 
-    function setupAreaChart(plotArea, options) {
-        view = new ViewStub();
+    function segmentPaths() {
+        return areaChart._segments[0].visual.children;
+    }
 
+    function getAreaPath(areaChart) {
+        return segmentPaths()[0];
+    }
+
+    function getLinePath(areaChart) {
+        return segmentPaths()[1];
+    }
+
+    function setupAreaChart(plotArea, options) {
         areaChart = new dataviz.AreaChart(plotArea, options);
 
         root = new dataviz.RootElement();
         root.append(areaChart);
+        root.reflow();
 
-        areaChart.reflow();
-        areaChart.getViewElements(view);
-        pointCoordinates = mapPoints(view.log.path[0].points);
+        root.renderVisual();
+        pointCoordinates = mapSegments(getAreaPath(areaChart).segments);
     }
 
     function stubPlotArea(getCategorySlot, getValueSlot, options) {
@@ -342,7 +349,8 @@
         });
 
         // ------------------------------------------------------------
-        var polyline;
+        var linePath;
+        var areaPath;
 
         module("Area Chart / Rendering", {
             setup: function() {
@@ -363,30 +371,30 @@
                     ]
                 });
 
-                polyline = view.log.path[0];
-
+                linePath = getLinePath(areaChart);
+                areaPath = getAreaPath(areaChart);
             },
             teardown: destroyChart
         });
 
         test("sets area line width", function() {
-            equal(view.log.path[1].style.strokeWidth, 2);
+            equal(linePath.options.stroke.width, 2);
         });
 
         test("sets area line color", function() {
-            equal(view.log.path[1].style.stroke, "lineColor");
+            equal(linePath.options.stroke.color, "lineColor");
         });
 
         test("sets area line opacity", function() {
-            equal(view.log.path[1].style.strokeOpacity, 0.5);
+            equal(linePath.options.stroke.opacity, 0.5);
         });
 
-        test("sets area line opacity", function() {
-            equal(view.log.path[1].style.dashType, "dot");
+        test("sets area line dashType", function() {
+            equal(linePath.options.stroke.dashType, "dot");
         });
 
         test("sets area fill color", function() {
-            equal(polyline.style.fill, "areaColor");
+            equal(areaPath.options.fill.color, "areaColor");
         });
 
         test("sets area fill color to default if series color is fn", function() {
@@ -400,13 +408,13 @@
                     )
                 ]
             });
-            equal(view.log.path[0].style.fill, "areaColor");
+            equal(areaPath.options.fill.color, "areaColor");
         });
 
         test("sets area opacity", function() {
-            equal(polyline.style.fillOpacity, 0.1);
+            equal(areaPath.options.fill.opacity, 0.1);
         });
-
+/* migrate after adding animations
         test("area has same model id as its segment", function() {
             equal(polyline.style.data.modelId, areaChart._segments[0].modelId);
         });
@@ -434,9 +442,9 @@
             });
             equal(group.options.animation.type, "clip");
         });
-
+*/
         test("area shape is open", function() {
-            equal(polyline.closed, false);
+            ok(!areaPath.options.closed);
         });
 
         // ------------------------------------------------------------
@@ -466,7 +474,7 @@
                 ]
             });
 
-            equal(view.log.path.length, 1);
+            equal(segmentPaths().length, 1);
         });
 
         test("area continues after missing value", function() {
@@ -517,7 +525,7 @@
             segment;
 
         function getElement(modelElement) {
-            return $(dataviz.getElement(modelElement.id));
+            return $(modelElement.visual._observers[0].element);
         }
 
         function createAreaChart(options) {
