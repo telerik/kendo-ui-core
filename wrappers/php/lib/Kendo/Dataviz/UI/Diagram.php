@@ -149,6 +149,62 @@ data source is fired. By default the widget will bind to the data source specifi
     }
 
     /**
+    * Sets the Edit event of the Diagram.
+    * Fired when the user edits a shape or connection.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\Dataviz\UI\Diagram
+    */
+    public function Edit($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('Edit', $value);
+    }
+
+    /**
+    * Sets the Save event of the Diagram.
+    * Fired when the user a shape or connection da is saved.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\Dataviz\UI\Diagram
+    */
+    public function Save($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('Save', $value);
+    }
+
+    /**
+    * Sets the cancel event of the Diagram.
+    * Fired when the user clicks the "cancel" button in the popup window.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\Dataviz\UI\Diagram
+    */
+    public function cancel($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('cancel', $value);
+    }
+
+    /**
+    * Sets the remove event of the Diagram.
+    * Fired when the user delete a shape or connection.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\Dataviz\UI\Diagram
+    */
+    public function remove($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('remove', $value);
+    }
+
+    /**
     * Sets the change event of the Diagram.
     * Fired when an item is added or removed to/from the diagram.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
