@@ -1641,7 +1641,7 @@
             },
 
             _getEditDataSource: function() {
-                return this.editor.model === "shape" ? this.dataSource : this.connectionsDataSource;
+                return this.editor.options.type === "shape" ? this.dataSource : this.connectionsDataSource;
             },
 
             _editArgs: function() {
