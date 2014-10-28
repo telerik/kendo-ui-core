@@ -1,5 +1,9 @@
+<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/Web.Master" 
+Inherits="System.Web.Mvc.ViewPage<IEnumerable<Kendo.Mvc.Examples.Models.TreeList.EmployeeDirectoryModel>>" %>
+
+<asp:Content ContentPlaceHolderID="MainContent" runat="server">
 <div class="demo-section k-header">
-    @(Html.Kendo().TreeList<Kendo.Mvc.Examples.Models.TreeList.EmployeeDirectoryModel>()
+    <%: Html.Kendo().TreeList<Kendo.Mvc.Examples.Models.TreeList.EmployeeDirectoryModel>()
         .Name("treelist")
         .Columns(columns =>
         {
@@ -23,5 +27,6 @@
             })
         )
         .Height(540)
-    )
+    %>
 </div>
+</asp:Content>

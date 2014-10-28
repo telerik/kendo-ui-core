@@ -853,6 +853,9 @@
     <Content Include="Areas\aspx\Views\pivotgrid\local_flat_data_binding.aspx" />
     <Content Include="Areas\aspx\Views\pivotgrid\remote_flat_data_binding.aspx" />
     <Content Include="Areas\aspx\Views\scheduler\timeline.aspx" />
+    <Content Include="Areas\aspx\Views\treelist\editing_popup.aspx" />
+    <Content Include="Areas\aspx\Views\treelist\editing.aspx" />
+    <Content Include="Areas\aspx\Views\treelist\index.aspx" />
     <Content Include="Areas\aspx\Views\treemap\events.aspx" />
     <Content Include="Areas\aspx\Views\treemap\index.aspx" />
     <Content Include="Areas\aspx\Views\map\bubble_layer.aspx" />
