@@ -17,7 +17,7 @@
     <script>
         $(".export-pdf").click(function() {
             var chart = $("#chart").getKendoChart();
-            chart.exportPDF({ paperSize: "auto", landscape: true }).done(function(data) {
+            chart.exportPDF({ paperSize: "auto", margin: { left: "1cm", top: "1cm", right: "1cm", bottom: "1cm" } }).done(function(data) {
                 kendo.saveAs({
                     dataURI: data,
                     fileName: "chart.pdf",
