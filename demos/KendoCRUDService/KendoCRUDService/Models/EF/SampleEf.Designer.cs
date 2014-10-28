@@ -35,7 +35,6 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("SampleModel", "FK_Tasks_Tasks", "Task", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(KendoCRUDService.Models.EF.Task), "Task1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KendoCRUDService.Models.EF.Task), true)]
 [assembly: EdmRelationshipAttribute("SampleModel", "FK_GanttTasks_GanttTasks", "GanttTask", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(KendoCRUDService.Models.EF.GanttTask), "GanttTask1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KendoCRUDService.Models.EF.GanttTask), true)]
 [assembly: EdmRelationshipAttribute("SampleModel", "FK_EmployeeDirectory_EmployeeDirectory", "EmployeeDirectory", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(KendoCRUDService.Models.EF.EmployeeDirectory), "EmployeeDirectory1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KendoCRUDService.Models.EF.EmployeeDirectory), true)]
-[assembly: EdmRelationshipAttribute("SampleModel", "FK_EmployeeDirectory_EmployeeDirectory1", "EmployeeDirectory1", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(KendoCRUDService.Models.EF.EmployeeDirectory1), "EmployeeDirectory11", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KendoCRUDService.Models.EF.EmployeeDirectory1), true)]
 
 #endregion
 
@@ -378,22 +377,6 @@ namespace KendoCRUDService.Models.EF
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<EmployeeDirectory> EmployeeDirectory
-        {
-            get
-            {
-                if ((_EmployeeDirectory == null))
-                {
-                    _EmployeeDirectory = base.CreateObjectSet<EmployeeDirectory>("EmployeeDirectory");
-                }
-                return _EmployeeDirectory;
-            }
-        }
-        private ObjectSet<EmployeeDirectory> _EmployeeDirectory;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<OrgChartConnections> OrgChartConnections
         {
             get
@@ -426,18 +409,18 @@ namespace KendoCRUDService.Models.EF
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<EmployeeDirectory1> EmployeeDirectory1Set
+        public ObjectSet<EmployeeDirectory> EmployeeDirectory
         {
             get
             {
-                if ((_EmployeeDirectory1Set == null))
+                if ((_EmployeeDirectory == null))
                 {
-                    _EmployeeDirectory1Set = base.CreateObjectSet<EmployeeDirectory1>("EmployeeDirectory1Set");
+                    _EmployeeDirectory = base.CreateObjectSet<EmployeeDirectory>("EmployeeDirectory");
                 }
-                return _EmployeeDirectory1Set;
+                return _EmployeeDirectory;
             }
         }
-        private ObjectSet<EmployeeDirectory1> _EmployeeDirectory1Set;
+        private ObjectSet<EmployeeDirectory> _EmployeeDirectory;
 
         #endregion
 
@@ -588,14 +571,6 @@ namespace KendoCRUDService.Models.EF
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the EmployeeDirectory EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToEmployeeDirectory(EmployeeDirectory employeeDirectory)
-        {
-            base.AddObject("EmployeeDirectory", employeeDirectory);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the OrgChartConnections EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToOrgChartConnections(OrgChartConnections orgChartConnections)
@@ -612,11 +587,11 @@ namespace KendoCRUDService.Models.EF
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the EmployeeDirectory1Set EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the EmployeeDirectory EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToEmployeeDirectory1Set(EmployeeDirectory1 employeeDirectory1)
+        public void AddToEmployeeDirectory(EmployeeDirectory employeeDirectory)
         {
-            base.AddObject("EmployeeDirectory1Set", employeeDirectory1);
+            base.AddObject("EmployeeDirectory", employeeDirectory);
         }
 
         #endregion
@@ -2216,391 +2191,6 @@ namespace KendoCRUDService.Models.EF
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<EmployeeDirectory>("SampleModel.FK_EmployeeDirectory_EmployeeDirectory", "EmployeeDirectory", value);
-                }
-            }
-        }
-
-        #endregion
-
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="SampleModel", Name="EmployeeDirectory1")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class EmployeeDirectory1 : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new EmployeeDirectory1 object.
-        /// </summary>
-        /// <param name="employeeID">Initial value of the EmployeeID property.</param>
-        public static EmployeeDirectory1 CreateEmployeeDirectory1(global::System.Int32 employeeID)
-        {
-            EmployeeDirectory1 employeeDirectory1 = new EmployeeDirectory1();
-            employeeDirectory1.EmployeeID = employeeID;
-            return employeeDirectory1;
-        }
-
-        #endregion
-
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 EmployeeID
-        {
-            get
-            {
-                return _EmployeeID;
-            }
-            set
-            {
-                if (_EmployeeID != value)
-                {
-                    OnEmployeeIDChanging(value);
-                    ReportPropertyChanging("EmployeeID");
-                    _EmployeeID = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("EmployeeID");
-                    OnEmployeeIDChanged();
-                }
-            }
-        }
-        private global::System.Int32 _EmployeeID;
-        partial void OnEmployeeIDChanging(global::System.Int32 value);
-        partial void OnEmployeeIDChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String FirstName
-        {
-            get
-            {
-                return _FirstName;
-            }
-            set
-            {
-                OnFirstNameChanging(value);
-                ReportPropertyChanging("FirstName");
-                _FirstName = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("FirstName");
-                OnFirstNameChanged();
-            }
-        }
-        private global::System.String _FirstName;
-        partial void OnFirstNameChanging(global::System.String value);
-        partial void OnFirstNameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String LastName
-        {
-            get
-            {
-                return _LastName;
-            }
-            set
-            {
-                OnLastNameChanging(value);
-                ReportPropertyChanging("LastName");
-                _LastName = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("LastName");
-                OnLastNameChanged();
-            }
-        }
-        private global::System.String _LastName;
-        partial void OnLastNameChanging(global::System.String value);
-        partial void OnLastNameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Int32> ReportsTo
-        {
-            get
-            {
-                return _ReportsTo;
-            }
-            set
-            {
-                OnReportsToChanging(value);
-                ReportPropertyChanging("ReportsTo");
-                _ReportsTo = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("ReportsTo");
-                OnReportsToChanged();
-            }
-        }
-        private Nullable<global::System.Int32> _ReportsTo;
-        partial void OnReportsToChanging(Nullable<global::System.Int32> value);
-        partial void OnReportsToChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String Address
-        {
-            get
-            {
-                return _Address;
-            }
-            set
-            {
-                OnAddressChanging(value);
-                ReportPropertyChanging("Address");
-                _Address = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Address");
-                OnAddressChanged();
-            }
-        }
-        private global::System.String _Address;
-        partial void OnAddressChanging(global::System.String value);
-        partial void OnAddressChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String City
-        {
-            get
-            {
-                return _City;
-            }
-            set
-            {
-                OnCityChanging(value);
-                ReportPropertyChanging("City");
-                _City = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("City");
-                OnCityChanged();
-            }
-        }
-        private global::System.String _City;
-        partial void OnCityChanging(global::System.String value);
-        partial void OnCityChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String Country
-        {
-            get
-            {
-                return _Country;
-            }
-            set
-            {
-                OnCountryChanging(value);
-                ReportPropertyChanging("Country");
-                _Country = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Country");
-                OnCountryChanged();
-            }
-        }
-        private global::System.String _Country;
-        partial void OnCountryChanging(global::System.String value);
-        partial void OnCountryChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String Phone
-        {
-            get
-            {
-                return _Phone;
-            }
-            set
-            {
-                OnPhoneChanging(value);
-                ReportPropertyChanging("Phone");
-                _Phone = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Phone");
-                OnPhoneChanged();
-            }
-        }
-        private global::System.String _Phone;
-        partial void OnPhoneChanging(global::System.String value);
-        partial void OnPhoneChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Int32> Extension
-        {
-            get
-            {
-                return _Extension;
-            }
-            set
-            {
-                OnExtensionChanging(value);
-                ReportPropertyChanging("Extension");
-                _Extension = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Extension");
-                OnExtensionChanged();
-            }
-        }
-        private Nullable<global::System.Int32> _Extension;
-        partial void OnExtensionChanging(Nullable<global::System.Int32> value);
-        partial void OnExtensionChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.DateTime> BirthDate
-        {
-            get
-            {
-                return _BirthDate;
-            }
-            set
-            {
-                OnBirthDateChanging(value);
-                ReportPropertyChanging("BirthDate");
-                _BirthDate = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("BirthDate");
-                OnBirthDateChanged();
-            }
-        }
-        private Nullable<global::System.DateTime> _BirthDate;
-        partial void OnBirthDateChanging(Nullable<global::System.DateTime> value);
-        partial void OnBirthDateChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.DateTime> HireDate
-        {
-            get
-            {
-                return _HireDate;
-            }
-            set
-            {
-                OnHireDateChanging(value);
-                ReportPropertyChanging("HireDate");
-                _HireDate = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("HireDate");
-                OnHireDateChanged();
-            }
-        }
-        private Nullable<global::System.DateTime> _HireDate;
-        partial void OnHireDateChanging(Nullable<global::System.DateTime> value);
-        partial void OnHireDateChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String Position
-        {
-            get
-            {
-                return _Position;
-            }
-            set
-            {
-                OnPositionChanging(value);
-                ReportPropertyChanging("Position");
-                _Position = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Position");
-                OnPositionChanged();
-            }
-        }
-        private global::System.String _Position;
-        partial void OnPositionChanging(global::System.String value);
-        partial void OnPositionChanged();
-
-        #endregion
-
-    
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SampleModel", "FK_EmployeeDirectory_EmployeeDirectory1", "EmployeeDirectory11")]
-        public EntityCollection<EmployeeDirectory1> EmployeeDirectory1_1
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<EmployeeDirectory1>("SampleModel.FK_EmployeeDirectory_EmployeeDirectory1", "EmployeeDirectory11");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<EmployeeDirectory1>("SampleModel.FK_EmployeeDirectory_EmployeeDirectory1", "EmployeeDirectory11", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SampleModel", "FK_EmployeeDirectory_EmployeeDirectory1", "EmployeeDirectory1")]
-        public EmployeeDirectory1 EmployeeDirectory2
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<EmployeeDirectory1>("SampleModel.FK_EmployeeDirectory_EmployeeDirectory1", "EmployeeDirectory1").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<EmployeeDirectory1>("SampleModel.FK_EmployeeDirectory_EmployeeDirectory1", "EmployeeDirectory1").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<EmployeeDirectory1> EmployeeDirectory2Reference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<EmployeeDirectory1>("SampleModel.FK_EmployeeDirectory_EmployeeDirectory1", "EmployeeDirectory1");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<EmployeeDirectory1>("SampleModel.FK_EmployeeDirectory_EmployeeDirectory1", "EmployeeDirectory1", value);
                 }
             }
         }

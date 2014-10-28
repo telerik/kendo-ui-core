@@ -256,7 +256,7 @@
           <Property Name="Start" Type="datetime" Nullable="false" />
           <Property Name="End" Type="datetime" Nullable="false" />
           <Property Name="Title" Type="ntext" Nullable="false" />
-          <Property Name="Description" Type="ntext" />
+          <Property Name="Description" Type="ntext" Nullable="false" />
           <Property Name="RoomID" Type="int" />
           <Property Name="IsAllDay" Type="bit" Nullable="false" />
           <Property Name="RecurrenceRule" Type="ntext" />
@@ -388,7 +388,7 @@
           <Property Name="RegionID" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-      warning 6002: The table/view 'C:\WORK\KENDO\WRAPPERS\MVC\DEMOS\KENDO.MVC.EXAMPLES\APP_DATA\SAMPLE.MDF.dbo.Weather' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      warning 6002: The table/view 'C:\WORK\KENDO\DEMOS\KENDOCRUDSERVICE\KENDOCRUDSERVICE\APP_DATA\SAMPLE.MDF.dbo.Weather' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
       -->
         <EntityType Name="Weather">
           <Key>
@@ -710,17 +710,12 @@
             <End Role="GanttTask" EntitySet="GanttTasks" />
             <End Role="GanttTask1" EntitySet="GanttTasks" />
           </AssociationSet>
-          <EntitySet Name="EmployeeDirectory" EntityType="SampleModel.EmployeeDirectory" />
-          <AssociationSet Name="FK_EmployeeDirectory_EmployeeDirectory" Association="SampleModel.FK_EmployeeDirectory_EmployeeDirectory">
-            <End EntitySet="EmployeeDirectory" Role="EmployeeDirectory" />
-            <End EntitySet="EmployeeDirectory" Role="EmployeeDirectory1" />
-          </AssociationSet>
           <EntitySet Name="OrgChartConnections" EntityType="SampleModel.OrgChartConnections" />
           <EntitySet Name="OrgChartShapes" EntityType="SampleModel.OrgChartShapes" />
-          <EntitySet Name="EmployeeDirectory1Set" EntityType="SampleModel.EmployeeDirectory1" />
-          <AssociationSet Name="FK_EmployeeDirectory_EmployeeDirectory1" Association="SampleModel.FK_EmployeeDirectory_EmployeeDirectory1">
-            <End Role="EmployeeDirectory1" EntitySet="EmployeeDirectory1Set" />
-            <End Role="EmployeeDirectory11" EntitySet="EmployeeDirectory1Set" />
+          <EntitySet Name="EmployeeDirectory" EntityType="SampleModel.EmployeeDirectory" />
+          <AssociationSet Name="FK_EmployeeDirectory_EmployeeDirectory" Association="SampleModel.FK_EmployeeDirectory_EmployeeDirectory">
+            <End Role="EmployeeDirectory" EntitySet="EmployeeDirectory" />
+            <End Role="EmployeeDirectory1" EntitySet="EmployeeDirectory" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Category">
@@ -1157,37 +1152,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="EmployeeDirectory">
-          <Key>
-            <PropertyRef Name="EmployeeID" />
-          </Key>
-          <Property Name="EmployeeID" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
-          <Property Name="FirstName" MaxLength="255" FixedLength="false" Unicode="false" Type="String" />
-          <Property Name="LastName" MaxLength="255" FixedLength="false" Unicode="false" Type="String" />
-          <Property Name="ReportsTo" Type="Int32" />
-          <Property Name="Address" MaxLength="255" FixedLength="false" Unicode="false" Type="String" />
-          <Property Name="City" MaxLength="255" FixedLength="false" Unicode="false" Type="String" />
-          <Property Name="Country" MaxLength="100" FixedLength="false" Unicode="false" Type="String" />
-          <Property Name="Phone" MaxLength="100" FixedLength="false" Unicode="false" Type="String" />
-          <Property Name="Extension" Type="Int32" />
-          <Property Name="BirthDate" Precision="3" Type="DateTime" />
-          <Property Name="HireDate" Precision="3" Type="DateTime" />
-          <Property Name="Position" MaxLength="255" FixedLength="false" Unicode="true" Type="String" />
-          <NavigationProperty Name="EmployeeDirectory1" Relationship="SampleModel.FK_EmployeeDirectory_EmployeeDirectory" FromRole="EmployeeDirectory" ToRole="EmployeeDirectory1" />
-          <NavigationProperty Name="EmployeeDirectory2" Relationship="SampleModel.FK_EmployeeDirectory_EmployeeDirectory" FromRole="EmployeeDirectory1" ToRole="EmployeeDirectory" />
-        </EntityType>
-        <Association Name="FK_EmployeeDirectory_EmployeeDirectory">
-          <End Type="SampleModel.EmployeeDirectory" Multiplicity="0..1" Role="EmployeeDirectory" />
-          <End Type="SampleModel.EmployeeDirectory" Multiplicity="*" Role="EmployeeDirectory1" />
-          <ReferentialConstraint>
-            <Principal Role="EmployeeDirectory">
-              <PropertyRef Name="EmployeeID" />
-            </Principal>
-            <Dependent Role="EmployeeDirectory1">
-              <PropertyRef Name="ReportsTo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="OrgChartConnections">
           <Key>
             <PropertyRef Name="Id" />
@@ -1208,7 +1172,7 @@
           <Property Type="String" Name="Image" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="ColorScheme" MaxLength="10" FixedLength="true" Unicode="true" />
         </EntityType>
-        <EntityType Name="EmployeeDirectory1">
+        <EntityType Name="EmployeeDirectory">
           <Key>
             <PropertyRef Name="EmployeeID" />
           </Key>
@@ -1224,17 +1188,17 @@
           <Property Type="DateTime" Name="BirthDate" />
           <Property Type="DateTime" Name="HireDate" />
           <Property Type="String" Name="Position" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="EmployeeDirectory1_1" Relationship="SampleModel.FK_EmployeeDirectory_EmployeeDirectory1" FromRole="EmployeeDirectory1" ToRole="EmployeeDirectory11" />
-          <NavigationProperty Name="EmployeeDirectory2" Relationship="SampleModel.FK_EmployeeDirectory_EmployeeDirectory1" FromRole="EmployeeDirectory11" ToRole="EmployeeDirectory1" />
+          <NavigationProperty Name="EmployeeDirectory1" Relationship="SampleModel.FK_EmployeeDirectory_EmployeeDirectory" FromRole="EmployeeDirectory" ToRole="EmployeeDirectory1" />
+          <NavigationProperty Name="EmployeeDirectory2" Relationship="SampleModel.FK_EmployeeDirectory_EmployeeDirectory" FromRole="EmployeeDirectory1" ToRole="EmployeeDirectory" />
         </EntityType>
-        <Association Name="FK_EmployeeDirectory_EmployeeDirectory1">
-          <End Type="SampleModel.EmployeeDirectory1" Role="EmployeeDirectory1" Multiplicity="0..1" />
-          <End Type="SampleModel.EmployeeDirectory1" Role="EmployeeDirectory11" Multiplicity="*" />
+        <Association Name="FK_EmployeeDirectory_EmployeeDirectory">
+          <End Type="SampleModel.EmployeeDirectory" Role="EmployeeDirectory" Multiplicity="0..1" />
+          <End Type="SampleModel.EmployeeDirectory" Role="EmployeeDirectory1" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="EmployeeDirectory1">
+            <Principal Role="EmployeeDirectory">
               <PropertyRef Name="EmployeeID" />
             </Principal>
-            <Dependent Role="EmployeeDirectory11">
+            <Dependent Role="EmployeeDirectory1">
               <PropertyRef Name="ReportsTo" />
             </Dependent>
           </ReferentialConstraint>
@@ -1533,8 +1497,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="EmployeeDirectory1Set">
-            <EntityTypeMapping TypeName="SampleModel.EmployeeDirectory1">
+          <EntitySetMapping Name="EmployeeDirectory">
+            <EntityTypeMapping TypeName="SampleModel.EmployeeDirectory">
               <MappingFragment StoreEntitySet="EmployeeDirectory">
                 <ScalarProperty Name="Position" ColumnName="Position" />
                 <ScalarProperty Name="HireDate" ColumnName="HireDate" />
@@ -1675,17 +1639,10 @@
         <EntityTypeShape EntityType="SampleModel.GanttDependency" Width="1.5" PointX="8.625" PointY="20.5" />
         <EntityTypeShape EntityType="SampleModel.GanttTask" Width="1.5" PointX="10.875" PointY="20.5" />
         <AssociationConnector Association="SampleModel.FK_GanttTasks_GanttTasks" />
-        <EntityTypeShape EntityType="SampleModel.EmployeeDirectory" PointX="0.5" PointY="6" Width="1.5" />
-        <AssociationConnector Association="SampleModel.FK_EmployeeDirectory_EmployeeDirectory">
-          <ConnectorPoint PointX="0.5" PointY="7.280261318108975" />
-          <ConnectorPoint PointX="0.25" PointY="7.280261318108975" />
-          <ConnectorPoint PointX="0.25" PointY="8.4581303335336546" />
-          <ConnectorPoint PointX="0.5" PointY="8.4581303335336546" />
-        </AssociationConnector>
         <EntityTypeShape EntityType="SampleModel.OrgChartConnections" Width="1.5" PointX="12.375" PointY="0.75" Height="1.7879850260416674" />
         <EntityTypeShape EntityType="SampleModel.OrgChartShapes" Width="1.5" PointX="5.375" PointY="12.75" Height="2.1725878906250031" />
-        <EntityTypeShape EntityType="SampleModel.EmployeeDirectory1" Width="1.5" PointX="7.375" PointY="12.75" Height="3.7109993489583388" />
-        <AssociationConnector Association="SampleModel.FK_EmployeeDirectory_EmployeeDirectory1" >
+        <EntityTypeShape EntityType="SampleModel.EmployeeDirectory" Width="1.5" PointX="7.375" PointY="12.75" Height="3.7109993489583388" />
+        <AssociationConnector Association="SampleModel.FK_EmployeeDirectory_EmployeeDirectory" >
           <ConnectorPoint PointX="7.9069230769230776" PointY="16.460999348958339" />
           <ConnectorPoint PointX="7.9069230769230776" PointY="16.710999348958339" />
           <ConnectorPoint PointX="8.35346153846154" PointY="16.710999348958339" />
