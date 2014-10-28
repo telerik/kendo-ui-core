@@ -137,6 +137,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\DiagramShapesController.cs" />
+    <Compile Include="Controllers\DiagramConnectionsController.cs" />
     <Compile Include="Controllers\EmployeeDirectoryController.cs" />
     <Compile Include="Controllers\ExportController.cs" />
     <Compile Include="Controllers\FileBrowserController.cs" />
@@ -159,6 +161,8 @@
     <Compile Include="Hubs\ProductHub.cs" />
     <Compile Include="Models\CustomerModel.cs" />
     <Compile Include="Models\CustomerRepository.cs" />
+    <Compile Include="Models\Diagram\DiagramConnectionsRepository.cs" />
+    <Compile Include="Models\Diagram\DiagramShapesRepository.cs" />
     <Compile Include="Models\EF\SampleEf.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
