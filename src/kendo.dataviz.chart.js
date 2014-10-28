@@ -5238,19 +5238,6 @@ var __meta__ = {
                 color = defaults.color;
             }
 
-            var line = draw.Path.fromPoints(this.points(), {
-                stroke: {
-                    color: color,
-                    width: series.width,
-                    opacity: series.opacity,
-                    dashType: series.dashType
-                }
-            });
-
-            if (options.closed) {
-                line.close();
-            }
-
             this.visual = new draw.Group();
 
             this.createArea(color);
