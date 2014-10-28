@@ -22,7 +22,7 @@ namespace Kendo.Mvc.UI
 
             DataSource = new DataSource();
             DataSource.Type = DataSourceType.Ajax;
-            DataSource.Schema.Model = new DiagramShapeModelDescriptor(typeof(TShapeModel));
+            DataSource.ModelType(typeof(object));
 
             ConnectionsDataSource = new DataSource();
             ConnectionsDataSource.Type = DataSourceType.Ajax;

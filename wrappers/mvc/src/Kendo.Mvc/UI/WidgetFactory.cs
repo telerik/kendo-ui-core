@@ -1334,6 +1334,21 @@ namespace Kendo.Mvc.UI.Fluent
         {
             return new ColorPickerBuilder(new ColorPicker(ViewContext, Initializer, ViewData));
         }
+
+        /// <summary>
+        /// Creates a <see cref="Diagram"/>
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Diagram()
+        ///             .Name("Diagram")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual DiagramBuilder<object, object> Diagram()
+        {
+            return new DiagramBuilder<object, object>(new Diagram<object, object>(ViewContext, Initializer, UrlGenerator));
+        }
         
         /// <summary>
         /// Creates a <see cref="Diagram"/>

@@ -29,6 +29,7 @@ using System.Web.Mvc;
             this.dataSource.Schema.Data = "Data";
             this.dataSource.Schema.Total = "Total";
             this.dataSource.Schema.Errors = "Errors";
+            dataSource.Schema.Model = new DiagramShapeModelDescriptor(typeof(TModel));
             return new DiagramShapeDataSourceBuilder<TModel>(dataSource, viewContext, urlGenerator);
         }
     }
