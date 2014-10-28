@@ -7512,6 +7512,20 @@
         "requiresServer": "true"
       },
       {
+        "text": "Export to PDF, Image, SVG",
+        "new": true,
+        "url": "chart-api/export",
+        "packages": [
+          "!mvc"
+        ],
+        "title": {
+            "kendo-ui": "Kendo UI Charts Export API methods"
+        },
+        "meta": {
+            "kendo-ui": "This demo shows how to export charts to PDF, PNG Images or SVG and save them directly in the browser."
+        }
+      },
+      {
         "text": "Selection",
         "url": "chart-api/selection",
         "title": {
