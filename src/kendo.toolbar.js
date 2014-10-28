@@ -584,8 +584,16 @@ var __meta__ = {
 
             remove: function(element) {
                 var commandElement = this.element.find(element),
-                    type = commandElement.data("type"),
+                    type, uid;
+
+                if (!commandElement.length && this.options.resizable) {
+                    commandElement = this.popup.element.find(element);
+                    uid = commandElement.parent().attr(KENDO_UID_ATTR);
+                } else {
                     uid = commandElement.attr(KENDO_UID_ATTR);
+                }
+
+                type = commandElement.data("type");
 
                 if (commandElement.parent("." + SPLIT_BUTTON).data("type")) {
                     type = "splitButton";
@@ -597,7 +605,7 @@ var __meta__ = {
                 }
 
                 commandElement
-                    .add(this.popup.element.find("[" + KENDO_UID_ATTR + "='" + commandElement.attr(KENDO_UID_ATTR) + "']"))
+                    .add(this.popup.element.find("[" + KENDO_UID_ATTR + "='" + uid + "']"))
                     .remove();
             },
 
