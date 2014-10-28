@@ -3,6 +3,12 @@
             <div id="treelist"></div>
         </div>
 
+        <script id="photo-template" type="text/x-kendo-template">
+           <div class='employee-photo'
+                style='background-image: url(../content/web/treelist/people/#:data.EmployeeID#.jpg);'></div>
+           <div class='employee-name'>#: FirstName #</div>
+        </script>
+
         <script>
             $(document).ready(function() {
                 var service = "http://demos.telerik.com/kendo-ui/service";
@@ -30,7 +36,8 @@
                     filterable: true,
                     sortable: true,
                     columns: [
-                        { field: "FirstName", title: "First Name", width: 220 },
+                        { field: "FirstName", title: "First Name", width: 280,
+                          template: $("#photo-template").html() },
                         { field: "LastName", title: "Last Name", width: 160 },
                         { field: "Position" },
                         { field: "Phone", width: 200 },
@@ -40,4 +47,25 @@
                 });
             });
         </script>
+
+        <style>
+            .employee-photo {
+                display: inline-block;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background-size: 40px 44px;
+                background-position: center center;
+                vertical-align: middle;
+                line-height: 41px;
+                box-shadow: inset 0 0 1px #999, inset 0 0 10px rgba(0,0,0,.2);
+            }
+
+            .employee-name {
+                display: inline-block;
+                vertical-align: middle;
+                line-height: 41px;
+                padding-left: 10px;
+            }
+        </style>
     </div>
