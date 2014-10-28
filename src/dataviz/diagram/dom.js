@@ -1575,7 +1575,20 @@
                 connections: []
             },
 
-            events: [ZOOM_END, ZOOM_START, PAN, SELECT, ITEMROTATE, ITEMBOUNDSCHANGE, CHANGE, CLICK, "toolBarClick"],
+            events: [
+                ZOOM_END,
+                ZOOM_START,
+                PAN, SELECT,
+                ITEMROTATE,
+                ITEMBOUNDSCHANGE,
+                CHANGE,
+                CLICK,
+                "toolBarClick",
+                "save",
+                "cancel",
+                "edit",
+                "remove"
+            ],
 
             edit: function(item) {
                 this.cancelEdit();
@@ -2110,17 +2123,23 @@
             },
 
             _remove: function(item, undoable) {
-                var dataSource = this.dataSource;
-
+                var eventArgs = {};
+                var dataSource;
                 if (this._isEditable) {
-                    if (item instanceof Connection) {
-                        dataSource = this.connectionsDataSource;
-                    }
-
                     if (item.length) {
                         this._destroyToolBar();
                     } else {
-                        if (dataSource) {
+                        if (item instanceof Connection) {
+                            if (this.connectionsDataSource) {
+                                dataSource = this.ConnectionsDataSource;
+                                eventArgs.connection = item.options.dataItem;
+                            }
+                        } else if (this.dataSource) {
+                            dataSource = this.dataSoruce;
+                            eventArgs.shape = item.options.dataItem;
+                        }
+
+                        if (dataSource && trigger("remove", eventArgs)) {
                             dataSource.remove(item.options.dataItem);
                             dataSource.sync();
                         }
@@ -3231,7 +3250,7 @@
                     }
                 } else {
                     this._addConnections(e.sender.view());
-					
+
                     if (this.options.layout) {
                         this.layout(this.options.layout);
                     }
