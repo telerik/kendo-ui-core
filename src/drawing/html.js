@@ -35,6 +35,8 @@
             var pos = element.getBoundingClientRect();
             setTransform(group, [ 1, 0, 0, 1, -pos.left, -pos.top ]);
 
+            nodeInfo._clipbox = false;
+            nodeInfo._matrix = geo.Matrix.unit();
             nodeInfo._stackingContext = {
                 element: element,
                 group: group
@@ -150,6 +152,17 @@
 
     function popNodeInfo() {
         nodeInfo = nodeInfo._up;
+    }
+
+    function updateClipbox(path) {
+        if (nodeInfo._clipbox != null) {
+            var box = path.bbox(nodeInfo._matrix);
+            if (nodeInfo._clipbox) {
+                nodeInfo._clipbox = geo.Rect.intersect(nodeInfo._clipbox, box);
+            } else {
+                nodeInfo._clipbox = box;
+            }
+        }
     }
 
     function createsStackingContext(element) {
@@ -283,7 +296,9 @@
     }
 
     function setTransform(shape, m) {
-        shape.transform(new geo.Matrix(m[0], m[1], m[2], m[3], m[4], m[5]));
+        m = new geo.Matrix(m[0], m[1], m[2], m[3], m[4], m[5]);
+        shape.transform(m);
+        return m;
     }
 
     function setClipping(shape, clipPath) {
@@ -456,15 +471,16 @@
                 var bottom = a[2] == "auto" ? innerbox.bottom : parseFloat(a[2]) + innerbox.top;
                 var left = a[3] == "auto" ? innerbox.left : parseFloat(a[3]) + innerbox.left;
                 var tmp = new drawing.Group();
-                setClipping(tmp,
-                            (new drawing.Path({ fill: null, stroke: null })
-                             .moveTo(left, top)
-                             .lineTo(right, top)
-                             .lineTo(right, bottom)
-                             .lineTo(left, bottom)
-                             .close()));
+                var clipPath = new drawing.Path()
+                    .moveTo(left, top)
+                    .lineTo(right, top)
+                    .lineTo(right, bottom)
+                    .lineTo(left, bottom)
+                    .close();
+                setClipping(tmp, clipPath);
                 group.append(tmp);
                 group = tmp;
+                updateClipbox(clipPath);
             }
         })();
 
@@ -495,6 +511,7 @@
                 setClipping(tmp, clipPath);
                 group.append(tmp);
                 group = tmp;
+                updateClipbox(clipPath);
             }
             if (/^(hidden|auto|scroll)/.test(getPropertyValue(style, "overflow"))) {
                 clipit();
@@ -1160,26 +1177,22 @@
         main.insertAt(tmp, i);
         tmp._dom_zIndex = zIndex;
 
-        // must apply any clipping from current group or parents to the new one.
-        for (i = group; i; i = i.parent) {
-            if (i.clip()) {
-                setClipping(tmp, i.clip());
-                break;
-            }
+        // if (nodeInfo._matrix) {
+        //     tmp.transform(nodeInfo._matrix);
+        // }
+        if (nodeInfo._clipbox) {
+            tmp.clip(drawing.Path.fromRect(nodeInfo._clipbox));
         }
-
-        // must apply the combined opacity of current group to the new one.
-        var alpha = 1;
-        for (i = group; i; i = i.parent) {
-            alpha *= i.opacity();
-        }
-        tmp.opacity(alpha);
 
         return tmp;
     }
 
     function renderElement(element, container) {
         if (/^(style|script|link|meta|iframe|svg)$/i.test(element.tagName)) {
+            return;
+        }
+
+        if (nodeInfo._clipbox == null) {
             return;
         }
 
@@ -1196,6 +1209,7 @@
 
         var zIndex = getPropertyValue(style, "z-index");
         if (zIndex != "auto") {
+            console.log("Für element:", element);
             group = groupInStackingContext(container, zIndex);
         } else {
             group = new drawing.Group();
@@ -1236,7 +1250,9 @@
                 var m = [ 1, 0, 0, 1, -x, -y ];
                 m = mmul(m, tr.matrix);
                 m = mmul(m, [ 1, 0, 0, 1, x, y ]);
-                setTransform(group, m);
+                m = setTransform(group, m);
+
+                nodeInfo._matrix = nodeInfo._matrix.multiplyCopy(m);
 
                 _renderElement(element, group);
             });
