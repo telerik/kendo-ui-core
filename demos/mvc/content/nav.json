@@ -5544,6 +5544,26 @@
         "meta": {
             "kendo-ui": "This example shows how different styling can be applied to icons by using Kendo UI Web framework."
         }
+      },
+      {
+        "text": "Checkboxes",
+        "url": "styling/checkboxes",
+        "title": {
+            "kendo-ui": "jQuery icons styling example | Kendo UI Web demos"
+        },
+        "meta": {
+            "kendo-ui": "This example shows how different styling can be applied to icons by using Kendo UI Web framework."
+        }
+      },
+	  {
+        "text": "Radio buttons",
+        "url": "styling/radios",
+        "title": {
+            "kendo-ui": "jQuery icons styling example | Kendo UI Web demos"
+        },
+        "meta": {
+            "kendo-ui": "This example shows how different styling can be applied to icons by using Kendo UI Web framework."
+        }
       }
     ],
     "category": "Interactivity & UX"

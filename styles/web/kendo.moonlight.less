@@ -230,4 +230,59 @@
 @button-focused-shadow: @focused-item-shadow;
 @button-focused-active-shadow: @focused-active-item-shadow;
 
+//Checkboxes
+@checkbox-border-color-before: transparent;
+@checkbox-border-color-after: #171e28;
+@checkbox-border-radius-before: 1px;
+@checkbox-background-color: #fff;
+
+@checkbox-hover-border-color: #2c353f;
+@checkbox-hover-box-shadow: none;
+
+@checkbox-checked-border-color-after: #f3ae03;
+@checkbox-checked-border-radius-after: 1px;
+@checkbox-checked-background-color-after: #fff;
+@checkbox-checked-color-after: #efa403;
+
+@checkbox-active-border-color-before: transparent;
+@checkbox-active-border-color-after: #f3ae03;
+@checkbox-active-border-radius: 1px;
+@checkbox-active-border-radius-after: 1px;
+@checkbox-active-box-shadow: 0 0 3px 0 #f3ae03;
+
+@checkbox-checked-active-border-radius-before: 1px;
+@checkbox-checked-active-box-shadow: @checkbox-active-box-shadow;
+
+@checkbox-checked-disabled-color-after: #414550;
+@checkbox-disabled-background-color-after: #7a7d85;
+@checkbox-disabled-color: #414550;
+@checkbox-disabled-box-shadow: none;
+@checkbox-disabled-border-color-before: #8d8f96;
+
+//Radio buttons
+@radio-border-color-before: #171e28;
+@radio-background-color: #fff;
+@radio-border-width-before: 1px;
+
+@radio-hover-border-color: #2c353f;
+@radio-hover-box-shadow:none;
+
+@radio-checked-border-color-before: #171e28;
+@radio-checked-background-color-after: #efa403;
+
+@radio-active-border-color-before: #f3ae03;
+@radio-active-box-shadow: 0 0 3px 0 #f3ae03;
+
+@radio-checked-active-border-color-before: #f3ae03;
+@radio-checked-active-box-shadow: @radio-active-box-shadow;
+
+@radio-disabled-background-color-after: #7a7d85;
+@radio-disabled-color: #414550;
+@radio-disabled-box-shadow: none;
+@radio-disabled-background-color-before: #7a7d85;
+
 @import "theme-template.less";
+
+.k-checkbox:checked + .k-checkbox-label:hover:after {
+    border-color: @checkbox-checked-border-color-after; 
+}

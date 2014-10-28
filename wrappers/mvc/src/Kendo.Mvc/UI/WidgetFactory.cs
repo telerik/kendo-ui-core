@@ -683,6 +683,36 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Creates a new <see cref="CheckBox"/>.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().CheckBox()
+        ///             .Name("CheckBox")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual CheckBoxBuilder CheckBox()
+        {
+            return new CheckBoxBuilder(new CheckBox(ViewContext, Initializer, ViewData));
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="RadioButton"/>.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().RadioButton()
+        ///             .Name("RadioButton")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual RadioButtonBuilder RadioButton()
+        {
+            return new RadioButtonBuilder(new RadioButton(ViewContext, Initializer, ViewData));
+        }
+
+        /// <summary>
         /// Creates a new <see cref="TextBox"/>.
         /// </summary>
         /// <example>
@@ -1926,6 +1956,54 @@ namespace Kendo.Mvc.UI.Fluent
                         .Name(GetName(expression))
                         .ModelMetadata(ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData))
                         .Value(GetValue(expression));
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="CheckBox"/>.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().CheckBoxFor(m=>m.Property) %&gt;
+        /// </code>
+        /// </example>
+        public virtual CheckBoxBuilder CheckBoxFor<TProperty>(Expression<Func<TModel, TProperty>> expression)
+        {
+            bool checkedValue = false;
+            object model = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
+
+            if (model != null && model.GetType().IsPredefinedType())
+            {
+                checkedValue = Convert.ToBoolean(model);
+            }
+
+            return CheckBox()
+                        .Name(GetName(expression))
+                        .ModelMetadata(ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData))
+                        .Checked(checkedValue);
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="RadioButton"/>.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().RadioButtonFor(m=>m.Property) %&gt;
+        /// </code>
+        /// </example>
+        public virtual RadioButtonBuilder RadioButtonFor<TProperty>(Expression<Func<TModel, TProperty>> expression)
+        {
+            bool checkedValue = false;
+            object model = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
+
+            if (model != null && model.GetType().IsPredefinedType())
+            {
+                checkedValue = Convert.ToBoolean(model);
+            }
+
+            return RadioButton()
+                        .Name(GetName(expression))
+                        .ModelMetadata(ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData))
+                        .Checked(checkedValue);
         }
 
         /// <summary>

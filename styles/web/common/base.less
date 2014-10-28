@@ -705,3 +705,87 @@ a.k-button:hover
     -webkit-background-clip: border-box;
     background-clip: border-box;
 }
+
+//Checkboxes
+.k-checkbox, 
+.k-radio {
+  display: none;
+}
+
+.k-checkbox-label {
+   position: relative;
+   padding-left: 1.5em;
+   vertical-align: middle;
+   line-height: 0.875em;
+   cursor: pointer;
+}
+
+.k-checkbox-label:before{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1em;
+  height: 1em;
+  border-width: 1px;
+  border-style: solid;
+}
+
+.k-checkbox-label:after{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1em;
+  height: 1em;
+  border-width: 1px;
+  border-style: solid;
+}
+
+.k-checkbox:checked + .k-checkbox-label:after {
+  content: "\2713";
+  width: 1em;
+  height: 1em;
+  position: absolute;
+  top: 0; 
+  left: 0;
+  border-width: 1px;
+  border-style: solid;
+  text-align: center;
+}
+
+.k-checkbox:disabled + .k-checkbox-label {
+   cursor: auto;
+}
+
+//Radio buttons
+.k-radio-label {
+  position: relative;
+  padding-left: 1.5em;
+  vertical-align: middle;
+  line-height: 0.875em;
+  cursor: pointer;
+}
+
+.k-radio-label:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 14px;
+  height: 14px;
+  border-style: solid;
+}
+
+.k-radio:checked + .k-radio-label:after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  top: 3px; 
+  left: 3px
+}
+
+.k-radio:disabled + .k-radio-label {
+   cursor: auto;
+}
