@@ -857,7 +857,6 @@
     <Content Include="Areas\aspx\Views\pivotgrid\remote_flat_data_binding.aspx" />
     <Content Include="Areas\aspx\Views\scheduler\timeline.aspx" />
     <Content Include="Areas\aspx\Views\treelist\api.aspx" />
-    <Content Include="Areas\aspx\Views\treelist\events.aspx" />
     <Content Include="Areas\aspx\Views\treelist\editing_popup.aspx" />
     <Content Include="Areas\aspx\Views\treelist\editing.aspx" />
     <Content Include="Areas\aspx\Views\treelist\events.aspx" />
