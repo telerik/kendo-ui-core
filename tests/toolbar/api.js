@@ -103,6 +103,19 @@
         equal(toolbar.popup.element.find(".k-separator").length, 0, "Separator is removed from the overflow container");
     });
 
+    test("remove method removes button with overflow: 'always'", 2, function() {
+       var toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", id: "foo", overflow: "always" }
+            ]
+       }).data("kendoToolBar");
+
+       toolbar.remove("#foo_overflow");
+
+       equal(toolbar.element.find("#foo").length, 0, "Button is removed");
+       equal(toolbar.popup.element.find("#foo_overflow").length, 0, "Button is removed");
+    });
+
     test("enable method enables button", 2, function() {
         var toolbar = container.kendoToolBar({
             items: [
