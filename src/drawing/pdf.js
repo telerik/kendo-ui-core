@@ -45,7 +45,7 @@
     };
 
     function render(group, callback) {
-        var fonts = [], images = [];
+        var fonts = [], images = [], options = group.options;
 
         var tmp = optimize(group);
         var bbox = tmp.bbox;
@@ -69,8 +69,8 @@
         });
 
         function getOption(name, defval) {
-            if (group.options.pdf && group.options.pdf[name] != null) {
-                return group.options.pdf[name];
+            if (options.pdf && options.pdf[name] != null) {
+                return options.pdf[name];
             }
             return defval;
         }
@@ -86,7 +86,7 @@
                     paperSize = [ size.width, size.height ];
                     addMargin = true;
                     var origin = bbox.getOrigin();
-                    var tmp = new drawing.Group();
+                    var tmp = new drawing.Group(options);
                     tmp.transform(new geo.Matrix(1, 0, 0, 1, -origin.x, -origin.y));
                     tmp.append(group);
                     group = tmp;
