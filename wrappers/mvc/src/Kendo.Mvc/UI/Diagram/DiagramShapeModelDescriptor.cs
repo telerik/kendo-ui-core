@@ -77,6 +77,13 @@
                     fields[currentMember] = field;
                 }
 
+                if (!prop.IsEditable)
+                {
+                    field["editable"] = false;
+                }
+
+                field["type"] = prop.MemberType.ToJavaScriptType().ToLowerInvariant();
+
                 if (prop.MemberType.IsNullableType() || prop.DefaultValue != null)
                 {
                     field["defaultValue"] = prop.DefaultValue;
