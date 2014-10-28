@@ -208,6 +208,57 @@
 @button-focused-shadow: none;
 @button-focused-active-shadow: none;
 
+//Checkboxes
+@checkbox-border-color-before: transparent;
+@checkbox-border-color-after: #10c4b2;
+@checkbox-border-radius-before: 1px;
+@checkbox-background-color: @widget-background-color;
+
+@checkbox-hover-border-color: #29d6c5;
+@checkbox-hover-box-shadow: none;
+
+@checkbox-checked-border-color-after: #10c4b2;
+@checkbox-checked-border-radius-after: 1px;
+@checkbox-checked-background-color-after: #fff;
+@checkbox-checked-color-after: #10c4b2;
+
+@checkbox-active-border-color-before: transparent;
+@checkbox-active-border-color-after: #363940;
+@checkbox-active-border-radius: 1px;
+@checkbox-active-border-radius-after: 1px;
+@checkbox-active-box-shadow: none;
+
+@checkbox-checked-active-border-radius-before: 1px;
+@checkbox-checked-active-box-shadow: @checkbox-active-box-shadow;
+
+@checkbox-checked-disabled-color-after: #c1c1c1;
+@checkbox-disabled-background-color-after: #fff;
+@checkbox-disabled-color: #c1c1c1;
+@checkbox-disabled-box-shadow: none;
+@checkbox-disabled-border-color-before: #cdcdcd;
+
+//Radio buttons
+@radio-border-color-before: #10c4b2;
+@radio-background-color: @widget-background-color;
+@radio-border-width-before: 1px;
+
+@radio-hover-border-color: #29d6c5;
+@radio-hover-box-shadow:none;
+
+@radio-checked-border-color-before: #10c4b2;
+@radio-checked-background-color-after: #10c4b2;
+
+@radio-active-border-color-before: #363940;
+@radio-active-box-shadow: none;
+
+@radio-checked-active-border-color-before: #363940;
+@radio-checked-active-box-shadow: none;
+
+@radio-disabled-background-color-after: #fff;
+@radio-disabled-color: #c1c1c1;
+@radio-disabled-box-shadow: none;
+@radio-disabled-background-color-before: #fff;
+
 @import "theme-template.less";
 
 .k-button-group .k-tool,
@@ -298,4 +349,8 @@
 .k-menu .k-popup
 {
     color: @secondary-text-color;
+}
+
+.k-checkbox:checked + .k-checkbox-label:active:after {
+    border-color: @checkbox-active-border-color-after; 
 }
