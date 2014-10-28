@@ -3,7 +3,7 @@
 })(function(){
 
     var __meta__ = {
-        id: "drawing",
+        id: "color",
         name: "Color utils",
         category: "framework",
         advanced: true,

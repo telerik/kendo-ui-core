@@ -7,7 +7,7 @@ var __meta__ = {
     name: "Chart",
     category: "dataviz",
     description: "The Chart widget uses modern browser technologies to render high-quality data visualizations in the browser.",
-    depends: [ "data", "userevents", "dataviz.core", "dataviz.svg", "dataviz.themes" ],
+    depends: [ "data", "userevents", "drawing", "dataviz.core", "dataviz.themes" ],
     features: [ {
         id: "dataviz.chart-polar",
         name: "Polar & Radar",
