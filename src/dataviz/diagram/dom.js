@@ -3630,12 +3630,14 @@
                 var element = this.selectedElement();
                 var currentAngle = element.rotate().angle;
                 element.rotate(currentAngle + 90);
+                this.diagram._updateAdorners();
             },
 
             rotateAnticlockwise: function() {
                 var element = this.selectedElement();
                 var currentAngle = element.rotate().angle;
                 element.rotate(currentAngle - 90);
+                this.diagram._updateAdorners();
             },
 
             selectedElement: function() {

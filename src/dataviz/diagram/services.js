@@ -1826,11 +1826,7 @@
             },
 
             refreshBounds: function () {
-                var bounds = this.shapes.length == 1 ?
-                    this.shapes[0].bounds().clone() :
-                    this.diagram.boundingBox(this.shapes, true);
-
-                this.bounds(bounds);
+                this.bounds(this.diagram.boundingBox(this.shapes, true));
             },
 
             refresh: function () {
