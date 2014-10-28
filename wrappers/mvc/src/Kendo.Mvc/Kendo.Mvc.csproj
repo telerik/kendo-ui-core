@@ -1420,6 +1420,10 @@
     <Compile Include="UI\Scheduler\Fluent\SchedulerAgendaViewBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerDayViewBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerEditableSettingsBuilder.cs" />
+    <Compile Include="UI\Scheduler\Fluent\SchedulerTimelineViewBuilder.cs" />
+    <Compile Include="UI\Scheduler\Fluent\SchedulerTimelineViewBuilderBase.cs" />
+    <Compile Include="UI\Scheduler\Fluent\SchedulerTimelineWeekViewBuilder.cs" />
+    <Compile Include="UI\Scheduler\Fluent\SchedulerTimelineWorkWeekViewBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerViewMessagesBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerMonthViewBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerBaseViewBuilder.cs" />

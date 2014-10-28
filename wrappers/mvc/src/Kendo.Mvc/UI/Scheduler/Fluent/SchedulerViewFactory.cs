@@ -188,6 +188,23 @@
         }
 
         /// <summary>
+        /// Defines a Scheduler timeline view.
+        /// </summary>
+        /// <returns></returns>
+        public SchedulerTimelineViewBuilder<SchedulerTimelineView> TimelineView(Action<SchedulerTimelineViewBuilder<SchedulerTimelineView>> addViewAction)
+        {
+            SchedulerTimelineView view = new SchedulerTimelineView(container);
+
+            container.Views.Add(view);
+
+            SchedulerTimelineViewBuilder<SchedulerTimelineView> builder = new SchedulerTimelineViewBuilder<SchedulerTimelineView>(view);
+
+            addViewAction(builder);
+
+            return builder;
+        }
+
+        /// <summary>
         /// Enables a Scheduler timeline week view.
         /// </summary>
         /// <returns></returns>
@@ -199,6 +216,23 @@
         }
 
         /// <summary>
+        /// Defines a Scheduler timelineWeek view.
+        /// </summary>
+        /// <returns></returns>
+        public SchedulerTimelineWeekViewBuilder<SchedulerTimelineWeekView> TimelineWeekView(Action<SchedulerTimelineWeekViewBuilder<SchedulerTimelineWeekView>> addViewAction)
+        {
+            SchedulerTimelineWeekView view = new SchedulerTimelineWeekView(container);
+
+            container.Views.Add(view);
+
+            SchedulerTimelineWeekViewBuilder<SchedulerTimelineWeekView> builder = new SchedulerTimelineWeekViewBuilder<SchedulerTimelineWeekView>(view);
+
+            addViewAction(builder);
+
+            return builder;
+        }
+
+        /// <summary>
         /// Enables a Scheduler timeline work week view.
         /// </summary>
         /// <returns></returns>
@@ -207,6 +241,23 @@
             SchedulerTimelineWorkWeekView view = new SchedulerTimelineWorkWeekView(container);
 
             container.Views.Add(view);
+        }
+
+        /// <summary>
+        /// Defines a Scheduler timelineWorkWeek view.
+        /// </summary>
+        /// <returns></returns>
+        public SchedulerTimelineWorkWeekViewBuilder<SchedulerTimelineWorkWeekView> TimelineWorkWeekView(Action<SchedulerTimelineWorkWeekViewBuilder<SchedulerTimelineWorkWeekView>> addViewAction)
+        {
+            SchedulerTimelineWorkWeekView view = new SchedulerTimelineWorkWeekView(container);
+
+            container.Views.Add(view);
+
+            SchedulerTimelineWorkWeekViewBuilder<SchedulerTimelineWorkWeekView> builder = new SchedulerTimelineWorkWeekViewBuilder<SchedulerTimelineWorkWeekView>(view);
+
+            addViewAction(builder);
+
+            return builder;
         }
 
         /// <summary>
