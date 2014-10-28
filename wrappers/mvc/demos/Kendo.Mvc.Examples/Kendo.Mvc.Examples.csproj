@@ -201,6 +201,7 @@
     <Compile Include="Controllers\PivotGrid\Local_Flat_Data_BindingController.cs" />
     <Compile Include="Controllers\PivotGrid\Remote_Flat_Data_BindingController.cs" />
     <Compile Include="Controllers\Scheduler\TimelineController.cs" />
+    <Compile Include="Controllers\TreeList\ApiController.cs" />
     <Compile Include="Controllers\TreeList\EventsController.cs" />
     <Compile Include="Controllers\TreeList\Remote_Data_BindingController.cs" />
     <Compile Include="Controllers\TreeList\Editing_PopupController.cs" />
@@ -855,6 +856,8 @@
     <Content Include="Areas\aspx\Views\pivotgrid\local_flat_data_binding.aspx" />
     <Content Include="Areas\aspx\Views\pivotgrid\remote_flat_data_binding.aspx" />
     <Content Include="Areas\aspx\Views\scheduler\timeline.aspx" />
+    <Content Include="Areas\aspx\Views\treelist\api.aspx" />
+    <Content Include="Areas\aspx\Views\treelist\events.aspx" />
     <Content Include="Areas\aspx\Views\treelist\editing_popup.aspx" />
     <Content Include="Areas\aspx\Views\treelist\editing.aspx" />
     <Content Include="Areas\aspx\Views\treelist\events.aspx" />
@@ -3371,6 +3374,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\aspx\Views\treelist\remote_data_binding.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\treelist\api.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
