@@ -1,0 +1,70 @@
+
+@(Html.Kendo().TreeList<Kendo.Mvc.Examples.Models.TreeList.EmployeeDirectoryModel>()
+    .Name("treelist")
+    .Toolbar(tb => tb.Add().Name("create"))
+    .Columns(columns =>
+    {
+        columns.Add().Field("FirstName").Title("First Name").Width("220px");
+        columns.Add().Field("LastName").Title("Last Name").Width("160px");            
+        columns.Add().Field("HireDate").Title("Hire Date").Format("{0:MMMM d, yyyy}");            
+        columns.Add().Field("Extension").Title("Ext").Format("{0:#}");
+        columns.Add().Title("Edit").Width("200px").Command(c =>
+        {
+            c.Add().Name("edit");
+            c.Add().Name("destroy");
+        });
+    })
+    .DataSource(dataSource => dataSource
+        .Create(create => create.Action("Create", "EmployeeDirectory"))
+        .Read(read => read.Action("All", "EmployeeDirectory"))
+        .Update(update => update.Action("Update", "EmployeeDirectory"))
+        .Destroy(delete => delete.Action("Destroy", "EmployeeDirectory"))
+        .Model(m => {
+            m.Id(f => f.EmployeeId);
+            m.ParentId(f => f.ReportsTo);
+            m.Field(f => f.FirstName);
+            m.Field(f => f.LastName);
+            m.Field(f => f.ReportsTo);
+            m.Field(f => f.HireDate);
+            m.Field(f => f.BirthDate);
+            m.Field(f => f.Extension);
+            m.Field(f => f.Position);
+        })
+    )
+    .Height(540)
+    .Events(events => {
+        events.Edit("onEdit");
+        events.Save("onSave");
+        events.Remove("onRemove");
+        events.DataBinding("onDataBinding");
+        events.DataBound("onDataBound");
+    })
+)
+<div class="box console-section">
+    <h4>Console</h4>
+    <div class="console"></div>
+</div>
+
+<script>
+        function onEdit(arg) {
+            var model = arg.model;
+
+            kendoConsole.log("TreeList edit: " + model.FirstName + " " + model.LastName);
+        }
+
+        function onSave(arg) {
+            kendoConsole.log("TreeList save");
+        }
+
+        function onRemove(arg) {
+            kendoConsole.log("TreeList remove");
+        }
+
+        function onDataBound(arg) {
+            kendoConsole.log("TreeList data bound");
+        }
+
+        function onDataBinding(arg) {
+            kendoConsole.log("TreeList data binding");
+        }
+</script>
