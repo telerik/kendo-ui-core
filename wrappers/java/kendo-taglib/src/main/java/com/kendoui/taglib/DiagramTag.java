@@ -75,6 +75,18 @@ public class DiagramTag extends WidgetTag /* interfaces */implements DataBoundWi
 
     }
 
+    public void setEdit(EditFunctionTag value) {
+        setEvent("Edit", value.getBody());
+    }
+
+    public void setSave(SaveFunctionTag value) {
+        setEvent("Save", value.getBody());
+    }
+
+    public void setCancel(CancelFunctionTag value) {
+        setEvent("cancel", value.getBody());
+    }
+
     public void setChange(ChangeFunctionTag value) {
         setEvent("change", value.getBody());
     }
@@ -95,6 +107,10 @@ public class DiagramTag extends WidgetTag /* interfaces */implements DataBoundWi
         setEvent("pan", value.getBody());
     }
 
+    public void setRemove(RemoveFunctionTag value) {
+        setEvent("remove", value.getBody());
+    }
+
     public void setSelect(SelectFunctionTag value) {
         setEvent("select", value.getBody());
     }
@@ -113,14 +129,6 @@ public class DiagramTag extends WidgetTag /* interfaces */implements DataBoundWi
 
     public void setAutoBind(boolean value) {
         setProperty("autoBind", value);
-    }
-
-    public java.lang.Object getConnectionsDataSource() {
-        return (java.lang.Object)getProperty("connectionsDataSource");
-    }
-
-    public void setConnectionsDataSource(java.lang.Object value) {
-        setProperty("connectionsDataSource", value);
     }
 
     public void setDataSource(DataSourceTag dataSource) {
@@ -183,6 +191,42 @@ public class DiagramTag extends WidgetTag /* interfaces */implements DataBoundWi
         setProperty("zoomRate", value);
     }
 
+    public String getEdit() {
+        Function property = ((Function)getProperty("Edit"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setEdit(String value) {
+        setProperty("Edit", new Function(value));
+    }
+
+    public String getSave() {
+        Function property = ((Function)getProperty("Save"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setSave(String value) {
+        setProperty("Save", new Function(value));
+    }
+
+    public String getCancel() {
+        Function property = ((Function)getProperty("cancel"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setCancel(String value) {
+        setProperty("cancel", new Function(value));
+    }
+
     public String getChange() {
         Function property = ((Function)getProperty("change"));
         if (property != null) {
@@ -241,6 +285,18 @@ public class DiagramTag extends WidgetTag /* interfaces */implements DataBoundWi
 
     public void setPan(String value) {
         setProperty("pan", new Function(value));
+    }
+
+    public String getRemove() {
+        Function property = ((Function)getProperty("remove"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setRemove(String value) {
+        setProperty("remove", new Function(value));
     }
 
     public String getSelect() {

@@ -12445,12 +12445,6 @@ data source is fired. By default the widget will bind to the data source specifi
         </attribute>
         <attribute>
             <description>See the dataSource field.</description>
-            <name>connectionsDataSource</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Object</type>
-        </attribute>
-        <attribute>
-            <description>See the dataSource field.</description>
             <name>dataSource</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
@@ -12498,6 +12492,26 @@ data source is fired. By default the widget will bind to the data source specifi
             <type>float</type>
         </attribute>
         <attribute>
+            <description>Fired when the user edits a shape or connection.</description>
+            <name>Edit</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fired when the user a shape or connection da is saved.</description>
+            <name>Save</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fired when the user clicks the "cancel" button in the popup window.</description>
+            <name>cancel</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fired when the user delete a shape or connection.</description>
+            <name>remove</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
             <description>Fired when an item is added or removed to/from the diagram.</description>
             <name>change</name>
             <rtexprvalue>true</rtexprvalue>
@@ -12538,111 +12552,6 @@ data source is fired. By default the widget will bind to the data source specifi
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <dynamic-attributes>true</dynamic-attributes>
-    </tag>
-
-    <tag>
-        <description>DiagramConnectionsDataSource</description>
-        <name>diagram-connectionsDataSource</name>
-        <tag-class>com.kendoui.taglib.diagram.DiagramConnectionsDataSource</tag-class>
-        <body-content>JSP</body-content>
-        <attribute>
-            <description>If set to true the data source would automatically save any changed data items by calling the sync method. By default changes are not automatically saved.</description>
-            <name>autoSync</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-        <attribute>
-            <description>If set to true the data source will batch CRUD operation requests. For example updating two data items would cause one HTTP request instead of two. By default the data source
-makes a HTTP request for every CRUD operation.</description>
-            <name>batch</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-        <attribute>
-            <description>The array of data items which the data source contains. The data source will wrap those items as kendo.data.ObservableObject or kendo.data.Model (if schema.model is set).Can be set to a string value if the schema.type option is set to "xml".</description>
-            <name>data</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Object</type>
-        </attribute>
-        <attribute>
-            <description>The page of data which the data source will return when the view method is invoked or request from the remote service.</description>
-            <name>page</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-        <attribute>
-            <description>The number of data items per page.</description>
-            <name>pageSize</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-        <attribute>
-            <description>If set to true the data source will leave the aggregate calculation to the remote service. By default the data source calculates aggregates client-side.</description>
-            <name>serverAggregates</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-        <attribute>
-            <description>If set to true the data source will leave the filtering implementation to the remote service. By default the data source performs filtering client-side.By default the filter is sent to the server following jQuery's conventions.For example the filter { logic: "and", filters: [ { field: "name", operator: "startswith", value: "Jane" } ] } is sent as:Use the parameterMap option to send the filter option in a different format.</description>
-            <name>serverFiltering</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-        <attribute>
-            <description>If set to true the data source will leave the grouping implementation to the remote service. By default the data source performs grouping client-side.By default the group is sent to the server following jQuery's conventions.For example the group { field: "category", dir: "desc" } is sent as:Use the parameterMap option to send the group option in a different format.</description>
-            <name>serverGrouping</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-        <attribute>
-            <description>If set to true the data source will leave the data item paging implementation to the remote service. By default the data source performs paging client-side.The following options are sent to the server when server paging is enabled:Use the parameterMap option to send the paging options in a different format.</description>
-            <name>serverPaging</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-        <attribute>
-            <description>If set to true the data source will leave the data item sorting implementation to the remote service. By default the data source performs sorting client-side.By default the sort is sent to the server following jQuery's conventions.For example the sort { field: "age", dir: "desc" } is sent as:Use the parameterMap option to send the paging options in a different format.</description>
-            <name>serverSorting</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-        <attribute>
-            <description>If set the data source will use a predefined transport and/or schema.
-The supported values are "odata" which supports the OData v.2 protocol and "signalr".</description>
-            <name>type</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-        <attribute>
-            <description>Fired when the data source is populated from a JavaScript array or a remote service, a data item is inserted, updated or removed, the data items are paged, sorted, filtered or grouped.The event handler function context (available via the this keyword) will be set to the data source instance.</description>
-            <name>change</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-        <attribute>
-            <description>Fired when a request to the remote service fails.The event handler function context (available via the this keyword) will be set to the data source instance.</description>
-            <name>error</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-        <attribute>
-            <description>Fired when the data source receives a push notification or the pushCreate, pushUpdate or pushDestroy methods are called.</description>
-            <name>push</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-        <attribute>
-            <description>Fired when a remote service request is finished.The event handler function context (available via the this keyword) will be set to the data source instance.</description>
-            <name>requestEnd</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-        <attribute>
-            <description>Fired when the data source makes a remote service request.The event handler function context (available via the this keyword) will be set to the data source instance.</description>
-            <name>requestStart</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-        <attribute>
-            <description>Fired after the data source saves data item changes. The data source saves the data item changes when the sync method is called.The event handler function context (available via the this keyword) will be set to the data source instance.</description>
-            <name>sync</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
     </tag>
 
     <tag>
@@ -12944,6 +12853,12 @@ The supported values are "odata" which supports the OData v.2 protocol and "sign
         <body-content>JSP</body-content>
 
         <attribute>
+            <description>Specifies the connection editor template.</description>
+            <name>connectionTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>Specifies the shape resizing.</description>
             <name>resize</name>
             <rtexprvalue>true</rtexprvalue>
@@ -12954,6 +12869,12 @@ The supported values are "odata" which supports the OData v.2 protocol and "sign
             <name>rotate</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the shape editor template.</description>
+            <name>shapeTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
         </attribute>
 
     </tag>
@@ -13189,6 +13110,18 @@ The supported values are "odata" which supports the OData v.2 protocol and "sign
 
 
 
+    <tag>
+        <description>Specifies the shape editor template.</description>
+        <name>diagram-editable-shapeTemplate</name>
+        <tag-class>com.kendoui.taglib.diagram.EditableShapeTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Specifies the connection editor template.</description>
+        <name>diagram-editable-connectionTemplate</name>
+        <tag-class>com.kendoui.taglib.diagram.EditableConnectionTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
 
     <tag>
         <description>The layout of a diagram consists in arranging the shapes (sometimes also the connections) in some fashion in order to achieve an aesthetically pleasing experience to the user. It aims at giving a more direct insight in the information contained within the diagram and its relational structure.On a technical level, layout consists of a multitude of algorithms and optimizations:and various ad-hoc calculations which depend on the type of layout. The criteria on which an algorithm is based vary but the common denominator is:Kendo diagram includes three of the most used layout algorithms which should cover most of your layout needs - tree layout, force-directed layout and layered layout. Please, check the type property for more details regarding each type.The generic way to apply a layout is by calling the layout() method on the diagram. The method has a single parameter options. It is an object, which can contain parameters which are specific to the layout as well as parameters customizing the global grid layout. Parameters which apply to other layout algorithms can be included but are overlooked if not applicable to the chose layout type. This means that you can define a set of parameters which cover all possible layout types and simply pass it in the method whatever the layout define in the first parameter.</description>
@@ -13957,6 +13890,30 @@ See visual.</description>
         <body-content>JSP</body-content>
     </tag>
 
+    <tag>
+        <description>Fired when the user edits a shape or connection.</description>
+        <name>diagram-Edit</name>
+        <tag-class>com.kendoui.taglib.diagram.EditFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the user a shape or connection da is saved.</description>
+        <name>diagram-Save</name>
+        <tag-class>com.kendoui.taglib.diagram.SaveFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the user clicks the "cancel" button in the popup window.</description>
+        <name>diagram-cancel</name>
+        <tag-class>com.kendoui.taglib.diagram.CancelFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the user delete a shape or connection.</description>
+        <name>diagram-remove</name>
+        <tag-class>com.kendoui.taglib.diagram.RemoveFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
     <tag>
         <description>Fired when an item is added or removed to/from the diagram.</description>
         <name>diagram-change</name>
@@ -16988,7 +16945,7 @@ If the dataSource options is missing the options of the Grid's dataSource will b
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Specifies the AutoComplete filter option. Possible values are same as the one for the AutoComplete filter option- "startswidht", "endswith", "contains". Notice this operator is completely separate from the operator used for filtering on this column.</description>
+            <description>Specifies the AutoComplete filter option. Possible values are same as the one for the AutoComplete filter option- "startswidht", "endswith", "contains".</description>
             <name>suggestionOperator</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>

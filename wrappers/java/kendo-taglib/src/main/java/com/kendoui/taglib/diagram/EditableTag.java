@@ -61,6 +61,22 @@ public class EditableTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         setProperty("rotate", value);
     }
 
+    public void setShapeTemplate(EditableShapeTemplateFunctionTag value) {
+        setEvent("shapeTemplate", value.getBody());
+    }
+
+    public void setConnectionTemplate(EditableConnectionTemplateFunctionTag value) {
+        setEvent("connectionTemplate", value.getBody());
+    }
+
+    public java.lang.String getConnectionTemplate() {
+        return (java.lang.String)getProperty("connectionTemplate");
+    }
+
+    public void setConnectionTemplate(java.lang.String value) {
+        setProperty("connectionTemplate", value);
+    }
+
     public boolean getResize() {
         return (boolean)getProperty("resize");
     }
@@ -75,6 +91,14 @@ public class EditableTag extends  BaseTag  /* interfaces */ /* interfaces */ {
 
     public void setRotate(boolean value) {
         setProperty("rotate", value);
+    }
+
+    public java.lang.String getShapeTemplate() {
+        return (java.lang.String)getProperty("shapeTemplate");
+    }
+
+    public void setShapeTemplate(java.lang.String value) {
+        setProperty("shapeTemplate", value);
     }
 
 //<< Attributes
