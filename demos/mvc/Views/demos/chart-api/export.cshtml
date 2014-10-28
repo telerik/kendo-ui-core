@@ -12,12 +12,12 @@
         </div>
     </div>
     <div class="demo-section k-content">
-        <div id="chart" style="width: 800px; margin: auto;"></div>
+        <div id="chart"></div>
     </div>
     <script>
         $(".export-pdf").click(function() {
             var chart = $("#chart").getKendoChart();
-            chart.exportPDF({ paperSize: "A4", landscape: true }).done(function(data) {
+            chart.exportPDF({ paperSize: "auto", landscape: true }).done(function(data) {
                 kendo.saveAs({
                     dataURI: data,
                     fileName: "chart.pdf",
