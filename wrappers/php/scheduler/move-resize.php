@@ -148,7 +148,7 @@ $scheduler->timezone("Etc/UTC")
         ->startTime(new DateTime('2013/6/13 6:00'))
         ->height(600)
         ->addView('day',
-            array('type' => 'week', 'selected' => true))
+            array('type' => 'week', 'selected' => true), 'timeline')
         ->dataSource($dataSource);
 
 ?>

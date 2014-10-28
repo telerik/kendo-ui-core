@@ -12,20 +12,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $type = $_GET['type'];
 
-    $columns = array('TaskID', 'Title', 'Start', 'End', 'StartTimezone', 'EndTimezone', 'IsAllDay', 'Description', 'RecurrenceID', 'RecurrenceRule', 'RecurrenceException', 'OwnerID');
+    $columns = array('MeetingID', 'Title', 'Start', 'End', 'StartTimezone', 'EndTimezone', 'IsAllDay', 'Description', 'RecurrenceID', 'RecurrenceRule', 'RecurrenceException', 'RoomID');
 
     switch($type) {
         case 'create':
-            $result = $result->create('Tasks', $columns, $request->models, 'TaskID');
+            $result = $result->createWithAssociation('Meetings', 'MeetingAttendees', $columns, $request->models, 'MeetingID', array('Attendees' => 'AttendeeID'));
             break;
         case 'update':
-            $result = $result->update('Tasks', $columns, $request->models, 'TaskID');
+            $result = $result->updateWithAssociation('Meetings', 'MeetingAttendees', $columns, $request->models, 'MeetingID', array('Attendees' => 'AttendeeID'));
             break;
         case 'destroy':
-            $result = $result->destroy('Tasks', $request->models, 'TaskID');
+            $result = $result->destroyWithAssociation('Meetings', 'MeetingAttendees', $request->models, 'MeetingID');
             break;
         default:
-            $result = $result->read('Tasks', array('TaskID', 'OwnerID'), $request);
+            $result = $result->readWithAssociation('Meetings', 'MeetingAttendees', 'MeetingID', array('AttendeeID' => 'Attendees'), array('MeetingID', 'RoomID'), $request);
             break;
     }
 
@@ -40,25 +40,25 @@ $transport = new \Kendo\Data\DataSourceTransport();
 
 $create = new \Kendo\Data\DataSourceTransportCreate();
 
-$create->url('index.php?type=create')
+$create->url('resources-grouping-vertical.php?type=create')
      ->contentType('application/json')
      ->type('POST');
 
 $read = new \Kendo\Data\DataSourceTransportRead();
 
-$read->url('index.php?type=read')
+$read->url('resources-grouping-vertical.php?type=read')
      ->contentType('application/json')
      ->type('POST');
 
 $update = new \Kendo\Data\DataSourceTransportUpdate();
 
-$update->url('index.php?type=update')
+$update->url('resources-grouping-vertical.php?type=update')
      ->contentType('application/json')
      ->type('POST');
 
 $destroy = new \Kendo\Data\DataSourceTransportDestroy();
 
-$destroy->url('index.php?type=destroy')
+$destroy->url('resources-grouping-vertical.php?type=destroy')
      ->contentType('application/json')
      ->type('POST');
 
@@ -72,9 +72,9 @@ $transport->create($create)
 
 $model = new \Kendo\Data\DataSourceSchemaModel();
 
-$taskIDField = new \Kendo\Data\DataSourceSchemaModelField('taskID');
-$taskIDField->type('number')
-            ->from('TaskID')
+$meetingIdField = new \Kendo\Data\DataSourceSchemaModelField('meetingID');
+$meetingIdField->type('number')
+            ->from('MeetingID')
             ->nullable(true);
 
 $titleField = new \Kendo\Data\DataSourceSchemaModelField('title');
@@ -114,12 +114,16 @@ $recurrenceRuleField->from('RecurrenceRule');
 $recurrenceExceptionField = new \Kendo\Data\DataSourceSchemaModelField('recurrenceException');
 $recurrenceExceptionField->from('RecurrenceException');
 
-$ownerIdField = new \Kendo\Data\DataSourceSchemaModelField('ownerId');
-$ownerIdField->from('OwnerID')
-        ->defaultValue(1);
+$roomIdField = new \Kendo\Data\DataSourceSchemaModelField('roomId');
+$roomIdField->from('RoomID')
+        ->nullable(true);
 
-$model->id('taskID')
-    ->addField($taskIDField)
+$attendeesField = new \Kendo\Data\DataSourceSchemaModelField('attendees');
+$attendeesField->from('Attendees')
+        ->nullable(true);
+
+$model->id('meetingID')
+    ->addField($meetingIdField)
     ->addField($titleField)
     ->addField($startField)
     ->addField($endField)
@@ -129,7 +133,8 @@ $model->id('taskID')
     ->addField($recurrenceIdField)
     ->addField($recurrenceRuleField)
     ->addField($recurrenceExceptionField)
-    ->addField($ownerIdField)
+    ->addField($roomIdField)
+    ->addField($attendeesField)
     ->addField($isAllDayField);
 
 $schema = new \Kendo\Data\DataSourceSchema();
@@ -141,18 +146,22 @@ $dataSource = new \Kendo\Data\DataSource();
 
 $dataSource->transport($transport)
     ->schema($schema)
-    ->batch(true)
-    ->addFilterItem(array(
-        'logic' => 'or',
-        'filters' => array(
-            array('field' => 'ownerId', 'operator' => 'eq', 'value' => 1),
-            array('field' => 'ownerId', 'operator' => 'eq', 'value' => 2),
-        )
+    ->batch(true);
+
+$roomResource = new \Kendo\UI\SchedulerResource();
+$roomResource->field('roomId')
+    ->title('Room')
+    ->name('Rooms')
+    ->dataSource(array(
+        array('text'=> 'Meeting Room 101', 'value' => 1, 'color' => '#6eb3fa'),
+        array('text'=> 'Meeting Room 201', 'value' => 2, 'color' => '#f58a8a')
     ));
 
-$resource = new \Kendo\UI\SchedulerResource();
-$resource->field('ownerId')
-    ->title('Owner')
+$attendeesResource = new \Kendo\UI\SchedulerResource();
+$attendeesResource->field('attendees')
+    ->title('Attendees')
+    ->multiple(true)
+    ->name('Attendees')
     ->dataSource(array(
         array('text'=> 'Alex', 'value' => 1, 'color' => '#f8a398'),
         array('text'=> 'Bob', 'value' => 2, 'color' => '#51a0ed'),
@@ -162,80 +171,14 @@ $resource->field('ownerId')
 $scheduler = new \Kendo\UI\Scheduler('scheduler');
 $scheduler->timezone("Etc/UTC")
         ->date(new DateTime('2013/6/13'))
-        ->height(600)
-        ->addResource($resource)
-        ->addView(array('type' => 'day', 'startTime' => new DateTime('2013/6/13 7:00')),
-            array('type' => 'workWeek', 'selected' => true, 'startTime' => new DateTime('2013/6/13 7:00')),
-            array('type' => 'week', 'startTime' => new DateTime('2013/6/13 7:00')), 'month', 'agenda', 'timeline')
+        ->startTime( new DateTime('2013/6/13 7:00'))
+        ->addResource($roomResource, $attendeesResource)
+        ->group(array('resources' => array('Rooms', 'Attendees'), 'orientation' => 'vertical'))
+        ->addView(array('type' => 'timeline', 'eventHeight' => 50),
+            array('type' => 'timelineWeek', 'eventHeight' => 50), 
+            array('type' => 'timelineWorkWeek', 'eventHeight' => 50))
         ->dataSource($dataSource);
 
-?>
-<div id="team-schedule">
-    <div id="people">
-        <input checked type="checkbox" id="alex" value="1">
-        <input checked type="checkbox" id="bob" value="2">
-        <input type="checkbox" id="charlie" value="3">
-    </div>
-</div>
-
-<?php
 echo $scheduler->render();
 ?>
-
-<script>
-    $("#people :checkbox").change(function(e) {
-        var checked = $.map($("#people :checked"), function(checkbox) {
-            return parseInt($(checkbox).val());
-        });
-
-        var filter = {
-            logic: "or",
-            filters: $.map(checked, function(value) {
-                return {
-                    operator: "eq",
-                    field: "ownerId",
-                    value: value
-                };
-            })
-        };
-
-        var scheduler = $("#scheduler").data("kendoScheduler");
-
-        scheduler.dataSource.filter(filter);
-    });
-</script>
-
-<style scoped>
-    #scheduler {
-        font-size: 14px;    
-    }
-    #team-schedule {
-        background: url('../content/web/scheduler/team-schedule.png') transparent no-repeat;
-        height: 115px;
-        position: relative;
-    }
-    
-    #people {
-        background: url('../content/web/scheduler/scheduler-people.png') no-repeat;
-        width: 345px;
-        height: 115px;
-        position: absolute;
-        right: 0;
-    }
-    #alex {
-        position: absolute;
-        left: 4px;
-        top: 81px;
-    }
-    #bob {
-        position: absolute;
-        left: 119px;
-        top: 81px;
-    }
-    #charlie {
-        position: absolute;
-        left: 234px;
-        top: 81px;
-    }
-</style>
 <?php require_once '../include/footer.php'; ?>

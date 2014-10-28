@@ -175,7 +175,7 @@ $scheduler->timezone("Etc/UTC")
         ->addResource($roomResource, $attendeesResource)
         ->group(array('resources' => array('Rooms', 'Attendees'), 'orientation' => 'vertical'))
         ->addView(array('type' => 'day', 'startTime' => new DateTime('2013/6/13 7:00')),
-            array('type' => 'week', 'selected' => true, 'startTime' => new DateTime('2013/6/13 7:00')), 'month', 'agenda')
+            array('type' => 'week', 'selected' => true, 'startTime' => new DateTime('2013/6/13 7:00')), 'month', 'agenda', 'timeline')
         ->dataSource($dataSource);
 
 echo $scheduler->render();
