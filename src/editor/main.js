@@ -739,7 +739,7 @@
 
         getRange: function () {
             var selection = this.getSelection(),
-                range = selection.rangeCount > 0 ? selection.getRangeAt(0) : this.createRange(),
+                range = selection && selection.rangeCount > 0 ? selection.getRangeAt(0) : this.createRange(),
                 doc = this.document;
 
             if (range.startContainer == doc && range.endContainer == doc && !range.startOffset && !range.endOffset) {

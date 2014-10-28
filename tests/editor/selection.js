@@ -73,6 +73,14 @@ test('getSelection returns selection like object', function() {
     ok(undefined !== selection.addRange);
 });
 
+test('getRange does not trigger Javascript error when the Editor is hidden', 1, function () {
+    QUnit.fixture.hide();
+    var range = editor.getRange();
+    QUnit.fixture.show();
+
+    ok(typeof range !== "undefined");
+});
+
 function selectAndGet(range) {
     var selection = editor.getSelection();
     selection.removeAllRanges();
