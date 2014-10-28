@@ -115,6 +115,14 @@ public class DiagramTag extends WidgetTag /* interfaces */implements DataBoundWi
         setProperty("autoBind", value);
     }
 
+    public java.lang.Object getConnectionsDataSource() {
+        return (java.lang.Object)getProperty("connectionsDataSource");
+    }
+
+    public void setConnectionsDataSource(java.lang.Object value) {
+        setProperty("connectionsDataSource", value);
+    }
+
     public void setDataSource(DataSourceTag dataSource) {
         setProperty("dataSource", dataSource);
     }
