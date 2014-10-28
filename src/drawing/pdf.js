@@ -245,7 +245,7 @@
             return;
         }
 
-        var color = fill.color || element.options.baseColor;
+        var color = fill.color;
         if (color) {
             color = parseColor(color);
             if (color == null) {
