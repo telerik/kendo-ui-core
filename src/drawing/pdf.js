@@ -276,11 +276,11 @@
     }
 
     function shouldDraw(thing) {
-            return thing &&
+        return thing &&
             thing.color && !/^(none|transparent)$/i.test(thing.color) &&
-                (thing.width == null || thing.width > 0) &&
-                (thing.opacity == null || thing.opacity > 0);
-        }
+            (thing.width == null || thing.width > 0) &&
+            (thing.opacity == null || thing.opacity > 0);
+    }
 
     function maybeFillStroke(element, page, pdf) {
         if (shouldDraw(element.fill()) && shouldDraw(element.stroke())) {
