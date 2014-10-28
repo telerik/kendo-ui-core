@@ -3229,6 +3229,10 @@
                     }
                 } else {
                     this._addConnections(e.sender.view());
+					
+                    if (this.options.layout) {
+                        this.layout(this.options.layout);
+                    }
                 }
             },
 
@@ -3306,6 +3310,7 @@
                         var options = deepExtend({}, this.options.connectionDefaults);
                         options.dataItem = dataItem;
                         var connection = new Connection(from, to, options);
+						connection.type(CASCADING);
                         this._connectionsDataMap[dataItem.uid] = connection;
                         this.addConnection(connection);
                     }
