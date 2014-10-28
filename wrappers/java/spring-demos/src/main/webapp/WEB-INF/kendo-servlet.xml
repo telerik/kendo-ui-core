@@ -63,6 +63,8 @@
 				<beans:value>com.kendoui.spring.models.Meeting</beans:value>
 				<beans:value>com.kendoui.spring.models.MeetingAttendee</beans:value>
 				<beans:value>com.kendoui.spring.models.Order</beans:value>
+				<beans:value>com.kendoui.spring.models.OrgChartConnection</beans:value>
+				<beans:value>com.kendoui.spring.models.OrgChartShape</beans:value>
 				<beans:value>com.kendoui.spring.models.Customer</beans:value>
 				<beans:value>com.kendoui.spring.models.Category</beans:value>
 				<beans:value>com.kendoui.spring.models.Employee</beans:value>
