@@ -702,7 +702,7 @@ test("parseDate parses /Date(milliseconds+offset)/ string", function() {
 
 test("parseDate parses /Date(milliseconds+offset)/ string (2)", function() {
     var utcTime = 1376949210000;
-    var tzoffset = new Date().getTimezoneOffset();
+    var tzoffset = new Date(utcTime).getTimezoneOffset();
 
     var sign = tzoffset > 0 ? "-" : "+";
     tzoffset = Math.abs(tzoffset);
