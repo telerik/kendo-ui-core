@@ -2975,7 +2975,7 @@
                     if (element) {
                         var tools = element.options.editable.tools;
                         if (tools) {
-                            var padding = 10;
+                            var padding = 20;
                             var point;
                             this.toolBar = new DiagramToolBar(diagram, {
                                 tools: tools,
@@ -3009,6 +3009,8 @@
                             }
 
                             if (point) {
+                                var offset = this.element.offset();
+                                point = Point(point.x + offset.left - 8, point.y + offset.top);
                                 point = Point(math.max(point.x, 0), math.max(point.y, 0));
                                 this.toolBar.show(point);
                             } else {
