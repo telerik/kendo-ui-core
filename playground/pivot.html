@@ -47,12 +47,13 @@
         <script>
             $(function() {
                 var pivot = $("#pivotgrid").kendoPivotGrid({
-                    height: 300,
+                    height: 500,
                     columnWidth: 50,
                     dataSource: {
                         type: "xmla",
-                        rows: [{ name: "[Date].[Calendar]", expand: true }],
-                        columns: [{ name: "[Geography].[City]", expand: true }],
+                        columns: [{ name: "[Date].[Calendar]", expand: true }],
+                        rows: [{ name: "[Product].[Category]", expand: true }],
+                        //columns: [{ name: "[Geography].[City]", expand: true }],
                         transport: {
                             connection: {
                                 catalog: "Adventure Works Internet Sales Model",
@@ -79,17 +80,7 @@
                 });
 
                 $("#kpi").click(function() {
-                    pivot.dataSource.schemaKPIs()
-                         .done(function(kpis) {
-                             var first = kpis[0];
-
-                             pivot.dataSource.measures([
-                                 first.value,
-                                 first.goal,
-                                 first.status,
-                                 first.trend
-                             ]);
-                         });
+                    pivot.dataSource.measures(["[Measures].[Internet Current Quarter Sales Performance]"]);
                 });
             });
         </script>
