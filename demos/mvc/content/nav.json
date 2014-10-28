@@ -4337,7 +4337,10 @@
         },
         "meta": {
             "kendo-ui": "This example illustrates how the treelist can be bound to local data, so that all information is available."
-        }
+        },
+        "packages": [
+            "!mvc"
+        ]
       },
       {
         "text": "Binding to remote data",
@@ -4379,7 +4382,10 @@
             "kendo-ui": "Export Kendo UI TreeList as Microsoft Excel file"
         },
         "packages": [
-            "!offline"
+            "!offline",
+            "!mvc",
+            "!jsp",
+            "!php"
         ]
       },
       {
@@ -4392,7 +4398,10 @@
             "kendo-ui": "Export Kendo UI TreeList as PDF file"
         },
         "packages": [
-            "!offline"
+            "!offline",
+            "!mvc",
+            "!jsp",
+            "!php"
         ]
       },
       {
