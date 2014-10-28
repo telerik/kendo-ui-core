@@ -12,14 +12,24 @@
         }
     });
 
-    test("jQuery element", function(){
+    test("Draws jQuery element", function(){
         container.html("<span style='font: bold 16px monospace'>Foo bar</span>");
         drawing.drawDOM(container).done(function(group){
             ok(true);
         });
     });
 
-    test("simple text node", function(){
+    test("Fails with no element", function(){
+        drawing.drawDOM($())
+        .fail(function() {
+            ok(true);
+        })
+        .done(function(group){
+            ok(false, "Should fail");
+        });
+    });
+
+    test("Draws simple text node", function(){
         container.html("<span style='font: bold 16px monospace'>Foo bar</span>");
         drawing.drawDOM(container[0]).done(function(group){
             var text = find(group, function(node){

@@ -28,6 +28,7 @@
         var defer = $.Deferred();
         element = $(element)[0];
 
+        if (element) {
         cacheImages(element, function(){
             var group = new drawing.Group();
 
@@ -45,6 +46,9 @@
             renderElement(element, group);
             defer.resolve(group);
         });
+        } else {
+            defer.reject("No element to export");
+        }
 
         return defer.promise();
     };
