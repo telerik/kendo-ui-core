@@ -230,7 +230,7 @@
             return;
         }
 
-        var color = fill.color;
+        var color = fill.color || element.options.baseColor;
         if (color) {
             color = parseColor(color);
             if (color == null) {
