@@ -52,7 +52,8 @@
     		<kendo:scheduler-view type="workWeek" selected="true" />
     		<kendo:scheduler-view type="week" />
     		<kendo:scheduler-view type="month"  />
-    		<kendo:scheduler-view type="agenda" />
+			<kendo:scheduler-view type="agenda" />
+			<kendo:scheduler-view type="timeline" />
     	</kendo:scheduler-views>
     	<kendo:scheduler-resources>
     		<kendo:scheduler-resource field="ownerId" title="Owner">

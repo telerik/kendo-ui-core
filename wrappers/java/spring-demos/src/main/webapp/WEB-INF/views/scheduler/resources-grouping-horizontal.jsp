@@ -56,7 +56,8 @@
     	<kendo:scheduler-views>
     		<kendo:scheduler-view type="day" />
     		<kendo:scheduler-view type="week" selected="true" />
-    		<kendo:scheduler-view type="month"  />    		
+			<kendo:scheduler-view type="month"  />
+			<kendo:scheduler-view type="timeline" />
     	</kendo:scheduler-views>
     	<kendo:scheduler-group resources="<%= new String[] { \"Rooms\" } %>"/>
     	<kendo:scheduler-resources>

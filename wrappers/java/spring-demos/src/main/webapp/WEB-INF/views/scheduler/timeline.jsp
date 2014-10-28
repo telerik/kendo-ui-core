@@ -9,42 +9,77 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
-<c:url value="/scheduler/move-resize/read" var="readUrl" />
-<c:url value="/scheduler/move-resize/create" var="createUrl" />
-<c:url value="/scheduler/move-resize/update" var="updateUrl" />
-<c:url value="/scheduler/move-resize/destroy" var="destroyUrl" />
+<c:url value="/scheduler/resources-grouping-vertical/read" var="readUrl" />
+<c:url value="/scheduler/resources-grouping-vertical/create" var="createUrl" />
+<c:url value="/scheduler/resources-grouping-vertical/update" var="updateUrl" />
+<c:url value="/scheduler/resources-grouping-vertical/destroy" var="destroyUrl" />
 
 <%
 	Date date = new SimpleDateFormat("yyyy/MM/dd").parse("2013/6/13");
 	
 	Date startTime = new SimpleDateFormat("yyyy/MM/dd hh:mm").parse("2013/6/13 7:00");
+	
+	ArrayList<HashMap<String, Object>> people = new ArrayList<HashMap<String, Object>>();
+	
+	HashMap<String, Object> alex = new HashMap<String, Object>();
+	alex.put("text", "Alex");
+	alex.put("value", 1);
+	alex.put("color", "#f8a398");
+	people.add(alex);
+	HashMap<String, Object> bob = new HashMap<String, Object>();
+	bob.put("text", "Bob");
+	bob.put("value", 2);
+	bob.put("color", "#51a0ed");
+	people.add(bob);
+	HashMap<String, Object> charlie = new HashMap<String, Object>();
+	charlie.put("text", "Charlie");
+	charlie.put("value", 3);
+	charlie.put("color", "#56ca85");
+	people.add(charlie);
+	
+	ArrayList<HashMap<String, Object>> rooms = new ArrayList<HashMap<String, Object>>();
+	
+	HashMap<String, Object> room1 = new HashMap<String, Object>();
+	room1.put("text", "Meeting Room 101");
+	room1.put("value", 1);
+	room1.put("color", "#6eb3fa");
+	rooms.add(room1);
+	HashMap<String, Object> room2 = new HashMap<String, Object>();
+	room2.put("text", "Meeting Room 102");
+	room2.put("value", 2);
+	room2.put("color", "#f58a8a");
+	rooms.add(room2);
+
 %>
 <demo:header />
-
-	<div class="configuration-horizontal">
-	    <div class="config-section">
-	        <label><input type="checkbox" checked />Snap events to slot boundaries</label>
-	    </div>
-	</div>
-	
-    <kendo:scheduler name="scheduler" timezone="Etc/UTC" height="600" date="<%= date %>" startTime="<%= startTime %>">
-    	<kendo:scheduler-views>
-    		<kendo:scheduler-view type="day" />
-			<kendo:scheduler-view type="week" selected="true" />
-			<kendo:scheduler-view type="timeline" />
+    <kendo:scheduler name="scheduler" timezone="Etc/UTC" date="<%= date %>" startTime="<%= startTime %>">
+    	<kendo:scheduler-views>  
+    		<kendo:scheduler-view type="timeline" eventHeight="50" />
+    		<kendo:scheduler-view type="timelineWeek" eventHeight="50" />
+    		<kendo:scheduler-view type="timelineWorkWeek" eventHeight="50" />		    		
     	</kendo:scheduler-views>
+    	<kendo:scheduler-group resources="<%= new String[] { \"Rooms\",\"Attendees\" } %>" orientation="vertical" />
+    	<kendo:scheduler-resources>
+    	    <kendo:scheduler-resource field="roomId" title="Room" name="Rooms">
+    			<kendo:dataSource data="<%= rooms %>" />
+    		</kendo:scheduler-resource>
+    		<kendo:scheduler-resource field="attendees" title="Attendees" multiple="true" name="Attendees">
+    			<kendo:dataSource data="<%= people %>" />
+    		</kendo:scheduler-resource>
+    	</kendo:scheduler-resources>
         <kendo:dataSource batch="true">
              <kendo:dataSource-schema>
-                <kendo:dataSource-schema-model id="taskId">
+                <kendo:dataSource-schema-model id="meetingId">
                      <kendo:dataSource-schema-model-fields>
-                         <kendo:dataSource-schema-model-field name="taskId" type="number" />
+                         <kendo:dataSource-schema-model-field name="meetingId" type="number" />
                          <kendo:dataSource-schema-model-field name="title" defaultValue="No title" type="string" />
                          <kendo:dataSource-schema-model-field name="description" type="string" />
                          <kendo:dataSource-schema-model-field name="isAllDay" type="boolean" />
                          <kendo:dataSource-schema-model-field name="recurrenceRule" type="string" nullable="true"/>
+                         <kendo:dataSource-schema-model-field name="attendees" nullable="true"/>
                          <kendo:dataSource-schema-model-field name="recurrenceId" type="number" nullable="true" />
                          <kendo:dataSource-schema-model-field name="recurrenceException" type="string" nullable="true" />
-                         <kendo:dataSource-schema-model-field name="ownerId" type="number" defaultValue="1" />
+                         <kendo:dataSource-schema-model-field name="roomId" nullable="true"/>
                          <kendo:dataSource-schema-model-field name="start" type="date" />
                          <kendo:dataSource-schema-model-field name="end" type="date" />
                     </kendo:dataSource-schema-model-fields>
@@ -69,15 +104,4 @@
             </kendo:dataSource-transport>
         </kendo:dataSource>
     </kendo:scheduler>
-    
-<script>
-	$(function () {
-	    $(":checkbox").change(function (e) {
-	        var scheduler = $("#scheduler").data("kendoScheduler");
-	
-	        scheduler.options.snap = this.checked;
-	        scheduler.view(scheduler.view().name);
-	    });
-	})
-</script>
 <demo:footer />

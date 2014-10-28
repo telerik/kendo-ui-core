@@ -40,6 +40,7 @@
             <option value="day">Day</option>
             <option value="month">Month</option>
             <option value="week">Week</option>
+            <option value="timeline">Timeline</option>
         </select>
     </p>
 </div>

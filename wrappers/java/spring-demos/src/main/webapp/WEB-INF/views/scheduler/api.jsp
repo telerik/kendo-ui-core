@@ -48,7 +48,14 @@
 	
 	week.put("text", "Week");
 	week.put("value", "week");
-	
+
+	views.add(week);
+
+	Map<String, Object> timeline = new HashMap<String, Object>();
+
+	week.put("text", "Timeline");
+	week.put("value", "timeline");
+
 	views.add(week);
 %>
 
@@ -59,6 +66,7 @@
     		<kendo:scheduler-view type="week" selected="true" />
     		<kendo:scheduler-view type="month"  />
     		<kendo:scheduler-view type="agenda" />
+			<kendo:scheduler-view type="timeline" />
     	</kendo:scheduler-views>
         <kendo:dataSource batch="true">
              <kendo:dataSource-schema>

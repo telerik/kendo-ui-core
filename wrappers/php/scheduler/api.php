@@ -172,7 +172,8 @@ echo $scheduler->render();
                           array('text' => 'Agenda', 'value' => 'agenda'),
                           array('text' => 'Day', 'value' => 'day'),
                           array('text' => 'Month', 'value' => 'month'),
-                          array('text' => 'Week', 'value' => 'week')
+                          array('text' => 'Week', 'value' => 'week'),
+                          array('text' => 'Timeline', 'value' => 'timeline')
                       ));
 
                 echo $viewsPicker->render();

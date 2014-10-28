@@ -96,6 +96,7 @@ function scheduler_navigate(e) {
             <kendo:scheduler-view type="week" selected="true" />
             <kendo:scheduler-view type="month"  />
             <kendo:scheduler-view type="agenda" />
+            <kendo:scheduler-view type="timeline" />
         </kendo:scheduler-views>
         <kendo:dataSource batch="true">
              <kendo:dataSource-schema>

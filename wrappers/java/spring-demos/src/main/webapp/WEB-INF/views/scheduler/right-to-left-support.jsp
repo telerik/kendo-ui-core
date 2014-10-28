@@ -57,8 +57,8 @@
     	<kendo:scheduler-views>
     		<kendo:scheduler-view type="day" />
     		<kendo:scheduler-view type="week" selected="true" />
-    		<kendo:scheduler-view type="month"  />
-    		<kendo:scheduler-view type="agenda" />
+			<kendo:scheduler-view type="month"  />
+			<kendo:scheduler-view type="agenda" />
     	</kendo:scheduler-views>
         <kendo:dataSource batch="true">
              <kendo:dataSource-schema>
