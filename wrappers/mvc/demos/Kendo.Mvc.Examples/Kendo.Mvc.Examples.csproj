@@ -201,6 +201,9 @@
     <Compile Include="Controllers\PivotGrid\Local_Flat_Data_BindingController.cs" />
     <Compile Include="Controllers\PivotGrid\Remote_Flat_Data_BindingController.cs" />
     <Compile Include="Controllers\Scheduler\TimelineController.cs" />
+    <Compile Include="Controllers\TreeList\Editing_PopupController.cs" />
+    <Compile Include="Controllers\TreeList\EmployeeDirectoryController.cs" />
+    <Compile Include="Controllers\TreeList\EditingController.cs" />
     <Compile Include="Controllers\TreeList\IndexController.cs" />
     <Compile Include="Controllers\TreeMap\EventsController.cs" />
     <Compile Include="Controllers\TreeMap\IndexController.cs" />
@@ -3347,6 +3350,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\razor\Views\treelist\index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\treelist\editing.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\treelist\editing_popup.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -67,16 +67,13 @@
         {
             var entity = employee.ToEntity();
             db.EmployeeDirectory.Attach(entity);
-
-            // TODO: Cascade delete?
-
             db.EmployeeDirectory.Remove(entity);
             db.SaveChanges();
         }
 
         private bool ValidateModel(EmployeeDirectoryModel employee, ModelStateDictionary modelState)
         {
-            if (employee.HireDate > employee.BirthDate)
+            if (employee.HireDate < employee.BirthDate)
             {
                 modelState.AddModelError("errors", "Employee cannot be hired before birth.");
                 return false;

@@ -4,7 +4,7 @@ namespace Kendo.Mvc.Examples.Controllers
 {
     public partial class TreeListController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Editing_Popup()
         {
             return View();
         }
