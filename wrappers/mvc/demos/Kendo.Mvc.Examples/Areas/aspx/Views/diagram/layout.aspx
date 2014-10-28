@@ -1,26 +1,11 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/Web.Master" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/Web.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 
-<%@ Import Namespace="Kendo.Mvc.Examples.Models" %>
-
-<asp:Content ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 <div class="diagram-wrapper" style="margin: auto;">
-    <%= Html.Kendo().Diagram<OrgChartShape, OrgChartConnection>()
+    <%= Html.Kendo().Diagram()
             .Name("diagram")
-            .DataSource(d => d
-                .ShapeDataSource()
-                .Model(m => 
-                {
-                    m.Id(s => s.Id);
-                })
-                .Read("ReadShapes", "Diagram")
-            )
-            .ConnectionsDataSource(d => d
-                .Model(m =>
-                {
-                    m.From(c => c.From);
-                    m.To(c => c.To);
-                })
-                .Read("ReadConnections", "Diagram")
+            .DataSource(dataSource => dataSource
+                .Read(read => read.Action("_DiagramTree", "Diagram")).Model(m => m.Children("Items"))
             )
             .Layout(l => l
                 .Type(DiagramLayoutType.Tree)
