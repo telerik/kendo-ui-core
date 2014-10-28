@@ -4,6 +4,15 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:url value="/diagram/index/read" var="readUrl" />
+<c:url value="/diagram/index/update" var="updateUrl" />
+<c:url value="/diagram/index/create" var="createUrl" />
+<c:url value="/diagram/index/destroy" var="destroyUrl" />
+
+<c:url value="/diagram/index/readConnections" var="readConnectionsUrl" />
+<c:url value="/diagram/index/updateConnection" var="updateConnectionUrl" />
+<c:url value="/diagram/index/createConnection" var="createConnectionUrl" />
+<c:url value="/diagram/index/destroyConnection" var="destroyConnectionUrl" />
+
 <c:url value="/resources/dataviz/diagram/people" var="imageRootUrl" />
 
 <demo:header />
@@ -51,13 +60,57 @@
 
 <kendo:diagram name="diagram">
      <kendo:dataSource>
-         <kendo:dataSource-transport>
-             <kendo:dataSource-transport-read url="${readUrl}" type="POST"  contentType="application/json"/>     
-         </kendo:dataSource-transport>
-         <kendo:dataSource-schema>
-             <kendo:dataSource-schema-hierarchical-model children="items" />
-         </kendo:dataSource-schema>
+           <kendo:dataSource-transport>
+               <kendo:dataSource-transport-create url="${createUrl}" dataType="json" type="POST" contentType="application/json" />
+               <kendo:dataSource-transport-read url="${readUrl}" dataType="json" type="POST" contentType="application/json"/>
+               <kendo:dataSource-transport-update url="${updateUrl}" dataType="json" type="POST" contentType="application/json" />
+               <kendo:dataSource-transport-destroy url="${destroyUrl}" dataType="json" type="POST" contentType="application/json" />
+               <kendo:dataSource-transport-parameterMap>
+               	<script>
+                	function parameterMap(options,type) {
+                		return JSON.stringify(options);
+                	}
+               	</script>
+               </kendo:dataSource-transport-parameterMap>
+           </kendo:dataSource-transport>
+          <kendo:dataSource-schema>
+              <kendo:dataSource-schema-model id="id">
+                  <kendo:dataSource-schema-model-fields>
+                  	  <kendo:dataSource-schema-model-field name="id" type="number" editable="false"/>
+                      <kendo:dataSource-schema-model-field name="firstName" type="string"/>
+                      <kendo:dataSource-schema-model-field name="lastName" type="string"/>
+                      <kendo:dataSource-schema-model-field name="title" type="string"/>
+                      <kendo:dataSource-schema-model-field name="colorScheme" type="string"/>
+                      <kendo:dataSource-schema-model-field name="image" type="string"/>
+                  </kendo:dataSource-schema-model-fields>
+              </kendo:dataSource-schema-model>
+          </kendo:dataSource-schema>
      </kendo:dataSource>
+     <kendo:diagram-connectionsDataSource>
+           <kendo:dataSource-transport>
+               <kendo:dataSource-transport-create url="${createConnectionUrl}" dataType="json" type="POST" contentType="application/json" />
+               <kendo:dataSource-transport-read url="${readConnectionsUrl}" dataType="json" type="POST" contentType="application/json"/>
+               <kendo:dataSource-transport-update url="${updateConnectionUrl}" dataType="json" type="POST" contentType="application/json" />
+               <kendo:dataSource-transport-destroy url="${destroyConnectionUrl}" dataType="json" type="POST" contentType="application/json" />
+               <kendo:dataSource-transport-parameterMap>
+               	<script>
+                	function parameterMap(options,type) {
+                		return JSON.stringify(options);
+                	}
+               	</script>
+               </kendo:dataSource-transport-parameterMap>
+           </kendo:dataSource-transport>
+          <kendo:dataSource-schema>
+              <kendo:dataSource-schema-model id="id">
+                  <kendo:dataSource-schema-model-fields>
+                  	  <kendo:dataSource-schema-model-field name="id" type="number" editable="false"/>
+                      <kendo:dataSource-schema-model-field name="from" type="number"/>
+                      <kendo:dataSource-schema-model-field name="to" type="number"/>
+                      <kendo:dataSource-schema-model-field name="text" type="string"/>
+                  </kendo:dataSource-schema-model-fields>
+              </kendo:dataSource-schema-model>
+          </kendo:dataSource-schema>
+     </kendo:diagram-connectionsDataSource>
      <kendo:diagram-layout type="layered" />
      <kendo:diagram-shapeDefaults visual="visualTemplate" />
      <kendo:diagram-connectionDefaults>
