@@ -491,12 +491,10 @@ var __meta__ = {
                 require: [ "?ngModel", "^?form" ],
                 scope: false,
 
-                transclude: true,
-                controller: [ '$scope', '$attrs', '$element', '$transclude', function($scope, $attrs, $element, $transclude) {
-                    // Make the element's contents available to the kendo widget to allow creating some widgets from existing elements.
-                    $transclude($scope, function(clone){
-                        $element.append(clone);
-                    });
+                controller: [ '$scope', '$attrs', '$element', function($scope, $attrs, $element) {
+                    this.template = function(key, value) {
+                        $attrs[key] = "'" + value + "'";
+                    };
                 }],
 
                 link: function(scope, element, attrs, controllers) {
@@ -1151,6 +1149,65 @@ var __meta__ = {
               };
           });
     });
+
+    var WIDGET_TEMPLATE_OPTIONS = {
+        "TreeMap": [ "Template" ],
+        "MobileListView": [ "HeaderTemplate", "Template" ],
+        "MobileScrollView": [ "EmptyTemplate", "Template" ],
+        "Grid": [ "AltRowTemplate", "DetailTemplate", "RowTemplate" ],
+        "ListView": [ "EditTemplate", "Template", "AltTemplate" ],
+        "Pager": [ "SelectTemplate", "LinkTemplate" ],
+        "PivotGrid": [ "ColumnHeaderTemplate", "DataCellTemplate", "RowHeaderTemplate" ],
+        "Scheduler": [ "AllDayEventTemplate", "DateHeaderTemplate", "EventTemplate", "MajorTimeHeaderTemplate", "MinorTimeHeaderTemplate" ],
+        "TreeView": [ "Template" ],
+        "Validator": [ "ErrorTemplate" ]
+    };
+
+    (function() {
+        var templateDirectives = {};
+        angular.forEach(WIDGET_TEMPLATE_OPTIONS, function(templates, widget) {
+            angular.forEach(templates, function(template) {
+                if (!templateDirectives[template]) {
+                    templateDirectives[template] = [ ];
+                }
+                templateDirectives[template].push("?^^kendo" + widget);
+            });
+        });
+
+        angular.forEach(templateDirectives, function(parents, directive) {
+            var templateName = "k" + directive;
+            var attrName = kendo.toHyphens(templateName);
+
+            module.directive(templateName, function() {
+                return {
+                    restrict: "A",
+                    require: parents,
+                    replace: true,
+                    template: "",
+                    compile: function($element, $attrs) {
+                        $element.removeAttr(attrName);
+                        var template = $element[0].outerHTML;
+
+                        return function(scope, element, attrs, controllers) {
+                            var controller;
+
+                            while(!controller && controllers.length) {
+                                controller = controllers.shift();
+                            }
+
+                            if (!controller) {
+                                $log.warn(attrName + " without a matching parent widget found. It can be one of the following: " + parents.join(", "));
+                            } else {
+                                controller.template(templateName, template);
+                            }
+                        };
+                    }
+                };
+            });
+        });
+
+    })();
+
 
 })(window.kendo.jQuery, window.angular);
 

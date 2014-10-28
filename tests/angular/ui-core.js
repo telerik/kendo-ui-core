@@ -173,6 +173,22 @@ withAngularTests("Angular (UI Core)", function(runTest){
         });
     });
 
+    runTest("ListView inline templates", function(dom, $scope){
+        $scope.edit = function(e) { equal(e.item.text(), "|Foo|"); }
+
+        $("<div kendo-list-view='list' k-data-source='data' k-on-edit='edit(kendoEvent)'><span k-template>{{dataItem.text}} {{dataItem.id}}</span><span k-alt-template>{{dataItem.id}} {{dataItem.text}}</span><div k-edit-template class='my-editable'>|{{dataItem.text}}|</div></div>").appendTo(dom);
+
+        expect(3);
+
+        $scope.whenRendered(function(){
+            var items = $scope.list.items();
+            equal(items.eq(0).text(), "Foo 1");
+            equal(items.eq(1).text(), "2 Bar");
+            $scope.list.edit(items.eq(0));
+            start();
+        });
+    });
+
     runTest("DropDownList templates", function(dom, $scope){
         $scope.options = {
             dataSource: $scope.data,
