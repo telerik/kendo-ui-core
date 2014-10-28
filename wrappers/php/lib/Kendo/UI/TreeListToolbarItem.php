@@ -3,6 +3,9 @@
 namespace Kendo\UI;
 
 class TreeListToolbarItem extends \Kendo\SerializableObject {
+    function __construct($name = null) {
+        $this->name($name);
+    }
 //>> Properties
 
     /**
