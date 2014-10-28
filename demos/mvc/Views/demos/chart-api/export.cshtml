@@ -20,7 +20,8 @@
             chart.exportPDF({ paperSize: "A4", landscape: true }).done(function(data) {
                 kendo.saveAs({
                     dataURI: data,
-                    fileName: "chart.pdf"
+                    fileName: "chart.pdf",
+                    proxyURL: "http://demos.telerik.com/kendo-ui/service/export"
                 });
             });
         });
@@ -30,7 +31,8 @@
             chart.exportImage().done(function(data) {
                 kendo.saveAs({
                     dataURI: data,
-                    fileName: "chart.png"
+                    fileName: "chart.png",
+                    proxyURL: "http://demos.telerik.com/kendo-ui/service/export"
                 });
             });
         });
@@ -40,7 +42,8 @@
             chart.exportSVG().done(function(data) {
                 kendo.saveAs({
                     dataURI: data,
-                    fileName: "chart.svg"
+                    fileName: "chart.svg",
+                    proxyURL: "http://demos.telerik.com/kendo-ui/service/export"
                 });
             });
         });
