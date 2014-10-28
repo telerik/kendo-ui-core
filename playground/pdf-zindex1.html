@@ -1,0 +1,56 @@
+<html>
+  <head>
+    <!-- Styles -->
+    <link href="../dist/styles/web/kendo.common.css" rel="stylesheet" />
+    <link href="../dist/styles/web/kendo.silver.css" rel="stylesheet" />
+
+    <script src="html2canvas.min.js"></script>
+    <script src="loader.js"></script>
+    <script>
+      requireSync([
+        "../src/jquery.js",
+        "../src/kendo.all.js",
+        "./console.time.js",
+        "./test-pdf-helpers.js"
+      ]);
+    </script>
+
+    <!-- <script src="./pako.min.js"></script> -->
+    <script src="./html2canvas.min.js"></script>
+
+    <style type="text/css">
+      .foo {
+        position: absolute;
+        width: 100px; height: 100px;
+        background: rgba(200, 50, 50, 1);
+      }
+      .bar {
+        width: 200px; height: 200px;
+        background: rgba(50, 200, 50, 0.5);
+        margin-left: 20px; margin-top: 20px;
+        overflow: hidden;
+        transform: rotate(5deg);
+      }
+      .baz {
+        z-index: 2;
+        position: absolute;
+        left: 50px; top: 50px;
+        background: rgba(50, 50, 200, 0.9);
+        width: 400px; height: 400px;
+      }
+    </style>
+  </head>
+  <body>
+    <script> ELEMENT = "#test" </script>
+    <button onclick=" pdf(ELEMENT)">PDF</button>
+    <button onclick="draw(ELEMENT, 'svg')">SVG</button>
+    <button onclick="draw(ELEMENT, 'canvas')">Canvas</button>
+    <button onclick=" h2c(ELEMENT)">html2canvas</button>
+    <div id="test">
+      <div class="foo"></div>
+      <div class="bar">
+        <div class="baz"></div>
+      </div>
+    </div>
+  </body>
+</html>

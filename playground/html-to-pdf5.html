@@ -1,0 +1,52 @@
+<html>
+  <head>
+    <!-- Styles -->
+    <link href="../dist/styles/web/kendo.common.css" rel="stylesheet" />
+    <link href="../dist/styles/web/kendo.silver.css" rel="stylesheet" />
+
+    <script src="html2canvas.min.js"></script>
+    <script src="loader.js"></script>
+    <script>
+      requireSync([
+        "../src/jquery.js",
+        "../src/kendo.all.js",
+        "./console.time.js",
+        "./test-pdf-helpers.js"
+      ]);
+    </script>
+
+    <!-- <script src="./pako.min.js"></script> -->
+    <script src="./html2canvas.min.js"></script>
+
+    <style type="text/css">
+      .foo {
+        width: 100px;
+        height: 100px;
+        border: 1px solid #000;
+        overflow: hidden;
+        position: relative;
+        transform: translate(0, 150px);
+      }
+      .bar {
+        position: absolute;
+        left: 60px;
+        top: 50px;
+        width: 500px;
+      }
+    </style>
+  </head>
+  <body>
+    <script> ELEMENT = "#test" </script>
+    <button onclick=" pdf(ELEMENT)">PDF</button>
+    <button onclick="draw(ELEMENT, 'svg')">SVG</button>
+    <button onclick="draw(ELEMENT, 'canvas')">Canvas</button>
+    <button onclick=" h2c(ELEMENT)">html2canvas</button>
+    <div id="test" style="width: 500px; height: 500px; background: #fefefe;">
+      <div class="foo">
+        <div class="bar">
+          Outside <b>This span should not be displayed</b>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

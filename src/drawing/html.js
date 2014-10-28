@@ -11,6 +11,7 @@
     "use strict";
 
     /* global console */ // XXX: temporary
+    /* jshint eqnull:true */
 
     /* -----[ local vars ]----- */
 
@@ -34,6 +35,13 @@
             var pos = element.getBoundingClientRect();
             setTransform(group, [ 1, 0, 0, 1, -pos.left, -pos.top ]);
 
+            nodeInfo._clipbox = false;
+            nodeInfo._matrix = geo.Matrix.unit();
+            nodeInfo._stackingContext = {
+                element: element,
+                group: group
+            };
+
             renderElement(element, group);
             defer.resolve(group);
         });
@@ -45,6 +53,19 @@
 
     // only function definitions after this line.
     return;
+
+    function parseColor(str, css) {
+        var color = kendo.parseColor(str);
+        if (color) {
+            color = color.toRGB();
+            if (css) {
+                color = color.toCssRgba();
+            } else if (color.a === 0) {
+                color = null;
+            }
+        }
+        return color;
+    }
 
     function cacheImages(element, callback) {
         var urls = [];
@@ -101,7 +122,7 @@
         }
     }
 
-    function pushNodeInfo(element, style) {
+    function pushNodeInfo(element, style, group) {
         var Tmp = function(parent) {
             this._up = parent;
         };
@@ -119,12 +140,39 @@
                     nodeInfo[name] = color;
                 }
             });
-            return true;
+        }
+
+        if (createsStackingContext(element)) {
+            nodeInfo._stackingContext = {
+                element: element,
+                group: group
+            };
         }
     }
 
     function popNodeInfo() {
         nodeInfo = nodeInfo._up;
+    }
+
+    function updateClipbox(path) {
+        if (nodeInfo._clipbox != null) {
+            var box = path.bbox(nodeInfo._matrix);
+            if (nodeInfo._clipbox) {
+                nodeInfo._clipbox = geo.Rect.intersect(nodeInfo._clipbox, box);
+            } else {
+                nodeInfo._clipbox = box;
+            }
+        }
+    }
+
+    function createsStackingContext(element) {
+        var style = getComputedStyle(element);
+        function prop(name) { return getPropertyValue(style, name); }
+        if (prop("transform") != "none" ||
+            (prop("position") != "static" && prop("z-index") != "auto") ||
+            (prop("opacity") < 1)) {
+            return true;
+        }
     }
 
     function getComputedStyle(element) {
@@ -162,7 +210,7 @@
         return {
             width: parseFloat(getPropertyValue(style, side + "-width")),
             style: getPropertyValue(style, side + "-style"),
-            color: getPropertyValue(style, side + "-color")
+            color: parseColor(getPropertyValue(style, side + "-color"), true)
         };
     }
 
@@ -248,7 +296,9 @@
     }
 
     function setTransform(shape, m) {
-        shape.transform(new geo.Matrix(m[0], m[1], m[2], m[3], m[4], m[5]));
+        m = new geo.Matrix(m[0], m[1], m[2], m[3], m[4], m[5]);
+        shape.transform(m);
+        return m;
     }
 
     function setClipping(shape, clipPath) {
@@ -357,8 +407,16 @@
         return path.close();
     }
 
+    var LOGGING;
+    function log() {
+        if (LOGGING) {
+            console.log.apply(console, arguments);
+        }
+    }
+
     function _renderElement(element, group) {
         var style = getComputedStyle(element);
+
         var top = getBorder(style, "top");
         var right = getBorder(style, "right");
         var bottom = getBorder(style, "bottom");
@@ -372,10 +430,7 @@
         var dir = getPropertyValue(style, "direction");
 
         var backgroundColor = getPropertyValue(style, "background-color");
-        backgroundColor = kendo.parseColor(backgroundColor);
-        if (backgroundColor && backgroundColor.toRGB().a === 0) {
-            backgroundColor = null;     // opacity zero
-        }
+        backgroundColor = parseColor(backgroundColor);
 
         var backgroundImage = getPropertyValue(style, "background-image");
         var backgroundRepeat = getPropertyValue(style, "background-repeat");
@@ -416,15 +471,16 @@
                 var bottom = a[2] == "auto" ? innerbox.bottom : parseFloat(a[2]) + innerbox.top;
                 var left = a[3] == "auto" ? innerbox.left : parseFloat(a[3]) + innerbox.left;
                 var tmp = new drawing.Group();
-                setClipping(tmp,
-                            (new drawing.Path({ fill: null, stroke: null })
-                             .moveTo(left, top)
-                             .lineTo(right, top)
-                             .lineTo(right, bottom)
-                             .lineTo(left, bottom)
-                             .close()));
+                var clipPath = new drawing.Path()
+                    .moveTo(left, top)
+                    .lineTo(right, top)
+                    .lineTo(right, bottom)
+                    .lineTo(left, bottom)
+                    .close();
+                setClipping(tmp, clipPath);
                 group.append(tmp);
                 group = tmp;
+                updateClipbox(clipPath);
             }
         })();
 
@@ -449,17 +505,24 @@
         // overflow: hidden/auto - if present, replace the group with
         // a new one clipped by the inner box.
         (function(){
-            var overflow = getPropertyValue(style, "overflow");
-            if (/^(hidden|auto)$/.test(overflow)) {
+            function clipit() {
                 var clipPath = elementRoundBox(element, innerbox, "padding");
                 var tmp = new drawing.Group();
                 setClipping(tmp, clipPath);
                 group.append(tmp);
                 group = tmp;
+                updateClipbox(clipPath);
+            }
+            if (/^(hidden|auto|scroll)/.test(getPropertyValue(style, "overflow"))) {
+                clipit();
+            } else if (/^(hidden|auto|scroll)/.test(getPropertyValue(style, "overflow-x"))) {
+                clipit();
+            } else if (/^(hidden|auto|scroll)/.test(getPropertyValue(style, "overflow-y"))) {
+                clipit();
             }
         })();
 
-        renderContents(element, style, group);
+        renderContents(element, group);
 
         return group; // only utility functions after this line.
 
@@ -508,6 +571,10 @@
         //    - `transform` -- transformation to apply
         //
         function drawEdge(color, len, Wtop, Wleft, Wright, rl, rr, transform) {
+            if (Wtop <= 0) {
+                return;
+            }
+
             var path, edge = new drawing.Group();
             setTransform(edge, transform);
             group.append(edge);
@@ -528,20 +595,16 @@
                 .close();
 
             if (rl.x) {
-                path = drawRoundCorner(Wleft, rl);
-                setTransform(path, [ -1, 0, 0, 1, rl.x, 0 ]);
-                edge.append(path);
+                drawRoundCorner(Wleft, rl, [ -1, 0, 0, 1, rl.x, 0 ]);
             }
 
             if (rr.x) {
-                path = drawRoundCorner(Wright, rr);
-                setTransform(path, [ 1, 0, 0, 1, len - rr.x, 0 ]);
-                edge.append(path);
+                drawRoundCorner(Wright, rr, [ 1, 0, 0, 1, len - rr.x, 0 ]);
             }
 
             // draws one round corner, starting at origin (needs to be
             // translated/rotated to be placed properly).
-            function drawRoundCorner(Wright, r) {
+            function drawRoundCorner(Wright, r, transform) {
                 var angle = Math.PI/2 * Wright / (Wright + Wtop);
 
                 // not sanitizing this one, because negative values
@@ -555,6 +618,8 @@
                     fill: { color: color },
                     stroke: null
                 }).moveTo(0, 0);
+
+                setTransform(path, transform);
 
                 addArcToPath(path, 0, r.y, {
                     startAngle: -90,
@@ -582,10 +647,8 @@
                         .lineTo(ri.x, 0);
                 }
 
-                return path.close();
+                edge.append(path.close());
             }
-
-            return edge;
         }
 
         // for left/right borders we need to invert the border-radiuses
@@ -603,16 +666,16 @@
             group.append(background);
 
             if (backgroundColor) {
-                background.append(
-                    new drawing.Path({
-                        fill: { color: backgroundColor.toCssRgba() },
-                        stroke: null
-                    })
-                        .moveTo(box.left, box.top)
-                        .lineTo(box.right, box.top)
-                        .lineTo(box.right, box.bottom)
-                        .lineTo(box.left, box.bottom)
-                        .close());
+                var path = new drawing.Path({
+                    fill: { color: backgroundColor.toCssRgba() },
+                    stroke: null
+                });
+                path.moveTo(box.left, box.top)
+                    .lineTo(box.right, box.top)
+                    .lineTo(box.right, box.bottom)
+                    .lineTo(box.left, box.bottom)
+                    .close();
+                background.append(path);
             }
 
             var url = backgroundImageURL(backgroundImage);
@@ -641,7 +704,7 @@
                 orgBox = innerBox(orgBox, "border-*-width", element);
             }
 
-            if (backgroundSize != "auto") {
+            if (!/^\s*auto(\s+auto)?\s*$/.test(backgroundSize)) {
                 var size = backgroundSize.split(/\s+/g);
                 // compute width
                 if (/%$/.test(size[0])) {
@@ -835,36 +898,28 @@
             }
 
             // top border
-            if (top.width > 0) {
-                drawEdge(top.color,
-                         box.width, top.width, left.width, right.width,
-                         rTL, rTR,
-                         [ 1, 0, 0, 1, box.left, box.top ]);
-            }
+            drawEdge(top.color,
+                     box.width, top.width, left.width, right.width,
+                     rTL, rTR,
+                     [ 1, 0, 0, 1, box.left, box.top ]);
 
             // bottom border
-            if (bottom.width > 0) {
-                drawEdge(bottom.color,
-                         box.width, bottom.width, right.width, left.width,
-                         rBR, rBL,
-                         [ -1, 0, 0, -1, box.right, box.bottom ]);
-            }
+            drawEdge(bottom.color,
+                     box.width, bottom.width, right.width, left.width,
+                     rBR, rBL,
+                     [ -1, 0, 0, -1, box.right, box.bottom ]);
 
             // left border
-            if (shouldDrawLeft) {
-                drawEdge(left.color,
-                         box.height, left.width, bottom.width, top.width,
-                         inv(rBL), inv(rTL),
-                         [ 0, -1, 1, 0, box.left, box.bottom ]);
-            }
+            drawEdge(left.color,
+                     box.height, left.width, bottom.width, top.width,
+                     inv(rBL), inv(rTL),
+                     [ 0, -1, 1, 0, box.left, box.bottom ]);
 
             // right border
-            if (shouldDrawRight) {
-                drawEdge(right.color,
-                         box.height, right.width, top.width, bottom.width,
-                         inv(rTR), inv(rBR),
-                         [ 0, 1, -1, 0, box.right, box.top ]);
-            }
+            drawEdge(right.color,
+                     box.height, right.width, top.width, bottom.width,
+                     inv(rTR), inv(rBR),
+                     [ 0, 1, -1, 0, box.right, box.top ]);
         }
     }
 
@@ -884,7 +939,7 @@
         var pa = getPropertyValue(sa, "position");
         var pb = getPropertyValue(sb, "position");
         if (isNaN(za) && isNaN(zb)) {
-            if (pa == "static" && pb == "static") {
+            if ((/static|absolute/.test(pa)) && (/static|absolute/.test(pb))) {
                 return 0;
             }
             if (pa == "static") {
@@ -904,11 +959,11 @@
         return parseFloat(za) - parseFloat(zb);
     }
 
-    function renderContents(element, style, group) {
+    function renderContents(element, group) {
         switch (element.tagName.toLowerCase()) {
           case "img":
             renderImage(element, element.src, group);
-            return;
+            break;
 
           case "canvas":
             try {
@@ -916,44 +971,62 @@
             } catch(ex) {
                 // tainted; can't draw it, ignore.
             }
-            return;
+            break;
 
           case "textarea":
           case "input":
-            return;
-        }
+            break;
 
-        pushNodeInfo(element, style);
-
-        var children = [];
-        for (var i = element.firstChild; i; i = i.nextSibling) {
-            switch (i.nodeType) {
-              case 1:         // Element
-                var pos = getPropertyValue(getComputedStyle(i), "position");
-                if (pos == "static") {
-                    renderElement(i, group);
-                } else {
-                    children.push(i);
+          default:
+            var blocks = [], floats = [], inline = [], positioned = [];
+            for (var i = element.firstChild; i; i = i.nextSibling) {
+                switch (i.nodeType) {
+                  case 3:         // Text
+                    if (/\S/.test(i.data)) {
+                        renderText(element, i, group);
+                    }
+                    break;
+                  case 1:         // Element
+                    var style = getComputedStyle(i);
+                    var display = getPropertyValue(style, "display");
+                    var floating = getPropertyValue(style, "float");
+                    var position = getPropertyValue(style, "position");
+                    if (position != "static") {
+                        positioned.push(i);
+                    }
+                    else if (display != "inline") {
+                        if (floating != "none") {
+                            floats.push(i);
+                        } else {
+                            blocks.push(i);
+                        }
+                    }
+                    else {
+                        inline.push(i);
+                    }
+                    break;
                 }
-                break;
-              case 3:         // Text
-                if (/\S/.test(i.data)) {
-                    renderText(element, i, group);
-                }
-                break;
             }
-        }
-        children.sort(zIndexSort).forEach(function(el){
-            renderElement(el, group);
-        });
 
-        popNodeInfo();
+            blocks.sort(zIndexSort).forEach(function(el){ renderElement(el, group); });
+            floats.sort(zIndexSort).forEach(function(el){ renderElement(el, group); });
+            inline.sort(zIndexSort).forEach(function(el){ renderElement(el, group); });
+            positioned.sort(zIndexSort).forEach(function(el){ renderElement(el, group); });
+        }
     }
 
     function renderText(element, node, group) {
+        var style = getComputedStyle(element);
+
+        if (parseFloat(getPropertyValue(style, "text-indent")) < -500) {
+            // assume it should not be displayed.  the slider's
+            // draggable handle displays a Drag text for some reason,
+            // having text-indent: -3333px.
+            return;
+        }
+
         var text = node.data;
         var range = element.ownerDocument.createRange();
-        var style = getComputedStyle(element);
         var align = getPropertyValue(style, "text-align");
         var isJustified = align == "justify";
 
@@ -1091,8 +1164,35 @@
         while (!doChunk()) {}
     }
 
+    function groupInStackingContext(group, zIndex) {
+        var main = nodeInfo._stackingContext.group;
+        var a = main.children;
+        for (var i = 0; i < a.length; ++i) {
+            if (a[i]._dom_zIndex != null && a[i]._dom_zIndex > zIndex) {
+                break;
+            }
+        }
+
+        var tmp = new drawing.Group();
+        main.insertAt(tmp, i);
+        tmp._dom_zIndex = zIndex;
+
+        // if (nodeInfo._matrix) {
+        //     tmp.transform(nodeInfo._matrix);
+        // }
+        if (nodeInfo._clipbox) {
+            tmp.clip(drawing.Path.fromRect(nodeInfo._clipbox));
+        }
+
+        return tmp;
+    }
+
     function renderElement(element, container) {
         if (/^(style|script|link|meta|iframe|svg)$/i.test(element.tagName)) {
+            return;
+        }
+
+        if (nodeInfo._clipbox == null) {
             return;
         }
 
@@ -1105,23 +1205,42 @@
             return;
         }
 
-        var group = new drawing.Group();
-        container.append(group);
+        var group;
+
+        var zIndex = getPropertyValue(style, "z-index");
+        if (zIndex != "auto") {
+            console.log("Für element:", element);
+            group = groupInStackingContext(container, zIndex);
+        } else {
+            group = new drawing.Group();
+            container.append(group);
+        }
+
+        // XXX: remove at some point
+        group.DEBUG = $(element).data("debug");
 
         if (opacity < 1) {
-            group.opacity(opacity);
+            group.opacity(opacity * group.opacity());
         }
+
+        pushNodeInfo(element, style, group);
 
         var tr = getTransform(style);
         if (!tr) {
             _renderElement(element, group);
         }
         else {
-            // must clear transform, so getBoundingClientRect returns correct values.
-            // must also clear transitions, so correct values are returned *immediately*
             saveStyle(element, function(){
-                pleaseSetPropertyValue(element.style, "transition", "none", "important");
+                // must clear transform, so getBoundingClientRect returns correct values.
                 pleaseSetPropertyValue(element.style, "transform", "none", "important");
+
+                // must also clear transitions, so correct values are returned *immediately*
+                pleaseSetPropertyValue(element.style, "transition", "none", "important");
+
+                // the presence of any transform makes it behave like it had position: relative,
+                // because why not.
+                // http://meyerweb.com/eric/thoughts/2011/09/12/un-fixing-fixed-elements-with-css-transforms/
+                pleaseSetPropertyValue(element.style, "position", "relative", "important");
 
                 // must translate to origin before applying the CSS
                 // transformation, then translate back.
@@ -1131,11 +1250,23 @@
                 var m = [ 1, 0, 0, 1, -x, -y ];
                 m = mmul(m, tr.matrix);
                 m = mmul(m, [ 1, 0, 0, 1, x, y ]);
-                setTransform(group, m);
+                m = setTransform(group, m);
+
+                nodeInfo._matrix = nodeInfo._matrix.multiplyCopy(m);
 
                 _renderElement(element, group);
             });
         }
+
+        popNodeInfo();
+
+        //drawDebugBox(element, container);
+    }
+
+    function drawDebugBox(element, group) {
+        var box = element.getBoundingClientRect();
+        var path = drawing.Path.fromRect(new geo.Rect([ box.left, box.top ], [ box.width, box.height ]));
+        group.append(path);
     }
 
     function mmul(a, b) {

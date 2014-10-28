@@ -4,7 +4,7 @@
     <link type="text/css" href="../../styles/web/kendo.common.css" rel="stylesheet/less"/>
     <link type="text/css" href="../../styles/web/kendo.silver.css" rel="stylesheet/less"/>
     <link type="text/css" href="../../styles/dataviz/kendo.dataviz.css" rel="stylesheet/less"/>
-    <link type="text/css" href="../../styles/dataviz/kendo.dataviz.silver.css" rel="stylesheet"/>    
+    <link type="text/css" href="../../styles/dataviz/kendo.dataviz.silver.css" rel="stylesheet"/>
     <script src="../require.js"></script>
     <script>
     require.config({
@@ -69,7 +69,7 @@
                 format: "{0}%"
             }
         });
-        
+
         $("#donut").kendoChart({
             title: {
                 position: "bottom",
@@ -151,7 +151,7 @@
                 template: "#= category # (#= series.name #): #= value #%"
             }
         });
-        
+
          $("#column").kendoChart({
                 title: {
                     text: "Site Visitors Stats \n /thousands/"
@@ -169,7 +169,7 @@
                     name: "Unique visitors",
                     data: [52000]
                 }],
-                valueAxis: {                   
+                valueAxis: {
                     line: {
                         visible: false
                     },
@@ -188,7 +188,7 @@
                     template: "#= series.name #: #= value #"
                 }
             });
-                   
+
          $("#bar").kendoChart({
                 title: {
                     text: "Site Visitors Stats \n /thousands/"
@@ -206,7 +206,7 @@
                     name: "Unique visitors",
                     data: [52000]
                 }],
-                valueAxis: {                   
+                valueAxis: {
                     line: {
                         visible: false
                     },
@@ -225,7 +225,7 @@
                     template: "#= series.name #: #= value #"
                 }
             });
-            
+
              $("#boxplot").kendoChart({
                 title: {
                     text: "Monthly Mean Temperatures (&deg;F)"
@@ -257,7 +257,7 @@
                     }
                 }
             });
-            
+
             $("#stock-chart").kendoStockChart({
                 dataSource: {
                     transport: {
@@ -376,7 +376,7 @@
                         visible: false
                     }
                 }
-            });   
+            });
             $("#range").kendoChart({
                 title: {
                     text: "Average Weather Conditions"
@@ -432,6 +432,21 @@
       <div id="water"></div>
       <div id="range"></div>
       <div id="bullet"></div>
-      <button>redraw</button>
+      <button>redraw</button><br />
+      PDF:
+      <button onclick="pdf('#donut')"       >donut</button>
+      <button onclick="pdf('#pie')"         >pie</button>
+      <button onclick="pdf('#column')"      >column</button>
+      <button onclick="pdf('#boxplot')"     >boxplot</button>
+      <button onclick="pdf('#stock-chart')" >stock-chart</button>
+      <button onclick="pdf('#water')"       >water</button>
+      <button onclick="pdf('#range')"       >range</button>
+      <script>
+        function pdf(sel) {
+          kendo.widgetInstance($(sel)).exportPDF().then(function(data){
+            kendo.saveAs({ dataURI: data, fileName: "kendo.pdf" });
+          });
+        }
+      </script>
   </body>
 </html>

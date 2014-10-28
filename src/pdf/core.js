@@ -1242,6 +1242,12 @@
                 this._out(img._resourceName, " Do", NL);
             }
         },
+        comment: function(txt) {
+            var self = this;
+            txt.split(/\r?\n/g).forEach(function(line){
+                self._out("% ", line, NL);
+            });
+        },
 
         // internal
         _context: function(val) {
