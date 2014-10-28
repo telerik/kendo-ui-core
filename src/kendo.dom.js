@@ -116,7 +116,7 @@ var __meta__ = {
                 if (attr[attrName] === undefined) {
                     if (node[attrName] !== undefined) {
                         if (attrName !== "style") {
-                            node[attrName] = "";
+                            node.removeAttribute(attrName);
                         } else {
                             node.style.cssText = "";
                         }

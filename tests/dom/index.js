@@ -174,6 +174,15 @@
         equal(root.firstChild.id, "");
     });
 
+    test("render removes attributes instead of clearing it", function() {
+        tree.render([element("td", { rowSpan: 2 })]);
+
+        tree.render([element("td", null)]);
+
+        console.log(root.firstChild.rowSpan);
+        equal(root.firstChild.rowSpan, 1);
+    });
+
     test("render removes attributes set via setAttribute", function() {
         tree.render([element("div", { foo: "foo" })]);
 
