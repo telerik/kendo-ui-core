@@ -2408,7 +2408,29 @@ var __meta__ = {
         }
     };
 
+    var xmlaReaderMethods = ["axes", "catalogs", "cubes", "dimensions", "hierarchies", "levels", "measures"];
+
     var XmlaDataReader = kendo.data.XmlDataReader.extend({
+        init: function(options) {
+            kendo.data.XmlDataReader.call(this, options);
+
+            this._extend(options);
+        },
+        _extend: function(options) {
+            var idx = 0;
+            var length = xmlaReaderMethods.length;
+            var methodName;
+            var option;
+
+            for (; idx < length; idx++) {
+                methodName = xmlaReaderMethods[idx];
+                option = options[methodName];
+
+                if (option && option !== identity) {
+                    this[methodName] = option;
+                }
+            }
+        },
         parse: function(xml) {
             var result = kendo.data.XmlDataReader.fn.parse(xml.replace(/<(\/?)(\w|-)+:/g, "<$1"));
             return kendo.getter("['Envelope']['Body']", true)(result);

@@ -230,4 +230,74 @@
         equal(members[0].hierarchyUniqueName, "[Date].[Calendar]");
         equal(members[0].childrenCardinality, "10");
     });
+
+    test("reader override default axes method", 1, function() {
+        var reader = new kendo.data.XmlaDataReader({
+            axes: function() {
+                ok(true);
+            }
+        });
+
+        reader.axes();
+    });
+
+    test("reader override default catalogs method", 1, function() {
+        var reader = new kendo.data.XmlaDataReader({
+            catalogs: function() {
+                ok(true);
+            }
+        });
+
+        reader.catalogs();
+    });
+
+    test("reader override default cubes method", 1, function() {
+        var reader = new kendo.data.XmlaDataReader({
+            cubes: function() {
+                ok(true);
+            }
+        });
+
+        reader.cubes();
+    });
+
+    test("reader override default dimensions method", 1, function() {
+        var reader = new kendo.data.XmlaDataReader({
+            dimensions: function() {
+                ok(true);
+            }
+        });
+
+        reader.dimensions();
+    });
+
+    test("reader override default hierarchies method", 1, function() {
+        var reader = new kendo.data.XmlaDataReader({
+            hierarchies: function() {
+                ok(true);
+            }
+        });
+
+        reader.hierarchies();
+    });
+
+    test("reader override default levels method", 1, function() {
+        var reader = new kendo.data.XmlaDataReader({
+            levels: function() {
+                ok(true);
+            }
+        });
+
+        reader.levels();
+    });
+
+    test("reader override default measures method", 1, function() {
+        var reader = new kendo.data.XmlaDataReader({
+            measures: function() {
+                ok(true);
+            }
+        });
+
+        reader.measures();
+    });
 })();
