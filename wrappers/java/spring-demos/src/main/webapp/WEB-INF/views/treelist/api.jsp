@@ -72,10 +72,7 @@
  });
 </script>
 
-<kendo:treeList name="treelist" editable="true" height="540" selectable="true">	
-	<kendo:treeList-toolbar>
-		<kendo:treeList-toolbarItem name="create"/>
-	</kendo:treeList-toolbar>
+<kendo:treeList name="treelist" height="540" selectable="true">		
 	<kendo:treeList-columns>
 		<kendo:treeList-column field="firstName" title="First Name" width="220"></kendo:treeList-column>
 		<kendo:treeList-column field="lastName" title="Last Name" width="100"></kendo:treeList-column>
