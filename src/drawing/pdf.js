@@ -339,29 +339,29 @@
             return;
         }
         if (!maybeDrawRect(element, page, pdf)) {
-        for (var prev, i = 0; i < segments.length; ++i) {
-            var seg = segments[i];
-            var anchor = seg.anchor();
-            if (!prev) {
-                page.moveTo(anchor.x, anchor.y);
-            } else {
-                var prevOut = prev.controlOut();
-                var controlIn = seg.controlIn();
-                if (prevOut && controlIn) {
-                    page.bezier(
-                        prevOut.x   , prevOut.y,
-                        controlIn.x , controlIn.y,
-                        anchor.x    , anchor.y
-                    );
+            for (var prev, i = 0; i < segments.length; ++i) {
+                var seg = segments[i];
+                var anchor = seg.anchor();
+                if (!prev) {
+                    page.moveTo(anchor.x, anchor.y);
                 } else {
-                    page.lineTo(anchor.x, anchor.y);
+                    var prevOut = prev.controlOut();
+                    var controlIn = seg.controlIn();
+                    if (prevOut && controlIn) {
+                        page.bezier(
+                            prevOut.x   , prevOut.y,
+                            controlIn.x , controlIn.y,
+                            anchor.x    , anchor.y
+                        );
+                    } else {
+                        page.lineTo(anchor.x, anchor.y);
+                    }
                 }
+                prev = seg;
             }
-            prev = seg;
-        }
-        if (element.options.closed) {
-            page.close();
-        }
+            if (element.options.closed) {
+                page.close();
+            }
         }
     }
 
@@ -569,12 +569,12 @@
                 },
                 Group: function(shape) {
                     return withClipping(shape, function(){
-                    var el = new drawing.Group(shape.options);
-                    el.children = optArray(shape.children);
-                    if (shape !== root && el.children.length === 0) {
-                        return change(null);
-                    }
-                    return el;
+                        var el = new drawing.Group(shape.options);
+                        el.children = optArray(shape.children);
+                        if (shape !== root && el.children.length === 0) {
+                            return change(null);
+                        }
+                        return el;
                     });
                 }
             }, shape);
