@@ -625,17 +625,21 @@
       <DependentUpon>Sample.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CategoryItem.cs" />
+    <Compile Include="Models\Diagram\DiagramConnectionService.cs" />
+    <Compile Include="Models\Diagram\DiagramShapeService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\OrgChartConnection.cs">
+      <DependentUpon>Sample.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrgChartShape.cs">
+      <DependentUpon>Sample.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EmployeeDirectory.cs">
       <DependentUpon>Sample.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TreeList\EmployeeDirectoryModel.cs" />
     <Compile Include="Models\TreeList\EmployeeDirectoryService.cs" />
-    <Compile Include="Models\OrgChart.cs">
-      <DependentUpon>Sample.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\OrgChartConnection.cs">
-      <DependentUpon>Sample.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\WebMail.cs" />
     <Compile Include="Models\WebMailDataRepository.cs" />
     <Compile Include="Models\Chart\AntennaGainItem.cs" />
@@ -696,7 +700,7 @@
     <Compile Include="Models\TreeViewItemModel.cs" />
     <Compile Include="Models\CompensationStats.cs" />
     <Compile Include="Models\Config.cs" />
-    <Compile Include="Models\Diagram\CrimeData.cs" />
+    <Compile Include="Models\Chart\CrimeData.cs" />
     <Compile Include="Models\Customer.cs">
       <DependentUpon>Sample.tt</DependentUpon>
     </Compile>

@@ -21,10 +21,12 @@ namespace Kendo.Mvc.UI
             this.urlGenerator = urlGenerator;
 
             DataSource = new DataSource();
-            DataSource.ModelType(typeof(object));
+            DataSource.Type = DataSourceType.Ajax;
+            DataSource.Schema.Model = new DiagramShapeModelDescriptor(typeof(TShapeModel));
 
             ConnectionsDataSource = new DataSource();
-            ConnectionsDataSource.ModelType(typeof(object));
+            ConnectionsDataSource.Type = DataSourceType.Ajax;
+            ConnectionsDataSource.Schema.Model = new DiagramConnectionModelDescriptor(typeof(TConnectionModel));
 
             //>> Initialization
         

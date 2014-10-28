@@ -718,7 +718,16 @@
     <Compile Include="UI\RadioButton\Html\RadioButtonHtmlBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\DataSourceSortDescriptorFactoryBase.cs" />
     <Compile Include="UI\DataSource\Fluent\FilterableAjaxDataSourceBuilder.cs" />
+    <Compile Include="UI\Diagram\DiagramConnectionModelDescriptor.cs" />
+    <Compile Include="UI\Diagram\DiagramShapeModelDescriptor.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramConnectionModelDescriptorFactory.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramConnectionDataSourceBuilder.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramShapeDataSourceBuilder.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramShapeModelDescriptorFactory.cs" />
+    <Compile Include="UI\Diagram\IDiagramConnection.cs" />
     <Compile Include="UI\Diagram\DiagramViewDataContainer.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramDataSourceBuilder.cs" />
+    <Compile Include="UI\Diagram\IDiagramShape.cs" />
     <Compile Include="UI\Gantt\DependencyType.cs" />
     <Compile Include="UI\Grid\Columns\GridColumnGroup.cs" />
     <Compile Include="UI\Grid\Commands\GridToolBarPdfCommand.cs" />
