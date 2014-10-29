@@ -1,52 +1,238 @@
 <div kendo-mobile-application ng-app="kendoDemo" k-transition="'slide'">
-<kendo-mobile-view id="music" k-title="'My Music'">
-    <div class="head">&nbsp;</div>
-    <h2>Welcome to "My Music" App</h2>
-    <p>A native-looking web based mobile application.</p>
+<kendo-mobile-view id="cities" k-title="'Welcome'">
+    <div class="hero">Cities</div>
+    <kendo-mobile-header>
+        <kendo-mobile-nav-bar>
+            <kendo-view-title>Welcome</kendo-view-title>
+        </kendo-mobile-nav-bar>
+    </kendo-mobile-header>
     <kendo-mobile-list-view k-style="'inset'" k-type="'group'">
-        <li>I want to:
+        <li>America
             <ul>
-                <li data-icon="play"><a href="#application-play">Play Music</a></li>
-                <li data-icon="cart"><a href="#application-store">Buy Music</a></li>
+                <li data-icon="globe"><a href="#cities-new-york">New York</a></li>
+                <li data-icon="globe"><a href="#cities-los-angeles">Los Angeles</a></li>
+		<li data-icon="globe"><a href="#cities-rio-de-janeiro">Rio de Janeiro</a></li>
+		<li data-icon="globe"><a href="#cities-chicago">Chicago</a></li>
+            </ul>
+        </li>
+	<li>Europe
+            <ul>
+                <li data-icon="globe"><a href="#cities-istanbul">Istanbul</a></li>
+                <li data-icon="globe"><a href="#cities-moscow">Moscow</a></li>
+		<li data-icon="globe"><a href="#cities-london">London</a></li>
+		<li data-icon="globe"><a href="#cities-berlin">Berlin</a></li>
             </ul>
         </li>
     </kendo-mobile-list-view>
 </kendo-mobile-view>
 
-<kendo-mobile-view id="application-play" k-title="'Play Music'">
-    <div class="head">&nbsp;</div>
+<kendo-mobile-view id="cities-new-york" k-title="'New York'">
+    <kendo-mobile-header>
+        <kendo-mobile-nav-bar>
+            <kendo-mobile-back-button k-align="'left'" href="#:back">Back</kendo-mobile-back-button>
+            <kendo-view-title>New York</kendo-view-title>
+        </kendo-mobile-nav-bar>
+    </kendo-mobile-header>
+    <div class="hero">&nbsp;</div>
     <kendo-mobile-list-view k-style="'inset'" k-type="'group'">
-        <li>Genres
+        <li>Guide
             <ul>
-                <li><a href="">Folk</a></li>
-                <li><a href="">Dance</a></li>
-                <li><a href="">Pop</a></li>
-                <li><a href="">R&B</a></li>
-                <li><a href="">Rap</a></li>
-                <li><a href="">Rock</a></li>
+                <li><a href="">Sightseeing</a></li>
+                <li><a href="">Shopping</a></li>
+                <li><a href="">Transport</a></li>
+                <li><a href="">Calendar</a></li>
+                <li><a href="">Culture</a></li>
+                <li><a href="">Nightlife</a></li>
+		<li><a href="">Dining</a></li>
+                <li><a href="">Discounts</a></li>
             </ul>
         </li>
     </kendo-mobile-list-view>
-    <kendo-mobile-button href="#:back" style="display: block; margin: 1em; text-align: center;">Go back!</kendo-mobile-button>
+    <p class="photo-copy">Photo source: <a href="http://en.wikipedia.org/wiki/File:Stars_and_Stripes.jpg">Wikipedia</a></p>
 </kendo-mobile-view>
 
 
-<kendo-mobile-view id="application-store" k-title="'Buy Music'">
-    <div class="head">&nbsp;</div>
+<kendo-mobile-view id="cities-los-angeles" k-title="'Los Angeles'">
+    <kendo-mobile-header>
+        <kendo-mobile-nav-bar>
+            <kendo-mobile-back-button k-align="'left'" href="#:back">Back</kendo-mobile-back-button>
+            <kendo-view-title>Los Angeles</kendo-view-title>
+        </kendo-mobile-nav-bar>
+    </kendo-mobile-header>
+    <div class="hero">&nbsp;</div>
     <kendo-mobile-list-view k-style="'inset'" k-type="'group'">
-        <li>Genres
+        <li>Guide
             <ul>
-                <li><a href="">Folk</a></li>
-                <li><a href="">Dance</a></li>
-                <li><a href="">Pop</a></li>
-                <li><a href="">R&B</a></li>
-                <li><a href="">Rap</a></li>
-                <li><a href="">Rock</a></li>
+                <li><a href="">Sightseeing</a></li>
+                <li><a href="">Shopping</a></li>
+                <li><a href="">Transport</a></li>
+                <li><a href="">Calendar</a></li>
+                <li><a href="">Culture</a></li>
+                <li><a href="">Nightlife</a></li>
+		<li><a href="">Dining</a></li>
+                <li><a href="">Discounts</a></li>
             </ul>
         </li>
     </kendo-mobile-list-view>
-    <kendo-mobile-button href="#:back" style="display: block; margin: 1em; text-align: center;">Go back!</kendo-mobile-button>
+    <p class="photo-copy">Photo source: <a href="http://en.wikipedia.org/wiki/File:LA_Skyline_Mountains2.jpg">Wikipedia</a></p>
 </kendo-mobile-view>
+
+
+<kendo-mobile-view id="cities-rio-de-janeiro" k-title="'Rio de Janeiro'">
+    <kendo-mobile-header>
+        <kendo-mobile-nav-bar>
+            <kendo-mobile-back-button k-align="'left'" href="#:back">Back</kendo-mobile-back-button>
+            <kendo-view-title>Rio de Janeiro</kendo-view-title>
+        </kendo-mobile-nav-bar>
+    </kendo-mobile-header>
+    <div class="hero">&nbsp;</div>
+    <kendo-mobile-list-view k-style="'inset'" k-type="'group'">
+        <li>Guide
+            <ul>
+                <li><a href="">Sightseeing</a></li>
+                <li><a href="">Shopping</a></li>
+                <li><a href="">Transport</a></li>
+                <li><a href="">Calendar</a></li>
+                <li><a href="">Culture</a></li>
+                <li><a href="">Nightlife</a></li>
+		<li><a href="">Dining</a></li>
+                <li><a href="">Discounts</a></li>
+            </ul>
+        </li>
+    </kendo-mobile-list-view>
+    <p class="photo-copy">Photo source: <a href="http://en.wikipedia.org/wiki/File:Vista_a%C3%A9rea_Centro_do_Rio_de_Janeiro_RJ.jpg">Wikipedia</a></p>
+</kendo-mobile-view>
+
+
+<kendo-mobile-view id="cities-chicago" k-title="'Chicago'">
+    <kendo-mobile-header>
+        <kendo-mobile-nav-bar>
+            <kendo-mobile-back-button k-align="'left'" href="#:back">Back</kendo-mobile-back-button>
+            <kendo-view-title>Chicago</kendo-view-title>
+        </kendo-mobile-nav-bar>
+    </kendo-mobile-header>
+    <div class="hero">&nbsp;</div>
+    <kendo-mobile-list-view k-style="'inset'" k-type="'group'">
+        <li>Guide
+            <ul>
+                <li><a href="">Sightseeing</a></li>
+                <li><a href="">Shopping</a></li>
+                <li><a href="">Transport</a></li>
+                <li><a href="">Calendar</a></li>
+                <li><a href="">Culture</a></li>
+                <li><a href="">Nightlife</a></li>
+		<li><a href="">Dining</a></li>
+                <li><a href="">Discounts</a></li>
+            </ul>
+        </li>
+    </kendo-mobile-list-view>
+    <p class="photo-copy">Photo source: <a href="http://en.wikipedia.org/wiki/File:ChicagovanafSearsTower.jpg">Wikipedia</a></p>
+</kendo-mobile-view>
+
+
+<kendo-mobile-view id="cities-istanbul" k-title="'Istanbul'">
+    <kendo-mobile-header>
+        <kendo-mobile-nav-bar>
+            <kendo-mobile-back-button k-align="'left'" href="#:back">Back</kendo-mobile-back-button>
+            <kendo-view-title>Istanbul</kendo-view-title>
+        </kendo-mobile-nav-bar>
+    </kendo-mobile-header>
+    <div class="hero">&nbsp;</div>
+    <kendo-mobile-list-view k-style="'inset'" k-type="'group'">
+        <li>Guide
+            <ul>
+                <li><a href="">Sightseeing</a></li>
+                <li><a href="">Shopping</a></li>
+                <li><a href="">Transport</a></li>
+                <li><a href="">Calendar</a></li>
+                <li><a href="">Culture</a></li>
+                <li><a href="">Nightlife</a></li>
+		<li><a href="">Dining</a></li>
+                <li><a href="">Discounts</a></li>
+            </ul>
+        </li>
+    </kendo-mobile-list-view>
+    <p class="photo-copy">Photo source: <a href="http://commons.wikimedia.org/wiki/File:Istanbul_Skyline.jpg">Wikipedia</a></p>
+</kendo-mobile-view>
+
+
+<kendo-mobile-view id="cities-moscow" k-title="'Moscow'">
+    <kendo-mobile-header>
+        <kendo-mobile-nav-bar>
+            <kendo-mobile-back-button k-align="'left'" href="#:back">Back</kendo-mobile-back-button>
+            <kendo-view-title>Moscow</kendo-view-title>
+        </kendo-mobile-nav-bar>
+    </kendo-mobile-header>
+    <div class="hero">&nbsp;</div>
+    <kendo-mobile-list-view k-style="'inset'" k-type="'group'">
+        <li>Guide
+            <ul>
+                <li><a href="">Sightseeing</a></li>
+                <li><a href="">Shopping</a></li>
+                <li><a href="">Transport</a></li>
+                <li><a href="">Calendar</a></li>
+                <li><a href="">Culture</a></li>
+                <li><a href="">Nightlife</a></li>
+		<li><a href="">Dining</a></li>
+                <li><a href="">Discounts</a></li>
+            </ul>
+        </li>
+    </kendo-mobile-list-view>
+    <p class="photo-copy">Photo source: <a href="http://en.wikipedia.org/wiki/File:RedSquare.jpg">Wikipedia</a></p>
+</kendo-mobile-view>
+
+
+<kendo-mobile-view id="cities-london" k-title="'London'">
+    <kendo-mobile-header>
+        <kendo-mobile-nav-bar>
+            <kendo-mobile-back-button k-align="'left'" href="#:back">Back</kendo-mobile-back-button>
+            <kendo-view-title>London</kendo-view-title>
+        </kendo-mobile-nav-bar>
+    </kendo-mobile-header>
+    <div class="hero">&nbsp;</div>
+    <kendo-mobile-list-view k-style="'inset'" k-type="'group'">
+        <li>Guide
+            <ul>
+                <li><a href="">Sightseeing</a></li>
+                <li><a href="">Shopping</a></li>
+                <li><a href="">Transport</a></li>
+                <li><a href="">Calendar</a></li>
+                <li><a href="">Culture</a></li>
+                <li><a href="">Nightlife</a></li>
+		<li><a href="">Dining</a></li>
+                <li><a href="">Discounts</a></li>
+            </ul>
+        </li>
+    </kendo-mobile-list-view>
+    <p class="photo-copy">Photo source: <a href="http://en.wikipedia.org/wiki/File:Canary.wharf.and.dome.london.arp.jpg">Wikipedia</a></p>
+</kendo-mobile-view>
+
+
+<kendo-mobile-view id="cities-berlin" k-title="'Berlin'">
+    <kendo-mobile-header>
+        <kendo-mobile-nav-bar>
+            <kendo-mobile-back-button k-align="'left'" href="#:back">Back</kendo-mobile-back-button>
+            <kendo-view-title>Berlin</kendo-view-title>
+        </kendo-mobile-nav-bar>
+    </kendo-mobile-header>
+    <div class="hero">&nbsp;</div>
+    <kendo-mobile-list-view k-style="'inset'" k-type="'group'">
+        <li>Guide
+            <ul>
+                <li><a href="">Sightseeing</a></li>
+                <li><a href="">Shopping</a></li>
+                <li><a href="">Transport</a></li>
+                <li><a href="">Calendar</a></li>
+                <li><a href="">Culture</a></li>
+                <li><a href="">Nightlife</a></li>
+		<li><a href="">Dining</a></li>
+                <li><a href="">Discounts</a></li>
+            </ul>
+        </li>
+    </kendo-mobile-list-view>
+    <p class="photo-copy">Photo source: <a href="http://en.wikipedia.org/wiki/File:PotsdamerPlatz_Vogelperspektive_2004_1.jpg">Wikipedia</a></p>
+</kendo-mobile-view>
+
 
 </div>
 
@@ -54,38 +240,67 @@
     angular.module("kendoDemo", [ 'kendo.directives' ]);
 </script>
 <style scoped>
-#application-store .head {
-    display: block;
-    margin: 1em;
-    height: 110px;
-    background: url(../content/mobile/shared/mymusic.jpg) no-repeat center center;
-    -webkit-background-size: 100% auto;
-    background-size: 100% auto;
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
+#cities .hero {
+    background: url(../content/mobile/shared/cityguide.jpg) no-repeat center center;
 }
 
-#application-play .head {
-    display: block;
-    margin: 1em;
-    height: 110px;
-    background: url(../content/mobile/shared/mymusic.jpg) no-repeat center center;
-    -webkit-background-size: 100% auto;
-    background-size: 100% auto;
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
+#cities-new-york .hero {
+    background: url(../content/mobile/cities/800/newyork.jpg) no-repeat center center;
 }
 
-#music .head {
+#cities-los-angeles .hero {
+    background: url(../content/mobile/cities/800/losangeles.jpg) no-repeat center center;
+}
+
+#cities-rio-de-janeiro .hero {
+    background: url(../content/mobile/cities/800/riodejaneiro.jpg) no-repeat center center;
+}
+
+#cities-chicago .hero {
+    background: url(../content/mobile/cities/800/chicago.jpg) no-repeat center center;
+}
+
+#cities-istanbul .hero {
+    background: url(../content/mobile/cities/800/istanbul.jpg) no-repeat center center;
+}
+
+#cities-moscow .hero {
+    background: url(../content/mobile/cities/800/moscow.jpg) no-repeat center center;
+}
+
+#cities-london .hero {
+    background: url(../content/mobile/cities/800/london.jpg) no-repeat center center;
+}
+
+#cities-berlin .hero {
+    background: url(../content/mobile/cities/800/berlin.jpg) no-repeat center center;
+}
+
+#cities .hero,
+#cities-new-york .hero,
+#cities-los-angeles .hero,
+#cities-rio-de-janeiro .hero,
+#cities-chicago .hero,
+#cities-istanbul .hero,
+#cities-moscow .hero,
+#cities-london .hero,
+#cities-berlin .hero {
     display: block;
-    margin: 1em;
+    margin: 0;
+    padding-left: .5em;
     height: 110px;
-    background: url(../content/mobile/shared/mymusic.jpg) no-repeat center center;
+    line-height: 110px;
+    font-size: 24px;
+    color: rgba(0,0,0,.65);
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: .5em;
     -webkit-background-size: 100% auto;
     background-size: 100% auto;
 }
-.km-ios #music .head {
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
+
+.photo-copy {
+    padding: 1em;
+    text-align: center;
 }
 </style>
