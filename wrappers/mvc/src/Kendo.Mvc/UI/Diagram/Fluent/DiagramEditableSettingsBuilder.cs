@@ -70,6 +70,28 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        /// <summary>
+        /// Specifies the shape editor template.
+        /// </summary>
+        /// <param name="value">The value that configures the shapetemplate.</param>
+        public DiagramEditableSettingsBuilder<TShapeModel, TConnectionModel> ShapeTemplateName(string value)
+        {
+            container.ShapeTemplateName = value;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Specifies the connection editor template.
+        /// </summary>
+        /// <param name="value">The value that configures the connectiontemplate.</param>
+        public DiagramEditableSettingsBuilder<TShapeModel, TConnectionModel> ConnectionTemplateName(string value)
+        {
+            container.ConnectionTemplateName = value;
+
+            return this;
+        }
     }
 }
 
