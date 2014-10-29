@@ -217,7 +217,7 @@
         var eventElement = $(container.find(".k-event")[0]);
         eventElement.trigger({
             type: "mousedown",
-            currentTarget: event
+            currentTarget: eventElement
         });
 
         var oldSelection = $(".k-scheduler-content .k-state-selected");
@@ -246,7 +246,7 @@
 
         eventElement.trigger({
             type: "mousedown",
-            currentTarget: event
+            currentTarget: eventElement
         });
 
         var oldSelection = $(".k-scheduler-content .k-state-selected");
