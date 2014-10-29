@@ -2078,7 +2078,7 @@
 
             _addShape: function(shape, options) {
                 if (this.dataSource && this._isEditable) {
-                    if (!this.trigger("add", { shape: shape.optins.dataItem })) {
+                    if (!this.trigger("add", { shape: shape.options.dataItem })) {
                         var dataItem = this.dataSource.add(shape.options.dataItem);
                         this.dataSource.sync();
                         if (shape.options.dataItem) {
