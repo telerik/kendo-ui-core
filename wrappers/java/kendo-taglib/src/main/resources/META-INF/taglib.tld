@@ -12445,6 +12445,12 @@ data source is fired. By default the widget will bind to the data source specifi
         </attribute>
         <attribute>
             <description>See the dataSource field.</description>
+            <name>connectionsDataSource</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>See the dataSource field.</description>
             <name>dataSource</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
