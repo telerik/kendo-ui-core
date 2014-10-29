@@ -3186,6 +3186,12 @@
                 } else if (e.action === "sync") {
                     this._syncShapes(e.items);
                 } else {
+                    this._shapeLoaded = true;
+                    if (this._connectionsLoaded && this._shapeLoaded) {
+                        this._connectionsLoaded = this._shapeLoaded = false;
+                        this.trigger("dataBound");
+                    }
+
                     this.clear();
                     this._addShapes(e.sender.view());
                     if (this.connectionsDataSource) {
@@ -3255,6 +3261,12 @@
                         this._updateConnections(e.items);
                     }
                 } else {
+                    this._connectionsLoaded = true;
+                    if (this._connectionsLoaded && this._shapeLoaded) {
+                        this._connectionsLoaded = this._shapeLoaded = false;
+                        this.trigger("dataBound");
+                    }
+
                     this._addConnections(e.sender.view());
 
                     if (this.options.layout) {
