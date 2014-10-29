@@ -137,11 +137,15 @@ module CodeGen::MVC::Wrappers::DataViz
         end
 
         def csharp_builder_class
-            "#{owner.csharp_class}#{csharp_name.chop}Factory"
+            "#{csharp_item_class}Factory"
         end
 
         def csharp_item_class
-            "#{owner.csharp_class}#{csharp_name.chop}"
+            item_class = "#{owner.csharp_class}#{csharp_name}"
+
+            item_class.chop! if item_class.end_with? "s"
+
+            item_class
         end
 
         def delete_ignored
