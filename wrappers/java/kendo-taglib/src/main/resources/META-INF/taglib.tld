@@ -12498,6 +12498,16 @@ data source is fired. By default the widget will bind to the data source specifi
             <type>float</type>
         </attribute>
         <attribute>
+            <description>Fired when the widget is bound to data from dataDource and connectionsDataSource.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+            <name>dataBound</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fired when the user add new shape or connection.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+            <name>Add</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
             <description>Fired when the user edits a shape or connection.</description>
             <name>Edit</name>
             <rtexprvalue>true</rtexprvalue>
@@ -13896,6 +13906,18 @@ See visual.</description>
         <body-content>JSP</body-content>
     </tag>
 
+    <tag>
+        <description>Fired when the widget is bound to data from dataDource and connectionsDataSource.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+        <name>diagram-dataBound</name>
+        <tag-class>com.kendoui.taglib.diagram.DataBoundFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the user add new shape or connection.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+        <name>diagram-Add</name>
+        <tag-class>com.kendoui.taglib.diagram.AddFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
     <tag>
         <description>Fired when the user edits a shape or connection.</description>
         <name>diagram-Edit</name>

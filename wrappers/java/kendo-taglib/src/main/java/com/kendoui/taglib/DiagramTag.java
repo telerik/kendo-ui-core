@@ -75,6 +75,10 @@ public class DiagramTag extends WidgetTag /* interfaces */implements DataBoundWi
 
     }
 
+    public void setAdd(AddFunctionTag value) {
+        setEvent("Add", value.getBody());
+    }
+
     public void setEdit(EditFunctionTag value) {
         setEvent("Edit", value.getBody());
     }
@@ -93,6 +97,10 @@ public class DiagramTag extends WidgetTag /* interfaces */implements DataBoundWi
 
     public void setClick(ClickFunctionTag value) {
         setEvent("click", value.getBody());
+    }
+
+    public void setDataBound(DataBoundFunctionTag value) {
+        setEvent("dataBound", value.getBody());
     }
 
     public void setItemBoundsChange(ItemBoundsChangeFunctionTag value) {
@@ -199,6 +207,18 @@ public class DiagramTag extends WidgetTag /* interfaces */implements DataBoundWi
         setProperty("zoomRate", value);
     }
 
+    public String getAdd() {
+        Function property = ((Function)getProperty("Add"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setAdd(String value) {
+        setProperty("Add", new Function(value));
+    }
+
     public String getEdit() {
         Function property = ((Function)getProperty("Edit"));
         if (property != null) {
@@ -257,6 +277,18 @@ public class DiagramTag extends WidgetTag /* interfaces */implements DataBoundWi
 
     public void setClick(String value) {
         setProperty("click", new Function(value));
+    }
+
+    public String getDataBound() {
+        Function property = ((Function)getProperty("dataBound"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setDataBound(String value) {
+        setProperty("dataBound", new Function(value));
     }
 
     public String getItemBoundsChange() {
