@@ -1209,7 +1209,6 @@
 
         var zIndex = getPropertyValue(style, "z-index");
         if (zIndex != "auto") {
-            console.log("Für element:", element);
             group = groupInStackingContext(container, zIndex);
         } else {
             group = new drawing.Group();
