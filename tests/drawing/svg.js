@@ -1244,6 +1244,18 @@
             });
         });
 
+        test("sets xmlns namespace", function() {
+            d.exportSVG(group, { raw: true }).done(function(svg) {
+                contains(svg, "xmlns='http://www.w3.org/2000/svg'");
+            });
+        });
+
+        test("sets xmlns:xlink namespace", function() {
+            d.exportSVG(group, { raw: true }).done(function(svg) {
+                contains(svg, "xmlns:xlink='http://www.w3.org/1999/xlink'");
+            });
+        });
+
         test("encodes entities", function() {
             group = new d.Text("Foo & Bar", [0, 0]);
             d.exportSVG(group).done(function(svg) {

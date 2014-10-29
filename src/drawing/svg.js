@@ -98,7 +98,8 @@
 
         _template: renderTemplate(
             "<svg style='width: 100%; height: 100%; overflow: hidden;' " +
-            "xmlns='" + SVG_NS + "' version='1.1'>#= d._root.render() #</svg>"
+            "xmlns='" + SVG_NS + "' " + "xmlns:xlink='http://www.w3.org/1999/xlink' " +
+            "version='1.1'>#= d._root.render() #</svg>"
         )
     });
 
