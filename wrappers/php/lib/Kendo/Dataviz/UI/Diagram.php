@@ -158,6 +158,34 @@ data source is fired. By default the widget will bind to the data source specifi
     }
 
     /**
+    * Sets the dataBound event of the Diagram.
+    * Fired when the widget is bound to data from dataDource and connectionsDataSource.The event handler function context (available via the this keyword) will be set to the widget instance.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\Dataviz\UI\Diagram
+    */
+    public function dataBound($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('dataBound', $value);
+    }
+
+    /**
+    * Sets the Add event of the Diagram.
+    * Fired when the user add new shape or connection.The event handler function context (available via the this keyword) will be set to the widget instance.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\Dataviz\UI\Diagram
+    */
+    public function Add($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('Add', $value);
+    }
+
+    /**
     * Sets the Edit event of the Diagram.
     * Fired when the user edits a shape or connection.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
