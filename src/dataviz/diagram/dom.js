@@ -1587,7 +1587,9 @@
                 "save",
                 "cancel",
                 "edit",
-                "remove"
+                "remove",
+                "add",
+                "dataBound"
             ],
 
             edit: function(item) {
@@ -2076,12 +2078,16 @@
 
             _addShape: function(shape, options) {
                 if (this.dataSource && this._isEditable) {
-                    var dataItem = this.dataSource.add(shape.options.dataItem);
-                    this.dataSource.sync();
-                    if (shape.options.dataItem) {
-                        this._dataMap[shape.options.dataItem.id] = shape;
-                        // refresh shape.dataitem in order to get uid in copy/paste scenario
-                        shape.options.dataItem = dataItem;
+                    if (!this.trigger("add", { shape: shape.optins.dataItem })) {
+                        var dataItem = this.dataSource.add(shape.options.dataItem);
+                        this.dataSource.sync();
+                        if (shape.options.dataItem) {
+                            this._dataMap[shape.options.dataItem.id] = shape;
+                            // refresh shape.dataitem in order to get uid in copy/paste scenario
+                            shape.options.dataItem = dataItem;
+                        }
+                    } else {
+                        this._remove(shape, false);
                     }
                 }
 
@@ -2139,7 +2145,7 @@
                             eventArgs.shape = item.options.dataItem;
                         }
 
-                        if (dataSource && trigger("remove", eventArgs)) {
+                        if (dataSource && !this.trigger("remove", eventArgs)) {
                             dataSource.remove(item.options.dataItem);
                             dataSource.sync();
                         }
