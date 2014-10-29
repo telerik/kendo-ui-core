@@ -992,7 +992,7 @@ var __meta__ = {
             this.wrapper = element.addClass(classNames.wrapper);
 
             layout =
-                "<div class='#= gridHeader #'>" +
+                "<div class='#= gridHeader #' style=\"padding-right: " + kendo.support.scrollbar() + "px;\">" +
                     "<div class='#= gridHeaderWrap #'>" +
                         "<table role='grid'>" +
                             colgroup +
