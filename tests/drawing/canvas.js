@@ -1333,8 +1333,18 @@
             image._observers[0].loading.resolve();
         });
 
+        test("forces invalidate", function() {
+            var surface = new d.canvas.Surface($("<div />"));
+            surface._root._invalidate = function() {
+                ok(true);
+            };
+
+            surface.draw(group);
+            surface.image();
+        });
+
         asyncTest("throws an error if the canvas becomes tainted", function() {
-            var image = new d.Image("http://goo.gl/6ov8Gw", new g.Rect([0, 0], [100, 100]));
+            var image = new d.Image("http://goo.gl/6ov8Gw?" + (new Date().getTime()), new g.Rect([0, 0], [100, 100]));
             group.append(image);
 
             d.exportImage(group).done(function() {
