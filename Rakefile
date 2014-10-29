@@ -1116,7 +1116,7 @@ namespace :build do
 
             desc 'Copy ASP.NET MVC DLLs from distribution archive'
             task :get_binaries do
-                sh "rsync -avc --del #{ARCHIVE_ROOT}/#{destination}/binaries/* dist/binaries/"
+                sh "rsync -av --del #{ARCHIVE_ROOT}/#{destination}/binaries/* dist/binaries/"
             end
         end
     end
