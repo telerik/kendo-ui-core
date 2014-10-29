@@ -493,7 +493,7 @@ var __meta__ = {
 
                 controller: [ '$scope', '$attrs', '$element', function($scope, $attrs, $element) {
                     this.template = function(key, value) {
-                        $attrs[key] = "'" + value + "'";
+                        $attrs[key] = kendo.stringify(value);
                     };
                 }],
 
