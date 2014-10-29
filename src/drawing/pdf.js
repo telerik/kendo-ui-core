@@ -296,41 +296,29 @@
         var segments = path.segments;
         if (segments.length == 4 && path.options.closed) {
             // detect if this path looks like a rectangle parallel to the axis
-            var a = [], tlpos, min = null;
+            var a = [];
             for (var i = 0; i < segments.length; ++i) {
                 if (segments[i].controlIn()) { // has curve?
                     return false;
                 }
-                var p = a[i] = segments[i].anchor();
-                // find the index of the closest point to origin
-                var dist = p.x * p.x + p.y * p.y;
-                if (min == null || dist < min) {
-                    min = dist;
-                    tlpos = i;
-                }
+                a[i] = segments[i].anchor();
             }
-            // by reordering here we still have the same path, but begin drawing
-            // from the closest point to origin.
-            if (tlpos > 0) {
-                a = a.slice(0, tlpos).concat(a.slice(tlpos));
-            }
-            // now it's easy to detect whether it's a rectangle
+            // it's a rectangle if the y/x/y/x or x/y/x/y coords of
+            // consecutive points are the same.
             var isRect = (
                 a[0].y == a[1].y && a[1].x == a[2].x && a[2].y == a[3].y && a[3].x == a[0].x
             ) || (
                 a[0].x == a[1].x && a[1].y == a[2].y && a[2].x == a[3].x && a[3].y == a[0].y
             );
-            if (!isRect) {
-                return false;
+            if (isRect) {
+                // this saves a bunch of instructions in PDF:
+                // moveTo, lineTo, lineTo, lineTo, close -> rect.
+                page.rect(a[0].x, a[0].y,
+                          a[2].x - a[0].x /*width*/,
+                          a[2].y - a[0].y /*height*/);
+                return true;
             }
-            // this saves a bunch of instructions in PDF:
-            // moveTo, lineTo, lineTo, lineTo, close -> rect.
-            page.rect(a[0].x, a[0].y,
-                      a[2].x - a[0].x /*width*/,
-                      a[2].y - a[0].y /*height*/);
-            return true;
         }
-        return false;
     }
 
     function _drawPath(element, page, pdf) {
