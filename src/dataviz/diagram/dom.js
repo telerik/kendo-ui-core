@@ -2141,7 +2141,7 @@
                                 eventArgs.connection = item.options.dataItem;
                             }
                         } else if (this.dataSource) {
-                            dataSource = this.dataSoruce;
+                            dataSource = this.dataSource;
                             eventArgs.shape = item.options.dataItem;
                         }
 
