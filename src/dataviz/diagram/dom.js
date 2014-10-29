@@ -2620,9 +2620,11 @@
             },
 
             setDataSource: function(dataSource) {
-                // TODO: should remove this
                 this.options.dataSource = dataSource;
-                this.fetchFreshData();
+                this._dataSource();
+                if (this.options.autoBind) {
+                    this.dataSource.fetch();
+                }
             },
             /**
              * Performs a diagram layout of the given type.
