@@ -1101,7 +1101,7 @@
 
         var svg = surface.svg();
         if (!options || !options.raw) {
-            svg = "data:image/svg+xml;chartset=UTF-8," + svg;
+            svg = "data:image/svg+xml;charset=UTF-8," + svg;
         }
 
         return $.Deferred().resolve(svg).promise();

@@ -1234,7 +1234,7 @@
 
         test("exports SVG Data URI", function() {
             d.exportSVG(group).done(function(svg) {
-                contains(svg, "data:image/svg+xml;chartset=UTF-8,<?xml version='1.0' ?><svg");
+                contains(svg, "data:image/svg+xml;charset=UTF-8,<?xml version='1.0' ?><svg");
             });
         });
 
