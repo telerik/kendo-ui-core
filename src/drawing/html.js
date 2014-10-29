@@ -1205,9 +1205,13 @@
             return;
         }
 
+        var tr = getTransform(style);
         var group;
 
         var zIndex = getPropertyValue(style, "z-index");
+        if ((tr || opacity < 1) && zIndex == "auto") {
+            zIndex = 0;
+        }
         if (zIndex != "auto") {
             group = groupInStackingContext(container, zIndex);
         } else {
@@ -1224,7 +1228,6 @@
 
         pushNodeInfo(element, style, group);
 
-        var tr = getTransform(style);
         if (!tr) {
             _renderElement(element, group);
         }
