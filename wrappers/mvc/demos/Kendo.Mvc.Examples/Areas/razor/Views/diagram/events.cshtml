@@ -46,6 +46,11 @@
           .ZoomStart("onZoomStart")
           .ZoomEnd("onZoomEnd")
           .Click("onClick")
+          .DataBound("onDataBound")
+          .Edit("onEdit")
+          .Add("onAdd")
+          .Remove("onRemove")
+          .Cancel("onCancel")
       )
 )
 
@@ -55,6 +60,26 @@
 </div>
 
 <script>
+    function onDataBound(e) {
+        kendoConsole.log("Diagram data bound");
+    }
+
+    function onEdit(e) {
+        kendoConsole.log("Diagram edit");
+    }
+
+    function onAdd(e) {
+        kendoConsole.log("Diagram add");
+    }
+
+    function onRemove(e) {
+        kendoConsole.log("Diagram remove");
+    }
+
+    function onCancel(e) {
+        kendoConsole.log("Diagram cancel");
+    }
+
     function onItemRotate(e) {
         var rotation = e.item.rotate();
         kendoConsole.log("Rotate - angle: " + rotation.angle + " center: " + rotation.x + "," + rotation.y);
