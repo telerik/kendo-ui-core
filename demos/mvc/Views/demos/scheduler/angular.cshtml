@@ -1,7 +1,11 @@
 <div id="example" ng-app="KendoDemos">
     <div ng-controller="MyCtrl">
-        <div kendo-scheduler k-options="schedulerOptions"></div>
+        <div kendo-scheduler k-options="schedulerOptions">
+            <span k-event-template class='custom-event'>{{dataItem.title}}</span>
+            <div k-all-day-event-template class='custom-all-day-event'>{{dataItem.title}}</div>
+        </div>
     </div>
+
 <style>
     .custom-event {
         text-shadow: 0 1px 1px #000;
@@ -26,8 +30,6 @@
                 "week",
                 "month",
             ],
-            eventTemplate: "<span class='custom-event'>{{dataItem.title}}</span>",
-            allDayEventTemplate: "<div class='custom-all-day-event'>{{dataItem.title}}</div>",
             timezone: "Etc/UTC",
             dataSource: {
                 batch: true,

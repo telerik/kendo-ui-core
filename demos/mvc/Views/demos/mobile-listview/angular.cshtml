@@ -6,17 +6,16 @@
         </kendo-mobile-nav-bar>
     </kendo-mobile-header>
 
-    <kendo-mobile-list-view k-load-more="true" k-data-source="source" k-template="template"></kendo-mobile-list-view>
+    <kendo-mobile-list-view k-load-more="true" k-data-source="source">
+        <div class="product" k-template>
+            <img src="../content/web/foods/{{dataItem.ProductID}}.jpg" alt="{{dataItem.ProductName}} image" class="pullImage"/>
+            <h3>{{dataItem.ProductName}}</h3>
+            <p>{{kendo.toString(dataItem.UnitPrice, "c")}}</p>
+        </div>
+    </kendo-mobile-list-view>
 
 </kendo-mobile-view>
 
-<script type="text/x-kendo-tmpl" id="load-more-template">
-    <div class="product">
-        <img src="../content/web/foods/{{dataItem.ProductID}}.jpg" alt="{{dataItem.ProductName}} image" class="pullImage"/>
-        <h3>{{dataItem.ProductName}}</h3>
-        <p>{{kendo.toString(dataItem.UnitPrice, "c")}}</p>
-    </div>
-</script>
 
 <script>
     angular.module("kendoDemo", [ 'kendo.directives' ])
@@ -31,8 +30,6 @@
                 serverPaging: true,
                 pageSize: 50
             });
-
-            $scope.template = $("#load-more-template").html();
         });
 </script>
 
