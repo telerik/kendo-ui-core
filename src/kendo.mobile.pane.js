@@ -209,7 +209,8 @@ var __meta__ = {
         },
 
         bindToRouter: function(router) {
-            var history = this.history,
+            var that = this,
+                history = this.history,
                 viewEngine = this.viewEngine;
 
             router.bind("init", function(e) {
