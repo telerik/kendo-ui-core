@@ -173,6 +173,20 @@
         equal(application.view().id, "#page2");
     });
 
+    test("supports prevention of initial view", 2, function() {
+        window.check = function(e) {
+            e.preventDefault();
+            kendo.mobile.application.navigate("#test1");
+        }
+
+        setup('<div data-role="view" id="test1">Page 1</div><div data-role="view" id="page2" data-before-show="check">Page 2</div>', {
+            initial: "page2"
+        });
+
+        equal(location.hash, "#test1");
+        equal(application.view().id, "#test1");
+    });
+
     test("Supports scope for view models", 1, function() {
         setup('<div data-role="view" data-model="foo" data-bind="events: { init: onInit }"></div>', {
             modelScope: {
