@@ -27,7 +27,7 @@
         "text": "Basic usage",
         "url": "autocomplete/index",
         "title": {
-            "kendo-ui": "Demo and source code for Kendo UI Autocomplete widget",,
+            "kendo-ui": "Demo and source code for Kendo UI Autocomplete widget",
 			"aspnet-mvc": "Demo and source code for  Telerik ASP.NET MVC Autocomplete"
         },
         "meta": {
