@@ -320,7 +320,15 @@ var __meta__ = {
                 valid = result.valid,
                 className = "." + INVALIDMSG,
                 fieldName = (input.attr(NAME) || ""),
-                lbl = that._findMessageContainer(fieldName).add(input.next(className)).hide(),
+                lbl = that._findMessageContainer(fieldName).add(input.next(className).filter(function() {
+                    var element = $(this);
+                    if (element.filter("[" + kendo.attr("for") + "]").length) {
+                        return element.attr(kendo.attr("for")) === fieldName;
+                    }
+
+                    return true;
+
+                })).hide(),
                 messageText;
 
             input.removeAttr("aria-invalid");
