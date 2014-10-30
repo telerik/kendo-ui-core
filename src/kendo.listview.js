@@ -200,9 +200,18 @@ var __meta__ = {
 
                     if (item.length > 0) {
                         idx = item.index();
+
+                        that.angular("cleanup", function() {
+                            return { elements: [ item ]};
+                        });
+
                         item.replaceWith(template(data));
                         item = that.items().eq(idx);
                         item.attr(kendo.attr("uid"), data.uid);
+
+                        that.angular("compile", function() {
+                            return { elements: [ item ], data: [ { dataItem: data } ]};
+                        });
 
                         that.trigger("itemChange", {
                             item: item,
