@@ -32,7 +32,7 @@ namespace Kendo.Mvc.UI
                 
             Sortable = new TreeListSortableSettings();
                 
-            Toolbar = new List<TreeListToolba>();
+            Toolbar = new List<TreeListToolbar>();
                 
         //<< Initialization
         }
@@ -63,7 +63,7 @@ namespace Kendo.Mvc.UI
             set;
         }
         
-        public List<TreeListToolba> Toolbar
+        public List<TreeListToolbar> Toolbar
         {
             get;
             set;

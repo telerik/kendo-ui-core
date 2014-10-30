@@ -98,9 +98,9 @@ namespace Kendo.Mvc.UI.Fluent
 		/// and the string value will be passed as an argument to a kendo.template() function.If a Function value is assigned (it may be a kendo.template() function call or a generic function reference), then the return value of the function will be used to render the treelist Toolbar contents.If an Array value is assigned, it will be treated as the list of commands displayed in the treelist Toolbar. Commands can be custom or built-in ("cancel", "create", "save", "excel").The "create" command adds an empty data item to the treelist.The "excel" command exports the treelist data in MS Excel format.
         /// </summary>
         /// <param name="configurator">The action that configures the toolbar.</param>
-        public TreeListBuilder<T> Toolbar(Action<TreeListToolbaFactory> configurator)
+        public TreeListBuilder<T> Toolbar(Action<TreeListToolbarFactory> configurator)
         {
-            configurator(new TreeListToolbaFactory(container.Toolbar));
+            configurator(new TreeListToolbarFactory(container.Toolbar));
             return this;
         }
         

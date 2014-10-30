@@ -6,13 +6,13 @@ namespace Kendo.Mvc.UI.Fluent
     using Kendo.Mvc.Extensions;
 
     /// <summary>
-    /// Defines the fluent API for configuring the TreeListToolba settings.
+    /// Defines the fluent API for configuring the TreeListToolbar settings.
     /// </summary>
-    public class TreeListToolbaBuilder: IHideObjectMembers
+    public class TreeListToolbarBuilder: IHideObjectMembers
     {
-        private readonly TreeListToolba container;
+        private readonly TreeListToolbar container;
 
-        public TreeListToolbaBuilder(TreeListToolba settings)
+        public TreeListToolbarBuilder(TreeListToolbar settings)
         {
             container = settings;
         }
@@ -24,7 +24,7 @@ namespace Kendo.Mvc.UI.Fluent
 		/// This class can be used to obtain reference to the button after TreeList initialization and attach click handlers.
         /// </summary>
         /// <param name="value">The value that configures the name.</param>
-        public TreeListToolbaBuilder Name(string value)
+        public TreeListToolbarBuilder Name(string value)
         {
             container.Name = value;
 
@@ -35,7 +35,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// The text displayed by the command button. If not set the name` option would be used as the button text instead.
         /// </summary>
         /// <param name="value">The value that configures the text.</param>
-        public TreeListToolbaBuilder Text(string value)
+        public TreeListToolbarBuilder Text(string value)
         {
             container.Text = value;
 

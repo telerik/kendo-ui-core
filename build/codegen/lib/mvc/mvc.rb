@@ -19,7 +19,8 @@ module CodeGen::MVC::Wrappers
         'map.layers.extent' => 'double[]',
         'map.markers.location' => 'double[]',
         'treemap.colors' => 'string[]',
-        'editor.stylesheets' => 'string[]'
+        'editor.stylesheets' => 'string[]',
+        'treelist.columns.attributes' => 'IDictionary<string, object>'
     }
 
     SERIALIZATION_SKIP_LIST = [
@@ -122,7 +123,7 @@ module CodeGen::MVC::Wrappers
         //<< Fields})
 
         FIELD_DECLARATION = ERB.new(%{
-        public <%= csharp_type == 'string' || is_csharp_array ? csharp_type : csharp_type + '?'%> <%= csharp_name %> { get; set; }
+        public <%= csharp_type =~ /IDictonary|string/ || is_csharp_array ? csharp_type : csharp_type + '?'%> <%= csharp_name %> { get; set; }
         })
 
         FIELD_SERIALIZATION = ERB.new(%{//>> Serialization
@@ -308,8 +309,12 @@ module CodeGen::MVC::Wrappers
             FLUENT_FIELD_DECLARATION.result(binding)
         end
 
-		def is_csharp_array
-			csharp_type.match(/\[\]$/)
+        def is_csharp_array
+            csharp_type.match(/\[\]$/)
+        end
+
+        def is_dictionary
+            csharp_type.match(/^IDictionary/)
         end
 
         def to_client_option
@@ -320,11 +325,16 @@ module CodeGen::MVC::Wrappers
                 json["<%= name %>"] = <%=csharp_name%>;
             }
             }).result(binding)
-            end
-
-            if is_csharp_array
+            elsif is_csharp_array
                 return ERB.new(%{
             if (<%=csharp_name%> != null)
+            {
+                json["<%= name %>"] = <%=csharp_name%>;
+            }
+            }).result(binding)
+            elsif is_dictionary
+                return ERB.new(%{
+            if (<%=csharp_name%>.Any())
             {
                 json["<%= name %>"] = <%=csharp_name%>;
             }

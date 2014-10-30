@@ -12,7 +12,7 @@ namespace Kendo.Mvc.UI
         {
             //>> Initialization
         
-            Command = new List<TreeListColumnComman>();
+            Command = new List<TreeListColumnCommand>();
                 
             Filterable = new TreeListColumnFilterableSettings();
                 
@@ -23,7 +23,9 @@ namespace Kendo.Mvc.UI
 
         //>> Fields
         
-        public List<TreeListColumnComman> Command
+        public IDictionary<string, object> Attributes { get; set; }
+        
+        public List<TreeListColumnCommand> Command
         {
             get;
             set;
@@ -32,6 +34,8 @@ namespace Kendo.Mvc.UI
         public string Editor { get; set; }
         
         public bool? Encoded { get; set; }
+        
+        public bool? Expandable { get; set; }
         
         public string Field { get; set; }
         
@@ -67,6 +71,11 @@ namespace Kendo.Mvc.UI
         {
             //>> Serialization
         
+            if (Attributes.Any())
+            {
+                json["attributes"] = Attributes;
+            }
+            
             var command = Command.ToJson();
             if (command.Any())
             {
@@ -80,6 +89,11 @@ namespace Kendo.Mvc.UI
             if (Encoded.HasValue)
             {
                 json["encoded"] = Encoded;
+            }
+                
+            if (Expandable.HasValue)
+            {
+                json["expandable"] = Expandable;
             }
                 
             if (Field.HasValue())

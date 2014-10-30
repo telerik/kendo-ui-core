@@ -19,14 +19,25 @@ namespace Kendo.Mvc.UI.Fluent
 
         //>> Fields
         
+        /// <summary>
+        /// HTML attributes of the table cell (&lt;td&gt;) rendered for the column.
+        /// </summary>
+        /// <param name="value">The value that configures the attributes.</param>
+        public TreeListColumnBuilder Attributes(IDictionary<string, object> value)
+        {
+            container.Attributes = value;
+
+            return this;
+        }
+        
         
         /// <summary>
         /// The configuration of the column command(s). If set the column would display a button for every command. Commands can be custom or built-in ("edit", "destroy" or "createchild").The "edit" built-in command switches the current table row in edit mode.The "createchild" built-in command adds new child item to the current table row and switches in edit mode.The "destroy" built-in command removes the data item to which the current table row is bound.Custom commands are supported by specifying the click option.
         /// </summary>
         /// <param name="configurator">The action that configures the command.</param>
-        public TreeListColumnBuilder Command(Action<TreeListColumnCommanFactory> configurator)
+        public TreeListColumnBuilder Command(Action<TreeListColumnCommandFactory> configurator)
         {
-            configurator(new TreeListColumnCommanFactory(container.Command));
+            configurator(new TreeListColumnCommandFactory(container.Command));
             return this;
         }
         
@@ -48,6 +59,17 @@ namespace Kendo.Mvc.UI.Fluent
         public TreeListColumnBuilder Encoded(bool value)
         {
             container.Encoded = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// If set to true the column will show the icons that are used for exapdning and collapsing of child rows. By default, the first column of the TreeList is expandable.
+        /// </summary>
+        /// <param name="value">The value that configures the expandable.</param>
+        public TreeListColumnBuilder Expandable(bool value)
+        {
+            container.Expandable = value;
 
             return this;
         }
