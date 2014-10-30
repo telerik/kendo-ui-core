@@ -1217,9 +1217,15 @@ var __meta__ = {
             }
 
             if (this._hasFooterTemplate()) {
+                attr = { className: classNames.footerTemplate };
+
+                if (!options.visible) {
+                    attr.style = { display: "none" };
+                }
+
                 rows.push(this._tds({
                     model: aggregates[options.parentId || null],
-                    attr: { className: classNames.footerTemplate },
+                    attr: attr,
                     level: level
                 }, this._footerTd));
             }

@@ -290,6 +290,24 @@
         equal(instance.content.find(".k-i-expand").length, 1);
     });
 
+    test("collapse hides row footer", function() {
+        createTreeList({
+            columns: [ { field: "id", footerTemplate: "foo" } ],
+            dataSource: [
+                { id: 1, parentId: null, expanded: true },
+                { id: 2, parentId: 1 }
+            ]
+        });
+
+        var row = instance.content.find("tr:first");
+
+        instance.collapse(row);
+
+        var footerRow = instance.content.find(".k-footer-template:first");
+
+        equal(footerRow.css("display"), "none");
+    });
+
     //test("expand on item without children", function() {
         //createTreeList({
             //dataSource: [
