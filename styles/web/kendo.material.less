@@ -58,7 +58,7 @@
 
 /*Focused State*/
 @focused-border-color: #67afe9;
-@focused-shadow: 0 6px 17px 0 #c4c4c4;
+@focused-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
 @focused-item-shadow: 0 6px 17px 0 rgba(0, 0, 0, 0.3);
 @focused-active-item-shadow: none;
 
@@ -505,7 +505,7 @@ border-color: @selected-background-color;
 }
 
 .k-list > .k-state-focused {
-	border-color: @hover-background-color;
+	border-color: transparent;
 	.box-shadow(none);
 }
 
@@ -1003,12 +1003,6 @@ table.k-editor {
     .box-shadow(none);
 	border-color: @draghandle-background-color;
 	background-color: @draghandle-background-color;
-}
-
-.k-checkbox-label,
- .k-radio-label {
-    color: @widget-text-color;
-    background-color: @widget-background-color;
 }
 
 .k-radio:checked + .k-radio-label:hover:before {

@@ -120,14 +120,19 @@
     padding: .714em 1.333em .643em 1.333em;
 }
 
-.k-textbox > input,
-.k-autocomplete .k-input,
-.k-picker-wrap .k-input,
-.k-numeric-wrap .k-input,
-.k-dropdown-wrap .k-input,
-.k-selectbox .k-input
+.k-textbox,
+.k-autocomplete,
+.k-dropdown-wrap,
+.k-picker-wrap,
+.k-numeric-wrap {
+    padding: 0 2.5em 0 0;   
+}
+
+.k-picker-wrap .k-select,
+.k-numeric-wrap .k-select,
+.k-dropdown-wrap .k-select
 {
-    padding: 0.214em 0;
+    width: 2.5em;
 }
 
 .k-calendar {
@@ -162,6 +167,13 @@
 .k-popup.k-list-container,
 .k-popup.k-calendar-container {
     padding: 0;
+}
+
+.k-popup .k-list .k-item,
+.k-fieldselector .k-list .k-item {
+    min-height: 2.500em;
+    line-height: 2.500em;
+    text-indent: 0.429em;
 }
 
 .k-button,
