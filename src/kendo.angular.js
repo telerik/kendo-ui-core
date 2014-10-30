@@ -1185,6 +1185,9 @@ var __meta__ = {
                     replace: true,
                     template: "",
                     compile: function($element, $attrs) {
+                        if ($attrs[templateName] !== "") {
+                            return;
+                        }
                         $element.removeAttr(attrName);
                         var template = $element[0].outerHTML;
 
