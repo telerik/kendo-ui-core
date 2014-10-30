@@ -301,6 +301,15 @@
         equal(container.find("span.k-invalid-msg").length, 1);
     });
 
+    test("correct error message element container for the validated element is used", function() {
+        container.append($('<div><span class="k-invalid-msg" data-kendo-for="foo"/><input type="text" name="foo" required validationMessage="invalid" /><span class="k-invalid-msg" data-kendo-for="someotherfield"/></div>')),
+        validator = setup(container);
+        validator.validate();
+
+        equal(container.find("span.k-invalid-msg:visible").length, 1);
+        ok(container.find("span[data-kendo-for=foo]").is(":visible"));
+    });
+
     test("error message as external template", function() {
         var input = $('<input type="text" required validationMessage="invalid" />'),
         validator = setup(input, { errorTemplate: $("#template").html() });
