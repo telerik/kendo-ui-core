@@ -1,0 +1,47 @@
+<div id="example">
+        <div class="demo-section k-header">
+            <div id="treelist"></div>
+        </div>
+
+        <script>
+            $(document).ready(function() {
+                var service = "http://demos.telerik.com/kendo-ui/service";
+
+                $("#treelist").kendoTreeList({
+                    dataSource: {
+                        transport: {
+                            read: {
+                                url: service + "/EmployeeDirectory/All",
+                                dataType: "jsonp"
+                            }
+                        },
+                        schema: {
+                            model: {
+                                id: "EmployeeID",
+                                fields: {
+                                    parentId: { field: "ReportsTo",  nullable: true },
+                                    EmployeeID: { field: "EmployeeId", type: "number" },
+                                    HireDate: { field: "HireDate", type: "date" }
+                                }
+                            }
+                        },
+                        aggregate: [
+                            { field: "FirstName", aggregate: "count" },
+                            { field: "HireDate", aggregate: "max" }
+                        ]
+                    },
+                    height: 540,
+                    filterable: true,
+                    sortable: true,
+                    columns: [
+                        { field: "FirstName", title: "Name", width: 400,
+                          template: "#: FirstName # #: LastName #",
+                          footerTemplate: "#= count # employee(s)" },
+                        { field: "Position" },
+                        { field: "HireDate", title: "Hire Date", format: "{0:MMMM d, yyyy}",
+                          footerTemplate: "Last employee hired on #= kendo.format('{0:MMMM d, yyyy}', max) #" }
+                    ]
+                });
+            });
+        </script>
+    </div>

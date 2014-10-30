@@ -4373,6 +4373,16 @@
         }
       },
       {
+        "text": "Aggregates",
+        "url": "treelist/aggregates",
+        "title": {
+            "kendo-ui": "Aggregating option demo for KendoTreeList jQuery control"
+        },
+        "meta": {
+            "kendo-ui": "This example demonstrates the aggregate option for KendoTreeList. Use demo source code to enable the TreeList to calculate aggregated values."
+        }
+      },
+      {
         "text": "Export to Excel",
         "url": "treelist/excel-export",
         "title": {
