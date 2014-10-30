@@ -209,9 +209,7 @@ var __meta__ = {
         },
 
         bindToRouter: function(router) {
-            var that = this,
-                options = that.options,
-                initial = options.initial,
+            var history = this.history,
                 viewEngine = this.viewEngine;
 
             router.bind("init", function(e) {
@@ -220,8 +218,11 @@ var __meta__ = {
 
                 viewEngine.rootView.attr(kendo.attr("url"), attrUrl);
 
-                if (url === "/" && initial) {
-                    router.navigate(initial, true);
+                // if current is set, then this means that the pane has navigated to a given view - we need to update the router accordingly.
+                var length = history.length;
+
+                if (url === "/" && length) {
+                    router.navigate(history[length - 1], true);
                     e.preventDefault(); // prevents from executing routeMissing, by default
                 }
             });
