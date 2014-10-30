@@ -27,25 +27,83 @@
 <body>
  
   <div id="gauge" style="width: 270px"></div>
+  <div id="gauge2" style="width: 270px"></div>
   <script>
+    var elem2 = $("#gauge2");
+
+    var gauge2 = elem2.kendoLinearGauge({
+            gaugeArea: {
+                    background: "yellow",
+                    border: {
+                    color: "blue",
+                    dashType: "dot",
+                    width: 2
+                },
+            },
+            pointer: {
+                value: 28
+            },
+
+            scale: {
+                labels: {
+                    color: "yellow",
+                    //padding: 5,
+                    //visible: false,
+                    background: "purple",
+                    border: {
+                        width: 5,
+                        color: "green",
+                        //dashType: "dot"
+                    },
+                    position: "outside",
+                    //template: "asdf"
+                    //margin: 10,
+                    format: "C",
+                    font: "15px Arial,Helvetica,sans-serif"
+                },
+                majorUnit: 20,
+                minorUnit: 2,
+                min: -40,
+                max: 60,
+                vertical: false,
+                ranges: [
+                    {
+                        from: -40,
+                        to: -20,
+                        color: "#2798df"
+                    }, {
+                        from: 30,
+                        to: 45,
+                        color: "#ffc700"
+                    }, {
+                        from: 45,
+                        to: 60,
+                        color: "#c20000"
+                    }
+                ]
+            }
+        }).data("kendoLinearGauge");
+
     var gauge = $("#gauge").kendoRadialGauge({
         gaugeArea: {
-            width: 500,
-            background: "blue",
+            width: 200,
+            height: 200,
             border: {
                 color: "yellow",
                 dashType: "solid",
                 width: 25
             }
         },
-
         pointer: {
             cap: {
-                size: 0.05
+                size: 0.25,
+                color: "blue"
             },
+            color: "blue",
             value: 55
         },
         scale: {
+            //vertical: false,
             minorTicks: {
                 size: 10,
                 width: 2
@@ -75,7 +133,7 @@
             minorUnit: 10,
             majorUnit: 20,
             startAngle: 0,
-            endAngle: 160,
+            endAngle: 90,
             min: 0,
             max: 100,
             //reverse: true,

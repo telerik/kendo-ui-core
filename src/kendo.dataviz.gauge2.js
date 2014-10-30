@@ -14,6 +14,7 @@ var __meta__ = {
     
     var math = Math,
         kendo = window.kendo,
+        util = kendo.util,
         Widget = kendo.ui.Widget,
         deepExtend = kendo.deepExtend,
 
@@ -22,9 +23,11 @@ var __meta__ = {
         ChartElement = dataviz.ChartElement,
         NumericAxis = dataviz.NumericAxis,
         Axis = dataviz.Axis,
+        Box2D = dataviz.Box2D,
         Class = kendo.Class,
         defined = dataviz.defined,
         isArray = $.isArray,
+        isNumber = util.isNumber,
         interpolateValue = dataviz.interpolateValue,
 
         getSpacing = dataviz.getSpacing,
@@ -293,7 +296,6 @@ var __meta__ = {
             that.labelElements = that.renderLabels();
             that.ticks = that.renderTicks();
             that.ranges = that.renderRanges();
-            //group.append(new Arc(arc).stroke(BLACK, 1)); //TODO remove. for testing only
             
             group.append(that.labelElements, that.ticks, that.ranges);
 
@@ -384,7 +386,7 @@ var __meta__ = {
                 labelPos = new Point(label.box.x1, label.box.y1);
 
                 if (that.labelElements === undefined) {
-                    lbl = that.buildLabel(label);
+                    lbl = buildLabel(label, options.labels);
                     labelsGroup.append(lbl);
                 } else {
                     lbl = that.labelElements.children[i];
@@ -399,47 +401,6 @@ var __meta__ = {
             }
 
             return labelsGroup;
-        },
-
-        buildLabel: function(label) {
-            var that = this;
-            var options = that.options.labels;
-            var labelBox = label.box;
-            var textBox = label.children[0].box;
-            var border = options.border || {};
-            var background = options.background || "";
-            var elements = new Group();
-            var styleBox, styleGeometry, wrapper;
-
-            wrapper = Path.fromRect(new geo.Rect([labelBox.x1, labelBox.y1], [labelBox.width(), labelBox.height()]), {
-                stroke: {}
-            });
-
-            var text = new Text(label.text, new Point(textBox.x1, textBox.y1), {
-                font: options.font,
-                fill: { color: options.color }
-            });
-
-            styleGeometry = _pad(text.bbox().clone(), options.padding);
-
-            styleBox = Path.fromRect(styleGeometry, {
-                stroke: {
-                    color: border.width ? border.color : "",
-                    width: border.width,
-                    dashType: border.dashType,
-                    lineJoin: "round",
-                    lineCap: "round"
-                },
-                fill: {
-                    color: background
-                }
-            });
-
-            elements.append(wrapper);
-            elements.append(styleBox);
-            elements.append(text);
-
-            return elements;
         },
 
         repositionRanges: function() {
@@ -756,6 +717,7 @@ var __meta__ = {
         },
 
         value: function(value) {
+
             var that = this;
             var pointer = that.pointers[0];
 
@@ -763,9 +725,33 @@ var __meta__ = {
                 return pointer.value();
             }
 
-            gauge.options.pointer.value = value;
+            //todo check
+            //gauge.options.pointer.value = value;
 
             pointer.value(value);
+        },
+
+        allValues: function(values) {
+            var that = this;
+            var pointers = that.pointers;
+            var allValues = [];
+            var i;
+
+            if (arguments.length === 0) {
+                for (i = 0; i < pointers.length; i++) {
+                    allValues.push(pointers[i].value());
+                }
+
+                return allValues;
+            }
+
+            if ($.isArray(values)) {
+                for (i = 0; i < values.length; i++) {
+                    if (isNumber(values[i])) {
+                        pointers[i].value(values[i]);
+                    }
+                }
+            }
         },
 
         _resize: function() {
@@ -868,7 +854,6 @@ var __meta__ = {
 
         reflow: function() {
             var that = this;
-            var surface = that.surface;
             var pointers = that.pointers;
             var size = that._getSize();
             var wrapper = new geo.Rect([0, 0], [size.width, size.height]);
@@ -876,30 +861,31 @@ var __meta__ = {
             var scaleElements = that.scale.reflow(bbox);
             that._initialPlotArea = that.scale.bbox;
 
-            //Todo testing only
-            surface.draw(scaleElements);
-
             for (var i = 0; i < pointers.length; i++) {
-                //Todo testing only
                 var pointerElement = pointers[i].reflow(that.scale.arc);
-                //surface.draw(pointerElement);
-
                 that._initialPlotArea = Rect.union(that._initialPlotArea, pointers[i].bbox);
             };
 
             that.fitScale(bbox);
             that.alignScale(bbox);
+            that.draw(that.gaugeArea, pointers, scaleElements);
+        },
+
+        draw: function(gaugeArea, pointers, scale) {
+            var surface = this.surface;
+            var current;
 
             surface.clear();
-            surface.draw(that.gaugeArea);
+            surface.draw(gaugeArea);
 
             for (var i = 0; i < pointers.length; i++) {
-                pointers[i].render();
-                surface.draw(pointers[i].elements);
-                pointers[i].value(pointers[i].options.value);
+                current = pointers[i];
+                current.render();
+                surface.draw(current.elements);
+                current.value(current.options.value);
             };
 
-            surface.draw(scaleElements);
+            surface.draw(scale);
         },
 
         fitScale: function(bbox) {
@@ -1046,18 +1032,66 @@ var __meta__ = {
     var LinearGauge = Gauge.extend({
         init: function(element, options) {
             var linearGauge = this;
+
             Gauge.fn.init.call(linearGauge, element, options);
+
             kendo.notify(linearGauge, dataviz.ui);
         },
 
         options: {
-            name: "LinearGauge",
+            name: "LinearGauge2",
             transitions: true,
             gaugeArea: {
                 background: ""
             },
             scale: {
                 vertical: true
+            }
+        },
+
+        reflow: function() {
+            var that = this;
+            var surface = that.surface;
+            var pointers = that.pointers;
+            var size = that._getSize();
+            var wrapper = new geo.Rect([0, 0], [size.width, size.height]);
+            var bbox = _unpad(wrapper.bbox(), that._gaugeAreaMargin);
+            var bboxX = bbox.origin.x;
+            var bboxY = bbox.origin.y;
+
+            var bbox2D = new dataviz.Box2D(bboxX, bboxX,
+                                           bboxX + bbox.width(), bboxY + bbox.height());
+
+            that.scale.reflow(bbox2D);
+
+            for (var i = 0; i < pointers.length; i++) {
+                pointers[i].reflow(bbox2D);
+            }
+
+            that.bbox = that._getBox(bbox2D);
+            that._alignElements();
+            that._shrinkElements();
+            that._draw();
+        },
+
+        _createModel: function() {
+            var that = this;
+            var options = that.options;
+            var pointers = options.pointer;
+            var scale = that.scale = new LinearScale(options.scale);
+            var current;
+
+            that.pointers = [];
+
+            pointers = $.isArray(pointers) ? pointers : [pointers];
+            for (var i = 0; i < pointers.length; i++) {
+                current = new LinearPointer(scale, 
+                    deepExtend({}, pointers[i], {
+                        animation: {
+                            transitions: options.transitions
+                        }
+                }));
+                that.pointers.push(current);
             }
         },
 
@@ -1077,14 +1111,407 @@ var __meta__ = {
             }
 
             return { width: width, height: height };
+        },
+
+        _getBox: function(box) {
+            var that = this;
+            var scale = that.scale;
+            var pointers = that.pointers;
+            var boxCenter = box.center();
+            var plotAreaBox = pointers[0].box.clone().wrap(scale.box);
+            var size;
+
+            for (var i = 0; i < pointers.length; i++) {
+                plotAreaBox.wrap(pointers[i].box.clone());
+            }
+
+            if (scale.options.vertical) {
+                size = plotAreaBox.width() / 2;
+                plotAreaBox = new Box2D(
+                    boxCenter.x - size, box.y1,
+                    boxCenter.x + size, box.y2
+                );
+            } else {
+                size = plotAreaBox.height() / 2;
+                plotAreaBox = new Box2D(
+                    box.x1, boxCenter.y - size,
+                    box.x2, boxCenter.y + size
+                );
+            }
+
+            return plotAreaBox;
+        },
+
+        _alignElements: function() {
+            var that = this;
+            var scale = that.scale;
+            var pointers = that.pointers;
+            var scaleBox = scale.box;
+            var box = pointers[0].box.clone().wrap(scale.box);
+            var plotAreaBox = that.bbox;
+            var diff;
+
+            for (var i = 0; i < pointers.length; i++) {
+                box.wrap(pointers[i].box.clone());
+            }
+
+            if (scale.options.vertical) {
+                diff = plotAreaBox.center().x - box.center().x;
+                scale.reflow(new Box2D(
+                    scaleBox.x1 + diff, plotAreaBox.y1,
+                    scaleBox.x2 + diff, plotAreaBox.y2
+                ));
+            } else {
+                diff = plotAreaBox.center().y - box.center().y;
+                scale.reflow(new Box2D(
+                    plotAreaBox.x1, scaleBox.y1 + diff,
+                    plotAreaBox.x2, scaleBox.y2 + diff
+                ));
+            }
+
+            for (var i = 0; i < pointers.length; i++) {
+                pointers[i].reflow(that.bbox);
+            }
+        },
+
+        _shrinkElements: function () {
+            var that = this;
+            var scale = that.scale;
+            var pointers = that.pointers;
+            var scaleBox = scale.box.clone();
+            var pos = scale.options.vertical ? "y" : "x";
+            var pointerBox = pointers[0].box;
+
+            for (var i = 0; i < pointers.length; i++) {
+                pointerBox.wrap(pointers[i].box.clone());
+            }
+
+            scaleBox[pos + 1] += math.max(scaleBox[pos + 1] - pointerBox[pos + 1], 0);
+            scaleBox[pos + 2] -= math.max(pointerBox[pos + 2] - scaleBox[pos + 2], 0);
+
+            scale.reflow(scaleBox);
+
+            for (var i = 0; i < pointers.length; i++) {
+                pointers[i].reflow(that.bbox);
+            }
+        },
+
+        _draw: function(){
+            var that = this;
+            var surface = that.surface;
+            var scaleElements = that.scale.render();
+
+            surface.draw(that.gaugeArea);
+            surface.draw(scaleElements);
+        }
+    });
+
+    var LinearScale = NumericAxis.extend({
+        init: function (options) {
+            var scale = this;
+
+            scale.options = deepExtend({}, scale.options, options);
+            scale.options = deepExtend({}, scale.options , { labels: { mirror: scale.options.mirror } });
+            scale.options.majorUnit = scale.options.majorUnit || autoMajorUnit(scale.options.min, scale.options.max);
+
+            Axis.fn.init.call(scale, scale.options);
+            scale.options.minorUnit = scale.options.minorUnit || scale.options.majorUnit / 10;
+        },
+
+        options: {
+            min: 0,
+            max: 50,
+
+            majorTicks: {
+                size: 15,
+                align: INSIDE,
+                color: BLACK,
+                width: DEFAULT_LINE_WIDTH,
+                visible: true
+            },
+
+            minorTicks: {
+                size: 10,
+                align: INSIDE,
+                color: BLACK,
+                width: DEFAULT_LINE_WIDTH,
+                visible: true
+            },
+
+            line: {
+                width: DEFAULT_LINE_WIDTH
+            },
+
+            labels: {
+                position: INSIDE,
+                padding: 2
+            },
+            mirror: false,
+            _alignLines: false
+        },
+
+        render: function() {
+            var that = this;
+            var elements = new Group();
+            var labels = that.renderLabels();
+            var scaleLine = that.renderLine();
+            var scaleTicks = that.renderTicks();
+
+            elements.append(scaleLine, labels, scaleTicks);
+
+            return elements;
+        },
+
+        renderLabels: function() {
+            var that = this;
+            var options = that.options;
+            var labels = that.labels;
+            var elements = new Group();
+
+            for (var i = 0; i < labels.length; i++) {
+                elements.append(buildLabel(labels[i], options.labels));
+            }
+
+            return elements;
+        },
+
+        renderLine: function() {
+            var that = this;
+            var options = that.options;
+            var line = options.line;
+            var lineBox = that.lineBox();
+            var linePath;
+            var elements = new Group();
+
+            if (line.width > 0 && line.visible) {
+                linePath = new draw.Path({
+                    color: line.color,
+                    dashType: line.dashType,
+                    width: line.width
+                    //zIndex: line.zIndex,
+                    //align: options._alignLines
+                });
+
+                linePath.moveTo(lineBox.x1, lineBox.y1).lineTo(lineBox.x2, lineBox.y2).close();
+
+                elements.append(linePath);
+            }
+
+            return elements;
+        },
+
+        renderTicks: function() {
+            var that = this;
+            var ticks = new Group();
+            var options = that.options;
+            var lineBox = that.lineBox();
+            var mirror = options.labels.mirror;
+            var majorUnit = options.majorTicks.visible ? options.majorUnit : 0;
+            var tickLineOptions= {
+               _alignLines: options._alignLines,
+               vertical: options.vertical
+            };
+            var start, end;
+
+            function render(tickPositions, tickOptions) {
+                var i, count = tickPositions.length;
+
+                if (tickOptions.visible) {
+                    for (i = tickOptions.skip; i < count; i += tickOptions.step) {
+                        if (i % tickOptions.skipUnit === 0) {
+                            continue;
+                        }
+
+                        tickLineOptions.tickX = mirror ? lineBox.x2 : lineBox.x2 - tickOptions.size;
+                        tickLineOptions.tickY = mirror ? lineBox.y1 - tickOptions.size : lineBox.y1;
+                        tickLineOptions.position = tickPositions[i];
+
+                        ticks.append(that.renderAxisTick(tickLineOptions, tickOptions));
+                    }
+                }
+            }
+
+            render(that.getMajorTickPositions(), options.majorTicks);
+            render(that.getMinorTickPositions(), deepExtend({}, {
+                    skipUnit: majorUnit / options.minorUnit
+                }, options.minorTicks));
+
+            return ticks;
+        },
+
+        renderAxisTick: function(options, tickOptions) {
+            var tickX = options.tickX;
+            var tickY = options.tickY;
+            var position = options.position;
+            var start, end, tickPath;
+
+            if (options.vertical) {
+                start = new Point(tickX, position);
+                end = new Point(tickX + tickOptions.size, position);
+            } else {
+                start = new Point(position, tickY);
+                end = new Point(position, tickY + tickOptions.size);
+            }
+
+            tickPath = new draw.Path({
+                color: tickOptions.color,
+                width: tickOptions.width
+            }).moveTo(start).lineTo(end).close();
+
+            return tickPath;
         }
     });
 
     var LinearPointer = Pointer.extend({
-        options: {
+        init: function(scale, options) {
+            var pointer = this;
 
+            Pointer.fn.init.call(pointer, scale, options);
+
+            pointer.options = deepExtend({
+                size: pointer.pointerSize(),
+                track: {
+                    visible: defined(options.track)
+                }
+            }, pointer.options);
+        },
+
+        options: {
+            shape: BAR_INDICATOR,
+
+            track: {
+                border: {
+                    width: 1
+                }
+            },
+
+            color: BLACK,
+            border: {
+                width: 1
+            },
+            opacity: 1,
+
+            margin: getSpacing(3),
+            animation: {
+                type: BAR_INDICATOR
+            },
+            visible: true
+        },
+
+        reflow: function() {
+            var pointer = this;
+            var options = pointer.options;
+            var scale = pointer.scale;
+            var scaleLine = scale.lineBox();
+            var trackSize = options.track.size || options.size;
+            var pointerHalfSize = options.size / 2;
+            var mirror = scale.options.mirror;
+            var margin = getSpacing(options.margin);
+            var vertical = scale.options.vertical;
+            var space = vertical ?
+                     margin[mirror ? "left" : "right"] :
+                     margin[mirror ? "bottom" : "top"];
+            var pointerBox, pointerRangeBox, trackBox;
+            var space = mirror ? -space : space;
+
+            if (vertical) {
+                trackBox = new Box2D(
+                    scaleLine.x1 + space, scaleLine.y1,
+                    scaleLine.x1 + space, scaleLine.y2);
+
+                if (mirror) {
+                    trackBox.x1 -= trackSize;
+                } else {
+                    trackBox.x2 += trackSize;
+                }
+
+                if (options.shape !== BAR_INDICATOR) {
+                    pointerRangeBox = new Box2D(
+                        scaleLine.x2 + space, scaleLine.y1 - pointerHalfSize,
+                        scaleLine.x2 + space, scaleLine.y2 + pointerHalfSize
+                    );
+                    pointerBox = pointerRangeBox;
+                }
+            } else {
+                trackBox = new Box2D(
+                    scaleLine.x1, scaleLine.y1 - space,
+                    scaleLine.x2, scaleLine.y1 - space);
+
+                if (mirror) {
+                    trackBox.y2 += trackSize;
+                } else {
+                    trackBox.y1 -= trackSize;
+                }
+
+                if (options.shape !== BAR_INDICATOR) {
+                    pointerRangeBox = new Box2D(
+                        scaleLine.x1 - pointerHalfSize, scaleLine.y1 - space,
+                        scaleLine.x2 + pointerHalfSize, scaleLine.y1 - space
+                    );
+                    pointerBox = pointerRangeBox;
+                }
+            }
+
+            pointer.trackBox = trackBox;
+            pointer.pointerRangeBox = pointerRangeBox;
+            pointer.box = pointerBox || trackBox.clone().pad(options.border.width);
+        },
+
+        pointerSize: function() {
+            var pointer = this,
+                options = pointer.options,
+                scale = pointer.scale,
+                tickSize = scale.options.majorTicks.size,
+                size;
+
+            if (options.shape === ARROW) {
+                size = tickSize * 0.6;
+            } else {
+                size = tickSize * 0.3;
+            }
+
+            return round(size);
         }
     });
+
+    function buildLabel(label, options) {
+        var labelBox = label.box;
+        var textBox = label.children[0].box;
+        var border = options.border || {};
+        var background = options.background || "";
+        var elements = new Group();
+        var styleBox, styleGeometry, wrapper;
+
+        wrapper = Path.fromRect(new geo.Rect([labelBox.x1, labelBox.y1], [labelBox.width(), labelBox.height()]), {
+            stroke: {}
+        });
+
+        var text = new Text(label.text, new Point(textBox.x1, textBox.y1), {
+            font: options.font,
+            fill: { color: options.color }
+        });
+
+        styleGeometry = _pad(text.bbox().clone(), options.padding);
+
+        styleBox = Path.fromRect(styleGeometry, {
+            stroke: {
+                color: border.width ? border.color : "",
+                width: border.width,
+                dashType: border.dashType,
+                lineJoin: "round",
+                lineCap: "round"
+            },
+            fill: {
+                color: background
+            }
+        });
+
+        elements.append(wrapper);
+        elements.append(styleBox);
+        elements.append(text);
+
+        return elements;
+    }
 
     function getRange(range, min, max) {
         var from = defined(range.from) ? range.from : MIN_VALUE;
@@ -1117,27 +1544,18 @@ var __meta__ = {
         return _pad(bbox, spacing);
     }
 
-    // function _unpad(bbox, value) {
-    //     var origin = bbox.getOrigin();
-    //     var size = bbox.getSize();
-
-    //     bbox.setOrigin([origin.x + value, origin.y + value]);
-    //     bbox.setSize([size.width - (2 * value), size.height - (2 * value)]);
-
-    //     return bbox;
-    // }
-
     dataviz.ui.plugin(RadialGauge);
+    dataviz.ui.plugin(LinearGauge);
 
     deepExtend(dataviz, {
         newGauge: {
             Gauge: Gauge,
             RadialPointer: RadialPointer,
             LinearPointer: LinearPointer,
-            //LinearScale: LinearScale,
+            LinearScale: LinearScale,
             RadialScale: RadialScale,
-            RadialGauge: RadialGauge,
-            LinearGauge: LinearGauge
+            LinearGauge: LinearGauge,
+            RadialGauge: RadialGauge           
         }
     });
 

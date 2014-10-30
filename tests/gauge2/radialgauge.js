@@ -3,11 +3,12 @@
     var RadialGauge = dataviz.newGauge.RadialGauge;
     var DEFAULT_MARGIN = 5
     var TOLERANCE = 1.5 + DEFAULT_MARGIN;
-    var elem = $('<div/>').width(200).height(200);
+    var elem = "<div id='gauge' style='width: 200px; height: 200px;'></div>"; //$('<div/>').width(200).height(200);
 
     (function() {
         function createGauge(options) {
-            radialGauge = new RadialGauge(elem, options);
+            $(elem).appendTo(QUnit.fixture);
+            radialGauge = new RadialGauge($("#gauge"), options);
             box = radialGauge.plotBbox;
         }
 
@@ -16,8 +17,9 @@
                 createGauge();
             },
             teardown: function() {
-                radialGauge.destroy();
-                elem.remove();
+                kendo.destroy(QUnit.fixture);
+                QUnit.fixture.empty();
+                debugger;
             }
         });
 
