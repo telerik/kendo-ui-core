@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.data", "./kendo.popup", "./kendo.window", "./kendo.resizable", "./kendo.gantt.list", "./kendo.gantt.timeline" ], f);
+    define([ "./kendo.data", "./kendo.popup", "./kendo.window", "./kendo.resizable", "./kendo.gantt.list", "./kendo.gantt.timeline", "./kendo.pdf" ], f);
 })(function(){
 
 var __meta__ = {
@@ -2395,6 +2395,10 @@ var __meta__ = {
             this.list._adjustHeight();
         }
     });
+    
+    if (kendo.PDFMixin) {
+        kendo.PDFMixin.extend(Gantt.prototype);
+    }
 
     kendo.ui.plugin(Gantt);
 
