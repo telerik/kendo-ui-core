@@ -194,7 +194,6 @@ var __meta__ = {
             }
 
             that.elements = elements;
-            
             that.setAngle(0);
 
             return elements;
@@ -217,9 +216,9 @@ var __meta__ = {
             var center = that.center;
             var needleColor = options.color;
 
-            var needlePath = new draw.Path({
+            var needlePath = new Path({
                 fill: { color: needleColor },
-                stroke: { color: needleColor, width: 0.5 }
+                stroke: { color: needleColor, width: DEFAULT_LINE_WIDTH }
             });
 
             needlePath.moveTo(center.x + that.radius - minorTickSize, center.y)
@@ -778,7 +777,7 @@ var __meta__ = {
             var size = that.surface.size();
             var margin = that._gaugeAreaMargin = options.margin || DEFAULT_MARGIN;
             var border = options.border || {};
-            var areaGeometry =  new geo.Rect([0, 0], [size.width, size.height]);
+            var areaGeometry =  new Rect([0, 0], [size.width, size.height]);
 
             if (border.width > 0) {
                 areaGeometry = _unpad(areaGeometry, border.width);
@@ -856,7 +855,7 @@ var __meta__ = {
             var that = this;
             var pointers = that.pointers;
             var size = that._getSize();
-            var wrapper = new geo.Rect([0, 0], [size.width, size.height]);
+            var wrapper = new Rect([0, 0], [size.width, size.height]);
             var bbox = _unpad(wrapper.bbox(), that._gaugeAreaMargin);
             var scaleElements = that.scale.reflow(bbox);
             that._initialPlotArea = that.scale.bbox;
@@ -877,6 +876,8 @@ var __meta__ = {
 
             surface.clear();
             surface.draw(gaugeArea);
+            surface.draw(scale.children[1]); // ticks
+            surface.draw(scale.children[2]); // ranges
 
             for (var i = 0; i < pointers.length; i++) {
                 current = pointers[i];
@@ -884,8 +885,7 @@ var __meta__ = {
                 surface.draw(current.elements);
                 current.value(current.options.value);
             };
-
-            surface.draw(scale);
+            surface.draw(scale.children[0]); // labels
         },
 
         fitScale: function(bbox) {
@@ -1054,7 +1054,7 @@ var __meta__ = {
             var surface = that.surface;
             var pointers = that.pointers;
             var size = that._getSize();
-            var wrapper = new geo.Rect([0, 0], [size.width, size.height]);
+            var wrapper = new Rect([0, 0], [size.width, size.height]);
             var bbox = _unpad(wrapper.bbox(), that._gaugeAreaMargin);
             var bboxX = bbox.origin.x;
             var bboxY = bbox.origin.y;
@@ -1200,9 +1200,16 @@ var __meta__ = {
             var that = this;
             var surface = that.surface;
             var scaleElements = that.scale.render();
+            var pointers = that.pointers;
+            var pointerElements = new Group();
+
+            for (var i = 0; i < pointers.length; i++) {
+                pointerElements.append(pointers[i].render());
+            }
 
             surface.draw(that.gaugeArea);
             surface.draw(scaleElements);
+            surface.draw(pointerElements); //TODO animate
         }
     });
 
@@ -1284,16 +1291,15 @@ var __meta__ = {
             var elements = new Group();
 
             if (line.width > 0 && line.visible) {
-                linePath = new draw.Path({
-                    color: line.color,
-                    dashType: line.dashType,
-                    width: line.width
-                    //zIndex: line.zIndex,
-                    //align: options._alignLines
+                linePath = new Path({
+                    stroke: {
+                        color: line.color,
+                        dashType: line.dashType,
+                        width: line.width
+                    }
                 });
 
-                linePath.moveTo(lineBox.x1, lineBox.y1).lineTo(lineBox.x2, lineBox.y2).close();
-
+                linePath.moveTo(lineBox.x1, lineBox.y1).lineTo(lineBox.x2, lineBox.y2);
                 elements.append(linePath);
             }
 
@@ -1353,10 +1359,12 @@ var __meta__ = {
                 end = new Point(position, tickY + tickOptions.size);
             }
 
-            tickPath = new draw.Path({
-                color: tickOptions.color,
-                width: tickOptions.width
-            }).moveTo(start).lineTo(end).close();
+            tickPath = new Path({
+                stroke: {
+                    color: tickOptions.color,
+                    width: tickOptions.width
+                }
+            }).moveTo(start).lineTo(end);
 
             return tickPath;
         }
@@ -1457,6 +1465,103 @@ var __meta__ = {
             pointer.box = pointerBox || trackBox.clone().pad(options.border.width);
         },
 
+        repaint: function() {
+
+        },
+
+        render: function() {
+            var that = this;
+            var options = that.options;
+            var element = that.element = new Group();
+            var scale = that.scale;
+            var elementOptions = {
+                fill: {
+                    color: options.color,
+                    opacity: options.opacity
+                },
+                stroke: defined(options.border) ? {
+                    color: options.border.width ? options.border.color || options.color : "",
+                    width: options.border.width,
+                    dashType: options.border.dashType
+                } : {},
+                animation: deepExtend(options.animation, {
+                    startPosition: scale.getSlot(scale.options.min, options.value),
+                    size: options.size,
+                    vertical: scale.options.vertical,
+                    reverse: scale.options.reverse
+                }),
+                id: options.id,
+                zIndex: 2,
+                align: false
+            };
+
+            var shape = that.pointerShape(options.value);
+
+            if (options.shape === ARROW) {
+                elementOptions.animation.type = ARROW_POINTER;
+                element = new Path({
+                    stroke: elementOptions.stroke,
+                    fill: elementOptions.fill
+                }).moveTo(shape[0]).lineTo(shape[1]).lineTo(shape[2]).close();
+            } else {
+                element = Path.fromRect(shape, {
+                    stroke: elementOptions.stroke,
+                    fill: elementOptions.fill
+                });
+            }
+
+            return element;
+        },
+
+        pointerShape: function(value) {
+            var that = this;
+            var options = that.options;
+            var scale = that.scale;
+            var slot = scale.getSlot(value, scale.options.min);
+            var size = options.size;
+            var pointerRangeBox = that.pointerRangeBox;
+            var vertical = scale.options.vertical;
+            var halfSize = size / 2;
+            var sign = (scale.options.mirror ? -1 : 1);
+            var reverse = scale.options.reverse;
+            var pos, shape, trackBox;
+
+            if (options.shape == ARROW) {
+                if (vertical) {
+                    pos = reverse ? "y2" : "y1";
+                    shape = [
+                        new Point(pointerRangeBox.x1, slot[pos] - halfSize),
+                        new Point(pointerRangeBox.x1 - sign * size, slot[pos]),
+                        new Point(pointerRangeBox.x1, slot[pos] + halfSize)
+                    ];
+                } else {
+                    pos = reverse ? "x1" : "x2";
+                    shape = [
+                        new Point(slot[pos] - halfSize, pointerRangeBox.y2),
+                        new Point(slot[pos], pointerRangeBox.y2 + sign * size),
+                        new Point(slot[pos] + halfSize, pointerRangeBox.y2)
+                    ];
+                }
+            } else {
+                trackBox = that.trackBox;
+                if (vertical) {
+                    // shape = new Box2D(
+                    //     trackBox.x1, slot.y1,
+                    //     trackBox.x1 + size, slot.y2);
+
+                    shape = new Rect([trackBox.x1, slot.y1], [size, slot.y2 - slot.y1]);
+                } else {
+                    // shape = new Box2D(
+                    //     slot.x1, trackBox.y1,
+                    //     slot.x2, trackBox.y1 + size);
+
+                    shape = new Rect([slot.x1, trackBox.y1], [slot.x2 - slot.x1, size]);
+                }
+            }
+
+            return shape;
+        },
+
         pointerSize: function() {
             var pointer = this,
                 options = pointer.options,
@@ -1482,7 +1587,7 @@ var __meta__ = {
         var elements = new Group();
         var styleBox, styleGeometry, wrapper;
 
-        wrapper = Path.fromRect(new geo.Rect([labelBox.x1, labelBox.y1], [labelBox.width(), labelBox.height()]), {
+        wrapper = Path.fromRect(new Rect([labelBox.x1, labelBox.y1], [labelBox.width(), labelBox.height()]), {
             stroke: {}
         });
 

@@ -35,16 +35,22 @@
             gaugeArea: {
                     background: "yellow",
                     border: {
-                    color: "blue",
-                    dashType: "dot",
-                    width: 2
-                },
+                        color: "blue",
+                        dashType: "dot",
+                        width: 2
+                    },
             },
             pointer: {
                 value: 28
             },
 
             scale: {
+                line: {
+                    color: "blue"
+                },
+                majorTicks: {
+                    color: "green"
+                },
                 labels: {
                     color: "yellow",
                     //padding: 5,
@@ -65,7 +71,7 @@
                 minorUnit: 2,
                 min: -40,
                 max: 60,
-                vertical: false,
+                vertical: true,
                 ranges: [
                     {
                         from: -40,
@@ -88,6 +94,7 @@
         gaugeArea: {
             width: 200,
             height: 200,
+            background: "blue",
             border: {
                 color: "yellow",
                 dashType: "solid",
@@ -96,14 +103,13 @@
         },
         pointer: {
             cap: {
-                size: 0.25,
-                color: "blue"
+                size: 0.05,
+                color: "pink"
             },
-            color: "blue",
-            value: 55
+            color: "pink",
+            value: 40
         },
         scale: {
-            //vertical: false,
             minorTicks: {
                 size: 10,
                 width: 2
@@ -124,7 +130,7 @@
                     color: "green",
                     //dashType: "dot"
                 },
-                position: "inside",
+                position: "outside",
                 //template: "asdf"
                 margin: 10,
                 format: "C",
@@ -138,19 +144,19 @@
             max: 100,
             //reverse: true,
             //rangePlaceholderColor: "yellow",
-        // ranges: [{
-        //     from: 10,
-        //     to: 20,
-        //     color: "green",
-        //     //opacity: 0.5
-        // },{
-        //     from: 30,
-        //     to: 60,
-        //     color: "red",
-        //     //opacity: 0,2
-        // }],
+        ranges: [{
+            from: 10,
+            to: 20,
+            color: "green",
+            //opacity: 0.5
+        },{
+            from: 30,
+            to: 60,
+            color: "red",
+            //opacity: 0,2
+        }],
           rangeSize: 25,
-          rangeDistance: 0,
+          rangeDistance: 10,
       }
     }).data("kendoRadialGauge");
   </script>

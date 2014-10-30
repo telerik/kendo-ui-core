@@ -56,10 +56,17 @@ var gauge2 = elem2.kendoLinearGauge2({
                 },
             },
             pointer: {
-                value: 28
+                value: 28,
+                shape: "arrow"
             },
 
             scale: {
+                line: {
+                    color: "blue"
+                },
+                majorTicks: {
+                    color: "green"
+                },
                 labels: {
                     color: "yellow",
                     //padding: 5,
@@ -80,7 +87,7 @@ var gauge2 = elem2.kendoLinearGauge2({
                 minorUnit: 2,
                 min: -40,
                 max: 60,
-                vertical: false,
+                vertical: true,
                 ranges: [
                     {
                         from: -40,
@@ -100,16 +107,16 @@ var gauge2 = elem2.kendoLinearGauge2({
         }).data("kendoLinearGauge2");
 
 var gauge = elem.kendoRadialGauge2({
-        // gaugeArea: {
-        //     width: 200,
-        //     height: 200,
-        //     background: "blue",
-        //     border: {
-        //         color: "yellow",
-        //         dashType: "solid",
-        //         width: 25
-        //     }
-        // },
+        gaugeArea: {
+            width: 200,
+            height: 200,
+            background: "blue",
+            border: {
+                color: "yellow",
+                dashType: "solid",
+                width: 25
+            }
+        },
 
         pointer: [{
             cap: {
@@ -154,7 +161,7 @@ var gauge = elem.kendoRadialGauge2({
                     color: "green",
                     //dashType: "dot"
                 },
-                position: "outside",
+                position: "inside",
                 //template: "asdf"
                 margin: 10,
                 format: "C",
