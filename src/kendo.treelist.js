@@ -962,6 +962,7 @@ var __meta__ = {
             }
 
             this._columnTemplates();
+            this._columnAttributes();
         },
 
         _columnTemplates: function() {
@@ -980,6 +981,27 @@ var __meta__ = {
 
                 if (column.footerTemplate) {
                     column.footerTemplate = kendo.template(column.footerTemplate);
+                }
+            }
+        },
+
+        _columnAttributes: function() {
+            // column style attribute is string, kendo.dom expects object
+            var idx, length, column;
+            var columns = this.columns;
+            var attr, properties, i, declaration;
+
+            for (idx = 0, length = columns.length; idx < length; idx++) {
+                attr = columns[idx].attributes;
+
+                if (attr && attr.style) {
+                    properties = attr.style.split(";");
+                    attr.style = {};
+
+                    for (i = 0; i < properties.length; i++) {
+                        declaration = properties[i].split(":");
+                        attr.style[declaration[0]] = declaration[1];
+                    }
                 }
             }
         },
@@ -1238,6 +1260,7 @@ var __meta__ = {
             var column = options.column;
             var template = options.column.footerTemplate || $.noop;
             var aggregates = options.model[column.field] || {};
+            var attr = { "role": "gridcell" };
 
             if (column.expandable) {
                 content = content.concat(createPlaceholders({
@@ -1246,9 +1269,13 @@ var __meta__ = {
                 }));
             }
 
+            if (column.attributes) {
+                extend(attr, column.attributes);
+            }
+
             content.push(kendoTextElement(template(aggregates) || ""));
 
-            return kendoDomElement("td", { "role": "gridcell" }, content);
+            return kendoDomElement("td", attr, content);
         },
 
         _hasFooterTemplate: function() {
@@ -1302,6 +1329,10 @@ var __meta__ = {
                     }
 
                     children.push(kendoDomElement("span", { className: iconClass.join(" ") }));
+                }
+
+                if (column.attributes) {
+                    extend(attr, column.attributes);
                 }
 
                 if (column.command) {

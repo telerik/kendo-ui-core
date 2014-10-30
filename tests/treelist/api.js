@@ -307,18 +307,4 @@
 
         equal(footerRow.css("display"), "none");
     });
-
-    //test("expand on item without children", function() {
-        //createTreeList({
-            //dataSource: [
-                //{ id: 1, parentId: null }
-            //]
-        //});
-
-        //var row = instance.content.find("tr:first");
-
-        //instance.expand(row);
-
-        //equal(instance.content.find("tr").length, 1);
-    //});
 })()

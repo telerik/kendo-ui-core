@@ -871,4 +871,36 @@
         var height = parseInt(dom.find(".k-grid-content").height(), 10);
         ok(height > 100);
     });
+
+    test("column attributes are rendered on cells", function() {
+        createTreeList({
+            columns: [
+                { field: "id", attributes: { "foo": "bar" } }
+            ]
+        });
+
+        equal(dom.find("td[foo=bar]").length, 2);
+    });
+
+    test("column attributes are rendered on footer cells", function() {
+        createTreeList({
+            columns: [ {
+                field: "id",
+                attributes: { "foo": "bar" },
+                footerTemplate: "footer"
+            } ]
+        });
+
+        equal(dom.find(".k-footer-template td[foo=bar]").length, 2);
+    });
+
+    test("column attributes render style attribute", function() {
+        createTreeList({
+            columns: [
+                { field: "id", attributes: { "style": "text-align: center;" } }
+            ]
+        });
+
+        equal(dom.find("td[style]").css("text-align"), "center");
+    });
 })();
