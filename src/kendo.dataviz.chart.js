@@ -3196,20 +3196,24 @@ var __meta__ = {
             var options = this.options;
 
             var bbox = element.bbox();
-            var origin = this.origin = options.aboveAxis ?
-                bbox.bottomLeft() : bbox.topRight();
+            if (bbox) {
+                var origin = this.origin = options.aboveAxis ?
+                    bbox.bottomLeft() : bbox.topRight();
 
-            var axis = options.vertical ? Y : X;
-            var stackBase = options.stackBase;
-            var fromOffset = this.fromOffset = new geom.Point();
-            fromOffset[axis] = valueOrDefault(stackBase, origin[axis]) - origin[axis];
+                var axis = options.vertical ? Y : X;
+                var stackBase = options.stackBase;
+                var fromOffset = this.fromOffset = new geom.Point();
+                fromOffset[axis] = valueOrDefault(stackBase, origin[axis]) - origin[axis];
 
-            var fromScale = this.fromScale = new geom.Point(1, 1);
-            fromScale[axis] = 0;
+                var fromScale = this.fromScale = new geom.Point(1, 1);
+                fromScale[axis] = 0;
 
-            element.transform(geom.transform()
-                .scale(fromScale.x, fromScale.y)
-            );
+                element.transform(geom.transform()
+                    .scale(fromScale.x, fromScale.y)
+                );
+            } else {
+                this.abort();
+            }
         },
 
         step: function(pos) {
