@@ -844,20 +844,32 @@ var __meta__ = {
         self.value(val);
     });
 
-    defadvice("ui.MultiSelect", "$angular_getLogicValue", function(){
-        return $.map(this.self.dataItems(), function(item){
-            return item.toJSON();
-        });
+    defadvice("ui.MultiSelect", "$angular_getLogicValue", function() {
+        var value = this.self.dataItems();
+        var valueField = this.self.options.dataValueField;
+
+        if (valueField && this.self.options.valuePrimitive) {
+            value = $.map(value, function(item) {
+                return item[valueField];
+            });
+        }
+
+        return value;
     });
 
-    defadvice("ui.MultiSelect", "$angular_setLogicValue", function(orig){
-        if (orig == null) {
-            orig = [];
+    defadvice("ui.MultiSelect", "$angular_setLogicValue", function(val){
+        if (val == null) {
+            val = [];
         }
-        var self = this.self;
-        var val = $.map(orig, function(item){
-            return item[self.options.dataValueField];
-        });
+        var self = this.self,
+            valueField = self.options.dataValueField;
+
+        if (valueField && !self.options.valuePrimitive) {
+            val = $.map(val, function(item) {
+                return item[valueField];
+            });
+        }
+
         self.value(val);
     });
 
