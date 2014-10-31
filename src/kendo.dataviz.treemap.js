@@ -61,8 +61,9 @@ var __meta__ = {
             name: "TreeMap",
             theme: "default",
             autoBind: true,
-            textField: "",
-            valueField: ""
+            textField: "text",
+            valueField: "value",
+            colorField: "color"
         },
 
         events: [DATA_BOUND, ITEM_CREATED],
