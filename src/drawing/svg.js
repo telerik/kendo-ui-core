@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./shapes" ], f);
+    define([ "./shapes", "../kendo.util" ], f);
 })(function(){
 
 (function ($) {
@@ -1101,7 +1101,7 @@
 
         var svg = surface.svg();
         if (!options || !options.raw) {
-            svg = "data:image/svg+xml;charset=UTF-8," + svg;
+            svg = "data:image/svg+xml;base64," + util.encodeBase64(svg);
         }
 
         return $.Deferred().resolve(svg).promise();

@@ -1234,7 +1234,7 @@
 
         test("exports SVG Data URI", function() {
             d.exportSVG(group).done(function(svg) {
-                contains(svg, "data:image/svg+xml;charset=UTF-8,<?xml version='1.0' ?><svg");
+                contains(svg, "data:image/svg+xml;base64,PD94");
             });
         });
 
@@ -1258,14 +1258,14 @@
 
         test("encodes entities", function() {
             group = new d.Text("Foo & Bar", [0, 0]);
-            d.exportSVG(group).done(function(svg) {
+            d.exportSVG(group, { raw: true }).done(function(svg) {
                 contains(svg, "Foo &amp; Bar");
             });
         });
 
         test("preserves encoded entities", function() {
             group = new d.Text("Foo &amp; Bar", [0, 0]);
-            d.exportSVG(group).done(function(svg) {
+            d.exportSVG(group, { raw: true }).done(function(svg) {
                 contains(svg, "Foo &amp; Bar");
             });
         });
