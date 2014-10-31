@@ -634,7 +634,7 @@ var __meta__ = {
                     that._actions();
                     titleBar = wrapper.children(KWINDOWTITLEBAR);
                 } else {
-                    title.text(text);
+                    title.html(text);
                 }
 
                 titleBarHeight = titleBar.outerHeight();
