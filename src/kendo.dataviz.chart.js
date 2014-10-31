@@ -3094,6 +3094,8 @@ var __meta__ = {
 
         createRect: function(view) {
             var options = this.options;
+            var border = options.border;
+            var strokeOpacity = defined(border.opacity) ? border.opacity : options.opacity;
             var rect = draw.Path.fromRect(this.box.toRect(), {
                 fill: {
                     color: this.color,
@@ -3101,9 +3103,9 @@ var __meta__ = {
                 },
                 stroke: {
                     color: this.getBorderColor(),
-                    width: options.border.width,
-                    opacity: options.border.opacity,
-                    dashType: options.border.dashType
+                    width: border.width,
+                    opacity: strokeOpacity,
+                    dashType: border.dashType
                 }
             });
 
