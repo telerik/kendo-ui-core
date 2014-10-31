@@ -4073,10 +4073,12 @@ function pad(number, digits, end) {
         kendo.saveAs = function(options) {
             var save = postToProxy;
 
-            if (downloadAttribute) {
-                save = saveAsDataURI;
-            } else if (navigator.msSaveBlob) {
-                save = saveAsBlob;
+            if (!options.forceProxy) {
+                if (downloadAttribute) {
+                    save = saveAsDataURI;
+                } else if (navigator.msSaveBlob) {
+                    save = saveAsBlob;
+                }
             }
 
             save(options.dataURI, options.fileName, options.proxyURL);
