@@ -101,6 +101,8 @@ var __meta__ = {
             var unregister = scope.$watch(kNgDelay, function(newValue, oldValue){
                 if (newValue !== oldValue) {
                     unregister();
+                    // remove subsequent delays, to make ng-rebind work
+                    element.removeAttr(attrs.$attr.kNgDelay);
                     kNgDelay = null;
                     $timeout(createIt); // XXX: won't work without `timeout` ;-\
                 }
