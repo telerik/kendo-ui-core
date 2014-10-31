@@ -139,22 +139,7 @@
                 var combinedTransform = srcElement.currentTransform(transform);
                 var currentOpacity = opacity * valueOrDefault(srcElement.options.opacity, 1);
 
-                var childNode;
-                if (srcElement instanceof d.Group) {
-                    childNode = new GroupNode(srcElement);
-                } else if (srcElement instanceof d.Text) {
-                    childNode = new TextNode(srcElement, combinedTransform, currentOpacity);
-                } else if (srcElement instanceof d.Path) {
-                    childNode = new PathNode(srcElement, combinedTransform, currentOpacity);
-                } else if (srcElement instanceof d.MultiPath) {
-                    childNode = new MultiPathNode(srcElement, combinedTransform, currentOpacity);
-                } else if (srcElement instanceof d.Circle) {
-                    childNode = new CircleNode(srcElement, combinedTransform, currentOpacity);
-                } else if (srcElement instanceof d.Arc) {
-                    childNode = new ArcNode(srcElement, combinedTransform, currentOpacity);
-                } else if (srcElement instanceof d.Image) {
-                    childNode = new ImageNode(srcElement, combinedTransform, currentOpacity);
-                }
+                var childNode = new nodeMap[srcElement.nodeType](srcElement, combinedTransform, currentOpacity);
 
                 if (children && children.length > 0) {
                     childNode.load(children, pos, combinedTransform, opacity);
@@ -1126,6 +1111,16 @@
             this.fill.refresh(this.srcElement.currentTransform(transform));
         }
     });
+
+    var nodeMap = {
+        Group: GroupNode,
+        Text: TextNode,
+        Path: PathNode,
+        MultiPath: MultiPathNode,
+        Circle: CircleNode,
+        Arc: ArcNode,
+        Image: ImageNode
+    };
 
     // Helper functions =======================================================
     function enableVML() {
