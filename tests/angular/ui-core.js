@@ -471,10 +471,7 @@ withAngularTests("Angular (UI Core)", function(runTest){
 
             deepEqual($scope.comboModel, { id: 1, text: "Foo" });
             deepEqual($scope.dropDownModel, { id: 1, text: "Foo" });
-            deepEqual($scope.multiSelectModel, [
-                { id: 2, text: "Bar" },
-                { id: 1, text: "Foo" }
-            ]);
+            equal(JSON.stringify($scope.multiSelectModel), JSON.stringify([ { text: "Bar", id: 2 }, { text: "Foo", id: 1 } ]));
             start();
         });
     });
