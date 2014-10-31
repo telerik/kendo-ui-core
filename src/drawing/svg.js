@@ -131,21 +131,7 @@
                 srcElement = elements[i];
                 children = srcElement.children;
 
-                if (srcElement instanceof d.Text) {
-                    childNode = new TextNode(srcElement);
-                } else if (srcElement instanceof d.Group) {
-                    childNode = new GroupNode(srcElement);
-                } else if (srcElement instanceof d.Path) {
-                    childNode = new PathNode(srcElement);
-                } else if (srcElement instanceof d.MultiPath) {
-                    childNode = new MultiPathNode(srcElement);
-                } else if (srcElement instanceof d.Circle) {
-                    childNode = new CircleNode(srcElement);
-                } else if (srcElement instanceof d.Arc) {
-                    childNode = new ArcNode(srcElement);
-                } else if (srcElement instanceof d.Image) {
-                    childNode = new ImageNode(srcElement);
-                }
+                childNode = new nodeMap[srcElement.nodeType](srcElement);
 
                 if (defined(pos)) {
                     node.insertAt(childNode, pos);
@@ -1033,6 +1019,16 @@
             return attrs;
         }
     });
+
+    var nodeMap = {
+        Group: GroupNode,
+        Text: TextNode,
+        Path: PathNode,
+        MultiPath: MultiPathNode,
+        Circle: CircleNode,
+        Arc: ArcNode,
+        Image: ImageNode
+    };
 
     // Helpers ================================================================
     var renderSVG = function(container, svg) {
