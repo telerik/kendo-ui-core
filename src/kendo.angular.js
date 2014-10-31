@@ -835,7 +835,15 @@ var __meta__ = {
 
     defadvice("ui.Select", "$angular_getLogicValue", function(){
         var item = this.self.dataItem();
-        return item ? item.toJSON() : null;
+        if (item) {
+            if (this.self.options.valuePrimitive) {
+                return item[this.self.options.dataValueField];
+            } else {
+                return item.toJSON();
+            }
+        } else {
+            return null;
+        }
     });
 
     defadvice("ui.Select", "$angular_setLogicValue", function(orig){
