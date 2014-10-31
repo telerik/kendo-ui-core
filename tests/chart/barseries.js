@@ -1,13 +1,14 @@
 (function() {
-    return;
 
     var dataviz = kendo.dataviz,
+        draw = kendo.drawing,
+        geom = kendo.geometry,
         getElement = dataviz.getElement,
         Box2D = dataviz.Box2D,
         categoriesCount = dataviz.categoriesCount,
         chartBox = new Box2D(0, 0, 800, 600),
         series,
-        view;
+        visual;
 
     function BarStub(box) {
         this.box = box;
@@ -20,7 +21,6 @@
     };
 
     function setupBarChart(plotArea, options) {
-        view = new ViewStub();
 
         options.gap = 1.5;
         series = new dataviz.BarChart(plotArea, options);
@@ -59,6 +59,14 @@
         };
     }
 
+    function pointTextBox(idx) {
+        return series.points[idx].label.textBox;
+    }
+
+    function pointText(idx) {
+        return pointTextBox(idx).visual.children[1].children[0];
+    }
+
     (function() {
         var positiveSeries = { data: [1, 2], labels: {} },
             negativeSeries = { data: [-1, -2], labels: {} },
@@ -92,21 +100,17 @@
         module("Bar Chart", {
             setup: function() {
                 setupBarChart(plotArea, { series: [ positiveSeries ] });
-                series.getViewElements(view);
+                series.renderVisual();
+                visual = series.visual;
             }
         });
 
-        test("generates unique id", function() {
-            ok(series.id);
+        test("renders group", function() {
+            ok(series.visual instanceof draw.Group);
         });
 
-        test("renders group with series id and no animations", function() {
-            var group = view.findInLog("group", function(item) {
-                return item.options.id === series.id;
-            });
-
-            ok(group && !group.options.animation);
-            equal(group.options.id, series.id);
+        test("does not create animation", function() {
+            equal(series.animation, undefined);
         });
 
         // ------------------------------------------------------------
@@ -1397,7 +1401,7 @@
         });
 
         test("labels have zIndex", function() {
-            equal(series.points[0].children[0].options.zIndex, 1);
+            equal(series.points[0].children[0].options.zIndex, 2);
         });
 
         // ------------------------------------------------------------
@@ -1489,8 +1493,8 @@
                     visible: true
                 }
             }] });
-            series.getViewElements(view);
-            equal(view.log.text[0].style.color, COLOR);
+            series.renderVisual();
+            equal(pointText(0).options.fill.color, COLOR);
         });
 
         test("background color", function() {
@@ -1501,8 +1505,8 @@
                     visible: true
                 }
             }] });
-            series.getViewElements(view);
-            equal(view.log.rect[1].style.fill, BACKGROUND);
+            series.renderVisual();
+            equal(pointTextBox(0).visual.children[0].options.fill.color, BACKGROUND);
         });
 
         test("border", function() {
@@ -1513,10 +1517,12 @@
                     visible: true
                 }
             }] });
-            series.getViewElements(view);
-            equal(view.log.rect[1].style.stroke, BORDER.color);
-            equal(view.log.rect[1].style.strokeWidth, BORDER.width);
-            equal(view.log.rect[1].style.dashType, BORDER.dashType);
+            series.renderVisual(view);
+            var background = pointTextBox(0).visual.children[0];
+            var stroke = background.options.stroke;
+            equal(stroke.color, BORDER.color);
+            equal(stroke.width, BORDER.width);
+            equal(stroke.dashType, BORDER.dashType);
         });
 
         test("padding and margin", function() {
@@ -1528,7 +1534,7 @@
                     visible: true
                 }
             }] });
-            series.getViewElements(view);
+
             var barLabel = series.points[0].children[0].children[0],
                 paddingBox = barLabel.paddingBox,
                 box = barLabel.box;
@@ -2181,11 +2187,23 @@
             label,
             box,
             rect,
+            overlay,
             root,
             VALUE = 1,
             CATEGORY = "A",
             SERIES_NAME = "series",
             TOOLTIP_OFFSET = 5;
+
+        function samePath(actual, expected) {
+            var actualSegments = actual.segments;
+            var expectedSegments = expected.segments;
+            if (actualSegments.length !== expectedSegments.length) {
+                ok(false, "different segments length");
+            }
+            for (var idx = 0; idx < actualSegments.length; idx++) {
+                ok(actualSegments[idx].anchor().equals(expectedSegments[idx].anchor()));
+            }
+        }
 
         function createBar(options, clipBox) {
             box = new Box2D(0, 0, 100, 100);
@@ -2203,16 +2221,16 @@
                 },
                 formatPointValue: function() { return "foo"; }
             };
-
             root = new dataviz.RootElement();
+            root.box = box;
             root.append(bar);
-
             bar.reflow(box);
             label = bar.children[0];
 
-            view = new ViewStub();
-            bar.getViewElements(view);
-            rect = view.log.rect[0];
+            root.renderVisual();
+
+            rect = bar.visual.children[0];
+            overlay = bar.visual.children[1];
         }
 
         // ------------------------------------------------------------
@@ -2240,128 +2258,103 @@
         });
 
         test("renders rectangle", function() {
-            sameBox(rect, box);
+            samePath(rect, draw.Path.fromRect(box.toRect()));
         });
 
         test("does not render rectangle when box height is zero", function() {
             bar.reflow(new Box2D(0, 0, 100, 0));
 
-            view = new ViewStub();
-            bar.getViewElements(view);
+            bar.renderVisual();
 
-            equal(view.log.rect.length, 0);
+            equal(bar.visual.children.length, 0);
         });
 
         test("does not render rectangle when box width is zero", function() {
             bar.reflow(new Box2D(0, 0, 0, 100));
 
-            view = new ViewStub();
-            bar.getViewElements(view);
+            bar.renderVisual();
 
-            equal(view.log.rect.length, 0);
+            equal(bar.visual.children.length, 0);
         });
 
         test("sets fill color", function() {
-            deepEqual(rect.style.fill, bar.color);
+            equal(rect.options.fill.color, bar.color);
         });
 
-        test("sets vertical", function() {
-            deepEqual(rect.style.vertical, true);
+        test("renders overlay", function() {
+            ok(overlay);
         });
 
-        test("sets aboveAxis", function() {
-            deepEqual(rect.style.aboveAxis, true);
+        test("overlay has same path as rect", function() {
+            samePath(rect, overlay);
         });
 
-        test("sets overlay rotation for vertical bars", function() {
-            deepEqual(rect.style.overlay.rotation, 0);
+        test("sets overlay baseColor to color", function() {
+            createBar({
+                color: "red"
+            });
+            equal(overlay.options.baseColor, "red");
         });
 
-        test("sets same overlay rotation for vertical bars below axis", function() {
-            createBar({ aboveAxis: false });
-            deepEqual(rect.style.overlay.rotation, 0);
+        test("sets overlay gradient end point based on vertical option", function() {
+            ok(overlay.options.fill.end().equals(new geom.Point(1, 0)));
+            createBar({
+                vertical: false
+            });
+            ok(overlay.options.fill.end().equals(new geom.Point(0, 1)));
         });
 
-        test("does not set overlay options when no overlay is defined", function() {
+        test("does not render overlay options when no overlay is defined", function() {
             createBar({ overlay: null });
-            ok(!rect.style.overlay);
+            ok(!overlay);
         });
 
         test("sets default border color based on color", function() {
             createBar({ color: "#cf0" });
-            equal(rect.style.stroke, "#a3cc00");
+            equal(rect.options.stroke.color, "#a3cc00");
         });
 
         test("does not change border color if set", function() {
             createBar({ border: { color: "" } });
-            equal(view.log.rect[0].style.stroke, "");
-        });
-
-        test("sets overlay rotation for horizontal bars", function() {
-            createBar({ vertical: false });
-            deepEqual(rect.style.overlay.rotation, 90);
-        });
-
-        test("sets same overlay rotation for horizontal bars below axis", function() {
-            createBar({ vertical: false, aboveAxis: false });
-            deepEqual(rect.style.overlay.rotation, 90);
+            equal(rect.options.stroke.color, "");
         });
 
         test("sets stroke color", function() {
             createBar({ border: { color: "red", width: 1 } });
-            deepEqual(rect.style.stroke, bar.options.border.color);
+            deepEqual(rect.options.stroke.color, bar.options.border.color);
         });
 
         test("sets stroke width", function() {
             createBar({ border: { color: "red", width: 1 } });
-            deepEqual(rect.style.strokeWidth, bar.options.border.width);
+            deepEqual(rect.options.stroke.width, bar.options.border.width);
         });
 
         test("sets stroke dash type", function() {
             createBar({ border: { color: "red", width: 1, dashType: "dot" } });
-            equal(rect.style.dashType, bar.options.border.dashType);
+            equal(rect.options.stroke.dashType, bar.options.border.dashType);
         });
 
         test("sets stroke opacity", function() {
             createBar({ border: { color: "red", width: 1, opacity: 0.5 } });
-            equal(rect.style.strokeOpacity, bar.options.border.opacity);
+            equal(rect.options.stroke.opacity, bar.options.border.opacity);
         });
 
         test("sets fill opacity", function() {
             createBar({ opacity: 0.5 });
-            deepEqual(rect.style.fillOpacity, bar.options.opacity);
+            deepEqual(rect.options.fill.opacity, bar.options.opacity);
         });
 
         test("sets stroke opacity", function() {
             createBar({ opacity: 0.5 });
-            deepEqual(rect.style.strokeOpacity, bar.options.opacity);
+            deepEqual(rect.options.stroke.opacity, bar.options.opacity);
         });
 
-        test("is discoverable", function() {
-            ok(bar.modelId);
-        });
-
-        test("sets id on rect", function() {
-            ok(rect.style.id.length > 0);
-        });
-
-        test("highlightOverlay returns rect", function() {
-            view = new ViewStub();
-
-            bar.highlightOverlay(view);
-            equal(view.log.rect.length, 1);
-        });
-
-        test("outline element has same model id", function() {
-            view = new ViewStub();
-
-            bar.highlightOverlay(view);
-            equal(view.log.rect[0].style.data.modelId, bar.modelId);
-        });
-
-        test("label has same model id", function() {
-            createBar({ labels: { visible: true } });
-            equal(label.modelId, bar.modelId);
+        test("createHighlight returns same path with the passed options", function() {
+            var highlight = bar.createHighlight({
+                foo: "bar"
+            });
+            samePath(rect, highlight);
+            equal(highlight.options.foo, "bar");
         });
 
         test("tooltipAnchor is top right corner / vertical / above axis",
@@ -2550,6 +2543,10 @@
             barElement,
             plotArea;
 
+        function getElement(chartElement) {
+            return $(chartElement.visual.observers()[0].element);
+        }
+
         function createBarChart(options) {
             chart = createChart($.extend({
                 series: [{
@@ -2563,7 +2560,7 @@
 
             plotArea = chart._model.children[1];
             bar = plotArea.charts[0].points[0];
-            barElement = $(getElement(bar.id));
+            barElement = getElement(bar);
         }
 
         function barClick(callback) {
@@ -2579,7 +2576,7 @@
                 seriesHover: callback
             });
 
-            barElement.mouseover();
+            $(barElement).mouseover();
         }
 
         // ------------------------------------------------------------
@@ -2623,7 +2620,7 @@
             });
             var label = plotArea.charts[0].points[0].children[0];
 
-            clickChart(chart, getElement(label.id));
+            clickChart(chart, getElement(label));
         });
 
         test("event arguments contain value", function() {
@@ -2654,7 +2651,7 @@
 
         test("event arguments contain jQuery element", function() {
             barClick(function(e) {
-                equal(e.element[0], getElement(bar.id));
+                equal(e.element[0], barElement[0]);
             });
         });
 
@@ -2702,7 +2699,7 @@
                 seriesHover: function() { ok(true); }
             });
             var label = plotArea.charts[0].points[0].children[0];
-            $(getElement(label.id)).mouseover();
+            getElement(label).mouseover();
         });
 
         test("event arguments contain value", function() {
@@ -2733,7 +2730,7 @@
 
         test("event arguments contain jQuery element", function() {
             barHover(function(e) {
-                equal(e.element[0], getElement(bar.id));
+                equal(e.element[0], barElement[0]);
             });
         });
 
