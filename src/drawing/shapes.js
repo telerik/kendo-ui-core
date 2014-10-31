@@ -1053,9 +1053,15 @@
         return boundingBox;
     }
 
-    function updateElementsParent(elements, parent) {
+    function updateElementsParent(elements, newParent) {
         for (var i = 0; i < elements.length; i++) {
-            elements[i].parent = parent;
+            var child = elements[i];
+            var currentParent = child.parent;
+            if (currentParent && currentParent.remove) {
+                currentParent.remove(child);
+            }
+
+            child.parent = newParent;
         }
     }
 

@@ -311,6 +311,16 @@
             ok(child.parent === group);
         });
 
+        test("append removes children from old parent", function() {
+            var child = new Group();
+            group.append(child);
+
+            var group2 = new Group();
+            group2.append(child);
+
+            equal(group.children.length, 0);
+        });
+
         test("append triggers childrenChange", function() {
             var child = new Group();
 
