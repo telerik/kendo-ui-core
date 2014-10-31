@@ -6586,7 +6586,7 @@
         "meta": {
             "kendo-ui": "In this demo you will see in action the HTML5 Box Plot Chart control for Kendo UI.",
 			"aspnet-mvc": "In this demo you will see in action the ASP.NET MVC Box Plot Chart HTMLHelper extension for Kendo UI Box Plot Charts component."
-        },
+        }
       },
 
       {
@@ -6612,7 +6612,7 @@
 		"meta": {
             "kendo-ui": "This demo shows how the local data-binding is supported in Kendo UI HTML5 Box Plot Charts. Use the demo source code to try the feature of the control.",
 			"aspnet-mvc": "This demo shows how the local data-binding is supported in ASP.NET MVC Box Plot Charts. Use the demo source code to try the feature of the control."
-        },
+        }
       },
       {
         "text": "MVVM",
