@@ -27,7 +27,6 @@
 
 </head>
 <body>
- 
 <div id="gauge" style="width: 270px"></div>
 <div id="gauge2" style="width: 270px"></div>
   <script>
@@ -55,10 +54,17 @@ var gauge2 = elem2.kendoLinearGauge2({
                     width: 2
                 },
             },
-            pointer: {
+            pointer: [{
                 value: 28,
                 shape: "arrow"
-            },
+            }, {
+                value: 20,
+                shape: "bar"
+            }, {
+                value: 50,
+                shape: "arrow",
+                color: "green"
+            }],
 
             scale: {
                 line: {
@@ -107,6 +113,7 @@ var gauge2 = elem2.kendoLinearGauge2({
         }).data("kendoLinearGauge2");
 
 var gauge = elem.kendoRadialGauge2({
+        transitions: false,
         gaugeArea: {
             width: 200,
             height: 200,

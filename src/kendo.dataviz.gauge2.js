@@ -47,7 +47,7 @@ var __meta__ = {
     var ANGULAR_SPEED = 150,
         ARROW = "arrow",
         ARROW_POINTER = "arrowPointer",
-        BAR_INDICATOR = "barIndicator",
+        BAR_POINTER = "barPointer",
         BLACK = "#000",
         CAP_SIZE = 0.05,
         COORD_PRECISION = dataviz.COORD_PRECISION,
@@ -141,10 +141,7 @@ var __meta__ = {
         },
 
         setAngle: function(angle) {
-            var that = this;
-            angle += GEO_ARC_ADJUST_ANGLE;
-
-            that.elements.transform(geo.transform().rotate(angle, that.center))
+            this.elements.transform(geo.transform().rotate(angle, this.center))
         },
 
         repaint: function() {
@@ -154,10 +151,14 @@ var __meta__ = {
             var oldAngle = scale.slotAngle(options._oldValue);
             var newAngle = scale.slotAngle(options.value);
 
-            new RadialPointerAnimation(that.elements, deepExtend(options.animation, {
-                oldAngle: oldAngle,
-                newAngle: newAngle
-            })).play();
+            if (options.animation.transitions === false) {
+                that.setAngle(newAngle);
+            } else {
+                new RadialPointerAnimation(that.elements, deepExtend(options.animation, {
+                    oldAngle: oldAngle,
+                    newAngle: newAngle
+                })).play();
+            }
         },
 
         render: function() {
@@ -194,7 +195,7 @@ var __meta__ = {
             }
 
             that.elements = elements;
-            that.setAngle(0);
+            that.setAngle(DEGREE);
 
             return elements;
         },
@@ -296,7 +297,7 @@ var __meta__ = {
             that.ticks = that.renderTicks();
             that.ranges = that.renderRanges();
             
-            group.append(that.labelElements, that.ticks, that.ranges);
+            group.append(that.ticks, that.ranges, that.labelElements);
 
             return group;
         },
@@ -876,8 +877,8 @@ var __meta__ = {
 
             surface.clear();
             surface.draw(gaugeArea);
-            surface.draw(scale.children[1]); // ticks
-            surface.draw(scale.children[2]); // ranges
+            surface.draw(scale.children[0]); // ticks
+            surface.draw(scale.children[1]); // ranges
 
             for (var i = 0; i < pointers.length; i++) {
                 current = pointers[i];
@@ -885,7 +886,7 @@ var __meta__ = {
                 surface.draw(current.elements);
                 current.value(current.options.value);
             };
-            surface.draw(scale.children[0]); // labels
+            surface.draw(scale.children[2]); // labels
         },
 
         fitScale: function(bbox) {
@@ -1028,6 +1029,16 @@ var __meta__ = {
         }
     });
     draw.AnimationFactory.current.register(RADIAL_POINTER, RadialPointerAnimation);
+
+    var ArrowLinearPointerAnimation = draw.Animation.extend({
+
+    });
+    draw.AnimationFactory.current.register(ARROW_POINTER, ArrowLinearPointerAnimation);
+
+    // var BarLinearPointerAnimation = draw.Animation.extend({
+
+    // });
+    // draw.AnimationFactory.current.register(BAR_POINTER, BarLinearPointerAnimation);
 
     var LinearGauge = Gauge.extend({
         init: function(element, options) {
@@ -1263,8 +1274,45 @@ var __meta__ = {
             var labels = that.renderLabels();
             var scaleLine = that.renderLine();
             var scaleTicks = that.renderTicks();
+            var ranges = that.renderRanges();
 
-            elements.append(scaleLine, labels, scaleTicks);
+            elements.append(scaleLine, labels, scaleTicks, ranges);
+
+            return elements;
+        },
+
+        renderRanges: function() {
+            var that = this;
+            var options = that.options;
+            var min = options.min;
+            var max = options.max;
+            var ranges = options.ranges || [];
+            var vertical = options.vertical;
+            var mirror = options.labels.mirror;
+            var elements = new Group();
+            var count = ranges.length;
+            var rangeSize = options.rangeSize || options.minorTicks.size / 2;
+            var range, slot, slotX, slotY, i;
+
+            if (count) {
+                for (i = 0; i < count; i++) {
+                    range = getRange(ranges[i], min, max);
+                    slot = that.getSlot(range.from, range.to);
+                    slotX = vertical ? that.lineBox() : slot;
+                    slotY = vertical ? slot : that.lineBox();
+                    if (vertical) {
+                        slotX.x1 -= rangeSize * (mirror ? -1 : 1);
+                    } else {
+                        slotY.y2 += rangeSize * (mirror ? -1 : 1);
+                    }
+
+                    elements.append(Path.fromRect(new Rect([slotX.x1, slotY.y1],
+                        [slotX.x2 - slotX.x1, slotY.y2 - slotY.y1]), {
+                        fill: { color: range.color, opacity: range.opacity },
+                        stroke: { }
+                    }));
+                }
+            }
 
             return elements;
         },
@@ -1385,7 +1433,7 @@ var __meta__ = {
         },
 
         options: {
-            shape: BAR_INDICATOR,
+            shape: BAR_POINTER,
 
             track: {
                 border: {
@@ -1401,7 +1449,7 @@ var __meta__ = {
 
             margin: getSpacing(3),
             animation: {
-                type: BAR_INDICATOR
+                type: BAR_POINTER
             },
             visible: true
         },
@@ -1433,7 +1481,7 @@ var __meta__ = {
                     trackBox.x2 += trackSize;
                 }
 
-                if (options.shape !== BAR_INDICATOR) {
+                if (options.shape !== BAR_POINTER) {
                     pointerRangeBox = new Box2D(
                         scaleLine.x2 + space, scaleLine.y1 - pointerHalfSize,
                         scaleLine.x2 + space, scaleLine.y2 + pointerHalfSize
@@ -1451,7 +1499,7 @@ var __meta__ = {
                     trackBox.y1 -= trackSize;
                 }
 
-                if (options.shape !== BAR_INDICATOR) {
+                if (options.shape !== BAR_POINTER) {
                     pointerRangeBox = new Box2D(
                         scaleLine.x1 - pointerHalfSize, scaleLine.y1 - space,
                         scaleLine.x2 + pointerHalfSize, scaleLine.y1 - space
@@ -1466,7 +1514,28 @@ var __meta__ = {
         },
 
         repaint: function() {
+            var pointer = this;
+            var scale = pointer.scale;
+            var options = pointer.options;
+            var element = pointer.element;
+            var animation;
+            var animation = element._animation;
 
+            // if (animation) {
+            //     animation.abort();
+            // }
+
+            if (options.animation.transitions === false) {
+
+            } else {
+                options.animation = {};
+
+                if (options.shape === ARROW) {
+                    animation = element._animation = new ArrowLinearPointerAnimation(element, options.animation);
+                } else {
+
+                }
+            }
         },
 
         render: function() {
@@ -1545,16 +1614,8 @@ var __meta__ = {
             } else {
                 trackBox = that.trackBox;
                 if (vertical) {
-                    // shape = new Box2D(
-                    //     trackBox.x1, slot.y1,
-                    //     trackBox.x1 + size, slot.y2);
-
                     shape = new Rect([trackBox.x1, slot.y1], [size, slot.y2 - slot.y1]);
                 } else {
-                    // shape = new Box2D(
-                    //     slot.x1, trackBox.y1,
-                    //     slot.x2, trackBox.y1 + size);
-
                     shape = new Rect([slot.x1, trackBox.y1], [slot.x2 - slot.x1, size]);
                 }
             }

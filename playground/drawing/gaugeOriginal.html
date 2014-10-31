@@ -35,13 +35,14 @@
             gaugeArea: {
                     background: "yellow",
                     border: {
-                        color: "blue",
-                        dashType: "dot",
-                        width: 2
-                    },
+                    color: "blue",
+                    dashType: "dot",
+                    width: 2
+                },
             },
             pointer: {
-                value: 28
+                value: 28,
+                shape: "bar"
             },
 
             scale: {
@@ -71,7 +72,7 @@
                 minorUnit: 2,
                 min: -40,
                 max: 60,
-                vertical: true,
+                vertical: false,
                 ranges: [
                     {
                         from: -40,
@@ -91,6 +92,7 @@
         }).data("kendoLinearGauge");
 
     var gauge = $("#gauge").kendoRadialGauge({
+        //transitions: false,
         gaugeArea: {
             width: 200,
             height: 200,
