@@ -4822,7 +4822,7 @@
             "!offline",
             "!mvc",
             "!jsp",
-            "!php"
+            "!php",
             "!offline"
         ]
       },
