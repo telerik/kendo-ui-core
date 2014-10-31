@@ -19,8 +19,11 @@
         },
 
         addObserver: function(element) {
-            var observers = this.observers();
-            observers.push(element);
+            if (!this._observers)  {
+                this._observers = [element];
+            } else {
+                this._observers.push(element);
+            }
             return this;
         },
 
