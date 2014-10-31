@@ -77,4 +77,21 @@
         multiSelect.trigger("change");
         equal(JSON.stringify(scope.selectedColors), JSON.stringify([ 'blue' ]));
     });
+
+    ngTest("multiselect returns empty array when no value is set", 1, function() {
+        angular.module("kendo.tests").controller("mine", function($scope) {
+            $scope.colors = [ { color: "red" }, { color: "green" }, { color: "blue" } ];
+            $scope.selectedColors = [ $scope.colors[0], $scope.colors[1] ];
+        });
+
+        QUnit.fixture.html('<div ng-controller=mine><select kendo-multiselect k-ng-model=selectedColors k-data-source=colors k-data-value-field="\'color\'"></select></div>');
+    },
+
+    function() {
+        var multiSelect = QUnit.fixture.find("select").getKendoMultiSelect();
+        var scope = multiSelect.element.scope();
+        multiSelect.value([]);
+        multiSelect.trigger("change");
+        equal(JSON.stringify(scope.selectedColors), JSON.stringify([]));
+    });
 })();
