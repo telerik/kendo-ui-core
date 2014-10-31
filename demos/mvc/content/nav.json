@@ -8723,7 +8723,7 @@
       },
       {
         "text": "Bing tile layer",
-        "url": "map/bing"
+        "url": "map/bing",
 		"title": {
             "kendo-ui": "Bing tile layer in Kendo UI Map",
 			"aspnet-mvc": "Bing tile layer in ASP.NET MVC Map"
