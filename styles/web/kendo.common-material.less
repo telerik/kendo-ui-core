@@ -46,8 +46,9 @@
 }
 
 .k-tabstrip-items > .k-item {
-    border-bottom-width: 1px;
+    border-bottom-width: 2px;
     border-bottom-style: solid;
+    text-transform: uppercase;
 }
 
 .k-tabstrip-items .k-link {
@@ -133,6 +134,22 @@
 .k-dropdown-wrap .k-select
 {
     width: 2.5em;
+}
+
+.k-datetimepicker {
+    width: 19.5em;
+}
+
+.k-datetimepicker .k-select {
+    width: 5em;
+}
+
+.k-datetimepicker .k-picker-wrap {
+    padding-right: 5em;
+}
+
+.k-datetimepicker .k-picker-wrap .k-icon {
+    margin: 0 6px;
 }
 
 .k-calendar {
@@ -232,7 +249,15 @@
 .k-multiselect-wrap li {
     border-radius: 1.071em;
     margin: 3px;
-    padding: 0 .15em 0 .4em;
+    padding: 0 .15em 0 .857em;
+}
+
+.k-multiselect-wrap li span {
+    margin-right: 1.071em;   
+}
+
+.k-numerictextbox .k-link {
+    height: (@input-height + 0.354em) / 2;
 }
 
 .k-menu.k-header,
@@ -349,76 +374,6 @@ span.k-tooltip
     left: -6px;
 }
 
-//New icons 
-.k-numerictextbox .k-select .k-link span.k-i-arrow-n  { background-position: 0 -3px; }
-.k-numerictextbox .k-select .k-link span.k-i-arrow-s { background-position: 0 -35px; }
-
-.k-state-hover .k-select span.k-i-arrow-s { 
-    background-position: 0 -32px; 
-}
-
-.k-state-hover .k-select span.k-i-calendar { 
-    background-position: -32px -176px; 
-}
-
-.k-state-hover .k-select span.k-i-clock { 
-    background-position: -32px -192px; 
-}
-
-.k-multiselect.k-state-hover .k-delete {
-    background-position: -160px -80px;
-}
-
-.k-state-border-down .k-select span.k-i-arrow-s,
-.k-colorpicker .k-state-border-up .k-select span.k-i-arrow-s { 
-    background-position: 0 0; 
-}
-
-.k-state-hover .k-icon.k-i-arrow-w {
-    background-position: 0px -48px;
-}
-
-.k-state-hover .k-icon.k-i-arrow-e {
-    background-position: 0px -16px; 
-}
-
-.k-calendar .k-icon.k-i-arrow-w {
-     background-position: -16px -48px;
-}
-
-.k-calendar .k-icon.k-i-arrow-e {
-     background-position: -16px -16px;
-}
-
-.k-button:hover .k-i-close, .k-button:hover .k-delete {
-    background-position: -32px -16px;
-}
-
-.k-tooltip .k-i-close,
-.k-window-titlebar .k-i-close {
-    background-position: -48px -16px;
-}
-
-.k-window-titlebar .k-i-maximize {
-    background-position: -48px -144px;
-}
-
-.k-window-titlebar .k-i-minimize {
-    background-position: -80px -288px;
-}
-
-.k-window-titlebar .k-i-pin {
-    background-position: -176px -256px;
-}
-
-.k-window-titlebar .k-i-custom {
-    background-position: -141px -113px;
-}
-
-.k-window-titlebar .k-i-refresh {
-    background-position: -48px -112px;
-}
-
 
 /* Editor */
 
@@ -453,7 +408,6 @@ span.k-tooltip
 .k-header.k-grid-toolbar {
     border-color: #3343a4;
 }
-
 
 .k-grouping-header,
 .k-grid-toolbar {
@@ -520,8 +474,6 @@ span.k-tooltip
 .k-pager-wrap .k-link.k-state-disabled .k-icon {
     opacity: 0.25;
 }
-
-
 
 /* Scheduler */
 
@@ -724,8 +676,8 @@ span.k-tooltip
 .k-i-pencil, .k-edit { .sprite-hoverable(2, 0); }
 .k-i-close, .k-delete, .k-group-delete { .sprite-hoverable(2, 1); }
 .k-si-close { .sprite-hoverable(10, 5); }
-.k-multiselect .k-delete { .sprite-position(10, 5); }
-.k-multiselect .k-state-hover .k-delete { .sprite-position(11, 5); }
+//.k-multiselect .k-delete { .sprite-position(10, 5); }
+.k-multiselect .k-state-hover .k-delete { .sprite-position(10, 5); }
 
 .k-i-tick, .k-insert, .k-update{ .sprite-hoverable(2, 2); }
 .k-check:checked,
@@ -795,11 +747,83 @@ span.k-tooltip
 .k-calendar .k-icon.k-i-arrow-w,
 .k-calendar .k-state-hover .k-icon.k-i-arrow-w {
      background-position: -16px -48px;
+     opacity: 1;
 }
 
 .k-calendar .k-icon.k-i-arrow-e,
 .k-calendar .k-state-hover .k-icon.k-i-arrow-e {
      background-position: -16px -16px;
+     opacity: 1;
+}
+
+//New icons 
+.k-numerictextbox .k-select .k-link span.k-i-arrow-n  { background-position: 0 -3px; }
+.k-numerictextbox .k-select .k-link span.k-i-arrow-s { background-position: 0 -35px; }
+
+.k-state-hover .k-select span.k-i-arrow-s { 
+    background-position: 0 -32px; 
+}
+
+.k-state-hover .k-select span.k-i-calendar { 
+    background-position: -32px -176px; 
+}
+
+.k-state-hover .k-select span.k-i-clock { 
+    background-position: -32px -192px; 
+}
+
+//.k-multiselect.k-state-hover .k-delete {
+  //  background-position: -160px -80px;
+//}
+
+.k-state-border-down .k-select span.k-i-arrow-s,
+.k-colorpicker .k-state-border-up .k-select span.k-i-arrow-s { 
+    background-position: 0 0; 
+}
+
+.k-state-hover .k-icon.k-i-arrow-w {
+    background-position: 0px -48px;
+}
+
+.k-state-hover .k-icon.k-i-arrow-e {
+    background-position: 0px -16px; 
+}
+
+.k-calendar .k-icon.k-i-arrow-w {
+     background-position: -16px -48px;
+}
+
+.k-calendar .k-icon.k-i-arrow-e {
+     background-position: -16px -16px;
+}
+
+.k-button:hover .k-i-close, .k-button:hover .k-delete {
+    background-position: -32px -16px;
+}
+
+.k-tooltip .k-i-close,
+.k-window-titlebar .k-i-close {
+    background-position: -48px -16px;
+}
+
+.k-window-titlebar .k-i-maximize {
+    background-position: -48px -144px;
+}
+
+.k-window-titlebar .k-i-minimize {
+    background-position: -80px -288px;
+}
+
+.k-window-titlebar .k-i-pin {
+    background-position: -176px -256px;
+}
+
+.k-window-titlebar .k-i-custom {
+    background-position: -141px -113px;
+}
+
+.k-window-titlebar .k-i-refresh {
+    background-position: -48px -112px;
 }
 
 .k-radio:checked + .k-radio-label:after {
@@ -807,3 +831,10 @@ span.k-tooltip
    left: 4px
 }
 
+.k-treeview .k-minus {
+    background-position: 0 -32px;
+}
+
+.k-treeview .k-plus {
+    background-position: 0 -16px;
+}
