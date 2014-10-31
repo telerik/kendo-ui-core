@@ -1217,9 +1217,7 @@ var __meta__ = {
                     className.push("k-grid-edit-row");
                 }
 
-                if (className.length) {
-                    attr.className = className.join(" ");
-                }
+                attr.className = className.join(" ") || undefined;
 
                 rows.push(this._tds({
                     model: model,

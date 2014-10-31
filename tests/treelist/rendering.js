@@ -116,6 +116,25 @@
         equal(alt.index(), 1);
     });
 
+    test("alternates k-alt styles correctly after expand", function() {
+        createTreeList({
+            dataSource: [
+                { id: 1, expanded: true, parentId: null },
+                { id: 2, parentId: 1 },
+                { id: 3, parentId: 1 }
+            ]
+        });
+
+        var rows = instance.content.find("tr");
+
+        var firstRow = rows.eq(0);
+        instance.collapse(firstRow);
+        instance.expand(firstRow);
+
+        ok(rows.eq(1).hasClass("k-alt"));
+        ok(!rows.eq(2).hasClass("k-alt"));
+    });
+
     test("renders column titles within headers", function() {
         createTreeList({
             columns: [
