@@ -328,7 +328,53 @@
             "@notification-error-border-color": constant(BORDERCOLOR, ".k-notification.k-notification-info"),
 
             "@task-summary-color": constant(BORDERCOLOR, ".k-task-summary"),
-            "@task-summary-selected-color": constant(BORDERCOLOR, ".k-state-selected.k-task-summary")
+            "@task-summary-selected-color": constant(BORDERCOLOR, ".k-state-selected.k-task-summary"),
+
+            "@checkbox-border-color-before": constant(BORDERCOLOR, ".k-checkbox-label"),
+            "@checkbox-border-color-after": constant(BORDERCOLOR, ".k-checkbox-label"),
+            "@checkbox-border-radius-before": constant("border-radius", ".k-checkbox-label"),
+            "@checkbox-background-color": constant(BGCOLOR, ".k-checkbox-label"),
+            "@checkbox-hover-border-color": constant(BORDERCOLOR, ".k-checkbox-label"),
+            "@checkbox-hover-box-shadow": constant("box-shadow", ".k-checkbox-label"),
+
+            "@checkbox-checked-border-color-after": constant(BORDERCOLOR, ".k-checkbox-label"),
+            "@checkbox-checked-border-radius-after": constant("border-radius", ".k-checkbox-label"),
+            "@checkbox-checked-background-color-after": constant(BORDERCOLOR, ".k-checkbox-label"),
+            "@checkbox-checked-color-after": constant(COLOR, ".k-checkbox-label"),
+
+            "@checkbox-active-border-color-before": constant(BORDERCOLOR, ".k-checkbox-label"),
+            "@checkbox-active-border-color-after": constant(BORDERCOLOR, ".k-checkbox-label"),
+            "@checkbox-active-border-radius": constant("border-radius", ".k-checkbox-label"),
+            "@checkbox-active-border-radius-after": constant("border-radius", ".k-checkbox-label"),
+            "@checkbox-active-box-shadow": constant("box-shadow", ".k-checkbox-label"),
+
+            "@checkbox-checked-active-border-radius-before": constant("border-radius", ".k-checkbox-label"),
+            "@checkbox-checked-active-box-shadow": constant("box-shadow", ".k-checkbox-label"),
+
+            "@checkbox-checked-disabled-color-after": constant(COLOR, ".k-checkbox-label"),
+            "@checkbox-disabled-background-color-after": constant(BORDERCOLOR, ".k-checkbox-label"),
+            "@checkbox-disabled-color": constant(COLOR, ".k-checkbox-label"),
+            "@checkbox-disabled-box-shadow": constant("box-shadow", ".k-checkbox-label"),
+            "@checkbox-disabled-border-color-before": constant(BORDERCOLOR, ".k-checkbox-label"),
+
+            "@radio-border-color-before": constant(BORDERCOLOR, ".k-radio-label"),
+            "@radio-background-color": constant(BGCOLOR, ".k-radio-label"),
+            "@radio-border-width-before": constant("border-width", ".k-radio-label"),
+            "@radio-hover-border-color": constant(BORDERCOLOR, ".k-radio-label"),
+            "@radio-hover-box-shadow": constant("box-shadow", ".k-radio-label"),
+
+            "@radio-checked-border-color-before": constant(BORDERCOLOR, ".k-radio-label"),
+            "@radio-checked-background-color-after": constant(BGCOLOR, ".k-radio-label"),
+            "@radio-active-border-color-before": constant(BORDERCOLOR, ".k-radio-label"),
+            "@radio-active-box-shadow": constant("box-shadow", ".k-radio-label"),
+
+            "@radio-checked-active-border-color-before": constant(BORDERCOLOR, ".k-radio-label"),
+            "@radio-checked-active-box-shadow": constant("box-shadow", ".k-radio-label"),
+
+            "@radio-disabled-background-color-after": constant(BGCOLOR, ".k-radio-label"),
+            "@radio-disabled-color": constant(BORDERCOLOR, ".k-radio-label"),
+            "@radio-disabled-box-shadow": constant("box-shadow", ".k-radio-label"),
+            "@radio-disabled-background-color-before": constant(BGCOLOR, ".k-radio-label"),
 
         },
         datavizConstants = {
