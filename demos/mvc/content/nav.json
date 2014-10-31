@@ -3875,7 +3875,7 @@
       {
         "text": "Keyboard navigation",
         "disableInMobile": true,
-        "url": "slider/keyboard-navigation"
+        "url": "slider/keyboard-navigation",
 		"title": {
             "kendo-ui": "Keyboard navigation in Kendo UI Slider | Kendo UI Web Demos",
 			"aspnet-mvc": "Keyboard navigation in ASP.NET MVC Slider | ASP.NET MVC Demo"
