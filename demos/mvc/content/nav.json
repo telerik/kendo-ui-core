@@ -6708,8 +6708,8 @@
 			"aspnet-mvc": "Local data binding mode in ASP.NET MVC Bubble chart control"
         },
         "meta": {
-            "kendo-ui": "This demo illustrates the powerful "Binding to local data" feature, supported in Kendo UI Bubble Chart widget.",
-			"aspnet-mvc": "This demo illustrates the powerful "Binding to local data" feature, supported in ASP.NET MVC Bubble Chart component."
+            "kendo-ui": "This demo illustrates the powerful Binding to local data feature, supported in Kendo UI Bubble Chart widget.",
+			"aspnet-mvc": "This demo illustrates the powerful Binding to local data feature, supported in ASP.NET MVC Bubble Chart component."
         }
       },
       {
