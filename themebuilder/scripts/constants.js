@@ -374,8 +374,7 @@
             "@radio-disabled-background-color-after": constant(BGCOLOR, ".k-radio-label"),
             "@radio-disabled-color": constant(BORDERCOLOR, ".k-radio-label"),
             "@radio-disabled-box-shadow": constant("box-shadow", ".k-radio-label"),
-            "@radio-disabled-background-color-before": constant(BGCOLOR, ".k-radio-label"),
-
+            "@radio-disabled-background-color-before": constant(BGCOLOR, ".k-radio-label")
         },
         datavizConstants = {
             "chart.title.color":                          constant(COLOR),
