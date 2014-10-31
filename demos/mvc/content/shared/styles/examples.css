@@ -2212,10 +2212,9 @@ ul.keyboard-legend li a {
 
 .footer-links {
     display: inline-block;
-    font-size: 11px;
     color: #fff;
-    padding: 0 8px;
-    font: 400 11px/1 Arial,Helvetica,sans-serif;
+    font: 400 12px/1.4 Arial,Helvetica,sans-serif;
+    padding: 0 1em;
     border-left: 1px solid #47494c;
 }
 
@@ -2231,9 +2230,9 @@ a.footer-links:hover,
 }
 
 .quick-links {
-     padding-top: 1.917em;
-     padding-bottom: 1em;
-     padding-left: 36px;
+     padding-top: 20px;
+     padding-bottom: 10px;
+     padding-left: 20px;
 }
 
 #telerik-logo {
@@ -2244,14 +2243,15 @@ a.footer-links:hover,
 }
 
 .copyright {
-
-    padding-left: 36px;
-    padding-bottom: 24px;
+    line-height: 1.4em;
+    padding-left: 20px;
+    padding-bottom: 20px;
 }
 
 .copyright p {
-    font-size: 11px;
-    margin-left: 35px;
+    font-size: 12px;
+    margin-left: 40px;
+    color: #818692;
 }
 
 /* Root navigation */
@@ -2609,20 +2609,22 @@ a.footer-links:hover,
     font-size: 16px;
     line-height: 16px;
     height: 1.188em;
+    text-indent: 0.75em;
 }
 
 #example-search-wrapper .k-uniE600 {
    position: absolute;
-   right: 6px;
-   top: 9px;
-   color: #000;
+   font-size: 15px;
+   right: 8px;
+   top: 7px;
+   color: #2d3e50;
 }
 
 #layout-search-wrapper .k-uniE600 {
    font-size: 16px;
    position: absolute;
    top: 13px;
-   right: 6px;
+   right: 13px;
    color: #000;
 }
 
@@ -2801,7 +2803,7 @@ a.footer-links:hover,
 
 .application {
     float: left;
-    width: 116px;
+    width: 240px;
 }
 
 h5 {
@@ -2890,7 +2892,7 @@ h5 {
 .application p {
     font-size: 13px;
     line-height: 16px;
-    height: 50px;
+    height: 20px;
     padding-top: 3px;
 }
 
@@ -3011,4 +3013,38 @@ html.k-material .demo-section.k-header {
     color: #aaa;
     font-style: italic;
     font-size: .9em;
+}
+
+@media only screen and (max-width : 1720px) {
+  .application {
+      width: 180px;
+  }
+}
+  
+@media only screen and (max-width : 1352px) {
+  #overview,
+  #applications-and-tools {
+      width: 1100px;
+      text-align: left;
+  }
+  
+  #overview-widgets h2, #most-popular h3, #most-popular .overview-col {
+      padding-left: 0;
+  }
+  
+  .application {
+      width: 240px;
+  }
+}
+
+@media only screen and (max-width : 1252px) {
+  #overview,
+  #applications-and-tools {
+      width: 940px;
+      text-align: left;
+  }
+  
+  .application {
+      width: 200px;
+  }
 }
