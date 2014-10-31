@@ -182,21 +182,7 @@
                 children = srcElement.children;
 
                 // TODO: Node registration
-                if (srcElement instanceof Path) {
-                    childNode = new PathNode(srcElement);
-                } else if (srcElement instanceof d.MultiPath) {
-                    childNode = new MultiPathNode(srcElement);
-                } else if (srcElement instanceof d.Circle) {
-                    childNode = new CircleNode(srcElement);
-                } else if (srcElement instanceof d.Arc) {
-                    childNode = new ArcNode(srcElement);
-                } else if (srcElement instanceof d.Text) {
-                    childNode = new TextNode(srcElement);
-                } else if (srcElement instanceof d.Image) {
-                    childNode = new ImageNode(srcElement);
-                } else if (srcElement instanceof d.Group) {
-                    childNode = new GroupNode(srcElement);
-                }
+                childNode = new nodeMap[srcElement.nodeType](srcElement);
 
                 if (children && children.length > 0) {
                     childNode.load(children);
@@ -571,6 +557,16 @@
 
         return promise;
     }
+
+    var nodeMap = {
+        Group: GroupNode,
+        Text: TextNode,
+        Path: PathNode,
+        MultiPath: MultiPathNode,
+        Circle: CircleNode,
+        Arc: ArcNode,
+        Image: ImageNode
+    };
 
     // Helpers ================================================================
     function addGradientStops(gradient, stops) {
