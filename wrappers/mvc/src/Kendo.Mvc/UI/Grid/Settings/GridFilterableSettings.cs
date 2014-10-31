@@ -29,7 +29,11 @@ namespace Kendo.Mvc.UI
                 json["extra"] = false;
             }
 
-            if (Mode != GridFilterMode.Menu)
+            if (Mode == (GridFilterMode.Row | GridFilterMode.Menu))
+            {
+                json["mode"] = "menu, row";
+            }
+            else if (Mode != GridFilterMode.Menu)
             {
                 json["mode"] = Mode;
             }
