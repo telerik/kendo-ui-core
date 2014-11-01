@@ -463,6 +463,16 @@
             ok(child.parent === null);
         });
 
+        test("clear does not call remove", 0, function() {
+            var child = new Element();
+            group.append(child);
+            group.remove = function() {
+                ok(false);
+            };
+
+            group.clear();
+        });
+
         test("clear is chainable", function() {
             equal(group.clear(), group);
         });

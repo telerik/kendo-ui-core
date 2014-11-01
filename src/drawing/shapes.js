@@ -297,7 +297,7 @@
 
         append: function() {
             append(this.children, arguments);
-            updateElementsParent(arguments, this);
+            this._reparent(arguments, this);
 
             this.childrenChange("add", arguments);
 
@@ -338,7 +338,7 @@
         clear: function() {
             var items = this.children;
             this.children = [];
-            updateElementsParent(items, null);
+            this._reparent(items, null);
 
             this.childrenChange("remove", items, 0);
 
@@ -359,6 +359,18 @@
 
         currentTransform: function(transformation) {
             return Element.fn.currentTransform.call(this, transformation) || null;
+        },
+
+        _reparent: function(elements, newParent) {
+            for (var i = 0; i < elements.length; i++) {
+                var child = elements[i];
+                var parent = child.parent;
+                if (parent && parent != this && parent.remove) {
+                    parent.remove(child);
+                }
+
+                child.parent = newParent;
+            }
         }
     });
     drawing.mixins.Traversable.extend(Group.fn, "children");
@@ -1051,18 +1063,6 @@
         }
 
         return boundingBox;
-    }
-
-    function updateElementsParent(elements, newParent) {
-        for (var i = 0; i < elements.length; i++) {
-            var child = elements[i];
-            var currentParent = child.parent;
-            if (currentParent && currentParent.remove) {
-                currentParent.remove(child);
-            }
-
-            child.parent = newParent;
-        }
     }
 
     function expandRect(rect, value) {
