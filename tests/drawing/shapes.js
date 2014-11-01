@@ -312,7 +312,7 @@
         });
 
         test("append removes children from old parent", function() {
-            var child = new Group();
+            var child = new Element();
             group.append(child);
 
             var group2 = new Group();
@@ -635,6 +635,16 @@
             group.append(child);
 
             ok(child.parent === group);
+        });
+
+        test("insertAt removes children from old parent", function() {
+            var child = new Element();
+            group.append(child);
+
+            var group2 = new Group();
+            group2.insertAt(child, 0);
+
+            equal(group.children.length, 3);
         });
 
         test("insertAt triggers childrenChange", function() {
