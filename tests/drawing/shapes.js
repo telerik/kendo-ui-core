@@ -311,6 +311,16 @@
             ok(child.parent === group);
         });
 
+        test("append removes children from old parent", function() {
+            var child = new Element();
+            group.append(child);
+
+            var group2 = new Group();
+            group2.append(child);
+
+            equal(group.children.length, 0);
+        });
+
         test("append triggers childrenChange", function() {
             var child = new Group();
 
@@ -451,6 +461,16 @@
             group.clear();
 
             ok(child.parent === null);
+        });
+
+        test("clear does not call remove", 0, function() {
+            var child = new Element();
+            group.append(child);
+            group.remove = function() {
+                ok(false);
+            };
+
+            group.clear();
         });
 
         test("clear is chainable", function() {
@@ -625,6 +645,16 @@
             group.append(child);
 
             ok(child.parent === group);
+        });
+
+        test("insertAt removes children from old parent", function() {
+            var child = new Element();
+            group.append(child);
+
+            var group2 = new Group();
+            group2.insertAt(child, 0);
+
+            equal(group.children.length, 3);
         });
 
         test("insertAt triggers childrenChange", function() {
