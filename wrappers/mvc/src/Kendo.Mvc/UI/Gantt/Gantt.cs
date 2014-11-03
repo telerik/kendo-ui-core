@@ -41,6 +41,8 @@ namespace Kendo.Mvc.UI
                 
             Messages = new GanttMessagesSettings();
                 
+            Toolbar = new List<GanttToolbar>();
+                
             Views = new List<GanttView>();
                 
         //<< Initialization
@@ -111,6 +113,12 @@ namespace Kendo.Mvc.UI
             set;
         }
         
+        public List<GanttToolbar> Toolbar
+        {
+            get;
+            set;
+        }
+        
         //<< Fields
 
         public override void WriteInitializationScript(TextWriter writer)
@@ -129,18 +137,13 @@ namespace Kendo.Mvc.UI
             {
                 json["autoBind"] = AutoBind;
             }
-
-            if (Editable.Enabled.HasValue && !Editable.Enabled.Value)
+                
+            var editable = Editable.ToJson();
+            if (editable.Any())
             {
-                json["editable"] = false;
-            }
-            else
-            {
-                var editable = Editable.ToJson();
-                if (editable.Any())
-                {
-                    json["editable"] = editable;
-                }
+                json["editable"] = editable;
+            } else if (Editable.Enabled != true) {
+                json["editable"] = Editable.Enabled;
             }
 
             if (Navigatable.HasValue)
@@ -193,7 +196,6 @@ namespace Kendo.Mvc.UI
             {
                 json["messages"] = messages;
             }
-                
             if (Selectable.HasValue)
             {
                 json["selectable"] = Selectable;
@@ -214,7 +216,11 @@ namespace Kendo.Mvc.UI
             {
                 json["views"] = views;
             }
-                
+            var toolbar = Toolbar.ToJson();
+            if (toolbar.Any())
+            {
+                json["toolbar"] = toolbar;
+            }
         //<< Serialization
 
             ProcessDataSource(DataSource);

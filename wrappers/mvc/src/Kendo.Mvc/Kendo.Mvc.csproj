@@ -2309,4 +2309,4 @@
     <Compile Include="UI\TreeList\TreeListToolbar.cs" />
     <Compile Include="UI\TreeList\Fluent\TreeListToolbarBuilder.cs" />
   </ItemGroup>
-</Project>
+<ItemGroup><Compile Include="UI\Gantt\Fluent\GanttToolbarFactory.cs" /><Compile Include="UI\Gantt\GanttToolbar.cs" /><Compile Include="UI\Gantt\Fluent\GanttToolbarBuilder.cs" /></ItemGroup></Project>
