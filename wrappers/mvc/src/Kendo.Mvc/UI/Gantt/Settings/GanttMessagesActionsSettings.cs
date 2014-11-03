@@ -25,6 +25,8 @@ namespace Kendo.Mvc.UI
         
         public string InsertAfter { get; set; }
         
+        public string Pdf { get; set; }
+        
         //<< Fields
 
         protected override void Serialize(IDictionary<string, object> json)
@@ -49,6 +51,11 @@ namespace Kendo.Mvc.UI
             if (InsertAfter.HasValue())
             {
                 json["insertAfter"] = InsertAfter;
+            }
+            
+            if (Pdf.HasValue())
+            {
+                json["pdf"] = Pdf;
             }
             
         //<< Serialization

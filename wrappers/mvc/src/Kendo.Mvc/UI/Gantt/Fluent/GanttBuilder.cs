@@ -272,6 +272,16 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
+        /// Configures the Kendo UI Gantt PDF export settings.
+        /// </summary>
+        /// <param name="configurator">The action that configures the pdf.</param>
+        public GanttBuilder<TTaskModel,TDependenciesModel> Pdf(Action<GanttPdfSettingsBuilder> configurator)
+        {
+            configurator(new GanttPdfSettingsBuilder(container.Pdf));
+            return this;
+        }
+
+        /// <summary>
         /// If set to false the user won't be able to select tasks in the gantt. By default selection is enabled and triggers the change event.
         /// </summary>
         /// <param name="value">The value that configures the selectable.</param>
@@ -305,18 +315,6 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// The views displayed by the gantt and their configuration. The array items can be either objects specifying the view configuration or strings representing the view types (assuming default configuration).
-		/// By default the Kendo UI Gantt widget displays all three ("day", "week", and "month") views.
-        /// </summary>
-        /// <param name="configurator">The action that configures the views.</param>
-        public GanttBuilder<TTaskModel,TDependenciesModel> Views(Action<GanttViewFactory> configurator)
-        {
-            configurator(new GanttViewFactory(container.Views));
-            return this;
-        }
-        
-        
-        /// <summary>
         /// If a String value is assigned to the toolbar configuration option, it will be treated as a single string template for the whole Gantt Toolbar,
 		/// and the string value will be passed as an argument to a kendo.template() function.If a Function value is assigned (it may be a kendo.template() function call or a generic function reference), then the return value of the function will be used to render the Gantt Toolbar contents.If an Array value is assigned, it will be treated as the list of commands displayed in the Gantt Toolbar. Commands can be custom or built-in ("append", "pdf").The "append" command adds a new task to the gantt.The "pdf" command exports the gantt in PDF format.
         /// </summary>
@@ -324,6 +322,18 @@ namespace Kendo.Mvc.UI.Fluent
         public GanttBuilder<TTaskModel,TDependenciesModel> Toolbar(Action<GanttToolbarFactory> configurator)
         {
             configurator(new GanttToolbarFactory(container.Toolbar));
+            return this;
+        }
+        
+        
+        /// <summary>
+        /// The views displayed by the Gantt and their configuration. The array items can be either objects specifying the view configuration or strings representing the view types (assuming default configuration).
+		/// By default the Kendo UI Gantt widget displays all three ("day", "week", and "month") views.
+        /// </summary>
+        /// <param name="configurator">The action that configures the views.</param>
+        public GanttBuilder<TTaskModel,TDependenciesModel> Views(Action<GanttViewFactory> configurator)
+        {
+            configurator(new GanttViewFactory(container.Views));
             return this;
         }
         

@@ -93,7 +93,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// Fired when the user selects a task in the gantt.The event handler function context (available via the this keyword) will be set to the widget instance.
+        /// Fired when the user selects a task in the Gantt.The event handler function context (available via the this keyword) will be set to the widget instance.
         /// </summary>
         /// <param name="handler">The name of the JavaScript function that will handle the change event.</param>
         public GanttEventBuilder Change(string handler)
@@ -104,7 +104,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// Fired when the user changes the selected view of the gantt.The event handler function context (available via the this keyword) will be set to the widget instance.
+        /// Fired when the user changes the selected view of the Gantt.The event handler function context (available via the this keyword) will be set to the widget instance.
         /// </summary>
         /// <param name="handler">The name of the JavaScript function that will handle the navigate event.</param>
         public GanttEventBuilder Navigate(string handler)
@@ -143,6 +143,17 @@ namespace Kendo.Mvc.UI.Fluent
         public GanttEventBuilder MoveEnd(string handler)
         {
             Handler("moveEnd", handler);
+
+            return this;
+        }
+        
+        /// <summary>
+        /// Fired when the user clicks the "Export to PDF" toolbar button.
+        /// </summary>
+        /// <param name="handler">The name of the JavaScript function that will handle the pdfExport event.</param>
+        public GanttEventBuilder PdfExport(string handler)
+        {
+            Handler("pdfExport", handler);
 
             return this;
         }

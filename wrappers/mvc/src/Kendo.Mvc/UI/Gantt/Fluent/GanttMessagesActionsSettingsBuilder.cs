@@ -20,7 +20,7 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Fields
         
         /// <summary>
-        /// The text similar to "Append" displayed as gantt "append" buttons.
+        /// The text similar to "Append" displayed as Gantt "append" buttons.
         /// </summary>
         /// <param name="value">The value that configures the append.</param>
         public GanttMessagesActionsSettingsBuilder Append(string value)
@@ -31,7 +31,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// The text similar to "Add child" displayed as gantt "add child" buttons.
+        /// The text similar to "Add child" displayed as Gantt "add child" buttons.
         /// </summary>
         /// <param name="value">The value that configures the addchild.</param>
         public GanttMessagesActionsSettingsBuilder AddChild(string value)
@@ -42,7 +42,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// The text similar to "Add above" displayed as gantt "add above" buttons.
+        /// The text similar to "Add above" displayed as Gantt "add above" buttons.
         /// </summary>
         /// <param name="value">The value that configures the insertbefore.</param>
         public GanttMessagesActionsSettingsBuilder InsertBefore(string value)
@@ -53,12 +53,23 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// The text similar to "Add below" displayed as gantt "add below" buttons.
+        /// The text similar to "Add below" displayed as Gantt "add below" buttons.
         /// </summary>
         /// <param name="value">The value that configures the insertafter.</param>
         public GanttMessagesActionsSettingsBuilder InsertAfter(string value)
         {
             container.InsertAfter = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// The text of "Export to PDF" button of the gantt toolbar.
+        /// </summary>
+        /// <param name="value">The value that configures the pdf.</param>
+        public GanttMessagesActionsSettingsBuilder Pdf(string value)
+        {
+            container.Pdf = value;
 
             return this;
         }

@@ -44,13 +44,11 @@ namespace Kendo.Mvc.UI
             {
                 json["views"] = views;
             }
-                
             var actions = Actions.ToJson();
             if (actions.Any())
             {
                 json["actions"] = actions;
             }
-                
         //<< Serialization
         }
     }

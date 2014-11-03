@@ -20,7 +20,7 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Fields
         
         /// <summary>
-        /// If set to true the gantt will display a confirmation dialog when the user deletes a task or a dependency.
+        /// If set to true the Gantt will display a confirmation dialog when the user deletes a task or a dependency.
         /// </summary>
         /// <param name="value">The value that configures the confirmation.</param>
         public GanttEditableSettingsBuilder Confirmation(bool value)

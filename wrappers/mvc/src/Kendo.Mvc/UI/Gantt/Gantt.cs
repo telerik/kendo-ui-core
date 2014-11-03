@@ -41,6 +41,8 @@ namespace Kendo.Mvc.UI
                 
             Messages = new GanttMessagesSettings();
                 
+            Pdf = new GanttPdfSettings();
+                
             Toolbar = new List<GanttToolbar>();
                 
             Views = new List<GanttView>();
@@ -101,19 +103,25 @@ namespace Kendo.Mvc.UI
             set;
         }
         
+        public GanttPdfSettings Pdf
+        {
+            get;
+            set;
+        }
+        
         public bool? Selectable { get; set; }
         
         public bool? ShowWorkDays { get; set; }
         
         public bool? ShowWorkHours { get; set; }
         
-        public List<GanttView> Views
+        public List<GanttToolbar> Toolbar
         {
             get;
             set;
         }
         
-        public List<GanttToolbar> Toolbar
+        public List<GanttView> Views
         {
             get;
             set;
@@ -196,6 +204,11 @@ namespace Kendo.Mvc.UI
             {
                 json["messages"] = messages;
             }
+            var pdf = Pdf.ToJson();
+            if (pdf.Any())
+            {
+                json["pdf"] = pdf;
+            }
             if (Selectable.HasValue)
             {
                 json["selectable"] = Selectable;
@@ -211,15 +224,15 @@ namespace Kendo.Mvc.UI
                 json["showWorkHours"] = ShowWorkHours;
             }
                 
-            var views = Views.ToJson();
-            if (views.Any())
-            {
-                json["views"] = views;
-            }
             var toolbar = Toolbar.ToJson();
             if (toolbar.Any())
             {
                 json["toolbar"] = toolbar;
+            }
+            var views = Views.ToJson();
+            if (views.Any())
+            {
+                json["views"] = views;
             }
         //<< Serialization
 

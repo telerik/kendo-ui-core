@@ -20,7 +20,7 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Fields
         
         /// <summary>
-        /// The text similar to "Day" displayed as gantt "day" view title.
+        /// The text similar to "Day" displayed as Gantt "day" view title.
         /// </summary>
         /// <param name="value">The value that configures the day.</param>
         public GanttMessagesViewsSettingsBuilder Day(string value)
@@ -31,7 +31,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// The text similar to "Week" displayed as gantt "week" view title.
+        /// The text similar to "Week" displayed as Gantt "week" view title.
         /// </summary>
         /// <param name="value">The value that configures the week.</param>
         public GanttMessagesViewsSettingsBuilder Week(string value)
@@ -42,7 +42,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// The text similar to "Month" displayed as gantt "month" view title.
+        /// The text similar to "Month" displayed as Gantt "month" view title.
         /// </summary>
         /// <param name="value">The value that configures the month.</param>
         public GanttMessagesViewsSettingsBuilder Month(string value)

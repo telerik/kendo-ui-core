@@ -2309,4 +2309,15 @@
     <Compile Include="UI\TreeList\TreeListToolbar.cs" />
     <Compile Include="UI\TreeList\Fluent\TreeListToolbarBuilder.cs" />
   </ItemGroup>
-<ItemGroup><Compile Include="UI\Gantt\Fluent\GanttToolbarFactory.cs" /><Compile Include="UI\Gantt\GanttToolbar.cs" /><Compile Include="UI\Gantt\Fluent\GanttToolbarBuilder.cs" /></ItemGroup></Project>
+	<ItemGroup>
+		<Compile Include="UI\Gantt\Fluent\GanttToolbarFactory.cs" />
+		<Compile Include="UI\Gantt\GanttToolbar.cs" />
+		<Compile Include="UI\Gantt\Fluent\GanttToolbarBuilder.cs" />
+	</ItemGroup>
+	<ItemGroup>
+		<Compile Include="UI\Gantt\Settings\GanttPdfSettings.cs" />
+		<Compile Include="UI\Gantt\Fluent\GanttPdfSettingsBuilder.cs" />
+		<Compile Include="UI\Gantt\Settings\GanttPdfMarginSettings.cs" />
+		<Compile Include="UI\Gantt\Fluent\GanttPdfMarginSettingsBuilder.cs" />
+	</ItemGroup>
+</Project>
