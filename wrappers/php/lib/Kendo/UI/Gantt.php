@@ -110,7 +110,7 @@ instance.If the dependencies option is set to a JavaScript object or array the w
     }
 
     /**
-    * If set to true the gantt will snap tasks to the nearest slot during dragging (resizing or moving). Set it to false to allow free moving and resizing of tasks.
+    * If set to true the Gantt will snap tasks to the nearest slot during dragging (resizing or moving). Set it to false to allow free moving and resizing of tasks.
     * @param boolean $value
     * @return \Kendo\UI\Gantt
     */
@@ -137,7 +137,7 @@ instance.If the dependencies option is set to a JavaScript object or array the w
     }
 
     /**
-    * The configuration of the gantt messages. Use this option to customize or localize the gantt messages.
+    * The configuration of the Gantt messages. Use this option to customize or localize the Gantt messages.
     * @param \Kendo\UI\GanttMessages|array $value
     * @return \Kendo\UI\Gantt
     */
@@ -146,7 +146,7 @@ instance.If the dependencies option is set to a JavaScript object or array the w
     }
 
     /**
-    * If set to false the user won't be able to select tasks in the gantt. By default selection is enabled and triggers the change event.
+    * If set to false the user won't be able to select tasks in the Gantt. By default selection is enabled and triggers the change event.
     * @param boolean $value
     * @return \Kendo\UI\Gantt
     */
@@ -155,7 +155,7 @@ instance.If the dependencies option is set to a JavaScript object or array the w
     }
 
     /**
-    * If set to false, gantt views will show all days of the week. By default the views display only business days.
+    * If set to false, Gantt views will show all days of the week. By default the views display only business days.
     * @param boolean $value
     * @return \Kendo\UI\Gantt
     */
@@ -179,6 +179,15 @@ instance.If the dependencies option is set to a JavaScript object or array the w
     */
     public function addView($value) {
         return $this->add('views', func_get_args());
+    }
+
+    /**
+    * Adds GanttToolbarItem to the Gantt.
+    * @param \Kendo\UI\GanttToolbarItem|array,... $value one or more GanttToolbarItem to add.
+    * @return \Kendo\UI\Gantt
+    */
+    public function addToolbarItem($value) {
+        return $this->add('toolbar', func_get_args());
     }
 
     /**
@@ -281,7 +290,7 @@ instance.If the dependencies option is set to a JavaScript object or array the w
 
     /**
     * Sets the change event of the Gantt.
-    * Fired when the user selects a task in the gantt.The event handler function context (available via the this keyword) will be set to the widget instance.
+    * Fired when the user selects a task in the Gantt.The event handler function context (available via the this keyword) will be set to the widget instance.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\UI\Gantt
     */
@@ -295,7 +304,7 @@ instance.If the dependencies option is set to a JavaScript object or array the w
 
     /**
     * Sets the navigate event of the Gantt.
-    * Fired when the user changes the selected view of the gantt.The event handler function context (available via the this keyword) will be set to the widget instance.
+    * Fired when the user changes the selected view of the Gantt.The event handler function context (available via the this keyword) will be set to the widget instance.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\UI\Gantt
     */
