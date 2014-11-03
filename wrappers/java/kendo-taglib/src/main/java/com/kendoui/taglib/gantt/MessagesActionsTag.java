@@ -83,6 +83,14 @@ public class MessagesActionsTag extends  BaseTag  /* interfaces */ /* interfaces
         setProperty("insertBefore", value);
     }
 
+    public java.lang.String getPdf() {
+        return (java.lang.String)getProperty("pdf");
+    }
+
+    public void setPdf(java.lang.String value) {
+        setProperty("pdf", value);
+    }
+
 //<< Attributes
 
 }

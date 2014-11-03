@@ -16006,6 +16006,11 @@ and the string value will be passed as an argument to a kendo.template() functio
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
+            <description>Fired when the user clicks the "Export to PDF" toolbar button.</description>
+            <name>pdfExport</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
             <description>Fired when the user starts to resize a task.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>resizeStart</name>
             <rtexprvalue>true</rtexprvalue>
@@ -16150,6 +16155,12 @@ which field to update. The other option is to use MVVM bindings in order to bind
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+        <attribute>
+            <description>The text of "Export to PDF" button of the gantt toolbar.</description>
+            <name>pdf</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
 
     </tag>
 
@@ -16177,6 +16188,115 @@ which field to update. The other option is to use MVVM bindings in order to bind
             <name>week</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+
+
+    <tag>
+        <description>Configures the Kendo UI Gantt PDF export settings.</description>
+        <name>gantt-pdf</name>
+        <tag-class>com.kendoui.taglib.gantt.PdfTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The author of the PDF document.</description>
+            <name>author</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The creator of the PDF document.</description>
+            <name>creator</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The date when the PDF document is created. Defaults to new Date().</description>
+            <name>date</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.Date</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the file name of the exported PDF file.</description>
+            <name>fileName</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the keywords of the exported PDF file.</description>
+            <name>keywords</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Set to true to reverse the paper dimensions if needed such that width is the larger edge.</description>
+            <name>landscape</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the paper size of the PDF document. Can be set to a predefined size, i.e. "A4", "A3" etc,
+or an array of two Number-s specifying the width/height in points (1pt = 1/72in), or strings including unit, i.e. "10mm". Supported
+units are "mm", "cm", "in" and "pt".  The default "auto" means paper size is determined by content.</description>
+            <name>paperSize</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The URL of the server side proxy which will stream the PDF file to the end user. Used when the browser isn't capable of saving files from JavaScript. Such browsers are IE&lt;10 and Safari.
+The developer is responsible for implementing the server-side proxy. Implementation instructions are available here.</description>
+            <name>proxyURL</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Sets the subject of the PDF file.</description>
+            <name>subject</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Sets the title of the PDF file.</description>
+            <name>title</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>Specifies the margins of the page (numbers or strings with units). Supported
+units are "mm", "cm", "in" and "pt" (default).</description>
+        <name>gantt-pdf-margin</name>
+        <tag-class>com.kendoui.taglib.gantt.PdfMarginTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The bottom margin. Numbers are considered as "pt" units.</description>
+            <name>bottom</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The left margin. Numbers are considered as "pt" units.</description>
+            <name>left</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The right margin. Numbers are considered as "pt" units.</description>
+            <name>right</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The top margin. Numbers are considered as "pt" units.</description>
+            <name>top</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
         </attribute>
 
     </tag>
@@ -16395,6 +16515,12 @@ By default the Kendo UI Gantt widget displays all three ("day", "week", and "mon
         <description>Fired when the user stops moving a task.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>gantt-moveEnd</name>
         <tag-class>com.kendoui.taglib.gantt.MoveEndFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the user clicks the "Export to PDF" toolbar button.</description>
+        <name>gantt-pdfExport</name>
+        <tag-class>com.kendoui.taglib.gantt.PdfExportFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
