@@ -146,6 +146,15 @@ instance.If the dependencies option is set to a JavaScript object or array the w
     }
 
     /**
+    * Configures the Kendo UI Gantt PDF export settings.
+    * @param \Kendo\UI\GanttPdf|array $value
+    * @return \Kendo\UI\Gantt
+    */
+    public function pdf($value) {
+        return $this->setProperty('pdf', $value);
+    }
+
+    /**
     * If set to false the user won't be able to select tasks in the Gantt. By default selection is enabled and triggers the change event.
     * @param boolean $value
     * @return \Kendo\UI\Gantt
@@ -173,21 +182,21 @@ instance.If the dependencies option is set to a JavaScript object or array the w
     }
 
     /**
-    * Adds GanttView to the Gantt.
-    * @param \Kendo\UI\GanttView|array,... $value one or more GanttView to add.
-    * @return \Kendo\UI\Gantt
-    */
-    public function addView($value) {
-        return $this->add('views', func_get_args());
-    }
-
-    /**
     * Adds GanttToolbarItem to the Gantt.
     * @param \Kendo\UI\GanttToolbarItem|array,... $value one or more GanttToolbarItem to add.
     * @return \Kendo\UI\Gantt
     */
     public function addToolbarItem($value) {
         return $this->add('toolbar', func_get_args());
+    }
+
+    /**
+    * Adds GanttView to the Gantt.
+    * @param \Kendo\UI\GanttView|array,... $value one or more GanttView to add.
+    * @return \Kendo\UI\Gantt
+    */
+    public function addView($value) {
+        return $this->add('views', func_get_args());
     }
 
     /**
@@ -356,6 +365,20 @@ instance.If the dependencies option is set to a JavaScript object or array the w
         }
 
         return $this->setProperty('moveEnd', $value);
+    }
+
+    /**
+    * Sets the pdfExport event of the Gantt.
+    * Fired when the user clicks the "Export to PDF" toolbar button.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\UI\Gantt
+    */
+    public function pdfExport($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('pdfExport', $value);
     }
 
     /**
