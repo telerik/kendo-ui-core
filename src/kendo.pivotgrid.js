@@ -1110,11 +1110,81 @@ var __meta__ = {
             return this._processResult(newData, axes);
         },
 
+        _createRoot: function(tuple) {
+            var name;
+            var member;
+            var parentName;
+            var members = tuple.members;
+            var root = { members: [] };
+            var levelNum;
+
+            for (var idx = 0; idx < members.length; idx++) {
+                member = members[idx];
+                levelNum = Number(member.levelNum);
+                parentName = member.parentName;
+
+                if (levelNum === 0) {
+                    parentName = member.name;
+                } else {
+                    levelNum -= 1;
+                }
+
+                root.members.push({
+                    children: [],
+                    caption: "All", //TODO: find a way to get proper caption ???
+                    name: parentName,
+                    levelName: parentName,
+                    levelNum: levelNum.toString(),
+                    hasChildren: true,
+                    hierarchy: parentName
+                });
+            }
+
+            return root;
+        },
+
+        _hasRoot: function(source, target) {
+            if (source.length) {
+                return findExistingTuple(source, target).tuple;
+            }
+
+            var members = target.members;
+            var member;
+
+            var isRoot = true;
+            var levelNum;
+
+            for (var idx = 0, length = members.length; idx < length; idx++) {
+                member = members[idx];
+                levelNum = Number(member.levelNum) || 0;
+
+                if (levelNum !== 0) {
+                    isRoot = false;
+                    break;
+                }
+            }
+
+            return isRoot;
+        },
+
+        _normalizeTuples: function(tuples, source) {
+            if (!tuples.length) {
+                return;
+            }
+
+            if (!this._hasRoot(source, tuples[0])) {
+                tuples.splice(0, 0, this._createRoot(tuples[0]));
+            }
+        },
+
         _mergeAxes: function(sourceAxes, data, axisToSkip) {
             var columnMeasures = this._columnMeasures();
             var rowMeasures = this._rowMeasures();
             var axes = this.axes();
             var startIndex, tuples;
+
+            this._normalizeTuples(sourceAxes.columns.tuples, axes.columns.tuples);
+            this._normalizeTuples(sourceAxes.rows.tuples, axes.rows.tuples);
 
             var newRowsLength = sourceAxes.rows.tuples.length;
             var oldColumnsLength = membersCount(axes.columns.tuples, columnMeasures);
