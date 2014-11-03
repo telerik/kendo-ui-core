@@ -4213,15 +4213,7 @@ var __meta__ = {
 
         svg: function() {
             if (draw.svg.Surface) {
-                var surface = new draw.svg.Surface($("<div />"), {
-                    encodeText: true
-                });
-
-                surface.draw(this.exportVisual());
-                var svg = surface.svg();
-                surface.destroy();
-
-                return svg;
+                return draw.svg._exportGroup(this.exportVisual());
             } else {
                 throw new Error("SVG Export failed. Unable to export instantiate kendo.drawing.svg.Surface");
             }
