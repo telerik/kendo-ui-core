@@ -1931,17 +1931,6 @@
         }
       },
       {
-        "text": "Multi-column headers",
-        "url": "grid/multicolumnheaders",
-        "new": true,
-        "title": {
-            "kendo-ui": "Multiple column headers in Kendo UI Grid control | Kendo UI Web demo"
-        },
-        "meta": {
-            "kendo-ui": "This demo shows multiple column headers feature of KendoGrid control."
-        }
-      },
-      {
         "text": "Column reordering",
         "url": "grid/column-reordering",
         "title": {
@@ -2037,17 +2026,6 @@
         "meta": {
             "kendo-ui": "This demo shows how API Functions can manipulate the contents and behavior of Kendo UI Grid widget.",
 			"aspnet-mvc": "See how the powerful and comprehensive API Functions allow you to manipulate the contents and behavior of the Telerik ASP.NET MVC Grid."
-        }
-      },
-       {
-        "text": "Persist state",
-        "url": "grid/persist-state",
-        "new": true,
-        "title": {
-            "kendo-ui": "KendoGrid Persist State API Demo"
-        },
-        "meta": {
-            "kendo-ui": "This demo shows how setOptions and getOptions methods can manipulate the state of Kendo UI Grid widget."
         }
       },
        {
