@@ -1451,7 +1451,7 @@ var __meta__ = {
             var template = command.template || BUTTON_TEMPLATE;
             var messages = this.options.messages.actions;
             var commandName = typeof command === STRING ? command : command.name || command.text;
-            var className = defaultCommands[commandName] ? defaultCommands[commandName].className : "";
+            var className = defaultCommands[commandName] ? defaultCommands[commandName].className : "k-gantt-" + (commandName || "").replace(/\s/g, "");
             var options = { 
                 iconClass: "",
                 action: "",
