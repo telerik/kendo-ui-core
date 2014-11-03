@@ -136,6 +136,7 @@ var __meta__ = {
             actions: "k-gantt-actions",
             button: "k-button k-button-icontext",
             iconPlus: "k-icon k-i-plus",
+            iconPdf: "k-icon k-i-pdf",
             viewButtonDefault: "k-state-default",
             viewButton: "k-view",
             link: "k-link",
@@ -237,7 +238,7 @@ var __meta__ = {
         pdf: {
             text: "Export to PDF",
             className: ganttStyles.toolbar.pdfButton,
-            iconClass: ganttStyles.toolbar.iconPlus
+            iconClass: ganttStyles.toolbar.iconPdf
         }
     };
 
