@@ -846,9 +846,15 @@ var __meta__ = {
         }
     });
 
-    defadvice("ui.Select", "$angular_setLogicValue", function(orig){
+    defadvice("ui.Select", "$angular_setLogicValue", function(val){
         var self = this.self;
-        var val = orig != null ? orig[self.options.dataValueField || self.options.dataTextField] : null;
+        var options = self.options;
+        var valueField = options.dataValueField;
+
+        if (valueField && !options.valuePrimitive) {
+            val = val != null ? val[options.dataValueField || options.dataTextField] : null;
+        }
+
         self.value(val);
     });
 
