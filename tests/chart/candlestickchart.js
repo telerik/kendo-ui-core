@@ -1,5 +1,4 @@
 (function() {
-    return;
 
     var dataviz = kendo.dataviz,
         Box2D = dataviz.Box2D,
@@ -7,22 +6,36 @@
         chartBox = new Box2D(0, 0, 800, 600),
         candlestickChart,
         root,
-        view,
         firstPoint,
+        firstLine,
+        pointBody,
         TOLERANCE = 1;
 
     function setupCandlestickChart(plotArea, options) {
-        view = new ViewStub();
 
         candlestickChart = new dataviz.CandlestickChart(plotArea, options);
 
         root = new dataviz.RootElement();
         root.append(candlestickChart);
-
-        candlestickChart.reflow();
-        candlestickChart.getViewElements(view);
+        root.box = chartBox.clone();
+        candlestickChart.reflow(chartBox);
+        root.renderVisual();
 
         firstPoint = candlestickChart.points[0];
+        firstLine = getLine(getMainGroup(firstPoint));
+        pointBody = getBody(getMainGroup(firstPoint));
+    }
+
+    function getMainGroup(point) {
+        return point.visual.children[0];
+    }
+
+    function getLine(group) {
+        return group.children[2];
+    }
+
+    function getBody(group) {
+        return group.children[0];
     }
 
     function stubPlotArea(getCategorySlot, getValueSlot, options) {
@@ -221,30 +234,30 @@
         });
 
         test("sets line width", function() {
-            equal(view.log.path[0].style.strokeWidth, 4);
+            equal(firstLine.options.stroke.width, 4);
         });
 
         test("sets line color", function() {
-            equal(view.log.path[0].style.stroke, "lineColor");
+            equal(firstLine.options.stroke.color, "lineColor");
         });
 
         test("sets line opacity", function() {
-            equal(view.log.path[0].style.strokeOpacity, 0.5);
+            equal(firstLine.options.stroke.opacity, 0.5);
         });
 
         test("sets line dashType", function() {
-            equal(view.log.path[0].style.dashType, "dot");
+            equal(firstLine.options.stroke.dashType, "dot");
         });
 
         test("sets rect border", function() {
-            equal(view.log.rect[0].style.strokeWidth, 2);
-            equal(view.log.rect[0].style.stroke, "borderColor");
-            equal(view.log.rect[0].style.strokeOpacity, 0.2);
-            equal(view.log.rect[0].style.dashType, "dot");
+            equal(pointBody.options.stroke.width, 2);
+            equal(pointBody.options.stroke.color, "borderColor");
+            equal(pointBody.options.stroke.opacity, 0.2);
+            equal(pointBody.options.stroke.dashType, "dot");
         });
 
         test("sets rect color(open < close)", function() {
-            equal(view.log.rect[0].style.fill, "rectColor");
+            equal(pointBody.options.fill.color, "rectColor");
         });
 
         test("sets rect down body color(open > close)", function() {
@@ -256,7 +269,7 @@
                 }]
             });
 
-            equal(view.log.rect[0].style.fill, "downColor");
+            equal(pointBody.options.fill.color, "downColor");
         });
 
         test("sets rect default color if down color is null or empty(open > close)", function() {
@@ -269,39 +282,15 @@
                 }]
             });
 
-            equal(view.log.rect[0].style.fill, "color");
+            equal(pointBody.options.fill.color, "color");
         });
 
-        test("overlay rect has same model id as its segment", function() {
-            equal(view.log.rect[1].style.data.modelId, candlestickChart.points[0].modelId);
-        });
-
-        test("generates unique id", function() {
-            ok(candlestickChart.id);
-        });
-
-        test("renders group with CandlestickChart id and no animations", function() {
-            var group = view.findInLog("group", function(item) {
-                return item.options.id === candlestickChart.id;
-            });
-
-            ok(group && !group.options.animation);
-            equal(group.options.id, candlestickChart.id);
-        });
-
-        test("renders chart group", function() {
-            var group = view.findInLog("group", function(item) {
-                return item.options.animation;
-            });
-            ok(group);
-        });
-
-        test("sets group animation", function() {
-            var group = view.findInLog("group", function(item) {
-                return item.options.animation;
-            });
-            equal(group.options.animation.type, "clip");
-        });
+        // test("creates animation", function() {
+            // var group = view.findInLog("group", function(item) {
+                // return item.options.animation;
+            // });
+            // equal(group.options.animation.type, "clip");
+        // });
 
         // ------------------------------------------------------------
         module("Candlestick Chart / Rendering / Highlight", {
@@ -313,92 +302,84 @@
             teardown: destroyChart
         });
 
-        test("overlay elements have same model id", function() {
-            var group = firstPoint.highlightOverlay(view);
-            for (var i = 0; i < group.children.length; i++) {
-                var element = group.children[i];
-                equal(element.options.data.modelId, firstPoint.modelId);
-            };
+        test("createHighlight renders default border width", function() {
+            var rect = getBody(firstPoint.createHighlight());
+
+            equal(rect.options.stroke.width, 1);
         });
 
-        test("highlightOverlay renders default border width", function() {
-            var rect = firstPoint.highlightOverlay(view).children[0];
-
-            equal(rect.options.strokeWidth, 1);
-        });
-
-        test("highlightOverlay renders custom border width", function() {
+        test("createHighlight renders custom border width", function() {
             firstPoint.options.highlight.border.width = 2;
-            var rect = firstPoint.highlightOverlay(view).children[0];
+            var rect = getBody(firstPoint.createHighlight());
 
-            equal(rect.options.strokeWidth, 2);
+            equal(rect.options.stroke.width, 2);
         });
 
-        test("highlightOverlay renders default border color (computed)", function() {
+        test("createHighlight renders default border color (computed)", function() {
             firstPoint.color = "#ffffff";
-            var rect = firstPoint.highlightOverlay(view).children[0];
+            var rect = getBody(firstPoint.createHighlight());
 
-            equal(rect.options.stroke, "#cccccc");
+            equal(rect.options.stroke.color, "#cccccc");
         });
 
-        test("highlightOverlay renders custom border color", function() {
+        test("createHighlight renders custom border color", function() {
             firstPoint.options.border.color = "red";
-            var rect = firstPoint.highlightOverlay(view).children[0];
+            var rect = getBody(firstPoint.createHighlight());
 
-            equal(rect.options.stroke, "red");
+            equal(rect.options.stroke.color, "red");
         });
 
-        test("highlightOverlay renders default border opacity", function() {
-            var rect = firstPoint.highlightOverlay(view).children[0];
+        test("createHighlight renders default border opacity", function() {
+            var rect = getBody(firstPoint.createHighlight());
 
-            equal(rect.options.strokeOpacity, 1);
+            equal(rect.options.stroke.opacity, 1);
         });
 
-        test("highlightOverlay renders custom border opacity", function() {
+        test("createHighlight renders custom border opacity", function() {
             firstPoint.options.highlight.border.opacity = 0.5;
-            var rect = firstPoint.highlightOverlay(view).children[0];
+            var rect = getBody(firstPoint.createHighlight());
 
-            equal(rect.options.strokeOpacity, 0.5);
+            equal(rect.options.stroke.opacity, 0.5);
         });
 
-        test("highlightOverlay renders default border width", function() {
-            var rect = firstPoint.highlightOverlay(view).children[0];
+        test("createHighlight renders default border width", function() {
+            var rect = getBody(firstPoint.createHighlight());
 
-            equal(rect.options.strokeWidth, 1);
+            equal(rect.options.stroke.width, 1);
         });
 
-        test("highlightOverlay renders custom line width", function() {
+        test("createHighlight renders custom line width", function() {
             firstPoint.options.highlight.line.width = 2;
-            var line = firstPoint.highlightOverlay(view).children[1];
+            var line = getLine(firstPoint.createHighlight());
 
-            equal(line.options.strokeWidth, 2);
+            equal(line.options.stroke.width, 2);
         });
 
-        test("highlightOverlay renders default line color (computed)", function() {
+        test("createHighlight renders default line color (computed)", function() {
             firstPoint.color = "#ffffff";
-            var line = firstPoint.highlightOverlay(view).children[1];
+            var line = getLine(firstPoint.createHighlight());
 
-            equal(line.options.stroke, "#cccccc");
+            equal(line.options.stroke.color, "#cccccc");
         });
 
-        test("highlightOverlay renders custom line color", function() {
+        test("createHighlight renders custom line color", function() {
             firstPoint.options.highlight.line.color = "red";
-            var line = firstPoint.highlightOverlay(view).children[1];
+            var line = getLine(firstPoint.createHighlight());
 
-            equal(line.options.stroke, "red");
+            equal(line.options.stroke.color, "red");
         });
 
-        test("highlightOverlay renders default line opacity", function() {
-            var line = firstPoint.highlightOverlay(view).children[1];
+        test("createHighlight renders default line opacity", function() {
+            var line = getLine(firstPoint.createHighlight());
 
-            equal(line.options.strokeOpacity, 1);
+            equal(line.options.stroke.opacity, 1);
         });
 
-        test("highlightOverlay renders custom line opacity", function() {
+        test("createHighlight renders custom line opacity", function() {
             firstPoint.options.highlight.line.opacity = 0.5;
-            var line = firstPoint.highlightOverlay(view).children[1];
+            var line = getLine(firstPoint.createHighlight());
 
-            equal(line.options.strokeOpacity, 0.5);
+            equal(line.options.stroke.opacity, 0.5);
         });
 
     })();
@@ -581,10 +562,6 @@
             }
         });
 
-        test("is discoverable", function() {
-            ok(point.modelId);
-        });
-
         test("sets point border width", function() {
             createPoint({ border: { width: 4 } });
             equal(point.options.border.width, 4);
@@ -593,17 +570,6 @@
         test("sets point opacity", function() {
             createPoint({ opacity: 0.5 });
             deepEqual(point.options.opacity, 0.5);
-        });
-
-        test("sets point id", function() {
-            ok(point.id.length > 0);
-        });
-
-        test("point has same model id", function() {
-            view = new ViewStub();
-
-            point.getViewElements(view);
-            equal(view.log.rect[1].style.data.modelId, point.modelId);
         });
 
         test("tooltipAnchor is at top right of point", function() {
