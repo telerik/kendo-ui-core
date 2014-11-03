@@ -1,6 +1,7 @@
 (function(f, define){
     define([
-        "./util/main"
+        "./util/main",
+        "./util/base64"
     ], f);
 })(function(){
 

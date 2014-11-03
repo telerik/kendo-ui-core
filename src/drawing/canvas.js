@@ -85,7 +85,7 @@
 
             var defer = $.Deferred();
             $.when.apply($, loadingStates).done(function() {
-                root.invalidate();
+                root._invalidate();
 
                 try {
                     var data = rootElement.toDataURL();
@@ -243,7 +243,7 @@
             this.ctx = canvas.getContext("2d");
 
             this.invalidate = kendo.throttle(
-                $.proxy(this.invalidate, this),
+                $.proxy(this._invalidate, this),
                 FRAME_DELAY
             );
         },
@@ -254,7 +254,7 @@
             this.ctx = null;
         },
 
-        invalidate: function() {
+        _invalidate: function() {
             if (!this.ctx) {
                 return;
             }

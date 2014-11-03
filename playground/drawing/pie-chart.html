@@ -441,11 +441,16 @@
       <button onclick="pdf('#stock-chart')" >stock-chart</button>
       <button onclick="pdf('#water')"       >water</button>
       <button onclick="pdf('#range')"       >range</button>
+      <button onclick="pdf('body')">page</button>
       <script>
         function pdf(sel) {
-          kendo.widgetInstance($(sel)).exportPDF().then(function(data){
-            kendo.saveAs({ dataURI: data, fileName: "kendo.pdf" });
-          });
+            kendo.drawing.drawDOM($(sel))
+            .then(function(group) {
+                return kendo.drawing.exportPDF(group);
+            })
+            .done(function(data){
+                kendo.saveAs({ dataURI: data, fileName: "kendo.pdf" });
+            });
         }
       </script>
   </body>

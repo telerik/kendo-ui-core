@@ -28,6 +28,7 @@
         var defer = $.Deferred();
         element = $(element)[0];
 
+        if (element) {
         cacheImages(element, function(){
             var group = new drawing.Group();
 
@@ -45,6 +46,9 @@
             renderElement(element, group);
             defer.resolve(group);
         });
+        } else {
+            defer.reject("No element to export");
+        }
 
         return defer.promise();
     };
@@ -522,7 +526,9 @@
             }
         })();
 
-        renderContents(element, group);
+        if (!maybeRenderWidget(element, group)) {
+            renderContents(element, group);
+        }
 
         return group; // only utility functions after this line.
 
@@ -920,6 +926,22 @@
                      box.height, right.width, top.width, bottom.width,
                      inv(rTR), inv(rBR),
                      [ 0, 1, -1, 0, box.right, box.top ]);
+        }
+    }
+
+    function maybeRenderWidget(element, group) {
+        if (element.getAttribute(kendo.attr("role"))) {
+            var widget = kendo.widgetInstance($(element));
+            if (widget && widget.exportVisual) {
+                var visual = widget.exportVisual();
+
+                var bbox = element.getBoundingClientRect();
+                visual.transform(geo.transform().translate(bbox.left, bbox.top));
+
+                group.append(visual);
+
+                return true;
+            }
         }
     }
 

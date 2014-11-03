@@ -1584,6 +1584,10 @@ var __meta__ = {
         },
 
         createVisual: function() {
+            this.visual = this._render();
+        },
+
+        _render: function() {
             var that = this,
                 options = that.options,
                 value = options.value,
@@ -1597,10 +1601,10 @@ var __meta__ = {
                 result, textToDisplay,
                 textHeight;
 
-            this.visual = new draw.Group();
+            var visual = new draw.Group();
 
             that.contentBox = contentBox;
-            that._createBackground(size);
+            visual.append(that._getBackground(size));
 
             if (textOptions.visible) {
                 textToDisplay = value;
@@ -1608,22 +1612,24 @@ var __meta__ = {
                     textToDisplay += " " + encoding.checksum;
                 }
 
-                var text = that._getTextElement(textToDisplay);
+                var text = that._getText(textToDisplay);
                 textHeight = text.bbox().height();
                 barHeight -= textHeight + textMargin.top + textMargin.bottom;
 
-                this.visual.append(text);
+                visual.append(text);
             }
 
             result = encoding.encode(value, contentBox.width(), barHeight);
 
             that.barHeight = barHeight;
 
-            that._createElements(result.pattern, result.baseUnit);
+            visual.append(this._getBands(result.pattern, result.baseUnit));
+
+            return visual;
         },
 
         exportVisual: function() {
-            return this.visual;
+            return this._render();
         },
 
         _getSize: function() {
@@ -1656,13 +1662,14 @@ var __meta__ = {
             that.redraw();
         },
 
-        _createElements: function (pattern, baseUnit) {
+        _getBands: function (pattern, baseUnit) {
             var that = this,
                 contentBox = that.contentBox,
                 position = contentBox.x1,
                 step,
                 item;
 
+            var group = new draw.Group();
             for (var i = 0; i < pattern.length; i++) {
                 item = isPlainObject(pattern[i]) ? pattern[i] : {
                     width: pattern[i],
@@ -1685,14 +1692,16 @@ var __meta__ = {
                         stroke: null
                     });
 
-                    this.visual.append(path);
+                    group.append(path);
                 }
 
                 position += step;
             }
+
+            return group;
         },
 
-        _createBackground: function (size) {
+        _getBackground: function (size) {
             var that = this,
                 options = that.options,
                 border = options.border || {};
@@ -1709,10 +1718,10 @@ var __meta__ = {
                 }
             });
 
-            this.visual.append(path);
+            return path;
         },
 
-        _getTextElement: function(value) {
+        _getText: function(value) {
             var that = this,
                 textOptions = that.options.text,
                 text = new TextBox(value, {

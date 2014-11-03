@@ -3,23 +3,33 @@
     var container;
     var drawing = kendo.drawing;
 
-    module("drawDOM tests", {
+    module("[drawDOM]", {
         setup: function() {
-            container = $("<div style='position: absolute !important; left: 0 !important; top: 0 !important;' />").appendTo(QUnit.fixture);
+            container = createContainer();
         },
         teardown: function() {
             container.remove();
         }
     });
 
-    test("[drawDOM] jQuery element", function(){
+    test("Draws jQuery element", function(){
         container.html("<span style='font: bold 16px monospace'>Foo bar</span>");
         drawing.drawDOM(container).done(function(group){
             ok(true);
         });
     });
 
-    test("[drawDOM] simple text node", function(){
+    test("Fails with no element", function(){
+        drawing.drawDOM($())
+        .fail(function() {
+            ok(true);
+        })
+        .done(function(group){
+            ok(false, "Should fail");
+        });
+    });
+
+    test("Draws simple text node", function(){
         container.html("<span style='font: bold 16px monospace'>Foo bar</span>");
         drawing.drawDOM(container[0]).done(function(group){
             var text = find(group, function(node){
@@ -33,7 +43,7 @@
         });
     });
 
-    test("[drawDOM] CSS borders", function(){
+    test("CSS borders", function(){
         container.html("<div style='border: 2px solid red; width: 100px; height: 200px'></div>");
         drawing.drawDOM(container[0]).done(function(group){
             // a simple border where all edges have the same colors, widths and no corner radiuses
@@ -65,7 +75,75 @@
         });
     });
 
+    // ------------------------------------------------------------
+    (function() {
+        var container;
+        var element;
+        var widget;
+
+        module("[drawDOM] / Exportable Widgets", {
+            setup: function() {
+                container = createContainer();
+                element = $("<div />").kendoExportable().appendTo(container);
+                widget = element.getKendoExportable();
+            },
+            teardown: function() {
+                container.remove();
+            }
+        });
+
+        test("calls exportVisual", function(){
+            widget.exportVisual = function() {
+                ok(true);
+                return new drawing.Group();
+            };
+
+            drawing.drawDOM(container);
+        });
+
+        test("appends exportVisual result", function(){
+            drawing.drawDOM(container).done(function(group) {
+                ok(group.children[0] instanceof drawing.Group);
+            });
+        });
+
+        test("positions widget", function(){
+            element.css({
+                position: "absolute",
+                left: "50px",
+                top: "100px"
+            });
+
+            drawing.drawDOM(container).done(function(group) {
+                deepEqual(group.bbox().origin.toArray(), [50, 100]);
+            });
+        });
+
+        test("ignores children", function(){
+            element.append($("<div>Foo</div>"));
+
+            drawing.drawDOM(container).done(function(group) {
+                equal(group.children.length, 1);
+            });
+        });
+    })();
+
     /* -----[ utils ]----- */
+
+    var Exportable = kendo.ui.Widget.extend({
+        options: {
+            name: "Exportable"
+        },
+
+        exportVisual: function() {
+            var path = new drawing.Path().moveTo(0, 0).lineTo(1, 1);
+            var group = new drawing.Group();
+            group.append(path);
+
+            return group;
+        }
+    });
+    kendo.ui.plugin(Exportable);
 
     function find(group, predicate) {
         return findMany(group, predicate)[0];
@@ -82,6 +160,10 @@
             }
         })(group);
         return result;
+    }
+
+    function createContainer() {
+        return $("<div style='position: absolute !important; left: 0 !important; top: 0 !important;' />").appendTo(QUnit.fixture);
     }
 
 })();

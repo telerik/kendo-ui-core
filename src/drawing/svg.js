@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./shapes" ], f);
+    define([ "./shapes", "../kendo.util" ], f);
 })(function(){
 
 (function ($) {
@@ -98,7 +98,8 @@
 
         _template: renderTemplate(
             "<svg style='width: 100%; height: 100%; overflow: hidden;' " +
-            "xmlns='" + SVG_NS + "' version='1.1'>#= d._root.render() #</svg>"
+            "xmlns='" + SVG_NS + "' " + "xmlns:xlink='http://www.w3.org/1999/xlink' " +
+            "version='1.1'>#= d._root.render() #</svg>"
         )
     });
 
@@ -1095,12 +1096,18 @@
     }
 
     function exportSVG(group, options) {
-        var surface = new Surface($("<div />"), { encodeText: true });
-        surface.draw(group);
+        var root = new RootNode({ encodeText: true });
+        root.load([group]);
 
-        var svg = surface.svg();
+        var svg = "<?xml version='1.0' ?>" +
+                  "<svg style='width: 100%; height: 100%; overflow: hidden;' " +
+                  "xmlns='" + SVG_NS + "' " + "xmlns:xlink='http://www.w3.org/1999/xlink' " +
+                  "version='1.1'>" + root.render() + "</svg>";
+
+        root.destroy();
+
         if (!options || !options.raw) {
-            svg = "data:image/svg+xml;chartset=UTF-8," + svg;
+            svg = "data:image/svg+xml;base64," + util.encodeBase64(svg);
         }
 
         return $.Deferred().resolve(svg).promise();

@@ -64,6 +64,12 @@ function exportTests(name, createWidget) {
 
     test("exportSVG exports SVG", function() {
         widget.exportSVG().done(function(svg) {
+            contains(svg, "data:image/svg+xml;base64,");
+        });
+    });
+
+    test("exportSVG exports raw SVG", function() {
+        widget.exportSVG({ raw: true }).done(function(svg) {
             contains(svg, "<?xml version='1.0' ?><svg");
         });
     });
