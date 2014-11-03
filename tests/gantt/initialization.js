@@ -125,13 +125,13 @@
     test("toolbar action button is added", function () {
         var gantt = new Gantt(element);
 
-        ok(gantt.toolbar.find(".k-gantt-actions").length);
+        ok(gantt.toolbar.find(".k-gantt-actions").children().length);
     });
 
     test("toolbar action button are not added when non editable", function() {
         var gantt = new Gantt(element, { editable: false });
 
-        equal(gantt.toolbar.find(".k-gantt-actions").length, 0);
+        equal(gantt.toolbar.find(".k-gantt-actions").children().length, 0);
     });
 
     test("toolbar action button's elements are rendered", 4, function () {
@@ -206,6 +206,39 @@
         });
 
         equal(gantt.footer.find(".k-gantt-actions > button").text(), "bar");
+    });
+
+    test("toolbar set as string is rendered", function() {
+        var gantt = new Gantt(element, { toolbar: "<div class='customToolbarItem' />" });
+
+        equal(gantt.toolbar.find(".k-gantt-actions").children(".customToolbarItem").length, 1);
+    });
+
+    test("toolbar set as function is rendered", function() {
+        var gantt = new Gantt(element, { toolbar: kendo.template("<div class='customToolbarItem' />") });
+
+        equal(gantt.toolbar.find(".k-gantt-actions").children(".customToolbarItem").length, 1);
+    });
+
+    test("toolbar set as array predefined commands are rendered", function() {
+        var gantt = new Gantt(element, { toolbar: ["append"] });
+
+        equal(gantt.toolbar.find(".k-gantt-actions").children("button.k-gantt-create").length, 1);
+    });
+
+    test("toolbar set as array custom commands as string are rendered", function() {
+        var gantt = new Gantt(element, { toolbar: ["customCommand"] });
+
+        equal(gantt.toolbar.find(".k-gantt-actions").children("button.k-button").length, 1);
+        equal(gantt.toolbar.find(".k-gantt-actions").children("button.k-button").text(), "customCommand");
+    });
+
+    test("toolbar set as array custom commands as object are rendered", function() {
+        var gantt = new Gantt(element, { toolbar: [{ name: "customCommand", className: "customClass", iconClass: "customIconClass" }] });
+
+        equal(gantt.toolbar.find(".k-gantt-actions").children("button.customClass").length, 1);
+        equal(gantt.toolbar.find(".k-gantt-actions").children("button.customClass").children("span.customIconClass").length, 1);
+        equal(gantt.toolbar.find(".k-gantt-actions").children("button.customClass").text(), "customCommand");
     });
 
     test("toolbar action dropDown is created", 2, function() {

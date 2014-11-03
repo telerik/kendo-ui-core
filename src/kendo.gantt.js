@@ -19,6 +19,8 @@ var __meta__ = {
     var DataSource = kendo.data.DataSource;
     var Query = kendo.data.Query;
     var isArray = $.isArray;
+    var inArray = $.inArray;
+    var isFunction = kendo.isFunction;
     var proxy = $.proxy;
     var extend = $.extend;
     var isPlainObject = $.isPlainObject;
@@ -45,19 +47,17 @@ var __meta__ = {
     var DOT = ".";
     var TASK_DELETE_CONFIRM = "Are you sure you want to delete this task?";
     var DEPENDENCY_DELETE_CONFIRM = "Are you sure you want to delete this dependency?";
+    var BUTTON_TEMPLATE = '<button class="#=styles.button# #=className#" '+
+            '#if (action) {#' +
+                'data-action="#=action#"' +
+            '#}#' + 
+        '><span class="#=iconClass#"></span>#=text#</button>';
     var COMMAND_BUTTON_TEMPLATE = '<a class="#=className#" #=attr# href="\\#">#=text#</a>';
-    var HEADER_TEMPLATE = kendo.template('<div class="#=styles.headerWrapper#">' +
-            '#if (editable) {#'+
-                '<div class="#=styles.actions#">' +
-                    '<button class="#=styles.button#" data-action="#=action.data#"><span class="#=styles.iconPlus#"></span>#=action.title#</button>' +
-                '</div>' +
+    var HEADER_VIEWS_TEMPLATE = kendo.template('<ul class="#=styles.viewsWrapper#">' +
+            '#for(var view in views){#' +
+                '<li class="#=styles.viewButtonDefault# #=styles.viewButton#-#= view.toLowerCase() #" data-#=ns#name="#=view#"><a href="\\#" class="#=styles.link#">#=views[view].title#</a></li>' +
             '#}#' +
-            '<ul class="#=styles.viewsWrapper#">' +
-                '#for(var view in views){#' +
-                    '<li class="#=styles.viewButtonDefault# #=styles.viewButton#-#= view.toLowerCase() #" data-#=ns#name="#=view#"><a href="\\#" class="#=styles.link#">#=views[view].title#</a></li>' +
-                '#}#' +
-            '</ul>' +
-        '</div>');
+        '</ul>');
     var TASK_DROPDOWN_TEMPLATE = kendo.template('<div class="#=styles.popupWrapper#">' +
             '<ul class="#=styles.popupList#" role="listbox">' +
                 '#for(var i = 0, l = actions.length; i < l; i++){#' +
@@ -138,7 +138,9 @@ var __meta__ = {
             iconPlus: "k-icon k-i-plus",
             viewButtonDefault: "k-state-default",
             viewButton: "k-view",
-            link: "k-link"
+            link: "k-link",
+            pdfButton: "k-gantt-pdf",
+            appendButton: "k-gantt-create"
         }
     };
 
@@ -225,6 +227,20 @@ var __meta__ = {
                 .add(window);
     }
 
+    var defaultCommands = {
+        append: {
+            text: "Add Task",
+            action: "add",
+            className: ganttStyles.toolbar.appendButton,
+            iconClass: ganttStyles.toolbar.iconPlus
+        },
+        pdf: {
+            text: "Export to PDF",
+            className: ganttStyles.toolbar.pdfButton,
+            iconClass: ganttStyles.toolbar.iconPlus
+        }
+    };
+
     var TaskDropDown = Observable.extend({
         init: function(element, options) {
 
@@ -299,7 +315,7 @@ var __meta__ = {
             );
 
             this.element
-                .on(CLICK + NS, "button", function(e) {
+                .on(CLICK + NS, DOT + ganttStyles.toolbar.appendButton, function(e) {
                     var target = $(this);
                     var action = target.attr(kendo.attr("action"));
 
@@ -1343,17 +1359,29 @@ var __meta__ = {
             var that = this;
             var ganttStyles = Gantt.styles;
             var viewsSelector = DOT + ganttStyles.toolbar.views + " > li";
+            var pdfSelector = DOT + ganttStyles.toolbar.pdfButton;
             var hoveredClassName = ganttStyles.hovered;
-            var toolbar = $(HEADER_TEMPLATE({
+            var actions = this.options.toolbar;
+            var actionsWrap = $("<div class='" + ganttStyles.toolbar.actions + "'>");
+            var toolbar;
+            var views;
+
+            if (!isFunction(actions)) {
+                actions = (typeof actions === STRING ? actions : this._actions(actions));
+                actions = proxy(kendo.template(actions), this);
+            }
+
+            views = $(HEADER_VIEWS_TEMPLATE({
                 ns: kendo.ns,
                 views: this.timeline.views,
-                styles: Gantt.styles.toolbar,
-                action: {
-                    data: "add",
-                    title: this.options.messages.actions.append
-                },
-                editable: this.options.editable
+                styles: ganttStyles.toolbar
             }));
+
+            actionsWrap.append(actions({}));
+
+            toolbar = $("<div class='" + ganttStyles.toolbar.headerWrapper + "'>")
+                .append(actionsWrap)
+                .append(views);
 
             this.wrapper.prepend(toolbar);
             this.toolbar = toolbar;
@@ -1367,6 +1395,9 @@ var __meta__ = {
                     if (!that.trigger("navigate", { view: name })) {
                         that.view(name);
                     }
+                })
+                .on(CLICK + NS, pdfSelector, function(e) {
+                    that.saveAsPDF();
                 });
 
             this.wrapper
@@ -1376,6 +1407,26 @@ var __meta__ = {
                 }, function() {
                     $(this).removeClass(hoveredClassName);
                 });
+        },
+
+        _actions: function() {
+            var options = this.options;
+            var actions = options.toolbar;
+            var html = "";
+
+            if (!isArray(actions)) {
+                if (options.editable) {
+                    actions = ["append"];
+                } else {
+                    return html;
+                }
+            }
+
+            for (var i = 0, length = actions.length; i < length; i++) {
+                html += this._createButton(actions[i]);
+            }
+
+            return html;
         },
 
         _footer: function() {
@@ -1393,6 +1444,36 @@ var __meta__ = {
 
             this.wrapper.append(footer);
             this.footer = footer;
+        },
+
+        _createButton: function(command) {
+            var template = command.template || BUTTON_TEMPLATE;
+            var messages = this.options.messages.actions;
+            var commandName = typeof command === STRING ? command : command.name || command.text;
+            var className = defaultCommands[commandName] ? defaultCommands[commandName].className : "";
+            var options = { 
+                iconClass: "",
+                action: "",
+                text: commandName,
+                className: className,
+                styles: Gantt.styles.toolbar
+            };
+
+            if (!commandName && !(isPlainObject(command) && command.template))  {
+                throw new Error("Custom commands should have name specified");
+            }
+
+            options = extend(true, options, defaultCommands[commandName], { text: messages[commandName] });
+
+            if (isPlainObject(command)) {
+                if (command.className && inArray(options.className, command.className.split(" ")) < 0) {
+                    command.className += " " + options.className;
+                }
+
+                options = extend(true, options, command);
+            }
+
+            return kendo.template(template)(options);
         },
 
         _adjustDimensions: function() {
@@ -1697,7 +1778,7 @@ var __meta__ = {
 
             var editor = this._editor = new PopupEditor(this.wrapper, extend({}, this.options, {
                 target: this,
-                createButton: proxy(this._createButton, this)
+                createButton: proxy(this._createPopupButton, this)
             }));
 
             editor
@@ -1729,7 +1810,7 @@ var __meta__ = {
 
         },
 
-        _createButton: function(command) {
+        _createPopupButton: function(command) {
             var commandName = command.name || command.text;
             var options = { 
                 className: Gantt.styles.popup.button + " k-gantt-" + (commandName || "").replace(/\s/g, ""),
