@@ -655,7 +655,8 @@
                 json.options.id = diagram.randomId();
 
                 if (this.diagram && this.diagram._isEditable && defined(this.options.dataItem)) {
-                    this.options.dataItem[this.options.dataItem.idField] = this.options.dataItem._defaultId;
+                    json.options.dataItem = this.options.dataItem.toJSON();
+                    json.options.dataItem[this.options.dataItem.idField] = this.options.dataItem._defaultId;
                 }
 
                 return new Shape(json.options);
@@ -2077,21 +2078,25 @@
             },
 
             _addShape: function(shape, options) {
+                var that = this;
                 if (this.dataSource && this._isEditable) {
                     if (!this.trigger("add", { shape: shape.options.dataItem })) {
                         var dataItem = this.dataSource.add(shape.options.dataItem);
+                        this.dataSource.one("sync", function() {
+                            for (var i = 0; i < that.shapes.length; i++) {
+                                var element = that.shapes[i];
+                                if (element.options.dataItem.uid === dataItem.uid) {
+                                    element.redraw(shape.options)
+                                }
+                            }
+                        });
                         this.dataSource.sync();
-                        if (shape.options.dataItem) {
-                            this._dataMap[shape.options.dataItem.id] = shape;
-                            // refresh shape.dataitem in order to get uid in copy/paste scenario
-                            shape.options.dataItem = dataItem;
-                        }
                     } else {
                         this._remove(shape, false);
                     }
+                } else {
+                    return this.addShape(shape, options);
                 }
-
-                return this.addShape(shape, options);
             },
             /**
              * Removes items (or single item) from the diagram.
@@ -2504,9 +2509,10 @@
                         }
                         copied = item.clone();
                         mapping.set(item.id, copied.id);
-                        this._addShape(copied);
                         copied.position(new Point(item.options.x + offsetX, item.options.y + offsetY));
-                        copied.select(true);
+                        copied.diagram = this;
+                        this._addShape(copied);
+                        copied.select();
                         copied.updateModel();
                     }
                     // then the connections

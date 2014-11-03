@@ -341,6 +341,7 @@
             },
 
             undo: function () {
+                this.diagram.deselect();
                 this.diagram._remove(this.shape, false);
             },
 

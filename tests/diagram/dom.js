@@ -1423,6 +1423,7 @@
 
             d = $("#canvas").getKendoDiagram();
             randomDiagram(d);
+            d._isEditable = false;
         },
         teardown: function () {
             d.destroy();
