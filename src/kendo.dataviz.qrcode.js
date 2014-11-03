@@ -939,39 +939,6 @@ var __meta__ = {
                 this.surface.draw(this.visual);
             },
 
-            svg: function() {
-                if (dataviz.SVGView) {
-                    var view = new dataviz.SVGView();
-
-                    this._redraw(view);
-
-                    return view.render();
-                } else {
-                    throw new Error("Unable to create SVGView. Check that kendo.dataviz.svg.js is loaded.");
-                }
-            },
-
-            imageDataURL: function() {
-                if (dataviz.CanvasView) {
-                    if (dataviz.supportsCanvas()) {
-                        var container = document.createElement("div"),
-                            view = new dataviz.CanvasView();
-
-                        this._redraw(view);
-
-                        return view.renderTo(container).toDataURL();
-                    } else {
-                        kendo.logToConsole(
-                            "Warning: Unable to generate image. The browser does not support Canvas.\n" +
-                            "User agent: " + navigator.userAgent);
-
-                        return null;
-                    }
-                } else {
-                    throw new Error("Unable to create CanvasView. Check that kendo.dataviz.canvas.js is loaded.");
-                }
-            },
-
             getSize: function() {
                 return kendo.dimensions(this.element);
             },
@@ -982,6 +949,10 @@ var __meta__ = {
 
             createVisual: function() {
                 this.visual = this._render();
+            },
+
+            exportVisual: function() {
+                return this._render();
             },
 
             _render: function() {
@@ -1138,6 +1109,7 @@ var __meta__ = {
             }
         });
 
+        dataviz.ExportMixin.extend(QRCode.fn);
         dataviz.ui.plugin(QRCode);
 
       kendo.deepExtend(dataviz, {
