@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.dataviz.core", "./kendo.dataviz.svg", "./kendo.dataviz.canvas" ], f);
+    define([ "./kendo.dataviz.core", "./kendo.drawing" ], f);
 })(function(){
 
 var __meta__ = {
@@ -13,6 +13,8 @@ var __meta__ = {
 (function ($, undefined) {
     var kendo = window.kendo,
         extend = $.extend,
+        geom = kendo.geometry,
+        draw = kendo.drawing,
         dataviz = kendo.dataviz,
         Widget = kendo.ui.Widget,
         Box2D = dataviz.Box2D,
@@ -917,16 +919,24 @@ var __meta__ = {
                 that.element = $(element);
                 that.wrapper = that.element;
                 that.element.addClass("k-qrcode");
-                that._view = dataviz.ViewFactory.current.create({}, that.options.renderAs);
+                that.surfaceWrap = $("<div />").css("position", "relative").appendTo(this.element);
+                that.surface = draw.Surface.create(that.surfaceWrap, {
+                    type: that.options.renderAs
+                });
                 that.setOptions(options);
             },
 
             redraw: function(){
-                var that = this,
-                    view = that._view;
+                var size = this._getSize();
 
-                that._redraw(view);
-                view.renderTo(that.element[0]);
+                this.surfaceWrap.css({
+                    width: size,
+                    height: size
+                });
+                this.surface.clear();
+
+                this.createVisual();
+                this.surface.draw(this.visual);
             },
 
             svg: function() {
@@ -970,7 +980,11 @@ var __meta__ = {
                 this.redraw();
             },
 
-            _redraw: function(view) {
+            createVisual: function() {
+                this.visual = this._render();
+            },
+
+            _render: function() {
                 var that = this,
                     value = that._value,
                     baseUnit,
@@ -985,45 +999,43 @@ var __meta__ = {
 
                 border.width = borderWidth;
 
-                if(!value){
-                    return;
+                var visual = new draw.Group();
+
+                if (value){
+                    matrix = encodeData(value, that.options.errorCorrection, that.options.encoding);
+                    size = that._getSize();
+                    contentSize = size - 2  * (borderWidth + padding);
+                    baseUnit = that._calculateBaseUnit(contentSize, matrix.length);
+                    dataSize = matrix.length * baseUnit;
+                    quietZoneSize = borderWidth + padding + (contentSize - dataSize) / 2;
+
+                    visual.append(that._renderBackground(size, border));
+                    visual.append(that._renderMatrix(matrix, baseUnit, quietZoneSize));
                 }
 
-                matrix = encodeData(value, that.options.errorCorrection, that.options.encoding);
-                size = that._getSize();
-                contentSize = size - 2 * (borderWidth + padding);
-                baseUnit = that._calculateBaseUnit(contentSize, matrix.length);
-                dataSize =  matrix.length * baseUnit;
-                
-                quietZoneSize = that._calculateQuietZone(dataSize, contentSize, borderWidth, padding);
-
-                view.children = [];
-                view.options.width = size;
-                view.options.height = size;
-                that._renderBackground(view, size, border);
-                that._renderMatrix(view, matrix, baseUnit, quietZoneSize);
+                return visual;
             },
 
             _getSize: function(){
                 var that = this,
                     size;
-                if(that.options.size){
+
+                if (that.options.size){
                    size = parseInt(that.options.size, 10);
-                }
-                else {
+                } else {
                     var element = that.element,
                         min = Math.min(element.width(), element.height());
 
-                    if(min > 0){
-                        size =  min;
-                    }
-                    else{
+                    if (min > 0){
+                        size = min;
+                    } else {
                         size = QRCodeDefaults.DEFAULT_SIZE;
                     }
                 }
 
                 return size;
             },
+
             _calculateBaseUnit: function(size, matrixSize){
                 var baseUnit = Math.floor(size/ matrixSize);
 
@@ -1038,54 +1050,58 @@ var __meta__ = {
 
                 return baseUnit;
             },
-            _calculateQuietZone: function(dataSize, contentSize, border, padding){
-                return border + padding + (contentSize - dataSize) / 2;
-            },
 
-            _renderMatrix: function(view, matrix, baseUnit, quietZoneSize){
-                var that = this,
-                    y,
-                    x1,
-                    box,
-                    column,
-                    elements = [];
+            _renderMatrix: function(matrix, baseUnit, quietZoneSize){
+                var path = new draw.MultiPath({
+                    fill: {
+                        color: this.options.color
+                    },
+                    stroke: null
+                });
 
-                for(var row = 0; row < matrix.length; row++){
-                    y = quietZoneSize + row * baseUnit;
-                    column = 0;
-                    while(column < matrix.length){
-                        while(matrix[row][column] === 0 && column < matrix.length){
+                for (var row = 0; row < matrix.length; row++){
+                    var y = quietZoneSize + row * baseUnit;
+                    var column = 0;
+
+                    while (column < matrix.length){
+                        while (matrix[row][column] === 0 && column < matrix.length){
                             column++;
                         }
-                        if(column < matrix.length){
-                            x1 = column;
-                            while(matrix[row][column] == 1){
+
+                        if (column < matrix.length){
+                            var x = column;
+                            while (matrix[row][column] == 1){
                                 column++;
                             }
-                            box = new Box2D(
-                                round(quietZoneSize + x1 * baseUnit), round(y),
-                                round(quietZoneSize + column * baseUnit), round(y + baseUnit));
-                            elements.push(box.points());
+
+                            var x1 = round(quietZoneSize + x * baseUnit);
+                            var y1 = round(y);
+                            var x2 = round(quietZoneSize + column * baseUnit);
+                            var y2 = round(y + baseUnit);
+
+                            path.moveTo(x1, y1)
+                                .lineTo(x1, y2)
+                                .lineTo(x2, y2)
+                                .lineTo(x2, y1)
+                                .close();
                         }
                     }
                 }
 
-                view.children.push(view.createMultiLine(elements, {
-                        fill: that.options.color,
-                        stroke: that.options.color, strokeWidth: 0,
-                        align: false
-                    }));
+                return path;
             },
 
-            _renderBackground: function (view, size, border) {
-                var that = this;
-                view.children.push(view.createRect(Box2D(0,0, size, size).unpad(border.width / 2),
-                    {
-                        fill: that.options.background,
-                        stroke: border.color,
-                        strokeWidth: border.width,
-                        align: false
-                    }));
+            _renderBackground: function (size, border) {
+                var box = Box2D(0,0, size, size).unpad(border.width / 2);
+                return draw.Path.fromRect(box.toRect(), {
+                    fill: {
+                        color: this.options.background
+                    },
+                    stroke: {
+                        color: border.color,
+                        width: border.width
+                    }
+                });
             },
 
             setOptions: function (options) {
@@ -1122,7 +1138,7 @@ var __meta__ = {
             }
         });
 
-      dataviz.ui.plugin(QRCode);
+        dataviz.ui.plugin(QRCode);
 
       kendo.deepExtend(dataviz, {
             QRCode: QRCode,
