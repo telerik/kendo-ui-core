@@ -88,7 +88,12 @@
 }
 
 .k-grid td {
-    padding: 0.929em .6em;
+    padding: 0.929em 1.286em;
+}
+
+.k-grid-header th.k-header>.k-link {
+    font-size: 0.929em;
+    padding: 0.462em 1.286em;
 }
 
 .k-grouping-header
@@ -107,6 +112,11 @@
     cursor: pointer;
 }
 
+.k-pager-numbers .k-link,
+.k-pager-numbers .k-state-selected {
+    border-width: 2px 0 0;
+}
+
 .k-pager-wrap {
     padding: 0;
 }
@@ -114,15 +124,18 @@
 .k-pager-wrap .k-link,
 .k-pager-wrap .k-pager-numbers .k-state-selected,
 .k-pager-sizes{
-    padding: .643em 0 .643em 0.250em;
+    padding: .571em 0 .571em 0.250em;
 }
 
 .k-pager-info {
     padding: .714em 1.333em .643em 1.333em;
 }
 
-.k-textbox,
-.k-autocomplete,
+.k-pager-wrap .k-pager-refresh {
+    margin-right: 1.214em;
+
+}
+
 .k-dropdown-wrap,
 .k-picker-wrap,
 .k-numeric-wrap {
@@ -414,6 +427,10 @@ span.k-tooltip
     padding: 0.429em;
 }
 
+.k-grouping-header {
+    padding-left: 1.286em;
+}
+
 .k-grid .k-icon {
     opacity: 0.45;
 }
@@ -476,6 +493,10 @@ span.k-tooltip
 }
 
 /* Scheduler */
+
+.k-scheduler-toolbar .k-scheduler-views {
+    text-transform: uppercase;
+}
 
 .k-scheduler-toolbar,
 .k-scheduler-footer {

@@ -253,6 +253,7 @@
 //new var-s
 @secondary-background-color: #f9f9f9;
 @secondary-hover-background-color: #5c6bc0;
+@secondary-header-color: rgba(256, 256, 256, 0.3);
 @secondary-header-background-color: #283593;
 @accent-color: #00b0ff;
 
@@ -713,10 +714,15 @@ background-color: @secondary-background-color;
 	border-color: @widget-border-color;
 }
 
+.k-grid .k-grouping-header {
+	color: @secondary-header-color;
+}
+
 .k-pager-wrap {
 color: @widget-text-color;
 }
 
+.k-grouping-header .k-link,
 .k-grouping-header .k-link:link {
 color: @header-text-color;
 }
@@ -732,12 +738,13 @@ background-color: @accent-color;
 color: @inverse-text-color;
 }
 
-.k-grid-header .k-header,
+.k-grid-header .k-header .k-link,
 .k-grid-header .k-link,
 .k-grid-header .k-link:link,
 .k-grid-pager .k-link,
-.k-grid-pager .k-link:link  {
-color: @widget-text-color;
+.k-grid-pager .k-link:link,
+.k-pager-info  {
+color: @primary-disabled-text-color;
 }
 
 .k-pager-numbers .k-link,
