@@ -18,6 +18,9 @@ Inherits="System.Web.Mvc.ViewPage<IEnumerable<Kendo.Mvc.Examples.Models.TreeList
             {
                 c.Add().Name("edit");
                 c.Add().Name("destroy");
+            })
+            .Attributes(new {
+                style = "text-align: center;"
             });
         })
         .DataSource(dataSource => dataSource

@@ -19,6 +19,8 @@ namespace Kendo.Mvc.UI
             Sortable = new TreeListColumnSortableSettings();
                 
         //<< Initialization
+
+            Attributes = new Dictionary<string, object>();
         }
 
         //>> Fields

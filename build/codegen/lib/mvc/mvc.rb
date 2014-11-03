@@ -123,7 +123,7 @@ module CodeGen::MVC::Wrappers
         //<< Fields})
 
         FIELD_DECLARATION = ERB.new(%{
-        public <%= csharp_type =~ /IDictonary|string/ || is_csharp_array ? csharp_type : csharp_type + '?'%> <%= csharp_name %> { get; set; }
+        public <%= is_nullable_type || is_csharp_array ? csharp_type : csharp_type + '?'%> <%= csharp_name %> { get; set; }
         })
 
         FIELD_SERIALIZATION = ERB.new(%{//>> Serialization
@@ -143,16 +143,25 @@ module CodeGen::MVC::Wrappers
 
         COMPOSITE_FIELD_INITIALIZATION = ERB.new(%{//>> Initialization
         <%= composite_options.map { |option|
-			next if INITIALIZATION_SKIP_LIST.include?(option.full_name)
-			option.to_initialization
-		}.join %>
+            next if INITIALIZATION_SKIP_LIST.include?(option.full_name)
+            option.to_initialization
+        }.join %>
         //<< Initialization})
 
         COMPONENT_FLUENT_FIELDS = ERB.new(%{//>> Fields
         <%= unique_options.map { |option| option.to_fluent }.join %>
         //<< Fields})
 
-        FLUENT_FIELD_DECLARATION = ERB.new(%{
+        FLUENT_FIELD_DECLARATION = ERB.new(%{<% if is_dictionary %>
+        /// <summary>
+        /// <%= description.gsub(/\r?\n/, '\n\t\t/// ').html_encode()%>
+        /// </summary>
+        /// <param name="value">The value that configures the <%= csharp_name.downcase %>.</param>
+        public <%= csharp_builder_name %> <%= csharp_name %>(object value)
+        {
+            return this.<%= csharp_name %>(value.ToDictionary());
+        }
+        <% end %>
         /// <summary>
         /// <%= description.gsub(/\r?\n/, '\n\t\t/// ').html_encode()%>
         /// </summary>
@@ -165,8 +174,7 @@ module CodeGen::MVC::Wrappers
         }
         })
 
-        FLUENT_COMPOSITE_FIELD_DECLARATION = ERB.new(%{
-        <% if toggleable %>
+        FLUENT_COMPOSITE_FIELD_DECLARATION = ERB.new(%{<% if toggleable %>
         /// <summary>
         /// <%= description.gsub(/\r?\n/, '\n\t\t/// ').html_encode()%>
         /// </summary>
@@ -309,6 +317,10 @@ module CodeGen::MVC::Wrappers
             FLUENT_FIELD_DECLARATION.result(binding)
         end
 
+        def is_nullable_type
+            csharp_type == "string" || is_dictionary
+        end
+
         def is_csharp_array
             csharp_type.match(/\[\]$/)
         end
@@ -318,35 +330,39 @@ module CodeGen::MVC::Wrappers
         end
 
         def to_client_option
+            template = ""
+
             if csharp_type.eql?('string')
-                return ERB.new(%{
+                template = %{
             if (<%=csharp_name%>.HasValue())
             {
                 json["<%= name %>"] = <%=csharp_name%>;
             }
-            }).result(binding)
+            }
             elsif is_csharp_array
-                return ERB.new(%{
+                template = %{
             if (<%=csharp_name%> != null)
             {
                 json["<%= name %>"] = <%=csharp_name%>;
             }
-            }).result(binding)
+            }
             elsif is_dictionary
-                return ERB.new(%{
+                template = %{
             if (<%=csharp_name%>.Any())
             {
                 json["<%= name %>"] = <%=csharp_name%>;
             }
-            }).result(binding)
-            end
-
-            ERB.new(%{
+            }
+            else
+                template = %{
             if (<%= csharp_name %>.HasValue)
             {
                 json["<%= name %>"] = <%= csharp_name %>;
             }
-                }).result(binding)
+                }
+            end
+
+            ERB.new(template).result(binding)
         end
 
         def to_enum

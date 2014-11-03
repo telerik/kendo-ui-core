@@ -23,13 +23,21 @@ namespace Kendo.Mvc.UI.Fluent
         /// HTML attributes of the table cell (&lt;td&gt;) rendered for the column.
         /// </summary>
         /// <param name="value">The value that configures the attributes.</param>
+        public TreeListColumnBuilder Attributes(object value)
+        {
+            return this.Attributes(value.ToDictionary());
+        }
+        
+        /// <summary>
+        /// HTML attributes of the table cell (&lt;td&gt;) rendered for the column.
+        /// </summary>
+        /// <param name="value">The value that configures the attributes.</param>
         public TreeListColumnBuilder Attributes(IDictionary<string, object> value)
         {
             container.Attributes = value;
 
             return this;
         }
-        
         
         /// <summary>
         /// The configuration of the column command(s). If set the column would display a button for every command. Commands can be custom or built-in ("edit", "destroy" or "createchild").The "edit" built-in command switches the current table row in edit mode.The "createchild" built-in command adds new child item to the current table row and switches in edit mode.The "destroy" built-in command removes the data item to which the current table row is bound.Custom commands are supported by specifying the click option.
@@ -122,7 +130,6 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
         
-        
         /// <summary>
         /// If set to true the user can click the column header and sort the grid by the column field when sorting is enabled. If set to false sorting will
 		/// be disabled for this column. By default all columns are sortable if sorting is enabled via the sortable option.
@@ -193,7 +200,6 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
-        
         
         /// <summary>
         /// If set to true a filter menu will be displayed for this column when filtering is enabled. If set to false the filter menu will not be displayed. By default a filter menu is displayed

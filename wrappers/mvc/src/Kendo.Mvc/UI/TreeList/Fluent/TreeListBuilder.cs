@@ -22,7 +22,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         //>> Fields
         
-        
         /// <summary>
         /// The configuration of the treelist columns. An array of JavaScript objects or strings. A JavaScript objects are interpreted as column configurations. Strings are interpreted as the
 		/// field to which the column is bound. The treelist will create a column for every item of the array.
@@ -68,7 +67,6 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
         
-        
         /// <summary>
         /// If set to true the user could sort the treelist by clicking the column header cells. By default sorting is disabled.Can be set to a JavaScript object which represents the sorting configuration.
         /// </summary>
@@ -92,7 +90,6 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
         
-        
         /// <summary>
         /// If a String value is assigned to the toolbar configuration option, it will be treated as a single string template for the whole treelist Toolbar,
 		/// and the string value will be passed as an argument to a kendo.template() function.If a Function value is assigned (it may be a kendo.template() function call or a generic function reference), then the return value of the function will be used to render the treelist Toolbar contents.If an Array value is assigned, it will be treated as the list of commands displayed in the treelist Toolbar. Commands can be custom or built-in ("cancel", "create", "save", "excel").The "create" command adds an empty data item to the treelist.The "excel" command exports the treelist data in MS Excel format.
@@ -114,7 +111,6 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
-        
         
         /// <summary>
         /// If set to true the user can filter the data source using the grid filter menu. Filtering is disabled by default.Can be set to a JavaScript object which represents the filter menu configuration.
@@ -138,7 +134,6 @@ namespace Kendo.Mvc.UI.Fluent
             configurator(new TreeListFilterableSettingsBuilder(container.Filterable));
             return this;
         }
-        
         
         /// <summary>
         /// If set to true the user would be able to edit the data to which the treelist is bound to. By default editing is disabled.Can be set to a string ("inline" or "popup") to specify the editing mode. The default editing mode is "inline".Can be set to a JavaScript object which represents the editing configuration.
