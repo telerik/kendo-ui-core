@@ -184,7 +184,7 @@
         equal(gantt.footer.find(".k-gantt-actions > button").text(), "Add Task");
     });
 
-    test("default action toolbar button is localized", function() {
+    test("default action toolbar append button is localized", function() {
         var gantt = new Gantt(element, {
             messages: {
                 actions: {
@@ -195,8 +195,23 @@
 
         equal(gantt.toolbar.find(".k-gantt-actions > button").text(), "bar");
     });
+    
+    test("default action toolbar pdf button is localized", function() {
+        var gantt = new Gantt(element, {
+            messages: {
+                actions: {
+                    pdf: "bar"
+                }
+            },
+            toolbar: [
+                "pdf"
+            ]
+        });
 
-    test("default action footer button is localized", function() {
+        equal(gantt.toolbar.find(".k-gantt-actions > button").text(), "bar");
+    });
+
+    test("default action footer append button is localized", function() {
         var gantt = new Gantt(element, {
             messages: {
                 actions: {

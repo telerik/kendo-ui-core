@@ -1240,7 +1240,8 @@ var __meta__ = {
                     append: "Add Task",
                     addChild: "Add Child",
                     insertBefore: "Add Above",
-                    insertAfter: "Add Below"
+                    insertAfter: "Add Below",
+                    pdf: "Export to PDF"
                 },
                 editor: {
                     editorTitle: "Task",
