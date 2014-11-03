@@ -390,4 +390,29 @@ test("reseting data unbind change from the previous data", 1, function() {
     originalData.push({});
 });
 
+test("re-read parent of the old array is reset", function() {
+    var dataSource = new DataSource({ data: [{ foo: "foo" }, { foo: "foo1" }]});
+
+    dataSource.read();
+
+    var arr = dataSource.data();
+
+    dataSource.read();
+
+    notDeepEqual(dataSource.data()[0].parent(), arr);
+    notDeepEqual(arr[0].parent(), arr);
+});
+
+test("re-read does not remove the parent of the observable array", function() {
+    var arr = new kendo.data.ObservableArray([{ foo: "foo" }, { foo: "foo1" }]);
+    var dataSource = new DataSource({ data: arr });
+
+    dataSource.read();
+
+    dataSource.read();
+
+    deepEqual(arr[0].parent(), arr);
+    deepEqual(arr[1].parent(), arr);
+});
+
 }());
