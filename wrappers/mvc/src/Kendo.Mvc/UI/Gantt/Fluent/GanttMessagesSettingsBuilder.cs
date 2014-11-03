@@ -19,7 +19,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         //>> Fields
         
-        
         /// <summary>
         /// The configuration of the Gantt view messages. Use this option to customize or localize the Gantt view messages.
         /// </summary>
@@ -29,7 +28,6 @@ namespace Kendo.Mvc.UI.Fluent
             configurator(new GanttMessagesViewsSettingsBuilder(container.Views));
             return this;
         }
-        
         
         /// <summary>
         /// The configuration of the Gantt action messages. Use this option to customize or localize the Gantt action messages.

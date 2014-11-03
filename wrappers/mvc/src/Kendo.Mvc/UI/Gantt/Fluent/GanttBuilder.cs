@@ -98,66 +98,26 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
-
+        
         /// <summary>
         /// If set to false the user won't be able to create, modify or delete tasks and dependencies.
         /// </summary>
-        /// <param name="isEditable">The isEditable</param>
-        /// <example>
-        /// <code lang="Razor">
-        /// @(Html.Kendo().Gantt&lt;TaskViewModel, DependencyViewModel&gt;()
-        ///     .Name("gantt")
-        ///     .Editable(false)
-        ///     .DataSource(d =&gt; d
-        ///        .Model(m =&gt;
-        ///        {
-        ///            m.Id(f =&gt; f.TaskID);
-        ///            m.ParentId(f =&gt; f.ParentID);
-        ///            m.OrderId(f =&gt; f.OrderId);
-        ///            m.Field(f =&gt; f.Expanded).DefaultValue(true);
-        ///        })
-        ///        .Read(&quot;ReadTasks&quot;, &quot;Gantt&quot;)
-        ///    )
-        /// )
-        /// </code>
-        /// </example>
-        public GanttBuilder<TTaskModel, TDependenciesModel> Editable(bool isEditable)
+        /// <param name="enabled">Enables or disables the editable option.</param>
+        public GanttBuilder<TTaskModel,TDependenciesModel> Editable(bool enabled)
         {
-            Component.Editable.Enabled = isEditable;
+            container.Editable.Enabled = true;
             return this;
         }
 
+        
         /// <summary>
-        /// Sets the editing configuration of the gantt.
+        /// If set to false the user won't be able to create, modify or delete tasks and dependencies.
         /// </summary>
-        /// <param name="configurator">The lambda which configures the editing</param>
-        /// <example>
-        /// <code lang="Razor">
-        ///@(Html.Kendo().Gantt&lt;TaskViewModel, DependencyViewModel&gt;()
-        ///    .Name("gantt")
-        ///    .Editable(editable =&gt;
-        ///    {
-        ///        editable.Confirmation(false);
-        ///        editable.TemplateId(&quot;customEditTemplate&quot;);
-        ///    })
-        ///    .DataSource(d =&gt; d
-        ///        .Model(m =&gt;
-        ///        {
-        ///            m.Id(f =&gt; f.TaskID);
-        ///            m.ParentId(f =&gt; f.ParentID);
-        ///            m.OrderId(f =&gt; f.OrderId);
-        ///            m.Field(f =&gt; f.Expanded).DefaultValue(true);
-        ///        })
-        ///        .Read(&quot;ReadTasks&quot;, &quot;Gantt&quot;)
-        ///        .Create(&quot;CreateTask&quot;, &quot;Gantt&quot;)
-        ///        .Destroy(&quot;DestroyTask&quot;, &quot;Gantt&quot;)
-        ///        .Update(&quot;UpdateTask&quot;, &quot;Gantt&quot;)
-        ///    )
-        ///)
-        /// </code>
-        /// </example>
+        /// <param name="configurator">The action that configures the editable.</param>
         public GanttBuilder<TTaskModel,TDependenciesModel> Editable(Action<GanttEditableSettingsBuilder> configurator)
         {
+            container.Editable.Enabled = true;
+            
             configurator(new GanttEditableSettingsBuilder(container.Editable));
             return this;
         }
@@ -229,7 +189,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// If set to true the gantt will snap tasks to the nearest slot during dragging (resizing or moving). Set it to false to allow free moving and resizing of tasks.
+        /// If set to true the Gantt will snap tasks to the nearest slot during dragging (resizing or moving). Set it to false to allow free moving and resizing of tasks.
         /// </summary>
         /// <param name="value">The value that configures the snap.</param>
         public GanttBuilder<TTaskModel,TDependenciesModel> Snap(bool value)
@@ -262,7 +222,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// The configuration of the gantt messages. Use this option to customize or localize the gantt messages.
+        /// The configuration of the Gantt messages. Use this option to customize or localize the Gantt messages.
         /// </summary>
         /// <param name="configurator">The action that configures the messages.</param>
         public GanttBuilder<TTaskModel,TDependenciesModel> Messages(Action<GanttMessagesSettingsBuilder> configurator)
@@ -280,9 +240,9 @@ namespace Kendo.Mvc.UI.Fluent
             configurator(new GanttPdfSettingsBuilder(container.Pdf));
             return this;
         }
-
+        
         /// <summary>
-        /// If set to false the user won't be able to select tasks in the gantt. By default selection is enabled and triggers the change event.
+        /// If set to false the user won't be able to select tasks in the Gantt. By default selection is enabled and triggers the change event.
         /// </summary>
         /// <param name="value">The value that configures the selectable.</param>
         public GanttBuilder<TTaskModel,TDependenciesModel> Selectable(bool value)
@@ -293,7 +253,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// If set to false, gantt views will show all days of the week. By default the views display only business days.
+        /// If set to false, Gantt views will show all days of the week. By default the views display only business days.
         /// </summary>
         /// <param name="value">The value that configures the showworkdays.</param>
         public GanttBuilder<TTaskModel,TDependenciesModel> ShowWorkDays(bool value)
@@ -324,7 +284,6 @@ namespace Kendo.Mvc.UI.Fluent
             configurator(new GanttToolbarFactory(container.Toolbar));
             return this;
         }
-        
         
         /// <summary>
         /// The views displayed by the Gantt and their configuration. The array items can be either objects specifying the view configuration or strings representing the view types (assuming default configuration).

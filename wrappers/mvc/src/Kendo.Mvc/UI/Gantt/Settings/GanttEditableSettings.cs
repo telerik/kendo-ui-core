@@ -10,10 +10,14 @@ namespace Kendo.Mvc.UI
     {
         public GanttEditableSettings()
         {
+            Enabled = true;
+        
             //>> Initialization
         
         //<< Initialization
         }
+
+        public bool Enabled { get; set; }
 
         //>> Fields
         
