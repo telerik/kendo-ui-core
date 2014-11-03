@@ -6143,7 +6143,11 @@ var __meta__ = {
 
             this.color = highlight.color || this.color;
             var overlay = this.mainVisual(
-                deepExtend({}, this.options, highlight)
+                deepExtend({}, this.options, {
+                    line: {
+                        color: this.getBorderColor()
+                    }
+                }, highlight)
             );
             this.color = normalColor;
 
