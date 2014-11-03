@@ -61,6 +61,12 @@ public class GanttTag extends WidgetTag /* interfaces */implements DataBoundWidg
         setProperty("messages", value);
     }
 
+    public void setToolbar(ToolbarTag value) {
+
+        setProperty("toolbar", value.toolbar());
+
+    }
+
     public void setViews(ViewsTag value) {
 
         setProperty("views", value.views());
@@ -217,6 +223,14 @@ public class GanttTag extends WidgetTag /* interfaces */implements DataBoundWidg
 
     public void setSnap(boolean value) {
         setProperty("snap", value);
+    }
+
+    public java.lang.String getToolbar() {
+        return (java.lang.String)getProperty("toolbar");
+    }
+
+    public void setToolbar(java.lang.String value) {
+        setProperty("toolbar", value);
     }
 
     public java.util.Date getWorkDayEnd() {
