@@ -4851,15 +4851,21 @@ var __meta__ = {
 
         createHighlight: function() {
             var highlight = this.options.highlight;
-            var overlay = this.marker.getElement();
-
-            var markers = this.options.markers;
             var border = highlight.border;
-            overlay.options.set("stroke", {
-                color: border.color ||
-                    new Color(markers.background).brightness(BAR_BORDER_BRIGHTNESS).toHex(),
-                width: border.width,
-                opacity:border.opacity
+            var markers = this.options.markers;
+            var center = this.box.center();
+            var radius = markers.size / 2 - border.width / 2;
+            var overlay = new draw.Circle(new geom.Circle([center.x, center.y], radius), {
+                stroke: {
+                    color: border.color ||
+                        new Color(markers.background).brightness(BAR_BORDER_BRIGHTNESS).toHex(),
+                    width: border.width,
+                    opacity: border.opacity
+                },
+                fill: {
+                    color: markers.background,
+                    opacity: highlight.opacity
+                }
             });
 
             return overlay;
