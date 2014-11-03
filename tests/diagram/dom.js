@@ -1450,32 +1450,6 @@
         equal(shapesCount + 1, d.shapes.length);
     });
 
-    test("Cut and Paste", function () {
-        var shapesCount = d.shapes.length;
-        var s1 = d.shapes[0];
-
-        s1.select(true);
-        equal(d._clipboard.length, 0);
-        d.cut();
-        equal(d._clipboard.length, 1);
-        equal(shapesCount - 1, d.shapes.length);
-        d.paste();
-        equal(shapesCount, d.shapes.length);
-    });
-
-    test("Cut and Paste - positions", function () {
-        var shapesCount = d.shapes.length;
-        var s1 = d.shapes[0];
-        var pos = s1.position().clone();
-
-        s1.select(true);
-        d.cut();
-        d.paste();
-        var copied = d.shapes[d.shapes.length - 1];
-        deepEqual(copied.position(), pos);
-    });
-
-
     test("Copy and Paste - positions", function () {
         var shapesCount = d.shapes.length;
         var s1 = d.shapes[0];
@@ -1535,5 +1509,76 @@
         equal(d._clipboard.length, 1);
         d.paste();
         equal(cons, d.connections.length);
+    });
+
+    // ------------------------------------------------------------
+    module("Editing / Shape data source", {
+        setup: function () {
+            d = setupEditableDiagram();
+        },
+        teardown: function () {
+            d.destroy();
+        }
+    });
+
+    test("Copy and Paste should insert shape dataItem", function () {
+        var shape = d.shapes[0];
+
+        shape.select(true);
+        d.copy();
+        d.paste();
+        equal(d.dataSource.data().length, 3);
+    });
+
+    test("Cut should remove shape dataItem", function () {
+        var shape = d.shapes[0];
+
+        shape.select(true);
+        d.cut();
+        equal(d.dataSource.data().length, 1);
+    });
+
+    test("Redo should add shape dataItem", function () {
+        var shape = d.shapes[0];
+
+        shape.select(true);
+        d.remove(d.select(), true);
+        d.undo();
+        equal(d.dataSource.data().length, 2);
+    });
+
+    module("Editing / Connections data source", {
+        setup: function () {
+            d = setupEditableDiagram();
+        },
+        teardown: function () {
+            d.destroy();
+        }
+    });
+
+    test("Copy and Paste should insert connection dataItem", function () {
+        var connection = d.connections[0];
+
+        connection.select(true);
+        d.copy();
+        d.paste();
+        equal(d.connectionsDataSource.data().length, 2);
+    });
+
+    test("Cut should remove connection dataItem", function () {
+        var connection = d.connections[0];
+
+        connection.select(true);
+        d.cut();
+        equal(d.connectionsDataSource.data().length, 0);
+    });
+
+    test("Redo should add connection dataItem", function () {
+        var connection = d.connections[0];
+
+        connection.select(true);
+        d.remove(d.select(), true);
+        d.undo();
+        equal(d.connectionsDataSource.data().length, 1);
     });
 })();

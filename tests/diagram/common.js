@@ -141,7 +141,36 @@
         return root;
     };
 
+    function setupEditableDiagram() {
+        QUnit.fixture.html('<div id="canvas" />');
+
+        $("#canvas").kendoDiagram({
+            dataSource: {
+                data: [{
+                    firstName: "firstName"
+                },{
+                    firstName: "firstName1"
+                }],
+                schema: {
+                    model: {
+                        id: "id",
+                        firstName: { type: "string" }
+                    }
+                }
+            },
+            connectionsDataSource: {
+                data: [{
+                    from: 1,
+                    to: 2
+                }]
+            }
+        });
+
+        return $("#canvas").getKendoDiagram();
+    }
+
     deepExtend(window, {
+        setupEditableDiagram: setupEditableDiagram,
         Shapes: Shapes,
         roughlyEqual: roughlyEqual,
         roughlyEqualPoint: roughlyEqualPoint,
