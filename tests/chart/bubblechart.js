@@ -1,27 +1,22 @@
 (function() {
-    return;
-
     var dataviz = kendo.dataviz,
+        draw = kendo.drawing,
         Box2D = dataviz.Box2D,
         chartBox = new Box2D(0, 0, 800, 600),
         plotArea,
         bubbleChart,
         firstPoint,
         root,
-        view,
         TOLERANCE = 1;
 
     function setupBubbleChart(plotArea, options) {
-        view = new ViewStub();
-
         bubbleChart = new dataviz.BubbleChart(plotArea, options);
 
         root = new dataviz.RootElement();
         root.append(bubbleChart);
-
+        root.box = chartBox.clone();
         bubbleChart.reflow(chartBox);
-        bubbleChart.getViewElements(view);
-
+        root.renderVisual();
         firstPoint = bubbleChart.points[0];
     }
 
@@ -164,12 +159,12 @@
             }
         });
 
-        test("highlightOverlay renders a circle", function() {
-            ok(firstPoint.highlightOverlay(view).c);
+        test("createHighlight creates a circle", function() {
+            equal(firstPoint.createHighlight().nodeType, "Circle");
         });
 
         test("renders top-level group", function() {
-            equal(view.log.group.length, 1);
+            equal(bubbleChart.visual.nodeType, "Group");
         });
 
         // ------------------------------------------------------------
@@ -180,76 +175,56 @@
             }
         });
 
-        test("highlightOverlay renders a transparent circle", function() {
-            equal(firstPoint.highlightOverlay(view).options.fill, undefined);
+        test("createHighlight renders fill based on marker background", function() {
+            var highlight = firstPoint.createHighlight();
+            equal(highlight.options.fill.color, firstPoint.options.markers.background);
         });
 
-        test("highlightOverlay renders a circle with 1 border smaller diameter", function() {
+        test("createHighlight creates a circle with 1 border smaller diameter", function() {
             firstPoint.options.highlight.border.width = 2;
-            var outline = firstPoint.highlightOverlay(view);
+            var outline = firstPoint.createHighlight();
 
-            equal(outline.r, firstPoint.options.markers.size / 2 - 1);
+            equal(outline.geometry().getRadius(), firstPoint.options.markers.size / 2 - 1);
         });
 
-        test("highlightOverlay renders default border width", function() {
-            var outline = firstPoint.highlightOverlay(view);
+        test("createHighlight renders default border width", function() {
+            var outline = firstPoint.createHighlight();
 
-            equal(outline.options.strokeWidth, 1);
+            equal(outline.options.stroke.width, 1);
         });
 
-        test("highlightOverlay renders custom border width", function() {
+        test("createHighlight renders custom border width", function() {
             firstPoint.options.highlight.border.width = 2;
-            var outline = firstPoint.highlightOverlay(view);
+            var outline = firstPoint.createHighlight();
 
-            equal(outline.options.strokeWidth, 2);
+            equal(outline.options.stroke.width, 2);
         });
 
-        test("highlightOverlay renders default border color (computed)", function() {
+        test("createHighlight renders default border color (computed)", function() {
             firstPoint.options.markers.background = "#ffffff";
-            var outline = firstPoint.highlightOverlay(view);
+            var outline = firstPoint.createHighlight();
 
-            equal(outline.options.stroke, "#cccccc");
+            equal(outline.options.stroke.color, "#cccccc");
         });
 
-        test("highlightOverlay renders custom border color", function() {
+        test("createHighlight renders custom border color", function() {
             firstPoint.options.highlight.border.color = "red";
-            var outline = firstPoint.highlightOverlay(view);
+            var outline = firstPoint.createHighlight();
 
-            equal(outline.options.stroke, "red");
+            equal(outline.options.stroke.color, "red");
         });
 
-        test("highlightOverlay renders default border opacity", function() {
-            var outline = firstPoint.highlightOverlay(view);
+        test("createHighlight renders default border opacity", function() {
+            var outline = firstPoint.createHighlight();
 
-            equal(outline.options.strokeOpacity, 1);
+            equal(outline.options.stroke.opacity, 1);
         });
 
-        test("highlightOverlay renders custom border opacity", function() {
+        test("createHighlight renders custom border opacity", function() {
             firstPoint.options.highlight.border.opacity = 0.5;
-            var outline = firstPoint.highlightOverlay(view);
+            var outline = firstPoint.createHighlight();
 
-            equal(outline.options.strokeOpacity, 0.5);
-        });
-
-        // ------------------------------------------------------------
-        module("Bubble Chart / Rendering", {
-            setup: function() {
-                plotArea = new PlotAreaStub();
-                setupBubbleChart(plotArea, { series: [ series ] });
-            }
-        });
-
-        test("generates unique id", function() {
-            ok(bubbleChart.id);
-        });
-
-        test("renders group with bubblechart id and no animations", function() {
-            var group = view.findInLog("group", function(item) {
-                return item.options.id === bubbleChart.id;
-            });
-
-            ok(group && !group.options.animation);
-            equal(group.options.id, bubbleChart.id);
+            equal(outline.options.stroke.opacity, 0.5);
         });
 
     })();
