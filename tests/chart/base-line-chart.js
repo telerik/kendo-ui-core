@@ -1,5 +1,4 @@
 function baseLineChartTests(seriesName, TChart) {
-    return;
 
     var dataviz = kendo.dataviz,
         getElement = dataviz.getElement,
@@ -8,23 +7,25 @@ function baseLineChartTests(seriesName, TChart) {
         chartBox = new Box2D(0, 0, 800, 600),
         chart,
         root,
-        view,
         pointCoordinates,
         TOLERANCE = 1;
 
     var chartName = seriesName.substring(0, 1).toUpperCase() + seriesName.substring(1, seriesName.length);
 
-    function setupChart(plotArea, options) {
-        view = new ViewStub();
+    function segmentPaths(chart) {
+        return chart._segments[0].visual.children;
+    }
 
+    function setupChart(plotArea, options) {
+        var box = chartBox.clone();
         chart = new TChart(plotArea, options);
 
         root = new dataviz.RootElement();
         root.append(chart);
 
-        chart.reflow();
-        chart.getViewElements(view);
-        pointCoordinates = mapPoints(view.log.path[0].points);
+        root.reflow();
+        root.renderVisual();
+        pointCoordinates = mapSegments(segmentPaths(chart)[0].segments);
     }
 
     function stubPlotArea(getCategorySlot, getValueSlot, options) {
