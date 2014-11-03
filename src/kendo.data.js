@@ -2175,6 +2175,8 @@ var __meta__ = {
             that._aggregate = options.aggregate;
             that._total = options.total;
 
+            that._shouldDetachObservableParents = true;
+
             Observable.fn.init.call(that);
 
             that.transport = Transport.create(options, data);
@@ -2927,9 +2929,11 @@ var __meta__ = {
         },
 
         _detachObservableParents: function() {
-            if (this._data) {
+            if (this._data && this._shouldDetachObservableParents) {
                 for (var idx = 0; idx < this._data.length; idx++) {
-                    this._data[idx].parent = null;
+                    if (this._data[idx].parent) {
+                        this._data[idx].parent = noop;
+                    }
                 }
             }
         },
@@ -3072,16 +3076,20 @@ var __meta__ = {
             }
             return false;
         },
+
         _observe: function(data) {
             var that = this,
                 model = that.reader.model,
                 wrap = false;
+
+            that._shouldDetachObservableParents = true;
 
             if (model && data.length) {
                 wrap = !(data[0] instanceof model);
             }
 
             if (data instanceof ObservableArray) {
+                that._shouldDetachObservableParents = false;
                 if (wrap) {
                     data.type = that.reader.model;
                     data.wrapAll(data, data);
