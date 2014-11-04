@@ -75,6 +75,14 @@ public class MessagesViewsTag extends  BaseTag  /* interfaces */ /* interfaces *
         setProperty("week", value);
     }
 
+    public java.lang.String getYear() {
+        return (java.lang.String)getProperty("year");
+    }
+
+    public void setYear(java.lang.String value) {
+        setProperty("year", value);
+    }
+
 //<< Attributes
 
 }

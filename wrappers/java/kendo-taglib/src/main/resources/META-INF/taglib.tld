@@ -16189,6 +16189,12 @@ which field to update. The other option is to use MVVM bindings in order to bind
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+        <attribute>
+            <description>The text similar to "Year" displayed as Gantt "year" view title.</description>
+            <name>year</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
 
     </tag>
 
@@ -16350,7 +16356,7 @@ This class can be used to obtain reference to the button after Gantt initializat
 
     <tag>
         <description>The views displayed by the Gantt and their configuration. The array items can be either objects specifying the view configuration or strings representing the view types (assuming default configuration).
-By default the Kendo UI Gantt widget displays all three ("day", "week", and "month") views.</description>
+By default the Kendo UI Gantt widget displays "day", "week", and "month" views.</description>
         <name>gantt-views</name>
         <tag-class>com.kendoui.taglib.gantt.ViewsTag</tag-class>
         <body-content>JSP</body-content>
@@ -16358,7 +16364,7 @@ By default the Kendo UI Gantt widget displays all three ("day", "week", and "mon
 
     <tag>
         <description>The views displayed by the Gantt and their configuration. The array items can be either objects specifying the view configuration or strings representing the view types (assuming default configuration).
-By default the Kendo UI Gantt widget displays all three ("day", "week", and "month") views.</description>
+By default the Kendo UI Gantt widget displays "day", "week", and "month" views.</description>
         <name>gantt-view</name>
         <tag-class>com.kendoui.taglib.gantt.ViewTag</tag-class>
 
@@ -16394,7 +16400,7 @@ By default the Kendo UI Gantt widget displays all three ("day", "week", and "mon
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The view type. Supported types are "day", "week", and "month".</description>
+            <description>The view type. Supported types are "day", "week", "month" and "year".</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
