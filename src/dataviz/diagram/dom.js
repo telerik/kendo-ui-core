@@ -1396,8 +1396,9 @@
             clone: function () {
                 var json = this.serialize();
 
-                if (this.diagram && this.diagram._isEditable && defined(this.dataItem)) {
-                    this.dataItem[this.dataItem.idField] = this.dataItem._defaultId;
+                if (this.diagram && this.diagram._isEditable && defined(this.options.dataItem)) {
+                    json.options.dataItem = this.options.dataItem.toJSON();
+                    json.options.dataItem[this.options.dataItem.idField] = this.options.dataItem._defaultId;
                 }
 
                 return new Connection(this.from, this.to, json.options);
@@ -2024,15 +2025,26 @@
             },
 
             _addConnection: function (connection, undoable) {
+                var that = this;
                 if (this.connectionsDataSource && this._isEditable) {
-                    var dataItem = this.connectionsDataSource.add(connection.options.dataItem);
-                    connection.dataItem = connection.options.dataItem = dataItem;
-                    connection.updateModel(false);
-                    this.connectionsDataSource.sync();
-                    this._connectionsDataMap[connection.options.dataItem.uid] = connection;
+                    if (!this.trigger("add", { connection: connection.options.dataItem })) {
+                        var dataItem = this.connectionsDataSource.add(connection.options.dataItem);
+                        this.connectionsDataSource.one("sync", function() {
+                            for (var i = 0; i < that.connections.length; i++) {
+                                var element = that.connections[i];
+                                if (element.options.dataItem.uid === dataItem.uid) {
+                                    element.redraw(connection.options);
+                                }
+                            }
+                        });
+                        connection.options.dataItem = dataItem;
+                        this.connectionsDataSource.sync();
+                    } else {
+                        this._remove(connection, false);
+                    }
+                } else {
+                    return this.addConnection(connection, undoable);
                 }
-
-                return this.addConnection(connection, undoable);
             },
 
             /**
@@ -2086,10 +2098,11 @@
                             for (var i = 0; i < that.shapes.length; i++) {
                                 var element = that.shapes[i];
                                 if (element.options.dataItem.uid === dataItem.uid) {
-                                    element.redraw(shape.options)
+                                    element.redraw(shape.options);
                                 }
                             }
                         });
+                        shape.options.dataItem = dataItem;
                         this.dataSource.sync();
                     } else {
                         this._remove(shape, false);
@@ -2142,7 +2155,7 @@
                     } else {
                         if (item instanceof Connection) {
                             if (this.connectionsDataSource) {
-                                dataSource = this.ConnectionsDataSource;
+                                dataSource = this.connectionsDataSource;
                                 eventArgs.connection = item.options.dataItem;
                             }
                         } else if (this.dataSource) {
@@ -2540,6 +2553,7 @@
                                 copied.target(new Point(item.targetPoint().x + offsetX, item.targetPoint().y + offsetY));
                             }
                         }
+                        copied.diagram = this;
                         this._addConnection(copied);
                         copied.position(new Point(item.options.x + offsetX, item.options.y + offsetY));
                         copied.select(true);
@@ -3228,14 +3242,9 @@
                         item = items[i];
                         if (inactiveShapeItem.uid === item.uid) {
                             this._addDataItem(item);
-                            isActive = true;
+                            inactiveItems.push(inactiveShapeItem);
                             break;
                         }
-                    }
-
-                    if (!isActive) {
-                        inactiveItems.push(inactiveShapeItem);
-                        isActive = false;
                     }
                 }
                 this._inactiveShapeItems = inactiveItems;
@@ -3292,22 +3301,17 @@
 
             _syncConnections: function(items) {
                 var inactiveItems = [],
-                    i, y, item, inactiveConnectionDataMap, isActive = false;
+                    i, y, item, inactiveConnection, isActive = false;
 
                 for (y = 0; y < this._inactiveConnectionItems.length; y++) {
-                    inactiveConnectionDataMap = this._inactiveConnectionItems[y];
+                    inactiveConnection = this._inactiveConnectionItems[y];
                     for (i = 0; i < items.length; i++) {
                         item = items[i];
-                        if (inactiveConnectionDataMap.uid === item.uid) {
+                        if (inactiveConnection.uid === item.uid) {
                             this._addConnectionDataItem(item);
-                            isActive = true;
+                            inactiveItems.push(inactiveConnection);
                             break;
                         }
-                    }
-
-                    if (!isActive) {
-                        inactiveItems.push(inactiveConnectionDataMap);
-                        isActive = false;
                     }
                 }
                 this._inactiveConnectionDataMaps = inactiveItems;
