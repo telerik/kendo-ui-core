@@ -1,5 +1,11 @@
 (function() {
    module("NG pro", {
+       setup: function() {
+           fixtureData = new kendo.data.ObservableArray([
+               { text: "Foo", id: 1 },
+               { text: "Bar", id: 2 }
+           ]);
+       },
        teardown: function() {
            kendo.destroy(QUnit.fixture);
        }
@@ -9,16 +15,13 @@
        title: "Das titlen"
    };
 
-   var fixtureData = new kendo.data.ObservableArray([
-       { text: "Foo", id: 1 },
-       { text: "Bar", id: 2 }
-   ]);
+   var fixtureData;
 
     function trigger(type, el, e) {
         el.trigger($.Event(type, e));
     }
 
-    ngTest("Grid cell templates after edit", 5, function() {
+    ngTest("Grid cell templates after edit", 7, function() {
 
         angular.module("kendo.tests").controller("mine", function($scope) {
             $scope.options = {
@@ -44,6 +47,7 @@
         var el = grid.element;
         var tbody = grid.tbody;
         var rows = tbody.find("tr");
+        var scope = grid.element.scope();
 
         equal(el.find('.command-template').eq(0).text(), "Foo/1");
         equal(el.find('.command-template').eq(1).text(), "Bar/2");
@@ -56,6 +60,14 @@
         grid.editCell(grid.tbody.find("tr").eq(0).find("td").eq(0));
         grid.closeCell();
         equal(grid.tbody.find("tr").eq(0).find("td").eq(0).text(), "|Foo|");
+
+        scope.$apply(function(){
+            fixtureData[0].id = "3";
+            fixtureData[1].id = "4";
+        });
+
+        equal(grid.tbody.find("tr").eq(0).find("td").eq(1).text(), "|3|");
+        equal(grid.tbody.find("tr").eq(1).find("td").eq(1).text(), "|4|");
     }
     );
 

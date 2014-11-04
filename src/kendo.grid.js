@@ -2379,15 +2379,11 @@ var __meta__ = {
                 tmpl = proxy(tmpl, state.storage);
             }
 
-            that.angular("cleanup", function(){
-                return { elements: cell.parent() };
-            });
-
             cell.empty().html(tmpl(dataItem));
 
             that.angular("compile", function(){
                 return {
-                    elements: cell.parent(),
+                    elements: cell,
                     data: [ { dataItem: dataItem } ]
                 };
             });
