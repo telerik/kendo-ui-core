@@ -29,23 +29,23 @@
         element = $(element)[0];
 
         if (element) {
-        cacheImages(element, function(){
-            var group = new drawing.Group();
+            cacheImages(element, function(){
+                var group = new drawing.Group();
 
-            // translate to start of page
-            var pos = element.getBoundingClientRect();
-            setTransform(group, [ 1, 0, 0, 1, -pos.left, -pos.top ]);
+                // translate to start of page
+                var pos = element.getBoundingClientRect();
+                setTransform(group, [ 1, 0, 0, 1, -pos.left, -pos.top ]);
 
-            nodeInfo._clipbox = false;
-            nodeInfo._matrix = geo.Matrix.unit();
-            nodeInfo._stackingContext = {
-                element: element,
-                group: group
-            };
+                nodeInfo._clipbox = false;
+                nodeInfo._matrix = geo.Matrix.unit();
+                nodeInfo._stackingContext = {
+                    element: element,
+                    group: group
+                };
 
-            renderElement(element, group);
-            defer.resolve(group);
-        });
+                renderElement(element, group);
+                defer.resolve(group);
+            });
         } else {
             defer.reject("No element to export");
         }
