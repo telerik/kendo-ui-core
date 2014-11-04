@@ -134,7 +134,7 @@ class GanttView extends \Kendo\SerializableObject {
     }
 
     /**
-    * The view type. Supported types are "day", "week", and "month".
+    * The view type. Supported types are "day", "week", "month" and "year".
     * @param string $value
     * @return \Kendo\UI\GanttView
     */
