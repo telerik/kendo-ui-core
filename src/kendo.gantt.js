@@ -95,7 +95,7 @@ var __meta__ = {
     };
 
     var RESOURCESEDITOR = function(container, options) {
-        $('<a href="#" class="k-button">' + options.messages.assingButton + '</a>').click(options.click).appendTo(container);
+        $('<a href="#" class="' + options.styles.button + '">' + options.messages.assingButton + '</a>').click(options.click).appendTo(container);
     };
 
     var ganttStyles = {
@@ -115,6 +115,7 @@ var __meta__ = {
         line: "k-line",
         buttonDelete: "k-gantt-delete",
         buttonCancel: "k-gantt-cancel",
+        buttonSave: "k-gantt-update",
         primary: "k-primary",
         hovered: "k-state-hover",
         selected: "k-state-selected",
@@ -941,7 +942,7 @@ var __meta__ = {
 
             var click = function(e) {
                 e.preventDefault();
-                resources.editor(that.container.find(".k-gantt-resources"), model);
+                resources.editor(that.container.find(DOT + Gantt.styles.popup.resourcesField), model);
             };
 
             var fields = [
@@ -952,7 +953,7 @@ var __meta__ = {
             ];
 
             if (model.get(resources.field)) {
-                fields.push({ field: resources.field, title: messages.resources, messages: messages, editor: editors.resources, click: click });
+                fields.push({ field: resources.field, title: messages.resources, messages: messages, editor: editors.resources, click: click, styles: Gantt.styles.popup });
             }
 
             return fields;
@@ -1091,7 +1092,8 @@ var __meta__ = {
             var that = this;
             var options = {};
             var messages = this.options.messages;
-            var popupStyles = Gantt.styles.popup;
+            var ganttStyles = Gantt.styles;
+            var popupStyles = ganttStyles.popup;
 
             var html = kendo.format('<div {0}="{1}" class="{2} {3}"><div class="{4}">', 
                 kendo.attr("uid"), task.uid, popupStyles.form, popupStyles.editForm, popupStyles.formContainer);
@@ -1138,14 +1140,14 @@ var __meta__ = {
             if (!this.trigger("edit", { container: container, model: task })) {
                 container.data("kendoWindow").center().open();
 
-                container.on(CLICK + NS, "a.k-gantt-cancel", function(e) {
+                container.on(CLICK + NS, DOT + ganttStyles.buttonCancel, function(e) {
                     e.preventDefault();
                     e.stopPropagation();
 
                     that.trigger("cancel", { container: container, model: task });
                 });
 
-                container.on(CLICK + NS, "a.k-gantt-update", function(e) {
+                container.on(CLICK + NS, DOT + ganttStyles.buttonSave, function(e) {
                     e.preventDefault();
                     e.stopPropagation();
 
@@ -1161,7 +1163,7 @@ var __meta__ = {
                     that.trigger("save", { container: container, model: task, updateInfo: updateInfo });
                 });
 
-                container.on(CLICK + NS, "a.k-gantt-delete", function(e) {
+                container.on(CLICK + NS, DOT + ganttStyles.buttonDelete, function(e) {
                     e.preventDefault();
                     e.stopPropagation();
 
@@ -1217,13 +1219,14 @@ var __meta__ = {
         },
 
         _attachHandlers: function() {
+            var ganttStyles = Gantt.styles;
             var grid = this.grid;
 
             var closeHandler = this._cancelProxy = proxy(this._cancel, this);
-            this.container.on(CLICK + NS, ".k-gantt-cancel", this._cancelProxy);
+            this.container.on(CLICK + NS, DOT + ganttStyles.buttonCancel, this._cancelProxy);
 
             this._saveProxy = proxy(this._save, this);
-            this.container.on(CLICK + NS, ".k-gantt-update", this._saveProxy);
+            this.container.on(CLICK + NS, DOT + ganttStyles.buttonSave, this._saveProxy);
 
             this.window.bind("close", function(e) {
                 if (e.userTriggered) {
