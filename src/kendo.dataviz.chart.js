@@ -3112,6 +3112,8 @@ var __meta__ = {
                 }
             });
 
+            dataviz.alignPathToPixel(rect);
+
             this.visual.append(rect);
 
             if (hasGradientOverlay(options)) {
