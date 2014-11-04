@@ -89,8 +89,6 @@ function showDemoLayout(e) {
             }
 
             e.view.header.find("#themechooser-button").toggle(!currentSection.mobile);
-            e.view.footer.find("#desktop-footer").toggle(!currentSection.mobile);
-            e.view.footer.find("#desktop-link").attr("href", "../" + url);
 
             element.find("[data-role=backbutton]").attr("href", "#section?name=" + currentSection.name);
         }
