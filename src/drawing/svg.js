@@ -1095,7 +1095,7 @@
         return "url(" + baseUrl() + "#"  + id + ")";
     }
 
-    function exportSVG(group, options) {
+    function exportGroup(group) {
         var root = new RootNode({ encodeText: true });
         root.load([group]);
 
@@ -1105,6 +1105,12 @@
                   "version='1.1'>" + root.render() + "</svg>";
 
         root.destroy();
+
+        return svg;
+    }
+
+    function exportSVG(group, options) {
+        var svg = exportGroup(group);
 
         if (!options || !options.raw) {
             svg = "data:image/svg+xml;base64," + util.encodeBase64(svg);
@@ -1165,7 +1171,8 @@
             RadialGradientNode: RadialGradientNode,
             RootNode: RootNode,
             Surface: Surface,
-            TextNode: TextNode
+            TextNode: TextNode,
+            _exportGroup: exportGroup
         }
     });
 
