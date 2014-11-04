@@ -4857,6 +4857,8 @@ var __meta__ = {
                 path.segments[i].anchor().round(0).translate(0.5, 0.5);
             }
         }
+
+        return path;
     }
 
     function innerRadialStops(options) {

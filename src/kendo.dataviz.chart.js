@@ -64,6 +64,7 @@ var __meta__ = {
         Text = dataviz.Text,
         TextBox = dataviz.TextBox,
         Title = dataviz.Title,
+        alignPathToPixel = dataviz.alignPathToPixel,
         animationDecorator = dataviz.animationDecorator,
         append = dataviz.append,
         autoFormat = dataviz.autoFormat,
@@ -3112,8 +3113,7 @@ var __meta__ = {
                 }
             });
 
-            dataviz.alignPathToPixel(rect);
-
+            alignPathToPixel(rect);
             this.visual.append(rect);
 
             if (hasGradientOverlay(options)) {
@@ -3142,9 +3142,8 @@ var __meta__ = {
 
         createHighlight: function(style) {
             var highlight = draw.Path.fromRect(this.box.toRect(), style);
-            dataviz.alignPathToPixel(highlight)
 
-            return highlight;
+            return alignPathToPixel(highlight);
         },
 
         getBorderColor: function() {
@@ -4392,7 +4391,7 @@ var __meta__ = {
                 });
             }
 
-            dataviz.alignPathToPixel(body);
+            alignPathToPixel(body);
             this.visual.append(body);
         },
 
@@ -6077,8 +6076,9 @@ var __meta__ = {
                 });
             }
 
-            dataviz.alignPathToPixel(body);
+            alignPathToPixel(body);
             container.append(body);
+
             if (hasGradientOverlay(options)) {
                 container.append(this.createGradientOverlay(body, {
                         baseColor: this.color
@@ -6105,7 +6105,7 @@ var __meta__ = {
 
             for (var i = 0; i < lines.length; i++) {
                 var line = draw.Path.fromPoints(lines[i], lineStyle);
-                dataviz.alignPathToPixel(line);
+                alignPathToPixel(line);
                 container.append(line);
             }
         },
