@@ -1,4 +1,4 @@
-@input-height: 2.071em;
+@input-height: 2.214em;
 @input-indent: .8em;
 @editor-icon-size: 32px;
 @menu-link-padding: 1.071em;
@@ -7,6 +7,7 @@
 @treeview-inner-margin: 1px 0 1px 0.3333em;
 @scheduler-link-padding: .16666em 1.1em;
 @grid-header-padding: .429em .2em .429em 1em;
+@icon-positioning: "material";
 
 @import "common/all.less";
 
@@ -279,6 +280,20 @@
     border-width: 0;
 }
 
+.k-context-menu.k-menu-vertical > .k-item > .k-link,
+.k-menu .k-menu-group .k-item > .k-link
+{
+    padding: 0.5em 4.929em 0.5em 1.714em;
+}
+
+.k-menu .k-item > .k-link > .k-i-arrow-e {
+    right: 2.143rem;
+}
+
+.k-menu .k-animation-container .k-menu-group {
+    padding: 1.143em 0;
+}
+
 .k-editor .k-editor-toolbar-wrap
 {
     padding: 2px 0;
@@ -292,8 +307,23 @@
     line-height: 1.143em;
 }
 
+.k-toolbar .k-input {
+    height: @input-height;
+    line-height: @input-height;
+    padding: 0.177em 0;
+    text-indent: @input-indent;
+    border: 0;
+    margin: 0;
+}
+
 .k-toolbar .k-overflow-anchor {
+    border-width: 1px;    
     line-height: inherit;
+}
+
+.k-toolbar .k-button-group .k-tool-icon {
+    width: 24px;
+    height: 24px;
 }
 
 .k-editor-toolbar .k-tool,
@@ -354,6 +384,10 @@ span.k-tooltip
     border-width: 0;
 }
 
+.k-slider .k-button .k-icon {
+    margin-top: 5px;
+}
+
 .k-slider-horizontal .k-slider-track,
 .k-slider-horizontal .k-slider-selection {
     height: 2px;
@@ -367,19 +401,40 @@ span.k-tooltip
 }
 
 .k-slider-horizontal .k-draghandle,
-.k-slider-vertical .k-draghandle {
+.k-slider-vertical .k-draghandle,
+.k-flatcolorpicker .k-hue-slider .k-draghandle,
+.k-flatcolorpicker .k-transparency-slider .k-draghandle {
     width: 6px;
     height: 6px;
 }
 
+.k-flatcolorpicker .k-hue-slider .k-draghandle {
+    margin-top: -1px;
+}
+
+.k-colorpicker
+{
+    .k-picker-wrap {
+        line-height: @input-height;
+    }
+
+    .k-selected-color {
+        height: @input-height;
+        padding: 0.177em 0;
+    }      
+}
+
 .k-draghandle.k-state-selected,
-.k-draghandle.k-state-selected:link
+.k-draghandle.k-state-selected:link,
+.k-flatcolorpicker .k-hue-slider .k-draghandle.k-state-selected,
+.k-flatcolorpicker .k-transparency-slider .k-draghandle.k-state-selected
 {
     width: 10px;
     height: 10px;
 }
 
-.k-slider-horizontal .k-draghandle.k-state-selected {
+.k-slider-horizontal .k-draghandle.k-state-selected,
+.k-flatcolorpicker .k-hue-slider .k-draghandle.k-state-selected {
     top: -6px;
 }
 
@@ -389,7 +444,6 @@ span.k-tooltip
 
 
 /* Editor */
-
 .editor-icon(@x, @y) {
     background-position: @x @y;
     opacity: 0.45;
@@ -493,14 +547,19 @@ span.k-tooltip
 }
 
 /* Scheduler */
-
-.k-scheduler-toolbar .k-scheduler-views {
+.k-scheduler-toolbar .k-nav-today,
+.k-scheduler-toolbar .k-scheduler-views,
+.k-scheduler-footer .k-scheduler-fullday {
     text-transform: uppercase;
+}
+
+.k-scheduler-footer .k-icon.k-i-clock {
+    display: none;
 }
 
 .k-scheduler-toolbar,
 .k-scheduler-footer {
-    line-height: 3em;
+    line-height: 2.857em;
     padding: 0;
 }
 
@@ -527,7 +586,7 @@ span.k-tooltip
     opacity: 1;
     background-position: -48px -192px;
 }
-/*####################################################################*/
+
 
 /* icons */
 
