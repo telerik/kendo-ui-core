@@ -319,6 +319,7 @@ var __meta__ = {
             var task;
             var coordinates = this._taskCoordinates = {};
             var milestoneWidth = Math.round(this._calculateMilestoneWidth());
+            var resourcesField = this.options.resourcesField;
 
             var addCoordinates = function(rowIndex) {
                 var taskLeft;
@@ -348,13 +349,13 @@ var __meta__ = {
 
                 cell = kendoDomElement("td", null, [this._renderTask(tasks[i], position)]);
 
-                if (task.resources) {
+                if (task[resourcesField] && task[resourcesField].length) {
                     cell.children.push(kendoDomElement("div",
                         {
                             className: "k-resources-wrap",
                             style: { left: (Math.max((position.width - 2), 0) + position.left) + "px" }
                         },
-                        this._renderResources(task.resources)));
+                        this._renderResources(task[resourcesField])));
                 }
 
                 row.children.push(cell);
