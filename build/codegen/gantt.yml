@@ -1,7 +1,7 @@
 :options:
     - :name: views.type
       :type: String
-      :description: The view type. Supported types are "day", "week", and "month".
+      :description: The view type. Supported types are "day", "week", "month" and "year".
       :values:
           - day
           - week
