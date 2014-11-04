@@ -4609,8 +4609,7 @@ var __meta__ = {
                 markers: {
                     border: {}
                 }
-            },
-            zIndex: 2
+            }
         },
 
         render: function() {
@@ -4647,13 +4646,13 @@ var __meta__ = {
                 }
                 point.label = new TextBox(labelText,
                     deepExtend({
-                        id: uniqueId(),
                         align: CENTER,
                         vAlign: CENTER,
                         margin: {
                             left: 5,
                             right: 5
-                        }
+                        },
+                        zIndex: this.zIndex()
                     }, labels)
                 );
                 point.append(point.label);
@@ -4691,11 +4690,15 @@ var __meta__ = {
                 background: options.background,
                 border: this.markerBorder(),
                 opacity: options.opacity,
-                zIndex: options.zIndex,
+                zIndex: this.zIndex(),
                 animation: options.animation
             });
 
             return marker;
+        },
+
+        zIndex: function() {
+            return valueOrDefault(this.series.zIndex, 2) + 0.1;
         },
 
         markerBox: function() {
@@ -4911,15 +4914,19 @@ var __meta__ = {
                     width: series.width,
                     opacity: series.opacity,
                     dashType: series.dashType
-                }
+                },
+                zIndex: this.zIndex()
             });
 
             if (options.closed) {
                 line.close();
             }
 
-            this.visual = new draw.Group();
-            this.visual.append(line);
+            this.visual = line;
+        },
+
+        zIndex: function() {
+            return valueOrDefault(this.series.zIndex, 2);
         },
 
         aliasFor: function(e, coords) {
@@ -5274,7 +5281,8 @@ var __meta__ = {
                         opacity: lineOptions.opacity,
                         dashType: lineOptions.dashType,
                         lineCap: "butt"
-                    }
+                    },
+                    zIndex: this.zIndex()
                 });
 
                 this.appendVisual(line);
@@ -5289,7 +5297,8 @@ var __meta__ = {
                     color: color,
                     opacity: series.opacity
                 },
-                stroke: null
+                stroke: null,
+                zIndex: this.zIndex()
             });
 
             this.appendVisual(area);
@@ -5772,7 +5781,9 @@ var __meta__ = {
         formatPointValue: function(point, format) {
             var value = point.value;
             return autoFormat(format, value.x, value.y);
-        }
+        },
+
+        createVisual: noop
     });
 
     var ScatterLineChart = ScatterChart.extend({

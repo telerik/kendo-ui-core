@@ -826,7 +826,7 @@ var __meta__ = {
 
             if (childVisual.options.noclip) {
                 this.getRoot().visual.append(childVisual);
-            } else if (childVisual.options.zIndex) {
+            } else if (defined(childVisual.options.zIndex)) {
                 this.stackRoot().stackVisual(childVisual);
             } else if (this.visual) {
                 this.visual.append(childVisual);
@@ -2609,14 +2609,12 @@ var __meta__ = {
                 );
             }
 
+            element.options.zIndex = this.options.zIndex;
             return element;
         },
 
         createVisual: function() {
-            var element = this.getElement();
-            if (element) {
-                this.appendVisual(element);
-            }
+            this.visual = this.getElement();
         }
     });
 
