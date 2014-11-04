@@ -2,6 +2,7 @@
 
     var Gantt = kendo.ui.Gantt;
     var GanttTask = kendo.data.GanttTask;
+    var ObservableObject = kendo.data.ObservableObject;
     var element;
     var gantt;
     var extend = $.extend;
@@ -832,6 +833,50 @@
         saveButton.click();
     });
 
+    test("save button updates assignments", function() {
+        setup({
+            columns: [
+                { field: "resources", title: "Task Resources", editable: true }
+            ]
+        });
+
+        var model = gantt.dataSource.at(0);
+
+        gantt.list.content.find("td:first").trigger("dblclick");
+
+        stub(gantt, {
+            _updateAssignments: function(id, resources) {
+                ok(true);
+                equal(id, model.get("id"));
+                equal(resources.length, 2);
+            }
+        });
+
+        $(".k-gantt-update").click();
+    });
+
+    test("save button update model assignments with models with value", function() {
+        setup({
+            columns: [
+                { field: "resources", title: "Task Resources", editable: true }
+            ]
+        });
+
+        var model = gantt.dataSource.at(0);
+
+        gantt.list.content.find("td:first").trigger("dblclick");
+
+        var editor = gantt._resourceEditor;
+
+        editor.unbind("save");
+        editor.grid.dataSource.at(0).set("value", null);
+        editor.grid.dataSource.at(1).set("value", 0);
+
+        $(".k-gantt-update").click();
+
+        equal(editor.model.get(gantt.resources.field).length, 0);
+    });
+
     test("close method closes window", function() {
         setup({
             columns: [
@@ -913,94 +958,15 @@
         $(".k-i-close").click();
     });
 
-    test("updates assignment dataSource - all resources cleared", function() {
-        setup({
-            columns: [
-                { field: "resources", title: "Task Resources", editable: true }
-            ]
-        });
-
-        gantt.list.content.find("td:first").trigger("dblclick");
-
-        var editor = gantt._resourceEditor;
-        var saveButton = $(".k-gantt-update");
-        var grid = gantt._resourceEditor.grid;
-
-        grid.dataSource.at(0).set("value", null);
-        grid.dataSource.at(1).set("value", null);
-
-        saveButton.click();
-
-        equal(gantt.assignments.dataSource.total(), 1);
-    });
-
-    test("updates assignment dataSource - all resources values are 0", function() {
-        setup({
-            columns: [
-                { field: "resources", title: "Task Resources", editable: true }
-            ]
-        });
-
-        gantt.list.content.find("td:first").trigger("dblclick");
-
-        var editor = gantt._resourceEditor;
-        var saveButton = $(".k-gantt-update");
-        var grid = gantt._resourceEditor.grid;
-
-        grid.dataSource.at(0).set("value", 0);
-        grid.dataSource.at(1).set("value", 0);
-
-        saveButton.click();
-
-        equal(gantt.assignments.dataSource.total(), 1);
-    });
-
-    test("updates assignment dataSource - all resources added", function() {
-        setup({
-            columns: [
-                { field: "resources", title: "Task Resources", editable: true }
-            ]
-        });
-
-        gantt.list.content.find("td:eq(1)").trigger("dblclick");
-
-        var editor = gantt._resourceEditor;
-        var saveButton = $(".k-gantt-update");
-        var grid = gantt._resourceEditor.grid;
-
-        grid.dataSource.at(0).set("value", 1);
-
-        saveButton.click();
-
-        equal(gantt.assignments.dataSource.total(), 4);
-    });
-
-    test("updates assignment dataSource - update existing resources", function() {
-        setup({
-            columns: [
-                { field: "resources", title: "Task Resources", editable: true }
-            ]
-        });
-
-        gantt.list.content.find("td:first").trigger("dblclick");
-
-        var editor = gantt._resourceEditor;
-        var saveButton = $(".k-gantt-update");
-        var grid = gantt._resourceEditor.grid;
-
-        grid.dataSource.at(0).set("value", 6);
-        grid.dataSource.at(1).set("value", 6);
-
-        saveButton.click();
-
-        equal(gantt.assignments.dataSource.at(0).get(gantt.assignments.dataValueField), 6);
-        equal(gantt.assignments.dataSource.at(1).get(gantt.assignments.dataValueField), 6);
-    });
-
     module("ResourceEditor grid", {
         setup: function() {
             element = $("<div />").appendTo(QUnit.fixture);
             kendo.effects.disable();
+            setup({
+                columns: [
+                    { field: "resources", title: "Task Resources", editable: true }
+                ]
+            });
         },
         teardown: function() {
             kendo.destroy(element);
@@ -1010,12 +976,6 @@
     });
 
     test("renders checkbox in resource name column", function() {
-        setup({
-            columns: [
-                { field: "resources", title: "Task Resources", editable: true }
-            ]
-        });
-
         gantt.list.content.find("td:first").trigger("dblclick");
 
         var grid = gantt._resourceEditor.grid;
@@ -1024,12 +984,6 @@
     });
 
     test("renders resource text in label", function() {
-        setup({
-            columns: [
-                { field: "resources", title: "Task Resources", editable: true }
-            ]
-        });
-
         gantt.list.content.find("td:first").trigger("dblclick");
 
         var grid = gantt._resourceEditor.grid;
@@ -1039,12 +993,6 @@
     });
 
     test("renders checked input when task has value from resources", function() {
-        setup({
-            columns: [
-                { field: "resources", title: "Task Resources", editable: true }
-            ]
-        });
-
         gantt.list.content.find("td:first").trigger("dblclick");
 
         var grid = gantt._resourceEditor.grid;
@@ -1054,12 +1002,6 @@
     });
 
     test("renders unchecked input when task does not have value from resources", function() {
-        setup({
-            columns: [
-                { field: "resources", title: "Task Resources", editable: true }
-            ]
-        });
-
         gantt.list.content.find("td:eq(1)").trigger("dblclick");
 
         var grid = gantt._resourceEditor.grid;
@@ -1069,12 +1011,6 @@
     });
 
     test("renders formated resource value", function() {
-        setup({
-            columns: [
-                { field: "resources", title: "Task Resources", editable: true }
-            ]
-        });
-
         gantt.list.content.find("td:first").trigger("dblclick");
 
         var grid = gantt._resourceEditor.grid;
@@ -1084,12 +1020,6 @@
     });
 
     test("renders empty resource value when task has not assignement from resources", function() {
-        setup({
-            columns: [
-                { field: "resources", title: "Task Resources", editable: true }
-            ]
-        });
-
         gantt.list.content.find("td:eq(1)").trigger("dblclick");
 
         var grid = gantt._resourceEditor.grid;
@@ -1099,12 +1029,6 @@
     });
 
     test("clicking checked checkbox remove resource value assignment", function() {
-        setup({
-            columns: [
-                { field: "resources", title: "Task Resources", editable: true }
-            ]
-        });
-
         gantt.list.content.find("td:first").trigger("dblclick");
 
         var grid = gantt._resourceEditor.grid;
@@ -1115,12 +1039,6 @@
     });
 
     test("clicking unchecked checkbox adds resource value assignment", function() {
-        setup({
-            columns: [
-                { field: "resources", title: "Task Resources", editable: true }
-            ]
-        });
-
         gantt.list.content.find("td:eq(1)").trigger("dblclick");
 
         var grid = gantt._resourceEditor.grid;
@@ -1131,12 +1049,6 @@
     });
 
     test("adding resource assignment value checks checkbox", function() {
-        setup({
-            columns: [
-                { field: "resources", title: "Task Resources", editable: true }
-            ]
-        });
-
         gantt.list.content.find("td:eq(1)").trigger("dblclick");
 
         var grid = gantt._resourceEditor.grid;
@@ -1147,12 +1059,6 @@
     });
 
     test("setting resource assignment value to 0 uncheck checkbox", function() {
-        setup({
-            columns: [
-                { field: "resources", title: "Task Resources", editable: true }
-            ]
-        });
-
         gantt.list.content.find("td:eq(1)").trigger("dblclick");
 
         var grid = gantt._resourceEditor.grid;
@@ -1163,12 +1069,6 @@
     });
 
     test("setting resource assignment value to null uncheck checkbox", function() {
-        setup({
-            columns: [
-                { field: "resources", title: "Task Resources", editable: true }
-            ]
-        });
-
         gantt.list.content.find("td:eq(1)").trigger("dblclick");
 
         var grid = gantt._resourceEditor.grid;
@@ -1182,6 +1082,11 @@
         setup: function() {
             element = $("<div />").appendTo(QUnit.fixture);
             kendo.effects.disable();
+            setup({
+                columns: [
+                    { field: "resources", title: "Task Resources", editable: true }
+                ]
+            });
         },
         teardown: function() {
             kendo.destroy(element);
@@ -1191,12 +1096,6 @@
     });
 
     test("wrap resource field", 6, function() {
-        setup({
-            columns: [
-                { field: "resources", title: "Task Resources", editable: true }
-            ]
-        });
-
         gantt.editTask(gantt.dataSource.at(0).uid);
 
         var container = gantt._editor.container.children("div.k-edit-form-container");
@@ -1214,12 +1113,6 @@
     });
 
     test("renders button for resources editor", 2, function() {
-        setup({
-            columns: [
-                { field: "resources", title: "Task Resources", editable: true }
-            ]
-        });
-
         gantt.editTask(gantt.dataSource.at(0).uid);
 
         var container = gantt._editor.container.children("div.k-edit-form-container");
@@ -1230,12 +1123,6 @@
     });
 
     test("clicking resources 'assign' button creates resources editor", function() {
-        setup({
-            columns: [
-                { field: "resources", title: "Task Resources", editable: true }
-            ]
-        });
-
         gantt.editTask(gantt.dataSource.at(0).uid);
 
         var container = gantt._editor.container.children("div.k-edit-form-container");
@@ -1246,12 +1133,6 @@
     });
 
     test("clicking resources editor save button does not trigger save event", function() {
-        setup({
-            columns: [
-                { field: "resources", title: "Task Resources", editable: true }
-            ]
-        });
-
         gantt.editTask(gantt.dataSource.at(0).uid);
 
         var container = gantt._editor.container.children("div.k-edit-form-container");
@@ -1271,12 +1152,6 @@
     });
 
     test("update assignments upon save button click", 3, function() {
-        setup({
-            columns: [
-                { field: "resources", title: "Task Resources", editable: true }
-            ]
-        });
-
         var model = gantt.dataSource.at(0);
 
         gantt.editTask(model.uid);
@@ -1292,6 +1167,48 @@
         });
 
         container.find("a.k-gantt-update").click();
+    });
+
+    module("Gantt", {
+        setup: function() {
+            element = $("div");
+            setup();
+        },
+        teardown: function() {
+            gantt.destroy();
+        }
+    });
+
+    test("updates assignment dataSource - all resources cleared", function() {
+        gantt._updateAssignments(gantt.dataSource.at(0).get("id"), []);
+
+        equal(gantt.assignments.dataSource.total(), 1);
+    });
+
+    test("updates assignment dataSource - all resources added", function() {
+        var resources = [
+           new ObservableObject({ id: 0, value: 1 }),
+           new ObservableObject({ id: 1, value: 1 })
+        ];
+
+        gantt._updateAssignments(gantt.dataSource.at(1).get("id"), resources);
+
+        equal(gantt.assignments.dataSource.total(), 4);
+    });
+
+    test("updates assignment dataSource - update existing resources", 3, function() {
+        var resources = [
+           new ObservableObject({ id: 0, value: 4 }),
+           new ObservableObject({ id: 1, value: 4 })
+        ];
+        var assignments = gantt.assignments.dataSource;
+
+        gantt._updateAssignments(gantt.dataSource.at(0).get("id"), resources);
+
+        equal(assignments.total(), 3)
+
+        equal(assignments.at(0).get(gantt.assignments.dataValueField), 4);
+        equal(assignments.at(0).get(gantt.assignments.dataValueField), 4);
     });
 
 })();
