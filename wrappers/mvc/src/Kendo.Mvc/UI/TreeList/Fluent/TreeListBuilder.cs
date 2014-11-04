@@ -70,10 +70,19 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// If set to true the user could sort the treelist by clicking the column header cells. By default sorting is disabled.Can be set to a JavaScript object which represents the sorting configuration.
         /// </summary>
+        public TreeListBuilder<T> Sortable()
+        {
+            container.Sortable.Enabled = true;
+            return this;
+        }
+
+        /// <summary>
+        /// If set to true the user could sort the treelist by clicking the column header cells. By default sorting is disabled.Can be set to a JavaScript object which represents the sorting configuration.
+        /// </summary>
         /// <param name="enabled">Enables or disables the sortable option.</param>
         public TreeListBuilder<T> Sortable(bool enabled)
         {
-            container.Sortable.Enabled = true;
+            container.Sortable.Enabled = enabled;
             return this;
         }
 
@@ -115,10 +124,19 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// If set to true the user can filter the data source using the grid filter menu. Filtering is disabled by default.Can be set to a JavaScript object which represents the filter menu configuration.
         /// </summary>
+        public TreeListBuilder<T> Filterable()
+        {
+            container.Filterable.Enabled = true;
+            return this;
+        }
+
+        /// <summary>
+        /// If set to true the user can filter the data source using the grid filter menu. Filtering is disabled by default.Can be set to a JavaScript object which represents the filter menu configuration.
+        /// </summary>
         /// <param name="enabled">Enables or disables the filterable option.</param>
         public TreeListBuilder<T> Filterable(bool enabled)
         {
-            container.Filterable.Enabled = true;
+            container.Filterable.Enabled = enabled;
             return this;
         }
 
@@ -138,10 +156,19 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// If set to true the user would be able to edit the data to which the treelist is bound to. By default editing is disabled.Can be set to a string ("inline" or "popup") to specify the editing mode. The default editing mode is "inline".Can be set to a JavaScript object which represents the editing configuration.
         /// </summary>
+        public TreeListBuilder<T> Editable()
+        {
+            container.Editable.Enabled = true;
+            return this;
+        }
+
+        /// <summary>
+        /// If set to true the user would be able to edit the data to which the treelist is bound to. By default editing is disabled.Can be set to a string ("inline" or "popup") to specify the editing mode. The default editing mode is "inline".Can be set to a JavaScript object which represents the editing configuration.
+        /// </summary>
         /// <param name="enabled">Enables or disables the editable option.</param>
         public TreeListBuilder<T> Editable(bool enabled)
         {
-            container.Editable.Enabled = true;
+            container.Editable.Enabled = enabled;
             return this;
         }
 

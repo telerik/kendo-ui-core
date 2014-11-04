@@ -610,7 +610,6 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
         
-        
         /// <summary>
         /// The text messages displayed in the widget. Use it to customize or localize the messages.
         /// </summary>

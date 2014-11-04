@@ -134,10 +134,20 @@ namespace Kendo.Mvc.UI.Fluent
         /// If set to true the user can click the column header and sort the grid by the column field when sorting is enabled. If set to false sorting will
 		/// be disabled for this column. By default all columns are sortable if sorting is enabled via the sortable option.
         /// </summary>
+        public TreeListColumnBuilder Sortable()
+        {
+            container.Sortable.Enabled = true;
+            return this;
+        }
+
+        /// <summary>
+        /// If set to true the user can click the column header and sort the grid by the column field when sorting is enabled. If set to false sorting will
+		/// be disabled for this column. By default all columns are sortable if sorting is enabled via the sortable option.
+        /// </summary>
         /// <param name="enabled">Enables or disables the sortable option.</param>
         public TreeListColumnBuilder Sortable(bool enabled)
         {
-            container.Sortable.Enabled = true;
+            container.Sortable.Enabled = enabled;
             return this;
         }
 
@@ -205,10 +215,20 @@ namespace Kendo.Mvc.UI.Fluent
         /// If set to true a filter menu will be displayed for this column when filtering is enabled. If set to false the filter menu will not be displayed. By default a filter menu is displayed
 		/// for all columns when filtering is enabled via the filterable option.Can be set to a JavaScript object which represents the filter menu configuration.
         /// </summary>
+        public TreeListColumnBuilder Filterable()
+        {
+            container.Filterable.Enabled = true;
+            return this;
+        }
+
+        /// <summary>
+        /// If set to true a filter menu will be displayed for this column when filtering is enabled. If set to false the filter menu will not be displayed. By default a filter menu is displayed
+		/// for all columns when filtering is enabled via the filterable option.Can be set to a JavaScript object which represents the filter menu configuration.
+        /// </summary>
         /// <param name="enabled">Enables or disables the filterable option.</param>
         public TreeListColumnBuilder Filterable(bool enabled)
         {
-            container.Filterable.Enabled = true;
+            container.Filterable.Enabled = enabled;
             return this;
         }
 

@@ -102,10 +102,19 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// If set to false the user won't be able to create, modify or delete tasks and dependencies.
         /// </summary>
+        public GanttBuilder<TTaskModel,TDependenciesModel> Editable()
+        {
+            container.Editable.Enabled = true;
+            return this;
+        }
+
+        /// <summary>
+        /// If set to false the user won't be able to create, modify or delete tasks and dependencies.
+        /// </summary>
         /// <param name="enabled">Enables or disables the editable option.</param>
         public GanttBuilder<TTaskModel,TDependenciesModel> Editable(bool enabled)
         {
-            container.Editable.Enabled = true;
+            container.Editable.Enabled = enabled;
             return this;
         }
 

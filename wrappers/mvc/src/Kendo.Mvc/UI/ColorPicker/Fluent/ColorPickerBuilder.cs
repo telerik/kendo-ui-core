@@ -45,7 +45,6 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
         
-        
         /// <summary>
         /// Allows localization of the strings that are used in the widget.
         /// </summary>

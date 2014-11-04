@@ -243,7 +243,6 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
         
-        
         /// <summary>
         /// Allows setting of serialization options.
         /// </summary>

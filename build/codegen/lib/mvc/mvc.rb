@@ -178,10 +178,19 @@ module CodeGen::MVC::Wrappers
         /// <summary>
         /// <%= description.gsub(/\r?\n/, '\n\t\t/// ').html_encode()%>
         /// </summary>
+        public <%= owner.respond_to?('csharp_item_class') ? owner.csharp_item_class : owner.csharp_class %>Builder<%= owner.csharp_generic_args %> <%= csharp_name%>()
+        {
+            container.<%= csharp_name %>.Enabled = true;
+            return this;
+        }
+
+        /// <summary>
+        /// <%= description.gsub(/\r?\n/, '\n\t\t/// ').html_encode()%>
+        /// </summary>
         /// <param name="enabled">Enables or disables the <%= csharp_name.downcase %> option.</param>
         public <%= owner.respond_to?('csharp_item_class') ? owner.csharp_item_class : owner.csharp_class %>Builder<%= owner.csharp_generic_args %> <%= csharp_name%>(bool enabled)
         {
-            container.<%= csharp_name %>.Enabled = true;
+            container.<%= csharp_name %>.Enabled = enabled;
             return this;
         }
 
