@@ -104,8 +104,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         public GanttBuilder<TTaskModel,TDependenciesModel> Editable()
         {
-            container.Editable.Enabled = true;
-            return this;
+            return Editable(true);
         }
 
         /// <summary>

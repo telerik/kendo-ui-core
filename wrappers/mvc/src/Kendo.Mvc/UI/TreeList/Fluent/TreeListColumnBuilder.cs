@@ -32,7 +32,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// HTML attributes of the table cell (&lt;td&gt;) rendered for the column.
         /// </summary>
         /// <param name="value">The value that configures the attributes.</param>
-        public TreeListColumnBuilder<T> Attributes(IDictionary<string, object> value)
+        public TreeListColumnBuilder<T> Attributes(IDictionary<string,object> value)
         {
             container.Attributes = value;
 
@@ -136,8 +136,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         public TreeListColumnBuilder<T> Sortable()
         {
-            container.Sortable.Enabled = true;
-            return this;
+            return Sortable(true);
         }
 
         /// <summary>
@@ -217,8 +216,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         public TreeListColumnBuilder<T> Filterable()
         {
-            container.Filterable.Enabled = true;
-            return this;
+            return Filterable(true);
         }
 
         /// <summary>

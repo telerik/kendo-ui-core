@@ -19,8 +19,7 @@ module CodeGen::MVC::Wrappers
         'map.layers.extent' => 'double[]',
         'map.markers.location' => 'double[]',
         'treemap.colors' => 'string[]',
-        'editor.stylesheets' => 'string[]',
-        'treelist.columns.attributes' => 'IDictionary<string, object>'
+        'editor.stylesheets' => 'string[]'
     }
 
     SERIALIZATION_SKIP_LIST = [
@@ -60,7 +59,8 @@ module CodeGen::MVC::Wrappers
     ]
 
     GENERIC_BUILDER_SKIP_LIST = [
-        'gantt'
+        'gantt',
+        'diagram'
     ]
 
     IGNORED = [
@@ -184,8 +184,7 @@ module CodeGen::MVC::Wrappers
         /// </summary>
         public <%= owner.respond_to?('csharp_item_class') ? owner.csharp_item_class : owner.csharp_class %>Builder<%= owner.csharp_generic_args %> <%= csharp_name%>()
         {
-            container.<%= csharp_name %>.Enabled = true;
-            return this;
+            return <%= csharp_name %>(true);
         }
 
         /// <summary>
@@ -299,6 +298,8 @@ module CodeGen::MVC::Wrappers
                 return_type = enum_type
             elsif values
                 return_type = "#{owner.csharp_class.gsub(/Settings/, "")}#{csharp_name}"
+            elsif full_name.match(/attributes$/)
+                return_type = 'IDictionary<string,object>'
             else
                 return_type = FIELD_TYPES[full_name] || TYPES[type[0]]
             end

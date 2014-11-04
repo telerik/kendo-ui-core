@@ -25,7 +25,7 @@ namespace Kendo.Mvc.UI
 
         //>> Fields
         
-        public IDictionary<string, object> Attributes { get; set; }
+        public IDictionary<string,object> Attributes { get; set; }
         
         public List<TreeListColumnCommand> Command
         {

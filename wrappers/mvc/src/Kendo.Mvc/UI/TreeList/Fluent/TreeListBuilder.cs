@@ -72,8 +72,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         public TreeListBuilder<T> Sortable()
         {
-            container.Sortable.Enabled = true;
-            return this;
+            return Sortable(true);
         }
 
         /// <summary>
@@ -126,8 +125,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         public TreeListBuilder<T> Filterable()
         {
-            container.Filterable.Enabled = true;
-            return this;
+            return Filterable(true);
         }
 
         /// <summary>
@@ -158,8 +156,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         public TreeListBuilder<T> Editable()
         {
-            container.Editable.Enabled = true;
-            return this;
+            return Editable(true);
         }
 
         /// <summary>
