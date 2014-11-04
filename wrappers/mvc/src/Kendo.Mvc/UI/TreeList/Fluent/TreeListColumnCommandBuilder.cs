@@ -8,7 +8,7 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent API for configuring the TreeListColumnCommand settings.
     /// </summary>
-    public class TreeListColumnCommandBuilder: IHideObjectMembers
+    public class TreeListColumnCommandBuilder<T>: IHideObjectMembers where T : class
     {
         private readonly TreeListColumnCommand container;
 
@@ -23,7 +23,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// The name of the command. The built-in commands are "edit", "createchild" and "destroy". Can be set to a custom value.
         /// </summary>
         /// <param name="value">The value that configures the name.</param>
-        public TreeListColumnCommandBuilder Name(string value)
+        public TreeListColumnCommandBuilder<T> Name(string value)
         {
             container.Name = value;
 
@@ -34,7 +34,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// The text displayed by the command button. If not set the name option is used as the button text.
         /// </summary>
         /// <param name="value">The value that configures the text.</param>
-        public TreeListColumnCommandBuilder Text(string value)
+        public TreeListColumnCommandBuilder<T> Text(string value)
         {
             container.Text = value;
 
@@ -45,7 +45,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// The CSS class applied to the command button.
         /// </summary>
         /// <param name="value">The value that configures the classname.</param>
-        public TreeListColumnCommandBuilder ClassName(string value)
+        public TreeListColumnCommandBuilder<T> ClassName(string value)
         {
             container.ClassName = value;
 
@@ -56,7 +56,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// The JavaScript function executed when the user clicks the command button. The function receives a jQuery Event as an argument.The function context (available via the this keyword) will be set to the grid instance.
         /// </summary>
         /// <param name="value">The value that configures the click.</param>
-        public TreeListColumnCommandBuilder Click(string value)
+        public TreeListColumnCommandBuilder<T> Click(string value)
         {
             container.Click = value;
 

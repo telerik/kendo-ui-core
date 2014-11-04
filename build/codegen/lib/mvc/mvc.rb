@@ -59,6 +59,10 @@ module CodeGen::MVC::Wrappers
 		'map.layerdefaults.marker'
     ]
 
+    GENERIC_BUILDER_SKIP_LIST = [
+        'gantt'
+    ]
+
     IGNORED = [
         'map.center',
         'map.controls.attribution.position',
@@ -199,11 +203,11 @@ module CodeGen::MVC::Wrappers
         /// <%= description.gsub(/\r?\n/, '\n\t\t/// ').html_encode()%>
         /// </summary>
         /// <param name="configurator">The action that configures the <%= csharp_name.downcase %>.</param>
-        public <%= owner.respond_to?('csharp_item_class') ? owner.csharp_item_class : owner.csharp_class %>Builder<%= owner.csharp_generic_args %> <%= csharp_name%>(Action<<%= csharp_builder_class %>> configurator)
+        public <%= owner.respond_to?('csharp_item_class') ? owner.csharp_item_class : owner.csharp_class %>Builder<%= owner.csharp_generic_args %> <%= csharp_name%>(Action<<%= csharp_builder_class %><%= csharp_generic_args %>> configurator)
         {<% if toggleable %>
             container.<%= csharp_name %>.Enabled = true;
             <% end %>
-            configurator(new <%= csharp_builder_class %>(container.<%= csharp_name%>));
+            configurator(new <%= csharp_builder_class %><%= csharp_generic_args %>(container.<%= csharp_name%>));
             return this;
         }
         })
@@ -394,6 +398,20 @@ module CodeGen::MVC::Wrappers
             "#{csharp_class}Builder"
         end
 
+        def uses_generic_args?
+            GENERIC_BUILDER_SKIP_LIST.inject(true) do |uses_generics, field|
+                uses_generics && !full_name.start_with?(field)
+            end
+        end
+
+        def csharp_generic_args
+            owner.csharp_generic_args if uses_generic_args?
+        end
+
+        def csharp_generic_constraints
+            owner.csharp_generic_constraints if uses_generic_args?
+        end
+
         def to_initialization
             ERB.new(%{
             <%=csharp_name%> = new <%=csharp_class%>();
@@ -475,11 +493,11 @@ module CodeGen::MVC::Wrappers
         end
 
         def csharp_builder_class
-            csharp_class + 'Builder' + csharp_generic_args
+            "#{csharp_class}Builder#{csharp_generic_args}"
         end
 
         def csharp_html_builder_class
-            csharp_class + 'HtmlBuilder' + csharp_generic_args
+            "#{csharp_class}HtmlBuilder#{csharp_generic_args}"
         end
 
         def csharp_generic_args

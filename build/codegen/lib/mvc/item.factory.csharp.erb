@@ -6,7 +6,7 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent API for adding items to Kendo <%= owner.csharp_name %> for ASP.NET MVC
     /// </summary>
-    public class <%= csharp_builder_class %> : IHideObjectMembers
+    public class <%= csharp_builder_class %><%= csharp_generic_args %> : IHideObjectMembers<%= csharp_generic_constraints %>
     {
         private readonly <%= csharp_class %> container;
 
@@ -15,13 +15,13 @@ namespace Kendo.Mvc.UI.Fluent
             this.container = container;
         }
 
-        public virtual <%= csharp_item_class %>Builder Add()
+        public virtual <%= csharp_item_class %>Builder<%= csharp_generic_args %> Add()
         {
             var item = new <%= csharp_item_class %>();
 
             container.Add(item);
 
-            return new <%= csharp_item_class %>Builder(item);
+            return new <%= csharp_item_class %>Builder<%= csharp_generic_args %>(item);
         }
     }
 }

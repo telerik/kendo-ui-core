@@ -8,7 +8,7 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent API for configuring the TreeListFilterableSettings settings.
     /// </summary>
-    public class TreeListFilterableSettingsBuilder: IHideObjectMembers
+    public class TreeListFilterableSettingsBuilder<T>: IHideObjectMembers where T : class
     {
         private readonly TreeListFilterableSettings container;
 
@@ -23,7 +23,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// If set to true the filter menu allows the user to input a second criteria.
         /// </summary>
         /// <param name="value">The value that configures the extra.</param>
-        public TreeListFilterableSettingsBuilder Extra(bool value)
+        public TreeListFilterableSettingsBuilder<T> Extra(bool value)
         {
             container.Extra = value;
 

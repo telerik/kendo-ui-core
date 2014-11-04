@@ -115,6 +115,7 @@ module CodeGen::MVC::Wrappers::DataViz
         include Options
     end
 
+
     class ArrayItem < CompositeOption
         def csharp_class
             owner.csharp_item_class

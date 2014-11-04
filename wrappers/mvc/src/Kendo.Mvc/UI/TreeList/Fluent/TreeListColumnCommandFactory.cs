@@ -6,7 +6,7 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent API for adding items to Kendo Column for ASP.NET MVC
     /// </summary>
-    public class TreeListColumnCommandFactory : IHideObjectMembers
+    public class TreeListColumnCommandFactory<T> : IHideObjectMembers where T : class
     {
         private readonly List<TreeListColumnCommand> container;
 
@@ -15,13 +15,13 @@ namespace Kendo.Mvc.UI.Fluent
             this.container = container;
         }
 
-        public virtual TreeListColumnCommandBuilder Add()
+        public virtual TreeListColumnCommandBuilder<T> Add()
         {
             var item = new TreeListColumnCommand();
 
             container.Add(item);
 
-            return new TreeListColumnCommandBuilder(item);
+            return new TreeListColumnCommandBuilder<T>(item);
         }
     }
 }

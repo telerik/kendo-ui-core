@@ -8,7 +8,7 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent API for configuring the TreeListColumn settings.
     /// </summary>
-    public class TreeListColumnBuilder: IHideObjectMembers
+    public class TreeListColumnBuilder<T>: IHideObjectMembers where T : class
     {
         private readonly TreeListColumn container;
 
@@ -23,7 +23,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// HTML attributes of the table cell (&lt;td&gt;) rendered for the column.
         /// </summary>
         /// <param name="value">The value that configures the attributes.</param>
-        public TreeListColumnBuilder Attributes(object value)
+        public TreeListColumnBuilder<T> Attributes(object value)
         {
             return this.Attributes(value.ToDictionary());
         }
@@ -32,7 +32,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// HTML attributes of the table cell (&lt;td&gt;) rendered for the column.
         /// </summary>
         /// <param name="value">The value that configures the attributes.</param>
-        public TreeListColumnBuilder Attributes(IDictionary<string, object> value)
+        public TreeListColumnBuilder<T> Attributes(IDictionary<string, object> value)
         {
             container.Attributes = value;
 
@@ -43,9 +43,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// The configuration of the column command(s). If set the column would display a button for every command. Commands can be custom or built-in ("edit", "destroy" or "createchild").The "edit" built-in command switches the current table row in edit mode.The "createchild" built-in command adds new child item to the current table row and switches in edit mode.The "destroy" built-in command removes the data item to which the current table row is bound.Custom commands are supported by specifying the click option.
         /// </summary>
         /// <param name="configurator">The action that configures the command.</param>
-        public TreeListColumnBuilder Command(Action<TreeListColumnCommandFactory> configurator)
+        public TreeListColumnBuilder<T> Command(Action<TreeListColumnCommandFactory<T>> configurator)
         {
-            configurator(new TreeListColumnCommandFactory(container.Command));
+            configurator(new TreeListColumnCommandFactory<T>(container.Command));
             return this;
         }
         
@@ -53,7 +53,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Provides a way to specify a custom editing UI for the column. Use the container parameter to create the editing UI.
         /// </summary>
         /// <param name="value">The value that configures the editor.</param>
-        public TreeListColumnBuilder Editor(string value)
+        public TreeListColumnBuilder<T> Editor(string value)
         {
             container.Editor = value;
 
@@ -64,7 +64,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// If set to true the column value will be HTML-encoded before it is displayed. If set to false the column value will be displayed as is. By default the column value is HTML-encoded.
         /// </summary>
         /// <param name="value">The value that configures the encoded.</param>
-        public TreeListColumnBuilder Encoded(bool value)
+        public TreeListColumnBuilder<T> Encoded(bool value)
         {
             container.Encoded = value;
 
@@ -75,7 +75,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// If set to true the column will show the icons that are used for exapdning and collapsing of child rows. By default, the first column of the TreeList is expandable.
         /// </summary>
         /// <param name="value">The value that configures the expandable.</param>
-        public TreeListColumnBuilder Expandable(bool value)
+        public TreeListColumnBuilder<T> Expandable(bool value)
         {
             container.Expandable = value;
 
@@ -87,7 +87,7 @@ namespace Kendo.Mvc.UI.Fluent
 		/// The field name should be a valid Javascript identifier and should contain no spaces, no special characters, and the first character should be a letter.
         /// </summary>
         /// <param name="value">The value that configures the field.</param>
-        public TreeListColumnBuilder Field(string value)
+        public TreeListColumnBuilder<T> Field(string value)
         {
             container.Field = value;
 
@@ -99,7 +99,7 @@ namespace Kendo.Mvc.UI.Fluent
 		/// custom number format, standard date format or a custom date format.
         /// </summary>
         /// <param name="value">The value that configures the format.</param>
-        public TreeListColumnBuilder Format(string value)
+        public TreeListColumnBuilder<T> Format(string value)
         {
             container.Format = value;
 
@@ -111,7 +111,7 @@ namespace Kendo.Mvc.UI.Fluent
 		/// is displayed in the column header cell.
         /// </summary>
         /// <param name="value">The value that configures the headertemplate.</param>
-        public TreeListColumnBuilder HeaderTemplate(string value)
+        public TreeListColumnBuilder<T> HeaderTemplate(string value)
         {
             container.HeaderTemplate = value;
 
@@ -123,7 +123,7 @@ namespace Kendo.Mvc.UI.Fluent
 		/// is displayed in the column header cell.
         /// </summary>
         /// <param name="value">The value that configures the headertemplate.</param>
-        public TreeListColumnBuilder HeaderTemplateId(string value)
+        public TreeListColumnBuilder<T> HeaderTemplateId(string value)
         {
             container.HeaderTemplateId = value;
 
@@ -134,7 +134,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// If set to true the user can click the column header and sort the grid by the column field when sorting is enabled. If set to false sorting will
 		/// be disabled for this column. By default all columns are sortable if sorting is enabled via the sortable option.
         /// </summary>
-        public TreeListColumnBuilder Sortable()
+        public TreeListColumnBuilder<T> Sortable()
         {
             container.Sortable.Enabled = true;
             return this;
@@ -145,7 +145,7 @@ namespace Kendo.Mvc.UI.Fluent
 		/// be disabled for this column. By default all columns are sortable if sorting is enabled via the sortable option.
         /// </summary>
         /// <param name="enabled">Enables or disables the sortable option.</param>
-        public TreeListColumnBuilder Sortable(bool enabled)
+        public TreeListColumnBuilder<T> Sortable(bool enabled)
         {
             container.Sortable.Enabled = enabled;
             return this;
@@ -157,11 +157,11 @@ namespace Kendo.Mvc.UI.Fluent
 		/// be disabled for this column. By default all columns are sortable if sorting is enabled via the sortable option.
         /// </summary>
         /// <param name="configurator">The action that configures the sortable.</param>
-        public TreeListColumnBuilder Sortable(Action<TreeListColumnSortableSettingsBuilder> configurator)
+        public TreeListColumnBuilder<T> Sortable(Action<TreeListColumnSortableSettingsBuilder<T>> configurator)
         {
             container.Sortable.Enabled = true;
             
-            configurator(new TreeListColumnSortableSettingsBuilder(container.Sortable));
+            configurator(new TreeListColumnSortableSettingsBuilder<T>(container.Sortable));
             return this;
         }
         
@@ -170,7 +170,7 @@ namespace Kendo.Mvc.UI.Fluent
 		/// Each table row consists of table cells (&lt;td&gt;) which represent the treelist columns. By default the HTML-encoded value of the field is displayed in the column.
         /// </summary>
         /// <param name="value">The value that configures the template.</param>
-        public TreeListColumnBuilder Template(string value)
+        public TreeListColumnBuilder<T> Template(string value)
         {
             container.Template = value;
 
@@ -182,7 +182,7 @@ namespace Kendo.Mvc.UI.Fluent
 		/// Each table row consists of table cells (&lt;td&gt;) which represent the treelist columns. By default the HTML-encoded value of the field is displayed in the column.
         /// </summary>
         /// <param name="value">The value that configures the template.</param>
-        public TreeListColumnBuilder TemplateId(string value)
+        public TreeListColumnBuilder<T> TemplateId(string value)
         {
             container.TemplateId = value;
 
@@ -193,7 +193,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// The text that is displayed in the column header cell. If not set the field is used.
         /// </summary>
         /// <param name="value">The value that configures the title.</param>
-        public TreeListColumnBuilder Title(string value)
+        public TreeListColumnBuilder<T> Title(string value)
         {
             container.Title = value;
 
@@ -204,7 +204,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// The width of the column. Numeric values are treated as pixels. For more important information, please refer to Column Widths.
         /// </summary>
         /// <param name="value">The value that configures the width.</param>
-        public TreeListColumnBuilder Width(string value)
+        public TreeListColumnBuilder<T> Width(string value)
         {
             container.Width = value;
 
@@ -215,7 +215,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// If set to true a filter menu will be displayed for this column when filtering is enabled. If set to false the filter menu will not be displayed. By default a filter menu is displayed
 		/// for all columns when filtering is enabled via the filterable option.Can be set to a JavaScript object which represents the filter menu configuration.
         /// </summary>
-        public TreeListColumnBuilder Filterable()
+        public TreeListColumnBuilder<T> Filterable()
         {
             container.Filterable.Enabled = true;
             return this;
@@ -226,7 +226,7 @@ namespace Kendo.Mvc.UI.Fluent
 		/// for all columns when filtering is enabled via the filterable option.Can be set to a JavaScript object which represents the filter menu configuration.
         /// </summary>
         /// <param name="enabled">Enables or disables the filterable option.</param>
-        public TreeListColumnBuilder Filterable(bool enabled)
+        public TreeListColumnBuilder<T> Filterable(bool enabled)
         {
             container.Filterable.Enabled = enabled;
             return this;
@@ -238,11 +238,11 @@ namespace Kendo.Mvc.UI.Fluent
 		/// for all columns when filtering is enabled via the filterable option.Can be set to a JavaScript object which represents the filter menu configuration.
         /// </summary>
         /// <param name="configurator">The action that configures the filterable.</param>
-        public TreeListColumnBuilder Filterable(Action<TreeListColumnFilterableSettingsBuilder> configurator)
+        public TreeListColumnBuilder<T> Filterable(Action<TreeListColumnFilterableSettingsBuilder<T>> configurator)
         {
             container.Filterable.Enabled = true;
             
-            configurator(new TreeListColumnFilterableSettingsBuilder(container.Filterable));
+            configurator(new TreeListColumnFilterableSettingsBuilder<T>(container.Filterable));
             return this;
         }
         

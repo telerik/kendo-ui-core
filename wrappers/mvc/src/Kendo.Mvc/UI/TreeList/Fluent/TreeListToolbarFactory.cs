@@ -6,7 +6,7 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent API for adding items to Kendo TreeList for ASP.NET MVC
     /// </summary>
-    public class TreeListToolbarFactory : IHideObjectMembers
+    public class TreeListToolbarFactory<T> : IHideObjectMembers where T : class
     {
         private readonly List<TreeListToolbar> container;
 
@@ -15,13 +15,13 @@ namespace Kendo.Mvc.UI.Fluent
             this.container = container;
         }
 
-        public virtual TreeListToolbarBuilder Add()
+        public virtual TreeListToolbarBuilder<T> Add()
         {
             var item = new TreeListToolbar();
 
             container.Add(item);
 
-            return new TreeListToolbarBuilder(item);
+            return new TreeListToolbarBuilder<T>(item);
         }
     }
 }

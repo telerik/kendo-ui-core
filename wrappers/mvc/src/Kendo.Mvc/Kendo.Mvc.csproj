@@ -1600,6 +1600,8 @@
     <Compile Include="UI\Tooltip\Tooltip.cs" />
     <Compile Include="UI\Tooltip\TooltipPosition.cs" />
     <Compile Include="UI\TreeList\Fluent\TreeListAjaxDataSourceBuilder.cs" />
+    <Compile Include="UI\TreeList\Fluent\TreeListColumnFactory.cs" />
+    <Compile Include="UI\TreeList\Fluent\TreeListToolbarFactory.cs" />
     <Compile Include="UI\TreeList\TreeListModelDescriptor.cs" />
     <Compile Include="UI\TreeMap\Fluent\TreeMapColorRangeFactory.cs" />
     <Compile Include="UI\TreeMap\Html\TreeMapHtmlBuilder.cs" />
@@ -2292,7 +2294,6 @@
     <Compile Include="UI\TreeList\Html\TreeListHtmlBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UI\TreeList\Fluent\TreeListColumnFactory.cs" />
     <Compile Include="UI\TreeList\TreeListColumn.cs" />
     <Compile Include="UI\TreeList\Fluent\TreeListColumnBuilder.cs" />
     <Compile Include="UI\TreeList\TreeListColumnComman.cs" />
@@ -2305,19 +2306,18 @@
     <Compile Include="UI\TreeList\Fluent\TreeListColumnCommandFactory.cs" />
     <Compile Include="UI\TreeList\TreeListColumnCommand.cs" />
     <Compile Include="UI\TreeList\Fluent\TreeListColumnCommandBuilder.cs" />
-    <Compile Include="UI\TreeList\Fluent\TreeListToolbarFactory.cs" />
     <Compile Include="UI\TreeList\TreeListToolbar.cs" />
     <Compile Include="UI\TreeList\Fluent\TreeListToolbarBuilder.cs" />
   </ItemGroup>
-	<ItemGroup>
-		<Compile Include="UI\Gantt\Fluent\GanttToolbarFactory.cs" />
-		<Compile Include="UI\Gantt\GanttToolbar.cs" />
-		<Compile Include="UI\Gantt\Fluent\GanttToolbarBuilder.cs" />
-	</ItemGroup>
-	<ItemGroup>
-		<Compile Include="UI\Gantt\Settings\GanttPdfSettings.cs" />
-		<Compile Include="UI\Gantt\Fluent\GanttPdfSettingsBuilder.cs" />
-		<Compile Include="UI\Gantt\Settings\GanttPdfMarginSettings.cs" />
-		<Compile Include="UI\Gantt\Fluent\GanttPdfMarginSettingsBuilder.cs" />
-	</ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\Gantt\Fluent\GanttToolbarFactory.cs" />
+    <Compile Include="UI\Gantt\GanttToolbar.cs" />
+    <Compile Include="UI\Gantt\Fluent\GanttToolbarBuilder.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\Gantt\Settings\GanttPdfSettings.cs" />
+    <Compile Include="UI\Gantt\Fluent\GanttPdfSettingsBuilder.cs" />
+    <Compile Include="UI\Gantt\Settings\GanttPdfMarginSettings.cs" />
+    <Compile Include="UI\Gantt\Fluent\GanttPdfMarginSettingsBuilder.cs" />
+  </ItemGroup>
 </Project>

@@ -8,7 +8,7 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent API for configuring the TreeListSortableSettings settings.
     /// </summary>
-    public class TreeListSortableSettingsBuilder: IHideObjectMembers
+    public class TreeListSortableSettingsBuilder<T>: IHideObjectMembers where T : class
     {
         private readonly TreeListSortableSettings container;
 
@@ -23,7 +23,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// If set to true the user can get the treelist in unsorted state by clicking the sorted column header.
         /// </summary>
         /// <param name="value">The value that configures the allowunsort.</param>
-        public TreeListSortableSettingsBuilder AllowUnsort(bool value)
+        public TreeListSortableSettingsBuilder<T> AllowUnsort(bool value)
         {
             container.AllowUnsort = value;
 
@@ -34,7 +34,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// The sorting mode. If set to "single" the user can sort by one column. If set to "multiple" the user can sort by one column.
         /// </summary>
         /// <param name="value">The value that configures the mode.</param>
-        public TreeListSortableSettingsBuilder Mode(string value)
+        public TreeListSortableSettingsBuilder<T> Mode(string value)
         {
             container.Mode = value;
 

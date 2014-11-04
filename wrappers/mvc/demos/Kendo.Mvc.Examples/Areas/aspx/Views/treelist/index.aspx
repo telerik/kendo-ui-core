@@ -20,8 +20,8 @@ Inherits="System.Web.Mvc.ViewPage<IEnumerable<Kendo.Mvc.Examples.Models.TreeList
             columns.Add().Field("Extension").Width("140px");
             columns.Add().Field("Address");
         })
-        .Filterable(true)
-        .Sortable(true)
+        .Filterable()
+        .Sortable()
         .DataSource(dataSource => dataSource
             .Read(read => read.Action("All", "EmployeeDirectory"))
             .Model(m => {

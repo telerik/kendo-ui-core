@@ -8,7 +8,7 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent API for configuring the TreeListColumnFilterableSettings settings.
     /// </summary>
-    public class TreeListColumnFilterableSettingsBuilder: IHideObjectMembers
+    public class TreeListColumnFilterableSettingsBuilder<T>: IHideObjectMembers where T : class
     {
         private readonly TreeListColumnFilterableSettings container;
 
@@ -23,7 +23,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// The role data attribute of the widget used in the filter menu or a JavaScript function which initializes that widget.
         /// </summary>
         /// <param name="value">The value that configures the ui.</param>
-        public TreeListColumnFilterableSettingsBuilder Ui(string value)
+        public TreeListColumnFilterableSettingsBuilder<T> Ui(string value)
         {
             container.Ui = value;
 
