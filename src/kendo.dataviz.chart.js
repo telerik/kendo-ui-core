@@ -3141,7 +3141,10 @@ var __meta__ = {
         },
 
         createHighlight: function(style) {
-            return draw.Path.fromRect(this.box.toRect(), style);
+            var highlight = draw.Path.fromRect(this.box.toRect(), style);
+            dataviz.alignPathToPixel(highlight)
+
+            return highlight;
         },
 
         getBorderColor: function() {
@@ -5263,6 +5266,10 @@ var __meta__ = {
                 color = defaults.color;
             }
 
+            this.visual = new draw.Group({
+                zIndex: this.zIndex()
+            });
+
             this.createArea(color);
             this.createLine(color);
         },
@@ -5283,11 +5290,10 @@ var __meta__ = {
                         opacity: lineOptions.opacity,
                         dashType: lineOptions.dashType,
                         lineCap: "butt"
-                    },
-                    zIndex: this.zIndex()
+                    }
                 });
 
-                this.appendVisual(line);
+                this.visual.append(line);
             }
         },
 
@@ -5299,11 +5305,10 @@ var __meta__ = {
                     color: color,
                     opacity: series.opacity
                 },
-                stroke: null,
-                zIndex: this.zIndex()
+                stroke: null
             });
 
-            this.appendVisual(area);
+            this.visual.append(area);
         }
     };
 
