@@ -5212,13 +5212,13 @@ var __meta__ = {
                     width: series.width,
                     opacity: series.opacity,
                     dashType: series.dashType
-                }
+                },
+                zIndex: this.zIndex()
             });
 
             curve.segments.push.apply(curve.segments, segments);
 
-            this.visual = new draw.Group();
-            this.visual.append(curve);
+            this.visual = curve;
         }
     });
 
