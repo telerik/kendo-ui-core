@@ -29,6 +29,7 @@ var __meta__ = {
         isArray = $.isArray,
         map = $.map,
         math = Math,
+        noop = $.noop,
         extend = $.extend,
         proxy = $.proxy,
 
@@ -1615,7 +1616,6 @@ var __meta__ = {
 
         createVisual: function() {
             this.textBox.options.noclip = this.options.noclip;
-            ChartElement.fn.createVisual.call(this);
         },
 
         reflow: function(targetBox) {
@@ -2875,7 +2875,9 @@ var __meta__ = {
 
                 position += slotSize;
             }
-        }
+        },
+
+        createVisual: noop
     });
 
     var StackWrap = ChartElement.extend({
@@ -2913,7 +2915,9 @@ var __meta__ = {
                     box.wrap(childBox);
                 }
             }
-        }
+        },
+
+        createVisual: noop
     });
 
     var PointEventsMixin = {
@@ -3044,8 +3048,7 @@ var __meta__ = {
 
                 this.label = new BarLabel(labelText,
                         deepExtend({
-                            vertical: options.vertical,
-                            id: uniqueId()
+                            vertical: options.vertical
                         },
                         options.labels
                     ));
@@ -3871,7 +3874,9 @@ var __meta__ = {
 
         pointValue: function(data) {
             return data.valueFields.value;
-        }
+        },
+
+        createVisual: noop
     });
 
     var BarChart = CategoricalChart.extend({
@@ -4674,6 +4679,8 @@ var __meta__ = {
             return border;
         },
 
+        createVisual: noop,
+
         createMarker: function() {
             var options = this.options.markers;
             var marker = new ShapeElement({
@@ -5247,8 +5254,6 @@ var __meta__ = {
                 color = defaults.color;
             }
 
-            this.visual = new draw.Group();
-
             this.createArea(color);
             this.createLine(color);
         },
@@ -5272,7 +5277,7 @@ var __meta__ = {
                     }
                 });
 
-                this.visual.append(line);
+                this.appendVisual(line);
             }
         },
 
@@ -5287,7 +5292,7 @@ var __meta__ = {
                 stroke: null
             });
 
-            this.visual.append(area);
+            this.appendVisual(area);
         }
     };
 

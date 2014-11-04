@@ -912,7 +912,7 @@ var __meta__ = {
                     }
                 });
 
-                this.visual.append(highlight);
+                this.appendVisual(highlight);
             }
 
             if (options && options.visible) {
@@ -1447,7 +1447,9 @@ var __meta__ = {
                 width: element.box.width(),
                 height: element.box.height()
             };
-        }
+        },
+
+        createVisual: noop
     });
 
     var TextBox = BoxElement.extend({
@@ -2611,10 +2613,9 @@ var __meta__ = {
         },
 
         createVisual: function() {
-            ChartElement.fn.createVisual.call(this);
             var element = this.getElement();
             if (element) {
-                this.visual.append(element);
+                this.appendVisual(element);
             }
         }
     });
