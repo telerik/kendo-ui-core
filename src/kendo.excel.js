@@ -16,7 +16,7 @@ var __meta__ = {
 
 kendo.ExcelExporter = kendo.Class.extend({
     init: function(options) {
-        this.columns = $.map(options.columns || [], this._prepareColumn);
+        this.columns = $.map(this._leafColumns(options.columns || []), this._prepareColumn);
 
         this.options = options;
 
@@ -37,6 +37,19 @@ kendo.ExcelExporter = kendo.Class.extend({
         } else {
             this.dataSource = kendo.data.DataSource.create(dataSource);
         }
+    },
+    _leafColumns: function(columns) {
+        var result = [];
+
+        for (var idx = 0; idx < columns.length; idx++) {
+            if (!columns[idx].columns) {
+                result.push(columns[idx]);
+                continue;
+            }
+            result = result.concat(this._leafColumns(columns[idx].columns));
+        }
+
+        return result;
     },
     workbook: function() {
         var promise = this.dataSource.fetch();
@@ -174,31 +187,90 @@ kendo.ExcelExporter = kendo.Class.extend({
 
         return rows;
     },
+    _isColumnVisible: function(column) {
+        return this._visibleColumns([column]).length > 0;
+    },
+    _visibleColumns: function(columns) {
+        var that = this;
+        return $.grep(columns, function(column) {
+            var result = !column.hidden;
+            if (result && column.columns) {
+                result = that._visibleColumns(column.columns).length > 0;
+            }
+            return result;
+        });
+    },
+    _headerRow: function(row, groups) {
+        var headers = $.map(row.cells, function(cell) {
+            return {
+                background: "#7a7a7a",
+                color: "#fff",
+                value: cell.title,
+                colSpan: cell.colSpan > 1 ? cell.colSpan : 1,
+                rowSpan: row.rowSpan > 1 && !cell.colSpan ? row.rowSpan : 1
+            };
+        });
+
+        headers[0].colSpan = this._depth() + 1;
+
+        return {
+            type: "header",
+            cells: $.map(new Array(groups.length), function() {
+                return {
+                    background: "#7a7a7a",
+                    color: "#fff"
+                };
+            }).concat(headers)
+        };
+    },
+    _prependHeaderRows: function(rows) {
+        var groups = this.dataSource.group();
+
+        var headerRows = [{ rowSpan: 1, cells: [], index: 0 }];
+
+        this._prepareHeaderRows(headerRows, this.options.columns);
+
+        for (var idx = headerRows.length - 1; idx >= 0; idx--) {
+            rows.unshift(this._headerRow(headerRows[idx], groups));
+        }
+    },
+    _prepareHeaderRows: function(rows, columns, parentCell, parentRow) {
+        var row = parentRow || rows[rows.length - 1];
+
+        var childRow = rows[row.index + 1];
+        var totalColSpan = 0;
+        var column;
+
+        for (var idx = 0; idx < columns.length; idx++) {
+            column = columns[idx];
+            if (this._isColumnVisible(column)) {
+                var cell = { title: column.title || column.field, colSpan: 0 };
+                row.cells.push(cell);
+
+                if (column.columns && column.columns.length) {
+                    if (!childRow) {
+                        childRow = { rowSpan: 0, cells: [], index: rows.length };
+                        rows.push(childRow);
+                    }
+                    cell.colSpan = this._visibleColumns(column.columns).length;
+                    this._prepareHeaderRows(rows, column.columns, cell, childRow);
+                    totalColSpan += cell.colSpan - 1;
+                    row.rowSpan = rows.length - row.index;
+                }
+            }
+        }
+        if (parentCell) {
+            parentCell.colSpan += totalColSpan;
+        }
+    },
     _rows: function() {
         var groups = this.dataSource.group();
 
         var rows = this._dataRows(this.dataSource.view(), 0);
 
         if (this.columns.length) {
-            var headers = $.map(this.columns, function(column) {
-                return {
-                    background: "#7a7a7a",
-                    color: "#fff",
-                    value: column.title || column.field
-                };
-            });
 
-            headers[0].colSpan = this._depth() + 1;
-
-            rows.unshift({
-                type: "header",
-                cells: $.map(new Array(groups.length), function() {
-                    return {
-                        background: "#7a7a7a",
-                        color: "#fff"
-                    };
-                }).concat(headers)
-            });
+            this._prependHeaderRows(rows);
 
             var footer = false;
 
