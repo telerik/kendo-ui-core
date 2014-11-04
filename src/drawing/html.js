@@ -58,10 +58,10 @@
     var parseGradient = (function(){
         var tok_linear_gradient  = /^(linear-gradient\s*)\(/;
         var tok_radial_gradient  = /^(radial-gradient\s*)\(/;
-        var tok_percent          = /^([0-9.]+%)/;
-        var tok_length           = /^([0-9.]+px)/;
+        var tok_percent          = /^([-0-9.]+%)/;
+        var tok_length           = /^([-0-9.]+px)/;
         var tok_keyword          = /^(left|right|top|bottom|to|center)\W/;
-        var tok_angle            = /^([0-9.]+deg)/;
+        var tok_angle            = /^([-0-9.]+deg)/;
         var tok_whitespace       = /^(\s+)/;
         var tok_popen            = /^(\()/;
         var tok_pclose           = /^(\))/;
@@ -116,6 +116,9 @@
                         to2 = read(tok_keyword);
                         read(tok_comma);
                     }
+                    else {
+                        return null; // can't figure it out.
+                    }
 
                     // 2. color stops
                     while (input && !read(tok_pclose)) {
@@ -127,7 +130,6 @@
                         read(tok_comma);
                     }
 
-                    read(tok_pclose);
                     return {
                         type  : "linear",
                         angle : angle,
@@ -784,29 +786,27 @@
                 var gradient = parseGradient(backgroundImage);
                 if (gradient) {
                     drawBackgroundImage(background, box, box.width, box.height, function(group, rect){
-                        var width = rect.width(), height = rect.height();
+                        var width = rect.width(), height = rect.height(), tl = rect.topLeft();
                         switch (gradient.type) {
                           case "linear":
-                            var k = Math.sqrt(width*width + height*height) / 2 * Math.sin(Math.atan2(height, width) + gradient.angle);
+                            var k = Math.sin(Math.atan2(height, width) + gradient.angle) * Math.sqrt(width*width + height*height) / 2;
                             var x = k * Math.sin(gradient.angle);
                             var y = k * Math.cos(gradient.angle);
-                            var start = [ width/2 - x, height/2 + y ];
-                            var end = [ width/2 + x, height/2 - y ];
-                            var stops = gradient.stops.map(function(s){
-                                return {
-                                    color: s.color.toCssRgba(),
-                                    offset: s.percent
-                                };
-                            });
-                            var grad = new drawing.LinearGradient({
-                                stops: stops,
-                                start: start,
-                                end: end,
-                                userSpace: true
-                            });
-                            var path = drawing.Path.fromRect(rect);
-                            path.fill(grad);
-                            group.append(path);
+                            group.append(
+                                drawing.Path.fromRect(rect)
+                                    .stroke(null)
+                                    .fill(new drawing.LinearGradient({
+                                        start : [ tl.x + width/2 - x, tl.y + height/2 + y ],
+                                        end   : [ tl.x + width/2 + x, tl.y + height/2 - y ],
+                                        stops : gradient.stops.map(function(s){
+                                            return {
+                                                color: s.color.toCssRgba(),
+                                                offset: s.percent
+                                            };
+                                        }),
+                                        userSpace: true
+                                    }))
+                            );
                             break;
                           case "radial":
                             console.error("TODO: Radial gradients");
