@@ -3707,6 +3707,20 @@
         }
       },
       {
+          "text": "Export to PDF",
+          "url": "gantt/pdf-export",
+          "new": true,
+          "title": {
+              "kendo-ui": "Exporting to PDF"
+          },
+          "meta": {
+              "kendo-ui": "Export Kendo UI gantt as PDF file"
+          },
+          "packages": [
+              "!offline"
+          ]
+      },
+      {
         "text": "Events",
         "url": "gantt/events",
         "title": {
