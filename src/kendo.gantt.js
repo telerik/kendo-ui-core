@@ -1234,7 +1234,8 @@ var __meta__ = {
                 views: {
                     day: "Day",
                     week: "Week",
-                    month: "Month"
+                    month: "Month",
+                    year: "Year"
                 },
                 actions: {
                     append: "Add Task",
