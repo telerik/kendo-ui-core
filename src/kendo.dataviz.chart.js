@@ -29,6 +29,7 @@ var __meta__ = {
         isArray = $.isArray,
         map = $.map,
         math = Math,
+        noop = $.noop,
         extend = $.extend,
         proxy = $.proxy,
 
@@ -63,6 +64,7 @@ var __meta__ = {
         Text = dataviz.Text,
         TextBox = dataviz.TextBox,
         Title = dataviz.Title,
+        alignPathToPixel = dataviz.alignPathToPixel,
         animationDecorator = dataviz.animationDecorator,
         append = dataviz.append,
         autoFormat = dataviz.autoFormat,
@@ -1615,7 +1617,6 @@ var __meta__ = {
 
         createVisual: function() {
             this.textBox.options.noclip = this.options.noclip;
-            ChartElement.fn.createVisual.call(this);
         },
 
         reflow: function(targetBox) {
@@ -2875,7 +2876,9 @@ var __meta__ = {
 
                 position += slotSize;
             }
-        }
+        },
+
+        createVisual: noop
     });
 
     var StackWrap = ChartElement.extend({
@@ -2913,7 +2916,9 @@ var __meta__ = {
                     box.wrap(childBox);
                 }
             }
-        }
+        },
+
+        createVisual: noop
     });
 
     var PointEventsMixin = {
@@ -3044,8 +3049,7 @@ var __meta__ = {
 
                 this.label = new BarLabel(labelText,
                         deepExtend({
-                            vertical: options.vertical,
-                            id: uniqueId()
+                            vertical: options.vertical
                         },
                         options.labels
                     ));
@@ -3109,6 +3113,7 @@ var __meta__ = {
                 }
             });
 
+            alignPathToPixel(rect);
             this.visual.append(rect);
 
             if (hasGradientOverlay(options)) {
@@ -3136,7 +3141,9 @@ var __meta__ = {
         },
 
         createHighlight: function(style) {
-            return draw.Path.fromRect(this.box.toRect(), style);
+            var highlight = draw.Path.fromRect(this.box.toRect(), style);
+
+            return alignPathToPixel(highlight);
         },
 
         getBorderColor: function() {
@@ -3871,7 +3878,9 @@ var __meta__ = {
 
         pointValue: function(data) {
             return data.valueFields.value;
-        }
+        },
+
+        createVisual: noop
     });
 
     var BarChart = CategoricalChart.extend({
@@ -4382,7 +4391,7 @@ var __meta__ = {
                 });
             }
 
-            dataviz.alignPathToPixel(body);
+            alignPathToPixel(body);
             this.visual.append(body);
         },
 
@@ -4604,8 +4613,7 @@ var __meta__ = {
                 markers: {
                     border: {}
                 }
-            },
-            zIndex: 2
+            }
         },
 
         render: function() {
@@ -4642,13 +4650,13 @@ var __meta__ = {
                 }
                 point.label = new TextBox(labelText,
                     deepExtend({
-                        id: uniqueId(),
                         align: CENTER,
                         vAlign: CENTER,
                         margin: {
                             left: 5,
                             right: 5
-                        }
+                        },
+                        zIndex: this.zIndex()
                     }, labels)
                 );
                 point.append(point.label);
@@ -4674,6 +4682,8 @@ var __meta__ = {
             return border;
         },
 
+        createVisual: noop,
+
         createMarker: function() {
             var options = this.options.markers;
             var marker = new ShapeElement({
@@ -4684,11 +4694,15 @@ var __meta__ = {
                 background: options.background,
                 border: this.markerBorder(),
                 opacity: options.opacity,
-                zIndex: options.zIndex,
+                zIndex: this.zIndex(),
                 animation: options.animation
             });
 
             return marker;
+        },
+
+        zIndex: function() {
+            return valueOrDefault(this.series.zIndex, 2) + 0.1;
         },
 
         markerBox: function() {
@@ -4904,15 +4918,19 @@ var __meta__ = {
                     width: series.width,
                     opacity: series.opacity,
                     dashType: series.dashType
-                }
+                },
+                zIndex: this.zIndex()
             });
 
             if (options.closed) {
                 line.close();
             }
 
-            this.visual = new draw.Group();
-            this.visual.append(line);
+            this.visual = line;
+        },
+
+        zIndex: function() {
+            return valueOrDefault(this.series.zIndex, 2);
         },
 
         aliasFor: function(e, coords) {
@@ -5194,13 +5212,13 @@ var __meta__ = {
                     width: series.width,
                     opacity: series.opacity,
                     dashType: series.dashType
-                }
+                },
+                zIndex: this.zIndex()
             });
 
             curve.segments.push.apply(curve.segments, segments);
 
-            this.visual = new draw.Group();
-            this.visual.append(curve);
+            this.visual = curve;
         }
     });
 
@@ -5247,7 +5265,9 @@ var __meta__ = {
                 color = defaults.color;
             }
 
-            this.visual = new draw.Group();
+            this.visual = new draw.Group({
+                zIndex: this.zIndex()
+            });
 
             this.createArea(color);
             this.createLine(color);
@@ -5767,7 +5787,9 @@ var __meta__ = {
         formatPointValue: function(point, format) {
             var value = point.value;
             return autoFormat(format, value.x, value.y);
-        }
+        },
+
+        createVisual: noop
     });
 
     var ScatterLineChart = ScatterChart.extend({
@@ -6054,8 +6076,9 @@ var __meta__ = {
                 });
             }
 
-            dataviz.alignPathToPixel(body);
+            alignPathToPixel(body);
             container.append(body);
+
             if (hasGradientOverlay(options)) {
                 container.append(this.createGradientOverlay(body, {
                         baseColor: this.color
@@ -6082,7 +6105,7 @@ var __meta__ = {
 
             for (var i = 0; i < lines.length; i++) {
                 var line = draw.Path.fromPoints(lines[i], lineStyle);
-                dataviz.alignPathToPixel(line);
+                alignPathToPixel(line);
                 container.append(line);
             }
         },

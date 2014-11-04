@@ -24,7 +24,12 @@
 
         options.gap = 1.5;
         series = new dataviz.BarChart(plotArea, options);
-        series.reflow();
+
+        var root = new dataviz.RootElement();
+        root.append(series);
+        root.reflow();
+
+        root.renderVisual();
     }
 
     function stubPlotArea(getCategorySlot, getValueSlot, options) {
@@ -64,7 +69,7 @@
     }
 
     function pointText(idx) {
-        return pointTextBox(idx).visual.children[1].children[0];
+        return pointTextBox(idx).visual.children[1];
     }
 
     (function() {
@@ -100,13 +105,12 @@
         module("Bar Chart", {
             setup: function() {
                 setupBarChart(plotArea, { series: [ positiveSeries ] });
-                series.renderVisual();
                 visual = series.visual;
             }
         });
 
-        test("renders group", function() {
-            ok(series.visual instanceof draw.Group);
+        test("does not visual", function() {
+            ok(!series.visual);
         });
 
         test("does not create animation", function() {
@@ -1493,7 +1497,6 @@
                     visible: true
                 }
             }] });
-            series.renderVisual();
             equal(pointText(0).options.fill.color, COLOR);
         });
 
@@ -1505,7 +1508,6 @@
                     visible: true
                 }
             }] });
-            series.renderVisual();
             equal(pointTextBox(0).visual.children[0].options.fill.color, BACKGROUND);
         });
 
@@ -1517,7 +1519,6 @@
                     visible: true
                 }
             }] });
-            series.renderVisual(view);
             var background = pointTextBox(0).visual.children[0];
             var stroke = background.options.stroke;
             equal(stroke.color, BORDER.color);
@@ -2201,7 +2202,7 @@
                 ok(false, "different segments length");
             }
             for (var idx = 0; idx < actualSegments.length; idx++) {
-                ok(actualSegments[idx].anchor().equals(expectedSegments[idx].anchor()));
+                deepEqual(actualSegments[idx].anchor().toString(), expectedSegments[idx].anchor().toString(), idx);
             }
         }
 
@@ -2258,7 +2259,10 @@
         });
 
         test("renders rectangle", function() {
-            samePath(rect, draw.Path.fromRect(box.toRect()));
+            var ref = draw.Path.fromRect(box.toRect());
+            kendo.dataviz.alignPathToPixel(ref);
+
+            samePath(rect, ref);
         });
 
         test("does not render rectangle when box height is zero", function() {
@@ -2618,7 +2622,7 @@
                 },
                 seriesClick: function() { ok(true); }
             });
-            var label = plotArea.charts[0].points[0].children[0];
+            var label = plotArea.charts[0].points[0].label.children[0];
 
             clickChart(chart, getElement(label));
         });
@@ -2698,7 +2702,7 @@
                 },
                 seriesHover: function() { ok(true); }
             });
-            var label = plotArea.charts[0].points[0].children[0];
+            var label = plotArea.charts[0].points[0].label.children[0];
             getElement(label).mouseover();
         });
 

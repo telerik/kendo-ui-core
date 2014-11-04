@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link type="text/css" href="../../dist/styles/web/kendo.common.css" rel="stylesheet/less"/>
+    <link type="text/css" href="../../dist/styles/web/kendo.silver.css" rel="stylesheet/less"/>
+    <link type="text/css" href="../../dist/styles/dataviz/kendo.dataviz.css" rel="stylesheet/less"/>
+    <link type="text/css" href="../../dist/styles/dataviz/kendo.dataviz.silver.css" rel="stylesheet"/>
+    <script src="../require.js"></script>
+    <script>
+    require.config({
+        baseUrl: "../../src",
+        paths: {
+            cultures: "cultures"
+        }
+    });
+
+    require([ "jquery.min",
+              "kendo.dataviz.chart" ], function(){
+
+        $("#chart-1").kendoChart({
+            seriesDefaults: {
+                type: "area",
+                labels: {
+                    visible: true
+                }
+            },
+            // Current behavior: Ordered by type
+            series: [{
+                type: "line",
+                data: [1.5, 2.5, 3.5],
+                color: "green"
+            }, {
+                data: [1, 2, 3],
+                color: "red"
+            }, {
+                data: [2, 3, 4],
+                color: "blue"
+            }, {
+                type: "column",
+                data: [1, 2, 3],
+                color: "black"
+            }],
+            categoryAxis: {
+                justified: true
+            }
+        });
+
+        $("#chart-2").kendoChart({
+            seriesDefaults: {
+                type: "area",
+                labels: {
+                    visible: true
+                }
+            },
+            // Ordered by zIndex
+            series: [{
+                type: "line",
+                zIndex: 0,
+                data: [1.5, 2.5, 3.5],
+                color: "green"
+            }, {
+                zIndex: 2,
+                data: [1, 2, 3],
+                color: "red"
+            }, {
+                zIndex: 1,
+                data: [2, 3, 4],
+                color: "blue"
+            }, {
+                zIndex: 1.5,
+                type: "column",
+                data: [1, 2, 3],
+                color: "black"
+            }, {
+                zIndex: 3,
+                type: "column",
+                data: [3, 5, 5],
+                color: "yellow"
+            }],
+            categoryAxis: {
+                justified: true
+            }
+        });
+    });
+    </script>
+    <style>
+        .k-chart {
+            width: 800px;
+            height: 500px;
+            float: left;
+        }
+    </style>
+  </head>
+  <body>
+      <div id="chart-1"></div>
+      <div id="chart-2"></div>
+  </body>
+</html>

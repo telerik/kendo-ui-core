@@ -826,7 +826,7 @@ var __meta__ = {
 
             if (childVisual.options.noclip) {
                 this.getRoot().visual.append(childVisual);
-            } else if (childVisual.options.zIndex) {
+            } else if (defined(childVisual.options.zIndex)) {
                 this.stackRoot().stackVisual(childVisual);
             } else if (this.visual) {
                 this.visual.append(childVisual);
@@ -912,7 +912,7 @@ var __meta__ = {
                     }
                 });
 
-                this.visual.append(highlight);
+                this.appendVisual(highlight);
             }
 
             if (options && options.visible) {
@@ -1447,7 +1447,9 @@ var __meta__ = {
                 width: element.box.width(),
                 height: element.box.height()
             };
-        }
+        },
+
+        createVisual: noop
     });
 
     var TextBox = BoxElement.extend({
@@ -2607,15 +2609,12 @@ var __meta__ = {
                 );
             }
 
+            element.options.zIndex = this.options.zIndex;
             return element;
         },
 
         createVisual: function() {
-            ChartElement.fn.createVisual.call(this);
-            var element = this.getElement();
-            if (element) {
-                this.visual.append(element);
-            }
+            this.visual = this.getElement();
         }
     });
 
@@ -4858,6 +4857,8 @@ var __meta__ = {
                 path.segments[i].anchor().round(0).translate(0.5, 0.5);
             }
         }
+
+        return path;
     }
 
     function innerRadialStops(options) {
