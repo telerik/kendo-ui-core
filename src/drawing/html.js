@@ -55,6 +55,94 @@
 
     var nodeInfo = {};
 
+    var parseGradient = (function(){
+        var tok_linear_gradient  = /^(linear-gradient\s*)\(/;
+        var tok_radial_gradient  = /^(radial-gradient\s*)\(/;
+        var tok_percent          = /^([0-9.]+%)/;
+        var tok_length           = /^([0-9.]+px)/;
+        var tok_keyword          = /^(left|right|top|bottom|to|center)\W/;
+        var tok_angle            = /^([0-9.]+deg)/;
+        var tok_whitespace       = /^(\s+)/;
+        var tok_popen            = /^(\()/;
+        var tok_pclose           = /^(\))/;
+        var tok_comma            = /^(,)/;
+
+        return function(input) {
+            function skip_ws() {
+                var m = tok_whitespace.exec(input);
+                if (m) {
+                    input = input.substr(m[1].length);
+                }
+            }
+            function read(token) {
+                skip_ws();
+                var m = token.exec(input);
+                if (m) {
+                    input = input.substr(m[1].length);
+                    return m[1];
+                }
+            }
+
+            function read_stop() {
+                // XXX: do NOT use the parseColor (defined later) here.
+                // kendo.parseColor leaves the `match` data in the
+                // object, that would be lost after .toRGB().
+                var color = kendo.parseColor(input, true);
+                var length, percent;
+                if (color) {
+                    input = input.substr(color.match[0].length);
+                    color = color.toRGB();
+                    if (!(length = read(tok_length))) {
+                        percent = read(tok_percent);
+                    }
+                    return { color: color, length: length, percent: percent };
+                }
+            }
+
+            function read_linear_gradient() {
+                var angle;
+                var to1, to2;
+                var stops = [];
+
+                if (read(tok_popen)) {
+                    // 1. [ <angle> || to <side-or-corner>, ]?
+                    angle = read(tok_angle); // XXX: support more units
+                    if (angle) {
+                        angle = degreesToRadians(parseFloat(angle));
+                        read(tok_comma);
+                    }
+                    else if (read(tok_keyword) == "to") {
+                        to1 = read(tok_keyword);
+                        to2 = read(tok_keyword);
+                        read(tok_comma);
+                    }
+
+                    // 2. color stops
+                    while (input && !read(tok_pclose)) {
+                        var stop = read_stop();
+                        if (!stop) {
+                            break;
+                        }
+                        stops.push(stop);
+                        read(tok_comma);
+                    }
+
+                    read(tok_pclose);
+                    return {
+                        type  : "linear",
+                        angle : angle,
+                        to    : to1 && to2 ? to1 + " " + to2 : to1,
+                        stops : stops
+                    };
+                }
+            }
+
+            if (read(tok_linear_gradient)) {
+                return read_linear_gradient();
+            }
+        };
+    })();
+
     // only function definitions after this line.
     return;
 
@@ -295,8 +383,12 @@
         }
     }
 
-    function toDegrees(radians) {
+    function radiansToDegrees(radians) {
         return ((180 * radians) / Math.PI) % 360;
+    }
+
+    function degreesToRadians(degrees) {
+        return Math.PI * degrees / 180;
     }
 
     function setTransform(shape, m) {
@@ -629,7 +721,7 @@
 
                 addArcToPath(path, 0, r.y, {
                     startAngle: -90,
-                    endAngle: -toDegrees(angle),
+                    endAngle: -radiansToDegrees(angle),
                     radiusX: r.x,
                     radiusY: r.y
                 });
@@ -637,7 +729,7 @@
                 if (ri.x > 0 && ri.y > 0) {
                     path.lineTo(ri.x * Math.cos(angle), r.y - ri.y * Math.sin(angle));
                     addArcToPath(path, 0, r.y, {
-                        startAngle: -toDegrees(angle),
+                        startAngle: -radiansToDegrees(angle),
                         endAngle: -90,
                         radiusX: ri.x,
                         radiusY: ri.y,
@@ -655,11 +747,6 @@
 
                 edge.append(path.close());
             }
-        }
-
-        // for left/right borders we need to invert the border-radiuses
-        function inv(p) {
-            return { x: p.y, y: p.x };
         }
 
         function drawBackground(box) {
@@ -686,19 +773,51 @@
 
             var url = backgroundImageURL(backgroundImage);
             if (url) {
-                drawBackgroundImage(background, box, url);
+                var img = IMAGE_CACHE[url];
+                if (img && img.width > 0 && img.height > 0) {
+                    drawBackgroundImage(background, box, img.width, img.height, function(group, rect){
+                        group.append(new drawing.Image(url, rect));
+                    });
+                }
+            }
+            else {
+                var gradient = parseGradient(backgroundImage);
+                if (gradient) {
+                    drawBackgroundImage(background, box, box.width, box.height, function(group, rect){
+                        var width = rect.width(), height = rect.height();
+                        switch (gradient.type) {
+                          case "linear":
+                            var k = Math.sqrt(width*width + height*height) / 2 * Math.sin(Math.atan2(height, width) + gradient.angle);
+                            var x = k * Math.sin(gradient.angle);
+                            var y = k * Math.cos(gradient.angle);
+                            var start = [ width/2 - x, height/2 + y ];
+                            var end = [ width/2 + x, height/2 - y ];
+                            var stops = gradient.stops.map(function(s){
+                                return {
+                                    color: s.color.toCssRgba(),
+                                    offset: s.percent
+                                };
+                            });
+                            var grad = new drawing.LinearGradient({
+                                stops: stops,
+                                start: start,
+                                end: end,
+                                userSpace: true
+                            });
+                            var path = drawing.Path.fromRect(rect);
+                            path.fill(grad);
+                            group.append(path);
+                            break;
+                          case "radial":
+                            console.error("TODO: Radial gradients");
+                            break;
+                        }
+                    });
+                }
             }
         }
 
-        function drawBackgroundImage(group, box, url) {
-            var img = IMAGE_CACHE[url];
-
-            if (!(img && img.width > 0 && img.height > 0)) {
-                return;
-            }
-
-            var img_width = img.width;
-            var img_height = img.height;
+        function drawBackgroundImage(group, box, img_width, img_height, renderBG) {
             var aspect_ratio = img_width / img_height;
 
             // for background-origin: border-box the box is already appropriate
@@ -764,13 +883,13 @@
 
             function repeatX() {
                 while (rect.origin.x < box.right) {
-                    group.append(new drawing.Image(url, rect.clone()));
+                    renderBG(group, rect.clone());
                     rect.origin.x += img_width;
                 }
             }
 
             if (backgroundRepeat == "no-repeat") {
-                group.append(new drawing.Image(url, rect));
+                renderBG(group, rect);
             }
             else if (backgroundRepeat == "repeat-x") {
                 rewX();
@@ -779,7 +898,7 @@
             else if (backgroundRepeat == "repeat-y") {
                 rewY();
                 while (rect.origin.y < box.bottom) {
-                    group.append(new drawing.Image(url, rect.clone()));
+                    renderBG(group, rect.clone());
                     rect.origin.y += img_height;
                 }
             }
@@ -914,6 +1033,11 @@
                      box.width, bottom.width, right.width, left.width,
                      rBR, rBL,
                      [ -1, 0, 0, -1, box.right, box.bottom ]);
+
+            // for left/right borders we need to invert the border-radiuses
+            function inv(p) {
+                return { x: p.y, y: p.x };
+            }
 
             // left border
             drawEdge(left.color,

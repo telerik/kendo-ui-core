@@ -260,6 +260,7 @@
                         var linear = this.get("fillType");
                         var start = linear.start;
                         var end = linear.end;
+                        console.log( this.get("fillType.stops").toJSON() );
                         circle.fill(new drawing.LinearGradient({
                             stops: this.get("fillType.stops").toJSON(),
                             start: [start.x, start.y],
@@ -435,8 +436,8 @@
 
             function pathArcTest() {
                 var path = new Path();
-                path.moveTo(200, 100);      
-             
+                path.moveTo(200, 100);
+
                 path.arc(30, 180, 100, 100);
                 surface.draw(path);
             }
