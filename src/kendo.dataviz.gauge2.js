@@ -29,6 +29,7 @@ var __meta__ = {
         isArray = $.isArray,
         isNumber = util.isNumber,
         interpolateValue = dataviz.interpolateValue,
+        valueOrDefault = dataviz.valueOrDefault,
 
         getSpacing = dataviz.getSpacing,
         round = dataviz.round,
@@ -45,6 +46,7 @@ var __meta__ = {
 
     // Constants ==============================================================
     var ANGULAR_SPEED = 150,
+        LINEAR_SPEED = 1000,
         ARROW = "arrow",
         ARROW_POINTER = "arrowPointer",
         BAR_POINTER = "barPointer",
@@ -60,13 +62,16 @@ var __meta__ = {
         DEFAULT_MIN_HEIGHT = 60,
         DEFAULT_MARGIN = 5,
         DEGREE = math.PI / 180,
+        GEO_ARC_ADJUST_ANGLE = 180,
         INSIDE = "inside",
         LINEAR = "linear",
         NEEDLE = "needle",
         OUTSIDE = "outside",
         RADIAL_POINTER = "radialPointer",
         ROTATION_ORIGIN = 90,
-        GEO_ARC_ADJUST_ANGLE = 180;
+        SWING = "swing",
+        X = "x",
+        Y = "y";
 
     var Pointer = Class.extend({
         init: function(scale, options) {  
@@ -868,10 +873,10 @@ var __meta__ = {
 
             that.fitScale(bbox);
             that.alignScale(bbox);
-            that.draw(that.gaugeArea, pointers, scaleElements);
+            that._draw(that.gaugeArea, pointers, scaleElements);
         },
 
-        draw: function(gaugeArea, pointers, scale) {
+        _draw: function(gaugeArea, pointers, scale) {
             var surface = this.surface;
             var current;
 
@@ -1006,40 +1011,6 @@ var __meta__ = {
         }
     });
 
-    var RadialPointerAnimation = draw.Animation.extend({
-        init: function(element, options){
-            draw.Animation.fn.init.call(this, element, options);
-
-            options = this.options;
-
-            options.duration = math.max((math.abs(options.newAngle - options.oldAngle) / options.speed) * 1000, 1);
-        },
-
-        options: {
-            easing: LINEAR,
-            speed: ANGULAR_SPEED
-        },
-
-        step: function(pos) {
-            var anim = this;
-            var options = anim.options;
-            var angle = interpolateValue(options.oldAngle, options.newAngle, pos);
-
-            anim.element.transform(geo.transform().rotate(angle, options.center));
-        }
-    });
-    draw.AnimationFactory.current.register(RADIAL_POINTER, RadialPointerAnimation);
-
-    var ArrowLinearPointerAnimation = draw.Animation.extend({
-
-    });
-    draw.AnimationFactory.current.register(ARROW_POINTER, ArrowLinearPointerAnimation);
-
-    // var BarLinearPointerAnimation = draw.Animation.extend({
-
-    // });
-    // draw.AnimationFactory.current.register(BAR_POINTER, BarLinearPointerAnimation);
-
     var LinearGauge = Gauge.extend({
         init: function(element, options) {
             var linearGauge = this;
@@ -1083,6 +1054,24 @@ var __meta__ = {
             that._alignElements();
             that._shrinkElements();
             that._draw();
+        },
+
+        _draw: function(){
+            var that = this;
+            var surface = that.surface;
+            var scaleElements = that.scale.render();
+            var pointers = that.pointers;
+            var current;
+
+            surface.clear();
+            surface.draw(that.gaugeArea);
+            surface.draw(scaleElements);
+
+            for (var i = 0; i < pointers.length; i++) {
+                current = pointers[i];
+                surface.draw(current.render());
+                current.value(current.options.value);
+            }
         },
 
         _createModel: function() {
@@ -1205,22 +1194,6 @@ var __meta__ = {
             for (var i = 0; i < pointers.length; i++) {
                 pointers[i].reflow(that.bbox);
             }
-        },
-
-        _draw: function(){
-            var that = this;
-            var surface = that.surface;
-            var scaleElements = that.scale.render();
-            var pointers = that.pointers;
-            var pointerElements = new Group();
-
-            for (var i = 0; i < pointers.length; i++) {
-                pointerElements.append(pointers[i].render());
-            }
-
-            surface.draw(that.gaugeArea);
-            surface.draw(scaleElements);
-            surface.draw(pointerElements); //TODO animate
         }
     });
 
@@ -1514,16 +1487,10 @@ var __meta__ = {
         },
 
         repaint: function() {
-            var pointer = this;
-            var scale = pointer.scale;
-            var options = pointer.options;
-            var element = pointer.element;
+            var that = this;
+            var scale = that.scale;
+            var options = that.options;
             var animation;
-            var animation = element._animation;
-
-            // if (animation) {
-            //     animation.abort();
-            // }
 
             if (options.animation.transitions === false) {
 
@@ -1531,17 +1498,27 @@ var __meta__ = {
                 options.animation = {};
 
                 if (options.shape === ARROW) {
-                    animation = element._animation = new ArrowLinearPointerAnimation(element, options.animation);
+                    animation = new ArrowLinearPointerAnimation(that.elements, deepExtend(options.animation, {
+                        reverse:  scale.options.reverse,
+                        vertical: scale.options.vertical,
+                        slot: scale.getSlot(scale.options.min, options.value)
+                    }));
                 } else {
-
+                    animation = new BarLinearPointerAnimation(that.elements, deepExtend(options.animation, {
+                        reverse:  scale.options.reverse,
+                        vertical: scale.options.vertical
+                    }));
                 }
+
+                animation.setup();
+                animation.play();
             }
         },
 
         render: function() {
             var that = this;
             var options = that.options;
-            var element = that.element = new Group();
+            var elements = new Group();
             var scale = that.scale;
             var elementOptions = {
                 fill: {
@@ -1568,18 +1545,20 @@ var __meta__ = {
 
             if (options.shape === ARROW) {
                 elementOptions.animation.type = ARROW_POINTER;
-                element = new Path({
+                elements = new Path({
                     stroke: elementOptions.stroke,
                     fill: elementOptions.fill
                 }).moveTo(shape[0]).lineTo(shape[1]).lineTo(shape[2]).close();
             } else {
-                element = Path.fromRect(shape, {
+                elements = Path.fromRect(shape, {
                     stroke: elementOptions.stroke,
                     fill: elementOptions.fill
                 });
             }
 
-            return element;
+            that.elements = elements;
+
+            return elements;
         },
 
         pointerShape: function(value) {
@@ -1639,6 +1618,95 @@ var __meta__ = {
             return round(size);
         }
     });
+
+    var RadialPointerAnimation = draw.Animation.extend({
+        init: function(element, options){
+            draw.Animation.fn.init.call(this, element, options);
+
+            options = this.options;
+
+            options.duration = math.max((math.abs(options.newAngle - options.oldAngle) / options.speed) * 1000, 1);
+        },
+
+        options: {
+            easing: LINEAR,
+            speed: ANGULAR_SPEED
+        },
+
+        step: function(pos) {
+            var anim = this;
+            var options = anim.options;
+            var angle = interpolateValue(options.oldAngle, options.newAngle, pos);
+
+            anim.element.transform(geo.transform().rotate(angle, options.center));
+        }
+    });
+    draw.AnimationFactory.current.register(RADIAL_POINTER, RadialPointerAnimation);
+
+    var ArrowLinearPointerAnimation = draw.Animation.extend({
+        options: {
+            easing: SWING,
+            duration: LINEAR_SPEED
+        },
+
+        setup: function() {
+            var that = this;
+            var element = that.element;
+            var options = that.options;
+            var axis = options.vertical ? Y : X;
+            var startPos = axis + (options.reverse ? "1" : "2");
+            var endPos = axis + (options.reverse ? "2" : "1");
+            var startPosition = options.slot[options.vertical ? startPos : endPos];
+            var endPosition = options.slot[options.vertical ? endPos : startPos];
+
+            var fromScale = that.fromScale = new Point();
+            fromScale[axis] = startPosition - endPosition;
+
+            element.transform(geo.transform().translate(fromScale.x, fromScale.y));
+        },
+
+        step: function(pos) {
+            var translateX = interpolateValue(this.fromScale.x, 0, pos);
+            var translateY = interpolateValue(this.fromScale.y, 0, pos);
+
+            this.element.transform(geo.transform().translate(translateX, translateY));
+        }
+    });
+    draw.AnimationFactory.current.register(ARROW_POINTER, ArrowLinearPointerAnimation);
+
+    var BarLinearPointerAnimation = draw.Animation.extend({
+        options: {
+            easing: SWING,
+            duration: LINEAR_SPEED
+        },
+
+        setup: function() {
+            var element = this.element;
+            var options = this.options;
+
+            var bbox = element.bbox();
+            var origin = this.origin = options.reverse ? bbox.topRight() : bbox.bottomLeft();
+            var axis = options.vertical ? Y : X;
+            var fromOffset = this.fromOffset = new Point();
+            var fromScale = this.fromScale = new Point(1, 1);
+            fromScale[axis] = 0;
+
+            element.transform(geo.transform().scale(fromScale.x, fromScale.y));
+        },
+
+        step: function(pos) {
+            var scaleX = interpolateValue(this.fromScale.x, 1, pos);
+            var scaleY = interpolateValue(this.fromScale.y, 1, pos);
+            var translateX = interpolateValue(this.fromOffset.x, 0, pos);
+            var translateY = interpolateValue(this.fromOffset.y, 0, pos);
+
+            this.element.transform(geo.transform()
+                .translate(translateX, translateY)
+                .scale(scaleX, scaleY, this.origin)
+            );
+        }
+    });
+    draw.AnimationFactory.current.register(BAR_POINTER, BarLinearPointerAnimation);
 
     function buildLabel(label, options) {
         var labelBox = label.box;

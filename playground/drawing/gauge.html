@@ -27,7 +27,8 @@
 
 </head>
 <body>
-<div id="gauge" style="width: 270px"></div>
+
+<!-- <div id="gauge" style="width: 270px"></div> -->
 <div id="gauge2" style="width: 270px"></div>
   <script>
     var dataviz = kendo.dataviz;
@@ -46,27 +47,33 @@ var elem = $("#gauge");
 var elem2 = $("#gauge2");
 
 var gauge2 = elem2.kendoLinearGauge2({
-            gaugeArea: {
-                    background: "yellow",
-                    border: {
-                    color: "blue",
-                    dashType: "dot",
-                    width: 2
-                },
-            },
             pointer: [{
-                value: 28,
-                shape: "arrow"
+                value: -10,
+                shape: "arrow",
+                color: "aqua"
             }, {
+                value: 0,
+                shape: "arrow",
+                color: "olive"
+            },{
                 value: 20,
-                shape: "bar"
+                shape: "arrow",
+                color: "purple"
+            }, {
+                value: 40,
+                shape: "arrow",
+                color: "yellow"
             }, {
                 value: 50,
-                shape: "arrow",
+                shape: "bar",
                 color: "green"
+            }, {
+                value: 0,
+                shape: "bar",
+                color: "blue"
             }],
-
             scale: {
+                reverse: false,
                 line: {
                     color: "blue"
                 },
@@ -83,15 +90,11 @@ var gauge2 = elem2.kendoLinearGauge2({
                         color: "green",
                         //dashType: "dot"
                     },
-                    position: "outside",
-                    //template: "asdf"
-                    //margin: 10,
-                    format: "C",
-                    font: "15px Arial,Helvetica,sans-serif"
+                    position: "outside"
                 },
                 majorUnit: 20,
                 minorUnit: 2,
-                min: -40,
+                min: -60,
                 max: 60,
                 vertical: true,
                 ranges: [
@@ -113,7 +116,6 @@ var gauge2 = elem2.kendoLinearGauge2({
         }).data("kendoLinearGauge2");
 
 var gauge = elem.kendoRadialGauge2({
-        transitions: false,
         gaugeArea: {
             width: 200,
             height: 200,

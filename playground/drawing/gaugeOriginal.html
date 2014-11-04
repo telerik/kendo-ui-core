@@ -26,26 +26,19 @@
 </head>
 <body>
  
-  <div id="gauge" style="width: 270px"></div>
+  <!-- <div id="gauge" style="width: 270px"></div> -->
   <div id="gauge2" style="width: 270px"></div>
   <script>
     var elem2 = $("#gauge2");
 
     var gauge2 = elem2.kendoLinearGauge({
-            gaugeArea: {
-                    background: "yellow",
-                    border: {
-                    color: "blue",
-                    dashType: "dot",
-                    width: 2
-                },
-            },
             pointer: {
-                value: 28,
-                shape: "bar"
+                value: 60,
+                shape: "arrow",
+                color: "green"
             },
-
             scale: {
+                //reverse: true,
                 line: {
                     color: "blue"
                 },
@@ -62,17 +55,13 @@
                         color: "green",
                         //dashType: "dot"
                     },
-                    position: "outside",
-                    //template: "asdf"
-                    //margin: 10,
-                    format: "C",
-                    font: "15px Arial,Helvetica,sans-serif"
+                    position: "outside"
                 },
                 majorUnit: 20,
                 minorUnit: 2,
-                min: -40,
+                min: -60,
                 max: 60,
-                vertical: false,
+                vertical: true,
                 ranges: [
                     {
                         from: -40,
