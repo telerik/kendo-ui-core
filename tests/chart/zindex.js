@@ -75,10 +75,6 @@
             teardown: destroyChart
         });
 
-        test("marker zIndex defaults to base zIndex + fraction", function() {
-            equal(chart.points[0].marker.visual.options.zIndex, 100.1);
-        });
-
         test("segment zIndex defaults to base zIndex", function() {
             equal(chart._segments[0].visual.options.zIndex, 100);
         });
@@ -89,11 +85,6 @@
                 zIndex: 100
             });
             equal(chart._segments[0].visual.options.zIndex, 100);
-        });
-
-        test("line chart default zIndex is 2", function() {
-            createLineChart();
-            equal(chart.points[0].marker.visual.options.zIndex, 2.1);
         });
     })();
 })();

@@ -4656,7 +4656,7 @@ var __meta__ = {
                             left: 5,
                             right: 5
                         },
-                        zIndex: this.zIndex()
+                        zIndex: this.series.zIndex
                     }, labels)
                 );
                 point.append(point.label);
@@ -4694,15 +4694,11 @@ var __meta__ = {
                 background: options.background,
                 border: this.markerBorder(),
                 opacity: options.opacity,
-                zIndex: this.zIndex(),
+                zIndex: this.series.zIndex,
                 animation: options.animation
             });
 
             return marker;
-        },
-
-        zIndex: function() {
-            return valueOrDefault(this.series.zIndex, 2) + 0.1;
         },
 
         markerBox: function() {
@@ -4919,7 +4915,7 @@ var __meta__ = {
                     opacity: series.opacity,
                     dashType: series.dashType
                 },
-                zIndex: this.zIndex()
+                zIndex: series.zIndex
             });
 
             if (options.closed) {
@@ -4927,10 +4923,6 @@ var __meta__ = {
             }
 
             this.visual = line;
-        },
-
-        zIndex: function() {
-            return valueOrDefault(this.series.zIndex, 2);
         },
 
         aliasFor: function(e, coords) {
@@ -4951,7 +4943,9 @@ var __meta__ = {
                 seriesCount = seriesPoints.length,
                 sortedPoints, linePoints,
                 point, pointIx, pointCount,
-                segments = [];
+                lastSegment;
+
+            this._segments = [];
 
             for (seriesIx = 0; seriesIx < seriesCount; seriesIx++) {
                 currentSeries = series[seriesIx];
@@ -4965,27 +4959,28 @@ var __meta__ = {
                         linePoints.push(point);
                     } else if (chart.seriesMissingValues(currentSeries) !== INTERPOLATE) {
                         if (linePoints.length > 1) {
-                            segments.push(
-                                chart.createSegment(
-                                    linePoints, currentSeries, seriesIx, last(segments)
-                                )
+                            lastSegment = chart.createSegment(
+                                linePoints, currentSeries, seriesIx, lastSegment
                             );
+                            this._addSegment(lastSegment);
                         }
                         linePoints = [];
                     }
                 }
 
                 if (linePoints.length > 1) {
-                    segments.push(
-                        chart.createSegment(
-                            linePoints, currentSeries, seriesIx, last(segments)
-                        )
+                    lastSegment = chart.createSegment(
+                        linePoints, currentSeries, seriesIx, lastSegment
                     );
+                    this._addSegment(lastSegment);
                 }
             }
+        },
 
-            chart._segments = segments;
-            chart.append.apply(chart, segments);
+        _addSegment: function(segment) {
+            this._segments.push(segment);
+            this.children.unshift(segment);
+            segment.parent = this;
         },
 
         sortPoints: function(points) {
@@ -5213,7 +5208,7 @@ var __meta__ = {
                     opacity: series.opacity,
                     dashType: series.dashType
                 },
-                zIndex: this.zIndex()
+                zIndex: series.zIndex
             });
 
             curve.segments.push.apply(curve.segments, segments);
@@ -5266,7 +5261,7 @@ var __meta__ = {
             }
 
             this.visual = new draw.Group({
-                zIndex: this.zIndex()
+                zIndex: series.zIndex
             });
 
             this.createArea(color);
