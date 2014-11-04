@@ -1457,6 +1457,21 @@ namespace Kendo.Mvc.UI.Fluent
         //<< DataVizComponents
 
         /// <summary>
+        /// Creates a <see cref="Diagram"/>
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Diagram()
+        ///             .Name("Diagram")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual DiagramBuilder<object, object> Diagram()
+        {
+            return new DiagramBuilder<object, object>(new Diagram<object, object>(ViewContext, Initializer, UrlGenerator));
+        }
+
+        /// <summary>
         /// Creates a new <see cref="Kendo.Mvc.UI.Gantt{T}"/> bound to the specified data source.
         /// </summary>
         /// <typeparam name="T">The type of the data item</typeparam>
