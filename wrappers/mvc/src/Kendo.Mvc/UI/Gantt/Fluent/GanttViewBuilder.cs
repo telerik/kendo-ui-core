@@ -152,7 +152,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// The view type. Supported types are "day", "week", and "month".
+        /// The view type. Supported types are "day", "week", "month" and "year".
         /// </summary>
         /// <param name="value">The value that configures the type.</param>
         public GanttViewBuilder Type(GanttViewType value)

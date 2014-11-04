@@ -52,6 +52,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
         
+        /// <summary>
+        /// The text similar to "Year" displayed as Gantt "year" view title.
+        /// </summary>
+        /// <param name="value">The value that configures the year.</param>
+        public GanttMessagesViewsSettingsBuilder Year(string value)
+        {
+            container.Year = value;
+
+            return this;
+        }
+        
         //<< Fields
     }
 }

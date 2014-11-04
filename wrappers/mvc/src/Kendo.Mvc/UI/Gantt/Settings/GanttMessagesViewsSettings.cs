@@ -23,6 +23,8 @@ namespace Kendo.Mvc.UI
         
         public string Month { get; set; }
         
+        public string Year { get; set; }
+        
         //<< Fields
 
         protected override void Serialize(IDictionary<string, object> json)
@@ -42,6 +44,11 @@ namespace Kendo.Mvc.UI
             if (Month.HasValue())
             {
                 json["month"] = Month;
+            }
+            
+            if (Year.HasValue())
+            {
+                json["year"] = Year;
             }
             
         //<< Serialization
