@@ -891,6 +891,7 @@ var __meta__ = {
         var options = this.self.options;
 
         var values = this.self.value().split(options.separator);
+        var valuePrimitive = options.valuePrimitive;
         var data = this.self.dataSource.data();
         var dataItems = [];
         for (var idx = 0, length = data.length; idx < length; idx++) {
@@ -898,23 +899,35 @@ var __meta__ = {
             var dataValue = options.dataTextField ? item[options.dataTextField] : item;
             for (var j = 0; j < values.length; j++) {
                 if (dataValue === values[j]) {
-                    dataItems.push(item.toJSON());
+                    if (valuePrimitive) {
+                        dataItems.push(dataValue);
+                    } else {
+                        dataItems.push(item.toJSON());
+                    }
+
                     break;
                 }
             }
         }
+
         return dataItems;
     });
 
-    defadvice("ui.AutoComplete", "$angular_setLogicValue", function(orig){
-        if (orig == null) {
-            orig = [];
+    defadvice("ui.AutoComplete", "$angular_setLogicValue", function(value) {
+        if (value == null) {
+            value = [];
         }
-        var self = this.self;
-        var val = $.map(orig, function(item){
-            return item[self.options.dataTextField];
-        });
-        self.value(val);
+
+        var self = this.self,
+            dataTextField = self.options.dataTextField;
+
+        if (dataTextField && !self.options.valuePrimitive) {
+            value = $.map(value, function(item){
+                return item[dataTextField];
+            });
+        }
+
+        self.value(value);
     });
 
     // All event handlers that are strings are compiled the Angular way.
