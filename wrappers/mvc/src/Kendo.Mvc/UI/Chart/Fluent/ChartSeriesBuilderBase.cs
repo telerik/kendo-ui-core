@@ -406,5 +406,33 @@ using Kendo.Mvc.Infrastructure;
 
             return this as TSeriesBuilder;
         }
+
+        /// <summary>
+        /// Sets the series stacking order relative to other series.
+        /// </summary>
+        /// <param name="zIndex">
+        /// The stacking order of series, relative to other series.
+        /// The series with the highest Z-index will be placed on top.
+        /// 
+        /// Series with no Z-index will use the default stacking order based on series type.
+        /// For example line series will be on top with bar and area following below.
+        /// </param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().Chart(Model)
+        ///            .Name("Chart")
+        ///            .Series(series => {
+        ///                 series.Area(s => s.Sales).ZIndex(2);
+        ///                 series.Column(s => s.Price).ZIndex(1);
+        ///            })
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public TSeriesBuilder ZIndex(double zIndex)
+        {
+            Series.ZIndex = zIndex;
+
+            return this as TSeriesBuilder;
+        }
     }
 }

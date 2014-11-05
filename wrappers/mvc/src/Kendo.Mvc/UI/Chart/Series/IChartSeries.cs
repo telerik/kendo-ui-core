@@ -111,6 +111,17 @@ namespace Kendo.Mvc.UI
             get;
             set;
         }
+
+        /// <summary>
+        /// Gets or sets the series Z-Index.
+        /// </summary>
+        /// <value>A numeric value that will be compared with
+        /// other series to determine stacking order.</value>
+        double? ZIndex
+        {
+            get;
+            set;
+        }
         
         IChartSerializer CreateSerializer();
     }
