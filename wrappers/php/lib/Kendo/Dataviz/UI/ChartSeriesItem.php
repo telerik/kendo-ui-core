@@ -694,6 +694,16 @@ or series name (for other available series types) in the legend.
         return $this->setProperty('notes', $value);
     }
 
+    /**
+    * An optional Z-index that can be used to change the default stacking order of series.The series with the highest Z-index will be placed on top.Series with no Z-index will use the default stacking order based on series type.
+For example line series will be on top with bar and area following below.
+    * @param float $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function zIndex($value) {
+        return $this->setProperty('zIndex', $value);
+    }
+
 //<< Properties
 }
 

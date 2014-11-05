@@ -3459,6 +3459,13 @@ or series name (for other available series types) in the legend.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+        <attribute>
+            <description>An optional Z-index that can be used to change the default stacking order of series.The series with the highest Z-index will be placed on top.Series with no Z-index will use the default stacking order based on series type.
+For example line series will be on top with bar and area following below.</description>
+            <name>zindex</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
     </tag>
 
     <tag>
@@ -26152,6 +26159,13 @@ A string value is interpreted as series.stack.group.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
+        <attribute>
+            <description>An optional Z-index that can be used to change the default stacking order of series.The series with the highest Z-index will be placed on top.Series with no Z-index will use the default stacking order based on series type.
+For example line series will be on top with bar and area following below.</description>
+            <name>zindex</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
     </tag>
 
     <tag>
@@ -26641,7 +26655,8 @@ A string value is interpreted as series.stack.group.</description>
             <description>The icon shape.The supported values are:
 * "circle" - the marker shape is circle.
 * "square" - the marker shape is square.
-* "triangle" - the marker shape is triangle.</description>
+* "triangle" - the marker shape is triangle.
+* "cross" - the marker shape is cross.</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -26783,7 +26798,7 @@ A string value is interpreted as series.stack.group.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The line length of the notes.</description>
+            <description>The length of the connecting lines in pixels.</description>
             <name>length</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -33117,6 +33132,13 @@ A string value is interpreted as series.stack.group.</description>
         <attribute>
             <description>The line width.** Applicable for area and line series. **</description>
             <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>An optional Z-index that can be used to change the default stacking order of series.The series with the highest Z-index will be placed on top.Series with no Z-index will use the default stacking order based on series type.
+For example line series will be on top with bar and area following below.</description>
+            <name>zindex</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
