@@ -4,7 +4,7 @@ package com.kendoui.taglib.gantt;
 
 import com.kendoui.taglib.BaseTag;
 
-
+import com.kendoui.taglib.DataSourceTag;
 
 import com.kendoui.taglib.GanttTag;
 
