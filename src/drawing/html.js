@@ -56,12 +56,12 @@
     var nodeInfo = {};
 
     var parseGradient = (function(){
-        var tok_linear_gradient  = /^(linear-gradient\s*)\(/;
-        var tok_radial_gradient  = /^(radial-gradient\s*)\(/;
+        var tok_linear_gradient  = /^((-webkit-|-moz-|-o-|-ms-)?linear-gradient\s*)\(/;
+        var tok_radial_gradient  = /^((-webkit-|-moz-|-o-|-ms-)?radial-gradient\s*)\(/;
         var tok_percent          = /^([-0-9.]+%)/;
         var tok_length           = /^([-0-9.]+px)/;
         var tok_keyword          = /^(left|right|top|bottom|to|center)\W/;
-        var tok_angle            = /^([-0-9.]+deg)/;
+        var tok_angle            = /^([-0-9.]+(deg|grad|rad|turn))/;
         var tok_whitespace       = /^(\s+)/;
         var tok_popen            = /^(\()/;
         var tok_pclose           = /^(\))/;
@@ -99,25 +99,28 @@
                 }
             }
 
-            function read_linear_gradient() {
+            function read_linear_gradient(propName) {
                 var angle;
                 var to1, to2;
                 var stops = [];
+                var reverse = false;
 
                 if (read(tok_popen)) {
                     // 1. [ <angle> || to <side-or-corner>, ]?
-                    angle = read(tok_angle); // XXX: support more units
+                    angle = read(tok_angle);
                     if (angle) {
-                        angle = degreesToRadians(parseFloat(angle));
-                        read(tok_comma);
-                    }
-                    else if (read(tok_keyword) == "to") {
-                        to1 = read(tok_keyword);
-                        to2 = read(tok_keyword);
+                        angle = parseAngle(angle);
                         read(tok_comma);
                     }
                     else {
-                        return null; // can't figure it out.
+                        to1 = read(tok_keyword);
+                        if (to1 == "to") {
+                            to1 = read(tok_keyword);
+                        } else if (/-webkit-/.test(propName)) { // aaargh, so many horror stories I could tell!
+                            reverse = true;
+                        }
+                        to2 = read(tok_keyword);
+                        read(tok_comma);
                     }
 
                     // 2. color stops
@@ -131,17 +134,33 @@
                     }
 
                     return {
-                        type  : "linear",
-                        angle : angle,
-                        to    : to1 && to2 ? to1 + " " + to2 : to1,
-                        stops : stops
+                        type    : "linear",
+                        angle   : angle,
+                        to      : to1 && to2 ? to1 + " " + to2 : to1,
+                        stops   : stops,
+                        reverse : reverse
                     };
                 }
             }
 
-            if (read(tok_linear_gradient)) {
-                return read_linear_gradient();
+            var list = [];
+            while (input) {
+                var prev = input;
+                var tok = read(tok_linear_gradient);
+                if (tok) {
+                    tok = read_linear_gradient(tok);
+                }
+                if (tok) {
+                    list.push(tok);
+                }
+                read(tok_comma);
+                if (input == prev) {
+                    // encountered something we can't read, bail out.
+                    break;
+                }
             }
+
+            return list.length > 0 ? list : null;
         };
     })();
 
@@ -374,7 +393,7 @@
             return null;
         }
         var matrix = /^\s*matrix\(\s*(.*?)\s*\)\s*$/.exec(transform);
-        if (matrix) { // IE9 doesn't support CSS transforms
+        if (matrix) {
             var origin = getPropertyValue(style, "transform-origin");
             matrix = matrix[1].split(/\s*,\s*/g).map(parseFloat);
             origin = origin.split(/\s+/g).map(parseFloat);
@@ -389,8 +408,20 @@
         return ((180 * radians) / Math.PI) % 360;
     }
 
-    function degreesToRadians(degrees) {
-        return Math.PI * degrees / 180;
+    function parseAngle(angle) {
+        var num = parseFloat(angle);
+        if (/grad$/.test(angle)) {
+            return Math.PI * num / 200;
+        }
+        else if (/rad$/.test(angle)) {
+            return num;
+        }
+        else if (/turn$/.test(angle)) {
+            return Math.PI * num * 2;
+        }
+        else if (/deg$/.test(angle)) {
+            return Math.PI * num / 180;
+        }
     }
 
     function setTransform(shape, m) {
@@ -535,6 +566,11 @@
         var backgroundPosition = getPropertyValue(style, "background-position");
         var backgroundOrigin = getPropertyValue(style, "background-origin");
         var backgroundSize = getPropertyValue(style, "background-size");
+
+        if (/^\s*repeat\s*,\s*repeat\s*$/.test(backgroundRepeat)) {
+            // Chrome does this sometimes, because why not.
+            backgroundRepeat = "repeat";
+        }
 
         if (browser.msie && browser.version < 10) {
             // IE9 hacks.  getPropertyValue won't return the correct
@@ -785,34 +821,7 @@
             else {
                 var gradient = parseGradient(backgroundImage);
                 if (gradient) {
-                    drawBackgroundImage(background, box, box.width, box.height, function(group, rect){
-                        var width = rect.width(), height = rect.height(), tl = rect.topLeft();
-                        switch (gradient.type) {
-                          case "linear":
-                            var k = Math.sin(Math.atan2(height, width) + gradient.angle) * Math.sqrt(width*width + height*height) / 2;
-                            var x = k * Math.sin(gradient.angle);
-                            var y = k * Math.cos(gradient.angle);
-                            group.append(
-                                drawing.Path.fromRect(rect)
-                                    .stroke(null)
-                                    .fill(new drawing.LinearGradient({
-                                        start : [ tl.x + width/2 - x, tl.y + height/2 + y ],
-                                        end   : [ tl.x + width/2 + x, tl.y + height/2 - y ],
-                                        stops : gradient.stops.map(function(s){
-                                            return {
-                                                color: s.color.toCssRgba(),
-                                                offset: s.percent
-                                            };
-                                        }),
-                                        userSpace: true
-                                    }))
-                            );
-                            break;
-                          case "radial":
-                            console.error("TODO: Radial gradients");
-                            break;
-                        }
-                    });
+                    drawBackgroundImage(background, box, box.width, box.height, gradientRenderer(gradient));
                 }
             }
         }
@@ -829,7 +838,7 @@
                 orgBox = innerBox(orgBox, "border-*-width", element);
             }
 
-            if (!/^\s*auto(\s+auto)?\s*$/.test(backgroundSize)) {
+            if (!/^\s*auto((\s*,\s*|\s+)auto)?\s*$/.test(backgroundSize)) {
                 var size = backgroundSize.split(/\s+/g);
                 // compute width
                 if (/%$/.test(size[0])) {
@@ -1050,6 +1059,108 @@
                      box.height, right.width, top.width, bottom.width,
                      inv(rTR), inv(rBR),
                      [ 0, 1, -1, 0, box.right, box.top ]);
+        }
+    }
+
+    function gradientRenderer(gradient) {
+        return function(group, rect) {
+            for (var i = gradient.length; --i >= 0;) {
+                draw(gradient[i], group, rect);
+            }
+        };
+        function draw(gradient, group, rect){
+            var width = rect.width(), height = rect.height(), tl = rect.topLeft();
+
+            switch (gradient.type) {
+              case "linear":
+
+                // figure out the angle.
+                var angle = gradient.angle || Math.PI;
+                switch (gradient.to) {
+                  case "top":
+                    angle = 0;
+                    break;
+                  case "left":
+                    angle = -Math.PI / 2;
+                    break;
+                  case "bottom":
+                    angle = Math.PI;
+                    break;
+                  case "right":
+                    angle = Math.PI / 2;
+                    break;
+                  case "top left": case "left top":
+                    angle = -Math.atan2(height, width);
+                    break;
+                  case "top right": case "right top":
+                    angle = Math.atan2(height, width);
+                    break;
+                  case "bottom left": case "left bottom":
+                    angle = Math.PI + Math.atan2(height, width);
+                    break;
+                  case "bottom right": case "right bottom":
+                    angle = Math.PI - Math.atan2(height, width);
+                    break;
+                }
+
+                if (gradient.reverse) {
+                    angle += Math.PI;
+                }
+
+                // compute gradient's start/end points.  here len is the length of the gradient line
+                // and x,y is the end point relative to the center of the rectangle in conventional
+                // (math) axis direction.
+                var len = Math.abs(width * Math.sin(angle)) + Math.abs(height * Math.cos(angle));
+                var x = len/2 * Math.sin(angle);
+                var y = len/2 * Math.cos(angle);
+
+                // compute the color stops.
+                var implicit = [], right = 0;
+                var stops = gradient.stops.map(function(s, i){
+                    var offset = s.percent;
+                    if (offset) {
+                        offset = parseFloat(offset) / 100;
+                    } else if (s.length) {
+                        offset = parseFloat(s.length) / len;
+                    } else if (i === 0) {
+                        offset = 0;
+                    } else if (i == gradient.stops.length - 1) {
+                        offset = 1;
+                    }
+                    var stop = {
+                        color: s.color.toCssRgba(),
+                        offset: offset
+                    };
+                    if (offset != null) {
+                        right = offset;
+                        // fix implicit offsets
+                        implicit.forEach(function(s, i){
+                            var stop = s.stop;
+                            stop.offset = s.left + (right - s.left) * (i + 1) / (implicit.length + 1);
+                        });
+                        implicit = [];
+                    } else {
+                        implicit.push({ left: right, stop: stop });
+                    }
+                    return stop;
+                });
+
+                // finally, draw it.
+                group.append(
+                    drawing.Path.fromRect(rect)
+                        .stroke(null)
+                        .fill(new drawing.LinearGradient({
+                            start : [ tl.x + width/2 - x, tl.y + height/2 + y ],
+                            end   : [ tl.x + width/2 + x, tl.y + height/2 - y ],
+                            stops : stops,
+                            userSpace: true
+                        }))
+                );
+                break;
+              case "radial":
+                console.error("TODO: Radial gradients");
+                break;
+            }
         }
     }
 
