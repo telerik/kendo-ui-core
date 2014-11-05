@@ -383,6 +383,22 @@
         instance.content.find(".k-grid-add").click();
     });
 
+    test("command name is case-insensitive", function() {
+        createTreeList({
+            dataSource: [ { id: 1 } ],
+            columns: [
+                { field: "id" },
+                { command: ["createChild"] }
+            ]
+        });
+
+        instance.editRow = function() {
+            ok(true);
+        };
+
+        instance.content.find(".k-grid-add").click();
+    });
+
     test("editing row shows update and cancel buttons", function() {
         createTreeList({
             dataSource: [ { id: 1 } ],

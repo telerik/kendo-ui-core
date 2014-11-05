@@ -910,6 +910,8 @@ var __meta__ = {
             var columns = this.columns;
             var i, j, commands;
 
+            name = name.toLowerCase();
+
             if (defaultCommands[name]) {
                 return defaultCommands[name];
             }
@@ -919,7 +921,7 @@ var __meta__ = {
                 commands = columns[i].command;
                 if (commands) {
                     for (j = 0; j < commands.length; j++) {
-                        if (commands[j].name == name) {
+                        if (commands[j].name.toLowerCase() == name) {
                             return commands[j];
                         }
                     }
@@ -1381,11 +1383,11 @@ var __meta__ = {
         },
 
         _button: function(command) {
-            var name = command.name || command;
+            var name = (command.name || command).toLowerCase();
             var text = this.options.messages.commands[name];
             var icon = [];
 
-            command = extend({} , defaultCommands[name], { text: text }, command);
+            command = extend({}, defaultCommands[name], { text: text }, command);
 
             if (command.imageClass) {
                 icon.push(kendoDomElement("span", {
