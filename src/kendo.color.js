@@ -171,7 +171,7 @@
         color = color.toLowerCase();
         if ((m = namedColorRegexp.exec(color))) {
             if (m[1] == "transparent") {
-                color = new _RGB(0, 0, 0, 0);
+                color = new _RGB(1, 1, 1, 0);
             }
             else {
                 color = parseColor(Color.namedColors[m[1]], nothrow);
