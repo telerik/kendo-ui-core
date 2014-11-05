@@ -68,8 +68,8 @@
 
         equal(resources.field, "resources");
         equal(resources.dataTextField, "name");
-        equal(resources.dataColourField, "color");
-        equal(resources.dataBaseUnitField, "format");
+        equal(resources.dataColorField, "color");
+        equal(resources.dataFormatField, "format");
     });
 
     test("are initialized with dataSource field", function() {
@@ -133,8 +133,8 @@
         gantt = new Gantt(element);
         assignments = gantt.assignments;
 
-        equal(assignments.dataTaskField, "taskId");
-        equal(assignments.dataResourceField, "resourceId");
+        equal(assignments.dataTaskIdField, "taskId");
+        equal(assignments.dataResourceIdField, "resourceId");
         equal(assignments.dataValueField, "value");
     });
 
@@ -269,14 +269,14 @@
             },
             resources: {
                 dataTextField: "resourceName",
-                dataColourField: "customColor",
+                dataColorField: "customColor",
                 dataSource: [
                     { id: 0, resourceName: "foo", customColor: "00ffff" }
                 ]
             },
             assignments: {
-                dataTaskField: "id",
-                dataResourceField: "resource",
+                dataTaskIdField: "id",
+                dataResourceIdField: "resource",
                 dataValueField: "customValue",
                 dataSource: [
                     { id: 0, resource: 0, customValue: 5 }

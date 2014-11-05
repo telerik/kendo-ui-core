@@ -2024,8 +2024,8 @@ var __meta__ = {
             this.resources = {
                 field: "resources",
                 dataTextField: "name",
-                dataColourField: "color",
-                dataBaseUnitField: "format"
+                dataColorField: "color",
+                dataFormatField: "format"
             };
 
             extend(this.resources, resources);
@@ -2045,8 +2045,8 @@ var __meta__ = {
             }
 
             this.assignments = {
-                dataTaskField: "taskId",
-                dataResourceField: "resourceId",
+                dataTaskIdField: "taskId",
+                dataResourceIdField: "resourceId",
                 dataValueField: "value"
             };
 
@@ -2190,8 +2190,8 @@ var __meta__ = {
 
         _updateAssignments: function(id, resources) {
             var dataSource = this.assignments.dataSource;
-            var taskId = this.assignments.dataTaskField;
-            var resourceId = this.assignments.dataResourceField;
+            var taskId = this.assignments.dataTaskIdField;
+            var resourceId = this.assignments.dataResourceIdField;
             var resourceValue = this.assignments.dataValueField;
             var hasMatch = false;
             var assignments = new Query(dataSource.view())
@@ -2514,7 +2514,7 @@ var __meta__ = {
             var groupAssigments = function() {
                 var data = assignments.dataSource.view();
                 var group = {
-                    field: assignments.dataTaskField
+                    field: assignments.dataTaskIdField
                 };
 
                 data = new Query(data).group(group).toArray();
@@ -2536,16 +2536,16 @@ var __meta__ = {
             var wrapTask = function(task, items) {
                 for (var j = 0, length = items.length; j < length; j++) {
                     var item = items[j];
-                    var resource = resources.dataSource.get(item.get(assignments.dataResourceField));
+                    var resource = resources.dataSource.get(item.get(assignments.dataResourceIdField));
                     var resourceValue = item.get(assignments.dataValueField);
-                    var resourcedId = item.get(assignments.dataResourceField);
-                    var valueFormat = resource.get(resources.dataBaseUnitField);
+                    var resourcedId = item.get(assignments.dataResourceIdField);
+                    var valueFormat = resource.get(resources.dataFormatField);
                     var formatedValue = valueFormat ? kendo.toString(resourceValue, valueFormat) : resourceValue;
 
                     task[resources.field].push(new ObservableObject({
                         id: resourcedId,
                         name: resource.get(resources.dataTextField),
-                        color: resource.get(resources.dataColourField),
+                        color: resource.get(resources.dataColorField),
                         value: resourceValue,
                         formatedValue: formatedValue
                     }));
@@ -2564,7 +2564,7 @@ var __meta__ = {
             var resources = this.resources.dataSource.view();
             var assignments = this.assignments.dataSource.view();
             var taskAssignments = new Query(assignments).filter({
-                field: that.assignments.dataTaskField,
+                field: that.assignments.dataTaskIdField,
                 operator: "eq",
                 value: id
             }).toArray();
@@ -2572,7 +2572,7 @@ var __meta__ = {
                 var resourceValue = null;
 
                 new Query(taskAssignments).filter({
-                    field: that.assignments.dataResourceField,
+                    field: that.assignments.dataResourceIdField,
                     operator: "eq",
                     value: id
                 }).select(function(assignment) {
@@ -2587,7 +2587,7 @@ var __meta__ = {
                 result.push({
                     id: resource.get("id"),
                     name: resource.get(that.resources.dataTextField),
-                    format: resource.get(that.resources.dataBaseUnitField),
+                    format: resource.get(that.resources.dataFormatField),
                     value: valuePerResource(resource.id)
                 });
             }
