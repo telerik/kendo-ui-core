@@ -242,11 +242,13 @@ kendo.ExcelExporter = kendo.Class.extend({
         var childRow = rows[row.index + 1];
         var totalColSpan = 0;
         var column;
+        var cell;
 
         for (var idx = 0; idx < columns.length; idx++) {
             column = columns[idx];
             if (this._isColumnVisible(column)) {
-                var cell = { title: column.title || column.field, colSpan: 0 };
+
+                cell = { title: column.title || column.field, colSpan: 0 };
                 row.cells.push(cell);
 
                 if (column.columns && column.columns.length) {
@@ -307,13 +309,27 @@ kendo.ExcelExporter = kendo.Class.extend({
 
         return rows;
     },
+    _headerDepth: function(columns) {
+        var result = 1;
+        var max = 0;
+
+        for (var idx = 0; idx < columns.length; idx++) {
+            if (columns[idx].columns) {
+                var temp = this._headerDepth(columns[idx].columns);
+                if (temp > max) {
+                    max = temp;
+                }
+            }
+        }
+        return result + max;
+    },
     _freezePane: function() {
         var colSplit = $.grep(this.columns, function(column) {
             return column.locked;
         }).length;
 
         return {
-            rowSplit: 1,
+            rowSplit: this._headerDepth(this._visibleColumns(this.options.columns || [])),
             colSplit: colSplit? colSplit + this.dataSource.group().length : 0
         };
     },

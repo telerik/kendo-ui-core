@@ -258,6 +258,17 @@ test("freezes first row", function() {
     });
 });
 
+test("freezes all header rows with multi-column headers set", function() {
+    testWorkbook({
+        columns: [
+            { title: "master", columns: [{ field: "foo" }] },
+            { title: "master2", columns: [{ field: "bar" }, { field: "baz" }] }
+        ], dataSource: [{ foo: "bar", bar: "baz", baz: "moo" }] }, function(book) {
+
+        equal(book.sheets[0].freezePane.rowSplit, 2);
+    });
+});
+
 test("enables filtering", function() {
     testWorkbook({ filterable: true, columns: [ { field: "foo" } ], dataSource: [ {} ] }, function(book) {
         equal(book.sheets[0].filter.from, 0);
