@@ -196,8 +196,8 @@ function sameRectPath(path, rectCoordinates, TOLERANCE) {
         x2 = rectCoordinates[2],
         y2 = rectCoordinates[3];
 
-    var rect = kendo.drawing.Path.fromRect(new kendo.geometry.Rect([x1, y1, x2 - x1, y2 - y1]));
-    sameLinePath(plotBands, rect, TOLERANCE);
+    var rect = kendo.drawing.Path.fromRect(new kendo.geometry.Rect([x1, y1], [x2 - x1, y2 - y1]));
+    sameLinePath(path, rect, TOLERANCE);
 }
 
 function stubMethod(fn, methodName, stub, callback) {

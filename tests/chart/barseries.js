@@ -2195,17 +2195,6 @@
             SERIES_NAME = "series",
             TOOLTIP_OFFSET = 5;
 
-        function samePath(actual, expected) {
-            var actualSegments = actual.segments;
-            var expectedSegments = expected.segments;
-            if (actualSegments.length !== expectedSegments.length) {
-                ok(false, "different segments length");
-            }
-            for (var idx = 0; idx < actualSegments.length; idx++) {
-                deepEqual(actualSegments[idx].anchor().toString(), expectedSegments[idx].anchor().toString(), idx);
-            }
-        }
-
         function createBar(options, clipBox) {
             box = new Box2D(0, 0, 100, 100);
             bar = new Bar(VALUE, kendo.deepExtend({}, Bar.fn.defaults, options));
@@ -2259,10 +2248,7 @@
         });
 
         test("renders rectangle", function() {
-            var ref = draw.Path.fromRect(box.toRect());
-            kendo.dataviz.alignPathToPixel(ref);
-
-            samePath(rect, ref);
+            sameLinePath(rect, draw.Path.fromRect(box.toRect()));
         });
 
         test("does not render rectangle when box height is zero", function() {
@@ -2290,7 +2276,7 @@
         });
 
         test("overlay has same path as rect", function() {
-            samePath(rect, overlay);
+            sameLinePath(rect, overlay);
         });
 
         test("sets overlay baseColor to color", function() {
@@ -2357,7 +2343,7 @@
             var highlight = bar.createHighlight({
                 foo: "bar"
             });
-            samePath(rect, highlight);
+            sameLinePath(rect, highlight);
             equal(highlight.options.foo, "bar");
         });
 

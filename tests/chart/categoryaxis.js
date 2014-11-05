@@ -1,13 +1,13 @@
 (function() {
-    return;
 
     var deepExtend = kendo.deepExtend,
+        draw = kendo.drawing,
+        geom = kendo.geometry,
         dataviz = kendo.dataviz,
         getElement = dataviz.getElement,
         Box2D = dataviz.Box2D,
         chartBox = new Box2D(0, 0, 800, 600),
         CategoryAxis,
-        view,
         TOLERANCE = 2;
 
     CategoryAxis = dataviz.CategoryAxis.extend({
@@ -18,10 +18,6 @@
             }
         }
     });
-
-    function moduleSetup() {
-        view = new ViewStub();
-    }
 
     (function() {
         var categoryAxis,
@@ -40,73 +36,84 @@
             );
             categoryAxis.reflow(chartBox);
             lineBox = categoryAxis.lineBox();
+            categoryAxis.renderVisual();
+        }
+
+        function getBackground() {
+             return categoryAxis._backgroundPath;
+        }
+
+        function getLine() {
+            return categoryAxis._lineGroup.children[0];
+        }
+
+        function getTicks() {
+            return categoryAxis._lineGroup.children.slice(1);
+        }
+
+        function getAxisTextBoxes() {
+            return $.grep(categoryAxis.visual.children, function(item) {
+                if (item !== categoryAxis._lineGroup && item !== categoryAxis._backgroundPath && item !== categoryAxis._gridLines) {
+                    return true;
+                }
+            });
+        }
+
+        function getAxisTexts() {
+            return $.map(getAxisTextBoxes(), function(item) {
+                return dataviz.last(item.children);
+            });
         }
 
         // ------------------------------------------------------------
         module("Category Axis / Horizontal / Rendering", {
             setup: function() {
-                moduleSetup();
-
                 createCategoryAxis();
             }
         });
 
         test("creates axis line", function() {
-            categoryAxis.getViewElements(view);
-            sameBox(view.log.line[0], new Box2D(
-                    chartBox.x1, LINE_Y,
-                    chartBox.x2, LINE_Y),
-                    TOLERANCE
-            );
+            var expectedLine = draw.Path.fromPoints([[chartBox.x1, LINE_Y], [chartBox.x2, LINE_Y]]);
+            dataviz.alignPathToPixel(expectedLine);
+            sameLinePath(getLine(), expectedLine, TOLERANCE);
         });
 
         test("creates background box", function() {
             createCategoryAxis({ background: "red" });
-            categoryAxis.getViewElements(view);
 
-            var rect = view.log.rect[0];
-            var box = categoryAxis.box;
+            var rect = getBackground();
+            var box = draw.Path.fromRect(categoryAxis.box.toRect());
 
-            close(rect.x1, box.x1, TOLERANCE);
-            close(rect.y1, box.y1, TOLERANCE);
-            close(rect.x2, box.x2, TOLERANCE);
-            close(rect.y2, box.y2, TOLERANCE);
+            sameLinePath(rect, box, TOLERANCE);
         });
 
         test("should not create axis line if visible is false", function() {
             createCategoryAxis({ line: { visible: false } });
 
-            categoryAxis.getViewElements(view);
-            ok(view.log.line.length == 0);
+            ok(!categoryAxis._lineGroup);
         });
 
         test("should not render axis if visible is false", function() {
             createCategoryAxis({ visible: false });
-
-            categoryAxis.getViewElements(view);
-            ok(view.log.line.length == 0 && view.log.line.length == 0);
+            ok(!categoryAxis.visual);
         });
 
         test("creates labels", 1, function() {
-            categoryAxis.getViewElements(view);
-
-            deepEqual($.map(view.log.text, function(text) { return text.content }),
+            deepEqual($.map(getAxisTexts(), function(text) { return text.content() }),
                  ["Foo", "Bar"]);
         });
 
         test("creates labels with full format", 1, function() {
             createCategoryAxis({ categories: [1, 2], labels: { format: "{0:C}"} });
-            categoryAxis.getViewElements(view);
 
-            deepEqual($.map(view.log.text, function(text) { return text.content }),
+            deepEqual($.map(getAxisTexts(), function(text) { return text.content() }),
                  ["$1.00", "$2.00"]);
         });
 
         test("creates labels with simple format", 1, function() {
             createCategoryAxis({ categories: [1, 2], labels: { format: "C"} });
-            categoryAxis.getViewElements(view);
 
-            deepEqual($.map(view.log.text, function(text) { return text.content }),
+            deepEqual($.map(getAxisTexts(), function(text) { return text.content() }),
                  ["$1.00", "$2.00"]);
         });
 
@@ -127,9 +134,7 @@
                 }
             });
 
-            categoryAxis.getViewElements(view);
-
-            equal(view.log.text[0].content, "|Foo|");
+            equal(getAxisTexts()[0].content(), "|Foo|");
         });
 
         test("labels have set color", 1, function() {
@@ -139,9 +144,7 @@
                 }
             });
 
-            categoryAxis.getViewElements(view);
-
-            equal(view.log.text[0].style.color, "#f00");
+            equal(getAxisTexts()[0].options.fill.color, "#f00");
         });
 
         test("labels have rotation angle", 1, function() {
@@ -161,9 +164,7 @@
                 }
             });
 
-            categoryAxis.getViewElements(view);
-
-            equal(view.log.rect[0].style.fill, "#f0f");
+            equal(getAxisTextBoxes()[0].children[0].options.fill.color, "#f0f");
         });
 
         test("labels have set zIndex", 1, function() {
@@ -171,9 +172,7 @@
                 zIndex: 2
             });
 
-            categoryAxis.getViewElements(view);
-
-            equal(view.log.text[0].style.zIndex, 2);
+            equal(getAxisTextBoxes()[0].options.zIndex, 2);
         });
 
         test("labels are positioned below axis line with margin and padding", 2, function() {
@@ -184,87 +183,71 @@
                 }
             });
 
-            categoryAxis.getViewElements(view);
-
-            $.each(view.log.text, function() {
-                    equal(this.style.y, LINE_Y + MAJOR_TICK_HEIGHT + 2 * MARGIN + PADDING, TOLERANCE);
+            $.each(getAxisTexts(), function() {
+                close(this.rect().origin.y, LINE_Y + MAJOR_TICK_HEIGHT + 2 * MARGIN + PADDING, TOLERANCE);
             })
         });
 
         test("labels are distributed horizontally", function() {
-            categoryAxis.getViewElements(view);
 
-            arrayClose($.map(view.log.text, function(text) { return text.style.x }),
+            arrayClose($.map(getAxisTexts(), function(text) { return text.rect().origin.x }),
                  [185.5, 586.5], TOLERANCE);
         });
 
         test("labels are distributed horizontally (justified)", function() {
             createCategoryAxis({ justified: true });
-            categoryAxis.getViewElements(view);
 
-            arrayClose($.map(view.log.text, function(text) { return text.style.x }),
+            arrayClose($.map(getAxisTexts(), function(text) { return text.rect().origin.x }),
                  [0, 773], TOLERANCE);
         });
 
         test("labels are distributed horizontally in reverse", function() {
             createCategoryAxis({ reverse: true });
-            categoryAxis.getViewElements(view);
 
-            arrayClose($.map(view.log.text, function(text) { return text.style.x }),
+            arrayClose($.map(getAxisTexts(), function(text) { return text.rect().origin.x }),
                  [586.5, 185.5], TOLERANCE);
         });
 
         test("labels are distributed horizontally in reverse (justified)", function() {
             createCategoryAxis({ justified: true, reverse: true });
-            categoryAxis.getViewElements(view);
 
-            arrayClose($.map(view.log.text, function(text) { return text.style.x }),
+
+            arrayClose($.map(getAxisTexts(), function(text) { return text.rect().origin.x }),
                  [773, 0], TOLERANCE);
         });
 
         test("labels are positioned below axis line", 2, function() {
-            categoryAxis.getViewElements(view);
-            $.each(view.log.text, function() {
-                    equal(this.style.y, LINE_Y + MAJOR_TICK_HEIGHT + MARGIN, TOLERANCE);
+            $.each(getAxisTexts(), function() {
+                    equal(this.rect().origin.y, LINE_Y + MAJOR_TICK_HEIGHT + MARGIN, TOLERANCE);
             })
         });
 
         test("major ticks are distributed horizontally", function() {
-            categoryAxis.getViewElements(view);
-            view.log.line.shift();
-            arrayClose($.map(view.log.line, function(line) { return line.x1; }),
-                 [0, 400, 800], TOLERANCE);
+            arrayClose($.map(getTicks(), function(line) {return line.segments[0].anchor().x;}),
+                 [0.5, 400.5, 800.5], TOLERANCE);
         });
 
         test("major ticks are distributed horizontally (justified)", function() {
             createCategoryAxis({ justified: true });
-            categoryAxis.getViewElements(view);
-            view.log.line.shift();
-            arrayClose($.map(view.log.line, function(line) { return line.x1; }),
+            arrayClose($.map(getTicks(), function(line) { return line.segments[0].anchor().x; }),
                  [14.5, 786.5], TOLERANCE);
         });
 
         test("major ticks are distributed horizontally in reverse", function() {
             createCategoryAxis({ reverse: true });
-            categoryAxis.getViewElements(view);
-            view.log.line.shift();
-            arrayClose($.map(view.log.line, function(line) { return line.x1; }),
+            arrayClose($.map(getTicks(), function(line) { return line.segments[0].anchor().x; }),
                  [800, 400, 0], TOLERANCE);
         });
 
         test("major ticks are distributed horizontally in reverse (justified)", function() {
             createCategoryAxis({ justified: true, reverse: true });
-            categoryAxis.getViewElements(view);
-            view.log.line.shift();
-            arrayClose($.map(view.log.line, function(line) { return line.x1; }),
+            arrayClose($.map(getTicks(), function(line) { return line.segments[0].anchor().x; }),
                  [786.5, 14.5], TOLERANCE);
         });
 
         test("major ticks can be disabled", function() {
             createCategoryAxis({ majorTicks: { visible: false }});
-            categoryAxis.getViewElements(view);
-            view.log.line.shift();
-            equal(view.log.line.length, 0);
+            equal(getTicks().length, 0);
         });
 
         test("minor ticks are distributed horizontally", function() {
@@ -272,9 +255,7 @@
                 majorTicks: { visible: false },
                 minorTicks: { visible: true }
             });
-            categoryAxis.getViewElements(view);
-            view.log.line.shift();
-            arrayClose($.map(view.log.line, function(line) { return line.x1; }),
+            arrayClose($.map(getTicks(), function(line) { return line.segments[0].anchor().x; }),
                  [0, 200, 400, 600, 800], TOLERANCE);
         });
 
@@ -284,9 +265,7 @@
                 majorTicks: { visible: false },
                 minorTicks: { visible: true }
             });
-            categoryAxis.getViewElements(view);
-            view.log.line.shift();
-            arrayClose($.map(view.log.line, function(line) { return line.x1; }),
+            arrayClose($.map(getTicks(), function(line) { return line.segments[0].anchor().x; }),
                  [14.5, 272, 529, 786], TOLERANCE);
         });
 
@@ -296,9 +275,7 @@
                 majorTicks: { visible: false },
                 minorTicks: { visible: true }
              });
-            categoryAxis.getViewElements(view);
-            view.log.line.shift();
-            arrayClose($.map(view.log.line, function(line) { return line.x1; }),
+            arrayClose($.map(getTicks(), function(line) { return line.segments[0].anchor().x; }),
                  [800, 600, 400, 200, 0], TOLERANCE);
         });
 
@@ -308,29 +285,31 @@
                 reverse: true,
                 majorTicks: { visible: false },
                 minorTicks: { visible: true }
-             });
-            categoryAxis.getViewElements(view);
-            view.log.line.shift();
-            arrayClose($.map(view.log.line, function(line) { return line.x1; }),
+            });
+
+            arrayClose($.map(getTicks(), function(line) { return line.segments[0].anchor().x; }),
                  [786, 529, 271, 14.5], TOLERANCE);
         });
 
         test("minor ticks can be disabled", function() {
-            view.log.line.shift();
-            equal(view.log.line.length, 0);
+            createCategoryAxis({
+                majorTicks: { visible: false },
+            });
+            equal(getTicks().length, 0);
         });
 
         test("line width 0 remove all ticks", function() {
-            categoryAxis.options.line.width = 0;
-            categoryAxis.getViewElements(view);
-            equal(view.log.line.length, 0);
+            createCategoryAxis({
+                line: {
+                    width: 0
+                }
+            });
+            ok(!categoryAxis._lineGroup);
         });
 
         test("major ticks are aligned to axis", 3, function() {
-            categoryAxis.getViewElements(view);
-            view.log.line.shift();
-            $.each(view.log.line, function() {
-                    equal(this.y1, 0);
+            $.each(getTicks(), function() {
+                equal(this.segments[0].anchor().y, 0.5);
             });
         });
 
@@ -339,83 +318,68 @@
                 majorTicks: { visible: false },
                 minorTicks: { visible: true }
             });
-            categoryAxis.getViewElements(view);
-            view.log.line.shift();
-            $.each(view.log.line, function() {
-                    equal(this.y1, 0);
+
+            $.each(getTicks(), function() {
+                equal(this.segments[0].anchor().y, 0.5);
             });
         });
 
         // ------------------------------------------------------------
         module("Category Axis / Horizontal / Label Step / Rendering", {
             setup: function() {
-                moduleSetup();
-
                 createCategoryAxis({
                     categories: ["Foo", "Bar", "Baz"],
                     labels: { step: 2 }
                 });
-
-                categoryAxis.getViewElements(view);
             }
         });
 
         test("renders every second label", function() {
-            deepEqual($.map(view.log.text, function(text) { return text.content }),
+            deepEqual($.map(getAxisTexts(), function(text) { return text.content() }),
                  ["Foo", "Baz"]);
         });
 
         test("labels are distributed horizontally", function() {
-            arrayClose($.map(view.log.text, function(text) { return text.style.x }),
+            arrayClose($.map(getAxisTexts(), function(text) { return text.rect().origin.x }),
                  [119, 652], TOLERANCE);
         });
 
         // ------------------------------------------------------------
         module("Category Axis / Horizontal / Label Step and skip / Rendering", {
             setup: function() {
-                moduleSetup();
-
                 createCategoryAxis({
                     categories: ["Foo", "Bar", "Baz"],
                     labels: { step: 2, skip: 2 }
                 });
-
-                categoryAxis.getViewElements(view);
             }
         });
 
         test("renders every second label, starting from the third", function() {
-            deepEqual($.map(view.log.text, function(text) { return text.content }),
+            deepEqual($.map(getAxisTexts(), function(text) { return text.content() }),
                  ["Baz"]);
         });
 
         test("labels are distributed horizontally, starting from the third", function() {
-            arrayClose($.map(view.log.text, function(text) { return text.style.x }),
+            arrayClose($.map(getAxisTexts(), function(text) { return text.rect().origin.x }),
                  [652], TOLERANCE);
         });
 
         // ------------------------------------------------------------
         module("Category Axis / Horizontal / Mirrored / Rendering", {
             setup: function() {
-                moduleSetup();
-
                 createCategoryAxis({ labels: { mirror: true } });
             }
         });
 
         test("labels are aligned bottom", 2, function() {
-            categoryAxis.getViewElements(view);
-
-            $.each(view.log.text, function() {
-                equal(this.style.y, 0);
+            $.each(getAxisTexts(), function() {
+                equal(this.rect().origin.y, 0);
             })
         });
 
         test("major ticks are aligned to axis", 3, function() {
-            categoryAxis.getViewElements(view);
-            view.log.line.shift();
-            $.each(view.log.line, function() {
-                equal(this.y1, 23);
+            $.each(getTicks(), function() {
+                equal(this.segments[0].anchor().y, 23.5);
             });
         });
 
@@ -425,43 +389,34 @@
                 majorTicks: { visible: false },
                 minorTicks: { visible: true }
             });
-            categoryAxis.getViewElements(view);
-            view.log.line.shift();
-            $.each(view.log.line, function() {
-                equal(this.y1, 23);
+            $.each(getTicks(), function() {
+                equal(this.segments[0].anchor().y, 23.5);
             });
         });
 
         // ------------------------------------------------------------
         module("Category Axis / Vertical / Rendering", {
             setup: function() {
-                moduleSetup();
-
                 createCategoryAxis({ vertical: true });
             }
         });
 
         test("creates axis line", function() {
-            categoryAxis.getViewElements(view);
-            sameBox(view.log.line[0], new Box2D(
-                    LINE_X + MARGIN, chartBox.y1,
-                    LINE_X + MARGIN, chartBox.y2),
-                    TOLERANCE
-            );
+            var expectedLine = draw.Path.fromPoints([[LINE_X + MARGIN, chartBox.y1], [LINE_X + MARGIN, chartBox.y2]]);
+            dataviz.alignPathToPixel(expectedLine);
+            sameLinePath(getLine(), expectedLine, TOLERANCE);
         });
 
         test("should not create axis line if visible is false", function() {
             createCategoryAxis({ line: { visible: false }, vertical: true });
 
-            categoryAxis.getViewElements(view);
-            ok(view.log.line.length == 0);
+            ok(!categoryAxis._lineGroup);
         });
 
         test("should not render axis if visible is false", function() {
             createCategoryAxis({ visible: false, vertical: true });
 
-            categoryAxis.getViewElements(view);
-            ok(view.log.line.length == 0 && view.log.line.length == 0);
+            ok(!categoryAxis.visual);
         });
 
         test("creates axis with dash type", function() {
@@ -471,14 +426,11 @@
                 }
             });
 
-            categoryAxis.getViewElements(view);
-            equal(view.log.line[0].options.dashType, "dot");
+            equal(getLine().options.stroke.dashType, "dot");
         });
 
         test("creates labels", 1, function() {
-            categoryAxis.getViewElements(view);
-
-            deepEqual($.map(view.log.text, function(text) { return text.content }),
+            deepEqual($.map(getAxisTexts(), function(text) { return text.content() }),
                  ["Foo", "Bar"]);
         });
 
@@ -493,39 +445,31 @@
         });
 
         test("labels are distributed vertically", function() {
-            categoryAxis.getViewElements(view);
-
-            arrayClose($.map(view.log.text, function(text) { return text.style.y }),
+            arrayClose($.map(getAxisTexts(), function(text) { return text.rect().origin.y }),
                  [141, 441], TOLERANCE);
         });
 
         test("labels are distributed vertically (justified)", function() {
             createCategoryAxis({ vertical: true, justified: true });
-            categoryAxis.getViewElements(view);
 
-            arrayClose($.map(view.log.text, function(text) { return text.style.y }),
+            arrayClose($.map(getAxisTexts(), function(text) { return text.rect().origin.y }),
                  [0, 582], TOLERANCE);
         });
 
         test("labels are positioned to the left of the axis line", function() {
-            categoryAxis.getViewElements(view);
-
-            deepEqual($.map(view.log.text, function(text) { return text.style.x }),
+            deepEqual($.map(getAxisTexts(), function(text) { return text.rect().origin.x }),
                  [0, 2]);
         });
 
         test("major ticks are distributed vertically", function() {
-            categoryAxis.getViewElements(view);
-            view.log.line.shift();
-            arrayClose($.map(view.log.line, function(line) { return line.y1; }),
+            arrayClose($.map(getTicks(), function(line) { return line.segments[0].anchor().y; }),
                  [0, 300, 600], TOLERANCE);
         });
 
         test("major ticks are distributed vertically (justified)", function() {
             createCategoryAxis({ vertical: true, justified: true });
-            categoryAxis.getViewElements(view);
-            view.log.line.shift();
-            arrayClose($.map(view.log.line, function(line) { return line.y1; }),
+
+            arrayClose($.map(getTicks(), function(line) { return line.segments[0].anchor().y; }),
                  [9, 591], TOLERANCE);
         });
 
@@ -535,9 +479,8 @@
                 minorTicks: { visible: true },
                 vertical: true
             });
-            categoryAxis.getViewElements(view);
-            view.log.line.shift();
-            arrayClose($.map(view.log.line, function(line) { return line.y1; }),
+
+            arrayClose($.map(getTicks(), function(line) { return line.segments[0].anchor().y; }),
                 [0, 150, 300, 450, 600], TOLERANCE);
         });
 
@@ -548,17 +491,18 @@
                 vertical: true,
                 justified: true
             });
-            categoryAxis.getViewElements(view);
-            view.log.line.shift();
-            arrayClose($.map(view.log.line, function(line) { return line.y1; }),
+
+            arrayClose($.map(getTicks(), function(line) { return line.segments[0].anchor().y; }),
                 [9, 203, 397, 591], TOLERANCE);
         });
 
         test("line width 0 remove all ticks", function() {
-            categoryAxis.options.line.width = 0;
-            categoryAxis.getViewElements(view);
-
-            equal(view.log.line.length, 0);
+            createCategoryAxis({
+                line: {
+                    width: 0
+                }
+            });
+            ok(!categoryAxis._lineGroup);
         });
 
         test("labels have set background", 1, function() {
@@ -569,9 +513,7 @@
                 }
             });
 
-            categoryAxis.getViewElements(view);
-
-            equal(view.log.rect[0].style.fill, "#f0f");
+            equal(getAxisTextBoxes()[0].children[0].options.fill.color, "#f0f");
         });
 
         test("labels are positioned to the left of the axis line with margin and padding", function() {
@@ -583,17 +525,13 @@
                 }
             });
 
-            categoryAxis.getViewElements(view);
-
-            deepEqual($.map(view.log.text, function(text) { return text.style.x }),
+            deepEqual($.map(getAxisTexts(), function(text) { return text.rect().origin.x }),
                  [0 + MARGIN + PADDING, 2 + MARGIN + PADDING]);
         });
 
         test("major ticks are aligned to axis", 3, function() {
-            categoryAxis.getViewElements(view);
-            view.log.line.shift();
-            $.each(view.log.line, function() {
-                equal(this.x1, 34);
+            $.each(getTicks(), function() {
+                equal(this.segments[0].anchor().x, 34.5);
             });
         });
 
@@ -603,83 +541,67 @@
                 minorTicks: { visible: true },
                 vertical: true
             });
-            categoryAxis.getViewElements(view);
-            view.log.line.shift();
-            $.each(view.log.line, function() {
-                equal(this.x1, 34);
+            $.each(getTicks(), function() {
+                equal(this.segments[0].anchor().x, 34.5);
             });
         });
 
         // ------------------------------------------------------------
         module("Category Axis / Vertical / Label Step / Rendering", {
             setup: function() {
-                moduleSetup();
-
                 createCategoryAxis({
                     categories: ["Foo", "Bar", "Baz"],
                     labels: { step: 2 },
                     vertical: true
                 });
-
-                categoryAxis.getViewElements(view);
             }
         });
 
         test("renders every second label", function() {
-            deepEqual($.map(view.log.text, function(text) { return text.content }),
+            deepEqual($.map(getAxisTexts(), function(text) { return text.content() }),
                  ["Foo", "Baz"]);
         });
 
         test("labels are distributed vertically", function() {
-            arrayClose($.map(view.log.text, function(text) { return text.style.y }),
+            arrayClose($.map(getAxisTexts(), function(text) { return text.rect().origin.y }),
                  [91, 491], TOLERANCE);
         });
 
         // ------------------------------------------------------------
         module("Category Axis / Vertical / Label Step and skip / Rendering", {
             setup: function() {
-                moduleSetup();
-
                 createCategoryAxis({
                     categories: ["Foo", "Bar", "Baz"],
                     labels: { step: 2, skip: 2 },
                     vertical: true
                 });
-
-                categoryAxis.getViewElements(view);
             }
         });
 
         test("renders every second label, starting from the third", function() {
-            deepEqual($.map(view.log.text, function(text) { return text.content }),
+            deepEqual($.map(getAxisTexts(), function(text) { return text.content() }),
                  ["Baz"]);
         });
 
         test("labels are distributed vertically, starting from the third", function() {
-            arrayClose($.map(view.log.text, function(text) { return text.style.y }),
+            arrayClose($.map(getAxisTexts(), function(text) { return text.rect().origin.y }),
                  [491], TOLERANCE);
         });
 
         // ------------------------------------------------------------
         module("Category Axis / Vertical / Mirrored / Rendering", {
             setup: function() {
-                moduleSetup();
-
                 createCategoryAxis({ labels: { mirror: true }, vertical: true });
             }
         });
 
         test("labels are aligned left", function() {
-            categoryAxis.getViewElements(view);
-
-            $.each(view.log.text, function() { equal(this.style.x, 9); });
+            $.each(getAxisTexts(), function() { equal(this.rect().origin.x, 9); });
         });
 
         test("major ticks are aligned to axis", 3, function() {
-            categoryAxis.getViewElements(view);
-            view.log.line.shift();
-            $.each(view.log.line, function() {
-                    equal(this.x1, 0);
+            $.each(getTicks(), function() {
+                    equal(this.segments[0].anchor().x, 0.5);
             });
         });
 
@@ -690,10 +612,9 @@
                 labels: { mirror: true },
                 vertical: true
             });
-            categoryAxis.getViewElements(view);
-            view.log.line.shift();
-            $.each(view.log.line, function() {
-                equal(this.x1, 0);
+
+            $.each(getTicks(), function() {
+                equal(this.segments[0].anchor().x, 0.5);
             });
         });
 
@@ -716,7 +637,6 @@
         // ------------------------------------------------------------
         module("Category Axis / Horizontal / Slots", {
             setup: function() {
-                moduleSetup();
                 createCategoryAxis();
             }
         });
@@ -858,7 +778,6 @@
         // ------------------------------------------------------------
         module("Category Axis / Vertical / Slots", {
             setup: function() {
-                moduleSetup();
                 createCategoryAxis({ vertical: true });
             }
         });
@@ -1145,6 +1064,10 @@
                 data: [100, 20, 30]
             }];
 
+        function getPlotBands() {
+            return plotArea.axes[0]._plotbandGroup;
+        }
+
         function createPlotArea(series, chartOptions) {
             plotArea = new dataviz.CategoricalPlotArea(series, deepExtend({
                 categoryAxis: {
@@ -1168,11 +1091,9 @@
                 }
             }, chartOptions));
 
-            view = new ViewStub();
-
             plotArea.reflow(chartBox);
-            plotArea.getViewElements(view);
-            plotBands = view.log.rect[0];
+            plotArea.renderVisual();
+            plotBands = getPlotBands().children[0];
         }
 
         // ------------------------------------------------------------
@@ -1183,20 +1104,19 @@
         });
 
         test("renders box", function() {
-            arrayClose([plotBands.x1, plotBands.y1, plotBands.x2, plotBands.y2],
-                 [ 39, 9, 292.666, 573 ], TOLERANCE);
+             sameRectPath(plotBands, [39, 9, 292.666, 573], TOLERANCE);
         });
 
         test("renders color", function() {
-            equal(plotBands.style.fill, "red");
+            equal(plotBands.options.fill.color, "red");
         });
 
         test("renders opacity", function() {
-            equal(plotBands.style.fillOpacity, 0.5);
+            equal(plotBands.options.fill.opacity, 0.5);
         });
 
         test("renders z index", function() {
-            equal(plotBands.style.zIndex, -1);
+            equal(getPlotBands().options.zIndex, -1);
         });
 
         // ------------------------------------------------------------
@@ -1207,8 +1127,7 @@
         });
 
         test("renders box", function() {
-            arrayClose([plotBands.x1, plotBands.y1, plotBands.x2, plotBands.y2],
-                 [ 39, 9, 419, 573 ], TOLERANCE);
+            sameRectPath(plotBands, [39, 9, 419, 573], TOLERANCE);
         });
 
         // ------------------------------------------------------------
@@ -1219,20 +1138,19 @@
         });
 
         test("renders box", function() {
-            arrayClose([plotBands.x1, plotBands.y1, plotBands.x2, plotBands.y2],
-                 [ 20, 0, 785, 191 ], TOLERANCE);
+            sameRectPath(plotBands, [20, 0, 785, 191], TOLERANCE);
         });
 
         test("renders color", function() {
-            equal(plotBands.style.fill, "red");
+            equal(plotBands.options.fill.color, "red");
         });
 
         test("renders opacity", function() {
-            equal(plotBands.style.fillOpacity, 0.5);
+            equal(plotBands.options.fill.opacity, 0.5);
         });
 
         test("renders z index", function() {
-            equal(plotBands.style.zIndex, -1);
+            equal(getPlotBands().options.zIndex, -1);
         });
 
         // ------------------------------------------------------------
@@ -1247,15 +1165,16 @@
         });
 
         test("renders box", function() {
-            arrayClose([plotBands.x1, plotBands.y1, plotBands.x2, plotBands.y2],
-                 [ 20, 0, 785, 286.5 ], TOLERANCE);
+            sameRectPath(plotBands, [20, 0, 785, 286.5], TOLERANCE);
         });
     })();
 
 
     (function() {
         var plotArea,
-            title,
+            textVisual,
+            textboxVisual,
+            textBackgroundVisual,
             titleBox,
             lineSeriesData = [{
                 name: "Value A",
@@ -1277,7 +1196,8 @@
                         color: "red",
                         opacity: 0.33,
                         font: "16px Verdana, sans-serif",
-                        position: "center"
+                        position: "center",
+                        background: "green"
                     },
                     labels: {
                         // Tests expect particular font size
@@ -1292,14 +1212,14 @@
                 }
             }, plotOptions));
 
-            view = new ViewStub();
-
             plotArea.reflow(chartBox);
-            plotArea.getViewElements(view);
+            plotArea.renderVisual();
 
-            title = $.grep(view.log.text, function(text) {
-                return text.content == "text";
-            })[0];
+            if (plotArea.axes[0].title) {            
+                textboxVisual = plotArea.axes[0].title.visual;
+                textBackgroundVisual = textboxVisual.children[0];
+                textVisual = textboxVisual.children[1];
+            }
         }
 
         // ------------------------------------------------------------
@@ -1332,15 +1252,15 @@
         });
 
         test("renders color", function() {
-            equal(title.style.color, "red");
+            equal(textVisual.options.fill.color, "red");
         });
 
         test("renders opacity", function() {
-            equal(title.style.opacity, 0.33);
+            equal(textBackgroundVisual.options.fill.opacity, 0.33);
         });
 
         test("renders zIndex", function() {
-            equal(title.style.zIndex, 1);
+            equal(textboxVisual.options.zIndex, 1);
         });
 
         test("hidden when visible is false", function() {
@@ -1413,15 +1333,15 @@
         });
 
         test("renders color", function() {
-            equal(title.style.color, "red");
+            equal(textVisual.options.fill.color, "red");
         });
 
         test("renders opacity", function() {
-            equal(title.style.opacity, 0.33);
+            equal(textBackgroundVisual.options.fill.opacity, 0.33);
         });
 
         test("renders zIndex", function() {
-            equal(title.style.zIndex, 1);
+            equal(textboxVisual.options.zIndex, 1);
         });
 
         // ------------------------------------------------------------
@@ -1466,6 +1386,10 @@
             label,
             plotArea;
 
+        function getElement(chartElement) {
+            return $(chartElement.visual.observers()[0].element);
+        }
+
         function axisLabelClick(clickHandler, options) {
             chart = createChart($.extend(true, {
                 dataSource: [{
@@ -1492,7 +1416,7 @@
             plotArea = chart._model.children[1];
             label = plotArea.categoryAxis.labels[1];
 
-            chart._userEvents.press(0, 0, getElement(label.options.id));
+            chart._userEvents.press(0, 0, getElement(label));
             chart._userEvents.end(0, 0);
         }
 
@@ -1518,7 +1442,7 @@
                 }
             });
 
-            chart._userEvents.press(0, 0, getElement(label.options.id).firstChild);
+            chart._userEvents.press(0, 0, getElement(label).children().first());
             chart._userEvents.end(0, 0);
         });
 
