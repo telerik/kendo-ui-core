@@ -173,6 +173,33 @@ function sameBox(a, b, tolerance) {
     arrayClose([a.x1, a.y1, a.x2, a.y2], [b.x1, b.y1, b.x2, b.y2], tolerance);
 }
 
+function sameLinePath(actual, expected, tolerance) {
+    var actualSegments = actual.segments;
+    var expectedSegments = expected.segments;
+    var actualPoint, expectedPoint;
+    if (actualSegments.length !== expectedSegments.length) {
+        ok(false, "different segment lengths");
+    }
+    equal(!!actual.options.closed, !!expected.options.closed)
+
+    for (var idx = 0; idx < actualSegments.length; idx++) {
+        actualPoint = actualSegments[idx].anchor();
+        expectedPoint = expectedSegments[idx].anchor();
+        close(actualPoint.x, expectedPoint.x, tolerance);
+        close(actualPoint.y, expectedPoint.y, tolerance);
+    }
+}
+
+function sameRectPath(path, rectCoordinates, TOLERANCE) {
+    var x1 = rectCoordinates[0],
+        y1 = rectCoordinates[1],
+        x2 = rectCoordinates[2],
+        y2 = rectCoordinates[3];
+
+    var rect = kendo.drawing.Path.fromRect(new kendo.geometry.Rect([x1, y1, x2 - x1, y2 - y1]));
+    sameLinePath(plotBands, rect, TOLERANCE);
+}
+
 function stubMethod(fn, methodName, stub, callback) {
     var oldMethod = fn[methodName];
 

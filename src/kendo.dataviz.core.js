@@ -929,7 +929,8 @@ var __meta__ = {
                 stroke: {
                     color: NONE
                 },
-                fill: this.createGradient(gradientOptions)
+                fill: this.createGradient(gradientOptions),
+                closed: element.options.closed
             }, options));
             overlay.segments.elements(element.segments.elements());
 
