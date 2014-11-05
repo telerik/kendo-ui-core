@@ -1447,7 +1447,7 @@ namespace Kendo.Mvc.UI
                 var cellBuilderFactory = new GridCellBuilderFactory();
 
                 
-                VisibleColumns.Each(column =>
+                VisibleColumns.LeafColumns().OfType<GridColumnBase<T>>().Each(column =>
                 {
                     var cellBuilder = cellBuilderFactory.CreateEditCellBuilder(column, htmlHelper);
                     var editor = cellBuilder.CreateCell(dataItem);
