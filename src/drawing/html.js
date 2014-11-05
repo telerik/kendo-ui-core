@@ -116,10 +116,26 @@
                         to1 = read(tok_keyword);
                         if (to1 == "to") {
                             to1 = read(tok_keyword);
-                        } else if (/-webkit-/.test(propName)) { // aaargh, so many horror stories I could tell!
+                        } else {
                             reverse = true;
                         }
                         to2 = read(tok_keyword);
+                        read(tok_comma);
+                    }
+
+                    if (/-moz-/.test(propName) && angle == null && to1 == null) {
+                        var x = read(tok_percent), y = read(tok_percent);
+                        reverse = true;
+                        if (x == "0%") {
+                            to1 = "left";
+                        } else if (x == "100%") {
+                            to1 = "right";
+                        }
+                        if (y == "0%") {
+                            to2 = "top";
+                        } else if (y == "100%") {
+                            to2 = "bottom";
+                        }
                         read(tok_comma);
                     }
 
@@ -136,7 +152,7 @@
                     return {
                         type    : "linear",
                         angle   : angle,
-                        to      : to1 && to2 ? to1 + " " + to2 : to1,
+                        to      : to1 && to2 ? to1 + to2 : to1 ? to1 : to2 ? to2 : null,
                         stops   : stops,
                         reverse : reverse
                     };
@@ -838,7 +854,11 @@
                 orgBox = innerBox(orgBox, "border-*-width", element);
             }
 
-            if (!/^\s*auto((\s*,\s*|\s+)auto)?\s*$/.test(backgroundSize)) {
+            // so, backgroundSize can be, depending on the browser, "auto", "auto auto", "auto,
+            // auto", "auto auto, auto auto" and probably a random number of other combinations
+            // between auto, whitespace and the comma.  therefore let's write the dumbest regexp
+            // possible.
+            if (!/^[auto\s,]*$/.test(backgroundSize)) {
                 var size = backgroundSize.split(/\s+/g);
                 // compute width
                 if (/%$/.test(size[0])) {

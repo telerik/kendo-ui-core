@@ -150,23 +150,35 @@
 
     // Tools from ColorPicker =================================================
 
+    var namedColorRegexp = [ "transparent" ];
+    for (var i in Color.namedColors) {
+        if (Color.namedColors.hasOwnProperty(i)) {
+            namedColorRegexp.push(i);
+        }
+    }
+    namedColorRegexp = new RegExp("^(" + namedColorRegexp.join("|") + ")(\\W|$)", "i");
+
     /*jshint eqnull:true  */
 
     function parseColor(color, nothrow) {
+        var m, ret;
         if (color == null || color == "none") {
             return null;
-        }
-        if (color == "transparent") {
-            return new _RGB(0, 0, 0, 0);
         }
         if (color instanceof _Color) {
             return color;
         }
         color = color.toLowerCase();
-        if (Color.namedColors.hasOwnProperty(color)) {
-            color = Color.namedColors[color];
+        if ((m = namedColorRegexp.exec(color))) {
+            if (m[1] == "transparent") {
+                color = new _RGB(0, 0, 0, 0);
+            }
+            else {
+                color = parseColor(Color.namedColors[m[1]], nothrow);
+            }
+            color.match = [ m[1] ];
+            return color;
         }
-        var m, ret;
         if ((m = /^#?([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})/i.exec(color))) {
             ret = new _Bytes(parseInt(m[1], 16),
                              parseInt(m[2], 16),
