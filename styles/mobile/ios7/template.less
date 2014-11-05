@@ -16,6 +16,7 @@
 @ios7-switch-color: #4CDA64;
 @ios7-light-shadow: rgba(255,255,255,.2);
 @ios7-overlay-background: rgba(0,0,0,.4);
+@ios7-tabstrip-color: #929292;
 
 .km-ios7 .km-navbar,
 .km-ios7 .k-toolbar,
@@ -329,11 +330,15 @@
     background: @ios7-list-select-background;
 }
 
-.km-ios7 .km-tabstrip .km-button:not(.km-state-active),
 .km-ios7 li.km-state-active .km-listview-link,
 .km-ios7 li.km-state-active .km-listview-label
 {
     color: @ios7-main-color;
+}
+
+.km-ios7 .km-tabstrip .km-button:not(.km-state-active)
+{
+    color: @ios7-tabstrip-color;
 }
 
 .km-ios7 .k-list,
