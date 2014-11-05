@@ -581,9 +581,9 @@
 
         for (idx = 0; idx < stops.length; idx++) {
             stop = stops[idx];
-            color = new Color(stop.color());
-            gradient.addColorStop(stop.offset(),
-                "rgba(" + color.r + "," + color.g + "," + color.b + "," + stop.opacity() + ")");
+            color = kendo.parseColor(stop.color());
+            color.a *= stop.opacity();
+            gradient.addColorStop(stop.offset(), color.toCssRgba());
         }
     }
 
