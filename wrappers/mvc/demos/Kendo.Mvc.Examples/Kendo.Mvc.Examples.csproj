@@ -189,6 +189,7 @@
     <Compile Include="Controllers\DropDownList\ClientFilteringController.cs" />
     <Compile Include="Controllers\DropDownList\ServerFilteringController.cs" />
     <Compile Include="Controllers\Gantt\ApiController.cs" />
+    <Compile Include="Controllers\Gantt\Pdf_ExportController.cs" />
     <Compile Include="Controllers\Gantt\EventsController.cs" />
     <Compile Include="Controllers\Gantt\Keyboard_NavigationController.cs" />
     <Compile Include="Controllers\Gantt\ServerBindingController.cs" />
@@ -847,6 +848,7 @@
     <Content Include="Areas\aspx\Views\dropdownlist\clientfiltering.aspx" />
     <Content Include="Areas\aspx\Views\dropdownlist\serverfiltering.aspx" />
     <Content Include="Areas\aspx\Views\gantt\api.aspx" />
+    <Content Include="Areas\aspx\Views\gantt\pdf_export.aspx" />
     <Content Include="Areas\aspx\Views\gantt\events.aspx" />
     <Content Include="Areas\aspx\Views\gantt\index.aspx" />
     <Content Include="Areas\aspx\Views\gantt\keyboard_navigation.aspx" />
@@ -3376,6 +3378,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\razor\Views\treelist\api.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\gantt\pdf_export.cshtml">
+      <SubType>Code</SubType>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
