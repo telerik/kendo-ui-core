@@ -121,7 +121,7 @@
 
         equal(dataSource.calls("remove"), 0);
     });
-    
+
     module("Dependency delete confirmation", {
         setup: function() {
             element = $("<div/>");

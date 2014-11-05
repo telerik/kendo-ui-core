@@ -103,12 +103,14 @@ var __meta__ = {
         rowsTable: "k-gantt-rows",
         columnsTable: "k-gantt-columns",
         tasksTable: "k-gantt-tasks",
+        resource: "k-resource",
         task: "k-task",
         taskSingle: "k-task-single",
         taskMilestone: "k-task-milestone",
         taskSummary: "k-task-summary",
         taskWrap: "k-task-wrap",
         taskMilestoneWrap: "k-milestone-wrap",
+        resourcesWrap: "k-resources-wrap",
         taskDot: "k-task-dot",
         taskDotStart: "k-task-start",
         taskDotEnd: "k-task-end",
@@ -314,10 +316,13 @@ var __meta__ = {
         _tasksTable: function(tasks) {
             var rows = [];
             var row;
+            var cell;
             var position;
             var task;
+            var styles = GanttView.styles;
             var coordinates = this._taskCoordinates = {};
             var milestoneWidth = Math.round(this._calculateMilestoneWidth());
+            var resourcesField = this.options.resourcesField;
 
             var addCoordinates = function(rowIndex) {
                 var taskLeft;
@@ -343,11 +348,20 @@ var __meta__ = {
 
                 position = this._taskPosition(task);
 
-                row = kendoDomElement("tr", null, [
-                    kendoDomElement("td", null, [
-                        this._renderTask(tasks[i], position)
-                    ])
-                ]);
+                row = kendoDomElement("tr", null);
+
+                cell = kendoDomElement("td", null, [this._renderTask(tasks[i], position)]);
+
+                if (task[resourcesField] && task[resourcesField].length) {
+                    cell.children.push(kendoDomElement("div",
+                        {
+                            className: styles.resourcesWrap,
+                            style: { left: (Math.max((position.width - 2), 0) + position.left) + "px" }
+                        },
+                        this._renderResources(task[resourcesField])));
+                }
+
+                row.children.push(cell);
 
                 rows.push(row);
 
@@ -499,6 +513,24 @@ var __meta__ = {
             ]);
 
             return element;
+        },
+
+        _renderResources: function(resources) {
+            var styles = GanttView.styles;
+            var children = [];
+            var resource;
+
+            for (var i = 0, length = resources.length; i < length; i++) {
+                resource = resources[i];
+                children.push(kendoDomElement("span", {
+                    className: styles.resource,
+                    style: {
+                        "color": resource.get("color")
+                    }
+                }, [kendoTextElement(resource.get("name"))]));
+            }
+
+            return children;
         },
 
         _taskPosition: function(task) {

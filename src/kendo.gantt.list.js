@@ -341,11 +341,22 @@ var __meta__ = {
 
         _td: function(options) {
             var children = [];
+            var resourcesField = this.options.resourcesField;
             var listStyles = GanttList.styles;
             var task = options.task;
             var column = options.column;
-            var value = task.get(column.field);
-            var formatedValue = column.format ? kendo.format(column.format, value) : value;
+            var value = task.get(column.field) || [];
+            var formatedValue;
+
+            if (column.field == resourcesField) {
+                formatedValue = [];
+                for (var i = 0; i < value.length; i++) {
+                    formatedValue.push(kendo.format("{0} [{1}]", value[i].get("name"), value[i].get("formatedValue")));
+                }
+                formatedValue = formatedValue.join(", ");
+            } else {
+                formatedValue = column.format ? kendo.format(column.format, value) : value;
+            }
 
             if (column.field === "title") {
                 children = createPlaceholders({ level: options.level, className: listStyles.iconPlaceHolder });
@@ -382,6 +393,7 @@ var __meta__ = {
         },
 
         _sortable: function() {
+            var resourcesField = this.options.resourcesField;
             var columns = this.columns;
             var column;
             var sortableInstance;
@@ -391,7 +403,7 @@ var __meta__ = {
             for (var idx = 0, length = cells.length; idx < length; idx++) {
                 column = columns[idx];
 
-                if (column.sortable) {
+                if (column.sortable && column.field !== resourcesField) {
                     cell = cells.eq(idx);
 
                     sortableInstance = cell.data("kendoColumnSorter");
@@ -551,6 +563,7 @@ var __meta__ = {
         },
 
         _editCell: function(options) {
+            var resourcesField = this.options.resourcesField;
             var listStyles = GanttList.styles;
             var cell = options.cell;
             var column = options.column;
@@ -566,6 +579,11 @@ var __meta__ = {
                     field.validation.required === true : false
             };
             var editor;
+
+            if (column.field === resourcesField) {
+                column.editor(cell, modelCopy);
+                return;
+            }
 
             this._editableContent = cell.children().detach();
             this._editableContainer = cell;
