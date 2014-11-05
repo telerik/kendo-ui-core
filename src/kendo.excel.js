@@ -211,7 +211,9 @@ kendo.ExcelExporter = kendo.Class.extend({
             };
         });
 
-        headers[0].colSpan = this._depth() + 1;
+        if (this._hierarchical()) {
+            headers[0].colSpan = this._depth() + 1;
+        }
 
         return {
             type: "header",
