@@ -8,13 +8,13 @@ Inherits="System.Web.Mvc.ViewPage<IEnumerable<Kendo.Mvc.Examples.Models.TreeList
         .Toolbar(tb => tb.Add().Name("create"))
         .Columns(columns =>
         {
-            columns.Add().Field("FirstName").Title("First Name").Width("220px");
-            columns.Add().Field("LastName").Title("Last Name").Width("160px");
-            columns.Add().Field("Position");
-            columns.Add().Field("HireDate").Title("Hire Date").Format("{0:MMMM d, yyyy}");
-            columns.Add().Field("Phone");
-            columns.Add().Field("Extension").Title("Ext").Format("{0:#}");
-            columns.Add().Title("Edit").Width("200px").Command(c =>
+            columns.Add().Field(e => e.FirstName).Width(220);
+            columns.Add().Field(e => e.LastName).Width(160);
+            columns.Add().Field(e => e.Position);
+            columns.Add().Field(e => e.HireDate).Format("{0:MMMM d, yyyy}");
+            columns.Add().Field(e => e.Phone);
+            columns.Add().Field(e => e.Extension).Title("Ext").Format("{0:#}");
+            columns.Add().Title("Edit").Width(200).Command(c =>
             {
                 c.Add().Name("edit");
                 c.Add().Name("destroy");

@@ -4,6 +4,9 @@ namespace Kendo.Mvc.UI.Fluent
     using System.Collections;
     using System;
     using Kendo.Mvc.Extensions;
+    using System.Web.Mvc;
+    using System.Linq.Expressions;
+    using Kendo.Mvc.Resources;
 
     /// <summary>
     /// Defines the fluent API for configuring the TreeListColumn settings.
@@ -78,6 +81,42 @@ namespace Kendo.Mvc.UI.Fluent
         public TreeListColumnBuilder<T> Expandable(bool value)
         {
             container.Expandable = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// The field to which the column is bound. The value of this field is displayed by the column during data binding.
+		/// The field name should be a valid Javascript identifier and should contain no spaces, no special characters, and the first character should be a letter.
+        /// </summary>
+        /// <param name="expression">The expression that specifies the field, based on the bound model.</param>
+        public TreeListColumnBuilder<T> Field<TValue>(Expression<Func<T, TValue>> expression)
+        {
+            if (typeof(T).IsPlainType() && !expression.IsBindable())
+            {
+                throw new InvalidOperationException(Exceptions.MemberExpressionRequired);
+            }
+
+            container.Field = expression.MemberWithoutInstance();
+            Type type = expression.ToMemberExpression().Type();
+
+            Func<T, TValue> value = expression.Compile();
+
+            if (typeof(T).IsPlainType())
+            {
+                var metadata = ModelMetadata.FromLambdaExpression(expression, new ViewDataDictionary<T>());
+                type = metadata.ModelType;
+                container.Title = metadata.DisplayName;
+                container.Format = metadata.DisplayFormatString;
+            }
+
+            if (string.IsNullOrEmpty(container.Title))
+            {
+                var asTitle = container.Field.AsTitle();
+                if (asTitle != container.Field) {
+                    container.Title = asTitle;
+                }
+            }
 
             return this;
         }
@@ -243,8 +282,19 @@ namespace Kendo.Mvc.UI.Fluent
             configurator(new TreeListColumnFilterableSettingsBuilder<T>(container.Filterable));
             return this;
         }
-        
+
         //<< Fields
+
+        /// <summary>
+        /// The width of the column. Numeric values are treated as pixels. For more important information, please refer to Column Widths.
+        /// </summary>
+        /// <param name="value">The value that configures the width.</param>
+        public TreeListColumnBuilder<T> Width(int value)
+        {
+            container.Width = value + "px";
+
+            return this;
+        }
     }
 }
 

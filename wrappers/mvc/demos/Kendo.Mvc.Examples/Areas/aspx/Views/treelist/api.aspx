@@ -30,10 +30,10 @@ Inherits="System.Web.Mvc.ViewPage<IEnumerable<Kendo.Mvc.Examples.Models.TreeList
     .Name("treelist")
     .Columns(columns =>
     {
-        columns.Add().Field("FirstName").Title("First Name").Width("250px");
-        columns.Add().Field("LastName").Title("Last Name").Width("160px");        
-        columns.Add().Field("HireDate").Width("200px").Format("{0:MMMM d, yyyy}");
-        columns.Add().Field("Extension").Width("140px");        
+        columns.Add().Field(e => e.FirstName).Width(250);
+        columns.Add().Field(e => e.LastName).Width(160);
+        columns.Add().Field(e => e.HireDate).Width(200).Format("{0:MMMM d, yyyy}");
+        columns.Add().Field(e => e.Extension).Width(140);
     })
     .Selectable(true)    
     .DataSource(dataSource => dataSource

@@ -7,10 +7,10 @@ Inherits="System.Web.Mvc.ViewPage<IEnumerable<Kendo.Mvc.Examples.Models.TreeList
         .Name("treelist")
         .Columns(columns =>
         {
-            columns.Add().Field("FirstName").Title("First Name").Width("250px");
-            columns.Add().Field("LastName").Title("Last Name");
-            columns.Add().Field("Position");
-            columns.Add().Field("Extension").Title("Ext").Format("{0:#}");
+            columns.Add().Field(f => f.FirstName).Width(250);
+            columns.Add().Field(e => e.LastName);
+            columns.Add().Field(e => e.Position);
+            columns.Add().Field(e => e.Extension).Title("Ext").Format("{0:#}");
         })
         .DataSource(dataSource => dataSource
             .Read(read => read.Action("Index", "EmployeeDirectory"))

@@ -165,6 +165,41 @@ module CodeGen::MVC::Wrappers
         {
             return this.<%= csharp_name %>(value.ToDictionary());
         }
+        <% end %><% if is_field_bound %>
+        /// <summary>
+        /// <%= description.gsub(/\r?\n/, '\n\t\t/// ').html_encode()%>
+        /// </summary>
+        /// <param name="expression">The expression that specifies the <%= csharp_name.downcase %>, based on the bound model.</param>
+        public <%= csharp_builder_name %> <%= csharp_name %><TValue>(Expression<Func<T, TValue>> expression)
+        {
+            if (typeof(T).IsPlainType() && !expression.IsBindable())
+            {
+                throw new InvalidOperationException(Exceptions.MemberExpressionRequired);
+            }
+
+            container.<%= csharp_name %> = expression.MemberWithoutInstance();
+            Type type = expression.ToMemberExpression().Type();
+
+            Func<T, TValue> value = expression.Compile();
+
+            if (typeof(T).IsPlainType())
+            {
+                var metadata = ModelMetadata.FromLambdaExpression(expression, new ViewDataDictionary<T>());
+                type = metadata.ModelType;
+                container.Title = metadata.DisplayName;
+                container.Format = metadata.DisplayFormatString;
+            }
+
+            if (string.IsNullOrEmpty(container.Title))
+            {
+                var asTitle = container.<%= csharp_name %>.AsTitle();
+                if (asTitle != container.<%= csharp_name %>) {
+                    container.Title = asTitle;
+                }
+            }
+
+            return this;
+        }
         <% end %>
         /// <summary>
         /// <%= description.gsub(/\r?\n/, '\n\t\t/// ').html_encode()%>
@@ -263,6 +298,12 @@ module CodeGen::MVC::Wrappers
         def csharp_generic_args
         end
 
+        def uses_generic_args?
+            GENERIC_BUILDER_SKIP_LIST.inject(true) do |uses_generics, field|
+                uses_generics && !full_name.start_with?(field)
+            end
+        end
+
         def full_name
             name = @name
 
@@ -339,6 +380,10 @@ module CodeGen::MVC::Wrappers
             csharp_type.match(/\[\]$/)
         end
 
+        def is_field_bound
+            name.downcase == 'field' && uses_generic_args?
+        end
+
         def is_dictionary
             csharp_type.match(/^IDictionary/)
         end
@@ -397,12 +442,6 @@ module CodeGen::MVC::Wrappers
 
         def csharp_builder_class
             "#{csharp_class}Builder"
-        end
-
-        def uses_generic_args?
-            GENERIC_BUILDER_SKIP_LIST.inject(true) do |uses_generics, field|
-                uses_generics && !full_name.start_with?(field)
-            end
         end
 
         def csharp_generic_args
