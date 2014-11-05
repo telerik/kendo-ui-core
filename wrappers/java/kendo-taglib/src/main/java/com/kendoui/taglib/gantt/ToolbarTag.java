@@ -21,6 +21,13 @@ public class ToolbarTag extends BaseTag /* interfaces */ /* interfaces */ {
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
+
+        
+        GanttTag parent = (GanttTag)findParentWithClass(GanttTag.class);
+
+
+        parent.setToolbar(this);
+		
 //<< doEndTag
 
         return super.doEndTag();
