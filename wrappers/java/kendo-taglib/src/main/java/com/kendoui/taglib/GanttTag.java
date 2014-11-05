@@ -47,6 +47,10 @@ public class GanttTag extends WidgetTag /* interfaces */implements DataBoundWidg
         return "gantt";
     }
 
+    public void setAssignments(com.kendoui.taglib.gantt.AssignmentsTag value) {
+        setProperty("assignments", value);
+    }
+
     public void setColumns(ColumnsTag value) {
 
         setProperty("columns", value.columns());
@@ -63,6 +67,10 @@ public class GanttTag extends WidgetTag /* interfaces */implements DataBoundWidg
 
     public void setPdf(com.kendoui.taglib.gantt.PdfTag value) {
         setProperty("pdf", value);
+    }
+
+    public void setResources(com.kendoui.taglib.gantt.ResourcesTag value) {
+        setProperty("resources", value);
     }
 
     public void setToolbar(ToolbarTag value) {

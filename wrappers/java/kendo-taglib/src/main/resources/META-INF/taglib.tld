@@ -16029,6 +16029,42 @@ and the string value will be passed as an argument to a kendo.template() functio
     </tag>
 
     <tag>
+        <description>The configuration of the assignments of the gantt resources. An assignment is a one-to-one mapping between a gantt task and a gantt resource containing the number of units for which a resource is assigned to a task.</description>
+        <name>gantt-assignments</name>
+        <tag-class>com.kendoui.taglib.gantt.AssignmentsTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The field of the assignment data item which represents the resource id.</description>
+            <name>dataResourceIdField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The data source which contains assignment data items.  Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing kendo.data.DataSource
+instance.If the dataSource option is set to a JavaScript object or array the widget will initialize a new kendo.data.DataSource instance using that value as data source configuration.If the dataSource option is an existing kendo.data.DataSource instance the widget will use that instance and will not initialize a new one.</description>
+            <name>dataSource</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The field of the assignment data item which represents the task id.</description>
+            <name>dataTaskIdField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The field of the assignment data item which represents the amount of the assigned resource.</description>
+            <name>dataValueField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
         <description>The configuration of the Gantt columns. An array of JavaScript objects or strings. A JavaScript objects are interpreted as column configurations. Strings are interpreted as the
 field to which the column is bound. The Gantt will create a column for every item of the array.</description>
         <name>gantt-columns</name>
@@ -16307,6 +16343,50 @@ units are "mm", "cm", "in" and "pt" (default).</description>
 
     </tag>
 
+
+
+
+    <tag>
+        <description>The configuration of the gantt resource(s). A gantt resource is optional metadata that can be associated
+with a gantt task.</description>
+        <name>gantt-resources</name>
+        <tag-class>com.kendoui.taglib.gantt.ResourcesTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The field of the resource data item which contains the resource color.</description>
+            <name>dataColorField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The field of the resource data item containing the format of the resource value, which could be assigned to a gantt task.
+The data item format value could be any valid kendo format.</description>
+            <name>dataFormatField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The data source which contains resource data items.  Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing kendo.data.DataSource
+instance.If the dataSource option is set to a JavaScript object or array the widget will initialize a new kendo.data.DataSource instance using that value as data source configuration.If the dataSource option is an existing kendo.data.DataSource instance the widget will use that instance and will not initialize a new one.</description>
+            <name>dataSource</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The field of the resource data item which represents the resource text.</description>
+            <name>dataTextField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The field of the gantt task which contains the assigned resource objects.</description>
+            <name>field</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
 
 
 
@@ -36747,6 +36827,12 @@ field to which the column is bound. The treelist will create a column for every 
 
         <body-content>JSP</body-content>
         <attribute>
+            <description>HTML attributes of the table cell (&lt;td&gt;) rendered for the column.</description>
+            <name>attributes</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
             <description>Provides a way to specify a custom editing UI for the column. Use the container parameter to create the editing UI.</description>
             <name>editor</name>
             <rtexprvalue>true</rtexprvalue>
@@ -36755,6 +36841,12 @@ field to which the column is bound. The treelist will create a column for every 
         <attribute>
             <description>If set to true the column value will be HTML-encoded before it is displayed. If set to false the column value will be displayed as is. By default the column value is HTML-encoded.</description>
             <name>encoded</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>If set to true the column will show the icons that are used for exapdning and collapsing of child rows. By default, the first column of the TreeList is expandable.</description>
+            <name>expandable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
