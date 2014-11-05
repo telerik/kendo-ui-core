@@ -817,8 +817,8 @@ var __meta__ = {
 
         var indexAttr = kendo.attr("index");
         cells.sort(function(a, b) {
-            a = $(a).attr(indexAttr);
-            b = $(b).attr(indexAttr);
+            a = parseInt($(a).attr(indexAttr), 10);
+            b = parseInt($(b).attr(indexAttr), 10);
             return a > b ? 1 : (a < b ? -1 : 0);
         });
         return cells;
