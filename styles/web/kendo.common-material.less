@@ -1,6 +1,6 @@
 @input-height: 2.214em;
 @input-indent: .8em;
-@editor-icon-size: 32px;
+@editor-icon-size: 36px;
 @menu-link-padding: 1.071em;
 @button-padding: 10px 14px;
 @treeview-inner-padding: 0.429em 0.6667em 0.429em 0.5833em;
@@ -294,17 +294,17 @@
     padding: 1.143em 0;
 }
 
-.k-editor .k-editor-toolbar-wrap
-{
-    padding: 2px 0;
+table.k-editor {
+	border-spacing: 0;
 }
 
-.k-toolbar {
-    padding: 0.214em 0.214em;
+.k-editor .k-editable-area {
+	border-width: 1px 0 0;
+	padding-left: 10px;
 }
 
-.k-toolbar .k-button {
-    line-height: 1.143em;
+.k-editor .k-editor-toolbar-wrap {
+	padding-left: 10px;
 }
 
 .k-toolbar .k-input {
@@ -321,6 +321,11 @@
     line-height: inherit;
 }
 
+.k-button-group .k-tool {
+	margin: 6px 0;
+}
+
+.k-editor-toolbar .k-button-group .k-tool-icon,
 .k-toolbar .k-button-group .k-tool-icon {
     width: 24px;
     height: 24px;
@@ -354,8 +359,20 @@ span.k-tooltip
     padding: 0.5em 0 0.571em;
 }
 
+.k-window-titlebar .k-window-actions {
+	right: 0.929em;
+}
+
+div.k-window {
+	border-width: 0;
+}
+
 .k-file {
     padding: 0.357em .167em 0.357em .8em;
+}
+
+.k-scheduler-table td {
+	vertical-align: middle;
 }
 
 .k-scheduler-table td,
@@ -555,6 +572,13 @@ span.k-tooltip
 
 .k-scheduler-footer .k-icon.k-i-clock {
     display: none;
+}
+
+.k-scheduler-toolbar > ul > li,
+.k-scheduler-footer > ul > li
+{
+    border-width:2px 1px 3px 0;
+    border-color: red;
 }
 
 .k-scheduler-toolbar,
@@ -917,4 +941,8 @@ span.k-tooltip
 
 .k-treeview .k-plus {
     background-position: 0 -16px;
+}
+
+.k-window-titlebar .k-link:not(.k-state-disabled):hover .k-i-close {
+    background-position: -48px -16px;
 }
