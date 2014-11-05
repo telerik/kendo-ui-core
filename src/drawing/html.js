@@ -302,11 +302,7 @@
     }
 
     function pushNodeInfo(element, style, group) {
-        var Tmp = function(parent) {
-            this._up = parent;
-        };
-        Tmp.prototype = nodeInfo;
-        nodeInfo = new Tmp(nodeInfo);
+        nodeInfo = Object.create(nodeInfo);
         nodeInfo[element.tagName.toLowerCase()] = {
             element: element,
             style: style
@@ -330,7 +326,7 @@
     }
 
     function popNodeInfo() {
-        nodeInfo = nodeInfo._up;
+        nodeInfo = Object.getPrototypeOf(nodeInfo);
     }
 
     function updateClipbox(path) {
@@ -661,7 +657,7 @@
         boxes = adjustBoxes(boxes);
 
         for (var i = 0; i < boxes.length; ++i) {
-            drawOne(boxes[i], i === 0, i == boxes.length - 1);
+            drawOneBox(boxes[i], i === 0, i == boxes.length - 1);
         }
 
         // overflow: hidden/auto - if present, replace the group with
@@ -974,7 +970,7 @@
         }
 
         // draws a single border box
-        function drawOne(box, isFirst, isLast) {
+        function drawOneBox(box, isFirst, isLast) {
             if (box.width === 0 || box.height === 0) {
                 return;
             }
