@@ -1,9 +1,9 @@
- (function() {
-     return;
+(function() {
 
     var kendo = window.kendo,
+        draw = kendo.drawing,
         dataviz = kendo.dataviz,
-        Point = dataviz.Point2D,
+        Point = kendo.geometry.Point,
         CurveProcessor = dataviz.CurveProcessor,
         EXTREMUM_ALLOWED_DEVIATION = 0.01;
         processor = new CurveProcessor(false),
@@ -343,8 +343,8 @@
         var p0 = new Point(1, 1),
             p1 = new Point(2, 2),
             p2 = new Point(3, 3),
-            cp1 = Point(1.667, 1.667),
-            cp2 = Point(2.333,2.333),
+            cp1 = new Point(1.667, 1.667),
+            cp2 = new Point(2.333,2.333),
             controlPoints = processor.controlPoints(p0, p1, p2);
 
         equal(controlPoints[0].x, cp1.x, "correct second control point X");
@@ -357,8 +357,8 @@
         var p0 = new Point(1, 1),
             p1 = new Point(1, 2),
             p2 = new Point(1, 3),
-            cp1 = Point(1, 2),
-            cp2 = Point(1, 2),
+            cp1 = new Point(1, 2),
+            cp2 = new Point(1, 2),
             controlPoints = processor.controlPoints(p0, p1, p2);
 
         equal(controlPoints[0].x, cp1.x, "correct second control point X");
@@ -374,8 +374,8 @@
         var p0 = new Point(3, 4),
             p1 = new Point(5, 6),
             p2 = new Point(7, 9),
-            cp1 = Point(4.334, 5.1675),
-            cp2 = Point(5.666, 6.8325),
+            cp1 = new Point(4.334, 5.1675),
+            cp2 = new Point(5.666, 6.8325),
             controlPoints = processor.controlPoints(p0, p1, p2);
 
         equal(controlPoints[0].x, cp1.x, "correct second control point X");
@@ -388,8 +388,8 @@
         var p0 = new Point(3, 3),
             p1 = new Point(1, 2.9),
             p2 = new Point(0.9, 1),
-            cp1 = Point(1.105, 3),
-            cp2 = Point(0.9667,  2.8682857142857143),
+            cp1 = new Point(1.105, 3),
+            cp2 = new Point(0.9667,  2.8682857142857143),
             controlPoints = processor.controlPoints(p0, p1, p2);
 
         equal(controlPoints[0].x, cp1.x, "correct second control point X");
@@ -405,8 +405,8 @@
         var p0 = new Point(1, 1),
             p1 = new Point(3, 3),
             p2 = new Point(4, 1),
-            cp1 = Point(2.334, 3),
-            cp2 = Point(3.333, 3),
+            cp1 = new Point(2.334, 3),
+            cp2 = new Point(3.333, 3),
             controlPoints = processor.controlPoints(p0, p1, p2);
 
         equal(controlPoints[0].x, cp1.x, "correct second control point X");
@@ -419,8 +419,8 @@
         var p0 = new Point(1, 3),
             p1 = new Point(3, 1),
             p2 = new Point(4, 3),
-            cp1 = Point(2.334, 1),
-            cp2 = Point(3.333, 1),
+            cp1 = new Point(2.334, 1),
+            cp2 = new Point(3.333, 1),
             controlPoints = processor.controlPoints(p0, p1, p2);
 
         equal(controlPoints[0].x, cp1.x, "correct second control point X");
@@ -433,8 +433,8 @@
         var p0 = new Point(4, 1),
             p1 = new Point(3, 3),
             p2 = new Point(1, 1),
-            cp1 = Point(3.333, 3),
-            cp2 = Point(2.334, 3),
+            cp1 = new Point(3.333, 3),
+            cp2 = new Point(2.334, 3),
             controlPoints = processor.controlPoints(p0, p1, p2);
 
         equal(controlPoints[0].x, cp1.x, "correct second control point X");
@@ -447,8 +447,8 @@
         var p0 = new Point(4, 3),
             p1 = new Point(3, 1),
             p2 = new Point(1, 3),
-            cp1 = Point(3.333, 1),
-            cp2 = Point(2.334, 1),
+            cp1 = new Point(3.333, 1),
+            cp2 = new Point(2.334, 1),
             controlPoints = processor.controlPoints(p0, p1, p2);
 
         equal(controlPoints[0].x, cp1.x, "correct second control point X");
@@ -461,8 +461,8 @@
         var p0 = new Point(1, 4),
             p1 = new Point(3, 3),
             p2 = new Point(1, 1),
-            cp1 = Point(3, 3.333),
-            cp2 = Point(3, 2.334),
+            cp1 = new Point(3, 3.333),
+            cp2 = new Point(3, 2.334),
             controlPoints = processor.controlPoints(p0, p1, p2);
 
         equal(controlPoints[0].x, cp1.x, "correct second control point X");
@@ -475,8 +475,8 @@
         var p0 = new Point(3, 4),
             p1 = new Point(1, 3),
             p2 = new Point(3, 1),
-            cp1 = Point(1, 3.333),
-            cp2 = Point(1, 2.334),
+            cp1 = new Point(1, 3.333),
+            cp2 = new Point(1, 2.334),
             controlPoints = processor.controlPoints(p0, p1, p2);
 
         equal(controlPoints[0].x, cp1.x, "correct second control point X");
@@ -489,8 +489,8 @@
         var p0 = new Point(1, 1),
             p1 = new Point(3, 3),
             p2 = new Point(1, 4),
-            cp1 = Point(3, 2.334),
-            cp2 = Point(3, 3.333),
+            cp1 = new Point(3, 2.334),
+            cp2 = new Point(3, 3.333),
             controlPoints = processor.controlPoints(p0, p1, p2);
 
         equal(controlPoints[0].x, cp1.x, "correct second control point X");
@@ -503,8 +503,8 @@
         var p0 = new Point(3, 1),
             p1 = new Point(1, 3),
             p2 = new Point(3, 4),
-            cp1 = Point(1, 2.334),
-            cp2 = Point(1, 3.333),
+            cp1 = new Point(1, 2.334),
+            cp2 = new Point(1, 3.333),
             controlPoints = processor.controlPoints(p0, p1, p2);
 
         equal(controlPoints[0].x, cp1.x, "correct second control point X");
@@ -520,8 +520,8 @@
         var p0 = new Point(1, 1),
             p1 = new Point(3, 1),
             p2 = new Point(2, 2),
-            cp1 = Point(2.334, 0.99334),
-            cp2 = Point(3.00333, 1.333),
+            cp1 = new Point(2.334, 0.99334),
+            cp2 = new Point(3.00333, 1.333),
             controlPoints = processor.controlPoints(p0, p1, p2);
 
         equal(controlPoints[0].x, cp1.x, "correct second control point X");
@@ -534,8 +534,8 @@
         var p0 = new Point(3, 1),
             p1 = new Point(1, 1),
             p2 = new Point(2, 2),
-            cp1 = Point(1.666, 0.99334),
-            cp2 = Point(0.99667, 1.333),
+            cp1 = new Point(1.666, 0.99334),
+            cp2 = new Point(0.99667, 1.333),
             controlPoints = processor.controlPoints(p0, p1, p2);
 
         equal(controlPoints[0].x, cp1.x, "correct second control point X");
@@ -548,8 +548,8 @@
         var p0 = new Point(1, 3),
             p1 = new Point(3, 3),
             p2 = new Point(2, 2),
-            cp1 = Point(2.334, 3.00666),
-            cp2 = Point(3.00333, 2.667),
+            cp1 = new Point(2.334, 3.00666),
+            cp2 = new Point(3.00333, 2.667),
             controlPoints = processor.controlPoints(p0, p1, p2);
 
         equal(controlPoints[0].x, cp1.x, "correct second control point X");
@@ -562,8 +562,8 @@
         var p0 = new Point(3, 3),
             p1 = new Point(1, 3),
             p2 = new Point(2, 2),
-            cp1 = Point(1.666, 3.00666),
-            cp2 = Point(0.99667, 2.667),
+            cp1 = new Point(1.666, 3.00666),
+            cp2 = new Point(0.99667, 2.667),
             controlPoints = processor.controlPoints(p0, p1, p2);
 
         equal(controlPoints[0].x, cp1.x, "correct second control point X");
@@ -576,8 +576,8 @@
         var p0 = new Point(2, 1),
             p1 = new Point(2, 3),
             p2 = new Point(3, 2),
-            cp1 = Point(1.99334, 2.334),
-            cp2 = Point(2.333, 3.00333),
+            cp1 = new Point(1.99334, 2.334),
+            cp2 = new Point(2.333, 3.00333),
             controlPoints = processor.controlPoints(p0, p1, p2);
 
         equal(controlPoints[0].x, cp1.x, "correct second control point X");
@@ -590,8 +590,8 @@
         var p0 = new Point(2, 1),
             p1 = new Point(2, 3),
             p2 = new Point(1, 2),
-            cp1 = Point(2.00666, 2.334),
-            cp2 = Point(1.667, 3.00333),
+            cp1 = new Point(2.00666, 2.334),
+            cp2 = new Point(1.667, 3.00333),
             controlPoints = processor.controlPoints(p0, p1, p2);
 
         equal(controlPoints[0].x, cp1.x, "correct second control point X");
@@ -604,8 +604,8 @@
         var p0 = new Point(2, 3),
             p1 = new Point(2, 1),
             p2 = new Point(1, 2),
-            cp1 = Point(2.00666, 1.666),
-            cp2 = Point(1.667, 0.99667),
+            cp1 = new Point(2.00666, 1.666),
+            cp2 = new Point(1.667, 0.99667),
             controlPoints = processor.controlPoints(p0, p1, p2);
 
         equal(controlPoints[0].x, cp1.x, "correct second control point X");
@@ -618,8 +618,8 @@
         var p0 = new Point(2, 3),
             p1 = new Point(2, 1),
             p2 = new Point(3, 2),
-            cp1 = Point(1.99334, 1.666),
-            cp2 = Point(2.333, 0.99667),
+            cp1 = new Point(1.99334, 1.666),
+            cp2 = new Point(2.333, 0.99667),
             controlPoints = processor.controlPoints(p0, p1, p2);
 
         equal(controlPoints[0].x, cp1.x, "correct second control point X");
@@ -632,8 +632,8 @@
         var p0 = new Point(2, 1),
             p1 = new Point(3, 3),
             p2 = new Point(1, 3),
-            cp1 = Point(3.00666, 2.334),
-            cp2 = Point(2.334, 3.00666),
+            cp1 = new Point(3.00666, 2.334),
+            cp2 = new Point(2.334, 3.00666),
             controlPoints = processor.controlPoints(p0, p1, p2);
 
         equal(controlPoints[0].x, cp1.x, "correct second control point X");
@@ -646,8 +646,8 @@
         var p0 = new Point(2, 1),
             p1 = new Point(1, 3),
             p2 = new Point(3, 3),
-            cp1 = Point(0.99334, 2.334),
-            cp2 = Point(1.666, 3.00666),
+            cp1 = new Point(0.99334, 2.334),
+            cp2 = new Point(1.666, 3.00666),
             controlPoints = processor.controlPoints(p0, p1, p2);
 
         equal(controlPoints[0].x, cp1.x, "correct second control point X");
@@ -660,8 +660,8 @@
         var p0 = new Point(2, 3),
             p1 = new Point(1, 2),
             p2 = new Point(3, 2),
-            cp1 = Point(0.99667, 2.333),
-            cp2 = Point(1.666, 1.99334),
+            cp1 = new Point(0.99667, 2.333),
+            cp2 = new Point(1.666, 1.99334),
             controlPoints = processor.controlPoints(p0, p1, p2);
 
         equal(controlPoints[0].x, cp1.x, "correct second control point X");
@@ -674,8 +674,8 @@
         var p0 = new Point(2, 3),
             p1 = new Point(3, 2),
             p2 = new Point(1, 2),
-            cp1 = Point(3.00333, 2.333),
-            cp2 = Point(2.334, 1.99334),
+            cp1 = new Point(3.00333, 2.333),
+            cp2 = new Point(2.334, 1.99334),
             controlPoints = processor.controlPoints(p0, p1, p2);
 
         equal(controlPoints[0].x, cp1.x, "correct second control point X");
@@ -688,8 +688,8 @@
         var p0 = new Point(1, 2),
             p1 = new Point(3, 1),
             p2 = new Point(2, 3),
-            cp1 = Point(2.334, 0.99334),
-            cp2 = Point(3.00666, 1.666),
+            cp1 = new Point(2.334, 0.99334),
+            cp2 = new Point(3.00666, 1.666),
             controlPoints = processor.controlPoints(p0, p1, p2);
 
         equal(controlPoints[0].x, cp1.x, "correct second control point X");
@@ -702,8 +702,8 @@
         var p0 = new Point(3, 2),
             p1 = new Point(2, 1),
             p2 = new Point(2, 3),
-            cp1 = Point(2.333, 0.99667),
-            cp2 = Point(1.99334, 1.666),
+            cp1 = new Point(2.333, 0.99667),
+            cp2 = new Point(1.99334, 1.666),
             controlPoints = processor.controlPoints(p0, p1, p2);
 
         equal(controlPoints[0].x, cp1.x, "correct second control point X");
@@ -716,8 +716,8 @@
         var p0 = new Point(1, 2),
             p1 = new Point(2, 3),
             p2 = new Point(2, 1),
-            cp1 = Point(1.667, 3.00333),
-            cp2 = Point(2.00666, 2.334),
+            cp1 = new Point(1.667, 3.00333),
+            cp2 = new Point(2.00666, 2.334),
             controlPoints = processor.controlPoints(p0, p1, p2);
 
         equal(controlPoints[0].x, cp1.x, "correct second control point X");
@@ -730,8 +730,8 @@
         var p0 = new Point(3, 2),
             p1 = new Point(2, 3),
             p2 = new Point(2, 1),
-            cp1 = Point(2.333, 3.00333),
-            cp2 = Point(1.99334, 2.334),
+            cp1 = new Point(2.333, 3.00333),
+            cp2 = new Point(1.99334, 2.334),
             controlPoints = processor.controlPoints(p0, p1, p2);
 
         equal(controlPoints[0].x, cp1.x, "correct second control point X");
@@ -743,31 +743,24 @@
     module("curveprocessor / process", {
     });
 
-    var equalFields = function(a, b) {
-            var areEqual = true;
-            if ($.isArray(a)) {
-                if (!$.isArray(b) || a.length != b.length) {
-                    return false;
-                }
-                for (var idx = 0; idx < a.length; idx++) {
-                    areEqual = areEqual && equalFields(a[idx], b[idx]);
-                }
-                return areEqual;
-            }
+    function closePoints(a, b) {
+        return (a.x - b.x < TOLERANCE) && (a.y - b.y < TOLERANCE)
+    }
 
-            if (a instanceof Point) {
-                return (a.x - b.x < TOLERANCE) && (a.y - b.y < TOLERANCE);
+    function equalSegmentPoints(segments, points) {
+        var segment, point, areEqual = true;
+        for (var idx = 0, pointIdx = 0; idx < segments.length; idx++) {
+            segment = segments[idx];
+            if (segment.controlIn()) {
+                areEqual = areEqual && closePoints(segment.controlIn(), points[pointIdx++]);
             }
-
-            if (typeof a === "object") {
-                for (var field in a) {
-                    areEqual = areEqual && equalFields(a[field], b[field]);
-                }
-                return areEqual;
+            areEqual = areEqual && closePoints(segment.anchor(), points[pointIdx++]);
+            if (segment.controlOut()) {
+                areEqual = areEqual && closePoints(segment.controlOut(), points[pointIdx++]);
             }
-
-            return a === b;
-        };
+        }
+        return areEqual;
+    }
 
     test("empty array is returned for zero data points", function() {
         var dataPoints = [],
@@ -777,106 +770,106 @@
     });
 
     test("empty array is returned for one data points", function() {
-        var dataPoints = [Point(1,1)],
+        var dataPoints = [new Point(1,1)],
             curvePoints = processor.process(dataPoints);
 
         ok(curvePoints && curvePoints.length === 0);
     });
 
     test("duplicate points are not calculated", function() {
-        var dataPoints = [Point(7, 9), Point(7, 9), Point(5,6), Point(5,6), Point(5,6), Point(3,4), Point(3,4)],
-            expectedPoints = [Point(7, 9), Point(6.334, 8.001), Point(5.666, 6.8325), Point(5,6),
-                Point(4.334, 5.1675), Point(3.666, 4.666), Point(3,4)],
+        var dataPoints = [new Point(7, 9), new Point(7, 9), new Point(5,6), new Point(5,6), new Point(5,6), new Point(3,4), new Point(3,4)],
+            expectedPoints = [new Point(7, 9), new Point(6.334, 8.001), new Point(5.666, 6.8325), new Point(5,6),
+                new Point(4.334, 5.1675), new Point(3.666, 4.666), new Point(3,4)],
             curvePoints = processor.process(dataPoints);
 
-        ok(equalFields(curvePoints, expectedPoints));
+        ok(equalSegmentPoints(curvePoints, expectedPoints));
     });
 
     test("empty array is returned if 1 point is left after removing duplicated points", function() {
-        var dataPoints = [Point(1,1), Point(1,1)],
+        var dataPoints = [new Point(1,1), new Point(1,1)],
             curvePoints = processor.process(dataPoints);
 
         ok(curvePoints && curvePoints.length === 0);
     });
 
     test("tangent line is used if 2 points are left after removing duplicated points", function() {
-        var dataPoints = [Point(1,1), Point(1,1), Point(3,3)],
-            expectedPoints = [Point(1,1), Point(1.666,1.666), Point(2.334,2.334), Point(3,3)],
+        var dataPoints = [new Point(1,1), new Point(1,1), new Point(3,3)],
+            expectedPoints = [new Point(1,1), new Point(1.666,1.666), new Point(2.334,2.334), new Point(3,3)],
             curvePoints = processor.process(dataPoints);
 
-        ok(equalFields(curvePoints, expectedPoints));
+        ok(equalSegmentPoints(curvePoints, expectedPoints));
     });
 
     test("four points are returned lying on the tangent line for two data points", function() {
-        var dataPoints = [Point(1,1), Point(3,3)],
-            expectedPoints = [Point(1,1), Point(1.666,1.666), Point(2.334,2.334), Point(3,3)],
+        var dataPoints = [new Point(1,1), new Point(3,3)],
+            expectedPoints = [new Point(1,1), new Point(1.666,1.666), new Point(2.334,2.334), new Point(3,3)],
             curvePoints = processor.process(dataPoints);
 
-        ok(curvePoints.length === 4 && equalFields(curvePoints, expectedPoints));
+        ok(equalSegmentPoints(curvePoints, expectedPoints));
     });
 
     test("curve starts and ends with the tangent line between the points", function() {
-        var dataPoints = [Point(1,1), Point(2,1), Point(4,2), Point(3,3)],
-            exprectedFirstControlPoint = Point(1.333, 1),
-            exprectedLastControlPoint = Point(3.333, 2.667),
+        var dataPoints = [new Point(1,1), new Point(2,1), new Point(4,2), new Point(3,3)],
+            exprectedFirstControlPoint = new Point(1.333, 1),
+            exprectedLastControlPoint = new Point(3.333, 2.667),
             curvePoints = processor.process(dataPoints);
 
-        ok(equalFields(curvePoints[1], exprectedFirstControlPoint), "correct first control point");
-        ok(equalFields(curvePoints[curvePoints.length - 2], exprectedLastControlPoint), "correct last control point");
+        ok(closePoints(curvePoints[0].controlOut(), exprectedFirstControlPoint), "correct first control point");
+        ok(closePoints(curvePoints[1].controlIn(), exprectedLastControlPoint), "correct last control point");
     });
 
     test("points on the same line are correctly processed", function() {
-        var dataPoints = [Point(1,1), Point(2,1), Point(4,1), Point(3,1)],
-            expectedPoints = [Point(1,1), Point(1.333,1), Point(1.667,1), Point(2,1), Point(2.666,1),
-                Point(3.334,1), Point(4,1), Point(3.667,1), Point(3.333,1), Point(3,1)],
+        var dataPoints = [new Point(1,1), new Point(2,1), new Point(4,1), new Point(3,1)],
+            expectedPoints = [new Point(1,1), new Point(1.333,1), new Point(1.667,1), new Point(2,1), new Point(2.666,1),
+                new Point(3.334,1), new Point(4,1), new Point(3.667,1), new Point(3.333,1), new Point(3,1)],
             curvePoints = processor.process(dataPoints);
 
-        ok(equalFields(curvePoints, expectedPoints));
+        ok(equalSegmentPoints(curvePoints, expectedPoints));
     });
 
     test("points on the same vertical line are correctly processed", function() {
-        var dataPoints = [Point(1,1), Point(1,2), Point(1,4), Point(1,3)],
-            expectedPoints = [Point(1,1), Point(1, 1), Point(1, 2), Point(1,2), Point(1, 2),
-                Point(1, 4), Point(1, 4), Point(1, 4), Point(1, 3), Point(1, 3)],
+        var dataPoints = [new Point(1,1), new Point(1,2), new Point(1,4), new Point(1,3)],
+            expectedPoints = [new Point(1,1), new Point(1, 1), new Point(1, 2), new Point(1,2), new Point(1, 2),
+                new Point(1, 4), new Point(1, 4), new Point(1, 4), new Point(1, 3), new Point(1, 3)],
             curvePoints = processor.process(dataPoints);
 
-        ok(equalFields(curvePoints, expectedPoints));
+        ok(equalSegmentPoints(curvePoints, expectedPoints));
     });
 
     test("monotonic points are correctly processed", function() {
-        var dataPoints = [Point(7, 9), Point(5,6), Point(3,4)],
-            expectedPoints = [Point(7, 9), Point(6.334, 8.001), Point(5.666, 6.8325), Point(5,6),
-                Point(4.334, 5.1675), Point(3.666, 4.666), Point(3,4)],
+        var dataPoints = [new Point(7, 9), new Point(5,6), new Point(3,4)],
+            expectedPoints = [new Point(7, 9), new Point(6.334, 8.001), new Point(5.666, 6.8325), new Point(5,6),
+                new Point(4.334, 5.1675), new Point(3.666, 4.666), new Point(3,4)],
             curvePoints = processor.process(dataPoints);
 
-        ok(equalFields(curvePoints, expectedPoints));
+        ok(equalSegmentPoints(curvePoints, expectedPoints));
     });
 
     test("monotonic points with restrictions are correctly processed", function() {
-        var dataPoints = [Point(1, 3), Point(3, 2.9), Point(3.1, 1)],
-            expectedPoints = [Point(1, 3), Point(1.666, 2.967), Point(2.895, 3), Point(3, 2.9),
-                Point(3.033, 2.868), Point(3.067, 1.633), Point(3.1, 1)],
+        var dataPoints = [new Point(1, 3), new Point(3, 2.9), new Point(3.1, 1)],
+            expectedPoints = [new Point(1, 3), new Point(1.666, 2.967), new Point(2.895, 3), new Point(3, 2.9),
+                new Point(3.033, 2.868), new Point(3.067, 1.633), new Point(3.1, 1)],
             curvePoints = processor.process(dataPoints);
 
-        ok(equalFields(curvePoints, expectedPoints));
+        ok(equalSegmentPoints(curvePoints, expectedPoints));
     });
 
     test("extremums are correctly processed", function() {
-        var dataPoints = [Point(1, 3), Point(3, 1), Point(5, 3)],
-            expectedPoints = [Point(1, 3), Point(1.666, 2.334), Point(2.334, 1), Point(3, 1),
-                Point(3.666, 1), Point(4.334, 2.334), Point(5, 3)],
+        var dataPoints = [new Point(1, 3), new Point(3, 1), new Point(5, 3)],
+            expectedPoints = [new Point(1, 3), new Point(1.666, 2.334), new Point(2.334, 1), new Point(3, 1),
+                new Point(3.666, 1), new Point(4.334, 2.334), new Point(5, 3)],
             curvePoints = processor.process(dataPoints);
 
-        ok(equalFields(curvePoints, expectedPoints));
+        ok(equalSegmentPoints(curvePoints, expectedPoints));
     });
 
     test("reversed points are correctly processed", function() {
-        var dataPoints = [Point(1, 2), Point(2, 3), Point(2, 1)],
-            expectedPoints = [Point(1, 2), Point(1.333, 2.333), Point(1.667, 3.00333), Point(2, 3),
-                Point(2.00666, 2.334), Point(2, 1), Point(2, 1)],
+        var dataPoints = [new Point(1, 2), new Point(2, 3), new Point(2, 1)],
+            expectedPoints = [new Point(1, 2), new Point(1.333, 2.333), new Point(1.667, 3.00333), new Point(2, 3),
+                new Point(2.00666, 2.334), new Point(2, 1), new Point(2, 1)],
             curvePoints = processor.process(dataPoints);
 
-        ok(equalFields(curvePoints, expectedPoints));
+        ok(equalSegmentPoints(curvePoints, expectedPoints));
     });
 
     module("curveprocessor / process / closed curve", {
@@ -890,76 +883,76 @@
     });
 
     test("empty array is returned for one points", function() {
-        var dataPoints = [Point(1,1)],
+        var dataPoints = [new Point(1,1)],
             curvePoints = closedPointsProcessor.process(dataPoints);
 
         ok(curvePoints && curvePoints.length === 0);
     });
 
     test("duplicate points are not calculated", function() {
-        var dataPoints = [Point(1, 2), Point(1, 2), Point(2, 3), Point(2, 3), Point(2, 1), Point(2, 1), Point(2, 1)],
-            expectedPoints = [Point(1, 2), Point(1, 2.333), Point(1.667, 3.003), Point(2, 3),
-                Point(2.007, 2.334), Point(2.007, 1.666), Point(2, 1), Point(1.667, 0.997), Point(1, 1.667), Point(1, 2)],
+        var dataPoints = [new Point(1, 2), new Point(1, 2), new Point(2, 3), new Point(2, 3), new Point(2, 1), new Point(2, 1), new Point(2, 1)],
+            expectedPoints = [new Point(1, 2), new Point(1, 2.333), new Point(1.667, 3.003), new Point(2, 3),
+                new Point(2.007, 2.334), new Point(2.007, 1.666), new Point(2, 1), new Point(1.667, 0.997), new Point(1, 1.667), new Point(1, 2)],
             curvePoints = closedPointsProcessor.process(dataPoints);
 
-        ok(equalFields(curvePoints, expectedPoints));
+        ok(equalSegmentPoints(curvePoints, expectedPoints));
     });
 
     test("empty array is returned if 1 point is left after removing duplicated points", function() {
-        var dataPoints = [Point(1,1), Point(1,1)],
+        var dataPoints = [new Point(1,1), new Point(1,1)],
             curvePoints = closedPointsProcessor.process(dataPoints);
 
         ok(curvePoints && curvePoints.length === 0);
     });
 
     test("tangent line is used if 2 points are left after removing duplicated points", function() {
-        var dataPoints = [Point(1,1), Point(1,1), Point(3,3)],
-            expectedPoints = [Point(1,1), Point(1.666,1.666), Point(2.334,2.334), Point(3,3)],
+        var dataPoints = [new Point(1,1), new Point(1,1), new Point(3,3)],
+            expectedPoints = [new Point(1,1), new Point(1.666,1.666), new Point(2.334,2.334), new Point(3,3)],
             curvePoints = closedPointsProcessor.process(dataPoints);
 
-        ok(equalFields(curvePoints, expectedPoints));
+        ok(equalSegmentPoints(curvePoints, expectedPoints));
     });
 
     test("two points are not closed", function() {
-        var dataPoints = [Point(1,1), Point(3,3)],
-            expectedPoints = [Point(1,1), Point(1.666,1.666), Point(2.334,2.334), Point(3,3)],
+        var dataPoints = [new Point(1,1), new Point(3,3)],
+            expectedPoints = [new Point(1,1), new Point(1.666,1.666), new Point(2.334,2.334), new Point(3,3)],
             curvePoints = closedPointsProcessor.process(dataPoints);
 
-        ok(curvePoints.length === 4 && equalFields(curvePoints, expectedPoints));
+        ok(equalSegmentPoints(curvePoints, expectedPoints));
     });
 
     test("the end points are used to determine the start and end control points and to close the curve", function() {
-        var dataPoints = [Point(1, 2), Point(2, 3), Point(2, 1)],
-            expectedPoints = [Point(1, 2), Point(1, 2.333), Point(1.667, 3.003), Point(2, 3),
-                Point(2.007, 2.334), Point(2.007, 1.666), Point(2, 1), Point(1.667, 0.997), Point(1, 1.667), Point(1, 2)],
+        var dataPoints = [new Point(1, 2), new Point(2, 3), new Point(2, 1)],
+            expectedPoints = [new Point(1, 2), new Point(1, 2.333), new Point(1.667, 3.003), new Point(2, 3),
+                new Point(2.007, 2.334), new Point(2.007, 1.666), new Point(2, 1), new Point(1.667, 0.997), new Point(1, 1.667), new Point(1, 2)],
             curvePoints = closedPointsProcessor.process(dataPoints);
 
-        ok(equalFields(curvePoints, expectedPoints));
+        ok(equalSegmentPoints(curvePoints, expectedPoints));
     });
 
     test("the curve is closed if the first point is equal to the last point", function() {
-        var dataPoints = [Point(1, 2), Point(2, 3), Point(2, 1), Point(1, 2)],
-            expectedPoints = [Point(1, 2), Point(1, 2.333), Point(1.667, 3.003), Point(2, 3),
-                Point(2.007, 2.334), Point(2.007, 1.666), Point(2, 1), Point(1.667, 0.997), Point(1, 1.667), Point(1, 2)],
+        var dataPoints = [new Point(1, 2), new Point(2, 3), new Point(2, 1), new Point(1, 2)],
+            expectedPoints = [new Point(1, 2), new Point(1, 2.333), new Point(1.667, 3.003), new Point(2, 3),
+                new Point(2.007, 2.334), new Point(2.007, 1.666), new Point(2, 1), new Point(1.667, 0.997), new Point(1, 1.667), new Point(1, 2)],
             curvePoints = processor.process(dataPoints);
 
-        ok(equalFields(curvePoints, expectedPoints));
+        ok(equalSegmentPoints(curvePoints, expectedPoints));
     });
 
     test("the curve is not closed for 3 points if the first point is equal to the last point", function() {
-        var dataPoints = [Point(1,1), Point(3,3), Point(1,1)],
-            expectedPoints = [Point(1,1), Point(1.666,1.666), Point(2.334,2.334), Point(3,3)],
+        var dataPoints = [new Point(1,1), new Point(3,3), new Point(1,1)],
+            expectedPoints = [new Point(1,1), new Point(1.666,1.666), new Point(2.334,2.334), new Point(3,3)],
             curvePoints = closedPointsProcessor.process(dataPoints);
 
-        ok(equalFields(curvePoints, expectedPoints));
+        ok(equalSegmentPoints(curvePoints, expectedPoints));
     });
 
     test("the curve is not closed if there are less than 3 points after removing the last points", function() {
-        var dataPoints = [Point(1,1), Point(3,3), Point(1,1), Point(1,1)],
-            expectedPoints = [Point(1,1), Point(1.666,1.666), Point(2.334,2.334), Point(3,3)],
+        var dataPoints = [new Point(1,1), new Point(3,3), new Point(1,1), new Point(1,1)],
+            expectedPoints = [new Point(1,1), new Point(1.666,1.666), new Point(2.334,2.334), new Point(3,3)],
             curvePoints = closedPointsProcessor.process(dataPoints);
 
-        ok(equalFields(curvePoints, expectedPoints));
+        ok(equalSegmentPoints(curvePoints, expectedPoints));
     });
 
 })();
