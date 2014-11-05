@@ -15,14 +15,8 @@ namespace Kendo.Mvc.UI.Fluent
             this.container = container;
         }
 
-        public virtual <%= csharp_item_class %>Builder<%= csharp_generic_args %> Add()
-        {
-            var item = new <%= csharp_item_class %>();
-
-            container.Add(item);
-
-            return new <%= csharp_item_class %>Builder<%= csharp_generic_args %>(item);
-        }
+        //>> Factory methods
+        //<< Factory methods
     }
 }
 

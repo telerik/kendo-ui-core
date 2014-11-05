@@ -15,7 +15,12 @@ namespace Kendo.Mvc.UI.Fluent
             this.container = container;
         }
 
-        public virtual TreeListColumnCommandBuilder<T> Add()
+        //>> Factory methods
+        
+        /// <summary>
+        /// Adds an item for a custom action.
+        /// </summary>
+        public virtual TreeListColumnCommandBuilder<T> Custom()
         {
             var item = new TreeListColumnCommand();
 
@@ -23,6 +28,43 @@ namespace Kendo.Mvc.UI.Fluent
 
             return new TreeListColumnCommandBuilder<T>(item);
         }
+
+        /// <summary>
+        /// Adds an item for the edit action.
+        /// </summary>
+        public virtual TreeListColumnCommandBuilder<T> Edit()
+        {
+            var item = new TreeListColumnCommand() { Name = "edit" };
+
+            container.Add(item);
+
+            return new TreeListColumnCommandBuilder<T>(item);
+        }
+
+        /// <summary>
+        /// Adds an item for the createChild action.
+        /// </summary>
+        public virtual TreeListColumnCommandBuilder<T> CreateChild()
+        {
+            var item = new TreeListColumnCommand() { Name = "createChild" };
+
+            container.Add(item);
+
+            return new TreeListColumnCommandBuilder<T>(item);
+        }
+
+        /// <summary>
+        /// Adds an item for the destroy action.
+        /// </summary>
+        public virtual TreeListColumnCommandBuilder<T> Destroy()
+        {
+            var item = new TreeListColumnCommand() { Name = "destroy" };
+
+            container.Add(item);
+
+            return new TreeListColumnCommandBuilder<T>(item);
+        }
+        //<< Factory methods
     }
 }
 

@@ -43,7 +43,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// The configuration of the column command(s). If set the column would display a button for every command. Commands can be custom or built-in ("edit", "destroy" or "createchild").The "edit" built-in command switches the current table row in edit mode.The "createchild" built-in command adds new child item to the current table row and switches in edit mode.The "destroy" built-in command removes the data item to which the current table row is bound.Custom commands are supported by specifying the click option.
+        /// The configuration of the column command(s). If set the column would display a button for every command. Commands can be custom or built-in ("edit", "destroy" or "createChild").The "edit" built-in command switches the current table row in edit mode.The "createChild" built-in command adds new child item to the current table row and switches in edit mode.The "destroy" built-in command removes the data item to which the current table row is bound.Custom commands are supported by specifying the click option.
         /// </summary>
         /// <param name="configurator">The action that configures the command.</param>
         public TreeListColumnBuilder<T> Command(Action<TreeListColumnCommandFactory<T>> configurator)
@@ -282,7 +282,7 @@ namespace Kendo.Mvc.UI.Fluent
             configurator(new TreeListColumnFilterableSettingsBuilder<T>(container.Filterable));
             return this;
         }
-
+        
         //<< Fields
 
         /// <summary>

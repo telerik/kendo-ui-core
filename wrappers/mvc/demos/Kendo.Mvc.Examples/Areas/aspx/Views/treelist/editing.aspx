@@ -5,7 +5,7 @@ Inherits="System.Web.Mvc.ViewPage<IEnumerable<Kendo.Mvc.Examples.Models.TreeList
 <div class="demo-section k-header">
     <%:Html.Kendo().TreeList<Kendo.Mvc.Examples.Models.TreeList.EmployeeDirectoryModel>()
         .Name("treelist")
-        .Toolbar(tb => tb.Add().Name("create"))
+        .Toolbar(toolbar => toolbar.Create())
         .Columns(columns =>
         {
             columns.Add().Field(e => e.FirstName).Width(220);
@@ -16,8 +16,8 @@ Inherits="System.Web.Mvc.ViewPage<IEnumerable<Kendo.Mvc.Examples.Models.TreeList
             columns.Add().Field(e => e.Extension).Title("Ext").Format("{0:#}");
             columns.Add().Title("Edit").Width(200).Command(c =>
             {
-                c.Add().Name("edit");
-                c.Add().Name("destroy");
+                c.Edit();
+                c.Destroy();
             })
             .Attributes(new {
                 style = "text-align: center;"

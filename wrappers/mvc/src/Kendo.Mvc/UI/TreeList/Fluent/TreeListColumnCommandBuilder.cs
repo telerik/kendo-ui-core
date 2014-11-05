@@ -20,7 +20,7 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Fields
         
         /// <summary>
-        /// The name of the command. The built-in commands are "edit", "createchild" and "destroy". Can be set to a custom value.
+        /// The name of the command. The built-in commands are "edit", "createChild" and "destroy". When set to a custom value, it is rendered as a data-command attribute.
         /// </summary>
         /// <param name="value">The value that configures the name.</param>
         public TreeListColumnCommandBuilder<T> Name(string value)

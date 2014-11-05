@@ -3,6 +3,10 @@ class String
     def to_attribute
         self.gsub(/[A-Z]/, '-\0').downcase
     end
+
+    def to_csharp_name
+        self.slice(0,1).capitalize + self.slice(1..-1)
+    end
 end
 
 module CodeGen::MVC::Wrappers
@@ -263,6 +267,44 @@ module CodeGen::MVC::Wrappers
         }
         })
 
+        NAMED_FACTORY_METHODS = ERB.new(%{//>> Factory methods
+        <% if builtin_names.empty? %>
+        /// <summary>
+        /// Adds an item to the collection
+        /// </summary>
+        public virtual <%= csharp_item_class %>Builder<%= csharp_generic_args %> Add()
+        {
+            var item = new <%= csharp_item_class %>();
+
+            container.Add(item);
+
+            return new <%= csharp_item_class %>Builder<%= csharp_generic_args %>(item);
+        }<% else %>
+        /// <summary>
+        /// Adds an item for a custom action.
+        /// </summary>
+        public virtual <%= csharp_item_class %>Builder<%= csharp_generic_args %> Custom()
+        {
+            var item = new <%= csharp_item_class %>();
+
+            container.Add(item);
+
+            return new <%= csharp_item_class %>Builder<%= csharp_generic_args %>(item);
+        }<% end %><% builtin_names.each { |name| %>
+
+        /// <summary>
+        /// Adds an item for the <%= name %> action.
+        /// </summary>
+        public virtual <%= csharp_item_class %>Builder<%= csharp_generic_args %> <%= name.to_csharp_name %>()
+        {
+            var item = new <%= csharp_item_class %>() { Name = "<%= name %>" };
+
+            container.Add(item);
+
+            return new <%= csharp_item_class %>Builder<%= csharp_generic_args %>(item);
+        }<% } %>
+        //<< Factory methods})
+
         COMPONENT_REGISTER = ERB.new(%{
         /// <summary>
         /// Creates a <see cref="<%= csharp_class %>"/>
@@ -292,7 +334,7 @@ module CodeGen::MVC::Wrappers
 
         def csharp_name
             postfix = name[/template$/i].nil? ? "" : "Id"
-            name.slice(0,1).capitalize + name.slice(1..-1) + postfix
+            name.to_csharp_name + postfix
         end
 
         def csharp_generic_args
@@ -302,6 +344,15 @@ module CodeGen::MVC::Wrappers
             GENERIC_BUILDER_SKIP_LIST.inject(true) do |uses_generics, field|
                 uses_generics && !full_name.start_with?(field)
             end
+        end
+
+        def builtin_names
+            # check if child options contain 'name'
+            name_field = options.map{ |o| o.options }.flatten.find{ |o| o.name == "name" }
+
+            return [] if name_field.nil?
+
+            name_field.description.scan(/"(\w+)"/i).flatten
         end
 
         def full_name
@@ -643,6 +694,15 @@ module CodeGen::MVC::Wrappers
             csharp = csharp.sub(/\/\/>> Serialization(.|\n)*\/\/<< Serialization/, FIELD_SERIALIZATION.result(option.get_binding))
         end
 
+        def to_item_factory(filename, option)
+            @files.push(filename)
+
+            csharp = File.exists?(filename) ? File.read(filename) : ITEM_FACTORY.result(option.get_binding)
+
+            csharp = csharp.sub(/\/\/>> Factory methods(.|\n)*\/\/<< Factory methods/, NAMED_FACTORY_METHODS.result(option.get_binding))
+            csharp
+        end
+
         def to_fluent_setting(filename, option)
             @files.push(filename)
 
@@ -783,8 +843,7 @@ module CodeGen::MVC::Wrappers
         def write_array(component, option)
             #write *Factory.cs file
             filename = "#{@path}/#{component.path}/Fluent/#{option.csharp_builder_class}.cs"
-            component.files.push(filename)
-            write_file(filename, ITEM_FACTORY.result(option.get_binding)) unless File.exists?(filename)
+            write_file(filename, component.to_item_factory(filename, option))
 
             #write *Item.cs file
             filename = "#{@path}/#{component.path}/#{option.csharp_item_class}.cs"
