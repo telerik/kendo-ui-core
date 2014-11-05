@@ -2248,7 +2248,7 @@
         });
 
         test("renders rectangle", function() {
-            sameLinePath(rect, draw.Path.fromRect(box.toRect()));
+            sameLinePath(rect, dataviz.alignPathToPixel(draw.Path.fromRect(box.toRect())));
         });
 
         test("does not render rectangle when box height is zero", function() {
