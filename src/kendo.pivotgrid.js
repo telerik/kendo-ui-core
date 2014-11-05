@@ -1071,6 +1071,19 @@ var __meta__ = {
 
             data = this._normalizeData(data, axes.columns.tuples.length, axes.rows.tuples.length);
 
+            var columnRoot = this._normalizeTuples(axes.columns.tuples, this._axes.columns.tuples);
+            var rowRoot = this._normalizeTuples(axes.rows.tuples, this._axes.rows.tuples);
+
+            if (columnRoot || rowRoot) {
+                data = this._populateEmptyData({
+                    data: data,
+                    columnsLength: axes.columns.tuples.length,
+                    rowsLength: axes.rows.tuples.length,
+                    columnRoot: columnRoot,
+                    rowRoot: rowRoot
+                });
+            }
+
             if (this._lastExpanded == "rows") {
                 tuples = axes.columns.tuples;
                 measures = this._columnMeasures();
@@ -1174,6 +1187,7 @@ var __meta__ = {
 
             if (!this._hasRoot(source, tuples[0])) {
                 tuples.splice(0, 0, this._createRoot(tuples[0]));
+                return true;
             }
         },
 
@@ -1182,9 +1196,6 @@ var __meta__ = {
             var rowMeasures = this._rowMeasures();
             var axes = this.axes();
             var startIndex, tuples;
-
-            this._normalizeTuples(sourceAxes.columns.tuples, axes.columns.tuples);
-            this._normalizeTuples(sourceAxes.rows.tuples, axes.rows.tuples);
 
             var newRowsLength = sourceAxes.rows.tuples.length;
             var oldColumnsLength = membersCount(axes.columns.tuples, columnMeasures);
@@ -1332,6 +1343,38 @@ var __meta__ = {
             } else {
                 return that._data;
             }
+        },
+
+        _populateEmptyData: function(options) {
+            var columnsLength = options.columnsLength || 1;
+            var columnRoot = options.columnRoot;
+            var data = options.data;
+
+            var result = [];
+            var dataIdx = 0;
+            var idx = 0;
+
+            var length = columnsLength * (options.rowsLength || 1);
+
+            if (options.rowRoot) {
+                for (idx; idx < columnsLength; idx++) {
+                    result[idx] = { value: "", ordinal: idx };
+                }
+            }
+
+            for (; idx < length; idx++) {
+                if (columnRoot && (idx % columnsLength === 0)) {
+                    result[idx] = { value: "", ordinal: idx };
+                    idx += 1;
+                }
+
+                result[idx] = data[dataIdx];
+                result[idx].ordinal = idx;
+
+                dataIdx += 1;
+            }
+
+            return result;
         },
 
         _normalizeData: function(data, columns, rows) {
@@ -1895,7 +1938,11 @@ var __meta__ = {
         return result;
     }
 
-    function prepareDataOnColumns(tuples, data) {
+    function insertEmptyItem(index, data) {
+
+    }
+
+    function prepareDataOnColumns(tuples, data, rootAdded) {
         if (!tuples || !tuples.length) {
             return data;
         }

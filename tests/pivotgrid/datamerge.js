@@ -2431,5 +2431,209 @@
         equal(data[10].value, "col 0, row 2, measure 2");
         equal(data[11].value, "col 1, row 2, measure 2");
     });
+
+    test("expand of root level column axis without root tuple", function() {
+        var columnTuples = [
+            {
+                tuples: [
+                    { members: [ { name: "level 1-0", parentName: "level 0", children: [], levelNum: "1" } ] },
+                    { members: [ { name: "level 1-1", parentName: "level 0", children: [], levelNum: "1" } ] }
+                ]
+            }
+        ];
+        var data = [
+            [ { value: 3, ordinal: 0 }, { value: 7, ordinal: 1 } ]
+        ];
+
+        var dataSource = new PivotDataSource({
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    options.success({
+                        axes: {
+                            columns: columnTuples.shift()
+                        },
+                        data: data.shift()
+                    });
+                }
+            }
+        });
+
+        dataSource.read();
+
+        var data = dataSource.data();
+        equal(data.length, 3);
+        equal(data[0].value, "");
+        equal(data[0].ordinal, 0);
+        equal(data[1].value, 3);
+        equal(data[1].ordinal, 1);
+        equal(data[2].value, 7);
+        equal(data[2].ordinal, 2);
+    });
+
+    test("expand of root level row axis without root tuple", function() {
+        var rowTuples = [
+            {
+                tuples: [
+                    { members: [ { name: "level 1-0", parentName: "level 0", children: [], levelNum: "1" } ] },
+                    { members: [ { name: "level 1-1", parentName: "level 0", children: [], levelNum: "1" } ] }
+                ]
+            }
+        ];
+        var data = [
+            [ { value: 3, ordinal: 0 }, { value: 7, ordinal: 1 } ]
+        ];
+
+        var dataSource = new PivotDataSource({
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    options.success({
+                        axes: {
+                            rows: rowTuples.shift()
+                        },
+                        data: data.shift()
+                    });
+                }
+            }
+        });
+
+        dataSource.read();
+
+        var data = dataSource.data();
+        equal(data.length, 3);
+        equal(data[0].value, "");
+        equal(data[0].ordinal, 0);
+        equal(data[1].value, 3);
+        equal(data[1].ordinal, 1);
+        equal(data[2].value, 7);
+        equal(data[2].ordinal, 2);
+    });
+
+    test("expand of root level of row and column axes without roots", function() {
+        var columnTuples = [
+            {
+                tuples: [
+                    { members: [ { name: "level 1-0", parentName: "level 0", children: [], levelNum: "1" } ] },
+                    { members: [ { name: "level 1-1", parentName: "level 0", children: [], levelNum: "1" } ] }
+                ]
+            }
+        ];
+        var rowTuples = [
+            {
+                tuples: [
+                    { members: [ { name: "level 1-0", parentName: "level 0", children: [], levelNum: "1" } ] },
+                    { members: [ { name: "level 1-1", parentName: "level 0", children: [], levelNum: "1" } ] }
+                ]
+            }
+        ];
+        var data = [
+            [ { value: 3, ordinal: 0 }, { value: 7, ordinal: 1 }, { value: 10, ordinal: 2 }, { value: 11, ordinal: 3 } ]
+        ];
+
+        var dataSource = new PivotDataSource({
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    options.success({
+                        axes: {
+                            columns: columnTuples.shift(),
+                            rows: rowTuples.shift()
+                        },
+                        data: data.shift()
+                    });
+                }
+            }
+        });
+
+        dataSource.read();
+
+        var data = dataSource.data();
+
+        equal(data.length, 9);
+        //empty row
+        equal(data[0].value, "");
+        equal(data[0].ordinal, 0);
+        equal(data[1].value, "");
+        equal(data[1].ordinal, 1);
+        equal(data[2].value, "");
+        equal(data[2].ordinal, 2);
+        //empty col
+        equal(data[3].value, "");
+        equal(data[3].ordinal, 3);
+        equal(data[4].value, 3);
+        equal(data[4].ordinal, 4);
+        equal(data[5].value, 7);
+        equal(data[5].ordinal, 5);
+
+        //empty col
+        equal(data[6].value, "");
+        equal(data[6].ordinal, 6);
+        equal(data[7].value, 10);
+        equal(data[7].ordinal, 7);
+        equal(data[8].value, 11);
+        equal(data[8].ordinal, 8);
+    });
+
+    test("expand of child level of column axis without root", function() {
+        var columnTuples = [
+            {
+                tuples: [
+                    { members: [ { name: "level 0", children: [], levelNum: "0" } ] },
+                    { members: [ { name: "level 1-0", parentName: "level 0", children: [], levelNum: "1" } ] },
+                    { members: [ { name: "level 1-1", parentName: "level 0", children: [], levelNum: "1" } ] }
+                ]
+            },
+            {
+                tuples: [
+                    { members: [ { name: "level 2-0", parentName: "level 1-0", children: [], levelNum: "2" } ] },
+                    { members: [ { name: "level 2-1", parentName: "level 1-0", children: [], levelNum: "2" } ] }
+                ]
+            }
+        ];
+        var data = [
+            [ { value: 3, ordinal: 0 }, { value: 7, ordinal: 1 }, { value: 10, ordinal: 2 } ],
+            [ { value: 22, ordinal: 0 }, { value: 25, ordinal: 1 } ]
+        ];
+
+        var dataSource = new PivotDataSource({
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    options.success({
+                        axes: {
+                            columns: columnTuples.shift()
+                        },
+                        data: data.shift()
+                    });
+                }
+            }
+        });
+
+        dataSource.read();
+        dataSource.expandColumn("level 1-0");
+
+        var data = dataSource.data();
+
+        equal(data.length, 5);
+
+        equal(data[0].value, 3);
+        equal(data[1].value, 7);
+        equal(data[2].value, 22);
+        equal(data[3].value, 25);
+        equal(data[4].value, 10);
+    });
 })();
 
