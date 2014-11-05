@@ -68,6 +68,7 @@
         var tok_comma            = /^(,)/;
 
         return function(input) {
+            var orig = input;
             function skip_ws() {
                 var m = tok_whitespace.exec(input);
                 if (m) {
@@ -116,7 +117,7 @@
                         to1 = read(tok_keyword);
                         if (to1 == "to") {
                             to1 = read(tok_keyword);
-                        } else {
+                        } else if (to1 && /^-/.test(propName)) {
                             reverse = true;
                         }
                         to2 = read(tok_keyword);
@@ -154,34 +155,83 @@
                         angle   : angle,
                         to      : to1 && to2 ? to1 + to2 : to1 ? to1 : to2 ? to2 : null,
                         stops   : stops,
-                        reverse : reverse
+                        reverse : reverse,
+                        orig    : orig
                     };
                 }
             }
 
-            var list = [];
-            while (input) {
-                var prev = input;
-                var tok = read(tok_linear_gradient);
-                if (tok) {
-                    tok = read_linear_gradient(tok);
-                }
-                if (tok) {
-                    list.push(tok);
-                }
-                read(tok_comma);
-                if (input == prev) {
-                    // encountered something we can't read, bail out.
-                    break;
-                }
+            var tok = read(tok_linear_gradient);
+            if (tok) {
+                return read_linear_gradient(tok);
             }
-
-            return list.length > 0 ? list : null;
         };
     })();
 
     // only function definitions after this line.
     return;
+
+    function splitOnComma(input) {
+        var ret = [];
+        var last = 0, pos = 0;
+        var in_paren = 0;
+        var in_string = false;
+        var m;
+
+        function looking_at(rx) {
+            return (m = rx.exec(input.substr(pos)));
+        }
+
+        function trim(str) {
+            return str.replace(/^\s+|\s+$/g, "");
+        }
+
+        while (pos < input.length) {
+            if (looking_at(/^\s+/)) {
+                pos += m[0].length;
+            }
+            else if (looking_at(/^[\(\[\{]/)) {
+                in_paren++;
+                pos++;
+            }
+            else if (looking_at(/^[\)\]\}]/)) {
+                in_paren--;
+                pos++;
+            }
+            else if (!in_string && looking_at(/^[\"\']/)) {
+                in_string = m[0];
+                pos++;
+            }
+            else if (in_string == "'" && looking_at(/^\\\'/)) {
+                pos += 2;
+            }
+            else if (in_string == '"' && looking_at(/^\\\"/)) {
+                pos += 2;
+            }
+            else if (in_string == "'" && looking_at(/^\'/)) {
+                in_string = false;
+                pos++;
+            }
+            else if (in_string == '"' && looking_at(/^\"/)) {
+                in_string = false;
+                pos++;
+            }
+            else if (looking_at(/^\s*,\s*/)) {
+                if (!in_string && !in_paren && pos > last) {
+                    ret.push(trim(input.substring(last, pos)));
+                    last = pos + m[0].length;
+                }
+                pos += m[0].length;
+            }
+            else {
+                pos++;
+            }
+        }
+        if (last < pos) {
+            ret.push(trim(input.substring(last, pos)));
+        }
+        return ret;
+    }
 
     function parseColor(str, css) {
         var color = kendo.parseColor(str);
@@ -577,16 +627,11 @@
         var backgroundColor = getPropertyValue(style, "background-color");
         backgroundColor = parseColor(backgroundColor);
 
-        var backgroundImage = getPropertyValue(style, "background-image");
-        var backgroundRepeat = getPropertyValue(style, "background-repeat");
-        var backgroundPosition = getPropertyValue(style, "background-position");
-        var backgroundOrigin = getPropertyValue(style, "background-origin");
-        var backgroundSize = getPropertyValue(style, "background-size");
-
-        if (/^\s*repeat\s*,\s*repeat\s*$/.test(backgroundRepeat)) {
-            // Chrome does this sometimes, because why not.
-            backgroundRepeat = "repeat";
-        }
+        var backgroundImage = splitOnComma( getPropertyValue(style, "background-image") );
+        var backgroundRepeat = splitOnComma( getPropertyValue(style, "background-repeat") );
+        var backgroundPosition = splitOnComma( getPropertyValue(style, "background-position") );
+        var backgroundOrigin = splitOnComma( getPropertyValue(style, "background-origin") );
+        var backgroundSize = splitOnComma( getPropertyValue(style, "background-size") );
 
         if (browser.msie && browser.version < 10) {
             // IE9 hacks.  getPropertyValue won't return the correct
@@ -594,16 +639,6 @@
             // move it in getPropertyValue, but we don't have the
             // element.
             backgroundPosition = element.currentStyle.backgroundPosition;
-            // backgroundSize = element.currentStyle.backgroundSize;
-
-            // gradients rendered as SVG (for instance in the colorpicker)
-            // cannot be displayed.
-            if (/^url\(\"data:image\/svg/i.test(backgroundImage)) {
-                // this will taint the canvas in IE9 for some reason
-                // and we get a DOM security exception when we try to
-                // retrieve the image from it.  ditch it.
-                backgroundImage = null;
-            }
         }
 
         var innerbox = innerBox(element.getBoundingClientRect(), "border-*-width", element);
@@ -804,10 +839,6 @@
         }
 
         function drawBackground(box) {
-            if (!backgroundColor && (!backgroundImage || (backgroundImage == "none"))) {
-                return;
-            }
-
             var background = new drawing.Group();
             setClipping(background, roundBox(box, rTL, rTR, rBR, rBL));
             group.append(background);
@@ -825,11 +856,37 @@
                 background.append(path);
             }
 
+            var bgImage, bgRepeat, bgPosition, bgOrigin, bgSize;
+
+            for (var i = backgroundImage.length; --i >= 0;) {
+                bgImage = backgroundImage[i];
+                bgRepeat = backgroundRepeat[i] || backgroundRepeat[backgroundRepeat.length - 1];
+                bgPosition = backgroundPosition[i] || backgroundPosition[backgroundPosition.length - 1];
+                bgOrigin = backgroundOrigin[i] || backgroundOrigin[backgroundOrigin.length - 1];
+                bgSize = backgroundSize[i] || backgroundSize[backgroundSize.length - 1];
+                drawOneBackground( background, box, bgImage, bgRepeat, bgPosition, bgOrigin, bgSize );
+            }
+        }
+
+        function drawOneBackground(group, box, backgroundImage, backgroundRepeat, backgroundPosition, backgroundOrigin, backgroundSize) {
+            if (!backgroundImage || (backgroundImage == "none")) {
+                return;
+            }
+
+            // gradients rendered as SVG (for instance in the colorpicker)
+            // cannot be displayed.  //XXX: re-check this.
+            if (/^url\(\"data:image\/svg/i.test(backgroundImage)) {
+                // this will taint the canvas in IE9 for some reason
+                // and we get a DOM security exception when we try to
+                // retrieve the image from it.  ditch it.
+                return;
+            }
+
             var url = backgroundImageURL(backgroundImage);
             if (url) {
                 var img = IMAGE_CACHE[url];
                 if (img && img.width > 0 && img.height > 0) {
-                    drawBackgroundImage(background, box, img.width, img.height, function(group, rect){
+                    drawBackgroundImage(group, box, img.width, img.height, function(group, rect){
                         group.append(new drawing.Image(url, rect));
                     });
                 }
@@ -837,108 +894,104 @@
             else {
                 var gradient = parseGradient(backgroundImage);
                 if (gradient) {
-                    drawBackgroundImage(background, box, box.width, box.height, gradientRenderer(gradient));
+                    drawBackgroundImage(group, box, box.width, box.height, gradientRenderer(gradient));
                 }
             }
-        }
 
-        function drawBackgroundImage(group, box, img_width, img_height, renderBG) {
-            var aspect_ratio = img_width / img_height;
+            function drawBackgroundImage(group, box, img_width, img_height, renderBG) {
+                var aspect_ratio = img_width / img_height;
 
-            // for background-origin: border-box the box is already appropriate
-            var orgBox = box;
-            if (backgroundOrigin == "content-box") {
-                orgBox = innerBox(orgBox, "border-*-width", element);
-                orgBox = innerBox(orgBox, "padding-*", element);
-            } else if (backgroundOrigin == "padding-box") {
-                orgBox = innerBox(orgBox, "border-*-width", element);
-            }
+                // for background-origin: border-box the box is already appropriate
+                var orgBox = box;
+                if (backgroundOrigin == "content-box") {
+                    orgBox = innerBox(orgBox, "border-*-width", element);
+                    orgBox = innerBox(orgBox, "padding-*", element);
+                } else if (backgroundOrigin == "padding-box") {
+                    orgBox = innerBox(orgBox, "border-*-width", element);
+                }
 
-            // so, backgroundSize can be, depending on the browser, "auto", "auto auto", "auto,
-            // auto", "auto auto, auto auto" and probably a random number of other combinations
-            // between auto, whitespace and the comma.  therefore let's write the dumbest regexp
-            // possible.
-            if (!/^[auto\s,]*$/.test(backgroundSize)) {
-                var size = backgroundSize.split(/\s+/g);
-                // compute width
-                if (/%$/.test(size[0])) {
-                    img_width = orgBox.width * parseFloat(size[0]) / 100;
+                if (!/^\s*auto(\s+auto)?\s*$/.test(backgroundSize)) {
+                    var size = backgroundSize.split(/\s+/g);
+                    // compute width
+                    if (/%$/.test(size[0])) {
+                        img_width = orgBox.width * parseFloat(size[0]) / 100;
+                    } else {
+                        img_width = parseFloat(size[0]);
+                    }
+                    // compute height
+                    if (size.length == 1 || size[1] == "auto") {
+                        img_height = img_width / aspect_ratio;
+                    } else if (/%$/.test(size[1])) {
+                        img_height = orgBox.height * parseFloat(size[1]) / 100;
+                    } else {
+                        img_height = parseFloat(size[1]);
+                    }
+                }
+
+                var pos = (backgroundPosition+"").split(/\s+/);
+                if (pos.length == 1) {
+                    pos[1] = "50%";
+                }
+
+                if (/%$/.test(pos[0])) {
+                    pos[0] = parseFloat(pos[0]) / 100 * (orgBox.width - img_width);
                 } else {
-                    img_width = parseFloat(size[0]);
+                    pos[0] = parseFloat(pos[0]);
                 }
-                // compute height
-                if (size.length == 1 || size[1] == "auto") {
-                    img_height = img_width / aspect_ratio;
-                } else if (/%$/.test(size[1])) {
-                    img_height = orgBox.height * parseFloat(size[1]) / 100;
+                if (/%$/.test(pos[1])) {
+                    pos[1] = parseFloat(pos[1]) / 100 * (orgBox.height - img_height);
                 } else {
-                    img_height = parseFloat(size[1]);
+                    pos[1] = parseFloat(pos[1]);
                 }
-            }
 
-            var pos = backgroundPosition.split(/\s+/g);
-            if (pos.length == 1) {
-                pos[1] = "50%";
-            }
+                var rect = new geo.Rect([ orgBox.left + pos[0], orgBox.top + pos[1] ], [ img_width, img_height ]);
 
-            if (/%$/.test(pos[0])) {
-                pos[0] = parseFloat(pos[0]) / 100 * (orgBox.width - img_width);
-            } else {
-                pos[0] = parseFloat(pos[0]);
-            }
-            if (/%$/.test(pos[1])) {
-                pos[1] = parseFloat(pos[1]) / 100 * (orgBox.height - img_height);
-            } else {
-                pos[1] = parseFloat(pos[1]);
-            }
+                // XXX: background-repeat could be implemented more
+                //      efficiently as a fill pattern (at least for PDF
+                //      output, probably SVG too).
 
-            var rect = new geo.Rect([ orgBox.left + pos[0], orgBox.top + pos[1] ], [ img_width, img_height ]);
-
-            // XXX: background-repeat could be implemented more
-            //      efficiently as a fill pattern (at least for PDF
-            //      output, probably SVG too).
-
-            function rewX() {
-                while (rect.origin.x > box.left) {
-                    rect.origin.x -= img_width;
+                function rewX() {
+                    while (rect.origin.x > box.left) {
+                        rect.origin.x -= img_width;
+                    }
                 }
-            }
 
-            function rewY() {
-                while (rect.origin.y > box.top) {
-                    rect.origin.y -= img_height;
+                function rewY() {
+                    while (rect.origin.y > box.top) {
+                        rect.origin.y -= img_height;
+                    }
                 }
-            }
 
-            function repeatX() {
-                while (rect.origin.x < box.right) {
-                    renderBG(group, rect.clone());
-                    rect.origin.x += img_width;
+                function repeatX() {
+                    while (rect.origin.x < box.right) {
+                        renderBG(group, rect.clone());
+                        rect.origin.x += img_width;
+                    }
                 }
-            }
 
-            if (backgroundRepeat == "no-repeat") {
-                renderBG(group, rect);
-            }
-            else if (backgroundRepeat == "repeat-x") {
-                rewX();
-                repeatX();
-            }
-            else if (backgroundRepeat == "repeat-y") {
-                rewY();
-                while (rect.origin.y < box.bottom) {
-                    renderBG(group, rect.clone());
-                    rect.origin.y += img_height;
+                if (backgroundRepeat == "no-repeat") {
+                    renderBG(group, rect);
                 }
-            }
-            else if (backgroundRepeat == "repeat") {
-                rewX();
-                rewY();
-                var origin = rect.origin.clone();
-                while (rect.origin.y < box.bottom) {
-                    rect.origin.x = origin.x;
+                else if (backgroundRepeat == "repeat-x") {
+                    rewX();
                     repeatX();
-                    rect.origin.y += img_height;
+                }
+                else if (backgroundRepeat == "repeat-y") {
+                    rewY();
+                    while (rect.origin.y < box.bottom) {
+                        renderBG(group, rect.clone());
+                        rect.origin.y += img_height;
+                    }
+                }
+                else if (backgroundRepeat == "repeat") {
+                    rewX();
+                    rewY();
+                    var origin = rect.origin.clone();
+                    while (rect.origin.y < box.bottom) {
+                        rect.origin.x = origin.x;
+                        repeatX();
+                        rect.origin.y += img_height;
+                    }
                 }
             }
         }
@@ -1084,11 +1137,6 @@
 
     function gradientRenderer(gradient) {
         return function(group, rect) {
-            for (var i = gradient.length; --i >= 0;) {
-                draw(gradient[i], group, rect);
-            }
-        };
-        function draw(gradient, group, rect){
             var width = rect.width(), height = rect.height(), tl = rect.topLeft();
 
             switch (gradient.type) {
@@ -1124,7 +1172,7 @@
                 }
 
                 if (gradient.reverse) {
-                    angle += Math.PI;
+                    angle -= Math.PI;
                 }
 
                 // compute gradient's start/end points.  here len is the length of the gradient line
@@ -1165,13 +1213,16 @@
                     return stop;
                 });
 
+                var start = [ tl.x + width/2 - x, tl.y + height/2 + y ];
+                var end = [ tl.x + width/2 + x, tl.y + height/2 - y ];
+
                 // finally, draw it.
                 group.append(
                     drawing.Path.fromRect(rect)
                         .stroke(null)
                         .fill(new drawing.LinearGradient({
-                            start : [ tl.x + width/2 - x, tl.y + height/2 + y ],
-                            end   : [ tl.x + width/2 + x, tl.y + height/2 - y ],
+                            start : start,
+                            end   : end,
                             stops : stops,
                             userSpace: true
                         }))
@@ -1181,7 +1232,7 @@
                 console.error("TODO: Radial gradients");
                 break;
             }
-        }
+        };
     }
 
     function maybeRenderWidget(element, group) {
