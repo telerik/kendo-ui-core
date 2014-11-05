@@ -9,6 +9,15 @@ class Gantt extends \Kendo\UI\Widget {
 //>> Properties
 
     /**
+    * The configuration of the assignments of the gantt resources. An assignment is a one-to-one mapping between a gantt task and a gantt resource containing the number of units for which a resource is assigned to a task.
+    * @param \Kendo\UI\GanttAssignments|array $value
+    * @return \Kendo\UI\Gantt
+    */
+    public function assignments($value) {
+        return $this->setProperty('assignments', $value);
+    }
+
+    /**
     * If set to false the widget will not bind to the data source during initialization. In this case data binding will occur when the change event of the
 data source is fired. By default the widget will bind to the data source specified in the configuration.
     * @param boolean $value
@@ -197,6 +206,16 @@ instance.If the dependencies option is set to a JavaScript object or array the w
     */
     public function addView($value) {
         return $this->add('views', func_get_args());
+    }
+
+    /**
+    * The configuration of the gantt resource(s). A gantt resource is optional metadata that can be associated
+with a gantt task.
+    * @param \Kendo\UI\GanttResources|array $value
+    * @return \Kendo\UI\Gantt
+    */
+    public function resources($value) {
+        return $this->setProperty('resources', $value);
     }
 
     /**

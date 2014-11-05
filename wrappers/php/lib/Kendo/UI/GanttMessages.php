@@ -6,7 +6,7 @@ class GanttMessages extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * The configuration of the gantt view messages. Use this option to customize or localize the gantt view messages.
+    * The configuration of the Gantt view messages. Use this option to customize or localize the Gantt view messages.
     * @param \Kendo\UI\GanttMessagesViews|array $value
     * @return \Kendo\UI\GanttMessages
     */
@@ -15,7 +15,7 @@ class GanttMessages extends \Kendo\SerializableObject {
     }
 
     /**
-    * The configuration of the gantt action messages. Use this option to customize or localize the gantt action messages.
+    * The configuration of the Gantt action messages. Use this option to customize or localize the Gantt action messages.
     * @param \Kendo\UI\GanttMessagesActions|array $value
     * @return \Kendo\UI\GanttMessages
     */
