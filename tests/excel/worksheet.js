@@ -179,7 +179,7 @@ test("toXML adds strings to sharedStrings", function() {
 
     worksheet.toXML();
 
-    equal(sharedStrings.indexes.foo, 0);
+    equal(sharedStrings.indexes["$foo"], 0);
 });
 
 test("toXML increments count of sharedStrings", function() {
@@ -227,7 +227,7 @@ test("toXML creates a new shared string", function() {
 
     equal(sharedStrings.uniqueCount, 2);
     equal(sharedStrings.count, 2);
-    equal(sharedStrings.indexes.bar, 1);
+    equal(sharedStrings.indexes["$bar"], 1);
 });
 
 test("toXML creates a 'v' element for the value", function() {
@@ -243,7 +243,20 @@ test("toXML uses the shared string index as the toXML value", function() {
 
     var dom = $(worksheet.toXML());
 
-    equal(dom.find("c").children("v").text(), sharedStrings.indexes.foo);
+    equal(dom.find("c").children("v").text(), sharedStrings.indexes["$foo"]);
+});
+
+test("keeps the order of strings when numberic values are stored as strings", function() {
+    var worksheet = Worksheet([
+        { cells: [ { value: "foo"}, { value: "0" } ]  }
+    ]);
+
+    worksheet.toXML();
+
+    for (var index in sharedStrings.indexes) {
+        equal(index, "$foo");
+        break;
+    }
 });
 
 test("toXML creates a 'row' element", function() {

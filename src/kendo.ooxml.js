@@ -178,7 +178,7 @@ var SHARED_STRINGS = kendo.template(
 '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\r\n' +
 '<sst xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" count="${count}" uniqueCount="${uniqueCount}">' +
 '# for (var index in indexes) { #' +
-    '<si><t>${index}</t></si>' +
+    '<si><t>${index.substring(1)}</t></si>' +
 '# } #' +
 '</sst>');
 
@@ -324,12 +324,13 @@ var Worksheet = kendo.Class.extend({
         };
     },
     _lookupString: function(value) {
-        var index = this._strings.indexes[value];
+        var key = "$" + value;
+        var index = this._strings.indexes[key];
 
         if (index !== undefined) {
             value = index;
         } else {
-            value = this._strings.indexes[value] = this._strings.uniqueCount;
+            value = this._strings.indexes[key] = this._strings.uniqueCount;
             this._strings.uniqueCount ++;
         }
 
