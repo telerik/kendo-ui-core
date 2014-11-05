@@ -393,22 +393,6 @@
         };
     }
 
-    // not currently used, but could be handy.
-    // function saveProperties(element, props, func) {
-    //     props = props.map(function(name){
-    //         return {
-    //             name: name,
-    //             value: element.style.getPropertyValue(name),
-    //             prio: element.style.getPropertyPriority(name)
-    //         };
-    //     });
-    //     var result = func();
-    //     props.forEach(function(prop){
-    //         element.style.setProperty(prop.name, prop.value, prop.prio);
-    //     });
-    //     return result;
-    // }
-
     function saveStyle(element, func) {
         var prev = element.style.cssText;
         var result = func();
@@ -600,13 +584,6 @@
             });
         }
         return path.close();
-    }
-
-    var LOGGING;
-    function log() {
-        if (LOGGING) {
-            console.log.apply(console, arguments);
-        }
     }
 
     function _renderElement(element, group) {
