@@ -7,31 +7,19 @@
     // Imports ================================================================
     var noop = $.noop,
         doc = document,
-        math = Math,
 
         kendo = window.kendo,
-        Class = kendo.Class,
-        Observable = kendo.Observable,
-        ObservableArray = kendo.data.ObservableArray,
-        ObservableObject = kendo.data.ObservableObject,
-        getter = kendo.getter,
         deepExtend = kendo.deepExtend,
 
         util = kendo.util,
-        alignToPixel = util.alignToPixel,
-        append = util.append,
         defined = util.defined,
         isTransparent = util.isTransparent,
-        round = util.round,
         renderTemplate = util.renderTemplate,
         valueOrDefault = util.valueOrDefault,
 
         g = kendo.geometry,
         d = kendo.drawing,
-        BaseNode = d.BaseNode,
-        Color = kendo.Color,
-        Group = d.Group,
-        Path = d.Path;
+        BaseNode = d.BaseNode;
 
     // Constants ==============================================================
     var BUTT = "butt",
@@ -543,7 +531,7 @@
             var size = bbox.getSize();
             defaults.width = size.width + "px";
             defaults.height = size.height + "px";
-        };
+        }
 
         options = deepExtend(defaults, options);
 
