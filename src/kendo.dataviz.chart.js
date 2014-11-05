@@ -7807,14 +7807,15 @@ var __meta__ = {
             // Is full combination really necessary?
             for (i = 0; i < axes.length; i++) {
                 axis = axes[i];
-                vertical = axis.options.vertical;
-                gridLines = vertical ? vGridLines : hGridLines;
-
-                for (j = 0; j < allAxes.length; j++) {
-                    if (gridLines.length === 0) {
-                        altAxis = allAxes[j];
-                        if (vertical !== altAxis.options.vertical) {
-                            append(gridLines, axis.createGridLines(altAxis));
+                if (axis.options.visible !== false) {
+                    vertical = axis.options.vertical;
+                    gridLines = vertical ? vGridLines : hGridLines;
+                    for (j = 0; j < allAxes.length; j++) {
+                        if (gridLines.length === 0) {
+                            altAxis = allAxes[j];
+                            if (vertical !== altAxis.options.vertical) {
+                                append(gridLines, axis.createGridLines(altAxis));
+                            }
                         }
                     }
                 }

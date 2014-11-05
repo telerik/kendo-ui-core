@@ -785,6 +785,10 @@ var __meta__ = {
         },
 
         renderVisual: function() {
+            if (this.options.visible === false) {
+                return;
+            }
+
             this.createVisual();
 
             if (this.visual) {
