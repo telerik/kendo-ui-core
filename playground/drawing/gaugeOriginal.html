@@ -26,18 +26,19 @@
 </head>
 <body>
  
-  <!-- <div id="gauge" style="width: 270px"></div> -->
-  <div id="gauge2" style="width: 270px"></div>
+<div id="gauge" style="width: 500px; height: 500px;"></div>
+<div id="gauge2" style="width: 500px; height: 500px;"></div>
   <script>
     var elem2 = $("#gauge2");
 
     var gauge2 = elem2.kendoLinearGauge({
             pointer: {
-                value: 60,
+                value: -30,
                 shape: "arrow",
                 color: "green"
             },
             scale: {
+                mirror: true,
                 //reverse: true,
                 line: {
                     color: "blue"
@@ -82,16 +83,16 @@
 
     var gauge = $("#gauge").kendoRadialGauge({
         //transitions: false,
-        gaugeArea: {
-            width: 200,
-            height: 200,
-            background: "blue",
-            border: {
-                color: "yellow",
-                dashType: "solid",
-                width: 25
-            }
-        },
+        // gaugeArea: {
+        //     width: 200,
+        //     height: 200,
+        //     background: "blue",
+        //     border: {
+        //         color: "yellow",
+        //         dashType: "solid",
+        //         width: 25
+        //     }
+        // },
         pointer: {
             cap: {
                 size: 0.05,

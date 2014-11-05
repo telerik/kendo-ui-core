@@ -28,8 +28,8 @@
 </head>
 <body>
 
-<!-- <div id="gauge" style="width: 270px"></div> -->
-<div id="gauge2" style="width: 270px"></div>
+<!-- <div id="gauge" style="width: 500px; height: 500px;"></div> -->
+<div id="gauge2" style="width: 500px; height: 500px;"></div>
   <script>
     var dataviz = kendo.dataviz;
     var geo = dataviz.geometry;
@@ -46,12 +46,13 @@
 var elem = $("#gauge");
 var elem2 = $("#gauge2");
 
-var gauge2 = elem2.kendoLinearGauge2({
+var l = elem2.kendoLinearGauge2({
             pointer: [{
                 value: -10,
                 shape: "arrow",
                 color: "aqua"
-            }, {
+            }
+            , {
                 value: 0,
                 shape: "arrow",
                 color: "olive"
@@ -63,17 +64,22 @@ var gauge2 = elem2.kendoLinearGauge2({
                 value: 40,
                 shape: "arrow",
                 color: "yellow"
-            }, {
-                value: 50,
-                shape: "bar",
-                color: "green"
-            }, {
-                value: 0,
-                shape: "bar",
-                color: "blue"
-            }],
+            }, 
+            // {
+            //     value: 50,
+            //     shape: "bar",
+            //     color: "green"
+            // }, {
+            //     value: 0,
+            //     shape: "bar",
+            //     color: "blue"
+            // }
+            ],
+            transitions: false,
             scale: {
+                //mirror: true,
                 reverse: false,
+                vertical: true,
                 line: {
                     color: "blue"
                 },
@@ -96,7 +102,6 @@ var gauge2 = elem2.kendoLinearGauge2({
                 minorUnit: 2,
                 min: -60,
                 max: 60,
-                vertical: true,
                 ranges: [
                     {
                         from: -40,
@@ -115,17 +120,17 @@ var gauge2 = elem2.kendoLinearGauge2({
             }
         }).data("kendoLinearGauge2");
 
-var gauge = elem.kendoRadialGauge2({
-        gaugeArea: {
-            width: 200,
-            height: 200,
-            background: "blue",
-            border: {
-                color: "yellow",
-                dashType: "solid",
-                width: 25
-            }
-        },
+var r = elem.kendoRadialGauge2({
+        // gaugeArea: {
+        //     width: 200,
+        //     height: 200,
+        //     background: "blue",
+        //     border: {
+        //         color: "yellow",
+        //         dashType: "solid",
+        //         width: 25
+        //     }
+        // },
 
         pointer: [{
             cap: {
@@ -133,7 +138,7 @@ var gauge = elem.kendoRadialGauge2({
                 color: "blue"
             },
             color: "blue",
-            value: 55
+            value: 15
         }, {
             cap: {
                 size: 0.15,
@@ -170,7 +175,7 @@ var gauge = elem.kendoRadialGauge2({
                     color: "green",
                     //dashType: "dot"
                 },
-                position: "inside",
+                position: "outside",
                 //template: "asdf"
                 margin: 10,
                 format: "C",

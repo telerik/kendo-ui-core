@@ -46,7 +46,7 @@ var __meta__ = {
 
     // Constants ==============================================================
     var ANGULAR_SPEED = 150,
-        LINEAR_SPEED = 1000,
+        LINEAR_SPEED = 200, //1000,
         ARROW = "arrow",
         ARROW_POINTER = "arrowPointer",
         BAR_POINTER = "barPointer",
@@ -132,7 +132,7 @@ var __meta__ = {
             },
             animation: {
                 type: RADIAL_POINTER,
-                speed: ANGULAR_SPEED
+                duration: ANGULAR_SPEED
             }
         },
 
@@ -1085,7 +1085,8 @@ var __meta__ = {
 
             pointers = $.isArray(pointers) ? pointers : [pointers];
             for (var i = 0; i < pointers.length; i++) {
-                current = new LinearPointer(scale, 
+                //TODO CHANGE
+                current = new ArrowLinearPointer(scale, 
                     deepExtend({}, pointers[i], {
                         animation: {
                             transitions: options.transitions
@@ -1398,7 +1399,7 @@ var __meta__ = {
             Pointer.fn.init.call(pointer, scale, options);
 
             pointer.options = deepExtend({
-                size: pointer.pointerSize(),
+                //size: pointer.pointerSize(),
                 track: {
                     visible: defined(options.track)
                 }
@@ -1486,41 +1487,41 @@ var __meta__ = {
             pointer.box = pointerBox || trackBox.clone().pad(options.border.width);
         },
 
-        repaint: function() {
-            var that = this;
-            var scale = that.scale;
-            var options = that.options;
-            var animation;
+        // repaint: function() {
+        //     var that = this;
+        //     var scale = that.scale;
+        //     var options = that.options;
+        //     var animation;
 
-            if (options.animation.transitions === false) {
+        //     if (options.animation.transitions === false) {
 
-            } else {
-                options.animation = {};
+        //     } else {
+        //         if (options.shape === ARROW) {
+        //             animation = new ArrowLinearPointerAnimation(that.elements, deepExtend(options.animation, {
+        //                 vertical: scale.options.vertical,
+        //                 mirror: scale.options.mirror,
+        //                 from: scale.getSlot(options._oldValue),
+        //                 to: scale.getSlot(options.value),
+        //             }));
+        //             debugger;
+        //         } else {
+        //             animation = new BarLinearPointerAnimation(that.elements, deepExtend(options.animation, {
+        //                 reverse:  scale.options.reverse,
+        //                 vertical: scale.options.vertical,
+        //             }));
+        //         }
 
-                if (options.shape === ARROW) {
-                    animation = new ArrowLinearPointerAnimation(that.elements, deepExtend(options.animation, {
-                        reverse:  scale.options.reverse,
-                        vertical: scale.options.vertical,
-                        slot: scale.getSlot(scale.options.min, options.value)
-                    }));
-                } else {
-                    animation = new BarLinearPointerAnimation(that.elements, deepExtend(options.animation, {
-                        reverse:  scale.options.reverse,
-                        vertical: scale.options.vertical
-                    }));
-                }
+        //         animation.setup();
+        //         animation.play();
+        //     }
+        // },
 
-                animation.setup();
-                animation.play();
-            }
-        },
-
-        render: function() {
-            var that = this;
-            var options = that.options;
+        getElementOptions: function() {
+            var options = this.options;
             var elements = new Group();
-            var scale = that.scale;
-            var elementOptions = {
+            var scale = this.scale;
+            
+            return {
                 fill: {
                     color: options.color,
                     opacity: options.opacity
@@ -1529,93 +1530,256 @@ var __meta__ = {
                     color: options.border.width ? options.border.color || options.color : "",
                     width: options.border.width,
                     dashType: options.border.dashType
-                } : {},
-                animation: deepExtend(options.animation, {
-                    startPosition: scale.getSlot(scale.options.min, options.value),
-                    size: options.size,
-                    vertical: scale.options.vertical,
-                    reverse: scale.options.reverse
-                }),
-                id: options.id,
-                zIndex: 2,
-                align: false
+                } : {}
             };
+        },
 
-            var shape = that.pointerShape(options.value);
+        // render: function() {
+        //     var that = this;
+        //     var options = that.options;
+        //     var elements = new Group();
+        //     var scale = that.scale;
+        //     var elementOptions = {
+        //         fill: {
+        //             color: options.color,
+        //             opacity: options.opacity
+        //         },
+        //         stroke: defined(options.border) ? {
+        //             color: options.border.width ? options.border.color || options.color : "",
+        //             width: options.border.width,
+        //             dashType: options.border.dashType
+        //         } : {}
+        //     };
 
-            if (options.shape === ARROW) {
-                elementOptions.animation.type = ARROW_POINTER;
-                elements = new Path({
-                    stroke: elementOptions.stroke,
-                    fill: elementOptions.fill
-                }).moveTo(shape[0]).lineTo(shape[1]).lineTo(shape[2]).close();
-            } else {
-                elements = Path.fromRect(shape, {
-                    stroke: elementOptions.stroke,
-                    fill: elementOptions.fill
-                });
-            }
+        //     var shape = that.pointerShape(options.value);
 
-            that.elements = elements;
+        //     if (options.shape === ARROW) {
+        //         options.animation.type = ARROW_POINTER;
+        //         elements = new Path({
+        //             stroke: elementOptions.stroke,
+        //             fill: elementOptions.fill
+        //         }).moveTo(shape[0]).lineTo(shape[1]).lineTo(shape[2]).close();
+        //     } else {
+        //         elements = Path.fromRect(shape, {
+        //             stroke: elementOptions.stroke,
+        //             fill: elementOptions.fill
+        //         });
+        //     }
 
-            return elements;
+        //     var slot = scale.getSlot(options.value);
+        //     elements.transform(geo.transform().translate(slot.x1, slot.y1));
+
+        //     that.elements = elements;
+
+        //     return elements;
+        // },
+
+        // pointerShape: function(value) {
+        //     var that = this;
+        //     var options = that.options;
+        //     var scale = that.scale;
+        //     var slot = new Box2D();
+        //     var pointerRangeBox = new Box2D();
+        //     var size = options.size;
+        //     var vertical = scale.options.vertical;
+        //     var halfSize = size / 2;
+        //     var sign = (scale.options.mirror ? -1 : 1);
+        //     var reverse = scale.options.reverse;
+        //     var pos, shape, trackBox;
+
+        //     if (options.shape == ARROW) {
+        //         if (vertical) {
+        //             pos = reverse ? "y2" : "y1";
+        //             shape = [
+        //                 new Point(pointerRangeBox.x1, slot[pos] - halfSize),
+        //                 new Point(pointerRangeBox.x1 - sign * size, slot[pos]),
+        //                 new Point(pointerRangeBox.x1, slot[pos] + halfSize)
+        //             ];
+        //         } else {
+        //             pos = reverse ? "x1" : "x2";
+        //             shape = [
+        //                 new Point(slot[pos] - halfSize, pointerRangeBox.y2),
+        //                 new Point(slot[pos], pointerRangeBox.y2 + sign * size),
+        //                 new Point(slot[pos] + halfSize, pointerRangeBox.y2)
+        //             ];
+        //         }
+        //     } else {
+        //         trackBox = that.trackBox;
+        //         if (vertical) {
+        //             shape = new Rect([trackBox.x1, slot.y1], [size, slot.y2 - slot.y1]);
+        //         } else {
+        //             shape = new Rect([slot.x1, trackBox.y1], [slot.x2 - slot.x1, size]);
+        //         }
+        //     }
+
+        //     return shape;
+        // },
+
+        // pointerSize: function() {
+        //     var pointer = this,
+        //         options = pointer.options,
+        //         scale = pointer.scale,
+        //         tickSize = scale.options.majorTicks.size,
+        //         size;
+
+        //     if (options.shape === ARROW) {
+        //         size = tickSize * 0.6;
+        //     } else {
+        //         size = tickSize * 0.3;
+        //     }
+
+        //     return round(size);
+        // }
+    });
+
+    var ArrowLinearPointer = LinearPointer.extend({
+        init: function(scale, options) {
+            LinearPointer.fn.init.call(this, scale, options);
+
+            this.options.size = this.scale.options.majorTicks.size * 0.6;
         },
 
         pointerShape: function(value) {
             var that = this;
             var options = that.options;
             var scale = that.scale;
-            var slot = scale.getSlot(value, scale.options.min);
+            var slot = new Box2D();
+            var pointerRangeBox = new Box2D();
             var size = options.size;
-            var pointerRangeBox = that.pointerRangeBox;
             var vertical = scale.options.vertical;
             var halfSize = size / 2;
             var sign = (scale.options.mirror ? -1 : 1);
             var reverse = scale.options.reverse;
-            var pos, shape, trackBox;
+            var pos, shape;
 
-            if (options.shape == ARROW) {
-                if (vertical) {
-                    pos = reverse ? "y2" : "y1";
-                    shape = [
-                        new Point(pointerRangeBox.x1, slot[pos] - halfSize),
-                        new Point(pointerRangeBox.x1 - sign * size, slot[pos]),
-                        new Point(pointerRangeBox.x1, slot[pos] + halfSize)
-                    ];
-                } else {
-                    pos = reverse ? "x1" : "x2";
-                    shape = [
-                        new Point(slot[pos] - halfSize, pointerRangeBox.y2),
-                        new Point(slot[pos], pointerRangeBox.y2 + sign * size),
-                        new Point(slot[pos] + halfSize, pointerRangeBox.y2)
-                    ];
-                }
+            if (vertical) {
+                pos = reverse ? "y2" : "y1";
+                shape = [
+                    new Point(pointerRangeBox.x1, slot[pos] - halfSize),
+                    new Point(pointerRangeBox.x1 - sign * size, slot[pos]),
+                    new Point(pointerRangeBox.x1, slot[pos] + halfSize)
+                ];
             } else {
-                trackBox = that.trackBox;
-                if (vertical) {
-                    shape = new Rect([trackBox.x1, slot.y1], [size, slot.y2 - slot.y1]);
-                } else {
-                    shape = new Rect([slot.x1, trackBox.y1], [slot.x2 - slot.x1, size]);
-                }
+                pos = reverse ? "x1" : "x2";
+                shape = [
+                    new Point(slot[pos] - halfSize, pointerRangeBox.y2),
+                    new Point(slot[pos], pointerRangeBox.y2 + sign * size),
+                    new Point(slot[pos] + halfSize, pointerRangeBox.y2)
+                ];
             }
 
             return shape;
         },
 
-        pointerSize: function() {
-            var pointer = this,
-                options = pointer.options,
-                scale = pointer.scale,
-                tickSize = scale.options.majorTicks.size,
-                size;
+        repaint: function() {
+            var that = this;
+            var scale = that.scale;
+            var options = that.options;
+            var animation = new ArrowLinearPointerAnimation(that.elements, deepExtend(options.animation, {
+                vertical: scale.options.vertical,
+                mirror: scale.options.mirror,
+                from: scale.getSlot(options._oldValue),
+                to: scale.getSlot(options.value),
+            }));
 
-            if (options.shape === ARROW) {
-                size = tickSize * 0.6;
-            } else {
-                size = tickSize * 0.3;
+            if (options.animation.transitions === false) {
+                animation.options.duration = 0;
             }
 
-            return round(size);
+            animation.setup();
+            animation.play();
+        },
+
+        render: function() {
+            var that = this;
+            var options = that.options;
+            var elements = new Group();
+            var scale = that.scale;
+            var elementOptions = that.getElementOptions();
+            var shape = that.pointerShape(options.value);
+
+            options.animation.type = ARROW_POINTER;
+
+            elements = new Path({
+                stroke: elementOptions.stroke,
+                fill: elementOptions.fill
+            }).moveTo(shape[0]).lineTo(shape[1]).lineTo(shape[2]).close();
+
+            var slot = scale.getSlot(options.value);
+            elements.transform(geo.transform().translate(slot.x1, slot.y1));
+
+            that.elements = elements;
+
+            return elements;
+        }
+    });
+
+    var BarLinearPointer = LinearPointer.extend({
+        init: function(scale, options) {
+            LinearPointer.fn.init.call(this, scale, options);
+
+            this.options.size = this.scale.options.majorTicks.size * 0.3;
+        },
+
+        pointerShape: function(value) {
+            var that = this;
+            var options = that.options;
+            var scale = that.scale;
+            var slot = new Box2D();
+            var pointerRangeBox = new Box2D();
+            var size = options.size;
+            var vertical = scale.options.vertical;
+            var halfSize = size / 2;
+            var sign = (scale.options.mirror ? -1 : 1);
+            var reverse = scale.options.reverse;
+            var trackBox = that.trackBox;
+            var pos, shape;
+
+            if (vertical) {
+                shape = new Rect([trackBox.x1, slot.y1], [size, slot.y2 - slot.y1]);
+            } else {
+                shape = new Rect([slot.x1, trackBox.y1], [slot.x2 - slot.x1, size]);
+            }
+
+            return shape;
+        },
+
+        repaint: function() {
+            var that = this;
+            var scale = that.scale;
+            var options = that.options;
+            var animation = new BarLinearPointerAnimation(that.elements, deepExtend(options.animation, {
+                    reverse:  scale.options.reverse,
+                    vertical: scale.options.vertical,
+                }));
+
+            if (options.animation.transitions === false) {
+                animation.options.duration = 0;
+            }
+
+            animation.setup();
+            animation.play();
+        },
+
+        render: function() {
+            var that = this;
+            var options = that.options;
+            var elements = new Group();
+            var scale = that.scale;
+            var elementOptions = that.getElementOptions();
+            var shape = that.pointerShape(options.value);
+
+            elements = Path.fromRect(shape, {
+                stroke: elementOptions.stroke,
+                fill: elementOptions.fill
+            });
+
+            var slot = scale.getSlot(options.value);
+            elements.transform(geo.transform().translate(slot.x1, slot.y1));
+
+            that.elements = elements;
+
+            return elements;
         }
     });
 
@@ -1625,12 +1789,12 @@ var __meta__ = {
 
             options = this.options;
 
-            options.duration = math.max((math.abs(options.newAngle - options.oldAngle) / options.speed) * 1000, 1);
+            options.duration = math.max((math.abs(options.newAngle - options.oldAngle) / options.duration) * 1000, 1);
         },
 
         options: {
             easing: LINEAR,
-            speed: ANGULAR_SPEED
+            duration: ANGULAR_SPEED
         },
 
         step: function(pos) {
@@ -1645,38 +1809,48 @@ var __meta__ = {
 
     var ArrowLinearPointerAnimation = draw.Animation.extend({
         options: {
-            easing: SWING,
+            easing: LINEAR,
             duration: LINEAR_SPEED
         },
 
         setup: function() {
-            var that = this;
-            var element = that.element;
-            var options = that.options;
-            var axis = options.vertical ? Y : X;
-            var startPos = axis + (options.reverse ? "1" : "2");
-            var endPos = axis + (options.reverse ? "2" : "1");
-            var startPosition = options.slot[options.vertical ? startPos : endPos];
-            var endPosition = options.slot[options.vertical ? endPos : startPos];
+            var options = this.options;
+            var halfSize = this.element.bbox().width() / 2;
+            var from = options.from;
+            var to = options.to;
+            var axis = options.vertical ? "x1" : "y1";
 
-            var fromScale = that.fromScale = new Point();
-            fromScale[axis] = startPosition - endPosition;
+            if (options.mirror == options.vertical) {
+                from[axis] -= halfSize; to[axis] -= halfSize;
+            } else {
+                from[axis] += halfSize; to[axis] += halfSize;
+            }
 
-            element.transform(geo.transform().translate(fromScale.x, fromScale.y));
+            var fromScale = this.fromScale = new Point(from.x1, from.y1);
+            var toScale = this.toScale = new Point(to.x1, to.y1);
+
+            if (options.duration !== 0) {
+                options.duration = math.max((fromScale.distanceTo(toScale) / options.duration) * 1000, 1);
+            }
         },
 
         step: function(pos) {
-            var translateX = interpolateValue(this.fromScale.x, 0, pos);
-            var translateY = interpolateValue(this.fromScale.y, 0, pos);
+            //TODO Fix animation.js
+            if (!pos) {
+                pos = 1;
+            }
 
-            this.element.transform(geo.transform().translate(translateX, translateY));
+            var translateX = interpolateValue(this.fromScale.x, this.toScale.x, pos);
+            var translateY = interpolateValue(this.fromScale.y, this.toScale.y, pos);
+
+            this.element.transform(geo.transform().translate(translateX, translateY));            
         }
     });
     draw.AnimationFactory.current.register(ARROW_POINTER, ArrowLinearPointerAnimation);
 
     var BarLinearPointerAnimation = draw.Animation.extend({
         options: {
-            easing: SWING,
+            easing: LINEAR,
             duration: LINEAR_SPEED
         },
 
@@ -1691,17 +1865,19 @@ var __meta__ = {
             var fromScale = this.fromScale = new Point(1, 1);
             fromScale[axis] = 0;
 
+            //options.duration = math.max((math.abs(anim.start - anim.end) / options.speed) * 1000, 1);
+
             element.transform(geo.transform().scale(fromScale.x, fromScale.y));
         },
 
         step: function(pos) {
             var scaleX = interpolateValue(this.fromScale.x, 1, pos);
             var scaleY = interpolateValue(this.fromScale.y, 1, pos);
-            var translateX = interpolateValue(this.fromOffset.x, 0, pos);
-            var translateY = interpolateValue(this.fromOffset.y, 0, pos);
+            // var translateX = interpolateValue(this.fromOffset.x, 0, pos);
+            // var translateY = interpolateValue(this.fromOffset.y, 0, pos);
 
             this.element.transform(geo.transform()
-                .translate(translateX, translateY)
+                //.translate(translateX, translateY)
                 .scale(scaleX, scaleY, this.origin)
             );
         }
