@@ -1,15 +1,13 @@
 (function() {
-    return;
-
     var dataviz = kendo.dataviz,
         Box2D = dataviz.Box2D,
         TOLERANCE = 1;
 
     var crosshair,
-        element,
+        line,
         tooltip,
         chartBox = Box2D(0,0,200,200),
-        plotArea, view;
+        plotArea;
 
     function PlotAreaStub() { }
 
@@ -36,17 +34,17 @@
 
         axis.pane = { axes: [categoryAxis] };
         axis.getRoot = function() {
-            return { parent: { element: $(document.body) } };
+            return { chart: { element: $(document.body) } };
         };
 
         return axis;
     }
 
     function createCrosshair(options, axisOptions) {
-        view = new ViewStub();
         crosshair = new dataviz.Crosshair(createAxis(), options);
-        crosshair.getViewElements(view);
-        element = crosshair.element;
+        crosshair.renderVisual();
+
+        line = crosshair.line;
     }
 
     function createTooltip(options) {
@@ -76,22 +74,22 @@
 
     test("sets width", function() {
         createCrosshair({ width: 2 });
-        equal(element.options.strokeWidth, 2);
+        equal(line.options.stroke.width, 2);
     });
 
     test("sets opacity", function() {
         createCrosshair({ opacity: 0.5 });
-        equal(element.options.strokeOpacity, 0.5);
+        equal(line.options.stroke.opacity, 0.5);
     });
 
     test("sets color", function() {
         createCrosshair({ color: "color" });
-        equal(element.options.stroke, "color");
+        equal(line.options.stroke.color, "color");
     });
 
     test("sets dashType", function() {
         createCrosshair({ dashType: "dashType" });
-        equal(element.options.dashType, "dashType");
+        equal(line.options.stroke.dashType, "dashType");
     });
 
     // ------------------------------------------------------------
@@ -103,9 +101,11 @@
 
     test("returns vertical points", function() {
         createCrosshair();
-        points = crosshair.linePoints();
-        deepEqual([points[0].x, points[0].y], [0,7.5]);
-        deepEqual([points[1].x, points[1].y], [199,7.5]);
+        var segments = line.segments;
+        var start = segments[0].anchor();
+        var end = segments[1].anchor();
+        deepEqual([start.x, start.y], [0,7.5]);
+        deepEqual([end.x, end.y], [199,7.5]);
     });
 
     module("Crosshair / destroy", {
@@ -136,8 +136,8 @@
     });
 
     test("attaches to body on show", function() {
-        showTooltip();
 
+        showTooltip();
         equal(tooltip.element.parent("body").length, 1);
     });
 
