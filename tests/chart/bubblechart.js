@@ -163,10 +163,6 @@
             equal(firstPoint.createHighlight().nodeType, "Circle");
         });
 
-        test("renders top-level group", function() {
-            equal(bubbleChart.visual.nodeType, "Group");
-        });
-
         // ------------------------------------------------------------
         module("Bubble Chart / Points / Highlight", {
             setup: function() {
