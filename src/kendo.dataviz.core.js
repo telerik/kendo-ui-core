@@ -2009,7 +2009,7 @@ var __meta__ = {
                     alignPathToPixel(path);
                 }
 
-                var group = new draw.Group();
+                var group = this._lineGroup = new draw.Group();
                 group.append(path);
 
                 this.visual.append(group);
@@ -2040,14 +2040,14 @@ var __meta__ = {
                 box = axis.box;
 
             if (background) {
-                var path = draw.Path.fromRect(box.toRect(), {
+                axis._backgroundPath = draw.Path.fromRect(box.toRect(), {
                     fill: {
                         color: background
                     },
                     stroke: null
                 });
 
-                this.visual.append(path);
+                this.visual.append(axis._backgroundPath);
             }
         },
 
@@ -2063,7 +2063,7 @@ var __meta__ = {
                 return;
             }
 
-            var group = new draw.Group({
+            var group = this._plotbandGroup = new draw.Group({
                 zIndex: -1
             });
 
