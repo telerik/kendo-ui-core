@@ -372,12 +372,12 @@ var __meta__ = {
         return optional ? match : '([^\/]+)';
     }
 
-    function routeToRegExp(route) {
+    function routeToRegExp(route, ignoreCase) {
         return new RegExp('^' + route
             .replace(escapeRegExp, '\\$&')
             .replace(optionalParam, '(?:$1)?')
             .replace(namedParam, namedParamReplace)
-            .replace(splatParam, '(.*?)') + '$');
+            .replace(splatParam, '(.*?)') + '$', ignoreCase ? "i" : "");
     }
 
     function stripUrl(url) {
@@ -385,9 +385,9 @@ var __meta__ = {
     }
 
     var Route = kendo.Class.extend({
-        init: function(route, callback) {
+        init: function(route, callback, ignoreCase) {
             if (!(route instanceof RegExp)) {
-                route = routeToRegExp(route);
+                route = routeToRegExp(route, ignoreCase);
             }
 
             this.route = route;
@@ -437,6 +437,7 @@ var __meta__ = {
             this.pushState = options.pushState;
             this.hashBang = options.hashBang;
             this.root = options.root;
+            this.ignoreCase = options.ignoreCase !== false;
 
             this.bind([INIT, ROUTE_MISSING, CHANGE, SAME], options);
         },
@@ -474,7 +475,7 @@ var __meta__ = {
         },
 
         route: function(route, callback) {
-            this.routes.push(new Route(route, callback));
+            this.routes.push(new Route(route, callback, this.ignoreCase));
         },
 
         navigate: function(url, silent) {
