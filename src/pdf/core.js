@@ -144,11 +144,18 @@
                     // notation, then parseFloat to remove trailing zeros.
                     output.writeString(parseFloat(x.toFixed(7))+"");
                 }
-                else if (typeof x == "string") {
-                    output.writeString(x);
+                else if (/string|boolean/.test(typeof x)) {
+                    output.writeString(x+"");
                 }
                 else if (typeof x.get == "function") {
                     output.write(x.get());
+                }
+                else if (typeof x == "object") {
+                    if (!x) {
+                        output.writeString("null");
+                    } else {
+                        out(new PDFDictionary(x));
+                    }
                 }
             }
         }
@@ -536,7 +543,7 @@
             var gs = cache[id];
             if (!gs) {
                 var props = {
-                    Type: PDFName.get("ExtGState")
+                    Type: _("ExtGState")
                 };
                 if (forStroke) {
                     props.CA = opacity;
@@ -544,10 +551,22 @@
                     props.ca = opacity;
                 }
                 gs = this.attach(new PDFDictionary(props));
-                gs._resourceName = PDFName.get("GS" + (++RESOURCE_COUNTER));
+                gs._resourceName = _("GS" + (++RESOURCE_COUNTER));
                 cache[id] = gs;
             }
             return gs;
+        },
+
+        dict: function(props) {
+            return new PDFDictionary(props);
+        },
+
+        name: function(str) {
+            return _(str);
+        },
+
+        stream: function(props, content) {
+            return new PDFStream(content, props);
         }
     };
 
@@ -709,13 +728,15 @@
         }
     });
 
-    PDFName.cache = {};
-    PDFName.get = function(name) {
-        if (hasOwnProperty(PDFName.cache, name)) {
-            return PDFName.cache[name];
+    var PDFName_cache = {};
+    PDFName.get = _;
+
+    function _(name) {
+        if (hasOwnProperty(PDFName_cache, name)) {
+            return PDFName_cache[name];
         }
-        return (PDFName.cache[name] = new PDFName(name));
-    };
+        return (PDFName_cache[name] = new PDFName(name));
+    }
 
     /// dictionary
 
@@ -729,7 +750,7 @@
                 for (var i in props) {
                     if (hasOwnProperty(props, i) && !/^_/.test(i)) {
                         empty = false;
-                        out.indent(PDFName.get(i), " ", props[i]);
+                        out.indent(_(i), " ", props[i]);
                     }
                 }
             });
@@ -743,6 +764,11 @@
     /// streams
 
     var PDFStream = defclass(function PDFStream(data, props, compress) {
+        if (typeof data == "string") {
+            var tmp = BinaryStream();
+            tmp.write(data);
+            data = tmp;
+        }
         this.data = data;
         this.props = props || {};
         this.compress = compress;
@@ -755,7 +781,7 @@
                 } else if (!(props.Filter instanceof Array)) {
                     props.Filter = [ props.Filter ];
                 }
-                props.Filter.unshift(PDFName.get("FlateDecode"));
+                props.Filter.unshift(_("FlateDecode"));
                 data = global.pako.deflate(data);
             }
             props.Length = data.length;
@@ -769,7 +795,7 @@
 
     var PDFCatalog = defclass(function PDFCatalog(props){
         props = this.props = props || {};
-        props.Type = PDFName.get("Catalog");
+        props.Type = _("Catalog");
     }, {
         setPages: function(pagesObj) {
             this.props.Pages = pagesObj;
@@ -780,7 +806,7 @@
 
     var PDFPageTree = defclass(function PDFPageTree(mediabox){
         this.props = {
-            Type  : PDFName.get("Pages"),
+            Type  : _("Pages"),
             Kids  : [],
             Count : 0,
 
@@ -800,15 +826,15 @@
     function PDFJpegImage(width, height, data) {
         this.asStream = function() {
             var stream = new PDFStream(data, {
-                Type             : PDFName.get("XObject"),
-                Subtype          : PDFName.get("Image"),
+                Type             : _("XObject"),
+                Subtype          : _("Image"),
                 Width            : width,
                 Height           : height,
                 BitsPerComponent : 8,
-                ColorSpace       : PDFName.get("DeviceRGB"),
-                Filter           : PDFName.get("DCTDecode")
+                ColorSpace       : _("DeviceRGB"),
+                Filter           : _("DCTDecode")
             });
-            stream._resourceName = PDFName.get("I" + (++RESOURCE_COUNTER));
+            stream._resourceName = _("I" + (++RESOURCE_COUNTER));
             return stream;
         };
     }
@@ -818,23 +844,23 @@
     function PDFRawImage(width, height, rgb, alpha) {
         this.asStream = function(pdf) {
             var mask = new PDFStream(alpha, {
-                Type             : PDFName.get("XObject"),
-                Subtype          : PDFName.get("Image"),
+                Type             : _("XObject"),
+                Subtype          : _("Image"),
                 Width            : width,
                 Height           : height,
                 BitsPerComponent : 8,
-                ColorSpace       : PDFName.get("DeviceGray")
+                ColorSpace       : _("DeviceGray")
             }, true);
             var stream = new PDFStream(rgb, {
-                Type             : PDFName.get("XObject"),
-                Subtype          : PDFName.get("Image"),
+                Type             : _("XObject"),
+                Subtype          : _("Image"),
                 Width            : width,
                 Height           : height,
                 BitsPerComponent : 8,
-                ColorSpace       : PDFName.get("DeviceRGB"),
+                ColorSpace       : _("DeviceRGB"),
                 SMask            : pdf.attach(mask)
             }, true);
-            stream._resourceName = PDFName.get("I" + (++RESOURCE_COUNTER));
+            stream._resourceName = _("I" + (++RESOURCE_COUNTER));
             return stream;
         };
     }
@@ -843,11 +869,11 @@
 
     var PDFStandardFont = defclass(function PDFStandardFont(name){
         this.props = {
-            Type     : PDFName.get("Font"),
-            Subtype  : PDFName.get("Type1"),
-            BaseFont : PDFName.get(name)
+            Type     : _("Font"),
+            Subtype  : _("Type1"),
+            BaseFont : _(name)
         };
-        this._resourceName = PDFName.get("F" + (++RESOURCE_COUNTER));
+        this._resourceName = _("F" + (++RESOURCE_COUNTER));
     }, {
         encodeText: function(str) {
             return new PDFString(str+"");
@@ -858,14 +884,14 @@
 
     var PDFFont = defclass(function PDFFont(pdf, font, props){
         props = this.props = props || {};
-        props.Type = PDFName.get("Font");
-        props.Subtype = PDFName.get("Type0");
-        props.Encoding = PDFName.get("Identity-H");
+        props.Type = _("Font");
+        props.Subtype = _("Type0");
+        props.Encoding = _("Identity-H");
 
         this._pdf = pdf;
         this._font = font;
         this._sub = font.makeSubset();
-        this._resourceName = PDFName.get("F" + (++RESOURCE_COUNTER));
+        this._resourceName = _("F" + (++RESOURCE_COUNTER));
 
         var head = font.head;
 
@@ -911,8 +937,8 @@
             }, true);
 
             var descriptor = self._pdf.attach(new PDFDictionary({
-                Type         : PDFName.get("FontDescriptor"),
-                FontName     : PDFName.get(self._sub.psName),
+                Type         : _("FontDescriptor"),
+                FontName     : _(self._sub.psName),
                 FontBBox     : self.bbox,
                 Flags        : self.flags,
                 StemV        : self.stemV,
@@ -950,9 +976,9 @@
             // about anymore.
 
             var descendant = new PDFDictionary({
-                Type: PDFName.get("Font"),
-                Subtype: PDFName.get("CIDFontType2"),
-                BaseFont: PDFName.get(self._sub.psName),
+                Type: _("Font"),
+                Subtype: _("CIDFontType2"),
+                BaseFont: _(self._sub.psName),
                 CIDSystemInfo: new PDFDictionary({
                     Registry   : new PDFString("Adobe"),
                     Ordering   : new PDFString("Identity"),
@@ -967,7 +993,7 @@
             });
 
             var dict = self.props;
-            dict.BaseFont = PDFName.get(self._sub.psName);
+            dict.BaseFont = _(self._sub.psName);
             dict.DescendantFonts = [ self._pdf.attach(descendant) ];
 
             // Compute the ToUnicode map so that apps can extract
@@ -1020,6 +1046,129 @@
         }
     });
 
+    /// gradients
+
+    function makeGradientFunctions(stops) {
+        var hasAlpha = false;
+        var opacities = [];
+        var colors = [];
+        var offsets = [];
+        var encode = [];
+        for (var i = 1; i < stops.length; ++i) {
+            var prev = stops[i - 1];
+            var cur = stops[i];
+            var prevColor = prev.color;
+            var curColor = cur.color;
+            colors.push({
+                FunctionType: 2,
+                Domain: [ 0, 1 ],
+                Range: [ 0, 1, 0, 1, 0, 1 ],
+                N: 1,
+                C0: [ prevColor.r , prevColor.g , prevColor.b ],
+                C1: [  curColor.r ,  curColor.g ,  curColor.b ]
+            });
+            opacities.push({
+                FunctionType: 2,
+                Domain: [ 0, 1 ],
+                Range: [ 0, 1 ],
+                N: 1,
+                C0: [ prevColor.a ],
+                C1: [  curColor.a ]
+            });
+            if (prevColor.a < 1 || curColor.a < 1) {
+                hasAlpha = true;
+            }
+            offsets.push(cur.offset);
+            encode.push(0, 1);
+        }
+        offsets.pop();
+        return {
+            hasAlpha  : hasAlpha,
+            colors    : assemble(colors),
+            opacities : hasAlpha ? assemble(opacities) : null
+        };
+        function assemble(funcs) {
+            if (funcs.length == 1) {
+                return funcs[0];
+            }
+            return {
+                FunctionType: 3,
+                Functions: funcs,
+                Domain: [ 0, 1 ],
+                Bounds: offsets,
+                Encode: encode
+            };
+        }
+    }
+
+    function makeGradient(gradient, box, matrix) {
+        var isRadial = gradient.type == "radial";
+        var funcs = makeGradientFunctions(gradient.stops);
+        var bbox = [ box.left, box.bottom, box.right, box.top ];
+        var coords = isRadial ? [
+            gradient.start.x , gradient.start.y , gradient.start.r,
+            gradient.end.x   , gradient.end.y   , gradient.end.r
+        ] : [
+            gradient.start.x , gradient.start.y,
+            gradient.end.x   , gradient.end.y
+        ];
+        var pattern = {
+            Type: _("Pattern"),
+            PatternType: 2,
+            Shading: {
+                ShadingType: isRadial ? 3 : 2,
+                ColorSpace: _("DeviceRGB"),
+                BBox: bbox,
+                Coords: coords,
+                Domain: [ 0, 1 ],
+                Function: funcs.colors
+                //Extend: [ true, true ]
+            }
+        };
+        var opacity = funcs.hasAlpha ? {
+            Type: _("ExtGState"),
+            AIS: false,
+            CA: 1,
+            ca: 1,
+            SMask: {
+                Type: _("Mask"),
+                S: _("Luminosity"),
+                G: new PDFStream("/a0 gs /s0 sh", {
+                    Type: _("XObject"),
+                    Subtype: _("Form"),
+                    FormType: 1,
+                    BBox: bbox,
+                    Group: {
+                        Type: _("Group"),
+                        S: _("Transparency"),
+                        CS: _("DeviceGray"),
+                        I: true
+                    },
+                    Resources: {
+                        ExtGState: {
+                            a0: { CA: 1, ca: 1 }
+                        },
+                        Shading: {
+                            s0: {
+                                ColorSpace: _("DeviceGray"),
+                                Coords: coords,
+                                Domain: [ 0, 1 ],
+                                ShadingType: isRadial ? 3 : 2,
+                                Function: funcs.opacities
+                                //Extend: [ true, true ]
+                            }
+                        }
+                    }
+                })
+            }
+        } : null;
+        return {
+            hasAlpha: funcs.hasAlpha,
+            pattern: new PDFDictionary(pattern),
+            opacity: new PDFDictionary(opacity)
+        };
+    }
+
     /// page object
 
     var PDFPage = defclass(function PDFPage(pdf, props){
@@ -1029,6 +1178,7 @@
         this._fontResources = {};
         this._gsResources = {};
         this._xResources = {};
+        this._patResources = {};
         this._opacity = 1;
 
         this._font = null;
@@ -1037,18 +1187,19 @@
         this._contextStack = [];
 
         props = this.props = props || {};
-        props.Type = PDFName.get("Page");
+        props.Type = _("Page");
         props.ProcSet = [
-            PDFName.get("PDF"),
-            PDFName.get("Text"),
-            PDFName.get("ImageB"),
-            PDFName.get("ImageC"),
-            PDFName.get("ImageI")
+            _("PDF"),
+            _("Text"),
+            _("ImageB"),
+            _("ImageC"),
+            _("ImageI")
         ];
         props.Resources = new PDFDictionary({
             Font      : new PDFDictionary(this._fontResources),
             ExtGState : new PDFDictionary(this._gsResources),
-            XObject   : new PDFDictionary(this._xResources)
+            XObject   : new PDFDictionary(this._xResources),
+            Pattern   : new PDFDictionary(this._patResources)
         });
     }, {
         _out: function() {
@@ -1140,6 +1291,18 @@
                 this._gsResources[gs._resourceName] = gs;
                 this._out(gs._resourceName, " gs", NL);
             }
+        },
+        setFillGradient: function(gradient, box) {
+            var g = makeGradient(gradient, box);
+            var pname, oname;
+            pname = "P" + (++RESOURCE_COUNTER);
+            this._patResources[pname] = this._pdf.attach(g.pattern);
+            if (g.opacity) {
+                oname = "O" + (++RESOURCE_COUNTER);
+                this._gsResources[oname] = this._pdf.attach(g.opacity);
+                this._out("/" + oname + " gs ");
+            }
+            this._out("/Pattern cs /" + pname + " scn", NL);
         },
         setDashPattern: function(dashArray, dashPhase) {
             this._out(dashArray, " ", dashPhase, " d", NL);
