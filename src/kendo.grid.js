@@ -4230,7 +4230,8 @@ var __meta__ = {
                 },
                 closeCallback = function(element) {
                     focusTable(element.closest("table"), true);
-                };
+                },
+                $angular = options.$angular;
 
             if (columnMenu) {
                 if (typeof columnMenu == "boolean") {
@@ -4268,6 +4269,10 @@ var __meta__ = {
                             filter: isMobile ? ":not(.k-column-active)" : "",
                             lockedColumns: !hasMultiColumnHeaders && column.lockable !== false && lockedColumns(columns).length > 0
                         };
+
+                        if ($angular) {
+                            menuOptions.$angular = $angular;
+                        }
 
                         cell.kendoColumnMenu(menuOptions);
                     }

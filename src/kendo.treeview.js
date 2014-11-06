@@ -1993,7 +1993,8 @@ var __meta__ = {
            dragstart: proxy(that.dragstart, that),
            dragcancel: proxy(that.dragcancel, that),
            drag: proxy(that.drag, that),
-           dragend: proxy(that.dragend, that)
+           dragend: proxy(that.dragend, that),
+           $angular: treeview.options.$angular
         });
     }
 
