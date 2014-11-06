@@ -1,6 +1,6 @@
 (function(){
     var dataviz = kendo.dataviz;
-    var RadialGauge = dataviz.newGauge.RadialGauge;
+    var RadialGauge = dataviz.RadialGauge;
     var DEFAULT_MARGIN = 5
     var TOLERANCE = 1.5 + DEFAULT_MARGIN;
     var elem = "<div id='gauge' style='width: 200px; height: 200px;'></div>"; //$('<div/>').width(200).height(200);
@@ -19,7 +19,6 @@
             teardown: function() {
                 kendo.destroy(QUnit.fixture);
                 QUnit.fixture.empty();
-                debugger;
             }
         });
 

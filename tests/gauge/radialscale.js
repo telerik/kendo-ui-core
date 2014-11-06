@@ -1,13 +1,12 @@
 (function() {
-    var dataviz = kendo.dataviz,
-        Gauge = dataviz.ui.Gauge,
-        Box2D = dataviz.Box2D,
-        Point2D = dataviz.Point2D,
-        RadialScale,
-        radialScale,
-        ring,
-        chartBox = new Box2D(0, 0, 400, 300),
-        view;
+    var dataviz = kendo.dataviz;
+    var Gauge = dataviz.Gauge;
+    var geo = dataviz.geometry;
+    var Rect = geo.Rect;
+    var Arc = geo.Arc;
+    var arc;
+    var radialScale;
+    var chartBox = new Rect([0, 0], [400, 300]);
 
     RadialScale = dataviz.RadialScale.extend({
         options: {
@@ -35,29 +34,28 @@
                 });
             radialScale.reflow(chartBox);
 
-            ring = radialScale.ring;
+            arc = radialScale.arc;
         }
     });
 
-    test("reflow calculates scale ring position", function() {
-        equal(ring.c.x, 200);
-        equal(ring.c.y, 150);
-        equal(ring.r, 150);
-        equal(ring.ir, 140);
+    test("reflow calculates scale arc position", function() {
+        equal(arc.center.x, 200);
+        equal(arc.center.y, 150);
+        equal(arc.getRadiusX(), 150);
     });
 
     test("tickAngles returns array", function() {
-        var tickAngles = radialScale.tickAngles(ring, 10);
+        var tickAngles = radialScale.tickAngles(arc, 10);
 
         ok(tickAngles instanceof Array);
     });
 
     test("tickAngles returns proper amount of tick angles", function() {
-        var tickAngles = radialScale.tickAngles(ring, 10);
+        var tickAngles = radialScale.tickAngles(arc, 10);
 
         equal(tickAngles.length, 11);
 
-        tickAngles = radialScale.tickAngles(ring, 1);
+        tickAngles = radialScale.tickAngles(arc, 1);
 
         equal(tickAngles.length, 101);
     });
@@ -71,17 +69,20 @@
             endAngle: 270
         });
 
-        ring = new dataviz.Ring(new Point2D(100, 100), 50, 100, 90, 180);
-
-        radialScale.ring = ring;
-
-        var ticks = radialScale.renderTicks({
-            createLine: function() {
-                return {};
-            }
+        arc = new Arc([100, 100], {
+            radiusX: 100,
+            radiusY: 100,
+            startAngle: 270,
+            endAngle: 360
         });
 
-        equal(ticks.length, 5);
+        radialScale.arc = arc;
+
+        var ticks = radialScale.renderTicks();
+        var count = radialScale.majorTicks.children.length +
+                    radialScale.minorTicks.children.length
+
+        equal(count, 5);
     });
 
     test("slotAngle() returns startAngle/endAngle for extreme values", function() {
@@ -92,8 +93,8 @@
             endAngle: 48
         });
 
-        equal(radialScale.slotAngle(0), 27);
-        equal(radialScale.slotAngle(100), 48);
+        equal(radialScale.slotAngle(0), 207);
+        equal(radialScale.slotAngle(100), 228);
     });
 
     test("slotAngle() takes options.min and options.max into account", function() {
@@ -104,8 +105,8 @@
             endAngle: 48
         });
 
-        equal(radialScale.slotAngle(38), 27);
-        equal(radialScale.slotAngle(106), 48);
+        equal(radialScale.slotAngle(38), 207);
+        equal(radialScale.slotAngle(106), 228);
     });
 
     // ------------------------------------------------------------
@@ -133,8 +134,8 @@
             reverse: true
         });
 
-        equal(radialScale.slotAngle(0), 48);
-        equal(radialScale.slotAngle(100), 27);
+        equal(radialScale.slotAngle(0), 228);
+        equal(radialScale.slotAngle(100), 207);
     });
 
     test("slotAngle() takes options.min and options.max into account", function() {
@@ -146,8 +147,8 @@
             reverse: true
         });
 
-        equal(radialScale.slotAngle(38), 48);
-        equal(radialScale.slotAngle(106), 27);
+        equal(radialScale.slotAngle(38), 228);
+        equal(radialScale.slotAngle(106), 207);
     });
 
     test("slotAngle() should return correct values", function() {
@@ -159,14 +160,13 @@
             reverse: true
         });
 
-        equal(radialScale.slotAngle(50), 50);
-        equal(radialScale.slotAngle(10), 90);
-        equal(radialScale.slotAngle(90), 10);
+        equal(radialScale.slotAngle(50), 230);
+        equal(radialScale.slotAngle(10), 270);
+        equal(radialScale.slotAngle(90), 190);
     });
 
     function createScale(options) {
         radialScale = new RadialScale(options);
-        view = new ViewStub();
     }
 
     // ------------------------------------------------------------
@@ -179,13 +179,13 @@
                 to: 100
             }]
         });
-        radialScale.reflow(chartBox);
-        radialScale.getViewElements(view);
-        var ranges = view.log.ring,
-            ring = ranges[0].ring;
 
-        equal(ring.startAngle, radialScale.slotAngle(0));
-        equal(ring.startAngle + ring.angle, radialScale.slotAngle(10));
+        radialScale.reflow(chartBox);
+        var ranges = radialScale.ranges.children;
+        var arc = ranges[0]._geometry; 
+
+        equal(arc.startAngle, radialScale.slotAngle(0));
+        equal(arc.endAngle, radialScale.slotAngle(10));
     });
 
     test("render range from 10 to 100", function() {
@@ -195,13 +195,14 @@
                 to: 100
             }]
         });
-        radialScale.reflow(chartBox);
-        radialScale.getViewElements(view);
-        var ranges = view.log.ring;
 
-        ring = ranges[1].ring;
-        equal(ring.startAngle, radialScale.slotAngle(10));
-        equal(ring.startAngle + ring.angle, radialScale.slotAngle(100));
+        radialScale.reflow(chartBox);
+
+        var ranges = radialScale.ranges.children;
+        var arc = ranges[1]._geometry;
+        
+        equal(arc.startAngle, radialScale.slotAngle(10));
+        equal(arc.endAngle, radialScale.slotAngle(100));
     });
 
     test("render range from 10 to 50 and from 50 to 100", function() {
@@ -214,18 +215,18 @@
                 to: 100
             }]
         });
+
         radialScale.reflow(chartBox);
-        radialScale.getViewElements(view);
-        var ranges = view.log.ring;
+        var ranges = radialScale.ranges.children;
 
-        ring = ranges[1].ring;
-        equal(ring.startAngle, radialScale.slotAngle(10));
-        equal(ring.startAngle + ring.angle, radialScale.slotAngle(50));
+        var arc = ranges[1]._geometry;
+        equal(arc.startAngle, radialScale.slotAngle(10));
+        equal(arc.endAngle, radialScale.slotAngle(50));
 
-        ring = ranges[2].ring;
-        equal(ring.startAngle, radialScale.slotAngle(50));
-        equal(ring.startAngle + ring.angle, radialScale.slotAngle(100));
-    });
+        arc = ranges[2]._geometry;
+        equal(arc.startAngle, radialScale.slotAngle(50));
+        equal(arc.endAngle, radialScale.slotAngle(100));
+    });  
 
     test("render range color", function() {
         createScale({
@@ -236,11 +237,11 @@
             }]
         });
         radialScale.reflow(chartBox);
-        radialScale.getViewElements(view);
-        var ranges = view.log.ring,
-            style = ranges[1].style;
 
-        equal(style.fill, "color");
+        var ranges = radialScale.ranges.children;
+        var style = ranges[1].options;
+
+        equal(style.stroke.color, "color");
     });
 
     test("render range opacity", function() {
@@ -252,11 +253,11 @@
             }]
         });
         radialScale.reflow(chartBox);
-        radialScale.getViewElements(view);
-        var ranges = view.log.ring,
-            style = ranges[1].style;
 
-        equal(style.fillOpacity, 0.2);
+        var ranges = radialScale.ranges.children;
+        var style = ranges[1].options;
+
+        equal(style.stroke.opacity, 0.2);
     });
 
     // ------------------------------------------------------------
@@ -303,7 +304,7 @@
         equal(radialScale.options.majorUnit, 10);
     });
 
-    test("sets auto minorUnit", function() {
+    test("sets minorUnit", function() {
         createScale({
             min: 0,
             max: 1000,
