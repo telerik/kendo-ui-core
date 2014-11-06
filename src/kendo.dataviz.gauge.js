@@ -709,6 +709,8 @@ var __meta__ = {
 
             gauge.element.addClass("k-gauge");
 
+            gauge.surface = gauge._createSurface();
+
             gauge.redraw();
         },
 
@@ -771,7 +773,7 @@ var __meta__ = {
         redraw: function() {
             var that = this;
 
-            that.surface = that._createSurface();
+            that.surface.clear();
             that.gaugeArea = that._createGaugeArea();
             that._createModel();
             that.reflow();
@@ -811,10 +813,13 @@ var __meta__ = {
             var size = that._getSize();
             size = options.gaugeArea ? deepExtend(size, options.gaugeArea) : size;
 
-            return new draw.Surface.create(that.element, {
-                type: options.renderAs,
+            var wrap = $("<div></div>").appendTo(that.element).css({
                 width: size.width,
                 height: size.height
+            });
+
+            return new draw.Surface.create(wrap, {
+                type: options.renderAs
             });
         },
 
