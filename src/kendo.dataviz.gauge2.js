@@ -391,7 +391,7 @@ var __meta__ = {
                 labelPos = new Point(label.box.x1, label.box.y1);
 
                 if (that.labelElements === undefined) {
-                    lbl = buildLabel(label, options.labels);
+                    lbl = _buildLabel(label, options.labels);
                     labelsGroup.append(lbl);
                 } else {
                     lbl = that.labelElements.children[i];
@@ -1079,19 +1079,24 @@ var __meta__ = {
             var options = that.options;
             var pointers = options.pointer;
             var scale = that.scale = new LinearScale(options.scale);
-            var current;
+            var current, currentOptions;
 
             that.pointers = [];
 
             pointers = $.isArray(pointers) ? pointers : [pointers];
             for (var i = 0; i < pointers.length; i++) {
-                //TODO CHANGE
-                current = new ArrowLinearPointer(scale, 
-                    deepExtend({}, pointers[i], {
+                currentOptions = deepExtend({}, pointers[i], {
                         animation: {
                             transitions: options.transitions
                         }
-                }));
+                });
+
+                if (currentOptions.shape === ARROW) {
+                    current = new ArrowLinearPointer(scale, currentOptions);
+                } else {
+                    current = new BarLinearPointer(scale, currentOptions);
+                }
+
                 that.pointers.push(current);
             }
         },
@@ -1298,7 +1303,7 @@ var __meta__ = {
             var elements = new Group();
 
             for (var i = 0; i < labels.length; i++) {
-                elements.append(buildLabel(labels[i], options.labels));
+                elements.append(_buildLabel(labels[i], options.labels));
             }
 
             return elements;
@@ -1399,7 +1404,6 @@ var __meta__ = {
             Pointer.fn.init.call(pointer, scale, options);
 
             pointer.options = deepExtend({
-                //size: pointer.pointerSize(),
                 track: {
                     visible: defined(options.track)
                 }
@@ -1487,35 +1491,6 @@ var __meta__ = {
             pointer.box = pointerBox || trackBox.clone().pad(options.border.width);
         },
 
-        // repaint: function() {
-        //     var that = this;
-        //     var scale = that.scale;
-        //     var options = that.options;
-        //     var animation;
-
-        //     if (options.animation.transitions === false) {
-
-        //     } else {
-        //         if (options.shape === ARROW) {
-        //             animation = new ArrowLinearPointerAnimation(that.elements, deepExtend(options.animation, {
-        //                 vertical: scale.options.vertical,
-        //                 mirror: scale.options.mirror,
-        //                 from: scale.getSlot(options._oldValue),
-        //                 to: scale.getSlot(options.value),
-        //             }));
-        //             debugger;
-        //         } else {
-        //             animation = new BarLinearPointerAnimation(that.elements, deepExtend(options.animation, {
-        //                 reverse:  scale.options.reverse,
-        //                 vertical: scale.options.vertical,
-        //             }));
-        //         }
-
-        //         animation.setup();
-        //         animation.play();
-        //     }
-        // },
-
         getElementOptions: function() {
             var options = this.options;
             var elements = new Group();
@@ -1532,104 +1507,7 @@ var __meta__ = {
                     dashType: options.border.dashType
                 } : {}
             };
-        },
-
-        // render: function() {
-        //     var that = this;
-        //     var options = that.options;
-        //     var elements = new Group();
-        //     var scale = that.scale;
-        //     var elementOptions = {
-        //         fill: {
-        //             color: options.color,
-        //             opacity: options.opacity
-        //         },
-        //         stroke: defined(options.border) ? {
-        //             color: options.border.width ? options.border.color || options.color : "",
-        //             width: options.border.width,
-        //             dashType: options.border.dashType
-        //         } : {}
-        //     };
-
-        //     var shape = that.pointerShape(options.value);
-
-        //     if (options.shape === ARROW) {
-        //         options.animation.type = ARROW_POINTER;
-        //         elements = new Path({
-        //             stroke: elementOptions.stroke,
-        //             fill: elementOptions.fill
-        //         }).moveTo(shape[0]).lineTo(shape[1]).lineTo(shape[2]).close();
-        //     } else {
-        //         elements = Path.fromRect(shape, {
-        //             stroke: elementOptions.stroke,
-        //             fill: elementOptions.fill
-        //         });
-        //     }
-
-        //     var slot = scale.getSlot(options.value);
-        //     elements.transform(geo.transform().translate(slot.x1, slot.y1));
-
-        //     that.elements = elements;
-
-        //     return elements;
-        // },
-
-        // pointerShape: function(value) {
-        //     var that = this;
-        //     var options = that.options;
-        //     var scale = that.scale;
-        //     var slot = new Box2D();
-        //     var pointerRangeBox = new Box2D();
-        //     var size = options.size;
-        //     var vertical = scale.options.vertical;
-        //     var halfSize = size / 2;
-        //     var sign = (scale.options.mirror ? -1 : 1);
-        //     var reverse = scale.options.reverse;
-        //     var pos, shape, trackBox;
-
-        //     if (options.shape == ARROW) {
-        //         if (vertical) {
-        //             pos = reverse ? "y2" : "y1";
-        //             shape = [
-        //                 new Point(pointerRangeBox.x1, slot[pos] - halfSize),
-        //                 new Point(pointerRangeBox.x1 - sign * size, slot[pos]),
-        //                 new Point(pointerRangeBox.x1, slot[pos] + halfSize)
-        //             ];
-        //         } else {
-        //             pos = reverse ? "x1" : "x2";
-        //             shape = [
-        //                 new Point(slot[pos] - halfSize, pointerRangeBox.y2),
-        //                 new Point(slot[pos], pointerRangeBox.y2 + sign * size),
-        //                 new Point(slot[pos] + halfSize, pointerRangeBox.y2)
-        //             ];
-        //         }
-        //     } else {
-        //         trackBox = that.trackBox;
-        //         if (vertical) {
-        //             shape = new Rect([trackBox.x1, slot.y1], [size, slot.y2 - slot.y1]);
-        //         } else {
-        //             shape = new Rect([slot.x1, trackBox.y1], [slot.x2 - slot.x1, size]);
-        //         }
-        //     }
-
-        //     return shape;
-        // },
-
-        // pointerSize: function() {
-        //     var pointer = this,
-        //         options = pointer.options,
-        //         scale = pointer.scale,
-        //         tickSize = scale.options.majorTicks.size,
-        //         size;
-
-        //     if (options.shape === ARROW) {
-        //         size = tickSize * 0.6;
-        //     } else {
-        //         size = tickSize * 0.3;
-        //     }
-
-        //     return round(size);
-        // }
+        }
     });
 
     var ArrowLinearPointer = LinearPointer.extend({
@@ -1836,9 +1714,7 @@ var __meta__ = {
 
         step: function(pos) {
             //TODO Fix animation.js
-            if (!pos) {
-                pos = 1;
-            }
+            if (!pos) { pos = 1; }
 
             var translateX = interpolateValue(this.fromScale.x, this.toScale.x, pos);
             var translateY = interpolateValue(this.fromScale.y, this.toScale.y, pos);
@@ -1884,7 +1760,7 @@ var __meta__ = {
     });
     draw.AnimationFactory.current.register(BAR_POINTER, BarLinearPointerAnimation);
 
-    function buildLabel(label, options) {
+    function _buildLabel(label, options) {
         var labelBox = label.box;
         var textBox = label.children[0].box;
         var border = options.border || {};
@@ -1962,6 +1838,8 @@ var __meta__ = {
             Gauge: Gauge,
             RadialPointer: RadialPointer,
             LinearPointer: LinearPointer,
+            ArrowLinearPointer: ArrowLinearPointer,
+            BarLinearPointer: BarLinearPointer,
             LinearScale: LinearScale,
             RadialScale: RadialScale,
             LinearGauge: LinearGauge,
