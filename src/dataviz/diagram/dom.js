@@ -1594,6 +1594,30 @@
                 "dataBound"
             ],
 
+            createShape: function() {
+                var that = this;
+                if ((this.editor && this.editor.end()) || !this.editor) {
+                    var view = this.dataSource.view() || [];
+                    var index = view.length;
+                    var model = this.dataSource.insert(index, {});
+                    this.dataSource.one("sync", function() {
+                        var shape = that._dataMap[model.id];
+                        that.edit(shape);
+                    });
+                    this.dataSource.sync();
+                }
+            },
+
+            createConnection: function() {
+                if ((this.editor && this.editor.end()) || !this.editor) {
+                    var view = this.connectionsDataSource.view() || [];
+                    var index = view.length;
+                    var model = this.connectionsDataSource.insert(index, {});
+                    var connection = this._connectionsDataMap[model.uid];
+                    this.edit(connection);
+                }
+            },
+
             edit: function(item) {
                 this.cancelEdit();
                 var editorType, editors, template;
@@ -1882,6 +1906,7 @@
                 that.canvas.destroy(true);
                 that.canvas = undefined;
 
+                that._destroyEditor();
                 that.destroyScroller();
             },
 
@@ -3228,6 +3253,7 @@
 
             _removeShapes: function(items) {
                 for (var i = 0; i < items.length; i++) {
+                    this.remove(this._dataMap[items[i].id], false);
                     this._dataMap[items[i].id] = null;
                 }
             },
@@ -3361,7 +3387,7 @@
                         var options = deepExtend({}, this.options.connectionDefaults);
                         options.dataItem = dataItem;
                         var connection = new Connection(from, to, options);
-						connection.type(CASCADING);
+                        connection.type(CASCADING);
                         this._connectionsDataMap[dataItem.uid] = connection;
                         this.addConnection(connection);
                     }

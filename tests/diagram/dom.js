@@ -1548,6 +1548,37 @@
         equal(d.dataSource.data().length, 2);
     });
 
+    // ------------------------------------------------------------
+    module("Editing / Shape data source / createShape", {
+        setup: function () {
+            d = setupEditableDiagram();
+            d.createShape();
+        },
+        teardown: function () {
+            d.destroy();
+            QUnit.fixture.closest("body").find(".k-window-content").each(function(idx, element){
+                $(element).data("kendoWindow").destroy();
+            });
+            QUnit.fixture.closest("body").find(".k-overlay").remove();
+        }
+    });
+
+    test("should insert dataItem", function () {
+        equal(d.dataSource.data().length, 3);
+    });
+
+    test("should insert dataItem at the end of data array", function () {
+        equal(d.dataSource.data()[2].id, "");
+    });
+
+    test("should create editor", function () {
+        ok(d.editor != null);
+    });
+
+    test("should create editor with type shape", function () {
+        equal(d.editor.options.type, "shape");
+    });
+
     module("Editing / Connections data source", {
         setup: function () {
             d = setupEditableDiagram();
@@ -1581,5 +1612,32 @@
         d.remove(d.select(), true);
         d.undo();
         equal(d.connectionsDataSource.data().length, 1);
+    });
+
+    // ------------------------------------------------------------
+    module("Editing / Connection data source / createConnection", {
+        setup: function () {
+            d = setupEditableDiagram();
+            d.createConnection();
+        },
+        teardown: function () {
+            d.destroy();
+            QUnit.fixture.closest("body").find(".k-window-content").each(function(idx, element){
+                $(element).data("kendoWindow").destroy();
+            });
+            QUnit.fixture.closest("body").find(".k-overlay").remove();
+        }
+    });
+
+    test("should insert dataItem", function () {
+        equal(d.connectionsDataSource.data().length, 2);
+    });
+
+    test("should create editor", function () {
+        ok(d.editor != null);
+    });
+
+    test("should create editor with type shape", function () {
+        equal(d.editor.options.type, "connection");
     });
 })();
