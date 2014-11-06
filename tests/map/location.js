@@ -577,30 +577,30 @@
     // ------------------------------------------------------------
     module("Extent / edges", {
         setup: function() {
-            extent = new Extent([10, -10], [-10, 10]);
+            extent = new Extent([10, -20], [-30, 40]);
         }
     });
 
     test("nw edge", function() {
-        ok(extent.edges().nw.equals(new Location(10, -10)));
+        deepEqual(extent.edges().nw.toArray(), [10, -20]);
     });
 
     test("ne edge", function() {
-        ok(extent.edges().ne.equals(new Location(10, 10)));
+        deepEqual(extent.edges().ne.toArray(), [10, 40]);
     });
 
     test("se edge", function() {
-        ok(extent.edges().se.equals(new Location(-10, 10)));
+        deepEqual(extent.edges().se.toArray(), [-30, 40]);
     });
 
     test("sw edge", function() {
-        ok(extent.edges().sw.equals(new Location(-10, -10)));
+        deepEqual(extent.edges().sw.toArray(), [-30, -20]);
     });
 
     // ------------------------------------------------------------
     module("Extent / toArray", {
         setup: function() {
-            extent = new Extent([10, -10], [-10, 10]);
+            extent = new Extent([10, -20], [-30, 40]);
         }
     });
 

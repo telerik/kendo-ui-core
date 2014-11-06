@@ -272,7 +272,7 @@
                 se = this.se;
 
             return {nw: this.nw, ne: new Location(nw.lat, se.lng),
-                    se: this.se, sw: new Location(nw.lng, se.lat)};
+                    se: this.se, sw: new Location(se.lat, nw.lng)};
         },
 
         toArray: function() {
@@ -280,7 +280,7 @@
                 se = this.se;
 
             return [nw, new Location(nw.lat, se.lng),
-                    se, new Location(nw.lng, se.lat)];
+                    se, new Location(se.lat, nw.lng)];
         },
 
         overlaps: function(extent) {

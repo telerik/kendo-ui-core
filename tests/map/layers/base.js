@@ -186,7 +186,7 @@ function baseLayerTests(name, TLayer) {
             ]
         });
 
-        map._extent = new m.Extent([0, 42], [30, 0]);
+        map._extent = new m.Extent([42, 0], [0, 30]);
 
         stubMethod(TLayer.fn, "_setVisibility", function(visible) {
             ok(visible);
@@ -206,7 +206,7 @@ function baseLayerTests(name, TLayer) {
         });
 
         map._zoom = 5;
-        map._extent = new m.Extent([0, 42], [30, 0]);
+        map._extent = new m.Extent([42, 0], [0, 30]);
 
         stubMethod(TLayer.fn, "_setVisibility", function(visible) {
             ok(visible);
