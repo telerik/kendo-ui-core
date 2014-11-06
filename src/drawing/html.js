@@ -1551,7 +1551,10 @@
                 // the presence of any transform makes it behave like it had position: relative,
                 // because why not.
                 // http://meyerweb.com/eric/thoughts/2011/09/12/un-fixing-fixed-elements-with-css-transforms/
-                pleaseSetPropertyValue(element.style, "position", "relative", "important");
+                if (getPropertyValue(style, "position") == "static") {
+                    // but only if it's not already positioned. :-/
+                    pleaseSetPropertyValue(element.style, "position", "relative", "important");
+                }
 
                 // must translate to origin before applying the CSS
                 // transformation, then translate back.
