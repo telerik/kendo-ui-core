@@ -1135,7 +1135,7 @@
             root.box = Box2D();
             root.renderVisual();
 
-            ok(!barLabel.textBox.visual);            
+            ok(!barLabel.textBox.visual);
         });
 
         module("BarLabel / reflow / vertical", {});
@@ -1571,7 +1571,7 @@
 
         // ------------------------------------------------------------
         module("Bar Chart / Labels / Positive Values", {
-            setup: function() {                
+            setup: function() {
                 setupBarChart(plotArea, { series: [{
                     data: positiveData,
                     labels: {
@@ -1652,7 +1652,7 @@
 
         // ------------------------------------------------------------
         module("Bar Chart / Labels / Negative Values", {
-            setup: function() {                
+            setup: function() {
                 setupBarChart(plotArea, { series: [{
                     data: negativeData,
                     labels: {

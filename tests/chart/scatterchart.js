@@ -5,19 +5,17 @@
         plotArea,
         scatterChart,
         root,
-        view,
         TOLERANCE = 1;
 
     function setupScatterChart(plotArea, options) {
-        view = new ViewStub();
 
         scatterChart = new dataviz.ScatterChart(plotArea, options);
 
         root = new dataviz.RootElement();
         root.append(scatterChart);
 
-        scatterChart.reflow();
-        scatterChart.getViewElements(view);
+        root.reflow();
+        root.renderVisual();
     }
 
     (function() {
@@ -271,7 +269,9 @@
                 }]
             });
 
-            equal(view.log.text[0].content, "$1.00 $10.00");
+            var label = scatterChart.points[0].label;
+            var text = label.visual.children[0];
+            equal(text.content(), "$1.00 $10.00");
         });
 
     })();
