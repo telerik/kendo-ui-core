@@ -28,7 +28,7 @@ page.setFillGradient({
     end: { x: 200, y: 200 },
     stops: [
         { offset:   0, color: { r: 1, g: 0, b: 0, a: 1 } },
-        { offset: 0.5, color: { r: 1, g: 1, b: 0, a: 0.7 } },
+        //{ offset: 0.5, color: { r: 1, g: 1, b: 0, a: 0.9 } },
         { offset:   1, color: { r: 0, g: 1, b: 1, a: 1 } },
     ]
 }, {
@@ -68,7 +68,7 @@ page.restore();
 
 
 
-
+if(0){
 
 
 
@@ -179,6 +179,8 @@ page._out("/OP1 gs\n");
 page._out("/Pattern cs\n");
 page._out("/P1 scn\n");
 page.fill();
+
+}
 
 var stream = pdf.render();
 var data = stream.get();

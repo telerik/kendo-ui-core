@@ -1115,6 +1115,7 @@
         var pattern = {
             Type: _("Pattern"),
             PatternType: 2,
+            Matrix: matrix || [ 1, 0, 0, 1, 0, 0 ],
             Shading: {
                 ShadingType: isRadial ? 3 : 2,
                 ColorSpace: _("DeviceRGB"),
@@ -1180,6 +1181,7 @@
         this._xResources = {};
         this._patResources = {};
         this._opacity = 1;
+        this._matrix = [ 1, 0, 0, 1, 0, 0 ];
 
         this._font = null;
         this._fontSize = null;
@@ -1206,6 +1208,7 @@
             this._content.data.apply(null, arguments);
         },
         transform: function(a, b, c, d, e, f) {
+            this._matrix = mmul(this._matrix, arguments);
             this._out(a, " ", b, " ", c, " ", d, " ", e, " ", f, " cm", NL);
         },
         translate: function(dx, dy) {
@@ -1293,11 +1296,11 @@
             }
         },
         setFillGradient: function(gradient, box) {
-            var g = makeGradient(gradient, box);
+            var g = makeGradient(gradient, box, this._matrix);
             var pname, oname;
             pname = "P" + (++RESOURCE_COUNTER);
             this._patResources[pname] = this._pdf.attach(g.pattern);
-            if (g.opacity) {
+            if (g.hasAlpha) {
                 oname = "O" + (++RESOURCE_COUNTER);
                 this._gsResources[oname] = this._pdf.attach(g.opacity);
                 this._out("/" + oname + " gs ");
@@ -1416,9 +1419,11 @@
         _context: function(val) {
             if (val != null) {
                 this._opacity = val.opacity;
+                this._matrix = val.matrix;
             } else {
                 return {
-                    opacity: this._opacity
+                    opacity: this._opacity,
+                    matrix: this._matrix
                 };
             }
         }
@@ -1719,6 +1724,16 @@
             clip           : 7
         }
     };
+
+    function mmul(a, b) {
+        var a1 = a[0], b1 = a[1], c1 = a[2], d1 = a[3], e1 = a[4], f1 = a[5];
+        var a2 = b[0], b2 = b[1], c2 = b[2], d2 = b[3], e2 = b[4], f2 = b[5];
+        return [
+            a1*a2 + b1*c2,          a1*b2 + b1*d2,
+            c1*a2 + d1*c2,          c1*b2 + d1*d2,
+            e1*a2 + f1*c2 + e2,     e1*b2 + f1*d2 + f2
+        ];
+    }
 
 })(this, parseFloat);
 
