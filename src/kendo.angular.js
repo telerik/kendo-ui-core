@@ -780,7 +780,7 @@ var __meta__ = {
             return;
         }
 
-        var scope = self.$angular_scope || angular.element(self.element).scope();
+        var scope = self.$angular_scope; //  || angular.element(self.element).scope();
 
         if (scope) {
             withoutTimeout(function(){
