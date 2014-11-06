@@ -867,7 +867,7 @@ namespace Kendo.Mvc.UI
         {
             get
             {
-                int colspan = DataSource.Groups.Count + VisibleColumns.Count;
+                int colspan = DataSource.Groups.Count + Columns.LeafColumns().Where(c => c.Visible).Count();
 
                 if (HasDetailTemplate)
                 {
@@ -1097,7 +1097,7 @@ namespace Kendo.Mvc.UI
                 Mode = CurrentItemMode,
                 EditMode = Editable.Mode,
                 HasDetailTemplate = HasDetailTemplate,                
-                Colspan = Colspan - Columns.Count(column => column.Hidden),
+                Colspan = Colspan - Columns.LeafColumns().Count(column => column.Hidden),
                 DetailTemplate = MapDetailTemplate(HasDetailTemplate ? DetailTemplate : null),
                 NoRecordsTemplate = FormatNoRecordsTemplate(),
                 ScrollingHeight = Scrollable.Height,

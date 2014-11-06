@@ -110,7 +110,7 @@ namespace Kendo.Mvc.UI.Html
                 return new GridTemplateRowBuilder(td => renderingData.RowTemplate(item.DataItem, td), renderingData.Colspan);
             }
 
-            return new GridDataRowBuilder(item.DataItem, renderingData.Columns.Select(column => cellBuilderFactory.CreateDisplayCellBuilder(column, renderingData.HtmlHelper)));
+            return new GridDataRowBuilder(item.DataItem, renderingData.Columns.LeafColumns().Select(column => cellBuilderFactory.CreateDisplayCellBuilder(column, renderingData.HtmlHelper)));
         }
 
         protected virtual IGridRowBuilder CreateDetailRowBuilder(GridRenderingData renderingData, GridItem item)
@@ -188,7 +188,7 @@ namespace Kendo.Mvc.UI.Html
             
             var member = renderingData.GroupMembers.ElementAtOrDefault(item.GroupLevel);
             
-            var column = renderingData.Columns.OfType<IGridBoundColumn>().FirstOrDefault(c => c.Member == member);
+            var column = renderingData.Columns.LeafColumns().OfType<IGridBoundColumn>().FirstOrDefault(c => c.Member == member);
 
             var format = column != null && column.Format.HasValue() ? column.Format : "{0}";
                        
@@ -315,9 +315,9 @@ namespace Kendo.Mvc.UI.Html
 
         private IGridRowBuilder CreateInLineRowBuilder(GridRenderingData renderingData, GridItem item, Func<object, string> action, Func<IGridColumn, IGridHtmlHelper, IGridDataCellBuilder> cellBuilder)
         {            
-            var tableBuilder = tableBuilderFactory.CreateTableBuilder(renderingData.Columns.Select(c => new GridColData { Width = c.Width, Hidden = c.Hidden }));
+            var tableBuilder = tableBuilderFactory.CreateTableBuilder(renderingData.Columns.LeafColumns().Select(c => new GridColData { Width = c.Width, Hidden = c.Hidden }));
 
-            var cellBuilders = renderingData.Columns.Select(column => cellBuilder(column, renderingData.HtmlHelper));
+            var cellBuilders = renderingData.Columns.LeafColumns().Select(column => cellBuilder(column, renderingData.HtmlHelper));
 
             var formHtmlAttributes = CreateFormAttributes(renderingData.FormId, action(item.DataItem));
             //formHtmlAttributes.Merge(renderingData.EditFormHtmlAttributes);
