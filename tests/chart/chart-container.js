@@ -1,6 +1,4 @@
 (function() {
-    return;
-
     var dataviz = kendo.dataviz,
         ChartContainer = dataviz.ChartContainer,
         Box = dataviz.Box2D,
@@ -82,8 +80,7 @@
 
 
     (function() {
-        var view,
-            viewElements,
+        var visual,
             point;
 
         function chartPoint(box, visibleLabel) {
@@ -93,106 +90,74 @@
                     options: {
                         visible: visibleLabel
                     },
-                    getViewElements: function(view) {
+                    createVisual: function() {
                         return [{label: true}]
                     }
                 }
             };
         }
 
-        module("chart container / view elements", {
+        module("chart container / rendering", {
             setup: function() {
-                view = new ViewStub();
                 setup([setupAxis(Box(1, 10, 1, 100), true)]);
                 container.children = [{
                     options: {
                         clip: true
                     },
-                    getViewElements: function() {
-                        return [];
-                    }
+                    renderVisual: $.noop
                 }];
-                container.getViewElements(view);
+                container.renderVisual();
+                visual = container.visual;
             }
         });
 
-        test("creates clip path", function() {
-            equal(view.log.clipPath.length, 1);
+        test("creates group", function() {
+            equal(visual.nodeType, "Group");
         });
 
-        test("creates clip path on each redraw with same id", function() {
-            container.getViewElements(view);
-            equal(view.log.clipPath.length, 2);
-            equal(view.log.clipPath[0].id, view.log.clipPath[1].id);
+        test("creates clip path", function() {
+            ok(visual.clip());
+        });
+
+        test("create clip path on each render", function() {
+            var initialClip = container.visual.clip();
+            container.renderVisual();
+            var newClip = container.visual.clip();
+            ok(newClip.id !== initialClip.id);
         });
 
         test("does not create clip path if no clipping should be applied", function() {
             container.children[0].options.clip = false;
-            view = new ViewStub();
-            container.getViewElements(view);
-            equal(view.log.clipPath.length, 0);
-        });
-
-        test("creates group with clipPathId", function() {
-            equal(view.log.group.length, 1);
-            equal(view.log.group[0].options.clipPathId, container.clipPathId);
-        });
-
-        test("sets id to the group", function() {
-            ok(view.log.group[0].options.id !== undefined);
-        });
-
-        test("generates new id each time getViewElements is called and uses it for the group", function() {
-            var id = container.id;
-            view = new ViewStub();
-            container.getViewElements(view);
-            ok(container.id != id);
-            equal(view.log.group[0].options.id, container.id);
-        });
-
-        test("creates group without clippathid if no clipping should be applied", function() {
-            container.children[0].options.clip = false;
-            viewElements = container.getViewElements(view);
-            equal(viewElements.length, 1);
-            equal(viewElements[0].options.clipPathId, undefined);
-
+            container.renderVisual();
+            ok(!container.visual.clip());
         });
 
         test("sets clipBox", function() {
             ok(container.clipBox instanceof Box && container.clipBox !== undefined);
         });
 
-        test("moves labels after clipping group", function() {
+        test("sets noclip option to labels", function() {
             container.children[0].points = [chartPoint(Box(10, 90, 20, 110), true)];
 
-            viewElements = container.getViewElements(view);
-            ok(viewElements[0].options.clipPathId);
-            ok(viewElements[1].label);
+            container.renderVisual();
+
+            ok(container.children[0].points[0].label.options.noclip);
         });
 
-        test("does not render label if not visible", function() {
+        test("does not set noclip option if label is not visible", function() {
             container.children[0].points = [chartPoint(Box(10, 90, 20, 110), false)];
 
-            viewElements = container.getViewElements(view);
-            equal(viewElements.length, 1);
-            ok(!viewElements[0].label);
+            container.renderVisual();
+            ok(!container.children[0].points[0].label.options.noclip);
         });
 
-        test("does not render label if point does not overlap clipbox", function() {
+        test("does not set noclip option if point does not overlap clipbox", function() {
             container.children[0].points = [chartPoint(Box(10, 101, 20, 110), true)];
 
-            viewElements = container.getViewElements(view);
-            equal(viewElements.length, 1);
-            ok(!viewElements[0].label);
+            container.renderVisual();
+            ok(!container.children[0].points[0].label.options.noclip);
         });
 
-        test("sets label visible option to false", function() {
-            point = chartPoint(Box(10, 90, 20, 110), true);
-            container.children[0].points = [point];
-
-            container.getViewElements(view);
-            equal(point.label.options.visible, false);
-        });
 
         test("calls alignToClipBox method if available on the label", function() {
             point = chartPoint(Box(10, 90, 20, 110), true);
@@ -201,7 +166,7 @@
             };
             container.children[0].points = [point];
 
-            container.getViewElements(view);
+            container.renderVisual();
         });
 
     })();

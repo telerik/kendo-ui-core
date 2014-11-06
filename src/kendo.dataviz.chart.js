@@ -7913,7 +7913,7 @@ var __meta__ = {
 
                 for (j = 0; j < length; j++) {
                     point = points[j];
-                    if (point && point.label) {
+                    if (point && point.label && point.label.options.visible) {
                         if (point.box.overlaps(clipBox)) {
                             if (point.label.alignToClipBox) {
                                 point.label.alignToClipBox(clipBox);
