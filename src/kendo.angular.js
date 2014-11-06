@@ -95,9 +95,10 @@ var __meta__ = {
     }
 
     function createWidget(scope, element, attrs, widget, origAttr) {
-        var kNgDelay = attrs.kNgDelay;
+        var kNgDelay = attrs.kNgDelay,
+            delayValue = scope.$eval(kNgDelay);
 
-        if (kNgDelay) {
+        if (kNgDelay && !delayValue) {
             var unregister = scope.$watch(kNgDelay, function(newValue, oldValue){
                 if (newValue !== oldValue) {
                     unregister();
