@@ -140,9 +140,8 @@
                     if (isNaN(x)) {
                         throw new Error("Cannot output NaN to PDF");
                     }
-                    // toFixed() to make sure it doesn't end up in exponent
-                    // notation, then parseFloat to remove trailing zeros.
-                    output.writeString(parseFloat(x.toFixed(7))+"");
+                    // make sure it doesn't end up in exponent notation
+                    output.writeString(x.toFixed(7).replace(/\.?0+$/, ""));
                 }
                 else if (/string|boolean/.test(typeof x)) {
                     output.writeString(x+"");
