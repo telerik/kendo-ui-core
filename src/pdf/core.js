@@ -284,7 +284,7 @@
             page.transform(1, 0, 0, -1, 0, paperSize[1]);
 
             if (margin) {
-                page.transform(1, 0, 0, 1, margin.left, margin.top);
+                page.translate(margin.left, margin.top);
                 // XXX: clip to right/bottom margin.  Make this optional?
                 page.rect(0, 0, contentWidth, contentHeight);
                 page.clip();
@@ -1114,7 +1114,6 @@
         var pattern = {
             Type: _("Pattern"),
             PatternType: 2,
-            Matrix: matrix || [ 1, 0, 0, 1, 0, 0 ],
             Shading: {
                 ShadingType: isRadial ? 3 : 2,
                 ColorSpace: _("DeviceRGB"),
@@ -1125,6 +1124,9 @@
                 //Extend: [ true, true ]
             }
         };
+        if (matrix) {
+            pattern.Matrix = matrix.slice();
+        }
         var opacity = funcs.hasAlpha ? {
             Type: _("ExtGState"),
             AIS: false,
@@ -1295,6 +1297,24 @@
             }
         },
         setFillGradient: function(gradient, box) {
+
+            // var self = this;
+            // function point(p) {
+            //     self.save();
+            //     self.setFillColor(1, 0, 0);
+            //     self.circle(p.x, p.y, 3);
+            //     self.fill();
+            //     self.setFillColor(0, 0, 0);
+            //     self.beginText();
+            //     self.setFont("Times-Roman", 8);
+            //     self.transform(1, 0, 0, -1, p.x, p.y);
+            //     self.showText(p.x + ", " + p.y);
+            //     self.endText();
+            //     self.restore();
+            // }
+            // point(gradient.start);
+            // point(gradient.end);
+
             var g = makeGradient(gradient, box, this._matrix);
             var pname, oname;
             pname = "P" + (++RESOURCE_COUNTER);

@@ -246,6 +246,39 @@
             return;
         }
 
+        if (fill instanceof drawing.Gradient) {
+            if (!fill.userSpace()) {
+                throw "FIXME";
+            }
+            if (!(fill instanceof drawing.LinearGradient)) {
+                throw "FIXME";
+            }
+            var gradient = {
+                type: "linear",
+                start: fill.start(),
+                end: fill.end(),
+                stops: fill.stops.elements().map(function(stop){
+                    var offset = stop.offset();
+                    if (/%$/.test(offset)) {
+                        offset = parseFloat(offset) / 100;
+                    } else {
+                        offset = parseFloat(offset);
+                    }
+                    var color = parseColor(stop.color());
+                    color.a *= stop.opacity();
+                    return {
+                        offset: offset,
+                        color: color
+                    };
+                })
+            };
+            // XXX: bbox sucks, do something about it.
+            page.setFillGradient(gradient, {
+                left: 0, top: 0, right: 10000, bottom: 10000
+            });
+            return;
+        }
+
         var color = fill.color;
         if (color) {
             color = parseColor(color);
@@ -277,10 +310,11 @@
     }
 
     function shouldDraw(thing) {
-        return thing &&
-            thing.color && !/^(none|transparent)$/i.test(thing.color) &&
-            (thing.width == null || thing.width > 0) &&
-            (thing.opacity == null || thing.opacity > 0);
+        return (thing &&
+                (thing instanceof drawing.Gradient ||
+                 (thing.color && !/^(none|transparent)$/i.test(thing.color) &&
+                  (thing.width == null || thing.width > 0) &&
+                  (thing.opacity == null || thing.opacity > 0))));
     }
 
     function maybeFillStroke(element, page, pdf) {
