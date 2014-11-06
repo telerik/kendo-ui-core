@@ -41,7 +41,7 @@ var __meta__ = {
         Group = draw.Group,
         Path = draw.Path,
         Rect = geo.Rect,
-        Text = draw.Text
+        Text = draw.Text,
         Surface = draw.Surface;
 
     // Constants ==============================================================
@@ -146,7 +146,7 @@ var __meta__ = {
         },
 
         setAngle: function(angle) {
-            this.elements.transform(geo.transform().rotate(angle, this.center))
+            this.elements.transform(geo.transform().rotate(angle, this.center));
         },
 
         repaint: function() {
@@ -443,7 +443,7 @@ var __meta__ = {
             var reverse = that.options.reverse;
             var radius = that.radius();
             var rangeSize = that.options.rangeSize;
-            var rangeDistance = options.rangeDistance;
+            var rangeDistance = that.options.rangeDistance;
             var segment, rangeRadius, rangeGeom, i;
 
             if (segmentsCount) {
@@ -600,16 +600,16 @@ var __meta__ = {
             }
 
             that.minorTickAngles = that.normalizeTickAngles(that.tickAngles(arc, options.minorUnit));
-            that.minorTicks = drawTicks(tickArc, that.minorTickAngles, options.minorUnit, options.minorTicks, options.majorUnit)
+            that.minorTicks = drawTicks(tickArc, that.minorTickAngles, options.minorUnit, options.minorTicks, options.majorUnit);
             allTicks.append(that.minorTicks);
 
             return allTicks;
         },
 
         normalizeTickAngles: function(angles) {
-            var that = this
-                options = that.options
-                skip = options.majorUnit / options.minorUnit;
+            var that = this;
+            var options = that.options;
+            var skip = options.majorUnit / options.minorUnit;
 
             for (var i = angles.length - 1; i >= 0; i--) {
                 if (i % skip === 0) {
@@ -681,7 +681,7 @@ var __meta__ = {
                 var yDiff = newPoint.y - segments[0].anchor().y;
 
                 ticks[i].transform(new geo.Transformation().translate(xDiff, yDiff));
-            };
+            }
         }
     });
 
@@ -869,7 +869,7 @@ var __meta__ = {
             for (var i = 0; i < pointers.length; i++) {
                 var pointerElement = pointers[i].reflow(that.scale.arc);
                 that._initialPlotArea = Rect.union(that._initialPlotArea, pointers[i].bbox);
-            };
+            }
 
             that.fitScale(bbox);
             that.alignScale(bbox);
@@ -890,7 +890,7 @@ var __meta__ = {
                 current.render();
                 surface.draw(current.elements);
                 current.value(current.options.value);
-            };
+            }
             surface.draw(scale.children[2]); // labels
         },
 
@@ -1155,9 +1155,9 @@ var __meta__ = {
             var scaleBox = scale.box;
             var box = pointers[0].box.clone().wrap(scale.box);
             var plotAreaBox = that.bbox;
-            var diff;
+            var diff, i;
 
-            for (var i = 0; i < pointers.length; i++) {
+            for (i = 0; i < pointers.length; i++) {
                 box.wrap(pointers[i].box.clone());
             }
 
@@ -1175,7 +1175,7 @@ var __meta__ = {
                 ));
             }
 
-            for (var i = 0; i < pointers.length; i++) {
+            for (i = 0; i < pointers.length; i++) {
                 pointers[i].reflow(that.bbox);
             }
         },
@@ -1187,8 +1187,9 @@ var __meta__ = {
             var scaleBox = scale.box.clone();
             var pos = scale.options.vertical ? "y" : "x";
             var pointerBox = pointers[0].box;
+            var i;
 
-            for (var i = 0; i < pointers.length; i++) {
+            for (i = 0; i < pointers.length; i++) {
                 pointerBox.wrap(pointers[i].box.clone());
             }
 
@@ -1197,7 +1198,7 @@ var __meta__ = {
 
             scale.reflow(scaleBox);
 
-            for (var i = 0; i < pointers.length; i++) {
+            for (i = 0; i < pointers.length; i++) {
                 pointers[i].reflow(that.bbox);
             }
         }
@@ -1446,7 +1447,8 @@ var __meta__ = {
                      margin[mirror ? "left" : "right"] :
                      margin[mirror ? "bottom" : "top"];
             var pointerBox, pointerRangeBox, trackBox;
-            var space = mirror ? -space : space;
+
+            space = mirror ? -space : space;
 
             if (vertical) {
                 trackBox = new Box2D(
@@ -1557,7 +1559,7 @@ var __meta__ = {
                 vertical: scale.options.vertical,
                 mirror: scale.options.mirror,
                 from: scale.getSlot(options._oldValue),
-                to: scale.getSlot(options.value),
+                to: scale.getSlot(options.value)
             }));
 
             if (options.animation.transitions === false) {
@@ -1628,7 +1630,7 @@ var __meta__ = {
             var options = that.options;
             var animation = new BarLinearPointerAnimation(that.elements, deepExtend(options.animation, {
                     reverse:  scale.options.reverse,
-                    vertical: scale.options.vertical,
+                    vertical: scale.options.vertical
                 }));
 
             if (options.animation.transitions === false) {
