@@ -2858,7 +2858,7 @@ function pad(number, digits, end) {
 
         if (!result) {
             result = new widget(element, options);
-        } else {
+        } else if (!$.isEmptyObject(options)) {
             result.setOptions(options);
         }
 
