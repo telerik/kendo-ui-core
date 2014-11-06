@@ -89,6 +89,106 @@ test("the type of header row is set to 'header'", function() {
     });
 });
 
+test("correct number of header rows are added for multi-column headers", function() {
+    testWorkbook({ columns: [{ columns: [{ field: "foo" }] }], dataSource: [{ foo: "bar" }] }, function(book) {
+        equal(book.sheets[0].rows[0].type, "header");
+        equal(book.sheets[0].rows[1].type, "header");
+    });
+});
+
+test("header rows cells text is set with multi-column headers", function() {
+    testWorkbook({ columns: [{ title: "master", columns: [{ field: "foo" }] }], dataSource: [{ foo: "bar" }] }, function(book) {
+        equal(book.sheets[0].rows[0].cells[0].value, "master");
+        equal(book.sheets[0].rows[1].cells[0].value, "foo");
+    });
+});
+
+test("colSpan is set to parent column with multi-column headers", function() {
+    testWorkbook({
+        columns: [
+            { title: "master", columns: [{ field: "foo" }] },
+            { title: "master2", columns: [{ field: "bar" }, { field: "baz" }] }
+        ], dataSource: [{ foo: "bar", bar: "baz", baz: "moo" }] }, function(book) {
+
+        equal(book.sheets[0].rows[0].cells[0].colSpan, 1);
+        equal(book.sheets[0].rows[0].cells[1].colSpan, 2);
+    });
+});
+
+test("skips columns that don't have a field - multi-column headers", function() {
+    testWorkbook({ columns: [
+            { title: "master" },
+            { title: "master2", columns: [{ field: "bar" }, { field: "baz" }] }
+        ], dataSource: [{ foo: "bar", bar: "baz", baz: "moo" }] }, function(book) {
+
+        equal(book.sheets[0].columns.length, 2);
+        equal(book.sheets[0].rows[0].cells.length, 1);
+        equal(book.sheets[0].rows[1].cells.length, 2);
+        equal(book.sheets[0].rows[2].cells.length, 2);
+    });
+});
+
+test("skips header column if all child columns that don't have a field - multi-column headers", function() {
+    testWorkbook({ columns: [
+            { title: "master", field: "baz" },
+            { title: "master2", columns: [{ title: "bar" }, { title: "baz" }] }
+        ], dataSource: [{ foo: "bar", bar: "baz", baz: "moo" }] }, function(book) {
+
+        equal(book.sheets[0].columns.length, 1);
+        equal(book.sheets[0].rows[0].cells.length, 1);
+        equal(book.sheets[0].rows[1].cells.length, 1);
+    });
+});
+
+test("does not skips header column if there is at least one child columns that do have a field - multi-column headers", function() {
+    testWorkbook({ columns: [
+            { title: "master", field: "baz" },
+            { title: "master2", columns: [{ field: "bar" }, { title: "baz" }] }
+        ], dataSource: [{ foo: "bar", bar: "baz", baz: "moo" }] }, function(book) {
+
+        equal(book.sheets[0].columns.length, 2);
+        equal(book.sheets[0].rows[0].cells.length, 2);
+        equal(book.sheets[0].rows[1].cells.length, 1);
+        equal(book.sheets[0].rows[2].cells.length, 2);
+    });
+});
+
+test("rowSpan is set column with no children with multi-column headers", function() {
+    testWorkbook({
+        columns: [
+            { title: "master", field: "foo" },
+            { title: "master2", columns: [{ field: "bar" }, { field: "baz" }] }
+        ], dataSource: [{ foo: "bar", bar: "baz", baz: "moo" }] }, function(book) {
+
+        equal(book.sheets[0].rows[0].cells[0].rowSpan, 2);
+        equal(book.sheets[0].rows[0].cells[1].rowSpan, 1);
+    });
+});
+
+test("hidden column is not rendered in the multi-column headers - top level is hidden", function() {
+    testWorkbook({
+        columns: [
+            { title: "master", columns: [{ field: "foo" }] },
+            { title: "master2", hidden: true, columns: [{ field: "bar" }] }
+        ], dataSource: [{ foo: "bar", bar: "baz" }] }, function(book) {
+
+        equal(book.sheets[0].rows[0].cells.length, 1);
+        equal(book.sheets[0].rows[1].cells.length, 1);
+    });
+});
+
+test("parent column is not rendered if all child columns are hidden in the multi-column headers", function() {
+    testWorkbook({
+        columns: [
+            { title: "master", columns: [{ field: "foo" }] },
+            { title: "master2", columns: [{ field: "bar", hidden: true }] }
+        ], dataSource: [{ foo: "bar", bar: "baz" }] }, function(book) {
+
+        equal(book.sheets[0].rows[0].cells.length, 1);
+        equal(book.sheets[0].rows[1].cells.length, 1);
+    });
+});
+
 test("only data items that match the filter are exported", 2, function() {
     var options = {
         columns: [ { field: "foo" } ],
@@ -196,6 +296,17 @@ test("freezes first row", function() {
     });
 });
 
+test("freezes all header rows with multi-column headers set", function() {
+    testWorkbook({
+        columns: [
+            { title: "master", columns: [{ field: "foo" }] },
+            { title: "master2", columns: [{ field: "bar" }, { field: "baz" }] }
+        ], dataSource: [{ foo: "bar", bar: "baz", baz: "moo" }] }, function(book) {
+
+        equal(book.sheets[0].freezePane.rowSplit, 2);
+    });
+});
+
 test("enables filtering", function() {
     testWorkbook({ filterable: true, columns: [ { field: "foo" } ], dataSource: [ {} ] }, function(book) {
         equal(book.sheets[0].filter.from, 0);
@@ -205,6 +316,16 @@ test("enables filtering", function() {
 
 test("locked columns set the freezePane", function() {
     testWorkbook({ columns: [ { field: "foo", locked: true }, { field: "bar", locked: true } ], dataSource: [ {} ] }, function(book) {
+        equal(book.sheets[0].freezePane.colSplit, 2);
+    });
+});
+
+test("locked multi-column headers set the freezePane", function() {
+    testWorkbook({
+        columns: [
+            { title: "master2", locked: true, columns: [{ field: "bar" }, { field: "baz" }] },
+            { title: "master", columns: [{ field: "foo" }] }
+        ], dataSource: [{ foo: "bar", bar: "baz", baz: "moo" }] }, function(book) {
         equal(book.sheets[0].freezePane.colSplit, 2);
     });
 });
