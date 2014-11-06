@@ -2,7 +2,6 @@ global.kendo = {};
 
 require("../src/pdf/core.js");
 require("../src/pdf/ttf.js");
-require("../src/pdf/image.js");
 
 var fs = require("fs");
 
@@ -10,78 +9,178 @@ function mm2pt(mm) {
     return mm * (72/25.4);
 }
 
-var PDF = kendo.PDF;
-var pdf = new PDF();
-var fonturl = "/usr/share/fonts/truetype/freefont/FreeSerif.ttf";
-var imgurl = "/home/mishoo/boulder.jpg";
+var PDF = kendo.pdf;
+var pdf = new PDF.Document();
+var page = pdf.addPage();
 
-PDF.loadFonts([ fonturl ], function(){
-    PDF.loadImages([ imgurl ], function(){
-        makeIt();
-    });
+page.save();
+page.translate(120, 150);
+page.beginText();
+page.setFont("Times-Roman", 20);
+page.showText("Hello");
+page.endText();
+page.restore();
+
+page.save();
+page.setFillGradient({
+    type: "linear",
+    start: { x: 100, y: 100 },
+    end: { x: 200, y: 200 },
+    stops: [
+        { offset:   0, color: { r: 1, g: 0, b: 0, a: 1 } },
+        { offset: 0.5, color: { r: 1, g: 1, b: 0, a: 0.7 } },
+        { offset:   1, color: { r: 0, g: 1, b: 1, a: 1 } },
+    ]
+}, {
+    left: 100,
+    bottom: 100,
+    top: 200,
+    right: 200
 });
 
-function makeIt() {
-    var font = pdf.getFont(fonturl);
-    var strings = [
-        "Kendo UI PDF generator. ♥",
-        "♙♘♗♖♕♔ ♟♞♝♜♛♚",
-        ""
-    ];
-    // var txt = "";
-    // var cmap = font._font.cmap.getUnicodeEntry().codeMap;
-    // for (var i = 0; i < 65536; ++i) {
-    //     if (cmap[i] == null) continue;
-    //     if (font._font.widthOfGlyph(cmap[i]) <= 0) continue;
-    //     txt += String.fromCharCode(i);
-    //     if (txt.length == 80) {
-    //         strings.push(txt);
-    //         txt = "";
-    //     }
-    // }
-    // if (txt) strings.push(txt);
+page.rect(100, 100, 100, 100);
+page.fillStroke();
+page.restore();
 
-    var page = pdf.addPage();
-    page.transform(1, 0, 0, -1, 0, mm2pt(297));
-    page.beginText();
-    page._out(mm2pt(5), " ", mm2pt(290), " TD\n");
-    page.setFont(font, 8);
-    page.setTextLeading(mm2pt(3.5));
-    for (var i = 0; i < strings.length; ++i) {
-        page.showTextNL(strings[i]);
+
+page.save();
+page.setFillGradient({
+    type: "radial",
+    start: { x: 150, y: 350, r: 100 },
+    end: { x: 150, y: 350, r: 20 },
+    stops: [
+        { offset:   0, color: { r: 1, g: 0, b: 0, a: 1 } },
+        { offset: 0.5, color: { r: 1, g: 1, b: 0, a: 0.7 } },
+        { offset:   1, color: { r: 0, g: 1, b: 1, a: 1 } },
+    ]
+}, {
+    left   : 0,
+    bottom : 0,
+    top    : 800,
+    right  : 800
+});
+page.rect(0, 250, 450, 450);
+page.fillStroke();
+page.restore();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var page = pdf.addPage();
+
+var opacity = pdf.dict({
+    Type: pdf.name("ExtGState"),
+    CA: 1,
+    ca: 1,
+    SMask: {
+        Type: pdf.name("Mask"),
+        S: pdf.name("Luminosity"),
+        G: pdf.stream({
+            Type: pdf.name("XObject"),
+            Subtype: pdf.name("Form"),
+            FormType: 1,
+            BBox: [ 100, 100, 200, 200 ],
+            Group: {
+                Type: pdf.name("Group"),
+                S: pdf.name("Transparency"),
+                CS: pdf.name("DeviceGray"),
+                I: true
+            },
+            Resources: {
+                ExtGState: {
+                    a0: { CA: 1, ca: 1 }
+                },
+                Shading: {
+                    s0: {
+                        ColorSpace: pdf.name("DeviceGray"),
+                        Coords: [ 100, 100, 200, 200 ],
+                        Domain: [ 0, 1 ],
+                        ShadingType: 2,
+                        Function: {
+                            FunctionType: 2,
+                            Domain: [ 0, 1 ],
+                            Range: [ 0, 1 ],
+                            N: 3,
+                            C0: [ 1 ],
+                            C1: [ 0 ]
+                        }
+                    }
+                }
+            }
+        }, "/a0 gs /s0 sh")
     }
-    page.endText();
+});
 
-    page.save();
-    page.translate(100, 100);
-    page.scale(300, 225);
-    page.setOpacity(0.5);
-    page.setOpacity(0.5);
-    page.drawImage(imgurl);
-    page.restore();
+page._gsResources["OP1"] = pdf.attach(opacity);
 
-    page.translate(0, 500);
+var pat = pdf.dict({
+    Type: pdf.name("Pattern"),
+    PatternType: 2,
+    //ExtGState: opacity,
+    Shading: {
+        ShadingType: 2,
+        ColorSpace: pdf.name("DeviceRGB"),
+        BBox: [ 100, 200, 200, 100 ],
+        Coords: [ 100, 100, 200, 200 ],
+        Domain: [ 0, 1 ],
+        Extend: [ false, false ],
+        Function: {
+            FunctionType: 3,
+            Functions: [
+                {
+                    FunctionType: 2,
+                    Domain: [ 0, 1 ],
+                    Range: [ 0, 1, 0, 1, 0, 1 ],
+                    N: 1,
+                    C0: [ 1, 0, 0 ],
+                    C1: [ 1, 1, 0 ]
+                },
+                {
+                    FunctionType: 2,
+                    Domain: [ 0, 1 ],
+                    Range: [ 0, 1, 0, 1, 0, 1 ],
+                    N: 1,
+                    C0: [ 1, 1, 0 ],
+                    C1: [ 0, 1, 1 ]
+                }
+            ],
+            Domain: [ 0, 1 ],
+            Bounds: [ 0.5 ],
+            Encode: [ 0, 1, 0, 1 ]
+        }
+    },
+    Matrix: [ 1, 0, 0, 1, 0, 0 ]
+});
 
-    page.moveTo(100, 100);
-    page.setLineJoin(0);
+page._patResources["P1"] = pdf.attach(pat);
 
-    page.setLineWidth(10);
-    page.setStrokeColor(1, 0, 0);
-    page.lineTo(200, 100);
+page.save();
+page.translate(120, 150);
+page.beginText();
+page.setFont("Times-Roman", 20);
+page.showText("Hello");
+page.endText();
+page.restore();
 
-    page.setLineWidth(5);
-    page.setStrokeColor(0, 0.8, 0);
-    page.lineTo(200, 200);
+page.rect(100, 100, 100, 100);
+page._out("/OP1 gs\n");
+page._out("/Pattern cs\n");
+page._out("/P1 scn\n");
+page.fill();
 
-    page.setLineWidth(15);
-    page.setStrokeColor(0, 0, 1);
-    page.lineTo(100, 200);
+var stream = pdf.render();
+var data = stream.get();
 
-    page.setLineWidth(10);
-    page.setStrokeColor(0, 0, 0);
-    page.lineTo(100, 100);
-    page.closeStroke();
-
-    var binary = pdf.render();
-    fs.writeFileSync("/tmp/pdf.txt", binary, { encoding: "binary" });
-}
+fs.writeFileSync("/tmp/pdf.pdf", new Buffer(data));
