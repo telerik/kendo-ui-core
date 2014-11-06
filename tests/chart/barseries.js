@@ -1126,19 +1126,16 @@
             barBox,
             text;
 
-        module("BarLabel", {
-            setup: function() {
-                view = new ViewStub();
-            }
-        });
+        module("BarLabel", {});
 
         test("renders no elements if visible option is false", function() {
             barLabel = new BarLabel("content", {visible: false});
-            var result = barLabel.getViewElements(view);
+            var root = new dataviz.RootElement();
+            root.append(barLabel);
+            root.box = Box2D();
+            root.renderVisual();
 
-            equal(result.length, 0);
-            equal(view.log.text.length, 0);
-            equal(view.log.rect.length, 0);
+            ok(!barLabel.textBox.visual);            
         });
 
         module("BarLabel / reflow / vertical", {});
@@ -1574,8 +1571,7 @@
 
         // ------------------------------------------------------------
         module("Bar Chart / Labels / Positive Values", {
-            setup: function() {
-                view = new ViewStub();
+            setup: function() {                
                 setupBarChart(plotArea, { series: [{
                     data: positiveData,
                     labels: {
@@ -1656,8 +1652,7 @@
 
         // ------------------------------------------------------------
         module("Bar Chart / Labels / Negative Values", {
-            setup: function() {
-                view = new ViewStub();
+            setup: function() {                
                 setupBarChart(plotArea, { series: [{
                     data: negativeData,
                     labels: {
