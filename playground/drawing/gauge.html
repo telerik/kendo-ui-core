@@ -22,8 +22,7 @@
     <script src="../../src/drawing/vml.js"></script>
     <script src="../../src/drawing/canvas.js"></script>
     <script src="../../src/drawing/animation.js"></script>
-    <!--<script src="../../src/kendo.dataviz.gauge.js"></script>-->
-    <script src="../../src/kendo.dataviz.gauge2.js"></script> 
+    <script src="../../src/kendo.dataviz.gauge.js"></script>
 
 </head>
 <body>
@@ -46,7 +45,7 @@
 var elem = $("#gauge");
 var elem2 = $("#gauge2");
 
-var l = elem2.kendoLinearGauge2({
+var l = elem2.kendoLinearGauge({
             pointer: [{
                 value: -10,
                 shape: "arrow",
@@ -120,7 +119,7 @@ var l = elem2.kendoLinearGauge2({
             }
         }).data("kendoLinearGauge2");
 
-var r = elem.kendoRadialGauge2({
+var r = elem.kendoRadialGauge({
         // gaugeArea: {
         //     width: 200,
         //     height: 200,

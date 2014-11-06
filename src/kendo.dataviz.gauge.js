@@ -1,53 +1,55 @@
 (function(f, define){
-    define([ "./kendo.dataviz.core", "./kendo.dataviz.svg", "./kendo.dataviz.themes" ], f);
+    define([ "./kendo.dataviz.core", "./kendo.drawing", "./kendo.dataviz.themes" ], f);
 })(function(){
 
 var __meta__ = {
     id: "dataviz.gauge",
     name: "Gauge",
     category: "dataviz",
-    description: "Radial gauge.",
-    depends: [ "dataviz.core", "dataviz.svg", "dataviz.themes" ]
+    description: "Radial and Linear gauges.",
+    depends: [ "dataviz.core", "drawing", "dataviz.themes" ]
 };
 
 (function ($, undefined) {
-
-    // Imports ================================================================
+    
     var math = Math,
-        map = $.map,
-
         kendo = window.kendo,
+        util = kendo.util,
         Widget = kendo.ui.Widget,
         deepExtend = kendo.deepExtend,
 
         dataviz = kendo.dataviz,
-        Axis = dataviz.Axis,
-        Box2D = dataviz.Box2D,
+        autoMajorUnit = dataviz.autoMajorUnit,
         ChartElement = dataviz.ChartElement,
         NumericAxis = dataviz.NumericAxis,
-        Pin = dataviz.Pin,
-        Ring = dataviz.Ring,
-        RootElement = dataviz.RootElement,
-        RotationAnimation = dataviz.RotationAnimation,
-        BarIndicatorAnimatin = dataviz.BarIndicatorAnimatin,
-        ArrowAnimation = dataviz.ArrowAnimation,
-        append = dataviz.append,
-        animationDecorator = dataviz.animationDecorator,
-        autoMajorUnit = dataviz.autoMajorUnit,
-        getElement = dataviz.getElement,
-        getSpacing = dataviz.getSpacing,
+        Axis = dataviz.Axis,
+        Box2D = dataviz.Box2D,
+        Class = kendo.Class,
         defined = dataviz.defined,
-        rotatePoint = dataviz.rotatePoint,
-        Point2D = dataviz.Point2D,
-        round = dataviz.round,
+        isArray = $.isArray,
+        isNumber = util.isNumber,
+        interpolateValue = dataviz.interpolateValue,
         valueOrDefault = dataviz.valueOrDefault,
-        uniqueId = dataviz.uniqueId;
+
+        getSpacing = dataviz.getSpacing,
+        round = dataviz.round,
+        uniqueId = dataviz.uniqueId,
+        geo = dataviz.geometry,
+        draw = dataviz.drawing,
+        Point = geo.Point,
+        Circle = draw.Circle,
+        Group = draw.Group,
+        Path = draw.Path,
+        Rect = geo.Rect,
+        Text = draw.Text
+        Surface = draw.Surface;
 
     // Constants ==============================================================
     var ANGULAR_SPEED = 150,
+        LINEAR_SPEED = 200, //1000,
         ARROW = "arrow",
         ARROW_POINTER = "arrowPointer",
-        BAR_INDICATOR = "barIndicator",
+        BAR_POINTER = "barPointer",
         BLACK = "#000",
         CAP_SIZE = 0.05,
         COORD_PRECISION = dataviz.COORD_PRECISION,
@@ -58,18 +60,23 @@ var __meta__ = {
         DEFAULT_WIDTH = 200,
         DEFAULT_MIN_WIDTH = 60,
         DEFAULT_MIN_HEIGHT = 60,
+        DEFAULT_MARGIN = 5,
         DEGREE = math.PI / 180,
+        GEO_ARC_ADJUST_ANGLE = 180,
         INSIDE = "inside",
+        LINEAR = "linear",
         NEEDLE = "needle",
         OUTSIDE = "outside",
         RADIAL_POINTER = "radialPointer",
-        ROTATION_ORIGIN = 90;
+        ROTATION_ORIGIN = 90,
+        SWING = "swing",
+        X = "x",
+        Y = "y";
 
-    // Gauge ==================================================================
-    var Pointer = ChartElement.extend({
-        init: function (scale, options) {
-            var pointer = this,
-                scaleOptions = scale.options;
+    var Pointer = Class.extend({
+        init: function(scale, options) {  
+            var pointer = this;
+            var scaleOptions = scale.options;
 
             ChartElement.fn.init.call(pointer, options);
 
@@ -90,24 +97,26 @@ var __meta__ = {
             }
         },
 
-        options: {
+        options: { 
             color: BLACK
         },
 
         value: function(newValue) {
-            var pointer = this,
-                options = pointer.options,
-                value = options.value,
-                scaleOptions = pointer.scale.options;
+            var that = this;
+            var options = that.options;
+            var value = options.value;
+            var scaleOptions = that.scale.options;
 
             if (arguments.length === 0) {
                 return value;
             }
 
-            options._oldValue = options.value;
+            options._oldValue = (options._oldValue !== undefined)? options.value : scaleOptions.min;
             options.value = math.min(math.max(newValue, scaleOptions.min), scaleOptions.max);
 
-            pointer.repaint();
+            if (that.elements) {
+                that.repaint();
+            }
         }
     });
 
@@ -123,112 +132,47 @@ var __meta__ = {
             },
             animation: {
                 type: RADIAL_POINTER,
-                speed: ANGULAR_SPEED
+                duration: ANGULAR_SPEED
             }
         },
 
-        reflow: function() {
-            var pointer = this,
-                options = pointer.options,
-                scale = pointer.scale,
-                ring = scale.ring,
-                c = ring.c,
-                capSize = ring.r * options.cap.size;
+        setRadius: function(radius) {
+            var that = this;
 
-            pointer.box = new Box2D(
-                c.x - capSize, c.y - capSize,
-                c.x + capSize, c.y + capSize
-            );
+            if (radius) {
+                that.elements.clear();
+                that.render(that.parent, that.center, radius);
+            }
+        },
+
+        setAngle: function(angle) {
+            this.elements.transform(geo.transform().rotate(angle, this.center))
         },
 
         repaint: function() {
-            var pointer = this,
-                scale = pointer.scale,
-                options = pointer.options,
-                needle = pointer.elements[0],
-                animationOptions = options.animation,
-                minSlotAngle = scale.slotAngle(scale.options.min),
-                oldAngle = scale.slotAngle(options._oldValue) - minSlotAngle,
-                animation = needle._animation;
+            var that = this;
+            var scale = that.scale;
+            var options = that.options;
+            var oldAngle = scale.slotAngle(options._oldValue);
+            var newAngle = scale.slotAngle(options.value);
 
-            needle.options.rotation[0] = scale.slotAngle(options.value) - minSlotAngle;
-
-            if (animation) {
-                animation.abort();
-            }
-
-            if (animationOptions.transitions === false) {
-                needle.refresh(getElement(options.id));
+            if (options.animation.transitions === false) {
+                that.setAngle(newAngle);
             } else {
-                animation = needle._animation = new RotationAnimation(needle, deepExtend(animationOptions, {
-                    startAngle: oldAngle,
-                    reverse: scale.options.reverse
-                }));
-                animation.setup();
-                animation.play();
+                new RadialPointerAnimation(that.elements, deepExtend(options.animation, {
+                    oldAngle: oldAngle,
+                    newAngle: newAngle
+                })).play();
             }
         },
 
-        _renderNeedle: function(view, box, center, pointRotation) {
-            var pointer = this,
-                options = pointer.options,
-                scale = pointer.scale,
-                capSize = scale.ring.r * options.cap.size;
-
-            return [
-                view.createPolyline([
-                    rotatePoint((box.x1 + box.x2) / 2,
-                        box.y1 + scale.options.minorTicks.size, center.x, center.y, pointRotation
-                    ),
-                    rotatePoint(center.x - capSize / 2, center.y, center.x, center.y, pointRotation),
-                    rotatePoint(center.x + capSize / 2, center.y, center.x, center.y, pointRotation)
-                ], true, options),
-                view.createCircle(center, capSize, {
-                    fill: options.cap.color || options.color
-                })
-            ];
-        },
-
-        _renderArrow: function(view, box, center, pointRotation) {
-            var pointer = this,
-                options = pointer.options,
-                scale = pointer.scale,
-                ring = scale.ring.clone(),
-                trackWidth = 5,
-                arrowOptions = options.arrow,
-                height = arrowOptions.height;
-
-            ring.ir = ring.r - trackWidth;
-
-            return [
-                view.createPin(new Pin({
-                    origin: rotatePoint(
-                        (box.x1 + box.x2) / 2, box.y1 + height,
-                        center.x, center.y, pointRotation
-                    ),
-                    height: arrowOptions.height,
-                    radius: trackWidth,
-                    rotation: pointRotation,
-                    arcAngle: 180
-                }), options),
-                view.createRing(ring, {
-                    fill: options.color
-                })
-            ];
-        },
-
-        renderPointer: function(view) {
-            var pointer = this,
-                scale = pointer.scale,
-                ring = scale.ring,
-                c = ring.c,
-                r = ring.r,
-                shape,
-                options = pointer.options,
-                box = new Box2D(c.x - r, c.y - r, c.x + r, c.y + r),
-                center = box.center(),
-                minAngle = scale.slotAngle(scale.options.min),
-                pointRotation = ROTATION_ORIGIN - minAngle;
+        render: function() {
+            var that = this;
+            var scale = that.scale;
+            var center = scale.arc.center;
+            var options = that.options;
+            var minAngle = scale.slotAngle(scale.options.min);
+            var elements = new Group();
 
             if (options.animation !== false) {
                 deepExtend(options.animation, {
@@ -238,42 +182,84 @@ var __meta__ = {
                 });
             }
 
+            //TODO check if needed
             deepExtend(options, {
                 rotation: [
                     scale.slotAngle(options.value) - minAngle,
-                    center.x,
-                    center.y
+                    center.x, center.y
                 ]
             });
 
-            if (options.shape == ARROW) {
-                shape = pointer._renderArrow(view, box, center, pointRotation);
+            if (options.shape === NEEDLE) {
+                elements.append(
+                    that._renderNeedle(),
+                    that._renderCap()
+                );
             } else {
-                shape = pointer._renderNeedle(view, box, center, pointRotation);
+                elements.append(that._renderArrow());
             }
 
-            return shape;
-        },
-
-        getViewElements: function(view) {
-            var pointer = this,
-                elements = pointer.renderPointer(view);
-
-            pointer.elements = elements;
+            that.elements = elements;
+            that.setAngle(DEGREE);
 
             return elements;
+        },
+
+        reflow: function(arc) {
+            var that = this;
+            var center = that.center = arc.center;
+            var radius = that.radius = arc.getRadiusX();
+            var capSize = that.capSize = radius * that.options.cap.size;
+
+            that.bbox = Rect.fromPoints(new Point(center.x - capSize, center.y - capSize),
+                                        new Point(center.x + capSize, center.y + capSize));
+        },
+
+        _renderNeedle: function() {
+            var that = this;
+            var options = that.options;
+            var minorTickSize = that.scale.options.minorTicks.size;
+            var center = that.center;
+            var needleColor = options.color;
+
+            var needlePath = new Path({
+                fill: { color: needleColor },
+                stroke: { color: needleColor, width: DEFAULT_LINE_WIDTH }
+            });
+
+            needlePath.moveTo(center.x + that.radius - minorTickSize, center.y)
+                      .lineTo(center.x, center.y - (that.capSize / 2))
+                      .lineTo(center.x, center.y + (that.capSize / 2))
+                      .close();
+
+            return needlePath;
+        },
+
+        _renderCap: function() {
+            var that = this;
+            var options = that.options;
+            var capColor = options.cap.color || options.color;
+            var circle = new geo.Circle(that.center, that.capSize);
+
+            var cap = new draw.Circle(circle, {
+               fill: { color: capColor },
+               stroke: { color: capColor }
+            });
+
+            return cap;
         }
     });
 
     var RadialScale = NumericAxis.extend({
-        init: function (options) {
+        init: function(options) {
             var scale = this;
 
             scale.options = deepExtend({}, scale.options, options);
             scale.options.majorUnit = scale.options.majorUnit || autoMajorUnit(scale.options.min, scale.options.max);
 
-            Axis.fn.init.call(scale, scale.options);
             scale.options.minorUnit = scale.options.minorUnit || scale.options.majorUnit / 10;
+
+            Axis.fn.init.call(scale, scale.options);
         },
 
         options: {
@@ -305,28 +291,46 @@ var __meta__ = {
             }
         },
 
-        reflow: function(box) {
-            var scale = this,
-                options = scale.options,
-                center = box.center(),
-                radius = math.min(box.height(), box.width()) / 2,
-                ring = scale.ring || new dataviz.Ring(
-                    center, radius - options.majorTicks.size,
-                    radius, options.startAngle, options.endAngle - options.startAngle);
+        render: function(center, radius) {
+            var that = this;
+            var options = that.options;
+            var group = that.elements = new Group();
+            var arc = that.renderArc(center, radius);
 
-            scale.ring = ring;
-            scale.box = ring.getBBox();
-            scale.arrangeLabels();
+            that.bbox = arc.bbox();
+            that.labelElements = that.renderLabels();
+            that.ticks = that.renderTicks();
+            that.ranges = that.renderRanges();
+            
+            group.append(that.ticks, that.ranges, that.labelElements);
+
+            return group;
+        },
+
+        reflow: function(bbox) {
+            var that = this;
+            var options = that.options;
+            var center = bbox.center();
+            var radius = math.min(bbox.height(), bbox.width()) / 2;
+
+            if (that.elements !== undefined) {
+                that.bbox = that.arc.bbox();
+                that.radius(that.arc.getRadiusX());
+                that.repositionRanges();
+                that.renderLabels();
+            } else {
+                return that.render(center, radius);
+            }
         },
 
         slotAngle: function(value) {
-            var options = this.options,
-                startAngle = options.startAngle,
-                reverse = options.reverse,
-                angle = options.endAngle - startAngle,
-                min = options.min,
-                max = options.max,
-                result;
+            var options = this.options;
+            var startAngle = options.startAngle;
+            var reverse = options.reverse;
+            var angle = options.endAngle - startAngle;
+            var min = options.min;
+            var max = options.max;
+            var result;
 
             if (reverse) {
                 result = options.endAngle - (value - min) / (max - min) * angle;
@@ -334,160 +338,141 @@ var __meta__ = {
                 result = ((value - min) / (max - min) * angle) + startAngle;
             }
 
-            return result;
+            return result + GEO_ARC_ADJUST_ANGLE;
         },
 
-        renderTicks: function(view) {
-            var scale = this,
-                ticks = [],
-                majorTickRing = scale.ring,
-                minorTickRing = majorTickRing.clone(),
-                options = scale.options,
-                minorTickSize = options.minorTicks.size;
+        renderLabels: function() {
+            var that = this;
+            var options = that.options;
+            var majorTickSize = options.majorTicks.size;
+            var arc = that.arc.clone();
+            var radius = arc.getRadiusX();
+            var tickAngles = that.tickAngles(arc, options.majorUnit);
+            var labels = that.labels;
+            var count = labels.length;
+            var labelsOptions = options.labels;
+            var padding = labelsOptions.padding;
+            var rangeDistance = radius * 0.05;
+            var rangeSize = options.rangeSize = options.rangeSize || radius * 0.1;
+            var ranges = options.ranges || [];
+            var halfWidth, halfHeight, labelAngle;
+            var angle, label, lp, i, cx, cy, isInside;
+            var labelsGroup = new Group();
+            var lbl, labelPos, prevLabelPos, labelTransform;
 
-            function renderTickRing(ring, unit, tickOptions, visible, skipUnit) {
-                var tickAngles = scale.tickAngles(ring, unit),
-                    i, innerPoint, outerPoint,
-                    skip = skipUnit / unit,
-                    count = tickAngles.length;
+            if (that.options.rangeDistance !== undefined) {
+                rangeDistance = that.options.rangeDistance;
+            } else {
+                that.options.rangeDistance = rangeDistance;
+            }
 
-                if (visible) {
-                    for (i = 0; i < count; i++) {
-                        if (i % skip === 0) {
-                            continue;
-                        }
+            if (labelsOptions.position === INSIDE) {
+                radius -= majorTickSize;
 
-                        outerPoint = ring.point(tickAngles[i]);
-                        innerPoint = ring.point(tickAngles[i], true);
-
-                        ticks.push(view.createLine(
-                            innerPoint.x, innerPoint.y,
-                            outerPoint.x, outerPoint.y,
-                            {
-                                align: false,
-                                stroke: tickOptions.color,
-                                strokeWidth: tickOptions.width
-                            }
-                        ));
-                    }
+                if (ranges.length && that.labelElements === undefined) {
+                    radius -= rangeSize + rangeDistance;
                 }
-            }
-
-            renderTickRing(majorTickRing, options.majorUnit, options.majorTicks, options.majorTicks.visible);
-
-            if (options.labels.position == INSIDE) {
-                minorTickRing.radius(minorTickRing.r - minorTickSize, true);
-            } else {
-                minorTickRing.radius(minorTickRing.ir + minorTickSize);
-            }
-
-            renderTickRing(minorTickRing, options.minorUnit, options.minorTicks, options.minorTicks.visible, options.majorUnit);
-
-            return ticks;
-        },
-
-        arrangeLabels: function() {
-            var scale = this,
-                options = scale.options,
-                ring = scale.ring.clone(),
-                tickAngels = scale.tickAngles(ring, options.majorUnit),
-                labels = scale.labels,
-                count = labels.length,
-                labelsOptions = options.labels,
-                padding = labelsOptions.padding,
-                rangeDistance = ring.r * 0.05,
-                rangeSize = options.rangeSize = options.rangeSize || ring.r * 0.1,
-                ranges = options.ranges || [],
-                halfWidth, halfHeight, labelAngle,
-                angle, label, lp, i, cx, cy, isInside;
-
-            if (typeof scale.options.rangeDistance != "undefined") {
-                rangeDistance = scale.options.rangeDistance;
-            } else {
-                scale.options.rangeDistance = rangeDistance;
-            }
-
-            if (labelsOptions.position === INSIDE && ranges.length) {
-                ring.r -= rangeSize + rangeDistance;
-                ring.ir -= rangeSize + rangeDistance;
+                arc.setRadiusX(radius).setRadiusY(radius);
             }
 
             for (i = 0; i < count; i++) {
                 label = labels[i];
                 halfWidth = label.box.width() / 2;
                 halfHeight = label.box.height() / 2;
-                angle = tickAngels[i];
-                labelAngle = angle * DEGREE;
+                angle = tickAngles[i];
+                labelAngle = (angle - GEO_ARC_ADJUST_ANGLE) * DEGREE;
                 isInside = labelsOptions.position === INSIDE;
-                lp = ring.point(angle, isInside);
+                lp = arc.pointAt(angle);
                 cx = lp.x + (math.cos(labelAngle) * (halfWidth + padding) * (isInside ? 1 : -1));
                 cy = lp.y + (math.sin(labelAngle) * (halfHeight + padding) * (isInside ? 1 : -1));
 
-                label.reflow(new Box2D(cx - halfWidth, cy - halfHeight,
-                    cx + halfWidth, cy + halfHeight));
-                scale.box.wrap(label.box);
+                label.reflow(new dataviz.Box2D(cx - halfWidth, cy - halfHeight,
+                                               cx + halfWidth, cy + halfHeight));
+                labelPos = new Point(label.box.x1, label.box.y1);
+
+                if (that.labelElements === undefined) {
+                    lbl = _buildLabel(label, options.labels);
+                    labelsGroup.append(lbl);
+                } else {
+                    lbl = that.labelElements.children[i];
+                    prevLabelPos = lbl.bbox().origin;
+
+                    labelTransform = lbl.transform() || geo.transform();
+                    labelTransform.translate(labelPos.x - prevLabelPos.x, labelPos.y - prevLabelPos.y);
+                    lbl.transform(labelTransform);
+                }
+
+                that.bbox = Rect.union(that.bbox, lbl.bbox());
+            }
+
+            return labelsGroup;
+        },
+
+        repositionRanges: function() {
+            var that = this;
+            var arc = that.arc;
+            var ranges = that.ranges.children;
+            var rangeSize = that.options.rangeSize;
+            var rangeDistance = that.options.rangeDistance;
+            var rangeRadius, newRadius;
+
+            if (ranges.length > 0) {
+                rangeRadius = that.getRangeRadius();
+
+                if (that.options.labels.position === INSIDE) {
+                    rangeRadius += rangeSize + rangeDistance;
+                }
+
+                newRadius = rangeRadius + (rangeSize / 2);
+
+                for (var i = 0; i < ranges.length; i++) {
+                    ranges[i]._geometry.setRadiusX(newRadius).setRadiusY(newRadius);
+                }
+
+                that.bbox = Rect.union(that.bbox, that.ranges.bbox());
             }
         },
 
-        tickAngles: function(ring, stepValue) {
-            var scale = this,
-                options = scale.options,
-                reverse = options.reverse,
-                range = options.max - options.min,
-                angle = ring.angle,
-                pos = ring.startAngle,
-                tickCount = range / stepValue,
-                step = angle / tickCount,
-                positions = [],
-                i;
-
-            if (reverse) {
-                pos += angle;
-                step = -step;
-            }
-
-            for (i = 0; i < tickCount ; i++) {
-                positions.push(round(pos, COORD_PRECISION));
-                pos += step;
-            }
-
-            if (round(pos) <= options.endAngle) {
-                positions.push(pos);
-            }
-
-            return positions;
-        },
-
-        renderRanges: function(view) {
-            var scale = this,
-                result = [],
-                from,
-                to,
-                segments = scale.rangeSegments(),
-                segmentsCount = segments.length,
-                reverse = scale.options.reverse,
-                segment,
-                ringRadius,
-                i;
+        renderRanges: function() {
+            var that = this;
+            var arc = that.arc;
+            var result = new Group();
+            var from, to;
+            var segments = that.rangeSegments();
+            var segmentsCount = segments.length;
+            var reverse = that.options.reverse;
+            var radius = that.radius();
+            var rangeSize = that.options.rangeSize;
+            var rangeDistance = options.rangeDistance;
+            var segment, rangeRadius, rangeGeom, i;
 
             if (segmentsCount) {
-                ringRadius = scale.getRadius();
+                rangeRadius = that.getRangeRadius();
+
+                // move the ticks with a range distance and a range size
+                that.radius(that.radius() - rangeSize - rangeDistance);
 
                 for (i = 0; i < segmentsCount; i++) {
                     segment = segments[i];
-                    from = scale.slotAngle(segment[reverse ? "to": "from"]);
-                    to = scale.slotAngle(segment[!reverse ? "to": "from"]);
+                    from = that.slotAngle(segment[reverse ? "to": "from"]);
+                    to = that.slotAngle(segment[!reverse ? "to": "from"]);
 
                     if (to - from !== 0) {
-                        result.push(view.createRing(
-                            new Ring(
-                                scale.ring.c, ringRadius.inner,
-                                ringRadius.outer, from, to - from
-                            ), {
-                                fill: segment.color,
-                                fillOpacity: segment.opacity,
-                                zIndex: -1
-                        }));
+                        rangeGeom = new geo.Arc(arc.center, {
+                            radiusX: rangeRadius + (rangeSize / 2),
+                            radiusY: rangeRadius + (rangeSize / 2),
+                            startAngle: from,
+                            endAngle: to
+                        });
+
+                        result.append(new draw.Arc(rangeGeom, {
+                                stroke: {
+                                    width: rangeSize,
+                                    color: segment.color,
+                                    opacity: segment.opacity
+                                }
+                            })
+                        );
                     }
                 }
             }
@@ -496,18 +481,18 @@ var __meta__ = {
         },
 
         rangeSegments: function() {
-            var gauge = this,
-                options = gauge.options,
-                ranges = options.ranges || [],
-                count = ranges.length,
-                range,
-                segmentsCount,
-                defaultColor = options.rangePlaceholderColor,
-                segments = [],
-                segment,
-                min = options.min,
-                max = options.max,
-                i, j;
+            var gauge = this;
+            var options = gauge.options;
+            var ranges = options.ranges || [];
+            var count = ranges.length;
+            var range;
+            var segmentsCount;
+            var defaultColor = options.rangePlaceholderColor;
+            var segments = [];
+            var segment;
+            var min = options.min;
+            var max = options.max;
+            var i, j;
 
             function rangeSegment(from, to, color, opacity) {
                 return { from: from, to: to, color: color, opacity: opacity };
@@ -536,117 +521,401 @@ var __meta__ = {
             return segments;
         },
 
-        getRadius: function() {
-            var scale = this,
-                options = scale.options,
-                rangeSize = options.rangeSize,
-                rangeDistance = options.rangeDistance,
-                ring = scale.ring,
-                ir, r;
+        getRangeRadius: function() {
+            var that = this;
+            var options = that.options;
+            var majorTickSize = options.majorTicks.size;
+            var rangeSize = options.rangeSize;
+            var rangeDistance = options.rangeDistance;
+            var arc = that.arc;
+            var r;
 
             if (options.labels.position === OUTSIDE) {
-                r = ring.ir - rangeDistance;
-                ir = r - rangeSize;
+                r = arc.getRadiusX() - majorTickSize - rangeDistance - rangeSize;
             } else {
-                r = ring.r;
-                ir = r - rangeSize;
-                // move the ticks with a range distance and a range size
-                ring.r -= rangeSize + rangeDistance;
-                ring.ir -= rangeSize + rangeDistance;
+                r = arc.getRadiusX() - rangeSize;
             }
 
-            return { inner: ir, outer: r };
+            return r;
         },
 
-        getViewElements: function(view) {
-            var scale = this,
-                childElements = ChartElement.fn.getViewElements.call(scale, view);
+        renderArc: function(center, radius) {
+            var that = this;
+            var options = that.options;
 
-            append(childElements, scale.renderRanges(view));
-            append(childElements, scale.renderTicks(view));
+            var arc = that.arc = new geo.Arc(center, {
+                    radiusX: radius,
+                    radiusY: radius,
+                    startAngle: options.startAngle + GEO_ARC_ADJUST_ANGLE,
+                    endAngle: options.endAngle + GEO_ARC_ADJUST_ANGLE
+                });
 
-            return childElements;
+            return arc;
+        },
+
+        renderTicks: function() {
+            var that = this;
+            var arc = that.arc;
+            var options = that.options;
+            var labelsPosition = options.labels.position;
+            var allTicks = new Group();
+            var majorTickSize = options.majorTicks.size;
+            var minorTickSize = options.minorTicks.size;
+            var tickArc = arc.clone();
+            var radius = tickArc.getRadiusX();
+
+            function drawTicks(arc, tickAngles, unit, tickOptions) {
+                var ticks = new Group(),
+                    center = arc.center,
+                    radius = arc.getRadiusX(),
+                    i, tickStart, tickEnd,
+                    tickSize = unit.size,
+                    visible = tickOptions.visible;
+
+                if (visible) {
+                    for (i = 0; i < tickAngles.length; i++) {
+                        tickStart = arc.pointAt(tickAngles[i]);
+                        tickEnd = new Point(center.x + radius - tickOptions.size, center.y).rotate(tickAngles[i], center);
+
+                        ticks.append(new Path({
+                            stroke: {
+                                color: tickOptions.color,
+                                width: tickOptions.width
+                            }
+                        }).moveTo(tickStart).lineTo(tickEnd));
+                    }
+                }
+
+                return ticks;
+            }
+
+            that.majorTickAngles = that.tickAngles(arc, options.majorUnit);
+            that.majorTicks = drawTicks(tickArc, that.majorTickAngles, options.majorUnit, options.majorTicks);
+            allTicks.append(that.majorTicks);
+
+            that._tickDifference = majorTickSize - minorTickSize;
+            if (labelsPosition === OUTSIDE) {
+                tickArc.setRadiusX(radius - majorTickSize + minorTickSize)
+                       .setRadiusY(radius - majorTickSize + minorTickSize);    
+            }
+
+            that.minorTickAngles = that.normalizeTickAngles(that.tickAngles(arc, options.minorUnit));
+            that.minorTicks = drawTicks(tickArc, that.minorTickAngles, options.minorUnit, options.minorTicks, options.majorUnit)
+            allTicks.append(that.minorTicks);
+
+            return allTicks;
+        },
+
+        normalizeTickAngles: function(angles) {
+            var that = this
+                options = that.options
+                skip = options.majorUnit / options.minorUnit;
+
+            for (var i = angles.length - 1; i >= 0; i--) {
+                if (i % skip === 0) {
+                    angles.splice(i, 1);
+                }
+            }
+
+            return angles;
+        },
+
+        tickAngles: function(ring, stepValue) {
+            var scale = this;
+            var options = scale.options;
+            var reverse = options.reverse;
+            var range = options.max - options.min;
+            var angle = ring.endAngle - ring.startAngle;
+            var pos = ring.startAngle;
+            var tickCount = range / stepValue;
+            var step = angle / tickCount;
+            var positions = [];
+            var i;
+
+            if (reverse) {
+                pos += angle;
+                step = -step;
+            }
+
+            for (i = 0; i < tickCount ; i++) {
+                positions.push(round(pos, COORD_PRECISION));
+                pos += step;
+            }
+
+            if (round(pos) <= ring.endAngle) {
+                positions.push(pos);
+            }
+
+            return positions;
+        },
+
+        radius: function(radius) {
+            var that = this;
+            var parent = that.parent;
+            var center = that.arc.center;
+
+            if(radius) {
+                that.arc.setRadiusX(radius).setRadiusY(radius);
+                that.repositionTicks(that.majorTicks.children, that.majorTickAngles);
+                that.repositionTicks(that.minorTicks.children, that.minorTickAngles, true);
+            } else {
+                return that.arc.getRadiusX();
+            }
+        },
+
+        repositionTicks: function(ticks, tickAngles, minor) {
+            var that = this;
+            var diff = minor ? (that._tickDifference || 0) : 0;
+            var tickArc = that.arc;
+            var radius = tickArc.getRadiusX();
+
+            if (minor && that.options.labels.position === OUTSIDE && diff !== 0) {
+                tickArc = that.arc.clone();
+                tickArc.setRadiusX(radius - diff).setRadiusY(radius - diff);
+            }
+
+            for (var i = 0; i < ticks.length; i++) { //tickAngles.length
+                var newPoint = tickArc.pointAt(tickAngles[i]);
+                var segments = ticks[i].segments;
+                var xDiff = newPoint.x - segments[0].anchor().x;
+                var yDiff = newPoint.y - segments[0].anchor().y;
+
+                ticks[i].transform(new geo.Transformation().translate(xDiff, yDiff));
+            };
         }
     });
 
-    var RadialGaugePlotArea = ChartElement.extend({
-        init: function(options) {
-            ChartElement.fn.init.call(this, options);
+    var Gauge = Widget.extend({
+        init: function(element, userOptions) {
+            var gauge = this;
+            var options;
+            var themeOptions;
+            var themeName;
+            var themes = dataviz.ui.themes || {};
+            var theme;
 
-            this.render();
+            Widget.fn.init.call(gauge, element);
+
+            gauge.wrapper = gauge.element;
+
+            gauge._originalOptions = deepExtend({}, userOptions);
+            options = deepExtend({}, gauge.options, userOptions);
+
+            themeName = options.theme;
+            theme = themes[themeName] || themes[themeName.toLowerCase()];
+            themeOptions = themeName && theme ? theme.gauge : {};
+
+            gauge.options = deepExtend({}, themeOptions, options);
+
+            gauge.element.addClass("k-gauge");
+
+            gauge.redraw();
         },
 
         options: {
-            margin: {},
-            background: "",
-            border: {
-                color: BLACK,
-                width: 0
-            },
-            minorTicks: {
-                align: INSIDE
+            plotArea: {},
+            theme: "default",
+            renderAs: "",
+            pointer: {},
+            scale: {},
+            gaugeArea: {}
+        },
+
+        value: function(value) {
+
+            var that = this;
+            var pointer = that.pointers[0];
+
+            if (arguments.length === 0) {
+                return pointer.value();
+            }
+
+            //todo check
+            //gauge.options.pointer.value = value;
+
+            pointer.value(value);
+        },
+
+        allValues: function(values) {
+            var that = this;
+            var pointers = that.pointers;
+            var allValues = [];
+            var i;
+
+            if (arguments.length === 0) {
+                for (i = 0; i < pointers.length; i++) {
+                    allValues.push(pointers[i].value());
+                }
+
+                return allValues;
+            }
+
+            if ($.isArray(values)) {
+                for (i = 0; i < values.length; i++) {
+                    if (isNumber(values[i])) {
+                        pointers[i].value(values[i]);
+                    }
+                }
             }
         },
 
-        reflow: function(box) {
-            var plotArea = this,
-                scale = plotArea.scale,
-                pointer = plotArea.pointer,
-                plotBox;
-debugger;
-            scale.reflow(box);
-            plotBox = scale.box.clone();
-            pointer.scale = scale;
-            pointer.reflow();
-            plotBox.wrap(pointer.box);
+        _resize: function() {
+            var that = this;
+            var t = that.options.transitions;
 
-            plotArea.box = plotBox;
-            debugger;
-            plotArea.fitScale(box);
-            plotArea.alignScale(box);
+            that.options.transitions = false;
+            that.redraw();
+            that.options.transitions = t;
         },
 
-        alignScale: function(box) {
-            var plotArea = this,
-                plotBoxCenter = plotArea.box.center(),
-                boxCenter = box.center(),
-                paddingX = plotBoxCenter.x - boxCenter.x,
-                paddingY = plotBoxCenter.y - boxCenter.y,
-                scale = plotArea.scale,
-                pointer = plotArea.pointer;
+        redraw: function() {
+            var that = this;
 
-            scale.ring.c.x -= paddingX;
-            scale.ring.c.y -= paddingY;
-
-            scale.reflow(box);
-            pointer.reflow();
-
-            plotArea.box = scale.box.clone().wrap(pointer.box);
+            that.surface = that._createSurface();
+            that.gaugeArea = that._createGaugeArea();
+            that._createModel();
+            that.reflow();
         },
 
-        fitScale: function(box) {
-            debugger;
-            var plotArea = this,
-                scale = plotArea.scale,
-                ring = scale.ring,
-                plotAreaBox = plotArea.box,
-                step = math.abs(plotArea.getDiff(plotAreaBox, box)),
-                min = round(step, COORD_PRECISION),
-                max = round(-step, COORD_PRECISION),
-                minDiff, midDiff, maxDiff, mid,
-                i = 0;
+        _createGaugeArea: function() {
+            var that = this;
+            var options = that.options.gaugeArea;
+            var size = that.surface.size();
+            var margin = that._gaugeAreaMargin = options.margin || DEFAULT_MARGIN;
+            var border = options.border || {};
+            var areaGeometry =  new Rect([0, 0], [size.width, size.height]);
+
+            if (border.width > 0) {
+                areaGeometry = _unpad(areaGeometry, border.width);
+            }
+
+            var gaugeArea = Path.fromRect(areaGeometry, {
+                stroke: {
+                    color: border.width ? border.color : "",
+                    width: border.width,
+                    dashType: border.dashType,
+                    lineJoin: "round",
+                    lineCap: "round"
+                },
+                fill: {
+                    color: options.background
+                }
+            });
+
+            return gaugeArea;
+        },
+
+        _createSurface: function() {
+            var that = this;
+            var options = that.options;
+            var size = that._getSize();
+            size = options.gaugeArea ? deepExtend(size, options.gaugeArea) : size;
+
+            return new draw.Surface.create(that.element, {
+                type: options.renderAs,
+                width: size.width,
+                height: size.height
+            });
+        },
+
+        getSize: function() {
+            return this._getSize();
+        },
+
+        _getSize: function() {
+            var that = this;
+            var element = that.element;
+            var width = element.width();
+            var height = element.height();
+
+            if (!width) {
+                width = DEFAULT_WIDTH;
+            }
+
+            if (!height) {
+                height = DEFAULT_HEIGHT;
+            }
+
+            return { width: width, height: height };
+        }
+    });
+
+    var RadialGauge = Gauge.extend({
+        init: function(element, options) {
+            var radialGauge = this;
+
+            Gauge.fn.init.call(radialGauge, element, options);
+
+            kendo.notify(radialGauge, dataviz.ui);
+        },
+
+        options: {
+            name: "RadialGauge",
+            transitions: true,
+            gaugeArea: {
+                background: ""
+            }
+        },
+
+        reflow: function() {
+            var that = this;
+            var pointers = that.pointers;
+            var size = that._getSize();
+            var wrapper = new Rect([0, 0], [size.width, size.height]);
+            var bbox = _unpad(wrapper.bbox(), that._gaugeAreaMargin);
+            var scaleElements = that.scale.reflow(bbox);
+            that._initialPlotArea = that.scale.bbox;
+
+            for (var i = 0; i < pointers.length; i++) {
+                var pointerElement = pointers[i].reflow(that.scale.arc);
+                that._initialPlotArea = Rect.union(that._initialPlotArea, pointers[i].bbox);
+            };
+
+            that.fitScale(bbox);
+            that.alignScale(bbox);
+            that._draw(that.gaugeArea, pointers, scaleElements);
+        },
+
+        _draw: function(gaugeArea, pointers, scale) {
+            var surface = this.surface;
+            var current;
+
+            surface.clear();
+            surface.draw(gaugeArea);
+            surface.draw(scale.children[0]); // ticks
+            surface.draw(scale.children[1]); // ranges
+
+            for (var i = 0; i < pointers.length; i++) {
+                current = pointers[i];
+                current.render();
+                surface.draw(current.elements);
+                current.value(current.options.value);
+            };
+            surface.draw(scale.children[2]); // labels
+        },
+
+        fitScale: function(bbox) {
+            var that = this;
+            var scale = that.scale;
+            var arc = scale.arc;
+            var plotAreaBox = that._initialPlotArea;
+            var step = math.abs(that.getDiff(plotAreaBox, bbox));
+            var min = round(step, COORD_PRECISION);
+            var max = round(-step, COORD_PRECISION);
+            var minDiff, midDiff, maxDiff, mid;
+            var i = 0;
 
             while (i < 100) {
                 i++;
                 if (min != mid) {
-                    minDiff = plotArea.getPlotBox(min, box, ring);
+                    minDiff = that.getPlotBox(min, bbox, arc);
                     if (0 <= minDiff && minDiff <= 2) {
                         break;
                     }
                 }
 
                 if (max != mid) {
-                    maxDiff = plotArea.getPlotBox(max, box, ring);
+                    maxDiff = that.getPlotBox(max, bbox, arc);
                     if (0 <= maxDiff && maxDiff <= 2) {
                         break;
                     }
@@ -660,7 +929,7 @@ debugger;
                     mid = round(((min + max) / 2) || 1, COORD_PRECISION);
                 }
 
-                midDiff = plotArea.getPlotBox(mid, box, ring);
+                midDiff = that.getPlotBox(mid, bbox, arc);
                 if (0 <= midDiff && midDiff <= 2) {
                     break;
                 }
@@ -675,43 +944,262 @@ debugger;
             }
         },
 
-        getPlotBox: function(step, box, ring) {
-            var plotArea = this,
-                scale = plotArea.scale,
-                pointer = plotArea.pointer;
+        getPlotBox: function(step, bbox, arc) {
+            var that = this;
+            var scale = that.scale;
+            var pointers = that.pointers;
+            var radius = arc.getRadiusX();
 
-            ring = ring.clone();
-            ring.r += step;
-            ring.ir += step;
-            scale.ring = ring;
-            scale.reflow(box);
-            pointer.scale = scale;
-            pointer.reflow();
-            plotArea.box = scale.box.clone().wrap(pointer.box);
+            arc = arc.clone();
+            arc.setRadiusX(radius + step).setRadiusY(radius + step);
 
-            return plotArea.getDiff(plotArea.box, box);
+            scale.arc = arc;
+            scale.reflow(bbox);
+            that.plotBbox = scale.bbox;
+
+            for (var i = 0; i < pointers.length; i++) {
+                pointers[i].reflow(arc);
+                that.plotBbox = Rect.union(that.plotBbox, pointers[i].bbox);
+            }
+
+            return that.getDiff(that.plotBbox, bbox);
         },
 
         getDiff: function(plotBox, box) {
             return math.min(box.width() - plotBox.width(), box.height() - plotBox.height());
         },
 
-        render: function() {
-            var plotArea = this,
-                options = plotArea.options,
-                scale;
+        alignScale: function(bbox) {
+            var that = this;
+            var plotBoxCenter = that.plotBbox.center();
+            var boxCenter = bbox.center();
+            var paddingX = plotBoxCenter.x - boxCenter.x;
+            var paddingY = plotBoxCenter.y - boxCenter.y;
+            var scale = that.scale;
+            var pointers = that.pointers;
 
-            scale = plotArea.scale = new RadialScale(options.scale);
-            plotArea.append(plotArea.scale);
-            plotArea.pointer = new RadialPointer(
-                scale,
-                deepExtend({}, options.pointer, {
-                    animation: {
-                        transitions: options.transitions
-                    }
-                })
-            );
-            plotArea.append(plotArea.pointer);
+            scale.arc.center.x -= paddingX;
+            scale.arc.center.y -= paddingY;
+
+            scale.reflow(bbox);
+            
+            for (var i = 0; i < pointers.length; i++) {
+                pointers[i].reflow(scale.arc);
+                that.plotBbox = Rect.union(scale.bbox, pointers[i].bbox);
+            }
+        },
+
+        _createModel: function() {
+            var that = this;
+            var options = that.options;
+            var pointers = options.pointer;
+            var scale = that.scale = new RadialScale(options.scale);
+            var current;
+
+            that.pointers = [];
+
+            pointers = $.isArray(pointers) ? pointers : [pointers];
+            for (var i = 0; i < pointers.length; i++) {
+                current = new RadialPointer(scale, 
+                    deepExtend({}, pointers[i], {
+                        animation: {
+                            transitions: options.transitions
+                        }
+                }));
+                that.pointers.push(current);
+            }
+        }
+    });
+
+    var LinearGauge = Gauge.extend({
+        init: function(element, options) {
+            var linearGauge = this;
+
+            Gauge.fn.init.call(linearGauge, element, options);
+
+            kendo.notify(linearGauge, dataviz.ui);
+        },
+
+        options: {
+            name: "LinearGauge",
+            transitions: true,
+            gaugeArea: {
+                background: ""
+            },
+            scale: {
+                vertical: true
+            }
+        },
+
+        reflow: function() {
+            var that = this;
+            var surface = that.surface;
+            var pointers = that.pointers;
+            var size = that._getSize();
+            var wrapper = new Rect([0, 0], [size.width, size.height]);
+            var bbox = _unpad(wrapper.bbox(), that._gaugeAreaMargin);
+            var bboxX = bbox.origin.x;
+            var bboxY = bbox.origin.y;
+
+            var bbox2D = new dataviz.Box2D(bboxX, bboxX,
+                                           bboxX + bbox.width(), bboxY + bbox.height());
+
+            that.scale.reflow(bbox2D);
+
+            for (var i = 0; i < pointers.length; i++) {
+                pointers[i].reflow(bbox2D);
+            }
+
+            that.bbox = that._getBox(bbox2D);
+            that._alignElements();
+            that._shrinkElements();
+            that._draw();
+        },
+
+        _draw: function(){
+            var that = this;
+            var surface = that.surface;
+            var scaleElements = that.scale.render();
+            var pointers = that.pointers;
+            var current;
+
+            surface.clear();
+            surface.draw(that.gaugeArea);
+            surface.draw(scaleElements);
+
+            for (var i = 0; i < pointers.length; i++) {
+                current = pointers[i];
+                surface.draw(current.render());
+                current.value(current.options.value);
+            }
+        },
+
+        _createModel: function() {
+            var that = this;
+            var options = that.options;
+            var pointers = options.pointer;
+            var scale = that.scale = new LinearScale(options.scale);
+            var current, currentOptions;
+
+            that.pointers = [];
+
+            pointers = $.isArray(pointers) ? pointers : [pointers];
+            for (var i = 0; i < pointers.length; i++) {
+                currentOptions = deepExtend({}, pointers[i], {
+                        animation: {
+                            transitions: options.transitions
+                        }
+                });
+
+                if (currentOptions.shape === ARROW) {
+                    current = new ArrowLinearPointer(scale, currentOptions);
+                } else {
+                    current = new BarLinearPointer(scale, currentOptions);
+                }
+
+                that.pointers.push(current);
+            }
+        },
+
+        _getSize: function() {
+            var gauge = this;
+            var element = gauge.element;
+            var width = element.width();
+            var height = element.height();
+            var vertical = gauge.options.scale.vertical;
+
+            if (!width) {
+                width = vertical ? DEFAULT_MIN_WIDTH : DEFAULT_WIDTH;
+            }
+
+            if (!height) {
+                height = vertical ? DEFAULT_HEIGHT : DEFAULT_MIN_HEIGHT;
+            }
+
+            return { width: width, height: height };
+        },
+
+        _getBox: function(box) {
+            var that = this;
+            var scale = that.scale;
+            var pointers = that.pointers;
+            var boxCenter = box.center();
+            var plotAreaBox = pointers[0].box.clone().wrap(scale.box);
+            var size;
+
+            for (var i = 0; i < pointers.length; i++) {
+                plotAreaBox.wrap(pointers[i].box.clone());
+            }
+
+            if (scale.options.vertical) {
+                size = plotAreaBox.width() / 2;
+                plotAreaBox = new Box2D(
+                    boxCenter.x - size, box.y1,
+                    boxCenter.x + size, box.y2
+                );
+            } else {
+                size = plotAreaBox.height() / 2;
+                plotAreaBox = new Box2D(
+                    box.x1, boxCenter.y - size,
+                    box.x2, boxCenter.y + size
+                );
+            }
+
+            return plotAreaBox;
+        },
+
+        _alignElements: function() {
+            var that = this;
+            var scale = that.scale;
+            var pointers = that.pointers;
+            var scaleBox = scale.box;
+            var box = pointers[0].box.clone().wrap(scale.box);
+            var plotAreaBox = that.bbox;
+            var diff;
+
+            for (var i = 0; i < pointers.length; i++) {
+                box.wrap(pointers[i].box.clone());
+            }
+
+            if (scale.options.vertical) {
+                diff = plotAreaBox.center().x - box.center().x;
+                scale.reflow(new Box2D(
+                    scaleBox.x1 + diff, plotAreaBox.y1,
+                    scaleBox.x2 + diff, plotAreaBox.y2
+                ));
+            } else {
+                diff = plotAreaBox.center().y - box.center().y;
+                scale.reflow(new Box2D(
+                    plotAreaBox.x1, scaleBox.y1 + diff,
+                    plotAreaBox.x2, scaleBox.y2 + diff
+                ));
+            }
+
+            for (var i = 0; i < pointers.length; i++) {
+                pointers[i].reflow(that.bbox);
+            }
+        },
+
+        _shrinkElements: function () {
+            var that = this;
+            var scale = that.scale;
+            var pointers = that.pointers;
+            var scaleBox = scale.box.clone();
+            var pos = scale.options.vertical ? "y" : "x";
+            var pointerBox = pointers[0].box;
+
+            for (var i = 0; i < pointers.length; i++) {
+                pointerBox.wrap(pointers[i].box.clone());
+            }
+
+            scaleBox[pos + 1] += math.max(scaleBox[pos + 1] - pointerBox[pos + 1], 0);
+            scaleBox[pos + 2] -= math.max(pointerBox[pos + 2] - scaleBox[pos + 2], 0);
+
+            scale.reflow(scaleBox);
+
+            for (var i = 0; i < pointers.length; i++) {
+                pointers[i].reflow(that.bbox);
+            }
         }
     });
 
@@ -759,53 +1247,104 @@ debugger;
             _alignLines: false
         },
 
-        renderRanges: function(view) {
-            var scale = this,
-                options = scale.options,
-                min = options.min,
-                max = options.max,
-                ranges = options.ranges || [],
-                vertical = options.vertical,
-                mirror = options.labels.mirror,
-                result = [],
-                count = ranges.length,
-                range, slotX, slotY, i,
-                rangeSize = options.rangeSize || options.minorTicks.size / 2,
-                slot;
+        render: function() {
+            var that = this;
+            var elements = new Group();
+            var labels = that.renderLabels();
+            var scaleLine = that.renderLine();
+            var scaleTicks = that.renderTicks();
+            var ranges = that.renderRanges();
+
+            elements.append(scaleLine, labels, scaleTicks, ranges);
+
+            return elements;
+        },
+
+        renderRanges: function() {
+            var that = this;
+            var options = that.options;
+            var min = options.min;
+            var max = options.max;
+            var ranges = options.ranges || [];
+            var vertical = options.vertical;
+            var mirror = options.labels.mirror;
+            var elements = new Group();
+            var count = ranges.length;
+            var rangeSize = options.rangeSize || options.minorTicks.size / 2;
+            var range, slot, slotX, slotY, i;
 
             if (count) {
                 for (i = 0; i < count; i++) {
                     range = getRange(ranges[i], min, max);
-                    slot = scale.getSlot(range.from, range.to);
-                    slotX = vertical ? scale.lineBox() : slot;
-                    slotY = vertical ? slot : scale.lineBox();
+                    slot = that.getSlot(range.from, range.to);
+                    slotX = vertical ? that.lineBox() : slot;
+                    slotY = vertical ? slot : that.lineBox();
                     if (vertical) {
                         slotX.x1 -= rangeSize * (mirror ? -1 : 1);
                     } else {
                         slotY.y2 += rangeSize * (mirror ? -1 : 1);
                     }
 
-                    result.push(view.createRect(
-                            new Box2D(slotX.x1, slotY.y1, slotX.x2, slotY.y2),
-                            { fill: range.color, fillOpacity: range.opacity }));
+                    elements.append(Path.fromRect(new Rect([slotX.x1, slotY.y1],
+                        [slotX.x2 - slotX.x1, slotY.y2 - slotY.y1]), {
+                        fill: { color: range.color, opacity: range.opacity },
+                        stroke: { }
+                    }));
                 }
             }
 
-            return result;
+            return elements;
         },
 
-        renderTicks: function(view) {
-            var axis = this,
-                ticks = [],
-                options = axis.options,
-                lineBox = axis.lineBox(),
-                mirror = options.labels.mirror,
-                majorUnit = options.majorTicks.visible ? options.majorUnit : 0,
-                tickLineOptions= {
-                    _alignLines: options._alignLines,
-                    vertical: options.vertical
-                },
-                start, end;
+        renderLabels: function() {
+            var that = this;
+            var options = that.options;
+            var labels = that.labels;
+            var elements = new Group();
+
+            for (var i = 0; i < labels.length; i++) {
+                elements.append(_buildLabel(labels[i], options.labels));
+            }
+
+            return elements;
+        },
+
+        renderLine: function() {
+            var that = this;
+            var options = that.options;
+            var line = options.line;
+            var lineBox = that.lineBox();
+            var linePath;
+            var elements = new Group();
+
+            if (line.width > 0 && line.visible) {
+                linePath = new Path({
+                    stroke: {
+                        color: line.color,
+                        dashType: line.dashType,
+                        width: line.width
+                    }
+                });
+
+                linePath.moveTo(lineBox.x1, lineBox.y1).lineTo(lineBox.x2, lineBox.y2);
+                elements.append(linePath);
+            }
+
+            return elements;
+        },
+
+        renderTicks: function() {
+            var that = this;
+            var ticks = new Group();
+            var options = that.options;
+            var lineBox = that.lineBox();
+            var mirror = options.labels.mirror;
+            var majorUnit = options.majorTicks.visible ? options.majorUnit : 0;
+            var tickLineOptions= {
+               _alignLines: options._alignLines,
+               vertical: options.vertical
+            };
+            var start, end;
 
             function render(tickPositions, tickOptions) {
                 var i, count = tickPositions.length;
@@ -820,157 +1359,51 @@ debugger;
                         tickLineOptions.tickY = mirror ? lineBox.y1 - tickOptions.size : lineBox.y1;
                         tickLineOptions.position = tickPositions[i];
 
-                        ticks.push(createAxisTick(view, tickLineOptions, tickOptions));
+                        ticks.append(that.renderAxisTick(tickLineOptions, tickOptions));
                     }
                 }
             }
 
-            render(axis.getMajorTickPositions(), options.majorTicks);
-            render(axis.getMinorTickPositions(), deepExtend({}, {
+            render(that.getMajorTickPositions(), options.majorTicks);
+            render(that.getMinorTickPositions(), deepExtend({}, {
                     skipUnit: majorUnit / options.minorUnit
                 }, options.minorTicks));
 
             return ticks;
         },
 
-        renderLine: function(view) {
-            var axis = this,
-                options = axis.options,
-                line = options.line,
-                lineBox = axis.lineBox(),
-                lineOptions,
-                elements = [];
+        renderAxisTick: function(options, tickOptions) {
+            var tickX = options.tickX;
+            var tickY = options.tickY;
+            var position = options.position;
+            var start, end, tickPath;
 
-            if (line.width > 0 && line.visible) {
-                lineOptions = {
-                    strokeWidth: line.width,
-                    stroke: line.color,
-                    dashType: line.dashType,
-                    zIndex: line.zIndex,
-                    align: options._alignLines
-                };
-
-                elements.push(view.createLine(
-                    lineBox.x1, lineBox.y1, lineBox.x2, lineBox.y2,
-                    lineOptions));
-
-                append(elements, axis.renderTicks(view));
+            if (options.vertical) {
+                start = new Point(tickX, position);
+                end = new Point(tickX + tickOptions.size, position);
+            } else {
+                start = new Point(position, tickY);
+                end = new Point(position, tickY + tickOptions.size);
             }
 
-            return elements;
-        },
+            tickPath = new Path({
+                stroke: {
+                    color: tickOptions.color,
+                    width: tickOptions.width
+                }
+            }).moveTo(start).lineTo(end);
 
-        renderPlotBands: function(view) {
-            var axis = this,
-                options = axis.options,
-                plotBands = options.plotBands || [],
-                vertical = options.vertical,
-                result = [],
-                plotArea = axis.plotArea,
-                slotX, slotY, from, to;
-
-            if (plotBands.length) {
-                var range = this.range();
-                result = map(plotBands, function(item) {
-                    from = valueOrDefault(item.from, MIN_VALUE);
-                    to = valueOrDefault(item.to, MAX_VALUE);
-                    var element = [];
-
-                    if (isInRange(from, range) || isInRange(to, range)) {
-                        if (vertical) {
-                            slotX = plotArea.axisX.lineBox();
-                            slotY = axis.getSlot(item.from, item.to, true);
-                        } else {
-                            slotX = axis.getSlot(item.from, item.to, true);
-                            slotY = plotArea.axisY.lineBox();
-                        }
-
-                        element = view.createRect(
-                                Box2D(slotX.x1, slotY.y1, slotX.x2, slotY.y2),
-                                { fill: item.color, fillOpacity: item.opacity, zIndex: -1 });
-                    }
-
-                    return element;
-                });
-            }
-
-            return result;
-        },
-
-        renderBackground: function(view) {
-            var axis = this,
-                options = axis.options,
-                background = options.background,
-                box = axis.box,
-                elements = [];
-
-            if (background) {
-                elements.push(
-                    view.createRect(box, {
-                        fill: background, zIndex: -1
-                    })
-                );
-            }
-
-            return elements;
-        },
-
-        getViewElements: function(view) {
-            var axis = this,
-                elements = ChartElement.fn.getViewElements.call(axis, view);
-
-            append(elements, axis.renderLine(view));
-            append(elements, axis.renderPlotBands(view));
-            append(elements, axis.renderBackground(view));
-            append(elements, axis.renderRanges(view));
-
-            return elements;
+            return tickPath;
         }
     });
-
-    var LegacyExportMixin = {
-        svg: function() {
-            if (dataviz.SVGView) {
-                var model = this._getModel(),
-                    view = new dataviz.SVGView(deepExtend({ encodeText: true }, model.options));
-
-                view.load(model);
-
-                return view.render();
-            } else {
-                throw new Error("Unable to create SVGView. Check that kendo.dataviz.svg.js is loaded.");
-            }
-        },
-
-        imageDataURL: function() {
-            if (dataviz.CanvasView) {
-                if (dataviz.supportsCanvas()) {
-                    var model = this._getModel(),
-                        container = document.createElement("div"),
-                        view = new dataviz.CanvasView(model.options);
-
-                    view.load(model);
-
-                    return view.renderTo(container).toDataURL();
-                } else {
-                    kendo.logToConsole(
-                        "Warning: Unable to generate image. The browser does not support Canvas.\n" +
-                        "User agent: " + navigator.userAgent);
-
-                    return null;
-                }
-            } else {
-                throw new Error("Unable to create CanvasView. Check that kendo.dataviz.canvas.js is loaded.");
-            }
-        }
-    };
 
     var LinearPointer = Pointer.extend({
         init: function(scale, options) {
             var pointer = this;
+
             Pointer.fn.init.call(pointer, scale, options);
+
             pointer.options = deepExtend({
-                size: pointer.pointerSize(),
                 track: {
                     visible: defined(options.track)
                 }
@@ -978,7 +1411,7 @@ debugger;
         },
 
         options: {
-            shape: BAR_INDICATOR,
+            shape: BAR_POINTER,
 
             track: {
                 border: {
@@ -994,58 +1427,26 @@ debugger;
 
             margin: getSpacing(3),
             animation: {
-                type: BAR_INDICATOR
+                type: BAR_POINTER
             },
             visible: true
         },
 
-        repaint: function() {
-            var pointer = this,
-                scale = pointer.scale,
-                options = pointer.options,
-                element = pointer.element,
-                animation = element._animation;
-
-            if (animation) {
-                animation.abort();
-            }
-
-            if (options.animation.transitions === false) {
-                pointer.getViewElements(pointer._view);
-
-                element.points = pointer.element.points;
-                element.refresh(getElement(options.id));
-            } else {
-                options.animation = deepExtend({}, options.animation, {
-                    endPosition: scale.getSlot(scale.options.min, options.value),
-                    reverse: scale.options.reverse
-                });
-                if (options.shape === ARROW) {
-                    animation = element._animation = new ArrowAnimation(element, options.animation);
-                } else {
-                    animation = element._animation = new BarIndicatorAnimatin(element, options.animation);
-                }
-                animation.setup();
-                animation.play();
-            }
-        },
-
         reflow: function() {
-            var pointer = this,
-                options = pointer.options,
-                scale = pointer.scale,
-                scaleLine = scale.lineBox(),
-                trackSize = options.track.size || options.size,
-                pointerHalfSize = options.size / 2,
-                mirror = scale.options.mirror,
-                margin = getSpacing(options.margin),
-                vertical = scale.options.vertical,
-                space = vertical ?
+            var pointer = this;
+            var options = pointer.options;
+            var scale = pointer.scale;
+            var scaleLine = scale.lineBox();
+            var trackSize = options.track.size || options.size;
+            var pointerHalfSize = options.size / 2;
+            var mirror = scale.options.mirror;
+            var margin = getSpacing(options.margin);
+            var vertical = scale.options.vertical;
+            var space = vertical ?
                      margin[mirror ? "left" : "right"] :
-                     margin[mirror ? "bottom" : "top"],
-                pointerBox, pointerRangeBox, trackBox;
-
-            space = mirror ? -space : space;
+                     margin[mirror ? "bottom" : "top"];
+            var pointerBox, pointerRangeBox, trackBox;
+            var space = mirror ? -space : space;
 
             if (vertical) {
                 trackBox = new Box2D(
@@ -1058,7 +1459,7 @@ debugger;
                     trackBox.x2 += trackSize;
                 }
 
-                if (options.shape !== BAR_INDICATOR) {
+                if (options.shape !== BAR_POINTER) {
                     pointerRangeBox = new Box2D(
                         scaleLine.x2 + space, scaleLine.y1 - pointerHalfSize,
                         scaleLine.x2 + space, scaleLine.y2 + pointerHalfSize
@@ -1076,7 +1477,7 @@ debugger;
                     trackBox.y1 -= trackSize;
                 }
 
-                if (options.shape !== BAR_INDICATOR) {
+                if (options.shape !== BAR_POINTER) {
                     pointerRangeBox = new Box2D(
                         scaleLine.x1 - pointerHalfSize, scaleLine.y1 - space,
                         scaleLine.x2 + pointerHalfSize, scaleLine.y1 - space
@@ -1090,478 +1491,317 @@ debugger;
             pointer.box = pointerBox || trackBox.clone().pad(options.border.width);
         },
 
-        renderPointer: function(view) {
-            var pointer = this,
-                scale = pointer.scale,
-                options = pointer.options,
-                border = defined(options.border) ? {
-                    stroke: options.border.width ? options.border.color || options.color : "",
-                    strokeWidth: options.border.width,
+        getElementOptions: function() {
+            var options = this.options;
+            var elements = new Group();
+            var scale = this.scale;
+            
+            return {
+                fill: {
+                    color: options.color,
+                    opacity: options.opacity
+                },
+                stroke: defined(options.border) ? {
+                    color: options.border.width ? options.border.color || options.color : "",
+                    width: options.border.width,
                     dashType: options.border.dashType
-                } : {},
-                element,
-                elementOptions = deepExtend({
-                        fill: options.color,
-                        fillOpacity: options.opacity,
-                        animation: deepExtend(options.animation, {
-                            startPosition: scale.getSlot(scale.options.min, options.value),
-                            size: options.size,
-                            vertical: scale.options.vertical,
-                            reverse: scale.options.reverse
-                        }),
-                        id: options.id,
-                        zIndex: 2,
-                        align: false
-                    }, border),
-                shape = pointer.pointerShape(options.value);
+                } : {}
+            };
+        }
+    });
 
-            if (options.shape === ARROW) {
-                elementOptions.animation.type = ARROW_POINTER;
-                element = view.createPolyline(shape, true, elementOptions);
-            } else {
-                element = view.createRect(shape, elementOptions);
-            }
+    var ArrowLinearPointer = LinearPointer.extend({
+        init: function(scale, options) {
+            LinearPointer.fn.init.call(this, scale, options);
 
-            return element;
+            this.options.size = this.scale.options.majorTicks.size * 0.6;
         },
 
         pointerShape: function(value) {
-            var pointer = this,
-                options = pointer.options,
-                scale = pointer.scale,
-                slot = scale.getSlot(value, scale.options.min),
-                size = options.size,
-                pointerRangeBox = pointer.pointerRangeBox,
-                vertical = scale.options.vertical,
-                halfSize = size / 2,
-                shape,
-                sign = (scale.options.mirror ? -1 : 1),
-                reverse = scale.options.reverse,
-                pos,
-                trackBox;
+            var that = this;
+            var options = that.options;
+            var scale = that.scale;
+            var slot = new Box2D();
+            var pointerRangeBox = new Box2D();
+            var size = options.size;
+            var vertical = scale.options.vertical;
+            var halfSize = size / 2;
+            var sign = (scale.options.mirror ? -1 : 1);
+            var reverse = scale.options.reverse;
+            var pos, shape;
 
-            if (options.shape == ARROW) {
-                if (vertical) {
-                    pos = reverse ? "y2" : "y1";
-                    shape = [
-                        new Point2D(pointerRangeBox.x1, slot[pos] - halfSize),
-                        new Point2D(pointerRangeBox.x1 - sign * size, slot[pos]),
-                        new Point2D(pointerRangeBox.x1, slot[pos] + halfSize)
-                    ];
-                } else {
-                    pos = reverse ? "x1" : "x2";
-                    shape = [
-                        new Point2D(slot[pos] - halfSize, pointerRangeBox.y2),
-                        new Point2D(slot[pos], pointerRangeBox.y2 + sign * size),
-                        new Point2D(slot[pos] + halfSize, pointerRangeBox.y2)
-                    ];
-                }
+            if (vertical) {
+                pos = reverse ? "y2" : "y1";
+                shape = [
+                    new Point(pointerRangeBox.x1, slot[pos] - halfSize),
+                    new Point(pointerRangeBox.x1 - sign * size, slot[pos]),
+                    new Point(pointerRangeBox.x1, slot[pos] + halfSize)
+                ];
             } else {
-                trackBox = pointer.trackBox;
-                if (vertical) {
-                    shape = new Box2D(
-                        trackBox.x1, slot.y1,
-                        trackBox.x1 + size, slot.y2);
-                } else {
-                    shape = new Box2D(
-                        slot.x1, trackBox.y1,
-                        slot.x2, trackBox.y1 + size);
-                }
+                pos = reverse ? "x1" : "x2";
+                shape = [
+                    new Point(slot[pos] - halfSize, pointerRangeBox.y2),
+                    new Point(slot[pos], pointerRangeBox.y2 + sign * size),
+                    new Point(slot[pos] + halfSize, pointerRangeBox.y2)
+                ];
             }
 
             return shape;
         },
 
-        pointerSize: function() {
-            var pointer = this,
-                options = pointer.options,
-                scale = pointer.scale,
-                tickSize = scale.options.majorTicks.size,
-                size;
+        repaint: function() {
+            var that = this;
+            var scale = that.scale;
+            var options = that.options;
+            var animation = new ArrowLinearPointerAnimation(that.elements, deepExtend(options.animation, {
+                vertical: scale.options.vertical,
+                mirror: scale.options.mirror,
+                from: scale.getSlot(options._oldValue),
+                to: scale.getSlot(options.value),
+            }));
 
-            if (options.shape === ARROW) {
-                size = tickSize * 0.6;
-            } else {
-                size = tickSize * 0.3;
+            if (options.animation.transitions === false) {
+                animation.options.duration = 0;
             }
 
-            return round(size);
-        },
-
-        renderTrack: function(view) {
-            var pointer = this,
-                options = pointer.options,
-                trackOptions = options.track,
-                border = trackOptions.border || {},
-                trackBox = pointer.trackBox.clone().pad(border.width || 0);
-
-            return view.createRect(trackBox, {
-                fill: trackOptions.color,
-                fillOpacity: trackOptions.opacity,
-                stroke: border.width ? border.color || trackOptions.color : "",
-                strokeWidth: border.width,
-                dashType: border.dashType,
-                align: false
-            });
-        },
-
-        getViewElements: function(view) {
-            var pointer = this,
-                options = pointer.options,
-                elements = [];
-
-            pointer.element = pointer.renderPointer(view);
-            elements.push(pointer.element);
-            if (options.track.visible &&
-                (options.shape === BAR_INDICATOR || options.shape === "")) {
-                elements.push(pointer.renderTrack(view));
-            }
-
-            pointer._view = view;
-
-            append(elements, Pointer.fn.getViewElements.call(pointer, view));
-
-            return elements;
-        }
-    });
-
-    var LinearGaugePlotArea = ChartElement.extend({
-        init: function(options) {
-            ChartElement.fn.init.call(this, options);
-
-            this.render();
-        },
-
-        options: {
-            plotArea: {
-                margin: {},
-                background: "",
-                border: {
-                    color: BLACK,
-                    width: 0
-                }
-            },
-            pointer: {},
-            scale: {}
-        },
-
-        reflow: function(box){
-            var plotArea = this,
-                scale = plotArea.scale,
-                pointer = plotArea.pointer;
-
-            scale.reflow(box);
-            pointer.reflow(box);
-            plotArea.box = plotArea.getBox(box);
-            plotArea.alignElements();
-            plotArea.shrinkElements();
-        },
-
-        shrinkElements: function () {
-            var plotArea = this,
-                scale = plotArea.scale,
-                pointer = plotArea.pointer,
-                scaleBox = scale.box.clone(),
-                pointerBox = pointer.box,
-                pos = scale.options.vertical ? "y" : "x";
-
-            scaleBox[pos + 1] += math.max(scaleBox[pos + 1] - pointerBox[pos + 1], 0);
-            scaleBox[pos + 2] -= math.max(pointerBox[pos + 2] - scaleBox[pos + 2], 0);
-
-            scale.reflow(scaleBox);
-
-            pointer.reflow(plotArea.box);
-        },
-
-        getBox: function(box) {
-            var plotArea = this,
-                scale = plotArea.scale,
-                pointer = plotArea.pointer,
-                boxCenter = box.center(),
-                plotAreaBox = pointer.box.clone().wrap(scale.box),
-                size;
-
-            if (scale.options.vertical) {
-                size = plotAreaBox.width() / 2;
-                plotAreaBox = new Box2D(
-                    boxCenter.x - size, box.y1,
-                    boxCenter.x + size, box.y2
-                );
-            } else {
-                size = plotAreaBox.height() / 2;
-                plotAreaBox = new Box2D(
-                    box.x1, boxCenter.y - size,
-                    box.x2, boxCenter.y + size
-                );
-            }
-
-            return plotAreaBox;
-        },
-
-        alignElements: function() {
-            var plotArea = this,
-                scale = plotArea.scale,
-                pointer = plotArea.pointer,
-                scaleBox = scale.box,
-                box = pointer.box.clone().wrap(scale.box),
-                plotAreaBox = plotArea.box,
-                diff;
-
-            if (scale.options.vertical) {
-                diff = plotAreaBox.center().x - box.center().x;
-                scale.reflow(new Box2D(
-                    scaleBox.x1 + diff, plotAreaBox.y1,
-                    scaleBox.x2 + diff, plotAreaBox.y2
-                ));
-            } else {
-                diff = plotAreaBox.center().y - box.center().y;
-                scale.reflow(new Box2D(
-                    plotAreaBox.x1, scaleBox.y1 + diff,
-                    plotAreaBox.x2, scaleBox.y2 + diff
-                ));
-            }
-            pointer.reflow(plotArea.box);
+            animation.setup();
+            animation.play();
         },
 
         render: function() {
-            var plotArea = this,
-                options = plotArea.options,
-                scale;
+            var that = this;
+            var options = that.options;
+            var elements = new Group();
+            var scale = that.scale;
+            var elementOptions = that.getElementOptions();
+            var shape = that.pointerShape(options.value);
 
-            scale = plotArea.scale = new LinearScale(options.scale);
-            plotArea.append(plotArea.scale);
-            plotArea.pointer = new LinearPointer(
-                scale,
-                deepExtend({}, options.pointer, {
-                    animation: {
-                        transitions: options.transitions
-                    }
-                })
-            );
-            plotArea.append(plotArea.pointer);
-        },
+            options.animation.type = ARROW_POINTER;
 
-        getViewElements: function(view) {
-            var plotArea = this,
-                options = plotArea.options.plotArea,
-                childElements = ChartElement.fn.getViewElements.call(plotArea, view),
-                border = options.border || {},
-                elements = [
-                    view.createRect(plotArea.box, {
-                        fill: options.background,
-                        stroke: border.width ? border.color : "",
-                        strokeWidth: border.width,
-                        dashType: border.dashType
-                    })
-                ];
+            elements = new Path({
+                stroke: elementOptions.stroke,
+                fill: elementOptions.fill
+            }).moveTo(shape[0]).lineTo(shape[1]).lineTo(shape[2]).close();
 
-            append(elements, childElements);
+            var slot = scale.getSlot(options.value);
+            elements.transform(geo.transform().translate(slot.x1, slot.y1));
+
+            that.elements = elements;
 
             return elements;
         }
     });
 
-    var Gauge = Widget.extend({
-        init: function(element, userOptions) {
-            var gauge = this,
-                options,
-                themeOptions,
-                themeName,
-                themes = dataviz.ui.themes || {},
-                theme;
+    var BarLinearPointer = LinearPointer.extend({
+        init: function(scale, options) {
+            LinearPointer.fn.init.call(this, scale, options);
 
-            Widget.fn.init.call(gauge, element);
-
-            gauge.wrapper = gauge.element;
-
-            gauge._originalOptions = deepExtend({}, userOptions);
-            options = deepExtend({}, gauge.options, userOptions);
-
-            themeName = options.theme;
-            theme = themes[themeName] || themes[themeName.toLowerCase()];
-            themeOptions = themeName && theme ? theme.gauge : {};
-
-            gauge.options = deepExtend({}, themeOptions, options);
-
-            gauge.element.addClass("k-gauge");
-
-            gauge.redraw();
+            this.options.size = this.scale.options.majorTicks.size * 0.3;
         },
 
-        options: {
-            plotArea: {},
-            theme: "default",
-            renderAs: "",
-            pointer: {},
-            scale: {},
-            gaugeArea: {}
-        },
+        pointerShape: function(value) {
+            var that = this;
+            var options = that.options;
+            var scale = that.scale;
+            var slot = new Box2D();
+            var pointerRangeBox = new Box2D();
+            var size = options.size;
+            var vertical = scale.options.vertical;
+            var halfSize = size / 2;
+            var sign = (scale.options.mirror ? -1 : 1);
+            var reverse = scale.options.reverse;
+            var trackBox = that.trackBox;
+            var pos, shape;
 
-        value: function(value) {
-            var gauge = this,
-                pointer = gauge._pointers[0];
-
-            if (arguments.length === 0) {
-                return pointer.value();
-            }
-
-            gauge.options.pointer.value = value;
-
-            if (gauge._view.renderElement) {
-                pointer.value(value);
+            if (vertical) {
+                shape = new Rect([trackBox.x1, slot.y1], [size, slot.y2 - slot.y1]);
             } else {
-                gauge.redraw();
-            }
-        },
-
-        redraw: function() {
-            var gauge = this,
-                element = gauge.element,
-                model = gauge._model = gauge._getModel(),
-                view;
-
-            gauge._plotArea = model._plotArea;
-
-            view = gauge._view =
-                dataviz.ViewFactory.current.create(model.options, gauge.options.renderAs);
-
-            if (view) {
-                view.load(model);
-                gauge._viewElement = view.renderTo(element[0]);
-            }
-        },
-
-        getSize: function() {
-            return this._getSize();
-        },
-
-        _resize: function() {
-            var t = this.options.transitions;
-            this.options.transitions = false;
-
-            this.redraw();
-
-            this.options.transitions = t;
-        },
-
-        _createModel: function() {
-            var gauge = this,
-                options = gauge.options,
-                size = gauge._getSize();
-
-            return new RootElement(deepExtend({
-                width: size.width,
-                height: size.height,
-                transitions: options.transitions
-            }, options.gaugeArea));
-        },
-
-        _getSize: function() {
-            var gauge = this,
-                element = gauge.element,
-                width = element.width(),
-                height = element.height();
-
-            if (!width) {
-                width = DEFAULT_WIDTH;
+                shape = new Rect([slot.x1, trackBox.y1], [slot.x2 - slot.x1, size]);
             }
 
-            if (!height) {
-                height = DEFAULT_HEIGHT;
-            }
-
-            return { width: width, height: height };
-        }
-    });
-    deepExtend(Gauge.fn, LegacyExportMixin);
-
-    var RadialGauge = Gauge.extend({
-        init: function(element, options) {
-            var radialGauge = this;
-            Gauge.fn.init.call(radialGauge, element, options);
-            kendo.notify(radialGauge, dataviz.ui);
+            return shape;
         },
 
-        options: {
-            name: "RadialGauge",
-            transitions: true,
-            gaugeArea: {
-                background: ""
+        repaint: function() {
+            var that = this;
+            var scale = that.scale;
+            var options = that.options;
+            var animation = new BarLinearPointerAnimation(that.elements, deepExtend(options.animation, {
+                    reverse:  scale.options.reverse,
+                    vertical: scale.options.vertical,
+                }));
+
+            if (options.animation.transitions === false) {
+                animation.options.duration = 0;
             }
+
+            animation.setup();
+            animation.play();
         },
 
-        _getModel: function() {
-            var gauge = this,
-                options = gauge.options,
-                model = gauge._createModel(),
-                plotArea;
+        render: function() {
+            var that = this;
+            var options = that.options;
+            var elements = new Group();
+            var scale = that.scale;
+            var elementOptions = that.getElementOptions();
+            var shape = that.pointerShape(options.value);
 
-            plotArea = model._plotArea = new RadialGaugePlotArea(options);
+            elements = Path.fromRect(shape, {
+                stroke: elementOptions.stroke,
+                fill: elementOptions.fill
+            });
 
-            gauge._pointers = [plotArea.pointer];
+            var slot = scale.getSlot(options.value);
+            elements.transform(geo.transform().translate(slot.x1, slot.y1));
 
-            model.append(plotArea);
-            model.reflow();
+            that.elements = elements;
 
-            return model;
+            return elements;
         }
     });
 
-    var LinearGauge = Gauge.extend({
-        init: function(element, options) {
-            var linearGauge = this;
-            Gauge.fn.init.call(linearGauge, element, options);
-            kendo.notify(linearGauge, dataviz.ui);
+    var RadialPointerAnimation = draw.Animation.extend({
+        init: function(element, options){
+            draw.Animation.fn.init.call(this, element, options);
+
+            options = this.options;
+
+            options.duration = math.max((math.abs(options.newAngle - options.oldAngle) / options.duration) * 1000, 1);
         },
 
         options: {
-            name: "LinearGauge",
-            transitions: true,
-            gaugeArea: {
-                background: ""
+            easing: LINEAR,
+            duration: ANGULAR_SPEED
+        },
+
+        step: function(pos) {
+            var anim = this;
+            var options = anim.options;
+            var angle = interpolateValue(options.oldAngle, options.newAngle, pos);
+
+            anim.element.transform(geo.transform().rotate(angle, options.center));
+        }
+    });
+    draw.AnimationFactory.current.register(RADIAL_POINTER, RadialPointerAnimation);
+
+    var ArrowLinearPointerAnimation = draw.Animation.extend({
+        options: {
+            easing: LINEAR,
+            duration: LINEAR_SPEED
+        },
+
+        setup: function() {
+            var options = this.options;
+            var halfSize = this.element.bbox().width() / 2;
+            var from = options.from;
+            var to = options.to;
+            var axis = options.vertical ? "x1" : "y1";
+
+            if (options.mirror == options.vertical) {
+                from[axis] -= halfSize; to[axis] -= halfSize;
+            } else {
+                from[axis] += halfSize; to[axis] += halfSize;
+            }
+
+            var fromScale = this.fromScale = new Point(from.x1, from.y1);
+            var toScale = this.toScale = new Point(to.x1, to.y1);
+
+            if (options.duration !== 0) {
+                options.duration = math.max((fromScale.distanceTo(toScale) / options.duration) * 1000, 1);
+            }
+        },
+
+        step: function(pos) {
+            //TODO Fix animation.js
+            if (!pos) { pos = 1; }
+
+            var translateX = interpolateValue(this.fromScale.x, this.toScale.x, pos);
+            var translateY = interpolateValue(this.fromScale.y, this.toScale.y, pos);
+
+            this.element.transform(geo.transform().translate(translateX, translateY));            
+        }
+    });
+    draw.AnimationFactory.current.register(ARROW_POINTER, ArrowLinearPointerAnimation);
+
+    var BarLinearPointerAnimation = draw.Animation.extend({
+        options: {
+            easing: LINEAR,
+            duration: LINEAR_SPEED
+        },
+
+        setup: function() {
+            var element = this.element;
+            var options = this.options;
+
+            var bbox = element.bbox();
+            var origin = this.origin = options.reverse ? bbox.topRight() : bbox.bottomLeft();
+            var axis = options.vertical ? Y : X;
+            var fromOffset = this.fromOffset = new Point();
+            var fromScale = this.fromScale = new Point(1, 1);
+            fromScale[axis] = 0;
+
+            //options.duration = math.max((math.abs(anim.start - anim.end) / options.speed) * 1000, 1);
+
+            element.transform(geo.transform().scale(fromScale.x, fromScale.y));
+        },
+
+        step: function(pos) {
+            var scaleX = interpolateValue(this.fromScale.x, 1, pos);
+            var scaleY = interpolateValue(this.fromScale.y, 1, pos);
+            // var translateX = interpolateValue(this.fromOffset.x, 0, pos);
+            // var translateY = interpolateValue(this.fromOffset.y, 0, pos);
+
+            this.element.transform(geo.transform()
+                //.translate(translateX, translateY)
+                .scale(scaleX, scaleY, this.origin)
+            );
+        }
+    });
+    draw.AnimationFactory.current.register(BAR_POINTER, BarLinearPointerAnimation);
+
+    function _buildLabel(label, options) {
+        var labelBox = label.box;
+        var textBox = label.children[0].box;
+        var border = options.border || {};
+        var background = options.background || "";
+        var elements = new Group();
+        var styleBox, styleGeometry, wrapper;
+
+        wrapper = Path.fromRect(new Rect([labelBox.x1, labelBox.y1], [labelBox.width(), labelBox.height()]), {
+            stroke: {}
+        });
+
+        var text = new Text(label.text, new Point(textBox.x1, textBox.y1), {
+            font: options.font,
+            fill: { color: options.color }
+        });
+
+        styleGeometry = _pad(text.bbox().clone(), options.padding);
+
+        styleBox = Path.fromRect(styleGeometry, {
+            stroke: {
+                color: border.width ? border.color : "",
+                width: border.width,
+                dashType: border.dashType,
+                lineJoin: "round",
+                lineCap: "round"
             },
-            scale: {
-                vertical: true
+            fill: {
+                color: background
             }
-        },
+        });
 
-        _getModel: function() {
-            var gauge = this,
-                options = gauge.options,
-                model = gauge._createModel(),
-                plotArea;
+        elements.append(wrapper);
+        elements.append(styleBox);
+        elements.append(text);
 
-            plotArea = model._plotArea = new LinearGaugePlotArea(options);
-            gauge._pointers = [plotArea.pointer];
-
-            model.append(plotArea);
-            model.reflow();
-
-            return model;
-        },
-
-        _getSize: function() {
-            var gauge = this,
-                element = gauge.element,
-                width = element.width(),
-                height = element.height(),
-                vertical = gauge.options.scale.vertical;
-
-            if (!width) {
-                width = vertical ? DEFAULT_MIN_WIDTH : DEFAULT_WIDTH;
-            }
-
-            if (!height) {
-                height = vertical ? DEFAULT_HEIGHT : DEFAULT_MIN_HEIGHT;
-            }
-
-            return { width: width, height: height };
-        }
-    });
+        return elements;
+    }
 
     function getRange(range, min, max) {
-        var from = defined(range.from) ? range.from : MIN_VALUE,
-            to = defined(range.to) ? range.to : MAX_VALUE;
+        var from = defined(range.from) ? range.from : MIN_VALUE;
+        var to = defined(range.to) ? range.to : MAX_VALUE;
 
         range.from = math.max(math.min(to, from), min);
         range.to = math.min(math.max(to, from), max);
@@ -1569,52 +1809,40 @@ debugger;
         return range;
     }
 
-    function createAxisTick(view, options, tickOptions) {
-        var tickX = options.tickX,
-            tickY = options.tickY,
-            position = options.position,
-            start, end;
+    function _pad(bbox, value) {
+        var origin = bbox.getOrigin();
+        var size = bbox.getSize();
+        var spacing = getSpacing(value);
 
-        if (options.vertical) {
-            start = Point2D(tickX, position);
-            end = Point2D(tickX + tickOptions.size, position);
-        } else {
-            start = Point2D(position, tickY);
-            end = Point2D(position, tickY + tickOptions.size);
-        }
+        bbox.setOrigin([origin.x - spacing.left, origin.y - spacing.top]);
+        bbox.setSize([size.width + (spacing.left + spacing.right),
+                      size.height + (spacing.top + spacing.bottom)]);
 
-        return view.createLine(
-            start.x, start.y,
-            end.x, end.y, {
-                strokeWidth: tickOptions.width,
-                stroke: tickOptions.color,
-                align: options._alignLines
-            });
+        return bbox;
     }
 
-    function isInRange(value, range) {
-        return value >= range.min && value <= range.max;
+    function _unpad(bbox, value) {
+        var spacing = getSpacing(value);
+
+        spacing.left = -spacing.left; spacing.top = -spacing.top;
+        spacing.right = -spacing.right; spacing.bottom = -spacing.bottom;
+
+        return _pad(bbox, spacing);
     }
 
-    var RadialPointerAnimationDecorator = animationDecorator(RADIAL_POINTER, RotationAnimation);
-    var ArrowPointerAnimationDecorator = animationDecorator(ARROW_POINTER, ArrowAnimation);
-    var BarIndicatorAnimationDecorator = animationDecorator(BAR_INDICATOR, BarIndicatorAnimatin);
-
-    // Exports ================================================================
     dataviz.ui.plugin(RadialGauge);
     dataviz.ui.plugin(LinearGauge);
 
     deepExtend(dataviz, {
         Gauge: Gauge,
-        RadialGaugePlotArea: RadialGaugePlotArea,
-        LinearGaugePlotArea: LinearGaugePlotArea,
         RadialPointer: RadialPointer,
         LinearPointer: LinearPointer,
+        ArrowLinearPointer: ArrowLinearPointer,
+        BarLinearPointer: BarLinearPointer,
         LinearScale: LinearScale,
         RadialScale: RadialScale,
-        RadialPointerAnimationDecorator: RadialPointerAnimationDecorator,
-        ArrowPointerAnimationDecorator: ArrowPointerAnimationDecorator,
-        BarIndicatorAnimationDecorator: BarIndicatorAnimationDecorator
+        LinearGauge: LinearGauge,
+        RadialGauge: RadialGauge
     });
 
 })(window.kendo.jQuery);
