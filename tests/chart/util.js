@@ -200,6 +200,22 @@ function sameRectPath(path, rectCoordinates, TOLERANCE) {
     sameLinePath(path, rect, TOLERANCE);
 }
 
+function equalTexts(texts, expected) {
+    deepEqual($.map(texts, function(text) { return text.content() }), expected);
+}
+
+function closeTextPosition(axis, texts, expected, tolerance) {
+    if ($.isArray(expected)) {
+        arrayClose($.map(texts, function(item) {
+            return item.rect().origin[axis]
+        }), expected, tolerance);
+    } else {
+        $.each(texts, function(index) {
+            close(this.rect().origin[axis], $.isArray(expected) ? expected[index] : expected, tolerance);
+        });
+    }
+}
+
 function stubMethod(fn, methodName, stub, callback) {
     var oldMethod = fn[methodName];
 

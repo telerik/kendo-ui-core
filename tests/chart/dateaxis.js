@@ -1,12 +1,9 @@
 (function() {
-    return;
-
     var dataviz = kendo.dataviz,
         Box2D = dataviz.Box2D,
         Point2D = dataviz.Point2D,
         dateAxis,
         chartBox = new Box2D(0, 0, 800, 600),
-        view,
         TOLERANCE = 1;
 
     var DateCategoryAxis = dataviz.DateCategoryAxis.extend({
@@ -25,6 +22,20 @@
         }
     });
 
+    function getAxisTextBoxes() {
+        return $.grep(dateAxis.visual.children, function(item) {
+            if (item !== dateAxis._lineGroup && item !== dateAxis._backgroundPath && item !== dateAxis._gridLines) {
+                return true;
+            }
+        });
+    }
+
+    function getAxisTexts() {
+        return $.map(getAxisTextBoxes(), function(item) {
+            return dataviz.last(item.children);
+        });
+    }
+
     (function() {
         var categories;
 
@@ -33,9 +44,8 @@
 
             categories = dateAxis.options.categories;
 
-            view = new ViewStub();
             dateAxis.reflow(chartBox);
-            dateAxis.getViewElements(view);
+            dateAxis.renderVisual();
         }
 
         // ------------------------------------------------------------
@@ -458,9 +468,7 @@
                     new Date("2012/02/01 10:00:00"), new Date("2012/02/01 10:02:00")
                 ]
             });
-
-            deepEqual($.map(view.log.text, function(text) { return text.content }),
-                 ["10:00", "10:01", "10:02"]);
+            equalTexts(getAxisTexts(), ["10:00", "10:01", "10:02"]);
         });
 
         test("automatic base unit step is chosen according to maxDateGroups", function() {
@@ -570,9 +578,7 @@
                     new Date("2012/02/01 10:00:00"), new Date("2012/02/01 10:00:02")
                 ]
             });
-
-            deepEqual($.map(view.log.text, function(text) { return text.content }),
-                 ["10:00:00", "10:00:01", "10:00:02"]);
+            equalTexts(getAxisTexts(), ["10:00:00", "10:00:01", "10:00:02"]);
         });
 
         test("automatic base unit step is chosen according to maxDateGroups", function() {
@@ -1011,9 +1017,7 @@
                     new Date("2012/02/01"), new Date("2012/02/03")
                 ]
             });
-
-            deepEqual($.map(view.log.text, function(text) { return text.content }),
-                 ["2/1", "2/2", "2/3"]);
+            equalTexts(getAxisTexts(), ["2/1", "2/2", "2/3"]);
         });
 
         test("labels have associated data items", function() {
@@ -1038,9 +1042,7 @@
                     }
                 }
             });
-
-            deepEqual($.map(view.log.text, function(text) { return text.content }),
-                 ["2/1/12", "2/2/12", "2/3/12"]);
+            equalTexts(getAxisTexts(), ["2/1/12", "2/2/12", "2/3/12"]);
         });
 
         test("creates labels with custom format", function() {
@@ -1053,8 +1055,7 @@
                 }
             });
 
-            deepEqual($.map(view.log.text, function(text) { return text.content }),
-                 ["2/1/12", "2/2/12", "2/3/12"]);
+            equalTexts(getAxisTexts(), ["2/1/12", "2/2/12", "2/3/12"]);
         });
 
         test("creates labels with custom culture", function() {
@@ -1068,8 +1069,7 @@
                 }
             });
 
-            deepEqual($.map(view.log.text, function(text) { return text.content }),
-                 ["1.feb.", "2.feb.", "3.feb."]);
+            equalTexts(getAxisTexts(), ["1.feb.", "2.feb.", "3.feb."]);
         });
 
         test("creates labels with custom template", function() {
@@ -1082,8 +1082,7 @@
                 }
             });
 
-            deepEqual($.map(view.log.text, function(text) { return text.content }),
-                 ["2012", "2012", "2012"]);
+            equalTexts(getAxisTexts(), ["2012", "2012", "2012"]);
         });
 
         test("automatic base unit step is chosen according to maxDateGroups", function() {
@@ -1144,8 +1143,7 @@
                 ]
             });
 
-            deepEqual($.map(view.log.text, function(text) { return text.content }),
-                 ["1/1", "1/8", "1/15"]);
+            equalTexts(getAxisTexts(), ["1/1", "1/8", "1/15"]);
         });
 
         test("creates labels with custom date format", function() {
@@ -1160,8 +1158,7 @@
                 }
             });
 
-            deepEqual($.map(view.log.text, function(text) { return text.content }),
-                 ["1/1/12", "1/8/12", "1/15/12"]);
+            equalTexts(getAxisTexts(), ["1/1/12", "1/8/12", "1/15/12"]);
         });
 
         test("week start day can be customized", function() {
@@ -1172,8 +1169,7 @@
                 weekStartDay: kendo.days.Monday
             });
 
-            deepEqual($.map(view.log.text, function(text) { return text.content }),
-                 ["12/26", "1/2", "1/9"]);
+            equalTexts(getAxisTexts(), ["12/26", "1/2", "1/9"]);
         });
 
         tzTest("Sofia", "automatic base unit step is chosen according to maxDateGroups", function() {
@@ -1254,8 +1250,7 @@
                 ]
             });
 
-            deepEqual($.map(view.log.text, function(text) { return text.content }),
-                 ["Jan '12", "Feb '12"]);
+            equalTexts(getAxisTexts(), ["Jan '12", "Feb '12"]);
         });
 
         test("creates labels with custom date format", function() {
@@ -1270,8 +1265,7 @@
                 }
             });
 
-            deepEqual($.map(view.log.text, function(text) { return text.content }),
-                 ["1/1/12", "2/1/12"]);
+            equalTexts(getAxisTexts(), ["1/1/12", "2/1/12"]);
         });
 
         test("automatic base unit step is chosen according to maxDateGroups", function() {
@@ -1332,8 +1326,7 @@
                 ]
             });
 
-            deepEqual($.map(view.log.text, function(text) { return text.content }),
-                 ["2012", "2013"]);
+            equalTexts(getAxisTexts(), ["2012", "2013"]);
         });
 
         test("creates labels with custom date format", function() {
@@ -1348,8 +1341,7 @@
                 }
             });
 
-            deepEqual($.map(view.log.text, function(text) { return text.content }),
-                 ["1/1/12", "1/1/13"]);
+            equalTexts(getAxisTexts(), ["1/1/12", "1/1/13"]);
         });
 
         test("automatic base unit step is chosen according to maxDateGroups", function() {
@@ -1649,9 +1641,8 @@
                 min, max, options
             );
 
-            view = new ViewStub();
             dateAxis.reflow(chartBox);
-            dateAxis.getViewElements(view);
+            dateAxis.renderVisual();
         }
 
         // ------------------------------------------------------------
@@ -1911,8 +1902,7 @@
         test("creates labels with default format", function() {
             createDateValueAxis(new Date("2012/02/01"), new Date("2012/02/02"));
 
-            deepEqual($.map(view.log.text, function(text) { return text.content }),
-                 ["1/31", "2/1", "2/2", "2/3"]);
+            equalTexts(getAxisTexts(), ["1/31", "2/1", "2/2", "2/3"]);
         });
 
         test("creates labels with custom date format", function() {
@@ -1924,8 +1914,7 @@
                 }
             });
 
-            deepEqual($.map(view.log.text, function(text) { return text.content }),
-                 ["1/31/12", "2/1/12", "2/2/12", "2/3/12"]);
+            equalTexts(getAxisTexts(), ["1/31/12", "2/1/12", "2/2/12", "2/3/12"]);
         });
 
         test("creates labels with custom format", function() {
@@ -1935,8 +1924,7 @@
                 }
             });
 
-            deepEqual($.map(view.log.text, function(text) { return text.content }),
-                 ["1/31/12", "2/1/12", "2/2/12", "2/3/12"]);
+            equalTexts(getAxisTexts(), ["1/31/12", "2/1/12", "2/2/12", "2/3/12"]);
         });
 
         test("creates labels with custom culture", function() {
@@ -1947,8 +1935,7 @@
                 }
             });
 
-            deepEqual($.map(view.log.text, function(text) { return text.content }),
-                 ["31.ene.", "1.feb.", "2.feb.", "3.feb."]);
+            equalTexts(getAxisTexts(), ["31.ene.", "1.feb.", "2.feb.", "3.feb."]);
         });
 
         test("creates labels with custom template", function() {
@@ -1961,8 +1948,7 @@
                 }
             });
 
-            deepEqual($.map(view.log.text, function(text) { return text.content }),
-                 ["2012", "2012", "2012", "2012"]);
+            equalTexts(getAxisTexts(), ["2012", "2012", "2012", "2012"]);
         });
 
         // ------------------------------------------------------------
@@ -1984,8 +1970,7 @@
                 new Date("2012/01/01"), new Date("2012/01/15")
             );
 
-            deepEqual($.map(view.log.text, function(text) { return text.content }),
-                 ["12/25", "1/1", "1/8", "1/15", "1/22"]);
+            equalTexts(getAxisTexts(), ["12/25", "1/1", "1/8", "1/15", "1/22"]);
         });
 
         test("creates labels with custom date format", function() {
@@ -1997,8 +1982,7 @@
                 }
             });
 
-            deepEqual($.map(view.log.text, function(text) { return text.content }),
-                 ["12/25/11", "1/1/12", "1/8/12", "1/15/12", "1/22/12"]);
+            equalTexts(getAxisTexts(), ["12/25/11", "1/1/12", "1/8/12", "1/15/12", "1/22/12"]);
         });
 
         // ------------------------------------------------------------
@@ -2020,8 +2004,7 @@
                 new Date("2012/01/01"), new Date("2012/01/14")
             );
 
-            deepEqual($.map(view.log.text, function(text) { return text.content }),
-                 ["12/25", "1/1", "1/8", "1/15"]);
+            equalTexts(getAxisTexts(), ["12/25", "1/1", "1/8", "1/15"]);
         });
 
         test("creates labels with custom date format", function() {
@@ -2033,8 +2016,7 @@
                 }
             });
 
-            deepEqual($.map(view.log.text, function(text) { return text.content }),
-                 ["12/25/11", "1/1/12", "1/8/12", "1/15/12"]);
+            equalTexts(getAxisTexts(), ["12/25/11", "1/1/12", "1/8/12", "1/15/12"]);
         });
 
         // ------------------------------------------------------------
@@ -2056,8 +2038,7 @@
                 new Date("2012/01/01"), new Date("2012/02/01")
             );
 
-            deepEqual($.map(view.log.text, function(text) { return text.content }),
-                 ["Dec '11", "Jan '12", "Feb '12", "Mar '12"]);
+            equalTexts(getAxisTexts(), ["Dec '11", "Jan '12", "Feb '12", "Mar '12"]);
         });
 
         test("creates labels with custom date format", function() {
@@ -2069,8 +2050,7 @@
                 }
             });
 
-            deepEqual($.map(view.log.text, function(text) { return text.content }),
-                 ["12/1/11", "1/1/12", "2/1/12", "3/1/12"]);
+            equalTexts(getAxisTexts(), ["12/1/11", "1/1/12", "2/1/12", "3/1/12"]);
         });
 
         // ------------------------------------------------------------
@@ -2092,8 +2072,7 @@
                 new Date("2012/01/01"), new Date("2013/02/01")
             );
 
-            deepEqual($.map(view.log.text, function(text) { return text.content }),
-                 ["2011", "2012", "2013", "2014"]);
+            equalTexts(getAxisTexts(), ["2011", "2012", "2013", "2014"]);
         });
 
         test("creates labels with custom date format", function() {
@@ -2105,8 +2084,7 @@
                 }
             });
 
-            deepEqual($.map(view.log.text, function(text) { return text.content }),
-                 ["1/1/11", "1/1/12", "1/1/13", "1/1/14"]);
+            equalTexts(getAxisTexts(), ["1/1/11", "1/1/12", "1/1/13", "1/1/14"]);
         });
 
         // ------------------------------------------------------------
@@ -2128,8 +2106,7 @@
                 new Date("2012/01/01 15:00"), new Date("2012/01/01 16:00")
             );
 
-            deepEqual($.map(view.log.text, function(text) { return text.content }),
-                 ["14:00", "15:00", "16:00", "17:00"]);
+            equalTexts(getAxisTexts(), ["14:00", "15:00", "16:00", "17:00"]);
         });
 
         test("creates labels with custom date format", function() {
@@ -2142,8 +2119,7 @@
                 }
             });
 
-            deepEqual($.map(view.log.text, function(text) { return text.content }),
-                 ["1/1 14:00", "1/1 15:00", "1/1 16:00", "1/1 17:00"]);
+            equalTexts(getAxisTexts(), ["1/1 14:00", "1/1 15:00", "1/1 16:00", "1/1 17:00"]);
         });
 
     })();
@@ -2327,9 +2303,8 @@
                 }, options)
             );
 
-            view = new ViewStub();
             dateAxis.reflow(chartBox);
-            dateAxis.getViewElements(view);
+            dateAxis.renderVisual();
             notes = dateAxis.notes;
         }
 
@@ -2366,6 +2341,10 @@
                 data: [100, 20, 30]
             }];
 
+        function getPlotBands() {
+            return plotArea.axes[0]._plotbandGroup;
+        }
+
         function createPlotArea(series, chartOptions) {
             plotArea = new dataviz.CategoricalPlotArea(series, kendo.deepExtend({
                 categoryAxis: {
@@ -2378,11 +2357,9 @@
                 }
             }, chartOptions));
 
-            view = new ViewStub();
-
             plotArea.reflow(chartBox);
-            plotArea.getViewElements(view);
-            plotBands = view.log.rect[0];
+            plotArea.renderVisual();
+            plotBands = getPlotBands().children[0];
         }
 
         // ------------------------------------------------------------
@@ -2393,28 +2370,7 @@
         });
 
         test("renders box", function() {
-            arrayClose([plotBands.x1, plotBands.y1, plotBands.x2, plotBands.y2],
-                 [ 30, 7.5, 799, 577 ], TOLERANCE);
-        });
-
-        test("ignores plotBands if they are not in the axis range", function() {
-            var axis = new DateCategoryAxis({
-                plotBands: [{
-                    from: new Date("2012/01/01"),
-                    to: new Date("2012/01/03"),
-                    color: "red"
-                }],
-                min: new Date("2013/01/01")
-            });
-            axis.reflow(chartBox);
-            view = new ViewStub();
-
-            plotArea = new dataviz.CategoricalPlotArea([{}], { });
-            plotArea.reflow(chartBox);
-            axis.plotArea = plotArea;
-            var plotBands = axis.renderPlotBands(view);
-
-            equal(plotBands.length, 0);
+            sameRectPath(plotBands, [ 30, 7.5, 799, 577 ], TOLERANCE);
         });
 
         // ------------------------------------------------------------
@@ -2425,8 +2381,7 @@
         });
 
         test("renders box", function() {
-            arrayClose([plotBands.x1, plotBands.y1, plotBands.x2, plotBands.y2],
-                 [ 30, 7.5, 791.5, 577 ], TOLERANCE);
+            sameRectPath(plotBands, [ 30, 7.5, 791.5, 577 ], TOLERANCE);
         });
 
         // ------------------------------------------------------------
@@ -2437,8 +2392,7 @@
         });
 
         test("renders box", function() {
-            arrayClose([plotBands.x1, plotBands.y1, plotBands.x2, plotBands.y2],
-                 [ 26, 0, 789.5, 576 ], TOLERANCE);
+            sameRectPath(plotBands, [ 26, 0, 789.5, 576 ], TOLERANCE);
         });
 
         // ------------------------------------------------------------
@@ -2453,8 +2407,7 @@
         });
 
         test("renders box", function() {
-            arrayClose([plotBands.x1, plotBands.y1, plotBands.x2, plotBands.y2],
-                 [ 26, 7, 789.5, 576 ], TOLERANCE);
+            sameRectPath(plotBands, [ 26, 7, 789.5, 576 ], TOLERANCE);
         });
     })();
 })();

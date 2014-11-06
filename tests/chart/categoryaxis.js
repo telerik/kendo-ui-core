@@ -52,10 +52,8 @@
         }
 
         function getAxisTextBoxes() {
-            return $.grep(categoryAxis.visual.children, function(item) {
-                if (item !== categoryAxis._lineGroup && item !== categoryAxis._backgroundPath && item !== categoryAxis._gridLines) {
-                    return true;
-                }
+            return $.map(categoryAxis.labels, function(item) {
+                return item.visual;
             });
         }
 
@@ -99,22 +97,17 @@
         });
 
         test("creates labels", 1, function() {
-            deepEqual($.map(getAxisTexts(), function(text) { return text.content() }),
-                 ["Foo", "Bar"]);
+            equalTexts(getAxisTexts(), ["Foo", "Bar"]);
         });
 
         test("creates labels with full format", 1, function() {
             createCategoryAxis({ categories: [1, 2], labels: { format: "{0:C}"} });
-
-            deepEqual($.map(getAxisTexts(), function(text) { return text.content() }),
-                 ["$1.00", "$2.00"]);
+            equalTexts(getAxisTexts(), ["$1.00", "$2.00"]);
         });
 
         test("creates labels with simple format", 1, function() {
             createCategoryAxis({ categories: [1, 2], labels: { format: "C"} });
-
-            deepEqual($.map(getAxisTexts(), function(text) { return text.content() }),
-                 ["$1.00", "$2.00"]);
+            equalTexts(getAxisTexts(), ["$1.00", "$2.00"]);
         });
 
         test("labels can be hidden", function() {
@@ -182,44 +175,31 @@
                     padding: PADDING
                 }
             });
-
-            $.each(getAxisTexts(), function() {
-                close(this.rect().origin.y, LINE_Y + MAJOR_TICK_HEIGHT + 2 * MARGIN + PADDING, TOLERANCE);
-            })
+            closeTextPosition("y", getAxisTexts(), LINE_Y + MAJOR_TICK_HEIGHT + 2 * MARGIN + PADDING, TOLERANCE);
         });
 
         test("labels are distributed horizontally", function() {
-
-            arrayClose($.map(getAxisTexts(), function(text) { return text.rect().origin.x }),
-                 [185.5, 586.5], TOLERANCE);
+            closeTextPosition("x", getAxisTexts(), [185.5, 586.5], TOLERANCE);
         });
 
         test("labels are distributed horizontally (justified)", function() {
             createCategoryAxis({ justified: true });
-
-            arrayClose($.map(getAxisTexts(), function(text) { return text.rect().origin.x }),
-                 [0, 773], TOLERANCE);
+            closeTextPosition("x", getAxisTexts(), [0, 773], TOLERANCE);
         });
 
         test("labels are distributed horizontally in reverse", function() {
             createCategoryAxis({ reverse: true });
 
-            arrayClose($.map(getAxisTexts(), function(text) { return text.rect().origin.x }),
-                 [586.5, 185.5], TOLERANCE);
+            closeTextPosition("x", getAxisTexts(), [586.5, 185.5], TOLERANCE);
         });
 
         test("labels are distributed horizontally in reverse (justified)", function() {
             createCategoryAxis({ justified: true, reverse: true });
-
-
-            arrayClose($.map(getAxisTexts(), function(text) { return text.rect().origin.x }),
-                 [773, 0], TOLERANCE);
+            closeTextPosition("x", getAxisTexts(), [773, 0], TOLERANCE);
         });
 
         test("labels are positioned below axis line", 2, function() {
-            $.each(getAxisTexts(), function() {
-                    equal(this.rect().origin.y, LINE_Y + MAJOR_TICK_HEIGHT + MARGIN, TOLERANCE);
-            })
+            closeTextPosition("y", getAxisTexts(), LINE_Y + MAJOR_TICK_HEIGHT + MARGIN, TOLERANCE);
         });
 
         test("major ticks are distributed horizontally", function() {
@@ -1215,7 +1195,7 @@
             plotArea.reflow(chartBox);
             plotArea.renderVisual();
 
-            if (plotArea.axes[0].title) {            
+            if (plotArea.axes[0].title) {
                 textboxVisual = plotArea.axes[0].title.visual;
                 textBackgroundVisual = textboxVisual.children[0];
                 textVisual = textboxVisual.children[1];
