@@ -115,10 +115,48 @@ test("colSpan is set to parent column with multi-column headers", function() {
     });
 });
 
+test("skips columns that don't have a field - multi-column headers", function() {
+    testWorkbook({ columns: [
+            { title: "master" },
+            { title: "master2", columns: [{ field: "bar" }, { field: "baz" }] }
+        ], dataSource: [{ foo: "bar", bar: "baz", baz: "moo" }] }, function(book) {
+
+        equal(book.sheets[0].columns.length, 2);
+        equal(book.sheets[0].rows[0].cells.length, 1);
+        equal(book.sheets[0].rows[1].cells.length, 2);
+        equal(book.sheets[0].rows[2].cells.length, 2);
+    });
+});
+
+test("skips header column if all child columns that don't have a field - multi-column headers", function() {
+    testWorkbook({ columns: [
+            { title: "master", field: "baz" },
+            { title: "master2", columns: [{ title: "bar" }, { title: "baz" }] }
+        ], dataSource: [{ foo: "bar", bar: "baz", baz: "moo" }] }, function(book) {
+
+        equal(book.sheets[0].columns.length, 1);
+        equal(book.sheets[0].rows[0].cells.length, 1);
+        equal(book.sheets[0].rows[1].cells.length, 1);
+    });
+});
+
+test("does not skips header column if there is at least one child columns that do have a field - multi-column headers", function() {
+    testWorkbook({ columns: [
+            { title: "master", field: "baz" },
+            { title: "master2", columns: [{ field: "bar" }, { title: "baz" }] }
+        ], dataSource: [{ foo: "bar", bar: "baz", baz: "moo" }] }, function(book) {
+
+        equal(book.sheets[0].columns.length, 2);
+        equal(book.sheets[0].rows[0].cells.length, 2);
+        equal(book.sheets[0].rows[1].cells.length, 1);
+        equal(book.sheets[0].rows[2].cells.length, 2);
+    });
+});
+
 test("rowSpan is set column with no children with multi-column headers", function() {
     testWorkbook({
         columns: [
-            { title: "master" },
+            { title: "master", field: "foo" },
             { title: "master2", columns: [{ field: "bar" }, { field: "baz" }] }
         ], dataSource: [{ foo: "bar", bar: "baz", baz: "moo" }] }, function(book) {
 
@@ -278,6 +316,16 @@ test("enables filtering", function() {
 
 test("locked columns set the freezePane", function() {
     testWorkbook({ columns: [ { field: "foo", locked: true }, { field: "bar", locked: true } ], dataSource: [ {} ] }, function(book) {
+        equal(book.sheets[0].freezePane.colSplit, 2);
+    });
+});
+
+test("locked multi-column headers set the freezePane", function() {
+    testWorkbook({
+        columns: [
+            { title: "master2", locked: true, columns: [{ field: "bar" }, { field: "baz" }] },
+            { title: "master", columns: [{ field: "foo" }] }
+        ], dataSource: [{ foo: "bar", bar: "baz", baz: "moo" }] }, function(book) {
         equal(book.sheets[0].freezePane.colSplit, 2);
     });
 });

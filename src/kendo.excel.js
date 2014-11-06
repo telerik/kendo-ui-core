@@ -16,6 +16,8 @@ var __meta__ = {
 
 kendo.ExcelExporter = kendo.Class.extend({
     init: function(options) {
+        options.columns = this._trimColumns(options.columns || []);
+
         this.columns = $.map(this._leafColumns(options.columns || []), this._prepareColumn);
 
         this.options = options;
@@ -37,6 +39,16 @@ kendo.ExcelExporter = kendo.Class.extend({
         } else {
             this.dataSource = kendo.data.DataSource.create(dataSource);
         }
+    },
+    _trimColumns: function(columns) {
+        var that = this;
+        return $.grep(columns, function(column) {
+            var result = !(!column.field || column.hidden);
+            if (!result && column.columns) {
+                result = that._trimColumns(column.columns).length > 0;
+            }
+            return result;
+        });
     },
     _leafColumns: function(columns) {
         var result = [];
@@ -188,7 +200,7 @@ kendo.ExcelExporter = kendo.Class.extend({
         return rows;
     },
     _isColumnVisible: function(column) {
-        return this._visibleColumns([column]).length > 0;
+        return this._visibleColumns([column]).length > 0 && (column.field || column.columns);
     },
     _visibleColumns: function(columns) {
         var that = this;
@@ -256,7 +268,7 @@ kendo.ExcelExporter = kendo.Class.extend({
                         childRow = { rowSpan: 0, cells: [], index: rows.length };
                         rows.push(childRow);
                     }
-                    cell.colSpan = this._visibleColumns(column.columns).length;
+                    cell.colSpan = this._trimColumns(this._visibleColumns(column.columns)).length;
                     this._prepareHeaderRows(rows, column.columns, cell, childRow);
                     totalColSpan += cell.colSpan - 1;
                     row.rowSpan = rows.length - row.index;
@@ -324,12 +336,14 @@ kendo.ExcelExporter = kendo.Class.extend({
         return result + max;
     },
     _freezePane: function() {
-        var colSplit = $.grep(this.columns, function(column) {
+        var columns = this._visibleColumns(this.options.columns || []);
+
+        var colSplit = this._trimColumns(this._leafColumns($.grep(columns, function(column) {
             return column.locked;
-        }).length;
+        }))).length;
 
         return {
-            rowSplit: this._headerDepth(this._visibleColumns(this.options.columns || [])),
+            rowSplit: this._headerDepth(columns),
             colSplit: colSplit? colSplit + this.dataSource.group().length : 0
         };
     },
