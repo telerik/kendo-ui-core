@@ -47,6 +47,35 @@ test("supports multiple instances", 2, function(){
     router2.start();
 });
 
+asyncTest("by default ignores URL case", 1, function(){
+    router = new kendo.Router();
+
+    router.route("/bar", function() {
+        start();
+        ok(true);
+    });
+
+    router.start();
+    router.navigate("#/BAR");
+});
+
+asyncTest("ignoreCase false makes routes case sensitive", 1, function(){
+    router = new kendo.Router({ ignoreCase: false });
+
+    router.route("/bar", function() {
+        ok(false);
+    });
+
+
+    router.start();
+
+    router.bind("routeMissing", function() {
+        start();
+        ok(true);
+    });
+    router.navigate("#/BAR");
+});
+
 asyncTest("hashBang accepts normal urls and normalizes them", 2, function(){
     router = new kendo.Router({ hashBang: true });
 
@@ -58,7 +87,7 @@ asyncTest("hashBang accepts normal urls and normalizes them", 2, function(){
         });
     });
 
-    router.start({ hashBang: true });
+    router.start();
     router.navigate("#/bar");
 });
 
