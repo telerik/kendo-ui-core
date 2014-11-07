@@ -1534,6 +1534,7 @@
 
         elementTests("Circle", Circle);
         visualBaseTests("Circle", Circle);
+        autoSizableTests("Circle", Circle);
     })();
 
     (function() {

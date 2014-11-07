@@ -1190,6 +1190,7 @@
         init: function (options) {
             VisualBase.fn.init.call(this, options);
             this._initCircle();
+            this._initSize();
         },
 
         redraw: function (options) {
@@ -1206,6 +1207,9 @@
                 if (this._diffNumericOptions(options, ["radius"])) {
                     this._circle.setRadius(circleOptions.radius);
                 }
+
+                this._updateSize(options);
+
                 VisualBase.fn.redraw.call(this, options);
             }
         },
@@ -1234,6 +1238,7 @@
             });
         }
     });
+    deepExtend(Circle.fn, AutoSizeableMixin);
 
     var Canvas = Class.extend({
         init: function (element, options) {
