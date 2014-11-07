@@ -443,6 +443,7 @@ div.submenu-box ol {
 
 #source-code .k-item {
     font-weight: bold;
+    text-transform: initial;
 }
 
 .demos-nav
@@ -2936,7 +2937,7 @@ html.k-material #example {
 }
 
 html.k-material .demo-section.k-header {
-     background-color: #f9f9f9;
+     background-color: #fdfdfd;
      color: #444;
 }
 

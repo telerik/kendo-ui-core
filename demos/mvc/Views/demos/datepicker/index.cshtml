@@ -1,10 +1,10 @@
 
         <div id="example">
             <div id="email-settings">
-                <div style="margin-top: -6px; margin-left: 180px">
+                <div class="display-picker">
                     <input id="datepicker" value="10/10/2011" style="width:150px;" />
                 </div>
-                <div style="margin-top: 59px; margin-left: 180px">
+                <div class="archive-picker">
                     <input id="monthpicker" value="November 2011" style="width:150px" />
                 </div>
             </div>
@@ -35,6 +35,20 @@
                 margin: 30px auto;
                 padding: 110px 0 0 30px;
                 background: url('../content/web/datepicker/mailSettings.png') transparent no-repeat 0 0;
+            }
+            .display-picker {
+                margin-top: -6px;
+                margin-left: 180px
+            }
+            .archive-picker {
+                margin-top: 59px;
+                margin-left: 180px
+            }
+            html.k-material .display-picker {
+                margin-top: -13px;
+            }
+            html.k-material .archive-picker {
+                margin-top: 47px;
             }
         </style>
         </div>
