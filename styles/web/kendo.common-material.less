@@ -5,7 +5,7 @@
 @button-padding: 10px 14px;
 @treeview-inner-padding: 0.429em 0.6667em 0.429em 0.5833em;
 @treeview-inner-margin: 1px 0 1px 0.3333em;
-@scheduler-link-padding: .214em 1.1em;
+@scheduler-link-padding: 0 1.1em;
 @grid-header-padding: .429em .2em .429em 1em;
 @icon-positioning: "material";
 
@@ -564,6 +564,7 @@ div.k-window {
 }
 
 /* Scheduler */
+.k-gantt-toolbar,
 .k-scheduler-toolbar .k-nav-today,
 .k-scheduler-toolbar .k-scheduler-views,
 .k-scheduler-footer .k-scheduler-fullday {
@@ -574,22 +575,24 @@ div.k-window {
     display: none;
 }
 
-/*.k-scheduler-toolbar > ul > li,
-.k-scheduler-footer > ul > li
-{
-    border-width:2px 1px 3px 0;
-    border-color: red;
-}*/
-/*
-.k-scheduler-toolbar > ul > li,
-.k-scheduler-footer > ul > li {
-	border-color: red !important;
-}*/
+.k-gantt-toolbar > ul > li,
+.k-scheduler-toolbar > ul > li {
+    border-width: 0 0 2px 0; 
+}
 
+.k-gantt-toolbar li .k-link,
+.k-scheduler-toolbar li .k-link {
+    vertical-align: middle;
+    line-height: 44px;
+    padding-top: 2px;
+}
+
+.k-gantt-toolbar,
 .k-scheduler-toolbar,
 .k-scheduler-footer {
-    line-height: 2.857em;
-    padding: 0;
+    line-height: 44px;
+    padding: 0 1.286em;
+    vertical-align: middle;
 }
 
 .k-scheduler .k-scheduler-toolbar .k-state-default .k-link .k-icon.k-i-calendar,
