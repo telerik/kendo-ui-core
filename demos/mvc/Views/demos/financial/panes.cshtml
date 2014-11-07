@@ -11,10 +11,17 @@
                             url: "../content/dataviz/js/boeing-stock.json",
                             dataType: "json"
                         }
+                    },
+                    schema: {
+                        model: {
+                            fields: {
+                                Date: { type: "date" }
+                            }
+                        }
                     }
                 },
                 title: {
-                    text: "The Boeing Company (NYSE:BA)"
+                    text: "The Boeing Company\nNYSE:BA"
                 },
                 dateField: "Date",
                 panes: [{
