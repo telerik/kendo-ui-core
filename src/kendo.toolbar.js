@@ -73,6 +73,10 @@ var __meta__ = {
                     var items = options.buttons,
                         item;
 
+                    if (!items) {
+                        return;
+                    }
+
                     element.data({ type: "buttonGroup" });
                     element.attr(KENDO_UID_ATTR, options.uid);
 
