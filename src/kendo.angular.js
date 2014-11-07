@@ -503,6 +503,7 @@ var __meta__ = {
                 link: function(scope, element, attrs, controllers) {
                     var ngModel = controllers[0];
                     var ngForm = controllers[1];
+                    var $element = $(element);
 
                     // we must remove data-kendo-widget-name attribute because
                     // it breaks kendo.widgetInstance; can generate all kinds
@@ -513,12 +514,21 @@ var __meta__ = {
                     // but we still keep the attribute without the
                     // `data-` prefix, so k-rebind would work.
                     var roleattr = role.replace(/([A-Z])/g, "-$1");
-                    $(element).attr(roleattr, $(element).attr("data-" + roleattr));
-                    $(element)[0].removeAttribute("data-" + roleattr);
+                    var isVisible = $element.css("visibility") !== "hidden";
+
+                    $element.attr(roleattr, $element.attr("data-" + roleattr));
+                    $element[0].removeAttribute("data-" + roleattr);
+
+                    if (isVisible) {
+                        $element.css("visibility", "hidden");
+                    }
 
                     ++KENDO_COUNT;
 
                     $timeout(function() {
+                        if (isVisible) {
+                            $element.css("visibility", "");
+                        }
                         var widget = createWidget(scope, element, attrs, role, origAttr);
 
                         if (!widget) {
