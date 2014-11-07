@@ -2939,6 +2939,7 @@ html.k-material #example {
 html.k-material .demo-section.k-header {
      background-color: #fdfdfd;
      color: #444;
+     font-weight: normal;
 }
 
 .box h4,
