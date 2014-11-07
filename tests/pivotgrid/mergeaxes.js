@@ -3,7 +3,6 @@
 
     module("PivotDataSource merging of axes", { });
 
-    //ADD levelNum before uncomment!
     test("add children to the first member of root level tuple", function() {
         var dataSource = new PivotDataSource({
             columns: [ "dim 0", "dim 1" ],
@@ -267,16 +266,16 @@
             {
                 columns: {
                     tuples: [
-                        { members: [ { name: "level 0", children: [] } ] },
-                        { members: [ { name: "level 1", parentName: "level 0", children: [] } ] }
+                        { members: [ { name: "level 0", children: [], levelNum: "0" } ] },
+                        { members: [ { name: "level 1", parentName: "level 0", children: [], levelNum: "1" } ] }
                     ]
                 }
             },
             {
                 columns: {
                     tuples: [
-                        { members: [ { name: "level 1", parentName: "level 0", children: [] } ] },
-                        { members: [ { name: "level 2", parentName: "level 1", children: [] } ] }
+                        { members: [ { name: "level 1", parentName: "level 0", children: [], levelNum: "1" } ] },
+                        { members: [ { name: "level 2", parentName: "level 1", children: [], levelNum: "2" } ] }
                     ]
                 }
             }
@@ -956,5 +955,181 @@
         equal(axes.columns.tuples[0].members[1].children[1].members[0].name, "dim 0");
         equal(axes.columns.tuples[0].members[1].children[1].members[1].name, "dim 1 - 2");
     });
+
+    test("create root tuples for all measures", function() {
+        var dataSource = new PivotDataSource({
+            measures: [ "measure 1", "measure 2"],
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    options.success({
+                        axes: {
+                            columns: {
+                                tuples: [
+                                    { members: [ { name: "level 1-1", parentName: "level 0", children: [], levelNum: "1" }, { name: "measure 1", children: [] } ] },
+                                    { members: [ { name: "level 1-1", parentName: "level 0", children: [], levelNum: "1" }, { name: "measure 2", children: [] } ] },
+                                    { members: [ { name: "level 1-2", parentName: "level 0", children: [], levelNum: "1" }, { name: "measure 1", children: [] } ] },
+                                    { members: [ { name: "level 1-2", parentName: "level 0", children: [], levelNum: "1" }, { name: "measure 2", children: [] } ] }
+                                ]
+                            }
+                        },
+                        data: []
+                    });
+                }
+            }
+        });
+
+        dataSource.read();
+
+        var axes = dataSource.axes();
+        var tuple = axes.columns.tuples[0];
+
+        equal(tuple.members[0].name, "level 0");
+        equal(tuple.members[1].measure, true);
+        equal(tuple.members[1].name, "Measures");
+        equal(tuple.members[1].children.length, 2);
+        equal(tuple.members[1].children[0].name, "measure 1");
+        equal(tuple.members[1].children[1].name, "measure 2");
+    });
+
+    test("create tuples for missing measures", function() {
+        var dataSource = new PivotDataSource({
+            measures: [ "measure 1", "measure 2"],
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    options.success({
+                        axes: {
+                            columns: {
+                                tuples: [
+                                    { members: [ { name: "level 0", children: [], levelNum: "0" }, { name: "measure 1", children: [] } ] },
+                                    { members: [ { name: "level 0", children: [], levelNum: "0" }, { name: "measure 2", children: [] } ] },
+                                    { members: [ { name: "level 1-1", parentName: "level 0", children: [], levelNum: "1" }, { name: "measure 2", children: [] } ] }
+                                ]
+                            }
+                        },
+                        data: []
+                    });
+                }
+            }
+        });
+
+        dataSource.read();
+
+        var axes = dataSource.axes();
+        var tuple = axes.columns.tuples[0];
+        tuple = tuple.members[0].children[0]; //level 1-1;
+
+        equal(tuple.members[0].name, "level 1-1");
+        equal(tuple.members[1].name, "Measures");
+        equal(tuple.members[1].measure, true);
+        equal(tuple.members[1].children.length, 2);
+        equal(tuple.members[1].children[0].name, "measure 1");
+        equal(tuple.members[1].children[1].name, "measure 2");
+    });
+
+    test("create tuples for missing measures (multiple dimensions)", function() {
+        var dataSource = new PivotDataSource({
+            measures: [ "measure 1", "measure 2"],
+            columns: [ "dim 0", "dim 1" ],
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    options.success({
+                        axes: {
+                            columns: {
+                                tuples: [
+                                    { members: [ { name: "dim 0", children: [], levelNum: "0" },{ name: "dim 1", children: [], levelNum: "0" }, { name: "measure 1", children: [] } ] },
+                                    { members: [ { name: "dim 0-1", parentName: "dim 0", children: [], levelNum: "1" },{ name: "dim 1", children: [], levelNum: "0" }, { name: "measure 2", children: [] } ] },
+                                    { members: [ { name: "dim 0-1", parentName: "dim 0", children: [], levelNum: "1" },{ name: "dim 1-1", parentName: "dim 1", children: [], levelNum: "1" }, { name: "measure 1", children: [] } ] }
+                                ]
+                            }
+                        },
+                        data: []
+                    });
+                }
+            }
+        });
+
+        dataSource.read();
+
+        var axes = dataSource.axes();
+        var tuple = axes.columns.tuples[0];
+
+        equal(tuple.members[0].name, "dim 0");
+        equal(tuple.members[1].name, "dim 1");
+        equal(tuple.members[2].name, "Measures");
+        equal(tuple.members[2].children[0].name, "measure 1");
+        equal(tuple.members[2].children[1].name, "measure 2");
+
+        var child = tuple.members[0].children[0];
+
+        equal(child.members[0].name, "dim 0-1");
+        equal(child.members[1].name, "dim 1");
+        equal(child.members[2].name, "Measures");
+        equal(child.members[2].children[0].name, "measure 1");
+        equal(child.members[2].children[1].name, "measure 2");
+
+        child = child.members[1].children[0];
+
+        equal(child.members[0].name, "dim 0-1");
+        equal(child.members[1].name, "dim 1-1");
+        equal(child.members[2].name, "Measures");
+        equal(child.members[2].children[0].name, "measure 1");
+        equal(child.members[2].children[1].name, "measure 2");
+    });
+
+    test("create tuples for missing measures when tuples are even", function() {
+        var dataSource = new PivotDataSource({
+            measures: [ "measure 1", "measure 2"],
+            columns: [ "dim 0" ],
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    options.success({
+                        axes: {
+                            columns: {
+                                tuples: [
+                                    { members: [ { name: "dim 0", children: [], levelNum: "0" }, { name: "measure 1", children: [] } ] },
+                                    { members: [ { name: "dim 0-1", parentName: "dim 0", children: [], levelNum: "1" }, { name: "measure 2", children: [] } ] }
+                                ]
+                            }
+                        },
+                        data: []
+                    });
+                }
+            }
+        });
+
+        dataSource.read();
+
+        var axes = dataSource.axes();
+        var tuple = axes.columns.tuples[0];
+
+        equal(tuple.members[0].name, "dim 0");
+        equal(tuple.members[1].name, "Measures");
+        equal(tuple.members[1].children[0].name, "measure 1");
+        equal(tuple.members[1].children[1].name, "measure 2");
+
+        var child = tuple.members[0].children[0];
+
+        equal(child.members[0].name, "dim 0-1");
+        equal(child.members[1].name, "Measures");
+        equal(child.members[1].children[0].name, "measure 1");
+        equal(child.members[1].children[1].name, "measure 2");
+    });
+
 })();
 

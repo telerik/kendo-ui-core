@@ -1069,10 +1069,15 @@ var __meta__ = {
                 rows: normalizeAxis(axes.rows)
             };
 
+            //this will need to normalize data after tuple normalization
+            var columnIndexes = this._normalizeTuples(axes.columns.tuples, this._axes.columns.tuples, this._columnMeasures());
+            var rowIndexes = this._normalizeTuples(axes.rows.tuples, this._axes.rows.tuples, this._rowMeasures());
+
+            //remove when merge axes
             data = this._normalizeData(data, axes.columns.tuples.length, axes.rows.tuples.length);
 
-            var columnRoot = this._normalizeTuples(axes.columns.tuples, this._axes.columns.tuples);
-            var rowRoot = this._normalizeTuples(axes.rows.tuples, this._axes.rows.tuples);
+            //normalize data if columnIndexes or rowIndexes
+            /*data = this._normalizeData(data, columnIndexes, rowIndexes);
 
             if (columnRoot || rowRoot) {
                 data = this._populateEmptyData({
@@ -1082,7 +1087,7 @@ var __meta__ = {
                     columnRoot: columnRoot,
                     rowRoot: rowRoot
                 });
-            }
+            }*/
 
             if (this._lastExpanded == "rows") {
                 tuples = axes.columns.tuples;
@@ -1093,6 +1098,7 @@ var __meta__ = {
                     axisToSkip = "columns";
                     axes.columns = resultAxis;
                     adjustDataByColumn(tuples, resultAxis.tuples, axes.rows.tuples.length, measures, data);
+                    //think how to combine indexes comcept here!
                     data = this._normalizeData(data, membersCount(axes.columns.tuples, measures), axes.rows.tuples.length);
                 }
             } else if (this._lastExpanded == "columns") {
@@ -1104,6 +1110,7 @@ var __meta__ = {
                     axisToSkip = "rows";
                     axes.rows = resultAxis;
                     adjustDataByRow(tuples, resultAxis.tuples, axes.columns.tuples.length, measures, data);
+                    //think how to combine indexes comcept here!
                     data = this._normalizeData(data, membersCount(axes.rows.tuples, measures), axes.columns.tuples.length);
                 }
             }
@@ -1123,40 +1130,63 @@ var __meta__ = {
             return this._processResult(newData, axes);
         },
 
-        _createRoot: function(tuple) {
+        _createTuple: function(tuple, measure, buildRoot) {
             var name;
             var member;
             var parentName;
             var members = tuple.members;
+            var length = members.length;
             var root = { members: [] };
             var levelNum;
+            var caption;
+            var idx = 0;
 
-            for (var idx = 0; idx < members.length; idx++) {
+            if (measure) {
+                length -= 1;
+            }
+
+            for (var idx = 0; idx < length; idx++) {
                 member = members[idx];
                 levelNum = Number(member.levelNum);
-                parentName = member.parentName;
 
-                if (levelNum === 0) {
-                    parentName = member.name;
-                } else {
-                    levelNum -= 1;
+                name = member.name;
+                parentName = member.parentName;
+                caption = member.caption || name;
+
+                if (buildRoot) {
+                    caption = "All"; //TODO: find a way to get proper caption ???
+                    if (levelNum === 0) {
+                        parentName = member.name;
+                    } else {
+                        levelNum -= 1;
+                    }
+
+                    name = parentName;
                 }
 
                 root.members.push({
+                    name: name,
                     children: [],
-                    caption: "All", //TODO: find a way to get proper caption ???
-                    name: parentName,
+                    caption: caption,
                     levelName: parentName,
                     levelNum: levelNum.toString(),
-                    hasChildren: true,
-                    hierarchy: parentName
+                    hasChildren: buildRoot,
+                    hierarchy: parentName,
+                    parentName: !buildRoot ? parentName: ""
+                });
+            }
+
+            if (measure) {
+                root.members.push({
+                    name: measure,
+                    children: []
                 });
             }
 
             return root;
         },
 
-        _hasRoot: function(source, target) {
+        _hasRoot: function(target, source) {
             if (source.length) {
                 return findExistingTuple(source, target).tuple;
             }
@@ -1178,17 +1208,6 @@ var __meta__ = {
             }
 
             return isRoot;
-        },
-
-        _normalizeTuples: function(tuples, source) {
-            if (!tuples.length) {
-                return;
-            }
-
-            if (!this._hasRoot(source, tuples[0])) {
-                tuples.splice(0, 0, this._createRoot(tuples[0]));
-                return true;
-            }
         },
 
         _mergeAxes: function(sourceAxes, data, axisToSkip) {
@@ -1376,6 +1395,75 @@ var __meta__ = {
 
             return result;
         },
+
+        _normalizeTuples: function(tuples, source, measures) {
+            var length = measures.length || 1;
+            var idx = 0;
+
+            var roots = [];
+            var indexes = [];
+            var measureIdx = 0;
+            var tuple, memberIdx, last;
+
+            if (!tuples.length) {
+                return;
+            }
+
+            if (!this._hasRoot(tuples[0], source)) {
+                for (; idx < length; idx++) {
+                    roots.push(this._createTuple(tuples[0], measures[idx], true));
+                    indexes.push(idx);
+                }
+
+                tuples.splice.apply(tuples, [0, tuples.length].concat(roots).concat(tuples));
+                idx = length;
+            }
+
+            //TODO: find better way to detect missing tuples to avoid unnecessary loops
+            if (measures.length) {
+                last = tuple = tuples[idx];
+                memberIdx = tuple.members.length - 1;
+
+                while (tuple) {
+                    if (measureIdx >= length) {
+                        measureIdx = 0;
+                    }
+
+                    if (tuple.members[memberIdx].name !== measures[measureIdx]) {
+                        tuples.splice(idx, 0, this._createTuple(tuple, measures[measureIdx]));
+                        indexes.push(idx);
+                    }
+
+                    idx += 1;
+                    measureIdx += 1;
+                    tuple = tuples[idx];
+
+                    if (length > measureIdx && (!tuple || tupleName(last, memberIdx - 1) !== tupleName(tuple, memberIdx - 1))) {
+                        for (; measureIdx < length; measureIdx++) {
+                            tuples.splice(idx, 0, this._createTuple(last, measures[measureIdx]));
+                            indexes.push(idx);
+                            idx += 1;
+                        }
+                        tuple = tuples[idx];
+                    }
+                    last = tuple;
+                }
+            }
+
+            return indexes;
+        },
+
+        /*_normalizeData: function(options) {
+            var data = options.data;
+
+            var columnIndexes = options.columnIndexes;
+            var rowIndexes = options.rowIndexes;
+
+            var columnLength = options.columnLength;
+            var rowLength = options.rowLength;
+
+            var length = (columnLength + columnIndexes.length) * (rowLength + rowIndexes.length);
+        },*/
 
         _normalizeData: function(data, columns, rows) {
             var cell, idx, length;
@@ -3497,6 +3585,17 @@ var __meta__ = {
         }
 
         return path;
+    };
+
+    var tupleName = function(tuple, index) {
+        var name = "";
+        var idx = 0;
+
+        for(; idx <= index; idx++) {
+            name += tuple.members[idx].name;
+        }
+
+        return name;
     };
 
     var ColumnBuilder = Class.extend({
