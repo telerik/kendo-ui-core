@@ -190,7 +190,11 @@
     display: none;
 }
 
-[data-role="view"], [data-role="drawer"]
+/**
+ * The angular tags will be converted to div kendo-mobile-view
+ *
+ */
+[data-role="view"], [data-role="drawer"], kendo-mobile-view, kendo-mobile-split-view, kendo-mobile-drawer
 {
     visibility: hidden;
 }
