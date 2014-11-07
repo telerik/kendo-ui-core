@@ -1420,15 +1420,22 @@ var __meta__ = {
 
                     if (!items.length) {
                         updateNodeHtml(parentNode);
+
+                        this.trigger("itemChange", { item: parentNode, data: node, ns: ui });
                     } else {
                         this._appendItems(e.index, items, parentNode);
 
+                        var children = subGroup(parentNode).children();
+
                         if (loadOnDemand && checkChildren) {
-                            this._bubbleIndeterminate(subGroup(parentNode).children().last());
+                            this._bubbleIndeterminate(children.last());
+                        }
+
+                        for (i = 0; i < children.length; i++) {
+                            var child = children.eq(i);
+                            this.trigger("itemChange", { item: child, data: this.dataItem(child), ns: ui });
                         }
                     }
-
-                    this.trigger("itemChange", { item: parentNode, data: node, ns: ui });
                 } else {
 
                     var groupHtml = this._renderGroup({

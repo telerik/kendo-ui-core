@@ -375,5 +375,26 @@
             ok(dom.find(":checkbox:first").prop("indeterminate"));
         });
 
+        test("templates are bound to correct item", function() {
+            $('<div id="tmpl"><i class="text" data-bind="text: name"></i></div>').appendTo(QUnit.fixture);
+            var dom = $('<div data-role="treeview" data-template="tmpl" data-load-on-demand="false" data-bind="source: items" />').appendTo(QUnit.fixture);
+
+            var viewModel = kendo.observable({
+                items: kendo.observableHierarchy([
+                    { name: "foo", expanded: true, items: [
+                      { name: "bar" },
+                      { name: "baz" }
+                    ] }
+                ])
+            });
+
+            kendo.bind(dom, viewModel);
+
+            var items = dom.find(".text");
+            equal(items.eq(0).text(), "foo");
+            equal(items.eq(1).text(), "bar");
+            equal(items.eq(2).text(), "baz");
+        });
+
     })();
 })();
