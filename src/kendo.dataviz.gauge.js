@@ -1670,9 +1670,17 @@ var __meta__ = {
             var that = this;
             var scale = that.scale;
             var options = that.options;
-            var animation = new BarLinearPointerAnimation(that.elements.children[0], deepExtend(options.animation, {
+            var shape = that.pointerShape(options.value);
+            var pointerPath = that.elements.children[0];
+            var oldShape = that.pointerShape(options._oldValue);
+
+            pointerPath.moveTo(shape[0]).lineTo(shape[1]).lineTo(shape[2]).lineTo(shape[3]).close();
+
+            var animation = new BarLinearPointerAnimation(pointerPath, deepExtend(options.animation, {
                     reverse:  scale.options.reverse,
-                    vertical: scale.options.vertical
+                    vertical: scale.options.vertical,
+                    oldPoints: [oldShape[1], oldShape[2]],
+                    newPoints: [shape[1], shape[2]]
                 }));
 
             if (options.animation.transitions === false) {
@@ -1690,13 +1698,12 @@ var __meta__ = {
             var scale = that.scale;
             var elementOptions = that.getElementOptions();
             var shape = that.pointerShape(options.value);
-            var pointer = Path.fromPoints(shape, {
+            var pointer = new Path({
                 stroke: elementOptions.stroke,
                 fill: elementOptions.fill
             });
 
             group.append(pointer);
-            group.clip(Path.fromRect(pointer.bbox()));
 
             that.elements = group;
 
@@ -1776,28 +1783,29 @@ var __meta__ = {
         setup: function() {
             var element = this.element;
             var options = this.options;
-            var bbox = element.bbox();
-            var size = this.size = options.vertical ? bbox.height() : bbox.width();
-            //var origin = this.origin = options.reverse ? bbox.topRight() : bbox.bottomLeft();
-            var axis = options.vertical ? Y : X;
-            var fromOffset = this.fromOffset = new Point();
 
-            fromOffset[axis] = size;
-            if (options.vertical == options.reverse) { 
-                fromOffset[axis] *= -1;
-            }
+            var newPoints = options.newPoints;
+            var oldPoints = options.oldPoints;
+            var axis = this.axis = options.vertical ? Y : X;
+            var to = this.to = newPoints[0][axis];
+            var from = this.from = oldPoints[0][axis];
 
-            options.duration = math.max((size / options.speed) * 1000, 1);
+            options.duration = math.max((math.abs(to - from) / options.speed) * 1000, 1);
 
-            element.transform(geo.transform().translate(fromOffset.x, fromOffset.y));
+            this._set(from)
         },
 
         step: function(pos) {
-            var translateX = interpolateValue(this.fromOffset.x, 0, pos);
-            var translateY = interpolateValue(this.fromOffset.y, 0, pos);
+            var value = interpolateValue(this.from, this.to, pos);
+            this._set(value);
+        },
 
-            this.element.transform(geo.transform().translate(translateX, translateY)
-            );
+        _set: function(value) {
+            var setter = "set" + this.axis.toUpperCase();
+            var points = this.options.newPoints;
+
+            points[0][setter](value);
+            points[1][setter](value);
         }
     });
     draw.AnimationFactory.current.register(BAR_POINTER, BarLinearPointerAnimation);
