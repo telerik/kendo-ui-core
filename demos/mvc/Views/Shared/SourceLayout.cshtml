@@ -6,13 +6,12 @@
     <link href="styles/kendo.default.min.css" rel="stylesheet" />
     <link href="styles/kendo.dataviz.min.css" rel="stylesheet" />
     <link href="styles/kendo.dataviz.default.min.css" rel="stylesheet" />
-    @if (ViewBag.Mobile && !ViewBag.DisableInMobile)
+    @if ((ViewBag.Mobile && !ViewBag.DisableInMobile) || ViewBag.MobileAngular)
     {
-    <link href="styles/kendo.mobile.all.min.css" rel="stylesheet" />
-    }
-    @if (ViewBag.DisableInMobile)
+        <link href="styles/kendo.mobile.all.min.css" rel="stylesheet" />
+    } else if (ViewBag.DisableInMobile)
     {
-    <link href="styles/kendo.default.mobile.min.css" rel="stylesheet" />
+        <link href="styles/kendo.default.mobile.min.css" rel="stylesheet" />
     }
     @if (Request.Url.PathAndQuery.Contains("right-to-left"))
     {
