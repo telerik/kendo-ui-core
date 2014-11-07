@@ -26,6 +26,9 @@
     font-style: normal;
 }
 
+/*Roboto Font used in Material Theme preview*/
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700,700italic,300,300italic);
+
 [class^="k-uni"],
 .tc-activator:after,
 .back-nav:before,
@@ -2926,6 +2929,10 @@ h5 {
 html.k-flat .demo-section.k-header {
   background-color: #fff;
   color: #4c5356;
+}
+
+html.k-material #example {
+    font-family: "Roboto", Helvetica, Arial, sans-serif;
 }
 
 html.k-material .demo-section.k-header {
