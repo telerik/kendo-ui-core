@@ -27,7 +27,7 @@
 </head>
 <body>
 
-<div id="gauge" style="width: 500px; height: 500px;"></div>
+<!-- <div id="gauge" style="width: 500px; height: 500px;"></div> -->
 <div id="gauge2" style="width: 500px; height: 500px;"></div>
   <script>
     var dataviz = kendo.dataviz;
@@ -47,9 +47,10 @@ var elem2 = $("#gauge2");
 
 var l = elem2.kendoLinearGauge({
             pointer: [{
-                value: -10,
-                shape: "arrow",
-                color: "aqua"
+                value: 0,
+                shape: "bar",
+                color: "aqua",
+                margin: 10
             }
             // , {
             //     value: 0,
@@ -77,8 +78,8 @@ var l = elem2.kendoLinearGauge({
             //transitions: false,
             scale: {
                 //mirror: true,
-                reverse: false,
-                vertical: true,
+                //reverse: true,
+                //vertical: true,
                 line: {
                     color: "blue"
                 },

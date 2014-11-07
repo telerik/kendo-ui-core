@@ -1052,7 +1052,7 @@ var __meta__ = {
             that.scale.reflow(bbox2D);
 
             for (var i = 0; i < pointers.length; i++) {
-                pointers[i].reflow(bbox2D);
+                pointers[i].reflow();
             }
 
             that.bbox = that._getBox(bbox2D);
@@ -1512,8 +1512,23 @@ var __meta__ = {
                     color: options.border.width ? options.border.color || options.color : "",
                     width: options.border.width,
                     dashType: options.border.dashType
-                } : {}
+                } : null
             };
+        },
+
+        _margin: function() {
+            var pointer = this;
+            var options = pointer.options;
+            var scale = pointer.scale;
+            var mirror = scale.options.mirror;
+            var margin = getSpacing(options.margin);
+            var vertical = scale.options.vertical;
+
+            var space = vertical ?
+                     margin[mirror ? "left" : "right"] :
+                     margin[mirror ? "bottom" : "top"];
+
+            return space;
         }
     });
 
@@ -1528,8 +1543,8 @@ var __meta__ = {
             var that = this;
             var options = that.options;
             var scale = that.scale;
-            var slot = new Box2D();
-            var pointerRangeBox = new Box2D();
+            var slot = new Box2D(); //TODO 0
+            var pointerRangeBox = new Box2D(); //TODO 0
             var size = options.size;
             var vertical = scale.options.vertical;
             var halfSize = size / 2;
@@ -1610,30 +1625,52 @@ var __meta__ = {
             var that = this;
             var options = that.options;
             var scale = that.scale;
-            var slot = new Box2D();
-            var pointerRangeBox = new Box2D();
-            var size = options.size;
             var vertical = scale.options.vertical;
-            var halfSize = size / 2;
-            var sign = (scale.options.mirror ? -1 : 1);
-            var reverse = scale.options.reverse;
-            var trackBox = that.trackBox;
-            var pos, shape;
+            var mirror = scale.options.mirror ;
+            var dir = mirror == vertical  ? -1 : 1;
+            var size = options.size * dir;
+            var minSlot = scale.getSlot(scale.options.min);
+            var slot = scale.getSlot(value);
+            var axis = vertical ? Y : X;
+            var sizeAxis = vertical ? X : Y;
+            var margin = that._margin() * dir;
+
+            var shape = [];
+            var p1 = new Point();
+            p1[axis] = minSlot[axis + "1"];
+            p1[sizeAxis] = minSlot[sizeAxis + "1"];
+
+            var p2 = new Point();
+            p2[axis] = slot[axis + "1"];
+            p2[sizeAxis] = slot[sizeAxis + "1"];
 
             if (vertical) {
-                shape = new Rect([trackBox.x1, slot.y1], [size, slot.y2 - slot.y1]);
+                p1.translate(margin, 0);
+                p2.translate(margin, 0);
             } else {
-                shape = new Rect([slot.x1, trackBox.y1], [slot.x2 - slot.x1, size]);
+                p1.translate(0, margin);
+                p2.translate(0, margin);
             }
 
-            return shape;
+            var p3 = p2.clone();
+            var p4 = p1.clone();
+
+            if (vertical) {
+                p3.translate(size, 0);
+                p4.translate(size, 0);
+            } else {
+                p3.translate(0, size);
+                p4.translate(0, size);
+            }
+
+            return [p1, p2, p3, p4];
         },
 
         repaint: function() {
             var that = this;
             var scale = that.scale;
             var options = that.options;
-            var animation = new BarLinearPointerAnimation(that.elements, deepExtend(options.animation, {
+            var animation = new BarLinearPointerAnimation(that.elements.children[0], deepExtend(options.animation, {
                     reverse:  scale.options.reverse,
                     vertical: scale.options.vertical
                 }));
@@ -1649,22 +1686,21 @@ var __meta__ = {
         render: function() {
             var that = this;
             var options = that.options;
-            var elements = new Group();
+            var group = new Group();
             var scale = that.scale;
             var elementOptions = that.getElementOptions();
             var shape = that.pointerShape(options.value);
-
-            elements = Path.fromRect(shape, {
+            var pointer = Path.fromPoints(shape, {
                 stroke: elementOptions.stroke,
                 fill: elementOptions.fill
             });
 
-            var slot = scale.getSlot(options.value);
-            elements.transform(geo.transform().translate(slot.x1, slot.y1));
+            group.append(pointer);
+            group.clip(Path.fromRect(pointer.bbox()));
 
-            that.elements = elements;
+            that.elements = group;
 
-            return elements;
+            return group;
         }
     });
 
@@ -1734,34 +1770,33 @@ var __meta__ = {
     var BarLinearPointerAnimation = draw.Animation.extend({
         options: {
             easing: LINEAR,
-            duration: LINEAR_SPEED
+            speed: 350// LINEAR_SPEED
         },
 
         setup: function() {
             var element = this.element;
             var options = this.options;
-
             var bbox = element.bbox();
-            var origin = this.origin = options.reverse ? bbox.topRight() : bbox.bottomLeft();
+            var size = this.size = options.vertical ? bbox.height() : bbox.width();
+            //var origin = this.origin = options.reverse ? bbox.topRight() : bbox.bottomLeft();
             var axis = options.vertical ? Y : X;
             var fromOffset = this.fromOffset = new Point();
-            var fromScale = this.fromScale = new Point(1, 1);
-            fromScale[axis] = 0;
 
-            //options.duration = math.max((math.abs(anim.start - anim.end) / options.speed) * 1000, 1);
+            fromOffset[axis] = size;
+            if (options.vertical == options.reverse) { 
+                fromOffset[axis] *= -1;
+            }
 
-            element.transform(geo.transform().scale(fromScale.x, fromScale.y));
+            options.duration = math.max((size / options.speed) * 1000, 1);
+
+            element.transform(geo.transform().translate(fromOffset.x, fromOffset.y));
         },
 
         step: function(pos) {
-            var scaleX = interpolateValue(this.fromScale.x, 1, pos);
-            var scaleY = interpolateValue(this.fromScale.y, 1, pos);
-            // var translateX = interpolateValue(this.fromOffset.x, 0, pos);
-            // var translateY = interpolateValue(this.fromOffset.y, 0, pos);
+            var translateX = interpolateValue(this.fromOffset.x, 0, pos);
+            var translateY = interpolateValue(this.fromOffset.y, 0, pos);
 
-            this.element.transform(geo.transform()
-                //.translate(translateX, translateY)
-                .scale(scaleX, scaleY, this.origin)
+            this.element.transform(geo.transform().translate(translateX, translateY)
             );
         }
     });
