@@ -174,7 +174,7 @@ var __meta__ = {
             }
 
             if (options.anchor != BODY) {
-                direction = (anchor[0].className.match(ACTIVEBORDERREGEXP) || ["", "down"])[1];
+                direction = ((anchor.attr("class") || "").match(ACTIVEBORDERREGEXP) || ["", "down"])[1];
                 dirClass = ACTIVEBORDER + "-" + direction;
 
                 anchor
