@@ -7,13 +7,9 @@ server {
     server_name localhost;
     autoindex on;
     index  index.html index.htm index.php;
-    root  <%= @home_dir %>;
+    root  <%= @home_dir %>/github;
 
     expires -1;
-
-    location /kendo {
-        alias <%= @kendo_dir %>;
-    }
 
     location /kendo-ui {
         alias <%= @kendo_dir %>/docs/_site;
