@@ -3,7 +3,6 @@
 })(function(){
 
 (function ($, Math) {
-
     // Imports ================================================================
     var doc = document,
         noop = $.noop,
@@ -29,43 +28,46 @@
             easing: "swing"
         },
 
+        setup: noop,
+        step: noop,
+
         play: function() {
             var anim = this,
                 options = anim.options,
-                element = anim.element,
-                delay = options.delay || 0,
-                start = +new Date() + delay,
-                duration = options.duration,
-                finish = start + duration,
                 easing = $.easing[options.easing],
-                wallTime,
-                time,
-                pos,
-                easingPos;
+                duration = options.duration,
+                delay = options.delay || 0,
+                start = util.now() + delay,
+                finish = start + duration;
 
-            setTimeout(function() {
-                var loop = function() {
-                    if (anim._stopped) {
-                        return;
-                    }
+            if (duration === 0) {
+                anim.step(1);
+                anim.abort();
+            } else {
+                setTimeout(function() {
+                    var loop = function() {
+                        if (anim._stopped) {
+                            return;
+                        }
 
-                    wallTime = +new Date();
+                        var wallTime = util.now();
 
-                    time = util.limitValue(wallTime - start, 0, duration);
-                    pos = time / duration;
-                    easingPos = easing(pos, time, 0, 1, duration);
+                        var time = util.limitValue(wallTime - start, 0, duration);
+                        var pos = time / duration;
+                        var easingPos = easing(pos, time, 0, 1, duration);
 
-                    anim.step(easingPos);
+                        anim.step(easingPos);
 
-                    if (wallTime < finish) {
-                        animationFrame(loop);
-                    } else {
-                        anim.destroy();
-                    }
-                };
+                        if (wallTime < finish) {
+                            animationFrame(loop);
+                        } else {
+                            anim.abort();
+                        }
+                    };
 
-                loop();
-            }, delay);
+                    loop();
+                }, delay);
+            }
         },
 
         abort: function() {
@@ -74,11 +76,7 @@
 
         destroy: function() {
             this.abort();
-        },
-
-        setup: noop,
-
-        step: noop
+        }
     });
 
     // Animation factory =====================================================
