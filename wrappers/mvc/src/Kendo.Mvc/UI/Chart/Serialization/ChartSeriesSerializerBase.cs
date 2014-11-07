@@ -23,7 +23,8 @@ namespace Kendo.Mvc.UI
                   .Add("visible", series.Visible, () => series.Visible.HasValue)
                   .Add("axis", series.Axis, string.Empty)
                   .Add("categoryAxis", series.CategoryAxis, string.Empty)
-                  .Add("groupNameTemplate", series.GroupNameTemplate, string.Empty);
+                  .Add("groupNameTemplate", series.GroupNameTemplate, string.Empty)
+                  .Add("zIndex", series.ZIndex, () => series.ZIndex.HasValue);
 
             var tooltipData = series.Tooltip.CreateSerializer().Serialize();
             if (tooltipData.Count > 0) {

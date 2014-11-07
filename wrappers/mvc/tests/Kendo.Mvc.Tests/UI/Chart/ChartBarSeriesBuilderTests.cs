@@ -382,5 +382,18 @@ namespace Kendo.Mvc.UI.Tests.Chart
         {
             builder.NoteTextField("NoteText").ShouldBeSameAs(builder);
         }
+
+        [Fact]
+        public void ZIndex_should_set_zIndex()
+        {
+            builder.ZIndex(5);
+            series.ZIndex.ShouldEqual(5);
+        }
+
+        [Fact]
+        public void ZIndex_should_return_builder()
+        {
+            builder.ZIndex(5).ShouldBeSameAs(builder);
+        }
     }
 }

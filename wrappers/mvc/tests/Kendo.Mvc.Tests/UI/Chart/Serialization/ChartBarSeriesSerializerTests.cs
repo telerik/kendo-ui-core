@@ -399,5 +399,18 @@ namespace Kendo.Mvc.UI.Tests
             GetJson(series).ContainsKey("errorLowField").ShouldBeFalse();
             GetJson(series).ContainsKey("errorHighField").ShouldBeFalse();
         }
+
+        [Fact]
+        public void Serializes_zIndex()
+        {
+            series.ZIndex = 5;
+            GetJson(series)["zIndex"].ShouldEqual(5.0);
+        }
+
+        [Fact]
+        public void Should_not_serialize_default_zIndex()
+        {
+            GetJson(series).ContainsKey("zIndex").ShouldBeFalse();
+        }
     }
 }

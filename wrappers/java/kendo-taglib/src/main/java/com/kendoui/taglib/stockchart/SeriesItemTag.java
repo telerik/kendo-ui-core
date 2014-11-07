@@ -321,6 +321,14 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("width", value);
     }
 
+    public float getZindex() {
+        return (float)getProperty("zIndex");
+    }
+
+    public void setZindex(float value) {
+        setProperty("zIndex", value);
+    }
+
 //<< Attributes
 
 }

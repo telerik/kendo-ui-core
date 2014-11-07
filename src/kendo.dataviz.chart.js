@@ -8825,11 +8825,6 @@ var __meta__ = {
                     pane
                 );
 
-                plotArea.createLineChart(
-                    filterSeriesByType(filteredSeries, [LINE, VERTICAL_LINE]),
-                    pane
-                );
-
                 plotArea.createCandlestickChart(
                     filterSeriesByType(filteredSeries, CANDLESTICK),
                     pane
@@ -8847,6 +8842,11 @@ var __meta__ = {
 
                 plotArea.createWaterfallChart(
                     filterSeriesByType(filteredSeries, [WATERFALL, HORIZONTAL_WATERFALL]),
+                    pane
+                );
+
+                plotArea.createLineChart(
+                    filterSeriesByType(filteredSeries, [LINE, VERTICAL_LINE]),
                     pane
                 );
             }
