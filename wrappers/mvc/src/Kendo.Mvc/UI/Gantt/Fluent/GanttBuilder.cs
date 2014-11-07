@@ -88,6 +88,16 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Fields
         
         /// <summary>
+        /// The configuration of the assignments of the gantt resources. An assignment is a one-to-one mapping between a gantt task and a gantt resource containing the number of units for which a resource is assigned to a task.
+        /// </summary>
+        /// <param name="configurator">The action that configures the assignments.</param>
+        public GanttBuilder<TTaskModel,TDependenciesModel> Assignments(Action<GanttAssignmentsSettingsBuilder> configurator)
+        {
+            configurator(new GanttAssignmentsSettingsBuilder(container.Assignments, this.Component.ViewContext, this.Component.UrlGenerator));
+            return this;
+        }
+        
+        /// <summary>
         /// If set to false the widget will not bind to the data source during initialization. In this case data binding will occur when the change event of the
 		/// data source is fired. By default the widget will bind to the data source specified in the configuration.
         /// </summary>
@@ -301,6 +311,17 @@ namespace Kendo.Mvc.UI.Fluent
         public GanttBuilder<TTaskModel,TDependenciesModel> Views(Action<GanttViewFactory> configurator)
         {
             configurator(new GanttViewFactory(container.Views));
+            return this;
+        }
+        
+        /// <summary>
+        /// The configuration of the gantt resource(s). A gantt resource is optional metadata that can be associated
+		/// with a gantt task.
+        /// </summary>
+        /// <param name="configurator">The action that configures the resources.</param>
+        public GanttBuilder<TTaskModel,TDependenciesModel> Resources(Action<GanttResourcesSettingsBuilder> configurator)
+        {
+            configurator(new GanttResourcesSettingsBuilder(container.Resources, this.Component.ViewContext, this.Component.UrlGenerator));
             return this;
         }
         

@@ -2320,4 +2320,10 @@
     <Compile Include="UI\Gantt\Settings\GanttPdfMarginSettings.cs" />
     <Compile Include="UI\Gantt\Fluent\GanttPdfMarginSettingsBuilder.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\Gantt\Settings\GanttAssignmentsSettings.cs" />
+    <Compile Include="UI\Gantt\Fluent\GanttAssignmentsSettingsBuilder.cs" />
+    <Compile Include="UI\Gantt\Settings\GanttResourcesSettings.cs" />
+    <Compile Include="UI\Gantt\Fluent\GanttResourcesSettingsBuilder.cs" />
+  </ItemGroup>
 </Project>

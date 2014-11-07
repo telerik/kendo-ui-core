@@ -37,11 +37,15 @@ namespace Kendo.Mvc.UI
 
 //>> Initialization
         
+            Assignments = new GanttAssignmentsSettings();
+                
             Editable = new GanttEditableSettings();
                 
             Messages = new GanttMessagesSettings();
                 
             Pdf = new GanttPdfSettings();
+                
+            Resources = new GanttResourcesSettings();
                 
             Toolbar = new List<GanttToolbar>();
                 
@@ -70,6 +74,12 @@ namespace Kendo.Mvc.UI
 
 
 //>> Fields
+        
+        public GanttAssignmentsSettings Assignments
+        {
+            get;
+            set;
+        }
         
         public bool? AutoBind { get; set; }
         
@@ -127,6 +137,12 @@ namespace Kendo.Mvc.UI
             set;
         }
         
+        public GanttResourcesSettings Resources
+        {
+            get;
+            set;
+        }
+        
         //<< Fields
 
         public override void WriteInitializationScript(TextWriter writer)
@@ -141,6 +157,11 @@ namespace Kendo.Mvc.UI
 
 //>> Serialization
         
+            var assignments = Assignments.ToJson();
+            if (assignments.Any())
+            {
+                json["assignments"] = assignments;
+            }
             if (AutoBind.HasValue)
             {
                 json["autoBind"] = AutoBind;
@@ -233,6 +254,11 @@ namespace Kendo.Mvc.UI
             if (views.Any())
             {
                 json["views"] = views;
+            }
+            var resources = Resources.ToJson();
+            if (resources.Any())
+            {
+                json["resources"] = resources;
             }
         //<< Serialization
 
