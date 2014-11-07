@@ -134,7 +134,12 @@
 
 .k-pager-wrap .k-pager-refresh {
     margin-right: 1.214em;
+}
 
+.k-autocomplete .k-loading,
+.k-multiselect .k-loading
+{
+    bottom: 10px;
 }
 
 .k-dropdown-wrap,
@@ -270,8 +275,21 @@
     margin-right: 1.071em;   
 }
 
+.k-numeric-wrap .k-select {
+    vertical-align: baseline;
+}
+
 .k-numerictextbox .k-link {
     height: (@input-height + 0.354em) / 2;
+    line-height: 1.357em;
+}
+
+.k-numerictextbox .k-link .k-i-arrow-n {
+    vertical-align: bottom;
+}
+
+.k-numerictextbox .k-link .k-i-arrow-s {
+    vertical-align: top;
 }
 
 .k-menu.k-header,
@@ -590,9 +608,17 @@ div.k-window {
 .k-gantt-toolbar,
 .k-scheduler-toolbar,
 .k-scheduler-footer {
-    line-height: 44px;
-    padding: 0 1.286em;
+    line-height: 44px;    
     vertical-align: middle;
+}
+
+.k-scheduler-footer {
+    padding: 0;
+}
+
+.k-gantt-toolbar,
+.k-scheduler-toolbar {
+    padding: 0 1.286em;
 }
 
 .k-scheduler .k-scheduler-toolbar .k-state-default .k-link .k-icon.k-i-calendar,

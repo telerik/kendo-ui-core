@@ -253,7 +253,7 @@
 //new var-s
 @secondary-background-color: #f9f9f9;
 @secondary-hover-background-color: #5c6bc0;
-@secondary-header-color: rgba(256, 256, 256, 0.3);
+@secondary-header-color: rgba(256, 256, 256, 0.5);
 @secondary-header-background-color: #283593;
 @accent-color: #00b0ff;
 
@@ -309,6 +309,11 @@
 @radio-disabled-background-color-before: #fff;
 
 @import "theme-template.less";
+
+.k-button,
+.k-header {
+	font-weight: 500;
+}
 
 .k-button:active,
 .k-button.k-state-active,
@@ -430,7 +435,8 @@ span.k-colorpicker {
 }
 
 .k-textbox {
-	border-color: @drop-down-border-color;
+    background-color: @drop-down-background;
+    border-color: @drop-down-border-color;
 }
 
 .k-combobox,
