@@ -314,7 +314,14 @@ var __meta__ = {
                 width: 0
             },
             editable: {
-                tools: ["edit", "delete", "rotate"]
+                tools: [{
+                    type: "edit"
+                }, {
+                    type: "delete"
+                }, {
+                    type: "rotate",
+                    step: 90
+                }]
             }
         },
         editable: {
@@ -2952,8 +2959,8 @@ var __meta__ = {
             ]
         }
     });
-    
-    
+
+
      registerTheme("material", {
        chart: {
             title: {
@@ -3169,7 +3176,7 @@ var __meta__ = {
             ]
         }
     });
-    
+
 
 })(window.kendo.jQuery);
 

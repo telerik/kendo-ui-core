@@ -3602,7 +3602,7 @@
             createTool: function(tool) {
                 if (isPlainObject(tool)) {
                     if (tool.type) {
-                        this[tool.type + "Tool"]();
+                        this[tool.type + "Tool"](tool);
                     } else if (tool.template) {
                         this._toolBar.add({
                             template: tool.template
@@ -3630,7 +3630,7 @@
                     type: "button",
                     showText: "overflow",
                     text: "Edit",
-                    attributes: this._getAttribute("edit")
+                    attributes: this._setAttributes({ action: "edit" })
                 });
             },
 
@@ -3640,37 +3640,66 @@
                     showText: "overflow",
                     type: "button",
                     text: "delete",
-                    attributes: this._getAttribute("delete")
+                    attributes: this._setAttributes({ action: "delete" })
                 });
             },
 
-            rotateTool: function() {
+            rotateTool: function(options) {
+                options = options || {};
                 this._toolBar.add({
                     type: "buttonGroup",
-                    buttons: [
-                        { spriteCssClass: "k-icon k-i-rotateccw", attributes: this._getAttribute("rotateAnticlockwise"), showText: "overflow", text: "rotateAnticlockwise", group: "rotate" },
-                        { spriteCssClass: "k-icon k-i-rotatecw", attributes: this._getAttribute("rotateClockwise"), showText: "overflow", text: "rotateClockwise", group: "rotate" }
-                    ]
+                    buttons: [{
+                        spriteCssClass: "k-icon k-i-rotateccw",
+                        attributes: this._setAttributes({ action: "rotateAnticlockwise", step: options.step }),
+                        showText: "overflow",
+                        text: "rotateAnticlockwise",
+                        group: "rotate"
+                    }, {
+                        spriteCssClass: "k-icon k-i-rotatecw",
+                        attributes: this._setAttributes({ action: "rotateClockwise", step: options.step }),
+                        showText: "overflow",
+                        text: "rotateClockwise",
+                        group: "rotate"
+                    }]
                 });
             },
 
-            _getAttribute: function(action) {
-                var result = {};
+            _setAttributes: function(attributes) {
+                var attr = {};
 
-                result[kendo.attr("action")] = action;
+                if (attributes.action) {
+                    attr[kendo.attr("action")] = attributes.action;
+                }
 
-                return result;
+                if (attributes.step) {
+                    attr[kendo.attr("step")] = attributes.step;
+                }
+
+                return attr;
             },
 
-            _getActionFromElement: function(element) {
-                return element.attr(kendo.attr("action"));
+            _getAttributes: function(element) {
+                var attr = {};
+
+                var action = element.attr(kendo.attr("action"));
+                if (action) {
+                    attr.action = action;
+                }
+
+                var step = element.attr(kendo.attr("step"));
+                if (step) {
+                    attr.step = step;
+                }
+
+                return attr;
             },
 
             click: function(e) {
-                var action = this._getActionFromElement($(e.target));
+                var attributes = this._getAttributes($(e.target));
+                var action = attributes.action;
 
-                if (this[action]) {
-                    this[action]();
+                if (action) {
+                    this[action](attributes);
                 }
 
                 this.trigger("click", this.eventData(action));
@@ -3701,17 +3730,17 @@
                 this.diagram.edit(this.selectedElement());
             },
 
-            rotateClockwise: function() {
+            rotateClockwise: function(options) {
                 var element = this.selectedElement();
                 var currentAngle = element.rotate().angle;
-                element.rotate(currentAngle + 90);
+                element.rotate(currentAngle + parseFloat(options.step || 90));
                 this.diagram._updateAdorners();
             },
 
-            rotateAnticlockwise: function() {
+            rotateAnticlockwise: function(options) {
                 var element = this.selectedElement();
                 var currentAngle = element.rotate().angle;
-                element.rotate(currentAngle - 90);
+                element.rotate(currentAngle - parseFloat(options.step || 90));
                 this.diagram._updateAdorners();
             },
 
@@ -3938,7 +3967,8 @@
         deepExtend(diagram, {
             Shape: Shape,
             Connection: Connection,
-            Connector: Connector
+            Connector: Connector,
+            DiagramToolBar: DiagramToolBar
         });
 })(window.kendo.jQuery);
 
