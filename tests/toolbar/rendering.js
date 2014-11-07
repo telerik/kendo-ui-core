@@ -754,6 +754,18 @@
         ok($("#btn3").hasClass("baz"));
     });
 
+    test("ButtonGroup with no buttons does not throw JS error", 0, function() {
+        try {
+            var toolbar = container.kendoToolBar({
+                items: [
+                    { type: "buttonGroup" }
+                ]
+            }).data("kendoToolBar");
+        } catch (e) {
+            ok(false);
+        }
+    });
+
     /* SPLIT BUTTON */
 
     test("renders splitButton from JSON", 2, function() {
