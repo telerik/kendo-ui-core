@@ -100,6 +100,13 @@
         return hashKey(objectKey(object));
     }
 
+    var now = Date.now;
+    if (!now) {
+        now = function() {
+            return new Date().getTime();
+        }
+    }
+
     // Array helpers ==========================================================
     function arrayLimits(arr) {
         var length = arr.length,
@@ -240,6 +247,7 @@
             isTransparent: isTransparent,
             last: last,
             limitValue: limitValue,
+            now: now,
             objectKey: objectKey,
             round: round,
             rad: rad,
