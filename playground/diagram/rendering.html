@@ -5,6 +5,7 @@
     <title>Rendering</title>
     <script src="../../src/jquery.js"></script>
     <script src="../../src/kendo.core.js"></script>
+    <script src="../../src/kendo.color.js"></script>
     <script src="../../src/kendo.data.js"></script>
     <script src="../../src/kendo.popup.js"></script>
     <script src="../../src/kendo.list.js"></script>
@@ -18,53 +19,28 @@
     <script src="../../src/kendo.mobile.scroller.js"></script>
 
     <script src="../../src/kendo.dataviz.core.js"></script>
-    <script src="../../src/dataviz/util.js"></script>
-    <script src="../../src/dataviz/text-metrics.js"></script>
-    <script src="../../src/dataviz/geometry.js"></script>
-    <script src="../../src/dataviz/drawing/core.js"></script>
-    <script src="../../src/dataviz/drawing/mixins.js"></script>
-    <script src="../../src/dataviz/drawing/shapes.js"></script>
-    <script src="../../src/dataviz/drawing/parser.js"></script>
-    <script src="../../src/dataviz/drawing/svg.js"></script>
-    <script src="../../src/dataviz/drawing/vml.js"></script>
     <script src="../../src/kendo.dataviz.themes.js"></script>
+
+     <script src="../../src/util/main.js"></script>     
+     <script src="../../src/mixins/observers.js"></script>
+     <script src="../../src/geometry/main.js"></script>
+     <script src="../../src/drawing/core.js"></script>     
+     <script src="../../src/drawing/mixins.js"></script>
+     <script src="../../src/drawing/text-metrics.js"></script>
+     <script src="../../src/drawing/shapes.js"></script>
+     <script src="../../src/drawing/parser.js"></script>
+     <script src="../../src/drawing/svg.js"></script>
+     <script src="../../src/drawing/canvas.js"></script>
+     <script src="../../src/drawing/vml.js"></script>
 
     <script src="../../src/dataviz/diagram/utils.js" type="text/javascript"></script>
     <script src="../../src/dataviz/diagram/math.js" type="text/javascript"></script>
     <script src="../../src/dataviz/diagram/svg.js" type="text/javascript"></script>
     <script src="../../src/dataviz/diagram/services.js" type="text/javascript"></script>
-    <script src="../../src/dataviz/diagram/extensions.js" type="text/javascript"></script>
     <script src="../../src/dataviz/diagram/dom.js" type="text/javascript"></script>
     <script src="../../src/dataviz/diagram/layout.js" type="text/javascript"></script>
 </head>
 <body>
-<style>
-.k-diagram .k-layer {
-  position: absolute;
-  left: 0;
-  top: 0;
-}
-
-.k-diagram {
-  height: 600px;
-}
-.k-diagram .km-scroll-wrapper {
-  padding-bottom: 0;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-}
-.k-diagram .km-scroll-wrapper,
-.k-diagram .km-scroll-container {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
-
-.k-diagram .km-touch-scrollbar {
-  display: none;
-}
-</style>
 <button type="button" id="startGroup">start</button>
 <button type="button" id="endGroup">end</button>
 <button type="button" id="active">active</button>
@@ -76,42 +52,49 @@
 
     function createDiagram() {
     $("#canvas").kendoDiagram({
-        dataSource: [{
-            "name" : "Telerik",
-            "items": [
-                {
-                    "name" : "Telerik",
-                    "items": [{
-                            "name": "Kendo",
-                            "items": [
-                                    {"name": "Kendo"},
-                                    {"name": "Icenium"},
-                                     {"name": "Kendo"},
-                                    {"name": "Icenium"},
-                                     {"name": "Kendo"},
-                                    {"name": "Icenium"},
-                                     {"name": "Kendo"},
-                                    {"name": "Icenium"}
-                                ]
-                        },
-                        {"name": "Icenium"},
-                         {"name": "Kendo"},
-                        {"name": "Icenium"},
-                         {"name": "Kendo"},
-                        {"name": "Icenium"},
-                         {"name": "Kendo"},
-                        {"name": "Icenium"}
-                    ]
-                },
-                {"name": "Icenium"},
-                 {"name": "Kendo"},
-                {"name": "Icenium"},
-                 {"name": "Kendo"},
-                {"name": "Icenium"},
-                 {"name": "Kendo"},
-                {"name": "Icenium"}
-            ]
-        }],
+        dataSource: {
+            data: [{
+                "name" : "Telerik",
+                "items": [
+                    {
+                        "name" : "Telerik",
+                        "items": [{
+                                "name": "Kendo",
+                                "items": [
+                                        {"name": "Kendo"},
+                                        {"name": "Icenium"},
+                                         {"name": "Kendo"},
+                                        {"name": "Icenium"},
+                                         {"name": "Kendo"},
+                                        {"name": "Icenium"},
+                                         {"name": "Kendo"},
+                                        {"name": "Icenium"}
+                                    ]
+                            },
+                            {"name": "Icenium"},
+                             {"name": "Kendo"},
+                            {"name": "Icenium"},
+                             {"name": "Kendo"},
+                            {"name": "Icenium"},
+                             {"name": "Kendo"},
+                            {"name": "Icenium"}
+                        ]
+                    },
+                    {"name": "Icenium"},
+                     {"name": "Kendo"},
+                    {"name": "Icenium"},
+                     {"name": "Kendo"},
+                    {"name": "Icenium"},
+                     {"name": "Kendo"},
+                    {"name": "Icenium"}
+                ]
+            }],
+            schema: {
+                model: {
+                    children: "items"
+                }
+            }
+        },
         layout:{
             type: "tree",
             subtype: "Down"
@@ -120,12 +103,12 @@
             // type: "image",
             // source: "http://demos.telerik.com/kendo-ui/content/web/foods/1.jpg"
             //visual: visual,
-            type: "rectangle",
+            type: "circle",
             content: {
                 text: "KOR"
             },
-            width: 200,
-            height: 100,
+            width: 100,
+            height: 200,
             hover: {
                 fill: "green"
             }
