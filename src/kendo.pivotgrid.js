@@ -1040,6 +1040,7 @@ var __meta__ = {
                 axes = processedData.axes;
             }
 
+            var columnIndexes, rowIndexes;
             var tuples, resultAxis, measures, axisToSkip;
             var columnDescriptors = this.columns().length;
             var rowDescriptors = this.rows().length;
@@ -1069,25 +1070,16 @@ var __meta__ = {
                 rows: normalizeAxis(axes.rows)
             };
 
-            //this will need to normalize data after tuple normalization
-            var columnIndexes = this._normalizeTuples(axes.columns.tuples, this._axes.columns.tuples, this._columnMeasures());
-            var rowIndexes = this._normalizeTuples(axes.rows.tuples, this._axes.rows.tuples, this._rowMeasures());
+            columnIndexes = this._normalizeTuples(axes.columns.tuples, this._axes.columns.tuples, this._columnMeasures());
+            rowIndexes = this._normalizeTuples(axes.rows.tuples, this._axes.rows.tuples, this._rowMeasures());
 
-            //remove when merge axes
-            data = this._normalizeData(data, axes.columns.tuples.length, axes.rows.tuples.length);
-
-            //normalize data if columnIndexes or rowIndexes
-            /*data = this._normalizeData(data, columnIndexes, rowIndexes);
-
-            if (columnRoot || rowRoot) {
-                data = this._populateEmptyData({
-                    data: data,
-                    columnsLength: axes.columns.tuples.length,
-                    rowsLength: axes.rows.tuples.length,
-                    columnRoot: columnRoot,
-                    rowRoot: rowRoot
-                });
-            }*/
+            data = this._normalizeData({
+                columnsLength: axes.columns.tuples.length,
+                rowsLength: axes.rows.tuples.length,
+                columnIndexes: columnIndexes,
+                rowIndexes: rowIndexes,
+                data: data
+            });
 
             if (this._lastExpanded == "rows") {
                 tuples = axes.columns.tuples;
@@ -1098,8 +1090,11 @@ var __meta__ = {
                     axisToSkip = "columns";
                     axes.columns = resultAxis;
                     adjustDataByColumn(tuples, resultAxis.tuples, axes.rows.tuples.length, measures, data);
-                    //think how to combine indexes comcept here!
-                    data = this._normalizeData(data, membersCount(axes.columns.tuples, measures), axes.rows.tuples.length);
+                    data = this._normalizeData({
+                        columnsLength: membersCount(axes.columns.tuples, measures),
+                        rowsLength: axes.rows.tuples.length,
+                        data: data
+                    });
                 }
             } else if (this._lastExpanded == "columns") {
                 tuples = axes.rows.tuples;
@@ -1110,8 +1105,12 @@ var __meta__ = {
                     axisToSkip = "rows";
                     axes.rows = resultAxis;
                     adjustDataByRow(tuples, resultAxis.tuples, axes.columns.tuples.length, measures, data);
-                    //think how to combine indexes comcept here!
-                    data = this._normalizeData(data, membersCount(axes.rows.tuples, measures), axes.columns.tuples.length);
+
+                    data = this._normalizeData({
+                        columnsLength: membersCount(axes.rows.tuples, measures),
+                        rowsLength: axes.columns.tuples.length,
+                        data: data
+                    });
                 }
             }
 
@@ -1364,44 +1363,13 @@ var __meta__ = {
             }
         },
 
-        _populateEmptyData: function(options) {
-            var columnsLength = options.columnsLength || 1;
-            var columnRoot = options.columnRoot;
-            var data = options.data;
-
-            var result = [];
-            var dataIdx = 0;
-            var idx = 0;
-
-            var length = columnsLength * (options.rowsLength || 1);
-
-            if (options.rowRoot) {
-                for (idx; idx < columnsLength; idx++) {
-                    result[idx] = { value: "", ordinal: idx };
-                }
-            }
-
-            for (; idx < length; idx++) {
-                if (columnRoot && (idx % columnsLength === 0)) {
-                    result[idx] = { value: "", ordinal: idx };
-                    idx += 1;
-                }
-
-                result[idx] = data[dataIdx];
-                result[idx].ordinal = idx;
-
-                dataIdx += 1;
-            }
-
-            return result;
-        },
-
+        //TODO: optimize as splice is slow
         _normalizeTuples: function(tuples, source, measures) {
             var length = measures.length || 1;
             var idx = 0;
 
             var roots = [];
-            var indexes = [];
+            var indexes = {};
             var measureIdx = 0;
             var tuple, memberIdx, last;
 
@@ -1412,7 +1380,7 @@ var __meta__ = {
             if (!this._hasRoot(tuples[0], source)) {
                 for (; idx < length; idx++) {
                     roots.push(this._createTuple(tuples[0], measures[idx], true));
-                    indexes.push(idx);
+                    indexes[idx] = idx;
                 }
 
                 tuples.splice.apply(tuples, [0, tuples.length].concat(roots).concat(tuples));
@@ -1431,7 +1399,7 @@ var __meta__ = {
 
                     if (tuple.members[memberIdx].name !== measures[measureIdx]) {
                         tuples.splice(idx, 0, this._createTuple(tuple, measures[measureIdx]));
-                        indexes.push(idx);
+                        indexes[idx] = idx;
                     }
 
                     idx += 1;
@@ -1441,7 +1409,7 @@ var __meta__ = {
                     if (length > measureIdx && (!tuple || tupleName(last, memberIdx - 1) !== tupleName(tuple, memberIdx - 1))) {
                         for (; measureIdx < length; measureIdx++) {
                             tuples.splice(idx, 0, this._createTuple(last, measures[measureIdx]));
-                            indexes.push(idx);
+                            indexes[idx] = idx;
                             idx += 1;
                         }
                         tuple = tuples[idx];
@@ -1453,36 +1421,56 @@ var __meta__ = {
             return indexes;
         },
 
-        /*_normalizeData: function(options) {
+        _normalizeData: function(options) {
             var data = options.data;
 
-            var columnIndexes = options.columnIndexes;
-            var rowIndexes = options.rowIndexes;
+            var columnIndexes = options.columnIndexes || {};
+            var rowIndexes = options.rowIndexes || {};
 
-            var columnLength = options.columnLength;
-            var rowLength = options.rowLength;
+            var columnsLength = options.columnsLength || 1;
+            var length = columnsLength * (options.rowsLength || 1);
 
-            var length = (columnLength + columnIndexes.length) * (rowLength + rowIndexes.length);
-        },*/
+            var idx = 0;
+            var dataIdx = 0;
+            var lastOrdinal = 0;
+            var dataItem, i;
+            var result = new Array(length);
 
-        _normalizeData: function(data, columns, rows) {
-            var cell, idx, length;
-            var axesLength = (columns || 1) * (rows || 1);
-            var result = new Array(axesLength);
-
-            if (data.length === axesLength) {
+            if (data.length === length) {
                 return data;
             }
 
-            for (idx = 0, length = result.length; idx < length; idx++) {
-                result[idx] = { value: "", fmtValue: "", ordinal: idx };
-            }
+            for (; idx < length; idx++) {
+                if (rowIndexes[parseInt(idx / columnsLength)] !== undefined) {
+                    for (i = 0; i < columnsLength; i++) {
+                        result[idx] = { value: "", fmtValue: "", ordinal: idx };
+                        idx += 1;
+                    }
+                }
 
-            for (idx = 0, length = data.length; idx < length; idx++) {
-               cell = data[idx];
-               if (cell) {
-                   result[cell.ordinal] = cell;
-               }
+                if (columnIndexes[idx % columnsLength] !== undefined) {
+                    result[idx] = { value: "", fmtValue: "", ordinal: idx };
+                    idx += 1;
+                }
+
+                dataItem = data[dataIdx];
+
+                if (dataItem) {
+                    if (dataItem.ordinal - lastOrdinal > 1) {
+                        lastOrdinal += 1;
+                        for (; lastOrdinal < dataItem.ordinal; lastOrdinal++) {
+                            result[idx] = { value: "", fmtValue: "", ordinal: idx };
+                            idx += 1;
+                        }
+                    }
+
+                    lastOrdinal = dataItem.ordinal;
+                    dataItem.ordinal = idx;
+                    result[idx] = dataItem;
+                    dataIdx += 1;
+                } else {
+                    result[idx] = { value: "", fmtValue: "", ordinal: idx };
+                }
             }
 
             return result;

@@ -7,14 +7,14 @@
         var columnTuples = [
             {
                 tuples: [
-                    { members: [ { name: "level 0", children: [] } ] }
+                    { members: [ { name: "level 0", children: [], levelNum: "0" } ] }
                 ]
             },
             {
                 tuples: [
-                    { members: [ { name: "level 0", children: [] } ] },
-                    { members: [ { name: "level 1-0", parentName: "level 0", children: [] } ] },
-                    { members: [ { name: "level 1-1", parentName: "level 0", children: [] } ] }
+                    { members: [ { name: "level 0", children: [], levelNum: "0" } ] },
+                    { members: [ { name: "level 1-0", parentName: "level 0", children: [], levelNum: "1" } ] },
+                    { members: [ { name: "level 1-1", parentName: "level 0", children: [], levelNum: "1" } ] }
                 ]
             }
         ];
@@ -1052,17 +1052,17 @@
             {
                 tuples: [
                     { members: [
-                        { name: "dim 0 level 0", children: [] }
+                        { name: "dim 0 level 0", children: [], levelNum: "0" }
                     ] }
                 ]
             },
             {
                 tuples: [
                     { members: [
-                        { name: "dim 0 level 0", children: [] }
+                        { name: "dim 0 level 0", children: [], levelNum: "0" }
                     ] },
                     { members: [
-                        { name: "dim 0 level 1-0", parentName: "dim 0 level 0", children: [] }
+                        { name: "dim 0 level 1-0", parentName: "dim 0 level 0", children: [], levelNum: "1" }
                     ] }
                 ]
             }
@@ -1072,23 +1072,23 @@
             {
                 tuples: [
                     { members: [
-                        { name: "dim 0 level 0", children: [] }
+                        { name: "dim 0 level 0", children: [], levelNum: "0" }
                     ] },
                     { members: [
-                        { name: "dim 0 level 1-0", parentName: "dim 0 level 0", children: [] }
+                        { name: "dim 0 level 1-0", parentName: "dim 0 level 0", children: [], levelNum: "1" }
                     ] },
                     { members: [
-                        { name: "dim 0 level 1-1", parentName: "dim 0 level 0", children: [] }
+                        { name: "dim 0 level 1-1", parentName: "dim 0 level 0", children: [], levelNum: "1" }
                     ] }
                 ]
             },
             {
                 tuples: [
                 { members: [
-                    { name: "dim 0 level 0", children: [] }
+                    { name: "dim 0 level 0", children: [], levelNum: "0"  }
                     ] },
                 { members: [
-                    { name: "dim 0 level 1-1", parentName: "dim 0 level 0", children: [] }
+                    { name: "dim 0 level 1-1", parentName: "dim 0 level 0", children: [], levelNum: "1" }
                     ] }
                 ]
             }
@@ -2636,4 +2636,3 @@
         equal(data[4].value, 10);
     });
 })();
-
