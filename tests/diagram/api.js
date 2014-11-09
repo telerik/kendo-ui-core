@@ -5,11 +5,10 @@
         Rect = dataviz.diagram.Rect,
         diagram;
 
-        /*-----------------------------------------------*/
-    module("api / selectAll", {
-        setup: function () {
-            var div = QUnit.fixture.html('<div id="diagram" />');
-            diagram = div.kendoDiagram({
+    function createDiagram() {
+        diagram = $('<div id="diagram" />')
+            .appendTo(QUnit.fixture)
+            .kendoDiagram({
                 shapes: [{
                     id: "rect",
                     type: "Rectangle",
@@ -25,7 +24,16 @@
                     width: 100,
                     height: 100
                 }]
-            }).getKendoDiagram();
+            })
+            .getKendoDiagram();
+
+        return diagram;
+    }
+
+    /*-----------------------------------------------*/
+    module("Diagram API / selectAll", {
+        setup: function () {
+            createDiagram();
         },
         teardown: function () {
             diagram.destroy();
@@ -40,26 +48,9 @@
     });
 
     /*-----------------------------------------------*/
-    module("api / select", {
+    module("Diagram API / select", {
         setup: function () {
-            var div = QUnit.fixture.html('<div id="diagram" />');
-            diagram = div.kendoDiagram({
-                shapes: [{
-                    id: "rect",
-                    type: "Rectangle",
-                    x: 0,
-                    y: 0,
-                    width: 100,
-                    height: 100
-                },{
-                    id: "rect1",
-                    type: "Rectangle",
-                    x: 200,
-                    y: 200,
-                    width: 100,
-                    height: 100
-                }]
-            }).getKendoDiagram();
+            createDiagram();
         },
         teardown: function () {
             diagram.destroy();
@@ -88,26 +79,9 @@
     });
 
     /*-----------------------------------------------*/
-    module("api / selectArea", {
+    module("Diagram API / selectArea", {
         setup: function () {
-            var div = QUnit.fixture.html('<div id="diagram" />');
-            diagram = div.kendoDiagram({
-                shapes: [{
-                    id: "rect",
-                    type: "Rectangle",
-                    x: 0,
-                    y: 0,
-                    width: 100,
-                    height: 100
-                },{
-                    id: "rect1",
-                    type: "Rectangle",
-                    x: 200,
-                    y: 200,
-                    width: 100,
-                    height: 100
-                }]
-            }).getKendoDiagram();
+            createDiagram();
         },
         teardown: function () {
             diagram.destroy();
@@ -121,27 +95,9 @@
     });
 
     /*-----------------------------------------------*/
-    module("api / deselect", {
+    module("Diagram API / deselect", {
         setup: function () {
-            var div = QUnit.fixture.html('<div id="diagram" />');
-            diagram = div.kendoDiagram({
-                shapes: [{
-                    id: "rect",
-                    type: "Rectangle",
-                    x: 0,
-                    y: 0,
-                    width: 100,
-                    height: 100
-                },{
-                    id: "rect1",
-                    type: "Rectangle",
-                    x: 200,
-                    y: 200,
-                    width: 100,
-                    height: 100
-                }]
-            }).getKendoDiagram();
-            // make all items selected
+            createDiagram();
             diagram.selectAll();
         },
         teardown: function () {
@@ -168,4 +124,24 @@
             ok(this.isSelected === false);
         });
     });
+
+    /*-----------------------------------------------*/
+    module("Diagram API / export", {
+        setup: function () {
+            createDiagram();
+        },
+        teardown: function () {
+            kendo.destroy(QUnit.fixture);
+        }
+    });
+
+    test("Does not define svg legacy method", function() {
+        ok(!diagram.svg);
+    });
+
+    test("Does not define imageDataUrl legacy method", function() {
+        ok(!diagram.imageDataURL);
+    });
+
+    exportTests("Diagram", createDiagram);
 })();

@@ -3,6 +3,7 @@
            "../../kendo.editable",
            "../../kendo.window",
            "../../kendo.dropdownlist",
+           "../../kendo.dataviz.core",
            "../../kendo.dataviz.themes",
            "./svg",
            "./services",
@@ -3484,8 +3485,13 @@
                     this.toolBar.destroy();
                     this.toolBar = null;
                 }
+            },
+
+            exportVisual: function() {
+                return this.canvas.drawingElement;
             }
         });
+        dataviz.ExportMixin.extend(Diagram.fn, true);
 
         function filterShapeDataItem(dataItem) {
             var result = {};
