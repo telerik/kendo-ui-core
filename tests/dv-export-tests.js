@@ -1,40 +1,16 @@
 // ------------------------------------------------------------
 function exportTests(name, createWidget) {
     var draw = kendo.drawing;
-
-    var SVGSurface,
-        CanvasSurface,
-        supportsCanvas;
-
     var widget;
 
     module("Base Export / " + name + " /", {
         setup: function() {
             widget = createWidget();
-
-            SVGSurface = draw.svg.Surface;
-            CanvasSurface = draw.canvas.Surface;
-            supportsCanvas = kendo.support.canvas;
         },
         teardown: function() {
-            draw.svg.Surface = SVGSurface;
-            draw.canvas.Surface = CanvasSurface;
-            kendo.support.canvas = supportsCanvas;
-
             kendo.destroy(QUnit.fixture);
             QUnit.fixture.empty();
         }
-    });
-
-    test("svg() exports SVG", function() {
-        ok(widget.svg().match(/<svg.*<\/svg>/));
-    });
-
-    test("svg() throws error if SVG Surface is not loaded", function() {
-        draw.svg.Surface = undefined;
-
-        throws(function() { widget.svg() },
-               "SVG Export failed. Unable to export instantiate kendo.drawing.svg.Surface");
     });
 
     test("exportVisual returns Group", function() {
@@ -72,23 +48,6 @@ function exportTests(name, createWidget) {
         widget.exportSVG({ raw: true }).done(function(svg) {
             contains(svg, "<?xml version='1.0' ?><svg");
         });
-    });
-
-    test("imageDataURL() exports image/png", function() {
-        contains(widget.imageDataURL(), "image/png" );
-    });
-
-    test("imageDataURL() returns null if Canvas is not supported", function() {
-        kendo.support.canvas = false;
-
-        equal(widget.imageDataURL(), null);
-    });
-
-    test("imageDataURL() throws error if Canvas surface is not loaded", function() {
-        draw.canvas.Surface = undefined;
-
-        throws(function() { widget.imageDataURL() },
-               "Image Export failed. Unable to export instantiate kendo.drawing.canvas.Surface");
     });
 
     test("exportImage forwards visual to drawing.exportImage", function() {
@@ -143,5 +102,62 @@ function exportTests(name, createWidget) {
         widget.exportPDF().done(function(data) {
             contains(data, "application/pdf");
         });
+    });
+}
+
+// ------------------------------------------------------------
+function legacyExportTests(name, createWidget) {
+    var draw = kendo.drawing;
+
+    var SVGSurface,
+        CanvasSurface,
+        supportsCanvas;
+
+    var widget;
+
+    module("Base Export / " + name + " /", {
+        setup: function() {
+            widget = createWidget();
+
+            SVGSurface = draw.svg.Surface;
+            CanvasSurface = draw.canvas.Surface;
+            supportsCanvas = kendo.support.canvas;
+        },
+        teardown: function() {
+            draw.svg.Surface = SVGSurface;
+            draw.canvas.Surface = CanvasSurface;
+            kendo.support.canvas = supportsCanvas;
+
+            kendo.destroy(QUnit.fixture);
+            QUnit.fixture.empty();
+        }
+    });
+
+    test("svg() exports SVG", function() {
+        ok(widget.svg().match(/<svg.*<\/svg>/));
+    });
+
+    test("svg() throws error if SVG Surface is not loaded", function() {
+        draw.svg.Surface = undefined;
+
+        throws(function() { widget.svg() },
+               "SVG Export failed. Unable to export instantiate kendo.drawing.svg.Surface");
+    });
+
+    test("imageDataURL() exports image/png", function() {
+        contains(widget.imageDataURL(), "image/png" );
+    });
+
+    test("imageDataURL() returns null if Canvas is not supported", function() {
+        kendo.support.canvas = false;
+
+        equal(widget.imageDataURL(), null);
+    });
+
+    test("imageDataURL() throws error if Canvas surface is not loaded", function() {
+        draw.canvas.Surface = undefined;
+
+        throws(function() { widget.imageDataURL() },
+               "Image Export failed. Unable to export instantiate kendo.drawing.canvas.Surface");
     });
 }
