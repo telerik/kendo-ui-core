@@ -147,5 +147,18 @@
         equal(diagram.exportVisual(), diagram.canvas.drawingElement.children[0]);
     });
 
+    test("Exports DOM visual with applied scrolling", function() {
+        diagram.pan(new Point(100, 100));
+        var visual = diagram.exportDOMVisual();
+        deepEqual(visual.bbox().origin.toArray(), [-100, -100]);
+    });
+
+    test("Exports DOM visual with applied clipping", function() {
+        var visual = diagram.exportDOMVisual();
+        var clip = visual.options.get("clip").bbox();
+        deepEqual(clip.origin.toArray(), [0, 0]);
+        deepEqual(clip.size.toArray(), [572, 600]);
+    });
+
     exportTests("Diagram", createDiagram);
 })();

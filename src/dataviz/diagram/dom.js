@@ -3487,6 +3487,27 @@
                 }
             },
 
+            exportDOMVisual: function() {
+                var viewBox = this.canvas._viewBox;
+                var scrollOffset = kendo.geometry.transform().translate(
+                    -viewBox.x, -viewBox.y
+                );
+
+                var viewRect = new kendo.geometry.Rect(
+                    [0, 0], [viewBox.width, viewBox.height]
+                );
+                var clipPath = kendo.drawing.Path.fromRect(viewRect);
+
+                var wrap = new kendo.drawing.Group({
+                    transform: scrollOffset,
+                    clip: clipPath
+                });
+
+                var root = this.canvas.drawingElement.children[0];
+                wrap.children.push(root);
+                return wrap;
+            },
+
             exportVisual: function() {
                 return this.canvas.drawingElement.children[0];
             }
