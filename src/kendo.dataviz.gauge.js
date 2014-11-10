@@ -46,7 +46,7 @@ var __meta__ = {
 
     // Constants ==============================================================
     var ANGULAR_SPEED = 150,
-        LINEAR_SPEED = 200, //1000,
+        LINEAR_SPEED = 250,
         ARROW = "arrow",
         ARROW_POINTER = "arrowPointer",
         BAR_POINTER = "barPointer",
@@ -68,8 +68,6 @@ var __meta__ = {
         NEEDLE = "needle",
         OUTSIDE = "outside",
         RADIAL_POINTER = "radialPointer",
-        ROTATION_ORIGIN = 90,
-        SWING = "swing",
         X = "x",
         Y = "y";
 
@@ -998,6 +996,7 @@ var __meta__ = {
             var that = this;
             var options = that.options;
             var pointers = options.pointer;
+            debugger;
             var scale = that.scale = new RadialScale(options.scale);
             var current;
 
@@ -1763,9 +1762,6 @@ var __meta__ = {
         },
 
         step: function(pos) {
-            //TODO Fix animation.js
-            if (!pos) { pos = 1; }
-
             var translateX = interpolateValue(this.fromScale.x, this.toScale.x, pos);
             var translateY = interpolateValue(this.fromScale.y, this.toScale.y, pos);
 
@@ -1777,7 +1773,7 @@ var __meta__ = {
     var BarLinearPointerAnimation = draw.Animation.extend({
         options: {
             easing: LINEAR,
-            speed: 350// LINEAR_SPEED
+            speed: LINEAR_SPEED
         },
 
         setup: function() {
@@ -1790,7 +1786,9 @@ var __meta__ = {
             var to = this.to = newPoints[0][axis];
             var from = this.from = oldPoints[0][axis];
 
-            options.duration = math.max((math.abs(to - from) / options.speed) * 1000, 1);
+            if (options.duration !== 0) {
+                options.duration = math.max((math.abs(to - from) / options.speed) * 1000, 1);
+            }
 
             this._set(from)
         },
