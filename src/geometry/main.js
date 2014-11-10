@@ -205,6 +205,14 @@
 
         clone: function() {
             return new Size(this.width, this.height);
+        },
+
+        toArray: function(digits) {
+            var doRound = defined(digits);
+            var width = doRound ? round(this.width, digits) : this.width;
+            var height = doRound ? round(this.height, digits) : this.height;
+
+            return [width, height];
         }
     });
     defineAccessors(Size.fn, ["width", "height"]);
