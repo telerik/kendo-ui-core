@@ -1269,6 +1269,24 @@
                 contains(svg, "Foo &amp; Bar");
             });
         });
+
+        test("discards target origin", function() {
+            group.append(new d.Text("Foo", [10, 10]));
+
+            d.exportSVG(group, { raw: true }).done(function(svg) {
+                contains(svg, "<g transform='matrix(1,0,0,1,-10,-10)' ><g>")
+            });
+        });
+
+        test("does not reparent target", function() {
+            var parent = new d.Group();
+            parent.append(group);
+            group.append(new d.Text("Foo", [10, 10]));
+
+            d.exportSVG(group).done(function() {
+                ok(group.parent === parent);
+            });
+        });
     })();
 
     // ------------------------------------------------------------
