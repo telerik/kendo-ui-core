@@ -22,7 +22,7 @@ page.endText();
 page.restore();
 
 page.save();
-page.setFillGradient({
+page.gradient({
     type: "linear",
     start: { x: 100, y: 100 },
     end: { x: 200, y: 200 },
@@ -33,18 +33,18 @@ page.setFillGradient({
     ]
 }, {
     left: 100,
-    bottom: 100,
     top: 200,
-    right: 200
+    width: 100,
+    height: 100
 });
 
-page.rect(100, 100, 100, 100);
-page.fillStroke();
+// page.rect(100, 100, 100, 100);
+// page.fillStroke();
 page.restore();
 
 
 page.save();
-page.setFillGradient({
+page.gradient({
     type: "radial",
     start: { x: 150, y: 350, r: 100 },
     end: { x: 150, y: 350, r: 20 },
@@ -55,9 +55,9 @@ page.setFillGradient({
     ]
 }, {
     left   : 0,
-    bottom : 0,
     top    : 800,
-    right  : 800
+    width  : 300,
+    height : 300
 });
 page.rect(0, 250, 450, 450);
 page.fillStroke();
