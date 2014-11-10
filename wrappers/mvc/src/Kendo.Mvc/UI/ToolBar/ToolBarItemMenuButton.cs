@@ -21,6 +21,8 @@ namespace Kendo.Mvc.UI
 
         //>> Fields
         
+        public IDictionary<string,object> HtmlAttributes { get; set; }
+        
         public bool? Enable { get; set; }
         
         public string Icon { get; set; }
@@ -37,12 +39,15 @@ namespace Kendo.Mvc.UI
         
         //<< Fields
 
-        public IDictionary<string, object> HtmlAttributes { get; set; }
-
         protected override void Serialize(IDictionary<string, object> json)
         {
             //>> Serialization
-                
+        
+            if (HtmlAttributes.Any())
+            {
+                json["attributes"] = HtmlAttributes;
+            }
+            
             if (Enable.HasValue)
             {
                 json["enable"] = Enable;

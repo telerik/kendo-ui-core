@@ -20,12 +20,54 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Fields
         
         /// <summary>
+        /// Specifies the HTML attributes of a ToolBar button.
+        /// </summary>
+        /// <param name="value">The value that configures the htmlattributes.</param>
+        public ToolBarItemBuilder HtmlAttributes(object value)
+        {
+            return this.HtmlAttributes(value.ToDictionary());
+        }
+        
+        /// <summary>
+        /// Specifies the HTML attributes of a ToolBar button.
+        /// </summary>
+        /// <param name="value">The value that configures the htmlattributes.</param>
+        public ToolBarItemBuilder HtmlAttributes(IDictionary<string,object> value)
+        {
+            container.HtmlAttributes = value;
+
+            return this;
+        }
+        
+        /// <summary>
         /// Specifies the buttons of ButtonGroup.
         /// </summary>
         /// <param name="configurator">The action that configures the buttons.</param>
         public ToolBarItemBuilder Buttons(Action<ToolBarItemButtonFactory> configurator)
         {
             configurator(new ToolBarItemButtonFactory(container.Buttons));
+            return this;
+        }
+        
+        /// <summary>
+        /// Specifies the click event handler of the button. Applicable only for commands of type button and splitButton.
+        /// </summary>
+        /// <param name="value">The value that configures the click action.</param>
+        public ToolBarItemBuilder Click(Func<object, object> handler)
+        {
+            container.Click.TemplateDelegate = handler;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Specifies the click event handler of the button. Applicable only for commands of type button and splitButton.
+        /// </summary>
+        /// <param name="value">The value that configures the click action.</param>
+        public ToolBarItemBuilder Click(string handler)
+        {
+            container.Click.HandlerName = handler;
+
             return this;
         }
         
@@ -194,6 +236,28 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
+        /// Specifies the toggle event handler of the button. Applicable only for commands of type button and togglable: true.
+        /// </summary>
+        /// <param name="value">The value that configures the toggle action.</param>
+        public ToolBarItemBuilder Toggle(Func<object, object> handler)
+        {
+            container.Toggle.TemplateDelegate = handler;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Specifies the toggle event handler of the button. Applicable only for commands of type button and togglable: true.
+        /// </summary>
+        /// <param name="value">The value that configures the toggle action.</param>
+        public ToolBarItemBuilder Toggle(string handler)
+        {
+            container.Toggle.HandlerName = handler;
+
+            return this;
+        }
+        
+        /// <summary>
         /// Specifies the url to navigate to.
         /// </summary>
         /// <param name="value">The value that configures the url.</param>
@@ -249,59 +313,6 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         //<< Fields
-
-        /// <summary>
-        /// Specifies the click event handler of the button. Applicable only for commands of type button and splitButton.
-        /// </summary>
-        /// <param name="value">The name of the click handler.</param>
-        public ToolBarItemBuilder Click(string value)
-        {
-            container.Click.HandlerName = value;
-
-            return this;
-        }
-
-        /// <summary>
-        /// Specifies the click event handler of the button. Applicable only for commands of type button and splitButton.
-        /// </summary>                
-        public ToolBarItemBuilder Click(Func<object, object> value)
-        {
-            container.Click.TemplateDelegate = value;
-
-            return this;
-        }
-
-        /// <summary>
-        /// Specifies the toggle event handler of the button. Applicable only for commands of type button and togglable: true.
-        /// </summary>
-        /// <param name="value">The name of the toggle handler.</param>
-        public ToolBarItemBuilder Toggle(string value)
-        {
-            container.Toggle.HandlerName = value;
-
-            return this;
-        }
-
-        /// <summary>
-        /// Specifies the click event handler of the button. Applicable only for commands of type button and splitButton.
-        /// </summary>                
-        public ToolBarItemBuilder Toggle(Func<object, object> value)
-        {
-            container.Toggle.TemplateDelegate = value;
-
-            return this;
-        }
-
-        /// <summary>
-        /// Specifies the HTML attributes of a ToolBar button.
-        /// </summary>
-        /// <param name="attributes">The attributes.</param>
-        public ToolBarItemBuilder HtmlAttributes(object attributes)
-        {
-            container.HtmlAttributes = attributes.ToDictionary();
-
-            return this;
-        }
     }
 }
 

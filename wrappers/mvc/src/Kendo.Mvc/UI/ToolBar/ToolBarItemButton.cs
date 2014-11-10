@@ -25,6 +25,10 @@ namespace Kendo.Mvc.UI
 
         //>> Fields
         
+        public IDictionary<string,object> HtmlAttributes { get; set; }
+        
+        public ClientHandlerDescriptor Click { get; set; }
+        
         public bool? Enable { get; set; }
         
         public string Group { get; set; }
@@ -39,6 +43,8 @@ namespace Kendo.Mvc.UI
         
         public string SpriteCssClass { get; set; }
         
+        public ClientHandlerDescriptor Toggle { get; set; }
+        
         public bool? Togglable { get; set; }
         
         public string Text { get; set; }
@@ -51,16 +57,15 @@ namespace Kendo.Mvc.UI
         
         //<< Fields
 
-        public ClientHandlerDescriptor Click { get; set; }
-
-        public ClientHandlerDescriptor Toggle { get; set; }
-
-        public IDictionary<string, object> HtmlAttributes { get; set; }
-
         protected override void Serialize(IDictionary<string, object> json)
         {
             //>> Serialization
-                
+        
+            if (HtmlAttributes.Any())
+            {
+                json["attributes"] = HtmlAttributes;
+            }
+            
             if (Click.HasValue())
             {
                 json["click"] = Click;

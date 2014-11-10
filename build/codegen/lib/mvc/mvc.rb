@@ -23,7 +23,14 @@ module CodeGen::MVC::Wrappers
         'map.layers.extent' => 'double[]',
         'map.markers.location' => 'double[]',
         'treemap.colors' => 'string[]',
-        'editor.stylesheets' => 'string[]'
+        'editor.stylesheets' => 'string[]',
+
+        # types: Function => ClientHandlerDescriptior, perhaps?
+        'toolbar.items.click' => 'ClientHandlerDescriptor',
+        'toolbar.items.toggle' => 'ClientHandlerDescriptor',
+        'toolbar.items.buttons.click' => 'ClientHandlerDescriptor',
+        'toolbar.items.buttons.toggle' => 'ClientHandlerDescriptor',
+        'treelist.columns.command.click' => 'ClientHandlerDescriptor'
     }
 
     SERIALIZATION_SKIP_LIST = [
@@ -131,7 +138,7 @@ module CodeGen::MVC::Wrappers
         //<< Fields})
 
         FIELD_DECLARATION = ERB.new(%{
-        public <%= is_nullable_type || is_csharp_array ? csharp_type : csharp_type + '?'%> <%= csharp_name %> { get; set; }
+        public <%= nullable? || csharp_array? ? csharp_type : csharp_type + '?'%> <%= csharp_name %> { get; set; }
         })
 
         FIELD_SERIALIZATION = ERB.new(%{//>> Serialization
@@ -160,7 +167,7 @@ module CodeGen::MVC::Wrappers
         <%= unique_options.map { |option| option.to_fluent }.join %>
         //<< Fields})
 
-        FLUENT_FIELD_DECLARATION = ERB.new(%{<% if is_dictionary %>
+        FLUENT_FIELD_DECLARATION = ERB.new(%{<% if dictionary? %>
         /// <summary>
         /// <%= description.gsub(/\r?\n/, '\n\t\t/// ').html_encode()%>
         /// </summary>
@@ -169,7 +176,7 @@ module CodeGen::MVC::Wrappers
         {
             return this.<%= csharp_name %>(value.ToDictionary());
         }
-        <% end %><% if is_field_bound %>
+        <% end %><% if field? %>
         /// <summary>
         /// <%= description.gsub(/\r?\n/, '\n\t\t/// ').html_encode()%>
         /// </summary>
@@ -204,17 +211,38 @@ module CodeGen::MVC::Wrappers
 
             return this;
         }
-        <% end %>
+        <% end %><% if handler? %>
+        /// <summary>
+        /// <%= description.gsub(/\r?\n/, '\n\t\t/// ').html_encode()%>
+        /// </summary>
+        /// <param name="value">The value that configures the <%= csharp_name.downcase %> action.</param>
+        public <%= csharp_builder_name %> <%= csharp_name %>(Func<object, object> handler)
+        {
+            container.<%= csharp_name %>.TemplateDelegate = handler;
+
+            return this;
+        }
+
+        /// <summary>
+        /// <%= description.gsub(/\r?\n/, '\n\t\t/// ').html_encode()%>
+        /// </summary>
+        /// <param name="value">The value that configures the <%= csharp_name.downcase %> action.</param>
+        public <%= csharp_builder_name %> <%= csharp_name %>(string handler)
+        {
+            container.<%= csharp_name %>.HandlerName = handler;
+
+            return this;
+        }<% else %>
         /// <summary>
         /// <%= description.gsub(/\r?\n/, '\n\t\t/// ').html_encode()%>
         /// </summary>
         /// <param name="value">The value that configures the <%= csharp_name.downcase %>.</param>
-        public <%= csharp_builder_name %> <%= csharp_name %>(<%= is_csharp_array ? 'params ' : '' %><%= csharp_type %> value)
+        public <%= csharp_builder_name %> <%= csharp_name %>(<%= csharp_array? ? 'params ' : '' %><%= csharp_type %> value)
         {
             container.<%= csharp_name %> = value;
 
             return this;
-        }
+        }<% end %>
         })
 
         FLUENT_COMPOSITE_FIELD_DECLARATION = ERB.new(%{<% if toggleable %>
@@ -334,10 +362,17 @@ module CodeGen::MVC::Wrappers
 
         def csharp_name
             postfix = name[/template$/i].nil? ? "" : "Id"
+
             name.to_csharp_name + postfix
         end
 
         def csharp_generic_args
+        end
+
+        def to_initialization
+            ERB.new(%{
+            <%=csharp_name%> = new <%=csharp_class%>();
+                }).result(binding)
         end
 
         def uses_generic_args?
@@ -409,6 +444,10 @@ module CodeGen::MVC::Wrappers
             declaration_template.result(binding)
         end
 
+        def csharp_class
+            csharp_type
+        end
+
         def csharp_builder_name
             if owner.respond_to?('csharp_item_class')
                 producedType = owner.csharp_item_class
@@ -423,40 +462,44 @@ module CodeGen::MVC::Wrappers
             FLUENT_FIELD_DECLARATION.result(binding)
         end
 
-        def is_nullable_type
-            csharp_type == "string" || is_dictionary
+        def nullable?
+            csharp_type == "string" || handler? || dictionary?
         end
 
-        def is_csharp_array
+        def csharp_array?
             csharp_type.match(/\[\]$/)
         end
 
-        def is_field_bound
+        def field?
             name.downcase == 'field' && uses_generic_args?
         end
 
-        def is_dictionary
+        def handler?
+            csharp_type == "ClientHandlerDescriptor"
+        end
+
+        def dictionary?
             csharp_type.match(/^IDictionary/)
         end
 
         def to_client_option
             template = ""
 
-            if csharp_type.eql?('string')
+            if csharp_type.eql?('string') || handler?
                 template = %{
             if (<%=csharp_name%>.HasValue())
             {
                 json["<%= name %>"] = <%=csharp_name%>;
             }
             }
-            elsif is_csharp_array
+            elsif csharp_array?
                 template = %{
             if (<%=csharp_name%> != null)
             {
                 json["<%= name %>"] = <%=csharp_name%>;
             }
             }
-            elsif is_dictionary
+            elsif dictionary?
                 template = %{
             if (<%=csharp_name%>.Any())
             {
@@ -501,12 +544,6 @@ module CodeGen::MVC::Wrappers
 
         def csharp_generic_constraints
             owner.csharp_generic_constraints if uses_generic_args?
-        end
-
-        def to_initialization
-            ERB.new(%{
-            <%=csharp_name%> = new <%=csharp_class%>();
-                }).result(binding)
         end
 
         def to_declaration

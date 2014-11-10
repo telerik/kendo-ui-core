@@ -55,10 +55,21 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// The JavaScript function executed when the user clicks the command button. The function receives a jQuery Event as an argument.The function context (available via the this keyword) will be set to the grid instance.
         /// </summary>
-        /// <param name="value">The value that configures the click.</param>
-        public TreeListColumnCommandBuilder<T> Click(string value)
+        /// <param name="value">The value that configures the click action.</param>
+        public TreeListColumnCommandBuilder<T> Click(Func<object, object> handler)
         {
-            container.Click = value;
+            container.Click.TemplateDelegate = handler;
+
+            return this;
+        }
+
+        /// <summary>
+        /// The JavaScript function executed when the user clicks the command button. The function receives a jQuery Event as an argument.The function context (available via the this keyword) will be set to the grid instance.
+        /// </summary>
+        /// <param name="value">The value that configures the click action.</param>
+        public TreeListColumnCommandBuilder<T> Click(string handler)
+        {
+            container.Click.HandlerName = handler;
 
             return this;
         }

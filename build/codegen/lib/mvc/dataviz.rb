@@ -34,7 +34,7 @@ module CodeGen::MVC::Wrappers::DataViz
         /// <%= description.gsub(/\r?\n/, '\n\t\t/// ').html_encode()%>
         /// </summary>
         /// <param name="value">The value that configures the <%= csharp_name.downcase %>.</param>
-        public <%= csharp_builder_name %> <%= csharp_name %>(<%= is_csharp_array ? 'params ' : '' %><%= csharp_type %> value)
+        public <%= csharp_builder_name %> <%= csharp_name %>(<%= csharp_array? ? 'params ' : '' %><%= csharp_type %> value)
         {
             container.<%= csharp_name %> = value;
 
@@ -45,7 +45,7 @@ module CodeGen::MVC::Wrappers::DataViz
         /// <%= description.gsub(/\r?\n/, '\n\t\t/// ').html_encode()%>
         /// </summary>
         /// <param name="value">The value that configures the <%= csharp_name.downcase %>.</param>
-        public <%= csharp_builder_name %> <%= csharp_name %>Id(<%= is_csharp_array ? 'params ' : '' %><%= csharp_type %> value)
+        public <%= csharp_builder_name %> <%= csharp_name %>Id(<%= csharp_array? ? 'params ' : '' %><%= csharp_type %> value)
         {
             container.<%= csharp_name %>Id = value;
 
@@ -57,7 +57,7 @@ module CodeGen::MVC::Wrappers::DataViz
         include Options
 
         def csharp_declaration_type
-            if csharp_type == 'string' || is_csharp_array
+            if csharp_type == 'string' || csharp_array?
                 csharp_type
             else
                 csharp_type + '?'
@@ -65,7 +65,9 @@ module CodeGen::MVC::Wrappers::DataViz
         end
 
         def csharp_name
-            name.slice(0,1).capitalize + name.slice(1..-1)
+            prefix = (name == 'attributes') ? "Html" : ""
+
+            prefix + name.to_csharp_name
         end
 
         def template?

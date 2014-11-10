@@ -20,12 +20,12 @@ namespace Kendo.Mvc.UI
                 
         //<< Initialization
 
-            Attributes = new Dictionary<string, object>();
+            HtmlAttributes = new Dictionary<string, object>();
         }
 
         //>> Fields
         
-        public IDictionary<string,object> Attributes { get; set; }
+        public IDictionary<string,object> HtmlAttributes { get; set; }
         
         public List<TreeListColumnCommand> Command
         {
@@ -73,9 +73,9 @@ namespace Kendo.Mvc.UI
         {
             //>> Serialization
         
-            if (Attributes.Any())
+            if (HtmlAttributes.Any())
             {
-                json["attributes"] = Attributes;
+                json["attributes"] = HtmlAttributes;
             }
             
             var command = Command.ToJson();

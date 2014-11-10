@@ -25,19 +25,19 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// HTML attributes of the table cell (&lt;td&gt;) rendered for the column.
         /// </summary>
-        /// <param name="value">The value that configures the attributes.</param>
-        public TreeListColumnBuilder<T> Attributes(object value)
+        /// <param name="value">The value that configures the htmlattributes.</param>
+        public TreeListColumnBuilder<T> HtmlAttributes(object value)
         {
-            return this.Attributes(value.ToDictionary());
+            return this.HtmlAttributes(value.ToDictionary());
         }
         
         /// <summary>
         /// HTML attributes of the table cell (&lt;td&gt;) rendered for the column.
         /// </summary>
-        /// <param name="value">The value that configures the attributes.</param>
-        public TreeListColumnBuilder<T> Attributes(IDictionary<string,object> value)
+        /// <param name="value">The value that configures the htmlattributes.</param>
+        public TreeListColumnBuilder<T> HtmlAttributes(IDictionary<string,object> value)
         {
-            container.Attributes = value;
+            container.HtmlAttributes = value;
 
             return this;
         }

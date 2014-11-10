@@ -20,6 +20,26 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Fields
         
         /// <summary>
+        /// Specifies the HTML attributes of a menu button.
+        /// </summary>
+        /// <param name="value">The value that configures the htmlattributes.</param>
+        public ToolBarItemMenuButtonBuilder HtmlAttributes(object value)
+        {
+            return this.HtmlAttributes(value.ToDictionary());
+        }
+        
+        /// <summary>
+        /// Specifies the HTML attributes of a menu button.
+        /// </summary>
+        /// <param name="value">The value that configures the htmlattributes.</param>
+        public ToolBarItemMenuButtonBuilder HtmlAttributes(IDictionary<string,object> value)
+        {
+            container.HtmlAttributes = value;
+
+            return this;
+        }
+        
+        /// <summary>
         /// Specifies whether the menu button is initially enabled or disabled.
         /// </summary>
         /// <param name="value">The value that configures the enable.</param>
@@ -97,17 +117,6 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         //<< Fields
-
-        /// <summary>
-        /// Specifies the HTML attributes of a ToolBar button.
-        /// </summary>
-        /// <param name="attributes">The attributes.</param>
-        public ToolBarItemMenuButtonBuilder HtmlAttributes(object attributes)
-        {
-            container.HtmlAttributes = attributes.ToDictionary();
-
-            return this;
-        }
     }
 }
 

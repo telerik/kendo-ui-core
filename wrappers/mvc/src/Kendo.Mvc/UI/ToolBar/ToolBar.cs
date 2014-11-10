@@ -52,7 +52,6 @@ namespace Kendo.Mvc.UI
             {
                 json["items"] = items;
             }
-                
         //<< Serialization
 
             writer.Write(Initializer.Initialize(Selector, "ToolBar", json));

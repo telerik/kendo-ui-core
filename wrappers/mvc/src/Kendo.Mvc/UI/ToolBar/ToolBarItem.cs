@@ -29,11 +29,15 @@ namespace Kendo.Mvc.UI
 
         //>> Fields
         
+        public IDictionary<string,object> HtmlAttributes { get; set; }
+        
         public List<ToolBarItemButton> Buttons
         {
             get;
             set;
         }
+        
+        public ClientHandlerDescriptor Click { get; set; }
         
         public bool? Enable { get; set; }
         
@@ -69,6 +73,8 @@ namespace Kendo.Mvc.UI
         
         public bool? Togglable { get; set; }
         
+        public ClientHandlerDescriptor Toggle { get; set; }
+        
         public string Url { get; set; }
         
         public CommandType? Type { get; set; }
@@ -81,22 +87,20 @@ namespace Kendo.Mvc.UI
         
         //<< Fields
 
-        public ClientHandlerDescriptor Click { get; set; }
-
-        public ClientHandlerDescriptor Toggle { get; set; }
-
-        public IDictionary<string, object> HtmlAttributes { get; set; }
-
         protected override void Serialize(IDictionary<string, object> json)
         {
             //>> Serialization
-                
+        
+            if (HtmlAttributes.Any())
+            {
+                json["attributes"] = HtmlAttributes;
+            }
+            
             var buttons = Buttons.ToJson();
             if (buttons.Any())
             {
                 json["buttons"] = buttons;
             }
-                
             if (Click.HasValue())
             {
                 json["click"] = Click;
@@ -132,7 +136,6 @@ namespace Kendo.Mvc.UI
             {
                 json["menuButtons"] = menuButtons;
             }
-                
             if (!string.IsNullOrEmpty(OverflowTemplateId))
             {
                 json["overflowTemplate"] = new ClientHandlerDescriptor {

@@ -23,7 +23,7 @@ namespace Kendo.Mvc.UI
         
         public string ClassName { get; set; }
         
-        public string Click { get; set; }
+        public ClientHandlerDescriptor Click { get; set; }
         
         //<< Fields
 
