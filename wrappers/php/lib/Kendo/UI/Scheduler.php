@@ -268,6 +268,15 @@ If the developer wants to control the day and month order then one needs to defi
     }
 
     /**
+    * Configures the Kendo UI Scheduler PDF export settings.
+    * @param \Kendo\UI\SchedulerPdf|array $value
+    * @return \Kendo\UI\Scheduler
+    */
+    public function pdf($value) {
+        return $this->setProperty('pdf', $value);
+    }
+
+    /**
     * Adds SchedulerResource to the Scheduler.
     * @param \Kendo\UI\SchedulerResource|array,... $value one or more SchedulerResource to add.
     * @return \Kendo\UI\Scheduler
@@ -286,7 +295,7 @@ If the developer wants to control the day and month order then one needs to defi
     }
 
     /**
-    * If set to true the view will be initially shown in business hours mode. By default view is displyed in full day mode.
+    * If set to true the view will be initially shown in business hours mode. By default view is displayed in full day mode.
     * @param boolean $value
     * @return \Kendo\UI\Scheduler
     */
@@ -321,6 +330,15 @@ That way all users would see the same dates and times no matter their configured
     */
     public function timezone($value) {
         return $this->setProperty('timezone', $value);
+    }
+
+    /**
+    * Adds SchedulerToolbarItem to the Scheduler.
+    * @param \Kendo\UI\SchedulerToolbarItem|array,... $value one or more SchedulerToolbarItem to add.
+    * @return \Kendo\UI\Scheduler
+    */
+    public function addToolbarItem($value) {
+        return $this->add('toolbar', func_get_args());
     }
 
     /**
@@ -501,6 +519,20 @@ That way all users would see the same dates and times no matter their configured
         }
 
         return $this->setProperty('navigate', $value);
+    }
+
+    /**
+    * Sets the pdfExport event of the Scheduler.
+    * Fired when the user clicks the "Export to PDF" toolbar button.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\UI\Scheduler
+    */
+    public function pdfExport($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('pdfExport', $value);
     }
 
     /**

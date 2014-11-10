@@ -61,7 +61,7 @@ By default only one resource instance can be assigned to an event.
     }
 
     /**
-    * Tha name of the resource used to distinguish resource. If not set the value of the field option is used.
+    * The name of the resource used to distinguish resource. If not set the value of the field option is used.
     * @param string $value
     * @return \Kendo\UI\SchedulerResource
     */

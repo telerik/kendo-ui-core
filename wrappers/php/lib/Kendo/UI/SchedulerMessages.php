@@ -15,6 +15,24 @@ class SchedulerMessages extends \Kendo\SerializableObject {
     }
 
     /**
+    * Specifies the format string used to populate the aria-label attribute value of the selected event element.The arguments which can be used in the format string are:
+    * @param string $value
+    * @return \Kendo\UI\SchedulerMessages
+    */
+    public function ariaEventLabel($value) {
+        return $this->setProperty('ariaEventLabel', $value);
+    }
+
+    /**
+    * Specifies the format string used to populate the aria-label attribute value of the selected slot element.The arguments which can be used in the format string are:
+    * @param string $value
+    * @return \Kendo\UI\SchedulerMessages
+    */
+    public function ariaSlotLabel($value) {
+        return $this->setProperty('ariaSlotLabel', $value);
+    }
+
+    /**
     * The text similar to "Cancel" displayed in scheduler.
     * @param string $value
     * @return \Kendo\UI\SchedulerMessages
@@ -57,6 +75,15 @@ class SchedulerMessages extends \Kendo\SerializableObject {
     */
     public function event($value) {
         return $this->setProperty('event', $value);
+    }
+
+    /**
+    * The text displayed by the PDF export button.
+    * @param string $value
+    * @return \Kendo\UI\SchedulerMessages
+    */
+    public function pdf($value) {
+        return $this->setProperty('pdf', $value);
     }
 
     /**
