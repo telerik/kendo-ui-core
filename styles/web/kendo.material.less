@@ -742,8 +742,7 @@ border-color: @secondary-header-background-color;
 .k-pager-numbers .k-state-selected,
 .k-grid-footer,
 .k-grid-footer td,
-.k-scheduler-header,
-.k-scheduler .k-scheduler-toolbar .k-state-selected {
+.k-scheduler-header {
 color: @widget-text-color;
 background-color: @secondary-background-color;
 }
@@ -787,7 +786,6 @@ color: @header-text-color;
 }
 
 .k-scheduler-layout .k-state-selected,
-.k-scheduler .k-scheduler-toolbar .k-state-selected,
 .k-scheduler .k-today.k-state-selected,.k-grid tr.k-state-selected,
 .k-marquee-color {
 background-color: @accent-color; 
@@ -801,7 +799,8 @@ color: @inverse-text-color;
 .k-grid-header .k-link,
 .k-grid-header .k-link:link,
 .k-pager-info,
-.k-scheduler-header {
+.k-scheduler-header,
+.k-scheduler-agendaview .k-scheduler-datecolumn {
 color: @primary-disabled-text-color;
 }
 
@@ -1064,14 +1063,16 @@ table.k-editor {
 	.box-shadow(none);
 }
 
-.k-flatcolorpicker .k-hue-slider .k-draghandle
+.k-flatcolorpicker .k-hue-slider .k-draghandle,
+.k-flatcolorpicker .k-transparency-slider .k-draghandle
 {
     border-color: @draghandle-border-color;
     background-color: @draghandle-background-color;
     .box-shadow(@draghandle-shadow);
 }
 
-.k-flatcolorpicker .k-hue-slider .k-draghandle:hover
+.k-flatcolorpicker .k-hue-slider .k-draghandle:hover,
+.k-flatcolorpicker .k-transparency-slider .k-draghandle:hover
 {
     border-color: @draghandle-hover-border-color;
     background-color: @draghandle-hover-background-color;
@@ -1081,7 +1082,8 @@ table.k-editor {
 .k-draghandle.k-state-selected,
 .k-draghandle.k-state-selected:link,
 .k-draghandle.k-state-selected:hover,
-.k-flatcolorpicker .k-hue-slider .k-draghandle.k-state-selected
+.k-flatcolorpicker .k-hue-slider .k-draghandle.k-state-selected,
+.k-flatcolorpicker .k-transparency-slider .k-draghandle.k-state-selected
 {
    background-color: @draghandle-selected-background;
    border-color: @draghandle-selected-background;
@@ -1089,7 +1091,8 @@ table.k-editor {
 
 .k-draghandle.k-state-focused,
 .k-draghandle.k-state-focused:link,
-.k-flatcolorpicker .k-hue-slider .k-draghandle.k-state-focused
+.k-flatcolorpicker .k-hue-slider .k-draghandle.k-state-focused,
+.k-flatcolorpicker .k-transparency-slider .k-draghandle.k-state-focused
 {
     .box-shadow(none);
 	border-color: @draghandle-background-color;
@@ -1125,4 +1128,9 @@ table.k-editor {
 
 .k-edit-form-container .k-scheduler-delete {
 	color: @accent-color;
-} 
+}
+
+div.k-scheduler-marquee:before,
+div.k-scheduler-marquee:after {
+	border-color: @accent-color;
+}

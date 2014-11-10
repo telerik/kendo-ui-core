@@ -200,9 +200,12 @@
     border-top-style: solid;
 }
 
-.k-popup.k-list-container,
-.k-popup.k-calendar-container {
+.k-popup.k-list-container {
     padding: 0.286em 0;
+}
+
+.k-popup.k-calendar-containe {
+	padding: 0;
 }
 
 .k-popup .k-list .k-item,
@@ -258,7 +261,11 @@
 .k-calendar .k-footer .k-nav-today,
 .k-calendar .k-footer > .k-state-disabled
 {
-    padding: 1.071em 0 1.071em;
+    padding: 1.143em 0 1.071em;
+}
+
+.k-popup.k-calendar-container {
+ 	padding: 0;
 }
 
 .k-multiselect-wrap .k-input {
@@ -979,4 +986,36 @@ div.k-window {
 
 .k-window-titlebar .k-link:not(.k-state-disabled):hover .k-i-close {
     background-position: -48px -16px;
+}
+
+div.k-scheduler-marquee:after {
+	bottom: -16px;
+	right: -16px;
+	border-radius: 0 50% 50% 50%;
+}
+
+div.k-scheduler-marquee:before {
+	top: -16px;
+	left: -16px;
+	border-radius: 50% 50% 0 50%;
+}
+
+.k-scheduler-marquee.k-first:before,
+.k-scheduler-marquee.k-last:after {
+	border-width: 8px;
+}
+
+//RTL
+.k-rtl .k-dropdown-wrap,
+.k-rtl .k-picker-wrap,
+.k-rtl .k-numeric-wrap {
+	padding-left: 2.5em !important;
+}
+
+.k-rtl .k-datetimepicker .k-picker-wrap {
+	padding-left: 5em !important;
+}
+
+.k-rtl .k-datetimepicker .k-picker-wrap .k-icon {
+	margin: 0 6px !important;
 }
