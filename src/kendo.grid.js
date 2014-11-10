@@ -571,6 +571,48 @@ var __meta__ = {
         return $(elements).map(function() { return this.toArray(); });
     }
 
+    function depth(columns) {
+        var result = 1;
+        var max = 0;
+
+        for (var idx = 0; idx < columns.length; idx++) {
+            if (columns[idx].columns) {
+                var temp = depth(columns[idx].columns);
+                if (temp > max) {
+                    max = temp;
+                }
+            }
+        }
+        return result + max;
+    }
+
+    function moveCells(leafs, columns, container, destination) {
+        var sourcePosition = columnVisiblePosition(leafs[0], columns);
+
+        var ths = container.find("tr:eq(" + sourcePosition.row + ")>th.k-header");
+
+        var t = $();
+
+        var sourceIndex = sourcePosition.cell;
+
+        for (var idx = 0; idx < leafs.length; idx++) {
+            t = t.add(ths.eq(sourceIndex + idx));
+        }
+
+        destination.find("tr").eq(sourcePosition.row).append(t);
+
+        var children = [];
+        for (var idx = 0; idx < leafs.length; idx++) {
+            if (leafs[idx].columns) {
+                children = children.concat(leafs[idx].columns);
+            }
+        }
+
+        if (children.length) {
+            moveCells(children, columns, container, destination);
+        }
+    }
+
     function columnPosition(column, columns, row, cellCounts) {
         var result;
         var idx;
@@ -703,13 +745,23 @@ var __meta__ = {
         return width;
     }
 
-    function updateRowSpan(container, count) {
+    function removeRowSpanValue(container, count) {
+        var cells = container.find("tr:not(.k-filter-row) th:not(.k-group-cell,.k-hierarchy-cell)");
+
+        var rowSpan;
+        for (var idx = 0; idx < cells.length; idx++) {
+            rowSpan = cells[idx].rowSpan;
+            if (rowSpan > 1) {
+                cells[idx].rowSpan = (rowSpan - count) || 1;
+            }
+        }
+    }
+
+    function addRowSpanValue(container, count) {
         var cells = container.find("tr:not(.k-filter-row) th:not(.k-group-cell,.k-hierarchy-cell)");
 
         for (var idx = 0; idx < cells.length; idx++) {
-            if (cells[idx].rowSpan > 1) {
-                cells[idx].rowSpan -= count;
-            }
+            cells[idx].rowSpan += count;
         }
     }
 
@@ -1890,21 +1942,45 @@ var __meta__ = {
             var sourcePosition = columnVisiblePosition(sources[0], that.columns);
             var destPosition = columnVisiblePosition(target, that.columns);
 
-            reorder(elements(that.lockedHeader, that.thead, "tr:eq(" + sourcePosition.row + ")>th.k-header:not(.k-group-cell,.k-hierarchy-cell)"), sourcePosition.cell, destPosition.cell, before, sources.length);
-
             var leafs = [];
             for (var idx = 0; idx < sources.length; idx++) {
                 if (sources[idx].columns) {
                     leafs = leafs.concat(sources[idx].columns);
                 }
             }
+
             if (leafs.length) {
+                var sourceLockedColumns = lockedColumns(sources).length;
+                var targetLockedColumns = lockedColumns([target]).length;
+
+                var moveCellsBetweenContainers = function(source, target, leafs, columns, container, destination) {
+                    var sourcesDepth = depth(sources);
+                    var targetDepth = depth([target]);
+
+                    if (sourcesDepth > targetDepth) {
+                        destination.append($(new Array((sourcesDepth - targetDepth) + 1).join("<tr/>")));
+                    }
+
+                    addRowSpanValue(destination, sourcesDepth - targetDepth);
+
+                    moveCells(leafs, columns, container, destination);
+                }
+
+                if (sourceLockedColumns > 0 && targetLockedColumns === 0) {
+                    moveCellsBetweenContainers(sources, target, leafs, that.columns, that.lockedHeader.find("thead"), that.thead);
+                }
+
+                if (sourceLockedColumns === 0 && targetLockedColumns > 0) {
+                    moveCellsBetweenContainers(sources, target, leafs, that.columns, that.thead, that.lockedHeader.find("thead"));
+                }
+
                 target = findReorderTarget(that.columns, target, sources[0], before);
                 if (target) {
                     that._reorderHeader(leafs, target, before);
                 }
             }
 
+            reorder(elements(that.lockedHeader, that.thead, "tr:eq(" + sourcePosition.row + ")>th.k-header:not(.k-group-cell,.k-hierarchy-cell)"), sourcePosition.cell, destPosition.cell, before, sources.length);
         },
 
         _reorderContent: function(sources, destination, before) {
@@ -2004,6 +2080,11 @@ var __meta__ = {
 
             that._reorderHeader([column], destColumn, before);
 
+            if (that.lockedHeader) {
+                removeEmptyRows(that.thead);
+                removeEmptyRows(that.lockedHeader);
+            }
+
             if (column.columns || destColumn.columns) {
                 if (column.columns) {
                     if (destColumn.columns) {
@@ -2012,6 +2093,13 @@ var __meta__ = {
                     }
 
                     that._reorderContent(leafColumns(column.columns), destColumn, before);
+                } else {
+                    if (destColumn.columns) {
+                        destColumn = leafColumns(destColumn.columns);
+                        destColumn = destColumn[before ? 0 : destColumn.length - 1];
+                    }
+
+                    that._reorderContent([column], destColumn, before);
                 }
             } else {
                 that._reorderContent([column], destColumn, before);
@@ -2030,6 +2118,7 @@ var __meta__ = {
 
             that._updateTablesWidth();
             that._applyLockedContainersWidth();
+            that._syncLockedHeaderHeight();
             that._syncLockedContentHeight();
             that._updateFirstColumnClass();
 
@@ -5109,7 +5198,7 @@ var __meta__ = {
 
                 var count = removeEmptyRows(this.thead);
                 if (rows.length < count) {
-                    updateRowSpan(table);
+                    removeRowSpanValue(table, count);
                 }
 
                 trFilter = table.find(".k-filter-row");

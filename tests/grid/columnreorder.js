@@ -1659,4 +1659,181 @@
         equal(grid.thead.find("tr").first().find("th").eq(0).attr("data-index"), 5);
     });
 
+    test("move locked multi-header column to non-locked single row column creates additional row elements", function() {
+        var grid = new Grid(div, {
+            columns: [
+                { title: "master", width: 10 },
+                { title: "master1",
+                    locked: true,
+                    columns: [
+                        { title: "master1-child" },
+                        { title: "master1-child1", columns: [{ title: "master1-child1-child", width: 30 }, { title: "master1-child1-child2", width: 40 } ] },
+                        { title: "master1-child2", columns: [{ title: "master1-child2-child", width: 50 }, { title: "master1-child2-child2", width: 60 } ] }
+                ] },
+                { title: "master2", width: 70, locked: true },
+                { title: "master3", width: 80 },
+            ]
+        });
+
+        grid.reorderColumn(2, grid.columns[0], true);
+
+        equal(grid.lockedHeader.find("tr").eq(0).find("th").eq(0).text(), "master2");
+        equal(grid.lockedHeader.find("th").length, 1);
+        equal(grid.lockedHeader.find("tr").length, 1);
+
+        equal(grid.thead.find("tr").eq(0).find("th").eq(0).text(), "master1");
+        equal(grid.thead.find("tr").eq(0).find("th").eq(1).text(), "master");
+        equal(grid.thead.find("tr").eq(0).find("th").eq(2).text(), "master3");
+
+        equal(grid.thead.find("tr").eq(1).find("th").eq(0).text(), "master1-child");
+        equal(grid.thead.find("tr").eq(1).find("th").eq(1).text(), "master1-child1");
+        equal(grid.thead.find("tr").eq(1).find("th").eq(2).text(), "master1-child2");
+
+        equal(grid.thead.find("tr").eq(2).find("th").eq(0).text(), "master1-child1-child");
+        equal(grid.thead.find("tr").eq(2).find("th").eq(1).text(), "master1-child1-child2");
+        equal(grid.thead.find("tr").eq(2).find("th").eq(2).text(), "master1-child2-child");
+        equal(grid.thead.find("tr").eq(2).find("th").eq(3).text(), "master1-child2-child2");
+
+
+        equal(grid.thead.find("tr").length, 3);
+    });
+
+    test("move non locked multi-header column to locked single row column creates additional row elements", function() {
+        var grid = new Grid(div, {
+            columns: [
+                { title: "master", width: 10, locked: true },
+                { title: "master1",
+                    columns: [
+                        { title: "master1-child" },
+                        { title: "master1-child1", columns: [{ title: "master1-child1-child", width: 30 }, { title: "master1-child1-child2", width: 40 } ] },
+                        { title: "master1-child2", columns: [{ title: "master1-child2-child", width: 50 }, { title: "master1-child2-child2", width: 60 } ] }
+                ] },
+                { title: "master2", width: 70, locked: true },
+                { title: "master3", width: 80 },
+            ]
+        });
+
+        grid.reorderColumn(1, grid.columns[2], true);
+
+        equal(grid.thead.find("tr").eq(0).find("th").eq(0).text(), "master3");
+        equal(grid.thead.find("th").length, 1);
+        equal(grid.thead.find("tr").length, 1);
+
+        equal(grid.lockedHeader.find("tr").eq(0).find("th").eq(0).text(), "master");
+        equal(grid.lockedHeader.find("tr").eq(0).find("th").eq(1).text(), "master1");
+        equal(grid.lockedHeader.find("tr").eq(0).find("th").eq(2).text(), "master2");
+
+        equal(grid.lockedHeader.find("tr").eq(1).find("th").eq(0).text(), "master1-child");
+        equal(grid.lockedHeader.find("tr").eq(1).find("th").eq(1).text(), "master1-child1");
+        equal(grid.lockedHeader.find("tr").eq(1).find("th").eq(2).text(), "master1-child2");
+
+        equal(grid.lockedHeader.find("tr").eq(2).find("th").eq(0).text(), "master1-child1-child");
+        equal(grid.lockedHeader.find("tr").eq(2).find("th").eq(1).text(), "master1-child1-child2");
+        equal(grid.lockedHeader.find("tr").eq(2).find("th").eq(2).text(), "master1-child2-child");
+        equal(grid.lockedHeader.find("tr").eq(2).find("th").eq(3).text(), "master1-child2-child2");
+
+
+        equal(grid.lockedHeader.find("tr").length, 3);
+    });
+
+    test("move non locked multi-header column to locked multi-header column creates additional row elements", function() {
+        var grid = new Grid(div, {
+            columns: [
+                { title: "master", width: 10, locked: true },
+                { title: "master1", locked: true,
+                    columns: [
+                        { title: "master1-child" },
+                        { title: "master1-child1", columns: [{ title: "master1-child1-child", width: 30 }, { title: "master1-child1-child2", width: 40 } ] },
+                        { title: "master1-child2", columns: [{ title: "master1-child2-child", width: 50 }, { title: "master1-child2-child2", width: 60 } ] }
+                ] },
+                { title: "master2", width: 70 },
+                { title: "master3",
+                    columns: [
+                        { title: "master3-child" },
+                        { title: "master3-child1", columns: [{ title: "master3-child1-child", width: 30 }, { title: "master3-child1-child2", width: 40 } ] },
+                        { title: "master3-child2", columns: [{ title: "master3-child2-child", width: 50 }, { title: "master3-child2-child2", width: 60 } ] }
+                ] }
+            ]
+        });
+
+        grid.reorderColumn(1, grid.columns[3], true);
+
+        equal(grid.thead.find("tr").eq(0).find("th").eq(0).text(), "master2");
+        equal(grid.thead.find("th").length, 1);
+        equal(grid.thead.find("tr").length, 1, "non locked rows");
+
+        equal(grid.lockedHeader.find("tr").eq(0).find("th").eq(0).text(), "master");
+        equal(grid.lockedHeader.find("tr").eq(0).find("th").eq(1).text(), "master3");
+        equal(grid.lockedHeader.find("tr").eq(0).find("th").eq(2).text(), "master1");
+
+        equal(grid.lockedHeader.find("tr").eq(1).find("th").eq(0).text(), "master3-child");
+        equal(grid.lockedHeader.find("tr").eq(1).find("th").eq(1).text(), "master3-child1");
+        equal(grid.lockedHeader.find("tr").eq(1).find("th").eq(2).text(), "master3-child2");
+
+        equal(grid.lockedHeader.find("tr").eq(1).find("th").eq(3).text(), "master1-child");
+        equal(grid.lockedHeader.find("tr").eq(1).find("th").eq(4).text(), "master1-child1");
+        equal(grid.lockedHeader.find("tr").eq(1).find("th").eq(5).text(), "master1-child2");
+
+        equal(grid.lockedHeader.find("tr").eq(2).find("th").eq(0).text(), "master3-child1-child");
+        equal(grid.lockedHeader.find("tr").eq(2).find("th").eq(1).text(), "master3-child1-child2");
+        equal(grid.lockedHeader.find("tr").eq(2).find("th").eq(2).text(), "master3-child2-child");
+        equal(grid.lockedHeader.find("tr").eq(2).find("th").eq(3).text(), "master3-child2-child2");
+
+        equal(grid.lockedHeader.find("tr").eq(2).find("th").eq(4).text(), "master1-child1-child");
+        equal(grid.lockedHeader.find("tr").eq(2).find("th").eq(5).text(), "master1-child1-child2");
+        equal(grid.lockedHeader.find("tr").eq(2).find("th").eq(6).text(), "master1-child2-child");
+        equal(grid.lockedHeader.find("tr").eq(2).find("th").eq(7).text(), "master1-child2-child2");
+
+        equal(grid.lockedHeader.find("tr").length, 3);
+    });
+
+    test("move locked multi-header column to non-locked single row column updates the rowspan", function() {
+        var grid = new Grid(div, {
+            columns: [
+                { title: "master", width: 10 },
+                { title: "master1",
+                    locked: true,
+                    columns: [
+                        { title: "master1-child" },
+                        { title: "master1-child1", columns: [{ title: "master1-child1-child", width: 30 }, { title: "master1-child1-child2", width: 40 } ] },
+                        { title: "master1-child2", columns: [{ title: "master1-child2-child", width: 50 }, { title: "master1-child2-child2", width: 60 } ] }
+                ] },
+                { title: "master2", width: 70, locked: true },
+                { title: "master3", width: 80 },
+            ]
+        });
+
+        grid.reorderColumn(2, grid.columns[0], true);
+
+        equal(grid.lockedHeader.find("tr").eq(0).find("th").eq(0).text(), "master2");
+        equal(grid.lockedHeader.find("th")[0].rowSpan, 1);
+
+        equal(grid.thead.find("tr").eq(0).find("th")[1].rowSpan, 3);
+        equal(grid.thead.find("tr").eq(0).find("th")[2].rowSpan, 3);
+    });
+
+    test("move non locked multi-header column to locked single row column updates the rowspans", function() {
+        var grid = new Grid(div, {
+            columns: [
+                { title: "master", width: 10, locked: true },
+                { title: "master1",
+                    columns: [
+                        { title: "master1-child" },
+                        { title: "master1-child1", columns: [{ title: "master1-child1-child", width: 30 }, { title: "master1-child1-child2", width: 40 } ] },
+                        { title: "master1-child2", columns: [{ title: "master1-child2-child", width: 50 }, { title: "master1-child2-child2", width: 60 } ] }
+                ] },
+                { title: "master2", width: 70, locked: true },
+                { title: "master3", width: 80 },
+            ]
+        });
+
+        grid.reorderColumn(1, grid.columns[2], true);
+
+        equal(grid.thead.find("tr").eq(0).find("th")[0].rowSpan, 1, "non locked column rowspan");
+
+        equal(grid.lockedHeader.find("tr").eq(0).find("th")[0].rowSpan, 3, "locked column 1");
+        equal(grid.lockedHeader.find("tr").eq(0).find("th")[1].rowSpan, 1, "locked column 2");
+        equal(grid.lockedHeader.find("tr").eq(0).find("th")[2].rowSpan, 3, "locked column 3");
+    });
+
 })();
