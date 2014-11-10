@@ -571,6 +571,23 @@ var __meta__ = {
         return $(elements).map(function() { return this.toArray(); });
     }
 
+    function updateCellIndex(thead, columns, offset) {
+        offset = offset || 0;
+
+        var position;
+        var cell;
+        var allColumns = columns;
+        columns = leafColumns(columns);
+
+        for (var idx = 0, length = columns.length; idx < length; idx++) {
+            position = columnPosition(columns[idx], allColumns);
+            cell = thead.find(">tr").eq(position.row).find(".k-header:not(.k-group-cell,.k-hierarchy-cell)").eq(position.cell);
+            cell.attr(kendo.attr("index"), offset + idx);
+        }
+
+        return columns.length;
+    }
+
     function depth(columns) {
         var result = 1;
         var max = 0;
@@ -2138,13 +2155,14 @@ var __meta__ = {
         },
 
         _updateColumnCellIndex: function() {
-            var columns = leafColumns(this.columns);
-            var header = this.thead.add(this.lockedHeader);
-            for (var idx = 0, length = columns.length; idx < length; idx++) {
-                var position = columnPosition(columns[idx], this.columns);
-                var cell = header.find("tr").eq(position.row).find(".k-header:not(.k-group-cell,.k-hierarchy-cell)").eq(position.cell);
-                cell.attr(kendo.attr("index"), idx);
+            var header;
+            var offset = 0;
+
+            if (this.lockedHeader) {
+                header = this.lockedHeader.find("thead");
+                offset = updateCellIndex(header, lockedColumns(this.columns));
             }
+            updateCellIndex(this.thead, nonLockedColumns(this.columns), offset);
         },
 
         lockColumn: function(column) {
