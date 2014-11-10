@@ -1219,7 +1219,7 @@ var __meta__ = {
         },
 
         _trs: function(options) {
-            var model, attr, className, hasChildren, childNodes, i, parentId;
+            var model, attr, className, hasChildren, childNodes, i, length, parentId;
             var rows = [];
             var level = options.level;
             var data = options.data;
