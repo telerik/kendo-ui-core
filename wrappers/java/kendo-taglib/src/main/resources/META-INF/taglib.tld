@@ -16766,7 +16766,7 @@ The grid uses same layout for both phone and tablet.</description>
         </attribute>
         <attribute>
             <description>If a String value is assigned to the toolbar configuration option, it will be treated as a single string template for the whole Grid Toolbar,
-and the string value will be passed as an argument to a kendo.template() function.If a Function value is assigned (it may be a kendo.template() function call or a generic function reference), then the return value of the function will be used to render the Grid Toolbar contents.If an Array value is assigned, it will be treated as the list of commands displayed in the Grid Toolbar. Commands can be custom or built-in ("cancel", "create", "save", "excel").The "cancel" built-in command reverts any data changes done by the end user.The "create" command adds an empty data item to the grid.The "save" command persists any data changes done by the end user.The "excel" command exports the grid data in MS Excel format.</description>
+and the string value will be passed as an argument to a kendo.template() function.If a Function value is assigned (it may be a kendo.template() function call or a generic function reference), then the return value of the function will be used to render the Grid Toolbar contents.If an Array value is assigned, it will be treated as the list of commands displayed in the Grid Toolbar. Commands can be custom or built-in ("cancel", "create", "save", "excel", "pdf").The "cancel" built-in command reverts any data changes done by the end user.The "create" command adds an empty data item to the grid.The "save" command persists any data changes done by the end user.The "excel" command exports the grid data in MS Excel format.The "pdf" command exports the grid data in PDF format.</description>
             <name>toolbar</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -17778,7 +17778,7 @@ The developer is responsible for implementing the server-side proxy. Implementat
         <body-content>empty</body-content>
 
         <attribute>
-            <description>Defines the text of "Cancel Changes" button located in the ToolBar of the widget.</description>
+            <description>Defines the text of "Cancel Changes" button located in the toolbar of the widget.</description>
             <name>cancel</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -17790,7 +17790,7 @@ The developer is responsible for implementing the server-side proxy. Implementat
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Defines the text of "Add new record" button located in the ToolBar of the widget.</description>
+            <description>Defines the text of "Add new record" button located in the toolbar of the widget.</description>
             <name>create</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -17814,7 +17814,7 @@ The developer is responsible for implementing the server-side proxy. Implementat
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Defines the text of "Save Changes" button located in the ToolBar of the widget.</description>
+            <description>Defines the text of "Save Changes" button located in the toolbar of the widget.</description>
             <name>save</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -18120,7 +18120,7 @@ units are "mm", "cm", "in" and "pt" (default).</description>
 
     <tag>
         <description>If a String value is assigned to the toolbar configuration option, it will be treated as a single string template for the whole Grid Toolbar,
-and the string value will be passed as an argument to a kendo.template() function.If a Function value is assigned (it may be a kendo.template() function call or a generic function reference), then the return value of the function will be used to render the Grid Toolbar contents.If an Array value is assigned, it will be treated as the list of commands displayed in the Grid Toolbar. Commands can be custom or built-in ("cancel", "create", "save", "excel").The "cancel" built-in command reverts any data changes done by the end user.The "create" command adds an empty data item to the grid.The "save" command persists any data changes done by the end user.The "excel" command exports the grid data in MS Excel format.</description>
+and the string value will be passed as an argument to a kendo.template() function.If a Function value is assigned (it may be a kendo.template() function call or a generic function reference), then the return value of the function will be used to render the Grid Toolbar contents.If an Array value is assigned, it will be treated as the list of commands displayed in the Grid Toolbar. Commands can be custom or built-in ("cancel", "create", "save", "excel", "pdf").The "cancel" built-in command reverts any data changes done by the end user.The "create" command adds an empty data item to the grid.The "save" command persists any data changes done by the end user.The "excel" command exports the grid data in MS Excel format.The "pdf" command exports the grid data in PDF format.</description>
         <name>grid-toolbar</name>
         <tag-class>com.kendoui.taglib.grid.ToolbarTag</tag-class>
         <body-content>JSP</body-content>
@@ -18128,13 +18128,13 @@ and the string value will be passed as an argument to a kendo.template() functio
 
     <tag>
         <description>If a String value is assigned to the toolbar configuration option, it will be treated as a single string template for the whole Grid Toolbar,
-and the string value will be passed as an argument to a kendo.template() function.If a Function value is assigned (it may be a kendo.template() function call or a generic function reference), then the return value of the function will be used to render the Grid Toolbar contents.If an Array value is assigned, it will be treated as the list of commands displayed in the Grid Toolbar. Commands can be custom or built-in ("cancel", "create", "save", "excel").The "cancel" built-in command reverts any data changes done by the end user.The "create" command adds an empty data item to the grid.The "save" command persists any data changes done by the end user.The "excel" command exports the grid data in MS Excel format.</description>
+and the string value will be passed as an argument to a kendo.template() function.If a Function value is assigned (it may be a kendo.template() function call or a generic function reference), then the return value of the function will be used to render the Grid Toolbar contents.If an Array value is assigned, it will be treated as the list of commands displayed in the Grid Toolbar. Commands can be custom or built-in ("cancel", "create", "save", "excel", "pdf").The "cancel" built-in command reverts any data changes done by the end user.The "create" command adds an empty data item to the grid.The "save" command persists any data changes done by the end user.The "excel" command exports the grid data in MS Excel format.The "pdf" command exports the grid data in PDF format.</description>
         <name>grid-toolbarItem</name>
         <tag-class>com.kendoui.taglib.grid.ToolbarItemTag</tag-class>
 
         <body-content>JSP</body-content>
         <attribute>
-            <description>The name of the toolbar command. Either a built-in ("cancel", "create", "save" and "excel") or custom. The name is reflected in one of the CSS classes, which is applied to the button - k-grid-name.
+            <description>The name of the toolbar command. Either a built-in ("cancel", "create", "save", "excel", "pdf") or custom. The name is reflected in one of the CSS classes, which is applied to the button - k-grid-name.
 This class can be used to obtain reference to the button after Grid initialization and attach click handlers.</description>
             <name>name</name>
             <rtexprvalue>true</rtexprvalue>
@@ -23153,6 +23153,11 @@ That way all users would see the same dates and times no matter their configured
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
+            <description>Fired when the user clicks the "Export to PDF" toolbar button.</description>
+            <name>pdfExport</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
             <description>Fired when the user clicks the "destroy" button.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>remove</name>
             <rtexprvalue>true</rtexprvalue>
@@ -23355,6 +23360,12 @@ which field to update. The other option is to use MVVM bindings in order to bind
         <attribute>
             <description>The text similar to "Event" displayed in scheduler.</description>
             <name>event</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text displayed by the PDF export button.</description>
+            <name>pdf</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -23856,6 +23867,115 @@ which field to update. The other option is to use MVVM bindings in order to bind
 
 
     <tag>
+        <description>Configures the Kendo UI Scheduler PDF export settings.</description>
+        <name>scheduler-pdf</name>
+        <tag-class>com.kendoui.taglib.scheduler.PdfTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The author of the PDF document.</description>
+            <name>author</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The creator of the PDF document.</description>
+            <name>creator</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The date when the PDF document is created. Defaults to new Date().</description>
+            <name>date</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.Date</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the file name of the exported PDF file.</description>
+            <name>fileName</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the keywords of the exported PDF file.</description>
+            <name>keywords</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Set to true to reverse the paper dimensions if needed such that width is the larger edge.</description>
+            <name>landscape</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the paper size of the PDF document. Can be set to a predefined size, i.e. "A4", "A3" etc,
+or an array of two Number-s specifying the width/height in points (1pt = 1/72in), or strings including unit, i.e. "10mm". Supported
+units are "mm", "cm", "in" and "pt".  The default "auto" means paper size is determined by content.</description>
+            <name>paperSize</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The URL of the server side proxy which will stream the PDF file to the end user. Used when the browser isn't capable of saving files from JavaScript. Such browsers are IE&lt;10 and Safari.
+The developer is responsible for implementing the server-side proxy. Implementation instructions are available here.</description>
+            <name>proxyURL</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Sets the subject of the PDF file.</description>
+            <name>subject</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Sets the title of the PDF file.</description>
+            <name>title</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>Specifies the margins of the page (numbers or strings with units). Supported
+units are "mm", "cm", "in" and "pt" (default).</description>
+        <name>scheduler-pdf-margin</name>
+        <tag-class>com.kendoui.taglib.scheduler.PdfMarginTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The bottom margin. Numbers are considered as "pt" units.</description>
+            <name>bottom</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The left margin. Numbers are considered as "pt" units.</description>
+            <name>left</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The right margin. Numbers are considered as "pt" units.</description>
+            <name>right</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The top margin. Numbers are considered as "pt" units.</description>
+            <name>top</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+
+    </tag>
+
+
+
+
+    <tag>
         <description>The configuration of the scheduler resource(s). A scheduler resource is optional metadata that can be associated
 with a scheduler event.</description>
         <name>scheduler-resources</name>
@@ -23926,6 +24046,29 @@ By default the scheduler expects that field to contain a primitive value (string
             <name>valuePrimitive</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
+        </attribute>
+    </tag>
+
+
+
+    <tag>
+        <description>List of commands that the scheduler will display in its toolbar as buttons. Currently supports only the "pdf" command.The "pdf" command exports the scheduler in PDF format.</description>
+        <name>scheduler-toolbar</name>
+        <tag-class>com.kendoui.taglib.scheduler.ToolbarTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+    <tag>
+        <description>List of commands that the scheduler will display in its toolbar as buttons. Currently supports only the "pdf" command.The "pdf" command exports the scheduler in PDF format.</description>
+        <name>scheduler-toolbarItem</name>
+        <tag-class>com.kendoui.taglib.scheduler.ToolbarItemTag</tag-class>
+
+        <body-content>empty</body-content>
+        <attribute>
+            <description>The name of the command.</description>
+            <name>name</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
         </attribute>
     </tag>
 
@@ -24250,6 +24393,12 @@ By default the Kendo UI Scheduler widget displays "day" and "week" view.</descri
         <description>Fired when the user changes the selected date, or view of the schedulerThe event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>scheduler-navigate</name>
         <tag-class>com.kendoui.taglib.scheduler.NavigateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the user clicks the "Export to PDF" toolbar button.</description>
+        <name>scheduler-pdfExport</name>
+        <tag-class>com.kendoui.taglib.scheduler.PdfExportFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
@@ -36785,7 +36934,7 @@ instance.If the dataSource option is set to a JavaScript object or array the wid
         </attribute>
         <attribute>
             <description>If a String value is assigned to the toolbar configuration option, it will be treated as a single string template for the whole treelist Toolbar,
-and the string value will be passed as an argument to a kendo.template() function.If a Function value is assigned (it may be a kendo.template() function call or a generic function reference), then the return value of the function will be used to render the treelist Toolbar contents.If an Array value is assigned, it will be treated as the list of commands displayed in the treelist Toolbar. Commands can be custom or built-in ("cancel", "create", "save", "excel").The "create" command adds an empty data item to the treelist.The "excel" command exports the treelist data in MS Excel format.</description>
+and the string value will be passed as an argument to a kendo.template() function.If a Function value is assigned (it may be a kendo.template() function call or a generic function reference), then the return value of the function will be used to render the treelist Toolbar contents.If an Array value is assigned, it will be treated as the list of commands displayed in the treelist Toolbar. Commands can be custom or built-in ("create", "pdf", "excel").The "create" command adds an empty data item to the treelist.The "excel" command exports the treelist data in MS Excel format.The "pdf" command exports the treelist data in PDF format.</description>
             <name>toolbar</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -36887,6 +37036,12 @@ for all columns when filtering is enabled via the filterable option.Can be set t
             <type>boolean</type>
         </attribute>
         <attribute>
+            <description>The template which renders the footer table cell for the column.The fields which can be used in the template are:</description>
+            <name>footerTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>The format that is applied to the value before it is displayed. Takes the form "{0:format}" where "format" is a standard number format,
 custom number format, standard date format or a custom date format.</description>
             <name>format</name>
@@ -36929,14 +37084,14 @@ Each table row consists of table cells (&lt;td&gt;) which represent the treelist
     </tag>
 
     <tag>
-        <description>The configuration of the column command(s). If set the column would display a button for every command. Commands can be custom or built-in ("edit", "destroy" or "createchild").The "edit" built-in command switches the current table row in edit mode.The "createchild" built-in command adds new child item to the current table row and switches in edit mode.The "destroy" built-in command removes the data item to which the current table row is bound.Custom commands are supported by specifying the click option.</description>
+        <description>The configuration of the column command(s). If set the column would display a button for every command. Commands can be custom or built-in ("edit", "destroy" or "createChild").The "edit" built-in command switches the current table row in edit mode.The "createChild" built-in command adds new child item to the current table row and switches in edit mode.The "destroy" built-in command removes the data item to which the current table row is bound.Custom commands are supported by specifying the click option.</description>
         <name>treeList-column-command</name>
         <tag-class>com.kendoui.taglib.treelist.ColumnCommandTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
     <tag>
-        <description>The configuration of the column command(s). If set the column would display a button for every command. Commands can be custom or built-in ("edit", "destroy" or "createchild").The "edit" built-in command switches the current table row in edit mode.The "createchild" built-in command adds new child item to the current table row and switches in edit mode.The "destroy" built-in command removes the data item to which the current table row is bound.Custom commands are supported by specifying the click option.</description>
+        <description>The configuration of the column command(s). If set the column would display a button for every command. Commands can be custom or built-in ("edit", "destroy" or "createChild").The "edit" built-in command switches the current table row in edit mode.The "createChild" built-in command adds new child item to the current table row and switches in edit mode.The "destroy" built-in command removes the data item to which the current table row is bound.Custom commands are supported by specifying the click option.</description>
         <name>treeList-column-commandItem</name>
         <tag-class>com.kendoui.taglib.treelist.ColumnCommandItemTag</tag-class>
 
@@ -36954,7 +37109,7 @@ Each table row consists of table cells (&lt;td&gt;) which represent the treelist
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The name of the command. The built-in commands are "edit", "createchild" and "destroy". Can be set to a custom value.</description>
+            <description>The name of the command. The built-in commands are "edit", "createChild" and "destroy". When set to a custom value, it is rendered as a data-command attribute.</description>
             <name>name</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -37025,6 +37180,12 @@ be disabled for this column. By default all columns are sortable if sorting is e
         <description>Provides a way to specify a custom editing UI for the column. Use the container parameter to create the editing UI.</description>
         <name>treeList-column-editor</name>
         <tag-class>com.kendoui.taglib.treelist.ColumnEditorFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The template which renders the footer table cell for the column.The fields which can be used in the template are:</description>
+        <name>treeList-column-footerTemplate</name>
+        <tag-class>com.kendoui.taglib.treelist.ColumnFooterTemplateFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
@@ -37121,7 +37282,7 @@ which field to update. The other option is to use MVVM bindings in order to bind
 
     <tag>
         <description>If a String value is assigned to the toolbar configuration option, it will be treated as a single string template for the whole treelist Toolbar,
-and the string value will be passed as an argument to a kendo.template() function.If a Function value is assigned (it may be a kendo.template() function call or a generic function reference), then the return value of the function will be used to render the treelist Toolbar contents.If an Array value is assigned, it will be treated as the list of commands displayed in the treelist Toolbar. Commands can be custom or built-in ("cancel", "create", "save", "excel").The "create" command adds an empty data item to the treelist.The "excel" command exports the treelist data in MS Excel format.</description>
+and the string value will be passed as an argument to a kendo.template() function.If a Function value is assigned (it may be a kendo.template() function call or a generic function reference), then the return value of the function will be used to render the treelist Toolbar contents.If an Array value is assigned, it will be treated as the list of commands displayed in the treelist Toolbar. Commands can be custom or built-in ("create", "pdf", "excel").The "create" command adds an empty data item to the treelist.The "excel" command exports the treelist data in MS Excel format.The "pdf" command exports the treelist data in PDF format.</description>
         <name>treeList-toolbar</name>
         <tag-class>com.kendoui.taglib.treelist.ToolbarTag</tag-class>
         <body-content>JSP</body-content>
@@ -37129,13 +37290,13 @@ and the string value will be passed as an argument to a kendo.template() functio
 
     <tag>
         <description>If a String value is assigned to the toolbar configuration option, it will be treated as a single string template for the whole treelist Toolbar,
-and the string value will be passed as an argument to a kendo.template() function.If a Function value is assigned (it may be a kendo.template() function call or a generic function reference), then the return value of the function will be used to render the treelist Toolbar contents.If an Array value is assigned, it will be treated as the list of commands displayed in the treelist Toolbar. Commands can be custom or built-in ("cancel", "create", "save", "excel").The "create" command adds an empty data item to the treelist.The "excel" command exports the treelist data in MS Excel format.</description>
+and the string value will be passed as an argument to a kendo.template() function.If a Function value is assigned (it may be a kendo.template() function call or a generic function reference), then the return value of the function will be used to render the treelist Toolbar contents.If an Array value is assigned, it will be treated as the list of commands displayed in the treelist Toolbar. Commands can be custom or built-in ("create", "pdf", "excel").The "create" command adds an empty data item to the treelist.The "excel" command exports the treelist data in MS Excel format.The "pdf" command exports the treelist data in PDF format.</description>
         <name>treeList-toolbarItem</name>
         <tag-class>com.kendoui.taglib.treelist.ToolbarItemTag</tag-class>
 
         <body-content>empty</body-content>
         <attribute>
-            <description>The name of the toolbar command. Either a built-in ("create" and "excel") or custom. The name is reflected in one of the CSS classes, which is applied to the button - k-grid-name.
+            <description>The name of the toolbar command. Either a built-in ("create", "pdf", "excel") or custom. The name is reflected in one of the CSS classes, which is applied to the button - k-grid-name.
 This class can be used to obtain reference to the button after TreeList initialization and attach click handlers.</description>
             <name>name</name>
             <rtexprvalue>true</rtexprvalue>

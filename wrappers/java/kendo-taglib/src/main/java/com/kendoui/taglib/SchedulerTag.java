@@ -71,9 +71,19 @@ public class SchedulerTag extends WidgetTag /* interfaces */implements DataBound
         setProperty("messages", value);
     }
 
+    public void setPdf(com.kendoui.taglib.scheduler.PdfTag value) {
+        setProperty("pdf", value);
+    }
+
     public void setResources(ResourcesTag value) {
 
         setProperty("resources", value.resources());
+
+    }
+
+    public void setToolbar(ToolbarTag value) {
+
+        setProperty("toolbar", value.toolbar());
 
     }
 
@@ -121,6 +131,10 @@ public class SchedulerTag extends WidgetTag /* interfaces */implements DataBound
 
     public void setNavigate(NavigateFunctionTag value) {
         setEvent("navigate", value.getBody());
+    }
+
+    public void setPdfExport(PdfExportFunctionTag value) {
+        setEvent("pdfExport", value.getBody());
     }
 
     public void setRemove(RemoveFunctionTag value) {
@@ -489,6 +503,18 @@ public class SchedulerTag extends WidgetTag /* interfaces */implements DataBound
 
     public void setNavigate(String value) {
         setProperty("navigate", new Function(value));
+    }
+
+    public String getPdfExport() {
+        Function property = ((Function)getProperty("pdfExport"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setPdfExport(String value) {
+        setProperty("pdfExport", new Function(value));
     }
 
     public String getRemove() {

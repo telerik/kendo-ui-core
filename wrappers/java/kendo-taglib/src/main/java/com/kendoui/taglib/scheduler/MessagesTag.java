@@ -77,6 +77,22 @@ public class MessagesTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         setProperty("allDay", value);
     }
 
+    public java.lang.String getAriaEventLabel() {
+        return (java.lang.String)getProperty("ariaEventLabel");
+    }
+
+    public void setAriaEventLabel(java.lang.String value) {
+        setProperty("ariaEventLabel", value);
+    }
+
+    public java.lang.String getAriaSlotLabel() {
+        return (java.lang.String)getProperty("ariaSlotLabel");
+    }
+
+    public void setAriaSlotLabel(java.lang.String value) {
+        setProperty("ariaSlotLabel", value);
+    }
+
     public java.lang.String getCancel() {
         return (java.lang.String)getProperty("cancel");
     }
@@ -115,6 +131,14 @@ public class MessagesTag extends  BaseTag  /* interfaces */ /* interfaces */ {
 
     public void setEvent(java.lang.String value) {
         setProperty("event", value);
+    }
+
+    public java.lang.String getPdf() {
+        return (java.lang.String)getProperty("pdf");
+    }
+
+    public void setPdf(java.lang.String value) {
+        setProperty("pdf", value);
     }
 
     public java.lang.String getSave() {
