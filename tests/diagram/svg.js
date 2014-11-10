@@ -792,6 +792,18 @@
             equal(stroke.dashType, "dotted");
         });
 
+        test("does not set stroke if width is 0", function() {
+            textblock = new TextBlock({
+                text: "foo",
+                stroke: {
+                    color: "red",
+                    width: 0
+                }
+            });
+            drawingElement = textblock.drawingElement;
+            ok(drawingElement.options.stroke === null);
+        });
+
         test("content returns drawing text", function() {
             equal(textblock.content(), "foo");
         });
