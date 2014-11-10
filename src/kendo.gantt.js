@@ -28,6 +28,7 @@ var __meta__ = {
     var map = $.map;
     var keys = kendo.keys;
     var NS = ".kendoGantt";
+    var PERCENTAGE_FORMAT = "p0";
     var TABINDEX = "tabIndex";
     var CLICK = "click";
     var WIDTH = "width";
@@ -949,7 +950,7 @@ var __meta__ = {
                 { field: "title", title: messages.title },
                 { field: "start", title: messages.start, editor: editors.dateRange },
                 { field: "end", title: messages.end, editor: editors.dateRange },
-                { field: "percentComplete", title: messages.percentComplete, format: "p0" }
+                { field: "percentComplete", title: messages.percentComplete, format: PERCENTAGE_FORMAT }
             ];
 
             if (model.get(resources.field)) {
@@ -2539,8 +2540,8 @@ var __meta__ = {
                     var resource = resources.dataSource.get(item.get(assignments.dataResourceIdField));
                     var resourceValue = item.get(assignments.dataValueField);
                     var resourcedId = item.get(assignments.dataResourceIdField);
-                    var valueFormat = resource.get(resources.dataFormatField);
-                    var formatedValue = valueFormat ? kendo.toString(resourceValue, valueFormat) : resourceValue;
+                    var valueFormat = resource.get(resources.dataFormatField) || PERCENTAGE_FORMAT;
+                    var formatedValue = kendo.toString(resourceValue, valueFormat);
 
                     task[resources.field].push(new ObservableObject({
                         id: resourcedId,
@@ -2587,7 +2588,7 @@ var __meta__ = {
                 result.push({
                     id: resource.get("id"),
                     name: resource.get(that.resources.dataTextField),
-                    format: resource.get(that.resources.dataFormatField),
+                    format: resource.get(that.resources.dataFormatField) || PERCENTAGE_FORMAT,
                     value: valuePerResource(resource.id)
                 });
             }

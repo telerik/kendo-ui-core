@@ -348,6 +348,55 @@
 
     });
 
+    test("extent resource value with default percentage format", function() {
+        gantt = new Gantt(element, {
+            dataSource: {
+                data: [
+                    { id: 0, title: "Task1" }
+                ]
+            },
+            resources: {
+                dataSource: [
+                    { id: 0, name: "foo" },
+                ]
+            },
+            assignments: {
+                dataSource: [
+                    { taskId: 0, resourceId: 0, value: 1 }
+                ]
+            }
+        });
+
+        var taskTree = gantt.dataSource.taskTree();
+        var resources = taskTree[0].get("resources");
+
+        equal(resources[0].get("formatedValue"), "100 %");
+    });
+
+    test("wraps resource editor data with default percentage format", function() {
+        gantt = new Gantt(element, {
+            dataSource: {
+                data: [
+                    { id: 0, title: "Task1" }
+                ]
+            },
+            resources: {
+                dataSource: [
+                    { id: 0, name: "foo" },
+                ]
+            },
+            assignments: {
+                dataSource: [
+                    { taskId: 0, resourceId: 0, value: 1 }
+                ]
+            }
+        });
+
+        var data = gantt._wrapResourceData(0);
+
+        equal(data[0].format, "p0");
+    });
+
     module("Gantt timeline resource rendering", {
         setup: function() {
             element = $("<div />").appendTo(QUnit.fixture);
@@ -1019,7 +1068,7 @@
         equal(grid.table.find("tr:eq(1) > td:eq(1)").text(), "100 %");
     });
 
-    test("renders empty resource value when task has not assignement from resources", function() {
+    test("renders empty resource value when task has not assignment from resources", function() {
         gantt.list.content.find("td:eq(1)").trigger("dblclick");
 
         var grid = gantt._resourceEditor.grid;
