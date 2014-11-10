@@ -404,9 +404,20 @@
             deepExtend(options, {
                 stroke: strokeOptions
             });
-            var stroke = options.stroke;
 
-            this.drawingElement.stroke(stroke.color, stroke.width, stroke.opacity);
+            strokeOptions = options.stroke;
+
+            var stroke = null;
+            if (strokeOptions.width > 0) {
+                stroke = {
+                    color: strokeOptions.color,
+                    width: strokeOptions.width,
+                    opacity: strokeOptions.opacity,
+                    dashType: strokeOptions.dashType
+                };
+            }
+
+            this.drawingElement.options.set("stroke", stroke);
         },
 
         _fill: function(fillOptions) {
@@ -445,11 +456,13 @@
 
         _initText: function() {
             var options = this.options;
+
             this.drawingElement = new d.Text(defined(options.text) ? options.text : "", new g.Point(), {
                 fill: options.fill,
-                stroke: options.stroke,
                 font: options.font
             });
+
+            this._stroke();
         },
 
         _textColor: function(options) {

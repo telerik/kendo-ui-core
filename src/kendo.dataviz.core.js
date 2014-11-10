@@ -4191,7 +4191,7 @@ var __meta__ = {
     ViewFactory.current = new ViewFactory();
 
     var ExportMixin = {
-        extend: function(proto) {
+        extend: function(proto, skipLegacy) {
             if (!proto.exportVisual) {
                 throw new Error("Mixin target has no exportVisual method defined.");
             }
@@ -4199,8 +4199,11 @@ var __meta__ = {
             proto.exportSVG = this.exportSVG;
             proto.exportImage = this.exportImage;
             proto.exportPDF = this.exportPDF;
-            proto.svg = this.svg;
-            proto.imageDataURL = this.imageDataURL;
+
+            if (!skipLegacy) {
+                proto.svg = this.svg;
+                proto.imageDataURL = this.imageDataURL;
+            }
         },
 
         exportSVG: function(options) {

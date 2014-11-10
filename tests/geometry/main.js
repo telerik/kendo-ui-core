@@ -472,6 +472,18 @@
             equal(size.getHeight(), 20);
         });
 
+        test("toArray returns an array with the values", function() {
+            var result = size.toArray();
+            deepEqual(result, [10, 20]);
+        });
+
+        test("toArray returns an array with the values rounded to the specified precision", function() {
+            size.width = 3.14;
+            size.height = 3.45;
+            var result = size.toArray(1);
+            deepEqual(result, [3.1, 3.5]);
+        });
+
         test("changing width triggers geometryChange", function() {
             size.addObserver({
                 geometryChange: function() {

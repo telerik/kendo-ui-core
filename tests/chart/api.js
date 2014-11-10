@@ -368,6 +368,7 @@
         }
 
         exportTests("Chart", createChart);
+        legacyExportTests("Chart", createChart);
 
         // ------------------------------------------------------------
         module("Export", {

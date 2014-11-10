@@ -1,6 +1,6 @@
 (function() {
-    var dataviz = kendo.dataviz,
-        draw = kendo.drawing,
+    var draw = kendo.drawing,
+        geom = kendo.geometry,
         pdf = draw.pdf;
 
     var group;
@@ -23,5 +23,28 @@
                 ok(landscape !== portrait);
             });
         });
+    });
+
+    test("does not reparent target", function() {
+        var parent = new draw.Group();
+        parent.append(group);
+
+        group.append(new draw.Text("Foo", [10, 10]));
+
+        draw.exportPDF(group).done(function() {
+            ok(group.parent === parent);
+        });
+    });
+
+    test("does not set options", 0, function() {
+        group.options.addObserver({
+            optionsChange: function(e) {
+                ok(false, "No options should be set during export, but " + e.field + " was set");
+            }
+        });
+
+        group.append(new draw.Text("Foo", [10, 10]));
+
+        draw.exportPDF(group);
     });
 })();

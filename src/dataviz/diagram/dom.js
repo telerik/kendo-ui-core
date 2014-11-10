@@ -3,6 +3,7 @@
            "../../kendo.editable",
            "../../kendo.window",
            "../../kendo.dropdownlist",
+           "../../kendo.dataviz.core",
            "../../kendo.dataviz.themes",
            "./svg",
            "./services",
@@ -12,6 +13,8 @@
     (function ($, undefined) {
         // Imports ================================================================
         var dataviz = kendo.dataviz,
+            draw = kendo.drawing,
+            geom = kendo.geometry,
             diagram = dataviz.diagram,
             Widget = kendo.ui.Widget,
             Class = kendo.Class,
@@ -3484,8 +3487,42 @@
                     this.toolBar.destroy();
                     this.toolBar = null;
                 }
+            },
+
+            exportDOMVisual: function() {
+                var viewBox = this.canvas._viewBox;
+                var scrollOffset = geom.transform().translate(
+                    -viewBox.x, -viewBox.y
+                );
+
+                var viewRect = new geom.Rect(
+                    [0, 0], [viewBox.width, viewBox.height]
+                );
+                var clipPath = draw.Path.fromRect(viewRect);
+
+                var wrap = new draw.Group({
+                    transform: scrollOffset,
+                    clip: clipPath
+                });
+
+                var root = this.canvas.drawingElement.children[0];
+                wrap.children.push(root);
+                return wrap;
+            },
+
+            exportVisual: function() {
+                var scale = geom.transform().scale(1 / this._zoom);
+                var wrap = new draw.Group({
+                    transform: scale
+                });
+
+                var root = this.canvas.drawingElement.children[0];
+                wrap.children.push(root);
+
+                return wrap;
             }
         });
+        dataviz.ExportMixin.extend(Diagram.fn, true);
 
         function filterShapeDataItem(dataItem) {
             var result = {};

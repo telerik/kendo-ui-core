@@ -1097,6 +1097,16 @@
 
     function exportGroup(group) {
         var root = new RootNode({ encodeText: true });
+
+        var bbox = group.clippedBBox();
+        if (bbox) {
+            var origin = bbox.getOrigin();
+            var exportRoot = new d.Group();
+            exportRoot.transform(g.transform().translate(-origin.x, -origin.y));
+            exportRoot.children.push(group);
+            group = exportRoot;
+        }
+
         root.load([group]);
 
         var svg = "<?xml version='1.0' ?>" +

@@ -101,6 +101,28 @@
             drawing.drawDOM(container);
         });
 
+        test("calls exportDOMVisual", function(){
+            widget.exportDOMVisual = function() {
+                ok(true);
+                return new drawing.Group();
+            };
+
+            drawing.drawDOM(container);
+        });
+
+        test("does not call exportVisual if exportDOMVisual is defined", function(){
+            widget.exportVisual = function() {
+                ok(false);
+            };
+
+            widget.exportDOMVisual = function() {
+                ok(true);
+                return new drawing.Group();
+            };
+
+            drawing.drawDOM(container);
+        });
+
         test("appends exportVisual result", function(){
             drawing.drawDOM(container).done(function(group) {
                 ok(group.children[0] instanceof drawing.Group);
@@ -116,6 +138,17 @@
 
             drawing.drawDOM(container).done(function(group) {
                 deepEqual(group.bbox().origin.toArray(), [50, 100]);
+            });
+        });
+
+        test("does not apply transformation to exported visual", function() {
+            var visual = new drawing.Group();
+            widget.exportVisual = function() {
+                return visual;
+            };
+
+            drawing.drawDOM(container).done(function() {
+                ok(!visual.transform());
             });
         });
 

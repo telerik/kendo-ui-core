@@ -8865,6 +8865,20 @@
 			"aspnet-mvc": "This sample demonstrates the built-in layouts which are specific to ASP.NET MVC Diagram component."
         }
       },
+      {
+        "text": "Export to PDF, Image, SVG",
+        "new": true,
+        "url": "diagram/export",
+        "packages": [
+          "!mvc"
+        ],
+        "title": {
+            "kendo-ui": "Kendo UI Diagram Export API methods"
+        },
+        "meta": {
+            "kendo-ui": "This demo shows how to export diagram to PDF, PNG Images or SVG and save them directly in the browser."
+        }
+      },
 	  {
         "text": "Events",
         "url": "diagram/events",

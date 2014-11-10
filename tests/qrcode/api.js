@@ -9,4 +9,5 @@
     }
 
     exportTests("QRCode", createQRCode);
+    legacyExportTests("QRCode", createQRCode);
 })();

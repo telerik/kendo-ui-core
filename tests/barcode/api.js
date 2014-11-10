@@ -11,4 +11,5 @@
     }
 
     exportTests("Barcode", createBarcode);
+    legacyExportTests("Barcode", createBarcode);
 })();
