@@ -730,9 +730,6 @@ var __meta__ = {
                 return pointer.value();
             }
 
-            //todo check
-            //gauge.options.pointer.value = value;
-
             pointer.value(value);
         },
 
@@ -770,11 +767,16 @@ var __meta__ = {
 
         redraw: function() {
             var that = this;
+            var size = deepExtend(that._getSize(), that.options.gaugeArea);
+            var wrapper = new Rect([0, 0], [size.width, size.height]);
+            var bbox;
 
             that.surface.clear();
             that.gaugeArea = that._createGaugeArea();
             that._createModel();
-            that.reflow();
+
+            bbox = _unpad(wrapper.bbox(), that._gaugeAreaMargin);
+            that.reflow(bbox);
         },
 
         _createGaugeArea: function() {
@@ -860,12 +862,9 @@ var __meta__ = {
             }
         },
 
-        reflow: function() {
+        reflow: function(bbox) {
             var that = this;
             var pointers = that.pointers;
-            var size = that._getSize();
-            var wrapper = new Rect([0, 0], [size.width, size.height]);
-            var bbox = _unpad(wrapper.bbox(), that._gaugeAreaMargin);
             var scaleElements = that.scale.reflow(bbox);
             that._initialPlotArea = that.scale.bbox;
 
@@ -996,7 +995,6 @@ var __meta__ = {
             var that = this;
             var options = that.options;
             var pointers = options.pointer;
-            debugger;
             var scale = that.scale = new RadialScale(options.scale);
             var current;
 
@@ -1035,13 +1033,10 @@ var __meta__ = {
             }
         },
 
-        reflow: function() {
+        reflow: function(bbox) {
             var that = this;
             var surface = that.surface;
             var pointers = that.pointers;
-            var size = that._getSize();
-            var wrapper = new Rect([0, 0], [size.width, size.height]);
-            var bbox = _unpad(wrapper.bbox(), that._gaugeAreaMargin);
             var bboxX = bbox.origin.x;
             var bboxY = bbox.origin.y;
 

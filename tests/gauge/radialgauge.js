@@ -112,7 +112,21 @@
 
             arrayClose([ box.origin.x, box.origin.y, box.origin.x + box.width(), box.origin.y + box.height() ], [ 1, 29, 200, 172 ], TOLERANCE);
         });
-    }());    
+
+        test("gauge area dimensions are applied if set", function() {
+            createGauge({
+                scale: { startAngle: 0, endAngle: 180 },
+                gaugeArea: { width: 200, height: 300 }
+            });
+
+            radialGauge.reflow = function(box) {
+                arrayClose([ box.origin.x, box.origin.y, box.origin.x + box.width(), box.origin.y + box.height() ], [ 0, 0, 200, 300 ], TOLERANCE);
+            }
+
+            radialGauge.redraw();
+
+        });
+    }());
 
     (function() {
         var arc;
