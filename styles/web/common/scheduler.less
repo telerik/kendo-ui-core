@@ -46,6 +46,18 @@
     float:left;
 }
 
+.k-scheduler-toolbar > .k-scheduler-export
+{
+    float: left;
+    margin-bottom: .5em;
+}
+
+.k-scheduler-export + .k-scheduler-navigation
+{
+    float: left;
+    clear: left;
+}
+
 .k-scheduler-toolbar > ul > li,
 .k-scheduler-footer > ul > li
 {
@@ -54,7 +66,8 @@
     border-width:1px 1px 1px 0;
 }
 
-.k-scheduler .k-scheduler-toolbar .k-nav-current
+.k-scheduler .k-scheduler-toolbar .k-nav-current,
+.k-scheduler .k-scheduler-toolbar .k-scheduler-export > li
 {
     border-width:0;
 }
