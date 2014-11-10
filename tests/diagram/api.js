@@ -144,7 +144,13 @@
     });
 
     test("Exports root visual to exclude adorners", function() {
-        equal(diagram.exportVisual(), diagram.canvas.drawingElement.children[0]);
+        equal(diagram.exportVisual().children[0], diagram.canvas.drawingElement.children[0]);
+    });
+
+    test("Exports visual with 1:1 scale", function() {
+        diagram.zoom(0.2);
+        var visual = diagram.exportVisual();
+        deepEqual(visual.bbox().size.toArray(), [300, 300]);
     });
 
     test("Exports DOM visual with applied scrolling", function() {

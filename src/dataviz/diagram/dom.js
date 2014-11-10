@@ -3509,7 +3509,15 @@
             },
 
             exportVisual: function() {
-                return this.canvas.drawingElement.children[0];
+                var zoom = kendo.geometry.transform().scale(1 / this._zoom);
+                var wrap = new kendo.drawing.Group({
+                    transform: zoom
+                });
+
+                var root = this.canvas.drawingElement.children[0];
+                wrap.children.push(root);
+
+                return wrap;
             }
         });
         dataviz.ExportMixin.extend(Diagram.fn, true);
