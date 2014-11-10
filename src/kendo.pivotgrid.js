@@ -59,6 +59,18 @@ var __meta__ = {
                             '</tr>' +
                         '</table>';
 
+    function normalizeMeasures(measure) {
+        var descriptor = typeof measure === "string" ? [{ name: measure }] : measure;
+        var descriptors = toString.call(descriptor) === "[object Array]" ? descriptor : (descriptor !== undefined ? [descriptor] : []);
+
+        return map(descriptors, function(d) {
+            if (typeof d === "string") {
+                return { name: d };
+            }
+            return { name: d.name, type: d.type };
+        });
+    }
+
     function normalizeMembers(member) {
         var descriptor = typeof member === "string" ? [{ name: [member], expand: false }] : member;
         var descriptors = toString.call(descriptor) === "[object Array]" ? descriptor : (descriptor !== undefined ? [descriptor] : []);
@@ -295,7 +307,7 @@ var __meta__ = {
         init: function(options) {
             this.options = extend({}, this.options, options);
             this.dimensions = this._normalizeDescriptors("field", this.options.dimensions);
-            this.measures = this._normalizeDescriptors("name", this.options.measures);
+            this.measures = this._normalizeDescriptors("name", this.options.measures); //TODO: normalize measures like in XMLA (normalizeMeasures)
         },
 
         _normalizeDescriptors: function(keyField, descriptors) {
@@ -424,7 +436,7 @@ var __meta__ = {
             if (measures && measures.length) {
                 var descriptors = (this.measures || {});
                 for (var idx = 0; idx < measures.length; idx++) {
-                    var measure = descriptors[measures[idx]];
+                    var measure = descriptors[measures[idx]]; //TODO: update measure usage here to measures[idx].name
                     if (measure.format) {
                         formats[measures[idx]] = measure.format;
                     }
@@ -552,7 +564,7 @@ var __meta__ = {
             if (measureDescriptors.length) {
                 for (idx = 0, length = measureDescriptors.length; idx < length; idx++) {
                     descriptor = measureDescriptors[idx];
-                    measure = measures[descriptor];
+                    measure = measures[descriptor]; //TODO: here measure should have name too
 
                     if (measure) {
                         aggregators.push({
@@ -600,7 +612,7 @@ var __meta__ = {
             data = data || [];
             options = options || {};
 
-            var measures = options.measures || [];
+            var measures = options.measures || []; //TODO: normalize measures here!
 
             var measuresRowAxis = options.measuresAxis === "rows";
 
@@ -618,7 +630,7 @@ var __meta__ = {
             }
 
             if (!columnDescriptors.length && measures.length) {
-                columnDescriptors = normalizeMembers(options.measures);
+                columnDescriptors = normalizeMembers(options.measures); //TODO normalize measures here
             }
 
             var aggregatedData = {};
@@ -806,7 +818,7 @@ var __meta__ = {
                 measuresAxis = this.options.measures.axis || "columns";
             }
 
-            this._measures = measures || [];
+            this._measures = normalizeMeasures(measures || []);
             this._measuresAxis = measuresAxis;
 
             this._axes = {};
@@ -884,7 +896,7 @@ var __meta__ = {
             this.query({
                 columns: this.columnsAxisDescriptors(),
                 rows: this.rowsAxisDescriptors(),
-                measures: val
+                measures: normalizeMeasures(val)
             });
         },
 
@@ -987,7 +999,7 @@ var __meta__ = {
             options = DataSource.fn._mergeState.call(this, options);
 
             if (options !== undefined) {
-                this._measures = asArray(options.measures);
+                this._measures = normalizeMeasures(options.measures);
 
                 if (options.columns) {
                     options.columns = normalizeMembers(options.columns);
@@ -1177,7 +1189,7 @@ var __meta__ = {
 
             if (measure) {
                 root.members.push({
-                    name: measure,
+                    name: measure.name,
                     children: []
                 });
             }
@@ -1397,7 +1409,7 @@ var __meta__ = {
                         measureIdx = 0;
                     }
 
-                    if (tuple.members[memberIdx].name !== measures[measureIdx]) {
+                    if (tuple.members[memberIdx].name !== measures[measureIdx].name) {
                         tuples.splice(idx, 0, this._createTuple(tuple, measures[measureIdx]));
                         indexes[idx] = idx;
                     }
@@ -1938,13 +1950,13 @@ var __meta__ = {
         var measure = measures[0];
         var members = tuple.members;
         for (var idx = 0, len = members.length; idx < len; idx ++) {
-            if (members[idx].name == measure) {
+            if (members[idx].name == measure.name) {
                 return idx;
             }
         }
     }
 
-    function normalizeMeasures(tuple, index) {
+    function normalizeTupleMeasures(tuple, index) {
         if (index < 0) {
             return;
         }
@@ -1973,7 +1985,7 @@ var __meta__ = {
             //keep the old data index of the tuple
             tuple.dataIndex = i;
 
-            normalizeMeasures(tuple, measureIndex);
+            normalizeTupleMeasures(tuple, measureIndex);
             var parentMember = findParentMember(tuple, map);
 
             if (parentMember) {
@@ -2139,8 +2151,10 @@ var __meta__ = {
 
     function crossJoinCommand(members, measures) {
         var tmp = members.slice(0);
+        var names;
+
         if (measures.length > 1) {
-            tmp.push("{" + measures.join(",") + "}");
+            tmp.push("{" + measureNames(measures).join(",") + "}");
         }
         return crossJoin(tmp);
     }
@@ -2152,6 +2166,20 @@ var __meta__ = {
             if (members[idx].expand) {
                 result.push(members[idx]);
             }
+        }
+
+        return result;
+    }
+
+    function measureNames(measures) {
+        var idx = 0;
+        var length = measures.length;
+        var result = [];
+        var measure;
+
+        for (; idx < length; idx++) {
+            measure = measures[idx];
+            result.push(measure.name !== undefined ? measure.name :  measure);
         }
 
         return result;
@@ -2438,7 +2466,7 @@ var __meta__ = {
             }
 
             if (measures.length == 1 && columns.length) {
-                command += " WHERE (" + measures.join(",") + ")";
+                command += " WHERE (" + measureNames(measures).join(",") + ")";
             }
 
             command += '</Statement></Command><Properties><PropertyList><Catalog>' + options.connection.catalog + '</Catalog><Format>Multidimensional</Format></PropertyList></Properties></Execute></Body></Envelope>';

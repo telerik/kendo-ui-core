@@ -268,9 +268,9 @@
         var measures = dataSource.measures();
 
         equal(measures.length, 3);
-        equal(measures[0], "foo");
-        equal(measures[1], "bar");
-        equal(measures[2], "baz");
+        equal(measures[0].name, "foo");
+        equal(measures[1].name, "bar");
+        equal(measures[2].name, "baz");
     });
 
     test("add skips duplicate measures", function() {
@@ -288,8 +288,8 @@
         var measures = dataSource.measures();
 
         equal(measures.length, 2);
-        equal(measures[0], "foo");
-        equal(measures[1], "bar");
+        equal(measures[0].name, "foo");
+        equal(measures[1].name, "bar");
     });
 
     test("remove updates the datasource", function() {
@@ -324,7 +324,7 @@
         var measures = dataSource.measures();
 
         equal(measures.length, 1);
-        equal(measures[0], "foo");
+        equal(measures[0].name, "foo");
     });
 
     test("remove does not change datasource for non existing values", 0, function() {

@@ -3311,7 +3311,7 @@
             var tuple = tuples[index];
             var templateTuple = data.columnTuple;
 
-            equal(data.measure, measures[index]);
+            equal(data.measure.name, measures[index]);
 
             equal(tuple.members[0].name, templateTuple.members[0].name);
             equal(tuple.members[1].name, templateTuple.members[1].name);
@@ -3346,7 +3346,7 @@
             var tuple = tuples[index];
             var templateTuple = data.rowTuple;
 
-            equal(data.measure, measures[index]);
+            equal(data.measure.name, measures[index]);
 
             equal(tuple.members[0].name, templateTuple.members[0].name);
             equal(tuple.members[1].name, templateTuple.members[1].name);
@@ -3377,9 +3377,7 @@
 
         window.checkTuple = function (data) {
             var measure = measures[indexes.shift()];
-            var dataMeasure = data.measure;
-
-            equal(measure, data.measure);
+            equal(measure, data.measure.name);
         };
 
         var pivotgrid = createPivot({
@@ -3407,9 +3405,8 @@
 
         window.checkTuple = function (data) {
             var measure = measures[indexes.shift()];
-            var dataMeasure = data.measure;
 
-            equal(measure, data.measure);
+            equal(measure, data.measure.name);
         };
 
         var pivotgrid = createPivot({
