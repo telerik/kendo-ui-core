@@ -724,7 +724,7 @@ div.submenu-box ol {
     -webkit-columns: 3;
     -moz-columns: 3;
     columns: 3;
-    width: 480px;
+    width: 540px;
 }
 
 .tc-column h4+ul
@@ -788,7 +788,6 @@ div.submenu-box ol {
     display: inline-block;
     width: 10px;
     height: 10px;
-    box-shadow: 0 0 0 1px #c5c8ca;
 }
 
 #qrWrap
@@ -2937,7 +2936,9 @@ html.k-material #example {
 }
 
 html.k-material .demo-section.k-header {
-     background-color: #fdfdfd;
+     background-color: #fefefe;
+     border-color: #fefefe;
+     box-shadow: 0 1px 2px 1px rgba(0,0,0,.10), 0 2px 5px rgba(0,0,0,.10);
      color: #444;
      font-weight: normal;
 }
@@ -2977,16 +2978,20 @@ html.k-material .demo-section.k-header {
 .box .k-button {
     cursor: pointer;
     border-radius: 2px;
-    padding: 2px 6px;
     font-size: inherit;
     color: #333;
-    background: #e1e5ea;
-    border-color: #c2ccd4;
+    background: #e2e4e7;
+    border-color: #e2e4e7;
+    min-width: 90px;
 }
 
-.box .k-button:hover {
-    background: #c2ccd4;
+.box .k-button:hover,
+.box .k-button:focus:active:not(.k-state-disabled):not([disabled]),
+.box .k-button:focus:not(.k-state-disabled):not([disabled]) {
+    background: #cad0d6;
+    border-color: #cad0d6;
     color: #000;
+    box-shadow: none;
 }
 
 .box .k-primary {
@@ -2995,26 +3000,32 @@ html.k-material .demo-section.k-header {
     border-color: #015991;
 }
 
-.box .k-primary:hover {
+.box .k-primary:hover,
+.box .k-primary:focus:active:not(.k-state-disabled):not([disabled]),
+.box .k-primary:focus:not(.k-state-disabled):not([disabled]) {
     background: #013A5E;
+    border-color: #013A5E;
     color: #fff;
 }
 
 .box .k-textbox,
 .box textarea {
     background: #fff;
-    border-color: #ccc;
+    border-color: #e2e4e7;
     color: #555;
-    border-radius: 0;
+    border-radius: 2px;
 }
 
 .box .k-textbox:hover,
 .box .k-textbox:active,
+.box .k-textbox:focus,
 .box textarea:hover,
-.box textarea:active {
-    border-color: #999;
+.box textarea:active,
+.box textarea:focus {
+    border-color: #cad0d6;
     background: #fff;
     color: #333;
+    box-shadow: none;
 }
 
 .demo-hint {

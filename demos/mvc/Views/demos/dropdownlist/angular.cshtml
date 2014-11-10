@@ -68,7 +68,7 @@
   <div class="box-col">
     <h4>Custom item template</h4>
     <select id="customers"
-            kendo-drop-down-list style="width: 400px"
+            kendo-drop-down-list style="width: 450px"
             k-options="customOptions"></select>
   </div>
 
@@ -86,7 +86,7 @@
       border-style: solid;
       border-width: 0 0 1px 1px;
       padding: .3em .6em;
-      width: 79%;
+      width: 362px;
     }
 
     .dropdown-header > span:first-child {
@@ -136,6 +136,34 @@
     #customers-list p {
       margin: 0;
       padding: 0;
+    }
+    
+    html.k-material .selected-value {
+      margin: 6px 0 0 10px;
+    }
+    
+    html.k-material .dropdown-header > span {
+      border: 0;
+    }
+    html.k-material .dropdown-header > span {
+      width: 354px;
+    }
+    html.k-material .dropdown-header > span:first-child {
+      width: 90px;
+    }
+    html.k-material #customers-list .k-item > span{
+      min-height: 80px;
+      border-width: 0 0 1px 0;
+    }
+    html.k-material #customers-list img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+    }
+    html.k-material #customers-list h3 {
+      font-size: 1.2em;
+      line-height: 1em;
+      margin-top: .5em;
     }
   </style>
 </div>
