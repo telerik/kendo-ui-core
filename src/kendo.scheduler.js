@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.dropdownlist", "./kendo.editable", "./kendo.multiselect", "./kendo.window", "./kendo.datetimepicker", "./kendo.scheduler.recurrence", "./kendo.scheduler.view", "./kendo.scheduler.dayview", "./kendo.scheduler.agendaview", "./kendo.scheduler.monthview", "./kendo.scheduler.timelineview", "./kendo.mobile.actionsheet", "./kendo.mobile.pane" ], f);
+    define([ "./kendo.dropdownlist", "./kendo.editable", "./kendo.multiselect", "./kendo.window", "./kendo.datetimepicker", "./kendo.scheduler.recurrence", "./kendo.scheduler.view", "./kendo.scheduler.dayview", "./kendo.scheduler.agendaview", "./kendo.scheduler.monthview", "./kendo.scheduler.timelineview", "./kendo.mobile.actionsheet", "./kendo.mobile.pane", "./kendo.pdf" ], f);
 })(function(){
 
 var __meta__ = {
@@ -33,6 +33,11 @@ var __meta__ = {
         name: "Scheduler adaptive rendering",
         description: "Support for adaptive rendering",
         depends: [ "mobile.actionsheet", "mobile.pane" ]
+    }, {
+        id: "scheduler-pdf-export",
+        name: "PDF export",
+        description: "Export the scheduler events as PDF",
+        depends: [ "pdf" ]
     } ]
 };
 
@@ -73,6 +78,11 @@ var __meta__ = {
         EDITRECURRING = "Do you want to edit only this event occurrence or the whole series?",
         COMMANDBUTTONTMPL = '<a class="k-button #=className#" #=attr# href="\\#">#=text#</a>',
         TOOLBARTEMPLATE = kendo.template('<div class="k-floatwrap k-header k-scheduler-toolbar">' +
+           '# if (pdf) { #' +
+           '<ul class="k-scheduler-tools">' +
+               '<li><a role="button" href="\\#" class="k-button k-pdf"><span class="k-icon k-i-pdf"></span>${messages.pdf}</a></li>' +
+           '</ul>' +
+           '# } #' +
             '<ul class="k-reset k-header k-scheduler-navigation">' +
                '<li class="k-state-default k-nav-today"><a role="button" href="\\#" class="k-link">${messages.today}</a></li>' +
                '<li class="k-state-default k-nav-prev"><a role="button" href="\\#" class="k-link"><span class="k-icon k-i-arrow-w"></span></a></li>' +
@@ -1909,8 +1919,10 @@ var __meta__ = {
             allDaySlot: true,
             min: new Date(1900, 0, 1),
             max: new Date(2099, 11, 31),
+            toolbar: null,
             messages: {
                 today: "Today",
+                pdf: "Export to PDF",
                 save: "Save",
                 cancel: "Cancel",
                 destroy: "Delete",
@@ -3184,9 +3196,18 @@ var __meta__ = {
         _toolbar: function() {
             var that = this;
             var options = that.options;
+            var commands = [];
+
+            if (options.toolbar) {
+                commands = $.isArray(options.toolbar) ? options.toolbar : [options.toolbar];
+            }
+
             var template = this._isMobilePhoneView() ? MOBILETOOLBARTEMPLATE : TOOLBARTEMPLATE;
             var toolbar = $(template({
                     messages: options.messages,
+                    pdf: $.grep(commands, function(item) {
+                            return item == "pdf" || item.name == "pdf";
+                        }).length > 0,
                     ns: kendo.ns,
                     views: that.views
                 }));
@@ -3195,6 +3216,11 @@ var __meta__ = {
             that.toolbar = toolbar;
 
             kendo.bind(that.toolbar, that._model);
+
+            toolbar.on(CLICK + NS, ".k-pdf", function(e) {
+                e.preventDefault();
+                that.saveAsPDF();
+            });
 
             toolbar.on(CLICK + NS, ".k-scheduler-navigation li", function(e) {
                 var li = $(this);
@@ -3366,6 +3392,10 @@ var __meta__ = {
     };
 
     ui.plugin(Scheduler);
+
+    if (kendo.PDFMixin) {
+        kendo.PDFMixin.extend(Scheduler.prototype);
+    }
 
     var TimezoneEditor = Widget.extend({
         init: function(element, options) {

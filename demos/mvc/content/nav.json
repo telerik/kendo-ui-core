@@ -3446,6 +3446,20 @@
         }
       },
       {
+          "text": "Export to PDF",
+          "url": "scheduler/pdf-export",
+          "new": true,
+          "title": {
+              "kendo-ui": "Exporting to PDF"
+          },
+          "meta": {
+              "kendo-ui": "Export Kendo UI scheduler as PDF file"
+          },
+          "packages": [
+              "!offline"
+          ]
+      },
+      {
         "text": "Binding to Telerik Backend Services",
         "url": "scheduler/backend-services",
         "disableInMobile": true,
@@ -6010,7 +6024,7 @@
       },
       {
         "text": "Checkboxes",
-        "new": true, 
+        "new": true,
         "url": "styling/checkboxes",
         "title": {
             "kendo-ui": "jQuery icons styling example | Kendo UI Web demos"
@@ -6611,7 +6625,7 @@
         "title": {
             "kendo-ui": "Binding to remote data example | Kendo UI Box Plot Charts",
 			"aspnet-mvc": "Binding to remote data example | ASP.NET MVC Box Plot Charts"
-        },        
+        },
 		"meta": {
             "kendo-ui": "This demo shows how Kendo UI HTML5 Box Plot Charts can be bound to remote data to produce high-performance report in your business app.",
 			"aspnet-mvc": "This demo shows how ASP.NET MVC Box Plot Charts can be bound to remote data to produce high-performance report in your business app."
