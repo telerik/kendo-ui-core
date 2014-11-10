@@ -4,6 +4,13 @@ var dom;
 
 var saveAsPDF = kendo.ui.Grid.fn.saveAsPDF;
 
+saveAsPDFTests("Grid", function() {
+    var dom = $("<div>").appendTo(QUnit.fixture);
+    dom.kendoGrid({});
+
+    return dom.getKendoGrid();
+});
+
 module("grid pdf export",  {
     setup: function() {
         dom = $("<div>");
