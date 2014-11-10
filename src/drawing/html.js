@@ -932,13 +932,21 @@
     function maybeRenderWidget(element, group) {
         if (element.getAttribute(kendo.attr("role"))) {
             var widget = kendo.widgetInstance($(element));
-            if (widget && widget.exportVisual) {
-                var visual = widget.exportVisual();
+            if (widget && (widget.exportDOMVisual || widget.exportVisual)) {
+                var visual;
+                if (widget.exportDOMVisual) {
+                    visual = widget.exportDOMVisual();
+                } else {
+                    visual = widget.exportVisual();
+                }
+
+                var wrap = new drawing.Group();
+                wrap.children.push(visual);
 
                 var bbox = element.getBoundingClientRect();
-                visual.transform(geo.transform().translate(bbox.left, bbox.top));
+                wrap.transform(geo.transform().translate(bbox.left, bbox.top));
 
-                group.append(visual);
+                group.append(wrap);
 
                 return true;
             }
