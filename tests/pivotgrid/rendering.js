@@ -3487,6 +3487,218 @@
         ok(cells.eq(2).hasClass("k-alt"));
     });
 
+    test("PivotGrid pass column measure to dataCellTemplate", function() {
+        var tuples = [
+            { members: [ { name: "measure 1", children: [] } ] },
+            { members: [ { name: "measure 2", children: [] } ] },
+        ]
+
+        var measures = [ "measure 1", "measure 2"];
+
+        var data = [
+            { value: 1 },
+            { value: 2 }
+        ];
+
+        var indexes = [0, 1];
+
+        window.checkTuple = function (data) {
+            var measure = measures[indexes.shift()];
+            equal(measure, data.measure.name);
+        };
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, data, measures),
+            dataCellTemplate: "#checkTuple(data)#"
+        });
+
+        window.checkTuple = null;
+    });
+
+    test("PivotGrid pass column measure to dataCellTemplate", function() {
+        var tuples = [
+            { members: [ { name: "measure 1", children: [] } ] },
+            { members: [ { name: "measure 2", children: [] } ] },
+        ]
+
+        var measures = [ "measure 1", "measure 2"];
+
+        var data = [
+            { value: 1 },
+            { value: 2 }
+        ];
+
+        var indexes = [0, 1];
+
+        window.checkTuple = function (data) {
+            var measure = measures[indexes.shift()];
+            equal(measure, data.measure.name);
+        };
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, data, measures),
+            dataCellTemplate: "#checkTuple(data)#"
+        });
+
+        window.checkTuple = null;
+    });
+
+    test("PivotGrid renders kpi open-status icon for Status measure", 2, function() {
+        var tuples = [
+            { members: [ { name: "measure 1", children: [] } ] }
+        ]
+
+        var measures = [{
+            name: "measure 1",
+            type: "status"
+        }];
+
+        var data = [
+            { value: 1 }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, data, measures)
+        });
+
+        var rows = pivotgrid.wrapper.find(".k-grid-content").find("tbody").find("tr");
+        var cell = rows.eq(0).find("td").eq(0);
+        var icon = cell.children(":first");
+
+        ok(icon.hasClass("k-i-kpi-open"));
+        equal(icon.text(), "1");
+    });
+
+    test("PivotGrid renders kpi hold-status icon for Status measure", 2, function() {
+        var tuples = [
+            { members: [ { name: "measure 1", children: [] } ] }
+        ]
+
+        var measures = [{
+            name: "measure 1",
+            type: "status"
+        }];
+
+        var data = [
+            { value: 0 }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, data, measures)
+        });
+
+        var rows = pivotgrid.wrapper.find(".k-grid-content").find("tbody").find("tr");
+        var cell = rows.eq(0).find("td").eq(0);
+        var icon = cell.children(":first");
+
+        ok(icon.hasClass("k-i-kpi-hold"));
+        equal(icon.text(), "0");
+    });
+
+    test("PivotGrid renders kpi denied-status icon for Status measure", 2, function() {
+        var tuples = [
+            { members: [ { name: "measure 1", children: [] } ] }
+        ]
+
+        var measures = [{
+            name: "measure 1",
+            type: "status"
+        }];
+
+        var data = [
+            { value: -1 }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, data, measures)
+        });
+
+        var rows = pivotgrid.wrapper.find(".k-grid-content").find("tbody").find("tr");
+        var cell = rows.eq(0).find("td").eq(0);
+        var icon = cell.children(":first");
+
+        ok(icon.hasClass("k-i-kpi-denied"));
+        equal(icon.text(), "-1");
+    });
+
+    test("PivotGrid renders kpi increase-trend icon for Trend measure", 2, function() {
+        var tuples = [
+            { members: [ { name: "measure 1", children: [] } ] }
+        ]
+
+        var measures = [{
+            name: "measure 1",
+            type: "trend"
+        }];
+
+        var data = [
+            { value: 1 }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, data, measures)
+        });
+
+        var rows = pivotgrid.wrapper.find(".k-grid-content").find("tbody").find("tr");
+        var cell = rows.eq(0).find("td").eq(0);
+        var icon = cell.children(":first");
+
+        ok(icon.hasClass("k-i-kpi-increase"));
+        equal(icon.text(), "1");
+    });
+
+    test("PivotGrid renders kpi equal-trend icon for Trend measure", 2, function() {
+        var tuples = [
+            { members: [ { name: "measure 1", children: [] } ] }
+        ]
+
+        var measures = [{
+            name: "measure 1",
+            type: "trend"
+        }];
+
+        var data = [
+            { value: 0 }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, data, measures)
+        });
+
+        var rows = pivotgrid.wrapper.find(".k-grid-content").find("tbody").find("tr");
+        var cell = rows.eq(0).find("td").eq(0);
+        var icon = cell.children(":first");
+
+        ok(icon.hasClass("k-i-kpi-equal"));
+        equal(icon.text(), "0");
+    });
+
+    test("PivotGrid renders kpi decrease-trend icon for Trend measure", 2, function() {
+        var tuples = [
+            { members: [ { name: "measure 1", children: [] } ] }
+        ]
+
+        var measures = [{
+            name: "measure 1",
+            type: "trend"
+        }];
+
+        var data = [
+            { value: -1 }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, data, measures)
+        });
+
+        var rows = pivotgrid.wrapper.find(".k-grid-content").find("tbody").find("tr");
+        var cell = rows.eq(0).find("td").eq(0);
+        var icon = cell.children(":first");
+
+        ok(icon.hasClass("k-i-kpi-decrease"));
+        equal(icon.text(), "-1");
+    });
+
     module("PivotGrid resize on render", {
         setup: function() {
             kendo.ns = "kendo-";
