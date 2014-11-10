@@ -1116,7 +1116,7 @@
               case "linear":
 
                 // figure out the angle.
-                var angle = gradient.angle || Math.PI;
+                var angle = gradient.angle != null ? gradient.angle : Math.PI;
                 switch (gradient.to) {
                   case "top":
                     angle = 0;
