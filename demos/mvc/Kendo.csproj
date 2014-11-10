@@ -1156,6 +1156,7 @@
     <Content Include="Views\demos\diagram\mvvm.cshtml" />
     <Content Include="Views\demos\grid\persist-state.cshtml" />
     <Content Include="Views\demos\scheduler\timeline.cshtml" />
+    <Content Include="Views\demos\gantt\resources.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="content\integration\diagram\js\" />

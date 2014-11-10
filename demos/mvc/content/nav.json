@@ -3721,6 +3721,17 @@
           ]
       },
       {
+        "text": "Resources",
+        "url": "gantt/resources",
+        "new": true,
+        "title": {
+            "kendo-ui": "Resources in Kendo UI Gantt"
+        },
+        "meta": {
+            "kendo-ui": "This demo shows how to assign resources to gantt tasks."
+        }
+      },
+      {
         "text": "Events",
         "url": "gantt/events",
         "title": {
