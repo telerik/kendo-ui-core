@@ -306,7 +306,7 @@
 
             /// cross-reference table
             var xrefOffset = out.offset();
-            out("xref", NL, 0, " ", objects.length, NL);
+            out("xref", NL, 0, " ", objects.length + 1, NL);
             out("0000000000 65535 f ", NL);
             for (i = 0; i < objects.length; ++i) {
                 out(zeropad(objects[i]._offset, 10), " 00000 n ", NL);
@@ -316,7 +316,7 @@
             /// trailer
             out("trailer", NL);
             out(new PDFDictionary({
-                Size: objects.length,
+                Size: objects.length + 1,
                 Root: catalog,
                 Info: new PDFDictionary({
                     Producer     : new PDFString("Kendo UI PDF Generator"),
