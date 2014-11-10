@@ -3488,7 +3488,7 @@
             },
 
             exportVisual: function() {
-                return this.canvas.drawingElement;
+                return this.canvas.drawingElement.children[0];
             }
         });
         dataviz.ExportMixin.extend(Diagram.fn, true);

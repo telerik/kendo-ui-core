@@ -143,5 +143,9 @@
         ok(!diagram.imageDataURL);
     });
 
+    test("Exports root visual to exclude adorners", function() {
+        equal(diagram.exportVisual(), diagram.canvas.drawingElement.children[0]);
+    });
+
     exportTests("Diagram", createDiagram);
 })();
