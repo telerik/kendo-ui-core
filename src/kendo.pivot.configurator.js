@@ -133,6 +133,8 @@ var __meta__ = {
                 transport: {
                     read: function(options) {
                         var promise;
+                        var node;
+
                         if ($.isEmptyObject(options.data)) {
                             promise = that.dataSource.schemaDimensions();
 
@@ -143,13 +145,13 @@ var __meta__ = {
                                     .fail(options.error);
                         } else {
                             //Hack to get the actual node as the HierarchicalDataSource does not support passing it
-                            var node = that.treeView.dataSource.get(options.data.uniqueName);
+                            node = that.treeView.dataSource.get(options.data.uniqueName);
 
                             //KPI
                             if (node.uniqueName === "[KPIs]") {
                                 promise = that.dataSource.schemaKPIs();
                                 promise.done(function (data) {
-                                            for (var idx = 0; idx < data.length; idx++) {
+                                            for (var idx = 0, length = data.length; idx < length; idx++) {
                                                 data[idx].uniqueName = data[idx].name;
                                                 data[idx].type = "kpi";
                                             }
@@ -226,8 +228,16 @@ var __meta__ = {
 
                                 name = [];
                                 for (var idx = 0; idx < measures.length; idx++) {
-                                    name.push(measures[idx].uniqueName);
+                                    name.push({
+                                        name: measures[idx].uniqueName,
+                                        type: measures[idx].type
+                                    });
                                 }
+                            } else if (node.type) {
+                                name = [{
+                                    name: node.uniqueName,
+                                    type: node.type
+                                }];
                             }
 
                             setting.add(name);
@@ -348,23 +358,24 @@ var __meta__ = {
         }
     });
 
-    function kpiMeasure(name, measure) {
+    function kpiMeasure(name, measure, type) {
         return {
             hierarchyUniqueName: name,
             uniqueName: measure,
             caption: measure,
             measure: measure,
-            name: measure
+            name: measure,
+            type: type
         };
     }
 
     function buildKPImeasures(node) {
         var name = node.name;
         return [
-            kpiMeasure(name, node.value),
-            kpiMeasure(name, node.goal),
-            kpiMeasure(name, node.status),
-            kpiMeasure(name, node.trend)
+            kpiMeasure(name, node.value, "value"),
+            kpiMeasure(name, node.goal, "goal"),
+            kpiMeasure(name, node.status, "status"),
+            kpiMeasure(name, node.trend, "trend")
         ];
     }
 

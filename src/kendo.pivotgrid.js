@@ -49,13 +49,13 @@ var __meta__ = {
         HEADER_TEMPLATE = "#: data.member.caption || data.member.name #",
         DATACELL_TEMPLATE = '# var measure = data.measure; #' +
                             '# var dataItem = data.dataItem; #' +
-                            '# if (dataItem && measure && measure.type === "status") { #' +
+                            '# if (dataItem && dataItem.value !== "" && measure && measure.type === "status") { #' +
                                 '<span class="k-icon k-i-kpi-#=dataItem.value > 0 ? \"open\" : dataItem.value < 0 ? \"denied\" : \"hold\"#">#:dataItem.value#</span>' +
-                            '# } else if (dataItem && measure && measure.type === "trend") { #' +
+                            '# } else if (dataItem && dataItem.value !== "" && measure && measure.type === "trend") { #' +
                                 '<span class="k-icon k-i-kpi-#=dataItem.value > 0 ? \"increase\" : dataItem.value < 0 ? \"decrease\" : \"equal\"#">#:dataItem.value#</span>' +
                             '# } else { #' +
                             '#: dataItem ? (dataItem.fmtValue || dataItem.value) : "" #' +
-                            '# } #';
+                            '# } #',
         LAYOUT_TABLE = '<table class="k-pivot-layout">' +
                             '<tr>' +
                                 '<td>' +
@@ -1101,6 +1101,7 @@ var __meta__ = {
                 data: data
             });
 
+            debugger;
             if (this._lastExpanded == "rows") {
                 tuples = axes.columns.tuples;
                 measures = this._columnMeasures();

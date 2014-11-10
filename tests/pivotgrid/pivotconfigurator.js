@@ -80,6 +80,34 @@
         ok(!model.hasChildren);
     });
 
+    test("treeview transport adds KPI item after Measures", function() {
+        var configurator = createConfigurator({
+            dataSource: {
+                transport: {
+                    discover: function(options) {
+                        options.success([]);
+                    }
+                },
+                schema: {
+                    dimensions: function() {
+                        return [{ uniqueName: "foo", type: 2 }]; //measure
+                    }
+                }
+            }
+        });
+
+        var dataSource = configurator.treeView.dataSource;
+
+        dataSource.read();
+
+        var kpi = dataSource.at(1);
+
+        equal(kpi.caption, "KPIs");
+        equal(kpi.defaultHierarchy, "[KPIs]");
+        equal(kpi.name, "KPIs");
+        equal(kpi.uniqueName, "[KPIs]");
+    });
+
     test("treeview transport calls pivotDataSource for list of dimentions", function() {
         var configurator = createConfigurator({
             dataSource: {
@@ -123,6 +151,96 @@
         dataSource.at(0).load();
 
         equal(method.calls("schemaMeasures"), 1);
+    });
+
+    test("treeview transport calls pivotDataSource for list of KPIs", function() {
+        var configurator = createConfigurator({
+            dataSource: {
+                transport: {
+                    discover: function(options) {
+                        options.success([]);
+                    }
+                },
+                schema: {
+                    dimensions: function() {
+                        return [{ uniqueName: "foo", type: 2 }]; //measure
+                    },
+                    kpis: function() {
+                        return [];
+                    }
+                }
+            }
+        });
+
+        var method = stub(configurator.dataSource, { schemaKPIs: configurator.dataSource.schemaKPIs });
+
+        var dataSource = configurator.treeView.dataSource;
+
+        dataSource.read();
+        dataSource.at(1).load(); //KPI load
+
+        equal(method.calls("schemaKPIs"), 1);
+    });
+
+    test("treeview transport creates KPI items per KPI node data", function() {
+        var configurator = createConfigurator({
+            dataSource: {
+                transport: {
+                    discover: function(options) {
+                        options.success([]);
+                    }
+                },
+                schema: {
+                    dimensions: function() {
+                        return [{ uniqueName: "foo", type: 2 }]; //measure
+                    },
+                    kpis: function() {
+                        return [{
+                            goal: "goal",
+                            status: "status",
+                            trend: "trend",
+                            value: "value"
+                        }];
+                    }
+                }
+            }
+        });
+
+        var method = stub(configurator.dataSource, { schemaKPIs: configurator.dataSource.schemaKPIs });
+
+        var dataSource = configurator.treeView.dataSource;
+
+        dataSource.read();
+        dataSource.at(1).load(); //load kpis
+        dataSource.at(1).items[0].load(); //show kpi measures
+
+        var measures = dataSource.at(1).items[0].items;
+
+        equal(measures.length, 4);
+
+        equal(measures[0].caption, "value");
+        equal(measures[0].id, "value");
+        equal(measures[0].measure, "value");
+        equal(measures[0].name, "value");
+        equal(measures[0].type, "value");
+
+        equal(measures[1].caption, "goal");
+        equal(measures[1].id, "goal");
+        equal(measures[1].measure, "goal");
+        equal(measures[1].name, "goal");
+        equal(measures[1].type, "goal");
+
+        equal(measures[2].caption, "status");
+        equal(measures[2].id, "status");
+        equal(measures[2].measure, "status");
+        equal(measures[2].name, "status");
+        equal(measures[2].type, "status");
+
+        equal(measures[3].caption, "trend");
+        equal(measures[3].id, "trend");
+        equal(measures[3].measure, "trend");
+        equal(measures[3].name, "trend");
+        equal(measures[3].type, "trend");
     });
 
     test("treeview transport calls pivotDataSource for list of hierarchies", function() {

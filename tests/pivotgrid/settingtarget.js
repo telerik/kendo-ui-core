@@ -692,6 +692,15 @@
         ok(!setting.validate({ defaultHierarchy: "bar" }));
     });
 
+    test("validate returns true for measures setting when node is kpi", function() {
+        var setting = new PivotSettingTarget($(div), {
+            setting: "measures"
+        });
+
+        ok(setting.validate({ type: "kpi" }));
+        ok(setting.validate({ measure: true }));
+    });
+
     test("field menu is initialized if filterable", function() {
         var setting  = new PivotSettingTarget($(div), {
             filterable: true

@@ -3699,6 +3699,31 @@
         equal(icon.text(), "-1");
     });
 
+    test("PivotGrid does not render status icon if no value", function() {
+        var tuples = [
+            { members: [ { name: "measure 1", children: [] } ] }
+        ]
+
+        var measures = [{
+            name: "measure 1",
+            type: "trend"
+        }];
+
+        var data = [
+            { value: "" }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, data, measures)
+        });
+
+        var rows = pivotgrid.wrapper.find(".k-grid-content").find("tbody").find("tr");
+        var cell = rows.eq(0).find("td").eq(0);
+        var icon = cell.children(":first");
+
+        ok(!icon[0]);
+    });
+
     module("PivotGrid resize on render", {
         setup: function() {
             kendo.ns = "kendo-";
