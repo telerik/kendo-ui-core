@@ -874,7 +874,7 @@ var __meta__ = {
     }
 
     function leafDataCells(container) {
-        var rows = container.find("tr:not(.k-filter-row)");
+        var rows = container.find(">tr:not(.k-filter-row)");
 
         var cells = $();
         if (rows.length > 1) {
@@ -5736,7 +5736,7 @@ var __meta__ = {
                 length,
                 footer = that.footer || that.wrapper.find(".k-grid-footer"),
                 columns = that.columns,
-                visibleLocked = that.lockedHeader ? leafDataCells(that.lockedHeader).filter(":visible").length : 0,
+                visibleLocked = that.lockedHeader ? leafDataCells(that.lockedHeader.find(">table>thead")).filter(":visible").length : 0,
                 columnIndex;
 
             if (typeof column == "number") {
@@ -5786,7 +5786,7 @@ var __meta__ = {
 
             headerCellIndex = columnIndex;
             if (that.lockedHeader && visibleLocked > columnIndex) {
-                container = that.lockedHeader;
+                container = that.lockedHeader.find(">table>thead");
             } else {
                 headerCellIndex -= visibleLocked;
             }
@@ -5893,7 +5893,7 @@ var __meta__ = {
                 cols,
                 columns = that.columns,
                 footer = that.footer || that.wrapper.find(".k-grid-footer"),
-                lockedColumnsCount = that.lockedHeader ? leafDataCells(that.lockedHeader).length : 0,
+                lockedColumnsCount = that.lockedHeader ? leafDataCells(that.lockedHeader.find(">table>thead")).length : 0,
                 columnIndex;
 
             if (typeof column == "number") {
@@ -5942,7 +5942,7 @@ var __meta__ = {
 
             headerCellIndex = columnIndex;
             if (that.lockedHeader && lockedColumnsCount > columnIndex) {
-                container = that.lockedHeader;
+                container = that.lockedHeader.find(">table>thead");
             } else {
                 headerCellIndex -= lockedColumnsCount;
             }
@@ -6415,7 +6415,7 @@ var __meta__ = {
                currentTable = verticalTable(currentTable, dataTable, headerTable, up);
                focusTable(currentTable);
                if (up && !current.is(".k-header")) {
-                   return leafDataCells(currentTable).eq(current.index());
+                   return leafDataCells(currentTable.find("thead:first")).eq(current.index());
                }
                row = currentTable.find((up ? ">thead>" : ">tbody>") + NAVROW).first();
            }
