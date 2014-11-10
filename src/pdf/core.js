@@ -280,7 +280,6 @@
 
             // canvas-like coord. system.  (0,0) is upper-left.
             // text must be vertically mirorred before drawing.
-            // XXX: configurable page size.
             page.transform(1, 0, 0, -1, 0, paperSize[1]);
 
             if (margin) {
@@ -599,12 +598,16 @@
         if (a.length > 0) {
             out.withIndent(function(){
                 for (var i = 0; i < a.length; ++i) {
-                    out.indent(a[i]);
+                    if (i > 0 && i % 8 === 0) {
+                        out.indent(a[i]);
+                    } else {
+                        out(" ", a[i]);
+                    }
                 }
             });
-            out.indent();
+            //out.indent();
         }
-        out("]");
+        out(" ]");
     }
 
     function renderDate(date, out) {
@@ -1100,10 +1103,9 @@
         }
     }
 
-    function makeGradient(gradient, box, matrix) {
+    function makeGradient(gradient, matrix) {
         var isRadial = gradient.type == "radial";
         var funcs = makeGradientFunctions(gradient.stops);
-        var bbox = [ box.left, box.bottom, box.right, box.top ];
         var coords = isRadial ? [
             gradient.start.x , gradient.start.y , gradient.start.r,
             gradient.end.x   , gradient.end.y   , gradient.end.r
@@ -1111,22 +1113,15 @@
             gradient.start.x , gradient.start.y,
             gradient.end.x   , gradient.end.y
         ];
-        var pattern = {
-            Type: _("Pattern"),
-            PatternType: 2,
-            Shading: {
-                ShadingType: isRadial ? 3 : 2,
-                ColorSpace: _("DeviceRGB"),
-                BBox: bbox,
-                Coords: coords,
-                Domain: [ 0, 1 ],
-                Function: funcs.colors
-                //Extend: [ true, true ]
-            }
+        var shading = {
+            Type: _("Shading"),
+            ShadingType: isRadial ? 3 : 2,
+            ColorSpace: _("DeviceRGB"),
+            Coords: coords,
+            Domain: [ 0, 1 ],
+            Function: funcs.colors,
+            Extend: [ true, true ]
         };
-        if (matrix) {
-            pattern.Matrix = matrix.slice();
-        }
         var opacity = funcs.hasAlpha ? {
             Type: _("ExtGState"),
             AIS: false,
@@ -1139,7 +1134,7 @@
                     Type: _("XObject"),
                     Subtype: _("Form"),
                     FormType: 1,
-                    BBox: bbox,
+                    BBox: [ 0, 1, 1, 0 ],
                     Group: {
                         Type: _("Group"),
                         S: _("Transparency"),
@@ -1156,8 +1151,8 @@
                                 Coords: coords,
                                 Domain: [ 0, 1 ],
                                 ShadingType: isRadial ? 3 : 2,
-                                Function: funcs.opacities
-                                //Extend: [ true, true ]
+                                Function: funcs.opacities,
+                                Extend: [ true, true ]
                             }
                         }
                     }
@@ -1166,7 +1161,7 @@
         } : null;
         return {
             hasAlpha: funcs.hasAlpha,
-            pattern: new PDFDictionary(pattern),
+            shading: new PDFDictionary(shading),
             opacity: new PDFDictionary(opacity)
         };
     }
@@ -1181,6 +1176,7 @@
         this._gsResources = {};
         this._xResources = {};
         this._patResources = {};
+        this._shResources = {};
         this._opacity = 1;
         this._matrix = [ 1, 0, 0, 1, 0, 0 ];
 
@@ -1202,15 +1198,21 @@
             Font      : new PDFDictionary(this._fontResources),
             ExtGState : new PDFDictionary(this._gsResources),
             XObject   : new PDFDictionary(this._xResources),
-            Pattern   : new PDFDictionary(this._patResources)
+            Pattern   : new PDFDictionary(this._patResources),
+            Shading   : new PDFDictionary(this._shResources)
         });
     }, {
         _out: function() {
             this._content.data.apply(null, arguments);
         },
         transform: function(a, b, c, d, e, f) {
-            this._matrix = mmul(this._matrix, arguments);
-            this._out(a, " ", b, " ", c, " ", d, " ", e, " ", f, " cm", NL);
+            if (!isIdentityMatrix(arguments)) {
+                this._matrix = mmul(this._matrix, arguments);
+                this._out(a, " ", b, " ", c, " ", d, " ", e, " ", f, " cm");
+                // XXX: debug
+                // this._out(" % current matrix: ", this._matrix);
+                this._out(NL);
+            }
         },
         translate: function(dx, dy) {
             this.transform(1, 0, 0, 1, dx, dy);
@@ -1296,35 +1298,22 @@
                 this._out(gs._resourceName, " gs", NL);
             }
         },
-        setFillGradient: function(gradient, box) {
-
-            // var self = this;
-            // function point(p) {
-            //     self.save();
-            //     self.setFillColor(1, 0, 0);
-            //     self.circle(p.x, p.y, 3);
-            //     self.fill();
-            //     self.setFillColor(0, 0, 0);
-            //     self.beginText();
-            //     self.setFont("Times-Roman", 8);
-            //     self.transform(1, 0, 0, -1, p.x, p.y);
-            //     self.showText(p.x + ", " + p.y);
-            //     self.endText();
-            //     self.restore();
-            // }
-            // point(gradient.start);
-            // point(gradient.end);
-
-            var g = makeGradient(gradient, box, this._matrix);
-            var pname, oname;
-            pname = "P" + (++RESOURCE_COUNTER);
-            this._patResources[pname] = this._pdf.attach(g.pattern);
+        gradient: function(gradient, box) {
+            this.save();
+            this.rect(box.left, box.top, box.width, box.height);
+            this.clip();
+            this.transform(box.width, 0, 0, box.height, box.left, box.top);
+            var g = makeGradient(gradient);
+            var sname, oname;
+            sname = "S" + (++RESOURCE_COUNTER);
+            this._shResources[sname] = this._pdf.attach(g.shading);
             if (g.hasAlpha) {
                 oname = "O" + (++RESOURCE_COUNTER);
                 this._gsResources[oname] = this._pdf.attach(g.opacity);
                 this._out("/" + oname + " gs ");
             }
-            this._out("/Pattern cs /" + pname + " scn", NL);
+            this._out("/" + sname + " sh", NL);
+            this.restore();
         },
         setDashPattern: function(dashArray, dashPhase) {
             this._out(dashArray, " ", dashPhase, " d", NL);
@@ -1407,6 +1396,9 @@
         },
         stroke: function() {
             this._out("S", NL);
+        },
+        nop: function() {
+            this._out("n", NL);
         },
         clip: function() {
             this._out("W n", NL);
@@ -1752,6 +1744,10 @@
             c1*a2 + d1*c2,          c1*b2 + d1*d2,
             e1*a2 + f1*c2 + e2,     e1*b2 + f1*d2 + f2
         ];
+    }
+
+    function isIdentityMatrix(m) {
+        return m[0] === 1 && m[1] === 0 && m[2] === 0 && m[3] === 1 && m[4] === 0 && m[5] === 0;
     }
 
 })(this, parseFloat);

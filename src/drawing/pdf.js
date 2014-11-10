@@ -247,35 +247,6 @@
         }
 
         if (fill instanceof drawing.Gradient) {
-            if (!fill.userSpace()) {
-                throw "FIXME";
-            }
-            if (!(fill instanceof drawing.LinearGradient)) {
-                throw "FIXME";
-            }
-            var gradient = {
-                type: "linear",
-                start: fill.start(),
-                end: fill.end(),
-                stops: fill.stops.elements().map(function(stop){
-                    var offset = stop.offset();
-                    if (/%$/.test(offset)) {
-                        offset = parseFloat(offset) / 100;
-                    } else {
-                        offset = parseFloat(offset);
-                    }
-                    var color = parseColor(stop.color());
-                    color.a *= stop.opacity();
-                    return {
-                        offset: offset,
-                        color: color
-                    };
-                })
-            };
-            // XXX: bbox sucks, do something about it.
-            page.setFillGradient(gradient, {
-                left: 0, top: 0, right: 10000, bottom: 10000
-            });
             return;
         }
 
@@ -321,7 +292,43 @@
         if (shouldDraw(element.fill()) && shouldDraw(element.stroke())) {
             page.fillStroke();
         } else if (shouldDraw(element.fill())) {
-            page.fill();
+            var fill = element.fill();
+            if (element.fill() instanceof drawing.Gradient) {
+                page.nop();
+                if (!(fill instanceof drawing.LinearGradient)) {
+                    throw "FIXME";
+                }
+                var gradient = {
+                    type: "linear",
+                    start: fill.start(),
+                    end: fill.end(),
+                    stops: fill.stops.elements().map(function(stop){
+                        var offset = stop.offset();
+                        if (/%$/.test(offset)) {
+                            offset = parseFloat(offset) / 100;
+                        } else {
+                            offset = parseFloat(offset);
+                        }
+                        var color = parseColor(stop.color());
+                        color.a *= stop.opacity();
+                        return {
+                            offset: offset,
+                            color: color
+                        };
+                    })
+                };
+                var box = element.rawBBox();
+                var tl = box.topLeft(), size = box.getSize();
+                box = {
+                    left   : tl.x,
+                    top    : tl.y,
+                    width  : size.width,
+                    height : size.height
+                };
+                page.gradient(gradient, box);
+            } else {
+                page.fill();
+            }
         } else if (shouldDraw(element.stroke())) {
             page.stroke();
         }
