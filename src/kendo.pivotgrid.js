@@ -47,15 +47,9 @@ var __meta__ = {
         STATE_EXPANDED = "k-i-arrow-s",
         STATE_COLLAPSED = "k-i-arrow-e",
         HEADER_TEMPLATE = "#: data.member.caption || data.member.name #",
-        DATACELL_TEMPLATE = '# var measure = data.measure; #' +
-                            '# var dataItem = data.dataItem; #' +
-                            '# if (dataItem && dataItem.value !== "" && measure && measure.type === "status") { #' +
-                                '<span class="k-icon k-i-kpi-#=dataItem.value > 0 ? \"open\" : dataItem.value < 0 ? \"denied\" : \"hold\"#">#:dataItem.value#</span>' +
-                            '# } else if (dataItem && dataItem.value !== "" && measure && measure.type === "trend") { #' +
-                                '<span class="k-icon k-i-kpi-#=dataItem.value > 0 ? \"increase\" : dataItem.value < 0 ? \"decrease\" : \"equal\"#">#:dataItem.value#</span>' +
-                            '# } else { #' +
-                            '#: dataItem ? (dataItem.fmtValue || dataItem.value) : "" #' +
-                            '# } #',
+        KPISTATUS_TEMPLATE = '<span class="k-icon k-i-kpi-#=data.dataItem.value > 0 ? \"open\" : data.dataItem.value < 0 ? \"denied\" : \"hold\"#">#:data.dataItem.value#</span>',
+        KPITREND_TEMPLATE = '<span class="k-icon k-i-kpi-#=data.dataItem.value > 0 ? \"increase\" : data.dataItem.value < 0 ? \"decrease\" : \"equal\"#">#:data.dataItem.value#</span>',
+        DATACELL_TEMPLATE = '#: data.dataItem ? (data.dataItem.fmtValue || data.dataItem.value) : "" #',
         LAYOUT_TABLE = '<table class="k-pivot-layout">' +
                             '<tr>' +
                                 '<td>' +
@@ -1101,7 +1095,6 @@ var __meta__ = {
                 data: data
             });
 
-            debugger;
             if (this._lastExpanded == "rows") {
                 tuples = axes.columns.tuples;
                 measures = this._columnMeasures();
@@ -3173,6 +3166,8 @@ var __meta__ = {
             columnHeaderTemplate: null,
             rowHeaderTemplate: null,
             dataCellTemplate: null,
+            kpiStatusTemplate: null,
+            kpiTrendTemplate: null,
             messages: {
                 measureFields: "Drop Data Fields Here",
                 columnFields: "Drop Column Fields Here",
@@ -3181,12 +3176,16 @@ var __meta__ = {
         },
 
         _templates: function() {
-            var dataTemplate = this.options.dataCellTemplate;
             var columnTemplate = this.options.columnHeaderTemplate;
             var rowTemplate = this.options.rowHeaderTemplate;
+            var dataTemplate = this.options.dataCellTemplate;
+            var kpiStatusTemplate = this.options.kpiStatusTemplate;
+            var kpiTrendTemplate = this.options.kpiTrendTemplate;
 
             this._columnBuilder.template = kendo.template(columnTemplate || HEADER_TEMPLATE, { useWithBlock: !!columnTemplate });
-            this._contentBuilder.template = kendo.template(dataTemplate || DATACELL_TEMPLATE, { useWithBlock: !!dataTemplate });
+            this._contentBuilder.dataTemplate = kendo.template(dataTemplate || DATACELL_TEMPLATE, { useWithBlock: !!dataTemplate });
+            this._contentBuilder.kpiStatusTemplate = kendo.template(kpiStatusTemplate || KPISTATUS_TEMPLATE, { useWithBlock: !!kpiStatusTemplate });
+            this._contentBuilder.kpiTrendTemplate = kendo.template(kpiTrendTemplate || KPITREND_TEMPLATE, { useWithBlock: !!kpiTrendTemplate });
             this._rowBuilder.template = kendo.template(rowTemplate || HEADER_TEMPLATE, { useWithBlock: !!rowTemplate });
         },
 
@@ -4322,8 +4321,9 @@ var __meta__ = {
             var cells = [];
             var idx = 0;
 
+            var templateInfo;
             var cellContent;
-            var attr;
+            var attr, dataItem, measure;
 
             for (; idx < length; idx++) {
                 columnInfo = columnIndexes[idx];
@@ -4333,12 +4333,28 @@ var __meta__ = {
                     attr.className = "k-alt";
                 }
 
-                cellContent = this.template({
+                cellContent = "";
+                dataItem = this.data[startIdx + columnInfo.index];
+                measure = columnInfo.measure || rowInfo.measure;
+
+                templateInfo = {
                     columnTuple: columnInfo.tuple,
                     rowTuple: rowInfo.tuple,
-                    measure: columnInfo.measure || rowInfo.measure,
-                    dataItem: this.data[startIdx + columnInfo.index]
-                });
+                    measure: measure,
+                    dataItem: dataItem
+                };
+
+                if (dataItem.value !== "" && measure && measure.type) {
+                    if (measure.type === "status") {
+                        cellContent = this.kpiStatusTemplate(templateInfo);
+                    } else if (measure.type === "trend") {
+                        cellContent = this.kpiTrendTemplate(templateInfo);
+                    }
+                }
+
+                if (!cellContent) {
+                    cellContent = this.dataTemplate(templateInfo);
+                }
 
                 cells.push(element("td", attr, [ htmlNode(cellContent) ]));
             }
