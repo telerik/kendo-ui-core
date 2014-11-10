@@ -13,6 +13,8 @@
     (function ($, undefined) {
         // Imports ================================================================
         var dataviz = kendo.dataviz,
+            draw = kendo.drawing,
+            geom = kendo.geometry,
             diagram = dataviz.diagram,
             Widget = kendo.ui.Widget,
             Class = kendo.Class,
@@ -3489,16 +3491,16 @@
 
             exportDOMVisual: function() {
                 var viewBox = this.canvas._viewBox;
-                var scrollOffset = kendo.geometry.transform().translate(
+                var scrollOffset = geom.transform().translate(
                     -viewBox.x, -viewBox.y
                 );
 
-                var viewRect = new kendo.geometry.Rect(
+                var viewRect = new geom.Rect(
                     [0, 0], [viewBox.width, viewBox.height]
                 );
-                var clipPath = kendo.drawing.Path.fromRect(viewRect);
+                var clipPath = draw.Path.fromRect(viewRect);
 
-                var wrap = new kendo.drawing.Group({
+                var wrap = new draw.Group({
                     transform: scrollOffset,
                     clip: clipPath
                 });
@@ -3509,9 +3511,9 @@
             },
 
             exportVisual: function() {
-                var zoom = kendo.geometry.transform().scale(1 / this._zoom);
-                var wrap = new kendo.drawing.Group({
-                    transform: zoom
+                var scale = geom.transform().scale(1 / this._zoom);
+                var wrap = new draw.Group({
+                    transform: scale
                 });
 
                 var root = this.canvas.drawingElement.children[0];
