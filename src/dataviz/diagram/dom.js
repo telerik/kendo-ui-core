@@ -3571,7 +3571,12 @@
                 return wrap;
             }
         });
+
         dataviz.ExportMixin.extend(Diagram.fn, true);
+
+        if (kendo.PDFMixin) {
+            kendo.PDFMixin.extend(Diagram.fn);
+        }
 
         function filterShapeDataItem(dataItem) {
             var result = {};
