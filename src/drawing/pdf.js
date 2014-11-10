@@ -288,49 +288,66 @@
                   (thing.opacity == null || thing.opacity > 0))));
     }
 
+    function maybeGradient(element, page, pdf, stroke) {
+        var fill = element.fill();
+        if (fill instanceof drawing.Gradient) {
+            if (stroke) {
+                page.stroke();
+            } else {
+                // XXX: could optimize: the already rendered path is
+                // useless in this case.
+                page.nop();
+            }
+            if (!(fill instanceof drawing.LinearGradient)) {
+                throw "FIXME";
+            }
+            var gradient = {
+                type: "linear",
+                start: fill.start(),
+                end: fill.end(),
+                stops: fill.stops.elements().map(function(stop){
+                    var offset = stop.offset();
+                    if (/%$/.test(offset)) {
+                        offset = parseFloat(offset) / 100;
+                    } else {
+                        offset = parseFloat(offset);
+                    }
+                    var color = parseColor(stop.color());
+                    color.a *= stop.opacity();
+                    return {
+                        offset: offset,
+                        color: color
+                    };
+                })
+            };
+            var box = element.rawBBox();
+            var tl = box.topLeft(), size = box.getSize();
+            box = {
+                left   : tl.x,
+                top    : tl.y,
+                width  : size.width,
+                height : size.height
+            };
+            page.gradient(gradient, box);
+            return true;
+        }
+    }
+
     function maybeFillStroke(element, page, pdf) {
         if (shouldDraw(element.fill()) && shouldDraw(element.stroke())) {
-            page.fillStroke();
+            if (!maybeGradient(element, page, pdf, true)) {
+                page.fillStroke();
+            }
         } else if (shouldDraw(element.fill())) {
-            var fill = element.fill();
-            if (element.fill() instanceof drawing.Gradient) {
-                page.nop();
-                if (!(fill instanceof drawing.LinearGradient)) {
-                    throw "FIXME";
-                }
-                var gradient = {
-                    type: "linear",
-                    start: fill.start(),
-                    end: fill.end(),
-                    stops: fill.stops.elements().map(function(stop){
-                        var offset = stop.offset();
-                        if (/%$/.test(offset)) {
-                            offset = parseFloat(offset) / 100;
-                        } else {
-                            offset = parseFloat(offset);
-                        }
-                        var color = parseColor(stop.color());
-                        color.a *= stop.opacity();
-                        return {
-                            offset: offset,
-                            color: color
-                        };
-                    })
-                };
-                var box = element.rawBBox();
-                var tl = box.topLeft(), size = box.getSize();
-                box = {
-                    left   : tl.x,
-                    top    : tl.y,
-                    width  : size.width,
-                    height : size.height
-                };
-                page.gradient(gradient, box);
-            } else {
+            if (!maybeGradient(element, page, pdf, false)) {
                 page.fill();
             }
         } else if (shouldDraw(element.stroke())) {
             page.stroke();
+        } else {
+            // we should not get here; the path should have been
+            // optimized away.  but let's be prepared.
+            page.nop();
         }
     }
 
