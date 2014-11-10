@@ -1152,8 +1152,8 @@
                 // and x,y is the end point relative to the center of the rectangle in conventional
                 // (math) axis direction.
                 var len = Math.abs(width * Math.sin(angle)) + Math.abs(height * Math.cos(angle));
-                var x = len/2 * Math.sin(angle);
-                var y = len/2 * Math.cos(angle);
+                var x = len/2 * Math.sin(angle) / width;
+                var y = len/2 * Math.cos(angle) / height;
 
                 // compute the color stops.
                 var implicit = [], right = 0;
@@ -1186,18 +1186,18 @@
                     return stop;
                 });
 
-                var start = [ tl.x + width/2 - x, tl.y + height/2 + y ];
-                var end = [ tl.x + width/2 + x, tl.y + height/2 - y ];
+                var start = [ 0.5 - x, 0.5 + y ];
+                var end = [ 0.5 + x, 0.5 - y ];
 
                 // finally, draw it.
                 group.append(
                     drawing.Path.fromRect(rect)
                         .stroke(null)
                         .fill(new drawing.LinearGradient({
-                            start : start,
-                            end   : end,
-                            stops : stops,
-                            userSpace: true
+                            start     : start,
+                            end       : end,
+                            stops     : stops,
+                            userSpace : false
                         }))
                 );
                 break;
