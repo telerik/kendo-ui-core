@@ -337,8 +337,7 @@ var __meta__ = {
         _render: function(dates) {
             var that = this;
             dates = dates || [];
-            //dates are considered as resource for creating columns
-            //in current case they are not
+
             that._dates = dates;
 
             that._getColumnCount();
@@ -351,18 +350,8 @@ var __meta__ = {
 
             that.createLayout(that._layout(dates));
 
-            /* Option? ((40+16+1)*80)-1 for first cell without borders*/
-            //var width = ((40+16+1)*80)-1;
-            // that.datesHeader.css({width: (width - 15)  +"px", "padding-right":"16px" })//.find("th:not([colspan])").css({width: "40px"});
-            // that.content.css({width: width + "px"});
-
-            //that.table.css({"table-layout": "fixed"});
-            //that.table.find("> tbody > tr > td:first-child").css({width: "180px"});
-
             that._content(dates);
-            //set column width
-            //set column height as well? or at least scroll bar padding
-            //!also - if there is 'height' set, then vertical scrollbar should be always rendered!!!
+
             that._setContentWidth();
 
             that.refreshLayout();
@@ -383,7 +372,7 @@ var __meta__ = {
             }
 
             contentTable.add(this.datesHeader.find("table"))
-                .css("min-width", minWidth + "%");
+                .css("width", minWidth + "%");
         },
 
         _calculateSlotRanges: function () {
@@ -744,14 +733,102 @@ var __meta__ = {
                 );
             });
 
+            var eventGroups = [];
+            var maxRowCount = 0;
+
             for (var groupIndex = 0; groupIndex < eventsByResource.length; groupIndex++) {
-                this._renderEvents(eventsByResource[groupIndex], groupIndex);
+                var eventGroup = {
+                    groupIndex: groupIndex,
+                    maxRowCount: 0,
+                    events: {}
+                };
+
+                eventGroups.push(eventGroup);
+
+                this._renderEvents(eventsByResource[groupIndex], groupIndex, eventGroup);
+
+                if (maxRowCount < eventGroup.maxRowCount) {
+                    maxRowCount = eventGroup.maxRowCount;
+                }
             }
 
-            this._setContentWidth();
-            this._refreshSlots();
-            
+            this._setRowsHeight(eventGroups, eventsByResource.length, maxRowCount);
+
+            for (var groupIndex = 0; groupIndex < eventsByResource.length; groupIndex++) {
+                var events = eventGroups[groupIndex].events;
+                for (var eventUid in events) {
+                    var eventObject = events[eventUid];
+                    this._positionEvent(eventObject);
+                }
+            }
+
             this.trigger("activate");
+        },
+
+        _setRowsHeight: function(eventGroups, groupsCount, maxRowCount) {
+            var eventHeight = this.options.eventHeight + 2;/* two times border width */
+            var eventBottomOffset = this._getBottomRowOffset();
+
+            groupsCount = this._isVerticallyGrouped() ? groupsCount : 1;
+            for (var groupIndex = 0; groupIndex < groupsCount; groupIndex++) {
+                var rowsCount = this._isVerticallyGrouped() ? eventGroups[groupIndex].maxRowCount : maxRowCount;
+
+                rowsCount = rowsCount ? rowsCount : 1;
+
+                var rowHeight = ((eventHeight + 2) * rowsCount) + eventBottomOffset;
+                var timesRow = this.times.find(kendo.format("tr:nth-child({0})",  groupIndex + 1));
+                var row = this.content.find(kendo.format("tr:nth-child({0})",  groupIndex + 1));
+
+                timesRow.height(rowHeight);
+                row.height(rowHeight);
+            }
+
+
+            this._setContentWidth();
+            this.refreshLayout();
+            this._refreshSlots();
+        },
+
+        _getBottomRowOffset: function() {
+            var eventBottomOffset = this.options.eventHeight * 0.50;
+            var isMobile = this._isMobile();
+            var minOffset;
+            var maxOffset;
+
+            if (isMobile) {
+                minOffset = 30;
+                maxOffset = 60;
+            } else {
+                minOffset = 15;
+                maxOffset = 30;
+            }
+
+            if (eventBottomOffset > maxOffset) {
+                eventBottomOffset = maxOffset;
+            } else if (eventBottomOffset < minOffset) {
+                eventBottomOffset = minOffset;
+            }
+
+            return eventBottomOffset;
+        },
+
+        _positionEvent: function(eventObject) {
+            var eventHeight = this.options.eventHeight + 2;
+            var rect = eventObject.slotRange.innerRect(eventObject.start, eventObject.end, false);
+
+            rect.top = eventObject.slotRange.start.offsetTop;
+            var width = rect.right - rect.left - 2;
+
+            if (width < 0) {
+                width = 0;
+            }
+
+            eventObject.element.css({
+                top:  eventObject.slotRange.start.offsetTop + eventObject.rowIndex * (eventHeight + 2) + "px",
+                left: rect.left,
+                width: width,
+                height: this.options.eventHeight
+            });
         },
 
         _refreshSlots: function() {
@@ -880,7 +957,7 @@ var __meta__ = {
             };
         },
 
-        _renderEvents: function(events, groupIndex) {
+        _renderEvents: function(events, groupIndex, eventGroup) {
             var event;
             var idx;
             var length;
@@ -905,10 +982,24 @@ var __meta__ = {
                         var element;
 
                         if (this._isInTimeSlot(adjustedEvent.occurrence)) {
+
                             element = this._createEventElement(adjustedEvent.occurrence, event, range.head || adjustedEvent.head, range.tail || adjustedEvent.tail);
+                            element.appendTo(container).css({top: 0});
+
+                            var eventObject = {
+                                start: adjustedEvent.occurrence.startTime || adjustedEvent.occurrence.start,
+                                end: adjustedEvent.occurrence.endTime || adjustedEvent.occurrence.end,
+                                element: element,
+                                uid: event.uid,
+                                slotRange: range,
+                                rowIndex: 0,
+                                offsetTop: 0
+                            };
+
+                            eventGroup.events[event.uid] = eventObject;
+
                             this.addContinuousEvent(group, range, element, event.isAllDay);
-                            element.css({top: 0}).appendTo(container);
-                            this._positionEvent(adjustedEvent.occurrence, element, range);
+                            this._arrangeRows(eventObject, range, eventGroup);
                         }
                     }
                 }
@@ -976,64 +1067,24 @@ var __meta__ = {
             return element;
         },
 
-        _positionEvent: function(event, element, slotRange) {
-            var start = event.startTime || event.start;
-            var end = event.endTime || event.end;
-            var eventHeight = this.options.eventHeight;
-
-            var rect = slotRange.innerRect(start, end, false);
-            rect.top = slotRange.start.offsetTop;
-            var width = rect.right - rect.left - 2;
-
-            if (width < 0) {
-                width = 0;
-            }
-
-            element
-                .css({
-                    left: rect.left,
-                    width: width,
-                    height: eventHeight
-                });
-
-            this._arrangeRows(element, slotRange);
-        },
-
-        _arrangeRows: function (element, slotRange) {
+        _arrangeRows: function (eventObject, slotRange, eventGroup) {
             var startIndex = slotRange.start.index;
             var endIndex = slotRange.end.index;
             var events = SchedulerView.collidingEvents(slotRange.events(), startIndex, endIndex);
-            var eventHeight = this.options.eventHeight + 2;/* two times border width */
 
-            slotRange.addEvent({ slotIndex: startIndex, start: startIndex, end: endIndex, element: element });
-            events.push({ slotIndex: startIndex, start: startIndex, end: endIndex, element: element });
+            slotRange.addEvent({ slotIndex: startIndex, start: startIndex, end: endIndex, element: eventObject.element, uid: eventObject.uid });
+            events.push({ slotIndex: startIndex, start: startIndex, end: endIndex, element: eventObject.element, uid: eventObject.uid });
 
             var rows = SchedulerView.createRows(events);
 
-            slotRange.start.refresh();
-
-            var eventBottomOffset = eventHeight * 0.10;
-
-            var rowHeight = (eventHeight + eventBottomOffset) * rows.length;
+            if (eventGroup.maxRowCount < rows.length) {
+                eventGroup.maxRowCount = rows.length;
+            }
 
             for (var idx = 0, length = rows.length; idx < length; idx++) {
                 var rowEvents = rows[idx].events;
-
-                var row = $(slotRange.start.element).closest("tr");
-
-                if (row.height() < rowHeight) {
-                    var rowIndex = row.index();
-                    var timesRow = this.times.find(kendo.format("tr:nth-child({0})",  rowIndex+1));
-
-                    row.height(rowHeight);
-                    timesRow.height(rowHeight);
-                    slotRange.start.refresh();
-                }
-
                 for (var j = 0, eventLength = rowEvents.length; j < eventLength; j++) {
-                    $(rowEvents[j].element).css({
-                        top:  slotRange.start.offsetTop + idx * (eventHeight + 2) + "px"
-                    });
+                    eventGroup.events[rowEvents[j].uid].rowIndex = idx;
                 }
             }
         },
