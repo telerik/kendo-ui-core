@@ -620,20 +620,20 @@ var __meta__ = {
     function moveCells(leafs, columns, container, destination) {
         var sourcePosition = columnVisiblePosition(leafs[0], columns);
 
-        var ths = container.find("tr:eq(" + sourcePosition.row + ")>th.k-header");
+        var ths = container.find(">tr:eq(" + sourcePosition.row + ")>th.k-header");
 
         var t = $();
-
         var sourceIndex = sourcePosition.cell;
+        var idx;
 
-        for (var idx = 0; idx < leafs.length; idx++) {
+        for (idx = 0; idx < leafs.length; idx++) {
             t = t.add(ths.eq(sourceIndex + idx));
         }
 
         destination.find("tr").eq(sourcePosition.row).append(t);
 
         var children = [];
-        for (var idx = 0; idx < leafs.length; idx++) {
+        for (idx = 0; idx < leafs.length; idx++) {
             if (leafs[idx].columns) {
                 children = children.concat(leafs[idx].columns);
             }
@@ -1170,14 +1170,16 @@ var __meta__ = {
         }
     }
 
-    function updateColspan(toAdd, toRemove) {
+    function updateColspan(toAdd, toRemove, num) {
+        num = num || 1;
+
         var item, idx, length;
-        for (idx = 0, length = toAdd.length; idx < length; idx += 1) {
+        for (idx = 0, length = toAdd.length; idx < length; idx++) {
             item = toAdd.eq(idx).children().last();
-            item.attr("colspan", parseInt(item.attr("colspan"), 10) + 1);
+            item.attr("colspan", parseInt(item.attr("colspan"), 10) + num);
 
             item = toRemove.eq(idx).children().last();
-            item.attr("colspan", parseInt(item.attr("colspan"), 10) - 1);
+            item.attr("colspan", parseInt(item.attr("colspan"), 10) - num);
         }
     }
 
@@ -2050,13 +2052,15 @@ var __meta__ = {
                     if (lockedCount <= sourceIndex) {
                         updateColspan(
                             that.lockedTable.find(">tbody>tr.k-grouping-row"),
-                            that.table.find(">tbody>tr.k-grouping-row")
+                            that.table.find(">tbody>tr.k-grouping-row"),
+                            sources.length
                         );
                     }
                 } else if (lockedCount > sourceIndex) {
                     updateColspan(
                         that.table.find(">tbody>tr.k-grouping-row"),
-                        that.lockedTable.find(">tbody>tr.k-grouping-row")
+                        that.lockedTable.find(">tbody>tr.k-grouping-row"),
+                        sources.length
                     );
                 }
 
