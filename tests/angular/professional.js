@@ -532,7 +532,7 @@
             grid.select(grid.items());
     });
 
-    ngTest("uses TreeListDataSource for TreeList", 1, function () {
+    ngTest("TreeList uses TreeListDataSource", 1, function () {
         angular.module("kendo.tests").controller("treelist", function($scope) {
             $scope.data = [ { id: 1, parentId: null } ];
         });
@@ -544,19 +544,38 @@
         var treelist = QUnit.fixture.find('[data-role=treelist]').getKendoTreeList();
         ok(treelist.dataSource instanceof kendo.data.TreeListDataSource);
     });
+
+    ngTest("TreeList compiles toolbar/header/footer", 3, function() {
+        angular.module("kendo.tests").controller("treelist", function($scope) {
+            $scope.options = {
+                dataSource: {
+                    data: [
+                        { id: 1, parentId: null },
+                        { id: 2, parentId: null }
+                    ],
+                    aggregate: [
+                        { field: "id", aggregate: "sum" },
+                    ]
+                },
+                toolbar: "foo {{ 1 + 1 }}",
+                columns: [
+                    { field: "id",
+                      foo: 1,
+                      title: "foo: {{ column.foo }}",
+                      footerTemplate: "foo: {{ column.foo }}, sum: {{ aggregate.sum }}" }
+                ]
+            };
+        });
+
+        $("<div ng-controller=treelist><div kendo-treelist k-options='options'/></div>")
+            .appendTo(QUnit.fixture);
+    }, function() {
+        var treelist = QUnit.fixture.find('[data-role=treelist]').getKendoTreeList();
+        var wrapper = treelist.wrapper;
+
+        equal(wrapper.find(".k-grid-toolbar").text(), "foo 2");
+        equal(wrapper.find("th.k-header").text(), "foo: 1");
+        equal(wrapper.find(".k-footer-template").text(), "foo: 1, sum: 3");
+    });
 })();
 
-/*
-withAngularTests("Angular (Professional)", function(runTest){
-
-    function trigger(type, el, e) {
-        el.trigger($.Event(type, e));
-    }
-
-
-
-
-
-
-});
-*/

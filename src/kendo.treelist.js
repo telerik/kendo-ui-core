@@ -724,14 +724,46 @@ var __meta__ = {
             }
 
             this._angularItems("cleanup");
+            this._angularFooters("cleanup");
 
             this._cancelEditor();
 
             this._render();
 
             this._angularItems("compile");
+            this._angularFooters("compile");
 
             this.trigger(DATABOUND);
+        },
+
+        _angularFooters: function(command) {
+            var i, footer, aggregates;
+            var allAggregates = this.dataSource.aggregates();
+            var footerRows = this.content.find("tr").filter(function() {
+                return $(this).hasClass(classNames.footerTemplate);
+            });
+
+            for (i = 0; i < footerRows.length; i++) {
+                footer = footerRows.eq(i);
+                aggregates = allAggregates[footer.attr("data-parentId")];
+
+                this._angularFooter(command, footer.find("td").get(), aggregates);
+            }
+        },
+
+        _angularFooter: function(command, cells, aggregates) {
+            var columns = this.columns;
+            this.angular(command, function() {
+                return {
+                    elements: cells,
+                    data: map(columns, function(col, i){
+                        return {
+                            column: col,
+                            aggregate: aggregates && aggregates[col.field]
+                        };
+                    })
+                };
+            });
         },
 
         items: function() {
@@ -1051,9 +1083,18 @@ var __meta__ = {
 
             this.toolbar = element.find(DOT + classNames.gridToolbar);
 
-            this.header = element.find(DOT + classNames.gridHeader).find("thead").addBack().filter("thead");
+            var header = this.header = element.find(DOT + classNames.gridHeader).find("thead").addBack().filter("thead");
             this._headerTree = new kendoDom.Tree(this.header[0]);
             this._headerTree.render([kendoDomElement("tr", { "role": "row" }, this._ths())]);
+
+            var columns = this.columns;
+
+            this.angular("compile", function() {
+                return {
+                    elements: header.find("th.k-header").get(),
+                    data: map(columns, function(col) { return { column: col }; })
+                };
+            });
 
             this.content = element.find(DOT + classNames.gridContentWrap).find("tbody");
 
@@ -1068,6 +1109,7 @@ var __meta__ = {
 
         _toolbar: function() {
             var options = this.options.toolbar;
+            var toolbar = this.toolbar;
 
             if (!options) {
                 return;
@@ -1075,10 +1117,14 @@ var __meta__ = {
 
             if ($.isArray(options)) {
                 var buttons = this._buildCommands(options);
-                new kendoDom.Tree(this.toolbar[0]).render(buttons);
+                new kendoDom.Tree(toolbar[0]).render(buttons);
             } else {
-                this.toolbar.append(kendo.template(options)({}));
+                toolbar.append(kendo.template(options)({}));
             }
+
+            this.angular("compile", function() {
+                return { elements: toolbar.get() };
+            });
         },
 
         _render: function(options) {
@@ -1173,18 +1219,14 @@ var __meta__ = {
         },
 
         _trs: function(options) {
-            var model;
+            var model, attr, className, hasChildren, childNodes, i, parentId;
             var rows = [];
-            var attr;
-            var className;
             var level = options.level;
             var data = options.data;
-            var hasChildren;
-            var childNodes;
             var dataSource = this.dataSource;
             var aggregates = dataSource.aggregates() || {};
 
-            for (var i = 0, length = data.length; i < length; i++) {
+            for (i = 0, length = data.length; i < length; i++) {
                 className = [];
 
                 model = data[i];
@@ -1239,14 +1281,19 @@ var __meta__ = {
             }
 
             if (this._hasFooterTemplate()) {
-                attr = { className: classNames.footerTemplate };
+                parentId = options.parentId || null;
+
+                attr = {
+                    className: classNames.footerTemplate,
+                    "data-parentId": parentId
+                };
 
                 if (!options.visible) {
                     attr.style = { display: "none" };
                 }
 
                 rows.push(this._tds({
-                    model: aggregates[options.parentId || null],
+                    model: aggregates[parentId],
                     attr: attr,
                     level: level
                 }, this._footerTd));
