@@ -1505,7 +1505,8 @@ var __meta__ = {
                 stroke: defined(options.border) ? {
                     color: options.border.width ? options.border.color || options.color : "",
                     width: options.border.width,
-                    dashType: options.border.dashType
+                    dashType: options.border.dashType,
+                    opacity: options.opacity
                 } : null
             };
         },
@@ -1530,15 +1531,15 @@ var __meta__ = {
         init: function(scale, options) {
             LinearPointer.fn.init.call(this, scale, options);
 
-            this.options.size = this.scale.options.majorTicks.size * 0.6;
+            if (this.options.size === undefined) {
+                this.options.size = this.scale.options.majorTicks.size * 0.6;
+            }
         },
 
         pointerShape: function(value) {
             var that = this;
             var options = that.options;
             var scale = that.scale;
-            var slot = new Box2D(); //TODO 0
-            var pointerRangeBox = new Box2D(); //TODO 0
             var size = options.size;
             var vertical = scale.options.vertical;
             var halfSize = size / 2;
@@ -1549,16 +1550,12 @@ var __meta__ = {
             if (vertical) {
                 pos = reverse ? "y2" : "y1";
                 shape = [
-                    new Point(pointerRangeBox.x1, slot[pos] - halfSize),
-                    new Point(pointerRangeBox.x1 - sign * size, slot[pos]),
-                    new Point(pointerRangeBox.x1, slot[pos] + halfSize)
+                    new Point(0, 0 - halfSize), new Point(0 - sign * size, 0), new Point(0, 0 + halfSize)
                 ];
             } else {
                 pos = reverse ? "x1" : "x2";
                 shape = [
-                    new Point(slot[pos] - halfSize, pointerRangeBox.y2),
-                    new Point(slot[pos], pointerRangeBox.y2 + sign * size),
-                    new Point(slot[pos] + halfSize, pointerRangeBox.y2)
+                    new Point(0 - halfSize, 0), new Point(0, 0 + sign * size), new Point(0 + halfSize, 0)
                 ];
             }
 
@@ -1572,6 +1569,7 @@ var __meta__ = {
             var animation = new ArrowLinearPointerAnimation(that.elements, deepExtend(options.animation, {
                 vertical: scale.options.vertical,
                 mirror: scale.options.mirror,
+                margin: options.margin,
                 from: scale.getSlot(options._oldValue),
                 to: scale.getSlot(options.value)
             }));
@@ -1612,7 +1610,9 @@ var __meta__ = {
         init: function(scale, options) {
             LinearPointer.fn.init.call(this, scale, options);
 
-            this.options.size = this.scale.options.majorTicks.size * 0.3;
+            if (this.options.size === undefined) {
+                this.options.size = this.scale.options.majorTicks.size * 0.3;
+            }
         },
 
         pointerShape: function(value) {
@@ -1691,7 +1691,7 @@ var __meta__ = {
             var group = new Group();
             var scale = that.scale;
             var elementOptions = that.getElementOptions();
-            var shape = that.pointerShape(options.value);
+
             var pointer = new Path({
                 stroke: elementOptions.stroke,
                 fill: elementOptions.fill
@@ -1738,14 +1738,15 @@ var __meta__ = {
         setup: function() {
             var options = this.options;
             var halfSize = this.element.bbox().width() / 2;
+            var margin = options.margin;
             var from = options.from;
             var to = options.to;
             var axis = options.vertical ? "x1" : "y1";
 
             if (options.mirror == options.vertical) {
-                from[axis] -= halfSize; to[axis] -= halfSize;
+                from[axis] -= (halfSize + margin); to[axis] -= (halfSize + margin);
             } else {
-                from[axis] += halfSize; to[axis] += halfSize;
+                from[axis] += (halfSize + margin); to[axis] += (halfSize + margin);
             }
 
             var fromScale = this.fromScale = new Point(from.x1, from.y1);
