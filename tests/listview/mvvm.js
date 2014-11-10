@@ -8,14 +8,15 @@
                     <div><span>#:text#</span></div>\
                 </script>\
                 <script id="editTemplate" type="text/x-kendo-template">\
-                    <div><input type="text" value="#:text#"/></div>\
+                    <div><input type="text" data-bind="value:text"/></div>\
                 </script>\
                 <script id="template-with-attributes" type="text/x-kendo-template">\
                     <div><strong data-bind="text:text"></strong></div>\
                 </script>\
                 <script id="template-with-events" type="text/x-kendo-template">\
                     <div><span>#=text#</span><strong data-bind="text:text, events:{ click: rootHandler }"></strong></div>\
-                </script>');
+                </script>\
+            ');
 
             window.dataBound = function() {
                 ok(true);
@@ -277,5 +278,49 @@
 
         var firstItemHtml = $.trim(listView.element.children().first().html());
         equal(firstItemHtml, "template");
+    });
+
+    test("item is bind ot the model after 'save' button is pressed in edit mode", function() {
+        var dom = $('<div data-role="listview" data-template="template-with-attributes" data-edit-template="editTemplate" data-bind="source:dataSource" />').appendTo(QUnit.fixture);
+
+        var viewmodel = {
+            dataSource: new kendo.data.DataSource({
+                data: [{id: 1, text:"foo"}, {id: 2, text:"bar"}],
+                schema: {
+                    model: {
+                        id: "id"
+                    }
+                }
+            })
+        }
+
+        kendo.bind(dom, viewmodel);
+
+        dom.data("kendoListView").edit(dom.children().eq(0));
+        dom.data("kendoListView").save();
+
+        equal(dom.children().eq(0).text(), "foo");
+    });
+
+    test("item is bind ot the model after 'cancel' button is pressed in edit mode", function() {
+        var dom = $('<div data-role="listview" data-template="template-with-attributes" data-edit-template="editTemplate" data-bind="source:dataSource" />').appendTo(QUnit.fixture);
+
+        var viewmodel = {
+            dataSource: new kendo.data.DataSource({
+                data: [{id: 1, text:"foo"}, {id: 2, text:"bar"}],
+                schema: {
+                    model: {
+                        id: "id"
+                    }
+                }
+            })
+        }
+
+        kendo.bind(dom, viewmodel);
+
+        dom.data("kendoListView").edit(dom.children().eq(0));
+        dom.data("kendoListView").cancel();
+
+        equal(dom.children().eq(0).text(), "foo");
     });
 })();
