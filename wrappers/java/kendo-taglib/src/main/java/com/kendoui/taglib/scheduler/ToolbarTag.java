@@ -1,51 +1,48 @@
-
 package com.kendoui.taglib.scheduler;
 
-
-import com.kendoui.taglib.BaseTag;
-
-
-
-import com.kendoui.taglib.SchedulerTag;
-
-
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.jsp.JspException;
 
+import com.kendoui.taglib.BaseTag;
+import com.kendoui.taglib.SchedulerTag;
+
 @SuppressWarnings("serial")
-public class ToolbarTag extends BaseTag /* interfaces */ /* interfaces */ {
-    
+public class ToolbarTag extends BaseTag /* interfaces *//* interfaces */{
+
     @Override
     public int doEndTag() throws JspException {
-//>> doEndTag
-//<< doEndTag
+        // >> doEndTag
+        // << doEndTag
+        SchedulerTag parent = (SchedulerTag) findParentWithClass(SchedulerTag.class);
+
+        parent.setToolbar(this);
 
         return super.doEndTag();
     }
 
     @Override
     public void initialize() {
-//>> initialize
+        // >> initialize
 
         toolbar = new ArrayList<Map<String, Object>>();
 
-//<< initialize
+        // << initialize
 
         super.initialize();
     }
 
     @Override
     public void destroy() {
-//>> destroy
-//<< destroy
+        // >> destroy
+        // << destroy
 
         super.destroy();
     }
 
-//>> Attributes
+    // >> Attributes
 
     private List<Map<String, Object>> toolbar;
 
@@ -61,6 +58,6 @@ public class ToolbarTag extends BaseTag /* interfaces */ /* interfaces */ {
         toolbar.add(value.properties());
     }
 
-//<< Attributes
+    // << Attributes
 
 }
