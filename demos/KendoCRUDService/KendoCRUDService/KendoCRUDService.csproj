@@ -143,6 +143,8 @@
     <Compile Include="Controllers\ExportController.cs" />
     <Compile Include="Controllers\FileBrowserController.cs" />
     <Compile Include="Controllers\GanttDependenciesController.cs" />
+    <Compile Include="Controllers\GanttResourceAssignmentsController.cs" />
+    <Compile Include="Controllers\GanttResourcesController.cs" />
     <Compile Include="Controllers\GanttTasksController.cs" />
     <Compile Include="Controllers\MeetingsController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
@@ -177,6 +179,10 @@
     <Compile Include="Models\FileBrowser\FitImageResizer.cs" />
     <Compile Include="Models\FileBrowser\ImageSize.cs" />
     <Compile Include="Models\FileBrowser\ThumbnailCreator.cs" />
+    <Compile Include="Models\Gantt\GanttResourceAssignmentsRepository.cs" />
+    <Compile Include="Models\Gantt\GanttResourceAssignmentModel.cs" />
+    <Compile Include="Models\Gantt\GanttResourceModel.cs" />
+    <Compile Include="Models\Gantt\GanttResourcesRepository.cs" />
     <Compile Include="Models\Gantt\GanttDependencyModel.cs" />
     <Compile Include="Models\Gantt\GanttDependencyRepository.cs" />
     <Compile Include="Models\Gantt\GanttTaskModel.cs" />

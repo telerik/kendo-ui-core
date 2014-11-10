@@ -35,6 +35,8 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("SampleModel", "FK_Tasks_Tasks", "Task", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(KendoCRUDService.Models.EF.Task), "Task1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KendoCRUDService.Models.EF.Task), true)]
 [assembly: EdmRelationshipAttribute("SampleModel", "FK_GanttTasks_GanttTasks", "GanttTask", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(KendoCRUDService.Models.EF.GanttTask), "GanttTask1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KendoCRUDService.Models.EF.GanttTask), true)]
 [assembly: EdmRelationshipAttribute("SampleModel", "FK_EmployeeDirectory_EmployeeDirectory", "EmployeeDirectory", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(KendoCRUDService.Models.EF.EmployeeDirectory), "EmployeeDirectory1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KendoCRUDService.Models.EF.EmployeeDirectory), true)]
+[assembly: EdmRelationshipAttribute("SampleModel", "FK_GanttResourceAssignments_GanttResources", "GanttResource", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(KendoCRUDService.Models.EF.GanttResource), "GanttResourceAssignment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KendoCRUDService.Models.EF.GanttResourceAssignment), true)]
+[assembly: EdmRelationshipAttribute("SampleModel", "FK_GanttResourceAssignments_GanttTasks", "GanttTask", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(KendoCRUDService.Models.EF.GanttTask), "GanttResourceAssignment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KendoCRUDService.Models.EF.GanttResourceAssignment), true)]
 
 #endregion
 
@@ -421,6 +423,38 @@ namespace KendoCRUDService.Models.EF
             }
         }
         private ObjectSet<EmployeeDirectory> _EmployeeDirectory;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<GanttResourceAssignment> GanttResourceAssignments
+        {
+            get
+            {
+                if ((_GanttResourceAssignments == null))
+                {
+                    _GanttResourceAssignments = base.CreateObjectSet<GanttResourceAssignment>("GanttResourceAssignments");
+                }
+                return _GanttResourceAssignments;
+            }
+        }
+        private ObjectSet<GanttResourceAssignment> _GanttResourceAssignments;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<GanttResource> GanttResources
+        {
+            get
+            {
+                if ((_GanttResources == null))
+                {
+                    _GanttResources = base.CreateObjectSet<GanttResource>("GanttResources");
+                }
+                return _GanttResources;
+            }
+        }
+        private ObjectSet<GanttResource> _GanttResources;
 
         #endregion
 
@@ -592,6 +626,22 @@ namespace KendoCRUDService.Models.EF
         public void AddToEmployeeDirectory(EmployeeDirectory employeeDirectory)
         {
             base.AddObject("EmployeeDirectory", employeeDirectory);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the GanttResourceAssignments EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToGanttResourceAssignments(GanttResourceAssignment ganttResourceAssignment)
+        {
+            base.AddObject("GanttResourceAssignments", ganttResourceAssignment);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the GanttResources EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToGanttResources(GanttResource ganttResource)
+        {
+            base.AddObject("GanttResources", ganttResource);
         }
 
         #endregion
@@ -2337,6 +2387,354 @@ namespace KendoCRUDService.Models.EF
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="SampleModel", Name="GanttResource")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class GanttResource : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new GanttResource object.
+        /// </summary>
+        /// <param name="id">Initial value of the ID property.</param>
+        /// <param name="name">Initial value of the Name property.</param>
+        public static GanttResource CreateGanttResource(global::System.Int32 id, global::System.String name)
+        {
+            GanttResource ganttResource = new GanttResource();
+            ganttResource.ID = id;
+            ganttResource.Name = name;
+            return ganttResource;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                if (_ID != value)
+                {
+                    OnIDChanging(value);
+                    ReportPropertyChanging("ID");
+                    _ID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID");
+                    OnIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ID;
+        partial void OnIDChanging(global::System.Int32 value);
+        partial void OnIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Name");
+                OnNameChanged();
+            }
+        }
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Color
+        {
+            get
+            {
+                return _Color;
+            }
+            set
+            {
+                OnColorChanging(value);
+                ReportPropertyChanging("Color");
+                _Color = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Color");
+                OnColorChanged();
+            }
+        }
+        private global::System.String _Color;
+        partial void OnColorChanging(global::System.String value);
+        partial void OnColorChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SampleModel", "FK_GanttResourceAssignments_GanttResources", "GanttResourceAssignment")]
+        public EntityCollection<GanttResourceAssignment> GanttResourceAssignments
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<GanttResourceAssignment>("SampleModel.FK_GanttResourceAssignments_GanttResources", "GanttResourceAssignment");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<GanttResourceAssignment>("SampleModel.FK_GanttResourceAssignments_GanttResources", "GanttResourceAssignment", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="SampleModel", Name="GanttResourceAssignment")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class GanttResourceAssignment : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new GanttResourceAssignment object.
+        /// </summary>
+        /// <param name="id">Initial value of the ID property.</param>
+        /// <param name="taskID">Initial value of the TaskID property.</param>
+        /// <param name="resourceID">Initial value of the ResourceID property.</param>
+        /// <param name="units">Initial value of the Units property.</param>
+        public static GanttResourceAssignment CreateGanttResourceAssignment(global::System.Int32 id, global::System.Int32 taskID, global::System.Int32 resourceID, global::System.Decimal units)
+        {
+            GanttResourceAssignment ganttResourceAssignment = new GanttResourceAssignment();
+            ganttResourceAssignment.ID = id;
+            ganttResourceAssignment.TaskID = taskID;
+            ganttResourceAssignment.ResourceID = resourceID;
+            ganttResourceAssignment.Units = units;
+            return ganttResourceAssignment;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                if (_ID != value)
+                {
+                    OnIDChanging(value);
+                    ReportPropertyChanging("ID");
+                    _ID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID");
+                    OnIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ID;
+        partial void OnIDChanging(global::System.Int32 value);
+        partial void OnIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 TaskID
+        {
+            get
+            {
+                return _TaskID;
+            }
+            set
+            {
+                OnTaskIDChanging(value);
+                ReportPropertyChanging("TaskID");
+                _TaskID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("TaskID");
+                OnTaskIDChanged();
+            }
+        }
+        private global::System.Int32 _TaskID;
+        partial void OnTaskIDChanging(global::System.Int32 value);
+        partial void OnTaskIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ResourceID
+        {
+            get
+            {
+                return _ResourceID;
+            }
+            set
+            {
+                OnResourceIDChanging(value);
+                ReportPropertyChanging("ResourceID");
+                _ResourceID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ResourceID");
+                OnResourceIDChanged();
+            }
+        }
+        private global::System.Int32 _ResourceID;
+        partial void OnResourceIDChanging(global::System.Int32 value);
+        partial void OnResourceIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Decimal Units
+        {
+            get
+            {
+                return _Units;
+            }
+            set
+            {
+                OnUnitsChanging(value);
+                ReportPropertyChanging("Units");
+                _Units = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Units");
+                OnUnitsChanged();
+            }
+        }
+        private global::System.Decimal _Units;
+        partial void OnUnitsChanging(global::System.Decimal value);
+        partial void OnUnitsChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SampleModel", "FK_GanttResourceAssignments_GanttResources", "GanttResource")]
+        public GanttResource GanttResource
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<GanttResource>("SampleModel.FK_GanttResourceAssignments_GanttResources", "GanttResource").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<GanttResource>("SampleModel.FK_GanttResourceAssignments_GanttResources", "GanttResource").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<GanttResource> GanttResourceReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<GanttResource>("SampleModel.FK_GanttResourceAssignments_GanttResources", "GanttResource");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<GanttResource>("SampleModel.FK_GanttResourceAssignments_GanttResources", "GanttResource", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SampleModel", "FK_GanttResourceAssignments_GanttTasks", "GanttTask")]
+        public GanttTask GanttTask
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<GanttTask>("SampleModel.FK_GanttResourceAssignments_GanttTasks", "GanttTask").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<GanttTask>("SampleModel.FK_GanttResourceAssignments_GanttTasks", "GanttTask").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<GanttTask> GanttTaskReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<GanttTask>("SampleModel.FK_GanttResourceAssignments_GanttTasks", "GanttTask");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<GanttTask>("SampleModel.FK_GanttResourceAssignments_GanttTasks", "GanttTask", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
     [EdmEntityTypeAttribute(NamespaceName="SampleModel", Name="GanttTask")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
@@ -2653,6 +3051,28 @@ namespace KendoCRUDService.Models.EF
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<GanttTask>("SampleModel.FK_GanttTasks_GanttTasks", "GanttTask", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SampleModel", "FK_GanttResourceAssignments_GanttTasks", "GanttResourceAssignment")]
+        public EntityCollection<GanttResourceAssignment> GanttResourceAssignments
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<GanttResourceAssignment>("SampleModel.FK_GanttResourceAssignments_GanttTasks", "GanttResourceAssignment");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<GanttResourceAssignment>("SampleModel.FK_GanttResourceAssignments_GanttTasks", "GanttResourceAssignment", value);
                 }
             }
         }

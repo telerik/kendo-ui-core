@@ -18,12 +18,12 @@ namespace KendoCRUDService.Controllers
 
         public JsonResult Update()
         {
-            var models = this.DeserializeObject<IEnumerable<GanttTaskModel>>("models");
-            if (models != null)
+            var tasks = this.DeserializeObject<IEnumerable<GanttTaskModel>>("models");
+            if (tasks != null)
             {
-                GanttTaskRepository.Update(models);
+                GanttTaskRepository.Update(tasks);
             }
-            return this.Jsonp(models);
+            return this.Jsonp(tasks);
         }
 
         public ActionResult Destroy()
@@ -39,12 +39,12 @@ namespace KendoCRUDService.Controllers
 
         public ActionResult Create()
         {
-            var products = this.DeserializeObject<IEnumerable<GanttTaskModel>>("models");
-            if (products != null)
+            var tasks = this.DeserializeObject<IEnumerable<GanttTaskModel>>("models");
+            if (tasks != null)
             {
-                GanttTaskRepository.Insert(products);
+                GanttTaskRepository.Insert(tasks);
             }
-            return this.Jsonp(products);
+            return this.Jsonp(tasks);
         }
     }
 }
