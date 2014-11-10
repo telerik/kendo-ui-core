@@ -754,15 +754,19 @@ var __meta__ = {
 
             this._setRowsHeight(eventGroups, eventsByResource.length, maxRowCount);
 
-            for (var groupIndex = 0; groupIndex < eventsByResource.length; groupIndex++) {
-                var events = eventGroups[groupIndex].events;
-                for (var eventUid in events) {
-                    var eventObject = events[eventUid];
+            this._positionEvents(eventGroups, eventsByResource.length);
+
+            this.trigger("activate");
+        },
+
+        _positionEvents: function(eventGroups, groupsCount) {
+            for (var groupIndex = 0; groupIndex < groupsCount; groupIndex++) {
+                var eventsForGroup = eventGroups[groupIndex].events;
+                for (var eventUid in eventsForGroup) {
+                    var eventObject = eventsForGroup[eventUid];
                     this._positionEvent(eventObject);
                 }
             }
-
-            this.trigger("activate");
         },
 
         _setRowsHeight: function(eventGroups, groupsCount, maxRowCount) {
