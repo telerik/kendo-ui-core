@@ -86,9 +86,10 @@
                     paperSize = [ size.width, size.height ];
                     addMargin = true;
                     var origin = bbox.getOrigin();
-                    var tmp = new drawing.Group(options);
+                    var tmp = new drawing.Group();
                     tmp.transform(new geo.Matrix(1, 0, 0, 1, -origin.x, -origin.y));
                     tmp.append(group);
+
                     group = tmp;
                 } else {
                     paperSize = "A4";
