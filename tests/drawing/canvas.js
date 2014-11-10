@@ -1355,5 +1355,27 @@
                 start();
             });
         });
+
+        test("discards target origin", function() {
+            var text = new d.Text("Foo", [10, 10]);
+            group.append(text);
+
+            d.exportImage(group).done(function(withOrigin) {
+                text.position([0, 0]);
+                d.exportImage(group).done(function(noOrigin) {
+                    equal(withOrigin, noOrigin);
+                });
+            });
+        });
+
+        test("does not reparent target", function() {
+            var parent = new d.Group();
+            parent.append(group);
+            group.append(new d.Text("Foo", [10, 10]));
+
+            d.exportImage(group).done(function() {
+                ok(group.parent === parent);
+            });
+        });
     })();
 })();

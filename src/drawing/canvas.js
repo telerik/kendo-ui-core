@@ -26,6 +26,7 @@
         renderTemplate = util.renderTemplate,
         valueOrDefault = util.valueOrDefault,
 
+        g = kendo.geometry,
         d = kendo.drawing,
         BaseNode = d.BaseNode,
         Color = kendo.Color,
@@ -533,6 +534,12 @@
 
         var bbox = group.clippedBBox();
         if (bbox) {
+            var origin = bbox.getOrigin();
+            var exportRoot = new d.Group();
+            exportRoot.transform(g.transform().translate(-origin.x, -origin.y));
+            exportRoot.children.push(group);
+            group = exportRoot;
+
             var size = bbox.getSize();
             defaults.width = size.width + "px";
             defaults.height = size.height + "px";
