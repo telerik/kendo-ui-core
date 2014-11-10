@@ -521,6 +521,7 @@ var __meta__ = {
            var that = this,
                editable = that.editable,
                data,
+               item,
                index,
                template = that.template,
                valid = true;
@@ -540,7 +541,12 @@ var __meta__ = {
 
                    index = editable.element.index();
                    editable.element.replaceWith(template(data));
-                   that.items().eq(index).attr(kendo.attr("uid"), data.uid);
+                   item = that.items().eq(index);
+                   item.attr(kendo.attr("uid"), data.uid);
+
+                   if (that._hasBindingTarget()) {
+                        kendo.bind(item, data);
+                   }
                }
            }
 
