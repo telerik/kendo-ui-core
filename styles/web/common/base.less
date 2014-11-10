@@ -282,6 +282,10 @@ html body .k-button-bare.k-upload-button:hover
     .k-rtl .k-textbox:hover &,
     .k-rtl .k-button:active & {
         .sprite-position(@row - @size, @column);
+
+        & when (@icon-positioning = "material") {
+            .sprite-position(@row, @column);
+        }
     }
 }
 
@@ -296,6 +300,10 @@ html body .k-button-bare.k-upload-button:hover
     .k-textbox:hover &,
     .k-button:active & {
         .sprite-position(@row + 1, @column, @size);
+
+        & when (@icon-positioning = "material") {
+            .sprite-position(@row, @column);
+        }
     }
 }
 
@@ -312,6 +320,10 @@ html body .k-button-bare.k-upload-button:hover
     .k-rtl .k-textbox:hover &,
     .k-rtl .k-button:active & {
         .sprite-position(@row + 1, @column, @size);
+
+        & when (@icon-positioning = "material") {
+            .sprite-position(@row, @column);
+        }
     }
 }
 
