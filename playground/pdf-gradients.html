@@ -17,7 +17,7 @@
     <style>
       #test1 {
         display: table;
-        background: #ffc;
+        background: #ff8;
         padding: 2em;
         border: 1px solid black;
         margin-top: 100px;
@@ -26,24 +26,44 @@
         //transform: translate(100px, 100px), rotate(15deg);
       }
       .linear1 {
-        width: 300px;
-        height: 200px;
-        background-image: linear-gradient(45deg, red, rgba(255, 255, 0, 0.2) 50%, green, #0ff, #00f);
+        width: 100px;
+        height: 300px;
+        background-image: linear-gradient(-135deg, red, rgba(255, 255, 0, 0.2) 50%, green, #0ff, #00f);
         background-repeat: no-repeat;
         background-origin: border-box;
-        transform: rotate(45deg);
+        //transform: rotate(45deg);
         //transform: rotate(20deg);
-        border: 20px solid rgba(0, 0, 0, 0.5);
-        border-radius: 50px;
+        //border: 20px solid rgba(0, 0, 0, 0.5);
+        //border-radius: 50px;
       }
     </style>
   </head>
   <body>
 
+    <script>
+      function animateAngle() {
+        var angle = -720;
+        var el = $(".linear1");
+        var timer = setInterval(function(){
+          el.css({
+            "backgroundImage":
+            "linear-gradient(" + angle + "deg, red, rgba(255, 255, 0, 1) 50%, green, #0ff, #00f)"
+          });
+          el.html(angle);
+          draw("#test1", "svg");
+          if (angle > 720) {
+            clearInterval(timer);
+          }
+          angle += 0.5;
+        }, 10);
+      }
+    </script>
+
     Kendo:
     <button onclick="pdf('#test1')">PDF</button>
     <button onclick="draw('#test1', 'svg')">SVG</button>
     <button onclick="draw('#test1', 'canvas')">Canvas</button>
+    <button onclick="animateAngle()">Animate angle</button>
     |
     <button onclick="h2c('#test1')">html2canvas</button>
     <div id="test1">

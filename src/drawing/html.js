@@ -1148,12 +1148,65 @@
                     angle -= Math.PI;
                 }
 
+                // limit the angle between 0..2π
+                angle %= 2 * Math.PI;
+                if (angle < 0) {
+                    angle += 2 * Math.PI;
+                }
+
                 // compute gradient's start/end points.  here len is the length of the gradient line
                 // and x,y is the end point relative to the center of the rectangle in conventional
                 // (math) axis direction.
-                var len = Math.abs(width * Math.sin(angle)) + Math.abs(height * Math.cos(angle));
-                var x = len/2 * Math.sin(angle) / width;
-                var y = len/2 * Math.cos(angle) / height;
+
+                // this is the original (unscaled) length of the gradient line.  needed to deal with
+                // absolutely positioned color stops.  formula from the CSS spec:
+                // http://dev.w3.org/csswg/css-images-3/#linear-gradient-syntax
+                var pxlen = Math.abs(width * Math.sin(angle)) + Math.abs(height * Math.cos(angle));
+
+                // The math below is pretty simple, but it took a while to figure out.  We compute x
+                // and y, the *end* of the gradient line.  However, we want to transform them into
+                // element-based coordinates (SVG's gradientUnits="objectBoundingBox").  That means,
+                // x=0 is the left edge, x=1 is the right edge, y=0 is the top edge and y=1 is the
+                // bottom edge.
+                //
+                // A naive approach would use the original angle for these calculations.  Say we'd
+                // like to draw a gradient angled at 45° in a 100x400 box.  When we use
+                // objectBoundingBox, the renderer will draw it in a 1x1 *square* box, and then
+                // scale that to the desired dimensions.  The 45° angle will look more like 70°
+                // after scaling.  SVG (http://www.w3.org/TR/SVG/pservers.html#LinearGradients) says
+                // the following:
+                //
+                //     When gradientUnits="objectBoundingBox" and ‘gradientTransform’ is the
+                //     identity matrix, the normal of the linear gradient is perpendicular to the
+                //     gradient vector in object bounding box space (i.e., the abstract coordinate
+                //     system where (0,0) is at the top/left of the object bounding box and (1,1) is
+                //     at the bottom/right of the object bounding box). When the object's bounding
+                //     box is not square, the gradient normal which is initially perpendicular to
+                //     the gradient vector within object bounding box space may render
+                //     non-perpendicular relative to the gradient vector in user space. If the
+                //     gradient vector is parallel to one of the axes of the bounding box, the
+                //     gradient normal will remain perpendicular. This transformation is due to
+                //     application of the non-uniform scaling transformation from bounding box space
+                //     to user space.
+                //
+                // which is an extremely long and confusing way to tell what I just said above.
+                //
+                // For this reason we need to apply the reverse scaling to the original angle, so
+                // that when it'll finally be rendered it'll actually be at the desired slope.  Now
+                // I'll let you figure out the math yourself.
+
+                var scaledAngle = Math.atan(width * Math.tan(angle) / height);
+                var sin = Math.sin(scaledAngle), cos = Math.cos(scaledAngle);
+                var len = Math.abs(sin) + Math.abs(cos);
+                var x = len/2 * sin;
+                var y = len/2 * cos;
+
+                // Because of the arctangent, our scaledAngle ends up between -π/2..π/2, possibly
+                // losing the intended direction of the gradient.  The following fixes it.
+                if (angle > Math.PI/2 && angle <= 3*Math.PI/2) {
+                    x = -x;
+                    y = -y;
+                }
 
                 // compute the color stops.
                 var implicit = [], right = 0;
@@ -1162,7 +1215,7 @@
                     if (offset) {
                         offset = parseFloat(offset) / 100;
                     } else if (s.length) {
-                        offset = parseFloat(s.length) / len;
+                        offset = parseFloat(s.length) / pxlen;
                     } else if (i === 0) {
                         offset = 0;
                     } else if (i == gradient.stops.length - 1) {
