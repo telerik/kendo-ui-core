@@ -3881,6 +3881,8 @@ var __meta__ = {
     }
 
     var Node = Model.define({
+        id: "id",
+
         init: function(value) {
             var that = this,
                 hasChildren = that.hasChildren || value && value.hasChildren,

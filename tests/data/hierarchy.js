@@ -38,6 +38,23 @@ test("Node inherits from Model", function() {
     ok(node instanceof kendo.data.Model);
 });
 
+test("Node serializes id by default", function() {
+    var node = new Node({ id: 1 });
+
+    equal(node.toJSON().id, 1);
+});
+
+test("Node does not serializes id when idField is changed", function() {
+    var NewNode = Node.define({ id: "foo" });
+
+    var node = new NewNode({ foo: 1 });
+
+    var json = node.toJSON();
+
+    ok(typeof json.id === "undefined");
+    equal(json.foo, 1);
+});
+
 test("HierarchicalDataSource contains objects of Node type", function() {
     var dataSource = new HierarchicalDataSource( {
         data: [{}]
