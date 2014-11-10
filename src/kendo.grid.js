@@ -571,6 +571,20 @@ var __meta__ = {
         return $(elements).map(function() { return this.toArray(); });
     }
 
+    function moveCellsBetweenContainers(sources, target, leafs, columns, container, destination, groups) {
+        var sourcesDepth = depth(sources);
+        var targetDepth = depth([target]);
+
+        if (sourcesDepth > targetDepth) {
+            var groupCells = new Array(groups + 1).join('<th class="k-group-cell k-header">&nbsp;</th>');
+            destination.append($(new Array((sourcesDepth - targetDepth) + 1).join("<tr>" + groupCells + "</tr>")));
+        }
+
+        addRowSpanValue(destination, sourcesDepth - targetDepth);
+
+        moveCells(leafs, columns, container, destination);
+    }
+
     function updateCellIndex(thead, columns, offset) {
         offset = offset || 0;
 
@@ -1970,25 +1984,12 @@ var __meta__ = {
                 var sourceLockedColumns = lockedColumns(sources).length;
                 var targetLockedColumns = lockedColumns([target]).length;
 
-                var moveCellsBetweenContainers = function(source, target, leafs, columns, container, destination) {
-                    var sourcesDepth = depth(sources);
-                    var targetDepth = depth([target]);
-
-                    if (sourcesDepth > targetDepth) {
-                        destination.append($(new Array((sourcesDepth - targetDepth) + 1).join("<tr/>")));
-                    }
-
-                    addRowSpanValue(destination, sourcesDepth - targetDepth);
-
-                    moveCells(leafs, columns, container, destination);
-                }
-
                 if (sourceLockedColumns > 0 && targetLockedColumns === 0) {
-                    moveCellsBetweenContainers(sources, target, leafs, that.columns, that.lockedHeader.find("thead"), that.thead);
+                    moveCellsBetweenContainers(sources, target, leafs, that.columns, that.lockedHeader.find("thead"), that.thead, this._groups());
                 }
 
                 if (sourceLockedColumns === 0 && targetLockedColumns > 0) {
-                    moveCellsBetweenContainers(sources, target, leafs, that.columns, that.thead, that.lockedHeader.find("thead"));
+                    moveCellsBetweenContainers(sources, target, leafs, that.columns, that.thead, that.lockedHeader.find("thead"), this._groups());
                 }
 
                 target = findReorderTarget(that.columns, target, sources[0], before);

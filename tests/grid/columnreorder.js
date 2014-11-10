@@ -1836,4 +1836,33 @@
         equal(grid.lockedHeader.find("tr").eq(0).find("th")[2].rowSpan, 3, "locked column 3");
     });
 
+    test("move non locked multi-header column to locked multi-header column creates group cells when grouping is applied", function() {
+        var grid = new Grid(div, {
+            dataSource: {
+                group: ["foo"]
+            },
+            columns: [
+                { title: "master", width: 10, locked: true },
+                { title: "master2", width: 70 },
+                { title: "master3",
+                    columns: [
+                        { title: "master3-child" },
+                        { title: "master3-child1", columns: [{ title: "master3-child1-child", width: 30 }, { title: "master3-child1-child2", width: 40 } ] },
+                        { title: "master3-child2", columns: [{ title: "master3-child2-child", width: 50 }, { title: "master3-child2-child2", width: 60 } ] }
+                ] }
+            ]
+        });
+
+        grid.reorderColumn(0, grid.columns[2], true);
+
+        equal(grid.thead.find("th").length, 1);
+        equal(grid.thead.find("tr").length, 1, "non locked rows");
+
+        ok(grid.lockedHeader.find("tr").eq(0).find("th").eq(0).hasClass("k-group-cell"));
+        ok(grid.lockedHeader.find("tr").eq(1).find("th").eq(0).hasClass("k-group-cell"));
+        ok(grid.lockedHeader.find("tr").eq(2).find("th").eq(0).hasClass("k-group-cell"));
+
+        equal(grid.lockedHeader.find("tr").length, 3);
+    });
+
 })();
