@@ -3,6 +3,7 @@ package com.kendoui.taglib.gantt;
 
 
 import com.kendoui.taglib.BaseTag;
+import com.kendoui.taglib.DataBoundWidget;
 
 import com.kendoui.taglib.DataSourceTag;
 
@@ -14,7 +15,7 @@ import com.kendoui.taglib.GanttTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class ResourcesTag extends  BaseTag  /* interfaces */ /* interfaces */ {
+public class ResourcesTag extends  BaseTag implements DataBoundWidget /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
