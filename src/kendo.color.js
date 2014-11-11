@@ -150,62 +150,71 @@
 
     // Tools from ColorPicker =================================================
 
+    var namedColorRegexp = [ "transparent" ];
+    for (var i in Color.namedColors) {
+        if (Color.namedColors.hasOwnProperty(i)) {
+            namedColorRegexp.push(i);
+        }
+    }
+    namedColorRegexp = new RegExp("^(" + namedColorRegexp.join("|") + ")(\\W|$)", "i");
+
     /*jshint eqnull:true  */
 
     function parseColor(color, nothrow) {
+        var m, ret;
         if (color == null || color == "none") {
             return null;
-        }
-        if (color == "transparent") {
-            return new _RGB(0, 0, 0, 0);
         }
         if (color instanceof _Color) {
             return color;
         }
         color = color.toLowerCase();
-        if (Color.namedColors.hasOwnProperty(color)) {
-            color = Color.namedColors[color];
+        if ((m = namedColorRegexp.exec(color))) {
+            if (m[1] == "transparent") {
+                color = new _RGB(1, 1, 1, 0);
+            }
+            else {
+                color = parseColor(Color.namedColors[m[1]], nothrow);
+            }
+            color.match = [ m[1] ];
+            return color;
         }
-        var m = /^#?([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i.exec(color);
-        if (m) {
-            return new _Bytes(parseInt(m[1], 16),
-                              parseInt(m[2], 16),
-                              parseInt(m[3], 16), 1);
+        if ((m = /^#?([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})/i.exec(color))) {
+            ret = new _Bytes(parseInt(m[1], 16),
+                             parseInt(m[2], 16),
+                             parseInt(m[3], 16), 1);
         }
-        m = /^#?([0-9a-f])([0-9a-f])([0-9a-f])$/i.exec(color);
-        if (m) {
-            return new _Bytes(parseInt(m[1] + m[1], 16),
-                              parseInt(m[2] + m[2], 16),
-                              parseInt(m[3] + m[3], 16), 1);
+        else if ((m = /^#?([0-9a-f])([0-9a-f])([0-9a-f])/i.exec(color))) {
+            ret = new _Bytes(parseInt(m[1] + m[1], 16),
+                             parseInt(m[2] + m[2], 16),
+                             parseInt(m[3] + m[3], 16), 1);
         }
-        m = /^rgb\(\s*([0-9]+)\s*,\s*([0-9]+)\s*,\s*([0-9]+)\s*\)/.exec(color);
-        if (m) {
-            return new _Bytes(parseInt(m[1], 10),
-                              parseInt(m[2], 10),
-                              parseInt(m[3], 10), 1);
+        else if ((m = /^rgb\(\s*([0-9]+)\s*,\s*([0-9]+)\s*,\s*([0-9]+)\s*\)/.exec(color))) {
+            ret = new _Bytes(parseInt(m[1], 10),
+                             parseInt(m[2], 10),
+                             parseInt(m[3], 10), 1);
         }
-        m = /^rgba\(\s*([0-9]+)\s*,\s*([0-9]+)\s*,\s*([0-9]+)\s*,\s*([0-9.]+)\s*\)/.exec(color);
-        if (m) {
-            return new _Bytes(parseInt(m[1], 10),
-                              parseInt(m[2], 10),
-                              parseInt(m[3], 10), parseFloat(m[4]));
+        else if ((m = /^rgba\(\s*([0-9]+)\s*,\s*([0-9]+)\s*,\s*([0-9]+)\s*,\s*([0-9.]+)\s*\)/.exec(color))) {
+            ret = new _Bytes(parseInt(m[1], 10),
+                             parseInt(m[2], 10),
+                             parseInt(m[3], 10), parseFloat(m[4]));
         }
-        m = /^rgb\(\s*([0-9]*\.?[0-9]+)%\s*,\s*([0-9]*\.?[0-9]+)%\s*,\s*([0-9]*\.?[0-9]+)%\s*\)/.exec(color);
-        if (m) {
-            return new _RGB(parseFloat(m[1]) / 100,
-                            parseFloat(m[2]) / 100,
-                            parseFloat(m[3]) / 100, 1);
+        else if ((m = /^rgb\(\s*([0-9]*\.?[0-9]+)%\s*,\s*([0-9]*\.?[0-9]+)%\s*,\s*([0-9]*\.?[0-9]+)%\s*\)/.exec(color))) {
+            ret = new _RGB(parseFloat(m[1]) / 100,
+                           parseFloat(m[2]) / 100,
+                           parseFloat(m[3]) / 100, 1);
         }
-        m = /^rgba\(\s*([0-9]*\.?[0-9]+)%\s*,\s*([0-9]*\.?[0-9]+)%\s*,\s*([0-9]*\.?[0-9]+)%\s*,\s*([0-9.]+)\s*\)/.exec(color);
-        if (m) {
-            return new _RGB(parseFloat(m[1]) / 100,
-                            parseFloat(m[2]) / 100,
-                            parseFloat(m[3]) / 100, parseFloat(m[4]));
+        else if ((m = /^rgba\(\s*([0-9]*\.?[0-9]+)%\s*,\s*([0-9]*\.?[0-9]+)%\s*,\s*([0-9]*\.?[0-9]+)%\s*,\s*([0-9.]+)\s*\)/.exec(color))) {
+            ret = new _RGB(parseFloat(m[1]) / 100,
+                           parseFloat(m[2]) / 100,
+                           parseFloat(m[3]) / 100, parseFloat(m[4]));
         }
-        if (!nothrow) {
+        if (ret) {
+            ret.match = m;
+        } else if (!nothrow) {
             throw new Error("Cannot parse color: " + color);
         }
-        return undefined;
+        return ret;
     }
 
     function hex(n, width, pad) {
