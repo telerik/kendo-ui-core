@@ -1119,6 +1119,61 @@
         window.checkTuple = null;
     });
 
+    test("PivotGrid renders correctly column tuples with missing measures", function() {
+        var dataSource = new PivotDataSource({
+            measures: ["measure 1", "measure 2"],
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    options.success({
+                        axes: {
+                            columns: {
+                                tuples: [
+                                    { members: [ { name: "Calendar", children: [], levelNum: "0" }, { name: "measure 1", children: [] } ] },
+                                    { members: [ { name: "Calendar", children: [], levelNum: "0" }, { name: "measure 2", children: [] } ] },
+                                    { members: [ { name: "2008", parentName: "Calendar", children: [], levelNum: "1" }, { name: "measure 1", children: [] } ] },
+                                    { members: [ { name: "2008", parentName: "Calendar", children: [], levelNum: "1" }, { name: "measure 2", children: [] } ] },
+                                    { members: [ { name: "2009", parentName: "Calendar", children: [], levelNum: "1" }, { name: "measure 1", children: [] } ] },
+                                    { members: [ { name: "2010", parentName: "Calendar", children: [], levelNum: "1" }, { name: "measure 1", children: [] } ] }
+                                ]
+                            },
+                            rows: {
+                                tuples: [
+                                    { members: [ { name: "Product", children: [], levelNum: "0" } ] },
+                                    { members: [ { name: "P1", parentName: "Product", children: [], levelNum: "1" } ] },
+                                    { members: [ { name: "P2", parentName: "Product", children: [], levelNum: "1" } ] }
+                                ]
+                            }
+                        },
+                        data: [
+                            { value: "92", ordinal: 0 },
+                            { value: "32265", ordinal: 1 },
+                            { value: "92", ordinal: 2 },
+                            { value: "92", ordinal: 3 },
+                            { value: "92", ordinal: 4 },
+                            { value: "92", ordinal: 6 },
+                            { value: "92", ordinal: 7 },
+                            { value: "92", ordinal: 8 },
+                            { value: "21067", ordinal: 9 },
+                            { value: "92", ordinal: 10 },
+                            { value: "92", ordinal: 11 }
+                        ]
+                    });
+                }
+            }
+        });
+
+        createPivot({
+            dataSource: dataSource
+        });
+
+        //no JavaScript errors
+        ok(true);
+    });
+
     module("PivotGrid rows header rendering", {
         setup: function() {
             kendo.ns = "kendo-";

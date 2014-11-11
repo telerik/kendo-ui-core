@@ -49,7 +49,7 @@ var __meta__ = {
         HEADER_TEMPLATE = "#: data.member.caption || data.member.name #",
         KPISTATUS_TEMPLATE = '<span class="k-icon k-i-kpi-#=data.dataItem.value > 0 ? \"open\" : data.dataItem.value < 0 ? \"denied\" : \"hold\"#">#:data.dataItem.value#</span>',
         KPITREND_TEMPLATE = '<span class="k-icon k-i-kpi-#=data.dataItem.value > 0 ? \"increase\" : data.dataItem.value < 0 ? \"decrease\" : \"equal\"#">#:data.dataItem.value#</span>',
-        DATACELL_TEMPLATE = '#: data.dataItem ? (data.dataItem.fmtValue || data.dataItem.value) : "" #',
+        DATACELL_TEMPLATE = '#: data.dataItem ? (data.dataItem.fmtValue || data.dataItem.value || " ") : " " #',
         LAYOUT_TABLE = '<table class="k-pivot-layout">' +
                             '<tr>' +
                                 '<td>' +
@@ -1240,6 +1240,7 @@ var __meta__ = {
                 tuples = parseSource(sourceAxes.columns.tuples, columnMeasures);
                 data = prepareDataOnColumns(tuples, data);
             }
+
             var mergedColumns = mergeTuples(axes.columns.tuples, tuples, columnMeasures);
 
             if (axisToSkip == "rows") {
@@ -2016,20 +2017,18 @@ var __meta__ = {
         var rowsLength = indices.length;
         var columnsLength = Math.max(data.length / rowsLength, 1);
         var rowIndex, columnIndex, targetIndex, sourceIndex;
+        var calcIndex;
 
         for (rowIndex = 0; rowIndex < rowsLength; rowIndex++) {
             targetIndex = columnsLength * rowIndex;
             sourceIndex = columnsLength * indices[rowIndex];
             for (columnIndex = 0; columnIndex < columnsLength; columnIndex++) {
-                result[targetIndex + columnIndex] = data[sourceIndex + columnIndex];
+                calcIndex = parseInt(sourceIndex + columnIndex);
+                result[parseInt(targetIndex + columnIndex)] = data[calcIndex] || { value: "", fmtValue: "", ordinal: calcIndex };
             }
         }
 
         return result;
-    }
-
-    function insertEmptyItem(index, data) {
-
     }
 
     function prepareDataOnColumns(tuples, data, rootAdded) {
@@ -2041,12 +2040,13 @@ var __meta__ = {
         var indices = buildDataIndices(tuples);
         var columnsLength = indices.length;
         var rowsLength = Math.max(data.length / columnsLength, 1);
-        var columnIndex, rowIndex, dataIndex;
+        var columnIndex, rowIndex, dataIndex, calcIndex;
 
         for (rowIndex = 0; rowIndex < rowsLength; rowIndex++) {
             dataIndex = columnsLength * rowIndex;
             for (columnIndex = 0; columnIndex < columnsLength; columnIndex++) {
-                result[dataIndex + columnIndex] = data[indices[columnIndex] + dataIndex];
+                calcIndex = indices[columnIndex] + dataIndex;
+                result[dataIndex + columnIndex] = data[calcIndex] || { value: "", fmtValue: "", ordinal: calcIndex };
             }
         }
 
