@@ -1,17 +1,26 @@
 ﻿namespace Kendo.Mvc.Examples.Models.TreeList
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
 
     public class EmployeeDirectoryModel
     {
         public int? EmployeeId { get; set; }
+
+        [Required]
         public string FirstName { get; set; }
+
+        [Required]
         public string LastName { get; set; }
+
         public int? ReportsTo { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
         public string Phone { get; set; }
+
+        [Required]
+        [Range(0, 9999)]
         public int? Extension { get; set; }
         public string Position { get; set; }
         public bool hasChildren { get; set; }

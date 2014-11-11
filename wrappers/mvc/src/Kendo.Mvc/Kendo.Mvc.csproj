@@ -2297,7 +2297,6 @@
   <ItemGroup>
     <Compile Include="UI\TreeList\TreeListColumn.cs" />
     <Compile Include="UI\TreeList\Fluent\TreeListColumnBuilder.cs" />
-    <Compile Include="UI\TreeList\TreeListColumnComman.cs" />
     <Compile Include="UI\TreeList\Settings\TreeListColumnFilterableSettings.cs" />
     <Compile Include="UI\TreeList\Fluent\TreeListColumnFilterableSettingsBuilder.cs" />
     <Compile Include="UI\TreeList\Settings\TreeListColumnSortableSettings.cs" />

@@ -65,7 +65,7 @@ namespace Kendo.Mvc.UI
             SerializeEditTemplate(json);
         }
 
-        protected string EditorHtml { get; set; }
+        public string EditorHtml { get; set; }
 
         public Func<T> DefaultDataItem { get; set; }
 

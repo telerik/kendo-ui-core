@@ -19,6 +19,7 @@
                 style = "text-align: center;"
             });
         })
+        .Editable()
         .DataSource(dataSource => dataSource
             .Create(create => create.Action("Create", "EmployeeDirectory"))
             .Read(read => read.Action("All", "EmployeeDirectory"))

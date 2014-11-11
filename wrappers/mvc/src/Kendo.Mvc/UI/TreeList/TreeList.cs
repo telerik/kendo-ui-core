@@ -8,6 +8,9 @@ namespace Kendo.Mvc.UI
     using System.Web.UI;
     using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.Extensions;
+    using Kendo.Mvc.UI.Html;
+    using System.Text.RegularExpressions;
+    using System.Web.Mvc.Html;
 
     public class TreeList<T> : WidgetBase where T : class
     {
@@ -158,11 +161,62 @@ namespace Kendo.Mvc.UI
 
         protected override void WriteHtml(HtmlTextWriter writer)
         {
+            if (Editable.Enabled)
+            {
+                InitializeEditors();
+            }
+
             var html = new TreeListHtmlBuilder<T>(this).Build();
 
             html.WriteTo(writer);
 
             base.WriteHtml(writer);
+        }
+
+        private HtmlHelper<T> CreateHtmlHelper(object model)
+        {
+            return new HtmlHelper<T>(ViewContext, new GridViewDataContainer<T>((T)model, ViewContext.ViewData));
+        }
+
+        private void InitializeEditors()
+        {
+            var popupSlashes = new Regex("(?<=data-val-regex-pattern=\")([^\"]*)", RegexOptions.Multiline);
+
+            var dataItem = Editable.DefaultDataItem();
+
+            var htmlHelper = CreateHtmlHelper(dataItem);
+
+            if (Editable.Enabled && Editable.Mode != "popup")
+            {
+                Columns.Each(column =>
+                {
+                    if (!column.Field.HasValue())
+                    {
+                        return;
+                    }
+
+                    string editorHtml;
+
+                    //if (column.TemplateName.HasValue())
+                    //{
+                    //    editorHtml = htmlHelper.EditorFor(expression, column.TemplateName).ToHtmlString();
+                    //}
+                    //else
+                    //{
+                        editorHtml = htmlHelper.Editor(column.Field).ToHtmlString();
+                    //}
+
+                    if (IsInClientTemplate)
+                    {
+                        editorHtml = popupSlashes.Replace(editorHtml, match =>
+                        {
+                            return match.Groups[0].Value.Replace("\\", "\\\\");
+                        });
+                    }
+
+                    column.Editor = editorHtml;
+                });
+            }
         }
     }
 }
