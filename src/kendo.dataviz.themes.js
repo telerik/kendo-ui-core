@@ -319,7 +319,10 @@ var __meta__ = {
                 }, {
                     type: "delete"
                 }, {
-                    type: "rotate",
+                    type: "rotateClockwise",
+                    step: 90
+                }, {
+                    type: "rotateAnticlockwise",
                     step: 90
                 }]
             }

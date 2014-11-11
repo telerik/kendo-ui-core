@@ -14,6 +14,7 @@
         diagram = {
             element: $("#diagram")
         };
+
         toolbar = new dataviz.diagram.DiagramToolBar(diagram, options || {});
     }
 
@@ -34,15 +35,23 @@
         equal(toolbar.element.find("a").data("action"), "delete");
     });
 
-    test("should create rotate action", function () {
-        createToolBar({ tools: ["rotate"] });
-        equal(toolbar.element.find("a:first").data("action"), "rotateAnticlockwise");
-        equal(toolbar.element.find("a:last").data("action"), "rotateClockwise");
+    test("should create rotateAnticlockwise action", function () {
+        createToolBar({ tools: ["rotateAnticlockwise"] });
+        equal(toolbar.element.find("a").data("action"), "rotateAnticlockwise");
     });
 
-    test("should create rotate action with custom step", function () {
-        createToolBar({ tools: [{ type: "rotate", step: 45 }] });
-        equal(toolbar.element.find("a:first").data("step"), 45);
-        equal(toolbar.element.find("a:last").data("step"), 45);
+    test("should create rotateClockwise action", function () {
+        createToolBar({ tools: ["rotateClockwise"] });
+        equal(toolbar.element.find("a").data("action"), "rotateClockwise");
+    });
+
+    test("should create rotateAnticlockwise action with custom step", function () {
+        createToolBar({ tools: [{ type: "rotateAnticlockwise", step: 45 }] });
+        equal(toolbar.element.find("a").data("step"), 45);
+    });
+
+    test("should create rotateClockwise action with custom step", function () {
+        createToolBar({ tools: [{ type: "rotateClockwise", step: 45 }] });
+        equal(toolbar.element.find("a").data("step"), 45);
     });
 })();

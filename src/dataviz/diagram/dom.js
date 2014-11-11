@@ -1597,6 +1597,24 @@
                 "dataBound"
             ],
 
+            _createGlobalToolBar: function() {
+                var tools = this.options.editable.tools;
+                this.toolBar = new DiagramToolBar(this, {
+                    tools: tools || {},
+                    click: proxy(this._toolBarClick, this),
+                    modal: false
+                });
+
+                this.toolBar.element.css({
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: this.element.width()
+                });
+
+                this.element.append(this.toolBar.element);
+            },
+
             createShape: function() {
                 var that = this;
                 if ((this.editor && this.editor.end()) || !this.editor) {
@@ -1707,7 +1725,9 @@
                     .attr("tabindex", 0)
                     .addClass("k-widget k-diagram");
 
+
                 this.scrollable = $("<div />").appendTo(this.element);
+                this._createGlobalToolBar();
             },
 
             _initShapeDefaults: function() {
@@ -1911,6 +1931,8 @@
 
                 that._destroyEditor();
                 that.destroyScroller();
+                that._destroyGlobalToolBar();
+                that._destroyToolBar();
             },
 
             destroyScroller: function () {
@@ -2602,10 +2624,6 @@
                     di = isDefined(items) ? this._getDiagramItems(items) : {shapes: this.shapes};
                 if (di.shapes.length > 0) {
                     var item = di.shapes[0];
-                    if (origin === true) {
-                        rect.x -= item._rotationOffset.x;
-                        rect.y -= item._rotationOffset.y;
-                    }
                     rect = item.bounds(ROTATED);
                     for (var i = 1; i < di.shapes.length; i++) {
                         item = di.shapes[i];
@@ -3045,20 +3063,21 @@
             _createToolBar: function() {
                 var diagram = this.toolService.diagram;
 
-                if (!this.toolBar && diagram.select().length === 1) {
+                if (!this.singleToolBar && diagram.select().length === 1) {
                     var element = this.toolService.hoveredItem;
                     if (element) {
                         var tools = element.options.editable.tools;
                         if (tools) {
                             var padding = 20;
                             var point;
-                            this.toolBar = new DiagramToolBar(diagram, {
+                            this.singleToolBar = new DiagramToolBar(diagram, {
                                 tools: tools,
-                                click: proxy(this._toolBarClick, this)
+                                click: proxy(this._toolBarClick, this),
+                                modal: true
                             });
-                            var toolBarElement = this.toolBar.element;
-                            var popupWidth = this.toolBar._popup.element.outerWidth();
-                            var popupHeight = this.toolBar._popup.element.outerHeight();
+                            var toolBarElement = this.singleToolBar.element;
+                            var popupWidth = this.singleToolBar._popup.element.outerWidth();
+                            var popupHeight = this.singleToolBar._popup.element.outerHeight();
                             if (element instanceof Shape) {
                                 var selectionBounds = this._resizingAdorner.bounds();
                                 var shapeBounds = element._transformedBounds();
@@ -3087,7 +3106,7 @@
                                 var offset = this.element.offset();
                                 point = Point(point.x + offset.left - 8, point.y + offset.top);
                                 point = Point(math.max(point.x, 0), math.max(point.y, 0));
-                                this.toolBar.show(point);
+                                this.singleToolBar.showAt(point);
                             } else {
                                 this._destroyToolBar();
                             }
@@ -3482,6 +3501,14 @@
             },
 
             _destroyToolBar: function() {
+                if (this.singleToolBar) {
+                    this.singleToolBar.hide();
+                    this.singleToolBar.destroy();
+                    this.singleToolBar = null;
+                }
+            },
+
+            _destroyGlobalToolBar: function() {
                 if (this.toolBar) {
                     this.toolBar.hide();
                     this.toolBar.destroy();
@@ -3605,10 +3632,14 @@
                 kendo.Observable.fn.init.call(this);
                 this.diagram = diagram;
                 this.options = deepExtend({}, this.options, options);
+                this._tools = [];
                 this.createToolBar();
-                this.createTools(this.options.tools);
+                this.createTools();
+                this.appendTools();
 
-                this.createPopup();
+                if (this.options.modal) {
+                    this.createPopup();
+                }
 
                 this.bind(this.events, options);
             },
@@ -3616,12 +3647,21 @@
             events: ["click"],
 
             createPopup: function() {
-                this.container = $("<div></div>").append(this.element);
+                this.container = $("<div/>").append(this.element);
                 this._popup = this.container.kendoPopup({}).getKendoPopup();
             },
 
+            appendTools: function() {
+                for (var i = 0; i < this._tools.length; i++) {
+                    var tool = this._tools[i];
+                    if (tool.buttons && tool.buttons.length || !defined(tool.buttons)) {
+                        this._toolBar.add(tool);
+                    }
+                }
+            },
+
             createToolBar: function() {
-                this.element = $("<div id='diagramToolBar'></div>");
+                this.element = $("<div/>");
                 this._toolBar = this.element
                     .kendoToolBar({
                         click: proxy(this.click, this),
@@ -3631,8 +3671,7 @@
 
             createTools: function() {
                 for (var i = 0; i < this.options.tools.length; i++) {
-                    var tool = this.options.tools[i];
-                    this.createTool(tool);
+                    this.createTool(this.options.tools[i]);
                 }
             },
 
@@ -3646,59 +3685,124 @@
                         });
                     }
                 } else {
-                    tool = this[tool + "Tool"]();
+                    tool = this[tool + "Tool"]({});
                     if (tool) {
                         tool.call(this);
                     }
                 }
             },
 
-            show: function(point) {
-                this._popup.open(point.x, point.y);
+            showAt: function(point) {
+                if (this._popup) {
+                    this._popup.open(point.x, point.y);
+                }
             },
 
             hide: function() {
-                this._popup.close();
+                if (this._popup) {
+                    this._popup.close();
+                }
+            },
+
+            newGroup: function() {
+                return {
+                    type: "buttonGroup",
+                    buttons: []
+                };
             },
 
             editTool: function() {
-                this._toolBar.add({
+                this._tools.push({
                     spriteCssClass: "k-icon k-i-pencil",
-                    type: "button",
                     showText: "overflow",
+                    type: "button",
                     text: "Edit",
                     attributes: this._setAttributes({ action: "edit" })
                 });
             },
 
             deleteTool: function() {
-                this._toolBar.add({
+                this._tools.push({
                     spriteCssClass: "k-icon k-i-close",
                     showText: "overflow",
                     type: "button",
-                    text: "delete",
+                    text: "Delete",
                     attributes: this._setAttributes({ action: "delete" })
                 });
             },
 
-            rotateTool: function(options) {
-                options = options || {};
-                this._toolBar.add({
-                    type: "buttonGroup",
-                    buttons: [{
-                        spriteCssClass: "k-icon k-i-rotateccw",
-                        attributes: this._setAttributes({ action: "rotateAnticlockwise", step: options.step }),
-                        showText: "overflow",
-                        text: "rotateAnticlockwise",
-                        group: "rotate"
-                    }, {
-                        spriteCssClass: "k-icon k-i-rotatecw",
-                        attributes: this._setAttributes({ action: "rotateClockwise", step: options.step }),
-                        showText: "overflow",
-                        text: "rotateClockwise",
-                        group: "rotate"
-                    }]
+            rotateAnticlockwiseTool: function(options) {
+                this._appendGroup("rotate");
+                this._rotateGroup.buttons.push({
+                    spriteCssClass: "k-icon k-i-rotateccw",
+                    showText: "overflow",
+                    text: "RotateAnticlockwise",
+                    group: "rotate",
+                    attributes: this._setAttributes({ action: "rotateAnticlockwise", step: options.step })
                 });
+            },
+
+            rotateClockwiseTool: function(options) {
+                this._appendGroup("rotate");
+                this._rotateGroup.buttons.push({
+                    spriteCssClass: "k-icon k-i-rotatecw",
+                    attributes: this._setAttributes({ action: "rotateClockwise", step: options.step }),
+                    showText: "overflow",
+                    text: "RotateClockwise",
+                    group: "rotate"
+                });
+            },
+
+            createShapeTool: function() {
+                this._appendGroup("create");
+                this._createGroup.buttons.push({
+                    spriteCssClass: "k-icon k-i-shape",
+                    showText: "overflow",
+                    text: "CreateShape",
+                    group: "create",
+                    attributes: this._setAttributes({ action: "createShape" })
+                });
+            },
+
+            createConnectionTool: function() {
+                this._appendGroup("create");
+                this._createGroup.buttons.push({
+                    spriteCssClass: "k-icon k-i-connector",
+                    showText: "overflow",
+                    text: "CreateConnection",
+                    group: "create",
+                    attributes: this._setAttributes({ action: "createConnection" })
+                });
+            },
+
+            undoTool: function() {
+                this._appendGroup("history");
+                this._historyGroup.buttons.push({
+                    spriteCssClass: "k-icon k-i-undo",
+                    showText: "overflow",
+                    text: "Undo",
+                    group: "history",
+                    attributes: this._setAttributes({ action: "undo" })
+                });
+            },
+
+            redoTool: function() {
+                this._appendGroup("history");
+                this._historyGroup.buttons.push({
+                    spriteCssClass: "k-icon k-i-redo",
+                    showText: "overflow",
+                    text: "Redo",
+                    group: "history",
+                    attributes: this._setAttributes({ action: "redo" })
+                });
+            },
+
+            _appendGroup: function(name) {
+                var prop = "_" + name + "Group";
+                if (!this[prop]) {
+                    this[prop] = this.newGroup();
+                    this._tools.push(this[prop]);
+                }
             },
 
             _setAttributes: function(attributes) {
@@ -3743,7 +3847,7 @@
             },
 
             eventData: function(action) {
-                var element = this.selectedElement(),
+                var element = this.selectedElements(),
                     shapes = [], connections = [];
 
                 if (element instanceof Shape) {
@@ -3760,29 +3864,49 @@
             },
 
             "delete": function() {
-                this.diagram._remove(this.selectedElement(), true);
+                this.diagram._remove(this.selectedElements(), true);
             },
 
             edit: function() {
-                this.diagram.edit(this.selectedElement());
+                this.diagram.edit(this.selectedElements()[0]);
             },
 
             rotateClockwise: function(options) {
-                var element = this.selectedElement();
-                var currentAngle = element.rotate().angle;
-                element.rotate(currentAngle + parseFloat(options.step || 90));
-                this.diagram._updateAdorners();
+                var elements = this.selectedElements();
+                var angle = parseFloat(options.step || 90);
+                this._rotate(angle);
             },
 
             rotateAnticlockwise: function(options) {
-                var element = this.selectedElement();
-                var currentAngle = element.rotate().angle;
-                element.rotate(currentAngle - parseFloat(options.step || 90));
-                this.diagram._updateAdorners();
+                var elements = this.selectedElements();
+                var angle = parseFloat(options.step || 90);
+                this._rotate(-angle);
             },
 
-            selectedElement: function() {
-                return this.diagram.select()[0];
+            _rotate: function(angle) {
+                var adorner = this.diagram._resizingAdorner;
+                adorner.angle(adorner.angle() + angle);
+                adorner.rotate();
+            },
+
+            selectedElements: function() {
+                return this.diagram.select();
+            },
+
+            createShape: function() {
+                this.diagram.createShape();
+            },
+
+            createConnection: function() {
+                this.diagram.createConnection();
+            },
+
+            undo: function() {
+                this.diagram.undo();
+            },
+
+            redo: function() {
+                this.diagram.redo();
             },
 
             destroy: function() {
@@ -3791,7 +3915,9 @@
                 this.options = null;
 
                 this._toolBar.destroy();
-                this._popup.destroy();
+                if (this._popup) {
+                    this._popup.destroy();
+                }
             }
         });
 

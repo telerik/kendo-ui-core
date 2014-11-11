@@ -1701,9 +1701,30 @@
                     handle = this.map[i];
                     handle.visual.visible(visibleHandles);
                 }
+
                 if (that.rotationThumb) {
                     that.rotationThumb.visible(visibleThumb);
                 }
+            },
+
+            angle: function(value) {
+                if (defined(value)) {
+                    this._angle = value;
+                }
+
+                return this._angle;
+            },
+
+            rotate: function() {
+                var center = this._innerBounds.center();
+                var currentAngle = this.angle();
+                this._internalChange = true;
+                for (var i = 0; i < this.shapes.length; i++) {
+                    var shape = this.shapes[i];
+                    currentAngle = (currentAngle + this.initialRotates[i] - this._startAngle) % 360;
+                    shape.rotate(currentAngle, center);
+                }
+                this.refresh();
             },
 
             move: function (handle, p) {
