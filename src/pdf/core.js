@@ -784,7 +784,7 @@
     }, {
         render: function(out) {
             var data = this.data.get(), props = this.props;
-            if (this.compress && global.pako) {
+            if (this.compress && global.pako && typeof global.pako.deflate == "function") {
                 if (!props.Filter) {
                     props.Filter = [];
                 } else if (!(props.Filter instanceof Array)) {
