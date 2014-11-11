@@ -49,7 +49,7 @@ var __meta__ = {
         HEADER_TEMPLATE = "#: data.member.caption || data.member.name #",
         KPISTATUS_TEMPLATE = '<span class="k-icon k-i-kpi-#=data.dataItem.value > 0 ? \"open\" : data.dataItem.value < 0 ? \"denied\" : \"hold\"#">#:data.dataItem.value#</span>',
         KPITREND_TEMPLATE = '<span class="k-icon k-i-kpi-#=data.dataItem.value > 0 ? \"increase\" : data.dataItem.value < 0 ? \"decrease\" : \"equal\"#">#:data.dataItem.value#</span>',
-        DATACELL_TEMPLATE = '#: data.dataItem ? (data.dataItem.fmtValue || data.dataItem.value || " ") : " " #',
+        DATACELL_TEMPLATE = '#= data.dataItem ? kendo.htmlEncode(data.dataItem.fmtValue || data.dataItem.value) || "&nbsp;" : "&nbsp;" #',
         LAYOUT_TABLE = '<table class="k-pivot-layout">' +
                             '<tr>' +
                                 '<td>' +

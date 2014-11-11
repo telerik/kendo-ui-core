@@ -3946,4 +3946,25 @@
 
         equal(measures.width(), rowFields.width());
     });
+
+    test("PivotGrid renders nbsp if no data value", 1, function() {
+        var tuples = [
+            { members: [ { name: "measure 1", children: [] } ] }
+        ]
+
+        var measures = ["measure 1"];
+
+        var data = [
+            { value: "" }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, data, measures)
+        });
+
+        var rows = pivotgrid.wrapper.find(".k-grid-content").find("tbody").find("tr");
+        var cell = rows.eq(0).find("td").eq(0);
+
+        equal(cell.html(), "&nbsp;");
+    });
 })();
