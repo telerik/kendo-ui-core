@@ -57,5 +57,15 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        /// <summary>
+        /// Forces the use of server-side proxy even if the browser supports local saving.
+        /// </summary>
+        /// <param name="forceProxy">true if the server proxy should be used always; false for automatic detection</param>
+        public GridExcelBuilder ForceProxy(bool forceProxy)
+        {
+            excel.ForceProxy = forceProxy;
+            return this;
+        }
     }
 }
