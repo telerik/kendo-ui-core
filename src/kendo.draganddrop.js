@@ -636,7 +636,7 @@ var __meta__ = {
 
         options: {
             name: "Draggable",
-            distance: 5,
+            distance: ( kendo.support.touch ? 0 : 5),
             group: "default",
             cursorOffset: null,
             axis: null,
@@ -754,6 +754,8 @@ var __meta__ = {
                 that.userEvents.cancel();
                 that._afterEnd();
             }
+
+            that.userEvents.capture();
 
             $(document).on(KEYUP, that._captureEscape);
         },
