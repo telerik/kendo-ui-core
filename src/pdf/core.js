@@ -12,7 +12,6 @@
     /* jshint loopfunc:true */
     /* jshint newcap:false */
     /* global VBArray */
-    /* global console */
 
     var kendo = global.kendo;
 
@@ -363,10 +362,10 @@
     function loadBinary(url, cont) {
         function error() {
             if (global.console) {
-                if (console.error) {
-                    console.error("Cannot load URL: %s", url);
+                if (global.console.error) {
+                    global.console.error("Cannot load URL: %s", url);
                 } else {
-                    console.log("Cannot load URL: %s", url);
+                    global.console.log("Cannot load URL: %s", url);
                 }
             }
             cont(null);

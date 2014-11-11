@@ -10,7 +10,6 @@
 
     "use strict";
 
-    /* global console */ // XXX: temporary
     /* jshint eqnull:true */
 
     /* -----[ local vars ]----- */
@@ -1251,7 +1250,10 @@
                 );
                 break;
               case "radial":
-                console.error("TODO: Radial gradients");
+                // XXX:
+                if (window.console && window.console.log) {
+                    window.console.log("Radial gradients are not yet supported in HTML renderer");
+                }
                 break;
             }
         };
