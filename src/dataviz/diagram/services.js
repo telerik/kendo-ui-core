@@ -568,6 +568,19 @@
             }
         });
 
+        function noMeta(meta) {
+            return meta.ctrlKey === false && meta.altKey === false && meta.shiftKey === false;
+        }
+
+        function tryActivateSelection(options, meta) {
+            var enabled = options !== false;
+
+            if (options.key && options.key != "none") {
+                enabled = meta[options.key + "Key"];
+            }
+            return enabled;
+        }
+
         var ScrollerTool = EmptyTool.extend({
             init: function (toolService) {
                 var tool = this;
@@ -598,9 +611,23 @@
                 virtualScroll(scroller.dimensions.y);
                 scroller.disable();
             },
+
             tryActivate: function (p, meta) {
-                return this.toolService.hoveredItem === undefined && meta.ctrlKey;
+                var toolService = this.toolService;
+                var options = toolService.diagram.options.pannable;
+                var enabled = meta.ctrlKey;
+
+                if (defined(options.key)) {
+                    if (!options.key || options.key == "none") {
+                        enabled = noMeta(meta);
+                    } else {
+                        enabled = meta[options.key + "Key"] && !(meta.ctrlKey && defined(toolService.hoveredItem));
+                    }
+                }
+
+                return  options !== false && enabled && !defined(toolService.hoveredAdorner) && !defined(toolService._hoveredConnector);
             },
+
             start: function () {
                 this.scroller.enable();
             },
@@ -645,10 +672,10 @@
                 var toolService = this.toolService,
                     diagram = toolService.diagram,
                     hoveredItem = toolService.hoveredItem,
-                    selectable = diagram.options.selectable !== false;
+                    selectable = diagram.options.selectable;
 
                 if (hoveredItem) {
-                    if (selectable) {
+                    if (tryActivateSelection(selectable, meta)) {
                         selectSingle(hoveredItem, meta);
                     }
                     if (hoveredItem.adorner) { //connection
@@ -702,9 +729,9 @@
             },
             tryActivate: function (p, meta) {
                 var toolService = this.toolService;
-                var diagram = toolService.diagram;
-                var selectable = diagram.options.selectable !== false;
-                return selectable && !defined(toolService.hoveredItem) && !defined(toolService.hoveredAdorner);
+                var enabled = tryActivateSelection(toolService.diagram.options.selectable, meta);
+
+                return enabled && !defined(toolService.hoveredItem) && !defined(toolService.hoveredAdorner);
             },
             start: function (p) {
                 var diagram = this.toolService.diagram;
@@ -737,7 +764,7 @@
                 this.type = "ConnectionTool";
             },
             tryActivate: function (p, meta) {
-                return this.toolService._hoveredConnector && !meta.ctrlKey; // connector it seems
+                return this.toolService._hoveredConnector;
             },
             start: function (p, meta) {
                 var diagram = this.toolService.diagram,
@@ -779,9 +806,10 @@
             tryActivate: function (p, meta) {
                 var toolService = this.toolService,
                     diagram = toolService.diagram,
-                    selectable = diagram.options.selectable !== false,
+                    selectable =  diagram.options.selectable,
                     item = toolService.hoveredItem,
-                    isActive = selectable && item && item.path; // means it is connection
+                    isActive = tryActivateSelection(selectable, meta) && item && item.path &&
+                        !(item.isSelected && meta.ctrlKey); // means it is connection
                 if (isActive) {
                     this._c = item;
                 }
@@ -2038,6 +2066,7 @@
             PolylineRouter: PolylineRouter,
             CascadingRouter: CascadingRouter,
             SelectionTool: SelectionTool,
+            ScrollerTool: ScrollerTool,
             PointerTool: PointerTool,
             ConnectionEditTool: ConnectionEditTool,
             RotateUnit: RotateUnit

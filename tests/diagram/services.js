@@ -13,6 +13,18 @@
         addShapes();
     }
 
+    function getMeta(enabled) {
+        var meta = {
+            ctrlKey: false,
+            altKey: false,
+            shiftKey: false
+        };
+        if (enabled) {
+            meta[enabled + "Key"] = true;
+        }
+        return meta;
+    }
+
     function addShapes() {
         d.addShape({ x: 10, y: 20, data: "Rectangle", dataItem: {} });
         d.addShape({ x: 50, y: 100, data: "Rectangle", dataItem: {} });
@@ -177,6 +189,129 @@
     })();
 
     (function() {
+        var ScrollerTool = diagram.ScrollerTool;
+        var toolservice;
+        var scrollerTool;
+        var shape;
+
+        function setupTool(options) {
+            setupDiagram(options);
+            shape = d.addShape({ x: 10, y: 20, data: "Rectangle", dataItem: {} });
+            toolservice = d.toolService;
+            for (var i = 0; i < toolservice.tools.length; i++) {
+                if (toolservice.tools[i] instanceof ScrollerTool) {
+                    scrollerTool = toolservice.tools[i];
+                    break;
+                }
+            }
+        }
+
+        module("ScrollerTool", {
+            teardown: teardown
+        });
+
+        test("activates if ctrl is pressed", function() {
+            setupTool({});
+
+            ok(scrollerTool.tryActivate({}, getMeta("ctrl")));
+        });
+
+        test("does not activate if ctrl is not pressed", function() {
+            setupTool({});
+
+            ok(!scrollerTool.tryActivate({}, getMeta()));
+        });
+
+        test("does not activate there is a hovered adorner", function() {
+            setupTool({});
+
+            toolservice.hoveredAdorner = true;
+
+            ok(!scrollerTool.tryActivate({}, getMeta("ctrl")));
+        });
+
+        test("does not activate there is a hovered connector", function() {
+            setupTool({});
+
+            toolservice._hoveredConnector = true;
+
+            ok(!scrollerTool.tryActivate({}, getMeta("ctrl")));
+        });
+
+        test("does not activate if panning is disabled", function() {
+            setupTool({
+                pannable: false
+            });
+
+            ok(!scrollerTool.tryActivate({}, getMeta("ctrl")));
+        });
+
+        module("ScrollerTool / custom key", {
+            teardown: teardown
+        });
+
+        test("activates if key is set to none and no key is pressed", function() {
+            setupTool({
+                pannable: {
+                    key: "none"
+                }
+            });
+
+            ok(scrollerTool.tryActivate({}, getMeta()));
+        });
+
+        test("activates on ctrl if key is not set", function() {
+            setupTool({
+                pannable: {}
+            });
+
+            ok(scrollerTool.tryActivate({}, getMeta("ctrl")));
+        });
+
+        test("does not activate if key is set to none and a key is pressed", function() {
+            setupTool({
+                pannable: {
+                    key: "none"
+                }
+            });
+
+            ok(!scrollerTool.tryActivate({}, getMeta("alt")));
+        });
+
+        test("activates if specific key is set and pressed", function() {
+            setupTool({
+                pannable: {
+                    key: "alt"
+                }
+            });
+
+            ok(scrollerTool.tryActivate({}, getMeta("alt")));
+        });
+
+        test("does not activate if specific key is set but not pressed", function() {
+            setupTool({
+                pannable: {
+                    key: "alt"
+                }
+            });
+
+            ok(!scrollerTool.tryActivate({}, getMeta("ctrl")));
+        });
+
+        test("does not activate if ctrl key is set and pressed and there is a hoveredItem", function() {
+            setupTool({
+                pannable: {
+                    key: "ctrl"
+                }
+            });
+
+            toolservice.hoveredItem = true;
+            ok(!scrollerTool.tryActivate({}, getMeta("ctrl")));
+        });
+
+    })();
+
+    (function() {
         var PointerTool = diagram.PointerTool;
         var toolservice;
         var pointertool;
@@ -243,7 +378,7 @@
             ok(!selectiontool.tryActivate(new Point(), {}));
         });
 
-        test("activates if diagram is selectabel", function() {
+        test("activates if diagram is selectable", function() {
             setupTool({
                 selectable: true
             });
@@ -266,6 +401,47 @@
             ok(!selectiontool.tryActivate(new Point(), {}));
         });
 
+        module("SelectionTool / custom key", {
+            teardown: teardown
+        });
+
+        test("activates if key is set to none", function() {
+            setupTool({
+                selectable: {
+                    key: "none"
+                }
+            });
+
+            ok(selectiontool.tryActivate({}, getMeta()));
+        });
+
+        test("activates if key is not set", function() {
+            setupTool({
+                selectable: {}
+            });
+
+            ok(selectiontool.tryActivate({}, getMeta()));
+        });
+
+        test("activates if key is set and pressed", function() {
+            setupTool({
+                selectable: {
+                    key: "ctrl"
+                }
+            });
+
+            ok(selectiontool.tryActivate({}, getMeta("ctrl")));
+        });
+
+        test("does not activate if key is set but not pressed", function() {
+            setupTool({
+                selectable: {
+                    key: "ctrl"
+                }
+            });
+
+            ok(!selectiontool.tryActivate({}, getMeta()));
+        });
     })();
 
     (function() {
@@ -301,6 +477,15 @@
             });
             toolservice.hoveredItem = new diagram.Connection(new Point(), new Point());
             ok(connectionEditTool.tryActivate(new Point(), {}));
+        });
+
+        test("does not activates if the connection is already selected and ctrl is pressed", function() {
+            setupTool({
+                selectable: true
+            });
+            toolservice.hoveredItem = new diagram.Connection(new Point(), new Point());
+            toolservice.hoveredItem.isSelected = true;
+            ok(!connectionEditTool.tryActivate(new Point(), getMeta("ctrl")));
         });
 
     })();

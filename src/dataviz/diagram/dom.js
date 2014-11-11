@@ -1563,6 +1563,12 @@
                     resize: {},
                     text: true
                 },
+                pannable: {
+                    key: "ctrl"
+                },
+                selectable: {
+                    key: "none"
+                },
                 tooltip: { enabled: true, format: "{0}" },
                 copy: {
                     enabled: true,
@@ -1777,7 +1783,9 @@
                         gestureend: proxy(that._gestureEnd, that)
                     });
                     that.toolService = new ToolService(that);
-                    that.scroller.enable();
+                    if (that.options.pannable !== false)  {
+                        that.scroller.enable();
+                    }
                 }
 
                 that._resizeHandler = proxy(that.resize, that);
@@ -1841,7 +1849,9 @@
             },
 
             _gestureEnd: function() {
-                this.scroller.enable();
+                if (this.options.pannable !== false)  {
+                    this.scroller.enable();
+                }
                 this.trigger(ZOOM_END, {
                     point: this._initialCenter,
                     zoom: this.zoom()
@@ -3156,7 +3166,7 @@
             },
 
             _meta: function (e) {
-                return { ctrlKey: e.ctrlKey, metaKey: e.metaKey, altKey: e.altKey };
+                return { ctrlKey: e.ctrlKey, metaKey: e.metaKey, altKey: e.altKey, shiftKey: e.shiftKey };
             },
 
             _calculatePosition: function (e) {

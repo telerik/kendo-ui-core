@@ -191,6 +191,14 @@
             diagram._gestureEnd(gesture);
         });
 
+        test("_gestureEnd does not enable scroller if panning is disabled", 0, function () {
+            diagram.options.pannable = false;
+            diagram.scroller.enable = function() {
+                ok(false);
+            };
+            diagram._gestureEnd(gesture);
+        });
+
         test("_gestureEnd triggers zoomEnd", function () {
             diagram.zoom(2);
             diagram._gestureStart(gesture);
