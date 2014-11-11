@@ -1,5 +1,4 @@
 (function() {
-    return;
 
     var dataviz = kendo.dataviz,
         Box2D = dataviz.Box2D,
@@ -20,8 +19,10 @@
         root = new dataviz.RootElement();
         root.append(donutChart);
 
+        root.box = chartBox;
         donutChart.reflow(chartBox);
-        donutChart.getViewElements(view);
+
+        root.renderVisual();        
 
         firstSegment = donutChart.points[0];
     }
@@ -219,11 +220,11 @@
             segment.reflow(box);
 
             root = new dataviz.RootElement();
+            root.box = box;
             root.append(segment);
+            root.renderVisual();
 
-            view = new ViewStub();
-            segment.getViewElements(view);
-            ring = view.log.ring[0];
+            ring = segment.visual.children[0];
         }
 
         // ------------------------------------------------------------
@@ -231,10 +232,6 @@
             setup: function() {
                 createSegment();
             }
-        });
-
-        test("is discoverable", function() {
-            ok(segment.modelId);
         });
 
         test("fills target box", function() {
@@ -256,50 +253,18 @@
             arrayClose([Math.round(anchor.x), Math.round(anchor.y)], [80, -77], TOLERANCE);
         });
 
-        test("sets overlay radius", function() {
-            equal(ring.style.overlay.r, segment.sector.r);
-        });
-
-        test("sets overlay inner radius", function() {
-            equal(ring.style.overlay.ir, segment.sector.ir);
-        });
-
-        test("sets overlay cx", function() {
-            equal(ring.style.overlay.cx, segment.sector.c.x);
-        });
-
-        test("sets overlay cy", function() {
-            equal(ring.style.overlay.cy, segment.sector.c.y);
+        test("renders overlay with same path", function() {
+            closePaths(ring, segment.visual.children[1]);
         });
 
         test("does not set overlay options when no overlay is defined", function() {
             createSegment({ overlay: null });
-            ok(!ring.style.overlay);
+            equal(segment.visual.children.length, 1);
         });
 
-        test("highlightOverlay returns segment outline", function() {
-            view = new ViewStub();
-
-            segment.highlightOverlay(view);
-            equal(view.log.ring.length, 1);
+        test("createOverlay renders the same path", function() {
+            closePaths(ring, segment.createHighlight());            
         });
-
-        test("outline element has same model id", function() {
-            view = new ViewStub();
-
-            segment.highlightOverlay(view);
-            equal(view.log.ring[0].style.data.modelId, segment.modelId);
-        });
-
-        test("ring has same model id", function() {
-            equal(ring.style.data.modelId, segment.modelId);
-        });
-
-        test("label has same model id", function() {
-            createSegment({ labels: { visible: true } });
-            equal(segment.label.modelId, segment.modelId);
-        });
-
     })();
 
 
@@ -308,6 +273,10 @@
         var chart,
             labelElement,
             segmentElement;
+
+        function getElement(modelElement) {
+            return $(modelElement.visual._observers[0].element);
+        }
 
         function createDonutChart(options) {
             chart = createChart($.extend({
@@ -325,8 +294,8 @@
                 segment = plotArea.charts[0].points[0],
                 label = segment.children[0];
 
-            segmentElement = $(dataviz.getElement(segment.id));
-            labelElement = $(dataviz.getElement(label.id));
+            segmentElement = getElement(segment);
+            labelElement = getElement(label);
         }
 
         module("Donut Chart / Events / seriesClick ", {
