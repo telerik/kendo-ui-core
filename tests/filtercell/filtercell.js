@@ -51,7 +51,7 @@
     test("wrap element has the filter-header class", function() {
         filterCell = setup(dom, { dataSource: dataSource });
 
-        ok(dom.is(".grid-filter-header"));
+        ok(dom.is(".k-filtercell"));
     });
 
     test("dataSource remains the same instance when set to an instance of the DataSource class, acDS creates new one", function() {
