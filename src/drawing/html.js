@@ -153,7 +153,7 @@
                     return {
                         type    : "linear",
                         angle   : angle,
-                        to      : to1 && to2 ? to1 + to2 : to1 ? to1 : to2 ? to2 : null,
+                        to      : to1 && to2 ? to1 + " " + to2 : to1 ? to1 : to2 ? to2 : null,
                         stops   : stops,
                         reverse : reverse,
                         orig    : orig
