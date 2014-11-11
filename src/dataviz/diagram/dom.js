@@ -1795,13 +1795,19 @@
             },
 
             _tap: function(e) {
-                var p = this._caculateMobilePosition(e);
-                var meta = this._meta(e);
-                if (this.toolService.start(p, meta)) {
+                if (this.options.selectable !== false) {
+                    var toolService = this.toolService;
+                    var p = this._caculateMobilePosition(e);
                     this._destroyToolBar();
-                    if (this.toolService.end(p, meta)) {
+                    toolService._updateHoveredItem(p);
+                    if (toolService.hoveredItem) {
+                        var item = toolService.hoveredItem;
+                        if (item.isSelected) {
+                            item.select(false);
+                        } else {
+                            this.select(item, {addToSelection: true});
+                        }
                         this._createToolBar();
-                        e.preventDefault();
                     }
                 }
             },
