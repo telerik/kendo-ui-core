@@ -2692,6 +2692,7 @@
                     this.dataSource.fetch();
                 }
             },
+
             /**
              * Performs a diagram layout of the given type.
              * @param layoutType The layout algorithm to be applied (TreeLayout, LayeredLayout, SpringLayout).
@@ -3175,18 +3176,34 @@
             },
 
             _fetchFreshData: function () {
-                this._dataSource();
+                var that = this;
+                that._dataSource();
 
-                if (this._isEditable) {
-                    this._connectionDataSource();
+                if (that._isEditable) {
+                    that._connectionDataSource();
                 }
 
-                if (this.options.autoBind) {
-                    this.dataSource.fetch();
-                    if (this._isEditable) {
-                        if (this.connectionsDataSource) {
-                            this.connectionsDataSource.fetch();
-                        }
+                if (that.options.autoBind) {
+                    if (that._isEditable) {
+                        that._preventRefresh = true;
+                        that._preventConnectionsRefresh = true;
+
+                        var promises = $.map([
+                            that.dataSource,
+                            that.connectionsDataSource
+                        ],
+                        function(dataSource) {
+                            return dataSource.fetch();
+                        });
+
+                        $.when.apply(null, promises)
+                            .done(function() {
+                                that._preventRefresh = false;
+                                that._preventConnectionsRefresh = false;
+                                that.refresh();
+                            });
+                    } else {
+                        that.dataSource.fetch();
                     }
                 }
             },
@@ -3245,21 +3262,38 @@
                 } else if (e.action === "sync") {
                     this._syncShapes(e.items);
                 } else {
-                    this._shapeLoaded = true;
-                    if (this._connectionsLoaded && this._shapeLoaded) {
-                        this._connectionsLoaded = this._shapeLoaded = false;
-                        this.trigger("dataBound");
-                    }
+                    this.refresh();
+                }
+            },
 
-                    this.clear();
-                    this._addShapes(e.sender.view());
-                    if (this.connectionsDataSource) {
-                        this._addConnections(this.connectionsDataSource.view());
-                    }
+            refresh: function() {
+                if (this._preventRefresh) {
+                    return;
+                }
 
-                    if (this.options.layout) {
-                        this.layout(this.options.layout);
-                    }
+                this.trigger("dataBound");
+                this.clear();
+                this._addShapes(this.dataSource.view());
+                if (this.connectionsDataSource) {
+                    this._addConnections(this.connectionsDataSource.view());
+                }
+
+                if (this.options.layout) {
+                    this.layout(this.options.layout);
+                }
+            },
+
+            refreshConnections: function() {
+                if (this._preventConnectionsRefresh) {
+                    return;
+                }
+
+                this.trigger("dataBound");
+
+                this._addConnections(e.sender.view());
+
+                if (this.options.layout) {
+                    this.layout(this.options.layout);
                 }
             },
 
@@ -3316,17 +3350,7 @@
                         this._updateConnections(e.items);
                     }
                 } else {
-                    this._connectionsLoaded = true;
-                    if (this._connectionsLoaded && this._shapeLoaded) {
-                        this._connectionsLoaded = this._shapeLoaded = false;
-                        this.trigger("dataBound");
-                    }
-
-                    this._addConnections(e.sender.view());
-
-                    if (this.options.layout) {
-                        this.layout(this.options.layout);
-                    }
+                    this.refreshConnections();
                 }
             },
 
