@@ -1,7 +1,7 @@
 (function() {
-    return;
 
     var dataviz = kendo.dataviz,
+        draw = kendo.drawing,
         deepExtend = kendo.deepExtend,
         Box2D = dataviz.Box2D,
         categoriesCount = dataviz.categoriesCount,
@@ -21,10 +21,24 @@
         root = new dataviz.RootElement();
         root.append(pieChart);
 
+        root.box = chartBox;
         pieChart.reflow(chartBox);
-        pieChart.getViewElements(view);
+
+        root.renderVisual();
 
         firstSegment = pieChart.points[0];
+    }
+
+    function getTextBoxes() {
+        return $.map(pieChart.points, function(item) {
+            return item.label.visual;
+        });
+    }
+
+    function getTexts() {
+        return $.map(getTextBoxes(), function(item) {
+            return dataviz.last(item.children);
+        });
     }
 
     (function() {
@@ -416,11 +430,10 @@
             segment.reflow(box);
 
             root = new dataviz.RootElement();
+            root.box = box;
             root.append(segment);
-
-            view = new ViewStub();
-            segment.getViewElements(view);
-            sector = view.log.sector[0];
+            root.renderVisual();
+            sector = segment.visual.children[0];
         }
 
         // ------------------------------------------------------------
@@ -430,27 +443,23 @@
             }
         });
 
-        test("is discoverable", function() {
-            ok(segment.modelId);
-        });
-
         test("fills target box", function() {
             sameBox(segment.box, box);
         });
 
         test("sets border color", function() {
             createSegment({ border: { color: "red" } });
-            equal(sector.style.stroke, "red");
+            equal(sector.options.stroke.color, "red");
         });
 
         test("sets pie border width", function() {
             createSegment({ border: { width: 4 } });
-            equal(sector.style.strokeWidth, 4);
+            equal(sector.options.stroke.width, 4);
         });
 
         test("sets pie border opacity", function() {
             createSegment({ border: { width: 4, opacity: 0.5 } });
-            equal(sector.style.strokeOpacity, 0.5);
+            equal(sector.options.stroke.opacity, 0.5);
         });
 
         test("tooltipAnchor is set distance from segment", function() {
@@ -458,82 +467,58 @@
             arrayClose([Math.round(anchor.x), Math.round(anchor.y)], [80, -77], TOLERANCE);
         });
 
-        test("sets overlay radius", function() {
-            equal(sector.style.overlay.r, segment.sector.r);
+        test("renders overlay with same path", function() {
+            closePaths(sector, segment.visual.children[1]);
         });
 
-        test("sets overlay cx", function() {
-            equal(sector.style.overlay.cx, segment.sector.c.x);
-        });
-
-        test("sets overlay cy", function() {
-            equal(sector.style.overlay.cy, segment.sector.c.y);
-        });
-
-        test("does not set overlay options when no overlay is defined", function() {
+        test("does not render overlay when no overlay is defined", function() {
             createSegment({ overlay: null });
-            ok(!sector.style.overlay);
-        });
-
-        test("sector has same model id", function() {
-            equal(sector.style.data.modelId, segment.modelId);
-        });
-
-        test("label has same model id", function() {
-            createSegment({ labels: { visible: true } });
-            equal(segment.label.modelId, segment.modelId);
+            equal(segment.visual.children.length, 1);
         });
 
         // ------------------------------------------------------------
         module("Pie Segment / Highlight", {
             setup: function() {
                 createSegment();
-                view = new ViewStub();
             }
         });
 
-        test("highlightOverlay renders a sector", function() {
-            segment.highlightOverlay(view);
-            equal(view.log.sector.length, 1);
-        });
-
-        test("highlightOverlay element has same model id", function() {
-            segment.highlightOverlay(view);
-            equal(view.log.sector[0].style.data.modelId, segment.modelId);
+        test("createHighlight renders same path", function() {
+            closePaths(sector, segment.createHighlight());
         });
 
         test("highlightOverlay renders default border width", function() {
-            var outline = segment.highlightOverlay(view);
+            var highlight = segment.createHighlight();
 
-            equal(outline.options.strokeWidth, 1);
+            equal(highlight.options.stroke.width, 1);
         });
 
         test("highlightOverlay renders custom border width", function() {
             segment.options.highlight.border.width = 2;
-            var outline = segment.highlightOverlay(view);
+            var highlight = segment.createHighlight();
 
-            equal(outline.options.strokeWidth, 2);
+            equal(highlight.options.stroke.width, 2);
         });
 
         test("highlightOverlay renders custom highlight color", function() {
             segment.options.highlight.color = "red";
-            var outline = segment.highlightOverlay(view);
+            var highlight = segment.createHighlight();
 
-            equal(outline.options.fill, "red");
+            equal(highlight.options.fill.color, "red");
         });
 
         test("highlightOverlay renders custom border color", function() {
             segment.options.highlight.border.color = "red";
-            var outline = segment.highlightOverlay(view);
+            var highlight = segment.createHighlight();
 
-            equal(outline.options.stroke, "red");
+            equal(highlight.options.stroke.color, "red");
         });
 
         test("highlightOverlay renders custom border opacity", function() {
             segment.options.highlight.border.opacity = 0.5;
-            var outline = segment.highlightOverlay(view);
+            var highlight = segment.createHighlight();
 
-            equal(outline.options.strokeOpacity, 0.5);
+            equal(highlight.options.stroke.opacity, 0.5);
         });
 
     })();
@@ -777,7 +762,7 @@
                 }]
             });
 
-            equal(view.log.text[0].content, "$1.00");
+            equalTexts(getTexts(), ["$1.00", "$2.00"]);
         });
 
         test("applies simple label format", function() {
@@ -788,7 +773,7 @@
                 }]
             });
 
-            equal(view.log.text[0].content, "$1.00");
+            equalTexts(getTexts(), ["$1.00", "$2.00"]);
         });
 
         // ------------------------------------------------------------
@@ -878,14 +863,11 @@
             }
         });
 
-        test("connector has same model id", function() {
-            equal(view.log.path[0].style.data.modelId, firstSegment.modelId);
-        });
-
         test("start point", function() {
             var points = [];
-            $.each(view.log.path, function() {
-                points.push([ this.points[0].x, this.points[0].y ]);
+            $.each(pieChart._connectorLines, function() {
+                var point = this.segments[0].anchor();
+                points.push([ point.x, point.y ]);
             });
 
             arrayClose(points, [ [ 438.17, 59.004 ], [ 543.42, 102.6 ],
@@ -897,8 +879,9 @@
 
         test("middle point", function() {
             var points = [];
-            $.each(view.log.path, function() {
-                points.push([ this.points[1].x, this.points[1].y ]);
+            $.each(pieChart._connectorLines, function() {
+                var point = this.segments[1].anchor();
+                points.push([ point.x, point.y ]);
             });
 
             arrayClose(points, [ [ 440.467, 44.5 ], [ 552.211, 90.5 ],
@@ -910,8 +893,9 @@
 
         test("end point", function() {
             var points = [];
-            $.each(view.log.path, function() {
-                points.push([ this.points[2].x, this.points[2].y ]);
+            $.each(pieChart._connectorLines, function() {
+                var point = this.segments[2].anchor();
+                points.push([ point.x, point.y ]);
             });
 
             arrayClose(points, [ [ 477.185, 44.5 ], [ 560.921, 90.5 ],
@@ -922,11 +906,11 @@
         });
 
         test("middle point Y and end point Y should be equal", function() {
-            $.each(view.log.path, function() {
-                if (this.points.length > 3) {
-                    equal(this.points[2].y, this.points[3].y);
+            $.each(pieChart._connectorLines, function() {
+                if (this.segments.length > 3) {
+                    equal(this.segments[2].anchor().y, this.segments[3].anchor().y);
                 } else {
-                    equal(this.points[1].y, this.points[2].y);
+                    equal(this.segments[1].anchor().y, this.segments[2].anchor().y);
                 }
             });
         });
@@ -949,8 +933,9 @@
 
         test("start point", function() {
             var points = [];
-            $.each(view.log.path, function() {
-                points.push([ this.points[0].x, this.points[0].y ]);
+            $.each(pieChart._connectorLines, function() {
+                var point = this.segments[0].anchor();
+                points.push([ point.x, point.y ]);
             });
 
             arrayClose(points, [ [ 418.234, 56.682 ], [ 471.92, 66.84 ],
@@ -964,8 +949,9 @@
 
         test("second point", function() {
             var points = [];
-            $.each(view.log.path, function() {
-                points.push([ this.points[1].x, this.points[1].y ]);
+            $.each(pieChart._connectorLines, function() {
+                var point = this.segments[1].anchor();
+                points.push([ point.x, point.y ]);
             });
 
             arrayClose(points, [ [ 419.746, 36.5 ], [ 476.343, 52.5 ],
@@ -979,8 +965,9 @@
 
         test("end point", function() {
             var points = [];
-            $.each(view.log.path, function() {
-                points.push([ this.points[2].x, this.points[2].y ]);
+            $.each(pieChart._connectorLines, function() {
+                var point = this.segments[2].anchor();
+                points.push([ point.x, point.y ]);
             });
 
             arrayClose(points, [ [ 446.744, 36.5 ], [ 498.367, 52.5 ],
@@ -993,11 +980,11 @@
         });
 
         test("middle point Y and end point Y should be equal", function() {
-            $.each(view.log.path, function() {
-                if (this.points.length > 3) {
-                    equal(this.points[2].y, this.points[3].y);
+            $.each(pieChart._connectorLines, function() {
+                if (this.segments.length > 3) {
+                    equal(this.segments[2].anchor().y, this.segments[3].anchor().y);
                 } else {
-                    equal(this.points[1].y, this.points[2].y);
+                    equal(this.segments[1].anchor().y, this.segments[2].anchor().y);
                 }
             });
         });
@@ -1020,8 +1007,9 @@
 
         test("start point", function() {
             var points = [];
-            $.each(view.log.path, function() {
-                points.push([ this.points[0].x, this.points[0].y ]);
+            $.each(pieChart._connectorLines, function() {
+                var point = this.segments[0].anchor();
+                points.push([ point.x, point.y ]);
             });
 
             arrayClose(points, [ [ 544.67, 103.514 ], [ 634.116, 231.257 ],
@@ -1039,8 +1027,9 @@
 
         test("second point", function() {
             var points = [];
-            $.each(view.log.path, function() {
-                points.push([ this.points[1].x, this.points[1].y ]);
+            $.each(pieChart._connectorLines, function() {
+                var point = this.segments[1].anchor();
+                points.push([ point.x, point.y ]);
             });
 
             arrayClose(points, [ [ 553.516, 91.5 ], [ 613.594, 155.5 ],
@@ -1058,8 +1047,9 @@
 
         test("end point", function() {
             var points = [];
-            $.each(view.log.path, function() {
-                points.push([ this.points[2].x, this.points[2].y ]);
+            $.each(pieChart._connectorLines, function() {
+                var point = this.segments[2].anchor();
+                points.push([ point.x, point.y ]);
             });
 
             arrayClose(points, [ [ 562.132, 91.5 ], [ 617.594, 155.5 ],
@@ -1076,11 +1066,11 @@
         });
 
         test("middle point Y and end point Y should be equal", function() {
-            $.each(view.log.path, function() {
-                if (this.points.length > 3) {
-                    equal(this.points[2].y, this.points[3].y);
+            $.each(pieChart._connectorLines, function() {
+                if (this.segments.length > 3) {
+                    equal(this.segments[2].anchor().y, this.segments[3].anchor().y);
                 } else {
-                    equal(this.points[1].y, this.points[2].y);
+                    equal(this.segments[1].anchor().y, this.segments[2].anchor().y);
                 }
             });
         });
@@ -1103,8 +1093,9 @@
 
         test("start point", function() {
             var points = [];
-            $.each(view.log.path, function() {
-                points.push([ this.points[0].x, this.points[0].y ]);
+            $.each(pieChart._connectorLines, function() {
+                var point = this.segments[0].anchor();
+                points.push([ point.x, point.y ]);
             });
 
             arrayClose(points, [ [ 622.251, 199.299 ], [ 580.792, 463.86 ],
@@ -1125,8 +1116,9 @@
 
         test("second point", function() {
             var points = [];
-            $.each(view.log.path, function() {
-                points.push([ this.points[1].x, this.points[1].y ]);
+            $.each(pieChart._connectorLines, function() {
+                var point = this.segments[1].anchor();
+                points.push([ point.x, point.y ]);
             });
 
             arrayClose(points, [ [ 632.824, 193.5 ], [ 588.792, 463.86 ],
@@ -1147,8 +1139,10 @@
 
         test("end point", function() {
             var points = [];
-            $.each(view.log.path, function() {
-                points.push([ this.points[2].x, this.points[2].y ]);
+
+            $.each(pieChart._connectorLines, function() {
+                var point = this.segments[2].anchor();
+                points.push([ point.x, point.y ]);
             });
 
             arrayClose(points, [ [ 636.824, 193.5 ], [ 631.581, 408.5 ],
@@ -1168,11 +1162,11 @@
         });
 
         test("middle point Y and end point Y should be equal", function() {
-            $.each(view.log.path, function() {
-                if (this.points.length > 3) {
-                    equal(this.points[2].y, this.points[3].y);
+            $.each(pieChart._connectorLines, function() {
+                if (this.segments.length > 3) {
+                    equal(this.segments[2].anchor().y, this.segments[3].anchor().y);
                 } else {
-                    equal(this.points[1].y, this.points[2].y);
+                    equal(this.segments[1].anchor().y, this.segments[2].anchor().y);
                 }
             });
         });
@@ -1204,13 +1198,7 @@
                 } ]
             });
 
-            var points = [];
-            $.each(view.log.text, function() {
-                var style = this.style;
-                points.push([ style.x, style.y ]);
-            });
-
-            arrayClose(points, [
+            closeTextPosition(false, getTexts(), [
                 [ 474.898, 193.63 ],
                 [ 522.764, 270.99 ],
                 [ 305.907, 388.934 ] ], TOLERANCE);
@@ -1227,13 +1215,8 @@
                     }
                 }]
             });
-            var points = [];
-            $.each(view.log.text, function() {
-                var style = this.style;
-                points.push([ style.x, style.y ]);
-            });
 
-            arrayClose(points, [
+            closeTextPosition(false, getTexts(), [
                 [ 541.44, 113.704 ],
                 [ 625.353, 253.918 ],
                 [ 237.988, 467.693 ] ], TOLERANCE);
@@ -1246,10 +1229,10 @@
                 points.push([ style.x, style.y ]);
             });
 
-            arrayClose(points, [
+            closeTextPosition(false, getTexts(), [
                 [ 587.103, 82 ],
                 [ 673.133, 248 ],
-                [ 191.896, 502 ] ], TOLERANCE );
+                [ 191.896, 502 ] ], TOLERANCE);
         });
 
     })();
@@ -1259,6 +1242,10 @@
         var chart,
             labelElement,
             segmentElement;
+
+        function getElement(modelElement) {
+            return $(modelElement.visual._observers[0].element);
+        }
 
         function createPieChart(options) {
             chart = createChart($.extend({
@@ -1276,8 +1263,8 @@
                 segment = plotArea.charts[0].points[0],
                 label = segment.children[0];
 
-            segmentElement = $(dataviz.getElement(segment.id));
-            labelElement = $(dataviz.getElement(label.id));
+            segmentElement = getElement(segment);
+            labelElement = getElement(label);
         }
 
         module("Pie Chart / Events / seriesClick ", {

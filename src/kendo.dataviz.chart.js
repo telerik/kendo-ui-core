@@ -7272,7 +7272,7 @@ var __meta__ = {
                 seriesIx, label, i;
 
             ChartElement.fn.createVisual.call(this);
-
+            this._connectorLines = [];
             for (i = 0; i < count; i++) {
                 segment = points[i];
                 sector = segment.sector;
@@ -7353,6 +7353,7 @@ var __meta__ = {
 
                         connectorLine.lineTo(end.x, end.y);
 
+                        this._connectorLines.push(connectorLine);
                         this.visual.append(connectorLine);
                     }
                 }

@@ -173,6 +173,29 @@ function sameBox(a, b, tolerance) {
     arrayClose([a.x1, a.y1, a.x2, a.y2], [b.x1, b.y1, b.x2, b.y2], tolerance);
 }
 
+function closePoints(p1, p2, tolerance) {
+    close(p1.x, p2.x, tolerance);
+    close(p1.y, p2.y, tolerance);
+}
+
+function closePaths(path1, path2, tolerance) {
+    var segments1 = path1.segments;
+    var segments2 = path2.segments;
+    var segment1, segment2;
+    ok(segments1.length === segments2.length);
+    for (var idx = 0; idx < segments1.length; idx++) {
+        segment1 = segments1[idx];
+        segment2 = segments2[idx];
+        if (segment1.controlOut()) {
+            closePoints(segment1.controlOut(), segment2.controlOut(), tolerance);
+        }
+        closePoints(segment1.anchor(), segment2.anchor(), tolerance);
+        if (segment1.controlIn()) {
+            closePoints(segment1.controlIn(), segment2.controlIn(), tolerance);
+        }
+    }
+}
+
 function sameLinePath(actual, expected, tolerance) {
     var actualSegments = actual.segments;
     var expectedSegments = expected.segments;
@@ -206,9 +229,17 @@ function equalTexts(texts, expected) {
 
 function closeTextPosition(axis, texts, expected, tolerance) {
     if ($.isArray(expected)) {
-        arrayClose($.map(texts, function(item) {
-            return item.rect().origin[axis]
-        }), expected, tolerance);
+        var origin, idx,
+            textPositions = [];
+        for (idx = 0; idx < texts.length; idx++) {
+            origin = texts[idx].rect().origin;
+            if (axis) {
+                textPositions.push(origin[axis]);
+            } else {
+                textPositions.push([origin.x, origin.y]);
+            }
+        }
+        arrayClose(textPositions, expected, tolerance);
     } else {
         $.each(texts, function(index) {
             close(this.rect().origin[axis], $.isArray(expected) ? expected[index] : expected, tolerance);
