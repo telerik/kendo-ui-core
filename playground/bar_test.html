@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link type="text/css" href="../../dist/styles/web/kendo.common.css" rel="stylesheet/less"/>
+    <link type="text/css" href="../../dist/styles/web/kendo.silver.css" rel="stylesheet/less"/>
+    <link type="text/css" href="../../dist/styles/dataviz/kendo.dataviz.css" rel="stylesheet/less"/>
+    <link type="text/css" href="../../dist/styles/dataviz/kendo.dataviz.silver.css" rel="stylesheet"/>
+    <script src="require.js"></script>
+    <script>
+    require.config({
+        baseUrl: "../src",
+        paths: {
+            cultures: "cultures"
+        }
+    });
+
+    require([ "jquery.min",
+              "kendo.dataviz.chart" ], function(){
+
+        $("#chart").kendoChart({
+            series: [{
+                type: "bar",
+                data: [1, 2, -3]
+            }, {
+                type: "bar",
+                data: [1, 2, 3]
+            }]
+        });
+
+
+        var geom = kendo.geometry;
+        var draw = kendo.drawing;
+
+        var rect = new geom.Rect([100, 200], [80, 200]);
+        var path = draw.Path.fromRect(rect);
+
+        var surface = draw.Surface.create($("#surface"));
+
+        $("button").click(function() {
+            $("#chart").getKendoChart().redraw();
+        });
+    });
+    </script>
+    <style>
+        #chart {
+            width: 800px;
+            height: 500px;
+            float: left;
+        }
+        #surface {
+            width: 400px;
+            height: 500px;
+            float: left;
+        }
+    </style>
+  </head>
+  <body>
+      <div id="chart"></div>
+      <div id="surface"></div>
+  </body>
+</html>

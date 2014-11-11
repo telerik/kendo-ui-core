@@ -1,12 +1,13 @@
 (function() {
-    var dataviz = kendo.dataviz,
-        Gauge = dataviz.ui.Gauge,
-        Box2D = dataviz.Box2D,
-        Point2D = dataviz.Point2D,
-        RadialPointer = dataviz.RadialPointer,
-        RadialScale,
-        pointer,
-        chartBox = new Box2D(0, 0, 400, 300);
+    var dataviz = kendo.dataviz;
+    var Gauge = dataviz.Gauge;
+    var RadialPointer = dataviz.RadialPointer;
+    var geo = dataviz.geometry;
+    var Rect = geo.Rect;
+    var Arc = geo.Arc;
+    var RadialScale;
+    var pointer;
+    var chartBox = new Rect([0, 0], [400, 300]);
 
     RadialScale = dataviz.RadialScale.extend({
         options: {
@@ -23,7 +24,12 @@
             max: max
         });
 
-        scale.ring = new dataviz.Ring(new Point2D(100, 100), 50, 100, 90, 180);
+        scale.arc = new Arc([100, 100], {
+            radiusX: 100,
+            radiusY: 100,
+            startAngle: 270,
+            endAngle: 360
+        });
 
         return scale;
     }
@@ -33,8 +39,6 @@
             pointer = new RadialPointer(stubScale(), {
                     type: "needle"
                 });
-
-            pointer.getViewElements(new dataviz.SVGView());
         }
     });
 
@@ -53,6 +57,7 @@
     test("value() calls repaint()", function() {
         var called = false;
 
+        pointer.elements = {};
         pointer.repaint = function() {
             called = true;
         };
@@ -70,7 +75,7 @@
         equal(pointer.value(), -20);
     });
 
-    test("value() takes scale.min into account", function() {
+    test("value() takes scale.max into account", function() {
         pointer.scale.options.max = 20;
 
         pointer.value(21);

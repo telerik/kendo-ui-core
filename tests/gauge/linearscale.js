@@ -1,13 +1,10 @@
 (function() {
-    var dataviz = kendo.dataviz,
-        Gauge = dataviz.ui.Gauge,
-        Box2D = dataviz.Box2D,
-        Point2D = dataviz.Point2D,
-        LinearScale,
-        linearScale,
-        chartBox = new Box2D(0, 0, 400, 400),
-        view,
-        TOLERANCE = 1.5;
+    var dataviz = kendo.dataviz;
+    var Gauge = dataviz.ui.Gauge;
+    var LinearScale;
+    var linearScale;
+    var chartBox = new dataviz.Box2D(0, 0, 400, 400);
+    var TOLERANCE = 1.5;
 
     LinearScale = dataviz.LinearScale.extend({
         options: {
@@ -20,7 +17,6 @@
 
     function createScale(options) {
         linearScale = new LinearScale(options);
-        view = new ViewStub();
     }
 
     // ------------------------------------------------------------
@@ -33,11 +29,13 @@
                 to: 20
             }]
         });
-        linearScale.reflow(chartBox);
-        linearScale.getViewElements(view);
-        var rect = view.log.rect[0];
 
-        arrayClose([rect.x1 , rect.y1, rect.x2, rect.y2], [39, 238.1, 44, 313.4], TOLERANCE);
+        linearScale.reflow(chartBox);
+        var ranges = linearScale.renderRanges().bbox();
+
+        arrayClose([ranges.origin.x , ranges.origin.y, 
+                    ranges.origin.x + ranges.width(), ranges.origin.y + ranges.height()],
+                   [39, 238.1, 44, 313.4], TOLERANCE);
     });
 
     test("render range from 10 to 15 and from 15 to 20", function() {
@@ -50,14 +48,19 @@
                 to: 20
             }]
         });
+
         linearScale.reflow(chartBox);
-        linearScale.getViewElements(view);
+        var ranges = linearScale.renderRanges();
+        var first = ranges.children[0].bbox();
+        var second = ranges.children[1].bbox();
 
-        var rect = view.log.rect[0];
-        arrayClose([rect.x1 , rect.y1, rect.x2, rect.y2], [39, 276, 44, 313.4], TOLERANCE);
-
-        rect = view.log.rect[1];
-        arrayClose([rect.x1 , rect.y1, rect.x2, rect.y2], [39, 238, 44, 276], TOLERANCE);
+        arrayClose([first.origin.x , first.origin.y,
+                    first.origin.x + first.width(), first.origin.y + first.height()],
+                    [39, 276, 44, 313.4], TOLERANCE);
+        
+        arrayClose([second.origin.x , second.origin.y,
+                    second.origin.x + second.width(), second.origin.y + second.height()],
+                   [39, 238, 44, 276], TOLERANCE);
     });
 
     // ------------------------------------------------------------
@@ -124,11 +127,12 @@
                 color: "red"
             }]
         });
-        linearScale.reflow(chartBox);
-        linearScale.getViewElements(view);
-        var rect = view.log.rect[0];
 
-        ok(rect.style.fill, "red");
+        linearScale.reflow(chartBox);
+        var ranges = linearScale.renderRanges();
+        var first = ranges.children[0];
+
+        ok(first.options.fill.color, "red");
     });
 
     test("render opacity", function() {
@@ -139,9 +143,11 @@
                 opacity: 0.33
             }]
         });
+
         linearScale.reflow(chartBox);
-        linearScale.getViewElements(view);
-        var rect = view.log.rect[0];
-        ok(rect.style.fillOpacity, 0.33);
+        var ranges = linearScale.renderRanges();
+        var first = ranges.children[0];
+
+        ok(first.options.fill.opacity, 0.33);
     });
 }());

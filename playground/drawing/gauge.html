@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gauge components</title>
+    <link rel="stylesheet" href="../../dist/styles/web/kendo.common.min.css" />
+    <link rel="stylesheet" href="../../dist/styles/web/kendo.default.min.css" />
+    <link rel="stylesheet" href="../../dist/styles/dataviz/kendo.dataviz.min.css" />
+    <link rel="stylesheet" href="../../dist/styles/dataviz/kendo.dataviz.default.min.css" />
+    <script src="../../src/jquery.min.js"></script>
+    <script src="../../src/kendo.core.js"></script>
+    <script src="../../src/kendo.dataviz.core.js"></script>
+    <script src="../../src/kendo.dataviz.svg.js"></script>
+    <script src="../../src/util/main.js"></script>
+    <script src="../../src/mixins/observers.js"></script>
+    <script src="../../src/geometry/main.js"></script>
+    <script src="../../src/drawing/core.js"></script>
+    <script src="../../src/drawing/mixins.js"></script>
+    <script src="../../src/drawing/shapes.js"></script>
+    <script src="../../src/drawing/text-metrics.js"></script>
+    <script src="../../src/drawing/parser.js"></script>
+    <script src="../../src/drawing/svg.js"></script>
+    <script src="../../src/drawing/vml.js"></script>
+    <script src="../../src/drawing/canvas.js"></script>
+    <script src="../../src/drawing/animation.js"></script>
+    <script src="../../src/kendo.dataviz.gauge.js"></script>
+
+</head>
+<body>
+
+<div id="gauge" style="width: 500px; height: 500px;"></div>
+<div id="gauge2" style="width: 500px; height: 500px;"></div>
+  <script>
+    var dataviz = kendo.dataviz;
+    var geo = dataviz.geometry;
+    var draw = dataviz.drawing;
+
+    var Point = geo.Point;
+    var Circle = draw.Circle;
+    var Group = draw.Group;
+    var Path = draw.Path;
+    var Text = draw.Text;
+    var Arc = draw.Arc;
+    var Rect = geo.Rect;
+
+var elem = $("#gauge");
+var elem2 = $("#gauge2");
+
+var l = elem2.kendoLinearGauge({
+            pointer:[{
+                value: -40,
+                shape: "arrow",
+                color: "purple",
+                size: 20,
+                //margin: 55
+            }, {
+                value: 40,
+                shape: "bar",
+                color: "blue",
+                size: 20,
+                //margin: 55
+            }],
+            //transitions: false,
+            scale: {
+                mirror: true,
+                //reverse: true,
+                vertical: false,
+                line: {
+                    color: "blue"
+                },
+                majorTicks: {
+                    color: "green"
+                },
+                labels: {
+                    color: "yellow",
+                    //padding: 5,
+                    //visible: false,
+                    background: "purple",
+                    border: {
+                        width: 5,
+                        color: "green",
+                        //dashType: "dot"
+                    },
+                    position: "outside"
+                },
+                majorUnit: 20,
+                minorUnit: 2,
+                min: -60,
+                max: 60,
+                ranges: [
+                    {
+                        from: -40,
+                        to: -20,
+                        color: "#2798df"
+                    }, {
+                        from: 30,
+                        to: 45,
+                        color: "#ffc700"
+                    }, {
+                        from: 45,
+                        to: 60,
+                        color: "#c20000"
+                    }
+                ]
+            }
+        }).data("kendoLinearGauge");
+
+var r = elem.kendoRadialGauge({
+        pointer: [{
+            cap: {
+                size: 0.25,
+                color: "blue"
+            },
+            color: "blue",
+            value: 300
+        }, {
+            cap: {
+                size: 0.15,
+                color: "green"
+            },
+            color: "green",
+            value: 600
+        }, {
+            cap: {
+                size: 0.05,
+                color: "pink"
+            },
+            color: "pink",
+            value: 900
+        }],
+        scale: {
+            minorTicks: {
+                size: 10,
+                width: 2
+                //visible: false
+            },
+            majorTicks: {
+                size: 25,
+                width: 2
+                //visible: false
+            },
+            labels: {
+                color: "yellow",
+                //padding: 5,
+                //visible: false,
+                background: "purple",
+                border: {
+                    width: 5,
+                    color: "green",
+                    //dashType: "dot"
+                },
+                position: "outside",
+                //template: "asdf"
+                margin: 10,
+                format: "C",
+                font: "15px Arial,Helvetica,sans-serif"
+            },
+            minorUnit: 100,
+            majorUnit: 200,
+            startAngle: 0,
+            endAngle: 90,
+            min: 0,
+            max: 1000,
+            //reverse: true,
+            //rangePlaceholderColor: "yellow",
+        ranges: [{
+            from: 10,
+            to: 20,
+            color: "green",
+            //opacity: 0.5
+        },{
+            from: 30,
+            to: 60,
+            color: "red",
+            //opacity: 0,2
+        }],
+          rangeSize: 25,
+          rangeDistance: 50,
+      }
+    }).data("kendoRadialGauge2");
+  </script>
+</body>
+</html>

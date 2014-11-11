@@ -426,6 +426,15 @@
         },
 
         // TODO: clone, equals
+        clone: function() {
+            return new Arc(this.center, {
+                radiusX: this.radiusX,
+                radiusY: this.radiusY,
+                startAngle: this.startAngle,
+                endAngle: this.endAngle,
+                anticlockwise: this.anticlockwise
+            });
+        },
 
         setCenter: function(value) {
             this._observerField("center", Point.create(value));
