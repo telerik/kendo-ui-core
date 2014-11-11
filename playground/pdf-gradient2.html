@@ -1,0 +1,52 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="../dist/styles/web/kendo.common.css" />
+    <link rel="stylesheet" href="../dist/styles/web/kendo.default.css" />
+    <script src="html2canvas.min.js"></script>
+    <script src="loader.js"></script>
+    <script>
+      requireSync([
+        "../src/jquery.js",
+        "../src/kendo.drawing.js",
+        "./console.time.js",
+        "./test-pdf-helpers.js"
+      ]);
+    </script>
+  </head>
+  <body>
+    <button onclick="pdf()">Get PDF</button>
+    <div id="drawing"></div>
+    <script>
+      var geo = kendo.geometry;
+      var drw = kendo.drawing;
+
+      var group = new drw.Group();
+
+      var gradient = new drw.LinearGradient({
+        start: [ 50, 0 ],
+        end: [ 250, 200 ],
+        userSpace: true,
+        stops: [
+          { offset: 0, color: "red" },
+          { offset: 0.3, color: "green" },
+          { offset: 0.6, color: "yellow", opacity: 0.5 },
+          { offset: 1, color: "blue" }
+        ]
+      });
+
+      var txt = new drw.Text("HELLO WORLD", [ 130, 90 ], { font: "18px sans-serif" });
+      group.append(txt);
+
+      var rect = new geo.Rect([ 10, 10 ], [ 300, 200 ]);
+      var path = drw.Path.fromRect(rect).fill(gradient);
+      group.append(path);
+
+      var surface = drw.Surface.create($("#drawing"));
+      surface.draw(group);
+
+      function pdf() {
+        drw.pdf.saveAs(group, "kendo.pdf");
+      }
+    </script>
+  </body>
+</html>
