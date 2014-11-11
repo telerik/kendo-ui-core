@@ -286,7 +286,8 @@
                     },{
                         id: 3
                     }]
-                }
+                },
+                connectionsDataSource: { }
             });
         },
         teardown: destroyDiagram

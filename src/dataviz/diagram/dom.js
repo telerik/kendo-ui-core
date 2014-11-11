@@ -3192,10 +3192,7 @@
             },
 
             _dataSource: function() {
-                if (this._isTreeDataSource()) {
-                    this._treeDataSource();
-                    this._isEditable = false;
-                } else {
+                if (defined(this.options.connectionsDataSource)) {
                     this._isEditable = true;
                     var dsOptions = this.options.dataSource || {};
                     var ds = isArray(dsOptions) ? { data: dsOptions } : dsOptions;
@@ -3212,17 +3209,10 @@
                     this.dataSource = kendo.data.DataSource.create(ds)
                         .bind("change", this._shapesRefreshHandler)
                         .bind("error", this._shapesErrorHandler);
+                } else {
+                    this._treeDataSource();
+                    this._isEditable = false;
                 }
-            },
-
-            _isTreeDataSource: function() {
-                var options = this.options.dataSource || {};
-                var isDsChildrenDefined =
-                    defined(options.schema) &&
-                    defined(options.schema.model) &&
-                    defined(options.schema.model.children);
-
-                return options instanceof kendo.data.HierarchicalDataSource || isDsChildrenDefined;
             },
 
             _connectionDataSource: function() {
