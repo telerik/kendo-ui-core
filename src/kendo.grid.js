@@ -571,13 +571,34 @@ var __meta__ = {
         return $(elements).map(function() { return this.toArray(); });
     }
 
+    function updateCellRowSpan(cell, columns, sourceLockedColumnsCount) {
+        var lockedColumnDepth = depth(lockedColumns(columns));
+        var nonLockedColumnDepth = depth(nonLockedColumns(columns));
+
+        var rowSpan = cell.rowSpan;
+        if (sourceLockedColumnsCount) {
+            if (lockedColumnDepth > nonLockedColumnDepth) {
+                cell.rowSpan = (rowSpan - (lockedColumnDepth - nonLockedColumnDepth)) || 1;
+            } else {
+                cell.rowSpan = rowSpan + (nonLockedColumnDepth - lockedColumnDepth);
+            }
+        } else {
+            if (lockedColumnDepth > nonLockedColumnDepth) {
+                cell.rowSpan = rowSpan + (lockedColumnDepth - nonLockedColumnDepth);
+            } else {
+                cell.rowSpan = (rowSpan - (nonLockedColumnDepth - lockedColumnDepth)) || 1;
+            }
+        }
+    }
+
     function moveCellsBetweenContainers(sources, target, leafs, columns, container, destination, groups) {
         var sourcesDepth = depth(sources);
         var targetDepth = depth([target]);
 
         if (sourcesDepth > targetDepth) {
             var groupCells = new Array(groups + 1).join('<th class="k-group-cell k-header">&nbsp;</th>');
-            destination.append($(new Array((sourcesDepth - targetDepth) + 1).join("<tr>" + groupCells + "</tr>")));
+            var rows = destination.children(":not(.k-filter-row)");
+            $(new Array((sourcesDepth - targetDepth) + 1).join("<tr>" + groupCells + "</tr>")).insertAfter(rows.last());
         }
 
         addRowSpanValue(destination, sourcesDepth - targetDepth);
@@ -595,7 +616,7 @@ var __meta__ = {
 
         for (var idx = 0, length = columns.length; idx < length; idx++) {
             position = columnPosition(columns[idx], allColumns);
-            cell = thead.find(">tr").eq(position.row).find(".k-header:not(.k-group-cell,.k-hierarchy-cell)").eq(position.cell);
+            cell = thead.find(">tr:not(.k-filter-row)").eq(position.row).find(".k-header:not(.k-group-cell,.k-hierarchy-cell)").eq(position.cell);
             cell.attr(kendo.attr("index"), offset + idx);
         }
 
@@ -620,7 +641,7 @@ var __meta__ = {
     function moveCells(leafs, columns, container, destination) {
         var sourcePosition = columnVisiblePosition(leafs[0], columns);
 
-        var ths = container.find(">tr:eq(" + sourcePosition.row + ")>th.k-header");
+        var ths = container.find(">tr:not(.k-filter-row):eq(" + sourcePosition.row + ")>th.k-header");
 
         var t = $();
         var sourceIndex = sourcePosition.cell;
@@ -630,7 +651,7 @@ var __meta__ = {
             t = t.add(ths.eq(sourceIndex + idx));
         }
 
-        destination.find("tr").eq(sourcePosition.row).append(t);
+        destination.find(">tr:not(.k-filter-row)").eq(sourcePosition.row).append(t);
 
         var children = [];
         for (idx = 0; idx < leafs.length; idx++) {
@@ -1982,15 +2003,15 @@ var __meta__ = {
                 }
             }
 
-            if (leafs.length) {
-                var sourceLockedColumns = lockedColumns(sources).length;
-                var targetLockedColumns = lockedColumns([target]).length;
+            var ths = elements(that.lockedHeader, that.thead, "tr:eq(" + sourcePosition.row + ")>th.k-header:not(.k-group-cell,.k-hierarchy-cell)");
 
+            var sourceLockedColumns = lockedColumns(sources).length;
+            var targetLockedColumns = lockedColumns([target]).length;
+
+            if (leafs.length) {
                 if (sourceLockedColumns > 0 && targetLockedColumns === 0) {
                     moveCellsBetweenContainers(sources, target, leafs, that.columns, that.lockedHeader.find("thead"), that.thead, this._groups());
-                }
-
-                if (sourceLockedColumns === 0 && targetLockedColumns > 0) {
+                } else if (sourceLockedColumns === 0 && targetLockedColumns > 0) {
                     moveCellsBetweenContainers(sources, target, leafs, that.columns, that.thead, that.lockedHeader.find("thead"), this._groups());
                 }
 
@@ -1998,9 +2019,11 @@ var __meta__ = {
                 if (target) {
                     that._reorderHeader(leafs, target, before);
                 }
+            } else if (sourceLockedColumns !== targetLockedColumns) { // move between containers
+                updateCellRowSpan(ths[sourcePosition.cell], that.columns, sourceLockedColumns);
             }
 
-            reorder(elements(that.lockedHeader, that.thead, "tr:eq(" + sourcePosition.row + ")>th.k-header:not(.k-group-cell,.k-hierarchy-cell)"), sourcePosition.cell, destPosition.cell, before, sources.length);
+            reorder(ths, sourcePosition.cell, destPosition.cell, before, sources.length);
         },
 
         _reorderContent: function(sources, destination, before) {

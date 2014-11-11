@@ -1736,6 +1736,46 @@
         equal(grid.lockedHeader.find("tr").length, 3);
     });
 
+    test("move non locked multi-header column to locked single row column creates additional row elements - with filter row enabled", function() {
+        var grid = new Grid(div, {
+            filterable: { mode: "row" },
+            columns: [
+                { title: "master", width: 10, locked: true },
+                { title: "master1",
+                    columns: [
+                        { title: "master1-child" },
+                        { title: "master1-child1", columns: [{ title: "master1-child1-child", width: 30 }, { title: "master1-child1-child2", width: 40 } ] },
+                        { title: "master1-child2", columns: [{ title: "master1-child2-child", width: 50 }, { title: "master1-child2-child2", width: 60 } ] }
+                ] },
+                { title: "master2", width: 70, locked: true },
+                { title: "master3", width: 80 },
+            ]
+        });
+
+        grid.reorderColumn(1, grid.columns[2], true);
+
+        equal(grid.thead.find("tr").eq(0).find("th").eq(0).text(), "master3");
+        equal(grid.thead.find("th").length, 2);
+        equal(grid.thead.find("tr").length, 2);
+
+        equal(grid.lockedHeader.find("tr").eq(0).find("th").eq(0).text(), "master");
+        equal(grid.lockedHeader.find("tr").eq(0).find("th").eq(1).text(), "master1");
+        equal(grid.lockedHeader.find("tr").eq(0).find("th").eq(2).text(), "master2");
+
+        equal(grid.lockedHeader.find("tr").eq(1).find("th").eq(0).text(), "master1-child");
+        equal(grid.lockedHeader.find("tr").eq(1).find("th").eq(1).text(), "master1-child1");
+        equal(grid.lockedHeader.find("tr").eq(1).find("th").eq(2).text(), "master1-child2");
+
+        equal(grid.lockedHeader.find("tr").eq(2).find("th").eq(0).text(), "master1-child1-child");
+        equal(grid.lockedHeader.find("tr").eq(2).find("th").eq(1).text(), "master1-child1-child2");
+        equal(grid.lockedHeader.find("tr").eq(2).find("th").eq(2).text(), "master1-child2-child");
+        equal(grid.lockedHeader.find("tr").eq(2).find("th").eq(3).text(), "master1-child2-child2");
+
+
+        equal(grid.lockedHeader.find("tr").length, 4);
+    });
+
+
     test("move non locked multi-header column to locked multi-header column creates additional row elements", function() {
         var grid = new Grid(div, {
             columns: [
@@ -1863,6 +1903,102 @@
         ok(grid.lockedHeader.find("tr").eq(2).find("th").eq(0).hasClass("k-group-cell"));
 
         equal(grid.lockedHeader.find("tr").length, 3);
+    });
+
+    test("move non locked single header column to locked multi-header column updates the rowspans", function() {
+        var grid = new Grid(div, {
+            columns: [
+                { title: "master", width: 10, locked: true },
+                { title: "master1", locked: true,
+                    columns: [
+                        { title: "master1-child" },
+                        { title: "master1-child1", columns: [{ title: "master1-child1-child", width: 30 }, { title: "master1-child1-child2", width: 40 } ] },
+                        { title: "master1-child2", columns: [{ title: "master1-child2-child", width: 50 }, { title: "master1-child2-child2", width: 60 } ] }
+                ] },
+                { title: "master2", width: 70 },
+                { title: "master3", width: 80 },
+            ]
+        });
+
+        grid.reorderColumn(1, grid.columns[2], true);
+
+        equal(grid.thead.find("tr").eq(0).find("th")[0].rowSpan, 1, "non locked column rowspan");
+
+        equal(grid.lockedHeader.find("tr").eq(0).find("th")[0].rowSpan, 3, "locked column 1");
+        equal(grid.lockedHeader.find("tr").eq(0).find("th")[1].rowSpan, 3, "locked column 2");
+        equal(grid.lockedHeader.find("tr").eq(0).find("th")[2].rowSpan, 1, "locked column 3");
+    });
+
+    test("move non locked single header column to locked single row column updates the rowspans - multi-header column is in the non locked container", function() {
+        var grid = new Grid(div, {
+            columns: [
+                { title: "master", width: 10, locked: true },
+                { title: "master1",
+                    columns: [
+                        { title: "master1-child" },
+                        { title: "master1-child1", columns: [{ title: "master1-child1-child", width: 30 }, { title: "master1-child1-child2", width: 40 } ] },
+                        { title: "master1-child2", columns: [{ title: "master1-child2-child", width: 50 }, { title: "master1-child2-child2", width: 60 } ] }
+                ] },
+                { title: "master2", width: 70, locked: true },
+                { title: "master3", width: 80 },
+            ]
+        });
+
+        grid.reorderColumn(1, grid.columns[3], true);
+
+        equal(grid.thead.find("tr").eq(0).find("th")[0].rowSpan, 1, "non locked column rowspan");
+
+        equal(grid.lockedHeader.find("tr").eq(0).find("th")[0].rowSpan, 1, "locked column 1");
+        equal(grid.lockedHeader.find("tr").eq(0).find("th")[1].rowSpan, 1, "locked column 2");
+        equal(grid.lockedHeader.find("tr").eq(0).find("th")[2].rowSpan, 1, "locked column 3");
+    });
+
+    test("move locked single header column to non-locked multi-header column updates the rowspans", function() {
+        var grid = new Grid(div, {
+            columns: [
+                { title: "master", width: 10, locked: true },
+                { title: "master1",
+                    columns: [
+                        { title: "master1-child" },
+                        { title: "master1-child1", columns: [{ title: "master1-child1-child", width: 30 }, { title: "master1-child1-child2", width: 40 } ] },
+                        { title: "master1-child2", columns: [{ title: "master1-child2-child", width: 50 }, { title: "master1-child2-child2", width: 60 } ] }
+                ] },
+                { title: "master2", width: 70, locked: true },
+                { title: "master3", width: 80 },
+            ]
+        });
+
+        grid.reorderColumn(2, grid.columns[1]);
+
+        equal(grid.thead.find("tr").eq(0).find("th")[0].rowSpan, 1, "non locked column 1 rowspan");
+        equal(grid.thead.find("tr").eq(0).find("th")[1].rowSpan, 3, "non locked column 2 rowspan");
+        equal(grid.thead.find("tr").eq(0).find("th")[2].rowSpan, 3, "non locked column 3 rowspan");
+
+        equal(grid.lockedHeader.find("tr").eq(0).find("th")[0].rowSpan, 1, "locked column 1");
+    });
+
+    test("move locked single header column to non-locked single header column updates the rowspans - multi-header column is in the locked container", function() {
+        var grid = new Grid(div, {
+            columns: [
+                { title: "master", width: 10, locked: true },
+                { title: "master1", locked: true,
+                    columns: [
+                        { title: "master1-child" },
+                        { title: "master1-child1", columns: [{ title: "master1-child1-child", width: 30 }, { title: "master1-child1-child2", width: 40 } ] },
+                        { title: "master1-child2", columns: [{ title: "master1-child2-child", width: 50 }, { title: "master1-child2-child2", width: 60 } ] }
+                ] },
+                { title: "master2", width: 70 },
+                { title: "master3", width: 80 },
+            ]
+        });
+
+        grid.reorderColumn(2, grid.columns[0]);
+
+        equal(grid.thead.find("tr").eq(0).find("th")[0].rowSpan, 1, "non locked column 1 rowspan");
+        equal(grid.thead.find("tr").eq(0).find("th")[1].rowSpan, 1, "non locked column 2 rowspan");
+        equal(grid.thead.find("tr").eq(0).find("th")[2].rowSpan, 1, "non locked column 3 rowspan");
+
+        equal(grid.lockedHeader.find("tr").eq(0).find("th")[0].rowSpan, 1, "locked column 1");
     });
 
 })();
