@@ -67,7 +67,7 @@ namespace Kendo.Mvc.UI.Fluent
         }        
 
         /// <summary>
-        /// Specify an editor template which to be used for InForm or PopUp modes
+        /// Specify an editor template to be used in PopUp edit mode
         /// </summary>
         /// <param name="templateName">name of the editor template</param>
         /// <remarks>This settings is applicable only when Mode is
