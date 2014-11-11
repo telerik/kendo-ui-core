@@ -220,4 +220,13 @@ function saveAsPDFTests(name, createWidget) {
             widget.saveAsPDF();
         });
     });
+
+    test("saveAsPDF passes through forceProxy option", function() {
+        stubMethod(kendo, "saveAs", function(options) {
+            ok(options.forceProxy);
+        }, function() {
+            widget.options.pdf.forceProxy = true;
+            widget.saveAsPDF();
+        });
+    });
 };

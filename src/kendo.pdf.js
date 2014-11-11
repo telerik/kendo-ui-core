@@ -59,7 +59,8 @@ kendo.PDFMixin = {
             kendo.saveAs({
                 dataURI: dataURI,
                 fileName: options.fileName,
-                proxyURL: options.proxyURL
+                proxyURL: options.proxyURL,
+                forceProxy: options.forceProxy
             });
         });
     }
