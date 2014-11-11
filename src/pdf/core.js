@@ -1110,7 +1110,7 @@
         }
     }
 
-    function makeGradient(gradient, box) {
+    function makeGradient(pdf, gradient, box) {
         var isRadial = gradient.type == "radial";
         var funcs = makeGradientFunctions(gradient.stops);
         var coords = isRadial ? [
@@ -1137,7 +1137,7 @@
             SMask: {
                 Type: _("Mask"),
                 S: _("Luminosity"),
-                G: new PDFStream("/a0 gs /s0 sh", {
+                G: pdf.attach(new PDFStream("/a0 gs /s0 sh", {
                     Type: _("XObject"),
                     Subtype: _("Form"),
                     FormType: 1,
@@ -1165,7 +1165,7 @@
                             }
                         }
                     }
-                })
+                }))
             }
         } : null;
         return {
@@ -1314,7 +1314,7 @@
             if (!gradient.userSpace) {
                 this.transform(box.width, 0, 0, box.height, box.left, box.top);
             }
-            var g = makeGradient(gradient, box);
+            var g = makeGradient(this._pdf, gradient, box);
             var sname, oname;
             sname = "S" + (++RESOURCE_COUNTER);
             this._shResources[sname] = this._pdf.attach(g.shading);
