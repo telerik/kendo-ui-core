@@ -321,7 +321,8 @@ var __meta__ = {
 
             extend(that, {
                 element: element,
-                surface: options.global ? $(document.documentElement) : $(options.surface || element),
+                // the touch events lock to the element anyway, so no need for the global setting
+                surface: options.global && !support.touch ? $(document.documentElement) : $(options.surface || element),
                 stopPropagation: options.stopPropagation,
                 pressed: false
             });
