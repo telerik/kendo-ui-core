@@ -1,10 +1,10 @@
 
         <div id="example">
             <div id="alarm-settings">
-                <div style="margin-top: -7px; margin-left: 180px">
+                <div class="alarm-time">
                     <input id="timepicker" value="10:00 AM" />
                 </div>
-                <div style="margin-top: 59px; padding-left: 180px">
+                <div class="alarm-desc">
                     <span style="" class="k-widget k-autocomplete k-header k-state-default">
                         <input id="descr" class="k-input" type="text" value="Wake up" style="width: 100%" />
                     </span>
@@ -24,7 +24,21 @@
                     margin: 30px auto;
                     padding: 110px 0 0 30px;
                     background: url('../content/web/timepicker/alarmSettings.png') transparent no-repeat 0 0;
-                    font-size: 12px;
+                }
+                .alarm-time {
+                    margin-top: -7px;
+                    margin-left: 180px
+                }
+                .alarm-desc {
+                    margin-top: 59px;
+                    padding-left: 180px;
+                }
+                .k-material .alarm-time {
+                    margin-top: -12px;
+                }
+                .k-material .alarm-desc {
+                    margin-top: 45px;
+                    padding-left: 180px;
                 }
             </style>
         </div>
