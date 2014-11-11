@@ -3222,8 +3222,8 @@ var __meta__ = {
             var that = this,
                 wrapper = that.wrapper,
                 groupable = that.options.groupable,
-                GROUPINGDRAGGABLES = HEADERCELLS + ":visible[" + kendo.attr("field") + "]",
-                GROUPINGFILTER =  HEADERCELLS + "[" + kendo.attr("field") + "]";
+                draggables = HEADERCELLS + "[" + kendo.attr("field") + "]",
+                filter = that.content ? ".k-grid-header:first " + draggables  : "table:first>.k-grid-header " + draggables;
 
             if (groupable && groupable.enabled !== false) {
 
@@ -3239,8 +3239,8 @@ var __meta__ = {
                     draggable: that._draggableInstance,
                     groupContainer: ">div.k-grouping-header",
                     dataSource: that.dataSource,
-                    draggableElements: that.content ? ".k-grid-header:first " + GROUPINGDRAGGABLES : "table:first>.k-grid-header " + GROUPINGDRAGGABLES,
-                    filter: that.content ? ".k-grid-header:first " + GROUPINGFILTER : "table:first>.k-grid-header " + GROUPINGFILTER,
+                    draggableElements: filter,
+                    filter: filter,
                     allowDrag: that.options.reorderable
                 }));
             }
