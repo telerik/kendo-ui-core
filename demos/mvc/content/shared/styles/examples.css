@@ -707,7 +707,7 @@ div.submenu-box ol {
     border: 0;
     text-align: left;
     overflow: hidden;
-    padding: 25px 87px;
+    padding: 25px 87px 50px;
 }
 
 .tc-theme-list ul
@@ -764,7 +764,7 @@ div.submenu-box ol {
     background-color: #e2e4e7;
 }
 
-.tc-name
+.themes-grid .tc-name
 {
     padding-left: 5px;
 }
