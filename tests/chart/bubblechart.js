@@ -131,8 +131,12 @@
             equal(firstPoint.color, "red");
         });
 
-        test("Color is set in options", function() {
-            equal(firstPoint.options.color, "red");
+        test("Color field is set", function() {
+            equal(firstPoint.color, "red");
+        });
+
+        test("Color is copied to marker background", function() {
+            equal(firstPoint.options.markers.background, "red");
         });
 
         test("format variable {0} returns x", function() {

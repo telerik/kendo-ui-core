@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link type="text/css" href="../styles/web/kendo.common.less" rel="stylesheet"/>
+    <link type="text/css" href="../styles/web/kendo.blueopal.less" rel="stylesheet/less"/>
+    <link type="text/css" href="../styles/dataviz/kendo.dataviz.less" rel="stylesheet"/>
+    <link type="text/css" href="../styles/dataviz/kendo.dataviz.blueopal.less" rel="stylesheet/less"/>
+    <script type="text/javascript" src="../build/less-js/dist/less-1.6.0.min.js"></script>
+    <script src="require.js"></script>
+    <script>
+    require.config({
+        baseUrl: "../src",
+        paths: {
+            cultures: "cultures",
+        }
+    });
+
+    require([ "jquery.min",
+              "kendo.dataviz.chart" ], function(){
+
+        $.getJSON("chart-scatter-perf.json", function(data) {
+            $("#chart").kendoChart({
+                renderAs: "canvas",
+                seriesDefaults: {
+                    type: "scatterLine",
+                    style: "smooth"
+                },
+                series: [{
+                    xField: "Orders",
+                    yField: "Magnitude",
+                    data: data,
+                    markers: {
+                        visible: false
+                    }
+                }]
+            });
+        });
+      });
+    </script>
+  </head>
+  <body>
+      <div id="chart" style="width: 900px; height: 500px;"></div>
+  </body>
+</html>

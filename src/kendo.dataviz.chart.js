@@ -4581,19 +4581,14 @@ var __meta__ = {
 
             point.value = value;
             point.options = options;
-            point.color = options.color;
             point.aboveAxis = valueOrDefault(point.options.aboveAxis, true);
-            point.id = uniqueId();
             point.tooltipTracking = true;
-
-            point.enableDiscovery();
         },
 
         defaults: {
             vertical: true,
             markers: {
                 visible: true,
-                background: WHITE,
                 size: LINE_MARKER_SIZE,
                 type: CIRCLE,
                 border: {
@@ -4834,9 +4829,7 @@ var __meta__ = {
         init: function(value, options) {
             var point = this;
 
-            LinePoint.fn.init.call(point, value,
-               deepExtend({}, this.defaults, options)
-            );
+            LinePoint.fn.init.call(point, value, options);
 
             point.category = value.category;
         },
@@ -5520,6 +5513,8 @@ var __meta__ = {
 
             chart.points = [];
             chart.seriesPoints = [];
+            chart.seriesOptions = [];
+            chart._evalSeries = [];
 
             chart.render();
         },
@@ -5656,37 +5651,66 @@ var __meta__ = {
 
         evalPointOptions: function(options, value, fields) {
             var series = fields.series;
+            var seriesIx = fields.seriesIx;
+            var state = { defaults: series._defaults, excluded: ["data", "tooltip", "tempate"] };
 
-            evalOptions(options, {
-                value: value,
-                series: series,
-                dataItem: fields.dataItem
-            }, { defaults: series._defaults, excluded: ["data", "tooltip", "tempate"] });
+            var doEval = this._evalSeries[seriesIx];
+            if (!defined(doEval)) {
+                this._evalSeries[seriesIx] = doEval = evalOptions(options, {}, state, true);
+            }
+
+            if (doEval) {
+                options = deepExtend({}, options);
+                evalOptions(options, {
+                    value: value,
+                    series: series,
+                    dataItem: fields.dataItem
+                }, state);
+            }
+
+            return options;
+        },
+
+        pointType: function() {
+            return LinePoint;
+        },
+
+        pointOptions: function(series, seriesIx) {
+            var options = this.seriesOptions[seriesIx];
+            if (!options) {
+                var defaults = this.pointType().fn.defaults;
+                this.seriesOptions[seriesIx] = options = deepExtend({}, defaults, {
+                    markers: {
+                        opacity: series.opacity
+                    },
+                    tooltip: {
+                        format: this.options.tooltip.format
+                    },
+                    labels: {
+                        format: this.options.labels.format
+                    }
+                }, series);
+            }
+
+            return options;
         },
 
         createPoint: function(value, fields) {
             var chart = this,
                 series = fields.series,
-                point,
-                pointOptions;
+                point;
 
-            pointOptions = deepExtend({}, LinePoint.fn.defaults, {
-                markers: {
-                    opacity: series.opacity
-                },
-                tooltip: {
-                    format: chart.options.tooltip.format
-                },
-                labels: {
-                    format: chart.options.labels.format
-                }
-            }, series, {
-                color: fields.color
-            });
+            var pointOptions = this.pointOptions(series, fields.seriesIx);
+            var color = fields.color || series.color;
 
-            chart.evalPointOptions(pointOptions, value, fields);
+            pointOptions = chart.evalPointOptions(pointOptions, value, fields);
+
+            if (kendo.isFunction(series.color)) {
+                color = pointOptions.color;
+            }
 
             point = new LinePoint(value, pointOptions);
+            point.color = color;
 
             chart.append(point);
 
@@ -5845,6 +5869,10 @@ var __meta__ = {
             ScatterChart.fn.reflow.call(chart, box);
         },
 
+        pointType: function() {
+            return Bubble;
+        },
+
         createPoint: function(value, fields) {
             var chart = this,
                 series = fields.series,
@@ -5858,25 +5886,21 @@ var __meta__ = {
                 },
                 color, point, pointOptions;
 
-            if (kendo.isFunction(series.color)) {
-                color = series.color;
-            } else if (fields.color) {
-                color = fields.color;
-            } else {
-                color = series.color;
+            var color = fields.color || series.color;
+            if (value.size < 0 && series.negativeValues.visible) {
+                color = valueOrDefault(
+                    series.negativeValues.color, color
+                );
             }
 
             pointOptions = deepExtend({
-                tooltip: {
-                    format: chart.options.tooltip.format
-                },
                 labels: {
-                    format: chart.options.labels.format,
-                    animation: animationOptions
+                    animation: {
+                        delay: delay,
+                        duration: INITIAL_ANIMATION_DURATION - delay
+                    },
                 }
-            },
-            series, {
-                color: color,
+            }, this.pointOptions(series, fields.seriesIx), {
                 markers: {
                     type: CIRCLE,
                     border: series.border,
@@ -5885,19 +5909,18 @@ var __meta__ = {
                 }
             });
 
-            chart.evalPointOptions(pointOptions, value, fields);
-
-            if (value.size < 0 && series.negativeValues.visible && !kendo.isFunction(series.color)) {
-                pointOptions.color = valueOrDefault(series.negativeValues.color, pointOptions.color);
+            pointOptions = chart.evalPointOptions(pointOptions, value, fields);
+            if (kendo.isFunction(series.color)) {
+                color = pointOptions.color;
             }
 
             pointOptions.markers.background = valueOrDefault(
                 pointOptions.markers.background,
-                pointOptions.color
+                color
             );
 
             point = new Bubble(value, pointOptions);
-            point.color = pointOptions.color;
+            point.color = color;
 
             chart.append(point);
 
@@ -9726,30 +9749,28 @@ var __meta__ = {
     });
     draw.AnimationFactory.current.register(PIE, PieAnimation);
 
-    var BubbleAnimation = ElementAnimation.extend({
+    var BubbleAnimation = draw.Animation.extend({
         options: {
-            easing: "easeOutElastic",
-            duration: INITIAL_ANIMATION_DURATION
+            easing: "easeOutElastic"
         },
 
         setup: function() {
-            var circle = this.element;
-
-            circle.endRadius = circle.radius;
-            circle.radius = 0;
+            var center = this.center = this.element.bbox().center();
+            this.element.transform(geom.transform()
+                .scale(0, 0, center)
+            );
         },
 
         step: function(pos) {
-            var circle = this.element,
-                endRadius = circle.endRadius;
-
-            circle.radius = interpolate(0, endRadius, pos);
+            this.element.transform(geom.transform()
+                .scale(pos, pos, this.center)
+            );
         }
     });
+    draw.AnimationFactory.current.register(BUBBLE, BubbleAnimation);
 
     var BarAnimationDecorator = animationDecorator(BAR, BarAnimation),
-        PieAnimationDecorator = animationDecorator(PIE, PieAnimation),
-        BubbleAnimationDecorator = animationDecorator(BUBBLE, BubbleAnimation);
+        PieAnimationDecorator = animationDecorator(PIE, PieAnimation);
 
     var Highlight = Class.extend({
         init: function(view) {
@@ -11939,7 +11960,6 @@ var __meta__ = {
         BarAnimationDecorator: BarAnimationDecorator,
         BarChart: BarChart,
         BarLabel: BarLabel,
-        BubbleAnimationDecorator: BubbleAnimationDecorator,
         BubbleChart: BubbleChart,
         BulletChart: BulletChart,
         CandlestickChart: CandlestickChart,
