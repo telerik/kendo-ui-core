@@ -1119,6 +1119,61 @@
         window.checkTuple = null;
     });
 
+    test("PivotGrid renders correctly column tuples with missing measures", function() {
+        var dataSource = new PivotDataSource({
+            measures: ["measure 1", "measure 2"],
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    options.success({
+                        axes: {
+                            columns: {
+                                tuples: [
+                                    { members: [ { name: "Calendar", children: [], levelNum: "0" }, { name: "measure 1", children: [] } ] },
+                                    { members: [ { name: "Calendar", children: [], levelNum: "0" }, { name: "measure 2", children: [] } ] },
+                                    { members: [ { name: "2008", parentName: "Calendar", children: [], levelNum: "1" }, { name: "measure 1", children: [] } ] },
+                                    { members: [ { name: "2008", parentName: "Calendar", children: [], levelNum: "1" }, { name: "measure 2", children: [] } ] },
+                                    { members: [ { name: "2009", parentName: "Calendar", children: [], levelNum: "1" }, { name: "measure 1", children: [] } ] },
+                                    { members: [ { name: "2010", parentName: "Calendar", children: [], levelNum: "1" }, { name: "measure 1", children: [] } ] }
+                                ]
+                            },
+                            rows: {
+                                tuples: [
+                                    { members: [ { name: "Product", children: [], levelNum: "0" } ] },
+                                    { members: [ { name: "P1", parentName: "Product", children: [], levelNum: "1" } ] },
+                                    { members: [ { name: "P2", parentName: "Product", children: [], levelNum: "1" } ] }
+                                ]
+                            }
+                        },
+                        data: [
+                            { value: "92", ordinal: 0 },
+                            { value: "32265", ordinal: 1 },
+                            { value: "92", ordinal: 2 },
+                            { value: "92", ordinal: 3 },
+                            { value: "92", ordinal: 4 },
+                            { value: "92", ordinal: 6 },
+                            { value: "92", ordinal: 7 },
+                            { value: "92", ordinal: 8 },
+                            { value: "21067", ordinal: 9 },
+                            { value: "92", ordinal: 10 },
+                            { value: "92", ordinal: 11 }
+                        ]
+                    });
+                }
+            }
+        });
+
+        createPivot({
+            dataSource: dataSource
+        });
+
+        //no JavaScript errors
+        ok(true);
+    });
+
     module("PivotGrid rows header rendering", {
         setup: function() {
             kendo.ns = "kendo-";
@@ -3311,7 +3366,7 @@
             var tuple = tuples[index];
             var templateTuple = data.columnTuple;
 
-            equal(data.measure, measures[index]);
+            equal(data.measure.name, measures[index]);
 
             equal(tuple.members[0].name, templateTuple.members[0].name);
             equal(tuple.members[1].name, templateTuple.members[1].name);
@@ -3346,7 +3401,7 @@
             var tuple = tuples[index];
             var templateTuple = data.rowTuple;
 
-            equal(data.measure, measures[index]);
+            equal(data.measure.name, measures[index]);
 
             equal(tuple.members[0].name, templateTuple.members[0].name);
             equal(tuple.members[1].name, templateTuple.members[1].name);
@@ -3377,9 +3432,7 @@
 
         window.checkTuple = function (data) {
             var measure = measures[indexes.shift()];
-            var dataMeasure = data.measure;
-
-            equal(measure, data.measure);
+            equal(measure, data.measure.name);
         };
 
         var pivotgrid = createPivot({
@@ -3407,9 +3460,8 @@
 
         window.checkTuple = function (data) {
             var measure = measures[indexes.shift()];
-            var dataMeasure = data.measure;
 
-            equal(measure, data.measure);
+            equal(measure, data.measure.name);
         };
 
         var pivotgrid = createPivot({
@@ -3488,6 +3540,243 @@
         ok(!cells.eq(0).hasClass("k-alt"));
         ok(cells.eq(1).hasClass("k-alt"));
         ok(cells.eq(2).hasClass("k-alt"));
+    });
+
+    test("PivotGrid pass column measure to dataCellTemplate", function() {
+        var tuples = [
+            { members: [ { name: "measure 1", children: [] } ] },
+            { members: [ { name: "measure 2", children: [] } ] },
+        ]
+
+        var measures = [ "measure 1", "measure 2"];
+
+        var data = [
+            { value: 1 },
+            { value: 2 }
+        ];
+
+        var indexes = [0, 1];
+
+        window.checkTuple = function (data) {
+            var measure = measures[indexes.shift()];
+            equal(measure, data.measure.name);
+        };
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, data, measures),
+            dataCellTemplate: "#checkTuple(data)#"
+        });
+
+        window.checkTuple = null;
+    });
+
+    test("PivotGrid pass column measure to dataCellTemplate", function() {
+        var tuples = [
+            { members: [ { name: "measure 1", children: [] } ] },
+            { members: [ { name: "measure 2", children: [] } ] },
+        ]
+
+        var measures = [ "measure 1", "measure 2"];
+
+        var data = [
+            { value: 1 },
+            { value: 2 }
+        ];
+
+        var indexes = [0, 1];
+
+        window.checkTuple = function (data) {
+            var measure = measures[indexes.shift()];
+            equal(measure, data.measure.name);
+        };
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, data, measures),
+            dataCellTemplate: "#checkTuple(data)#"
+        });
+
+        window.checkTuple = null;
+    });
+
+    test("PivotGrid renders kpi open-status icon for Status measure", 2, function() {
+        var tuples = [
+            { members: [ { name: "measure 1", children: [] } ] }
+        ]
+
+        var measures = [{
+            name: "measure 1",
+            type: "status"
+        }];
+
+        var data = [
+            { value: 1 }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, data, measures)
+        });
+
+        var rows = pivotgrid.wrapper.find(".k-grid-content").find("tbody").find("tr");
+        var cell = rows.eq(0).find("td").eq(0);
+        var icon = cell.children(":first");
+
+        ok(icon.hasClass("k-i-kpi-open"));
+        equal(icon.text(), "1");
+    });
+
+    test("PivotGrid renders kpi hold-status icon for Status measure", 2, function() {
+        var tuples = [
+            { members: [ { name: "measure 1", children: [] } ] }
+        ]
+
+        var measures = [{
+            name: "measure 1",
+            type: "status"
+        }];
+
+        var data = [
+            { value: 0 }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, data, measures)
+        });
+
+        var rows = pivotgrid.wrapper.find(".k-grid-content").find("tbody").find("tr");
+        var cell = rows.eq(0).find("td").eq(0);
+        var icon = cell.children(":first");
+
+        ok(icon.hasClass("k-i-kpi-hold"));
+        equal(icon.text(), "0");
+    });
+
+    test("PivotGrid renders kpi denied-status icon for Status measure", 2, function() {
+        var tuples = [
+            { members: [ { name: "measure 1", children: [] } ] }
+        ]
+
+        var measures = [{
+            name: "measure 1",
+            type: "status"
+        }];
+
+        var data = [
+            { value: -1 }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, data, measures)
+        });
+
+        var rows = pivotgrid.wrapper.find(".k-grid-content").find("tbody").find("tr");
+        var cell = rows.eq(0).find("td").eq(0);
+        var icon = cell.children(":first");
+
+        ok(icon.hasClass("k-i-kpi-denied"));
+        equal(icon.text(), "-1");
+    });
+
+    test("PivotGrid renders kpi increase-trend icon for Trend measure", 2, function() {
+        var tuples = [
+            { members: [ { name: "measure 1", children: [] } ] }
+        ]
+
+        var measures = [{
+            name: "measure 1",
+            type: "trend"
+        }];
+
+        var data = [
+            { value: 1 }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, data, measures)
+        });
+
+        var rows = pivotgrid.wrapper.find(".k-grid-content").find("tbody").find("tr");
+        var cell = rows.eq(0).find("td").eq(0);
+        var icon = cell.children(":first");
+
+        ok(icon.hasClass("k-i-kpi-increase"));
+        equal(icon.text(), "1");
+    });
+
+    test("PivotGrid renders kpi equal-trend icon for Trend measure", 2, function() {
+        var tuples = [
+            { members: [ { name: "measure 1", children: [] } ] }
+        ]
+
+        var measures = [{
+            name: "measure 1",
+            type: "trend"
+        }];
+
+        var data = [
+            { value: 0 }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, data, measures)
+        });
+
+        var rows = pivotgrid.wrapper.find(".k-grid-content").find("tbody").find("tr");
+        var cell = rows.eq(0).find("td").eq(0);
+        var icon = cell.children(":first");
+
+        ok(icon.hasClass("k-i-kpi-equal"));
+        equal(icon.text(), "0");
+    });
+
+    test("PivotGrid renders kpi decrease-trend icon for Trend measure", 2, function() {
+        var tuples = [
+            { members: [ { name: "measure 1", children: [] } ] }
+        ]
+
+        var measures = [{
+            name: "measure 1",
+            type: "trend"
+        }];
+
+        var data = [
+            { value: -1 }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, data, measures)
+        });
+
+        var rows = pivotgrid.wrapper.find(".k-grid-content").find("tbody").find("tr");
+        var cell = rows.eq(0).find("td").eq(0);
+        var icon = cell.children(":first");
+
+        ok(icon.hasClass("k-i-kpi-decrease"));
+        equal(icon.text(), "-1");
+    });
+
+    test("PivotGrid does not render status icon if no value", function() {
+        var tuples = [
+            { members: [ { name: "measure 1", children: [] } ] }
+        ]
+
+        var measures = [{
+            name: "measure 1",
+            type: "trend"
+        }];
+
+        var data = [
+            { value: "" }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, data, measures)
+        });
+
+        var rows = pivotgrid.wrapper.find(".k-grid-content").find("tbody").find("tr");
+        var cell = rows.eq(0).find("td").eq(0);
+        var icon = cell.children(":first");
+
+        ok(!icon[0]);
     });
 
     module("PivotGrid resize on render", {
@@ -3656,5 +3945,26 @@
         var rowFields = leftColumn.find(".k-settings-rows");
 
         equal(measures.width(), rowFields.width());
+    });
+
+    test("PivotGrid renders nbsp if no data value", 1, function() {
+        var tuples = [
+            { members: [ { name: "measure 1", children: [] } ] }
+        ]
+
+        var measures = ["measure 1"];
+
+        var data = [
+            { value: "" }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, data, measures)
+        });
+
+        var rows = pivotgrid.wrapper.find(".k-grid-content").find("tbody").find("tr");
+        var cell = rows.eq(0).find("td").eq(0);
+
+        equal(cell.html(), "&nbsp;");
     });
 })();

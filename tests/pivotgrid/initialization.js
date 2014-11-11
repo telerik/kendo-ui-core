@@ -276,14 +276,42 @@
         ok(method.calls("setDataSource"));
     });
 
-    test("setOptions updates template", function() {
+    test("setOptions updates data template", function() {
         var pivotgrid = createPivot();
 
         pivotgrid.setOptions({
             dataCellTemplate: "test #: dataItem.value #"
         });
 
-        var result = pivotgrid._contentBuilder.template({
+        var result = pivotgrid._contentBuilder.dataTemplate({
+            dataItem: { value: "1" }
+        });
+
+        equal(result, "test 1");
+    });
+
+    test("setOptions updates kpi status template", function() {
+        var pivotgrid = createPivot();
+
+        pivotgrid.setOptions({
+            kpiStatusTemplate: "test #: dataItem.value #"
+        });
+
+        var result = pivotgrid._contentBuilder.kpiStatusTemplate({
+            dataItem: { value: "1" }
+        });
+
+        equal(result, "test 1");
+    });
+
+    test("setOptions updates kpi trend template", function() {
+        var pivotgrid = createPivot();
+
+        pivotgrid.setOptions({
+            kpiTrendTemplate: "test #: dataItem.value #"
+        });
+
+        var result = pivotgrid._contentBuilder.kpiTrendTemplate({
             dataItem: { value: "1" }
         });
 

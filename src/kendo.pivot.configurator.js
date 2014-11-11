@@ -99,9 +99,27 @@ var __meta__ = {
             this.refresh();
         },
 
-
         _treeViewDataSource: function() {
             var that = this;
+
+            var addKPI = function(data) {
+                var found;
+                for (var idx = 0, length = data.length; idx < length; idx++) {
+                    if (data[idx].type == 2) {
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (found) {
+                    data.splice(idx + 1, 0, {
+                        caption: "KPIs",
+                        defaultHierarchy: "[KPIs]",
+                        name: "KPIs",
+                        uniqueName: "[KPIs]"
+                    });
+                }
+            };
 
             return kendo.data.HierarchicalDataSource.create({
                 schema: {
@@ -115,11 +133,37 @@ var __meta__ = {
                 transport: {
                     read: function(options) {
                         var promise;
+                        var node;
+
                         if ($.isEmptyObject(options.data)) {
                             promise = that.dataSource.schemaDimensions();
+
+                            promise.done(function(data) {
+                                        addKPI(data);
+                                        options.success(data);
+                                    })
+                                    .fail(options.error);
                         } else {
                             //Hack to get the actual node as the HierarchicalDataSource does not support passing it
-                            var node = that.treeView.dataSource.get(options.data.uniqueName);
+                            node = that.treeView.dataSource.get(options.data.uniqueName);
+
+                            //KPI
+                            if (node.uniqueName === "[KPIs]") {
+                                promise = that.dataSource.schemaKPIs();
+                                promise.done(function (data) {
+                                            for (var idx = 0, length = data.length; idx < length; idx++) {
+                                                data[idx].uniqueName = data[idx].name;
+                                                data[idx].type = "kpi";
+                                            }
+                                            options.success(data);
+                                       })
+                                       .fail(options.error);
+                                return;
+                            } else if (node.type == "kpi") {
+                                options.success(buildKPImeasures(node));
+                                return;
+                            }
+                            //end of KPI
 
                             if (node.type == 2) { //measure
                                 promise = that.dataSource.schemaMeasures();
@@ -128,9 +172,10 @@ var __meta__ = {
                             } else { // dimension
                                 promise = that.dataSource.schemaHierarchies(options.data.uniqueName);
                             }
+
+                            promise.done(options.success)
+                                    .fail(options.error);
                         }
-                        promise.done(options.success)
-                            .fail(options.error);
                     }
                 }
             });
@@ -155,7 +200,7 @@ var __meta__ = {
                     dataSource: this._treeViewDataSource(),
                     dragstart: function(e) {
                         var dataItem = this.dataItem(e.sourceNode);
-                        if ((!dataItem.hasChildren && !dataItem.aggregator) || (dataItem.type == 2)) {
+                        if ((!dataItem.hasChildren && !dataItem.aggregator && !dataItem.measure) || (dataItem.type == 2) || dataItem.uniqueName === "[KPIs]") {
                             e.preventDefault();
                         }
                     },
@@ -176,7 +221,26 @@ var __meta__ = {
                         var node = this.dataItem(e.sourceNode);
 
                         if (setting && setting.validate(node)) {
-                            setting.add(node.defaultHierarchy || node.uniqueName);
+                            var name = node.defaultHierarchy || node.uniqueName;
+
+                            if (node.type === "kpi") {
+                                var measures = buildKPImeasures(node);
+
+                                name = [];
+                                for (var idx = 0; idx < measures.length; idx++) {
+                                    name.push({
+                                        name: measures[idx].uniqueName,
+                                        type: measures[idx].type
+                                    });
+                                }
+                            } else if (node.type) {
+                                name = [{
+                                    name: node.uniqueName,
+                                    type: node.type
+                                }];
+                            }
+
+                            setting.add(name);
                         }
                     }
                  })
@@ -293,6 +357,27 @@ var __meta__ = {
             this._refreshHandler = null;
         }
     });
+
+    function kpiMeasure(name, measure, type) {
+        return {
+            hierarchyUniqueName: name,
+            uniqueName: measure,
+            caption: measure,
+            measure: measure,
+            name: measure,
+            type: type
+        };
+    }
+
+    function buildKPImeasures(node) {
+        var name = node.name;
+        return [
+            kpiMeasure(name, node.value, "value"),
+            kpiMeasure(name, node.goal, "goal"),
+            kpiMeasure(name, node.status, "status"),
+            kpiMeasure(name, node.trend, "trend")
+        ];
+    }
 
     ui.plugin(PivotConfigurator);
 

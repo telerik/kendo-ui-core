@@ -705,7 +705,7 @@
         equal(info.dataItem, pivotgrid.dataSource.data()[5]);
         equal(info.columnTuple, null);
         equal(info.rowTuple.members[0].name, "dim 0_2");
-        equal(info.measure, "measure 2");
+        equal(info.measure.name, "measure 2");
     });
 
     test("PivotGrid returns only measure info", function() {
@@ -730,7 +730,7 @@
         equal(info.dataItem, pivotgrid.dataSource.data()[1]);
         equal(info.columnTuple, null);
         equal(info.rowTuple, null);
-        equal(info.measure, "measure 2");
+        equal(info.measure.name, "measure 2");
     });
 
     test("PivotGrid returns null if no such data cell", function() {

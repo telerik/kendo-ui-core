@@ -77,7 +77,7 @@
         dataSource.measures("baz");
 
         equal(dataSource.measures().length, 1)
-        equal(dataSource.measures()[0], "baz");
+        equal(dataSource.measures()[0].name, "baz");
     });
 
     test("discover calls the transport discover", 1, function() {
@@ -397,8 +397,8 @@
             measures: ["foo", "bar"]
         });
 
-        equal(dataSource.measures()[0], "foo");
-        equal(dataSource.measures()[1], "bar");
+        equal(dataSource.measures()[0].name, "foo");
+        equal(dataSource.measures()[1].name, "bar");
     });
 
     test("default measures axis is columns", function() {
@@ -414,8 +414,8 @@
             }
         });
 
-        equal(dataSource.measures()[0], "foo");
-        equal(dataSource.measures()[1], "bar");
+        equal(dataSource.measures()[0].name, "foo");
+        equal(dataSource.measures()[1].name, "bar");
         equal(dataSource.measuresAxis(), "columns");
     });
 
@@ -427,8 +427,8 @@
             }
         });
 
-        equal(dataSource.measures()[0], "foo");
-        equal(dataSource.measures()[1], "bar");
+        equal(dataSource.measures()[0].name, "foo");
+        equal(dataSource.measures()[1].name, "bar");
         equal(dataSource.measuresAxis(), "rows");
     });
 
@@ -474,7 +474,7 @@
             measures: ["foo"],
             transport: {
                 read: function(options) {
-                    equal(options.data.measures[0], "foo"); }
+                    equal(options.data.measures[0].name, "foo"); }
             }
         });
         dataSource.read();
@@ -775,7 +775,7 @@
             transport: {
                 read: function(options) {
                     equal(options.data.measures.length, 1);
-                    equal(options.data.measures[0], "baz");
+                    equal(options.data.measures[0].name, "baz");
 
                     options.success({
                         axes: { },

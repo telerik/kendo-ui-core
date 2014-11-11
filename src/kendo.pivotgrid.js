@@ -47,7 +47,9 @@ var __meta__ = {
         STATE_EXPANDED = "k-i-arrow-s",
         STATE_COLLAPSED = "k-i-arrow-e",
         HEADER_TEMPLATE = "#: data.member.caption || data.member.name #",
-        DATACELL_TEMPLATE = '#: data.dataItem ? (data.dataItem.fmtValue || data.dataItem.value) : "" #',
+        KPISTATUS_TEMPLATE = '<span class="k-icon k-i-kpi-#=data.dataItem.value > 0 ? \"open\" : data.dataItem.value < 0 ? \"denied\" : \"hold\"#">#:data.dataItem.value#</span>',
+        KPITREND_TEMPLATE = '<span class="k-icon k-i-kpi-#=data.dataItem.value > 0 ? \"increase\" : data.dataItem.value < 0 ? \"decrease\" : \"equal\"#">#:data.dataItem.value#</span>',
+        DATACELL_TEMPLATE = '#= data.dataItem ? kendo.htmlEncode(data.dataItem.fmtValue || data.dataItem.value) || "&nbsp;" : "&nbsp;" #',
         LAYOUT_TABLE = '<table class="k-pivot-layout">' +
                             '<tr>' +
                                 '<td>' +
@@ -58,6 +60,18 @@ var __meta__ = {
                                 '</td>' +
                             '</tr>' +
                         '</table>';
+
+    function normalizeMeasures(measure) {
+        var descriptor = typeof measure === "string" ? [{ name: measure }] : measure;
+        var descriptors = toString.call(descriptor) === "[object Array]" ? descriptor : (descriptor !== undefined ? [descriptor] : []);
+
+        return map(descriptors, function(d) {
+            if (typeof d === "string") {
+                return { name: d };
+            }
+            return { name: d.name, type: d.type };
+        });
+    }
 
     function normalizeMembers(member) {
         var descriptor = typeof member === "string" ? [{ name: [member], expand: false }] : member;
@@ -295,7 +309,7 @@ var __meta__ = {
         init: function(options) {
             this.options = extend({}, this.options, options);
             this.dimensions = this._normalizeDescriptors("field", this.options.dimensions);
-            this.measures = this._normalizeDescriptors("name", this.options.measures);
+            this.measures = this._normalizeDescriptors("name", this.options.measures); //TODO: normalize measures like in XMLA (normalizeMeasures)
         },
 
         _normalizeDescriptors: function(keyField, descriptors) {
@@ -424,7 +438,7 @@ var __meta__ = {
             if (measures && measures.length) {
                 var descriptors = (this.measures || {});
                 for (var idx = 0; idx < measures.length; idx++) {
-                    var measure = descriptors[measures[idx]];
+                    var measure = descriptors[measures[idx]]; //TODO: update measure usage here to measures[idx].name
                     if (measure.format) {
                         formats[measures[idx]] = measure.format;
                     }
@@ -552,7 +566,7 @@ var __meta__ = {
             if (measureDescriptors.length) {
                 for (idx = 0, length = measureDescriptors.length; idx < length; idx++) {
                     descriptor = measureDescriptors[idx];
-                    measure = measures[descriptor];
+                    measure = measures[descriptor]; //TODO: here measure should have name too
 
                     if (measure) {
                         aggregators.push({
@@ -600,7 +614,7 @@ var __meta__ = {
             data = data || [];
             options = options || {};
 
-            var measures = options.measures || [];
+            var measures = options.measures || []; //TODO: normalize measures here!
 
             var measuresRowAxis = options.measuresAxis === "rows";
 
@@ -618,7 +632,7 @@ var __meta__ = {
             }
 
             if (!columnDescriptors.length && measures.length) {
-                columnDescriptors = normalizeMembers(options.measures);
+                columnDescriptors = normalizeMembers(options.measures); //TODO normalize measures here
             }
 
             var aggregatedData = {};
@@ -806,7 +820,7 @@ var __meta__ = {
                 measuresAxis = this.options.measures.axis || "columns";
             }
 
-            this._measures = measures || [];
+            this._measures = normalizeMeasures(measures || []);
             this._measuresAxis = measuresAxis;
 
             this._axes = {};
@@ -884,7 +898,7 @@ var __meta__ = {
             this.query({
                 columns: this.columnsAxisDescriptors(),
                 rows: this.rowsAxisDescriptors(),
-                measures: val
+                measures: normalizeMeasures(val)
             });
         },
 
@@ -987,7 +1001,7 @@ var __meta__ = {
             options = DataSource.fn._mergeState.call(this, options);
 
             if (options !== undefined) {
-                this._measures = asArray(options.measures);
+                this._measures = normalizeMeasures(options.measures);
 
                 if (options.columns) {
                     options.columns = normalizeMembers(options.columns);
@@ -1040,6 +1054,7 @@ var __meta__ = {
                 axes = processedData.axes;
             }
 
+            var columnIndexes, rowIndexes;
             var tuples, resultAxis, measures, axisToSkip;
             var columnDescriptors = this.columns().length;
             var rowDescriptors = this.rows().length;
@@ -1069,7 +1084,16 @@ var __meta__ = {
                 rows: normalizeAxis(axes.rows)
             };
 
-            data = this._normalizeData(data, axes.columns.tuples.length, axes.rows.tuples.length);
+            columnIndexes = this._normalizeTuples(axes.columns.tuples, this._axes.columns.tuples, this._columnMeasures());
+            rowIndexes = this._normalizeTuples(axes.rows.tuples, this._axes.rows.tuples, this._rowMeasures());
+
+            data = this._normalizeData({
+                columnsLength: axes.columns.tuples.length,
+                rowsLength: axes.rows.tuples.length,
+                columnIndexes: columnIndexes,
+                rowIndexes: rowIndexes,
+                data: data
+            });
 
             if (this._lastExpanded == "rows") {
                 tuples = axes.columns.tuples;
@@ -1080,7 +1104,11 @@ var __meta__ = {
                     axisToSkip = "columns";
                     axes.columns = resultAxis;
                     adjustDataByColumn(tuples, resultAxis.tuples, axes.rows.tuples.length, measures, data);
-                    data = this._normalizeData(data, membersCount(axes.columns.tuples, measures), axes.rows.tuples.length);
+                    data = this._normalizeData({
+                        columnsLength: membersCount(axes.columns.tuples, measures),
+                        rowsLength: axes.rows.tuples.length,
+                        data: data
+                    });
                 }
             } else if (this._lastExpanded == "columns") {
                 tuples = axes.rows.tuples;
@@ -1091,7 +1119,12 @@ var __meta__ = {
                     axisToSkip = "rows";
                     axes.rows = resultAxis;
                     adjustDataByRow(tuples, resultAxis.tuples, axes.columns.tuples.length, measures, data);
-                    data = this._normalizeData(data, membersCount(axes.rows.tuples, measures), axes.columns.tuples.length);
+
+                    data = this._normalizeData({
+                        columnsLength: membersCount(axes.rows.tuples, measures),
+                        rowsLength: axes.columns.tuples.length,
+                        data: data
+                    });
                 }
             }
 
@@ -1108,6 +1141,86 @@ var __meta__ = {
             var newData = this.reader.data(data);
 
             return this._processResult(newData, axes);
+        },
+
+        _createTuple: function(tuple, measure, buildRoot) {
+            var name;
+            var member;
+            var parentName;
+            var members = tuple.members;
+            var length = members.length;
+            var root = { members: [] };
+            var levelNum;
+            var caption;
+            var idx = 0;
+
+            if (measure) {
+                length -= 1;
+            }
+
+            for (; idx < length; idx++) {
+                member = members[idx];
+                levelNum = Number(member.levelNum);
+
+                name = member.name;
+                parentName = member.parentName;
+                caption = member.caption || name;
+
+                if (buildRoot) {
+                    caption = "All"; //TODO: find a way to get proper caption ???
+                    if (levelNum === 0) {
+                        parentName = member.name;
+                    } else {
+                        levelNum -= 1;
+                    }
+
+                    name = parentName;
+                }
+
+                root.members.push({
+                    name: name,
+                    children: [],
+                    caption: caption,
+                    levelName: parentName,
+                    levelNum: levelNum.toString(),
+                    hasChildren: buildRoot,
+                    hierarchy: parentName,
+                    parentName: !buildRoot ? parentName: ""
+                });
+            }
+
+            if (measure) {
+                root.members.push({
+                    name: measure.name,
+                    children: []
+                });
+            }
+
+            return root;
+        },
+
+        _hasRoot: function(target, source) {
+            if (source.length) {
+                return findExistingTuple(source, target).tuple;
+            }
+
+            var members = target.members;
+            var member;
+
+            var isRoot = true;
+            var levelNum;
+
+            for (var idx = 0, length = members.length; idx < length; idx++) {
+                member = members[idx];
+                levelNum = Number(member.levelNum) || 0;
+
+                if (levelNum !== 0) {
+                    isRoot = false;
+                    break;
+                }
+            }
+
+            return isRoot;
         },
 
         _mergeAxes: function(sourceAxes, data, axisToSkip) {
@@ -1127,6 +1240,7 @@ var __meta__ = {
                 tuples = parseSource(sourceAxes.columns.tuples, columnMeasures);
                 data = prepareDataOnColumns(tuples, data);
             }
+
             var mergedColumns = mergeTuples(axes.columns.tuples, tuples, columnMeasures);
 
             if (axisToSkip == "rows") {
@@ -1264,24 +1378,114 @@ var __meta__ = {
             }
         },
 
-        _normalizeData: function(data, columns, rows) {
-            var cell, idx, length;
-            var axesLength = (columns || 1) * (rows || 1);
-            var result = new Array(axesLength);
+        //TODO: optimize as splice is slow
+        _normalizeTuples: function(tuples, source, measures) {
+            var length = measures.length || 1;
+            var idx = 0;
 
-            if (data.length === axesLength) {
+            var roots = [];
+            var indexes = {};
+            var measureIdx = 0;
+            var tuple, memberIdx, last;
+
+            if (!tuples.length) {
+                return;
+            }
+
+            if (!this._hasRoot(tuples[0], source)) {
+                for (; idx < length; idx++) {
+                    roots.push(this._createTuple(tuples[0], measures[idx], true));
+                    indexes[idx] = idx;
+                }
+
+                tuples.splice.apply(tuples, [0, tuples.length].concat(roots).concat(tuples));
+                idx = length;
+            }
+
+            //TODO: find better way to detect missing tuples to avoid unnecessary loops
+            if (measures.length) {
+                last = tuple = tuples[idx];
+                memberIdx = tuple.members.length - 1;
+
+                while (tuple) {
+                    if (measureIdx >= length) {
+                        measureIdx = 0;
+                    }
+
+                    if (tuple.members[memberIdx].name !== measures[measureIdx].name) {
+                        tuples.splice(idx, 0, this._createTuple(tuple, measures[measureIdx]));
+                        indexes[idx] = idx;
+                    }
+
+                    idx += 1;
+                    measureIdx += 1;
+                    tuple = tuples[idx];
+
+                    if (length > measureIdx && (!tuple || tupleName(last, memberIdx - 1) !== tupleName(tuple, memberIdx - 1))) {
+                        for (; measureIdx < length; measureIdx++) {
+                            tuples.splice(idx, 0, this._createTuple(last, measures[measureIdx]));
+                            indexes[idx] = idx;
+                            idx += 1;
+                        }
+                        tuple = tuples[idx];
+                    }
+                    last = tuple;
+                }
+            }
+
+            return indexes;
+        },
+
+        _normalizeData: function(options) {
+            var data = options.data;
+
+            var columnIndexes = options.columnIndexes || {};
+            var rowIndexes = options.rowIndexes || {};
+
+            var columnsLength = options.columnsLength || 1;
+            var length = columnsLength * (options.rowsLength || 1);
+
+            var idx = 0;
+            var dataIdx = 0;
+            var lastOrdinal = 0;
+            var dataItem, i;
+            var result = new Array(length);
+
+            if (data.length === length) {
                 return data;
             }
 
-            for (idx = 0, length = result.length; idx < length; idx++) {
-                result[idx] = { value: "", fmtValue: "", ordinal: idx };
-            }
+            for (; idx < length; idx++) {
+                if (rowIndexes[parseInt(idx / columnsLength, 10)] !== undefined) {
+                    for (i = 0; i < columnsLength; i++) {
+                        result[idx] = { value: "", fmtValue: "", ordinal: idx };
+                        idx += 1;
+                    }
+                }
 
-            for (idx = 0, length = data.length; idx < length; idx++) {
-               cell = data[idx];
-               if (cell) {
-                   result[cell.ordinal] = cell;
-               }
+                if (columnIndexes[idx % columnsLength] !== undefined) {
+                    result[idx] = { value: "", fmtValue: "", ordinal: idx };
+                    idx += 1;
+                }
+
+                dataItem = data[dataIdx];
+
+                if (dataItem) {
+                    if (dataItem.ordinal - lastOrdinal > 1) {
+                        lastOrdinal += 1;
+                        for (; lastOrdinal < dataItem.ordinal; lastOrdinal++) {
+                            result[idx] = { value: "", fmtValue: "", ordinal: idx };
+                            idx += 1;
+                        }
+                    }
+
+                    lastOrdinal = dataItem.ordinal;
+                    dataItem.ordinal = idx;
+                    result[idx] = dataItem;
+                    dataIdx += 1;
+                } else {
+                    result[idx] = { value: "", fmtValue: "", ordinal: idx };
+                }
             }
 
             return result;
@@ -1328,6 +1532,22 @@ var __meta__ = {
                 }
             }, function(response) {
                 return that.reader.measures(response);
+            });
+        },
+
+        schemaKPIs: function() {
+            var that = this;
+
+            return that.discover({
+                data: {
+                    command: "schemaKPIs",
+                    restrictions: {
+                        catalogName: that.transport.catalog(),
+                        cubeName: that.transport.cube()
+                    }
+                }
+            }, function(response) {
+                return that.reader.kpis(response);
             });
         },
 
@@ -1733,13 +1953,13 @@ var __meta__ = {
         var measure = measures[0];
         var members = tuple.members;
         for (var idx = 0, len = members.length; idx < len; idx ++) {
-            if (members[idx].name == measure) {
+            if (members[idx].name == measure.name) {
                 return idx;
             }
         }
     }
 
-    function normalizeMeasures(tuple, index) {
+    function normalizeTupleMeasures(tuple, index) {
         if (index < 0) {
             return;
         }
@@ -1768,7 +1988,7 @@ var __meta__ = {
             //keep the old data index of the tuple
             tuple.dataIndex = i;
 
-            normalizeMeasures(tuple, measureIndex);
+            normalizeTupleMeasures(tuple, measureIndex);
             var parentMember = findParentMember(tuple, map);
 
             if (parentMember) {
@@ -1797,19 +2017,21 @@ var __meta__ = {
         var rowsLength = indices.length;
         var columnsLength = Math.max(data.length / rowsLength, 1);
         var rowIndex, columnIndex, targetIndex, sourceIndex;
+        var calcIndex;
 
         for (rowIndex = 0; rowIndex < rowsLength; rowIndex++) {
             targetIndex = columnsLength * rowIndex;
             sourceIndex = columnsLength * indices[rowIndex];
             for (columnIndex = 0; columnIndex < columnsLength; columnIndex++) {
-                result[targetIndex + columnIndex] = data[sourceIndex + columnIndex];
+                calcIndex = parseInt(sourceIndex + columnIndex, 10);
+                result[parseInt(targetIndex + columnIndex, 10)] = data[calcIndex] || { value: "", fmtValue: "", ordinal: calcIndex };
             }
         }
 
         return result;
     }
 
-    function prepareDataOnColumns(tuples, data) {
+    function prepareDataOnColumns(tuples, data, rootAdded) {
         if (!tuples || !tuples.length) {
             return data;
         }
@@ -1818,12 +2040,13 @@ var __meta__ = {
         var indices = buildDataIndices(tuples);
         var columnsLength = indices.length;
         var rowsLength = Math.max(data.length / columnsLength, 1);
-        var columnIndex, rowIndex, dataIndex;
+        var columnIndex, rowIndex, dataIndex, calcIndex;
 
         for (rowIndex = 0; rowIndex < rowsLength; rowIndex++) {
             dataIndex = columnsLength * rowIndex;
             for (columnIndex = 0; columnIndex < columnsLength; columnIndex++) {
-                result[dataIndex + columnIndex] = data[indices[columnIndex] + dataIndex];
+                calcIndex = indices[columnIndex] + dataIndex;
+                result[dataIndex + columnIndex] = data[calcIndex] || { value: "", fmtValue: "", ordinal: calcIndex };
             }
         }
 
@@ -1930,8 +2153,10 @@ var __meta__ = {
 
     function crossJoinCommand(members, measures) {
         var tmp = members.slice(0);
+        var names;
+
         if (measures.length > 1) {
-            tmp.push("{" + measures.join(",") + "}");
+            tmp.push("{" + measureNames(measures).join(",") + "}");
         }
         return crossJoin(tmp);
     }
@@ -1943,6 +2168,20 @@ var __meta__ = {
             if (members[idx].expand) {
                 result.push(members[idx]);
             }
+        }
+
+        return result;
+    }
+
+    function measureNames(measures) {
+        var idx = 0;
+        var length = measures.length;
+        var result = [];
+        var measure;
+
+        for (; idx < length; idx++) {
+            measure = measures[idx];
+            result.push(measure.name !== undefined ? measure.name :  measure);
         }
 
         return result;
@@ -2172,7 +2411,8 @@ var __meta__ = {
         schemaDimensions: "MDSCHEMA_DIMENSIONS",
         schemaHierarchies: "MDSCHEMA_HIERARCHIES",
         schemaLevels: "MDSCHEMA_LEVELS",
-        schemaMembers: "MDSCHEMA_MEMBERS"
+        schemaMembers: "MDSCHEMA_MEMBERS",
+        schemaKPIs: "MDSCHEMA_KPIS"
     };
 
     var convertersMap = {
@@ -2228,7 +2468,7 @@ var __meta__ = {
             }
 
             if (measures.length == 1 && columns.length) {
-                command += " WHERE (" + measures.join(",") + ")";
+                command += " WHERE (" + measureNames(measures).join(",") + ")";
             }
 
             command += '</Statement></Command><Properties><PropertyList><Catalog>' + options.connection.catalog + '</Catalog><Format>Multidimensional</Format></PropertyList></Properties></Execute></Body></Envelope>';
@@ -2366,6 +2606,18 @@ var __meta__ = {
             displayFolder: kendo.getter("MEASURE_DISPLAY_FOLDER['#text']", true),
             defaultFormat: kendo.getter("DEFAULT_FORMAT_STRING['#text']", true)
         },
+        kpis: {
+            name: kendo.getter("KPI_NAME['#text']", true),
+            caption: kendo.getter("KPI_CAPTION['#text']", true),
+            value: kendo.getter("KPI_VALUE['#text']", true),
+            goal: kendo.getter("KPI_GOAL['#text']", true),
+            status: kendo.getter("KPI_STATUS['#text']", true),
+            trend: kendo.getter("KPI_TREND['#text']", true),
+            statusGraphic: kendo.getter("KPI_STATUS_GRAPHIC['#text']", true),
+            trendGraphic: kendo.getter("KPI_TREND_GRAPHIC['#text']", true),
+            description: kendo.getter("KPI_DESCRIPTION['#text']", true),
+            groupName: kendo.getter("MEASUREGROUP_NAME['#text']", true)
+        },
         dimensions: {
             name: kendo.getter("DIMENSION_NAME['#text']", true),
             caption: kendo.getter("DIMENSION_CAPTION['#text']", true),
@@ -2499,6 +2751,9 @@ var __meta__ = {
         },
         measures: function(root) {
             return this._mapSchema(root, schemaDataReaderMap.measures);
+        },
+        kpis: function(root) {
+            return this._mapSchema(root, schemaDataReaderMap.kpis);
         },
         hierarchies: function(root) {
             return this._mapSchema(root, schemaDataReaderMap.hierarchies);
@@ -2678,8 +2933,12 @@ var __meta__ = {
             return index;
         },
 
+        _isKPI: function(data) {
+            return data.type === "kpi" || data.measure;
+        },
+
         validate: function(data) {
-            var isMeasure = (data.type == 2 || "aggregator" in data);
+            var isMeasure = (data.type == 2 || "aggregator" in data || this._isKPI(data));
 
             if (isMeasure) {
                 return this.options.setting === "measures";
@@ -2705,10 +2964,21 @@ var __meta__ = {
 
         add: function(name) {
             var items = this.dataSource[this.options.setting]();
-            var idx = this._indexOf(name, items);
+            var i, l;
+            var idx;
 
-            if (idx == -1) {
-                items.push(name);
+            name = $.isArray(name) ? name.slice(0) : [name];
+
+            for (i = 0, l = name.length; i < l; i++) {
+                if (this._indexOf(name[i], items) !== -1) {
+                    name.splice(i, 1);
+                    i -= 1;
+                    l -= 1;
+                }
+            }
+
+            if (name.length) {
+                items = items.concat(name);
                 this.dataSource[this.options.setting](items);
             }
         },
@@ -2896,6 +3166,8 @@ var __meta__ = {
             columnHeaderTemplate: null,
             rowHeaderTemplate: null,
             dataCellTemplate: null,
+            kpiStatusTemplate: null,
+            kpiTrendTemplate: null,
             messages: {
                 measureFields: "Drop Data Fields Here",
                 columnFields: "Drop Column Fields Here",
@@ -2904,12 +3176,16 @@ var __meta__ = {
         },
 
         _templates: function() {
-            var dataTemplate = this.options.dataCellTemplate;
             var columnTemplate = this.options.columnHeaderTemplate;
             var rowTemplate = this.options.rowHeaderTemplate;
+            var dataTemplate = this.options.dataCellTemplate;
+            var kpiStatusTemplate = this.options.kpiStatusTemplate;
+            var kpiTrendTemplate = this.options.kpiTrendTemplate;
 
             this._columnBuilder.template = kendo.template(columnTemplate || HEADER_TEMPLATE, { useWithBlock: !!columnTemplate });
-            this._contentBuilder.template = kendo.template(dataTemplate || DATACELL_TEMPLATE, { useWithBlock: !!dataTemplate });
+            this._contentBuilder.dataTemplate = kendo.template(dataTemplate || DATACELL_TEMPLATE, { useWithBlock: !!dataTemplate });
+            this._contentBuilder.kpiStatusTemplate = kendo.template(kpiStatusTemplate || KPISTATUS_TEMPLATE, { useWithBlock: !!kpiStatusTemplate });
+            this._contentBuilder.kpiTrendTemplate = kendo.template(kpiTrendTemplate || KPITREND_TEMPLATE, { useWithBlock: !!kpiTrendTemplate });
             this._rowBuilder.template = kendo.template(rowTemplate || HEADER_TEMPLATE, { useWithBlock: !!rowTemplate });
         },
 
@@ -3333,6 +3609,17 @@ var __meta__ = {
         }
 
         return path;
+    };
+
+    var tupleName = function(tuple, index) {
+        var name = "";
+        var idx = 0;
+
+        for(; idx <= index; idx++) {
+            name += tuple.members[idx].name;
+        }
+
+        return name;
     };
 
     var ColumnBuilder = Class.extend({
@@ -4033,8 +4320,9 @@ var __meta__ = {
             var cells = [];
             var idx = 0;
 
+            var templateInfo;
             var cellContent;
-            var attr;
+            var attr, dataItem, measure;
 
             for (; idx < length; idx++) {
                 columnInfo = columnIndexes[idx];
@@ -4044,12 +4332,28 @@ var __meta__ = {
                     attr.className = "k-alt";
                 }
 
-                cellContent = this.template({
+                cellContent = "";
+                dataItem = this.data[startIdx + columnInfo.index];
+                measure = columnInfo.measure || rowInfo.measure;
+
+                templateInfo = {
                     columnTuple: columnInfo.tuple,
                     rowTuple: rowInfo.tuple,
-                    measure: columnInfo.measure || rowInfo.measure,
-                    dataItem: this.data[startIdx + columnInfo.index]
-                });
+                    measure: measure,
+                    dataItem: dataItem
+                };
+
+                if (dataItem.value !== "" && measure && measure.type) {
+                    if (measure.type === "status") {
+                        cellContent = this.kpiStatusTemplate(templateInfo);
+                    } else if (measure.type === "trend") {
+                        cellContent = this.kpiTrendTemplate(templateInfo);
+                    }
+                }
+
+                if (!cellContent) {
+                    cellContent = this.dataTemplate(templateInfo);
+                }
 
                 cells.push(element("td", attr, [ htmlNode(cellContent) ]));
             }
