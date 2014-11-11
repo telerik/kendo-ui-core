@@ -16275,6 +16275,12 @@ which field to update. The other option is to use MVVM bindings in order to bind
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>If set to true, the content will be forwarded to proxyURL even if the browser supports saving files locally.</description>
+            <name>forceProxy</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
             <description>Specifies the keywords of the exported PDF file.</description>
             <name>keywords</name>
             <rtexprvalue>true</rtexprvalue>
@@ -16287,16 +16293,15 @@ which field to update. The other option is to use MVVM bindings in order to bind
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Specifies the paper size of the PDF document. Can be set to a predefined size, i.e. "A4", "A3" etc,
-or an array of two Number-s specifying the width/height in points (1pt = 1/72in), or strings including unit, i.e. "10mm". Supported
-units are "mm", "cm", "in" and "pt".  The default "auto" means paper size is determined by content.</description>
+            <description>Specifies the paper size of the PDF document.
+The default "auto" means paper size is determined by content.Supported values:</description>
             <name>paperSize</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
         </attribute>
         <attribute>
-            <description>The URL of the server side proxy which will stream the PDF file to the end user. Used when the browser isn't capable of saving files from JavaScript. Such browsers are IE&lt;10 and Safari.
-The developer is responsible for implementing the server-side proxy. Implementation instructions are available here.</description>
+            <description>The URL of the server side proxy which will stream the file to the end user.A proxy will be used when the browser isn't capable of saving files locally.
+Such browsers are IE version 9 and lower and Safari.The developer is responsible for implementing the server-side proxy.The proxy will receive a POST request with the following parameters in the request body:The proxy should return the decoded file with set "Content-Disposition" header.</description>
             <name>proxyURL</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -17443,8 +17448,14 @@ which field to update. The other option is to use MVVM bindings in order to bind
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>The URL of the server side proxy which will stream the Excel file to the end user. Used when the browser isn't capable of saving files from JavaScript. Such browsers are IE&lt;10 and Safari.
-The developer is responsible for implementing the server-side proxy. Implementation instructions are available here.</description>
+            <description>If set to true, the content will be forwarded to proxyURL even if the browser supports saving files locally.</description>
+            <name>forceProxy</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The URL of the server side proxy which will stream the file to the end user.A proxy will be used when the browser isn't capable of saving files locally.
+Such browsers are IE version 9 and lower and Safari.The developer is responsible for implementing the server-side proxy.The proxy will receive a POST request with the following parameters in the request body:The proxy should return the decoded file with set "Content-Disposition" header.</description>
             <name>proxyURL</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -18000,6 +18011,12 @@ The developer is responsible for implementing the server-side proxy. Implementat
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>If set to true, the content will be forwarded to proxyURL even if the browser supports saving files locally.</description>
+            <name>forceProxy</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
             <description>Specifies the keywords of the exported PDF file.</description>
             <name>keywords</name>
             <rtexprvalue>true</rtexprvalue>
@@ -18012,16 +18029,15 @@ The developer is responsible for implementing the server-side proxy. Implementat
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Specifies the paper size of the PDF document. Can be set to a predefined size, i.e. "A4", "A3" etc,
-or an array of two Number-s specifying the width/height in points (1pt = 1/72in), or strings including unit, i.e. "10mm". Supported
-units are "mm", "cm", "in" and "pt".  The default "auto" means paper size is determined by content.</description>
+            <description>Specifies the paper size of the PDF document.
+The default "auto" means paper size is determined by content.Supported values:</description>
             <name>paperSize</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
         </attribute>
         <attribute>
-            <description>The URL of the server side proxy which will stream the PDF file to the end user. Used when the browser isn't capable of saving files from JavaScript. Such browsers are IE&lt;10 and Safari.
-The developer is responsible for implementing the server-side proxy. Implementation instructions are available here.</description>
+            <description>The URL of the server side proxy which will stream the file to the end user.A proxy will be used when the browser isn't capable of saving files locally.
+Such browsers are IE version 9 and lower and Safari.The developer is responsible for implementing the server-side proxy.The proxy will receive a POST request with the following parameters in the request body:The proxy should return the decoded file with set "Content-Disposition" header.</description>
             <name>proxyURL</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -23897,6 +23913,12 @@ which field to update. The other option is to use MVVM bindings in order to bind
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>If set to true, the content will be forwarded to proxyURL even if the browser supports saving files locally.</description>
+            <name>forceProxy</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
             <description>Specifies the keywords of the exported PDF file.</description>
             <name>keywords</name>
             <rtexprvalue>true</rtexprvalue>
@@ -23909,16 +23931,15 @@ which field to update. The other option is to use MVVM bindings in order to bind
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Specifies the paper size of the PDF document. Can be set to a predefined size, i.e. "A4", "A3" etc,
-or an array of two Number-s specifying the width/height in points (1pt = 1/72in), or strings including unit, i.e. "10mm". Supported
-units are "mm", "cm", "in" and "pt".  The default "auto" means paper size is determined by content.</description>
+            <description>Specifies the paper size of the PDF document.
+The default "auto" means paper size is determined by content.Supported values:</description>
             <name>paperSize</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
         </attribute>
         <attribute>
-            <description>The URL of the server side proxy which will stream the PDF file to the end user. Used when the browser isn't capable of saving files from JavaScript. Such browsers are IE&lt;10 and Safari.
-The developer is responsible for implementing the server-side proxy. Implementation instructions are available here.</description>
+            <description>The URL of the server side proxy which will stream the file to the end user.A proxy will be used when the browser isn't capable of saving files locally.
+Such browsers are IE version 9 and lower and Safari.The developer is responsible for implementing the server-side proxy.The proxy will receive a POST request with the following parameters in the request body:The proxy should return the decoded file with set "Content-Disposition" header.</description>
             <name>proxyURL</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>

@@ -1402,7 +1402,12 @@ var __meta__ = {
             }
         }
     });
+
     dataviz.ExportMixin.extend(Chart.fn);
+
+    if (kendo.PDFMixin) {
+        kendo.PDFMixin.extend(Chart.fn);
+    }
 
     var PlotAreaFactory = Class.extend({
         init: function() {

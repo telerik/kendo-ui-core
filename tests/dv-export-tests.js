@@ -115,7 +115,7 @@ function legacyExportTests(name, createWidget) {
 
     var widget;
 
-    module("Base Export / " + name + " /", {
+    module("Legacy Export / " + name + " /", {
         setup: function() {
             widget = createWidget();
 
@@ -161,3 +161,72 @@ function legacyExportTests(name, createWidget) {
                "Image Export failed. Unable to export instantiate kendo.drawing.canvas.Surface");
     });
 }
+
+// ------------------------------------------------------------
+function saveAsPDFTests(name, createWidget) {
+    var draw = kendo.drawing;
+    var widget;
+
+    function exportNoop() {
+        return $.Deferred().resolve("");
+    }
+
+    module("saveAsPDF / " + name + " /", {
+        setup: function() {
+            widget = createWidget();
+        },
+        teardown: function() {
+            kendo.destroy(QUnit.fixture);
+            QUnit.fixture.empty();
+        }
+    });
+
+    test("saveAsPDF calls kendo.drawing.exportPDF", function() {
+        stubMethod(draw, "exportPDF", function() {
+            ok(true);
+            return exportNoop();
+        }, function() {
+            widget.saveAsPDF();
+        });
+    });
+
+    test("saveAsPDF passes through pdf options", function() {
+        stubMethod(draw, "exportPDF", function(group, options) {
+            ok(options.foo);
+            return exportNoop();
+        }, function() {
+            widget.options.pdf.foo = true;
+            widget.saveAsPDF();
+        });
+    });
+
+    test("saveAsPDF triggers pdfExport event", function() {
+        stubMethod(draw, "exportPDF", exportNoop,
+        function() {
+            widget.bind("pdfExport", function() {
+                ok(true);
+            });
+            widget.saveAsPDF();
+        });
+    });
+
+    test("cancelling pdfExport stops export", 0, function() {
+        stubMethod(draw, "exportPDF", function() {
+            ok(false);
+        }, function() {
+            widget.bind("pdfExport", function(e) {
+                e.preventDefault();
+            });
+            widget.saveAsPDF();
+        });
+    });
+
+    test("saveAsPDF passes through forceProxy option", function() {
+        stubMethod(kendo, "saveAs", function(options) {
+            ok(options.forceProxy);
+        }, function() {
+            widget.options.pdf.forceProxy = true;
+            widget.saveAsPDF();
+        });
+    });
+};

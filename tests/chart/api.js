@@ -369,6 +369,7 @@
 
         exportTests("Chart", createChart);
         legacyExportTests("Chart", createChart);
+        saveAsPDFTests("Chart", createChart);
 
         // ------------------------------------------------------------
         module("Export", {

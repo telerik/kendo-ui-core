@@ -33,8 +33,17 @@ class GridExcel extends \Kendo\SerializableObject {
     }
 
     /**
-    * The URL of the server side proxy which will stream the Excel file to the end user. Used when the browser isn't capable of saving files from JavaScript. Such browsers are IE<10 and Safari.
-The developer is responsible for implementing the server-side proxy. Implementation instructions are available here.
+    * If set to true, the content will be forwarded to proxyURL even if the browser supports saving files locally.
+    * @param boolean $value
+    * @return \Kendo\UI\GridExcel
+    */
+    public function forceProxy($value) {
+        return $this->setProperty('forceProxy', $value);
+    }
+
+    /**
+    * The URL of the server side proxy which will stream the file to the end user.A proxy will be used when the browser isn't capable of saving files locally.
+Such browsers are IE version 9 and lower and Safari.The developer is responsible for implementing the server-side proxy.The proxy will receive a POST request with the following parameters in the request body:The proxy should return the decoded file with set "Content-Disposition" header.
     * @param string $value
     * @return \Kendo\UI\GridExcel
     */

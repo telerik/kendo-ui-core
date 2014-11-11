@@ -167,4 +167,5 @@
     });
 
     exportTests("Diagram", createDiagram);
+    saveAsPDFTests("Diagram", createDiagram);
 })();

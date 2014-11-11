@@ -425,7 +425,8 @@ kendo.ExcelMixin = {
                 kendo.saveAs({
                     dataURI: workbook.toDataURL(),
                     fileName: book.fileName || excel.fileName,
-                    proxyURL: excel.proxyURL
+                    proxyURL: excel.proxyURL,
+                    forceProxy: excel.forceProxy
                 });
             }
         }, this));

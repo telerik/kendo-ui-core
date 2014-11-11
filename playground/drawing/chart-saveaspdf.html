@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link type="text/css" href="../../styles/web/kendo.common.less" rel="stylesheet"/>
+    <link type="text/css" href="../../styles/web/kendo.blueopal.less" rel="stylesheet/less"/>
+    <script type="text/javascript" src="../../build/less-js/dist/less-1.6.0.min.js"></script>
+    <script src="../require.js"></script>
+    <script>
+    require.config({
+        baseUrl: "../../src",
+        paths: {
+            cultures: "cultures",
+        }
+    });
+
+    require([ "jquery.min",
+              "kendo.dataviz.chart" ], function(){
+
+          $("#chart").kendoChart({
+              pdf: {
+                  paperSize: ["20cm", "20cm"]
+              },
+              legend: {
+                  position: "bottom"
+              },
+              series: [
+                  { name: "Series 1", data: [1, 2, 3] },
+                  { name: "Series 2", data: [3, 4, 5] }
+              ]
+          });
+
+          var chart = $("#chart").getKendoChart();
+          chart.saveAsPDF();
+      });
+    </script>
+  </head>
+  <body>
+      <div id="chart" style="width: 600px; height: 400px;"></div>
+  </body>
+</html>

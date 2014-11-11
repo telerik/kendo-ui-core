@@ -46,4 +46,19 @@ test("clicking the excel button calls the excel export method", 1, function() {
     dom.find(".k-grid-excel").trigger("click");
 });
 
+test("saveAsExcel passes through forceProxy option", function() {
+    dom.kendoGrid({
+        excel: {
+            forceProxy: true
+        }
+    });
+
+    stubMethod(kendo, "saveAs", function(options) {
+        ok(options.forceProxy);
+    }, function() {
+        kendo.ui.Grid.fn.saveAsExcel = saveAsExcel;
+        dom.getKendoGrid().saveAsExcel();
+    });
+});
+
 }());
