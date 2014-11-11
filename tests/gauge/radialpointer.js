@@ -39,8 +39,6 @@
             pointer = new RadialPointer(stubScale(), {
                     type: "needle"
                 });
-
-            //pointer.getViewElements(new dataviz.SVGView());
         }
     });
 

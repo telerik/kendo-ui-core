@@ -180,14 +180,6 @@ var __meta__ = {
                 });
             }
 
-            //TODO check if needed
-            deepExtend(options, {
-                rotation: [
-                    scale.slotAngle(options.value) - minAngle,
-                    center.x, center.y
-                ]
-            });
-
             if (options.shape === NEEDLE) {
                 elements.append(
                     that._renderNeedle(),
@@ -672,7 +664,7 @@ var __meta__ = {
                 tickArc.setRadiusX(radius - diff).setRadiusY(radius - diff);
             }
 
-            for (var i = 0; i < ticks.length; i++) { //tickAngles.length
+            for (var i = 0; i < ticks.length; i++) {
                 var newPoint = tickArc.pointAt(tickAngles[i]);
                 var segments = ticks[i].segments;
                 var xDiff = newPoint.x - segments[0].anchor().x;
@@ -1569,7 +1561,7 @@ var __meta__ = {
             var animation = new ArrowLinearPointerAnimation(that.elements, deepExtend(options.animation, {
                 vertical: scale.options.vertical,
                 mirror: scale.options.mirror,
-                margin: options.margin,
+                margin: that._margin(options.margin),
                 from: scale.getSlot(options._oldValue),
                 to: scale.getSlot(options.value)
             }));
@@ -1744,9 +1736,9 @@ var __meta__ = {
             var axis = options.vertical ? "x1" : "y1";
 
             if (options.mirror == options.vertical) {
-                from[axis] -= (halfSize + margin); to[axis] -= (halfSize + margin);
+                from[axis] -= margin; to[axis] -= margin;
             } else {
-                from[axis] += (halfSize + margin); to[axis] += (halfSize + margin);
+                from[axis] += margin; to[axis] += margin;
             }
 
             var fromScale = this.fromScale = new Point(from.x1, from.y1);
@@ -1786,7 +1778,7 @@ var __meta__ = {
                 options.duration = math.max((math.abs(to - from) / options.speed) * 1000, 1);
             }
 
-            this._set(from)
+            this._set(from);
         },
 
         step: function(pos) {

@@ -1,8 +1,8 @@
 (function(){
 
-var dataviz = kendo.dataviz,
-    gaugeElement,
-    gauge;
+var dataviz = kendo.dataviz;
+var gaugeElement;
+var gauge;
 
 function createGauge(options) {
     gaugeElement = $("<div>").kendoRadialGauge(kendo.deepExtend({
@@ -89,11 +89,5 @@ test("allValues() with no args returns all pointer values", function() {
 
     deepEqual(gauge.allValues(), [10, 20]);
 });
-
-// test("value(x) updates value in options", function() {
-//     gauge.value(11);
-
-//     equal(gauge.options.pointer.value, 11);
-// });
 
 }());

@@ -3,10 +3,15 @@
     var RadialGauge = dataviz.RadialGauge;
     var DEFAULT_MARGIN = 5
     var TOLERANCE = 1.5 + DEFAULT_MARGIN;
-    var elem = "<div id='gauge' style='width: 200px; height: 200px;'></div>"; //$('<div/>').width(200).height(200);
+    var gaugeBox = new dataviz.geometry.Rect([0, 0], [200, 200]);
+    var elem = "<div id='gauge' style='width: 200px; height: 200px;'></div>";
+    var arc;
 
     (function() {
         function createGauge(options) {
+            kendo.destroy(QUnit.fixture);
+            QUnit.fixture.empty();
+
             $(elem).appendTo(QUnit.fixture);
             radialGauge = new RadialGauge($("#gauge"), options);
             box = radialGauge.plotBbox;
@@ -23,7 +28,6 @@
         });
 
         test("fit plot area box in gauge with 0:90", function() {
-
             createGauge({ scale: { startAngle: 0, endAngle: 90 }});
             arrayClose([ box.origin.x, box.origin.y, box.origin.x + box.width(), box.origin.y + box.height() ], 
                        [ 0, 1.5, 200, 198.5 ], TOLERANCE);
@@ -124,14 +128,39 @@
             }
 
             radialGauge.redraw();
+        });
 
+        test("calculates scale ring center for 0:360 gauge", function() {
+            createGauge({ scale: { startAngle: 0, endAngle: 90 }});
+            arc = radialGauge.scale.arc;
+
+            equal(arc.getCenter().x, 182.5);
+            equal(arc.getCenter().y, 184);
+        });
+
+        test("calculates scale ring center for 90:270 gauge", function() {
+            createGauge({ scale: { startAngle: 90, endAngle: 270 }});
+            arc = radialGauge.scale.arc;
+
+            equal(arc.getCenter().x, 58.75);
+            equal(arc.getCenter().y, 100);
+        });
+
+        test("calculates scale ring center for -30:210 gauge", function() {
+            createGauge({ scale: { startAngle: -30, endAngle: 210 }});
+            arc = radialGauge.scale.arc;
+
+            equal(arc.getCenter().x, 100);
+            equal(arc.getCenter().y, 123.75);
+        });
+
+        test("calculates scale ring center for 0:180 gauge", function() {
+            createGauge({ scale: { startAngle: -30, endAngle: 210 }});
+            arc = radialGauge.scale.arc;
+
+            equal(arc.getCenter().x, 100);
+            equal(arc.getCenter().y, 123.75);
         });
     }());
 
-    (function() {
-        var arc;
-        var radius = 100;
-
-        module("RadialGauge / Reflow / Without pointer");
-    })();
 }());

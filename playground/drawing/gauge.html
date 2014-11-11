@@ -45,124 +45,87 @@
 var elem = $("#gauge");
 var elem2 = $("#gauge2");
 
-// var l = elem2.kendoLinearGauge({
-//            gaugeArea: {
-//                 width: 200,
-//                 height: 200,
-//                 background: "blue",
-//                 border: {
-//                     color: "yellow",
-//                     dashType: "solid",
-//                     width: 25
-//                 }
-//             },
-//             pointer: [{
-//                 value: 0,
-//                 shape: "bar",
-//                 color: "aqua",
-//                 margin: 10
-//             }
-//             , {
-//                 value: 0,
-//                 shape: "arrow",
-//                 color: "olive"
-//             },{
-//                 value: 20,
-//                 shape: "arrow",
-//                 color: "purple"
-//             }, {
-//                 value: 40,
-//                 shape: "arrow",
-//                 color: "yellow"
-//             }, 
-//             {
-//                 value: 50,
-//                 shape: "bar",
-//                 color: "green",
-//                 margin: 18
-//             }, {
-//                 value: 0,
-//                 shape: "bar",
-//                 color: "blue"
-//             }
-//             ],
-//             transitions: false,
-//             scale: {
-//                 mirror: true,
-//                 //reverse: true,
-//                 vertical: false,
-//                 line: {
-//                     color: "blue"
-//                 },
-//                 majorTicks: {
-//                     color: "green"
-//                 },
-//                 labels: {
-//                     color: "yellow",
-//                     //padding: 5,
-//                     //visible: false,
-//                     background: "purple",
-//                     border: {
-//                         width: 5,
-//                         color: "green",
-//                         //dashType: "dot"
-//                     },
-//                     position: "outside"
-//                 },
-//                 majorUnit: 20,
-//                 minorUnit: 2,
-//                 min: -60,
-//                 max: 60,
-//                 ranges: [
-//                     {
-//                         from: -40,
-//                         to: -20,
-//                         color: "#2798df"
-//                     }, {
-//                         from: 30,
-//                         to: 45,
-//                         color: "#ffc700"
-//                     }, {
-//                         from: 45,
-//                         to: 60,
-//                         color: "#c20000"
-//                     }
-//                 ]
-//             }
-//         }).data("kendoLinearGauge");
+var l = elem2.kendoLinearGauge({
+            pointer:[{
+                value: -40,
+                shape: "arrow",
+                color: "purple",
+                size: 20,
+                //margin: 55
+            }, {
+                value: 40,
+                shape: "bar",
+                color: "blue",
+                size: 20,
+                //margin: 55
+            }],
+            //transitions: false,
+            scale: {
+                mirror: true,
+                //reverse: true,
+                vertical: false,
+                line: {
+                    color: "blue"
+                },
+                majorTicks: {
+                    color: "green"
+                },
+                labels: {
+                    color: "yellow",
+                    //padding: 5,
+                    //visible: false,
+                    background: "purple",
+                    border: {
+                        width: 5,
+                        color: "green",
+                        //dashType: "dot"
+                    },
+                    position: "outside"
+                },
+                majorUnit: 20,
+                minorUnit: 2,
+                min: -60,
+                max: 60,
+                ranges: [
+                    {
+                        from: -40,
+                        to: -20,
+                        color: "#2798df"
+                    }, {
+                        from: 30,
+                        to: 45,
+                        color: "#ffc700"
+                    }, {
+                        from: 45,
+                        to: 60,
+                        color: "#c20000"
+                    }
+                ]
+            }
+        }).data("kendoLinearGauge");
 
 var r = elem.kendoRadialGauge({
-        gaugeArea: {
-            width: 200,
-            height: 200,
-            background: "blue",
-            border: {
-                color: "yellow",
-                dashType: "solid",
-                width: 25
-            }
-        },
         pointer: [{
             cap: {
                 size: 0.25,
                 color: "blue"
             },
             color: "blue",
-            value: 15
+            value: 300
         }, {
             cap: {
                 size: 0.15,
                 color: "green"
             },
             color: "green",
-            value: 85
+            value: 600
         }, {
             cap: {
                 size: 0.05,
                 color: "pink"
             },
             color: "pink",
-            value: 125
+            value: 900
         }],
         scale: {
             minorTicks: {
@@ -191,12 +154,12 @@ var r = elem.kendoRadialGauge({
                 format: "C",
                 font: "15px Arial,Helvetica,sans-serif"
             },
-            minorUnit: 10,
-            majorUnit: 20,
+            minorUnit: 100,
+            majorUnit: 200,
             startAngle: 0,
             endAngle: 90,
             min: 0,
-            max: 100,
+            max: 1000,
             //reverse: true,
             //rangePlaceholderColor: "yellow",
         ranges: [{
