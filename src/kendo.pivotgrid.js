@@ -3493,6 +3493,21 @@ var __meta__ = {
             }
         },
 
+        _axisMeasures: function(axis) {
+            var result = [];
+            var dataSource = this.dataSource;
+            var measures = dataSource.measures();
+            var hasMeasure = measures.length > 1 || (measures[0] && measures[0].type);
+
+            if (dataSource.measuresAxis() === axis) {
+                if (dataSource[axis]().length === 0 || hasMeasure) {
+                    result = measures;
+                }
+            }
+
+            return result;
+        },
+
         refresh: function() {
             var that = this;
             var dataSource = that.dataSource;
@@ -3511,7 +3526,7 @@ var __meta__ = {
                 return;
             }
 
-            columnBuilder.measures = dataSource._columnMeasures();
+            columnBuilder.measures = this._axisMeasures("columns");
 
             that.columnsHeaderTree.render(columnBuilder.build(columns));
             that.rowsHeaderTree.render(rowBuilder.build(rows));
@@ -3524,7 +3539,7 @@ var __meta__ = {
 
             rowAxis = {
                 indexes: rowBuilder._indexes,
-                measures: dataSource._rowMeasures(),
+                measures: this._axisMeasures("rows"),
                 metadata: rowBuilder.metadata
             };
 

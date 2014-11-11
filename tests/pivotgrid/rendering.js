@@ -3626,7 +3626,7 @@
 
     test("PivotGrid renders kpi hold-status icon for Status measure", 2, function() {
         var tuples = [
-            { members: [ { name: "measure 1", children: [] } ] }
+            { members: [ { name: "dim 0", children: [] } ] }
         ]
 
         var measures = [{
@@ -3639,7 +3639,26 @@
         ];
 
         var pivotgrid = createPivot({
-            dataSource: createDataSource(tuples, data, measures)
+            dataSource: new PivotDataSource({
+                columns: ["dim 0"],
+                measures: measures,
+                schema: {
+                    axes: "axes",
+                    data: "data"
+                },
+                transport: {
+                    read: function(options) {
+                        options.success({
+                            axes: {
+                                columns: {
+                                    tuples: tuples
+                                }
+                            },
+                            data: data
+                        });
+                    }
+                }
+            })
         });
 
         var rows = pivotgrid.wrapper.find(".k-grid-content").find("tbody").find("tr");
