@@ -130,36 +130,44 @@
             radialGauge.redraw();
         });
 
-        test("calculates scale ring center for 0:360 gauge", function() {
+        test("calculates scale arc center for 0:360 gauge", function() {
+            createGauge({ scale: { startAngle: 0, endAngle: 360 }});
+            arc = radialGauge.scale.arc;
+
+            arrayClose([arc.getCenter().x], [100], TOLERANCE);
+            arrayClose([arc.getCenter().y], [100], TOLERANCE);
+        });
+
+        test("calculates scale arc center for 0:90 gauge", function() {
             createGauge({ scale: { startAngle: 0, endAngle: 90 }});
             arc = radialGauge.scale.arc;
 
-            equal(arc.getCenter().x, 182.5);
-            equal(arc.getCenter().y, 184);
+            arrayClose([arc.getCenter().x], [182.5], TOLERANCE);
+            arrayClose([arc.getCenter().y], [184], TOLERANCE);
         });
 
-        test("calculates scale ring center for 90:270 gauge", function() {
+        test("calculates scale arc center for 90:270 gauge", function() {
             createGauge({ scale: { startAngle: 90, endAngle: 270 }});
             arc = radialGauge.scale.arc;
 
-            equal(arc.getCenter().x, 58.75);
-            equal(arc.getCenter().y, 100);
+            arrayClose([arc.getCenter().x], [58.75], TOLERANCE);
+            arrayClose([arc.getCenter().y], [100], TOLERANCE);
         });
 
-        test("calculates scale ring center for -30:210 gauge", function() {
+        test("calculates scale arc center for -30:210 gauge", function() {
             createGauge({ scale: { startAngle: -30, endAngle: 210 }});
             arc = radialGauge.scale.arc;
 
-            equal(arc.getCenter().x, 100);
-            equal(arc.getCenter().y, 123.75);
+            arrayClose([arc.getCenter().x], [100], TOLERANCE);
+            arrayClose([arc.getCenter().y], [123.75], TOLERANCE);
         });
 
-        test("calculates scale ring center for 0:180 gauge", function() {
-            createGauge({ scale: { startAngle: -30, endAngle: 210 }});
+        test("calculates scale arc center for 0:180 gauge", function() {
+            createGauge({ scale: { startAngle: 0, endAngle: 180 }});
             arc = radialGauge.scale.arc;
 
-            equal(arc.getCenter().x, 100);
-            equal(arc.getCenter().y, 123.75);
+            arrayClose([arc.getCenter().x], [100], TOLERANCE);
+            arrayClose([arc.getCenter().y], [142.75], TOLERANCE);
         });
     }());
 
