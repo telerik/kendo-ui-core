@@ -1110,7 +1110,7 @@
         }
     }
 
-    function makeGradient(gradient, matrix) {
+    function makeGradient(gradient, box) {
         var isRadial = gradient.type == "radial";
         var funcs = makeGradientFunctions(gradient.stops);
         var coords = isRadial ? [
@@ -1141,7 +1141,9 @@
                     Type: _("XObject"),
                     Subtype: _("Form"),
                     FormType: 1,
-                    BBox: [ 0, 1, 1, 0 ],
+                    BBox: (gradient.userSpace ? [
+                        box.left, box.top + box.height, box.left + box.width, box.top
+                    ] : [ 0, 1, 1, 0 ]),
                     Group: {
                         Type: _("Group"),
                         S: _("Transparency"),
@@ -1309,8 +1311,10 @@
             this.save();
             this.rect(box.left, box.top, box.width, box.height);
             this.clip();
-            this.transform(box.width, 0, 0, box.height, box.left, box.top);
-            var g = makeGradient(gradient);
+            if (!gradient.userSpace) {
+                this.transform(box.width, 0, 0, box.height, box.left, box.top);
+            }
+            var g = makeGradient(gradient, box);
             var sname, oname;
             sname = "S" + (++RESOURCE_COUNTER);
             this._shResources[sname] = this._pdf.attach(g.shading);

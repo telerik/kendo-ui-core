@@ -299,12 +299,19 @@
                 page.nop();
             }
             if (!(fill instanceof drawing.LinearGradient)) {
-                throw "FIXME";
+                // XXX:
+                if (window.console && window.console.log) {
+                    window.console.log("Radial gradients are not yet supported in PDF output.");
+                }
+                return;
             }
+            var start = { x: fill.start().x , y: fill.start().y };
+            var end   = { x: fill.end().x   , y: fill.end().y   };
             var gradient = {
                 type: "linear",
-                start: fill.start(),
-                end: fill.end(),
+                start: start,
+                end: end,
+                userSpace: fill.userSpace,
                 stops: fill.stops.elements().map(function(stop){
                     var offset = stop.offset();
                     if (/%$/.test(offset)) {
