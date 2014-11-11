@@ -18,4 +18,20 @@
           - tipover
           - mindmapvertical
           - mindmaphorizontal
+    - :name: pannable.key
+      :type: String
+      :description: The pannable key.
+      :values:
+          - none
+          - ctrl
+          - shift
+          - alt
+    - :name: selectable.key
+      :type: String
+      :description: The selectable key.
+      :values:
+          - none
+          - ctrl
+          - shift
+          - alt
 
