@@ -141,7 +141,14 @@
                         throw new Error("Cannot output NaN to PDF");
                     }
                     // make sure it doesn't end up in exponent notation
-                    output.writeString(x.toFixed(7).replace(/\.?0+$/, ""));
+                    var num = x.toFixed(7);
+                    if (num.indexOf(".") >= 0) {
+                        num = num.replace(/\.?0+$/, "");
+                    }
+                    if (num == "-0") {
+                        num = "0";
+                    }
+                    output.writeString(num);
                 }
                 else if (/string|boolean/.test(typeof x)) {
                     output.writeString(x+"");

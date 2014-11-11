@@ -273,8 +273,14 @@
         sequence = sequence.replace(/^\s+|\s+$/g, "").split(/\s+/g).join("\\s+");
         sequence = sequence.replace(/%DEC/g, "[0-9.]*");
         var rx = new RegExp("(?:^|\\s)" + sequence + "(?:$|\\s)");
+        var fine = rx.test(text);
 
-        ok(rx.test(text), msg);
+        ok(fine, msg);
+
+        if (!fine) {
+            console.error("Regexp failed:", rx+"");
+            console.error(text);
+        }
     }
 
     function getPageText(page) {
