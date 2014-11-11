@@ -611,7 +611,7 @@
             // value.  Sucks that we have to do it here, I'd prefer to
             // move it in getPropertyValue, but we don't have the
             // element.
-            backgroundPosition = element.currentStyle.backgroundPosition;
+            backgroundPosition = splitOnComma(element.currentStyle.backgroundPosition);
         }
 
         var innerbox = innerBox(element.getBoundingClientRect(), "border-*-width", element);
@@ -846,12 +846,8 @@
                 return;
             }
 
-            // gradients rendered as SVG (for instance in the colorpicker)
-            // cannot be displayed.  //XXX: re-check this.
+            // SVG taints the canvas, can't draw it.
             if (/^url\(\"data:image\/svg/i.test(backgroundImage)) {
-                // this will taint the canvas in IE9 for some reason
-                // and we get a DOM security exception when we try to
-                // retrieve the image from it.  ditch it.
                 return;
             }
 

@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
   <head>
     <link rel="stylesheet" href="../dist/styles/web/kendo.common.css" />
@@ -45,7 +46,7 @@
       surface.draw(group);
 
       function pdf() {
-        drw.pdf.saveAs(group, "kendo.pdf");
+        drw.pdf.saveAs(group, "kendo.pdf", "http://kendo.local:7569/");
       }
     </script>
   </body>
