@@ -1,6 +1,7 @@
 (function() {
     var TimelineView = kendo.ui.TimelineView;
     var TimelineWeekView = kendo.ui.TimelineWeekView;
+    var TimelineMonthView = kendo.ui.TimelineMonthView;
     var SchedulerEvent = kendo.data.SchedulerEvent;
     var Scheduler = kendo.ui.Scheduler;
     var container;
@@ -12,6 +13,10 @@
 
     function setupWeek(options) {
         return new TimelineWeekView(container, $.extend(options));
+    }
+
+    function setupMonth(options) {
+        return new TimelineMonthView(container, $.extend(options));
     }
 
     function setupScheduler(options) {
@@ -40,6 +45,13 @@
     test("title is read from the options", function () {
         var view = setup({ title: "the title", date: new Date("2013/6/6") });
         equal(view.title, "the title");
+    });
+
+    test("month view selects correctly first and end date of the month", function () {
+        var view = setupMonth({ title: "the title", date: new Date("2013/1/6") });
+
+        equal(view._dates[0].getDate(), 1);
+        equal(view._dates[view._dates.length-1].getDate(), 31);
     });
 
     tzTest("Sofia", "Current time marker is rendered correctly", function() {
@@ -117,6 +129,24 @@
 
         equal(view.groups[0].getTimeSlotCollection(0).events()[0].start, 0);
         equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 23);
+
+        ok(view.element.find(".k-event").length);
+    });
+
+    test("two day all day event is rendered correctly in month view", function() {
+        var view = setupMonth({ date: new Date(2013, 1, 3) });
+
+        view.render([new SchedulerEvent({
+            uid: "foo",
+            title: "",
+            start: new Date(2013, 1, 3, 0, 0, 0),
+            end: new Date(2013, 1, 4, 0, 0, 0),
+            isAllDay: true,
+            id: "2"
+        })]);
+
+        equal(view.groups[0].getTimeSlotCollection(0).events()[0].start, 2);
+        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 3);
 
         ok(view.element.find(".k-event").length);
     });

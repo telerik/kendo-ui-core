@@ -1457,6 +1457,29 @@ var __meta__ = {
                 }
                 this._render(dates);
             }
+        }),
+        TimelineMonthView: TimelineView.extend({
+            options: {
+                name: "TimelineMonthView",
+                title: "Timeline Month",
+                selectedDateFormat: "{0:D} - {1:D}",
+                majorTick: 1440,
+                minorTickCount: 1
+            },
+            name: "timelineWeek",
+            calculateDateRange: function() {
+                var selectedDate = this.options.date,
+                    start = kendo.date.firstDayOfMonth(selectedDate),
+                    end = kendo.date.lastDayOfMonth(selectedDate),
+                    idx, length,
+                    dates = [];
+
+                for (idx = 0, length = end.getDate(); idx < length; idx++) {
+                    dates.push(start);
+                    start = kendo.date.nextDay(start);
+                }
+                this._render(dates);
+            }
         })
     });
 

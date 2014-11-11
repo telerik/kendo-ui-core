@@ -1937,7 +1937,8 @@ var __meta__ = {
                     month: "Month",
                     timeline: "Timeline",
                     timelineWeek: "Timeline Week",
-                    timelineWorkWeek: "Timeline Work Week"
+                    timelineWorkWeek: "Timeline Work Week",
+                    timelineMonth: "Timeline Month"
                 },
                 recurrenceMessages: {
                     deleteWindowTitle: "Delete Recurring Item",
@@ -3388,6 +3389,9 @@ var __meta__ = {
         },
         timelineWorkWeek: {
             type: "kendo.ui.TimelineWorkWeekView"
+        },
+        timelineMonth: {
+            type: "kendo.ui.TimelineMonthView"
         }
     };
 
