@@ -254,6 +254,18 @@
 .demo-section.k-header {
     background-position: 50% 70%;
 }
+.k-material #example {
+    font-family: "Roboto", Helvetica, Arial, sans-serif;
+}
+
+.k-material .demo-section.k-header,
+.k-material .demo-section.k-content {
+    background-color: #fefefe;
+    border-color: #fefefe;
+    box-shadow: 0 1px 2px 1px rgba(0,0,0,.10), 0 2px 5px rgba(0,0,0,.10);
+    color: #444;
+    font-weight: normal;
+}
 
 #example .box h4,
 #example .demo-section h4 {

@@ -2109,7 +2109,7 @@ ul.keyboard-legend li a {
     opacity:.9;
 }
 
-#draggable
+/*#draggable
 {
     cursor: pointer;
     position: absolute;
@@ -2134,7 +2134,7 @@ ul.keyboard-legend li a {
     cursor: default;
     background: #ececec;
     border-color: #cbcbcb;
-}
+}*/
 
 .floatWrap.narrowCol
 {
@@ -2935,7 +2935,8 @@ html.k-material #example {
     font-family: "Roboto", Helvetica, Arial, sans-serif;
 }
 
-html.k-material .demo-section.k-header {
+html.k-material .demo-section.k-header,
+html.k-material .demo-section.k-content {
      background-color: #fefefe;
      border-color: #fefefe;
      box-shadow: 0 1px 2px 1px rgba(0,0,0,.10), 0 2px 5px rgba(0,0,0,.10);
