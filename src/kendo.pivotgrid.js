@@ -1158,7 +1158,7 @@ var __meta__ = {
                 length -= 1;
             }
 
-            for (var idx = 0; idx < length; idx++) {
+            for (; idx < length; idx++) {
                 member = members[idx];
                 levelNum = Number(member.levelNum);
 
@@ -1456,7 +1456,7 @@ var __meta__ = {
             }
 
             for (; idx < length; idx++) {
-                if (rowIndexes[parseInt(idx / columnsLength)] !== undefined) {
+                if (rowIndexes[parseInt(idx / columnsLength, 10)] !== undefined) {
                     for (i = 0; i < columnsLength; i++) {
                         result[idx] = { value: "", fmtValue: "", ordinal: idx };
                         idx += 1;
@@ -2023,8 +2023,8 @@ var __meta__ = {
             targetIndex = columnsLength * rowIndex;
             sourceIndex = columnsLength * indices[rowIndex];
             for (columnIndex = 0; columnIndex < columnsLength; columnIndex++) {
-                calcIndex = parseInt(sourceIndex + columnIndex);
-                result[parseInt(targetIndex + columnIndex)] = data[calcIndex] || { value: "", fmtValue: "", ordinal: calcIndex };
+                calcIndex = parseInt(sourceIndex + columnIndex, 10);
+                result[parseInt(targetIndex + columnIndex, 10)] = data[calcIndex] || { value: "", fmtValue: "", ordinal: calcIndex };
             }
         }
 
@@ -4282,7 +4282,6 @@ var __meta__ = {
 
                 if (children > -1) {
                     for (measureIdx = 0; measureIdx < measuresLength; measureIdx++) {
-                        //TODO: detect whether this data cell is KPI or not!!!
                         result[children + firstEmpty + measureIdx] = {
                             children: children,
                             index: dataIdx,
