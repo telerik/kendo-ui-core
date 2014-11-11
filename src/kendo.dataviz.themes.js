@@ -317,13 +317,13 @@ var __meta__ = {
                 tools: [{
                     type: "edit"
                 }, {
-                    type: "delete"
-                }, {
                     type: "rotateClockwise",
                     step: 90
                 }, {
                     type: "rotateAnticlockwise",
                     step: 90
+                }, {
+                    type: "delete"
                 }]
             }
         },
@@ -333,7 +333,8 @@ var __meta__ = {
                     width: 7,
                     height: 7
                 }
-            }
+            },
+            tools: ["createShape", "createConnection", "undo", "redo", "rotateClockwise", "rotateAnticlockwise"]
         },
         selectable: {
             stroke: {

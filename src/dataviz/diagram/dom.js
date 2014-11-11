@@ -1500,8 +1500,8 @@
                 kendo.destroy(element);
                 Widget.fn.init.call(that, element, userOptions);
 
-                that._initElements();
                 that._initTheme();
+                that._initElements();
                 that._extendLayoutOptions(that.options);
                 that._initShapeDefaults();
 
