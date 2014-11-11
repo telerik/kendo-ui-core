@@ -323,6 +323,30 @@
         ok(application.element.hasClass("km-wp-light") || application.element.hasClass("km-wp-dark"));
     });
 
+    test("useNativeScrolling mode + platform: 'android' pads the content correctly", 1, function() {
+        setup('<div data-role="view"><div data-role="footer">Footer content</div>Content</div>', {
+            platform: "android",
+            useNativeScrolling: true
+        });
+
+        var contentElement = application.element.find("[data-role=content]"),
+            footerElement = application.element.find("[data-role=footer]");
+
+        equal(contentElement.css("padding-top"), footerElement.css("height"));
+    });
+
+    test("useNativeScrolling mode + skin: 'android' pads the content correctly", 1, function() {
+        setup('<div data-role="view"><div data-role="footer">Footer content</div>Content</div>', {
+            skin: "android-light",
+            useNativeScrolling: true
+        });
+
+        var contentElement = application.element.find("[data-role=content]"),
+            footerElement = application.element.find("[data-role=footer]");
+
+        equal(contentElement.css("padding-top"), footerElement.css("height"));
+    });
+
     /*
     if (navigator.__defineGetter__ && !kendo.support.browser.safari) {
         test("Forcing platform layout still reports correct device", 1, function() {
