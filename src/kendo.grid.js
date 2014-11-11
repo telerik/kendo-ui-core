@@ -2123,32 +2123,25 @@ var __meta__ = {
                 before = destIndex < sourceIndex;
             }
 
-            that._reorderHeader([column], destColumn, before);
+            var sourceColumns = [column];
+
+            that._reorderHeader(sourceColumns, destColumn, before);
 
             if (that.lockedHeader) {
                 removeEmptyRows(that.thead);
                 removeEmptyRows(that.lockedHeader);
             }
 
-            if (column.columns || destColumn.columns) {
-                if (column.columns) {
-                    if (destColumn.columns) {
-                        destColumn = leafColumns(destColumn.columns);
-                        destColumn = destColumn[before ? 0 : destColumn.length - 1];
-                    }
-
-                    that._reorderContent(leafColumns(column.columns), destColumn, before);
-                } else {
-                    if (destColumn.columns) {
-                        destColumn = leafColumns(destColumn.columns);
-                        destColumn = destColumn[before ? 0 : destColumn.length - 1];
-                    }
-
-                    that._reorderContent([column], destColumn, before);
-                }
-            } else {
-                that._reorderContent([column], destColumn, before);
+            if (destColumn.columns) {
+                destColumn = leafColumns(destColumn.columns);
+                destColumn = destColumn[before ? 0 : destColumn.length - 1];
             }
+
+            if (column.columns) {
+                sourceColumns = leafColumns(column.columns);
+            }
+
+            that._reorderContent(sourceColumns, destColumn, before);
 
             lockChanged = !!column.locked;
             lockChanged = lockChanged != isLocked;
