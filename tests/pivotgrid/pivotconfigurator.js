@@ -423,4 +423,12 @@
         ok(columnsTarget.calls("setDataSource"));
         ok(rowsTarget.calls("setDataSource"));
     });
+
+    test("height option defines the widget height", function() {
+        var configurator = createConfigurator({
+            height: 300
+        });
+
+        equal(configurator.element.height(), 300);
+    });
 })();

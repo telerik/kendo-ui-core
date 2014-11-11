@@ -330,6 +330,28 @@ var __meta__ = {
             $(e.currentTarget).toggleClass("k-state-hover", e.type === "mouseenter");
         },
 
+        _resize: function() {
+            var element = this.element;
+            var height = this.options.height;
+            var border, fields;
+
+            if (!height) {
+                return;
+            }
+
+            if (element.is(":visible")) {
+                element.height(height);
+
+                fields = element.children(".k-columns")
+                                .children("div.k-state-default");
+
+                border = (element.outerHeight() - element.innerHeight()) / 2;
+                height = height - (fields.outerHeight(true) - fields.height()) - border;
+
+                fields.height(height);
+            }
+        },
+
         refresh: function() {
             var dataSource = this.dataSource;
 
@@ -339,6 +361,8 @@ var __meta__ = {
 
             this._catalog = this.dataSource.catalog();
             this._cube = this.dataSource.cube();
+
+            this._resize();
         },
 
         destroy: function() {
