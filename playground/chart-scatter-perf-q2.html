@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="http://cdn.kendostatic.com/2014.2.1008/styles/kendo.common.min.css" rel="stylesheet" />
+    <link href="http://cdn.kendostatic.com/2014.2.1008/styles/kendo.default.min.css" rel="stylesheet" />
+    <link href="http://cdn.kendostatic.com/2014.2.1008/styles/kendo.dataviz.min.css" rel="stylesheet" />
+    <link href="http://cdn.kendostatic.com/2014.2.1008/styles/kendo.dataviz.default.min.css" rel="stylesheet" />
+    <script src="http://cdn.kendostatic.com/2014.2.1008/js/jquery.min.js"></script>
+    <script src="http://cdn.kendostatic.com/2014.2.1008/js/kendo.all.min.js"></script>
+    <script>
+        $.getJSON("chart-scatter-perf.json", function(data) {
+            $("#chart").kendoChart({
+                seriesDefaults: {
+                    type: "scatterLine",
+                    style: "smooth"
+                },
+                series: [{
+                    xField: "Orders",
+                    yField: "Magnitude",
+                    data: data
+                }]
+            });
+        });
+    </script>
+  </head>
+  <body>
+      <div id="chart" style="width: 900px; height: 500px;"></div>
+  </body>
+</html>
