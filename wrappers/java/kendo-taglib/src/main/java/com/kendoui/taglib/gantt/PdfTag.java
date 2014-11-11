@@ -89,6 +89,14 @@ public class PdfTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         setProperty("fileName", value);
     }
 
+    public boolean getForceProxy() {
+        return (boolean)getProperty("forceProxy");
+    }
+
+    public void setForceProxy(boolean value) {
+        setProperty("forceProxy", value);
+    }
+
     public java.lang.String getKeywords() {
         return (java.lang.String)getProperty("keywords");
     }

@@ -77,6 +77,14 @@ public class ExcelTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         setProperty("filterable", value);
     }
 
+    public boolean getForceProxy() {
+        return (boolean)getProperty("forceProxy");
+    }
+
+    public void setForceProxy(boolean value) {
+        setProperty("forceProxy", value);
+    }
+
     public java.lang.String getProxyURL() {
         return (java.lang.String)getProperty("proxyURL");
     }

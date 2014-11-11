@@ -16,10 +16,11 @@ public class ColumnTag extends  BaseTag  /* interfaces *//* interfaces */ {
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
-        
-       GridColumnContainer parent = (GridColumnContainer)findParentWithClass(GridColumnContainer.class);
 
-       parent.addColumn(this);
+        ColumnsTag parent = (ColumnsTag)findParentWithClass(ColumnsTag.class);
+
+        parent.addColumn(this);
+
 //<< doEndTag
 
         return super.doEndTag();
