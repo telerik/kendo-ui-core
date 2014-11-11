@@ -53,11 +53,15 @@ test("saveAsExcel passes through forceProxy option", function() {
         }
     });
 
-    stubMethod(kendo, "saveAs", function(options) {
-        ok(options.forceProxy);
+    stubMethod(kendo.ooxml.Workbook.fn, "toDataURL", function() {
+        return "";
     }, function() {
-        kendo.ui.Grid.fn.saveAsExcel = saveAsExcel;
-        dom.getKendoGrid().saveAsExcel();
+        stubMethod(kendo, "saveAs", function(options) {
+            ok(options.forceProxy);
+        }, function() {
+            kendo.ui.Grid.fn.saveAsExcel = saveAsExcel;
+            dom.getKendoGrid().saveAsExcel();
+        });
     });
 });
 

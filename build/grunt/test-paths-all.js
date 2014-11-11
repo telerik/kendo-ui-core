@@ -12,7 +12,6 @@ exports.beforeTestFiles = [
 ];
 
 exports.afterTestFiles = [
-    'src/jszip.js',
     'src/kendo.timezones.js',
     'src/cultures/kendo.culture.de-DE.js',
     'src/cultures/kendo.culture.bg-BG.js',
