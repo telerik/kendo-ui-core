@@ -754,10 +754,10 @@
             }));
 
             var expectedStops = [{
-                color: "rgba(255,0,0,0.5)",
+                color: "rgba(255, 0, 0, 0.5)",
                 offset: 0.1
             }, {
-                color: "rgba(0,0,255,1)",
+                color: "rgba(0, 0, 255, 1)",
                 offset: 0.7
             }];
             deepEqual(result.gradient.stops, expectedStops);
