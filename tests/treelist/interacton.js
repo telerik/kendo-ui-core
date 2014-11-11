@@ -25,50 +25,6 @@
         instance = dom.data("kendoTreeList");
     }
 
-    test("click on expand arrow shows child rows", function() {
-        createTreeList();
-
-        instance.content.find(".k-i-expand").click();
-
-        equal(instance.content.find("tr").length, 2);
-    });
-
-    test("click on collapse arrow hides child rows", function() {
-        createTreeList({
-            dataSource: [
-                { id: 1, expanded: true, parentId: null },
-                { id: 2, parentId: 1 }
-            ]
-        });
-
-        instance.content.find(".k-i-collapse").click();
-
-        var rows = instance.content.find("tr");
-
-        equal(rows.length, 2);
-        ok(rows.eq(0).is(":visible"));
-        ok(!rows.eq(1).is(":visible"));
-    });
-
-    test("click on expand arrow loads items from remote", function() {
-        var calls = 0;
-        var ds = new kendo.data.TreeListDataSource({
-            transport: {
-                read: function(options) {
-                    options.success([ { id: ++calls, hasChildren: true } ]);
-                }
-            }
-        });
-
-        ds.read();
-
-        createTreeList({ dataSource: ds });
-
-        instance.content.find(".k-i-expand").click();
-
-        equal(instance.content.find("tr").length, 2);
-    });
-
     function loadingIcons() {
         return instance.content.find(".k-loading");
     }
@@ -98,6 +54,50 @@
         return read;
     }
 
+    test("click on expand arrow shows child rows", function() {
+        createTreeList();
+
+        instance.content.find(".k-i-expand").click();
+
+        equal(instance.content.find("tr").length, 2);
+    });
+
+    test("click on collapse arrow hides child rows", function() {
+        createTreeList({
+            dataSource: [
+                { id: 1, expanded: true, parentId: null },
+                { id: 2, parentId: 1 }
+            ]
+        });
+
+        instance.content.find(".k-i-collapse").mousedown();
+
+        var rows = instance.content.find("tr");
+
+        equal(rows.length, 2);
+        ok(rows.eq(0).is(":visible"));
+        ok(!rows.eq(1).is(":visible"));
+    });
+
+    test("click on expand arrow loads items from remote", function() {
+        var calls = 0;
+        var ds = new kendo.data.TreeListDataSource({
+            transport: {
+                read: function(options) {
+                    options.success([ { id: ++calls, hasChildren: true } ]);
+                }
+            }
+        });
+
+        ds.read();
+
+        createTreeList({ dataSource: ds });
+
+        instance.content.find(".k-i-expand").mousedown();
+
+        equal(instance.content.find("tr").length, 2);
+    });
+
     test("shows loading icon during loading of remote data", function() {
         var read = controlledRead();
 
@@ -111,7 +111,7 @@
         read.resolve([ { id: 1, hasChildren: true } ]);
 
         // expand item
-        instance.content.find(".k-i-expand").click();
+        instance.content.find(".k-i-expand").mousedown();
 
         equal(loadingIcons().length, 1, "loading icon not shown upon expanding");
 
@@ -129,7 +129,7 @@
 
         read.resolve([ { id: 1, hasChildren: true } ]);
 
-        instance.content.find(".k-i-expand").click();
+        instance.content.find(".k-i-expand").mousedown();
 
         read.resolve([]);
 
@@ -145,9 +145,9 @@
 
         read.resolve([ { id: 1, hasChildren: true } ]);
 
-        instance.content.find(".k-i-expand").click();
+        instance.content.find(".k-i-expand").mousedown();
 
-        instance.content.find(".k-i-collapse").click();
+        instance.content.find(".k-i-collapse").mousedown();
 
         equal(instance.content.find(".k-i-expand").length, 0);
         equal(instance.content.find(".k-loading").length, 1);
@@ -251,7 +251,7 @@
 
         read.resolve([ { id: 1, hasChildren: true } ]);
 
-        instance.content.find(".k-i-expand").click();
+        instance.content.find(".k-i-expand").mousedown();
 
         read.reject({});
 
@@ -267,11 +267,11 @@
 
         read.resolve([ { id: 1, hasChildren: true } ]);
 
-        instance.content.find(".k-i-expand").click();
+        instance.content.find(".k-i-expand").mousedown();
 
         read.reject({});
 
-        instance.content.find(".k-i-refresh").click();
+        instance.content.find(".k-i-refresh").mousedown();
 
         read.resolve([ { id: 2, parentId: 1 } ]);
 

@@ -64,6 +64,7 @@ var __meta__ = {
     var DOT = ".";
     var NS = ".kendoTreeList";
     var CLICK = "click";
+    var MOUSEDOWN = "mousedown";
     var EDIT = "edit";
     var SAVE = "save";
     var REMOVE = "remove";
@@ -923,6 +924,8 @@ var __meta__ = {
             var icon = $(e.currentTarget);
 
             this._toggle(icon);
+
+            e.preventDefault();
         },
 
         _attachEvents: function() {
@@ -933,7 +936,7 @@ var __meta__ = {
             var dataSource = this.dataSource;
 
             this.element
-                .on(CLICK + NS, icons, proxy(this._toggleChildren, this))
+                .on(MOUSEDOWN+ NS, icons, proxy(this._toggleChildren, this))
                 .on(CLICK + NS, retryButton, proxy(dataSource.fetch, dataSource))
                 .on(CLICK + NS, ".k-button[data-command]", proxy(this._commandClick, this));
         },
