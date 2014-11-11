@@ -3083,7 +3083,7 @@
                 var diagram = this.toolService.diagram;
 
                 if (!this.singleToolBar && diagram.select().length === 1) {
-                    var element = this.toolService.hoveredItem;
+                    var element = diagram.select()[0];
                     if (element) {
                         var tools = element.options.editable.tools;
                         if (tools) {
