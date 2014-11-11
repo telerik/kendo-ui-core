@@ -733,13 +733,13 @@
     <Compile Include="UI\Grid\Commands\GridToolBarPdfCommand.cs" />
     <Compile Include="UI\Grid\Commands\GridToolBarExcelCommand.cs" />
     <Compile Include="UI\Grid\Fluent\GridGroupColumnBuilder.cs" />
-    <Compile Include="UI\Grid\Fluent\GridPdfBuilder.cs" />
+    <Compile Include="UI\Fluent\PDFSettingsBuilder.cs" />
     <Compile Include="UI\Grid\Fluent\GridColumnFilterableCellSettingsBuilder.cs" />
     <Compile Include="UI\Grid\Fluent\GridExcelBuilder.cs" />
     <Compile Include="UI\Grid\GridFilterMode.cs" />
     <Compile Include="UI\Grid\Html\GridHeaderRowBuilder.cs" />
     <Compile Include="UI\Grid\Html\GridHeaderCellBuilderDecorator.cs" />
-    <Compile Include="UI\Grid\Settings\GridPdfSettings.cs" />
+    <Compile Include="UI\Settings\PDFSettings.cs" />
     <Compile Include="UI\Grid\Settings\GridExcelSettings.cs" />
     <Compile Include="UI\Grid\Settings\GridColumnFilterableCellSettings.cs" />
     <Compile Include="UI\PivotConfigurator\Fluent\PivotConfiguratorBuilder.cs" />

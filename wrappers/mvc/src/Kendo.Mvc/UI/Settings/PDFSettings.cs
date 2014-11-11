@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Kendo.Mvc.UI
 {    
-    public class GridPdfSettings : JsonObject
+    public class PDFSettings : JsonObject
     {
         public string ProxyUrl { get; set; }
 

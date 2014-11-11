@@ -6,23 +6,23 @@ using System.Text;
 namespace Kendo.Mvc.UI.Fluent
 {
     /// <summary>
-    /// The fluent API for configuring the grid Excel export.
+    /// The fluent API for configuring the grid PDF export.
     /// </summary>
-    public class GridPdfBuilder
+    public class PDFSettingsBuilder
     {
-        private readonly GridPdfSettings excel;
+        private readonly PDFSettings pdf;
 
-        public GridPdfBuilder(GridPdfSettings excel)
+        public PDFSettingsBuilder(PDFSettings pdf)
         {
-            this.excel = excel;
+            this.pdf = pdf;
         }
 
         /// <summary>
         /// Sets the file name of the PDF file.
         /// </summary>
-        public GridPdfBuilder FileName(string fileName)
+        public PDFSettingsBuilder FileName(string fileName)
         {
-            excel.FileName = fileName;
+            pdf.FileName = fileName;
 
             return this;
         }
@@ -30,9 +30,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Specifies a predefiend paper size e.g. "A3", "A4" or "auto" (default).
         /// </summary>
-        public GridPdfBuilder PaperSize(string paperSize)
+        public PDFSettingsBuilder PaperSize(string paperSize)
         {
-            excel.PaperSize = paperSize;
+            pdf.PaperSize = paperSize;
 
             return this;
         }
@@ -40,28 +40,28 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Specifies custom paper size in "pt" units.
         /// </summary>
-        public GridPdfBuilder PaperSize(double width, double height)
+        public PDFSettingsBuilder PaperSize(double width, double height)
         {
-            excel.PaperSize = new[] { width, height };
+            pdf.PaperSize = new[] { width, height };
             return this;
         }
 
         /// <summary>
         /// Specifies custom paper size in custom units ("in", "mm", "pt", "cm")
         /// </summary>
-        public GridPdfBuilder PaperSize(string width, string height)
+        public PDFSettingsBuilder PaperSize(string width, string height)
         {
-            excel.PaperSize = new[] { width, height };
+            pdf.PaperSize = new[] { width, height };
             return this;
         }
 
         /// <summary>
-        /// Set the url of the server side proxy. The proxy is responsible for returning the excel PDF to the end user. Used in browsers that don't support saving files from JavaScript.
+        /// Set the url of the server side proxy. The proxy is responsible for returning the PDF to the end user. Used in browsers that don't support saving files from JavaScript.
         /// </summary>
         /// <param name="url"></param>
-        public GridPdfBuilder ProxyUrl(string url)
+        public PDFSettingsBuilder ProxyUrl(string url)
         {
-            excel.ProxyUrl = url;
+            pdf.ProxyUrl = url;
 
             return this;
         }
@@ -69,9 +69,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Specifies the margins in "pt" units.
         /// </summary>
-        public GridPdfBuilder Margin(double top, double right, double bottom, double left)
+        public PDFSettingsBuilder Margin(double top, double right, double bottom, double left)
         {
-            excel.Margin = new Dictionary<string, object>
+            pdf.Margin = new Dictionary<string, object>
             {
                { "top", top },
                { "right", right },
@@ -85,9 +85,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Specifies the margins in units ("in", "mm", "pt", "cm")
         /// </summary>
-        public GridPdfBuilder Margin(string top, string right, string bottom, string left)
+        public PDFSettingsBuilder Margin(string top, string right, string bottom, string left)
         {
-            excel.Margin = new Dictionary<string, object>
+            pdf.Margin = new Dictionary<string, object>
             {
                { "top", top },
                { "right", right },
@@ -101,9 +101,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Sets the title of the PDF document.
         /// </summary>
-        public GridPdfBuilder Title(string title)
+        public PDFSettingsBuilder Title(string title)
         {
-            excel.Title = title;
+            pdf.Title = title;
 
             return this;
         }
@@ -111,9 +111,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Sets the author of the PDF document.
         /// </summary>
-        public GridPdfBuilder Author(string author)
+        public PDFSettingsBuilder Author(string author)
         {
-            excel.Author = author;
+            pdf.Author = author;
 
             return this;
         }
@@ -121,9 +121,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Sets the subject of the PDF document.
         /// </summary>
-        public GridPdfBuilder Subject(string subject)
+        public PDFSettingsBuilder Subject(string subject)
         {
-            excel.Subject = subject;
+            pdf.Subject = subject;
 
             return this;
         }
@@ -131,9 +131,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Sets the keywords of the PDF document.
         /// </summary>
-        public GridPdfBuilder Keywords(string keywords)
+        public PDFSettingsBuilder Keywords(string keywords)
         {
-            excel.Keywords = keywords;
+            pdf.Keywords = keywords;
 
             return this;
         }
@@ -141,9 +141,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Sets the creator of the PDF document.
         /// </summary>
-        public GridPdfBuilder Creator(string creator)
+        public PDFSettingsBuilder Creator(string creator)
         {
-            excel.Creator = creator;
+            pdf.Creator = creator;
 
             return this;
         }
@@ -151,9 +151,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Sets the date of the PDF document.
         /// </summary>
-        public GridPdfBuilder Date(DateTime date)
+        public PDFSettingsBuilder Date(DateTime date)
         {
-            excel.Date = date;
+            pdf.Date = date;
 
             return this;
         }

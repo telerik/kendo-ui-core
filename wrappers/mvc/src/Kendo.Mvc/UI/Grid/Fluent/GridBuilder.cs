@@ -134,9 +134,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public GridBuilder<T> Pdf(Action<GridPdfBuilder> configurator)
+        public GridBuilder<T> Pdf(Action<PDFSettingsBuilder> configurator)
         {
-            configurator(new GridPdfBuilder(Component.Pdf));
+            configurator(new PDFSettingsBuilder(Component.Pdf));
 
             return this;
         }

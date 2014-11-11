@@ -70,7 +70,7 @@ namespace Kendo.Mvc.UI
             Resizable = new GridResizableSettings();
             Reorderable = new GridReorderableSettings();
             Excel = new GridExcelSettings();
-            Pdf = new GridPdfSettings();
+            Pdf = new PDFSettings();
 
             TableHtmlAttributes = new RouteValueDictionary();
             
@@ -169,7 +169,7 @@ namespace Kendo.Mvc.UI
             private set;
         }
 
-        public GridPdfSettings Pdf
+        public PDFSettings Pdf
         {
             get;
             private set;
