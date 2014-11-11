@@ -83,7 +83,7 @@ var __meta__ = {
 
     var FilterCell = Widget.extend( {
         init: function(element, options) {
-            element = $(element).addClass("grid-filter-header");
+            element = $(element).addClass("k-filtercell");
             var wrapper = this.wrapper = $("<span/>").appendTo(element);
             var that = this,
                 dataSource,
@@ -147,6 +147,8 @@ var __meta__ = {
 
             if (type != BOOL && options.showOperators !== false) {
                 that._createOperatorDropDown(operators);
+            } else {
+                wrapper.addClass("k-operator-hidden");
             }
 
             that._createClearIcon();
