@@ -2464,7 +2464,7 @@ var __meta__ = {
                 return;
             }
 
-            if (this.resources.dataSource.total() !== 0) {
+            if (this.resources.dataSource.data().length !== 0) {
                 this._assignResources(taskTree);
             }
 
