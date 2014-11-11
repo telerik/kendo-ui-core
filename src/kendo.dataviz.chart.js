@@ -9749,30 +9749,28 @@ var __meta__ = {
     });
     draw.AnimationFactory.current.register(PIE, PieAnimation);
 
-    var BubbleAnimation = ElementAnimation.extend({
+    var BubbleAnimation = draw.Animation.extend({
         options: {
-            easing: "easeOutElastic",
-            duration: INITIAL_ANIMATION_DURATION
+            easing: "easeOutElastic"
         },
 
         setup: function() {
-            var circle = this.element;
-
-            circle.endRadius = circle.radius;
-            circle.radius = 0;
+            var center = this.center = this.element.bbox().center();
+            this.element.transform(geom.transform()
+                .scale(0, 0, center)
+            );
         },
 
         step: function(pos) {
-            var circle = this.element,
-                endRadius = circle.endRadius;
-
-            circle.radius = interpolate(0, endRadius, pos);
+            this.element.transform(geom.transform()
+                .scale(pos, pos, this.center)
+            );
         }
     });
+    draw.AnimationFactory.current.register(BUBBLE, BubbleAnimation);
 
     var BarAnimationDecorator = animationDecorator(BAR, BarAnimation),
-        PieAnimationDecorator = animationDecorator(PIE, PieAnimation),
-        BubbleAnimationDecorator = animationDecorator(BUBBLE, BubbleAnimation);
+        PieAnimationDecorator = animationDecorator(PIE, PieAnimation);
 
     var Highlight = Class.extend({
         init: function(view) {
@@ -11962,7 +11960,6 @@ var __meta__ = {
         BarAnimationDecorator: BarAnimationDecorator,
         BarChart: BarChart,
         BarLabel: BarLabel,
-        BubbleAnimationDecorator: BubbleAnimationDecorator,
         BubbleChart: BubbleChart,
         BulletChart: BulletChart,
         CandlestickChart: CandlestickChart,
