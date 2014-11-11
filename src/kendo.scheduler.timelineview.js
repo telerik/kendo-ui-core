@@ -830,8 +830,7 @@ var __meta__ = {
             eventObject.element.css({
                 top:  eventObject.slotRange.start.offsetTop + eventObject.rowIndex * (eventHeight + 2) + "px",
                 left: rect.left,
-                width: width,
-                height: this.options.eventHeight
+                width: width
             });
         },
 
@@ -988,7 +987,7 @@ var __meta__ = {
                         if (this._isInTimeSlot(adjustedEvent.occurrence)) {
 
                             element = this._createEventElement(adjustedEvent.occurrence, event, range.head || adjustedEvent.head, range.tail || adjustedEvent.tail);
-                            element.appendTo(container).css({top: 0});
+                            element.appendTo(container).css({top: 0, height: this.options.eventHeight});
 
                             var eventObject = {
                                 start: adjustedEvent.occurrence.startTime || adjustedEvent.occurrence.start,
