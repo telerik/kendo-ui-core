@@ -5884,7 +5884,7 @@ var __meta__ = {
                     duration: INITIAL_ANIMATION_DURATION - delay,
                     type: BUBBLE
                 },
-                color, point, pointOptions;
+                point, pointOptions;
 
             var color = fields.color || series.color;
             if (value.size < 0 && series.negativeValues.visible) {
@@ -5898,7 +5898,7 @@ var __meta__ = {
                     animation: {
                         delay: delay,
                         duration: INITIAL_ANIMATION_DURATION - delay
-                    },
+                    }
                 }
             }, this.pointOptions(series, fields.seriesIx), {
                 markers: {
