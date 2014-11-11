@@ -3298,7 +3298,7 @@
 
                 this.trigger("dataBound");
 
-                this._addConnections(e.sender.view());
+                this._addConnections(this.connectionsDataSource.view());
 
                 if (this.options.layout) {
                     this.layout(this.options.layout);
