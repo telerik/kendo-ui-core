@@ -2693,6 +2693,14 @@
                 }
             },
 
+            setConnectionsDataSource: function(dataSource) {
+                this.options.connectionsDataSource = dataSource;
+                this._connectionDataSource();
+                if (this.options.autoBind) {
+                    this.connectionsDataSource.fetch();
+                }
+            },
+
             /**
              * Performs a diagram layout of the given type.
              * @param layoutType The layout algorithm to be applied (TreeLayout, LayeredLayout, SpringLayout).
