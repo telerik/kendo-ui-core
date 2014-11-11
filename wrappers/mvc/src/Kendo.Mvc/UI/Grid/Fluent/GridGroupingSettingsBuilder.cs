@@ -34,5 +34,15 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        /// <summary>
+        /// Specifies whether the footer should be displayed when the Group is collapsed
+        /// </summary>        
+        public GridGroupingSettingsBuilder ShowFooter(bool value)
+        {
+            settings.ShowFooter = value;
+
+            return this;
+        }
     }
 }

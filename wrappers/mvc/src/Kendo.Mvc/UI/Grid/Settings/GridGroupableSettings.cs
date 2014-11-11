@@ -17,6 +17,8 @@ namespace Kendo.Mvc.UI
 
         public bool Visible { get; set; }
 
+        public bool ShowFooter { get; set; }
+
         public IList<GroupDescriptor> Groups { get; private set; }
         
         public GroupableMessages Messages { get; private set; }
@@ -28,6 +30,11 @@ namespace Kendo.Mvc.UI
             if (messages.Keys.Any())
             {
                 json["messages"] = messages;
+            }
+
+            if (ShowFooter)
+            {
+                json["showFooter"] = ShowFooter;
             }
         }
     }
