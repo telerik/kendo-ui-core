@@ -355,8 +355,10 @@ var __meta__ = {
             that._setContentWidth();
 
             that.refreshLayout();
-        },
 
+            this.timesHeader.find("table tr:last").hide(); /*Chrome fix, use CSS selector*/
+            this.datesHeader.find("table tr:last").hide();
+        },
 
         _setContentWidth: function() {
             var content = this.content;
@@ -469,14 +471,25 @@ var __meta__ = {
             var rows = [{ text: "All events"}];
             var that = this;
 
-            this._forTimeRange(this.startTime(), this.endTime(), function(date, majorTick, middleColumn, lastSlotColumn) {
-                var template = majorTick ? that.majorTimeHeaderTemplate : that.minorTimeHeaderTemplate;
-                var timeColumn = {
-                    text: template({ date: date }),
-                    className: lastSlotColumn ? "k-slot-cell" : ""
-                };
+            var minorTickSlots = [];
+            for (var minorTickIndex = 0; minorTickIndex < this.options.minorTickCount; minorTickIndex++) {
+                minorTickSlots.push({
+                    text: "",
+                    className: ""
+                });
+            }
 
-                timeColumns.push(timeColumn);
+            this._forTimeRange(this.startTime(), this.endTime(), function(date, majorTick, middleColumn, lastSlotColumn) {
+                var template = that.majorTimeHeaderTemplate;
+                if (majorTick) {
+                    var timeColumn = {
+                        text: template({ date: date }),
+                        className: lastSlotColumn ? "k-slot-cell" : "",
+                        columns: minorTickSlots.slice(0)
+                    };
+
+                    timeColumns.push(timeColumn);
+                }
             });
 
             for (var idx = 0; idx < dates.length; idx++) {

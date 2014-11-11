@@ -73,7 +73,7 @@ var __meta__ = {
 
         if (rowCount > 0) {
             for (var idx = 0; idx < columnLevelCount; idx++) {
-                tableRows.push("<th></th>");
+                tableRows.push("<th>&nbsp;</th>");
             }
         }
 
