@@ -6,7 +6,7 @@
         diagram;
 
     function createDiagram() {
-        diagram = $('<div id="diagram" />')
+        diagram = $('<div id="diagram" style="width: 800px; height: 600px;" />')
             .appendTo(QUnit.fixture)
             .kendoDiagram({
                 shapes: [{
@@ -163,7 +163,7 @@
         var visual = diagram.exportDOMVisual();
         var clip = visual.options.get("clip").bbox();
         deepEqual(clip.origin.toArray(), [0, 0]);
-        deepEqual(clip.size.toArray(), [572, 600]);
+        deepEqual(clip.size.toArray(), [800, 600]);
     });
 
     exportTests("Diagram", createDiagram);
