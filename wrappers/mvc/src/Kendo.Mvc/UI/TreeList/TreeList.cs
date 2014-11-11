@@ -26,7 +26,7 @@ namespace Kendo.Mvc.UI
         
             Columns = new List<TreeListColumn>();
                 
-            Editable = new TreeListEditableSettings();
+            Editable = new TreeListEditableSettings<T>();
                 
             Filterable = new TreeListFilterableSettings();
                 
@@ -77,7 +77,7 @@ namespace Kendo.Mvc.UI
             set;
         }
         
-        public TreeListEditableSettings Editable
+        public TreeListEditableSettings<T> Editable
         {
             get;
             set;
@@ -90,6 +90,8 @@ namespace Kendo.Mvc.UI
             var json = new Dictionary<string, object>(Events);
 
             json["dataSource"] = (Dictionary<string, object>)DataSource.ToJson();
+
+            Editable.InitializeEditor(ViewContext, ViewData);
 
 //>> Serialization
         

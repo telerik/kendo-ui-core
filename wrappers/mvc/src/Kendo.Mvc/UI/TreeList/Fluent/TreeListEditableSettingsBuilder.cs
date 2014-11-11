@@ -10,9 +10,9 @@ namespace Kendo.Mvc.UI.Fluent
     /// </summary>
     public class TreeListEditableSettingsBuilder<T>: IHideObjectMembers where T : class
     {
-        private readonly TreeListEditableSettings container;
+        private readonly TreeListEditableSettings<T> container;
 
-        public TreeListEditableSettingsBuilder(TreeListEditableSettings settings)
+        public TreeListEditableSettingsBuilder(TreeListEditableSettings<T> settings)
         {
             container = settings;
         }
@@ -53,8 +53,19 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
-        
+
         //<< Fields
+
+        /// <summary>
+        /// The EditorTemplate which to be rendered as editor.
+        /// </summary>
+        /// <param name="name">The name of the EditorTemplate</param>
+        public TreeListEditableSettingsBuilder<T> TemplateName(string name)
+        {
+            container.TemplateName = name;
+
+            return this;
+        }
     }
 }
 

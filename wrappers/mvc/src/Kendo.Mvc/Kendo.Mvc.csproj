@@ -1603,6 +1603,7 @@
     <Compile Include="UI\TreeList\Fluent\TreeListColumnFactory.cs" />
     <Compile Include="UI\TreeList\Fluent\TreeListToolbarFactory.cs" />
     <Compile Include="UI\TreeList\TreeListModelDescriptor.cs" />
+    <Compile Include="UI\TreeList\TreeListViewDataContainer.cs" />
     <Compile Include="UI\TreeMap\Fluent\TreeMapColorRangeFactory.cs" />
     <Compile Include="UI\TreeMap\Html\TreeMapHtmlBuilder.cs" />
     <Compile Include="UI\TreeView\Fluent\TreeViewCheckboxesBuilder.cs" />

@@ -5,12 +5,18 @@ namespace Kendo.Mvc.UI
     using System.Collections.Generic;
     using System.Web.Routing;
     using Kendo.Mvc.Extensions;
+    using System.Web.Mvc;
+    using System.Web.Mvc.Html;
+    using System.Text.RegularExpressions;
 
-    public class TreeListEditableSettings : JsonObject
+    public class TreeListEditableSettings<T> : JsonObject
+        where T : class
     {
         public TreeListEditableSettings()
         {
             Enabled = false;
+
+            DefaultDataItem = CreateDefaultItem;
         
             //>> Initialization
         
@@ -26,8 +32,10 @@ namespace Kendo.Mvc.UI
         public string Template { get; set; }
 
         public string TemplateId { get; set; }
-        
+
         //<< Fields
+
+        public string TemplateName { get; set; }
 
         protected override void Serialize(IDictionary<string, object> json)
         {
@@ -51,8 +59,48 @@ namespace Kendo.Mvc.UI
             {
                 json["template"] = Template;
             }
-                
+
         //<< Serialization
+
+            SerializeEditTemplate(json);
+        }
+
+        protected string EditorHtml { get; set; }
+
+        public Func<T> DefaultDataItem { get; set; }
+
+        private T CreateDefaultItem()
+        {
+            return Activator.CreateInstance<T>();
+        }
+
+        private void SerializeEditTemplate(IDictionary<string, object> options)
+        {
+            if (Enabled && !string.IsNullOrEmpty(EditorHtml))
+            {
+                var html = EditorHtml.Trim()
+                                .EscapeHtmlEntities()
+                                .Replace("\r\n", string.Empty)
+                                .Replace("jQuery(\"#", "jQuery(\"\\#");
+
+                options["template"] = html;
+            }
+        }
+
+        public void InitializeEditor(ViewContext viewContext, ViewDataDictionary viewData)
+        {
+            if (Enabled && TemplateName.HasValue())
+            {
+                var popupSlashes = new Regex("(?<=data-val-regex-pattern=\")([^\"]*)", RegexOptions.Multiline);
+                var helper = new HtmlHelper<T>(viewContext, new TreeListViewDataContainer<T>(DefaultDataItem(), viewData));
+
+                EditorHtml = helper.EditorForModel(TemplateName).ToHtmlString();
+
+                EditorHtml = popupSlashes.Replace(EditorHtml, match =>
+                {
+                    return match.Groups[0].Value.Replace("\\", "\\\\");
+                });
+            }
         }
     }
 }

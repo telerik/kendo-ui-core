@@ -13,6 +13,8 @@ namespace Kendo.Mvc.UI
             //>> Initialization
         
         //<< Initialization
+
+            Click = new ClientHandlerDescriptor();
         }
 
         //>> Fields
