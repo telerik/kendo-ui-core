@@ -170,6 +170,7 @@
     <Compile Include="UI\DataSource\WebApiDataSourceBuilderBaseTests.cs" />
     <Compile Include="UI\DataSource\WebApiDataSourceBuilderTests.cs" />
     <Compile Include="UI\DatePicker\DatePickerClientEventsBuilderTests.cs" />
+    <Compile Include="UI\Fluent\PDFSettingsBuilderTests.cs" />
     <Compile Include="UI\Gantt\GanttAssignmentsTests.cs" />
     <Compile Include="UI\Gantt\GanttBuilderTests.cs">
       <SubType>Code</SubType>
@@ -196,6 +197,8 @@
     <Compile Include="UI\Gantt\GanttViewFactoryTests.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="UI\Grid\GridExcelSettingsTests.cs" />
+    <Compile Include="UI\Grid\GridExcelBuilderTests.cs" />
     <Compile Include="UI\Grid\GridColumnGroupTests.cs" />
     <Compile Include="UI\Grid\Html\GridHeaderRowBuilderTests.cs" />
     <Compile Include="UI\HierarchicalDataSource\HierarchicalDataSourceBuilderTests.cs" />
@@ -246,6 +249,7 @@
     <Compile Include="UI\Scheduler\SchedulerEvent.cs" />
     <Compile Include="UI\Scheduler\SchedulerTestHelper.cs" />
     <Compile Include="UI\DataSource\WebApiDataSourceBuilderBaseDouble.cs" />
+    <Compile Include="UI\Settings\PDFSettingsTests.cs" />
     <Compile Include="UI\Sparkline\SparklineSeriesDefaultsBuilderTests.cs" />
     <Compile Include="UI\Sparkline\SparklineBuilderTests.cs" />
     <Compile Include="UI\Sparkline\SparklineHtmlBuilderTests.cs" />

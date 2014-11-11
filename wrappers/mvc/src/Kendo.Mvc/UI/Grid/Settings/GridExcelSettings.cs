@@ -29,6 +29,12 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        public bool ForceProxy
+        {
+            get;
+            set;
+        }
+
         protected override void Serialize(IDictionary<string, object> json)
         {
             if (ProxyUrl.HasValue())
@@ -49,6 +55,11 @@ namespace Kendo.Mvc.UI
             if (Filterable)
             {
                 json["filterable"] = true;
+            }
+
+            if (ForceProxy)
+            {
+                json["forceProxy"] = true;
             }
         }
     }

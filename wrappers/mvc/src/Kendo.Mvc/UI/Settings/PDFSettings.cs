@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Kendo.Mvc.UI
 {    
-    public class GridPdfSettings : JsonObject
+    public class PDFSettings : JsonObject
     {
         public string ProxyUrl { get; set; }
 
@@ -28,6 +28,12 @@ namespace Kendo.Mvc.UI
         public bool Landscape { get; set; }
 
         public IDictionary<string, object> Margin { get; set; }
+
+        public bool ForceProxy
+        {
+            get;
+            set;
+        }
 
         protected override void Serialize(IDictionary<string, object> json)
         {
@@ -84,6 +90,11 @@ namespace Kendo.Mvc.UI
             if (Date != null)
             {
                 json["date"] = Date;
+            }
+
+            if (ForceProxy)
+            {
+                json["forceProxy"] = true;
             }
         }
     }
