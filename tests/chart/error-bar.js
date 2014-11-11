@@ -1,6 +1,4 @@
  (function() {
-     return;
-
         var kendo = window.kendo,
             dataviz = kendo.dataviz,
             Box = dataviz.Box2D,
@@ -1017,10 +1015,11 @@
                 }
             },
         expectedOptions = {
-            stroke: "red",
-            strokeWidth: 1,
-            zIndex: 1,
-            align: false
+            stroke: {
+                color: "red",
+                width: 1
+            },
+            zIndex: 1
         },
         equalFields = function(a, b){
             var areEqual = true;
@@ -1088,168 +1087,152 @@
             ok(errorbar.getAxis() === yAxis);
         });
 
-        module("error bar", {
-        });
+        (function() {
+            var Path = kendo.drawing.Path;
+            var errorBar;
 
-        test("the caps width is calculated from the box width when it is smaller than the default width for a vertical error bar", function(){
-            var box = new Box(1,1, 8, 1),
-                expectedCapsWidth = Math.floor(box.width() / 2),
-                calculatedCapsWidth = ErrorBarBase.fn.getCapsWidth(box, true);
-            equal(calculatedCapsWidth, expectedCapsWidth);
-        });
+            function createErrorBar(type, vertical, chart, options) {
+                var targetBox = new Box(5,5,9, 9);
+                var rootElement = new dataviz.RootElement();
+                errorBar = new type(1, 2, vertical, chart, {}, options);
+                errorBar.reflow(targetBox);
+                rootElement.box = targetBox;
+                rootElement.append(errorBar);
+                rootElement.renderVisual();
+            }
 
-        test("the default caps width is used when it is smaller than the box width for a vertical error bar", function(){
-            var box = new Box(1,1, 23, 1),
-                expectedCapsWidth = DEFAULT_CAPS_WIDTH,
-                calculatedCapsWidth = ErrorBarBase.fn.getCapsWidth(box, true);
-            equal(calculatedCapsWidth, expectedCapsWidth);
-        });
+            function renderedLines(expected, options) {
+                var lines = errorBar.visual.children;
+                equal(expected.length, lines.length);
 
-        test("the caps width is calculated from the box height when it is smaller than the default width for a horizontal error bar", function(){
-            var box = new Box(1,1, 1, 8),
-                expectedCapsWidth = Math.floor(box.height() / 2),
-                calculatedCapsWidth = ErrorBarBase.fn.getCapsWidth(box, false);
-            equal(calculatedCapsWidth, expectedCapsWidth);
-        });
+                for (var idx = 0; idx < expected.length; idx++) {
+                    sameLinePath(expected[idx], lines[idx]);
+                    equalFields(lines[idx].options, options);
+                }
+            }
 
-        test("the default caps width is used when it is smaller than the box height for a horizontal error bar", function(){
-            var box = new Box(1,1, 1, 23),
-                expectedCapsWidth = DEFAULT_CAPS_WIDTH,
-                calculatedCapsWidth = ErrorBarBase.fn.getCapsWidth(box, false);
-            equal(calculatedCapsWidth, expectedCapsWidth);
-        });
+            module("error bar", {
+            });
 
-        test("lines are correctly created for a horizontal categorical error bar", function(){
-            var targetBox = new Box(5,5,9, 9),
-                errorBar = new CategoricalErrorBar(1,2, false, categoricalChart, {}, defaultOptions),
-                view = new ViewStub(),
-                expectedElements = [{x1: 1, x2: 2, y1: 7, y2: 7, options: expectedOptions}, {x1: 1, x2: 1, y1: 5, y2: 9, options: expectedOptions},
-                    {x1: 2, x2: 2, y1: 5, y2: 9, options: expectedOptions}],
-                elements;
-            errorBar.reflow(targetBox);
-            elements = errorBar.getViewElements(view);
+            test("the caps width is calculated from the box width when it is smaller than the default width for a vertical error bar", function(){
+                var box = new Box(1,1, 8, 1),
+                    expectedCapsWidth = Math.floor(box.width() / 2),
+                    calculatedCapsWidth = ErrorBarBase.fn.getCapsWidth(box, true);
+                equal(calculatedCapsWidth, expectedCapsWidth);
+            });
 
-            ok(equalFields(expectedElements, view.log.line) && elements.length == expectedElements.length);
-        });
+            test("the default caps width is used when it is smaller than the box width for a vertical error bar", function(){
+                var box = new Box(1,1, 23, 1),
+                    expectedCapsWidth = DEFAULT_CAPS_WIDTH,
+                    calculatedCapsWidth = ErrorBarBase.fn.getCapsWidth(box, true);
+                equal(calculatedCapsWidth, expectedCapsWidth);
+            });
 
-        test("lines are correctly created for a horizontal scatter error bar", function(){
-            var targetBox = new Box(5,5,9, 9),
-                errorBar = new ScatterErrorBar(1,2, false, xyChart, {}, defaultOptions),
-                view = new ViewStub(),
-                expectedElements = [{x1: 1, x2: 2, y1: 7, y2: 7, options: expectedOptions}, {x1: 1, x2: 1, y1: 5, y2: 9, options: expectedOptions},
-                    {x1: 2, x2: 2, y1: 5, y2: 9, options: expectedOptions}],
-                elements;
-            errorBar.reflow(targetBox);
-            elements = errorBar.getViewElements(view);
+            test("the caps width is calculated from the box height when it is smaller than the default width for a horizontal error bar", function(){
+                var box = new Box(1,1, 1, 8),
+                    expectedCapsWidth = Math.floor(box.height() / 2),
+                    calculatedCapsWidth = ErrorBarBase.fn.getCapsWidth(box, false);
+                equal(calculatedCapsWidth, expectedCapsWidth);
+            });
 
-            ok(equalFields(expectedElements, view.log.line) && elements.length == expectedElements.length);
-        });
+            test("the default caps width is used when it is smaller than the box height for a horizontal error bar", function(){
+                var box = new Box(1,1, 1, 23),
+                    expectedCapsWidth = DEFAULT_CAPS_WIDTH,
+                    calculatedCapsWidth = ErrorBarBase.fn.getCapsWidth(box, false);
+                equal(calculatedCapsWidth, expectedCapsWidth);
+            });
 
-        test("color is taken from errorbar options when specified for scatter error bar", function(){
-            var targetBox = new Box(5,5,9, 9),
-                errorBar = new ScatterErrorBar(1,2, false, xyChart, {}, {
+            test("lines are correctly created for a horizontal categorical error bar", function(){
+                var expectedPaths = [new Path().moveTo(1, 7).lineTo(2, 7),
+                        new Path().moveTo(1, 5).lineTo(1, 9),
+                        new Path().moveTo(2, 5).lineTo(2, 9)];
+                createErrorBar(CategoricalErrorBar, false, categoricalChart, defaultOptions);
+                renderedLines(expectedPaths, expectedOptions);
+            });
+
+            test("lines are correctly created for a horizontal scatter error bar", function(){
+                var expectedPaths = [new Path().moveTo(1, 7).lineTo(2, 7),
+                        new Path().moveTo(1, 5).lineTo(1, 9),
+                        new Path().moveTo(2, 5).lineTo(2, 9)];
+                createErrorBar(ScatterErrorBar, false, xyChart, defaultOptions);
+
+                renderedLines(expectedPaths, expectedOptions);
+            });
+
+            test("color is taken from errorbar options when specified for scatter error bar", function(){
+                var expectedPaths = [new Path().moveTo(1, 7).lineTo(2, 7),
+                    new Path().moveTo(1, 5).lineTo(1, 9),
+                    new Path().moveTo(2, 5).lineTo(2, 9)],
+                options = $.extend({}, expectedOptions, {stroke: {color: "black"}});
+
+                createErrorBar(ScatterErrorBar, false, xyChart, {
                     endCaps: true,
                     color: "black"
-                }),
-                view = new ViewStub(),
-                options = $.extend({}, expectedOptions, {stroke: "black"}),
-                expectedElements = [{x1: 1, x2: 2, y1: 7, y2: 7, options: options}, {x1: 1, x2: 1, y1: 5, y2: 9, options: options},
-                    {x1: 2, x2: 2, y1: 5, y2: 9, options: options}],
-                elements;
-            errorBar.reflow(targetBox);
-            elements = errorBar.getViewElements(view);
+                });
 
-            ok(equalFields(expectedElements, view.log.line) && elements.length == expectedElements.length);
-        });
+                renderedLines(expectedPaths, options);
+            });
 
-        test("color is taken from errorbar options when specified for categorical error bar", function(){
-            var targetBox = new Box(5,5,9, 9),
-                errorBar = new CategoricalErrorBar(1,2, true, categoricalChart, {} , {
+            test("color is taken from errorbar options when specified for categorical error bar", function(){
+                var expectedPaths = [new Path().moveTo(7, 1).lineTo(7, 2),
+                    new Path().moveTo(5, 1).lineTo(9, 1),
+                    new Path().moveTo(5, 2).lineTo(9, 2)],
+                options = $.extend({}, expectedOptions, {stroke: {color: "black"}});
+
+                createErrorBar(CategoricalErrorBar, true, categoricalChart, {
                     endCaps: true,
                     color: "black"
-                }),
-                view = new ViewStub(),
-                options = $.extend({}, expectedOptions, {stroke: "black"}),
-                expectedElements = [{x1: 7, x2: 7, y1: 1, y2: 2, options: options}, {x1: 5, x2: 9, y1: 1, y2: 1, options: options},
-                    {x1: 5, x2: 9, y1: 2, y2: 2, options: options}],
-                elements;
-            errorBar.reflow(targetBox);
-            elements = errorBar.getViewElements(view);
+                });
 
-            ok(equalFields(expectedElements, view.log.line) && elements.length == expectedElements.length);
-        });
+                renderedLines(expectedPaths, options);
+            });
 
-        test("lines are correctly created for a vertical categorical error bar", function(){
-            var targetBox = new Box(5,5,9, 9),
-                errorBar = new CategoricalErrorBar(1,2, true, categoricalChart, {},  defaultOptions),
-                view = new ViewStub(),
-                expectedElements = [{x1: 7, x2: 7, y1: 1, y2: 2, options: expectedOptions}, {x1: 5, x2: 9, y1: 1, y2: 1, options: expectedOptions},
-                    {x1: 5, x2: 9, y1: 2, y2: 2, options: expectedOptions}],
-                elements;
-            errorBar.reflow(targetBox);
-            elements = errorBar.getViewElements(view);
+            test("lines are correctly created for a vertical categorical error bar", function(){
+                var expectedPaths = [new Path().moveTo(7, 1).lineTo(7, 2),
+                    new Path().moveTo(5, 1).lineTo(9, 1),
+                    new Path().moveTo(5, 2).lineTo(9, 2)];
 
-            ok(equalFields(expectedElements, view.log.line) && elements.length == expectedElements.length);
-        });
+                createErrorBar(CategoricalErrorBar, true, categoricalChart, defaultOptions);
 
-        test("lines are correctly created for a vertical scatter error bar", function(){
-            var targetBox = new Box(5,5,9, 9),
-                errorBar = new ScatterErrorBar(1,2, true, xyChart, {}, defaultOptions),
-                view = new ViewStub(),
-                expectedElements = [{x1: 7, x2: 7, y1: 1, y2: 2, options: expectedOptions}, {x1: 5, x2: 9, y1: 1, y2: 1, options: expectedOptions},
-                    {x1: 5, x2: 9, y1: 2, y2: 2, options: expectedOptions}],
-                elements;
-            errorBar.reflow(targetBox);
-            elements = errorBar.getViewElements(view);
+                renderedLines(expectedPaths, expectedOptions);
+            });
 
-            ok(equalFields(expectedElements, view.log.line) && elements.length == expectedElements.length);
-        });
+            test("lines are correctly created for a vertical scatter error bar", function(){
+                var expectedPaths = [new Path().moveTo(7, 1).lineTo(7, 2),
+                    new Path().moveTo(5, 1).lineTo(9, 1),
+                    new Path().moveTo(5, 2).lineTo(9, 2)];
 
-        test("caps lines are not created for a horizontal categorical error bar when the endCaps option is false", function(){
-            var targetBox = new Box(5,5,9, 9),
-                errorBar = new CategoricalErrorBar(1,2, false, categoricalChart, {} , $.extend({}, defaultOptions, {endCaps: false})),
-                view = new ViewStub(),
-                expectedElements = [{x1: 1, x2: 2, y1: 7, y2: 7, options: expectedOptions}],
-                elements;
-            errorBar.reflow(targetBox);
-            elements = errorBar.getViewElements(view);
+                createErrorBar(ScatterErrorBar, true, xyChart, defaultOptions);
 
-            ok(equalFields(expectedElements, view.log.line) && elements.length == expectedElements.length);
-        });
+                renderedLines(expectedPaths, expectedOptions);
+            });
 
-        test("caps lines are not created for a horizontal scatter error bar when the endCaps option is false", function(){
-            var targetBox = new Box(5,5,9, 9),
-                errorBar = new ScatterErrorBar(1,2, false, xyChart, {} , $.extend({}, defaultOptions, {endCaps: false})),
-                view = new ViewStub(),
-                expectedElements = [{x1: 1, x2: 2, y1: 7, y2: 7, options: expectedOptions}],
-                elements;
-            errorBar.reflow(targetBox);
-            elements = errorBar.getViewElements(view);
+            test("caps lines are not created for a horizontal categorical error bar when the endCaps option is false", function(){
+                var expectedPaths = [new Path().moveTo(1, 7).lineTo(2, 7)];
+                createErrorBar(CategoricalErrorBar, false, categoricalChart, $.extend({}, defaultOptions, {endCaps: false}));
 
-            ok(equalFields(expectedElements, view.log.line) && elements.length == expectedElements.length);
-        });
+                renderedLines(expectedPaths, expectedOptions);
+            });
 
-        test("caps lines are not created for a vertical categorical error bar when the endCaps option is false", function(){
-            var targetBox = new Box(5,5,9, 9),
-                errorBar = new CategoricalErrorBar(1,2, true, categoricalChart, {}, $.extend({}, defaultOptions, {endCaps: false})),
-                view = new ViewStub(),
-                expectedElements = [{x1: 7, x2: 7, y1: 1, y2: 2, options: expectedOptions}],
-                elements;
-            errorBar.reflow(targetBox);
-            elements = errorBar.getViewElements(view);
+            test("caps lines are not created for a horizontal scatter error bar when the endCaps option is false", function(){
+                var expectedPaths = [new Path().moveTo(1, 7).lineTo(2, 7)];
+                createErrorBar(ScatterErrorBar, false, xyChart, $.extend({}, defaultOptions, {endCaps: false}));
 
-            ok(equalFields(expectedElements, view.log.line) && elements.length == expectedElements.length);
-        });
+                renderedLines(expectedPaths, expectedOptions);
+            });
 
-        test("caps lines are not created for a vertical scatter error bar when the endCaps option is false", function(){
-            var targetBox = new Box(5,5,9, 9),
-                errorBar = new ScatterErrorBar(1,2, true, xyChart, {}, $.extend({}, defaultOptions, {endCaps: false})),
-                view = new ViewStub(),
-                expectedElements = [{x1: 7, x2: 7, y1: 1, y2: 2, options: expectedOptions}],
-                elements;
-            errorBar.reflow(targetBox);
-            elements = errorBar.getViewElements(view);
+            test("caps lines are not created for a vertical categorical error bar when the endCaps option is false", function(){
+                var expectedPaths = [new Path().moveTo(7, 1).lineTo(7, 2)];
+                createErrorBar(CategoricalErrorBar, true, categoricalChart, $.extend({}, defaultOptions, {endCaps: false}));
 
-            ok(equalFields(expectedElements, view.log.line) && elements.length == expectedElements.length);
-        });
+                renderedLines(expectedPaths, expectedOptions);
+            });
+
+            test("caps lines are not created for a vertical scatter error bar when the endCaps option is false", function(){
+                var expectedPaths = [new Path().moveTo(7, 1).lineTo(7, 2)];
+                createErrorBar(ScatterErrorBar, true, xyChart, $.extend({}, defaultOptions, {endCaps: false}));
+
+                renderedLines(expectedPaths, expectedOptions);
+            });
+        })();
     })();
