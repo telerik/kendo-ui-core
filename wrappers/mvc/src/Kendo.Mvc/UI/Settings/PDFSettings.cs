@@ -29,6 +29,12 @@ namespace Kendo.Mvc.UI
 
         public IDictionary<string, object> Margin { get; set; }
 
+        public bool ForceProxy
+        {
+            get;
+            set;
+        }
+
         protected override void Serialize(IDictionary<string, object> json)
         {
             if (ProxyUrl.HasValue())
@@ -84,6 +90,11 @@ namespace Kendo.Mvc.UI
             if (Date != null)
             {
                 json["date"] = Date;
+            }
+
+            if (ForceProxy)
+            {
+                json["forceProxy"] = true;
             }
         }
     }

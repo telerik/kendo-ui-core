@@ -253,9 +253,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// Configures the Kendo UI Gantt PDF export settings.
         /// </summary>
         /// <param name="configurator">The action that configures the pdf.</param>
-        public GanttBuilder<TTaskModel,TDependenciesModel> Pdf(Action<PDFSettingsBuilder> configurator)
+        public GanttBuilder<TTaskModel,TDependenciesModel> Pdf(Action<GanttPdfSettingsBuilder> configurator)
         {
-            configurator(new PDFSettingsBuilder(container.Pdf));
+            configurator(new GanttPdfSettingsBuilder(container.Pdf));
             return this;
         }
         
