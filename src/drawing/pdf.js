@@ -311,7 +311,7 @@
                 type: "linear",
                 start: start,
                 end: end,
-                userSpace: fill.userSpace,
+                userSpace: fill.userSpace(),
                 stops: fill.stops.elements().map(function(stop){
                     var offset = stop.offset();
                     if (/%$/.test(offset)) {
