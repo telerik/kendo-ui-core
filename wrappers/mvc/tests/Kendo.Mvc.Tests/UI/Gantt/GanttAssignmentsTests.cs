@@ -41,7 +41,7 @@
         public void DataTaskIdField_sets_the_corresponding_property()
         {
             var dataTaskId = "ID";
-            builder.Assignments(a => a.DataTaskIdField(dataTaskId));
+            builder.Assignments< GanttAssingment>(a => a.DataTaskIdField(dataTaskId));
 
             Assert.Equal(dataTaskId, gantt.Assignments.DataTaskIdField);
         }
@@ -50,7 +50,7 @@
         public void DataResourceIdField_sets_the_corresponding_property()
         {
             var dataResourceId = "RID";
-            builder.Assignments(a => a.DataResourceIdField(dataResourceId));
+            builder.Assignments<GanttAssingment>(a => a.DataResourceIdField(dataResourceId));
 
             Assert.Equal(dataResourceId, gantt.Assignments.DataResourceIdField);
         }
@@ -59,7 +59,7 @@
         public void DataValueField_sets_the_corresponding_property()
         {
             var dataValueField = "Value";
-            builder.Assignments(a => a.DataValueField(dataValueField));
+            builder.Assignments<GanttAssingment>(a => a.DataValueField(dataValueField));
 
             Assert.Equal(dataValueField, gantt.Assignments.DataValueField);
         }
@@ -73,7 +73,7 @@
                 new { Text = "Charlie", id = 3, Color = "#56ca85" } 
             };
 
-            builder.Assignments(r => r.BindTo(data));
+            builder.Assignments<GanttAssingment>(r => r.BindTo(data));
 
             var json = gantt.Assignments.ToJson();
 

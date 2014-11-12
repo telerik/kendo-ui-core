@@ -172,6 +172,7 @@
     <Compile Include="UI\DatePicker\DatePickerClientEventsBuilderTests.cs" />
     <Compile Include="UI\Fluent\PDFSettingsBuilderTests.cs" />
     <Compile Include="UI\Gantt\GanttAssignmentsTests.cs" />
+    <Compile Include="UI\Gantt\GanttAssingment.cs" />
     <Compile Include="UI\Gantt\GanttBuilderTests.cs">
       <SubType>Code</SubType>
     </Compile>
