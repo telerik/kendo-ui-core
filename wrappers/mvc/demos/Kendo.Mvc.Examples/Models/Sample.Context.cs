@@ -48,5 +48,7 @@ namespace Kendo.Mvc.Examples.Models
         public DbSet<EmployeeDirectory> EmployeeDirectory { get; set; }
         public DbSet<OrgChartConnection> OrgChartConnections { get; set; }
         public DbSet<OrgChartShape> OrgChartShapes { get; set; }
+        public DbSet<GanttResourceAssignment> GanttResourceAssignments { get; set; }
+        public DbSet<GanttResource> GanttResources { get; set; }
     }
 }

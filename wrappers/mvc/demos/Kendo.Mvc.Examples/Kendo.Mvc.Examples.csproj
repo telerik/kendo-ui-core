@@ -192,6 +192,7 @@
     <Compile Include="Controllers\Gantt\Pdf_ExportController.cs" />
     <Compile Include="Controllers\Gantt\EventsController.cs" />
     <Compile Include="Controllers\Gantt\Keyboard_NavigationController.cs" />
+    <Compile Include="Controllers\Gantt\ResourcesController.cs" />
     <Compile Include="Controllers\Gantt\ServerBindingController.cs" />
     <Compile Include="Controllers\Grid\Multicolumnheaders.cs" />
     <Compile Include="Controllers\Grid\Pdf_ExportController.cs" />
@@ -636,6 +637,16 @@
     <Compile Include="Models\Diagram\DiagramShapeService.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\GanttResource.cs">
+      <DependentUpon>Sample.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GanttResourceAssignment.cs">
+      <DependentUpon>Sample.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Gantt\GanttAssignmentService.cs" />
+    <Compile Include="Models\Gantt\GanttResourceService.cs" />
+    <Compile Include="Models\Gantt\ResourceAssignmentViewModel.cs" />
+    <Compile Include="Models\Gantt\ResourceViewModel.cs" />
     <Compile Include="Models\OrgChartConnection.cs">
       <DependentUpon>Sample.tt</DependentUpon>
     </Compile>
@@ -848,6 +859,7 @@
     <Content Include="Areas\aspx\Views\dropdownlist\clientfiltering.aspx" />
     <Content Include="Areas\aspx\Views\dropdownlist\serverfiltering.aspx" />
     <Content Include="Areas\aspx\Views\gantt\api.aspx" />
+    <Content Include="Areas\aspx\Views\gantt\resources.aspx" />
     <Content Include="Areas\aspx\Views\gantt\pdf_export.aspx" />
     <Content Include="Areas\aspx\Views\gantt\events.aspx" />
     <Content Include="Areas\aspx\Views\gantt\index.aspx" />
@@ -3383,6 +3395,9 @@
     <Content Include="Areas\razor\Views\gantt\pdf_export.cshtml">
       <SubType>Code</SubType>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\gantt\resources.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

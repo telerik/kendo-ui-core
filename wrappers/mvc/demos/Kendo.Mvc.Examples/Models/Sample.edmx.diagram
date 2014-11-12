@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="db683a1a9da24938aa445abea7d80740" Name="Diagram1">
+      <Diagram DiagramId="db683a1a9da24938aa445abea7d80740" Name="Diagram1" ZoomLevel="71">
         <EntityTypeShape EntityType="SampleModel.Category" Width="1.5" PointX="3" PointY="19.5" IsExpanded="true" />
         <EntityTypeShape EntityType="SampleModel.CustomerDemographic" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
         <EntityTypeShape EntityType="SampleModel.Customer" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
@@ -44,6 +44,8 @@
         <AssociationConnector Association="SampleModel.FK_EmployeeDirectory_EmployeeDirectory" />
         <EntityTypeShape EntityType="SampleModel.OrgChartConnection" Width="1.5" PointX="10.375" PointY="24" />
         <EntityTypeShape EntityType="SampleModel.OrgChartShape" Width="1.5" PointX="10.748325593186694" PointY="12.456650888759945" />
+        <EntityTypeShape EntityType="SampleModel.GanttResourceAssignment" Width="1.5" PointX="11.875" PointY="15.5" />
+        <EntityTypeShape EntityType="SampleModel.GanttResource" Width="1.5" PointX="11.875" PointY="17.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

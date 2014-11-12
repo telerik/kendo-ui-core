@@ -14,6 +14,8 @@
           <EntitySet Name="Employees" EntityType="SampleModel.Store.Employees" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="EmployeeTerritories" EntityType="SampleModel.Store.EmployeeTerritories" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="GanttDependencies" EntityType="SampleModel.Store.GanttDependencies" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="GanttResourceAssignments" EntityType="SampleModel.Store.GanttResourceAssignments" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="GanttResources" EntityType="SampleModel.Store.GanttResources" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="GanttTasks" EntityType="SampleModel.Store.GanttTasks" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Intraday" EntityType="SampleModel.Store.Intraday" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="MeetingAttendees" EntityType="SampleModel.Store.MeetingAttendees" store:Type="Tables" Schema="dbo" />
@@ -214,6 +216,23 @@
           <Property Name="PredecessorID" Type="int" Nullable="false" />
           <Property Name="SuccessorID" Type="int" Nullable="false" />
           <Property Name="Type" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GanttResourceAssignments">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TaskID" Type="int" Nullable="false" />
+          <Property Name="ResourceID" Type="int" Nullable="false" />
+          <Property Name="Units" Type="decimal" Nullable="false" Precision="5" Scale="2" />
+        </EntityType>
+        <EntityType Name="GanttResources">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Color" Type="nchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="GanttTasks">
           <Key>
@@ -762,6 +781,8 @@
           </AssociationSet>
           <EntitySet Name="OrgChartConnections" EntityType="SampleModel.OrgChartConnection" />
           <EntitySet Name="OrgChartShapes" EntityType="SampleModel.OrgChartShape" />
+          <EntitySet Name="GanttResourceAssignments" EntityType="SampleModel.GanttResourceAssignment" />
+          <EntitySet Name="GanttResources" EntityType="SampleModel.GanttResource" />
         </EntityContainer>
         <EntityType Name="Category">
           <Key>
@@ -1289,6 +1310,23 @@
           <Property Type="String" Name="Image" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="ColorScheme" MaxLength="10" FixedLength="true" Unicode="true" />
         </EntityType>
+        <EntityType Name="GanttResourceAssignment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="TaskID" Nullable="false" />
+          <Property Type="Int32" Name="ResourceID" Nullable="false" />
+          <Property Type="Decimal" Name="Units" Nullable="false" Precision="5" Scale="2" />
+        </EntityType>
+        <EntityType Name="GanttResource">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Color" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1641,6 +1679,25 @@
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GanttResourceAssignments">
+            <EntityTypeMapping TypeName="SampleModel.GanttResourceAssignment">
+              <MappingFragment StoreEntitySet="GanttResourceAssignments">
+                <ScalarProperty Name="Units" ColumnName="Units" />
+                <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
+                <ScalarProperty Name="TaskID" ColumnName="TaskID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GanttResources">
+            <EntityTypeMapping TypeName="SampleModel.GanttResource">
+              <MappingFragment StoreEntitySet="GanttResources">
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

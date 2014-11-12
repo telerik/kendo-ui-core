@@ -14,11 +14,15 @@ namespace Kendo.Mvc.Examples.Controllers
     {
         private GanttTaskService taskService;
         private GanttDependencyService dependencyService;
+        private GanttAssignmentService assignmentService;
+        private GanttResourceService resourceService;
 
         public GanttController()
         {
             taskService = new GanttTaskService();
             dependencyService = new GanttDependencyService();
+            assignmentService = new GanttAssignmentService();
+            resourceService = new GanttResourceService();
         }
 
         protected override void Dispose(bool disposing)
