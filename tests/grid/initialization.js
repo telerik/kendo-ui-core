@@ -1875,7 +1875,7 @@
         var grid = new Grid(table, {
             dataSource: [{ foo: 1, bar: "bar"}],
             columns: [
-                { columns: ["foo", { columns: [{ field: "boo", hidden: true }, { field: "moo", hidden: true }], field: "baz" }] },
+                { columns: ["foo", { columns: [{ field: "boo", hidden: true }, { field: "moo", hidden: true }], title: "baz" }] },
                 { field: "bar" }
             ]
         });
@@ -1885,11 +1885,27 @@
         ok(grid.columns[0].columns[1].hidden);
     });
 
+    test("hidden child columns set parent colSpan - multiline headers", function() {
+        var grid = new Grid(table, {
+            dataSource: [{ foo: 1, bar: "bar"}],
+            columns: [
+                { columns: ["foo", { columns: [{ field: "boo", hidden: true }, { field: "moo" }], title: "baz" }] },
+                { field: "bar" }
+            ]
+        });
+
+        var parentCell = grid.thead.find(">tr:first th:first");
+
+        equal(parentCell[0].colSpan, 2);
+        equal(parentCell.attr(kendo.attr("colspan")), 3);
+    });
+
+
     test("hidden all child columns set parent as hidden - multiline headers", function() {
         var grid = new Grid(table, {
             dataSource: [{ foo: 1, bar: "bar"}],
             columns: [
-                { columns: [{ field: "foo", hidden: true }, { columns: [{ field: "boo", hidden: true }, { field: "moo", hidden: true }], field: "baz" }]},
+                { columns: [{ field: "foo", hidden: true }, { columns: [{ field: "boo", hidden: true }, { field: "moo", hidden: true }], title: "baz" }]},
                 { field: "bar" }
             ]
         });

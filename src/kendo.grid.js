@@ -5046,7 +5046,7 @@ var __meta__ = {
                     }
 
                     if (columns[idx].colSpan > 1) {
-                        html += 'colspan="' + (columns[idx].colSpan - hiddenLeafColumnsCount(columns[idx])) + '" ';
+                        html += 'colspan="' + (columns[idx].colSpan - hiddenLeafColumnsCount(th.columns)) + '" ';
                         html += kendo.attr("colspan") + "='" + columns[idx].colSpan + "'";
                     }
 
