@@ -3749,6 +3749,9 @@ var __meta__ = {
             transportOptions.read = typeof transportOptions.read === STRING ? { url: transportOptions.read } : transportOptions.read;
 
             if (options.type) {
+                kendo.data.transports = kendo.data.transports || {};
+                kendo.data.schemas = kendo.data.schemas || {};
+
                 if (kendo.data.transports[options.type] && !isPlainObject(kendo.data.transports[options.type])) {
                     transport = new kendo.data.transports[options.type](extend(transportOptions, { data: data }));
                 } else {
