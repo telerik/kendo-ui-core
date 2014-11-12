@@ -63,8 +63,8 @@
 
         // Constants ==============================================================
         var NS = ".kendoDiagram",
-            CASCADING = "Cascading",
-            POLYLINE = "Polyline",
+            CASCADING = "cascading",
+            POLYLINE = "polyline",
             ITEMBOUNDSCHANGE = "itemBoundsChange",
             CHANGE = "change",
             CLICK = "click",
@@ -414,6 +414,12 @@
 
             _canSelect: function () {
                 return this.options.selectable !== false;
+            },
+
+            toJSON: function() {
+                return {
+                    id: this.options.id
+                };
             }
         });
 
@@ -918,6 +924,11 @@
                         }
                     }
                 }
+            },
+            toJSON: function() {
+                return {
+                    shapeId: this.options.id
+                };
             }
         });
 
@@ -973,7 +984,7 @@
                 var that = this;
                 DiagramElement.fn.init.call(that, options);
                 this.updateOptionsFromModel();
-                that._router = new PolylineRouter(this);
+                this._initRouter();
                 that.path = new diagram.Polyline(that.options);
                 that.path.fill(TRANSPARENT);
                 that.visual.append(that.path);
@@ -1286,23 +1297,24 @@
              * @returns {ConnectionType}
              */
             type: function (value) {
+                var options = this.options;
                 if (value) {
-                    if (value !== this._type) {
-                        this._type = value;
-                        switch (value.toLowerCase()) {
-                            case CASCADING.toLowerCase():
-                                this._router = new CascadingRouter(this);
-                                break;
-                            case POLYLINE.toLowerCase():
-                                this._router = new PolylineRouter(this);
-                                break;
-                            default:
-                                throw "Unsupported connection type.";
-                        }
+                    if (value !== options.type) {
+                        options.type = value;
+                        this._initRouter();
                         this.refresh();
                     }
                 } else {
-                    return this._type;
+                    return options.type;
+                }
+            },
+
+            _initRouter: function() {
+                var type = (this.options.type || "").toLowerCase();
+                if (type == CASCADING) {
+                    this._router = new CascadingRouter(this);
+                } else {
+                    this._router = new PolylineRouter(this);
                 }
             },
             /**
@@ -1978,7 +1990,7 @@
 
                 for (i = 0; i < this.connections.length; i++) {
                     var con = this.connections[i];
-                    var conOptions = deepExtend({}, { from: con.from.toJSON(), to: con.to.toJSON() }, con.options);
+                    var conOptions = deepExtend({}, con.options, { from: con.from.toJSON(), to: con.to.toJSON() });
                     json.connections.push(conOptions);
                 }
 
