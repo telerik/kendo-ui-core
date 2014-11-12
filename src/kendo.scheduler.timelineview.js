@@ -330,6 +330,9 @@ var __meta__ = {
             currentTimeMarker: {
                 updateInterval: 10000,
                 useLocalTimezone: true
+            },
+            messages: {
+                defaultGroupText: "All events"
             }
         },
 
@@ -341,7 +344,6 @@ var __meta__ = {
 
             this.eventTemplate = this._eventTmpl(options.eventTemplate, EVENT_WRAPPER_STRING);
             this.majorTimeHeaderTemplate = kendo.template(options.majorTimeHeaderTemplate, settings);
-            this.minorTimeHeaderTemplate = kendo.template(options.minorTimeHeaderTemplate, settings);
             this.dateHeaderTemplate = kendo.template(options.dateHeaderTemplate, settings);
             this.slotTemplate = kendo.template(options.slotTemplate, settings);
         },
@@ -479,8 +481,7 @@ var __meta__ = {
         _layout: function(dates) {
             var timeColumns = [];
             var columns = [];
-            //make this option?
-            var rows = [{ text: "All events"}];
+            var rows = [{ text: this.options.messages.defaultGroupText }];
             var that = this;
 
             var minorTickSlots = [];
