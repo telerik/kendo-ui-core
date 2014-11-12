@@ -717,6 +717,7 @@
     <Compile Include="UI\Gantt\Fluent\GanttAssignmentsDataSourceBuilder.cs" />
     <Compile Include="UI\Gantt\Fluent\GanttResourceColumnBuilder.cs" />
     <Compile Include="UI\Gauge\Fluent\GaugeRadialPointerFactory.cs" />
+    <Compile Include="UI\Gauge\GaugeLinearPointerFactory.cs" />
     <Compile Include="UI\RadioButton\RadioButton.cs" />
     <Compile Include="UI\RadioButton\Fluent\RadioButtonBuilder.cs" />
     <Compile Include="UI\RadioButton\Html\RadioButtonHtmlBuilder.cs" />

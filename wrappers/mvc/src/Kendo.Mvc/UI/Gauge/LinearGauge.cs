@@ -1,6 +1,7 @@
 namespace Kendo.Mvc.UI
 {
     using System.IO;
+    using System.Linq;
     using System.Web.Mvc;
     using Kendo.Mvc.Infrastructure;
     using System.Collections.Generic;
@@ -18,6 +19,7 @@ namespace Kendo.Mvc.UI
         {
             Scale = new GaugeLinearScale(this);
             Pointer = new GaugeLinearPointer();
+            Pointers = new List<GaugeLinearPointer>();
         }
 
         /// <summary>
@@ -38,14 +40,32 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        /// <summary>
+        /// Configuration for the default multiple pointers (if any)
+        /// </summary>
+        public IList<GaugeLinearPointer> Pointers
+        {
+            get;
+            set;
+        }
+
         public override void WriteInitializationScript(TextWriter writer)
         {
             var options = new Dictionary<string, object>();
 
             SerializeData("gaugeArea", this.GaugeArea.CreateSerializer().Serialize(), options);
-            SerializeData("pointer", this.Pointer.CreateSerializer().Serialize(), options);
             SerializeData("scale", this.Scale.CreateSerializer().Serialize(), options);
-            
+
+            var pointers = this.Pointers.Select(pointer => pointer.CreateSerializer().Serialize());
+            if (pointers.Any())
+            {
+                options.Add("pointer", pointers);
+            }
+            else
+            {
+                SerializeData("pointer", this.Pointer.CreateSerializer().Serialize(), options);
+            }
+
             if (RenderAs.HasValue) {
                 options.Add("renderAs", RenderAs.ToString().ToLowerInvariant());
             }

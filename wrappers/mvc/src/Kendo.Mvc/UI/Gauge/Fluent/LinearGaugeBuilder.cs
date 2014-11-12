@@ -109,6 +109,39 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Allows configuring multiple pointers
+        /// </summary>
+        /// <param name="configurator">The lambda which configures the pointers</param>
+        /// <code lang="ASPX">
+        /// &lt;%= Html.Kendo().LinearGauge()
+        ///     .Name("gauge")
+        ///     .Pointers(pointer =>
+        ///     {
+        ///         pointer.Add().Value(10);
+        ///         pointer.Add().Value(20).Shape(GaugeLinearPointerShape.Arrow);
+        ///     })
+        /// %&gt;
+        /// </code>
+        /// <code lang="Razor">
+        /// @(Html.Kendo().LinearGauge()
+        ///     .Name("gauge")
+        ///     .Pointers(pointer =>
+        ///     {
+        ///         pointer.Add().Value(10);
+        ///         pointer.Add().Value(20).Shape(GaugeLinearPointerShape.Arrow);
+        ///     })
+        /// )
+        /// </code>
+        public LinearGaugeBuilder Pointers(Action<GaugeLinearPointerFactory> configurator)
+        {
+            GaugeLinearPointerFactory factory = new GaugeLinearPointerFactory(Component);
+
+            configurator(factory);
+
+            return this;
+        }
+
+        /// <summary>
         /// Enables or disabled animated transitions on initial load and refresh. 
         /// </summary>
         /// <param name="transitions">
