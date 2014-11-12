@@ -17,18 +17,18 @@ namespace Kendo.Mvc.UI
             Enabled = false;
 
             DefaultDataItem = CreateDefaultItem;
-        
+
             //>> Initialization
-        
-        //<< Initialization
+
+            //<< Initialization
         }
 
         public bool Enabled { get; set; }
 
         //>> Fields
-        
+
         public string Mode { get; set; }
-        
+
         public string Template { get; set; }
 
         public string TemplateId { get; set; }
@@ -40,15 +40,16 @@ namespace Kendo.Mvc.UI
         protected override void Serialize(IDictionary<string, object> json)
         {
             //>> Serialization
-        
+
             if (Mode.HasValue())
             {
                 json["mode"] = Mode;
             }
-            
+
             if (!string.IsNullOrEmpty(TemplateId))
             {
-                json["template"] = new ClientHandlerDescriptor {
+                json["template"] = new ClientHandlerDescriptor
+                {
                     HandlerName = string.Format(
                         "jQuery('#{0}').html()",
                         TemplateId
@@ -60,7 +61,7 @@ namespace Kendo.Mvc.UI
                 json["template"] = Template;
             }
 
-        //<< Serialization
+            //<< Serialization
 
             SerializeEditTemplate(json);
         }
@@ -89,7 +90,12 @@ namespace Kendo.Mvc.UI
 
         public void InitializeEditor(ViewContext viewContext, ViewDataDictionary viewData)
         {
-            if (Enabled && TemplateName.HasValue())
+            if (!Enabled)
+            {
+                return;
+            }
+
+            if (TemplateName.HasValue() || (!Template.HasValue() && !TemplateId.HasValue()))
             {
                 var popupSlashes = new Regex("(?<=data-val-regex-pattern=\")([^\"]*)", RegexOptions.Multiline);
                 var helper = new HtmlHelper<T>(viewContext, new TreeListViewDataContainer<T>(DefaultDataItem(), viewData));

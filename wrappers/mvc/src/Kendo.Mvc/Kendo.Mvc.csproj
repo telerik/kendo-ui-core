@@ -2295,7 +2295,6 @@
     <Compile Include="UI\TreeList\Fluent\TreeListFilterableSettingsBuilder.cs" />
     <Compile Include="UI\TreeList\Settings\TreeListSortableSettings.cs" />
     <Compile Include="UI\TreeList\Fluent\TreeListSortableSettingsBuilder.cs" />
-    <Compile Include="UI\TreeList\TreeListToolba.cs" />
     <Compile Include="UI\TreeList\Fluent\TreeListEventBuilder.cs" />
     <Compile Include="UI\TreeList\Html\TreeListHtmlBuilder.cs" />
   </ItemGroup>
