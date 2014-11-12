@@ -118,7 +118,7 @@ var __meta__ = {
 
             var center = this.box.center();
             var circle = new geom.Circle([center.x, center.y], radius);
-            var container = this._gridLines;
+            var container = this.gridLinesVisual();
 
             for (var i = 0; i < angles.length; i++) {
                 var line = new draw.Path(style);
@@ -465,7 +465,7 @@ var __meta__ = {
                 }
             };
 
-            var container = this._gridLines;
+            var container = this.gridLinesVisual();
             for (tickIx = 0; tickIx < ticks.length; tickIx++) {
                 tickRadius = center.y - ticks[tickIx];
                 if(tickRadius > 0) {

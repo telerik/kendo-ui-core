@@ -1938,14 +1938,21 @@ var __meta__ = {
         createVisual: function() {
             ChartElement.fn.createVisual.call(this);
 
-            this._gridLines = new draw.Group({
-                zIndex: -2
-            });
-            this.appendVisual(this._gridLines);
-
             this.createPlotBands();
             this.createBackground();
             this.createLine();
+        },
+
+        gridLinesVisual: function() {
+            var gridLines = this._gridLines;
+            if (!gridLines) {
+                gridLines = this._gridLines = new draw.Group({
+                    zIndex: -2
+                });
+                this.appendVisual(this._gridLines);
+            }
+
+            return gridLines;
         },
 
         createTicks: function(lineGroup) {
@@ -2120,7 +2127,7 @@ var __meta__ = {
                 },
                 pos, majorTicks = [];
 
-            var container = this._gridLines;
+            var container = this.gridLinesVisual();
             function render(tickPositions, gridLine, skipUnit) {
                 var count = tickPositions.length,
                     i;
@@ -3211,7 +3218,7 @@ var __meta__ = {
                 },
                 pos, majorTicks = [];
 
-            var container = this._gridLines;
+            var container = this.gridLinesVisual();
             function render(tickPosition, gridLine) {
                 if (!inArray(tickPosition, majorTicks)) {
                     lineOptions.position = tickPosition;
