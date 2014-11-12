@@ -7,7 +7,7 @@ var __meta__ = {
     name: "PivotGrid",
     category: "web",
     description: "The PivotGrid widget is a data summarization tool.",
-    depends: [ "dom", "data", "sortable" ],
+    depends: [ "dom", "data", "data.xml", "sortable" ],
     features: [ {
         id: "mobile-scroller",
         name: "Mobile scroller",
