@@ -23,6 +23,7 @@
         <link href="../styles/web/kendo.common.less" rel="stylesheet/less" />
         <link href="../styles/web/kendo.silver.less" rel="stylesheet/less" />
         <script src="../demos/mvc/content/shared/js/less.js"></script>
+        <script src="../demos/mvc/content/shared/js/products.js"></script>
 
         <style>
 
@@ -40,48 +41,39 @@
         </style>
     </head>
     <body>
-        <button id="kpi">Set KPI</button>
-        <div id="configurator"></div>
         <div id="pivotgrid"></div>
-
         <script>
-            $(function() {
-                var pivot = $("#pivotgrid").kendoPivotGrid({
-                    height: 500,
-                    columnWidth: 50,
+            $(document).ready(function () {
+                $("#pivotgrid").kendoPivotGrid({
+                    columnWidth: 120,
+                    height: 570,
                     dataSource: {
-                        type: "xmla",
-                        columns: [{ name: "[Date].[Calendar]", expand: true }],
-                        rows: [{ name: "[Product].[Category]", expand: true }],
-                        //columns: [{ name: "[Geography].[City]", expand: true }],
-                        transport: {
-                            connection: {
-                                catalog: "Adventure Works Internet Sales Model",
-                                cube: "Adventure Works Internet Sales Model"
+                        data: products,
+                        schema: {
+                            model: {
+                                fields: {
+                                    ProductName: { type: "string" },
+                                    UnitPrice: { type: "number" },
+                                    UnitsInStock: { type: "number" },
+                                    Discontinued: { type: "boolean" },
+                                    CategoryName: { field: "Category.CategoryName" }
+                                }
                             },
-                            read: {
-                                url: "http://krustev:8080/OLAP/msmdpump.dll",
-                                dataType: "text",
-                                contentType: "text/xml",
-                                type: "POST"
+                            cube: {
+                                dimensions: {
+                                    ProductName: { caption: "All Products" },
+                                    CategoryName: { caption: "All Categories" },
+                                    Discontinued: { caption: "Discontinued" }
+                                },
+                                measures: {
+                                    "Sum": { field: "UnitPrice", format: "{0:c}", aggregate: function(value, state) { return value + state; } }
+                                }
                             }
                         },
-                        schema: {
-                            type: "xmla"
-                        },
-                        error: function(e) {
-                           alert("error: " + kendo.stringify(e.errors[0]));
-                        }
+                        columns: [{ name: "CategoryName", expand: true }, { name: "ProductName" } ],
+                        rows: [{ name: "Discontinued", expand: true }],
+                        measures: ["Sum"]
                     }
-                }).data("kendoPivotGrid");
-
-                $("#configurator").kendoPivotConfigurator({
-                    dataSource: pivot.dataSource,
-                    height: 300
-                });
-
-                $("#kpi").click(function() {
-                    pivot.dataSource.measures(["[Measures].[Internet Current Quarter Sales Performance]"]);
                 });
             });
         </script>

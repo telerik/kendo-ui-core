@@ -177,7 +177,7 @@
 
         var data = [{ name: "name1", lastName: "LastName1", value: 1 }, { name: "name2", lastName: "LastName1", value: 2 }, { name: "name1", lastName: "LastName2", value: 1 } ];
 
-        var result = builder.process(data, { columns: [{ name: "name", expand: true }], rows: [{ name: "lastName" }], measures: ["Measure1"] });
+        var result = builder.process(data, { columns: [{ name: "name", expand: true }], rows: [{ name: "lastName" }], measures: [{ name: "Measure1" }] });
 
         equal(result.data.length, 3);
         equal(result.data[0].value, 4);
@@ -194,7 +194,7 @@
 
         var data = [{ name: "name1", lastName: "LastName1", value: 1 }, { name: "name2", lastName: "LastName1", value: 2 }, { name: "name1", lastName: "LastName2", value: 1 } ];
 
-        var result = builder.process(data, { columns: [{ name: "name", expand: true }], rows: [{ name: "lastName" }], measures: ["Measure1"] });
+        var result = builder.process(data, { columns: [{ name: "name", expand: true }], rows: [{ name: "lastName" }], measures: [{ name: "Measure1" }] });
 
         equal(result.data.length, 3);
         equal(result.data[0].fmtValue, "foo 4");
@@ -267,7 +267,7 @@
         var result = builder.process(data, {
             columns: [{ name: "FirstName", expand: true },{ name: "LastName", expand: true }],
             rows: [{ name: "Age", expand: true }],
-            measures: ["Count"]
+            measures: [{ name: "Count" }]
         });
 
         equal(result.data.length, 12);
@@ -343,7 +343,7 @@
             { name: "name2", lastName: "lastName2" },
             { name: "name1", lastName: "lastName3" }
         ];
-        var result = builder.process(data, { columns: [{ name: "name" }], measures: ["Measure1", "Measure2"]});
+        var result = builder.process(data, { columns: [{ name: "name" }], measures: [{ name: "Measure1" }, { name: "Measure2" }]});
 
         equal(result.axes.columns.tuples.length, 2);
     });
@@ -361,7 +361,7 @@
             { name: "name2", lastName: "lastName2" },
             { name: "name1", lastName: "lastName3" }
         ];
-        var result = builder.process(data, { columns: [{ name: "name" }], measures: ["Measure1", "Measure2"]});
+        var result = builder.process(data, { columns: [{ name: "name" }], measures: [{ name: "Measure1" }, { name: "Measure2" }]});
 
         equal(result.axes.columns.tuples[0].members.length, 2);
         equal(result.axes.columns.tuples[0].members[1].caption, "Measure 1");
@@ -382,7 +382,7 @@
             { name: "name2", lastName: "lastName2" },
             { name: "name1", lastName: "lastName3" }
         ];
-        var result = builder.process(data, { columns: [{ name: "name", expand: true }], measures: ["Measure1", "Measure2"]});
+        var result = builder.process(data, { columns: [{ name: "name", expand: true }], measures: [{ name: "Measure1" }, { name: "Measure2" }]});
 
         equal(result.axes.columns.tuples.length, 6);
 
@@ -414,7 +414,7 @@
             { name: "name2", lastName: "lastName2" },
             { name: "name1", lastName: "lastName3" }
         ];
-        var result = builder.process(data, { columns: [{ name: "name" }], rows: [{ name: "lastName" }], measures: ["Measure1", "Measure2"]});
+        var result = builder.process(data, { columns: [{ name: "name" }], rows: [{ name: "lastName" }], measures: [{ name: "Measure1" }, { name: "Measure2" }]});
 
         equal(result.axes.columns.tuples.length, 2);
         equal(result.axes.rows.tuples.length, 1);
@@ -432,7 +432,7 @@
 
         var result = builder.process(data, {
             columns: [{ name: "name" }],
-            measures: ["Measure1", "Measure2"] });
+            measures: [{ name: "Measure1" }, { name: "Measure2" }] });
 
         equal(result.data.length, 2);
     });
@@ -449,7 +449,7 @@
 
         var result = builder.process(data, {
             columns: [{ name: "name", expand: true }],
-            measures: ["Measure1", "Measure2"] });
+            measures: [{ name: "Measure1" }, { name: "Measure2" }] });
 
         equal(result.data.length, 6);
     });
@@ -467,7 +467,7 @@
         var result = builder.process(data, {
             columns: [{ name: "name", expand: true }],
             rows: [{ name: "lastName", expand: true }],
-            measures: ["Measure1", "Measure2"] });
+            measures: [{ name: "Measure1" }, { name: "Measure2" }] });
 
         equal(result.data.length, 16);
     });
@@ -482,7 +482,7 @@
 
         var data = [{ name: "name1", lastName: "LastName1" }, { name: "name2", lastName: "LastName1" }, { name: "name1", lastName: "LastName2" } ];
 
-        var result = builder.process(data, { columns: [{ name: "name", expand: false }], rows: [{ name: "lastName", expand: false }], measures: ["Measure1", "Measure2"] });
+        var result = builder.process(data, { columns: [{ name: "name", expand: false }], rows: [{ name: "lastName", expand: false }], measures: [{ name: "Measure1" }, { name: "Measure2" }] });
 
         equal(result.data[0].value, 3);
         equal(result.data[0].fmtValue, "foo3");
@@ -500,7 +500,7 @@
 
         var data = [{ name: "name1", lastName: "LastName1" }, { name: "name2", lastName: "LastName1" }, { name: "name1", lastName: "LastName2" } ];
 
-        var result = builder.process(data, { columns: [{ name: "name", expand: false }], rows: [{ name: "lastName", expand: false }], measures: ["Measure1", "Measure2"] });
+        var result = builder.process(data, { columns: [{ name: "name", expand: false }], rows: [{ name: "lastName", expand: false }], measures: [{ name: "Measure1" }, { name: "Measure2" }] });
 
         equal(result.data[0].value, 3);
         equal(result.data[0].fmtValue, 3);
@@ -521,7 +521,7 @@
             { name: "name2", lastName: "lastName2" },
             { name: "name1", lastName: "lastName3" }
         ];
-        var result = builder.process(data, { columns: [{ name: "lastName" }], measures: ["Measure1", "Measure2"], rows: [{ name: "name" }], measuresAxis: "rows" });
+        var result = builder.process(data, { columns: [{ name: "lastName" }], measures: [{ name: "Measure1" }, { name: "Measure2" }], rows: [{ name: "name" }], measuresAxis: "rows" });
 
         equal(result.axes.rows.tuples.length, 2);
     });
@@ -539,7 +539,7 @@
             { name: "name2", lastName: "lastName2" },
             { name: "name1", lastName: "lastName3" }
         ];
-        var result = builder.process(data, { columns: [{ name: "lastName" }], rows: [{ name: "name" }], measures: ["Measure1", "Measure2"], measuresAxis: "rows"});
+        var result = builder.process(data, { columns: [{ name: "lastName" }], rows: [{ name: "name" }], measures: [{ name: "Measure1" }, { name: "Measure2" }], measuresAxis: "rows"});
 
         equal(result.axes.rows.tuples[0].members.length, 2);
         equal(result.axes.rows.tuples[0].members[1].caption, "Measure 1");
@@ -560,7 +560,7 @@
             { name: "name2", lastName: "lastName2" },
             { name: "name1", lastName: "lastName3" }
         ];
-        var result = builder.process(data, { columns: [{ name: "lastName" }], rows: [{ name: "name", expand: true }], measuresAxis: "rows", measures: ["Measure1", "Measure2"]});
+        var result = builder.process(data, { columns: [{ name: "lastName" }], rows: [{ name: "name", expand: true }], measuresAxis: "rows", measures: [{ name: "Measure1" }, { name: "Measure2" }]});
 
         equal(result.axes.rows.tuples.length, 6);
 
@@ -592,7 +592,7 @@
             { name: "name2", lastName: "lastName2" },
             { name: "name1", lastName: "lastName3" }
         ];
-        var result = builder.process(data, { rows: [{ name: "name" }], columns: [{ name: "lastName" }], measuresAxis: "rows",  measures: ["Measure1", "Measure2"]});
+        var result = builder.process(data, { rows: [{ name: "name" }], columns: [{ name: "lastName" }], measuresAxis: "rows",  measures: [{ name: "Measure1" }, { name: "Measure2" }]});
 
         equal(result.axes.rows.tuples.length, 2);
         equal(result.axes.columns.tuples.length, 1);
@@ -612,7 +612,7 @@
             { name: "name1", lastName: "lastName3", value: 1 }
         ];
 
-        var result = builder.process(data, { rows: [{ name: "name" }], columns: [{ name: "lastName" }], measuresAxis: "rows",  measures: ["Count", "Sum"]});
+        var result = builder.process(data, { rows: [{ name: "name" }], columns: [{ name: "lastName" }], measuresAxis: "rows",  measures: [{ name: "Count" }, { name: "Sum" }]});
 
         equal(result.data.length, 2);
         equal(result.data[0].value, 3);
@@ -635,7 +635,7 @@
             { name: "name1", lastName: "lastName3", value: 1 }
         ];
 
-        var result = builder.process(data, { rows: [{ name: "name" }], columns: [{ name: "lastName", expand: true }], measuresAxis: "rows",  measures: ["Count", "Sum"]});
+        var result = builder.process(data, { rows: [{ name: "name" }], columns: [{ name: "lastName", expand: true }], measuresAxis: "rows",  measures: [{ name: "Count" }, { name: "Sum" }]});
 
         equal(result.data.length, 8);
         equal(result.data[0].value, 3);
@@ -670,7 +670,7 @@
             { name: "name1", lastName: "lastName3", value: 1 }
         ];
 
-        var result = builder.process(data, { rows: [{ name: "name", expand: true }], columns: [{ name: "lastName" }], measuresAxis: "rows",  measures: ["Count", "Sum"]});
+        var result = builder.process(data, { rows: [{ name: "name", expand: true }], columns: [{ name: "lastName" }], measuresAxis: "rows", measures: [{ name: "Count" }, { name: "Sum" }]});
 
         equal(result.data.length, 6);
         equal(result.data[0].value, 3);
@@ -701,7 +701,7 @@
             { name: "name1", lastName: "lastName3", value: 1 }
         ];
 
-        var result = builder.process(data, { rows: [{ name: "name", expand: true }], columns: [{ name: "lastName", expand: true }], measuresAxis: "rows",  measures: ["Count", "Sum"]});
+        var result = builder.process(data, { rows: [{ name: "name", expand: true }], columns: [{ name: "lastName", expand: true }], measuresAxis: "rows", measures: [{ name: "Count" }, { name: "Sum" }]});
 
         equal(result.data.length, 23);
 
@@ -757,7 +757,7 @@
             ]
         });
         var data = [{ name: "name1" }, { name: "name2" }, { name: "name1" } ];
-        var result = builder.process(data, { columns: [], rows: [], measures: ["Count"] });
+        var result = builder.process(data, { columns: [], rows: [], measures: [{ name: "Count" }] });
 
         ok(result.axes.columns);
         equal(result.data.length, 1);
@@ -771,7 +771,7 @@
             ]
         });
         var data = [{ name: "name1" }, { name: "name2" }, { name: "name1" } ];
-        var result = builder.process(data, { columns: [], rows: [], measures: ["Count", "Sum"] });
+        var result = builder.process(data, { columns: [], rows: [], measures: [{ name: "Count" }, { name: "Sum" }] });
 
         equal(result.axes.columns.tuples.length, 2);
         equal(result.axes.columns.tuples[0].members.length, 1, "members count");
@@ -786,7 +786,7 @@
             ]
         });
         var data = [{ name: "name1" }, { name: "name2" }, { name: "name1" } ];
-        var result = builder.process(data, { columns: [], rows: [{ name: "name" }], measures: ["Count"] });
+        var result = builder.process(data, { columns: [], rows: [{ name: "name" }], measures: [{ name: "Count" }] });
 
         ok(result.axes.columns.tuples.length);
         ok(result.axes.rows.tuples.length);

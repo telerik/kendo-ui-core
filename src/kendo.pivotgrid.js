@@ -309,7 +309,7 @@ var __meta__ = {
         init: function(options) {
             this.options = extend({}, this.options, options);
             this.dimensions = this._normalizeDescriptors("field", this.options.dimensions);
-            this.measures = this._normalizeDescriptors("name", this.options.measures); //TODO: normalize measures like in XMLA (normalizeMeasures)
+            this.measures = this._normalizeDescriptors("name", this.options.measures);
         },
 
         _normalizeDescriptors: function(keyField, descriptors) {
@@ -369,7 +369,7 @@ var __meta__ = {
                         root.members[root.members.length] = {
                             children: [],
                             caption: (measureAggregators[measureIdx]).caption,
-                            name: measureAggregators[measureIdx].name,
+                            name: measureAggregators[measureIdx].descriptor.name,
                             levelName: "MEASURES",
                             levelNum: "0",
                             hasChildren: false,
@@ -416,7 +416,7 @@ var __meta__ = {
                         tuple.members[tuple.members.length] = {
                             children: [],
                             caption: measureAggregators[measureIdx].caption,
-                            name: measureAggregators[measureIdx].name,
+                            name: measureAggregators[measureIdx].descriptor.name,
                             levelName: "MEASURES",
                             levelNum: "0",
                             hasChildren: true,
@@ -434,13 +434,19 @@ var __meta__ = {
 
         _toDataArray: function(map, rowStartOffset, measures, offset, addFunc) {
             var formats = {};
+            var descriptors, measure, name;
 
-            if (measures && measures.length) {
-                var descriptors = (this.measures || {});
-                for (var idx = 0; idx < measures.length; idx++) {
-                    var measure = descriptors[measures[idx]]; //TODO: update measure usage here to measures[idx].name
+            var idx = 0;
+            var length = measures && measures.length;
+
+            if (length) {
+                descriptors = (this.measures || {});
+                for (; idx < length; idx++) {
+                    name = measures[idx].name;
+                    measure = descriptors[name];
+
                     if (measure.format) {
-                        formats[measures[idx]] = measure.format;
+                        formats[name] = measure.format;
                     }
                 }
             }
@@ -501,7 +507,7 @@ var __meta__ = {
             var name;
 
             for (var measureIdx = 0; measureIdx < measureAggregators.length; measureIdx++) {
-                name = measureAggregators[measureIdx].name;
+                name = measureAggregators[measureIdx].descriptor.name;
                 state = totalItem.aggregates[name] || 0;
                 result[name] = measureAggregators[measureIdx].aggregator(dataItem, state);
             }
@@ -566,11 +572,11 @@ var __meta__ = {
             if (measureDescriptors.length) {
                 for (idx = 0, length = measureDescriptors.length; idx < length; idx++) {
                     descriptor = measureDescriptors[idx];
-                    measure = measures[descriptor]; //TODO: here measure should have name too
+                    measure = measures[descriptor.name];
 
                     if (measure) {
                         aggregators.push({
-                            name: descriptor,
+                            descriptor: descriptor,
                             caption: measure.caption,
                             aggregator: createAggregateGetter(measure)
                         });
@@ -578,7 +584,7 @@ var __meta__ = {
                 }
             } else {
                 aggregators.push({
-                    name: "default",
+                    descriptor: { name: "default"},
                     caption: "default",
                     aggregator: function() { return 1; }
                 });
@@ -614,7 +620,7 @@ var __meta__ = {
             data = data || [];
             options = options || {};
 
-            var measures = options.measures || []; //TODO: normalize measures here!
+            var measures = options.measures || [];
 
             var measuresRowAxis = options.measuresAxis === "rows";
 
@@ -632,7 +638,7 @@ var __meta__ = {
             }
 
             if (!columnDescriptors.length && measures.length) {
-                columnDescriptors = normalizeMembers(options.measures); //TODO normalize measures here
+                columnDescriptors = normalizeMembers(options.measures);
             }
 
             var aggregatedData = {};
@@ -1167,7 +1173,7 @@ var __meta__ = {
                 caption = member.caption || name;
 
                 if (buildRoot) {
-                    caption = "All"; //TODO: find a way to get proper caption ???
+                    caption = "All";
                     if (levelNum === 0) {
                         parentName = member.name;
                     } else {
@@ -1378,7 +1384,6 @@ var __meta__ = {
             }
         },
 
-        //TODO: optimize as splice is slow
         _normalizeTuples: function(tuples, source, measures) {
             var length = measures.length || 1;
             var idx = 0;
@@ -1402,7 +1407,6 @@ var __meta__ = {
                 idx = length;
             }
 
-            //TODO: find better way to detect missing tuples to avoid unnecessary loops
             if (measures.length) {
                 last = tuple = tuples[idx];
                 memberIdx = tuple.members.length - 1;
