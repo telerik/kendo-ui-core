@@ -58,7 +58,7 @@ public class IndexController {
             task.setExpanded((boolean)model.get("expanded"));
             task.setParentId((Integer)model.get("parentId"));
             task.setOrderId((int)model.get("orderId"));
-            task.setPercentComplete((double)model.get("percentComplete"));
+            task.setPercentComplete(Double.parseDouble(model.get("percentComplete").toString()));
             
             newTasks.add(task);
         }
@@ -87,7 +87,7 @@ public class IndexController {
             task.setExpanded((boolean)model.get("expanded"));
             task.setParentId((Integer)model.get("parentId"));
             task.setOrderId((int)model.get("orderId"));
-            task.setPercentComplete((double)model.get("percentComplete"));
+            task.setPercentComplete(Double.parseDouble(model.get("percentComplete").toString()));
             
             updatedTasks.add(task);
         }

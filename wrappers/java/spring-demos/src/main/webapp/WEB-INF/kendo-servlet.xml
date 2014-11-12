@@ -60,6 +60,8 @@
 				<beans:value>com.kendoui.spring.models.Task</beans:value>
 				<beans:value>com.kendoui.spring.models.GanttTask</beans:value>
 				<beans:value>com.kendoui.spring.models.GanttDependency</beans:value>
+                <beans:value>com.kendoui.spring.models.GanttResource</beans:value>
+				<beans:value>com.kendoui.spring.models.GanttAssignment</beans:value>
 				<beans:value>com.kendoui.spring.models.Meeting</beans:value>
 				<beans:value>com.kendoui.spring.models.MeetingAttendee</beans:value>
 				<beans:value>com.kendoui.spring.models.Order</beans:value>
