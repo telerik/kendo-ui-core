@@ -104,6 +104,7 @@ var __meta__ = {
         columnsTable: "k-gantt-columns",
         tasksTable: "k-gantt-tasks",
         resource: "k-resource",
+        resourceAlt: "k-resource k-resource-alt",
         task: "k-task",
         taskSingle: "k-task-single",
         taskMilestone: "k-task-milestone",
@@ -321,8 +322,12 @@ var __meta__ = {
             var task;
             var styles = GanttView.styles;
             var coordinates = this._taskCoordinates = {};
-            var milestoneWidth = Math.round(this._calculateMilestoneWidth());
+            var size = this._calculateMilestoneWidth();
+            var milestoneWidth = Math.round(size.width);
             var resourcesField = this.options.resourcesField;
+            var className = [styles.resource, styles.resourceAlt];
+            var resourcesPosition;
+            var resourcesMargin = this._calculateResourcesMargin();
 
             var addCoordinates = function(rowIndex) {
                 var taskLeft;
@@ -353,12 +358,14 @@ var __meta__ = {
                 cell = kendoDomElement("td", null, [this._renderTask(tasks[i], position)]);
 
                 if (task[resourcesField] && task[resourcesField].length) {
+                    resourcesPosition = Math.max((position.width || size.clientWidth), 0) + position.left;
+
                     cell.children.push(kendoDomElement("div",
                         {
                             className: styles.resourcesWrap,
-                            style: { left: (Math.max((position.width - 2), 0) + position.left) + "px" }
+                            style: { left: resourcesPosition + "px", width: (this._tableWidth - (resourcesPosition + resourcesMargin)) + "px" }
                         },
-                        this._renderResources(task[resourcesField])));
+                        this._renderResources(task[resourcesField], className[i % 2])));
                 }
 
                 row.children.push(cell);
@@ -416,17 +423,33 @@ var __meta__ = {
         },
 
         _calculateMilestoneWidth: function() {
-            var milestoneWidth;
+            var size;
             var className = GanttView.styles.task + " " + GanttView.styles.taskMilestone;
             var milestone = $("<div class='" + className + "' style='visibility: hidden; position: absolute'>");
 
             this.content.append(milestone);
 
-            milestoneWidth = milestone[0].getBoundingClientRect().width;
+            size = {
+                "width": milestone[0].getBoundingClientRect().width,
+                "clientWidth": milestone[0].clientWidth
+            };
 
             milestone.remove();
 
-            return milestoneWidth;
+            return size;
+        },
+
+        _calculateResourcesMargin: function() {
+            var margin;
+            var wrapper = $("<div class='" + GanttView.styles.resourcesWrap + "' style='visibility: hidden; position: absolute'>");
+
+            this.content.append(wrapper);
+
+            margin = parseInt(wrapper.css("margin-left"), 10);
+
+            wrapper.remove();
+
+            return margin;
         },
 
         _renderTask: function(task, position) {
@@ -515,15 +538,14 @@ var __meta__ = {
             return element;
         },
 
-        _renderResources: function(resources) {
-            var styles = GanttView.styles;
+        _renderResources: function(resources, className) {
             var children = [];
             var resource;
 
             for (var i = 0, length = resources.length; i < length; i++) {
                 resource = resources[i];
                 children.push(kendoDomElement("span", {
-                    className: styles.resource,
+                    className: className,
                     style: {
                         "color": resource.get("color")
                     }
