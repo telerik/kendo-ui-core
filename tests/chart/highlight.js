@@ -1,266 +1,89 @@
 (function() {
-    return;
 
     var dataviz = kendo.dataviz,
-        highlight,
-        viewMock,
-        element,
-        ownerGroup,
-        viewElement,
-        RED = "rgb(255,0,0)",
-        GREEN = "rgb(0,255,0)",
-        BLUE = "rgb(0,0,255)";
-
-    function uniqueId() {
-        uniqueId.id = uniqueId.id || 0;
-        return uniqueId.id++;
-    }
+        highlight;
 
     function createHighlight() {
-        viewMock = {
-            renderElement: function(element) {
-                return $("<div class='" + element.type + "'>" +
-                         element.children + "</div>")[0];
-            }
-        };
-
-        viewElement = $("<div id='viewelement'></div>");
-        QUnit.fixture.append(viewElement);
-
-        highlight = new dataviz.Highlight(viewMock, viewElement[0]);
-
-        ownerGroup = $("<div id='ownergroup'></div>");
-        QUnit.fixture.append(ownerGroup);
+        highlight = new dataviz.Highlight();
     }
-
-    function destroyHighlight() {
-        QUnit.fixture.empty();
-    }
-
-    var elementStub = {
-        highlightOverlay: function() {
-            return { type: "overlay", children: "" };
-        },
-        owner: {
-            id: "ownergroup"
-        },
-        toggleHighlight: function () {}
-    };
 
     (function() {
 
-        module("Highlight / Overlay", {
-            setup: createHighlight,
-            teardown: destroyHighlight
+        module("Highlight", {
+            setup: createHighlight
         });
 
-        test("Retrieves overlay element", 1, function() {
+        test("show toggles highlight", 1, function() {
             highlight.show({
-                highlightOverlay: function() {
-                    ok(true);
+                toggleHighlight: function(visible) {
+                    equal(visible, true);
                 }
             });
         });
 
-        test("Does not retrieve overlay element when highlight is disabled", 0, function() {
-            highlight.show({
-                options: {
-                    highlight: {
-                        visible: false
-                    }
-                },
-                highlightOverlay: function() {
-                    ok(false);
-                }
-            });
-        });
-
-        test("Renders overlay element", function() {
+        test("hide toggles highlight on currently highlighted elements", function() {
+            var elementStub = {
+                toggleHighlight: function () {}
+            };
             highlight.show(elementStub);
-            equal($(".overlay").length, 1);
-        });
-
-        test("Appends overlay element to owner group", function() {
-            highlight.show(elementStub);
-            ok(ownerGroup.children().last().is(".overlay"));
-        });
-
-        test("Appends overlay element to view element if owner group is not found", function() {
-            ownerGroup.remove();
-            highlight.show(elementStub);
-            ok(viewElement.children().last().is(".overlay"));
-        });
-
-        test("Does not render overlay if no overlay element exists", function() {
-            highlight.show({ highlightOverlay: function() { } });
-            equal($(".overlay").length, 0);
-        });
-
-        test("Removes overlay element", function() {
-            highlight.show(elementStub);
+            elementStub.toggleHighlight = function(visible) {
+                equal(visible, false);
+            };
             highlight.hide();
-            equal($(".overlay").length, 0);
         });
 
-        // ------------------------------------------------------------
-        module("Highlight / Overlay / isOverlay", {
-            setup: createHighlight,
-            teardown: destroyHighlight
+        test("Does not toggle highlight if element does not have toggleHighlight method", function() {
+            highlight.show({ });
+            ok(true);
         });
 
-        test("returns true for overlay element", function() {
+        test("isHighlighted returns true if element is highlighted", function() {
+            var elementStub = {
+                toggleHighlight: function () {}
+            };
             highlight.show(elementStub);
-            ok(highlight.isOverlay($(".overlay")[0]));
+            equal(highlight.isHighlighted(elementStub), true);
         });
 
-        test("returns true for overlay child elements", function() {
+        test("isHighlighted returns false if element is not highlighted", function() {
             highlight.show({
-                highlightOverlay: function() {
-                    return { children: "<div class='child'></div>" };
-                }
+                toggleHighlight: $.noop
             });
 
-            ok(highlight.isOverlay($(".child")[0]));
+            equal(highlight.isHighlighted({}), false);
         });
-
-        test("returns false for other elements", function() {
-            highlight.show(elementStub);
-            ok(!highlight.isOverlay(document.body));
-        });
-
         // ------------------------------------------------------------
-        module("Highlight / Overlay / Multiple points", {
-            setup: createHighlight,
-            teardown: destroyHighlight
+        module("Highlight / Multiple points", {
+            setup: createHighlight
         });
 
-        test("Retrieves overlay elements", 2, function() {
+        test("show toggles highlight", 2, function() {
             highlight.show([{
-                highlightOverlay: function() {
-                    ok(true);
+                toggleHighlight: function(visible) {
+                    equal(visible, true);
                 }
             }, {
-                highlightOverlay: function() {
-                    ok(true);
+                toggleHighlight: function(visible) {
+                    equal(visible, true);
                 }
             }]);
         });
 
-        test("Renders overlay elements", function() {
+        test("hide toggles highlight on currently highlighted elements", 2, function() {
+            var elementStub = {
+                toggleHighlight: function () {}
+            };
             highlight.show([elementStub, elementStub]);
-            equal($(".overlay").length, 2);
-        });
-
-        test("Appends overlay elements to owner group", function() {
-            highlight.show([elementStub, elementStub]);
-
-            equal(ownerGroup.find(".overlay").length, 2);
-        });
-
-        test("Appends overlay elements to view element if owner group is not found", function() {
-            ownerGroup.remove();
-            highlight.show([elementStub, elementStub]);
-
-            equal(viewElement.find(".overlay").length, 2);
-        });
-
-        test("Removes overlay elements", function() {
-            highlight.show([elementStub, elementStub]);
+            elementStub.toggleHighlight = function(visible) {
+                equal(visible, false);
+            };
             highlight.hide();
-            equal($(".overlay").length, 0);
         });
 
+        test("Does not toggle highlight if element does not have toggleHighlight method", function() {
+            highlight.show([{}, {}]);
+            ok(true);
+        });
     })();
 
-    (function() {
-
-        module("Highlight / Toggle", {
-            setup: function() {
-                createHighlight();
-            },
-            teardown: function() {
-                QUnit.fixture.empty();
-            }
-        });
-
-        test("Calls toggleHighlight on show", 1, function() {
-            highlight.show({
-                toggleHighlight: function(view) {
-                    ok(true);
-                }
-            });
-        });
-
-        test("Does not call toggleHighlight on show (highlight disabled)", 0, function() {
-            highlight.show({
-                options: {
-                    highlight: {
-                        visible: false
-                    }
-                },
-                toggleHighlight: function() {
-                    ok(false);
-                }
-            });
-        });
-
-        test("Calls toggleHighlight on hide", 2, function() {
-            highlight.show({
-                toggleHighlight: function(view) {
-                    ok(true);
-                }
-            });
-            highlight.hide();
-        });
-
-        test("Does not call toggleHighlight on hide (highlight disabled)", 0, function() {
-            highlight.show({
-                options: {
-                    highlight: {
-                        visible: false
-                    }
-                },
-                toggleHighlight: function() {
-                    ok(false);
-                }
-            });
-            highlight.hide();
-        });
-
-        // ------------------------------------------------------------
-        module("Highlight / Toggle / Multiple points", {
-            setup: function() {
-                createHighlight();
-            },
-            teardown: function() {
-                QUnit.fixture.empty();
-            }
-        });
-
-        test("Calls toggleHighlight on show", 2, function() {
-            highlight.show([{
-                toggleHighlight: function(view) {
-                    ok(true);
-                }
-            }, {
-                toggleHighlight: function(view) {
-                    ok(true);
-                }
-            }]);
-        });
-
-        test("Calls toggleHighlight on hide", 4, function() {
-            highlight.show([{
-                toggleHighlight: function(view) {
-                    ok(true);
-                }
-            }, {
-                toggleHighlight: function(view) {
-                    ok(true);
-                }
-            }]);
-            highlight.hide();
-        });
-
-    })();
 })();
