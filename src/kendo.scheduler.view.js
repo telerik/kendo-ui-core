@@ -673,6 +673,7 @@ var __meta__ = {
             var right;
             var startSlot = this.start;
             var endSlot = this.end;
+            var isRtl = kendo.support.isRtl(startSlot.element);
 
             if (typeof start != "number") {
                 start = kendo.date.toUtcTime(start);
@@ -685,8 +686,13 @@ var __meta__ = {
             if (snap) {
                 top = startSlot.offsetTop;
                 bottom = endSlot.offsetTop + endSlot[property + "Height"];
-                left = startSlot.offsetLeft;
-                right = endSlot.offsetLeft + endSlot[property + "Width"];
+                if(isRtl) {
+                    left = endSlot.offsetLeft;
+                    right = startSlot.offsetLeft + startSlot[property + "Width"];
+                } else {
+                    left = startSlot.offsetLeft;
+                    right = endSlot.offsetLeft + endSlot[property + "Width"];
+                }
             } else {
                 var startOffset = start - startSlot.start;
 
@@ -708,8 +714,13 @@ var __meta__ = {
 
                 bottom = endSlot.offsetTop + endSlot[property + "Height"] - endSlot[property + "Height"] * endOffset / endSlotDuration;
 
-                left = Math.round(startSlot.offsetLeft + startSlot[property + "Width"] * startOffset / startSlotDuration);
-                right = Math.round(endSlot.offsetLeft + endSlot[property + "Width"] - endSlot[property + "Width"] * endOffset / endSlotDuration);
+                if(isRtl) {
+                    left = Math.round(endSlot.offsetLeft + endSlot[property + "Width"]* endOffset / endSlotDuration);
+                    right = Math.round(startSlot.offsetLeft + startSlot[property + "Width"] - startSlot[property + "Width"] * startOffset / startSlotDuration);
+                } else {
+                    left = Math.round(startSlot.offsetLeft + startSlot[property + "Width"] * startOffset / startSlotDuration);
+                    right = Math.round(endSlot.offsetLeft + endSlot[property + "Width"] - endSlot[property + "Width"] * endOffset / endSlotDuration);
+                }
             }
 
             return {
@@ -932,8 +943,13 @@ var __meta__ = {
 
             if (this.isHorizontal) {
                 //need update
+                var isRtl = kendo.support.isRtl(this.element);
                 difference =  x - offset.left;
                 time = Math.floor(duration * ( difference / this.offsetWidth));
+
+                if (isRtl) {
+                    return this.start + duration - time;
+                }
             } else {
                 difference = y - offset.top;
                 time = Math.floor(duration * ( difference / this.offsetHeight));
@@ -953,11 +969,15 @@ var __meta__ = {
             var difference;
             var time;
 
-
             if (this.isHorizontal) {
                 //need update
+                var isRtl = kendo.support.isRtl(this.element);
                 difference = x - offset.left;
                 time = Math.floor(duration * ( difference / this.offsetWidth));
+
+                if (isRtl) {
+                    return this.start + duration - time;
+                }
             } else {
                 difference = y - offset.top;
                 time = Math.floor(duration * ( difference / this.offsetHeight));

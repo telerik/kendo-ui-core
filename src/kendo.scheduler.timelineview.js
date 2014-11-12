@@ -245,19 +245,31 @@ var __meta__ = {
 
        _slotByPosition: function(x, y) {
            var slot;
-           var offset;
+           var content = this.content;
+           var offset = content.offset();
            var group;
            var groupIndex;
-
-           offset = this.content.offset();
 
            x -= offset.left;
            y -= offset.top;
 
-           //if (!this._isVerticallyGrouped()) {
-           y += this.content[0].scrollTop;
-           x += this.content[0].scrollLeft;
-           //}
+           if (this._isRtl) {
+               var browser = kendo.support.browser;
+
+               if (browser.mozilla) {
+                    x += (content[0].scrollWidth - content[0].offsetWidth);
+                    x += content[0].scrollLeft;
+               } else if (browser.msie) {
+                    x -= content.scrollLeft();
+                    x += content[0].scrollWidth - this.content[0].offsetWidth;
+               } else if (browser.webkit) {
+                    x += content[0].scrollLeft;
+               }
+           } else {
+               x += content[0].scrollLeft;
+           }
+
+           y += content[0].scrollTop;
 
            x = Math.ceil(x);
            y = Math.ceil(y);
@@ -831,6 +843,7 @@ var __meta__ = {
 
         _positionEvent: function(eventObject) {
             var eventHeight = this.options.eventHeight + 2;
+
             var rect = eventObject.slotRange.innerRect(eventObject.start, eventObject.end, false);
 
             rect.top = eventObject.slotRange.start.offsetTop;
@@ -840,9 +853,14 @@ var __meta__ = {
                 width = 0;
             }
 
+            var left = rect.left;
+            if (this._isRtl) {
+                left -= (this.content[0].scrollWidth - this.content[0].offsetWidth);
+            }
+
             eventObject.element.css({
                 top:  eventObject.slotRange.start.offsetTop + eventObject.rowIndex * (eventHeight + 2) + "px",
-                left: rect.left,
+                left: left,
                 width: width
             });
         },
@@ -1172,8 +1190,14 @@ var __meta__ = {
                    width = 0;
                 }
 
+                var left = rect.left;
+
+                if (this._isRtl) {
+                   left -= (this.content[0].scrollWidth - this.content[0].offsetWidth);
+                }
+
                 var css = {
-                    left: rect.left,
+                    left: left,
                     top: startSlot.offsetTop,
                     height: startSlot.offsetHeight - 2,
                     width: width
@@ -1205,8 +1229,15 @@ var __meta__ = {
                 var width = startRect.right - startRect.left;
                 var height = start.offsetHeight;
 
+                var left = startRect.left;
+
+                var content = this.content;
+                if (this._isRtl) {
+                    left -= (content[0].scrollWidth - content[0].offsetWidth);
+                }
+
                 var hint = SchedulerView.fn._createResizeHint.call(this,
-                    startRect.left,
+                    left,
                     startRect.top,
                     width,
                     height
@@ -1225,6 +1256,7 @@ var __meta__ = {
             this._resizeHint.first().addClass("k-first").find(".k-label-top").text(kendo.toString(kendo.timezone.toLocalDate(startTime), format));
 
             this._resizeHint.last().addClass("k-last").find(".k-label-bottom").text(kendo.toString(kendo.timezone.toLocalDate(endTime), format));
+
         },
 
         selectionByElement: function(cell) {
