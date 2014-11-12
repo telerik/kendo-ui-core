@@ -33,25 +33,10 @@ namespace Kendo.Mvc.UI
             Settings = new GanttColumnSettings();
         }
 
-        /// <summary>
-        /// Gets the member of the column.
-        /// </summary>
-        /// <value>The member.</value>
-        public string Member
-        {
-            get
-            {
-                return Settings.Member;
-            }
-            
-            set
-            {
-                Settings.Member = value;
-            }
-        }
-
         protected override void Serialize(IDictionary<string, object> json)
         {
+            json["field"] = Member;
+
             if (Title.HasValue())
             {
                 json["title"] = Title;
@@ -75,6 +60,23 @@ namespace Kendo.Mvc.UI
             if (Sortable.HasValue)
             {
                 json["sortable"] = Sortable;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the member of the column.
+        /// </summary>
+        /// <value>The member.</value>
+        public string Member
+        {
+            get
+            {
+                return Settings.Member;
+            }
+
+            set
+            {
+                Settings.Member = value;
             }
         }
 

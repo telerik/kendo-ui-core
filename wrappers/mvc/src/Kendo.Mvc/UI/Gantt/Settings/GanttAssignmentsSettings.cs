@@ -11,6 +11,7 @@ namespace Kendo.Mvc.UI
         public GanttAssignmentsSettings()
         {
             DataSource = new DataSource();
+            DataSource.Type = DataSourceType.Ajax;
             //>> Initialization
         
         //<< Initialization

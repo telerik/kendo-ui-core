@@ -6,12 +6,6 @@ namespace Kendo.Mvc.UI
 
     public interface IGanttBoundColumn : IGanttColumn
     {
-        string Member
-        {
-            get;
-            set;
-        }
-
         Type MemberType
         {
             get;

@@ -112,8 +112,6 @@
         {
             base.Serialize(json);
 
-            json["field"] = Member;
-
             SerializeValues(json);
         }
 

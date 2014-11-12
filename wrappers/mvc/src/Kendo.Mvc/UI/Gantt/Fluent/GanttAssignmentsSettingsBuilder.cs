@@ -9,7 +9,8 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent API for configuring the GanttAssignmentsSettings settings.
     /// </summary>
-    public class GanttAssignmentsSettingsBuilder: IHideObjectMembers
+    public class GanttAssignmentsSettingsBuilder<TAssingmentModel>: IHideObjectMembers
+        where TAssingmentModel : class
     {
         private readonly GanttAssignmentsSettings container;
         private readonly ViewContext viewContext;
@@ -29,9 +30,9 @@ namespace Kendo.Mvc.UI.Fluent
 		/// instance.If the dataSource option is set to a JavaScript object or array the widget will initialize a new kendo.data.DataSource instance using that value as data source configuration.If the dataSource option is an existing kendo.data.DataSource instance the widget will use that instance and will not initialize a new one.
         /// </summary>
         /// <param name="value">The value that configures the datasource.</param>
-        public GanttAssignmentsSettingsBuilder DataSource(Action<DataSourceBuilder<object>> configurator)
+        public GanttAssignmentsSettingsBuilder<TAssingmentModel> DataSource(Action<GanttAssignmentsDataSourceBuilder<TAssingmentModel>> configurator)
         {
-            configurator(new DataSourceBuilder<object>(container.DataSource, this.viewContext, this.urlGenerator));
+            configurator(new GanttAssignmentsDataSourceBuilder<TAssingmentModel>(container.DataSource, this.viewContext, this.urlGenerator));
 
             return this;
         }
@@ -40,7 +41,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// The field of the assignment data item which represents the resource id.
         /// </summary>
         /// <param name="value">The value that configures the dataresourceidfield.</param>
-        public GanttAssignmentsSettingsBuilder DataResourceIdField(string value)
+        public GanttAssignmentsSettingsBuilder<TAssingmentModel> DataResourceIdField(string value)
         {
             container.DataResourceIdField = value;
 
@@ -51,7 +52,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// The field of the assignment data item which represents the task id.
         /// </summary>
         /// <param name="value">The value that configures the datataskidfield.</param>
-        public GanttAssignmentsSettingsBuilder DataTaskIdField(string value)
+        public GanttAssignmentsSettingsBuilder<TAssingmentModel> DataTaskIdField(string value)
         {
             container.DataTaskIdField = value;
 
@@ -62,7 +63,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// The field of the assignment data item which represents the amount of the assigned resource.
         /// </summary>
         /// <param name="value">The value that configures the datavaluefield.</param>
-        public GanttAssignmentsSettingsBuilder DataValueField(string value)
+        public GanttAssignmentsSettingsBuilder<TAssingmentModel> DataValueField(string value)
         {
             container.DataValueField = value;
 
@@ -75,7 +76,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Binds the gantt assignments to a list of objects
         /// </summary>
         /// <param name="dataSource">The dataSource</param>
-        public GanttAssignmentsSettingsBuilder BindTo(IEnumerable dataSource)
+        public GanttAssignmentsSettingsBuilder<TAssingmentModel> BindTo(IEnumerable dataSource)
         {
             container.DataSource.Data = dataSource;
 

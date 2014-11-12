@@ -44,6 +44,18 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Defines a resource column.
+        /// </summary>
+        public virtual GanttResourceColumnBuilder<TTaskModel> Resources(string memberName)
+        {
+            var column = new GanttResourceColumn<TTaskModel>(memberName);
+
+            container.Columns.Add(column);
+
+            return new GanttResourceColumnBuilder<TTaskModel>(column);
+        }
+
+        /// <summary>
         /// Defines a bound column.
         /// </summary>
         public virtual GanttBoundColumnBuilder<TTaskModel, TDependenciesModel> Bound(Type memberType, string memberName)

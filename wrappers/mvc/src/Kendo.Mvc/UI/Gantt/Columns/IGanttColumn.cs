@@ -7,6 +7,12 @@ namespace Kendo.Mvc.UI
 
     public interface IGanttColumn
     {
+        string Member
+        {
+            get;
+            set;
+        }
+
         string Format
         {
             get;
