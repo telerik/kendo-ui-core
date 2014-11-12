@@ -1052,12 +1052,42 @@ var __meta__ = {
             }
         },
 
+        _tempNormalizeData: function(data, columns, rows) {
+            var cell, idx, length;
+            var axesLength = (columns || 1) * (rows || 1);
+            var result = new Array(axesLength);
+
+            if (data.length === axesLength) {
+                return data;
+            }
+
+            for (idx = 0, length = result.length; idx < length; idx++) {
+                result[idx] = { value: "", fmtValue: "", ordinal: idx };
+            }
+
+            for (idx = 0, length = data.length; idx < length; idx++) {
+               cell = data[idx];
+               if (cell) {
+                   result[cell.ordinal] = cell;
+               }
+            }
+
+            return result;
+        },
+
         _processResult: function(data, axes) {
             if (this.cubeBuilder) {
                 var processedData = this.cubeBuilder.process(data, this._requestData);
 
                 data = processedData.data;
                 axes = processedData.axes;
+
+                axes = {
+                    columns: normalizeAxis(axes.columns),
+                    rows: normalizeAxis(axes.rows)
+                };
+
+                data = this._tempNormalizeData(data, axes.columns.tuples.length, axes.rows.tuples.length);
             }
 
             var columnIndexes, rowIndexes;
