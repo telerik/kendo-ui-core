@@ -1413,6 +1413,8 @@ var __meta__ = {
                 that.selectable.destroy();
             }
 
+            that.selectable = null;
+
             if (that.resizable) {
                 that.resizable.destroy();
 
