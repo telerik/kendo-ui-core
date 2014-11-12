@@ -896,12 +896,12 @@ var __meta__ = {
         renderComplete: $.noop,
 
         toggleHighlight: function(show) {
-            if (!this.createHighlight) {
-                return;
-            }
-
             var highlight = this._highlight;
             var options = this.options.highlight;
+
+            if (!this.createHighlight || (options && options.visible === false)) {
+                return;
+            }
 
             if (!highlight) {
                 highlight = this._highlight = this.createHighlight({
@@ -919,9 +919,7 @@ var __meta__ = {
                 this.appendVisual(highlight);
             }
 
-            if (options && options.visible) {
-                highlight.visible(show);
-            }
+            highlight.visible(show);
         },
 
         createGradientOverlay: function(element, options, gradientOptions) {
