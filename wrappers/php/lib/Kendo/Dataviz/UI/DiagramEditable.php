@@ -50,6 +50,15 @@ class DiagramEditable extends \Kendo\SerializableObject {
     }
 
     /**
+    * Adds DiagramEditableTool to the DiagramEditable.
+    * @param \Kendo\Dataviz\UI\DiagramEditableTool|array,... $value one or more DiagramEditableTool to add.
+    * @return \Kendo\Dataviz\UI\DiagramEditable
+    */
+    public function addTool($value) {
+        return $this->add('tools', func_get_args());
+    }
+
+    /**
     * Specifies the shape resizing.
     * @param boolean|\Kendo\Dataviz\UI\DiagramEditableResize|array $value
     * @return \Kendo\Dataviz\UI\DiagramEditable

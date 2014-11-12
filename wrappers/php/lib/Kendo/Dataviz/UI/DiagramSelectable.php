@@ -14,6 +14,15 @@ class DiagramSelectable extends \Kendo\SerializableObject {
         return $this->setProperty('stroke', $value);
     }
 
+    /**
+    * The selectable key.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\DiagramSelectable
+    */
+    public function key($value) {
+        return $this->setProperty('key', $value);
+    }
+
 //<< Properties
 }
 

@@ -140,6 +140,15 @@ data source is fired. By default the widget will bind to the data source specifi
     }
 
     /**
+    * Defines the pannable options.
+    * @param boolean|\Kendo\Dataviz\UI\DiagramPannable|array $value
+    * @return \Kendo\Dataviz\UI\Diagram
+    */
+    public function pannable($value) {
+        return $this->setProperty('pannable', $value);
+    }
+
+    /**
     * Defines the shape options.
     * @param \Kendo\Dataviz\UI\DiagramShapeDefaults|array $value
     * @return \Kendo\Dataviz\UI\Diagram

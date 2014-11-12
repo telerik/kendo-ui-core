@@ -6,6 +6,33 @@ class DiagramConnection extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
+    * Defines the connection from.
+    * @param string|float|\Kendo\Dataviz\UI\DiagramConnectionFrom|array $value
+    * @return \Kendo\Dataviz\UI\DiagramConnection
+    */
+    public function from($value) {
+        return $this->setProperty('from', $value);
+    }
+
+    /**
+    * Defines the connection to.
+    * @param string|float|\Kendo\Dataviz\UI\DiagramConnectionTo|array $value
+    * @return \Kendo\Dataviz\UI\DiagramConnection
+    */
+    public function to($value) {
+        return $this->setProperty('to', $value);
+    }
+
+    /**
+    * Defines the shape editable options.
+    * @param boolean|\Kendo\Dataviz\UI\DiagramConnectionEditable|array $value
+    * @return \Kendo\Dataviz\UI\DiagramConnection
+    */
+    public function editable($value) {
+        return $this->setProperty('editable', $value);
+    }
+
+    /**
     * Defines the stroke configuration.
     * @param \Kendo\Dataviz\UI\DiagramConnectionStroke|array $value
     * @return \Kendo\Dataviz\UI\DiagramConnection

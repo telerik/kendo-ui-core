@@ -6,6 +6,15 @@ class DiagramConnectionDefaults extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
+    * Defines the shape editable options.
+    * @param boolean|\Kendo\Dataviz\UI\DiagramConnectionDefaultsEditable|array $value
+    * @return \Kendo\Dataviz\UI\DiagramConnectionDefaults
+    */
+    public function editable($value) {
+        return $this->setProperty('editable', $value);
+    }
+
+    /**
     * Defines the stroke configuration.
     * @param \Kendo\Dataviz\UI\DiagramConnectionDefaultsStroke|array $value
     * @return \Kendo\Dataviz\UI\DiagramConnectionDefaults
