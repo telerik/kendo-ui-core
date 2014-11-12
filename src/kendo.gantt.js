@@ -1197,6 +1197,7 @@ var __meta__ = {
 
         open: function() {
             this.window.center().open();
+            this.grid.resize(true);
         },
 
         close: function() {
@@ -1318,6 +1319,7 @@ var __meta__ = {
                         }
                     }
                 ],
+                height: 280,
                 sortable: true,
                 editable: true,
                 filterable: true,
