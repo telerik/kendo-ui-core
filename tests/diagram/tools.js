@@ -46,12 +46,12 @@
     });
 
     test("should create rotateAnticlockwise action with custom step", function () {
-        createToolBar({ tools: [{ type: "rotateAnticlockwise", step: 45 }] });
+        createToolBar({ tools: [{ name: "rotateAnticlockwise", step: 45 }] });
         equal(toolbar.element.find("a").data("step"), 45);
     });
 
     test("should create rotateClockwise action with custom step", function () {
-        createToolBar({ tools: [{ type: "rotateClockwise", step: 45 }] });
+        createToolBar({ tools: [{ name: "rotateClockwise", step: 45 }] });
         equal(toolbar.element.find("a").data("step"), 45);
     });
 })();
