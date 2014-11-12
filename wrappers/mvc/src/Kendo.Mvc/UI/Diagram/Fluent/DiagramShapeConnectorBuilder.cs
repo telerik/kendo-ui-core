@@ -8,7 +8,9 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent API for configuring the DiagramShapeConnector settings.
     /// </summary>
-    public class DiagramShapeConnectorBuilder: IHideObjectMembers
+    public class DiagramShapeConnectorBuilder<TShapeModel, TConnectionModel> : IHideObjectMembers
+        where TShapeModel : class
+        where TConnectionModel : class
     {
         private readonly DiagramShapeConnector container;
 
@@ -23,7 +25,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// The connector name. Predefined names include:
         /// </summary>
         /// <param name="value">The value that configures the name.</param>
-        public DiagramShapeConnectorBuilder Name(string value)
+        public DiagramShapeConnectorBuilder<TShapeModel,TConnectionModel> Name(string value)
         {
             container.Name = value;
 
@@ -34,7 +36,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// The connector description.
         /// </summary>
         /// <param name="value">The value that configures the description.</param>
-        public DiagramShapeConnectorBuilder Description(string value)
+        public DiagramShapeConnectorBuilder<TShapeModel,TConnectionModel> Description(string value)
         {
             container.Description = value;
 
@@ -45,7 +47,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// The function that positions the connector.
         /// </summary>
         /// <param name="value">The value that configures the position.</param>
-        public DiagramShapeConnectorBuilder Position(string value)
+        public DiagramShapeConnectorBuilder<TShapeModel,TConnectionModel> Position(string value)
         {
             container.Position = value;
 

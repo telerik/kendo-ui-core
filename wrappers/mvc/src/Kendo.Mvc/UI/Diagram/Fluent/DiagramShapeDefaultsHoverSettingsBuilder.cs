@@ -8,7 +8,9 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent API for configuring the DiagramShapeDefaultsHoverSettings settings.
     /// </summary>
-    public class DiagramShapeDefaultsHoverSettingsBuilder: IHideObjectMembers
+    public class DiagramShapeDefaultsHoverSettingsBuilder<TShapeModel, TConnectionModel> : IHideObjectMembers
+        where TShapeModel : class
+        where TConnectionModel : class
     {
         private readonly DiagramShapeDefaultsHoverSettings container;
 
@@ -23,9 +25,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// Hover's fill options.
         /// </summary>
         /// <param name="configurator">The action that configures the fill.</param>
-        public DiagramShapeDefaultsHoverSettingsBuilder Fill(Action<DiagramShapeDefaultsHoverFillSettingsBuilder> configurator)
+        public DiagramShapeDefaultsHoverSettingsBuilder<TShapeModel,TConnectionModel> Fill(Action<DiagramShapeDefaultsHoverFillSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
         {
-            configurator(new DiagramShapeDefaultsHoverFillSettingsBuilder(container.Fill));
+            configurator(new DiagramShapeDefaultsHoverFillSettingsBuilder<TShapeModel,TConnectionModel>(container.Fill));
             return this;
         }
         

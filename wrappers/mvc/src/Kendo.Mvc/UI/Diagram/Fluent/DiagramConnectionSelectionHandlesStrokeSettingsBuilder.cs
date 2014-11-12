@@ -8,7 +8,9 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent API for configuring the DiagramConnectionSelectionHandlesStrokeSettings settings.
     /// </summary>
-    public class DiagramConnectionSelectionHandlesStrokeSettingsBuilder: IHideObjectMembers
+    public class DiagramConnectionSelectionHandlesStrokeSettingsBuilder<TShapeModel, TConnectionModel> : IHideObjectMembers
+        where TShapeModel : class
+        where TConnectionModel : class
     {
         private readonly DiagramConnectionSelectionHandlesStrokeSettings container;
 
@@ -23,7 +25,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Defines the handles stroke color.
         /// </summary>
         /// <param name="value">The value that configures the color.</param>
-        public DiagramConnectionSelectionHandlesStrokeSettingsBuilder Color(string value)
+        public DiagramConnectionSelectionHandlesStrokeSettingsBuilder<TShapeModel,TConnectionModel> Color(string value)
         {
             container.Color = value;
 

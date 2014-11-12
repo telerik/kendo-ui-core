@@ -8,7 +8,9 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent API for configuring the DiagramEditableSelectSettings settings.
     /// </summary>
-    public class DiagramEditableSelectSettingsBuilder: IHideObjectMembers
+    public class DiagramEditableSelectSettingsBuilder<TShapeModel, TConnectionModel> : IHideObjectMembers
+        where TShapeModel : class
+        where TConnectionModel : class
     {
         private readonly DiagramEditableSelectSettings container;
 
@@ -23,7 +25,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Set the thumb backgorund.
         /// </summary>
         /// <param name="value">The value that configures the background.</param>
-        public DiagramEditableSelectSettingsBuilder Background(string value)
+        public DiagramEditableSelectSettingsBuilder<TShapeModel, TConnectionModel> Background(string value)
         {
             container.Background = value;
 
@@ -34,9 +36,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// Specifies the select stroke styles.
         /// </summary>
         /// <param name="configurator">The action that configures the stroke.</param>
-        public DiagramEditableSelectSettingsBuilder Stroke(Action<DiagramEditableSelectStrokeSettingsBuilder> configurator)
+        public DiagramEditableSelectSettingsBuilder<TShapeModel, TConnectionModel> Stroke(Action<DiagramEditableSelectStrokeSettingsBuilder<TShapeModel, TConnectionModel>> configurator)
         {
-            configurator(new DiagramEditableSelectStrokeSettingsBuilder(container.Stroke));
+            configurator(new DiagramEditableSelectStrokeSettingsBuilder<TShapeModel, TConnectionModel>(container.Stroke));
             return this;
         }
         

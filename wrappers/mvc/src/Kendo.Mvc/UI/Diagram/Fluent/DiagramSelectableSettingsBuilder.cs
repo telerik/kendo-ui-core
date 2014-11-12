@@ -8,7 +8,9 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent API for configuring the DiagramSelectableSettings settings.
     /// </summary>
-    public class DiagramSelectableSettingsBuilder: IHideObjectMembers
+    public class DiagramSelectableSettingsBuilder<TShapeModel, TConnectionModel> : IHideObjectMembers
+        where TShapeModel : class
+        where TConnectionModel : class
     {
         private readonly DiagramSelectableSettings container;
 
@@ -23,9 +25,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// Defines the selection stroke configuration.
         /// </summary>
         /// <param name="configurator">The action that configures the stroke.</param>
-        public DiagramSelectableSettingsBuilder Stroke(Action<DiagramSelectableStrokeSettingsBuilder> configurator)
+        public DiagramSelectableSettingsBuilder<TShapeModel,TConnectionModel> Stroke(Action<DiagramSelectableStrokeSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
         {
-            configurator(new DiagramSelectableStrokeSettingsBuilder(container.Stroke));
+            configurator(new DiagramSelectableStrokeSettingsBuilder<TShapeModel,TConnectionModel>(container.Stroke));
             return this;
         }
         
@@ -33,7 +35,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// The selectable key.
         /// </summary>
         /// <param name="value">The value that configures the key.</param>
-        public DiagramSelectableSettingsBuilder Key(DiagramSelectableKey value)
+        public DiagramSelectableSettingsBuilder<TShapeModel,TConnectionModel> Key(DiagramSelectableKey value)
         {
             container.Key = value;
 

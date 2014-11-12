@@ -8,7 +8,9 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent API for configuring the DiagramConnectionDefaultsHoverStrokeSettings settings.
     /// </summary>
-    public class DiagramConnectionDefaultsHoverStrokeSettingsBuilder: IHideObjectMembers
+    public class DiagramConnectionDefaultsHoverStrokeSettingsBuilder<TShapeModel, TConnectionModel> : IHideObjectMembers
+        where TShapeModel : class
+        where TConnectionModel : class
     {
         private readonly DiagramConnectionDefaultsHoverStrokeSettings container;
 
@@ -23,7 +25,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Defines the highlight color when the pointer is hovering over the connection.
         /// </summary>
         /// <param name="value">The value that configures the color.</param>
-        public DiagramConnectionDefaultsHoverStrokeSettingsBuilder Color(string value)
+        public DiagramConnectionDefaultsHoverStrokeSettingsBuilder<TShapeModel,TConnectionModel> Color(string value)
         {
             container.Color = value;
 

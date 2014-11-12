@@ -8,7 +8,9 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent API for configuring the DiagramEditableResizeHandlesHoverSettings settings.
     /// </summary>
-    public class DiagramEditableResizeHandlesHoverSettingsBuilder: IHideObjectMembers
+    public class DiagramEditableResizeHandlesHoverSettingsBuilder<TShapeModel, TConnectionModel> : IHideObjectMembers
+        where TShapeModel : class
+        where TConnectionModel : class
     {
         private readonly DiagramEditableResizeHandlesHoverSettings container;
 
@@ -23,9 +25,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// Set the handles hover fill options.
         /// </summary>
         /// <param name="configurator">The action that configures the fill.</param>
-        public DiagramEditableResizeHandlesHoverSettingsBuilder Fill(Action<DiagramEditableResizeHandlesHoverFillSettingsBuilder> configurator)
+        public DiagramEditableResizeHandlesHoverSettingsBuilder<TShapeModel,TConnectionModel> Fill(Action<DiagramEditableResizeHandlesHoverFillSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
         {
-            configurator(new DiagramEditableResizeHandlesHoverFillSettingsBuilder(container.Fill));
+            configurator(new DiagramEditableResizeHandlesHoverFillSettingsBuilder<TShapeModel,TConnectionModel>(container.Fill));
             return this;
         }
         
@@ -33,9 +35,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// Specifies the handles stroke styles.
         /// </summary>
         /// <param name="configurator">The action that configures the stroke.</param>
-        public DiagramEditableResizeHandlesHoverSettingsBuilder Stroke(Action<DiagramEditableResizeHandlesHoverStrokeSettingsBuilder> configurator)
+        public DiagramEditableResizeHandlesHoverSettingsBuilder<TShapeModel,TConnectionModel> Stroke(Action<DiagramEditableResizeHandlesHoverStrokeSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
         {
-            configurator(new DiagramEditableResizeHandlesHoverStrokeSettingsBuilder(container.Stroke));
+            configurator(new DiagramEditableResizeHandlesHoverStrokeSettingsBuilder<TShapeModel,TConnectionModel>(container.Stroke));
             return this;
         }
         

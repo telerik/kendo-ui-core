@@ -8,7 +8,9 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent API for configuring the DiagramEditableResizeHandlesFillSettings settings.
     /// </summary>
-    public class DiagramEditableResizeHandlesFillSettingsBuilder: IHideObjectMembers
+    public class DiagramEditableResizeHandlesFillSettingsBuilder<TShapeModel, TConnectionModel> : IHideObjectMembers
+        where TShapeModel : class
+        where TConnectionModel : class
     {
         private readonly DiagramEditableResizeHandlesFillSettings container;
 
@@ -23,7 +25,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Specifies the handles fill color.
         /// </summary>
         /// <param name="value">The value that configures the color.</param>
-        public DiagramEditableResizeHandlesFillSettingsBuilder Color(string value)
+        public DiagramEditableResizeHandlesFillSettingsBuilder<TShapeModel,TConnectionModel> Color(string value)
         {
             container.Color = value;
 
@@ -34,7 +36,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Specifies the handles fill opacity.
         /// </summary>
         /// <param name="value">The value that configures the opacity.</param>
-        public DiagramEditableResizeHandlesFillSettingsBuilder Opacity(double value)
+        public DiagramEditableResizeHandlesFillSettingsBuilder<TShapeModel,TConnectionModel> Opacity(double value)
         {
             container.Opacity = value;
 

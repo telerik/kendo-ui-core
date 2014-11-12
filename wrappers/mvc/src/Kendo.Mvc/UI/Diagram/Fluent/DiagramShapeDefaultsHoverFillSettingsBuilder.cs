@@ -8,7 +8,9 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent API for configuring the DiagramShapeDefaultsHoverFillSettings settings.
     /// </summary>
-    public class DiagramShapeDefaultsHoverFillSettingsBuilder: IHideObjectMembers
+    public class DiagramShapeDefaultsHoverFillSettingsBuilder<TShapeModel, TConnectionModel> : IHideObjectMembers
+        where TShapeModel : class
+        where TConnectionModel : class
     {
         private readonly DiagramShapeDefaultsHoverFillSettings container;
 
@@ -23,7 +25,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Hover's fill color.
         /// </summary>
         /// <param name="value">The value that configures the color.</param>
-        public DiagramShapeDefaultsHoverFillSettingsBuilder Color(string value)
+        public DiagramShapeDefaultsHoverFillSettingsBuilder<TShapeModel,TConnectionModel> Color(string value)
         {
             container.Color = value;
 
@@ -34,7 +36,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Hover's fill opacity.
         /// </summary>
         /// <param name="value">The value that configures the opacity.</param>
-        public DiagramShapeDefaultsHoverFillSettingsBuilder Opacity(double value)
+        public DiagramShapeDefaultsHoverFillSettingsBuilder<TShapeModel,TConnectionModel> Opacity(double value)
         {
             container.Opacity = value;
 

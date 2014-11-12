@@ -8,7 +8,9 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent API for configuring the DiagramEditableSelectStrokeSettings settings.
     /// </summary>
-    public class DiagramEditableSelectStrokeSettingsBuilder: IHideObjectMembers
+    public class DiagramEditableSelectStrokeSettingsBuilder<TShapeModel, TConnectionModel> : IHideObjectMembers
+        where TShapeModel : class
+        where TConnectionModel : class
     {
         private readonly DiagramEditableSelectStrokeSettings container;
 
@@ -23,7 +25,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Specifies the select stroke color.
         /// </summary>
         /// <param name="value">The value that configures the color.</param>
-        public DiagramEditableSelectStrokeSettingsBuilder Color(string value)
+        public DiagramEditableSelectStrokeSettingsBuilder<TShapeModel, TConnectionModel> Color(string value)
         {
             container.Color = value;
 
@@ -34,7 +36,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Specifies the select stroke width.
         /// </summary>
         /// <param name="value">The value that configures the width.</param>
-        public DiagramEditableSelectStrokeSettingsBuilder Width(double value)
+        public DiagramEditableSelectStrokeSettingsBuilder<TShapeModel, TConnectionModel> Width(double value)
         {
             container.Width = value;
 
@@ -45,7 +47,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Specifies the select stroke dash type.
         /// </summary>
         /// <param name="value">The value that configures the dashtype.</param>
-        public DiagramEditableSelectStrokeSettingsBuilder DashType(string value)
+        public DiagramEditableSelectStrokeSettingsBuilder<TShapeModel, TConnectionModel> DashType(string value)
         {
             container.DashType = value;
 

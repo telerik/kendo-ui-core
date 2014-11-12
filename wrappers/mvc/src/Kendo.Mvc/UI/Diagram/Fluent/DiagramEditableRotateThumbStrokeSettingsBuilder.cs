@@ -8,7 +8,9 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent API for configuring the DiagramEditableRotateThumbStrokeSettings settings.
     /// </summary>
-    public class DiagramEditableRotateThumbStrokeSettingsBuilder: IHideObjectMembers
+    public class DiagramEditableRotateThumbStrokeSettingsBuilder<TShapeModel, TConnectionModel> : IHideObjectMembers
+        where TShapeModel : class
+        where TConnectionModel : class
     {
         private readonly DiagramEditableRotateThumbStrokeSettings container;
 
@@ -23,7 +25,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Specifies the thumb stroke color.
         /// </summary>
         /// <param name="value">The value that configures the color.</param>
-        public DiagramEditableRotateThumbStrokeSettingsBuilder Color(string value)
+        public DiagramEditableRotateThumbStrokeSettingsBuilder<TShapeModel,TConnectionModel> Color(string value)
         {
             container.Color = value;
 
@@ -34,7 +36,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Specifies the thumb stroke width.
         /// </summary>
         /// <param name="value">The value that configures the width.</param>
-        public DiagramEditableRotateThumbStrokeSettingsBuilder Width(double value)
+        public DiagramEditableRotateThumbStrokeSettingsBuilder<TShapeModel,TConnectionModel> Width(double value)
         {
             container.Width = value;
 
@@ -45,7 +47,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Specifies the thumb stroke dash type.
         /// </summary>
         /// <param name="value">The value that configures the dashtype.</param>
-        public DiagramEditableRotateThumbStrokeSettingsBuilder DashType(string value)
+        public DiagramEditableRotateThumbStrokeSettingsBuilder<TShapeModel,TConnectionModel> DashType(string value)
         {
             container.DashType = value;
 

@@ -8,7 +8,9 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent API for configuring the DiagramShape settings.
     /// </summary>
-    public class DiagramShapeBuilder: IHideObjectMembers
+    public class DiagramShapeBuilder<TShapeModel, TConnectionModel> : IHideObjectMembers
+        where TShapeModel : class
+        where TConnectionModel : class
     {
         private readonly DiagramShape container;
 
@@ -23,18 +25,19 @@ namespace Kendo.Mvc.UI.Fluent
         /// The unique identifier for a Shape.
         /// </summary>
         /// <param name="value">The value that configures the id.</param>
-        public DiagramShapeBuilder Id(string value)
+        public DiagramShapeBuilder<TShapeModel,TConnectionModel> Id(string value)
         {
             container.Id = value;
 
             return this;
         }
+        
 
         /// <summary>
         /// Defines the shape editable options.
         /// </summary>
         /// <param name="enabled">Enables or disables the editable option.</param>
-        public DiagramShapeBuilder Editable(bool enabled)
+        public DiagramShapeBuilder<TShapeModel,TConnectionModel> Editable(bool enabled)
         {
             container.Editable.Enabled = enabled;
             return this;
@@ -45,11 +48,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// Defines the shape editable options.
         /// </summary>
         /// <param name="configurator">The action that configures the editable.</param>
-        public DiagramShapeBuilder Editable(Action<DiagramShapeEditableSettingsBuilder> configurator)
+        public DiagramShapeBuilder<TShapeModel,TConnectionModel> Editable(Action<DiagramShapeEditableSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
         {
             container.Editable.Enabled = true;
             
-            configurator(new DiagramShapeEditableSettingsBuilder(container.Editable));
+            configurator(new DiagramShapeEditableSettingsBuilder<TShapeModel,TConnectionModel>(container.Editable));
             return this;
         }
         
@@ -57,7 +60,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// The path option of a Shape is a description of a custom geometry. The format follows the standard SVG format (http://www.w3.org/TR/SVG/paths.html#PathData "SVG Path data.").
         /// </summary>
         /// <param name="value">The value that configures the path.</param>
-        public DiagramShapeBuilder Path(string value)
+        public DiagramShapeBuilder<TShapeModel,TConnectionModel> Path(string value)
         {
             container.Path = value;
 
@@ -68,9 +71,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// Defines the stroke configuration.
         /// </summary>
         /// <param name="configurator">The action that configures the stroke.</param>
-        public DiagramShapeBuilder Stroke(Action<DiagramShapeStrokeSettingsBuilder> configurator)
+        public DiagramShapeBuilder<TShapeModel,TConnectionModel> Stroke(Action<DiagramShapeStrokeSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
         {
-            configurator(new DiagramShapeStrokeSettingsBuilder(container.Stroke));
+            configurator(new DiagramShapeStrokeSettingsBuilder<TShapeModel,TConnectionModel>(container.Stroke));
             return this;
         }
         
@@ -78,7 +81,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Specifies the type of the Shape using any of the built-in shape type.
         /// </summary>
         /// <param name="value">The value that configures the type.</param>
-        public DiagramShapeBuilder Type(string value)
+        public DiagramShapeBuilder<TShapeModel,TConnectionModel> Type(string value)
         {
             container.Type = value;
 
@@ -89,7 +92,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Defines the x-coordinate of the shape when added to the diagram.
         /// </summary>
         /// <param name="value">The value that configures the x.</param>
-        public DiagramShapeBuilder X(double value)
+        public DiagramShapeBuilder<TShapeModel,TConnectionModel> X(double value)
         {
             container.X = value;
 
@@ -100,7 +103,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Defines the y-coordinate of the shape when added to the diagram.
         /// </summary>
         /// <param name="value">The value that configures the y.</param>
-        public DiagramShapeBuilder Y(double value)
+        public DiagramShapeBuilder<TShapeModel,TConnectionModel> Y(double value)
         {
             container.Y = value;
 
@@ -111,7 +114,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Defines the minimum width the shape should have, i.e. it cannot be resized to a value smaller than the given one.
         /// </summary>
         /// <param name="value">The value that configures the minwidth.</param>
-        public DiagramShapeBuilder MinWidth(double value)
+        public DiagramShapeBuilder<TShapeModel,TConnectionModel> MinWidth(double value)
         {
             container.MinWidth = value;
 
@@ -122,7 +125,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Defines the minimum height the shape should have, i.e. it cannot be resized to a value smaller than the given one.
         /// </summary>
         /// <param name="value">The value that configures the minheight.</param>
-        public DiagramShapeBuilder MinHeight(double value)
+        public DiagramShapeBuilder<TShapeModel,TConnectionModel> MinHeight(double value)
         {
             container.MinHeight = value;
 
@@ -133,7 +136,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Defines the width of the shape when added to the diagram.
         /// </summary>
         /// <param name="value">The value that configures the width.</param>
-        public DiagramShapeBuilder Width(double value)
+        public DiagramShapeBuilder<TShapeModel,TConnectionModel> Width(double value)
         {
             container.Width = value;
 
@@ -144,7 +147,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Defines the height of the shape when added to the diagram.
         /// </summary>
         /// <param name="value">The value that configures the height.</param>
-        public DiagramShapeBuilder Height(double value)
+        public DiagramShapeBuilder<TShapeModel,TConnectionModel> Height(double value)
         {
             container.Height = value;
 
@@ -155,9 +158,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// Defines the fill options of the shape.
         /// </summary>
         /// <param name="configurator">The action that configures the fill.</param>
-        public DiagramShapeBuilder Fill(Action<DiagramShapeFillSettingsBuilder> configurator)
+        public DiagramShapeBuilder<TShapeModel,TConnectionModel> Fill(Action<DiagramShapeFillSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
         {
-            configurator(new DiagramShapeFillSettingsBuilder(container.Fill));
+            configurator(new DiagramShapeFillSettingsBuilder<TShapeModel,TConnectionModel>(container.Fill));
             return this;
         }
         
@@ -165,9 +168,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// Defines the hover configuration.
         /// </summary>
         /// <param name="configurator">The action that configures the hover.</param>
-        public DiagramShapeBuilder Hover(Action<DiagramShapeHoverSettingsBuilder> configurator)
+        public DiagramShapeBuilder<TShapeModel,TConnectionModel> Hover(Action<DiagramShapeHoverSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
         {
-            configurator(new DiagramShapeHoverSettingsBuilder(container.Hover));
+            configurator(new DiagramShapeHoverSettingsBuilder<TShapeModel,TConnectionModel>(container.Hover));
             return this;
         }
         
@@ -175,9 +178,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// Defines the connectors the shape owns.
         /// </summary>
         /// <param name="configurator">The action that configures the connectors.</param>
-        public DiagramShapeBuilder Connectors(Action<DiagramShapeConnectorFactory> configurator)
+        public DiagramShapeBuilder<TShapeModel,TConnectionModel> Connectors(Action<DiagramShapeConnectorFactory<TShapeModel,TConnectionModel>> configurator)
         {
-            configurator(new DiagramShapeConnectorFactory(container.Connectors));
+            configurator(new DiagramShapeConnectorFactory<TShapeModel,TConnectionModel>(container.Connectors));
             return this;
         }
         
@@ -185,9 +188,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// The function that positions the connector.
         /// </summary>
         /// <param name="configurator">The action that configures the rotation.</param>
-        public DiagramShapeBuilder Rotation(Action<DiagramShapeRotationSettingsBuilder> configurator)
+        public DiagramShapeBuilder<TShapeModel,TConnectionModel> Rotation(Action<DiagramShapeRotationSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
         {
-            configurator(new DiagramShapeRotationSettingsBuilder(container.Rotation));
+            configurator(new DiagramShapeRotationSettingsBuilder<TShapeModel,TConnectionModel>(container.Rotation));
             return this;
         }
         
@@ -195,9 +198,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// Defines the shapes content settings.
         /// </summary>
         /// <param name="configurator">The action that configures the content.</param>
-        public DiagramShapeBuilder Content(Action<DiagramShapeContentSettingsBuilder> configurator)
+        public DiagramShapeBuilder<TShapeModel,TConnectionModel> Content(Action<DiagramShapeContentSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
         {
-            configurator(new DiagramShapeContentSettingsBuilder(container.Content));
+            configurator(new DiagramShapeContentSettingsBuilder<TShapeModel,TConnectionModel>(container.Content));
             return this;
         }
         
@@ -205,7 +208,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// The source of the shape image. Applicable when the type is set to "image".
         /// </summary>
         /// <param name="value">The value that configures the source.</param>
-        public DiagramShapeBuilder Source(string value)
+        public DiagramShapeBuilder<TShapeModel,TConnectionModel> Source(string value)
         {
             container.Source = value;
 
@@ -218,7 +221,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Defines the inline visual template
         /// </summary>
         /// <param name="inlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
-        public DiagramShapeBuilder Visual(Func<object, object> inlineCodeBlock)
+        public DiagramShapeBuilder<TShapeModel, TConnectionModel> Visual(Func<object, object> inlineCodeBlock)
         {
             container.Visual = new ClientHandlerDescriptor { TemplateDelegate = inlineCodeBlock };
 
@@ -229,7 +232,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///  Defines the name of the JavaScript function that will create the visual element.
         /// </summary>
         /// <param name="visualHandler">The name of the JavaScript function that will create the visual element.</param>
-        public DiagramShapeBuilder Visual(string visualHandler)
+        public DiagramShapeBuilder<TShapeModel, TConnectionModel> Visual(string visualHandler)
         {
             container.Visual = new ClientHandlerDescriptor { HandlerName = visualHandler };
 

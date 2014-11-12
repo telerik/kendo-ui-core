@@ -70,8 +70,7 @@ module CodeGen::MVC::Wrappers
     ]
 
     GENERIC_BUILDER_SKIP_LIST = [
-        'gantt',
-        'diagram'
+        'gantt'
     ]
 
     IGNORED = [
@@ -242,14 +241,14 @@ module CodeGen::MVC::Wrappers
         }<% end %>
         })
 
-        FLUENT_COMPOSITE_FIELD_DECLARATION = ERB.new(%{<% if toggleable %>
+        FLUENT_COMPOSITE_FIELD_DECLARATION = ERB.new(%{<% if toggleable %><% if !default %>
         /// <summary>
         /// <%= description.gsub(/\r?\n/, '\n\t\t/// ').html_encode()%>
         /// </summary>
         public <%= owner.respond_to?('csharp_item_class') ? owner.csharp_item_class : owner.csharp_class %>Builder<%= owner.csharp_generic_args %> <%= csharp_name%>()
         {
             return <%= csharp_name %>(true);
-        }
+        }<% end %>
 
         /// <summary>
         /// <%= description.gsub(/\r?\n/, '\n\t\t/// ').html_encode()%>

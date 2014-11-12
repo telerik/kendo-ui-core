@@ -8,7 +8,9 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent API for configuring the DiagramEditableRotateSettings settings.
     /// </summary>
-    public class DiagramEditableRotateSettingsBuilder: IHideObjectMembers
+    public class DiagramEditableRotateSettingsBuilder<TShapeModel, TConnectionModel> : IHideObjectMembers
+        where TShapeModel : class
+        where TConnectionModel : class
     {
         private readonly DiagramEditableRotateSettings container;
 
@@ -23,9 +25,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// Specifyes the thumb style.
         /// </summary>
         /// <param name="configurator">The action that configures the thumb.</param>
-        public DiagramEditableRotateSettingsBuilder Thumb(Action<DiagramEditableRotateThumbSettingsBuilder> configurator)
+        public DiagramEditableRotateSettingsBuilder<TShapeModel,TConnectionModel> Thumb(Action<DiagramEditableRotateThumbSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
         {
-            configurator(new DiagramEditableRotateThumbSettingsBuilder(container.Thumb));
+            configurator(new DiagramEditableRotateThumbSettingsBuilder<TShapeModel,TConnectionModel>(container.Thumb));
             return this;
         }
         

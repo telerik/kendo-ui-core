@@ -713,6 +713,7 @@
     <Compile Include="UI\CheckBox\Fluent\CheckBoxBuilder.cs" />
     <Compile Include="UI\CheckBox\Html\CheckBoxHtmlBuilder.cs" />
     <Compile Include="UI\CheckBox\CheckBox.cs" />
+    <Compile Include="UI\Diagram\Settings\DiagramEditableResizeHandlesHoverStrokeSettings.cs" />
     <Compile Include="UI\Gantt\Columns\GanttResourceColumn.cs" />
     <Compile Include="UI\Gantt\Fluent\GanttAssignmentsDataSourceBuilder.cs" />
     <Compile Include="UI\Gantt\Fluent\GanttResourceColumnBuilder.cs" />
@@ -2155,7 +2156,6 @@
     <Compile Include="UI\Diagram\Fluent\DiagramEditableResizeHandlesSettingsBuilder.cs" />
     <Compile Include="UI\Diagram\Settings\DiagramEditableResizeHandlesHoverSettings.cs" />
     <Compile Include="UI\Diagram\Fluent\DiagramEditableResizeHandlesHoverSettingsBuilder.cs" />
-    <Compile Include="UI\Diagram\Settings\DiagramEditableResizeHandlesHoverStrokeSettings.cs" />
     <Compile Include="UI\Diagram\Fluent\DiagramEditableResizeHandlesHoverStrokeSettingsBuilder.cs" />
     <Compile Include="UI\Diagram\Settings\DiagramEditableResizeHandlesStrokeSettings.cs" />
     <Compile Include="UI\Diagram\Fluent\DiagramEditableResizeHandlesStrokeSettingsBuilder.cs" />

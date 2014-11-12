@@ -8,7 +8,9 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent API for configuring the DiagramEditableResizeHandlesHoverFillSettings settings.
     /// </summary>
-    public class DiagramEditableResizeHandlesHoverFillSettingsBuilder: IHideObjectMembers
+    public class DiagramEditableResizeHandlesHoverFillSettingsBuilder<TShapeModel, TConnectionModel> : IHideObjectMembers
+        where TShapeModel : class
+        where TConnectionModel : class
     {
         private readonly DiagramEditableResizeHandlesHoverFillSettings container;
 
@@ -23,7 +25,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Set the handles hover fill color.
         /// </summary>
         /// <param name="value">The value that configures the color.</param>
-        public DiagramEditableResizeHandlesHoverFillSettingsBuilder Color(string value)
+        public DiagramEditableResizeHandlesHoverFillSettingsBuilder<TShapeModel,TConnectionModel> Color(string value)
         {
             container.Color = value;
 
@@ -34,7 +36,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Set the handles hover fill opacity.
         /// </summary>
         /// <param name="value">The value that configures the opacity.</param>
-        public DiagramEditableResizeHandlesHoverFillSettingsBuilder Opacity(double value)
+        public DiagramEditableResizeHandlesHoverFillSettingsBuilder<TShapeModel,TConnectionModel> Opacity(double value)
         {
             container.Opacity = value;
 

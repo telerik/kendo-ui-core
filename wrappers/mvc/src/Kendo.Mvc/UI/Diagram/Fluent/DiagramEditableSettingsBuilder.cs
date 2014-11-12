@@ -25,7 +25,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Specifies the shape editor template.
         /// </summary>
         /// <param name="value">The value that configures the shapetemplate.</param>
-        public DiagramEditableSettingsBuilder<TShapeModel, TConnectionModel> ShapeTemplate(string value)
+        public DiagramEditableSettingsBuilder<TShapeModel,TConnectionModel> ShapeTemplate(string value)
         {
             container.ShapeTemplate = value;
 
@@ -36,7 +36,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Specifies the shape editor template.
         /// </summary>
         /// <param name="value">The value that configures the shapetemplate.</param>
-        public DiagramEditableSettingsBuilder<TShapeModel, TConnectionModel> ShapeTemplateId(string value)
+        public DiagramEditableSettingsBuilder<TShapeModel,TConnectionModel> ShapeTemplateId(string value)
         {
             container.ShapeTemplateId = value;
 
@@ -47,7 +47,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Specifies the connection editor template.
         /// </summary>
         /// <param name="value">The value that configures the connectiontemplate.</param>
-        public DiagramEditableSettingsBuilder<TShapeModel, TConnectionModel> ConnectionTemplate(string value)
+        public DiagramEditableSettingsBuilder<TShapeModel,TConnectionModel> ConnectionTemplate(string value)
         {
             container.ConnectionTemplate = value;
 
@@ -58,7 +58,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Specifies the connection editor template.
         /// </summary>
         /// <param name="value">The value that configures the connectiontemplate.</param>
-        public DiagramEditableSettingsBuilder<TShapeModel, TConnectionModel> ConnectionTemplateId(string value)
+        public DiagramEditableSettingsBuilder<TShapeModel,TConnectionModel> ConnectionTemplateId(string value)
         {
             container.ConnectionTemplateId = value;
 
@@ -69,17 +69,18 @@ namespace Kendo.Mvc.UI.Fluent
         /// Specifies the the toolbar tools. Predefined tools are:
         /// </summary>
         /// <param name="configurator">The action that configures the tools.</param>
-        public DiagramEditableSettingsBuilder<TShapeModel, TConnectionModel> Tools(Action<DiagramEditableSettingsToolFactory> configurator)
+        public DiagramEditableSettingsBuilder<TShapeModel,TConnectionModel> Tools(Action<DiagramEditableSettingsToolFactory<TShapeModel,TConnectionModel>> configurator)
         {
-            configurator(new DiagramEditableSettingsToolFactory(container.Tools));
+            configurator(new DiagramEditableSettingsToolFactory<TShapeModel,TConnectionModel>(container.Tools));
             return this;
         }
+        
 
         /// <summary>
         /// Specifies the shape resizing.
         /// </summary>
         /// <param name="enabled">Enables or disables the resize option.</param>
-        public DiagramEditableSettingsBuilder<TShapeModel, TConnectionModel> Resize(bool enabled)
+        public DiagramEditableSettingsBuilder<TShapeModel,TConnectionModel> Resize(bool enabled)
         {
             container.Resize.Enabled = enabled;
             return this;
@@ -90,19 +91,20 @@ namespace Kendo.Mvc.UI.Fluent
         /// Specifies the shape resizing.
         /// </summary>
         /// <param name="configurator">The action that configures the resize.</param>
-        public DiagramEditableSettingsBuilder<TShapeModel, TConnectionModel> Resize(Action<DiagramEditableResizeSettingsBuilder> configurator)
+        public DiagramEditableSettingsBuilder<TShapeModel,TConnectionModel> Resize(Action<DiagramEditableResizeSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
         {
             container.Resize.Enabled = true;
             
-            configurator(new DiagramEditableResizeSettingsBuilder(container.Resize));
+            configurator(new DiagramEditableResizeSettingsBuilder<TShapeModel,TConnectionModel>(container.Resize));
             return this;
         }
+        
 
         /// <summary>
         /// Specifyes the rotate style.
         /// </summary>
         /// <param name="enabled">Enables or disables the rotate option.</param>
-        public DiagramEditableSettingsBuilder<TShapeModel, TConnectionModel> Rotate(bool enabled)
+        public DiagramEditableSettingsBuilder<TShapeModel,TConnectionModel> Rotate(bool enabled)
         {
             container.Rotate.Enabled = enabled;
             return this;
@@ -113,11 +115,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// Specifyes the rotate style.
         /// </summary>
         /// <param name="configurator">The action that configures the rotate.</param>
-        public DiagramEditableSettingsBuilder<TShapeModel, TConnectionModel> Rotate(Action<DiagramEditableRotateSettingsBuilder> configurator)
+        public DiagramEditableSettingsBuilder<TShapeModel,TConnectionModel> Rotate(Action<DiagramEditableRotateSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
         {
             container.Rotate.Enabled = true;
             
-            configurator(new DiagramEditableRotateSettingsBuilder(container.Rotate));
+            configurator(new DiagramEditableRotateSettingsBuilder<TShapeModel,TConnectionModel>(container.Rotate));
             return this;
         }
         

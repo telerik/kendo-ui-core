@@ -8,7 +8,9 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent API for configuring the DiagramShapeContentSettings settings.
     /// </summary>
-    public class DiagramShapeContentSettingsBuilder: IHideObjectMembers
+    public class DiagramShapeContentSettingsBuilder<TShapeModel, TConnectionModel> : IHideObjectMembers
+        where TShapeModel : class
+        where TConnectionModel : class
     {
         private readonly DiagramShapeContentSettings container;
 
@@ -23,7 +25,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// The text displayed in the shape.
         /// </summary>
         /// <param name="value">The value that configures the text.</param>
-        public DiagramShapeContentSettingsBuilder Text(string value)
+        public DiagramShapeContentSettingsBuilder<TShapeModel,TConnectionModel> Text(string value)
         {
             container.Text = value;
 
@@ -34,7 +36,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// The alignment of the text inside the shape.
         /// </summary>
         /// <param name="value">The value that configures the align.</param>
-        public DiagramShapeContentSettingsBuilder Align(string value)
+        public DiagramShapeContentSettingsBuilder<TShapeModel,TConnectionModel> Align(string value)
         {
             container.Align = value;
 
@@ -45,7 +47,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// The font family of the shape content text.
         /// </summary>
         /// <param name="value">The value that configures the fontfamily.</param>
-        public DiagramShapeContentSettingsBuilder FontFamily(string value)
+        public DiagramShapeContentSettingsBuilder<TShapeModel,TConnectionModel> FontFamily(string value)
         {
             container.FontFamily = value;
 
@@ -56,7 +58,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// The font size of the shape content text.
         /// </summary>
         /// <param name="value">The value that configures the fontsize.</param>
-        public DiagramShapeContentSettingsBuilder FontSize(double value)
+        public DiagramShapeContentSettingsBuilder<TShapeModel,TConnectionModel> FontSize(double value)
         {
             container.FontSize = value;
 
@@ -67,7 +69,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// The color of the shape content text.
         /// </summary>
         /// <param name="value">The value that configures the color.</param>
-        public DiagramShapeContentSettingsBuilder Color(string value)
+        public DiagramShapeContentSettingsBuilder<TShapeModel,TConnectionModel> Color(string value)
         {
             container.Color = value;
 

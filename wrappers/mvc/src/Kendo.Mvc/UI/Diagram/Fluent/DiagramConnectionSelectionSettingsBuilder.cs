@@ -8,7 +8,9 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent API for configuring the DiagramConnectionSelectionSettings settings.
     /// </summary>
-    public class DiagramConnectionSelectionSettingsBuilder: IHideObjectMembers
+    public class DiagramConnectionSelectionSettingsBuilder<TShapeModel, TConnectionModel> : IHideObjectMembers
+        where TShapeModel : class
+        where TConnectionModel : class
     {
         private readonly DiagramConnectionSelectionSettings container;
 
@@ -23,9 +25,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// Defines the connection selection handles configuration.
         /// </summary>
         /// <param name="configurator">The action that configures the handles.</param>
-        public DiagramConnectionSelectionSettingsBuilder Handles(Action<DiagramConnectionSelectionHandlesSettingsBuilder> configurator)
+        public DiagramConnectionSelectionSettingsBuilder<TShapeModel,TConnectionModel> Handles(Action<DiagramConnectionSelectionHandlesSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
         {
-            configurator(new DiagramConnectionSelectionHandlesSettingsBuilder(container.Handles));
+            configurator(new DiagramConnectionSelectionHandlesSettingsBuilder<TShapeModel,TConnectionModel>(container.Handles));
             return this;
         }
         

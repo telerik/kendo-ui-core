@@ -8,7 +8,9 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent API for configuring the DiagramShapeFillSettings settings.
     /// </summary>
-    public class DiagramShapeFillSettingsBuilder: IHideObjectMembers
+    public class DiagramShapeFillSettingsBuilder<TShapeModel, TConnectionModel> : IHideObjectMembers
+        where TShapeModel : class
+        where TConnectionModel : class
     {
         private readonly DiagramShapeFillSettings container;
 
@@ -23,7 +25,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Defines the fill color of the shape.
         /// </summary>
         /// <param name="value">The value that configures the color.</param>
-        public DiagramShapeFillSettingsBuilder Color(string value)
+        public DiagramShapeFillSettingsBuilder<TShapeModel, TConnectionModel> Color(string value)
         {
             container.Color = value;
 
@@ -34,7 +36,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Defines the fill opacity of the shape.
         /// </summary>
         /// <param name="value">The value that configures the opacity.</param>
-        public DiagramShapeFillSettingsBuilder Opacity(double value)
+        public DiagramShapeFillSettingsBuilder<TShapeModel,TConnectionModel> Opacity(double value)
         {
             container.Opacity = value;
 

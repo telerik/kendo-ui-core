@@ -6,7 +6,9 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent API for adding items to Kendo Connection for ASP.NET MVC
     /// </summary>
-    public class DiagramConnectionPointFactory : IHideObjectMembers
+    public class DiagramConnectionPointFactory<TShapeModel, TConnectionModel> : IHideObjectMembers
+        where TShapeModel : class
+        where TConnectionModel : class
     {
         private readonly List<DiagramConnectionPoint> container;
 
@@ -15,13 +17,13 @@ namespace Kendo.Mvc.UI.Fluent
             this.container = container;
         }
 
-        public virtual DiagramConnectionPointBuilder Add()
+        public virtual DiagramConnectionPointBuilder<TShapeModel, TConnectionModel> Add()
         {
             var item = new DiagramConnectionPoint();
 
             container.Add(item);
 
-            return new DiagramConnectionPointBuilder(item);
+            return new DiagramConnectionPointBuilder<TShapeModel, TConnectionModel>(item);
         }
     }
 }

@@ -8,7 +8,9 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent API for configuring the DiagramEditableRotateThumbSettings settings.
     /// </summary>
-    public class DiagramEditableRotateThumbSettingsBuilder: IHideObjectMembers
+    public class DiagramEditableRotateThumbSettingsBuilder<TShapeModel, TConnectionModel> : IHideObjectMembers
+        where TShapeModel : class
+        where TConnectionModel : class
     {
         private readonly DiagramEditableRotateThumbSettings container;
 
@@ -23,9 +25,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// Set the thumb fill options.
         /// </summary>
         /// <param name="configurator">The action that configures the fill.</param>
-        public DiagramEditableRotateThumbSettingsBuilder Fill(Action<DiagramEditableRotateThumbFillSettingsBuilder> configurator)
+        public DiagramEditableRotateThumbSettingsBuilder<TShapeModel,TConnectionModel> Fill(Action<DiagramEditableRotateThumbFillSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
         {
-            configurator(new DiagramEditableRotateThumbFillSettingsBuilder(container.Fill));
+            configurator(new DiagramEditableRotateThumbFillSettingsBuilder<TShapeModel,TConnectionModel>(container.Fill));
             return this;
         }
         
@@ -33,9 +35,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// Specifies the thumb stroke styles.
         /// </summary>
         /// <param name="configurator">The action that configures the stroke.</param>
-        public DiagramEditableRotateThumbSettingsBuilder Stroke(Action<DiagramEditableRotateThumbStrokeSettingsBuilder> configurator)
+        public DiagramEditableRotateThumbSettingsBuilder<TShapeModel,TConnectionModel> Stroke(Action<DiagramEditableRotateThumbStrokeSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
         {
-            configurator(new DiagramEditableRotateThumbStrokeSettingsBuilder(container.Stroke));
+            configurator(new DiagramEditableRotateThumbStrokeSettingsBuilder<TShapeModel,TConnectionModel>(container.Stroke));
             return this;
         }
         

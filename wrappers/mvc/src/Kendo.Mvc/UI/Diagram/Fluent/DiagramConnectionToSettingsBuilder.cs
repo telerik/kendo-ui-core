@@ -8,7 +8,9 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent API for configuring the DiagramConnectionToSettings settings.
     /// </summary>
-    public class DiagramConnectionToSettingsBuilder: IHideObjectMembers
+    public class DiagramConnectionToSettingsBuilder<TShapeModel, TConnectionModel> : IHideObjectMembers
+        where TShapeModel : class
+        where TConnectionModel : class
     {
         private readonly DiagramConnectionToSettings container;
 
@@ -23,7 +25,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Defines the point x value.
         /// </summary>
         /// <param name="value">The value that configures the x.</param>
-        public DiagramConnectionToSettingsBuilder X(double value)
+        public DiagramConnectionToSettingsBuilder<TShapeModel,TConnectionModel> X(double value)
         {
             container.X = value;
 
@@ -34,7 +36,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Defines the point y value.
         /// </summary>
         /// <param name="value">The value that configures the y.</param>
-        public DiagramConnectionToSettingsBuilder Y(double value)
+        public DiagramConnectionToSettingsBuilder<TShapeModel,TConnectionModel> Y(double value)
         {
             container.Y = value;
 

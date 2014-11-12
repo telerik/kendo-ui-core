@@ -8,7 +8,9 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent API for configuring the DiagramConnectionStrokeSettings settings.
     /// </summary>
-    public class DiagramConnectionStrokeSettingsBuilder: IHideObjectMembers
+    public class DiagramConnectionStrokeSettingsBuilder<TShapeModel, TConnectionModel> : IHideObjectMembers
+        where TShapeModel : class
+        where TConnectionModel : class
     {
         private readonly DiagramConnectionStrokeSettings container;
 
@@ -23,7 +25,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Defines the stroke or line color of the connection.
         /// </summary>
         /// <param name="value">The value that configures the color.</param>
-        public DiagramConnectionStrokeSettingsBuilder Color(string value)
+        public DiagramConnectionStrokeSettingsBuilder<TShapeModel,TConnectionModel> Color(string value)
         {
             container.Color = value;
 
@@ -34,7 +36,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Defines the stroke width of the connection.
         /// </summary>
         /// <param name="value">The value that configures the width.</param>
-        public DiagramConnectionStrokeSettingsBuilder Width(double value)
+        public DiagramConnectionStrokeSettingsBuilder<TShapeModel,TConnectionModel> Width(double value)
         {
             container.Width = value;
 

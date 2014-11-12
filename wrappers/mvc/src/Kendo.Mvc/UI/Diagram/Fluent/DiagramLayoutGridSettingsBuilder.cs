@@ -8,7 +8,9 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent API for configuring the DiagramLayoutGridSettings settings.
     /// </summary>
-    public class DiagramLayoutGridSettingsBuilder: IHideObjectMembers
+    public class DiagramLayoutGridSettingsBuilder<TShapeModel, TConnectionModel> : IHideObjectMembers
+        where TShapeModel : class
+        where TConnectionModel : class
     {
         private readonly DiagramLayoutGridSettings container;
 
@@ -23,7 +25,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Defines the width of the grid. The bigger this parameter the more components will be organized in an horizontal row. How many components really depends on your diagram and they type of layout applied to each component. The default is set to 800.
         /// </summary>
         /// <param name="value">The value that configures the width.</param>
-        public DiagramLayoutGridSettingsBuilder Width(double value)
+        public DiagramLayoutGridSettingsBuilder<TShapeModel,TConnectionModel> Width(double value)
         {
             container.Width = value;
 
@@ -34,7 +36,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Defines the left offset of the grid layout. The default is 50.
         /// </summary>
         /// <param name="value">The value that configures the offsetx.</param>
-        public DiagramLayoutGridSettingsBuilder OffsetX(double value)
+        public DiagramLayoutGridSettingsBuilder<TShapeModel,TConnectionModel> OffsetX(double value)
         {
             container.OffsetX = value;
 
@@ -45,7 +47,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Defines the top offset of the grid layout. The default is 50.
         /// </summary>
         /// <param name="value">The value that configures the offsety.</param>
-        public DiagramLayoutGridSettingsBuilder OffsetY(double value)
+        public DiagramLayoutGridSettingsBuilder<TShapeModel,TConnectionModel> OffsetY(double value)
         {
             container.OffsetY = value;
 
@@ -56,7 +58,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Defines the horizontal spacing between each component. The default is 50.
         /// </summary>
         /// <param name="value">The value that configures the componentspacingx.</param>
-        public DiagramLayoutGridSettingsBuilder ComponentSpacingX(double value)
+        public DiagramLayoutGridSettingsBuilder<TShapeModel,TConnectionModel> ComponentSpacingX(double value)
         {
             container.ComponentSpacingX = value;
 
@@ -67,7 +69,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Defines the vertical spacing between each component. The default is 50.
         /// </summary>
         /// <param name="value">The value that configures the componentspacingy.</param>
-        public DiagramLayoutGridSettingsBuilder ComponentSpacingY(double value)
+        public DiagramLayoutGridSettingsBuilder<TShapeModel,TConnectionModel> ComponentSpacingY(double value)
         {
             container.ComponentSpacingY = value;
 

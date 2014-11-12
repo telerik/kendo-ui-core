@@ -8,7 +8,9 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent API for configuring the DiagramConnectionDefaultsSettings settings.
     /// </summary>
-    public class DiagramConnectionDefaultsSettingsBuilder: IHideObjectMembers
+    public class DiagramConnectionDefaultsSettingsBuilder<TShapeModel, TConnectionModel> : IHideObjectMembers
+        where TShapeModel : class
+        where TConnectionModel : class
     {
         private readonly DiagramConnectionDefaultsSettings container;
 
@@ -18,12 +20,13 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         //>> Fields
+        
 
         /// <summary>
         /// Defines the shape editable options.
         /// </summary>
         /// <param name="enabled">Enables or disables the editable option.</param>
-        public DiagramConnectionDefaultsSettingsBuilder Editable(bool enabled)
+        public DiagramConnectionDefaultsSettingsBuilder<TShapeModel,TConnectionModel> Editable(bool enabled)
         {
             container.Editable.Enabled = enabled;
             return this;
@@ -34,11 +37,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// Defines the shape editable options.
         /// </summary>
         /// <param name="configurator">The action that configures the editable.</param>
-        public DiagramConnectionDefaultsSettingsBuilder Editable(Action<DiagramConnectionDefaultsEditableSettingsBuilder> configurator)
+        public DiagramConnectionDefaultsSettingsBuilder<TShapeModel,TConnectionModel> Editable(Action<DiagramConnectionDefaultsEditableSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
         {
             container.Editable.Enabled = true;
             
-            configurator(new DiagramConnectionDefaultsEditableSettingsBuilder(container.Editable));
+            configurator(new DiagramConnectionDefaultsEditableSettingsBuilder<TShapeModel,TConnectionModel>(container.Editable));
             return this;
         }
         
@@ -46,9 +49,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// Defines the stroke configuration.
         /// </summary>
         /// <param name="configurator">The action that configures the stroke.</param>
-        public DiagramConnectionDefaultsSettingsBuilder Stroke(Action<DiagramConnectionDefaultsStrokeSettingsBuilder> configurator)
+        public DiagramConnectionDefaultsSettingsBuilder<TShapeModel,TConnectionModel> Stroke(Action<DiagramConnectionDefaultsStrokeSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
         {
-            configurator(new DiagramConnectionDefaultsStrokeSettingsBuilder(container.Stroke));
+            configurator(new DiagramConnectionDefaultsStrokeSettingsBuilder<TShapeModel,TConnectionModel>(container.Stroke));
             return this;
         }
         
@@ -56,9 +59,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// Defines the hover configuration.
         /// </summary>
         /// <param name="configurator">The action that configures the hover.</param>
-        public DiagramConnectionDefaultsSettingsBuilder Hover(Action<DiagramConnectionDefaultsHoverSettingsBuilder> configurator)
+        public DiagramConnectionDefaultsSettingsBuilder<TShapeModel,TConnectionModel> Hover(Action<DiagramConnectionDefaultsHoverSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
         {
-            configurator(new DiagramConnectionDefaultsHoverSettingsBuilder(container.Hover));
+            configurator(new DiagramConnectionDefaultsHoverSettingsBuilder<TShapeModel,TConnectionModel>(container.Hover));
             return this;
         }
         
@@ -66,7 +69,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// The start cap (arrow, head or decoration) of the connection:
         /// </summary>
         /// <param name="value">The value that configures the startcap.</param>
-        public DiagramConnectionDefaultsSettingsBuilder StartCap(string value)
+        public DiagramConnectionDefaultsSettingsBuilder<TShapeModel,TConnectionModel> StartCap(string value)
         {
             container.StartCap = value;
 
@@ -77,7 +80,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// The start cap (arrow, head or decoration) of the connection:Note that you can also use the "ArrowStart" for the endCap but its direction will be inversed.
         /// </summary>
         /// <param name="value">The value that configures the endcap.</param>
-        public DiagramConnectionDefaultsSettingsBuilder EndCap(string value)
+        public DiagramConnectionDefaultsSettingsBuilder<TShapeModel,TConnectionModel> EndCap(string value)
         {
             container.EndCap = value;
 
@@ -88,9 +91,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// Defines the connection selection configuration.
         /// </summary>
         /// <param name="configurator">The action that configures the selection.</param>
-        public DiagramConnectionDefaultsSettingsBuilder Selection(Action<DiagramConnectionDefaultsSelectionSettingsBuilder> configurator)
+        public DiagramConnectionDefaultsSettingsBuilder<TShapeModel,TConnectionModel> Selection(Action<DiagramConnectionDefaultsSelectionSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
         {
-            configurator(new DiagramConnectionDefaultsSelectionSettingsBuilder(container.Selection));
+            configurator(new DiagramConnectionDefaultsSelectionSettingsBuilder<TShapeModel,TConnectionModel>(container.Selection));
             return this;
         }
         

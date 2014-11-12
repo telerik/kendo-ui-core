@@ -8,7 +8,9 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent API for configuring the DiagramConnectionDefaultsSelectionHandlesFillSettings settings.
     /// </summary>
-    public class DiagramConnectionDefaultsSelectionHandlesFillSettingsBuilder: IHideObjectMembers
+    public class DiagramConnectionDefaultsSelectionHandlesFillSettingsBuilder<TShapeModel, TConnectionModel> : IHideObjectMembers
+        where TShapeModel : class
+        where TConnectionModel : class
     {
         private readonly DiagramConnectionDefaultsSelectionHandlesFillSettings container;
 
@@ -23,7 +25,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Defines the handles fill color.
         /// </summary>
         /// <param name="value">The value that configures the color.</param>
-        public DiagramConnectionDefaultsSelectionHandlesFillSettingsBuilder Color(string value)
+        public DiagramConnectionDefaultsSelectionHandlesFillSettingsBuilder<TShapeModel,TConnectionModel> Color(string value)
         {
             container.Color = value;
 

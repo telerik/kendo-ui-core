@@ -8,7 +8,9 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent API for configuring the DiagramEditableResizeHandlesStrokeSettings settings.
     /// </summary>
-    public class DiagramEditableResizeHandlesStrokeSettingsBuilder: IHideObjectMembers
+    public class DiagramEditableResizeHandlesStrokeSettingsBuilder<TShapeModel, TConnectionModel> : IHideObjectMembers
+        where TShapeModel : class
+        where TConnectionModel : class
     {
         private readonly DiagramEditableResizeHandlesStrokeSettings container;
 
@@ -23,7 +25,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Specifies the handles stroke color.
         /// </summary>
         /// <param name="value">The value that configures the color.</param>
-        public DiagramEditableResizeHandlesStrokeSettingsBuilder Color(string value)
+        public DiagramEditableResizeHandlesStrokeSettingsBuilder<TShapeModel,TConnectionModel> Color(string value)
         {
             container.Color = value;
 
@@ -34,7 +36,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Specifies the handles stroke width.
         /// </summary>
         /// <param name="value">The value that configures the width.</param>
-        public DiagramEditableResizeHandlesStrokeSettingsBuilder Width(double value)
+        public DiagramEditableResizeHandlesStrokeSettingsBuilder<TShapeModel,TConnectionModel> Width(double value)
         {
             container.Width = value;
 
@@ -45,7 +47,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Specifies the handles stroke dash type.
         /// </summary>
         /// <param name="value">The value that configures the dashtype.</param>
-        public DiagramEditableResizeHandlesStrokeSettingsBuilder DashType(string value)
+        public DiagramEditableResizeHandlesStrokeSettingsBuilder<TShapeModel,TConnectionModel> DashType(string value)
         {
             container.DashType = value;
 

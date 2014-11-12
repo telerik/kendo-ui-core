@@ -8,7 +8,9 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent API for configuring the DiagramConnectionPoint settings.
     /// </summary>
-    public class DiagramConnectionPointBuilder: IHideObjectMembers
+    public class DiagramConnectionPointBuilder<TShapeModel, TConnectionModel> : IHideObjectMembers
+        where TShapeModel : class
+        where TConnectionModel : class
     {
         private readonly DiagramConnectionPoint container;
 
@@ -23,7 +25,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Sets the X coordinate of the point.
         /// </summary>
         /// <param name="value">The value that configures the x.</param>
-        public DiagramConnectionPointBuilder X(double value)
+        public DiagramConnectionPointBuilder<TShapeModel,TConnectionModel> X(double value)
         {
             container.X = value;
 
@@ -34,7 +36,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Sets the Y coordinate of the point.
         /// </summary>
         /// <param name="value">The value that configures the y.</param>
-        public DiagramConnectionPointBuilder Y(double value)
+        public DiagramConnectionPointBuilder<TShapeModel,TConnectionModel> Y(double value)
         {
             container.Y = value;
 

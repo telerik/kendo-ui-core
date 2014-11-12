@@ -8,7 +8,9 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent API for configuring the DiagramShapeRotationSettings settings.
     /// </summary>
-    public class DiagramShapeRotationSettingsBuilder: IHideObjectMembers
+    public class DiagramShapeRotationSettingsBuilder<TShapeModel, TConnectionModel> : IHideObjectMembers
+        where TShapeModel : class
+        where TConnectionModel : class
     {
         private readonly DiagramShapeRotationSettings container;
 
@@ -23,7 +25,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// The rotation angle.
         /// </summary>
         /// <param name="value">The value that configures the angle.</param>
-        public DiagramShapeRotationSettingsBuilder Angle(double value)
+        public DiagramShapeRotationSettingsBuilder<TShapeModel,TConnectionModel> Angle(double value)
         {
             container.Angle = value;
 

@@ -8,7 +8,9 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent API for configuring the DiagramConnectionDefaultsHoverSettings settings.
     /// </summary>
-    public class DiagramConnectionDefaultsHoverSettingsBuilder: IHideObjectMembers
+    public class DiagramConnectionDefaultsHoverSettingsBuilder<TShapeModel, TConnectionModel> : IHideObjectMembers
+        where TShapeModel : class
+        where TConnectionModel : class
     {
         private readonly DiagramConnectionDefaultsHoverSettings container;
 
@@ -23,9 +25,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// Defines the hover stroke configuration.
         /// </summary>
         /// <param name="configurator">The action that configures the stroke.</param>
-        public DiagramConnectionDefaultsHoverSettingsBuilder Stroke(Action<DiagramConnectionDefaultsHoverStrokeSettingsBuilder> configurator)
+        public DiagramConnectionDefaultsHoverSettingsBuilder<TShapeModel,TConnectionModel> Stroke(Action<DiagramConnectionDefaultsHoverStrokeSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
         {
-            configurator(new DiagramConnectionDefaultsHoverStrokeSettingsBuilder(container.Stroke));
+            configurator(new DiagramConnectionDefaultsHoverStrokeSettingsBuilder<TShapeModel,TConnectionModel>(container.Stroke));
             return this;
         }
         

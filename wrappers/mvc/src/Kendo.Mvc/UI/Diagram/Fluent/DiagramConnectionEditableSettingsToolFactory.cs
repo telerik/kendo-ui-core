@@ -6,7 +6,9 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent API for adding items to Kendo Editable for ASP.NET MVC
     /// </summary>
-    public class DiagramConnectionEditableSettingsToolFactory : IHideObjectMembers
+    public class DiagramConnectionEditableSettingsToolFactory<TShapeModel, TConnectionModel> : IHideObjectMembers
+        where TShapeModel : class
+        where TConnectionModel : class
     {
         private readonly List<DiagramConnectionEditableSettingsTool> container;
 
@@ -20,37 +22,37 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Adds an item for a custom action.
         /// </summary>
-        public virtual DiagramConnectionEditableSettingsToolBuilder Custom()
+        public virtual DiagramConnectionEditableSettingsToolBuilder<TShapeModel,TConnectionModel> Custom()
         {
             var item = new DiagramConnectionEditableSettingsTool();
 
             container.Add(item);
 
-            return new DiagramConnectionEditableSettingsToolBuilder(item);
+            return new DiagramConnectionEditableSettingsToolBuilder<TShapeModel,TConnectionModel>(item);
         }
 
         /// <summary>
         /// Adds an item for the edit action.
         /// </summary>
-        public virtual DiagramConnectionEditableSettingsToolBuilder Edit()
+        public virtual DiagramConnectionEditableSettingsToolBuilder<TShapeModel,TConnectionModel> Edit()
         {
             var item = new DiagramConnectionEditableSettingsTool() { Name = "edit" };
 
             container.Add(item);
 
-            return new DiagramConnectionEditableSettingsToolBuilder(item);
+            return new DiagramConnectionEditableSettingsToolBuilder<TShapeModel,TConnectionModel>(item);
         }
 
         /// <summary>
         /// Adds an item for the delete action.
         /// </summary>
-        public virtual DiagramConnectionEditableSettingsToolBuilder Delete()
+        public virtual DiagramConnectionEditableSettingsToolBuilder<TShapeModel,TConnectionModel> Delete()
         {
             var item = new DiagramConnectionEditableSettingsTool() { Name = "delete" };
 
             container.Add(item);
 
-            return new DiagramConnectionEditableSettingsToolBuilder(item);
+            return new DiagramConnectionEditableSettingsToolBuilder<TShapeModel,TConnectionModel>(item);
         }
         //<< Factory methods
     }

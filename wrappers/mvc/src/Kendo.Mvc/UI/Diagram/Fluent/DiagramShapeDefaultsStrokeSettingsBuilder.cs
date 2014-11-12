@@ -8,7 +8,9 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent API for configuring the DiagramShapeDefaultsStrokeSettings settings.
     /// </summary>
-    public class DiagramShapeDefaultsStrokeSettingsBuilder: IHideObjectMembers
+    public class DiagramShapeDefaultsStrokeSettingsBuilder<TShapeModel, TConnectionModel> : IHideObjectMembers
+        where TShapeModel : class
+        where TConnectionModel : class
     {
         private readonly DiagramShapeDefaultsStrokeSettings container;
 
@@ -23,7 +25,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Defines the color of the shape's stroke.
         /// </summary>
         /// <param name="value">The value that configures the color.</param>
-        public DiagramShapeDefaultsStrokeSettingsBuilder Color(string value)
+        public DiagramShapeDefaultsStrokeSettingsBuilder<TShapeModel,TConnectionModel> Color(string value)
         {
             container.Color = value;
 
@@ -34,7 +36,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Defines the thickness or width of the shape's stroke.
         /// </summary>
         /// <param name="value">The value that configures the width.</param>
-        public DiagramShapeDefaultsStrokeSettingsBuilder Width(double value)
+        public DiagramShapeDefaultsStrokeSettingsBuilder<TShapeModel,TConnectionModel> Width(double value)
         {
             container.Width = value;
 
@@ -45,7 +47,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// The dash type of the shape.The following dash types are supported:
         /// </summary>
         /// <param name="value">The value that configures the dashtype.</param>
-        public DiagramShapeDefaultsStrokeSettingsBuilder DashType(string value)
+        public DiagramShapeDefaultsStrokeSettingsBuilder<TShapeModel,TConnectionModel> DashType(string value)
         {
             container.DashType = value;
 

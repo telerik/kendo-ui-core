@@ -6,7 +6,9 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent API for adding items to Kendo ShapeDefaults for ASP.NET MVC
     /// </summary>
-    public class DiagramShapeDefaultsSettingsConnectorFactory : IHideObjectMembers
+    public class DiagramShapeDefaultsSettingsConnectorFactory<TShapeModel, TConnectionModel> : IHideObjectMembers
+        where TShapeModel : class
+        where TConnectionModel : class
     {
         private readonly List<DiagramShapeDefaultsSettingsConnector> container;
 
@@ -15,13 +17,13 @@ namespace Kendo.Mvc.UI.Fluent
             this.container = container;
         }
 
-        public virtual DiagramShapeDefaultsSettingsConnectorBuilder Add()
+        public virtual DiagramShapeDefaultsSettingsConnectorBuilder<TShapeModel, TConnectionModel> Add()
         {
             var item = new DiagramShapeDefaultsSettingsConnector();
 
             container.Add(item);
 
-            return new DiagramShapeDefaultsSettingsConnectorBuilder(item);
+            return new DiagramShapeDefaultsSettingsConnectorBuilder<TShapeModel, TConnectionModel>(item);
         }
     }
 }

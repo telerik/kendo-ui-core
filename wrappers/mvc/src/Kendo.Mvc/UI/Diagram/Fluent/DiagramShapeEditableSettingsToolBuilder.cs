@@ -8,7 +8,9 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent API for configuring the DiagramShapeEditableSettingsTool settings.
     /// </summary>
-    public class DiagramShapeEditableSettingsToolBuilder: IHideObjectMembers
+    public class DiagramShapeEditableSettingsToolBuilder<TShapeModel, TConnectionModel> : IHideObjectMembers
+        where TShapeModel : class
+        where TConnectionModel : class
     {
         private readonly DiagramShapeEditableSettingsTool container;
 
@@ -23,7 +25,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// The name of the tool. The built-in tools are "edit", "delete", "rotateClockwise" and "rotateAnticlockwise". Can be set to a custom value.
         /// </summary>
         /// <param name="value">The value that configures the name.</param>
-        public DiagramShapeEditableSettingsToolBuilder Name(string value)
+        public DiagramShapeEditableSettingsToolBuilder<TShapeModel,TConnectionModel> Name(string value)
         {
             container.Name = value;
 
@@ -34,7 +36,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// The step of the rotateClockwise and rotateAnticlockwise tools.
         /// </summary>
         /// <param name="value">The value that configures the step.</param>
-        public DiagramShapeEditableSettingsToolBuilder Step(double value)
+        public DiagramShapeEditableSettingsToolBuilder<TShapeModel,TConnectionModel> Step(double value)
         {
             container.Step = value;
 

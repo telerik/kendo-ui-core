@@ -8,7 +8,9 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent API for configuring the DiagramConnectionDefaultsEditableSettings settings.
     /// </summary>
-    public class DiagramConnectionDefaultsEditableSettingsBuilder: IHideObjectMembers
+    public class DiagramConnectionDefaultsEditableSettingsBuilder<TShapeModel, TConnectionModel> : IHideObjectMembers
+        where TShapeModel : class
+        where TConnectionModel : class
     {
         private readonly DiagramConnectionDefaultsEditableSettings container;
 
@@ -23,9 +25,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// Specifies the the toolbar tools. Predefined tools are:
         /// </summary>
         /// <param name="configurator">The action that configures the tools.</param>
-        public DiagramConnectionDefaultsEditableSettingsBuilder Tools(Action<DiagramConnectionDefaultsEditableSettingsToolFactory> configurator)
+        public DiagramConnectionDefaultsEditableSettingsBuilder<TShapeModel,TConnectionModel> Tools(Action<DiagramConnectionDefaultsEditableSettingsToolFactory<TShapeModel,TConnectionModel>> configurator)
         {
-            configurator(new DiagramConnectionDefaultsEditableSettingsToolFactory(container.Tools));
+            configurator(new DiagramConnectionDefaultsEditableSettingsToolFactory<TShapeModel,TConnectionModel>(container.Tools));
             return this;
         }
         

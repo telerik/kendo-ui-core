@@ -8,7 +8,9 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent API for configuring the DiagramEditableRotateThumbFillSettings settings.
     /// </summary>
-    public class DiagramEditableRotateThumbFillSettingsBuilder: IHideObjectMembers
+    public class DiagramEditableRotateThumbFillSettingsBuilder<TShapeModel, TConnectionModel> : IHideObjectMembers
+        where TShapeModel : class
+        where TConnectionModel : class
     {
         private readonly DiagramEditableRotateThumbFillSettings container;
 
@@ -23,7 +25,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Set the thumb fill color.
         /// </summary>
         /// <param name="value">The value that configures the color.</param>
-        public DiagramEditableRotateThumbFillSettingsBuilder Color(string value)
+        public DiagramEditableRotateThumbFillSettingsBuilder<TShapeModel,TConnectionModel> Color(string value)
         {
             container.Color = value;
 
@@ -34,7 +36,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Set the thumb fill opacity.
         /// </summary>
         /// <param name="value">The value that configures the opacity.</param>
-        public DiagramEditableRotateThumbFillSettingsBuilder Opacity(double value)
+        public DiagramEditableRotateThumbFillSettingsBuilder<TShapeModel,TConnectionModel> Opacity(double value)
         {
             container.Opacity = value;
 

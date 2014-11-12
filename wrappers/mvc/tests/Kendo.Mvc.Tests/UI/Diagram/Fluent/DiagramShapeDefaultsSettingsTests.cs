@@ -8,13 +8,13 @@ namespace Kendo.Mvc.UI.Tests.Map.Fluent
     public class DiagramShapeDefaultsSettingsBuilderTests
     {
         private readonly DiagramShapeDefaultsSettings settings;
-        private readonly DiagramShapeDefaultsSettingsBuilder builder;
+        private readonly DiagramShapeDefaultsSettingsBuilder<object, object> builder;
         private readonly Func<object, object> nullFunc;
 
         public DiagramShapeDefaultsSettingsBuilderTests()
         {
             settings = new DiagramShapeDefaultsSettings();
-            builder = new DiagramShapeDefaultsSettingsBuilder(settings);
+            builder = new DiagramShapeDefaultsSettingsBuilder<object, object>(settings);
             nullFunc = (o) => null;
         }
 

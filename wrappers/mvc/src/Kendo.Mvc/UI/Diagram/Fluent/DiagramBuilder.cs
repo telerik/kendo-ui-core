@@ -79,6 +79,7 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+        
 
         /// <summary>
         /// Specifies the shape editable.
@@ -95,11 +96,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// Specifies the shape editable.
         /// </summary>
         /// <param name="configurator">The action that configures the editable.</param>
-        public DiagramBuilder<TShapeModel, TConnectionModel> Editable(Action<DiagramEditableSettingsBuilder<TShapeModel, TConnectionModel>> configurator)
+        public DiagramBuilder<TShapeModel,TConnectionModel> Editable(Action<DiagramEditableSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
         {
             container.Editable.Enabled = true;
-
-            configurator(new DiagramEditableSettingsBuilder<TShapeModel, TConnectionModel>(container.Editable));
+            
+            configurator(new DiagramEditableSettingsBuilder<TShapeModel,TConnectionModel>(container.Editable));
             return this;
         }
         
@@ -107,9 +108,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// The layout of a diagram consists in arranging the shapes (sometimes also the connections) in some fashion in order to achieve an aesthetically pleasing experience to the user. It aims at giving a more direct insight in the information contained within the diagram and its relational structure.On a technical level, layout consists of a multitude of algorithms and optimizations:and various ad-hoc calculations which depend on the type of layout. The criteria on which an algorithm is based vary but the common denominator is:Kendo diagram includes three of the most used layout algorithms which should cover most of your layout needs - tree layout, force-directed layout and layered layout. Please, check the type property for more details regarding each type.The generic way to apply a layout is by calling the layout() method on the diagram. The method has a single parameter options. It is an object, which can contain parameters which are specific to the layout as well as parameters customizing the global grid layout. Parameters which apply to other layout algorithms can be included but are overlooked if not applicable to the chose layout type. This means that you can define a set of parameters which cover all possible layout types and simply pass it in the method whatever the layout define in the first parameter.
         /// </summary>
         /// <param name="configurator">The action that configures the layout.</param>
-        public DiagramBuilder<TShapeModel,TConnectionModel> Layout(Action<DiagramLayoutSettingsBuilder> configurator)
+        public DiagramBuilder<TShapeModel,TConnectionModel> Layout(Action<DiagramLayoutSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
         {
-            configurator(new DiagramLayoutSettingsBuilder(container.Layout));
+            configurator(new DiagramLayoutSettingsBuilder<TShapeModel,TConnectionModel>(container.Layout));
             return this;
         }
         
@@ -139,9 +140,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// Defines the connections configuration.
         /// </summary>
         /// <param name="configurator">The action that configures the connectiondefaults.</param>
-        public DiagramBuilder<TShapeModel,TConnectionModel> ConnectionDefaults(Action<DiagramConnectionDefaultsSettingsBuilder> configurator)
+        public DiagramBuilder<TShapeModel,TConnectionModel> ConnectionDefaults(Action<DiagramConnectionDefaultsSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
         {
-            configurator(new DiagramConnectionDefaultsSettingsBuilder(container.ConnectionDefaults));
+            configurator(new DiagramConnectionDefaultsSettingsBuilder<TShapeModel,TConnectionModel>(container.ConnectionDefaults));
             return this;
         }
         
@@ -149,11 +150,12 @@ namespace Kendo.Mvc.UI.Fluent
         /// Defines the connections configuration.
         /// </summary>
         /// <param name="configurator">The action that configures the connections.</param>
-        public DiagramBuilder<TShapeModel,TConnectionModel> Connections(Action<DiagramConnectionFactory> configurator)
+        public DiagramBuilder<TShapeModel,TConnectionModel> Connections(Action<DiagramConnectionFactory<TShapeModel,TConnectionModel>> configurator)
         {
-            configurator(new DiagramConnectionFactory(container.Connections));
+            configurator(new DiagramConnectionFactory<TShapeModel,TConnectionModel>(container.Connections));
             return this;
         }
+        
 
         /// <summary>
         /// Defines the selectable options.
@@ -170,13 +172,14 @@ namespace Kendo.Mvc.UI.Fluent
         /// Defines the selectable options.
         /// </summary>
         /// <param name="configurator">The action that configures the selectable.</param>
-        public DiagramBuilder<TShapeModel,TConnectionModel> Selectable(Action<DiagramSelectableSettingsBuilder> configurator)
+        public DiagramBuilder<TShapeModel,TConnectionModel> Selectable(Action<DiagramSelectableSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
         {
             container.Selectable.Enabled = true;
             
-            configurator(new DiagramSelectableSettingsBuilder(container.Selectable));
+            configurator(new DiagramSelectableSettingsBuilder<TShapeModel,TConnectionModel>(container.Selectable));
             return this;
         }
+        
 
         /// <summary>
         /// Defines the pannable options.
@@ -193,11 +196,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// Defines the pannable options.
         /// </summary>
         /// <param name="configurator">The action that configures the pannable.</param>
-        public DiagramBuilder<TShapeModel,TConnectionModel> Pannable(Action<DiagramPannableSettingsBuilder> configurator)
+        public DiagramBuilder<TShapeModel,TConnectionModel> Pannable(Action<DiagramPannableSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
         {
             container.Pannable.Enabled = true;
             
-            configurator(new DiagramPannableSettingsBuilder(container.Pannable));
+            configurator(new DiagramPannableSettingsBuilder<TShapeModel,TConnectionModel>(container.Pannable));
             return this;
         }
         
@@ -205,9 +208,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// Defines the shape options.
         /// </summary>
         /// <param name="configurator">The action that configures the shapedefaults.</param>
-        public DiagramBuilder<TShapeModel,TConnectionModel> ShapeDefaults(Action<DiagramShapeDefaultsSettingsBuilder> configurator)
+        public DiagramBuilder<TShapeModel,TConnectionModel> ShapeDefaults(Action<DiagramShapeDefaultsSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
         {
-            configurator(new DiagramShapeDefaultsSettingsBuilder(container.ShapeDefaults));
+            configurator(new DiagramShapeDefaultsSettingsBuilder<TShapeModel,TConnectionModel>(container.ShapeDefaults));
             return this;
         }
         
@@ -215,9 +218,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// Defines the shape options.
         /// </summary>
         /// <param name="configurator">The action that configures the shapes.</param>
-        public DiagramBuilder<TShapeModel,TConnectionModel> Shapes(Action<DiagramShapeFactory> configurator)
+        public DiagramBuilder<TShapeModel,TConnectionModel> Shapes(Action<DiagramShapeFactory<TShapeModel,TConnectionModel>> configurator)
         {
-            configurator(new DiagramShapeFactory(container.Shapes));
+            configurator(new DiagramShapeFactory<TShapeModel,TConnectionModel>(container.Shapes));
             return this;
         }
         

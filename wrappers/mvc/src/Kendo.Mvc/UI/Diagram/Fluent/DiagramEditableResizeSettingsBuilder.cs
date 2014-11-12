@@ -8,7 +8,9 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent API for configuring the DiagramEditableResizeSettings settings.
     /// </summary>
-    public class DiagramEditableResizeSettingsBuilder: IHideObjectMembers
+    public class DiagramEditableResizeSettingsBuilder<TShapeModel, TConnectionModel> : IHideObjectMembers
+        where TShapeModel : class
+        where TConnectionModel : class
     {
         private readonly DiagramEditableResizeSettings container;
 
@@ -23,9 +25,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// Specifies the handles style.
         /// </summary>
         /// <param name="configurator">The action that configures the handles.</param>
-        public DiagramEditableResizeSettingsBuilder Handles(Action<DiagramEditableResizeHandlesSettingsBuilder> configurator)
+        public DiagramEditableResizeSettingsBuilder<TShapeModel,TConnectionModel> Handles(Action<DiagramEditableResizeHandlesSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
         {
-            configurator(new DiagramEditableResizeHandlesSettingsBuilder(container.Handles));
+            configurator(new DiagramEditableResizeHandlesSettingsBuilder<TShapeModel,TConnectionModel>(container.Handles));
             return this;
         }
         
