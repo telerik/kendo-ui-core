@@ -1,4 +1,10 @@
 <div id="example">
+    <div class="box">
+        <h4>Built-in methods</h4>
+        <div class="box-col">
+            <button class='export-pdf k-button'>Save as PDF</button>
+        </div>
+    </div>
     <div class="demo-section k-content">
         <div id="stock-chart"></div>
     </div>
@@ -71,6 +77,10 @@
                 }
             });
         }
+
+        $(".export-pdf").click(function() {
+            $("#stock-chart").getKendoStockChart().saveAsPDF();
+        });
 
         $(document).ready(createChart);
         $(document).bind("kendo:skinChange", createChart);

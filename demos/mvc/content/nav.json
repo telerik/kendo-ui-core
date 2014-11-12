@@ -8643,11 +8643,11 @@
         "url": "financial/index",
         "title": {
             "kendo-ui": "Example of Kendo UI charts for stock analysis apps",
-			"aspnet-mvc": "Example of ASP.NET MVC charts for stock analysis apps"
+            "aspnet-mvc": "Example of ASP.NET MVC charts for stock analysis apps"
         },
         "meta": {
             "kendo-ui": "With this demo for a stock chart, built with Kendo UI, you will be able to find out how Kendo UI chart widgets can be implemented in a financial app.",
-			"aspnet-mvc": "See how you can implement ASP.NET MVC stock chart in your financial app."
+            "aspnet-mvc": "See how you can implement ASP.NET MVC stock chart in your financial app."
         },
         "requiresServer": "true"
       },
@@ -8656,11 +8656,11 @@
         "url": "financial/panes",
         "title": {
             "kendo-ui": "Multiple panes in Kendo UI stock chart",
-			"aspnet-mvc": "Multiple panes in ASP.NET MVC stock chart"
+            "aspnet-mvc": "Multiple panes in ASP.NET MVC stock chart"
         },
         "meta": {
             "kendo-ui": "This demo illustrates the use of multiple graph panes in Kendo UI Stock chart.",
-			"aspnet-mvc": "This demo illustrates the use of multiple graph panes in ASP.NET MVC Stock chart."
+            "aspnet-mvc": "This demo illustrates the use of multiple graph panes in ASP.NET MVC Stock chart."
         },
         "requiresServer": "true"
       },
@@ -8669,11 +8669,22 @@
         "url": "financial/virtualization",
         "title": {
             "kendo-ui": "Virtualization in Kendo UI Stock Chart",
-			"aspnet-mvc": "Virtualization in ASP.NET MVC Stock Chart"
+            "aspnet-mvc": "Virtualization in ASP.NET MVC Stock Chart"
         },
         "meta": {
             "kendo-ui": "In this example we show you how the virtualization works in Kendo UI Stock Chart for rich data visualization.",
-			"aspnet-mvc": "In this example we show you how the virtualization works in ASP.NET MVC  Stock Chart for rich data visualization."
+            "aspnet-mvc": "In this example we show you how the virtualization works in ASP.NET MVC  Stock Chart for rich data visualization."
+        }
+      },
+      {
+        "text": "PDF Export",
+        "new": true,
+        "url": "financial/pdf-export",
+        "title": {
+            "kendo-ui": "Kendo UI StockChart saveAsPDF API method"
+        },
+        "meta": {
+            "kendo-ui": "This demo shows how to save the Stock Chart as PDF directly in the browser."
         }
       },
       {
