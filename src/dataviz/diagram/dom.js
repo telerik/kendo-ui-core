@@ -3732,8 +3732,8 @@
 
             createTool: function(tool) {
                 if (isPlainObject(tool)) {
-                    if (tool.type) {
-                        this[tool.type + "Tool"](tool);
+                    if (tool.name) {
+                        this[tool.name + "Tool"](tool);
                     } else if (tool.template) {
                         this._toolBar.add({
                             template: tool.template
@@ -3919,7 +3919,7 @@
             },
 
             "delete": function() {
-                this.diagram._remove(this.selectedElements(), true);
+                this.diagram._remove(this.selectedElements()[0], true);
             },
 
             edit: function() {

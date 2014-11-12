@@ -314,17 +314,7 @@ var __meta__ = {
                 width: 0
             },
             editable: {
-                tools: [{
-                    type: "edit"
-                }, {
-                    type: "rotateClockwise",
-                    step: 90
-                }, {
-                    type: "rotateAnticlockwise",
-                    step: 90
-                }, {
-                    type: "delete"
-                }]
+                tools: ["edit", "rotateClockwise", "rotateAnticlockwise", "delete"]
             }
         },
         editable: {
