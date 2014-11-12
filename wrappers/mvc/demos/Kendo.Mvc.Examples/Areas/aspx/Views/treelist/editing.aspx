@@ -14,7 +14,7 @@ Inherits="System.Web.Mvc.ViewPage<IEnumerable<Kendo.Mvc.Examples.Models.TreeList
             columns.Add().Field(e => e.HireDate).Format("{0:MMMM d, yyyy}");
             columns.Add().Field(e => e.Phone);
             columns.Add().Field(e => e.Extension).Title("Ext").Format("{0:#}");
-            columns.Add().Title("Edit").Width(200).Command(c =>
+            columns.Add().Width(200).Command(c =>
             {
                 c.Edit();
                 c.Destroy();

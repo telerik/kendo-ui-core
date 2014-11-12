@@ -98,14 +98,10 @@ namespace Kendo.Mvc.UI.Fluent
             }
 
             container.Field = expression.MemberWithoutInstance();
-            Type type = expression.ToMemberExpression().Type();
-
-            Func<T, TValue> value = expression.Compile();
 
             if (typeof(T).IsPlainType())
             {
                 var metadata = ModelMetadata.FromLambdaExpression(expression, new ViewDataDictionary<T>());
-                type = metadata.ModelType;
                 container.Title = metadata.DisplayName;
                 container.Format = metadata.DisplayFormatString;
             }

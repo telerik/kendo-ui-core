@@ -195,16 +195,7 @@ namespace Kendo.Mvc.UI
                         return;
                     }
 
-                    string editorHtml;
-
-                    //if (column.TemplateName.HasValue())
-                    //{
-                    //    editorHtml = htmlHelper.EditorFor(expression, column.TemplateName).ToHtmlString();
-                    //}
-                    //else
-                    //{
-                        editorHtml = htmlHelper.Editor(column.Field).ToHtmlString();
-                    //}
+                    var editorHtml = htmlHelper.Editor(column.Field).ToHtmlString();
 
                     if (IsInClientTemplate)
                     {

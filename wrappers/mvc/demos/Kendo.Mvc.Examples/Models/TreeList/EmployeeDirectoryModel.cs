@@ -20,7 +20,8 @@
         public string Phone { get; set; }
 
         [Required]
-        [Range(0, 9999)]
+        [Range(1000, 9999)]
+        [UIHint("Integer")]
         public int? Extension { get; set; }
         public string Position { get; set; }
         public bool hasChildren { get; set; }
