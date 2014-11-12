@@ -299,6 +299,68 @@
         equal(method.calls("schemaLevels"), 1);
     });
 
+    test("treeview renders dimension icon for dimension fields", function() {
+        var configurator = createConfigurator({
+            dataSource: {
+                schema: {
+                    dimensions: function() {
+                        return [
+                            { uniqueName: "foo", type: 1 },
+                            { uniqueName: "bar", type: 3 }
+                        ];
+                    }
+                }
+            }
+        });
+
+        configurator.treeView.dataSource.read();
+
+        var items = configurator.element.find(".k-treeview").find("li");
+        var icon1 = items.eq(0).find(".k-icon");
+        var icon2 = items.eq(1).find(".k-icon");
+
+        ok(icon1.hasClass("k-i-dimension"));
+        ok(icon2.hasClass("k-i-dimension"));
+    });
+
+    test("treeview renders measure icon for measure field", function() {
+        var configurator = createConfigurator({
+            dataSource: {
+                schema: {
+                    dimensions: function() {
+                        return [ { uniqueName: "foo", type: 2 } ];
+                    }
+                }
+            }
+        });
+
+        configurator.treeView.dataSource.read();
+
+        var items = configurator.element.find(".k-treeview").find("li");
+        var icon = items.eq(0).find(".k-icon");
+
+        ok(icon.hasClass("k-i-sum"));
+    });
+
+    test("treeview renders kpi icon for kpi field", function() {
+        var configurator = createConfigurator({
+            dataSource: {
+                schema: {
+                    dimensions: function() {
+                        return [ { uniqueName: "foo", type: 2 } ];
+                    }
+                }
+            }
+        });
+
+        configurator.treeView.dataSource.read();
+
+        var items = configurator.element.find(".k-treeview").find("li");
+        var icon = items.eq(1).find(".k-icon");
+
+        ok(icon.hasClass("k-i-kpi"));
+    });
+
     test("create columns setting target", function() {
         var configurator = createConfigurator();
 
