@@ -682,6 +682,7 @@ var __meta__ = {
             this._selectable();
             this._attachEvents();
             this._toolbar();
+            this._scrollable();
 
             this._adjustHeight();
 
@@ -690,6 +691,15 @@ var __meta__ = {
             }
 
             kendo.notify(this);
+        },
+
+        _scrollable: function() {
+            if (this.options.scrollable) {
+                var scrollables = this.header.closest(".k-grid-header-wrap");
+                this.content.closest(".k-grid-content").bind("scroll" + NS, function() {
+                    scrollables.scrollLeft(this.scrollLeft);
+                });
+            }
         },
 
         _progress: function() {

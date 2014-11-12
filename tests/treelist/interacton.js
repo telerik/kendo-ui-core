@@ -54,6 +54,25 @@
         return read;
     }
 
+    test("horizontal scroll of the content scrolls the header", function() {
+        dom.width(100);
+
+        createTreeList({
+            columns: [
+                { field: "id", width: 100 },
+                { field: "parentId", width: 200 }
+            ]
+        });
+
+        var content = instance.content.closest(".k-grid-content");
+        var header = instance.header.closest(".k-grid-header-wrap");
+
+        content[0].scrollLeft = 20;
+        content.trigger("scroll");
+
+        equal(header.scrollLeft(), content.scrollLeft());
+    });
+
     test("click on expand arrow shows child rows", function() {
         createTreeList();
 
