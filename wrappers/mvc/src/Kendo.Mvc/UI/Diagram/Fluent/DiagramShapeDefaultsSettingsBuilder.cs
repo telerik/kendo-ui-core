@@ -18,6 +18,17 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         //>> Fields
+
+        /// <summary>
+        /// Defines the shape editable options.
+        /// </summary>
+        /// <param name="enabled">Enables or disables the editable option.</param>
+        public DiagramShapeDefaultsSettingsBuilder Editable(bool enabled)
+        {
+            container.Editable.Enabled = enabled;
+            return this;
+        }
+
         
         /// <summary>
         /// Defines the shape editable options.
@@ -25,6 +36,8 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="configurator">The action that configures the editable.</param>
         public DiagramShapeDefaultsSettingsBuilder Editable(Action<DiagramShapeDefaultsEditableSettingsBuilder> configurator)
         {
+            container.Editable.Enabled = true;
+            
             configurator(new DiagramShapeDefaultsEditableSettingsBuilder(container.Editable));
             return this;
         }

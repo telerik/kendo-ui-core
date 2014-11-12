@@ -21,6 +21,8 @@ namespace Kendo.Mvc.UI
                 
             Rotate = new DiagramEditableRotateSettings();
                 
+            Tools = new List<DiagramEditableSettingsTool>();
+                
         //<< Initialization
 
             DefaultShapeDataItem = CreateShapeDefaultItem;
@@ -28,6 +30,20 @@ namespace Kendo.Mvc.UI
         }
 
         //>> Fields
+        
+        public string ShapeTemplate { get; set; }
+
+        public string ShapeTemplateId { get; set; }
+        
+        public string ConnectionTemplate { get; set; }
+
+        public string ConnectionTemplateId { get; set; }
+        
+        public List<DiagramEditableSettingsTool> Tools
+        {
+            get;
+            set;
+        }
         
         public DiagramEditableResizeSettings Resize
         {
@@ -67,11 +83,47 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        public bool Enabled { get; set; }
+
         protected override void Serialize(IDictionary<string, object> json)
         {
             //>> Serialization
         
+            if (!string.IsNullOrEmpty(ShapeTemplateId))
+            {
+                json["shapeTemplate"] = new ClientHandlerDescriptor {
+                    HandlerName = string.Format(
+                        "jQuery('#{0}').html()",
+                        ShapeTemplateId
+                    )
+                };
+            }
+            else if (!string.IsNullOrEmpty(ShapeTemplate))
+            {
+                json["shapeTemplate"] = ShapeTemplate;
+            }
+                
+            if (!string.IsNullOrEmpty(ConnectionTemplateId))
+            {
+                json["connectionTemplate"] = new ClientHandlerDescriptor {
+                    HandlerName = string.Format(
+                        "jQuery('#{0}').html()",
+                        ConnectionTemplateId
+                    )
+                };
+            }
+            else if (!string.IsNullOrEmpty(ConnectionTemplate))
+            {
+                json["connectionTemplate"] = ConnectionTemplate;
+            }
+                
+            var tools = Tools.ToJson();
+            if (tools.Any())
+            {
+                json["tools"] = tools;
+            }
         //<< Serialization
+            SerializeEditTemplates(json);
 
             if (Resize != null)
             {
@@ -100,7 +152,7 @@ namespace Kendo.Mvc.UI
             }
         }
 
-        private void SerializeEditTemplate(IDictionary<string, object> options)
+        private void SerializeEditTemplates(IDictionary<string, object> options)
         {
             SerializeShapeEditTemplate(options);
             SerializeConnectionEditTemplate(options);

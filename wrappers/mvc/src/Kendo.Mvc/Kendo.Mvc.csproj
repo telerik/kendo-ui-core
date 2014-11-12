@@ -718,6 +718,17 @@
     <Compile Include="UI\Gantt\Fluent\GanttResourceColumnBuilder.cs" />
     <Compile Include="UI\Gauge\Fluent\GaugeRadialPointerFactory.cs" />
     <Compile Include="UI\Gauge\GaugeLinearPointerFactory.cs" />
+    <Compile Include="UI\Gantt\Fluent\GanttResourceColumnBuilder.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramEditableResizeSettingsBuilder.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramEditableRotateSettingsBuilder.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramEditableRotateThumbFillSettingsBuilder.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramEditableRotateThumbSettingsBuilder.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramEditableRotateThumbStrokeSettingsBuilder.cs" />
+    <Compile Include="UI\Diagram\Settings\DiagramEditableResizeSettings.cs" />
+    <Compile Include="UI\Diagram\Settings\DiagramEditableRotateSettings.cs" />
+    <Compile Include="UI\Diagram\Settings\DiagramEditableRotateThumbFillSettings.cs" />
+    <Compile Include="UI\Diagram\Settings\DiagramEditableRotateThumbSettings.cs" />
+    <Compile Include="UI\Diagram\Settings\DiagramEditableRotateThumbStrokeSettings.cs" />
     <Compile Include="UI\RadioButton\RadioButton.cs" />
     <Compile Include="UI\RadioButton\Fluent\RadioButtonBuilder.cs" />
     <Compile Include="UI\RadioButton\Html\RadioButtonHtmlBuilder.cs" />
@@ -2141,8 +2152,6 @@
   <ItemGroup>
     <Compile Include="UI\Diagram\Settings\DiagramEditableSettings.cs" />
     <Compile Include="UI\Diagram\Fluent\DiagramEditableSettingsBuilder.cs" />
-    <Compile Include="UI\Diagram\Settings\DiagramEditableResizeSettings.cs" />
-    <Compile Include="UI\Diagram\Fluent\DiagramEditableResizeSettingsBuilder.cs" />
     <Compile Include="UI\Diagram\Settings\DiagramEditableResizeHandlesSettings.cs" />
     <Compile Include="UI\Diagram\Fluent\DiagramEditableResizeHandlesSettingsBuilder.cs" />
     <Compile Include="UI\Diagram\Settings\DiagramEditableResizeHandlesHoverSettings.cs" />
@@ -2151,12 +2160,6 @@
     <Compile Include="UI\Diagram\Fluent\DiagramEditableResizeHandlesHoverStrokeSettingsBuilder.cs" />
     <Compile Include="UI\Diagram\Settings\DiagramEditableResizeHandlesStrokeSettings.cs" />
     <Compile Include="UI\Diagram\Fluent\DiagramEditableResizeHandlesStrokeSettingsBuilder.cs" />
-    <Compile Include="UI\Diagram\Settings\DiagramEditableRotateSettings.cs" />
-    <Compile Include="UI\Diagram\Fluent\DiagramEditableRotateSettingsBuilder.cs" />
-    <Compile Include="UI\Diagram\Settings\DiagramEditableRotateThumbSettings.cs" />
-    <Compile Include="UI\Diagram\Fluent\DiagramEditableRotateThumbSettingsBuilder.cs" />
-    <Compile Include="UI\Diagram\Settings\DiagramEditableRotateThumbStrokeSettings.cs" />
-    <Compile Include="UI\Diagram\Fluent\DiagramEditableRotateThumbStrokeSettingsBuilder.cs" />
     <Compile Include="UI\Diagram\Settings\DiagramEditableSelectSettings.cs" />
     <Compile Include="UI\Diagram\Fluent\DiagramEditableSelectSettingsBuilder.cs" />
     <Compile Include="UI\Diagram\Settings\DiagramEditableSelectStrokeSettings.cs" />
@@ -2248,8 +2251,6 @@
     <Compile Include="UI\Diagram\Fluent\DiagramEditableResizeHandlesFillSettingsBuilder.cs" />
     <Compile Include="UI\Diagram\Settings\DiagramEditableResizeHandlesHoverFillSettings.cs" />
     <Compile Include="UI\Diagram\Fluent\DiagramEditableResizeHandlesHoverFillSettingsBuilder.cs" />
-    <Compile Include="UI\Diagram\Settings\DiagramEditableRotateThumbFillSettings.cs" />
-    <Compile Include="UI\Diagram\Fluent\DiagramEditableRotateThumbFillSettingsBuilder.cs" />
     <Compile Include="UI\Diagram\Settings\DiagramSelectableSettings.cs" />
     <Compile Include="UI\Diagram\Fluent\DiagramSelectableSettingsBuilder.cs" />
     <Compile Include="UI\Diagram\Settings\DiagramSelectableStrokeSettings.cs" />
@@ -2330,5 +2331,36 @@
     <Compile Include="UI\Gantt\Fluent\GanttAssignmentsSettingsBuilder.cs" />
     <Compile Include="UI\Gantt\Settings\GanttResourcesSettings.cs" />
     <Compile Include="UI\Gantt\Fluent\GanttResourcesSettingsBuilder.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\Diagram\Settings\DiagramConnectionDefaultsEditableSettings.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramConnectionDefaultsEditableSettingsBuilder.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramConnectionDefaultsEditableSettingsToolFactory.cs" />
+    <Compile Include="UI\Diagram\DiagramConnectionDefaultsEditableSettingsTool.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramConnectionDefaultsEditableSettingsToolBuilder.cs" />
+    <Compile Include="UI\Diagram\Settings\DiagramConnectionEditableSettings.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramConnectionEditableSettingsBuilder.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramConnectionEditableSettingsToolFactory.cs" />
+    <Compile Include="UI\Diagram\DiagramConnectionEditableSettingsTool.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramConnectionEditableSettingsToolBuilder.cs" />
+    <Compile Include="UI\Diagram\Settings\DiagramConnectionFromSettings.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramConnectionFromSettingsBuilder.cs" />
+    <Compile Include="UI\Diagram\Settings\DiagramConnectionToSettings.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramConnectionToSettingsBuilder.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramEditableSettingsToolFactory.cs" />
+    <Compile Include="UI\Diagram\DiagramEditableSettingsTool.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramEditableSettingsToolBuilder.cs" />
+    <Compile Include="UI\Diagram\Settings\DiagramPannableSettings.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramPannableSettingsBuilder.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramShapeDefaultsEditableSettingsToolFactory.cs" />
+    <Compile Include="UI\Diagram\DiagramShapeDefaultsEditableSettingsTool.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramShapeDefaultsEditableSettingsToolBuilder.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramShapeEditableSettingsToolFactory.cs" />
+    <Compile Include="UI\Diagram\DiagramShapeEditableSettingsTool.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramShapeEditableSettingsToolBuilder.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\Diagram\DiagramPannableKey.cs" />
+    <Compile Include="UI\Diagram\DiagramSelectableKey.cs" />
   </ItemGroup>
 </Project>

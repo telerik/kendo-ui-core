@@ -20,6 +20,49 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Fields
         
         /// <summary>
+        /// Defines the connection from.
+        /// </summary>
+        /// <param name="configurator">The action that configures the from.</param>
+        public DiagramConnectionBuilder From(Action<DiagramConnectionFromSettingsBuilder> configurator)
+        {
+            configurator(new DiagramConnectionFromSettingsBuilder(container.From));
+            return this;
+        }
+        
+        /// <summary>
+        /// Defines the connection to.
+        /// </summary>
+        /// <param name="configurator">The action that configures the to.</param>
+        public DiagramConnectionBuilder To(Action<DiagramConnectionToSettingsBuilder> configurator)
+        {
+            configurator(new DiagramConnectionToSettingsBuilder(container.To));
+            return this;
+        }
+
+        /// <summary>
+        /// Defines the shape editable options.
+        /// </summary>
+        /// <param name="enabled">Enables or disables the editable option.</param>
+        public DiagramConnectionBuilder Editable(bool enabled)
+        {
+            container.Editable.Enabled = enabled;
+            return this;
+        }
+
+        
+        /// <summary>
+        /// Defines the shape editable options.
+        /// </summary>
+        /// <param name="configurator">The action that configures the editable.</param>
+        public DiagramConnectionBuilder Editable(Action<DiagramConnectionEditableSettingsBuilder> configurator)
+        {
+            container.Editable.Enabled = true;
+            
+            configurator(new DiagramConnectionEditableSettingsBuilder(container.Editable));
+            return this;
+        }
+        
+        /// <summary>
         /// Defines the stroke configuration.
         /// </summary>
         /// <param name="configurator">The action that configures the stroke.</param>

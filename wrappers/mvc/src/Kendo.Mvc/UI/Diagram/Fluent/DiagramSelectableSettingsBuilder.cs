@@ -29,6 +29,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
         
+        /// <summary>
+        /// The selectable key.
+        /// </summary>
+        /// <param name="value">The value that configures the key.</param>
+        public DiagramSelectableSettingsBuilder Key(DiagramSelectableKey value)
+        {
+            container.Key = value;
+
+            return this;
+        }
+        
         //<< Fields
     }
 }

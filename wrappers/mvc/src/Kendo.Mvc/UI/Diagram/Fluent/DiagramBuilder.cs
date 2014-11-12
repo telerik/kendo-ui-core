@@ -79,6 +79,17 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        /// <summary>
+        /// Specifies the shape editable.
+        /// </summary>
+        /// <param name="enabled">Enables or disables the editable option.</param>
+        public DiagramBuilder<TShapeModel,TConnectionModel> Editable(bool enabled)
+        {
+            container.Editable.Enabled = enabled;
+            return this;
+        }
+
         
         /// <summary>
         /// Specifies the shape editable.
@@ -86,6 +97,8 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="configurator">The action that configures the editable.</param>
         public DiagramBuilder<TShapeModel, TConnectionModel> Editable(Action<DiagramEditableSettingsBuilder<TShapeModel, TConnectionModel>> configurator)
         {
+            container.Editable.Enabled = true;
+
             configurator(new DiagramEditableSettingsBuilder<TShapeModel, TConnectionModel>(container.Editable));
             return this;
         }
@@ -141,6 +154,17 @@ namespace Kendo.Mvc.UI.Fluent
             configurator(new DiagramConnectionFactory(container.Connections));
             return this;
         }
+
+        /// <summary>
+        /// Defines the selectable options.
+        /// </summary>
+        /// <param name="enabled">Enables or disables the selectable option.</param>
+        public DiagramBuilder<TShapeModel,TConnectionModel> Selectable(bool enabled)
+        {
+            container.Selectable.Enabled = enabled;
+            return this;
+        }
+
         
         /// <summary>
         /// Defines the selectable options.
@@ -148,7 +172,32 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="configurator">The action that configures the selectable.</param>
         public DiagramBuilder<TShapeModel,TConnectionModel> Selectable(Action<DiagramSelectableSettingsBuilder> configurator)
         {
+            container.Selectable.Enabled = true;
+            
             configurator(new DiagramSelectableSettingsBuilder(container.Selectable));
+            return this;
+        }
+
+        /// <summary>
+        /// Defines the pannable options.
+        /// </summary>
+        /// <param name="enabled">Enables or disables the pannable option.</param>
+        public DiagramBuilder<TShapeModel,TConnectionModel> Pannable(bool enabled)
+        {
+            container.Pannable.Enabled = enabled;
+            return this;
+        }
+
+        
+        /// <summary>
+        /// Defines the pannable options.
+        /// </summary>
+        /// <param name="configurator">The action that configures the pannable.</param>
+        public DiagramBuilder<TShapeModel,TConnectionModel> Pannable(Action<DiagramPannableSettingsBuilder> configurator)
+        {
+            container.Pannable.Enabled = true;
+            
+            configurator(new DiagramPannableSettingsBuilder(container.Pannable));
             return this;
         }
         
@@ -237,20 +286,6 @@ namespace Kendo.Mvc.UI.Fluent
         public DiagramBuilder<TShapeModel, TConnectionModel> Events(Action<DiagramEventBuilder> configurator)
         {
             configurator(new DiagramEventBuilder(Component.Events));
-
-            return this;
-        }
-
-        /// <summary>
-        /// Specifies the shape editable.
-        /// </summary>
-        /// <param name="visible">A value indicating if the editable will be available.</param>
-        public DiagramBuilder<TShapeModel, TConnectionModel> Editable(bool visible)
-        {
-            if (!visible)
-            {
-                container.Editable = null;
-            }
 
             return this;
         }

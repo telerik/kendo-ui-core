@@ -30,6 +30,16 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
         
+        /// <summary>
+        /// Specifies the the toolbar tools. Predefined tools are:
+        /// </summary>
+        /// <param name="configurator">The action that configures the tools.</param>
+        public DiagramShapeDefaultsEditableSettingsBuilder Tools(Action<DiagramShapeDefaultsEditableSettingsToolFactory> configurator)
+        {
+            configurator(new DiagramShapeDefaultsEditableSettingsToolFactory(container.Tools));
+            return this;
+        }
+        
         //<< Fields
     }
 }

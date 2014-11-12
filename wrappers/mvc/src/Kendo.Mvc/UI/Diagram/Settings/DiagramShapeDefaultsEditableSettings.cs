@@ -12,6 +12,8 @@ namespace Kendo.Mvc.UI
         {
             //>> Initialization
         
+            Tools = new List<DiagramShapeDefaultsEditableSettingsTool>();
+                
         //<< Initialization
         }
 
@@ -19,18 +21,34 @@ namespace Kendo.Mvc.UI
         
         public bool? Connect { get; set; }
         
+        public List<DiagramShapeDefaultsEditableSettingsTool> Tools
+        {
+            get;
+            set;
+        }
+        
         //<< Fields
+
+        public bool Enabled { get; set; }
 
         protected override void Serialize(IDictionary<string, object> json)
         {
-            //>> Serialization
+            if (Enabled)
+            {
+                //>> Serialization
         
             if (Connect.HasValue)
             {
                 json["connect"] = Connect;
             }
                 
+            var tools = Tools.ToJson();
+            if (tools.Any())
+            {
+                json["tools"] = tools;
+            }
         //<< Serialization
+            }
         }
     }
 }

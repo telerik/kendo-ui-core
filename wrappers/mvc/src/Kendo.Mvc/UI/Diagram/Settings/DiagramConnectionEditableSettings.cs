@@ -6,22 +6,24 @@ namespace Kendo.Mvc.UI
     using System.Web.Routing;
     using Kendo.Mvc.Extensions;
 
-    public class DiagramShapeEditableSettings : JsonObject
+    public class DiagramConnectionEditableSettings : JsonObject
     {
-        public DiagramShapeEditableSettings()
+        public DiagramConnectionEditableSettings()
         {
+            Enabled = true;
+        
             //>> Initialization
         
-            Tools = new List<DiagramShapeEditableSettingsTool>();
+            Tools = new List<DiagramConnectionEditableSettingsTool>();
                 
         //<< Initialization
         }
 
+        public bool Enabled { get; set; }
+
         //>> Fields
         
-        public bool? Connect { get; set; }
-        
-        public List<DiagramShapeEditableSettingsTool> Tools
+        public List<DiagramConnectionEditableSettingsTool> Tools
         {
             get;
             set;
@@ -29,26 +31,16 @@ namespace Kendo.Mvc.UI
         
         //<< Fields
 
-        public bool Enabled { get; set; }
-
         protected override void Serialize(IDictionary<string, object> json)
         {
-            if (Enabled)
-            {
-                //>> Serialization
+            //>> Serialization
         
-            if (Connect.HasValue)
-            {
-                json["connect"] = Connect;
-            }
-                
             var tools = Tools.ToJson();
             if (tools.Any())
             {
                 json["tools"] = tools;
             }
         //<< Serialization
-            }
         }
     }
 }

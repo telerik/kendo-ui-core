@@ -6,28 +6,20 @@ namespace Kendo.Mvc.UI
     using System.Web.Routing;
     using Kendo.Mvc.Extensions;
 
-    public class DiagramEditableResizeSettings : JsonObject
+    public class DiagramConnectionFromSettings : JsonObject
     {
-        public DiagramEditableResizeSettings()
+        public DiagramConnectionFromSettings()
         {
-            Enabled = true;
-        
             //>> Initialization
         
-            Handles = new DiagramEditableResizeHandlesSettings();
-                
         //<< Initialization
         }
 
-        public bool Enabled { get; set; }
-
         //>> Fields
         
-        public DiagramEditableResizeHandlesSettings Handles
-        {
-            get;
-            set;
-        }
+        public double? X { get; set; }
+        
+        public double? Y { get; set; }
         
         //<< Fields
 
@@ -35,11 +27,16 @@ namespace Kendo.Mvc.UI
         {
             //>> Serialization
         
-            var handles = Handles.ToJson();
-            if (handles.Any())
+            if (X.HasValue)
             {
-                json["handles"] = handles;
+                json["x"] = X;
             }
+                
+            if (Y.HasValue)
+            {
+                json["y"] = Y;
+            }
+                
         //<< Serialization
         }
     }

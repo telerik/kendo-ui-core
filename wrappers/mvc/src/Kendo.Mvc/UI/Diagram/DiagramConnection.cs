@@ -12,6 +12,10 @@ namespace Kendo.Mvc.UI
         {
             //>> Initialization
         
+            Editable = new DiagramConnectionEditableSettings();
+                
+            From = new DiagramConnectionFromSettings();
+                
             Hover = new DiagramConnectionHoverSettings();
                 
             Points = new List<DiagramConnectionPoint>();
@@ -20,10 +24,30 @@ namespace Kendo.Mvc.UI
                 
             Stroke = new DiagramConnectionStrokeSettings();
                 
+            To = new DiagramConnectionToSettings();
+                
         //<< Initialization
         }
 
         //>> Fields
+        
+        public DiagramConnectionFromSettings From
+        {
+            get;
+            set;
+        }
+        
+        public DiagramConnectionToSettings To
+        {
+            get;
+            set;
+        }
+        
+        public DiagramConnectionEditableSettings Editable
+        {
+            get;
+            set;
+        }
         
         public DiagramConnectionStrokeSettings Stroke
         {
@@ -59,18 +83,34 @@ namespace Kendo.Mvc.UI
         {
             //>> Serialization
         
+            var from = From.ToJson();
+            if (from.Any())
+            {
+                json["from"] = from;
+            }
+            var to = To.ToJson();
+            if (to.Any())
+            {
+                json["to"] = to;
+            }
+            var editable = Editable.ToJson();
+            if (editable.Any())
+            {
+                json["editable"] = editable;
+            } else if (Editable.Enabled != true) {
+                json["editable"] = Editable.Enabled;
+            }
+
             var stroke = Stroke.ToJson();
             if (stroke.Any())
             {
                 json["stroke"] = stroke;
             }
-                
             var hover = Hover.ToJson();
             if (hover.Any())
             {
                 json["hover"] = hover;
             }
-                
             if (StartCap.HasValue())
             {
                 json["startCap"] = StartCap;
@@ -86,13 +126,11 @@ namespace Kendo.Mvc.UI
             {
                 json["points"] = points;
             }
-                
             var selection = Selection.ToJson();
             if (selection.Any())
             {
                 json["selection"] = selection;
             }
-                
         //<< Serialization
         }
     }

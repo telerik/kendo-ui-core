@@ -119,7 +119,6 @@ namespace Kendo.Mvc.UI
             {
                 json["grid"] = grid;
             }
-                
             if (LayerSeparation.HasValue)
             {
                 json["layerSeparation"] = LayerSeparation;

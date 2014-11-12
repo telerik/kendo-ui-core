@@ -56,19 +56,16 @@ namespace Kendo.Mvc.UI
             {
                 json["fill"] = fill;
             }
-                
             var stroke = Stroke.ToJson();
             if (stroke.Any())
             {
                 json["stroke"] = stroke;
             }
-                
             var hover = Hover.ToJson();
             if (hover.Any())
             {
                 json["hover"] = hover;
             }
-                
             if (Width.HasValue)
             {
                 json["width"] = Width;

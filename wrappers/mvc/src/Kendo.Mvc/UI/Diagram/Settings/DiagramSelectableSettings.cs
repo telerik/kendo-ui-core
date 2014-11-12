@@ -25,7 +25,11 @@ namespace Kendo.Mvc.UI
             set;
         }
         
+        public DiagramSelectableKey? Key { get; set; }
+        
         //<< Fields
+
+        public bool? Enabled { get; set; }
 
         protected override void Serialize(IDictionary<string, object> json)
         {
@@ -35,6 +39,10 @@ namespace Kendo.Mvc.UI
             if (stroke.Any())
             {
                 json["stroke"] = stroke;
+            }
+            if (Key.HasValue)
+            {
+                json["key"] = Key;
             }
                 
         //<< Serialization

@@ -36,7 +36,6 @@ namespace Kendo.Mvc.UI
             {
                 json["handles"] = handles;
             }
-                
         //<< Serialization
         }
     }

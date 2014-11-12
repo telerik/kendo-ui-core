@@ -120,6 +120,7 @@ module CodeGen::MVC::Wrappers
 		'diagram.shapedefaults.visual',
 		'diagram.shapes.visual',
 		'diagram.datasource',
+		'diagram.connectionsdatasource',
 		'treemap.datasource'
     ]
 

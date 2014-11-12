@@ -95,6 +95,8 @@ namespace Kendo.Mvc.UI
         
         //<< Fields
 
+        public bool Enabled { get; set; }
+
         public ClientHandlerDescriptor Visual { get; set; }
 
         protected override void Serialize(IDictionary<string, object> json)
@@ -105,8 +107,10 @@ namespace Kendo.Mvc.UI
             if (editable.Any())
             {
                 json["editable"] = editable;
+            } else if (Editable.Enabled != true) {
+                json["editable"] = Editable.Enabled;
             }
-                
+
             if (Path.HasValue())
             {
                 json["path"] = Path;
@@ -117,7 +121,6 @@ namespace Kendo.Mvc.UI
             {
                 json["stroke"] = stroke;
             }
-                
             if (Type.HasValue())
             {
                 json["type"] = Type;
@@ -158,31 +161,26 @@ namespace Kendo.Mvc.UI
             {
                 json["fill"] = fill;
             }
-                
             var hover = Hover.ToJson();
             if (hover.Any())
             {
                 json["hover"] = hover;
             }
-                
             var connectors = Connectors.ToJson();
             if (connectors.Any())
             {
                 json["connectors"] = connectors;
             }
-                
             var rotation = Rotation.ToJson();
             if (rotation.Any())
             {
                 json["rotation"] = rotation;
             }
-                
             var content = Content.ToJson();
             if (content.Any())
             {
                 json["content"] = content;
             }
-                
             if (Source.HasValue())
             {
                 json["source"] = Source;

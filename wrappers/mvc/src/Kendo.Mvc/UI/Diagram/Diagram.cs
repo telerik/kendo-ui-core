@@ -38,6 +38,8 @@ namespace Kendo.Mvc.UI
                 
             Layout = new DiagramLayoutSettings();
                 
+            Pannable = new DiagramPannableSettings();
+                
             Selectable = new DiagramSelectableSettings();
                 
             ShapeDefaults = new DiagramShapeDefaultsSettings();
@@ -100,6 +102,12 @@ namespace Kendo.Mvc.UI
         }
         
         public DiagramSelectableSettings Selectable
+        {
+            get;
+            set;
+        }
+        
+        public DiagramPannableSettings Pannable
         {
             get;
             set;
@@ -173,7 +181,6 @@ namespace Kendo.Mvc.UI
             {
                 json["layout"] = layout;
             }
-                
             if (!string.IsNullOrEmpty(TemplateId))
             {
                 json["template"] = new ClientHandlerDescriptor {
@@ -193,31 +200,37 @@ namespace Kendo.Mvc.UI
             {
                 json["connectionDefaults"] = connectionDefaults;
             }
-                
             var connections = Connections.ToJson();
             if (connections.Any())
             {
                 json["connections"] = connections;
             }
-                
             var selectable = Selectable.ToJson();
             if (selectable.Any())
             {
                 json["selectable"] = selectable;
+            } else if (Selectable.Enabled != true) {
+                json["selectable"] = Selectable.Enabled;
             }
-                
+
+            var pannable = Pannable.ToJson();
+            if (pannable.Any())
+            {
+                json["pannable"] = pannable;
+            } else if (Pannable.Enabled != true) {
+                json["pannable"] = Pannable.Enabled;
+            }
+
             var shapeDefaults = ShapeDefaults.ToJson();
             if (shapeDefaults.Any())
             {
                 json["shapeDefaults"] = shapeDefaults;
             }
-                
             var shapes = Shapes.ToJson();
             if (shapes.Any())
             {
                 json["shapes"] = shapes;
             }
-                
         //<< Serialization
 
             if (Editable != null)

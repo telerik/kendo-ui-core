@@ -12,6 +12,8 @@ namespace Kendo.Mvc.UI
         {
             //>> Initialization
         
+            Editable = new DiagramConnectionDefaultsEditableSettings();
+                
             Hover = new DiagramConnectionDefaultsHoverSettings();
                 
             Selection = new DiagramConnectionDefaultsSelectionSettings();
@@ -22,6 +24,12 @@ namespace Kendo.Mvc.UI
         }
 
         //>> Fields
+        
+        public DiagramConnectionDefaultsEditableSettings Editable
+        {
+            get;
+            set;
+        }
         
         public DiagramConnectionDefaultsStrokeSettings Stroke
         {
@@ -51,18 +59,24 @@ namespace Kendo.Mvc.UI
         {
             //>> Serialization
         
+            var editable = Editable.ToJson();
+            if (editable.Any())
+            {
+                json["editable"] = editable;
+            } else if (Editable.Enabled != true) {
+                json["editable"] = Editable.Enabled;
+            }
+
             var stroke = Stroke.ToJson();
             if (stroke.Any())
             {
                 json["stroke"] = stroke;
             }
-                
             var hover = Hover.ToJson();
             if (hover.Any())
             {
                 json["hover"] = hover;
             }
-                
             if (StartCap.HasValue())
             {
                 json["startCap"] = StartCap;
@@ -78,7 +92,6 @@ namespace Kendo.Mvc.UI
             {
                 json["selection"] = selection;
             }
-                
         //<< Serialization
         }
     }

@@ -44,13 +44,11 @@ namespace Kendo.Mvc.UI
             {
                 json["fill"] = fill;
             }
-                
             var stroke = Stroke.ToJson();
             if (stroke.Any())
             {
                 json["stroke"] = stroke;
             }
-                
         //<< Serialization
         }
     }

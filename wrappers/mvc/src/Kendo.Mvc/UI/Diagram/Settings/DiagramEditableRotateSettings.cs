@@ -10,12 +10,16 @@ namespace Kendo.Mvc.UI
     {
         public DiagramEditableRotateSettings()
         {
+            Enabled = true;
+        
             //>> Initialization
         
             Thumb = new DiagramEditableRotateThumbSettings();
                 
         //<< Initialization
         }
+
+        public bool Enabled { get; set; }
 
         //>> Fields
         
@@ -29,6 +33,8 @@ namespace Kendo.Mvc.UI
 
         protected override void Serialize(IDictionary<string, object> json)
         {
+            if (Enabled)
+            { 
             //>> Serialization
         
             var thumb = Thumb.ToJson();
@@ -36,8 +42,8 @@ namespace Kendo.Mvc.UI
             {
                 json["thumb"] = thumb;
             }
-                
         //<< Serialization
+            }
         }
     }
 }

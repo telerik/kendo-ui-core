@@ -18,6 +18,29 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         //>> Fields
+
+        /// <summary>
+        /// Defines the shape editable options.
+        /// </summary>
+        /// <param name="enabled">Enables or disables the editable option.</param>
+        public DiagramConnectionDefaultsSettingsBuilder Editable(bool enabled)
+        {
+            container.Editable.Enabled = enabled;
+            return this;
+        }
+
+        
+        /// <summary>
+        /// Defines the shape editable options.
+        /// </summary>
+        /// <param name="configurator">The action that configures the editable.</param>
+        public DiagramConnectionDefaultsSettingsBuilder Editable(Action<DiagramConnectionDefaultsEditableSettingsBuilder> configurator)
+        {
+            container.Editable.Enabled = true;
+            
+            configurator(new DiagramConnectionDefaultsEditableSettingsBuilder(container.Editable));
+            return this;
+        }
         
         /// <summary>
         /// Defines the stroke configuration.

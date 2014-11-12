@@ -20,6 +20,7 @@
           - mindmaphorizontal
     - :name: pannable.key
       :type: String
+      :enum_type: DiagramPannableKey
       :description: The pannable key.
       :values:
           - none
@@ -28,6 +29,7 @@
           - alt
     - :name: selectable.key
       :type: String
+      :enum_type: DiagramSelectableKey
       :description: The selectable key.
       :values:
           - none
