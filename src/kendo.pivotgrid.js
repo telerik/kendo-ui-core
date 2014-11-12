@@ -229,6 +229,7 @@ var __meta__ = {
 
         for (aggregate in map[key].aggregates) {
             value = map[key].aggregates[aggregate];
+            value = value.currentValue;
 
             format = formats[aggregate];
 
@@ -250,6 +251,7 @@ var __meta__ = {
 
             for (aggregate in items[columnKey].aggregates) {
                 value = items[columnKey].aggregates[aggregate];
+                value = value.currentValue;
 
                 format = formats[aggregate];
 
@@ -268,6 +270,7 @@ var __meta__ = {
 
         for (aggregate in map[key].aggregates) {
             value = map[key].aggregates[aggregate];
+            value = value.currentValue;
 
             format = formats[aggregate];
 
@@ -286,6 +289,7 @@ var __meta__ = {
 
             for (aggregate in items[columnKey].aggregates) {
                 value = items[columnKey].aggregates[aggregate];
+                value = value.currentValue;
 
                 format = formats[aggregate];
 
@@ -300,8 +304,8 @@ var __meta__ = {
 
     function createAggregateGetter(m) {
         var measureGetter = kendo.getter(m.field, true);
-        return function(data, state) {
-            return m.aggregate(measureGetter(data), state);
+        return function(aggregatorContext, state) {
+            return m.aggregate(measureGetter(aggregatorContext.dataItem), state, aggregatorContext);
         };
     }
 
@@ -501,26 +505,28 @@ var __meta__ = {
             return false;
         },
 
-        _calculateAggregate: function(measureAggregators, dataItem, totalItem) {
+        _calculateAggregate: function(measureAggregators, aggregatorContext, totalItem) {
             var result = {};
             var state;
             var name;
 
             for (var measureIdx = 0; measureIdx < measureAggregators.length; measureIdx++) {
                 name = measureAggregators[measureIdx].descriptor.name;
-                state = totalItem.aggregates[name] || 0;
-                result[name] = measureAggregators[measureIdx].aggregator(dataItem, state);
+                state = totalItem.aggregates[name] || { currentValue: 0 };
+                state.currentValue = measureAggregators[measureIdx].aggregator(aggregatorContext, state);
+                result[name] = state;
             }
 
             return result;
         },
 
-        _processColumns: function(measureAggregators, descriptors, getters, columns, dataItem, rowTotal, state, updateColumn) {
+        _processColumns: function(measureAggregators, descriptors, getters, columns, aggregatorContext, rowTotal, state, updateColumn) {
             var value;
             var descriptor;
             var name;
             var column;
             var totalItem;
+            var dataItem = aggregatorContext.dataItem;
 
             for (var idx = 0; idx < descriptors.length; idx++) {
                 descriptor = descriptors[idx];
@@ -550,7 +556,7 @@ var __meta__ = {
 
                     rowTotal.items[name] = {
                         index: column.index,
-                        aggregates: this._calculateAggregate(measureAggregators, dataItem, totalItem)
+                        aggregates: this._calculateAggregate(measureAggregators, aggregatorContext, totalItem)
                     };
 
                     if (updateColumn) {
@@ -655,32 +661,42 @@ var __meta__ = {
             var processed = false;
 
             if (columnDescriptors.length || rowDescriptors.length) {
+                var dataItem;
+                var aggregatorContext;
                 var hasExpandedRows = this._isExpanded(rowDescriptors);
 
                 processed = true;
 
                 for (var idx = 0, length = data.length; idx < length; idx++) {
+                    dataItem = data[idx];
+
+                    aggregatorContext = {
+                        index: idx,
+                        length: length,
+                        dataItem: dataItem
+                    };
+
                     var rowTotal = aggregatedData[ROW_TOTAL_KEY] || {
                         items: {},
                         aggregates: {}
                     };
 
-                    this._processColumns(measureAggregators, columnDescriptors, columnGetters, columns, data[idx], rowTotal, state, !hasExpandedRows);
+                    this._processColumns(measureAggregators, columnDescriptors, columnGetters, columns, aggregatorContext, rowTotal, state, !hasExpandedRows);
 
-                    rowTotal.aggregates = this._calculateAggregate(measureAggregators, data[idx], rowTotal);
+                    rowTotal.aggregates = this._calculateAggregate(measureAggregators, aggregatorContext, rowTotal);
                     aggregatedData[ROW_TOTAL_KEY] = rowTotal;
 
                     for (var rowIdx = 0, rowLength = rowDescriptors.length; rowIdx < rowLength; rowIdx++) {
                         var rowDescriptor = rowDescriptors[rowIdx];
 
                         if (rowDescriptor.expand) {
-                            if (!this._matchDescriptors(data[idx], rowDescriptors, rowGetters, rowIdx)) {
+                            if (!this._matchDescriptors(dataItem, rowDescriptors, rowGetters, rowIdx)) {
                                 continue;
                             }
 
                             var rowName = getName(rowDescriptor);
 
-                            rowValue = rowGetters[rowName](data[idx]);
+                            rowValue = rowGetters[rowName](dataItem);
                             rowValue = rowValue !== undefined ? rowValue.toString() : rowValue;
                             rows[rowValue] = {
                                 name: rowName + "&" + rowValue,
@@ -693,9 +709,9 @@ var __meta__ = {
                                 aggregates: {}
                             };
 
-                            this._processColumns(measureAggregators, columnDescriptors, columnGetters, columns, data[idx], value, state, true);
+                            this._processColumns(measureAggregators, columnDescriptors, columnGetters, columns, aggregatorContext, value, state, true);
 
-                            value.aggregates = this._calculateAggregate(measureAggregators, data[idx], value);
+                            value.aggregates = this._calculateAggregate(measureAggregators, aggregatorContext, value);
                             aggregatedData[rowValue] = value;
                         }
                     }
