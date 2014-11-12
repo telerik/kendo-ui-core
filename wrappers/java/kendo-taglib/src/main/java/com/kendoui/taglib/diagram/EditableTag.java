@@ -61,6 +61,12 @@ public class EditableTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         setProperty("rotate", value);
     }
 
+    public void setTools(EditableToolsTag value) {
+
+        setProperty("tools", value.tools());
+
+    }
+
     public void setShapeTemplate(EditableShapeTemplateFunctionTag value) {
         setEvent("shapeTemplate", value.getBody());
     }

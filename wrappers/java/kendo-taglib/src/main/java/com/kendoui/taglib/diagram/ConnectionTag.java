@@ -49,6 +49,14 @@ public class ConnectionTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         return "diagram-connection";
     }
 
+    public void setEditable(com.kendoui.taglib.diagram.ConnectionEditableTag value) {
+        setProperty("editable", value);
+    }
+
+    public void setFrom(com.kendoui.taglib.diagram.ConnectionFromTag value) {
+        setProperty("from", value);
+    }
+
     public void setHover(com.kendoui.taglib.diagram.ConnectionHoverTag value) {
         setProperty("hover", value);
     }
@@ -67,6 +75,18 @@ public class ConnectionTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         setProperty("stroke", value);
     }
 
+    public void setTo(com.kendoui.taglib.diagram.ConnectionToTag value) {
+        setProperty("to", value);
+    }
+
+    public boolean getEditable() {
+        return (boolean)getProperty("editable");
+    }
+
+    public void setEditable(boolean value) {
+        setProperty("editable", value);
+    }
+
     public java.lang.String getEndCap() {
         return (java.lang.String)getProperty("endCap");
     }
@@ -75,12 +95,28 @@ public class ConnectionTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         setProperty("endCap", value);
     }
 
+    public java.lang.Object getFrom() {
+        return (java.lang.Object)getProperty("from");
+    }
+
+    public void setFrom(java.lang.Object value) {
+        setProperty("from", value);
+    }
+
     public java.lang.String getStartCap() {
         return (java.lang.String)getProperty("startCap");
     }
 
     public void setStartCap(java.lang.String value) {
         setProperty("startCap", value);
+    }
+
+    public java.lang.Object getTo() {
+        return (java.lang.Object)getProperty("to");
+    }
+
+    public void setTo(java.lang.Object value) {
+        setProperty("to", value);
     }
 
 //<< Attributes

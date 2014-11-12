@@ -53,6 +53,10 @@ public class ConnectionDefaultsTag extends  BaseTag  /* interfaces */ /* interfa
         return "diagram-connectionDefaults";
     }
 
+    public void setEditable(com.kendoui.taglib.diagram.ConnectionDefaultsEditableTag value) {
+        setProperty("editable", value);
+    }
+
     public void setHover(com.kendoui.taglib.diagram.ConnectionDefaultsHoverTag value) {
         setProperty("hover", value);
     }
@@ -63,6 +67,14 @@ public class ConnectionDefaultsTag extends  BaseTag  /* interfaces */ /* interfa
 
     public void setStroke(com.kendoui.taglib.diagram.ConnectionDefaultsStrokeTag value) {
         setProperty("stroke", value);
+    }
+
+    public boolean getEditable() {
+        return (boolean)getProperty("editable");
+    }
+
+    public void setEditable(boolean value) {
+        setProperty("editable", value);
     }
 
     public java.lang.String getEndCap() {

@@ -6,23 +6,25 @@ import com.kendoui.taglib.BaseTag;
 
 
 
+import com.kendoui.taglib.DiagramTag;
+
 
 
 
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class ShapeDefaultsEditableTag extends  BaseTag  /* interfaces */ /* interfaces */ {
+public class PannableTag extends  BaseTag  /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
 
-        ShapeDefaultsTag parent = (ShapeDefaultsTag)findParentWithClass(ShapeDefaultsTag.class);
+        DiagramTag parent = (DiagramTag)findParentWithClass(DiagramTag.class);
 
 
-        parent.setEditable(this);
+        parent.setPannable(this);
 
 //<< doEndTag
 
@@ -48,21 +50,15 @@ public class ShapeDefaultsEditableTag extends  BaseTag  /* interfaces */ /* inte
 //>> Attributes
 
     public static String tagName() {
-        return "diagram-shapeDefaults-editable";
+        return "diagram-pannable";
     }
 
-    public void setTools(ShapeDefaultsEditableToolsTag value) {
-
-        setProperty("tools", value.tools());
-
+    public java.lang.String getKey() {
+        return (java.lang.String)getProperty("key");
     }
 
-    public boolean getConnect() {
-        return (boolean)getProperty("connect");
-    }
-
-    public void setConnect(boolean value) {
-        setProperty("connect", value);
+    public void setKey(java.lang.String value) {
+        setProperty("key", value);
     }
 
 //<< Attributes

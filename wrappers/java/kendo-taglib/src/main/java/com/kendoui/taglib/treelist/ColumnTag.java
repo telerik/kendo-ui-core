@@ -68,12 +68,24 @@ public class ColumnTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         setEvent("editor", value.getBody());
     }
 
+    public void setFooterTemplate(ColumnFooterTemplateFunctionTag value) {
+        setEvent("footerTemplate", value.getBody());
+    }
+
     public void setHeaderTemplate(ColumnHeaderTemplateFunctionTag value) {
         setEvent("headerTemplate", value.getBody());
     }
 
     public void setTemplate(ColumnTemplateFunctionTag value) {
         setEvent("template", value.getBody());
+    }
+
+    public java.lang.Object getAttributes() {
+        return (java.lang.Object)getProperty("attributes");
+    }
+
+    public void setAttributes(java.lang.Object value) {
+        setProperty("attributes", value);
     }
 
     public String getEditor() {
@@ -96,6 +108,14 @@ public class ColumnTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         setProperty("encoded", value);
     }
 
+    public boolean getExpandable() {
+        return (boolean)getProperty("expandable");
+    }
+
+    public void setExpandable(boolean value) {
+        setProperty("expandable", value);
+    }
+
     public java.lang.String getField() {
         return (java.lang.String)getProperty("field");
     }
@@ -110,6 +130,14 @@ public class ColumnTag extends  BaseTag  /* interfaces */ /* interfaces */ {
 
     public void setFilterable(boolean value) {
         setProperty("filterable", value);
+    }
+
+    public java.lang.String getFooterTemplate() {
+        return (java.lang.String)getProperty("footerTemplate");
+    }
+
+    public void setFooterTemplate(java.lang.String value) {
+        setProperty("footerTemplate", value);
     }
 
     public java.lang.String getFormat() {

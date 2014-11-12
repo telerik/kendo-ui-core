@@ -61,6 +61,10 @@ public class DiagramTag extends WidgetTag /* interfaces */implements DataBoundWi
         setProperty("layout", value);
     }
 
+    public void setPannable(com.kendoui.taglib.diagram.PannableTag value) {
+        setProperty("pannable", value);
+    }
+
     public void setSelectable(com.kendoui.taglib.diagram.SelectableTag value) {
         setProperty("selectable", value);
     }
@@ -157,6 +161,14 @@ public class DiagramTag extends WidgetTag /* interfaces */implements DataBoundWi
 
     public void setEditable(boolean value) {
         setProperty("editable", value);
+    }
+
+    public boolean getPannable() {
+        return (boolean)getProperty("pannable");
+    }
+
+    public void setPannable(boolean value) {
+        setProperty("pannable", value);
     }
 
     public boolean getSelectable() {

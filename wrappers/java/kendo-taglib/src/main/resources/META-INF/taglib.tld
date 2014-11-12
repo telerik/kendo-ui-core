@@ -12469,6 +12469,12 @@ data source is fired. By default the widget will bind to the data source specifi
             <type>boolean</type>
         </attribute>
         <attribute>
+            <description>Defines the pannable options.</description>
+            <name>pannable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
             <description>Defines the selectable options.</description>
             <name>selectable</name>
             <rtexprvalue>true</rtexprvalue>
@@ -12584,6 +12590,12 @@ data source is fired. By default the widget will bind to the data source specifi
         <body-content>JSP</body-content>
 
         <attribute>
+            <description>Defines the shape editable options.</description>
+            <name>editable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
             <description>The start cap (arrow, head or decoration) of the connection:Note that you can also use the "ArrowStart" for the endCap but its direction will be inversed.</description>
             <name>endCap</name>
             <rtexprvalue>true</rtexprvalue>
@@ -12597,6 +12609,38 @@ data source is fired. By default the widget will bind to the data source specifi
         </attribute>
 
     </tag>
+
+    <tag>
+        <description>Defines the shape editable options.</description>
+        <name>diagram-connectionDefaults-editable</name>
+        <tag-class>com.kendoui.taglib.diagram.ConnectionDefaultsEditableTag</tag-class>
+        <body-content>JSP</body-content>
+
+
+    </tag>
+
+    <tag>
+        <description>Specifies the the toolbar tools. Predefined tools are:</description>
+        <name>diagram-connectionDefaults-editable-tools</name>
+        <tag-class>com.kendoui.taglib.diagram.ConnectionDefaultsEditableToolsTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+    <tag>
+        <description>Specifies the the toolbar tools. Predefined tools are:</description>
+        <name>diagram-connectionDefaults-editable-tool</name>
+        <tag-class>com.kendoui.taglib.diagram.ConnectionDefaultsEditableToolTag</tag-class>
+
+        <body-content>empty</body-content>
+        <attribute>
+            <description>The name of the tool. The built-in tools are "edit" and "delete". Can be set to a custom value.</description>
+            <name>name</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
+
 
     <tag>
         <description>Defines the hover configuration.</description>
@@ -12720,10 +12764,22 @@ data source is fired. By default the widget will bind to the data source specifi
 
         <body-content>JSP</body-content>
         <attribute>
+            <description>Defines the shape editable options.</description>
+            <name>editable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
             <description>The start cap (arrow, head or decoration) of the connection:Note that you can also use the "ArrowStart" for the endCap but its direction will be inversed.</description>
             <name>endCap</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Defines the connection from.</description>
+            <name>from</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
         </attribute>
         <attribute>
             <description>The start cap (arrow, head or decoration) of the connection:</description>
@@ -12731,7 +12787,67 @@ data source is fired. By default the widget will bind to the data source specifi
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+        <attribute>
+            <description>Defines the connection to.</description>
+            <name>to</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
     </tag>
+
+    <tag>
+        <description>Defines the shape editable options.</description>
+        <name>diagram-connection-editable</name>
+        <tag-class>com.kendoui.taglib.diagram.ConnectionEditableTag</tag-class>
+        <body-content>JSP</body-content>
+
+
+    </tag>
+
+    <tag>
+        <description>Specifies the the toolbar tools. Predefined tools are:</description>
+        <name>diagram-connection-editable-tools</name>
+        <tag-class>com.kendoui.taglib.diagram.ConnectionEditableToolsTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+    <tag>
+        <description>Specifies the the toolbar tools. Predefined tools are:</description>
+        <name>diagram-connection-editable-tool</name>
+        <tag-class>com.kendoui.taglib.diagram.ConnectionEditableToolTag</tag-class>
+
+        <body-content>empty</body-content>
+        <attribute>
+            <description>The name of the tool. The built-in tools are "edit" and "delete". Can be set to a custom value.</description>
+            <name>name</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
+
+
+    <tag>
+        <description>Defines the connection from.</description>
+        <name>diagram-connection-from</name>
+        <tag-class>com.kendoui.taglib.diagram.ConnectionFromTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Defines the point x value.</description>
+            <name>x</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>Defines the point y value.</description>
+            <name>y</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
 
     <tag>
         <description>Defines the hover configuration.</description>
@@ -12860,6 +12976,28 @@ data source is fired. By default the widget will bind to the data source specifi
         <attribute>
             <description>Defines the stroke width of the connection.</description>
             <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Defines the connection to.</description>
+        <name>diagram-connection-to</name>
+        <tag-class>com.kendoui.taglib.diagram.ConnectionToTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Defines the point x value.</description>
+            <name>x</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>Defines the point y value.</description>
+            <name>y</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
@@ -13132,6 +13270,34 @@ data source is fired. By default the widget will bind to the data source specifi
 
 
 
+    <tag>
+        <description>Specifies the the toolbar tools. Predefined tools are:</description>
+        <name>diagram-editable-tools</name>
+        <tag-class>com.kendoui.taglib.diagram.EditableToolsTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+    <tag>
+        <description>Specifies the the toolbar tools. Predefined tools are:</description>
+        <name>diagram-editable-tool</name>
+        <tag-class>com.kendoui.taglib.diagram.EditableToolTag</tag-class>
+
+        <body-content>empty</body-content>
+        <attribute>
+            <description>The name of the tool. The built-in tools are "edit", "createShape", "createConnection", "undo", "redo", "rotateClockwise" and "rotateAnticlockwise". Can be set to a custom value.</description>
+            <name>name</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The step of the rotateClockwise and rotateAnticlockwise tools.</description>
+            <name>step</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+    </tag>
+
+
 
     <tag>
         <description>Specifies the shape editor template.</description>
@@ -13283,11 +13449,34 @@ A diagram can have in general disconnected pieces, known as components, which ca
 
 
     <tag>
+        <description>Defines the pannable options.</description>
+        <name>diagram-pannable</name>
+        <tag-class>com.kendoui.taglib.diagram.PannableTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The pannable key.</description>
+            <name>key</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
         <description>Defines the selectable options.</description>
         <name>diagram-selectable</name>
         <tag-class>com.kendoui.taglib.diagram.SelectableTag</tag-class>
         <body-content>JSP</body-content>
 
+        <attribute>
+            <description>The selectable key.</description>
+            <name>key</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
 
     </tag>
 
@@ -13486,7 +13675,7 @@ A diagram can have in general disconnected pieces, known as components, which ca
         <description>Defines the shape editable options.</description>
         <name>diagram-shapeDefaults-editable</name>
         <tag-class>com.kendoui.taglib.diagram.ShapeDefaultsEditableTag</tag-class>
-        <body-content>empty</body-content>
+        <body-content>JSP</body-content>
 
         <attribute>
             <description>Specifies whether the connectors should appear on hover.</description>
@@ -13496,6 +13685,34 @@ A diagram can have in general disconnected pieces, known as components, which ca
         </attribute>
 
     </tag>
+
+    <tag>
+        <description>Specifies the the toolbar tools. Predefined tools are:</description>
+        <name>diagram-shapeDefaults-editable-tools</name>
+        <tag-class>com.kendoui.taglib.diagram.ShapeDefaultsEditableToolsTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+    <tag>
+        <description>Specifies the the toolbar tools. Predefined tools are:</description>
+        <name>diagram-shapeDefaults-editable-tool</name>
+        <tag-class>com.kendoui.taglib.diagram.ShapeDefaultsEditableToolTag</tag-class>
+
+        <body-content>empty</body-content>
+        <attribute>
+            <description>The name of the tool. The built-in tools are "edit", "delete", "rotateClockwise" and "rotateAnticlockwise". Can be set to a custom value.</description>
+            <name>name</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The step of the rotateClockwise and rotateAnticlockwise tools.</description>
+            <name>step</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+    </tag>
+
 
 
     <tag>
@@ -13788,7 +14005,7 @@ See visual.</description>
         <description>Defines the shape editable options.</description>
         <name>diagram-shape-editable</name>
         <tag-class>com.kendoui.taglib.diagram.ShapeEditableTag</tag-class>
-        <body-content>empty</body-content>
+        <body-content>JSP</body-content>
 
         <attribute>
             <description>Specifies whether the connectors should appear on hover.</description>
@@ -13798,6 +14015,34 @@ See visual.</description>
         </attribute>
 
     </tag>
+
+    <tag>
+        <description>Specifies the the toolbar tools. Predefined tools are:</description>
+        <name>diagram-shape-editable-tools</name>
+        <tag-class>com.kendoui.taglib.diagram.ShapeEditableToolsTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+    <tag>
+        <description>Specifies the the toolbar tools. Predefined tools are:</description>
+        <name>diagram-shape-editable-tool</name>
+        <tag-class>com.kendoui.taglib.diagram.ShapeEditableToolTag</tag-class>
+
+        <body-content>empty</body-content>
+        <attribute>
+            <description>The name of the tool. The built-in tools are "edit", "delete", "rotateClockwise" and "rotateAnticlockwise". Can be set to a custom value.</description>
+            <name>name</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The step of the rotateClockwise and rotateAnticlockwise tools.</description>
+            <name>step</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+    </tag>
+
 
 
     <tag>

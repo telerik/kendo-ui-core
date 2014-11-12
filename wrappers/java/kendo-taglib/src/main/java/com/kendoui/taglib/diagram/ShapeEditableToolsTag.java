@@ -7,23 +7,18 @@ import com.kendoui.taglib.BaseTag;
 
 
 
-
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.List;
 
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class ShapeEditableTag extends  BaseTag  /* interfaces */ /* interfaces */ {
+public class ShapeEditableToolsTag extends BaseTag /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
-
-
-        ShapeTag parent = (ShapeTag)findParentWithClass(ShapeTag.class);
-
-
-        parent.setEditable(this);
-
 //<< doEndTag
 
         return super.doEndTag();
@@ -32,6 +27,9 @@ public class ShapeEditableTag extends  BaseTag  /* interfaces */ /* interfaces *
     @Override
     public void initialize() {
 //>> initialize
+
+        tools = new ArrayList<Map<String, Object>>();
+
 //<< initialize
 
         super.initialize();
@@ -47,22 +45,18 @@ public class ShapeEditableTag extends  BaseTag  /* interfaces */ /* interfaces *
 
 //>> Attributes
 
+    private List<Map<String, Object>> tools;
+
+    public List<Map<String, Object>> tools() {
+        return tools;
+    }
+
     public static String tagName() {
-        return "diagram-shape-editable";
+        return "diagram-shape-editable-tools";
     }
 
-    public void setTools(ShapeEditableToolsTag value) {
-
-        setProperty("tools", value.tools());
-
-    }
-
-    public boolean getConnect() {
-        return (boolean)getProperty("connect");
-    }
-
-    public void setConnect(boolean value) {
-        setProperty("connect", value);
+    public void addTool(ShapeEditableToolTag value) {
+        tools.add(value.properties());
     }
 
 //<< Attributes

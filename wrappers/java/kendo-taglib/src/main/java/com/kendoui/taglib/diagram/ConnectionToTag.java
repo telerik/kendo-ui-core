@@ -12,17 +12,17 @@ import com.kendoui.taglib.BaseTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class ShapeDefaultsEditableTag extends  BaseTag  /* interfaces */ /* interfaces */ {
+public class ConnectionToTag extends  BaseTag  /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
 
-        ShapeDefaultsTag parent = (ShapeDefaultsTag)findParentWithClass(ShapeDefaultsTag.class);
+        ConnectionTag parent = (ConnectionTag)findParentWithClass(ConnectionTag.class);
 
 
-        parent.setEditable(this);
+        parent.setTo(this);
 
 //<< doEndTag
 
@@ -48,21 +48,23 @@ public class ShapeDefaultsEditableTag extends  BaseTag  /* interfaces */ /* inte
 //>> Attributes
 
     public static String tagName() {
-        return "diagram-shapeDefaults-editable";
+        return "diagram-connection-to";
     }
 
-    public void setTools(ShapeDefaultsEditableToolsTag value) {
-
-        setProperty("tools", value.tools());
-
+    public float getX() {
+        return (float)getProperty("x");
     }
 
-    public boolean getConnect() {
-        return (boolean)getProperty("connect");
+    public void setX(float value) {
+        setProperty("x", value);
     }
 
-    public void setConnect(boolean value) {
-        setProperty("connect", value);
+    public float getY() {
+        return (float)getProperty("y");
+    }
+
+    public void setY(float value) {
+        setProperty("y", value);
     }
 
 //<< Attributes

@@ -57,6 +57,14 @@ public class SelectableTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         setProperty("stroke", value);
     }
 
+    public java.lang.String getKey() {
+        return (java.lang.String)getProperty("key");
+    }
+
+    public void setKey(java.lang.String value) {
+        setProperty("key", value);
+    }
+
 //<< Attributes
 
 }
