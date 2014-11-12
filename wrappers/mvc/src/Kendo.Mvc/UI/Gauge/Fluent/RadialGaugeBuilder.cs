@@ -109,6 +109,41 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Allows configuring multiple pointers
+        /// </summary>
+        /// <param name="configurator">The lambda which configures the pointers</param>
+        /// <example>
+        /// <code lang="ASPX">
+        /// &lt;%= Html.Kendo().RadialGauge()
+        ///     .Name("gauge")
+        ///     .Pointers(pointer =>
+        ///     {
+        ///         pointer.Add().Value(10);
+        ///         pointer.Add().Value(20);
+        ///     })
+        /// %&gt;
+        /// </code>
+        /// <code lang="Razor">
+        /// @(Html.Kendo().RadialGauge()
+        ///     .Name("gauge")
+        ///     .Pointers(pointer =>
+        ///     {
+        ///         pointer.Add().Value(10);
+        ///         pointer.Add().Value(20);
+        ///     })
+        /// )
+        /// </code>
+        /// </example>
+        public RadialGaugeBuilder Pointers(Action<GaugeRadialPointerFactory> configurator)
+        {
+            GaugeRadialPointerFactory factory = new GaugeRadialPointerFactory(Component);
+
+            configurator(factory);
+
+            return this;
+        }
+
+        /// <summary>
         /// Enables or disabled animated transitions on initial load and refresh. 
         /// </summary>
         /// <param name="transitions">
