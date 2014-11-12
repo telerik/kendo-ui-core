@@ -2373,6 +2373,28 @@ var __meta__ = {
             this.dependencies.sync();
         },
 
+        _removeResourceAssignments: function(task) {
+            var dataSource = this.assignments.dataSource;
+            var assignments = dataSource.view();
+            var filter = {
+                field: this.assignments.dataTaskIdField,
+                operator: "eq",
+                value: task.get("id")
+            };
+
+            assignments = new Query(assignments).filter(filter).toArray();
+
+            this._preventRefresh = true;
+
+            for (var i = 0, length = assignments.length; i < length; i++) {
+                dataSource.remove(assignments[i]);
+            }
+
+            this._preventRefresh = false;
+
+            dataSource.sync();
+        },
+
         _removeTask: function(task) {
             var dependencies = this.dependencies.dependencies(task.id);
 
@@ -2381,6 +2403,7 @@ var __meta__ = {
                 dependencies: dependencies
             })) {
                 this._removeTaskDependencies(task, dependencies);
+                this._removeResourceAssignments(task);
 
                 this._preventRefresh = true;
 

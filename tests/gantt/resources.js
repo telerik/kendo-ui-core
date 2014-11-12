@@ -12,6 +12,7 @@
                 data: [
                     new GanttTask(extend({}, {
                         id: 0,
+                        orderId: 0,
                         start: new Date("2014/04/17"),
                         end: new Date("2014/04/18"),
                         title: "task1",
@@ -19,6 +20,7 @@
                     })),
                     new GanttTask(extend({}, {
                         id: 1,
+                        orderId: 1,
                         start: new Date("2014/04/17"),
                         end: new Date("2014/04/18"),
                         title: "task2",
@@ -1258,6 +1260,15 @@
 
         equal(assignments.at(0).get(gantt.assignments.dataValueField), 4);
         equal(assignments.at(0).get(gantt.assignments.dataValueField), 4);
+    });
+
+    test("remove assignments for deleted task", function() {
+        var task = gantt.dataSource.get(0);
+        var assignments = gantt.assignments.dataSource;
+
+        gantt._removeTask(task);
+
+        equal(assignments.data().length, 1);
     });
 
 })();
