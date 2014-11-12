@@ -30,7 +30,6 @@
             .Name("at 7 ft");
         })
         .YAxis(axis => axis.Polar()
-            .Visible(false)
             .Max(10)
         )
     %>

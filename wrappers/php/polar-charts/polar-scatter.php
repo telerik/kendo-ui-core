@@ -18,8 +18,7 @@ $ft7->data(array(
        ));
 
 $yAxis = new \Kendo\Dataviz\UI\ChartYAxisItem();
-$yAxis->visible(false)
-      ->max(10);
+$yAxis->max(10);
 
 $chart = new \Kendo\Dataviz\UI\Chart('chart');
 $chart->title(array('text' => 'Buck spread'))

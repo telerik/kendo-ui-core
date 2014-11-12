@@ -9,26 +9,26 @@
              <kendo:chart-legend position="bottom" />
              <kendo:chart-series>
                 <kendo:chart-seriesItem
-                	type="polarScatter"
-                	name="at 3 ft"
-                	data="<%= new double[][] {
-       		      		new double[] {150, 3}, new double[] {150, 3.1},
-       		      		new double[] {152, 3.2}, new double[] {152, 3.1},
-       		      		new double[] {151, 3.2}, new double[] {153, 3.3},
-       		      		new double[] {149, 3}
-	         		} %>" />
+                    type="polarScatter"
+                    name="at 3 ft"
+                    data="<%= new double[][] {
+                        new double[] {150, 3}, new double[] {150, 3.1},
+                        new double[] {152, 3.2}, new double[] {152, 3.1},
+                        new double[] {151, 3.2}, new double[] {153, 3.3},
+                        new double[] {149, 3}
+                    } %>" />
                 <kendo:chart-seriesItem
-                	type="polarScatter"
-                	name="at 7 ft"
-                	data="<%= new double[][] {
-                		new double[] {270, 5}, new double[] {250, 7},
-                		new double[] {259, 4}, new double[] {270, 7},
-                		new double[] {265, 5}, new double[] {250, 7},
-                		new double[] {263, 8}, new double[] {261, 5}
-	         		} %>" />
+                    type="polarScatter"
+                    name="at 7 ft"
+                    data="<%= new double[][] {
+                        new double[] {270, 5}, new double[] {250, 7},
+                        new double[] {259, 4}, new double[] {270, 7},
+                        new double[] {265, 5}, new double[] {250, 7},
+                        new double[] {263, 8}, new double[] {261, 5}
+                    } %>" />
              </kendo:chart-series>
              <kendo:chart-yAxis>
-             	<kendo:chart-yAxisItem max="10" visible="false" />
+                <kendo:chart-yAxisItem max="10" />
              </kendo:chart-yAxis>
          </kendo:chart>
      </div>
