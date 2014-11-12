@@ -617,12 +617,19 @@
             $(document).off("mousedown", proxy(that._endTyping, that))
                        .off("mouseup", proxy(that._mouseup, that));
 
-            // move focus to containing frame, see https://github.com/telerik/kendo/issues/3673
-            window.focus();
+            that._focusOutside();
 
             that.toolbar.destroy();
 
             kendo.destroy(that.wrapper);
+        },
+
+        _focusOutside: function () {
+            // move focus outside the Editor, see https://github.com/telerik/kendo/issues/3673
+            if (kendo.support.browser.msie && this.textarea) {
+                var tempInput = $("<input style='position:absolute;left:-10px;top:-10px;width:1px;height:1px;font-size:0;border:0;' />").appendTo(document.body).focus();
+                tempInput.blur().remove();
+            }
         },
 
         state: function(toolName) {
