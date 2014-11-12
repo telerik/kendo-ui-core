@@ -684,6 +684,9 @@ var __meta__ = {
             var themes = dataviz.ui.themes || {};
             var theme;
 
+            kendo.destroy(element);
+            $(element).empty();
+
             Widget.fn.init.call(gauge, element);
 
             gauge.wrapper = gauge.element;
@@ -696,6 +699,12 @@ var __meta__ = {
             themeOptions = themeName && theme ? theme.gauge : {};
 
             gauge.options = deepExtend({}, themeOptions, options);
+
+            if ($.isArray(options.pointer)) {
+                for (var i = options.pointer.length - 1; i >= 0; i--) {
+                    gauge.options.pointer[i] = deepExtend({}, themeOptions.pointer, options.pointer[i]);
+                }
+            }
 
             gauge.element.addClass("k-gauge");
 
@@ -711,6 +720,12 @@ var __meta__ = {
             pointer: {},
             scale: {},
             gaugeArea: {}
+        },
+
+        destroy: function() {
+            this.surface.destroy();
+
+            Widget.fn.destroy.call(this);
         },
 
         value: function(value) {
