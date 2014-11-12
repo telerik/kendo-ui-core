@@ -413,6 +413,27 @@
             equal(view.log.path[0].style.data.modelId, lineChart._segments[0].modelId);
         });
 
+        test("does not render points for hidden points", function() {
+            var plotArea = stubPlotArea(
+                function(categoryIndex) {
+                    return new Box2D();
+                },
+                function(value) {
+                    if (value !== 0) {
+                        return Box2D();
+                    } else {
+                        return;
+                    }
+                }
+            );
+
+            setupLineChart(plotArea, {
+                series: [{ type: "line", data: [1, 0, 2] }]
+            });
+
+            equal(lineChart._segments[0].points().length, 2);
+        });
+
         test("renders group with LineChart id and no animations", function() {
             var group = view.findInLog("group", function(item) {
                 return item.options.id === lineChart.id;

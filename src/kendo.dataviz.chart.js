@@ -4892,11 +4892,11 @@ var __meta__ = {
         points: function(visualPoints) {
             var segment = this,
                 linePoints = segment.linePoints.concat(visualPoints || []),
-                points = new Array(linePoints.length);
+                points = [];
 
             for (var i = 0, length = linePoints.length; i < length; i++) {
                 if (linePoints[i].visible !== false) {
-                    points[i] = linePoints[i]._childBox.toRect().center();
+                    points.push(linePoints[i]._childBox.toRect().center());
                 }
             }
 
