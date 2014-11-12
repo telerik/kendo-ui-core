@@ -2,7 +2,7 @@
         <div id="example">
         <div class="demo-section k-header">
         <div id="tickets">
-            <form class="k-content">
+            <form class="k-content" id="ticketsForm">
                 <h3>Book Tickets</h3>
                 <ul>
                     <li>
@@ -142,7 +142,7 @@
 
                     $("#amount").kendoNumericTextBox();
 
-                    var validator = $("#tickets").kendoValidator().data("kendoValidator"),
+                    var validator = $("#ticketsForm").kendoValidator().data("kendoValidator"),
                     status = $(".status");
 
                     $("form").submit(function(event) {
