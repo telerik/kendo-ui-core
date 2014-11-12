@@ -8893,6 +8893,17 @@
             "kendo-ui": "This demo shows how to export diagram to PDF, PNG Images or SVG and save them directly in the browser."
         }
       },
+      {
+        "text": "Editing",
+        "new": true,
+        "url": "diagram/editing",
+        "title": {
+            "kendo-ui": "Kendo UI Diagram editing"
+        },
+        "meta": {
+            "kendo-ui": "This demo shows how to use editing for the Kendo UI Diagram."
+        }
+      },
 	  {
         "text": "Events",
         "url": "diagram/events",
