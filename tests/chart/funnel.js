@@ -1,5 +1,4 @@
 (function() {
-    return;
 
     var dataviz = kendo.dataviz,
         getElement = dataviz.getElement,
@@ -712,6 +711,10 @@
             segmentElement,
             plotArea;
 
+        function getElement(modelElement) {
+            return $(modelElement.visual._observers[0].element);
+        }
+
         function createFunnelChart(options) {
             chart = createChart($.extend({
                 series: [{
@@ -725,7 +728,7 @@
 
             plotArea = chart._plotArea;
             segment = plotArea.charts[0].points[0];
-            segmentElement = $(getElement(segment.id));
+            segmentElement = getElement(segment);
         }
 
         function segmentClick(callback) {
@@ -763,7 +766,7 @@
                 seriesClick: function() { ok(true); }
             });
             var label = plotArea.charts[0].labels[0];
-            clickChart(chart, getElement(label.id));
+            clickChart(chart, getElement(label));
         });
 
         test("event arguments contain value", 1, function() {
@@ -782,7 +785,7 @@
 
         test("event arguments contain jQuery element", 1, function() {
             segmentClick(function(e) {
-                equal(e.element[0], getElement(segment.id));
+                equal(e.element[0], getElement(segment)[0]);
             });
         });
 
@@ -820,7 +823,7 @@
                 seriesHover: function() { ok(true); }
             });
             var label = plotArea.charts[0].labels[0];
-            $(getElement(label.id)).mouseover();
+            $(getElement(label)).mouseover();
         });
 
         test("event arguments contain value", 1, function() {
@@ -839,7 +842,7 @@
 
         test("event arguments contain jQuery element", 1, function() {
             segmentHover(function(e) {
-                equal(e.element[0], getElement(segment.id));
+                equal(e.element[0], getElement(segment)[0]);
             });
         });
 
