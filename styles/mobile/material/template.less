@@ -248,18 +248,19 @@
 .km-material .km-popup.km-pane,
 .km-tablet .km-material .km-actionsheet-wrapper
 {
+    color: @material-main-color;
     background-color: @material-background;
 }
 
 .km-material .km-popup-arrow:after
 {
-    border-color: @material-dark-background transparent;
+    border-color: @material-background;
 }
 
 .km-material .km-left .km-popup-arrow:after,
 .km-material .km-right .km-popup-arrow:after
 {
-    border-color: transparent @material-dark-background;
+    border-color: transparent @material-background;
 }
 
 /* Loader & Pull-to-refresh */
@@ -302,7 +303,7 @@
 .km-material .k-slider .k-draghandle,
 .km-material .k-slider .k-draghandle:hover,
 .km-material .km-scroller-pull .km-icon,
-.km-material .km-popup.km-pane .km-navbar,
+//.km-material .km-popup.km-pane .km-navbar,
 .km-material .km-popup.km-pane .k-toolbar,
 .km-material .km-popup.km-pane .km-tabstrip,
 .km-material .km-popup .k-state-hover,
