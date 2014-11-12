@@ -104,7 +104,7 @@ var __meta__ = {
         columnsTable: "k-gantt-columns",
         tasksTable: "k-gantt-tasks",
         resource: "k-resource",
-        resourceAlt: "k-resource k-resource-alt",
+        resourceAlt: "k-resource k-alt",
         task: "k-task",
         taskSingle: "k-task-single",
         taskMilestone: "k-task-milestone",
