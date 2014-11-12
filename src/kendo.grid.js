@@ -198,6 +198,9 @@ var __meta__ = {
             if (kendo.support.kineticScrollNeeded) {
                 that.drag = new kendo.UserEvents(that.wrapper, {
                     global: true,
+                    start: function(e) {
+                        e.sender.capture();
+                    },
                     move: function(e) {
                         that.verticalScrollbar.scrollTop(that.verticalScrollbar.scrollTop() - e.y.delta);
                         wrapper.scrollLeft(wrapper.scrollLeft() - e.x.delta);
