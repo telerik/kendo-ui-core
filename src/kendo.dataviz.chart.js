@@ -929,7 +929,7 @@ var __meta__ = {
                 tooltipOptions = chart.options.tooltip,
                 point;
 
-            if (chart._suppressHover || !highlight || highlight.isOverlay(element) || chart._sharedTooltip()) {
+            if (chart._suppressHover || !highlight || highlight.isHighlighted(element) || chart._sharedTooltip()) {
                 return;
             }
 
@@ -9769,7 +9769,7 @@ var __meta__ = {
         PieAnimationDecorator = animationDecorator(PIE, PieAnimation);
 
     var Highlight = Class.extend({
-        init: function(view) {
+        init: function() {
             this._points = [];
         },
 
@@ -9797,7 +9797,7 @@ var __meta__ = {
             }
         },
 
-        isOverlay: function(element) {
+        isHighlighted: function(element) {
             var points = this._points;
 
             for (var i = 0; i < points.length; i++) {
