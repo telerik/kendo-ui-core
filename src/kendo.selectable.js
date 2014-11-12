@@ -166,6 +166,8 @@ var __meta__ = {
                 that._items = currentElement.find(that.options.filter);
             }
 
+            e.sender.capture();
+
             that._marquee
                 .appendTo(document.body)
                 .css({
