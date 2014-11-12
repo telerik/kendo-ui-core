@@ -4589,6 +4589,7 @@ var __meta__ = {
             vertical: true,
             markers: {
                 visible: true,
+                background: WHITE,
                 size: LINE_MARKER_SIZE,
                 type: CIRCLE,
                 border: {
@@ -5914,10 +5915,7 @@ var __meta__ = {
                 color = pointOptions.color;
             }
 
-            pointOptions.markers.background = valueOrDefault(
-                pointOptions.markers.background,
-                color
-            );
+            pointOptions.markers.background = color;
 
             point = new Bubble(value, pointOptions);
             point.color = color;
