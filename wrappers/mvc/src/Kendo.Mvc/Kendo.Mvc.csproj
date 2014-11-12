@@ -718,7 +718,6 @@
     <Compile Include="UI\Gantt\Fluent\GanttResourceColumnBuilder.cs" />
     <Compile Include="UI\Gauge\Fluent\GaugeRadialPointerFactory.cs" />
     <Compile Include="UI\Gauge\GaugeLinearPointerFactory.cs" />
-    <Compile Include="UI\Gantt\Fluent\GanttResourceColumnBuilder.cs" />
     <Compile Include="UI\Diagram\Fluent\DiagramEditableResizeSettingsBuilder.cs" />
     <Compile Include="UI\Diagram\Fluent\DiagramEditableRotateSettingsBuilder.cs" />
     <Compile Include="UI\Diagram\Fluent\DiagramEditableRotateThumbFillSettingsBuilder.cs" />
