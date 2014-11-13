@@ -29,10 +29,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Fired when the user add new shape or connection.The event handler function context (available via the this keyword) will be set to the widget instance.
         /// </summary>
-        /// <param name="handler">The name of the JavaScript function that will handle the Add event.</param>
+        /// <param name="handler">The name of the JavaScript function that will handle the add event.</param>
         public DiagramEventBuilder Add(string handler)
         {
-            Handler("Add", handler);
+            Handler("add", handler);
 
             return this;
         }
@@ -40,10 +40,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Fired when the user edits a shape or connection.
         /// </summary>
-        /// <param name="handler">The name of the JavaScript function that will handle the Edit event.</param>
+        /// <param name="handler">The name of the JavaScript function that will handle the edit event.</param>
         public DiagramEventBuilder Edit(string handler)
         {
-            Handler("Edit", handler);
+            Handler("edit", handler);
 
             return this;
         }
@@ -51,10 +51,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Fired when the user a shape or connection da is saved.
         /// </summary>
-        /// <param name="handler">The name of the JavaScript function that will handle the Save event.</param>
+        /// <param name="handler">The name of the JavaScript function that will handle the save event.</param>
         public DiagramEventBuilder Save(string handler)
         {
-            Handler("Save", handler);
+            Handler("save", handler);
 
             return this;
         }
