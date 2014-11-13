@@ -456,7 +456,7 @@ var __meta__ = {
                 var isLastSlotColumn = majorTickDivider === minorTickCount - 1;
                 var minorTickColumns = minorTickCount;
 
-                if (length % minorTickCount != 0) {
+                if (length % minorTickCount !== 0) {
                     var isLastMajorSlot = (length - (idx + 1)) < minorTickCount;
                     if (isMajorTickColumn && isLastMajorSlot) {
                         minorTickColumns = length % minorTickCount;
