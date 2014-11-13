@@ -10,6 +10,7 @@ namespace Kendo.Mvc.UI
     {
         public DiagramSelectableSettings()
         {
+            Enabled = true;
             //>> Initialization
         
             Stroke = new DiagramSelectableStrokeSettings();
@@ -29,7 +30,7 @@ namespace Kendo.Mvc.UI
         
         //<< Fields
 
-        public bool? Enabled { get; set; }
+        public bool Enabled { get; set; }
 
         protected override void Serialize(IDictionary<string, object> json)
         {

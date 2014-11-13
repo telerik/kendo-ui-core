@@ -334,9 +334,8 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="JobTittle" Type="ntext" />
-          <Property Name="Color" Type="nchar" MaxLength="10" />
-          <Property Name="Shape" Type="nchar" MaxLength="10" />
+          <Property Name="JobTitle" Type="ntext" />
+          <Property Name="Color" Type="varchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="Products">
           <Key>
@@ -1327,9 +1326,8 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="JobTittle" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Color" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Type="String" Name="Shape" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="JobTitle" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Color" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1700,9 +1698,8 @@
           <EntitySetMapping Name="OrgChartShapes">
             <EntityTypeMapping TypeName="SampleModel.OrgChartShape">
               <MappingFragment StoreEntitySet="OrgChartShapes">
-                <ScalarProperty Name="Shape" ColumnName="Shape" />
                 <ScalarProperty Name="Color" ColumnName="Color" />
-                <ScalarProperty Name="JobTittle" ColumnName="JobTittle" />
+                <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

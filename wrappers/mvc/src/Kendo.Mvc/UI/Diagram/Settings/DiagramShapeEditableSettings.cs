@@ -10,6 +10,7 @@ namespace Kendo.Mvc.UI
     {
         public DiagramShapeEditableSettings()
         {
+            Enabled = true;
             //>> Initialization
         
             Tools = new List<DiagramShapeEditableSettingsTool>();

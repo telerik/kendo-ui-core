@@ -15,6 +15,7 @@ namespace Kendo.Mvc.UI
     {
         public DiagramEditableSettings()
         {
+            Enabled = true;
             //>> Initialization
         
             Resize = new DiagramEditableResizeSettings();

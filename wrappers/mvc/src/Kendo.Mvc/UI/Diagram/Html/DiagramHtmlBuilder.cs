@@ -27,6 +27,7 @@ namespace Kendo.Mvc.UI
         {
             var html = CreateElement();
             html.Attribute("data-role", "diagram")
+                .Attributes(component.HtmlAttributes)
                 .Attribute("id", component.Id);
 
             return html;

@@ -1,6 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/Web.Master" %>
-
-<%@ Import Namespace="Kendo.Mvc.Examples.Models" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/Web.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
 
@@ -16,7 +14,7 @@
             stroke: {
                 width: 0
             },
-            fill: dataItem.ColorScheme
+            background: dataItem.ColorScheme
         }));
 
         g.append(new dataviz.diagram.TextBlock({
@@ -45,35 +43,15 @@
     }
 </script>
 <div class="diagram-wrapper" style="margin: auto;">
-    <%= Html.Kendo().Diagram<OrgChartShape, OrgChartConnection>()
+    <%= Html.Kendo().Diagram()
             .Name("diagram")
-            .DataSource(d => d
-                .ShapeDataSource()
-                .Model(m => 
-                {
-                    m.Id(s => s.Id);
-                    m.Field(s => s.FirstName);
-                    m.Field(s => s.LastName);
-                    m.Field(s => s.Image);
-                    m.Field(s => s.Title);
-                })
-                .Read("ReadShapes", "Diagram")
-                .Create("CreateShape", "Diagram")
-                .Destroy("DestroyShape", "Diagram")
-                .Update("UpdateShape", "Diagram")
+            .DataSource(dataSource => dataSource
+                .Read(read => read
+                    .Action("_OrgChart", "Diagram")
+                )
+                .Model(m => m.Children("Items"))
             )
-            .ConnectionsDataSource(d => d
-                .Model(m =>
-                {
-                    m.Id(c => c.Id);
-                    m.From(c => c.From);
-                    m.To(c => c.To);
-                })
-                .Read("ReadConnections", "Diagram")
-                .Create("CreateConnection", "Diagram")
-                .Destroy("DestroyConnection", "Diagram")
-                .Update("UpdateConnection", "Diagram")
-            )
+            .Editable(false)
             .Layout(l => l.Type(DiagramLayoutType.Layered))
             .ShapeDefaults(sd => sd
                 .Visual("visualTemplate")

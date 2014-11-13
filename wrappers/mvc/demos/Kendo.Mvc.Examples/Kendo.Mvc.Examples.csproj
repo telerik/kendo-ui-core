@@ -185,6 +185,7 @@
     <Compile Include="Controllers\Bullet_Charts\Local_Data_BindingController.cs" />
     <Compile Include="Controllers\Bullet_Charts\Remote_Data_BindingController.cs" />
     <Compile Include="Controllers\Diagram\ApiController.cs" />
+    <Compile Include="Controllers\Diagram\EditingController.cs" />
     <Compile Include="Controllers\Diagram\Events.cs" />
     <Compile Include="Controllers\DropDownList\ClientFilteringController.cs" />
     <Compile Include="Controllers\DropDownList\ServerFilteringController.cs" />
@@ -202,7 +203,6 @@
     <Compile Include="Controllers\PivotGrid\TemplatesController.cs" />
     <Compile Include="Controllers\PivotGrid\Local_Flat_Data_BindingController.cs" />
     <Compile Include="Controllers\PivotGrid\Remote_Flat_Data_BindingController.cs" />
-    <Compile Include="Controllers\Scheduler\Pdf_ExportController.cs" />
     <Compile Include="Controllers\Scheduler\TimelineController.cs" />
     <Compile Include="Controllers\TreeList\ApiController.cs" />
     <Compile Include="Controllers\TreeList\EventsController.cs" />
@@ -856,6 +856,7 @@
     <Content Include="Areas\aspx\Views\bullet_charts\local_data_binding.aspx" />
     <Content Include="Areas\aspx\Views\bullet_charts\remote_data_binding.aspx" />
     <Content Include="Areas\aspx\Views\diagram\api.aspx" />
+    <Content Include="Areas\aspx\Views\diagram\editing.aspx" />
     <Content Include="Areas\aspx\Views\diagram\events.aspx" />
     <Content Include="Areas\aspx\Views\dropdownlist\clientfiltering.aspx" />
     <Content Include="Areas\aspx\Views\dropdownlist\serverfiltering.aspx" />
@@ -870,7 +871,6 @@
     <Content Include="Areas\aspx\Views\menu\context_menu.aspx" />
     <Content Include="Areas\aspx\Views\pivotgrid\local_flat_data_binding.aspx" />
     <Content Include="Areas\aspx\Views\pivotgrid\remote_flat_data_binding.aspx" />
-    <Content Include="Areas\aspx\Views\scheduler\pdf_export.aspx" />
     <Content Include="Areas\aspx\Views\scheduler\timeline.aspx" />
     <Content Include="Areas\aspx\Views\treelist\api.aspx" />
     <Content Include="Areas\aspx\Views\treelist\editing_popup.aspx" />
@@ -3400,9 +3400,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\razor\Views\gantt\resources.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\razor\Views\scheduler\pdf_export.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
