@@ -98,7 +98,9 @@ var __meta__ = {
             var colspan = columnCount / level.length;
 
             for (columnIndex = 0; columnIndex < level.length; columnIndex ++) {
-                th.push('<th colspan="' + colspan + '" class="' + (level[columnIndex].className || "")  + '">' + level[columnIndex].text + "</th>");
+                var column = level[columnIndex];
+
+                th.push('<th colspan="' + (column.colspan || colspan) + '" class="' + (column.className || "")  + '">' + column.text + "</th>");
             }
 
             dateTableRows.push(th.join(""));

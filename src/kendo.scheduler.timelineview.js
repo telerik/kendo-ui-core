@@ -450,12 +450,20 @@ var __meta__ = {
             length = Math.round(length);
 
             for (; idx < length; idx++) {
-                var majorTickDivider = idx % (msMajorInterval/msInterval),
-                    isMajorTickColumn = majorTickDivider === 0,
-                    isMiddleColumn = majorTickDivider < minorTickCount - 1,
-                    isLastSlotColumn = majorTickDivider === minorTickCount - 1;
+                var majorTickDivider = idx % (msMajorInterval/msInterval);
+                var isMajorTickColumn = majorTickDivider === 0;
+                var isMiddleColumn = majorTickDivider < minorTickCount - 1;
+                var isLastSlotColumn = majorTickDivider === minorTickCount - 1;
+                var minorTickColumns = minorTickCount;
 
-                html += action(start, isMajorTickColumn, isMiddleColumn, isLastSlotColumn);
+                if (length % minorTickCount != 0) {
+                    var isLastMajorSlot = (length - (idx + 1)) < minorTickCount;
+                    if (isMajorTickColumn && isLastMajorSlot) {
+                        minorTickColumns = length % minorTickCount;
+                    }
+                }
+
+                html += action(start, isMajorTickColumn, isMiddleColumn, isLastSlotColumn, minorTickColumns);
 
                 setTime(start, msInterval, false);
             }
@@ -481,26 +489,27 @@ var __meta__ = {
         _layout: function(dates) {
             var timeColumns = [];
             var columns = [];
-            var rows = [{ text: this.options.messages.defaultGroupText }];
             var that = this;
+            var rows = [{ text: that.options.messages.defaultGroupText }];
 
             var minorTickSlots = [];
-            for (var minorTickIndex = 0; minorTickIndex < this.options.minorTickCount; minorTickIndex++) {
+            for (var minorTickIndex = 0; minorTickIndex < that.options.minorTickCount; minorTickIndex++) {
                 minorTickSlots.push({
                     text: "",
                     className: ""
                 });
             }
 
-            this._forTimeRange(this.startTime(), this.endTime(), function(date, majorTick, middleColumn, lastSlotColumn) {
+            this._forTimeRange(that.startTime(), that.endTime(), function(date, majorTick, middleColumn, lastSlotColumn, minorSlotsCount) {
                 var template = that.majorTimeHeaderTemplate;
+
                 if (majorTick) {
                     var timeColumn = {
                         text: template({ date: date }),
                         className: lastSlotColumn ? "k-slot-cell" : "",
-                        columns: minorTickSlots.slice(0)
+                        columns: minorTickSlots.slice(0, minorSlotsCount)
                     };
-
+                    that._setColspan(timeColumn);
                     timeColumns.push(timeColumn);
                 }
             });
@@ -516,9 +525,9 @@ var __meta__ = {
             var resources = this.groupedResources;
             if (resources.length) {
                 if (this._groupOrientation() === "vertical") {
-                    rows = this._createRowsLayout(resources, null);
+                    rows = that._createRowsLayout(resources, null);
                 } else {
-                    columns = this._createColumnsLayout(resources, columns);
+                    columns = that._createColumnsLayout(resources, columns);
                 }
             }
 
@@ -526,6 +535,20 @@ var __meta__ = {
                 columns: columns,
                 rows: rows
             };
+        },
+
+        _setColspan: function (columnLevel) {
+            var count = 0;
+            if (columnLevel.columns) {
+                for (var i = 0; i < columnLevel.columns.length; i++) {
+                    count += this._setColspan(columnLevel.columns[i]);
+                }
+                columnLevel.colspan = count;
+                return count;
+            } else {
+                columnLevel.colspan = 1;
+                return 1;
+            }
         },
 
         //optional methods
@@ -570,7 +593,7 @@ var __meta__ = {
                 if (isVerticalGrouped) {
                     rowCount = this._rowCountForLevel(this.rowLevels.length - 1);
                 } else {
-                    groupsCount = this._columnCountForLevel(this.columnLevels.length - 3);
+                    groupsCount = this._columnCountForLevel(this.columnLevels.length - 4);
                 }
             }
 
@@ -748,7 +771,7 @@ var __meta__ = {
             var eventsByResource = [];
 
             this._eventsByResource(events, this.groupedResources, eventsByResource);
-     
+
             var eventsPerDate = $.map(this._dates, function(date) {
                 return Math.max.apply(null,
                     $.map(eventsByResource, function(events) {
@@ -1065,7 +1088,7 @@ var __meta__ = {
             var eventEndDate = event.end;
 
             var resources = this.eventResources(event);
-            
+
             if (event.startTime) {
                 eventStartDate = new Date(eventStartTime);
                 eventStartDate = kendo.timezone.apply(eventStartDate, "Etc/UTC");
@@ -1132,7 +1155,7 @@ var __meta__ = {
                     return this._rowCountForLevel(this.rowLevels.length - 1);
                 } else {
                     //update this if date headers is option
-                    return this._columnCountForLevel(this.columnLevels.length - 3);
+                    return this._columnCountForLevel(this.columnLevels.length - 4);
                 }
             }
             return 1;
@@ -1452,7 +1475,7 @@ var __meta__ = {
             SchedulerView.fn.destroy.call(this);
         }
     });
-    
+
     extend(true, ui, {
         TimelineView: TimelineView,
         TimelineWeekView: TimelineView.extend({

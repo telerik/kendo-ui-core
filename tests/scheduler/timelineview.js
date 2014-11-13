@@ -8,15 +8,15 @@
     var scheduler;
 
     function setup(options) {
-        return new TimelineView(container, $.extend(options));
+        return new TimelineView(container, options);
     }
 
     function setupWeek(options) {
-        return new TimelineWeekView(container, $.extend(options));
+        return new TimelineWeekView(container, options);
     }
 
     function setupMonth(options) {
-        return new TimelineMonthView(container, $.extend(options));
+        return new TimelineMonthView(container, options);
     }
 
     function setupScheduler(options) {
@@ -52,6 +52,93 @@
 
         equal(view._dates[0].getDate(), 1);
         equal(view._dates[view._dates.length-1].getDate(), 31);
+    });
+
+    test("week view shows the same amount of cells in header and content with even minorTicks", function () {
+        var view = setupWeek({
+            title: "the title",
+            date: new Date("2013/1/6"),
+            startTime: new Date("2013/1/6 07:00")
+        });
+
+        equal(view.datesHeader.find("table tr:last").children().length,  view.content.find("table tr:first").children().length);
+    });
+
+    test("week view shows the same amount of cells in header and content with odd minorTicks", function () {
+        var view = setupWeek({
+            title: "the title",
+            date: new Date("2013/1/6"),
+            minorTickCount: 3,
+            majorTick: 120,
+            startTime: new Date("2013/1/6 06:00"),
+            endTime: new Date("2013/1/6 11:00")
+        });
+
+        equal(view.datesHeader.find("table tr:last").children().length,  view.content.find("table tr:first").children().length);
+    });
+
+    test("week view shows the same amount of cells in header and content with odd minorTicks and grouping", function () {
+        setupScheduler({
+            date: new Date("2013/1/6"),
+            minorTickCount: 3,
+            majorTick: 120,
+            startTime: new Date("2013/1/6 06:00"),
+            endTime: new Date("2013/1/6 11:00"),
+            views: [
+                "timelineWeek"
+            ],
+            group: {
+                resources: ["Rooms"],
+                orientation: "horizontal"
+            },
+            resources: [
+                {
+                    field: "roomId",
+                    name: "Rooms",
+                    dataSource: [
+                        { text: "Meeting Room 101", value: 1, color: "#6eb3fa" },
+                        { text: "Meeting Room 201", value: 2, color: "#f58a8a" }
+                    ],
+                    title: "Room"
+                }]
+
+        });
+
+        var view = scheduler.view();
+
+        equal(view.datesHeader.find("table tr:last").children().length,  view.content.find("table tr:first").children().length);
+    });
+
+    test("week view shows the same amount of cells in header and content with even minorTicks and grouping", function () {
+        setupScheduler({
+            date: new Date("2013/1/6"),
+            minorTickCount: 2,
+            majorTick: 120,
+            startTime: new Date("2013/1/6 06:00"),
+            endTime: new Date("2013/1/6 11:00"),
+            views: [
+                "timelineWeek"
+            ],
+            group: {
+                resources: ["Rooms"],
+                orientation: "horizontal"
+            },
+            resources: [
+                {
+                    field: "roomId",
+                    name: "Rooms",
+                    dataSource: [
+                        { text: "Meeting Room 101", value: 1, color: "#6eb3fa" },
+                        { text: "Meeting Room 201", value: 2, color: "#f58a8a" }
+                    ],
+                    title: "Room"
+                }]
+
+        });
+
+        var view = scheduler.view();
+
+        equal(view.datesHeader.find("table tr:last").children().length,  view.content.find("table tr:first").children().length);
     });
 
     tzTest("Sofia", "Current time marker is rendered correctly", function() {
