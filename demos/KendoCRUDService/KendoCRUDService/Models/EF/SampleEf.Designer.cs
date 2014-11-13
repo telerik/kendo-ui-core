@@ -377,38 +377,6 @@ namespace KendoCRUDService.Models.EF
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<OrgChartConnections> OrgChartConnections
-        {
-            get
-            {
-                if ((_OrgChartConnections == null))
-                {
-                    _OrgChartConnections = base.CreateObjectSet<OrgChartConnections>("OrgChartConnections");
-                }
-                return _OrgChartConnections;
-            }
-        }
-        private ObjectSet<OrgChartConnections> _OrgChartConnections;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<OrgChartShapes> OrgChartShapes
-        {
-            get
-            {
-                if ((_OrgChartShapes == null))
-                {
-                    _OrgChartShapes = base.CreateObjectSet<OrgChartShapes>("OrgChartShapes");
-                }
-                return _OrgChartShapes;
-            }
-        }
-        private ObjectSet<OrgChartShapes> _OrgChartShapes;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<EmployeeDirectory> EmployeeDirectory
         {
             get
@@ -453,6 +421,38 @@ namespace KendoCRUDService.Models.EF
             }
         }
         private ObjectSet<GanttResource> _GanttResources;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<OrgChartConnection> OrgChartConnections
+        {
+            get
+            {
+                if ((_OrgChartConnections == null))
+                {
+                    _OrgChartConnections = base.CreateObjectSet<OrgChartConnection>("OrgChartConnections");
+                }
+                return _OrgChartConnections;
+            }
+        }
+        private ObjectSet<OrgChartConnection> _OrgChartConnections;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<OrgChartShape> OrgChartShapes
+        {
+            get
+            {
+                if ((_OrgChartShapes == null))
+                {
+                    _OrgChartShapes = base.CreateObjectSet<OrgChartShape>("OrgChartShapes");
+                }
+                return _OrgChartShapes;
+            }
+        }
+        private ObjectSet<OrgChartShape> _OrgChartShapes;
 
         #endregion
 
@@ -603,22 +603,6 @@ namespace KendoCRUDService.Models.EF
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the OrgChartConnections EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToOrgChartConnections(OrgChartConnections orgChartConnections)
-        {
-            base.AddObject("OrgChartConnections", orgChartConnections);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the OrgChartShapes EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToOrgChartShapes(OrgChartShapes orgChartShapes)
-        {
-            base.AddObject("OrgChartShapes", orgChartShapes);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the EmployeeDirectory EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToEmployeeDirectory(EmployeeDirectory employeeDirectory)
@@ -640,6 +624,22 @@ namespace KendoCRUDService.Models.EF
         public void AddToGanttResources(GanttResource ganttResource)
         {
             base.AddObject("GanttResources", ganttResource);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the OrgChartConnections EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToOrgChartConnections(OrgChartConnection orgChartConnection)
+        {
+            base.AddObject("OrgChartConnections", orgChartConnection);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the OrgChartShapes EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToOrgChartShapes(OrgChartShape orgChartShape)
+        {
+            base.AddObject("OrgChartShapes", orgChartShape);
         }
 
         #endregion
@@ -4491,26 +4491,22 @@ namespace KendoCRUDService.Models.EF
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="SampleModel", Name="OrgChartConnections")]
+    [EdmEntityTypeAttribute(NamespaceName="SampleModel", Name="OrgChartConnection")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class OrgChartConnections : EntityObject
+    public partial class OrgChartConnection : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new OrgChartConnections object.
+        /// Create a new OrgChartConnection object.
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
-        /// <param name="from">Initial value of the From property.</param>
-        /// <param name="to">Initial value of the To property.</param>
-        public static OrgChartConnections CreateOrgChartConnections(global::System.Int32 id, global::System.Int32 from, global::System.Int32 to)
+        public static OrgChartConnection CreateOrgChartConnection(global::System.Int32 id)
         {
-            OrgChartConnections orgChartConnections = new OrgChartConnections();
-            orgChartConnections.Id = id;
-            orgChartConnections.From = from;
-            orgChartConnections.To = to;
-            return orgChartConnections;
+            OrgChartConnection orgChartConnection = new OrgChartConnection();
+            orgChartConnection.Id = id;
+            return orgChartConnection;
         }
 
         #endregion
@@ -4547,50 +4543,50 @@ namespace KendoCRUDService.Models.EF
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.Int32 From
+        public Nullable<global::System.Int32> FromShapeId
         {
             get
             {
-                return _From;
+                return _FromShapeId;
             }
             set
             {
-                OnFromChanging(value);
-                ReportPropertyChanging("From");
-                _From = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("From");
-                OnFromChanged();
+                OnFromShapeIdChanging(value);
+                ReportPropertyChanging("FromShapeId");
+                _FromShapeId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("FromShapeId");
+                OnFromShapeIdChanged();
             }
         }
-        private global::System.Int32 _From;
-        partial void OnFromChanging(global::System.Int32 value);
-        partial void OnFromChanged();
+        private Nullable<global::System.Int32> _FromShapeId;
+        partial void OnFromShapeIdChanging(Nullable<global::System.Int32> value);
+        partial void OnFromShapeIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.Int32 To
+        public Nullable<global::System.Int32> ToShapeId
         {
             get
             {
-                return _To;
+                return _ToShapeId;
             }
             set
             {
-                OnToChanging(value);
-                ReportPropertyChanging("To");
-                _To = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("To");
-                OnToChanged();
+                OnToShapeIdChanging(value);
+                ReportPropertyChanging("ToShapeId");
+                _ToShapeId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ToShapeId");
+                OnToShapeIdChanged();
             }
         }
-        private global::System.Int32 _To;
-        partial void OnToChanging(global::System.Int32 value);
-        partial void OnToChanged();
+        private Nullable<global::System.Int32> _ToShapeId;
+        partial void OnToShapeIdChanging(Nullable<global::System.Int32> value);
+        partial void OnToShapeIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -4615,6 +4611,102 @@ namespace KendoCRUDService.Models.EF
         private global::System.String _Text;
         partial void OnTextChanging(global::System.String value);
         partial void OnTextChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> FromPointX
+        {
+            get
+            {
+                return _FromPointX;
+            }
+            set
+            {
+                OnFromPointXChanging(value);
+                ReportPropertyChanging("FromPointX");
+                _FromPointX = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("FromPointX");
+                OnFromPointXChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _FromPointX;
+        partial void OnFromPointXChanging(Nullable<global::System.Int32> value);
+        partial void OnFromPointXChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> FromPointY
+        {
+            get
+            {
+                return _FromPointY;
+            }
+            set
+            {
+                OnFromPointYChanging(value);
+                ReportPropertyChanging("FromPointY");
+                _FromPointY = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("FromPointY");
+                OnFromPointYChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _FromPointY;
+        partial void OnFromPointYChanging(Nullable<global::System.Int32> value);
+        partial void OnFromPointYChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> ToPointX
+        {
+            get
+            {
+                return _ToPointX;
+            }
+            set
+            {
+                OnToPointXChanging(value);
+                ReportPropertyChanging("ToPointX");
+                _ToPointX = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ToPointX");
+                OnToPointXChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _ToPointX;
+        partial void OnToPointXChanging(Nullable<global::System.Int32> value);
+        partial void OnToPointXChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> ToPointY
+        {
+            get
+            {
+                return _ToPointY;
+            }
+            set
+            {
+                OnToPointYChanging(value);
+                ReportPropertyChanging("ToPointY");
+                _ToPointY = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ToPointY");
+                OnToPointYChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _ToPointY;
+        partial void OnToPointYChanging(Nullable<global::System.Int32> value);
+        partial void OnToPointYChanged();
 
         #endregion
 
@@ -4624,22 +4716,22 @@ namespace KendoCRUDService.Models.EF
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="SampleModel", Name="OrgChartShapes")]
+    [EdmEntityTypeAttribute(NamespaceName="SampleModel", Name="OrgChartShape")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class OrgChartShapes : EntityObject
+    public partial class OrgChartShape : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new OrgChartShapes object.
+        /// Create a new OrgChartShape object.
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
-        public static OrgChartShapes CreateOrgChartShapes(global::System.Int32 id)
+        public static OrgChartShape CreateOrgChartShape(global::System.Int32 id)
         {
-            OrgChartShapes orgChartShapes = new OrgChartShapes();
-            orgChartShapes.Id = id;
-            return orgChartShapes;
+            OrgChartShape orgChartShape = new OrgChartShape();
+            orgChartShape.Id = id;
+            return orgChartShape;
         }
 
         #endregion
@@ -4678,120 +4770,48 @@ namespace KendoCRUDService.Models.EF
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String FirstName
+        public global::System.String JobTitle
         {
             get
             {
-                return _FirstName;
+                return _JobTitle;
             }
             set
             {
-                OnFirstNameChanging(value);
-                ReportPropertyChanging("FirstName");
-                _FirstName = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("FirstName");
-                OnFirstNameChanged();
+                OnJobTitleChanging(value);
+                ReportPropertyChanging("JobTitle");
+                _JobTitle = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("JobTitle");
+                OnJobTitleChanged();
             }
         }
-        private global::System.String _FirstName;
-        partial void OnFirstNameChanging(global::System.String value);
-        partial void OnFirstNameChanged();
+        private global::System.String _JobTitle;
+        partial void OnJobTitleChanging(global::System.String value);
+        partial void OnJobTitleChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String LastName
+        public global::System.String Color
         {
             get
             {
-                return _LastName;
+                return _Color;
             }
             set
             {
-                OnLastNameChanging(value);
-                ReportPropertyChanging("LastName");
-                _LastName = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("LastName");
-                OnLastNameChanged();
+                OnColorChanging(value);
+                ReportPropertyChanging("Color");
+                _Color = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Color");
+                OnColorChanged();
             }
         }
-        private global::System.String _LastName;
-        partial void OnLastNameChanging(global::System.String value);
-        partial void OnLastNameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String Title
-        {
-            get
-            {
-                return _Title;
-            }
-            set
-            {
-                OnTitleChanging(value);
-                ReportPropertyChanging("Title");
-                _Title = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Title");
-                OnTitleChanged();
-            }
-        }
-        private global::System.String _Title;
-        partial void OnTitleChanging(global::System.String value);
-        partial void OnTitleChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String Image
-        {
-            get
-            {
-                return _Image;
-            }
-            set
-            {
-                OnImageChanging(value);
-                ReportPropertyChanging("Image");
-                _Image = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Image");
-                OnImageChanged();
-            }
-        }
-        private global::System.String _Image;
-        partial void OnImageChanging(global::System.String value);
-        partial void OnImageChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String ColorScheme
-        {
-            get
-            {
-                return _ColorScheme;
-            }
-            set
-            {
-                OnColorSchemeChanging(value);
-                ReportPropertyChanging("ColorScheme");
-                _ColorScheme = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("ColorScheme");
-                OnColorSchemeChanged();
-            }
-        }
-        private global::System.String _ColorScheme;
-        partial void OnColorSchemeChanging(global::System.String value);
-        partial void OnColorSchemeChanged();
+        private global::System.String _Color;
+        partial void OnColorChanging(global::System.String value);
+        partial void OnColorChanged();
 
         #endregion
 

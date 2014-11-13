@@ -19,7 +19,7 @@ namespace KendoCRUDService.Controllers
 
         public JsonResult Update()
         {
-            var models = this.DeserializeObject<IEnumerable<OrgChartConnections>>("models");
+            var models = this.DeserializeObject<IEnumerable<OrgChartConnection>>("models");
             if (models != null)
             {
                 DiagramConnectionsRepository.Update(models);
@@ -29,7 +29,7 @@ namespace KendoCRUDService.Controllers
 
         public ActionResult Destroy()
         {
-            var models = this.DeserializeObject<IEnumerable<OrgChartConnections>>("models");
+            var models = this.DeserializeObject<IEnumerable<OrgChartConnection>>("models");
 
             if (models != null)
             {
@@ -40,7 +40,7 @@ namespace KendoCRUDService.Controllers
 
         public ActionResult Create()
         {
-            var models = this.DeserializeObject<IEnumerable<OrgChartConnections>>("models");
+            var models = this.DeserializeObject<IEnumerable<OrgChartConnection>>("models");
             if (models != null)
             {
                 DiagramConnectionsRepository.Insert(models);

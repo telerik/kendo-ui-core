@@ -11,9 +11,9 @@ namespace KendoCRUDService.Models
     {
         private static bool UpdateDatabase = false;
 
-        public static IList<OrgChartConnections> All()
+        public static IList<OrgChartConnection> All()
         {
-            var result = HttpContext.Current.Session["OrgChartConnections"] as IList<OrgChartConnections>;
+            var result = HttpContext.Current.Session["OrgChartConnections"] as IList<OrgChartConnection>;
 
             if (result == null || UpdateDatabase)
             {
@@ -28,20 +28,20 @@ namespace KendoCRUDService.Models
             return result;
         }
 
-        public static OrgChartConnections One(Func<OrgChartConnections, bool> predicate)
+        public static OrgChartConnection One(Func<OrgChartConnection, bool> predicate)
         {
             return All().FirstOrDefault(predicate);
         }
 
-        public static void Insert(IEnumerable<OrgChartConnections> shapes)
+        public static void Insert(IEnumerable<OrgChartConnection> connections)
         {
-            foreach (var shape in shapes)
+            foreach (var connection in connections)
             {
-                Insert(shape);
+                Insert(connection);
             }
         }
 
-        public static void Insert(OrgChartConnections shape)
+        public static void Insert(OrgChartConnection connection)
         {
             if (!UpdateDatabase)
             {
@@ -54,65 +54,69 @@ namespace KendoCRUDService.Models
                     id = first.Id;
                 }
 
-                shape.Id = id + 1;
+                connection.Id = id + 1;
 
-                All().Insert(0, shape);
+                All().Insert(0, connection);
             }
             else
             {
                 using (var db = new SampleEntities())
                 {
-                    db.OrgChartConnections.AddObject(shape);
+                    db.OrgChartConnections.AddObject(connection);
                     db.SaveChanges();
                 }
             }
         }
 
-        public static void Update(IEnumerable<OrgChartConnections> shapes)
+        public static void Update(IEnumerable<OrgChartConnection> connections)
         {
-            foreach (var shape in shapes)
+            foreach (var connection in connections)
             {
-                Update(shape);
+                Update(connection);
             }
         }
 
-        public static void Update(OrgChartConnections shape)
+        public static void Update(OrgChartConnection connection)
         {
             if (!UpdateDatabase)
             {
-                var target = One(e => e.Id == shape.Id);
+                var target = One(e => e.Id == connection.Id);
 
                 if (target != null)
                 {
-                    target.From = shape.From;
-                    target.To = shape.To;
-                    target.Text = shape.Text;
+                    target.FromShapeId = connection.FromShapeId;
+                    target.ToShapeId = connection.ToShapeId;
+                    target.Text = connection.Text;
+                    target.FromPointX = connection.FromPointX;
+                    target.FromPointY = connection.FromPointY;
+                    target.ToPointX = connection.ToPointX;
+                    target.ToPointY = connection.ToPointY;
                 }
             }
             else
             {
                 using (var db = new SampleEntities())
                 {
-                    db.OrgChartConnections.Attach(shape);
-                    db.ObjectStateManager.ChangeObjectState(shape, EntityState.Modified);
+                    db.OrgChartConnections.Attach(connection);
+                    db.ObjectStateManager.ChangeObjectState(connection, EntityState.Modified);
                     db.SaveChanges();
                 }
             }
         }
 
-        public static void Delete(IEnumerable<OrgChartConnections> shapes)
+        public static void Delete(IEnumerable<OrgChartConnection> connections)
         {
-            foreach (var shape in shapes)
+            foreach (var connection in connections)
             {
-                Delete(shape);
+                Delete(connection);
             }
         }
 
-        public static void Delete(OrgChartConnections shape)
+        public static void Delete(OrgChartConnection connection)
         {
             if (!UpdateDatabase)
             {
-                var target = One(p => p.Id == shape.Id);
+                var target = One(p => p.Id == connection.Id);
                 if (target != null)
                 {
                     All().Remove(target);
@@ -122,8 +126,8 @@ namespace KendoCRUDService.Models
             {
                 using (var db = new SampleEntities())
                 {
-                    db.OrgChartConnections.Attach(shape);
-                    db.OrgChartConnections.DeleteObject(shape);
+                    db.OrgChartConnections.Attach(connection);
+                    db.OrgChartConnections.DeleteObject(connection);
                     db.SaveChanges();
                 }
             }

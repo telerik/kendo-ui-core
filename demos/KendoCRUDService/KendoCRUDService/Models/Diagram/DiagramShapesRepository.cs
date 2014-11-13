@@ -11,9 +11,9 @@ namespace KendoCRUDService.Models
     {
         private static bool UpdateDatabase = false;
         
-        public static IList<OrgChartShapes> All()
+        public static IList<OrgChartShape> All()
         {
-            var result = HttpContext.Current.Session["OrgChartShapes"] as IList<OrgChartShapes>;
+            var result = HttpContext.Current.Session["OrgChartShapes"] as IList<OrgChartShape>;
 
             if (result == null || UpdateDatabase)
             {
@@ -28,12 +28,12 @@ namespace KendoCRUDService.Models
             return result;
         }
 
-        public static OrgChartShapes One(Func<OrgChartShapes, bool> predicate)
+        public static OrgChartShape One(Func<OrgChartShape, bool> predicate)
         {
             return All().FirstOrDefault(predicate);
         }
 
-        public static void Insert(IEnumerable<OrgChartShapes> shapes)
+        public static void Insert(IEnumerable<OrgChartShape> shapes)
         {
             foreach (var shape in shapes)
             {
@@ -41,7 +41,7 @@ namespace KendoCRUDService.Models
             }
         }
 
-        public static void Insert(OrgChartShapes shape)
+        public static void Insert(OrgChartShape shape)
         {
             if (!UpdateDatabase)
             {
@@ -68,7 +68,7 @@ namespace KendoCRUDService.Models
             }
         }
 
-        public static void Update(IEnumerable<OrgChartShapes> shapes)
+        public static void Update(IEnumerable<OrgChartShape> shapes)
         {
             foreach (var shape in shapes)
             {
@@ -76,7 +76,7 @@ namespace KendoCRUDService.Models
             }
         }
 
-        public static void Update(OrgChartShapes shape)
+        public static void Update(OrgChartShape shape)
         {
             if (!UpdateDatabase)
             {
@@ -84,11 +84,8 @@ namespace KendoCRUDService.Models
 
                 if (target != null)
                 {
-                    target.Title = shape.Title;
-                    target.ColorScheme = shape.ColorScheme;
-                    target.FirstName = shape.FirstName;
-                    target.LastName = shape.LastName;
-                    target.Image = shape.Image;
+                    target.JobTitle = shape.JobTitle;
+                    target.Color = shape.Color;
                 }
             }
             else
@@ -102,7 +99,7 @@ namespace KendoCRUDService.Models
             }
         }
 
-        public static void Delete(IEnumerable<OrgChartShapes> shapes)
+        public static void Delete(IEnumerable<OrgChartShape> shapes)
         {
             foreach (var shape in shapes)
             {
@@ -110,7 +107,7 @@ namespace KendoCRUDService.Models
             }
         }
 
-        public static void Delete(OrgChartShapes shape)
+        public static void Delete(OrgChartShape shape)
         {
             if (!UpdateDatabase)
             {

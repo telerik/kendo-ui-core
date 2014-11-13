@@ -319,20 +319,21 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="From" Type="int" Nullable="false" />
-          <Property Name="To" Type="int" Nullable="false" />
+          <Property Name="FromShapeId" Type="int" />
+          <Property Name="ToShapeId" Type="int" />
           <Property Name="Text" Type="ntext" />
+          <Property Name="FromPointX" Type="int" />
+          <Property Name="FromPointY" Type="int" />
+          <Property Name="ToPointX" Type="int" />
+          <Property Name="ToPointY" Type="int" />
         </EntityType>
         <EntityType Name="OrgChartShapes">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="ntext" />
-          <Property Name="LastName" Type="ntext" />
-          <Property Name="Title" Type="ntext" />
-          <Property Name="Image" Type="ntext" />
-          <Property Name="ColorScheme" Type="nchar" MaxLength="10" />
+          <Property Name="JobTitle" Type="nvarchar" MaxLength="200" />
+          <Property Name="Color" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Products">
           <Key>
@@ -729,8 +730,6 @@
             <End Role="GanttTask" EntitySet="GanttTasks" />
             <End Role="GanttTask1" EntitySet="GanttTasks" />
           </AssociationSet>
-          <EntitySet Name="OrgChartConnections" EntityType="SampleModel.OrgChartConnections" />
-          <EntitySet Name="OrgChartShapes" EntityType="SampleModel.OrgChartShapes" />
           <EntitySet Name="EmployeeDirectory" EntityType="SampleModel.EmployeeDirectory" />
           <AssociationSet Name="FK_EmployeeDirectory_EmployeeDirectory" Association="SampleModel.FK_EmployeeDirectory_EmployeeDirectory">
             <End Role="EmployeeDirectory" EntitySet="EmployeeDirectory" />
@@ -738,6 +737,8 @@
           </AssociationSet>
           <EntitySet Name="GanttResourceAssignments" EntityType="SampleModel.GanttResourceAssignment" />
           <EntitySet Name="GanttResources" EntityType="SampleModel.GanttResource" />
+          <EntitySet Name="OrgChartConnections" EntityType="SampleModel.OrgChartConnection" />
+          <EntitySet Name="OrgChartShapes" EntityType="SampleModel.OrgChartShape" />
           </EntityContainer>
         <EntityType Name="Category">
           <Key>
@@ -1173,26 +1174,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="OrgChartConnections">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="From" Nullable="false" />
-          <Property Type="Int32" Name="To" Nullable="false" />
-          <Property Type="String" Name="Text" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="OrgChartShapes">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="FirstName" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="LastName" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Title" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Image" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="ColorScheme" MaxLength="10" FixedLength="true" Unicode="true" />
-        </EntityType>
         <EntityType Name="EmployeeDirectory">
           <Key>
             <PropertyRef Name="EmployeeID" />
@@ -1240,6 +1221,27 @@
           <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Color" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="OrgChartConnection">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="FromShapeId" />
+          <Property Type="Int32" Name="ToShapeId" />
+          <Property Type="String" Name="Text" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="FromPointX" />
+          <Property Type="Int32" Name="FromPointY" />
+          <Property Type="Int32" Name="ToPointX" />
+          <Property Type="Int32" Name="ToPointY" />
+        </EntityType>
+        <EntityType Name="OrgChartShape">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="JobTitle" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Color" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1513,28 +1515,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="OrgChartConnections">
-            <EntityTypeMapping TypeName="SampleModel.OrgChartConnections">
-              <MappingFragment StoreEntitySet="OrgChartConnections">
-                <ScalarProperty Name="Text" ColumnName="Text" />
-                <ScalarProperty Name="To" ColumnName="To" />
-                <ScalarProperty Name="From" ColumnName="From" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="OrgChartShapes">
-            <EntityTypeMapping TypeName="SampleModel.OrgChartShapes">
-              <MappingFragment StoreEntitySet="OrgChartShapes">
-                <ScalarProperty Name="ColorScheme" ColumnName="ColorScheme" />
-                <ScalarProperty Name="Image" ColumnName="Image" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="EmployeeDirectory">
             <EntityTypeMapping TypeName="SampleModel.EmployeeDirectory">
               <MappingFragment StoreEntitySet="EmployeeDirectory">
@@ -1569,6 +1549,29 @@
                 <ScalarProperty Name="Color" ColumnName="Color" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrgChartConnections">
+            <EntityTypeMapping TypeName="SampleModel.OrgChartConnection">
+              <MappingFragment StoreEntitySet="OrgChartConnections">
+                <ScalarProperty Name="ToPointY" ColumnName="ToPointY" />
+                <ScalarProperty Name="ToPointX" ColumnName="ToPointX" />
+                <ScalarProperty Name="FromPointY" ColumnName="FromPointY" />
+                <ScalarProperty Name="FromPointX" ColumnName="FromPointX" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="ToShapeId" ColumnName="ToShapeId" />
+                <ScalarProperty Name="FromShapeId" ColumnName="FromShapeId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrgChartShapes">
+            <EntityTypeMapping TypeName="SampleModel.OrgChartShape">
+              <MappingFragment StoreEntitySet="OrgChartShapes">
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1622,8 +1625,8 @@
         </AssociationConnector>
         <AssociationConnector Association="SampleModel.FK_Orders_Employees" ManuallyRouted="false">
           <ConnectorPoint PointX="4.5" PointY="11.874705403645834" />
-          <ConnectorPoint PointX="5.197916666666667" PointY="11.874705403645834" />
-          <ConnectorPoint PointX="5.364583333333333" PointY="11.874705403645834" />
+          <ConnectorPoint PointX="5.2447891666666671" PointY="11.874705403645834" />
+          <ConnectorPoint PointX="5.4114558333333331" PointY="11.874705403645834" />
           <ConnectorPoint PointX="5.46875" PointY="11.874705403645834" />
           <ConnectorPoint PointX="5.46875" PointY="5.4802050781250031" />
         </AssociationConnector>
@@ -1632,10 +1635,10 @@
           <ConnectorPoint PointX="7.5" PointY="3.3074446614583337" />
         </AssociationConnector>
         <AssociationConnector Association="SampleModel.FK_Order_Details_Products" ManuallyRouted="false">
-          <ConnectorPoint PointX="6.0156244999999995" PointY="20.875" />
-          <ConnectorPoint PointX="6.0156244999999995" PointY="15.172587890625003" />
-          <ConnectorPoint PointX="7.125" PointY="15.172587890625003" />
-          <ConnectorPoint PointX="7.125" PointY="8.97068359375" />
+          <ConnectorPoint PointX="5.984375" PointY="20.875" />
+          <ConnectorPoint PointX="5.984375" PointY="8.97068359375" />
+          <ConnectorPoint PointX="6.416666666666667" PointY="8.97068359375" />
+          <ConnectorPoint PointX="6.583333333333333" PointY="8.97068359375" />
           <ConnectorPoint PointX="7.5" PointY="8.97068359375" />
           <ConnectorPoint PointX="7.5" PointY="5.7302050781250031" />
           <ConnectorPoint PointX="7" PointY="5.7302050781250031" />
@@ -1644,8 +1647,8 @@
         </AssociationConnector>
         <AssociationConnector Association="SampleModel.FK_Orders_Shippers" ManuallyRouted="false">
           <ConnectorPoint PointX="4.5" PointY="16.143992513020834" />
-          <ConnectorPoint PointX="5.28125" PointY="16.143992513020834" />
-          <ConnectorPoint PointX="5.28125" PointY="5.4802050781250031" />
+          <ConnectorPoint PointX="5.3281225" PointY="16.143992513020834" />
+          <ConnectorPoint PointX="5.3281225" PointY="5.4802050781250031" />
         </AssociationConnector>
         <AssociationConnector Association="SampleModel.FK_Products_Suppliers" ManuallyRouted="false">
           <ConnectorPoint PointX="4.5" PointY="23.321848958333334" />
@@ -1654,8 +1657,6 @@
         <AssociationConnector Association="SampleModel.FK_Territories_Region" ManuallyRouted="false">
           <ConnectorPoint PointX="6.5" PointY="8.72068359375" />
           <ConnectorPoint PointX="6.5" PointY="10.865143229166666" />
-          <ConnectorPoint PointX="7.041666666666667" PointY="10.865143229166666" />
-          <ConnectorPoint PointX="7.208333333333333" PointY="10.865143229166666" />
           <ConnectorPoint PointX="8" PointY="10.865143229166666" />
         </AssociationConnector>
         <AssociationConnector Association="SampleModel.CustomerCustomerDemo" ManuallyRouted="false">
@@ -1664,14 +1665,12 @@
         </AssociationConnector>
         <AssociationConnector Association="SampleModel.EmployeeTerritories" ManuallyRouted="false">
           <ConnectorPoint PointX="4.5" PointY="10.307571614583333" />
-          <ConnectorPoint PointX="5.197916666666667" PointY="10.307571614583333" />
-          <ConnectorPoint PointX="5.364583333333333" PointY="10.307571614583333" />
-          <ConnectorPoint PointX="5.385416666666667" PointY="10.307571614583333" />
-          <ConnectorPoint PointX="5.552083333333333" PointY="10.307571614583333" />
+          <ConnectorPoint PointX="5.2447891666666671" PointY="10.307571614583331" />
+          <ConnectorPoint PointX="5.5520833333333321" PointY="10.307571614583333" />
+          <ConnectorPoint PointX="5.901041666666667" PointY="10.307571614583333" />
+          <ConnectorPoint PointX="6.067708333333333" PointY="10.307571614583333" />
           <ConnectorPoint PointX="6.416666666666667" PointY="10.307571614583333" />
           <ConnectorPoint PointX="6.583333333333333" PointY="10.307571614583333" />
-          <ConnectorPoint PointX="7.041666666666667" PointY="10.307571614583333" />
-          <ConnectorPoint PointX="7.208333333333333" PointY="10.307571614583333" />
           <ConnectorPoint PointX="8" PointY="10.307571614583333" />
         </AssociationConnector>
         <EntityTypeShape EntityType="SampleModel.MeetingAttendee" Width="1.5" PointX="12.625" PointY="5.5" Height="1.5956835937500031" />
@@ -1696,8 +1695,6 @@
         <EntityTypeShape EntityType="SampleModel.GanttDependency" Width="1.5" PointX="7.875" PointY="17.625" />
         <EntityTypeShape EntityType="SampleModel.GanttTask" Width="3.25" PointX="11.375" PointY="17.625" />
         <AssociationConnector Association="SampleModel.FK_GanttTasks_GanttTasks" />
-        <EntityTypeShape EntityType="SampleModel.OrgChartConnections" Width="1.5" PointX="12.375" PointY="0.75" Height="1.7879850260416674" />
-        <EntityTypeShape EntityType="SampleModel.OrgChartShapes" Width="1.5" PointX="5.375" PointY="12.75" Height="2.1725878906250031" />
         <EntityTypeShape EntityType="SampleModel.EmployeeDirectory" Width="1.5" PointX="7.375" PointY="12.75" Height="3.7109993489583388" />
         <AssociationConnector Association="SampleModel.FK_EmployeeDirectory_EmployeeDirectory" >
           <ConnectorPoint PointX="7.9069230769230776" PointY="16.460999348958339" />
@@ -1707,6 +1704,8 @@
         </AssociationConnector>
         <EntityTypeShape EntityType="SampleModel.GanttResourceAssignment" Width="1.5" PointX="8.125" PointY="22" />
         <EntityTypeShape EntityType="SampleModel.GanttResource" Width="1.5" PointX="10.625" PointY="22" />
+        <EntityTypeShape EntityType="SampleModel.OrgChartConnection" Width="1.5" PointX="12.375" PointY="0.875" Height="2.5571907552083246" />
+        <EntityTypeShape EntityType="SampleModel.OrgChartShape" Width="1.5" PointX="14.5" PointY="1" Height="1.5956835937500102" />
         </Diagram>
     </Diagrams>
   </Designer>
