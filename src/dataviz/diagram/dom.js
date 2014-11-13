@@ -4179,10 +4179,10 @@
         function connectionSelector(container, options) {
             var type = options.model.fields[options.field];
             var model = this.dataSource.reader.model;
-            var textField = model.fn.fields.text ? "text": "id";
+            var textField = model.fn.fields.text ? "text": model.idField;
             $("<input name='" + options.field + "' />")
                 .appendTo(container).kendoDropDownList({
-                    dataValueField: "id",
+                    dataValueField: model.idField,
                     dataTextField: textField,
                     dataSource: this.dataSource.data().toJSON(),
                     optionLabel: " "
