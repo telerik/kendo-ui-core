@@ -324,7 +324,7 @@ var __meta__ = {
                     height: 7
                 }
             },
-            tools: ["createShape", "createConnection", "undo", "redo", "rotateClockwise", "rotateAnticlockwise"]
+            tools: ["createShape", "undo", "redo", "rotateClockwise", "rotateAnticlockwise"]
         },
         selectable: {
             stroke: {
