@@ -1234,12 +1234,12 @@ var __meta__ = {
                 return {
                     restrict: "A",
                     require: parents,
-                    replace: true,
-                    template: "",
+                    terminal: true,
                     compile: function($element, $attrs) {
                         if ($attrs[templateName] !== "") {
                             return;
                         }
+
                         $element.removeAttr(attrName);
                         var template = $element[0].outerHTML;
 
@@ -1254,6 +1254,7 @@ var __meta__ = {
                                 $log.warn(attrName + " without a matching parent widget found. It can be one of the following: " + parents.join(", "));
                             } else {
                                 controller.template(templateName, template);
+                                $element.remove();
                             }
                         };
                     }
