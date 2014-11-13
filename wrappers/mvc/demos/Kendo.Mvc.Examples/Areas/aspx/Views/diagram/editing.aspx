@@ -90,7 +90,7 @@
             .ShapeDefaults(sd => sd
                 .Visual("visualTemplate")
                 .Content(c => c
-                    .Template("#= item.JobTitle #")
+                    .Template("#= dataItem.JobTitle #")
                     .FontSize(17)
                 )
             )

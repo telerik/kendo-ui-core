@@ -44,7 +44,7 @@
         .ShapeDefaults(sd => sd
             .Visual("visualTemplate")
             .Content(c => c
-                .Template("#= item.JobTitle #")
+                .Template("#= dataItem.JobTitle #")
                 .FontSize(17)
             )
         )
@@ -55,19 +55,6 @@
             )
         )
         .HtmlAttributes(new { style = "height: 600px;" } )
-        .Events(events => events
-            .ItemRotate("onItemRotate")
-            .Pan("onPan")
-            .Select("onSelect")
-            .ZoomStart("onZoomStart")
-            .ZoomEnd("onZoomEnd")
-            .Click("onClick")
-            .DataBound("onDataBound")
-            .Edit("onEdit")
-            .Add("onAdd")
-            .Remove("onRemove")
-            .Cancel("onCancel")
-        )
 %>
 <div class="box">
     <h4>Console log</h4>
