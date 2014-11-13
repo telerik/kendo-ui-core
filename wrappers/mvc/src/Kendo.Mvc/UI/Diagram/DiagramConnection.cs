@@ -12,6 +12,8 @@ namespace Kendo.Mvc.UI
         {
             //>> Initialization
         
+            Content = new DiagramConnectionContentSettings();
+                
             Editable = new DiagramConnectionEditableSettings();
                 
             From = new DiagramConnectionFromSettings();
@@ -30,6 +32,12 @@ namespace Kendo.Mvc.UI
         }
 
         //>> Fields
+        
+        public DiagramConnectionContentSettings Content
+        {
+            get;
+            set;
+        }
         
         public DiagramConnectionFromSettings From
         {
@@ -83,6 +91,11 @@ namespace Kendo.Mvc.UI
         {
             //>> Serialization
         
+            var content = Content.ToJson();
+            if (content.Any())
+            {
+                json["content"] = content;
+            }
             var from = From.ToJson();
             if (from.Any())
             {

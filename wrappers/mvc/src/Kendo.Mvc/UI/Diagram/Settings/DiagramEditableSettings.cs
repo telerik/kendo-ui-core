@@ -20,8 +20,6 @@ namespace Kendo.Mvc.UI
         
             Resize = new DiagramEditableResizeSettings();
                 
-            Rotate = new DiagramEditableRotateSettings();
-                
             Tools = new List<DiagramEditableSettingsTool>();
                 
         //<< Initialization
@@ -47,12 +45,6 @@ namespace Kendo.Mvc.UI
         }
         
         public DiagramEditableResizeSettings Resize
-        {
-            get;
-            set;
-        }
-        
-        public DiagramEditableRotateSettings Rotate
         {
             get;
             set;
@@ -137,19 +129,6 @@ namespace Kendo.Mvc.UI
             else
             {
                 json["resize"] = false;
-            }
-
-            if (Rotate != null)
-            {
-                var rotate = Rotate.ToJson();
-                if (rotate.Any())
-                {
-                    json["rotate"] = rotate;
-                }
-            }
-            else
-            {
-                json["rotate"] = false;
             }
         }
 

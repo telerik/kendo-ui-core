@@ -33,6 +33,28 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
+        /// The template which renders the labels.The fields which can be used in the template are:
+        /// </summary>
+        /// <param name="value">The value that configures the template.</param>
+        public DiagramShapeContentSettingsBuilder<TShapeModel,TConnectionModel> Template(string value)
+        {
+            container.Template = value;
+
+            return this;
+        }
+
+        /// <summary>
+        /// The template which renders the labels.The fields which can be used in the template are:
+        /// </summary>
+        /// <param name="value">The value that configures the template.</param>
+        public DiagramShapeContentSettingsBuilder<TShapeModel,TConnectionModel> TemplateId(string value)
+        {
+            container.TemplateId = value;
+
+            return this;
+        }
+        
+        /// <summary>
         /// The alignment of the text inside the shape.
         /// </summary>
         /// <param name="value">The value that configures the align.</param>

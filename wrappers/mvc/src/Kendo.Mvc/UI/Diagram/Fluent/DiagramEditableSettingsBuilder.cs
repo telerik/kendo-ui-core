@@ -99,30 +99,6 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
         
-
-        /// <summary>
-        /// Specifyes the rotate style.
-        /// </summary>
-        /// <param name="enabled">Enables or disables the rotate option.</param>
-        public DiagramEditableSettingsBuilder<TShapeModel,TConnectionModel> Rotate(bool enabled)
-        {
-            container.Rotate.Enabled = enabled;
-            return this;
-        }
-
-        
-        /// <summary>
-        /// Specifyes the rotate style.
-        /// </summary>
-        /// <param name="configurator">The action that configures the rotate.</param>
-        public DiagramEditableSettingsBuilder<TShapeModel,TConnectionModel> Rotate(Action<DiagramEditableRotateSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
-        {
-            container.Rotate.Enabled = true;
-            
-            configurator(new DiagramEditableRotateSettingsBuilder<TShapeModel,TConnectionModel>(container.Rotate));
-            return this;
-        }
-        
         //<< Fields
 
         /// <summary>

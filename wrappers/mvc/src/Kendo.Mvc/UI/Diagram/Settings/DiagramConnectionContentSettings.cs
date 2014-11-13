@@ -6,9 +6,9 @@ namespace Kendo.Mvc.UI
     using System.Web.Routing;
     using Kendo.Mvc.Extensions;
 
-    public class DiagramShapeDefaultsContentSettings : JsonObject
+    public class DiagramConnectionContentSettings : JsonObject
     {
-        public DiagramShapeDefaultsContentSettings()
+        public DiagramConnectionContentSettings()
         {
             //>> Initialization
         
@@ -22,14 +22,6 @@ namespace Kendo.Mvc.UI
         public string Template { get; set; }
 
         public string TemplateId { get; set; }
-        
-        public string Align { get; set; }
-        
-        public string FontFamily { get; set; }
-        
-        public double? FontSize { get; set; }
-        
-        public string Color { get; set; }
         
         //<< Fields
 
@@ -56,26 +48,6 @@ namespace Kendo.Mvc.UI
                 json["template"] = Template;
             }
                 
-            if (Align.HasValue())
-            {
-                json["align"] = Align;
-            }
-            
-            if (FontFamily.HasValue())
-            {
-                json["fontFamily"] = FontFamily;
-            }
-            
-            if (FontSize.HasValue)
-            {
-                json["fontSize"] = FontSize;
-            }
-                
-            if (Color.HasValue())
-            {
-                json["color"] = Color;
-            }
-            
         //<< Serialization
         }
     }

@@ -12,6 +12,8 @@ namespace Kendo.Mvc.UI
         {
             //>> Initialization
         
+            Content = new DiagramConnectionDefaultsContentSettings();
+                
             Editable = new DiagramConnectionDefaultsEditableSettings();
                 
             Hover = new DiagramConnectionDefaultsHoverSettings();
@@ -24,6 +26,12 @@ namespace Kendo.Mvc.UI
         }
 
         //>> Fields
+        
+        public DiagramConnectionDefaultsContentSettings Content
+        {
+            get;
+            set;
+        }
         
         public DiagramConnectionDefaultsEditableSettings Editable
         {
@@ -59,6 +67,11 @@ namespace Kendo.Mvc.UI
         {
             //>> Serialization
         
+            var content = Content.ToJson();
+            if (content.Any())
+            {
+                json["content"] = content;
+            }
             var editable = Editable.ToJson();
             if (editable.Any())
             {

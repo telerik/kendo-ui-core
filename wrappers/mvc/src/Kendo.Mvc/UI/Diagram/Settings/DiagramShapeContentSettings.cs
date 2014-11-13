@@ -19,6 +19,10 @@ namespace Kendo.Mvc.UI
         
         public string Text { get; set; }
         
+        public string Template { get; set; }
+
+        public string TemplateId { get; set; }
+        
         public string Align { get; set; }
         
         public string FontFamily { get; set; }
@@ -38,6 +42,20 @@ namespace Kendo.Mvc.UI
                 json["text"] = Text;
             }
             
+            if (!string.IsNullOrEmpty(TemplateId))
+            {
+                json["template"] = new ClientHandlerDescriptor {
+                    HandlerName = string.Format(
+                        "jQuery('#{0}').html()",
+                        TemplateId
+                    )
+                };
+            }
+            else if (!string.IsNullOrEmpty(Template))
+            {
+                json["template"] = Template;
+            }
+                
             if (Align.HasValue())
             {
                 json["align"] = Align;

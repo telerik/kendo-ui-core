@@ -720,15 +720,7 @@
     <Compile Include="UI\Gauge\Fluent\GaugeRadialPointerFactory.cs" />
     <Compile Include="UI\Gauge\GaugeLinearPointerFactory.cs" />
     <Compile Include="UI\Diagram\Fluent\DiagramEditableResizeSettingsBuilder.cs" />
-    <Compile Include="UI\Diagram\Fluent\DiagramEditableRotateSettingsBuilder.cs" />
-    <Compile Include="UI\Diagram\Fluent\DiagramEditableRotateThumbFillSettingsBuilder.cs" />
-    <Compile Include="UI\Diagram\Fluent\DiagramEditableRotateThumbSettingsBuilder.cs" />
-    <Compile Include="UI\Diagram\Fluent\DiagramEditableRotateThumbStrokeSettingsBuilder.cs" />
     <Compile Include="UI\Diagram\Settings\DiagramEditableResizeSettings.cs" />
-    <Compile Include="UI\Diagram\Settings\DiagramEditableRotateSettings.cs" />
-    <Compile Include="UI\Diagram\Settings\DiagramEditableRotateThumbFillSettings.cs" />
-    <Compile Include="UI\Diagram\Settings\DiagramEditableRotateThumbSettings.cs" />
-    <Compile Include="UI\Diagram\Settings\DiagramEditableRotateThumbStrokeSettings.cs" />
     <Compile Include="UI\RadioButton\RadioButton.cs" />
     <Compile Include="UI\RadioButton\Fluent\RadioButtonBuilder.cs" />
     <Compile Include="UI\RadioButton\Html\RadioButtonHtmlBuilder.cs" />
@@ -2365,5 +2357,11 @@
   <ItemGroup>
     <Compile Include="UI\Diagram\DiagramPannableKey.cs" />
     <Compile Include="UI\Diagram\DiagramSelectableKey.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\Diagram\Settings\DiagramConnectionDefaultsContentSettings.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramConnectionDefaultsContentSettingsBuilder.cs" />
+    <Compile Include="UI\Diagram\Settings\DiagramConnectionContentSettings.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramConnectionContentSettingsBuilder.cs" />
   </ItemGroup>
 </Project>

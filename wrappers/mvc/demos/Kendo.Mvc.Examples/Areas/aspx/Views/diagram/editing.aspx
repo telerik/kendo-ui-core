@@ -82,9 +82,17 @@
                 .Update("UpdateConnection", "Diagram")
             )
             .Events(e => e.DataBound("onDataBound"))
-            .Layout(l => l.Type(DiagramLayoutType.Tree).Subtype(DiagramLayoutSubtype.Tipover).UnderneathHorizontalOffset(140))
+            .Layout(l => l
+                .Type(DiagramLayoutType.Tree)
+                .Subtype(DiagramLayoutSubtype.Tipover)
+                .UnderneathHorizontalOffset(140)
+            )
             .ShapeDefaults(sd => sd
                 .Visual("visualTemplate")
+                .Content(c => c
+                    .Template("#= item.JobTitle #")
+                    .FontSize(17)
+                )
             )
             .ConnectionDefaults(cd => cd
                 .Stroke(s => s

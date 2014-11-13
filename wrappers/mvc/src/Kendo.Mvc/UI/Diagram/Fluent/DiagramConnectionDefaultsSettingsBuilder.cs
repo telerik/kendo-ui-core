@@ -21,6 +21,16 @@ namespace Kendo.Mvc.UI.Fluent
 
         //>> Fields
         
+        /// <summary>
+        /// Defines the shapes content settings.
+        /// </summary>
+        /// <param name="configurator">The action that configures the content.</param>
+        public DiagramConnectionDefaultsSettingsBuilder<TShapeModel,TConnectionModel> Content(Action<DiagramConnectionDefaultsContentSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
+        {
+            configurator(new DiagramConnectionDefaultsContentSettingsBuilder<TShapeModel,TConnectionModel>(container.Content));
+            return this;
+        }
+        
 
         /// <summary>
         /// Defines the shape editable options.
