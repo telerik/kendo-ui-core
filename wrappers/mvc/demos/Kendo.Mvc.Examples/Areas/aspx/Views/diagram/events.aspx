@@ -37,7 +37,6 @@
             .Destroy("DestroyConnection", "Diagram")
             .Update("UpdateConnection", "Diagram")
         )
-        .Events(e => e.DataBound("onDataBound"))
         .Layout(l => l
             .Type(DiagramLayoutType.Tree)
             .Subtype(DiagramLayoutSubtype.Tipover)
@@ -57,6 +56,19 @@
             )
         )
         .HtmlAttributes(new { style = "height: 600px;" } )
+        .Events(events => events
+            .ItemRotate("onItemRotate")
+            .Pan("onPan")
+            .Select("onSelect")
+            .ZoomStart("onZoomStart")
+            .ZoomEnd("onZoomEnd")
+            .Click("onClick")
+            .DataBound("onDataBound")
+            .Edit("onEdit")
+            .Add("onAdd")
+            .Remove("onRemove")
+            .Cancel("onCancel")
+        )
 %>
 <div class="box">
     <h4>Console log</h4>
