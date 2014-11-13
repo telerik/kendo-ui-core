@@ -1617,20 +1617,22 @@
 
             _createGlobalToolBar: function() {
                 var tools = this.options.editable.tools;
-                this.toolBar = new DiagramToolBar(this, {
-                    tools: tools || {},
-                    click: proxy(this._toolBarClick, this),
-                    modal: false
-                });
+                if (tools && tools.length) {
+                    this.toolBar = new DiagramToolBar(this, {
+                        tools: tools || {},
+                        click: proxy(this._toolBarClick, this),
+                        modal: false
+                    });
 
-                this.toolBar.element.css({
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    width: this.element.width()
-                });
+                    this.toolBar.element.css({
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                        width: this.element.width()
+                    });
 
-                this.element.append(this.toolBar.element);
+                    this.element.append(this.toolBar.element);
+                }
             },
 
             createShape: function() {
