@@ -1,12 +1,17 @@
 <div id="example">
-    <div id="draggable"></div>
-    <div id="droptarget" class="k-widget k-header"><div class="test1 k-widget k-header">Start dragging.</div><div class="test2 k-widget k-header">Start dragging.</div></div>
+    
+    <div class="demo-section k-header">
+        <div id="draggable"></div>
+        <div id="droptarget">
+            <div class="test1">Drag the small circle here ...</div>
+            <div class="test2">... Or here.</div>
+        </div>
+    </div>
 
     <script>
         function draggableOnDragStart(e) {
             $("#draggable").addClass("hollow");
-
-            $("#droptarget").html("<div class='test1 k-widget k-header'>(Drop here)</div><div class='test2 k-widget k-header'>(Drop here)</div>");
+            $("#droptarget").html("<div class='test1'>(Drop here)</div><div class='test2'>(Drop here)</div>");
         }
 
         function droptargetOnDragEnter(e) {
@@ -27,7 +32,7 @@
 
             if (!draggable.data("kendoDraggable").dropped) {
                 // drag ended outside of any droptarget
-                $("#droptarget").html("<div class='test1 k-widget k-header'>(Try again)</div><div class='test2 k-widget k-header'>(Try again)</div>");
+                $("#droptarget").html("<div class='test1'>(Try again)</div><div class='test2'>(Try again)</div>");
             }
 
             draggable.removeClass("hollow");
@@ -52,49 +57,58 @@
     </script>
 
     <style scoped>
-        #droptarget,
-        .test1, .test2
-        {
-            height: 198px;
-            font-size: 18px;
-            border-radius: 37px;
-            text-align: center;
-            line-height: 198px;
-            margin: 0 0 30px 215px;
-            cursor: default;
-            vertical-align: middle;
+        .demo-section {
+            width: 700px;
+            position: relative;
+        }
+        
+        #draggable {
+            cursor: move;
+            position: absolute;
+            top: 113px;
+            left: 70px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background-color: #03a9f4;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.23), 0 3px 10px rgba(0, 0, 0, 0.16);
         }
 
-        .test1, .test2
-        {
+        #droptarget {
+            margin-left: 150px;
+            height: 200px;
+            text-align: center;
+            line-height: 200px;
+            cursor: default;
+            vertical-align: middle;
+            border: 2px dotted #ccc;
+        }
+
+        .test1,
+        .test2 {
             vertical-align: middle;
             display: inline-block;
-            width: 220px;
+            width: 230px;
             height: 100px;
             line-height: 100px;
             margin: 0 10px 0;
+            font-size: 14px;
+            font-weight: normal;
+            border-radius: 60px;
+            color: #fff;
+        }
+        .test1 {
+            background-color: #3f51b5;
+        }
+        .test2 {
+            background-color: #ee6f0b;
         }
 
         *+html .test1,
-        *+html .test2
-        {
+        *+html .test2 {
             margin-top: 50px;
             display: inline;
             zoom: 1;
-        }
-
-        #example
-        {
-            background: url(../content/web/dragdrop/drag-clue.png) no-repeat 130px 80px;
-        }
-
-        #exampleTitle
-        {
-            color: #000;
-        }
-        #draggable 
-        {
-            top: 60px;    
         }
     </style>
 </div>

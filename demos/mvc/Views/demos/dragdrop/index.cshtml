@@ -2,35 +2,45 @@
         <div id="example">
 
             <div class="box">
-                <h4>Configuration</h4>
-                <ul class="options">
-                    <li><label for="cursorOffset"><input type="checkbox" id="cursorOffset"> Enable <code>cursorOffset</code></label></li>
-                    <li><label for="axis">Axis: <select id="axis">
-                                <option value="">(none)</option>
-                                <option value="x">Horizontal (x)</option>
-                                <option value="y">Vertical (y)</option>
-                        </select></label></li>
-                </ul>
+                <div class="box-col">
+                    <h4>Axis</h4>
+                    <ul class="options">
+                        <li><select id="axis">
+                            <option value="">(none)</option>
+                            <option value="x">Horizontal (x)</option>
+                            <option value="y">Vertical (y)</option>
+                            </select>
+                        </li>
+                    </ul>  
+                </div>
+                <div class="box-col">
+                <h4>cursorOffset</h4>
+                    <ul class="options">
+                        <li><label for="cursorOffset"><input type="checkbox" id="cursorOffset"> Enable <code>cursorOffset</code></label></li>
+                    </ul>   
+                </div>
             </div>
 
-            <div class="demo-section">
+            <div class="demo-section k-header">
                 <div id="draggable"></div>
-                <div id="droptarget" class="k-header">Start dragging.</div>
+                <div id="droptarget" class="k-header">Drag the small circle here.</div>
             </div>
 
             <script>
                 function draggableOnDragStart(e) {
                     $("#draggable").addClass("hollow");
-
-                    $("#droptarget").text("(Drop here)");
+                    $("#droptarget").text("Drop here.");
+                    $("#droptarget").removeClass("painted");
                 }
 
                 function droptargetOnDragEnter(e) {
                     $("#droptarget").text("Now drop...");
+                    $("#droptarget").addClass("painted");
                 }
 
                 function droptargetOnDragLeave(e) {
-                    $("#droptarget").text("(Drop here)");
+                    $("#droptarget").text("Drop here.");
+                    $("#droptarget").removeClass("painted");
                 }
 
                 function droptargetOnDrop(e) {
@@ -77,37 +87,52 @@
                     $("#axis").change(function(e) {
                         draggable.options.axis = $(this).val();
                     });
+                    
+                    $("#axis").kendoDropDownList({
+                    });
                 });
             </script>
 
             <style scoped>
+                #draggable {
+                    cursor: move;
+                    position: absolute;
+                    top: 113px;
+                    left:100px;
+                    width: 56px;
+                    height: 56px;
+                    border-radius: 50%;
+                    background-color: #03a9f4;
+                    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.23), 0 3px 10px rgba(0, 0, 0, 0.16);
+                }
+                .painted {
+                    background-color: #03a9f4;
+                    color: #fff;
+                }
+                
+                #draggable.hollow
+                {
+                    cursor: default;
+                    background: #ececec;
+                }
+                
                 #droptarget
                 {
-                    height: 198px;
-                    width: 300px;
-                    font-size: 36px;
-                    border-radius: 37px;
+                    height: 200px;
+                    width: 200px;
+                    font-size: 14px;
+                    border-radius: 50%;
                     text-align: center;
-                    line-height: 198px;
-                    margin: 0 0 30px 220px;
+                    line-height: 200px;
+                    margin: 0 0 0 250px;
                     cursor: default;
+                    border: 1px solid #999;
                 }
 
                 .demo-section
                 {
-                    width: 520px;
+                    width: 500px;
                     position: relative;
-                    background: url(../content/web/dragdrop/drag-clue.png) no-repeat 155px 130px;
-                }
-
-                #exampleTitle
-                {
-                    color: #000;
-                }
-                
-                #draggable 
-                {
-                    top: 110px;
                 }
             </style>
         </div>

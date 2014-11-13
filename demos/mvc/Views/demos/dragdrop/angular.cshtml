@@ -1,7 +1,7 @@
 <div id="example" ng-app="KendoDemos">
 
     <div ng-controller="MyCtrl">
-        <div class="demo-section">
+        <div class="demo-section k-header">
             <div class="{{ draggableCLass }}" id="draggable" kendo-draggable k-hint="draggableHint" k-dragstart="onDragStart" k-dragend="onDragEnd"></div>
             <div id="droptarget" kendo-droptarget k-dragenter="onDragEnter" k-dragleave="onDragLeave" k-drop="onDrop" class="k-header">{{ dropTargetText }}</div>
         </div>
@@ -10,7 +10,7 @@
     <script>
         angular.module("KendoDemos", [ "kendo.directives" ])
             .controller("MyCtrl", function($scope){
-                $scope.dropTargetText = "Drag here";
+                $scope.dropTargetText = "Drag the small circle here.";
     
                 $scope.draggableHint = function() {
                     return $("#draggable").clone();
@@ -30,7 +30,7 @@
                 $scope.onDragStart = function() {
                     $scope.$apply(function() {
                         $scope.draggableClass = "hollow";
-                        $scope.dropTargetText = "(Drop here)";
+                        $scope.dropTargetText = "Drop here.";
                     });
                 }
     
@@ -42,7 +42,7 @@
     
                 $scope.onDragLeave = function(e) {
                     $scope.$apply(function() {
-                        $scope.dropTargetText = "(Drop here)";
+                        $scope.dropTargetText = "Drop here.";
                     });
                 }
     
@@ -56,33 +56,41 @@
 </script>
 
 <style scoped>
+    #draggable {
+        cursor: move;
+        position: absolute;
+        top: 113px;
+        left:100px;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background-color: #03a9f4;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.23), 0 3px 10px rgba(0, 0, 0, 0.16);
+    }
+    
+    #draggable.hollow
+    {
+        cursor: default;
+        background: #ececec;
+    }
+    
     #droptarget
     {
-        height: 198px;
-        width: 300px;
-        font-size: 36px;
-        border-radius: 37px;
+        height: 200px;
+        width: 200px;
+        font-size: 14px;
+        border-radius: 50%;
         text-align: center;
-        line-height: 198px;
-        margin: 0 0 30px 220px;
+        line-height: 200px;
+        margin: 0 0 0 250px;
         cursor: default;
+        border: 1px solid #999;
     }
-
+    
     .demo-section
     {
-        width: 520px;
+        width: 500px;
         position: relative;
-        background: url(../content/web/dragdrop/drag-clue.png) no-repeat 155px 130px;
-    }
-
-    #exampleTitle
-    {
-        color: #000;
-    }
-
-    #draggable
-    {
-        top: 110px;
     }
 </style>
 </div>
