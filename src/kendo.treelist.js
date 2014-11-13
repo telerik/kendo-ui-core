@@ -561,13 +561,14 @@ var __meta__ = {
         },
 
         _initContainer: function() {
+            var options = this.options;
+            var formContent = [];
+
             this.wrapper = $('<div class="k-popup-edit-form"/>')
                 .attr(kendo.attr("uid"), this.model.uid)
                 .append('<div class="k-edit-form-container"/>');
 
-            var formContent = [];
-
-            if (this.options.template) {
+            if (options.template) {
                 this._appendTemplate(formContent);
                 this.fields = [];
             } else {
@@ -577,7 +578,9 @@ var __meta__ = {
 
             new kendoDom.Tree(this.wrapper.children()[0]).render(formContent);
 
-            this.window = new ui.Window(this.wrapper, this.options.window);
+            this.wrapper.appendTo(options.appendTo);
+
+            this.window = new ui.Window(this.wrapper, options.window);
         },
 
         _appendTemplate: function(form) {
@@ -1768,7 +1771,8 @@ var __meta__ = {
                     }, this),
                     fieldRenderer: this._cellContent,
                     save: proxy(this.saveRow, this),
-                    cancel: proxy(this._cancelEdit, this)
+                    cancel: proxy(this._cancelEdit, this),
+                    appendTo: this.wrapper
                 });
 
                 this.editor = new PopupEditor(row, options);

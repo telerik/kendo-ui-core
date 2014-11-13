@@ -274,4 +274,17 @@
 
         equal(instance.content.find(attr).length, 0);
     });
+
+    test("edit executes scripts", function() {
+        createTreeList({
+            editable: {
+                mode: "popup",
+                template: "<input id='foo'><script>$('\\#foo').val('bar')<\/script>"
+            }
+        });
+
+        instance.editRow(instance.content.find("tr").first());
+
+        equal(instance.editor.wrapper.find("#foo").val(), "bar");
+    });
 })();
