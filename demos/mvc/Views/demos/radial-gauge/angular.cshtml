@@ -1,17 +1,11 @@
 <div id="example" ng-app="KendoDemos">
     <div  ng-controller="MyCtrl">
-        <div class="demo-section k-content">
-            <div class="box-col" style="width: 300px">
-                <h4>Linear Gauge</h4>
-                <span kendo-radialgauge
-                    k-scale="{ min:0, max: 100}"
-                    ng-model="selectedNumber"
-                    ></span>
-            </div>
-            <div class="box-col" style="width: 300px">
-                <h4>Value</h4>
-                <input kendo-slider k-min="0" k-max="100" k-small-step="10" k-large-step="20" ng-model="selectedNumber">
-            </div>
+        <div id="gauge-container">
+            <span kendo-radialgauge
+                k-scale="{ min:0, max: 100}"
+                ng-model="selectedNumber"
+                ></span>
+            <input kendo-slider k-min="0" k-max="100" k-show-buttons="false" k-show-labels="false" k-small-step="10" k-large-step="20" ng-model="selectedNumber">
         </div>
     </div>
 <script>
@@ -20,4 +14,25 @@
             $scope.selectedNumber = 10;
         })
 </script>
+<style scoped>
+    #gauge-container {
+        background: transparent url("../content/dataviz/gauge/gauge-container-partial.png") no-repeat 50% 50%;
+        width: 386px;
+        height: 386px;
+        text-align: center;
+        margin: 0 auto 30px auto;
+    }
+    
+    #gauge-container > span {
+        display: block;
+        width: 350px;
+        height: 300px;
+        margin: 0 auto;
+    }
+    
+    #gauge-container .k-slider {
+        margin-top: -15px;
+        width: 140px;
+    }
+</style>
 </div>

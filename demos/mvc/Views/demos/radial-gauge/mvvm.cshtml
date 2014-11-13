@@ -1,13 +1,10 @@
 <div id="example">
-    <div class="demo-section">
-        <div class="box-col" style="width: 300px">
-            <h4>Radial Gauge</h4>
-            <span  data-role="radialgauge"
-                   data-scale="{ min: 0, max: 100 }"
-                   data-bind="visible: isVisible,
-                              value: selectedNumber"
-                   style="width: 180px"></span>
-        </div>
+    <div id="gauge-container">
+        <span  data-role="radialgauge"
+               data-scale="{ min: 0, max: 100 }"
+               data-bind="visible: isVisible,
+                          value: selectedNumber"
+               class="gauge"></span>
     </div>
     <div class="box">
         <div class="box-col" style="width: 300px">
@@ -18,7 +15,7 @@
         </div>
         <div class="box-col" style="width: 300px">
             <h4>Value</h4>
-            <input data-role="slider" data-min="0" data-max="100" data-small-step="10" data-large-step="20" data-bind="value: selectedNumber">
+            <input data-role="slider" data-min="0" data-max="100" data-show-buttons="false" data-small-step="10" data-large-step="20" data-bind="value: selectedNumber">
         </div>
         <div class="box-col">
             <h4>Information</h4>
@@ -27,14 +24,30 @@
             <a href="http://docs.telerik.com/kendo-ui/getting-started/framework/mvvm/bindings/visible">visible</a> bindings.
         </div>
     </div>
-<script>
-    function createGauge() {
-        var viewModel = kendo.observable({
-            selectedNumber: 10,
-            isVisible: true
-        });
-        kendo.bind($("#example"), viewModel);
-    }
-    $(document).ready(createGauge).bind("kendo:skinChange", createGauge);
-</script>
+    <script>
+        function createGauge() {
+            var viewModel = kendo.observable({
+                selectedNumber: 10,
+                isVisible: true
+            });
+            kendo.bind($("#example"), viewModel);
+        }
+        $(document).ready(createGauge).bind("kendo:skinChange", createGauge);
+    </script>
+    <style scoped>
+        #gauge-container {
+            background: transparent url("../content/dataviz/gauge/gauge-container.png") no-repeat 50% 50%;
+            width: 404px;
+            height: 404px;
+            text-align: center;
+            margin: 0 auto 30px auto;
+        }
+
+        .gauge {
+            display: inline-block;
+            width: 330px;
+            height: 330px;
+            margin: 0 auto;
+        }
+    </style>
 </div>

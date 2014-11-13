@@ -2975,6 +2975,9 @@ html.k-material .demo-section.k-content {
     border-color: #ccc;
     color: #7c7c7c;
 }
+.box .k-widget.k-slider {
+    background-color: transparent;
+}
 
 .box .k-button {
     cursor: pointer;

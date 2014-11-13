@@ -1,6 +1,12 @@
         <div id="example" class="k-content">
-            <div class="configuration" style="width:190px;">
-                <span class="configHead">Gauge</span>
+
+            <div id="gauge-container">
+                <div id="gauge"></div>
+            </div>
+            
+            <div class="box">
+                <div class="box-col">
+                <h4>Gauge Labels</h4>
                 <ul class="options">
                     <li>
                         <input id="labels" checked="checked" type="checkbox" autocomplete="off">
@@ -16,16 +22,18 @@
                         <input id="labels-outside" type="radio" value="outside" name="labels-position">
                         <label for="labels-outside">- outside of the gauge</label>
                     </li>
-
+                </ul>
+                </div>
+                <div class="box-col">
+                <h4>Gauge Ranges</h4>
+                <ul class="options">
                     <li>
                         <input id="ranges" checked="checked" type="checkbox" autocomplete="off">
                         <label for="ranges">Show ranges</label>
                     </li>
                 </ul>
-            </div>
-
-            <div id="gauge-container">
-                <div id="gauge"></div>
+                </div>
+                
             </div>
 
             <script>
@@ -66,7 +74,7 @@
                 $(document).ready(function() {
                     createGauge();
 
-                    $(".configuration").bind("change", refresh);
+                    $(".box").bind("change", refresh);
 
                     $(document).bind("kendo:skinChange", function(e) {
                         createGauge();
@@ -98,7 +106,7 @@
                     width: 404px;
                     height: 404px;
                     text-align: center;
-                    margin: 0 0 30px 50px;
+                    margin: 0 auto 30px auto;
                 }
 
                 #gauge {
