@@ -9,6 +9,10 @@
         <div id="chart"></div>
     </div>
     <script>
+        $(".export-pdf").click(function() {
+            $("#chart").getKendoChart().saveAsPDF();
+        });
+
         function createChart() {
             $("#chart").kendoChart({
                 pdf: {
@@ -61,10 +65,6 @@
                 }
             });
         }
-
-        $(".export-pdf").click(function() {
-            $("#chart").getKendoChart().saveAsPDF();
-        });
 
         $(document).ready(createChart);
         $(document).bind("kendo:skinChange", createChart);

@@ -9,6 +9,10 @@
         <div id="stock-chart"></div>
     </div>
     <script>
+        $(".export-pdf").click(function() {
+            $("#stock-chart").getKendoStockChart().saveAsPDF();
+        });
+
         function createChart() {
             $("#stock-chart").kendoStockChart({
                 dataSource: {
@@ -77,10 +81,6 @@
                 }
             });
         }
-
-        $(".export-pdf").click(function() {
-            $("#stock-chart").getKendoStockChart().saveAsPDF();
-        });
 
         $(document).ready(createChart);
         $(document).bind("kendo:skinChange", createChart);
