@@ -41,7 +41,7 @@
      </kendo:stockChart>
      <style>
 	    #stockChart {
-	    	height: 500px;
+	    	height: 600px;
 	    }
 	</style>
 <demo:footer />
