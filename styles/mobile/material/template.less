@@ -308,7 +308,7 @@
 .km-material .km-popup.km-pane .km-tabstrip,
 .km-material .km-popup .k-state-hover,
 .km-material .km-popup .k-state-focused,
-.km-material .km-popup .k-state-selected,
+//.km-material .km-popup .k-state-selected,
 //.km-material .km-actionsheet > li > a:active,
 //.km-material .km-actionsheet > li > a:hover,
 //.km-material .km-actionsheet > li > .km-state-active,
@@ -380,7 +380,8 @@
 }
 
 .km-material .km-listview .km-state-active,
-.km-material .km-button.km-state-active {
+.km-material .km-button.km-state-active,
+.km-material li.km-state-active .km-listview-label {
     background: @material-selected-background;
     //border-color: @material-selected-background;
 }
@@ -436,6 +437,7 @@
 
 //.km-material,
 .km-material .km-navbar,
+.km-material .km-navbar .km-view-title,
 .km-material .km-navbar .km-button,
 .km-material .k-toolbar,
 .km-material .k-toolbar .km-button,
@@ -470,6 +472,16 @@
     background-color: @material-primary-selected-color;
 }
 
+.km-material .km-popup .k-popup .k-item.k-state-selected,
+.km-material .km-popup .k-popup .k-item.k-state-focused {
+    color: @material-main-color;
+    background-color: @material-selected-background;
+}
+
+.km-material .km-popup .k-popup .k-item.k-state-hover {
+    color: @material-main-color;
+}
+
 /*.km-material .km-popup .k-list-container,
 .km-material .km-popup .k-state-hover,
 .km-material .km-popup .k-state-focused,
@@ -487,3 +499,120 @@
     background-color: @material-background; 
 }
 
+
+.km-material,
+.km-material .km-header,
+.km-material .km-footer,
+.km-material .km-content,
+.km-material .km-pane,
+.km-material .km-scroll-header .km-group-title,
+.km-material input[type=password],
+.km-material input[type=search],
+.km-material input[type=number],
+.km-material input[type=tel],
+.km-material input[type=url],
+.km-material input[type=email],
+.km-material input[type=text]:not(.k-input),
+.km-root .km-material textarea
+{
+    background: @material-primary-inverse-color;
+    outline-color: @material-primary-inverse-color;
+}
+
+.km-material,
+.km-material .km-header,
+.km-material .km-footer,
+.km-material .km-content,
+.km-material .km-pane,
+.km-material .km-scroll-header .km-group-title,
+.km-material input[type=password],
+.km-material input[type=search],
+.km-material input[type=number],
+.km-material input[type=tel],
+.km-material input[type=url],
+.km-material input[type=email],
+.km-material input[type=text]:not(.k-input),
+.km-root .km-material textarea
+{
+    background: @material-primary-inverse-color;
+    outline-color: @material-primary-inverse-color;
+}
+
+.km-material input,
+.km-material select,
+.km-material textarea,
+.km-material .k-dropdown .k-input
+{
+    color: @material-disabled-color;
+    border-color: @material-border-color;
+}
+
+.km-material input[type=password],
+.km-material input[type=search],
+.km-material input[type=number],
+.km-material input[type=tel],
+.km-material input[type=url],
+.km-material input[type=email],
+.km-material input[type=text]:not(.k-input),
+.km-root .km-material textarea
+{
+    color: @material-disabled-color;
+    border-color: @material-border-color;
+}
+
+.km-material input[type=radio],
+.km-material input[type=checkbox]
+{
+    color: @material-main-color;
+    border-color: @material-border-color;
+    //.box-shadow(0 0 1px currentcolor);
+}
+
+.km-material input[type=month],
+.km-material input[type=color],
+.km-material input[type=week],
+.km-material input[type=date],
+.km-material input[type=time],
+.km-material input[type=datetime],
+.km-material input[type=datetime-local],
+.km-material select:not([multiple]),
+.km-material .k-dropdown .k-dropdown-wrap
+{
+    border-bottom-color: @material-border-color;
+    /*background: 100% 100% no-repeat url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAACWCAQAAABj2vCcAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAf0lEQVR4XuzLsQkAAAwCsP7/tD1CcAqZcykMsizLsizLsizLsizLsizLsizLsizL8ncuxzYAgEAAhJz893BazVfXE2quGc9z32asZahlqGWoZahlqGWoZahlqGWoZahlqGWoZahlqGWoZahlqGWoZahlqOUq5CrkKuStlKuS3QdJPtFaleZ1DgAAAABJRU5ErkJggg==") transparent;*/
+    background-size: auto 100%;
+}
+
+.km-material select:focus,
+.km-material textarea:focus,
+.km-material.km-pane input:focus,
+.km-material li.km-actionsheet-title,
+.km-material .k-dropdown .k-state-focused
+{
+    border-color: @material-border-color;
+}
+
+.km-material select:focus,
+.km-material textarea:focus,
+.km-material.km-pane input:focus,
+.km-material li.km-actionsheet-title,
+.km-material .k-dropdown .k-state-focused
+{
+    border-color: @material-primary-color;
+}
+
+.km-material .km-shim,
+.km-material .km-popup,
+.km-material .k-slider,
+.km-material .km-badge,
+.km-material .km-switch-on,
+.km-material .km-current-page,
+.km-material input:focus,
+.km-material select:focus,
+.km-material textarea:focus,
+.km-material input:checked,
+.km-material .km-touch-scrollbar,
+.km-material input[type=text]:not(.k-input):focus
+{
+    color: @material-primary-color;
+}
