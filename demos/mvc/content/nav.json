@@ -8138,6 +8138,7 @@
   {
     "text": "Chart API",
     "name": "chart-api",
+    "new": true,
     "pro": "true",
     "api": "dataviz/chart",
     "spriteCssClass": "chartIcon",
