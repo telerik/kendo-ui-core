@@ -21,7 +21,7 @@
             }));
         } else {
             g.append(new dataviz.diagram.Rectangle({
-                width: 263,
+                width: 240,
                 height: 67,
                 stroke: {
                     width: 0
