@@ -1945,6 +1945,7 @@
       {
         "text": "Column resizing",
         "url": "grid/column-resizing",
+        "disableInMobile": true,
         "title": {
             "kendo-ui": "Column resizing feature of Kendo UI grid control | Kendo UI Grid demo",
 			"aspnet-mvc": "Column resizing in Telerik ASP.NET MVC Grid"
@@ -1957,6 +1958,7 @@
       {
         "text": "Column menu",
         "url": "grid/column-menu",
+        "disableInMobile": true,
         "title": {
             "kendo-ui": "Column menu in Kendo UI Grid",
 			"aspnet-mvc": "Column menu functionality of Telerik ASP.NET MVC Grid"
