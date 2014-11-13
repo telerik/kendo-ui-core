@@ -737,7 +737,7 @@
         }
     });
 
-    test("options.attributes are attached to each button", 3, function() {
+    test("options.attributes (button level) are attached to each button", 3, function() {
         var toolbar = container.kendoToolBar({
             items: [
                 { type: "buttonGroup", buttons: [
@@ -752,6 +752,38 @@
         ok($("#btn1").hasClass("foo"));
         ok($("#btn2").hasClass("bar"));
         ok($("#btn3").hasClass("baz"));
+    });
+
+    test("options.attributes (buttonGroup level) are attached to the buttonGroup wrapper", 1, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "buttonGroup", attributes: { "class": "foo" }, buttons: [
+                        { id: "btn1", text: "Btn1" },
+                        { id: "btn2", text: "Btn2" },
+                        { id: "btn3", text: "Btn3" }
+                    ]
+                }
+            ]
+        }).data("kendoToolBar");
+
+        var buttonGroup = toolbar.element.find(".k-button-group");
+        ok(buttonGroup.hasClass("foo"));
+    });
+
+    test("options.attributes (buttonGroup level) are attached to the buttonGroup wrapper located in the overflow popup", 1, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "buttonGroup", attributes: { "class": "foo" }, buttons: [
+                        { id: "btn1", text: "Btn1" },
+                        { id: "btn2", text: "Btn2" },
+                        { id: "btn3", text: "Btn3" }
+                    ]
+                }
+            ]
+        }).data("kendoToolBar");
+
+        var buttonGroup = toolbar.popup.element.find(".k-button-group");
+        ok(buttonGroup.hasClass("foo"));
     });
 
     test("ButtonGroup with no buttons does not throw JS error", 0, function() {
