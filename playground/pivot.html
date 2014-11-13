@@ -69,22 +69,12 @@
                                     "Sum": {
                                        field: "UnitPrice",
                                        format: "{0:c}",
-                                       aggregate: function(value, state, context) {
-                                           return value + state.currentValue;
-                                       }
+                                       aggregate: "sum"
                                     },
                                     "Avarage": {
                                        field: "UnitPrice",
                                        format: "{0:c}",
-                                       aggregate: function(value, state, context) {
-                                           state.count = state.count || 1;
-                                           state.count += 1;
-
-                                           return value + state.currentValue;
-                                       },
-                                       result: function(state) {
-                                           return state.currentValue / state.count;
-                                       }
+                                       aggregate: "average"
                                     }
                                 }
                             }

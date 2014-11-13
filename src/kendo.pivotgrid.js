@@ -232,7 +232,7 @@ var __meta__ = {
             resultFunc = resultFuncs[aggregate];
             format = formats[aggregate];
 
-            value = resultFunc ? resultFunc(value) : value.currentValue;
+            value = resultFunc ? resultFunc(value) : value.accumulator;
 
             result[start] = {
                 ordinal: start,
@@ -255,7 +255,7 @@ var __meta__ = {
                 resultFunc = resultFuncs[aggregate];
                 format = formats[aggregate];
 
-                value = resultFunc ? resultFunc(value) : value.currentValue;
+                value = resultFunc ? resultFunc(value) : value.accumulator;
 
                 result[index] = {
                     ordinal: index,
@@ -275,7 +275,7 @@ var __meta__ = {
             resultFunc = resultFuncs[aggregate];
             format = formats[aggregate];
 
-            value = resultFunc ? resultFunc(value) : value.currentValue;
+            value = resultFunc ? resultFunc(value) : value.accumulator;
 
             result[result.length] = {
                 ordinal: rowIndex++,
@@ -295,7 +295,7 @@ var __meta__ = {
                 resultFunc = resultFuncs[aggregate];
                 format = formats[aggregate];
 
-                value = resultFunc ? resultFunc(value) : value.currentValue;
+                value = resultFunc ? resultFunc(value) : value.accumulator;
 
                 result[result.length] = {
                     ordinal: rowIndex + index++,
@@ -312,6 +312,85 @@ var __meta__ = {
             return m.aggregate(measureGetter(aggregatorContext.dataItem), state, aggregatorContext);
         };
     }
+
+    function isNumber(val) {
+        return typeof val === "number" && !isNaN(val);
+    }
+
+    function isDate(val) {
+        return val && val.getTime;
+    }
+
+    var functions = {
+        sum: function(value, state) {
+            var accumulator = state.accumulator;
+
+            if (!isNumber(accumulator)) {
+                accumulator = value;
+            } else if (isNumber(value)) {
+                accumulator += value;
+            }
+
+            return accumulator;
+        },
+        count: function(value, state) {
+            return (state.accumulator || 0) + 1;
+        },
+        average: {
+            aggregate: function(value, state) {
+                var accumulator = state.accumulator;
+
+                if (state.count === undefined) {
+                    state.count = 0;
+                }
+
+                if (!isNumber(accumulator)) {
+                    accumulator = value;
+                } else if (isNumber(value)) {
+                    accumulator += value;
+                }
+
+                if (isNumber(value)) {
+                    state.count++;
+                }
+
+                return accumulator;
+            },
+            result: function(state) {
+                var accumulator = state.accumulator;
+
+                if (isNumber(accumulator)) {
+                    accumulator = accumulator / state.count;
+                }
+
+                return accumulator;
+            }
+        },
+        max: function(value, state) {
+            var accumulator = state.accumulator;
+
+            if (!isNumber(accumulator) && !isDate(accumulator)) {
+                accumulator = value;
+            }
+
+            if(accumulator < value && (isNumber(value) || isDate(value))) {
+                accumulator = value;
+            }
+            return accumulator;
+        },
+        min: function(value, state) {
+            var accumulator = state.accumulator;
+
+            if (!isNumber(accumulator) && !isDate(accumulator)) {
+                accumulator = value;
+            }
+
+            if(accumulator > value && (isNumber(value) || isDate(value))) {
+                accumulator = value;
+            }
+            return accumulator;
+        }
+    };
 
     var PivotCubeBuilder = Class.extend({
         init: function(options) {
@@ -521,8 +600,8 @@ var __meta__ = {
 
             for (var measureIdx = 0; measureIdx < measureAggregators.length; measureIdx++) {
                 name = measureAggregators[measureIdx].descriptor.name;
-                state = totalItem.aggregates[name] || { currentValue: 0 };
-                state.currentValue = measureAggregators[measureIdx].aggregator(aggregatorContext, state);
+                state = totalItem.aggregates[name] || { };
+                state.accumulator = measureAggregators[measureIdx].aggregator(aggregatorContext, state);
                 result[name] = state;
             }
 
@@ -583,13 +662,28 @@ var __meta__ = {
             var measures = this.measures || {};
             var aggregators = [];
             var descriptor, measure, idx, length;
+            var defaultAggregate, aggregate;
 
             if (measureDescriptors.length) {
                 for (idx = 0, length = measureDescriptors.length; idx < length; idx++) {
                     descriptor = measureDescriptors[idx];
                     measure = measures[descriptor.name];
+                    defaultAggregate = null;
 
                     if (measure) {
+                        aggregate = measure.aggregate;
+                        if (typeof aggregate === "string") {
+                            defaultAggregate = functions[aggregate.toLowerCase()];
+
+                            if (!defaultAggregate) {
+                                throw new Error("There is no such aggregate function");
+                            }
+
+                            measure.aggregate = defaultAggregate.aggregate || defaultAggregate;
+                            measure.result = defaultAggregate.result;
+                        }
+
+
                         aggregators.push({
                             descriptor: descriptor,
                             caption: measure.caption,
