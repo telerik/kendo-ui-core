@@ -13,6 +13,7 @@ namespace Kendo.Mvc.Extensions
     using Kendo.Mvc.Infrastructure.Implementation;
     using Infrastructure.Implementation.Expressions;
     using Kendo.Mvc.UI;
+    using System.Reflection;
 
     /// <summary>
     /// Provides extension methods to process DataSourceRequest.
@@ -108,7 +109,7 @@ namespace Kendo.Mvc.Extensions
         {
             var result = new DataSourceResult();
 
-            var data = queryable;    
+            var data = queryable;
 
             var filters = new List<IFilterDescriptor>();
 
@@ -177,7 +178,7 @@ namespace Kendo.Mvc.Extensions
             }
 
             if (groups.Any())
-            {                
+            {
                 groups.Reverse().Each(groupDescriptor =>
                 {
                     var sortDescriptor = new SortDescriptor
@@ -203,7 +204,7 @@ namespace Kendo.Mvc.Extensions
             if (groups.Any())
             {
                 data = data.GroupBy(notPagedData, groups);
-            }           
+            }
 
             result.Data = data.Execute(selector);
 
@@ -212,7 +213,7 @@ namespace Kendo.Mvc.Extensions
                 result.Errors = modelState.SerializeErrors();
             }
 
-            temporarySortDescriptors.Each(sortDescriptor => sort.Remove(sortDescriptor));            
+            temporarySortDescriptors.Each(sortDescriptor => sort.Remove(sortDescriptor));
 
             return result;
         }
@@ -575,6 +576,375 @@ namespace Kendo.Mvc.Extensions
 
                 return list;
             }
+        }
+
+        public static DataSourceResult ToTreeDataSourceResult<TModel, T1, T2>(this IQueryable<TModel> enumerable,
+            DataSourceRequest request,
+            Expression<Func<TModel, T1>> idSelector,
+            Expression<Func<TModel, T2>> parentIDSelector)
+        {
+            return enumerable.CreateTreeDataSourceResult<TModel, T1, T2, TModel>(request, idSelector, parentIDSelector, null, null, null);
+        }
+
+        public static DataSourceResult ToTreeDataSourceResult<TModel, T1, T2>(this IQueryable<TModel> enumerable,
+            DataSourceRequest request,
+            Expression<Func<TModel, T1>> idSelector,
+            Expression<Func<TModel, T2>> parentIDSelector,
+            Expression<Func<TModel, bool>> idFilter)
+        {
+            return enumerable.CreateTreeDataSourceResult<TModel, T1, T2, TModel>(request, idSelector, parentIDSelector, null, null, idFilter);
+        }
+
+        public static DataSourceResult ToTreeDataSourceResult<TModel, T1, T2, TResult>(this IQueryable<TModel> queryable,
+            DataSourceRequest request,
+            Expression<Func<TModel, T1>> idSelector,
+            Expression<Func<TModel, T2>> parentIDSelector,
+            Expression<Func<TModel, bool>> idFilter,
+            Func<TModel, TResult> selector)
+        {
+            return queryable.CreateTreeDataSourceResult(request, idSelector, parentIDSelector, null, selector, idFilter);
+        }
+
+        public static DataSourceResult ToTreeDataSourceResult<TModel, T1, T2>(this IQueryable<TModel> queryable,
+            DataSourceRequest request,
+            Expression<Func<TModel, T1>> idSelector,
+            Expression<Func<TModel, T2>> parentIDSelector,
+            ModelStateDictionary modelState)
+        {
+            return queryable.ToTreeDataSourceResult<TModel, T1, T2, TModel>(request, idSelector, parentIDSelector, modelState, null);
+        }
+
+        public static DataSourceResult ToTreeDataSourceResult<TModel, T1, T2>(this IQueryable<TModel> enumerable,
+            DataSourceRequest request,
+            Expression<Func<TModel, T1>> idSelector,
+            Expression<Func<TModel, T2>> parentIDSelector,
+            Expression<Func<TModel, bool>> idFilter,
+            ModelStateDictionary modelState)
+        {
+            return enumerable.CreateTreeDataSourceResult<TModel, T1, T2, TModel>(request, idSelector, parentIDSelector, modelState, null, idFilter);
+        }
+
+        public static DataSourceResult ToTreeDataSourceResult<TModel, T1, T2, TResult>(this IQueryable<TModel> queryable,
+            DataSourceRequest request,
+            Expression<Func<TModel, T1>> idSelector,
+            Expression<Func<TModel, T2>> parentIDSelector,
+            Func<TModel, TResult> selector)
+        {
+            return queryable.CreateTreeDataSourceResult(request, idSelector, parentIDSelector, null, selector, null);
+        }
+
+        public static DataSourceResult ToTreeDataSourceResult<TModel, T1, T2, TResult>(this IQueryable<TModel> queryable,
+            DataSourceRequest request,
+            Expression<Func<TModel, T1>> idSelector,
+            Expression<Func<TModel, T2>> parentIDSelector,
+            ModelStateDictionary modelState,
+            Func<TModel, TResult> selector)
+        {
+            return queryable.CreateTreeDataSourceResult(request, idSelector, parentIDSelector, modelState, selector, null);
+        }
+
+        public static DataSourceResult ToTreeDataSourceResult<TModel, T1, T2, TResult>(this IQueryable<TModel> queryable,
+            DataSourceRequest request,
+            Expression<Func<TModel, T1>> idSelector,
+            Expression<Func<TModel, T2>> parentIDSelector,
+            Expression<Func<TModel, bool>> idFilter,
+            ModelStateDictionary modelState,
+            Func<TModel, TResult> selector)
+        {
+            return queryable.CreateTreeDataSourceResult(request, idSelector, parentIDSelector, modelState, selector, idFilter);
+        }
+
+        public static DataSourceResult ToTreeDataSourceResult<TModel, T1, T2>(this IEnumerable<TModel> enumerable,
+            DataSourceRequest request,
+            Expression<Func<TModel, T1>> idSelector,
+            Expression<Func<TModel, T2>> parentIDSelector)
+        {
+            return enumerable.AsQueryable().CreateTreeDataSourceResult<TModel, T1, T2, TModel>(request, idSelector, parentIDSelector, null, null, null);
+        }
+
+        public static DataSourceResult ToTreeDataSourceResult<TModel, T1, T2>(this IEnumerable<TModel> enumerable,
+            DataSourceRequest request,
+            Expression<Func<TModel, T1>> idSelector,
+            Expression<Func<TModel, T2>> parentIDSelector,
+            Expression<Func<TModel, bool>> idFilter)
+        {
+            return enumerable.AsQueryable().CreateTreeDataSourceResult<TModel, T1, T2, TModel>(request, idSelector, parentIDSelector, null, null, idFilter);
+        }
+
+        public static DataSourceResult ToTreeDataSourceResult<TModel, T1, T2, TResult>(this IEnumerable<TModel> queryable,
+            DataSourceRequest request,
+            Expression<Func<TModel, T1>> idSelector,
+            Expression<Func<TModel, T2>> parentIDSelector,
+            Expression<Func<TModel, bool>> idFilter,
+            Func<TModel, TResult> selector)
+        {
+            return queryable.AsQueryable().CreateTreeDataSourceResult(request, idSelector, parentIDSelector, null, selector, idFilter);
+        }
+
+        public static DataSourceResult ToTreeDataSourceResult<TModel, T1, T2>(this IEnumerable<TModel> queryable,
+            DataSourceRequest request,
+            Expression<Func<TModel, T1>> idSelector,
+            Expression<Func<TModel, T2>> parentIDSelector,
+            ModelStateDictionary modelState)
+        {
+            return queryable.AsQueryable().ToTreeDataSourceResult<TModel, T1, T2, TModel>(request, idSelector, parentIDSelector, modelState, null);
+        }
+
+        public static DataSourceResult ToTreeDataSourceResult<TModel, T1, T2>(this IEnumerable<TModel> enumerable,
+            DataSourceRequest request,
+            Expression<Func<TModel, T1>> idSelector,
+            Expression<Func<TModel, T2>> parentIDSelector,
+            Expression<Func<TModel, bool>> idFilter,
+            ModelStateDictionary modelState)
+        {
+            return enumerable.AsQueryable().CreateTreeDataSourceResult<TModel, T1, T2, TModel>(request, idSelector, parentIDSelector, modelState, null, idFilter);
+        }
+
+        public static DataSourceResult ToTreeDataSourceResult<TModel, T1, T2, TResult>(this IEnumerable<TModel> queryable,
+            DataSourceRequest request,
+            Expression<Func<TModel, T1>> idSelector,
+            Expression<Func<TModel, T2>> parentIDSelector,
+            Func<TModel, TResult> selector)
+        {
+            return queryable.AsQueryable().CreateTreeDataSourceResult(request, idSelector, parentIDSelector, null, selector, null);
+        }
+
+        public static DataSourceResult ToTreeDataSourceResult<TModel, T1, T2, TResult>(this IEnumerable<TModel> queryable,
+            DataSourceRequest request,
+            Expression<Func<TModel, T1>> idSelector,
+            Expression<Func<TModel, T2>> parentIDSelector,
+            ModelStateDictionary modelState,
+            Func<TModel, TResult> selector)
+        {
+            return queryable.AsQueryable().CreateTreeDataSourceResult(request, idSelector, parentIDSelector, modelState, selector, null);
+        }
+
+        public static DataSourceResult ToTreeDataSourceResult<TModel, T1, T2, TResult>(this IEnumerable<TModel> queryable,
+            DataSourceRequest request,
+            Expression<Func<TModel, T1>> idSelector,
+            Expression<Func<TModel, T2>> parentIDSelector,
+            Expression<Func<TModel, bool>> idFilter,
+            ModelStateDictionary modelState,
+            Func<TModel, TResult> selector)
+        {
+            return queryable.AsQueryable().CreateTreeDataSourceResult(request, idSelector, parentIDSelector, modelState, selector, idFilter);
+        }
+
+        private static DataSourceResult CreateTreeDataSourceResult<TModel, T1, T2, TResult>(this IQueryable queryable,
+            DataSourceRequest request,
+            Expression<Func<TModel, T1>> idSelector,
+            Expression<Func<TModel, T2>> parentIDSelector,
+            ModelStateDictionary modelState,
+            Func<TModel, TResult> selector,
+            Expression<Func<TModel, bool>> idFilter)
+        {
+            var result = new DataSourceResult();
+
+            var data = queryable;
+
+            var filters = new List<IFilterDescriptor>();
+
+            if (request.Filters != null)
+            {
+                filters.AddRange(request.Filters);
+            }
+
+            if (filters.Any())
+            {
+                data = data.Where(filters);
+
+                data = data.ParentsRecursive<TModel>(queryable, idSelector, parentIDSelector);
+            }
+
+            var sort = new List<SortDescriptor>();
+
+            if (request.Sorts != null)
+            {
+                sort.AddRange(request.Sorts);
+            }
+
+            var temporarySortDescriptors = new List<SortDescriptor>();
+
+            //IList<GroupDescriptor> groups = new List<GroupDescriptor>();
+
+            //if (request.Groups != null)
+            //{
+            //    groups.AddRange(request.Groups);
+            //}
+
+            //var aggregates = new List<AggregateDescriptor>();
+
+            //if (request.Aggregates != null)
+            //{
+            //    aggregates.AddRange(request.Aggregates);
+            //}
+
+            //if (aggregates.Any())
+            //{
+            //    var dataSource = data.AsQueryable();
+
+            //    var source = dataSource;
+            //    if (filters.Any())
+            //    {
+            //        source = dataSource.Where(filters);
+            //    }
+
+            //    result.AggregateResults = source.Aggregate(aggregates.SelectMany(a => a.Aggregates));
+
+            //    if (groups.Any() && aggregates.Any())
+            //    {
+            //        groups.Each(g => g.AggregateFunctions.AddRange(aggregates.SelectMany(a => a.Aggregates)));
+            //    }
+            //}
+
+            //result.Total = data.Count();
+
+            if (!sort.Any() && queryable.Provider.IsEntityFrameworkProvider())
+            {
+                // The Entity Framework provider demands OrderBy before calling Skip.
+                SortDescriptor sortDescriptor = new SortDescriptor
+                {
+                    Member = queryable.ElementType.FirstSortableProperty()
+                };
+                sort.Add(sortDescriptor);
+                temporarySortDescriptors.Add(sortDescriptor);
+            }
+
+            //if (groups.Any())
+            //{
+            //    groups.Reverse().Each(groupDescriptor =>
+            //    {
+            //        var sortDescriptor = new SortDescriptor
+            //        {
+            //            Member = groupDescriptor.Member,
+            //            SortDirection = groupDescriptor.SortDirection
+            //        };
+
+            //        sort.Insert(0, sortDescriptor);
+            //        temporarySortDescriptors.Add(sortDescriptor);
+            //    });
+            //}
+
+            if (sort.Any())
+            {
+                data = data.Sort(sort);
+            }
+
+            //var notPagedData = data;
+
+            //data = data.Page(request.Page - 1, request.PageSize);
+
+            //if (groups.Any())
+            //{
+            //    data = data.GroupBy(notPagedData, groups);
+            //}
+
+            if (idFilter != null)
+            {
+                data = data.Where(idFilter);
+            }
+
+            result.Data = data.Execute(selector);
+
+            if (modelState != null && !modelState.IsValid)
+            {
+                result.Errors = modelState.SerializeErrors();
+            }
+
+            temporarySortDescriptors.Each(sortDescriptor => sort.Remove(sortDescriptor));
+
+            return result;
+        }
+
+        private static MethodInfo anyMethod;
+        private static MethodInfo AnyMethod(Type type)
+        {
+            if (anyMethod == null)
+            {
+                anyMethod = typeof(Queryable).GetMethods().First(method => method.Name == "Any" && method.GetParameters().Length == 1).MakeGenericMethod(type);
+            }
+
+            return anyMethod;
+        }
+
+        private static IQueryable ParentsRecursive<TModel>(this IQueryable matches,
+            IQueryable allData,
+            LambdaExpression idSelector,
+            LambdaExpression parentIDSelector)
+        {
+            var parents = matches.Parents(allData, idSelector, parentIDSelector);
+            var anyMethod = AnyMethod(matches.ElementType);
+
+            if ((bool)anyMethod.Invoke(null, new[] { parents }))
+            {
+                parents = parents.Union(parents.ParentsRecursive<TModel>(allData, idSelector, parentIDSelector));
+            }
+
+            return matches.Union(parents);
+        }
+
+        private static IQueryable Parents(this IQueryable matches,
+            IQueryable allData,
+            LambdaExpression idSelector,
+            LambdaExpression parentIDSelector)
+        {
+            var elementType = allData.ElementType;
+
+            var allParam = Expression.Parameter(elementType, "allItem");
+            var matchesParam = Expression.Parameter(elementType, "matchedItem");
+
+            var allID = ExpressionFactory.MakeMemberAccess(allParam, idSelector.MemberWithoutInstance());
+
+            var matchesParentID = ExpressionFactory.MakeMemberAccess(matchesParam, parentIDSelector.MemberWithoutInstance());
+            matchesParentID = Expression.Convert(matchesParentID, allID.Type);
+
+            BinaryExpression comparison = Expression.Equal(matchesParentID, allID);
+
+            var anyLambda = Expression.Lambda(comparison, matchesParam);
+            var anyCall =
+                Expression.Call(
+                    typeof(Queryable),
+                    "Any",
+                    new[] { elementType },
+                    matches.Expression,
+                    Expression.Quote(anyLambda));
+
+            var whereLambda = Expression.Lambda(anyCall, allParam);
+            var whereCall =
+                    Expression.Call(
+                        typeof(Queryable),
+                        "Where",
+                        new[] { elementType },
+                        allData.Expression,
+                        Expression.Quote(whereLambda));
+
+            return allData.Provider.CreateQuery(whereCall);
+        }
+
+        /// <summary>
+        /// Produces the set union of two sequences by using the default equality comparer.        
+        /// </summary>
+        /// <returns>        
+        /// An <see cref="IQueryable" /> that contains the elements from both input sequences, excluding duplicates.
+        /// </returns>
+        /// <param name="source">
+        /// An <see cref="IQueryable" /> whose distinct elements form the first set for the union.
+        /// </param>
+        /// <param name="second">
+        /// An <see cref="IQueryable" /> whose distinct elements form the first set for the union.
+        /// </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="source" /> is null.</exception>
+        public static IQueryable Union(this IQueryable source, IQueryable second)
+        {
+            IQueryable query = source.Provider.CreateQuery(
+                Expression.Call(
+                    typeof(Queryable),
+                    "Union",
+                    new[] { source.ElementType },
+                    source.Expression,
+                    second.Expression));
+
+            return query;
         }
     }
 }
