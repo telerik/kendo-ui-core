@@ -284,17 +284,12 @@ var __meta__ = {
         render: function(center, radius) {
             var that = this;
             var options = that.options;
-            var group = that.elements = new Group();
             var arc = that.renderArc(center, radius);
 
             that.bbox = arc.bbox();
             that.labelElements = that.renderLabels();
             that.ticks = that.renderTicks();
             that.ranges = that.renderRanges();
-            
-            group.append(that.ticks, that.ranges, that.labelElements);
-
-            return group;
         },
 
         reflow: function(bbox) {
@@ -303,7 +298,7 @@ var __meta__ = {
             var center = bbox.center();
             var radius = math.min(bbox.height(), bbox.width()) / 2;
 
-            if (that.elements !== undefined) {
+            if (that.bbox !== undefined) {
                 that.bbox = that.arc.bbox();
                 that.radius(that.arc.getRadiusX());
                 that.repositionRanges();
@@ -701,7 +696,7 @@ var __meta__ = {
             gauge.options = deepExtend({}, themeOptions, options);
 
             if ($.isArray(options.pointer)) {
-                for (var i = options.pointer.length - 1; i >= 0; i--) {
+                for (var i = 0; i < options.pointer.length; i++) {
                     gauge.options.pointer[i] = deepExtend({}, themeOptions.pointer, options.pointer[i]);
                 }
             }
@@ -738,6 +733,17 @@ var __meta__ = {
             }
 
             pointer.value(value);
+        },
+
+         _draw: function() {
+            var surface = this.surface;
+
+            surface.clear();
+            surface.draw(this._visuals);
+        },
+
+        exportVisual: function() {
+            return this._visuals;
         },
 
         allValues: function(values) {
@@ -882,25 +888,27 @@ var __meta__ = {
 
             that.fitScale(bbox);
             that.alignScale(bbox);
-            that._draw(that.gaugeArea, pointers, scaleElements);
+            that._buildVisual(that.gaugeArea, pointers, that.scale);
+            that._draw();
         },
 
-        _draw: function(gaugeArea, pointers, scale) {
-            var surface = this.surface;
+        _buildVisual: function(gaugeArea, pointers, scale) {
+            var visuals = new Group();
             var current;
 
-            surface.clear();
-            surface.draw(gaugeArea);
-            surface.draw(scale.children[0]); // ticks
-            surface.draw(scale.children[1]); // ranges
+            visuals.append(gaugeArea);
+            visuals.append(scale.ticks);
+            visuals.append(scale.ranges);
 
             for (var i = 0; i < pointers.length; i++) {
                 current = pointers[i];
                 current.render();
-                surface.draw(current.elements);
+                visuals.append(current.elements);
                 current.value(current.options.value);
             }
-            surface.draw(scale.children[2]); // labels
+            visuals.append(scale.labelElements);
+
+            this._visuals = visuals;
         },
 
         fitScale: function(bbox) {
@@ -1059,25 +1067,27 @@ var __meta__ = {
             that.bbox = that._getBox(bbox2D);
             that._alignElements();
             that._shrinkElements();
+            that._buildVisual();
             that._draw();
         },
 
-        _draw: function(){
+        _buildVisual: function(){
             var that = this;
-            var surface = that.surface;
+            var visuals = new Group();
             var scaleElements = that.scale.render();
             var pointers = that.pointers;
             var current;
 
-            surface.clear();
-            surface.draw(that.gaugeArea);
-            surface.draw(scaleElements);
+            visuals.append(that.gaugeArea);
+            visuals.append(scaleElements);
 
             for (var i = 0; i < pointers.length; i++) {
                 current = pointers[i];
-                surface.draw(current.render());
+                visuals.append(current.render());
                 current.value(current.options.value);
             }
+
+            that._visuals = visuals;
         },
 
         _createModel: function() {
@@ -1256,7 +1266,7 @@ var __meta__ = {
 
         render: function() {
             var that = this;
-            var elements = new Group();
+            var elements = that.elements = new Group();
             var labels = that.renderLabels();
             var scaleLine = that.renderLine();
             var scaleTicks = that.renderTicks();
@@ -1883,6 +1893,7 @@ var __meta__ = {
 
     dataviz.ui.plugin(RadialGauge);
     dataviz.ui.plugin(LinearGauge);
+    dataviz.ExportMixin.extend(Gauge.fn);
 
     deepExtend(dataviz, {
         Gauge: Gauge,
