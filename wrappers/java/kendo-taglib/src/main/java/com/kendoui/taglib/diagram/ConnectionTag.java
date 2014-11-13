@@ -49,6 +49,10 @@ public class ConnectionTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         return "diagram-connection";
     }
 
+    public void setContent(com.kendoui.taglib.diagram.ConnectionContentTag value) {
+        setProperty("content", value);
+    }
+
     public void setEditable(com.kendoui.taglib.diagram.ConnectionEditableTag value) {
         setProperty("editable", value);
     }

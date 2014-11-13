@@ -1,28 +1,23 @@
 
 package com.kendoui.taglib.diagram;
 
-
-import com.kendoui.taglib.BaseTag;
-
-
-
-
+import com.kendoui.taglib.FunctionTag;
 
 
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class EditableRotateTag extends  BaseTag  /* interfaces */ /* interfaces */ {
+public class ConnectionDefaultsContentTemplateFunctionTag extends FunctionTag /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
 
-        EditableTag parent = (EditableTag)findParentWithClass(EditableTag.class);
+        ConnectionDefaultsContentTag parent = (ConnectionDefaultsContentTag)findParentWithClass(ConnectionDefaultsContentTag.class);
 
 
-        parent.setRotate(this);
+        parent.setTemplate(this);
 
 //<< doEndTag
 
@@ -46,15 +41,6 @@ public class EditableRotateTag extends  BaseTag  /* interfaces */ /* interfaces 
     }
 
 //>> Attributes
-
-    public static String tagName() {
-        return "diagram-editable-rotate";
-    }
-
-    public void setThumb(com.kendoui.taglib.diagram.EditableRotateThumbTag value) {
-        setProperty("thumb", value);
-    }
-
 //<< Attributes
 
 }

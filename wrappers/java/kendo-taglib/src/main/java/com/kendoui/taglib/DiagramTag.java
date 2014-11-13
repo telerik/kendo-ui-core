@@ -80,15 +80,7 @@ public class DiagramTag extends WidgetTag /* interfaces */implements DataBoundWi
     }
 
     public void setAdd(AddFunctionTag value) {
-        setEvent("Add", value.getBody());
-    }
-
-    public void setEdit(EditFunctionTag value) {
-        setEvent("Edit", value.getBody());
-    }
-
-    public void setSave(SaveFunctionTag value) {
-        setEvent("Save", value.getBody());
+        setEvent("add", value.getBody());
     }
 
     public void setCancel(CancelFunctionTag value) {
@@ -107,6 +99,10 @@ public class DiagramTag extends WidgetTag /* interfaces */implements DataBoundWi
         setEvent("dataBound", value.getBody());
     }
 
+    public void setEdit(EditFunctionTag value) {
+        setEvent("edit", value.getBody());
+    }
+
     public void setItemBoundsChange(ItemBoundsChangeFunctionTag value) {
         setEvent("itemBoundsChange", value.getBody());
     }
@@ -121,6 +117,10 @@ public class DiagramTag extends WidgetTag /* interfaces */implements DataBoundWi
 
     public void setRemove(RemoveFunctionTag value) {
         setEvent("remove", value.getBody());
+    }
+
+    public void setSave(SaveFunctionTag value) {
+        setEvent("save", value.getBody());
     }
 
     public void setSelect(SelectFunctionTag value) {
@@ -220,7 +220,7 @@ public class DiagramTag extends WidgetTag /* interfaces */implements DataBoundWi
     }
 
     public String getAdd() {
-        Function property = ((Function)getProperty("Add"));
+        Function property = ((Function)getProperty("add"));
         if (property != null) {
             return property.getBody();
         }
@@ -228,31 +228,7 @@ public class DiagramTag extends WidgetTag /* interfaces */implements DataBoundWi
     }
 
     public void setAdd(String value) {
-        setProperty("Add", new Function(value));
-    }
-
-    public String getEdit() {
-        Function property = ((Function)getProperty("Edit"));
-        if (property != null) {
-            return property.getBody();
-        }
-        return null;
-    }
-
-    public void setEdit(String value) {
-        setProperty("Edit", new Function(value));
-    }
-
-    public String getSave() {
-        Function property = ((Function)getProperty("Save"));
-        if (property != null) {
-            return property.getBody();
-        }
-        return null;
-    }
-
-    public void setSave(String value) {
-        setProperty("Save", new Function(value));
+        setProperty("add", new Function(value));
     }
 
     public String getCancel() {
@@ -303,6 +279,18 @@ public class DiagramTag extends WidgetTag /* interfaces */implements DataBoundWi
         setProperty("dataBound", new Function(value));
     }
 
+    public String getEdit() {
+        Function property = ((Function)getProperty("edit"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setEdit(String value) {
+        setProperty("edit", new Function(value));
+    }
+
     public String getItemBoundsChange() {
         Function property = ((Function)getProperty("itemBoundsChange"));
         if (property != null) {
@@ -349,6 +337,18 @@ public class DiagramTag extends WidgetTag /* interfaces */implements DataBoundWi
 
     public void setRemove(String value) {
         setProperty("remove", new Function(value));
+    }
+
+    public String getSave() {
+        Function property = ((Function)getProperty("save"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setSave(String value) {
+        setProperty("save", new Function(value));
     }
 
     public String getSelect() {

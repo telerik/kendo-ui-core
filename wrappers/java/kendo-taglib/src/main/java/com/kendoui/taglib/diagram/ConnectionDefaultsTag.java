@@ -53,6 +53,10 @@ public class ConnectionDefaultsTag extends  BaseTag  /* interfaces */ /* interfa
         return "diagram-connectionDefaults";
     }
 
+    public void setContent(com.kendoui.taglib.diagram.ConnectionDefaultsContentTag value) {
+        setProperty("content", value);
+    }
+
     public void setEditable(com.kendoui.taglib.diagram.ConnectionDefaultsEditableTag value) {
         setProperty("editable", value);
     }

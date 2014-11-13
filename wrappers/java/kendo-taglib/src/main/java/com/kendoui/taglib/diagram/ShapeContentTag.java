@@ -51,6 +51,10 @@ public class ShapeContentTag extends  BaseTag  /* interfaces */ /* interfaces */
         return "diagram-shape-content";
     }
 
+    public void setTemplate(ShapeContentTemplateFunctionTag value) {
+        setEvent("template", value.getBody());
+    }
+
     public java.lang.String getAlign() {
         return (java.lang.String)getProperty("align");
     }
@@ -81,6 +85,14 @@ public class ShapeContentTag extends  BaseTag  /* interfaces */ /* interfaces */
 
     public void setFontSize(float value) {
         setProperty("fontSize", value);
+    }
+
+    public java.lang.String getTemplate() {
+        return (java.lang.String)getProperty("template");
+    }
+
+    public void setTemplate(java.lang.String value) {
+        setProperty("template", value);
     }
 
     public java.lang.String getText() {

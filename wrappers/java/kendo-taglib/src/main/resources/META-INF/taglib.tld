@@ -12517,17 +12517,17 @@ data source is fired. By default the widget will bind to the data source specifi
         </attribute>
         <attribute>
             <description>Fired when the user add new shape or connection.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
-            <name>Add</name>
+            <name>add</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
             <description>Fired when the user edits a shape or connection.</description>
-            <name>Edit</name>
+            <name>edit</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
             <description>Fired when the user a shape or connection da is saved.</description>
-            <name>Save</name>
+            <name>save</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
@@ -12610,6 +12610,34 @@ data source is fired. By default the widget will bind to the data source specifi
 
     </tag>
 
+    <tag>
+        <description>Defines the shapes content settings.</description>
+        <name>diagram-connectionDefaults-content</name>
+        <tag-class>com.kendoui.taglib.diagram.ConnectionDefaultsContentTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The template which renders the labels.The fields which can be used in the template are:</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text displayed for the connection.</description>
+            <name>text</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The template which renders the labels.The fields which can be used in the template are:</description>
+        <name>diagram-connectionDefaults-content-template</name>
+        <tag-class>com.kendoui.taglib.diagram.ConnectionDefaultsContentTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
     <tag>
         <description>Defines the shape editable options.</description>
         <name>diagram-connectionDefaults-editable</name>
@@ -12795,6 +12823,34 @@ data source is fired. By default the widget will bind to the data source specifi
         </attribute>
     </tag>
 
+    <tag>
+        <description>Defines the shapes content settings.</description>
+        <name>diagram-connection-content</name>
+        <tag-class>com.kendoui.taglib.diagram.ConnectionContentTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The template which renders the labels.The fields which can be used in the template are:</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text displayed for the connection.</description>
+            <name>text</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The template which renders the labels.The fields which can be used in the template are:</description>
+        <name>diagram-connection-content-template</name>
+        <tag-class>com.kendoui.taglib.diagram.ConnectionContentTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
     <tag>
         <description>Defines the shape editable options.</description>
         <name>diagram-connection-editable</name>
@@ -13026,12 +13082,6 @@ data source is fired. By default the widget will bind to the data source specifi
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Specifyes the rotate style.</description>
-            <name>rotate</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-        <attribute>
             <description>Specifies the shape editor template.</description>
             <name>shapeTemplate</name>
             <rtexprvalue>true</rtexprvalue>
@@ -13184,82 +13234,6 @@ data source is fired. By default the widget will bind to the data source specifi
         </attribute>
         <attribute>
             <description>Specifies the handles stroke width.</description>
-            <name>width</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-    </tag>
-
-
-
-
-    <tag>
-        <description>Specifyes the rotate style.</description>
-        <name>diagram-editable-rotate</name>
-        <tag-class>com.kendoui.taglib.diagram.EditableRotateTag</tag-class>
-        <body-content>JSP</body-content>
-
-
-    </tag>
-
-    <tag>
-        <description>Specifyes the thumb style.</description>
-        <name>diagram-editable-rotate-thumb</name>
-        <tag-class>com.kendoui.taglib.diagram.EditableRotateThumbTag</tag-class>
-        <body-content>JSP</body-content>
-
-        <attribute>
-            <description>Set the thumb fill options.</description>
-            <name>fill</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-    </tag>
-
-    <tag>
-        <description>Set the thumb fill options.</description>
-        <name>diagram-editable-rotate-thumb-fill</name>
-        <tag-class>com.kendoui.taglib.diagram.EditableRotateThumbFillTag</tag-class>
-        <body-content>empty</body-content>
-
-        <attribute>
-            <description>Set the thumb fill color.</description>
-            <name>color</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-        <attribute>
-            <description>Set the thumb fill opacity.</description>
-            <name>opacity</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-    </tag>
-
-
-    <tag>
-        <description>Specifies the thumb stroke styles.</description>
-        <name>diagram-editable-rotate-thumb-stroke</name>
-        <tag-class>com.kendoui.taglib.diagram.EditableRotateThumbStrokeTag</tag-class>
-        <body-content>empty</body-content>
-
-        <attribute>
-            <description>Specifies the thumb stroke color.</description>
-            <name>color</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-        <attribute>
-            <description>Specifies the thumb stroke dash type.</description>
-            <name>dashType</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-        <attribute>
-            <description>Specifies the thumb stroke width.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -13635,7 +13609,7 @@ A diagram can have in general disconnected pieces, known as components, which ca
         <description>Defines the shapes content settings.</description>
         <name>diagram-shapeDefaults-content</name>
         <tag-class>com.kendoui.taglib.diagram.ShapeDefaultsContentTag</tag-class>
-        <body-content>empty</body-content>
+        <body-content>JSP</body-content>
 
         <attribute>
             <description>The alignment of the text inside the shape.</description>
@@ -13662,6 +13636,12 @@ A diagram can have in general disconnected pieces, known as components, which ca
             <type>float</type>
         </attribute>
         <attribute>
+            <description>The template which renders the labels.The fields which can be used in the template are:</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>The text displayed in the shape.</description>
             <name>text</name>
             <rtexprvalue>true</rtexprvalue>
@@ -13671,6 +13651,12 @@ A diagram can have in general disconnected pieces, known as components, which ca
     </tag>
 
 
+    <tag>
+        <description>The template which renders the labels.The fields which can be used in the template are:</description>
+        <name>diagram-shapeDefaults-content-template</name>
+        <tag-class>com.kendoui.taglib.diagram.ShapeDefaultsContentTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
     <tag>
         <description>Defines the shape editable options.</description>
         <name>diagram-shapeDefaults-editable</name>
@@ -13965,7 +13951,7 @@ See visual.</description>
         <description>Defines the shapes content settings.</description>
         <name>diagram-shape-content</name>
         <tag-class>com.kendoui.taglib.diagram.ShapeContentTag</tag-class>
-        <body-content>empty</body-content>
+        <body-content>JSP</body-content>
 
         <attribute>
             <description>The alignment of the text inside the shape.</description>
@@ -13992,6 +13978,12 @@ See visual.</description>
             <type>float</type>
         </attribute>
         <attribute>
+            <description>The template which renders the labels.The fields which can be used in the template are:</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>The text displayed in the shape.</description>
             <name>text</name>
             <rtexprvalue>true</rtexprvalue>
@@ -14001,6 +13993,12 @@ See visual.</description>
     </tag>
 
 
+    <tag>
+        <description>The template which renders the labels.The fields which can be used in the template are:</description>
+        <name>diagram-shape-content-template</name>
+        <tag-class>com.kendoui.taglib.diagram.ShapeContentTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
     <tag>
         <description>Defines the shape editable options.</description>
         <name>diagram-shape-editable</name>
@@ -14166,19 +14164,19 @@ See visual.</description>
     </tag>
     <tag>
         <description>Fired when the user add new shape or connection.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
-        <name>diagram-Add</name>
+        <name>diagram-add</name>
         <tag-class>com.kendoui.taglib.diagram.AddFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
         <description>Fired when the user edits a shape or connection.</description>
-        <name>diagram-Edit</name>
+        <name>diagram-edit</name>
         <tag-class>com.kendoui.taglib.diagram.EditFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
         <description>Fired when the user a shape or connection da is saved.</description>
-        <name>diagram-Save</name>
+        <name>diagram-save</name>
         <tag-class>com.kendoui.taglib.diagram.SaveFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>

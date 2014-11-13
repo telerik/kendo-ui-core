@@ -12,14 +12,14 @@ import com.kendoui.taglib.BaseTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class ShapeDefaultsContentTag extends  BaseTag  /* interfaces */ /* interfaces */ {
+public class ConnectionDefaultsContentTag extends  BaseTag  /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
 
-        ShapeDefaultsTag parent = (ShapeDefaultsTag)findParentWithClass(ShapeDefaultsTag.class);
+        ConnectionDefaultsTag parent = (ConnectionDefaultsTag)findParentWithClass(ConnectionDefaultsTag.class);
 
 
         parent.setContent(this);
@@ -48,43 +48,11 @@ public class ShapeDefaultsContentTag extends  BaseTag  /* interfaces */ /* inter
 //>> Attributes
 
     public static String tagName() {
-        return "diagram-shapeDefaults-content";
+        return "diagram-connectionDefaults-content";
     }
 
-    public void setTemplate(ShapeDefaultsContentTemplateFunctionTag value) {
+    public void setTemplate(ConnectionDefaultsContentTemplateFunctionTag value) {
         setEvent("template", value.getBody());
-    }
-
-    public java.lang.String getAlign() {
-        return (java.lang.String)getProperty("align");
-    }
-
-    public void setAlign(java.lang.String value) {
-        setProperty("align", value);
-    }
-
-    public java.lang.String getColor() {
-        return (java.lang.String)getProperty("color");
-    }
-
-    public void setColor(java.lang.String value) {
-        setProperty("color", value);
-    }
-
-    public java.lang.String getFontFamily() {
-        return (java.lang.String)getProperty("fontFamily");
-    }
-
-    public void setFontFamily(java.lang.String value) {
-        setProperty("fontFamily", value);
-    }
-
-    public float getFontSize() {
-        return (float)getProperty("fontSize");
-    }
-
-    public void setFontSize(float value) {
-        setProperty("fontSize", value);
     }
 
     public java.lang.String getTemplate() {
