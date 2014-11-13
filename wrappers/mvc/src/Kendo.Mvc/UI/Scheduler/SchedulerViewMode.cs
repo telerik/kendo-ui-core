@@ -13,6 +13,7 @@
         WorkWeek,
         Timeline,
         TimelineWeek,
-        TimelineWorkWeek
+        TimelineWorkWeek,
+        TimelineMonth
     }
 }

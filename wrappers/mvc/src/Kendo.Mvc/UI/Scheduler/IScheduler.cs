@@ -162,6 +162,12 @@
             get;
         }
 
+
+        IList<SchedulerToolbarCommand> ToolbarCommands
+        {
+            get;
+        }
+
         SchedulerMessages Messages
         {
             get;

@@ -991,5 +991,54 @@
             Component.CurrentTimeMarker.Enabled = enabled;
             return this;
         }
+
+        /// <summary>
+        /// Configures the PDF export settings.
+        /// </summary>
+        /// <code lang="Razor">
+        /// @(Html.Kendo().Scheduler&lt;Task&gt;()
+        ///     .Name(&quot;scheduler&quot;)
+        ///     .Pdf(pdf => pdf.FileName(&quot;SchedulerExport.pdf&quot))
+        ///     .DataSource(dataSource =&gt;
+        ///         // configure the data source
+        ///         dataSource
+        ///             .Ajax()
+        ///             .Read(&quot;Read&quot;, &quot;Scheduler&quot;)
+        ///     )
+        /// )
+        /// </code>
+        /// </example>
+        public SchedulerBuilder<TModel> Pdf(Action<PDFSettingsBuilder> configurator)
+        {
+            configurator(new PDFSettingsBuilder(Component.Pdf));
+
+            return this;
+        }
+
+        /// <summary>
+        /// Adds PDF command to the toolbar.
+        /// </summary>
+        /// <code lang="Razor">
+        /// @(Html.Kendo().Scheduler&lt;Task&gt;()
+        ///     .Name(&quot;scheduler&quot;)
+        ///     .Toolbar(toolbar => toolbar.Pdf())
+        ///     .Pdf(pdf => pdf.FileName(&quot;SchedulerExport.pdf&quot))
+        ///     .DataSource(dataSource =&gt;
+        ///         // configure the data source
+        ///         dataSource
+        ///             .Ajax()
+        ///             .Read(&quot;Read&quot;, &quot;Scheduler&quot;)
+        ///     )
+        /// )
+        /// </code>
+        /// </example>
+        public SchedulerBuilder<TModel> Toolbar(Action<SchedulerToolbarFactory<TModel>> addToolbarAction)
+        {
+            SchedulerToolbarFactory<TModel> factory = new SchedulerToolbarFactory<TModel>(Component);
+
+            addToolbarAction(factory);
+
+            return this;
+        }
     }
 }

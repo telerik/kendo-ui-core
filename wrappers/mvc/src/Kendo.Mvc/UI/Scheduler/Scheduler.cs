@@ -32,16 +32,26 @@
 
             Views = new List<SchedulerViewBase>();
 
+            ToolbarCommands = new List<SchedulerToolbarCommand>();
+
             AllDaySlot = true;
 
             Snap = true;
 
             AutoBind = true;
 
+            Pdf = new PDFSettings();
+
             Messages = new SchedulerMessages();
             Group = new SchedulerGroupSettings();
             Editable = new SchedulerEditableSettings<TModel>();
             CurrentTimeMarker = new SchedulerCurrentTimeMarkerSettings();
+        }
+
+        public PDFSettings Pdf
+        {
+            get;
+            private set;
         }
 
         public DataSource DataSource
@@ -254,6 +264,12 @@
             private set;
         }
 
+        public IList<SchedulerToolbarCommand> ToolbarCommands
+        {
+            get;
+            private set;
+        }
+
         public SchedulerMessages Messages
         {
             get;
@@ -455,6 +471,17 @@
             if (Views.Count > 0)
             {
                 options["views"] = Views.ToJson();
+            }
+
+            if (ToolbarCommands.Count > 0)
+            {
+                options["toolbar"] = ToolbarCommands.ToJson();
+            }
+
+            var pdf = Pdf.ToJson();
+            if (pdf.Count > 0)
+            {
+                options["pdf"] = pdf;
             }
 
             var messages = Messages.ToJson();

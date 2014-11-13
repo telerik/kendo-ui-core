@@ -755,6 +755,11 @@
     <Compile Include="UI\Grid\GridFilterMode.cs" />
     <Compile Include="UI\Grid\Html\GridHeaderRowBuilder.cs" />
     <Compile Include="UI\Grid\Html\GridHeaderCellBuilderDecorator.cs" />
+    <Compile Include="UI\Scheduler\Fluent\SchedulerTimelineMonthViewBuilder.cs" />
+    <Compile Include="UI\Scheduler\Fluent\SchedulerToolbarFactory.cs" />
+    <Compile Include="UI\Scheduler\SchedulerToolbarCommand.cs" />
+    <Compile Include="UI\Scheduler\SchedulerToolbarCommandType.cs" />
+    <Compile Include="UI\Scheduler\Views\SchedulerTimelineMonthView.cs" />
     <Compile Include="UI\Settings\PDFSettings.cs" />
     <Compile Include="UI\Grid\Settings\GridExcelSettings.cs" />
     <Compile Include="UI\Grid\Settings\GridColumnFilterableCellSettings.cs" />

@@ -260,6 +260,35 @@
             return builder;
         }
 
+
+        /// <summary>
+        /// Enables a Scheduler timeline month view.
+        /// </summary>
+        /// <returns></returns>
+        public void TimelineMonthView()
+        {
+            SchedulerTimelineMonthView view = new SchedulerTimelineMonthView(container);
+
+            container.Views.Add(view);
+        }
+
+        /// <summary>
+        /// Defines a Scheduler timeline month view.
+        /// </summary>
+        /// <returns></returns>
+        public SchedulerTimelineMonthViewBuilder<SchedulerTimelineMonthView> TimelineMonthView(Action<SchedulerTimelineMonthViewBuilder<SchedulerTimelineMonthView>> addViewAction)
+        {
+            SchedulerTimelineMonthView view = new SchedulerTimelineMonthView(container);
+
+            container.Views.Add(view);
+
+            SchedulerTimelineMonthViewBuilder<SchedulerTimelineMonthView> builder = new SchedulerTimelineMonthViewBuilder<SchedulerTimelineMonthView>(view);
+
+            addViewAction(builder);
+
+            return builder;
+        }
+
         /// <summary>
         /// Enables a Scheduler agenda view.
         /// </summary>

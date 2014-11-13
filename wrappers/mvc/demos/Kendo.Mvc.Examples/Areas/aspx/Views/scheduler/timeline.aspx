@@ -10,6 +10,7 @@
         views.TimelineView();
         views.TimelineWeekView();
         views.TimelineWorkWeekView();
+        views.TimelineMonthView();
     })
     .Timezone("Etc/UTC")
     .Group(group => group.Resources("Rooms", "Attendees").Orientation(SchedulerGroupOrientation.Vertical))
