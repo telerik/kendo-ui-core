@@ -6,6 +6,15 @@ class DiagramConnection extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
+    * Defines the shapes content settings.
+    * @param \Kendo\Dataviz\UI\DiagramConnectionContent|array $value
+    * @return \Kendo\Dataviz\UI\DiagramConnection
+    */
+    public function content($value) {
+        return $this->setProperty('content', $value);
+    }
+
+    /**
     * Defines the connection from.
     * @param string|float|\Kendo\Dataviz\UI\DiagramConnectionFrom|array $value
     * @return \Kendo\Dataviz\UI\DiagramConnection

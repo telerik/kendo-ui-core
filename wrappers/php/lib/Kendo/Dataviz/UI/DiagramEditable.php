@@ -67,15 +67,6 @@ class DiagramEditable extends \Kendo\SerializableObject {
         return $this->setProperty('resize', $value);
     }
 
-    /**
-    * Specifyes the rotate style.
-    * @param boolean|\Kendo\Dataviz\UI\DiagramEditableRotate|array $value
-    * @return \Kendo\Dataviz\UI\DiagramEditable
-    */
-    public function rotate($value) {
-        return $this->setProperty('rotate', $value);
-    }
-
 //<< Properties
 }
 

@@ -181,45 +181,45 @@ data source is fired. By default the widget will bind to the data source specifi
     }
 
     /**
-    * Sets the Add event of the Diagram.
+    * Sets the add event of the Diagram.
     * Fired when the user add new shape or connection.The event handler function context (available via the this keyword) will be set to the widget instance.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\Dataviz\UI\Diagram
     */
-    public function Add($value) {
+    public function addEvent($value) {
         if (is_string($value)) {
             $value = new \Kendo\JavaScriptFunction($value);
         }
 
-        return $this->setProperty('Add', $value);
+        return $this->setProperty('add', $value);
     }
 
     /**
-    * Sets the Edit event of the Diagram.
+    * Sets the edit event of the Diagram.
     * Fired when the user edits a shape or connection.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\Dataviz\UI\Diagram
     */
-    public function Edit($value) {
+    public function edit($value) {
         if (is_string($value)) {
             $value = new \Kendo\JavaScriptFunction($value);
         }
 
-        return $this->setProperty('Edit', $value);
+        return $this->setProperty('edit', $value);
     }
 
     /**
-    * Sets the Save event of the Diagram.
+    * Sets the save event of the Diagram.
     * Fired when the user a shape or connection da is saved.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\Dataviz\UI\Diagram
     */
-    public function Save($value) {
+    public function save($value) {
         if (is_string($value)) {
             $value = new \Kendo\JavaScriptFunction($value);
         }
 
-        return $this->setProperty('Save', $value);
+        return $this->setProperty('save', $value);
     }
 
     /**

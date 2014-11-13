@@ -6,6 +6,15 @@ class DiagramConnectionDefaults extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
+    * Defines the shapes content settings.
+    * @param \Kendo\Dataviz\UI\DiagramConnectionDefaultsContent|array $value
+    * @return \Kendo\Dataviz\UI\DiagramConnectionDefaults
+    */
+    public function content($value) {
+        return $this->setProperty('content', $value);
+    }
+
+    /**
     * Defines the shape editable options.
     * @param boolean|\Kendo\Dataviz\UI\DiagramConnectionDefaultsEditable|array $value
     * @return \Kendo\Dataviz\UI\DiagramConnectionDefaults
