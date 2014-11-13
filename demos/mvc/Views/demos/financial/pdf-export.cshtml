@@ -15,6 +15,10 @@
 
         function createChart() {
             $("#stock-chart").kendoStockChart({
+                pdf: {
+                    fileName: "Kendo UI Stock Chart Export.pdf",
+                    proxyURL: "http://demos.telerik.com/kendo-ui/service/export"
+                },
                 dataSource: {
                     transport: {
                         read: {
