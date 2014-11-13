@@ -8894,6 +8894,18 @@
         }
       },
       {
+        "text": "Editing",
+        "new": true,
+        "url": "diagram/editing",
+        "title": {
+            "kendo-ui": "Kendo UI Diagram Editing"
+        },
+        "meta": {
+            "kendo-ui": "In this example you will learn how you can easily use editing operations in Kendo UI Diagram.",
+			"aspnet-mvc": "In this example you will learn how you can easily use editing operations in ASP.NET MVC Diagram."
+        }
+      },
+      {
         "text": "Export to PDF, Image, SVG",
         "new": true,
         "url": "diagram/export",
