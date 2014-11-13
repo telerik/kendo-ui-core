@@ -648,13 +648,13 @@
     <Compile Include="Models\Gantt\GanttResourceService.cs" />
     <Compile Include="Models\Gantt\ResourceAssignmentViewModel.cs" />
     <Compile Include="Models\Gantt\ResourceViewModel.cs" />
+    <Compile Include="Models\EmployeeDirectory.cs">
+      <DependentUpon>Sample.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\OrgChartConnection.cs">
       <DependentUpon>Sample.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\OrgChartShape.cs">
-      <DependentUpon>Sample.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EmployeeDirectory.cs">
       <DependentUpon>Sample.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TreeList\EmployeeDirectoryModel.cs" />

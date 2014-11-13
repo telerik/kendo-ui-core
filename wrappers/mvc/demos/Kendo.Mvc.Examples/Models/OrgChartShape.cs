@@ -15,10 +15,8 @@ namespace Kendo.Mvc.Examples.Models
     public partial class OrgChartShape
     {
         public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Title { get; set; }
-        public string Image { get; set; }
-        public string ColorScheme { get; set; }
+        public string JobTittle { get; set; }
+        public string Color { get; set; }
+        public string Shape { get; set; }
     }
 }

@@ -42,10 +42,10 @@
         <EntityTypeShape EntityType="SampleModel.UrbanArea" Width="1.5" PointX="1.4793553787653127" PointY="15.978519208719265" />
         <EntityTypeShape EntityType="SampleModel.EmployeeDirectory" Width="1.5" PointX="8.25" PointY="20.5" />
         <AssociationConnector Association="SampleModel.FK_EmployeeDirectory_EmployeeDirectory" />
-        <EntityTypeShape EntityType="SampleModel.OrgChartConnection" Width="1.5" PointX="10.375" PointY="24" />
-        <EntityTypeShape EntityType="SampleModel.OrgChartShape" Width="1.5" PointX="10.748325593186694" PointY="12.456650888759945" />
         <EntityTypeShape EntityType="SampleModel.GanttResourceAssignment" Width="1.5" PointX="11.875" PointY="15.5" />
         <EntityTypeShape EntityType="SampleModel.GanttResource" Width="1.5" PointX="11.875" PointY="17.75" />
+        <EntityTypeShape EntityType="SampleModel.OrgChartConnection" Width="1.5" PointX="12.375" PointY="20.5" />
+        <EntityTypeShape EntityType="SampleModel.OrgChartShape" Width="1.5" PointX="14.375" PointY="20.5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

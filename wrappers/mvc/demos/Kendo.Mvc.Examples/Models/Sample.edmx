@@ -321,20 +321,22 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="From" Type="int" Nullable="false" />
-          <Property Name="To" Type="int" Nullable="false" />
+          <Property Name="FromShapeId" Type="int" />
+          <Property Name="ToShapeId" Type="int" />
           <Property Name="Text" Type="ntext" />
+          <Property Name="FromPointX" Type="int" />
+          <Property Name="FromPointY" Type="int" />
+          <Property Name="ToPointX" Type="int" />
+          <Property Name="ToPointY" Type="int" />
         </EntityType>
         <EntityType Name="OrgChartShapes">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="ntext" />
-          <Property Name="LastName" Type="ntext" />
-          <Property Name="Title" Type="ntext" />
-          <Property Name="Image" Type="ntext" />
-          <Property Name="ColorScheme" Type="nchar" MaxLength="10" />
+          <Property Name="JobTittle" Type="ntext" />
+          <Property Name="Color" Type="nchar" MaxLength="10" />
+          <Property Name="Shape" Type="nchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="Products">
           <Key>
@@ -779,10 +781,10 @@
             <End Role="EmployeeDirectory" EntitySet="EmployeeDirectory" />
             <End Role="EmployeeDirectory1" EntitySet="EmployeeDirectory" />
           </AssociationSet>
-          <EntitySet Name="OrgChartConnections" EntityType="SampleModel.OrgChartConnection" />
-          <EntitySet Name="OrgChartShapes" EntityType="SampleModel.OrgChartShape" />
           <EntitySet Name="GanttResourceAssignments" EntityType="SampleModel.GanttResourceAssignment" />
           <EntitySet Name="GanttResources" EntityType="SampleModel.GanttResource" />
+          <EntitySet Name="OrgChartConnections" EntityType="SampleModel.OrgChartConnection" />
+          <EntitySet Name="OrgChartShapes" EntityType="SampleModel.OrgChartShape" />
         </EntityContainer>
         <EntityType Name="Category">
           <Key>
@@ -1290,26 +1292,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="OrgChartConnection">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="From" Nullable="false" />
-          <Property Type="Int32" Name="To" Nullable="false" />
-          <Property Type="String" Name="Text" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="OrgChartShape">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="FirstName" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="LastName" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Title" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Image" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="ColorScheme" MaxLength="10" FixedLength="true" Unicode="true" />
-        </EntityType>
         <EntityType Name="GanttResourceAssignment">
           <Key>
             <PropertyRef Name="ID" />
@@ -1326,6 +1308,28 @@
           <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Color" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="OrgChartConnection">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="FromShapeId" />
+          <Property Type="Int32" Name="ToShapeId" />
+          <Property Type="String" Name="Text" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="FromPointX" />
+          <Property Type="Int32" Name="FromPointY" />
+          <Property Type="Int32" Name="ToPointX" />
+          <Property Type="Int32" Name="ToPointY" />
+        </EntityType>
+        <EntityType Name="OrgChartShape">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="JobTittle" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Color" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="Shape" MaxLength="10" FixedLength="true" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1660,28 +1664,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="OrgChartConnections">
-            <EntityTypeMapping TypeName="SampleModel.OrgChartConnection">
-              <MappingFragment StoreEntitySet="OrgChartConnections">
-                <ScalarProperty Name="Text" ColumnName="Text" />
-                <ScalarProperty Name="To" ColumnName="To" />
-                <ScalarProperty Name="From" ColumnName="From" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="OrgChartShapes">
-            <EntityTypeMapping TypeName="SampleModel.OrgChartShape">
-              <MappingFragment StoreEntitySet="OrgChartShapes">
-                <ScalarProperty Name="ColorScheme" ColumnName="ColorScheme" />
-                <ScalarProperty Name="Image" ColumnName="Image" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="GanttResourceAssignments">
             <EntityTypeMapping TypeName="SampleModel.GanttResourceAssignment">
               <MappingFragment StoreEntitySet="GanttResourceAssignments">
@@ -1701,6 +1683,30 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="OrgChartConnections">
+            <EntityTypeMapping TypeName="SampleModel.OrgChartConnection">
+              <MappingFragment StoreEntitySet="OrgChartConnections">
+                <ScalarProperty Name="ToPointY" ColumnName="ToPointY" />
+                <ScalarProperty Name="ToPointX" ColumnName="ToPointX" />
+                <ScalarProperty Name="FromPointY" ColumnName="FromPointY" />
+                <ScalarProperty Name="FromPointX" ColumnName="FromPointX" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="ToShapeId" ColumnName="ToShapeId" />
+                <ScalarProperty Name="FromShapeId" ColumnName="FromShapeId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrgChartShapes">
+            <EntityTypeMapping TypeName="SampleModel.OrgChartShape">
+              <MappingFragment StoreEntitySet="OrgChartShapes">
+                <ScalarProperty Name="Shape" ColumnName="Shape" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="JobTittle" ColumnName="JobTittle" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1715,7 +1721,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
