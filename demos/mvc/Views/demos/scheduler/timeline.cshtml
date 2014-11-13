@@ -5,12 +5,18 @@
     $(function () {
         $("#scheduler").kendoScheduler({
             date: new Date("2013/6/13"),
-            startTime: new Date("2013/6/13 07:00 AM"),
+            startTime: new Date("2013/6/13 10:00 AM"),
             eventHeight: 50,
+            majorTick: 60,
             views: [
                 "timeline",
                 "timelineWeek",
-                "timelineWorkWeek"
+                "timelineWorkWeek",
+                {
+                    type: "timelineMonth",
+                    startTime: new Date("2013/6/13 00:00 AM"),
+                    majorTick: 1440
+                }
             ],
             timezone: "Etc/UTC",
             dataSource: {
