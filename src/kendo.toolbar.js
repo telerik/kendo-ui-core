@@ -77,6 +77,10 @@ var __meta__ = {
                         return;
                     }
 
+                    if (options.attributes) {
+                        element.attr(options.attributes);
+                    }
+
                     element.data({ type: "buttonGroup" });
                     element.attr(KENDO_UID_ATTR, options.uid);
 
@@ -92,8 +96,11 @@ var __meta__ = {
                     element.children().last().addClass(GROUP_END);
                 },
                 toolbar: function (options) {
-                    var element = $('<div class="' + BUTTON_GROUP + '"></div>');
+                    var element = $('<div></div>');
+
                     components.buttonGroup.base(options, components.button.toolbar, element);
+
+                    element.addClass(BUTTON_GROUP);
 
                     if (options.align) {
                         element.addClass("k-align-" + options.align);
@@ -106,8 +113,11 @@ var __meta__ = {
                     return element;
                 },
                 overflow: function (options) {
-                    var element = $('<li class="' + (options.mobile ? "" : BUTTON_GROUP) + ' k-overflow-group"></li>');
+                    var element = $('<li></li>');
+
                     components.buttonGroup.base(options, components.button.overflow, element);
+
+                    element.addClass((options.mobile ? "" : BUTTON_GROUP) + " k-overflow-group");
 
                     if (options.id) {
                         element.attr("id", options.id + "_overflow");
