@@ -12,8 +12,9 @@ function baseLineChartTests(seriesName, TChart) {
 
     var chartName = seriesName.substring(0, 1).toUpperCase() + seriesName.substring(1, seriesName.length);
 
-    function segmentPaths(chart) {
-        return chart._segments[0].visual.children;
+    function pathSegments(chart) {
+        var visual = chart._segments[0].visual;
+        return (visual.children ? visual.children[0] : visual).segments;
     }
 
     function setupChart(plotArea, options) {
@@ -25,7 +26,7 @@ function baseLineChartTests(seriesName, TChart) {
 
         root.reflow();
         root.renderVisual();
-        pointCoordinates = mapSegments(segmentPaths(chart)[0].segments);
+        pointCoordinates = mapSegments(pathSegments(chart));
     }
 
     function stubPlotArea(getCategorySlot, getValueSlot, options) {

@@ -1,28 +1,28 @@
 (function() {
-    return;
-
     var dataviz = kendo.dataviz,
         getElement = dataviz.getElement,
         Box2D = dataviz.Box2D,
+        draw = kendo.drawing,
         categoriesCount = dataviz.categoriesCount,
         chartBox = new Box2D(0, 0, 800, 600),
         lineChart,
         root,
-        view,
+        segmentPath,
         pointCoordinates,
         TOLERANCE = 1;
 
-    function setupLineChart(plotArea, options) {
-        view = new ViewStub();
 
+
+    function setupLineChart(plotArea, options) {
         lineChart = new dataviz.LineChart(plotArea, options);
 
         root = new dataviz.RootElement();
         root.append(lineChart);
+        root.reflow();
+        root.renderVisual();
+        segmentPath = lineChart._segments[0].visual;
 
-        lineChart.reflow();
-        lineChart.getViewElements(view);
-        pointCoordinates = mapPoints(view.log.path[0].points);
+        pointCoordinates = mapSegments(segmentPath.segments);
     }
 
     function stubPlotArea(getCategorySlot, getValueSlot, options) {
@@ -382,11 +382,11 @@
         });
 
         test("sets line width", function() {
-            equal(view.log.path[0].style.strokeWidth, 4);
+            equal(segmentPath.options.stroke.width, 4);
         });
 
         test("sets line color", function() {
-            equal(view.log.path[0].style.stroke, "#cf0");
+            equal(segmentPath.options.stroke.color, "#cf0");
         });
 
         test("sets line color to default if series color is fn", function() {
@@ -402,15 +402,11 @@
                     )
                 ]
             });
-            equal(view.log.path[0].style.stroke, "#cf0");
+            equal(segmentPath.options.stroke.color, "#cf0");
         });
 
         test("sets line opacity", function() {
-            equal(view.log.path[0].style.strokeOpacity, 0.5);
-        });
-
-        test("line has same model id as its segment", function() {
-            equal(view.log.path[0].style.data.modelId, lineChart._segments[0].modelId);
+            equal(segmentPath.options.stroke.opacity, 0.5);
         });
 
         test("does not render points for hidden points", function() {
@@ -432,29 +428,6 @@
             });
 
             equal(lineChart._segments[0].points().length, 2);
-        });
-
-        test("renders group with LineChart id and no animations", function() {
-            var group = view.findInLog("group", function(item) {
-                return item.options.id === lineChart.id;
-            });
-
-            ok(group && !group.options.animation);
-            equal(group.options.id, lineChart.id);
-        });
-
-        test("renders line chart group", function() {
-            var group = view.findInLog("group", function(item) {
-                return item.options.animation;
-            });
-            ok(group);
-        });
-
-        test("sets group animation", function() {
-            var group = view.findInLog("group", function(item) {
-                return item.options.animation;
-            });
-            equal(group.options.animation.type, "clip");
         });
 
         // ------------------------------------------------------------
@@ -481,7 +454,7 @@
                 ]
             });
 
-            equal(view.log.path.length, 1);
+            equal(lineChart._segments.length, 1);
         });
 
         test("line continues after missing value", function() {
@@ -563,6 +536,8 @@
 
             root = new dataviz.RootElement();
             root.append(point);
+            root.box = box;
+            root.renderVisual();
 
             marker = point.marker;
             label = point.label;
@@ -573,10 +548,6 @@
             setup: function() {
                 createPoint();
             }
-        });
-
-        test("is discoverable", function() {
-            ok(point.modelId);
         });
 
         test("fills target box", function() {
@@ -661,63 +632,20 @@
             deepEqual(marker.options.opacity, point.options.markers.opacity);
         });
 
-        test("sets marker id", function() {
-            ok(marker.id.length > 0);
-        });
-
-        test("marker has same model id", function() {
-            view = new ViewStub();
-
-            point.getViewElements(view);
-            equal(marker.modelId, point.modelId);
-        });
-
-        test("highlightOverlay returns marker outline", function() {
+        test("createHighlight returns marker outline", function() {
             createPoint({ markers: { type: "circle" }});
-            view = new ViewStub();
+            var marker = point.marker.visual.geometry();
+            var highlight = point.createHighlight().geometry();
 
-            point.highlightOverlay(view);
-            equal(view.log.circle.length, 1);
+            ok(marker.center.equals(highlight.center));
+            equal(marker.radius, highlight.radius);
         });
 
-        test("highlightOverlay returns marker when not initially visible", function() {
+        test("createHighlight returns marker when not initially visible", function() {
             createPoint({ markers: { visible: false }});
-            view = new ViewStub();
 
-            point.highlightOverlay(view);
-            equal(view.log.circle.length, 1);
-        });
-
-        test("outline element has same model id", function() {
-            createPoint({ markers: { type: "circle" }});
-            view = new ViewStub();
-
-            point.highlightOverlay(view);
-            equal(view.log.circle[0].style.data.modelId, point.modelId);
-        });
-
-        test("highlightOverlay applies render options for square markers", function() {
-            createPoint({ markers: { type: "square" }});
-            view = new ViewStub();
-
-            point.highlightOverlay(view, { flag: true });
-            ok(view.log.path[0].style.flag);
-        });
-
-        test("highlightOverlay applies render options for circle markers", function() {
-            createPoint({ markers: { type: "circle" }});
-            view = new ViewStub();
-
-            point.highlightOverlay(view, { flag: true });
-            ok(view.log.circle[0].style.flag);
-        });
-
-        test("highlightOverlay applies render options for triangle markers", function() {
-            createPoint({ markers: { type: "triangle" }});
-            view = new ViewStub();
-
-            point.highlightOverlay(view, { flag: true });
-            ok(view.log.path[0].style.flag);
+            var highlight = point.createHighlight();
+            ok(highlight instanceof draw.Circle);
         });
 
         test("tooltipAnchor is at top right of marker / above axis", function() {
@@ -880,10 +808,9 @@
             label,
             segment;
 
-        function getElementFromModel(modelElement) {
-            return $(getElement(modelElement.id));
+        function getElement(modelElement) {
+            return $(modelElement.visual._observers[0].element);
         }
-
         function createLineChart(options) {
             chart = createChart($.extend({
                 series: [{
@@ -913,7 +840,7 @@
                 seriesClick: callback
             });
 
-            chart._userEvents.press(0, 0, getElementFromModel(marker));
+            chart._userEvents.press(0, 0, getElement(marker));
             chart._userEvents.end(0, 0);
         }
 
@@ -922,7 +849,7 @@
                 seriesHover: callback
             });
 
-            getElementFromModel(marker).mouseover();
+            getElement(marker).mouseover();
         }
 
         function lineClick(callback, x, y) {
@@ -930,7 +857,7 @@
                 seriesClick: callback
             });
 
-            chart._userEvents.press(x, y, getElementFromModel(segment));
+            chart._userEvents.press(x, y, getElement(segment));
             chart._userEvents.end(x, y);
         }
 
@@ -939,7 +866,7 @@
                 seriesHover: callback
             });
 
-            triggerEvent("mouseover", getElementFromModel(segment), x, y);
+            triggerEvent("mouseover", getElement(segment), x, y);
         }
 
         // ------------------------------------------------------------
@@ -962,7 +889,7 @@
                 },
                 seriesClick: function(e) { ok(true); }
             });
-            chart._userEvents.press(0, 0, getElementFromModel(label));
+            chart._userEvents.press(0, 0, getElement(label));
             chart._userEvents.end(0, 0);
         });
 
@@ -983,7 +910,7 @@
                 series: [{ data: [1] }, { data: [2] }],
                 seriesClick: function(e) { equal(e.percentage, 1/3); }
             });
-            chart._userEvents.press(0, 0, getElementFromModel(marker));
+            chart._userEvents.press(0, 0, getElement(marker));
             chart._userEvents.end(0, 0);
         });
 
@@ -1001,7 +928,7 @@
 
         test("event arguments contain jQuery element", 1, function() {
             linePointClick(function(e) {
-                equal(e.element[0], getElement(marker.id));
+                equal(e.element[0], getElement(marker)[0]);
             });
         });
 
@@ -1040,7 +967,7 @@
                 },
                 seriesHover: function(e) { ok(true); }
             });
-            getElementFromModel(label).mouseover();
+            getElement(label).mouseover();
         });
 
         test("event arguments contain value", 1, function() {
@@ -1056,7 +983,7 @@
                 series: [{ data: [1] }, { data: [2] }],
                 seriesHover: function(e) { equal(e.percentage, 1/3); }
             });
-            getElementFromModel(marker).mouseover();
+            getElement(marker).mouseover();
         });
 
         test("event arguments contain category", 1, function() {
@@ -1077,7 +1004,7 @@
 
         test("event arguments contain jQuery element", 1, function() {
             linePointHover(function(e) {
-                equal(e.element[0], getElement(marker.id));
+                equal(e.element[0], getElement(marker)[0]);
             });
         });
 
