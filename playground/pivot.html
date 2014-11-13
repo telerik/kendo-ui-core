@@ -41,10 +41,11 @@
         </style>
     </head>
     <body>
+        <div id="configurator"></div>
         <div id="pivotgrid"></div>
         <script>
             $(document).ready(function () {
-                $("#pivotgrid").kendoPivotGrid({
+                var pivot = $("#pivotgrid").kendoPivotGrid({
                     columnWidth: 120,
                     height: 570,
                     dataSource: {
@@ -79,10 +80,14 @@
                                 }
                             }
                         },
-                        columns: [{ name: "CategoryName", expand: true }, { name: "ProductName" } ],
-                        rows: [{ name: "Discontinued", expand: true }],
+                        columns: [{ name: "CategoryName", expand: true } ],
+                        rows: [{ name: "Discontinued", expand: true }, { name: "ProductName" }],
                         measures: ["Sum", "Avarage"]
                     }
+                }).data("kendoPivotGrid");
+
+                $("#configurator").kendoPivotConfigurator({
+                    dataSource: pivot.dataSource
                 });
             });
         </script>

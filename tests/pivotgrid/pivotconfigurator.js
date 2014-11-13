@@ -108,6 +108,62 @@
         equal(kpi.uniqueName, "[KPIs]");
     });
 
+    test("treeview transport skips KPI item if client cube is used", function() {
+        var configurator = createConfigurator({
+            dataSource: {
+                transport: {
+                    discover: function(options) {
+                        options.success([]);
+                    }
+                },
+                schema: {
+                    dimensions: function() {
+                        return [{ uniqueName: "foo", type: 2 }]; //measure
+                    },
+                    cube: {}
+                }
+            }
+        });
+
+        var dataSource = configurator.treeView.dataSource;
+
+        dataSource.read();
+
+        var measure = dataSource.at(0);
+        var kpi = dataSource.at(1);
+
+        ok(measure);
+        ok(!kpi);
+    });
+
+    test("configurator calls treeview fetch if client cube is used", function() {
+        var configurator = createConfigurator({
+            dataSource: {
+                transport: {
+                    discover: function(options) {
+                        options.success([]);
+                    }
+                },
+                schema: {
+                    dimensions: function() {
+                        return [{ uniqueName: "foo", type: 2 }]; //measure
+                    },
+                    cube: {}
+                }
+            }
+        });
+
+        var dataSource = configurator.treeView.dataSource;
+
+        stub(dataSource, {
+            fetch: dataSource.fetch
+        });
+
+        configurator.refresh();
+
+        equal(dataSource.calls("fetch"), 1);
+    });
+
     test("treeview transport calls pivotDataSource for list of dimentions", function() {
         var configurator = createConfigurator({
             dataSource: {

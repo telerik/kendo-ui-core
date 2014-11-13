@@ -2155,7 +2155,7 @@
         ok(!rows[0].expand);
     });
 
-    test("featch data is not read if once loaded with local cube processing", 1, function() {
+    test("fetch data is not read if once loaded with local cube processing", 1, function() {
         var data = [
                 { FirstName: "Name1", LastName: "LastName1", Age: 42 },
                 { FirstName: "Name2", LastName: "LastName1", Age: 42  },
@@ -2185,5 +2185,92 @@
         dataSource.read();
 
         dataSource.fetch();
+    });
+
+    test("define static dimensions info when local cube is used", 5, function() {
+        var dataSource = new PivotDataSource({
+            columns: ["FirstName"],
+            rows: ["LastName"],
+            transport: {
+                read: function(options) {
+                    options.success(data);
+                    ok(true);
+                }
+            },
+            schema: {
+                cube: {
+                    dimensions: {
+                        FirstName: { caption: "All First Names" },
+                        LastName: { caption: "All Last Names" },
+                        Age: { caption: "Age" }
+                    }
+                }
+            }
+        });
+
+        dataSource.schemaDimensions().done(function(data) {
+            equal(data.length, 3);
+            equal(data[0].name, "FirstName");
+            equal(data[0].caption, "All First Names");
+            equal(data[0].uniqueName, "FirstName");
+            equal(data[0].type, 1);
+        });
+    });
+
+    test("create a Measure dimension if cube.measures are defined", 5, function() {
+        var dataSource = new PivotDataSource({
+            columns: ["FirstName"],
+            transport: {
+                read: function(options) {
+                    options.success(data);
+                    ok(true);
+                }
+            },
+            schema: {
+                cube: {
+                    dimensions: {
+                        FirstName: { caption: "All First Names" }
+                    },
+                    measures: {}
+                }
+            }
+        });
+
+        dataSource.schemaDimensions().done(function(data) {
+            equal(data.length, 2);
+            equal(data[1].name, "Measures");
+            equal(data[1].caption, "Measures");
+            equal(data[1].uniqueName, "Measures");
+            equal(data[1].type, 2);
+        });
+    });
+
+    test("define static measures info when local cube is used", 6, function() {
+        var dataSource = new PivotDataSource({
+            columns: ["FirstName"],
+            rows: ["LastName"],
+            transport: {
+                read: function(options) {
+                    options.success(data);
+                    ok(true);
+                }
+            },
+            schema: {
+                cube: {
+                    measures: {
+                        Sum: { }
+                    }
+                }
+            }
+        });
+
+        dataSource.schemaMeasures().done(function(data) {
+            equal(data.length, 1);
+            equal(data[0].name, "Sum");
+            equal(data[0].caption, "Sum");
+            equal(data[0].uniqueName, "Sum");
+            equal(data[0].aggregator, "Sum");
+            equal(data[0].type, undefined);
+        });
     });
 })();

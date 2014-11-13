@@ -158,7 +158,9 @@ var __meta__ = {
                             promise = that.dataSource.schemaDimensions();
 
                             promise.done(function(data) {
-                                        addKPI(data);
+                                        if (!that.dataSource.cubeBuilder) {
+                                            addKPI(data);
+                                        }
                                         options.success(data);
                                     })
                                     .fail(options.error);
@@ -374,7 +376,7 @@ var __meta__ = {
         refresh: function() {
             var dataSource = this.dataSource;
 
-            if (this._cube !== dataSource.cube() || this._catalog !== dataSource.catalog()) {
+            if (dataSource.cubeBuilder || this._cube !== dataSource.cube() || this._catalog !== dataSource.catalog()) {
                 this.treeView.dataSource.fetch();
             }
 

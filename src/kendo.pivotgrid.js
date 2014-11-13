@@ -939,30 +939,36 @@ var __meta__ = {
 
     var PivotDataSource = DataSource.extend({
         init: function(options) {
-            DataSource.fn.init.call(this, extend(true, {}, {
-                schema: {
-                    axes: identity,
-                    cubes: identity,
-                    catalogs: identity,
-                    measures: identity,
-                    dimensions: identity,
-                    hierarchies: identity,
-                    levels: identity,
-                    members: identity
-                }
-            }, options));
+            var cube = ((options || {}).schema || {}).cube;
+            var measuresAxis = "columns";
+            var measures;
 
-            if (this.options.schema && this.options.schema.cube) {
-                this.cubeBuilder = new PivotCubeBuilder(this.options.schema.cube);
+            var schema = {
+                axes: identity,
+                cubes: identity,
+                catalogs: identity,
+                measures: identity,
+                dimensions: identity,
+                hierarchies: identity,
+                levels: identity,
+                members: identity
+            };
+
+            if (cube) {
+                schema = $.extend(schema, this._cubeSchema(cube));
+                this.cubeBuilder = new PivotCubeBuilder(cube);
             }
+
+            DataSource.fn.init.call(this, extend(true, {}, {
+                schema: schema
+            }, options));
 
             this.transport = new PivotTransport(this.options.transport || {}, this.transport);
 
             this._columns = normalizeMembers(this.options.columns);
             this._rows = normalizeMembers(this.options.rows);
 
-            var measures = this.options.measures || [];
-            var measuresAxis = "columns";
+            measures = this.options.measures || [];
 
             if (this.options.measures !== null && toString.call(this.options.measures) === "[object Object]") {
                 measures = this.options.measures.values || [];
@@ -973,6 +979,54 @@ var __meta__ = {
             this._measuresAxis = measuresAxis;
 
             this._axes = {};
+        },
+
+        _cubeSchema: function(cube) {
+            return {
+                dimensions: function() {
+                    var result = [];
+                    var dimensions = cube.dimensions;
+
+                    for (var key in dimensions) {
+                        result.push({
+                            name: key,
+                            caption: dimensions[key].caption || key,
+                            uniqueName: key,
+                            defaultHierarchy: key,
+                            type: 1
+                        });
+                    }
+
+                    if (cube.measures) {
+                        result.push({
+                            name: "Measures",
+                            caption: "Measures",
+                            uniqueName: "Measures",
+                            type: 2
+                        });
+                    }
+
+                    return result;
+                },
+                hierarchies: function(){
+                    return [];
+                },
+                measures: function() {
+                    var result = [];
+                    var measures = cube.measures;
+
+                    for (var key in measures) {
+                        result.push({
+                            name: key,
+                            caption: key,
+                            uniqueName: key,
+                            aggregator: key
+                        });
+                    }
+
+                    return result;
+                }
+            };
         },
 
         options: {
