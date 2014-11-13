@@ -222,15 +222,17 @@ var __meta__ = {
         return members;
     }
 
-    function addDataCellVertical(result, rowIndex, map, key, formats, offset) {
-        var value, aggregate, columnKey, format, measuresCount = 0;
+    function addDataCellVertical(result, rowIndex, map, key, resultFuncs, formats, offset) {
+        var value, aggregate, columnKey, resultFunc, format, measuresCount = 0;
 
         var start = rowIndex;
 
         for (aggregate in map[key].aggregates) {
             value = map[key].aggregates[aggregate];
-
+            resultFunc = resultFuncs[aggregate];
             format = formats[aggregate];
+
+            value = resultFunc ? resultFunc(value) : value.accumulator;
 
             result[start] = {
                 ordinal: start,
@@ -250,8 +252,10 @@ var __meta__ = {
 
             for (aggregate in items[columnKey].aggregates) {
                 value = items[columnKey].aggregates[aggregate];
-
+                resultFunc = resultFuncs[aggregate];
                 format = formats[aggregate];
+
+                value = resultFunc ? resultFunc(value) : value.accumulator;
 
                 result[index] = {
                     ordinal: index,
@@ -263,13 +267,15 @@ var __meta__ = {
         }
     }
 
-    function addDataCell(result, rowIndex, map, key, formats) {
-        var value, aggregate, columnKey, format, measuresCount = 0;
+    function addDataCell(result, rowIndex, map, key, resultFuncs, formats) {
+        var value, aggregate, columnKey, resultFunc, format, measuresCount = 0;
 
         for (aggregate in map[key].aggregates) {
             value = map[key].aggregates[aggregate];
-
+            resultFunc = resultFuncs[aggregate];
             format = formats[aggregate];
+
+            value = resultFunc ? resultFunc(value) : value.accumulator;
 
             result[result.length] = {
                 ordinal: rowIndex++,
@@ -286,8 +292,10 @@ var __meta__ = {
 
             for (aggregate in items[columnKey].aggregates) {
                 value = items[columnKey].aggregates[aggregate];
-
+                resultFunc = resultFuncs[aggregate];
                 format = formats[aggregate];
+
+                value = resultFunc ? resultFunc(value) : value.accumulator;
 
                 result[result.length] = {
                     ordinal: rowIndex + index++,
@@ -300,10 +308,89 @@ var __meta__ = {
 
     function createAggregateGetter(m) {
         var measureGetter = kendo.getter(m.field, true);
-        return function(data, state) {
-            return m.aggregate(measureGetter(data), state);
+        return function(aggregatorContext, state) {
+            return m.aggregate(measureGetter(aggregatorContext.dataItem), state, aggregatorContext);
         };
     }
+
+    function isNumber(val) {
+        return typeof val === "number" && !isNaN(val);
+    }
+
+    function isDate(val) {
+        return val && val.getTime;
+    }
+
+    var functions = {
+        sum: function(value, state) {
+            var accumulator = state.accumulator;
+
+            if (!isNumber(accumulator)) {
+                accumulator = value;
+            } else if (isNumber(value)) {
+                accumulator += value;
+            }
+
+            return accumulator;
+        },
+        count: function(value, state) {
+            return (state.accumulator || 0) + 1;
+        },
+        average: {
+            aggregate: function(value, state) {
+                var accumulator = state.accumulator;
+
+                if (state.count === undefined) {
+                    state.count = 0;
+                }
+
+                if (!isNumber(accumulator)) {
+                    accumulator = value;
+                } else if (isNumber(value)) {
+                    accumulator += value;
+                }
+
+                if (isNumber(value)) {
+                    state.count++;
+                }
+
+                return accumulator;
+            },
+            result: function(state) {
+                var accumulator = state.accumulator;
+
+                if (isNumber(accumulator)) {
+                    accumulator = accumulator / state.count;
+                }
+
+                return accumulator;
+            }
+        },
+        max: function(value, state) {
+            var accumulator = state.accumulator;
+
+            if (!isNumber(accumulator) && !isDate(accumulator)) {
+                accumulator = value;
+            }
+
+            if(accumulator < value && (isNumber(value) || isDate(value))) {
+                accumulator = value;
+            }
+            return accumulator;
+        },
+        min: function(value, state) {
+            var accumulator = state.accumulator;
+
+            if (!isNumber(accumulator) && !isDate(accumulator)) {
+                accumulator = value;
+            }
+
+            if(accumulator > value && (isNumber(value) || isDate(value))) {
+                accumulator = value;
+            }
+            return accumulator;
+        }
+    };
 
     var PivotCubeBuilder = Class.extend({
         init: function(options) {
@@ -434,6 +521,7 @@ var __meta__ = {
 
         _toDataArray: function(map, rowStartOffset, measures, offset, addFunc) {
             var formats = {};
+            var resultFuncs = {};
             var descriptors, measure, name;
 
             var idx = 0;
@@ -445,6 +533,10 @@ var __meta__ = {
                     name = measures[idx].name;
                     measure = descriptors[name];
 
+                    if (measure.result) {
+                        resultFuncs[name] = measure.result;
+                    }
+
                     if (measure.format) {
                         formats[name] = measure.format;
                     }
@@ -455,7 +547,7 @@ var __meta__ = {
             var items;
             var rowIndex = 0;
 
-            addFunc(result, rowIndex, map, ROW_TOTAL_KEY, formats, rowStartOffset);
+            addFunc(result, rowIndex, map, ROW_TOTAL_KEY, resultFuncs, formats, rowStartOffset);
 
             for (var key in map) {
                 if (key === ROW_TOTAL_KEY) {
@@ -463,7 +555,7 @@ var __meta__ = {
                 }
 
                 rowIndex += offset;
-                addFunc(result, rowIndex, map, key, formats, rowStartOffset);
+                addFunc(result, rowIndex, map, key, resultFuncs, formats, rowStartOffset);
             }
 
             return result;
@@ -501,26 +593,28 @@ var __meta__ = {
             return false;
         },
 
-        _calculateAggregate: function(measureAggregators, dataItem, totalItem) {
+        _calculateAggregate: function(measureAggregators, aggregatorContext, totalItem) {
             var result = {};
             var state;
             var name;
 
             for (var measureIdx = 0; measureIdx < measureAggregators.length; measureIdx++) {
                 name = measureAggregators[measureIdx].descriptor.name;
-                state = totalItem.aggregates[name] || 0;
-                result[name] = measureAggregators[measureIdx].aggregator(dataItem, state);
+                state = totalItem.aggregates[name] || { };
+                state.accumulator = measureAggregators[measureIdx].aggregator(aggregatorContext, state);
+                result[name] = state;
             }
 
             return result;
         },
 
-        _processColumns: function(measureAggregators, descriptors, getters, columns, dataItem, rowTotal, state, updateColumn) {
+        _processColumns: function(measureAggregators, descriptors, getters, columns, aggregatorContext, rowTotal, state, updateColumn) {
             var value;
             var descriptor;
             var name;
             var column;
             var totalItem;
+            var dataItem = aggregatorContext.dataItem;
 
             for (var idx = 0; idx < descriptors.length; idx++) {
                 descriptor = descriptors[idx];
@@ -550,7 +644,7 @@ var __meta__ = {
 
                     rowTotal.items[name] = {
                         index: column.index,
-                        aggregates: this._calculateAggregate(measureAggregators, dataItem, totalItem)
+                        aggregates: this._calculateAggregate(measureAggregators, aggregatorContext, totalItem)
                     };
 
                     if (updateColumn) {
@@ -568,16 +662,32 @@ var __meta__ = {
             var measures = this.measures || {};
             var aggregators = [];
             var descriptor, measure, idx, length;
+            var defaultAggregate, aggregate;
 
             if (measureDescriptors.length) {
                 for (idx = 0, length = measureDescriptors.length; idx < length; idx++) {
                     descriptor = measureDescriptors[idx];
                     measure = measures[descriptor.name];
+                    defaultAggregate = null;
 
                     if (measure) {
+                        aggregate = measure.aggregate;
+                        if (typeof aggregate === "string") {
+                            defaultAggregate = functions[aggregate.toLowerCase()];
+
+                            if (!defaultAggregate) {
+                                throw new Error("There is no such aggregate function");
+                            }
+
+                            measure.aggregate = defaultAggregate.aggregate || defaultAggregate;
+                            measure.result = defaultAggregate.result;
+                        }
+
+
                         aggregators.push({
                             descriptor: descriptor,
                             caption: measure.caption,
+                            result: measure.result,
                             aggregator: createAggregateGetter(measure)
                         });
                     }
@@ -655,32 +765,41 @@ var __meta__ = {
             var processed = false;
 
             if (columnDescriptors.length || rowDescriptors.length) {
+                var dataItem;
+                var aggregatorContext;
                 var hasExpandedRows = this._isExpanded(rowDescriptors);
 
                 processed = true;
 
                 for (var idx = 0, length = data.length; idx < length; idx++) {
+                    dataItem = data[idx];
+
+                    aggregatorContext = {
+                        dataItem: dataItem,
+                        index: idx
+                    };
+
                     var rowTotal = aggregatedData[ROW_TOTAL_KEY] || {
                         items: {},
                         aggregates: {}
                     };
 
-                    this._processColumns(measureAggregators, columnDescriptors, columnGetters, columns, data[idx], rowTotal, state, !hasExpandedRows);
+                    this._processColumns(measureAggregators, columnDescriptors, columnGetters, columns, aggregatorContext, rowTotal, state, !hasExpandedRows);
 
-                    rowTotal.aggregates = this._calculateAggregate(measureAggregators, data[idx], rowTotal);
+                    rowTotal.aggregates = this._calculateAggregate(measureAggregators, aggregatorContext, rowTotal);
                     aggregatedData[ROW_TOTAL_KEY] = rowTotal;
 
                     for (var rowIdx = 0, rowLength = rowDescriptors.length; rowIdx < rowLength; rowIdx++) {
                         var rowDescriptor = rowDescriptors[rowIdx];
 
                         if (rowDescriptor.expand) {
-                            if (!this._matchDescriptors(data[idx], rowDescriptors, rowGetters, rowIdx)) {
+                            if (!this._matchDescriptors(dataItem, rowDescriptors, rowGetters, rowIdx)) {
                                 continue;
                             }
 
                             var rowName = getName(rowDescriptor);
 
-                            rowValue = rowGetters[rowName](data[idx]);
+                            rowValue = rowGetters[rowName](dataItem);
                             rowValue = rowValue !== undefined ? rowValue.toString() : rowValue;
                             rows[rowValue] = {
                                 name: rowName + "&" + rowValue,
@@ -693,9 +812,9 @@ var __meta__ = {
                                 aggregates: {}
                             };
 
-                            this._processColumns(measureAggregators, columnDescriptors, columnGetters, columns, data[idx], value, state, true);
+                            this._processColumns(measureAggregators, columnDescriptors, columnGetters, columns, aggregatorContext, value, state, true);
 
-                            value.aggregates = this._calculateAggregate(measureAggregators, data[idx], value);
+                            value.aggregates = this._calculateAggregate(measureAggregators, aggregatorContext, value);
                             aggregatedData[rowValue] = value;
                         }
                     }
@@ -721,7 +840,7 @@ var __meta__ = {
                 }
 
                 aggregatedData = this._toDataArray(aggregatedData, columns.length, options.measures, offset, measuresRowAxis ? addDataCellVertical : addDataCell);
-
+                aggregatedData = this._normalizeData(aggregatedData, columns.length, rows.length);
             } else {
                 aggregatedData = columns = rows = [];
             }
@@ -733,6 +852,30 @@ var __meta__ = {
                 },
                 data: aggregatedData
             };
+        },
+
+        _normalizeData: function(data, columns, rows) {
+            var axesLength = (columns || 1) * (rows || 1);
+            var result = new Array(axesLength);
+            var length = data.length;
+            var cell, idx;
+
+            if (length === axesLength) {
+                return data;
+            }
+
+            for (idx = 0; idx < axesLength; idx++) {
+                result[idx] = { value: "", fmtValue: "", ordinal: idx };
+            }
+
+            for (idx = 0; idx < length; idx++) {
+               cell = data[idx];
+               if (cell) {
+                   result[cell.ordinal] = cell;
+               }
+            }
+
+            return result;
         }
     });
 
@@ -1052,42 +1195,12 @@ var __meta__ = {
             }
         },
 
-        _tempNormalizeData: function(data, columns, rows) {
-            var cell, idx, length;
-            var axesLength = (columns || 1) * (rows || 1);
-            var result = new Array(axesLength);
-
-            if (data.length === axesLength) {
-                return data;
-            }
-
-            for (idx = 0, length = result.length; idx < length; idx++) {
-                result[idx] = { value: "", fmtValue: "", ordinal: idx };
-            }
-
-            for (idx = 0, length = data.length; idx < length; idx++) {
-               cell = data[idx];
-               if (cell) {
-                   result[cell.ordinal] = cell;
-               }
-            }
-
-            return result;
-        },
-
         _processResult: function(data, axes) {
             if (this.cubeBuilder) {
                 var processedData = this.cubeBuilder.process(data, this._requestData);
 
                 data = processedData.data;
                 axes = processedData.axes;
-
-                axes = {
-                    columns: normalizeAxis(axes.columns),
-                    rows: normalizeAxis(axes.rows)
-                };
-
-                data = this._tempNormalizeData(data, axes.columns.tuples.length, axes.rows.tuples.length);
             }
 
             var columnIndexes, rowIndexes;
@@ -1123,13 +1236,15 @@ var __meta__ = {
             columnIndexes = this._normalizeTuples(axes.columns.tuples, this._axes.columns.tuples, this._columnMeasures());
             rowIndexes = this._normalizeTuples(axes.rows.tuples, this._axes.rows.tuples, this._rowMeasures());
 
-            data = this._normalizeData({
-                columnsLength: axes.columns.tuples.length,
-                rowsLength: axes.rows.tuples.length,
-                columnIndexes: columnIndexes,
-                rowIndexes: rowIndexes,
-                data: data
-            });
+            if (!this.cubeBuilder) {
+                data = this._normalizeData({
+                    columnsLength: axes.columns.tuples.length,
+                    rowsLength: axes.rows.tuples.length,
+                    columnIndexes: columnIndexes,
+                    rowIndexes: rowIndexes,
+                    data: data
+                });
+            }
 
             if (this._lastExpanded == "rows") {
                 tuples = axes.columns.tuples;
