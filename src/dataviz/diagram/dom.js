@@ -405,7 +405,7 @@
                 if (that.options.content.template) {
                     var data = that.options.dataItem || {},
                         elementTemplate = kendo.template(that.options.content.template, {
-                            paramName: "item"
+                            paramName: "dataItem"
                         });
 
                     that.options.content.text = elementTemplate(data);
@@ -498,13 +498,19 @@
                     var modelOptions = filterShapeDataItem(model || this.options.dataItem);
 
                     if (model) {
-                        this._template();
+                        if (field && !dataviz.inArray(field, ["x", "y", "width", "height"])) {
+                            if (this.options.visual) {
+                                this.redrawVisual();
+                            } else if (modelOptions.type) {
+                                this.options = deepExtend({}, this.options, modelOptions);
+                                this.redrawVisual();
+                            }
 
-                        if (!dataviz.inArray(field, ["x", "y", "width", "height"])) {
-                            this.redrawVisual();
+                            if (this.options.content) {
+                                this._template();
+                                this.content(this.options.content);
+                            }
                         }
-
-                        this.redraw(modelOptions);
                     } else {
                         this.options = deepExtend({}, this.options, modelOptions);
                     }
@@ -513,6 +519,7 @@
 
             redrawVisual: function() {
                 this.visual.clear();
+                this._contentVisual = null;
                 this.shapeVisual = Shape.createShapeVisual(this.options);
                 this.visual.append(this.shapeVisual);
                 this.updateBounds();
@@ -527,19 +534,19 @@
                     }
 
                     if (model) {
-                        if (bounds.x !== model.x) {
+                        if (defined(model.x) && bounds.x !== model.x) {
                             model.set("x", bounds.x);
                         }
 
-                        if (bounds.y !== model.y) {
+                        if (defined(model.y) && bounds.y !== model.y) {
                             model.set("y", bounds.y);
                         }
 
-                        if (bounds.width !== model.width) {
+                        if (defined(model.width) && bounds.width !== model.width) {
                             model.set("width", bounds.width);
                         }
 
-                        if (bounds.height !== model.height) {
+                        if (defined(model.height) && bounds.height !== model.height) {
                             model.set("height", bounds.height);
                         }
 
@@ -3360,12 +3367,12 @@
                 this._inactiveShapeItems = inactiveItems;
             },
 
-            _updateShapes: function(items) {
+            _updateShapes: function(items, field) {
                 for (var i = 0; i < items.length; i++) {
                     var dataItem = items[i];
 
                     var shape = this._dataMap[dataItem.id];
-                    shape.updateOptionsFromModel(dataItem);
+                    shape.updateOptionsFromModel(dataItem, field);
                 }
             },
 
