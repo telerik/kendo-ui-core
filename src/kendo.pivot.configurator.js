@@ -208,7 +208,7 @@ var __meta__ = {
             var that = this;
             var template = '# if (item.type == 2 || item.uniqueName == "[KPIs]") { #' +
                            '<span class="k-icon k-i-#= (item.type == 2 ? \"sum\" : \"kpi\") #"></span>' +
-                           '# } else { #' +
+                           '# } else if (item.type && item.type !== "kpi") { #' +
                            '<span class="k-icon k-i-dimension"></span>' +
                            '# } #' +
                            '#: item.name #';
