@@ -11,6 +11,7 @@
             .Model(m =>
             {
                 m.Id(s => s.Id);
+                m.Field(s => s.Id).Editable(false);
                 m.Field(s => s.JobTitle);
                 m.Field(s => s.Color);
             })
@@ -23,6 +24,7 @@
             .Model(m =>
             {
                 m.Id(c => c.Id);
+                m.Field(c => c.Id).Editable(false);
                 m.From(c => c.FromShapeId);
                 m.To(c => c.ToShapeId);
                 m.FromX(c => c.FromPointX);
