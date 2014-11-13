@@ -111,7 +111,7 @@
         /// <param name="fieldName">The member name.</param>
         public void ToX(string fieldName)
         {
-            shapeModel.FromX = fieldName;
+            shapeModel.ToX = fieldName;
         }
 
         /// <summary>
@@ -121,7 +121,7 @@
         /// <param name="expression">Member access expression which describes the member</param>
         public void ToY<TValue>(Expression<Func<TModel, TValue>> expression)
         {
-            shapeModel.FromY = expression.MemberWithoutInstance();
+            shapeModel.ToY = expression.MemberWithoutInstance();
         }
 
         /// <summary>

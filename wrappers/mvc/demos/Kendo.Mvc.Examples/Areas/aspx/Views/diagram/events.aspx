@@ -25,6 +25,7 @@
             {
                 m.Id(c => c.Id);
                 m.Field(c => c.Id).Editable(false);
+                m.Field(c => c.Text).Editable(false);
                 m.From(c => c.FromShapeId);
                 m.To(c => c.ToShapeId);
                 m.FromX(c => c.FromPointX);
