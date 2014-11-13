@@ -1507,6 +1507,8 @@ var __meta__ = {
                     aggregate: dataSource.aggregate()
                 });
 
+            result.$angular = undefined;
+
             return result;
         },
 

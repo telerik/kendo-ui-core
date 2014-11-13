@@ -102,6 +102,24 @@
     }
     );
 
+    ngTest("Grid getOptions does not contain circular references", 1, function(){
+        angular.module("kendo.tests").controller("mine", function($scope) {
+            $scope.options = {
+                dataSource: fixtureData,
+                columns: [ "text", "id" ]
+            };
+        });
+
+        $("<div ng-controller=mine><div kendo-grid='grid' k-options='options'></div></div>").appendTo(QUnit.fixture);
+    },
+
+    function() {
+        var grid = QUnit.fixture.find('[data-role=grid]').getKendoGrid();
+
+        ok(kendo.stringify(grid.getOptions()))
+    }
+    );
+
     ngTest("Grid cell templates", 4, function(){
         angular.module("kendo.tests").controller("mine", function($scope) {
             $scope.options = {
