@@ -67,6 +67,10 @@ public class StockChartTag extends WidgetTag /* interfaces */implements DataBoun
 
     }
 
+    public void setPdf(com.kendoui.taglib.stockchart.PdfTag value) {
+        setProperty("pdf", value);
+    }
+
     public void setPlotArea(com.kendoui.taglib.stockchart.PlotAreaTag value) {
         setProperty("plotArea", value);
     }

@@ -65,6 +65,10 @@ public class DiagramTag extends WidgetTag /* interfaces */implements DataBoundWi
         setProperty("pannable", value);
     }
 
+    public void setPdf(com.kendoui.taglib.diagram.PdfTag value) {
+        setProperty("pdf", value);
+    }
+
     public void setSelectable(com.kendoui.taglib.diagram.SelectableTag value) {
         setProperty("selectable", value);
     }

@@ -68,6 +68,10 @@ public class ChartTag extends WidgetTag /* interfaces */implements DataBoundWidg
 
     }
 
+    public void setPdf(com.kendoui.taglib.chart.PdfTag value) {
+        setProperty("pdf", value);
+    }
+
     public void setPlotArea(com.kendoui.taglib.chart.PlotAreaTag value) {
         setProperty("plotArea", value);
     }
