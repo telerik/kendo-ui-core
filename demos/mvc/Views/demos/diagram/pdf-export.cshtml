@@ -134,6 +134,10 @@
             }
 
             $("#diagram").kendoDiagram({
+                pdf: {
+                    fileName: "Kendo UI Diagram Export.pdf",
+                    proxyURL: "http://demos.telerik.com/kendo-ui/service/export"
+                },
                 dataSource: shapesDataSource,
                 connectionsDataSource: connectionsDataSource,
                 layout: {
