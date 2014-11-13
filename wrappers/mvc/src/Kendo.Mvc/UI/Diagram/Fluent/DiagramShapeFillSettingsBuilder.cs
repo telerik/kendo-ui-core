@@ -25,7 +25,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Defines the fill color of the shape.
         /// </summary>
         /// <param name="value">The value that configures the color.</param>
-        public DiagramShapeFillSettingsBuilder<TShapeModel, TConnectionModel> Color(string value)
+        public DiagramShapeFillSettingsBuilder<TShapeModel,TConnectionModel> Color(string value)
         {
             container.Color = value;
 

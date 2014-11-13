@@ -149,7 +149,7 @@ module CodeGen::MVC::Wrappers
         //<< Serialization})
 
         COMPOSITE_FIELD_DECLARATION = ERB.new(%{
-        public <%= csharp_class %> <%= csharp_name %>
+        public <%= csharp_class %><%= csharp_generic_args if needs_generics? %> <%= csharp_name %>
         {
             get;
             set;
@@ -241,7 +241,7 @@ module CodeGen::MVC::Wrappers
         }<% end %>
         })
 
-        FLUENT_COMPOSITE_FIELD_DECLARATION = ERB.new(%{<% if toggleable %><% if !default %>
+        FLUENT_COMPOSITE_FIELD_DECLARATION = ERB.new(%{<% if toggleable %><% if default.eql?('false') %>
         /// <summary>
         /// <%= description.gsub(/\r?\n/, '\n\t\t/// ').html_encode()%>
         /// </summary>
@@ -366,8 +366,10 @@ module CodeGen::MVC::Wrappers
         end
 
         def to_initialization
+            type_args = csharp_generic_args if needs_generics?
+
             ERB.new(%{
-            <%=csharp_name%> = new <%=csharp_class%>();
+            <%= csharp_name%> = new <%= csharp_class %><%= type_args %>();
                 }).result(binding)
         end
 
@@ -379,7 +381,7 @@ module CodeGen::MVC::Wrappers
 
         def builtin_names
             # check if child options contain 'name'
-            name_field = options.map{ |o| o.options }.flatten.find{ |o| o.name == "name" }
+            name_field = options.map{ |o| o.options }.flatten.find{ |o| o.name.eql?('name') }
 
             return [] if name_field.nil?
 
@@ -459,7 +461,7 @@ module CodeGen::MVC::Wrappers
         end
 
         def nullable?
-            csharp_type == "string" || handler? || dictionary?
+            csharp_type.eql?('string') || handler? || dictionary?
         end
 
         def csharp_array?
@@ -467,11 +469,11 @@ module CodeGen::MVC::Wrappers
         end
 
         def field?
-            name.downcase == 'field' && uses_generic_args?
+            name.downcase.eql?('field') && uses_generic_args?
         end
 
         def handler?
-            csharp_type == "ClientHandlerDescriptor"
+            csharp_type.eql?('ClientHandlerDescriptor')
         end
 
         def dictionary?
@@ -540,6 +542,10 @@ module CodeGen::MVC::Wrappers
 
         def csharp_generic_constraints
             owner.csharp_generic_constraints if uses_generic_args?
+        end
+
+        def needs_generics?
+            full_name.eql?('treelist.editable') || full_name.eql?('diagram.editable')
         end
 
         def to_declaration
@@ -641,7 +647,7 @@ module CodeGen::MVC::Wrappers
         end
 
         def csharp_init_args
-            return ", DI.Current.Resolve<INavigationItemAuthorization>()" if name == 'TreeView'
+            return ", DI.Current.Resolve<INavigationItemAuthorization>()" if name.eql?('TreeView')
 
             return ""
         end

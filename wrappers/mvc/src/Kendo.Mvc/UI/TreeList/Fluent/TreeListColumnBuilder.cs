@@ -130,6 +130,28 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
+        /// The template which renders the footer table cell for the column.The fields which can be used in the template are:
+        /// </summary>
+        /// <param name="value">The value that configures the footertemplate.</param>
+        public TreeListColumnBuilder<T> FooterTemplate(string value)
+        {
+            container.FooterTemplate = value;
+
+            return this;
+        }
+
+        /// <summary>
+        /// The template which renders the footer table cell for the column.The fields which can be used in the template are:
+        /// </summary>
+        /// <param name="value">The value that configures the footertemplate.</param>
+        public TreeListColumnBuilder<T> FooterTemplateId(string value)
+        {
+            container.FooterTemplateId = value;
+
+            return this;
+        }
+        
+        /// <summary>
         /// The format that is applied to the value before it is displayed. Takes the form "{0:format}" where "format" is a standard number format,
 		/// custom number format, standard date format or a custom date format.
         /// </summary>
@@ -165,14 +187,6 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
         
-        /// <summary>
-        /// If set to true the user can click the column header and sort the grid by the column field when sorting is enabled. If set to false sorting will
-		/// be disabled for this column. By default all columns are sortable if sorting is enabled via the sortable option.
-        /// </summary>
-        public TreeListColumnBuilder<T> Sortable()
-        {
-            return Sortable(true);
-        }
 
         /// <summary>
         /// If set to true the user can click the column header and sort the grid by the column field when sorting is enabled. If set to false sorting will
@@ -245,14 +259,6 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
         
-        /// <summary>
-        /// If set to true a filter menu will be displayed for this column when filtering is enabled. If set to false the filter menu will not be displayed. By default a filter menu is displayed
-		/// for all columns when filtering is enabled via the filterable option.Can be set to a JavaScript object which represents the filter menu configuration.
-        /// </summary>
-        public TreeListColumnBuilder<T> Filterable()
-        {
-            return Filterable(true);
-        }
 
         /// <summary>
         /// If set to true a filter menu will be displayed for this column when filtering is enabled. If set to false the filter menu will not be displayed. By default a filter menu is displayed
@@ -289,6 +295,26 @@ namespace Kendo.Mvc.UI.Fluent
         {
             container.Width = value + "px";
 
+            return this;
+        }
+
+        /// <summary>
+        /// If set to true the user can click the column header and sort the grid by the column field when sorting is enabled. If set to false sorting will
+        /// be disabled for this column. By default all columns are sortable if sorting is enabled via the sortable option.
+        /// </summary>
+        public TreeListColumnBuilder<T> Sortable()
+        {
+            container.Sortable.Enabled = true;
+            return this;
+        }
+
+        /// <summary>
+        /// If set to true a filter menu will be displayed for this column when filtering is enabled. If set to false the filter menu will not be displayed. By default a filter menu is displayed
+        /// for all columns when filtering is enabled via the filterable option. Can be set to a JavaScript object which represents the filter menu configuration.
+        /// </summary>
+        public TreeListColumnBuilder<T> Filterable()
+        {
+            container.Filterable.Enabled = true;
             return this;
         }
     }

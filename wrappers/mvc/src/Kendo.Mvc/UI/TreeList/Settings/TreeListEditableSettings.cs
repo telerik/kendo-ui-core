@@ -19,20 +19,20 @@ namespace Kendo.Mvc.UI
             DefaultDataItem = CreateDefaultItem;
 
             //>> Initialization
-
-            //<< Initialization
+        
+        //<< Initialization
         }
 
         public bool Enabled { get; set; }
 
         //>> Fields
-
+        
         public string Mode { get; set; }
-
+        
         public string Template { get; set; }
 
         public string TemplateId { get; set; }
-
+        
         //<< Fields
 
         public string TemplateName { get; set; }
@@ -40,16 +40,15 @@ namespace Kendo.Mvc.UI
         protected override void Serialize(IDictionary<string, object> json)
         {
             //>> Serialization
-
+        
             if (Mode.HasValue())
             {
                 json["mode"] = Mode;
             }
-
+            
             if (!string.IsNullOrEmpty(TemplateId))
             {
-                json["template"] = new ClientHandlerDescriptor
-                {
+                json["template"] = new ClientHandlerDescriptor {
                     HandlerName = string.Format(
                         "jQuery('#{0}').html()",
                         TemplateId
@@ -60,8 +59,8 @@ namespace Kendo.Mvc.UI
             {
                 json["template"] = Template;
             }
-
-            //<< Serialization
+                
+        //<< Serialization
 
             SerializeEditTemplate(json);
         }

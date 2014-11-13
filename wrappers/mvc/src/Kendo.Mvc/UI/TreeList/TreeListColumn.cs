@@ -41,6 +41,10 @@ namespace Kendo.Mvc.UI
         
         public string Field { get; set; }
         
+        public string FooterTemplate { get; set; }
+
+        public string FooterTemplateId { get; set; }
+        
         public string Format { get; set; }
         
         public string HeaderTemplate { get; set; }
@@ -103,6 +107,20 @@ namespace Kendo.Mvc.UI
                 json["field"] = Field;
             }
             
+            if (!string.IsNullOrEmpty(FooterTemplateId))
+            {
+                json["footerTemplate"] = new ClientHandlerDescriptor {
+                    HandlerName = string.Format(
+                        "jQuery('#{0}').html()",
+                        FooterTemplateId
+                    )
+                };
+            }
+            else if (!string.IsNullOrEmpty(FooterTemplate))
+            {
+                json["footerTemplate"] = FooterTemplate;
+            }
+                
             if (Format.HasValue())
             {
                 json["format"] = Format;
