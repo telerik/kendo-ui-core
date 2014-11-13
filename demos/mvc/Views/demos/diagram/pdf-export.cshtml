@@ -1,14 +1,8 @@
 <div id="example">
     <div class="box">
-        <h4>Export diagram content</h4>
+        <h4>Export diagram view</h4>
         <div class="box-col">
-            <button class='export-pdf k-button'>Export as PDF</button>
-        </div>
-        <div class="box-col">
-            <button class='export-img k-button'>Export as Image</button>
-        </div>
-        <div class="box-col">
-            <button class='export-svg k-button'>Export as SVG</button>
+            <button class='export-pdf k-button'>Save as PDF</button>
         </div>
     </div>
     <div class="demo-section k-content">
@@ -16,36 +10,7 @@
     </div>
     <script>
         $(".export-pdf").click(function() {
-            var diagram = $("#diagram").getKendoDiagram();
-            diagram.exportPDF({ paperSize: "auto", margin: { left: "1cm", top: "1cm", right: "1cm", bottom: "1cm" } }).done(function(data) {
-                kendo.saveAs({
-                    dataURI: data,
-                    fileName: "diagram.pdf",
-                    proxyURL: "http://demos.telerik.com/kendo-ui/service/export"
-                });
-            });
-        });
-
-        $(".export-img").click(function() {
-            var diagram = $("#diagram").getKendoDiagram();
-            diagram.exportImage().done(function(data) {
-                kendo.saveAs({
-                    dataURI: data,
-                    fileName: "diagram.png",
-                    proxyURL: "http://demos.telerik.com/kendo-ui/service/export"
-                });
-            });
-        });
-
-        $(".export-svg").click(function() {
-            var diagram = $("#diagram").getKendoDiagram();
-            diagram.exportSVG().done(function(data) {
-                kendo.saveAs({
-                    dataURI: data,
-                    fileName: "diagram.svg",
-                    proxyURL: "http://demos.telerik.com/kendo-ui/service/export"
-                });
-            });
+            $("#diagram").getKendoDiagram().saveAsPDF();
         });
 
         function createDiagram() {

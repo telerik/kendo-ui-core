@@ -8964,7 +8964,18 @@
         ]
       },
       {
-        "text": "Export to PDF, Image, SVG",
+        "text": "PDF Export",
+        "new": true,
+        "url": "diagram/pdf-export",
+        "title": {
+            "kendo-ui": "Kendo UI Diagram saveAsPDF API method"
+        },
+        "meta": {
+            "kendo-ui": "This demo shows how to save the diagram as PDF directly in the browser."
+        }
+      },
+      {
+        "text": "Advanced Export",
         "new": true,
         "url": "diagram/export",
         "packages": [
@@ -8974,7 +8985,7 @@
             "kendo-ui": "Kendo UI Diagram Export API methods"
         },
         "meta": {
-            "kendo-ui": "This demo shows how to export diagram to PDF, PNG Images or SVG and save them directly in the browser."
+            "kendo-ui": "This demo shows how to export diagrams to PDF, PNG Images or SVG and save them directly in the browser."
         }
       },
 	  {
