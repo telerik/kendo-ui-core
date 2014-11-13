@@ -514,6 +514,10 @@ var Workbook = kendo.Class.extend({
         }, this));
     },
     toDataURL: function() {
+        if (typeof JSZip === "undefined") {
+           throw new Error("JSZip not found. Check http://docs.telerik.com/kendo-ui/framework/excel/introduction#requirements for more details.");
+        }
+
         var zip = new JSZip();
 
         var docProps = zip.folder("docProps");
