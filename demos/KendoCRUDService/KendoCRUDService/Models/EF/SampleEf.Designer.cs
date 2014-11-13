@@ -35,8 +35,6 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("SampleModel", "FK_Tasks_Tasks", "Task", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(KendoCRUDService.Models.EF.Task), "Task1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KendoCRUDService.Models.EF.Task), true)]
 [assembly: EdmRelationshipAttribute("SampleModel", "FK_GanttTasks_GanttTasks", "GanttTask", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(KendoCRUDService.Models.EF.GanttTask), "GanttTask1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KendoCRUDService.Models.EF.GanttTask), true)]
 [assembly: EdmRelationshipAttribute("SampleModel", "FK_EmployeeDirectory_EmployeeDirectory", "EmployeeDirectory", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(KendoCRUDService.Models.EF.EmployeeDirectory), "EmployeeDirectory1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KendoCRUDService.Models.EF.EmployeeDirectory), true)]
-[assembly: EdmRelationshipAttribute("SampleModel", "FK_GanttResourceAssignments_GanttResources", "GanttResource", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(KendoCRUDService.Models.EF.GanttResource), "GanttResourceAssignment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KendoCRUDService.Models.EF.GanttResourceAssignment), true)]
-[assembly: EdmRelationshipAttribute("SampleModel", "FK_GanttResourceAssignments_GanttTasks", "GanttTask", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(KendoCRUDService.Models.EF.GanttTask), "GanttResourceAssignment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KendoCRUDService.Models.EF.GanttResourceAssignment), true)]
 
 #endregion
 
@@ -2489,32 +2487,6 @@ namespace KendoCRUDService.Models.EF
         #endregion
 
     
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SampleModel", "FK_GanttResourceAssignments_GanttResources", "GanttResourceAssignment")]
-        public EntityCollection<GanttResourceAssignment> GanttResourceAssignments
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<GanttResourceAssignment>("SampleModel.FK_GanttResourceAssignments_GanttResources", "GanttResourceAssignment");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<GanttResourceAssignment>("SampleModel.FK_GanttResourceAssignments_GanttResources", "GanttResourceAssignment", value);
-                }
-            }
-        }
-
-        #endregion
-
     }
     
     /// <summary>
@@ -2650,86 +2622,6 @@ namespace KendoCRUDService.Models.EF
         #endregion
 
     
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SampleModel", "FK_GanttResourceAssignments_GanttResources", "GanttResource")]
-        public GanttResource GanttResource
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<GanttResource>("SampleModel.FK_GanttResourceAssignments_GanttResources", "GanttResource").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<GanttResource>("SampleModel.FK_GanttResourceAssignments_GanttResources", "GanttResource").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<GanttResource> GanttResourceReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<GanttResource>("SampleModel.FK_GanttResourceAssignments_GanttResources", "GanttResource");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<GanttResource>("SampleModel.FK_GanttResourceAssignments_GanttResources", "GanttResource", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SampleModel", "FK_GanttResourceAssignments_GanttTasks", "GanttTask")]
-        public GanttTask GanttTask
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<GanttTask>("SampleModel.FK_GanttResourceAssignments_GanttTasks", "GanttTask").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<GanttTask>("SampleModel.FK_GanttResourceAssignments_GanttTasks", "GanttTask").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<GanttTask> GanttTaskReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<GanttTask>("SampleModel.FK_GanttResourceAssignments_GanttTasks", "GanttTask");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<GanttTask>("SampleModel.FK_GanttResourceAssignments_GanttTasks", "GanttTask", value);
-                }
-            }
-        }
-
-        #endregion
-
     }
     
     /// <summary>
@@ -3051,28 +2943,6 @@ namespace KendoCRUDService.Models.EF
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<GanttTask>("SampleModel.FK_GanttTasks_GanttTasks", "GanttTask", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SampleModel", "FK_GanttResourceAssignments_GanttTasks", "GanttResourceAssignment")]
-        public EntityCollection<GanttResourceAssignment> GanttResourceAssignments
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<GanttResourceAssignment>("SampleModel.FK_GanttResourceAssignments_GanttTasks", "GanttResourceAssignment");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<GanttResourceAssignment>("SampleModel.FK_GanttResourceAssignments_GanttTasks", "GanttResourceAssignment", value);
                 }
             }
         }

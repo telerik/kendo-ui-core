@@ -68,14 +68,6 @@
             <End Role="Territories" EntitySet="Territories" />
             <End Role="EmployeeTerritories" EntitySet="EmployeeTerritories" />
           </AssociationSet>
-          <AssociationSet Name="FK_GanttResourceAssignments_GanttResources" Association="SampleModel.Store.FK_GanttResourceAssignments_GanttResources">
-            <End Role="GanttResources" EntitySet="GanttResources" />
-            <End Role="GanttResourceAssignments" EntitySet="GanttResourceAssignments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_GanttResourceAssignments_GanttTasks" Association="SampleModel.Store.FK_GanttResourceAssignments_GanttTasks">
-            <End Role="GanttTasks" EntitySet="GanttTasks" />
-            <End Role="GanttResourceAssignments" EntitySet="GanttResourceAssignments" />
-          </AssociationSet>
           <AssociationSet Name="FK_GanttTasks_GanttTasks" Association="SampleModel.Store.FK_GanttTasks_GanttTasks">
             <End Role="GanttTasks" EntitySet="GanttTasks" />
             <End Role="GanttTasks1" EntitySet="GanttTasks" />
@@ -510,32 +502,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_GanttResourceAssignments_GanttResources">
-          <End Role="GanttResources" Type="SampleModel.Store.GanttResources" Multiplicity="1" />
-          <End Role="GanttResourceAssignments" Type="SampleModel.Store.GanttResourceAssignments" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="GanttResources">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="GanttResourceAssignments">
-              <PropertyRef Name="ResourceID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_GanttResourceAssignments_GanttTasks">
-          <End Role="GanttTasks" Type="SampleModel.Store.GanttTasks" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="GanttResourceAssignments" Type="SampleModel.Store.GanttResourceAssignments" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="GanttTasks">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="GanttResourceAssignments">
-              <PropertyRef Name="TaskID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_GanttTasks_GanttTasks">
           <End Role="GanttTasks" Type="SampleModel.Store.GanttTasks" Multiplicity="0..1" />
           <End Role="GanttTasks1" Type="SampleModel.Store.GanttTasks" Multiplicity="*" />
@@ -772,14 +738,6 @@
           </AssociationSet>
           <EntitySet Name="GanttResourceAssignments" EntityType="SampleModel.GanttResourceAssignment" />
           <EntitySet Name="GanttResources" EntityType="SampleModel.GanttResource" />
-          <AssociationSet Name="FK_GanttResourceAssignments_GanttResources" Association="SampleModel.FK_GanttResourceAssignments_GanttResources">
-            <End Role="GanttResource" EntitySet="GanttResources" />
-            <End Role="GanttResourceAssignment" EntitySet="GanttResourceAssignments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_GanttResourceAssignments_GanttTasks" Association="SampleModel.FK_GanttResourceAssignments_GanttTasks">
-            <End Role="GanttTask" EntitySet="GanttTasks" />
-            <End Role="GanttResourceAssignment" EntitySet="GanttResourceAssignments" />
-          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Category">
           <Key>
@@ -1202,7 +1160,6 @@
           <NavigationProperty Name="GanttTasks1" Relationship="SampleModel.FK_GanttTasks_GanttTasks" FromRole="GanttTask" ToRole="GanttTask1" />
           <NavigationProperty Name="GanttTask1" Relationship="SampleModel.FK_GanttTasks_GanttTasks" FromRole="GanttTask1" ToRole="GanttTask" />
           <Property Type="Boolean" Name="Summary" Nullable="false" />
-          <NavigationProperty Name="GanttResourceAssignments" Relationship="SampleModel.FK_GanttResourceAssignments_GanttTasks" FromRole="GanttTask" ToRole="GanttResourceAssignment" />
         </EntityType>
         <Association Name="FK_GanttTasks_GanttTasks">
           <End Type="SampleModel.GanttTask" Role="GanttTask" Multiplicity="0..1" />
@@ -1275,8 +1232,6 @@
           <Property Type="Int32" Name="TaskID" Nullable="false" />
           <Property Type="Int32" Name="ResourceID" Nullable="false" />
           <Property Type="Decimal" Name="Units" Nullable="false" Precision="5" Scale="2" />
-          <NavigationProperty Name="GanttResource" Relationship="SampleModel.FK_GanttResourceAssignments_GanttResources" FromRole="GanttResourceAssignment" ToRole="GanttResource" />
-          <NavigationProperty Name="GanttTask" Relationship="SampleModel.FK_GanttResourceAssignments_GanttTasks" FromRole="GanttResourceAssignment" ToRole="GanttTask" />
         </EntityType>
         <EntityType Name="GanttResource">
           <Key>
@@ -1285,34 +1240,7 @@
           <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Color" MaxLength="10" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="GanttResourceAssignments" Relationship="SampleModel.FK_GanttResourceAssignments_GanttResources" FromRole="GanttResource" ToRole="GanttResourceAssignment" />
         </EntityType>
-        <Association Name="FK_GanttResourceAssignments_GanttResources">
-          <End Type="SampleModel.GanttResource" Role="GanttResource" Multiplicity="1" />
-          <End Type="SampleModel.GanttResourceAssignment" Role="GanttResourceAssignment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="GanttResource">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="GanttResourceAssignment">
-              <PropertyRef Name="ResourceID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_GanttResourceAssignments_GanttTasks">
-          <End Type="SampleModel.GanttTask" Role="GanttTask" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="SampleModel.GanttResourceAssignment" Role="GanttResourceAssignment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="GanttTask">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="GanttResourceAssignment">
-              <PropertyRef Name="TaskID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1664,7 +1592,7 @@
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="SampleEf" ZoomLevel="119">
+      <Diagram Name="SampleEf" ZoomLevel="88">
         <EntityTypeShape EntityType="SampleModel.Category" Width="1.5" PointX="3" PointY="19.5" Height="1.9802864583333317" IsExpanded="true" />
         <EntityTypeShape EntityType="SampleModel.CustomerDemographic" Width="2.125" PointX="0.75" PointY="2.5" Height="1.59568359375" IsExpanded="true" />
         <EntityTypeShape EntityType="SampleModel.Customer" Width="1.5" PointX="3" PointY="1.375" Height="3.7109993489583335" IsExpanded="true" />
@@ -1777,10 +1705,8 @@
           <ConnectorPoint PointX="8.35346153846154" PointY="16.710999348958339" />
           <ConnectorPoint PointX="8.35346153846154" PointY="16.460999348958339" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="SampleModel.GanttResourceAssignment" Width="1.5" PointX="10.178360865534451" PointY="25.492564019510784" />
-        <EntityTypeShape EntityType="SampleModel.GanttResource" Width="1.5" PointX="10.543869192965268" PointY="31.794315785073824" />
-        <AssociationConnector Association="SampleModel.FK_GanttResourceAssignments_GanttResources" />
-        <AssociationConnector Association="SampleModel.FK_GanttResourceAssignments_GanttTasks" />
+        <EntityTypeShape EntityType="SampleModel.GanttResourceAssignment" Width="1.5" PointX="8.125" PointY="22" />
+        <EntityTypeShape EntityType="SampleModel.GanttResource" Width="1.5" PointX="10.625" PointY="22" />
         </Diagram>
     </Diagrams>
   </Designer>
