@@ -8352,7 +8352,12 @@
         "meta": {
             "kendo-ui": "This example shows how easily you can configure the radial gauge to use multiple pointers.",
             "aspnet-mvc": "This example shows how easily you can configure the ASP.NET MVC radial gauge to use multiple pointers."
-        }
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
       },
       {
         "text": "MVVM",
