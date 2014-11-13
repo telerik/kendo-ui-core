@@ -1,5 +1,4 @@
 (function() {
-    return;
 
     var dataviz = kendo.dataviz,
         LogarithmicAxis = dataviz.LogarithmicAxis,
@@ -7,7 +6,7 @@
         defined = dataviz.defined,
         Point = dataviz.Point2D,
         Box = dataviz.Box2D,
-        view,
+        draw = kendo.drawing,
         axis,
         chartBox = dataviz.Box2D(0, 0, 800, 600),
         TOLERANCE = 0.1;
@@ -699,8 +698,7 @@
     })();
 
     (function() {
-        var view,
-            tickLineOptions = {
+        var tickLineOptions = {
                 align: true,
                 stroke: "red",
                 strokeWidth: 5
@@ -725,6 +723,13 @@
                 }
             };
 
+        function comparePaths(actual, expected) {
+            for (var idx = 0; idx < actual.length; idx++) {
+                dataviz.alignPathToPixel(expected[idx]);
+                sameLinePath(actual[idx], expected[idx]);
+            }
+        }
+
         // ------------------------------------------------------------
         module("axis / render / minor ticks", {
             setup: function() {
@@ -740,23 +745,25 @@
                     }
                 });
                 axis.reflow(chartBox);
+                axis.renderVisual();
             }
         });
 
         test("renders minor ticks", function() {
-            view = new ViewStub();
-            axis.renderTicks(view);
-            var expected = [{x1:19,y1:592.5,x2:23,y2:592.5,options:tickLineOptions},
-                {x1:19,y1:416.397453,x2:23,y2:416.397453,options:tickLineOptions},
-                {x1:19,y1:313.384066,x2:23,y2:313.384066,options:tickLineOptions},
-                {x1:19,y1:240.294905,x2:23,y2:240.294905,options:tickLineOptions},
-                {x1:19,y1:183.602547,x2:23,y2:183.602547,options:tickLineOptions},
-                {x1:19,y1:137.281519,x2:23,y2:137.281519,options:tickLineOptions},
-                {x1:19,y1:98.117647,x2:23,y2:98.117647,options:tickLineOptions},
-                {x1:19,y1:64.192358,x2:23,y2:64.192358,options:tickLineOptions},
-                {x1:19,y1:34.268132,x2:23,y2:34.268132,options:tickLineOptions}];
+            var lines = axis._lineGroup.children.slice(1);
+            var expectedPaths = [
+                new draw.Path().moveTo(19, 592.5).lineTo(23, 592.5),
+                new draw.Path().moveTo(19, 416.397453).lineTo(23, 416.397453),
+                new draw.Path().moveTo(19, 313.384066).lineTo(23, 313.384066),
+                new draw.Path().moveTo(19, 240.294905).lineTo(23, 240.294905),
+                new draw.Path().moveTo(19, 183.602547).lineTo(23, 183.602547),
+                new draw.Path().moveTo(19, 137.281519).lineTo(23, 137.281519),
+                new draw.Path().moveTo(19, 98.117647).lineTo(23, 98.117647),
+                new draw.Path().moveTo(19, 64.192358).lineTo(23, 64.192358),
+                new draw.Path().moveTo(19, 34.268132).lineTo(23, 34.268132)
+            ];
 
-            deepEqual(view.log.line, expected);
+            comparePaths(lines, expectedPaths);
         });
 
         // ------------------------------------------------------------
@@ -774,16 +781,17 @@
                     }
                 });
                 axis.reflow(chartBox);
+                axis.renderVisual();
             }
         });
 
         test("renders major ticks", function() {
-            view = new ViewStub();
-            axis.renderTicks(view);
-            var expected = [{x1: 19, x2: 23, y1: 592.5, y2: 592.5,options:tickLineOptions},
-                {x1: 19, x2: 23, y1: 7.5, y2: 7.5,options:tickLineOptions}];
-
-            deepEqual(view.log.line, expected);
+            var lines = axis._lineGroup.children.slice(1);
+            var expectedPaths = [
+                new draw.Path().moveTo(19, 592.5).lineTo(23, 592.5),
+                new draw.Path().moveTo(19, 7.5).lineTo(23, 7.5)
+            ];
+            comparePaths(lines, expectedPaths);
         });
 
         // ------------------------------------------------------------
@@ -803,23 +811,27 @@
                     modelId: 1
                 };
                 axis.reflow(chartBox);
+                axis.renderVisual();
+                axis.createGridLines(altAxis);
             }
         });
 
         test("renders minor grid lines", function() {
-            view = new ViewStub();
-            axis.renderGridLines(view, altAxis);
-            var expected = [{x1:0,y1:592.5,x2:0,y2:592.5,options:gridLineOptions},
-                {x1:0,y1:416.397453,x2:0,y2:416.397453,options:gridLineOptions},
-                {x1:0,y1:313.384066,x2:0,y2:313.384066,options:gridLineOptions},
-                {x1:0,y1:240.294905,x2:0,y2:240.294905,options:gridLineOptions},
-                {x1:0,y1:183.602547,x2:0,y2:183.602547,options:gridLineOptions},
-                {x1:0,y1:137.281519,x2:0,y2:137.281519,options:gridLineOptions},
-                {x1:0,y1:98.117647,x2:0,y2:98.117647,options:gridLineOptions},
-                {x1:0,y1:64.192358,x2:0,y2:64.192358,options:gridLineOptions},
-                {x1:0,y1:34.268132,x2:0,y2:34.268132,options:gridLineOptions}];
+            var lines = axis._gridLines.children;
+            var expectedPaths = [
+                new draw.Path().moveTo(0, 592.5).lineTo(0, 592.5),
+                new draw.Path().moveTo(0, 416.397453).lineTo(0, 416.397453),
+                new draw.Path().moveTo(0, 313.384066).lineTo(0, 313.384066),
+                new draw.Path().moveTo(0, 240.294905).lineTo(0, 240.294905),
+                new draw.Path().moveTo(0, 183.602547).lineTo(0, 183.602547),
+                new draw.Path().moveTo(0, 137.281519).lineTo(0, 137.281519),
+                new draw.Path().moveTo(0, 98.117647).lineTo(0, 98.117647),
+                new draw.Path().moveTo(0, 64.192358).lineTo(0, 64.192358),
+                new draw.Path().moveTo(0, 34.268132).lineTo(0, 34.268132)
+            ];
 
-            deepEqual(view.log.line, expected);
+            comparePaths(lines, expectedPaths);
+
         });
 
         // ------------------------------------------------------------
@@ -839,16 +851,19 @@
                     modelId: 1
                 };
                 axis.reflow(chartBox);
+                axis.renderVisual();
+                axis.createGridLines(altAxis);
             }
         });
 
         test("renders minor grid lines", function() {
-            view = new ViewStub();
-            axis.renderGridLines(view, altAxis);
-            var expected = [{x1:0,y1:592.5,x2:0,y2:592.5,options:gridLineOptions},
-                {x1:0,y1:7.5,x2:0,y2:7.5,options:gridLineOptions}];
+            var lines = axis._gridLines.children;
+            var expectedPaths = [
+                new draw.Path().moveTo(0, 592.5).lineTo(0, 592.5),
+                new draw.Path().moveTo(0, 7.5).lineTo(0, 7.5)
+            ];
 
-            deepEqual(view.log.line, expected);
+            comparePaths(lines, expectedPaths);
         });
 
     })();
