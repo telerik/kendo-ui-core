@@ -1,0 +1,81 @@
+﻿        <div id="example" class="k-content">
+            <div id="gauge"></div>
+
+            <dl>
+                <dt>Red pointer</dt>
+                    <dd><input id="gauge-value0" class="slider" value="10"></dd>
+                <dt>Orange pointer</dt>
+                    <dd><input id="gauge-value1" class="slider" value="70"></dd>
+                <dt>Yellow pointer</dt>
+                    <dd><input id="gauge-value2" class="slider" value="140"></dd>
+                <dt>Get all pointer values</dt>
+                    <dd><button id="getValues" class="k-button">Get all</button></dd>
+                <dt>Set all pointer values</dt>
+                    <dd>
+                        <button id="setValues" class="k-button">Set all</button>
+                        <input id="newValues" class="k-textbox" value="100, 10, 80" />
+                    </dd>
+            </dl>
+
+            <script>
+                function createGauge() {
+                    $("#gauge").kendoRadialGauge({
+
+                        pointer: [{
+                            value: 10,
+                            color: "#c20000",
+                            cap: { size: 0.15 }
+                        }, {
+                            value: 70,
+                            color: "#ff7a00",
+                            cap: { size: 0.1 }
+                        }, {
+                            value: 140,
+                            color: "#ffc700"
+                        }],
+                        scale: {
+                            minorUnit: 5,
+                            startAngle: -30,
+                            endAngle: 210,
+                            max: 180
+                        }
+                    });
+                }
+
+                $(document).ready(function () {
+                    createGauge();
+
+                    $("#example .slider").each(function () {
+                        $(this).kendoSlider({
+                            min: 0,
+                            max: 180,
+                            showButtons: false,
+                            change: function () {
+                                var id = this.element.attr("id");
+                                var pointerIndex = id.substr(id.length - 1);
+                                var gauge = $("#gauge").data("kendoRadialGauge");
+                                gauge.pointers[pointerIndex].value(this.value());
+                            }
+                        });
+                    });
+
+                    $("#getValues").click(function () {
+                        alert("All values: " + $("#gauge").data("kendoRadialGauge").allValues().join(", "));
+                    });
+
+                    $("#setValues").click(function () {
+                        var values = $("#newValues").val().split(",");
+
+                        values = $.map(values, function (val) {
+                            return parseInt(val);
+                        });
+
+                        $("#gauge").data("kendoRadialGauge").allValues(values);
+                    });
+
+                    $(document).bind("kendo:skinChange", function (e) {
+                        createGauge();
+                    });
+                });
+            </script>
+        </div>

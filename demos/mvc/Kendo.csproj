@@ -1157,6 +1157,7 @@
     <Content Include="Views\demos\grid\persist-state.cshtml" />
     <Content Include="Views\demos\scheduler\timeline.cshtml" />
     <Content Include="Views\demos\gantt\resources.cshtml" />
+    <Content Include="Views\demos\radial-gauge\multiple-pointers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="content\integration\diagram\js\" />

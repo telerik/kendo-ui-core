@@ -8343,6 +8343,18 @@
         }
       },
       {
+        "text": "Multiple pointers",
+        "url": "radial-gauge/multiple-pointers",
+        "title": {
+            "kendo-ui": "Kendo UI Radial Gauge multiple pointers demo",
+            "aspnet-mvc": "ASP.NET MVC Radial Gauge multiple pointers demo"
+        },
+        "meta": {
+            "kendo-ui": "This example shows how easily you can configure the radial gauge to use multiple pointers.",
+            "aspnet-mvc": "This example shows how easily you can configure the ASP.NET MVC radial gauge to use multiple pointers."
+        }
+      },
+      {
         "text": "MVVM",
         "url": "radial-gauge/mvvm",
         "title": {
