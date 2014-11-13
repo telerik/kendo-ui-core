@@ -310,6 +310,26 @@
 
 @import "theme-template.less";
 
+.k-button:hover .k-icon,
+.k-tool-icon:hover,
+.k-state-hover .k-tool-icon,
+.k-state-selected .k-tool-icon,
+.k-state-focused .k-tool-icon,
+.k-button:hover .k-tool-icon,
+.k-splitbar.k-splitbar-horizontal-hover .k-icon,
+.k-splitbar.k-splitbar-vertical-hover .k-icon,
+div.k-splitbar.k-state-focused .k-icon,
+.k-textbox:hover > .k-icon
+{
+    opacity:1;
+}
+
+.k-tool-icon,
+.k-splitbar .k-icon
+{
+    opacity: @default-icon-opacity;
+}
+
 .k-button,
 .k-header {
 	font-weight: 500;
