@@ -1,12 +1,9 @@
 <div id="example">
-    <div class="demo-section">
-        <div class="box-col" style="width: 300px">
-            <h4>Linear Gauge</h4>
-            <span  data-role="lineargauge"
-                   data-scale="{ min:0, max: 50, vertical: false}"
-                   data-bind="visible: isVisible,
-                              value: selectedNumber"></span>
-        </div>
+    <div class="demo-section k-header">
+        <span  data-role="lineargauge"
+               data-scale="{ min:0, max: 50, vertical: false}"
+               data-bind="visible: isVisible,
+                          value: selectedNumber"></span>
     </div>
     <div class="box">
         <div class="box-col" style="width: 300px">
@@ -17,7 +14,7 @@
         </div>
         <div class="box-col" style="width: 300px">
             <h4>Value</h4>
-            <input data-role="slider" data-min="0" data-max="50" data-small-step="5" data-large-step="10" data-bind="value: selectedNumber">
+            <input data-role="slider" data-show-buttons="false" data-min="0" data-max="50" data-small-step="5" data-large-step="10" data-bind="value: selectedNumber">
         </div>
         <div class="box-col">
             <h4>Information</h4>
@@ -36,4 +33,9 @@
     }
     $(document).ready(createGauge).bind("kendo:skinChange", createGauge);
 </script>
+<style scoped>
+    .demo-section {
+        width: 200px;
+    }
+</style>
 </div>

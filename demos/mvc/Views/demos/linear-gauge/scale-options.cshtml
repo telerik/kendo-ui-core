@@ -1,7 +1,11 @@
-        <div id="example" class="k-content">
-            <div class="configuration" style="width:170px;">
-                <span class="configHead">Configuration</span>
-                <span class="configTitle">Gauge scale should...</span>
+        <div id="example" class="k-content">            
+            
+            <div id="gauge-container">
+                <div id="gauge"></div>
+            </div>
+            
+            <div class="box">
+                <h4>Gauge scale should...</h4>
                 <ul class="options">
                     <li>
                         <input id="vertical" checked="checked" type="checkbox" autocomplete="off">
@@ -18,10 +22,6 @@
                         <label for="ranges">... show ranges</label>
                     </li>
                 </ul>
-            </div>
-
-            <div id="gauge-container">
-                <div id="gauge"></div>
             </div>
 
             <script>
@@ -59,7 +59,7 @@
                 $(document).ready(function() {
                     createGauge();
 
-                    $(".configuration").bind("change", refresh);
+                    $(".box").bind("change", refresh);
 
                     $(document).bind("kendo:skinChange", function(e) {
                         createGauge();
@@ -96,6 +96,7 @@
                     padding: 18px;
                     width: 300px;
                     height: 300px;
+                    margin: 0 auto;
                 }
 
                 #gauge-container.horizontal {
