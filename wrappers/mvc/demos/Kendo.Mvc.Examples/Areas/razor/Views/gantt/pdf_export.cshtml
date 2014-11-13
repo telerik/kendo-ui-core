@@ -20,6 +20,10 @@
         tb.Add().Name("append");
         tb.Add().Name("pdf");
     })
+    .Pdf(pdf => pdf
+        .FileName("Kendo UI Gantt Export.pdf")
+        .ProxyURL(Url.Action("Pdf_Export_Save", "Gantt"))
+    )
     .Height(400)
     .ShowWorkHours(false)
     .ShowWorkDays(false)
