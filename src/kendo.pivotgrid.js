@@ -840,7 +840,7 @@ var __meta__ = {
                 }
 
                 aggregatedData = this._toDataArray(aggregatedData, columns.length, options.measures, offset, measuresRowAxis ? addDataCellVertical : addDataCell);
-
+                aggregatedData = this._normalizeData(aggregatedData, columns.length, rows.length);
             } else {
                 aggregatedData = columns = rows = [];
             }
@@ -852,6 +852,30 @@ var __meta__ = {
                 },
                 data: aggregatedData
             };
+        },
+
+        _normalizeData: function(data, columns, rows) {
+            var axesLength = (columns || 1) * (rows || 1);
+            var result = new Array(axesLength);
+            var length = data.length;
+            var cell, idx;
+
+            if (length === axesLength) {
+                return data;
+            }
+
+            for (idx = 0; idx < axesLength; idx++) {
+                result[idx] = { value: "", fmtValue: "", ordinal: idx };
+            }
+
+            for (idx = 0; idx < length; idx++) {
+               cell = data[idx];
+               if (cell) {
+                   result[cell.ordinal] = cell;
+               }
+            }
+
+            return result;
         }
     });
 
@@ -1171,42 +1195,12 @@ var __meta__ = {
             }
         },
 
-        _tempNormalizeData: function(data, columns, rows) {
-            var cell, idx, length;
-            var axesLength = (columns || 1) * (rows || 1);
-            var result = new Array(axesLength);
-
-            if (data.length === axesLength) {
-                return data;
-            }
-
-            for (idx = 0, length = result.length; idx < length; idx++) {
-                result[idx] = { value: "", fmtValue: "", ordinal: idx };
-            }
-
-            for (idx = 0, length = data.length; idx < length; idx++) {
-               cell = data[idx];
-               if (cell) {
-                   result[cell.ordinal] = cell;
-               }
-            }
-
-            return result;
-        },
-
         _processResult: function(data, axes) {
             if (this.cubeBuilder) {
                 var processedData = this.cubeBuilder.process(data, this._requestData);
 
                 data = processedData.data;
                 axes = processedData.axes;
-
-                axes = {
-                    columns: normalizeAxis(axes.columns),
-                    rows: normalizeAxis(axes.rows)
-                };
-
-                data = this._tempNormalizeData(data, axes.columns.tuples.length, axes.rows.tuples.length);
             }
 
             var columnIndexes, rowIndexes;
@@ -1242,13 +1236,15 @@ var __meta__ = {
             columnIndexes = this._normalizeTuples(axes.columns.tuples, this._axes.columns.tuples, this._columnMeasures());
             rowIndexes = this._normalizeTuples(axes.rows.tuples, this._axes.rows.tuples, this._rowMeasures());
 
-            data = this._normalizeData({
-                columnsLength: axes.columns.tuples.length,
-                rowsLength: axes.rows.tuples.length,
-                columnIndexes: columnIndexes,
-                rowIndexes: rowIndexes,
-                data: data
-            });
+            if (!this.cubeBuilder) {
+                data = this._normalizeData({
+                    columnsLength: axes.columns.tuples.length,
+                    rowsLength: axes.rows.tuples.length,
+                    columnIndexes: columnIndexes,
+                    rowIndexes: rowIndexes,
+                    data: data
+                });
+            }
 
             if (this._lastExpanded == "rows") {
                 tuples = axes.columns.tuples;

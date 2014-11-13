@@ -114,7 +114,7 @@
 
         var result = builder.process(data, { columns: [{ name: "name", expand: true }], rows: [{ name: "lastName", expand: true }] });
 
-        equal(result.data.length, 8);
+        equal(result.data.length, 9);
     });
 
     test("process data contains correct number of items - expanded on columns axis, no missing values", function() {
@@ -157,7 +157,7 @@
 
         var result = builder.process(data, { columns: [{ name: "name", expand: true }], rows: [{ name: "lastName", expand: true }] });
 
-        equal(result.data.length, 8);
+        equal(result.data.length, 9);
         equal(result.data[0].ordinal, 0);
         equal(result.data[1].ordinal, 1);
         equal(result.data[2].ordinal, 2);
@@ -165,7 +165,8 @@
         equal(result.data[4].ordinal, 4);
         equal(result.data[5].ordinal, 5);
         equal(result.data[6].ordinal, 6);
-        equal(result.data[7].ordinal, 8);
+        equal(result.data[7].ordinal, 7);
+        equal(result.data[8].ordinal, 8);
     });
 
     test("process data measure is calculated- expanded on columns axis, no missing values", function() {
@@ -386,7 +387,7 @@
             measures: [{ name: "Count" }]
         });
 
-        equal(result.data.length, 12);
+        equal(result.data.length, 15);
         equal(result.data[0].ordinal, 0, "ordinal 0");
         equal(result.data[0].value, 3, "ordinal 0");
         equal(result.data[1].ordinal, 1, "ordinal 1");
@@ -405,12 +406,18 @@
         equal(result.data[7].value, 2, "ordinal 7");
         equal(result.data[8].ordinal, 8, "ordinal 8");
         equal(result.data[8].value, 1, "ordinal 8");
-        equal(result.data[9].ordinal, 10, "ordinal 9");
-        equal(result.data[9].value, 1, "ordinal 9");
-        equal(result.data[10].ordinal, 13, "ordinal 10");
+        equal(result.data[9].ordinal, 9, "ordinal 9");
+        equal(result.data[9].value, "", "ordinal 9");
+        equal(result.data[10].ordinal, 10, "ordinal 10");
         equal(result.data[10].value, 1, "ordinal 10");
-        equal(result.data[11].ordinal, 14, "ordinal 11");
-        equal(result.data[11].value, 1, "ordinal 11");
+        equal(result.data[11].ordinal, 11, "ordinal 11");
+        equal(result.data[11].value, "", "ordinal 11");
+        equal(result.data[12].ordinal, 12, "ordinal 12");
+        equal(result.data[12].value, "", "ordinal 12");
+        equal(result.data[13].ordinal, 13, "ordinal 13");
+        equal(result.data[13].value, 1, "ordinal 13");
+        equal(result.data[14].ordinal, 14, "ordinal 14");
+        equal(result.data[14].value, 1, "ordinal 14");
     });
 
     test("dimension as array", function() {
@@ -585,7 +592,7 @@
             rows: [{ name: "lastName", expand: true }],
             measures: [{ name: "Measure1" }, { name: "Measure2" }] });
 
-        equal(result.data.length, 16);
+        equal(result.data.length, 18);
     });
 
     test("process data items are correctly formatted with multiple measures", function() {
@@ -819,7 +826,7 @@
 
         var result = builder.process(data, { rows: [{ name: "name", expand: true }], columns: [{ name: "lastName", expand: true }], measuresAxis: "rows", measures: [{ name: "Count" }, { name: "Sum" }]});
 
-        equal(result.data.length, 23);
+        equal(result.data.length, 24);
 
         equal(result.data[0].value, 3);
         equal(result.data[0].ordinal, 0);
