@@ -206,10 +206,10 @@ var __meta__ = {
             var container = $('<div class="k-state-default"><p class="k-reset"><span class="k-icon k-i-group"></span>' + this.options.messages.fieldsLabel + '</p></div>').appendTo(this.form);
 
             var that = this;
-            var template = '# if (item.type == 3 || item.type == 2 || item.type == 1) { #' +
-                           '<span class="k-icon k-i-#= (item.type == 3 || item.type == 1 ? \"dimension\" : \"sum\") #"></span>' +
-                           '# } else if (item.uniqueName == "[KPIs]") { #' +
-                           '<span class="k-icon k-i-kpi"></span>' +
+            var template = '# if (item.type == 2 || item.uniqueName == "[KPIs]") { #' +
+                           '<span class="k-icon k-i-#= (item.type == 2 ? \"sum\" : \"kpi\") #"></span>' +
+                           '# } else { #' +
+                           '<span class="k-icon k-i-dimension"></span>' +
                            '# } #' +
                            '#: item.name #';
 
