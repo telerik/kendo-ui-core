@@ -247,11 +247,55 @@
 
         equal(aggregatorContexts[0].dataItem, data[0]);
         equal(aggregatorContexts[0].index, 0);
-        equal(aggregatorContexts[0].length, 2);
 
         equal(aggregatorContexts[1].dataItem, data[1]);
         equal(aggregatorContexts[1].index, 1);
-        equal(aggregatorContexts[1].length, 2);
+    });
+
+    test("process data measure calls result function at the and", function() {
+        var aggregatorContexts = [];
+        var builder = new PivotCubeBuilder({
+            measures: {
+                Measure1: {
+                    caption: "Measure 1",
+                    field: "value",
+                    aggregate: function(value, state, context) {
+                       return value + state.currentValue;
+                    },
+                    result: function(state) {
+                        equal(state.currentValue, 3);
+                    }
+                }
+            }
+        });
+
+        var data = [{ name: "name1", lastName: "LastName1", value: 1 }, { name: "name2", lastName: "LastName1", value: 2 } ];
+
+        builder.process(data, { columns: [{ name: "name", expand: false }], rows: [], measures: [{ name: "Measure1" }] });
+    });
+
+    test("process data measure uses result function value", function() {
+        var aggregatorContexts = [];
+        var builder = new PivotCubeBuilder({
+            measures: {
+                Measure1: {
+                    caption: "Measure 1",
+                    field: "value",
+                    aggregate: function(value, state, context) {
+                       return value + state.currentValue;
+                    },
+                    result: function(state) {
+                        return 10;
+                    }
+                }
+            }
+        });
+
+        var data = [{ name: "name1", lastName: "LastName1", value: 1 }, { name: "name2", lastName: "LastName1", value: 2 } ];
+
+        var result = builder.process(data, { columns: [{ name: "name", expand: false }], rows: [], measures: [{ name: "Measure1" }] });
+
+        equal(result.data[0].value, 10);
     });
 
     test("process data measure format is applied", function() {

@@ -77,11 +77,13 @@
                                        field: "UnitPrice",
                                        format: "{0:c}",
                                        aggregate: function(value, state, context) {
-                                           if (context.index === (context.length - 1)) {
-                                               return (value + state.currentValue) / context.length;
-                                           } else {
-                                               return value + state.currentValue;
-                                           }
+                                           state.count = state.count || 1;
+                                           state.count += 1;
+
+                                           return value + state.currentValue;
+                                       },
+                                       result: function(state) {
+                                           return state.currentValue / state.count;
                                        }
                                     }
                                 }

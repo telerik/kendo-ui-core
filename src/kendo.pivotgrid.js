@@ -222,16 +222,17 @@ var __meta__ = {
         return members;
     }
 
-    function addDataCellVertical(result, rowIndex, map, key, formats, offset) {
-        var value, aggregate, columnKey, format, measuresCount = 0;
+    function addDataCellVertical(result, rowIndex, map, key, resultFuncs, formats, offset) {
+        var value, aggregate, columnKey, resultFunc, format, measuresCount = 0;
 
         var start = rowIndex;
 
         for (aggregate in map[key].aggregates) {
             value = map[key].aggregates[aggregate];
-            value = value.currentValue;
-
+            resultFunc = resultFuncs[aggregate];
             format = formats[aggregate];
+
+            value = resultFunc ? resultFunc(value) : value.currentValue;
 
             result[start] = {
                 ordinal: start,
@@ -251,9 +252,10 @@ var __meta__ = {
 
             for (aggregate in items[columnKey].aggregates) {
                 value = items[columnKey].aggregates[aggregate];
-                value = value.currentValue;
-
+                resultFunc = resultFuncs[aggregate];
                 format = formats[aggregate];
+
+                value = resultFunc ? resultFunc(value) : value.currentValue;
 
                 result[index] = {
                     ordinal: index,
@@ -265,14 +267,15 @@ var __meta__ = {
         }
     }
 
-    function addDataCell(result, rowIndex, map, key, formats) {
-        var value, aggregate, columnKey, format, measuresCount = 0;
+    function addDataCell(result, rowIndex, map, key, resultFuncs, formats) {
+        var value, aggregate, columnKey, resultFunc, format, measuresCount = 0;
 
         for (aggregate in map[key].aggregates) {
             value = map[key].aggregates[aggregate];
-            value = value.currentValue;
-
+            resultFunc = resultFuncs[aggregate];
             format = formats[aggregate];
+
+            value = resultFunc ? resultFunc(value) : value.currentValue;
 
             result[result.length] = {
                 ordinal: rowIndex++,
@@ -289,9 +292,10 @@ var __meta__ = {
 
             for (aggregate in items[columnKey].aggregates) {
                 value = items[columnKey].aggregates[aggregate];
-                value = value.currentValue;
-
+                resultFunc = resultFuncs[aggregate];
                 format = formats[aggregate];
+
+                value = resultFunc ? resultFunc(value) : value.currentValue;
 
                 result[result.length] = {
                     ordinal: rowIndex + index++,
@@ -438,6 +442,7 @@ var __meta__ = {
 
         _toDataArray: function(map, rowStartOffset, measures, offset, addFunc) {
             var formats = {};
+            var resultFuncs = {};
             var descriptors, measure, name;
 
             var idx = 0;
@@ -449,6 +454,10 @@ var __meta__ = {
                     name = measures[idx].name;
                     measure = descriptors[name];
 
+                    if (measure.result) {
+                        resultFuncs[name] = measure.result;
+                    }
+
                     if (measure.format) {
                         formats[name] = measure.format;
                     }
@@ -459,7 +468,7 @@ var __meta__ = {
             var items;
             var rowIndex = 0;
 
-            addFunc(result, rowIndex, map, ROW_TOTAL_KEY, formats, rowStartOffset);
+            addFunc(result, rowIndex, map, ROW_TOTAL_KEY, resultFuncs, formats, rowStartOffset);
 
             for (var key in map) {
                 if (key === ROW_TOTAL_KEY) {
@@ -467,7 +476,7 @@ var __meta__ = {
                 }
 
                 rowIndex += offset;
-                addFunc(result, rowIndex, map, key, formats, rowStartOffset);
+                addFunc(result, rowIndex, map, key, resultFuncs, formats, rowStartOffset);
             }
 
             return result;
@@ -584,6 +593,7 @@ var __meta__ = {
                         aggregators.push({
                             descriptor: descriptor,
                             caption: measure.caption,
+                            result: measure.result,
                             aggregator: createAggregateGetter(measure)
                         });
                     }
@@ -671,9 +681,8 @@ var __meta__ = {
                     dataItem = data[idx];
 
                     aggregatorContext = {
-                        index: idx,
-                        length: length,
-                        dataItem: dataItem
+                        dataItem: dataItem,
+                        index: idx
                     };
 
                     var rowTotal = aggregatedData[ROW_TOTAL_KEY] || {
