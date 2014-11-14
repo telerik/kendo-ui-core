@@ -5,12 +5,17 @@
     .Name("scheduler")
     .Date(new DateTime(2013,6 ,13))
     .StartTime(new DateTime(2013, 6, 13, 7, 00, 00))
+    .MajorTick(60)
     .Views(views =>
     {
-        views.TimelineView();
-        views.TimelineWeekView();
-        views.TimelineWorkWeekView();
-        views.TimelineMonthView();
+        views.TimelineView(timeline => timeline.EventHeight(50));
+        views.TimelineWeekView(timeline => timeline.EventHeight(50));
+        views.TimelineWorkWeekView(timeline => timeline.EventHeight(50));
+        views.TimelineMonthView(timeline => {
+            timeline.StartTime(new DateTime(2013, 6, 13, 00, 00, 00));
+            timeline.MajorTick(1440);
+            timeline.EventHeight(50);
+        });
     })
     .Timezone("Etc/UTC")
     .Group(group => group.Resources("Rooms", "Attendees").Orientation(SchedulerGroupOrientation.Vertical))

@@ -1,5 +1,6 @@
 ﻿namespace Kendo.Mvc.UI
 {
+    using System;
     using System.Collections.Generic;
 
     public abstract class SchedulerTimelineViewBase : SchedulerViewBase
@@ -21,9 +22,43 @@
             set;
         }
 
+        public int? MinorTickCount
+        {
+            get;
+            set;
+        }
+
+        public int? MajorTick
+        {
+            get;
+            set;
+        }
+
+        public DateTime? StartTime
+        {
+            get;
+            set;
+        }
+
+        public DateTime? EndTime
+        {
+            get;
+            set;
+        }
+
         protected override void Serialize(IDictionary<string, object> json)
         {
             base.Serialize(json);
+
+            if (MajorTick != null)
+            {
+                json["majorTick"] = MajorTick;
+            }
+
+            if (MinorTickCount != null)
+            {
+                json["minorTickCount"] = MinorTickCount;
+            }
 
             if (ColumnWidth != null)
             {
@@ -33,6 +68,16 @@
             if (EventHeight != null)
             {
                 json["eventHeight"] = EventHeight;
+            }
+
+            if (StartTime != null)
+            {
+                json["startTime"] = StartTime;
+            }
+
+            if (EndTime != null)
+            {
+                json["endTime"] = EndTime;
             }
         }
     }
