@@ -782,6 +782,8 @@ namespace Kendo.Mvc.Extensions
                 data = data.ParentsRecursive<TModel>(queryable, idSelector, parentIDSelector);
             }
 
+            var filteredData = data;
+
             if (rootSelector != null)
             {
                 data = data.Where(rootSelector);
@@ -808,7 +810,7 @@ namespace Kendo.Mvc.Extensions
 
                 foreach (IGrouping<T2, TModel> group in groups)
                 {
-                    result.AggregateResults.Add(Convert.ToString(group.Key), group.AggregateForLevel(queryable, aggregates, idSelector, parentIDSelector));                        
+                    result.AggregateResults.Add(Convert.ToString(group.Key), group.AggregateForLevel(filteredData, aggregates, idSelector, parentIDSelector));                        
                 }
             }            
         
