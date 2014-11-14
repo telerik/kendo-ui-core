@@ -1826,7 +1826,7 @@
                         if (item.isSelected) {
                             item.select(false);
                         } else {
-                            this.select(item, {addToSelection: true});
+                            this.select(item, { addToSelection: true });
                         }
                         if (this._isEditable) {
                             this._createToolBar();
@@ -4157,11 +4157,13 @@
                 this.window.element.on(CLICK + NS, "a.k-diagram-update", this._updateClickHandler);
             },
 
-            _updateClick: function() {
+            _updateClick: function(e) {
+                e.preventDefault();
                 this.trigger("update");
             },
 
-            _cancelClick: function () {
+            _cancelClick: function (e) {
+                e.preventDefault();
                 this.trigger("cancel");
             },
 
