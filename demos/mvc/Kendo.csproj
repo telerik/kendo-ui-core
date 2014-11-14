@@ -1158,6 +1158,7 @@
     <Content Include="Views\demos\scheduler\timeline.cshtml" />
     <Content Include="Views\demos\gantt\resources.cshtml" />
     <Content Include="Views\demos\radial-gauge\multiple-pointers.cshtml" />
+    <Content Include="Views\demos\diagram\editing.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="content\integration\diagram\js\" />

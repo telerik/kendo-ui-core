@@ -1,6 +1,54 @@
 <div id="example">
-        <div id="diagram"></div>
+    <div id="diagram"></div>
     <script>
+        var data = [{
+            firstName: "Antonio",
+            lastName: "Moreno",
+            image: "antonio.jpg",
+            title: "Team Lead",
+            colorScheme: "#1696d3",
+            items: [{
+                firstName: "Elizabeth",
+                image: "elizabeth.jpg",
+                lastName: "Brown",
+                title: "Design Lead",
+                colorScheme: "#ef6944",
+                items: [{
+                    firstName: "Ann",
+                    lastName: "Devon",
+                    image: "ann.jpg",
+                    title: "UI Designer",
+                    colorScheme: "#ef6944"
+                }]
+            }, {
+                firstName: "Diego",
+                lastName: "Roel",
+                image: "diego.jpg",
+                title: "QA Engineer",
+                colorScheme: "#ee587b",
+                items: [{
+                    firstName: "Fran",
+                    lastName: "Wilson",
+                    image: "fran.jpg",
+                    title: "QA Intern",
+                    colorScheme: "#ee587b"
+                }]
+            }, {
+                firstName: "Felipe",
+                lastName: "Izquiedro",
+                image: "felipe.jpg",
+                title: "Senior Developer",
+                colorScheme: "#75be16",
+                items: [{
+                    firstName: "Daniel",
+                    lastName: "Tonini",
+                    image: "daniel.jpg",
+                    title: "Developer",
+                    colorScheme: "#75be16"
+                }]
+            }]
+        }];
+
         function visualTemplate(options) {
             var dataviz = kendo.dataviz;
             var g = new dataviz.diagram.Group();
@@ -12,25 +60,25 @@
                 stroke: {
                     width: 0
                 },
-                fill: dataItem.ColorScheme
+                fill: dataItem.colorScheme
             }));
 
             g.append(new dataviz.diagram.TextBlock({
-                text: dataItem.FirstName + " " + dataItem.LastName,
+                text: dataItem.firstName + " " + dataItem.lastName,
                 x: 85,
                 y: 20,
-                color: "#fff"
+                fill: "#fff"
             }));
 
             g.append(new dataviz.diagram.TextBlock({
-                text: dataItem.Title,
+                text: dataItem.title,
                 x: 85,
                 y: 40,
-                color: "#fff"
+                fill: "#fff"
             }));
 
             g.append(new dataviz.diagram.Image({
-                source: "../content/dataviz/diagram/people/" + dataItem.Image,
+                source: "../content/dataviz/diagram/people/" + dataItem.image,
                 x: 3,
                 y: 3,
                 width: 68,
@@ -41,89 +89,15 @@
         }
 
         function createDiagram() {
-            var serviceRoot = "http://demos.telerik.com/kendo-ui/service";
-
-            var shapesDataSource = {
-                batch: false,
-                transport: {
-                    read: {
-                        url: serviceRoot + "/DiagramShapes",
-                        dataType: "jsonp"
-                    },
-                    update: {
-                        url: serviceRoot + "/DiagramShapes/Update",
-                        dataType: "jsonp"
-                    },
-                    destroy: {
-                        url: serviceRoot + "/DiagramShapes/Destroy",
-                        dataType: "jsonp"
-                    },
-                    create: {
-                        url: serviceRoot + "/DiagramShapes/Create",
-                        dataType: "jsonp"
-                    },
-                    parameterMap: function (options, operation) {
-                        if (operation !== "read") {
-                            return { models: kendo.stringify(options.models || [options]) };
-                        }
-                    }
-                },
-                schema: {
-                    model: {
-                        id: "id",
-                        fields: {
-                            id: { from: "Id", type: "number", editable: false },
-                            FirstName: { type: "string" },
-                            LastName: { type: "string" },
-                            Title: { type: "string" },
-                            Image: { type: "string" },
-                            ColorScheme: { type: "string" },
-                        }
-                    }
-                }
-            };
-
-            var connectionsDataSource = {
-                batch: false,
-                transport: {
-                    read: {
-                        url: serviceRoot + "/DiagramConnections",
-                        dataType: "jsonp"
-                    },
-                    update: {
-                        url: serviceRoot + "/DiagramConnections/Update",
-                        dataType: "jsonp"
-                    },
-                    destroy: {
-                        url: serviceRoot + "/DiagramConnections/Destroy",
-                        dataType: "jsonp"
-                    },
-                    create: {
-                        url: serviceRoot + "/DiagramConnections/Create",
-                        dataType: "jsonp"
-                    },
-                    parameterMap: function (options, operation) {
-                        if (operation !== "read") {
-                            return { models: kendo.stringify(options.models || [options]) };
-                        }
-                    }
-                },
-                schema: {
-                    model: {
-                        id: "id",
-                        fields: {
-                            id: { from: "Id", type: "number", editable: false },
-                            from: { from: "From", type: "number" },
-                            to: { from: "To", type: "number" },
-                            Text: { from: "Text", type: "string" }
-                        }
-                    }
-                }
-            };
-
             $("#diagram").kendoDiagram({
-                dataSource: shapesDataSource,
-                connectionsDataSource: connectionsDataSource,
+                dataSource: new kendo.data.HierarchicalDataSource({
+                    data: data,
+                    schema: {
+                        model: {
+                            children: "items"
+                        }
+                    }
+                }),
                 layout: {
                     type: "layered"
                 },
@@ -137,6 +111,9 @@
                     }
                 }
             });
+
+            var diagram = $("#diagram").getKendoDiagram();
+            diagram.bringIntoView(diagram.shapes);
         }
 
         $(document).ready(createDiagram);
