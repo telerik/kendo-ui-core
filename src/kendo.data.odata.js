@@ -25,7 +25,7 @@ var __meta__ = {
             endswith: "endswith",
             startswith: "startswith"
         },
-        odataFiltersVersionFour = extend(odataFilters, {
+        odataFiltersVersionFour = extend({}, odataFilters, {
             contains: "contains"
         }),
         mappers = {
