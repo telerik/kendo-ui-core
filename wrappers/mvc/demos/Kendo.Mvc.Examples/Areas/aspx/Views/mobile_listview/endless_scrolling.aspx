@@ -29,11 +29,13 @@
 <style scoped>
     .product h3 {
         font-size: 1.3em;
+        font-weight: normal;
         line-height: 1.4em;
         margin: 0;
-        padding: .7em 0 0;
-        height: 1.3em;
+        padding: .5em 0 0;
         overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
     .product p {
         font-size: 1em;
@@ -45,8 +47,8 @@
         height: 64px;
         border-radius: 3px;
         float: left;
-        margin-right: 1.3em;
-    }    
+        margin-right: 1em;
+    }   
 </style>
 
 </asp:Content>
