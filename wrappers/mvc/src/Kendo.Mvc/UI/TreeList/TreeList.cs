@@ -31,7 +31,13 @@ namespace Kendo.Mvc.UI
                 
             Editable = new TreeListEditableSettings<T>();
                 
+            Excel = new TreeListExcelSettings();
+                
             Filterable = new TreeListFilterableSettings();
+                
+            Messages = new TreeListMessagesSettings();
+                
+            Pdf = new TreeListPdfSettings();
                 
             Sortable = new TreeListSortableSettings();
                 
@@ -55,6 +61,18 @@ namespace Kendo.Mvc.UI
         }
         
         public bool? AutoBind { get; set; }
+        
+        public TreeListMessagesSettings Messages
+        {
+            get;
+            set;
+        }
+        
+        public TreeListPdfSettings Pdf
+        {
+            get;
+            set;
+        }
         
         public bool? Scrollable { get; set; }
         
@@ -86,6 +104,12 @@ namespace Kendo.Mvc.UI
             set;
         }
         
+        public TreeListExcelSettings Excel
+        {
+            get;
+            set;
+        }
+        
         //<< Fields
 
         public override void WriteInitializationScript(TextWriter writer)
@@ -108,6 +132,16 @@ namespace Kendo.Mvc.UI
                 json["autoBind"] = AutoBind;
             }
                 
+            var messages = Messages.ToJson();
+            if (messages.Any())
+            {
+                json["messages"] = messages;
+            }
+            var pdf = Pdf.ToJson();
+            if (pdf.Any())
+            {
+                json["pdf"] = pdf;
+            }
             if (Scrollable.HasValue)
             {
                 json["scrollable"] = Scrollable;
@@ -152,6 +186,11 @@ namespace Kendo.Mvc.UI
                 json["editable"] = Editable.Enabled;
             }
 
+            var excel = Excel.ToJson();
+            if (excel.Any())
+            {
+                json["excel"] = excel;
+            }
         //<< Serialization
 
             writer.Write(Initializer.Initialize(Selector, "TreeList", json));

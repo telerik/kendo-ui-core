@@ -46,6 +46,26 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
+        /// Defines the text of the command buttons that are shown within the TreeList. Used primarily for localization.
+        /// </summary>
+        /// <param name="configurator">The action that configures the messages.</param>
+        public TreeListBuilder<T> Messages(Action<TreeListMessagesSettingsBuilder<T>> configurator)
+        {
+            configurator(new TreeListMessagesSettingsBuilder<T>(container.Messages));
+            return this;
+        }
+        
+        /// <summary>
+        /// Configures the Kendo UI TreeList PDF export settings.
+        /// </summary>
+        /// <param name="configurator">The action that configures the pdf.</param>
+        public TreeListBuilder<T> Pdf(Action<TreeListPdfSettingsBuilder<T>> configurator)
+        {
+            configurator(new TreeListPdfSettingsBuilder<T>(container.Pdf));
+            return this;
+        }
+        
+        /// <summary>
         /// If set to true the grid will display a scrollbar when the total row height (or width) exceeds the grid height (or width). By default scrolling is enabled.Can be set to a JavaScript object which represents the scrolling configuration.
         /// </summary>
         /// <param name="value">The value that configures the scrollable.</param>
@@ -179,6 +199,16 @@ namespace Kendo.Mvc.UI.Fluent
             container.Editable.Enabled = true;
             
             configurator(new TreeListEditableSettingsBuilder<T>(container.Editable));
+            return this;
+        }
+        
+        /// <summary>
+        /// Configures the Kendo UI TreeList Excel export settings.
+        /// </summary>
+        /// <param name="configurator">The action that configures the excel.</param>
+        public TreeListBuilder<T> Excel(Action<TreeListExcelSettingsBuilder<T>> configurator)
+        {
+            configurator(new TreeListExcelSettingsBuilder<T>(container.Excel));
             return this;
         }
         

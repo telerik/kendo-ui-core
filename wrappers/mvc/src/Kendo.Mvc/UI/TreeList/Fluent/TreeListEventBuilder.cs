@@ -16,6 +16,17 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Handlers
         
         /// <summary>
+        /// Fired when an item is about to be collapsed.The event handler function context (available via the this keyword) will be set to the widget instance.
+        /// </summary>
+        /// <param name="handler">The name of the JavaScript function that will handle the collapse event.</param>
+        public TreeListEventBuilder Collapse(string handler)
+        {
+            Handler("collapse", handler);
+
+            return this;
+        }
+        
+        /// <summary>
         /// Fired before the widget binds to its data source.The event handler function context (available via the this keyword) will be set to the widget instance.
         /// </summary>
         /// <param name="handler">The name of the JavaScript function that will handle the dataBinding event.</param>
@@ -33,6 +44,17 @@ namespace Kendo.Mvc.UI.Fluent
         public TreeListEventBuilder DataBound(string handler)
         {
             Handler("dataBound", handler);
+
+            return this;
+        }
+        
+        /// <summary>
+        /// Fired when an item is about to be expanded.The event handler function context (available via the this keyword) will be set to the widget instance.
+        /// </summary>
+        /// <param name="handler">The name of the JavaScript function that will handle the expand event.</param>
+        public TreeListEventBuilder Expand(string handler)
+        {
+            Handler("expand", handler);
 
             return this;
         }

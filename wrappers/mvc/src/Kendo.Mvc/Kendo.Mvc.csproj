@@ -2370,4 +2370,4 @@
     <Compile Include="UI\Diagram\Settings\DiagramConnectionContentSettings.cs" />
     <Compile Include="UI\Diagram\Fluent\DiagramConnectionContentSettingsBuilder.cs" />
   </ItemGroup>
-</Project>
+<ItemGroup><Compile Include="UI\TreeList\Settings\TreeListExcelSettings.cs" /><Compile Include="UI\TreeList\Fluent\TreeListExcelSettingsBuilder.cs" /><Compile Include="UI\TreeList\Settings\TreeListMessagesSettings.cs" /><Compile Include="UI\TreeList\Fluent\TreeListMessagesSettingsBuilder.cs" /><Compile Include="UI\TreeList\Settings\TreeListMessagesCommandsSettings.cs" /><Compile Include="UI\TreeList\Fluent\TreeListMessagesCommandsSettingsBuilder.cs" /><Compile Include="UI\TreeList\Settings\TreeListPdfSettings.cs" /><Compile Include="UI\TreeList\Fluent\TreeListPdfSettingsBuilder.cs" /><Compile Include="UI\TreeList\Settings\TreeListPdfMarginSettings.cs" /><Compile Include="UI\TreeList\Fluent\TreeListPdfMarginSettingsBuilder.cs" /></ItemGroup></Project>
