@@ -981,11 +981,6 @@
             ok(textNode.render().indexOf("font:arial;") > -1);
         });
 
-        test("replaces single quotes in font", function() {
-            text.options.set("font", "'arial'");
-            contains(textNode.render(), "font:\"arial\";");
-        });
-
         test("renders transformation", function() {
             text.transform(g.transform(new Matrix(1,1,1,1,1,1)));
             ok(textNode.render().indexOf("transform='matrix(1,1,1,1,1,1)'") > -1);
@@ -1272,6 +1267,13 @@
             group = new d.Text("Foo &amp; Bar", [0, 0]);
             d.exportSVG(group, { raw: true }).done(function(svg) {
                 contains(svg, "Foo &amp; Bar");
+            });
+        });
+
+        test("encodes entites in font name", function() {
+            group = new d.Text("Foo", [0, 0], { font: "'serif'" });
+            d.exportSVG(group, { raw: true }).done(function(svg) {
+                contains(svg, "font:&#39;serif&#39;;");
             });
         });
 

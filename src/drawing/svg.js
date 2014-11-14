@@ -832,7 +832,11 @@
         mapStyle: function() {
             var style = PathNode.fn.mapStyle.call(this);
             var font = this.srcElement.options.font;
-            font = font.replace(/'/g, "\"");
+            var options = this.root().options;
+            if (options && options.encodeText) {
+                font = kendo.htmlEncode(font);
+            }
+
             style.push(["font", font]);
 
             return style;
@@ -860,7 +864,7 @@
             "<text #= d.renderStyle() # #= d.renderOpacity() # " +
             "x='#= this.pos().x #' y='#= this.pos().y #' " +
             "#= d.renderStroke() # " +
-            "#=  d.renderTransform() # " +
+            "#= d.renderTransform() # " +
             "#= d.renderDefinitions() # " +
             "#= d.renderFill() #><tspan>#= d.content() #</tspan></text>"
         )
