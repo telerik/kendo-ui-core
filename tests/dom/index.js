@@ -223,6 +223,13 @@
         equal(root.firstChild.style.cssText, "");
     });
 
+    test("render removes class attribute", function() {
+        tree.render([element("div", { className: "test" })]);
+        tree.render([element("div", null)]);
+
+        equal(root.firstChild.className, "");
+    });
+
     test("render outputs html child node", function() {
         tree.render([html("<b>foo</b>")]);
 

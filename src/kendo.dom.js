@@ -115,10 +115,12 @@ var __meta__ = {
             for (attrName in cached.attr) {
                 if (attr[attrName] === undefined) {
                     if (node[attrName] !== undefined) {
-                        if (attrName !== "style") {
-                            node.removeAttribute(attrName);
-                        } else {
+                        if (attrName === "style") {
                             node.style.cssText = "";
+                        } else if (attrName === "className") {
+                            node[attrName] = "";
+                        } else {
+                            node.removeAttribute(attrName);
                         }
                     } else {
                         node.removeAttribute(attrName);
