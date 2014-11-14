@@ -73,6 +73,96 @@
 
     // ------------------------------------------------------------
     (function() {
+        function tapEvent(x, y) {
+            return {
+                x: {
+                    location: x
+                },
+                y: {
+                    location: y
+                }
+            };
+        }
+
+        module("Diagram / tap", {
+            setup: function() {
+                setup();
+            },
+            teardown: teardown
+        });
+
+        test("converts point", function(e) {
+            var expected = diagram.documentToModel(new Point(10, 20));
+            diagram.toolService._updateHoveredItem = function(actual) {
+                equal(expected.x, actual.x);
+                equal(expected.y, actual.y);
+            };
+            diagram._tap(tapEvent(10, 20));
+        });
+
+        test("selects the hovered item", function(e) {
+            stubMethod(diagram, "select", function(item, options) {
+                if (item) {
+                    equal(item, "foo");
+                    equal(options.addToSelection, true);
+                } else {
+                    return [];
+                }
+            }, function() {
+                diagram.toolService._updateHoveredItem = function() {
+                    this.hoveredItem = "foo";
+                };
+                diagram._tap(tapEvent(10, 20));
+            });
+
+        });
+
+        test("does not select item if no item is hovered", 0, function(e) {
+            stubMethod(diagram, "select", function(item, options) {
+                if (item) {
+                    ok(false);
+                }
+            }, function() {
+                diagram.toolService._updateHoveredItem = $.noop;
+                diagram._tap(tapEvent(10, 20));
+            });
+        });
+
+        test("deselects already selected item", function(e) {
+            var item = {
+                isSelected: true,
+                select: function(e) {
+                    equal(e, false);
+                }
+            };
+            diagram.toolService._updateHoveredItem = function() {
+                this.hoveredItem = item;
+            };
+            diagram._tap(tapEvent(10, 20));
+        });
+
+        test("triggers click if there is a hovered item", function(e) {
+            diagram.toolService._updateHoveredItem = function() {
+                this.hoveredItem = "foo";
+            };
+            diagram.bind("click", function(e) {
+                equal(e.item, "foo");
+            });
+            diagram._tap(tapEvent(10, 20));
+        });
+
+        test("does triggers click if there is not a hovered item", 0, function(e) {
+            diagram.toolService._updateHoveredItem = $.noop;
+            diagram.bind("click", function(e) {
+                ok(false);
+            });
+            diagram._tap(tapEvent(10, 20));
+        });
+
+    })();
+
+    // ------------------------------------------------------------
+    (function() {
         var MOBILE_ZOOM_RATE = 0.05;
         var MOBILE_PAN_DISTANCE = 5;
         var gesture;

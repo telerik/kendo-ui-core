@@ -1816,13 +1816,13 @@
             },
 
             _tap: function(e) {
-                if (this.options.selectable !== false) {
-                    var toolService = this.toolService;
-                    var p = this._caculateMobilePosition(e);
-                    this._destroyToolBar();
-                    toolService._updateHoveredItem(p);
-                    if (toolService.hoveredItem) {
-                        var item = toolService.hoveredItem;
+                var toolService = this.toolService;
+                var p = this._caculateMobilePosition(e);
+                toolService._updateHoveredItem(p);
+                if (toolService.hoveredItem) {
+                    var item = toolService.hoveredItem;
+                    if (this.options.selectable !== false) {
+                        this._destroyToolBar();
                         if (item.isSelected) {
                             item.select(false);
                         } else {
@@ -1830,6 +1830,10 @@
                         }
                         this._createToolBar();
                     }
+                    this.trigger("click", {
+                        item: item,
+                        point: p
+                    });
                 }
             },
 
