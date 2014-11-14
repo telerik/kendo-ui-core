@@ -981,6 +981,11 @@
             ok(textNode.render().indexOf("font:arial;") > -1);
         });
 
+        test("replaces single quotes in font", function() {
+            text.options.set("font", "'arial'");
+            contains(textNode.render(), "font:\"arial\";");
+        });
+
         test("renders transformation", function() {
             text.transform(g.transform(new Matrix(1,1,1,1,1,1)));
             ok(textNode.render().indexOf("transform='matrix(1,1,1,1,1,1)'") > -1);

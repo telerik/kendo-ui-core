@@ -831,7 +831,9 @@
 
         mapStyle: function() {
             var style = PathNode.fn.mapStyle.call(this);
-            style.push(["font", this.srcElement.options.font]);
+            var font = this.srcElement.options.font;
+            font = font.replace(/'/g, "\"");
+            style.push(["font", font]);
 
             return style;
         },
