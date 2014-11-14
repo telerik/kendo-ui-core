@@ -19,12 +19,12 @@ This is the entire visible area of the gauge.
     }
 
     /**
-    * The pointer configuration options.
-    * @param \Kendo\Dataviz\UI\RadialGaugePointer|array $value
+    * Adds RadialGaugePointerItem to the RadialGauge.
+    * @param \Kendo\Dataviz\UI\RadialGaugePointerItem|array,... $value one or more RadialGaugePointerItem to add.
     * @return \Kendo\Dataviz\UI\RadialGauge
     */
-    public function pointer($value) {
-        return $this->setProperty('pointer', $value);
+    public function addPointerItem($value) {
+        return $this->add('pointer', func_get_args());
     }
 
     /**
@@ -57,6 +57,15 @@ If it is not supported by the browser, the Gauge will switch to the first availa
 
 
 //<< Properties
+
+    /**
+    * The pointer configuration options.
+    * @param \Kendo\Dataviz\UI\RadialGaugePointer|array $value
+    * @return \Kendo\Dataviz\UI\RadialGauge
+    */
+    public function pointer($value) {
+        return $this->setProperty('pointer', $value);
+    }
 }
 
 ?>

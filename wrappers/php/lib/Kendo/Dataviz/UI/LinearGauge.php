@@ -19,12 +19,12 @@ This is the entire visible area of the gauge.
     }
 
     /**
-    * The pointer configuration options.
-    * @param \Kendo\Dataviz\UI\LinearGaugePointer|array $value
+    * Adds LinearGaugePointerItem to the LinearGauge.
+    * @param \Kendo\Dataviz\UI\LinearGaugePointerItem|array,... $value one or more LinearGaugePointerItem to add.
     * @return \Kendo\Dataviz\UI\LinearGauge
     */
-    public function pointer($value) {
-        return $this->setProperty('pointer', $value);
+    public function addPointerItem($value) {
+        return $this->add('pointer', func_get_args());
     }
 
     /**
@@ -57,6 +57,15 @@ If it is not supported by the browser, the Gauge will switch to the first availa
 
 
 //<< Properties
+
+    /**
+    * The pointer configuration options.
+    * @param \Kendo\Dataviz\UI\LinearGaugePointer|array $value
+    * @return \Kendo\Dataviz\UI\LinearGauge
+    */
+    public function pointer($value) {
+        return $this->setProperty('pointer', $value);
+    }
 }
 
 ?>
