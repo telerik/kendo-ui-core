@@ -59,9 +59,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// Set the url of the server side proxy. The proxy is responsible for returning the PDF to the end user. Used in browsers that don't support saving files from JavaScript.
         /// </summary>
         /// <param name="url"></param>
-        public PDFSettingsBuilder ProxyUrl(string url)
+        public PDFSettingsBuilder ProxyURL(string url)
         {
-            pdf.ProxyUrl = url;
+            pdf.ProxyURL = url;
 
             return this;
         }
