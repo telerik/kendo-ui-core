@@ -604,6 +604,30 @@ namespace Kendo.Mvc.Extensions
             }
         }
 
+        public static TreeDataSourceResult ToTreeDataSourceResult(this IEnumerable enumerable, DataSourceRequest request)
+        {
+            return enumerable.AsQueryable().ToTreeDataSourceResult(request, null);
+        }
+
+        public static TreeDataSourceResult ToTreeDataSourceResult(this IEnumerable enumerable, DataSourceRequest request, ModelStateDictionary modelState)
+        {
+            return enumerable.AsQueryable().CreateTreeDataSourceResult<object, object, object, object>(request, null, null, modelState, null, null);
+        }
+
+        public static TreeDataSourceResult ToTreeDataSourceResult<TModel, TResult>(this IQueryable<TModel> enumerable,
+            DataSourceRequest request,
+            Func<TModel, TResult> selector)
+        {
+            return enumerable.ToTreeDataSourceResult<TModel, object, object, TResult>(request, null, null, selector);
+        }
+
+        public static TreeDataSourceResult ToTreeDataSourceResult<TModel, TResult>(this IEnumerable<TModel> enumerable,
+            DataSourceRequest request,
+            Func<TModel, TResult> selector)
+        {
+            return enumerable.ToTreeDataSourceResult<TModel, object, object, TResult>(request, null, null, selector);
+        }
+
         public static TreeDataSourceResult ToTreeDataSourceResult<TModel, T1, T2>(this IQueryable<TModel> enumerable,
             DataSourceRequest request,
             Expression<Func<TModel, T1>> idSelector,
@@ -616,19 +640,19 @@ namespace Kendo.Mvc.Extensions
             DataSourceRequest request,
             Expression<Func<TModel, T1>> idSelector,
             Expression<Func<TModel, T2>> parentIDSelector,
-            Expression<Func<TModel, bool>> idFilter)
+            Expression<Func<TModel, bool>> rootSelector)
         {
-            return enumerable.CreateTreeDataSourceResult<TModel, T1, T2, TModel>(request, idSelector, parentIDSelector, null, null, idFilter);
+            return enumerable.CreateTreeDataSourceResult<TModel, T1, T2, TModel>(request, idSelector, parentIDSelector, null, null, rootSelector);
         }
 
         public static TreeDataSourceResult ToTreeDataSourceResult<TModel, T1, T2, TResult>(this IQueryable<TModel> queryable,
             DataSourceRequest request,
             Expression<Func<TModel, T1>> idSelector,
             Expression<Func<TModel, T2>> parentIDSelector,
-            Expression<Func<TModel, bool>> idFilter,
+            Expression<Func<TModel, bool>> rootSelector,
             Func<TModel, TResult> selector)
         {
-            return queryable.CreateTreeDataSourceResult(request, idSelector, parentIDSelector, null, selector, idFilter);
+            return queryable.CreateTreeDataSourceResult(request, idSelector, parentIDSelector, null, selector, rootSelector);
         }
 
         public static TreeDataSourceResult ToTreeDataSourceResult<TModel, T1, T2>(this IQueryable<TModel> queryable,
@@ -644,10 +668,10 @@ namespace Kendo.Mvc.Extensions
             DataSourceRequest request,
             Expression<Func<TModel, T1>> idSelector,
             Expression<Func<TModel, T2>> parentIDSelector,
-            Expression<Func<TModel, bool>> idFilter,
+            Expression<Func<TModel, bool>> rootSelector,
             ModelStateDictionary modelState)
         {
-            return enumerable.CreateTreeDataSourceResult<TModel, T1, T2, TModel>(request, idSelector, parentIDSelector, modelState, null, idFilter);
+            return enumerable.CreateTreeDataSourceResult<TModel, T1, T2, TModel>(request, idSelector, parentIDSelector, modelState, null, rootSelector);
         }
 
         public static TreeDataSourceResult ToTreeDataSourceResult<TModel, T1, T2, TResult>(this IQueryable<TModel> queryable,
@@ -673,11 +697,11 @@ namespace Kendo.Mvc.Extensions
             DataSourceRequest request,
             Expression<Func<TModel, T1>> idSelector,
             Expression<Func<TModel, T2>> parentIDSelector,
-            Expression<Func<TModel, bool>> idFilter,
+            Expression<Func<TModel, bool>> rootSelector,
             ModelStateDictionary modelState,
             Func<TModel, TResult> selector)
         {
-            return queryable.CreateTreeDataSourceResult(request, idSelector, parentIDSelector, modelState, selector, idFilter);
+            return queryable.CreateTreeDataSourceResult(request, idSelector, parentIDSelector, modelState, selector, rootSelector);
         }
 
         public static TreeDataSourceResult ToTreeDataSourceResult<TModel, T1, T2>(this IEnumerable<TModel> enumerable,
@@ -692,19 +716,19 @@ namespace Kendo.Mvc.Extensions
             DataSourceRequest request,
             Expression<Func<TModel, T1>> idSelector,
             Expression<Func<TModel, T2>> parentIDSelector,
-            Expression<Func<TModel, bool>> idFilter)
+            Expression<Func<TModel, bool>> rootSelector)
         {
-            return enumerable.AsQueryable().CreateTreeDataSourceResult<TModel, T1, T2, TModel>(request, idSelector, parentIDSelector, null, null, idFilter);
+            return enumerable.AsQueryable().CreateTreeDataSourceResult<TModel, T1, T2, TModel>(request, idSelector, parentIDSelector, null, null, rootSelector);
         }
 
         public static TreeDataSourceResult ToTreeDataSourceResult<TModel, T1, T2, TResult>(this IEnumerable<TModel> queryable,
             DataSourceRequest request,
             Expression<Func<TModel, T1>> idSelector,
             Expression<Func<TModel, T2>> parentIDSelector,
-            Expression<Func<TModel, bool>> idFilter,
+            Expression<Func<TModel, bool>> rootSelector,
             Func<TModel, TResult> selector)
         {
-            return queryable.AsQueryable().CreateTreeDataSourceResult(request, idSelector, parentIDSelector, null, selector, idFilter);
+            return queryable.AsQueryable().CreateTreeDataSourceResult(request, idSelector, parentIDSelector, null, selector, rootSelector);
         }
 
         public static TreeDataSourceResult ToTreeDataSourceResult<TModel, T1, T2>(this IEnumerable<TModel> queryable,
@@ -720,10 +744,10 @@ namespace Kendo.Mvc.Extensions
             DataSourceRequest request,
             Expression<Func<TModel, T1>> idSelector,
             Expression<Func<TModel, T2>> parentIDSelector,
-            Expression<Func<TModel, bool>> idFilter,
+            Expression<Func<TModel, bool>> rootSelector,
             ModelStateDictionary modelState)
         {
-            return enumerable.AsQueryable().CreateTreeDataSourceResult<TModel, T1, T2, TModel>(request, idSelector, parentIDSelector, modelState, null, idFilter);
+            return enumerable.AsQueryable().CreateTreeDataSourceResult<TModel, T1, T2, TModel>(request, idSelector, parentIDSelector, modelState, null, rootSelector);
         }
 
         public static TreeDataSourceResult ToTreeDataSourceResult<TModel, T1, T2, TResult>(this IEnumerable<TModel> queryable,
@@ -749,11 +773,11 @@ namespace Kendo.Mvc.Extensions
             DataSourceRequest request,
             Expression<Func<TModel, T1>> idSelector,
             Expression<Func<TModel, T2>> parentIDSelector,
-            Expression<Func<TModel, bool>> idFilter,
+            Expression<Func<TModel, bool>> rootSelector,
             ModelStateDictionary modelState,
             Func<TModel, TResult> selector)
         {
-            return queryable.AsQueryable().CreateTreeDataSourceResult(request, idSelector, parentIDSelector, modelState, selector, idFilter);
+            return queryable.AsQueryable().CreateTreeDataSourceResult(request, idSelector, parentIDSelector, modelState, selector, rootSelector);
         }
 
         private static TreeDataSourceResult CreateTreeDataSourceResult<TModel, T1, T2, TResult>(this IQueryable queryable,
