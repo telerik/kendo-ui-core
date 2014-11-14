@@ -715,7 +715,11 @@
     <Compile Include="UI\CheckBox\Fluent\CheckBoxBuilder.cs" />
     <Compile Include="UI\CheckBox\Html\CheckBoxHtmlBuilder.cs" />
     <Compile Include="UI\CheckBox\CheckBox.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramPdfMarginSettingsBuilder.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramPdfSettingsBuilder.cs" />
     <Compile Include="UI\Diagram\Settings\DiagramEditableResizeHandlesHoverStrokeSettings.cs" />
+    <Compile Include="UI\Diagram\Settings\DiagramPdfMarginSettings.cs" />
+    <Compile Include="UI\Diagram\Settings\DiagramPdfSettings.cs" />
     <Compile Include="UI\Gantt\Columns\GanttResourceColumn.cs" />
     <Compile Include="UI\Gantt\Fluent\GanttAssignmentsDataSourceBuilder.cs" />
     <Compile Include="UI\Gantt\Fluent\GanttResourceColumnBuilder.cs" />
