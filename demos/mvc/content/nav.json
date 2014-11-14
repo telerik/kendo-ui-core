@@ -8299,6 +8299,22 @@
           "!jsp",
           "!php"
         ]
+      },
+      {
+        "text": "Multiple pointers",
+        "url": "linear-gauge/multiple-pointers",
+        "title": {
+            "kendo-ui": "Kendo UI Linear Gauge multiple pointers demo",
+            "aspnet-mvc": "ASP.NET MVC Linear Gauge multiple pointers demo"
+        },
+        "meta": {
+            "kendo-ui": "This example shows how easily you can configure the Linear gauge to use multiple pointers.",
+            "aspnet-mvc": "This example shows how easily you can configure the ASP.NET MVC Linear gauge to use multiple pointers."
+        },
+        "packages": [
+          "!mvc",
+          "!jsp"
+        ]
       }
     ],
     "category": "Data Visualization"
@@ -8365,8 +8381,7 @@
         },
         "packages": [
           "!mvc",
-          "!jsp",
-          "!php"
+          "!jsp"
         ]
       },
       {

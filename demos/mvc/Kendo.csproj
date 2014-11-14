@@ -1165,6 +1165,7 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="Views\demos\diagram\export.cshtml" />
+    <Content Include="Views\demos\linear-gauge\multiple-pointers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="content\integration\diagram\js\" />
