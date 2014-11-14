@@ -211,6 +211,7 @@
     <Compile Include="..\shared\CommonAssemblyInfo.cs">
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Extensions\TreeDataSourceExtensions.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\MemberExpressionExtensions.cs" />
     <Compile Include="Extensions\ModelStateExtensions.cs" />
@@ -709,6 +710,7 @@
     <Compile Include="UI\ComboBox\Fluent\ComboBoxEventBuilder.cs" />
     <Compile Include="UI\ContextMenu\ContextMenuDirection.cs" />
     <Compile Include="UI\ContextMenu\ContextMenuOrientation.cs" />
+    <Compile Include="UI\DataSource\TreeDataSourceResult.cs" />
     <Compile Include="UI\DataSource\Fluent\DataSourceTreeListModelDescriptorFactory.cs" />
     <Compile Include="UI\CheckBox\Fluent\CheckBoxBuilder.cs" />
     <Compile Include="UI\CheckBox\Html\CheckBoxHtmlBuilder.cs" />

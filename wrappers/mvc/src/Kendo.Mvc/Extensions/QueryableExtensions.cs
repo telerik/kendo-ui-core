@@ -527,6 +527,32 @@ namespace Kendo.Mvc.Extensions
                     Expression.Constant(index)));
         }
 
+        /// <summary>
+        /// Produces the set union of two sequences by using the default equality comparer.        
+        /// </summary>
+        /// <returns>        
+        /// An <see cref="IQueryable" /> that contains the elements from both input sequences, excluding duplicates.
+        /// </returns>
+        /// <param name="source">
+        /// An <see cref="IQueryable" /> whose distinct elements form the first set for the union.
+        /// </param>
+        /// <param name="second">
+        /// An <see cref="IQueryable" /> whose distinct elements form the first set for the union.
+        /// </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="source" /> is null.</exception>
+        public static IQueryable Union(this IQueryable source, IQueryable second)
+        {
+            IQueryable query = source.Provider.CreateQuery(
+                Expression.Call(
+                    typeof(Queryable),
+                    "Union",
+                    new[] { source.ElementType },
+                    source.Expression,
+                    second.Expression));
+
+            return query;
+        }
+
         private static IEnumerable Execute<TModel, TResult>(this IQueryable source, Func<TModel, TResult> selector)
         {
             if (source == null) throw new ArgumentNullException("source");
@@ -578,7 +604,7 @@ namespace Kendo.Mvc.Extensions
             }
         }
 
-        public static DataSourceResult ToTreeDataSourceResult<TModel, T1, T2>(this IQueryable<TModel> enumerable,
+        public static TreeDataSourceResult ToTreeDataSourceResult<TModel, T1, T2>(this IQueryable<TModel> enumerable,
             DataSourceRequest request,
             Expression<Func<TModel, T1>> idSelector,
             Expression<Func<TModel, T2>> parentIDSelector)
@@ -586,7 +612,7 @@ namespace Kendo.Mvc.Extensions
             return enumerable.CreateTreeDataSourceResult<TModel, T1, T2, TModel>(request, idSelector, parentIDSelector, null, null, null);
         }
 
-        public static DataSourceResult ToTreeDataSourceResult<TModel, T1, T2>(this IQueryable<TModel> enumerable,
+        public static TreeDataSourceResult ToTreeDataSourceResult<TModel, T1, T2>(this IQueryable<TModel> enumerable,
             DataSourceRequest request,
             Expression<Func<TModel, T1>> idSelector,
             Expression<Func<TModel, T2>> parentIDSelector,
@@ -595,7 +621,7 @@ namespace Kendo.Mvc.Extensions
             return enumerable.CreateTreeDataSourceResult<TModel, T1, T2, TModel>(request, idSelector, parentIDSelector, null, null, idFilter);
         }
 
-        public static DataSourceResult ToTreeDataSourceResult<TModel, T1, T2, TResult>(this IQueryable<TModel> queryable,
+        public static TreeDataSourceResult ToTreeDataSourceResult<TModel, T1, T2, TResult>(this IQueryable<TModel> queryable,
             DataSourceRequest request,
             Expression<Func<TModel, T1>> idSelector,
             Expression<Func<TModel, T2>> parentIDSelector,
@@ -605,7 +631,7 @@ namespace Kendo.Mvc.Extensions
             return queryable.CreateTreeDataSourceResult(request, idSelector, parentIDSelector, null, selector, idFilter);
         }
 
-        public static DataSourceResult ToTreeDataSourceResult<TModel, T1, T2>(this IQueryable<TModel> queryable,
+        public static TreeDataSourceResult ToTreeDataSourceResult<TModel, T1, T2>(this IQueryable<TModel> queryable,
             DataSourceRequest request,
             Expression<Func<TModel, T1>> idSelector,
             Expression<Func<TModel, T2>> parentIDSelector,
@@ -614,7 +640,7 @@ namespace Kendo.Mvc.Extensions
             return queryable.ToTreeDataSourceResult<TModel, T1, T2, TModel>(request, idSelector, parentIDSelector, modelState, null);
         }
 
-        public static DataSourceResult ToTreeDataSourceResult<TModel, T1, T2>(this IQueryable<TModel> enumerable,
+        public static TreeDataSourceResult ToTreeDataSourceResult<TModel, T1, T2>(this IQueryable<TModel> enumerable,
             DataSourceRequest request,
             Expression<Func<TModel, T1>> idSelector,
             Expression<Func<TModel, T2>> parentIDSelector,
@@ -624,7 +650,7 @@ namespace Kendo.Mvc.Extensions
             return enumerable.CreateTreeDataSourceResult<TModel, T1, T2, TModel>(request, idSelector, parentIDSelector, modelState, null, idFilter);
         }
 
-        public static DataSourceResult ToTreeDataSourceResult<TModel, T1, T2, TResult>(this IQueryable<TModel> queryable,
+        public static TreeDataSourceResult ToTreeDataSourceResult<TModel, T1, T2, TResult>(this IQueryable<TModel> queryable,
             DataSourceRequest request,
             Expression<Func<TModel, T1>> idSelector,
             Expression<Func<TModel, T2>> parentIDSelector,
@@ -633,7 +659,7 @@ namespace Kendo.Mvc.Extensions
             return queryable.CreateTreeDataSourceResult(request, idSelector, parentIDSelector, null, selector, null);
         }
 
-        public static DataSourceResult ToTreeDataSourceResult<TModel, T1, T2, TResult>(this IQueryable<TModel> queryable,
+        public static TreeDataSourceResult ToTreeDataSourceResult<TModel, T1, T2, TResult>(this IQueryable<TModel> queryable,
             DataSourceRequest request,
             Expression<Func<TModel, T1>> idSelector,
             Expression<Func<TModel, T2>> parentIDSelector,
@@ -643,7 +669,7 @@ namespace Kendo.Mvc.Extensions
             return queryable.CreateTreeDataSourceResult(request, idSelector, parentIDSelector, modelState, selector, null);
         }
 
-        public static DataSourceResult ToTreeDataSourceResult<TModel, T1, T2, TResult>(this IQueryable<TModel> queryable,
+        public static TreeDataSourceResult ToTreeDataSourceResult<TModel, T1, T2, TResult>(this IQueryable<TModel> queryable,
             DataSourceRequest request,
             Expression<Func<TModel, T1>> idSelector,
             Expression<Func<TModel, T2>> parentIDSelector,
@@ -654,7 +680,7 @@ namespace Kendo.Mvc.Extensions
             return queryable.CreateTreeDataSourceResult(request, idSelector, parentIDSelector, modelState, selector, idFilter);
         }
 
-        public static DataSourceResult ToTreeDataSourceResult<TModel, T1, T2>(this IEnumerable<TModel> enumerable,
+        public static TreeDataSourceResult ToTreeDataSourceResult<TModel, T1, T2>(this IEnumerable<TModel> enumerable,
             DataSourceRequest request,
             Expression<Func<TModel, T1>> idSelector,
             Expression<Func<TModel, T2>> parentIDSelector)
@@ -662,7 +688,7 @@ namespace Kendo.Mvc.Extensions
             return enumerable.AsQueryable().CreateTreeDataSourceResult<TModel, T1, T2, TModel>(request, idSelector, parentIDSelector, null, null, null);
         }
 
-        public static DataSourceResult ToTreeDataSourceResult<TModel, T1, T2>(this IEnumerable<TModel> enumerable,
+        public static TreeDataSourceResult ToTreeDataSourceResult<TModel, T1, T2>(this IEnumerable<TModel> enumerable,
             DataSourceRequest request,
             Expression<Func<TModel, T1>> idSelector,
             Expression<Func<TModel, T2>> parentIDSelector,
@@ -671,7 +697,7 @@ namespace Kendo.Mvc.Extensions
             return enumerable.AsQueryable().CreateTreeDataSourceResult<TModel, T1, T2, TModel>(request, idSelector, parentIDSelector, null, null, idFilter);
         }
 
-        public static DataSourceResult ToTreeDataSourceResult<TModel, T1, T2, TResult>(this IEnumerable<TModel> queryable,
+        public static TreeDataSourceResult ToTreeDataSourceResult<TModel, T1, T2, TResult>(this IEnumerable<TModel> queryable,
             DataSourceRequest request,
             Expression<Func<TModel, T1>> idSelector,
             Expression<Func<TModel, T2>> parentIDSelector,
@@ -681,7 +707,7 @@ namespace Kendo.Mvc.Extensions
             return queryable.AsQueryable().CreateTreeDataSourceResult(request, idSelector, parentIDSelector, null, selector, idFilter);
         }
 
-        public static DataSourceResult ToTreeDataSourceResult<TModel, T1, T2>(this IEnumerable<TModel> queryable,
+        public static TreeDataSourceResult ToTreeDataSourceResult<TModel, T1, T2>(this IEnumerable<TModel> queryable,
             DataSourceRequest request,
             Expression<Func<TModel, T1>> idSelector,
             Expression<Func<TModel, T2>> parentIDSelector,
@@ -690,7 +716,7 @@ namespace Kendo.Mvc.Extensions
             return queryable.AsQueryable().ToTreeDataSourceResult<TModel, T1, T2, TModel>(request, idSelector, parentIDSelector, modelState, null);
         }
 
-        public static DataSourceResult ToTreeDataSourceResult<TModel, T1, T2>(this IEnumerable<TModel> enumerable,
+        public static TreeDataSourceResult ToTreeDataSourceResult<TModel, T1, T2>(this IEnumerable<TModel> enumerable,
             DataSourceRequest request,
             Expression<Func<TModel, T1>> idSelector,
             Expression<Func<TModel, T2>> parentIDSelector,
@@ -700,7 +726,7 @@ namespace Kendo.Mvc.Extensions
             return enumerable.AsQueryable().CreateTreeDataSourceResult<TModel, T1, T2, TModel>(request, idSelector, parentIDSelector, modelState, null, idFilter);
         }
 
-        public static DataSourceResult ToTreeDataSourceResult<TModel, T1, T2, TResult>(this IEnumerable<TModel> queryable,
+        public static TreeDataSourceResult ToTreeDataSourceResult<TModel, T1, T2, TResult>(this IEnumerable<TModel> queryable,
             DataSourceRequest request,
             Expression<Func<TModel, T1>> idSelector,
             Expression<Func<TModel, T2>> parentIDSelector,
@@ -709,7 +735,7 @@ namespace Kendo.Mvc.Extensions
             return queryable.AsQueryable().CreateTreeDataSourceResult(request, idSelector, parentIDSelector, null, selector, null);
         }
 
-        public static DataSourceResult ToTreeDataSourceResult<TModel, T1, T2, TResult>(this IEnumerable<TModel> queryable,
+        public static TreeDataSourceResult ToTreeDataSourceResult<TModel, T1, T2, TResult>(this IEnumerable<TModel> queryable,
             DataSourceRequest request,
             Expression<Func<TModel, T1>> idSelector,
             Expression<Func<TModel, T2>> parentIDSelector,
@@ -719,7 +745,7 @@ namespace Kendo.Mvc.Extensions
             return queryable.AsQueryable().CreateTreeDataSourceResult(request, idSelector, parentIDSelector, modelState, selector, null);
         }
 
-        public static DataSourceResult ToTreeDataSourceResult<TModel, T1, T2, TResult>(this IEnumerable<TModel> queryable,
+        public static TreeDataSourceResult ToTreeDataSourceResult<TModel, T1, T2, TResult>(this IEnumerable<TModel> queryable,
             DataSourceRequest request,
             Expression<Func<TModel, T1>> idSelector,
             Expression<Func<TModel, T2>> parentIDSelector,
@@ -730,15 +756,15 @@ namespace Kendo.Mvc.Extensions
             return queryable.AsQueryable().CreateTreeDataSourceResult(request, idSelector, parentIDSelector, modelState, selector, idFilter);
         }
 
-        private static DataSourceResult CreateTreeDataSourceResult<TModel, T1, T2, TResult>(this IQueryable queryable,
+        private static TreeDataSourceResult CreateTreeDataSourceResult<TModel, T1, T2, TResult>(this IQueryable queryable,
             DataSourceRequest request,
             Expression<Func<TModel, T1>> idSelector,
             Expression<Func<TModel, T2>> parentIDSelector,
             ModelStateDictionary modelState,
             Func<TModel, TResult> selector,
-            Expression<Func<TModel, bool>> idFilter)
+            Expression<Func<TModel, bool>> rootSelector)
         {
-            var result = new DataSourceResult();
+            var result = new TreeDataSourceResult();
 
             var data = queryable;
 
@@ -756,6 +782,11 @@ namespace Kendo.Mvc.Extensions
                 data = data.ParentsRecursive<TModel>(queryable, idSelector, parentIDSelector);
             }
 
+            if (rootSelector != null)
+            {
+                data = data.Where(rootSelector);
+            }
+
             var sort = new List<SortDescriptor>();
 
             if (request.Sorts != null)
@@ -763,188 +794,45 @@ namespace Kendo.Mvc.Extensions
                 sort.AddRange(request.Sorts);
             }
 
-            var temporarySortDescriptors = new List<SortDescriptor>();
+            var aggregates = new List<AggregateDescriptor>();
 
-            //IList<GroupDescriptor> groups = new List<GroupDescriptor>();
-
-            //if (request.Groups != null)
-            //{
-            //    groups.AddRange(request.Groups);
-            //}
-
-            //var aggregates = new List<AggregateDescriptor>();
-
-            //if (request.Aggregates != null)
-            //{
-            //    aggregates.AddRange(request.Aggregates);
-            //}
-
-            //if (aggregates.Any())
-            //{
-            //    var dataSource = data.AsQueryable();
-
-            //    var source = dataSource;
-            //    if (filters.Any())
-            //    {
-            //        source = dataSource.Where(filters);
-            //    }
-
-            //    result.AggregateResults = source.Aggregate(aggregates.SelectMany(a => a.Aggregates));
-
-            //    if (groups.Any() && aggregates.Any())
-            //    {
-            //        groups.Each(g => g.AggregateFunctions.AddRange(aggregates.SelectMany(a => a.Aggregates)));
-            //    }
-            //}
-
-            //result.Total = data.Count();
-
-            if (!sort.Any() && queryable.Provider.IsEntityFrameworkProvider())
+            if (request.Aggregates != null)
             {
-                // The Entity Framework provider demands OrderBy before calling Skip.
-                SortDescriptor sortDescriptor = new SortDescriptor
-                {
-                    Member = queryable.ElementType.FirstSortableProperty()
-                };
-                sort.Add(sortDescriptor);
-                temporarySortDescriptors.Add(sortDescriptor);
+                aggregates.AddRange(request.Aggregates);
             }
 
-            //if (groups.Any())
-            //{
-            //    groups.Reverse().Each(groupDescriptor =>
-            //    {
-            //        var sortDescriptor = new SortDescriptor
-            //        {
-            //            Member = groupDescriptor.Member,
-            //            SortDirection = groupDescriptor.SortDirection
-            //        };
+            if (aggregates.Any())
+            {
+                var dataSource = data;                
+                var groups = dataSource.GroupBy(parentIDSelector);
 
-            //        sort.Insert(0, sortDescriptor);
-            //        temporarySortDescriptors.Add(sortDescriptor);
-            //    });
-            //}
+                var aggregateResults = new List<TreeAggreateResult>();
 
+                foreach (IGrouping<T2, TModel> group in groups)
+                {
+                    aggregateResults.Add(new TreeAggreateResult
+                    {
+                        Key = group.Key,
+                        AggregateResults = group.AggregateForLevel(queryable, aggregates, idSelector, parentIDSelector)
+                    });
+                }
+
+                result.AggregateResults = aggregateResults;                         
+            }            
+        
             if (sort.Any())
             {
                 data = data.Sort(sort);
-            }
-
-            //var notPagedData = data;
-
-            //data = data.Page(request.Page - 1, request.PageSize);
-
-            //if (groups.Any())
-            //{
-            //    data = data.GroupBy(notPagedData, groups);
-            //}
-
-            if (idFilter != null)
-            {
-                data = data.Where(idFilter);
-            }
+            }            
 
             result.Data = data.Execute(selector);
 
             if (modelState != null && !modelState.IsValid)
             {
                 result.Errors = modelState.SerializeErrors();
-            }
-
-            temporarySortDescriptors.Each(sortDescriptor => sort.Remove(sortDescriptor));
+            }            
 
             return result;
-        }
-
-        private static MethodInfo anyMethod;
-        private static MethodInfo AnyMethod(Type type)
-        {
-            if (anyMethod == null)
-            {
-                anyMethod = typeof(Queryable).GetMethods().First(method => method.Name == "Any" && method.GetParameters().Length == 1).MakeGenericMethod(type);
-            }
-
-            return anyMethod;
-        }
-
-        private static IQueryable ParentsRecursive<TModel>(this IQueryable matches,
-            IQueryable allData,
-            LambdaExpression idSelector,
-            LambdaExpression parentIDSelector)
-        {
-            var parents = matches.Parents(allData, idSelector, parentIDSelector);
-            var anyMethod = AnyMethod(matches.ElementType);
-
-            if ((bool)anyMethod.Invoke(null, new[] { parents }))
-            {
-                parents = parents.Union(parents.ParentsRecursive<TModel>(allData, idSelector, parentIDSelector));
-            }
-
-            return matches.Union(parents);
-        }
-
-        private static IQueryable Parents(this IQueryable matches,
-            IQueryable allData,
-            LambdaExpression idSelector,
-            LambdaExpression parentIDSelector)
-        {
-            var elementType = allData.ElementType;
-
-            var allParam = Expression.Parameter(elementType, "allItem");
-            var matchesParam = Expression.Parameter(elementType, "matchedItem");
-
-            var allID = ExpressionFactory.MakeMemberAccess(allParam, idSelector.MemberWithoutInstance());
-
-            var matchesParentID = ExpressionFactory.MakeMemberAccess(matchesParam, parentIDSelector.MemberWithoutInstance());
-            matchesParentID = Expression.Convert(matchesParentID, allID.Type);
-
-            BinaryExpression comparison = Expression.Equal(matchesParentID, allID);
-
-            var anyLambda = Expression.Lambda(comparison, matchesParam);
-            var anyCall =
-                Expression.Call(
-                    typeof(Queryable),
-                    "Any",
-                    new[] { elementType },
-                    matches.Expression,
-                    Expression.Quote(anyLambda));
-
-            var whereLambda = Expression.Lambda(anyCall, allParam);
-            var whereCall =
-                    Expression.Call(
-                        typeof(Queryable),
-                        "Where",
-                        new[] { elementType },
-                        allData.Expression,
-                        Expression.Quote(whereLambda));
-
-            return allData.Provider.CreateQuery(whereCall);
-        }
-
-        /// <summary>
-        /// Produces the set union of two sequences by using the default equality comparer.        
-        /// </summary>
-        /// <returns>        
-        /// An <see cref="IQueryable" /> that contains the elements from both input sequences, excluding duplicates.
-        /// </returns>
-        /// <param name="source">
-        /// An <see cref="IQueryable" /> whose distinct elements form the first set for the union.
-        /// </param>
-        /// <param name="second">
-        /// An <see cref="IQueryable" /> whose distinct elements form the first set for the union.
-        /// </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="source" /> is null.</exception>
-        public static IQueryable Union(this IQueryable source, IQueryable second)
-        {
-            IQueryable query = source.Provider.CreateQuery(
-                Expression.Call(
-                    typeof(Queryable),
-                    "Union",
-                    new[] { source.ElementType },
-                    source.Expression,
-                    second.Expression));
-
-            return query;
-        }
+        }       
     }
 }
