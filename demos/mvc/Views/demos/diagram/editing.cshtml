@@ -1,6 +1,50 @@
-﻿<div id="example">
-    <div id="diagram" style="height: 600px;"></div>
+<div id="example">
+    <div id="diagram" style="height:600px;"></div>
     <script>
+        function visualTemplate(options) {
+            var dataviz = kendo.dataviz;
+            var g = new dataviz.diagram.Group();
+            var dataItem = options.dataItem;
+
+            if (dataItem.JobTitle === "President") {
+                g.append(new dataviz.diagram.Circle({
+                    radius: 60,
+                    stroke: {
+                        width: 2,
+                        color: "#586477"
+                    },
+                    fill: "#e8eff7"
+                }));
+            } else {
+                g.append(new dataviz.diagram.Rectangle({
+                    width: 240,
+                    height: 67,
+                    stroke: {
+                        width: 0
+                    },
+                    fill: "#e8eff7"
+                }));
+
+                g.append(new dataviz.diagram.Rectangle({
+                    width: 8,
+                    height: 67,
+                    fill: dataItem.Color,
+                    stroke: {
+                        width: 0
+                    }
+                }));
+            }
+
+            return g;
+        }
+
+        function onDataBound(e) {
+            var that = this;
+            setTimeout(function () {
+                that.bringIntoView(that.shapes);
+            }, 0);
+        }
+
         function createDiagram() {
             var serviceRoot = "http://demos.telerik.com/kendo-ui/service";
 
@@ -103,142 +147,10 @@
                         width: 2
                     }
                 },
-                itemRotate: onItemRotate,
-                pan: onPan,
-                select: onSelect,
-                zoomStart: onZoomStart,
-                zoomEnd: onZoomEnd,
-                click: onClick,
-                dataBound: onDataBound,
-                edit: onEdit,
-                add: onAdd,
-                remove: onRemove,
-                cancel: onCancel
+                dataBound: onDataBound
             });
-        }
-
-        function onDataBound(e) {
-            var that = this;
-            setTimeout(function () {
-                that.bringIntoView(that.shapes);
-            }, 0);
-            kendoConsole.log("Diagram data bound");
-        }
-
-        function onEdit(e) {
-            kendoConsole.log("Diagram edit");
-        }
-
-        function onAdd(e) {
-            kendoConsole.log("Diagram add");
-        }
-
-        function onRemove(e) {
-            kendoConsole.log("Diagram remove");
-        }
-
-        function onCancel(e) {
-            kendoConsole.log("Diagram cancel");
-        }
-
-        function onItemRotate(e) {
-            var rotation = e.item.rotate();
-            kendoConsole.log("Rotate - angle: " + rotation.angle + " center: " + rotation.x + "," + rotation.y);
-        }
-
-        function onPan(e) {
-            kendoConsole.log("Pan: " + e.pan.toString());
-        }
-
-        function onSelect(e) {
-            var action;
-            var items;
-            if (e.selected.length) {
-                action = "Selected";
-                items = e.selected;
-            } else if (e.deselected.length) {
-                action = "Deselected";
-                items = e.deselected;
-            }
-
-            kendoConsole.log(action + ": " + items.length);
-        }
-
-        function onZoomStart(e) {
-            kendoConsole.log("Zoom start: " + e.zoom);
-        }
-
-        function onZoomEnd(e) {
-            kendoConsole.log("Zoom end: " + e.zoom);
-        }
-
-        function onClick(e) {
-            kendoConsole.log("Click: " + elementText(e.item));
-        }
-
-        var diagram = kendo.dataviz.diagram;
-        var Shape = diagram.Shape;
-        var Connection = diagram.Connection;
-        var Point = diagram.Point;
-
-        function elementText(element) {
-            var text;
-            if (element instanceof Shape) {
-                text = element.dataItem.JobTitle;
-            } else if (element instanceof Point) {
-                text = "(" + element.x + "," + element.y + ")";
-            } else if (element instanceof Connection) {
-                var source = element.source();
-                var target = element.target();
-                var sourceElement = source.shape || source;
-                var targetElement = target.shape || target;
-                text = elementText(sourceElement) + " - " + elementText(targetElement);
-            }
-            return text;
-        }
-
-        function visualTemplate(options) {
-            var dataviz = kendo.dataviz;
-            var g = new dataviz.diagram.Group();
-            var dataItem = options.dataItem;
-
-            if (dataItem.JobTitle === "President") {
-                g.append(new dataviz.diagram.Circle({
-                    radius: 60,
-                    stroke: {
-                        width: 2,
-                        color: "#586477"
-                    },
-                    fill: "#e8eff7"
-                }));
-            } else {
-                g.append(new dataviz.diagram.Rectangle({
-                    width: 240,
-                    height: 67,
-                    stroke: {
-                        width: 0
-                    },
-                    fill: "#e8eff7"
-                }));
-
-                g.append(new dataviz.diagram.Rectangle({
-                    width: 8,
-                    height: 67,
-                    fill: dataItem.Color,
-                    stroke: {
-                        width: 0
-                    }
-                }));
-            }
-
-            return g;
         }
 
         $(document).ready(createDiagram);
     </script>
-    <div class="box">
-        <h4>Console log</h4>
-        <div class="console"></div>
-    </div>
 </div>
-

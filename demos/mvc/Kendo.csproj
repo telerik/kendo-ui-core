@@ -1159,6 +1159,12 @@
     <Content Include="Views\demos\gantt\resources.cshtml" />
     <Content Include="Views\demos\radial-gauge\multiple-pointers.cshtml" />
     <Content Include="Views\demos\diagram\editing.cshtml" />
+    <Content Include="Views\demos\diagram\angular.cshtml" />
+    <Content Include="Views\demos\diagram\api.cshtml" />
+    <Content Include="Views\demos\diagram\events.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\demos\diagram\export.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="content\integration\diagram\js\" />
