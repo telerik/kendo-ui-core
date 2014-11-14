@@ -561,7 +561,7 @@
         ok(ds.get(4));
     });
 
-    test("exisiting aggreates are extended", function() {
+    test("exisiting aggregates are extended", function() {
         var aggregates = [
             { aggregates: { null: { id: { count: 1 } } } },
             { aggregates: { 1: { id: { count: 1 } } } }
@@ -584,6 +584,29 @@
 
         equal(ds.aggregates()[null].id.count, 1);
         equal(ds.aggregates()[1].id.count, 1);
+    });
+
+    test("aggregate with key as empty string is replaced with default parend id value", function() {
+        var ds = new TreeListDataSource({
+            serverAggregates: true,
+            aggregate: { field: "id", aggregates:[ "count" ] },
+            schema: {
+                aggregates: "aggregates"
+            },
+            transport: {
+                read: function(options) {
+                    options.success({
+                        aggregates: { "": { id: { count: 1 } } }
+                    });
+                }
+            }
+        });
+
+        ds.read();
+
+        var aggregates = ds.aggregates();
+        ok(!("" in aggregates));
+        equal(ds.aggregates()[null].id.count, 1);
     });
 
     test("aggregate calculates aggregates for each parent item", function() {

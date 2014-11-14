@@ -208,7 +208,13 @@ var __meta__ = {
         },
 
         _readAggregates: function(data) {
-            return extend(this._aggregateResult, this.reader.aggregates(data));
+            var result = extend(this._aggregateResult, this.reader.aggregates(data));
+            if ("" in result) {
+                result[this._defaultParentId()] = result[""];
+                delete result[""];
+            }
+
+            return result;
         },
 
         remove: function(root) {
