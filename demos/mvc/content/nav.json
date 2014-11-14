@@ -8921,7 +8921,6 @@
       {
         "text": "Basic usage",
         "url": "diagram/index",
-        "disableInMobile": true,
         "title": {
             "kendo-ui": "Example of Kendo UI Diagram with a simple layout",
 			"aspnet-mvc": "Example of ASP.NET MVC Diagram with a simple layout"
