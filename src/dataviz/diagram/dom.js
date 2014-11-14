@@ -3735,6 +3735,8 @@
                         click: proxy(this.click, this),
                         resizable: false
                     }).getKendoToolBar();
+
+                this.element.css("border", "none");
             },
 
             createTools: function() {
