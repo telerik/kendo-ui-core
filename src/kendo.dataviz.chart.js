@@ -1389,6 +1389,7 @@ var __meta__ = {
             chart._destroyView();
 
             chart.surface.destroy();
+            chart.surface = null;
 
             Widget.fn.destroy.call(chart);
         },
