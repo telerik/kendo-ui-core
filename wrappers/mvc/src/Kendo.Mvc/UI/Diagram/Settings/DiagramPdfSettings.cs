@@ -6,13 +6,13 @@ namespace Kendo.Mvc.UI
     using System.Web.Routing;
     using Kendo.Mvc.Extensions;
 
-    public class GanttPdfSettings : JsonObject
+    public class DiagramPdfSettings : JsonObject
     {
-        public GanttPdfSettings()
+        public DiagramPdfSettings()
         {
             //>> Initialization
         
-            Margin = new GanttPdfMarginSettings();
+            Margin = new DiagramPdfMarginSettings();
                 
         //<< Initialization
         }
@@ -25,15 +25,15 @@ namespace Kendo.Mvc.UI
         
         public DateTime? Date { get; set; }
         
-        public string FileName { get; set; }
-        
         public bool? ForceProxy { get; set; }
+        
+        public string FileName { get; set; }
         
         public string Keywords { get; set; }
         
         public bool? Landscape { get; set; }
         
-        public GanttPdfMarginSettings Margin
+        public DiagramPdfMarginSettings Margin
         {
             get;
             set;
@@ -68,16 +68,16 @@ namespace Kendo.Mvc.UI
                 json["date"] = Date;
             }
                 
-            if (FileName.HasValue())
-            {
-                json["fileName"] = FileName;
-            }
-            
             if (ForceProxy.HasValue)
             {
                 json["forceProxy"] = ForceProxy;
             }
                 
+            if (FileName.HasValue())
+            {
+                json["fileName"] = FileName;
+            }
+            
             if (Keywords.HasValue())
             {
                 json["keywords"] = Keywords;

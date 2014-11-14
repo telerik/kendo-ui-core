@@ -40,6 +40,8 @@ namespace Kendo.Mvc.UI
                 
             Pannable = new DiagramPannableSettings();
                 
+            Pdf = new DiagramPdfSettings();
+                
             Selectable = new DiagramSelectableSettings();
                 
             ShapeDefaults = new DiagramShapeDefaultsSettings();
@@ -108,6 +110,12 @@ namespace Kendo.Mvc.UI
         }
         
         public DiagramPannableSettings Pannable
+        {
+            get;
+            set;
+        }
+        
+        public DiagramPdfSettings Pdf
         {
             get;
             set;
@@ -221,6 +229,11 @@ namespace Kendo.Mvc.UI
                 json["pannable"] = Pannable.Enabled;
             }
 
+            var pdf = Pdf.ToJson();
+            if (pdf.Any())
+            {
+                json["pdf"] = pdf;
+            }
             var shapeDefaults = ShapeDefaults.ToJson();
             if (shapeDefaults.Any())
             {

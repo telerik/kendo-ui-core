@@ -6,13 +6,13 @@ namespace Kendo.Mvc.UI.Fluent
     using Kendo.Mvc.Extensions;
 
     /// <summary>
-    /// Defines the fluent API for configuring the GanttPdfSettings settings.
+    /// Defines the fluent API for configuring the DiagramPdfSettings settings.
     /// </summary>
-    public class GanttPdfSettingsBuilder: IHideObjectMembers
+    public class DiagramPdfSettingsBuilder<TShapeModel,TConnectionModel>: IHideObjectMembers where TShapeModel : class  where TConnectionModel : class
     {
-        private readonly GanttPdfSettings container;
+        private readonly DiagramPdfSettings container;
 
-        public GanttPdfSettingsBuilder(GanttPdfSettings settings)
+        public DiagramPdfSettingsBuilder(DiagramPdfSettings settings)
         {
             container = settings;
         }
@@ -23,7 +23,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// The author of the PDF document.
         /// </summary>
         /// <param name="value">The value that configures the author.</param>
-        public GanttPdfSettingsBuilder Author(string value)
+        public DiagramPdfSettingsBuilder<TShapeModel,TConnectionModel> Author(string value)
         {
             container.Author = value;
 
@@ -34,7 +34,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// The creator of the PDF document.
         /// </summary>
         /// <param name="value">The value that configures the creator.</param>
-        public GanttPdfSettingsBuilder Creator(string value)
+        public DiagramPdfSettingsBuilder<TShapeModel,TConnectionModel> Creator(string value)
         {
             container.Creator = value;
 
@@ -45,20 +45,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// The date when the PDF document is created. Defaults to new Date().
         /// </summary>
         /// <param name="value">The value that configures the date.</param>
-        public GanttPdfSettingsBuilder Date(DateTime value)
+        public DiagramPdfSettingsBuilder<TShapeModel,TConnectionModel> Date(DateTime value)
         {
             container.Date = value;
-
-            return this;
-        }
-        
-        /// <summary>
-        /// Specifies the file name of the exported PDF file.
-        /// </summary>
-        /// <param name="value">The value that configures the filename.</param>
-        public GanttPdfSettingsBuilder FileName(string value)
-        {
-            container.FileName = value;
 
             return this;
         }
@@ -67,9 +56,20 @@ namespace Kendo.Mvc.UI.Fluent
         /// If set to true, the content will be forwarded to proxyURL even if the browser supports saving files locally.
         /// </summary>
         /// <param name="value">The value that configures the forceproxy.</param>
-        public GanttPdfSettingsBuilder ForceProxy(bool value)
+        public DiagramPdfSettingsBuilder<TShapeModel,TConnectionModel> ForceProxy(bool value)
         {
             container.ForceProxy = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// Specifies the file name of the exported PDF file.
+        /// </summary>
+        /// <param name="value">The value that configures the filename.</param>
+        public DiagramPdfSettingsBuilder<TShapeModel,TConnectionModel> FileName(string value)
+        {
+            container.FileName = value;
 
             return this;
         }
@@ -78,7 +78,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Specifies the keywords of the exported PDF file.
         /// </summary>
         /// <param name="value">The value that configures the keywords.</param>
-        public GanttPdfSettingsBuilder Keywords(string value)
+        public DiagramPdfSettingsBuilder<TShapeModel,TConnectionModel> Keywords(string value)
         {
             container.Keywords = value;
 
@@ -89,7 +89,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Set to true to reverse the paper dimensions if needed such that width is the larger edge.
         /// </summary>
         /// <param name="value">The value that configures the landscape.</param>
-        public GanttPdfSettingsBuilder Landscape(bool value)
+        public DiagramPdfSettingsBuilder<TShapeModel,TConnectionModel> Landscape(bool value)
         {
             container.Landscape = value;
 
@@ -101,19 +101,18 @@ namespace Kendo.Mvc.UI.Fluent
 		/// units are "mm", "cm", "in" and "pt" (default).
         /// </summary>
         /// <param name="configurator">The action that configures the margin.</param>
-        public GanttPdfSettingsBuilder Margin(Action<GanttPdfMarginSettingsBuilder> configurator)
+        public DiagramPdfSettingsBuilder<TShapeModel,TConnectionModel> Margin(Action<DiagramPdfMarginSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
         {
-            configurator(new GanttPdfMarginSettingsBuilder(container.Margin));
+            configurator(new DiagramPdfMarginSettingsBuilder<TShapeModel,TConnectionModel>(container.Margin));
             return this;
         }
         
         /// <summary>
-        /// Specifies the paper size of the PDF document. Can be set to a predefined size, i.e. "A4", "A3" etc,
-		/// or an array of two Number-s specifying the width/height in points (1pt = 1/72in), or strings including unit, i.e. "10mm". Supported
-		/// units are "mm", "cm", "in" and "pt".  The default "auto" means paper size is determined by content.
+        /// Specifies the paper size of the PDF document.
+		/// The default "auto" means paper size is determined by content.Supported values:
         /// </summary>
         /// <param name="value">The value that configures the papersize.</param>
-        public GanttPdfSettingsBuilder PaperSize(string value)
+        public DiagramPdfSettingsBuilder<TShapeModel,TConnectionModel> PaperSize(string value)
         {
             container.PaperSize = value;
 
@@ -125,7 +124,7 @@ namespace Kendo.Mvc.UI.Fluent
 		/// Such browsers are IE version 9 and lower and Safari.The developer is responsible for implementing the server-side proxy.The proxy will receive a POST request with the following parameters in the request body:The proxy should return the decoded file with set "Content-Disposition" header.
         /// </summary>
         /// <param name="value">The value that configures the proxyurl.</param>
-        public GanttPdfSettingsBuilder ProxyURL(string value)
+        public DiagramPdfSettingsBuilder<TShapeModel,TConnectionModel> ProxyURL(string value)
         {
             container.ProxyURL = value;
 
@@ -136,7 +135,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Sets the subject of the PDF file.
         /// </summary>
         /// <param name="value">The value that configures the subject.</param>
-        public GanttPdfSettingsBuilder Subject(string value)
+        public DiagramPdfSettingsBuilder<TShapeModel,TConnectionModel> Subject(string value)
         {
             container.Subject = value;
 
@@ -147,7 +146,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Sets the title of the PDF file.
         /// </summary>
         /// <param name="value">The value that configures the title.</param>
-        public GanttPdfSettingsBuilder Title(string value)
+        public DiagramPdfSettingsBuilder<TShapeModel,TConnectionModel> Title(string value)
         {
             container.Title = value;
 
