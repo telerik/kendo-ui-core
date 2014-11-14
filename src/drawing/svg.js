@@ -546,7 +546,7 @@
         },
 
         template: renderTemplate(
-            "<clippath id='#=d.id#'>#= d.renderChildren()#</clippath>"
+            "<clipPath id='#=d.id#'>#= d.renderChildren()#</clipPath>"
         )
     });
 

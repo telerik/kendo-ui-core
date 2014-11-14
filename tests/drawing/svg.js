@@ -1102,8 +1102,8 @@
             }
         });
 
-        test("renders clippath", function() {
-            ok(clipNode.render().indexOf("clippath") !== -1);
+        test("renders clipPath", function() {
+            ok(clipNode.render().indexOf("clipPath") !== -1);
         });
 
         test("renders clip path id", function() {
