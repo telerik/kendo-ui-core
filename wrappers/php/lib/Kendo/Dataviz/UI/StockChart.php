@@ -92,6 +92,15 @@ This is the entire visible area of the chart.
     }
 
     /**
+    * Configures the export settings for the saveAsPDF method.
+    * @param \Kendo\Dataviz\UI\StockChartPdf|array $value
+    * @return \Kendo\Dataviz\UI\StockChart
+    */
+    public function pdf($value) {
+        return $this->setProperty('pdf', $value);
+    }
+
+    /**
     * The plot area configuration options. This is the area containing the plotted series.
     * @param \Kendo\Dataviz\UI\StockChartPlotArea|array $value
     * @return \Kendo\Dataviz\UI\StockChart
