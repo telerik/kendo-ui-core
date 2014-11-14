@@ -14,6 +14,15 @@
     
     
     <div class="demo-section k-header export-app">
+        <div class="demo-section content-wrapper">
+          <div class="demo-section charts-wrapper">
+            <div id="users"></div>
+            <div id="applications"></div>
+            <div id="referrals"></div>
+          </div>
+          <div id="grid"></div>
+        </div>
+        
         <div class="menu-wrapper">
           <ul id="menu">
             <li>Dashboard</li>
@@ -28,14 +37,6 @@
             <li>Interview Calendar</li>
             <li>Events Calendar</li>
           </ul>
-        </div>
-        <div class="demo-section content-wrapper">
-          <div class="demo-section charts-wrapper">
-            <div id="applications"></div>
-            <div id="interviews"></div>
-            <div id="forwards"></div>
-          </div>
-          <div id="grid"></div>
         </div>
     </div>
 
@@ -105,6 +106,20 @@
           "percentage": 112
         }];
         
+        var refs = [{
+          "source": "Dev",
+          "percentage": 42
+        }, {
+          "source": "Sales",
+          "percentage": 18
+        }, {
+          "source": "Finance",
+          "percentage": 29
+        }, {
+          "source": "Legal",
+          "percentage": 11
+        }];
+        
         $("#applications").kendoChart({
           legend: {
             position: "bottom"
@@ -123,39 +138,62 @@
           }
         });
         
-        $("#interviews").kendoChart({
-          legend: {
-            position: "bottom"
-          },
-          dataSource: {
-            data: data
-          },
-          series: [{
-            type: "donut",
-            field: "percentage",
-            categoryField: "source"
-          }],
-          tooltip: {
-            visible: true,
-            template: "${ category } - ${ value } applications"
-          }
+        $("#users").kendoChart({
+            legend: {
+                visible: false
+            },
+            seriesDefaults: {
+                type: "column"
+            },
+            series: [{
+                name: "Users Reached",
+                data: [340, 894, 1345, 1012, 3043, 2013, 2561, 2018, 2435, 3012]
+            }, {
+                name: "Applications",
+                data: [50, 80, 120, 203, 324, 297, 176, 354, 401, 349]
+            }],
+            valueAxis: {
+                labels: {
+                    visible: false
+                },
+                line: {
+                    visible: false
+                },
+                majorGridLines: {
+                    visible: false
+                }
+            },
+            categoryAxis: {
+                categories: [2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011],
+                line: {
+                    visible: false
+                },
+                majorGridLines: {
+                    visible: false
+                }
+            },
+            tooltip: {
+                visible: true,
+                format: "{0}",
+                template: "#= series.name #: #= value #"
+            }
         });
         
-        $("#forwards").kendoChart({
+        $("#referrals").kendoChart({
           legend: {
             position: "bottom"
           },
           dataSource: {
-            data: data
+            data: refs
           },
           series: [{
-            type: "donut",
+            type: "pie",
             field: "percentage",
             categoryField: "source"
           }],
           tooltip: {
             visible: true,
-            template: "${ category } - ${ value } applications"
+            template: "${ category } - ${ value }%"
           }
         });
         
@@ -195,14 +233,14 @@
             },{
               field: "Phone",
               title: "Phone",
-              width: 140
+              width: 160
             },{
               field: "CompanyName",
               title: "Company Name"
             },{
               field: "City",
               title: "City",
-              width: 120
+              width: 160
             }
           ]
         });
@@ -213,7 +251,7 @@
     .export-app {
         display: table;
         width: 100%;
-        height: 700px;
+        height: 750px;
         padding: 0;
     }
     .export-app .demo-section {
@@ -233,18 +271,25 @@
     
     #menu {
         height: 100%;
-        border-width: 0 1px 0 0;
+        border-width: 0 0 0 1px;
     }
         
     .charts-wrapper {
         height: 250px;
+        padding: 0 0 20px;
     }
     
     #applications,
-    #interviews,
-    #forwards {
+    #users,
+    #referrals {
         display: inline-block;
-        width: 33%;
+        width: 50%;
+        height: 240px;
+        vertical-align: top;
+    }
+    #applications,
+    #referrals {
+        width: 24%;
         height: 250px;
     }
         
