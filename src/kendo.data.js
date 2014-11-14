@@ -2858,6 +2858,10 @@ var __meta__ = {
             return deferred.promise();
         },
 
+        _readAggregates: function(data) {
+            return this.reader.aggregates(data);
+        },
+
         success: function(data) {
             var that = this,
                 options = that.options;
@@ -2875,7 +2879,7 @@ var __meta__ = {
                 that._total = that.reader.total(data);
 
                 if (that._aggregate && options.serverAggregates) {
-                    that._aggregateResult = that.reader.aggregates(data);
+                    that._aggregateResult = that._readAggregates(data);
                 }
 
                 data = that._readData(data);
