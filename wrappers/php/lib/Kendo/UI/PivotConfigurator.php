@@ -36,6 +36,15 @@ class PivotConfigurator extends \Kendo\UI\Widget {
     }
 
     /**
+    * The height of the PivotConfigurator. Numeric values are treated as pixels.
+    * @param float|string $value
+    * @return \Kendo\UI\PivotConfigurator
+    */
+    public function height($value) {
+        return $this->setProperty('height', $value);
+    }
+
+    /**
     * The text messages displayed in the fields sections.
     * @param \Kendo\UI\PivotConfiguratorMessages|array $value
     * @return \Kendo\UI\PivotConfigurator
