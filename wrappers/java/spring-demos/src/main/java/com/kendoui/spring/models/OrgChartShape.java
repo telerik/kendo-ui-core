@@ -11,11 +11,8 @@ import javax.persistence.Table;
 @Table(name="OrgChartShapes")
 public class OrgChartShape {
     private int id;
-    private String firstName;
-    private String lastName;
-    private String title;
-    private String image;
-    private String colorScheme;
+    private String jobTitle;
+    private String color;
 
     @Id
     @Column(name="Id")
@@ -28,49 +25,22 @@ public class OrgChartShape {
         this.id = id;
     }
 
-    @Column(name="FirstName")
-    public String getFirstName() {
-        return firstName;
+    @Column(name="JobTitle")
+    public String getJobTitle() {
+        return jobTitle;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setJobTitle(String jobTitle) {
+        this.jobTitle = jobTitle;
     }
 
-    @Column(name="LastName")
-    public String getLastName() {
-        return lastName;
+    @Column(name="Color")
+    public String getColor() {
+        return color;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    @Column(name="Title")
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    @Column(name="Image")
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    @Column(name="ColorScheme")
-    public String getColorScheme() {
-        return colorScheme;
-    }
-
-    public void setColorScheme(String colorScheme) {
-        this.colorScheme = colorScheme;
+    public void setColor(String color) {
+        this.color = color;
     }
 }
 

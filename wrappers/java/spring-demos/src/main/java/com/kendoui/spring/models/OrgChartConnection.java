@@ -11,9 +11,13 @@ import javax.persistence.Table;
 @Table(name="OrgChartConnections")
 public class OrgChartConnection {
     private int id;
-    private Integer from;
-    private Integer to;
     private String text;
+    private Integer fromShapeId;
+    private Integer toShapeId;
+    private Integer fromPointX;
+    private Integer fromPointY;
+    private Integer toPointX;
+    private Integer toPointY;
 
     @Id
     @Column(name="Id")
@@ -26,24 +30,6 @@ public class OrgChartConnection {
         this.id = id;
     }
 
-    @Column(name="[From]")
-    public Integer getFrom() {
-        return from;
-    }
-
-    public void setFrom(Integer from) {
-        this.from = from;
-    }
-
-    @Column(name="[To]")
-    public Integer getTo() {
-        return to;
-    }
-
-    public void setTo(Integer to) {
-        this.to = to;
-    }
-
     @Column(name="Text")
     public String getText() {
         return text;
@@ -52,4 +38,58 @@ public class OrgChartConnection {
     public void setText(String text) {
         this.text = text;
     }
+    
+    @Column(name="FromShapeId")
+    public Integer getFromShapeId() {
+        return fromShapeId;
+    }
+
+    public void setFromShapeId(Integer fromShapeId) {
+        this.fromShapeId = fromShapeId;
+    }
+
+    @Column(name="ToShapeId")
+    public Integer getToShapeId() {
+        return toShapeId;
+    }
+
+    public void setToShapeId(Integer toShapeId) {
+        this.toShapeId = toShapeId;
+    }
+
+    @Column(name="FromPointX")
+    public Integer getFromPointX() {
+        return fromPointX;
+    }
+
+    public void setFromPointX(Integer fromPointX) {
+        this.fromPointX = fromPointX;
+    }
+
+    @Column(name="FromPointY")
+    public Integer getFromPointY() {
+        return fromPointY;
+    }
+
+    public void setFromPointY(Integer fromPointY) {
+        this.fromPointY = fromPointY;
+    }
+
+    @Column(name="ToPointX")
+    public Integer getToPointX() {
+        return toPointX;
+    }
+
+    public void setToPointX(Integer toPointX) {
+        this.toPointX = toPointX;
+    }
+
+    @Column(name="ToPointY")
+    public Integer getToPointY() {
+        return toPointY;
+    }
+
+    public void setToPointY(Integer toPointY) {
+        this.toPointY = toPointY;
+    }    
 }

@@ -38,11 +38,8 @@ public class EditingController {
         OrgChartShape target = new OrgChartShape();
 
         target.setId((int)model.get("id"));
-        target.setFirstName((String)model.get("firstName"));
-        target.setLastName((String)model.get("lastName"));
-        target.setTitle((String)(model.get("title")));
-        target.setImage((String)model.get("image"));
-        target.setColorScheme((String)model.get("colorScheme"));
+        target.setJobTitle((String)model.get("jobTitle"));
+        target.setColor((String)model.get("color"));
 
         orgShape.saveOrUpdate(target);
 
@@ -53,11 +50,8 @@ public class EditingController {
     public @ResponseBody OrgChartShape create(@RequestBody Map<String, Object> model) {
         OrgChartShape target = new OrgChartShape();
 
-        target.setFirstName((String)model.get("firstName"));
-        target.setLastName((String)model.get("lastName"));
-        target.setTitle((String)(model.get("title")));
-        target.setImage((String)model.get("image"));
-        target.setColorScheme((String)model.get("colorScheme"));
+        target.setJobTitle((String)model.get("jobTitle"));
+        target.setColor((String)model.get("color"));
 
         orgShape.saveOrUpdate(target);
 
@@ -85,9 +79,13 @@ public class EditingController {
         OrgChartConnection target = new OrgChartConnection();
 
         target.setId((int)model.get("id"));
-        target.setFrom((Integer)model.get("from"));
-        target.setTo((Integer)model.get("to"));
-        target.setText((String)(model.get("text")));
+        target.setText((String)model.get("text"));
+        target.setFromShapeId((Integer)model.get("fromShapeId"));
+        target.setToShapeId((Integer)model.get("toShapeId"));
+        target.setFromPointX((Integer)model.get("fromPointX"));
+        target.setFromPointY((Integer)model.get("fromPointY"));
+        target.setToPointX((Integer)model.get("toPointX"));
+        target.setToPointY((Integer)model.get("toPointY"));
 
         orgConnection.saveOrUpdate(target);
 
@@ -98,9 +96,13 @@ public class EditingController {
     public @ResponseBody OrgChartConnection createConnection(@RequestBody Map<String, Object> model) {
         OrgChartConnection target = new OrgChartConnection();
 
-        target.setFrom((Integer)model.get("from"));
-        target.setTo((Integer)model.get("to"));
-        target.setText((String)(model.get("text")));
+        target.setText((String)model.get("text"));
+        target.setFromShapeId((Integer)model.get("fromShapeId"));
+        target.setToShapeId((Integer)model.get("toShapeId"));
+        target.setFromPointX((Integer)model.get("fromPointX"));
+        target.setFromPointY((Integer)model.get("fromPointY"));
+        target.setToPointX((Integer)model.get("toPointX"));
+        target.setToPointY((Integer)model.get("toPointY"));
 
         orgConnection.saveOrUpdate(target);
 
