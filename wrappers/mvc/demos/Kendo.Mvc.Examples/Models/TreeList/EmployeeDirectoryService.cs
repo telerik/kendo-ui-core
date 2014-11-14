@@ -5,7 +5,7 @@
     using Kendo.Mvc.UI;
     using System;
     using System.Data;
-    using System.Collections.Generic;
+    using System.Collections.Generic;    
 
     public static class EmployeeDirectoryIEnumerableExtensions
     {        
@@ -26,6 +26,33 @@
                 Position = employee.Position,
                 Extension = employee.Extension,
                 hasChildren = employee.EmployeeDirectory1.Any()
+            };
+        }
+
+        public static EmployeeDirectoryModel ToEmployeeDirectoryModel(this EmployeeDirectory employee, DataSourceRequest request)
+        {
+            var filters = request.Filters;
+            if (!filters.Any()) {
+                return employee.ToEmployeeDirectoryModel();
+            }
+
+            var predicate = ExpressionBuilder.Expression<EmployeeDirectory>(filters, false).Compile();
+
+            return new EmployeeDirectoryModel
+            {
+                EmployeeId = employee.EmployeeID,
+                ReportsTo = employee.ReportsTo,
+                FirstName = employee.FirstName,
+                LastName = employee.LastName,
+                Address = employee.Address,
+                City = employee.City,
+                Country = employee.Country,
+                BirthDate = employee.BirthDate,
+                HireDate = employee.HireDate,
+                Phone = employee.Phone,
+                Position = employee.Position,
+                Extension = employee.Extension,
+                hasChildren = employee.EmployeeDirectory1.Any(predicate)
             };
         }
     }

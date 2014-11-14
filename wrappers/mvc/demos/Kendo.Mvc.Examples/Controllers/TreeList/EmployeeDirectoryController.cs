@@ -17,23 +17,29 @@ namespace Kendo.Mvc.Examples.Controllers
         public EmployeeDirectoryController()
         {
             employeeDirectory = new EmployeeDirectoryService(new SampleEntities());
-        }        
-       
+        }
+
         public JsonResult Index([DataSourceRequest] DataSourceRequest request, int? id)
-        {                        
+        {
             var result = GetDirectory().ToTreeDataSourceResult(request,
                 e => e.EmployeeID,
                 e => e.ReportsTo,
                 e => id.HasValue ? e.ReportsTo == id : e.ReportsTo == null,
                 e => e.ToEmployeeDirectoryModel()
-            );            
+            );
 
             return Json(result, JsonRequestBehavior.AllowGet);
-        }       
+        }
 
         public JsonResult All([DataSourceRequest] DataSourceRequest request)
         {
-            return Json(GetDirectory().ToTreeDataSourceResult(request, e => e.ToEmployeeDirectoryModel()), JsonRequestBehavior.AllowGet);
+            var result = GetDirectory().ToTreeDataSourceResult(request,
+                e => e.EmployeeID,
+                e => e.ReportsTo,
+                e => e.ToEmployeeDirectoryModel(request)
+            );
+            
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult Destroy([DataSourceRequest] DataSourceRequest request, EmployeeDirectoryModel employee)
@@ -69,7 +75,7 @@ namespace Kendo.Mvc.Examples.Controllers
         private IEnumerable<EmployeeDirectory> GetDirectory()
         {
             return employeeDirectory.GetAll();
-        }
+        }       
 
         protected override void Dispose(bool disposing)
         {
