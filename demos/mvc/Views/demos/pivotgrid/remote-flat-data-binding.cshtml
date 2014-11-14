@@ -1,4 +1,5 @@
 <div id="example">
+    <div id="configurator"></div>
     <div id="pivotgrid"></div>
 
     <script>
@@ -20,7 +21,7 @@
                                 ContactTitle: { caption: "All Titles" }
                             },
                             measures: {
-                                "Contacts Count": { field: "CustomerID", aggregate: function(value, state) { return state + 1; } }
+                                "Contacts Count": { field: "CustomerID", aggregate: "count" }
                             }
                         }
                     },
@@ -29,6 +30,25 @@
                     measures: ["Contacts Count"]
                 }
             });
+
+            $("#configurator").kendoPivotConfigurator({
+                dataSource: pivotgrid.dataSource,
+                height: 570
+            });
         });
-</script>
+    </script>
+    <style>
+        #pivotgrid
+        {
+            display: inline-block;
+            vertical-align: top;
+            width: 70%;
+        }
+
+        #configurator
+        {
+            display: inline-block;
+            vertical-align: top;
+        }
+    </style>
 </div>

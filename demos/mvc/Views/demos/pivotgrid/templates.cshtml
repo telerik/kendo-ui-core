@@ -29,12 +29,12 @@
                         columnHeaderTemplate: $("#headerTemplate").html(),
                         rowHeaderTemplate: $("#headerTemplate").html(),
                         columnWidth: 200,
-                        height: 282,
+                        height: 300,
                         dataSource: {
                             type: "xmla",
                             columns: [{ name: "[Date].[Calendar]", expand: true }],
                             rows: [{ name: "[Product].[Product Line]", expand: true }],
-                            measures: ["[Measures].[Internet Sales Amount]"],
+                            measures: ["[Measures].[Reseller Freight Cost]"],
                             transport: {
                                 connection: {
                                     catalog: "Adventure Works DW 2008R2",

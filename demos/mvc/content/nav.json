@@ -2176,6 +2176,16 @@
         }
       },
       {
+        "text": "KPI measures",
+        "url": "pivotgrid/kpi",
+        "title": {
+            "kendo-ui": "Define KPI measures in Kendo UI PivotGrid"
+        },
+        "meta": {
+            "kendo-ui": "This demo for Kendo UI jQuery-based PivotGrid component shows how you can define KPI measures."
+        }
+      },
+      {
         "text": "Remote binding",
         "url": "pivotgrid/remote-flat-data-binding",
         "title": {

@@ -1,6 +1,7 @@
 <script src="../content/shared/js/products.js"></script>
 
 <div id="example">
+    <div id="configurator"></div>
     <div id="pivotgrid"></div>
 
     <script>
@@ -27,7 +28,8 @@
                                 Discontinued: { caption: "Discontinued" }
                             },
                             measures: {
-                                "Sum": { field: "UnitPrice", format: "{0:c}", aggregate: function(value, state) { return value + state; } }
+                                "Sum": { field: "UnitPrice", format: "{0:c}", aggregate: "sum" },
+                                "Average": { field: "UnitPrice", format: "{0:c}", aggregate: "average" }
                             }
                         }
                     },
@@ -36,6 +38,25 @@
                     measures: ["Sum"]
                 }
             });
+
+            $("#configurator").kendoPivotConfigurator({
+                dataSource: pivotgrid.dataSource,
+                height: 570
+            });
         });
-</script>
+    </script>
+    <style>
+        #pivotgrid
+        {
+            display: inline-block;
+            vertical-align: top;
+            width: 70%;
+        }
+
+        #configurator
+        {
+            display: inline-block;
+            vertical-align: top;
+        }
+    </style>
 </div>

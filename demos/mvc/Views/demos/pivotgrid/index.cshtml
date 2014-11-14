@@ -1,57 +1,55 @@
+<div id="example">
+    <div id="configurator"></div>
+    <div id="pivotgrid"></div>
 
-        <div id="example">
-            <div id="configurator"></div>
-            <div id="pivotgrid"></div>
-
-            <script>
-                $(document).ready(function () {
-                    var loaded = false;
-
-                    var pivotgrid = $("#pivotgrid").kendoPivotGrid({
-                        filterable: true,
-                        sortable: true,
-                        columnWidth: 200,
-                        height: 580,
-                        dataSource: {
-                            type: "xmla",
-                            columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Product].[Category]" } ],
-                            rows: [{ name: "[Geography].[City]" }],
-                            measures: ["[Measures].[Internet Sales Amount]"],
-                            transport: {
-                                connection: {
-                                    catalog: "Adventure Works DW 2008R2",
-                                    cube: "Adventure Works"
-                                },
-                                read: "http://demos.telerik.com/olap/msmdpump.dll"
-                            },
-                            schema: {
-                                type: "xmla"
-                            },
-                            error: function (e) {
-                                alert("error: " + kendo.stringify(e.errors[0]));
-                            }
-                        }
-                    }).data("kendoPivotGrid");
-
-                    $("#configurator").kendoPivotConfigurator({
-                        dataSource: pivotgrid.dataSource,
-                        filterable: true,
-                        sortable: true
-                    });
-                });
-            </script>
-            <style>
-                #pivotgrid
-                {
-                    display: inline-block;
-                    vertical-align: top;
-                    width: 70%;
+    <script>
+        $(document).ready(function () {
+            var pivotgrid = $("#pivotgrid").kendoPivotGrid({
+                filterable: true,
+                sortable: true,
+                columnWidth: 200,
+                height: 580,
+                dataSource: {
+                    type: "xmla",
+                    columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Product].[Category]" } ],
+                    rows: [{ name: "[Geography].[City]" }],
+                    measures: ["[Measures].[Reseller Freight Cost]"],
+                    transport: {
+                        connection: {
+                            catalog: "Adventure Works DW 2008R2",
+                            cube: "Adventure Works"
+                        },
+                        read: "http://demos.telerik.com/olap/msmdpump.dll"
+                    },
+                    schema: {
+                        type: "xmla"
+                    },
+                    error: function (e) {
+                        alert("error: " + kendo.stringify(e.errors[0]));
+                    }
                 }
+            }).data("kendoPivotGrid");
 
-                #configurator
-                {
-                    display: inline-block;
-                    vertical-align: top;
-                }
-            </style>
-        </div>
+            $("#configurator").kendoPivotConfigurator({
+                dataSource: pivotgrid.dataSource,
+                filterable: true,
+                sortable: true,
+                height: 580
+            });
+        });
+    </script>
+    <style>
+        #pivotgrid
+        {
+            display: inline-block;
+            vertical-align: top;
+            width: 70%;
+        }
+
+        #configurator
+        {
+            display: inline-block;
+            vertical-align: top;
+        }
+    </style>
+</div>

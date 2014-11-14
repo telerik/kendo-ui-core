@@ -1,6 +1,6 @@
 <div id="example">
   <div ng-app="KendoDemo" ng-controller="MyCtrl">
-    <div kendo-pivot-configurator k-data-source="dataSource" id="configurator"></div>
+    <div kendo-pivot-configurator k-height="580" k-data-source="dataSource" id="configurator"></div>
     <div kendo-pivot-grid k-options="options" id="pivotgrid"></div>
   </div>
 </div>
@@ -12,7 +12,7 @@
               type: "xmla",
               columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Product].[Category]" } ],
               rows: [{ name: "[Geography].[City]" }],
-              measures: ["[Measures].[Internet Sales Amount]"],
+              measures: ["[Measures].[Reseller Freight Cost]"],
               transport: {
                   connection: {
                       catalog: "Adventure Works DW 2008R2",
