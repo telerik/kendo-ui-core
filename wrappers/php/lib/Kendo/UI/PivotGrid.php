@@ -119,6 +119,54 @@ About the data item structure review this help topic.
     }
 
     /**
+    * Sets the kpiStatusTemplate option of the PivotGrid.
+    * The template which renders the content of the KPI Status value. By default renders "open", "hold" and "denied" status icons.The fields which can be used in the template are:For information about the tuple structure check this link.
+About the data item structure review this help topic.
+    * @param string $value The id of the element which represents the kendo template.
+    * @return \Kendo\UI\PivotGrid
+    */
+    public function kpiStatusTemplateId($value) {
+        $value = new \Kendo\Template($value);
+
+        return $this->setProperty('kpiStatusTemplate', $value);
+    }
+
+    /**
+    * Sets the kpiStatusTemplate option of the PivotGrid.
+    * The template which renders the content of the KPI Status value. By default renders "open", "hold" and "denied" status icons.The fields which can be used in the template are:For information about the tuple structure check this link.
+About the data item structure review this help topic.
+    * @param string $value The template content.
+    * @return \Kendo\UI\PivotGrid
+    */
+    public function kpiStatusTemplate($value) {
+        return $this->setProperty('kpiStatusTemplate', $value);
+    }
+
+    /**
+    * Sets the kpiTrendTemplate option of the PivotGrid.
+    * The template which renders the content of the KPI Trend value. By default renders "increase", "decrease" and "equal" status icons.The fields which can be used in the template are:For information about the tuple structure check this link.
+About the data item structure review this help topic.
+    * @param string $value The id of the element which represents the kendo template.
+    * @return \Kendo\UI\PivotGrid
+    */
+    public function kpiTrendTemplateId($value) {
+        $value = new \Kendo\Template($value);
+
+        return $this->setProperty('kpiTrendTemplate', $value);
+    }
+
+    /**
+    * Sets the kpiTrendTemplate option of the PivotGrid.
+    * The template which renders the content of the KPI Trend value. By default renders "increase", "decrease" and "equal" status icons.The fields which can be used in the template are:For information about the tuple structure check this link.
+About the data item structure review this help topic.
+    * @param string $value The template content.
+    * @return \Kendo\UI\PivotGrid
+    */
+    public function kpiTrendTemplate($value) {
+        return $this->setProperty('kpiTrendTemplate', $value);
+    }
+
+    /**
     * Sets the rowHeaderTemplate option of the PivotGrid.
     * The template which renders the content of the row header cell. By default it renders the caption of the tuple member.The fields which can be used in the template are:For information about the tuple structure check this link.
     * @param string $value The id of the element which represents the kendo template.
