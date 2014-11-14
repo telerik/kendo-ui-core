@@ -1,0 +1,128 @@
+.km-badge,
+.km-detail
+{
+    text-decoration: none;
+    display: inline-block;
+    vertical-align: middle;
+    overflow: hidden;
+    text-align: center;
+    position: absolute;
+    z-index: 1;
+    height: 2em;
+    font-size: .6rem;
+    text-shadow: none;
+}
+
+.km-badge
+{
+    top: -1em;
+    right: -1em;
+    line-height: 2em;
+    margin-left: .5em;
+    min-width: .9em;
+    padding: 0 .55em;
+    -webkit-background-clip: padding-box;
+    .background-clip(padding-box);
+}
+
+.km-tabstrip .km-badge
+{
+    top: -.2em;
+    right: auto;
+    margin-left: -1em;
+}
+
+/* DetailButtons */
+.km-detail
+{
+    position: absolute;
+    float: right;
+    right: .8rem;
+    top: 50%;
+    margin-top: -.7rem;
+    width: 1.3rem;
+    height: 1.3rem;
+    font-size: 1rem;
+    .box-sizing(border-box);
+}
+
+.km-widget .km-detaildisclose
+{
+    font-size: .8em;
+}
+
+.k-ff .km-detail
+{
+    width: 1rem;
+    height: 1rem;
+}
+
+.km-detail .km-text {
+    display: none;
+}
+
+.km-widget .km-rowinsert:after,
+.km-widget .km-rowdelete:after,
+.km-widget .km-contactadd:after,
+.km-widget .km-detaildisclose:after,
+.km-widget .km-rowinsert:before,
+.km-widget .km-rowdelete:before,
+.km-widget .km-contactadd:before,
+.km-widget .km-detaildisclose:before,
+.km-detail .km-icon
+{
+    left: .15em;
+    top: .15em;
+    line-height: 1em;
+    font-size: 1em;
+    position: absolute;
+}
+
+.km-widget .km-detaildisclose:after
+{
+    left: .1em;
+    top: .25em;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Buttons */
+.km-button
+{
+    cursor: pointer;
+    outline: 0;
+    text-align: center;
+}
+
+button.km-button
+{
+    display: inline-block;
+    font: inherit;
+}
+
+.km-button:hover
+{
+    text-decoration: none;
+}
+
+.km-button::-moz-focus-inner
+{
+    padding: 0;
+    border: 0;
+}
+
+.km-ios .km-state-disabled .km-button,
+.km-android .km-state-disabled .km-button,
+.km-blackberry .km-state-disabled .km-button,
+.km-meego .km-state-disabled .km-button
+{
+    color: #aaa;
+    text-shadow: none;
+}
+
+.km-root .km-pane .k-button:focus,
+.km-root .km-pane .k-button:active,
+.km-root .km-pane .k-button:focus:active
+{
+    .box-shadow(none);
+}

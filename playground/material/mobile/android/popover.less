@@ -1,0 +1,66 @@
+@import "../common/popover.less";
+@import "base.less";
+
+/* PopOver */
+
+.km-android .km-popup.km-pane .km-view
+{
+    padding: 1px;
+}
+
+.km-android .km-popup.km-pane
+{
+    .box-shadow(0 0 10px rgba(0,0,0,.5));
+}
+
+.km-android .km-popover-root .km-list:last-child
+{
+    margin-bottom: 0;
+}
+
+.km-android .km-left .km-popup-arrow,
+.km-android .km-right .km-popup-arrow
+{
+    margin-top: 0;
+}
+
+.km-android .km-popup-arrow:after,
+.km-android .km-popup-arrow:before
+{
+    border-style: solid;
+    border-width: 0 10px 10px;
+}
+
+.km-android .km-down .km-popup-arrow:after
+{
+    margin-top: -1px;
+}
+
+.km-android .km-down .km-popup-arrow:before
+{
+    margin-top: -2px;
+}
+
+.km-android .km-up .km-popup-arrow:before
+{
+    margin-top: 1px;
+}
+
+.km-android .km-up .km-popup-arrow:after,
+.km-android .km-up .km-popup-arrow:before
+{
+    border-width: 10px 10px 0 10px;
+}
+
+.km-android .km-left .km-popup-arrow:after,
+.km-android .km-left .km-popup-arrow:before
+{
+    border-width: 10px 0 10px 10px;
+}
+
+.km-android .km-right .km-popup-arrow:after,
+.km-android .km-right .km-popup-arrow:before
+{
+    border-width: 10px 10px 10px 0;
+}
+

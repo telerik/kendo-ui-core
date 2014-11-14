@@ -1,0 +1,38 @@
+/* SplitView */
+.km-splitview > .km-content
+{
+    .box-orient(horizontal);
+    .box-direction(normal);
+    .flex-direction(row);
+}
+
+.km-split-vertical > .km-content
+{
+    .box-orient(vertical);
+    .flex-direction(column);
+}
+
+.km-split-content > .km-pane
+{
+    .flex(2);
+    width: auto;
+    height: auto;
+}
+
+.km-split-content > .km-pane:first-child
+{
+    .flex(1);
+}
+
+.km-split-horizontal > .km-content > .km-pane
+{
+    top: 0;
+    bottom: 0;
+}
+
+// Hopefully temporary
+.km-split-vertical > .km-content > .km-pane > .km-view
+{
+    display: -webkit-box;
+}
+

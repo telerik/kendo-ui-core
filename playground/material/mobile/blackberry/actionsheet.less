@@ -1,0 +1,74 @@
+@import "../common/actionsheet.less";
+@import "base.less";
+
+/* ActionSheet */
+
+.km-blackberry .km-shim.km-actionsheet-root > .k-animation-container
+{
+    top: 0;
+    right: 0;
+    left: auto !important;
+    height: 100% !important;
+    width: 80% !important;
+}
+
+.km-blackberry.km-pane div.km-actionsheet-wrapper
+{
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.km-blackberry .km-actionsheet
+{
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    border: 0;
+    vertical-align: middle;
+    padding: 0;
+    border-radius: 0;
+    .box-sizing(border-box);
+}
+
+.km-blackberry.km-pane .km-actionsheet-title
+{
+    text-align: center;
+}
+
+.km-blackberry .km-actionsheet-title,
+.km-blackberry .km-actionsheet-cancel
+{
+    display: none;
+}
+
+.km-blackberry .km-actionsheet-wrapper:before
+{
+    content: "\a0";
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+    width: 0;
+}
+
+.km-blackberry .km-actionsheet > li > a
+{
+    font-size: 1em;
+    font-weight: normal;
+    display: block;
+    line-height: 3rem;
+    padding: 0 1em;
+    border-radius: 0;
+    border-style: solid;
+    border-width: 0 0 @blackberry-border-width;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.km-blackberry .km-actionsheet > li:nth-child(2) > a
+{
+    border-top-width: @blackberry-border-width;
+    border-style: solid;
+}
+

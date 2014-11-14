@@ -1,0 +1,135 @@
+@import "../common/icons.less";
+@import "../common/listview.less";
+@import "base.less";
+
+/* ListView */
+
+.km-wp .km-listinset,
+.km-wp .km-listgroupinset
+{
+    margin: 0 1em;
+}
+
+.km-wp .km-list > li > .km-icon,
+.km-wp .km-listview-link > .km-icon
+{
+    margin: -.1em .2em 0 -.4em;
+    width: 1.3em;
+    height: 1.3em;
+    text-align: center;
+    font-size: 1.6em;
+    vertical-align: middle;
+}
+
+.km-wp .km-list > li > .km-icon:before,
+.km-wp .km-listview-link > .km-icon:before
+{
+    display: none;
+}
+
+.km-wp .km-list > li > .km-icon:after,
+.km-wp .km-listview-link > .km-icon:after
+{
+    display: inline-block;
+    width: auto;
+}
+
+.km-wp .km-listview-link,
+.km-wp .km-listview-label
+{
+    padding-bottom: .3em;
+    .pTransition(~"transform .1s, color .1s");
+}
+
+.km-wp .km-state-active .km-listview-link,
+.km-wp .km-state-active .km-listview-label
+{
+    background: none;
+    .transform(scale(.98, .94));
+}
+
+.km-wp .km-listview-link:after
+{
+    display: none;
+}
+
+.km-wp .km-group-title
+{
+	text-transform: uppercase;
+    font-size: 1em;
+    padding: 0;
+    margin-bottom: .2em;
+}
+
+.km-wp .km-group-title .km-text
+{
+    text-indent: 0;
+    padding-left: .7em;
+}
+
+.km-wp .km-scroller-pull .km-template
+{
+    text-transform: lowercase;
+}
+
+/* Filter box */
+
+.km-wp .km-listview-wrapper form .km-filter-wrap > input
+{
+    margin-top: -1px;
+    font-size: 1.2em;
+    padding-left: 1.6em;
+    padding-right: 1.8em;
+}
+
+.km-wp .km-filter-wrap > input::-ms-clear
+{
+    display: none;
+}
+
+.km-wp .km-filter-wrap:before,
+.km-wp .km-filter-reset .km-clear
+{
+    font-size: 1em;
+}
+
+.km-wp .km-filter-wrap:before
+{
+    font-size: .8em;
+    margin: .05em -1.3em 0 .3em;
+}
+
+.km-wp .km-filter-reset .km-clear:after
+{
+    content: "\e038";
+}
+
+/* ListView */
+
+.km-wp .km-list > li
+{
+    overflow: hidden;
+}
+
+/* ListView Detail Icons */
+
+.km-wp .km-detail
+{
+    position: absolute;
+    height: 1.2em;
+    width: 1.3em;
+    right: .4em;
+    font-size: 1.5em;
+    margin-top: -.6em;
+    border: none;
+    background: @wp-main-background;
+    .box-sizing(border-box);
+}
+
+.km-wp .km-detaildisclose:after,
+.km-wp .km-detaildisclose:before
+{
+    font-size: .86em;
+    margin-left: -2px;
+}
+

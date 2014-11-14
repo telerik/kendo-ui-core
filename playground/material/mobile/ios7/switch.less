@@ -1,0 +1,73 @@
+@import "../common/switch.less";
+@import "base.less";
+
+/* Switch */
+
+.km-ios7 .km-switch
+{
+    width: 3.6rem;
+    height: 2.2rem;
+    overflow: visible;
+}
+
+.km-ios7 .km-switch-wrapper
+{
+    overflow: hidden;
+}
+
+.km-ios7 .km-switch-background,
+.km-ios7 .k-slider-selection
+{
+    background-position: 4.25em 0;
+    background-repeat: no-repeat;
+    background-color: currentcolor;
+    margin-left: -3.4rem;
+}
+
+.km-ios7 .km-switch-container
+{
+    overflow: visible;
+    border-width: 0;
+    padding: 0 0 0 1px;
+}
+
+.km-ios7 .km-switch-handle
+{
+    width: 2.2em;
+    .transition(width .2s linear);
+    margin: 0 3px 0 0;
+}
+
+.km-ios7 .km-switch-handle.km-state-active
+{
+    width: 2.6em;
+}
+
+.km-ios7 .km-switch-label-on,
+.km-ios7 .km-switch-label-off
+{
+    display: none;
+}
+
+.km-ios7 .km-switch-handle,
+.km-ios7 .km-switch-wrapper,
+.km-ios7 .km-switch-container,
+.km-ios7 .km-switch-background
+{
+    border-radius: 3em;
+}
+
+.km-ios7 .km-switch-container,
+.km-ios7 .km-switch-wrapper
+{
+    .box-sizing(border-box);
+    border-width: 1px;
+    border-style: solid;
+    background-clip: content-box;
+}
+
+.km-ios7 .km-switch-on .km-switch-container
+{
+    border-color: currentcolor;
+}
+

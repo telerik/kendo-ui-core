@@ -1,0 +1,455 @@
+@import "../common/base.less";
+
+@ios-border-width: 1px;
+@ios-border-radius: 7px;
+@ios-inline-border-radius: @ios-border-radius - 1px;
+@ios-button-border-radius: @ios-inline-border-radius - 1px;
+
+
+/* Support for iOS6 */
+@media only screen and (height : 320px) and (orientation : landscape) {
+    .km-ios6 {
+        height: 100% !important;
+    }
+}
+
+/* CSS */
+
+.km-ios:after
+{
+     content: url("images/back.png");
+     display: none;
+}
+
+.km-ios
+{
+    font: bold .9em HelveticaNeue, sans-serif;
+}
+
+.km-ios .km-view
+{
+    overflow: hidden;
+}
+
+.km-ios .km-toolbar,
+.km-ios .km-navbar,
+.km-ios .km-button,
+.km-ios .km-tabstrip,
+.km-ios .km-popup .k-item,
+.km-ios .km-actionsheet > li > a
+{
+    overflow: visible;
+    text-decoration: none;
+    border-width: 1px;
+    border-style:  solid;
+    -webkit-tap-highlight-color: @transparent-color;
+    border-radius: @ios-button-border-radius;
+}
+
+/* Icons */
+
+.k-ff .km-ios .km-detail .km-icon
+{
+    top: 5%;
+    left: 7%;
+}
+
+.km-ios .km-button .km-icon:before,
+.km-ios .km-button .km-contactadd:before,
+.km-ios .km-button .km-rowdelete:before,
+.km-ios .km-button .km-rowinsert:before,
+.km-ios .km-button .km-detaildisclose:before
+{
+    display: block;
+    margin-top: -1px;
+}
+
+.km-ios .km-button .km-icon,
+.km-ios .km-button.km-state-active .km-icon
+{
+    text-shadow: none;
+}
+
+.km-ios .km-buttongroup .km-icon
+{
+    margin-top: .1em;
+}
+
+.k-webkit .km-ios .km-icon:after,
+.k-safari .km-ios .km-icon:after
+{
+    background-color: currentcolor;
+}
+
+.km-ios .km-tabstrip .km-icon:before
+{
+    display: block;
+    margin-top: 1px;
+}
+
+.km-ios .km-tabstrip .km-state-active .km-icon:before
+{
+    margin-top: 2px;
+}
+
+.km-ios .km-navbar,
+.km-ios .km-toolbar,
+.km-ios .km-tabstrip
+{
+    border: 0;
+    border-radius: 0;
+}
+
+/* Loader */
+
+.km-ios.km-pane > .km-loader,
+.km-ios .km-pane > .km-loader
+{
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    margin: 0;
+    text-align: center;
+    .box-sizing(border-box);
+}
+
+.km-ios .km-loader:before
+{
+    content: "\a0";
+    display: inline-block;
+    height: 100%;
+    width: 0;
+    vertical-align: middle;
+}
+
+.km-ios .km-load-more,
+.km-ios .km-scroller-pull
+{
+    font-size: 1em;
+}
+
+.km-ios .km-scroller-pull
+{
+    opacity: .5;
+}
+
+.km-ios .km-list > .km-load-more {
+    border-top: 0;
+}
+
+.km-ios .km-loader h1,
+.km-ios .km-scroller-refresh .km-template
+{
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 2em;
+}
+
+.km-ios .km-scroller-pull .km-template
+{
+    min-width: 0;
+}
+
+.km-ios .km-loading,
+.km-ios .km-loader .km-loading-left,
+.km-root .km-ios .km-load-more.km-scroller-refresh .km-icon,
+.km-root .km-ios .km-scroller-pull.km-scroller-refresh .km-icon,
+.km-ios .km-scroller-refresh .km-loading-left
+{
+    display: inline-block;
+    top: auto;
+    left: auto;
+    width: 8px;
+    height: 2px;
+    font-size: 1em;
+    margin: 0;
+    border: 0;
+    border-radius: 5px;
+    vertical-align: middle;
+    .transform-origin(150% 50%);
+    background: currentcolor;
+    .animation(km-ios-spin 1.5s infinite steps(8));
+    .box-shadow(16px 0 rgba(0,0,0,.6));
+}
+
+.km-ios .km-loading,
+.km-ios .km-loader .km-loading-left
+{
+    margin: 2px 0 0;
+}
+
+.km-ios .km-loading:before,
+.km-ios .km-loading:after,
+.km-ios .km-load-more.km-scroller-refresh .km-icon:after,
+.km-ios .km-load-more.km-scroller-refresh .km-icon:before,
+.km-ios .km-scroller-pull.km-scroller-refresh .km-icon:after,
+.km-ios .km-scroller-pull.km-scroller-refresh .km-icon:before
+{
+    color: inherit;
+    content: "\a0";
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin-left: 0;
+    margin-top: 0;
+    .transform-origin(inherit);
+    .transform(rotate(-45deg));
+    width: inherit;
+    height: inherit;
+    border-radius: inherit;
+    background: inherit;
+    -webkit-background-clip: border-box;
+    -webkit-text-fill-color: inherit;
+    .box-shadow(16px 0 rgba(0,0,0,.5));
+}
+
+.km-ios .km-loading:after,
+.km-ios .km-load-more.km-scroller-refresh .km-icon:after,
+.km-ios .km-scroller-pull.km-scroller-refresh .km-icon:after
+{
+    .transform(rotate(-90deg));
+    .box-shadow(16px 0 rgba(0,0,0,.4));
+}
+
+.km-ios .km-loader .km-loading-left,
+.km-ios .km-scroller-refresh .km-loading-left
+{
+    margin-left: -8px;
+    .box-shadow(16px 0 rgba(0,0,0,.3));
+    .animation(km-ios-spin1 1.5s infinite steps(8));
+}
+
+.km-ios .km-loading-left:after,
+.km-ios .km-loading-left:before,
+.km-ios .km-loading-right
+{
+    display: none;
+}
+
+.km-ios .km-loading,
+.km-ios .km-loading:after,
+.km-ios .km-loading:before
+{
+    color: black;
+}
+
+.km-ios .km-loading:before
+{
+    color: rgba(0,0,0,.9);
+}
+
+.km-ios .km-loading:after
+{
+    color: rgba(0,0,0,.8);
+}
+
+.km-ios .km-loading-left
+{
+    color: rgba(0,0,0,.7);
+}
+
+/* PopUp */
+
+.km-ios .km-popup .k-popup
+{
+    font-size: .8em;
+}
+
+.km-ios .km-popup .k-item,
+.km-ios .km-actionsheet > li > a
+{
+    overflow: hidden;
+    border-width: 3px;
+    border-radius: .6em;
+    .box-sizing(border-box);
+    background-clip: padding-box;
+    font-size: 1.5em;
+    padding: .35em 0 .35em .6em;
+    text-shadow: none;
+}
+
+.km-root .km-ios .km-popup .k-item
+{
+    border-width: 3px;
+    border-style: solid;
+}
+
+.km-ios .km-popup .k-item,
+.km-ios .km-actionsheet > li
+{
+    margin: .5em 0;
+}
+
+.km-ios .km-popup .k-item:first-child,
+.km-ios .km-actionsheet > li:first-child
+{
+    margin: 1em 0 .5em;
+}
+
+.km-ios .km-popup .k-item:last-child
+{
+    margin: .5em 0 1em;
+}
+
+.km-ios .km-popup .k-state-hover,
+.km-ios .km-popup .k-state-focused,
+.km-ios .km-popup .k-state-selected,
+.km-ios .km-actionsheet > li > a:active,
+.km-ios .km-actionsheet > li > a:hover,
+.km-ios li.km-actionsheet-cancel > a
+{
+    background-clip: padding-box;
+}
+
+.km-ios .km-popup
+{
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    .box-sizing(border-box);
+}
+
+.km-ios .km-popup .k-list-container
+{
+    width: 100% !important;
+}
+
+.km-ios .km-actionsheet,
+.km-phone .km-ios .km-popup .k-list-container
+{
+    max-height: 80%;
+}
+
+.km-ios .km-actionsheet-wrapper,
+.km-ios .km-popup .k-list-container
+{
+    bottom: 0;
+    border: 0;
+    border-radius: 0;
+    .box-sizing(border-box);
+    padding: 1em 1.5em;
+}
+
+.km-phone .km-ios .km-actionsheet-wrapper,
+.km-phone .km-ios .km-popup .k-list-container
+{
+    border-top: 0;
+}
+
+.km-ios .km-popup-wrapper,
+.km-ios .km-modalview-wrapper
+{
+    padding: 15px;
+}
+
+.km-ios .km-popup.km-pane
+{
+    border: 5px solid transparent;
+}
+
+.km-ios .km-popup.km-pane,
+.km-tablet .km-ios .km-actionsheet-wrapper
+{
+    border-radius: 5px;
+}
+
+.km-ios .km-modalview,
+.km-ios .km-popup.km-pane .km-view
+{
+    overflow: visible;
+    border-radius: 0;
+}
+
+html .km-ios .km-modalview .km-navbar,
+html .km-ios .km-modalview .km-toolbar,
+html .km-ios .km-popup.km-pane .km-navbar,
+html .km-ios .km-popup.km-pane .km-toolbar,
+html .km-ios .km-popup.km-pane .km-tabstrip
+{
+    background: none;
+    .box-shadow(none);
+}
+
+.km-ios .km-modalview .km-header,
+.km-ios .km-popup.km-pane .km-header
+{
+    padding: 0 5px;
+    margin: -5px -5px 2px;
+    border-radius: 5px 5px 0 0;
+    -webkit-margin-collapse: separate;
+}
+
+/* Checkboxes and Radios */
+
+.km-ios .km-listview-label input[type=radio]:checked,
+.km-ios .km-listview-label input[type=checkbox]:checked
+{
+    font-size: 1.2em;
+}
+
+/* Tablet Styles */
+
+.km-tablet .km-ios .km-tabstrip
+{
+    padding: .2rem 0 .2rem;
+}
+
+.km-tablet .km-ios.km-horizontal .km-tabstrip
+{
+    padding: .2rem 0 0;
+}
+
+.km-tablet .km-pane.km-ios .km-tabstrip
+{
+    padding: 0;
+}
+
+.km-tablet .km-ios .km-tabstrip .km-icon
+{
+    margin: .3rem auto;
+}
+
+.km-tablet .km-ios.km-horizontal .km-tabstrip .km-icon
+{
+    margin: .1rem auto;
+}
+
+.km-tablet .km-ios .km-tabstrip .km-button
+{
+    padding: .1rem .3rem;
+    margin: 0;
+    min-width: 8em;
+}
+
+.km-tablet .km-ios.km-horizontal .km-tabstrip .km-button
+{
+    padding: 0 .2rem;
+}
+
+.km-tablet .km-ios .km-view-title,
+.km-tablet .km-ios .km-modalview .km-view-title
+{
+    line-height: 2.2em;
+}
+
+.km-tablet .km-ios .km-actionsheet-title,
+.km-tablet .km-ios li.km-actionsheet-cancel
+{
+    display: none;
+}
+
+.km-tablet .km-ios .km-actionsheet-wrapper,
+.km-tablet .km-ios .km-popup .k-list-container
+{
+    padding: .6em 1em;
+}
+
+
+
+
+
+/* Color Template */
+@import "template.less";

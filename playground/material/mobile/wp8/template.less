@@ -1,0 +1,496 @@
+/* Variables */
+
+@wp-main-background: Background;
+
+@wp-main-text-dark: #fff;
+@wp-main-text-light: #000;
+
+@wp-accent-background: Highlight;
+@wp-accent-text: HighlightText;
+
+@wp-second-background-dark: #1f1f1f;
+@wp-second-background-light: #ddd;
+
+@wp-second-text-dark: #999;
+@wp-second-text-light: #8c8c8c;
+
+@wp-third-background-dark: #333;
+@wp-third-background-light: #bebebe;
+
+@wp-third-text-dark: #666;
+@wp-third-text-light: #ccc;
+
+
+.km-wp,
+.km-wp .km-content,
+.km-wp .km-button
+{
+	background-color: @wp-main-background;
+}
+
+.km-wp-dark-force,
+.km-wp-dark-force .km-content,
+.km-wp-dark-force .km-button
+{
+	background-color: @wp-main-text-light;
+}
+
+.km-wp-light-force,
+.km-wp-light-force .km-content,
+.km-wp-light-force .km-button
+{
+	background-color: @wp-main-text-dark;
+}
+
+.km-wp-dark,
+.km-wp-dark a,
+.km-wp-dark .k-widget,
+.km-wp-dark .k-group,
+.km-wp-dark .k-content,
+.km-wp-dark .km-button,
+.km-wp-dark .km-load-more,
+.km-wp-dark .km-scroller-pull,
+.km-wp-dark .km-detail,
+.km-wp-dark .km-popup .km-item,
+.km-wp-dark .k-dropdown .k-dropdown-wrap
+{
+	color: @wp-main-text-dark;
+}
+
+.km-wp-light,
+.km-wp-light a,
+.km-wp-light .k-widget,
+.km-wp-light .k-group,
+.km-wp-light .k-content,
+.km-wp-light .km-button,
+.km-wp-light .km-load-more,
+.km-wp-light .km-scroller-pull,
+.km-wp-light .km-detail,
+.km-wp-light .km-popup .km-item,
+.km-wp-light .k-dropdown .k-dropdown-wrap
+{
+	color: @wp-main-text-light;
+}
+
+.km-wp-dark .km-actionsheet-wrapper,
+.km-wp-dark .km-popup .k-list-container,
+.km-wp-dark .km-modalview,
+.km-wp-dark .km-popup-wrapper,
+.km-wp-dark .km-footer
+{
+	background-color: @wp-second-background-dark;
+}
+
+.km-wp-light .km-actionsheet-wrapper,
+.km-wp-light .km-popup .k-list-container,
+.km-wp-light .km-modalview,
+.km-wp-light .km-popup-wrapper,
+.km-wp-light .km-footer
+{
+	background-color: @wp-second-background-light;
+}
+
+.km-wp-dark .km-button,
+.km-wp-dark .km-listview-link:after
+{
+	border-color: @wp-main-text-dark;
+}
+
+.km-wp-light .km-button,
+.km-wp-light .km-listview-link:after
+{
+	border-color: @wp-main-text-light;
+}
+
+.km-wp .km-detail:active,
+.km-wp .km-button:active,
+.km-wp .km-detail.km-state-active,
+.km-wp .km-button.km-state-active,
+.km-wp .km-actionsheet > li > a:hover,
+.km-wp .km-actionsheet > li > a:active,
+.km-wp .km-actionsheet > li > .k-state-active,
+.km-wp .km-popup li.k-item:active,
+.km-wp .km-popup li.k-state-selected
+{
+	background: @wp-accent-background;
+}
+
+.km-wp .km-detail:active,
+.km-wp .km-detail.km-state-active,
+.km-wp *:not(.km-tabstrip) > .km-button:active,
+.km-wp *:not(.km-tabstrip) > .km-button.km-state-active,
+.km-wp .km-actionsheet > li > a:hover,
+.km-wp .km-actionsheet > li > a:active,
+.km-wp .km-actionsheet > li > .k-state-active,
+.km-wp .km-popup li.k-item:active,
+.km-wp .km-popup li.k-state-selected
+{
+    color: @wp-accent-text;
+}
+
+.km-wp-dark .km-list > li > .km-icon,
+.km-wp-dark .km-listview-link > .km-icon
+{
+    background: @wp-third-background-dark
+}
+
+.km-wp-light .km-list > li > .km-icon,
+.km-wp-light .km-listview-link > .km-icon
+{
+    background: @wp-third-background-light
+}
+
+.km-wp-dark .km-state-active .km-listview-link,
+.km-wp-dark .km-state-active .km-listview-label
+{
+    color: @wp-second-background-light;
+}
+
+.km-wp-light .km-state-active .km-listview-link,
+.km-wp-light .km-state-active .km-listview-label
+{
+    color: @wp-second-background-dark;
+}
+
+.km-wp .km-badge,
+.km-wp .km-state-active .km-listview-link:after
+{
+    border-color: @wp-accent-text;
+}
+
+.km-wp .km-listview-label input[type=radio],
+.km-wp .km-listview-label input[type=checkbox]
+{
+    border-color: @wp-main-text-dark;
+    .box-shadow(0 0 1px @wp-main-text-dark);
+}
+
+.km-wp-light .km-listview-label input[type=radio],
+.km-wp-light .km-listview-label input[type=checkbox]
+{
+    border-color: @wp-main-text-light;
+    .box-shadow(0 0 1px @wp-main-text-light);
+}
+
+.km-wp .km-listview-label input[type=checkbox]:checked:after
+{
+    color: @wp-main-text-dark;
+}
+
+.km-wp-light .km-listview-label input[type=checkbox]:checked:after
+{
+    color: @wp-main-text-light;
+}
+
+.km-wp .km-listview-label input[type=radio]:checked:after
+{
+    color: transparent;
+    background: @wp-main-text-dark;
+}
+
+.km-wp-light .km-listview-label input[type=radio]:checked:after
+{
+    background: @wp-main-text-light;
+}
+
+.km-wp .km-badge,
+.km-wp .km-group-title
+{
+    background-color: @wp-accent-background;
+    color: @wp-accent-text;
+}
+
+.km-wp-dark .km-loader h1,
+.km-wp-dark .km-filter-wrap:before,
+.km-wp-dark .km-filter-reset .km-clear
+{
+	color: @wp-main-text-dark;
+}
+
+.km-wp-light .km-loader h1,
+.km-wp-light .km-filter-wrap:before,
+.km-wp-light .km-filter-reset .km-clear
+{
+	color: @wp-main-text-light;
+}
+
+.km-wp .km-navbar,
+.km-wp .k-toolbar
+{
+    background: @wp-main-background;
+}
+
+.km-wp-dark-force .km-navbar,
+.km-wp-dark-force .k-toolbar
+{
+    background: @wp-main-text-light;
+}
+
+.km-wp-light-force .km-navbar,
+.km-wp-light-force .k-toolbar
+{
+    background: @wp-main-text-dark;
+}
+
+.km-wp-dark .km-pages > li
+{
+	background: @wp-main-text-dark;
+}
+
+.km-wp-light .km-pages > li
+{
+	background: @wp-main-text-light;
+}
+
+.km-wp .km-pages .km-current-page
+{
+	background: @wp-accent-background;
+}
+
+.km-wp-dark .km-switch-wrapper
+{
+	border-color: @wp-main-text-dark;
+}
+
+.km-wp-light .km-switch-wrapper
+{
+	border-color: @wp-main-text-light;
+}
+
+.km-wp-light .km-switch-container
+{
+    .box-shadow(inset 0 0 0 .2em @wp-main-text-dark);
+}
+
+.km-wp-dark .km-switch-container
+{
+    .box-shadow(inset 0 0 0 .2em @wp-main-text-light);
+}
+
+.km-wp-dark .km-switch-handle
+{
+    .box-shadow(0 0 0 .3em @wp-main-text-light);
+	background: @wp-main-text-dark;
+}
+
+.km-wp-light .km-switch-handle
+{
+    .box-shadow(0 0 0 .3em @wp-main-text-dark);
+	background: @wp-main-text-light;
+}
+
+.km-wp .km-switch-background
+{
+	background: @wp-accent-background;
+}
+
+.km-wp .km-tabstrip .km-state-active .km-icon
+{
+	background-color: @wp-accent-background;
+	color: @wp-accent-text;
+}
+
+.km-wp-dark .km-scroller-pull .km-icon,
+.km-wp-dark .km-tabstrip .km-state-active .km-icon
+{
+	border-color: @wp-main-text-dark;
+}
+
+.km-wp-light .km-scroller-pull .km-icon,
+.km-wp-light .km-tabstrip .km-state-active .km-icon
+{
+	border-color: @wp-main-text-light;
+}
+
+.km-wp-light .km-loader:before,
+.km-wp-light .km-loader:after,
+.km-wp-light .km-loader .km-loading,
+.km-wp-light .km-loader .km-loading:after,
+.km-wp-light .km-loader .km-loading:before,
+.km-wp-light .km-scroller-refresh:after,
+.km-wp-light .km-scroller-refresh:before,
+.km-wp-light .km-scroller-refresh .km-icon,
+.km-wp-light .km-scroller-refresh .km-icon:after,
+.km-wp-light .km-scroller-refresh .km-icon:before
+{
+    color: @wp-main-text-light;
+}
+
+.km-wp-dark .km-loading-right
+{
+    background: @wp-second-background-dark;
+}
+
+.km-wp-light .km-loading-right
+{
+    background: @wp-second-background-light;
+}
+
+.km-wp .km-touch-scrollbar
+{
+    border-color: rgba(255, 255, 255, .4);
+}
+
+/* Forms */
+
+.km-wp input[type=password],
+.km-wp input[type=search],
+.km-wp input[type=number],
+.km-wp input[type=tel],
+.km-wp input[type=url],
+.km-wp input[type=email],
+.km-wp input[type=text]:not(.k-input),
+.km-wp input[type=month],
+.km-wp input[type=color],
+.km-wp input[type=week],
+.km-wp input[type=date],
+.km-wp input[type=time],
+.km-wp input[type=datetime],
+.km-wp input[type=datetime-local],
+.km-wp select:not([multiple]),
+.km-wp .k-dropdown,
+.km-wp textarea
+{
+	border-color: @wp-main-text-dark;
+    background: @wp-main-background;
+	color: @wp-main-text-dark;
+}
+
+.km-wp input::selection,
+.km-wp textarea::selection
+{
+    color: @wp-accent-text;
+    background: @wp-accent-background;
+}
+
+.km-wp-light input[type=password],
+.km-wp-light input[type=search],
+.km-wp-light input[type=number],
+.km-wp-light input[type=tel],
+.km-wp-light input[type=url],
+.km-wp-light input[type=email],
+.km-wp-light input[type=text]:not(.k-input),
+.km-wp-light input[type=month],
+.km-wp-light input[type=color],
+.km-wp-light input[type=week],
+.km-wp-light input[type=date],
+.km-wp-light input[type=time],
+.km-wp-light input[type=datetime],
+.km-wp-light input[type=datetime-local],
+.km-wp-light select:not([multiple]),
+.km-wp-light .k-dropdown,
+.km-wp-light textarea
+{
+	border-color: @wp-main-text-light;
+    color: @wp-main-text-light;
+}
+
+.km-wp-dark-force input[type=password],
+.km-wp-dark-force input[type=search],
+.km-wp-dark-force input[type=number],
+.km-wp-dark-force input[type=tel],
+.km-wp-dark-force input[type=url],
+.km-wp-dark-force input[type=email],
+.km-wp-dark-force input[type=text]:not(.k-input),
+.km-wp-dark-force input[type=month],
+.km-wp-dark-force input[type=color],
+.km-wp-dark-force input[type=week],
+.km-wp-dark-force input[type=date],
+.km-wp-dark-force input[type=time],
+.km-wp-dark-force input[type=datetime],
+.km-wp-dark-force input[type=datetime-local],
+.km-wp-dark-force select:not([multiple]),
+.km-wp-dark-force .k-dropdown,
+.km-wp-dark-force textarea
+{
+    background: @wp-main-text-light;
+}
+
+.km-wp-light-force input[type=password],
+.km-wp-light-force input[type=search],
+.km-wp-light-force input[type=number],
+.km-wp-light-force input[type=tel],
+.km-wp-light-force input[type=url],
+.km-wp-light-force input[type=email],
+.km-wp-light-force input[type=text]:not(.k-input),
+.km-wp-light-force input[type=month],
+.km-wp-light-force input[type=color],
+.km-wp-light-force input[type=week],
+.km-wp-light-force input[type=date],
+.km-wp-light-force input[type=time],
+.km-wp-light-force input[type=datetime],
+.km-wp-light-force input[type=datetime-local],
+.km-wp-light-force select:not([multiple]),
+.km-wp-light-force .k-dropdown,
+.km-wp-light-force textarea
+{
+	background: @wp-main-text-dark;
+}
+
+.km-wp input[type=password]:focus,
+.km-wp input[type=search]:focus,
+.km-wp input[type=number]:focus,
+.km-wp input[type=tel]:focus,
+.km-wp input[type=url]:focus,
+.km-wp input[type=email]:focus,
+.km-wp input[type=text]:not(.k-input):focus,
+.km-wp input[type=month]:focus,
+.km-wp input[type=color]:focus,
+.km-wp input[type=week]:focus,
+.km-wp input[type=date]:focus,
+.km-wp input[type=time]:focus,
+.km-wp input[type=datetime]:focus,
+.km-wp input[type=datetime-local]:focus,
+.km-wp textarea:focus
+{
+	border-color: @wp-accent-background;
+}
+
+.km-wp select:not([multiple]):focus,
+.km-wp .k-dropdown .k-state-active,
+.km-wp .k-dropdown .k-state-focused
+{
+    color: @wp-accent-text;
+    border-color: @wp-accent-text;
+    background-color: @wp-accent-background;
+}
+
+/* Slider */
+
+.km-wp .k-slider .k-draghandle,
+.km-wp .k-slider .k-draghandle:hover
+{
+    background: @wp-main-text-dark;
+}
+
+.km-wp-light .k-slider .k-draghandle,
+.km-wp-light .k-slider .k-draghandle:hover
+{
+    background: @wp-main-text-light;
+}
+
+.km-wp .k-slider .k-tick-large:before
+{
+    background: @wp-main-text-light;
+}
+
+.km-wp-light .k-slider .k-tick-large:before
+{
+    background: @wp-main-text-dark;
+}
+
+.km-wp .k-slider-selection
+{
+    background: @wp-accent-background;
+}
+
+.km-wp .k-slider-track
+{
+    background: @wp-third-background-dark;
+}
+
+.km-wp-light .k-slider-track
+{
+    background: @wp-third-background-light;
+}
+

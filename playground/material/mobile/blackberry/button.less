@@ -1,0 +1,102 @@
+@import "../common/icons.less";
+@import "../common/button.less";
+@import "base.less";
+
+/* Button */
+
+.km-blackberry .km-button
+{
+    margin-left: 4px;
+    margin-right: 4px;
+    .box-shadow(none);
+}
+
+.km-blackberry .km-button:before
+{
+    content: "\a0";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    top: -1px;
+    left: -1px;
+    background-color: inherit;
+    border: inherit;
+    border-radius: inherit;
+    z-index: -1;
+}
+
+.km-blackberry .km-button:before
+{
+    z-index: 0;
+    display: none;
+}
+
+.km-blackberry .km-button .km-text
+{
+    position: relative;
+}
+
+.km-blackberry .km-badge
+{
+    min-width: 1em;
+    font-size: .7rem;
+    border-radius: ~"2rem";
+}
+
+.km-blackberry .km-detail
+{
+    line-height: .95rem;
+    border-radius: ~".2rem";
+}
+
+.km-root .km-blackberry .km-detail
+{
+    width: 1.35rem;
+    height: 1.4rem;
+}
+
+.km-blackberry .km-detail .km-icon,
+.km-blackberry .km-detail .km-icon:after,
+.km-blackberry .km-detail .km-icon:before,
+.km-root .km-blackberry .km-detail:before,
+.km-root .km-blackberry .km-detail:after
+{
+    line-height: 1.4rem;
+    text-align: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.km-blackberry .km-detail .km-icon:after,
+.km-blackberry .km-detail .km-icon:before
+{
+    text-shadow: none;
+}
+
+.km-blackberry .km-detail .km-icon:before,
+.km-root .km-blackberry .km-detail:before
+{
+    display: block;
+}
+
+.km-blackberry .km-detail .km-text
+{
+    display: none;
+}
+
+.km-blackberry .km-button:active:before,
+.km-blackberry .km-button.km-state-active:before
+{
+    display: block;
+}
+
+.km-blackberry .km-content .km-button:after
+{
+    background-color: transparent;
+}
+

@@ -1,0 +1,95 @@
+@import "../common/navbar.less";
+@import "base.less";
+
+/* NavBar */
+
+.km-android .km-view-title
+{
+    visibility: hidden;
+}
+
+.km-android .km-popover-root .km-view-title,
+.km-android .km-modalview .km-view-title,
+.km-android .km-splitview .km-view-title
+{
+    visibility: visible;
+    display: block;
+}
+
+.km-android .km-view-title,
+.km-android .km-dialog-title
+{
+    text-align: center;
+    font-size: 1.4em;
+    line-height: 2.4em;
+    font-weight: bold;
+}
+
+.km-android.km-horizontal .km-view-title
+{
+    line-height: 2.1em;
+}
+
+.km-root .km-android .km-navbar,
+.km-root .km-android .k-toolbar
+{
+    font-size: .8em;
+}
+
+.km-android .km-navbar
+{
+    padding: 0 .5em;
+}
+
+.km-android .km-navbar .km-button,
+.km-android .k-toolbar .km-button
+{
+    margin: 0;
+    border-style: none;
+    .box-shadow(none);
+    background: none;
+}
+
+.km-android .km-navbar .km-button
+{
+    display: inline;
+}
+
+.km-android .km-navbar [class*=item] .km-button
+{
+    padding: .95em 0;
+    text-transform: uppercase;
+}
+
+.km-android .k-toolbar > .km-button
+{
+    text-transform: uppercase;
+}
+
+.km-android .km-navbar [class*=item] .km-text
+{
+    float: none;
+    border: 0;
+    border-right-width: @android-border-width;
+    border-right-style: solid;
+    padding: 0 .95em;
+}
+
+.km-android.km-horizontal .km-leftitem .km-button,
+.km-android.km-horizontal .km-rightitem .km-button
+{
+    padding: .4em 0;
+}
+
+html .km-android .km-navbar .km-state-active,
+html .km-android .k-toolbar .km-state-active
+{
+    background: currentcolor;
+    opacity: .6;
+}
+
+html .km-android .k-toolbar .km-state-active
+{
+    opacity: 1;
+}
+

@@ -1,0 +1,87 @@
+/* Platform specific workarounds */
+
+.km-on-wp .km-view,
+.km-on-wp .km-header,
+.km-on-wp .km-footer,
+.km-on-wp .km-slider,
+.km-on-wp .km-switch,
+.km-on-wp .km-filter-reset,
+.km-on-wp .km-shim .k-animation-container,
+.km-on-wp .km-scroll-container
+{
+    transform: translateZ(0);
+}
+
+.km-ios,
+.km-blackberry,
+.km-on-ios .km-view,
+.km-on-ios .km-header,
+.km-on-ios .km-footer,
+.km-on-ios .km-slider,
+.km-on-ios .km-switch,
+.km-on-ios .km-group-title,
+// .km-on-ios .km-list > li,
+.km-on-ios .km-filter-reset,
+.km-on-ios .km-shim .k-animation-container,
+.km-on-ios .km-scroll-container,
+.km-on-blackberry .km-view,
+.km-on-blackberry .km-content,
+.km-on-blackberry .km-header,
+.km-on-blackberry .km-footer,
+.km-on-blackberry .km-icon,
+.km-on-blackberry .km-switch,
+.km-on-blackberry .km-popup .k-item,
+.km-on-blackberry .km-actionsheet-wrapper,
+.km-on-android.km-4 .k-slider
+{
+    -webkit-transform: translatez(0);
+}
+
+.km-on-android.km-4 .km-switch,
+.km-on-android.km-4 .km-listview-wrapper,
+.km-on-android.km-4 .km-content,
+.km-on-android.km-4 .km-switch-handle,
+.km-android.km-4.km-on-android .km-switch-wrapper,
+.km-on-android.km-4 .km-scroll-container,
+.km-on-meego .km-content,
+.km-on-meego .km-switch,
+.km-on-meego .km-icon,
+.km-on-meego .km-header,
+.km-on-meego .km-footer,
+.km-on-meego .km-content,
+.km-on-meego .km-switch-handle,
+.km-on-meego .km-switch-wrapper
+{
+    -webkit-transform: translatez(0);
+    -webkit-backface-visibility: hidden;
+}
+
+// Fix for several strange behaviors in Android Chrome and native scrolling
+.km-android4.km-ios-chrome .km-listview-wrapper
+{
+    -webkit-transform: none;
+}
+
+.km-native-scrolling .km-header,
+.km-native-scrolling .km-footer,
+.km-native-scrolling .km-shim,
+.km-native-scrolling .km-popup-overlay,
+.km-native-scrolling .km-drawer,
+.km-native-scrolling > .km-pane > .km-loader,
+.km-on-android.km-4 .km-scroller-pull .km-icon
+{
+    -webkit-backface-visibility: hidden;
+}
+
+// Fix for the Android input duplication issue
+.km-on-android.km-4 input
+{
+    -webkit-user-modify: read-write-plaintext-only;
+}
+
+.km-wp .km-view .km-absolute,
+.km-meego .km-view .km-absolute
+{
+    position: absolute;
+}
+

@@ -1,0 +1,82 @@
+@import "../common/navbar.less";
+@import "../../common/transitions.less";
+@import "base.less";
+
+/* ToolBar */
+
+.km-flat .k-toolbar
+{
+    line-height: 2.1em;
+}
+
+.km-flat .k-toolbar .km-button,
+.km-flat .k-toolbar .k-split-button
+{
+    padding-top: 0;
+    padding-bottom: 0;
+    line-height: inherit;
+}
+
+.km-flat .k-toolbar .k-button-icon .km-icon,
+.km-flat .k-toolbar .k-button-icontext .km-icon,
+.km-flat .k-split-button .km-arrowdown
+{
+    width: 1em;
+    height: 1em;
+    font-size: 1.2em;
+    margin-top: -7px;
+    margin-bottom: -2px;
+    vertical-align: middle;
+}
+
+.km-flat .k-split-button .km-arrowdown
+{
+    margin-left: 2px;
+    margin-right: 1px;
+}
+
+.km-flat .k-split-button .k-button-icontext
+{
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.km-flat .k-split-button-arrow
+{
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.km-flat .km-actionsheet.k-split-container > li > .km-button,
+.km-flat .km-actionsheet.k-overflow-container > li > .km-button
+{
+    min-width: 10em;
+    text-align: center;
+    font-size: 1.1em;
+    border: 0;
+    border-radius: 0;
+}
+
+.km-flat .km-actionsheet.k-split-container > li > .km-button
+{
+    min-width: 5em;
+}
+
+.km-flat .k-split-wrapper .km-actionsheet-wrapper,
+.km-flat .k-overflow-wrapper .km-actionsheet-wrapper
+{
+    padding: 1px;
+}
+
+html .km-flat .k-split-container.km-actionsheet > li,
+html .km-flat .k-overflow-container.km-actionsheet > li
+{
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.km-flat .k-split-container.km-actionsheet,
+.km-flat .k-overflow-container.km-actionsheet
+{
+    border-top: 0;
+}

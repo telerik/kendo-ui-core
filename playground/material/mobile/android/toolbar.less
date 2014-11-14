@@ -1,0 +1,123 @@
+@import "../common/navbar.less";
+@import "../../common/transitions.less";
+@import "base.less";
+
+/* ToolBar */
+
+.km-android .k-toolbar
+{
+    border: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    line-height: 2.6em;
+    background-image: none;
+}
+
+.km-android .k-toolbar > *
+{
+    vertical-align: top;
+}
+
+.km-android .k-toolbar .k-button-icon .km-icon,
+.km-android .k-toolbar .k-button-icontext .km-icon,
+.km-android .k-split-button .km-arrowdown
+{
+    width: 1em;
+    height: 1em;
+    font-size: 2.4em;
+    margin-top: -8px;
+    margin-bottom: -5px;
+    margin-right: .1em;
+    vertical-align: middle;
+}
+
+.km-android .k-toolbar .km-button
+{
+    .box-sizing(border-box);
+}
+
+.km-android .k-toolbar .km-text
+{
+    vertical-align: middle;
+}
+
+.km-android .k-toolbar .km-buttongroup .k-button-icon
+{
+    padding-left: .6em;
+    padding-right: .6em;
+}
+
+.km-android .k-toolbar .km-buttongroup
+{
+    border-width: 0 1px;
+    border-style: solid;
+    padding: 0 .5em;
+}
+
+.km-android .k-toolbar .km-buttongroup .km-button
+{
+    border-style: solid;
+    border-color: transparent;
+    border-width: 1px 0;
+}
+
+.km-android .k-toolbar .km-buttongroup + .km-buttongroup
+{
+    padding-left: 0;
+    border-left: 0;
+    margin-left: 0;
+}
+
+.km-root .k-toolbar .km-buttongroup.k-toolbar-last-visible
+{
+    padding-right: 0;
+    border-right: 0;
+    margin-right: 0;
+}
+
+.km-android .k-toolbar .k-split-button-arrow
+{
+    border-radius: 0;
+}
+
+.km-android .k-split-button .km-arrowdown
+{
+    margin: 0;
+}
+
+.km-android .km-popup .k-split-container,
+.km-android .km-popup .k-overflow-container
+{
+    margin-left: 0 !important;
+    width: 100% !important;
+}
+
+.km-android .k-split-wrapper > .km-popup-wrapper,
+.km-android .k-overflow-wrapper > .km-popup-wrapper
+{
+    padding: 7px 7px 13px;
+}
+
+.km-tablet .km-android .k-split-wrapper > .km-popup-wrapper,
+.km-tablet .km-android .k-overflow-wrapper > .km-popup-wrapper
+{
+    padding: 9px 9px 15px;
+}
+.km-android .k-split-container .km-actionsheet-cancel,
+.km-android .k-overflow-container .km-actionsheet-cancel
+{
+    display: none;
+}
+
+.km-android .k-split-container .km-button,
+.km-android .k-overflow-container .km-button
+{
+    margin: 0;
+    padding-right: 3em;
+}
+
+.km-android .k-overflow-wrapper
+{
+    height: auto !important;
+    bottom: 0;
+}

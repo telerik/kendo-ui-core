@@ -1,0 +1,169 @@
+.km-hide-title
+{
+    display: none;
+}
+
+.km-show-title:after
+{
+    display: block;
+    content: "\a0";
+    height: 0;
+}
+
+.km-fill-title:after
+{
+    height: auto;
+}
+
+.km-footer .km-show-title:after
+{
+    display: inline-block;
+}
+
+.km-view-title,
+.km-dialog-title
+{
+    position: relative;
+    visibility: visible;
+    text-align: center;
+    font-size: 1.4em;
+    line-height: 2.3em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.km-horizontal .km-view-title
+{
+    line-height: 2em;
+}
+
+.km-root .k-toolbar,
+.km-navbar
+{
+    padding: 0;
+    .flex(1);
+    position: relative;
+    overflow: hidden;
+    display: block;
+    border-width: 0 0 1px 0;
+    background-color: #fff;
+}
+
+.k-ff.km-root .k-toolbar,
+.k-ff .km-navbar
+{
+    overflow: visible;
+}
+
+.km-navbar .km-button
+{
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+}
+
+.km-navbar .km-no-title
+{
+    padding-top: .7rem;
+    padding-bottom: .7rem;
+}
+
+.km-horizontal .km-navbar .km-button
+{
+    margin-top: .3rem;
+    margin-bottom: .3rem;
+}
+
+.km-horizontal .km-navbar .km-no-title
+{
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+}
+
+.km-tablet.km-root .km-no-title
+{
+    padding-top: .55rem;
+    padding-bottom: .55rem;
+}
+
+.km-tablet .km-navbar .km-button
+{
+    margin-top: .45rem;
+    margin-bottom: .45rem;
+}
+
+.km-root .km-pane .km-navbar .km-no-title
+{
+    visibility: visible;
+    line-height: 0;
+}
+
+/* Navbar */
+
+// pad the NavBar when black-translucent to fix its size and support iOS7
+.km-on-ios.km-black-translucent-status-bar.km-app .km-header .km-navbar
+{
+    padding-top: 1.4em;
+    background-clip: border-box;
+}
+
+// reset the padding in iOS6, as the status bar can't overlay it in Cordova
+.km-on-ios.km-ios5.km-cordova .km-header .km-navbar,
+.km-on-ios.km-ios6.km-cordova .km-header .km-navbar
+{
+    padding-top: 0;
+}
+
+.km-leftitem,
+.km-rightitem
+{
+    z-index: 1;
+    position: absolute;
+    right: .5em;
+}
+
+.km-popup .km-rightitem
+{
+    right: 0;
+}
+
+.km-leftitem
+{
+    left: .5em;
+    right: auto;
+}
+
+.km-popup .km-leftitem
+{
+    left: 0;
+}
+
+/* Center left/right item contents */
+.km-leftitem,
+.km-rightitem
+{
+    height: 100%;
+}
+
+.km-on-ios.km-black-translucent-status-bar.km-app .km-leftitem,
+.km-on-ios.km-black-translucent-status-bar.km-app .km-rightitem
+{
+    height: auto;
+}
+
+.km-leftitem > *,
+.km-rightitem > *
+{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.km-leftitem:before,
+.km-rightitem:before
+{
+    content: "\a0";
+    display: inline-block;
+    height: 100%;
+    width: 0;
+    vertical-align: middle;
+}
+

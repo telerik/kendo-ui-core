@@ -1,0 +1,280 @@
+/* Forms and icons */
+
+.km-item label:before,
+.km-item label.km-item-checked:after
+{
+    position: absolute;
+    content: " ";
+    display: block;
+    top: 50%;
+    left: .6em;
+    width: 36px;
+    height: 36px;
+    margin-top: -18px;
+}
+
+/* Slider */
+
+.km-widget .k-slider
+{
+    line-height: .6em;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.km-widget .k-slider-horizontal
+{
+    width: 50%;
+    height: .6em;
+    line-height: .6em;
+}
+
+.km-list .k-slider
+{
+    position: absolute;
+    right: 0;
+    margin-top: -.5em;
+    top: 50%;
+}
+
+.km-root .k-slider-track
+{
+    left: 1em !important;
+    right: 1em;
+    height: 100%;
+    display: block;
+    position: absolute;
+    border: .5em solid transparent;
+    border-width: .5em 0;
+}
+
+.km-widget .k-slider-horizontal .k-slider-track
+{
+    width: auto !important;
+}
+
+.km-widget .k-slider .k-slider-track
+{
+    background-clip: padding-box;
+}
+
+.km-widget .k-slider-track,
+.km-widget .k-slider-selection
+{
+    margin-top: 0;
+    border-radius: 5px;
+    .box-shadow(inset 0 0 1px rgba(0,0,0,.3));
+}
+
+.km-widget .k-slider-horizontal .k-slider-selection
+{
+    top: 0;
+    height: 100%;
+}
+
+.km-widget .k-slider-items
+{
+    margin: 0;
+}
+
+.km-widget .k-slider .k-draghandle
+{
+    text-indent: -3333px;
+    left: 0;
+    width: 1.2em;
+    height: 1.2em;
+    display: block;
+    position: absolute;
+}
+
+.km-widget .k-slider-tooltip
+{
+    display: none;
+}
+
+/* Dialog */
+
+.km-dialog
+{
+    position: absolute;
+    min-width: 19em;
+    max-width: 25em;
+    overflow: hidden;
+}
+
+.km-dialog-title
+{
+    position: static;
+    float: none;
+    height: 2.6em;
+    margin-top: -2.6em;
+    font-size: 1.22em;
+    line-height: 3em;
+}
+
+.km-dialog:before
+{
+    content: "\a0";
+    display: block;
+    overflow: visible;
+    width: 100%;
+    height: 3em;
+    opacity: .2;
+}
+
+.km-dialog-content
+{
+    font-weight: normal;
+    min-height: 2em;
+    text-align: center;
+}
+
+.km-dialog .km-button
+{
+    display: block;
+    margin: .4em;
+    font-size: 1.3em;
+    text-align: center;
+    padding: .44em;
+    .user-select(none);
+}
+
+/* Form elements */
+
+.km-list input[type=text]:not(.k-input),
+.km-list input[type=password],
+.km-list input[type=search],
+.km-list input[type=number],
+.km-list input[type=tel],
+.km-list input[type=url],
+.km-list input[type=email],
+.km-list input[type=file],
+.km-list input[type=month],
+.km-list input[type=color],
+.km-list input[type=week],
+.km-list input[type=date],
+.km-list input[type=time],
+.km-list input[type=datetime],
+.km-list input[type=datetime-local],
+.km-list select:not([multiple]),
+.km-list .k-dropdown,
+.km-list textarea
+{
+    width: 50%;
+    .box-sizing(border-box);
+    font-size: 1.2em;
+    position: absolute;
+    top: 50%;
+    line-height: normal;
+    z-index: 1;
+    right: 0;
+    margin-top: -1em;
+}
+
+.km-widget .k-slider .k-tick,
+.km-widget .k-slider .k-label,
+.km-widget .k-slider .k-button
+{
+    display: none;
+}
+
+.km-list textarea
+{
+    position: relative;
+    width: ~"-webkit-calc(50% + .7em)";
+    width: ~"-moz-calc(50% + .7em)";
+    width: ~"calc(50% + .7em)";
+    margin-right: -.7em;
+}
+
+.km-list input,
+.km-list select,
+.km-list textarea,
+.km-list input[type=checkbox],
+.km-list input[type=radio]
+{
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+
+.km-list input[type=checkbox],
+.km-list input[type=radio]
+{
+    position: absolute;
+    top: 50%;
+    right: .7em;
+    margin-top: -.5em;
+    background: none;
+}
+
+.km-widget input,
+.km-widget textarea
+{
+    .user-select(text);
+}
+
+.km-widget input[readonly],
+.km-widget input[type=image],
+.km-widget select:not([multiple])
+{
+    .user-select(none);
+}
+
+.km-list textarea
+{
+    top: 0;
+}
+
+.km-list .k-dropdown
+{
+    line-height: 1.4em;
+}
+
+.km-list .k-dropdown,
+.km-list .k-dropdown .k-input
+{
+    background-color: transparent;
+}
+
+.km-list .k-dropdown-wrap
+{
+    display: inline-block;
+}
+
+.km-list .km-listview-label:after,
+.km-list input ~ .km-listview-link:after,
+.km-list textarea ~ .km-listview-link:after,
+.km-list select ~ .km-listview-link:after,
+.km-list .k-dropdown ~ .km-listview-link:after
+{
+    display: none;
+}
+
+.km-list .k-dropdown select,
+.km-list .k-dropdown .k-select
+{
+    display: none;
+}
+
+.km-widget .km-list textarea
+{
+    position: relative;
+    float: right;
+    margin-top: 0;
+    font-family: inherit;
+}
+
+/* Checkboxes and Radios */
+
+.km-listview-label input[type=radio],
+.km-listview-label input[type=checkbox]
+{
+    border: 0;
+    font-size: inherit;
+    width: 1em;
+    height: .9em;
+}
+

@@ -1,0 +1,57 @@
+@import "../common/icons.less";
+@import "../common/buttongroup.less";
+@import "base.less";
+
+/* ButtonGroup */
+
+.km-ios .km-buttongroup
+{
+    border: none;
+    background: none;
+    padding: 0 1px 1px 0;
+}
+
+.km-ios .km-buttongroup .km-button,
+.km-tablet .km-ios .km-buttongroup .km-button
+{
+    border-radius: 0;
+    border-width: 1px;
+    border-right-width: 0;
+}
+
+.km-ios .km-navbar .km-buttongroup .km-button:not(.km-state-active)
+{
+    background-color: transparent;
+}
+
+.km-ios .km-view .km-buttongroup .km-button:first-child
+{
+    border-radius: 5pt 0 0 5pt;
+}
+
+.km-ios .km-view .km-buttongroup .km-button:last-child
+{
+    border-radius: 0 5pt 5pt 0;
+}
+
+.km-ios .k-toolbar .km-buttongroup
+{
+    border-radius: 6pt;
+}
+
+.km-ios .km-buttongroup .km-button:last-child
+{
+    border-right-width: 1px;
+}
+
+.km-ios .km-buttongroup .km-state-active
+{
+    text-shadow: none;
+    border-width: 1px 0 1px 1px;
+}
+
+.km-ios .km-buttongroup .km-state-active:last-child
+{
+    margin-left: -1px;
+}
+

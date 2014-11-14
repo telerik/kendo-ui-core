@@ -1,0 +1,117 @@
+@import "../common/icons.less";
+@import "../common/listview.less";
+@import "base.less";
+
+/* ListView */
+
+.km-blackberry .km-listinset,
+.km-blackberry .km-listgroupinset
+{
+    margin: 0;
+}
+
+.km-blackberry .km-listview
+{
+    margin: 0;
+}
+
+.km-blackberry div.km-group-title
+{
+    margin-top: 0;
+    padding: .2em 0;
+    border-top-width: @blackberry-border-width;
+    border-top-style: solid;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+}
+
+.km-blackberry .km-list > li
+{
+    font-size: 1em;
+    font-weight: normal;
+    line-height: 2em;
+    border-bottom-width: @blackberry-border-width;
+    border-bottom-style: solid;
+    overflow: hidden;
+}
+
+.km-blackberry .km-list .km-button
+{
+    line-height: 1.2em;
+}
+
+.km-blackberry .km-group-title
+{
+    color: #333;
+    background: transparent;
+    padding-top: .2em;
+    line-height: inherit;
+}
+
+.km-blackberry .km-list
+{
+    margin-top: 0;
+}
+
+.km-blackberry .km-listview-link:after
+{
+    display: none;
+}
+
+.km-blackberry .km-list .km-item
+{
+    height: 56px;
+}
+
+.km-blackberry .km-listview .km-switch
+{
+    margin-top: -1em;
+}
+
+/* Filter box */
+
+.km-blackberry .km-listview-wrapper form .km-filter-wrap > input
+{
+    font-size: 1.2em;
+    padding-left: 1.8em;
+    padding-right: 1.8em;
+}
+
+.km-blackberry .km-filter-wrap:before
+{
+    margin: 0 -1.3em 0 .3em;
+}
+
+.km-blackberry .km-filter-reset
+{
+    margin-left: -2em;
+}
+
+.km-blackberry .km-filter-reset .km-clear:after
+{
+    content: "\e038";
+}
+
+/* Pull to refresh */
+
+.km-blackberry .km-load-more,
+.km-blackberry .km-scroller-pull
+{
+    font-size: 1.4rem;
+}
+
+.km-blackberry .km-load-more .km-icon,
+.km-blackberry .km-scroller-pull .km-icon
+{
+    width: 2.4rem;
+    height: 2.4rem;
+    font-size: 2.4rem;
+}
+
+.km-blackberry .km-scroller-refresh .km-icon
+{
+    width: 2rem;
+    height: 2rem;
+    font-size: 2rem;
+}
+
