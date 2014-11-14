@@ -142,6 +142,8 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\aspx\ASPXAreaRegistration.cs" />
     <Compile Include="Areas\razor\RazorAreaRegistration.cs" />
+    <Compile Include="Controllers\Chart_Api\ExportController.cs" />
+    <Compile Include="Controllers\Chart_Api\Pdf_ExportController.cs" />
     <Compile Include="Controllers\Chart_Api\EventsController.cs" />
     <Compile Include="Controllers\Chart_Api\IndexController.cs" />
     <Compile Include="Controllers\Chart_Api\SelectionController.cs" />
@@ -858,6 +860,7 @@
     <Content Include="Areas\aspx\Views\bullet_charts\local_data_binding.aspx" />
     <Content Include="Areas\aspx\Views\bullet_charts\remote_data_binding.aspx" />
     <Content Include="Areas\aspx\Views\diagram\api.aspx" />
+    <Content Include="Areas\aspx\Views\diagram\export.aspx" />
     <Content Include="Areas\aspx\Views\diagram\pdf_export.aspx" />
     <Content Include="Areas\aspx\Views\diagram\editing.aspx" />
     <Content Include="Areas\aspx\Views\diagram\events.aspx" />
@@ -1255,6 +1258,8 @@
     <Content Include="Areas\aspx\Views\diagram\layout.aspx" />
     <Content Include="Areas\razor\Views\diagram\pdf_export.cshtml" />
     <Content Include="Areas\razor\Views\diagram\export.cshtml" />
+    <Content Include="Areas\razor\Views\chart_api\pdf_export.cshtml" />
+    <Content Include="Areas\razor\Views\chart_api\export.cshtml" />
     <None Include="Areas\razor\Views\diagram\editing.cshtml" />
     <Content Include="Areas\razor\Views\range_bar_charts\index.cshtml" />
     <Content Include="Areas\razor\Views\diagram\index.cshtml" />
