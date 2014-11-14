@@ -4,6 +4,9 @@ using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using System.Linq;
+using System.Linq.Expressions;
+using System;
 
 namespace Kendo.Mvc.Examples.Controllers
 {
@@ -14,18 +17,23 @@ namespace Kendo.Mvc.Examples.Controllers
         public EmployeeDirectoryController()
         {
             employeeDirectory = new EmployeeDirectoryService(new SampleEntities());
-        }
-
+        }        
+       
         public JsonResult Index([DataSourceRequest] DataSourceRequest request, int? id)
-        {
-            var result = employeeDirectory.GetEmployees(id);
+        {                        
+            var result = GetDirectory().ToTreeDataSourceResult(request,
+                e => e.EmployeeID,
+                e => e.ReportsTo,
+                e => id.HasValue ? e.ReportsTo == id : e.ReportsTo == null,
+                e => e.ToEmployeeDirectoryModel()
+            );            
 
-            return Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
-        }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }       
 
         public JsonResult All([DataSourceRequest] DataSourceRequest request)
         {
-            return Json(GetDirectory().ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+            return Json(GetDirectory().ToTreeDataSourceResult(request, e => e.ToEmployeeDirectoryModel()), JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult Destroy([DataSourceRequest] DataSourceRequest request, EmployeeDirectoryModel employee)
@@ -35,7 +43,7 @@ namespace Kendo.Mvc.Examples.Controllers
                 employeeDirectory.Delete(employee, ModelState);
             }
 
-            return Json(new[] { employee }.ToDataSourceResult(request, ModelState));
+            return Json(new[] { employee }.ToTreeDataSourceResult(request, ModelState));
         }
 
         public JsonResult Create([DataSourceRequest] DataSourceRequest request, EmployeeDirectoryModel employee)
@@ -45,7 +53,7 @@ namespace Kendo.Mvc.Examples.Controllers
                 employeeDirectory.Insert(employee, ModelState);
             }
 
-            return Json(new[] { employee }.ToDataSourceResult(request, ModelState));
+            return Json(new[] { employee }.ToTreeDataSourceResult(request, ModelState));
         }
 
         public JsonResult Update([DataSourceRequest] DataSourceRequest request, EmployeeDirectoryModel employee)
@@ -55,10 +63,10 @@ namespace Kendo.Mvc.Examples.Controllers
                 employeeDirectory.Update(employee, ModelState);
             }
 
-            return Json(new[] { employee }.ToDataSourceResult(request, ModelState));
+            return Json(new[] { employee }.ToTreeDataSourceResult(request, ModelState));
         }
 
-        private IEnumerable<EmployeeDirectoryModel> GetDirectory()
+        private IEnumerable<EmployeeDirectory> GetDirectory()
         {
             return employeeDirectory.GetAll();
         }

@@ -13,6 +13,7 @@ namespace Kendo.Mvc.Extensions
     using Kendo.Mvc.Infrastructure.Implementation;
     using Infrastructure.Implementation.Expressions;
     using Kendo.Mvc.UI;
+    using System.Reflection;
 
     /// <summary>
     /// Provides extension methods to process DataSourceRequest.
@@ -108,7 +109,7 @@ namespace Kendo.Mvc.Extensions
         {
             var result = new DataSourceResult();
 
-            var data = queryable;    
+            var data = queryable;
 
             var filters = new List<IFilterDescriptor>();
 
@@ -177,7 +178,7 @@ namespace Kendo.Mvc.Extensions
             }
 
             if (groups.Any())
-            {                
+            {
                 groups.Reverse().Each(groupDescriptor =>
                 {
                     var sortDescriptor = new SortDescriptor
@@ -203,7 +204,7 @@ namespace Kendo.Mvc.Extensions
             if (groups.Any())
             {
                 data = data.GroupBy(notPagedData, groups);
-            }           
+            }
 
             result.Data = data.Execute(selector);
 
@@ -212,7 +213,7 @@ namespace Kendo.Mvc.Extensions
                 result.Errors = modelState.SerializeErrors();
             }
 
-            temporarySortDescriptors.Each(sortDescriptor => sort.Remove(sortDescriptor));            
+            temporarySortDescriptors.Each(sortDescriptor => sort.Remove(sortDescriptor));
 
             return result;
         }
@@ -526,6 +527,32 @@ namespace Kendo.Mvc.Extensions
                     Expression.Constant(index)));
         }
 
+        /// <summary>
+        /// Produces the set union of two sequences by using the default equality comparer.        
+        /// </summary>
+        /// <returns>        
+        /// An <see cref="IQueryable" /> that contains the elements from both input sequences, excluding duplicates.
+        /// </returns>
+        /// <param name="source">
+        /// An <see cref="IQueryable" /> whose distinct elements form the first set for the union.
+        /// </param>
+        /// <param name="second">
+        /// An <see cref="IQueryable" /> whose distinct elements form the first set for the union.
+        /// </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="source" /> is null.</exception>
+        public static IQueryable Union(this IQueryable source, IQueryable second)
+        {
+            IQueryable query = source.Provider.CreateQuery(
+                Expression.Call(
+                    typeof(Queryable),
+                    "Union",
+                    new[] { source.ElementType },
+                    source.Expression,
+                    second.Expression));
+
+            return query;
+        }
+
         private static IEnumerable Execute<TModel, TResult>(this IQueryable source, Func<TModel, TResult> selector)
         {
             if (source == null) throw new ArgumentNullException("source");
@@ -576,5 +603,254 @@ namespace Kendo.Mvc.Extensions
                 return list;
             }
         }
+
+        public static TreeDataSourceResult ToTreeDataSourceResult(this IEnumerable enumerable, DataSourceRequest request)
+        {
+            return enumerable.AsQueryable().ToTreeDataSourceResult(request, null);
+        }
+
+        public static TreeDataSourceResult ToTreeDataSourceResult(this IEnumerable enumerable, DataSourceRequest request, ModelStateDictionary modelState)
+        {
+            return enumerable.AsQueryable().CreateTreeDataSourceResult<object, object, object, object>(request, null, null, modelState, null, null);
+        }
+
+        public static TreeDataSourceResult ToTreeDataSourceResult<TModel, TResult>(this IQueryable<TModel> enumerable,
+            DataSourceRequest request,
+            Func<TModel, TResult> selector)
+        {
+            return enumerable.ToTreeDataSourceResult<TModel, object, object, TResult>(request, null, null, selector);
+        }
+
+        public static TreeDataSourceResult ToTreeDataSourceResult<TModel, TResult>(this IEnumerable<TModel> enumerable,
+            DataSourceRequest request,
+            Func<TModel, TResult> selector)
+        {
+            return enumerable.ToTreeDataSourceResult<TModel, object, object, TResult>(request, null, null, selector);
+        }
+
+        public static TreeDataSourceResult ToTreeDataSourceResult<TModel, T1, T2>(this IQueryable<TModel> enumerable,
+            DataSourceRequest request,
+            Expression<Func<TModel, T1>> idSelector,
+            Expression<Func<TModel, T2>> parentIDSelector)
+        {
+            return enumerable.CreateTreeDataSourceResult<TModel, T1, T2, TModel>(request, idSelector, parentIDSelector, null, null, null);
+        }
+
+        public static TreeDataSourceResult ToTreeDataSourceResult<TModel, T1, T2>(this IQueryable<TModel> enumerable,
+            DataSourceRequest request,
+            Expression<Func<TModel, T1>> idSelector,
+            Expression<Func<TModel, T2>> parentIDSelector,
+            Expression<Func<TModel, bool>> rootSelector)
+        {
+            return enumerable.CreateTreeDataSourceResult<TModel, T1, T2, TModel>(request, idSelector, parentIDSelector, null, null, rootSelector);
+        }
+
+        public static TreeDataSourceResult ToTreeDataSourceResult<TModel, T1, T2, TResult>(this IQueryable<TModel> queryable,
+            DataSourceRequest request,
+            Expression<Func<TModel, T1>> idSelector,
+            Expression<Func<TModel, T2>> parentIDSelector,
+            Expression<Func<TModel, bool>> rootSelector,
+            Func<TModel, TResult> selector)
+        {
+            return queryable.CreateTreeDataSourceResult(request, idSelector, parentIDSelector, null, selector, rootSelector);
+        }
+
+        public static TreeDataSourceResult ToTreeDataSourceResult<TModel, T1, T2>(this IQueryable<TModel> queryable,
+            DataSourceRequest request,
+            Expression<Func<TModel, T1>> idSelector,
+            Expression<Func<TModel, T2>> parentIDSelector,
+            ModelStateDictionary modelState)
+        {
+            return queryable.ToTreeDataSourceResult<TModel, T1, T2, TModel>(request, idSelector, parentIDSelector, modelState, null);
+        }
+
+        public static TreeDataSourceResult ToTreeDataSourceResult<TModel, T1, T2>(this IQueryable<TModel> enumerable,
+            DataSourceRequest request,
+            Expression<Func<TModel, T1>> idSelector,
+            Expression<Func<TModel, T2>> parentIDSelector,
+            Expression<Func<TModel, bool>> rootSelector,
+            ModelStateDictionary modelState)
+        {
+            return enumerable.CreateTreeDataSourceResult<TModel, T1, T2, TModel>(request, idSelector, parentIDSelector, modelState, null, rootSelector);
+        }
+
+        public static TreeDataSourceResult ToTreeDataSourceResult<TModel, T1, T2, TResult>(this IQueryable<TModel> queryable,
+            DataSourceRequest request,
+            Expression<Func<TModel, T1>> idSelector,
+            Expression<Func<TModel, T2>> parentIDSelector,
+            Func<TModel, TResult> selector)
+        {
+            return queryable.CreateTreeDataSourceResult(request, idSelector, parentIDSelector, null, selector, null);
+        }
+
+        public static TreeDataSourceResult ToTreeDataSourceResult<TModel, T1, T2, TResult>(this IQueryable<TModel> queryable,
+            DataSourceRequest request,
+            Expression<Func<TModel, T1>> idSelector,
+            Expression<Func<TModel, T2>> parentIDSelector,
+            ModelStateDictionary modelState,
+            Func<TModel, TResult> selector)
+        {
+            return queryable.CreateTreeDataSourceResult(request, idSelector, parentIDSelector, modelState, selector, null);
+        }
+
+        public static TreeDataSourceResult ToTreeDataSourceResult<TModel, T1, T2, TResult>(this IQueryable<TModel> queryable,
+            DataSourceRequest request,
+            Expression<Func<TModel, T1>> idSelector,
+            Expression<Func<TModel, T2>> parentIDSelector,
+            Expression<Func<TModel, bool>> rootSelector,
+            ModelStateDictionary modelState,
+            Func<TModel, TResult> selector)
+        {
+            return queryable.CreateTreeDataSourceResult(request, idSelector, parentIDSelector, modelState, selector, rootSelector);
+        }
+
+        public static TreeDataSourceResult ToTreeDataSourceResult<TModel, T1, T2>(this IEnumerable<TModel> enumerable,
+            DataSourceRequest request,
+            Expression<Func<TModel, T1>> idSelector,
+            Expression<Func<TModel, T2>> parentIDSelector)
+        {
+            return enumerable.AsQueryable().CreateTreeDataSourceResult<TModel, T1, T2, TModel>(request, idSelector, parentIDSelector, null, null, null);
+        }
+
+        public static TreeDataSourceResult ToTreeDataSourceResult<TModel, T1, T2>(this IEnumerable<TModel> enumerable,
+            DataSourceRequest request,
+            Expression<Func<TModel, T1>> idSelector,
+            Expression<Func<TModel, T2>> parentIDSelector,
+            Expression<Func<TModel, bool>> rootSelector)
+        {
+            return enumerable.AsQueryable().CreateTreeDataSourceResult<TModel, T1, T2, TModel>(request, idSelector, parentIDSelector, null, null, rootSelector);
+        }
+
+        public static TreeDataSourceResult ToTreeDataSourceResult<TModel, T1, T2, TResult>(this IEnumerable<TModel> queryable,
+            DataSourceRequest request,
+            Expression<Func<TModel, T1>> idSelector,
+            Expression<Func<TModel, T2>> parentIDSelector,
+            Expression<Func<TModel, bool>> rootSelector,
+            Func<TModel, TResult> selector)
+        {
+            return queryable.AsQueryable().CreateTreeDataSourceResult(request, idSelector, parentIDSelector, null, selector, rootSelector);
+        }
+
+        public static TreeDataSourceResult ToTreeDataSourceResult<TModel, T1, T2>(this IEnumerable<TModel> queryable,
+            DataSourceRequest request,
+            Expression<Func<TModel, T1>> idSelector,
+            Expression<Func<TModel, T2>> parentIDSelector,
+            ModelStateDictionary modelState)
+        {
+            return queryable.AsQueryable().ToTreeDataSourceResult<TModel, T1, T2, TModel>(request, idSelector, parentIDSelector, modelState, null);
+        }
+
+        public static TreeDataSourceResult ToTreeDataSourceResult<TModel, T1, T2>(this IEnumerable<TModel> enumerable,
+            DataSourceRequest request,
+            Expression<Func<TModel, T1>> idSelector,
+            Expression<Func<TModel, T2>> parentIDSelector,
+            Expression<Func<TModel, bool>> rootSelector,
+            ModelStateDictionary modelState)
+        {
+            return enumerable.AsQueryable().CreateTreeDataSourceResult<TModel, T1, T2, TModel>(request, idSelector, parentIDSelector, modelState, null, rootSelector);
+        }
+
+        public static TreeDataSourceResult ToTreeDataSourceResult<TModel, T1, T2, TResult>(this IEnumerable<TModel> queryable,
+            DataSourceRequest request,
+            Expression<Func<TModel, T1>> idSelector,
+            Expression<Func<TModel, T2>> parentIDSelector,
+            Func<TModel, TResult> selector)
+        {
+            return queryable.AsQueryable().CreateTreeDataSourceResult(request, idSelector, parentIDSelector, null, selector, null);
+        }
+
+        public static TreeDataSourceResult ToTreeDataSourceResult<TModel, T1, T2, TResult>(this IEnumerable<TModel> queryable,
+            DataSourceRequest request,
+            Expression<Func<TModel, T1>> idSelector,
+            Expression<Func<TModel, T2>> parentIDSelector,
+            ModelStateDictionary modelState,
+            Func<TModel, TResult> selector)
+        {
+            return queryable.AsQueryable().CreateTreeDataSourceResult(request, idSelector, parentIDSelector, modelState, selector, null);
+        }
+
+        public static TreeDataSourceResult ToTreeDataSourceResult<TModel, T1, T2, TResult>(this IEnumerable<TModel> queryable,
+            DataSourceRequest request,
+            Expression<Func<TModel, T1>> idSelector,
+            Expression<Func<TModel, T2>> parentIDSelector,
+            Expression<Func<TModel, bool>> rootSelector,
+            ModelStateDictionary modelState,
+            Func<TModel, TResult> selector)
+        {
+            return queryable.AsQueryable().CreateTreeDataSourceResult(request, idSelector, parentIDSelector, modelState, selector, rootSelector);
+        }
+
+        private static TreeDataSourceResult CreateTreeDataSourceResult<TModel, T1, T2, TResult>(this IQueryable queryable,
+            DataSourceRequest request,
+            Expression<Func<TModel, T1>> idSelector,
+            Expression<Func<TModel, T2>> parentIDSelector,
+            ModelStateDictionary modelState,
+            Func<TModel, TResult> selector,
+            Expression<Func<TModel, bool>> rootSelector)
+        {
+            var result = new TreeDataSourceResult();
+
+            var data = queryable;
+
+            var filters = new List<IFilterDescriptor>();
+
+            if (request.Filters != null)
+            {
+                filters.AddRange(request.Filters);
+            }
+
+            if (filters.Any())
+            {
+                data = data.Where(filters);
+
+                data = data.ParentsRecursive<TModel>(queryable, idSelector, parentIDSelector);
+            }
+
+            var filteredData = data;
+
+            if (rootSelector != null)
+            {
+                data = data.Where(rootSelector);
+            }
+
+            var sort = new List<SortDescriptor>();
+
+            if (request.Sorts != null)
+            {
+                sort.AddRange(request.Sorts);
+            }
+
+            var aggregates = new List<AggregateDescriptor>();
+
+            if (request.Aggregates != null)
+            {
+                aggregates.AddRange(request.Aggregates);
+            }
+
+            if (aggregates.Any())
+            {
+                var dataSource = data;                
+                var groups = dataSource.GroupBy(parentIDSelector);                
+
+                foreach (IGrouping<T2, TModel> group in groups)
+                {
+                    result.AggregateResults.Add(Convert.ToString(group.Key), group.AggregateForLevel(filteredData, aggregates, idSelector, parentIDSelector));                        
+                }
+            }            
+        
+            if (sort.Any())
+            {
+                data = data.Sort(sort);
+            }            
+
+            result.Data = data.Execute(selector);
+
+            if (modelState != null && !modelState.IsValid)
+            {
+                result.Errors = modelState.SerializeErrors();
+            }            
+
+            return result;
+        }       
     }
 }

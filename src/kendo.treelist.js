@@ -207,6 +207,16 @@ var __meta__ = {
             return result.concat(DataSource.fn._readData.call(this, newData));
         },
 
+        _readAggregates: function(data) {
+            var result = extend(this._aggregateResult, this.reader.aggregates(data));
+            if ("" in result) {
+                result[this._defaultParentId()] = result[""];
+                delete result[""];
+            }
+
+            return result;
+        },
+
         remove: function(root) {
             var items = this._subtree(this._childrenMap(this.data()), root.id);
 

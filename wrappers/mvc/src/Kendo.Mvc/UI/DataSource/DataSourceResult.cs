@@ -10,5 +10,5 @@ namespace Kendo.Mvc.UI
         public int Total { get; set; }
         public IEnumerable<AggregateResult> AggregateResults { get; set; }
         public object Errors { get; set; }
-    }
+    }  
 }

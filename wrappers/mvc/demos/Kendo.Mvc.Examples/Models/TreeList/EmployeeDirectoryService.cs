@@ -8,10 +8,10 @@
     using System.Collections.Generic;
 
     public static class EmployeeDirectoryIEnumerableExtensions
-    {
-        public static IQueryable<EmployeeDirectoryModel> ToEmployeeDirectoryModel(this IEnumerable<EmployeeDirectory> enumerable)
+    {        
+        public static EmployeeDirectoryModel ToEmployeeDirectoryModel(this EmployeeDirectory employee)
         {
-            return enumerable.Select(employee => new EmployeeDirectoryModel
+            return new EmployeeDirectoryModel
             {
                 EmployeeId = employee.EmployeeID,
                 ReportsTo = employee.ReportsTo,
@@ -26,7 +26,7 @@
                 Position = employee.Position,
                 Extension = employee.Extension,
                 hasChildren = employee.EmployeeDirectory1.Any()
-            }).AsQueryable();
+            };
         }
     }
 
@@ -42,16 +42,11 @@
         public EmployeeDirectoryService()
             : this(new SampleEntities())
         {
-        }
+        }       
 
-        public virtual IQueryable<EmployeeDirectoryModel> GetEmployees(int? employeeId)
+        public virtual IQueryable<EmployeeDirectory> GetAll()
         {
-            return db.EmployeeDirectory.ToList().FindAll(e => e.ReportsTo == employeeId).ToEmployeeDirectoryModel();
-        }
-
-        public virtual IQueryable<EmployeeDirectoryModel> GetAll()
-        {
-            return db.EmployeeDirectory.ToList().ToEmployeeDirectoryModel();
+            return db.EmployeeDirectory;
         }
 
         public virtual void Insert(EmployeeDirectoryModel employee, ModelStateDictionary modelState)
