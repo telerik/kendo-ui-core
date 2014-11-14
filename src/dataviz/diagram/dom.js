@@ -1812,8 +1812,8 @@
 
                 that._resizeHandler = proxy(that.resize, that);
                 kendo.onResize(that._resizeHandler);
-                this.bind("zoom", proxy(that._destroyToolBar, that));
-                this.bind("pan", proxy(that._destroyToolBar, that));
+                this.bind(ZOOM_START, proxy(that._destroyToolBar, that));
+                this.bind(PAN, proxy(that._destroyToolBar, that));
             },
 
             _tap: function(e) {
