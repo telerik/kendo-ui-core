@@ -79,7 +79,7 @@ var __meta__ = {
         COMMANDBUTTONTMPL = '<a class="k-button #=className#" #=attr# href="\\#">#=text#</a>',
         TOOLBARTEMPLATE = kendo.template('<div class="k-floatwrap k-header k-scheduler-toolbar">' +
            '# if (pdf) { #' +
-           '<ul class="k-scheduler-tools">' +
+           '<ul class="k-reset k-scheduler-tools">' +
                '<li><a role="button" href="\\#" class="k-button k-pdf"><span class="k-icon k-i-pdf"></span>${messages.pdf}</a></li>' +
            '</ul>' +
            '# } #' +
