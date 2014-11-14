@@ -193,6 +193,7 @@
     <Compile Include="Controllers\Diagram\Pdf_ExportController.cs" />
     <Compile Include="Controllers\DropDownList\ClientFilteringController.cs" />
     <Compile Include="Controllers\DropDownList\ServerFilteringController.cs" />
+    <Compile Include="Controllers\Financial\Pdf_ExportController.cs" />
     <Compile Include="Controllers\Gantt\ApiController.cs" />
     <Compile Include="Controllers\Gantt\Pdf_ExportController.cs" />
     <Compile Include="Controllers\Gantt\EventsController.cs" />
@@ -817,6 +818,8 @@
     <Content Include="App_Data\Sample_log.ldf">
       <DependentUpon>Sample.mdf</DependentUpon>
     </Content>
+    <Content Include="Areas\aspx\Views\chart_api\export.aspx" />
+    <Content Include="Areas\aspx\Views\chart_api\pdf_export.aspx" />
     <Content Include="Areas\aspx\Views\chart_api\events.aspx" />
     <Content Include="Areas\aspx\Views\chart_api\index.aspx" />
     <Content Include="Areas\aspx\Views\chart_api\selection.aspx" />
@@ -866,6 +869,7 @@
     <Content Include="Areas\aspx\Views\diagram\events.aspx" />
     <Content Include="Areas\aspx\Views\dropdownlist\clientfiltering.aspx" />
     <Content Include="Areas\aspx\Views\dropdownlist\serverfiltering.aspx" />
+    <Content Include="Areas\aspx\Views\financial\pdf_export.aspx" />
     <Content Include="Areas\aspx\Views\gantt\api.aspx" />
     <Content Include="Areas\aspx\Views\gantt\resources.aspx" />
     <Content Include="Areas\aspx\Views\gantt\pdf_export.aspx" />
@@ -2630,6 +2634,7 @@
     <Content Include="Areas\razor\Views\menu\context-menu.cshtml" />
     <Content Include="Areas\razor\Views\pivotgrid\index.cshtml" />
     <Content Include="Areas\razor\Views\menu\context_menu.cshtml" />
+    <Content Include="Areas\razor\Views\financial\pdf_export.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\razor\Views\map\api.cshtml" />
