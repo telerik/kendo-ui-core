@@ -24,6 +24,14 @@ class PivotDataSourceSchemaCubeMeasure extends \Kendo\SerializableObject {
     }
 
     public function aggregate($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('aggregate', $value);
+    }
+
+    public function aggregateName($value) {
         return $this->setProperty('aggregate', $value);
     }
 
