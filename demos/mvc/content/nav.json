@@ -8201,9 +8201,6 @@
         "text": "Advanced Export",
         "new": true,
         "url": "chart-api/export",
-        "packages": [
-          "!mvc"
-        ],
         "title": {
             "kendo-ui": "Kendo UI Charts Export API methods"
         },
@@ -8979,9 +8976,6 @@
         "text": "Advanced Export",
         "new": true,
         "url": "diagram/export",
-        "packages": [
-          "!mvc"
-        ],
         "title": {
             "kendo-ui": "Kendo UI Diagram Export API methods"
         },
