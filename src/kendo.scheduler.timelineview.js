@@ -542,7 +542,6 @@ var __meta__ = {
             if (resources.length) {
                 if (this._groupOrientation() === "vertical") {
                     rows = that._createRowsLayout(resources, null, this.groupHeaderTemplate);
-                    debugger;
                 } else {
                     columns = that._createColumnsLayout(resources, columns, this.groupHeaderTemplate);
                 }
