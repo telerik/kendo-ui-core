@@ -1,29 +1,36 @@
+@{ Func<string,bool> UrlMatches = (query) => Request.Url.PathAndQuery.Contains(query); }
+@{ Func<string,bool,IHtmlString> ConditionalResource = (resource, condition) => {
+    if (condition) {
+        if (resource.EndsWith(".css")) {
+            return MvcHtmlString.Create("\n    <link rel=\"stylesheet\" href=\"" + resource + "\" />");
+        } else {
+            return MvcHtmlString.Create("\n    <script src=\"" + resource + "\"></script>");
+        }
+    } else {
+        return MvcHtmlString.Empty;
+    }
+}; }
 <!DOCTYPE html>
 <html>
 <head>
     <title>@ViewBag.Title</title>
-    <link href="styles/kendo.common.min.css" rel="stylesheet" />
-    <link href="styles/kendo.default.min.css" rel="stylesheet" />
-    <link href="styles/kendo.dataviz.min.css" rel="stylesheet" />
-    <link href="styles/kendo.dataviz.default.min.css" rel="stylesheet" />
-    @if ((ViewBag.Mobile && !ViewBag.DisableInMobile) || ViewBag.MobileAngular)
-    {
-        <link href="styles/kendo.mobile.all.min.css" rel="stylesheet" />
-    } else if (ViewBag.DisableInMobile)
-    {
-        <link href="styles/kendo.default.mobile.min.css" rel="stylesheet" />
-    }
-    @if (Request.Url.PathAndQuery.Contains("right-to-left"))
-    {
-    <link href="styles/kendo.rtl.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/kendo.common.min.css" />
+    <link rel="stylesheet" href="styles/kendo.default.min.css" />@(
+    ConditionalResource("styles/kendo.rtl.min.css", UrlMatches("right-to-left")))
+    <link rel="stylesheet" href="styles/kendo.dataviz.min.css" />
+    <link rel="stylesheet" href="styles/kendo.dataviz.default.min.css" />
+    @if ((ViewBag.Mobile && !ViewBag.DisableInMobile) || ViewBag.MobileAngular) {
+    <link rel="stylesheet" href="styles/kendo.mobile.all.min.css" />
+    } else if (ViewBag.DisableInMobile) {
+    <link rel="stylesheet" href="styles/kendo.default.mobile.min.css" />
     }
 
-    <script src="js/jquery.min.js"></script>
-    <script src="js/jszip.min.js"></script>
-    <script src="js/angular.min.js"></script>
-    <script src="js/kendo.all.min.js"></script>
-    @if (ViewBag.MobileAngular)
-    {
+    <script src="js/jquery.min.js"></script>@(
+    ConditionalResource("js/jszip.min.js", UrlMatches("export")))@(
+    ConditionalResource("js/angular.min.js", UrlMatches("angular")))
+    <script src="js/kendo.all.min.js"></script>@(
+    ConditionalResource("js/kendo.timezones.min.js", UrlMatches("scheduler")))
+    @if (ViewBag.MobileAngular) {
     <style>
         html, body {
             height: 100%;
@@ -35,8 +42,7 @@
     @{ WriteTo(new StringWriter(), RenderSection("Description", false)); }
     @RenderBody()
 
-    @if (ViewBag.Mobile && !ViewBag.DisableInMobile)
-    {
+    @if (ViewBag.Mobile && !ViewBag.DisableInMobile) {
 <script>
     var app = new kendo.mobile.Application(document.body);
 </script>
