@@ -6,7 +6,7 @@
 
     <script>
         $(document).ready(function () {
-            $("#pivotgrid").kendoPivotGrid({
+            var pivotgrid = $("#pivotgrid").kendoPivotGrid({
                 columnWidth: 120,
                 height: 570,
                 dataSource: {
@@ -37,7 +37,7 @@
                     rows: [{ name: "Discontinued", expand: true }],
                     measures: ["Sum"]
                 }
-            });
+            }).data("kendoPivotGrid");
 
             $("#configurator").kendoPivotConfigurator({
                 dataSource: pivotgrid.dataSource,

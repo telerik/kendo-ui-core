@@ -4,7 +4,7 @@
 
     <script>
         $(document).ready(function () {
-            $("#pivotgrid").kendoPivotGrid({
+            var pivotgrid = $("#pivotgrid").kendoPivotGrid({
                 columnWidth: 120,
                 height: 570,
                 dataSource: {
@@ -29,7 +29,7 @@
                     rows: [{ name: "ContactTitle", expand: true }],
                     measures: ["Contacts Count"]
                 }
-            });
+            }).data("kendoPivotGrid");
 
             $("#configurator").kendoPivotConfigurator({
                 dataSource: pivotgrid.dataSource,
