@@ -1828,7 +1828,9 @@
                         } else {
                             this.select(item, {addToSelection: true});
                         }
-                        this._createToolBar();
+                        if (this._isEditable) {
+                            this._createToolBar();
+                        }
                     }
                     this.trigger("click", {
                         item: item,
