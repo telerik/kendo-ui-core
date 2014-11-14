@@ -171,13 +171,18 @@ function saveAsPDFTests(name, createWidget) {
         return $.Deferred().resolve("");
     }
 
+    var saveAs;
+
     module("saveAsPDF / " + name + " /", {
         setup: function() {
             widget = createWidget();
+            saveAs = kendo.saveAs;
+            kendo.saveAs = exportNoop;
         },
         teardown: function() {
             kendo.destroy(QUnit.fixture);
             QUnit.fixture.empty();
+            kendo.saveAs = saveAs;
         }
     });
 
