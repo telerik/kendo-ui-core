@@ -18,6 +18,7 @@
 	Date date = new SimpleDateFormat("yyyy/MM/dd").parse("2013/6/13");
 	
 	Date startTime = new SimpleDateFormat("yyyy/MM/dd hh:mm").parse("2013/6/13 7:00");
+	Date startTimeMonth = new SimpleDateFormat("yyyy/MM/dd hh:mm").parse("2013/6/13 00:00");
 	
 	ArrayList<HashMap<String, Object>> people = new ArrayList<HashMap<String, Object>>();
 	
@@ -54,9 +55,10 @@
 <demo:header />
     <kendo:scheduler name="scheduler" timezone="Etc/UTC" date="<%= date %>" startTime="<%= startTime %>">
     	<kendo:scheduler-views>  
-    		<kendo:scheduler-view type="timeline" eventHeight="50" />
-    		<kendo:scheduler-view type="timelineWeek" eventHeight="50" />
-    		<kendo:scheduler-view type="timelineWorkWeek" eventHeight="50" />		    		
+			<kendo:scheduler-view type="timeline" eventHeight="50" majorTick="60" />
+			<kendo:scheduler-view type="timelineWeek" eventHeight="50"  majorTick="60" />
+			<kendo:scheduler-view type="timelineWorkWeek" eventHeight="50" majorTick="60"  />
+			<kendo:scheduler-view type="timelineMonth" eventHeight="50"  startTime="<%= startTimeMonth %>"/>
     	</kendo:scheduler-views>
     	<kendo:scheduler-group resources="<%= new String[] { \"Rooms\",\"Attendees\" } %>" orientation="vertical" />
     	<kendo:scheduler-resources>
