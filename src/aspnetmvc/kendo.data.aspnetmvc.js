@@ -201,6 +201,18 @@
         return aggregates;
     }
 
+    function convertAggregates(aggregates) {
+        var idx, length, aggregate;
+        var result = {};
+
+        for (idx = 0, length = aggregates.length; idx < length; idx++) {
+            aggregate = aggregates[idx];
+            result[aggregate.Member] = extend(true, result[aggregate.Member], translateAggregateResults(aggregate));
+        }
+
+        return result;
+    }
+
     extend(true, kendo.data, {
         schemas: {
             "aspnetmvc-ajax": {
@@ -209,17 +221,17 @@
                 },
                 aggregates: function(data) {
                     data = data.d || data;
-                    var result = {},
-                        aggregates = data.AggregateResults || [],
-                        aggregate,
-                        idx,
-                        length;
+                    var aggregates = data.AggregateResults || [];
 
-                    for (idx = 0, length = aggregates.length; idx < length; idx++) {
-                        aggregate = aggregates[idx];
-                        result[aggregate.Member] = extend(true, result[aggregate.Member], translateAggregateResults(aggregate));
+                    if (!$.isArray(aggregates)) {
+                        for (var key in aggregates) {
+                            aggregates[key] = convertAggregates(aggregates[key]);
+                        }
+
+                        return aggregates;
                     }
-                    return result;
+
+                    return convertAggregates(aggregates);
                 }
             }
         }
