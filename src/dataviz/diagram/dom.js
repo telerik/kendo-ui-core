@@ -1785,7 +1785,7 @@
                 element.on(MOUSEWHEEL_NS, proxy(that._wheel, that));
                 if (!kendo.support.touch && !kendo.support.mobileOS) {
                     that.toolService = new ToolService(that);
-                    element.find(".k-layer")
+                    this.scroller.wrapper
                         .on("mousemove" + NS, proxy(that._mouseMove, that))
                         .on("mouseup" + NS, proxy(that._mouseUp, that))
                         .on("mousedown" + NS, proxy(that._mouseDown, that))
