@@ -11,35 +11,40 @@
             <button class='export-svg k-button'>Export as SVG</button>
         </div>
     </div>
-    <div class="demo-section">
-        <div class="product-display">
-            <img class="product-image" src="../content/web/colorpicker/sofa-ffcc33.jpg" alt="" width="285" height="149">
-
-            <div id="color-chooser"></div>
+    
+    
+    <div class="demo-section k-header export-app">
+        <div class="menu-wrapper">
+          <ul id="menu">
+            <li>Dashboard</li>
+            <li>Job Opennings
+                    <ul>
+                <li>USA</li>
+                <li>Australia</li>
+                <li>Germany</li>
+              </ul>
+            </li>
+            <li>Applicants</li>
+            <li>Interview Calendar</li>
+            <li>Events Calendar</li>
+          </ul>
         </div>
-
-        <div class="product-info">
-            <h3>Natural Linen Loveseat</h3>
-            <p>Add comfortable seating to your living room or den. The soft foam in the cushions make this loveseat a great place to relax.</p>
-            <dl>
-                <dt>Dimensions</dt>
-                <dd>34" D x 52" W x 31" H</dd>
-
-                <dt>Materials</dt>
-                <dd>Wood, Fabric, Foam</dd>
-
-                <dt>Assembly</dt>
-                <dd>No Assembly Required</dd>
-            </dl>
-
-            <div id="sku-barcode"></div>
+        <div class="demo-section content-wrapper">
+          <div class="demo-section charts-wrapper">
+            <div id="applications"></div>
+            <div id="interviews"></div>
+            <div id="forwards"></div>
+          </div>
+          <div id="grid"></div>
         </div>
     </div>
 
     <script>
+    $(document).ready(function() {
+        
         $(".export-pdf").click(function() {
             // Convert the DOM element to a drawing using kendo.drawing.drawDOM
-            kendo.drawing.drawDOM($(".demo-section"))
+            kendo.drawing.drawDOM($(".content-wrapper"))
             .then(function(group) {
                 // Render the result as a PDF file
                 return kendo.drawing.exportPDF(group, {
@@ -51,7 +56,7 @@
                 // Save the PDF file
                 kendo.saveAs({
                     dataURI: data,
-                    fileName: "Furniture.pdf",
+                    fileName: "HR-Dashboard.pdf",
                     proxyURL: "http://demos.telerik.com/kendo-ui/service/export"
                 });
             });
@@ -59,7 +64,7 @@
 
         $(".export-img").click(function() {
             // Convert the DOM element to a drawing using kendo.drawing.drawDOM
-            kendo.drawing.drawDOM($(".demo-section"))
+            kendo.drawing.drawDOM($(".export-app"))
             .then(function(group) {
                 // Render the result as a PNG image
                 return kendo.drawing.exportImage(group);
@@ -68,7 +73,7 @@
                 // Save the image file
                 kendo.saveAs({
                     dataURI: data,
-                    fileName: "Furniture.png",
+                    fileName: "HR-Dashboard.png",
                     proxyURL: "http://demos.telerik.com/kendo-ui/service/export"
                 });
             });
@@ -76,7 +81,7 @@
 
         $(".export-svg").click(function() {
             // Convert the DOM element to a drawing using kendo.drawing.drawDOM
-            kendo.drawing.drawDOM($(".demo-section"))
+            kendo.drawing.drawDOM($(".export-app"))
             .then(function(group) {
                 // Render the result as a SVG document
                 return kendo.drawing.exportSVG(group);
@@ -85,98 +90,180 @@
                 // Save the SVG document
                 kendo.saveAs({
                     dataURI: data,
-                    fileName: "Furniture.svg",
+                    fileName: "HR-Dashboard.svg",
                     proxyURL: "http://demos.telerik.com/kendo-ui/service/export"
                 });
             });
         });
-
-        $("#color-chooser").kendoColorPalette({
-            palette: [ "#ddd1c3", "#d2d2d2", "#746153", "#3a4c8b", "#ffcc33", "#fb455f", "#ac120f" ],
-            tileSize: 30,
-            value: "#ffcc33",
-            change: function() {
-                var colorId = this.value().substring(1);
-
-                $("#sku-barcode").getKendoBarcode().value("NLL-" + colorId.toUpperCase());
-                $(".product-image").attr("src", "../content/web/colorpicker/sofa-" + colorId + ".jpg");
+        
+        
+        var data = [{
+          "source": "Approved",
+          "percentage": 237
+        }, {
+          "source": "Rejected",
+          "percentage": 112
+        }];
+        
+        $("#applications").kendoChart({
+          legend: {
+            position: "bottom"
+          },
+          dataSource: {
+            data: data
+          },
+          series: [{
+            type: "donut",
+            field: "percentage",
+            categoryField: "source"
+          }],
+          tooltip: {
+            visible: true,
+            template: "${ category } - ${ value } applications"
+          }
+        });
+        
+        $("#interviews").kendoChart({
+          legend: {
+            position: "bottom"
+          },
+          dataSource: {
+            data: data
+          },
+          series: [{
+            type: "donut",
+            field: "percentage",
+            categoryField: "source"
+          }],
+          tooltip: {
+            visible: true,
+            template: "${ category } - ${ value } applications"
+          }
+        });
+        
+        $("#forwards").kendoChart({
+          legend: {
+            position: "bottom"
+          },
+          dataSource: {
+            data: data
+          },
+          series: [{
+            type: "donut",
+            field: "percentage",
+            categoryField: "source"
+          }],
+          tooltip: {
+            visible: true,
+            template: "${ category } - ${ value } applications"
+          }
+        });
+        
+        $("#menu").kendoPanelBar();
+        
+        $("#grid").kendoGrid({
+          dataSource: {
+            type: "odata",
+            transport: {
+              read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+            },
+            pageSize: 15,
+            group: { field: "ContactTitle" }
+          },
+          height: 450,
+          groupable: true,
+          sortable: true,
+          selectable: "multiple",
+          reorderable: true,
+          resizable: true,
+          filterable: true,
+          pageable: {
+            refresh: true,
+            pageSizes: true,
+            buttonCount: 5
+          },
+          columns: [
+            {
+              field: "ContactName",
+              template: "<div class=\'customer-name\'>#: ContactName #</div>",
+              title: "Contact",
+              width: 200
+            },{
+              field: "ContactTitle",
+              title: "Contact Title",
+              width: 220
+            },{
+              field: "Phone",
+              title: "Phone",
+              width: 140
+            },{
+              field: "CompanyName",
+              title: "Company Name"
+            },{
+              field: "City",
+              title: "City",
+              width: 120
             }
+          ]
         });
-
-        $("#sku-barcode").kendoBarcode({
-            value: "NLL-FFCC33",
-            type: "code39",
-            width: 280,
-            height: 100
-        });
+       });
     </script>
 
     <style scoped>
-        .demo-section {
-            overflow: hidden;
-            width: 880px;
-            padding: 0;
-            background: #fff;
-        }
-
-        .product-display, .product-info {
-            float: left;
-        }
-
-        .product-display {
-            background-color: #fff;
-            background-image: url();
-            height: 380px;
-            width: 450px;
-            margin: -10px 4%;
-            text-align: center;
-        }
-
-        .product-image {
-            display: block;
-            margin: 56px auto;
-        }
-
-        .product-info {
-            width: 300px;
-        }
-
-        .product-info h3 {
-            font-size: 1.5em;
-            padding: 1.615em 0 .6em;
-        }
-
-        .product-info dl {
-            margin: 2em 0;
-            overflow: hidden;
-        }
-
-        .product-info dt,
-        .product-info dd {
-            float: left;
-            margin: 0;
-            padding: 0 0 .7em 0;
-        }
-
-        .product-info dt {
-            font-weight: bold;
-            width: 34%;
-            text-align: right;
-            padding-right: 2.4%;
-        }
-
-        .product-info dt:after {
-            content: ":";
-        }
-
-        .product-info dd {
-            width: 63.6%;
-        }
-
-        .product-info button {
-            width: 60%;
-            height: 32px;
-            text-align: center;
-        }
+    .export-app {
+        display: table;
+        width: 100%;
+        height: 700px;
+        padding: 0;
+    }
+    .export-app .demo-section {
+        margin: 0 auto;
+        border: 0;
+    }
+    
+    .menu-wrapper,
+    .content-wrapper {
+        display: table-cell;
+        vertical-align: top;
+    }
+    
+    .menu-wrapper {
+        width: 15%;
+    }
+    
+    #menu {
+        height: 100%;
+        border-width: 0 1px 0 0;
+    }
+        
+    .charts-wrapper {
+        height: 250px;
+    }
+    
+    #applications,
+    #interviews,
+    #forwards {
+        display: inline-block;
+        width: 33%;
+        height: 250px;
+    }
+        
+    .customer-photo {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-size: 40px 44px;
+        background-position: center center;
+        vertical-align: middle;
+        line-height: 41px;
+        box-shadow: inset 0 0 1px #999, inset 0 0 10px rgba(0,0,0,.2);
+    }
+    .customer-name {
+        display: inline-block;
+        vertical-align: middle;
+        line-height: 41px;
+        padding-left: 10px;
+    }
     </style>
 </div>
