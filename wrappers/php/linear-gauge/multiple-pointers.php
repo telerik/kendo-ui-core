@@ -4,7 +4,20 @@ require_once '../include/chart_data.php';
 
 require_once '../include/header.php';
 $gauge = new \Kendo\Dataviz\UI\LinearGauge('gauge');
-$gauge->pointer(array('value' => 28))
+
+$pointer0 = new \Kendo\Dataviz\UI\LinearGaugePointerItem('pointer0');
+$pointer0->value(10)->color("#c20000")->shape("arrow");
+
+$pointer1 = new \Kendo\Dataviz\UI\LinearGaugePointerItem('pointer1');
+$pointer1->value(50)->margin(10)->color("#ff7a00");
+
+$pointer2 = new \Kendo\Dataviz\UI\LinearGaugePointerItem('pointer2');
+$pointer2->value(30)->color("#ffc700");
+
+$pointer3 = new \Kendo\Dataviz\UI\LinearGaugePointerItem('pointer3');
+$pointer3->value(45)->color("#428bca")->shape("arrow");
+
+$gauge->pointer(array($pointer0, $pointer1, $pointer2, $pointer3))
       ->scale(array('majorUnit' => 20, 'minorUnit' => 2,'min' => -40,
       'max' => 60, 'vertical' => true, 'ranges' => array(
           array('from' => -40, 'to' => -20, 'color' => '#2798df'),

@@ -12,11 +12,16 @@ $gauge->pointer(array('value' => 65, 'shape' => 'arrow'))
           array('from' => 150, 'to' => 180, 'color' => '#c20000'),
       )));
 
-echo $gauge->render();
 ?>
-<div class="configuration k-widget k-header" style="width:170px;">
-    <span class="configHead">Configuration</span>
-    <span class="configTitle">Gauge scale should...</span>
+
+<div id="gauge-container">
+    <?php
+        echo $gauge->render();
+    ?>
+</div>
+
+<div class="box">
+    <h4>Gauge scale should...</h4>
     <ul class="options">
         <li>
             <input id="vertical" checked="checked" type="checkbox" autocomplete="off">
@@ -37,7 +42,7 @@ echo $gauge->render();
 <script>
 $(document).ready(function() {
     window.configuredRanges = $("#gauge").data("kendoLinearGauge").options.scale.ranges;
-    $(".configuration").bind("change", refresh);
+    $(".box").bind("change", refresh);
 
     function refresh() {
         var gauge = $("#gauge").data("kendoLinearGauge"),
@@ -58,4 +63,26 @@ $(document).ready(function() {
     }
 });
 </script>
+
+<style scoped>
+    #gauge-container {
+        text-align: center;
+        margin-left: 30px;
+        background: transparent url("../content/dataviz/gauge/linear-gauge-container.png") no-repeat 50% 50%;
+        padding: 18px;
+        width: 300px;
+        height: 300px;
+        margin: 0 auto;
+    }
+
+    #gauge-container.horizontal {
+        background-image: url("../content/dataviz/gauge/linear-gauge-container-h.png");
+    }
+
+    #gauge {
+        width: 100%;
+        height: 100%;
+        margin: 0 auto 0;
+    }
+</style>
 <?php require_once '../include/footer.php'; ?>
