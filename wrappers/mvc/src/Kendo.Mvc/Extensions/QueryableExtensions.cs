@@ -804,20 +804,12 @@ namespace Kendo.Mvc.Extensions
             if (aggregates.Any())
             {
                 var dataSource = data;                
-                var groups = dataSource.GroupBy(parentIDSelector);
-
-                var aggregateResults = new List<TreeAggreateResult>();
+                var groups = dataSource.GroupBy(parentIDSelector);                
 
                 foreach (IGrouping<T2, TModel> group in groups)
                 {
-                    aggregateResults.Add(new TreeAggreateResult
-                    {
-                        Key = group.Key,
-                        AggregateResults = group.AggregateForLevel(queryable, aggregates, idSelector, parentIDSelector)
-                    });
+                    result.AggregateResults.Add(Convert.ToString(group.Key), group.AggregateForLevel(queryable, aggregates, idSelector, parentIDSelector));                        
                 }
-
-                result.AggregateResults = aggregateResults;                         
             }            
         
             if (sort.Any())
