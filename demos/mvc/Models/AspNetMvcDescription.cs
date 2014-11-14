@@ -84,6 +84,15 @@ namespace Kendo.Models
                                 Url = "~/src/aspnetmvc/models/Scheduler/SchedulerMeetingService.cs"
                             };
                         }
+
+                        if (source.Contains("TreeListController"))
+                        {
+                            yield return new ExampleFile
+                            {
+                                Name = "EmployeeDirectoryController.cs",
+                                Url = "~/src/aspnetmvc/controllers/TreeList/EmployeeDirectoryController.cs"
+                            };
+                        }
                     }
                 }
             }
