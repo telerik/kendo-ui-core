@@ -210,6 +210,7 @@
     <Compile Include="Controllers\PivotGrid\Remote_Flat_Data_BindingController.cs" />
     <Compile Include="Controllers\Scheduler\TimelineController.cs" />
     <Compile Include="Controllers\TreeList\ApiController.cs" />
+    <Compile Include="Controllers\TreeList\AggregatesController.cs" />
     <Compile Include="Controllers\TreeList\EventsController.cs" />
     <Compile Include="Controllers\TreeList\Remote_Data_BindingController.cs" />
     <Compile Include="Controllers\TreeList\Editing_PopupController.cs" />
@@ -883,6 +884,7 @@
     <Content Include="Areas\aspx\Views\pivotgrid\remote_flat_data_binding.aspx" />
     <Content Include="Areas\aspx\Views\scheduler\timeline.aspx" />
     <Content Include="Areas\aspx\Views\treelist\api.aspx" />
+    <Content Include="Areas\aspx\Views\treelist\aggregates.aspx" />
     <Content Include="Areas\aspx\Views\treelist\editing_popup.aspx" />
     <Content Include="Areas\aspx\Views\treelist\editing.aspx" />
     <Content Include="Areas\aspx\Views\treelist\events.aspx" />
@@ -2635,6 +2637,7 @@
     <Content Include="Areas\razor\Views\pivotgrid\index.cshtml" />
     <Content Include="Areas\razor\Views\menu\context_menu.cshtml" />
     <Content Include="Areas\razor\Views\financial\pdf_export.cshtml" />
+    <Content Include="Areas\razor\Views\treelist\aggregates.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\razor\Views\map\api.cshtml" />
