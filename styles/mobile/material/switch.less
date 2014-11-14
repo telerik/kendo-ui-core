@@ -6,9 +6,9 @@
 .km-material .km-switch
 {
     width: 4.6rem;
-    height: 1.9rem;
+    height: 1.167rem;
     line-height: 1.76rem;
-    overflow: hidden;
+    overflow: visible;
 }
 
 .km-material .km-switch-wrapper
@@ -27,16 +27,19 @@
 
 .km-material .km-switch-container
 {
-    padding: 1px 0 1px 1px;
+    padding: 1px 0;
     border-width: 0;
+    overflow: visible;
 }
 
 .km-material .km-switch-handle
 {
-    width: 1.6em;
-    margin: 0 4px 0 0;
+    width: 1.667em;
+    height: 1.667em;
+    margin: -4px 0 0;
     border-width: @material-border-width;
-    border-style: solid;;
+    border-style: solid;
+    border-radius: 50%;
 }
 
 .km-material .km-switch-label-off
@@ -52,6 +55,7 @@
 .km-material .km-switch-label-on,
 .km-material .km-switch-label-off
 {
+    display: none;
     text-shadow: none;
     width: 185%;
     font-size: 1em;
@@ -63,12 +67,7 @@
 .km-material .km-switch-container,
 .km-material .km-switch-background
 {
-    border-radius: @material-border-radius + 1px;
-}
-
-.km-material .km-switch-handle
-{
-    border-radius: @material-border-radius;
+    border-radius: @material-border-radius + 3px;
 }
 
 .km-material .km-switch-container,

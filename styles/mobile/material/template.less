@@ -4,7 +4,8 @@
 @material-accent-color: #00b0ff;
 @material-main-color: rgba(0,0,0,.87);
 @material-icon-color: rgba(0,0,0,.54);
-@material-disabled-color: rgba(0,0,0,.26);
+//@material-disabled-color: rgba(0,0,0,.26);
+@material-disabled-color: #bababa;
 @material-border-color: rgba(0,0,0,.12);
 
 
@@ -62,16 +63,18 @@
 
 .km-material .km-switch-handle
 {
-    background: @material-primary-inverse-color;
+    background: @material-primary-color;
     border-color: rgba(0,0,0,.1);
-    //-webkit-box-shadow: 0 1px 0 1px currentcolor, 0 -1px 0 1px currentcolor;
-    //box-shadow:0 1px 0 1px currentcolor, 0 -1px 0 1px currentcolor;
+     -webkit-box-shadow: 0 2px 4px @material-primary-color, 0 2px @material-primary-color;
+    box-shadow: 0 2px 4px @material-primary-color, 0 2px @material-primary-color;
 }
 
 .km-material .km-switch-off .km-switch-handle
 {
-    //-webkit-box-shadow: 0 1px 0 1px @material-second-color, 0 -1px 0 1px @material-second-color;
-    //box-shadow: 0 1px 0 1px @material-second-color, 0 -1px 0 1px @material-second-color;
+    //background-color: fadein(@material-disabled-color, 50%);
+    background-color: @material-background; 
+    -webkit-box-shadow: 0 2px 4px @material-border-color, 0 2px @material-overlay-background;
+    box-shadow: 0 2px 4px @material-border-color, 0 2px @material-overlay-background;
 }
 
 .km-material .km-switch-container,
@@ -328,10 +331,13 @@
 }
 
 .km-material .km-switch-handle,
-.km-material .k-slider-selection,
-.km-material .km-switch-background
+.km-material .k-slider-selection
 {
     color: @material-primary-color;
+}
+
+.km-material .km-switch-background {
+    color: lighten(@material-primary-color, 20%);
 }
 
 .km-material .km-rowinsert,
