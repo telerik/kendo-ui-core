@@ -212,5 +212,18 @@ namespace Kendo.Mvc.UI.Tests.Chart
         {
             builder.Transitions(false).ShouldBeSameAs(builder);
         }
+
+        [Fact]
+        public void Pdf_should_set_PDFSettings()
+        {
+            builder.Pdf(pdf => pdf.ForceProxy(true));
+            chart.Pdf.ForceProxy.ShouldEqual(true);
+        }
+
+        [Fact]
+        public void Pdf_should_return_builder()
+        {
+            builder.Pdf(pdf => pdf.ForceProxy(true)).ShouldBeSameAs(builder);
+        }
     }
 }
