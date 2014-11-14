@@ -1,0 +1,97 @@
+<div id="example">
+    <div class="box">
+        <h4>Export Stock Chart</h4>
+        <div class="box-col">
+            <button class='export-pdf k-button'>Save as PDF</button>
+        </div>
+    </div>
+    <div class="demo-section k-content">
+        <div id="stock-chart"></div>
+    </div>
+    <script>
+        $(".export-pdf").click(function() {
+            $("#stock-chart").getKendoStockChart().saveAsPDF();
+        });
+
+        function createChart() {
+            $("#stock-chart").kendoStockChart({
+                pdf: {
+                    fileName: "Kendo UI Stock Chart Export.pdf",
+                    proxyURL: "http://demos.telerik.com/kendo-ui/service/export"
+                },
+                dataSource: {
+                    transport: {
+                        read: {
+                            url: "../content/dataviz/js/boeing-stock.json",
+                            dataType: "json"
+                        }
+                    },
+                    schema: {
+                        model: {
+                            fields: {
+                                Date: { type: "date" }
+                            }
+                        }
+                    }
+                },
+                title: {
+                    text: "The Boeing Company\nNYSE:BA"
+                },
+                dateField: "Date",
+                panes: [{
+                    title: "Value"
+                }, {
+                    name: "volumePane",
+                    title: "Volume",
+                    height: 150 // pixels
+                }],
+                categoryAxis: {
+                    pane: "volumePane"
+                },
+                valueAxes: [{
+                    // Default axis
+                    line: {
+                        visible: false
+                    }
+                }, {
+                    name: "volumeAxis",
+                    pane: "volumePane",
+                    visible: false
+                }],
+                series: [{
+                    type: "candlestick",
+                    openField: "Open",
+                    highField: "High",
+                    lowField: "Low",
+                    closeField: "Close"
+
+                }, {
+                    type: "column",
+                    field: "Volume",
+                    axis: "volumeAxis",
+                    tooltip: {
+                        format: "{0:C0}"
+                    }
+                }],
+                navigator: {
+                    series: {
+                        type: "area",
+                        field: "Close"
+                    },
+                    select: {
+                        from: "2009/02/05",
+                        to: "2011/10/07"
+                    }
+                }
+            });
+        }
+
+        $(document).ready(createChart);
+        $(document).bind("kendo:skinChange", createChart);
+    </script>
+    <style scoped>
+        #stock-chart {
+            height: 600px;
+        }
+    </style>
+</div>

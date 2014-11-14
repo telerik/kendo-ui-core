@@ -1,0 +1,161 @@
+<div id="example">
+    <div class="box">
+        <h4>Export diagram view</h4>
+        <div class="box-col">
+            <button class='export-pdf k-button'>Save as PDF</button>
+        </div>
+    </div>
+    <div class="demo-section k-content">
+        <div id="diagram"></div>
+    </div>
+    <script>
+        $(".export-pdf").click(function() {
+            $("#diagram").getKendoDiagram().saveAsPDF();
+        });
+
+        function createDiagram() {
+            var serviceRoot = "http://demos.telerik.com/kendo-ui/service";
+
+            var shapesDataSource = {
+                batch: false,
+                transport: {
+                    read: {
+                        url: serviceRoot + "/DiagramShapes",
+                        dataType: "jsonp"
+                    },
+                    update: {
+                        url: serviceRoot + "/DiagramShapes/Update",
+                        dataType: "jsonp"
+                    },
+                    destroy: {
+                        url: serviceRoot + "/DiagramShapes/Destroy",
+                        dataType: "jsonp"
+                    },
+                    create: {
+                        url: serviceRoot + "/DiagramShapes/Create",
+                        dataType: "jsonp"
+                    },
+                    parameterMap: function (options, operation) {
+                        if (operation !== "read") {
+                            return { models: kendo.stringify(options.models || [options]) };
+                        }
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "id",
+                        fields: {
+                            id: { from: "Id", type: "number", editable: false },
+                            FirstName: { type: "string" },
+                            LastName: { type: "string" },
+                            Title: { type: "string" },
+                            Image: { type: "string" },
+                            ColorScheme: { type: "string" },
+                        }
+                    }
+                }
+            };
+
+            var connectionsDataSource = {
+                batch: false,
+                transport: {
+                    read: {
+                        url: serviceRoot + "/DiagramConnections",
+                        dataType: "jsonp"
+                    },
+                    update: {
+                        url: serviceRoot + "/DiagramConnections/Update",
+                        dataType: "jsonp"
+                    },
+                    destroy: {
+                        url: serviceRoot + "/DiagramConnections/Destroy",
+                        dataType: "jsonp"
+                    },
+                    create: {
+                        url: serviceRoot + "/DiagramConnections/Create",
+                        dataType: "jsonp"
+                    },
+                    parameterMap: function (options, operation) {
+                        if (operation !== "read") {
+                            return { models: kendo.stringify(options.models || [options]) };
+                        }
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "id",
+                        fields: {
+                            id: { from: "Id", type: "number", editable: false },
+                            from: { from: "From", type: "number" },
+                            to: { from: "To", type: "number" },
+                            Text: { from: "Text", type: "string" }
+                        }
+                    }
+                }
+            };
+
+            function visualTemplate(options) {
+                var dataviz = kendo.dataviz;
+                var g = new dataviz.diagram.Group();
+                var dataItem = options.dataItem;
+
+                g.append(new dataviz.diagram.Rectangle({
+                    width: 210,
+                    height: 75,
+                    stroke: {
+                        width: 0
+                    },
+                    fill: dataItem.ColorScheme
+                }));
+
+                g.append(new dataviz.diagram.TextBlock({
+                    text: dataItem.FirstName + " " + dataItem.LastName,
+                    x: 85,
+                    y: 20,
+                    color: "#fff"
+                }));
+
+                g.append(new dataviz.diagram.TextBlock({
+                    text: dataItem.Title,
+                    x: 85,
+                    y: 40,
+                    color: "#fff"
+                }));
+
+                g.append(new dataviz.diagram.Image({
+                    source: "http://demos.telerik.com/kendo-ui/content/dataviz/diagram/people/" + dataItem.Image,
+                    x: 3,
+                    y: 3,
+                    width: 68,
+                    height: 68
+                }));
+
+                return g;
+            }
+
+            $("#diagram").kendoDiagram({
+                pdf: {
+                    fileName: "Kendo UI Diagram Export.pdf",
+                    proxyURL: "http://demos.telerik.com/kendo-ui/service/export"
+                },
+                dataSource: shapesDataSource,
+                connectionsDataSource: connectionsDataSource,
+                layout: {
+                    type: "layered"
+                },
+                shapeDefaults: {
+                    visual: visualTemplate
+                },
+                connectionDefaults: {
+                    stroke: {
+                        color: "#979797",
+                        width: 2
+                    }
+                }
+            });
+        }
+
+        $(document).ready(createDiagram);
+        $(document).bind("kendo:skinChange", createDiagram);
+    </script>
+</div>

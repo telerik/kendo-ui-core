@@ -51,7 +51,7 @@
     .ToolBar(tools => tools.Pdf())
     .Pdf(pdf => pdf
         .FileName("Kendo UI Grid Export.pdf")
-        .ProxyUrl(Url.Action("Pdf_Export_Save", "Grid"))
+        .ProxyURL(Url.Action("Pdf_Export_Save", "Grid"))
     )
     .DataSource(dataSource => dataSource
         .Ajax()                 

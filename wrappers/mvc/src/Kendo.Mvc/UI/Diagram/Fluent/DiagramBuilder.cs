@@ -205,6 +205,16 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
+        /// Configures the export settings for the saveAsPDF method.
+        /// </summary>
+        /// <param name="configurator">The action that configures the pdf.</param>
+        public DiagramBuilder<TShapeModel,TConnectionModel> Pdf(Action<DiagramPdfSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
+        {
+            configurator(new DiagramPdfSettingsBuilder<TShapeModel,TConnectionModel>(container.Pdf));
+            return this;
+        }
+        
+        /// <summary>
         /// Defines the shape options.
         /// </summary>
         /// <param name="configurator">The action that configures the shapedefaults.</param>

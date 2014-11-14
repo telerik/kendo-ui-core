@@ -8138,6 +8138,7 @@
   {
     "text": "Chart API",
     "name": "chart-api",
+    "new": true,
     "pro": "true",
     "api": "dataviz/chart",
     "spriteCssClass": "chartIcon",
@@ -8165,11 +8166,11 @@
         "url": "chart-api/index",
         "title": {
             "kendo-ui": "Kendo UI Charts API methods",
-			"aspnet-mvc": " Charting API methods for ASP.NET MVC and jQuery "
+            "aspnet-mvc": " Charting API methods for ASP.NET MVC and jQuery "
         },
         "meta": {
             "kendo-ui": "This demo shows how the API manipulates the methods, applicable to Kendo UI jQuery-based chart components.",
-			"aspnet-mvc": "Play with this demo and explore all API functions of Telerik Charting control for ASP.NET MVC."
+            "aspnet-mvc": "Play with this demo and explore all API functions of Telerik Charting control for ASP.NET MVC."
         }
       },
       {
@@ -8177,21 +8178,29 @@
         "url": "chart-api/events",
         "title": {
             "kendo-ui": "Events API for Kendo UI HTML5 charting components | Kendo UI Demos",
-			"aspnet-mvc": "Chart API events in ASP.NET MVC | UI for ASP.NET MVC demos"
+            "aspnet-mvc": "Chart API events in ASP.NET MVC | UI for ASP.NET MVC demos"
         },
         "meta": {
             "kendo-ui": "This sample demonstrates the events which are specific to Kendo UI HTML5 chart components.",
-			"aspnet-mvc": "This demo illustrates the use of Telerik ASP.NET MVC API events."
+            "aspnet-mvc": "This demo illustrates the use of Telerik ASP.NET MVC API events."
         },
         "requiresServer": "true"
       },
       {
-        "text": "Export to PDF, Image, SVG",
+        "text": "PDF Export",
+        "new": true,
+        "url": "chart-api/pdf-export",
+        "title": {
+            "kendo-ui": "Kendo UI Chart saveAsPDF API method"
+        },
+        "meta": {
+            "kendo-ui": "This demo shows how to save the chart as PDF directly in the browser."
+        }
+      },
+      {
+        "text": "Advanced Export",
         "new": true,
         "url": "chart-api/export",
-        "packages": [
-          "!mvc"
-        ],
         "title": {
             "kendo-ui": "Kendo UI Charts Export API methods"
         },
@@ -8204,11 +8213,11 @@
         "url": "chart-api/selection",
         "title": {
             "kendo-ui": "Axis selection in Kendo UI charting components | Kendo UI Demo",
-			"aspnet-mvc": "ASP.NET MVC Chart API Selection Demo"
+            "aspnet-mvc": "ASP.NET MVC Chart API Selection Demo"
         },
         "meta": {
             "kendo-ui": "Take a look at this example that illustrates how to configure the axis selection in Kendo UI HTML5-powered charting widgets.",
-			"aspnet-mvc": "In this demo you will see how the API is used for a selection in Telerik ASP.NET MVC Chart."
+            "aspnet-mvc": "In this demo you will see how the API is used for a selection in Telerik ASP.NET MVC Chart."
         }
       },
       {
@@ -8632,11 +8641,11 @@
         "url": "financial/index",
         "title": {
             "kendo-ui": "Example of Kendo UI charts for stock analysis apps",
-			"aspnet-mvc": "Example of ASP.NET MVC charts for stock analysis apps"
+            "aspnet-mvc": "Example of ASP.NET MVC charts for stock analysis apps"
         },
         "meta": {
             "kendo-ui": "With this demo for a stock chart, built with Kendo UI, you will be able to find out how Kendo UI chart widgets can be implemented in a financial app.",
-			"aspnet-mvc": "See how you can implement ASP.NET MVC stock chart in your financial app."
+            "aspnet-mvc": "See how you can implement ASP.NET MVC stock chart in your financial app."
         },
         "requiresServer": "true"
       },
@@ -8645,11 +8654,11 @@
         "url": "financial/panes",
         "title": {
             "kendo-ui": "Multiple panes in Kendo UI stock chart",
-			"aspnet-mvc": "Multiple panes in ASP.NET MVC stock chart"
+            "aspnet-mvc": "Multiple panes in ASP.NET MVC stock chart"
         },
         "meta": {
             "kendo-ui": "This demo illustrates the use of multiple graph panes in Kendo UI Stock chart.",
-			"aspnet-mvc": "This demo illustrates the use of multiple graph panes in ASP.NET MVC Stock chart."
+            "aspnet-mvc": "This demo illustrates the use of multiple graph panes in ASP.NET MVC Stock chart."
         },
         "requiresServer": "true"
       },
@@ -8658,11 +8667,22 @@
         "url": "financial/virtualization",
         "title": {
             "kendo-ui": "Virtualization in Kendo UI Stock Chart",
-			"aspnet-mvc": "Virtualization in ASP.NET MVC Stock Chart"
+            "aspnet-mvc": "Virtualization in ASP.NET MVC Stock Chart"
         },
         "meta": {
             "kendo-ui": "In this example we show you how the virtualization works in Kendo UI Stock Chart for rich data visualization.",
-			"aspnet-mvc": "In this example we show you how the virtualization works in ASP.NET MVC  Stock Chart for rich data visualization."
+            "aspnet-mvc": "In this example we show you how the virtualization works in ASP.NET MVC  Stock Chart for rich data visualization."
+        }
+      },
+      {
+        "text": "PDF Export",
+        "new": true,
+        "url": "financial/pdf-export",
+        "title": {
+            "kendo-ui": "Kendo UI StockChart saveAsPDF API method"
+        },
+        "meta": {
+            "kendo-ui": "This demo shows how to save the Stock Chart as PDF directly in the browser."
         }
       },
       {
@@ -8942,17 +8962,25 @@
         ]
       },
       {
-        "text": "Export to PDF, Image, SVG",
+        "text": "PDF Export",
+        "new": true,
+        "url": "diagram/pdf-export",
+        "title": {
+            "kendo-ui": "Kendo UI Diagram saveAsPDF API method"
+        },
+        "meta": {
+            "kendo-ui": "This demo shows how to save the diagram as PDF directly in the browser."
+        }
+      },
+      {
+        "text": "Advanced Export",
         "new": true,
         "url": "diagram/export",
-        "packages": [
-          "!mvc"
-        ],
         "title": {
             "kendo-ui": "Kendo UI Diagram Export API methods"
         },
         "meta": {
-            "kendo-ui": "This demo shows how to export diagram to PDF, PNG Images or SVG and save them directly in the browser."
+            "kendo-ui": "This demo shows how to export diagrams to PDF, PNG Images or SVG and save them directly in the browser."
         }
       },
 	  {

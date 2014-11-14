@@ -27,6 +27,8 @@ namespace Kendo.Mvc.UI
         
         public string FileName { get; set; }
         
+        public bool? ForceProxy { get; set; }
+        
         public string Keywords { get; set; }
         
         public bool? Landscape { get; set; }
@@ -71,6 +73,11 @@ namespace Kendo.Mvc.UI
                 json["fileName"] = FileName;
             }
             
+            if (ForceProxy.HasValue)
+            {
+                json["forceProxy"] = ForceProxy;
+            }
+                
             if (Keywords.HasValue())
             {
                 json["keywords"] = Keywords;

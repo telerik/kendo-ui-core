@@ -253,6 +253,16 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Configures the PDF export settings.
+        /// </summary>
+        public ChartBuilder<T> Pdf(Action<PDFSettingsBuilder> configurator)
+        {
+            configurator(new PDFSettingsBuilder(Component.Pdf));
+
+            return this;
+        }
+
+        /// <summary>
         /// Defines the options for all chart axes of the specified type.
         /// </summary>
         /// <param name="configurator">The configurator.</param>

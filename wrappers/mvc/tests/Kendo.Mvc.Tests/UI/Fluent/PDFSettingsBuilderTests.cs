@@ -8,25 +8,38 @@ namespace Kendo.Mvc.UI.Html.Tests
     public class PDFSettingsBuilderTests
     {
         private PDFSettingsBuilder builder;
-        private PDFSettings excel;
+        private PDFSettings pdf;
 
         public PDFSettingsBuilderTests()
         {
-            excel = new PDFSettings();
-            builder = new PDFSettingsBuilder(excel);
+            pdf = new PDFSettings();
+            builder = new PDFSettingsBuilder(pdf);
         }
 
         [Fact]
         public void ForceProxy_sets_forceProxy()
         {
             builder.ForceProxy(true);
-            excel.ForceProxy.ShouldBeTrue();
+            pdf.ForceProxy.ShouldBeTrue();
         }
 
         [Fact]
         public void ForceProxy_returns_builder()
         {
             builder.ForceProxy(true).ShouldEqual(builder);
+        }
+
+        [Fact]
+        public void ProxyURL_sets_ProxyURL()
+        {
+            builder.ProxyURL("Foo");
+            pdf.ProxyURL.ShouldEqual("Foo");
+        }
+
+        [Fact]
+        public void ProxyURL_returns_builder()
+        {
+            builder.ProxyURL("Foo").ShouldEqual(builder);
         }
     }
 }

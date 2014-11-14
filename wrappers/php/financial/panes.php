@@ -57,7 +57,7 @@ echo $chart->render();
 ?>
 <style scoped>
 .k-chart {
-    height: 500px;
+    height: 600px;
 }
 </style>
 <?php require_once '../include/footer.php'; ?>

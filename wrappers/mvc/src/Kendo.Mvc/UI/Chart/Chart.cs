@@ -2,6 +2,7 @@ namespace Kendo.Mvc.UI
 {
     using System.Collections.Generic;
     using System.IO;
+    using System.Linq;
     using System.Web.Mvc;
     using System.Web.UI;
     using Kendo.Mvc.Extensions;
@@ -32,7 +33,8 @@ namespace Kendo.Mvc.UI
             DataSource.Schema.Data = "";
             DataSource.Schema.Total = "";
             DataSource.Schema.Errors = "";
-            DataSource.ModelType(typeof(T));    
+            DataSource.ModelType(typeof(T));
+            Pdf = new PDFSettings(); 
         }
 
         /// <summary>
@@ -246,6 +248,15 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        /// <summary>
+        /// PDF Export settings
+        /// </summary>
+        public PDFSettings Pdf
+        {
+            get;
+            private set;
+        }
+
         protected virtual string WidgetName {
             get
             {
@@ -305,6 +316,12 @@ namespace Kendo.Mvc.UI
 
             if (AutoBind.HasValue) {
                 options.Add("autoBind", AutoBind.Value);
+            }
+
+            var pdf = Pdf.ToJson();
+            if (pdf.Any())
+            {
+                options.Add("pdf", pdf);
             }
         }
 

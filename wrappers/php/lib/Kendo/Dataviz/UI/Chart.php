@@ -73,6 +73,15 @@ data source is fired. By default the widget will bind to the data source specifi
     }
 
     /**
+    * Configures the export settings for the saveAsPDF method.
+    * @param \Kendo\Dataviz\UI\ChartPdf|array $value
+    * @return \Kendo\Dataviz\UI\Chart
+    */
+    public function pdf($value) {
+        return $this->setProperty('pdf', $value);
+    }
+
+    /**
     * The plot area configuration options. The plot area is the area which displays the series.
     * @param \Kendo\Dataviz\UI\ChartPlotArea|array $value
     * @return \Kendo\Dataviz\UI\Chart

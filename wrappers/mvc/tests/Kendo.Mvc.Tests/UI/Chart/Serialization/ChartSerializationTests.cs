@@ -286,5 +286,22 @@ namespace Kendo.Mvc.UI.Tests.Chart
 
             output.ShouldContain(dataSourceExample);
         }
+
+        [Fact]
+        public void PDFSettings_serialized()
+        {
+            chart.Pdf.ForceProxy = true;
+            chart.WriteInitializationScript(textWriter.Object);
+
+            output.ShouldContain("{\"pdf\":{\"forceProxy\":true}}");
+        }
+
+        [Fact]
+        public void PDFSettings_default_not_serialized()
+        {
+            chart.WriteInitializationScript(textWriter.Object);
+
+            output.ShouldNotContain("pdf");
+        }
     }
 }

@@ -149,6 +149,15 @@ data source is fired. By default the widget will bind to the data source specifi
     }
 
     /**
+    * Configures the export settings for the saveAsPDF method.
+    * @param \Kendo\Dataviz\UI\DiagramPdf|array $value
+    * @return \Kendo\Dataviz\UI\Diagram
+    */
+    public function pdf($value) {
+        return $this->setProperty('pdf', $value);
+    }
+
+    /**
     * Defines the shape options.
     * @param \Kendo\Dataviz\UI\DiagramShapeDefaults|array $value
     * @return \Kendo\Dataviz\UI\Diagram
