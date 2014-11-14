@@ -1972,6 +1972,7 @@
 
                 that.clear();
                 that.element.off(NS);
+                that.scroller.wrapper.off(NS);
                 that.canvas.destroy(true);
                 that.canvas = undefined;
 
