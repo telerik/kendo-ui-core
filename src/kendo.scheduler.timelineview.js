@@ -91,6 +91,20 @@ var __meta__ = {
         return workDays;
     }
 
+    function setColspan(columnLevel) {
+        var count = 0;
+        if (columnLevel.columns) {
+            for (var i = 0; i < columnLevel.columns.length; i++) {
+                count += setColspan(columnLevel.columns[i]);
+            }
+            columnLevel.colspan = count;
+            return count;
+        } else {
+            columnLevel.colspan = 1;
+            return 1;
+        }
+    }
+
     var TimelineView = SchedulerView.extend({
         init: function(element, options) {
             var that = this;
@@ -322,6 +336,7 @@ var __meta__ = {
             majorTick: 60,
             eventHeight: 25,
             columnWidth: 100,
+            groupHeaderTemplate: "#=text#",
             majorTimeHeaderTemplate: "#=kendo.toString(date, 't')#",
             minorTimeHeaderTemplate: "&nbsp;",
             slotTemplate: "&nbsp;",
@@ -346,6 +361,7 @@ var __meta__ = {
             this.majorTimeHeaderTemplate = kendo.template(options.majorTimeHeaderTemplate, settings);
             this.dateHeaderTemplate = kendo.template(options.dateHeaderTemplate, settings);
             this.slotTemplate = kendo.template(options.slotTemplate, settings);
+            this.groupHeaderTemplate = kendo.template(options.groupHeaderTemplate, settings);
         },
 
         _render: function(dates) {
@@ -509,7 +525,7 @@ var __meta__ = {
                         className: lastSlotColumn ? "k-slot-cell" : "",
                         columns: minorTickSlots.slice(0, minorSlotsCount)
                     };
-                    that._setColspan(timeColumn);
+                    setColspan(timeColumn);
                     timeColumns.push(timeColumn);
                 }
             });
@@ -525,9 +541,10 @@ var __meta__ = {
             var resources = this.groupedResources;
             if (resources.length) {
                 if (this._groupOrientation() === "vertical") {
-                    rows = that._createRowsLayout(resources, null);
+                    rows = that._createRowsLayout(resources, null, this.groupHeaderTemplate);
+                    debugger;
                 } else {
-                    columns = that._createColumnsLayout(resources, columns);
+                    columns = that._createColumnsLayout(resources, columns, this.groupHeaderTemplate);
                 }
             }
 
@@ -535,20 +552,6 @@ var __meta__ = {
                 columns: columns,
                 rows: rows
             };
-        },
-
-        _setColspan: function (columnLevel) {
-            var count = 0;
-            if (columnLevel.columns) {
-                for (var i = 0; i < columnLevel.columns.length; i++) {
-                    count += this._setColspan(columnLevel.columns[i]);
-                }
-                columnLevel.colspan = count;
-                return count;
-            } else {
-                columnLevel.colspan = 1;
-                return 1;
-            }
         },
 
         //optional methods
@@ -1459,7 +1462,6 @@ var __meta__ = {
 
             return handled;
         },
-
 
         destroy: function() {
             var that = this;

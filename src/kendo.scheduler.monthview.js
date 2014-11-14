@@ -188,6 +188,7 @@ var __meta__ = {
 
             this.eventTemplate = this._eventTmpl(options.eventTemplate, EVENT_WRAPPER_STRING);
             this.dayTemplate = kendo.template(options.dayTemplate, settings);
+            this.groupHeaderTemplate = kendo.template(options.groupHeaderTemplate, settings);
         },
 
         dateForTitle: function() {
@@ -440,9 +441,9 @@ var __meta__ = {
                         inner.push({ text: "<div>&nbsp;</div>", className: "k-hidden k-slot-cell" });
                     }
 
-                    rows = this._createRowsLayout(resources, inner);
+                    rows = this._createRowsLayout(resources, inner, this.groupHeaderTemplate);
                 } else {
-                    columns = this._createColumnsLayout(resources, columns);
+                    columns = this._createColumnsLayout(resources, columns, this.groupHeaderTemplate);
                 }
             }
 
@@ -894,6 +895,7 @@ var __meta__ = {
             moreButtonHeight: 13,
             editable: true,
             selectedDateFormat: "{0:y}",
+            groupHeaderTemplate: "#=text#",
             dayTemplate: DAY_TEMPLATE,
             eventTemplate: EVENT_TEMPLATE
         }

@@ -1772,8 +1772,8 @@ var __meta__ = {
             this.groupedResources = result;
         },
 
-        _createColumnsLayout: function(resources, inner) {
-            return createLayoutConfiguration("columns", resources, inner);
+        _createColumnsLayout: function(resources, inner, template) {
+            return createLayoutConfiguration("columns", resources, inner, template);
         },
 
         _groupOrientation: function() {
@@ -1785,8 +1785,8 @@ var __meta__ = {
             return this.groupedResources.length && this._groupOrientation() === "vertical";
         },
 
-        _createRowsLayout: function(resources, inner) {
-            return createLayoutConfiguration("rows", resources, inner);
+        _createRowsLayout: function(resources, inner, template) {
+            return createLayoutConfiguration("rows", resources, inner, template);
         },
 
         selectionByElement: function() {
@@ -2105,7 +2105,7 @@ var __meta__ = {
         return columns;
     }
 
-    function createLayoutConfiguration(name, resources, inner) {
+    function createLayoutConfiguration(name, resources, inner, template) {
         var resource = resources[0];
         if (resource) {
             var configuration = [];
@@ -2114,10 +2114,17 @@ var __meta__ = {
 
             for (var dataIndex = 0; dataIndex < data.length; dataIndex++) {
                 var obj = {
-                    text: kendo.htmlEncode(kendo.getter(resource.dataTextField)(data[dataIndex])),
+                    text: template({
+                        text: kendo.htmlEncode(kendo.getter(resource.dataTextField)(data[dataIndex])),
+                        color: kendo.getter(resource.dataColorField)(data[dataIndex]),
+                        field: resource.field,
+                        title: resource.title,
+                        name: resource.name,
+                        value:kendo.getter(resource.dataValueField)(data[dataIndex])
+                    }),
                     className: "k-slot-cell"
                 };
-                obj[name] = createLayoutConfiguration(name, resources.slice(1), inner);
+                obj[name] = createLayoutConfiguration(name, resources.slice(1), inner, template);
 
                 configuration.push(obj);
             }

@@ -608,6 +608,7 @@ var __meta__ = {
             majorTick: 60,
             majorTimeHeaderTemplate: "#=kendo.toString(date, 't')#",
             minorTimeHeaderTemplate: "&nbsp;",
+            groupHeaderTemplate: "#=text#",
             slotTemplate: "&nbsp;",
             allDaySlotTemplate: "&nbsp;",
             eventTemplate: DAY_VIEW_EVENT_TEMPLATE,
@@ -646,6 +647,7 @@ var __meta__ = {
             this.dateHeaderTemplate = kendo.template(options.dateHeaderTemplate, settings);
             this.slotTemplate = kendo.template(options.slotTemplate, settings);
             this.allDaySlotTemplate = kendo.template(options.allDaySlotTemplate, settings);
+            this.groupHeaderTemplate = kendo.template(options.groupHeaderTemplate, settings);
         },
 
         _editable: function() {
@@ -796,9 +798,9 @@ var __meta__ = {
 
             if (resources.length) {
                 if (this._groupOrientation() === "vertical") {
-                    rows = this._createRowsLayout(resources, rows);
+                    rows = this._createRowsLayout(resources, rows, this.groupHeaderTemplate);
                 } else {
-                    columns = this._createColumnsLayout(resources, columns);
+                    columns = this._createColumnsLayout(resources, columns, this.groupHeaderTemplate);
                 }
             }
 

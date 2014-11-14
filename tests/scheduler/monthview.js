@@ -545,6 +545,29 @@
         ok(group1 && group2 && group3 && group4);
     });
 
+    test("texts and values of resources are passed to groupHeaderTemplate", function() {
+        var texts = [], values = [];
+        var element = $("<div>").appendTo(QUnit.fixture);
+
+        setupGroupedScheduler(element, "horizontal", {
+            type: "month",
+            groupHeaderTemplate: function(data) {
+                texts.push(data.text);
+                values.push(data.value);
+                return data.text + data.value;
+            }
+        });
+
+        var view = element.getKendoScheduler().view();
+
+        equal(texts.indexOf("Room1"), 0);
+        equal(texts.indexOf("Barny"), 2);
+        equal(values.indexOf(1), 0);
+        equal(values.indexOf(2), 2);
+        equal(view.datesHeader.find("tr:first th:first").html(), "Room11");
+    });
+
+
     test("correct resources are passed to dayTemplate (vertical grouping)", function() {
         var group1, group2, group3, group4;
 

@@ -109,6 +109,107 @@
         equal(view.datesHeader.find("table tr:last").children().length,  view.content.find("table tr:first").children().length);
     });
 
+    test("groupHeaderTemplate is used in horizontal grouping", function () {
+        setupScheduler({
+            date: new Date("2013/1/6"),
+            minorTickCount: 3,
+            majorTick: 120,
+            startTime: new Date("2013/1/6 06:00"),
+            endTime: new Date("2013/1/6 11:00"),
+            groupHeaderTemplate: "#=text#TEST",
+            views: [
+                "timelineWeek"
+            ],
+            group: {
+                resources: ["Rooms"],
+                orientation: "horizontal"
+            },
+            resources: [
+                {
+                    field: "roomId",
+                    name: "Rooms",
+                    dataSource: [
+                        { text: "Resource1", value: 1, color: "#6eb3fa" },
+                        { text: "Resource2", value: 2, color: "#f58a8a" }
+                    ],
+                    title: "Room"
+                }]
+
+        });
+
+        var view = scheduler.view();
+
+        equal(view.datesHeader.find("tr:first th:first").html(), "Resource1TEST");
+    });
+
+    test("groupHeaderTemplate is used in horizontal grouping", function () {
+        setupScheduler({
+            date: new Date("2013/1/6"),
+            minorTickCount: 3,
+            majorTick: 120,
+            startTime: new Date("2013/1/6 06:00"),
+            endTime: new Date("2013/1/6 11:00"),
+            groupHeaderTemplate: "#=text#TEST",
+            views: [
+                "timelineWeek"
+            ],
+            group: {
+                resources: ["Rooms"],
+                orientation: "vertical"
+            },
+            resources: [
+                {
+                    field: "roomId",
+                    name: "Rooms",
+                    dataSource: [
+                        { text: "Resource1", value: 1, color: "#6eb3fa" },
+                        { text: "Resource2", value: 2, color: "#f58a8a" }
+                    ],
+                    title: "Room"
+                }]
+
+        });
+
+        var view = scheduler.view();
+
+        equal(view.times.find("tr:first th:first").html(), "Resource1TEST");
+    });
+
+    test("groupHeaderTemplate that contains color and value arguments", function () {
+        setupScheduler({
+            date: new Date("2013/1/6"),
+            minorTickCount: 3,
+            majorTick: 120,
+            startTime: new Date("2013/1/6 06:00"),
+            endTime: new Date("2013/1/6 11:00"),
+            groupHeaderTemplate: "#=value##=color#",
+            views: [
+                "timelineWeek"
+            ],
+            group: {
+                resources: ["Rooms"],
+                orientation: "vertical"
+            },
+            resources: [
+                {
+                    field: "roomId",
+                    name: "Rooms",
+                    dataSource: [
+                        { text: "Resource1", value: 1, color: "#ebeeee" },
+                        { text: "Resource2", value: 2, color: "#f58a8a" }
+                    ],
+                    title: "Room"
+                }]
+
+        });
+
+        var view = scheduler.view();
+        var headerText = view.times.find("tr:first th:first").html();
+
+        ok(headerText.indexOf("1") > -1);
+        ok(headerText.indexOf("ebeeee") > -1);
+    });
+
     test("week view shows the same amount of cells in header and content with even minorTicks and grouping", function () {
         setupScheduler({
             date: new Date("2013/1/6"),
