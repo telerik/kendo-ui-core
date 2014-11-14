@@ -109,7 +109,7 @@ var __meta__ = {
 
                     } else if (type === "date") {
                         if (useOdataFour) {
-                            format = "{1:yyyy-MM-ddTHH:mm:ss+00:00}"
+                            format = "{1:yyyy-MM-ddTHH:mm:ss+00:00}";
                         } else {
                             format = "datetime'{1:yyyy-MM-ddTHH:mm:ss}'";
                         }
