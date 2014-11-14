@@ -21,8 +21,14 @@ namespace Kendo.Mvc.UI
         {
             this.urlGenerator = urlGenerator;
 
-            DataSource = new DataSource();
-            DataSource.Type = DataSourceType.Ajax;
+            DataSource = new DataSource()
+            {
+                Type = DataSourceType.Ajax,
+                ServerAggregates = true,
+                ServerFiltering = true,                
+                ServerPaging = true,
+                ServerSorting = true
+            };
             DataSource.Schema.Model = new TreeListModelDescriptor(typeof(T));
 
 //>> Initialization
