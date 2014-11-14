@@ -5,7 +5,7 @@ namespace Kendo.Mvc.UI
 {    
     public class GridExcelSettings : JsonObject
     {
-        public string ProxyUrl
+        public string ProxyURL
         {
             get;
             set;
@@ -37,9 +37,9 @@ namespace Kendo.Mvc.UI
 
         protected override void Serialize(IDictionary<string, object> json)
         {
-            if (ProxyUrl.HasValue())
+            if (ProxyURL.HasValue())
             {
-                json["proxyURL"] = ProxyUrl;
+                json["proxyURL"] = ProxyURL;
             }
 
             if (FileName.HasValue())
