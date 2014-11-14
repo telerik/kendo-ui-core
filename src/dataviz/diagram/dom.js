@@ -1635,7 +1635,8 @@
                         position: "absolute",
                         top: 0,
                         left: 0,
-                        width: this.element.width()
+                        width: this.element.width(),
+                        textAlign: "left"
                     });
 
                     this.element.append(this.toolBar.element);
