@@ -1895,6 +1895,8 @@
                 if (this.canvas) {
                     this.canvas.size(size);
                 }
+
+                this.toolBar._toolBar.element.width(this.element.width());
             },
 
             _mouseover: function(e) {
