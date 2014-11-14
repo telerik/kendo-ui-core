@@ -24,6 +24,7 @@ Inherits="System.Web.Mvc.ViewPage<IEnumerable<Kendo.Mvc.Examples.Models.TreeList
         .Sortable()
         .DataSource(dataSource => dataSource
             .Read(read => read.Action("All", "EmployeeDirectory"))
+            .ServerOperation(false)
             .Model(m => {
                 m.Id(f => f.EmployeeId);
                 m.ParentId(f => f.ReportsTo);
