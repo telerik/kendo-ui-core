@@ -14,8 +14,8 @@
                     columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Product].[Category]" } ],
                     rows: [{ name: "[Geography].[City]" }],
                     measures: [
-                        { name: "[Measures].[Internet Revenue Status]", type: "status" },
-                        { name: "[Measures].[Internet Revenue Trend]", type: "trend" }
+                        { name: "[Measures].[Internet Revenue Status]", type: "status" }, //KPI Status measure that will render kpiStatusTemplate
+                        { name: "[Measures].[Internet Revenue Trend]", type: "trend" } //KPI Trend measure that will render kpiTrendTemplate
                     ],
                     transport: {
                         connection: {
