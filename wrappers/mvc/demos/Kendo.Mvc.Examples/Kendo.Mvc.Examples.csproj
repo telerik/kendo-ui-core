@@ -185,8 +185,10 @@
     <Compile Include="Controllers\Bullet_Charts\Local_Data_BindingController.cs" />
     <Compile Include="Controllers\Bullet_Charts\Remote_Data_BindingController.cs" />
     <Compile Include="Controllers\Diagram\ApiController.cs" />
+    <Compile Include="Controllers\Diagram\ExportController.cs" />
     <Compile Include="Controllers\Diagram\EditingController.cs" />
     <Compile Include="Controllers\Diagram\Events.cs" />
+    <Compile Include="Controllers\Diagram\Pdf_ExportController.cs" />
     <Compile Include="Controllers\DropDownList\ClientFilteringController.cs" />
     <Compile Include="Controllers\DropDownList\ServerFilteringController.cs" />
     <Compile Include="Controllers\Gantt\ApiController.cs" />
@@ -856,6 +858,7 @@
     <Content Include="Areas\aspx\Views\bullet_charts\local_data_binding.aspx" />
     <Content Include="Areas\aspx\Views\bullet_charts\remote_data_binding.aspx" />
     <Content Include="Areas\aspx\Views\diagram\api.aspx" />
+    <Content Include="Areas\aspx\Views\diagram\pdf_export.aspx" />
     <Content Include="Areas\aspx\Views\diagram\editing.aspx" />
     <Content Include="Areas\aspx\Views\diagram\events.aspx" />
     <Content Include="Areas\aspx\Views\dropdownlist\clientfiltering.aspx" />
@@ -1250,6 +1253,8 @@
     <Content Include="Areas\aspx\Views\window\keyboard_navigation.aspx" />
     <Content Include="Areas\aspx\Views\window\right_to_left_support.aspx" />
     <Content Include="Areas\aspx\Views\diagram\layout.aspx" />
+    <Content Include="Areas\razor\Views\diagram\pdf_export.cshtml" />
+    <Content Include="Areas\razor\Views\diagram\export.cshtml" />
     <None Include="Areas\razor\Views\diagram\editing.cshtml" />
     <Content Include="Areas\razor\Views\range_bar_charts\index.cshtml" />
     <Content Include="Areas\razor\Views\diagram\index.cshtml" />
