@@ -552,5 +552,15 @@ namespace Kendo.Mvc.UI.Fluent
             Component.Transitions = transitions;
             return this;
         }
+
+        /// <summary>
+        /// Configures the PDF export settings.
+        /// </summary>
+        public StockChartBuilder<T> Pdf(Action<PDFSettingsBuilder> configurator)
+        {
+            configurator(new PDFSettingsBuilder(Component.Pdf));
+
+            return this;
+        }
     }
 }
