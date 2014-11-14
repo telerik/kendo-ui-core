@@ -341,6 +341,71 @@ test("select uses data value field if data-value-primitive is set to true", func
     strictEqual(viewModel.selectedItem, viewModel.foo[1].text);
 });
 
+test("select uses data value field if data-value-primitive is set to true with data source", function() {
+    var viewModel = kendo.observable( {
+        foo: new kendo.data.DataSource({ data: [ { text: "foo" }, { text: "bar" } ]}),
+        selectedItem: ""
+    });
+
+    viewModel.selectedItem = viewModel.foo[0];
+
+    var dom = $('<select data-value-field="text" data-text-field="text" data-value-primitive="true" data-bind="source:foo,value:selectedItem"/>');
+
+    kendo.bind(dom, viewModel);
+
+    dom.find("option:first")[0].selected = false;
+    dom.find("option:last")[0].selected = true;
+
+    dom.trigger("change");
+    dom.triggerHandler("change");
+
+    strictEqual(viewModel.selectedItem, viewModel.foo.view().at(1).text);
+});
+
+test("select works with data source and existing selectedItem", function() {
+    var ds = new kendo.data.DataSource({ data: [ { text: "foo" }, { text: "bar" } ]});
+    ds.read();
+
+    var viewModel = kendo.observable({
+        foo: ds,
+        selectedItem: ds.at(0)
+    });
+
+    var dom = $('<select data-text-field="text" data-value-field="text" data-bind="source:foo,value:selectedItem"/>');
+
+    kendo.bind(dom, viewModel);
+
+    dom.find("option:first")[0].selected = false;
+    dom.find("option:last")[0].selected = true;
+
+    dom.trigger("change");
+    dom.triggerHandler("change");
+
+    strictEqual(viewModel.selectedItem, viewModel.foo.view().at(1));
+});
+
+
+test("select works with data source and an initial null value", function() {
+    var ds = new kendo.data.DataSource({ data: [ { text: "foo" }, { text: "bar" } ]});
+
+    var viewModel = kendo.observable({
+        foo: ds,
+        selectedItem: null
+    });
+
+    var dom = $('<select data-text-field="text" data-value-field="text" data-bind="source:foo,value:selectedItem"/>');
+
+    kendo.bind(dom, viewModel);
+
+    dom.find("option:first")[0].selected = false;
+    dom.find("option:last")[0].selected = true;
+
+    dom.trigger("change");
+    dom.triggerHandler("change");
+
+    strictEqual(viewModel.selectedItem, viewModel.foo.view().at(1));
+});
+
 test("select tracks complex value if text-field is set", function() {
     var viewModel = kendo.observable( {
         foo: [ { text: "foo" }, { text: "bar" } ],
@@ -1189,6 +1254,5 @@ if (number[0].type == "number") {
         strictEqual(observable.number, 3.14);
     });
 }
-
 
 }());
