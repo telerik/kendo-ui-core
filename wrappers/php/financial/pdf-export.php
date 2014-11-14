@@ -2,16 +2,48 @@
 require_once '../lib/Kendo/Autoload.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    header('Content-Type: application/json');
+    $type = $_GET['type'];
+    if ($type == 'save') {
+        $fileName = $_POST['fileName'];
+        $contentType = $_POST['contentType'];
+        $base64 = $_POST['base64'];
 
-    $result = json_decode(file_get_contents('../content/dataviz/js/boeing-stock.json'));
+        $data = base64_decode($base64);
 
-    echo json_encode($result);
+        header('Content-Type:' . $contentType);
+        header('Content-Length:' . strlen($data));
+        header('Content-Disposition: attachment; filename=' . $fileName);
+
+        echo $data;
+    } else {
+        header('Content-Type: application/json');
+        $result = json_decode(file_get_contents('../content/dataviz/js/boeing-stock.json'));
+        echo json_encode($result);
+    }
 
     exit;
 }
 
 require_once '../include/header.php';
+?>
+
+<div class="box">
+    <h4>Export Stock Chart</h4>
+    <div class="box-col">
+        <button class='export-pdf k-button'>Save as PDF</button>
+    </div>
+</div>
+
+<script>
+    $(".export-pdf").click(function() {
+        $("#stock-chart").getKendoStockChart().saveAsPDF();
+    });
+</script>
+
+<?php
+$pdf = new \Kendo\Dataviz\UI\ChartPdf();
+$pdf->fileName('Kendo UI Stock Chart Export.pdf')
+    ->proxyURL('pdf-export.php?type=save');
 
 $stock = new \Kendo\Dataviz\UI\StockChartSeriesItem();
 $stock->type('candlestick')
@@ -40,7 +72,8 @@ $dataSource->transport($transport);
 
 $chart = new \Kendo\Dataviz\UI\StockChart('stock-chart');
 
-$chart->dataSource($dataSource)
+$chart->pdf($pdf)
+      ->dataSource($dataSource)
       ->title(array('text' => 'The Boeing Company (NYSE:BA)'))
       ->dateField('Date')
       ->addPane(
@@ -55,9 +88,11 @@ $chart->dataSource($dataSource)
 
 echo $chart->render();
 ?>
+
 <style scoped>
 .k-chart {
     height: 600px;
 }
 </style>
+
 <?php require_once '../include/footer.php'; ?>
