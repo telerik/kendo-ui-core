@@ -1197,6 +1197,8 @@ var __meta__ = {
                     children.push(kendoDomElement("a", { href: "#", className: classNames.link }, [
                         kendoTextElement(title)
                     ]));
+                } else if (column.headerTemplate) {
+                    children.push(kendoHtmlElement(title));
                 } else {
                     children.push(kendoTextElement(title));
                 }

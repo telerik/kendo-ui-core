@@ -348,6 +348,22 @@
         equal(instance.header.find("tr>th:last").text(), "Header template");
     });
 
+    test("column header template does not encode HTML", function() {
+        createTreeList({
+            columns: [
+                "id",
+                { field: "parentId", headerTemplate: "<span class='foo' />" }
+            ],
+            dataSource: {
+                data: [
+                    { id: 1, parentId: null }
+                ]
+            }
+        });
+
+        equal(instance.header.find(".foo").length, 1);
+    });
+
     test("column header template as function", function() {
         var templateFunction = function(data) {
             return "Header template";
