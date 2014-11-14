@@ -790,6 +790,8 @@
                     nc.target(hi);
                 }
 
+                nc.updateModel();
+
                 this.toolService._connectionManipulation();
             },
             getCursor: function () {
