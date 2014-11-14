@@ -6,7 +6,7 @@ class TreeListColumnCommandItem extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * The name of the command. The built-in commands are "edit", "createchild" and "destroy". Can be set to a custom value.
+    * The name of the command. The built-in commands are "edit", "createChild" and "destroy". When set to a custom value, it is rendered as a data-command attribute.
     * @param string $value
     * @return \Kendo\UI\TreeListColumnCommandItem
     */

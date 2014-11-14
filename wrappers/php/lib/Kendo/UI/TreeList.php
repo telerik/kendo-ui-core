@@ -28,6 +28,24 @@ data source is fired. By default the widget will bind to the data source specifi
     }
 
     /**
+    * Defines the text of the command buttons that are shown within the TreeList. Used primarily for localization.
+    * @param \Kendo\UI\TreeListMessages|array $value
+    * @return \Kendo\UI\TreeList
+    */
+    public function messages($value) {
+        return $this->setProperty('messages', $value);
+    }
+
+    /**
+    * Configures the Kendo UI TreeList PDF export settings.
+    * @param \Kendo\UI\TreeListPdf|array $value
+    * @return \Kendo\UI\TreeList
+    */
+    public function pdf($value) {
+        return $this->setProperty('pdf', $value);
+    }
+
+    /**
     * If set to true the grid will display a scrollbar when the total row height (or width) exceeds the grid height (or width). By default scrolling is enabled.Can be set to a JavaScript object which represents the scrolling configuration.
     * @param boolean| $value
     * @return \Kendo\UI\TreeList
@@ -91,12 +109,35 @@ data source is fired. By default the widget will bind to the data source specifi
     }
 
     /**
+    * Configures the Kendo UI TreeList Excel export settings.
+    * @param \Kendo\UI\TreeListExcel|array $value
+    * @return \Kendo\UI\TreeList
+    */
+    public function excel($value) {
+        return $this->setProperty('excel', $value);
+    }
+
+    /**
     * Sets the data source of the TreeList.
     * @param array|\Kendo\Data\DataSource $value
     * @return \Kendo\UI\TreeList
     */
     public function dataSource($value) {
         return $this->setProperty('dataSource', $value);
+    }
+
+    /**
+    * Sets the collapse event of the TreeList.
+    * Fired when an item is about to be collapsed.The event handler function context (available via the this keyword) will be set to the widget instance.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\UI\TreeList
+    */
+    public function collapse($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('collapse', $value);
     }
 
     /**
@@ -125,6 +166,20 @@ data source is fired. By default the widget will bind to the data source specifi
         }
 
         return $this->setProperty('dataBound', $value);
+    }
+
+    /**
+    * Sets the expand event of the TreeList.
+    * Fired when an item is about to be expanded.The event handler function context (available via the this keyword) will be set to the widget instance.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\UI\TreeList
+    */
+    public function expand($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('expand', $value);
     }
 
     /**

@@ -6,6 +6,15 @@ class TreeListColumn extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
+    * HTML attributes of the table cell (<td>) rendered for the column.
+    * @param  $value
+    * @return \Kendo\UI\TreeListColumn
+    */
+    public function attributes($value) {
+        return $this->setProperty('attributes', $value);
+    }
+
+    /**
     * Adds TreeListColumnCommandItem to the TreeListColumn.
     * @param \Kendo\UI\TreeListColumnCommandItem|array,... $value one or more TreeListColumnCommandItem to add.
     * @return \Kendo\UI\TreeListColumn
@@ -38,6 +47,15 @@ class TreeListColumn extends \Kendo\SerializableObject {
     }
 
     /**
+    * If set to true the column will show the icons that are used for exapdning and collapsing of child rows. By default, the first column of the TreeList is expandable.
+    * @param boolean $value
+    * @return \Kendo\UI\TreeListColumn
+    */
+    public function expandable($value) {
+        return $this->setProperty('expandable', $value);
+    }
+
+    /**
     * The field to which the column is bound. The value of this field is displayed by the column during data binding.
 The field name should be a valid Javascript identifier and should contain no spaces, no special characters, and the first character should be a letter.
     * @param string $value
@@ -45,6 +63,28 @@ The field name should be a valid Javascript identifier and should contain no spa
     */
     public function field($value) {
         return $this->setProperty('field', $value);
+    }
+
+    /**
+    * Sets the footerTemplate option of the TreeListColumn.
+    * The template which renders the footer table cell for the column.The fields which can be used in the template are:
+    * @param string $value The id of the element which represents the kendo template.
+    * @return \Kendo\UI\TreeListColumn
+    */
+    public function footerTemplateId($value) {
+        $value = new \Kendo\Template($value);
+
+        return $this->setProperty('footerTemplate', $value);
+    }
+
+    /**
+    * Sets the footerTemplate option of the TreeListColumn.
+    * The template which renders the footer table cell for the column.The fields which can be used in the template are:
+    * @param string $value The template content.
+    * @return \Kendo\UI\TreeListColumn
+    */
+    public function footerTemplate($value) {
+        return $this->setProperty('footerTemplate', $value);
     }
 
     /**

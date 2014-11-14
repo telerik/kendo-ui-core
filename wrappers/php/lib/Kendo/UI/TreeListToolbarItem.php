@@ -9,7 +9,7 @@ class TreeListToolbarItem extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * The name of the toolbar command. Either a built-in ("create" and "excel") or custom. The name is reflected in one of the CSS classes, which is applied to the button - k-grid-name.
+    * The name of the toolbar command. Either a built-in ("create", "pdf", "excel") or custom. The name is reflected in one of the CSS classes, which is applied to the button - k-grid-name.
 This class can be used to obtain reference to the button after TreeList initialization and attach click handlers.
     * @param string $value
     * @return \Kendo\UI\TreeListToolbarItem

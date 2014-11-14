@@ -57,8 +57,20 @@ public class TreeListTag extends WidgetTag /* interfaces */implements DataBoundW
         setProperty("editable", value);
     }
 
+    public void setExcel(com.kendoui.taglib.treelist.ExcelTag value) {
+        setProperty("excel", value);
+    }
+
     public void setFilterable(com.kendoui.taglib.treelist.FilterableTag value) {
         setProperty("filterable", value);
+    }
+
+    public void setMessages(com.kendoui.taglib.treelist.MessagesTag value) {
+        setProperty("messages", value);
+    }
+
+    public void setPdf(com.kendoui.taglib.treelist.PdfTag value) {
+        setProperty("pdf", value);
     }
 
     public void setSortable(com.kendoui.taglib.treelist.SortableTag value) {
@@ -79,6 +91,10 @@ public class TreeListTag extends WidgetTag /* interfaces */implements DataBoundW
         setEvent("change", value.getBody());
     }
 
+    public void setCollapse(CollapseFunctionTag value) {
+        setEvent("collapse", value.getBody());
+    }
+
     public void setDataBinding(DataBindingFunctionTag value) {
         setEvent("dataBinding", value.getBody());
     }
@@ -89,6 +105,10 @@ public class TreeListTag extends WidgetTag /* interfaces */implements DataBoundW
 
     public void setEdit(EditFunctionTag value) {
         setEvent("edit", value.getBody());
+    }
+
+    public void setExpand(ExpandFunctionTag value) {
+        setEvent("expand", value.getBody());
     }
 
     public void setFilterMenuInit(FilterMenuInitFunctionTag value) {
@@ -195,6 +215,18 @@ public class TreeListTag extends WidgetTag /* interfaces */implements DataBoundW
         setProperty("change", new Function(value));
     }
 
+    public String getCollapse() {
+        Function property = ((Function)getProperty("collapse"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setCollapse(String value) {
+        setProperty("collapse", new Function(value));
+    }
+
     public String getDataBinding() {
         Function property = ((Function)getProperty("dataBinding"));
         if (property != null) {
@@ -229,6 +261,18 @@ public class TreeListTag extends WidgetTag /* interfaces */implements DataBoundW
 
     public void setEdit(String value) {
         setProperty("edit", new Function(value));
+    }
+
+    public String getExpand() {
+        Function property = ((Function)getProperty("expand"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setExpand(String value) {
+        setProperty("expand", new Function(value));
     }
 
     public String getFilterMenuInit() {
