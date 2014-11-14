@@ -35,13 +35,19 @@ $discontinuedDimension->caption('Discontinued');
 $sumMeasure = new \Kendo\Data\PivotDataSourceSchemaCubeMeasure('Sum');
 $sumMeasure->format('{0:c}')
             ->field('UnitPrice')
-            ->aggregate('function(value, state) { return value + state; }');
+            ->aggregateName('sum');
+
+$averageMeasure = new \Kendo\Data\PivotDataSourceSchemaCubeMeasure('Average');
+$averageMeasure->format('{0:c}')
+            ->field('UnitPrice')
+            ->aggregateName('average');
 
 $cube = new \Kendo\Data\PivotDataSourceSchemaCube();
 $cube->addDimension($productNameDimension)
     ->addDimension($categoryNameDimension)
     ->addDimension($discontinuedDimension)
-    ->addMeasure($sumMeasure);
+    ->addMeasure($sumMeasure)
+    ->addMeasure($averageMeasure);
 
 $schema = new \Kendo\Data\PivotDataSourceSchema();
 $schema->model($model)
@@ -68,12 +74,31 @@ $dataSource ->addColumn($categoryColumn, $productNameColumn)
 
 $pivotgrid = new \Kendo\UI\PivotGrid('pivotgrid');
 $pivotgrid->dataSource($dataSource)
+    ->configurator("#configurator")
     ->columnWidth(120)
     ->height(570);
+
+$configurator = new \Kendo\UI\PivotConfigurator('configurator');
+$configurator->height(570);
 ?>
 
 <?php
+echo $configurator->render();
 echo $pivotgrid->render();
 ?>
 
+<style>
+    #pivotgrid
+    {
+        display: inline-block;
+        vertical-align: top;
+        width: 60%;
+    }
+
+    #configurator
+    {
+        display: inline-block;
+        vertical-align: top;
+    }
+</style>
 <?php require_once '../include/footer.php'; ?>

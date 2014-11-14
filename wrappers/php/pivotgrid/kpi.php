@@ -1,3 +1,4 @@
+
 <?php
 require_once '../lib/Kendo/Autoload.php';
 
@@ -35,50 +36,51 @@ $dateColumn = new \Kendo\Data\PivotDataSourceColumn();
 $dateColumn->name('[Date].[Calendar]')
             ->expand(true);
 
-$productRow = new \Kendo\Data\PivotDataSourceColumn();
-$productRow->name('[Product].[Product Line]')
-            ->expand(true);
+$productColumn = new \Kendo\Data\PivotDataSourceColumn();
+$productColumn->name('[Product].[Category]');
 
 $dataSource = new \Kendo\Data\PivotDataSource();
 
 $dataSource->transport($transport)
             ->type("xmla")
-            ->addColumn($dateColumn)
-            ->addRow($productRow)
-            ->addMeasure('[Measures].[Reseller Freight Cost]')
+            ->addColumn($dateColumn, $productColumn)
+            ->addRow('[Geography].[City]')
+            ->addMeasure(array('name' => '[Measures].[Internet Revenue Status]', 'type' => 'status')) //KPI Status measure that will render kpiStatusTemplate
+            ->addMeasure(array('name' => '[Measures].[Internet Revenue Trend]', 'type' => 'trend')) //KPI Trend measure that will render kpiTrendTemplate
             ->schema($schema);
 
 $pivotgrid = new \Kendo\UI\PivotGrid('pivotgrid');
 $pivotgrid->dataSource($dataSource)
     ->columnWidth(200)
-    ->dataCellTemplateId('dataCellTemplate')
-    ->columnHeaderTemplateId('headerTemplate')
-    ->rowHeaderTemplateId('headerTemplate')
-    ->height(320);
+    ->configurator("#configurator")
+    ->filterable(true)
+    ->sortable(true)
+    ->height(580);
+
+$configurator = new \Kendo\UI\PivotConfigurator('configurator');
+$configurator->height(580)
+             ->filterable(true)
+             ->sortable(true);
+
 ?>
 
-<script id="dataCellTemplate" type="text/x-kendo-tmpl">
-    # var columnMember = columnTuple ? columnTuple.members[0] : { children: [] }; #
-    # var rowMember = rowTuple ? rowTuple.members[0] : { children: [] }; #
-    # var value = kendo.toString(kendo.parseFloat(dataItem.value) || "N/A", "c2"); #
-
-    # if (columnMember.children.length || rowMember.children.length) { #
-        <em  style="color: red">#: value # (total)</em>
-    # } else { #
-        #: value #
-    # } #
-</script>
-
-<script id="headerTemplate" type="text/x-kendo-tmpl">
-    # if (!member.children.length) { #
-        <em>#: member.caption #</em>
-    # } else { #
-        #: member.caption #
-    # } #
-</script>
-
 <?php
+echo $configurator->render();
 echo $pivotgrid->render();
 ?>
 
+<style>
+    #pivotgrid
+    {
+        display: inline-block;
+        vertical-align: top;
+        width: 60%;
+    }
+
+    #configurator
+    {
+        display: inline-block;
+        vertical-align: top;
+    }
+</style>
 <?php require_once '../include/footer.php'; ?>

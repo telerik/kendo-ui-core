@@ -44,7 +44,7 @@ $dataSource->transport($transport)
             ->type("xmla")
             ->addColumn($dateColumn, $productColumn)
             ->addRow('[Geography].[City]')
-            ->addMeasure('[Measures].[Internet Sales Amount]')
+            ->addMeasure('[Measures].[Reseller Freight Cost]')
             ->schema($schema);
 
 $pivotgrid = new \Kendo\UI\PivotGrid('pivotgrid');
@@ -53,10 +53,11 @@ $pivotgrid->dataSource($dataSource)
     ->configurator("#configurator")
     ->filterable(true)
     ->sortable(true)
-    ->height(494);
+    ->height(580);
 
 $configurator = new \Kendo\UI\PivotConfigurator('configurator');
-$configurator->filterable(true)
+$configurator->height(580)
+             ->filterable(true)
              ->sortable(true);
 
 ?>

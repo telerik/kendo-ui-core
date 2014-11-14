@@ -35,7 +35,7 @@ $contactTitleDimension->caption('All Titles');
 
 $countMeasure = new \Kendo\Data\PivotDataSourceSchemaCubeMeasure('Contacts Count');
 $countMeasure->field('CustomerID')
-            ->aggregate('function(value, state) { return state + 1; }');
+            ->aggregateName('count');
 
 $cube = new \Kendo\Data\PivotDataSourceSchemaCube();
 $cube->addDimension($companyNameDimension)
@@ -68,12 +68,32 @@ $dataSource ->addColumn($countryColumn, $companyNameColumn)
 
 $pivotgrid = new \Kendo\UI\PivotGrid('pivotgrid');
 $pivotgrid->dataSource($dataSource)
+    ->configurator("#configurator")
     ->columnWidth(120)
     ->height(570);
+
+$configurator = new \Kendo\UI\PivotConfigurator('configurator');
+$configurator->height(570);
 ?>
 
 <?php
+echo $configurator->render();
 echo $pivotgrid->render();
 ?>
+
+<style>
+    #pivotgrid
+    {
+        display: inline-block;
+        vertical-align: top;
+        width: 60%;
+    }
+
+    #configurator
+    {
+        display: inline-block;
+        vertical-align: top;
+    }
+</style>
 
 <?php require_once '../include/footer.php'; ?>
