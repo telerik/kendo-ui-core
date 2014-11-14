@@ -1,7 +1,10 @@
 (function() {
+    var handler;
+
     module("TreeList events", {
         setup: function() {
            dom = $("<div />").appendTo(QUnit.fixture);
+           handler = spy();
         },
         teardown: function() {
             kendo.destroy(QUnit.fixture);
@@ -24,8 +27,6 @@
     }
 
     test("dataBound is fired upon refresh", function() {
-        var handler = spy();
-
         createTreeList({
             dataBound: handler
         });
@@ -46,8 +47,6 @@
     });
 
     test("change is fired upon select", function() {
-        var handler = spy();
-
         createTreeList({
             selectable: true,
             change: handler
@@ -59,8 +58,6 @@
     });
 
     test("filterMenuInit is fired upon filter menu initialization", function() {
-        var handler = spy();
-
         createTreeList({
             filterable: true,
             filterMenuInit: handler
@@ -69,5 +66,57 @@
         instance.header.find(".k-grid-filter:first").click();
 
         equal(handler.calls, 1);
+    });
+
+    test("expand is fired upon row expanding", function() {
+        createTreeList({
+            expand: handler
+        });
+
+        instance.content.find(".k-i-expand").mousedown();
+
+        equal(handler.calls, 1);
+    });
+
+    test("expand event can be prevented", function() {
+        createTreeList({
+            expand: function(e) {
+                e.preventDefault();
+            }
+        });
+
+        instance.content.find(".k-i-expand").mousedown();
+
+        equal(instance.content.find("tr:visible").length, 1);
+    });
+
+    test("collapse is fired upon row collapse", function() {
+        createTreeList({
+            dataSource: [
+                { id: 1, parentId: null, expanded: true },
+                { id: 2, parentId: 1 }
+            ],
+            collapse: handler
+        });
+
+        instance.content.find(".k-i-collapse").mousedown();
+
+        equal(handler.calls, 1);
+    });
+
+    test("collapse event can be prevented", function() {
+        createTreeList({
+            dataSource: [
+                { id: 1, parentId: null, expanded: true },
+                { id: 2, parentId: 1 }
+            ],
+            collapse: function(e) {
+                e.preventDefault();
+            }
+        });
+
+        instance.content.find(".k-i-collapse").mousedown();
+
+        equal(instance.content.find("tr:visible").length, 2);
     });
 })();

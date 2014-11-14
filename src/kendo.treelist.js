@@ -67,6 +67,8 @@ var __meta__ = {
     var MOUSEDOWN = "mousedown";
     var EDIT = "edit";
     var SAVE = "save";
+    var EXPAND = "expand";
+    var COLLAPSE = "collapse";
     var REMOVE = "remove";
     var DATABINDING = "dataBinding";
     var DATABOUND = "dataBound";
@@ -889,14 +891,15 @@ var __meta__ = {
             EDIT,
             SAVE,
             REMOVE,
+            EXPAND,
+            COLLAPSE,
             DATABINDING,
             DATABOUND,
             CANCEL,
             FILTERMENUINIT
         ],
 
-        _toggle: function(row, expand) {
-            var model = this.dataItem(row);
+        _toggle: function(model, expand) {
             var loaded = model.loaded();
 
             // reset error state
@@ -926,17 +929,21 @@ var __meta__ = {
         },
 
         expand: function(row) {
-            this._toggle(row, true);
+            this._toggle(this.dataItem(row), true);
         },
 
         collapse: function(row) {
-            this._toggle(row, false);
+            this._toggle(this.dataItem(row), false);
         },
 
         _toggleChildren: function(e) {
             var icon = $(e.currentTarget);
+            var model = this.dataItem(icon);
+            var event = !model.expanded ? EXPAND : COLLAPSE;
 
-            this._toggle(icon);
+            if (!this.trigger(event, { model: model })) {
+                this._toggle(model);
+            }
 
             e.preventDefault();
         },
