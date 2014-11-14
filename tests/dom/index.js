@@ -179,7 +179,6 @@
 
         tree.render([element("td", null)]);
 
-        console.log(root.firstChild.rowSpan);
         equal(root.firstChild.rowSpan, 1);
     });
 
