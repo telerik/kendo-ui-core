@@ -180,6 +180,7 @@ var __meta__ = {
         POINTER = "pointer",
         RANGE_BAR = "rangeBar",
         RANGE_COLUMN = "rangeColumn",
+        RENDER = "render",
         RIGHT = "right",
         ROUNDED_BEVEL = "roundedBevel",
         ROUNDED_GLASS = "roundedGlass",
@@ -378,7 +379,8 @@ var __meta__ = {
             SELECT,
             SELECT_END,
             NOTE_CLICK,
-            NOTE_HOVER
+            NOTE_HOVER,
+            RENDER
         ],
 
         items: function() {
@@ -529,7 +531,7 @@ var __meta__ = {
             chart._setupSelection();
 
             if (!chart._hasDataSource || chart._hasData) {
-                chart.trigger("render");
+                chart.trigger(RENDER);
             }
         },
 
