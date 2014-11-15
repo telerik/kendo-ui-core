@@ -321,6 +321,150 @@
         }
 
         /// <summary>
+        /// Sets the KPI Status template of the pivot grid.
+        /// </summary>
+        /// <param name="template">The template</param>
+        /// <example>
+        /// <code lang="Razor">
+        /// @(Html.Kendo().PivotGrid()
+        ///       .Name(&quot;pivotgrid&quot;)
+        ///       .KPIStatusTemplate(&quot;<em>#: dataItem.value #</em>&quot;)
+        ///       .DataSource(dataSource =&gt;
+        ///         dataSource.Xmla()
+        ///            .Columns(columns =&gt; columns.Add(&quot;[Date].[Calendar]&quot;).Expand(true))
+        ///            .Rows(rows =&gt; rows.Add(&quot;[Geography].[City]&quot;))
+        ///            .Measures(measures =&gt; measures.Values(new string[]{&quot;[Measures].[Internet Sales Amount]&quot;}))
+        ///            .Transport(transport =&gt; transport
+        ///                .Connection(connection =&gt; connection
+        ///                    .Catalog(&quot;Adventure Works DW 2008R2&quot;)
+        ///                    .Cube(&quot;Adventure Works&quot;))
+        ///                .Read(read =&gt; read
+        ///                    .Url(&quot;http://demos.telerik.com/olap/msmdpump.dll&quot;)
+        ///                    .DataType(&quot;text&quot;)
+        ///                    .ContentType(&quot;text/xml&quot;)
+        ///                    .Type(HttpVerbs.Post)
+        ///                )
+        ///            )
+        ///        )
+        ///    )
+        /// </code>
+        /// </example>
+        public PivotGridBuilder<TModel> KPIStatusTemplate(string template)
+        {
+            Component.KPIStatusTemplate = template;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the KPI Status template of the pivot grid.
+        /// </summary>
+        /// <param name="templateId">The template id</param>
+        /// <example>
+        /// <code lang="Razor">
+        /// @(Html.Kendo().PivotGrid()
+        ///       .Name(&quot;pivotgrid&quot;)
+        ///       .KPIStatusTemplateId(&quot;kpiStatusTemplateId&quot;)
+        ///       .DataSource(dataSource =&gt;
+        ///         dataSource.Xmla()
+        ///            .Columns(columns =&gt; columns.Add(&quot;[Date].[Calendar]&quot;).Expand(true))
+        ///            .Rows(rows =&gt; rows.Add(&quot;[Geography].[City]&quot;))
+        ///            .Measures(measures =&gt; measures.Values(new string[]{&quot;[Measures].[Internet Sales Amount]&quot;}))
+        ///            .Transport(transport =&gt; transport
+        ///                .Connection(connection =&gt; connection
+        ///                    .Catalog(&quot;Adventure Works DW 2008R2&quot;)
+        ///                    .Cube(&quot;Adventure Works&quot;))
+        ///                .Read(read =&gt; read
+        ///                    .Url(&quot;http://demos.telerik.com/olap/msmdpump.dll&quot;)
+        ///                    .DataType(&quot;text&quot;)
+        ///                    .ContentType(&quot;text/xml&quot;)
+        ///                    .Type(HttpVerbs.Post)
+        ///                )
+        ///            )
+        ///        )
+        ///    )
+        /// </code>
+        /// </example>
+        public PivotGridBuilder<TModel> KPIStatusTemplateId(string templateId)
+        {
+            Component.KPIStatusTemplateId = templateId;
+
+            return this;
+        }
+        //......
+        /// <summary>
+        /// Sets the KPI Trend template of the pivot grid.
+        /// </summary>
+        /// <param name="template">The template</param>
+        /// <example>
+        /// <code lang="Razor">
+        /// @(Html.Kendo().PivotGrid()
+        ///       .Name(&quot;pivotgrid&quot;)
+        ///       .KPITrendTemplate(&quot;<em>#: dataItem.value #</em>&quot;)
+        ///       .DataSource(dataSource =&gt;
+        ///         dataSource.Xmla()
+        ///            .Columns(columns =&gt; columns.Add(&quot;[Date].[Calendar]&quot;).Expand(true))
+        ///            .Rows(rows =&gt; rows.Add(&quot;[Geography].[City]&quot;))
+        ///            .Measures(measures =&gt; measures.Values(new string[]{&quot;[Measures].[Internet Sales Amount]&quot;}))
+        ///            .Transport(transport =&gt; transport
+        ///                .Connection(connection =&gt; connection
+        ///                    .Catalog(&quot;Adventure Works DW 2008R2&quot;)
+        ///                    .Cube(&quot;Adventure Works&quot;))
+        ///                .Read(read =&gt; read
+        ///                    .Url(&quot;http://demos.telerik.com/olap/msmdpump.dll&quot;)
+        ///                    .DataType(&quot;text&quot;)
+        ///                    .ContentType(&quot;text/xml&quot;)
+        ///                    .Type(HttpVerbs.Post)
+        ///                )
+        ///            )
+        ///        )
+        ///    )
+        /// </code>
+        /// </example>
+        public PivotGridBuilder<TModel> KPITrendTemplate(string template)
+        {
+            Component.KPITrendTemplate = template;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the KPI Trend template of the pivot grid.
+        /// </summary>
+        /// <param name="templateId">The template id</param>
+        /// <example>
+        /// <code lang="Razor">
+        /// @(Html.Kendo().PivotGrid()
+        ///       .Name(&quot;pivotgrid&quot;)
+        ///       .KPITrendTemplateId(&quot;kpiTrendTemplateId&quot;)
+        ///       .DataSource(dataSource =&gt;
+        ///         dataSource.Xmla()
+        ///            .Columns(columns =&gt; columns.Add(&quot;[Date].[Calendar]&quot;).Expand(true))
+        ///            .Rows(rows =&gt; rows.Add(&quot;[Geography].[City]&quot;))
+        ///            .Measures(measures =&gt; measures.Values(new string[]{&quot;[Measures].[Internet Sales Amount]&quot;}))
+        ///            .Transport(transport =&gt; transport
+        ///                .Connection(connection =&gt; connection
+        ///                    .Catalog(&quot;Adventure Works DW 2008R2&quot;)
+        ///                    .Cube(&quot;Adventure Works&quot;))
+        ///                .Read(read =&gt; read
+        ///                    .Url(&quot;http://demos.telerik.com/olap/msmdpump.dll&quot;)
+        ///                    .DataType(&quot;text&quot;)
+        ///                    .ContentType(&quot;text/xml&quot;)
+        ///                    .Type(HttpVerbs.Post)
+        ///                )
+        ///            )
+        ///        )
+        ///    )
+        /// </code>
+        /// </example>
+        public PivotGridBuilder<TModel> KPITrendTemplateId(string templateId)
+        {
+            Component.KPITrendTemplateId = templateId;
+
+            return this;
+        }
+
+        /// <summary>
         /// Sets the column header cell template of the pivot grid.
         /// </summary>
         /// <param name="template">The template</param>

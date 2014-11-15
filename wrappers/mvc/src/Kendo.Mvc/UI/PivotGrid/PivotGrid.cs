@@ -108,6 +108,30 @@
             set;
         }
 
+        public string KPIStatusTemplate
+        {
+            get;
+            set;
+        }
+
+        public string KPIStatusTemplateId
+        {
+            get;
+            set;
+        }
+
+        public string KPITrendTemplate
+        {
+            get;
+            set;
+        }
+
+        public string KPITrendTemplateId
+        {
+            get;
+            set;
+        }
+
         public string RowHeaderTemplate
         {
             get;
@@ -177,6 +201,8 @@
             options["dataSource"] = DataSource.ToJson();
 
             options["dataCellTemplate"] = GetTemplate(DataCellTemplateId, DataCellTemplate);
+            options["kpiStatusTemplate"] = GetTemplate(KPIStatusTemplateId, KPIStatusTemplate);
+            options["kpiTrendTemplate"] = GetTemplate(KPITrendTemplateId, KPITrendTemplate);
 
             options["columnHeaderTemplate"] = GetTemplate(ColumnHeaderTemplateId, ColumnHeaderTemplate);
             options["rowHeaderTemplate"] = GetTemplate(RowHeaderTemplateId, RowHeaderTemplate);
