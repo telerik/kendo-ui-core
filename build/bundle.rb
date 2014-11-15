@@ -10,6 +10,7 @@ end
 desc "Upload all internal builds on kendoui.com"
 task "internal_builds:bundles:all" => [ "build:production:get_binaries" ]
 
+
 def bundle(options)
     name = options[:name]
     eula = options[:eula]
@@ -26,6 +27,33 @@ def bundle(options)
     license = nil
 
     prerequisites = [:js, :less] + options[:prerequisites].to_a
+
+    add_file = lambda do |to, from|
+        dest = File.join(path, to, from)
+        file_copy :from => from, :to => dest
+        prerequisites.push(dest)
+    end
+
+    unless options[:skip_grunt_build]
+        add_file.call('src', 'package.json')
+        add_file.call('src', 'npm-shrinkwrap.json')
+
+        license_path = File.join(path, 'src/resources/legal/core-license.txt')
+        file_copy :from => File.join(legal_dir, "#{options[:license]}.txt"), :to => license_path
+
+        grunt_path = File.join(path, 'src/Gruntfile.js')
+        file_copy :from => 'build/Gruntfile.dist.js', :to => grunt_path
+
+        build_files = File.join(path, 'src/build')
+
+        tree :to => build_files,
+             :from => 'build/{grunt/**/*,less-js/**/*,kendo-meta.js}',
+             :root => 'build'
+
+        prerequisites.push(build_files)
+        prerequisites.push(license_path)
+        prerequisites.push(grunt_path)
+    end
 
     if options[:license]
         license = "#{path}.license"
