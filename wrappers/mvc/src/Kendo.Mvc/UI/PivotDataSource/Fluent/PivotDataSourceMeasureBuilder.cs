@@ -1,5 +1,9 @@
 ﻿namespace Kendo.Mvc.UI.Fluent
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="PivotDataSourceMeasure"/>.
     /// </summary>
@@ -22,7 +26,22 @@
         /// <param name="values">The measure values</param>
         public PivotDataSourceMeasureBuilder Values(params string[] values)
         {
-            measure.Values = values;
+            measure.Values = values.Select(value => new PivotDataSourceMeasureInfo(value));
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets measure values.
+        /// </summary>
+        /// <param name="values">The measure values</param>
+        public PivotDataSourceMeasureBuilder Values(Action<PivotDataSourceMeasureInfoFactory> addAction)
+        {
+            var items = new List<PivotDataSourceMeasureInfo>();
+
+            addAction(new PivotDataSourceMeasureInfoFactory(items));
+
+            measure.Values = items;
 
             return this;
         }

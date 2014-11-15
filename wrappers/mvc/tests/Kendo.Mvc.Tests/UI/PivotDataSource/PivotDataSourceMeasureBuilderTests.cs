@@ -1,6 +1,7 @@
 ﻿namespace Kendo.Mvc.UI.Fluent.Tests
 {
     using Xunit;
+    using System.Linq;
 
     public class PivotDataSourceMeasureBuilderTests
     {
@@ -40,7 +41,9 @@
             var values = new string[] { "test", "test2" };
             builder.Values(values);
 
-            Assert.Equal(values, measure.Values);
+            Assert.Equal(measure.Values.Count(), 2);
+            Assert.Equal(values[0], measure.Values.ToList()[0].Name);
+            Assert.Equal(values[1], measure.Values.ToList()[1].Name);
         }
     }
 }

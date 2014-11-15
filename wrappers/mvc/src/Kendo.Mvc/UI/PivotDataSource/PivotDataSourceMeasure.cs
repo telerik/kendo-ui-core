@@ -10,14 +10,14 @@
             Axis = PivotDataSourceMeasureAxis.Columns;
         }
 
-        public IEnumerable<string> Values { get; set; }
+        public IEnumerable<PivotDataSourceMeasureInfo> Values { get; set; }
         public PivotDataSourceMeasureAxis Axis { get; set; }
 
         protected override void Serialize(System.Collections.Generic.IDictionary<string, object> json)
         {
             if (Values != null && Values.Any())
             {
-                json["values"] = Values;
+                json["values"] = Values.ToJson();
             }
             if (Axis != PivotDataSourceMeasureAxis.Columns)
             {

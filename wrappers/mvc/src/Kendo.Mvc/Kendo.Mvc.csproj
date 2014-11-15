@@ -727,6 +727,9 @@
     <Compile Include="UI\Gauge\GaugeLinearPointerFactory.cs" />
     <Compile Include="UI\Diagram\Fluent\DiagramEditableResizeSettingsBuilder.cs" />
     <Compile Include="UI\Diagram\Settings\DiagramEditableResizeSettings.cs" />
+    <Compile Include="UI\PivotDataSource\Fluent\PivotDataSourceMeasureInfoFactory.cs" />
+    <Compile Include="UI\PivotDataSource\Fluent\PivotDataSourceMeasureInfoBuilder.cs" />
+    <Compile Include="UI\PivotDataSource\PivotDataSourceMeasureInfo.cs" />
     <Compile Include="UI\RadioButton\RadioButton.cs" />
     <Compile Include="UI\RadioButton\Fluent\RadioButtonBuilder.cs" />
     <Compile Include="UI\RadioButton\Html\RadioButtonHtmlBuilder.cs" />
@@ -2370,4 +2373,16 @@
     <Compile Include="UI\Diagram\Settings\DiagramConnectionContentSettings.cs" />
     <Compile Include="UI\Diagram\Fluent\DiagramConnectionContentSettingsBuilder.cs" />
   </ItemGroup>
-<ItemGroup><Compile Include="UI\TreeList\Settings\TreeListExcelSettings.cs" /><Compile Include="UI\TreeList\Fluent\TreeListExcelSettingsBuilder.cs" /><Compile Include="UI\TreeList\Settings\TreeListMessagesSettings.cs" /><Compile Include="UI\TreeList\Fluent\TreeListMessagesSettingsBuilder.cs" /><Compile Include="UI\TreeList\Settings\TreeListMessagesCommandsSettings.cs" /><Compile Include="UI\TreeList\Fluent\TreeListMessagesCommandsSettingsBuilder.cs" /><Compile Include="UI\TreeList\Settings\TreeListPdfSettings.cs" /><Compile Include="UI\TreeList\Fluent\TreeListPdfSettingsBuilder.cs" /><Compile Include="UI\TreeList\Settings\TreeListPdfMarginSettings.cs" /><Compile Include="UI\TreeList\Fluent\TreeListPdfMarginSettingsBuilder.cs" /></ItemGroup></Project>
+  <ItemGroup>
+    <Compile Include="UI\TreeList\Settings\TreeListExcelSettings.cs" />
+    <Compile Include="UI\TreeList\Fluent\TreeListExcelSettingsBuilder.cs" />
+    <Compile Include="UI\TreeList\Settings\TreeListMessagesSettings.cs" />
+    <Compile Include="UI\TreeList\Fluent\TreeListMessagesSettingsBuilder.cs" />
+    <Compile Include="UI\TreeList\Settings\TreeListMessagesCommandsSettings.cs" />
+    <Compile Include="UI\TreeList\Fluent\TreeListMessagesCommandsSettingsBuilder.cs" />
+    <Compile Include="UI\TreeList\Settings\TreeListPdfSettings.cs" />
+    <Compile Include="UI\TreeList\Fluent\TreeListPdfSettingsBuilder.cs" />
+    <Compile Include="UI\TreeList\Settings\TreeListPdfMarginSettings.cs" />
+    <Compile Include="UI\TreeList\Fluent\TreeListPdfMarginSettingsBuilder.cs" />
+  </ItemGroup>
+</Project>
