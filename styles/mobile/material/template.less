@@ -130,7 +130,7 @@
 .km-material .km-filter-wrap:before,
 .km-material .km-filter-reset .km-clear
 {
-	color: @material-main-color;
+    color: @material-main-color;
 }
 
 .km-material .km-filter-wrap > input
@@ -399,17 +399,22 @@
     color: @material-main-color;
 }
 
+.km-material .km-button.km-state-active {
+    color: @material-primary-color;
+}
 
 .km-material .km-button.km-state-disabled {
     color: @material-disabled-color;
     opacity: 1;
 }
 
-.km-material .km-buttongroup  {
+.km-material .km-buttongroup,
+.km-material .km-widget.km-navbar .km-buttongroup  {
     border-color: @material-border-color;
 }
 
-.km-material .km-buttongroup .km-button {
+.km-material .km-buttongroup .km-button,
+.km-material .km-widget.km-navbar .km-buttongroup .km-button {
     color: @material-main-color;
 }
 
@@ -427,7 +432,11 @@
 .km-material .km-buttongroup > .km-state-active {
     color: @material-primary-color;
     background-color: transparent;
-    border-color:  @material-primary-color;
+    border-color: @material-primary-color;
+}
+
+.km-material .km-widget.km-navbar .km-buttongroup .km-state-active {
+    border-color: @material-accent-color;
 }
 
 .km-material .km-listview-label input[type=radio]:checked,
@@ -505,29 +514,8 @@
     background-color: @material-background; 
 }
 
-
 .km-material,
 .km-material .km-header,
-.km-material .km-footer,
-.km-material .km-content,
-.km-material .km-pane,
-.km-material .km-scroll-header .km-group-title,
-.km-material input[type=password],
-.km-material input[type=search],
-.km-material input[type=number],
-.km-material input[type=tel],
-.km-material input[type=url],
-.km-material input[type=email],
-.km-material input[type=text]:not(.k-input),
-.km-root .km-material textarea
-{
-    background: @material-primary-inverse-color;
-    outline-color: @material-primary-inverse-color;
-}
-
-.km-material,
-.km-material .km-header,
-.km-material .km-footer,
 .km-material .km-content,
 .km-material .km-pane,
 .km-material .km-scroll-header .km-group-title,

@@ -137,12 +137,71 @@ var inbox = [
             },
             index: 0
         });
+        localStorage.clear()
+        less.refresh();
     }
 </script>-->
 <!--......................................................................................................................-->
 
+
+    <div data-role="view" id="buttongroup-navbar" data-init="initNameSource" data-show="viewShow">
+    <header data-role="header">
+        <div data-role="navbar">
+            <ul data-role="buttongroup" data-index="0" data-select="regroup">
+                <li>
+                    By Name
+                </li>
+                <li>
+                    By Family
+                </li>
+            </ul>
+            <a data-align="right" data-role="button" class="nav-button" href="#/">Index</a>
+        </div>
+    </header>
+    <ul data-role="listview" data-type="group" data-source="nameSource" data-template="nameTemplate" data-fixed-headers="true">
+    </ul>
+</div>
+
+
+<script>
+    nameSource = kendo.data.DataSource.create({
+        data: [
+                  { firstName: "Ann", lastName: "Devon", firstLetter: "A", lastLetter: "D" },
+                  { firstName: "Annette", lastName: "Roulet", firstLetter: "A", lastLetter: "R" },
+                  { firstName: "Antonio", lastName: "Moreno", firstLetter: "A", lastLetter: "M" },
+                  { firstName: "Carine", lastName: "Schmitt", firstLetter: "C", lastLetter: "S" }
+              ],
+        group: "firstLetter"
+    });
+
+    function regroup() {
+        nameSource.group(this.selectedIndex ? "lastLetter" : "firstLetter");
+    }
+</script>
+
+<script id="nameTemplate" type="text/x-kendo-template">
+    <h2>#:firstName# #:lastName#</h2>
+</script>
+
+<style scoped>
+    #buttongroup-navbar h2 {
+        display: inline-block;
+        font-size: 1.1em;
+        margin: 1em 0 .5em 1em;
+    }
+    #buttongroup-navbar img {
+        float: left;
+        width: 4em;
+        height: 4em;
+        margin: 0;
+        border: 1px solid rgba(0,0,0,.2);
+    -webkit-border-radius: 4em;
+    border-radius: 4em;
+    }
+</style>
+
 <!-- ListView -->
- <div data-role="view" data-title="Destinations" id="listview-home">
+<!-- <div data-role="view" data-title="Destinations" id="listview-home">
     <ul data-role="listview" data-style="inset" data-type="group">
         <li>
             Africa
@@ -180,7 +239,7 @@ var inbox = [
             </ul>
         </li>
     </ul>
-</div>
+</div>-->
 <!--......................................................................................................................-->
 
 <!--Detail Buttons -->
@@ -412,14 +471,15 @@ var inbox = [
 <!--......................................................................................................................-->
 
 <!-- Switch -->
- <!--<div data-role="view" data-init="mobileSwitchInit" data-title="User Settings">
-    <ul data-role="listview" data-style="inset">
+  <!--<div data-role="view" id="switch-home" data-init="mobileSwitchInit" data-show="viewShow" data-title="User Settings">
+    <ul data-role="listview" data-style="inset" data-type="group">
         <li>Profile
             <ul>
                 <li><h2>Eduardo <span>Saavedra</span></h2></li>
                 <li>Brand Manager at Marketing Team</li>
             </ul>
         </li>
+
         <li>Password
             <ul>
                 <li>User cannot change pasword <input data-role="switch" id="email-switch" checked="checked" /></li>
@@ -446,11 +506,15 @@ var inbox = [
         });
     }
 </script>
+
+<style scoped>
+
+</style>
 -->
 <!--......................................................................................................................-->
 
 <!--TabStrip -->
-<!--
+ <!--
 <div data-role="view" id="tabstrip-profile" data-title="Profile" data-layout="mobile-tabstrip">
     <ul data-role="listview" data-style="inset" data-type="group">
         <li>Profile
@@ -1107,9 +1171,99 @@ Text</textarea>
     }
 </style>-->
 
+ <div data-role="view" data-layout="layout" data-show="viewShow" id="layoutView">
+    <p>
+        This examples shows the platform specific layouts. Change the OS to see how the header and footer changes.
+    </p>
+</div>
+
+<div data-role="layout" data-id="layout" data-platform="ios">
+    <header data-role="header">
+        <div data-role="navbar">
+            <a data-align="right" data-role="button" class="nav-button" href="#/">Index</a>
+            <span data-role="view-title">iOS Platform</span>
+        </div>
+    </header>
+    <footer data-role="footer">
+        <div data-role="tabstrip">
+            <a data-icon="contacts">Profile
+            </a><a data-icon="settings">Settings</a>
+        </div>
+    </footer>
+</div>
+
+<div data-role="layout" data-id="layout" data-platform="android">
+    <header data-role="header">
+        <div data-role="navbar">
+            <span data-role="view-title">Android Platform</span>
+            <a data-align="right" data-role="button" class="nav-button" href="#/">Index</a>
+        </div>
+    </header>
+
+    <footer data-role="footer">
+        <div data-role="tabstrip">
+            <a data-icon="history">Sales</a>
+            <a data-icon="settings">Settings</a>
+        </div>
+    </footer>
+</div>
+
+<div data-role="layout" data-id="layout" data-platform="blackberry">
+    <header data-role="header">
+        <div data-role="navbar">
+            <a data-align="right" data-role="button" class="nav-button" href="#/">Index</a>
+            <span data-role="view-title">BlackBerry platform</span>
+        </div>
+    </header>
+
+    <footer data-role="footer">
+        <div data-role="tabstrip">
+            <a data-icon="favorites">Rating</a>
+            <a data-icon="settings">Settings</a>
+        </div>
+    </footer>
+</div>
+
+<div data-role="layout" data-id="layout" data-platform="wp">
+    <header data-role="header">
+        <div data-role="navbar">
+            <a data-align="right" data-role="button" class="nav-button" href="#/">Index</a>
+            <span data-role="view-title">Windows Phone platform</span>
+        </div>
+    </header>
+
+    <footer data-role="footer">
+        <div data-role="tabstrip">
+            <a data-icon="home">Home</a>
+            <a data-icon="globe">Global</a>
+        </div>
+    </footer>
+</div>
+
+<style scoped>
+    #layoutView .km-view-title
+    {
+        visibility: inherit;
+    }
+
+    .km-android #layoutView .km-view-title
+    {
+        display: block;
+        position: static;
+    }
+</style>
+
+
+
 <script>
 //var app = new kendo.mobile.Application(document.body);
-var app = new kendo.mobile.Application($(document.body), { skin: 'material' });
+var app = new kendo.mobile.Application($(document.body), { skin: 'material', platform: "android"});
+
+function viewShow() {
+    localStorage.clear()
+less.refresh()
+
+}
 </script>
 </body>
 </html>
