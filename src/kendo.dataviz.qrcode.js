@@ -7,7 +7,7 @@ var __meta__ = {
     name: "QRCode",
     category: "dataviz",
     description: "QRCode widget.",
-    depends: [ "dataviz.core", "dataviz.svg", "dataviz.canvas" ]
+    depends: [ "dataviz.core", "drawing" ]
 };
 
 (function ($, undefined) {

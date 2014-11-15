@@ -50,9 +50,7 @@
         "./kendo.dataviz.gauge.js",
         "./kendo.dataviz.barcode.js",
         "./kendo.dataviz.stock.js",
-        "./kendo.dataviz.sparkline.js",
-        "./kendo.dataviz.svg.js",
-        "./kendo.dataviz.canvas.js"
+        "./kendo.dataviz.sparkline.js"
     ], f);
 })(function(){
     "bundle all";
