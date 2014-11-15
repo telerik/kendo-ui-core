@@ -331,11 +331,14 @@ var __meta__ = {
 
             chart._bindCategories();
 
+            if (dataSource) {
+                chart._hasDataSource = true;
+            }
+
             chart._redraw();
             chart._attachEvents();
 
             if (dataSource) {
-                chart._hasDataSource = true;
                 if (chart.options.autoBind) {
                     chart.dataSource.fetch();
                 }
@@ -348,6 +351,7 @@ var __meta__ = {
             chart.dataSource.unbind(CHANGE, chart._dataChangeHandler);
             chart.dataSource = dataSource = DataSource.create(dataSource);
             chart._hasDataSource = true;
+            chart._hasData = false;
 
             dataSource.bind(CHANGE, chart._dataChangeHandler);
 
@@ -523,6 +527,10 @@ var __meta__ = {
             chart._tooltip = chart._createTooltip();
             chart._highlight = new Highlight(view);
             chart._setupSelection();
+
+            if (!chart._hasDataSource || chart._hasData) {
+                chart.trigger("render");
+            }
         },
 
         exportVisual: function() {
@@ -1124,6 +1132,8 @@ var __meta__ = {
             chart._bindCategories();
 
             chart.trigger(DATABOUND);
+
+            chart._hasData = true;
             chart._redraw();
         },
 
