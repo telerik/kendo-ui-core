@@ -346,7 +346,7 @@ var __meta__ = {
             var chart = this;
 
             chart.dataSource.unbind(CHANGE, chart._dataChangeHandler);
-            chart.dataSource = dataSource;
+            chart.dataSource = dataSource = DataSource.create(dataSource);
             chart._hasDataSource = true;
 
             dataSource.bind(CHANGE, chart._dataChangeHandler);
@@ -1348,9 +1348,7 @@ var __meta__ = {
             chart._initTheme(chart.options);
 
             if (dataSource) {
-                chart.setDataSource(
-                    DataSource.create(dataSource)
-                );
+                chart.setDataSource(dataSource);
             }
 
             if (chart._shouldAttachMouseMove()) {
