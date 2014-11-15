@@ -65,6 +65,14 @@ public class PivotConfiguratorTag extends WidgetTag /* interfaces */implements D
         setProperty("filterable", value);
     }
 
+    public java.lang.Object getHeight() {
+        return (java.lang.Object)getProperty("height");
+    }
+
+    public void setHeight(java.lang.Object value) {
+        setProperty("height", value);
+    }
+
     public boolean getSortable() {
         return (boolean)getProperty("sortable");
     }

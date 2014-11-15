@@ -123,6 +123,22 @@ public class PivotGridTag extends WidgetTag /* interfaces */implements DataBound
         setProperty("height", value);
     }
 
+    public java.lang.String getKpiStatusTemplate() {
+        return (java.lang.String)getProperty("kpiStatusTemplate");
+    }
+
+    public void setKpiStatusTemplate(java.lang.String value) {
+        setProperty("kpiStatusTemplate", value);
+    }
+
+    public java.lang.String getKpiTrendTemplate() {
+        return (java.lang.String)getProperty("kpiTrendTemplate");
+    }
+
+    public void setKpiTrendTemplate(java.lang.String value) {
+        setProperty("kpiTrendTemplate", value);
+    }
+
     public boolean getReorderable() {
         return (boolean)getProperty("reorderable");
     }

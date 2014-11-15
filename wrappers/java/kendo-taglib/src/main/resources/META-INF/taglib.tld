@@ -22172,6 +22172,12 @@ instance.If the dataSource option is set to a JavaScript object the widget will 
             <type>boolean</type>
         </attribute>
         <attribute>
+            <description>The height of the PivotConfigurator. Numeric values are treated as pixels.</description>
+            <name>height</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
             <description>If set to true the user could sort the widget by clicking the dimension fields. By default sorting is disabled.Can be set to a JavaScript object which represents the sorting configuration.</description>
             <name>sortable</name>
             <rtexprvalue>true</rtexprvalue>
@@ -22422,6 +22428,20 @@ instance.If the dataSource option is set to a JavaScript object the widget will 
             <name>height</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The template which renders the content of the KPI Status value. By default renders "open", "hold" and "denied" status icons.The fields which can be used in the template are:For information about the tuple structure check this link.
+About the data item structure review this help topic.</description>
+            <name>kpiStatusTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The template which renders the content of the KPI Trend value. By default renders "increase", "decrease" and "equal" status icons.The fields which can be used in the template are:For information about the tuple structure check this link.
+About the data item structure review this help topic.</description>
+            <name>kpiTrendTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description>If set to false the user will not be able to add/close/reorder current fields for columns/rows/measures.</description>

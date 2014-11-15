@@ -19,7 +19,7 @@ import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
 public class MeasuresTag extends BaseTag /* interfaces */ /* interfaces */ {
-    
+
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
@@ -37,7 +37,7 @@ public class MeasuresTag extends BaseTag /* interfaces */ /* interfaces */ {
     public void initialize() {
 //>> initialize
 
-        measures = new ArrayList<String>();
+        measures = new ArrayList<MeasureTag>();
 
 //<< initialize
 
@@ -54,7 +54,7 @@ public class MeasuresTag extends BaseTag /* interfaces */ /* interfaces */ {
 
 //>> Attributes
 
-    private List<String> measures;
+    private List<MeasureTag> measures;
 
     public Map<String, Object> measures() {
         return new HashMap<String, Object>() {{
@@ -68,7 +68,7 @@ public class MeasuresTag extends BaseTag /* interfaces */ /* interfaces */ {
     }
 
     public void addMeasure(MeasureTag value) {
-        measures.add(value.getName());
+        measures.add(value);
     }
 
     public java.lang.String getAxis() {
