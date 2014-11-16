@@ -1,5 +1,11 @@
-﻿@(Html.Kendo().PivotGrid<Kendo.Mvc.Examples.Models.CustomerViewModel>()
+﻿@(Html.Kendo().PivotConfigurator()
+    .Name("configurator")
+    .Sortable()
+)
+
+@(Html.Kendo().PivotGrid<Kendo.Mvc.Examples.Models.CustomerViewModel>()
     .Name("pivotgrid")
+    .Configurator("#configurator")
     .ColumnWidth(120)
     .Height(570)
     .DataSource(dataSource => dataSource
@@ -13,7 +19,7 @@
                     dimensions.Add(model => model.Country).Caption("All Countries");
                     dimensions.Add(model => model.ContactTitle).Caption("All Titles");
                 })
-                .Measures(measures => measures.Add("Contacts Count").Field(model => model.CustomerID).Aggregate(@<text>function(value, state) { return state + 1; }</text>))
+                .Measures(measures => measures.Add("Contacts Count").Field(model => model.CustomerID).AggregateName("count"))
             ))
         .Columns(columns =>
         {
@@ -24,3 +30,18 @@
         .Measures(measures => measures.Values("Contacts Count"))
     )
 )
+
+<style>
+    #pivotgrid
+    {
+        display: inline-block;
+        vertical-align: top;
+        width: 70%;
+    }
+
+    #configurator
+    {
+        display: inline-block;
+        vertical-align: top;        
+    }
+</style>

@@ -1,7 +1,13 @@
 ﻿@model IEnumerable<Kendo.Mvc.Examples.Models.ProductViewModel>
 
+@(Html.Kendo().PivotConfigurator()
+    .Name("configurator")
+    .Sortable()
+)
+
 @(Html.Kendo().PivotGrid<Kendo.Mvc.Examples.Models.ProductViewModel>()
     .Name("pivotgrid")
+    .Configurator("#configurator")
     .ColumnWidth(120)
     .Height(570)
     .BindTo(Model)
@@ -15,7 +21,10 @@
                     dimensions.Add("CategoryName").Caption("All Categories");
                     dimensions.Add(model => model.Discontinued).Caption("Discontinued");
                 })
-                .Measures(measures => measures.Add("Sum").Format("{0:c}").Field(model => model.UnitPrice).Aggregate(@<text>function(value, state) { return value + state; }</text>))
+                .Measures(measures => {
+                    measures.Add("Average").Format("{0:c}").Field(model => model.UnitPrice).AggregateName("average");
+                    measures.Add("Sum").Format("{0:c}").Field(model => model.UnitPrice).AggregateName("sum");
+                })
             ))
         .Columns(columns =>
         {
@@ -33,3 +42,18 @@
         alert("error: " + kendo.stringify(e.errors[0]));
     }
 </script>
+
+<style>
+    #pivotgrid
+    {
+        display: inline-block;
+        vertical-align: top;
+        width: 70%;
+    }
+
+    #configurator
+    {
+        display: inline-block;
+        vertical-align: top;        
+    }
+</style>

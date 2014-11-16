@@ -33,7 +33,7 @@
         Xmla()
         .Columns(columns => columns.Add("[Date].[Calendar]").Expand(true))
         .Rows(rows => rows.Add("[Product].[Product Line]").Expand(true))
-        .Measures(measures => measures.Values(new string[]{"[Measures].[Internet Sales Amount]"}))
+        .Measures(measures => measures.Values(new string[]{"[Measures].[Reseller Freight Cost]"}))
         .Transport(transport => transport
             .Connection(connection => connection
                 .Catalog("Adventure Works DW 2008R2")

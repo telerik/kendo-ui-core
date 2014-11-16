@@ -38,7 +38,14 @@
                 columns.Add("[Product].[Category]");
             })
             .Rows(rows => rows.Add("[Geography].[City]"))
-            .Measures(measures => measures.Values(new string[]{"[Measures].[Reseller Freight Cost]"}))
+            .Measures(measures =>
+            {
+                measures.Values(values =>
+                {
+                    values.Add().Name("[Measures].[Internet Revenue Status]").Type("status");
+                    values.Add().Name("[Measures].[Internet Revenue Trend]").Type("trend");
+                });
+            })
             .Transport(transport => transport
                 .Connection(connection => connection
                     .Catalog("Adventure Works DW 2008R2")
