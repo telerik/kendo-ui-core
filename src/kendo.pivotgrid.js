@@ -2644,7 +2644,7 @@ var __meta__ = {
             if (columns.length) {
                 command += serializeMembers(columns, !measuresRowAxis ? measures : [], sort);
             } else if (measures.length && !measuresRowAxis) {
-                command += measures.join(",");
+                command += measureNames(measures).join(",");
             }
 
             command += "} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS";
@@ -2655,7 +2655,7 @@ var __meta__ = {
                 if (rows.length) {
                     command += serializeMembers(rows, measuresRowAxis ? measures : [], sort);
                 } else {
-                    command += measures.join(",");
+                    command += measureNames(measures).join(",");
                 }
 
                 command += "} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON ROWS";
@@ -3294,7 +3294,6 @@ var __meta__ = {
             that._wrapper();
             that._createLayout();
 
-
             that._columnBuilder = columnBuilder = new ColumnBuilder();
             that._rowBuilder = rowBuilder = new RowBuilder();
             that._contentBuilder = new ContentBuilder();
@@ -3753,6 +3752,11 @@ var __meta__ = {
             };
 
             that.contentTree.render(that._contentBuilder.build(dataSource.view(), columnAxis, rowAxis));
+
+            /*that.columnsHeader
+                .children("table")
+                .css("table-layout", "auto")
+                .css("table-layout", "fixed");*/
 
             that._resize();
 
