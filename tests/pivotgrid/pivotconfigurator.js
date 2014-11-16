@@ -549,4 +549,12 @@
 
         equal(configurator.element.height(), 300);
     });
+
+    test("height option in string value defines the widget height", function() {
+        var configurator = createConfigurator({
+            height: "300px"
+        });
+
+        equal(configurator.element.height(), 300);
+    });
 })();

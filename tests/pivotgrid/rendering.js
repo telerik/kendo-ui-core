@@ -3903,6 +3903,20 @@
         var content = pivotgrid.wrapper.find(".k-grid-content");
         var rowsHeader = pivotgrid.wrapper.find(".k-pivot-rowheaders").find(".k-grid");
 
+        equal(pivotgrid.wrapper.height(), 200);
+        equal(rowsHeader.height(), content.height());
+    });
+
+    test("PivotGrid supports string height option value", function() {
+        var pivotgrid = createPivot({
+            height: "200px",
+            dataSource: createDataSource()
+        });
+
+        var content = pivotgrid.wrapper.find(".k-grid-content");
+        var rowsHeader = pivotgrid.wrapper.find(".k-pivot-rowheaders").find(".k-grid");
+
+        equal(pivotgrid.wrapper.height(), 200);
         equal(rowsHeader.height(), content.height());
     });
 

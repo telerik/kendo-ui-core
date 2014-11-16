@@ -3494,7 +3494,13 @@ var __meta__ = {
         },
 
         _wrapper: function() {
+            var height = this.options.height;
+
             this.wrapper = this.element.addClass("k-widget k-pivot");
+
+            if (height) {
+                this.wrapper.css("height", height);
+            }
         },
 
         _measureFields: function() {
@@ -3665,7 +3671,7 @@ var __meta__ = {
             var that = this;
             var content = that.content;
             var rowsHeader = that.rowsHeader;
-            var height = that.options.height;
+            var height = that.wrapper.innerHeight();
             var scrollbar = kendo.support.scrollbar();
             var skipScrollbar = content[0].offsetHeight === content[0].clientHeight;
 
