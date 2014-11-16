@@ -463,17 +463,25 @@ var __meta__ = {
 
         _initSurface: function() {
             var surface = this.surface;
+            var wrap = this._surfaceWrap();
             if (!surface || surface.options.type !== this.options.renderAs) {
                 if (surface) {
                     surface.destroy();
                 }
 
-                var wrap = this._surfaceWrap();
                 this.surface = draw.Surface.create(wrap, {
                     type: this.options.renderAs
                 });
             } else {
                 this.surface.clear();
+            }
+
+            var chartArea = this.options.chartArea;
+            if (chartArea.width) {
+                wrap.css("width", chartArea.width);
+            }
+            if (chartArea.height) {
+                wrap.css("height", chartArea.height);
             }
         },
 

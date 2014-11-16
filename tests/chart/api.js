@@ -241,6 +241,41 @@
         });
 
         // ------------------------------------------------------------
+        (function() {
+            module("chartArea size", {
+                teardown: destroyChart
+            });
+
+            test("applies width in pixels", function() {
+                setupChart({
+                    chartArea: { width: 1000 }
+                });
+                equal(chart.element.width(), 1000);
+            });
+
+            test("applies height in pixels", function() {
+                setupChart({
+                    chartArea: { height: 500 }
+                });
+                equal(chart.element.height(), 500);
+            });
+
+            test("applies width in units", function() {
+                setupChart({
+                    chartArea: { width: "1000px" }
+                });
+                equal(chart.element.width(), 1000);
+            });
+
+            test("applies height", function() {
+                setupChart({
+                    chartArea: { height: "500px" }
+                });
+                equal(chart.element.height(), 500);
+            });
+        })();
+
+        // ------------------------------------------------------------
         module("destroy", {
             setup: function() {
                 setupChart({series: [{}]});
