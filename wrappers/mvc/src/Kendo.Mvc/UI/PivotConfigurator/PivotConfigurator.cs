@@ -30,6 +30,12 @@
             private set;
         }
 
+        public int Height
+        {
+            get;
+            set;
+        }
+
         public bool Filterable
         {
             get;
@@ -55,6 +61,11 @@
         public override void WriteInitializationScript(TextWriter writer)
         {
             var options = this.SeriailzeBaseOptions();
+
+            if (Height != 0)
+            {
+                options["height"] = Height;
+            }
 
             if (Filterable == true)
             {

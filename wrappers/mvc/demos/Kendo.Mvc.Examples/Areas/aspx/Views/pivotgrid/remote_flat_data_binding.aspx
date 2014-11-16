@@ -20,7 +20,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 <%= Html.Kendo().PivotConfigurator()
     .Name("configurator")
-    .Sortable()
+    .Height(570)
 %>
 
 <%= Html.Kendo().PivotGrid<Kendo.Mvc.Examples.Models.CustomerViewModel>()

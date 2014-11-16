@@ -17,6 +17,17 @@
         }
 
         /// <summary>
+        /// Use it to set the height of the Pivot.
+        /// </summary>
+        /// <param name="height">The height</param>
+        public PivotConfiguratorBuilder Height(int height)
+        {
+            Component.Height = height;
+
+            return this;
+        }
+
+        /// <summary>
         /// If set to true the user will be able to filter by using the field menu.
         /// </summary>
         /// <param name="filterable">The filterable</param>

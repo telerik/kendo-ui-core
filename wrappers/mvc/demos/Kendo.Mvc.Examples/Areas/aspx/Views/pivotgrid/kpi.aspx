@@ -22,6 +22,7 @@
         .Name("configurator")
         .Filterable(true)
         .Sortable()
+        .Height(570)
     %>
 
     <%= Html.Kendo().PivotGrid()
@@ -29,7 +30,7 @@
         .ColumnWidth(200)
         .Filterable(true)
         .Sortable()
-        .Height(494)
+        .Height(570)
         .Configurator("#configurator")
         .DataSource(dataSource => dataSource.
             Xmla()
