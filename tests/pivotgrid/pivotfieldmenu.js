@@ -753,6 +753,28 @@
         equal(filters[0].value, "chai");
     });
 
+    test("filter button prevents default", 1, function() {
+        var dataSource = createDataSource();
+        var fieldmenu = createMenu({ dataSource: dataSource });
+        var filterItem = fieldmenu.menu.element.find(".k-filter-item");
+
+        dataSource.filter({
+            field: fieldmenu.currentMember,
+            operator: "eq",
+            value: "test"
+        });
+
+        filterItem.find("select").data("kendoDropDownList").value("eq");
+        filterItem.find("input").val("chai");
+
+        filterItem.find(".k-button-filter").trigger({
+            type: "click",
+            preventDefault: function() {
+                ok(true);
+            }
+        });
+    });
+
     test("filter form preserves filters on 'in' operators", function() {
         var dataSource = createDataSource();
         var fieldmenu = createMenu({ dataSource: dataSource });
@@ -814,6 +836,54 @@
 
         equal(filterItem.find("select").val(), "contains");
         equal(filterItem.find("input").val(), "");
+    });
+
+    test("clear button prevents default", 1, function() {
+        var dataSource = createDataSource();
+        var fieldmenu = createMenu({ dataSource: dataSource });
+        var filterItem = fieldmenu.menu.element.find(".k-filter-item");
+
+        dataSource.filter({
+            field: fieldmenu.currentMember,
+            operator: "eq",
+            value: "test"
+        });
+
+        filterItem.find(".k-button-clear").trigger({
+            type: "click",
+            preventDefault: function() {
+                ok(true);
+            }
+        });
+    });
+
+    test("filter item form submit is prevented", 0, function() {
+        var dataSource = createDataSource();
+        var fieldmenu = createMenu({ dataSource: dataSource });
+        var filterItem = fieldmenu.menu.element.find(".k-filter-item");
+        var form = filterItem.find("form");
+
+        form.trigger({
+            type: "submit"
+        });
+    });
+
+    test("filter item form filters on submit", function() {
+        var dataSource = createDataSource();
+        var fieldmenu = createMenu({ dataSource: dataSource });
+        var filterItem = fieldmenu.menu.element.find(".k-filter-item");
+
+        filterItem.find("select").data("kendoDropDownList").value("eq");
+        filterItem.find("input").val("chai");
+
+        filterItem.find("form").submit();
+
+        var filters = dataSource.filter().filters;
+
+        equal(filters.length, 1);
+        equal(filters[0].field, fieldmenu.currentMember);
+        equal(filters[0].operator, "eq");
+        equal(filters[0].value, "chai");
     });
 
     test("close context menu on filter", function() {

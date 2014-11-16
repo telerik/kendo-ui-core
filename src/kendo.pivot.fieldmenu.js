@@ -90,12 +90,15 @@ var __meta__ = {
 
         _initFilterForm: function() {
             var filterForm = this.menu.element.find(".k-filter-item");
+            var filterProxy = proxy(this._filter, this);
 
             this._filterOperator = new kendo.ui.DropDownList(filterForm.find("select"));
             this._filterValue = filterForm.find(".k-textbox");
 
+
             filterForm
-                .on("click" + NS, ".k-button-filter", proxy(this._filter, this))
+                .on("submit" + NS, filterProxy)
+                .on("click" + NS, ".k-button-filter", filterProxy)
                 .on("click" + NS, ".k-button-clear", proxy(this._reset, this));
         },
 
@@ -128,9 +131,11 @@ var __meta__ = {
             return filter;
         },
 
-        _filter: function() {
+        _filter: function(e) {
             var that = this;
             var value = that._filterValue.val();
+
+            e.preventDefault();
 
             if (!value) {
                 that.menu.close();
@@ -150,9 +155,11 @@ var __meta__ = {
             that.menu.close();
         },
 
-        _reset: function() {
+        _reset: function(e) {
             var that = this;
             var filter = that._clearFilters(that.currentMember);
+
+            e.preventDefault();
 
             if (!filter.filters[0]) {
                 filter = {};
