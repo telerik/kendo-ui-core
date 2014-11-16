@@ -1,17 +1,17 @@
 ﻿namespace Kendo.Mvc.UI.Fluent
 {
     /// <summary>
-    /// Defines the fluent interface for configuring the <see cref="PivotDataSourceMeasureInfo"/>.
+    /// Defines the fluent interface for configuring the <see cref="PivotDataSourceMeasureDescriptor"/>.
     /// </summary>
-    public class PivotDataSourceMeasureInfoBuilder : IHideObjectMembers
+    public class PivotDataSourceMeasureDescriptorBuilder : IHideObjectMembers
     {
-        private readonly PivotDataSourceMeasureInfo measure;
+        private readonly PivotDataSourceMeasureDescriptor measure;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PivotDataSourceMeasureInfoBuilder"/> class.
+        /// Initializes a new instance of the <see cref="PivotDataSourceMeasureDescriptorBuilder"/> class.
         /// </summary>
         /// <param name="measure">The column</param>
-        public PivotDataSourceMeasureInfoBuilder(PivotDataSourceMeasureInfo measure)
+        public PivotDataSourceMeasureDescriptorBuilder(PivotDataSourceMeasureDescriptor measure)
         {
             this.measure = measure;
         }
@@ -20,7 +20,7 @@
         /// Sets measure name.
         /// </summary>
         /// <param name="values">The measure name</param>
-        public PivotDataSourceMeasureInfoBuilder Name(string name)
+        public PivotDataSourceMeasureDescriptorBuilder Name(string name)
         {
             measure.Name = name;
 
@@ -31,7 +31,7 @@
         /// Sets measure type.
         /// </summary>
         /// <param name="values">The measure type</param>
-        public PivotDataSourceMeasureInfoBuilder Type(string type)
+        public PivotDataSourceMeasureDescriptorBuilder Type(string type)
         {
             measure.Type = type;
 

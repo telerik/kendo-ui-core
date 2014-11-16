@@ -727,9 +727,9 @@
     <Compile Include="UI\Gauge\GaugeLinearPointerFactory.cs" />
     <Compile Include="UI\Diagram\Fluent\DiagramEditableResizeSettingsBuilder.cs" />
     <Compile Include="UI\Diagram\Settings\DiagramEditableResizeSettings.cs" />
-    <Compile Include="UI\PivotDataSource\Fluent\PivotDataSourceMeasureInfoFactory.cs" />
-    <Compile Include="UI\PivotDataSource\Fluent\PivotDataSourceMeasureInfoBuilder.cs" />
-    <Compile Include="UI\PivotDataSource\PivotDataSourceMeasureInfo.cs" />
+    <Compile Include="UI\PivotDataSource\Fluent\PivotDataSourceMeasureDescriptorFactory.cs" />
+    <Compile Include="UI\PivotDataSource\Fluent\PivotDataSourceMeasureDescriptorBuilder.cs" />
+    <Compile Include="UI\PivotDataSource\PivotDataSourceMeasureDescriptor.cs" />
     <Compile Include="UI\RadioButton\RadioButton.cs" />
     <Compile Include="UI\RadioButton\Fluent\RadioButtonBuilder.cs" />
     <Compile Include="UI\RadioButton\Html\RadioButtonHtmlBuilder.cs" />

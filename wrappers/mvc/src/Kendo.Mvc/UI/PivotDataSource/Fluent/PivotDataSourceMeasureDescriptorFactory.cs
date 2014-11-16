@@ -4,17 +4,17 @@
     using Infrastructure;
 
     /// <summary>
-    /// Creates items for the <see cref="PivotDataSourceMeasureInfo" />.
+    /// Creates items for the <see cref="PivotDataSourceMeasureDescriptor" />.
     /// </summary>
-    public class PivotDataSourceMeasureInfoFactory : IHideObjectMembers
+    public class PivotDataSourceMeasureDescriptorFactory : IHideObjectMembers
     {
-        private readonly IList<PivotDataSourceMeasureInfo> container;
+        private readonly IList<PivotDataSourceMeasureDescriptor> container;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PivotDataSourceMeasureValuesFactory"/> class.
         /// </summary>
         /// <param name="settings">The settings.</param>
-        public PivotDataSourceMeasureInfoFactory(IList<PivotDataSourceMeasureInfo> container)
+        public PivotDataSourceMeasureDescriptorFactory(IList<PivotDataSourceMeasureDescriptor> container)
         {
             this.container = container;
         }
@@ -23,13 +23,13 @@
         /// Defines a item.
         /// </summary>
         /// <returns></returns>
-        public PivotDataSourceMeasureInfoBuilder Add()
+        public PivotDataSourceMeasureDescriptorBuilder Add()
         {
-            PivotDataSourceMeasureInfo item = new PivotDataSourceMeasureInfo();
+            PivotDataSourceMeasureDescriptor item = new PivotDataSourceMeasureDescriptor();
 
             container.Add(item);
 
-            return new PivotDataSourceMeasureInfoBuilder(item);
+            return new PivotDataSourceMeasureDescriptorBuilder(item);
         }
     }
 }

@@ -10,7 +10,7 @@
             Axis = PivotDataSourceMeasureAxis.Columns;
         }
 
-        public IEnumerable<PivotDataSourceMeasureInfo> Values { get; set; }
+        public IEnumerable<PivotDataSourceMeasureDescriptor> Values { get; set; }
         public PivotDataSourceMeasureAxis Axis { get; set; }
 
         protected override void Serialize(System.Collections.Generic.IDictionary<string, object> json)

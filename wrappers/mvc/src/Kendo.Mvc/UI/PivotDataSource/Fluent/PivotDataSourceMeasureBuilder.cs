@@ -26,7 +26,7 @@
         /// <param name="values">The measure values</param>
         public PivotDataSourceMeasureBuilder Values(params string[] values)
         {
-            measure.Values = values.Select(value => new PivotDataSourceMeasureInfo(value));
+            measure.Values = values.Select(value => new PivotDataSourceMeasureDescriptor { Name = value });
 
             return this;
         }
@@ -35,11 +35,11 @@
         /// Sets measure values.
         /// </summary>
         /// <param name="values">The measure values</param>
-        public PivotDataSourceMeasureBuilder Values(Action<PivotDataSourceMeasureInfoFactory> addAction)
+        public PivotDataSourceMeasureBuilder Values(Action<PivotDataSourceMeasureDescriptorFactory> addAction)
         {
-            var items = new List<PivotDataSourceMeasureInfo>();
+            var items = new List<PivotDataSourceMeasureDescriptor>();
 
-            addAction(new PivotDataSourceMeasureInfoFactory(items));
+            addAction(new PivotDataSourceMeasureDescriptorFactory(items));
 
             measure.Values = items;
 

@@ -84,5 +84,37 @@
 
             return this;
         }
+
+        /// <summary>
+        /// Sets a built-in Aggregate option
+        /// </summary>
+        /// <param name="aggregate">Aggregate option</param>
+        public virtual PivotAjaxDataSourceSchemaCubeMeasureBuilder<TModel> AggregateName(string aggregateName)
+        {
+            measure.AggregateName = aggregateName;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets Result option
+        /// </summary>
+        /// <param name="result">Result option</param>
+        public virtual PivotAjaxDataSourceSchemaCubeMeasureBuilder<TModel> Result(string result)
+        {
+            measure.Result.HandlerName = result;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets JavaScript function which to return the result value.
+        /// </summary>
+        public virtual PivotAjaxDataSourceSchemaCubeMeasureBuilder<TModel> Result(Func<object, object> handler)
+        {
+            measure.Result.TemplateDelegate = handler;
+
+            return this;
+        }
     }
 }

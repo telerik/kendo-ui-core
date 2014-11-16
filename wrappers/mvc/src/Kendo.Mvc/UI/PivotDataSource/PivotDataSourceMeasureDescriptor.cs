@@ -3,17 +3,8 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    public class PivotDataSourceMeasureInfo : JsonObject
+    public class PivotDataSourceMeasureDescriptor : JsonObject
     {
-        public PivotDataSourceMeasureInfo()
-        {
-        }
-
-        public PivotDataSourceMeasureInfo(string name)
-        {
-            Name = name;
-        }
-
         public string Name { get; set; }
         public string Type { get; set; }
 

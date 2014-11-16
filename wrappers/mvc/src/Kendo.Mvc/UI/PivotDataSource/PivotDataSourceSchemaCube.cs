@@ -38,9 +38,18 @@
                         measure["field"] = prop.Field;
                     }
 
-                    if (prop.Aggregate.HasValue())
+                    if (prop.AggregateName.HasValue())
+                    {
+                        measure["aggregate"] = prop.AggregateName;
+                    } 
+                    else if (prop.Aggregate.HasValue())
                     {
                         measure["aggregate"] = prop.Aggregate;
+                    }
+
+                    if (prop.Result.HasValue())
+                    {
+                        measure["result"] = prop.Result;
                     }
 
                     if (!string.IsNullOrEmpty(prop.Format))
