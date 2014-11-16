@@ -43,7 +43,8 @@
             },
             columns: [
                 { field: "resources", title: "Task Resources", sortable: true, width: 200 }
-            ]
+            ],
+            showWorkDays: false
         }, options));
     };
 
@@ -110,7 +111,8 @@
                 start();
                 equal(this.resources.dataSource.data().length, 1);
                 equal(this.dataSource.data().length, 2);
-            }
+            },
+            showWorkDays: false
         });
     });
 
@@ -174,7 +176,8 @@
                 start();
                 equal(this.assignments.dataSource.data().length, 1);
                 equal(this.dataSource.data().length, 2);
-            }
+            },
+            showWorkDays: false
         });
     });
 
@@ -209,7 +212,8 @@
                     { taskId: 0, resourceId: 1, value: 6 },
                     { taskId: 2, resourceId: 2, value: 7 }
                 ]
-            }
+            },
+            showWorkDays: false
         });
 
         var taskTree = gantt.dataSource.taskTree();
@@ -251,7 +255,8 @@
                     { taskId: 0, resourceId: 1, value: 6 },
                     { taskId: 2, resourceId: 2, value: 7 }
                 ]
-            }
+            },
+            showWorkDays: false
         });
 
         var taskTree = gantt.dataSource.taskTree();
@@ -283,7 +288,8 @@
                 dataSource: [
                     { id: 0, resource: 0, customValue: 5 }
                 ]
-            }
+            },
+            showWorkDays: false
         });
 
         var taskTree = gantt.dataSource.taskTree();
@@ -311,7 +317,8 @@
                 dataSource: [
                     { taskId: 0, resourceId: 0, value: 5 }
                 ]
-            }
+            },
+            showWorkDays: false
         });
 
         var taskTree = gantt.dataSource.taskTree();
@@ -339,7 +346,8 @@
                     { taskId: 0, resourceId: 0, value: 5 },
                     { taskId: 0, resourceId: 1, value: 1 }
                 ]
-            }
+            },
+            showWorkDays: false
         });
 
         var taskTree = gantt.dataSource.taskTree();
@@ -366,7 +374,8 @@
                 dataSource: [
                     { taskId: 0, resourceId: 0, value: 1 }
                 ]
-            }
+            },
+            showWorkDays: false
         });
 
         var taskTree = gantt.dataSource.taskTree();
@@ -391,7 +400,8 @@
                 dataSource: [
                     { taskId: 0, resourceId: 0, value: 1 }
                 ]
-            }
+            },
+            showWorkDays: false
         });
 
         var data = gantt._wrapResourceData(0);
@@ -428,7 +438,8 @@
                         { taskId: 0, resourceId: 0, value: 5 },
                         { taskId: 0, resourceId: 1, value: 6 }
                     ]
-                }
+                },
+                showWorkDays: false
             });
         },
         teardown: function() {

@@ -12,7 +12,8 @@
             gantt = new Gantt(element, {
                 editable: {
                     confirmation: false
-                }
+                },
+                showWorkDays: false
             });
         },
         teardown: function() {

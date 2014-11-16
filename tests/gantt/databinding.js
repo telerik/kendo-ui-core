@@ -127,14 +127,18 @@
     });
 
     test("Initializing from JSON array populates items", function() {
-        var gantt = new Gantt(container, JSONData);
+        var gantt = new Gantt(container, {
+            dataSource: JSONData,
+            showWorkDays: false
+        });
 
         equal(gantt.dataSource.data().length, 8);
     });
 
     test("Initializing from local datasource populates items", function() {
         var gantt = new Gantt(container, {
-            dataSource: dataSource
+            dataSource: dataSource,
+            showWorkDays: false
         });
 
         equal(gantt.dataSource.data().length, 8);
@@ -148,7 +152,8 @@
                         options.success([{}, {}]);
                     }
                 }
-            }
+            },
+            showWorkDays: false
         });
 
         equal(gantt.dataSource.data().length, 2);
@@ -158,7 +163,8 @@
         var gantt = new Gantt(container, {
             dataSource: new GanttDataSource({
                 data: JSONData
-            })
+            }),
+            showWorkDays: false
         });
 
         equal(gantt.dataSource.data().length, 8);

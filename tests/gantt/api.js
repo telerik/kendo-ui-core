@@ -28,7 +28,8 @@
             editable: { confirmation: false },
             columns: options.columns,
             dataSource: dataSource,
-            dependencies: dependencies
+            dependencies: dependencies,
+            showWorkDays: false
         });
 
         ganttList = gantt.list;
