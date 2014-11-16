@@ -144,9 +144,9 @@ var inbox = [
 <!--......................................................................................................................-->
 
 
-    <div data-role="view" id="buttongroup-navbar" data-init="initNameSource" data-show="viewShow">
+  <!--  <div data-role="view" id="buttongroup-navbar" data-init="initNameSource" data-show="viewShow" data-title="aaaa">
     <header data-role="header">
-        <div data-role="navbar">
+        <div data-role="navbar" data-title="test">
             <ul data-role="buttongroup" data-index="0" data-select="regroup">
                 <li>
                     By Name
@@ -158,6 +158,18 @@ var inbox = [
             <a data-align="right" data-role="button" class="nav-button" href="#/">Index</a>
         </div>
     </header>
+<ul id="select-period">
+        <li>
+            Month
+        </li>
+        <li>
+            Quarter
+        </li>
+        <li>
+            Year
+        </li>
+    </ul>
+
     <ul data-role="listview" data-type="group" data-source="nameSource" data-template="nameTemplate" data-fixed-headers="true">
     </ul>
 </div>
@@ -177,6 +189,15 @@ var inbox = [
     function regroup() {
         nameSource.group(this.selectedIndex ? "lastLetter" : "firstLetter");
     }
+
+     $("#select-period").kendoMobileButtonGroup({
+            select: function(e) {
+                listviews.hide()
+                         .eq(e.index)
+                         .show();
+            },
+            index: 0
+        });
 </script>
 
 <script id="nameTemplate" type="text/x-kendo-template">
@@ -199,9 +220,9 @@ var inbox = [
     border-radius: 4em;
     }
 </style>
-
+-->
 <!-- ListView -->
-<!-- <div data-role="view" data-title="Destinations" id="listview-home">
+<div data-role="view" data-title="Destinations" id="listview-home">
     <ul data-role="listview" data-style="inset" data-type="group">
         <li>
             Africa
@@ -239,7 +260,7 @@ var inbox = [
             </ul>
         </li>
     </ul>
-</div>-->
+</div>
 <!--......................................................................................................................-->
 
 <!--Detail Buttons -->
@@ -1170,7 +1191,7 @@ Text</textarea>
         background-color: rgba(0,0,0,0.2);
     }
 </style>-->
-
+<!--
  <div data-role="view" data-layout="layout" data-show="viewShow" id="layoutView">
     <p>
         This examples shows the platform specific layouts. Change the OS to see how the header and footer changes.
@@ -1252,6 +1273,8 @@ Text</textarea>
         position: static;
     }
 </style>
+
+-->
 
 
 
