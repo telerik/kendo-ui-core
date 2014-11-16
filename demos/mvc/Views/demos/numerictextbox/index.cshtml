@@ -1,16 +1,21 @@
 
         <div id="example">
             <div id="add-product">
+                <p class="title">Add new product</p>
                 <div>
+                    <span class="description">Price:</span>
                     <input id="currency" type="number" value="30" min="0" max="100" />
                 </div>
                 <div style="margin-top: 7px;">
+                    <span class="description">Price Discount:</span>
                     <input id="percentage" value="0.05" />
                 </div>
                 <div style="margin-top: 7px;">
+                    <span class="description">Weight:</span>
                     <input id="custom" value="2" />
                 </div>
                 <div style="margin-top: 7px;">
+                    <span class="description">Currently in stock:</span>
                     <input id="numeric" type="number" value="17" min="0" max="100" step="1" />
                 </div>
             </div>
@@ -45,11 +50,24 @@
             <style scoped>
                 #add-product {
                     height: 181px;
-                    width: 252px;
-                    margin: 30px auto;
-                    padding: 64px 0 0 143px;
-                    background: url('../content/web/numerictextbox/addProduct.png') transparent no-repeat 0 0;
+                    width: 400px;
+                    margin: 30px auto;                  
                     font-size: 12px;
+                }
+
+                #add-product .title {
+                    font-size: 16px;
+                    color: #fff;
+                    background-color: #5c82af;
+                    padding: 15px;
+                    margin: 20px 0;
+               }
+
+                #add-product .description {
+                    display:inline-block;
+                    width: 200px;
+                    font-weight: bold;
+                    padding: 0 20px;
                 }
             </style>
         </div>
