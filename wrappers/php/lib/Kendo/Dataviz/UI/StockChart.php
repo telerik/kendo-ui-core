@@ -333,6 +333,20 @@ and is about to render it.
     }
 
     /**
+    * Sets the render event of the StockChart.
+    * Fired when the chart is ready to render on screen.Can be used, for example, to remove loading indicators. Changes to options will be ignored.The event handler function context (available via the this keyword) will be set to the widget instance.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\Dataviz\UI\StockChart
+    */
+    public function renderEvent($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('render', $value);
+    }
+
+    /**
     * Sets the seriesClick event of the StockChart.
     * Fires when chart series are clicked.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
