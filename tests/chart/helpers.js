@@ -8,7 +8,6 @@
         Chart = dataviz.ui.Chart,
         Box2D = dataviz.Box2D,
         Point2D = dataviz.Point2D,
-        Matrix = dataviz.Matrix,
         box,
         targetBox;
 
@@ -352,15 +351,6 @@
         deepEqual(point.multiply(2), point);
     });
 
-    test("transform applies matrix", function() {
-        deepEqual(point.transform(new Matrix(1,1,1,1,1,1)), new Point2D(31, 31));
-    });
-
-
-    test("transform returns point", function() {
-        deepEqual(point.transform(Matrix.unit), point);
-    });
-
     (function() {
         var sector;
 
@@ -520,22 +510,6 @@
         test("containsPoint for point next to inner end point", function() {
             point = outerRing.point(outerRing.startAngle + outerRing.angle);
             ok(!ring.containsPoint(point));
-        });
-    })();
-
-    (function() {
-        var pin;
-
-        module("Pin", {
-            setup: function() {
-                pin = new dataviz.Pin({
-                    origin: new Point2D(100, 200)
-                });
-            }
-        });
-
-        test("constructor sets origin", function() {
-            deepEqual([pin.origin.x, pin.origin.y], [100, 200]);
         });
     })();
 

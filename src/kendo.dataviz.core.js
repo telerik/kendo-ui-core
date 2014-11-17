@@ -25,6 +25,7 @@ var __meta__ = {
         dataviz = kendo.dataviz,
         geom = dataviz.geometry,
         draw = dataviz.drawing,
+        Matrix = geom.Matrix,
         Class = kendo.Class,
         template = kendo.template,
         map = $.map,
@@ -100,70 +101,6 @@ var __meta__ = {
     }
 
     // Geometric primitives ===================================================
-
-    // MERGE WITH DIAGRAM MATH
-    var Matrix = Class.extend({
-        init: function (a, b, c, d, e, f) {
-            this.a = a || 0;
-            this.b = b || 0;
-            this.c = c || 0;
-            this.d = d || 0;
-            this.e = e || 0;
-            this.f = f || 0;
-        },
-        times: function (m) {
-            return new Matrix(
-                this.a * m.a + this.c * m.b,
-                this.b * m.a + this.d * m.b,
-                this.a * m.c + this.c * m.d,
-                this.b * m.c + this.d * m.d,
-                this.a * m.e + this.c * m.f + this.e,
-                this.b * m.e + this.d * m.f + this.f
-            );
-        }
-    });
-
-    // TODO: Backport method names
-    deepExtend(Matrix, {
-        translate: function (x, y) {
-            var m = new Matrix();
-            m.a = 1;
-            m.b = 0;
-            m.c = 0;
-            m.d = 1;
-            m.e = x;
-            m.f = y;
-            return m;
-        },
-        unit: function () {
-            return new Matrix(1, 0, 0, 1, 0, 0);
-        },
-        rotate: function (angle, x, y) {
-            var m = new Matrix();
-            m.a = math.cos(angle * DEG_TO_RAD);
-            m.b = math.sin(angle * DEG_TO_RAD);
-            m.c = -m.b;
-            m.d = m.a;
-            m.e = (x - x * m.a + y * m.b) || 0;
-            m.f = (y - y * m.a - x * m.b) || 0;
-            return m;
-        },
-        scale: function (scaleX, scaleY) {
-            var m = new Matrix();
-            m.a = scaleX;
-            m.b = 0;
-            m.c = 0;
-            m.d = scaleY;
-            m.e = 0;
-            m.f = 0;
-            return m;
-        }
-    });
-
-    kendo.dataviz.Matrix = Matrix;
-
-
-    // TODO: Rename to Point?
     var Point2D = function(x, y) {
         var point = this;
         if (!(point instanceof Point2D)) {
@@ -222,16 +159,6 @@ var __meta__ = {
                 dy = this.y - point.y;
 
             return math.sqrt(dx * dx + dy * dy);
-        },
-
-        transform: function(mx) {
-            var x = this.x,
-                y = this.y;
-
-            this.x = mx.a * x + mx.c * y + mx.e;
-            this.y = mx.b * x + mx.d * y + mx.f;
-
-            return this;
         }
     };
 
@@ -616,17 +543,6 @@ var __meta__ = {
 
         point: function(angle) {
             return Ring.fn.point.call(this, angle);
-        }
-    });
-
-    var Pin = Class.extend({
-        init: function(options) {
-            deepExtend(this, {
-                height: 40,
-                rotation: 90,
-                radius: 10,
-                arcAngle: 10
-            }, options);
         }
     });
 
@@ -2466,50 +2382,6 @@ var __meta__ = {
         }
     });
 
-    var PinElement = BoxElement.extend({
-        init: function(options) {
-            var pin = this;
-
-            BoxElement.fn.init.call(pin, options);
-
-            pin.createTextBox();
-        },
-
-        options: {
-            arcAngle: 300,
-            border: {
-                width: 1,
-                color: "red"
-            },
-            label: {
-                zIndex: 2,
-                margin: getSpacing(2),
-                border: {
-                    width: 1,
-                    color: "green"
-                }
-            }
-        },
-
-        createTextBox: function() {
-            var pin = this,
-                options = pin.options,
-                textBox = new TextBox(options.code, options.label);
-
-            pin.append(textBox);
-            pin.textBox = textBox;
-        },
-
-        reflow: function(targetBox) {
-            var pin = this,
-                textBox = pin.textBox;
-
-            pin.box = Box2D(0, 0, textBox.box.height(), textBox.box.height() * 1.5);
-
-            BoxElement.fn.reflow.call(pin, targetBox);
-        }
-    });
-
     var NumericAxis = Axis.extend({
         init: function(seriesMin, seriesMax, options) {
             var axis = this,
@@ -4029,14 +3901,6 @@ var __meta__ = {
         NOTE_CLICK: NOTE_CLICK,
         NOTE_HOVER: NOTE_HOVER,
         CLIP: CLIP,
-        DASH_ARRAYS: {
-            dot: [1.5, 3.5],
-            dash: [4, 3.5],
-            longdash: [8, 3.5],
-            dashdot: [3.5, 3.5, 1.5, 3.5],
-            longdashdot: [8, 3.5, 1.5, 3.5],
-            longdashdotdot: [8, 3.5, 1.5, 3.5, 1.5, 3.5]
-        },
 
         Axis: Axis,
         AxisLabel: AxisLabel,
@@ -4048,13 +3912,10 @@ var __meta__ = {
         FloatElement: FloatElement,
         LogarithmicAxis: LogarithmicAxis,
         LRUCache: LRUCache,
-        Matrix: Matrix,
         Note: Note,
         NumericAxis: NumericAxis,
         Point2D: Point2D,
-        PinElement: PinElement,
         Ring: Ring,
-        Pin: Pin,
         RootElement: RootElement,
         Sector: Sector,
         ShapeBuilder: ShapeBuilder,
