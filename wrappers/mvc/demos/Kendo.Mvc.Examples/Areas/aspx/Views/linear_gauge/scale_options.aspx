@@ -25,20 +25,21 @@
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
-<div class="configuration k-widget k-header" style="width:170px;">
-    <span class="configHead">Configuration</span>
-    <span class="configTitle">Gauge scale should...</span>
+<div class="box">
+    <h4>Gauge scale should...</h4>
     <ul class="options">
         <li>
-            <input id="vertical" checked="checked" type="checkbox" autocomplete="off" />
+            <input id="vertical" checked="checked" type="checkbox" autocomplete="off">
             <label for="vertical">... be vertical</label>
         </li>
+
         <li>
-            <input id="labels" checked="checked" type="checkbox" autocomplete="off" />
+            <input id="labels" checked="checked" type="checkbox" autocomplete="off">
             <label for="labels">... show labels</label>
         </li>
+
         <li>
-            <input id="ranges" checked="checked" type="checkbox" autocomplete="off" />
+            <input id="ranges" checked="checked" type="checkbox" autocomplete="off">
             <label for="ranges">... show ranges</label>
         </li>
     </ul>
@@ -67,7 +68,7 @@
 
 <script>
     $(document).ready(function () {
-        $(".configuration").bind("change", refresh);
+        $(".box").bind("change", refresh);
         window.configuredRanges = $("#gauge").data("kendoLinearGauge").options.scale.ranges;
     });
 

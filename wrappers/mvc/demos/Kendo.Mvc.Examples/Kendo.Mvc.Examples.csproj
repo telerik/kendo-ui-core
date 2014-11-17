@@ -204,11 +204,13 @@
     <Compile Include="Controllers\Grid\Pdf_ExportController.cs" />
     <Compile Include="Controllers\Grid\Excel_ExportController.cs" />
     <Compile Include="Controllers\Grid\Filter_Row_Controller.cs" />
+    <Compile Include="Controllers\Linear_Gauge\Multiple_PointersController.cs" />
     <Compile Include="Controllers\Menu\Context_MenuController.cs" />
     <Compile Include="Controllers\PivotGrid\KPIController.cs" />
     <Compile Include="Controllers\PivotGrid\TemplatesController.cs" />
     <Compile Include="Controllers\PivotGrid\Local_Flat_Data_BindingController.cs" />
     <Compile Include="Controllers\PivotGrid\Remote_Flat_Data_BindingController.cs" />
+    <Compile Include="Controllers\Radial_Gauge\Multiple_PointersController.cs" />
     <Compile Include="Controllers\Scheduler\TimelineController.cs" />
     <Compile Include="Controllers\TreeList\ApiController.cs" />
     <Compile Include="Controllers\TreeList\AggregatesController.cs" />
@@ -880,10 +882,12 @@
     <Content Include="Areas\aspx\Views\gantt\keyboard_navigation.aspx" />
     <Content Include="Areas\aspx\Views\gantt\serverbinding.aspx" />
     <Content Include="Areas\aspx\Views\grid\multicolumnheaders.aspx" />
+    <Content Include="Areas\aspx\Views\linear_gauge\multiple_pointers.aspx" />
     <Content Include="Areas\aspx\Views\menu\context_menu.aspx" />
     <Content Include="Areas\aspx\Views\pivotgrid\kpi.aspx" />
     <Content Include="Areas\aspx\Views\pivotgrid\local_flat_data_binding.aspx" />
     <Content Include="Areas\aspx\Views\pivotgrid\remote_flat_data_binding.aspx" />
+    <Content Include="Areas\aspx\Views\radial_gauge\multiple_pointers.aspx" />
     <Content Include="Areas\aspx\Views\scheduler\timeline.aspx" />
     <Content Include="Areas\aspx\Views\treelist\api.aspx" />
     <Content Include="Areas\aspx\Views\treelist\aggregates.aspx" />
@@ -2641,6 +2645,8 @@
     <Content Include="Areas\razor\Views\financial\pdf_export.cshtml" />
     <Content Include="Areas\razor\Views\treelist\aggregates.cshtml" />
     <Content Include="Areas\razor\Views\pivotgrid\kpi.cshtml" />
+    <Content Include="Areas\razor\Views\linear_gauge\multiple_pointers.cshtml" />
+    <Content Include="Areas\razor\Views\radial_gauge\multiple_pointers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\razor\Views\map\api.cshtml" />
