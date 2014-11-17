@@ -29,7 +29,7 @@ var __meta__ = {
         isArray = $.isArray,
         isNumber = util.isNumber,
         interpolateValue = dataviz.interpolateValue,
-        valueOrDefault = dataviz.valueOrDefault,
+        valueOrDefault = util.valueOrDefault,
 
         getSpacing = dataviz.getSpacing,
         round = dataviz.round,

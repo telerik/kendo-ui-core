@@ -1,7 +1,8 @@
 (function(f, define){
     define([
         "./kendo.core",
-        "./kendo.drawing"
+        "./kendo.drawing",
+        "./kendo.util"
     ], f);
 })(function(){
 
@@ -20,6 +21,7 @@ var __meta__ = {
     var doc = document,
         kendo = window.kendo,
         util = kendo.util,
+        valueOrDefault = util.valueOrDefault,
         dataviz = kendo.dataviz,
         geom = dataviz.geometry,
         draw = dataviz.drawing,
@@ -31,10 +33,6 @@ var __meta__ = {
         trim = $.trim,
         math = Math,
         deepExtend = kendo.deepExtend;
-
-    var renderTemplate = function(definition) {
-        return template(definition, { useWithBlock: false, paramName: "d" });
-    };
 
     var CSS_PREFIX = "k-";
 
@@ -3574,15 +3572,6 @@ var __meta__ = {
         })[0];
     }
 
-    function supportsSVG() {
-        return doc.implementation.hasFeature(
-            "http://www.w3.org/TR/SVG11/feature#BasicStructure", "1.1");
-    }
-
-    function supportsCanvas() {
-        return !!doc.createElement("canvas").getContext;
-    }
-
     function inArray(value, array) {
         return indexOf(value, array) != -1;
     }
@@ -3625,10 +3614,6 @@ var __meta__ = {
 
     function defined(value) {
         return typeof value !== UNDEFINED;
-    }
-
-    function valueOrDefault(value, defaultValue) {
-        return defined(value) ? value : defaultValue;
     }
 
     function numericComparer(a, b) {
@@ -4097,11 +4082,7 @@ var __meta__ = {
         rotatePoint: rotatePoint,
         round: round,
         ceil: ceil,
-        floor: floor,
-        supportsCanvas: supportsCanvas,
-        supportsSVG: supportsSVG,
-        renderTemplate: renderTemplate,
-        valueOrDefault: valueOrDefault
+        floor: floor
     });
 
 })(window.kendo.jQuery);

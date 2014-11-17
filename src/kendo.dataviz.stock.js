@@ -19,6 +19,9 @@ var __meta__ = {
         math = Math,
         proxy = $.proxy,
 
+        util = kendo.util,
+        renderTemplate = util.renderTemplate,
+
         dataviz = kendo.dataviz,
         defined = dataviz.defined,
         filterSeriesByType = dataviz.filterSeriesByType,
@@ -29,7 +32,6 @@ var __meta__ = {
         last = dataviz.last,
         limitValue = dataviz.limitValue,
         lteDateIndex = dataviz.lteDateIndex,
-        renderTemplate = dataviz.renderTemplate,
         toDate = dataviz.toDate,
         toTime = dataviz.toTime;
 
