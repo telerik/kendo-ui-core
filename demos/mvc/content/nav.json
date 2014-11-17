@@ -8320,6 +8320,22 @@
             "kendo-ui": "This example shows how easily you can configure the Linear gauge to use multiple pointers.",
             "aspnet-mvc": "This example shows how easily you can configure the ASP.NET MVC Linear gauge to use multiple pointers."
         }
+      },
+      {
+        "text": "Export to PDF, Image, SVG",
+        "url": "linear-gauge/export",
+        "title": {
+            "kendo-ui": "Kendo UI Linear Gauge export demo",
+            "aspnet-mvc": "ASP.NET MVC Linear Gauge export demo"
+        },
+        "meta": {
+            "kendo-ui": "This example shows how easily you can export the linear gauge to PDF, Image and SVG.",
+            "aspnet-mvc": "This example shows how easily you can export the ASP.NET MVC linear gauge to PDF, Image and SVG."
+        },
+        "packages": [
+          "!jsp",
+          "!php"
+        ]
       }
     ],
     "category": "Data Visualization"
@@ -8384,6 +8400,22 @@
             "kendo-ui": "This example shows how easily you can configure the radial gauge to use multiple pointers.",
             "aspnet-mvc": "This example shows how easily you can configure the ASP.NET MVC radial gauge to use multiple pointers."
         }
+      },
+      {
+        "text": "Export to PDF, Image, SVG",
+        "url": "radial-gauge/export",
+        "title": {
+            "kendo-ui": "Kendo UI Radial Gauge export demo",
+            "aspnet-mvc": "ASP.NET MVC Radial Gauge export demo"
+        },
+        "meta": {
+            "kendo-ui": "This example shows how easily you can export the radial gauge to PDF, Image and SVG.",
+            "aspnet-mvc": "This example shows how easily you can export the ASP.NET MVC radial gauge to PDF, Image and SVG."
+        },
+        "packages": [
+          "!jsp",
+          "!php"
+        ]
       },
       {
         "text": "MVVM",

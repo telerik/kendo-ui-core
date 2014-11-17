@@ -1,0 +1,111 @@
+﻿<div id="example">
+    <div class="box">
+        <h4>Advanced Export options</h4>
+        <div class="box-col">
+            <button class='export-pdf k-button'>Export as PDF</button>
+        </div>
+        <div class="box-col">
+            <button class='export-img k-button'>Export as Image</button>
+        </div>
+        <div class="box-col">
+            <button class='export-svg k-button'>Export as SVG</button>
+        </div>
+    </div>
+    <div id="gauge-container" class="demo-section">
+        <div id="gauge"></div>
+    </div>
+    <script>
+        $(".export-pdf").click(function() {
+            var gauge = $("#gauge").getKendoRadialGauge();
+            gauge.exportPDF({ paperSize: "auto", margin: { left: "1cm", top: "1cm", right: "1cm", bottom: "1cm" } }).done(function (data) {
+                kendo.saveAs({
+                    dataURI: data,
+                    fileName: "chart.pdf",
+                    proxyURL: "http://demos.telerik.com/kendo-ui/service/export"
+                });
+            });
+        });
+
+        $(".export-img").click(function() {
+            var gauge = $("#gauge").getKendoRadialGauge();
+            gauge.exportImage().done(function(data) {
+                kendo.saveAs({
+                    dataURI: data,
+                    fileName: "chart.png",
+                    proxyURL: "http://demos.telerik.com/kendo-ui/service/export"
+                });
+            });
+        });
+
+        $(".export-svg").click(function() {
+            var gauge = $("#gauge").getKendoRadialGauge();
+            gauge.exportSVG().done(function(data) {
+                kendo.saveAs({
+                    dataURI: data,
+                    fileName: "chart.svg",
+                    proxyURL: "http://demos.telerik.com/kendo-ui/service/export"
+                });
+            });
+        });
+
+        function createChart() {
+            $("#gauge").kendoRadialGauge({
+                pointer: [{
+                    value: 20,
+                    color: "#c20000",
+                    cap: { size: 0.15 }
+                }, {
+                    value: 80,
+                    color: "#ff7a00",
+                    cap: { size: 0.1 }
+                }, {
+                    value: 140,
+                    color: "#ffc700"
+                }],
+                scale: {
+                    minorUnit: 5,
+                    startAngle: -30,
+                    endAngle: 210,
+                    max: 180,
+                    labels: {
+                        position: "inside"
+                    },
+                    ranges: [
+                        {
+                            from: 80,
+                            to: 120,
+                            color: "#bb6e36"
+                        }, {
+                            from: 120,
+                            to: 150,
+                            color: "#b8b8b8"
+                        }, {
+                            from: 150,
+                            to: 180,
+                            color: "#f3ac32"
+                        }
+                    ]
+                }
+            });
+        }
+
+        $(document).ready(createChart);
+        $(document).bind("kendo:skinChange", createChart);
+    </script>
+
+    <style scoped>
+        #gauge-container {
+            background: transparent url("../content/dataviz/gauge/gauge-container.png") no-repeat 50% 50%;
+            width: 404px;
+            height: 404px;
+            text-align: center;
+            margin: 0 auto 30px auto;
+        }
+
+        #gauge {
+            width: 330px;
+            height: 330px;
+            margin: 0 auto 0;
+        }
+    </style>
+</div>

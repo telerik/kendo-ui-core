@@ -1167,6 +1167,8 @@
     <Content Include="Views\demos\diagram\export.cshtml" />
     <Content Include="Views\demos\linear-gauge\multiple-pointers.cshtml" />
     <Content Include="Views\demos\diagram\pdf-export.cshtml" />
+    <Content Include="Views\demos\linear-gauge\export.cshtml" />
+    <Content Include="Views\demos\radial-gauge\export.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="content\integration\diagram\js\" />
