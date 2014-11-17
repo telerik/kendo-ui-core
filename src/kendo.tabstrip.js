@@ -1183,7 +1183,8 @@ var __meta__ = {
                             }, 40);
                         }
 
-                        that.angular("cleanup", function(){ return { elements: content.get() }; });
+                        that.angular("cleanup", function () { return { elements: content.get() }; });
+                        kendo.destroy(content);
                         content.html(data);
                     } catch (e) {
                         var console = window.console;
