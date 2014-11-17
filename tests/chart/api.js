@@ -701,4 +701,34 @@
             }]);
         });
     })();
+
+    // ------------------------------------------------------------
+    (function() {
+        var vml;
+
+        module("Deferred redraw", {
+            setup: function() {
+                vml = kendo.support.vml;
+                kendo.support.vml = true;
+            },
+            teardown: function() {
+                kendo.support.vml = vml;
+                destroyChart();
+            }
+        });
+
+        asyncTest("chart model is accessible in dataBound + setTimeout", function() {
+            createChart({
+                dataSource: [{ foo: 1 }],
+                series: [{ field: "foo" }],
+                dataBound: function(e) {
+                    setTimeout(function() {
+                        equal(e.sender._plotArea.charts[0].points[0].value, 1);
+                        start();
+                    });
+                }
+            });
+        });
+
+    })();
 })();
