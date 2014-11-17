@@ -37,7 +37,7 @@ public class MeasuresTag extends BaseTag /* interfaces */ /* interfaces */ {
     public void initialize() {
 //>> initialize
 
-        measures = new ArrayList<MeasureTag>();
+        measures = new ArrayList<HashMap<String, Object>>();
 
 //<< initialize
 
@@ -54,27 +54,11 @@ public class MeasuresTag extends BaseTag /* interfaces */ /* interfaces */ {
 
 //>> Attributes
 
-    private List<MeasureTag> measures;
-
-    private List<HashMap<String, Object>> serializeMeasures() {
-        List<HashMap<String, Object>> result = new ArrayList<HashMap<String, Object>>();
-
-        for (int i = 0; i < measures.size(); i++) {
-            HashMap<String, Object> map = new HashMap<String, Object>();
-            MeasureTag tag = measures.get(i);
-
-            map.put("name", tag.getName());
-            map.put("type", tag.getType());
-
-            result.add(map);
-        }
-
-        return result;
-    }
-
+    private List<HashMap<String, Object>> measures;
+    
     public Map<String, Object> measures() {
         return new HashMap<String, Object>() {{
-            put("values", serializeMeasures());
+            put("values", measures);
             put("axis", getAxis());
           }};
     }
@@ -83,7 +67,7 @@ public class MeasuresTag extends BaseTag /* interfaces */ /* interfaces */ {
         return "pivotDataSource-measures";
     }
 
-    public void addMeasure(MeasureTag value) {
+    public void addMeasure(HashMap<String, Object> value) {
         measures.add(value);
     }
 

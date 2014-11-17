@@ -39986,9 +39986,13 @@ The supported values are "odata" which supports the OData v.2 protocol and "sign
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+        <attribute>
+            <description>Measure type.</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
     </tag>
-
-
 
     <tag>
         <description>The configuration of rows axis members. An array of JavaScript objects or strings. A JavaScript objects are interpreted as rows descriptors. Strings are interpreted as the hierarchal name of the member.</description>
@@ -40188,6 +40192,16 @@ return the measures schema information for the response. It is executed during t
          <attribute>
             <description></description>
             <name>aggregate</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+         <attribute>
+            <description></description>
+            <name>aggregateName</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description></description>
+            <name>result</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
     </tag>

@@ -2,6 +2,8 @@
 package com.kendoui.taglib.pivotdatasource;
 
 
+import java.util.HashMap;
+
 import com.kendoui.taglib.BaseTag;
 
 
@@ -20,7 +22,10 @@ public class MeasureTag extends  BaseTag  /* interfaces */ /* interfaces */ {
 
         MeasuresTag parent = (MeasuresTag)findParentWithClass(MeasuresTag.class);
 
-        parent.addMeasure(this);
+        parent.addMeasure(new HashMap<String, Object>() {{
+            put("name", getName());
+            put("type", getType());
+        }});        
 
 //<< doEndTag
 
