@@ -2600,7 +2600,7 @@
                         var item = this._selectedItems[i];
                         this._clipboard.push(item);
                     }
-                    this.remove(this._clipboard);
+                    this.remove(this._clipboard, true);
                 }
             },
             paste: function () {
@@ -3934,7 +3934,7 @@
             },
 
             "delete": function() {
-                this.diagram._remove(this.selectedElements()[0], true);
+                this.diagram.remove(this.selectedElements(), true);
             },
 
             edit: function() {
