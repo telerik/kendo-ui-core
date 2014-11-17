@@ -177,6 +177,7 @@ var __meta__ = {
         options: {
             name: "Application",
             hideAddressBar: true,
+            browserHistory: true,
             historyTransition: HISTORY_TRANSITION,
             modelScope: window,
             statusBarStyle: "black",
@@ -306,9 +307,15 @@ var __meta__ = {
         },
 
         _startHistory: function() {
-            this.router = new kendo.Router({ pushState: this.options.pushState, root: this.options.root, hashBang: this.options.hashBang });
-            this.pane.bindToRouter(this.router);
-            this.router.start();
+            if (this.options.browserHistory) {
+                this.router = new kendo.Router({ pushState: this.options.pushState, root: this.options.root, hashBang: this.options.hashBang });
+                this.pane.bindToRouter(this.router);
+                this.router.start();
+            } else {
+                if (!this.options.initial) {
+                    this.pane.navigate("");
+                }
+            }
         },
 
         _resizeToScreenHeight: function() {
