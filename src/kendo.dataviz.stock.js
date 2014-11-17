@@ -185,9 +185,9 @@ var __meta__ = {
                 navigator = chart._navigator = new Navigator(chart);
             }
 
+            navigator._setInitialRange();
             Chart.fn._redraw.call(chart);
-            navigator.redraw();
-            navigator.redrawSlaves();
+            navigator._initSelection();
         },
 
         _onDataChanged: function() {
@@ -316,12 +316,13 @@ var __meta__ = {
             }
 
             if (chart._model) {
-               navi.redraw();
-               navi.filterAxes();
+                // TODO: Do we need to read the selection
+                navi.redraw();
+                navi.filterAxes();
 
-               if (!chart.options.dataSource || (chart.options.dataSource && chart._dataBound)) {
-                   navi.redrawSlaves();
-               }
+                if (!chart.options.dataSource || (chart.options.dataSource && chart._dataBound)) {
+                    navi.redrawSlaves();
+                }
             }
         },
 
@@ -340,7 +341,9 @@ var __meta__ = {
 
         redraw: function() {
             this._redrawSelf();
+        },
 
+        _initSelection: function() {
             var navi = this,
                 chart = navi.chart,
                 options = navi.options,
@@ -367,7 +370,6 @@ var __meta__ = {
                 // "Freeze" the selection axis position until the next redraw
                 axisClone.box = axis.box;
 
-                // TODO: Move selection initialization to PlotArea.redraw
                 selection = navi.selection = new Selection(chart, axisClone, {
                     min: min,
                     max: max,
@@ -389,8 +391,28 @@ var __meta__ = {
                         format: options.hint.format
                     });
                 }
+            }
+        },
 
-                navi.readSelection();
+        _setInitialRange: function() {
+            var navi = this,
+                chart = navi.chart,
+                options = navi.options,
+                plotArea = chart._createPlotArea(true),
+                axis = plotArea.namedCategoryAxes[NAVIGATOR_AXIS],
+                groups = axis.options.categories,
+                select = navi.options.select || {},
+                selection = navi.selection,
+                range = axis.range(),
+                min = range.min,
+                max = range.max,
+                from = toDate(select.from) || min,
+                to = toDate(select.to) || max;
+
+            if (from < min) { from = min; }
+            if (to > max) { to = max; }
+
+            if (groups.length > 0) {
                 navi.filterAxes();
             }
         },
