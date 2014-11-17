@@ -421,7 +421,7 @@
         var method = stub(setting, "move");
 
         setting.sortable.trigger("change", {
-           item: $("<span data-kendo-name='bar'></span"),
+           item: $("<span data-kendo-name='bar'></span>"),
            action: "sort",
            newIndex: 0
         });
@@ -429,6 +429,34 @@
         equal(method.calls("move"), 1);
         equal(method.args("move", 0)[0], "bar");
         equal(method.args("move", 0)[1], 0);
+    });
+
+    test("sorting measure via sortable persists KPI measure",  function() {
+        var dataSource = new kendo.data.PivotDataSource({
+            measures: [
+                { name: "foo", type: "status" },
+                { name: "bar", type: "trend" }
+            ]
+        });
+
+        var setting = new PivotSettingTarget($(div), {
+            dataSource: dataSource,
+            setting: "measures"
+        });
+
+        setting.sortable.trigger("change", {
+           item: $("<span data-kendo-name='bar'></span>"),
+           action: "sort",
+           newIndex: 0
+        });
+
+        var measures = dataSource.measures();
+
+        equal(measures[0].name, "bar");
+        equal(measures[0].type, "trend");
+
+        equal(measures[1].name, "foo");
+        equal(measures[1].type, "status");
     });
 
     test("renders empty template if not settings", function() {

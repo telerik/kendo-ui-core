@@ -58,21 +58,24 @@
                         type: "xmla",
                         columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
                         rows: [ { name: "[Product].[Category]", expand: true } ],
-                        measures: ["[Measures].[Internet Order Lines Count]", "[Measures].[Internet Total Sales]"],
+                        measures: [
+                            { name: "[Measures].[Internet Revenue Status]", type: "status" }, //KPI Status measure that will render kpiStatusTemplate
+                            { name: "[Measures].[Internet Revenue Trend]", type: "trend" } //KPI Trend measure that will render kpiTrendTemplate
+                        ],
                         transport: {
                             connection: {
-                                catalog: "adventure works internet sales model",
-                                cube: "adventure works internet sales model"
-//                               catalog: "Adventure Works DW 2008R2",
-//                              cube: "Adventure Works"
+//                                catalog: "adventure works internet sales model",
+//                                cube: "adventure works internet sales model"
+                               catalog: "Adventure Works DW 2008R2",
+                               cube: "Adventure Works"
                              //   catalog: "FoodMart",
                               //  cube: "HR"
                             },
                             read: {
                             //    url: "http://sampledata.infragistics.com/olap/msmdpump.dll",//"http://krustev:8080/olap/msmdpump.dll",
                             //    url: "http://korchev:8080/foodmart/xmla",
-//                                url: "http://demos.telerik.com/olap/msmdpump.dll",
-                                url: "http://krustev:8080/olap/msmdpump.dll",
+                                url: "http://demos.telerik.com/olap/msmdpump.dll",
+//                                url: "http://krustev:8080/olap/msmdpump.dll",
                                 dataType: "text",
                                 contentType: "text/xml",
                                 type: "POST"

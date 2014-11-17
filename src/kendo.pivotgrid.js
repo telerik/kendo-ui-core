@@ -3189,12 +3189,13 @@ var __meta__ = {
 
         move: function(name, index) {
             var items = this.dataSource[this.options.setting]();
-
             var idx = this._indexOf(name, items);
 
             if (idx > -1) {
-                items.splice(idx, 1);
+                name = items.splice(idx, 1)[0];
+
                 items.splice(index, 0, name);
+
                 this.dataSource[this.options.setting](items);
             }
         },
