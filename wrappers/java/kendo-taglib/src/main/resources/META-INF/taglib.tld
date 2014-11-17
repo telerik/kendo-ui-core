@@ -719,6 +719,11 @@ If it is not supported by the browser, the Chart will switch to the first availa
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
+            <description>Fired when the chart is ready to render on screen.Can be used, for example, to remove loading indicators. Changes to options will be ignored.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+            <name>render</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
             <description>Fired when the user modifies the selection.The range units are:The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>select</name>
             <rtexprvalue>true</rtexprvalue>
@@ -10614,6 +10619,12 @@ body of the chart.</description>
         <description>Fired when the user clicks the plot area.</description>
         <name>chart-plotAreaClick</name>
         <tag-class>com.kendoui.taglib.chart.PlotAreaClickFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the chart is ready to render on screen.Can be used, for example, to remove loading indicators. Changes to options will be ignored.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+        <name>chart-render</name>
+        <tag-class>com.kendoui.taglib.chart.RenderFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
@@ -29530,6 +29541,11 @@ and is about to render it.</description>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
+            <description>Fired when the chart is ready to render on screen.Can be used, for example, to remove loading indicators. Changes to options will be ignored.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+            <name>render</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
             <description>Fires when chart series are clicked.</description>
             <name>seriesClick</name>
             <rtexprvalue>true</rtexprvalue>
@@ -36461,6 +36477,12 @@ and is about to render it.</description>
         <description>Fires when plot area is clicked.</description>
         <name>stockChart-plotAreaClick</name>
         <tag-class>com.kendoui.taglib.stockchart.PlotAreaClickFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the chart is ready to render on screen.Can be used, for example, to remove loading indicators. Changes to options will be ignored.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+        <name>stockChart-render</name>
+        <tag-class>com.kendoui.taglib.stockchart.RenderFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
