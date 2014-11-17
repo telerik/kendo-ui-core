@@ -138,6 +138,18 @@
             set;
         }
 
+        public string GroupHeaderTemplate
+        {
+            get;
+            set;
+        }
+
+        public string GroupHeaderTemplateId
+        {
+            get;
+            set;
+        }
+
         public bool AllDaySlot
         {
             get;
@@ -376,6 +388,16 @@
             if (!string.IsNullOrEmpty(AllDayEventTemplateId))
             {
                 options["allDayEventTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template(jQuery('{0}{1}').html())", idPrefix, AllDayEventTemplateId) };
+            }
+
+            if (!string.IsNullOrEmpty(GroupHeaderTemplate))
+            {
+                options["groupHeaderTemplate"] = GroupHeaderTemplate;
+            }
+
+            if (!string.IsNullOrEmpty(GroupHeaderTemplateId))
+            {
+                options["groupHeaderTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template(jQuery('{0}{1}').html())", idPrefix, GroupHeaderTemplateId) };
             }
 
             if (!AllDaySlot)

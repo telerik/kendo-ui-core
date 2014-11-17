@@ -353,6 +353,28 @@
         }
 
         /// <summary>
+        /// The template used to render the group headers of scheduler day, week, workWeek and timeline views.
+        /// </summary>
+        /// <param name="groupHeaderTemplate">The groupHeaderTemplate</param>
+        public SchedulerBuilder<TModel> GroupHeaderTemplate(string groupHeaderTemplate)
+        {
+            Component.GroupHeaderTemplate = groupHeaderTemplate;
+
+            return this;
+        }
+
+        /// <summary>
+        /// The Id of the template used to render the group headers of scheduler day, week, workWeek and timeline views.
+        /// </summary>
+        /// <param name="groupHeaderTemplateId">The groupHeaderTemplateId</param>
+        public SchedulerBuilder<TModel> GroupHeaderTemplateId(string groupHeaderTemplateId)
+        {
+            Component.GroupHeaderTemplateId = groupHeaderTemplateId;
+
+            return this;
+        }
+
+        /// <summary>
         /// If set to true the scheduler will display a slot for "all day" events.
         /// </summary>
         /// <param name="allDaySlot">The allDaySlot.</param>

@@ -57,7 +57,7 @@ ROOT_MAP = {
     '.' => /(dist\/js|dist\/styles\/.+?)\//,
     'js' => DIST_JS_ROOT,
     'styles' => /dist\/styles\/.+?\//,
-    'src/js' => DIST_JS_ROOT,
+    'src/src' => DIST_JS_ROOT,
     'src/styles' => /dist\/styles\//,
     'src/Kendo.Mvc/Kendo.Mvc' => 'wrappers/mvc/src/Kendo.Mvc/',
     'src/Kendo.Mvc/packages' => 'wrappers/mvc/packages/',
@@ -265,7 +265,7 @@ bundle :name => 'professional.commercial',
        :contents => {
             'js' => COMPLETE_MIN_JS + COMPLETE_MIN_JS_MAP + JQUERY_MAP,
             'styles' => MIN_CSS_RESOURCES,
-            'src/js' => COMPLETE_SRC_JS,
+            'src/src' => COMPLETE_SRC_JS,
             'src/styles' => SRC_CSS
        }
 
@@ -364,7 +364,7 @@ bundle :name => 'web.commercial',
        :contents => {
             'js' => WEB_MIN_JS + WEB_MIN_JS_MAP + JQUERY_MAP,
             'styles' => WEB_MIN_CSS,
-            'src/js' => WEB_SRC_JS,
+            'src/src' => WEB_SRC_JS,
             'src/styles' => WEB_SRC_CSS
        }
 #Kendo UI Web GPL (obsolete)
@@ -381,7 +381,7 @@ bundle :name => 'web.open-source',
        :contents => {
             'js' => WEB_MIN_JS + WEB_MIN_JS_MAP + JQUERY_MAP,
             'styles' => WEB_MIN_CSS,
-            'src/js' => WEB_SRC_JS,
+            'src/src' => WEB_SRC_JS,
             'src/styles' => WEB_SRC_CSS
        }
 
@@ -401,7 +401,7 @@ bundle :name => 'mobile.commercial',
        :contents => {
             'js' => MOBILE_MIN_JS + MOBILE_MIN_JS_MAP + JQUERY_MAP,
             'styles' => MOBILE_MIN_CSS,
-            'src/js' => MOBILE_SRC_JS,
+            'src/src' => MOBILE_SRC_JS,
             'src/styles' => MOBILE_SRC_CSS
        }
 
@@ -421,12 +421,13 @@ bundle :name => 'dataviz.commercial',
        :contents => {
             'js' => DATAVIZ_MIN_JS + DATAVIZ_MIN_JS_MAP + JQUERY_MAP,
             'styles' => DATAVIZ_MIN_CSS + WEB_MIN_CSS,
-            'src/js' => DATAVIZ_SRC_JS,
+            'src/src' => DATAVIZ_SRC_JS,
             'src/styles' => DATAVIZ_SRC_CSS
        }
 
 # UI for ASP.NET MVC
 bundle :name => 'aspnetmvc.trial',
+       :skip_grunt_build => true,
        :license => 'src-license-complete',
        :eula => 'aspnetmvc',
        :readme => 'README.KendoUI.Trial',
@@ -539,6 +540,7 @@ bundle :name => 'aspnetmvc.trial',
 bundle :name => 'aspnetmvc.hotfix.trial',
        :license => 'src-license-complete',
        :eula => 'aspnetmvc',
+       :skip_grunt_build => true,
        :vsdoc => %w(all web mobile dataviz),
        :intellisense => %w(all web mobile dataviz),
        :type_script => %w(all web mobile dataviz),
@@ -639,7 +641,7 @@ bundle :name => 'aspnetmvc.commercial',
        :contents => {
             'js' => MVC_MIN_JS + MVC_MIN_JS_MAP + JQUERY_MAP,
             'styles' => MIN_CSS_RESOURCES,
-            'src/js' => MVC_SRC_JS,
+            'src/src' => MVC_SRC_JS,
             'src/styles' => SRC_CSS,
             'src/Kendo.Mvc/packages' => FileList['wrappers/mvc/packages/**/*.*'],
             'src/Kendo.Mvc/Kendo.Mvc' => FileList['wrappers/mvc/src/Kendo.Mvc/**/*']
@@ -679,7 +681,7 @@ bundle :name => 'aspnetmvc.internal.commercial',
             'wrappers/aspnetmvc/EditorTemplates/ascx' => MVC_ASCX_EDITOR_TEMPLATES,
             'wrappers/aspnetmvc/EditorTemplates/razor' => MVC_RAZOR_EDITOR_TEMPLATES,
             'wrappers/aspnetmvc/LegacyThemes' => FileList['wrappers/mvc/legacy-themes/**/*'],
-            'src/js' => MVC_SRC_JS,
+            'src/src' => MVC_SRC_JS,
             'src/styles' => SRC_CSS,
             'src/Kendo.Mvc/packages' => FileList['wrappers/mvc/packages/**/*.*'],
             'src/Kendo.Mvc/Kendo.Mvc' => FileList['wrappers/mvc/src/Kendo.Mvc/**/*']
@@ -697,6 +699,7 @@ bundle :name => 'aspnetmvc.internal.commercial',
        ]
 
 bundle :name => 'aspnetmvc.hotfix.commercial',
+       :skip_grunt_build => true,
        :license => 'src-license-complete',
        :eula => 'aspnetmvc',
        :vsdoc => %w(all web mobile dataviz),
@@ -737,6 +740,7 @@ bundle :name => 'aspnetmvc.hotfix.commercial',
 
 
 bundle :name => 'cdn.commercial',
+       :skip_grunt_build => true,
        :license => 'src-license-cdn',
        :vsdoc => %w(all web mobile dataviz),
        :intellisense => %w(all web mobile dataviz),
@@ -750,11 +754,13 @@ bundle :name => 'cdn.commercial',
 WIN_JS_RESOURCES = WIN_MIN_JS + WIN_SRC_JS + WIN_SRC_CSS + WIN_MIN_CSS
 
 bundle :name => 'winjs.commercial',
+       :skip_grunt_build => true,
        :contents => {
             '.' => WIN_JS_RESOURCES
        }
 
 bundle :name => 'appbuilder.professional',
+       :skip_grunt_build => true,
        :license => 'src-license-appbuilder',
        :type_script => %w(dataviz.mobile),
        :changelog => %w(dataviz mobile framework),
@@ -769,6 +775,7 @@ bundle :name => 'appbuilder.professional',
        :appbuilder_features => "Kendo UI DataViz"
 
 bundle :name => 'appbuilder.core',
+       :skip_grunt_build => true,
        :license => 'src-license-appbuilder-core',
        :type_script => %w(mobile),
        :changelog => %w(mobile framework),
@@ -783,6 +790,7 @@ bundle :name => 'appbuilder.core',
 
 # UI for JSP
 bundle :name => 'jsp.trial',
+       :skip_grunt_build => true,
        :license => 'src-license-complete',
        :eula => 'jsp',
        :readme => 'README.KendoUI.Trial',
@@ -856,7 +864,7 @@ bundle :name => 'jsp.commercial',
        :contents => {
             'js' => COMPLETE_MIN_JS + COMPLETE_MIN_JS_MAP + JQUERY_MAP,
             'styles' => MIN_CSS_RESOURCES,
-            'src/js' => COMPLETE_SRC_JS,
+            'src/src' => COMPLETE_SRC_JS,
             'src/styles' => SRC_CSS,
             'src/kendo-taglib' => JSP_TAGLIB_SRC.exclude('**/test/**/*')
        }.merge(JSP_CONTENT),
@@ -869,6 +877,7 @@ bundle :name => 'jsp.commercial',
 
 # UI for PHP
 bundle :name => 'php.trial',
+       :skip_grunt_build => true,
        :license => 'src-license-complete',
        :eula => 'php',
        :readme => 'README.KendoUI.Trial',
@@ -940,7 +949,7 @@ bundle :name => 'php.commercial',
        :contents => {
             'js' => COMPLETE_MIN_JS + COMPLETE_MIN_JS_MAP + JQUERY_MAP,
             'styles' => MIN_CSS_RESOURCES,
-            'src/js' => COMPLETE_SRC_JS,
+            'src/src' => COMPLETE_SRC_JS,
             'src/styles' => SRC_CSS,
             'src/php' => PHP_LIB_SRC
        }.merge(PHP_CONTENT),
@@ -976,7 +985,7 @@ bundle :name => 'core',
        :contents => {
             'js' => CORE_MIN_JS + CORE_MIN_JS_MAP + JQUERY_MAP,
             'styles' => CORE_MIN_CSS_RESOURCES,
-            'src/js' => CORE_SRC_JS,
+            'src/src' => CORE_SRC_JS,
             'src/styles' => CORE_SRC_CSS
        }
 

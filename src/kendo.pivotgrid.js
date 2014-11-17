@@ -37,6 +37,7 @@ var __meta__ = {
         ERROR = "error",
         PROGRESS = "progress",
         STATERESET = "stateReset",
+        AUTO = "auto",
         DIV = "<div/>",
         NS = ".kendoPivotGrid",
         ROW_TOTAL_KEY = "__row_total__",
@@ -3612,17 +3613,26 @@ var __meta__ = {
         },
 
         _resize: function() {
+            var columnTable = this.columnsHeader.children("table");
+
             if (this.content[0].firstChild) {
                 this._setSectionsWidth();
                 this._setSectionsHeight();
                 this._setContentWidth();
                 this._setContentHeight();
+
+                columnTable.css("table-layout", AUTO);
+
+                clearTimeout(this._layoutTimeout);
+                this._layoutTimeout = setTimeout(function() {
+                    columnTable.css("table-layout", "fixed");
+                });
             }
         },
 
         _setSectionsWidth: function() {
             var rowsHeader = this.rowsHeader;
-            var leftColumn = rowsHeader.parent(".k-pivot-rowheaders").width("auto");
+            var leftColumn = rowsHeader.parent(".k-pivot-rowheaders").width(AUTO);
             var width;
 
             width = Math.max(this.measureFields.outerWidth(), this.rowFields.outerWidth());
@@ -3632,10 +3642,10 @@ var __meta__ = {
         },
 
         _setSectionsHeight: function() {
-            var measureFieldsHeight = this.measureFields.height("auto").height();
-            var columnFieldsHeight = this.columnFields.height("auto").height();
-            var rowFieldsHeight = this.rowFields.height("auto").innerHeight();
-            var columnsHeight = this.columnsHeader.height("auto").innerHeight();
+            var measureFieldsHeight = this.measureFields.height(AUTO).height();
+            var columnFieldsHeight = this.columnFields.height(AUTO).height();
+            var rowFieldsHeight = this.rowFields.height(AUTO).innerHeight();
+            var columnsHeight = this.columnsHeader.height(AUTO).innerHeight();
 
             var padding = rowFieldsHeight - this.rowFields.height();
 
@@ -3755,11 +3765,6 @@ var __meta__ = {
             };
 
             that.contentTree.render(that._contentBuilder.build(dataSource.view(), columnAxis, rowAxis));
-
-            /*that.columnsHeader
-                .children("table")
-                .css("table-layout", "auto")
-                .css("table-layout", "fixed");*/
 
             that._resize();
 

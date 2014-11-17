@@ -241,6 +241,14 @@ public class SchedulerTag extends WidgetTag /* interfaces */implements DataBound
         setProperty("footer", value);
     }
 
+    public java.lang.String getGroupHeaderTemplate() {
+        return (java.lang.String)getProperty("groupHeaderTemplate");
+    }
+
+    public void setGroupHeaderTemplate(java.lang.String value) {
+        setProperty("groupHeaderTemplate", value);
+    }
+
     public java.lang.Object getHeight() {
         return (java.lang.Object)getProperty("height");
     }

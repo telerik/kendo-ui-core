@@ -109,6 +109,14 @@ public class MessagesTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         setProperty("date", value);
     }
 
+    public java.lang.String getDefaultRowText() {
+        return (java.lang.String)getProperty("defaultRowText");
+    }
+
+    public void setDefaultRowText(java.lang.String value) {
+        setProperty("defaultRowText", value);
+    }
+
     public java.lang.String getDeleteWindowTitle() {
         return (java.lang.String)getProperty("deleteWindowTitle");
     }
