@@ -12,9 +12,9 @@
 
 <kendo:notification name="notification" autoHideAfter="0" stacking="down">
 	<kendo:notification-templates>
-		<kendo:notification-template type="info" templateId="emailTemplate"/>
-		<kendo:notification-template type="error" templateId="errorTemplate"/>
-		<kendo:notification-template type="upload-success" templateId="successTemplate"/>		
+		<kendo:notification-template type="info" template="emailTemplate"/>
+		<kendo:notification-template type="error" template="errorTemplate"/>
+		<kendo:notification-template type="upload-success" template="successTemplate"/>
 	</kendo:notification-templates>
 	<kendo:notification-position pinned="true" top="30" right="30" />
 </kendo:notification>
