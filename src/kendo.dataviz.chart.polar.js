@@ -452,7 +452,6 @@ var __meta__ = {
 
         renderGridLines: function(center, ticks, angles, options) {
             var axis = this,
-                modelId = axis.plotArea.modelId,
                 tickRadius,
                 tickIx,
                 angleIx;

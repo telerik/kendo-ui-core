@@ -4,7 +4,6 @@
         draw = kendo.drawing,
         geom = kendo.geometry,
         dataviz = kendo.dataviz,
-        getElement = dataviz.getElement,
         Box2D = dataviz.Box2D,
         chartBox = new Box2D(0, 0, 800, 600),
         CategoryAxis,
@@ -1505,7 +1504,6 @@
 
             plotArea = chart._model.children[1];
             label = plotArea.categoryAxis.labels[1];
-            $(getElement(label.options.id)).click();
         }
 
         // ------------------------------------------------------------

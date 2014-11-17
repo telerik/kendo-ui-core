@@ -51,7 +51,6 @@ var __meta__ = {
         ChartElement = dataviz.ChartElement,
         Color = kendo.drawing.Color,
         CurveProcessor = dataviz.CurveProcessor,
-        ElementAnimation = dataviz.ElementAnimation,
         FloatElement = dataviz.FloatElement,
         Note = dataviz.Note,
         LogarithmicAxis = dataviz.LogarithmicAxis,
@@ -65,12 +64,10 @@ var __meta__ = {
         TextBox = dataviz.TextBox,
         Title = dataviz.Title,
         alignPathToPixel = dataviz.alignPathToPixel,
-        animationDecorator = dataviz.animationDecorator,
         append = dataviz.append,
         autoFormat = dataviz.autoFormat,
         defined = dataviz.defined,
         dateComparer = dataviz.dateComparer,
-        getElement = dataviz.getElement,
         getSpacing = dataviz.getSpacing,
         inArray = dataviz.inArray,
         interpolate = dataviz.interpolateValue,
@@ -9772,9 +9769,6 @@ var __meta__ = {
     });
     draw.AnimationFactory.current.register(BUBBLE, BubbleAnimation);
 
-    var BarAnimationDecorator = animationDecorator(BAR, BarAnimation),
-        PieAnimationDecorator = animationDecorator(PIE, PieAnimation);
-
     var Highlight = Class.extend({
         init: function() {
             this._points = [];
@@ -11960,7 +11954,6 @@ var __meta__ = {
         AreaSegment: AreaSegment,
         AxisGroupRangeTracker: AxisGroupRangeTracker,
         Bar: Bar,
-        BarAnimationDecorator: BarAnimationDecorator,
         BarChart: BarChart,
         BarLabel: BarLabel,
         BubbleChart: BubbleChart,
@@ -11992,7 +11985,6 @@ var __meta__ = {
         LineSegment: LineSegment,
         Pane: Pane,
         PieAnimation: PieAnimation,
-        PieAnimationDecorator: PieAnimationDecorator,
         PieChart: PieChart,
         PieChartMixin: PieChartMixin,
         PiePlotArea: PiePlotArea,

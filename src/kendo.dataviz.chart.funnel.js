@@ -409,8 +409,7 @@ var __meta__ = {
                 stroke: border.color,
                 strokeOpacity: border.opacity,
                 strokeWidth: border.width,
-                fillOpacity:hlOptions.opacity,
-                data: { modelId: this.modelId }
+                fillOpacity:hlOptions.opacity
             });
             var element = view.createPolyline(this.points,true,calcOptions);
             return element;

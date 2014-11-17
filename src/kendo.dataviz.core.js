@@ -693,14 +693,7 @@ var __meta__ = {
             var element = this,
                 children = element.children,
                 root = element.getRoot(),
-                modelId = element.modelId,
                 i;
-
-            if (modelId) {
-                if (root && root.modelMap[modelId]) {
-                    root.modelMap[modelId] = undefined;
-                }
-            }
 
             if (this.animation) {
                 this.animation.destroy();
@@ -3034,8 +3027,7 @@ var __meta__ = {
                 lineOptions = {
                     lineStart: lineBox[vertical ? "x1" : "y1"],
                     lineEnd: lineBox[vertical ? "x2" : "y2"],
-                    vertical: vertical,
-                    modelId: axis.plotArea.modelId
+                    vertical: vertical
                 },
                 pos, majorTicks = [];
 
@@ -3302,323 +3294,6 @@ var __meta__ = {
             }]
         }
     };
-
-    // Animations =============================================================
-    var ElementAnimation = Class.extend({
-        init: function(element, options) {
-            var anim = this;
-
-            anim.options = deepExtend({}, anim.options, options);
-            anim.element = element;
-        },
-
-        options: {
-            duration: INITIAL_ANIMATION_DURATION,
-            easing: SWING
-        },
-
-        play: function() {
-            var anim = this,
-                options = anim.options,
-                element = anim.element,
-                elementId = element.options.id,
-                domElement,
-                delay = options.delay || 0,
-                start = +new Date() + delay,
-                duration = options.duration,
-                finish = start + duration,
-                easing = $.easing[options.easing],
-                wallTime,
-                time,
-                pos,
-                easingPos;
-
-            setTimeout(function() {
-                var loop = function() {
-                    if (anim._stopped) {
-                        return;
-                    }
-
-                    wallTime = +new Date();
-                    time = math.min(wallTime - start, duration);
-                    pos = time / duration;
-                    easingPos = easing(pos, time, 0, 1, duration);
-
-                    anim.step(easingPos);
-
-                    if (!domElement || detached(domElement)) {
-                        domElement = getElement(elementId);
-                    }
-
-                    element.refresh(domElement);
-
-                    if (wallTime < finish) {
-                        dataviz.requestFrame(loop);
-                    } else {
-                        anim.destroy();
-                    }
-                };
-
-                loop();
-            }, delay);
-        },
-
-        abort: function() {
-            this._stopped = true;
-        },
-
-        destroy: function() {
-            this.abort();
-        },
-
-        setup: noop,
-
-        step: noop
-    });
-
-    var FadeAnimation = ElementAnimation.extend({
-        options: {
-            duration: 200,
-            easing: LINEAR
-        },
-
-        setup: function() {
-            var anim = this,
-                options = anim.element.options;
-
-            anim.targetFillOpacity = options.fillOpacity;
-            anim.targetStrokeOpacity = options.strokeOpacity;
-            options.fillOpacity = options.strokeOpacity = 0;
-        },
-
-        step: function(pos) {
-            var anim = this,
-                options = anim.element.options;
-
-            options.fillOpacity = pos * anim.targetFillOpacity;
-            options.strokeOpacity = pos * anim.targetStrokeOpacity;
-        }
-    });
-
-    var ExpandAnimation = ElementAnimation.extend({
-        options: {
-            size: 0,
-            easing: LINEAR
-        },
-
-        setup: function() {
-            var points = this.element.points;
-
-            points[1].x = points[2].x = points[0].x;
-        },
-
-        step: function(pos) {
-            var options = this.options,
-                size = interpolateValue(0, options.size, pos),
-                points = this.element.points;
-
-            // Expands rectangle to the right
-            points[1].x = points[2].x = points[0].x + size;
-        },
-
-        destroy: function() {
-            ElementAnimation.fn.destroy.call(this);
-
-            // Unwrap all child elements
-            this.element.destroy();
-        }
-    });
-
-    var RotationAnimation = ElementAnimation.extend({
-        options: {
-            easing: LINEAR,
-            duration: 900
-        },
-
-        setup: function() {
-            var anim = this,
-                element = anim.element,
-                elementOptions = element.options,
-                options = anim.options,
-                center = options.center,
-                start, end;
-
-            if (elementOptions.rotation) {
-                start = options.startAngle;
-                end = elementOptions.rotation[0];
-
-                options.duration = math.max((math.abs(start - end) / options.speed) * 1000, 1);
-
-                anim.endState = end;
-                elementOptions.rotation = [
-                    start,
-                    center.x,
-                    center.y
-                ];
-            }
-        },
-
-        step: function(pos) {
-            var anim = this,
-                element = anim.element;
-
-            if (element.options.rotation) {
-                element.options.rotation[0] = interpolateValue(anim.options.startAngle, anim.endState, pos);
-            }
-        }
-    });
-
-    var BarIndicatorAnimatin = ElementAnimation.extend({
-        options: {
-            easing: SWING,
-            duration: 1000
-        },
-
-        setup: function() {
-            var anim = this,
-                element = anim.element,
-                points = element.points,
-                options = element.options.animation,
-                vertical = options.vertical,
-                reverse = options.reverse,
-                axis = anim.axis = vertical ? "y" : "x",
-                start, end, pos,
-                endPosition = anim.options.endPosition,
-                initialState = anim.initialState = {
-                    top: points[0].y,
-                    right: points[1].x,
-                    bottom: points[3].y,
-                    left: points[0].x
-                },
-                initial = !defined(anim.options.endPosition);
-
-            if (vertical) {
-                pos = reverse ? "y2" : "y1";
-                start = initialState[initial && !reverse ? BOTTOM : TOP];
-                end = initial ? initialState[reverse ? BOTTOM : TOP] : endPosition[pos];
-            } else {
-                pos = reverse ? "x1" : "x2";
-                start = initialState[initial && !reverse ? LEFT : RIGHT];
-                end = initial ? initialState[reverse ? LEFT : RIGHT] : endPosition[pos];
-            }
-
-            anim.start = start;
-            anim.end = end;
-
-            if (initial) {
-                updateArray(points, axis, anim.start);
-            } else if (options.speed) {
-                anim.options.duration = math.max((math.abs(anim.start - anim.end) / options.speed) * 1000, 1);
-            }
-        },
-
-        step: function(pos) {
-            var anim = this,
-                start = anim.start,
-                end = anim.end,
-                element = anim.element,
-                points = element.points,
-                axis = anim.axis;
-
-            if (element.options.animation.vertical) {
-                points[0][axis] = points[1][axis] =
-                    interpolateValue(start, end, pos);
-            } else {
-                points[1][axis] = points[2][axis] =
-                    interpolateValue(start, end, pos);
-            }
-        }
-    });
-
-    var ArrowAnimation = ElementAnimation.extend({
-        options: {
-            easing: SWING,
-            duration: 1000
-        },
-
-        setup: function() {
-            var anim = this,
-                element = anim.element,
-                points = element.points,
-                options = element.options.animation,
-                vertical = options.vertical,
-                reverse = options.reverse,
-                axis = vertical ? "y" : "x",
-                startPos = axis + (reverse ? "1" : "2"),
-                endPos = axis + (reverse ? "2" : "1"),
-                startPosition = options.startPosition[vertical ? startPos : endPos],
-                halfSize = options.size / 2,
-                count = points.length,
-                initial = !defined(anim.options.endPosition),
-                padding = halfSize,
-                point,
-                end,
-                i;
-
-            anim.axis = axis;
-            anim.endPositions = [];
-            anim.startPositions = [];
-
-            if (!initial) {
-                startPosition = points[1][axis];
-                end = anim.options.endPosition[vertical ? endPos : startPos];
-                if (options.speed) {
-                    anim.options.duration = math.max((math.abs(startPosition - end) / options.speed) * 1000, 1);
-                }
-            }
-
-            for (i = 0; i < count; i++) {
-                point = deepExtend({}, points[i]);
-                if (initial) {
-                    anim.endPositions[i] = point[axis];
-                    points[i][axis] = startPosition - padding;
-                } else {
-                    anim.endPositions[i] = end - padding;
-                }
-                anim.startPositions[i] = points[i][axis];
-                padding -= halfSize;
-            }
-        },
-
-        step: function(pos) {
-            var anim = this,
-                startPositions = anim.startPositions,
-                endPositions = anim.endPositions,
-                element = anim.element,
-                points = element.points,
-                axis = anim.axis,
-                count = points.length,
-                i;
-
-            for (i = 0; i < count; i++) {
-                points[i][axis] = interpolateValue(startPositions[i], endPositions[i], pos);
-            }
-        }
-    });
-
-    function animationDecorator(animationName, animationType) {
-        return Class.extend({
-            init: function(view) {
-                this.view = view;
-            },
-
-            decorate: function(element) {
-                var decorator = this,
-                    view = decorator.view,
-                    animation = element.options.animation,
-                    animationObject;
-
-                if (animation && animation.type === animationName && view.options.transitions) {
-                    animationObject = element._animation = new animationType(element, animation);
-                    view.animations.push(animationObject);
-                }
-
-                return element;
-            }
-        });
-    }
-
-    var FadeAnimationDecorator = animationDecorator(FADEIN, FadeAnimation);
 
     // Helper functions========================================================
     var LRUCache = Class.extend({
@@ -3908,20 +3583,6 @@ var __meta__ = {
         return !!doc.createElement("canvas").getContext;
     }
 
-    var requestFrameFn =
-        window.requestAnimationFrame       ||
-        window.webkitRequestAnimationFrame ||
-        window.mozRequestAnimationFrame    ||
-        window.oRequestAnimationFrame      ||
-        window.msRequestAnimationFrame     ||
-        function(callback) {
-            setTimeout(callback, ANIMATION_STEP);
-        };
-
-    dataviz.requestFrame = function(callback, delay) {
-        return requestFrameFn(callback, delay);
-    };
-
     function inArray(value, array) {
         return indexOf(value, array) != -1;
     }
@@ -3989,10 +3650,6 @@ var __meta__ = {
         }
 
         return kendo.toString(value, format);
-    }
-
-    function getElement(modelId) {
-        return doc.getElementById(modelId);
     }
 
     function detached(element) {
@@ -4402,13 +4059,7 @@ var __meta__ = {
         BoxElement: BoxElement,
         ChartElement: ChartElement,
         CurveProcessor: CurveProcessor,
-        ElementAnimation:ElementAnimation,
-        ExpandAnimation: ExpandAnimation,
         ExportMixin: ExportMixin,
-        ArrowAnimation: ArrowAnimation,
-        BarIndicatorAnimatin: BarIndicatorAnimatin,
-        FadeAnimation: FadeAnimation,
-        FadeAnimationDecorator: FadeAnimationDecorator,
         FloatElement: FloatElement,
         LogarithmicAxis: LogarithmicAxis,
         LRUCache: LRUCache,
@@ -4420,7 +4071,6 @@ var __meta__ = {
         Ring: Ring,
         Pin: Pin,
         RootElement: RootElement,
-        RotationAnimation: RotationAnimation,
         Sector: Sector,
         ShapeBuilder: ShapeBuilder,
         ShapeElement: ShapeElement,
@@ -4430,7 +4080,6 @@ var __meta__ = {
         Title: Title,
 
         alignPathToPixel: alignPathToPixel,
-        animationDecorator: animationDecorator,
         append: append,
         autoFormat: autoFormat,
         autoMajorUnit: autoMajorUnit,
@@ -4438,7 +4087,6 @@ var __meta__ = {
         defined: defined,
         dateComparer: dateComparer,
         decodeEntities: decodeEntities,
-        getElement: getElement,
         getSpacing: getSpacing,
         inArray: inArray,
         interpolateValue: interpolateValue,
