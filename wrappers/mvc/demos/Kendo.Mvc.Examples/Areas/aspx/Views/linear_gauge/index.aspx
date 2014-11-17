@@ -14,7 +14,6 @@
         #gauge {
             height: 300px;
             display: inline-block;
-            *display: inline;
             zoom: 1;
         }
     </style>
