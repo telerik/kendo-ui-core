@@ -394,27 +394,31 @@ var __meta__ = {
         },
 
         _setRange: function() {
-            var navi = this,
-                chart = navi.chart,
-                plotArea = chart._createPlotArea(true),
-                axis = plotArea.namedCategoryAxes[NAVIGATOR_AXIS],
-                groups = axis.options.categories,
-                select = navi.options.select || {},
-                range = axis.range(),
-                min = range.min,
-                max = range.max,
-                from = toDate(select.from) || min,
-                to = toDate(select.to) || max;
+            var plotArea = this.chart._createPlotArea(true);
+            var axis = plotArea.namedCategoryAxes[NAVIGATOR_AXIS];
+            var axisOpt = axis.options;
 
-            if (from < min) { from = min; }
-            if (to > max) { to = max; }
+            var range = axis.range();
+            var min = range.min;
+            var max = addDuration(range.max, axisOpt.baseUnitStep, axisOpt.baseUnit);
 
-            navi.options.select = {
+            var select = this.options.select || {};
+            var from = toDate(select.from) || min;
+            if (from < min) {
+                from = min;
+            }
+
+            var to = toDate(select.to) || max;
+            if (to > max) {
+                to = max;
+            }
+
+            this.options.select = {
                 from: from,
                 to: to
             };
 
-            navi.filterAxes();
+            this.filterAxes();
         },
 
         _redrawSelf: function(silent) {
