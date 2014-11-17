@@ -8331,11 +8331,7 @@
         "meta": {
             "kendo-ui": "This example shows how easily you can export the linear gauge to PDF, Image and SVG.",
             "aspnet-mvc": "This example shows how easily you can export the ASP.NET MVC linear gauge to PDF, Image and SVG."
-        },
-        "packages": [
-          "!jsp",
-          "!php"
-        ]
+        }
       }
     ],
     "category": "Data Visualization"
@@ -8411,11 +8407,7 @@
         "meta": {
             "kendo-ui": "This example shows how easily you can export the radial gauge to PDF, Image and SVG.",
             "aspnet-mvc": "This example shows how easily you can export the ASP.NET MVC radial gauge to PDF, Image and SVG."
-        },
-        "packages": [
-          "!jsp",
-          "!php"
-        ]
+        }
       },
       {
         "text": "MVVM",
