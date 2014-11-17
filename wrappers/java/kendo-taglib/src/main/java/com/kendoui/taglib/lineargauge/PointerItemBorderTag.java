@@ -1,5 +1,5 @@
 
-package com.kendoui.taglib.radialgauge;
+package com.kendoui.taglib.lineargauge;
 
 
 import com.kendoui.taglib.BaseTag;
@@ -12,17 +12,17 @@ import com.kendoui.taglib.BaseTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class PointerCapTag extends  BaseTag  /* interfaces *//* interfaces */ {
+public class PointerItemBorderTag extends  BaseTag  /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
 
-        PointerTag parent = (PointerTag)findParentWithClass(PointerTag.class);
+        PointerItemTag parent = (PointerItemTag)findParentWithClass(PointerItemTag.class);
 
 
-        parent.setCap(this);
+        parent.setBorder(this);
 
 //<< doEndTag
 
@@ -48,7 +48,7 @@ public class PointerCapTag extends  BaseTag  /* interfaces *//* interfaces */ {
 //>> Attributes
 
     public static String tagName() {
-        return "radialGauge-pointer-cap";
+        return "linearGauge-pointerItem-border";
     }
 
     public java.lang.String getColor() {
@@ -59,12 +59,20 @@ public class PointerCapTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("color", value);
     }
 
-    public float getSize() {
-        return (float)getProperty("size");
+    public java.lang.String getDashType() {
+        return (java.lang.String)getProperty("dashType");
     }
 
-    public void setSize(float value) {
-        setProperty("size", value);
+    public void setDashType(java.lang.String value) {
+        setProperty("dashType", value);
+    }
+
+    public float getWidth() {
+        return (float)getProperty("width");
+    }
+
+    public void setWidth(float value) {
+        setProperty("width", value);
     }
 
 //<< Attributes

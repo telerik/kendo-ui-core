@@ -1,12 +1,12 @@
 
 package com.kendoui.taglib.radialgauge;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import com.kendoui.taglib.BaseTag;
-
 import com.kendoui.taglib.RadialGaugeTag;
-
-
-
 
 import javax.servlet.jsp.JspException;
 
@@ -31,6 +31,9 @@ public class PointerTag extends BaseTag /* interfaces *//* interfaces */ {
     @Override
     public void initialize() {
 //>> initialize
+
+        pointer = new ArrayList<Map<String, Object>>();
+
 //<< initialize
 
         super.initialize();
@@ -46,28 +49,18 @@ public class PointerTag extends BaseTag /* interfaces *//* interfaces */ {
 
 //>> Attributes
 
+    private List<Map<String, Object>> pointer;
+
+    public List<Map<String, Object>> pointer() {
+        return pointer;
+    }
+
     public static String tagName() {
         return "radialGauge-pointer";
     }
 
-    public void setCap(com.kendoui.taglib.radialgauge.PointerCapTag value) {
-        setProperty("cap", value);
-    }
-
-    public java.lang.String getColor() {
-        return (java.lang.String)getProperty("color");
-    }
-
-    public void setColor(java.lang.String value) {
-        setProperty("color", value);
-    }
-
-    public float getValue() {
-        return (float)getProperty("value");
-    }
-
-    public void setValue(float value) {
-        setProperty("value", value);
+    public void addPointerItem(PointerItemTag value) {
+        pointer.add(value.properties());
     }
 
 //<< Attributes

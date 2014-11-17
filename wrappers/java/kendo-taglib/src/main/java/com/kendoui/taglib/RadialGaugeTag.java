@@ -3,6 +3,8 @@ package com.kendoui.taglib;
 
 import javax.servlet.jsp.JspException;
 
+import com.kendoui.taglib.radialgauge.PointerTag;
+
 @SuppressWarnings("serial")
 public class RadialGaugeTag extends WidgetTag /* interfaces *//* interfaces */ {
 
@@ -45,8 +47,10 @@ public class RadialGaugeTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("gaugeArea", value);
     }
 
-    public void setPointer(com.kendoui.taglib.radialgauge.PointerTag value) {
-        setProperty("pointer", value);
+    public void setPointer(PointerTag value) {
+
+        setProperty("pointer", value.pointer());
+
     }
 
     public void setScale(com.kendoui.taglib.radialgauge.ScaleTag value) {

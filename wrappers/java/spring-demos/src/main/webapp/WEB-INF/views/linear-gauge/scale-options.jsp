@@ -23,7 +23,9 @@
      </div>
      <div id="gauge-container">
          <kendo:linearGauge name="gauge" style="width:200px;">
-            <kendo:linearGauge-pointer value="65" shape="arrow" />
+            <kendo:linearGauge-pointer>
+            	<kendo:linearGauge-pointerItem value="65" shape="arrow" />
+            </kendo:linearGauge-pointer>
             <kendo:linearGauge-scale minorUnit="5" majorUnit="20" max="180">
                 <kendo:linearGauge-scale-ranges>
                     <kendo:linearGauge-scale-range from="80" to="120" color="#ffc700" />

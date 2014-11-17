@@ -9,7 +9,9 @@
     
      <div id="gauge-container">
          <kendo:radialGauge name="gauge">
-            <kendo:radialGauge-pointer value="65" />
+            <kendo:radialGauge-pointer>
+            	<kendo:radialGauge-pointerItem value="65" />
+            </kendo:radialGauge-pointer>
             <kendo:radialGauge-scale minorUnit="5" startAngle="-30" endAngle="210" max="180" />
          </kendo:radialGauge>
          <kendo:slider name="gauge-value" value="65" change="change" min="0" max="180" showButtons="false">

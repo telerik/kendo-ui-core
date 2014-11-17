@@ -29,7 +29,9 @@
      </div>
      <div id="gauge-container">
          <kendo:radialGauge name="gauge">
-            <kendo:radialGauge-pointer value="65" />
+            <kendo:radialGauge-pointer>
+            	<kendo:radialGauge-pointerItem value="65" />
+            </kendo:radialGauge-pointer>
             <kendo:radialGauge-scale minorUnit="5" startAngle="-60" endAngle="240" max="180">
                 <kendo:radialGauge-scale-labels position="inside" />
                 <kendo:radialGauge-scale-ranges>

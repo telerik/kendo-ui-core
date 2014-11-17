@@ -18871,11 +18871,18 @@ horizontal gauge is 200px.</description>
 
 
     <tag>
-        <description>The pointer configuration options.</description>
+        <description>The pointer configuration options. It accepts an Array of pointers, each with it's own configuration options.</description>
         <name>linearGauge-pointer</name>
         <tag-class>com.kendoui.taglib.lineargauge.PointerTag</tag-class>
         <body-content>JSP</body-content>
+    </tag>
 
+    <tag>
+        <description>The pointer configuration options. It accepts an Array of pointers, each with it's own configuration options.</description>
+        <name>linearGauge-pointerItem</name>
+        <tag-class>com.kendoui.taglib.lineargauge.PointerItemTag</tag-class>
+
+        <body-content>JSP</body-content>
         <attribute>
             <description>The color of the pointer.</description>
             <name>color</name>
@@ -18913,13 +18920,12 @@ Any valid CSS color string will work here, including hex and rgb.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
-
     </tag>
 
     <tag>
         <description>The border of the pointer.</description>
-        <name>linearGauge-pointer-border</name>
-        <tag-class>com.kendoui.taglib.lineargauge.PointerBorderTag</tag-class>
+        <name>linearGauge-pointerItem-border</name>
+        <tag-class>com.kendoui.taglib.lineargauge.PointerItemBorderTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
@@ -18948,8 +18954,8 @@ Any valid CSS color string will work here, including hex and rgb.</description>
     <tag>
         <description>The element arround/under the pointer.
 (available only for 'barIndicator' shape)</description>
-        <name>linearGauge-pointer-track</name>
-        <tag-class>com.kendoui.taglib.lineargauge.PointerTrackTag</tag-class>
+        <name>linearGauge-pointerItem-track</name>
+        <tag-class>com.kendoui.taglib.lineargauge.PointerItemTrackTag</tag-class>
         <body-content>JSP</body-content>
 
         <attribute>
@@ -18981,8 +18987,8 @@ Any valid CSS color string will work here, including hex and rgb.</description>
 
     <tag>
         <description>The border of the track.</description>
-        <name>linearGauge-pointer-track-border</name>
-        <tag-class>com.kendoui.taglib.lineargauge.PointerTrackBorderTag</tag-class>
+        <name>linearGauge-pointerItem-track-border</name>
+        <tag-class>com.kendoui.taglib.lineargauge.PointerItemTrackBorderTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
@@ -22963,11 +22969,18 @@ and horizontal gauge is 200px.</description>
 
 
     <tag>
-        <description>The pointer configuration options.</description>
+        <description>The pointer configuration options. It accepts an Array of pointers, each with it's own configuration options.</description>
         <name>radialGauge-pointer</name>
         <tag-class>com.kendoui.taglib.radialgauge.PointerTag</tag-class>
         <body-content>JSP</body-content>
+    </tag>
 
+    <tag>
+        <description>The pointer configuration options. It accepts an Array of pointers, each with it's own configuration options.</description>
+        <name>radialGauge-pointerItem</name>
+        <tag-class>com.kendoui.taglib.radialgauge.PointerItemTag</tag-class>
+
+        <body-content>JSP</body-content>
         <attribute>
             <description>The color of the pointer.
 Any valid CSS color string will work here, including hex and rgb.</description>
@@ -22981,13 +22994,12 @@ Any valid CSS color string will work here, including hex and rgb.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
-
     </tag>
 
     <tag>
         <description>The cap configuration options.</description>
-        <name>radialGauge-pointer-cap</name>
-        <tag-class>com.kendoui.taglib.radialgauge.PointerCapTag</tag-class>
+        <name>radialGauge-pointerItem-cap</name>
+        <tag-class>com.kendoui.taglib.radialgauge.PointerItemCapTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
@@ -24740,7 +24752,7 @@ By default the Kendo UI Scheduler widget displays "day" and "week" view.</descri
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The type of the view. The built-in views are: "day", "week", "workWeek", "month", "agenda", "timeline", "timelineWeek" and "timelineWorkWeek".</description>
+            <description>The type of the view. The built-in views are: "day", "week", "workWeek", "month", "agenda", "timeline", "timelineWeek", "timelineWorkWeek" and "timelineMonth".</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -37578,6 +37590,11 @@ and the string value will be passed as an argument to a kendo.template() functio
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>Fired when an item is about to be collapsed.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+            <name>collapse</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
             <description>Fired before the widget binds to its data source.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>dataBinding</name>
             <rtexprvalue>true</rtexprvalue>
@@ -37585,6 +37602,11 @@ and the string value will be passed as an argument to a kendo.template() functio
         <attribute>
             <description>Fired when the widget is bound to data from its data source.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>dataBound</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fired when an item is about to be expanded.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+            <name>expand</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
@@ -37879,6 +37901,42 @@ which field to update. The other option is to use MVVM bindings in order to bind
     </tag>
 
     <tag>
+        <description>Configures the Kendo UI TreeList Excel export settings.</description>
+        <name>treeList-excel</name>
+        <tag-class>com.kendoui.taglib.treelist.ExcelTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Specifies the file name of the exported Excel file.</description>
+            <name>fileName</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Enables or disables column filtering in the Excel file. Not to be mistaken with the treelist filtering feature.</description>
+            <name>filterable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>If set to true, the content will be forwarded to proxyURL even if the browser supports saving files locally.</description>
+            <name>forceProxy</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The URL of the server side proxy which will stream the file to the end user.A proxy will be used when the browser isn't capable of saving files locally.
+Such browsers are IE version 9 and lower and Safari.The developer is responsible for implementing the server-side proxy.The proxy will receive a POST request with the following parameters in the request body:The proxy should return the decoded file with set "Content-Disposition" header.</description>
+            <name>proxyURL</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
         <description>If set to true the user can filter the data source using the grid filter menu. Filtering is disabled by default.Can be set to a JavaScript object which represents the filter menu configuration.</description>
         <name>treeList-filterable</name>
         <tag-class>com.kendoui.taglib.treelist.FilterableTag</tag-class>
@@ -37892,6 +37950,213 @@ which field to update. The other option is to use MVVM bindings in order to bind
         </attribute>
 
     </tag>
+
+
+
+    <tag>
+        <description>Defines the text of the command buttons that are shown within the TreeList. Used primarily for localization.</description>
+        <name>treeList-messages</name>
+        <tag-class>com.kendoui.taglib.treelist.MessagesTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>Defines the text of "Loading..." message when the widget loads its root-level items.</description>
+            <name>loading</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Defines the text of "No records to display" message when the widget does not show any items.</description>
+            <name>noRows</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Defines the text of "Request failed." message when the widget fails to load its root-level items.</description>
+            <name>requestFailed</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Defines the text of "Retry" message assigned to the button that tries to load root-level items again.</description>
+            <name>retry</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>Defines the text for the command buttons used across the widget.</description>
+        <name>treeList-messages-commands</name>
+        <tag-class>com.kendoui.taglib.treelist.MessagesCommandsTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Defines the text of "Cancel" button that discards the changes during editing.</description>
+            <name>canceledit</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Defines the text of "Add new record" button that adds new data rows.</description>
+            <name>create</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Defines the text of "Add child record" button that adds new child data rows.</description>
+            <name>createchild</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Defines the text of "Delete" button that deletes a data row.</description>
+            <name>destroy</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Defines the text of "Edit" button that shows the editable fields for the row.</description>
+            <name>edit</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Defines the text of "Export to Excel" button that exports the widget data in spreadsheet format.</description>
+            <name>excel</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Defines the text of "Export to PDF" button that exports the widget data in PDF format.</description>
+            <name>pdf</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Defines the text of "Update" button that applies the changes during editing.</description>
+            <name>update</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+
+
+    <tag>
+        <description>Configures the Kendo UI TreeList PDF export settings.</description>
+        <name>treeList-pdf</name>
+        <tag-class>com.kendoui.taglib.treelist.PdfTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The author of the PDF document.</description>
+            <name>author</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The creator of the PDF document.</description>
+            <name>creator</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The date when the PDF document is created. Defaults to new Date().</description>
+            <name>date</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.Date</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the file name of the exported PDF file.</description>
+            <name>fileName</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>If set to true, the content will be forwarded to proxyURL even if the browser supports saving files locally.</description>
+            <name>forceProxy</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the keywords of the exported PDF file.</description>
+            <name>keywords</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Set to true to reverse the paper dimensions if needed such that width is the larger edge.</description>
+            <name>landscape</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the paper size of the PDF document.
+The default "auto" means paper size is determined by content.Supported values:</description>
+            <name>paperSize</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The URL of the server side proxy which will stream the file to the end user.A proxy will be used when the browser isn't capable of saving files locally.
+Such browsers are IE version 9 and lower and Safari.The developer is responsible for implementing the server-side proxy.The proxy will receive a POST request with the following parameters in the request body:The proxy should return the decoded file with set "Content-Disposition" header.</description>
+            <name>proxyURL</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Sets the subject of the PDF file.</description>
+            <name>subject</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Sets the title of the PDF file.</description>
+            <name>title</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>Specifies the margins of the page (numbers or strings with units). Supported
+units are "mm", "cm", "in" and "pt" (default).</description>
+        <name>treeList-pdf-margin</name>
+        <tag-class>com.kendoui.taglib.treelist.PdfMarginTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The bottom margin. Numbers are considered as "pt" units.</description>
+            <name>bottom</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The left margin. Numbers are considered as "pt" units.</description>
+            <name>left</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The right margin. Numbers are considered as "pt" units.</description>
+            <name>right</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The top margin. Numbers are considered as "pt" units.</description>
+            <name>top</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+
+    </tag>
+
 
 
 
@@ -37951,6 +38216,12 @@ This class can be used to obtain reference to the button after TreeList initiali
 
 
     <tag>
+        <description>Fired when an item is about to be collapsed.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+        <name>treeList-collapse</name>
+        <tag-class>com.kendoui.taglib.treelist.CollapseFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
         <description>Fired before the widget binds to its data source.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>treeList-dataBinding</name>
         <tag-class>com.kendoui.taglib.treelist.DataBindingFunctionTag</tag-class>
@@ -37960,6 +38231,12 @@ This class can be used to obtain reference to the button after TreeList initiali
         <description>Fired when the widget is bound to data from its data source.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>treeList-dataBound</name>
         <tag-class>com.kendoui.taglib.treelist.DataBoundFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when an item is about to be expanded.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+        <name>treeList-expand</name>
+        <tag-class>com.kendoui.taglib.treelist.ExpandFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>

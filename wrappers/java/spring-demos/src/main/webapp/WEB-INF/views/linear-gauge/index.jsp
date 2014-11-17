@@ -5,7 +5,9 @@
 <demo:header />
      <div id="gauge-container">
          <kendo:linearGauge name="gauge">
-            <kendo:linearGauge-pointer value="28" />
+            <kendo:linearGauge-pointer>
+            	<kendo:linearGauge-pointerItem value="28" />
+            </kendo:linearGauge-pointer>
             <kendo:linearGauge-scale minorUnit="2" majorUnit="20" min="-40" max="60">
                 <kendo:linearGauge-scale-ranges>
                     <kendo:linearGauge-scale-range from="-40" to="-20" color="#2798df" />

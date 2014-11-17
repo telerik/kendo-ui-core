@@ -12,14 +12,14 @@ import com.kendoui.taglib.BaseTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class PointerBorderTag extends  BaseTag  /* interfaces *//* interfaces */ {
+public class PointerItemTrackBorderTag extends  BaseTag  /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
 
-        PointerTag parent = (PointerTag)findParentWithClass(PointerTag.class);
+        PointerItemTrackTag parent = (PointerItemTrackTag)findParentWithClass(PointerItemTrackTag.class);
 
 
         parent.setBorder(this);
@@ -48,7 +48,7 @@ public class PointerBorderTag extends  BaseTag  /* interfaces *//* interfaces */
 //>> Attributes
 
     public static String tagName() {
-        return "linearGauge-pointer-border";
+        return "linearGauge-pointerItem-track-border";
     }
 
     public java.lang.String getColor() {

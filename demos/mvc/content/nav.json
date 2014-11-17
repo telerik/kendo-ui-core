@@ -8319,8 +8319,7 @@
         "meta": {
             "kendo-ui": "This example shows how easily you can configure the Linear gauge to use multiple pointers.",
             "aspnet-mvc": "This example shows how easily you can configure the ASP.NET MVC Linear gauge to use multiple pointers."
-        },
-        "packages": ["!jsp"]
+        }
       }
     ],
     "category": "Data Visualization"
@@ -8384,8 +8383,7 @@
         "meta": {
             "kendo-ui": "This example shows how easily you can configure the radial gauge to use multiple pointers.",
             "aspnet-mvc": "This example shows how easily you can configure the ASP.NET MVC radial gauge to use multiple pointers."
-        },
-        "packages": ["!jsp"]
+        }
       },
       {
         "text": "MVVM",
