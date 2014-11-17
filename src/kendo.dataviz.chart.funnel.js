@@ -355,7 +355,6 @@ var __meta__ = {
             segment.value = value;
             segment.id = uniqueId();
             segment.options.index = segmentOptions.index;
-            segment.enableDiscovery();
         },
 
         options: {

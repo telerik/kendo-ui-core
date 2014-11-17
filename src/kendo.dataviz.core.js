@@ -1540,8 +1540,6 @@ var __meta__ = {
             TextBox.fn.init.call(label, text,
                 deepExtend({ id: uniqueId() }, options)
             );
-
-            label.enableDiscovery();
         },
 
         click: function(widget, e) {
@@ -2225,7 +2223,6 @@ var __meta__ = {
             var note = this;
 
             BoxElement.fn.init.call(note, options);
-            note.enableDiscovery();
             note.value = value;
             note.text = text;
             note.dataItem = dataItem;

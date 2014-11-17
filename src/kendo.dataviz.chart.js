@@ -1771,8 +1771,6 @@ var __meta__ = {
             item.createContainer();
             item.createMarker();
             item.createLabel();
-
-            item.enableDiscovery();
         },
 
         createContainer: function() {
@@ -3036,7 +3034,6 @@ var __meta__ = {
             bar.aboveAxis = valueOrDefault(bar.options.aboveAxis, true);
             bar.value = value;
             bar.id = uniqueId();
-            bar.enableDiscovery();
         },
 
         defaults: {
@@ -4926,8 +4923,6 @@ var __meta__ = {
             segment.series = series;
             segment.seriesIx = seriesIx;
             segment.id = uniqueId();
-
-            segment.enableDiscovery();
         },
 
         options: {
@@ -5069,14 +5064,6 @@ var __meta__ = {
     };
 
     var LineChart = CategoricalChart.extend({
-        init: function(plotArea, options) {
-            var chart = this;
-
-            chart.enableDiscovery();
-
-            CategoricalChart.fn.init.call(chart, plotArea, options);
-        },
-
         render: function() {
             var chart = this;
 
@@ -6528,7 +6515,6 @@ var __meta__ = {
             ChartElement.fn.init.call(point, options);
             point.value = value;
             point.id = uniqueId();
-            point.enableDiscovery();
 
             point.createNote();
         },
@@ -6743,7 +6729,6 @@ var __meta__ = {
             ChartElement.fn.init.call(segment, options);
 
             segment.id = uniqueId();
-            segment.enableDiscovery();
         },
 
         options: {
@@ -8015,7 +8000,6 @@ var __meta__ = {
             plotArea.crosshairs = [];
 
             plotArea.id = uniqueId();
-            plotArea.enableDiscovery();
 
             plotArea.createPanes();
             plotArea.render();
