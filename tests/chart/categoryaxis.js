@@ -1084,7 +1084,7 @@
         });
 
         test("renders box", function() {
-             sameRectPath(plotBands, [39, 9, 292.666, 573], TOLERANCE);
+            sameRectPath(plotBands, [39, 9, 292.666, 573], TOLERANCE);
         });
 
         test("renders color", function() {

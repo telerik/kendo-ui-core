@@ -1,14 +1,12 @@
 (function() {
-    return;
 
     var dataviz = kendo.dataviz,
-        getElement = dataviz.getElement,
+        draw = kendo.drawing,
         Box2D = dataviz.Box2D,
         NumericAxis,
         numericAxis,
         gridLayout,
         chartBox = new Box2D(0, 0, 800, 600),
-        view,
         COORDINATE_LIMIT = 100000,
         TOLERANCE = 1.5;
 
@@ -21,9 +19,38 @@
         }
     });
 
+    function getBackground() {
+         return numericAxis._backgroundPath;
+    }
+
+    function getLine() {
+        return numericAxis._lineGroup.children[0];
+    }
+
+    function getTicks() {
+        return numericAxis._lineGroup.children.slice(1);
+    }
+
+    function getAxisTextBoxes() {
+        return $.map(numericAxis.labels, function(item) {
+            return item.visual;
+        });
+    }
+
+    function getAxisTexts() {
+        return $.map(getAxisTextBoxes(), function(item) {
+            return dataviz.last(item.children);
+        });
+    }
+
+    function createNumericAxis(options) {
+        numericAxis = new NumericAxis(0, 1, options || {});
+        numericAxis.reflow(chartBox);
+        numericAxis.renderVisual();
+    }
+
     function moduleSetup() {
         numericAxis = new NumericAxis(0, 1, {});
-        view = new ViewStub();
     }
 
     function moduleTeardown() {
@@ -398,54 +425,33 @@
         });
 
         // ------------------------------------------------------------
-        module("Numeric Axis / Configuration / Labels", {
-            setup: moduleSetup,
-            teardown: moduleTeardown
-        });
+        module("Numeric Axis / Configuration / Labels", {});
 
         test("labels can be hidden", function() {
-            numericAxis = new NumericAxis(0, 1, { labels: { visible: false } });
+            createNumericAxis({ labels: { visible: false } });
             equal(numericAxis.labels.length, 0);
         });
 
         test("labels have rotation angle", 1, function() {
-            numericAxis = new NumericAxis(0, 1, { labels: { rotation: 42.5 } });
+            createNumericAxis({ labels: { rotation: 42.5 } });
 
             equal(numericAxis.labels[0].options.rotation, 42.5);
         });
 
         test("creates labels with full format", 1, function() {
-            numericAxis = new NumericAxis(0, 1, { labels: { format: "{0:C}"} });
-            numericAxis.reflow(chartBox);
-            numericAxis.getViewElements(view);
-
-            deepEqual($.map(view.log.text, function(text) { return text.content }),
-                 ["$0.00", "$0.20", "$0.40", "$0.60", "$0.80", "$1.00", "$1.20"]);
+            createNumericAxis({ labels: { format: "{0:C}"} });
+            equalTexts(getAxisTexts(), ["$0.00", "$0.20", "$0.40", "$0.60", "$0.80", "$1.00", "$1.20"]);
         });
 
         test("creates labels with simple format", 1, function() {
-            numericAxis = new NumericAxis(0, 1, { labels: { format: "C"} });
-            numericAxis.reflow(chartBox);
-            numericAxis.getViewElements(view);
-
-            deepEqual($.map(view.log.text, function(text) { return text.content }),
-                 ["$0.00", "$0.20", "$0.40", "$0.60", "$0.80", "$1.00", "$1.20"]);
+            createNumericAxis({ labels: { format: "C"} });
+            equalTexts(getAxisTexts(), ["$0.00", "$0.20", "$0.40", "$0.60", "$0.80", "$1.00", "$1.20"]);
         });
 
         test("labels have set zIndex", 1, function() {
-            numericAxis = new NumericAxis(0, 1, { zIndex: 2 });
-            numericAxis.reflow(chartBox);
-            numericAxis.getViewElements(view);
+            createNumericAxis({ zIndex: 2 });
 
-            equal(view.log.text[0].style.zIndex, 2);
-        });
-
-        test("Label id is not assigned to the TextBox prototype", function() {
-            numericAxis = new NumericAxis(0, 1, {});
-            numericAxis.reflow(chartBox);
-            numericAxis.getViewElements(view);
-
-            ok(!kendo.dataviz.TextBox.fn.options.id);
+            equal(getAxisTextBoxes()[0].options.zIndex, 2);
         });
 
     })();
@@ -460,582 +466,411 @@
             MARGIN = PADDING = 5;
 
         // ------------------------------------------------------------
-        module("Numeric Axis / Vertical / Rendering", {
-            setup: function() {
-                moduleSetup();
-
-                numericAxis.reflow(chartBox);
-            },
-            teardown: moduleTeardown
-        });
+        module("Numeric Axis / Vertical / Rendering", {});
 
         test("creates axis line", function() {
-            numericAxis.getViewElements(view);
+            var expectedLine = draw.Path.fromPoints([[MAX_LABEL_WIDTH + MARGIN, chartBox.y1 + LABEL_HEIGHT / 2],
+                [MAX_LABEL_WIDTH + MARGIN, chartBox.y2 - LABEL_HEIGHT / 2]]);
+            dataviz.alignPathToPixel(expectedLine);
+            createNumericAxis();
 
-            sameBox(view.log.line[0], new Box2D(
-                    MAX_LABEL_WIDTH + MARGIN, chartBox.y1 + LABEL_HEIGHT / 2,
-                    MAX_LABEL_WIDTH + MARGIN, chartBox.y2 - LABEL_HEIGHT / 2),
-                    TOLERANCE
-            );
+            sameLinePath(getLine(), expectedLine, TOLERANCE);
         });
 
         test("creates background box", function() {
-            numericAxis = new NumericAxis(0, 1, { background: "red" });
-            numericAxis.reflow(chartBox);
-            numericAxis.getViewElements(view);
+            createNumericAxis({ background: "red" });
 
-            var rect = view.log.rect[0];
-            var box = numericAxis.box;
+            var rect = getBackground();
+            var box = draw.Path.fromRect(numericAxis.box.toRect())
 
-            close(rect.x1, box.x1, TOLERANCE);
-            close(rect.y1, box.y1, TOLERANCE);
-            close(rect.x2, box.x2, TOLERANCE);
-            close(rect.y2, box.y2, TOLERANCE);
+            sameLinePath(rect, box, TOLERANCE);
         });
 
         test("should not create axis line if visible is false", function() {
-            numericAxis = new NumericAxis(0, 1, { line: { visible: false }});
-            numericAxis.reflow(chartBox);
-
-            numericAxis.getViewElements(view);
-            ok(view.log.line.length == 0);
+            createNumericAxis({ line: { visible: false }});
+            ok(!numericAxis._lineGroup);
         });
 
         test("should not render axis if visible is false", function() {
-            numericAxis = new NumericAxis(0, 1, { visible: false });
-            numericAxis.reflow(chartBox);
-
-            numericAxis.getViewElements(view);
-            ok(view.log.line.length == 0 && view.log.line.length == 0);
+            createNumericAxis({ visible: false });
+            ok(!numericAxis.visual);
         });
 
         test("creates axis line when max is not multiple of majorUnit", function() {
-            numericAxis = new NumericAxis(0, 1, { min: 0, max: 1, majorUnit: .3 });
-            numericAxis.reflow(chartBox);
+            var expectedLine = draw.Path.fromPoints([[MAX_LABEL_WIDTH + MARGIN, chartBox.y1 + LABEL_HEIGHT / 2],
+                [MAX_LABEL_WIDTH + MARGIN, chartBox.y2 - LABEL_HEIGHT / 2]]);
+            dataviz.alignPathToPixel(expectedLine);
+            createNumericAxis({ min: 0, max: 1, majorUnit: .3 });
 
-            numericAxis.getViewElements(view);
-
-            sameBox(view.log.line[0], new Box2D(
-                    MAX_LABEL_WIDTH + MARGIN, chartBox.y1 + LABEL_HEIGHT / 2,
-                    MAX_LABEL_WIDTH + MARGIN, chartBox.y2 - LABEL_HEIGHT / 2),
-                    TOLERANCE
-            );
+            sameLinePath(getLine(), expectedLine, TOLERANCE);
         });
 
         test("creates axis with dash type", function() {
-            numericAxis = new NumericAxis(0, 1, {
+            createNumericAxis({
                 line: {
                     dashType: "dot"
                 }
             });
-            numericAxis.reflow(chartBox);
-
-            numericAxis.getViewElements(view);
-            equal(view.log.line[0].options.dashType, "dot");
+            equal(getLine().options.stroke.dashType, "dot");
         });
 
         test("creates labels", function() {
-            numericAxis.getViewElements(view);
+            createNumericAxis();
 
-            deepEqual($.map(view.log.text, function(text) { return text.content }),
-                 ["0", "0.2", "0.4", "0.6", "0.8", "1", "1.2"]);
+            equalTexts(getAxisTexts(), ["0", "0.2", "0.4", "0.6", "0.8", "1", "1.2"]);
         });
 
         test("labels have set color", 1, function() {
-            numericAxis = new NumericAxis(0, 1, {
+            createNumericAxis({
                 labels: {
                     color: "#f00"
                 }
             });
-            numericAxis.reflow(chartBox);
 
-            numericAxis.getViewElements(view);
-
-            equal(view.log.text[0].style.color, "#f00");
+            equal(getAxisTexts()[0].options.fill.color, "#f00");
         });
 
         test("labels have set background", 1, function() {
-            numericAxis = new NumericAxis(0, 1, {
+            createNumericAxis({
                 labels: {
                     background: "#f0f"
                 }
             });
-            numericAxis.reflow(chartBox);
 
-            numericAxis.getViewElements(view);
-
-            equal(view.log.rect[0].style.fill, "#f0f");
+            equal(getAxisTextBoxes()[0].children[0].options.fill.color, "#f0f");
         });
 
         test("labels have set template", 1, function() {
-            numericAxis = new NumericAxis(0, 1, {
+            createNumericAxis({
                 labels: {
                     template: "|${ data.value }|"
                 }
             });
 
-            numericAxis.reflow(chartBox);
-            numericAxis.getViewElements(view);
-
-            equal(view.log.text[0].content, "|0|");
+            equal(getAxisTexts()[0].content(), "|0|");
         });
 
         test("labels are distributed vertically", function() {
-            numericAxis.getViewElements(view);
-
-            arrayClose($.map(view.log.text, function(text) { return text.style.y }),
-                 [582, 485, 388, 291, 194, 97, 0], TOLERANCE);
+            createNumericAxis();
+            closeTextPosition("y", getAxisTexts(), [582, 485, 388, 291, 194, 97, 0], TOLERANCE);
         });
 
         test("labels are distributed vertically in reverse", function() {
-            numericAxis = new NumericAxis(0, 1, {
+            createNumericAxis({
                 reverse: true
             });
 
-            numericAxis.reflow(chartBox);
-            numericAxis.getViewElements(view);
-
-            arrayClose($.map(view.log.text, function(text) { return text.style.y }),
-                 [582, 485, 388, 291, 194, 97, 0].reverse(), TOLERANCE);
+            closeTextPosition("y", getAxisTexts(), [582, 485, 388, 291, 194, 97, 0].reverse(), TOLERANCE);
         });
 
         test("labels are aligned right", function() {
-            numericAxis.getViewElements(view);
-
-            arrayClose($.map(view.log.text, function(text) { return text.style.x }),
-                 [16, 0, 0, 0, 0, 16, 0]);
+            createNumericAxis();
+            closeTextPosition("x", getAxisTexts(), [16, 0, 0, 0, 0, 16, 0], TOLERANCE);
         });
 
         test("labels are aligned right with margin and padding", function() {
-            numericAxis = new NumericAxis(0, 1, {
+            createNumericAxis({
                 labels: {
                     margin: MARGIN,
                     padding: PADDING
                 }
             });
-            numericAxis.reflow(chartBox);
-            numericAxis.getViewElements(view);
 
-            arrayClose($.map(view.log.text, function(text) { return text.style.x }),
-                 [ 26, 10, 10, 10, 10, 26, 10 ]);
+            closeTextPosition("x", getAxisTexts(), [ 26, 10, 10, 10, 10, 26, 10 ], TOLERANCE);
         });
 
         test("major ticks are distributed vertically", function() {
-            numericAxis.getViewElements(view);
+            createNumericAxis();
 
-            view.log.line.shift();
-
-            arrayClose($.map(view.log.line, function(line) { return line.y1; }),
+            arrayClose($.map(getTicks(), function(line) {return line.segments[0].anchor().y;}),
                  [591, 494, 397, 300, 203, 106, 9], TOLERANCE);
         });
 
         test("excess space is allocated after last major tick", function() {
-            numericAxis = new NumericAxis(0, 1, {
+            createNumericAxis({
                 max: 1.2,
                 majorUnit: 0.5
             });
-
-            numericAxis.reflow(chartBox);
-            numericAxis.getViewElements(view);
-
-            view.log.line.shift();
-
-            arrayClose($.map(view.log.line, function(line) { return line.y1; }),
+            arrayClose($.map(getTicks(), function(line) {return line.segments[0].anchor().y;}),
                  [591, 348.5, 106], TOLERANCE);
         });
 
         test("major ticks are distributed vertically in reverse", function() {
-            numericAxis = new NumericAxis(0, 1, {
+            createNumericAxis({
                 reverse: true
             });
 
-            numericAxis.reflow(chartBox);
-            numericAxis.getViewElements(view);
-
-            view.log.line.shift();
-
-            arrayClose($.map(view.log.line, function(line) { return line.y1; }),
+            arrayClose($.map(getTicks(), function(line) {return line.segments[0].anchor().y;}),
                  [591, 494, 397, 300, 203, 106, 9].reverse(), TOLERANCE);
         });
 
         test("excess space is allocated after last major tick in reverse", function() {
-            numericAxis = new NumericAxis(0, 1, {
+            createNumericAxis({
                 reverse: true,
                 max: 1.2,
                 majorUnit: 0.5
             });
-
-            numericAxis.reflow(chartBox);
-            numericAxis.getViewElements(view);
-
-            view.log.line.shift();
-
-            arrayClose($.map(view.log.line, function(line) { return line.y1; }),
+            arrayClose($.map(getTicks(), function(line) {return line.segments[0].anchor().y;}),
                  [9, 251.5, 494], TOLERANCE);
         });
 
         test("minor ticks can be disabled", function() {
-            numericAxis.options.line.width = 0;
-            numericAxis.getViewElements(view);
+            createNumericAxis({
+                line: {
+                    width: 0
+                }
+            });
 
-            equal(view.log.line.length, 0);
+            ok(!numericAxis._lineGroup);
         });
 
         test("minor ticks are distributed vertically", function() {
-            numericAxis = new NumericAxis(0, 1, {
+            createNumericAxis({
                 majorTicks: { visible: false },
                 minorTicks: { visible: true }
             });
-            numericAxis.reflow(chartBox);
-            numericAxis.getViewElements(view);
-
-            view.log.line.shift();
-
-            arrayClose($.map(view.log.line, function(line) { return line.y1; }),
-                [591, 571.6, 552.2, 532.8, 513.4,
+            arrayClose($.map(getTicks(), function(line) {return line.segments[0].anchor().y;}),
+                 [591, 571.6, 552.2, 532.8, 513.4,
                 494, 474.6, 455.2, 435.8, 416.4,
                 397, 377.6, 358.2, 338.8, 319.4,
                 300, 280.6, 261.2, 241.8, 222.4,
                 203, 183.6, 164.2, 144.8, 125.4,
                 106, 86.6, 67.2, 47.8, 28.4, 9], TOLERANCE);
-
         });
 
         test("minor ticks are distributed vertically in reverse", function() {
-            numericAxis = new NumericAxis(0, 1, {
+            createNumericAxis({
                 reverse: true,
                 majorTicks: { visible: false },
                 minorTicks: { visible: true }
             });
-
-            numericAxis.reflow(chartBox);
-            numericAxis.getViewElements(view);
-
-            view.log.line.shift();
-
-            arrayClose($.map(view.log.line, function(line) { return line.y1; }),
-                [591, 571.6, 552.2, 532.8, 513.4,
+            arrayClose($.map(getTicks(), function(line) {return line.segments[0].anchor().y;}),
+                 [591, 571.6, 552.2, 532.8, 513.4,
                 494, 474.6, 455.2, 435.8, 416.4,
                 397, 377.6, 358.2, 338.8, 319.4,
                 300, 280.6, 261.2, 241.8, 222.4,
                 203, 183.6, 164.2, 144.8, 125.4,
                 106, 86.6, 67.2, 47.8, 28.4, 9].reverse(), TOLERANCE);
-
-        });
-
-        test("major ticks can be disabled", function() {
-            numericAxis.options.line.width = 0;
-            numericAxis.getViewElements(view);
-
-            equal(view.log.line.length, 0);
         });
 
         test("minor ticks are rendered after last major tick", function() {
-            numericAxis = new NumericAxis(0, 1, {
+            createNumericAxis({
                 min: 0,
                 max: 0.3,
                 majorUnit: 0.2,
                 majorTicks: { visible: false },
                 minorTicks: { visible: true }
             });
-            numericAxis.reflow(chartBox);
-            numericAxis.getViewElements(view);
-
-            view.log.line.shift();
-
-            arrayClose($.map(view.log.line, function(line) { return line.y1; }),
+            arrayClose($.map(getTicks(), function(line) {return line.segments[0].anchor().y;}),
                 [591, 513.4, 435.8, 358.2, 280.6, 203, 125.4, 47.8], TOLERANCE);
         });
 
         test("major ticks are aligned to axis", 7, function() {
-            numericAxis.getViewElements(view);
-            view.log.line.shift();
-            $.each(view.log.line, function() {
-                    equal(this.x1, 31);
+            createNumericAxis();
+
+            $.each(getTicks(), function() {
+                equal(this.segments[0].anchor().x, 31.5);
             });
         });
 
         test("minor ticks are aligned to axis", 31, function() {
-            numericAxis = new NumericAxis(0, 1, {
+            createNumericAxis({
                 majorTicks: { visible: false },
                 minorTicks: { visible: true }
             });
-            numericAxis.reflow(chartBox);
-            numericAxis.getViewElements(view);
-            view.log.line.shift();
-            $.each(view.log.line, function() {
-                    equal(this.x1, 31);
+            $.each(getTicks(), function() {
+                equal(this.segments[0].anchor().x, 31.5);
             });
         });
 
         test("Returns just one major tick if majorUnit is 0", function() {
-            numericAxis = new NumericAxis(0, 1, { majorUnit: 0 });
-            numericAxis.reflow(chartBox);
-            numericAxis.getViewElements(view);
-            equal(view.log.line.length, 2);
+            createNumericAxis({ majorUnit: 0 });
+            equal(getTicks().length, 1);
         });
 
         // ------------------------------------------------------------
         module("Numeric Axis / Vertical / Label Step / Rendering", {
             setup: function() {
-                moduleSetup();
-
-                numericAxis = new NumericAxis(0, 1, {
+                createNumericAxis({
                     labels: { step: 2 }
                 });
-
-                numericAxis.reflow(chartBox);
-                numericAxis.getViewElements(view);
             },
             teardown: moduleTeardown
         });
 
         test("renders every second label", function() {
-            deepEqual($.map(view.log.text, function(text) { return text.content }),
-                 ["0", "0.4", "0.8", "1.2"]);
+            equalTexts(getAxisTexts(), ["0", "0.4", "0.8", "1.2"]);
         });
 
         test("labels are distributed vertically", function() {
-            arrayClose($.map(view.log.text, function(text) { return text.style.y }),
-                 [582, 388, 194, 0], TOLERANCE);
+            closeTextPosition("y", getAxisTexts(), [582, 388, 194, 0], TOLERANCE);
         });
 
         // ------------------------------------------------------------
         module("Numeric Axis / Vertical / Label Step and skip / Rendering", {
             setup: function() {
-                moduleSetup();
-
-                numericAxis = new NumericAxis(0, 1, {
+                createNumericAxis({
                     labels: { step: 2, skip: 2 }
                 });
-
-                numericAxis.reflow(chartBox);
-                numericAxis.getViewElements(view);
-            },
-            teardown: moduleTeardown
+            }
         });
 
         test("renders every second label, starting from the third", function() {
-            deepEqual($.map(view.log.text, function(text) { return text.content }),
-                 ["0.4", "0.8", "1.2"]);
+            equalTexts(getAxisTexts(), ["0.4", "0.8", "1.2"]);
         });
 
         test("labels are distributed vertically, starting from the third", function() {
-            arrayClose($.map(view.log.text, function(text) { return text.style.y }),
-                 [388, 194, 0], TOLERANCE);
+            closeTextPosition("y", getAxisTexts(), [388, 194, 0], TOLERANCE);
         });
 
         // ------------------------------------------------------------
         module("Numeric Axis / Vertical / Mirrored / Rendering", {
             setup: function() {
-                moduleSetup();
-
-                numericAxis.options.labels.mirror = true;
-                numericAxis.reflow(chartBox);
-            },
-            teardown: moduleTeardown
+                createNumericAxis({
+                    labels: {
+                        mirror: true
+                    }
+                });
+            }
         });
 
         test("labels are aligned left", 7, function() {
-            numericAxis.getViewElements(view);
-
-            $.each(view.log.text, function() { equal(this.style.x, 9); });
+            closeTextPosition("x", getAxisTexts(), 9, TOLERANCE);
         });
 
         test("major ticks are aligned to axis", 7, function() {
-            numericAxis.getViewElements(view);
-            view.log.line.shift();
-            $.each(view.log.line, function() {
-                    equal(this.x1, 0);
+            $.each(getTicks(), function() {
+                equal(this.segments[0].anchor().x, 0.5);
             });
         });
 
         test("minor ticks are aligned to axis", 31, function() {
-            numericAxis = new NumericAxis(0, 1, {
+            createNumericAxis({
                 majorTicks: { visible: false },
                 minorTicks: { visible: true },
                 labels: {
                     mirror: true
                 }
             });
-            numericAxis.reflow(chartBox);
-            numericAxis.getViewElements(view);
-            view.log.line.shift();
-            $.each(view.log.line, function() {
-                    equal(this.x1, 0);
+            $.each(getTicks(), function() {
+                equal(this.segments[0].anchor().x, 0.5);
             });
         });
 
         // ------------------------------------------------------------
-        module("View Rendering / Horizontal", {
+        module("Rendering / Horizontal", {
             setup: function() {
-                moduleSetup();
-
-                numericAxis = new NumericAxis(0, 1, { vertical: false });
-                numericAxis.reflow(chartBox);
-            },
-            teardown: moduleTeardown
+                createNumericAxis({ vertical: false });
+            }
         });
 
         test("creates axis line", function() {
-            numericAxis.getViewElements(view);
+            var expectedLine = draw.Path.fromPoints([[chartBox.x1 + (FIRST_LABEL_WIDTH / 2), chartBox.y1],
+                [chartBox.x2 - (LAST_LABEL_WIDTH / 2), chartBox.y1]]);
+            dataviz.alignPathToPixel(expectedLine);
 
-            sameBox(view.log.line[0], new Box2D(
-                    chartBox.x1 + (FIRST_LABEL_WIDTH / 2), chartBox.y1,
-                    chartBox.x2 - (LAST_LABEL_WIDTH / 2), chartBox.y1),
-                    TOLERANCE
-            );
+            sameLinePath(getLine(), expectedLine, TOLERANCE);
         });
 
         test("should not create axis line if visible is false", function() {
-            numericAxis = new NumericAxis(0, 1, { line: { visible: false }, vertical: false});
-            numericAxis.reflow(chartBox);
+            createNumericAxis({ line: { visible: false }, vertical: false});
 
-            numericAxis.getViewElements(view);
-            ok(view.log.line.length == 0);
+            ok(!numericAxis._lineGroup);
         });
 
         test("should not render axis if visible is false", function() {
-            numericAxis = new NumericAxis(0, 1, { visible: false });
-            numericAxis.reflow(chartBox);
-
-            numericAxis.getViewElements(view);
-            ok(view.log.line.length == 0 && view.log.line.length == 0);
+            createNumericAxis({ visible: false, vertical: false });
+            ok(!numericAxis._lineGroup);
         });
 
         test("creates labels", function() {
-            numericAxis.getViewElements(view);
-
-            deepEqual($.map(view.log.text, function(text) { return text.content }),
-                 ["0", "0.2", "0.4", "0.6", "0.8", "1", "1.2"]);
+            equalTexts(getAxisTexts(), ["0", "0.2", "0.4", "0.6", "0.8", "1", "1.2"]);
         });
 
         test("labels are distributed horizontally", function() {
-            numericAxis.getViewElements(view);
-
-            arrayClose($.map(view.log.text, function(text) { return text.style.x }),
-                 [0, 122.333, 252.667, 383, 513.333, 651.667, 774], TOLERANCE);
+            closeTextPosition("x", getAxisTexts(), [0, 122.333, 252.667, 383, 513.333, 651.667, 774], TOLERANCE);
         });
 
         test("labels are distributed horizontally in reverse", function() {
-            numericAxis = new NumericAxis(0, 1, { vertical: false, reverse: true });
-            numericAxis.reflow(chartBox);
-            numericAxis.getViewElements(view);
-
-            arrayClose($.map(view.log.text, function(text) { return text.style.x }),
-                 [782, 644, 513, 383, 253, 130, -8], TOLERANCE);
+            createNumericAxis({ vertical: false, reverse: true });
+            closeTextPosition("x", getAxisTexts(), [782, 644, 513, 383, 253, 130, -8], TOLERANCE);
         });
 
         test("labels are aligned top", 7, function() {
-            numericAxis.getViewElements(view);
-
-            $.each(view.log.text, function() {
-                    equal(this.style.y, MAJOR_TICK_HEIGHT + MARGIN);
-            })
+            closeTextPosition("y", getAxisTexts(), MAJOR_TICK_HEIGHT + MARGIN);
         });
 
         test("labels are aligned top", 7, function() {
-            numericAxis = new NumericAxis(0, 1, {
+            createNumericAxis({
                 vertical: false,
                 labels: {
                     margin: MARGIN,
                     padding: PADDING
                 }
             });
-            numericAxis.reflow(chartBox);
-            numericAxis.getViewElements(view);
 
-            $.each(view.log.text, function() {
-                    equal(this.style.y, MAJOR_TICK_HEIGHT + 2 * MARGIN + PADDING);
-            })
+            closeTextPosition("y", getAxisTexts(), MAJOR_TICK_HEIGHT + 2 * MARGIN + PADDING);
         });
 
         test("major ticks are distributed horizontally", function() {
-            numericAxis.getViewElements(view);
-            view.log.line.shift();
-            arrayClose($.map(view.log.line, function(line) { return line.x1; }),
+            arrayClose($.map(getTicks(), function(line) { return line.segments[0].anchor().x; }),
                  [5, 135, 265, 396, 526, 656, 787], TOLERANCE);
         });
 
         test("excess space is allocated after last major tick", function() {
-            numericAxis = new NumericAxis(0, 1, {
+            createNumericAxis({
                 vertical: false,
                 max: 1.2,
                 majorUnit: 0.5
             });
-
-            numericAxis.reflow(chartBox);
-            numericAxis.getViewElements(view);
-
-            view.log.line.shift();
-
-            arrayClose($.map(view.log.line, function(line) { return line.x1; }),
+            arrayClose($.map(getTicks(), function(line) { return line.segments[0].anchor().x; }),
                  [5, 334, 663], TOLERANCE);
         });
 
         test("major ticks are distributed horizontally in reverse", function() {
-            numericAxis = new NumericAxis(0, 1, { vertical: false, reverse: true });
-            numericAxis.reflow(chartBox);
-            numericAxis.getViewElements(view);
-
-            view.log.line.shift();
-            arrayClose($.map(view.log.line, function(line) { return line.x1; }),
+            createNumericAxis({ vertical: false, reverse: true });
+            arrayClose($.map(getTicks(), function(line) { return line.segments[0].anchor().x; }),
                  [5, 135, 265, 396, 526, 656, 787].reverse(), TOLERANCE);
         });
 
         test("excess space is allocated after last major tick in reverse", function() {
-            numericAxis = new NumericAxis(0, 1, {
+            createNumericAxis({
                 vertical: false,
                 reverse: true,
                 max: 1.2,
                 majorUnit: 0.5
             });
-
-            numericAxis.reflow(chartBox);
-            numericAxis.getViewElements(view);
-
-            view.log.line.shift();
-
-            arrayClose($.map(view.log.line, function(line) { return line.x1; }),
+            arrayClose($.map(getTicks(), function(line) { return line.segments[0].anchor().x; }),
                  [795, 465.833, 136.667], TOLERANCE);
         });
 
         test("major ticks are vertical", 7, function() {
-            numericAxis.getViewElements(view);
-            view.log.line.shift();
-            $.each(view.log.line, function() {
-                    equal(this.x2, this.x1);
+            $.each(getTicks(), function() {
+                equal(this.segments[1].anchor().x, this.segments[0].anchor().x);
             });
         });
 
         test("major ticks are aligned to axis", 7, function() {
-            numericAxis.getViewElements(view);
-            view.log.line.shift();
-            $.each(view.log.line, function() {
-                    equal(this.y1, 0);
+            $.each(getTicks(), function() {
+                equal(this.segments[0].anchor().y, 0.5);
             });
         });
 
         test("major ticks are of predefined height", 7, function() {
-            numericAxis.getViewElements(view);
-            view.log.line.shift();
-            $.each(view.log.line, function() {
-                    equal(this.y2 - this.y1, MAJOR_TICK_HEIGHT);
+            $.each(getTicks(), function() {
+                equal(this.segments[1].anchor().y - this.segments[0].anchor().y, MAJOR_TICK_HEIGHT);
             });
         });
 
         test("minor ticks are distributed horizontally", function() {
-            numericAxis = new NumericAxis(0, 1, {
+            createNumericAxis({
                 vertical: false,
                 reverse: true,
                 majorTicks: { visible: false },
                 minorTicks: { visible: true }
             });
-            numericAxis.reflow(chartBox);
-            numericAxis.getViewElements(view);
 
-            view.log.line.shift();
-            arrayClose($.map(view.log.line, function(line) { return line.x1; }),
+            arrayClose($.map(getTicks(), function(line) { return line.segments[0].anchor().x; }),
                 [5, 31.067, 57.133, 83.2, 109.267, 135.333,
                 161.4, 187.467, 213.533, 239.6, 265.667,
                 291.733, 317.8, 343.867, 369.933, 396,
@@ -1045,15 +880,12 @@
         });
 
         test("minor ticks are distributed horizontally in reverse", function() {
-            numericAxis = new NumericAxis(0, 1, {
+            createNumericAxis({
                 majorTicks: { visible: false },
                 minorTicks: { visible: true },
                 vertical: false
             });
-            numericAxis.reflow(chartBox);
-            numericAxis.getViewElements(view);
-            view.log.line.shift();
-            arrayClose($.map(view.log.line, function(line) { return line.x1; }),
+            arrayClose($.map(getTicks(), function(line) { return line.segments[0].anchor().x; }),
                 [5, 31.067, 57.133, 83.2, 109.267, 135.333,
                 161.4, 187.467, 213.533, 239.6, 265.667,
                 291.733, 317.8, 343.867, 369.933, 396,
@@ -1063,7 +895,7 @@
         });
 
         test("minor ticks are rendered after last major tick", function() {
-            numericAxis = new NumericAxis(0, 1, {
+            createNumericAxis({
                 vertical: false,
                 min: 0,
                 max: 0.3,
@@ -1071,144 +903,106 @@
                 majorTicks: { visible: false },
                 minorTicks: { visible: true }
             });
-            numericAxis.reflow(chartBox);
-            numericAxis.getViewElements(view);
-
-            view.log.line.shift();
-
-            arrayClose($.map(view.log.line, function(line) { return line.x1; }),
+            arrayClose($.map(getTicks(), function(line) { return line.segments[0].anchor().x; }),
                 [5, 109.267, 213.533, 317.8, 422.067, 526.333, 630.6, 734.867], TOLERANCE);
         });
 
         test("minor ticks are vertical", 31, function() {
-            numericAxis = new NumericAxis(0, 1, {
+            createNumericAxis({
                 majorTicks: { visible: false },
                 minorTicks: { visible: true },
                 vertical: false
             });
-            numericAxis.reflow(chartBox);
-            numericAxis.getViewElements(view);
-            view.log.line.shift();
-            $.each(view.log.line, function() {
-                    equal(this.x2, this.x1);
+
+            $.each(getTicks(), function() {
+                equal(this.segments[0].anchor().x, this.segments[1].anchor().x);
             });
         });
 
         test("minor ticks are aligned to axis", 31, function() {
-            numericAxis = new NumericAxis(0, 1, {
+            createNumericAxis({
                 majorTicks: { visible: false },
                 minorTicks: { visible: true },
                 vertical: false
             });
-            numericAxis.reflow(chartBox);
-            numericAxis.getViewElements(view);
-            view.log.line.shift();
-            $.each(view.log.line, function() {
-                    equal(this.y1, 0);
+            $.each(getTicks(), function() {
+                equal(this.segments[0].anchor().y, 0.5);
             });
         });
 
         test("minor ticks are of predefined height", 31, function() {
-            numericAxis = new NumericAxis(0, 1, {
+            createNumericAxis({
                 majorTicks: { visible: false },
                 minorTicks: { visible: true },
                 vertical: false
             });
-            numericAxis.reflow(chartBox);
-            numericAxis.getViewElements(view);
-            view.log.line.shift();
-            $.each(view.log.line, function() {
-                    equal(this.y2 - this.y1, MINOR_TICK_HEIGHT);
+            $.each(getTicks(), function() {
+                equal(this.segments[1].anchor().y - this.segments[0].anchor().y, MINOR_TICK_HEIGHT);
             });
         });
 
         // ------------------------------------------------------------
         module("Numeric Axis / Horizontal / Label Step / Rendering", {
             setup: function() {
-                moduleSetup();
-
-                numericAxis = new NumericAxis(0, 1, {
+                createNumericAxis({
                     labels: { step: 2 },
                     vertical: false
                 });
-
-                numericAxis.reflow(chartBox);
-                numericAxis.getViewElements(view);
-            },
-            teardown: moduleTeardown
+            }
         });
 
         test("renders every second label", function() {
-            deepEqual($.map(view.log.text, function(text) { return text.content }),
-                 ["0", "0.4", "0.8", "1.2"]);
+            equalTexts(getAxisTexts(), ["0", "0.4", "0.8", "1.2"]);
         });
 
         test("labels are distributed horizontally", function() {
-            arrayClose($.map(view.log.text, function(text) { return text.style.x }),
-                 [0, 253, 513, 774], TOLERANCE);
+            closeTextPosition("x", getAxisTexts(), [0, 253, 513, 774], TOLERANCE);
         });
 
         // ------------------------------------------------------------
         module("Numeric Axis / Horizontal / Label Step and skip / Rendering", {
             setup: function() {
-                moduleSetup();
-
-                numericAxis = new NumericAxis(0, 1, {
+                createNumericAxis({
                     labels: { step: 2, skip: 2 },
                     vertical: false
                 });
-
-                numericAxis.reflow(chartBox);
-                numericAxis.getViewElements(view);
             },
             teardown: moduleTeardown
         });
 
         test("renders every second label, starting from the third label", function() {
-            deepEqual($.map(view.log.text, function(text) { return text.content }),
-                 ["0.4", "0.8", "1.2"]);
+            equalTexts(getAxisTexts(), ["0.4", "0.8", "1.2"]);
         });
 
         test("labels are distributed horizontally, starting from the thrid label", function() {
-            arrayClose($.map(view.log.text, function(text) { return text.style.x }),
-                 [258, 516, 774], TOLERANCE);
+            closeTextPosition("x", getAxisTexts(), [258, 516, 774], TOLERANCE);
         });
 
         // ------------------------------------------------------------
         module("Numeric Axis / Horizontal / Mirrored / Rendering", {
             setup: function() {
-                moduleSetup();
-
-                numericAxis = new NumericAxis(0, 1, {
+                createNumericAxis({
                     vertical: false,
                     labels: {
                         mirror: true
                     }
                 });
-
-                numericAxis.reflow(chartBox);
             },
             teardown: moduleTeardown
         });
 
         test("labels are aligned bottom", 7, function() {
-            numericAxis.getViewElements(view);
-
-            $.each(view.log.text, function() {
-                    equal(this.style.y, 0);
-            })
+            closeTextPosition("y", getAxisTexts(), 0);
         });
 
         test("major ticks are aligned to axis", 7, function() {
-            numericAxis.getViewElements(view);
-            view.log.line.shift();
-            $.each(view.log.line, function() {
-                    equal(this.y1, 23);
+            $.each(getTicks(), function() {
+                equal(this.segments[0].anchor().y, 23.5);
             });
         });
 
         test("minor ticks are aligned to axis", 31, function() {
-            numericAxis = new NumericAxis(0, 1, {
+            createNumericAxis({
                 majorTicks: { visible: false },
                 minorTicks: { visible: true },
                 vertical: false,
@@ -1216,11 +1010,8 @@
                     mirror: true
                 }
             });
-            numericAxis.reflow(chartBox);
-            numericAxis.getViewElements(view);
-            view.log.line.shift();
-            $.each(view.log.line, function() {
-                    equal(this.y1, 23);
+            $.each(getTicks(), function() {
+                 equal(this.segments[0].anchor().y, 23.5);
             });
         });
 
@@ -1229,22 +1020,19 @@
     (function() {
         module("Slots / Vertical", {
             setup: function() {
-                moduleSetup();
-
-                numericAxis.reflow(chartBox);
-            },
-            teardown: moduleTeardown
+                createNumericAxis();
+            }
         });
 
         test("positions slot for [0, 0.5]", function() {
-            numericAxis = new NumericAxis(0, 1, { });
-            numericAxis.reflow(chartBox);
             var slot = numericAxis.getSlot(0, 0.5);
             arrayClose([slot.y1, slot.y2], [348.5, 591], TOLERANCE);
         });
 
         test("positions slot for [0, 0.5] when reversed", function() {
-            numericAxis.options.reverse = true;
+            createNumericAxis({
+                reverse: true
+            });
             var slot = numericAxis.getSlot(0, 0.5);
             arrayClose([slot.y1, slot.y2], [9, 251], TOLERANCE);
         });
@@ -1599,6 +1387,11 @@
                 data: [0, 1]
             }];
 
+        function getPlotBands(axis) {
+            var axis = plotArea.axisX instanceof dataviz.NumericAxis ? plotArea.axisX : plotArea.axisY;
+            return axis._plotbandGroup;
+        }
+
         function createPlotArea(series, valueAxisOptions) {
             var valueAxis = valueAxisOptions || {
                     plotBands: [{
@@ -1621,60 +1414,55 @@
                 }
             });
 
-            view = new ViewStub();
-
             plotArea.reflow(chartBox);
-            plotArea.getViewElements(view);
+            plotArea.renderVisual();
+            plotBands = getPlotBands().children[0];
         }
 
         // ------------------------------------------------------------
         module("Numeric Axis / Plot Bands / Horizontal", {
             setup: function() {
                 createPlotArea(lineSeriesData);
-                plotBands = view.log.rect[0];
             }
         });
 
         test("renders box", function() {
-            arrayClose([plotBands.x1, plotBands.y1, plotBands.x2, plotBands.y2],
-                 [35, 432, 799, 479], TOLERANCE);
+            sameRectPath(plotBands, [35, 432, 799, 479], TOLERANCE);
         });
 
         test("renders color", function() {
-            equal(plotBands.style.fill, "red");
+            equal(plotBands.options.fill.color, "red");
         });
 
         test("renders opacity", function() {
-            equal(plotBands.style.fillOpacity, 0.5);
+            equal(plotBands.options.fill.opacity, 0.5);
         });
 
         test("renders z index", function() {
-            equal(plotBands.style.zIndex, -1);
+            equal(getPlotBands().options.zIndex, -1);
         });
 
         // ------------------------------------------------------------
         module("Numeric Axis / Plot Bands / Vertical", {
             setup: function() {
                 createPlotArea(barSeriesData);
-                plotBands = view.log.rect[1];
             }
         });
 
         test("renders box", function() {
-            arrayClose([plotBands.x1, plotBands.y1, plotBands.x2, plotBands.y2],
-                 [147, 0, 211, 573], TOLERANCE);
+            sameRectPath(plotBands, [147, 0, 211, 573], TOLERANCE);
         });
 
         test("renders color", function() {
-            equal(plotBands.style.fill, "red");
+            equal(plotBands.options.fill.color, "red");
         });
 
         test("renders opacity", function() {
-            equal(plotBands.style.fillOpacity, 0.5);
+            equal(plotBands.options.fill.opacity, 0.5);
         });
 
         test("renders z index", function() {
-            equal(plotBands.style.zIndex, -1);
+            equal(getPlotBands().options.zIndex, -1);
         });
 
         module("Numeric Axis / Plot Bands / limit", {
@@ -1692,12 +1480,11 @@
                         font: "16px Verdana, sans-serif"
                     }
                 });
-                plotBands = view.log.rect[0];
             }
         });
 
         test("limits plotBands slot", function() {
-            arrayClose([plotBands.y1, plotBands.y2],
+            arrayClose([plotBands.segments[0].anchor().y, plotBands.segments[3].anchor().y],
                  [291, 573], TOLERANCE);
         });
 
@@ -1715,14 +1502,14 @@
                 min: 3
             });
             axis.reflow(chartBox);
-            view = new ViewStub();
 
             plotArea = new dataviz.CategoricalPlotArea([{}], { });
             plotArea.reflow(chartBox);
             axis.plotArea = plotArea;
-            var plotBands = axis.renderPlotBands(view);
+            axis.renderVisual();
 
-            equal(plotBands.length, 0);
+
+            equal(axis._plotbandGroup.children.length, 0);
         });
 
     })();
@@ -1731,6 +1518,8 @@
     (function() {
         var plotArea,
             title,
+            titleTextBox,
+            titleBackground,
             titleBox,
             lineSeriesData = [{
                 name: "Value A",
@@ -1750,6 +1539,7 @@
                         font: "16px Verdana, sans-serif",
                         text: "text",
                         color: "red",
+                        background: "green",
                         opacity: 0.33,
                         position: "center"
                     },
@@ -1765,14 +1555,14 @@
                 }
             }, plotOptions));
 
-            view = new ViewStub();
-
             plotArea.reflow(chartBox);
-            plotArea.getViewElements(view);
-
-            title = $.grep(view.log.text, function(text) {
-                return text.content == "text";
-            })[0];
+            plotArea.renderVisual();
+            numericAxis = plotArea.axisX instanceof dataviz.NumericAxis ? plotArea.axisX : plotArea.axisY;
+            if (numericAxis.title) {
+                titleTextBox = numericAxis.title.visual;
+                titleBackground = titleTextBox.children[0];
+                title = titleTextBox.children[1];
+            }
         }
 
         // ------------------------------------------------------------
@@ -1810,15 +1600,15 @@
         });
 
         test("renders color", function() {
-            equal(title.style.color, "red");
+            equal(title.options.fill.color, "red");
         });
 
         test("renders opacity", function() {
-            equal(title.style.opacity, 0.33);
+            equal(titleBackground.options.fill.opacity, 0.33);
         });
 
         test("renders zIndex", function() {
-            equal(title.style.zIndex, 1);
+            equal(titleTextBox.options.zIndex, 1);
         });
 
         test("hidden when visible is false", function() {
@@ -1901,15 +1691,15 @@
         });
 
         test("renders color", function() {
-            equal(title.style.color, "red");
+            equal(title.options.fill.color, "red");
         });
 
         test("renders opacity", function() {
-            equal(title.style.opacity, 0.33);
+            equal(titleBackground.options.fill.opacity, 0.33);
         });
 
         test("renders zIndex", function() {
-            equal(title.style.zIndex, 1);
+            equal(titleTextBox.options.zIndex, 1);
         });
 
         // ------------------------------------------------------------
@@ -1958,6 +1748,10 @@
         var chart,
             plotArea;
 
+        function getElement(chartElement) {
+            return $(chartElement.visual.observers()[0].element);
+        }
+
         function axisLabelClick(clickHandler, options) {
             chart = createChart($.extend(true, {
                 series: [{
@@ -1970,7 +1764,7 @@
             plotArea = chart._model.children[1];
             label = plotArea.valueAxis.labels[1];
 
-            chart._userEvents.press(0, 0, getElement(label.options.id));
+            chart._userEvents.press(0, 0, getElement(label));
             chart._userEvents.end(0, 0);
         }
 
