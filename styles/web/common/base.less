@@ -261,7 +261,7 @@ html body .k-button-bare.k-upload-button:hover
     .k-link:not(.k-state-disabled):hover > &,
     .k-state-hover > &,
     .k-state-hover > * > &,
-    .k-button:hover &,
+    .k-button:not(.k-state-disabled):hover &,
     .k-textbox:hover &,
     .k-button:active & {
         .sprite-position(@row - @size, @column);
@@ -278,7 +278,7 @@ html body .k-button-bare.k-upload-button:hover
     .k-rtl .k-link:not(.k-state-disabled):hover > &,
     .k-rtl .k-state-hover > &,
     .k-rtl .k-state-hover > * > &,
-    .k-rtl .k-button:hover &,
+    .k-rtl .k-button:not(.k-state-disabled):hover &,
     .k-rtl .k-textbox:hover &,
     .k-rtl .k-button:active & {
         .sprite-position(@row - @size, @column);
@@ -296,7 +296,7 @@ html body .k-button-bare.k-upload-button:hover
     .k-link:not(.k-state-disabled):hover > &,
     .k-state-hover > &,
     .k-state-hover > * > &,
-    .k-button:hover &,
+    .k-button:not(.k-state-disabled):hover &,
     .k-textbox:hover &,
     .k-button:active & {
         .sprite-position(@row + 1, @column, @size);
@@ -316,7 +316,7 @@ html body .k-button-bare.k-upload-button:hover
     .k-rtl .k-link:not(.k-state-disabled):hover > &,
     .k-rtl .k-state-hover > &,
     .k-rtl .k-state-hover > * > &,
-    .k-rtl .k-button:hover &,
+    .k-rtl .k-button:not(.k-state-disabled):hover &,
     .k-rtl .k-textbox:hover &,
     .k-rtl .k-button:active & {
         .sprite-position(@row + 1, @column, @size);
