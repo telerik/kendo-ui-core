@@ -155,11 +155,15 @@
         updateTheme: function(e) {
             var themeName = e.item.value;
             ThemeChooser.changeTheme(themeName, true);
-        },
 
-        updateCommon: function(e) {
-            ThemeChooser.changeCommon(e.item.value, true);
-            cookie("commonFile", e.item.value, Infinity, "/");
+            var commonFile = ThemeChooser.getCommonUrl();
+            if (/material/i.test(themeName) && !/material/i.test(commonFile)) {
+                ThemeChooser.replaceCommon("common-material");
+            } else if (/bootstrap/i.test(themeName) && !/bootstrap/i.test(commonFile)) {
+                ThemeChooser.replaceCommon("common-bootstrap");
+            } else if (!/material|bootstrap/i.test(themeName)) {
+                ThemeChooser.replaceCommon("common");
+            }
         },
 
         setMobileTheme: function(themeName) {
@@ -238,6 +242,7 @@
                 themeLink = ThemeChooser.getCurrentCommonLink();
 
             ThemeChooser.updateLink(themeLink, newCommonUrl);
+            cookie("commonFile", commonName, Infinity, "/");
         },
 
         replaceWebTheme: function (themeName) {
