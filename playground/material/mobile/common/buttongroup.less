@@ -1,0 +1,80 @@
+@import "button.less";
+
+.km-buttongroup
+{
+    padding: .4rem .7rem;
+    -webkit-margin-collapse: separate;
+    margin-collapse: separate;
+    margin: .5em auto;
+}
+
+.km-widget.km-buttongroup
+{
+    padding: 0;
+    border-color: transparent;
+    background: none;
+    white-space: nowrap;
+    display: table;
+}
+
+.km-buttongroup > .km-button
+{
+    display: table-cell;
+}
+
+.km-widget.km-buttongroup .km-button
+{
+    margin: 0;
+    border-width: 1px 0 1px 1px;
+    padding: .48em .9em .44em;
+}
+
+.km-tablet .km-buttongroup .km-button
+{
+    padding: .4em .8em .34em;
+}
+
+.km-widget.km-navbar .km-buttongroup
+{
+    font-size: .95rem;
+    line-height: 1em;
+    margin: 0 0 .2em;
+    display: inline-block;
+    height: 1.5em;
+    top: -2px;
+}
+
+.k-toolbar .km-buttongroup
+{
+    margin: 0;
+    display: inline-block;
+}
+
+.km-tablet .km-navbar .km-buttongroup
+{
+    top: -1px;
+}
+
+.km-widget.km-navbar .km-buttongroup > .km-button
+{
+    font-size: 1em;
+    min-width: 4rem;
+    text-align: center;
+}
+
+.km-tablet .km-navbar .km-buttongroup > .km-button
+{
+    min-width: 6rem;
+}
+
+.km-view .km-buttongroup .km-button:last-child
+{
+    border-right-width: 1px;
+}
+
+.km-ios .km-buttongroup .km-button
+{
+    font-size: 1.2em;
+    font-weight: bold;
+}
+

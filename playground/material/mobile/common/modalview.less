@@ -1,0 +1,50 @@
+/* ModalView */
+
+.km-modalview-root
+{
+    text-align: center;
+}
+
+.km-modalview-root > .k-animation-container
+{
+    text-align: left;
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    display: inline-block !important;
+    vertical-align: middle;
+}
+
+.km-modalview,
+.km-modalview-wrapper:before
+{
+    overflow: hidden;
+    position: relative;
+    .flexbox(inline);
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+    max-height: 100%;
+}
+
+.km-modalview .km-content
+{
+    box-flex: 1;
+}
+
+.km-auto-height .km-content
+{
+    -ms-flex: auto;
+}
+
+.km-modalview-root:before,
+.km-modalview-wrapper:before
+{
+    vertical-align: middle;
+    height: 100%;
+    margin-left: -1px;
+    content: "\a0";
+    width: 0px;
+    display: inline-block;
+}
+

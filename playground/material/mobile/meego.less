@@ -1,0 +1,1271 @@
+/* Platform specific MeeGo-Harmattan CSS */
+
+.km-meego,
+.km-meego .km-content
+{
+    color: #000;
+    background: #f0f1f2;
+}
+
+.km-meego,
+.km-meego .km-view
+{
+    overflow: hidden;
+    border-radius: 9px;
+}
+
+.km-meego .km-view-title,
+.km-meego .km-dialog-title
+{
+    visibility: visible;
+    color: #fff;
+    font-size: 1.5em;
+    line-height: 2.2em;
+    padding-left: .3em;
+    padding-right: .3em;
+    text-align: left;
+    width: 100%;
+    display: block;
+    .box-shadow(inset 0 -1px 0 rgba(255,255,255,.3));
+}
+
+.km-meego .km-leftitem
+{
+    position: relative;
+    float: left;
+    margin-right: 1em;
+}
+
+.km-meego .km-navbar .km-no-title
+{
+    position: relative;
+    width: 100%;
+    display: block;
+    left: 0;
+    .box-sizing(border-box);
+    padding-top: .3rem;
+    padding-bottom: .3rem;
+}
+
+.km-meego .km-navbar .km-button
+{
+    margin-top: .4rem;
+    margin-bottom: .4rem;
+}
+
+.km-meego .km-tabstrip .km-button
+{
+    height: auto;
+    .box-shadow(none);
+}
+
+.km-meego .km-navbar,
+.km-meego .km-toolbar,
+.km-meego .km-button,
+.km-meego .km-switch,
+.km-meego .km-tabstrip
+{
+    color: #000;
+    border-color: #e7e7e7;
+    background-color: #000;
+}
+
+.km-meego .km-button
+{
+    .linear-gradient-image(top, rgba(255,255,255,0), rgba(255,255,255,.1));
+    border-radius: ~".8rem";
+
+    background: #f5f5f5;
+    .box-shadow(~"inset 0 1px 1px rgba(255,255,255,.5), 0 1px 1px rgba(0,0,0,.4)");
+}
+
+.km-meego .km-button:active,
+.km-meego .km-button.km-state-active
+{
+    color: #768694;
+    background: #0a4d85;
+    .box-shadow(~"inset 0 0 2px rgba(0,0,0,.4)");
+}
+
+.km-meego .km-button .km-text
+{
+    position: relative;
+    z-index: 1;
+}
+
+.km-meego li.km-state-active
+{
+    border-width: 0;
+    color: white;
+}
+
+.km-meego
+{
+    font-family: Nokia Pure, HelveticaNeue, sans-serif;
+}
+
+.km-meego,
+.km-meego .km-button
+{
+    font-size: 1.2em;
+}
+
+.km-meego .km-button
+{
+    font-weight: bold;
+}
+
+.km-meego .km-back
+{
+    background: transparent;
+    border-color: transparent;
+    .box-shadow(none);
+    border-radius: ~"1rem";
+    height: 1.2em;
+    padding: .4em;
+}
+
+.km-meego .km-back.km-state-active
+{
+    background: transparent;
+}
+
+.km-meego .km-back .km-text
+{
+    display: none;
+}
+
+.km-meego .km-back:before
+{
+    width: .5em;
+    height: .5em;
+    content: "\a0";
+    display: inline-block;
+    margin: -.25em 0 0 .4em;
+    vertical-align: middle;
+    border: 0 solid #fff;
+    border-width: .24em 0 0 .24em;
+    .transform(rotate(-45deg));
+}
+
+.km-meego .km-switch-background,
+.km-meego .km-slider-background
+{
+    display: none;
+}
+
+.km-meego .km-switch-wrapper
+{
+    border-radius: ~".8rem";
+    background: #d0d2d2;
+    .box-shadow(~"inset 0 2px 2px 0 rgba(0,0,0,.3), 0 1px 1px rgba(255,255,255,.8)");
+}
+
+.km-meego .km-switch-container
+{
+    overflow: hidden;
+    border-radius: ~".8rem";
+    .linear-gradient-image(top, rgba(0,0,0,0), rgba(0,0,0,0) 98%, rgba(0,0,0,.2));
+    padding: 0;
+}
+
+
+.k-ff .km-meego .km-switch-handle
+{
+    border-right-width: 1.44rem;
+}
+
+.km-meego .km-switch-label-on,
+.km-meego .km-switch-label-off
+{
+    display: none;
+}
+
+.km-meego .km-switch
+{
+    font-family: HelveticaNeue, Arial, sans-serif;
+    background: transparent;
+    height: 2rem;
+    overflow: visible;
+    width: 3.6rem;
+}
+
+.km-meego .km-switch-handle
+{
+    .linear-gradient-image(top, rgb(255,255,255), rgb(215,215,215) 5%, rgb(255,255,255));
+    width: 1.6rem;
+    height: 1.6rem;
+    background: #fff;
+    -webkit-margin-collapse: separate;
+    border-radius: ~".6rem";
+    .box-shadow(0 1px 2px rgba(0,0,0,.4));
+    margin: .2rem .2rem 0;
+}
+
+.km-meego .km-switch-on .km-switch-wrapper
+{
+    background: #1080DD;
+    .linear-gradient-image(top, rgba(255,255,255,.2), rgba(255,255,255,.3) 10%, rgba(255,255,255,0));
+}
+
+.km-meego .km-badge,
+.km-meego .km-detail
+{
+    .linear-gradient-image(top, rgba(255,255,255,.5), rgba(255,255,255,.2) 50%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0));
+    color: #FFF;
+    border: .3rem solid #FFF;
+    background-color: #bc0404;
+}
+
+.km-meego .km-badge
+{
+    font-size: .8rem;
+    min-width: 1em;
+    background: #33b5e5;
+    border: 0;
+    border-radius: ~"2rem";
+    .box-shadow(0 2px 2px rgba(0,0,0,.5));
+}
+
+.km-meego .km-detail
+{
+    line-height: .95rem;
+    background: #999;
+    text-shadow: none;
+    .box-shadow(none);
+    border-radius: ~".5rem";
+    .box-sizing(border-box);
+    border: 1px solid rgba(0,0,0,.2);
+}
+
+.km-root .km-meego .km-detail
+{
+    width: 1.4rem;
+    height: 1.4rem;
+}
+
+.km-meego .km-detail .km-text
+{
+    display: none;
+}
+
+.km-meego .km-detail span.km-icon
+{
+    color: #fff;
+    text-shadow: none;
+}
+
+.km-root .km-pane.km-meego .km-detail:before,
+.km-meego .km-detail span.km-icon:before
+{
+    color: #000;
+    display: block;
+}
+
+.km-meego .km-detail .km-icon:after,
+.km-meego .km-detail .km-icon:before,
+.km-root .km-meego .km-detail:after,
+.km-root .km-meego .km-detail:before
+{
+    color: inherit;
+    line-height: 1.1rem;
+    text-align: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.km-meego .km-detail .km-icon:after,
+.km-meego .km-detail .km-icon:before
+{
+    line-height: .8rem;
+}
+
+.km-meego .km-rowinsert
+{
+    background-color: #24870D;
+}
+
+.km-meego .km-rowdelete
+{
+    background-color: #B01B1A;
+}
+
+.km-meego .km-buttongroup
+{
+    font-size: .8em;
+    width: 90%;
+    text-align: center;
+    border-radius: ~".8rem";
+    .box-shadow(0 1px 1px rgba(0,0,0,.4));
+}
+
+.km-meego .km-navbar .km-buttongroup
+{
+    width: 80%;
+    display: table;
+    height: auto;
+    margin: 2px auto;
+    font-size: 1.1rem;
+    line-height: 1.2em;
+    top: 0;
+}
+
+.km-meego .km-buttongroup .km-button
+{
+    border-right-width: 0;
+    .box-shadow(none);
+}
+
+.km-meego .km-buttongroup .km-text
+{
+    width: 100%;
+}
+
+.km-meego .km-view .km-buttongroup .km-button:first-child
+{
+    border-radius: 8px 0 0 8px;
+}
+
+.km-meego .km-view .km-buttongroup .km-button:last-child
+{
+    border-radius: 0 8px 8px 0;
+}
+
+.km-meego .km-buttongroup > .km-button
+{
+    display: table-cell;
+}
+
+.km-meego .km-buttongroup li.km-state-active
+{
+    color: #fff;
+    border: 1px 0 1px 1px;
+    border-color: transparent;
+    background-color: #1080dd;
+    .linear-gradient-image(top, rgba(255,255,255,0), rgba(255,255,255,.2));
+}
+
+.km-meego .km-content:first-child
+{
+    border-radius: 8px 8px 0 0;
+}
+
+.km-meego .km-content:last-child
+{
+    border-radius: 0 0 8px 8px;
+}
+
+.km-meego .km-content:first-child:last-child
+{
+    border-radius: 8px;
+}
+
+.km-meego .km-navbar,
+.km-meego .km-toolbar
+{
+    padding: 0 .5em;
+    font-size: .8em;
+    background: #207BC4;
+    background-clip: border-box;
+    border-radius: 8px 8px 0 0;
+}
+
+.km-meego .km-tabstrip
+{
+    display: table;
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.km-meego .km-tabstrip .km-button
+{
+    display: table-cell;
+}
+
+.km-meego .km-tabstrip
+{
+    padding: 0;
+    background: #e5e5e5;
+    .linear-gradient-image(top, rgba(0,0,0,0), rgba(0,0,0,.2));
+    background-clip: padding-box;
+    border-top: 1px solid #fff;
+    .box-shadow(0 0 5px rgba(0,0,0,.8));
+    border-radius: 0 0 8px 8px;
+}
+
+.km-meego .km-tabstrip .km-button
+{
+    color: #999;
+    padding: .5rem 0 .4rem;
+    border-radius: 0;
+    border-style: solid;
+    border-color: transparent;
+    border-width: 0;
+    background: transparent;
+    background-clip: padding-box;
+    min-width: 4rem;
+}
+
+.km-meego.km-horizontal .km-tabstrip .km-button
+{
+    padding: .2rem 0 .1rem;
+}
+
+.km-meego .km-tabstrip .km-text
+{
+    position: relative;
+    left: 50%;
+    width: 0;
+    height: 0;
+    display: block;
+    float: left;
+    text-indent: -9999px;
+}
+
+.km-meego .km-tabstrip .km-state-active
+{
+    background: #f5f5f5;
+    .linear-gradient-image(top, rgba(255,255,255,0), rgba(255,255,255,.1));
+}
+
+.km-meego .km-tabstrip .km-state-active:last-child
+{
+    border-radius: 0 0 5px 0;
+}
+
+.km-meego .km-tabstrip .km-state-active:first-child
+{
+    border-radius: 0 0 0 5px;
+}
+
+.km-meego .km-tabstrip .km-button:active,
+.km-meego .km-tabstrip .km-state-active
+{
+    color: #2e2e2e;
+    .box-shadow(none);
+}
+
+.km-meego .km-navbar .km-state-active:after,
+.km-meego .km-toolbar .km-state-active:after,
+.km-meego .km-tabstrip .km-state-active:after
+{
+    display: none;
+}
+
+.km-meego .km-listinset > li:first-child,
+.km-meego .km-listgroupinset .km-list > li:first-child
+{
+    border: 1px solid rgba(0,0,0,.2);
+    border-width: 1px 1px 0;
+    border-color: rgba(0,0,0,.2);
+    border-radius: .8rem .8rem 0 0;
+}
+
+.km-meego .km-listinset > li,
+.km-meego .km-listgroupinset .km-list > li
+{
+    border: 1px solid rgba(0,0,0,.2);
+    border-width: 0 1px;
+    .box-shadow(inset 0 -1px 0 rgba(0,0,0,.1));
+}
+
+.km-meego .km-listinset > li:last-child,
+.km-meego .km-listgroupinset .km-list > li:last-child
+{
+    border: 1px solid rgba(0,0,0,.2);
+    border-bottom-color: rgba(0,0,0,.3);
+    border-width: 0 1px 1px 1px;
+    border-radius: 0 0 .8rem .8rem;
+    .box-shadow(0 1px 0 0 rgba(255,255,255,.4));
+}
+
+.km-meego .km-listinset > li:first-child:last-child,
+.km-meego .km-listgroupinset .km-list > li:first-child:last-child
+{
+    border-width: 1px;
+    border-radius: .8rem;
+}
+
+.km-meego .km-listinset > li:first-child,
+.km-meego .km-listgroupinset .km-list > li:first-child,
+.km-meego .km-listinset li:first-child > .km-listview-link,
+.km-meego .km-listgroupinset li:first-child > .km-listview-link,
+.km-meego .km-listinset li:first-child > .km-listview-label,
+.km-meego .km-listgroupinset li:first-child > .km-listview-label
+{
+    border-radius: .7rem .7rem 0 0;
+}
+
+.km-meego .km-listinset li:last-child > .km-listview-link,
+.km-meego .km-listgroupinset li:last-child > .km-listview-link,
+.km-meego .km-listinset li:last-child > .km-listview-label,
+.km-meego .km-listgroupinset li:last-child > .km-listview-label
+{
+    border-radius: 0 0 .7rem .7rem;
+}
+
+.km-meego .km-listinset li:first-child:last-child > .km-listview-link,
+.km-meego .km-listgroupinset li:first-child:last-child > .km-listview-link,
+.km-meego .km-listinset li:first-child:last-child > .km-listview-label,
+.km-meego .km-listgroupinset li:first-child:last-child > .km-listview-label
+{
+    border-radius: .7rem;
+}
+
+
+.km-meego .km-listinset > li,
+.km-meego .km-listgroupinset .km-list > li
+{
+    background: #f5f5f5;
+}
+
+.km-meego li.km-state-active .km-listview-link,
+.km-meego .km-state-active .km-listview-link,
+.km-meego li.km-state-active .km-listview-label
+{
+    background: #d7d8d8;
+}
+
+.km-meego .km-detail.km-state-active,
+.km-meego .km-state-active .km-detail,
+.km-meego .km-listinset .km-state-active .km-listview-link,
+.km-meego .km-listgroupinset .km-state-active .km-listview-link,
+.km-meego .km-listinset .km-state-active .km-listview-label,
+.km-meego .km-listgroupinset .km-state-active .km-listview-label
+{
+    color: #fff;
+    background-color: #1080dd;
+    .linear-gradient-image(top, rgba(255,255,255,0), rgba(255,255,255,.2));
+}
+
+.km-meego .km-listinset .km-state-active .km-listview-link:after,
+.km-meego .km-listgroupinset .km-state-active .km-listview-link:after
+{
+    border-color: #fff;
+}
+
+.km-meego .km-listgroup div.km-group-title,
+.km-meego .km-scroll-header .km-group-title
+{
+    padding: 0 .8rem .5rem;
+    overflow: hidden;
+}
+
+.km-meego .km-listgroup .km-group-title:after,
+.km-meego .km-scroll-header .km-group-title:after
+{
+    content: "\a0";
+    display: block;
+    height: 2px;
+    border-bottom: 1px solid rgba(255,255,255,.5);
+    background: rgba(0,0,0,.2);
+    .box-sizing(border-box);
+    background-clip: padding-box;
+    margin-top: .7rem;
+}
+
+.km-meego .km-listgroup .km-group-title .km-text,
+.km-meego .km-scroll-header .km-group-title .km-text
+{
+    float: right;
+    background: #f0f1f2;
+}
+
+.km-meego .km-scroll-header .km-group-title
+{
+    background: #f0f1f2;
+    padding-bottom: 0;
+}
+
+.km-meego .km-listgroupinset .km-group-title
+{
+    color: #373e50;
+    padding: 0;
+    background: none;
+    border: none;
+    .box-shadow(none);
+    text-shadow: 0 1px 1px rgba(255,255,255,.8);
+}
+
+.km-meego .km-list > li
+{
+    display: block;
+    vertical-align: middle;
+    line-height: 1.6rem;
+    overflow: hidden;
+}
+
+.km-meego .km-listview-link:after
+{
+    width: .6rem;
+    height: .6rem;
+    margin-top: ~"-.4rem";
+    border-color: #282828;
+    border-radius: 0 3px 0 0;
+}
+
+.km-meego .km-list .km-item
+{
+    height: 56px;
+}
+
+.km-meego .km-listview .km-switch
+{
+    margin-top: ~"-.95rem";
+}
+
+.km-meego .km-meego,
+.km-meego .km-listgroup .km-list,
+.km-meego .km-vertical,
+.km-meego .km-horizontal
+{
+    color: #000;
+    background: #f0f1f2;
+}
+
+.km-meego .km-item label:before
+{
+    border: 1px solid #000;
+    background-color: rgb(54, 54, 54);
+    .linear-gradient-image(top, rgb(54, 54, 54), rgb(43, 43, 43));
+    border-radius: 2px;
+    .box-sizing(border-box);
+    .box-shadow(0 0 1px 2px #808080);
+}
+
+.km-meego label.km-item-checked:after
+{
+    background: transparent url("images/meego-sprite.png") 0 -36px no-repeat;
+}
+
+.km-meego .km-footer
+{
+    background: transparent;
+}
+
+/* Filter box */
+
+.km-meego .km-filter-wrap
+{
+    border-radius: 2em;
+}
+
+.km-meego .km-listview-wrapper form .km-filter-wrap > input
+{
+    margin-top: -1px;
+    border-radius: 2em;
+    font-size: 1.2em;
+    padding-left: 1.8em;
+    padding-right: 1.8em;
+}
+
+.km-meego .km-filter-wrap:before
+{
+    margin: 0 -1.3em 0 .3em;
+}
+
+.km-meego .km-filter-reset
+{
+    margin-left: -2em;
+}
+
+.km-meego .km-filter-wrap:before,
+.km-meego .km-filter-reset .km-clear
+{
+    font-size: 1.4em;
+	color: #adadad;
+}
+
+.km-meego .km-filter-reset .km-clear:after
+{
+    content: "\e038";
+}
+
+/* Icon styles */
+
+.km-meego .km-icon
+{
+    text-shadow: 1px 1px 0 rgba(255,255,255,.5);
+}
+
+.km-meego .km-state-active .km-icon
+{
+    text-shadow: none;
+}
+
+.km-meego .km-list .km-icon,
+.km-meego .km-navbar .km-icon,
+.km-meego .km-button .km-icon
+{
+    color: rgba(0,0,0,.8);
+}
+
+.km-meego .km-button:active .km-icon,
+.km-meego .km-button.km-state-active .km-icon
+{
+    color: #96a6b4;
+    text-shadow: none;
+}
+
+.km-meego .km-tabstrip .km-icon
+{
+    width: 1.8rem;
+    height: 1.8rem;
+    font-size: 1.8rem;
+    position: relative;
+    margin: .3rem auto .4rem;
+    color: #433f40;
+}
+
+.km-meego .km-tabstrip .km-state-active .km-icon
+{
+    color: #635f60;
+}
+
+.km-meego .km-listinset .km-state-active .km-listview-link > .km-icon,
+.km-meego .km-listgroupinset .km-state-active .km-listview-link > .km-icon
+{
+    color: #fff;
+}
+
+/* Pull to refresh */
+
+.km-meego .km-scroller-pull
+{
+    font-size: 1.4rem;
+}
+
+.km-meego .km-scroller-pull .km-icon
+{
+    width: 2.4rem;
+    height: 2.4rem;
+    font-size: 2.4rem;
+}
+
+.km-meego .km-load-more .km-icon,
+.km-meego .km-scroller-pull .km-icon
+{
+    color: #333;
+}
+
+/* ScrollView */
+
+.km-meego .km-pages
+{
+    display: table;
+    width: 100%;
+}
+
+.km-meego .km-pages li
+{
+    display: table-cell;
+    height: 2px;
+    background: transparent;
+}
+
+.km-meego .km-pages .km-current-page
+{
+    background: rgba(150,150,150,.7);
+}
+
+/* Slider */
+
+.km-meego .k-slider-horizontal
+{
+    height: .4em;
+}
+
+.km-meego .k-slider-vertical
+{
+    width: .4em;
+}
+
+.km-meego .k-slider .k-draghandle,
+.km-meego .k-slider .k-draghandle:hover
+{
+    border: 0;
+    background-color: #eee;
+    border-radius: 2em;
+    .linear-gradient-image(top, rgba(255,255,255,.6), rgba(255,255,255,0));
+    .box-shadow(~"inset 0 0 0 1px #ddd, 0 1px 1px rgba(0,0,0,.3)");
+}
+
+.km-meego .k-slider-horizontal .k-draghandle
+{
+    top: -.4em;
+}
+
+.km-meego .k-slider-vertical .k-draghandle
+{
+    left: -.3em;
+}
+
+.km-meego .k-slider-selection
+{
+    background: 0 0 no-repeat;
+    .linear-gradient-image(top,  rgb(109,169,247), rgb(42,93,178));
+}
+
+.km-meego .k-slider-track
+{
+    border-width: 1px;
+    .linear-gradient-image(top, rgba(0,0,0,.3), rgba(0,0,0,0) 30%, rgba(0,0,0,0) 90%, rgba(0,0,0,.4),
+                           top, rgb(219,219,219), rgb(255,255,255));
+}
+
+.km-meego .k-slider-horizontal .k-slider-track
+{
+    margin-top: .2em;
+}
+
+.km-meego .k-slider-horizontal .k-slider-selection
+{
+    margin-left: 0;
+}
+
+/* Scroller */
+
+.km-meego .km-touch-scrollbar
+{
+    background-color: #999;
+    border: 1px solid rgba(255,255,255,.8);
+}
+
+/* Dialog */
+
+.km-meego .km-dialog
+{
+    background: rgba(10,25,65,.8);
+    border: 2px solid rgba(255,255,255,.8);
+    .box-shadow(3px 3px 5px #111);
+}
+
+.km-meego .km-dialog-title
+{
+    .linear-gradient-image(top, rgba(255,255,255,.3), rgba(255,255,255,0) 60%);
+    text-shadow: 0 -1px #333;
+}
+
+.km-meego .km-dialog:before
+{
+    background: ~"url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22><defs><clipPath id=%22clip%22><rect x=%220%22 y=%220%22 width=%22100%%22 height=%22100%%22 rx=%2210%22 ry=%2210%22/></clipPath></defs><ellipse fill=%22white%22 cx=%2250%%22 cy=%220%22 rx=%2280%%22 ry=%2260%%22 clip-path=%22url(%23clip)%22/></svg>')";
+}
+
+.km-meego .km-dialog-content
+{
+    color: #fff;
+    text-shadow: 0 -1px #333;
+}
+
+.km-meego .km-dialog .km-button
+{
+    display: block;
+    margin: .4rem;
+    font-size: 1.3rem;
+    text-align: center;
+    padding: .3rem;
+    .user-select(none);
+    border-radius: 4px;
+}
+
+/* Loader */
+
+.km-meego .km-loader
+{
+    margin: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+}
+
+.km-meego .km-loader h1
+{
+    display: none;
+}
+
+.km-meego .km-loading
+{
+    width: 50px;
+    height: 50px;
+    font-size: 50px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -25px;
+    margin-top: -25px;
+}
+
+/* Forms */
+
+.km-meego input[type=password],
+.km-meego input[type=search],
+.km-meego input[type=number],
+.km-meego input[type=tel],
+.km-meego input[type=url],
+.km-meego input[type=email],
+.km-meego input[type=month],
+.km-meego input[type=color],
+.km-meego input[type=week],
+.km-meego input[type=date],
+.km-meego input[type=time],
+.km-meego input[type=datetime],
+.km-meego input[type=datetime-local],
+.km-meego input[type=text]:not(.k-input),
+.km-meego select:not([multiple]),
+.km-meego .k-dropdown,
+.km-meego textarea
+{
+    font-size: 1em;
+    .appearance(none);
+    border: 0;
+    padding: .3em .4em;
+    outline: none;
+    border-radius: ~".8em";
+}
+
+.km-meego .km-list input[type=password],
+.km-meego .km-list input[type=search],
+.km-meego .km-list input[type=number],
+.km-meego .km-list input[type=tel],
+.km-meego .km-list input[type=url],
+.km-meego .km-list input[type=email],
+.km-meego .km-list input[type=month],
+.km-meego .km-list input[type=color],
+.km-meego .km-list input[type=week],
+.km-meego .km-list input[type=date],
+.km-meego .km-list input[type=time],
+.km-meego .km-list input[type=datetime],
+.km-meego .km-list input[type=datetime-local],
+.km-meego .km-list input[type=text]:not(.k-input),
+.km-meego .km-list select:not([multiple]),
+.km-meego .km-list textarea,
+.km-meego .k-dropdown,
+.km-meego .k-slider
+{
+    right: .4em;
+    margin-top: -1em;
+}
+
+.km-meego .k-dropdown
+{
+    padding: 0;
+    width: 10em;
+    border-radius: 0;
+}
+
+.km-meego .k-slider
+{
+    margin-top: -.35em;
+}
+
+.km-meego .km-list textarea
+{
+    margin-top: 0;
+}
+
+.km-meego .k-dropdown .k-dropdown-wrap
+{
+    display: block;
+    padding: 0 2em 0 .4em;
+    border-radius: ~".8em";
+}
+
+.km-meego .km-list select:not([multiple])
+{
+    margin-top: -.95em;
+    min-width: 6em;
+    padding: .32em 2em .32em .4em;
+}
+
+.km-meego input:not(.k-input):not(.k-button),
+.km-meego select:not([multiple]),
+.km-meego .k-dropdown-wrap,
+.km-meego textarea
+{
+    .box-shadow(~"inset 0 1px 2px 1px rgba(0,0,0,.2)");
+}
+
+.km-meego input:not(.k-input):not(.k-button):focus,
+.km-meego select:not([multiple]):focus,
+.km-meego .k-dropdown .k-state-focused,
+.km-meego textarea:focus
+{
+    .box-shadow(~"inset 0 1px 2px 1px rgba(0,0,0,.2), 0 0 0 2px #1080DD");
+}
+
+.km-meego select:not([multiple]),
+.km-meego .k-dropdown-wrap
+{
+    border: 0;
+    background: #fff;
+}
+
+.km-meego select:not([multiple]):focus,
+.km-meego .k-dropdown .k-state-focused
+{
+    background: #fff;
+}
+
+/* PopUp + ActionSheet */
+
+.km-meego .km-popup
+{
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.km-meego .km-shim > .k-animation-container
+{
+    height: 100% !important;
+}
+
+.km-meego .km-shim,
+.km-meego .km-popup,
+.km-meego .km-actionsheet-wrapper
+{
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.9);
+}
+
+.km-meego .km-popup .k-list-container
+{
+    position: static !important;
+    margin-left: 10% !important;
+    width: 80% !important;
+    display: inline-block !important;
+}
+
+.km-meego .km-actionsheet,
+.km-meego .km-popup .k-list-container
+{
+    position: relative;
+    margin-left: 10%;
+    width: 80%;
+    display: inline-block;
+    max-height: 80%;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    color: #fff;
+    vertical-align: middle;
+    border-radius: 0;
+}
+
+.km-meego > .k-list-container
+{
+    display: none !important;
+}
+
+.km-meego .km-popup:before,
+.km-meego .km-actionsheet-wrapper:before
+{
+    content: "\a0";
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+    width: 0;
+}
+
+.km-meego li.km-actionsheet-cancel:before,
+.km-meego .km-popup .k-list-container:before
+{
+    content: "\2715";
+    color: #fff;
+    position: relative;
+    float: right;
+    font-size: 1.6em;
+    top: -1.2em;
+    right: .05em;
+}
+
+.km-meego .km-actionsheet-title,
+.km-meego .km-popup .k-item,
+.km-meego .km-actionsheet > li > a
+{
+    font-size: 1.05rem;
+    line-height: 2.2em;
+    border-width: 0;
+    padding: 0 1.2em;
+    color: #fff;
+    display: block;
+    text-decoration: none;
+    border-radius: 0;
+}
+
+.km-meego .km-popup .k-state-focused,
+.km-meego .km-popup .k-state-selected,
+.km-meego .km-actionsheet > li > a:focus,
+.km-meego .km-actionsheet > li > a:active
+{
+    background: rgba(0,0,0,.2);
+}
+
+.km-meego .km-popup .k-state-hover,
+.km-meego .km-actionsheet > li > a:hover
+{
+    background: rgba(255,255,255,.2);
+}
+
+.km-meego .km-popup .k-item:first-child:before
+{
+    position: absolute;
+    display: block;
+    content: "\a0";
+    width: 100%;
+    height: 1px;
+    background: #777;
+    margin: -3px -1.2em 0;
+}
+
+.km-meego .km-actionsheet-title
+{
+    font-size: 1.3em;
+    color: #fff;
+    padding: 0 1.8em 0 .8em;
+    border-bottom: 1px solid #fff;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.km-meego li.km-actionsheet-cancel:before,
+.km-meego li.km-actionsheet-cancel
+{
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: -.4em;
+    top: 0;
+}
+
+.km-meego li.km-actionsheet-cancel
+{
+    right: 1em;
+    top: .5em;
+}
+
+.km-meego li.km-actionsheet-cancel > a
+{
+    display: none;
+}
+
+/* Checkboxes and Radios */
+
+.km-meego .km-listview-label input[type=radio],
+.km-meego .km-listview-label input[type=checkbox]
+{
+    .box-shadow(~"inset 0 1px 2px 1px rgba(0,0,0,.2)");
+    width: 1.4em;
+    height: 1.4em;
+    border-radius: .5em;
+}
+
+.km-meego .km-listview-label input[type=radio]:not([type=button]):not([type=submit]):not([type=reset]):not([type=image]),
+.km-meego .km-listview-label input[type=checkbox]:not([type=button]):not([type=submit]):not([type=reset]):not([type=image])
+{
+    margin-top: -.7em;
+}
+
+.km-meego .km-listview-label input[type=radio]:after
+{
+    border-radius: .3em;
+}
+
+.km-meego .km-listview-label input[type=radio]:after,
+.km-meego .km-listview-label input[type=checkbox]:after,
+.km-meego .km-listview-label input[type=checkbox]:before
+{
+    content: "\a0";
+    display: block;
+    margin: 20% 0 0 20%;
+    width: 64%;
+    height: 64%;
+}
+
+.km-meego .km-listview-label input[type=checkbox]:after
+{
+    margin-top: 25%;
+    margin-left: 14%;
+    width: 74%;
+    height: 54%;
+}
+
+.km-meego .km-listview-label input[type=checkbox]:checked:before
+{
+    position: absolute;
+    margin-top: 25%;
+    margin-left: 10%;
+    width: 82%;
+    height: 60%;
+    background: rgba(0,0,0,.4);
+}
+
+.km-meego .km-listview-label input[type=radio]:checked,
+.km-meego .km-listview-label input[type=checkbox]:checked
+{
+    background-color: rgba(9,144,233,.8);
+}
+
+.km-meego .km-listview-label input[type=radio]:checked:after,
+.km-meego .km-listview-label input[type=checkbox]:checked:after
+{
+    .linear-gradient-image(top, #fff, #f9f9f9 10%, #eee);
+    .box-shadow(0 1px 1px rgba(0,0,0,.7));
+}
+
+.km-meego .km-listview-label input[type=checkbox]:checked:after,
+.km-meego .km-listview-label input[type=checkbox]:checked:before
+{
+    -webkit-mask-box-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAsBJREFUeNrsmzFIAzEUhlMLgtCpUBBcC05CwUnoKgidBEHo5FpwFQqCUBBcnQpOTgWh4CQIroLgdOAkFJw6CU6dCkK9SCyK9fr+5CV39+qDN/bC+5I/l/9dWphMJmqRY0kteghaAcU4I10SIUdxVj5rFwTggFi8zvZ08oUAKMU5JBb/EueyNAAdYPabP+QvAMCa0TSl+Ptf+58AAD1g9rekAajF+U4svjfzDZhzAPfE4sdGKqIA7AJL/+zPM1BOAejX2IBY/NC8JkUBOAJmv5V4Cs4hgHKcb8TiI3NEFgWgC8z+zlwflDMAVeC1d0MygjkDcEMsXkNalwZgG1j6XXIrICcAEK//ZjZKUQBaqNeXBADx+oMvry8JwBkw+3vIg6cAbDOQ1x/beH0pABCvX5MGYAsovmczQNYBUL3+aJbXzzuAJjD7p7aDZBUAi9fPM4A2MPsHLgNlEUBZ0VvciV4fPQhdAS5rMyNev+462HcAmvwrceAn5LgJxAan17c5Cu8B9Dspev2xaYywA9DRT0kKDQD+OdegswCkIYWieRar13dxg6GlgHj9Q07NJdnhPqBHFymUgBb3gHvzTQJQCSQFxOs3uHfdeQ0R31Ko+vT6XB0hRAqoH6d6/Xcbr88FoAJoFJFCHVhdl76OndSeoA8pPPr2+txNUU4pIF7/2GfTAQGASCFKkMIK0OJ28vo+2uIcUkC8ftN3z83mu4CLFJDrbFGIlrMNABcpXIT0+r4A6NgHCjkxv0Gus/VVoHD5NIZK4S601/cNAJWC03W2LAJApRDc64cAoOOaEUBLBQ4OAIgUkvLZtcWdFgAuKTRUCsF5QcJFCrcqpeAEsGopBW9ePzQAWyl0VYrh444QIoWRWTmiACBSaKuUw9ctMUrDY6j8fF/MBACKFJoqA+ETQJIUHlRGQtde+P/3+ILHhwADAA2kPASxM5juAAAAAElFTkSuQmCC');
+}
+
+.km-meego .km-state-active input[type=radio]:checked:after,
+.km-meego .km-state-active input[type=checkbox]:checked:after
+{
+    background-color: #eee;
+}
+
+/* ActionSheet */
+
+.km-meego .km-actionsheet-wrapper
+{
+    background: transparent;
+}
+
+/* ModalView */
+
+.km-meego .km-modalview-wrapper
+{
+    padding: 20px 10px;
+}
+
+.km-meego .km-modalview
+{
+    background-color: #7185a2;
+    .box-sizing(border-box);
+    .box-shadow(~"0 0 15px rgba(0,0,0,.5), 0 0 2px rgba(0,0,0,.5)");
+}
+
+.km-meego .km-modalview .km-header
+{
+    padding: 0;
+    margin: -1px 0 0;
+}
+
+.km-meego .km-modalview > :first-child
+{
+    border: 0;
+}
+

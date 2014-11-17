@@ -1,0 +1,53 @@
+@import "../common/splitview.less";
+@import "base.less";
+
+/* SplitView */
+
+.km-ios .km-splitview > .km-pane
+{
+    border-radius: 5px;
+}
+
+.km-ios .km-split-vertical > .km-pane
+{
+    border-right: 0;
+}
+
+.km-ios .km-splitview > .km-pane
+{
+    border-right-width: 1px;
+    border-right-style: solid;
+}
+
+.km-ios .km-split-vertical > .km-pane
+{
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+}
+
+.km-ios .km-splitview .km-navbar,
+.km-ios .km-splitview .km-toolbar,
+.km-ios .km-modalview > :first-child,
+.km-ios .km-splitview .km-view > :first-child
+{
+    border-radius: 5px 5px 0 0;
+}
+
+.km-ios .km-splitview .km-tabstrip,
+.km-ios .km-modalview > :last-child,
+.km-ios .km-splitview .km-view > :last-child
+{
+    border-radius: 0 0 5px 5px;
+}
+
+.km-ios .km-modalview > :first-child:last-child,
+.km-ios .km-pane > .km-view > :first-child:last-child
+{
+    border-radius: 5px;
+}
+
+.km-ios .km-splitview .km-pane:last-child
+{
+    border: 0;
+}
+

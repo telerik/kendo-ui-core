@@ -1,0 +1,208 @@
+@import "button.less";
+@import "navbar.less";
+
+/* Toolbar */
+
+.km-root .k-toolbar
+{
+    position: relative;
+    display: block;
+    vertical-align: middle;
+    text-align: right;
+    line-height: 2.2em;
+    border-style: solid;
+    .box-shadow(none);
+    padding: .55em 3.4em .55em .5em;
+}
+
+.km-root .km-widget.k-toolbar
+{
+    .box-sizing(border-box);
+}
+
+.km-root .k-toolbar span.km-icon
+{
+    vertical-align: middle;
+}
+
+.km-root .k-toolbar .k-button-icon
+{
+    padding-left: .4em;
+    padding-right: .4em;
+}
+
+.km-root .k-toolbar .k-button-icon .km-icon
+{
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.km-root .k-toolbar-resizable
+{
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.km-root .k-toolbar > *
+{
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+    line-height: inherit;
+}
+
+.km-root .k-toolbar .km-button
+{
+    line-height: inherit;
+}
+
+.km-root div.k-toolbar > .k-align-left
+{
+    float: left;
+    line-height: inherit;
+}
+
+.km-root div.k-toolbar > .k-align-right
+{
+    float: none;
+}
+
+.km-root .k-toolbar > .km-button,
+.km-root .k-toolbar .km-buttongroup,
+.km-root .k-toolbar .k-split-button,
+.km-root .k-toolbar .k-widget,
+.km-root .k-toolbar .km-widget,
+.km-root .k-toolbar .k-textbox,
+.km-root .k-toolbar label,
+.km-root .k-toolbar .k-separator
+{
+    margin: 0 .4em;
+}
+
+.km-root .k-toolbar .k-button-icontext .km-icon
+{
+    margin-left: -.15em;
+}
+
+.km-root .k-toolbar .k-split-button
+{
+    padding-left: 0;
+}
+
+.km-root .k-toolbar .k-split-button .km-button,
+.km-root .k-toolbar .km-buttongroup .km-group-start
+{
+    margin: 0;
+}
+
+.km-root .k-toolbar .k-split-button > .km-button
+{
+    padding-left: 1em;
+    padding-right: .6em;
+}
+
+.km-root .k-toolbar .k-split-button .k-split-button-arrow
+{
+    margin: 0 0 0 -1px;
+    padding-left: .2em;
+    padding-right: .2em;
+}
+
+.km-root .km-pane .k-toolbar .k-overflow-anchor
+{
+    border-width: 0;
+    width: 1.5em;
+    height: 100%;
+    margin: 0;
+    font-size: 2.2em;
+    border-radius: 0;
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0;
+}
+
+.km-root .k-overflow-anchor span.km-icon
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -.5em 0 0 -.5em;
+}
+
+.km-root .k-overflow-anchor .km-icon:after,
+.km-root .k-overflow-anchor .km-icon:before
+{
+    margin-left: 0;
+}
+
+.km-root .k-overflow-container .k-item
+{
+    float: none;
+    border: 0;
+}
+
+.km-root .k-overflow-container .k-overflow-button,
+.km-root .k-split-container .km-button
+{
+    text-align: left;
+    display: block;
+    white-space: nowrap;
+    margin: 0 0 1px;
+}
+
+.km-root .k-overflow-container li:last-child .k-overflow-button,
+.km-root .k-split-container li:last-child .km-button
+{
+    margin: 0;
+}
+
+.km-root .k-overflow-container .km-buttongroup
+{
+    padding: 0;
+}
+
+.km-root .k-overflow-container .km-buttongroup > li
+{
+    display: block;
+}
+
+.km-root .k-overflow-container .k-overflow-group
+{
+    border-width: 1px 0;
+    border-style: solid;
+    border-radius: 0;
+    padding: 1px 0 0;
+    margin: 0 0 1px;
+}
+
+.km-root .k-overflow-container .km-state-disabled
+{
+    opacity: 1;
+}
+
+.km-root .k-overflow-container .k-overflow-hidden
+{
+    display: none;
+}
+
+.km-root .k-overflow-container .k-toolbar-first-visible,
+.km-root .k-overflow-container .k-overflow-group + .k-overflow-group
+{
+    border-top: 0;
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.km-root .k-overflow-container .k-toolbar-last-visible
+{
+    border-bottom: 0;
+    margin-bottom: 0;
+}
+
+.km-root .k-overflow-wrapper .km-actionsheet-wrapper .km-actionsheet
+{
+    overflow: hidden;
+    overflow-y: auto;
+}

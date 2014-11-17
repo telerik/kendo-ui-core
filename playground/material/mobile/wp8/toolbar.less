@@ -1,0 +1,145 @@
+@import "../common/navbar.less";
+@import "../../common/transitions.less";
+@import "base.less";
+
+/* ToolBar */
+
+.km-wp .k-toolbar
+{
+    line-height: 1.6em;
+}
+
+.km-wp .k-toolbar .km-button,
+.km-wp .k-toolbar .k-split-button,
+.km-root .km-wp .k-toolbar .km-buttongroup .km-button
+{
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.km-wp .k-toolbar > *
+{
+    color: inherit;
+}
+
+.km-wp .k-toolbar > .km-button,
+.km-wp .k-toolbar .km-buttongroup,
+.km-wp .k-toolbar .k-split-button,
+.km-wp .k-toolbar .k-widget,
+.km-wp .k-toolbar .km-widget,
+.km-wp .k-toolbar .k-textbox,
+.km-wp .k-toolbar label,
+.km-wp .k-toolbar .k-separator
+{
+    margin: 0 .3em;
+}
+
+.km-wp .k-toolbar .km-button,
+.km-wp .k-toolbar .k-split-button,
+.km-wp .k-toolbar .km-buttongroup,
+.km-root .km-wp .k-toolbar .km-buttongroup .km-button
+{
+    line-height: inherit;
+}
+
+.km-wp .k-toolbar .km-button .km-text
+{
+    padding-bottom: 0;
+}
+
+.km-wp .k-toolbar .k-split-button-arrow
+{
+    border-radius: 0;
+}
+
+.km-root .km-wp .k-toolbar .km-buttongroup .km-button
+{
+    margin-left: -2px;
+    height: auto;
+    padding-bottom: .3em;
+}
+
+.km-wp .k-overflow-anchor .km-icon:after,
+.km-wp .k-overflow-anchor .km-icon:before
+{
+    margin-top: 0;
+}
+
+.km-wp .k-toolbar .k-button-icon .km-icon,
+.km-wp .k-toolbar .k-button-icontext .km-icon,
+.km-wp .k-split-button .km-arrowdown
+{
+    width: 1em;
+    height: 1em;
+    font-size: 1.2em;
+    margin-top: -5px;
+    margin-bottom: -1px;
+    vertical-align: middle;
+}
+
+.km-wp .k-split-button .km-arrowdown
+{
+    margin-left: 2px;
+    margin-right: 1px;
+}
+
+.km-wp .k-split-button .k-button-icontext
+{
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.km-wp .k-split-button-arrow
+{
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.km-wp .km-actionsheet.k-split-container > li > .km-button,
+.km-wp .km-actionsheet.k-overflow-container > li > .km-button
+{
+    min-width: 10em;
+    text-align: center;
+    font-size: 1.1em;
+    border: 0;
+    border-radius: 0;
+}
+
+.km-wp .km-actionsheet.k-split-container > li > .km-button
+{
+    min-width: 5em;
+}
+
+.km-wp .k-split-wrapper .km-actionsheet-wrapper,
+.km-wp .k-overflow-wrapper .km-actionsheet-wrapper
+{
+    padding: 1px;
+}
+
+html .km-wp .k-split-container.km-actionsheet > li,
+html .km-wp .k-overflow-container.km-actionsheet > li
+{
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.km-wp .k-split-container.km-actionsheet,
+.km-wp .k-overflow-container.km-actionsheet
+{
+    border-top: 0;
+    touch-action: pan-y;
+    -ms-touch-action: pan-y;
+}
+
+.km-wp .k-split-container.km-actionsheet,
+.km-wp .k-overflow-container.km-actionsheet
+{
+    border-top: 0;
+}
+
+.km-wp .k-split-container.km-actionsheet *,
+.km-wp .k-overflow-container.km-actionsheet *
+{
+    touch-action: pan-y;
+    -ms-touch-action: pan-y;
+}

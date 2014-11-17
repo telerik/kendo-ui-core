@@ -1,0 +1,41 @@
+@import "../common/actionsheet.less";
+@import "base.less";
+
+/* PopUp + ActionSheet */
+
+.km-ios .km-actionsheet > li > a
+{
+    text-align: center;
+}
+
+.km-ios .km-actionsheet > .km-actionsheet-cancel
+{
+    margin: 1.5em 0 1em;
+}
+
+.km-ios .km-actionsheet-wrapper,
+.km-ios .km-actionsheet-root > .k-animation-container
+{
+    .box-sizing(border-box);
+}
+
+.km-ios .km-actionsheet > li > a
+{
+    display: block;
+}
+
+.km-ios .km-shim.km-actionsheet-root > .k-animation-container
+{
+    left: 0 !important;
+    width: 100%;
+    top: auto !important;
+    bottom: 0 !important;
+}
+
+.km-ios .km-shim li.km-actionsheet-title
+{
+    visibility: hidden;
+    height: 0;
+    margin: .5em 0 0;
+}
+

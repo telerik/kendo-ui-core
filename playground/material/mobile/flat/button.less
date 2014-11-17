@@ -1,0 +1,54 @@
+@import "../common/icons.less";
+@import "../common/button.less";
+@import "base.less";
+
+/* Button */
+
+.km-flat .km-button
+{
+    padding: .5em .8em;
+    border-style: solid;
+    border-width: @flat-border-width;
+    border-radius: @flat-border-radius;
+}
+
+/* Badges and Details */
+
+.km-flat .km-badge,
+.km-flat .km-detail
+{
+    border: 0;
+    min-width: 1.8em;
+    height: 1.8em;
+    line-height: 1.8em;
+    border-radius: 5em;
+}
+
+.km-flat .km-detail
+{
+    min-width: 1.4em;
+    height: 1.4em;
+    line-height: 1.4em;
+    border-width: @flat-border-width;
+    border-style: solid;
+}
+
+.km-flat .km-detaildisclose
+{
+    min-width: 1.8em;
+    height: 1.8em;
+    line-height: 1.8em;
+}
+
+.km-flat .km-detaildisclose:after,
+.km-flat .km-detaildisclose:before
+{
+    left: .1em;
+    top: 0.35em;
+}
+
+.km-flat .km-detail .km-icon:before
+{
+    display: none;
+}
+

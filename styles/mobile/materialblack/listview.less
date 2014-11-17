@@ -15,7 +15,7 @@
 {
     border-style: solid;
     border-width: @materialblack-border-width;
-    border-radius: @materialblack-border-radius @materialblack-border-radius 0 0;
+    border-radius: 0;
 }
 
 .km-materialblack .km-listinset > li,
@@ -29,7 +29,7 @@
 {
     border-style: solid;
     border-width: 0 @materialblack-border-width @materialblack-border-width @materialblack-border-width;
-    border-radius: 0 0 @materialblack-border-radius @materialblack-border-radius;
+    border-radius: 0;
 }
 
 .km-materialblack .km-listinset > li:first-child:last-child,
@@ -149,8 +149,7 @@
 }
 
 .km-materialblack .km-group-title {
-    padding-left: 3.875em;
-    text-indent: 0;
+    text-indent: .4em;
 }
 
 .km-materialblack .km-listgroupinset .km-group-title {
@@ -160,7 +159,6 @@
 
 .km-materialblack .km-listview .km-text {
     font-size: .875em;
-    //text-indent: 4.429em;
     line-height: 1em;
     padding: 1.429em 0 1.429em;
 }
@@ -169,7 +167,6 @@
     font-size: 1.5em;
     margin-right: 1.333em;
     vertical-align: middle;
-    margin-top: -4px;
 }
 
 .km-materialblack .km-icon:before,
@@ -178,4 +175,19 @@
 .km-materialblack .km-rowinsert:before,
 .km-materialblack .km-detaildisclose:before {
     margin-top: 0;
+}
+
+.km-widget .km-listview-link,
+.km-widget .km-listview-label {
+    margin: -.750em -.7em -.688em;
+    padding: .750em .7em .688em;
+}
+
+.km-materialblack .km-detail {
+    width: 2em;
+    height: 2em;
+}
+
+.km-materialblack .km-detaildisclose  {
+    font-size: 0.857em;
 }

@@ -1,0 +1,74 @@
+@import "../common/icons.less";
+@import "../common/tabstrip.less";
+@import "base.less";
+
+/* TabStrip */
+
+.km-android .km-tabstrip
+{
+    display: table;
+    padding: 0;
+    background-clip: padding-box;
+}
+
+.km-android .km-tabstrip .km-text
+{
+    font-size: 0;
+}
+
+.km-android .km-tabstrip .km-button
+{
+    display: table-cell;
+    font-size: .8em;
+    padding: .5em 0 .4em 0;
+    border-radius: 0;
+    border-style: solid;
+    border-color: transparent;
+    border-width: 0;
+    background-clip: padding-box;
+    min-width: 5em;
+}
+
+.km-android.km-horizontal .km-tabstrip .km-text
+{
+    height: 2em;
+}
+
+.km-android.km-horizontal .km-tabstrip .km-text
+{
+    margin-top: -2.2em;
+}
+
+.km-android.km-horizontal .km-tabstrip .km-button
+{
+    padding: 0;
+}
+
+.km-android .km-tabstrip .km-badge
+{
+    top: 0;
+}
+
+.km-android .km-tabstrip .km-state-active
+{
+    border-bottom-width: .4em;
+    padding-bottom: 0;
+    .box-shadow(none);
+    border-color: currentcolor;
+}
+
+.km-android .km-tabstrip .km-state-active .km-icon
+{
+    color: inherit;
+}
+
+.km-android .km-tabstrip .km-icon:before
+{
+    display: none;
+}
+
+.km-android .km-tabstrip .km-state-active .km-icon:before
+{
+    display: block;
+}
+

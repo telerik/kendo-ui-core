@@ -1,0 +1,335 @@
+@import "../common/base.less";
+
+@flat-border-width: 1px;
+@flat-border-radius: 3px;
+@flat-inline-border-radius: @flat-border-radius - 1px;
+
+.km-flat
+{
+    font: normal 1em "HelveticaNeue Light", "Roboto Light", "Slate Light", "Segoe WP", NokiaPureTextLight, sans-serif;
+}
+
+/* override transform options for performance */
+.km-root .km-flat.km-pane,
+.km-root .km-flat .km-view,
+.km-root .km-flat .km-slider,
+.km-root .km-flat .km-switch,
+.km-root .km-flat .km-group-title,
+.km-root .km-flat .km-filter-reset,
+.km-root .km-flat .km-shim .k-animation-container
+{
+    -webkit-transform: none;
+}
+
+.km-flat,
+.km-flat *
+{
+    .box-sizing(border-box);
+    .background-clip(border-box);
+}
+
+/* Revert box/clip for Web widgets */
+.km-flat [class^=k-]
+{
+    .box-sizing(content-box);
+}
+
+
+.km-flat .km-tabstrip .km-button
+{
+    background: none;
+}
+
+/* PopUp */
+
+.km-flat .km-popup .k-popup
+{
+    font-size: 1em !important;
+}
+
+.km-flat .km-popup .k-item,
+.km-flat .km-actionsheet > li > a
+{
+    text-decoration: none;
+    padding: .5em .6em;
+    border-radius: 0;
+    border-width: 0 0 @flat-border-width;
+    border-style: solid;
+    .box-sizing(border-box);
+}
+
+.km-flat .km-popup
+{
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    .box-sizing(border-box);
+}
+
+.km-flat .km-popup .k-list-container
+{
+    width: 100% !important;
+    height: auto !important;
+}
+
+.km-flat .km-actionsheet,
+.km-flat .km-popup .k-list-container
+{
+    max-height: 80%;
+}
+
+.km-flat .km-actionsheet-wrapper,
+.km-flat .km-popup .k-list-container
+{
+    bottom: 0;
+    border-width: @flat-border-width 0 0;
+    border-style: solid;
+    border-radius: 0;
+    .box-sizing(border-box);
+}
+
+.km-flat .km-shim .k-animation-container
+{
+    left: 0;
+    top: auto;
+    bottom: 0;
+}
+
+.km-flat .km-popup-wrapper
+{
+    padding: 15px;
+}
+
+.km-flat .km-popup.km-pane,
+.km-flat .km-actionsheet-wrapper.km-popup
+{
+    border-radius: @flat-border-radius;
+}
+
+/* Loader & Pull-to-refresh */
+
+.km-flat .km-load-more
+{
+    height: 3.4em;
+}
+
+.km-flat .km-load-more .km-button
+{
+    margin: 0 .8em;
+    display: block;
+}
+
+.km-flat .km-loader:before,
+.km-flat .km-scroller-refresh.km-load-more,
+.km-flat .km-scroller-pull
+{
+    border-radius: 20em;
+    overflow: visible;
+}
+
+.km-flat .km-loader:before
+{
+    content: "\a0";
+    display: block;
+    position: absolute;
+    margin-top: -2em;
+    margin-left: -2em;
+    width: 4em;
+    height: 4em;
+    top: 50%;
+    left: 50%;
+    border-radius: 5em;
+}
+
+.km-flat .km-loader
+{
+    left: 0;
+    top: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.km-flat .km-scroller-refresh.km-load-more
+{
+    padding: 0;
+    position: relative;
+    margin: auto;
+}
+
+.km-flat .km-scroller-refresh.km-load-more,
+.km-flat .km-scroller-pull
+{
+    font-size: 1em;
+    width: 2.5em;
+    height: 2.5em;
+    top: .25em;
+    white-space: nowrap;
+}
+
+.km-flat .km-scroller-pull
+{
+    left: 50%;
+    margin: 0 0 0 -90px;
+}
+
+.km-flat .km-loader h1
+{
+    display: none;
+    font-size: 1em;
+    position: absolute;
+    left: -50%;
+    width: 200%;
+    top: 55%;
+}
+
+.km-flat .km-scroller-pull .km-template
+{
+    position: absolute;
+    line-height: 2em;
+    font-size: 1.2em;
+    min-width: 0;
+    top: 0;
+    left: 3em;
+}
+
+.km-flat .km-loading,
+.km-flat .km-loader .km-loading-left,
+.km-flat .km-loader .km-loading-right,
+.km-flat .km-load-more.km-scroller-refresh .km-icon,
+.km-flat .km-scroller-pull.km-scroller-refresh .km-icon,
+.km-flat .km-scroller-refresh .km-loading-left,
+.km-flat .km-scroller-refresh .km-loading-right
+{
+    font-size: 1em;
+    display: block;
+    width: .36em;
+    height: 1em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -.8em;
+    margin-top: -.5em;
+    border-radius: 1em;
+    .animation(km-flatload .6s infinite linear);
+    -webkit-background-clip: none;
+}
+
+.km-flat .km-scroller-pull .km-icon
+{
+    margin-right: 0;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -1rem;
+    margin-top: -1rem;
+}
+
+.km-flat .km-load-more.km-scroller-refresh .km-icon,
+.km-flat .km-scroller-pull.km-scroller-refresh .km-icon,
+.km-flat .km-scroller-refresh .km-loading-left,
+.km-flat .km-scroller-refresh .km-loading-right
+{
+    height: .6em;
+    margin-top: -.3em;
+    margin-left: -.6em;
+    width: .25em;
+    .animation(km-flatrefresh .6s infinite linear);
+}
+
+.km-flat .km-scroller-pull .km-icon:after
+{
+    content: "\e012";
+    margin-left: -3px;
+}
+
+.km-flat .km-scroller-refresh .km-icon:after
+{
+    display: none;
+}
+
+.km-root .km-flat .km-loading-left
+{
+    margin-left: -.2em;
+    .animation-delay(.2s);
+}
+
+.km-root .km-flat .km-loading-right
+{
+    margin-left: .42em;
+    .animation-delay(.4s);
+}
+
+.km-flat .km-scroller-refresh .km-loading-left
+{
+    margin-left: -.18em;
+}
+
+.km-flat .km-scroller-refresh .km-loading-right
+{
+    margin-left: .28em;
+}
+
+@keyframes km-flatload
+{
+    0% { height: 1em; margin-top: -.5em; }
+    33% { height: 2em; margin-top: -1em; }
+    66% { height: 1em; margin-top: -.5em; }
+}
+
+@-moz-keyframes km-flatload
+{
+    0% { height: 1em; margin-top: -.5em; }
+    33% { height: 2em; margin-top: -1em; }
+    66% { height: 1em; margin-top: -.5em; }
+}
+
+@-webkit-keyframes km-flatload
+{
+    0% { height: 1em; margin-top: -.5em; }
+    33% { height: 2em; margin-top: -1em; }
+    66% { height: 1em; margin-top: -.5em; }
+}
+
+@keyframes km-flatrefresh
+{
+    0% { height: .6em; margin-top: -.3em; }
+    33% { height: 1.2em; margin-top: -.6em; }
+    66% { height: .6em; margin-top: -.3em; }
+}
+
+@-moz-keyframes km-flatrefresh
+{
+    0% { height: .6em; margin-top: -.3em; }
+    33% { height: 1.2em; margin-top: -.6em; }
+    66% { height: .6em; margin-top: -.3em; }
+}
+
+@-webkit-keyframes km-flatrefresh
+{
+    0% { height: .6em; margin-top: -.3em; }
+    33% { height: 1.2em; margin-top: -.6em; }
+    66% { height: .6em; margin-top: -.3em; }
+}
+
+
+
+
+
+/* Color Template */
+@import "template.less";
+
+
+
+/* Tablet Styles */
+
+.km-tablet .km-flat.km-horizontal .km-navbar .km-button,
+.km-tablet .km-flat.km-horizontal .km-toolbar .km-button
+{
+    margin-top: .2rem;
+    margin-bottom: .2rem;
+}
+
+

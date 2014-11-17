@@ -1,0 +1,110 @@
+@import "../common/icons.less";
+@import "../common/listview.less";
+@import "base.less";
+
+/* ListView */
+
+.km-ios7 .km-listinset,
+.km-ios7 .km-listgroupinset
+{
+    margin: 0;
+}
+
+.km-ios7 .km-list > li
+{
+    font-size: 1.1em;
+    padding-left: 1em;
+    background: transparent;
+    border-radius: 0;
+    border-width: 1px 0 0;
+    border-style: solid;
+}
+
+.km-ios7 .km-list > .km-load-more+li {
+    border-top: 0;
+}
+
+.km-ios7 .km-listview-link:after
+{
+    width: .66rem;
+    height: .64rem;
+    border-width: 0;
+    box-shadow: inset -.2rem .2rem 0 currentcolor;
+}
+
+.km-ios7 .km-list li > .km-listview-link,
+.km-ios7 .km-list li > .km-listview-label
+{
+    margin-left: -1em;
+    padding-left: 1em;
+    border-radius: 0;
+}
+
+.km-ios7 .km-group-title
+{
+    font-size: .95em;
+    position: -webkit-sticky;
+    text-indent: 1em;
+    margin-top: 0;
+    font-weight: normal;
+    text-transform: uppercase;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+}
+
+.km-ios7 .km-listgroup .km-group-title,
+.km-ios7 .km-listgroupinset .km-group-title
+{
+    line-height: 2em;
+    border-top-width: 2em;
+    border-top-style: solid;
+}
+
+.km-ios7 .km-listview .km-switch
+{
+    margin-top: -1.1rem;
+}
+
+/* Filter box */
+
+.km-ios7 .km-filter-wrap
+{
+    color: inherit;
+    border-radius: @ios7-secondary-border-radius;
+    background: currentcolor;
+}
+
+.km-ios7 .km-filter-wrap > input
+{
+    padding: 0 1.8em;
+    color: transparent;
+    background: transparent;
+}
+
+.km-ios7 .km-filter-wrap > input::-webkit-input-placeholder { text-align: center; }
+.km-ios7 .km-filter-wrap > input::-moz-placeholder { text-align: center; }
+.km-ios7 .km-filter-wrap > input::-ms-input-placeholder { text-align: center; }
+
+.km-ios7 .km-filter-wrap > input:focus::-webkit-input-placeholder { text-align: left; }
+.km-ios7 .km-filter-wrap > input:focus::-moz-placeholder { text-align: left; }
+.km-ios7 .km-filter-wrap > input:focus::-ms-input-placeholder { text-align: left; }
+
+.km-ios7 .km-filter-wrap:before,
+.km-ios7 .km-filter-reset .km-clear
+{
+    position: absolute;
+    top: 50%;
+    margin-top: -.55em;
+}
+
+.km-ios7 .km-filter-wrap:before
+{
+    font-size: 1em;
+    content: "\e21e";
+}
+
+.km-ios7 .km-filter-wrap .km-clear:after
+{
+    content: "\e031";
+}
+

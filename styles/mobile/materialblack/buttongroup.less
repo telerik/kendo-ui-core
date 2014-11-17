@@ -21,17 +21,6 @@
     border-radius: 0;
 }
 
-.km-materialblack .km-buttongroup > *.km-state-active
-{
-    //border-right-width: 1px;
-}
-
-.km-materialblack .km-buttongroup > *.km-state-active + *
-{
-    //border-left-width: 0;
-}
-
-//New styles
 .km-buttongroup {
 	margin: 0;
 }    
@@ -49,20 +38,22 @@
 	display: inline-block;
 }
 
-/*.km-materialblack .km-buttongroup .km-text
-{
-	display: inline-block;
-	
-	text-transform: uppercase;
-}*/
-
-/*.km-materialblack .km-buttongroup .km-state-active .km-text
-{
-	border-bottom-width: 2px;
-	border-bottom-style: solid;
-}*/
-
 .km-view .km-buttongroup .km-button:last-child
 {
     border-right-width: 0;
+}
+
+.km-materialblack .km-widget.km-navbar .km-buttongroup {
+	font-size: .875em;
+	line-height: 1em;
+	margin: 0;
+	display: inline-block;
+	top: 0;	
+    height: auto;
+    margin-bottom: -1px;
+}
+
+.km-materialblack .km-widget.km-navbar .km-buttongroup > .km-button {
+	font-size: .778em;
+	text-indent: 0;
 }

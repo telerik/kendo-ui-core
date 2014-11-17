@@ -1,0 +1,173 @@
+.flexbox() {
+    display: ~"-moz-box";
+    display: ~"-webkit-box";
+    display: ~"-webkit-flex";
+    display: ~"-ms-flexbox";
+    display: flex;
+}
+
+.flexbox(@type) {
+    display: ~"-moz-@{type}-box";
+    display: ~"-webkit-@{type}-box";
+    display: ~"-webkit-@{type}-flex";
+    display: ~"-ms-@{type}-flexbox";
+    display: ~"@{type}-flex";
+}
+
+.box-orient(@direction) {
+    -moz-box-orient: @direction;
+    -webkit-box-orient: @direction;
+}
+
+.box-direction(@direction) {
+    -moz-box-direction: @direction;
+    -webkit-box-direction: @direction;
+}
+
+.flex-direction(@direction) {
+    -webkit-flex-direction: @direction;
+    -ms-flex-direction: @direction;
+    flex-direction: @direction;
+}
+
+.flex-wrap(@wrap) {
+    -webkit-flex-wrap: @wrap;
+    -ms-flex-wrap: @wrap;
+    flex-wrap: @wrap;
+}
+
+.flex(@amount) {
+    -moz-box-flex: @amount;
+    -webkit-box-flex: @amount;
+    -webkit-flex: @amount;
+    -ms-flex: @amount;
+    flex: @amount;
+}
+
+.flex-align(@alignment) {
+    -moz-box-align: @alignment;
+    -webkit-box-align: @alignment;
+    -ms-flex-align: @alignment;
+    flex-align: @alignment;
+}
+
+.flex-align-items(@alignment) {
+    -webkit-align-items: @alignment;
+    -ms-align-items: @alignment;
+    align-items: @alignment;
+}
+
+.flex-align-content(@alignment) {
+    -webkit-align-content: @alignment;
+    align-content: @alignment;
+}
+
+.flex-pack(@pack) {
+    -moz-box-pack: @pack;
+    -webkit-box-pack: @pack;
+    -webkit-flex-pack: @pack;
+    -ms-flex-pack: @pack;
+    flex-pack: @pack;
+}
+
+.box-shadow(...) {
+    box-shadow: @arguments;
+    -webkit-box-shadow: @arguments;
+}
+
+.box-sizing(@type) {
+    -moz-box-sizing: @type;
+    -webkit-box-sizing: @type;
+    box-sizing: @type;
+}
+
+.background-clip(@type) {
+    -moz-background-clip: @type;
+    -webkit-background-clip: @type;
+    background-clip: @type;
+}
+
+.transform(...) {
+    -webkit-transform: @arguments;
+    -moz-transform: @arguments;
+    -ms-transform: @arguments;
+    -o-transform: @arguments;
+    transform: @arguments;
+}
+
+.transform-origin(...) {
+    -webkit-transform-origin: @arguments;
+    -moz-transform-origin: @arguments;
+    -ms-transform-origin: @arguments;
+    -o-transform-origin: @arguments;
+    transform-origin: @arguments;
+}
+
+.transform-style(...) {
+    -webkit-transform-origin: @arguments;
+    -moz-transform-origin: @arguments;
+    transform-style: @arguments;
+}
+
+.transition(...) {
+    -webkit-transition: @arguments;
+    -moz-transition: @arguments;
+    -ms-transition: @arguments;
+    -o-transition: @arguments;
+    transition: @arguments;
+}
+
+.pTransition(...) {
+    -webkit-transition: ~"-webkit-@{arguments}";
+    -moz-transition: ~"-moz-@{arguments}";
+    -ms-transition: ~"-ms-@{arguments}";
+    -o-transition: ~"-o-@{arguments}";
+    transition: @arguments;
+}
+
+.user-select(...) {
+    -moz-user-select: @arguments;
+    -webkit-user-select: @arguments;
+    -ms-user-select: @arguments;
+    user-select: @arguments;
+}
+
+.animation(...) {
+    animation: @arguments;
+    -moz-animation: @arguments;
+    -webkit-animation: @arguments;
+}
+
+.animation-delay(...) {
+    animation-delay: @arguments;
+    -moz-animation-delay: @arguments;
+    -webkit-animation-delay: @arguments;
+}
+
+.appearance(...) {
+    appearance: @arguments;
+    -moz-appearance: @arguments;
+    -webkit-appearance: @arguments;
+}
+
+.text-size-adjust(...) {
+    -webkit-text-size-adjust: @arguments;
+    -moz-text-size-adjust: @arguments;
+    text-size-adjust: @arguments;
+}
+
+.linear-gradient(...) {
+    background: linear-gradient("webkit", @arguments);
+    background: linear-gradient("blink", @arguments);
+    background: linear-gradient("moz", @arguments);
+    background: linear-gradient("o", @arguments);
+    background: linear-gradient("ms", @arguments);
+}
+
+.linear-gradient-image(...) {
+    background-image: linear-gradient("webkit", @arguments);
+    background-image: linear-gradient("blink", @arguments);
+    background-image: linear-gradient("moz", @arguments);
+    background-image: linear-gradient("ms", @arguments);
+    background-image: linear-gradient("o", @arguments);
+}

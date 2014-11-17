@@ -1,0 +1,56 @@
+@import "button.less";
+
+.km-tabstrip
+{
+    padding: .4rem .7rem;
+}
+
+.km-horizontal .km-tabstrip
+{
+    padding: .2rem .7rem;
+}
+
+.km-tabstrip
+{
+    .box-orient(horizontal);
+    .flex-align(start);
+    .flex-direction(row);
+    -moz-box-pack: start;
+    padding: 0;
+    text-align: center;
+    word-spacing: -1em;
+}
+
+.km-tabstrip .km-button
+{
+    word-spacing: normal;
+    .box-shadow(none);
+    vertical-align: bottom;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    .km-tabstrip { word-spacing: normal; width: 100%; }
+}
+
+.km-tabstrip .km-button
+{
+    font-family: Arial, Helvetica, sans-serif;
+    color: #a8a8a8;
+    padding: .4em .8em;
+    border-width: 0;
+    border-color: transparent;
+    background: none;
+    margin: 0;
+    text-align: center;
+}
+
+.km-tabstrip .km-button:first-child
+{
+    border-left: 0;
+}
+
+.km-tabstrip .km-button:last-child
+{
+    border-right: 0;
+}
+

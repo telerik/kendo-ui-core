@@ -1,0 +1,351 @@
+@flat-main-color: #4c5356;
+@flat-second-color: #bababa;
+@flat-background: #f4f4f4;
+@flat-dark-background: #363940;
+@flat-list-background: #fcfcfc;
+@flat-button-background: rgba(0,0,0,.1);
+@flat-border-color: rgba(0,0,0,.1);
+@flat-active-color: #fff;
+@flat-active-background: #10c4b2;
+@flat-second-active-background: #da2228;
+@flat-light-shadow: rgba(255,255,255,.2);
+@flat-overlay-background: rgba(0,0,0,.4);
+
+.km-flat,
+.km-flat .km-navbar,
+.km-flat .k-toolbar,
+.km-flat .km-detail,
+.km-flat .km-content
+{
+    color: @flat-main-color;
+    background-color: @flat-background;
+}
+
+/* Button */
+
+.km-flat .km-button
+{
+    background: @flat-button-background;
+    border-color: @flat-border-color;
+}
+
+/* Badges and Details */
+
+.km-flat .km-detail,
+.km-flat .k-toolbar
+{
+    border-color: @flat-border-color;
+}
+
+/* Switch */
+
+.km-flat .km-switch-wrapper
+{
+    background-color: @flat-second-color;
+}
+
+.km-flat .km-switch-background,
+.km-flat .k-slider-selection
+{
+    .linear-gradient-image(top, @flat-second-color, @flat-second-color);
+}
+
+.km-flat .km-switch-handle
+{
+    background: @flat-background;
+    border-color: rgba(0,0,0,.1);
+    -webkit-box-shadow: 0 1px 0 1px currentcolor, 0 -1px 0 1px currentcolor;
+    box-shadow:0 1px 0 1px currentcolor, 0 -1px 0 1px currentcolor;
+}
+
+.km-flat .km-switch-off .km-switch-handle
+{
+    -webkit-box-shadow: 0 1px 0 1px @flat-second-color, 0 -1px 0 1px @flat-second-color;
+    box-shadow: 0 1px 0 1px @flat-second-color, 0 -1px 0 1px @flat-second-color;
+}
+
+.km-flat .km-switch-container,
+.km-flat .km-switch-wrapper
+{
+    border-color: #f0f0f0;
+}
+
+/* Slider */
+
+.km-flat .k-slider-track
+{
+    background-color: @flat-second-color;
+}
+
+/* ListView */
+
+.km-flat .km-list > li
+{
+    background: @flat-list-background;
+    border-color: @flat-border-color;
+    .box-shadow(inset 0 @flat-border-width 0 @flat-light-shadow);
+}
+
+.km-flat .km-listinset > li:first-child,
+.km-flat .km-listgroupinset .km-list > li:first-child
+{
+    border-color: @flat-border-color;
+}
+
+.km-flat .km-listinset > li:last-child,
+.km-flat .km-listgroupinset .km-list > li:last-child
+{
+    border-color: @flat-border-color;
+}
+
+.km-flat .km-listview-link:after
+{
+    color: lighten(@flat-main-color, 30);
+    border-color: currentcolor;
+}
+
+.km-flat .km-group-title
+{
+    background: @flat-background;
+    border-color: @flat-border-color;
+}
+
+.km-flat .km-filter-wrap:before,
+.km-flat .km-filter-reset .km-clear
+{
+	color: @flat-main-color;
+}
+
+.km-flat .km-filter-wrap > input
+{
+    color: @flat-main-color;
+    border-color: @flat-border-color;
+}
+
+.km-flat .km-filter-wrap > input:focus
+{
+    border-color: #000;
+}
+
+/* ScrollView */
+
+.km-flat .km-pages li
+{
+    background: @flat-border-color;
+}
+
+/* Forms */
+
+.km-flat .km-list input[type=password],
+.km-flat .km-list input[type=search],
+.km-flat .km-list input[type=number],
+.km-flat .km-list input[type=tel],
+.km-flat .km-list input[type=url],
+.km-flat .km-list input[type=email],
+.km-flat .km-list input[type=month],
+.km-flat .km-list input[type=color],
+.km-flat .km-list input[type=week],
+.km-flat .km-list input[type=date],
+.km-flat .km-list input[type=time],
+.km-flat .km-list input[type=datetime],
+.km-flat .km-list input[type=datetime-local],
+.km-flat .km-list input[type=text]:not(.k-input),
+.km-flat .km-list select:not([multiple]),
+.km-flat .km-list .k-dropdown-wrap,
+.km-flat .km-list textarea,
+.km-flat .km-list .k-dropdown-wrap .k-input
+{
+    color: @flat-main-color;
+}
+
+.km-flat .km-list select:not([multiple]) option
+{
+    color: #333;
+}
+
+.km-flat .km-content .km-list .km-state-active input[type=password],
+.km-flat .km-content .km-list .km-state-active input[type=search],
+.km-flat .km-content .km-list .km-state-active input[type=number],
+.km-flat .km-content .km-list .km-state-active input[type=tel],
+.km-flat .km-content .km-list .km-state-active input[type=url],
+.km-flat .km-content .km-list .km-state-active input[type=email],
+.km-flat .km-content .km-list .km-state-active input[type=month],
+.km-flat .km-content .km-list .km-state-active input[type=color],
+.km-flat .km-content .km-list .km-state-active input[type=week],
+.km-flat .km-content .km-list .km-state-active input[type=date],
+.km-flat .km-content .km-list .km-state-active input[type=time],
+.km-flat .km-content .km-list .km-state-active input[type=datetime],
+.km-flat .km-content .km-list .km-state-active input[type=datetime-local],
+.km-flat .km-content .km-list .km-state-active input[type=text]:not(.k-input),
+.km-flat .km-content .km-list .km-state-active select:not([multiple]),
+.km-flat .km-content .km-list .km-state-active textarea
+{
+    color: @flat-active-color;
+}
+
+/* Checkboxes and Radios */
+
+.km-flat .km-listview-label input[type=radio],
+.km-flat .km-listview-label input[type=checkbox]
+{
+    border-color: @flat-border-color;
+    background: @flat-background;
+}
+
+.km-flat .km-listview-label input[type=checkbox]:checked:after
+{
+    color: #eee;
+}
+
+/* Shim */
+
+.km-flat .km-shim,
+.km-phone .km-flat .km-actionsheet-wrapper
+{
+    background: rgba(0,0,0,.4);
+}
+
+/* PopUp */
+
+.km-flat .km-popup .k-item,
+.km-flat .km-actionsheet > li > a
+{
+    background: @flat-dark-background;
+    border-bottom-color: @flat-light-shadow;
+}
+
+.km-flat .km-popup
+{
+    background: @flat-overlay-background;
+}
+
+.km-flat .km-actionsheet-wrapper,
+.km-flat .km-popup .k-list-container
+{
+    background: @flat-overlay-background;
+    border-top-color: @flat-light-shadow;
+}
+
+.km-flat .km-popup.km-pane,
+.km-tablet .km-flat .km-actionsheet-wrapper
+{
+    background-color: @flat-dark-background;
+}
+
+.km-flat .km-popup-arrow:after
+{
+    border-color: @flat-dark-background transparent;
+}
+
+.km-flat .km-left .km-popup-arrow:after,
+.km-flat .km-right .km-popup-arrow:after
+{
+    border-color: transparent @flat-dark-background;
+}
+
+/* Loader & Pull-to-refresh */
+
+.km-flat .km-loader
+{
+    background: rgba(0,0,0,.05);
+}
+
+.km-flat .km-loader h1
+{
+    color: @flat-main-color;
+}
+
+
+
+
+
+/* Active States */
+
+.km-flat .km-detail:active,
+.km-flat .km-state-active .km-detail,
+.km-flat .km-state-active[style*=background]
+{
+    .box-shadow(inset 0 0 0 1000px rgba(0,0,0,.2));
+}
+
+/* Active States */
+
+.km-flat .km-badge,
+.km-flat .km-rowinsert,
+.km-flat .km-rowdelete,
+.km-flat .km-state-active,
+.km-flat .km-switch-label-on,
+.km-flat .km-switch-label-off,
+.km-flat .km-tabstrip .km-button,
+.km-flat .km-popup .k-item,
+.km-flat .km-actionsheet > li > a,
+.km-flat .km-tabstrip .km-state-active,
+.km-flat .k-slider .k-draghandle,
+.km-flat .k-slider .k-draghandle:hover,
+.km-flat .km-scroller-pull .km-icon,
+.km-flat .km-popup.km-pane .km-navbar,
+.km-flat .km-popup.km-pane .k-toolbar,
+.km-flat .km-popup.km-pane .km-tabstrip,
+.km-flat .km-popup .k-state-hover,
+.km-flat .km-popup .k-state-focused,
+.km-flat .km-popup .k-state-selected,
+.km-flat .km-actionsheet > li > a:active,
+.km-flat .km-actionsheet > li > a:hover,
+.km-flat .km-actionsheet > li > .km-state-active,
+.km-flat li.km-state-active .km-listview-link,
+.km-flat li.km-state-active .km-listview-label,
+.km-flat .km-state-active .km-listview-link:after
+{
+    color: @flat-active-color;
+}
+
+.km-flat .km-loader > *:not(h1),
+.km-flat .km-filter-wrap > input,
+.km-flat .km-switch-handle.km-state-active,
+.km-root .km-flat .km-scroller-refresh span:not(.km-template)
+{
+    background: @flat-active-color;
+}
+
+.km-flat .km-switch-handle,
+.km-flat .k-slider-selection,
+.km-flat .km-switch-background
+{
+    color: @flat-active-background;
+}
+
+.km-flat .km-rowinsert,
+.km-flat .km-state-active,
+.km-flat .km-scroller-pull,
+.km-flat .km-loader:before,
+.km-flat .k-slider-selection,
+.km-flat .km-touch-scrollbar,
+.km-flat .km-pages .km-current-page,
+.km-flat .k-slider .k-draghandle,
+.km-flat .k-slider .k-draghandle:hover,
+.km-flat .km-tabstrip .km-state-active,
+.km-flat .km-scroller-refresh.km-load-more,
+.km-flat .km-popup .k-state-hover,
+.km-flat .km-popup .k-state-focused,
+.km-flat .km-popup .k-state-selected,
+.km-flat .km-actionsheet > li > a:active,
+.km-flat .km-actionsheet > li > a:hover,
+.km-flat .km-actionsheet > li > .km-state-active,
+.km-flat li.km-state-active .km-listview-link,
+.km-flat li.km-state-active .km-listview-label,
+.km-flat .km-listview-label input[type=radio]:checked,
+.km-flat .km-listview-label input[type=checkbox]:checked
+{
+    background: @flat-active-background;
+}
+
+.km-flat .km-filter-wrap > input:focus
+{
+    border-color: @flat-active-background;
+}
+
+.km-flat .km-badge,
+.km-flat .km-rowdelete
+{
+    background: @flat-second-active-background;
+}

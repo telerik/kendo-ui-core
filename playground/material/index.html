@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<script src="http://cdn.kendostatic.com/2014.2.1008/js/jquery.min.js"></script>
+<script src="http://cdn.kendostatic.com/2014.2.1008/js/kendo.all.min.js"></script>
+<!-- <link href="mobile/kendo.mobile.all.less" rel="stylesheet/less" type="text/css" /> -->
+<link href="mobile/kendo.mobile.materialblack.less" rel="stylesheet/less" type="text/css" />
+<script src="src/less.js" type="text/javascript"></script>    
+</head>
+<body>
+<!-- ActionSheet -->
+<!--<div data-role="view" data-title="Inbox" id="actionsheet-view">
+<h3 id="actionResult"></h3>
+<ul data-role="listview" data-source="inbox" data-template="inboxItem" class="inboxList"></ul>
+
+<ul data-role="actionsheet" id="inboxActions" data-open="onOpen" data-popup='{"direction": "left"}'>
+    <li class="km-actionsheet-title">Monday Meeting:</li>
+    <li><a href="#" data-action="reply">Reply</a></li>
+    <li><a href="#" data-action="replyAll">Reply All</a></li>
+    <li><a href="#" data-action="archive">Archive</a></li>
+</ul>
+</div>
+
+<script type="script/x-kendo-template" id="inboxItem">
+<h3 class="time">#: Time#</h3><h3>#: From #</h3>
+<a class="reply"
+    data-role="button"
+    data-rel="actionsheet"
+    href="\\#inboxActions"
+    data-actionsheet-context="#:ID#">Reply</a>
+<h2>#: Subject#</h2>
+<p>#: Text#</p>
+</script>
+
+<script>
+var inbox = [
+    {
+        ID: 1,
+        From: "John Doe",
+        Subject: "Monday meeting",
+        Text: "Hi Tom, Since Monday I'll be out of office, I'm rescheduling the meeting for Tuesday.",
+        Time: "07:56"
+    }
+];
+</script>-->
+
+<style>
+/*@font-face {
+    font-family: "KendoUI";
+    src: url("images/KendoUI.woff") format("woff"),
+         url("images/KendoUI.ttf") format("truetype");
+}
+
+.km-actionsheet > li > a:before {
+	content: "\e0d0";
+	font: 1em/1.5em "KendoUI" !important;
+	margin-right: 20px;
+}*/
+
+</style>
+<!--......................................................................................................................-->
+
+<!--Button-->
+<!--<div data-role="view" id="button-home" data-title="Sports Academy" data-persist="true">
+    <div class="home head">&nbsp;</div>
+    <a class="button selected-button" data-role="button">Home</a><a class="button" data-role="button" href="#facility">Facility</a>
+    <ul data-role="listview" data-style="inset">
+        <li>
+            <p>Our Sports Academy provides a venue for outdoor and indoor sports and activities for children and adults of all ages.</p>
+        </li>
+    </ul>
+</div>
+
+<div data-role="view" id="facility" data-title="Facility" data-persist="true">
+    <div class="facility head">&nbsp;</div>
+    <a class="button" data-role="button" href="#:back">Home</a><a class="button k-state-disabled" data-role="button" href="#facility" disabled="disabled">Facility</a>
+    <ul data-role="listview" data-style="inset">
+        <li>
+            <p>The facility has two indoor basketball fields, olympic size swimming pool, outdoor soccer field, baseball field, golf club and more.</p>
+        </li>
+    </ul>
+</div>-->
+<!--......................................................................................................................-->
+
+<!-- Button Group -->
+<!--<div data-role="view" id="buttongroup-home" data-show="mobileSalesViewInit" data-title="Sales Report">
+    <div class="head">&nbsp;</div>
+    <ul id="select-period">
+        <li>
+            Month
+        </li>
+        <li>
+            Quarter
+        </li>
+        <li>
+            Year
+        </li>
+    </ul>
+    <ul data-role="listview" data-style="inset">
+        <li>January <span class="sales-up">&uarr; $ 35,000</span></li>
+        <li>February <span class="sales-down">&darr; $ 25,000</span></li>
+        <li>March <span class="sales-down">&darr; $ 23,000</span></li>
+        <li>April <span class="sales-up">&uarr; $ 30,000</span></li>
+        <li>May <span class="sales-up">&uarr; $ 31,000</span></li>
+        <li>June <span class="sales-down">&darr; $ 29,000</span></li>
+        <li>July <span class="sales-up">&uarr; $ 35,000</span></li>
+        <li>August <span class="sales-up">&uarr; $ 37,000</span></li>
+        <li>September <span class="sales-hold">&rarr; $ 37,000</span></li>
+        <li>October <span class="sales-hold">&rarr; $ 37,000</span></li>
+        <li>November <span class="sales-up">&uarr; $ 38,000</span></li>
+        <li>December <span class="sales-up">&uarr; $ 40,000</span></li>
+    </ul>
+    <ul data-role="listview" data-style="inset" style="display:none">
+        <li>1st Quarter <span class="sales-up">&uarr; $ 83,000</span></li>
+        <li>2nd Quarter <span class="sales-up">&uarr; $ 90,000</span></li>
+        <li>3rd Quarter <span class="sales-up">&uarr; $ 109,000</span></li>
+        <li>4th Quarter <span class="sales-up">&uarr; $ 115,000</span></li>
+    </ul>
+    <ul data-role="listview" data-style="inset" style="display:none">
+        <li>2009 <span class="sales-up">&uarr; $ 120,000</span></li>
+        <li>2010 <span class="sales-down">&darr; $ 109,000</span></li>
+        <li>2011 <span class="sales-hold">&rarr; $ 109,000</span></li>
+    </ul>
+</div>
+
+
+<script>
+    function mobileSalesViewInit() {
+        var listviews = this.element.find("ul.km-listview");
+
+        $("#select-period").kendoMobileButtonGroup({
+            select: function(e) {
+                listviews.hide()
+                         .eq(e.index)
+                         .show();
+            },
+            index: 0
+        });
+        localStorage.clear()
+        less.refresh();
+    }
+</script>-->
+<!--......................................................................................................................-->
+
+
+  <!--  <div data-role="view" id="buttongroup-navbar" data-init="initNameSource" data-show="viewShow" data-title="aaaa">
+    <header data-role="header">
+        <div data-role="navbar" data-title="test">
+            <ul data-role="buttongroup" data-index="0" data-select="regroup">
+                <li>
+                    By Name
+                </li>
+                <li>
+                    By Family
+                </li>
+            </ul>
+            <a data-align="right" data-role="button" class="nav-button" href="#/">Index</a>
+        </div>
+    </header>
+<ul id="select-period">
+        <li>
+            Month
+        </li>
+        <li>
+            Quarter
+        </li>
+        <li>
+            Year
+        </li>
+    </ul>
+
+    <ul data-role="listview" data-type="group" data-source="nameSource" data-template="nameTemplate" data-fixed-headers="true">
+    </ul>
+</div>
+
+
+<script>
+    nameSource = kendo.data.DataSource.create({
+        data: [
+                  { firstName: "Ann", lastName: "Devon", firstLetter: "A", lastLetter: "D" },
+                  { firstName: "Annette", lastName: "Roulet", firstLetter: "A", lastLetter: "R" },
+                  { firstName: "Antonio", lastName: "Moreno", firstLetter: "A", lastLetter: "M" },
+                  { firstName: "Carine", lastName: "Schmitt", firstLetter: "C", lastLetter: "S" }
+              ],
+        group: "firstLetter"
+    });
+
+    function regroup() {
+        nameSource.group(this.selectedIndex ? "lastLetter" : "firstLetter");
+    }
+
+     $("#select-period").kendoMobileButtonGroup({
+            select: function(e) {
+                listviews.hide()
+                         .eq(e.index)
+                         .show();
+            },
+            index: 0
+        });
+</script>
+
+<script id="nameTemplate" type="text/x-kendo-template">
+    <h2>#:firstName# #:lastName#</h2>
+</script>
+
+<style scoped>
+    #buttongroup-navbar h2 {
+        display: inline-block;
+        font-size: 1.1em;
+        margin: 1em 0 .5em 1em;
+    }
+    #buttongroup-navbar img {
+        float: left;
+        width: 4em;
+        height: 4em;
+        margin: 0;
+        border: 1px solid rgba(0,0,0,.2);
+    -webkit-border-radius: 4em;
+    border-radius: 4em;
+    }
+</style>
+-->
+<!-- ListView -->
+<div data-role="view" data-title="Destinations" id="listview-home">
+    <ul data-role="listview" data-style="inset" data-type="group">
+        <li>
+            Africa
+            <ul>
+                <li data-icon="toprated"><a>Nairobi</a></li>
+            </ul>
+        </li>
+        <li>
+            America
+            <ul>
+                <li data-icon="globe"><a>Boston</a></li>
+                <li data-icon="globe"><a>Ottawa</a></li>
+                <li data-icon="toprated"><a>San Francisco</a></li>
+            </ul>
+        </li>
+        <li>
+            Asia
+            <ul>
+                <li data-icon="globe"><a>Bombay</a></li>
+            </ul>
+        </li>
+        <li>
+            Australia
+            <ul>
+                <li data-icon="globe"><a>Melbourne</a></li>
+                <li data-icon="toprated"><a>Sydney</a></li>
+            </ul>
+        </li>
+        <li>
+            Europe
+            <ul>
+                <li data-icon="globe"><a>Cannes</a></li>
+                <li data-icon="globe"><a>Liverpool</a></li>
+                <li data-icon="toprated"><a>London</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<!--......................................................................................................................-->
+
+<!--Detail Buttons -->
+  <!--<div data-role="view" data-title="Detail Buttons">
+    <ul data-role="listview" data-style="inset" data-type="group">
+        <li>
+            Default button styles
+            <ul>
+                <li>Contact Add<a data-role="detailbutton" data-style="contactadd"></a></li>
+                <li>Detail Disclose<a data-role="detailbutton" data-style="detaildisclose"></a></li>
+                <li>Row Insert<a data-role="detailbutton" data-style="rowinsert"></a></li>
+                <li>Row Delete<a data-role="detailbutton" data-style="rowdelete"></a></li>
+            </ul>
+        </li>
+        <li>
+            Custom icons
+            <ul>
+                <li>More info<a data-role="detailbutton"  data-icon="more"></a></li>
+                <li>Battery level<a data-role="detailbutton"  data-icon="battery"></a></li>
+            </ul>
+        </li>
+        <li>
+            Link Items &amp; Detail Buttons
+            <ul>
+                <li><a>Row Insert</a><a data-role="detailbutton" data-style="rowinsert"></a></li>
+                <li><a>Row Delete</a><a data-role="detailbutton" data-style="rowdelete"></a></li>
+                <li><a>More info</a><a data-role="detailbutton"  data-icon="more"></a></li>
+                <li><a>Battery Level</a><a data-role="detailbutton"  data-icon="battery"></a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+-->
+
+<!-- ModalView -->
+ <!--  <div data-role="view" id="modalview-camera" data-title="HTML5 Camera">
+   <a data-role="button" data-rel="modalview" href="#modalview-login" id="modalview-open-button">Login</a>
+</div>
+
+<div data-role="modalview" id="modalview-login" style="width: 90%;">
+    <div data-role="header">
+        <div data-role="navbar">
+            <span>Login</span>
+            <a data-click="closeModalViewLogin" data-role="button" data-align="right">Cancel</a>
+        </div>
+    </div>
+
+    <ul data-role="listview" data-style="inset">
+        <li><label for="username">Username: <input type="text" id="username" /></label></li>
+        <li><label for="password">Password: <input type="password" id="password" /></label></li>
+    </ul>
+    <a data-click="closeModalViewLogin" id="modalview-login-button" type="button" data-role="button">Login</a>
+    <a data-click="closeModalViewLogin" id="modalview-reg-button" type="button" data-role="button">Register</a>
+</div>
+
+<style scoped>
+
+
+</style>
+<script>
+    function closeModalViewLogin() {
+        $("#modalview-login").kendoMobileModalView("close");
+    }
+</script>-->
+
+<!--......................................................................................................................-->
+
+<!--Toolbar-->
+<!--<div data-role="view" id="toolbar-mobile">
+    <header data-role="header">
+        <div data-role="toolbar" data-items='[
+                        {
+                            id: "back",
+                            type: "button",
+                            icon: "arrow-w",
+                            overflow: "never",
+                            align: "left",
+                            url: "#:back"
+                        },
+                        {
+                            type: "splitButton", id: "viewName", name: "viewName", text: "Inbox (18)", menuButtons: [
+                                { id: "option1", text: "Drafts (3)" },
+                                { id: "option2", text: "Sent" },
+                                { id: "option3", text: "Junk (21)" },
+                                { id: "option4", text: "Trash (53)" }
+                            ],
+                            overflow: "never",
+                            align: "left"
+                        },
+
+                        { type: "button", showText: "overflow", id: "prev", text: "Previous", icon: "previous", enable: false, align: "left" },
+                        { type: "button", showText: "overflow", id: "next", text: "Next", icon: "next", align: "left" },
+                        { type: "button", showText: "overflow", id: "flag", text: "Flag", icon: "toprated", click: function(e){$("#flags").data("kendoMobileActionSheet").open(e.target)} },
+                        { type: "button", showText: "overflow", id: "reply", text: "Reply", icon: "reply", click: function(e){$("#reply-options").data("kendoMobileActionSheet").open(e.target)} },
+                        { type: "button", showText: "overflow", id: "disabledBtn", text: "Delete", icon: "delete", click: function(e){$("#delete-confirm").data("kendoMobileActionSheet").open(e.target)} },
+
+                        { type: "button", text: "Organize", overflow: "always", icon: "organize", enable: false }
+                    ]'>
+        </div>
+    </header>
+    
+    <div class="mail-content">
+        <h2>RE: New "Your Links" menu</h2>
+        <h3>From: John Doe</h3>
+        <p>Excellent feature! Except that I instantly imagined that this would be how I keep track of all those demo pages that I wanted to re-visit or remember existed. Any chance you could include the bookmark feature on the demo pages?</p>
+    </div>
+    
+    <ul data-role="actionsheet" id="flags">
+        <li class="km-actionsheet-title">Flag</li>
+        <li><a href="#">Flag</a></li>
+        <li><a href="#">Mark as Unread</a></li>
+        <li><a href="#">Move to Junk</a></li>
+    </ul>
+    
+    <ul data-role="actionsheet" id="reply-options">
+        <li class="km-actionsheet-title">Reply</li>
+        <li><a href="#">Reply</a></li>
+        <li><a href="#">Reply to All</a></li>
+        <li><a href="#">Forward</a></li>
+    </ul>
+    
+    <ul data-role="actionsheet" id="delete-confirm">
+        <li class="km-actionsheet-title">Delete</li>
+        <li><a href="#">Delete</a></li>
+    </ul>
+    
+    <footer data-role="footer">
+        <div data-role="tabstrip">
+            <a data-role="button" data-icon="home" data-badge="18">Inbox</a>
+            <a data-role="button" data-icon="compose" data-badge="3">Drafts</a>
+            <a data-role="button" data-icon="organize" data-badge="21">Junk</a>
+            <a data-role="button" data-icon="trash" data-badge="53">Trash</a>
+        </div>
+    </footer>
+</div>
+
+<style scoped>
+    .km-android #toolbar-mobile {
+        -webkit-box-direction: normal;
+        -moz-box-direction: normal;
+        -webkit-flex-direction: column;
+        flex-direction: column;
+    }
+
+    #back .km-arrow-w:after,
+    #back .km-arrow-w:before
+    {
+        content: "\e013";
+    }
+
+    #examples.km-flat #back .km-arrow-w
+    {
+        font-size: 1em;
+    }
+    
+    .km-previous:after,
+    .km-previous:before
+    {
+        content: "\e011";
+    }
+    
+    .km-next:after,
+    .km-next:before
+    {
+        content: "\e012";
+    }
+
+    .km-ios7 #viewName_wrapper,
+    #examples.km-flat #viewName_wrapper
+    {
+        margin-left: -.5em;
+    }
+
+    .mail-content h2,
+    .mail-content h3,
+    .mail-content p {
+        margin-top: 1em;
+    }
+</style>-->
+<!--......................................................................................................................-->
+
+<!-- NavBar -->
+  <!-- <div data-role="view" id="navbar-home" data-title="Contacts">
+    <header data-role="header">
+        <div data-role="navbar">
+            <a id="back-button" class="nav-button" data-align="left" href="#/" data-role="backbutton">Back</a>
+            <span data-role="view-title"></span>
+            <a data-align="right" data-icon="organize" data-role="button" href="#navbar-grouped">Group</a>
+        </div>
+    </header>
+    <ul data-role="listview">
+        <li><h2>Francisco Chang</h2></li>
+        <li><h2>Daniel Tonini</h2></li>
+
+    </ul>
+</div>
+
+<div data-role="view" id="navbar-grouped" data-title="Contacts">
+    <header data-role="header">
+        <div data-role="navbar">
+            <a class="nav-button" href="#/" data-align="left" data-role="backbutton">Back</a>
+            <span data-role="view-title">Contacts</span>
+            <a data-align="right" data-icon="stop" data-role="button" href="#:back">Ungroup</a>
+        </div>
+    </header>
+    <ul data-role="listview" data-type="group">
+        <li>
+            A
+            <ul>
+                <li><h2>Ann Devon</h2></li>
+                <li><h2>Annette Roulet</h2></li>
+                <li><h2>Antonio Moreno</h2></li>
+            </ul>
+        </li>
+        <li>
+            C
+            <ul>
+                <li><h2>Carine Schmitt</h2></li>
+                <li><h2>Catherine Dewey</h2></li>
+            </ul>
+        </li>
+       
+    </ul>
+</div>
+<style>
+
+</style>-->
+
+<!--......................................................................................................................-->
+
+<!-- Switch -->
+  <!--<div data-role="view" id="switch-home" data-init="mobileSwitchInit" data-show="viewShow" data-title="User Settings">
+    <ul data-role="listview" data-style="inset" data-type="group">
+        <li>Profile
+            <ul>
+                <li><h2>Eduardo <span>Saavedra</span></h2></li>
+                <li>Brand Manager at Marketing Team</li>
+            </ul>
+        </li>
+
+        <li>Password
+            <ul>
+                <li>User cannot change pasword <input data-role="switch" id="email-switch" checked="checked" /></li>
+                <li>Password never expires <input id="wink-switch" /></li>
+            </ul>
+        </li>
+
+        <li>Newsletter Subscription
+            <ul>
+                <li>Subscribed <input id="subscription-switch" /></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<script>
+    function mobileSwitchInit() {
+        $("#wink-switch").kendoMobileSwitch();
+
+        $("#subscription-switch").kendoMobileSwitch({
+            checked: true,
+            onLabel: "YES",
+            offLabel: "NO"
+        });
+    }
+</script>
+
+<style scoped>
+
+</style>
+-->
+<!--......................................................................................................................-->
+
+<!--TabStrip -->
+ <!--
+<div data-role="view" id="tabstrip-profile" data-title="Profile" data-layout="mobile-tabstrip">
+    <ul data-role="listview" data-style="inset" data-type="group">
+        <li>Profile
+            <ul>
+                <li><h2>Carine <span>Callahan</span></h2></li>
+                <li>Weekly average sales <span class="sales-up">$ 8,250</span></li>
+                <li>Monthly average sales <span class="sales-up">$ 32,000</span></li>
+            </ul>
+        </li>
+        <li>
+            Languages
+            <ul>
+                <li>English <span class="value">Native</span></li>
+                <li>Hungarian <span class="value">Advanced</span></li>
+                <li>French <span class="value">Advanced</span></li>
+                <li>Chinese <span class="value">Beginner</span></li>
+            </ul>
+        </li>
+        <li>
+            Sales commodity
+            <ul>
+                <li>Beverages</li>
+                <li>Condiments</li>
+                <li>Confections</li>
+                <li>Diary Products</li>
+                <li>Grains/Cereals</li>
+                <li>Meat/Poultry</li>
+                <li>Produce</li>
+                <li>Seafood</li>
+            </ul>
+        </li>
+        <li>
+            PC Skills
+            <ul>
+                <li>MS Word</li>
+                <li>MS Excel</li>
+                <li>MS Outlook</li>
+                <li>MS PowerPoint</li>
+                <li>MS Project</li>
+                <li>Windows (XP, Vista)</li>
+                <li>Internet</li>
+                <li>SAP - Sales and Marketing Module</li>
+                <li>MS Visual Studio</li>
+                <li>Adobe Acrobat</li>
+                <li>CorelDraw</li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<div data-role="view" id="tabstrip-sales" data-title="Sales History" data-layout="mobile-tabstrip">
+    <ul data-role="listview" data-style="inset" data-type="group">
+        <li>
+            Sales 2011
+            <ul>
+                <li>January <span class="sales-up">&uarr; $ 35,000</span></li>
+                <li>February <span class="sales-down">&darr; $ 25,000</span></li>
+                <li>March <span class="sales-down">&darr; $ 23,000</span></li>
+                <li>April <span class="sales-up">&uarr; $ 30,000</span></li>
+                <li>May <span class="sales-up">&uarr; $ 31,000</span></li>
+                <li>June <span class="sales-down">&darr; $ 29,000</span></li>
+                <li>July <span class="sales-up">&uarr; $ 35,000</span></li>
+                <li>August <span class="sales-up">&uarr; $ 37,000</span></li>
+                <li>September <span class="sales-hold">&rarr; $ 37,000</span></li>
+                <li>October <span class="sales-hold">&rarr; $ 37,000</span></li>
+                <li>November <span class="sales-up">&uarr; $ 38,000</span></li>
+                <li>December <span class="sales-up">&uarr; $ 40,000</span></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<div data-role="view" id="tabstrip-rating" data-title="Rating" data-layout="mobile-tabstrip">
+    <ul data-role="listview" data-style="inset" data-type="group">
+        <li>
+            Sales Representatives
+            <ul>
+                <li data-icon="toprated">1. Andrew Fuller</li>
+                <li data-icon="toprated">2. Janet Leverling</li>
+                <li data-icon="toprated" style="background-color: Green; color: #fff;">3. Carine Callahan</li>
+                <li data-icon="toprated">4. Margaret Johnson</li>
+                <li data-icon="toprated">5. Steve Collins</li>
+                <li data-icon="toprated">6. Maria Steward</li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<div data-role="view" id="tabstrip-settings" data-title="Settings" data-layout="mobile-tabstrip">
+    <ul data-role="listview" data-style="inset" data-type="group">
+        <li>
+            Carine Callahan
+            <ul>
+                <li>Notify when online <input type="checkbox" data-role="switch" checked></li>
+                <li>Administrator <input type="checkbox" data-role="switch"></li>
+                <li>Access to stats <input type="checkbox" data-role="switch" checked></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<div data-role="layout" data-id="mobile-tabstrip">
+    <header data-role="header">
+        <div data-role="navbar">
+            <span data-role="view-title"></span>
+            <a data-align="right" data-role="button" class="nav-button" href="#/">Index</a>
+        </div>
+    </header>
+
+    <p>TabStrip</p>
+
+    <div data-role="footer">
+        <div data-role="tabstrip">
+            <a href="#tabstrip-profile" data-icon="contacts">Profile
+            </a><a href="#tabstrip-sales" data-icon="history">Sales
+            </a><a href="#tabstrip-rating" data-icon="favorites">Rating
+            </a><a href="#tabstrip-settings" data-icon="settings">Settings</a>
+        </div>
+    </div>
+</div>-->
+<!--......................................................................................................................-->
+
+<!-- Forms -->
+<!-- <div id="forms" data-role="view" data-title="Form Elements" data-init="initForm" data-use-native-scrolling="true">
+    <form action="./index.html">
+        <ul data-role="listview" data-style="inset">
+            <li>
+                <label>Select element
+                    <select>
+                        <option value="First Option">First Option</option>
+                        <option value="Second Option">Second Option</option>
+                        <option value="Third Option">Third Option</option>
+                        <option value="Fourth Option">Fourth Option</option>
+                    </select>
+                </label>
+            </li>
+            <li>
+                <label>DropDownList
+                    <select id="dropdown">
+                        <option value="First Option">First Option</option>
+                        <option value="Second Option">Second Option</option>
+                        <option value="Third Option">Third Option</option>
+                        <option value="Fourth Option">Fourth Option</option>
+                        <option value="First Option">Fifth Option</option>
+                        <option value="Sixth Option">Sixth Option</option>
+                    </select>
+                </label>
+            </li>
+            <li>
+                <label>Slider
+                    <input id="slider" type="range" max="100" />
+                </label>
+            </li>
+            <li>
+                <label>Type text
+                    <input type="text" value="Text" />
+                </label>
+            </li>
+            <li>
+                <label>
+                Type password
+                <input type="password" value="password" />
+                </label>
+            </li>
+            <li>
+                <label>
+                Type search
+                <input type="search" value="search" />
+                </label>
+            </li>
+            <li>
+                <label>
+                Type url
+                <input type="url" value="http://www.telerik.com" />
+                </label>
+            </li>
+            <li>
+                <label>
+                    Type email
+                    <input type="email" value="kendoui@telerik.com" />
+                </label>
+            </li>
+            <li>
+                <label>
+                    Type number
+                    <input type="number" value="20" />
+                </label>
+            </li>
+            <li>
+                <label>
+                    Type tel
+                    <input type="tel" value="+44 22 11 10" />
+                </label>
+            </li>
+            <li>
+                <label>
+                    Type date
+                    <input type="date" value="2012-03-22" />
+                </label>
+            </li>
+            <li>
+                <label>
+                    Type time
+                    <input type="time" value="22:30" />
+                </label>
+            </li>
+            <li>
+                <label>
+                    Type month
+                    <input type="month" value="2012-01" />
+                </label>
+            </li>
+            <li>
+                <label>
+                    Type datetime-local
+                    <input type="datetime-local" value="2012-03-22T20:15" />
+                </label>
+            </li>
+            <li>
+                <label>
+                    Textarea
+                    <textarea style="resize: none">Multiline
+Text</textarea>
+                </label>
+            </li>
+        </ul>
+    </form>
+</div>
+<script>
+    function initForm() {
+        var body = $(".km-pane");
+
+        if (kendo.ui.DropDownList) {
+            $("#dropdown").kendoDropDownList({
+                // The options are needed only for the desktop demo, remove them for mobile.
+                popup: { appendTo: body },
+                close: function(e){e.preventDefault();},
+                animation: { open: { effects: body.hasClass("km-android") ? "fadeIn" : body.hasClass("km-ios") || body.hasClass("km-wp") ? "slideIn:up" : "slideIn:down" } }
+            });
+        }
+
+        if (kendo.ui.Slider) {
+            $("#slider").kendoSlider({ tooltip: { enabled: false } });
+        }
+    }
+</script>-->
+<!--......................................................................................................................-->
+
+<!-- Checkboxes and radio buttons -->
+ <!--<div id="checks" data-role="view" data-title="Shopping List" data-layout="checklayout">
+    <ul data-role="listview" data-style="inset">
+        <li>
+            <label>
+                <input type="checkbox" checked="checked" />
+                Lettuce
+            </label>
+        </li>
+        <li>
+            <label>
+                <input type="checkbox" />
+                Carrots
+            </label>
+        </li>
+        <li>
+            <label>
+                <input type="checkbox" />
+                Peas
+            </label>
+        </li>
+        <li>
+            <label>
+                <input type="checkbox" />
+                Bread
+            </label>
+        </li>
+        <li>
+            <label>
+                <input type="checkbox" />
+                Unicorns
+            </label>
+        </li>
+    </ul>
+</div>
+
+<div id="radios" data-role="view" data-title="Settings" data-layout="checklayout">
+    <ul data-role="listview" data-style="inset" data-type="group">
+        <li>
+            On Item Check
+            <ul>
+                <li>
+                    <label>
+                        <input name="radio" type="radio" checked="checked" />
+                        Move to bottom
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input name="radio" type="radio" />
+                        Delete
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input name="radio" type="radio" />
+                        Leave in place
+                    </label>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <ul data-role="listview" data-style="inset" data-type="group">
+        <li>
+            Show Units
+            <ul>
+                <li>
+                    <label>
+                        <input name="units" type="radio" checked="checked" />
+                        In Kilograms
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input name="units" type="radio" />
+                        In Grams
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input name="units" type="radio" />
+                        In Pieces
+                    </label>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<div data-role="layout" data-id="checklayout">
+    <header data-role="header">
+        <div data-role="navbar">
+            <span data-role="view-title"></span>
+            <a data-align="right" data-role="button" class="nav-button" href="#/">Index</a>
+        </div>
+    </header>
+
+    <div data-role="footer">
+        <div data-role="tabstrip">
+            <a href="#checks" data-icon="bookmarks">Shopping
+            </a><a href="#radios" data-icon="settings">Settings</a>
+        </div>
+    </div>
+    </div>-->
+    <!--......................................................................................................................-->
+
+ <!-- SplitView -->   
+<!--<div data-role="splitview">
+    <div data-role="pane" data-layout="side-default" data-transition="slide">
+        <div data-role="view" data-title="Categories" id="side-root">
+            <ul data-role="listview" data-style="inset" data-source="splitViewCategories" data-template="categoriesTemplate">
+            </ul>
+        </div>
+
+        <script id="categoriesTemplate" type="text/x-kendo-template">
+            <a href="\#side-inbox?CategoryID=#: CategoryID#">#: CategoryName #</a>
+        </script>
+
+        <div data-role="view" id="side-inbox" data-title="Products" data-show="filterProducts">
+            <ul data-role="listview" data-auto-bind="false" data-source="splitViewProducts" data-template="productsTemplate">
+
+            </ul>
+        </div>
+
+        <script id="productsTemplate" type="text/x-kendo-template">
+            <a href="\#orders?ProductID=#: ProductID #" data-target="main-pane">
+                <span class="date">$#: UnitPrice#</span>
+                <h3>#: ProductName #</h3>
+                <span class="excerpt">#: QuantityPerUnit #</span>
+            </a>
+        </script>
+
+        <div data-role="layout" data-id="side-default" data-show="toggleBackButton">
+            <div data-role="header">
+                <div data-role="navbar">
+                    <a class="nav-button" data-align="left" data-role="backbutton">Back</a>
+                    <span data-role="view-title"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div data-role="pane" data-layout="main-default" id="main-pane">
+        <div data-role="view" data-title="Orders">
+            No product selected
+        </div>
+
+        <script type="text/x-kendo-template" id="ordersTemplate">
+            <dl>
+                <dt>Discount</dt>
+                <dd>#: Discount #</dd>
+                <dt>Quantity</dt>
+                <dd>#: Quantity #</dd>
+                <dt>UnitPrice</dt>
+                <dd>#: UnitPrice #</dd>
+            </dl>
+        </script>
+
+        <div data-role="view" data-title="Orders" id="orders" data-show="displayOrder">
+            <div id="product-details">
+            </div>
+        </div>
+
+        <div data-role="layout" data-id="main-default">
+            <div data-role="header">
+                <div data-role="navbar">
+                    <span data-role="view-title"></span>
+                    <a data-role="button" href="#/" data-align="right" data-target="_top">Index</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var categoryID = null;
+
+    var splitViewCategories = new kendo.data.DataSource({
+        type: "odata",
+        transport: {
+            read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
+        }
+    });
+
+    var splitViewProducts = new kendo.data.DataSource({
+        type: "odata",
+        serverFiltering: true,
+
+        transport: {
+            read: {
+                url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+            }
+        }
+    });
+
+
+    var splitViewOrderDetails = new kendo.data.DataSource({
+        type: "odata",
+        serverFiltering: true,
+        transport: {
+            read: {
+                url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Order_Details?$expand=Order"
+            }
+        },
+
+        change: function() {
+            var template = kendo.template($("#ordersTemplate").text());
+            $("#product-details").html(kendo.render(template, this.data()));
+        }
+    });
+
+    function displayOrder(e) {
+        splitViewOrderDetails.filter({
+            field: "ProductID",
+            operator: "eq",
+            value: parseInt(e.view.params.ProductID)
+        });
+
+        splitViewOrderDetails.read();
+    }
+
+    function filterProducts(e) {
+        splitViewProducts.filter({
+            field: "CategoryID",
+            operator: "eq",
+            value: parseInt(e.view.params.CategoryID)
+        });
+
+        splitViewProducts.read();
+    }
+
+    function toggleBackButton(e) {
+        if (e.view.id === "#side-root") {
+            e.view.element.find("[data-role=backbutton]").css("visibility", "hidden");
+        } else {
+            e.view.element.find("[data-role=backbutton]").css("visibility", "visible");
+        }
+    }
+</script>-->
+    <!--......................................................................................................................-->
+
+<!-- PopOver -->    
+ <!--<div data-role="view" data-title="Tag Us!" id="popover">
+    <div data-role="header">
+        <div data-role="navbar">
+            <a id="back-button" class="nav-button" data-align="left" data-role="backbutton">Back</a>
+            <span data-role="view-title"></span>
+            <a data-align="right" data-rel="popover" href="#popover-people" data-role="button">Select people</a>
+        </div>
+    </div>
+
+    <div data-role="content">
+        <img src="../content/mobile/shared/faces.jpg" />
+    </div>
+
+    <div data-role="popover" id="popover-people" data-popup='{"height": "16em", "width": "20em"}'>
+        <div data-role="view" data-title="People">
+            <div data-role="header">
+                <div data-role="navbar">
+                    <span data-role="view-title"></span>
+                    <a data-role="button" data-align="right" data-click="closeParentPopover">Close</a>
+                </div>
+            </div>
+            <ul data-role="listview">
+                <li><label>Isabella Anderson<input type="checkbox"></label></li>
+                <li><label>Josh Anderson<input type="checkbox"></label></li>
+                <li><label>Linda Anderson<input type="checkbox"></label></li>
+                <li><label>Oliver Anderson<input type="checkbox"></label></li>
+                <li><label>James Williams<input type="checkbox"></label></li>
+                <li><label>Barbara Williams<input type="checkbox"></label></li>
+            </ul>
+        </div>
+    </div>
+
+    <div data-role="popover" id="popover-location" data-popup='{"width": "20em"}'>
+        <div data-role="view">
+            <ul data-role="listview" data-click="closeParentPopover">
+                <li><label>Sydney, Australia <input name="location" type="radio"></label></li>
+                <li><label>New York, USA <input name="location" type="radio"></label></li>
+                <li><label>Miami, USA <input name="location" type="radio"></label></li>
+            </ul>
+        </div>
+    </div>
+
+    <div data-role="footer">
+        <div data-role="navbar">
+            <a data-align="right" href="#popover-location" data-rel="popover" data-role="button">Select location</a>
+        </div>
+    </div>
+</div>
+
+<style scoped>
+    .km-ios #popover .km-view-title,
+    .km-ios #popover-people .km-view-title
+    {
+        color: #fff;
+        text-shadow: 0 -1px rgba(0,0,0,.5);
+    }
+
+    .km-ios #popover .km-navbar,
+    .km-root > * > #popover > .km-content
+    {
+        background: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(255, 255, 255, 0.35)), color-stop(0.5, rgba(255, 255, 255, 0.1)), color-stop(0.5, rgba(255, 255, 255, 0)), color-stop(1, rgba(255, 255, 255, 0))) #000;
+    }
+
+    .km-ios #popover .km-navbar .km-button
+    {
+        background-color: #000;
+    }
+</style>
+
+<script>
+    function closeParentPopover(e) {
+
+        var popover = e.sender.element.closest('[data-role=popover]').data('kendoMobilePopOver');
+
+        popover.close();
+    }
+</script>-->
+ <!--......................................................................................................................-->
+
+
+<!--Scroller-->
+<!--<div data-role="view" data-title="Titanic Belfast" id="scroller-view">
+    <div class="titanic_a">&nbsp;</div>
+
+    <h2>Titanic Belfast</h2>
+
+    <div data-role="scroller" class="scroller-content">
+        <p>
+           The world's largest Titanic experience is opening today in Belfast, Ireland - the place where the iconic ship had been designed and built.
+        </p>
+        <p>
+           The 14,000-sq-m structure took three years to build - the same timespan as the Titanic itself - and like the boat it omits a luxurious aeasthetic. Guests confront a shimmering facade that's made of four peaking triangular shells, resembling 27-m-high vertical ship hulls.
+        </p>
+        <p>
+           Titanic Belfast&reg; extends over nine galleries, with multiple dimensions to the exhibition, drawing together special effects, dark rides, full-scale reconstructions and innovative interactive features to explore the Titanic story in a fresh and insightful way; from her conception in Belfast in the early 1900s, through her construction and launch, to her infamous maiden voyage and catastrophic demise. The journey goes beyond the aftermath of the sinking, to the discovery of the wreck and continues into the present day with a live undersea exploration centre. 
+        </p>
+    </div>
+
+    <div class="titanic_b">&nbsp;</div>
+
+
+    <div data-role="scroller" class="scroller-content">
+        <p>
+            'Its architectural form cuts a skyline silhouette that has been inspired by the very ships that were built on this hallowed ground,' says Eric R Kuhne of CivicArts / Eric R Kuhne & Associates, who designed the building in collaboratino with TODD Architects. 'Its design anchors the profound spirit of invention and innovation from a century ago in a new form.'
+        </p>
+
+        <p>
+            Inside the six-storey museum are a 1000-seat suite, education and communication facilities, plus catering and retail space. A five-storey central atrium was inspired by the physical gap between the Titanic and Olympic when they were constructed.
+        </p>
+    </div>
+
+    <div class="titanic_c">&nbsp;</div>
+
+    <div data-role="scroller" class="scroller-content">
+        <p>
+            <a href="http://www.frameweb.com/news/titanic-belfast" title="www.frameweb.com">www.frameweb.com</a>
+        </p>
+        <p>
+            Text by Lydia Parafianowicz and <a href="http://www.titanicbelfast.com" title="www.titanicbelfast.com">www.titanicbelfast.com</a>
+        </p>
+        <p>
+            Photos courtesy Christopher Heaney.
+        </p>
+    </div>
+</div>
+
+<style scoped>
+    .titanic_a, .titanic_b, .titanic_c {
+        display: block;
+        height: 230px;
+        -webkit-background-size: 100% auto;
+        background-size: 100% auto;
+    }
+
+   
+
+    #scroller-view h2{
+        margin: 15px 10px 0 10px;
+    }
+
+    #scroller-view img {
+        -webkit-transform: translatez(0);
+    }
+
+    #scroller-view .scroller-content {
+        font-weight: normal;
+        height: 130px;
+        margin: 15px 0;
+        background-color: rgba(0, 0, 0, 0.07);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.45) inset;
+    }
+    
+    .km-ios #scroller-view .km-navbar {
+        background: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(255, 255, 255, 0.5)), color-stop(0.06, rgba(255, 255, 255, 0.45)), color-stop(0.5, rgba(255, 255, 255, 0.2)), color-stop(0.5, rgba(255, 255, 255, 0.15)), color-stop(1, rgba(100, 100, 100, 0))), url(../content/shared/images/patterns/pattern9.png);
+        background: -moz-linear-gradient(center top , rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.45) 6%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.15) 50%, rgba(100, 100, 100, 0)), url(../content/shared/images/patterns/pattern9.png);
+	}
+	.km-tablet .km-ios #scroller-view .km-view-title {
+        color: #fff;
+        text-shadow: 0 -1px rgba(0,0,0,.5);
+    }
+    
+    .km-ios #scroller-view .km-navbar .km-button {
+        background-color: rgba(0,0,0,0.2);
+    }
+</style>-->
+<!--
+ <div data-role="view" data-layout="layout" data-show="viewShow" id="layoutView">
+    <p>
+        This examples shows the platform specific layouts. Change the OS to see how the header and footer changes.
+    </p>
+</div>
+
+<div data-role="layout" data-id="layout" data-platform="ios">
+    <header data-role="header">
+        <div data-role="navbar">
+            <a data-align="right" data-role="button" class="nav-button" href="#/">Index</a>
+            <span data-role="view-title">iOS Platform</span>
+        </div>
+    </header>
+    <footer data-role="footer">
+        <div data-role="tabstrip">
+            <a data-icon="contacts">Profile
+            </a><a data-icon="settings">Settings</a>
+        </div>
+    </footer>
+</div>
+
+<div data-role="layout" data-id="layout" data-platform="android">
+    <header data-role="header">
+        <div data-role="navbar">
+            <span data-role="view-title">Android Platform</span>
+            <a data-align="right" data-role="button" class="nav-button" href="#/">Index</a>
+        </div>
+    </header>
+
+    <footer data-role="footer">
+        <div data-role="tabstrip">
+            <a data-icon="history">Sales</a>
+            <a data-icon="settings">Settings</a>
+        </div>
+    </footer>
+</div>
+
+<div data-role="layout" data-id="layout" data-platform="blackberry">
+    <header data-role="header">
+        <div data-role="navbar">
+            <a data-align="right" data-role="button" class="nav-button" href="#/">Index</a>
+            <span data-role="view-title">BlackBerry platform</span>
+        </div>
+    </header>
+
+    <footer data-role="footer">
+        <div data-role="tabstrip">
+            <a data-icon="favorites">Rating</a>
+            <a data-icon="settings">Settings</a>
+        </div>
+    </footer>
+</div>
+
+<div data-role="layout" data-id="layout" data-platform="wp">
+    <header data-role="header">
+        <div data-role="navbar">
+            <a data-align="right" data-role="button" class="nav-button" href="#/">Index</a>
+            <span data-role="view-title">Windows Phone platform</span>
+        </div>
+    </header>
+
+    <footer data-role="footer">
+        <div data-role="tabstrip">
+            <a data-icon="home">Home</a>
+            <a data-icon="globe">Global</a>
+        </div>
+    </footer>
+</div>
+
+<style scoped>
+    #layoutView .km-view-title
+    {
+        visibility: inherit;
+    }
+
+    .km-android #layoutView .km-view-title
+    {
+        display: block;
+        position: static;
+    }
+</style>
+
+-->
+
+
+
+<script>
+//var app = new kendo.mobile.Application(document.body);
+var app = new kendo.mobile.Application($(document.body), { skin: 'materialblack'});
+
+function viewShow() {
+    localStorage.clear()
+less.refresh()
+
+}
+</script>
+</body>
+</html>

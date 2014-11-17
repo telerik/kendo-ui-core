@@ -1,0 +1,24 @@
+@import "../common/splitview.less";
+@import "base.less";
+
+/* SplitView */
+
+.km-android .km-popup.km-pane .km-view,
+.km-android .km-scrollview .km-pane:last-child .km-content
+{
+    border-width: @android-border-width;
+    border-style: solid;
+    .box-sizing(border-box);
+    background-clip: padding-box;
+}
+
+.km-android .km-pane
+{
+    z-index: 1;
+}
+
+.km-android .km-pane:first-child
+{
+    z-index: 0;
+}
+

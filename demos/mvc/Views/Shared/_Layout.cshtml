@@ -15,7 +15,7 @@
     @if (ViewBag.Debug)
     {
     <script src="@Url.Content("~/content/shared/js/less.js")"></script>
-    <script>less.env = "development"; less.refresh();</script>
+    <script>less.env = "development"; less.logLevel = 1; less.refresh();</script>
     }
     <link href="@Url.Content("~/content/shared/styles/examples.css")" rel="stylesheet" />
     @{ bool isAngularJsExample = ViewBag.CurrentExample != null &&
