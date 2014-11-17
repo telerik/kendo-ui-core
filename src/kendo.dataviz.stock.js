@@ -185,7 +185,7 @@ var __meta__ = {
                 navigator = chart._navigator = new Navigator(chart);
             }
 
-            navigator._setInitialRange();
+            navigator._setRange();
             Chart.fn._redraw.call(chart);
             navigator._initSelection();
         },
@@ -316,7 +316,6 @@ var __meta__ = {
             }
 
             if (chart._model) {
-                // TODO: Do we need to read the selection
                 navi.redraw();
                 navi.filterAxes();
 
@@ -341,6 +340,7 @@ var __meta__ = {
 
         redraw: function() {
             this._redrawSelf();
+            this._initSelection();
         },
 
         _initSelection: function() {
@@ -393,15 +393,13 @@ var __meta__ = {
             }
         },
 
-        _setInitialRange: function() {
+        _setRange: function() {
             var navi = this,
                 chart = navi.chart,
-                options = navi.options,
                 plotArea = chart._createPlotArea(true),
                 axis = plotArea.namedCategoryAxes[NAVIGATOR_AXIS],
                 groups = axis.options.categories,
                 select = navi.options.select || {},
-                selection = navi.selection,
                 range = axis.range(),
                 min = range.min,
                 max = range.max,
@@ -411,9 +409,12 @@ var __meta__ = {
             if (from < min) { from = min; }
             if (to > max) { to = max; }
 
-            if (groups.length > 0) {
-                navi.filterAxes();
-            }
+            navi.options.select = {
+                from: from,
+                to: to
+            };
+
+            navi.filterAxes();
         },
 
         _redrawSelf: function(silent) {
