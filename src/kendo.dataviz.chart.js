@@ -1134,7 +1134,6 @@ var __meta__ = {
             chart._bindCategories();
             chart._hasData = true;
 
-            chart.trigger(DATABOUND);
             chart._deferRedraw();
         },
 
@@ -1148,9 +1147,11 @@ var __meta__ = {
                         return;
                     }
 
+                    chart.trigger(DATABOUND);
                     chart._redraw();
                 }, 0);
             } else {
+                chart.trigger(DATABOUND);
                 chart._redraw();
             }
         },
