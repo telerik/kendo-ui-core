@@ -204,6 +204,26 @@
             return (TTimelineViewBuilder)this;
         }
 
+        /// <summary>
+        /// The template used to render the group headers of scheduler day, week, workWeek and timeline views.
+        /// </summary>
+        /// <param name="groupHeaderTemplate">The groupHeaderTemplate</param>
+        public TTimelineViewBuilder GroupHeaderTemplate(string groupHeaderTemplate)
+        {
+            view.GroupHeaderTemplate = groupHeaderTemplate;
 
+            return (TTimelineViewBuilder)this;
+        }
+
+        /// <summary>
+        /// The Id of the template used to render the group headers of scheduler day, week, workWeek and timeline views.
+        /// </summary>
+        /// <param name="groupHeaderTemplateId">The groupHeaderTemplateId</param>
+        public TTimelineViewBuilder GroupHeaderTemplateId(string groupHeaderTemplateId)
+        {
+            view.GroupHeaderTemplateId = groupHeaderTemplateId;
+
+            return (TTimelineViewBuilder)this;
+        }
     }
 }

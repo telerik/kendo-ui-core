@@ -46,9 +46,33 @@
             set;
         }
 
+        public string GroupHeaderTemplate
+        {
+            get;
+            set;
+        }
+
+        public string GroupHeaderTemplateId
+        {
+            get;
+            set;
+        }
+
         protected override void Serialize(IDictionary<string, object> json)
         {
             base.Serialize(json);
+
+            var idPrefix = "#";
+
+            if (!string.IsNullOrEmpty(GroupHeaderTemplate))
+            {
+                json["groupHeaderTemplate"] = GroupHeaderTemplate;
+            }
+
+            if (!string.IsNullOrEmpty(GroupHeaderTemplateId))
+            {
+                json["groupHeaderTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template(jQuery('{0}{1}').html())", idPrefix, GroupHeaderTemplateId) };
+            }
 
             if (MajorTick != null)
             {
