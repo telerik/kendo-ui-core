@@ -163,9 +163,9 @@
                 radius: 60,
                 stroke: {
                     width: 2,
-                    color: "#586477"
+                    color: dataItem.Color || "#586477"
                 },
-                fill: dataItem.Color || "#e8eff7"
+                fill: "#e8eff7"
             }));
         } else {
             g.append(new dataviz.diagram.Rectangle({
