@@ -351,6 +351,28 @@ That way all users would see the same dates and times no matter their configured
     }
 
     /**
+    * Sets the groupHeaderTemplate option of the Scheduler.
+    * The template used to render the group headers of scheduler day, week, workWeek and timeline views.The fields which can be used in the template are:
+    * @param string $value The id of the element which represents the kendo template.
+    * @return \Kendo\UI\Scheduler
+    */
+    public function groupHeaderTemplateId($value) {
+        $value = new \Kendo\Template($value);
+
+        return $this->setProperty('groupHeaderTemplate', $value);
+    }
+
+    /**
+    * Sets the groupHeaderTemplate option of the Scheduler.
+    * The template used to render the group headers of scheduler day, week, workWeek and timeline views.The fields which can be used in the template are:
+    * @param string $value The template content.
+    * @return \Kendo\UI\Scheduler
+    */
+    public function groupHeaderTemplate($value) {
+        return $this->setProperty('groupHeaderTemplate', $value);
+    }
+
+    /**
     * The width of the widget. Numeric values are treated as pixels.
     * @param float|string $value
     * @return \Kendo\UI\Scheduler

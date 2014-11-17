@@ -87,6 +87,15 @@ class SchedulerMessages extends \Kendo\SerializableObject {
     }
 
     /**
+    * The text similar to "All events" displayed in timeline views when there is no vertical grouping.
+    * @param string $value
+    * @return \Kendo\UI\SchedulerMessages
+    */
+    public function defaultRowText($value) {
+        return $this->setProperty('defaultRowText', $value);
+    }
+
+    /**
     * The text similar to "Save" displayed in scheduler.
     * @param string $value
     * @return \Kendo\UI\SchedulerMessages
