@@ -32,7 +32,6 @@ $gauge->pointer(array('value' => 28))
     #gauge {
         height: 300px;
         display: inline-block;
-        *display: inline;
         zoom: 1;
     }
 </style>

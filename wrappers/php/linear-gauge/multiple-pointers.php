@@ -45,7 +45,6 @@ $gauge->pointer(array($pointer0, $pointer1, $pointer2, $pointer3))
     #gauge {
         height: 300px;
         display: inline-block;
-        *display: inline;
         zoom: 1;
     }
 </style>
