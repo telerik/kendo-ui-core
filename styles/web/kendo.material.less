@@ -721,8 +721,8 @@ border-color: @panelbar-items-border;
 .k-grid .k-header .k-button,
 .k-scheduler .k-header li,
 .k-scheduler .k-header .k-link,
-.k-gantt .k-header li,
-.k-gantt .k-header .k-link,
+.k-gantt > .k-header li,
+.k-gantt > .k-header .k-link,
 .k-gantt-toolbar .k-button {
 color: @header-text-color;
 background-color: @header-background-color;
@@ -834,8 +834,13 @@ color: @header-text-color;
 }
 
 .k-scheduler-layout .k-state-selected,
-.k-scheduler .k-today.k-state-selected,.k-grid tr.k-state-selected,
-.k-marquee-color {
+.k-scheduler .k-today.k-state-selected,
+.k-grid tr.k-state-selected,
+.k-marquee-color,
+.k-gantt .k-treelist .k-state-selected,
+.k-gantt .k-treelist .k-state-selected td,
+.k-gantt .k-treelist .k-alt.k-state-selected,
+.k-gantt .k-treelist .k-alt.k-state-selected > td {
 background-color: @accent-color; 
 }
 
@@ -1084,6 +1089,10 @@ table.k-editor {
 /* Pivot Grid */
 .k-grid.k-alt {
 	background-color: @secondary-background-color;
+}
+
+.k-gantt .k-treelist .k-alt{
+   background-color: @alt-background-color
 }
 
 .k-list > .k-state-hover {
