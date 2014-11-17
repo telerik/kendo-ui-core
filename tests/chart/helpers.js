@@ -1048,18 +1048,6 @@
             ok(!areNumbers([1, 2, NaN]));
         });
 
-        test("sparseArrayLimits ignores undefined values", function() {
-            var l = dataviz.sparseArrayLimits([1, undefined, 2]);
-            equal(l.min, 1);
-            equal(l.max, 2);
-        });
-
-        test("sparseArrayLimits returns undefined for empty array", function() {
-            var l = dataviz.sparseArrayLimits([]);
-            equal(l.min, undefined);
-            equal(l.max, undefined)
-        });
-
     })();
 
     (function() {

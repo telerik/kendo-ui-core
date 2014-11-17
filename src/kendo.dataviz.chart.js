@@ -77,6 +77,9 @@ var __meta__ = {
         round = dataviz.round,
 
         util = kendo.util,
+        sparseArrayLimits = util.sparseArrayLimits,
+        sparseArrayMin = util.sparseArrayMin,
+        sparseArrayMax = util.sparseArrayMax,
         renderTemplate = util.renderTemplate,
         valueOrDefault = util.valueOrDefault,
 
@@ -11139,35 +11142,6 @@ var __meta__ = {
         }
     };
 
-    function sparseArrayMin(arr) {
-        return sparseArrayLimits(arr).min;
-    }
-
-    function sparseArrayMax(arr) {
-        return sparseArrayLimits(arr).max;
-    }
-
-    function sparseArrayLimits(arr) {
-        var min = MAX_VALUE,
-            max = MIN_VALUE,
-            i,
-            length = arr.length,
-            n;
-
-        for (i = 0; i < length; i++) {
-            n = arr[i];
-            if (n !== null && isFinite(n)) {
-                min = math.min(min, n);
-                max = math.max(max, n);
-            }
-        }
-
-        return {
-            min: min === MAX_VALUE ? undefined : min,
-            max: max === MIN_VALUE ? undefined : max
-        };
-    }
-
     function intersection(a1, a2, b1, b2) {
         var result,
             ua_t = (b2.x - b1.x) * (a1.y - b1.y) - (b2.y - b1.y) * (a1.x - b1.x),
@@ -12030,7 +12004,6 @@ var __meta__ = {
         seriesTotal: seriesTotal,
         singleItemOrArray: singleItemOrArray,
         sortDates: sortDates,
-        sparseArrayLimits: sparseArrayLimits,
         startOfWeek: startOfWeek,
         transpose: transpose,
         toDate: toDate,
