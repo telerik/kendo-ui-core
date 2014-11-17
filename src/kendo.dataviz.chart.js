@@ -1132,11 +1132,34 @@ var __meta__ = {
 
             chart._bindSeries();
             chart._bindCategories();
+            chart._hasData = true;
 
             chart.trigger(DATABOUND);
+            chart._deferRedraw();
+        },
 
-            chart._hasData = true;
-            chart._redraw();
+        _deferRedraw: function() {
+            var chart = this;
+
+            if (kendo.support.vml) {
+                chart._clearRedrawTimeout();
+                chart._redrawTimeout = setTimeout(function() {
+                    if (!chart.surface) {
+                        return;
+                    }
+
+                    chart._redraw();
+                }, 0);
+            } else {
+                chart._redraw();
+            }
+        },
+
+        _clearRedrawTimeout: function() {
+            if (this._redrawTimeout) {
+                clearInterval(this._redrawTimeout);
+                this._redrawTimeout = null;
+            }
         },
 
         _bindSeries: function() {
@@ -1390,6 +1413,8 @@ var __meta__ = {
 
             chart.surface.destroy();
             chart.surface = null;
+
+            chart._clearRedrawTimeout();
 
             Widget.fn.destroy.call(chart);
         },
