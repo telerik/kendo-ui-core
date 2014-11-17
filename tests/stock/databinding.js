@@ -117,20 +117,6 @@
             deepEqual(chart.options.categoryAxis[0].max, new Date("2012/09/04"));
         });
 
-        test("navigator redrawn on main DS change", 2, function() {
-            stubMethod(Navigator.fn, "_redrawSelf", function() {
-                ok(true);
-            }, function() {
-                createStockChart({
-                    autoBind: false,
-                    navigator: {
-                        dataSource: null
-                    }
-                });
-                chart.dataSource.fetch();
-            });
-        });
-
         test("slaves redrawn fully on main DS change", 2, function() {
             stubMethod(Chart.fn, "_redraw", function() {
                 ok(true);
@@ -151,15 +137,15 @@
                 navigator: {
                     dataSource: null,
                     select: {
-                        from: new Date("2012/09/01"),
-                        to: new Date("2012/09/06")
+                        from: new Date("2012/09/02"),
+                        to: new Date("2012/09/03")
                     }
                 }
             });
 
-            stubMethod(Navigator.fn, "redrawSlaves", function() {
+            stubMethod(Navigator.fn, "_setRange", function() {
                 deepEqual(chart.options.categoryAxis[0].min, new Date("2012/09/02 00:00:00"), "min");
-                deepEqual(chart.options.categoryAxis[0].max, new Date("2012/09/03 01:00:00"), "max");
+                deepEqual(chart.options.categoryAxis[0].max, new Date("2012/09/03 00:00:00"), "max");
             }, function() {
                 chart.dataSource.data([{
                     date: new Date("2012/09/02"),
@@ -323,7 +309,7 @@
             });
         });
 
-        test("navigator is redrawn partially during navigator DS change", 2, function() {
+        test("navigator is redrawn partially during navigator DS change", 1, function() {
             stubMethod(Navigator.fn, "_redrawSelf", function() {
                 ok(true);
             }, function() {
@@ -332,7 +318,7 @@
             });
         });
 
-        test("navigator is redrawn during navigator DS change (unbound chart)", 3, function() {
+        test("navigator is redrawn during navigator DS change (unbound chart)", 2, function() {
             var partialRedrawCalls = 0,
                 redrawCalls = 0;
 
