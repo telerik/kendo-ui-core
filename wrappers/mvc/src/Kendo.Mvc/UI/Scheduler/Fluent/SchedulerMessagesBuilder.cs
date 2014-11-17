@@ -74,6 +74,13 @@
             return this;
         }
 
+        public SchedulerMessagesBuilder DefaultRowText(string message)
+        {
+            messages.DefaultRowText = message;
+
+            return this;
+        }
+
         public SchedulerMessagesBuilder DeleteWindowTitle(string message)
         {
             messages.DeleteWindowTitle = message;

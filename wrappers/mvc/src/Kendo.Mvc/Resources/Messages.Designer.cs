@@ -1274,7 +1274,7 @@ namespace Kendo.Mvc.Resources {
                 return ResourceManager.GetString("PivotFieldMenu_Title", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to all day.
         /// </summary>
@@ -1283,7 +1283,7 @@ namespace Kendo.Mvc.Resources {
                 return ResourceManager.GetString("Scheduler_AllDay", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
@@ -1311,6 +1311,15 @@ namespace Kendo.Mvc.Resources {
             }
         }
         
+        /// <summary>
+        ///   Looks up a localized string similar to All events.
+        /// </summary>
+        public static string Scheduler_DefaultRowText {
+            get {
+                return ResourceManager.GetString("Scheduler_DefaultRowText", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Delete event.
         /// </summary>

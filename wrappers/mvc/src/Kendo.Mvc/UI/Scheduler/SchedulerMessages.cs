@@ -27,6 +27,8 @@
 
         private const string DefaultShowWorkDay = "Show business hours";
 
+        private const string DefaultDefaultRowText = "All events";
+
         public SchedulerMessages()
         {
             Today = Messages.Scheduler_Today;
@@ -44,6 +46,8 @@
             Time = Messages.Scheduler_Time;
 
             AllDay = Messages.Scheduler_AllDay;
+
+            DefaultRowText = Messages.Scheduler_DefaultRowText;
 
             DeleteWindowTitle = Messages.Scheduler_DeleteWindowTitle;
 
@@ -81,6 +85,8 @@
         public string ShowFullDay { get; set; }
 
         public string ShowWorkDay { get; set; }
+
+        public string DefaultRowText { get; set; }
 
         public SchedulerViewMessages ViewMessages { get; set; }
 
@@ -130,6 +136,11 @@
             if (AllDay != DefaultAllDay)
             {
                 json["allDay"] = AllDay;
+            }
+
+            if (DefaultRowText != DefaultDefaultRowText)
+            {
+                json["defaultRowText"] = DefaultRowText;
             }
 
             if (DeleteWindowTitle != DefaultDeleteWindowTitle)

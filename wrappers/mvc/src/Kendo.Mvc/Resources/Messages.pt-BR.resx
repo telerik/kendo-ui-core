@@ -759,4 +759,7 @@
   <data name="PivotFieldMenu_Title" xml:space="preserve">
     <value>Fields to include</value>
   </data>
+  <data name="Scheduler_DefaultRowText" xml:space="preserve">
+    <value>All events</value>
+  </data>
 </root>

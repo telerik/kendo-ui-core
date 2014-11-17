@@ -768,4 +768,7 @@
   <data name="Grid_Pdf" xml:space="preserve">
     <value>Export to PDF</value>
   </data>
+  <data name="Scheduler_DefaultRowText" xml:space="preserve">
+    <value>All events</value>
+  </data>
 </root>
