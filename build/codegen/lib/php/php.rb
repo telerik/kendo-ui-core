@@ -201,6 +201,8 @@ EVENT_SETTER = ERB.new(%{
         def php_event_method
             if (name == "add")
                 "addEvent"
+            elsif (name == "render")
+                "renderEvent"
             else
                 name
             end

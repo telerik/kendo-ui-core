@@ -139,6 +139,10 @@ public class StockChartTag extends WidgetTag /* interfaces */implements DataBoun
         setEvent("plotAreaClick", value.getBody());
     }
 
+    public void setRender(RenderFunctionTag value) {
+        setEvent("render", value.getBody());
+    }
+
     public void setSelect(SelectFunctionTag value) {
         setEvent("select", value.getBody());
     }
@@ -341,6 +345,18 @@ public class StockChartTag extends WidgetTag /* interfaces */implements DataBoun
 
     public void setPlotAreaClick(String value) {
         setProperty("plotAreaClick", new Function(value));
+    }
+
+    public String getRender() {
+        Function property = ((Function)getProperty("render"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setRender(String value) {
+        setProperty("render", new Function(value));
     }
 
     public String getSelect() {

@@ -624,4 +624,81 @@
         });
 
     })();
+
+    // ------------------------------------------------------------
+    (function() {
+        module("Events / render", {
+            teardown: destroyChart
+        });
+
+        test("triggers render after chart is rendered", 1, function() {
+            createChart({
+                series: [{
+                    data: [1, 2, 3]
+                }],
+                render: function(e) {
+                    ok(e.sender.surface._root.childNodes);
+                }
+            });
+        });
+
+        test("triggers render after dataBound", 1, function() {
+            var dataBound = false;
+            createChart({
+                dataSource: [{
+                    period: "Jan",
+                    sales: 100
+                }],
+                series: [{
+                    field: "sales"
+                }],
+                dataBound: function() {
+                    dataBound = true;
+                },
+                render: function() {
+                    ok(dataBound);
+                }
+            });
+        });
+
+        test("triggers render after rendering if autoBind is false", 1, function() {
+            createChart({
+                autoBind: false,
+                dataSource: [{
+                    period: "Jan",
+                    sales: 100
+                }],
+                series: [{
+                    field: "sales"
+                }],
+                dataBound: function() {
+                    dataBound = true;
+                },
+                render: function() {
+                    ok(true);
+                }
+            });
+        });
+
+        test("triggers render after setDataSource", 1, function() {
+            var dataBound = false;
+            var chart = createChart({
+                series: [{
+                    field: "sales"
+                }],
+                dataBound: function() {
+                    dataBound = true;
+                }
+            });
+
+            chart.bind("render", function() {
+                ok(dataBound);
+            });
+
+            chart.setDataSource([{
+                period: "Jan",
+                sales: 100
+            }]);
+        });
+    })();
 })();

@@ -4,7 +4,7 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:url value="/api/events/read" var="readUrl" />
+<c:url value="/chart-api/events/read" var="readUrl" />
 
 <demo:header />
     <div class="chart-wrapper">
@@ -12,6 +12,7 @@
     	 			  dataBound="onDataBound"
     	 			  axisLabelClick="onAxisLabelClick"
     	 			  plotAreaClick="onPlotAreaClick"
+    	 			  render="onRender"
     	 			  dragStart="onDragStart"
     	 			  drag="onDrag"
     	 			  dragEnd="onDragEnd"
@@ -71,6 +72,10 @@
 	        kendoConsole.log(kendo.format("Plot area click :: {0} : {1:N0}",
 	            e.category, e.value));
 	    }
+	    
+        function onRender(e) {
+            kendoConsole.log("Render");
+        }
 
 	    function onDragStart(e) {
 	        kendoConsole.log("Drag start");

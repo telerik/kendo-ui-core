@@ -180,6 +180,7 @@ var __meta__ = {
         POINTER = "pointer",
         RANGE_BAR = "rangeBar",
         RANGE_COLUMN = "rangeColumn",
+        RENDER = "render",
         RIGHT = "right",
         ROUNDED_BEVEL = "roundedBevel",
         ROUNDED_GLASS = "roundedGlass",
@@ -331,11 +332,14 @@ var __meta__ = {
 
             chart._bindCategories();
 
+            if (dataSource) {
+                chart._hasDataSource = true;
+            }
+
             chart._redraw();
             chart._attachEvents();
 
             if (dataSource) {
-                chart._hasDataSource = true;
                 if (chart.options.autoBind) {
                     chart.dataSource.fetch();
                 }
@@ -346,8 +350,9 @@ var __meta__ = {
             var chart = this;
 
             chart.dataSource.unbind(CHANGE, chart._dataChangeHandler);
-            chart.dataSource = dataSource;
+            chart.dataSource = dataSource = DataSource.create(dataSource);
             chart._hasDataSource = true;
+            chart._hasData = false;
 
             dataSource.bind(CHANGE, chart._dataChangeHandler);
 
@@ -374,7 +379,8 @@ var __meta__ = {
             SELECT,
             SELECT_END,
             NOTE_CLICK,
-            NOTE_HOVER
+            NOTE_HOVER,
+            RENDER
         ],
 
         items: function() {
@@ -523,6 +529,10 @@ var __meta__ = {
             chart._tooltip = chart._createTooltip();
             chart._highlight = new Highlight(view);
             chart._setupSelection();
+
+            if (!chart._hasDataSource || chart._hasData || !chart.options.autoBind) {
+                chart.trigger(RENDER);
+            }
         },
 
         exportVisual: function() {
@@ -1124,6 +1134,8 @@ var __meta__ = {
             chart._bindCategories();
 
             chart.trigger(DATABOUND);
+
+            chart._hasData = true;
             chart._redraw();
         },
 
@@ -1348,9 +1360,7 @@ var __meta__ = {
             chart._initTheme(chart.options);
 
             if (dataSource) {
-                chart.setDataSource(
-                    DataSource.create(dataSource)
-                );
+                chart.setDataSource(dataSource);
             }
 
             if (chart._shouldAttachMouseMove()) {

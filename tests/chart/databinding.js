@@ -568,6 +568,21 @@
             equal(chart.options.categoryAxis.categories.length, 0);
         });
 
+        test("setDataSource accepts DataSource configuration", function() {
+            chart = createChart();
+            chart.setDataSource({
+                data: [{
+                    period: "Jan",
+                    sales: 100
+                }, {
+                    period: "Feb",
+                    sales: 110
+                }]
+            });
+
+            equal(chart.dataSource.view().length, 2);
+        });
+
         // ------------------------------------------------------------
         module("Binding to DataSource / Null values", {
             teardown: destroyChart

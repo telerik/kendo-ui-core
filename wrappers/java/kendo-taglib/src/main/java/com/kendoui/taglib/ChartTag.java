@@ -152,6 +152,10 @@ public class ChartTag extends WidgetTag /* interfaces */implements DataBoundWidg
         setEvent("plotAreaClick", value.getBody());
     }
 
+    public void setRender(RenderFunctionTag value) {
+        setEvent("render", value.getBody());
+    }
+
     public void setSelect(SelectFunctionTag value) {
         setEvent("select", value.getBody());
     }
@@ -354,6 +358,18 @@ public class ChartTag extends WidgetTag /* interfaces */implements DataBoundWidg
 
     public void setPlotAreaClick(String value) {
         setProperty("plotAreaClick", new Function(value));
+    }
+
+    public String getRender() {
+        Function property = ((Function)getProperty("render"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setRender(String value) {
+        setProperty("render", new Function(value));
     }
 
     public String getSelect() {
