@@ -369,7 +369,6 @@
                 }]}, options));
 
             donutChart.reflow(chartBox);
-            donutChart.getViewElements(view);
 
             points = donutChart.points;
         }
@@ -424,7 +423,6 @@
                 }]});
 
             donutChart.reflow(chartBox);
-            donutChart.getViewElements(view);
 
             points = donutChart.points;
 
