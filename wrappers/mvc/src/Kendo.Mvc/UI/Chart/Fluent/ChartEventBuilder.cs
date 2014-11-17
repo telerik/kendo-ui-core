@@ -467,6 +467,51 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Defines the inline handler of the Render client-side event
+        /// </summary>
+        /// <param name="inlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .Events(events => events.Render(
+        ///                @&lt;text&gt;
+        ///                function(e) {
+        ///                    //event handling code
+        ///                }
+        ///                &lt;/text&gt;
+        ///           ))
+        ///           .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartEventBuilder Render(Func<object, object> inlineCodeBlock)
+        {
+            Handler("render", inlineCodeBlock);
+
+            return this;
+        }
+
+        /// <summary>
+        ///  Defines the name of the JavaScript function that will handle the the Render client-side event.
+        /// </summary>
+        /// <param name="onPlotAreaClickHandlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Events(events => events.Render("onRender"))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartEventBuilder Render(string onRenderHandlerName)
+        {
+            Handler("render", onRenderHandlerName);
+
+            return this;
+        }
+
+        /// <summary>
         /// Defines the name of the JavaScript function that will handle the the ZoomStart client-side event.
         /// </summary>
         /// <param name="onZoomStartHandlerName">The name of the JavaScript function that will handle the event.</param>
