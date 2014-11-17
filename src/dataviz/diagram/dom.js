@@ -1645,7 +1645,8 @@
 
             createShape: function() {
                 var that = this;
-                if ((this.editor && this.editor.end()) || !this.editor) {
+                if (((this.editor && this.editor.end()) || !this.editor) &&
+                    !this.trigger("add", { shape: {} })) {
                     var view = this.dataSource.view() || [];
                     var index = view.length;
                     var model = this.dataSource.insert(index, {});
@@ -1658,7 +1659,8 @@
             },
 
             createConnection: function() {
-                if ((this.editor && this.editor.end()) || !this.editor) {
+                if (((this.editor && this.editor.end()) || !this.editor) &&
+                    !this.trigger("add", { connection: {} })) {
                     var view = this.connectionsDataSource.view() || [];
                     var index = view.length;
                     var model = this.connectionsDataSource.insert(index, {});
