@@ -540,39 +540,6 @@
     })();
 
     // ------------------------------------------------------------
-    module("blendColors");
-
-    test("#fff, #99c62a with alpha 0.2 => #add155", function() {
-        equal(dataviz.blendColors("#99c62a", "#fff", 0.2), "#add155");
-    });
-
-    // ------------------------------------------------------------
-    var blendGradient = dataviz.blendGradient,
-        gradient;
-
-    module("blendGradient", {
-        setup: function() {
-            gradient = {
-                stops: [{
-                    offset: 0.05,
-                    color: "#fff",
-                    opacity: 0.2
-                }]
-            };
-        }
-    });
-
-    test("blend over #99c62a with alpha 0.2", function() {
-        var result = blendGradient("#99c62a", gradient);
-
-        deepEqual(result.stops[0], {
-            offset: 0.05,
-            color: "#add155",
-            opacity: 0
-        });
-    });
-
-    // ------------------------------------------------------------
     var floorDate = dataviz.floorDate,
         ceilDate = dataviz.ceilDate,
         date;
