@@ -23500,6 +23500,12 @@ If the developer wants to control the day and month order then one needs to defi
             <type>boolean</type>
         </attribute>
         <attribute>
+            <description>The template used to render the group headers of scheduler day, week, workWeek and timeline views.The fields which can be used in the template are:</description>
+            <name>groupHeaderTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>The height of the widget. Numeric values are treated as pixels.</description>
             <name>height</name>
             <rtexprvalue>true</rtexprvalue>
@@ -23849,6 +23855,12 @@ which field to update. The other option is to use MVVM bindings in order to bind
         <attribute>
             <description>The text similar to "Date" displayed in scheduler.</description>
             <name>date</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "All events" displayed in timeline views when there is no vertical grouping.</description>
+            <name>defaultRowText</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
