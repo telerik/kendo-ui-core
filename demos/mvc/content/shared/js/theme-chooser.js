@@ -108,8 +108,6 @@
         }
     });
 
-    var MOBILE_CLASSES = "km-ios km-ios4 km-ios5 km-ios6 km-ios7 km-android km-android-dark km-android-light km-blackberry km-wp km-wp-dark km-wp-light km-flat";
-
     var ThemeChooserViewModel = kendo.observable({
         themes: [
             { value: "default", name: "Default", colors: [ "#ef6f1c", "#e24b17", "#5a4b43" ]  },
@@ -166,8 +164,10 @@
 
         setMobileTheme: function(themeName) {
             var mobileContainer = $("#mobile-application-container");
-            mobileContainer.removeClass(MOBILE_CLASSES).addClass("km-" + themeName + (" km-" + themeName.replace(/-.*/, "")));
-            $("#device-wrapper").removeClass("ios7 ios wp-dark wp-light android-light android-dark blackberry flat").addClass(themeName);
+            var toClass = function(x) { return "km-" + x + (" km-" + x.replace(/-.*/, "")) };
+            var themeIds = $.map(this.mobileThemes, function(x) { return x.value; });
+            mobileContainer.removeClass($.map(themeIds, toClass).join(" ")).addClass(toClass(themeName));
+            $("#device-wrapper").removeClass(themeIds.join(" ")).addClass(themeName);
             cookie("mobileTheme", themeName, Infinity, "/");
             kendo.resize(mobileContainer);
         }
