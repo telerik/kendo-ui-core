@@ -605,11 +605,11 @@ var __meta__ = {
             }, options.chartArea);
         },
 
-        _createPlotArea: function() {
+        _createPlotArea: function(skipSeries) {
             var chart = this,
                 options = chart.options;
 
-            return PlotAreaFactory.current.create(options.series, options);
+            return PlotAreaFactory.current.create(skipSeries ? [] : options.series, options);
         },
 
         _setupSelection: function() {

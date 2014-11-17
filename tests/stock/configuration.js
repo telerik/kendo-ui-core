@@ -209,19 +209,20 @@
                 }
             });
 
-            equal(chart._plotArea.axes[0].options.maxDateGroups, 100);
+            equal(chart._navigator.mainAxis().options.maxDateGroups, 100);
         });
 
         test("extends valueAxis options", function() {
             createStockChart({
                 navigator: {
                     valueAxis: {
+                        name: "foo",
                         min: 100
                     }
                 }
             });
 
-            equal(chart._plotArea.axes[3].options.min, 100);
+            equal(chart._plotArea.namedValueAxes["foo"].options.min, 100);
         });
 
         // ------------------------------------------------------------

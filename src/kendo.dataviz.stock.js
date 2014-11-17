@@ -185,9 +185,9 @@ var __meta__ = {
                 navigator = chart._navigator = new Navigator(chart);
             }
 
+            navigator._setRange();
             Chart.fn._redraw.call(chart);
-            navigator.redraw();
-            navigator.redrawSlaves();
+            navigator._initSelection();
         },
 
         _onDataChanged: function() {
@@ -316,12 +316,12 @@ var __meta__ = {
             }
 
             if (chart._model) {
-               navi.redraw();
-               navi.filterAxes();
+                navi.redraw();
+                navi.filterAxes();
 
-               if (!chart.options.dataSource || (chart.options.dataSource && chart._dataBound)) {
-                   navi.redrawSlaves();
-               }
+                if (!chart.options.dataSource || (chart.options.dataSource && chart._dataBound)) {
+                    navi.redrawSlaves();
+                }
             }
         },
 
@@ -340,59 +340,85 @@ var __meta__ = {
 
         redraw: function() {
             this._redrawSelf();
+            this._initSelection();
+        },
 
+        _initSelection: function() {
             var navi = this,
                 chart = navi.chart,
                 options = navi.options,
                 axis = navi.mainAxis(),
                 axisClone = clone(axis),
-                groups = axis.options.categories,
-                select = navi.options.select || {},
-                selection = navi.selection,
                 range = axis.range(),
                 min = range.min,
                 max = range.max,
-                from = toDate(select.from) || min,
-                to = toDate(select.to) || max;
+                groups = axis.options.categories,
+                select = navi.options.select,
+                selection = navi.selection,
+                from = toDate(select.from),
+                to = toDate(select.to);
 
-            if (from < min) { from = min; }
-            if (to > max) { to = max; }
+            if (groups.length === 0) {
+                return;
+            }
 
-            if (groups.length > 0) {
-                if (selection) {
-                    selection.destroy();
-                    selection.wrapper.remove();
+            if (selection) {
+                selection.destroy();
+                selection.wrapper.remove();
+            }
+
+            // "Freeze" the selection axis position until the next redraw
+            axisClone.box = axis.box;
+
+            selection = navi.selection = new Selection(chart, axisClone, {
+                min: min,
+                max: max,
+                from: from,
+                to: to,
+                selectStart: $.proxy(navi._selectStart, navi),
+                select: $.proxy(navi._select, navi),
+                selectEnd: $.proxy(navi._selectEnd, navi),
+                mousewheel: {
+                    zoom: "left"
                 }
+            });
 
-                // "Freeze" the selection axis position until the next redraw
-                axisClone.box = axis.box;
-
-                // TODO: Move selection initialization to PlotArea.redraw
-                selection = navi.selection = new Selection(chart, axisClone, {
+            if (options.hint.visible) {
+                navi.hint = new NavigatorHint(chart.element, {
                     min: min,
                     max: max,
-                    from: from,
-                    to: to,
-                    selectStart: $.proxy(navi._selectStart, navi),
-                    select: $.proxy(navi._select, navi),
-                    selectEnd: $.proxy(navi._selectEnd, navi),
-                    mousewheel: {
-                        zoom: "left"
-                    }
+                    template: options.hint.template,
+                    format: options.hint.format
                 });
-
-                if (options.hint.visible) {
-                    navi.hint = new NavigatorHint(chart.element, {
-                        min: min,
-                        max: max,
-                        template: options.hint.template,
-                        format: options.hint.format
-                    });
-                }
-
-                navi.readSelection();
-                navi.filterAxes();
             }
+        },
+
+        _setRange: function() {
+            var plotArea = this.chart._createPlotArea(true);
+            var axis = plotArea.namedCategoryAxes[NAVIGATOR_AXIS];
+            var axisOpt = axis.options;
+
+            var range = axis.range();
+            var min = range.min;
+            var max = addDuration(range.max, axisOpt.baseUnitStep, axisOpt.baseUnit);
+
+            var select = this.options.select || {};
+            var from = toDate(select.from) || min;
+            if (from < min) {
+                from = min;
+            }
+
+            var to = toDate(select.to) || max;
+            if (to > max) {
+                to = max;
+            }
+
+            this.options.select = {
+                from: from,
+                to: to
+            };
+
+            this.filterAxes();
         },
 
         _redrawSelf: function(silent) {
