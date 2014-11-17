@@ -562,4 +562,25 @@ test("filtering skips the groups", function() {
     });
 });
 
+test("keeps loaded TreeListDataSource items", function() {
+    dataSource = new kendo.data.TreeListDataSource({
+        transport: {
+            read: function(options) {
+                if (!options.id) {
+                    options.success([ { id: 1, parentId: null, hasChildren: true } ]);
+                } else {
+                    options.success([ { id: 2, parentId: 1, hasChildren: false } ]);
+                }
+            }
+        }
+    });
+
+    dataSource.read();
+    dataSource.load(dataSource.get(1));
+
+    testWorkbook({ columns: [ { field: "id" } ], dataSource: dataSource }, function(book) {
+        equal(book.sheets[0].rows.length, 3);
+    });
+});
+
 }());

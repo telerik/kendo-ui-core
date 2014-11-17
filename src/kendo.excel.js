@@ -39,6 +39,10 @@ kendo.ExcelExporter = kendo.Class.extend({
         } else {
             this.dataSource = kendo.data.DataSource.create(dataSource);
         }
+
+        if (dataSource instanceof kendo.data.TreeListDataSource) {
+            this.dataSource.data(dataSource.view().toJSON());
+        }
     },
     _trimColumns: function(columns) {
         var that = this;
