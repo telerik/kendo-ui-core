@@ -19,51 +19,41 @@
 
         $("#chart").kendoStockChart({
             dataSource: {
-                data: [{
-                    date: new Date("2012/09/01"),
-                    sales: 100
-                }, {
-                    date: new Date("2012/09/02"),
-                    sales: 110
-                }, {
-                    date: new Date("2012/09/03"),
-                    sales: 105
-                }, {
-                    date: new Date("2012/09/04"),
-                    sales: 100
-                }, {
-                    date: new Date("2012/09/05"),
-                    sales: 110
-                }, {
-                    date: new Date("2012/09/06"),
-                    sales: 105
-                }],
-                serverFiltering: true,
+                transport: {
+                    read: {
+                        url: "../../demos/mvc/content/dataviz/js/boeing-stock.json",
+                        dataType: "json"
+                    }
+                },
                 schema: {
                     model: {
                         fields: {
-                            date: { type: "date" }
+                            Date: { type: "date" }
                         }
                     }
                 }
             },
-            dateField: "date",
+            title: {
+                text: "The Boeing Company\nNYSE:BA"
+            },
+            dateField: "Date",
             series: [{
-                field: "sales"
+                type: "candlestick",
+                openField: "Open",
+                highField: "High",
+                lowField: "Low",
+                closeField: "Close"
             }],
             navigator: {
-                dataSource: null,
-                series: [{
-                    field: "volume"
-                }],
+                series: {
+                    type: "area",
+                    field: "Close"
+                },
                 select: {
-                    from: new Date("2012/09/04")
+                    from: "2009/02/05",
+                    to: "2011/10/07"
                 }
             }
-        });
-
-        $("button").click(function() {
-            $("#chart").getKendoStockChart().redraw();
         });
     });
     </script>
@@ -71,12 +61,10 @@
         #chart {
             width: 800px;
             height: 500px;
-            float: left;
         }
     </style>
   </head>
   <body>
       <div id="chart"></div>
-      <button>redraw</button>
   </body>
 </html>
