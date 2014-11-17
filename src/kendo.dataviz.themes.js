@@ -3170,7 +3170,222 @@ var __meta__ = {
             ]
         }
     });
+    
+    registerTheme("materialblack", {
+       chart: {
+            title: {
+                color: "#fff"
+            },
+            legend: {
+                labels: {
+                    color: "#fff"
+                },
+                inactiveItems: {
+                    labels: {
+                        color: "#CBCBCB"
+                    },
+                    markers: {
+                        color: "#CBCBCB"
+                    }
+                }
+            },
+            seriesDefaults: {
+                labels: {
+                    color: "#fff"
+                },
+                errorBars: {
+                    color: "#fff"
+                },
+                notes: {
+                    icon: {
+                        background: "transparent",
+                        border: {
+                            color: "#e5e5e5"
+                        }
+                    },
+                    label: {
+                        color: "#fff"
+                    },
+                    line: {
+                        color: "#e5e5e5"
+                    }
+                },
+                candlestick: {
+                    downColor: "#c7c7c7",
+                    line: {
+                        color: "#787878"
+                    }
+                },
+                area: {
+                    opacity: 0.9
+                },
+                waterfall: {
+                    line: {
+                        color: "#4d4d4d"
+                    }
+                },
+                horizontalWaterfall: {
+                    line: {
+                        color: "#4d4d4d"
+                    }
+                },
+                overlay: {
+                    gradient: "none"
+                },
+                border: {
+                    _brightness: 1
+                }
+            },
+            seriesColors: ["#3f51b5", "#03a9f4", "#4caf50", "#f9ce1d", "#ff9800", "#ff5722"],
+            axisDefaults: {
+                line: {
+                    color: "#4d4d4d"
+                },
+                labels: {
+                    color: "#fff"
+                },
+                minorGridLines: {
+                    color: "#4d4d4d"
+                },
+                majorGridLines: {
+                    color: "#4d4d4d"
+                },
+                title: {
+                    color: "#fff"
+                },
+                crosshair: {
+                    color: "#7f7f7f"
+                },
+                notes: {
+                    icon: {
+                        background: "transparent",
+                        border: {
+                            color: "#4d4d4d"
+                        }
+                    },
+                    label: {
+                        color: "#fff"
+                    },
+                    line: {
+                        color: "#4d4d4d"
+                    }
+                }
+            }
+        },
+        gauge: {
+            pointer: {
+                color: "#3f51b5"
+            },
+            scale: {
+                rangePlaceholderColor: "#4d4d4d",
 
+                labels: {
+                    color: "#fff"
+                },
+                minorTicks: {
+                    color: "#fff"
+                },
+                majorTicks: {
+                    color: "#fff"
+                },
+                line: {
+                    color: "#fff"
+                }
+            }
+        },
+        diagram: {
+            shapeDefaults: {
+                fill: {
+                    color: "#3f51b5"
+                },
+                connectorDefaults: {
+                    fill: {
+                        color: "#7f7f7f"
+                    },
+                    stroke: {
+                        color: WHITE
+                    },
+                    hover: {
+                        fill: {
+                            color: WHITE
+                        },
+                        stroke: {
+                            color: "#7f7f7f"
+                        }
+                    }
+                },
+                content: {
+                    color: "#fff"
+                }
+            },
+            editable: {
+                resize: {
+                    handles: {
+                        fill: {
+                            color: WHITE
+                        },
+                        stroke: {
+                            color: "#fff"
+                        },
+                        hover: {
+                            fill: {
+                                color: "#fff"
+                            },
+                            stroke: {
+                                color: "#fff"
+                            }
+                        }
+                    }
+                },
+                rotate: {
+                    thumb: {
+                        stroke: {
+                            color: "#fff"
+                        },
+                        fill: {
+                            color: "#fff"
+                        }
+                    }
+                }
+            },
+            selectable: {
+                stroke: {
+                    color: "#fff"
+                }
+            },
+            connectionDefaults: {
+                stroke: {
+                    color: "#7f7f7f"
+                },
+                content: {
+                    color: "#fff"
+                },
+                selection: {
+                    handles: {
+                        fill: {
+                            color: WHITE
+                        },
+                        stroke: {
+                            color: "#fff"
+                        }
+                    },
+                    stroke: {
+                        color: "#fff"
+                    }
+                }
+            }
+        },
+        treeMap: {
+            colors: [
+                ["#3f51b5", "#cff3f0"],
+                ["#03a9f4", "#e5f6fe"],
+                ["#4caf50", "#edf7ed"],
+                ["#f9ce1d", "#fefae8"],
+                ["#ff9800", "#fff4e5"],
+                ["#ff5722", "#ffeee8"]
+            ]
+        }
+    });
 
 })(window.kendo.jQuery);
 
