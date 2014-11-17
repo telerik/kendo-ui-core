@@ -4,7 +4,6 @@
 @material-accent-color: #00b0ff;
 @material-main-color: rgba(0,0,0,.87);
 @material-icon-color: rgba(0,0,0,.54);
-//@material-disabled-color: rgba(0,0,0,.26);
 @material-disabled-color: #bababa;
 @material-border-color: rgba(0,0,0,.12);
 
@@ -311,7 +310,10 @@
     border-color: @material-border-color;
 }
 
-.km-material .km-buttongroup .km-button,
+.km-material .km-buttongroup .km-button {
+    color: @material-main-color;
+}
+
 .km-material .km-widget.km-navbar .km-buttongroup .km-button {
     color: @material-primary-inverse-color;
 }
