@@ -23,7 +23,8 @@
 				<kendo:pivotDataSource-row name="[Geography].[City]"/>
 			</kendo:pivotDataSource-rows>
 			<kendo:pivotDataSource-measures>
-				<kendo:pivotDataSource-measure name="[Measures].[Reseller Freight Cost]"/>
+				<kendo:pivotDataSource-measure name="[Measures].[Internet Revenue Status]" type="status" />
+				<kendo:pivotDataSource-measure name="[Measures].[Internet Revenue Trend]" type="trend" />
 			</kendo:pivotDataSource-measures>
 			<kendo:pivotDataSource-schema type="xmla">
 			</kendo:pivotDataSource-schema>

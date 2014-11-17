@@ -6,8 +6,11 @@
 <c:url value="/grid/customers/" var="transportReadUrl" />
 
 <demo:header />
-
+	<kendo:pivotConfigurator name="configurator" height="570px">
+	</kendo:pivotConfigurator>
+	
 	<kendo:pivotGrid name="pivotgrid" columnWidth="120" height="570px">		
+		<kendo:pivotGrid-configurator name="configurator" />
 		<kendo:pivotDataSource data="${products}">
 			<kendo:pivotDataSource-schema>
 				<kendo:pivotDataSource-schema-cube>
@@ -18,7 +21,7 @@
 						<kendo:pivotDataSource-schema-cube-dimension name="contactTitle" caption="All Titles"/>
 					</kendo:pivotDataSource-schema-cube-dimensions>
 					<kendo:pivotDataSource-schema-cube-measures>
-						<kendo:pivotDataSource-schema-cube-measure name="Contacts Count" field="CustomerID" aggregate="countAggregate"/>
+						<kendo:pivotDataSource-schema-cube-measure name="Contacts Count" field="CustomerID" aggregateName="count"/>
 					</kendo:pivotDataSource-schema-cube-measures>
 				</kendo:pivotDataSource-schema-cube>
 				 <kendo:dataSource-schema-model>
@@ -48,9 +51,18 @@
 		</kendo:pivotDataSource>
 	</kendo:pivotGrid>
 	
-<script>
-	function countAggregate(value, state) { 
-		return state + 1; 
-	}
-</script>
+ 	<style>
+     #pivotgrid
+     {
+         display: inline-block;
+         vertical-align: top;
+         width: 60%;
+     }
+
+     #configurator
+     {
+         display: inline-block;
+         vertical-align: top;
+     }
+     </style>
 <demo:footer />

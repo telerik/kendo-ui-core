@@ -56,9 +56,25 @@ public class MeasuresTag extends BaseTag /* interfaces */ /* interfaces */ {
 
     private List<MeasureTag> measures;
 
+    private List<HashMap<String, Object>> serializeMeasures() {
+        List<HashMap<String, Object>> result = new ArrayList<HashMap<String, Object>>();
+
+        for (int i = 0; i < measures.size(); i++) {
+            HashMap<String, Object> map = new HashMap<String, Object>();
+            MeasureTag tag = measures.get(i);
+
+            map.put("name", tag.getName());
+            map.put("type", tag.getType());
+
+            result.add(map);
+        }
+
+        return result;
+    }
+
     public Map<String, Object> measures() {
         return new HashMap<String, Object>() {{
-            put("values", measures);
+            put("values", serializeMeasures());
             put("axis", getAxis());
           }};
     }

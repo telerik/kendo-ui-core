@@ -35,7 +35,7 @@
 				<kendo:pivotDataSource-row name="[Product].[Product Line]"/>
 			</kendo:pivotDataSource-rows>
 			<kendo:pivotDataSource-measures>
-				<kendo:pivotDataSource-measure name="[Measures].[Internet Sales Amount]"/>
+				<kendo:pivotDataSource-measure name="[Measures].[Reseller Freight Cost]"/>
 			</kendo:pivotDataSource-measures>
 			<kendo:pivotDataSource-schema type="xmla">
 			</kendo:pivotDataSource-schema>

@@ -6,7 +6,11 @@
 
 <demo:header />
 
+	<kendo:pivotConfigurator name="configurator" height="570px">
+	</kendo:pivotConfigurator>
+
 	<kendo:pivotGrid name="pivotgrid" columnWidth="120" height="570px">		
+		<kendo:pivotGrid-configurator name="configurator" />
 		<kendo:pivotDataSource data="${products}">
 			<kendo:pivotDataSource-schema>
 				<kendo:pivotDataSource-schema-cube>
@@ -16,7 +20,8 @@
 						<kendo:pivotDataSource-schema-cube-dimension name="discontinued" caption="Discontinued"/>
 					</kendo:pivotDataSource-schema-cube-dimensions>
 					<kendo:pivotDataSource-schema-cube-measures>
-						<kendo:pivotDataSource-schema-cube-measure name="Sum" field="unitPrice" aggregate="sumAggregate" format="{0:c}"/>
+						<kendo:pivotDataSource-schema-cube-measure name="Sum" field="unitPrice" aggregateName="sum" format="{0:c}"/>
+						<kendo:pivotDataSource-schema-cube-measure name="Average" field="unitPrice" aggregateName="average" format="{0:c}"/>
 					</kendo:pivotDataSource-schema-cube-measures>
 				</kendo:pivotDataSource-schema-cube>
 				 <kendo:dataSource-schema-model>
@@ -41,10 +46,19 @@
 			</kendo:pivotDataSource-measures>			
 		</kendo:pivotDataSource>
 	</kendo:pivotGrid>
-	
-<script>
-	function sumAggregate(value, state) { 
-		return value + state; 
-	}
-</script>
+
+ 	<style>
+     #pivotgrid
+     {
+         display: inline-block;
+         vertical-align: top;
+         width: 60%;
+     }
+
+     #configurator
+     {
+         display: inline-block;
+         vertical-align: top;
+     }
+     </style>
 <demo:footer />
