@@ -79,7 +79,6 @@ var __meta__ = {
         mwDelta = dataviz.mwDelta,
         round = dataviz.round,
         renderTemplate = dataviz.renderTemplate,
-        uniqueId = dataviz.uniqueId,
         valueOrDefault = dataviz.valueOrDefault,
 
         geom = dataviz.geometry,
@@ -1798,10 +1797,7 @@ var __meta__ = {
         createLabel: function() {
             var item = this,
                 options = item.options,
-                labelOptions = deepExtend({}, options.labels, {
-                        id: uniqueId()
-                    }
-                );
+                labelOptions = deepExtend({}, options.labels);
 
             item.container.append(new TextBox(options.text, labelOptions));
         },
@@ -3033,7 +3029,6 @@ var __meta__ = {
             bar.color = options.color || WHITE;
             bar.aboveAxis = valueOrDefault(bar.options.aboveAxis, true);
             bar.value = value;
-            bar.id = uniqueId();
         },
 
         defaults: {
@@ -3436,7 +3431,6 @@ var __meta__ = {
             var chart = this;
 
             ChartElement.fn.init.call(chart, options);
-            chart.id = uniqueId();
 
             chart.plotArea = plotArea;
             chart.categoryAxis = plotArea.seriesCategoryAxis(options.series[0]);
@@ -4125,8 +4119,7 @@ var __meta__ = {
 
             return new BarLabel(labelText,
                 deepExtend({
-                    vertical: this.options.vertical,
-                    id: uniqueId()
+                    vertical: this.options.vertical
                 },
                 options
             ));
@@ -4376,7 +4369,6 @@ var __meta__ = {
                         vAlign: TOP,
                         align: RIGHT
                     });
-                    bullet.target.id = bullet.id;
 
                     bullet.append(bullet.target);
                 }
@@ -4674,7 +4666,6 @@ var __meta__ = {
 
             if (markers.visible && markers.size) {
                 point.marker = point.createMarker();
-                point.marker.id = point.id;
                 point.append(point.marker);
             }
 
@@ -4922,7 +4913,6 @@ var __meta__ = {
             segment.linePoints = linePoints;
             segment.series = series;
             segment.seriesIx = seriesIx;
-            segment.id = uniqueId();
         },
 
         options: {
@@ -5535,7 +5525,6 @@ var __meta__ = {
             var chart = this;
 
             ChartElement.fn.init.call(chart, options);
-            chart.id = uniqueId();
 
             chart.plotArea = plotArea;
 
@@ -6514,7 +6503,6 @@ var __meta__ = {
 
             ChartElement.fn.init.call(point, options);
             point.value = value;
-            point.id = uniqueId();
 
             point.createNote();
         },
@@ -6727,8 +6715,6 @@ var __meta__ = {
             segment.sector = sector;
 
             ChartElement.fn.init.call(segment, options);
-
-            segment.id = uniqueId();
         },
 
         options: {
@@ -6788,7 +6774,6 @@ var __meta__ = {
 
             if (labels.visible && labelText) {
                 segment.label = new TextBox(labelText, deepExtend({}, labels, {
-                        id: uniqueId(),
                         align: CENTER,
                         vAlign: "",
                         animation: {
@@ -7035,7 +7020,6 @@ var __meta__ = {
                 colorsCount = colors.length,
                 series = options.series,
                 seriesCount = series.length,
-                overlayId = uniqueId(),
                 currentSeries, pointData, fields, seriesIx,
                 angle, data, anglePerValue, value, plotValue, explode,
                 total, currentAngle, i, pointIx = 0;
@@ -7080,9 +7064,6 @@ var __meta__ = {
                         explode: explode,
                         visibleInLegend: fields.visibleInLegend,
                         visible: fields.visible,
-                        overlay: {
-                            id: overlayId + seriesIx
-                        },
                         zIndex: seriesCount - seriesIx,
                         animationDelay: chart.animationDelay(i, seriesIx, seriesCount)
                     });
@@ -7690,7 +7671,6 @@ var __meta__ = {
             segment.from = from;
             segment.to = to;
             segment.series = series;
-            segment.id = uniqueId();
         },
 
         options: {
@@ -7747,7 +7727,7 @@ var __meta__ = {
             BoxElement.fn.init.call(pane, options);
 
             options = pane.options;
-            pane.id = uniqueId();
+            pane.id = kendo.guid();
 
             pane.createTitle();
 
@@ -7998,8 +7978,6 @@ var __meta__ = {
             plotArea.options.legend.items = [];
             plotArea.axes = [];
             plotArea.crosshairs = [];
-
-            plotArea.id = uniqueId();
 
             plotArea.createPanes();
             plotArea.render();

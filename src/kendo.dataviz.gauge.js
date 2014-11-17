@@ -11,7 +11,7 @@ var __meta__ = {
 };
 
 (function ($, undefined) {
-    
+
     var math = Math,
         kendo = window.kendo,
         util = kendo.util,
@@ -33,7 +33,6 @@ var __meta__ = {
 
         getSpacing = dataviz.getSpacing,
         round = dataviz.round,
-        uniqueId = dataviz.uniqueId,
         geo = dataviz.geometry,
         draw = dataviz.drawing,
         Point = geo.Point,
@@ -72,17 +71,13 @@ var __meta__ = {
         Y = "y";
 
     var Pointer = Class.extend({
-        init: function(scale, options) {  
+        init: function(scale, options) {
             var pointer = this;
             var scaleOptions = scale.options;
 
             ChartElement.fn.init.call(pointer, options);
 
             options = pointer.options;
-
-            if (!options.id) {
-                options.id = uniqueId();
-            }
 
             options.fill = options.color;
 
@@ -95,7 +90,7 @@ var __meta__ = {
             }
         },
 
-        options: { 
+        options: {
             color: BLACK
         },
 
@@ -581,7 +576,7 @@ var __meta__ = {
             that._tickDifference = majorTickSize - minorTickSize;
             if (labelsPosition === OUTSIDE) {
                 tickArc.setRadiusX(radius - majorTickSize + minorTickSize)
-                       .setRadiusY(radius - majorTickSize + minorTickSize);    
+                       .setRadiusY(radius - majorTickSize + minorTickSize);
             }
 
             that.minorTickAngles = that.normalizeTickAngles(that.tickAngles(arc, options.minorUnit));
@@ -999,7 +994,7 @@ var __meta__ = {
             scale.arc.center.y -= paddingY;
 
             scale.reflow(bbox);
-            
+
             for (var i = 0; i < pointers.length; i++) {
                 pointers[i].reflow(scale.arc);
                 that.plotBbox = Rect.union(scale.bbox, pointers[i].bbox);
@@ -1017,7 +1012,7 @@ var __meta__ = {
 
             pointers = $.isArray(pointers) ? pointers : [pointers];
             for (var i = 0; i < pointers.length; i++) {
-                current = new RadialPointer(scale, 
+                current = new RadialPointer(scale,
                     deepExtend({}, pointers[i], {
                         animation: {
                             transitions: options.transitions
@@ -1513,7 +1508,7 @@ var __meta__ = {
             var options = this.options;
             var elements = new Group();
             var scale = this.scale;
-            
+
             return {
                 fill: {
                     color: options.color,
@@ -1778,7 +1773,7 @@ var __meta__ = {
             var translateX = interpolateValue(this.fromScale.x, this.toScale.x, pos);
             var translateY = interpolateValue(this.fromScale.y, this.toScale.y, pos);
 
-            this.element.transform(geo.transform().translate(translateX, translateY));            
+            this.element.transform(geo.transform().translate(translateX, translateY));
         }
     });
     draw.AnimationFactory.current.register(ARROW_POINTER, ArrowLinearPointerAnimation);

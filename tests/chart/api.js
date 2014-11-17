@@ -308,11 +308,6 @@
             equal(chart.dataSource._events["change"].length, 0);
         });
 
-        test("releases IDs to pool", function() {
-            chart.destroy();
-            ok(dataviz.IDPool.current._pool.length > 0);
-        });
-
         // ------------------------------------------------------------
         function triggerMousewheel(delta) {
             chart._mousewheel({

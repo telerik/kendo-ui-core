@@ -35,8 +35,7 @@ var __meta__ = {
         autoFormat = dataviz.autoFormat,
         evalOptions = dataviz.evalOptions,
         limitValue = dataviz.limitValue,
-        seriesTotal = dataviz.seriesTotal,
-        uniqueId = dataviz.uniqueId;
+        seriesTotal = dataviz.seriesTotal;
 
     // Constants ==============================================================
     var CATEGORY = "category",
@@ -223,8 +222,7 @@ var __meta__ = {
                 chart.evalSegmentOptions(labels, value, fields);
 
                 textBox = new TextBox(text, deepExtend({
-                        vAlign: labels.position,
-                        id: uniqueId()
+                        vAlign: labels.position
                     }, labels)
                 );
 
@@ -353,7 +351,6 @@ var __meta__ = {
             ChartElement.fn.init.call(segment, options);
 
             segment.value = value;
-            segment.id = uniqueId();
             segment.options.index = segmentOptions.index;
         },
 

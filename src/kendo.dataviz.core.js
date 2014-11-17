@@ -670,7 +670,6 @@ var __meta__ = {
             element.children = [];
 
             element.options = deepExtend({}, element.options, options);
-            element.id = element.options.id;
         },
 
         reflow: function(targetBox) {
@@ -695,17 +694,9 @@ var __meta__ = {
                 children = element.children,
                 root = element.getRoot(),
                 modelId = element.modelId,
-                id = element.id,
-                pool = IDPool.current,
                 i;
 
-            if (id) {
-                pool.free(id);
-            }
-
             if (modelId) {
-                pool.free(modelId);
-
                 if (root && root.modelMap[modelId]) {
                     root.modelMap[modelId] = undefined;
                 }
@@ -1123,26 +1114,6 @@ var __meta__ = {
                 },
                 cursor: options.cursor
             };
-        },
-
-        elementStyle: function() {
-            var boxElement = this,
-                options = boxElement.options,
-                border = options.border || {};
-
-            return {
-                id: this.id,
-                stroke: border.width ? border.color : "",
-                strokeWidth: border.width,
-                dashType: border.dashType,
-                strokeOpacity: valueOrDefault(border.opacity, options.opacity),
-                fill: options.background,
-                fillOpacity: options.opacity,
-                animation: options.animation,
-                zIndex: options.zIndex,
-                cursor: options.cursor,
-                data: { modelId: boxElement.modelId }
-            };
         }
     });
 
@@ -1392,7 +1363,6 @@ var __meta__ = {
         _initContainer: function() {
             var textbox = this;
             var options = textbox.options;
-            var id = options.id;
             var rows = (textbox.content + "").split(textbox.ROWS_SPLIT_REGEX);
             var floatElement = new FloatElement({vertical: true, align: options.align, wrap: false});
             var textOptions = deepExtend({ }, options, { opacity: 1, animation: null });
@@ -1405,9 +1375,6 @@ var __meta__ = {
 
             for (rowIdx = 0; rowIdx < rows.length; rowIdx++) {
                 text = new Text(trim(rows[rowIdx]), textOptions);
-                if (hasBox || (id && rowIdx > 0)) {
-                    text.id = uniqueId();
-                }
                 floatElement.append(text);
             }
         },
@@ -1537,9 +1504,7 @@ var __meta__ = {
             label.index = index;
             label.dataItem = dataItem;
 
-            TextBox.fn.init.call(label, text,
-                deepExtend({ id: uniqueId() }, options)
-            );
+            TextBox.fn.init.call(label, text, options);
         },
 
         click: function(widget, e) {
@@ -2005,8 +1970,7 @@ var __meta__ = {
                 lineOptions = {
                     lineStart: lineBox[vertical ? "x1" : "y1"],
                     lineEnd: lineBox[vertical ? "x2" : "y2"],
-                    vertical: vertical,
-                    modelId: axis.plotArea.modelId
+                    vertical: vertical
                 },
                 pos, majorTicks = [];
 
@@ -2266,7 +2230,6 @@ var __meta__ = {
                 text = note.text,
                 icon = options.icon,
                 size = icon.size,
-                dataModelId = { data: { modelId: note.modelId } },
                 box = Box2D(),
                 marker, width, height, noteTemplate;
 
@@ -2285,7 +2248,7 @@ var __meta__ = {
                         text = autoFormat(label.format, text);
                     }
 
-                    note.label = new TextBox(text, deepExtend({}, label, dataModelId));
+                    note.label = new TextBox(text, deepExtend({}, label));
                     note.append(note.label);
 
                     if (label.position === INSIDE) {
@@ -2302,7 +2265,7 @@ var __meta__ = {
                 icon.width = width || size;
                 icon.height = height || size;
 
-                marker = new ShapeElement(deepExtend({}, icon, dataModelId));
+                marker = new ShapeElement(deepExtend({}, icon));
 
                 note.marker = marker;
                 note.append(marker);
@@ -3658,43 +3621,6 @@ var __meta__ = {
     var FadeAnimationDecorator = animationDecorator(FADEIN, FadeAnimation);
 
     // Helper functions========================================================
-    var IDPool = Class.extend({
-        init: function(size, prefix, start) {
-            this._pool = [];
-            this._freed = {};
-            this._size = size;
-            this._id = start;
-            this._prefix = prefix;
-        },
-
-        alloc: function() {
-            var that = this,
-                pool = that._pool,
-                id;
-
-            if (pool.length > 0) {
-                id = pool.pop();
-                delete that._freed[id];
-            } else {
-                id = that._prefix + that._id++;
-            }
-
-            return id;
-        },
-
-        free: function(id) {
-            var that = this,
-                pool = that._pool,
-                freed = that._freed;
-
-            if (pool.length < that._size && !freed[id]) {
-                pool.push(id);
-                freed[id] = true;
-            }
-        }
-    });
-    IDPool.current = new IDPool(ID_POOL_SIZE, ID_PREFIX, ID_START);
-
     var LRUCache = Class.extend({
         init: function(size) {
             this._size = size;
@@ -3913,10 +3839,6 @@ var __meta__ = {
         }
 
         return hash.sort().join(" ");
-    }
-
-    function uniqueId() {
-        return IDPool.current.alloc();
     }
 
     // TODO: Replace with Point2D.rotate
@@ -4488,7 +4410,6 @@ var __meta__ = {
         FadeAnimation: FadeAnimation,
         FadeAnimationDecorator: FadeAnimationDecorator,
         FloatElement: FloatElement,
-        IDPool: IDPool,
         LogarithmicAxis: LogarithmicAxis,
         LRUCache: LRUCache,
         Matrix: Matrix,
@@ -4532,7 +4453,6 @@ var __meta__ = {
         supportsCanvas: supportsCanvas,
         supportsSVG: supportsSVG,
         renderTemplate: renderTemplate,
-        uniqueId: uniqueId,
         valueOrDefault: valueOrDefault
     });
 
