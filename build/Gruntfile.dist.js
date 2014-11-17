@@ -54,7 +54,7 @@ module.exports = function(grunt) {
             compile: {
                 src: [ "styles/**/kendo*.less" ],
             }
-        }
+        },
 
         license: {
             apply: {
