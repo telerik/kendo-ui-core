@@ -60,6 +60,7 @@
                 legendItemClick: onLegendItemClick,
                 legendItemHover: onLegendItemHover,
                 plotAreaClick: onPlotAreaClick,
+                render: onRender,
                 dragStart: onDragStart,
                 drag: onDrag,
                 dragEnd: onDragEnd,
@@ -100,6 +101,10 @@
             kendoConsole.log(kendo.format("Plot area click :: {0} : {1:N0}",
                 e.category, e.value
             ));
+        }
+
+        function onRender(e) {
+            kendoConsole.log("Render");
         }
 
         function onDragStart(e) {
