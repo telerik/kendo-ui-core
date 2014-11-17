@@ -347,7 +347,7 @@ var __meta__ = {
                 useLocalTimezone: true
             },
             messages: {
-                defaultGroupText: "All events"
+                defaultRowText: "All events"
             }
         },
 
@@ -506,7 +506,7 @@ var __meta__ = {
             var timeColumns = [];
             var columns = [];
             var that = this;
-            var rows = [{ text: that.options.messages.defaultGroupText }];
+            var rows = [{ text: that.options.messages.defaultRowText }];
 
             var minorTickSlots = [];
             for (var minorTickIndex = 0; minorTickIndex < that.options.minorTickCount; minorTickIndex++) {
