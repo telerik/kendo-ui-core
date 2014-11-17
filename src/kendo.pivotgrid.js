@@ -3689,6 +3689,9 @@ var __meta__ = {
 
                 if (height <= scrollbar * 2) { // do not set height if proper scrollbar cannot be displayed
                     height = scrollbar * 2 + 1;
+                    if (!skipScrollbar) {
+                        height += scrollbar;
+                    }
                 }
 
                 content.height(height);

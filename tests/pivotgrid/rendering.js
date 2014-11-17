@@ -3920,6 +3920,44 @@
         equal(rowsHeader.height(), content.height());
     });
 
+    test("PivotGrid sets min height if height value is lower than scrollbar width", function() {
+        var pivotgrid = createPivot({
+            height: 10,
+            dataSource: createDataSource()
+        });
+
+        var scrollbar = kendo.support.scrollbar();
+        var content = pivotgrid.wrapper.find(".k-grid-content");
+        var rowsHeader = pivotgrid.wrapper.find(".k-pivot-rowheaders").find(".k-grid");
+
+        scrollbar = (scrollbar * 2 + 1);
+
+        equal(content.height(), scrollbar);
+    });
+
+    test("PivotGrid sets heights to 3 scrollbar width if horizontal scollbar is visible", function() {
+        var tuples = [{ members: [ { name: "dim 0", levelNum: "0", children: [] }] }];
+        var data = [];
+
+        for (var idx = 0; idx < 100; idx++) {
+            tuples.push({ members: [ { name: "tuple " + idx, parentName: "dim 0", levelNum: "1", children: [] }] });
+            data.push(idx);
+        }
+
+        var pivotgrid = createPivot({
+            height: 10,
+            dataSource: createDataSource(tuples, data)
+        });
+
+        var scrollbar = kendo.support.scrollbar();
+        var content = pivotgrid.wrapper.find(".k-grid-content");
+        var rowsHeader = pivotgrid.wrapper.find(".k-pivot-rowheaders").find(".k-grid");
+
+        scrollbar = (scrollbar * 3 + 1);
+
+        equal(content.height(), scrollbar);
+    });
+
     test("PivotGrid sets height of rows header without scrollbar if horizontal content scrollbar", function() {
         var tuples = [{ members: [ { name: "dim 0", levelNum: "0", children: [] }] }];
         var data = [];
