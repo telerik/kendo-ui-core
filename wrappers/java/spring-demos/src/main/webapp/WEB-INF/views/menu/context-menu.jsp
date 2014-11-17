@@ -40,7 +40,6 @@
    	        <kendo:contextMenu-item text="Mark As">
    	            <kendo:contextMenu-items>
    	                <kendo:contextMenu-item text="Unread" />
-                    <kendo:contextMenu-item separator="true" />
    	                <kendo:contextMenu-item text="Important" />
    	                <kendo:contextMenu-item text="Read" />
    	            </kendo:contextMenu-items>
@@ -48,11 +47,9 @@
             <kendo:contextMenu-item text="Label As">
                 <kendo:contextMenu-items>
                     <kendo:contextMenu-item text="None" />
-                    <kendo:contextMenu-item separator="true" />
                     <kendo:contextMenu-item text="Important" imageUrl="${important}" />
                     <kendo:contextMenu-item text="Work" imageUrl="${todo}" />
                     <kendo:contextMenu-item text="Personal" imageUrl="${done}" />
-                    <kendo:contextMenu-item separator="true" />
                     <kendo:contextMenu-item text="New Label" />
                 </kendo:contextMenu-items>
             </kendo:contextMenu-item>
