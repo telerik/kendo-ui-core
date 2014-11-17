@@ -1246,6 +1246,12 @@
             equal(imageNode.loading.state(), "resolved");
         });
 
+        test("error handler rejects loading state", function() {
+            image.src("Baz");
+            imageNode.onError();
+            equal(imageNode.loading.state(), "rejected");
+        });
+
         test("load handler invalidates node", function() {
             imageNode.invalidate = function() {
                 ok(true);
@@ -1344,13 +1350,25 @@
         });
 
         asyncTest("throws an error if the canvas becomes tainted", function() {
-            var image = new d.Image("http://goo.gl/6ov8Gw?" + (new Date().getTime()), new g.Rect([0, 0], [100, 100]));
+            var image = new d.Image("http://kendobuild/pesho.jpg", new g.Rect([0, 0], [100, 100]));
             group.append(image);
 
             d.exportImage(group).done(function() {
                 ok(false, "Should fail");
             }).fail(function(e) {
-                ok(e.message.indexOf("Tainted") + e.message.indexOf("insecure") >= 0);
+                contains(e.message, "Unable to load");
+                contains(e.message, "pesho.jpg");
+            }).always(function() {
+                start();
+            });
+        });
+
+        asyncTest("does not throw an error if image is CORS-enabled", function() {
+            var image = new d.Image("http://upload.wikimedia.org/wikipedia/en/b/bc/Wiki.png", new g.Rect([0, 0], [100, 100]));
+            group.append(image);
+
+            d.exportImage(group).done(function() {
+                ok(true);
             }).always(function() {
                 start();
             });

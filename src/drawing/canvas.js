@@ -54,7 +54,7 @@
         type: "canvas",
 
         draw: function(element) {
-            this._root.load([element]);
+            this._root.load([element], undefined, this.options.cors);
         },
 
         clear: function() {
@@ -82,6 +82,8 @@
                 } catch (e) {
                     defer.reject(e);
                 }
+            }).fail(function(e) {
+                defer.reject(e);
             });
 
             return defer.promise();
@@ -159,7 +161,7 @@
             }
         },
 
-        load: function(elements, pos) {
+        load: function(elements, pos, cors) {
             var node = this,
                 childNode,
                 srcElement,
@@ -170,11 +172,10 @@
                 srcElement = elements[i];
                 children = srcElement.children;
 
-                // TODO: Node registration
-                childNode = new nodeMap[srcElement.nodeType](srcElement);
+                childNode = new nodeMap[srcElement.nodeType](srcElement, cors);
 
                 if (children && children.length > 0) {
-                    childNode.load(children);
+                    childNode.load(children, pos, cors);
                 }
 
                 if (defined(pos)) {
@@ -466,14 +467,28 @@
     });
 
     var ImageNode = PathNode.extend({
-        init: function(srcElement) {
+        init: function(srcElement, cors) {
             PathNode.fn.init.call(this, srcElement);
 
             this.onLoad = $.proxy(this.onLoad, this);
+            this.onError = $.proxy(this.onError, this);
 
-            this.img = new Image();
-            this.img.onload = this.onLoad;
-            this.img.src = srcElement.src();
+            var img = this.img = new Image();
+
+            if (cors) {
+                img.crossOrigin = cors;
+            }
+
+            img.onload = this.onLoad;
+            img.onerror = this.onError;
+            var src = img.src = srcElement.src();
+
+            // Make sure the load event fires for cached images too
+            // See https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image
+            if (img.complete || img.complete === undefined) {
+                img.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
+                img.src = src;
+            }
 
             this.loading = $.Deferred();
         },
@@ -505,6 +520,13 @@
             this.invalidate();
         },
 
+        onError: function() {
+            this.loading.reject(new Error(
+                "Unable to load image '" + this.img.src +
+                "'. Check for connectivity and verify CORS headers."
+            ));
+        },
+
         drawImage: function(ctx) {
             var rect = this.srcElement.rect();
             var tl = rect.topLeft();
@@ -517,7 +539,8 @@
 
     function exportImage(group, options) {
         var defaults = {
-            width: "800px", height: "600px"
+            width: "800px", height: "600px",
+            cors: "Anonymous"
         };
 
         var bbox = group.clippedBBox();
