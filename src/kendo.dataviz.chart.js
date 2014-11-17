@@ -530,7 +530,7 @@ var __meta__ = {
             chart._highlight = new Highlight(view);
             chart._setupSelection();
 
-            if (!chart._hasDataSource || chart._hasData) {
+            if (!chart._hasDataSource || chart._hasData || !chart.options.autoBind) {
                 chart.trigger(RENDER);
             }
         },
