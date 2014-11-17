@@ -1,0 +1,342 @@
+@import "../common/base.less";
+
+@material-border-width: 0;
+@material-border-radius: 3px;
+@material-inline-border-radius: @material-border-radius - 1px;
+
+.km-material
+{
+    font: normal 1em "HelveticaNeue Light", "Roboto Light", "Slate Light", "Segoe WP", NokiaPureTextLight, sans-serif;
+}
+
+/* override transform options for performance */
+.km-root .km-material.km-pane,
+.km-root .km-material .km-view,
+.km-root .km-material .km-slider,
+.km-root .km-material .km-switch,
+.km-root .km-material .km-group-title,
+.km-root .km-material .km-filter-reset,
+.km-root .km-material .km-shim .k-animation-container
+{
+    -webkit-transform: none;
+}
+
+.km-material,
+.km-material *
+{
+    .box-sizing(border-box);
+    .background-clip(border-box);
+}
+
+/* Revert box/clip for Web widgets */
+.km-material [class^=k-]
+{
+    .box-sizing(content-box);
+}
+
+
+.km-material .km-tabstrip .km-button
+{
+    background: none;
+}
+
+/* PopUp */
+
+.km-material .km-popup .k-popup
+{
+    font-size: 1em !important;
+}
+
+.km-material .km-popup .k-item,
+.km-material .km-actionsheet > li > a
+{
+    text-decoration: none;
+    padding: .5em .6em;
+    border-radius: 0;
+    border-width: 0 0 @material-border-width;
+    border-style: solid;
+    .box-sizing(border-box);
+}
+
+.km-material .km-popup
+{
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    .box-sizing(border-box);
+}
+
+.km-material .km-popup .k-list-container
+{
+    width: 100% !important;
+    height: auto !important;
+}
+
+.km-material .km-actionsheet,
+.km-material .km-popup .k-list-container
+{
+    max-height: 80%;
+}
+
+.km-material .km-actionsheet-wrapper,
+.km-material .km-popup .k-list-container
+{
+    bottom: 0;
+    border-width: @material-border-width 0 0;
+    border-style: solid;
+    border-radius: 0;
+    .box-sizing(border-box);
+}
+
+.km-material .km-shim .k-animation-container
+{
+    left: 0;
+    top: auto;
+    bottom: 0;
+}
+
+.km-material .km-popup-wrapper
+{
+    padding: 15px;
+}
+
+.km-material .km-popup.km-pane,
+.km-material .km-actionsheet-wrapper.km-popup
+{
+    border-radius: @material-border-radius;
+}
+
+/* Loader & Pull-to-refresh */
+
+.km-material .km-load-more
+{
+    height: 3.4em;
+}
+
+.km-material .km-load-more .km-button
+{
+    margin: 0 .8em;
+    display: block;
+}
+
+.km-material .km-loader:before,
+.km-material .km-scroller-refresh.km-load-more,
+.km-material .km-scroller-pull
+{
+    border-radius: 20em;
+    overflow: visible;
+}
+
+.km-material .km-loader:before
+{
+    content: "\a0";
+    display: block;
+    position: absolute;
+    margin-top: -2em;
+    margin-left: -2em;
+    width: 4em;
+    height: 4em;
+    top: 50%;
+    left: 50%;
+    border-radius: 5em;
+}
+
+.km-material .km-loader
+{
+    left: 0;
+    top: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.km-material .km-scroller-refresh.km-load-more
+{
+    padding: 0;
+    position: relative;
+    margin: auto;
+}
+
+.km-material .km-scroller-refresh.km-load-more,
+.km-material .km-scroller-pull
+{
+    font-size: 1em;
+    width: 2.5em;
+    height: 2.5em;
+    top: .25em;
+    white-space: nowrap;
+}
+
+.km-material .km-scroller-pull
+{
+    left: 50%;
+    margin: 0 0 0 -90px;
+}
+
+.km-material .km-loader h1
+{
+    display: none;
+    font-size: 1em;
+    position: absolute;
+    left: -50%;
+    width: 200%;
+    top: 55%;
+}
+
+.km-material .km-scroller-pull .km-template
+{
+    position: absolute;
+    line-height: 2em;
+    font-size: 1.2em;
+    min-width: 0;
+    top: 0;
+    left: 3em;
+}
+
+.km-material .km-loading,
+.km-material .km-loader .km-loading-left,
+.km-material .km-loader .km-loading-right,
+.km-material .km-load-more.km-scroller-refresh .km-icon,
+.km-material .km-scroller-pull.km-scroller-refresh .km-icon,
+.km-material .km-scroller-refresh .km-loading-left,
+.km-material .km-scroller-refresh .km-loading-right
+{
+    font-size: 1em;
+    display: block;
+    width: .36em;
+    height: 1em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -.8em;
+    margin-top: -.5em;
+    border-radius: 1em;
+    .animation(km-materialload .6s infinite linear);
+    -webkit-background-clip: none;
+}
+
+.km-material .km-scroller-pull .km-icon
+{
+    margin-right: 0;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -1rem;
+    margin-top: -1rem;
+}
+
+.km-material .km-load-more.km-scroller-refresh .km-icon,
+.km-material .km-scroller-pull.km-scroller-refresh .km-icon,
+.km-material .km-scroller-refresh .km-loading-left,
+.km-material .km-scroller-refresh .km-loading-right
+{
+    height: .6em;
+    margin-top: -.3em;
+    margin-left: -.6em;
+    width: .25em;
+    .animation(km-materialrefresh .6s infinite linear);
+}
+
+.km-material .km-scroller-pull .km-icon:after
+{
+    content: "\e012";
+    margin-left: -3px;
+}
+
+.km-material .km-scroller-refresh .km-icon:after
+{
+    display: none;
+}
+
+.km-root .km-material .km-loading-left
+{
+    margin-left: -.2em;
+    .animation-delay(.2s);
+}
+
+.km-root .km-material .km-loading-right
+{
+    margin-left: .42em;
+    .animation-delay(.4s);
+}
+
+.km-material .km-scroller-refresh .km-loading-left
+{
+    margin-left: -.18em;
+}
+
+.km-material .km-scroller-refresh .km-loading-right
+{
+    margin-left: .28em;
+}
+
+@keyframes km-materialload
+{
+    0% { height: 1em; margin-top: -.5em; }
+    33% { height: 2em; margin-top: -1em; }
+    66% { height: 1em; margin-top: -.5em; }
+}
+
+@-moz-keyframes km-materialload
+{
+    0% { height: 1em; margin-top: -.5em; }
+    33% { height: 2em; margin-top: -1em; }
+    66% { height: 1em; margin-top: -.5em; }
+}
+
+@-webkit-keyframes km-materialload
+{
+    0% { height: 1em; margin-top: -.5em; }
+    33% { height: 2em; margin-top: -1em; }
+    66% { height: 1em; margin-top: -.5em; }
+}
+
+@keyframes km-materialrefresh
+{
+    0% { height: .6em; margin-top: -.3em; }
+    33% { height: 1.2em; margin-top: -.6em; }
+    66% { height: .6em; margin-top: -.3em; }
+}
+
+@-moz-keyframes km-materialrefresh
+{
+    0% { height: .6em; margin-top: -.3em; }
+    33% { height: 1.2em; margin-top: -.6em; }
+    66% { height: .6em; margin-top: -.3em; }
+}
+
+@-webkit-keyframes km-materialrefresh
+{
+    0% { height: .6em; margin-top: -.3em; }
+    33% { height: 1.2em; margin-top: -.6em; }
+    66% { height: .6em; margin-top: -.3em; }
+}
+
+/* Color Template */
+@import "template.less";
+
+/* Tablet Styles */
+
+.km-tablet .km-material.km-horizontal .km-navbar .km-button,
+.km-tablet .km-material.km-horizontal .km-toolbar .km-button
+{
+    margin-top: .2rem;
+    margin-bottom: .2rem;
+}
+
+.km-material .km-view-title {
+    font-size: 1.25em;
+    font-weight: 500;
+    margin-top: 0.5em;
+}
+
+.km-root {
+    font-size: 1em;
+}
+
+.km-material .k-popup .km-button {
+    text-transform: uppercase;
+}
+

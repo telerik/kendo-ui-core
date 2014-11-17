@@ -1,0 +1,193 @@
+@import "../common/icons.less";
+@import "../common/listview.less";
+@import "base.less";
+
+/* ListView */
+
+.km-materialblack .km-list > li
+{
+    border-style: solid;
+    border-width: 0 0 @materialblack-border-width 0;
+}
+
+.km-materialblack .km-listinset > li:first-child,
+.km-materialblack .km-listgroupinset .km-list > li:first-child
+{
+    border-style: solid;
+    border-width: @materialblack-border-width;
+    border-radius: 0;
+}
+
+.km-materialblack .km-listinset > li,
+.km-materialblack .km-listgroupinset .km-list > li
+{
+    border-width: 0 @materialblack-border-width @materialblack-border-width @materialblack-border-width;
+}
+
+.km-materialblack .km-listinset > li:last-child,
+.km-materialblack .km-listgroupinset .km-list > li:last-child
+{
+    border-style: solid;
+    border-width: 0 @materialblack-border-width @materialblack-border-width @materialblack-border-width;
+    border-radius: 0;
+}
+
+.km-materialblack .km-listinset > li:first-child:last-child,
+.km-materialblack .km-listgroupinset .km-list > li:first-child:last-child
+{
+    border-width: @materialblack-border-width;
+    border-radius: @materialblack-border-radius;
+}
+
+.km-materialblack .km-listview-link:after
+{
+    border-width: .2rem .2rem 0 0;
+}
+
+.km-materialblack:not(.km-on-android) .km-listview-link:after
+{
+    width: .66rem;
+    height: .64rem;
+    border-width: 0;
+    box-shadow: inset -.2rem .2rem 0;
+}
+
+.km-materialblack .km-listinset li:first-child > .km-listview-link,
+.km-materialblack .km-listgroupinset li:first-child > .km-listview-link,
+.km-materialblack .km-listinset li:first-child > .km-listview-label,
+.km-materialblack .km-listgroupinset li:first-child > .km-listview-label
+{
+    border-radius: @materialblack-inline-border-radius @materialblack-inline-border-radius 0 0;
+}
+
+.km-materialblack .km-listinset li:last-child > .km-listview-link,
+.km-materialblack .km-listgroupinset li:last-child > .km-listview-link,
+.km-materialblack .km-listinset li:last-child > .km-listview-label,
+.km-materialblack .km-listgroupinset li:last-child > .km-listview-label
+{
+    border-radius: 0 0 @materialblack-inline-border-radius @materialblack-inline-border-radius;
+}
+
+.km-materialblack .km-listinset li:first-child:last-child > .km-listview-link,
+.km-materialblack .km-listgroupinset li:first-child:last-child > .km-listview-link,
+.km-materialblack .km-listinset li:first-child:last-child > .km-listview-label,
+.km-materialblack .km-listgroupinset li:first-child:last-child > .km-listview-label
+{
+    border-radius: @materialblack-inline-border-radius;
+}
+
+.km-materialblack .km-group-title
+{
+    border-style: solid;
+    border-width: @materialblack-border-width 0;
+}
+
+.km-materialblack .km-scroll-header .km-group-title
+{
+    border-width: 0 0 @materialblack-border-width;
+}
+
+.km-materialblack .km-listgroupinset .km-group-title
+{
+    border: 0;
+    background: none;
+}
+
+.km-materialblack .km-listview .km-switch
+{
+    margin-top: -.9rem;
+}
+
+/* Filter box */
+
+.km-materialblack .km-listview-wrapper form .km-filter-wrap > input
+{
+    font-size: 1.2em;
+    padding: .3em 1.8em;
+}
+
+.km-materialblack .km-filter-wrap:before
+{
+    margin: .05em -1.3em 0 .3em;
+}
+
+.km-materialblack .km-filter-reset
+{
+    margin: .05em 0 0 -2em;
+}
+
+.km-materialblack .km-filter-reset .km-clear:after
+{
+    content: "\e038";
+}
+
+.km-materialblack .km-filter-wrap > input
+{
+    border-radius: @materialblack-border-radius;
+    border-width: @materialblack-border-width;
+    border-style: solid;
+}
+
+.km-materialblack .km-filter-wrap > input:focus
+{
+    border-width: @materialblack-border-width;
+    border-style: solid;
+}
+
+.km-list > li {
+    padding: .750em .7em .688em;
+}
+
+.km-materialblack .km-group-container {
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+}
+
+.km-materialblack .km-listinset,
+.km-materialblack .km-listgroupinset {
+    margin: 0.643em;
+}
+
+.km-materialblack .km-group-title {
+    text-indent: .4em;
+}
+
+.km-materialblack .km-listgroupinset .km-group-title {
+    margin-top: 0;
+    font-weight: 500;
+}
+
+.km-materialblack .km-listview .km-text {
+    font-size: .875em;
+    line-height: 1em;
+    padding: 1.429em 0 1.429em;
+}
+
+.km-materialblack .km-list .km-icon {
+    font-size: 1.5em;
+    margin-right: 1.333em;
+    vertical-align: middle;
+}
+
+.km-materialblack .km-icon:before,
+.km-materialblack .km-contactadd:before,
+.km-materialblack .km-rowdelete:before,
+.km-materialblack .km-rowinsert:before,
+.km-materialblack .km-detaildisclose:before {
+    margin-top: 0;
+}
+
+.km-widget .km-listview-link,
+.km-widget .km-listview-label {
+    margin: -.750em -.7em -.688em;
+    padding: .750em .7em .688em;
+}
+
+.km-materialblack .km-detail {
+    width: 2em;
+    height: 2em;
+}
+
+.km-materialblack .km-detaildisclose  {
+    font-size: 0.857em;
+}

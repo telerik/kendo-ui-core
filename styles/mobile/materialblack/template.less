@@ -1,0 +1,493 @@
+@materialblack-primary-color: #3f51b5;
+@materialblack-primary-inverse-color: rgba(255,255,255,1);
+@materialblack-primary-selected-color: #283593;
+@materialblack-accent-color: #00b0ff;
+@materialblack-main-color: rgba(255,255,255,1);
+@materialblack-icon-color: rgba(255,255,255,1);
+@materialblack-disabled-color: rgba(0, 0, 0,.3);
+@materialblack-border-color: #545454;
+
+
+@materialblack-background: #303030;
+@materialblack-selected-background: #454545;
+@materialblack-overlay-background: rgba(0,0,0,.2);
+
+@materialblack-dark-color: rgba(0,0,0,1);
+@materialblack-light-color: rgba(0,0,0,.39);
+
+@materialblack-overlay-shadow: 0 15px 30px 3px rgba(0, 0, 0, 0.30);
+@materialblack-second-active-background: #da2228;
+
+/* Button */
+
+.km-materialblack .km-button
+{
+    background: @materialblack-background;
+    border-color: @materialblack-background;
+}
+
+/* Badges and Details */
+
+.km-materialblack .km-detail,
+.km-materialblack .k-toolbar
+{
+    border-color: @materialblack-border-color;
+}
+
+/* Switch */
+
+.km-materialblack .km-switch-wrapper
+{
+    background-color: @materialblack-main-color;
+}
+
+.km-materialblack .km-switch-handle
+{
+    background: @materialblack-primary-color;
+    border-color: rgba(0,0,0,.1);
+     -webkit-box-shadow: 0 2px 4px @materialblack-primary-color, 0 2px @materialblack-primary-color;
+    box-shadow: 0 2px 4px @materialblack-primary-color, 0 2px @materialblack-primary-color;
+}
+
+.km-materialblack .km-switch-off .km-switch-handle
+{
+    background-color: lighten(@materialblack-background, 30%); 
+    -webkit-box-shadow: 0 2px 4px @materialblack-border-color, 0 2px @materialblack-overlay-background;
+    box-shadow: 0 2px 4px @materialblack-border-color, 0 2px @materialblack-overlay-background;
+}
+
+.km-materialblack .km-switch-container,
+.km-materialblack .km-switch-wrapper
+{
+    border-color: @materialblack-main-color;
+}
+
+/* ListView */
+.km-materialblack .km-group-container {
+    border-color: @materialblack-border-color;
+}
+
+.km-materialblack .km-list > li
+{
+    border-color: @materialblack-border-color;
+}
+
+.km-materialblack .km-listinset > li:first-child,
+.km-materialblack .km-listgroupinset .km-list > li:first-child
+{
+    border-color: @materialblack-border-color;
+}
+
+.km-materialblack .km-listinset > li:last-child,
+.km-materialblack .km-listgroupinset .km-list > li:last-child
+{
+    border-color: @materialblack-border-color;
+}
+
+.km-materialblack .km-listview-link:after
+{
+    color: @materialblack-main-color;
+}
+
+.km-materialblack .km-group-title
+{
+    color: @materialblack-primary-color;
+    background: @materialblack-background;
+    border-color: @materialblack-border-color;
+}
+
+.km-materialblack .km-filter-wrap:before,
+.km-materialblack .km-filter-reset .km-clear
+{
+    color: @materialblack-main-color;
+}
+
+.km-materialblack .km-filter-wrap > input
+{
+    color: @materialblack-main-color;
+}
+
+/* ScrollView */
+
+.km-materialblack .km-pages li
+{
+    background: @materialblack-border-color;
+}
+
+/* Forms */
+.km-materialblack .km-list select:not([multiple]) option
+{
+    color: #333;
+}
+
+/* Checkboxes and Radios */
+
+.km-materialblack .km-listview-label input[type=radio],
+.km-materialblack .km-listview-label input[type=checkbox]
+{
+    border-color: @materialblack-icon-color;
+    background: @materialblack-primary-inverse-color;
+}
+
+.km-materialblack .km-listview-label input[type=checkbox]:checked:after
+{
+    color: @materialblack-primary-inverse-color;
+}
+
+/* Shim */
+
+.km-materialblack .km-shim
+{
+    background: @materialblack-overlay-background;
+}
+.km-phone .km-materialblack .km-actionsheet-wrapper
+{
+    background: @materialblack-background;
+}
+
+/* PopUp */
+
+.km-materialblack .km-popup .k-item,
+.km-materialblack .km-actionsheet > li > a
+{
+    color: @materialblack-main-color;
+    background: @materialblack-background;
+    border-bottom-color: @materialblack-background;
+}
+
+.km-materialblack .km-popup
+{
+    background: @materialblack-background;
+}
+
+.km-materialblack .km-actionsheet-wrapper,
+.km-materialblack .km-popup .k-list-container
+{
+    background: @materialblack-background;
+    border-top-color: @materialblack-background;
+    box-shadow: @materialblack-overlay-shadow;
+}
+
+.km-materialblack .km-popup.km-pane,
+.km-tablet .km-materialblack .km-actionsheet-wrapper
+{
+    color: @materialblack-main-color;
+    background-color: @materialblack-background;
+}
+
+.km-materialblack .km-popup-arrow:after
+{
+    border-color: @materialblack-background;
+}
+
+.km-materialblack .km-left .km-popup-arrow:after,
+.km-materialblack .km-right .km-popup-arrow:after
+{
+    border-color: transparent @materialblack-background;
+}
+
+/* Loader & Pull-to-refresh */
+
+.km-materialblack .km-loader
+{
+    background: rgba(0,0,0,.05);
+}
+
+.km-materialblack .km-loader h1
+{
+    color: @materialblack-main-color;
+}
+
+
+
+
+
+/* Active States */
+
+.km-materialblack .km-detail:active,
+.km-materialblack .km-state-active .km-detail,
+.km-materialblack .km-state-active[style*=background]
+{
+    .box-shadow(inset 0 0 0 1000px rgba(0,0,0,.2));
+}
+
+/* Active States */
+
+.km-materialblack .km-badge,
+.km-materialblack .km-rowinsert,
+.km-materialblack .km-rowdelete,
+.km-materialblack .km-switch-label-on,
+.km-materialblack .km-switch-label-off,
+.km-materialblack .k-slider .k-draghandle,
+.km-materialblack .k-slider .k-draghandle:hover,
+.km-materialblack .km-scroller-pull .km-icon,
+.km-materialblack .km-popup.km-pane .k-toolbar,
+.km-materialblack .km-popup.km-pane .km-tabstrip,
+.km-materialblack .km-popup .k-state-hover,
+.km-materialblack .km-popup .k-state-focused,
+.km-materialblack li.km-state-active .km-listview-label,
+.km-materialblack .km-state-active .km-listview-link:after
+{
+    color: @materialblack-primary-inverse-color;
+}
+
+.km-materialblack .km-loader > *:not(h1),
+.km-materialblack .km-filter-wrap > input,
+.km-materialblack .km-switch-handle.km-state-active,
+.km-root .km-materialblack .km-scroller-refresh span:not(.km-template)
+{
+    background: @materialblack-primary-inverse-color;
+}
+
+.km-materialblack .km-switch-handle,
+.km-materialblack .k-slider-selection
+{
+    color: @materialblack-primary-color;
+}
+
+.km-materialblack .km-switch-background {
+    color: lighten(@materialblack-primary-color, 20%);
+}
+
+.km-materialblack .km-switch-off .km-switch-background {
+    background-color: @materialblack-disabled-color;
+}
+
+.km-materialblack .km-rowinsert,
+.km-materialblack .km-state-active,
+.km-materialblack .km-scroller-pull,
+.km-materialblack .km-loader:before,
+.km-materialblack .k-slider-selection,
+.km-materialblack .km-touch-scrollbar,
+.km-materialblack .km-pages .km-current-page,
+.km-materialblack .k-slider .k-draghandle,
+.km-materialblack .k-slider .k-draghandle:hover,
+.km-materialblack li.km-state-active .km-listview-label,
+.km-materialblack .km-listview-label input[type=radio]:checked,
+.km-materialblack .km-listview-label input[type=checkbox]:checked
+{
+    background: @materialblack-primary-color;
+}
+
+.km-materialblack .km-filter-wrap > input:focus
+{
+    border-color: @materialblack-primary-color;
+}
+
+.km-materialblack .km-badge,
+.km-materialblack .km-rowdelete
+{
+    background: @materialblack-second-active-background;
+}
+
+.km-materialblack .km-button,
+.km-materialblack .km-modalview .km-navbar .km-button {
+    color: @materialblack-primary-color;
+    background: transparent;
+    border-color: transparent;
+}
+
+.km-materialblack .km-listview .km-state-active,
+.km-materialblack .km-button.km-state-active,
+.km-materialblack li.km-state-active .km-listview-label {
+    background: @materialblack-selected-background;
+}
+
+.km-materialblack .km-state-active,
+.km-materialblack li.km-state-active .km-listview-label,
+.km-materialblack .km-state-active .km-listview-link:after,
+.km-materialblack li.km-state-active .km-listview-link {
+    color: @materialblack-main-color;
+}
+
+.km-materialblack .km-button.km-state-active {
+    color: @materialblack-primary-color;
+}
+
+.km-materialblack .km-button.km-state-disabled {
+    color: @materialblack-disabled-color;
+    opacity: 1;
+}
+
+.km-materialblack .km-buttongroup,
+.km-materialblack .km-widget.km-navbar .km-buttongroup  {
+    border-color: @materialblack-border-color;
+}
+
+.km-materialblack .km-buttongroup .km-button {
+    color: @materialblack-main-color;
+}
+
+.km-materialblack .km-widget.km-navbar .km-buttongroup .km-button {
+    color: @materialblack-primary-inverse-color;
+}
+
+.km-materialblack .km-buttongroup > .km-state-active {
+    color: @materialblack-primary-color;
+    background-color: transparent;
+    border-color:  @materialblack-primary-color;
+}
+
+.km-materialblack .km-widget.km-navbar .km-buttongroup .km-state-active {
+    border-color: @materialblack-accent-color;
+}
+
+.km-materialblack .km-listview-label input[type=radio]:checked,
+.km-materialblack .km-listview-label input[type=checkbox]:checked {
+    background-color: @materialblack-primary-color;
+    border-color: @materialblack-primary-color;
+}
+
+.km-materialblack .km-content {
+    color: @materialblack-main-color;
+    background-color: @materialblack-background;
+}
+
+.km-materialblack .km-navbar,
+.km-materialblack .km-navbar .km-view-title,
+.km-materialblack .km-navbar .km-button,
+.km-materialblack .k-toolbar,
+.km-materialblack .k-toolbar .km-button,
+.km-materialblack .km-detail,
+.km-materialblack .km-footer
+{
+    color: @materialblack-primary-inverse-color;
+    background-color: @materialblack-primary-color;
+    border-color: @materialblack-primary-color;
+}
+
+.km-materialblack .km-tabstrip .km-button {
+    color: fade(@materialblack-primary-inverse-color, 50%);
+}
+
+.km-materialblack .km-tabstrip .km-button.km-state-active {
+    color: @materialblack-primary-inverse-color;
+    border-color: @materialblack-accent-color;
+    background-color: @materialblack-primary-color;
+
+}
+
+.km-materialblack .k-toolbar .km-button,
+.km-materialblack .km-popup .k-state-hover,
+.km-materialblack .km-popup .k-state-focused,
+.km-materialblack .km-popup .k-state-selected,
+.km-materialblack .km-popup .k-list-container {
+    border-color: @materialblack-primary-color;
+}
+
+.km-materialblack .k-toolbar .km-state-active {
+    background-color: @materialblack-primary-selected-color;
+}
+
+.km-materialblack .km-popup .k-popup .k-item.k-state-selected,
+.km-materialblack .km-popup .k-popup .k-item.k-state-focused {
+    color: @materialblack-main-color;
+    background-color: @materialblack-selected-background;
+}
+
+.km-materialblack .km-popup .k-popup .k-item.k-state-hover {
+    color: @materialblack-main-color;
+}
+
+.km-materialblack .km-modalview {
+    box-shadow: @materialblack-overlay-shadow;
+}
+
+.km-materialblack .km-modalview .km-navbar {
+    color: @materialblack-main-color;
+    background-color: @materialblack-background; 
+}
+
+.km-materialblack,
+.km-materialblack .km-header,
+.km-materialblack .km-pane,
+.km-materialblack .km-scroll-header .km-group-title,
+.km-materialblack input[type=password],
+.km-materialblack input[type=search],
+.km-materialblack input[type=number],
+.km-materialblack input[type=tel],
+.km-materialblack input[type=url],
+.km-materialblack input[type=email],
+.km-materialblack input[type=text]:not(.k-input),
+.km-root .km-materialblack textarea
+{
+    background: @materialblack-primary-inverse-color;
+    outline-color: @materialblack-primary-inverse-color;
+}
+
+.km-materialblack input,
+.km-materialblack select,
+.km-materialblack textarea,
+.km-materialblack .k-dropdown .k-input
+{
+    color: @materialblack-disabled-color;
+    border-color: @materialblack-border-color;
+}
+
+.km-materialblack input[type=password],
+.km-materialblack input[type=search],
+.km-materialblack input[type=number],
+.km-materialblack input[type=tel],
+.km-materialblack input[type=url],
+.km-materialblack input[type=email],
+.km-materialblack input[type=text]:not(.k-input),
+.km-root .km-materialblack textarea
+{
+    color: lighten(@materialblack-disabled-color, 50);
+    border-color: @materialblack-border-color;
+}
+
+.km-materialblack input[type=radio],
+.km-materialblack input[type=checkbox]
+{
+    color: @materialblack-main-color;
+    border-color: @materialblack-border-color;
+}
+
+.km-materialblack input[type=month],
+.km-materialblack input[type=color],
+.km-materialblack input[type=week],
+.km-materialblack input[type=date],
+.km-materialblack input[type=time],
+.km-materialblack input[type=datetime],
+.km-materialblack input[type=datetime-local],
+.km-materialblack select:not([multiple]),
+.km-materialblack .k-dropdown .k-dropdown-wrap
+{
+    border-bottom-color: @materialblack-border-color;
+    background-size: auto 100%;
+}
+
+.km-materialblack select:focus,
+.km-materialblack textarea:focus,
+.km-materialblack.km-pane input:focus,
+.km-materialblack li.km-actionsheet-title,
+.km-materialblack .k-dropdown .k-state-focused
+{
+    border-color: @materialblack-border-color;
+}
+
+.km-materialblack select:focus,
+.km-materialblack textarea:focus,
+.km-materialblack.km-pane input:focus,
+.km-materialblack li.km-actionsheet-title,
+.km-materialblack .k-dropdown .k-state-focused
+{
+    border-color: @materialblack-primary-color;
+}
+
+.km-materialblack .km-shim,
+.km-materialblack .km-popup,
+.km-materialblack .k-slider,
+.km-materialblack .km-badge,
+.km-materialblack .km-switch-on,
+.km-materialblack .km-current-page,
+.km-materialblack input:focus,
+.km-materialblack select:focus,
+.km-materialblack textarea:focus,
+.km-materialblack input:checked,
+.km-materialblack .km-touch-scrollbar,
+.km-materialblack input[type=text]:not(.k-input):focus
+{
+    color: @materialblack-main-color;
+}
