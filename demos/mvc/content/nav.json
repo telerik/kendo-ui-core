@@ -2042,7 +2042,7 @@
         },
         "packages": [
           "mvc",
-          "!php",
+          "php",
           "!jsp"
         ]
       },
