@@ -5,7 +5,7 @@
 /* global JSZip */
 
 var __meta__ = {
-    id: "ooxml",
+    id: "excel",
     name: "Excel export",
     category: "framework",
     advanced: true,
