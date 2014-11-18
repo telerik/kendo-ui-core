@@ -2039,12 +2039,7 @@
         },
         "meta": {
             "kendo-ui": "This demo shows how setOptions and getOptions methods can manipulate the state of Kendo UI Grid widget."
-        },
-        "packages": [
-          "mvc",
-          "php",
-          "!jsp"
-        ]
+        }
       },
       {
         "text": "Globalization",
