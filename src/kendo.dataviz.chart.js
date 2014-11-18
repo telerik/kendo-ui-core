@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.data", "./kendo.userevents", "./kendo.dataviz.core", "./kendo.drawing", "./kendo.util", "./kendo.dataviz.themes" ], f);
+    define([ "./kendo.data", "./kendo.userevents", "./kendo.dataviz.core", "./kendo.drawing", "./kendo.dataviz.themes" ], f);
 })(function(){
 
 var __meta__ = {
@@ -20,7 +20,12 @@ var __meta__ = {
         description: "Support for Funnel chart.",
         depends: [ "dataviz.chart.funnel" ],
         requireJS: false
-    } ]
+    }, {
+        id: "dataviz.chart-pdf-export",
+        name: "PDF export",
+        description: "Export Chart as PDF",
+        depends: [ "pdf" ]
+    }]
 };
 
 (function ($, undefined) {

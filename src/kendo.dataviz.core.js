@@ -1,8 +1,7 @@
 (function(f, define){
     define([
         "./kendo.core",
-        "./kendo.drawing",
-        "./kendo.util"
+        "./kendo.drawing"
     ], f);
 })(function(){
 
