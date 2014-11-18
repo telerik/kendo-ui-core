@@ -20,7 +20,13 @@
         name: "Drawing API",
         category: "framework",
         description: "The Kendo UI low-level drawing API",
-        depends: [ "core" ]
+        depends: [ "core" ],
+        features: [{
+            id: "drawing-pdf-export",
+            name: "PDF export",
+            description: "Export to PDF support",
+            depends: [ "pdf" ]
+        }]
     };
 
 }, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

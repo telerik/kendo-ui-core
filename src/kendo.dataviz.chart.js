@@ -20,7 +20,12 @@ var __meta__ = {
         description: "Support for Funnel chart.",
         depends: [ "dataviz.chart.funnel" ],
         requireJS: false
-    } ]
+    }, {
+        id: "dataviz.chart-pdf-export",
+        name: "PDF export",
+        description: "Export Chart as PDF",
+        depends: [ "pdf" ]
+    }]
 };
 
 (function ($, undefined) {
