@@ -126,7 +126,8 @@ $chart_dec->title(array('position' => 'bottom', 'text' => 'December'))
                 min: 0,
                 max: 10,
                 smallStep: 0.01,
-                largeStep: 0.1
+                largeStep: 0.1,
+                showButtons: false
             });
 
             $('.configuration-horizontal').on('click', ':checkbox', refresh);
