@@ -37,11 +37,13 @@ Inherits="System.Web.Mvc.ViewPage<IEnumerable<Kendo.Mvc.Examples.Models.ProductV
         $(function () {
             var grid = $("#grid").data("kendoGrid");
 
-            $("#save").click(function () {
+            $("#save").click(function (e) {
+                e.preventDefault();
                 localStorage["kendo-grid-options"] = kendo.stringify(grid.getOptions());
             });
 
-            $("#load").click(function () {
+            $("#load").click(function (e) {
+                e.preventDefault();
                 var options = localStorage["kendo-grid-options"];
                 if (options) {
                     grid.setOptions(JSON.parse(options));
