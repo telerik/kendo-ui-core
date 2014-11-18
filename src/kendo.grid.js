@@ -1496,7 +1496,8 @@ var __meta__ = {
             result.columns = kendo.deepExtend([], this.columns);
             var dataSource = this.dataSource;
 
-            result.dataSource = kendo.deepExtend(
+            result.dataSource = $.extend(
+                true,
                 {},
                 dataSource.options, {
                     page: dataSource.page(),
