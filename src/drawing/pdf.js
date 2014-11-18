@@ -18,9 +18,13 @@
     var drawing     = kendo.drawing;
     var geo         = kendo.geometry;
     var Color       = drawing.Color;
-    var PDF         = kendo.pdf;
 
-    var TEXT_RENDERING_MODE = PDF.TEXT_RENDERING_MODE;
+    function PDF() {
+        if (!kendo.pdf) {
+            throw new Error("kendo.pdf.js is not loaded");
+        }
+        return kendo.pdf;
+    }
 
     var DASH_PATTERNS = {
         dash           : [ 4 ],
@@ -59,8 +63,8 @@
                     }
                 },
                 Text: function(element) {
-                    var style = PDF.parseFontDef(element.options.font);
-                    var url = PDF.getFontURL(style);
+                    var style = PDF().parseFontDef(element.options.font);
+                    var url = PDF().getFontURL(style);
                     if (fonts.indexOf(url) < 0) {
                         fonts.push(url);
                     }
@@ -95,7 +99,7 @@
                     paperSize = "A4";
                 }
             }
-            var pdf = new PDF.Document({
+            var pdf = new (PDF().Document)({
                 paperSize : paperSize,
                 landscape : getOption("landscape", false),
                 margin    : getOption("margin"),
@@ -113,8 +117,8 @@
         }
 
         var count = 2;
-        PDF.loadFonts(fonts, doIt);
-        PDF.loadImages(images, doIt);
+        PDF().loadFonts(fonts, doIt);
+        PDF().loadImages(images, doIt);
     }
 
     function toDataURL(group, callback) {
@@ -452,20 +456,20 @@
     }
 
     function drawText(element, page, pdf) {
-        var style = PDF.parseFontDef(element.options.font);
+        var style = PDF().parseFontDef(element.options.font);
         var pos = element._position;
         var mode;
         if (element.fill() && element.stroke()) {
-            mode = TEXT_RENDERING_MODE.fillAndStroke;
+            mode = PDF().TEXT_RENDERING_MODE.fillAndStroke;
         } else if (element.fill()) {
-            mode = TEXT_RENDERING_MODE.fill;
+            mode = PDF().TEXT_RENDERING_MODE.fill;
         } else if (element.stroke()) {
-            mode = TEXT_RENDERING_MODE.stroke;
+            mode = PDF().TEXT_RENDERING_MODE.stroke;
         }
 
         page.transform(1, 0, 0, -1, pos.x, pos.y + style.fontSize);
         page.beginText();
-        page.setFont(PDF.getFontURL(style), style.fontSize);
+        page.setFont(PDF().getFontURL(style), style.fontSize);
         page.setTextRenderingMode(mode);
         page.showText(element.content());
         page.endText();
