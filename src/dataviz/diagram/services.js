@@ -1,5 +1,5 @@
 (function (f, define) {
-    define([ "./svg" ], f);
+    define([ "../../kendo.drawing", "./svg" ], f);
 })(function () {
 
     (function ($, undefined) {
@@ -21,7 +21,7 @@
             deepExtend = kendo.deepExtend,
             Movable = kendo.ui.Movable,
             browser = kendo.support.browser,
-            defined = dataviz.defined,
+            defined = kendo.util.defined,
 
             proxy = $.proxy;
         // Constants ==============================================================

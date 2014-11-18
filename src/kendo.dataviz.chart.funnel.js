@@ -36,7 +36,7 @@ var __meta__ = {
         TextBox = dataviz.TextBox,
         autoFormat = dataviz.autoFormat,
         evalOptions = dataviz.evalOptions,
-        limitValue = dataviz.limitValue,
+        limitValue = util.limitValue,
         seriesTotal = dataviz.seriesTotal;
 
     // Constants ==============================================================

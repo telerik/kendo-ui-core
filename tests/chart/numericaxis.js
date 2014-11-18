@@ -39,7 +39,7 @@
 
     function getAxisTexts() {
         return $.map(getAxisTextBoxes(), function(item) {
-            return dataviz.last(item.children);
+            return kendo.util.last(item.children);
         });
     }
 

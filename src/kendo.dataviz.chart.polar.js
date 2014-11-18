@@ -50,7 +50,7 @@ var __meta__ = {
         SplineAreaSegment = dataviz.SplineAreaSegment,
         getSpacing = dataviz.getSpacing,
         filterSeriesByType = dataviz.filterSeriesByType,
-        limitValue = dataviz.limitValue,
+        limitValue = util.limitValue,
         round = dataviz.round;
 
     // Constants ==============================================================

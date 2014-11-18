@@ -3,7 +3,7 @@
     var dataviz = kendo.dataviz,
         LogarithmicAxis = dataviz.LogarithmicAxis,
         deepExtend = dataviz.deepExtend,
-        defined = dataviz.defined,
+        defined = kendo.util.defined,
         Point = dataviz.Point2D,
         Box = dataviz.Box2D,
         draw = kendo.drawing,

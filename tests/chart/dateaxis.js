@@ -32,7 +32,7 @@
 
     function getAxisTexts() {
         return $.map(getAxisTextBoxes(), function(item) {
-            return dataviz.last(item.children);
+            return kendo.util.last(item.children);
         });
     }
 
@@ -711,7 +711,7 @@
                 roundToBaseUnit: false
             });
 
-            deepEqual(dataviz.last(dateAxis.options.categories), new Date("2012/03/01"));
+            deepEqual(kendo.util.last(dateAxis.options.categories), new Date("2012/03/01"));
         });
 
         test("Does not add categories beyond last day", function() {
@@ -724,7 +724,7 @@
                 roundToBaseUnit: false
             });
 
-            deepEqual(dataviz.last(dateAxis.options.categories), new Date("2012/01/02"));
+            deepEqual(kendo.util.last(dateAxis.options.categories), new Date("2012/01/02"));
         });
 
         test("Does not add categories beyond last week", function() {
@@ -737,7 +737,7 @@
                 roundToBaseUnit: false
             });
 
-            deepEqual(dataviz.last(dateAxis.options.categories), new Date("2013/03/03"));
+            deepEqual(kendo.util.last(dateAxis.options.categories), new Date("2013/03/03"));
         });
 
         test("Last category label is hidden if it equals the range end", function() {

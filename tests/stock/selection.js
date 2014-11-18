@@ -146,7 +146,7 @@
             });
 
             var labelAxis = chart._plotArea.namedCategoryAxes["_navigator_labels"];
-            deepEqual(dataviz.last(labelAxis.options.categories), new Date("2013/01/31 00:00"));
+            deepEqual(kendo.util.last(labelAxis.options.categories), new Date("2013/01/31 00:00"));
         });
 
         // ------------------------------------------------------------

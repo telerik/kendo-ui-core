@@ -20,9 +20,14 @@ var __meta__ = {
     // Imports ================================================================
     var doc = document,
         kendo = window.kendo,
+
         util = kendo.util,
         append = util.append,
+        defined = util.defined,
+        last = util.last,
+        limitValue = util.limitValue,
         valueOrDefault = util.valueOrDefault,
+
         dataviz = kendo.dataviz,
         geom = dataviz.geometry,
         draw = dataviz.drawing,
@@ -3388,10 +3393,6 @@ var __meta__ = {
         return indexOf(value, array) != -1;
     }
 
-    function last(array) {
-        return array[array.length - 1];
-    }
-
     function ceil(value, step) {
         return round(math.ceil(value / step) * step, DEFAULT_PRECISION);
     }
@@ -3418,10 +3419,6 @@ var __meta__ = {
 
     function interpolateValue(start, end, progress) {
         return round(start + (end - start) * progress, COORD_PRECISION);
-    }
-
-    function defined(value) {
-        return typeof value !== UNDEFINED;
     }
 
     function numericComparer(a, b) {
@@ -3761,9 +3758,6 @@ var __meta__ = {
             return result;
         }
     };
-    function limitValue(value, min, max) {
-        return math.max(math.min(value, max), min);
-    }
 
     function mwDelta(e) {
         var origEvent = e.originalEvent,
@@ -3859,10 +3853,6 @@ var __meta__ = {
         Text: Text,
         TextBox: TextBox,
         Title: Title,
-
-        defined: defined,
-        last: last,
-        limitValue: limitValue,
 
         alignPathToPixel: alignPathToPixel,
         autoFormat: autoFormat,
