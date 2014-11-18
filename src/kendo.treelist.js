@@ -37,7 +37,7 @@ var __meta__ = {
         id: "treelist-pdf-export",
         name: "PDF export",
         description: "Export data as PDF",
-        depends: [ "pdf" ]
+        depends: [ "pdf", "drawing" ]
     } ]
 };
 

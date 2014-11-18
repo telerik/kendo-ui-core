@@ -37,7 +37,7 @@ var __meta__ = {
         id: "scheduler-pdf-export",
         name: "PDF export",
         description: "Export the scheduler events as PDF",
-        depends: [ "pdf" ]
+        depends: [ "pdf", "drawing" ]
     } ]
 };
 
