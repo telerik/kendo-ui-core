@@ -485,7 +485,7 @@ var __meta__ = {
                 }
             }
 
-            return container.elements;
+            return container.children;
         },
 
         getValue: function(point) {
