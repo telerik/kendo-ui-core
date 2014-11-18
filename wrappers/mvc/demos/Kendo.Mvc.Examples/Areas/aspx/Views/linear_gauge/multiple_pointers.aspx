@@ -20,29 +20,78 @@
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
-    <div id="gauge-container">
-        <%= Html.Kendo().LinearGauge()
+    <div id="example" class="k-content">
+        <div id="gauge-container">
+            <%= Html.Kendo().LinearGauge()
               .Name("gauge")
-              .Pointers(pointers => 
+              .Pointers(pointers =>
               {
-                  pointers.Add().Value(10).Shape(GaugeLinearPointerShape.Arrow).Color("#c20000");
-                  pointers.Add().Value(50).Margin(10).Color("#ff7a00");
-                  pointers.Add().Value(30).Color("#ffc700");
-                  pointers.Add().Value(45).Shape(GaugeLinearPointerShape.Arrow).Color("#428bca");
+                  pointers.Add().Value(10).Color("#c20000").Shape(GaugeLinearPointerShape.Arrow);
+                  pointers.Add().Value(70).Color("#ff7a00").Margin(10);
+                  pointers.Add().Value(140).Color("#ffc700"); 
               })
               .Scale(scale => scale
-                  .MajorUnit(20)
-                  .MinorUnit(2)
-                  .Min(-40)
-                  .Max(60)
-                  .Ranges(ranges =>
-                  {
-                      ranges.Add().From(-40).To(-20).Color("#2798df");
-                      ranges.Add().From(30).To(45).Color("#ffc700");
-                      ranges.Add().From(45).To(60).Color("#c20000");
-                  }
-                  )
+                     .MinorUnit(5)
+                     .Min(0)
+                     .Max(180)
+                     .Vertical(true)
               )
-        %>
+            %>
+        </div>
+
+        <div class="box">
+            <div class="box-col">
+                <h4>Red pointer value</h4>
+                    <%= Html.Kendo().Slider().Name("gauge-value0")
+                          .Min(0).Max(180).Value(10).ShowButtons(false)
+                          .HtmlAttributes(new { style = "width: 220px;" })
+                          .Events(e => e.Change("onSliderChange"))
+                    %>
+                <h4 style="margin-top: 30px;">Get all pointer values</h4>
+                <button id="getValues" class="k-button">Get all</button>
+            </div>
+            <div class="box-col">
+                <h4>Orange pointer value</h4>
+                    <%= Html.Kendo().Slider().Name("gauge-value1")
+                          .Min(0).Max(180).Value(70).ShowButtons(false)
+                          .HtmlAttributes(new { style = "width: 220px;" })
+                          .Events(e => e.Change("onSliderChange"))
+                    %>
+                <h4 style="margin-top: 30px;">Set all pointer values</h4>
+                <input id="newValues" class="k-textbox" value="100, 10, 80" style="width: 110px;" />
+                <button id="setValues" class="k-button">Set all</button>
+            </div>
+            <div class="box-col">
+                <h4>Yellow pointer value</h4>
+                    <%= Html.Kendo().Slider().Name("gauge-value2")
+                          .Min(0).Max(180).Value(140).ShowButtons(false)
+                          .HtmlAttributes(new { style = "width: 220px;" })
+                          .Events(e => e.Change("onSliderChange"))
+                    %>
+            </div>
+        </div>
+
+        <script>
+            function onSliderChange(e) {
+                var id = this.element.attr("id");
+                var pointerIndex = id.substr(id.length - 1);
+                var gauge = $("#gauge").data("kendoLinearGauge");
+                gauge.pointers[pointerIndex].value(this.value());
+            }
+
+            $("#getValues").click(function () {
+                alert("All values: " + $("#gauge").data("kendoLinearGauge").allValues().join(", "));
+            });
+
+            $("#setValues").click(function () {
+                var values = $("#newValues").val().split(",");
+
+                values = $.map(values, function (val) {
+                    return parseInt(val);
+                });
+
+                $("#gauge").data("kendoLinearGauge").allValues(values);
+            });
+        </script>
     </div>
 </asp:Content>
