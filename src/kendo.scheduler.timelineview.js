@@ -592,9 +592,9 @@ var __meta__ = {
                 isVerticalGrouped = that._groupOrientation() === "vertical";
 
                 if (isVerticalGrouped) {
-                    rowCount = this._rowCountForLevel(this.rowLevels.length - 1);
+                    rowCount = that._groupCount();
                 } else {
-                    groupsCount = this._columnCountForLevel(this.columnLevels.length - 4);
+                    groupsCount = that._groupCount();
                 }
             }
 
@@ -1159,7 +1159,7 @@ var __meta__ = {
                 if (this._groupOrientation() === "vertical") {
                     return this._rowCountForLevel(resources.length - 1);
                 } else {
-                    return this._columnCountForLevel(resources.length -1);
+                    return this._columnCountForLevel(resources.length - 1);
                 }
             }
             return 1;
