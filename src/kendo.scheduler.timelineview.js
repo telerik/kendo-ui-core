@@ -1328,7 +1328,8 @@ var __meta__ = {
             if (this._isVerticallyGrouped()) {
                 return slot;
             } else {
-                return slot;
+                var collection = group._collection(0, isDay);
+                return collection.last();
             }
         },
 
@@ -1394,17 +1395,16 @@ var __meta__ = {
             selection.start = new Date(date);
             selection.end = new Date(date);
 
-            if (!this._isVerticallyGrouped()) {
-                selection.groupIndex = reverse ? this.groups.length - 1 : 0;
+            if (this._isHorizontallyGrouped()) {
+               selection.groupIndex = reverse ? this.groups.length - 1 : 0;
             }
 
             var duration = end - start;
 
             if (reverse) {
                 end = getMilliseconds(this.endTime());
-                end = end === 0 ? MS_PER_DAY : 0 ;
+                end = end === 0 ? MS_PER_DAY : end;
 
-                //calculate previous range based on calculate dateRange:
                 setTime(selection.start, end-duration);
                 setTime(selection.end,  end);
             } else {

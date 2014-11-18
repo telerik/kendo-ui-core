@@ -419,4 +419,78 @@
         equal($(oldSelection[0]).index(), 2);
         equal(currentSelection.index(), 4);
     });
+
+    test("move to prev group and date in horizontal grouping set correct slot and date", function() {
+        setupWidget({
+            startTime: new Date(2013, 1, 3, 10, 0, 0, 0),
+            endTime: new Date(2013, 1, 3, 11, 0, 0, 0),
+            group: {
+                resources: ["Rooms"],
+                orientation: "horizontal"
+            },
+            resources: [
+                {
+                    field: "roomId",
+                    name: "Rooms",
+                    dataSource: [
+                        { text: "Meeting Room 101", value: 1, color: "#6eb3fa" },
+                        { text: "Meeting Room 201", value: 2, color: "#f58a8a" }
+                    ],
+                    title: "Room"
+                }]
+
+        });
+
+        var scheduler = container.data("kendoScheduler");
+        var oldDViewDate = scheduler.view()._dates[0];
+
+        keydown(keys.LEFT);
+
+        var oldSelection = $(".k-scheduler-content .k-state-selected");
+
+        keydown(keys.LEFT);
+        var currentViewDate = scheduler.view()._dates[0];
+        var currentSelection = $(".k-scheduler-content .k-state-selected");
+
+        equal(oldSelection.index(), 3);
+        equal(currentSelection.index(), 2);
+        notEqual(currentViewDate, oldDViewDate);
+    });
+
+    test("move to prev group in horizontal grouping restarts selection to single cell when selection is multiple", function() {
+        setupWidget({
+            startTime: new Date(2013, 1, 3, 10, 0, 0, 0),
+            endTime: new Date(2013, 1, 3, 11, 0, 0, 0),
+            group: {
+                resources: ["Rooms"],
+                orientation: "horizontal"
+            },
+            resources: [
+                {
+                    field: "roomId",
+                    name: "Rooms",
+                    dataSource: [
+                        { text: "Meeting Room 101", value: 1, color: "#6eb3fa" },
+                        { text: "Meeting Room 201", value: 2, color: "#f58a8a" }
+                    ],
+                    title: "Room"
+                }]
+
+        });
+
+        keydown(keys.RIGHT);
+        keydown(keys.RIGHT);
+        keydown(keys.RIGHT, { shiftKey: true });
+
+        var oldSelection = $(".k-scheduler-content .k-state-selected");
+
+        keydown(keys.LEFT);
+
+        var currentSelection = $(".k-scheduler-content .k-state-selected");
+
+        equal(oldSelection.length, 2);
+        equal($(oldSelection[0]).index(), 2);
+        equal(currentSelection.length, 1);
+        equal($(currentSelection[0]).index(), 1);
+    });
 })();
