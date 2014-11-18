@@ -807,3 +807,9 @@ a.k-button:hover
 .k-radio:disabled + .k-radio-label {
    cursor: auto;
 }
+
+// Avoid double-click bug with checkbox + label combination in Google Chrome
+input.k-checkbox + label{
+    -webkit-user-select:none;
+    user-select:none;
+}
