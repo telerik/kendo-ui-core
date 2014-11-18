@@ -45,7 +45,7 @@ public class GanttTask {
         this.orderId = orderId;
     }
 
-    @Column(name="ParentID")
+    @Column(name="ParentID", nullable = true)
     public Integer getParentId() {
         return parentId;
     }

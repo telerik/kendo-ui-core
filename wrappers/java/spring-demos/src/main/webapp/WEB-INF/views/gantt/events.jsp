@@ -40,13 +40,13 @@
                 <kendo:dataSource-schema-model id="id">
                      <kendo:dataSource-schema-model-fields>
                          <kendo:dataSource-schema-model-field name="id" type="number" />
-                         <kendo:dataSource-schema-model-field name="orderId" type="number" />
+                         <kendo:dataSource-schema-model-field name="parentId" defaultValue="null" nullable="true" type="number" />
                          <kendo:dataSource-schema-model-field name="parentId" type="number" />
                          <kendo:dataSource-schema-model-field name="start" type="date" />
                          <kendo:dataSource-schema-model-field name="end" type="date" />
                          <kendo:dataSource-schema-model-field name="title" defaultValue="No title" type="string" />
                          <kendo:dataSource-schema-model-field name="percentComplete" type="number" />
-                         <kendo:dataSource-schema-model-field name="expanded" type="boolean" />
+                         <kendo:dataSource-schema-model-field name="expanded" type="boolean" defaultValue="true" />
                          <kendo:dataSource-schema-model-field name="summary" type="boolean" />
                     </kendo:dataSource-schema-model-fields>
                 </kendo:dataSource-schema-model>
