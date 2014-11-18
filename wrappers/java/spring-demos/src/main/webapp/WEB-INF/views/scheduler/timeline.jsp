@@ -53,12 +53,12 @@
 
 %>
 <demo:header />
-    <kendo:scheduler name="scheduler" timezone="Etc/UTC" date="<%= date %>" startTime="<%= startTime %>">
+    <kendo:scheduler name="scheduler" timezone="Etc/UTC" date="<%= date %>" startTime="<%= startTime %>" footer="false">
     	<kendo:scheduler-views>  
 			<kendo:scheduler-view type="timeline" eventHeight="50" majorTick="60" />
 			<kendo:scheduler-view type="timelineWeek" eventHeight="50"  majorTick="60" />
 			<kendo:scheduler-view type="timelineWorkWeek" eventHeight="50" majorTick="60"  />
-			<kendo:scheduler-view type="timelineMonth" eventHeight="50"  startTime="<%= startTimeMonth %>"/>
+			<kendo:scheduler-view type="timelineMonth" eventHeight="50" startTime="<%= startTimeMonth %>" endTime="<%= startTimeMonth %>" majorTick="1440" />
     	</kendo:scheduler-views>
     	<kendo:scheduler-group resources="<%= new String[] { \"Rooms\",\"Attendees\" } %>" orientation="vertical" />
     	<kendo:scheduler-resources>

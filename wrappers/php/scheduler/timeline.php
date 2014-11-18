@@ -171,13 +171,12 @@ $attendeesResource->field('attendees')
 $scheduler = new \Kendo\UI\Scheduler('scheduler');
 $scheduler->timezone("Etc/UTC")
         ->date(new DateTime('2013/6/13'))
-        ->startTime(new DateTime('2013/6/13 7:00'))
         ->addResource($roomResource, $attendeesResource)
         ->group(array('resources' => array('Rooms', 'Attendees'), 'orientation' => 'vertical'))
-        ->addView(array('type' => 'timeline', 'eventHeight' => 50, 'majorTick' => 60),
-            array('type' => 'timelineWeek', 'eventHeight' => 50, 'majorTick' => 60),
-            array('type' => 'timelineWorkWeek', 'eventHeight' => 50, 'majorTick' => 60),
-            array('type' => 'timelineMonth', 'eventHeight' => 50, 'startTime' => new DateTime('2013/6/13 00:00')))
+        ->addView(array('type' => 'timeline', 'eventHeight' => 50, 'majorTick' => 60, 'startTime' => new DateTime('2013/6/13 7:00')),
+            array('type' => 'timelineWeek', 'eventHeight' => 50, 'majorTick' => 60, 'startTime' => new DateTime('2013/6/13 7:00')),
+            array('type' => 'timelineWorkWeek', 'eventHeight' => 50, 'majorTick' => 60, 'startTime' => new DateTime('2013/6/13 7:00')),
+            array('type' => 'timelineMonth', 'eventHeight' => 50, 'majorTick' => 1440, 'footer' => false))
         ->dataSource($dataSource);
 
 echo $scheduler->render();
