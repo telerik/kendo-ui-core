@@ -21,6 +21,7 @@ var __meta__ = {
     var doc = document,
         kendo = window.kendo,
         util = kendo.util,
+        append = util.append,
         valueOrDefault = util.valueOrDefault,
         dataviz = kendo.dataviz,
         geom = dataviz.geometry,
@@ -3391,10 +3392,6 @@ var __meta__ = {
         return array[array.length - 1];
     }
 
-    function append(first, second) {
-        first.push.apply(first, second);
-    }
-
     function ceil(value, step) {
         return round(math.ceil(value / step) * step, DEFAULT_PRECISION);
     }
@@ -3863,7 +3860,6 @@ var __meta__ = {
         TextBox: TextBox,
         Title: Title,
 
-        append: append,
         defined: defined,
         last: last,
         limitValue: limitValue,

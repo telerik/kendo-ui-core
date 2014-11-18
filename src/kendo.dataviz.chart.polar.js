@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.dataviz.chart", "./kendo.drawing" ], f);
+    define([ "./kendo.dataviz.chart", "./kendo.drawing", "./kendo.util" ], f);
 })(function(){
 
 var __meta__ = {
@@ -16,6 +16,9 @@ var __meta__ = {
 
         kendo = window.kendo,
         deepExtend = kendo.deepExtend,
+
+        util = kendo.util,
+        append = util.append,
 
         draw = kendo.drawing,
         geom = kendo.geometry,
@@ -45,7 +48,6 @@ var __meta__ = {
         ShapeBuilder = dataviz.ShapeBuilder,
         SplineSegment = dataviz.SplineSegment,
         SplineAreaSegment = dataviz.SplineAreaSegment,
-        append = dataviz.append,
         getSpacing = dataviz.getSpacing,
         filterSeriesByType = dataviz.filterSeriesByType,
         limitValue = dataviz.limitValue,

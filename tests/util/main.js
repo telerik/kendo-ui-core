@@ -18,4 +18,23 @@
         equal(l.min, undefined);
         equal(l.max, undefined)
     });
+
+    test("appends array to array", function() {
+        var arr = [1];
+        util.append(arr, [2, 3]);
+
+        deepEqual(arr, [1, 2, 3]);
+    });
+
+    test("calls push method", function() {
+        function Foo() { };
+        Foo.prototype.push = function() {
+            ok(true);
+        };
+
+        var foo = new Foo();
+
+        util.append(foo, []);
+    });
+
 })();

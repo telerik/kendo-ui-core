@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.dataviz.chart", "./kendo.drawing" ], f);
+    define([ "./kendo.dataviz.chart", "./kendo.drawing", "./kendo.util" ], f);
 })(function(){
 
 var __meta__ = {
@@ -19,6 +19,9 @@ var __meta__ = {
         isFn = kendo.isFunction,
         template = kendo.template,
 
+        util = kendo.util,
+        append = util.append,
+
         draw = kendo.drawing,
         geom = kendo.geometry,
         dataviz = kendo.dataviz,
@@ -31,7 +34,6 @@ var __meta__ = {
         Box2D = dataviz.Box2D,
         SeriesBinder = dataviz.SeriesBinder,
         TextBox = dataviz.TextBox,
-        append = dataviz.append,
         autoFormat = dataviz.autoFormat,
         evalOptions = dataviz.evalOptions,
         limitValue = dataviz.limitValue,

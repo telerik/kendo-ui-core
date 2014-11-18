@@ -64,7 +64,6 @@ var __meta__ = {
         TextBox = dataviz.TextBox,
         Title = dataviz.Title,
         alignPathToPixel = dataviz.alignPathToPixel,
-        append = dataviz.append,
         autoFormat = dataviz.autoFormat,
         defined = dataviz.defined,
         dateComparer = dataviz.dateComparer,
@@ -77,6 +76,7 @@ var __meta__ = {
         round = dataviz.round,
 
         util = kendo.util,
+        append = util.append,
         sparseArrayLimits = util.sparseArrayLimits,
         sparseArrayMin = util.sparseArrayMin,
         sparseArrayMax = util.sparseArrayMax,
