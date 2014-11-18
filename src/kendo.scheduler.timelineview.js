@@ -553,7 +553,6 @@ var __meta__ = {
             };
         },
 
-        //optional methods
         _columnCountForLevel: function(level) {
             var columnLevel = this.columnLevels[level];
             return columnLevel ? columnLevel.length : 0;
@@ -670,6 +669,10 @@ var __meta__ = {
 
         _isVerticallyGrouped: function() {
             return this.groupedResources.length && this._groupOrientation() === "vertical";
+        },
+
+        _isHorizontallyGrouped: function() {
+            return this.groupedResources.length && this._groupOrientation() === "horizontal";
         },
 
         _timeSlotGroups: function (groupCount, datesCount) {
@@ -1325,7 +1328,7 @@ var __meta__ = {
             if (this._isVerticallyGrouped()) {
                 return slot;
             } else {
-                //horizontal grouping
+                return slot;
             }
         },
 
@@ -1340,7 +1343,8 @@ var __meta__ = {
             if (this._isVerticallyGrouped()) {
                 return slot;
             } else {
-                //horizontal grouping
+                var collection = group._collection(0, isDay);
+                return collection.first();
             }
         },
 
@@ -1371,6 +1375,10 @@ var __meta__ = {
 
             startSlot = group[method](startSlot);
             endSlot = group[method](endSlot);
+
+            if (!multiple && this._isHorizontallyGrouped() && (!startSlot || !endSlot)) {
+                startSlot = endSlot = this._changeGroup(selection, reverse);
+            }
 
             return {
                 startSlot: startSlot,
