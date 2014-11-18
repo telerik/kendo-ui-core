@@ -300,7 +300,7 @@ function clickChart(chart, element, x, y) {
 kendo.drawing.util.TextMetrics.current = {
     measure: function(text, style) {
         return {
-            width: text.length * 8,
+            width: text ? text.length * 8 : 0,
             height: 15,
             baseline: 12
         };
