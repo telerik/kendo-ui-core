@@ -1612,7 +1612,9 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
     background-image: url("wpSkin.png");
 }
 
-#device-wrapper.flat {
+#device-wrapper.flat,
+#device-wrapper.material,
+#device-wrapper.materialblack {
     background-image: url("flat.png");
 }
 
@@ -1663,7 +1665,7 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
 
 #device-wrapper,
 #mobile-application-container {
-    height: 455px;
+    height: 460px;
     overflow: hidden;
     position: relative;
     width: 282px;
