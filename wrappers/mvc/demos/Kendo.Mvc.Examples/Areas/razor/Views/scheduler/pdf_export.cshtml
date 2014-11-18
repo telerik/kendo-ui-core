@@ -5,7 +5,7 @@
     .Height(600)
     .Pdf(pdf => pdf
         .FileName("Kendo UI Scheduler Export.pdf")
-        .ProxyUrl(Url.Action("Pdf_Export_Save", "Grid"))
+        .ProxyURL(Url.Action("Pdf_Export_Save", "Grid"))
     )
     .Toolbar(t => t.Pdf())
     .Views(views =>
