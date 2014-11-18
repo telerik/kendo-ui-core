@@ -2998,6 +2998,7 @@ html.k-materialblack .demo-section.k-content {
     background: #e2e4e7;
     border-color: #e2e4e7;
     min-width: 90px;
+    box-shadow: none;
 }
 
 .box .k-button:hover,
