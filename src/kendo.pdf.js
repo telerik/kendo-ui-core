@@ -4,7 +4,7 @@
 }) (function(){
 
 var __meta__ = {
-    id: "pdf",
+    id: "pdf-export",
     name: "PDF export",
     category: "framework",
     advanced: true,

@@ -1,5 +1,6 @@
 (function(f, define){
     define([
+        "../kendo.color",
         "./shapes",
         "./text-metrics"
     ], f);

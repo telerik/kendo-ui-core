@@ -1,6 +1,6 @@
 (function(f, define) {
     define([
-        "../mixins/observers"
+        "../kendo.util", "../mixins/observers"
     ], f);
 })(function() {
 
