@@ -161,7 +161,7 @@
             pointer.repaint();
 
             var origin = pointerElements.bbox().origin;
-            arrayClose([origin.x, origin.y], [37.5, 289], TOLERANCE);
+            arrayClose([origin.x, origin.y], [30.5, 289], TOLERANCE);
         });
 
         test("renders bar indicator shape", function() {

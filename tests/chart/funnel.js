@@ -642,14 +642,14 @@
     test("First label text position", function() {
         var textBox = chart.labels[0].children[0].box;
         close(textBox.x1,5,TOLERANCE);
-        close(textBox.x2,84,TOLERANCE);
+        close(textBox.x2,109,TOLERANCE);
         close(textBox.y1,114,TOLERANCE);
         close(textBox.y2,129,TOLERANCE);
     });
 
     test("Second label text position", function() {
         var textBox = chart.labels[1].children[0].box;
-        close(textBox.x1,716,TOLERANCE);
+        close(textBox.x1,691,TOLERANCE);
         close(textBox.x2,795,TOLERANCE);
         close(textBox.y1,292,TOLERANCE);
         close(textBox.y2,307,TOLERANCE);
@@ -658,7 +658,7 @@
     test("Third label text position", function() {
         var textBox = chart.labels[2].children[0].box;
         close(textBox.x1,5,TOLERANCE);
-        close(textBox.x2,84,TOLERANCE);
+        close(textBox.x2,109,TOLERANCE);
         close(textBox.y1,470,TOLERANCE);
         close(textBox.y2,485,TOLERANCE);
     });
@@ -666,14 +666,14 @@
     test("First label box position", function() {
         var textBox = chart.labels[0].box;
         close(textBox.x1,0,TOLERANCE);
-        close(textBox.x2,89,TOLERANCE);
+        close(textBox.x2,114,TOLERANCE);
         close(textBox.y1,109,TOLERANCE);
         close(textBox.y2,134,TOLERANCE);
     });
 
     test("Second label bx position", function() {
         var textBox = chart.labels[1].box;
-        close(textBox.x1,711,TOLERANCE);
+        close(textBox.x1,686,TOLERANCE);
         close(textBox.x2,800,TOLERANCE);
         close(textBox.y1,287,TOLERANCE);
         close(textBox.y2,312,TOLERANCE);
@@ -682,26 +682,26 @@
     test("Third label box position", function() {
         var textBox = chart.labels[2].box;
         close(textBox.x1,0,TOLERANCE);
-        close(textBox.x2,89,TOLERANCE);
+        close(textBox.x2,114,TOLERANCE);
         close(textBox.y1,465,TOLERANCE);
         close(textBox.y2,490,TOLERANCE);
     });
 
     test("First segment position", function() {
         arrayClose(mapPoints(chart.points[0].points), [
-            [89, 0], [711, 0], [488, 243], [311, 243]
+            [114, 0], [686, 0], [481.7, 243], [318, 243]
         ], TOLERANCE);
     });
 
     test("Second segment position", function() {
         arrayClose(mapPoints(chart.points[1].points), [
-            [311, 265], [488, 265], [711, 334], [89, 334]
+            [318, 265], [481, 265], [686, 334], [114, 334]
         ], TOLERANCE);
     });
 
     test("Third segment position", function() {
         arrayClose(mapPoints(chart.points[2].points), [
-            [89, 356], [711, 356], [711, 600], [89, 600]
+            [114, 356], [686, 356], [686, 600], [114, 600]
         ], TOLERANCE);
     });
 

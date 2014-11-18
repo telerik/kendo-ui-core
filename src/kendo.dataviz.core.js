@@ -25,6 +25,7 @@ var __meta__ = {
         dataviz = kendo.dataviz,
         geom = dataviz.geometry,
         draw = dataviz.drawing,
+        measureText = draw.util.measureText,
         Matrix = geom.Matrix,
         Class = kendo.Class,
         template = kendo.template,
@@ -3287,68 +3288,6 @@ var __meta__ = {
         }
     };
 
-    var TextMetrics = Class.extend({
-        init: function() {
-            this._cache = new LRUCache(1000);
-        },
-
-        measure: function(text, style) {
-            var styleHash = getHash(style),
-                cacheKey = text + styleHash,
-                cachedResult = this._cache.get(cacheKey);
-
-            if (cachedResult) {
-                return cachedResult;
-            }
-
-            var size = {
-                width: 0,
-                height: 0,
-                baseline: 0
-            };
-
-            var measureBox = this._measureBox,
-                baselineMarker = this._baselineMarker.cloneNode(false);
-
-            for (var styleKey in style) {
-                measureBox.style[styleKey] = style[styleKey];
-            }
-            measureBox.innerHTML = text;
-            measureBox.appendChild(baselineMarker);
-            doc.body.appendChild(measureBox);
-
-            if ((text + "").length) {
-                size = {
-                    width: measureBox.offsetWidth - BASELINE_MARKER_SIZE,
-                    height: measureBox.offsetHeight,
-                    baseline: baselineMarker.offsetTop + BASELINE_MARKER_SIZE
-                };
-            }
-
-            this._cache.put(cacheKey, size);
-
-            measureBox.parentNode.removeChild(measureBox);
-
-            return size;
-        }
-    });
-
-    TextMetrics.fn._baselineMarker =
-        $("<div class='" + CSS_PREFIX + "baseline-marker' " +
-          "style='display: inline-block; vertical-align: baseline;" +
-          "width: " + BASELINE_MARKER_SIZE + "px; height: " + BASELINE_MARKER_SIZE + "px;" +
-          "overflow: hidden;' />")[0];
-
-    TextMetrics.fn._measureBox =
-        $("<div style='position: absolute; top: -4000px;" +
-                      "line-height: normal; visibility: hidden; white-space:nowrap;' />")[0];
-
-    TextMetrics.current = new TextMetrics();
-
-    function measureText(text, style) {
-        return TextMetrics.current.measure(text, style);
-    }
-
     function autoMajorUnit(min, max) {
         var diff = round(max - min, DEFAULT_PRECISION - 1);
 
@@ -3921,24 +3860,23 @@ var __meta__ = {
         ShapeBuilder: ShapeBuilder,
         ShapeElement: ShapeElement,
         Text: Text,
-        TextMetrics: TextMetrics,
         TextBox: TextBox,
         Title: Title,
 
-        alignPathToPixel: alignPathToPixel,
         append: append,
+        defined: defined,
+        last: last,
+        limitValue: limitValue,
+
+        alignPathToPixel: alignPathToPixel,
         autoFormat: autoFormat,
         autoMajorUnit: autoMajorUnit,
         boxDiff: boxDiff,
-        defined: defined,
         dateComparer: dateComparer,
         decodeEntities: decodeEntities,
         getSpacing: getSpacing,
         inArray: inArray,
         interpolateValue: interpolateValue,
-        last: last,
-        limitValue: limitValue,
-        measureText: measureText,
         mwDelta: mwDelta,
         rotatePoint: rotatePoint,
         round: round,

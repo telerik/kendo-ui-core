@@ -765,7 +765,7 @@
             });
 
             arrayClose(dateAxis.getMajorTickPositions(),
-                [13, 99, 328, 557, 786] , 1);
+                [13, 99, 328, 558, 788] , 1);
         });
 
         test("Major ticks are not affected when start/end time match base unit", function() {
@@ -778,7 +778,7 @@
             });
 
             arrayClose(dateAxis.getMajorTickPositions(),
-                [14, 207, 400, 593, 787], 1);
+                [12, 207, 400, 593, 787], 1);
         });
 
         test("First label is hidden if it does not match base unit", function() {
@@ -1420,7 +1420,7 @@
 
         test("Returns correct first partial slot", function() {
             sameBox(dateAxis.getSlot(0),
-                    new Box2D(14, 0, 14, 0),
+                    new Box2D(12, 0, 12, 0),
                     TOLERANCE);
         });
 
@@ -1432,7 +1432,7 @@
 
         test("Returns correct last full slot", function() {
             sameBox(dateAxis.getSlot(3),
-                    new Box2D(557, 0, 557, 0),
+                    new Box2D(558, 0, 558, 0),
                     TOLERANCE);
         });
 
@@ -1603,7 +1603,7 @@
             deepEqual(range, dateAxis.range());
         });
 
-        test("scaleRange with negative delta exoands range", function() {
+        test("scaleRange with negative delta expands range", function() {
             var range = dateAxis.scaleRange(-2);
             deepEqual(range.min, new Date("2012/01/25 22:04:48"));
             deepEqual(range.max, new Date("2012/02/15 01:55:12"));
@@ -1729,8 +1729,8 @@
             createDateValueAxis(new Date("2012/02/01"), new Date("2012/02/10"));
             var limited = dateAxis.getSlot("2012/02/20", "2012/02/20", true),
                 unlimited = dateAxis.getSlot("2012/02/20", "2012/02/20", false);
-            close(limited.x1, 781.5, 1, 1, "value is limited");
-            close(unlimited.x1, 1217.5, 1, "value is not limited");
+            close(limited.x1, 784, 1, 1, "value is limited");
+            close(unlimited.x1, 1222, 1, "value is not limited");
         });
 
         // ------------------------------------------------------------
@@ -2370,7 +2370,7 @@
         });
 
         test("renders box", function() {
-            sameRectPath(plotBands, [ 30, 7.5, 799, 577 ], TOLERANCE);
+            sameRectPath(plotBands, [33, 7.5, 799, 577], TOLERANCE);
         });
 
         // ------------------------------------------------------------
@@ -2381,7 +2381,7 @@
         });
 
         test("renders box", function() {
-            sameRectPath(plotBands, [ 30, 7.5, 791.5, 577 ], TOLERANCE);
+            sameRectPath(plotBands, [33, 7.5, 788, 577], TOLERANCE);
         });
 
         // ------------------------------------------------------------
@@ -2392,7 +2392,7 @@
         });
 
         test("renders box", function() {
-            sameRectPath(plotBands, [ 26, 0, 789.5, 576 ], TOLERANCE);
+            sameRectPath(plotBands, [33, 0, 788, 576], TOLERANCE);
         });
 
         // ------------------------------------------------------------
@@ -2407,7 +2407,7 @@
         });
 
         test("renders box", function() {
-            sameRectPath(plotBands, [ 26, 7, 789.5, 576 ], TOLERANCE);
+            sameRectPath(plotBands, [33, 7, 788, 576], TOLERANCE);
         });
     })();
 })();
