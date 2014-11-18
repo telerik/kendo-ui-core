@@ -334,22 +334,32 @@
             $("#example").trigger("kendo:skinChange");
         },
 
+        currentlyUsing: function(href) {
+            if (/common/.test(href)) {
+                return ThemeChooser.getCurrentCommonLink().attr("href") == href;
+            } else {
+                return ThemeChooser.getCurrentThemeLink().attr("href") == href;
+            }
+        },
+
         animateCssChange: function(options) {
             options = $.extend({ complete: $.noop, replace: $.noop }, options);
 
-            if (options.link && options.prefetch == options.link.attr("href")) {
+            var prefetch = options.prefetch;
+
+            if (!$.isArray(prefetch)) {
+                prefetch = [prefetch];
+            }
+
+            prefetch = $.grep(prefetch, function(x) {
+                return !ThemeChooser.currentlyUsing(x);
+            });
+
+            if (!prefetch.length) {
                 return;
             }
 
-            var stylesLoaded;
-
-            if ($.isArray(options.prefetch)) {
-                stylesLoaded = $.when.apply($, options.prefetch);
-            } else {
-                stylesLoaded = ThemeChooser.preloadStylesheet(options.prefetch);
-            }
-
-            stylesLoaded.then(function() {
+            $.when.apply($, prefetch).then(function() {
                 var example = $("#example");
 
                 example.kendoStop().kendoAnimate(extend({}, animation.hide, {
@@ -365,7 +375,9 @@
                                     .kendoStop()
                                     .kendoAnimate(animation.show);
 
-                                kendo.resize(example, true);
+                                if (prefetch.join(":").indexOf("common") > -1) {
+                                    kendo.resize(example, true);
+                                }
 
                                 options.complete();
                             }, 100);
@@ -378,7 +390,6 @@
         changeCommon: function(commonName, animate) {
             ThemeChooser.animateCssChange({
                 prefetch: ThemeChooser.getCommonUrl(commonName),
-                link: ThemeChooser.getCurrentCommonLink(),
                 replace: function() {
                     ThemeChooser.replaceCommon(commonName);
                 }
@@ -392,7 +403,6 @@
             if (animate) {
                 ThemeChooser.animateCssChange({
                     prefetch: ThemeChooser.getThemeUrl(themeName),
-                    link: ThemeChooser.getCurrentThemeLink(),
                     replace: function() {
                         ThemeChooser.replaceTheme(themeName);
                     },
