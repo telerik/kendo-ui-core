@@ -1,5 +1,6 @@
 (function(f, define){
-    define([ "./kendo.core", "./pdf/core", "./pdf/ttf" ], f);
+    define([ "./kendo.core", "./kendo.drawing", "./pdf/core", "./pdf/ttf" ], f);
+
 }) (function(){
 
 var __meta__ = {
