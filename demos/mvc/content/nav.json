@@ -2041,7 +2041,7 @@
             "kendo-ui": "This demo shows how setOptions and getOptions methods can manipulate the state of Kendo UI Grid widget."
         },
         "packages": [
-          "!mvc",
+          "mvc",
           "!php",
           "!jsp"
         ]
