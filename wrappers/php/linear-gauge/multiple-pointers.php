@@ -3,34 +3,84 @@ require_once '../lib/Kendo/Autoload.php';
 require_once '../include/chart_data.php';
 
 require_once '../include/header.php';
+
 $gauge = new \Kendo\Dataviz\UI\LinearGauge('gauge');
 
 $pointer0 = new \Kendo\Dataviz\UI\LinearGaugePointerItem('pointer0');
 $pointer0->value(10)->color("#c20000")->shape("arrow");
 
 $pointer1 = new \Kendo\Dataviz\UI\LinearGaugePointerItem('pointer1');
-$pointer1->value(50)->margin(10)->color("#ff7a00");
+$pointer1->value(70)->color("#ff7a00")->margin(10);
 
 $pointer2 = new \Kendo\Dataviz\UI\LinearGaugePointerItem('pointer2');
-$pointer2->value(30)->color("#ffc700");
+$pointer2->value(140)->color("#ffc700");
 
-$pointer3 = new \Kendo\Dataviz\UI\LinearGaugePointerItem('pointer3');
-$pointer3->value(45)->color("#428bca")->shape("arrow");
+$gauge->pointer(array($pointer0, $pointer1, $pointer2))
+      ->scale(array('minorUnit' => 5, 'min' => 0, 'max' => 180, 'vertical' => true));
 
-$gauge->pointer(array($pointer0, $pointer1, $pointer2, $pointer3))
-      ->scale(array('majorUnit' => 20, 'minorUnit' => 2,'min' => -40,
-      'max' => 60, 'vertical' => true, 'ranges' => array(
-          array('from' => -40, 'to' => -20, 'color' => '#2798df'),
-          array('from' => 30, 'to' => 45, 'color' => '#ffc700'),
-          array('from' => 45, 'to' => 60, 'color' => '#c20000'),
-      )));
+function createSlider($name, $value){
+    $slider = new \Kendo\UI\Slider($name);
+    $slider->min(0)
+           ->max(180)
+           ->value($value)
+           ->showButtons(false)
+           ->attr('class', 'slider')
+           ->change('updateValue');
+
+    return $slider;
+}
+
 ?>
 
 <div id="gauge-container">
     <?php
-        echo $gauge->render();
+      echo $gauge->render();
     ?>
 </div>
+
+<div class="box">
+    <div class="box-col">
+        <h4>Red pointer value</h4>
+        <?= createSlider('gauge-value0', 10)->render() ?>
+        <h4 style="margin-top: 30px;">Get all pointer values</h4>
+        <button id="getValues" class="k-button">Get all</button>
+    </div>
+    <div class="box-col">
+        <h4>Orange pointer value</h4>
+        <?= createSlider('gauge-value1', 70)->render() ?>
+                
+        <h4 style="margin-top: 30px;">Set all pointer values</h4>
+        <input id="newValues" class="k-textbox" value="100, 10, 80" style="width: 110px;" />
+        <button id="setValues" class="k-button">Set all</button>
+    </div>
+    <div class="box-col">
+        <h4>Yellow pointer value</h4>
+        <?= createSlider('gauge-value2', 140)->render() ?>
+    </div>
+</div>
+
+<script>
+  function updateValue(){
+    var id = this.element.attr("id");
+        var pointerIndex = id.substr(id.length - 1);
+        var gauge = $("#gauge").data("kendoLinearGauge");
+        gauge.pointers[pointerIndex].value(this.value());
+  }
+
+  $("#getValues").click(function () {
+        alert("All values: " + $("#gauge").data("kendoLinearGauge").allValues().join(", "));
+    });
+
+    $("#setValues").click(function () {
+        var values = $("#newValues").val().split(",");
+
+        values = $.map(values, function (val) {
+            return parseInt(val);
+        });
+
+        $("#gauge").data("kendoLinearGauge").allValues(values);
+    });
+</script>
 
 <style scoped>
     #gauge-container {
