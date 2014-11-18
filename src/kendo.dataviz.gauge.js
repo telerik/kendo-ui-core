@@ -767,10 +767,19 @@ var __meta__ = {
         _resize: function() {
             var that = this;
             var t = that.options.transitions;
+            var i;
 
             that.options.transitions = false;
+            for (i = 0; i < that.pointers.length; i++) {
+                that.pointers[i].options.animation.transitions = false;
+            }
+
             that.redraw();
+
             that.options.transitions = t;
+            for (i = 0; i < that.pointers.length; i++) {
+                that.pointers[i].options.animation.transitions = t;
+            }
         },
 
         redraw: function() {
