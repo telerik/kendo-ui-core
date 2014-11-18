@@ -699,11 +699,11 @@ var __meta__ = {
             this._toolbar();
             this._scrollable();
 
-            this._adjustHeight();
-
             if (this.options.autoBind) {
                 this.dataSource.fetch();
             }
+
+            this._adjustHeight();
 
             kendo.notify(this);
         },
@@ -714,6 +714,13 @@ var __meta__ = {
                 this.content.closest(".k-grid-content").bind("scroll" + NS, function() {
                     scrollables.scrollLeft(this.scrollLeft);
                 });
+
+
+                var touchScroller = kendo.touchScroller(this.content.closest("div"));
+
+                if (touchScroller && touchScroller.movable) {
+                    this._touchScroller = touchScroller;
+                }
             }
         },
 
@@ -755,6 +762,8 @@ var __meta__ = {
             this._cancelEditor();
 
             this._render();
+
+            this._adjustHeight();
 
             this._angularItems("compile");
             this._angularFooters("compile");
@@ -858,6 +867,10 @@ var __meta__ = {
             this._destroyEditor();
 
             this.element.off(NS);
+
+            if (this._touchScroller) {
+                this._touchScroller.destroy();
+            }
 
             this._refreshHandler = this._errorHandler = this._progressHandler = null;
             this.header = this.content = this.element = null;
