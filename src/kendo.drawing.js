@@ -1,7 +1,8 @@
 (function(f, define){
     define([
         "./kendo.color",
-        "./kendo.util",
+        "./util/main",
+        "./util/base64",
         "./mixins/observers",
         "./geometry/main",
         "./drawing/core",
@@ -22,7 +23,7 @@
         name: "Drawing API",
         category: "framework",
         description: "The Kendo UI low-level drawing API",
-        depends: [ "core", "util" ]
+        depends: [ "core" ]
     };
 
 }, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });
