@@ -47,6 +47,56 @@
         equal(view.title, "the title");
     });
 
+    test("render footer toolbar", function() {
+        var view = setup();
+
+        ok(view.footer);
+        ok(view.footer.hasClass("k-scheduler-footer"));
+    });
+
+    test("footer is not rendered", function() {
+        var view = setup({ footer: false });
+
+        ok(!view.element.find("k-scheduler-footer").length);
+    });
+
+    test("render workday button in the footer", function() {
+        var view = setup({
+            footer: {
+                command: "workDay"
+            }
+        });
+
+        ok(view.footer.find(".k-scheduler-fullday").length);
+    });
+
+    test("render workday button in the footer by default", function() {
+        var view = setup();
+
+        ok(view.footer.find(".k-scheduler-fullday").length);
+    });
+
+    test("workday button is not rendered", function() {
+        var view = setup({
+            footer: {
+                command: ""
+            }
+        });
+
+        ok(!view.footer.find(".k-scheduler-fullday").length);
+    });
+
+    test("clicking workday button triggers naivgate event", 2, function() {
+        var view = setup();
+
+        view.bind("navigate",function(e) {
+            equal(e.view, "timeline");
+            ok(e.isWorkDay);
+        });
+
+        view.footer.find(".k-scheduler-fullday").click();
+    });
+
     test("month view selects correctly first and end date of the month", function () {
         var view = setupMonth({ title: "the title", date: new Date("2013/1/6") });
 

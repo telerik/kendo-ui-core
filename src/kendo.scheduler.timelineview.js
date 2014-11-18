@@ -301,25 +301,6 @@ var __meta__ = {
            return null;
        },
 
-       _getColumnCount: function() {
-            var options = this.options;
-            var msMajorInterval = this._timeSlotInterval();
-            var msMin = getMilliseconds(toInvariantTime(options.startTime));
-            var msMax = getMilliseconds(toInvariantTime(options.endTime));
-            var columnCount;
-
-            columnCount = MS_PER_DAY / msMajorInterval;
-            if (msMin != msMax) {
-                if (msMin > msMax) {
-                    msMax += MS_PER_DAY;
-                }
-
-                columnCount = (msMax - msMin) / msMajorInterval;
-            }
-
-            this._columnCount = Math.round(columnCount);
-       },
-
         options: {
             name: "TimelineView",
             title: "Timeline",
@@ -327,6 +308,7 @@ var __meta__ = {
             date: kendo.date.today(),
             startTime: kendo.date.today(),
             endTime: kendo.date.today(),
+            showWorkHours: false,
             minorTickCount: 2,
             editable: true,
             workDayStart: new Date(1980, 1, 1, 8, 0, 0),
@@ -342,12 +324,17 @@ var __meta__ = {
             slotTemplate: "&nbsp;",
             eventTemplate: EVENT_TEMPLATE,
             dateHeaderTemplate: DATA_HEADER_TEMPLATE,
+            footer: {
+                command: "workDay"
+            },
             currentTimeMarker: {
                 updateInterval: 10000,
                 useLocalTimezone: true
             },
             messages: {
-                defaultRowText: "All events"
+                defaultRowText: "All events",
+                showFullDay: "Show full day",
+                showWorkDay: "Show business hours"
             }
         },
 
@@ -370,8 +357,6 @@ var __meta__ = {
 
             that._dates = dates;
 
-            that._getColumnCount();
-
             that._startDate = dates[0];
 
             that._endDate = dates[(dates.length - 1) || 0];
@@ -381,6 +366,8 @@ var __meta__ = {
             that.createLayout(that._layout(dates));
 
             that._content(dates);
+
+            that._footer();
 
             that._setContentWidth();
 
@@ -551,6 +538,39 @@ var __meta__ = {
                 columns: columns,
                 rows: rows
             };
+        },
+
+        _footer: function() {
+            var options = this.options;
+
+            if (options.footer !== false) {
+                var html = '<div class="k-header k-scheduler-footer">';
+
+                var command = options.footer.command;
+
+                if (command && command === "workDay") {
+                    html += '<ul class="k-reset k-header">';
+
+                    html += '<li class="k-state-default k-scheduler-fullday"><a href="#" class="k-link"><span class="k-icon k-i-clock"></span>';
+                    html += (options.showWorkHours ? options.messages.showFullDay : options.messages.showWorkDay) + '</a></li>';
+
+                    html += '</ul>';
+
+                } else {
+                    html += "&nbsp;";
+                }
+
+                html += "</div>";
+
+                this.footer = $(html).appendTo(this.element);
+
+                var that = this;
+
+                this.footer.on("click" + NS, ".k-scheduler-fullday", function(e) {
+                    e.preventDefault();
+                    that.trigger("navigate", { view: that.name || options.name, date: that.startDate(), isWorkDay: !options.showWorkHours });
+                });
+            }
         },
 
         _columnCountForLevel: function(level) {
@@ -738,12 +758,12 @@ var __meta__ = {
 
         startTime: function() {
             var options = this.options;
-            return options.startTime;
+            return options.showWorkHours ? options.workDayStart : options.startTime;
         },
 
         endTime: function() {
             var options = this.options;
-            return options.endTime;
+            return options.showWorkHours ? options.workDayEnd : options.endTime;
         },
 
         _timeSlotInterval: function() {
@@ -1470,11 +1490,26 @@ var __meta__ = {
                 that.element.off(NS);
             }
 
+            if (that.footer) {
+                that.footer.remove();
+            }
+
             if (that._currentTimeUpdateTimer) {
                 clearInterval(that._currentTimeUpdateTimer);
             }
 
             SchedulerView.fn.destroy.call(this);
+
+            if (this._isMobile() && that.options.editable) {
+                if (that.options.editable.create !== false) {
+                    that._addUserEvents.destroy();
+                    that._allDayUserEvents.destroy();
+                }
+
+                if (that.options.editable.update !== false) {
+                    that._editUserEvents.destroy();
+                }
+            }
         }
     });
 
