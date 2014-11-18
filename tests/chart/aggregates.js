@@ -2,7 +2,7 @@
     var dataviz = kendo.dataviz,
         SeriesAggregator = dataviz.SeriesAggregator,
         DefaultAggregates = dataviz.DefaultAggregates,
-        defined = dataviz.defined,
+        defined = kendo.util.defined,
         binder,
         defaults,
         series;

@@ -33,9 +33,9 @@
         linearScale.reflow(chartBox);
         var ranges = linearScale.renderRanges().bbox();
 
-        arrayClose([ranges.origin.x , ranges.origin.y, 
+        arrayClose([ranges.origin.x , ranges.origin.y,
                     ranges.origin.x + ranges.width(), ranges.origin.y + ranges.height()],
-                   [39, 238.1, 44, 313.4], TOLERANCE);
+                   [35, 238.1, 40, 313.4], TOLERANCE);
     });
 
     test("render range from 10 to 15 and from 15 to 20", function() {
@@ -56,11 +56,11 @@
 
         arrayClose([first.origin.x , first.origin.y,
                     first.origin.x + first.width(), first.origin.y + first.height()],
-                    [39, 276, 44, 313.4], TOLERANCE);
-        
+                    [35, 276, 40, 313.4], TOLERANCE);
+
         arrayClose([second.origin.x , second.origin.y,
                     second.origin.x + second.width(), second.origin.y + second.height()],
-                   [39, 238, 44, 276], TOLERANCE);
+                   [35, 238, 40, 276], TOLERANCE);
     });
 
     // ------------------------------------------------------------

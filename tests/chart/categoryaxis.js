@@ -4,7 +4,6 @@
         draw = kendo.drawing,
         geom = kendo.geometry,
         dataviz = kendo.dataviz,
-        getElement = dataviz.getElement,
         Box2D = dataviz.Box2D,
         chartBox = new Box2D(0, 0, 800, 600),
         CategoryAxis,
@@ -25,7 +24,7 @@
             MAX_LABEL_HEIGHT = 17,
             MAJOR_TICK_HEIGHT = 4,
             LINE_Y = chartBox.y1,
-            LINE_X = 33,
+            LINE_X = 29,
             MARGIN = PADDING = 5;
 
         function createCategoryAxis(options) {
@@ -59,7 +58,7 @@
 
         function getAxisTexts() {
             return $.map(getAxisTextBoxes(), function(item) {
-                return dataviz.last(item.children);
+                return kendo.util.last(item.children);
             });
         }
 
@@ -179,23 +178,23 @@
         });
 
         test("labels are distributed horizontally", function() {
-            closeTextPosition("x", getAxisTexts(), [185.5, 586.5], TOLERANCE);
+            closeTextPosition("x", getAxisTexts(), [187.5, 586.5], TOLERANCE);
         });
 
         test("labels are distributed horizontally (justified)", function() {
             createCategoryAxis({ justified: true });
-            closeTextPosition("x", getAxisTexts(), [0, 773], TOLERANCE);
+            closeTextPosition("x", getAxisTexts(), [0, 776], TOLERANCE);
         });
 
         test("labels are distributed horizontally in reverse", function() {
             createCategoryAxis({ reverse: true });
 
-            closeTextPosition("x", getAxisTexts(), [586.5, 185.5], TOLERANCE);
+            closeTextPosition("x", getAxisTexts(), [586.5, 187.5], TOLERANCE);
         });
 
         test("labels are distributed horizontally in reverse (justified)", function() {
             createCategoryAxis({ justified: true, reverse: true });
-            closeTextPosition("x", getAxisTexts(), [773, 0], TOLERANCE);
+            closeTextPosition("x", getAxisTexts(), [776, 0], TOLERANCE);
         });
 
         test("labels are positioned below axis line", 2, function() {
@@ -246,7 +245,7 @@
                 minorTicks: { visible: true }
             });
             arrayClose($.map(getTicks(), function(line) { return line.segments[0].anchor().x; }),
-                 [14.5, 272, 529, 786], TOLERANCE);
+                 [14.5, 272, 529, 788.5], TOLERANCE);
         });
 
         test("minor ticks are distributed horizontally in reverse", function() {
@@ -268,7 +267,7 @@
             });
 
             arrayClose($.map(getTicks(), function(line) { return line.segments[0].anchor().x; }),
-                 [786, 529, 271, 14.5], TOLERANCE);
+                 [788.5, 529, 271, 14.5], TOLERANCE);
         });
 
         test("minor ticks can be disabled", function() {
@@ -321,7 +320,7 @@
 
         test("labels are distributed horizontally", function() {
             arrayClose($.map(getAxisTexts(), function(text) { return text.rect().origin.x }),
-                 [119, 652], TOLERANCE);
+                 [121.5, 652], TOLERANCE);
         });
 
         // ------------------------------------------------------------
@@ -359,7 +358,7 @@
 
         test("major ticks are aligned to axis", 3, function() {
             $.each(getTicks(), function() {
-                equal(this.segments[0].anchor().y, 23.5);
+                equal(this.segments[0].anchor().y, 20.5);
             });
         });
 
@@ -370,7 +369,7 @@
                 minorTicks: { visible: true }
             });
             $.each(getTicks(), function() {
-                equal(this.segments[0].anchor().y, 23.5);
+                equal(this.segments[0].anchor().y, 20.5);
             });
         });
 
@@ -433,12 +432,12 @@
             createCategoryAxis({ vertical: true, justified: true });
 
             arrayClose($.map(getAxisTexts(), function(text) { return text.rect().origin.y }),
-                 [0, 582], TOLERANCE);
+                 [0, 585], TOLERANCE);
         });
 
         test("labels are positioned to the left of the axis line", function() {
             deepEqual($.map(getAxisTexts(), function(text) { return text.rect().origin.x }),
-                 [0, 2]);
+                 [0, 0]);
         });
 
         test("major ticks are distributed vertically", function() {
@@ -450,7 +449,7 @@
             createCategoryAxis({ vertical: true, justified: true });
 
             arrayClose($.map(getTicks(), function(line) { return line.segments[0].anchor().y; }),
-                 [9, 591], TOLERANCE);
+                 [9, 593.5], TOLERANCE);
         });
 
         test("minor ticks are distributed vertically", function() {
@@ -473,7 +472,7 @@
             });
 
             arrayClose($.map(getTicks(), function(line) { return line.segments[0].anchor().y; }),
-                [9, 203, 397, 591], TOLERANCE);
+                [9, 203, 397, 593.5], TOLERANCE);
         });
 
         test("line width 0 remove all ticks", function() {
@@ -506,12 +505,12 @@
             });
 
             deepEqual($.map(getAxisTexts(), function(text) { return text.rect().origin.x }),
-                 [0 + MARGIN + PADDING, 2 + MARGIN + PADDING]);
+                 [0 + MARGIN + PADDING, 0 + MARGIN + PADDING]);
         });
 
         test("major ticks are aligned to axis", 3, function() {
             $.each(getTicks(), function() {
-                equal(this.segments[0].anchor().x, 34.5);
+                equal(this.segments[0].anchor().x, 29.5);
             });
         });
 
@@ -522,7 +521,7 @@
                 vertical: true
             });
             $.each(getTicks(), function() {
-                equal(this.segments[0].anchor().x, 34.5);
+                equal(this.segments[0].anchor().x, 29.5);
             });
         });
 
@@ -1084,7 +1083,7 @@
         });
 
         test("renders box", function() {
-            sameRectPath(plotBands, [39, 9, 292.666, 573], TOLERANCE);
+            sameRectPath(plotBands, [33, 9, 288.333, 576], TOLERANCE);
         });
 
         test("renders color", function() {
@@ -1107,7 +1106,7 @@
         });
 
         test("renders box", function() {
-            sameRectPath(plotBands, [39, 9, 419, 573], TOLERANCE);
+            sameRectPath(plotBands, [33, 9, 416, 576], TOLERANCE);
         });
 
         // ------------------------------------------------------------
@@ -1118,7 +1117,7 @@
         });
 
         test("renders box", function() {
-            sameRectPath(plotBands, [20, 0, 785, 191], TOLERANCE);
+            sameRectPath(plotBands, [17, 0, 788, 191], TOLERANCE);
         });
 
         test("renders color", function() {
@@ -1145,7 +1144,7 @@
         });
 
         test("renders box", function() {
-            sameRectPath(plotBands, [20, 0, 785, 286.5], TOLERANCE);
+            sameRectPath(plotBands, [17, 0, 788, 286.5], TOLERANCE);
         });
     })();
 
@@ -1212,7 +1211,7 @@
 
         test("positioned at center", function() {
             arrayClose([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
-                 [ 403, 582, 436, 600 ], TOLERANCE);
+                 [ 400.5, 585, 432.5, 600 ], TOLERANCE);
         });
 
         test("positioned left", function() {
@@ -1220,7 +1219,7 @@
             titleBox = plotArea.axisX.title.box;
 
             arrayClose([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
-                 [ 39, 582, 72, 600 ], TOLERANCE);
+                 [ 34, 585, 65, 600 ], TOLERANCE);
         });
 
         test("positioned right", function() {
@@ -1228,7 +1227,7 @@
             titleBox = plotArea.axisX.title.box;
 
             arrayClose([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
-                 [ 767, 582, 800, 600 ], TOLERANCE);
+                 [ 767, 585, 800, 600 ], TOLERANCE);
         });
 
         test("renders color", function() {
@@ -1258,7 +1257,7 @@
 
         test("positioned at center", function() {
             arrayClose([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
-                 [ 403, 546, 436, 564 ], TOLERANCE);
+                 [ 400.5, 553.5, 432.5, 568.5 ], TOLERANCE);
         });
 
         test("positioned left", function() {
@@ -1269,7 +1268,7 @@
             titleBox = plotArea.axisX.title.box;
 
             arrayClose([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
-                 [ 39, 546, 72, 564 ], TOLERANCE);
+                 [ 33, 553.5, 65, 568.5 ], TOLERANCE);
         });
 
         test("positioned right", function() {
@@ -1280,7 +1279,7 @@
             titleBox = plotArea.axisX.title.box;
 
             arrayClose([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
-                 [ 767, 546, 800, 564 ], TOLERANCE);
+                 [ 767, 553.5, 800, 568.5 ], TOLERANCE);
         });
 
         // ------------------------------------------------------------
@@ -1293,7 +1292,7 @@
 
         test("applied position center", function() {
             arrayClose([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
-                 [ 0, 270, 18, 303 ], TOLERANCE);
+                 [ 0, 272.5, 15, 303 ], TOLERANCE);
         });
 
         test("applied position bottom", function() {
@@ -1301,7 +1300,7 @@
             titleBox = plotArea.axisY.title.box;
 
             arrayClose([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
-                 [ 0, 540, 18, 573 ], TOLERANCE);
+                 [ 0, 545, 15, 577 ], TOLERANCE);
         });
 
         test("applied position top", function() {
@@ -1309,7 +1308,7 @@
             titleBox = plotArea.axisY.title.box;
 
             arrayClose([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
-                 [ 0, 0, 18, 33 ], TOLERANCE);
+                 [ 0, 0, 15, 33 ], TOLERANCE);
         });
 
         test("renders color", function() {
@@ -1334,7 +1333,7 @@
 
         test("applied position center", function() {
             arrayClose([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
-                 [ 25, 270, 43, 303 ], TOLERANCE);
+                 [ 21, 272.5, 36, 303 ], TOLERANCE);
         });
 
         test("applied position bottom", function() {
@@ -1345,7 +1344,7 @@
             titleBox = plotArea.axisY.title.box;
 
             arrayClose([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
-                 [ 25, 540, 43, 573 ], TOLERANCE);
+                 [ 21, 545, 36, 577 ], TOLERANCE);
         });
 
         test("applied position top", function() {
@@ -1356,7 +1355,7 @@
             titleBox = plotArea.axisY.title.box;
 
             arrayClose([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
-                 [ 25, 0, 43, 33 ], TOLERANCE);
+                 [ 21, 0, 36, 33 ], TOLERANCE);
         });
 
     })();
@@ -1505,7 +1504,6 @@
 
             plotArea = chart._model.children[1];
             label = plotArea.categoryAxis.labels[1];
-            $(getElement(label.options.id)).click();
         }
 
         // ------------------------------------------------------------

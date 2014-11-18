@@ -37,7 +37,7 @@
 
     function getTexts() {
         return $.map(getTextBoxes(), function(item) {
-            return dataviz.last(item.children);
+            return kendo.util.last(item.children);
         });
     }
 
@@ -1199,9 +1199,9 @@
             });
 
             closeTextPosition(false, getTexts(), [
-                [ 474.898, 193.63 ],
-                [ 522.764, 270.99 ],
-                [ 305.907, 388.934 ] ], TOLERANCE);
+                [ 473.898, 193.63 ],
+                [ 522.264, 270.99 ],
+                [ 304.407, 388.934 ] ], TOLERANCE);
         });
 
         test("insideEnd", function() {
@@ -1217,9 +1217,9 @@
             });
 
             closeTextPosition(false, getTexts(), [
-                [ 541.44, 113.704 ],
-                [ 625.353, 253.918 ],
-                [ 237.988, 467.693 ] ], TOLERANCE);
+                [ 540.440, 113.704 ],
+                [ 624.853, 253.918 ],
+                [ 236.488, 467.693 ] ], TOLERANCE);
         });
 
         test("outsideEnd", function() {
@@ -1232,7 +1232,7 @@
             closeTextPosition(false, getTexts(), [
                 [ 587.103, 82 ],
                 [ 673.133, 248 ],
-                [ 191.896, 502 ] ], TOLERANCE);
+                [ 188.896, 502 ] ], TOLERANCE);
         });
 
     })();

@@ -19,17 +19,19 @@ var __meta__ = {
         math = Math,
         proxy = $.proxy,
 
+        util = kendo.util,
+        last = util.last,
+        renderTemplate = util.renderTemplate,
+
         dataviz = kendo.dataviz,
-        defined = dataviz.defined,
+        defined = util.defined,
         filterSeriesByType = dataviz.filterSeriesByType,
         template = kendo.template,
         Chart = dataviz.ui.Chart,
         Selection = dataviz.Selection,
         addDuration = dataviz.addDuration,
-        last = dataviz.last,
-        limitValue = dataviz.limitValue,
+        limitValue = util.limitValue,
         lteDateIndex = dataviz.lteDateIndex,
-        renderTemplate = dataviz.renderTemplate,
         toDate = dataviz.toDate,
         toTime = dataviz.toTime;
 

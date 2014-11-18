@@ -8,7 +8,6 @@
         Chart = dataviz.ui.Chart,
         Box2D = dataviz.Box2D,
         Point2D = dataviz.Point2D,
-        Matrix = dataviz.Matrix,
         box,
         targetBox;
 
@@ -352,15 +351,6 @@
         deepEqual(point.multiply(2), point);
     });
 
-    test("transform applies matrix", function() {
-        deepEqual(point.transform(new Matrix(1,1,1,1,1,1)), new Point2D(31, 31));
-    });
-
-
-    test("transform returns point", function() {
-        deepEqual(point.transform(Matrix.unit), point);
-    });
-
     (function() {
         var sector;
 
@@ -522,55 +512,6 @@
             ok(!ring.containsPoint(point));
         });
     })();
-
-    (function() {
-        var pin;
-
-        module("Pin", {
-            setup: function() {
-                pin = new dataviz.Pin({
-                    origin: new Point2D(100, 200)
-                });
-            }
-        });
-
-        test("constructor sets origin", function() {
-            deepEqual([pin.origin.x, pin.origin.y], [100, 200]);
-        });
-    })();
-
-    // ------------------------------------------------------------
-    module("blendColors");
-
-    test("#fff, #99c62a with alpha 0.2 => #add155", function() {
-        equal(dataviz.blendColors("#99c62a", "#fff", 0.2), "#add155");
-    });
-
-    // ------------------------------------------------------------
-    var blendGradient = dataviz.blendGradient,
-        gradient;
-
-    module("blendGradient", {
-        setup: function() {
-            gradient = {
-                stops: [{
-                    offset: 0.05,
-                    color: "#fff",
-                    opacity: 0.2
-                }]
-            };
-        }
-    });
-
-    test("blend over #99c62a with alpha 0.2", function() {
-        var result = blendGradient("#99c62a", gradient);
-
-        deepEqual(result.stops[0], {
-            offset: 0.05,
-            color: "#add155",
-            opacity: 0
-        });
-    });
 
     // ------------------------------------------------------------
     var floorDate = dataviz.floorDate,
@@ -1081,163 +1022,6 @@
             ok(!areNumbers([1, 2, NaN]));
         });
 
-        test("sparseArrayLimits ignores undefined values", function() {
-            var l = dataviz.sparseArrayLimits([1, undefined, 2]);
-            equal(l.min, 1);
-            equal(l.max, 2);
-        });
-
-        test("sparseArrayLimits returns undefined for empty array", function() {
-            var l = dataviz.sparseArrayLimits([]);
-            equal(l.min, undefined);
-            equal(l.max, undefined)
-        });
-
-    })();
-
-    (function() {
-        var lru;
-
-        // ------------------------------------------------------------
-        module("LRUCache", {
-            setup: function() {
-                lru = new dataviz.LRUCache(4);
-                lru.put("a", 1);
-                lru.put("b", 2);
-                lru.put("c", 3);
-            }
-        });
-
-        test("put sets head", function() {
-            deepEqual(lru._head.value, 1);
-        });
-
-        test("put sets tail", function() {
-            deepEqual(lru._tail.value, 3);
-        });
-
-        test("put sets newer ref", function() {
-            equal(lru._head.newer.value, 2);
-        });
-
-        test("put sets older ref", function() {
-            equal(lru._tail.older.value, 2);
-        });
-
-        test("put does not clean last element if within size", function() {
-            lru.put("d", 4);
-            equal(lru._head.value, 1);
-        });
-
-        test("put cleans last element if exceeding size", function() {
-            lru.put("d", 4);
-            lru.put("e", 5);
-            equal(lru._head.value, 2);
-            deepEqual(lru._head.older, null);
-            deepEqual(lru._map["a"], null);
-        });
-
-        test("get retrieves value by key", function() {
-            equal(lru.get("a"), 1);
-        });
-
-        test("get retrieves single value", function() {
-            lru = new dataviz.LRUCache(1);
-            lru.put("a", 1);
-            equal(lru.get("a"), 1);
-        });
-
-        test("get moves head to tail", function() {
-            equal(lru.get("a"), 1);
-            equal(lru._tail.value, 1);
-        });
-
-        test("get patches head reference", function() {
-            equal(lru.get("a"), 1);
-            equal(lru._head.value, 2);
-            equal(lru._head.older, null);
-        });
-
-        test("get moves middle to tail", function() {
-            equal(lru.get("b"), 2);
-            equal(lru._tail.value, 2);
-        });
-
-        test("get patches middle references", function() {
-            equal(lru.get("b"), 2);
-            deepEqual(lru._head.newer.older, lru._head);
-        });
-
-        test("get keeps tail in place", function() {
-            equal(lru.get("c"), 3);
-            equal(lru._tail.value, 3);
-        });
-    })();
-
-    (function() {
-        // ------------------------------------------------------------
-        var pool;
-
-        module("IDPool", {
-            setup: function() {
-                pool = new dataviz.IDPool(3, "k", 100);
-            }
-        });
-
-        test("returns ascending IDs", function() {
-            equal(pool.alloc(), "k100");
-            equal(pool.alloc(), "k101");
-        });
-
-        test("reuses IDs", function() {
-            var id = pool.alloc();
-            pool.free(id);
-            equal(pool.alloc(), id);
-        });
-
-        test("pool does not grow beyond max size", function() {
-            for (var i = 0; i < 10; i++) {
-                pool.free("id" + i);
-            }
-
-            equal(pool._pool.length, 3);
-        });
-
-        test("freed does not grow beyond max size", function() {
-            var ids = [];
-
-            pool.free(pool.alloc());
-
-            for (var i = 0; i < 4; i++) {
-                ids.push(pool.alloc());
-            }
-
-            for (i = 0; i < 4; i++) {
-                pool.free(ids.pop());
-            }
-
-            var freed = 0;
-            for (var key in pool._freed) {
-                freed++;
-            };
-
-            equal(freed, 3);
-        });
-
-        test("pool does not accept duplicates", function() {
-            pool.free("foo");
-            pool.free("foo");
-
-            equal(pool._pool.length, 1);
-        });
-
-        test("pool clears duplicates after alloc", function() {
-            pool.free("foo");
-            pool.alloc();
-            pool.free("foo");
-
-            equal(pool._pool.length, 1);
-        });
     })();
 
     (function() {
@@ -1424,30 +1208,6 @@
 
     test("returns other types as-is", function() {
         equal(dataviz.decodeEntities(1), 1);
-    });
-
-
-    // ------------------------------------------------------------
-    append = dataviz.append;
-
-    module("append");
-
-    test("appends array to array", function() {
-        var arr = [1];
-        append(arr, [2, 3]);
-
-        deepEqual(arr, [1, 2, 3]);
-    });
-
-    test("calls push method", function() {
-        function Foo() { };
-        Foo.prototype.push = function() {
-            ok(true);
-        };
-
-        var foo = new Foo();
-
-        append(foo, []);
     });
 
     // ------------------------------------------------------------

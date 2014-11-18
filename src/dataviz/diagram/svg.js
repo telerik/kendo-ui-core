@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "../../kendo.drawing", "./math" ], f);
+    define([ "../../kendo.drawing", "../../kendo.util", "./math" ], f);
 })(function(){
 
 (function ($, undefined) {
@@ -23,7 +23,7 @@
         g = kendo.geometry,
         d = kendo.drawing,
 
-        defined = dataviz.defined,
+        defined = kendo.util.defined,
 
         inArray = $.inArray;
 

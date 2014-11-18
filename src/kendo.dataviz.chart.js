@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.data", "./kendo.userevents", "./kendo.dataviz.core", "./kendo.drawing", "./kendo.dataviz.themes" ], f);
+    define([ "./kendo.data", "./kendo.userevents", "./kendo.dataviz.core", "./kendo.drawing", "./kendo.util", "./kendo.dataviz.themes" ], f);
 })(function(){
 
 var __meta__ = {
@@ -51,7 +51,6 @@ var __meta__ = {
         ChartElement = dataviz.ChartElement,
         Color = kendo.drawing.Color,
         CurveProcessor = dataviz.CurveProcessor,
-        ElementAnimation = dataviz.ElementAnimation,
         FloatElement = dataviz.FloatElement,
         Note = dataviz.Note,
         LogarithmicAxis = dataviz.LogarithmicAxis,
@@ -65,22 +64,24 @@ var __meta__ = {
         TextBox = dataviz.TextBox,
         Title = dataviz.Title,
         alignPathToPixel = dataviz.alignPathToPixel,
-        animationDecorator = dataviz.animationDecorator,
-        append = dataviz.append,
         autoFormat = dataviz.autoFormat,
-        defined = dataviz.defined,
         dateComparer = dataviz.dateComparer,
-        getElement = dataviz.getElement,
         getSpacing = dataviz.getSpacing,
         inArray = dataviz.inArray,
         interpolate = dataviz.interpolateValue,
-        last = dataviz.last,
-        limitValue = dataviz.limitValue,
         mwDelta = dataviz.mwDelta,
         round = dataviz.round,
-        renderTemplate = dataviz.renderTemplate,
-        uniqueId = dataviz.uniqueId,
-        valueOrDefault = dataviz.valueOrDefault,
+
+        util = kendo.util,
+        append = util.append,
+        defined = util.defined,
+        last = util.last,
+        limitValue = util.limitValue,
+        sparseArrayLimits = util.sparseArrayLimits,
+        sparseArrayMin = util.sparseArrayMin,
+        sparseArrayMax = util.sparseArrayMax,
+        renderTemplate = util.renderTemplate,
+        valueOrDefault = util.valueOrDefault,
 
         geom = dataviz.geometry,
         draw = dataviz.drawing;
@@ -1771,8 +1772,6 @@ var __meta__ = {
             item.createContainer();
             item.createMarker();
             item.createLabel();
-
-            item.enableDiscovery();
         },
 
         createContainer: function() {
@@ -1800,10 +1799,7 @@ var __meta__ = {
         createLabel: function() {
             var item = this,
                 options = item.options,
-                labelOptions = deepExtend({}, options.labels, {
-                        id: uniqueId()
-                    }
-                );
+                labelOptions = deepExtend({}, options.labels);
 
             item.container.append(new TextBox(options.text, labelOptions));
         },
@@ -3035,8 +3031,6 @@ var __meta__ = {
             bar.color = options.color || WHITE;
             bar.aboveAxis = valueOrDefault(bar.options.aboveAxis, true);
             bar.value = value;
-            bar.id = uniqueId();
-            bar.enableDiscovery();
         },
 
         defaults: {
@@ -3439,7 +3433,6 @@ var __meta__ = {
             var chart = this;
 
             ChartElement.fn.init.call(chart, options);
-            chart.id = uniqueId();
 
             chart.plotArea = plotArea;
             chart.categoryAxis = plotArea.seriesCategoryAxis(options.series[0]);
@@ -4128,8 +4121,7 @@ var __meta__ = {
 
             return new BarLabel(labelText,
                 deepExtend({
-                    vertical: this.options.vertical,
-                    id: uniqueId()
+                    vertical: this.options.vertical
                 },
                 options
             ));
@@ -4379,7 +4371,6 @@ var __meta__ = {
                         vAlign: TOP,
                         align: RIGHT
                     });
-                    bullet.target.id = bullet.id;
 
                     bullet.append(bullet.target);
                 }
@@ -4677,7 +4668,6 @@ var __meta__ = {
 
             if (markers.visible && markers.size) {
                 point.marker = point.createMarker();
-                point.marker.id = point.id;
                 point.append(point.marker);
             }
 
@@ -4925,9 +4915,6 @@ var __meta__ = {
             segment.linePoints = linePoints;
             segment.series = series;
             segment.seriesIx = seriesIx;
-            segment.id = uniqueId();
-
-            segment.enableDiscovery();
         },
 
         options: {
@@ -5069,14 +5056,6 @@ var __meta__ = {
     };
 
     var LineChart = CategoricalChart.extend({
-        init: function(plotArea, options) {
-            var chart = this;
-
-            chart.enableDiscovery();
-
-            CategoricalChart.fn.init.call(chart, plotArea, options);
-        },
-
         render: function() {
             var chart = this;
 
@@ -5548,7 +5527,6 @@ var __meta__ = {
             var chart = this;
 
             ChartElement.fn.init.call(chart, options);
-            chart.id = uniqueId();
 
             chart.plotArea = plotArea;
 
@@ -6527,8 +6505,6 @@ var __meta__ = {
 
             ChartElement.fn.init.call(point, options);
             point.value = value;
-            point.id = uniqueId();
-            point.enableDiscovery();
 
             point.createNote();
         },
@@ -6741,9 +6717,6 @@ var __meta__ = {
             segment.sector = sector;
 
             ChartElement.fn.init.call(segment, options);
-
-            segment.id = uniqueId();
-            segment.enableDiscovery();
         },
 
         options: {
@@ -6803,7 +6776,6 @@ var __meta__ = {
 
             if (labels.visible && labelText) {
                 segment.label = new TextBox(labelText, deepExtend({}, labels, {
-                        id: uniqueId(),
                         align: CENTER,
                         vAlign: "",
                         animation: {
@@ -7050,7 +7022,6 @@ var __meta__ = {
                 colorsCount = colors.length,
                 series = options.series,
                 seriesCount = series.length,
-                overlayId = uniqueId(),
                 currentSeries, pointData, fields, seriesIx,
                 angle, data, anglePerValue, value, plotValue, explode,
                 total, currentAngle, i, pointIx = 0;
@@ -7095,9 +7066,6 @@ var __meta__ = {
                         explode: explode,
                         visibleInLegend: fields.visibleInLegend,
                         visible: fields.visible,
-                        overlay: {
-                            id: overlayId + seriesIx
-                        },
                         zIndex: seriesCount - seriesIx,
                         animationDelay: chart.animationDelay(i, seriesIx, seriesCount)
                     });
@@ -7705,7 +7673,6 @@ var __meta__ = {
             segment.from = from;
             segment.to = to;
             segment.series = series;
-            segment.id = uniqueId();
         },
 
         options: {
@@ -7762,7 +7729,7 @@ var __meta__ = {
             BoxElement.fn.init.call(pane, options);
 
             options = pane.options;
-            pane.id = uniqueId();
+            pane.id = kendo.guid();
 
             pane.createTitle();
 
@@ -8013,9 +7980,6 @@ var __meta__ = {
             plotArea.options.legend.items = [];
             plotArea.axes = [];
             plotArea.crosshairs = [];
-
-            plotArea.id = uniqueId();
-            plotArea.enableDiscovery();
 
             plotArea.createPanes();
             plotArea.render();
@@ -9810,9 +9774,6 @@ var __meta__ = {
     });
     draw.AnimationFactory.current.register(BUBBLE, BubbleAnimation);
 
-    var BarAnimationDecorator = animationDecorator(BAR, BarAnimation),
-        PieAnimationDecorator = animationDecorator(PIE, PieAnimation);
-
     var Highlight = Class.extend({
         init: function() {
             this._points = [];
@@ -11181,35 +11142,6 @@ var __meta__ = {
         }
     };
 
-    function sparseArrayMin(arr) {
-        return sparseArrayLimits(arr).min;
-    }
-
-    function sparseArrayMax(arr) {
-        return sparseArrayLimits(arr).max;
-    }
-
-    function sparseArrayLimits(arr) {
-        var min = MAX_VALUE,
-            max = MIN_VALUE,
-            i,
-            length = arr.length,
-            n;
-
-        for (i = 0; i < length; i++) {
-            n = arr[i];
-            if (n !== null && isFinite(n)) {
-                min = math.min(min, n);
-                max = math.max(max, n);
-            }
-        }
-
-        return {
-            min: min === MAX_VALUE ? undefined : min,
-            max: max === MIN_VALUE ? undefined : max
-        };
-    }
-
     function intersection(a1, a2, b1, b2) {
         var result,
             ua_t = (b2.x - b1.x) * (a1.y - b1.y) - (b2.y - b1.y) * (a1.x - b1.x),
@@ -11998,7 +11930,6 @@ var __meta__ = {
         AreaSegment: AreaSegment,
         AxisGroupRangeTracker: AxisGroupRangeTracker,
         Bar: Bar,
-        BarAnimationDecorator: BarAnimationDecorator,
         BarChart: BarChart,
         BarLabel: BarLabel,
         BubbleChart: BubbleChart,
@@ -12030,7 +11961,6 @@ var __meta__ = {
         LineSegment: LineSegment,
         Pane: Pane,
         PieAnimation: PieAnimation,
-        PieAnimationDecorator: PieAnimationDecorator,
         PieChart: PieChart,
         PieChartMixin: PieChartMixin,
         PiePlotArea: PiePlotArea,
@@ -12074,7 +12004,6 @@ var __meta__ = {
         seriesTotal: seriesTotal,
         singleItemOrArray: singleItemOrArray,
         sortDates: sortDates,
-        sparseArrayLimits: sparseArrayLimits,
         startOfWeek: startOfWeek,
         transpose: transpose,
         toDate: toDate,

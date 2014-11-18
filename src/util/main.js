@@ -55,10 +55,6 @@
         return radians / DEG_TO_RAD;
     }
 
-    function alignToPixel(coord) {
-        return math.round(coord) + 0.5;
-    }
-
     function isNumber(val) {
         return typeof val === "number" && !isNaN(val);
     }
@@ -234,7 +230,6 @@
             MAX_NUM: MAX_NUM,
             MIN_NUM: MIN_NUM,
 
-            alignToPixel: alignToPixel,
             append: append,
             arrayLimits: arrayLimits,
             arrayMin: arrayMin,

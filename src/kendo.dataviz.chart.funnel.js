@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.dataviz.chart", "./kendo.drawing" ], f);
+    define([ "./kendo.dataviz.chart", "./kendo.drawing", "./kendo.util" ], f);
 })(function(){
 
 var __meta__ = {
@@ -19,6 +19,9 @@ var __meta__ = {
         isFn = kendo.isFunction,
         template = kendo.template,
 
+        util = kendo.util,
+        append = util.append,
+
         draw = kendo.drawing,
         geom = kendo.geometry,
         dataviz = kendo.dataviz,
@@ -31,12 +34,10 @@ var __meta__ = {
         Box2D = dataviz.Box2D,
         SeriesBinder = dataviz.SeriesBinder,
         TextBox = dataviz.TextBox,
-        append = dataviz.append,
         autoFormat = dataviz.autoFormat,
         evalOptions = dataviz.evalOptions,
-        limitValue = dataviz.limitValue,
-        seriesTotal = dataviz.seriesTotal,
-        uniqueId = dataviz.uniqueId;
+        limitValue = util.limitValue,
+        seriesTotal = dataviz.seriesTotal;
 
     // Constants ==============================================================
     var CATEGORY = "category",
@@ -223,8 +224,7 @@ var __meta__ = {
                 chart.evalSegmentOptions(labels, value, fields);
 
                 textBox = new TextBox(text, deepExtend({
-                        vAlign: labels.position,
-                        id: uniqueId()
+                        vAlign: labels.position
                     }, labels)
                 );
 
@@ -353,9 +353,7 @@ var __meta__ = {
             ChartElement.fn.init.call(segment, options);
 
             segment.value = value;
-            segment.id = uniqueId();
             segment.options.index = segmentOptions.index;
-            segment.enableDiscovery();
         },
 
         options: {
@@ -413,8 +411,7 @@ var __meta__ = {
                 stroke: border.color,
                 strokeOpacity: border.opacity,
                 strokeWidth: border.width,
-                fillOpacity:hlOptions.opacity,
-                data: { modelId: this.modelId }
+                fillOpacity:hlOptions.opacity
             });
             var element = view.createPolyline(this.points,true,calcOptions);
             return element;

@@ -79,17 +79,6 @@
         );
 
         // ------------------------------------------------------------
-        module("Line Chart", {
-            setup: function() {
-                setupLineChart(plotArea, { series: [ positiveSeries ] });
-            }
-        });
-
-        test("generates unique id", function() {
-            ok(lineChart.id);
-        });
-
-        // ------------------------------------------------------------
         module("Line Chart / Values exceeding value axis min or max options ", {});
 
         test("values are not limited", 2, function() {

@@ -91,17 +91,6 @@
         );
 
         // ------------------------------------------------------------
-        module("Area Chart", {
-            setup: function() {
-                setupAreaChart(plotArea, { series: [ positiveSeries ] });
-            }
-        });
-
-        test("generates unique id", function() {
-            ok(areaChart.id);
-        });
-
-        // ------------------------------------------------------------
         module("Area Chart / Positive Values", {
             setup: function() {
                 setupAreaChart(plotArea, { series: [ positiveSeries ] });

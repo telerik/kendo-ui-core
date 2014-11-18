@@ -5,6 +5,7 @@ return;
     var view;
     var encodingStub;
     var dataviz = kendo.dataviz;
+    var measureText = kendo.drawing.util.measureText;
     var Barcode = dataviz.ui.Barcode;
 
     var EncodingStub = function(pattern) {
@@ -92,7 +93,7 @@ return;
     })();
 
     (function() {
-        var textHeight = dataviz.measureText("foo", {font: SANS12}).height;
+        var textHeight = measureText("foo", {font: SANS12}).height;
         var barHeight = 100 - 14 - (textHeight + 10);
         var bars;
 
@@ -169,7 +170,7 @@ return;
     })();
 
     (function() {
-        var textSize = dataviz.measureText("foo", {font: SANS12});
+        var textSize = measureText("foo", {font: SANS12});
         var text;
 
         function createBarcodeWithText(options) {
