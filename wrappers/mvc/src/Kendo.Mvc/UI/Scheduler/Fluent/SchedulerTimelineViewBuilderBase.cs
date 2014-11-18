@@ -225,5 +225,122 @@
 
             return (TTimelineViewBuilder)this;
         }
+
+        /// <summary>
+        /// The start time of the business hours. The scheduler will display events after the workDayStart if "WorkDayCommand" button is clicked.
+        /// </summary>
+        /// <param name="workDayStart">The WorkDayStart</param>
+        public TTimelineViewBuilder WorkDayStart(DateTime workDayStart)
+        {
+            view.WorkDayStart = workDayStart;
+
+            return (TTimelineViewBuilder)this;
+        }
+
+        /// <summary>
+        /// The start time of the business hours. The scheduler will display events after the workDayStart if "WorkDayCommand" button is clicked.
+        /// </summary>
+        /// <param name="hours">The hours</param>
+        /// <param name="minutes">The minutes</param>
+        /// <param name="seconds">The seconds</param>
+        public TTimelineViewBuilder WorkDayStart(int hours, int minutes, int seconds)
+        {
+            var today = DateTime.Today;
+
+            view.WorkDayStart = new DateTime(today.Year, today.Month, today.Day, hours, minutes, seconds);
+
+            return (TTimelineViewBuilder)this;
+        }
+
+        /// <summary>
+        /// The end time of the business hours. The scheduler will display events before the workDayEnd if "WorkDayCommand" button is clicked.
+        /// </summary>
+        /// <param name="workDayEnd">The WorkDayEnd</param>
+        public TTimelineViewBuilder WorkDayEnd(DateTime workDayEnd)
+        {
+            view.WorkDayEnd = workDayEnd;
+
+            return (TTimelineViewBuilder)this;
+        }
+
+        /// <summary>
+        /// The end time of the business hours. The scheduler will display events before the workDayEnd if "WorkDayCommand" button is clicked.
+        /// </summary>
+        /// <param name="hours">The hours</param>
+        /// <param name="minutes">The minutes</param>
+        /// <param name="seconds">The seconds</param>
+        public TTimelineViewBuilder WorkDayEnd(int hours, int minutes, int seconds)
+        {
+            var today = DateTime.Today;
+
+            view.WorkDayEnd = new DateTime(today.Year, today.Month, today.Day, hours, minutes, seconds);
+
+            return (TTimelineViewBuilder)this;
+        }
+
+        /// <summary>
+        /// If set to false the scheduler will not display the "WorkDayCommand" button. Default value is true.
+        /// </summary>
+        /// <param name="showWorkDayCommand">The showWorkDayCommand</param>
+        public TTimelineViewBuilder WorkDayCommand(bool showWorkDayCommand)
+        {
+            view.WorkDayCommand = showWorkDayCommand;
+
+            return (TTimelineViewBuilder)this;
+        }
+
+        /// <summary>
+        /// If set to true the view will be initially shown in business hours mode.
+        /// </summary>
+        /// <param name="value"></param>
+        public TTimelineViewBuilder ShowWorkHours(bool value)
+        {
+            view.ShowWorkHours = value;
+
+            return (TTimelineViewBuilder)this;
+        }
+
+        /// <summary>
+        /// If set the view will be initially shown in business hours mode.
+        /// </summary>
+        public TTimelineViewBuilder ShowWorkHours()
+        {
+            view.ShowWorkHours = true;
+
+            return (TTimelineViewBuilder)this;
+        }
+
+        /// <summary>
+        /// If set to false the scheduler will not display the "footer" area. Default value is true.
+        /// </summary>
+        /// <param name="showFooter">The footer</param>
+        public TTimelineViewBuilder Footer(bool showFooter)
+        {
+            view.Footer = showFooter;
+
+            return (TTimelineViewBuilder)this;
+        }
+
+        /// <summary>
+        /// Sets the start day of work week by index.
+        /// </summary>
+        /// <param name="workWeekStartDay">The workWeekStartDay</param>
+        public TTimelineViewBuilder WorkWeekStart(int workWeekStartDay)
+        {
+            view.WorkWeekStart = workWeekStartDay;
+
+            return (TTimelineViewBuilder)this;
+        }
+
+        /// <summary>
+        /// Sets the end day of work week by index.
+        /// </summary>
+        /// <param name="workWeekEndDay">The workWeekEndDay</param>
+        public TTimelineViewBuilder WorkWeekEnd(int workWeekEndDay)
+        {
+            view.WorkWeekEnd = workWeekEndDay;
+
+            return (TTimelineViewBuilder)this;
+        }
     }
 }

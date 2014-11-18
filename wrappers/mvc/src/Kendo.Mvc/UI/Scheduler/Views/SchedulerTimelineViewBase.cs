@@ -8,6 +8,9 @@
         protected SchedulerTimelineViewBase(SchedulerViewType type, IScheduler scheduler) 
             : base(type, scheduler)
         {
+            WorkDayCommand = true;
+            Footer = true;
+            ShowWorkHours = scheduler.ShowWorkHours;
         }
 
         public int? EventHeight
@@ -41,6 +44,48 @@
         }
 
         public DateTime? EndTime
+        {
+            get;
+            set;
+        }
+
+        public DateTime? WorkDayStart
+        {
+            get;
+            set;
+        }
+
+        public DateTime? WorkDayEnd
+        {
+            get;
+            set;
+        }
+
+        public bool ShowWorkHours
+        {
+            get;
+            set;
+        }
+
+        public bool WorkDayCommand
+        {
+            get;
+            set;
+        }
+
+        public bool Footer
+        {
+            get;
+            set;
+        }
+
+        public int? WorkWeekStart
+        {
+            get;
+            set;
+        }
+
+        public int? WorkWeekEnd
         {
             get;
             set;
@@ -102,6 +147,38 @@
             if (EndTime != null)
             {
                 json["endTime"] = EndTime;
+            }
+
+            if (WorkDayStart != null)
+            {
+                json["workDayStart"] = WorkDayStart;
+            }
+
+            if (WorkDayEnd != null)
+            {
+                json["workDayEnd"] = WorkDayEnd;
+            }
+
+            if (!Footer)
+            {
+                json["footer"] = Footer;
+            }
+
+            if (!WorkDayCommand && Footer)
+            {
+                json["footer"] = new Dictionary<string, object>() {
+                    { "command", false }
+                };
+            }
+
+            if (WorkWeekStart != null)
+            {
+                json["workWeekStart"] = WorkWeekStart;
+            }
+
+            if (WorkWeekEnd != null)
+            {
+                json["workWeekEnd"] = WorkWeekEnd;
             }
         }
     }
