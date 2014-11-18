@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "../util/main" ], f);
+    define([ "./core", "../util/main" ], f);
 })(function(){
 
 (function ($) {
