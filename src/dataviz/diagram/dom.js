@@ -162,7 +162,8 @@
                 height: DEFAULT_SHAPE_HEIGHT,
                 hover: {},
                 editable: {
-                    connect: true
+                    connect: true,
+                    tools: []
                 },
                 connectors: diagram.DefaultConnectors,
                 rotation: {
@@ -1542,6 +1543,7 @@
 
                 that._initialize();
                 that._fetchFreshData();
+                that._createGlobalToolBar();
                 that._resizingAdorner = new ResizingAdorner(that, { editable: that.options.editable });
                 that._connectorsAdorner = new ConnectorsAdorner(that);
 
@@ -1580,7 +1582,8 @@
                 editable: {
                     rotate: {},
                     resize: {},
-                    text: true
+                    text: true,
+                    tools: []
                 },
                 pannable: {
                     key: "ctrl"
@@ -1600,7 +1603,11 @@
                     angle: 10
                 },
                 shapeDefaults: diagram.shapeDefaults({ undoable: true }),
-                connectionDefaults: {},
+                connectionDefaults: {
+                    editable: {
+                        tools: []
+                    }
+                },
                 shapes: [],
                 connections: []
             },
@@ -1624,6 +1631,10 @@
 
             _createGlobalToolBar: function() {
                 var tools = this.options.editable.tools;
+                if (this._isEditable && tools.length === 0) {
+                    tools = ["createShape", "undo", "redo", "rotateClockwise", "rotateAnticlockwise"];
+                }
+
                 if (tools && tools.length) {
                     this.toolBar = new DiagramToolBar(this, {
                         tools: tools || {},
@@ -1757,7 +1768,6 @@
 
 
                 this.scrollable = $("<div />").appendTo(this.element);
-                this._createGlobalToolBar();
             },
 
             _initShapeDefaults: function() {
@@ -1831,9 +1841,7 @@
                         } else {
                             this.select(item, { addToSelection: true });
                         }
-                        if (this._isEditable) {
-                            this._createToolBar();
-                        }
+                        this._createToolBar();
                     }
                     this.trigger("click", {
                         item: item,
@@ -1899,7 +1907,9 @@
                     this.canvas.size(size);
                 }
 
-                this.toolBar._toolBar.element.width(this.element.width());
+                if (this.toolBar) {
+                    this.toolBar._toolBar.element.width(this.element.width());
+                }
             },
 
             _mouseover: function(e) {
@@ -3111,9 +3121,7 @@
             _mouseUp: function (e) {
                 var p = this._calculatePosition(e);
                 if (e.which == 1 && this.toolService.end(p, this._meta(e))) {
-                    if (this._isEditable) {
-                        this._createToolBar();
-                    }
+                    this._createToolBar();
                     e.preventDefault();
                 }
             },
@@ -3125,6 +3133,14 @@
                     var element = diagram.select()[0];
                     if (element) {
                         var tools = element.options.editable.tools;
+                        if (this._isEditable && tools.length === 0) {
+                            if (element instanceof Shape) {
+                                tools = ["edit", "rotateClockwise", "rotateAnticlockwise", "delete"];
+                            } else if (element instanceof Connection) {
+                                tools = ["edit", "delete"];
+                            }
+                        }
+
                         if (tools) {
                             var padding = 20;
                             var point;
@@ -3141,7 +3157,6 @@
                                 point = Point(shapeBounds.x, shapeBounds.y).minus(Point(
                                     (popupWidth - shapeBounds.width) / 2,
                                     popupHeight + padding));
-
                             } else if (element instanceof Connection) {
                                 var connectionBounds = this.modelToView(element.bounds());
 
@@ -3986,7 +4001,10 @@
                 this.element = null;
                 this.options = null;
 
-                this._toolBar.destroy();
+                if (this._toolBar) {
+                    this._toolBar.destroy();
+                }
+
                 if (this._popup) {
                     this._popup.destroy();
                 }

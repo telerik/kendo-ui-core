@@ -312,9 +312,6 @@ var __meta__ = {
             },
             stroke: {
                 width: 0
-            },
-            editable: {
-                tools: ["edit", "rotateClockwise", "rotateAnticlockwise", "delete"]
             }
         },
         editable: {
@@ -323,8 +320,7 @@ var __meta__ = {
                     width: 7,
                     height: 7
                 }
-            },
-            tools: ["createShape", "undo", "redo", "rotateClockwise", "rotateAnticlockwise"]
+            }
         },
         selectable: {
             stroke: {
@@ -3170,7 +3166,7 @@ var __meta__ = {
             ]
         }
     });
-    
+
     registerTheme("materialblack", {
        chart: {
             title: {
