@@ -23,9 +23,9 @@
     .PageSizes(true)
     .ButtonCount(5))
     .DataSource(dataSource => dataSource
-    .Ajax()
-    .PageSize(20)
-    .Read(read => read.Action("Customers_Read", "Grid"))
+        .Ajax()
+        .PageSize(20)
+        .Read(read => read.Action("Customers_Read", "Grid"))
     )
 )
 
