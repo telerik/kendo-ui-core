@@ -2,58 +2,85 @@
             <div id="gauge-container">
                 <div id="gauge"></div>
             </div>
+            
+            <div class="box">
+                <div class="box-col">
+                    <h4>Red pointer value</h4>
+                        <input id="gauge-value0" class="slider" value="10" style="width: 220px;">
+                    <h4 style="margin-top: 30px;">Get all pointer values</h4>
+                    <button id="getValues" class="k-button">Get all</button>
+                </div>
+                <div class="box-col">
+                    <h4>Orange pointer value</h4>
+                        <input id="gauge-value1" class="slider" value="70" style="width: 220px;">
+                            
+                    <h4 style="margin-top: 30px;">Set all pointer values</h4>
+                    <input id="newValues" class="k-textbox" value="100, 10, 80" style="width: 110px;" />
+                    <button id="setValues" class="k-button">Set all</button>
+                </div>
+                <div class="box-col">
+                    <h4>Yellow pointer value</h4>
+                        <input id="gauge-value2" class="slider" value="140" style="width: 220px;">
+                </div>
+            </div>
 
             <script>
-                function createGauges() {
-                    var value = $("#gauge-value").val();
-
+                function createGauge() {
                     $("#gauge").kendoLinearGauge({
                         pointer: [{
                             value: 10,
-                            shape: "arrow",
-                            color: "#c20000"
+                            color: "#c20000",
+                            shape: "arrow"
                         }, {
-                            value: 50,
+                            value: 70,
                             color: "#ff7a00",
                             margin: 10
                         }, {
-                            value: 30,
+                            value: 140,
                             color: "#ffc700"
-                        }, {
-                            value: 45,
-                            color: "#428bca",
-                            shape: "arrow"
                         }],
                         scale: {
-                            majorUnit: 20,
-                            minorUnit: 2,
-                            min: -40,
-                            max: 60,
-                            vertical: true,
-                            ranges: [
-                                {
-                                    from: -40,
-                                    to: -20,
-                                    color: "#2798df"
-                                }, {
-                                    from: 30,
-                                    to: 45,
-                                    color: "#ffc700"
-                                }, {
-                                    from: 45,
-                                    to: 60,
-                                    color: "#c20000"
-                                }
-                            ]
+                            minorUnit: 5,
+                            min: 0,
+                            max: 180,
+                            vertical: true
                         }
                     });
                 }
 
-                $(document).ready(function() {
-                    createGauges();
+                $(document).ready(function () {
+                    createGauge();
 
-                    $(document).bind("kendo:skinChange", function(e) {
-                        createGauges();
+                    $("#example .slider").each(function () {
+                        $(this).kendoSlider({
+                            min: 0,
+                            max: 180,
+                            showButtons: false,
+                            change: function () {
+                                var id = this.element.attr("id");
+                                var pointerIndex = id.substr(id.length - 1);
+                                var gauge = $("#gauge").data("kendoLinearGauge");
+                                gauge.pointers[pointerIndex].value(this.value());
+                            }
+                        });
+                    });
+
+                    $("#getValues").click(function () {
+                        alert("All values: " + $("#gauge").data("kendoLinearGauge").allValues().join(", "));
+                    });
+
+                    $("#setValues").click(function () {
+                        var values = $("#newValues").val().split(",");
+
+                        values = $.map(values, function (val) {
+                            return parseInt(val);
+                        });
+
+                        $("#gauge").data("kendoLinearGauge").allValues(values);
+                    });
+
+                    $(document).bind("kendo:skinChange", function (e) {
+                        createGauge();
                     });
                 });
             </script>
