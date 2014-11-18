@@ -3232,6 +3232,9 @@ var __meta__ = {
                     _brightness: 1
                 }
             },
+            chartArea: {
+                background: "#1c1c1c"
+            },
             seriesColors: ["#3f51b5", "#03a9f4", "#4caf50", "#f9ce1d", "#ff9800", "#ff5722"],
             axisDefaults: {
                 line: {
