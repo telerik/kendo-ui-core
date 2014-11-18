@@ -154,16 +154,17 @@
 
         updateTheme: function(e) {
             var themeName = e.item.value;
-            ThemeChooser.changeTheme(themeName, true);
-
             var commonFile = ThemeChooser.getCommonUrl();
+
             if (/material/i.test(themeName) && !/material/i.test(commonFile)) {
-                ThemeChooser.replaceCommon("common-material");
+                commonFile = "common-material";
             } else if (/bootstrap/i.test(themeName) && !/bootstrap/i.test(commonFile)) {
-                ThemeChooser.replaceCommon("common-bootstrap");
+                commonFile = "common-bootstrap";
             } else if (!/material|bootstrap/i.test(themeName)) {
-                ThemeChooser.replaceCommon("common");
+                commonFile = "common";
             }
+
+            ThemeChooser.changeThemePair(themeName, commonFile, true);
         },
 
         setMobileTheme: function(themeName) {
@@ -186,12 +187,17 @@
 
     extend(ThemeChooser, {
         preloadStylesheet: function (file, callback) {
-            var element = $("<link rel='stylesheet' media='print' href='" + file + "' />").appendTo("head");
+            var deferred = $.Deferred();
+            var element = $("<link rel='stylesheet' media='print' href='" + file + "' />");
+            element.appendTo("head");
+            deferred.then(callback);
 
             setTimeout(function () {
-                callback();
+                deferred.resolve();
                 element.remove();
             }, 100);
+
+            return deferred.promise();
         },
 
         getCurrentCommonLink: function () {
@@ -331,11 +337,19 @@
         animateCssChange: function(options) {
             options = $.extend({ complete: $.noop, replace: $.noop }, options);
 
-            if (options.prefetch == options.link.attr("href")) {
+            if (options.link && options.prefetch == options.link.attr("href")) {
                 return;
             }
 
-            ThemeChooser.preloadStylesheet(options.prefetch, function () {
+            var stylesLoaded;
+
+            if ($.isArray(options.prefetch)) {
+                stylesLoaded = $.when.apply($, options.prefetch);
+            } else {
+                stylesLoaded = ThemeChooser.preloadStylesheet(options.prefetch);
+            }
+
+            stylesLoaded.then(function() {
                 var example = $("#example");
 
                 example.kendoStop().kendoAnimate(extend({}, animation.hide, {
@@ -350,6 +364,8 @@
                                     .css("visibility", "visible")
                                     .kendoStop()
                                     .kendoAnimate(animation.show);
+
+                                kendo.resize(example, true);
 
                                 options.complete();
                             }, 100);
@@ -385,6 +401,19 @@
             } else {
                 ThemeChooser.replaceTheme(themeName);
             }
+        },
+
+        changeThemePair: function(themeName, commonName, animate) {
+            ThemeChooser.animateCssChange({
+                prefetch: [
+                    ThemeChooser.getCommonUrl(commonName),
+                    ThemeChooser.getThemeUrl(themeName)
+                ],
+                replace: function() {
+                    ThemeChooser.replaceCommon(commonName);
+                    ThemeChooser.replaceTheme(themeName);
+                }
+            });
         }
     });
 
