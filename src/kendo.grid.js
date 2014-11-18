@@ -67,7 +67,7 @@ var __meta__ = {
         id: "grid-pdf-export",
         name: "PDF export",
         description: "Export grid data as PDF",
-        depends: [ "pdf" ]
+        depends: [ "pdf", "drawing" ]
     } ]
 };
 

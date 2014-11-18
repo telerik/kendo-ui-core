@@ -17,7 +17,13 @@
         name: "Diagram",
         category: "dataviz",
         description: "The Kendo DataViz Diagram ",
-        depends: [ "data", "userevents", "mobile.scroller", "draganddrop", "dataviz.core", "drawing" ]
+        depends: [ "data", "userevents", "mobile.scroller", "draganddrop", "dataviz.core", "drawing" ],
+        features: [{
+            id: "dataviz.diagram-pdf-export",
+            name: "PDF export",
+            description: "Export Diagram as PDF",
+            depends: [ "pdf" ]
+        }]
     };
 
 }, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

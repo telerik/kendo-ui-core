@@ -1,5 +1,5 @@
 (function(f, define) {
-    define([ "./tile", "../../../kendo.util" ], f);
+    define([ "./tile", "../../../util/main" ], f);
 })(function() {
 
 (function ($, undefined) {
