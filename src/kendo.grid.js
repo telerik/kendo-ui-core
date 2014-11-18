@@ -1496,17 +1496,14 @@ var __meta__ = {
             result.columns = kendo.deepExtend([], this.columns);
             var dataSource = this.dataSource;
 
-            result.dataSource = $.extend(
-                true,
-                {},
-                dataSource.options, {
-                    page: dataSource.page(),
-                    filter: dataSource.filter(),
-                    pageSize: dataSource.pageSize(),
-                    sort: dataSource.sort(),
-                    group: dataSource.group(),
-                    aggregate: dataSource.aggregate()
-                });
+            result.dataSource = $.extend( true, {}, dataSource.options);
+
+            result.dataSource.page = dataSource.page();
+            result.dataSource.filter = dataSource.filter();
+            result.dataSource.pageSize = dataSource.pageSize();
+            result.dataSource.sort = dataSource.sort();
+            result.dataSource.group = dataSource.group();
+            result.dataSource.aggregate = dataSource.aggregate();
 
             result.$angular = undefined;
 
