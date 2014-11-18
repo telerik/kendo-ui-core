@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.dataviz.chart", "./kendo.drawing", "./kendo.util" ], f);
+    define([ "./kendo.dataviz.chart", "./kendo.drawing" ], f);
 })(function(){
 
 var __meta__ = {

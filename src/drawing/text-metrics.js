@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "../kendo.util" ], f);
+    define([ ], f);
 })(function(){
 
 (function ($) {
