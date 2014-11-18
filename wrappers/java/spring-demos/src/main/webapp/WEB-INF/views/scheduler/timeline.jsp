@@ -53,7 +53,7 @@
 
 %>
 <demo:header />
-    <kendo:scheduler name="scheduler" timezone="Etc/UTC" date="<%= date %>" startTime="<%= startTime %>" footer="false">
+    <kendo:scheduler name="scheduler" timezone="Etc/UTC" date="<%= date %>" startTime="<%= startTime %>">
     	<kendo:scheduler-views>  
 			<kendo:scheduler-view type="timeline" eventHeight="50" majorTick="60" />
 			<kendo:scheduler-view type="timelineWeek" eventHeight="50"  majorTick="60" />

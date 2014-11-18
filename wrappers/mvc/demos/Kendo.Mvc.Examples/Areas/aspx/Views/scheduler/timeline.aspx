@@ -15,7 +15,6 @@
             timeline.StartTime(new DateTime(2013, 6, 13, 00, 00, 00));
             timeline.EndTime(new DateTime(2013, 6, 13, 00, 00, 00));
             timeline.MajorTick(1440);
-            timeline.Footer(false);
             timeline.EventHeight(50);
         });
     })

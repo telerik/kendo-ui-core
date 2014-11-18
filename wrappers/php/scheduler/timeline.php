@@ -176,7 +176,7 @@ $scheduler->timezone("Etc/UTC")
         ->addView(array('type' => 'timeline', 'eventHeight' => 50, 'majorTick' => 60, 'startTime' => new DateTime('2013/6/13 7:00')),
             array('type' => 'timelineWeek', 'eventHeight' => 50, 'majorTick' => 60, 'startTime' => new DateTime('2013/6/13 7:00')),
             array('type' => 'timelineWorkWeek', 'eventHeight' => 50, 'majorTick' => 60, 'startTime' => new DateTime('2013/6/13 7:00')),
-            array('type' => 'timelineMonth', 'eventHeight' => 50, 'majorTick' => 1440, 'footer' => false))
+            array('type' => 'timelineMonth', 'eventHeight' => 50, 'majorTick' => 1440))
         ->dataSource($dataSource);
 
 echo $scheduler->render();
