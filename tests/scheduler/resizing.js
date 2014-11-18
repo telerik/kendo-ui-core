@@ -317,6 +317,7 @@
     test("timeline dragging and dropping the east resize handle changes allDay event to regular one", function() {
         var scheduler = new kendo.ui.Scheduler(div, {
             date: new Date("2013/2/3"),
+            majorTick: 240,
             views: ["timelineWeek"],
             dataSource: [
                 { start: new Date("2013/2/3 00:00"), end: new Date("2013/2/3 00:00"), title: "", isAllDay: true }
@@ -338,6 +339,7 @@
     test("timeline dragging and dropping the west resize handle changes allDay event to regular one", function() {
         var scheduler = new kendo.ui.Scheduler(div, {
             date: new Date("2013/2/3"),
+            majorTick: 240,
             views: ["timelineWeek"],
             dataSource: [
                 { start: new Date("2013/2/3 00:00"), end: new Date("2013/2/3 00:00"), title: "", isAllDay: true }

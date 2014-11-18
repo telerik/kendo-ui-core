@@ -320,7 +320,6 @@ var __meta__ = {
             columnWidth: 100,
             groupHeaderTemplate: "#=text#",
             majorTimeHeaderTemplate: "#=kendo.toString(date, 't')#",
-            minorTimeHeaderTemplate: "&nbsp;",
             slotTemplate: "&nbsp;",
             eventTemplate: EVENT_TEMPLATE,
             dateHeaderTemplate: DATA_HEADER_TEMPLATE,
@@ -1520,7 +1519,7 @@ var __meta__ = {
                 name: "TimelineWeekView",
                 title: "Timeline Week",
                 selectedDateFormat: "{0:D} - {1:D}",
-                majorTick: 240
+                majorTick: 120
             },
             name: "timelineWeek",
             calculateDateRange: function() {
@@ -1541,7 +1540,7 @@ var __meta__ = {
                 name: "TimelineWorkWeekView",
                 title: "Timeline Work Week",
                 selectedDateFormat: "{0:D} - {1:D}",
-                majorTick: 240
+                majorTick: 120
             },
             name: "timelineWorkWeek",
             nextDate: function() {
@@ -1568,6 +1567,9 @@ var __meta__ = {
                 name: "TimelineMonthView",
                 title: "Timeline Month",
                 selectedDateFormat: "{0:D} - {1:D}",
+                workDayStart: new Date(1980, 1, 1, 0, 0, 0),
+                workDayEnd: new Date(1980, 1, 1, 0, 0, 0),
+                footer: false,
                 majorTick: 1440,
                 minorTickCount: 1
             },

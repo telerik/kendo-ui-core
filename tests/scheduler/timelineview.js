@@ -12,10 +12,22 @@
     }
 
     function setupWeek(options) {
+        var options = options || {};
+
+        options = $.extend({
+            majorTick: 240
+        }, options);
+
         return new TimelineWeekView(container, options);
     }
 
     function setupMonth(options) {
+        var options = options || {};
+
+        options = $.extend({
+            majorTick: 1440
+        }, options);
+
         return new TimelineMonthView(container, options);
     }
 
