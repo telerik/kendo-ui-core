@@ -1,6 +1,5 @@
 (function(f, define){
     define([
-        "./kendo.color",
         "./mixins/observers",
         "./geometry/main",
         "./drawing/core",

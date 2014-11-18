@@ -1,7 +1,6 @@
 (function(f, define){
     define([
         "../kendo.core",
-        "../kendo.color",
         "../kendo.pdf",
         "./shapes"
     ], f);
