@@ -1157,10 +1157,9 @@ var __meta__ = {
 
             if (resources.length) {
                 if (this._groupOrientation() === "vertical") {
-                    return this._rowCountForLevel(this.rowLevels.length - 1);
+                    return this._rowCountForLevel(resources.length - 1);
                 } else {
-                    //update this if date headers is option
-                    return this._columnCountForLevel(this.columnLevels.length - 4);
+                    return this._columnCountForLevel(resources.length -1);
                 }
             }
             return 1;
@@ -1197,12 +1196,6 @@ var __meta__ = {
             var ranges = group.slotRanges(adjustedEvent.occurrence, false);
 
             this._removeMoveHint();
-
-            //if (!multiday && (getMilliseconds(end) === 0 || getMilliseconds(end) < getMilliseconds(this.startTime()))) {
-            //    if (ranges.length > 1) {
-            //        ranges.pop();
-            //    }
-            //}
 
             for (var rangeIndex = 0; rangeIndex < ranges.length; rangeIndex++) {
                 var range = ranges[rangeIndex];
