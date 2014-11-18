@@ -18,6 +18,7 @@ var __meta__ = {
     var Widget = kendo.ui.Widget;
     var DataSource = kendo.data.DataSource;
     var ObservableObject = kendo.data.ObservableObject;
+    var ObservableArray = kendo.data.ObservableArray;
     var Query = kendo.data.Query;
     var isArray = $.isArray;
     var inArray = $.inArray;
@@ -2551,7 +2552,7 @@ var __meta__ = {
             var applyTaskResource = function(task, action) {
                 var taskId = task.get("id");
 
-                kendo.setter(resources.field)(task, []);
+                kendo.setter(resources.field)(task, new ObservableArray([]));
 
                 for (var i = 0, length = assigments.length; i < length; i++) {
                     if (assigments[i].value === taskId) {
