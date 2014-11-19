@@ -13,7 +13,7 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
     "lt": "Menor que",
     "neq": "Diferente"
   },
-  "enum": {
+  "enums": {
     "eq": "Igual",
     "neq": "Diferente"
   },
@@ -49,7 +49,7 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
     "lt": "Menor que",
     "neq": "Diferente"
   },
-  "enum": {
+  "enums": {
     "eq": "Igual",
     "neq": "Diferente"
   },

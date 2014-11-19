@@ -13,7 +13,7 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
     "lte": "Is op of voor",
     "neq": "Is ongelijk aan"
   },
-  "enum": {
+  "enums": {
     "eq": "Is gelijk aan",
     "neq": "Is ongelijk aan"
   },
@@ -49,7 +49,7 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
     "lte": "Is op of voor",
     "neq": "Is ongelijk aan"
   },
-  "enum": {
+  "enums": {
     "eq": "Is gelijk aan",
     "neq": "Is ongelijk aan"
   },

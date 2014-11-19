@@ -29,7 +29,7 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
     "neq": "Är inte lika med",
     "startswith": "Börjar med"
   },
-  "enum": {
+  "enums": {
     "eq": "Är lika med",
     "neq": "Är inte lika med"
   }
@@ -65,7 +65,7 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
     "neq": "Är inte lika med",
     "startswith": "Börjar med"
   },
-  "enum": {
+  "enums": {
     "eq": "Är lika med",
     "neq": "Är inte lika med"
   }
