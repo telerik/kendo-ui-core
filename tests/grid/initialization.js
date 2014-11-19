@@ -1970,6 +1970,50 @@
         equal(grid.tbody.find(".k-detail-row>.k-detail-cell").attr("colspan"), "2");
     });
 
+    test("group cell is visible when initially hidden grid is shown", function() {
+
+        $(table).hide();
+
+        var grid = new Grid(table, {
+            dataSource: {
+                data: [{ foo: 1, bar: "bar"}],
+                group: { field: "bar" }
+            },
+            columns: [
+                { field: "bar" },
+                {title: "bar" }
+            ]
+        });
+
+        $(table).show();
+
+        grid.refresh();
+
+        equal(grid.thead.find("th:visible").length, 3);
+    });
+
+    test("group cell is visible when initially hidden grid is shown with filter row", function() {
+
+        $(table).hide();
+
+        var grid = new Grid(table, {
+            dataSource: {
+                data: [{ foo: 1, bar: "bar"}],
+                group: { field: "bar" }
+            },
+            filterable: { mode: "row" },
+            columns: [
+                { field: "bar" },
+                {title: "bar" }
+            ]
+        });
+
+        $(table).show();
+
+        grid.refresh();
+
+        equal(grid.thead.find("th:visible").length, 6);
+    });
     test("group cell colspan depends on visible columns - multiline headers", function() {
         var grid = new Grid(table, {
             dataSource: {

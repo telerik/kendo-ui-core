@@ -5694,13 +5694,15 @@ var __meta__ = {
                 container = that._isLocked() ? that.lockedHeader.find("thead") : that.thead,
                 filterCells = container.find("tr.k-filter-row").find("th.k-group-cell").length,
                 length = container.find("tr:first").find("th.k-group-cell").length,
-                rows = container.children("tr").filter(function() {
+                rows = container.children("tr:not(:first)").filter(function() {
                     return !$(this).children(":visible").length;
                 });
 
             if(groups > length) {
                 $(new Array(groups - length + 1).join('<th class="k-group-cell k-header">&nbsp;</th>')).prependTo(container.children("tr:not(.k-filter-row)"));
-                rows.find("th.k-group-cell").hide();
+                if (that.element.is(":visible")) {
+                    rows.find("th.k-group-cell").hide();
+                }
             } else if(groups < length) {
                 container.find("tr").each(function() {
                     $(this).find("th.k-group-cell")
