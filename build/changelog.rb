@@ -28,7 +28,7 @@ class Issue
     end
 
     def framework_construct?
-        @labels.join(" ") =~ /\b(View|Application|Popup|FX)\b/
+        @labels.join(" ") =~ /\b(View|Popup|FX)\b/
     end
 end
 
