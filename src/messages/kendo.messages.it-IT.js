@@ -29,7 +29,7 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
     "neq": "Non è uguale a",
     "startswith": "Inizia con"
   },
-  "enum": {
+  "enums": {
     "eq": "È uguale a",
     "neq": "Non è uguale a"
   }
@@ -65,7 +65,7 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
     "neq": "Non è uguale a",
     "startswith": "Inizia con"
   },
-  "enum": {
+  "enums": {
     "eq": "È uguale a",
     "neq": "Non è uguale a"
   }
