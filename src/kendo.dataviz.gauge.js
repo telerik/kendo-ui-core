@@ -194,7 +194,7 @@ var __meta__ = {
             var that = this;
             var center = that.center = arc.center;
             var radius = that.radius = arc.getRadiusX();
-            var capSize = that.capSize = radius * that.options.cap.size;
+            var capSize = that.capSize = Math.round(radius * that.options.cap.size);
 
             that.bbox = Rect.fromPoints(new Point(center.x - capSize, center.y - capSize),
                                         new Point(center.x + capSize, center.y + capSize));
