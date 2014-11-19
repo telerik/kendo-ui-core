@@ -84,7 +84,7 @@
                     }
                 });
 
-                $("#gantt").kendoGantt({
+                var gantt = $("#gantt").kendoGantt({
                     dataSource: tasksDataSource,
                     dependencies: dependenciesDataSource,
                     views: [
@@ -104,6 +104,10 @@
                     showWorkDays: false,
 
                     snap: false
+                }).data("kendoGantt");
+
+                $(document).bind("kendo:skinChange", function() {
+                    gantt.refresh();
                 });
             });
         </script>

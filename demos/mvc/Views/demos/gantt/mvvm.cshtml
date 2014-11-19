@@ -137,6 +137,9 @@
                 })
             });
             kendo.bind($("#example"), viewModel);
+            $(document).bind("kendo:skinChange", function() {
+                $("#example div[data-role='gantt']").data("kendoGantt").refresh();
+            });
         </script>
     </div>
 

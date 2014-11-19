@@ -226,7 +226,7 @@
                 }
             });
 
-            $("#gantt").kendoGantt({
+            var gantt = $("#gantt").kendoGantt({
                 dataSource: tasksDataSource,
                 dependencies: dependenciesDataSource,
                 views: [
@@ -246,6 +246,10 @@
 
                 showWorkHours: false,
                 showWorkDays: false
+            }).data("kendoGantt");
+
+            $(document).bind("kendo:skinChange", function() {
+                gantt.refresh();
             });
 
             $(document.body).keydown(function(e) {

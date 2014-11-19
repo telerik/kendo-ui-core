@@ -155,7 +155,7 @@
                     }
                 });
 
-                $("#gantt").kendoGantt({
+                var gantt = $("#gantt").kendoGantt({
                     dataSource: tasksDataSource,
                     dependencies: dependenciesDataSource,
                     views: [
@@ -189,6 +189,10 @@
                     resizeStart: onResizeStart,
                     resize: onResize,
                     resizeEnd: onResizeEnd
+                }).data("kendoGantt");
+
+                $(document).bind("kendo:skinChange", function() {
+                    gantt.refresh();
                 });
             });
         </script>
