@@ -13,7 +13,7 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
     "lte": "É anterior ou igual a",
     "neq": "Não é igual a"
   },
-  "enum": {
+  "enums": {
     "eq": "É igual a",
     "neq": "Não é igual a"
   },
@@ -49,7 +49,7 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
     "lte": "É anterior ou igual a",
     "neq": "Não é igual a"
   },
-  "enum": {
+  "enums": {
     "eq": "É igual a",
     "neq": "Não é igual a"
   },

@@ -29,7 +29,7 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
     "contains": "Contiene",
     "doesnotcontain": "No contiene"
   },
-  "enum": {
+  "enums": {
     "eq": "Es igual a",
     "neq": "No es igual a"
   }
@@ -65,7 +65,7 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
     "contains": "Contiene",
     "doesnotcontain": "No contiene"
   },
-  "enum": {
+  "enums": {
     "eq": "Es igual a",
     "neq": "No es igual a"
   }

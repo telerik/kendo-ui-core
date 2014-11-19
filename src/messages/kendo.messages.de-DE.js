@@ -13,7 +13,7 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
     "lte": "Ist vor oder gleich",
     "neq": "Ist nicht gleich"
   },
-  "enum": {
+  "enums": {
     "eq": "Ist gleich",
     "neq": "Ist nicht gleich"
   },
@@ -49,7 +49,7 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
     "lte": "Ist vor oder gleich",
     "neq": "Ist nicht gleich"
   },
-  "enum": {
+  "enums": {
     "eq": "Ist gleich",
     "neq": "Ist nicht gleich"
   },

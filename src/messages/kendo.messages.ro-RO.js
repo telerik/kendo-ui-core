@@ -13,7 +13,7 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
     "lte": "Inainte sau egal cu",
     "neq": "Diferit de"
   },
-  "enum": {
+  "enums": {
     "eq": "Egal cu",
     "neq": "Diferit de"
   },
@@ -49,7 +49,7 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
     "lte": "Inainte sau egal cu",
     "neq": "Diferit de"
   },
-  "enum": {
+  "enums": {
     "eq": "Egal cu",
     "neq": "Diferit de"
   },

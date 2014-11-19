@@ -29,7 +29,7 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
     "neq": "Je různá od",
     "startswith": "Začíná na"
   },
-  "enum": {
+  "enums": {
     "eq": "Je rovno",
     "neq": "Je různá od"
   }
@@ -64,7 +64,7 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
     "neq": "Je různá od",
     "startswith": "Začíná na"
   },
-  "enum": {
+  "enums": {
     "eq": "Je rovno",
     "neq": "Je různá od"
   }

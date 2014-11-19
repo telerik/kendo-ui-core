@@ -13,7 +13,7 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
     "lte": "Önce ya da eşit",
     "neq": "Eşit değildir"
   },
-  "enum": {
+  "enums": {
     "eq": "Eşittir",
     "neq": "Eşit değildir"
   },
@@ -49,7 +49,7 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
     "lte": "Önce ya da eşit",
     "neq": "Eşit değildir"
   },
-  "enum": {
+  "enums": {
     "eq": "Eşittir",
     "neq": "Eşit değildir"
   },

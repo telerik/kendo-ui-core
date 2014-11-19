@@ -181,7 +181,7 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
     "lte": "小於等於",
     "lt": "小於"
   },
-  "enum": {
+  "enums": {
     "eq": "等於",
     "neq": "不等於"
   }
@@ -217,7 +217,7 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
     "lte": "小於等於",
     "lt": "小於"
   },
-  "enum": {
+  "enums": {
     "eq": "等於",
     "neq": "不等於"
   }
