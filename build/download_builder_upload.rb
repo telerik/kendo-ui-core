@@ -122,9 +122,9 @@ def upload_files_and_test(bot, archive_path)
       upload_db_file(bot, upload_id, full_path)
 
       bot.click_element(bot.find("[value='Upload']"))
-      sleep(3)
+      sleep(10)
       bot.wait_for_validation("//div[contains(text(), 'successfully')]")
-      sleep(3)
+      sleep(7)
       bot.click_element(bot.driver.find_element(:xpath, "//input[contains(@id, '_btnDownload')]"))
 end
 def upload_db_file(bot, upload_id, full_path)
