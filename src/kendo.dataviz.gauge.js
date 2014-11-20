@@ -719,7 +719,6 @@ var __meta__ = {
         },
 
         value: function(value) {
-
             var that = this;
             var pointer = that.pointers[0];
 
@@ -728,6 +727,7 @@ var __meta__ = {
             }
 
             pointer.value(value);
+            that._setValueOptions(value);
         },
 
          _draw: function() {
@@ -761,6 +761,17 @@ var __meta__ = {
                         pointers[i].value(values[i]);
                     }
                 }
+            }
+
+            that._setValueOptions(values);
+        },
+
+        _setValueOptions: function(values) {
+            var pointers = [].concat(this.options.pointer);
+            values = [].concat(values);
+
+            for (var i = 0; i < values.length; i++) {
+                pointers[i].value = values[i];
             }
         },
 

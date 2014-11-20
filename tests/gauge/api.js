@@ -60,6 +60,13 @@ test("value() with no args returns pointer value", function() {
     equal(gauge.value(), 11);
 });
 
+test("value() survives after redraw", function() {
+    gauge.value(11);
+    gauge.redraw();
+
+    equal(gauge.value(), 11);
+});
+
 test("allValues() method calls pointer.value()", function() {
     var calls = 0,
         usedValue;
@@ -86,6 +93,13 @@ test("allValues(x) does not fail with transitions disabled", function() {
 
 test("allValues() with no args returns all pointer values", function() {
     gauge.allValues([10, 20]);
+
+    deepEqual(gauge.allValues(), [10, 20]);
+});
+
+test("allValues() survives after redraw", function() {
+    gauge.allValues([10, 20]);
+    gauge.redraw();
 
     deepEqual(gauge.allValues(), [10, 20]);
 });
