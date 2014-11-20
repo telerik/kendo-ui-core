@@ -6259,7 +6259,8 @@ var __meta__ = {
 
            for (idx = 0; idx < length; idx++) {
                if (heights[idx]) {
-                   rows[idx].style.height = rows2[idx].style.height = heights[idx] + "px";
+                   //add one to resolve row misalignment in IE
+                   rows[idx].style.height = rows2[idx].style.height = (heights[idx] + 1) + "px";
                }
            }
 
