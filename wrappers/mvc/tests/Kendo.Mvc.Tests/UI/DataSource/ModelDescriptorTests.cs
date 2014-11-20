@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using Xunit;
     using Kendo.Mvc.UI;
+    using System.Linq;
 
     public class ModelDescriptorTests
     {
@@ -10,7 +11,7 @@
 
         public ModelDescriptorTests()
         {
-            model = new ModelDescriptor(typeof(object));
+            model = new ModelDescriptor(typeof(Customer));
         }
 
         [Fact]
@@ -53,5 +54,28 @@
             model.ChildrenMember = "items";
             model.ToJson()["children"].ShouldNotEqual("items");
         }
+
+        [Fact]
+        public void ToJson_serializes_enum_field_underlying_value()
+        {
+            var modelField = model.Fields.First(f => f.Member.Equals("Gender"));
+            modelField.DefaultValue = Gender.Male;
+            var json = model.ToJson();
+            var fields = json["fields"] as Dictionary<string, object>;
+            var field = fields["Gender"] as Dictionary<string, object>;
+            field["defaultValue"].ShouldEqual(1);
+        }
+
+        [Fact]
+        public void ToJson_does_not_conver_enum_field_if_the_default_value_is_not_enum()
+        {
+            var modelField = model.Fields.First(f => f.Member.Equals("Gender"));
+            modelField.DefaultValue = new Kendo.Mvc.ClientHandlerDescriptor();
+            var json = model.ToJson();
+            var fields = json["fields"] as Dictionary<string, object>;
+            var field = fields["Gender"] as Dictionary<string, object>;
+            field["defaultValue"].ShouldBeSameAs(modelField.DefaultValue);
+        }
+
     }
 }

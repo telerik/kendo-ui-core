@@ -89,7 +89,14 @@
 
                     if (prop.MemberType.IsNullableType() || prop.DefaultValue != null)
                     {
-                        field["defaultValue"] = prop.DefaultValue;
+                        var defaultValue = prop.DefaultValue;
+
+                        if (prop.MemberType.GetNonNullableType().IsEnum && defaultValue is Enum)
+                        {
+                            var underlyingType = Enum.GetUnderlyingType(prop.MemberType.GetNonNullableType());
+                            defaultValue = Convert.ChangeType(defaultValue, underlyingType);
+                        }
+                        field["defaultValue"] = defaultValue;
                     }
 
                     if (!string.IsNullOrEmpty(prop.From))
