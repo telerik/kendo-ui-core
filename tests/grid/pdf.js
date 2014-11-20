@@ -53,4 +53,19 @@ test("clicking the pdf button calls the pdf export method", 1, function() {
     dom.find(".k-grid-pdf").trigger("click");
 });
 
+test("clicking the pdf button fires the pdfExport event", 1, function() {
+    var grid = dom.kendoGrid({
+        toolbar: [ { name: "pdf" }],
+        pdfExport: function() {
+          ok(true);
+        }
+    }).data("kendoGrid");
+
+    grid.saveAsPDF = function() {
+        this.trigger("pdfExport");
+    };
+
+    dom.find(".k-grid-pdf").trigger("click");
+});
+
 }());

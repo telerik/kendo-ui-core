@@ -1283,7 +1283,6 @@ var __meta__ = {
            CHANGE,
            "dataBinding",
            "cancel",
-           "pdfExport",
            DATABOUND,
            DETAILEXPAND,
            DETAILCOLLAPSE,
