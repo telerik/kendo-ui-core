@@ -2647,7 +2647,6 @@
     <Content Include="Areas\razor\Views\toolbar\api.cshtml" />
     <Content Include="Areas\razor\Views\toolbar\integration.cshtml" />
     <Content Include="Content\dataviz\js\population-usa.json" />
-    <Content Include="Areas\razor\Views\menu\context-menu.cshtml" />
     <Content Include="Areas\razor\Views\pivotgrid\index.cshtml" />
     <Content Include="Areas\razor\Views\menu\context_menu.cshtml" />
     <Content Include="Areas\razor\Views\financial\pdf_export.cshtml" />
