@@ -124,6 +124,13 @@
     cursor: pointer;
 }
 
+/*fixes Chrome 38+ column resizing glitches*/
+.k-grid th,
+.k-grid td
+{
+    -webkit-transform: translateZ(0);
+}
+
 .k-grid td
 {
     border-style: solid;
