@@ -1078,18 +1078,17 @@ var __meta__ = {
                 target = e.relatedTarget,
                 i;
 
-            if (target) {
+            if (!(target && $(target).closest(tooltip.element).length)) {
+                chart._mousemove.cancel();
+
                 for (i = 0; i < crosshairs.length; i++) {
                     crosshairs[i].hide();
                 }
 
                 highlight.hide();
 
-                var tooltipElement = tooltip.element[0];
-                if (target !== tooltipElement && !$.contains(tooltipElement, target)) {
-                    setTimeout(proxy(tooltip.hide, tooltip), TOOLTIP_HIDE_DELAY);
-                    chart._tooltipCategoryIx = null;
-                }
+                setTimeout(proxy(tooltip.hide, tooltip), TOOLTIP_HIDE_DELAY);
+                chart._tooltipCategoryIx = null;
             }
         },
 
