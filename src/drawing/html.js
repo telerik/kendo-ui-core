@@ -42,7 +42,9 @@
                     group: group
                 };
 
+                $(element).addClass("k-pdf-export");
                 renderElement(element, group);
+                $(element).removeClass("k-pdf-export");
                 defer.resolve(group);
             });
         } else {
