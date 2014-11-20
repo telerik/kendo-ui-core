@@ -3902,7 +3902,7 @@ function pad(number, digits, end) {
             return fn;
         }
 
-        return function() {
+        var throttled = function() {
             var that = this;
             var elapsed = +new Date() - lastExecTime;
             var args = arguments;
@@ -3927,6 +3927,12 @@ function pad(number, digits, end) {
                 timeout = setTimeout(exec, delay - elapsed);
             }
         };
+
+        throttled.cancel = function() {
+            clearTimeout(timeout);
+        };
+
+        return throttled;
     };
 
 
