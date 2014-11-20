@@ -1413,6 +1413,9 @@
         clip: function() {
             this._out("W n", NL);
         },
+        clipStroke: function() {
+            this._out("W S", NL);
+        },
         closeStroke: function() {
             this._out("s", NL);
         },

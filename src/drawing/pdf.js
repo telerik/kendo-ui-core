@@ -296,23 +296,21 @@
         var fill = element.fill();
         if (fill instanceof drawing.Gradient) {
             if (stroke) {
-                page.stroke();
+                page.clipStroke();
             } else {
-                // XXX: could optimize: the already rendered path is
-                // useless in this case.
-                page.nop();
+                page.clip();
             }
-            if (!(fill instanceof drawing.LinearGradient)) {
-                // XXX:
-                if (window.console && window.console.log) {
-                    window.console.log("Radial gradients are not yet supported in PDF output.");
-                }
-                return;
+            var isRadial = fill instanceof drawing.RadialGradient;
+            var start, end;
+            if (isRadial) {
+                start = { x: fill.center().x , y: fill.center().y , r: 0 };
+                end   = { x: fill.center().x , y: fill.center().y , r: fill.radius() };
+            } else {
+                start = { x: fill.start().x , y: fill.start().y };
+                end   = { x: fill.end().x   , y: fill.end().y   };
             }
-            var start = { x: fill.start().x , y: fill.start().y };
-            var end   = { x: fill.end().x   , y: fill.end().y   };
             var gradient = {
-                type: "linear",
+                type: isRadial ? "radial" : "linear",
                 start: start,
                 end: end,
                 userSpace: fill.userSpace(),
