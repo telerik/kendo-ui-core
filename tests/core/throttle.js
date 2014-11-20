@@ -71,4 +71,21 @@
             equal(args, 3);
         }, 100);
     });
+
+    asyncTest("function is not called if it is cancelled", function() {
+        var calledWithTimeout;
+        var fn = throttle(function(arg) {
+            calledWithTimeout = arg;
+        }, 10);
+
+        fn(false);
+        fn(true);
+        fn.cancel();
+
+        setTimeout(function() {
+            start();
+            equal(calledWithTimeout, false);
+        }, 100);
+    });
+
 }());
