@@ -140,7 +140,7 @@
 /* Gantt*/
 
 @task-summary-color: lighten(@header-background-color, 25%);
-@task-summary-selected-color: lighten(@selected-background-color, 25%);
+@task-summary-selected-color: lighten(@header-background-color, 25%);
 
 /* Loading Indicators */
 @loading-panel-color: #fff;
@@ -977,8 +977,11 @@ background-color: @widget-background-color;
 
 /* Gantt */
 .k-task-milestone,
-.k-task-summary-complete {
+.k-task-summary-complete,
+.k-state-selected.k-task-milestone,
+.k-state-selected .k-task-summary-complete {
 background-color: @header-background-color;
+border-color: @header-background-color;
 }
 
 .k-task-single
@@ -1000,6 +1003,7 @@ background-color: @accent-color;
 border-color: @accent-color;
 }
 
+.k-grid td.k-state-focused,
 .k-multiselect .k-button:focus:active:not(.k-state-disabled):not([disabled]),
 .k-toolbar .k-button:focus:active:not(.k-state-disabled):not([disabled]),
 .k-group-indicator .k-button,
