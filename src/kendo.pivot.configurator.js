@@ -257,7 +257,7 @@ var __meta__ = {
                                 for (idx = 0; idx < length; idx++) {
                                     name.push(kpiNode(measures[idx]));
                                 }
-                            } else if (node.type) {
+                            } else if (node.kpi) {
                                 name = [kpiNode(node)];
                             }
 
@@ -410,7 +410,8 @@ var __meta__ = {
             caption: measure,
             measure: measure,
             name: measure,
-            type: type
+            type: type,
+            kpi: true
         };
     }
 

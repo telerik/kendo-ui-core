@@ -279,24 +279,28 @@
         equal(measures[0].measure, "value");
         equal(measures[0].name, "value");
         equal(measures[0].type, "value");
+        equal(measures[0].kpi, true);
 
         equal(measures[1].caption, "goal");
         equal(measures[1].id, "goal");
         equal(measures[1].measure, "goal");
         equal(measures[1].name, "goal");
         equal(measures[1].type, "goal");
+        equal(measures[1].kpi, true);
 
         equal(measures[2].caption, "status");
         equal(measures[2].id, "status");
         equal(measures[2].measure, "status");
         equal(measures[2].name, "status");
         equal(measures[2].type, "status");
+        equal(measures[2].kpi, true);
 
         equal(measures[3].caption, "trend");
         equal(measures[3].id, "trend");
         equal(measures[3].measure, "trend");
         equal(measures[3].name, "trend");
         equal(measures[3].type, "trend");
+        equal(measures[3].kpi, true);
     });
 
     test("treeview transport calls pivotDataSource for list of hierarchies", function() {
@@ -556,5 +560,151 @@
         });
 
         equal(configurator.element.height(), 300);
+    });
+
+    test("drop KPI group creates list of measures", function() {
+        var configurator = createConfigurator({
+            dataSource: {
+                transport: {
+                    discover: function(options) {
+                        options.success([]);
+                    }
+                },
+                schema: {
+                    dimensions: function() {
+                        return [{ uniqueName: "foo", type: 2 }]; //measure
+                    },
+                    kpis: function() {
+                        return [{
+                            goal: "goal",
+                            status: "status",
+                            trend: "trend",
+                            value: "value"
+                        }];
+                    }
+                }
+            }
+        });
+
+        var method = stub(configurator.dataSource, { schemaKPIs: configurator.dataSource.schemaKPIs });
+
+        var dataSource = configurator.treeView.dataSource;
+
+        dataSource.read();
+        dataSource.at(1).load(); //load kpis
+        dataSource.at(1).items[0].load(); //show kpi measures
+
+        var setting = configurator.measures;
+        var sourceNode = configurator.treeView.wrapper.find("[data-kendo-uid=" + dataSource.at(1).items[0].uid + "]");
+
+        stub(setting, "add");
+
+        configurator.treeView.trigger("drop", {
+            preventDefault: $.noop,
+            dropTarget: setting.element,
+            sourceNode: sourceNode
+        });
+
+        var args = setting.args("add")[0];
+
+        equal(args.length, 4);
+        equal(args[0].name, "value");
+        equal(args[0].type, "value");
+
+        equal(args[1].name, "goal");
+        equal(args[1].type, "goal");
+
+        equal(args[2].name, "status");
+        equal(args[2].type, "status");
+
+        equal(args[3].name, "trend");
+        equal(args[3].type, "trend");
+    });
+
+    test("drop KPI measures creates measure with a special type", function() {
+        var configurator = createConfigurator({
+            dataSource: {
+                transport: {
+                    discover: function(options) {
+                        options.success([]);
+                    }
+                },
+                schema: {
+                    dimensions: function() {
+                        return [{ uniqueName: "foo", type: 2 }]; //measure
+                    },
+                    kpis: function() {
+                        return [{
+                            goal: "goal",
+                            status: "status",
+                            trend: "trend",
+                            value: "value"
+                        }];
+                    }
+                }
+            }
+        });
+
+        var method = stub(configurator.dataSource, { schemaKPIs: configurator.dataSource.schemaKPIs });
+
+        var dataSource = configurator.treeView.dataSource;
+
+        dataSource.read();
+        dataSource.at(1).load(); //load kpis
+        dataSource.at(1).items[0].load(); //show kpi measures
+
+        var setting = configurator.measures;
+        var sourceNode = configurator.treeView.wrapper.find("[data-kendo-uid=" + dataSource.at(1).items[0].items[0].uid + "]");
+
+        stub(setting, "add");
+
+        configurator.treeView.trigger("drop", {
+            preventDefault: $.noop,
+            dropTarget: setting.element,
+            sourceNode: sourceNode
+        });
+
+        var args = setting.args("add")[0];
+
+        equal(args.length, 1);
+        equal(args[0].name, "value");
+        equal(args[0].type, "value");
+    });
+
+    test("droped root dimension onto columns setting uses correct name", function() {
+        var configurator = createConfigurator({
+            dataSource: {
+                transport: {
+                    discover: function(options) {
+                        options.success([]);
+                    }
+                },
+                schema: {
+                    dimensions: function() {
+                        return [{ defaultHierarchy: "[foo].[foo]", uniqueName: "wrong", type: 1 }]; //root dimension
+                    }
+                }
+            }
+        });
+
+        var method = stub(configurator.dataSource, { schemaKPIs: configurator.dataSource.schemaKPIs });
+
+        var dataSource = configurator.treeView.dataSource;
+
+        dataSource.read();
+
+        var setting = configurator.columns;
+        var sourceNode = configurator.treeView.wrapper.find("[data-kendo-uid=" + dataSource.at(0).uid + "]");
+
+        stub(setting, "add");
+
+        configurator.treeView.trigger("drop", {
+            preventDefault: $.noop,
+            dropTarget: setting.element,
+            sourceNode: sourceNode
+        });
+
+        var args = setting.args("add")[0];
+        equal(args, "[foo].[foo]");
     });
 })();
