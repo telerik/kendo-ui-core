@@ -40,26 +40,26 @@ var ParagraphCommand = Command.extend({
         return marker;
     },
 
-    _moveFocus: function(range, next) {
-        if (dom.is(next, 'img')) {
-            range.setStartBefore(next);
+    _moveFocus: function(range, candidate) {
+        if (dom.isEmpty(candidate)) {
+            range.setStartBefore(candidate);
         } else {
-            range.selectNodeContents(next);
+            range.selectNodeContents(candidate);
 
-            var textNode = RangeUtils.textNodes(range)[0];
+            var focusNode = RangeUtils.textNodes(range)[0];
 
-            if (textNode) {
-                if (dom.is(textNode, 'img')) {
-                    range.setStartBefore(textNode);
-                } else {
-                    range.selectNodeContents(textNode);
+            if (!focusNode) {
+                while (candidate.childNodes.length && !dom.is(candidate.firstChild, "br")) {
+                    candidate = candidate.firstChild;
                 }
+
+                focusNode = candidate;
+            }
+
+            if (dom.isEmpty(focusNode)) {
+                range.setStartBefore(focusNode);
             } else {
-                while (next.childNodes.length && !dom.is(next.firstChild, "br")) {
-                    next = next.firstChild;
-                }
-
-                range.selectNodeContents(next);
+                range.selectNodeContents(focusNode);
             }
         }
     },

@@ -477,4 +477,13 @@ test("paragraph before link does not remove it", function() {
     equal(editor.value(), '<p></p><p><a href="foo">foo</a></p>');
 });
 
+test("paragraph before input does not clone it", function() {
+    var range = createRangeFromText(editor, '<p>||<input></p>');
+
+    createParagraphCommand(range).exec();
+    createParagraphCommand(editor.getRange()).exec();
+
+    equal(editor.value(), '<p></p><p></p><p><input /></p>');
+});
+
 }());
