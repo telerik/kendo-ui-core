@@ -70,7 +70,23 @@
 .k-grid-header th.k-header,
 .k-filter-row th
 {
-    padding: .786em .6em .714em .6em;
+    padding: .786em 1em .714em 1em;
+}
+
+.k-filtercell > span {
+    padding-right: 5.714em;
+}
+
+.k-filtercell > span > .k-button {
+    padding-left: .714em;
+    padding-right: .714em;
+    line-height: 1.286em;
+    margin: 0;
+}
+
+.k-filter-row .k-dropdown-operator {
+    width: 2.714em;
+    right: 2.857em;
 }
 
 .k-grouping-header .k-group-indicator
@@ -89,7 +105,7 @@
 }
 
 .k-grid td {
-    padding: 0.929em 1.286em;
+    padding: 0.929em 1em;
 }
 
 .k-grid-header th.k-header>.k-link {
@@ -108,10 +124,9 @@
     border-style: solid;
 }
 
-.k-grid .k-grid-header,
-.k-grid-header .k-grid-header-wrap,
-.k-grid-header tr:last-child th.k-header {
-    border-bottom-width: 0;
+.k-grid-content table tr:first-child td,
+.k-grid-content-locked table tr:first-child td {
+    border-top: 0;
 }
 
 .k-grid-content tr td {
@@ -159,14 +174,14 @@
 .k-dropdown-wrap,
 .k-picker-wrap,
 .k-numeric-wrap {
-    padding: 0 2.5em 0 0;   
+    padding: 0 2.571em 0 0;  
 }
 
 .k-picker-wrap .k-select,
 .k-numeric-wrap .k-select,
 .k-dropdown-wrap .k-select
 {
-    width: 2.5em;
+    width: 2.571em;
 }
 
 .k-datetimepicker {
@@ -226,7 +241,6 @@
 .k-fieldselector .k-list .k-item {
     min-height: 2.143em;
     line-height: 2.143em;
-    text-indent: 0.429em;
 }
 
 .k-button,
