@@ -840,10 +840,10 @@ var Marker = Class.extend({
             dom.insertBefore(bom, that.end);
         }
 
+        normalize(range.commonAncestorContainer);
+
         range.setStartBefore(that.start);
         range.setEndAfter(that.end);
-
-        normalize(range.commonAncestorContainer);
 
         return range;
     },

@@ -341,4 +341,14 @@ test("quotes are html encoded", function() {
     equal(editor.value(), '<img alt="" src="foo.jpg&quot;onmousemove=&quot;foo();" />');
 });
 
+test("persists markup around element", function() {
+    var range = createRangeFromText(editor, 'foo ||bar');
+    execImageCommandOnRange(range);
+
+    $('#k-editor-image-url').val('foo.jpg');
+    $('.k-dialog-insert').click();
+
+    equal(editor.value(), 'foo <img alt="" src="foo.jpg" />bar');
+});
+
 }());

@@ -27,7 +27,7 @@ function createRange(startContainer, startOffset, endContainer, endOffset) {
 }
 
 function clean(html) {
-    return html.toLowerCase().replace(/class=k-marker/g, 'class="k-marker"').replace(/<br[^>]*k-br[^>]*>/ig, "");
+    return html.toLowerCase().replace(/class=k-marker/g, 'class="k-marker"').replace(/<br[^>]*k-br[^>]*>/ig, "").replace(/\ufeff/g, "BOM");
 }
 
 test('addMarker inserts markers', function() {
@@ -105,11 +105,10 @@ test('removeMarker normalizes neighbouring text nodes', function() {
     marker.add(range);
     marker.remove(range);
 
-    equal(editor.body.childNodes.length, 2);
-    equal(range.startContainer, editor.body.firstChild);
-    equal(range.endContainer, editor.body.firstChild);
-    equal(range.startOffset, 3);
-    equal(range.endOffset, 6);
+    equal(range.startContainer, editor.body.firstChild, "startContainer");
+    equal(range.endContainer, editor.body.firstChild, "endContainer");
+    equal(range.startOffset, 3, "endOffset");
+    equal(range.endOffset, 6, "endOffset");
 });
 
 test('removeMarker on collapsed range', function() {
@@ -185,7 +184,7 @@ test('removeCaretMarker normalizes dom', function() {
     marker.addCaret(range);
     marker.removeCaret(range);
 
-    equal(editor.body.childNodes.length, 2); // #text + br
+    equal(editor.body.firstChild.nodeValue, "foo");
 });
 
 test('removeCaretMarker updates range to collapsed state', function() {
