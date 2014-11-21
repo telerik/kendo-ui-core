@@ -151,6 +151,14 @@ var __meta__ = {
         return filter;
     }
 
+    function stripMetadata(obj) {
+        for (var name in obj) {
+            if(name.indexOf("@odata") === 0) {
+                delete obj[name];
+            }
+        }
+    }
+
     extend(true, kendo.data, {
         schemas: {
             odata: {
@@ -240,10 +248,12 @@ var __meta__ = {
             "odata-v4": {
                 type: "json",
                 data: function(data) {
+                    data = $.extend({}, data);
+                    stripMetadata(data);
+
                     if (data.value) {
                         return data.value;
                     }
-                    delete data["odata.metadata"];
                     return [data];
                 },
                 total: function(data) {
