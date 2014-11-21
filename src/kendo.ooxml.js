@@ -297,6 +297,8 @@ function ref(rowIndex, colIndex) {
     return numChar(colIndex) + (rowIndex + 1);
 }
 
+var DATE_EPOCH = kendo.timezone.remove(new Date(1900, 0, 0), "Etc/UTC");
+
 var Worksheet = kendo.Class.extend({
     init: function(options, sharedStrings, styles) {
         this.options = options;
@@ -394,8 +396,8 @@ var Worksheet = kendo.Class.extend({
             type = "b";
             value = +value;
         } else if (value && value.getTime) {
-            type = "d";
-            value = kendo.timezone.remove(value, "Etc/UTC").toJSON();
+            type = null;
+            value = (kendo.timezone.remove(value, "Etc/UTC") - DATE_EPOCH) / kendo.date.MS_PER_DAY + 1;
             if (!style.format) {
                 style.format = "mm-dd-yy";
             }

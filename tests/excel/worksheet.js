@@ -72,14 +72,14 @@ test("toXML sets the t attribute to 's' when the value is a string", function() 
     equal(dom.find("c").attr("t"), "s");
 });
 
-test("toXML sets the 't' attribute to 'd' when the value is a date", function() {
+test("toXML doesn't set the 't' attribute the value is a date", function() {
     var worksheet = Worksheet([
         { cells: [{ value: new Date() }] }
     ]);
 
     var dom = $(worksheet.toXML());
 
-    equal(dom.find("c").attr("t"), "d");
+    equal(dom.find("c").attr("t"), null);
 });
 
 test("toXML sets the 't' attribute to 'n' when the value is a number", function() {
@@ -162,8 +162,9 @@ test("toXML sets the 's' attribute of dates", function() {
     equal(dom.find("c").attr("s"), "1");
 });
 
-test("toXML stores dates as ISO strings", function() {
-    var date = new Date();
+test("toXML stores dates as offsets from epoch", function() {
+    // see http://xlsxwriter.readthedocs.org/en/latest/working_with_dates_and_time.html
+    var date = new Date(2013, 0, 1, 12, 0);
 
     var worksheet = Worksheet([
         { cells: [{ value: date }] }
@@ -171,7 +172,7 @@ test("toXML stores dates as ISO strings", function() {
 
     var dom = $(worksheet.toXML());
 
-    equal(dom.find("c > v").text(), kendo.timezone.remove(date, "Etc/UTC").toISOString());
+    equal(dom.find("c > v").text(), "41275.5");
 });
 
 test("toXML adds strings to sharedStrings", function() {
