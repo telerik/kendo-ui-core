@@ -40,7 +40,8 @@ kendo.ExcelExporter = kendo.Class.extend({
             this.dataSource = kendo.data.DataSource.create(dataSource);
         }
 
-        if (dataSource instanceof kendo.data.TreeListDataSource) {
+        var TreeListDataSource = kendo.data.TreeListDataSource;
+        if (TreeListDataSource && dataSource instanceof TreeListDataSource) {
             this.dataSource.data(dataSource.view().toJSON());
         }
     },
