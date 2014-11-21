@@ -361,6 +361,43 @@
         equal(col[1].style.width, "10px");
     });
 
+    test("reorder when first column is hidden", function() {
+        var grid = new Grid(div, {
+            columns: [
+                { field: "foo", hidden: true, width: 10 },
+                { field: "moo", width: 20 },
+                { field: "bar", width: 30 },
+                { field: "baz", width: 40 }
+            ],
+            dataSource: [{ foo: "foo", bar: "bar", baz: "baz", moo: "moo" }]
+        });
+
+        grid.reorderColumn(2, grid.columns[3], true);
+
+        var td = grid.tbody.find("td");
+        var th = grid.thead.find("th");
+        var col = grid.thead.prev().find("col");
+
+        equal(grid.columns[0].field, "foo");
+        equal(grid.columns[1].field, "moo");
+        equal(grid.columns[2].field, "baz");
+        equal(grid.columns[3].field, "bar");
+
+        equal(td.eq(0).text(), "foo");
+        equal(td.eq(1).text(), "moo");
+        equal(td.eq(2).text(), "baz");
+        equal(td.eq(3).text(), "bar");
+
+        equal(th.eq(0).text(), "foo");
+        equal(th.eq(1).text(), "moo");
+        equal(th.eq(2).text(), "baz");
+        equal(th.eq(3).text(), "bar");
+
+        equal(col[0].style.width, "20px");
+        equal(col[1].style.width, "40px");
+        equal(col[2].style.width, "30px");
+    });
+
     test("reorder to right when hidden column", function() {
         var grid = new Grid(div, {
             columns: [
@@ -1398,6 +1435,37 @@
         equal(rows.eq(2).find("th").eq(2).text(), "master1-child2-child");
         equal(rows.eq(2).find("th").eq(3).text(), "master1-child2-child2");
         equal(rows.eq(2).find("th").eq(4).text(), "master1-child-child");
+    });
+
+    test("reorder second level header with two target child columns and hidden source column - ltr multiple columns insert after", function() {
+        var grid = new Grid(div, {
+            columns: [
+                { title: "master", width: 10 },
+                { title: "master1",
+                    columns: [
+                        { title: "master1-child", columns: [{ title: "master1-child-child", width: 20, hidden: true }, { title: "master1-child-child2", width: 20 }] },
+                        { title: "master1-child1", columns: [{ title: "master1-child1-child", width: 20 }, { title: "master1-child1-child2", width: 20 }] }
+                ] }
+            ],
+            dataSource: {
+                data: data
+            }
+        });
+
+        grid.reorderColumn(1, grid.columns[1].columns[0]);
+
+        var rows = grid.thead.find("tr");
+
+        equal(rows.eq(0).find("th").eq(0).text(), "master");
+        equal(rows.eq(0).find("th").eq(1).text(), "master1");
+
+        equal(rows.eq(1).find("th").eq(0).text(), "master1-child1");
+        equal(rows.eq(1).find("th").eq(1).text(), "master1-child");
+
+        equal(rows.eq(2).find("th").eq(0).text(), "master1-child1-child");
+        equal(rows.eq(2).find("th").eq(1).text(), "master1-child1-child2");
+        equal(rows.eq(2).find("th").eq(2).text(), "master1-child-child");
+        equal(rows.eq(2).find("th").eq(3).text(), "master1-child-child2");
     });
 
     test("reorder second level header with two source child columns to non child target", function() {

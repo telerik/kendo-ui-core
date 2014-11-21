@@ -2001,8 +2001,8 @@ var __meta__ = {
 
         _reorderHeader: function(sources, target, before) {
             var that = this;
-            var sourcePosition = columnVisiblePosition(sources[0], that.columns);
-            var destPosition = columnVisiblePosition(target, that.columns);
+            var sourcePosition = columnPosition(sources[0], that.columns);
+            var destPosition = columnPosition(target, that.columns);
 
             var leafs = [];
             for (var idx = 0; idx < sources.length; idx++) {
