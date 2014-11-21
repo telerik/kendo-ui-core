@@ -134,10 +134,12 @@ module.exports = function(grunt) {
             },
             legacyUnit: {
                 options: {
-                    browsers: [],
+                    browsers: browserOption ? [ browserOption ] : [],
 
                     files: [].concat(
-                        TESTS.beforeTestFiles,
+                        TESTS.beforeTestFiles.filter(function(x) {
+                            return !/angular/i.test(x);
+                        }),
                         allKendoFiles,
                         TESTS.afterTestFiles.filter(function(x) {
                             return !/(themeuilder|less)\.js/i.test(x);

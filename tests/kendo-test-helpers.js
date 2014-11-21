@@ -254,6 +254,10 @@ var close = QUnit.close,
     contains = QUnit.contains;
 
 function withAngularTests(moduleName, func) {
+    if (!('angular' in window)) {
+        return;
+    }
+
     var $injector, $controller, $scope, $compile;
 
     module(moduleName, {
@@ -331,9 +335,13 @@ function withAngularTests(moduleName, func) {
 
 }
 
-var ngTestModule, ngTest, ngScope;
+var ngTestModule = $.noop, ngTest = $.noop, ngScope;
 
 (function() {
+    if (!('angular' in window)) {
+        return;
+    }
+
     var $injector, $scope, $compile;
 
     ngScope = function() {
