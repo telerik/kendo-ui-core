@@ -971,12 +971,12 @@ var __meta__ = {
 
             measures = this.options.measures || [];
 
-            if (this.options.measures !== null && toString.call(this.options.measures) === "[object Object]") {
-                measures = this.options.measures.values || [];
-                measuresAxis = this.options.measures.axis || "columns";
+            if (toString.call(measures) === "[object Object]") {
+                measuresAxis = measures.axis || "columns";
+                measures = measures.values || [];
             }
 
-            this._measures = normalizeMeasures(measures || []);
+            this._measures = normalizeMeasures(measures);
             this._measuresAxis = measuresAxis;
 
             this._axes = {};
@@ -2902,7 +2902,7 @@ var __meta__ = {
             return null;
         },
         axes: function(root) {
-            root = kendo.getter("ExecuteResponse.return.root", true)(root);
+            root = kendo.getter("ExecuteResponse[\"return\"].root", true)(root);
 
             var axes = asArray(kendo.getter("Axes.Axis", true)(root));
             var columns = translateAxis(axes[0]);
@@ -2918,7 +2918,7 @@ var __meta__ = {
             };
         },
         data: function(root) {
-            root = kendo.getter("ExecuteResponse.return.root", true)(root);
+            root = kendo.getter("ExecuteResponse[\"return\"].root", true)(root);
 
             var cells = asArray(kendo.getter("CellData.Cell", true)(root));
 
@@ -2938,7 +2938,7 @@ var __meta__ = {
             return result;
         },
         _mapSchema: function(root, getters) {
-            root = kendo.getter("DiscoverResponse.return.root", true)(root);
+            root = kendo.getter("DiscoverResponse[\"return\"].root", true)(root);
             var rows = asArray(kendo.getter("row", true)(root));
 
             var result = [];
