@@ -556,6 +556,10 @@ var __meta__ = {
         column.headerAttributes = method(column.headerAttributes);
     }
 
+    function isCellVisible() {
+        return this.style.display !== "none";
+    }
+
     function isVisible(column) {
         return visibleColumns([column]).length > 0;
     }
@@ -5763,7 +5767,7 @@ var __meta__ = {
                 length,
                 footer = that.footer || that.wrapper.find(".k-grid-footer"),
                 columns = that.columns,
-                visibleLocked = that.lockedHeader ? leafDataCells(that.lockedHeader.find(">table>thead")).filter(":visible").length : 0,
+                visibleLocked = that.lockedHeader ? leafDataCells(that.lockedHeader.find(">table>thead")).filter(isCellVisible).length : 0,
                 columnIndex;
 
             if (typeof column == "number") {
@@ -5818,7 +5822,7 @@ var __meta__ = {
                 headerCellIndex -= visibleLocked;
             }
 
-            cell = leafDataCells(container).filter(":visible").eq(headerCellIndex);
+            cell = leafDataCells(container).filter(isCellVisible).eq(headerCellIndex);
             cell[0].style.display = "none";
 
             setCellVisibility(elements($(">table>thead", that.lockedHeader), that.thead, ">tr.k-filter-row>th"), columnIndex, false);

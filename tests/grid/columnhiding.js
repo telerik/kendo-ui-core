@@ -1834,4 +1834,94 @@
         ok(rows.eq(2).find("th").eq(0).is(":visible"));
     });
 
+    test("hideColumn when grid is hidden", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo" },
+                { field: "bar" },
+            ]
+        });
+
+        grid.wrapper.hide();
+
+        grid.hideColumn(0);
+
+        grid.wrapper.show();
+
+        equal(grid.table.find("td").eq(0).is(":visible"), false, "first body cell");
+        equal(grid.table.find("td").eq(1).is(":visible"), true, "second body cell");
+        equal(grid.thead.find("th").eq(0).is(":visible"), false, "first header cell");
+        equal(grid.thead.find("th").eq(1).is(":visible"), true, "second header cell");
+    });
+
+    test("hideColumn when grid is hidden - locked columns", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", locked: true },
+                { field: "baz", locked: true },
+                { field: "bar" },
+            ]
+        });
+
+        grid.wrapper.hide();
+
+        grid.hideColumn(0);
+
+        grid.wrapper.show();
+
+        equal(grid.lockedTable.find("td").eq(0).is(":visible"), false, "first locked body cell");
+        equal(grid.lockedTable.find("td").eq(1).is(":visible"), true, "second locked body cell");
+
+        equal(grid.lockedHeader.find("th").eq(0).is(":visible"), false, "first locked header cell");
+        equal(grid.lockedHeader.find("th").eq(1).is(":visible"), true, "second locked header cell");
+
+        equal(grid.table.find("td").eq(0).is(":visible"), true, "first body cell");
+        equal(grid.thead.find("th").eq(0).is(":visible"), true, "first header cell");
+    });
+
+    test("showColumn when grid is hidden", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", hidden: true },
+                { field: "bar" },
+            ]
+        });
+
+        grid.wrapper.hide();
+
+        grid.showColumn(0);
+
+        grid.wrapper.show();
+
+        equal(grid.table.find("td").eq(0).is(":visible"), true, "first body cell");
+        equal(grid.table.find("td").eq(1).is(":visible"), true, "second body cell");
+        equal(grid.thead.find("th").eq(0).is(":visible"), true, "first header cell");
+        equal(grid.thead.find("th").eq(1).is(":visible"), true, "second header cell");
+    });
+
+    test("hideColumn when grid is hidden - locked columns", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", locked: true, hidden: true },
+                { field: "baz", locked: true },
+                { field: "bar" },
+            ]
+        });
+
+        grid.wrapper.hide();
+
+        grid.showColumn(0);
+
+        grid.wrapper.show();
+
+        equal(grid.lockedTable.find("td").eq(0).is(":visible"), true, "first locked body cell");
+        equal(grid.lockedTable.find("td").eq(1).is(":visible"), true, "second locked body cell");
+
+        equal(grid.lockedHeader.find("th").eq(0).is(":visible"), true, "first locked header cell");
+        equal(grid.lockedHeader.find("th").eq(1).is(":visible"), true, "second locked header cell");
+
+        equal(grid.table.find("td").eq(0).is(":visible"), true, "first body cell");
+        equal(grid.thead.find("th").eq(0).is(":visible"), true, "first header cell");
+    });
+
 })();
