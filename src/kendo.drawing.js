@@ -23,7 +23,7 @@
         name: "Drawing API",
         category: "framework",
         description: "The Kendo UI low-level drawing API",
-        depends: [ "core" ],
+        depends: [ "core", "color" ],
         features: [{
             id: "drawing-pdf",
             name: "PDF export",
