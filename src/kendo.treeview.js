@@ -512,7 +512,7 @@ var __meta__ = {
         },
 
         items: function() {
-            return this.element.find(".k-item div:first-child");
+            return this.element.find(".k-item > div:first-child");
         },
 
         setDataSource: function(dataSource) {
