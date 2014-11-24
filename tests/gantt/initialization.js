@@ -150,6 +150,12 @@
         equal(gantt.toolbar.find(".k-gantt-actions > button").attr("data-action"), "add");
     });
 
+    test("toolbar action button command style is rendered", function () {
+        var gantt = new Gantt(element);
+
+        ok(gantt.toolbar.find(".k-gantt-actions > button").hasClass("k-gantt-create"));
+    });
+
     test("toolbar action button text is rendered", function () {
         var gantt = new Gantt(element);
 
@@ -176,6 +182,12 @@
         var gantt = new Gantt(element);
 
         equal(gantt.footer.find(".k-gantt-actions > button").attr("data-action"), "add");
+    });
+
+    test("footer action action button command style is rendered", function() {
+        var gantt = new Gantt(element);
+
+        ok(gantt.footer.find(".k-gantt-actions > button").hasClass("k-gantt-create"));
     });
 
     test("footer action button text is rendered", function () {

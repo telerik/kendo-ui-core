@@ -68,11 +68,6 @@ var __meta__ = {
                 '#}#' +
             '</ul>' +
         '</div>');
-    var FOOTER_TEMPLATE = kendo.template('<div class="#=styles.footerWrapper#">' +
-            '<div class="#=styles.actions#">' +
-                    '<button class="#=styles.button#" data-action="#=action.data#"><span class="#=styles.iconPlus#"></span>#=action.title#</button>' +
-            '</div>' +
-        '</div>');
 
     var DATERANGEEDITOR = function(container, options) {
         var attr = { name: options.field };
@@ -1671,13 +1666,11 @@ var __meta__ = {
                 return;
             }
 
-            var footer = $(FOOTER_TEMPLATE({
-                styles: Gantt.styles.toolbar,
-                action: {
-                    data: "add",
-                    title: this.options.messages.actions.append
-                }
-            }));
+            var ganttStyles = Gantt.styles.toolbar;
+            var messages = this.options.messages.actions;
+            var button = $(kendo.template(BUTTON_TEMPLATE)(extend(true, { styles: ganttStyles }, defaultCommands.append, { text: messages.append })));
+            var actionsWrap = $("<div class='" + ganttStyles.actions + "'>").append(button);
+            var footer = $("<div class='" + ganttStyles.footerWrapper + "'>").append(actionsWrap);
 
             this.wrapper.append(footer);
             this.footer = footer;
