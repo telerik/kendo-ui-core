@@ -7,7 +7,7 @@ var __meta__ = {
     name: "Color tools",
     category: "web",
     description: "Color selection widgets",
-    depends: [ "core", "popup", "slider", "userevents" ]
+    depends: [ "core", "color", "popup", "slider", "userevents" ]
 };
 
 (function($, parseInt, undefined){
