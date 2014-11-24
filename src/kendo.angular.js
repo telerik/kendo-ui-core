@@ -99,15 +99,27 @@ var __meta__ = {
             delayValue = scope.$eval(kNgDelay);
 
         if (kNgDelay && !delayValue) {
-            var unregister = scope.$watch(kNgDelay, function(newValue, oldValue){
-                if (newValue !== oldValue) {
-                    unregister();
-                    // remove subsequent delays, to make ng-rebind work
-                    element.removeAttr(attrs.$attr.kNgDelay);
-                    kNgDelay = null;
-                    $timeout(createIt); // XXX: won't work without `timeout` ;-\
-                }
-            });
+            var root = scope.$root || scope;
+
+            var register = function() {
+                var unregister = scope.$watch(kNgDelay, function(newValue, oldValue) {
+                        if (newValue !== oldValue) {
+                        unregister();
+                        // remove subsequent delays, to make ng-rebind work
+                        element.removeAttr(attrs.$attr.kNgDelay);
+                        kNgDelay = null;
+                        $timeout(createIt); // XXX: won't work without `timeout` ;-\
+                    }
+                });
+            };
+
+            // WARNING: the watchers should be registered in the digest cycle.
+            // the fork here is for the timeout/non-timeout initiated widgets.
+            if (/^\$(digest|apply)$/.test(root.$$phase)) {
+                register();
+            } else {
+                scope.$apply(register);
+            }
 
             return;
         } else {
