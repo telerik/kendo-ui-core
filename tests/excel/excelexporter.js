@@ -562,6 +562,16 @@ test("filtering skips the groups", function() {
     });
 });
 
+test("exports data set after data source initialization", 1, function() {
+    dataSource = new DataSource({});
+
+    dataSource.data([ { foo: "bar" } ]);
+
+    testWorkbook({ columns: [ { field: "foo" } ], dataSource: dataSource }, function(book) {
+        equal(book.sheets[0].rows[1].cells[0].value, "bar");
+    });
+});
+
 test("keeps loaded TreeListDataSource items", function() {
     dataSource = new kendo.data.TreeListDataSource({
         transport: {

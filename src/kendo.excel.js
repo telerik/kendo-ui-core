@@ -36,13 +36,15 @@ kendo.ExcelExporter = kendo.Class.extend({
                     group: dataSource.group(),
                     aggregate: dataSource.aggregate()
                 }));
+
+            var data = dataSource.data();
+
+            if (data.length > 0) {
+                this.dataSource.data(data.toJSON());
+            }
+
         } else {
             this.dataSource = kendo.data.DataSource.create(dataSource);
-        }
-
-        var TreeListDataSource = kendo.data.TreeListDataSource;
-        if (TreeListDataSource && dataSource instanceof TreeListDataSource) {
-            this.dataSource.data(dataSource.view().toJSON());
         }
     },
     _trimColumns: function(columns) {
