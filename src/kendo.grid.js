@@ -6445,7 +6445,7 @@ var __meta__ = {
            row = current.parent()[nextFn](NAVROW).first();
            if (!row[0] && (up || current.is("th")) || (!up && current[0].rowSpan > 1)) {
                currentTable = verticalTable(currentTable, dataTable, headerTable, up);
-               focusTable(currentTable);
+               focusTable(currentTable, true);
                if (up && !current.is(".k-header")) {
                    return leafDataCells(currentTable.find("thead:first")).eq(current.index());
                }
