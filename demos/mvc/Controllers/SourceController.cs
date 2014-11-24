@@ -48,6 +48,7 @@ namespace Kendo.Controllers
                     ViewBag.Source = source;
                     ViewBag.Mobile = false;
                     ViewBag.DisableInMobile = false;
+                    ViewBag.MobileAngular = false;
 
                     source = ViewResult("SourceCode");
                 }
