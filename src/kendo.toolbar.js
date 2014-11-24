@@ -192,10 +192,6 @@ var __meta__ = {
                         item.appendTo(element);
                     }
 
-                    if (options.id) {
-                        element.attr("id", options.id + "_overflow");
-                    }
-
                     element.data({ type: "splitButton" });
                     element.attr(KENDO_UID_ATTR, options.uid);
 
@@ -597,30 +593,45 @@ var __meta__ = {
             },
 
             remove: function(element) {
-                var commandElement = this.element.find(element),
+                var toolbarElement,
+                    overflowElement,
+                    isResizable = this.options.resizable,
                     type, uid;
 
-                if (!commandElement.length && this.options.resizable) {
-                    commandElement = this.popup.element.find(element);
-                    uid = commandElement.parent().attr(KENDO_UID_ATTR);
-                } else {
-                    uid = commandElement.attr(KENDO_UID_ATTR);
+                toolbarElement = this.element.find(element);
+
+                if (isResizable) {
+                    overflowElement = this.popup.element.find(element);
                 }
 
-                type = commandElement.data("type");
+                if (toolbarElement.length) {
+                    type = toolbarElement.data("type");
+                    uid = toolbarElement.attr(KENDO_UID_ATTR);
 
-                if (commandElement.parent("." + SPLIT_BUTTON).data("type")) {
-                    type = "splitButton";
-                    commandElement = commandElement.parent();
+                    if (toolbarElement.parent("." + SPLIT_BUTTON).data("type") === "splitButton") {
+                        type = "splitButton";
+                        toolbarElement = toolbarElement.parent();
+                    }
+
+                    overflowElement = isResizable ? this.popup.element.find("li[" + KENDO_UID_ATTR + "='" + uid + "']") : $([]);
+                } else if (overflowElement.length) {
+                    type = overflowElement.data("type");
+                    overflowElement = overflowElement.parent();
+
+                    if (overflowElement.data("type") === "splitButton") {
+                        type = "splitButton";
+                    }
+
+                    uid = overflowElement.attr(KENDO_UID_ATTR);
+                    toolbarElement = this.element.find("div." + SPLIT_BUTTON + "[" + KENDO_UID_ATTR + "='" + uid + "']");
                 }
 
-                if (type === "splitButton") {
-                    commandElement.data("kendoPopup").destroy();
+                if (type === "splitButton" && toolbarElement.data("kendoPopup")) {
+                    toolbarElement.data("kendoPopup").destroy();
                 }
 
-                commandElement
-                    .add(this.popup.element.find("[" + KENDO_UID_ATTR + "='" + uid + "']"))
-                    .remove();
+                toolbarElement.remove();
+                overflowElement.remove();
             },
 
             enable: function(element, enable) {
