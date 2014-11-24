@@ -1,30 +1,30 @@
 /* SplitView */
-.km-splitview > .km-content
+div.km-splitview > .km-content
 {
     .box-orient(horizontal);
     .box-direction(normal);
     .flex-direction(row);
 }
 
-.km-split-vertical > .km-content
+div.km-split-vertical > .km-content
 {
     .box-orient(vertical);
     .flex-direction(column);
 }
 
-.km-split-content > .km-pane
+div.km-split-content > .km-pane
 {
     .flex(2);
     width: auto;
     height: auto;
 }
 
-.km-split-content > .km-pane:first-child
+div.km-split-content > .km-pane:first-child
 {
     .flex(1);
 }
 
-.km-split-horizontal > .km-content > .km-pane
+div.km-split-horizontal > .km-content > .km-pane
 {
     top: 0;
     bottom: 0;
