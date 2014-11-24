@@ -142,6 +142,8 @@ var InsertTableTool = PopupTool.extend({
             rows = that.rows,
             cellWidth, cellHeight;
 
+        element.find("*").addBack().attr("unselectable", "on");
+
         end.left += lastCell[0].offsetWidth;
         end.top += lastCell[0].offsetHeight;
 
