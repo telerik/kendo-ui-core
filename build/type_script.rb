@@ -567,7 +567,7 @@ namespace :type_script do
 
                     File.write(path, get_type_script(path, md_api_suite(suite), false))
 
-                    sh "node_modules/typescript/bin/tsc --noImplicitAny #{path}"
+                    sh "node_modules/typescript/bin/tsc --noImplicitAny build/jquery.d.ts #{path}"
                 end
             end
         end
