@@ -1,5 +1,5 @@
 (function (f, define) {
-    define(["../../kendo.data", "../../kendo.draganddrop", "../../kendo.popup", "../../kendo.toolbar",
+    define(["../../kendo.data", "../../kendo.draganddrop", "../../kendo.toolbar",
            "../../kendo.editable",
            "../../kendo.window",
            "../../kendo.dropdownlist",

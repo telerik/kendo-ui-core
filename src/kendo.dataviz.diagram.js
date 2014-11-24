@@ -17,12 +17,17 @@
         name: "Diagram",
         category: "dataviz",
         description: "The Kendo DataViz Diagram ",
-        depends: [ "data", "userevents", "mobile.scroller", "draganddrop", "dataviz.core", "drawing" ],
+        depends: [ "data", "userevents", "mobile.scroller", "draganddrop", "drawing", "dataviz.core", "dataviz.themes", "toolbar" ],
         features: [{
             id: "dataviz.diagram-pdf-export",
             name: "PDF export",
             description: "Export Diagram as PDF",
             depends: [ "pdf" ]
+        },{
+            id: "dataviz.diagram-editing",
+            name: "Editing",
+            description: "Support for model editing",
+            depends: [ "editable", "window", "dropdownlist" ]
         }]
     };
 
