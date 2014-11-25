@@ -1859,12 +1859,18 @@
             _gestureStart: function(e) {
                 this._destroyToolBar();
                 this.scroller.disable();
-                this._gesture = e;
-                this._initialCenter = this.documentToModel(new Point(e.center.x, e.center.y));
-                this.trigger(ZOOM_START, {
-                    point: this._initialCenter,
+                var initialCenter = this.documentToModel(new Point(e.center.x, e.center.y));
+                var eventArgs = {
+                    point: initialCenter,
                     zoom: this.zoom()
-                });
+                };
+
+                if (this.trigger(ZOOM_START, eventArgs)) {
+                    return;
+                }
+
+                this._gesture = e;
+                this._initialCenter = initialCenter;
             },
 
             _gestureChange: function(e) {
