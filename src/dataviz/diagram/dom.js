@@ -4213,14 +4213,16 @@
         function connectionSelector(container, options) {
             var type = options.model.fields[options.field];
             var model = this.dataSource.reader.model;
-            var textField = model.fn.fields.text ? "text": model.idField;
-            $("<input name='" + options.field + "' />")
-                .appendTo(container).kendoDropDownList({
-                    dataValueField: model.idField,
-                    dataTextField: textField,
-                    dataSource: this.dataSource.data().toJSON(),
-                    optionLabel: " "
-                });
+            if (model) {
+                var textField = model.fn.fields.text ? "text": model.idField;
+                $("<input name='" + options.field + "' />")
+                    .appendTo(container).kendoDropDownList({
+                        dataValueField: model.idField,
+                        dataTextField: textField,
+                        dataSource: this.dataSource.data().toJSON(),
+                        optionLabel: " "
+                    });
+            }
         }
 
         dataviz.ui.plugin(Diagram);
