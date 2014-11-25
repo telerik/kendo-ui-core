@@ -37575,7 +37575,7 @@ instance.If the dataSource option is set to a JavaScript object or array the wid
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>If set to true the user can filter the data source using the grid filter menu. Filtering is disabled by default.Can be set to a JavaScript object which represents the filter menu configuration.</description>
+            <description>If set to true the user can filter the data source using the treelist filter menu. Filtering is disabled by default.Can be set to a JavaScript object which represents the filter menu configuration.</description>
             <name>filterable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -37587,7 +37587,7 @@ instance.If the dataSource option is set to a JavaScript object or array the wid
             <type>java.lang.Object</type>
         </attribute>
         <attribute>
-            <description>If set to true the grid will display a scrollbar when the total row height (or width) exceeds the grid height (or width). By default scrolling is enabled.Can be set to a JavaScript object which represents the scrolling configuration.</description>
+            <description>If set to true the treelist will display a scrollbar when the total row height (or width) exceeds the treelist height (or width). By default scrolling is enabled.Can be set to a JavaScript object which represents the scrolling configuration.</description>
             <name>scrollable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
@@ -37627,8 +37627,18 @@ and the string value will be passed as an argument to a kendo.template() functio
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
+            <description>Fired when the user clicks the "Export to Excel" toolbar button.</description>
+            <name>excelExport</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
             <description>Fired when an item is about to be expanded.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>expand</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fired when the user clicks the "Export to PDF" toolbar button.</description>
+            <name>pdfExport</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
@@ -37738,7 +37748,7 @@ is displayed in the column header cell.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>If set to true the user can click the column header and sort the grid by the column field when sorting is enabled. If set to false sorting will
+            <description>If set to true the user can click the column header and sort the treelist by the column field when sorting is enabled. If set to false sorting will
 be disabled for this column. By default all columns are sortable if sorting is enabled via the sortable option.</description>
             <name>sortable</name>
             <rtexprvalue>true</rtexprvalue>
@@ -37785,7 +37795,7 @@ Each table row consists of table cells (&lt;td&gt;) which represent the treelist
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The JavaScript function executed when the user clicks the command button. The function receives a jQuery Event as an argument.The function context (available via the this keyword) will be set to the grid instance.</description>
+            <description>The JavaScript function executed when the user clicks the command button. The function receives a jQuery Event as an argument.The function context (available via the this keyword) will be set to the treelist instance.</description>
             <name>click</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -37806,7 +37816,7 @@ Each table row consists of table cells (&lt;td&gt;) which represent the treelist
 
 
     <tag>
-        <description>The JavaScript function executed when the user clicks the command button. The function receives a jQuery Event as an argument.The function context (available via the this keyword) will be set to the grid instance.</description>
+        <description>The JavaScript function executed when the user clicks the command button. The function receives a jQuery Event as an argument.The function context (available via the this keyword) will be set to the treelist instance.</description>
         <name>treeList-column-commandItem-click</name>
         <tag-class>com.kendoui.taglib.treelist.ColumnCommandItemClickFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -37835,7 +37845,7 @@ for all columns when filtering is enabled via the filterable option.Can be set t
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>If set to true the user can click the column header and sort the grid by the column field when sorting is enabled. If set to false sorting will
+        <description>If set to true the user can click the column header and sort the treelist by the column field when sorting is enabled. If set to false sorting will
 be disabled for this column. By default all columns are sortable if sorting is enabled via the sortable option.</description>
         <name>treeList-column-sortable</name>
         <tag-class>com.kendoui.taglib.treelist.ColumnSortableTag</tag-class>
@@ -37898,7 +37908,7 @@ Each table row consists of table cells (&lt;td&gt;) which represent the treelist
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The template which renders popup editor.The template should contain elements whose name HTML attributes are set as the editable fields. This is how the grid will know
+            <description>The template which renders popup editor.The template should contain elements whose name HTML attributes are set as the editable fields. This is how the treelist will know
 which field to update. The other option is to use MVVM bindings in order to bind HTML elements to data item fields.</description>
             <name>template</name>
             <rtexprvalue>true</rtexprvalue>
@@ -37915,7 +37925,7 @@ which field to update. The other option is to use MVVM bindings in order to bind
 
 
     <tag>
-        <description>The template which renders popup editor.The template should contain elements whose name HTML attributes are set as the editable fields. This is how the grid will know
+        <description>The template which renders popup editor.The template should contain elements whose name HTML attributes are set as the editable fields. This is how the treelist will know
 which field to update. The other option is to use MVVM bindings in order to bind HTML elements to data item fields.</description>
         <name>treeList-editable-template</name>
         <tag-class>com.kendoui.taglib.treelist.EditableTemplateFunctionTag</tag-class>
@@ -37959,7 +37969,7 @@ Such browsers are IE version 9 and lower and Safari.The developer is responsible
 
 
     <tag>
-        <description>If set to true the user can filter the data source using the grid filter menu. Filtering is disabled by default.Can be set to a JavaScript object which represents the filter menu configuration.</description>
+        <description>If set to true the user can filter the data source using the treelist filter menu. Filtering is disabled by default.Can be set to a JavaScript object which represents the filter menu configuration.</description>
         <name>treeList-filterable</name>
         <tag-class>com.kendoui.taglib.treelist.FilterableTag</tag-class>
         <body-content>empty</body-content>
@@ -38256,9 +38266,21 @@ This class can be used to obtain reference to the button after TreeList initiali
         <body-content>JSP</body-content>
     </tag>
     <tag>
+        <description>Fired when the user clicks the "Export to Excel" toolbar button.</description>
+        <name>treeList-excelExport</name>
+        <tag-class>com.kendoui.taglib.treelist.ExcelExportFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
         <description>Fired when an item is about to be expanded.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>treeList-expand</name>
         <tag-class>com.kendoui.taglib.treelist.ExpandFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the user clicks the "Export to PDF" toolbar button.</description>
+        <name>treeList-pdfExport</name>
+        <tag-class>com.kendoui.taglib.treelist.PdfExportFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
