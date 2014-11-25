@@ -49,12 +49,34 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
+        /// Fired when the user clicks the "Export to Excel" toolbar button.
+        /// </summary>
+        /// <param name="handler">The name of the JavaScript function that will handle the excelExport event.</param>
+        public TreeListEventBuilder ExcelExport(string handler)
+        {
+            Handler("excelExport", handler);
+
+            return this;
+        }
+        
+        /// <summary>
         /// Fired when an item is about to be expanded.The event handler function context (available via the this keyword) will be set to the widget instance.
         /// </summary>
         /// <param name="handler">The name of the JavaScript function that will handle the expand event.</param>
         public TreeListEventBuilder Expand(string handler)
         {
             Handler("expand", handler);
+
+            return this;
+        }
+        
+        /// <summary>
+        /// Fired when the user clicks the "Export to PDF" toolbar button.
+        /// </summary>
+        /// <param name="handler">The name of the JavaScript function that will handle the pdfExport event.</param>
+        public TreeListEventBuilder PdfExport(string handler)
+        {
+            Handler("pdfExport", handler);
 
             return this;
         }
