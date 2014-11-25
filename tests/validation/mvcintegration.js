@@ -61,6 +61,16 @@
         ok(validator.validate());
     });
 
+    test("validate reutrns true if checkbox with label and hidden is marked required", function() {
+        container.append(
+            '<input type="checkbox" class="k-checkbox" data-val="true" data-val-required="foo" id="bar" name="bar" />' +
+            '<label class="k-checkbox-label" for="bar">Bar label</label>' +
+            '<input name="bar" type="hidden" value="false" /> '
+        );
+        var validator = setup(container);
+        ok(validator.validate());
+    });
+
     test("validate returns false if checkbox marked as required is not checked", function() {
         container.append($('<input type="checkbox" data-val="true" data-val-required="foo" />'));
         var validator = setup(container);

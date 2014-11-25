@@ -122,7 +122,13 @@
 
             if (checkbox.length) {
                 name = checkbox[0].name.replace(nameSpecialCharRegExp, "\\$1");
-                var hidden = checkbox.next("input:hidden[name='" + name + "']");
+                var hiddenSelector = "input:hidden[name='" + name + "']";
+                var hidden = checkbox.next(hiddenSelector);
+
+                if (!hidden.length) {
+                    hidden = checkbox.next("label.k-checkbox-label").next(hiddenSelector);
+                }
+
                 if (hidden.length) {
                     value = hidden.val();
                 } else {
