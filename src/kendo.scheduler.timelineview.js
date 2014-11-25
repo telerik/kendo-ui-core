@@ -1573,7 +1573,7 @@ var __meta__ = {
                 majorTick: 1440,
                 minorTickCount: 1
             },
-            name: "timelineWeek",
+            name: "timelineMonth",
             calculateDateRange: function() {
                 var selectedDate = this.options.date,
                     start = kendo.date.firstDayOfMonth(selectedDate),

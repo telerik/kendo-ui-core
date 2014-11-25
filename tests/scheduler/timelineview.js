@@ -1,6 +1,7 @@
 (function() {
     var TimelineView = kendo.ui.TimelineView;
     var TimelineWeekView = kendo.ui.TimelineWeekView;
+    var TimelineWorkWeekView = kendo.ui.TimelineWorkWeekView;
     var TimelineMonthView = kendo.ui.TimelineMonthView;
     var SchedulerEvent = kendo.data.SchedulerEvent;
     var Scheduler = kendo.ui.Scheduler;
@@ -19,6 +20,16 @@
         }, options);
 
         return new TimelineWeekView(container, options);
+    }
+
+    function setupWorkWeek(options) {
+        var options = options || {};
+
+        options = $.extend({
+            majorTick: 240
+        }, options);
+
+        return new TimelineWorkWeekView(container, options);
     }
 
     function setupMonth(options) {
@@ -65,6 +76,7 @@
         ok(view.footer);
         ok(view.footer.hasClass("k-scheduler-footer"));
     });
+
 
     test("footer is not rendered", function() {
         var view = setup({ footer: false });
@@ -114,6 +126,30 @@
 
         equal(view._dates[0].getDate(), 1);
         equal(view._dates[view._dates.length-1].getDate(), 31);
+    });
+
+    test("month view name is correct", function () {
+        var view = setupMonth({ title: "the title"});
+
+        equal(view.name, "timelineMonth");
+    });
+
+    test("week view name is correct", function () {
+        var view = setupWeek({ title: "the title"});
+
+        equal(view.name, "timelineWeek");
+    });
+
+    test("workWeek view name is correct", function () {
+        var view = setupWorkWeek({ title: "the title"});
+
+        equal(view.name, "timelineWorkWeek");
+    });
+
+    test("timeline view name is correct", function () {
+        var view = setup({ title: "the title"});
+
+        equal(view.name, "timeline");
     });
 
     test("week view shows the same amount of cells in header and content with even minorTicks", function () {
