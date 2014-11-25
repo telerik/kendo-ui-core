@@ -23,7 +23,7 @@ var __meta__ = {
         CHANGE = "change",
         NS = ".kendoSelectable",
         UNSELECTING = "k-state-unselecting",
-        INPUTSELECTOR = "input,a,textarea,.k-multiselect-wrap,select,button",
+        INPUTSELECTOR = "input,a,textarea,.k-multiselect-wrap,select,button,a.k-button>.k-icon",
         msie = kendo.support.browser.msie,
         supportEventDelegation = false;
 
