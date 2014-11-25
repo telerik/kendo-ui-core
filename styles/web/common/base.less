@@ -808,6 +808,24 @@ a.k-button:hover
    cursor: auto;
 }
 
+// Remove Checkboxes / Radio buttons styling for IE 8
+.k-ie8 .k-checkbox,
+.k-ie8 .k-radio {
+    display: inline-block;
+}
+
+.k-ie8 .k-checkbox-label,
+.k-ie8 .k-radio-label {
+    padding-left: 0;
+}
+
+.k-ie8 .k-checkbox-label:before,
+.k-ie8 .k-checkbox-label:after,
+.k-ie8 .k-radio-label:before,
+.k-ie8 .k-radio-label:after {
+    display: none;
+}
+
 // Avoid double-click bug with checkbox + label combination in Google Chrome
 input.k-checkbox + label{
     -webkit-user-select:none;
