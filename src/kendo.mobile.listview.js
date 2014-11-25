@@ -202,9 +202,11 @@ var __meta__ = {
                         handler.dataSource.read(pullParameters.call(listView, handler._first));
                     }
                 },
-                pullTemplate: options.messages.pullTemplate,
-                releaseTemplate: options.messages.releaseTemplate,
-                refreshTemplate: options.messages.refreshTemplate
+                messages: {
+                    pullTemplate: options.messages.pullTemplate,
+                    releaseTemplate: options.messages.releaseTemplate,
+                    refreshTemplate: options.messages.refreshTemplate
+                }
             });
         },
 
