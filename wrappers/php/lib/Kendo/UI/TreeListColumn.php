@@ -122,7 +122,7 @@ is displayed in the column header cell.
     }
 
     /**
-    * If set to true the user can click the column header and sort the grid by the column field when sorting is enabled. If set to false sorting will
+    * If set to true the user can click the column header and sort the treelist by the column field when sorting is enabled. If set to false sorting will
 be disabled for this column. By default all columns are sortable if sorting is enabled via the sortable option.
     * @param boolean|\Kendo\UI\TreeListColumnSortable|array $value
     * @return \Kendo\UI\TreeListColumn

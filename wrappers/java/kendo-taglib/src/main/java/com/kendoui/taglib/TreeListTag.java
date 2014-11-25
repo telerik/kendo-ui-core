@@ -107,12 +107,20 @@ public class TreeListTag extends WidgetTag /* interfaces */implements DataBoundW
         setEvent("edit", value.getBody());
     }
 
+    public void setExcelExport(ExcelExportFunctionTag value) {
+        setEvent("excelExport", value.getBody());
+    }
+
     public void setExpand(ExpandFunctionTag value) {
         setEvent("expand", value.getBody());
     }
 
     public void setFilterMenuInit(FilterMenuInitFunctionTag value) {
         setEvent("filterMenuInit", value.getBody());
+    }
+
+    public void setPdfExport(PdfExportFunctionTag value) {
+        setEvent("pdfExport", value.getBody());
     }
 
     public void setRemove(RemoveFunctionTag value) {
@@ -263,6 +271,18 @@ public class TreeListTag extends WidgetTag /* interfaces */implements DataBoundW
         setProperty("edit", new Function(value));
     }
 
+    public String getExcelExport() {
+        Function property = ((Function)getProperty("excelExport"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setExcelExport(String value) {
+        setProperty("excelExport", new Function(value));
+    }
+
     public String getExpand() {
         Function property = ((Function)getProperty("expand"));
         if (property != null) {
@@ -285,6 +305,18 @@ public class TreeListTag extends WidgetTag /* interfaces */implements DataBoundW
 
     public void setFilterMenuInit(String value) {
         setProperty("filterMenuInit", new Function(value));
+    }
+
+    public String getPdfExport() {
+        Function property = ((Function)getProperty("pdfExport"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setPdfExport(String value) {
+        setProperty("pdfExport", new Function(value));
     }
 
     public String getRemove() {

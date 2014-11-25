@@ -46,7 +46,7 @@ data source is fired. By default the widget will bind to the data source specifi
     }
 
     /**
-    * If set to true the grid will display a scrollbar when the total row height (or width) exceeds the grid height (or width). By default scrolling is enabled.Can be set to a JavaScript object which represents the scrolling configuration.
+    * If set to true the treelist will display a scrollbar when the total row height (or width) exceeds the treelist height (or width). By default scrolling is enabled.Can be set to a JavaScript object which represents the scrolling configuration.
     * @param boolean| $value
     * @return \Kendo\UI\TreeList
     */
@@ -91,7 +91,7 @@ data source is fired. By default the widget will bind to the data source specifi
     }
 
     /**
-    * If set to true the user can filter the data source using the grid filter menu. Filtering is disabled by default.Can be set to a JavaScript object which represents the filter menu configuration.
+    * If set to true the user can filter the data source using the treelist filter menu. Filtering is disabled by default.Can be set to a JavaScript object which represents the filter menu configuration.
     * @param boolean|\Kendo\UI\TreeListFilterable|array $value
     * @return \Kendo\UI\TreeList
     */
@@ -169,6 +169,20 @@ data source is fired. By default the widget will bind to the data source specifi
     }
 
     /**
+    * Sets the excelExport event of the TreeList.
+    * Fired when the user clicks the "Export to Excel" toolbar button.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\UI\TreeList
+    */
+    public function excelExport($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('excelExport', $value);
+    }
+
+    /**
     * Sets the expand event of the TreeList.
     * Fired when an item is about to be expanded.The event handler function context (available via the this keyword) will be set to the widget instance.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
@@ -180,6 +194,20 @@ data source is fired. By default the widget will bind to the data source specifi
         }
 
         return $this->setProperty('expand', $value);
+    }
+
+    /**
+    * Sets the pdfExport event of the TreeList.
+    * Fired when the user clicks the "Export to PDF" toolbar button.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\UI\TreeList
+    */
+    public function pdfExport($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('pdfExport', $value);
     }
 
     /**
