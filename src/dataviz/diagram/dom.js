@@ -1573,8 +1573,8 @@
                 layout: "",
                 zoomRate: 0.1,
                 zoom: 1,
-                minZoom: 0,
-                maxZoom: 2,
+                zoomMin: 0,
+                zoomMax: 2,
                 dataSource: {},
                 draggable: true,
                 template: "",
@@ -2836,7 +2836,7 @@
                 }
             },
             _getValidZoom: function (zoom) {
-                return math.min(math.max(zoom, this.options.minZoom), this.options.maxZoom);
+                return math.min(math.max(zoom, this.options.zoomMin), this.options.zoomMax);
             },
             _panTransform: function (pos) {
                 var diagram = this,

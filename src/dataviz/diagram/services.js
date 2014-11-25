@@ -22,8 +22,8 @@
             Movable = kendo.ui.Movable,
             browser = kendo.support.browser,
             defined = kendo.util.defined,
-
             proxy = $.proxy;
+
         // Constants ==============================================================
         var Cursors = {
                 arrow: "default",
@@ -956,7 +956,7 @@
                     z -= zoomRate;
                 }
 
-                z = kendo.dataviz.round(Math.max(options.minZoom, Math.min(options.maxZoom, z)), 2);
+                z = kendo.dataviz.round(Math.max(options.zoomMin, Math.min(options.zoomMax, z)), 2);
                 zoomOptions.zoom = z;
 
                 diagram.zoom(z, zoomOptions);
