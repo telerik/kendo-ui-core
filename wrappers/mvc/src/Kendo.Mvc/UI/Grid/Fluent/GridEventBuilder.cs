@@ -146,6 +146,93 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Defines the name of the JavaScript function that will handle the excelExport client-side event.
+        /// </summary>
+        /// <param name="handler">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <example>
+        /// <code lang="CS">
+        /// @(Html.Kendo().Grid()
+        ///           .Name("Grid")
+        ///           .Events(events => events.ExcelExport(
+        ///                @&lt;text&gt;
+        ///                function(e) {
+        ///                    //event handling code
+        ///                }
+        ///                &lt;/text&gt;
+        ///           ))
+        /// )
+        /// </code>
+        /// </example>
+        public GridEventBuilder ExcelExport(Func<object, object> handler)
+        {
+            Handler("excelExport", handler);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Defines the name of the JavaScript function that will handle the excelExport client-side event.
+        /// </summary>
+        /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// @(Html.Kendo().Grid()
+        ///            .Name("Grid")
+        ///            .Events(events => events.ExcelExport("gridExcelExport"))
+        /// )
+        /// </code>
+        /// </example>
+        public GridEventBuilder ExcelExport(string handler)
+        {
+            Handler("excelExport", handler);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Defines the name of the JavaScript function that will handle the pdfExport client-side event.
+        /// </summary>
+        /// <param name="handler">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <example>
+        /// <code lang="CS">
+        /// @(Html.Kendo().Grid()
+        ///           .Name("Grid")
+        ///           .Events(events => events.PdfExport(
+        ///                @&lt;text&gt;
+        ///                function(e) {
+        ///                    //event handling code
+        ///                }
+        ///                &lt;/text&gt;
+        ///           ))
+        /// )
+        /// </code>
+        /// </example>
+        public GridEventBuilder PdfExport(Func<object, object> handler)
+        {
+            Handler("pdfExport", handler);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Defines the name of the JavaScript function that will handle the pdfExport client-side event.
+        /// </summary>
+        /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// @(Html.Kendo().Grid()
+        ///            .Name("Grid")
+        ///            .Events(events => events.PdfExport("gridPdfExport"))
+        /// )
+        /// </code>
+        /// </example>
+        public GridEventBuilder PdfExport(string handler)
+        {
+            Handler("pdfExport", handler);
+
+            return this;
+        }
+        /// <summary>
         /// Defines the name of the JavaScript function that will handle the the Save client-side event.
         /// </summary>
         /// <param name="handler">The handler code wrapped in a text tag (Razor syntax).</param>
