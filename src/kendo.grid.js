@@ -1676,6 +1676,10 @@ var __meta__ = {
                     left += container.find(".k-group-cell:first").outerWidth() * groups;
                 }
 
+                if (that._hasDetails()) {
+                    left += container.find(".k-hierarchy-cell:first").outerWidth();
+                }
+
            } else {
                 left = th.position().left;
                 if (scrollable) {

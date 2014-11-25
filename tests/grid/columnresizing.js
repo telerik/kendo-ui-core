@@ -817,4 +817,21 @@
             ok(column.hasClass("k-column-active"));
         }, 100);
     });
+
+    test("handler is position over the th right side with detail template set", function() {
+        var grid = new Grid(table, {
+            dataSource: [ { foo: "foo", bar: "bar" } ],
+            resizable: true,
+            detailInit: $.noop,
+            columns: [{ field: "foo" }, { field: "bar" }]
+        });
+
+        var firstColumn = grid.thead.find("th:not(.k-hierarchy-cell):first");
+
+        $(firstColumn).trigger({ type: "mousemove", clientX: firstColumn.offset().left + firstColumn.outerWidth(), clientY: 0});
+
+        equal(grid.wrapper.find(".k-grid-header-wrap").children(".k-resize-handle").first()[0].offsetTop, firstColumn[0].offsetTop);
+        equal(grid.wrapper.find(".k-grid-header-wrap").children(".k-resize-handle").first()[0].offsetLeft, firstColumn[0].offsetLeft + firstColumn[0].offsetWidth - indicatorWidth);
+    });
+
 })();
