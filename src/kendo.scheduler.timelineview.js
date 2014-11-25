@@ -27,7 +27,7 @@ var __meta__ = {
     var EVENT_TEMPLATE = kendo.template('<div>' +
         '<div class="k-event-template k-event-time">#:kendo.format("{0:t} - {1:t}", start, end)#</div>' +
         '<div class="k-event-template">${title}</div></div>'),
-        DATA_HEADER_TEMPLATE = kendo.template("<span class='k-link k-nav-day'>#=kendo.toString(date, 'ddd M/dd')#</span>"),
+        DATA_HEADER_TEMPLATE = kendo.template("<span class='k-link k-nav-day'>#=kendo.format('{0:m}', date)#</span>"),
         EVENT_WRAPPER_STRING = '<div role="gridcell" aria-selected="false" ' +
                 'data-#=ns#uid="#=uid#"' +
                 '#if (resources[0]) { #' +
@@ -372,8 +372,16 @@ var __meta__ = {
 
             that.refreshLayout();
 
-            this.timesHeader.find("table tr:last").hide(); /*Chrome fix, use CSS selector*/
-            this.datesHeader.find("table tr:last").hide();
+            that.datesHeader.on("click" + NS, ".k-nav-day", function(e) {
+                var th = $(e.currentTarget).closest("th");
+
+                var slot = that._slotByPosition(th.offset().left, that.content.offset().top);
+
+                that.trigger("navigate", { view: "timeline", date: slot.startDate() });
+            });
+
+            that.timesHeader.find("table tr:last").hide(); /*Chrome fix, use CSS selector*/
+            that.datesHeader.find("table tr:last").hide();
         },
 
         _setContentWidth: function() {
@@ -518,7 +526,7 @@ var __meta__ = {
 
             for (var idx = 0; idx < dates.length; idx++) {
                 columns.push({
-                    text: kendo.format("{0:m}",dates[idx]),
+                    text: that.dateHeaderTemplate({ date: dates[idx] }),
                     className:  "k-slot-cell",
                     columns: timeColumns.slice(0)
                 });

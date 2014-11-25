@@ -152,6 +152,31 @@
         equal(view.name, "timeline");
     });
 
+    test("timeline view dateHeaderTemplate is used", function () {
+        var date = new Date("2012/1/1 10:00");
+        var view = setup({
+            title: "the title",
+            dateHeaderTemplate: "#=kendo.format('{0:d}', date)#",
+            date: date
+        });
+
+        equal(view.datesHeader.find("tr:first th").text(), kendo.format("{0:d}", date));
+    });
+
+    test("timelineWeek view clicking on date header navigates to timeline view", function () {
+        var date = new Date("2012/1/1 10:00");
+        var view = setupWorkWeek({
+            title: "the title",
+            date: date
+        });
+
+        view.bind("navigate",function(e) {
+            equal(e.view, "timeline");
+        });
+
+        view.datesHeader.find("tr:first th:first span").click();
+    });
+
     test("week view shows the same amount of cells in header and content with even minorTicks", function () {
         var view = setupWeek({
             title: "the title",
