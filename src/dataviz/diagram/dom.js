@@ -4120,7 +4120,7 @@
                     //The bellow line is required due to: draggable window in IE, change event will be triggered while the window is closing
                     if (e.userTriggered) {
                         e.sender.element.focus();
-                        that._cancelClick(e);
+                        that._cancelClick();
                     }
                 });
 
