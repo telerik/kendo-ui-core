@@ -133,20 +133,21 @@ var __meta__ = {
 
     var Application = Widget.extend({
         init: function(element, options) {
+            // global reference to current application
+            mobile.application = this;
+            $($.proxy(this, 'bootstrap', element, options));
+        },
+
+        bootstrap: function(element, options) {
             element = $(element);
 
             if (!element[0]) {
                 element = $(document.body);
             }
 
-            // global reference to current application
-            mobile.application = this;
             Widget.fn.init.call(this, element, options);
             this.element.removeAttr("data-" + kendo.ns + "role");
-            $($.proxy(this, 'bootstrap'));
-        },
 
-        bootstrap: function() {
             this._setupPlatform();
             this._attachMeta();
             this._setupElementClass();
