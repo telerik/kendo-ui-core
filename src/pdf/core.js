@@ -1194,7 +1194,7 @@
         if (!box) {
             var a = [ isRadial ].concat(coords);
             stops.forEach(function(x){
-                a.push(x.offset, x.color.r, x.color.g, x.color.b);
+                a.push(x.offset, x.color.a);
             });
             hash = makeHash(a);
             opacity = pdf.GRAD_OPC[hash];
