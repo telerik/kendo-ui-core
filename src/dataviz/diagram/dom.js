@@ -3147,7 +3147,7 @@
                             }
                         }
 
-                        if (tools) {
+                        if (tools && tools.length) {
                             var padding = 20;
                             var point;
                             this.singleToolBar = new DiagramToolBar(diagram, {
