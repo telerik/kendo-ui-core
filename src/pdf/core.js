@@ -232,6 +232,8 @@
 
         self.FONTS = {};
         self.IMAGES = {};
+        self.GRAD_COL_FUNCTIONS = {}; // cache for color gradient functions
+        self.GRAD_OPC_FUNCTIONS = {}; // cache for opacity gradient functions
 
         var paperSize = getOption("paperSize", PAPER_SIZE.a4);
         if (typeof paperSize == "string") {
@@ -1056,38 +1058,79 @@
 
     /// gradients
 
-    function makeGradientFunctions(stops) {
+    function makeHash(a) {
+        return a.map(function(x){
+            return isArray(x) ? makeHash(x)
+                : typeof x == "string" ? x
+                : x.toFixed(4);
+        }).join("-");
+    }
+
+    function cacheColorGradientFunction(pdf, r1, g1, b1, r2, g2, b2) {
+        var hash = makeHash([ r1, g1, b1, r2, g2, b2 ]);
+        var func = pdf.GRAD_COL_FUNCTIONS[hash];
+        if (!func) {
+            func = pdf.GRAD_COL_FUNCTIONS[hash] = pdf.attach(new PDFDictionary({
+                FunctionType: 2,
+                Domain: [ 0, 1 ],
+                Range: [ 0, 1, 0, 1, 0, 1 ],
+                N: 1,
+                C0: [ r1 , g1 , b1 ],
+                C1: [ r2 , g2 , b2 ]
+            }));
+        }
+        return func;
+    }
+
+    function cacheOpacityGradientFunction(pdf, a1, a2) {
+        var hash = makeHash([ a1, a2 ]);
+        var func = pdf.GRAD_OPC_FUNCTIONS[hash];
+        if (!func) {
+            func = pdf.GRAD_OPC_FUNCTIONS[hash] = pdf.attach(new PDFDictionary({
+                FunctionType: 2,
+                Domain: [ 0, 1 ],
+                Range: [ 0, 1 ],
+                N: 1,
+                C0: [ a1 ],
+                C1: [ a2 ]
+            }));
+        }
+        return func;
+    }
+
+    function makeGradientFunctions(pdf, stops) {
         var hasAlpha = false;
         var opacities = [];
         var colors = [];
         var offsets = [];
         var encode = [];
-        for (var i = 1; i < stops.length; ++i) {
-            var prev = stops[i - 1];
-            var cur = stops[i];
-            var prevColor = prev.color;
-            var curColor = cur.color;
-            colors.push({
-                FunctionType: 2,
-                Domain: [ 0, 1 ],
-                Range: [ 0, 1, 0, 1, 0, 1 ],
-                N: 1,
-                C0: [ prevColor.r , prevColor.g , prevColor.b ],
-                C1: [  curColor.r ,  curColor.g ,  curColor.b ]
-            });
-            opacities.push({
-                FunctionType: 2,
-                Domain: [ 0, 1 ],
-                Range: [ 0, 1 ],
-                N: 1,
-                C0: [ prevColor.a ],
-                C1: [  curColor.a ]
-            });
+        var i, prev, cur, prevColor, curColor;
+        for (i = 1; i < stops.length; ++i) {
+            prev = stops[i - 1];
+            cur = stops[i];
+            prevColor = prev.color;
+            curColor = cur.color;
+            colors.push(cacheColorGradientFunction(
+                pdf,
+                prevColor.r, prevColor.g, prevColor.b,
+                curColor.r,  curColor.g,  curColor.b
+            ));
             if (prevColor.a < 1 || curColor.a < 1) {
                 hasAlpha = true;
             }
             offsets.push(cur.offset);
             encode.push(0, 1);
+        }
+        if (hasAlpha) {
+            for (i = 1; i < stops.length; ++i) {
+                prev = stops[i - 1];
+                cur = stops[i];
+                prevColor = prev.color;
+                curColor = cur.color;
+                opacities.push(cacheOpacityGradientFunction(
+                    pdf, prevColor.a, curColor.a
+                ));
+            }
         }
         offsets.pop();
         return {
@@ -1111,7 +1154,7 @@
 
     function makeGradient(pdf, gradient, box) {
         var isRadial = gradient.type == "radial";
-        var funcs = makeGradientFunctions(gradient.stops);
+        var funcs = makeGradientFunctions(pdf, gradient.stops);
         var coords = isRadial ? [
             gradient.start.x , gradient.start.y , gradient.start.r,
             gradient.end.x   , gradient.end.y   , gradient.end.r
