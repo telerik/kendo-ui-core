@@ -103,6 +103,18 @@
             set;
         }
 
+        public string DateHeaderTemplate
+        {
+            get;
+            set;
+        }
+
+        public string DateHeaderTemplateId
+        {
+            get;
+            set;
+        }
+
         protected override void Serialize(IDictionary<string, object> json)
         {
             base.Serialize(json);
@@ -179,6 +191,16 @@
             if (WorkWeekEnd != null)
             {
                 json["workWeekEnd"] = WorkWeekEnd;
+            }
+
+            if (!string.IsNullOrEmpty(DateHeaderTemplate))
+            {
+                json["dateHeaderTemplate"] = DateHeaderTemplate;
+            }
+
+            if (!string.IsNullOrEmpty(DateHeaderTemplateId))
+            {
+                json["dateHeaderTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template(jQuery('{0}{1}').html())", idPrefix, DateHeaderTemplateId) };
             }
         }
     }

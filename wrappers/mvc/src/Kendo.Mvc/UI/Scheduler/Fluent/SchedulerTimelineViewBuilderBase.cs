@@ -342,5 +342,27 @@
 
             return (TTimelineViewBuilder)this;
         }
+
+        /// <summary>
+        /// The template used to render the date header cells.
+        /// </summary>
+        /// <param name="dateHeaderTemplate">The dateHeaderTemplate</param>
+        public TTimelineViewBuilder DateHeaderTemplate(string dateHeaderTemplate)
+        {
+            view.DateHeaderTemplate = dateHeaderTemplate;
+
+            return (TTimelineViewBuilder)this;
+        }
+
+        /// <summary>
+        /// The Id of the template used to render the date header cells.
+        /// </summary>
+        /// <param name="dateHeaderTemplateId">The dateHeaderTemplateId</param>
+        public TTimelineViewBuilder DateHeaderTemplateId(string dateHeaderTemplateId)
+        {
+            view.DateHeaderTemplateId = dateHeaderTemplateId;
+
+            return (TTimelineViewBuilder)this;
+        }
     }
 }
