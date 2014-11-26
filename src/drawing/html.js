@@ -27,6 +27,10 @@
         var defer = $.Deferred();
         element = $(element)[0];
 
+        if (typeof window.getComputedStyle != "function") {
+            throw new Error("window.getComputedStyle is missing.  You are using an unsupported browser, or running in IE8 compatibility mode.  Drawing HTML is supported in Chrome, Firefox, Safari and IE9+.");
+        }
+
         if (element) {
             cacheImages(element, function(){
                 var group = new drawing.Group();
