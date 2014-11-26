@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gauge</title>
+    <link type="text/css" href="../../dist/styles/web/kendo.common.css" rel="stylesheet/less"/>
+    <link type="text/css" href="../../dist/styles/web/kendo.silver.css" rel="stylesheet/less"/>
+    <link type="text/css" href="../../dist/styles/dataviz/kendo.dataviz.css" rel="stylesheet/less"/>
+    <link type="text/css" href="../../dist/styles/dataviz/kendo.dataviz.silver.css" rel="stylesheet"/>
+    <script src="../require.js"></script>
+    <script>
+    require.config({
+        baseUrl: "../../src",
+        paths: {
+            cultures: "cultures"
+        }
+    });
+
+    require([ "jquery.min",
+              "kendo.dataviz.gauge" ], function(){
+
+        $("#gauge").kendoRadialGauge({
+            pointer: {
+                value: 50
+            },
+
+            transitions: false,
+
+            scale: {
+                minorUnit: 5,
+                startAngle: -30,
+                endAngle: 210,
+                max: 180
+            }
+        });
+    });
+    </script>
+    <style>
+        gauge {
+            width: 500px;
+            height: 500px;
+        }
+    </style>
+  </head>
+  <body>
+      <div id="gauge"></div>
+  </body>
+</html>

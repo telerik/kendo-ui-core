@@ -1592,13 +1592,23 @@
 
         module("CircleTransformNode", {
             setup: function() {
-                transformCircle = new Circle(new g.Circle(new Point(600,400), 100));
+                transformCircle = new Circle(new g.Circle([600,400], 100));
                 circleTransformNode = new CircleTransformNode(transformCircle, new Matrix(1,2,3,4,5,6));
             }
         });
 
         test("circle transform origin is minus bbox center over bbox size", function() {
-            ok(circleTransformNode.element.origin, "-3,-2");
+            equal(circleTransformNode.element.origin, "-3,-2");
+        });
+
+        test("circle transform origin rounds up center coordinates", function() {
+            transformCircle.geometry().center.move(599.1, 399.1);
+            equal(circleTransformNode.transformOrigin(), "-3,-2");
+        });
+
+        test("circle transform origin rounds up bounding box", function() {
+            transformCircle.geometry().setRadius(99.55);
+            equal(circleTransformNode.transformOrigin(), "-3,-2");
         });
 
         test("options change updates attributes", 4, function() {
@@ -1636,7 +1646,8 @@
 
     // ------------------------------------------------------------
     (function() {
-        var circle,
+        var geometry,
+            circle,
             circleNode;
 
         baseClipTests("CircleNode", vml.CircleNode, d.Circle);
@@ -1649,7 +1660,7 @@
 
         module("CircleNode", {
             setup: function() {
-                var geometry = new g.Circle(new Point(10, 20), 30);
+                geometry = new g.Circle(new Point(10, 20), 30);
                 circle = new Circle(geometry);
                 circleNode = new CircleNode(circle);
             }
@@ -1660,13 +1671,25 @@
         });
 
         test("renders center", function() {
-            ok(circleNode.element.style.top, "-10px");
-            ok(circleNode.element.style.left, "-20px");
+            equal(circleNode.element.style.top, "-10px");
+            equal(circleNode.element.style.left, "-20px");
+        });
+
+        test("rounds center up", function() {
+            geometry.center.translate(-0.4, -0.4);
+            equal(circleNode.element.style.top, "-10px");
+            equal(circleNode.element.style.left, "-20px");
         });
 
         test("renders radius", function() {
-            ok(circleNode.element.style.width, "60px");
-            ok(circleNode.element.style.height, "60px");
+            equal(circleNode.element.style.width, "60px");
+            equal(circleNode.element.style.height, "60px");
+        });
+
+        test("rounds radius up", function() {
+            geometry.setRadius(29.55);
+            equal(circleNode.element.style.width, "60px");
+            equal(circleNode.element.style.height, "60px");
         });
 
         test("geometryChange sets center", 2, function() {

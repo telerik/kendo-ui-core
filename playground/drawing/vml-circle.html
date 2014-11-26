@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../require.js"></script>
+    <script>
+    require.config({
+        baseUrl: "../../src",
+        paths: {
+            cultures: "cultures"
+        }
+    });
+
+    require([ "jquery.min",
+              "kendo.drawing" ], function(){
+
+        var geom = kendo.geometry;
+        var draw = kendo.drawing;
+
+        var center = new geom.Point(200, 300);
+
+        var rect = new geom.Rect(center.clone().translate(-50, -50), [100, 100]);
+        var path = draw.Path.fromRect(rect, {
+            fill: {
+                color: "blue"
+            }
+        });
+
+        var circle = new geom.Circle(center, 12.25);
+        var shape = new draw.Circle(circle, {
+            fill: {
+                color: "red"
+            }
+        });
+
+        var group = new draw.Group();
+        group.append(path, shape);
+
+        var surface = draw.Surface.create($("#surface"));
+        surface.draw(group);
+
+        var angle = 0;
+        setInterval(function() {
+            angle += 10;
+            group.transform(geom.transform().rotate(
+                angle, center
+            ));
+        }, 500);
+    });
+    </script>
+    <style>
+        #surface {
+            width: 500px;
+            height: 500px;
+        }
+    </style>
+  </head>
+  <body>
+      <div id="surface"></div>
+  </body>
+</html>

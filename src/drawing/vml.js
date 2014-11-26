@@ -8,6 +8,7 @@
     var doc = document,
         math = Math,
         atan2 = math.atan2,
+        ceil = math.ceil,
         sqrt = math.sqrt,
 
         kendo = window.kendo,
@@ -852,8 +853,8 @@
         transformOrigin: function() {
             var boundingBox = this.srcElement.geometry().bbox(),
                 center = boundingBox.center(),
-                originX = -center.x / boundingBox.width(),
-                originY = -center.y / boundingBox.height();
+                originX = -ceil(center.x) / ceil(boundingBox.width()),
+                originY = -ceil(center.y) / ceil(boundingBox.height());
 
             return originX + "," + originY;
         }
@@ -880,12 +881,12 @@
             var geometry = this.srcElement.geometry();
             var radius = geometry.radius;
             var center = geometry.center;
-            var diameter = radius * 2;
+            var diameter = ceil(radius * 2);
 
             var styles = ShapeNode.fn.mapStyle.call(this, diameter, diameter);
             styles.push(
-                ["left", center.x - radius + "px"],
-                ["top", center.y - radius + "px"]
+                ["left", ceil(center.x - radius) + "px"],
+                ["top", ceil(center.y - radius) + "px"]
             );
 
             return styles;
