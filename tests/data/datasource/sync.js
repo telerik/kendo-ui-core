@@ -535,6 +535,36 @@ test("hasChanges returns true if record is deleted", function() {
     ok(dataSource.hasChanges());
 });
 
+test("hasChanges returns true if model is updated on third page", function() {
+    var dataSource = new DataSource({
+        schema: {
+            model: { id: "id" }
+        },
+        pageSize: 1,
+        data: [{ id: 0, foo: "bar"}, { id: 1, foo: "bar"}, { id: 2, foo: "bar"}]
+    });
+
+    dataSource.read();
+
+    dataSource.at(2).set("foo", "baz");
+
+    ok(dataSource.hasChanges());
+});
+
+test("hasChanges returns false if model is not updated with paging enabled", function() {
+    var dataSource = new DataSource({
+        schema: {
+            model: { id: "id" }
+        },
+        pageSize: 1,
+        data: [{ id: 0, foo: "bar"}, { id: 1, foo: "bar"}, { id: 2, foo: "bar"}]
+    });
+
+    dataSource.read();
+
+    ok(!dataSource.hasChanges());
+});
+
 test("requestStart is called for each sync request", 3, function() {
     var dataSource = new DataSource({
         schema: {
