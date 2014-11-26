@@ -78,6 +78,7 @@ if (kendo.ui.ColumnMenu) {
 kendo.ui.ColumnMenu.prototype.options.messages =
 $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
   "columns": "Colonne",
+  "filter": "Filtro",
   "sortAscending": "In ordine crescente",
   "sortDescending": "In ordine decrescente",
   "settings": "Impostazioni colonna",
