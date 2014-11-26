@@ -234,6 +234,8 @@
         self.IMAGES = {};
         self.GRAD_COL_FUNCTIONS = {}; // cache for color gradient functions
         self.GRAD_OPC_FUNCTIONS = {}; // cache for opacity gradient functions
+        self.GRAD_COL = {};     // cache for whole color gradient objects
+        self.GRAD_OPC = {};     // cache for whole opacity gradient objects
 
         var paperSize = getOption("paperSize", PAPER_SIZE.a4);
         if (typeof paperSize == "string") {
@@ -1061,9 +1063,9 @@
     function makeHash(a) {
         return a.map(function(x){
             return isArray(x) ? makeHash(x)
-                : typeof x == "string" ? x
-                : x.toFixed(4);
-        }).join("-");
+                : typeof x == "number" ? (Math.round(x * 1000) / 1000).toFixed(3)
+                : x;
+        }).join(" ");
     }
 
     function cacheColorGradientFunction(pdf, r1, g1, b1, r2, g2, b2) {
@@ -1152,7 +1154,101 @@
         }
     }
 
-    function makeGradient(pdf, gradient, box) {
+    function cacheColorGradient(pdf, isRadial, stops, coords, funcs, box) {
+        var shading, hash;
+        // if box is given then we have user-space coordinates, which
+        // means the gradient is designed for a certain position/size
+        // on page.  caching won't do any good.
+        if (!box) {
+            var a = [ isRadial ].concat(coords);
+            stops.forEach(function(x){
+                a.push(x.offset, x.color.r, x.color.g, x.color.b);
+            });
+            hash = makeHash(a);
+            shading = pdf.GRAD_COL[hash];
+        }
+        if (!shading) {
+            shading = new PDFDictionary({
+                Type: _("Shading"),
+                ShadingType: isRadial ? 3 : 2,
+                ColorSpace: _("DeviceRGB"),
+                Coords: coords,
+                Domain: [ 0, 1 ],
+                Function: funcs,
+                Extend: [ true, true ]
+            });
+            pdf.attach(shading);
+            shading._resourceName = "S" + (++RESOURCE_COUNTER);
+            if (hash) {
+                pdf.GRAD_COL[hash] = shading;
+            }
+        }
+        return shading;
+    }
+
+    function cacheOpacityGradient(pdf, isRadial, stops, coords, funcs, box) {
+        var opacity, hash;
+        // if box is given then we have user-space coordinates, which
+        // means the gradient is designed for a certain position/size
+        // on page.  caching won't do any good.
+        if (!box) {
+            var a = [ isRadial ].concat(coords);
+            stops.forEach(function(x){
+                a.push(x.offset, x.color.r, x.color.g, x.color.b);
+            });
+            hash = makeHash(a);
+            opacity = pdf.GRAD_OPC[hash];
+        }
+        if (!opacity) {
+            opacity = new PDFDictionary({
+                Type: _("ExtGState"),
+                AIS: false,
+                CA: 1,
+                ca: 1,
+                SMask: {
+                    Type: _("Mask"),
+                    S: _("Luminosity"),
+                    G: pdf.attach(new PDFStream("/a0 gs /s0 sh", {
+                        Type: _("XObject"),
+                        Subtype: _("Form"),
+                        FormType: 1,
+                        BBox: (box ? [
+                            box.left, box.top + box.height, box.left + box.width, box.top
+                        ] : [ 0, 1, 1, 0 ]),
+                        Group: {
+                            Type: _("Group"),
+                            S: _("Transparency"),
+                            CS: _("DeviceGray"),
+                            I: true
+                        },
+                        Resources: {
+                            ExtGState: {
+                                a0: { CA: 1, ca: 1 }
+                            },
+                            Shading: {
+                                s0: {
+                                    ColorSpace: _("DeviceGray"),
+                                    Coords: coords,
+                                    Domain: [ 0, 1 ],
+                                    ShadingType: isRadial ? 3 : 2,
+                                    Function: funcs,
+                                    Extend: [ true, true ]
+                                }
+                            }
+                        }
+                    }))
+                }
+            });
+            pdf.attach(opacity);
+            opacity._resourceName = "O" + (++RESOURCE_COUNTER);
+            if (hash) {
+                pdf.GRAD_OPC[hash] = opacity;
+            }
+        }
+        return opacity;
+    }
+
+    function cacheGradient(pdf, gradient, box) {
         var isRadial = gradient.type == "radial";
         var funcs = makeGradientFunctions(pdf, gradient.stops);
         var coords = isRadial ? [
@@ -1162,58 +1258,16 @@
             gradient.start.x , gradient.start.y,
             gradient.end.x   , gradient.end.y
         ];
-        var shading = {
-            Type: _("Shading"),
-            ShadingType: isRadial ? 3 : 2,
-            ColorSpace: _("DeviceRGB"),
-            Coords: coords,
-            Domain: [ 0, 1 ],
-            Function: funcs.colors,
-            Extend: [ true, true ]
-        };
-        var opacity = funcs.hasAlpha ? {
-            Type: _("ExtGState"),
-            AIS: false,
-            CA: 1,
-            ca: 1,
-            SMask: {
-                Type: _("Mask"),
-                S: _("Luminosity"),
-                G: pdf.attach(new PDFStream("/a0 gs /s0 sh", {
-                    Type: _("XObject"),
-                    Subtype: _("Form"),
-                    FormType: 1,
-                    BBox: (gradient.userSpace ? [
-                        box.left, box.top + box.height, box.left + box.width, box.top
-                    ] : [ 0, 1, 1, 0 ]),
-                    Group: {
-                        Type: _("Group"),
-                        S: _("Transparency"),
-                        CS: _("DeviceGray"),
-                        I: true
-                    },
-                    Resources: {
-                        ExtGState: {
-                            a0: { CA: 1, ca: 1 }
-                        },
-                        Shading: {
-                            s0: {
-                                ColorSpace: _("DeviceGray"),
-                                Coords: coords,
-                                Domain: [ 0, 1 ],
-                                ShadingType: isRadial ? 3 : 2,
-                                Function: funcs.opacities,
-                                Extend: [ true, true ]
-                            }
-                        }
-                    }
-                }))
-            }
-        } : null;
+        var shading = cacheColorGradient(
+            pdf, isRadial, gradient.stops, coords, funcs.colors, gradient.userSpace && box
+        );
+        var opacity = funcs.hasAlpha ? cacheOpacityGradient(
+            pdf, isRadial, gradient.stops, coords, funcs.opacities, gradient.userSpace && box
+        ) : null;
         return {
             hasAlpha: funcs.hasAlpha,
-            shading: new PDFDictionary(shading),
-            opacity: new PDFDictionary(opacity)
+            shading: shading,
+            opacity: opacity
         };
     }
 
@@ -1356,13 +1410,12 @@
             if (!gradient.userSpace) {
                 this.transform(box.width, 0, 0, box.height, box.left, box.top);
             }
-            var g = makeGradient(this._pdf, gradient, box);
-            var sname, oname;
-            sname = "S" + (++RESOURCE_COUNTER);
-            this._shResources[sname] = this._pdf.attach(g.shading);
+            var g = cacheGradient(this._pdf, gradient, box);
+            var sname = g.shading._resourceName, oname;
+            this._shResources[sname] = g.shading;
             if (g.hasAlpha) {
-                oname = "O" + (++RESOURCE_COUNTER);
-                this._gsResources[oname] = this._pdf.attach(g.opacity);
+                oname = g.opacity._resourceName;
+                this._gsResources[oname] = g.opacity;
                 this._out("/" + oname + " gs ");
             }
             this._out("/" + sname + " sh", NL);
