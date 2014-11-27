@@ -140,6 +140,22 @@
         equal(grid.columns[0].field, "bar");
     });
 
+    test("setOptions does not create new instance of the dataSource when no options for dataSource are passed", function() {
+        var grid = setup({ });
+
+        var ds = grid.dataSource;
+        grid.setOptions({ editable: true });
+        ok(ds === grid.dataSource);
+    });
+
+    test("setOptions creates new instance of the dataSource when options for dataSource exist", function() {
+        var grid = setup({ });
+
+        var ds = grid.dataSource;
+        grid.setOptions({ editable: true, dataSource: { batch: true } });
+        ok(ds !== grid.dataSource);
+    });
+
     test("setOptions sets the new Options and persists the current", function() {
         var grid = setup({
             dataSource: {

@@ -1516,6 +1516,9 @@ var __meta__ = {
         setOptions: function(options) {
             var currentOptions = this.getOptions();
             kendo.deepExtend(currentOptions, options);
+            if (!options.dataSource) {
+                currentOptions.dataSource = this.dataSource;
+            }
             var wrapper = this.wrapper;
             var events = this._events;
             var element = this.element;
