@@ -748,4 +748,21 @@
 
         equal(grid.items().length, 1);
     });
+
+    test("groupFooterTemplate shows correct aggregates when multiple grouping are set", function() {
+        var grid = new Grid(table(), {
+            dataSource: {
+                data: [{foo: "1", bar: "bar"},{foo: "1", bar: "bar"},{foo: "1", bar: "baz"}],
+                group: [{ field: "foo", aggregates: [ { field: "foo", aggregate: "count" } ]}, { field: "bar", aggregates: [ { field: "foo", aggregate: "count" } ]}]
+            },
+            columns: [{ field: "foo", groupFooterTemplate: "#=count#" }, "bar"]
+        });
+
+        var footers = grid.table.find("tr.k-group-footer");
+        equal(footers.eq(0).find("td:not(.k-group-cell):first").text(), 2);
+        equal(footers.eq(1).find("td:not(.k-group-cell):first").text(), 1);
+        equal(footers.eq(2).find("td:not(.k-group-cell):first").text(), 3);
+    });
+
+
 })();
