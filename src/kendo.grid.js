@@ -5557,7 +5557,7 @@ var __meta__ = {
                 idx,
                 length,
                 field = group.field,
-                column = grep(that.columns, function(column) { return column.field == field; })[0] || { },
+                column = grep(leafColumns(that.columns), function(column) { return column.field == field; })[0] || { },
                 template = column.groupHeaderTemplate,
                 text =  (column.title || field) + ': ' + formatGroupValue(group.value, column.format, column.values),
                 footerDefaults = that._groupAggregatesDefaultObject || {},

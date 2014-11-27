@@ -492,6 +492,18 @@
         equal(grid.tbody.find("tr>td:first").text(), "baz");
     });
 
+    test("text in grouping row uses column groupHeaderTemplate if set - multicolumn header", function() {
+        var grid = new Grid(table(), {
+            dataSource: {
+                data: [{foo: "foo", bar: "bar"}, {foo: "foo1", bar: "baz"}],
+                group: "foo"
+            },
+            columns: [ { title: "master", columns: [{ field: "foo", groupHeaderTemplate: "baz" } ] }]
+        });
+
+        equal(grid.tbody.find("tr>td:first").text(), "baz");
+    });
+
     test("groupHeaderTemplate as function", function() {
         var args,
             grid = new Grid(table(), {
