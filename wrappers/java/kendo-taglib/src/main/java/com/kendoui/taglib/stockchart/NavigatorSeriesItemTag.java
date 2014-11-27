@@ -81,6 +81,10 @@ public class NavigatorSeriesItemTag extends  BaseTag  /* interfaces *//* interfa
         setProperty("tooltip", value);
     }
 
+    public void setAggregate(NavigatorSeriesItemAggregateFunctionTag value) {
+        setEvent("aggregate", value.getBody());
+    }
+
     public java.lang.String getAggregate() {
         return (java.lang.String)getProperty("aggregate");
     }

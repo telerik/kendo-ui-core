@@ -8,7 +8,7 @@ class ChartSeriesItem extends \Kendo\SerializableObject {
     /**
     * The aggregate function to apply for date series.This function is used when a category (an year, month, etc.) contains two or more points.
 The function return value is displayed instead of the individual points.The supported values are:
-    * @param string $value
+    * @param string|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */
     public function aggregate($value) {

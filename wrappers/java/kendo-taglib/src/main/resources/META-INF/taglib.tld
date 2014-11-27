@@ -5377,6 +5377,13 @@ A string value is interpreted as series.stack.group.</description>
     </tag>
 
     <tag>
+        <description>The aggregate function to apply for date series.This function is used when a category (an year, month, etc.) contains two or more points.
+The function return value is displayed instead of the individual points.The supported values are:</description>
+        <name>chart-seriesItem-aggregate</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemAggregateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
         <description>The series base color. The supported values are:</description>
         <name>chart-seriesItem-color</name>
         <tag-class>com.kendoui.taglib.chart.SeriesItemColorFunctionTag</tag-class>
@@ -27723,6 +27730,13 @@ Template variables:</description>
     </tag>
 
     <tag>
+        <description>The aggregate function to apply for date series.This function is used when a category (an year, month, etc.) contains two or more points.
+The function return value is displayed instead of the individual points.The supported values are:</description>
+        <name>sparkline-seriesItem-aggregate</name>
+        <tag-class>com.kendoui.taglib.sparkline.SeriesItemAggregateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
         <description>The series base color. The supported values are:</description>
         <name>sparkline-seriesItem-color</name>
         <tag-class>com.kendoui.taglib.sparkline.SeriesItemColorFunctionTag</tag-class>
@@ -33421,6 +33435,13 @@ Template variables:</description>
         <body-content>JSP</body-content>
     </tag>
 
+    <tag>
+        <description>The aggregate function to apply for date series.This function is used when a category (an year, month, etc.) contains two or more points.
+The function return value is displayed instead of the individual points.The supported values are:</description>
+        <name>stockChart-navigator-seriesItem-aggregate</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorSeriesItemAggregateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
 
 
     <tag>
@@ -34811,6 +34832,13 @@ Template variables:</description>
         <body-content>JSP</body-content>
     </tag>
 
+    <tag>
+        <description>The aggregate function to apply for date series.This function is used when a category (an year, month, etc.) contains two or more points.
+The function return value is displayed instead of the individual points.The supported values are:</description>
+        <name>stockChart-seriesItem-aggregate</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemAggregateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
     <tag>
         <description>The series base color. The supported values are:</description>
         <name>stockChart-seriesItem-color</name>

@@ -113,6 +113,10 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("tooltip", value);
     }
 
+    public void setAggregate(SeriesItemAggregateFunctionTag value) {
+        setEvent("aggregate", value.getBody());
+    }
+
     public void setColor(SeriesItemColorFunctionTag value) {
         setEvent("color", value.getBody());
     }
