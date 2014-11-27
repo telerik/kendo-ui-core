@@ -28,7 +28,7 @@ namespace Kendo.Mvc.UI
             var button = factory.CreateButton<ButtonBuilder>(ButtonType);
 
             button.CssClass += " k-grid-pdf";
-            button.SpriteCssClass = "k-pdf";
+            button.SpriteCssClass = "k-i-pdf";
             button.Text = Text;
             button.HtmlAttributes = HtmlAttributes;
 

@@ -28,7 +28,7 @@ namespace Kendo.Mvc.UI
             var button = factory.CreateButton<ButtonBuilder>(ButtonType);
 
             button.CssClass += " k-grid-excel";
-            button.SpriteCssClass = "k-excel";
+            button.SpriteCssClass = "k-i-excel";
             button.Text = Text;
             button.HtmlAttributes = HtmlAttributes;
 
