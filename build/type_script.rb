@@ -191,7 +191,7 @@ module CodeGen::TypeScript
                 declaration = %{/**
                 #{description}
                 */
-                #{declaration}%}
+                #{declaration}}
             end
 
             declaration
