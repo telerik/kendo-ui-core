@@ -27,7 +27,7 @@ file 'themebuilder/scripts/template.js' => [ 'styles/web/theme-template.less',
 end
 
 def live_cdn_version
-    '2013.2.716'
+    '2014.3.1119'
 end
 
 class PatchedBoostrapScriptTask < Rake::FileTask
