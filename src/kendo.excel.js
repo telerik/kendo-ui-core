@@ -89,7 +89,24 @@ kendo.ExcelExporter = kendo.Class.extend({
             return;
         }
 
+        var value = function(dataItem) {
+            return dataItem.get(column.field);
+        };
+
+        if (column.values) {
+            var values = {};
+
+            $.each(column.values, function(item) {
+               values[this.value] = this.text;
+            });
+
+            value = function(dataItem) {
+                return values[dataItem.get(column.field)];
+            };
+        }
+
         return $.extend({}, column, {
+            value: value,
             groupHeaderTemplate: kendo.template(column.groupHeaderTemplate || "${title}: ${value}"),
             groupFooterTemplate: column.groupFooterTemplate ? kendo.template(column.groupFooterTemplate) : null,
             footerTemplate: column.footerTemplate ? kendo.template(column.footerTemplate) : null
@@ -355,11 +372,9 @@ kendo.ExcelExporter = kendo.Class.extend({
         };
     },
     _cell: function(dataItem, column) {
-        if (column.field) {
-            return {
-                value: dataItem.get(column.field)
-            };
-        }
+        return {
+            value: column.value(dataItem)
+        };
     },
     _hierarchical: function() {
         return this.options.hierarchy && this.dataSource.level;
