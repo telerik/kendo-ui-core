@@ -18,7 +18,7 @@
 String[] months = { "January", "February", "March", "April", "May", "June" };
 for (int i = 0; i < months.length; i++) {
     int monthNumber = i + 1;
-    String readUrl = "remote-data/read?station=SOFIA&year=2012&month=" + monthNumber;
+    String readUrl = "remote-data-binding/read?station=SOFIA&year=2012&month=" + monthNumber;
 %>
         <tr>
             <td class="month"><%= months[i] %></td>
