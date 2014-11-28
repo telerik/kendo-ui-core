@@ -3769,9 +3769,10 @@
             },
 
             createTool: function(tool) {
+                var toolName;
                 if (isPlainObject(tool)) {
                     if (tool.name) {
-                        var toolName = tool.name;
+                        toolName = tool.name + "Tool";
                         if (this[toolName]) {
                             this[toolName](tool);
                         }
@@ -3781,9 +3782,9 @@
                         });
                     }
                 } else {
-                    tool = this[tool + "Tool"]({});
-                    if (tool) {
-                        tool.call(this);
+                    toolName = tool + "Tool";
+                    if (this[toolName]) {
+                        this[toolName]({});
                     }
                 }
             },
