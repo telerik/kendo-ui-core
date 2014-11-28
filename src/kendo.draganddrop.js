@@ -35,6 +35,7 @@ var __meta__ = {
         DRAG = "drag",
         DRAGEND = "dragend",
         DRAGCANCEL = "dragcancel",
+        HINTDESTROYED = "hintDestroyed",
 
         // DropTarget events
         DRAGENTER = "dragenter",
@@ -631,7 +632,8 @@ var __meta__ = {
             DRAGSTART,
             DRAG,
             DRAGEND,
-            DRAGCANCEL
+            DRAGCANCEL,
+            HINTDESTROYED
         ],
 
         options: {
@@ -901,6 +903,7 @@ var __meta__ = {
             delete draggables[that.options.group];
 
             that.trigger("destroy");
+            that.trigger(HINTDESTROYED);
             $(document).off(KEYUP, that._captureEscape);
         }
     });
