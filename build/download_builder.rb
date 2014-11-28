@@ -22,6 +22,10 @@ namespace :download_builder do
         File.write(core, contents)
     end
 
+    task :tests => :js do
+        grunt "download_builder_tests"
+    end
+
     def download_builder_prerequisites(path, service_url)
         dist_path = File.join('dist', path)
         tree :to => dist_path,

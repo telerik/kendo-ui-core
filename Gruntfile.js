@@ -134,7 +134,14 @@ module.exports = function(grunt) {
             },
             download_builder: {
                 options: {
+                    reporters: ['dots'],
+                    browsers: ['Chrome'],
+                    singleRun: true,
                     reportSlowerThan: 5000,
+                    junitReporter: {
+                      outputFile: grunt.option('junit-results')
+                    },
+
                     files: [].concat(
                         jquery,
                         "download-builder/scripts/script-resolver.js",
