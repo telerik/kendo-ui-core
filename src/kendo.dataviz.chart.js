@@ -7715,14 +7715,17 @@ var __meta__ = {
             var options = this.options;
             var line = this.series.line || {};
 
-            this.visual.append(draw.Path.fromPoints(this.linePoints(), {
+            var path = draw.Path.fromPoints(this.linePoints(), {
                 stroke: {
                     color: line.color,
                     width: line.width,
                     opacity: line.opacity,
                     dashType: line.dashType
                 }
-            }));
+            });
+
+            alignPathToPixel(path);
+            this.visual.append(path);
         }
     });
 
