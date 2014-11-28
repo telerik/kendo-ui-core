@@ -45,6 +45,8 @@ var __meta__ = {
         "pointer": 9
     };
 
+    var ENABLE_GLOBAL_SURFACE = (!support.touch || support.mouseAndTouchPresent);
+
     function touchDelta(touch1, touch2) {
         var x1 = touch1.x.location,
             y1 = touch1.y.location,
@@ -322,10 +324,12 @@ var __meta__ = {
             extend(that, {
                 element: element,
                 // the touch events lock to the element anyway, so no need for the global setting
-                surface: options.global && !support.touch ? $(document.documentElement) : $(options.surface || element),
+                surface: options.global && ENABLE_GLOBAL_SURFACE ? $(document.documentElement) : $(options.surface || element),
                 stopPropagation: options.stopPropagation,
                 pressed: false
             });
+
+            console.log(that.surface);
 
             that.surface.handler(that)
                 .on(kendo.applyEventMap("move", ns), "_move")
