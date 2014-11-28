@@ -189,8 +189,11 @@ var __meta__ = {
             if (that.groupContainer) {
                 that.groupContainer.empty().append(
                     $.map(dataSource.group() || [], function(item) {
-                        var fieldName = item.field.replace(nameSpecialCharRegExp, "\\$1");
-                        var element = that.element.find(that.options.filter).filter("[" + kendo.attr("field") + "=" + fieldName + "]");
+                        var fieldName = item.field;
+                        var attr = kendo.attr("field");
+                        var element = that.element.find(that.options.filter)
+                            .filter(function() { return $(this).attr(attr) === fieldName; });
+
                         return that.buildIndicator(item.field, element.attr(kendo.attr("title")), item.dir);
                     }).join("")
                 );
