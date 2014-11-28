@@ -986,6 +986,10 @@
             ok(textNode.render().indexOf("transform='matrix(1,1,1,1,1,1)'") > -1);
         });
 
+        test("does not render tspan", function() {
+            ok(textNode.render().indexOf("<tspan>") == -1);
+        });
+
         test("geometryChange sets position", 2, function() {
             textNode.attr = function(name, value) {
                 if (name === "x") {

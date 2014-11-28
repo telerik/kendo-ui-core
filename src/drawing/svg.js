@@ -866,7 +866,7 @@
             "#= d.renderStroke() # " +
             "#= d.renderTransform() # " +
             "#= d.renderDefinitions() # " +
-            "#= d.renderFill() #><tspan>#= d.content() #</tspan></text>"
+            "#= d.renderFill() #>#= d.content() #</text>"
         )
     });
 
