@@ -97,6 +97,7 @@ $gridFilterable->mode("row");
 $grid->addColumn($contactName, $contactTitle, $companyName, $Country)
      ->dataSource($dataSource)
      ->sortable(true)
+     ->resizable(true)
      ->filterable($gridFilterable)
      ->columnMenu(true)
      ->groupable(true)

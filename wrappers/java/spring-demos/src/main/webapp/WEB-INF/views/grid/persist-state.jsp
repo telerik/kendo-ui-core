@@ -11,7 +11,7 @@
 
 	<a href="#" class="k-button" id="save">Save State</a>
 	<a href="#" class="k-button" id="load">Load State</a>
-    <kendo:grid name="grid" groupable="true" sortable="true" style="height:550px;" columnMenu="true">
+    <kendo:grid name="grid" groupable="true" resizable="true" sortable="true" style="height:550px;" columnMenu="true">
     	<kendo:grid-filterable mode="row"/>
     	<kendo:grid-pageable refresh="true" pageSizes="true" buttonCount="5">
     	</kendo:grid-pageable>

@@ -20,6 +20,7 @@ Inherits="System.Web.Mvc.ViewPage<IEnumerable<Kendo.Mvc.Examples.Models.ProductV
         .Groupable()
         .Filterable(ftb=>ftb.Mode(GridFilterMode.Row))
         .Sortable()
+        .Resizable()
         .ColumnMenu()
         .Reorderable(r=>r.Columns(true))
         .Pageable(pageable => pageable
