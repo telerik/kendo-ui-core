@@ -51,6 +51,24 @@
         equal(app.view().scrollerContent.text(), "2");
     });
 
+    ngTest("SplitView executes the controller each time it is displayed",
+    2,
+    function() {
+        var i = 0;
+        angular.module('kendo.tests').controller('foo', [ '$parse', '$scope', function($parse, $scope) {
+            i ++;
+            $scope.foo = i;
+        }])
+        QUnit.fixture.html("<div kendo-mobile-application><kendo-mobile-split-view ng-controller=foo><kendo-mobile-pane><kendo-mobile-view>{{foo}}</kendo-mobile-view></kendo-mobile-pane></kendo-mobile-split-view><kendo-mobile-view id=bar></kendo-mobile-view></div>");
+    },
+    function() {
+        var app = kendo.mobile.application;
+        equal(app.view().panes[0].view().scrollerContent.text(), "1");
+        app.navigate("#bar");
+        app.navigate("#/");
+        equal(app.view().panes[0].view().scrollerContent.text(), "2");
+    });
+
     ngTest("understands the layout configuration",
     1,
     function() {
