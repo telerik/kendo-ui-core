@@ -60,6 +60,14 @@ test('findSuitable() does not skip mid-element markers', function() {
     equal(finder.findSuitable(editor.body.firstChild.childNodes[2]), null);
 });
 
+
+test("findSuitable() does not break out of element", function() {
+    editor.value('<span>foo <em><span class="k-marker"></span>bar<span class="k-marker"></span></em> baz</span>');
+
+    finder = new InlineFormatFinder(formats.underline);
+    equal(finder.findSuitable(editor.body.firstChild.childNodes[1].childNodes[1]), null);
+});
+
 test('findFormat() finds formatted node by tag', function() {
     editor.value('<strong>foo</strong>');
 

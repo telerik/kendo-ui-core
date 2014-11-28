@@ -55,7 +55,18 @@ var InlineFormatFinder = Class.extend({
             return null;
         }
 
-        return dom.parentOfType(sourceNode, this.format[0].tags);
+        var node = sourceNode.parentNode;
+        var tags = this.format[0].tags;
+
+        while (!dom.ofType(node, tags)) {
+            if (this.numberOfSiblings(node) > 0) {
+                return null;
+            }
+
+            node = node.parentNode;
+        }
+
+        return node;
     },
 
     findFormat: function (sourceNode) {
