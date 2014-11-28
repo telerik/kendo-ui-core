@@ -24,7 +24,7 @@ namespace :download_builder do
     end
 
     task :tests => :js do
-        grunt_xvfb "download_builder_tests", "--single-run=true"
+        grunt_xvfb "download_builder_tests", "--junit-results=download_builder-test-results.xml", "--single-run=true"
     end
 
     def download_builder_prerequisites(path, service_url)
