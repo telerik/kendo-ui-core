@@ -7,7 +7,7 @@ var __meta__ = {
     name: "Gauge",
     category: "dataviz",
     description: "Radial and Linear gauges.",
-    depends: [ "dataviz.core", "drawing", "dataviz.themes" ]
+    depends: [ "dataviz.core", "dataviz.themes" ]
 };
 
 (function ($, undefined) {

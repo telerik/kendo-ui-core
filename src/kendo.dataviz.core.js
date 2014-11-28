@@ -10,7 +10,7 @@ var __meta__ = {
     name: "Core",
     description: "The DataViz core functions",
     category: "dataviz",
-    depends: [ "core" ],
+    depends: [ "core", "drawing" ],
     hidden: true
 };
 

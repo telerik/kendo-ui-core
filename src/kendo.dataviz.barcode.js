@@ -7,7 +7,7 @@ var __meta__ = {
     name: "Barcode",
     category: "dataviz",
     description: "Barcode widget",
-    depends: [ "dataviz.core", "drawing" ]
+    depends: [ "dataviz.core" ]
 };
 
 (function ($, undefined) {

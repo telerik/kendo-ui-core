@@ -132,6 +132,18 @@ module.exports = function(grunt) {
                     )
                 }
             },
+            download_builder: {
+                options: {
+                    reportSlowerThan: 5000,
+                    files: [].concat(
+                        jquery,
+                        "download-builder/scripts/script-resolver.js",
+                        { pattern: "dist/js/*.js", included: false, served: true },
+                        { pattern: "download-builder/config/kendo-config.json", included: false, served: true },
+                        "tests/download-builder/*.js"
+                    )
+                }
+            },
             legacyUnit: {
                 options: {
                     browsers: browserOption ? [ browserOption ] : [],
@@ -265,6 +277,7 @@ module.exports = function(grunt) {
     grunt.registerTask('styles', [ 'copy:css_assets', 'less' ]);
     grunt.registerTask('all', [ 'kendo', 'download_builder', 'copy:jquery', 'copy:angular', 'copy:jszip', 'copy:timezones' ]);
     grunt.registerTask('build', [ 'kendo', 'copy:jquery', 'copy:angular', 'styles', 'license' ]);
+    grunt.registerTask('download_builder_tests', ['download_builder', 'karma:download_builder']);
 
     grunt.registerTask('ci', [ "all", 'styles', 'karma:jenkins' ]);
     grunt.registerTask("travis", [ 'jshint', 'build', 'karma:travis' ]);

@@ -7,8 +7,8 @@ exports.beforeTestFiles = [
     { pattern: 'tests/router/sandbox.html', watched: true, included: false },
     { pattern: 'tests/window/blank.html', watched: true, included: false },
     { pattern: 'tests/editor/editorStyles.css', included: false },
-    { pattern: 'tests/**/*-fixture.html' },
-    { pattern: 'demos/mvc/App_Data/*json', included: false }
+    { pattern: "tests/download-builder/*.js", included: false },
+    { pattern: 'tests/**/*-fixture.html' }
 ];
 
 exports.afterTestFiles = [
@@ -45,10 +45,9 @@ exports.afterTestFiles = [
     'tests/upload/cancel.js',
     'tests/upload/remove.js',
 
-    { pattern: 'src/kendo.editor.js', included: false }, // download builder needs this
-    { pattern: 'src/kendo.aspnetmvc.js', included: false }, // download builder needs this
+    { pattern: 'src/kendo.editor.js', included: false },
+    { pattern: 'src/kendo.aspnetmvc.js', included: false },
 
-    'download-builder/scripts/script-resolver.js',
     'tests/diagram/common.js',
     'demos/mvc/content/shared/js/kendo-dojo.js'
 ];
