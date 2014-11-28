@@ -151,6 +151,17 @@ test("detects Windows Phone 8 and as a phone", function() {
     ok(!result.tablet);
 });
 
+test("detects Windows Phone 8.1 and as a phone", function() {
+    var result = detect("Mozilla/5.0 (Windows Phone 8.1; ARM; Trident/7.0; Touch; rv:11; IEMobile/11.0) like Android 4.1.2; compatible) like iPhone OS 7_0_3 Mac OS X WebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.99 Mobile Safari /537.36");
+
+    ok(result.device == "wp");
+    ok(result.majorVersion == 8);
+    ok(result.minorVersion == 1);
+    ok(result.flatVersion == 810);
+    ok(result.wp);
+    ok(!result.tablet);
+});
+
 test("detects Opera Mobile", function() {
     var result = detect("Opera/9.80 (Android 2.3.3; Linux; Opera Mobi/ADR-1111101157; U; es-ES) Presto/2.9.201 Version/11.50");
 
