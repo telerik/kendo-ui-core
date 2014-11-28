@@ -134,7 +134,7 @@ module.exports = function(grunt) {
             },
             download_builder: {
                 options: {
-                    reporters: ['dots'],
+                    reporters: ['dots', 'junit'],
                     browsers: ['Chrome'],
                     singleRun: true,
                     reportSlowerThan: 5000,
