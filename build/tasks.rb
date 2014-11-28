@@ -3,7 +3,9 @@ require 'zip'
 
 README_DIR = 'resources'
 THIRD_PARTY_LEGAL_DIR = File.join('resources', 'legal', 'third-party')
+XVFB_RUN = "xvfb-run"
 GRUNT = File.join(Rake.application.original_dir, "node_modules", ".bin", "grunt")
+GRUNT_XVFB = system("which", XVFB_RUN, :out => "/dev/null") ? [XVFB_RUN, "-a", GRUNT] : [GRUNT]
 METAJS = File.join(Rake.application.original_dir, "build", "kendo-meta.js");
 LESSC = File.join(Rake.application.original_dir, "build", "less-js", "bin", "lessc")
 CSSMIN = File.join(Rake.application.original_dir, "node_modules", "cssmin", "bin", "cssmin")
@@ -76,7 +78,15 @@ def mvn(name, options)
 end
 
 def grunt(*args)
-    sh *([GRUNT] + args.map { |arg| arg.to_s })
+    run_shell([GRUNT], args)
+end
+
+def grunt_xvfb(*args)
+    run_shell(GRUNT_XVFB, args)
+end
+
+def run_shell(cmd, args)
+    sh *(cmd + args.map { |arg| arg.to_s })
 end
 
 def uglifyjs(from, to)

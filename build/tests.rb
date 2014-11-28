@@ -1,8 +1,6 @@
 require 'tasks'
 
 TESTS = FileList["tests/**/*"]
-XVFB_RUN = "xvfb-run"
-GRUNT_CMD = system("which", XVFB_RUN, :out => "/dev/null") ? [XVFB_RUN, "-a", GRUNT] : [GRUNT]
 DEPS = [MIN_JS.sub("dist/js", "src").sub("min.js", "js"), FileList['styles/**/*.*'], KENDO_CONFIG_FILE, TESTS].flatten
 SUPPORTED_JQUERY_VERSIONS = ["1.10.2", "2.0.3"]
 
@@ -19,20 +17,20 @@ namespace :tests do
     desc "Run tests in supported jQuery versions"
     task :jquery => DEPS do
         SUPPORTED_JQUERY_VERSIONS.each do |version|
-            sh *(GRUNT_CMD + [ "ci", "--junit-results=jquery-#{version}-test-results.xml", "--single-run=true", "--jquery=#{version}" ])
+            grunt_xvfb "ci", "--junit-results=jquery-#{version}-test-results.xml", "--single-run=true", "--jquery=#{version}"
         end
     end
 
     desc "Run tests in firefox"
     task :firefox => DEPS do
-        sh *(GRUNT_CMD + [ "ci", "--junit-results=firefox-test-results.xml", "--single-run=true", "--browser=Firefox" ])
+        grunt_xvfb "ci", "--junit-results=firefox-test-results.xml", "--single-run=true", "--browser=Firefox"
     end
 
     %w[CI Production TZ].each do |env|
         output = "#{env}-test-results.xml"
 
         file output => DEPS do |t|
-            sh *(GRUNT_CMD + [ "jshint", "ci", "--junit-results=#{output}", "--single-run=true" ])
+            grunt_xvfb "jshint", "ci", "--junit-results=#{output}", "--single-run=true"
         end
 
         desc "Run #{env} tests"

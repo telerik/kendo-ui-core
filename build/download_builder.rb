@@ -1,5 +1,6 @@
 require 'erb'
 require 'tasks'
+require 'tests'
 require 'download_builder_upload'
 
 BUILDER_STAGING_SERVICE =  'http://mvc-kendobuild/staging/download-builder-service'
@@ -23,7 +24,7 @@ namespace :download_builder do
     end
 
     task :tests => :js do
-        grunt "download_builder_tests"
+        grunt_xvfb "download_builder_tests", "--single-run=true"
     end
 
     def download_builder_prerequisites(path, service_url)
