@@ -329,8 +329,6 @@ var __meta__ = {
                 pressed: false
             });
 
-            console.log(that.surface);
-
             that.surface.handler(that)
                 .on(kendo.applyEventMap("move", ns), "_move")
                 .on(kendo.applyEventMap("up cancel", ns), "_end");
