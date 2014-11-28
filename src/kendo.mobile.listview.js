@@ -638,6 +638,7 @@ var __meta__ = {
 
             list.bind("resize", function() {
                 binder.updateScrollerSize();
+                listView.updateSize();
             });
 
             list.bind("reset", function() {
@@ -1105,6 +1106,10 @@ var __meta__ = {
                 };
 
             return this._renderItems([dataItem], replaceItem)[0];
+        },
+
+        updateSize: function() {
+            this._size = this.getSize();
         },
 
         _renderItems: function(dataItems, callback) {
