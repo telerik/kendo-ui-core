@@ -1,6 +1,6 @@
 (function(f, define){
     define([
-        "./kendo.data", "./kendo.userevents", "./kendo.tooltip", "./kendo.mobile.scroller",
+        "./kendo.data", "./kendo.userevents", "./kendo.tooltip", "./kendo.mobile.scroller", "./kendo.draganddrop",
         "./kendo.drawing",
 
         "./dataviz/map/location",

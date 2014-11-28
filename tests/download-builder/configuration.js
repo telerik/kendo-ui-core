@@ -36,7 +36,7 @@
         }
     }
 
-    function dryRun(component, source, scripts) {
+    function dryRun(source, scripts) {
         var iframe = $("<iframe />", { src: "javascript: '<html><body></body></html>';" } )
                      .css("display", "none")
                      .appendTo(document.body)[0];
@@ -79,7 +79,7 @@
             asyncTest(c.id, function() {
                 loadScripts(scripts,
                     function loaded(source) {
-                        dryRun(c, source, scripts);
+                        dryRun(source, scripts);
                     },
                     function error(src) {
                         ok(false, "Unable to load " + src);
@@ -87,6 +87,27 @@
                     }
                 );
             });
+        });
+
+        asyncTest("kendo.dataviz.map doesn't override geometry classes", function() {
+            resolver.reset();
+            resolver.addComponent("dataviz.map", []);
+
+            var scripts = ["jquery.js", "angular.js"].concat(resolver.scripts);
+            loadScripts(scripts,
+                function loaded(source) {
+                    source += ";" +
+                        "var path = new kendo.drawing.Path();" +
+                        "path.moveTo(new kendo.geometry.Point());" +
+                        "var anchor = path.segments[0].anchor();" +
+                        "parent.window.equal(anchor.toString(), '0 0');";
+                    dryRun(source, scripts);
+                },
+                function error(src) {
+                    ok(false, "Unable to load " + src);
+                    start();
+                }
+            );
         });
     });
 })();

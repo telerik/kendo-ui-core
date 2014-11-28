@@ -1,5 +1,5 @@
 (function(f, define) {
-    define([ "./base", "../location", "../../../geometry/main" ], f);
+    define([ "./base", "../location" ], f);
 })(function() {
 
 (function ($, undefined) {
