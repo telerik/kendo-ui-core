@@ -51,21 +51,25 @@ public class MeetingDaoImpl implements MeetingDao {
         for (Meeting meeting : meetings) {
             Criteria criteria = sessionFactory.getCurrentSession().createCriteria(MeetingAttendee.class);
             criteria.add(Restrictions.eq("meetingId", meeting.getMeetingId()));
-            
+
             List<MeetingAttendee> meetingAttendees = criteria.list();
-            
+
             List<Integer> attendees = meeting.getAttendees();
-            
-            for (MeetingAttendee attendee : meetingAttendees) {
-                if (attendees != null) {
-                    if (attendees.contains(attendee.getAttendeeId())) {
-                        attendees.remove((Object)attendee.getAttendeeId());
-                    } else {
-                        session.delete(attendee);
+
+            if (meeting.getMeetingId() != 0) {
+                for (MeetingAttendee attendee : meetingAttendees) {
+                    if (attendees != null) {
+                        if (attendees.contains(attendee.getAttendeeId())) {
+                            attendees.remove((Object)attendee.getAttendeeId());
+                        } else {
+                            session.delete(attendee);
+                        }
                     }
                 }
             }
-            
+
+            session.saveOrUpdate(meeting);
+
             if (attendees != null) {
                 for (int attendeeId : attendees) {
                     
@@ -78,7 +82,11 @@ public class MeetingDaoImpl implements MeetingDao {
                 }
             }
 
-            session.saveOrUpdate(meeting);
+            meetingAttendees = criteria.list();
+            meeting.getAttendees().clear();
+            for (MeetingAttendee attendee : meetingAttendees) {
+                meeting.getAttendees().add(attendee.getAttendeeId());
+            }
         }
     }
 
