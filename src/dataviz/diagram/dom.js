@@ -3771,7 +3771,10 @@
             createTool: function(tool) {
                 if (isPlainObject(tool)) {
                     if (tool.name) {
-                        this[tool.name + "Tool"](tool);
+                        var toolName = tool.name;
+                        if (this[toolName]) {
+                            this[toolName](tool);
+                        }
                     } else if (tool.template) {
                         this._toolBar.add({
                             template: tool.template
