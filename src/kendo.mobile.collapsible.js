@@ -20,6 +20,9 @@ var __meta__ = {
         HEADER_WRAPPER = "<div data-role='collapsible-header' class='" + HEADER + "'></div>",
         CONTENT_WRAPPER = "<div data-role='collapsible-content' class='" + CONTENT + "'></div>",
 
+        COLLAPSED = "km-collapsed",
+        EXPANDED = "km-expanded",
+
         //events
         EXAPND = "expand",
         COLLAPSE = "collapse";
@@ -39,6 +42,8 @@ var __meta__ = {
             that._userEvents = new kendo.UserEvents(that.header, {
                 press: function() { that.toggle(); }
             });
+
+            that.element.addClass(that.options.collapsed ? COLLAPSED : EXPANDED);
 
             if (that.options.collapsed) {
                 that.content.hide();
@@ -69,6 +74,7 @@ var __meta__ = {
                 if (icon) {
                     this.header.find(".km-icon").removeClass().addClass("km-icon km-" + icon);
                 }
+                this.element.removeClass(COLLAPSED).addClass(EXPANDED);
                 this.content.show();
             }
         },
@@ -80,6 +86,7 @@ var __meta__ = {
                 if (icon) {
                     this.header.find(".km-icon").removeClass().addClass("km-icon km-" + icon);
                 }
+                this.element.removeClass(EXPANDED).addClass(COLLAPSED);
                 this.content.hide();
             }
         },
