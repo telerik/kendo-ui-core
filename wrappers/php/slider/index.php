@@ -52,21 +52,19 @@ function eqSlider($index, $value) {
         margin-top: 75px;
         padding-right: 15px;
     }
-    .balSlider {
+    div.balSlider {
         width: 240px;
     }
-    .balSlider .k-slider-selection {
-        width: 240px;
+    div.balSlider .k-slider-selection {
         display: none;
     }
-    .eqSlider {
+    div.eqSlider {
         display: inline-block;
-        zoom: 1;
         margin: 0 12px;
         height: 122px;
     }
 
-    *+html .eqSlider {display:inline;}
+    .k-ie7 div.eqSlider {display:inline;zoom:1;}
 
 </style>
 <?php require_once '../include/footer.php'; ?>
