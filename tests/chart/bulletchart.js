@@ -197,4 +197,141 @@
             ok(typeof chart._plotArea.charts[0].points[0].target === "undefined");
         });
     })();
+
+
+    (function() {
+        var Bullet = dataviz.Bullet,
+            bullet,
+            box,
+            root,
+            VALUE = 1,
+            CATEGORY = "A",
+            SERIES_NAME = "series",
+            TOOLTIP_OFFSET = 5;
+
+        var AxisMock = function() {
+            this.getSlot = function() {
+                return new Box2D();
+            };
+        };
+
+        function createBullet(options, clipBox) {
+            box = new Box2D(0, 0, 100, 100);
+            bullet = new Bullet({
+                target: VALUE
+            }, kendo.deepExtend({}, {
+                notes: {
+                    label: {}
+                }
+            }, options));
+
+            bullet.category = CATEGORY;
+            bullet.dataItem = { value: VALUE };
+            bullet.percentage = 0.5;
+            bullet.series = { name: SERIES_NAME };
+            bullet.owner = {
+                pane: {
+                    clipBox: function(){
+                        return clipBox || new Box2D(0, 0, 100, 100);
+                    }
+                },
+                seriesValueAxis: function() {
+                    return new AxisMock();
+                },
+                categorySlot: function() {
+                    return new Box2D();
+                }
+            };
+            root = new dataviz.RootElement();
+            root.box = box;
+            root.append(bullet);
+            bullet.reflow(box);
+
+            root.renderVisual();
+        }
+
+        // ------------------------------------------------------------
+        module("Bullet", {});
+
+        test("tooltipAnchor is top right corner / vertical / above axis",
+        function() {
+            createBullet({ vertical: true, aboveAxis: true, isStacked: false });
+            var anchor = bullet.tooltipAnchor(10, 10);
+            deepEqual([anchor.x, anchor.y], [bullet.box.x2 + TOOLTIP_OFFSET, bullet.box.y1])
+        });
+
+        test("tooltipAnchor is top right corner / vertical / above axis / stacked",
+        function() {
+            createBullet({ vertical: true, aboveAxis: true, isStacked: true });
+            var anchor = bullet.tooltipAnchor(10, 10);
+            deepEqual([anchor.x, anchor.y], [bullet.box.x2 + TOOLTIP_OFFSET, bullet.box.y1])
+        });
+
+        test("tooltipAnchor is bottom right corner / vertical / below axis",
+        function() {
+            createBullet({ vertical: true, aboveAxis: false, isStacked: false });
+            var anchor = bullet.tooltipAnchor(10, 10);
+            deepEqual([anchor.x, anchor.y], [bullet.box.x2 + TOOLTIP_OFFSET, bullet.box.y2 - 10])
+        });
+
+        test("tooltipAnchor is bottom right corner / vertical / below axis / stacked",
+        function() {
+            createBullet({ vertical: true, aboveAxis: false, isStacked: true });
+            var anchor = bullet.tooltipAnchor(10, 10);
+            deepEqual([anchor.x, anchor.y], [bullet.box.x2 + TOOLTIP_OFFSET, bullet.box.y2 - 10])
+        });
+
+        test("tooltipAnchor is top right corner / horizontal / above axis",
+        function() {
+            createBullet({ vertical: false, aboveAxis: true, isStacked: false });
+            var anchor = bullet.tooltipAnchor(10, 10);
+            deepEqual([anchor.x, anchor.y], [bullet.box.x2 + TOOLTIP_OFFSET, bullet.box.y1])
+        });
+
+        test("tooltipAnchor is above top right corner / horizontal / above axis / stacked",
+        function() {
+            createBullet({ vertical: false, aboveAxis: true, isStacked: true });
+            var anchor = bullet.tooltipAnchor(10, 10);
+            deepEqual([anchor.x, anchor.y], [bullet.box.x2 - 10, bullet.box.y1 - 10 - TOOLTIP_OFFSET])
+        });
+
+        test("tooltipAnchor is top left corner / horizontal / below axis",
+        function() {
+            createBullet({ vertical: false, aboveAxis: false, isStacked: false });
+            var anchor = bullet.tooltipAnchor(10, 10);
+            deepEqual([anchor.x, anchor.y], [bullet.box.x1 - 10 - TOOLTIP_OFFSET, bullet.box.y1])
+        });
+
+        test("tooltipAnchor is above top left corner / horizontal / below axis / stacked",
+        function() {
+            createBullet({ vertical: false, aboveAxis: false, isStacked: true });
+            var anchor = bullet.tooltipAnchor(10, 10);
+            deepEqual([anchor.x, anchor.y], [bullet.box.x1, bullet.box.y1 - 10 - TOOLTIP_OFFSET])
+        });
+
+        test("tooltipAnchor is limited to the clipbox / horizontal / above axis", function() {
+            createBullet({ vertical: false, aboveAxis: true }, Box2D(1,1, 40, 100));
+            var anchor = bullet.tooltipAnchor(10, 10);
+            equal(anchor.x, 40 + TOOLTIP_OFFSET);
+        });
+
+        test("tooltipAnchor is limited to the clipbox / vertical / above axis", function() {
+            createBullet({ vertical: true, aboveAxis: true}, Box2D(1, 40, 100, 100));
+            var anchor = bullet.tooltipAnchor(10, 10);
+            equal(anchor.y, 40);
+        });
+
+        test("tooltipAnchor is limited to the clipbox / horizontal / below axis", function() {
+            createBullet({ vertical: false, aboveAxis: false}, Box2D(40,1, 100, 100));
+            var anchor = bullet.tooltipAnchor(10, 10);
+            equal(anchor.x, 30 - TOOLTIP_OFFSET);
+        });
+
+        test("tooltipAnchor is limited to the clipbox / vertical / below axis", function() {
+            createBullet({ vertical: true, aboveAxis: false}, Box2D(1, 1, 100, 40));
+            var anchor = bullet.tooltipAnchor(10, 10);
+            equal(anchor.y, 30);
+        });
+    })();
+
 })();

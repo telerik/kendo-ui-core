@@ -4463,17 +4463,21 @@ var __meta__ = {
                 box = bar.box,
                 vertical = options.vertical,
                 aboveAxis = bar.aboveAxis,
-                x, y;
+                clipBox = bar.owner.pane.clipBox() || box,
+                x,
+                y;
 
             if (vertical) {
                 x = box.x2 + TOOLTIP_OFFSET;
-                y = aboveAxis ? box.y1 : box.y2 - tooltipHeight;
+                y = aboveAxis ? math.max(box.y1, clipBox.y1) : math.min(box.y2, clipBox.y2) - tooltipHeight;
             } else {
+                var x1 = math.max(box.x1, clipBox.x1),
+                    x2 = math.min(box.x2, clipBox.x2);
                 if (options.isStacked) {
-                    x = aboveAxis ? box.x2 - tooltipWidth : box.x1;
+                    x = aboveAxis ? x2 - tooltipWidth : x1;
                     y = box.y1 - tooltipHeight - TOOLTIP_OFFSET;
                 } else {
-                    x = aboveAxis ? box.x2 + TOOLTIP_OFFSET : box.x1 - tooltipWidth - TOOLTIP_OFFSET;
+                    x = aboveAxis ? x2 + TOOLTIP_OFFSET : x1 - tooltipWidth - TOOLTIP_OFFSET;
                     y = box.y1;
                 }
             }
@@ -11924,6 +11928,7 @@ var __meta__ = {
         BarChart: BarChart,
         BarLabel: BarLabel,
         BubbleChart: BubbleChart,
+        Bullet: Bullet,
         BulletChart: BulletChart,
         CandlestickChart: CandlestickChart,
         Candlestick: Candlestick,
