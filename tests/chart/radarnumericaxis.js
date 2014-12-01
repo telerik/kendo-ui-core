@@ -1,16 +1,15 @@
 (function() {
-    return;
 
     var dataviz = kendo.dataviz,
         deepExtend = kendo.deepExtend,
-        getElement = dataviz.getElement,
         Point2D = dataviz.Point2D,
         Box2D = dataviz.Box2D,
         chartBox = new Box2D(100, 100, 500, 500),
         center = new Point2D(300, 300),
-        view,
         axis,
         altAxis,
+        gridLines,
+        plotBands,
         TOLERANCE = 1;
 
     function createAxis(options) {
@@ -38,51 +37,53 @@
             polarAxis: altAxis
         };
 
-        view = new ViewStub();
-        axis.getViewElements(view);
+        axis.renderVisual();
     }
 
     // ------------------------------------------------------------
+
+    function setupGridLines(axisOptions) {
+        createAxis(axisOptions);
+        gridLines = axis.createGridLines(altAxis);
+    }
+
     module("Radar Numeric Axis / Grid lines", {
         setup: function() {
-            createAxis();
-            axis.renderGridLines(view, altAxis);
+            setupGridLines();
         }
     });
 
     test("renders major grid lines by default", function() {
-        equal(view.log.path.length, 3);
+        equal(gridLines.length, 3);
     });
 
     test("points are placed on alt axis intervals", function() {
-        var points = view.log.path[0].points;
+        var segments = gridLines[0].segments;
 
-        close(points[0].x, 300, TOLERANCE);
-        close(points[0].y, 204, TOLERANCE);
+        close(segments[0].anchor().x, 300, TOLERANCE);
+        close(segments[0].anchor().y, 204, TOLERANCE);
 
-        close(points[1].x, 383, TOLERANCE);
-        close(points[1].y, 348, TOLERANCE);
+        close(segments[1].anchor().x, 383, TOLERANCE);
+        close(segments[1].anchor().y, 348, TOLERANCE);
 
-        close(points[2].x, 217, TOLERANCE);
-        close(points[2].y, 348, TOLERANCE);
+        close(segments[2].anchor().x, 217, TOLERANCE);
+        close(segments[2].anchor().y, 348, TOLERANCE);
     });
 
     test("applies major grid line color", function() {
-        createAxis({ majorGridLines: { color: "red" } });
-        axis.renderGridLines(view, altAxis);
+        setupGridLines({ majorGridLines: { color: "red" } });
 
-        equal(view.log.path[0].style.stroke, "red");
+        equal(gridLines[0].options.stroke.color, "red");
     });
 
     test("applies major grid line width", function() {
-        createAxis({ majorGridLines: { width: 2 } });
-        axis.renderGridLines(view, altAxis);
+        setupGridLines({ majorGridLines: { width: 2 } });
 
-        equal(view.log.path[0].style.strokeWidth, 2);
+        equal(gridLines[0].options.stroke.width, 2);
     });
 
     test("renders minor grid lines", function() {
-        createAxis({
+        setupGridLines({
             majorGridLines: {
                 visible: false
             },
@@ -90,13 +91,12 @@
                 visible: true
             }
         });
-        axis.renderGridLines(view, altAxis);
 
-        equal(view.log.path.length, 15);
+        equal(gridLines.length, 15);
     });
 
     test("applies minor grid line color", function() {
-        createAxis({
+        setupGridLines({
             majorGridLines: {
                 visible: false
             },
@@ -105,13 +105,12 @@
                 color: "red"
             }
         });
-        axis.renderGridLines(view, altAxis);
 
-        equal(view.log.path[0].style.stroke, "red");
+        equal(gridLines[0].options.stroke.color, "red");
     });
 
     test("applies minor grid line width", function() {
-        createAxis({
+        setupGridLines({
             majorGridLines: {
                 visible: false
             },
@@ -120,56 +119,52 @@
                 width: 4
             }
         });
-        axis.renderGridLines(view, altAxis);
 
-        equal(view.log.path[0].style.strokeWidth, 4);
+        equal(gridLines[0].options.stroke.width, 4);
     });
 
     // ------------------------------------------------------------
     module("Radar Numeric Axis / Grid arcs", {
         setup: function() {
-            createAxis({
+            setupGridLines({
                 majorGridLines: {
                     type: "arc"
                 }
             });
-            axis.renderGridLines(view, altAxis);
         }
     });
 
     test("renders major grid arcs", function() {
-        equal(view.log.circle.length, 3);
+        equal(gridLines.length, 3);
     });
 
     test("circle center is on alt axis center", function() {
-        var c = view.log.circle[0].c;
+        var c = gridLines[0].geometry().center;
 
         close(c.x, 300, TOLERANCE);
         close(c.y, 300, TOLERANCE);
     });
 
     test("circle radius matches value", function() {
-        close(view.log.circle[0].r, 96, TOLERANCE);
-        close(view.log.circle[1].r, 194, TOLERANCE);
-        close(view.log.circle[2].r, 292, TOLERANCE);
+        close(gridLines[0].geometry().radius, 96, TOLERANCE);
+        close(gridLines[1].geometry().radius, 194, TOLERANCE);
+        close(gridLines[2].geometry().radius, 292, TOLERANCE);
     });
 
     test("applies major grid line color", function() {
-        createAxis({ majorGridLines: { type: "arc", color: "red" } });
-        axis.renderGridLines(view, altAxis);
+        setupGridLines({ majorGridLines: { type: "arc", color: "red" } });
 
-        equal(view.log.circle[0].style.stroke, "red");
+        equal(gridLines[0].options.stroke.color, "red");
     });
 
     test("applies major grid line width", function() {
-        createAxis({ majorGridLines: { type: "arc", width: 2 } });
-        axis.renderGridLines(view, altAxis);
+        setupGridLines({ majorGridLines: { type: "arc", width: 2 } });
 
-        equal(view.log.circle[0].style.strokeWidth, 2);
+        equal(gridLines[0].options.stroke.width, 2);
     });
 
     test("renders minor grid arcs", function() {
-        createAxis({
+        setupGridLines({
             majorGridLines: {
                 visible: false
             },
@@ -178,31 +173,26 @@
                 visible: true
             }
         });
-        axis.renderGridLines(view, altAxis);
 
-        equal(view.log.circle.length, 15);
+        equal(gridLines.length, 15);
     });
 
     test("applies minor grid line color", function() {
-        createAxis({
+        setupGridLines({
             majorGridLines: { visible: false },
             minorGridLines: { visible: true, type: "arc", color: "red" }
         });
 
-        axis.renderGridLines(view, altAxis);
-
-        equal(view.log.circle[0].style.stroke, "red");
+        equal(gridLines[0].options.stroke.color, "red");
     });
 
     test("applies minor grid line width", function() {
-        createAxis({
+        setupGridLines({
             majorGridLines: { visible: false },
             minorGridLines: { visible: true, type: "arc", width: 2 }
         });
 
-        axis.renderGridLines(view, altAxis);
-
-        equal(view.log.circle[0].style.strokeWidth, 2);
+        equal(gridLines[0].options.stroke.width, 2);
     });
 
     // ------------------------------------------------------------
@@ -222,34 +212,35 @@
                     color: "red"
                 }]
             });
+            plotBands = axis._plotbandGroup.children;
         }
     });
 
     test("renders polygon", function() {
-        equal(view.log.path[0].points.length, 8);
+        equal(plotBands[0].segments.length, 8);
     });
 
     test("polygon is closed", function() {
-        equal(view.log.path[0].closed, true);
+        equal(plotBands[0].options.closed, true);
     });
 
     test("polygon points are on circle", function() {
-        arrayClose(mapPoints(view.log.path[0].points), [
+        arrayClose(mapSegments(plotBands[0].segments), [
             [300, 204], [383, 348], [217, 348], [300, 204],
             [302, 299], [298, 299], [300, 302], [302, 298]
         ], TOLERANCE);
     });
 
     test("renders color", function() {
-        equal(view.log.path[0].style.fill, "red");
+        equal(plotBands[0].options.fill.color, "red");
     });
 
     test("renders opacity", function() {
-        equal(view.log.path[0].style.fillOpacity, 0.5);
+        equal(plotBands[0].options.fill.opacity, 0.5);
     });
 
     test("renders z index", function() {
-        equal(view.log.path[0].style.zIndex, -1);
+        equal(axis._plotbandGroup.options.zIndex, -1);
     });
 
     // ------------------------------------------------------------
@@ -266,31 +257,34 @@
                     color: "red"
                 }]
             });
+            plotBands = axis._plotbandGroup.children;
         }
     });
 
     test("renders ring", function() {
-        equal(view.log.ring.length, 1);
-    });
-
-    test("ring inner radius", function() {
-        close(view.log.ring[0].ring.ir, 96, TOLERANCE);
-    });
-
-    test("ring outer radius", function() {
-        close(view.log.ring[0].ring.r, 194, TOLERANCE);
+        equal(plotBands.length, 1);
+        closePaths(plotBands[0], dataviz.ShapeBuilder.current.createRing({
+            angle: 360,
+            startAngle: 0,
+            c: {
+                x: 300,
+                y: 300
+            },
+            ir: 95.8,
+            r: 194.7
+        }), TOLERANCE);
     });
 
     test("renders color", function() {
-        equal(view.log.ring[0].style.fill, "red");
+        equal(plotBands[0].options.fill.color, "red");
     });
 
     test("renders opacity", function() {
-        equal(view.log.ring[0].style.fillOpacity, 0.5);
+        equal(plotBands[0].options.fill.opacity, 0.5);
     });
 
     test("renders z index", function() {
-        equal(view.log.ring[0].style.zIndex, -1);
+        equal(axis._plotbandGroup.options.zIndex, -1);
     });
 
     // ------------------------------------------------------------
@@ -367,7 +361,7 @@
 
             plotArea = chart._model.children[1];
             label = plotArea.valueAxis.labels[1];
-            clickChart(chart, getElement(label.options.id));
+            clickChart(chart, getChartDomElement(label));
         }
 
         // ------------------------------------------------------------

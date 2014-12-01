@@ -1365,10 +1365,6 @@
             label,
             plotArea;
 
-        function getElement(chartElement) {
-            return $(chartElement.visual.observers()[0].element);
-        }
-
         function axisLabelClick(clickHandler, options) {
             chart = createChart($.extend(true, {
                 dataSource: [{
@@ -1395,7 +1391,7 @@
             plotArea = chart._model.children[1];
             label = plotArea.categoryAxis.labels[1];
 
-            chart._userEvents.press(0, 0, getElement(label));
+            chart._userEvents.press(0, 0, getChartDomElement(label));
             chart._userEvents.end(0, 0);
         }
 
@@ -1421,7 +1417,7 @@
                 }
             });
 
-            chart._userEvents.press(0, 0, getElement(label).children().first());
+            chart._userEvents.press(0, 0, getChartDomElement(label).children().first());
             chart._userEvents.end(0, 0);
         });
 

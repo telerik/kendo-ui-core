@@ -1,6 +1,4 @@
 (function() {
-    return;
-
     var dataviz = kendo.dataviz,
         Chart = dataviz.ui.Chart;
 
@@ -30,79 +28,6 @@
             }]
         }, options));
     }
-
-    // ------------------------------------------------------------
-    var viewFactory;
-    module("Views / View Factory", {
-        setup: function() {
-            viewFactory = new dataviz.ViewFactory;
-        }
-    });
-
-    test("registers views in ascending order", function() {
-        viewFactory.register("bar", Object, 1);
-        viewFactory.register("foo", Object, 0);
-
-        equal(viewFactory._views[0].name, "foo");
-    });
-
-    test("instantiates view with options", function() {
-        viewFactory.register("foo", function(options) { ok(options.bar); }, 0);
-
-        viewFactory.create({ bar: true });
-    });
-
-    test("instantiates default view", function() {
-        viewFactory.register("foo", function() { ok(true); }, 0);
-        viewFactory.register("bar", Object, 1);
-
-        viewFactory.create();
-    });
-
-    test("instantiates preferred view", function() {
-        viewFactory.register("foo", Object, 0);
-        viewFactory.register("bar", function() { ok(true); }, 1);
-
-        viewFactory.create({}, "bar");
-    });
-
-    test("ignores case of preferred view", function() {
-        viewFactory.register("foo", Object, 0);
-        viewFactory.register("bar", function() { ok(true); }, 1);
-
-        viewFactory.create({}, "Bar");
-    });
-
-    test("instantiates default view if the preferred is unavailable", function() {
-        viewFactory.register("foo", function() { ok(true); }, 0);
-        viewFactory.register("bar", Object, 1);
-
-        viewFactory.create({}, "baz");
-    });
-
-    asyncTest("logs warning if no views are registered", 1, function() {
-        stubMethod(kendo, "logToConsole", function(message) {
-            ok(message.indexOf("Warning: KendoUI DataViz cannot render.") > -1);
-            start();
-        }, function() {
-            viewFactory.create();
-        });
-    });
-
-    // ------------------------------------------------------------
-    module("Views", {
-        setup: setupChart,
-        teardown: destroyChart
-    });
-
-    asyncTest("uses preferred view specified in 'renderAs'", 1, function() {
-        stubMethod(dataviz.ViewFactory.prototype, "create", function(options, preferred) {
-            equal(preferred, "foo");
-            start();
-        }, function() {
-            setupChart({ renderAs: "foo" });
-        });
-    });
 
     // ------------------------------------------------------------
     module("Category Axis Configuration", {
@@ -1462,12 +1387,10 @@
     // ------------------------------------------------------------
     var animations;
     function logAnimations(callback) {
-        animations = [];
-        stubMethod(dataviz.ViewBase.fn, "playAnimations",
+        animations = 0;
+        stubMethod(kendo.drawing.Animation.fn, "play",
             function() {
-                var view = this;
-                animations = view.animations;
-                view.animations = [];
+                animations++;
             }, callback
         );
     }
@@ -1482,7 +1405,7 @@
         logAnimations(
             function() {
                 createBarChart();
-                ok(animations.length > 0);
+                ok(animations > 0);
             }
         );
     });
@@ -1494,7 +1417,7 @@
                     transitions: false
                 });
 
-                equal(animations.length, 0);
+                equal(animations, 0);
             }
         );
     });

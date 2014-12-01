@@ -1,17 +1,32 @@
 (function() {
-    return;
-
     var dataviz = kendo.dataviz,
         deepExtend = kendo.deepExtend,
-        getElement = dataviz.getElement,
         Point2D = dataviz.Point2D,
         Box2D = dataviz.Box2D,
         chartBox = new Box2D(100, 100, 500, 500),
         center = new Point2D(300, 300),
-        view,
+        gridLines,
         axis,
         altAxis,
         TOLERANCE = 4;
+
+    function getAxisTextBoxes() {
+        return $.map(axis.labels, function(item) {
+            return item.visual;
+        });
+    }
+
+    function getAxisTextBackgrounds() {
+        return $.map(getAxisTextBoxes(), function(item) {
+            return item.children[0];
+        });
+    }
+
+    function getAxisTexts() {
+        return $.map(getAxisTextBoxes(), function(item) {
+            return kendo.util.last(item.children);
+        });
+    }
 
     function createAxis(options) {
         altAxis = {
@@ -26,12 +41,7 @@
             valueAxis: altAxis
         };
 
-        view = new ViewStub();
-        axis.getViewElements(view);
-    }
-
-    function lineEnd(line) {
-        return new Point2D(line.x2, line.y2);
+        axis.renderVisual();
     }
 
     // ------------------------------------------------------------
@@ -46,22 +56,19 @@
     });
 
     test("creates labels", 1, function() {
-        deepEqual($.map(view.log.text, function(text) { return text.content }),
-             ["0", "60", "120", "180", "240", "300"]);
+        equalTexts(getAxisTexts(), ["0", "60", "120", "180", "240", "300"]);
     });
 
     test("creates labels with full format", 1, function() {
         createAxis({ categories: [1, 2], labels: { format: "{0:N2}"} });
 
-        deepEqual($.map(view.log.text, function(text) { return text.content }),
-             ["0.00", "60.00", "120.00", "180.00", "240.00", "300.00"]);
+        equalTexts(getAxisTexts(), ["0.00", "60.00", "120.00", "180.00", "240.00", "300.00"]);
     });
 
     test("creates labels with simple format", 1, function() {
         createAxis({ categories: [1, 2], labels: { format: "N2"} });
 
-        deepEqual($.map(view.log.text, function(text) { return text.content }),
-             ["0.00", "60.00", "120.00", "180.00", "240.00", "300.00"]);
+        equalTexts(getAxisTexts(), ["0.00", "60.00", "120.00", "180.00", "240.00", "300.00"]);
     });
 
     test("labels can be hidden", function() {
@@ -81,7 +88,7 @@
             }
         });
 
-        equal(view.log.text[0].content, "|0|");
+        equal(getAxisTexts()[0].content(), "|0|");
     });
 
     test("labels have set color", 1, function() {
@@ -91,7 +98,7 @@
             }
         });
 
-        equal(view.log.text[0].style.color, "#f00");
+        equal(getAxisTexts()[0].options.fill.color, "#f00");
     });
 
     test("labels have set background", 1, function() {
@@ -101,7 +108,7 @@
             }
         });
 
-        equal(view.log.rect[0].style.fill, "#f0f");
+        equal(getAxisTextBackgrounds()[0].options.fill.color, "#f0f");
     });
 
     test("labels have set zIndex", 1, function() {
@@ -109,44 +116,26 @@
             zIndex: 2
         });
 
-        equal(view.log.text[0].style.zIndex, 2);
+        equal(getAxisTextBoxes()[0].options.zIndex, 2);
     });
 
     test("labels are distributed on major divisions", function() {
-        arrayClose(
-            $.map(view.log.text, function(text) {
-                return [[text.style.x, text.style.y]]
-            }),
-            [[510, 293], [410, 102], [169, 102],
-             [69, 293], [169, 483], [410, 483]],
-            TOLERANCE
-        );
+        closeTextPosition("", getAxisTexts(), [[510, 293], [410, 102], [169, 102],
+             [69, 293], [169, 483], [410, 483]], TOLERANCE);
     });
 
     test("labels margin is applied", function() {
         createAxis({ labels: { margin: 5 } });
 
-        arrayClose(
-            $.map(view.log.text, function(text) {
-                return [[text.style.x, text.style.y]]
-            }),
-            [[505, 293], [405, 107], [174, 107],
-             [74, 293], [174, 478], [406, 478]],
-            TOLERANCE
-        );
+        closeTextPosition("", getAxisTexts(), [[505, 293], [405, 107], [174, 107],
+             [74, 293], [174, 478], [406, 478]], TOLERANCE);
     });
 
     test("labels are distributed in reverse", function() {
         createAxis({ reverse: true });
 
-        arrayClose(
-            $.map(view.log.text, function(text) {
-                return [[text.style.x, text.style.y]]
-            }),
-            [[510, 293], [410, 483], [169, 483],
-             [69, 293], [169, 102], [410, 102]],
-            TOLERANCE
-        );
+        closeTextPosition("", getAxisTexts(), [[510, 293], [410, 483], [169, 483],
+             [69, 293], [169, 102], [410, 102]], TOLERANCE);
     });
 
     // ------------------------------------------------------------
@@ -363,59 +352,60 @@
     });
 
     // ------------------------------------------------------------
+    function setupGridLines(altAxis, axisOptions) {
+        createAxis(axisOptions);
+        gridLines = axis.createGridLines(altAxis);
+    }
+
     module("Polar Numeric Axis / Grid lines", {
         setup: function() {
-            createAxis();
-            axis.renderGridLines(view, altAxis);
+            setupGridLines(altAxis);
         }
     });
 
     test("renders major grid lines by default", function() {
-        equal(view.log.line.length, 6);
+        equal(gridLines.length, 6);
     });
 
     test("sets major grid lines default width", function() {
-        equal(view.log.line[0].options.strokeWidth, 1);
+        equal(gridLines[0].options.stroke.width, 1);
     });
 
     test("major grid lines extend from axis center", function() {
-        equal(view.log.line[0].x1, 300);
-        equal(view.log.line[0].y1, 300);
+        var anchor = gridLines[0].segments[0].anchor();
+        equal(anchor.x, 300);
+        equal(anchor.y, 300);
     });
 
     test("major grid lines extend to value axis end", function() {
-        close(view.log.line[0].x2, 100, TOLERANCE);
-        equal(view.log.line[0].y2, 300);
+        var anchor = gridLines[0].segments[1].anchor();
+        close(anchor.x, 100, TOLERANCE);
+        equal(anchor.y, 300);
     });
 
     test("renders 90 degree grid line when value axis is not visible", function() {
-        createAxis({ majorUnit: 90 });
-        axis.renderGridLines(view, {
+        setupGridLines({
             options: { visible: false },
             lineBox: altAxis.lineBox
-        });
-
-        equal(view.log.line[1].x2, 300);
-        equal(view.log.line[1].y2, 100);
+        }, { majorUnit: 90 });
+        var anchor = gridLines[1].segments[1].anchor();
+        equal(anchor.x, 300);
+        equal(anchor.y, 100);
     });
 
     test("applies major grid line color", function() {
-        createAxis({ majorGridLines: { color: "red" } });
-        axis.renderGridLines(view, altAxis);
+        setupGridLines(altAxis, { majorGridLines: { color: "red" } });
 
-        equal(view.log.line[0].options.stroke, "red");
+        equal(gridLines[0].options.stroke.color, "red");
     });
 
     test("applies major grid line width", function() {
-        createAxis({ majorGridLines: { width: 2 } });
-        axis.renderGridLines(view, altAxis);
-
-        equal(view.log.line[0].options.strokeWidth, 2);
-
+        setupGridLines(altAxis, { majorGridLines: { width: 2 } });
+        equal(gridLines[0].options.stroke.width, 2);
     });
 
     test("renders minor grid lines", function() {
-        createAxis({
+        setupGridLines(altAxis, {
             majorGridLines: {
                 visible: false
             },
@@ -423,13 +413,11 @@
                 visible: true
             }
         });
-        axis.renderGridLines(view, altAxis);
-
-        equal(view.log.line.length, 11);
+        equal(gridLines.length, 11);
     });
 
     test("applies minor grid line color", function() {
-        createAxis({
+        setupGridLines(altAxis, {
             majorGridLines: {
                 visible: false
             },
@@ -438,13 +426,12 @@
                 color: "red"
             }
         });
-        axis.renderGridLines(view, altAxis);
 
-        equal(view.log.line[0].options.stroke, "red");
+        equal(gridLines[0].options.stroke.color, "red");
     });
 
     test("applies minor grid line width", function() {
-        createAxis({
+        setupGridLines(altAxis, {
             majorGridLines: {
                 visible: false
             },
@@ -453,34 +440,37 @@
                 width: 4
             }
         });
-        axis.renderGridLines(view, altAxis);
 
-        equal(view.log.line[0].options.strokeWidth, 4);
+        equal(gridLines[0].options.stroke.width, 4);
     });
 
     // ------------------------------------------------------------
     module("Polar Numeric Axis / Grid lines / startAngle", {
         setup: function() {
-            createAxis({ startAngle: 10 });
-            axis.renderGridLines(view, altAxis);
+            setupGridLines(altAxis, { startAngle: 10 });
         }
     });
 
     test("major grid lines are offset with start angle", function() {
         var ref = Point2D.onCircle(center, 350, 200),
-            end = lineEnd(view.log.line[0]);
+            end = gridLines[0].segments[1].anchor();
 
         ok(ref.equals(end));
     });
 
     test("renders 90 degree grid line as it no longer overlaps the value axis", function() {
-        createAxis({ majorUnit: 90, startAngle: 10 });
-        axis.renderGridLines(view, altAxis);
+        setupGridLines(altAxis, { majorUnit: 90, startAngle: 10 });
 
-        equal(view.log.line.length, 4);
+        equal(gridLines.length, 4);
     });
 
+
     // ------------------------------------------------------------
+
+    function getPlotBands() {
+        return axis._plotbandGroup.children;
+    }
+
     module("Polar Numeric Axis / Plot Bands", {
         setup: function() {
             createAxis({
@@ -495,27 +485,31 @@
     });
 
     test("renders sectors", function() {
-        equal(view.log.sector.length, 1);
+        equal(getPlotBands().length, 1);
     });
 
-    test("sets sector start angle", function() {
-        equal(view.log.sector[0].sector.startAngle, 60);
-    });
-
-    test("sets sector angle", function() {
-        equal(view.log.sector[0].sector.angle, 60);
+    test("renders sectors with correct angles", function() {
+        closePaths(getPlotBands()[0], dataviz.ShapeBuilder.current.createRing({
+            startAngle: 60,
+            angle: 60,
+            r: 200,
+            c: {
+                x: 300,
+                y: 300
+            }
+        }));
     });
 
     test("renders color", function() {
-        equal(view.log.sector[0].style.fill, "red");
+        equal(getPlotBands()[0].options.fill.color, "red");
     });
 
     test("renders opacity", function() {
-        equal(view.log.sector[0].style.fillOpacity, 0.5);
+        equal(getPlotBands()[0].options.fill.opacity, 0.5);
     });
 
     test("renders z index", function() {
-        equal(view.log.sector[0].style.zIndex, -1);
+        equal(axis._plotbandGroup.options.zIndex, -1);
     });
 
     (function() {
@@ -537,7 +531,7 @@
 
             plotArea = chart._model.children[1];
             label = plotArea.polarAxis.labels[1];
-            chart._userEvents.press(0, 0, getElement(label.options.id));
+            chart._userEvents.press(0, 0, getChartDomElement(label));
             chart._userEvents.end(0, 0);
         }
 

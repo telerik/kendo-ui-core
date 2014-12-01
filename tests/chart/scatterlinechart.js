@@ -1,27 +1,26 @@
 (function() {
-    return;
-
     var dataviz = kendo.dataviz,
         Box2D = dataviz.Box2D,
         chartBox = new Box2D(0, 0, 800, 600),
         scatterLineChart,
         root,
-        view,
         pointCoordinates,
         TOLERANCE = 1;
 
-    function setupScatterLineChart(plotArea, options) {
-        view = new ViewStub();
+    function getSegmentPath(idx) {
+        return scatterLineChart._segments[idx || 0].visual;
+    }
 
+    function setupScatterLineChart(plotArea, options) {
         scatterLineChart = new dataviz.ScatterLineChart(plotArea, options);
 
         root = new dataviz.RootElement();
         root.append(scatterLineChart);
+        root.reflow();
+        root.renderVisual();
 
-        scatterLineChart.reflow();
-        scatterLineChart.getViewElements(view);
-        if (view.log.path[0]) {
-            pointCoordinates = mapPoints(view.log.path[0].points);
+        if (scatterLineChart._segments.length) {
+            pointCoordinates = mapSegments(getSegmentPath().segments);
         }
     }
 
@@ -280,56 +279,20 @@
             }
         });
 
-        test("generates unique id", function() {
-            ok(scatterLineChart.id);
-        });
-
         test("sets line width", function() {
-            equal(view.log.path[0].style.strokeWidth, 4);
+            equal(getSegmentPath().options.stroke.width, 4);
         });
 
         test("sets line color", function() {
-            equal(view.log.path[0].style.stroke, "#cf0");
+            equal(getSegmentPath().options.stroke.color, "#cf0");
         });
 
         test("sets line opacity", function() {
-            equal(view.log.path[0].style.strokeOpacity, 0.5);
+            equal(getSegmentPath().options.stroke.opacity, 0.5);
         });
 
         test("sets line dashType", function() {
-            equal(view.log.path[0].style.dashType, "dot");
-        });
-
-        test("line has same model id as its segment", function() {
-            equal(view.log.path[0].style.data.modelId, scatterLineChart._segments[0].modelId);
-        });
-
-        test("line is not aligned", function() {
-            equal(view.log.path[0].style.align, false);
-        });
-
-        test("renders group with ScatterLineChart id and no animations", function() {
-            var group = view.findInLog("group", function(item) {
-                return item.options.id === scatterLineChart.id;
-            });
-
-            ok(group && !group.options.animation);
-            equal(group.options.id, scatterLineChart.id);
-        });
-
-        test("renders line chart group", function() {
-            var group = view.findInLog("group", function(item) {
-                return item.options.animation;
-            });
-            ok(group);
-        });
-
-        test("sets group animation", function() {
-            var group = view.findInLog("group", function(item) {
-                return item.options.animation;
-            });
-
-            equal(group.options.animation.type, "clip");
+            equal(getSegmentPath().options.stroke.dashType, "dot");
         });
 
         // ------------------------------------------------------------
@@ -358,7 +321,7 @@
                 ]
             });
 
-            equal(view.log.path.length, 1);
+            equal(scatterLineChart._segments.length, 1);
         });
 
         test("line continues after missing value", function() {
@@ -386,7 +349,12 @@
             ]);
         });
 
-        // ------------------------------------------------------------
+        // ------------------------------------------------------------\
+
+        function getPointText(idx) {
+            return scatterLineChart.points[idx || 0].label.visual.children[0];
+        }
+
         module("Scatter Line Chart / Labels", {
             setup: function() {
                 plotArea = new PlotAreaStub();
@@ -402,7 +370,7 @@
                 }]
             });
 
-            equal(view.log.text[0].content, "$1.00 $10.00");
+            equal(getPointText().content(), "$1.00 $10.00");
         });
 
     })();

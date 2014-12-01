@@ -1,7 +1,6 @@
 (function() {
 
     var dataviz = kendo.dataviz,
-        getElement = dataviz.getElement,
         Box2D = dataviz.Box2D,
         TOLERANCE = 1,
         box = new Box2D(0, 0, 800, 600),
@@ -711,10 +710,6 @@
             segmentElement,
             plotArea;
 
-        function getElement(modelElement) {
-            return $(modelElement.visual._observers[0].element);
-        }
-
         function createFunnelChart(options) {
             chart = createChart($.extend({
                 series: [{
@@ -728,7 +723,7 @@
 
             plotArea = chart._plotArea;
             segment = plotArea.charts[0].points[0];
-            segmentElement = getElement(segment);
+            segmentElement = getChartDomElement(segment);
         }
 
         function segmentClick(callback) {
@@ -766,7 +761,7 @@
                 seriesClick: function() { ok(true); }
             });
             var label = plotArea.charts[0].labels[0];
-            clickChart(chart, getElement(label));
+            clickChart(chart, getChartDomElement(label));
         });
 
         test("event arguments contain value", 1, function() {
@@ -785,7 +780,7 @@
 
         test("event arguments contain jQuery element", 1, function() {
             segmentClick(function(e) {
-                equal(e.element[0], getElement(segment)[0]);
+                equal(e.element[0], getChartDomElement(segment)[0]);
             });
         });
 
@@ -823,7 +818,7 @@
                 seriesHover: function() { ok(true); }
             });
             var label = plotArea.charts[0].labels[0];
-            $(getElement(label)).mouseover();
+            $(getChartDomElement(label)).mouseover();
         });
 
         test("event arguments contain value", 1, function() {
@@ -842,7 +837,7 @@
 
         test("event arguments contain jQuery element", 1, function() {
             segmentHover(function(e) {
-                equal(e.element[0], getElement(segment)[0]);
+                equal(e.element[0], getChartDomElement(segment)[0]);
             });
         });
 

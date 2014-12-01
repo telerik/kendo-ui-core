@@ -1,8 +1,6 @@
 (function() {
-    return;
 
     var dataviz = kendo.dataviz,
-        getElement = dataviz.getElement,
         Box2D = dataviz.Box2D,
         chartBox = new Box2D(100, 100, 1000, 1000),
         plotArea,
@@ -47,7 +45,7 @@
             plotAreaElement;
 
         var TOLERANCE = 5;
-
+        
         function createPolarChart(options) {
             chart = $("<div id='container' style='width: 600px; height: 400px;' />").appendTo(QUnit.fixture).kendoChart($.extend({
                 series: [{
@@ -61,9 +59,9 @@
             $("#container").css({ position: "absolute", top: "200px", left: "8px" });
 
             plotArea = chart._model.children[1];
-            plotAreaElement = getElement(plotArea.id);
+            plotAreaElement = getChartDomElement(plotArea);
             point = plotArea.charts[0].points[0];
-            pointElement = $(getElement(point.id));
+            pointElement = getChartDomElement(point.marker);
         }
 
         // ------------------------------------------------------------

@@ -3,7 +3,6 @@
     var dataviz = kendo.dataviz,
         draw = kendo.drawing,
         geom = kendo.geometry,
-        getElement = dataviz.getElement,
         Box2D = dataviz.Box2D,
         categoriesCount = dataviz.categoriesCount,
         chartBox = new Box2D(0, 0, 800, 600),
@@ -2528,10 +2527,6 @@
             barElement,
             plotArea;
 
-        function getElement(chartElement) {
-            return $(chartElement.visual.observers()[0].element);
-        }
-
         function createBarChart(options) {
             chart = createChart($.extend({
                 series: [{
@@ -2545,7 +2540,7 @@
 
             plotArea = chart._model.children[1];
             bar = plotArea.charts[0].points[0];
-            barElement = getElement(bar);
+            barElement = getChartDomElement(bar);
         }
 
         function barClick(callback) {
@@ -2605,7 +2600,7 @@
             });
             var label = plotArea.charts[0].points[0].label.children[0];
 
-            clickChart(chart, getElement(label));
+            clickChart(chart, getChartDomElement(label));
         });
 
         test("event arguments contain value", function() {
@@ -2684,7 +2679,7 @@
                 seriesHover: function() { ok(true); }
             });
             var label = plotArea.charts[0].points[0].label.children[0];
-            getElement(label).mouseover();
+            getChartDomElement(label).mouseover();
         });
 
         test("event arguments contain value", function() {

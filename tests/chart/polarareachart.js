@@ -1,8 +1,5 @@
 (function() {
-    return;
-
     var dataviz = kendo.dataviz,
-        getElement = dataviz.getElement,
         Point2D = dataviz.Point2D,
         Box2D = dataviz.Box2D,
         Ring = dataviz.Ring,
@@ -13,6 +10,9 @@
         chart,
         pointsXY;
 
+    function getFirstSegment(chart) {
+        return chart._segments[0].visual.children[0];
+    }
 
     function createChart(series, options) {
         view = new ViewStub();
@@ -35,8 +35,8 @@
         chart = plotArea.charts[0];
 
         plotArea.reflow(chartBox);
-        plotArea.getViewElements(view);
-        pointsXY = mapPoints(view.log.path[0].points);
+        plotArea.renderVisual();
+        pointsXY = mapSegments(getFirstSegment(chart).segments);
     }
 
     // ------------------------------------------------------------
@@ -64,16 +64,16 @@
             [494, 206], [533, 71], [434, 172]
         ], TOLERANCE);
     });
-    
+
     // ------------------------------------------------------------
-                           
-    (function() {      
+
+    (function() {
         module("PolarArea Chart / Values exceeding axis min or max options ", {});
 
         test("values are limited", 1, function() {
             var plotArea = {
                 axisX: {
-                    getSlot: function(a,b,limit) {   
+                    getSlot: function(a,b,limit) {
                         return new Ring(Point2D());
                     }
                 },
@@ -88,9 +88,9 @@
             var chart = new dataviz.PolarAreaChart(plotArea, {series: [{
                 type: "polarArea",
                 data: [[45, 1]]
-            }]});          
-            
-            chart.reflow();            
-        });          
-    })();    
+            }]});
+
+            chart.reflow();
+        });
+    })();
 })();

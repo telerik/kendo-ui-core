@@ -513,10 +513,6 @@
         var chart,
             segment;
 
-        function getElement(modelElement) {
-            return $(modelElement.visual._observers[0].element);
-        }
-
         function createAreaChart(options) {
             chart = createChart($.extend({
                 series: [{
@@ -539,7 +535,7 @@
                 seriesClick: callback
             });
 
-            chart._userEvents.press(x, y, getElement(segment));
+            chart._userEvents.press(x, y, getChartDomElement(segment));
             chart._userEvents.end(x, y);
         }
 
@@ -548,7 +544,7 @@
                 seriesHover: callback
             });
 
-            triggerEvent("mouseover", getElement(segment), x, y);
+            triggerEvent("mouseover", getChartDomElement(segment), x, y);
         }
 
         // ------------------------------------------------------------

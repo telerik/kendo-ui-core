@@ -1,25 +1,21 @@
 (function() {
-    return;
-
     var dataviz = kendo.dataviz,
         Box2D = dataviz.Box2D,
         chartBox = new Box2D(0, 0, 800, 600),
         lineChart,
         root,
-        view,
         pointCoordinates;
 
     function setupLineChart(plotArea, options) {
-        view = new ViewStub();
-
         lineChart = new dataviz.LineChart(plotArea, options);
 
         root = new dataviz.RootElement();
         root.append(lineChart);
 
-        lineChart.reflow();
-        lineChart.getViewElements(view);
-        pointCoordinates = mapPoints(view.log.path[0].points);
+        root.reflow();
+        root.renderVisual();
+
+        pointCoordinates = mapSegments(lineChart._segments[0].visual.segments);
     }
 
     function stubPlotArea(getCategorySlot, getValueSlot, options) {
@@ -41,7 +37,7 @@
 
             this.namedCategoryAxes = {};
             this.namedValueAxes = {};
- 
+
             this.seriesCategoryAxis = function(series) {
                 return series.categoryAxis ?
                     this.namedCategoryAxes[series.categoryAxis] : this.primaryCategoryAxis;

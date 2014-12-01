@@ -247,6 +247,10 @@ function closeTextPosition(axis, texts, expected, tolerance) {
     }
 }
 
+function getChartDomElement(chartElement) {
+    return $(chartElement.visual._observers[0].element);
+}
+
 function stubMethod(fn, methodName, stub, callback) {
     var oldMethod = fn[methodName];
 

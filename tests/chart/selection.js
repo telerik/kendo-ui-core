@@ -1,6 +1,4 @@
 (function() {
-    return; 
-
     var dataviz = kendo.dataviz,
         deepExtend = kendo.deepExtend,
         Selection = dataviz.Selection;
@@ -672,8 +670,8 @@
         });
 
         test("selection is rendered at chosen location", function() {
-            equal(selection.leftMask.width(), 141);
-            equal(selection.selection.width(), 139);
+            equal(selection.leftMask.width(), 139);
+            equal(selection.selection.width(), 138);
         });
 
         test("selectStart args contain date range", function() {

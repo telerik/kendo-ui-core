@@ -112,7 +112,7 @@ var __meta__ = {
         renderGridLines: function(angles, radius, options) {
             var style = {
                 stroke: {
-                    Width: options.width,
+                    width: options.width,
                     color: options.color,
                     dashType: options.dashType
                 }
@@ -261,7 +261,7 @@ var __meta__ = {
                 head,
                 tail;
 
-            var group = new draw.Group({
+            var group = this._plotbandGroup = new draw.Group({
                 zIndex: -1
             });
 
@@ -373,7 +373,7 @@ var __meta__ = {
                 slot,
                 ring;
 
-            var group = new draw.Group({
+            var group = this._plotbandGroup = new draw.Group({
                 zIndex: -1
             });
 

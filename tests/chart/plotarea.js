@@ -1,11 +1,7 @@
 (function() {
-    return;
-
     var dataviz = kendo.dataviz,
-        getElement = dataviz.getElement,
         Box2D = dataviz.Box2D,
         chartBox = new Box2D(100, 100, 1000, 1000),
-        view,
         TOLERANCE = 1,
         MARGIN = 10,
         GAP = 4,
@@ -13,7 +9,6 @@
         chartSeries;
 
     function moduleSetup() {
-        view = new ViewStub();
     }
 
     function moduleTeardown() {
@@ -124,6 +119,12 @@
             secondaryValueAxis = namedValueAxes.secondary;
 
             chartSeries = plotArea.charts[0];
+        }
+
+        function renderPlotArea(series, options) {
+            createPlotArea(series, options);
+            plotArea.reflow(chartBox);
+            plotArea.renderVisual();
         }
 
         function assertAxisRange(axis, min, max, series, options) {
@@ -2488,23 +2489,31 @@
                 name: "Value A",
                 type: "bar",
                 data: [100]
-            }];
+            }],
+            gridLines;
 
         function createPlotArea(categoryAxis, valueAxis, options) {
             plotArea = new dataviz.CategoricalPlotArea(barSeriesData, kendo.deepExtend({
                 categoryAxis: categoryAxis,
                 valueAxis: valueAxis
             }, options));
-
-            stubMethod(dataviz.NumericAxis.fn, "getViewElements", function() { return []; },
-                function() {
-                    stubMethod(dataviz.CategoryAxis.fn, "getViewElements", function() { return []; },
-                        function() {
-                            plotArea.reflow(chartBox);
-                            plotArea.getViewElements(view);
-                        }
-            )});
         }
+
+        function renderPlotArea(categoryAxis, valueAxis, options) {
+            createPlotArea(categoryAxis, valueAxis, options);
+            plotArea.reflow(chartBox);
+            plotArea.renderVisual();
+
+            gridLines = [];
+            var axes = plotArea.axes;
+            for (var idx = 0; idx < axes.length; idx++) {
+                if (axes[idx]._gridLines) {
+                    gridLines = gridLines.concat(axes[idx]._gridLines.children);
+                }
+            }
+        }
+
+
 
         // ------------------------------------------------------------
         module("Categorical PlotArea / Major Gridlines", {
@@ -2513,18 +2522,18 @@
         });
 
         test("renders gridlines", function() {
-            createPlotArea({
+            renderPlotArea({
                 categories: ["A"],
                 majorGridLines: {
                     visible: true
                 }
             });
 
-            equal(view.log.line.length, 7);
+            equal(gridLines.length, 7);
         });
 
         test("renders gridlines over hidden value axis", function() {
-            createPlotArea({
+            renderPlotArea({
                 categories: ["A"],
                 majorGridLines: {
                     visible: true
@@ -2535,7 +2544,7 @@
                 }
             });
 
-            equal(view.log.line.length, 8);
+            equal(gridLines.length, 8);
         });
 
         test("should not render gridlines for numeric axis", function() {
@@ -2551,9 +2560,9 @@
                     }
                 };
 
-            createPlotArea(categoryAxis, valueAxis);
+            renderPlotArea(categoryAxis, valueAxis);
 
-            equal(view.log.line.length, 1);
+            equal(gridLines.length, 1);
         });
 
         test("should not render gridlines for category axis", function() {
@@ -2561,9 +2570,9 @@
                     categories: ["A"]
                 };
 
-            createPlotArea(categoryAxis);
+            renderPlotArea(categoryAxis);
 
-            equal(view.log.line.length, 6);
+            equal(gridLines.length, 6);
         });
 
         test("should not render gridlines", function() {
@@ -2579,9 +2588,9 @@
                     }
                 };
 
-            createPlotArea(categoryAxis, valueAxis);
+            renderPlotArea(categoryAxis, valueAxis);
 
-            equal(view.log.line.length, 0);
+            equal(gridLines.length, 0);
         });
 
         test("gridlines extend to secondary axis end", function() {
@@ -2600,16 +2609,16 @@
                     }
                 };
 
-            createPlotArea(categoryAxis, valueAxis);
-            equal(view.log.line[0].x2, plotArea.valueAxis.lineBox().x2);
+            renderPlotArea(categoryAxis, valueAxis);
+            equal(gridLines[0].segments[1].anchor().x, kendo.util.round(plotArea.valueAxis.lineBox().x2, 0) + 0.5);
         });
 
         test("should not render gridlines for secondary value axis", function() {
-            createPlotArea({
+            renderPlotArea({
                 categories: ["A"]
             }, [{}, {}]);
 
-            equal(view.log.line.length, 6);
+            equal(gridLines.length, 6);
         });
 
         // ------------------------------------------------------------
@@ -2619,7 +2628,7 @@
         });
 
         test("renders gridlines when value axis is in different pane", function() {
-            createPlotArea({
+            renderPlotArea({
                     categories: ["A"],
                     majorGridLines: {
                         visible: true
@@ -2634,11 +2643,11 @@
                     }]
             });
 
-            equal(view.log.line.length, 8);
+            equal(gridLines.length, 8);
         });
 
         test("renders grid lines in each pane", function() {
-            createPlotArea({
+            renderPlotArea({
                     categories: ["A"],
                     majorGridLines: {
                         visible: true
@@ -2655,7 +2664,7 @@
                     }]
             });
 
-            equal(view.log.line.length, 13);
+            equal(gridLines.length, 13);
         });
 
         // ------------------------------------------------------------
@@ -2683,9 +2692,9 @@
                     }
                 };
 
-            createPlotArea(categoryAxis, valueAxis);
+            renderPlotArea(categoryAxis, valueAxis);
 
-            equal(view.log.line.length, 32);
+            equal(gridLines.length, 32);
         });
 
         test("should not render gridlines for numeric axis", function() {
@@ -2707,9 +2716,9 @@
                     }
                 };
 
-            createPlotArea(categoryAxis, valueAxis);
+            renderPlotArea(categoryAxis, valueAxis);
 
-            equal(view.log.line.length, 2);
+            equal(gridLines.length, 2);
         });
 
         test("should not render gridlines for category axis", function() {
@@ -2725,9 +2734,9 @@
                     }
                 };
 
-            createPlotArea(categoryAxis, valueAxis);
+            renderPlotArea(categoryAxis, valueAxis);
 
-            equal(view.log.line.length, 30);
+            equal(gridLines.length, 30);
         });
 
         test("should not render gridlines", function() {
@@ -2740,9 +2749,9 @@
                     }
                 };
 
-            createPlotArea(categoryAxis, valueAxis);
+            renderPlotArea(categoryAxis, valueAxis);
 
-            equal(view.log.line.length, 0);
+            equal(gridLines.length, 0);
         });
 
         // ------------------------------------------------------------
@@ -2770,9 +2779,9 @@
                     }
                 };
 
-            createPlotArea(categoryAxis, valueAxis);
+            renderPlotArea(categoryAxis, valueAxis);
 
-            equal(view.log.line.length, 32);
+            equal(gridLines.length, 32);
         });
 
         // ------------------------------------------------------------
@@ -2809,7 +2818,7 @@
                 },
                 valueAxis = { };
 
-            createPlotArea(categoryAxis, valueAxis, {
+            renderPlotArea(categoryAxis, valueAxis, {
                 plotArea: {
                     border: {
                         color: "red",
@@ -2819,11 +2828,12 @@
                 }
             });
 
-            var rect = view.log.rect[2];
-            equal(rect.style.dashType, "dot");
-            equal(rect.style.stroke, "red");
-            equal(rect.style.strokeWidth, 2);
-            deepEqual([rect.x1, rect.y1, rect.x2, rect.y2], [116, 100, 989.5, 976], TOLERANCE);
+            var rect = plotArea._bgVisual;
+            var stroke = rect.options.stroke;
+            equal(stroke.dashType, "dot");
+            equal(stroke.color, "red");
+            equal(stroke.width, 2);
+            sameRectPath(rect, [116, 100, 988, 976], TOLERANCE);
         });
 
         test("should render plot area background", function() {
@@ -2832,15 +2842,15 @@
                 },
                 valueAxis = { };
 
-            createPlotArea(categoryAxis, valueAxis, {
+            renderPlotArea(categoryAxis, valueAxis, {
                 plotArea: {
                     background: "color"
                 }
             });
 
-            var rect = view.log.rect[1];
-            equal(rect.style.fill, "color");
-            deepEqual([rect.x1, rect.y1, rect.x2, rect.y2], [116, 100, 989.5, 976], TOLERANCE);
+            var rect = plotArea._bgVisual;
+            equal(rect.options.fill.color, "color");
+            sameRectPath(rect, [116, 100, 988, 976], TOLERANCE);
         });
 
         test("should set plot area background opacity", function() {
@@ -2849,14 +2859,15 @@
                 },
                 valueAxis = { };
 
-            createPlotArea(categoryAxis, valueAxis, {
+            renderPlotArea(categoryAxis, valueAxis, {
                 plotArea: {
                     background: "color",
                     opacity: 0.5
                 }
             });
 
-            equal(view.log.rect[1].style.fillOpacity, 0.5);
+            var rect = plotArea._bgVisual;
+            equal(rect.options.fill.opacity, 0.5);
         });
 
     })();
@@ -2877,6 +2888,11 @@
             }, options));
 
             plotArea.reflow(chartBox);
+        }
+
+        function renderPlotArea(series, options) {
+            createPlotArea(series, options);
+            plotArea.renderVisual();
         }
 
         // ------------------------------------------------------------
@@ -3431,7 +3447,7 @@
             });
 
             var textBox = plotArea.panes[0].title.children[0];
-            equal(textBox.box.x1, 528.5, TOLERANCE);
+            equal(textBox.box.x1, 520, TOLERANCE);
         });
 
         test("title is aligned left by default", function() {
@@ -3460,7 +3476,7 @@
             });
 
             var textBox = plotArea.panes[0].title.children[0];
-            equal(textBox.box.x1, 957, TOLERANCE);
+            equal(textBox.box.x1, 940, TOLERANCE);
         });
 
         test("title text can be set directly", function() {
@@ -3480,7 +3496,7 @@
             setup: function() {
                 moduleSetup();
 
-                createPlotArea({
+                renderPlotArea({
                     categoryAxis: {
                         name: "cAxis"
                     },
@@ -3524,7 +3540,7 @@
         });
 
         test("Removes pane axes from pane.axes collection", function() {
-            createPlotArea({
+            renderPlotArea({
                 panes: [{
                     name: "a"
                 }]
@@ -3617,19 +3633,19 @@
             });
 
             plotArea = chart._model.children[1];
-            var paneId = plotArea.panes[0].id;
-            var element = getElement(paneId);
+            var pane = plotArea.panes[0];
+            var element = getChartDomElement(pane);
 
             plotArea.series[0].data[0] = 10;
             plotArea.redraw(plotArea.panes[0]);
 
-            notEqual(getElement(paneId), element);
+            notEqual(getChartDomElement(pane), element);
 
             destroyChart();
         });
 
         test("partial reflows account for axes in other panes", function() {
-            createPlotArea({
+            renderPlotArea({
                 categoryAxis: [{
                     name: "cAxis"
                 }, {
@@ -3657,7 +3673,7 @@
         });
 
         test("recreates crosshairs for the panes", function() {
-            createPlotArea({
+            renderPlotArea({
                 panes: [{
                     name: "a"
                 }, {
@@ -3685,7 +3701,7 @@
         });
 
         test("destroys crosshairs", function() {
-            createPlotArea({
+            renderPlotArea({
                 valueAxis: {
                     crosshair: {
                         visible: true
@@ -3700,7 +3716,7 @@
         });
 
         test("destroys crosshairs on destroy", function() {
-            createPlotArea({
+            renderPlotArea({
                 valueAxis: {
                     crosshair: {
                         visible: true
@@ -3742,7 +3758,7 @@
         });
 
         test("redraws multiple panes", function() {
-            createPlotArea({
+            renderPlotArea({
                 categoryAxis: {
                     name: "cAxis"
                 },
@@ -3807,8 +3823,8 @@
 
             plotArea = chart._model.children[1];
             bar = plotArea.charts[0].points[0];
-            barElement = getElement(bar.id);
-            plotAreaElement = getElement(plotArea.id);
+            barElement = getChartDomElement(bar);
+            plotAreaElement = getChartDomElement(plotArea);
         }
 
         // ------------------------------------------------------------
@@ -3970,7 +3986,7 @@
             });
 
             plotArea = chart._model.children[1];
-            plotAreaElement = getElement(plotArea.id);
+            plotAreaElement = getChartDomElement(plotArea);
         }
 
         module("Categorical Plot Area / Events / plotAreaClick / Panes", {
@@ -4028,7 +4044,7 @@
             });
 
             plotArea = chart._model.children[1];
-            plotAreaElement = getElement(plotArea.id);
+            plotAreaElement = getChartDomElement(plotArea);
             clickChart(chart, plotAreaElement, 300, 300);
         });
 
@@ -4064,6 +4080,12 @@
             secondaryYAxis = namedYAxes.secondary;
 
             chartSeries = plotArea.charts[0];
+        }
+
+        function renderPlotArea(series, options) {
+            createPlotArea(series, options);
+            plotArea.reflow(chartBox);
+            plotArea.renderVisual();
         }
 
         function assertAxisRange(axis, min, max, series, options) {
@@ -4789,7 +4811,7 @@
             setup: function() {
                 moduleSetup();
 
-                createPlotArea([{
+                renderPlotArea([{
                         type: "scatter",
                         xAxis: "xAxis",
                         yAxis: "yAxis",
@@ -4808,8 +4830,6 @@
                         }]
                     }
                 );
-
-                plotArea.reflow(chartBox);
             },
             teardown: moduleTeardown
         });
@@ -4836,12 +4856,11 @@
         });
 
         test("Removes pane axes from pane.axes collection", function() {
-            createPlotArea({
+            renderPlotArea({
                 panes: [{
                     name: "a"
                 }]
             });
-            plotArea.reflow(chartBox);
 
             plotArea.panes[0].axes[0].dirty = true;
             plotArea.redraw(plotArea.panes[0]);
@@ -4949,9 +4968,9 @@
             });
 
             plotArea = chart._model.children[1];
-            plotAreaElement = getElement(plotArea.id);
+            plotAreaElement = getChartDomElement(plotArea);
             point = plotArea.charts[0].points[0];
-            pointElement = $(getElement(point.id));
+            pointElement = getChartDomElement(point.marker);
         }
 
         // ------------------------------------------------------------
@@ -4994,7 +5013,7 @@
         test("event arguments contain multiple x axis values", 2, function() {
             createScatterChart({
                 xAxis: [{}, { name: "b", min: 100, max: 1000 }],
-                plotAreaClick: function(e) { arrayClose(e.x, [12, 193], TOLERANCE); }
+                plotAreaClick: function(e) { arrayClose(e.x, [12, 192], TOLERANCE); }
             });
 
             clickChart(chart, plotAreaElement, 200, 500);
@@ -5070,6 +5089,12 @@
                 color: "blue"
             }], options);
             legendItems = plotArea.options.legend.items;
+        }
+
+        function renderPlotArea(series, options) {
+            createPlotArea(series, options);
+            plotArea.reflow(chartBox);
+            plotArea.renderVisual();
         }
 
         // ------------------------------------------------------------

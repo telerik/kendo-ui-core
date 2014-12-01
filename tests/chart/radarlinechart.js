@@ -1,21 +1,19 @@
 (function() {
-    return;
-
     var dataviz = kendo.dataviz,
-        getElement = dataviz.getElement,
         Point2D = dataviz.Point2D,
         Box2D = dataviz.Box2D,
         Ring = dataviz.Ring,
         TOLERANCE = 1,
         chartBox = new Box2D(0, 0, 800, 600),
-        view,
         plotArea,
         chart,
         pointsXY;
 
+    function getSegmentAt(chart, idx) {
+        return chart._segments[idx || 0].visual;
+    }
 
     function createChart(series, options) {
-        view = new ViewStub();
         plotArea = new dataviz.RadarPlotArea(series,
             kendo.deepExtend({
                 categoryAxis: {
@@ -38,8 +36,8 @@
         chart = plotArea.charts[0];
 
         plotArea.reflow(chartBox);
-        plotArea.getViewElements(view);
-        pointsXY = mapPoints(view.log.path[0].points);
+        plotArea.renderVisual();
+        pointsXY = mapSegments(getSegmentAt(chart).segments);
     }
 
     // ------------------------------------------------------------
@@ -59,7 +57,7 @@
     });
 
     test("line is closed when all points are non-null", function() {
-        ok(view.log.path[0].closed);
+        ok(getSegmentAt(chart).options.closed);
     });
 
     test("line is not closed if any of the points is null", function() {
@@ -68,12 +66,12 @@
             data: [1, 2, null]
         }]);
 
-        ok(!view.log.path[0].closed);
+        ok(!getSegmentAt(chart).options.closed);
     });
-    
+
     // ------------------------------------------------------------
-                           
-    (function() {      
+
+    (function() {
         module("RadarLine Chart / Values exceeding axis min or max options ", {});
 
         test("values are limited", 2, function() {
@@ -109,9 +107,9 @@
             var chart = new dataviz.RadarLineChart(plotArea, {series: [{
                 type: "radaLine",
                 data: [1,2]
-            }]});          
-            
-            chart.reflow();            
-        });          
-    })();     
+            }]});
+
+            chart.reflow();
+        });
+    })();
 })();

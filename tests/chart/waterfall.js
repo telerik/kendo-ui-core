@@ -1,7 +1,7 @@
 (function() {
-    return;
-
     var dataviz = kendo.dataviz;
+    var draw = kendo.drawing;
+    var geom = kendo.geometry;
     var deepExtend = kendo.deepExtend;
     var plotArea;
     var chart;
@@ -309,7 +309,6 @@
     // ------------------------------------------------------------
     (function() {
         var segment;
-        var view;
         var polyline;
 
         module("WaterfallSegment", {
@@ -334,21 +333,22 @@
                     }
                 });
 
-                view = new ViewStub();
-                polyline = segment.getViewElements(view)[0];
+                segment.renderVisual();
+                polyline = segment.visual.children[0];
             }
         });
 
         test("connects point end to next point start", function() {
-            ok(polyline.points[0].equals(new dataviz.Point2D(0, 0)));
-            ok(polyline.points[1].equals(new dataviz.Point2D(30, 0)));
+            ok(polyline.segments[0].anchor().equals(new geom.Point(0.5, 0.5)));
+            ok(polyline.segments[1].anchor().equals(new geom.Point(30.5, 0.5)));
         });
 
         test("connects point end to next point start (negative values)", function() {
             segment.from.aboveAxis = segment.to.aboveAxis = false;
-            polyline = segment.getViewElements(view)[0];
-            ok(polyline.points[0].equals(new dataviz.Point2D(0, 100)));
-            ok(polyline.points[1].equals(new dataviz.Point2D(30, 100)));
+            segment.renderVisual();
+            polyline = segment.visual.children[0];
+            ok(polyline.segments[0].anchor().equals(new geom.Point(0.5, 100.5)));
+            ok(polyline.segments[1].anchor().equals(new geom.Point(30.5, 100.5)));
         });
 
         test("renders open polyline", function() {
@@ -356,23 +356,23 @@
         });
 
         test("sets default animation", function() {
-            equal(polyline.options.animation.type, "fadeIn");
+            equal(segment.animation.options.type, "fadeIn");
         });
 
         test("sets color", function() {
-            equal(polyline.options.stroke, "blue");
+            equal(polyline.options.stroke.color, "blue");
         });
 
         test("sets width", function() {
-            equal(polyline.options.strokeWidth, 2);
+            equal(polyline.options.stroke.width, 2);
         });
 
         test("sets opacity", function() {
-            equal(polyline.options.strokeOpacity, 0.5);
+            equal(polyline.options.stroke.opacity, 0.5);
         });
 
         test("sets dashType", function() {
-            equal(polyline.options.dashType, "dot");
+            equal(polyline.options.stroke.dashType, "dot");
         });
 
         // ------------------------------------------------------------
@@ -392,21 +392,22 @@
                     // Series
                 });
 
-                view = new ViewStub();
-                polyline = segment.getViewElements(view)[0];
+                segment.renderVisual();
+                polyline = segment.visual.children[0];
             }
         });
 
         test("connects point end to next point start", function() {
-            ok(polyline.points[0].equals(new dataviz.Point2D(100, 0)));
-            ok(polyline.points[1].equals(new dataviz.Point2D(100, 30)));
+            ok(polyline.segments[0].anchor().equals(new dataviz.Point2D(100.5, 0.5)));
+            ok(polyline.segments[1].anchor().equals(new dataviz.Point2D(100.5, 30.5)));
         });
 
         test("connects point end to next point start (negative values)", function() {
             segment.from.aboveAxis = segment.to.aboveAxis = false;
-            polyline = segment.getViewElements(view)[0];
-            ok(polyline.points[0].equals(new dataviz.Point2D(0, 0)));
-            ok(polyline.points[1].equals(new dataviz.Point2D(0, 30)));
+            segment.renderVisual();
+            polyline = segment.visual.children[0];
+            ok(polyline.segments[0].anchor().equals(new dataviz.Point2D(0.5, 0.5)));
+            ok(polyline.segments[1].anchor().equals(new dataviz.Point2D(0.5, 30.5)));
         });
     })();
 })();

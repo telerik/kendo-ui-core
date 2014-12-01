@@ -274,10 +274,6 @@
             labelElement,
             segmentElement;
 
-        function getElement(modelElement) {
-            return $(modelElement.visual._observers[0].element);
-        }
-
         function createDonutChart(options) {
             chart = createChart($.extend({
                 series: [{
@@ -294,8 +290,8 @@
                 segment = plotArea.charts[0].points[0],
                 label = segment.children[0];
 
-            segmentElement = getElement(segment);
-            labelElement = getElement(label);
+            segmentElement = getChartDomElement(segment);
+            labelElement = getChartDomElement(label);
         }
 
         module("Donut Chart / Events / seriesClick ", {

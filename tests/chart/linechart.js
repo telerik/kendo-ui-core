@@ -1,6 +1,5 @@
 (function() {
     var dataviz = kendo.dataviz,
-        getElement = dataviz.getElement,
         Box2D = dataviz.Box2D,
         draw = kendo.drawing,
         categoriesCount = dataviz.categoriesCount,
@@ -10,8 +9,6 @@
         segmentPath,
         pointCoordinates,
         TOLERANCE = 1;
-
-
 
     function setupLineChart(plotArea, options) {
         lineChart = new dataviz.LineChart(plotArea, options);
@@ -797,9 +794,6 @@
             label,
             segment;
 
-        function getElement(modelElement) {
-            return $(modelElement.visual._observers[0].element);
-        }
         function createLineChart(options) {
             chart = createChart($.extend({
                 series: [{
@@ -829,7 +823,7 @@
                 seriesClick: callback
             });
 
-            chart._userEvents.press(0, 0, getElement(marker));
+            chart._userEvents.press(0, 0, getChartDomElement(marker));
             chart._userEvents.end(0, 0);
         }
 
@@ -838,7 +832,7 @@
                 seriesHover: callback
             });
 
-            getElement(marker).mouseover();
+            getChartDomElement(marker).mouseover();
         }
 
         function lineClick(callback, x, y) {
@@ -846,7 +840,7 @@
                 seriesClick: callback
             });
 
-            chart._userEvents.press(x, y, getElement(segment));
+            chart._userEvents.press(x, y, getChartDomElement(segment));
             chart._userEvents.end(x, y);
         }
 
@@ -855,7 +849,7 @@
                 seriesHover: callback
             });
 
-            triggerEvent("mouseover", getElement(segment), x, y);
+            triggerEvent("mouseover", getChartDomElement(segment), x, y);
         }
 
         // ------------------------------------------------------------
@@ -878,7 +872,7 @@
                 },
                 seriesClick: function(e) { ok(true); }
             });
-            chart._userEvents.press(0, 0, getElement(label));
+            chart._userEvents.press(0, 0, getChartDomElement(label));
             chart._userEvents.end(0, 0);
         });
 
@@ -899,7 +893,7 @@
                 series: [{ data: [1] }, { data: [2] }],
                 seriesClick: function(e) { equal(e.percentage, 1/3); }
             });
-            chart._userEvents.press(0, 0, getElement(marker));
+            chart._userEvents.press(0, 0, getChartDomElement(marker));
             chart._userEvents.end(0, 0);
         });
 
@@ -917,7 +911,7 @@
 
         test("event arguments contain jQuery element", 1, function() {
             linePointClick(function(e) {
-                equal(e.element[0], getElement(marker)[0]);
+                equal(e.element[0], getChartDomElement(marker)[0]);
             });
         });
 
@@ -956,7 +950,7 @@
                 },
                 seriesHover: function(e) { ok(true); }
             });
-            getElement(label).mouseover();
+            getChartDomElement(label).mouseover();
         });
 
         test("event arguments contain value", 1, function() {
@@ -972,7 +966,7 @@
                 series: [{ data: [1] }, { data: [2] }],
                 seriesHover: function(e) { equal(e.percentage, 1/3); }
             });
-            getElement(marker).mouseover();
+            getChartDomElement(marker).mouseover();
         });
 
         test("event arguments contain category", 1, function() {
@@ -993,7 +987,7 @@
 
         test("event arguments contain jQuery element", 1, function() {
             linePointHover(function(e) {
-                equal(e.element[0], getElement(marker)[0]);
+                equal(e.element[0], getChartDomElement(marker)[0]);
             });
         });
 

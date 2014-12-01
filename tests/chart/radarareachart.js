@@ -1,21 +1,19 @@
 (function() {
-    return;
-
     var dataviz = kendo.dataviz,
-        getElement = dataviz.getElement,
         Point2D = dataviz.Point2D,
         Box2D = dataviz.Box2D,
         Ring = dataviz.Ring,
         TOLERANCE = 1,
         chartBox = new Box2D(0, 0, 800, 600),
-        view,
         plotArea,
         chart,
         pointsXY;
 
+    function getSegmentAt(chart, idx) {
+        return chart._segments[idx || 0].visual.children[0];
+    }
 
     function createChart(series, options) {
-        view = new ViewStub();
         plotArea = new dataviz.RadarPlotArea(series,
             kendo.deepExtend({
                 valueAxis: {
@@ -38,8 +36,8 @@
         chart = plotArea.charts[0];
 
         plotArea.reflow(chartBox);
-        plotArea.getViewElements(view);
-        pointsXY = mapPoints(view.log.path[0].points);
+        plotArea.renderVisual();
+        pointsXY = mapSegments(getSegmentAt(chart).segments);
     }
 
     // ------------------------------------------------------------
@@ -73,15 +71,15 @@
     });
 
     test("stacked series close around inner series", function() {
-        arrayClose(mapPoints(view.log.path[1].points), [
+        arrayClose(mapSegments(getSegmentAt(chart, 1).segments), [
             [400, 168], [630, 433], [285, 366], [400, 168],
             [400, 234], [343, 333], [515, 366], [400, 234]
         ], TOLERANCE);
     });
-    
+
     // ------------------------------------------------------------
-                           
-    (function() {      
+
+    (function() {
         module("RadarArea Chart / Values exceeding axis min or max options ", {});
 
         test("values are limited", 2, function() {
@@ -117,9 +115,9 @@
             var chart = new dataviz.RadarAreaChart(plotArea, {series: [{
                 type: "radarArea",
                 data: [1,2]
-            }]});          
-            
-            chart.reflow();            
-        });          
-    })();     
+            }]});
+
+            chart.reflow();
+        });
+    })();
 })();

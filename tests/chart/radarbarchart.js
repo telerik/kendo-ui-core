@@ -1,8 +1,5 @@
 (function() {
-    return;
-
     var dataviz = kendo.dataviz,
-        getElement = dataviz.getElement,
         Point2D = dataviz.Point2D,
         Box2D = dataviz.Box2D,
         Ring = dataviz.Ring,
@@ -223,10 +220,10 @@
                       [0, 34.125, 0, 68.25]);
         });
     })();
-    
+
     // ------------------------------------------------------------
-                           
-    (function() {      
+
+    (function() {
         module("RadarBar Chart / Values exceeding axis min or max options ", {});
 
         test("values are limited", 2, function() {
@@ -258,13 +255,13 @@
                     return plotArea.categoryAxis;
                 }
             };
-            
+
             var chart = new dataviz.RadarBarChart(plotArea, {series: [{
                 type: "radarColumn",
                 data: [1,2]
-            }]});          
-            
-            chart.reflow();            
-        });          
-    })();     
+            }]});
+
+            chart.reflow();
+        });
+    })();
 })();

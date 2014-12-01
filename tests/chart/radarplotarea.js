@@ -1,13 +1,9 @@
 (function() {
-    return;
-
     var dataviz = kendo.dataviz,
-        getElement = dataviz.getElement,
         Box2D = dataviz.Box2D,
         plotArea,
         categoryAxis,
         valueAxis;
-
 
     function createPlotArea(series, options) {
         plotArea = new dataviz.RadarPlotArea(series, options);
@@ -205,9 +201,9 @@
             $("#container").css({ position: "absolute", top: "200px", left: "8px" });
 
             plotArea = chart._model.children[1];
-            plotAreaElement = getElement(plotArea.id);
+            plotAreaElement = getChartDomElement(plotArea);
             point = plotArea.charts[0].points[0];
-            pointElement = $(getElement(point.id));
+            pointElement = getChartDomElement(point.marker);
         }
 
         // ------------------------------------------------------------

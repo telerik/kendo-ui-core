@@ -2047,6 +2047,12 @@ var __meta__ = {
                 offsetX, offsetY,
                 offsetX + containerBox.width(), offsetY + containerBox.height()
             ));
+        },
+
+        renderVisual: function() {
+            if (this.hasItems()) {
+                ChartElement.fn.renderVisual.call(this);
+            }
         }
     });
 
@@ -8044,28 +8050,6 @@ var __meta__ = {
             plotArea.panes = panes;
         },
 
-        destroy: function() {
-            var plotArea = this,
-                charts = plotArea.charts,
-                axes = plotArea.axes,
-                crosshairs = plotArea.crosshairs,
-                i;
-
-            for (i = 0; i < charts.length; i++) {
-                charts[i].destroy();
-            }
-
-            for (i = 0; i < axes.length; i++) {
-                axes[i].destroy();
-            }
-
-            for (i = 0; i < crosshairs.length; i++) {
-                crosshairs[i].destroy();
-            }
-
-            ChartElement.fn.destroy.call(plotArea);
-        },
-
         createCrosshairs: function(panes) {
             var plotArea = this,
                 i, j, pane, axis, currentCrosshair;
@@ -8691,14 +8675,15 @@ var __meta__ = {
             var options = this.options.plotArea;
             var border = options.border || {};
 
-            var bg = draw.Path.fromRect(bgBox.toRect(), {
+            var bg = this._bgVisual = draw.Path.fromRect(bgBox.toRect(), {
                 fill: {
                     color: options.background,
                     opacity: options.opacity
                 },
                 stroke: {
                     color: border.width ? border.color : "",
-                    width: border.width
+                    width: border.width,
+                    dashType: border.dashType
                 },
                 zIndex: -1
             });
@@ -10666,9 +10651,10 @@ var __meta__ = {
                 userEvents.destroy();
             }
 
+            clearTimeout(that._mwTimeout);
             that._state = null;
 
-            this.wrapper.remove();
+            that.wrapper.remove();
         },
 
         _rangeEventArgs: function(range) {
