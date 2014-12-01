@@ -1,6 +1,4 @@
 (function() {
-    return;
-
     var dataviz = kendo.dataviz,
         deepExtend = kendo.deepExtend,
         Sparkline = dataviz.ui.Sparkline,
@@ -52,44 +50,6 @@
 
         test("transitions are disabled", function() {
             ok(!sparkline.options.transitions);
-        });
-
-        // ------------------------------------------------------------
-        var factory;
-
-        module("Options / Canvas view", {
-            setup: function() {
-                factory = dataviz.ViewFactory.current;
-
-                dataviz.ViewFactory.current = {
-                    create: function() {
-                        var view = new dataviz.CanvasView();
-                        view.renderTo = function () { };
-                        return view;
-                    }
-                };
-            },
-            teardown: function() {
-                dataviz.ViewFactory.current = factory;
-                destroySparkline();
-            }
-        });
-
-        test("crosshair is disabled for non-interactive (canvas) view", function() {
-            createSparkline();
-            equal(sparkline.options.categoryAxis.crosshair.visible, false);
-        });
-
-        test("crosshair can't be enabled for canvas view", function() {
-            createSparkline({
-                categoryAxis: {
-                    crosshair: {
-                        visible: true
-                    }
-                }
-            });
-
-            equal(sparkline.options.categoryAxis.crosshair.visible, false);
         });
 
         // ------------------------------------------------------------
