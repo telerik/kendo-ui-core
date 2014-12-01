@@ -11523,7 +11523,8 @@ makes a HTTP request for every CRUD operation.</description>
         </attribute>
         <attribute>
             <description>If set the data source will use a predefined transport and/or schema.
-The supported values are "odata" which supports the OData v.2 protocol and "signalr".</description>
+The supported values are "odata" which supports the OData v.2 protocol, "odata-v4" which partially supports 
+odata version 4 and "signalr".</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -12643,23 +12644,8 @@ data source is fired. By default the widget will bind to the data source specifi
             <type>float</type>
         </attribute>
         <attribute>
-            <description>Fired when the widget is bound to data from dataDource and connectionsDataSource.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
-            <name>dataBound</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-        <attribute>
             <description>Fired when the user add new shape or connection.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>add</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-        <attribute>
-            <description>Fired when the user edits a shape or connection.</description>
-            <name>edit</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-        <attribute>
-            <description>Fired when the user a shape or connection da is saved.</description>
-            <name>save</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
@@ -12668,13 +12654,23 @@ data source is fired. By default the widget will bind to the data source specifi
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fired when the user delete a shape or connection.</description>
-            <name>remove</name>
+            <description>Fired when an item is added or removed to/from the diagram.</description>
+            <name>change</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fired when an item is added or removed to/from the diagram.</description>
-            <name>change</name>
+            <description>Fired when the user clicks on a shape or a connection.</description>
+            <name>click</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fired when the widget is bound to data from dataDource and connectionsDataSource.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+            <name>dataBound</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fired when the user edits a shape or connection.</description>
+            <name>edit</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
@@ -12693,13 +12689,18 @@ data source is fired. By default the widget will bind to the data source specifi
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fired when the user selects one or more items.</description>
-            <name>select</name>
+            <description>Fired when the user delete a shape or connection.</description>
+            <name>remove</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fired when the user starts changing the diagram zoom level.</description>
-            <name>zoomStart</name>
+            <description>Fired when the user a shape or connection da is saved.</description>
+            <name>save</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fired when the user selects one or more items.</description>
+            <name>select</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
@@ -12708,8 +12709,8 @@ data source is fired. By default the widget will bind to the data source specifi
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fired when the user clicks on a shape or a connection.</description>
-            <name>click</name>
+            <description>Fired when the user starts changing the diagram zoom level.</description>
+            <name>zoomStart</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <dynamic-attributes>true</dynamic-attributes>
@@ -13406,15 +13407,15 @@ data source is fired. By default the widget will bind to the data source specifi
 
 
     <tag>
-        <description>Specifies the shape editor template.</description>
-        <name>diagram-editable-shapeTemplate</name>
-        <tag-class>com.kendoui.taglib.diagram.EditableShapeTemplateFunctionTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-    <tag>
         <description>Specifies the connection editor template.</description>
         <name>diagram-editable-connectionTemplate</name>
         <tag-class>com.kendoui.taglib.diagram.EditableConnectionTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Specifies the shape editor template.</description>
+        <name>diagram-editable-shapeTemplate</name>
+        <tag-class>com.kendoui.taglib.diagram.EditableShapeTemplateFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
@@ -14403,27 +14404,9 @@ See visual.</description>
     </tag>
 
     <tag>
-        <description>Fired when the widget is bound to data from dataDource and connectionsDataSource.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
-        <name>diagram-dataBound</name>
-        <tag-class>com.kendoui.taglib.diagram.DataBoundFunctionTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-    <tag>
         <description>Fired when the user add new shape or connection.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>diagram-add</name>
         <tag-class>com.kendoui.taglib.diagram.AddFunctionTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-    <tag>
-        <description>Fired when the user edits a shape or connection.</description>
-        <name>diagram-edit</name>
-        <tag-class>com.kendoui.taglib.diagram.EditFunctionTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-    <tag>
-        <description>Fired when the user a shape or connection da is saved.</description>
-        <name>diagram-save</name>
-        <tag-class>com.kendoui.taglib.diagram.SaveFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
@@ -14433,15 +14416,27 @@ See visual.</description>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fired when the user delete a shape or connection.</description>
-        <name>diagram-remove</name>
-        <tag-class>com.kendoui.taglib.diagram.RemoveFunctionTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-    <tag>
         <description>Fired when an item is added or removed to/from the diagram.</description>
         <name>diagram-change</name>
         <tag-class>com.kendoui.taglib.diagram.ChangeFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the user clicks on a shape or a connection.</description>
+        <name>diagram-click</name>
+        <tag-class>com.kendoui.taglib.diagram.ClickFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the widget is bound to data from dataDource and connectionsDataSource.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+        <name>diagram-dataBound</name>
+        <tag-class>com.kendoui.taglib.diagram.DataBoundFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the user edits a shape or connection.</description>
+        <name>diagram-edit</name>
+        <tag-class>com.kendoui.taglib.diagram.EditFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
@@ -14463,15 +14458,21 @@ See visual.</description>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fired when the user selects one or more items.</description>
-        <name>diagram-select</name>
-        <tag-class>com.kendoui.taglib.diagram.SelectFunctionTag</tag-class>
+        <description>Fired when the user delete a shape or connection.</description>
+        <name>diagram-remove</name>
+        <tag-class>com.kendoui.taglib.diagram.RemoveFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fired when the user starts changing the diagram zoom level.</description>
-        <name>diagram-zoomStart</name>
-        <tag-class>com.kendoui.taglib.diagram.ZoomStartFunctionTag</tag-class>
+        <description>Fired when the user a shape or connection da is saved.</description>
+        <name>diagram-save</name>
+        <tag-class>com.kendoui.taglib.diagram.SaveFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the user selects one or more items.</description>
+        <name>diagram-select</name>
+        <tag-class>com.kendoui.taglib.diagram.SelectFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
@@ -14481,9 +14482,9 @@ See visual.</description>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fired when the user clicks on a shape or a connection.</description>
-        <name>diagram-click</name>
-        <tag-class>com.kendoui.taglib.diagram.ClickFunctionTag</tag-class>
+        <description>Fired when the user starts changing the diagram zoom level.</description>
+        <name>diagram-zoomStart</name>
+        <tag-class>com.kendoui.taglib.diagram.ZoomStartFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
@@ -17650,12 +17651,40 @@ Each table row consists of table cells (&lt;td&gt;) which represent the grid col
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The text displayed by the command button. If not set the name option is used as the button text.</description>
+            <description>The text displayed by the command button and the "cancel", "edit" and "update" texts of the edit command. If not set the name option is used as the button text.</description>
             <name>text</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
     </tag>
+
+    <tag>
+        <description>The text displayed by the command button and the "cancel", "edit" and "update" texts of the edit command. If not set the name option is used as the button text.</description>
+        <name>grid-column-commandItem-text</name>
+        <tag-class>com.kendoui.taglib.grid.ColumnCommandItemTextTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The "cancel" text of the edit command.</description>
+            <name>cancel</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The "edit" text of the edit command.</description>
+            <name>edit</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The "update" text of the edit command.</description>
+            <name>update</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
 
 
     <tag>

@@ -15,8 +15,8 @@ class GridColumnCommandItem extends \Kendo\SerializableObject {
     }
 
     /**
-    * The text displayed by the command button. If not set the name option is used as the button text.
-    * @param string $value
+    * The text displayed by the command button and the "cancel", "edit" and "update" texts of the edit command. If not set the name option is used as the button text.
+    * @param string|\Kendo\UI\GridColumnCommandItemText|array $value
     * @return \Kendo\UI\GridColumnCommandItem
     */
     public function text($value) {

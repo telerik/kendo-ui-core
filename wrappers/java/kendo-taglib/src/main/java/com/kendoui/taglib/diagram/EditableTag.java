@@ -63,12 +63,12 @@ public class EditableTag extends  BaseTag  /* interfaces */ /* interfaces */ {
 
     }
 
-    public void setShapeTemplate(EditableShapeTemplateFunctionTag value) {
-        setEvent("shapeTemplate", value.getBody());
-    }
-
     public void setConnectionTemplate(EditableConnectionTemplateFunctionTag value) {
         setEvent("connectionTemplate", value.getBody());
+    }
+
+    public void setShapeTemplate(EditableShapeTemplateFunctionTag value) {
+        setEvent("shapeTemplate", value.getBody());
     }
 
     public java.lang.String getConnectionTemplate() {

@@ -51,6 +51,10 @@ public class ColumnCommandItemTag extends  BaseTag  /* interfaces */ /* interfac
         return "grid-column-commandItem";
     }
 
+    public void setText(com.kendoui.taglib.grid.ColumnCommandItemTextTag value) {
+        setProperty("text", value);
+    }
+
     public void setClick(ColumnCommandItemClickFunctionTag value) {
         setEvent("click", value.getBody());
     }
