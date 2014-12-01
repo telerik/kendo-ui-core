@@ -25,10 +25,12 @@
         }
     });
 
+    /* Initialization */
+
     test("adds class to the panel", function() {
         var panel = $("#collapsible").kendoMobileCollapsible().data("kendoMobileCollapsible");
 
-        ok(panel.element.hasClass("km-collapsible-panel"), "has specified CSS class");
+        ok(panel.element.hasClass("km-collapsible"), "has specified CSS class");
     });
 
     test("wraps the header element", function() {
@@ -69,6 +71,26 @@
         ok(panel.content.is(":visible"));
     });
 
+    /* UI interactions */
+
+    test("clicking the header expands the content when content is hidden", function() {
+        var panel = $("#collapsible").kendoMobileCollapsible().data("kendoMobileCollapsible");
+
+        click($("#collapsible h4"));
+        ok(panel.content.is(":visible"));
+    });
+
+    test("clicking the header collapses the content when content is visible", function() {
+        var panel = $("#collapsible").kendoMobileCollapsible({
+            collapsed: false
+        }).data("kendoMobileCollapsible");
+
+        click($("#collapsible h4"));
+        ok(panel.content.is(":hidden"));
+    });
+
+    /* API */
+
     test("expand method expands the content", function() {
         var panel = $("#collapsible").kendoMobileCollapsible().data("kendoMobileCollapsible");
 
@@ -92,6 +114,25 @@
 
         panel.expand();
         ok(!panel.isCollapsed());
+    });
+
+    /* Events */
+
+    test("expand event fires", 1, function() {
+        var panel = $("#collapsible").kendoMobileCollapsible({
+            expand: function() { ok(true); }
+        });
+
+        click($("#collapsible h4"));
+    });
+
+    test("collapse event fires", 1, function() {
+        var panel = $("#collapsible").kendoMobileCollapsible({
+            collapsed: false,
+            collapse: function() { ok(true); }
+        });
+
+        click($("#collapsible h4"));
     });
 
 })();

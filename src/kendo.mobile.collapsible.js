@@ -18,7 +18,11 @@ var __meta__ = {
         HEADER = "km-collapsible-header",
         CONTENT = "km-collapsible-content",
         HEADER_WRAPPER = "<div data-role='collapsible-header' class='" + HEADER + "'></div>",
-        CONTENT_WRAPPER = "<div data-role='collapsible-content' class='" + CONTENT + "'></div>";
+        CONTENT_WRAPPER = "<div data-role='collapsible-content' class='" + CONTENT + "'></div>",
+
+        //events
+        EXAPND = "expand",
+        COLLAPSE = "collapse";
 
     var Collapsible = Widget.extend({
         init: function(element, options) {
@@ -42,7 +46,8 @@ var __meta__ = {
         },
 
         events: [
-
+            EXAPND,
+            COLLAPSE
         ],
 
         options: {
@@ -56,11 +61,15 @@ var __meta__ = {
         },
 
         expand: function() {
-            this.content.show();
+            if (!this.trigger(EXAPND)) {
+                this.content.show();
+            }
         },
 
         collapse: function() {
-            this.content.hide();
+            if (!this.trigger(COLLAPSE)) {
+                this.content.hide();
+            }
         },
 
         toggle: function() {
