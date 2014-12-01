@@ -629,7 +629,7 @@ div.k-window {
 .k-i-close,
 .k-delete,
 .k-group-delete {
-	background-position: -48px -16px;
+	background-position: -32px -16px;
 }
 
 .k-multiselect {
@@ -793,10 +793,6 @@ div.k-window {
     }
 }
 
-.k-filter-row .k-i-close {
-    background-position: -32px -16px;
-}
-
 .k-grouping-header {
     .k-group-delete,
     .k-button-icon:hover > .k-icon.k-group-delete {
@@ -862,7 +858,10 @@ div.k-window {
     }
 }
 
-.k-i-arrowhead-s,
+.k-i-arrowhead-s {
+    background-position: 0 -288px;
+}
+
 .k-item.k-state-hover .k-i-arrowhead-s,
 .k-button:hover .k-i-arrowhead-s {
     background-position: -16px -288px;
@@ -896,16 +895,23 @@ div.k-window {
 }
 
 .k-pivot-configurator-settings {
-    .k-i-arrowhead-s,
-    .k-item.k-state-hover .k-i-arrowhead-s,
-    .k-button:hover .k-i-arrowhead-s {
-        background-position: 0 -288px;
-}
-
     .k-si-close,
     .k-item.k-state-hover .k-si-close,
     .k-button:hover .k-si-close {
         background-position: -160px -80px;
+    }
+}
+
+.k-pivot {
+    .k-header,
+    .k-button:not(.k-state-disabled):hover {
+        .k-i-arrowhead-s {
+            background-position: -16px -288px;
+        }
+
+        .k-si-close {
+            background-position: -176px -80px;
+        }
     }
 }
 
