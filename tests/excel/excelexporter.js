@@ -77,6 +77,12 @@ test("the data source data is exported after the columns", 1, function() {
     });
 });
 
+test("resolves the promise with the datasource data", 1, function() {
+    testWorkbook({ columns: [ { field: "foo" } ], dataSource: [{ foo: "bar" }] }, function(book, data) {
+        equal(data[0].foo, "bar");
+    });
+});
+
 test("uses the text instead of the value when values is set", 1, function() {
     testWorkbook({ columns: [ { field: "foo", values: [ { value: 1, text: "bar" }] } ], dataSource: [{ foo: 1 }] }, function(book) {
         equal(book.sheets[0].rows[1].cells[0].value, "bar");

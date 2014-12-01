@@ -71,18 +71,22 @@ kendo.ExcelExporter = kendo.Class.extend({
         return result;
     },
     workbook: function() {
-        var promise = this.dataSource.fetch();
-
-        return promise.then($.proxy(function() {
-            return {
-                sheets: [ {
-                   columns: this._columns(),
-                   rows: this._rows(),
-                   freezePane: this._freezePane(),
-                   filter: this._filter()
-                } ]
-            };
-        }, this));
+        return $.Deferred($.proxy(function(d) {
+            this.dataSource.fetch()
+                .then($.proxy(function() {
+                    var workbook = {
+                        sheets: [
+                            {
+                               columns: this._columns(),
+                               rows: this._rows(),
+                               freezePane: this._freezePane(),
+                               filter: this._filter()
+                            }
+                        ]
+                    };
+                    d.resolve(workbook, this.dataSource.view());
+                }, this));
+        }, this)).promise();
     },
     _prepareColumn: function(column) {
         if (!column.field || column.hidden) {
@@ -440,8 +444,8 @@ kendo.ExcelMixin = {
             hierarchy: excel.hierarchy
         });
 
-        exporter.workbook().then($.proxy(function(book) {
-            if (!this.trigger("excelExport", { workbook: book })) {
+        exporter.workbook().then($.proxy(function(book, data) {
+            if (!this.trigger("excelExport", { workbook: book, data: data })) {
                 var workbook = new kendo.ooxml.Workbook(book);
 
                 kendo.saveAs({

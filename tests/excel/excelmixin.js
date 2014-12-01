@@ -25,7 +25,7 @@ module("excel mixin",  {
         kendo.ExcelExporter = function () {
             this.workbook = function() {
                 return $.Deferred(function(d) {
-                    d.resolve({});
+                    d.resolve({}, []);
                 }).promise();
             };
         };
@@ -180,6 +180,26 @@ test("saveAsExcel calls kendo.saveAs and passes the fileName option of the workb
     kendo.saveAs = function(options) {
        equal(options.fileName, "foo");
     };
+
+    widget.saveAsExcel();
+});
+
+test("data is available in the excelExport event arguments", 1, function() {
+    var data = [];
+
+    kendo.ExcelExporter = function () {
+        this.workbook = function() {
+            return $.Deferred(function(d) {
+                d.resolve({}, data);
+            }).promise();
+        };
+    };
+
+    var widget = dom.kendoExcel({
+        excelExport: function(e) {
+            strictEqual(e.data, data);
+        }
+    }).data("kendoExcel");
 
     widget.saveAsExcel();
 });
