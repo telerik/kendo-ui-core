@@ -3311,7 +3311,6 @@ var __meta__ = {
 
     var ErrorRangeCalculator = function(errorValue, series, field) {
         var that = this;
-        that.errorValue = errorValue;
         that.initGlobalRanges(errorValue, series, field);
     };
 
@@ -3365,9 +3364,8 @@ var __meta__ = {
             return valueGetter;
         },
 
-        getErrorRange: function(pointValue) {
+        getErrorRange: function(pointValue, errorValue) {
             var that = this,
-                errorValue = that.errorValue,
                 low,
                 high,
                 value;
@@ -3648,7 +3646,7 @@ var __meta__ = {
                 chart.seriesErrorRanges[seriesIx] = chart.seriesErrorRanges[seriesIx] ||
                     new ErrorRangeCalculator(errorBars.value, series, VALUE);
 
-                errorRange = chart.seriesErrorRanges[seriesIx].getErrorRange(value);
+                errorRange = chart.seriesErrorRanges[seriesIx].getErrorRange(value, errorBars.value);
             }
 
             if (errorRange) {
@@ -5593,7 +5591,7 @@ var __meta__ = {
                     chart.seriesErrorRanges[field][seriesIx] = chart.seriesErrorRanges[field][seriesIx] ||
                         new ErrorRangeCalculator(errorBars[valueErrorField], series, field);
 
-                    errorRange = chart.seriesErrorRanges[field][seriesIx].getErrorRange(value);
+                    errorRange = chart.seriesErrorRanges[field][seriesIx].getErrorRange(value, errorBars[valueErrorField]);
                 }
 
                 if (errorRange) {

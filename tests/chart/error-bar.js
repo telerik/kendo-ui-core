@@ -299,12 +299,12 @@
         module("ErrorRangeCalculator / get error range", {
         });
 
-        var correctErrorRanges = function(errorRangeCalculator, testData, expected){
+        var correctErrorRanges = function(value, errorRangeCalculator, testData, expected){
             var length = testData.length,
                 actual;
 
             for(var idx = 0; idx < length; idx++){
-                actual = errorRangeCalculator.getErrorRange(testData[idx].value);
+                actual = errorRangeCalculator.getErrorRange(testData[idx].value, value);
                 if(actual.low !== expected[idx].low || actual.high !== expected[idx].high){
                     return false;
                 }
@@ -318,7 +318,7 @@
                 expectedRanges = [new ErrorRange(0,2), new ErrorRange(9,11), new ErrorRange(-1,1), new ErrorRange(-2,0), new ErrorRange(-1,1)],
                 errorRangeCalculator = new ErrorRangeCalculator(value, testSeries, "value");
 
-            ok(correctErrorRanges(errorRangeCalculator, testDataWidthZeros, expectedRanges));
+            ok(correctErrorRanges(value, errorRangeCalculator, testDataWidthZeros, expectedRanges));
         });
 
         test("correct error ranges with array value", function() {
@@ -326,7 +326,7 @@
                 expectedRanges = [new ErrorRange(0,3), new ErrorRange(9,12), new ErrorRange(-1,2), new ErrorRange(-2,1), new ErrorRange(-1,2)],
                 errorRangeCalculator = new ErrorRangeCalculator(value, testSeries, "value");
 
-            ok(correctErrorRanges(errorRangeCalculator, testDataWidthZeros, expectedRanges));
+            ok(correctErrorRanges(value, errorRangeCalculator, testDataWidthZeros, expectedRanges));
         });
 
         test("correct error ranges with percentage value", function() {
@@ -334,7 +334,7 @@
                 expectedRanges = [new ErrorRange(1 - 0.05, 1 + 0.05), new ErrorRange(10 - 0.5, 10 + 0.5), new ErrorRange(0,0), new ErrorRange(-1 -0.05, -1 + 0.05), new ErrorRange(0,0)],
                 errorRangeCalculator = new ErrorRangeCalculator(value, testSeries, "value");
 
-            ok(correctErrorRanges(errorRangeCalculator, testDataWidthZeros, expectedRanges));
+            ok(correctErrorRanges(value, errorRangeCalculator, testDataWidthZeros, expectedRanges));
         });
 
         test("standard deviation is calculated only once", function() {
@@ -358,7 +358,7 @@
                 expectedRanges = [errorRange, errorRange, errorRange, errorRange, errorRange],
                 errorRangeCalculator = new ErrorRangeCalculator("stddev", testSeries, "value");
 
-            ok(correctErrorRanges(errorRangeCalculator, testDataWidthZeros, expectedRanges));
+            ok(correctErrorRanges("stddev", errorRangeCalculator, testDataWidthZeros, expectedRanges));
         });
 
         test("correct error ranges with multiple standard deviation", function() {
@@ -367,7 +367,7 @@
                 expectedRanges = [errorRange, errorRange, errorRange, errorRange, errorRange],
                 errorRangeCalculator = new ErrorRangeCalculator("stddev(2)", testSeries, "value");
 
-            ok(correctErrorRanges(errorRangeCalculator, testDataWidthZeros, expectedRanges));
+            ok(correctErrorRanges("stddev(2)", errorRangeCalculator, testDataWidthZeros, expectedRanges));
         });
 
         test("standard error is calculated only once", function() {
@@ -391,7 +391,7 @@
                     new ErrorRange(0 - expectedSE, 0 + expectedSE), new ErrorRange(-1 - expectedSE, -1 + expectedSE), new ErrorRange(0 - expectedSE, 0 + expectedSE)],
                 errorRangeCalculator = new ErrorRangeCalculator("stderr", testSeries, "value");
 
-            ok(correctErrorRanges(errorRangeCalculator, testDataWidthZeros, expectedRanges));
+            ok(correctErrorRanges("stderr", errorRangeCalculator, testDataWidthZeros, expectedRanges));
         });
 
         // ------------------------------------------------------------
@@ -412,14 +412,18 @@
             dataDefaultFieldsSeries = { data: [{x: 1, y: 1}, {x: 2, y: 2}], xAxis: xAxisName, yAxis: yAxisName, errorBars: { xValue: xErrorValue, yValue: yErrorValue }, labels: {}, type: "scatter" },
             dataCustomFieldsSeries = { data: [{fooX: 1, fooY: 1}, {fooX: 2, fooY: 2}], xField: "fooX", yField: "fooY", xAxis: xAxisName, yAxis: yAxisName, errorBars:{ xValue: xErrorValue, yValue: yErrorValue }, labels: {}, type: "scatter" };
 
-        function addedScatterPointErrorBars(points, seriesData, xGetter, yGetter){
+        function addedScatterPointErrorBars(points, seriesData, xGetter, yGetter, xValues, yValues){
             var idx = 0,
-                errorBars;
+                errorBars,
+                xValue,
+                yValue;
 
             for(;idx < points.length; idx++){
+                xValue = xValues ? xValues[idx] : xErrorValue;
+                yValue = yValues ? yValues[idx] : yErrorValue;
                 if(!(errorBars = points[idx].errorBars) || !errorBars[0] || !errorBars[1] ||
-                    errorBars[0].low != (xGetter(seriesData[idx]) - xErrorValue) || errorBars[0].high != (xGetter(seriesData[idx]) + xErrorValue) ||
-                    errorBars[1].low != (yGetter(seriesData[idx]) - yErrorValue) || errorBars[1].high != (yGetter(seriesData[idx]) + yErrorValue ||
+                    errorBars[0].low != (xGetter(seriesData[idx]) - xValue) || errorBars[0].high != (xGetter(seriesData[idx]) + xValue) ||
+                    errorBars[1].low != (yGetter(seriesData[idx]) - yValue) || errorBars[1].high != (yGetter(seriesData[idx]) + yValue ||
                     errorBars[0].isVertical || !errorBars[1].isVertical)){
                     return false;
                 }
@@ -523,11 +527,15 @@
         });
 
         test("correct error ranges with custom function when using scatter chart", function() {
-            var customXRange = function(data){
-                    return [xErrorValue, xErrorValue];
+            var xIdx = 0,
+                yIdx = 0,
+                xValues = [1, 2],
+                yValues = [3, 4]
+                customXRange = function(data){
+                    return [xValues[xIdx], xValues[xIdx++]];
                 },
                 customYRange = function(data){
-                    return [yErrorValue, yErrorValue];
+                    return [yValues[yIdx], yValues[yIdx++]];
                 },
                 scatterChart = new dataviz.ScatterChart({}, {series: [{ data: [[1, 1], [2, 2]], xAxis: xAxisName, yAxis: yAxisName, errorBars: { xValue: customXRange, yValue: customYRange }, labels: {}, type: "scatter" }]}),
                 seriesData = dataArraySeries.data,
@@ -535,7 +543,7 @@
                 xGetter = function(d) {return d[0]},
                 yGetter = function(d) {return d[1]};
 
-            ok(addedScatterPointErrorBars(points, seriesData, xGetter, yGetter));
+            ok(addedScatterPointErrorBars(points, seriesData, xGetter, yGetter, xValues, yValues));
         });
 
         // ------------------------------------------------------------
@@ -590,13 +598,15 @@
             return chart;
         }
 
-        function addedCategoricalPointErrorBar(points, seriesData, getter, isVertical) {
+        function addedCategoricalPointErrorBar(points, seriesData, getter, isVertical, values) {
             var idx = 0,
-                errorBars;
+                errorBars,
+                value;
 
             for(;idx < points.length; idx++){
+                value = values ? values[idx] : errorValue;
                 if(!(errorBars = points[idx].errorBars) || !errorBars[0] ||
-                    errorBars[0].low != (getter(seriesData[idx]) - errorValue) || errorBars[0].high != (getter(seriesData[idx]) + errorValue) ||
+                    errorBars[0].low != (getter(seriesData[idx]) - value) || errorBars[0].high != (getter(seriesData[idx]) + value) ||
                     errorBars[0].isVertical !== isVertical){
                     return false;
                 }
@@ -750,15 +760,17 @@
         });
 
         test("errorBars are correctly added when using custom function and categoricalChart", function() {
-            var customRange = function(data){
-                    return [errorValue, errorValue];
+            var idx = 0,
+                values = [1, 2, 3]
+                customRange = function(data){
+                    return [values[idx], values[idx++]];
                 },
                 data = [{value: 1},{value: 2},{value: 3}],
                 chart = new dataviz.BarChart(categoricalPlotArea, {series: [{type: BAR, data: data, errorBars: {value: customRange}}],invertAxes: true}),
                 points = chart.points,
                 getter = valueGetter;
 
-            ok(addedCategoricalPointErrorBar(points, data, getter, false));
+            ok(addedCategoricalPointErrorBar(points, data, getter, false, values));
         });
 
         test("value ranges are correctly updated for array data", function() {
