@@ -584,7 +584,7 @@ background-color: @widget-background-color;
 border-color: @widget-background-color;
 }
 
-.k-list > .k-state-selected {
+.k-list > .k-state-selected.k-state-focused {
 background-color: @selected-background-color;
 border-color: @selected-background-color;
 .box-shadow(none);
@@ -1126,7 +1126,8 @@ table.k-editor {
    background-color: @alt-background-color
 }
 
-.k-list > .k-state-hover {
+.k-list > .k-state-hover,
+.k-list > .k-state-focused {
 	color: @widget-text-color;
 	background-color: @hover-background-color;
 	border-color: @hover-background-color;
