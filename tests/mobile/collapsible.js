@@ -71,6 +71,43 @@
         ok(panel.content.is(":visible"));
     });
 
+    test("appends icon span to the header element", 1, function() {
+        var panel = $("#collapsible").kendoMobileCollapsible().data("kendoMobileCollapsible");
+
+        ok(panel.header.find(".km-icon").hasClass("km-plus"));
+    });
+
+    test("changes the icon after user expands the content", 1, function() {
+        var panel = $("#collapsible").kendoMobileCollapsible().data("kendoMobileCollapsible");
+
+        click(panel.header);
+
+        ok(panel.header.find(".km-icon").hasClass("km-minus"));
+    });
+
+    test("changes the icon after user collapses the content", 1, function() {
+        var panel = $("#collapsible").kendoMobileCollapsible({
+            collapsed: false
+        }).data("kendoMobileCollapsible");
+
+        click(panel.header);
+
+        ok(panel.header.find(".km-icon").hasClass("km-plus"));
+    });
+
+    test("accepts icon class through the options", 2, function() {
+        var panel = $("#collapsible").kendoMobileCollapsible({
+            collapseIcon: "foo",
+            expandIcon: "bar"
+        }).data("kendoMobileCollapsible");
+
+        ok(panel.header.find(".km-icon").hasClass("km-bar"));
+
+        click(panel.header);
+
+        ok(panel.header.find(".km-icon").hasClass("km-foo"));
+    });
+
     /* UI interactions */
 
     test("clicking the header expands the content when content is hidden", function() {

@@ -33,7 +33,7 @@ var __meta__ = {
 
             element.addClass(COLLAPSIBLE);
 
-            that.header = element.children(":first:header").wrap(HEADER_WRAPPER).parent();
+            that._buildHeader();
             that.content = element.children().not(that.header).wrapAll(CONTENT_WRAPPER).parent();
 
             that._userEvents = new kendo.UserEvents(that.header, {
@@ -52,7 +52,9 @@ var __meta__ = {
 
         options: {
             name: "Collapsible",
-            collapsed: true
+            collapsed: true,
+            collapseIcon: "minus",
+            expandIcon: "plus"
         },
 
         destroy: function() {
@@ -61,13 +63,23 @@ var __meta__ = {
         },
 
         expand: function() {
+            var icon = this.options.collapseIcon;
+
             if (!this.trigger(EXAPND)) {
+                if (icon) {
+                    this.header.find(".km-icon").removeClass().addClass("km-icon km-" + icon);
+                }
                 this.content.show();
             }
         },
 
         collapse: function() {
+            var icon = this.options.expandIcon;
+
             if (!this.trigger(COLLAPSE)) {
+                if (icon) {
+                    this.header.find(".km-icon").removeClass().addClass("km-icon km-" + icon);
+                }
                 this.content.hide();
             }
         },
@@ -82,6 +94,19 @@ var __meta__ = {
 
         isCollapsed: function() {
             return this.content.is(":hidden");
+        },
+
+        _buildHeader: function() {
+            var header = this.element.children(":header").wrapAll(HEADER_WRAPPER),
+                iconSpan = $('<span class="km-icon"/>'),
+                icon = this.options.collapsed ? this.options.expandIcon : this.options.collapseIcon;
+
+            if (icon) {
+                header.prepend(iconSpan);
+                iconSpan.addClass("km-" + icon);
+            }
+
+            this.header = header.parent();
         }
     });
 
