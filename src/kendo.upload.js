@@ -342,7 +342,9 @@ var __meta__ = {
             }
 
             if (!that.multiple && existingFileEntries.length > 0) {
-                that._module.onRemove({target : $(existingFileEntries, that.wrapper)});
+                if (!that.trigger(REMOVE, { files: existingFileEntries.data("fileNames") })) {
+                    that._module.onRemove({target : $(existingFileEntries, that.wrapper)});
+                }
             }
 
             return fileEntry;

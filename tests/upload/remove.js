@@ -123,6 +123,38 @@ function uploadRemoveEvent(params) {
         ok(!removeCalled);
     });
 
+    // -----------------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------
+    //Remove tests for multiple false
+    test("remove event is fired for first file, when selecting a second one", function(){
+        var removeFired = false;
+        var uploadInstance = createUpload({
+            remove: function(e) {
+                removeFired = true;
+            },
+            multiple: false
+        });
+
+        simulateUpload();
+        simulateFileSelect();
+
+        ok(removeFired);
+    });
+
+    test("previous file is not removed if the remove event is prevented", function(){
+        var removeFired = false;
+        var uploadInstance = createUpload({
+            remove: function(e) {
+                e.preventDefault();
+            },
+            multiple: false
+        });
+
+        simulateUpload();
+        simulateFileSelect();
+
+        equal($(".k-file", uploadInstance.wrapper).length, 2);
+    });
 
     // -----------------------------------------------------------------------------------
     // -----------------------------------------------------------------------------------
