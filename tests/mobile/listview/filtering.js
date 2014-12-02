@@ -117,7 +117,7 @@
 
         var expr = filter.args("filter", 0)[0];
         equal(expr.field, undefined);
-        equal(expr.operator, "startsWith");
+        equal(expr.operator, "startswith");
         equal(expr.value, "foo");
     });
 

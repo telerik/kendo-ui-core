@@ -846,7 +846,7 @@ var __meta__ = {
                 value = this.searchInput.val(),
                 expr = value.length ? {
                     field: options.field,
-                    operator: options.operator || "startsWith",
+                    operator: options.operator || "startswith",
                     ignoreCase: options.ignoreCase,
                     value: value
                 } : null;
