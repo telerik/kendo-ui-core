@@ -5,6 +5,9 @@ using System;
 
 namespace Kendo.Mvc.UI.Fluent
 {
+    /// <summary>
+    /// Defines the fluent API for configuring the ImageBrowser.
+    /// </summary>
     public class EditorImageBrowserSettingsBuilder : IHideObjectMembers
     {
         private readonly EditorImageBrowserSettings settings;

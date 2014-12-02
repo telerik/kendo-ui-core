@@ -5,6 +5,9 @@ using System;
 
 namespace Kendo.Mvc.UI.Fluent
 {
+    /// <summary>
+    /// Defines the fluent API for configuring the FileBrowser.
+    /// </summary>
     public class EditorFileBrowserSettingsBuilder : IHideObjectMembers
     {
         private readonly EditorFileBrowserSettings settings;
