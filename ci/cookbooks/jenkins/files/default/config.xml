@@ -106,12 +106,12 @@
       <properties class="hudson.model.View$PropertyList"/>
       <jobNames>
         <comparator class="hudson.util.CaseInsensitiveComparator"/>
-        <string>documentation-next</string>
+        <string>admin-tools</string>
+        <string>nuget-upload</string>
+        <string>production-CI-DownloadBuilder</string>
         <string>production-upload-appbuilder</string>
         <string>stable-upload-release</string>
         <string>sync-from-core-production</string>
-        <string>TreeList-CI</string>
-        <string>update-demos</string>
       </jobNames>
       <jobFilters/>
       <columns>
@@ -123,7 +123,7 @@
         <hudson.views.LastDurationColumn/>
         <hudson.views.BuildButtonColumn/>
       </columns>
-      <includeRegex>CI|.+CI</includeRegex>
+      <includeRegex>CI|.+CI|CI.+</includeRegex>
       <recurse>false</recurse>
     </listView>
     <listView>
