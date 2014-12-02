@@ -36,6 +36,11 @@ namespace Kendo.Mvc.UI
                 html.Attribute("checked", "checked");
             }
 
+            if (!component.Enable)
+            {
+                html.Attribute("data-enable", "false");
+            }
+
             if (component.OffLabel.HasValue())
             {
                 html.Attribute("data-off-label", component.OffLabel);

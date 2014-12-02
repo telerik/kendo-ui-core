@@ -16,6 +16,7 @@ namespace Kendo.Mvc.UI
             : base(viewContext, initializer)
         {
             this.urlGenerator = urlGenerator;
+            Enable = true;
 //>> Initialization
         
         //<< Initialization
