@@ -343,10 +343,8 @@ var __meta__ = {
 
         // keep in sync
 		
-		var watchMethod = widget instanceof kendo.ui.MultiSelect ? "$watchCollection" : "$watch";
-		
-        scope.$apply(function() {
-            scope[watchMethod](kNgModel, function(newValue, oldValue) {
+		scope.$apply(function() {
+            var watchHandler = function(newValue, oldValue) {
                 if (newValue === undefined) {
                     // because widget's value() method usually checks if the new value is undefined,
                     // in which case it returns the current value rather than clearing the field.
@@ -360,7 +358,13 @@ var __meta__ = {
                     return;
                 }
                 widget.$angular_setLogicValue(newValue);
-            });
+            };
+            
+            if (widget instanceof kendo.ui.MultiSelect) {
+                scope.$watchCollection(kNgModel, watchHandler);
+            } else {
+                scope.$watch(kNgModel, watchHandler);
+            }
         });
 
         widget.first("change", function(){
