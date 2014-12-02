@@ -264,7 +264,9 @@ var __meta__ = {
                 $(".k-progress", fileEntry).width('100%');
                 $(".k-upload-status", fileEntry).prepend("<span class='k-upload-pct'>100%</span>");
 
-                that._fileAction(fileEntry, REMOVE);
+                if (that._supportsRemove()){
+                    that._fileAction(fileEntry, REMOVE);
+                }
             }
         },
 

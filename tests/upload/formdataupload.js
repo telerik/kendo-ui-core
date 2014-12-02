@@ -969,6 +969,26 @@ test("k-upload-pct text is '100%'  for each initially rendered file entry", func
 });
 
 // -----------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------------
+module("Upload / FormDataUpload / Initial files without remove", {
+    setup: function() {
+        moduleSetup();
+        uploadInstance = createUpload({ 
+            async: {"saveUrl": 'javascript:;' },
+            files: [
+                { name: "test.doc", size: 50, extension: ".doc"},
+                { name: "test1.jpg", size: 60, extension: ".jpg" }
+            ]
+        });
+    },
+    teardown: moduleTeardown
+});
+
+test("remove icon is not rendered for the file entries", function() {
+    equal($(".k-delete", uploadInstance.wrapper).length, 0);
+});
+
+// -----------------------------------------------------------------------------------
 module("Upload / FormDataUpload / Files prior to initialization", {
     setup: function() {
         moduleSetup();
