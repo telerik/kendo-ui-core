@@ -216,6 +216,11 @@
         equal(dom.find(".foo").length, 1);
     });
 
+    test("sets the viewmodel initial operator to be the first available in operators", function() {
+        filterCell = setup(dom, { dataSource: dataSource, field: "foo" , operators: { string: { neq: "bar" } } });
+        equal(filterCell.viewModel.operator, "neq");
+    });
+
     test("updates the values of the filter when filter is cleared and then set", function() {
         filterCell = setup(dom, { dataSource: dataSource, field: "foo" });
         equal(dom.find("input").val(), "");

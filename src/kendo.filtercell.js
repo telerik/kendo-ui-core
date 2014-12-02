@@ -88,6 +88,8 @@ var __meta__ = {
             var that = this,
                 dataSource,
                 viewModel,
+                passedOptions = options,
+                first,
                 type,
                 operators = that.operators = options.operators || {},
                 input = that.input = $("<input/>")
@@ -111,6 +113,13 @@ var __meta__ = {
             }
 
             operators = operators[type] || options.operators[type];
+
+            if (!passedOptions.operator) {
+                for (first in operators) { // get the first operator
+                    options.operator = first;
+                    break;
+                }
+            }
 
             that._parse = function(value) {
                  return value + "";
