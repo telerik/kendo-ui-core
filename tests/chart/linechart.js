@@ -627,6 +627,40 @@
             equal(marker.radius, highlight.radius);
         });
 
+        test("createHighlight sets default border opacity", function() {
+            createPoint({ markers: { type: "circle" } });
+            var highlight = point.createHighlight();
+
+            equal(highlight.options.stroke.opacity, 1);
+        });
+
+        test("createHighlight sets user border opacity", function() {
+            createPoint({
+                markers: { type: "circle" },
+                highlight: { markers: { border: { opacity: 0.5 } } }
+            });
+            var highlight = point.createHighlight();
+
+            equal(highlight.options.stroke.opacity, 0.5);
+        });
+
+        test("createHighlight sets default opacity", function() {
+            createPoint({ markers: { type: "circle" } });
+            var highlight = point.createHighlight();
+
+            equal(highlight.options.fill.opacity, 1);
+        });
+
+        test("createHighlight sets user opacity", function() {
+            createPoint({
+                markers: { type: "circle" },
+                highlight: { markers: { opacity: 0.5 } }
+            });
+            var highlight = point.createHighlight();
+
+            equal(highlight.options.fill.opacity, 0.5);
+        });
+
         test("createHighlight returns marker when not initially visible", function() {
             createPoint({ markers: { visible: false }});
 

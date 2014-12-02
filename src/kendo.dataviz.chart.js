@@ -4840,9 +4840,9 @@ var __meta__ = {
                 border: {
                     color: markers.border.color,
                     width: markers.border.width,
-                    opacity: markers.border.opacity || 0
+                    opacity: valueOrDefault(markers.border.opacity, 1)
                 },
-                fillOpacity: markers.opacity || 1
+                opacity: valueOrDefault(markers.opacity, 1)
             });
             shadow.reflow(this._childBox);
 
