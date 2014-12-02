@@ -9,19 +9,19 @@ namespace Kendo.Models
         public static readonly IList<string> All = new string[]
         {
 #if DEBUG
-            "web/kendo.common.less",
+            "web/kendo.CURRENT_COMMON.less",
             "web/kendo.rtl.css",
-            "web/kendo.silver.less",
-            "web/kendo.silver.mobile.less",
+            "web/kendo.CURRENT_THEME.less",
+            "web/kendo.CURRENT_THEME.mobile.less",
             "dataviz/kendo.dataviz.less",
-            "dataviz/kendo.dataviz.silver.less"
+            "dataviz/kendo.dataviz.CURRENT_THEME.less"
 #else
-            "kendo.common.min.css",
+            "kendo.CURRENT_COMMON.min.css",
             "kendo.rtl.min.css",
-            "kendo.silver.min.css",
-            "kendo.silver.mobile.min.css",
+            "kendo.CURRENT_THEME.min.css",
+            "kendo.CURRENT_THEME.mobile.min.css",
             "kendo.dataviz.min.css",
-            "kendo.dataviz.silver.min.css"
+            "kendo.dataviz.CURRENT_THEME.min.css"
 #endif
         };
 
@@ -56,17 +56,17 @@ namespace Kendo.Models
         public static readonly IList<string> Mobile = new string[]
         {
 #if DEBUG
-            "web/kendo.common.less",
-            "web/kendo.silver.less",
+            "web/kendo.CURRENT_COMMON.less",
+            "web/kendo.CURRENT_THEME.less",
             "mobile/kendo.mobile.all.less",
             "dataviz/kendo.dataviz.less",
-            "dataviz/kendo.dataviz.silver.less"
+            "dataviz/kendo.dataviz.CURRENT_THEME.less"
 #else
-            "kendo.common.min.css",
-            "kendo.silver.min.css",
+            "kendo.CURRENT_COMMON.min.css",
+            "kendo.CURRENT_THEME.min.css",
             "kendo.mobile.all.min.css",
             "kendo.dataviz.min.css",
-            "kendo.dataviz.silver.min.css"
+            "kendo.dataviz.CURRENT_THEME.min.css"
 #endif
         };
 
