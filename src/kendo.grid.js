@@ -1843,6 +1843,11 @@ var __meta__ = {
                         columnStart = e.x.location;
                         columnWidth = th.outerWidth();
                         gridWidth = isLocked ? contentTable.children("tbody").outerWidth() : that.tbody.outerWidth(); // IE returns 0 if grid is empty and scrolling is enabled
+
+                        // fix broken UI in Chrome38+
+                        if (browser.webkit) {
+                            that.wrapper.addClass("k-grid-column-resizing");
+                        }
                     },
                     resize: function(e) {
                         var rtlMultiplier = isRtl ? -1 : 1,
@@ -1902,6 +1907,10 @@ var __meta__ = {
                             header;
 
                         cursor(that.wrapper, "");
+
+                        if (browser.webkit) {
+                            that.wrapper.removeClass("k-grid-column-resizing");
+                        }
 
                         if (columnWidth != newWidth) {
                             header = that.lockedHeader ? that.lockedHeader.find("thead:first tr:first").add(that.thead.find("tr:first")) : th.parent();
