@@ -199,14 +199,14 @@
             chartElement.appendVisual(visual);
         });
 
-        test("appends visual to the root if noClip is true", function() {
+        test("appends visual to the clipRoot if noclip is true", function() {
             var child = new dataviz.ChartElement();
             var visual = new draw.Group({
                 noclip: true
             });
             chartElement.append(child);
             chartElement.createVisual();
-            chartElement.getRoot = function() { return this; };
+            chartElement.clipRoot = function() { return this; };
 
             child.appendVisual(visual);
             ok(chartElement.visual.children[0] === visual);

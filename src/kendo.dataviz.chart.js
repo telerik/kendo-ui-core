@@ -7749,6 +7749,8 @@ var __meta__ = {
             pane.createTitle();
 
             pane.content = new ChartElement();
+            pane.content.clipRoot = returnSelf;
+
             pane.chartContainer = new ChartContainer({}, pane);
             pane.append(pane.content);
 
@@ -7844,9 +7846,7 @@ var __meta__ = {
             }
         },
 
-        stackRoot: function() {
-            return this;
-        },
+        stackRoot: returnSelf,
 
         createGridLines: function() {
             var pane = this,
@@ -7949,9 +7949,7 @@ var __meta__ = {
             }
         },
 
-        stackRoot: function() {
-            return this;
-        },
+        stackRoot: returnSelf,
 
         unclipLabels: function() {
             var container = this,
@@ -11828,6 +11826,10 @@ var __meta__ = {
     function hasGradientOverlay(options) {
         var overlay = options.overlay;
         return overlay && overlay.gradient && overlay.gradient != "none";
+    }
+
+    function returnSelf() {
+        return this;
     }
 
     // Exports ================================================================

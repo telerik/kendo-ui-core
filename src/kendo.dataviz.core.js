@@ -694,7 +694,7 @@ var __meta__ = {
             }
 
             if (childVisual.options.noclip) {
-                this.getRoot().visual.append(childVisual);
+                this.clipRoot().visual.append(childVisual);
             } else if (defined(childVisual.options.zIndex)) {
                 this.stackRoot().stackVisual(childVisual);
             } else if (this.visual) {
@@ -704,6 +704,14 @@ var __meta__ = {
                 // pass through child visuals
                 this.parent.appendVisual(childVisual);
             }
+        },
+
+        clipRoot: function() {
+            if (this.parent) {
+                return this.parent.clipRoot();
+            }
+
+            return this;
         },
 
         stackRoot: function() {
