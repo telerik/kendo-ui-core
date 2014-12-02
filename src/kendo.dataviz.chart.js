@@ -1812,7 +1812,7 @@ var __meta__ = {
             ChartElement.fn.renderComplete.call(this);
 
             var cursor = this.options.cursor || {};
-            var eventSink = draw.Path.fromRect(this.container.box.toRect(), {
+            var eventSink = this._itemOverlay = draw.Path.fromRect(this.container.box.toRect(), {
                 fill: {
                     color: WHITE,
                     opacity: 0
@@ -1821,7 +1821,7 @@ var __meta__ = {
                 cursor: cursor.style
             });
 
-            this.visual.append(eventSink);
+            this.appendVisual(eventSink);
         },
 
         click: function(widget, e) {
@@ -1859,7 +1859,9 @@ var __meta__ = {
                 seriesIndex: options.series.index,
                 pointIndex: options.pointIndex
             };
-        }
+        },
+
+        createVisual: noop
     });
 
     var Legend = ChartElement.extend({
@@ -1894,7 +1896,6 @@ var __meta__ = {
                 width: 0
             },
             item: {
-                zIndex: 1,
                 cursor: {
                     style: POINTER
                 }
@@ -1910,8 +1911,7 @@ var __meta__ = {
                 height: 7,
                 type: "rect",
                 align: LEFT,
-                vAlign: CENTER,
-                zIndex: 1
+                vAlign: CENTER
             }
         },
 

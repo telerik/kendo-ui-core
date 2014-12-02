@@ -2385,7 +2385,7 @@
             legend = chart._model.children[0];
             legendItem = legend.children[0].children[0].children[itemIndex || 0];
 
-            legendItemOverlay = getChartDomElement(legendItem);
+            legendItemOverlay = $(legendItem._itemOverlay.observers()[0].element);
         }
 
         module("LegendItem / Events / click", {
