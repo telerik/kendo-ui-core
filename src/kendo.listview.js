@@ -107,6 +107,7 @@ var __meta__ = {
             Widget.fn.setOptions.call(this, options);
 
             this._templates();
+            this._selectable();
         },
 
         _templates: function() {

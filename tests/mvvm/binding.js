@@ -220,6 +220,46 @@ test("change binding", 1, function() {
     dom.trigger("change");
 });
 
+test("change binding attaches to parent observable", 1, function() {
+    dom = $('<input data-bind="events: { change:foo }"/>');
+
+    var subvm = kendo.observable({
+    });
+
+    var vm = kendo.observable({
+        subvm: subvm,
+        foo: function() {
+            ok(true, "change is raised");
+        }
+    });
+
+    kendo.bind(dom, subvm);
+
+    dom.trigger("change");
+});
+
+test("change binding detaches from parent observable", 1, function() {
+    dom = $('<input data-bind="events: { change:foo }"/>');
+
+    var subvm = kendo.observable({
+    });
+
+    var vm = kendo.observable({
+        subvm: subvm,
+        foo: function() {
+            ok(true, "change is raised");
+        }
+    });
+
+    kendo.bind(dom, subvm);
+
+    dom.trigger("change");
+
+    kendo.unbind(dom);
+
+    dom.trigger("change");
+});
+
 test("the context of the event handler is the viewmodel",1, function() {
     dom = $('<span data-bind="click:foo"/>');
     var viewModel = kendo.observable( {
