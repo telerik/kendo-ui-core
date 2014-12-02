@@ -119,9 +119,11 @@ var __meta__ = {
                 _placeholder = this.options.placeholder,
                 placeholder = this.placeholder = kendo.isFunction(_placeholder) ? $(_placeholder.call(this, draggedElement)) : $(_placeholder);
 
+            console.log(e.initialTarget);
+
             if(disabled && draggedElement.is(disabled)) {
                 e.preventDefault();
-            } else if(handler && !$(target).is(handler)) {
+            } else if(handler && !$(e.initialTarget).is(handler)) {
                 e.preventDefault();
             } else {
 

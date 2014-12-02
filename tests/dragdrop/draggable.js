@@ -253,4 +253,27 @@
         trigger("mousemove", { pageX: 10, pageY: 1 });
         trigger("keyup", { keyCode: 27});
     });
+
+    test("initialTouch target is passed in dragstart event data", 2, function() {
+
+        QUnit.fixture.find("span")
+            .attr("id", "foo")
+            .css({
+                display: "block",
+                "background-color": "red",
+                width: 20,
+                height: 20
+            })
+            .append("<span id='bar' style='width:10px; height: 10px; background-color: blue; display: block;' />");
+
+        setup({
+            dragstart: function(e) {
+                equal($(e.initialTarget).attr("id"), "bar");
+                equal($(e.target).attr("id"), "foo");
+            }
+        });
+
+        trigger("mousedown", { pageX: 1, pageY: 1 }, QUnit.fixture.find("#bar"));
+        trigger("mousemove", { pageX: 21, pageY: 1 }, QUnit.fixture.find("#foo"));
+    });
 })();
