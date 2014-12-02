@@ -114,4 +114,30 @@
         });
 
     })();
+
+    // ------------------------------------------------------------
+    (function() {
+        module("mouseout", {
+            setup: function() {
+                setupChart({});
+            },
+            teardown: function() {
+                destroyChart();
+            }
+        });
+
+        test("calls chart element leave method if available", function() {
+            chart._getChartElement = function() {
+                return {
+                    leave: function() {
+                        ok(true);
+                    }
+                };
+            };
+
+            chart.element.trigger($.Event("mouseout"));
+        });
+
+    })();
+
 })();

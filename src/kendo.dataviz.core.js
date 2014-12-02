@@ -811,8 +811,6 @@ var __meta__ = {
         init: function(options) {
             var root = this;
 
-            // Logical tree ID to element map
-            root.modelMap = {};
             root.gradients = {};
 
             ChartElement.fn.init.call(root, options);

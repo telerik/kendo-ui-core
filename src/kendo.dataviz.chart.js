@@ -711,7 +711,7 @@ var __meta__ = {
 
         _mouseout: function(e) {
             var chart = this,
-                element = chart._model.modelMap[e.target.getAttribute("data-model-id")];
+                element = chart._getChartElement(e);
 
             if (element && element.leave) {
                 element.leave(chart, e);
