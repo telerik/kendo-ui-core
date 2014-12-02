@@ -342,20 +342,25 @@ var __meta__ = {
         widget.$angular_setLogicValue(getter(scope));
 
         // keep in sync
-        scope.$watch(kNgModel, function(newValue, oldValue){
-            if (newValue === undefined) {
-                // because widget's value() method usually checks if the new value is undefined,
-                // in which case it returns the current value rather than clearing the field.
-                // https://github.com/telerik/kendo-ui-core/issues/299
-                newValue = null;
-            }
-            if (updating) {
-                return;
-            }
-            if (newValue === oldValue) {
-                return;
-            }
-            widget.$angular_setLogicValue(newValue);
+		
+		var watchMethod = widget instanceof kendo.ui.MultiSelect ? "$watchCollection" : "$watch";
+		
+        scope.$apply(function() {
+            scope[watchMethod](kNgModel, function(newValue, oldValue) {
+                if (newValue === undefined) {
+                    // because widget's value() method usually checks if the new value is undefined,
+                    // in which case it returns the current value rather than clearing the field.
+                    // https://github.com/telerik/kendo-ui-core/issues/299
+                    newValue = null;
+                }
+                if (updating) {
+                    return;
+                }
+                if (newValue === oldValue) {
+                    return;
+                }
+                widget.$angular_setLogicValue(newValue);
+            });
         });
 
         widget.first("change", function(){
@@ -882,7 +887,7 @@ var __meta__ = {
     });
 
     defadvice("ui.MultiSelect", "$angular_getLogicValue", function() {
-        var value = this.self.dataItems();
+        var value = this.self.dataItems().slice(0);
         var valueField = this.self.options.dataValueField;
 
         if (valueField && this.self.options.valuePrimitive) {
