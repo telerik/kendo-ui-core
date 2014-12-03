@@ -1377,9 +1377,14 @@ var __meta__ = {
         range: function(range) {
             var calendarInfo = this.calendarInfo();
             var firstDay = calendarInfo.firstDay;
+            var rangeEnd = range.end;
+
+            if (firstDay === rangeEnd.getDay()) {
+                rangeEnd.setDate(rangeEnd.getDate() + 7);
+            }
 
             this.start = kendo.date.getDate(kendo.date.dayOfWeek(range.start, firstDay, -1));
-            this.end = kendo.date.getDate(kendo.date.dayOfWeek(range.end, firstDay, 1));
+            this.end = kendo.date.getDate(kendo.date.dayOfWeek(rangeEnd, firstDay, 1));
         },
 
         _createSlots: function() {

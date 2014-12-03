@@ -737,6 +737,19 @@
         equal(kendo.toString(view.start, "yyyy/MM/dd"), "2014/04/13");
         equal(kendo.toString(view.end, "yyyy/MM/dd"), "2014/04/27");
     });
+    
+    test("range() sets view range to containing weeks when end is the same day as week start", 2, function() {
+        view = weekView();
+        var range = {
+            start: new Date("2014/04/15"),
+            end: new Date("2014/04/27")
+        };
+
+        view.range(range);
+
+        equal(kendo.toString(view.start, "yyyy/MM/dd"), "2014/04/13");
+        equal(kendo.toString(view.end, "yyyy/MM/dd"), "2014/05/04");
+    });
 
     test("_calculateTableWidth() honors slotSize property", function() {
         view = weekView({
