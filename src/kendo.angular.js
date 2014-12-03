@@ -359,7 +359,6 @@ var __meta__ = {
                 }
                 widget.$angular_setLogicValue(newValue);
             };
-            debugger;
             if (kendo.ui.MultiSelect && widget instanceof kendo.ui.MultiSelect) {
                 scope.$watchCollection(kNgModel, watchHandler);
             } else {
