@@ -399,6 +399,10 @@ var __meta__ = {
     };
 
     function collision(element, position) {
+        if (!element.is(":visible")) {
+            return false;
+        }
+
         var elementPosition = kendo.getOffset(element),
             right = position.left + position.width,
             bottom = position.top + position.height;
