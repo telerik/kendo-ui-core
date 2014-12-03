@@ -89,6 +89,10 @@ def run_shell(cmd, args)
     sh *(cmd + args.map { |arg| arg.to_s })
 end
 
+def sync(source, dest)
+    sh "rsync -av --del #{source} #{dest}"
+end
+
 def uglifyjs(from, to)
     cmd = "node #{UGLIFYJS} #{from} -o #{to} -cm"
     cmd = cmd + " warnings=false" unless VERBOSE

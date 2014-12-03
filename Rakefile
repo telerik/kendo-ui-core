@@ -1125,7 +1125,7 @@ namespace :build do
 
             desc 'Copy ASP.NET MVC DLLs from distribution archive'
             task :get_binaries do
-                sh "rsync -av --del #{ARCHIVE_ROOT}/#{destination}/binaries/* dist/binaries/"
+                sync "#{ARCHIVE_ROOT}/#{destination}/binaries/*", "dist/binaries/"
             end
         end
     end
@@ -1136,7 +1136,7 @@ namespace :build do
 
         desc 'Update the /production build machine web site'
         task :demos => [ 'demos:staging', 'download_builder:staging' ] do
-            sh "rsync -avc dist/demos/staging/ #{WEB_ROOT}/production/"
+            sync "dist/demos/staging/", "#{WEB_ROOT}/production/"
         end
 
         changelog = "#{WEB_ROOT}/changelog/index.html"
@@ -1169,17 +1169,16 @@ namespace :build do
             'demos:staging_php',
             'demos:staging_mvc'
         ] do
-            sh "rsync -avc dist/demos/staging/ #{WEB_ROOT}/staging/"
-            sh "rsync -avc dist/download-builder-staging/ #{WEB_ROOT}/download-builder-staging/"
-            sh "rsync -avc --del dist/demos/staging-java/ #{TOMCAT_ROOT}/staging-java/"
-            # sh "curl -s -m 300 --netrc \"http://localhost:8081/manager/text/reload?path=/staging-java\""
-            sh "rsync -avc --del dist/demos/staging-php/ #{WEB_ROOT}/staging-php/"
+            sync "dist/demos/staging/", "#{WEB_ROOT}/staging/"
+            sync "dist/download-builder-staging/", "#{WEB_ROOT}/download-builder-staging/"
+            sync "dist/demos/staging-java/", "#{TOMCAT_ROOT}/staging-java/"
+            sync "dist/demos/staging-php/", "#{WEB_ROOT}/staging-php/"
 
 
             # Deploy MVC demos on kendoiis
             remote = WinRemote.new "kendoiis.telerik.com"
 
-            sh "rsync -avc --del dist/aspnetmvc-demos/ /mnt/kendo-iis/stable-demos-src/"
+            sync "dist/aspnetmvc-demos/", "/mnt/kendo-iis/stable-demos-src/"
 
             shares = "c:\\shares"
             source = "#{shares}\\stable-demos-src"
@@ -1210,7 +1209,7 @@ namespace :build do
         task :demos => [
             'demos:staging'
         ] do
-            sh "rsync -avc dist/demos/staging/ #{WEB_ROOT}/update/"
+            sync "dist/demos/staging/", "#{WEB_ROOT}/update/"
         end
     end
 
