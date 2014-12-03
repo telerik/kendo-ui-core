@@ -2822,7 +2822,8 @@ var __meta__ = {
             var deferred = $.Deferred();
 
             that._queueRequest(params, function() {
-                if (!that.trigger(REQUESTSTART, { type: "read" })) {
+                var isPrevented = that.trigger(REQUESTSTART, { type: "read" });
+                if (!isPrevented) {
                     that.trigger(PROGRESS);
 
                     that._ranges = [];
@@ -2851,7 +2852,7 @@ var __meta__ = {
                 } else {
                     that._dequeueRequest();
 
-                    deferred.resolve();
+                    deferred.resolve(isPrevented);
                 }
             });
 
@@ -3264,7 +3265,8 @@ var __meta__ = {
                 return this.read(this._mergeState(options));
             }
 
-            if (!this.trigger(REQUESTSTART, { type: "read" })) {
+            var isPrevented = this.trigger(REQUESTSTART, { type: "read" });
+            if (!isPrevented) {
                 this.trigger(PROGRESS);
 
                 result = this._queryProcess(this._data, this._mergeState(options));
@@ -3283,11 +3285,18 @@ var __meta__ = {
                 this.trigger(CHANGE, { items: result.data });
             }
 
-            return $.Deferred().resolve().promise();
+            return $.Deferred().resolve(isPrevented).promise();
         },
 
         fetch: function(callback) {
-            return this._query().then(proxy(callback, this));
+            var that = this;
+            var fn = function(isPrevented) {
+                if (isPrevented !== true && isFunction(callback)) {
+                    callback.call(that);
+                }
+            };
+
+            return this._query().then(fn);
         },
 
         _query: function(options) {

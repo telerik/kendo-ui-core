@@ -1689,6 +1689,46 @@ test("fetch callback is called with dataSource context", function() {
     });
 });
 
+test("fetch callback is not called when requestStart is prevented", function() {
+    var wasCalled = false,
+        dataSource = new DataSource({
+            data: [{foo: 1, bar: "1"}]
+        });
+
+    dataSource.read();
+
+    dataSource.one("requestStart", function(e) {
+        e.preventDefault();
+    });
+
+    dataSource.fetch(function() {
+        wasCalled = true;
+    });
+
+    ok(!wasCalled, "fetch callback was executed");
+});
+
+test("fetch callback is not called when requestStart is prevented with remote operations", function() {
+    var wasCalled = false,
+        dataSource = new DataSource({
+            transport: {
+                read: function(options) {
+                    options.success([{foo: 1, bar: "1"}]);
+                }
+            }
+        });
+
+    dataSource.one("requestStart", function(e) {
+        e.preventDefault();
+    });
+
+    dataSource.fetch(function() {
+        wasCalled = true;
+    });
+
+    ok(!wasCalled, "fetch callback was executed");
+});
+
 test("paging with custom schema", function() {
     var dataSource = new DataSource({
         transport:  {
