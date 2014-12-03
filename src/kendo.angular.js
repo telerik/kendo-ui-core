@@ -360,7 +360,7 @@ var __meta__ = {
                 widget.$angular_setLogicValue(newValue);
             };
             
-            if (widget instanceof kendo.ui.MultiSelect) {
+            if (kendo.ui.Multiselect && widget instanceof kendo.ui.MultiSelect) {
                 scope.$watchCollection(kNgModel, watchHandler);
             } else {
                 scope.$watch(kNgModel, watchHandler);
