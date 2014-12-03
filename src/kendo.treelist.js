@@ -1630,6 +1630,8 @@ var __meta__ = {
         setDataSource: function(dataSource) {
             this._dataSource(dataSource);
 
+            this._contentTree.render([]);
+
             if (this.options.autoBind) {
                 this.dataSource.fetch();
             }

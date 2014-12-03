@@ -4,7 +4,6 @@
 
     module("TreeList AngularJS support", {
         setup: function() {
-           dom = $("<div />").appendTo(QUnit.fixture);
         },
         teardown: function() {
             kendo.destroy(QUnit.fixture);
@@ -14,6 +13,8 @@
     });
 
     function createTreeList(options) {
+        dom = $("<div />").appendTo(QUnit.fixture);
+
         dom.kendoTreeList($.extend({
             dataSource: [
                 { id: 1, parentId: null },
@@ -50,5 +51,38 @@
         instance.dataSource.data([ { id: 1, parentId: null } ]);
 
         equal(instance.calls("angular"), 0);
+    });
+
+    ngTest("repaint templates when changing data source", 2, function() {
+        angular.module("kendo.tests").controller("mine", function($scope) {
+            $scope.options = {
+                dataSource: {
+                    data: [
+                        { id: 1, parentId: null, text: "foo" }
+                    ]
+                },
+                columns: [
+                    { field: "id" },
+                    { template: "{{dataItem.text}}" }
+                ]
+            };
+        });
+
+        $("<div ng-controller=mine><div kendo-treelist='tree' k-options='options'></div></div>").appendTo(QUnit.fixture);
+    },
+
+    function() {
+        var treeList = QUnit.fixture.find('[data-role=treelist]').getKendoTreeList();
+        var dataSource = new kendo.data.TreeListDataSource({
+                data: [
+                    { id: 2, parentId: null, text: "bar" }
+                ]
+            });
+
+        treeList.setDataSource(dataSource);
+
+        var tds = treeList.content.find("td");
+        equal(tds.eq(0).text(), "2");
+        equal(tds.eq(1).text(), "bar");
     });
 })();
