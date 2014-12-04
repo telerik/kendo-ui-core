@@ -1459,7 +1459,9 @@ var __meta__ = {
                     day: "Day",
                     week: "Week",
                     month: "Month",
-                    year: "Year"
+                    year: "Year",
+                    start: "Start",
+                    end: "End"
                 },
                 actions: {
                     append: "Add Task",

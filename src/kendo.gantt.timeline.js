@@ -36,8 +36,8 @@ var __meta__ = {
                        '</div>');
     var RESIZE_TOOLTIP_TEMPLATE = kendo.template('<div style="z-index: 100002;" class="#=styles.tooltipWrapper#">' +
                                    '<div class="#=styles.tooltipContent#">' +
-                                        '<div>Start: #=kendo.toString(start, "ddd M/dd HH:mm")#</div>' +
-                                        '<div>End: #=kendo.toString(end, "ddd M/dd HH:mm")#</div>' +
+                                        '<div>#=messages.start#: #=kendo.toString(start, "ddd M/dd HH:mm")#</div>' +
+                                        '<div>#=messages.end#: #=kendo.toString(end, "ddd M/dd HH:mm")#</div>' +
                                    '</div>' +
                               '</div>');
     var PERCENT_RESIZE_TOOLTIP_TEMPLATE = kendo.template('<div style="z-index: 100002;" class="#=styles.tooltipWrapper#" >' +
@@ -906,6 +906,7 @@ var __meta__ = {
             var taskTop = this._taskCoordinates[task.id].rowIndex * this._rowHeight;
             var tooltipHeight;
             var tooltipTop;
+            var messages = this.options.messages;
 
             this._resizeHint = $(RESIZE_HINT({ styles: styles })).css({
                 "top": 0,
@@ -914,7 +915,7 @@ var __meta__ = {
 
             this.content.append(this._resizeHint);
             
-            this._resizeTooltip = $(RESIZE_TOOLTIP_TEMPLATE({ styles: styles, start: task.start, end: task.end }))
+            this._resizeTooltip = $(RESIZE_TOOLTIP_TEMPLATE({ styles: styles, start: task.start, end: task.end, messages: messages.views }))
                 .css({
                     "top": 0,
                     "left": 0
@@ -941,6 +942,7 @@ var __meta__ = {
             var tooltipLeft = resizeStart ? left : right;
             var tablesWidth = this._tableWidth - 17;
             var tooltipWidth = this._resizeTooltipWidth;
+            var messages = this.options.messages;
 
             this._resizeHint
                 .css({
@@ -960,7 +962,7 @@ var __meta__ = {
                 tooltipLeft = tablesWidth - tooltipWidth;
             }
 
-            this._resizeTooltip = $(RESIZE_TOOLTIP_TEMPLATE({ styles: GanttView.styles, start: start, end: end }))
+            this._resizeTooltip = $(RESIZE_TOOLTIP_TEMPLATE({ styles: GanttView.styles, start: start, end: end, messages: messages.views }))
                 .css({
                     "top": this._resizeTooltipTop,
                     "left": tooltipLeft,
@@ -1538,7 +1540,9 @@ var __meta__ = {
                     day: "Day",
                     week: "Week",
                     month: "Month",
-                    year: "Year"
+                    year: "Year",
+                    start: "Start",
+                    end: "End"
                 }
             },
             snap: true,

@@ -516,6 +516,23 @@
         equal(tooltip.children().eq(0).text(), "Start: Tue 4/15 12:00");
         equal(tooltip.children().eq(1).text(), "End: Tue 4/15 16:00");
     });
+    
+    test("resize tooltip text messages are set", 2, function() {
+        setupTimeline({ messages: { views: { start: "Custom Start", end: "Custom End" } } });
+
+        var content = timeline.view().content;
+        var handle = content.find(".k-task .k-resize-e");
+        var targetSlot = timeline.view()._timeSlots()[16];
+        var tooltip;
+
+        dragStart(timeline, handle);
+        drag(timeline, targetSlot.offsetLeft);
+
+        tooltip = content.find(".k-tooltip-content");
+
+        equal(tooltip.children().eq(0).text(), "Custom Start: Tue 4/15 12:00");
+        equal(tooltip.children().eq(1).text(), "Custom End: Tue 4/15 16:00");
+    });
 
 
     function equalWithRound(value, expected) {
