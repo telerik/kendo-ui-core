@@ -15,12 +15,12 @@ class GanttMessagesViews extends \Kendo\SerializableObject {
     }
 
     /**
-    * The text similar to "Week" displayed as Gantt "week" view title.
+    * The text similar to "End" displayed in Gantt resize hint.
     * @param string $value
     * @return \Kendo\UI\GanttMessagesViews
     */
-    public function week($value) {
-        return $this->setProperty('week', $value);
+    public function end($value) {
+        return $this->setProperty('end', $value);
     }
 
     /**
@@ -30,6 +30,24 @@ class GanttMessagesViews extends \Kendo\SerializableObject {
     */
     public function month($value) {
         return $this->setProperty('month', $value);
+    }
+
+    /**
+    * The text similar to "Start" displayed in Gantt resize hint.
+    * @param string $value
+    * @return \Kendo\UI\GanttMessagesViews
+    */
+    public function start($value) {
+        return $this->setProperty('start', $value);
+    }
+
+    /**
+    * The text similar to "Week" displayed as Gantt "week" view title.
+    * @param string $value
+    * @return \Kendo\UI\GanttMessagesViews
+    */
+    public function week($value) {
+        return $this->setProperty('week', $value);
     }
 
     /**

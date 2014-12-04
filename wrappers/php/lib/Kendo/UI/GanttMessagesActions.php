@@ -6,15 +6,6 @@ class GanttMessagesActions extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * The text similar to "Append" displayed as Gantt "append" buttons.
-    * @param string $value
-    * @return \Kendo\UI\GanttMessagesActions
-    */
-    public function append($value) {
-        return $this->setProperty('append', $value);
-    }
-
-    /**
     * The text similar to "Add child" displayed as Gantt "add child" buttons.
     * @param string $value
     * @return \Kendo\UI\GanttMessagesActions
@@ -24,12 +15,12 @@ class GanttMessagesActions extends \Kendo\SerializableObject {
     }
 
     /**
-    * The text similar to "Add above" displayed as Gantt "add above" buttons.
+    * The text similar to "Append" displayed as Gantt "append" buttons.
     * @param string $value
     * @return \Kendo\UI\GanttMessagesActions
     */
-    public function insertBefore($value) {
-        return $this->setProperty('insertBefore', $value);
+    public function append($value) {
+        return $this->setProperty('append', $value);
     }
 
     /**
@@ -42,7 +33,16 @@ class GanttMessagesActions extends \Kendo\SerializableObject {
     }
 
     /**
-    * The text of "Export to PDF" button of the gantt toolbar.
+    * The text similar to "Add above" displayed as Gantt "add above" buttons.
+    * @param string $value
+    * @return \Kendo\UI\GanttMessagesActions
+    */
+    public function insertBefore($value) {
+        return $this->setProperty('insertBefore', $value);
+    }
+
+    /**
+    * The text of "Export to PDF" button of the Gantt toolbar.
     * @param string $value
     * @return \Kendo\UI\GanttMessagesActions
     */
