@@ -23,4 +23,26 @@ function uploadAsyncNoMultiple(createUpload, simulateUpload) {
 
         ok(!removeCalled);
     });
+
+    test("adding a second file should remove first one from list every time (multiple = false)", function() {
+        var uploadInstance = createUpload({ multiple: false, async: {"saveUrl":'javascript:;'} });
+
+        simulateUpload();
+        simulateUpload();
+
+        equal($(".k-file", uploadInstance.wrapper).length, 1);
+    });
+
+    test("adding a second file should remove first one from list when remove action fails (multiple = false)", function() {
+        var uploadInstance = createUpload({ multiple: false, async: {"saveUrl":'javascript:;', "removeUrl":'javascript:;'} });
+
+        uploadInstance._submitRemove = function(fileNames, data, onSuccess, onError) {
+            onError({ responseText: "fail" });
+        }
+
+        simulateUpload();
+        simulateUpload();
+
+        equal($(".k-file", uploadInstance.wrapper).length, 1);
+    });
 }
