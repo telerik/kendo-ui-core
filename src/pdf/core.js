@@ -1797,18 +1797,22 @@
     }
 
     var FONT_MAPPINGS = {
-        "serif"                  : "Times-Roman",
-        "serif|bold"             : "Times-Bold",
-        "serif|italic"           : "Times-Italic",
-        "serif|bold|italic"      : "Times-BoldItalic",
-        "sans-serif"             : "Helvetica",
-        "sans-serif|bold"        : "Helvetica-Bold",
-        "sans-serif|italic"      : "Helvetica-Oblique",
-        "sans-serif|bold|italic" : "Helvetica-BoldOblique",
-        "monospace"              : "Courier",
-        "monospace|bold"         : "Courier-Bold",
-        "monospace|italic"       : "Courier-Oblique",
-        "monospace|bold|italic"  : "Courier-BoldOblique"
+        "serif"                    : "Times-Roman",
+        "serif|bold"               : "Times-Bold",
+        "serif|italic"             : "Times-Italic",
+        "serif|bold|italic"        : "Times-BoldItalic",
+        "sans-serif"               : "Helvetica",
+        "sans-serif|bold"          : "Helvetica-Bold",
+        "sans-serif|italic"        : "Helvetica-Oblique",
+        "sans-serif|bold|italic"   : "Helvetica-BoldOblique",
+        "monospace"                : "Courier",
+        "monospace|bold"           : "Courier-Bold",
+        "monospace|italic"         : "Courier-Oblique",
+        "monospace|bold|italic"    : "Courier-BoldOblique",
+        "zapfdingbats"             : "ZapfDingbats",
+        "zapfdingbats|bold"        : "ZapfDingbats",
+        "zapfdingbats|italic"      : "ZapfDingbats",
+        "zapfdingbats|bold|italic" : "ZapfDingbats"
     };
 
     function defineFont(name, url) {
