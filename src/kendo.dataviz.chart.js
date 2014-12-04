@@ -3267,7 +3267,7 @@ var __meta__ = {
                 fromOffset[axis] = valueOrDefault(stackBase, origin[axis]) - origin[axis];
 
                 var fromScale = this.fromScale = new geom.Point(1, 1);
-                fromScale[axis] = 0;
+                fromScale[axis] = 0.001;
 
                 element.transform(geom.transform()
                     .scale(fromScale.x, fromScale.y)
@@ -3287,6 +3287,11 @@ var __meta__ = {
                 .translate(translateX, translateY)
                 .scale(scaleX, scaleY, this.origin)
             );
+        },
+
+        abort: function() {
+            draw.Animation.fn.abort.call(this);
+            this.element.transform(null);
         }
     });
     draw.AnimationFactory.current.register(BAR, BarAnimation);

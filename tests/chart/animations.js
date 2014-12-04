@@ -43,14 +43,14 @@
         test("setup collapses element (vertical bars)", function() {
             anim.setup();
 
-            ok(visual.transform().equals(geom.transform(new geom.Matrix(1, 0, 0, 0, 0, 0))));
+            deepEqual(visual.transform().matrix(), new geom.Matrix(1, 0, 0, 0.001, 0, 0));
         });
 
         test("setup collapses element (horizontal bars)", function() {
             createAnim({vertical: false });
             anim.setup();
 
-            ok(visual.transform().equals(geom.transform(new geom.Matrix(0, 0, 0, 1, 0, 0))));
+            deepEqual(visual.transform().matrix(), new geom.Matrix(0.001, 0, 0, 1, 0, 0));
         });
 
         test("setup calculates fromOffset element (vertical bars)", function() {
@@ -101,11 +101,11 @@
             ok(visual.transform().equals(geom.transform(new geom.Matrix(0.5, 0, 0, 1, 5, 0))));
         });
 
-        asyncTest("animates to final position", function() {
+        asyncTest("cleans up transformation", function() {
             anim.setup();
             anim.play();
             setTimeout(function() {
-                ok(visual.transform().equals(geom.transform(new geom.Matrix(1, 0, 0, 1, 0, 0))));
+                equal(visual.transform(), null);
                 start();
             }, 100);
         });
