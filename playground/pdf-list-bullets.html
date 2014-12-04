@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="../dist/styles/web/kendo.common.css" />
+    <link rel="stylesheet" href="../dist/styles/web/kendo.default.css" />
+    <script src="html2canvas.min.js"></script>
+    <script src="loader.js"></script>
+    <script>
+      requireSync([
+        "../src/jquery.js",
+        "../src/kendo.drawing.js",
+        "./console.time.js",
+        "./test-pdf-helpers.js"
+      ]);
+    </script>
+
+    <script src="./pako.min.js"></script>
+
+    <script>
+        kendo.pdf.defineFont({
+            "Verdana"             : "./Verdana/Verdana.ttf",
+            "Verdana|Bold"        : "./Verdana/Verdana_Bold.ttf",
+            "Verdana|Bold|Italic" : "./Verdana/Verdana_Bold_Italic.ttf",
+            "Verdana|Italic"      : "./Verdana/Verdana_Italic.ttf"
+        });
+    </script>
+
+    <style>
+      body {
+        margin: 0; padding: 1em;
+        font-size: 12px;
+        font-family: Verdana;
+      }
+      .k-widget, button {
+        font-family: Verdana !important;
+      }
+    </style>
+  </head>
+  <body>
+    Kendo:
+    <button onclick="pdf('#test1')">PDF</button>
+    <button onclick="draw('#test1', 'svg')">SVG</button>
+    <button onclick="draw('#test1', 'canvas')">Canvas</button>
+    |
+    <button onclick="h2c('#test1')">html2canvas</button>
+
+    <div id="test1">
+      <ul>
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3
+          <ul>
+            <li>Item 3.1</li>
+            <li>Item 3.2
+              <ul>
+                <li>Item 3.2.1</li>
+                <li>Item 3.2.2</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <ul>
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li style="list-style-position: inside; color: red">Item 3
+          <ul>
+            <li>Item 3.1</li>
+            <li>Item 3.2
+              <ul>
+                <li>Item 3.2.1</li>
+                <li>Item 3.2.2</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <ol style="list-style-type: lower-roman">
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3
+          <ol style="list-style-type: upper-roman">
+            <li>Item 3.1</li>
+            <li>Item 3.2
+              <ol>
+                <li>Item 3.2.1</li>
+                <li>Item 3.2.2</li>
+              </ol>
+            </li>
+            <li>Moar items</li>
+            <li>Moar items</li>
+            <li>Moar items</li>
+            <li>Moar items</li>
+            <li>Moar items</li>
+            <li>Moar items</li>
+            <li>Moar items</li>
+            <li>Moar items</li>
+            <li>Moar items</li>
+            <li>Moar items</li>
+            <li>Moar items</li>
+            <li>Moar items</li>
+            <li>Moar items</li>
+            <li>Moar items</li>
+          </ol>
+          <ol style="list-style-type: upper-alpha">
+            <li>Item 3.1</li>
+            <li>Item 3.2
+              <ol>
+                <li>Item 3.2.1</li>
+                <li>Item 3.2.2</li>
+              </ol>
+            </li>
+            <li>Moar items</li>
+            <li>Moar items</li>
+            <li>Moar items</li>
+            <li>Moar items</li>
+            <li>Moar items</li>
+            <li>Moar items</li>
+            <li>Moar items</li>
+            <li>Moar items</li>
+            <li>Moar items</li>
+            <li>Moar items</li>
+            <li>Moar items</li>
+            <li>Moar items</li>
+            <li>Moar items</li>
+            <li>Moar items</li>
+          </ol>
+        </li>
+      </ol>
+
+      <ol style="list-style-type: decimal-leading-zero">
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li style="color: red">Item 3
+          <ol>
+            <li>Item 3.1</li>
+            <li>Item 3.2
+              <ol>
+                <li>Item 3.2.1</li>
+                <li>Item 3.2.2</li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+        <li>Moar items</li>
+      </ol>
+    </div>
+  </body>
+</html>
