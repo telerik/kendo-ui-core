@@ -1,11 +1,15 @@
-% if (type_script_type =~ /^[a-z].*/ )
+% if (type_script_type =~ /^[a-z].*/ || type_script_type == '' )
+% if (type_script_type != 'kendo')
     module <%= type_script_type %> {
+%end
 % methods.each do |method|
 % method.type_script_declarations.each do |declaration|
-        export function <%= declaration %>
+        function <%= declaration %>
 % end
 % end
+% if (type_script_type != 'kendo')
     }
+%end
 % else
     <%= type_script_kind %> <%= type_script_type %> <%= 'extends ' + type_script_base_class if type_script_base_class %> {
 % if widget?

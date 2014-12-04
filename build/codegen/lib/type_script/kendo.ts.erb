@@ -1,10 +1,6 @@
 // Type definitions for Kendo UI
 
 declare module kendo {
-    function bind(selector: string, viewModel: any, namespace?: any): void;
-    function bind(element: JQuery, viewModel: any, namespace?: any): void;
-    function bind(element: Element, viewModel: any, namespace?: any): void;
-    function culture(value: string): void;
     function culture(): {
         name: string;
         calendar: {
@@ -171,39 +167,24 @@ declare module kendo {
         };
     }};
 
-    function destroy(selector: string): void;
-    function destroy(element: Element): void;
-    function destroy(element: JQuery): void;
     function format(format: string, ...values: any[]): string;
 
     function fx(selector: string): effects.Element;
     function fx(element: Element): effects.Element;
     function fx(element: JQuery): effects.Element;
 
-    function htmlEncode(value: string): string;
     function init(selector: string, ...namespaces: any[]): void;
     function init(element: JQuery, ...namespaces: any[]): void;
     function init(element: Element, ...namespaces: any[]): void;
+
     function observable(data: any): kendo.data.ObservableObject;
     function observableHierarchy(array: any[]): kendo.data.ObservableArray;
-    function parseDate(value: any, format?: string, culture?: string): Date;
-    function parseFloat(value: any, culture?: string): number;
-    function parseInt(value: any, culture?: string): number;
+
     function render(template:(data: any) => string, data: any[]): string;
-    function resize(selector: string): void;
-    function resize(element: JQuery): void;
-    function resize(element: Element): void;
-    function stringify(value: Object): string;
     function template(template: string, options?: TemplateOptions): (data: any) => string;
-    function touchScroller(selector: string): void;
-    function touchScroller(element: Element): void;
-    function touchScroller(element: JQuery): void;
-    function toString(value: number, format: string): string;
-    function toString(value: Date, format: string): string;
-    function unbind(selector: string): void;
-    function unbind(element: JQuery): void;
-    function unbind(element: Element): void;
+
     function guid(): string;
+
     function widgetInstance(element: JQuery, suite: typeof kendo.ui): kendo.ui.Widget;
 % if suite =~ /all|mobile/
     function widgetInstance(element: JQuery, suite: typeof kendo.mobile.ui): kendo.ui.Widget;
