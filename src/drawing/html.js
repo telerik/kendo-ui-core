@@ -299,6 +299,45 @@
         });
     }
 
+    function romanNumeral(n) {
+        var literals = {
+            1    : "i",       10   : "x",       100  : "c",
+            2    : "ii",      20   : "xx",      200  : "cc",
+            3    : "iii",     30   : "xxx",     300  : "ccc",
+            4    : "iv",      40   : "xl",      400  : "cd",
+            5    : "v",       50   : "l",       500  : "d",
+            6    : "vi",      60   : "lx",      600  : "dc",
+            7    : "vii",     70   : "lxx",     700  : "dcc",
+            8    : "viii",    80   : "lxxx",    800  : "dccc",
+            9    : "ix",      90   : "xc",      900  : "cm",
+            1000 : "m"
+        };
+        var values = [ 1000,
+                       900 , 800, 700, 600, 500, 400, 300, 200, 100,
+                       90  , 80 , 70 , 60 , 50 , 40 , 30 , 20 , 10 ,
+                       9   , 8  , 7  , 6  , 5  , 4  , 3  , 2  , 1 ];
+        var roman = "";
+        while (n > 0) {
+            if (n < values[0]) {
+                values.shift();
+            } else {
+                roman += literals[values[0]];
+                n -= values[0];
+            }
+        }
+        return roman;
+    }
+
+    function alphaNumeral(n) {
+        var result = "";
+        do {
+            var r = n % 26;
+            result = String.fromCharCode(97 + r) + result;
+            n = Math.floor(n / 26);
+        } while (n > 0);
+        return result;
+    }
+
     function backgroundImageURL(backgroundImage) {
         var m = /^\s*url\((['"]?)(.*?)\1\)\s*$/i.exec(backgroundImage);
         if (m) {
@@ -665,6 +704,10 @@
             drawOneBox(boxes[i], i === 0, i == boxes.length - 1);
         }
 
+        if (boxes.length > 0 && getPropertyValue(style, "display") == "list-item") {
+            drawBullet(boxes[0]);
+        }
+
         // overflow: hidden/auto - if present, replace the group with
         // a new one clipped by the inner box.
         (function(){
@@ -967,6 +1010,105 @@
                         rect.origin.y += img_height;
                     }
                 }
+            }
+        }
+
+        function drawBullet(box) {
+            var listStyleType = getPropertyValue(style, "list-style-type");
+            if (listStyleType == "none") {
+                return;
+            }
+            var listStyleImage = getPropertyValue(style, "list-style-image");
+            var listStylePosition = getPropertyValue(style, "list-style-position");
+
+            function _drawBullet(f) {
+                saveStyle(element, function(){
+                    element.style.position = "relative";
+                    var bullet = document.createElement("kendo-bullet");
+                    bullet.style.position = "absolute";
+                    bullet.style.boxSizing = "border-box";
+                    if (listStylePosition == "outside") {
+                        bullet.style.width = "6em";
+                        bullet.style.left = "-6.8em";
+                        bullet.style.textAlign = "right";
+                    } else {
+                        bullet.style.left = "0px";
+                    }
+                    f(bullet);
+                    element.insertBefore(bullet, element.firstChild);
+                    renderElement(bullet, group);
+                    element.removeChild(bullet);
+                });
+            }
+
+            function elementIndex(f) {
+                var a = element.parentNode.children;
+                for (var i = 0; i < a.length; ++i) {
+                    if (a[i] === element) {
+                        return f(i, a.length);
+                    }
+                }
+            }
+
+            switch (listStyleType) {
+              case "circle":
+              case "disc":
+              case "square":
+                _drawBullet(function(bullet){
+                    // XXX: the science behind these values is called "trial and error".
+                    //      also, ZapfDingbats works well in PDF output, but not in SVG/Canvas.
+                    bullet.style.fontSize = "70%";
+                    bullet.style.lineHeight = "150%";
+                    bullet.style.paddingRight = "0.5em";
+                    bullet.style.fontFamily = "ZapfDingbats";
+                    bullet.innerHTML = {
+                        "disc"   : "l",
+                        "circle" : "m",
+                        "square" : "n"
+                    }[listStyleType];
+                });
+                break;
+
+              case "decimal":
+              case "decimal-leading-zero":
+                _drawBullet(function(bullet){
+                    elementIndex(function(idx, len){
+                        ++idx;
+                        if (listStyleType == "decimal-leading-zero" && (idx+"").length < 2) {
+                            idx = "0" + idx;
+                        }
+                        bullet.innerHTML = idx + ".";
+                    });
+                });
+                break;
+
+              case "lower-roman":
+              case "upper-roman":
+                _drawBullet(function(bullet){
+                    elementIndex(function(idx, len){
+                        idx = romanNumeral(idx + 1);
+                        if (listStyleType == "upper-roman") {
+                            idx = idx.toUpperCase();
+                        }
+                        bullet.innerHTML = idx + ".";
+                    });
+                });
+                break;
+
+              case "lower-latin":
+              case "lower-alpha":
+              case "upper-latin":
+              case "upper-alpha":
+                _drawBullet(function(bullet){
+                    elementIndex(function(idx, len){
+                        idx = alphaNumeral(idx);
+                        if (/^upper/i.test(listStyleType)) {
+                            idx = idx.toUpperCase();
+                        }
+                        bullet.innerHTML = idx + ".";
+                    });
+                });
+                break;
             }
         }
 
