@@ -43,7 +43,7 @@ var __meta__ = {
                 tap: function() { that.toggle(); }
             });
 
-            that.container.addClass(that.options.collapsed ? COLLAPSED : EXPANDED);
+            container.addClass(that.options.collapsed ? COLLAPSED : EXPANDED);
 
             if (that.options.animation) {
                 that.content.addClass("km-animated");
