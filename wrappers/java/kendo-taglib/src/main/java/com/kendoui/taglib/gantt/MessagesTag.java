@@ -57,8 +57,52 @@ public class MessagesTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         setProperty("actions", value);
     }
 
+    public void setEditor(com.kendoui.taglib.gantt.MessagesEditorTag value) {
+        setProperty("editor", value);
+    }
+
     public void setViews(com.kendoui.taglib.gantt.MessagesViewsTag value) {
         setProperty("views", value);
+    }
+
+    public java.lang.String getCancel() {
+        return (java.lang.String)getProperty("cancel");
+    }
+
+    public void setCancel(java.lang.String value) {
+        setProperty("cancel", value);
+    }
+
+    public java.lang.String getDeleteDependencyWindowTitle() {
+        return (java.lang.String)getProperty("deleteDependencyWindowTitle");
+    }
+
+    public void setDeleteDependencyWindowTitle(java.lang.String value) {
+        setProperty("deleteDependencyWindowTitle", value);
+    }
+
+    public java.lang.String getDeleteTaskWindowTitle() {
+        return (java.lang.String)getProperty("deleteTaskWindowTitle");
+    }
+
+    public void setDeleteTaskWindowTitle(java.lang.String value) {
+        setProperty("deleteTaskWindowTitle", value);
+    }
+
+    public java.lang.String getDestroy() {
+        return (java.lang.String)getProperty("destroy");
+    }
+
+    public void setDestroy(java.lang.String value) {
+        setProperty("destroy", value);
+    }
+
+    public java.lang.String getSave() {
+        return (java.lang.String)getProperty("save");
+    }
+
+    public void setSave(java.lang.String value) {
+        setProperty("save", value);
     }
 
 //<< Attributes

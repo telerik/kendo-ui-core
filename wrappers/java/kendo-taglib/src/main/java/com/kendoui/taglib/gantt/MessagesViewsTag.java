@@ -59,12 +59,28 @@ public class MessagesViewsTag extends  BaseTag  /* interfaces */ /* interfaces *
         setProperty("day", value);
     }
 
+    public java.lang.String getEnd() {
+        return (java.lang.String)getProperty("end");
+    }
+
+    public void setEnd(java.lang.String value) {
+        setProperty("end", value);
+    }
+
     public java.lang.String getMonth() {
         return (java.lang.String)getProperty("month");
     }
 
     public void setMonth(java.lang.String value) {
         setProperty("month", value);
+    }
+
+    public java.lang.String getStart() {
+        return (java.lang.String)getProperty("start");
+    }
+
+    public void setStart(java.lang.String value) {
+        setProperty("start", value);
     }
 
     public java.lang.String getWeek() {

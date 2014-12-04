@@ -16655,6 +16655,36 @@ which field to update. The other option is to use MVVM bindings in order to bind
         <tag-class>com.kendoui.taglib.gantt.MessagesTag</tag-class>
         <body-content>JSP</body-content>
 
+        <attribute>
+            <description>The text similar to "Cancel" displayed in Gantt.</description>
+            <name>cancel</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Delete dependency" displayed in Gantt dependency delete dialog.</description>
+            <name>deleteDependencyWindowTitle</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Delete task" displayed in Gantt task delete dialog.</description>
+            <name>deleteTaskWindowTitle</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Delete" displayed in Gantt.</description>
+            <name>destroy</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Save" displayed in Gantt.</description>
+            <name>save</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
 
     </tag>
 
@@ -16689,8 +16719,78 @@ which field to update. The other option is to use MVVM bindings in order to bind
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The text of "Export to PDF" button of the gantt toolbar.</description>
+            <description>The text of "Export to PDF" button of the Gantt toolbar.</description>
             <name>pdf</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The configuration of the Gantt editor messages. Use this option to customize or localize the Gantt editor messages.</description>
+        <name>gantt-messages-editor</name>
+        <tag-class>com.kendoui.taglib.gantt.MessagesEditorTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The text similar to "Assign" displayed in Gantt task editor.</description>
+            <name>assignButton</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Task" displayed in Gantt task editor.</description>
+            <name>editorTitle</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "End" displayed in Gantt task editor.</description>
+            <name>end</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Complete" displayed in Gantt task editor.</description>
+            <name>percentComplete</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Resources" displayed in Gantt task editor.</description>
+            <name>resources</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Resources" displayed in Gantt task editor.</description>
+            <name>resourcesEditorTitle</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Resources" displayed in Gantt task editor.</description>
+            <name>resourcesHeader</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Start" displayed in Gantt task editor.</description>
+            <name>start</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Title" displayed in Gantt task editor.</description>
+            <name>title</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Units" displayed in Gantt task editor.</description>
+            <name>unitsHeader</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -16711,8 +16811,20 @@ which field to update. The other option is to use MVVM bindings in order to bind
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>The text similar to "End" displayed in Gantt resize hint.</description>
+            <name>end</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>The text similar to "Month" displayed as Gantt "month" view title.</description>
             <name>month</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Start" displayed in Gantt resize hint.</description>
+            <name>start</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
