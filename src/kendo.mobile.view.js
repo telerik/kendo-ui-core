@@ -655,8 +655,14 @@ var __meta__ = {
             var success = true;
 
             if (typeof response === "object") {
-                success = response.status === 0 && response.responseText.length > 0;
-                response = response.responseText;
+                if (response.status === 0) {
+                    if (response.responseText && response.responseText.length > 0) {
+                        success = true;
+                        response = response.responseText;
+                    } else { // request has been aborted for real
+                        return;
+                    }
+                }
             }
 
             this.trigger(LOAD_COMPLETE);
