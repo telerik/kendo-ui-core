@@ -19,9 +19,13 @@ namespace Kendo.Mvc.UI
         
         public string Day { get; set; }
         
-        public string Week { get; set; }
+        public string End { get; set; }
         
         public string Month { get; set; }
+        
+        public string Start { get; set; }
+        
+        public string Week { get; set; }
         
         public string Year { get; set; }
         
@@ -36,14 +40,24 @@ namespace Kendo.Mvc.UI
                 json["day"] = Day;
             }
             
-            if (Week.HasValue())
+            if (End.HasValue())
             {
-                json["week"] = Week;
+                json["end"] = End;
             }
             
             if (Month.HasValue())
             {
                 json["month"] = Month;
+            }
+            
+            if (Start.HasValue())
+            {
+                json["start"] = Start;
+            }
+            
+            if (Week.HasValue())
+            {
+                json["week"] = Week;
             }
             
             if (Year.HasValue())

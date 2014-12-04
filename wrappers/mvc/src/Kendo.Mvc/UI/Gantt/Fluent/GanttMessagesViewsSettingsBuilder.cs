@@ -31,12 +31,12 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// The text similar to "Week" displayed as Gantt "week" view title.
+        /// The text similar to "End" displayed in Gantt resize hint.
         /// </summary>
-        /// <param name="value">The value that configures the week.</param>
-        public GanttMessagesViewsSettingsBuilder Week(string value)
+        /// <param name="value">The value that configures the end.</param>
+        public GanttMessagesViewsSettingsBuilder End(string value)
         {
-            container.Week = value;
+            container.End = value;
 
             return this;
         }
@@ -48,6 +48,28 @@ namespace Kendo.Mvc.UI.Fluent
         public GanttMessagesViewsSettingsBuilder Month(string value)
         {
             container.Month = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// The text similar to "Start" displayed in Gantt resize hint.
+        /// </summary>
+        /// <param name="value">The value that configures the start.</param>
+        public GanttMessagesViewsSettingsBuilder Start(string value)
+        {
+            container.Start = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// The text similar to "Week" displayed as Gantt "week" view title.
+        /// </summary>
+        /// <param name="value">The value that configures the week.</param>
+        public GanttMessagesViewsSettingsBuilder Week(string value)
+        {
+            container.Week = value;
 
             return this;
         }

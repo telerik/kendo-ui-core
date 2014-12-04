@@ -2385,4 +2385,8 @@
     <Compile Include="UI\TreeList\Settings\TreeListPdfMarginSettings.cs" />
     <Compile Include="UI\TreeList\Fluent\TreeListPdfMarginSettingsBuilder.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\Gantt\Settings\GanttMessagesEditorSettings.cs" />
+    <Compile Include="UI\Gantt\Fluent\GanttMessagesEditorSettingsBuilder.cs" />
+  </ItemGroup>
 </Project>

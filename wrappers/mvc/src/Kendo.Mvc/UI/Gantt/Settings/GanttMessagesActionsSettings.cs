@@ -17,13 +17,13 @@ namespace Kendo.Mvc.UI
 
         //>> Fields
         
-        public string Append { get; set; }
-        
         public string AddChild { get; set; }
         
-        public string InsertBefore { get; set; }
+        public string Append { get; set; }
         
         public string InsertAfter { get; set; }
+        
+        public string InsertBefore { get; set; }
         
         public string Pdf { get; set; }
         
@@ -33,24 +33,24 @@ namespace Kendo.Mvc.UI
         {
             //>> Serialization
         
-            if (Append.HasValue())
-            {
-                json["append"] = Append;
-            }
-            
             if (AddChild.HasValue())
             {
                 json["addChild"] = AddChild;
             }
             
-            if (InsertBefore.HasValue())
+            if (Append.HasValue())
             {
-                json["insertBefore"] = InsertBefore;
+                json["append"] = Append;
             }
             
             if (InsertAfter.HasValue())
             {
                 json["insertAfter"] = InsertAfter;
+            }
+            
+            if (InsertBefore.HasValue())
+            {
+                json["insertBefore"] = InsertBefore;
             }
             
             if (Pdf.HasValue())

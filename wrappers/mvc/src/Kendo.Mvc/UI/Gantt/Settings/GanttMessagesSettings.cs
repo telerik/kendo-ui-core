@@ -14,6 +14,8 @@ namespace Kendo.Mvc.UI
         
             Actions = new GanttMessagesActionsSettings();
                 
+            Editor = new GanttMessagesEditorSettings();
+                
             Views = new GanttMessagesViewsSettings();
                 
         //<< Initialization
@@ -21,13 +23,29 @@ namespace Kendo.Mvc.UI
 
         //>> Fields
         
-        public GanttMessagesViewsSettings Views
+        public GanttMessagesActionsSettings Actions
         {
             get;
             set;
         }
         
-        public GanttMessagesActionsSettings Actions
+        public string Cancel { get; set; }
+        
+        public string DeleteDependencyWindowTitle { get; set; }
+        
+        public string DeleteTaskWindowTitle { get; set; }
+        
+        public string Destroy { get; set; }
+        
+        public GanttMessagesEditorSettings Editor
+        {
+            get;
+            set;
+        }
+        
+        public string Save { get; set; }
+        
+        public GanttMessagesViewsSettings Views
         {
             get;
             set;
@@ -39,15 +57,45 @@ namespace Kendo.Mvc.UI
         {
             //>> Serialization
         
-            var views = Views.ToJson();
-            if (views.Any())
-            {
-                json["views"] = views;
-            }
             var actions = Actions.ToJson();
             if (actions.Any())
             {
                 json["actions"] = actions;
+            }
+            if (Cancel.HasValue())
+            {
+                json["cancel"] = Cancel;
+            }
+            
+            if (DeleteDependencyWindowTitle.HasValue())
+            {
+                json["deleteDependencyWindowTitle"] = DeleteDependencyWindowTitle;
+            }
+            
+            if (DeleteTaskWindowTitle.HasValue())
+            {
+                json["deleteTaskWindowTitle"] = DeleteTaskWindowTitle;
+            }
+            
+            if (Destroy.HasValue())
+            {
+                json["destroy"] = Destroy;
+            }
+            
+            var editor = Editor.ToJson();
+            if (editor.Any())
+            {
+                json["editor"] = editor;
+            }
+            if (Save.HasValue())
+            {
+                json["save"] = Save;
+            }
+            
+            var views = Views.ToJson();
+            if (views.Any())
+            {
+                json["views"] = views;
             }
         //<< Serialization
         }
