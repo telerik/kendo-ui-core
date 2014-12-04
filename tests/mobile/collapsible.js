@@ -60,7 +60,7 @@
     test("by default after the initialization content is hidden", function() {
         var panel = $("#collapsible").kendoMobileCollapsible().data("kendoMobileCollapsible");
 
-        ok(panel.content.is(":hidden"));
+        ok(panel.element.is(".km-collapsed"));
     });
 
     test("if 'collapsed: false' is set the content will not be initially hidden", function() {
@@ -108,10 +108,26 @@
         ok(panel.header.find(".km-icon").hasClass("km-foo"));
     });
 
+    test("animated collapsible content receives class", 1, function() {
+        var panel = $("#collapsible").kendoMobileCollapsible().data("kendoMobileCollapsible");
+
+        ok(panel.content.hasClass("km-animated"));
+    });
+
+    test("non animated collapsible content does not have a class", 1, function() {
+        var panel = $("#collapsible").kendoMobileCollapsible({
+            animation: false
+        }).data("kendoMobileCollapsible");
+
+        ok(!panel.content.hasClass("km-animated"));
+    });
+
     /* UI interactions */
 
     test("clicking the header expands the content when content is hidden", function() {
-        var panel = $("#collapsible").kendoMobileCollapsible().data("kendoMobileCollapsible");
+        var panel = $("#collapsible").kendoMobileCollapsible({
+            animation: false
+        }).data("kendoMobileCollapsible");
 
         click($("#collapsible h4"));
         ok(panel.content.is(":visible"));
@@ -119,6 +135,7 @@
 
     test("clicking the header collapses the content when content is visible", function() {
         var panel = $("#collapsible").kendoMobileCollapsible({
+            animation: false,
             collapsed: false
         }).data("kendoMobileCollapsible");
 
@@ -131,7 +148,7 @@
     test("expand method expands the content", function() {
         var panel = $("#collapsible").kendoMobileCollapsible().data("kendoMobileCollapsible");
 
-        panel.expand();
+        panel.expand(true);
         ok(panel.content.is(":visible"));
     });
 
@@ -140,7 +157,7 @@
             collapsed: false
         }).data("kendoMobileCollapsible");
 
-        panel.collapse();
+        panel.collapse(true);
         ok(panel.content.is(":hidden"));
     });
 
@@ -149,7 +166,7 @@
 
         ok(panel.isCollapsed());
 
-        panel.expand();
+        panel.expand(true);
         ok(!panel.isCollapsed());
     });
 

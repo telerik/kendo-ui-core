@@ -30,22 +30,29 @@ var __meta__ = {
     var Collapsible = Widget.extend({
         init: function(element, options) {
             var that = this,
-                element = $(element);
+                container = $(element);
 
-            Widget.fn.init.call(that, element, options);
+            Widget.fn.init.call(that, container, options);
 
-            element.addClass(COLLAPSIBLE);
+            container.addClass(COLLAPSIBLE);
 
             that._buildHeader();
-            that.content = element.children().not(that.header).wrapAll(CONTENT_WRAPPER).parent();
+            that.content = container.children().not(that.header).wrapAll(CONTENT_WRAPPER).parent();
 
             that._userEvents = new kendo.UserEvents(that.header, {
-                press: function() { that.toggle(); }
+                tap: function() { that.toggle(); }
             });
 
-            that.element.addClass(that.options.collapsed ? COLLAPSED : EXPANDED);
+            that.container.addClass(that.options.collapsed ? COLLAPSED : EXPANDED);
 
-            if (that.options.collapsed) {
+            if (that.options.animation) {
+                that.content.addClass("km-animated");
+                that.content.height(0);
+
+                that.content.bind('transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd', function() {
+                    //console.log("transtionend");
+                });
+            } else if (that.options.collapsed) {
                 that.content.hide();
             }
         },
@@ -59,7 +66,8 @@ var __meta__ = {
             name: "Collapsible",
             collapsed: true,
             collapseIcon: "minus",
-            expandIcon: "plus"
+            expandIcon: "plus",
+            animation: true
         },
 
         destroy: function() {
@@ -67,7 +75,7 @@ var __meta__ = {
             this._userEvents.destroy();
         },
 
-        expand: function() {
+        expand: function(instant) {
             var icon = this.options.collapseIcon;
 
             if (!this.trigger(EXAPND)) {
@@ -75,11 +83,17 @@ var __meta__ = {
                     this.header.find(".km-icon").removeClass().addClass("km-icon km-" + icon);
                 }
                 this.element.removeClass(COLLAPSED).addClass(EXPANDED);
-                this.content.show();
+
+                if (this.options.animation && !instant) {
+                    this.content.height(this._getContentHeight());
+                    kendo.resize(this.content);
+                } else {
+                    this.content.show();
+                }
             }
         },
 
-        collapse: function() {
+        collapse: function(instant) {
             var icon = this.options.expandIcon;
 
             if (!this.trigger(COLLAPSE)) {
@@ -87,7 +101,12 @@ var __meta__ = {
                     this.header.find(".km-icon").removeClass().addClass("km-icon km-" + icon);
                 }
                 this.element.removeClass(EXPANDED).addClass(COLLAPSED);
-                this.content.hide();
+
+                if (this.options.animation && !instant) {
+                    this.content.height(0);
+                } else {
+                    this.content.hide();
+                }
             }
         },
 
@@ -100,7 +119,7 @@ var __meta__ = {
         },
 
         isCollapsed: function() {
-            return this.content.is(":hidden");
+            return this.element.hasClass(COLLAPSED);
         },
 
         _buildHeader: function() {
@@ -114,6 +133,23 @@ var __meta__ = {
             }
 
             this.header = header.parent();
+        },
+
+        _getContentHeight: function() {
+            var style = this.content.attr("style"),
+                height;
+
+            this.content.css({
+                position:   'absolute',
+                visibility: 'hidden',
+                height: "auto"
+            });
+
+            height = this.content.height();
+
+            this.content.attr("style", style ? style : "");
+
+            return height;
         }
     });
 
