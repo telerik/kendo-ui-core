@@ -230,6 +230,8 @@
             return value;
         };
 
+        self.pages = [];
+
         self.FONTS = {};
         self.IMAGES = {};
         self.GRAD_COL_FUNCTIONS = {}; // cache for color gradient functions
@@ -237,54 +239,70 @@
         self.GRAD_COL = {};     // cache for whole color gradient objects
         self.GRAD_OPC = {};     // cache for whole opacity gradient objects
 
-        var paperSize = getOption("paperSize", PAPER_SIZE.a4);
-        if (typeof paperSize == "string") {
-            paperSize = PAPER_SIZE[paperSize.toLowerCase()];
-            if (paperSize == null) {
-                throw new Error("Unknown paper size");
+        function getPaperOptions(getOption) {
+            var paperSize = getOption("paperSize", PAPER_SIZE.a4);
+            if (!paperSize) {
+                return {};
             }
-        }
-
-        paperSize[0] = unitsToPoints(paperSize[0]);
-        paperSize[1] = unitsToPoints(paperSize[1]);
-
-        if (getOption("landscape", false)) {
-            paperSize = [
-                Math.max(paperSize[0], paperSize[1]),
-                Math.min(paperSize[0], paperSize[1])
-            ];
-        }
-
-        var margin = getOption("margin");
-        if (margin) {
-            margin.left = unitsToPoints(margin.left, 0);
-            margin.top = unitsToPoints(margin.top, 0);
-            margin.right = unitsToPoints(margin.right, 0);
-            margin.bottom = unitsToPoints(margin.bottom, 0);
-            if (getOption("addMargin")) {
-                paperSize[0] += margin.left + margin.right;
-                paperSize[1] += margin.top + margin.bottom;
+            if (typeof paperSize == "string") {
+                paperSize = PAPER_SIZE[paperSize.toLowerCase()];
+                if (paperSize == null) {
+                    throw new Error("Unknown paper size");
+                }
             }
-        }
 
-        var contentWidth = paperSize[0];
-        var contentHeight = paperSize[1];
+            paperSize[0] = unitsToPoints(paperSize[0]);
+            paperSize[1] = unitsToPoints(paperSize[1]);
 
-        if (margin) {
-            contentWidth -= margin.left + margin.right;
-            contentHeight -= margin.top + margin.bottom;
+            if (getOption("landscape", false)) {
+                paperSize = [
+                    Math.max(paperSize[0], paperSize[1]),
+                    Math.min(paperSize[0], paperSize[1])
+                ];
+            }
+
+            var margin = getOption("margin");
+            if (margin) {
+                if (typeof margin == "string") {
+                    margin = unitsToPoints(margin, 0);
+                    margin = { left: margin, top: margin, right: margin, bottom: margin };
+                } else {
+                    margin.left = unitsToPoints(margin.left, 0);
+                    margin.top = unitsToPoints(margin.top, 0);
+                    margin.right = unitsToPoints(margin.right, 0);
+                    margin.bottom = unitsToPoints(margin.bottom, 0);
+                }
+                if (getOption("addMargin")) {
+                    paperSize[0] += margin.left + margin.right;
+                    paperSize[1] += margin.top + margin.bottom;
+                }
+            }
+            return { paperSize: paperSize, margin: margin };
         }
 
         var catalog = self.attach(new PDFCatalog());
-        var pageTree = self.attach(new PDFPageTree([ 0, 0, paperSize[0], paperSize[1] ]));
+        var pageTree = self.attach(new PDFPageTree());
         catalog.setPages(pageTree);
 
-        self.addPage = function() {
-            var content = new PDFStream(makeOutput(), null, true);
-            var page = new PDFPage(self, {
-                Contents : self.attach(content),
-                Parent   : pageTree
+        self.addPage = function(options) {
+            var paperOptions  = getPaperOptions(function(name, defval){
+                return (options && options[name] != null) ? options[name] : defval;
             });
+            var paperSize     = paperOptions.paperSize;
+            var margin        = paperOptions.margin;
+            var contentWidth  = paperSize[0];
+            var contentHeight = paperSize[1];
+            if (margin) {
+                contentWidth -= margin.left + margin.right;
+                contentHeight -= margin.top + margin.bottom;
+            }
+            var content = new PDFStream(makeOutput(), null, true);
+            var props = {
+                Contents : self.attach(content),
+                Parent   : pageTree,
+                MediaBox : [ 0, 0, paperSize[0], paperSize[1] ]
+            };
+            var page = new PDFPage(self, props);
             page._content = content;
             pageTree.addPage(self.attach(page));
 
@@ -299,6 +317,7 @@
                 page.clip();
             }
 
+            self.pages.push(page);
             return page;
         };
 
@@ -816,13 +835,11 @@
 
     /// page tree
 
-    var PDFPageTree = defclass(function PDFPageTree(mediabox){
+    var PDFPageTree = defclass(function PDFPageTree(){
         this.props = {
             Type  : _("Pages"),
             Kids  : [],
-            Count : 0,
-
-            MediaBox : mediabox
+            Count : 0
         };
     }, {
         addPage: function(pageObj) {

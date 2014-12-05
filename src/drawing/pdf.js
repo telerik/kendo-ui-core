@@ -51,9 +51,17 @@
     function render(group, callback) {
         var fonts = [], images = [], options = group.options;
 
-        var tmp = optimize(group);
-        var bbox = tmp.bbox;
-        group = tmp.root;
+        function getOption(name, defval, hash) {
+            if (!hash) {
+                hash = options;
+            }
+            if (hash.pdf && hash.pdf[name] != null) {
+                return hash.pdf[name];
+            }
+            return defval;
+        }
+
+        var multiPage = getOption("multiPage");
 
         group.traverse(function(element){
             dispatch({
@@ -72,38 +80,12 @@
             }, element);
         });
 
-        function getOption(name, defval) {
-            if (options.pdf && options.pdf[name] != null) {
-                return options.pdf[name];
-            }
-            return defval;
-        }
-
         function doIt() {
             if (--count > 0) {
                 return;
             }
-            var paperSize = getOption("paperSize", "auto"), addMargin = false;
-            if (paperSize == "auto") {
-                if (bbox) {
-                    var size = bbox.getSize();
-                    paperSize = [ size.width, size.height ];
-                    addMargin = true;
-                    var origin = bbox.getOrigin();
-                    var tmp = new drawing.Group();
-                    tmp.transform(new geo.Matrix(1, 0, 0, 1, -origin.x, -origin.y));
-                    tmp.append(group);
 
-                    group = tmp;
-                } else {
-                    paperSize = "A4";
-                }
-            }
             var pdf = new (PDF().Document)({
-                paperSize : paperSize,
-                landscape : getOption("landscape", false),
-                margin    : getOption("margin"),
-                addMargin : addMargin,
                 title     : getOption("title"),
                 author    : getOption("author"),
                 subject   : getOption("subject"),
@@ -111,9 +93,48 @@
                 creator   : getOption("creator"),
                 date      : getOption("date")
             });
-            var page = pdf.addPage();
-            drawElement(group, page, pdf);
-            callback(pdf.render(), pdf, page);
+
+            function drawPage(group) {
+                var options = group.options;
+
+                var tmp = optimize(group);
+                var bbox = tmp.bbox;
+                group = tmp.root;
+
+                var paperSize = getOption("paperSize", "auto", options), addMargin = false;
+                if (paperSize == "auto") {
+                    if (bbox) {
+                        var size = bbox.getSize();
+                        paperSize = [ size.width, size.height ];
+                        addMargin = true;
+                        var origin = bbox.getOrigin();
+                        tmp = new drawing.Group();
+                        tmp.transform(new geo.Matrix(1, 0, 0, 1, -origin.x, -origin.y));
+                        tmp.append(group);
+                        group = tmp;
+                    }
+                    else {
+                        paperSize = "A4";
+                    }
+                }
+
+                var page;
+                page = pdf.addPage({
+                    paperSize : paperSize,
+                    margin    : getOption("margin", getOption("margin"), options),
+                    addMargin : addMargin,
+                    landscape : getOption("landscape", getOption("landscape", false), options)
+                });
+                drawElement(group, page, pdf);
+            }
+
+            if (multiPage) {
+                group.children.forEach(drawPage);
+            } else {
+                drawPage(group);
+            }
+
+            callback(pdf.render(), pdf);
         }
 
         var count = 2;
