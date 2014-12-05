@@ -3001,7 +3001,7 @@ var __meta__ = {
 
         error: function(xhr, status, errorThrown) {
             this._dequeueRequest();
-            this.trigger(REQUESTEND, { });
+            this.trigger(REQUESTEND, { xhr: xhr, status: status, errorThrown: errorThrown });
             this.trigger(ERROR, { xhr: xhr, status: status, errorThrown: errorThrown });
         },
 
