@@ -122,6 +122,12 @@ var __meta__ = {
             return this.element.hasClass(COLLAPSED);
         },
 
+        resize: function() {
+            if (!this.isCollapsed() && this.options.animation) {
+                this.content.height(this._getContentHeight());
+            }
+        },
+
         _buildHeader: function() {
             var header = this.element.children(":header").wrapAll(HEADER_WRAPPER),
                 iconSpan = $('<span class="km-icon"/>'),
