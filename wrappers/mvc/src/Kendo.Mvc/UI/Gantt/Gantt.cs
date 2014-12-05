@@ -39,6 +39,8 @@ namespace Kendo.Mvc.UI
         
             Assignments = new GanttAssignmentsSettings();
                 
+            CurrentTimeMarker = new GanttCurrentTimeMarkerSettings();
+                
             Editable = new GanttEditableSettings();
                 
             Messages = new GanttMessagesSettings();
@@ -82,6 +84,12 @@ namespace Kendo.Mvc.UI
         }
         
         public bool? AutoBind { get; set; }
+        
+        public GanttCurrentTimeMarkerSettings CurrentTimeMarker
+        {
+            get;
+            set;
+        }
         
         public GanttEditableSettings Editable
         {
@@ -167,6 +175,14 @@ namespace Kendo.Mvc.UI
                 json["autoBind"] = AutoBind;
             }
                 
+            var currentTimeMarker = CurrentTimeMarker.ToJson();
+            if (currentTimeMarker.Any())
+            {
+                json["currentTimeMarker"] = currentTimeMarker;
+            } else if (CurrentTimeMarker.Enabled != ) {
+                json["currentTimeMarker"] = CurrentTimeMarker.Enabled;
+            }
+
             var editable = Editable.ToJson();
             if (editable.Any())
             {

@@ -2389,4 +2389,8 @@
     <Compile Include="UI\Gantt\Settings\GanttMessagesEditorSettings.cs" />
     <Compile Include="UI\Gantt\Fluent\GanttMessagesEditorSettingsBuilder.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\Gantt\Settings\GanttCurrentTimeMarkerSettings.cs" />
+    <Compile Include="UI\Gantt\Fluent\GanttCurrentTimeMarkerSettingsBuilder.cs" />
+  </ItemGroup>
 </Project>

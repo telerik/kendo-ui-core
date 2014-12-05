@@ -120,6 +120,20 @@ namespace Kendo.Mvc.UI.Fluent
             return Editable(true);
         }
 
+        
+        /// <summary>
+        /// If set to false the "current time" marker of the Gantt would not be displayed.
+        /// </summary>
+        /// <param name="configurator">The action that configures the currenttimemarker.</param>
+        public GanttBuilder<TTaskModel,TDependenciesModel> CurrentTimeMarker(Action<GanttCurrentTimeMarkerSettingsBuilder> configurator)
+        {
+            container.CurrentTimeMarker.Enabled = true;
+            
+            configurator(new GanttCurrentTimeMarkerSettingsBuilder(container.CurrentTimeMarker));
+            return this;
+        }
+        
+
         /// <summary>
         /// If set to false the user won't be able to create, modify or delete tasks and dependencies.
         /// </summary>
