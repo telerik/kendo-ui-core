@@ -37,6 +37,15 @@ data source is fired. By default the widget will bind to the data source specifi
     }
 
     /**
+    * If set to false the "current time" marker of the Gantt would not be displayed.
+    * @param boolean|\Kendo\UI\GanttCurrentTimeMarker|array $value
+    * @return \Kendo\UI\Gantt
+    */
+    public function currentTimeMarker($value) {
+        return $this->setProperty('currentTimeMarker', $value);
+    }
+
+    /**
     * Sets the data source of the Gantt.
     * @param array|\Kendo\Data\DataSource $value
     * @return \Kendo\UI\Gantt
