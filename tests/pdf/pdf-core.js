@@ -19,10 +19,6 @@
 
     test("[PDF] options make it into the document", function(){
         var pdf = new PDF.Document({
-            paperSize: [ 100, 200 ],
-            landscape: true,
-            margin: { left: 50, top: 50, right: 50, bottom: 50 },
-            addMargin: true,
             title: "The Title",
             author: "The Author",
             subject: "The Subject",
@@ -30,7 +26,12 @@
             creator: "The Creator",
             date: new Date(1979, 02, 08, 12, 0, 0, 0)
         });
-        var page = pdf.addPage();
+        var page = pdf.addPage({
+            paperSize: [ 100, 200 ],
+            landscape: true,
+            margin: { left: 50, top: 50, right: 50, bottom: 50 },
+            addMargin: true,
+        });
         var data = pdf.render();
         var text = data.readString(data.length());
 
@@ -75,8 +76,8 @@
     });
 
     test("[PDF] basic drawing primitives", function(){
-        var pdf = new PDF.Document({ paperSize: [ 100, 100 ] });
-        var page = pdf.addPage();
+        var pdf = new PDF.Document();
+        var page = pdf.addPage({ paperSize: [ 100, 100 ] });
 
         page.scale(2, 3);
         page.rotate(Math.PI);
@@ -152,7 +153,8 @@
         func(function(shape){
             group.append(shape)
         });
-        kendo.drawing.pdf.toStream(group, function(data, pdf, page){
+        kendo.drawing.pdf.toStream(group, function(data, pdf){
+            var page = pdf.pages[0];
             checkDocumentStructure(data);
             asserts(getPageText(page), data, pdf);
         });
