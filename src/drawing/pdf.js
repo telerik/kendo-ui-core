@@ -514,7 +514,7 @@
         var defer = $.Deferred();
 
         group.options.set("pdf", options);
-        toDataURL(group, defer.resolve);
+        drawing.pdf.toDataURL(group, defer.resolve);
 
         return defer.promise();
     }
