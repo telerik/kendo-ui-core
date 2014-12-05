@@ -117,6 +117,14 @@ test("dropping anything that is not a file is ignored", function () {
     equal($(".k-file", uploadInstance.wrapper).length, 0);
 });
 
+test("only one file is selected when multiple files are dropped (multiple='false')", function() {
+    uploadInstance = createUpload({ multiple: false });
+
+    simulateDrop([ { name: "first.txt", size: 1 }, { name: "second.txt", size: 2 } ]);
+
+    equal($(".k-file", uploadInstance.wrapper).length, 1);
+});
+
 module("Upload / Drag and drop / Synchronous upload", {
     setup: function() {
         Upload.prototype._supportsFormData = function() { return true; };

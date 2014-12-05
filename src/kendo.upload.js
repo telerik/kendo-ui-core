@@ -238,8 +238,11 @@ var __meta__ = {
             stopEvent(e);
 
             if (droppedFiles.length > 0) {
-                var prevented = that.trigger(SELECT, { files: files });
+                if (!that.multiple && files.length > 0) {
+                    files.splice(1, files.length - 1);
+                }
 
+                var prevented = that.trigger(SELECT, { files: files });
                 if (!prevented) {
                     that._module.onSelect({target : $(".k-dropzone", that.wrapper) }, files);
                 }
