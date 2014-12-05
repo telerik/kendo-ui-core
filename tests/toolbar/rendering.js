@@ -1190,4 +1190,17 @@
         ok($("#template").parent().data("uid"));
     });
 
+    /* TEMPLATES */
+
+    test("attributes are applied to the wrapper element", 2, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { template: '<span id="template"></span>', attributes: { "class": "foo", "data-test": "test" } }
+            ]
+        }).data("kendoToolBar");
+
+        ok($("#template").parent().hasClass("foo"));
+        equal($("#template").parent().data("test"), "test");
+    });
+
 })();
