@@ -238,7 +238,7 @@ var __meta__ = {
             stopEvent(e);
 
             if (droppedFiles.length > 0) {
-                if (!that.multiple && files.length > 0) {
+                if (!that.multiple && files.length > 1) {
                     files.splice(1, files.length - 1);
                 }
 
