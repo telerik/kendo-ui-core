@@ -569,6 +569,9 @@ var __meta__ = {
                         }
 
                         element = element.wrap("<div></div>").parent();
+                        if (options.attributes) {
+                            element.attr(options.attributes);
+                        }
                         element.attr(KENDO_UID_ATTR, options.uid);
                     } else if (component) { //build-in command
                         element = (component.toolbar || $.noop)(options);
