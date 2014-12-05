@@ -57,6 +57,10 @@ public class GanttTag extends WidgetTag /* interfaces */implements DataBoundWidg
 
     }
 
+    public void setCurrentTimeMarker(com.kendoui.taglib.gantt.CurrentTimeMarkerTag value) {
+        setProperty("currentTimeMarker", value);
+    }
+
     public void setEditable(com.kendoui.taglib.gantt.EditableTag value) {
         setProperty("editable", value);
     }
@@ -155,6 +159,14 @@ public class GanttTag extends WidgetTag /* interfaces */implements DataBoundWidg
 
     public void setAutoBind(boolean value) {
         setProperty("autoBind", value);
+    }
+
+    public boolean getCurrentTimeMarker() {
+        return (boolean)getProperty("currentTimeMarker");
+    }
+
+    public void setCurrentTimeMarker(boolean value) {
+        setProperty("currentTimeMarker", value);
     }
 
     public void setDataSource(DataSourceTag dataSource) {

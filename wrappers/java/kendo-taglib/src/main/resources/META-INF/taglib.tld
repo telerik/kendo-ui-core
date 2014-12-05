@@ -16344,6 +16344,12 @@ data source is fired. By default the widget will bind to the data source specifi
             <type>boolean</type>
         </attribute>
         <attribute>
+            <description>If set to false the "current time" marker of the Gantt would not be displayed.</description>
+            <name>currentTimeMarker</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
             <description>The data source of the widget which contains the tasks. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing kendo.data.GanttDataSource
 instance.If the dataSource option is set to a JavaScript object or array the widget will initialize a new kendo.data.GanttDataSource instance using that value as data source configuration.If the dataSource option is an existing kendo.data.GanttDataSource instance the widget will use that instance and will not initialize a new one.</description>
             <name>dataSource</name>
@@ -16614,6 +16620,23 @@ custom number format, standard date format or a custom date format.</description
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
         </attribute>
+    </tag>
+
+
+
+    <tag>
+        <description>If set to false the "current time" marker of the Gantt would not be displayed.</description>
+        <name>gantt-currentTimeMarker</name>
+        <tag-class>com.kendoui.taglib.gantt.CurrentTimeMarkerTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The update interval of the "current time" marker, in milliseconds.</description>
+            <name>updateInterval</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
     </tag>
 
 
