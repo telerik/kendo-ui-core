@@ -151,6 +151,62 @@
         equal(timeline.view().options.dayHeaderTemplate, "customTemplate");
     });
 
+    test("current time marker is not rendered when the option is set to false", function() {
+        timeline = new Timeline(element, {
+            currentTimeMarker: false
+        });
+
+        timeline.view("week");
+        timeline._render([]);
+
+        equal(timeline.view().element.find(".k-current-time").length, 0);
+    });
+    
+    test("current time marker is not rendered when the option is not an object", function() {
+        timeline = new Timeline(element, {
+            currentTimeMarker: true
+        });
+
+        timeline.view("week");
+        timeline._render([]);
+
+        equal(timeline.view().element.find(".k-current-time").length, 0);
+    });
+
+    test("current time marker is rendered when current date is in visible range", function() {
+        timeline = new Timeline(element);
+        var task = new kendo.data.GanttTask({
+            id: 1,
+            title: "Task",
+            start: new Date(),
+            end: new Date()
+        });
+
+        timeline.view("week");
+        timeline._render([task]);
+
+        equal(timeline.view().element.find(".k-current-time").length, 1);
+    });
+
+    test("current time marker is not rendered when current date is not in visible range", function() {
+        timeline = new Timeline(element);
+        var task = new kendo.data.GanttTask({
+            id: 1,
+            title: "Task",
+            start: new Date("2000/04/15 09:00"),
+            end: new Date("2000/04/15 11:00")
+        });
+
+        timeline.view("week");
+        timeline.view()._getCurrentDate = function() {
+            return new Date("2014/12/05 15:00");
+        };
+
+        timeline._render([task]);
+
+        equal(timeline.view().element.find(".k-current-time").length, 0);
+    });
+
     test("editable false does not initialize task draggable", function() {
         timeline = new Timeline(element, { editable: false });
 
@@ -663,6 +719,62 @@
         ok(view.header.find("tr:first th").eq(2).hasClass("k-nonwork-hour"));
     });
 
+    test("current time marker is not rendered when current date is in weekend and showWorkDays is true", function() {
+        timeline = new Timeline(element, {
+            workWeekStart: 1,
+            workWeekEnd: 5,
+            showWorkDays: true
+        });
+        var task1 = new kendo.data.GanttTask({
+            id: 1,
+            title: "Task1",
+            start: new Date("2014/12/05 09:00"),
+            end: new Date("2014/12/05 11:00")
+        });
+        var task2 = new kendo.data.GanttTask({
+            id: 2,
+            title: "Task2",
+            start: new Date("2014/12/10 09:00"),
+            end: new Date("2014/12/10 11:00")
+        });
+
+        timeline.view("day");
+        timeline.view()._getCurrentTime = function() {
+            return new Date("2014/12/06 11:00");
+        };
+
+        timeline._render([task1, task2]);
+
+        equal(timeline.view().element.find(".k-current-time").length, 0);
+
+        timeline.destroy();
+    });
+
+    test("current time marker is not rendered when current date is in non-working hours and showWorkHours is true", function() {
+        timeline = new Timeline(element, {
+            workDayStart: new Date(1980, 1, 1, 8, 0, 0),
+            workDayEnd: new Date(1980, 1, 1, 18, 0, 0),
+            showWorkHours: true
+        });
+        var task = new kendo.data.GanttTask({
+            id: 1,
+            title: "Task",
+            start: new Date("2014/12/05 09:00"),
+            end: new Date("2014/12/05 11:00")
+        });
+
+        timeline.view("day");
+        timeline.view()._getCurrentTime = function() {
+            return new Date("2014/12/05 02:00");
+        };
+
+        timeline._render([task]);
+
+        equal(timeline.view().element.find(".k-current-time").length, 0);
+
+        timeline.destroy();
+    });
+
 
     module("Week View", {
         setup: function() {
@@ -959,6 +1071,37 @@
         view.renderLayout();
 
         equal(view.header.find("tr:first th")[0].colSpan, 5);
+    });
+
+    test("current time marker is not rendered when current date is in weekend and showWorkDays is true", function() {
+        timeline = new Timeline(element, {
+            workWeekStart: 1,
+            workWeekEnd: 5,
+            showWorkDays: true
+        });
+        var task1 = new kendo.data.GanttTask({
+            id: 1,
+            title: "Task1",
+            start: new Date("2014/12/05 09:00"),
+            end: new Date("2014/12/05 11:00")
+        });
+        var task2 = new kendo.data.GanttTask({
+            id: 2,
+            title: "Task2",
+            start: new Date("2014/12/10 09:00"),
+            end: new Date("2014/12/10 11:00")
+        });
+
+        timeline.view("week");
+        timeline.view()._getCurrentTime = function() {
+            return new Date("2014/12/06 11:00");
+        };
+
+        timeline._render([task1, task2]);
+
+        equal(timeline.view().element.find(".k-current-time").length, 0);
+
+        timeline.destroy();
     });
 
 

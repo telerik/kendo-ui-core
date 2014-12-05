@@ -18,6 +18,7 @@ var __meta__ = {
     var kendoTextElement = kendo.dom.text;
     var isPlainObject = $.isPlainObject;
     var extend = $.extend;
+    var proxy = $.proxy;
     var browser = kendo.support.browser;
     var keys = kendo.keys;
     var Query = kendo.data.Query;
@@ -165,6 +166,8 @@ var __meta__ = {
             this._dependencyTree = options.dependencyTree;
 
             this._taskCoordinates = {};
+
+            this._currentTime();
         },
 
         destroy: function() {
@@ -192,7 +195,10 @@ var __meta__ = {
             workWeekStart: 1,
             workWeekEnd: 5,
             hourSpan: 1,
-            slotSize: 100
+            slotSize: 100,
+            currentTimeMarker: {
+                 updateInterval: 10000
+            }
         },
 
         renderLayout: function() {
@@ -246,6 +252,7 @@ var __meta__ = {
             var rowsTable = this._rowsTable(taskCount);
             var columnsTable = this._columnsTable(taskCount);
             var tasksTable = this._tasksTable(tasks);
+            var currentTimeMarker = this.options.currentTimeMarker;
 
             this._taskTree.render([rowsTable, columnsTable, tasksTable]);
 
@@ -255,6 +262,10 @@ var __meta__ = {
             this._rowHeight = contentTable.find("tr").height();
 
             this.content.find(DOT + styles.columnsTable).height(this._contentHeight);
+
+            if (currentTimeMarker !== false && currentTimeMarker.updateInterval !== undefined) {
+                this._renderCurrentTime();
+            }
         },
 
         _rowsTable: function(rowCount) {
@@ -569,7 +580,13 @@ var __meta__ = {
             var startOffset;
             var slotDuration;
             var slotOffset;
-            var startIndex = this._slotIndex("start", date);
+            var startIndex;
+
+            if (!slots.length) {
+                return 0;
+            }
+
+            startIndex = this._slotIndex("start", date);
 
             slot = slots[startIndex];
 
@@ -1094,6 +1111,10 @@ var __meta__ = {
         },
 
         _timeSlots: function() {
+            if (!this._slots || !this._slots.length) {
+                return [];
+            }
+
             return this._slots[this._slots.length - 1];
         },
 
@@ -1310,6 +1331,48 @@ var __meta__ = {
 
         calendarInfo: function() {
             return kendo.getCulture().calendars.standard;
+        },
+
+        _renderCurrentTime: function() {
+            var currentTime = this._getCurrentTime();
+            var timeOffset = this._offset(currentTime);
+            var element = $("<div class='k-current-time'></div>");
+            var slot;
+
+            if (!this.content || !this._timeSlots().length) {
+                return;
+            }
+
+            this.content.find(".k-current-time").remove();
+
+            slot = this._timeSlots()[this._slotIndex("start", currentTime)];
+
+            if (currentTime < slot.start || currentTime > slot.end) {
+                return;
+            }
+
+            element.css({
+                left: timeOffset + "px",
+                top: "0px",
+                width: "1px",
+                height: this._contentHeight + "px"
+            });
+
+            this.content.append(element);
+        },
+
+        _getCurrentTime: function() {
+            // Introduced for testing purposes
+            return new Date();
+        },
+
+        _currentTime: function() {
+            var markerOptions = this.options.currentTimeMarker;
+
+            if (markerOptions !== false && markerOptions.updateInterval !== undefined) {
+                this._renderCurrentTime();
+                this._currentTimeUpdateTimer = setInterval(proxy(this._renderCurrentTime, this), markerOptions.updateInterval);
+            }
         }
     });
 
@@ -1552,6 +1615,10 @@ var __meta__ = {
 
         destroy: function() {
             Widget.fn.destroy.call(this);
+
+            if (this._currentTimeUpdateTimer) {
+                clearInterval(this._currentTimeUpdateTimer);
+            }
 
             this._unbindView(this._selectedView);
 
