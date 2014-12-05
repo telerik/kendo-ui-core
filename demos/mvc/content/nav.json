@@ -6121,6 +6121,19 @@
         "meta": {
             "kendo-ui": "This demo shows how to export HTML elements and Drawing surfaces to PDF, PNG Images or SVG and save them directly in the browser."
         }
+      }, {
+        "text": "PDF Export Customizations",
+        "url": "drawing/custom-pdf-export",
+        "new": true,
+        "packages": [
+          "!mvc"
+        ],
+        "title": {
+            "kendo-ui": "Kendo UI PDF Export customizations"
+        },
+        "meta": {
+            "kendo-ui": "This demo shows how to customize layout and style of PDF exports."
+        }
       }
     ]
   },
