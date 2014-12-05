@@ -438,7 +438,12 @@
             cont(img);
         } else {
             img = new Image();
-            img.onload = function() {
+            if (!(/^data:/i.test(url))) {
+                img.crossOrigin = "Anonymous";
+            }
+            img.src = url;
+
+            var onload = function() {
                 var canvas = document.createElement("canvas");
                 canvas.width = img.width;
                 canvas.height = img.height;
@@ -491,18 +496,13 @@
                 cont(IMAGE_CACHE[url] = img);
             };
 
-            img.onerror = function() {
-                cont(IMAGE_CACHE[url] = "TAINTED");
-            };
-
-            img.crossOrigin = "Anonymous";
-            img.src = url;
-
-            // hack from https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image
-            // make sure the load event fires for cached images too
-            if (img.complete || img.complete === undefined) {
-                img.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
-                img.src = url;
+            if (img.complete) {
+                onload();
+            } else {
+                img.onload = onload;
+                img.onerror = function(ev) {
+                    cont(IMAGE_CACHE[url] = "TAINTED");
+                };
             }
         }
     }
