@@ -337,8 +337,13 @@ var __meta__ = {
                 messageText = that._extractMessage(input, result.key);
                 that._errors[fieldName] = messageText;
                 var messageLabel = parseHtml(template({ message: decode(messageText) }));
+                var lblId = lbl.attr('id');
 
                 that._decorateMessageContainer(messageLabel, fieldName);
+
+                if (lblId) {
+                    messageLabel.attr('id', lblId);
+                }
 
                 if (!lbl.replaceWith(messageLabel).length) {
                     messageLabel.insertAfter(input);
