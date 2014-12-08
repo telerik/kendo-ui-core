@@ -661,6 +661,10 @@ var __meta__ = {
                 parent = $(PanelBar.renderGroup({ group: groupData })).appendTo(referenceItem);
             }
 
+            if (item instanceof kendo.Observable) {
+                item = item.toJSON();
+            };
+
             if (plain || $.isArray(item)) { // is JSON
                 items = $.map(plain ? [ item ] : item, function (value, idx) {
                             if (typeof value === "string") {
