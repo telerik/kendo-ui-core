@@ -22,6 +22,7 @@ var __meta__ = {
 
         COLLAPSED = "km-collapsed",
         EXPANDED = "km-expanded",
+        ANIMATED = "km-animated",
 
         //events
         EXAPND = "expand",
@@ -46,12 +47,8 @@ var __meta__ = {
             container.addClass(that.options.collapsed ? COLLAPSED : EXPANDED);
 
             if (that.options.animation) {
-                that.content.addClass("km-animated");
+                that.content.addClass(ANIMATED);
                 that.content.height(0);
-
-                that.content.bind('transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd', function() {
-                    //console.log("transtionend");
-                });
             } else if (that.options.collapsed) {
                 that.content.hide();
             }
@@ -86,12 +83,9 @@ var __meta__ = {
                 this.element.removeClass(COLLAPSED).addClass(EXPANDED);
 
                 if (this.options.animation && !instant) {
-
-                    if (ios) { this.content.removeClass("km-animated"); } //required to get the height of the content on iOS
-
+                    if (ios) { this.content.removeClass(ANIMATED); } //required to get the height of the content on iOS
                     this.content.height(this._getContentHeight());
-
-                    if (ios) { this.content.addClass("km-animated"); }
+                    if (ios) { this.content.addClass(ANIMATED); }
 
                     kendo.resize(this.content);
                 } else {
@@ -117,11 +111,11 @@ var __meta__ = {
             }
         },
 
-        toggle: function() {
+        toggle: function(instant) {
             if (this.isCollapsed()) {
-                this.expand();
+                this.expand(instant);
             } else {
-                this.collapse();
+                this.collapse(instant);
             }
         },
 
