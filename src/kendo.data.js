@@ -2374,9 +2374,12 @@ var __meta__ = {
         },
 
         _observeView: function(data) {
-            replaceWithObservable(data, this._data, this._ranges, this.reader.model || ObservableObject);
+            var that = this;
+            replaceWithObservable(data, that._data, that._ranges, that.reader.model || ObservableObject);
 
-            return new LazyObservableArray(data, this.reader.model);
+            var view = new LazyObservableArray(data, that.reader.model);
+            view.parent = function() { return that.parent(); };
+            return view;
         },
 
         flatView: function() {
