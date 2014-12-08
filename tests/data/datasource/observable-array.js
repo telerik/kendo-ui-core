@@ -93,4 +93,45 @@ test("data parent field is assign if array is assign", function() {
     equal(viewModel.dataSource.data().parent(), viewModel);
 });
 
+test("parents chain is correct when grouping", function() {
+    var dataSource = new kendo.data.DataSource({
+        data: [{ foo: 1 }],
+        group: [ { field: "foo" }]
+    });
+
+    var viewModel = kendo.observable({
+        dataSource: dataSource
+    });
+
+    dataSource.read();
+
+    var flatViewItem = dataSource.flatView()[0];
+
+    var groupItem = dataSource.view()[0];
+
+    equal(flatViewItem.parent().parent().parent().parent(), viewModel);
+    equal(groupItem.parent().parent(), viewModel);
+});
+
+test("parents chain is correct when grouping on multiple fields", function() {
+    var dataSource = new kendo.data.DataSource({
+        data: [{ foo: 1, bar: 2 }],
+        group: [ { field: "foo" },{ field: "bar" }]
+    });
+
+    var viewModel = kendo.observable({
+        dataSource: dataSource
+    });
+
+    dataSource.read();
+
+    var flatViewItem = dataSource.flatView()[0];
+
+    var groupItem = dataSource.view()[0];
+    var nestedGroupItem = groupItem.items[0];
+
+    equal(flatViewItem.parent().parent().parent().parent().parent().parent(), viewModel);
+    equal(groupItem.parent().parent(), viewModel);
+    equal(nestedGroupItem.parent().parent().parent().parent(), viewModel);
+});
 }());
