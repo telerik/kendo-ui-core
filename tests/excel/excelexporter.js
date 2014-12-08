@@ -427,6 +427,21 @@ test("creates row at the end when footerTemplate is set", function() {
     });
 });
 
+test("passes all aggregates to footerTemplate", function() {
+    dataSource = new DataSource({
+       data: [
+           { foo: "foo", bar: "bar" }
+       ],
+       aggregate: [
+           { field: "foo", aggregate: "count" }
+       ]
+    });
+
+    testWorkbook({ columns: [ { field: "foo", footerTemplate: "Foo: #= data.foo.count #" }, { field: "bar" } ], dataSource: dataSource }, function(book) {
+        equal(book.sheets[0].rows[2].cells[0].value, "Foo: 1");
+    });
+});
+
 test("sets row type to 'footer' when footerTemplate is set", function() {
     dataSource = new DataSource({
        data: [

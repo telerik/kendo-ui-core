@@ -321,10 +321,14 @@ kendo.ExcelExporter = kendo.Class.extend({
             var cells = $.map(this.columns, $.proxy(function(column) {
                 if (column.footerTemplate) {
                     footer = true;
+                    var aggregates = this.dataSource.aggregates();
+                    var ctx = aggregates[column.field] || {};
+                    ctx.data = aggregates;
+
                     return {
                         background: "#dfdfdf",
                         color: "#333",
-                        value: column.footerTemplate(this.dataSource.aggregates()[column.field])
+                        value: column.footerTemplate(ctx)
                     };
                 } else {
                     return {
