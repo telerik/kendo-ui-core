@@ -160,6 +160,9 @@ var __meta__ = {
                 }
             } else {
                 element = content;
+                if (that._evalTemplate) {
+                    element.html(kendo.template(element.html())(that.model || {}));
+                }
                 if (that._wrap) {
                     element = element.wrapAll(wrapper).parent();
                 }
