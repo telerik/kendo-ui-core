@@ -309,20 +309,51 @@ var Worksheet = kendo.Class.extend({
     toXML: function() {
         var rows = this.options.rows || [];
         var filter = this.options.filter;
+        var spans = {};
+
+        this._maxCellIndex = 0;
 
         return WORKSHEET({
             freezePane: this.options.freezePane,
             columns: this.options.columns,
-            data: $.map(rows, $.proxy(this._row, this, rows)),
+            data: $.map(rows, $.proxy(this._row, this, rows, spans)),
             mergeCells: this._mergeCells,
             filter: filter ? { from: ref(0, filter.from), to: ref(0, filter.to) } : null
         });
     },
-    _row: function(rows, row, rowIndex) {
+    _row: function(rows, spans, row, rowIndex) {
+        if (this._cellIndex && this._cellIndex > this._maxCellIndex) {
+            this._maxCellIndex = this._cellIndex;
+        }
+
         this._cellIndex = 0;
 
+        var cell;
+        var data = [];
+        var cells = row.cells;
+
+        for (var idx = 0, length = cells.length; idx < length; idx ++) {
+            cell = this._cell(cells[idx], spans, rowIndex);
+
+            if (cell) {
+                data = data.concat(cell);
+            }
+        }
+
+        var columnInfo;
+
+        while (this._cellIndex < this._maxCellIndex) {
+            columnInfo = spans[this._cellIndex];
+            if (columnInfo) {
+                columnInfo.rowSpan -= 1;
+            }
+
+            data.push({ ref: ref(rowIndex, this._cellIndex) });
+            this._cellIndex++;
+        }
+
         return {
-            data: $.map(row.cells, $.proxy(this._cell, this, rows, rowIndex))
+            data: data
         };
     },
     _lookupString: function(value) {
@@ -356,7 +387,7 @@ var Worksheet = kendo.Class.extend({
         // There is one default style
         return index + 1;
     },
-    _cell: function(rows, rowIndex, data) {
+    _cell: function(data, spans, rowIndex) {
         if (!data) {
             this._cellIndex++;
             return;
@@ -408,39 +439,56 @@ var Worksheet = kendo.Class.extend({
 
         style = this._lookupStyle(style);
 
-        var cell = {
+        var cells = [];
+        var colSpanLength, cellRef;
+
+        var columnInfo = spans[this._cellIndex] || {};
+
+        while (columnInfo.rowSpan > 1) {
+            columnInfo.rowSpan -= 1;
+
+            colSpanLength = columnInfo.colSpan;
+
+            while(colSpanLength > 0) {
+                cells.push({ ref: ref(rowIndex, this._cellIndex) });
+                colSpanLength--;
+
+                this._cellIndex++;
+            }
+
+            columnInfo = spans[this._cellIndex] || {};
+        }
+
+        cellRef = ref(rowIndex, this._cellIndex);
+        cells.push({
             value: value,
             type: type,
             style: style,
-            ref: ref(rowIndex, this._cellIndex)
-        };
+            ref: cellRef
+        });
 
         var colSpan = data.colSpan || 1;
         var rowSpan = data.rowSpan || 1;
 
         if (colSpan > 1 || rowSpan > 1) {
-            var cells = [cell];
+            if (rowSpan > 1) {
+                spans[this._cellIndex] = {
+                    colSpan: colSpan,
+                    rowSpan: rowSpan
+                };
+            }
 
             for (var ci = 1; ci < colSpan; ci++) {
                 this._cellIndex++;
-
-                cells[ci] = { ref: ref(rowIndex, this._cellIndex) };
+                cells.push({ ref: ref(rowIndex, this._cellIndex) });
             }
 
-            for (var ri = 1; ri < rowSpan; ri++) {
-                if (rows[rowIndex + ri]) {
-                    rows[rowIndex + ri].cells.splice(this._cellIndex, 0, {});
-                }
-            }
-
-            this._mergeCells.push(cell.ref + ":" + ref(rowIndex + rowSpan - 1, this._cellIndex));
-
-            cell = cells;
+            this._mergeCells.push(cellRef + ":" + ref(rowIndex + rowSpan - 1, this._cellIndex));
         }
 
         this._cellIndex ++;
 
-        return cell;
+        return cells;
     }
 });
 

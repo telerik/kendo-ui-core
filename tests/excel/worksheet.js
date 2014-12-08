@@ -566,4 +566,341 @@ test("toXML creates 'autoFilter' element when the filter option is set", functio
     equal(dom.find("autoFilter").attr("ref"), "B1:C1");
 });
 
+test("toXML offsets cells if first has merged rows", function() {
+    var worksheet = Worksheet({
+        rows: [ {
+            cells: [
+                {"value":"","colSpan":2,"rowSpan":2},
+                {"value":"dim 0","colSpan":1,"rowSpan":1}
+            ]
+        }, {
+            cells: [
+                {"value":"dim 0_1","colSpan":1,"rowSpan":1}
+            ]
+        } ]
+    });
+
+    var dom = $(worksheet.toXML());
+    var cell1 = dom.find("row:eq(1) > c:eq(0)");
+    var cell2 = dom.find("row:eq(1) > c:eq(1)");
+    var cell3 = dom.find("row:eq(1) > c:eq(2)");
+
+    equal(cell1.attr("r"), "A2");
+    equal(cell1.find("v").length, 0);
+
+    equal(cell2.attr("r"), "B2");
+    equal(cell2.find("v").length, 0);
+
+    equal(cell3.attr("r"), "C2");
+    equal(cell3.find("v").text(), "2");
+});
+
+test("toXML offsets cells if second cell is merged in 3 rows", function() {
+    var worksheet = Worksheet({
+        rows: [ {
+            cells: [
+                { "value":"cell 0", "colSpan":1, "rowSpan":1 },
+                { "value":"cell 1", "colSpan":1, "rowSpan":3 },
+                { "value":"cell 2", "colSpan":1, "rowSpan":1 }
+            ]
+        }, {
+            cells: [
+                { "value":"cell 0_1", "colSpan":1, "rowSpan":1 },
+                { "value":"cell 2_1", "colSpan":1, "rowSpan":1 }
+            ]
+        }, {
+            cells: [
+                { "value":"cell 0_2", "colSpan":1, "rowSpan":1 },
+                { "value":"cell 2_2", "colSpan":1, "rowSpan":1 }
+            ]
+        } ]
+    });
+
+    var dom = $(worksheet.toXML());
+    var cell0_1 = dom.find("row:eq(1) > c:eq(0)");
+    var cell1_1 = dom.find("row:eq(1) > c:eq(1)");
+    var cell2_1 = dom.find("row:eq(1) > c:eq(2)");
+
+    equal(cell0_1.attr("r"), "A2");
+    equal(cell1_1.attr("r"), "B2");
+    equal(cell1_1.find("v").length, 0);
+    equal(cell2_1.attr("r"), "C2");
+
+    var cell0_2 = dom.find("row:eq(2) > c:eq(0)");
+    var cell1_2 = dom.find("row:eq(2) > c:eq(1)");
+    var cell2_2 = dom.find("row:eq(2) > c:eq(2)");
+
+    equal(cell0_2.attr("r"), "A3");
+    equal(cell1_2.attr("r"), "B3");
+    equal(cell1_2.find("v").length, 0);
+    equal(cell2_2.attr("r"), "C3");
+
+    var mergeCell = dom.find("mergeCell");
+
+    equal(mergeCell.eq(0).attr("ref"), "B1:B3");
+});
+
+test("toXML renders third level cells after second cell is merged in 2 rows", function() {
+    var worksheet = Worksheet({
+        rows: [ {
+            cells: [
+                { "value":"cell 0", "colSpan":1, "rowSpan":1 },
+                { "value":"cell 1", "colSpan":1, "rowSpan":2 },
+                { "value":"cell 2", "colSpan":1, "rowSpan":1 }
+            ]
+        }, {
+            cells: [
+                { "value":"cell 0_1", "colSpan":1, "rowSpan":1 },
+                { "value":"cell 2_1", "colSpan":1, "rowSpan":1 }
+            ]
+        }, {
+            cells: [
+                { "value":"cell 0_2", "colSpan":1, "rowSpan":1 },
+                { "value":"cell 1_2", "colSpan":1, "rowSpan":1 },
+                { "value":"cell 2_2", "colSpan":1, "rowSpan":1 }
+            ]
+        } ]
+    });
+
+    var dom = $(worksheet.toXML());
+    var cell0_1 = dom.find("row:eq(1) > c:eq(0)");
+    var cell1_1 = dom.find("row:eq(1) > c:eq(1)");
+    var cell2_1 = dom.find("row:eq(1) > c:eq(2)");
+
+    equal(cell0_1.attr("r"), "A2");
+    equal(cell1_1.attr("r"), "B2");
+    equal(cell2_1.attr("r"), "C2");
+
+    var cell0_2 = dom.find("row:eq(2) > c:eq(0)");
+    var cell1_2 = dom.find("row:eq(2) > c:eq(1)");
+    var cell2_2 = dom.find("row:eq(2) > c:eq(2)");
+
+    equal(cell0_2.attr("r"), "A3");
+    equal(cell1_2.attr("r"), "B3");
+    equal(cell2_2.attr("r"), "C3");
+
+    var mergeCell = dom.find("mergeCell");
+    equal(mergeCell.eq(0).attr("ref"), "B1:B2");
+});
+
+test("toXML merges cells when render multiline row headers", function() {
+    var worksheet = Worksheet({
+        rows: [
+            {
+                "cells":[
+                    {"value":"row 0","colSpan":1,"rowSpan":2},
+                    {"value":"row 0_1","colSpan":1,"rowSpan":1},
+                    {"value":"row 0_2","colSpan":1,"rowSpan":1}
+                ]
+            }, {
+                "cells":[
+                    {"value":"row 0_1","colSpan":2,"rowSpan":1}
+                ]
+            }, {
+                "cells":[
+                    {"value":"row 0","colSpan":3,"rowSpan":1}
+                ]
+            }
+        ]
+    });
+
+    var dom = $(worksheet.toXML());
+
+    var mergeCell = dom.find("mergeCell");
+
+    equal(mergeCell.length, 3);
+    equal(mergeCell.eq(0).attr("ref"), "A1:A2");
+    equal(mergeCell.eq(1).attr("ref"), "B2:C2");
+    equal(mergeCell.eq(2).attr("ref"), "A3:C3");
+});
+
+test("toXML outputs cells with correct value when render multiline row headers", function() {
+    var worksheet = Worksheet({
+        rows: [
+            {
+                "cells":[
+                    {"value":"row 0","colSpan":1,"rowSpan":2},
+                    {"value":"row 0_1","colSpan":1,"rowSpan":1},
+                    {"value":"row 0_2","colSpan":1,"rowSpan":1}
+                ]
+            }, {
+                "cells":[
+                    {"value":"row 0_1","colSpan":2,"rowSpan":1}
+                ]
+            }, {
+                "cells":[
+                    {"value":"row 0","colSpan":3,"rowSpan":1}
+                ]
+            }
+        ]
+    });
+
+    var dom = $(worksheet.toXML());
+
+    var rows = dom.find("row");
+    var row1_cells = rows.eq(0).find("c");
+
+    equal(row1_cells.eq(0).attr("r"), "A1")
+    equal(row1_cells.eq(0).find("v").text(), 0);
+
+    equal(row1_cells.eq(1).attr("r"), "B1")
+    equal(row1_cells.eq(1).find("v").text(), 1);
+
+    equal(row1_cells.eq(2).attr("r"), "C1")
+    equal(row1_cells.eq(2).find("v").text(), 2);
+
+    var row2_cells = rows.eq(1).find("c");
+
+    equal(row2_cells.eq(0).attr("r"), "A2")
+    equal(row2_cells.eq(0).find("v").length, 0);
+
+    equal(row2_cells.eq(1).attr("r"), "B2")
+    equal(row2_cells.eq(1).find("v").text(), "1");
+
+    equal(row2_cells.eq(2).attr("r"), "C2")
+    equal(row2_cells.eq(2).find("v").length, 0);
+
+    var row3_cells = rows.eq(2).find("c");
+
+    equal(row3_cells.eq(0).attr("r"), "A3")
+    equal(row3_cells.eq(0).find("v").text(), "0");
+
+    equal(row3_cells.eq(1).attr("r"), "B3")
+    equal(row3_cells.eq(1).find("v").length, 0);
+
+    equal(row3_cells.eq(2).attr("r"), "C3")
+    equal(row3_cells.eq(2).find("v").length, 0);
+});
+
+test("toXML outputs data cells correctly when render multiline row and column headers", function() {
+    var worksheet = Worksheet({
+        rows: [
+            {
+                "cells":[
+                    {"value":"","colSpan":3,"rowSpan":2},
+                    {"value":"col 0","colSpan":1,"rowSpan":1},
+                    {"value":"col 0","colSpan":1,"rowSpan":2}
+                ]
+            },
+            {
+                "cells":[
+                    {"value":"col 0_1","colSpan":1,"rowSpan":1}
+                ]
+            },
+            {
+                "cells":[
+                    {"value":"row 0","colSpan":1,"rowSpan":2},
+                    {"value":"row 0_1","colSpan":1,"rowSpan":1},
+                    {"value":"row 0_2","colSpan":1,"rowSpan":1},
+                    {"value":"1","colSpan":1,"rowSpan":1},
+                    {"value":"2","colSpan":1,"rowSpan":1}
+                ]
+            }, {
+                "cells":[
+                    {"value":"row 0_1","colSpan":2,"rowSpan":1},
+                    {"value":"1","colSpan":1,"rowSpan":1},
+                    {"value":"2","colSpan":1,"rowSpan":1}
+                ]
+            }, {
+                "cells":[
+                    {"value":"row 0","colSpan":3,"rowSpan":1},
+                    {"value":"1","colSpan":1,"rowSpan":1},
+                    {"value":"2","colSpan":1,"rowSpan":1}
+                ]
+            }
+        ]
+    });
+
+    var dom = $(worksheet.toXML());
+
+    var rows = dom.find("row");
+    var data1_cells = rows.eq(2).find("c");
+    var data2_cells = rows.eq(3).find("c");
+    var data3_cells = rows.eq(4).find("c");
+
+    equal(data1_cells.length, 5);
+    equal(data1_cells.eq(3).attr("r"), "D3")
+    equal(data1_cells.eq(3).find("v").length, 1);
+
+    equal(data1_cells.eq(4).attr("r"), "E3")
+    equal(data1_cells.eq(4).find("v").length, 1);
+
+    equal(data2_cells.length, 5);
+    equal(data2_cells.eq(3).attr("r"), "D4")
+    equal(data2_cells.eq(3).find("v").length, 1);
+
+    equal(data2_cells.eq(4).attr("r"), "E4")
+    equal(data2_cells.eq(4).find("v").length, 1);
+
+    equal(data3_cells.length, 5);
+    equal(data3_cells.eq(3).attr("r"), "D5")
+    equal(data3_cells.eq(3).find("v").length, 1);
+
+    equal(data3_cells.eq(4).attr("r"), "E5")
+    equal(data3_cells.eq(4).find("v").length, 1);
+});
+
+test("toXML outputs empty data cells for continues cells with rowSpan", function() {
+    var worksheet = Worksheet({
+        rows: [
+            {
+                "cells": [
+                    {"background":"#7a7a7a","color":"#fff","value":"","colSpan":4,"rowSpan":1},
+                    {"background":"#7a7a7a","color":"#fff","value":"dim 0","colSpan":1,"rowSpan":1}
+                ],
+                "type":"header"
+            }, {
+                "cells": [
+                    {"background":"#7a7a7a","color":"#fff","value":"dim 0","colSpan":1,"rowSpan":1},
+                    {"background":"#7a7a7a","color":"#fff","value":"dim 0_1","colSpan":1,"rowSpan":1},
+                    {"background":"#7a7a7a","color":"#fff","value":"dim 1","colSpan":2,"rowSpan":1},
+                    {"background":"#dfdfdf","color":"#333","value":"2","colSpan":1,"rowSpan":1}
+                ],
+                "type":"data"
+            }, {
+                "cells": [
+                    {"background":"#7a7a7a","color":"#fff","value":"dim 0","colSpan":2,"rowSpan":3},
+                    {"background":"#7a7a7a","color":"#fff","value":"dim 1","colSpan":1,"rowSpan":2},
+                    {"background":"#7a7a7a","color":"#fff","value":"dim 1_1","colSpan":1,"rowSpan":1},
+                    {"background":"#dfdfdf","color":"#333","value":"3","colSpan":1,"rowSpan":1}
+                ],
+                "type": "data"
+            }, {
+                "cells": [
+                    {"background":"#7a7a7a","color":"#fff","value":"dim 1_2","colSpan":1,"rowSpan":1},
+                    {"background":"#dfdfdf","color":"#333","value":"4","colSpan":1,"rowSpan":1}
+                ],
+                "type": "data"
+            }, {
+                "cells": [
+                    {"background":"#7a7a7a","color":"#fff","value":"dim 1","colSpan":2,"rowSpan":1},
+                    {"background":"#dfdfdf","color":"#333","value":"1","colSpan":1,"rowSpan":1}
+                ],
+                "type":"data"
+            }
+        ]
+    });
+
+    var dom = $(worksheet.toXML());
+
+    var rows = dom.find("row");
+    var cells = rows.eq(3).find("c");
+
+    equal(cells.length, 5);
+    equal(cells.eq(0).attr("r"), "A4")
+    equal(cells.eq(0).find("v").length, 0);
+
+    equal(cells.eq(1).attr("r"), "B4")
+    equal(cells.eq(1).find("v").length, 0);
+
+    equal(cells.eq(2).attr("r"), "C4")
+    equal(cells.eq(2).find("v").length, 0);
+
+    equal(cells.eq(3).attr("r"), "D4")
+    equal(cells.eq(3).find("v").length, 1);
+
+    equal(cells.eq(4).attr("r"), "E4")
+    equal(cells.eq(4).find("v").length, 1);
+});
+
 }());
