@@ -69,7 +69,7 @@ Kendo UI Core depends on the following libraries:
 
 - [jQuery](http://www.jquery.com) v1.9.1+
 
-Kendo UI Core has not been tested against any other versions of these libraries. You may find that versions other than these are compatible with Kendo UI Core, but we make no claims to support those version, nor can we troubleshoot issues that arise when using those versions.
+Kendo UI Core has not been tested against any other versions of these libraries. You may find that versions other than these are compatible with Kendo UI Core. However, we make no claims to support those versions, and will not troubleshoot issues that arise when using those versions.
 
 
 ## Building Kendo UI Core
@@ -113,7 +113,7 @@ npm run build
 ```
 The minified version of the scripts and styles of Kendo UI Core will be put in the `dist/` subdirectory.
 
-If you want to create custom build or help with Kendo UI Core development, it would be better to install [grunt command line interface](https://github.com/gruntjs/grunt-cli) as a global package:
+If you want to create custom build or help with Kendo UI Core development, it would be better to install the [grunt command line interface](https://github.com/gruntjs/grunt-cli) as a global package:
 
 ```
 [sudo] npm install -g grunt-cli
@@ -124,14 +124,14 @@ Make sure you have `grunt` installed by testing:
 grunt --version
 ```
 
-Now by running `grunt` command in the Kendo UI Core directory, you can build full version of Kendo UI Core, just like with `npm run build` command:
+Now by running the `grunt` command in the Kendo UI Core directory, you can build the full version of Kendo UI Core. This works just like the `npm run build` command:
 ```
 grunt build
 ```
 
 There are several other tasks available:
 ```
-grunt -help
+grunt --help
 ```
 
 ### Building only what you need
@@ -148,7 +148,7 @@ If you want to skip building Kendo UI Core yourself, head on over to [Telerik.co
 
 ## Using Kendo UI Core via the Kendo Static CDN
 
-You can also easily include Kendo UI Core into your site or application using the Kendo CDN:
+You can also easily include Kendo UI Core in your site or application by using the Kendo CDN:
 
 ```
 <link href="http://cdn.kendostatic.com/2014.2.716/styles/kendo.common.min.css" rel="stylesheet" />
@@ -156,7 +156,7 @@ You can also easily include Kendo UI Core into your site or application using th
 <script src="http://cdn.kendostatic.com/2014.2.716/js/jquery.min.js"></script>    
 <script src="http://cdn.kendostatic.com/2014.2.716/js/kendo.ui.core.min.js"></script> 
 ```
-The main advantage to this is that your users may be able to leverage a primed cache version of Kendo UI Core if they've visited other sites using the framework.
+The main advantage of the CDN approach is that your users may be able to leverage a primed cache version of Kendo UI Core if they've visited other sites using the framework.
 
 ## Documentation
 
@@ -176,11 +176,11 @@ Before contributing to Kendo UI Core, please:
 
 ## Getting Help
 
-**Tl;dr** - Use the [issues list](https://github.com/telerik/kendo-ui-core/issues) of this repo for bugs, [Stack Overflow](http://stackoverflow.com/questions/tagged/kendo-ui) or the [Kendo UI Premium Forums](http://www.telerik.com/forums/kendo-ui-framework) for help and [User Voice](http://kendoui-feedback.telerik.com/forums/127393-kendo-ui-feedback) for feature requests. Mis-filed items will be closed.
+**Tl;dr** - Use the [issues list](https://github.com/telerik/kendo-ui-core/issues) of this repo for bugs, [Stack Overflow](http://stackoverflow.com/questions/tagged/kendo-ui) or the [Kendo UI Premium Forums](http://www.telerik.com/forums/kendo-ui-framework) for help and [User Voice](http://kendoui-feedback.telerik.com/forums/127393-kendo-ui-feedback) for feature requests. Misfiled items will be closed.
 
 As a fully-open source project, Kendo UI Core is a primarily community-supported project, As such, you are encouraged to use forums like Stack Overflow to post questions, and the issues list of this repo to report bugs.
 
-The Kendo UI team does *not* provide formal support for Kendo UI Core, except to those customers who have purchased a [commercial license for Kendo UI](http://www.telerik.com/kendo-ui) (Professional, UI for MVC, etc.) or a support-only package from Telerik.com. Please do not create support requests for this project in the issues list for this repo, as these will be immediately closed and you'll be directed to post your question on a community forum.
+The Kendo UI team does *not* provide formal support for Kendo UI Core, except to those customers who have purchased a [commercial license for Kendo UI](http://www.telerik.com/kendo-ui) (Professional, UI for MVC, etc.) or a support-only package from Telerik.com. Please do not create support requests for this project in the issues list for this repo, as these will be immediately closed. You'll be directed to post your question on a community forum.
 
 ## Release Notes
 
