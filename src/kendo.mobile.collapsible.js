@@ -76,7 +76,8 @@ var __meta__ = {
         },
 
         expand: function(instant) {
-            var icon = this.options.collapseIcon;
+            var icon = this.options.collapseIcon,
+                ios = kendo.support.mobileOS.ios;
 
             if (!this.trigger(EXAPND)) {
                 if (icon) {
@@ -85,7 +86,13 @@ var __meta__ = {
                 this.element.removeClass(COLLAPSED).addClass(EXPANDED);
 
                 if (this.options.animation && !instant) {
+
+                    if (ios) { this.content.removeClass("km-animated"); } //required to get the height of the content on iOS
+
                     this.content.height(this._getContentHeight());
+
+                    if (ios) { this.content.addClass("km-animated"); }
+
                     kendo.resize(this.content);
                 } else {
                     this.content.show();
