@@ -663,7 +663,7 @@ var __meta__ = {
 
             if (item instanceof kendo.Observable) {
                 item = item.toJSON();
-            };
+            }
 
             if (plain || $.isArray(item)) { // is JSON
                 items = $.map(plain ? [ item ] : item, function (value, idx) {
