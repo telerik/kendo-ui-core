@@ -513,8 +513,8 @@
 
         tooltip = content.find(".k-tooltip-content");
 
-        equal(tooltip.children().eq(0).text(), "Start: Tue 4/15 12:00");
-        equal(tooltip.children().eq(1).text(), "End: Tue 4/15 16:00");
+        equal(tooltip.children().eq(0).text(), "Start: 12:00 PM Tue, Apr 15");
+        equal(tooltip.children().eq(1).text(), "End: 4:00 PM Tue, Apr 15");
     });
     
     test("resize tooltip text messages are set", 2, function() {
@@ -530,8 +530,25 @@
 
         tooltip = content.find(".k-tooltip-content");
 
-        equal(tooltip.children().eq(0).text(), "Custom Start: Tue 4/15 12:00");
-        equal(tooltip.children().eq(1).text(), "Custom End: Tue 4/15 16:00");
+        equal(tooltip.children().eq(0).text(), "Custom Start: 12:00 PM Tue, Apr 15");
+        equal(tooltip.children().eq(1).text(), "Custom End: 4:00 PM Tue, Apr 15");
+    });
+    
+    test("resize tooltip date format is set", 2, function() {
+        setupTimeline({ views: [{ type: "day", resizeTooltipFormat: "ddd M/dd" }] });
+
+        var content = timeline.view().content;
+        var handle = content.find(".k-task .k-resize-e");
+        var targetSlot = timeline.view()._timeSlots()[16];
+        var tooltip;
+
+        dragStart(timeline, handle);
+        drag(timeline, targetSlot.offsetLeft);
+
+        tooltip = content.find(".k-tooltip-content");
+
+        equal(tooltip.children().eq(0).text(), "Start: Tue 4/15");
+        equal(tooltip.children().eq(1).text(), "End: Tue 4/15");
     });
 
 

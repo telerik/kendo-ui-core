@@ -37,8 +37,8 @@ var __meta__ = {
                        '</div>');
     var RESIZE_TOOLTIP_TEMPLATE = kendo.template('<div style="z-index: 100002;" class="#=styles.tooltipWrapper#">' +
                                    '<div class="#=styles.tooltipContent#">' +
-                                        '<div>#=messages.start#: #=kendo.toString(start, "ddd M/dd HH:mm")#</div>' +
-                                        '<div>#=messages.end#: #=kendo.toString(end, "ddd M/dd HH:mm")#</div>' +
+                                        '<div>#=messages.start#: #=kendo.toString(start, format)#</div>' +
+                                        '<div>#=messages.end#: #=kendo.toString(end, format)#</div>' +
                                    '</div>' +
                               '</div>');
     var PERCENT_RESIZE_TOOLTIP_TEMPLATE = kendo.template('<div style="z-index: 100002;" class="#=styles.tooltipWrapper#" >' +
@@ -923,7 +923,8 @@ var __meta__ = {
             var taskTop = this._taskCoordinates[task.id].rowIndex * this._rowHeight;
             var tooltipHeight;
             var tooltipTop;
-            var messages = this.options.messages;
+            var options = this.options;
+            var messages = options.messages;
 
             this._resizeHint = $(RESIZE_HINT({ styles: styles })).css({
                 "top": 0,
@@ -932,11 +933,17 @@ var __meta__ = {
 
             this.content.append(this._resizeHint);
             
-            this._resizeTooltip = $(RESIZE_TOOLTIP_TEMPLATE({ styles: styles, start: task.start, end: task.end, messages: messages.views }))
-                .css({
-                    "top": 0,
-                    "left": 0
-                });
+            this._resizeTooltip = $(RESIZE_TOOLTIP_TEMPLATE({
+                styles: styles,
+                start: task.start,
+                end: task.end,
+                messages: messages.views,
+                format: options.resizeTooltipFormat
+            }))
+            .css({
+                "top": 0,
+                "left": 0
+            });
 
             this.content.append(this._resizeTooltip);
 
@@ -959,7 +966,8 @@ var __meta__ = {
             var tooltipLeft = resizeStart ? left : right;
             var tablesWidth = this._tableWidth - 17;
             var tooltipWidth = this._resizeTooltipWidth;
-            var messages = this.options.messages;
+            var options = this.options;
+            var messages = options.messages;
 
             this._resizeHint
                 .css({
@@ -979,12 +987,18 @@ var __meta__ = {
                 tooltipLeft = tablesWidth - tooltipWidth;
             }
 
-            this._resizeTooltip = $(RESIZE_TOOLTIP_TEMPLATE({ styles: GanttView.styles, start: start, end: end, messages: messages.views }))
-                .css({
-                    "top": this._resizeTooltipTop,
-                    "left": tooltipLeft,
-                    "min-width": tooltipWidth
-                });
+            this._resizeTooltip = $(RESIZE_TOOLTIP_TEMPLATE({
+                styles: GanttView.styles,
+                start: start,
+                end: end,
+                messages: messages.views,
+                format: options.resizeTooltipFormat
+            }))
+            .css({
+                "top": this._resizeTooltipTop,
+                "left": tooltipLeft,
+                "min-width": tooltipWidth
+            });
 
             this.content.append(this._resizeTooltip);
         },
@@ -1383,7 +1397,8 @@ var __meta__ = {
 
         options: {
             timeHeaderTemplate: TIME_HEADER_TEMPLATE,
-            dayHeaderTemplate: DAY_HEADER_TEMPLATE
+            dayHeaderTemplate: DAY_HEADER_TEMPLATE,
+            resizeTooltipFormat: "h:mm tt ddd, MMM d"
         },
 
         range: function(range) {
@@ -1436,7 +1451,8 @@ var __meta__ = {
 
         options: {
             dayHeaderTemplate: DAY_HEADER_TEMPLATE,
-            weekHeaderTemplate: WEEK_HEADER_TEMPLATE
+            weekHeaderTemplate: WEEK_HEADER_TEMPLATE,
+            resizeTooltipFormat: "h:mm tt ddd, MMM d"
         },
 
         range: function(range) {
@@ -1477,7 +1493,8 @@ var __meta__ = {
 
         options: {
             weekHeaderTemplate: WEEK_HEADER_TEMPLATE,
-            monthHeaderTemplate: MONTH_HEADER_TEMPLATE
+            monthHeaderTemplate: MONTH_HEADER_TEMPLATE,
+            resizeTooltipFormat: "dddd, MMM d, yyyy"
         },
 
         range: function(range) {
@@ -1510,7 +1527,8 @@ var __meta__ = {
 
         options: {
             yearHeaderTemplate: YEAR_HEADER_TEMPLATE,
-            monthHeaderTemplate: MONTH_HEADER_TEMPLATE
+            monthHeaderTemplate: MONTH_HEADER_TEMPLATE,
+            resizeTooltipFormat: "dddd, MMM d, yyyy"
         },
 
         range: function(range) {
