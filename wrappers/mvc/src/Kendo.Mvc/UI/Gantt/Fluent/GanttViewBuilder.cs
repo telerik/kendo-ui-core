@@ -152,6 +152,17 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
+        /// The format used to display the start and end dates in the resize tooltip.
+        /// </summary>
+        /// <param name="value">The value that configures the resizetooltipformat.</param>
+        public GanttViewBuilder ResizeTooltipFormat(string value)
+        {
+            container.ResizeTooltipFormat = value;
+
+            return this;
+        }
+        
+        /// <summary>
         /// The view type. Supported types are "day", "week", "month" and "year".
         /// </summary>
         /// <param name="value">The value that configures the type.</param>

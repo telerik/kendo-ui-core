@@ -41,6 +41,8 @@ namespace Kendo.Mvc.UI
 
         public string YearHeaderTemplateId { get; set; }
         
+        public string ResizeTooltipFormat { get; set; }
+        
         public GanttViewType? Type { get; set; }
         
         //<< Fields
@@ -129,6 +131,11 @@ namespace Kendo.Mvc.UI
                 json["yearHeaderTemplate"] = YearHeaderTemplate;
             }
                 
+            if (ResizeTooltipFormat.HasValue())
+            {
+                json["resizeTooltipFormat"] = ResizeTooltipFormat;
+            }
+            
             if (Type.HasValue)
             {
                 json["type"] = Type;
