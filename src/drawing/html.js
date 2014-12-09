@@ -196,15 +196,30 @@
                 addRules(ss, ss.cssRules);
             }
         }
-        function getTTFs(a, el){
+        function getTTF(el){
             var m;
-            if ((m = /^\s*url\((['"]?)(.*?)\1\)\s+format\((['"]?)truetype\3\)\s*$/.exec(el))) {
-                a.push(m[2]);
+            if ((m = /url\((['"]?)(.*?)\1\)\s+format\((['"]?)truetype\3\)/.exec(el))) {
+                return(m[2]);
             }
-            else if ((m = /^\s*url\((['"]?)(.*?\.ttf)\1\)\s*$/.exec(el))) {
-                a.push(m[2]);
+            else if ((m = /url\((['"]?)(.*?\.ttf)\1\)/.exec(el))) {
+                return(m[2]);
             }
-            return a;
+        }
+        function findFonts(rule) {
+            var src = getPropertyValue(rule.style, "src");
+            if (src) {
+                return splitOnComma(src).reduce(function(a, el){
+                    var font = getTTF(el);
+                    if (font) {
+                        a.push(font);
+                    }
+                    return a;
+                }, []);
+            } else {
+                // Internet Explorer
+                // XXX: this is gross.  should work though for valid CSS.
+                return [ getTTF(rule.cssText) ];
+            }
         }
         function addRules(styleSheet, rules) {
             for (var i = 0; i < rules.length; ++i) {
@@ -218,7 +233,7 @@
                     var family = splitOnComma(getPropertyValue(style, "font-family"));
                     var bold   = /^(400|bold)$/i.test(getPropertyValue(style, "font-weight"));
                     var italic = "italic" == getPropertyValue(style, "font-style");
-                    var src    = splitOnComma(getPropertyValue(style, "src")).reduce(getTTFs, []);
+                    var src    = findFonts(r);
                     if (src.length > 0) {
                         addRule(styleSheet, family, bold, italic, src[0]);
                     }
