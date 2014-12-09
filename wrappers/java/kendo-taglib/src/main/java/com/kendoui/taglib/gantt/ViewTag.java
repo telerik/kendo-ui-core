@@ -85,6 +85,14 @@ public class ViewTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         setProperty("monthHeaderTemplate", value);
     }
 
+    public java.lang.String getResizeTooltipFormat() {
+        return (java.lang.String)getProperty("resizeTooltipFormat");
+    }
+
+    public void setResizeTooltipFormat(java.lang.String value) {
+        setProperty("resizeTooltipFormat", value);
+    }
+
     public boolean getSelected() {
         return (boolean)getProperty("selected");
     }

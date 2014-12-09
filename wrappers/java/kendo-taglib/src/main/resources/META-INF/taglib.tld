@@ -17099,6 +17099,12 @@ By default the Kendo UI Gantt widget displays "day", "week", and "month" views.<
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>The format used to display the start and end dates in the resize tooltip.</description>
+            <name>resizeTooltipFormat</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>If set to true the view will be initially selected by the Gantt widget. The default selected view is "day".</description>
             <name>selected</name>
             <rtexprvalue>true</rtexprvalue>
