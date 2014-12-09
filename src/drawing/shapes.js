@@ -1045,13 +1045,13 @@
         return boundingBox;
     }
 
-    function elementsClippedBoundingBox(elements, applyTransform, transformation) {
+    function elementsClippedBoundingBox(elements, transformation) {
         var boundingBox;
 
         for (var i = 0; i < elements.length; i++) {
             var element = elements[i];
             if (element.visible()) {
-                var elementBoundingBox = applyTransform ? element.clippedBBox(transformation) : element.rawBBox();
+                var elementBoundingBox = element.clippedBBox(transformation);
                 if (elementBoundingBox) {
                     if (boundingBox) {
                         boundingBox = Rect.union(boundingBox, elementBoundingBox);
