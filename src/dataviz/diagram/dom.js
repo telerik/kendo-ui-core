@@ -467,9 +467,10 @@
         };
 
         var Shape = DiagramElement.extend({
-            init: function (options) {
+            init: function (options, diagram) {
                 var that = this;
                 DiagramElement.fn.init.call(that, options);
+                this.diagram = diagram;
                 this.updateOptionsFromModel();
                 options = that.options;
                 that.connectors = [];
@@ -3040,7 +3041,7 @@
 
                 options = deepExtend({}, this.options.shapeDefaults, options);
                 options.dataItem = dataItem;
-                shape = new Shape(options);
+                shape = new Shape(options, this);
                 this.addShape(shape);
                 this._dataMap[dataItem.id] = shape;
                 return shape;
@@ -3058,7 +3059,7 @@
 
                 var options = deepExtend({}, this.options.shapeDefaults);
                 options.dataItem = dataItem;
-                shape = new Shape(options);
+                shape = new Shape(options, this);
                 this.addShape(shape);
                 this._dataMap[dataItem.uid] = shape;
                 return shape;
