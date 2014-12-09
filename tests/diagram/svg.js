@@ -1613,6 +1613,19 @@
             equal(drawingElement.children.length, 0);
         });
 
+        test("_boundingBox returns clipped bounding box", function() {
+            var rect = new g.Rect([10, 20], [100, 200]);
+            var childGroup = new diagram.Group({});
+            childGroup.drawingElement.clippedBBox = function() {
+                return rect;
+            };
+
+            group.append(childGroup);
+            var boundingBox = group._boundingBox();
+            ok(boundingBox.origin.equals(rect.origin));
+            ok(boundingBox.size.equals(rect.size));
+        });
+
         test("_boundingBox returns transformed children bbox without parent transformation", function() {
             var rectangle = new diagram.Rectangle({
                 width: 50,
@@ -1833,8 +1846,8 @@
             teardown: teardown
         });
 
-        test("bounds returns rect with container bounding box width and height", function() {
-            canvas.drawingElement.bbox = function() {
+        test("bounds returns rect with container clipped bounding box width and height", function() {
+            canvas.drawingElement.clippedBBox = function() {
                 return new g.Rect(new g.Point(50,50), new g.Size(100, 200));
             };
             var rect = canvas.bounds();

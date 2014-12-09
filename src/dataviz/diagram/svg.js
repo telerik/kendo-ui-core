@@ -1182,7 +1182,7 @@
             for (var i = 0; i < children.length; i++) {
                 visual = children[i];
                 if (visual.visible() && visual._includeInBBox !== false) {
-                    childBoundingBox = visual.drawingContainer().bbox(null);
+                    childBoundingBox = visual.drawingContainer().clippedBBox(null);
                     if (childBoundingBox) {
                         if (boundingBox) {
                             boundingBox = Rect.union(boundingBox, childBoundingBox);
@@ -1268,7 +1268,7 @@
         },
 
         bounds: function () {
-            var box = this.drawingElement.bbox();
+            var box = this.drawingElement.clippedBBox();
             return new Rect(0, 0, box.width(), box.height());
         },
 
