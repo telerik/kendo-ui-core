@@ -174,13 +174,18 @@ namespace Kendo.Mvc.UI
             {
                 json["autoBind"] = AutoBind;
             }
-                
-            var currentTimeMarker = CurrentTimeMarker.ToJson();
-            if (currentTimeMarker.Any())
+
+            if (CurrentTimeMarker.Enabled == false)
             {
-                json["currentTimeMarker"] = currentTimeMarker;
-            } else if (CurrentTimeMarker.Enabled != ) {
-                json["currentTimeMarker"] = CurrentTimeMarker.Enabled;
+                json["currentTimeMarker"] = false;
+            }
+            else
+            {
+                IDictionary<string, object> currentTimeMarker = CurrentTimeMarker.ToJson();
+                if (currentTimeMarker.Count > 0)
+                {
+                    json["currentTimeMarker"] = currentTimeMarker;
+                }
             }
 
             var editable = Editable.ToJson();

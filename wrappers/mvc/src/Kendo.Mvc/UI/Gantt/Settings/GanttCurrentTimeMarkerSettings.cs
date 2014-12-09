@@ -10,7 +10,7 @@ namespace Kendo.Mvc.UI
     {
         public GanttCurrentTimeMarkerSettings()
         {
-            Enabled = ;
+            Enabled = true;
         
             //>> Initialization
         
