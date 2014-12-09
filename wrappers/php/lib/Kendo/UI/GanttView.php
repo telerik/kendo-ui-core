@@ -134,6 +134,15 @@ class GanttView extends \Kendo\SerializableObject {
     }
 
     /**
+    * The format used to display the start and end dates in the resize tooltip.
+    * @param string $value
+    * @return \Kendo\UI\GanttView
+    */
+    public function resizeTooltipFormat($value) {
+        return $this->setProperty('resizeTooltipFormat', $value);
+    }
+
+    /**
     * The view type. Supported types are "day", "week", "month" and "year".
     * @param string $value
     * @return \Kendo\UI\GanttView
