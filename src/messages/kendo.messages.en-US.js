@@ -193,16 +193,37 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
 if (kendo.ui.Gantt) {
 kendo.ui.Gantt.prototype.options.messages =
 $.extend(true, kendo.ui.Gantt.prototype.options.messages,{
+  "actions": {
+    "addChild": "Add Child",
+    "append": "Add Task",
+    "insertAfter": "Add Below",
+    "insertBefore": "Add Above",
+    "pdf": "Export to PDF"
+  },
+  "cancel": "Cancel",
+  "deleteDependencyWindowTitle": "Delete dependency",
+  "deleteTaskWindowTitle": "Delete task",
+  "destroy": "Delete",
+  "editor": {
+    "assingButton": "Assign",
+    "editorTitle": "Task",
+    "end": "End",
+    "percentComplete": "Complete",
+    "resources": "Resources",
+    "resourcesEditorTitle": "Resources",
+    "resourcesHeader": "Resources",
+    "start": "Start",
+    "title": "Title",
+    "unitsHeader": "Units"
+  },
+  "save": "Save",
   "views": {
     "day": "Day",
+    "end": "End",
+    "month": "Month",
+    "start": "Start",
     "week": "Week",
-    "month": "Month"
-  },
-  "actions": {
-    "append": "Add Task",
-    "addChild": "Add Child",
-    "insertBefore": "Add Above",
-    "insertAfter": "Add Below"
+    "year": "Year"
   }
 });
 }
