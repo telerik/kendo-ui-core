@@ -11,6 +11,7 @@
     "use strict";
 
     /* jshint eqnull:true */
+    /* jshint -W069 */
 
     /* -----[ local vars ]----- */
 
@@ -23,12 +24,16 @@
 
     /* -----[ exports ]----- */
 
-    drawing.drawDOM = function(element) {
+    function drawDOM(element) {
         var defer = $.Deferred();
         element = $(element)[0];
 
         if (typeof window.getComputedStyle != "function") {
             throw new Error("window.getComputedStyle is missing.  You are using an unsupported browser, or running in IE8 compatibility mode.  Drawing HTML is supported in Chrome, Firefox, Safari and IE9+.");
+        }
+
+        if (kendo.pdf) {
+            kendo.pdf.defineFont(getFontFaces());
         }
 
         if (element) {
@@ -56,7 +61,11 @@
         }
 
         return defer.promise();
-    };
+    }
+
+    drawing.drawDOM = drawDOM;
+
+    drawDOM.getFontFaces = getFontFaces;
 
     var nodeInfo = {};
 
@@ -175,6 +184,65 @@
 
     // only function definitions after this line.
     return;
+
+    function getFontFaces() {
+        var result = {};
+        for (var i = 0; i < document.styleSheets.length; ++i) {
+            doStylesheet(document.styleSheets[i]);
+        }
+        return result;
+        function doStylesheet(ss) {
+            if (ss) {
+                addRules(ss, ss.cssRules);
+            }
+        }
+        function getTTFs(a, el){
+            var m;
+            if ((m = /^\s*url\((['"]?)(.*?)\1\)\s+format\((['"]?)truetype\3\)\s*$/.exec(el))) {
+                a.push(m[2]);
+            }
+            else if ((m = /^\s*url\((['"]?)(.*?\.ttf)\1\)\s*$/.exec(el))) {
+                a.push(m[2]);
+            }
+            return a;
+        }
+        function addRules(styleSheet, rules) {
+            for (var i = 0; i < rules.length; ++i) {
+                var r = rules[i];
+                switch (r.type) {
+                  case 3:       // CSSImportRule
+                    doStylesheet(r.styleSheet);
+                    break;
+                  case 5:       // CSSFontFaceRule
+                    var style  = r.style;
+                    var family = splitOnComma(getPropertyValue(style, "font-family"));
+                    var bold   = /^(400|bold)$/i.test(getPropertyValue(style, "font-weight"));
+                    var italic = "italic" == getPropertyValue(style, "font-style");
+                    var src    = splitOnComma(getPropertyValue(style, "src")).reduce(getTTFs, []);
+                    if (src.length > 0) {
+                        addRule(styleSheet, family, bold, italic, src[0]);
+                    }
+                }
+            }
+        }
+        function addRule(styleSheet, names, bold, italic, url) {
+            // We get full resolved absolute URLs in Chrome, but sadly
+            // not in Firefox.
+            if (!(/^https?:\/\//.test(url) || /^\//.test(url))) {
+                url = String(styleSheet.href).replace(/[^\/]*$/, "") + url;
+            }
+            names.forEach(function(name){
+                name = name.replace(/^(['"]?)(.*?)\1$/, "$2"); // it's quoted
+                if (bold) {
+                    name += "|bold";
+                }
+                if (italic) {
+                    name += "|italic";
+                }
+                result[name] = url;
+            });
+        }
+    }
 
     function splitOnComma(input) {
         var ret = [];
@@ -1649,7 +1717,6 @@
         }
 
         function decorate(box) {
-            /*jshint -W069 */// aaaaargh!  JSHate.
             line(nodeInfo["underline"], box.bottom);
             line(nodeInfo["line-through"], box.bottom - box.height / 2.7);
             line(nodeInfo["overline"], box.top);
