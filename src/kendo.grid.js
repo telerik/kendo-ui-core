@@ -6063,6 +6063,9 @@ var __meta__ = {
                 this._setContentHeight();
                 this._setContentWidth();
             }
+            if (this.virtualScrollable) {
+                this.virtualScrollable.refresh();
+            }
         },
 
         _isActiveInTable: function() {
