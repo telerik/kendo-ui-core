@@ -3,17 +3,11 @@
 })(function(){
 
 var __meta__ = {
-    id: "pivotgrid.configurator",
+    id: "pivot.configurator",
     name: "PivotConfigurator",
     category: "web",
-    description: "The PivotConfigurator widget allows the user to select data slices displayed in PivotGrid",
-    depends: [ "dropdownlist", "treeview" ],
-    features: [ {
-        id: "pivotconfigurator-filtering",
-        name: "PivotConfigurator Filtering",
-        description: "Support for filtering",
-        depends: [ "pivot.fieldmenu" ]
-    } ]
+    depends: [ "dropdownlist", "treeview", "pivot.fieldmenu" ],
+    hidden: true
 };
 
 /*jshint eqnull: true*/
