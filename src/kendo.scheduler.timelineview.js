@@ -1510,7 +1510,6 @@ var __meta__ = {
             if (this._isMobile() && that.options.editable) {
                 if (that.options.editable.create !== false) {
                     that._addUserEvents.destroy();
-                    that._allDayUserEvents.destroy();
                 }
 
                 if (that.options.editable.update !== false) {

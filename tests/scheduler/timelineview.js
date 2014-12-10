@@ -232,6 +232,25 @@
         equal(view.datesHeader.find("table tr:last").children().length,  view.content.find("table tr:first").children().length);
     });
 
+    test("changing views in mobile scheduler", function () {
+        setupScheduler({
+            date: new Date("2013/1/6"),
+            minorTickCount: 3,
+            majorTick: 120,
+            views: [
+                "timelineWeek",
+                "day"
+            ],
+            mobile: "phone"
+        });
+
+        var oldViewName = scheduler.view().name;
+        scheduler.view("day");
+        var newViewName = scheduler.view().name;
+
+        notEqual(oldViewName, newViewName);
+    });
+
     test("groupHeaderTemplate is used in horizontal grouping", function () {
         setupScheduler({
             date: new Date("2013/1/6"),
