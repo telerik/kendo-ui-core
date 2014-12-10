@@ -970,15 +970,20 @@
         });
 
         test("renders position accounting for baseline", function() {
-            ok(textNode.render().indexOf("x='10' y='35'") > -1);
+            contains(textNode.render(), "x='10' y='35'");
         });
 
         test("renders content", function() {
-            ok(textNode.render().indexOf("Foo") > -1);
+            contains(textNode.render(), "Foo");
         });
 
         test("renders font", function() {
-            ok(textNode.render().indexOf("font:arial;") > -1);
+            contains(textNode.render(), "font:arial;");
+        });
+
+        test("encodes entites in font name", function() {
+            text.options.set("font", "'serif'");
+            contains(textNode.render(), "font:&#39;serif&#39;;");
         });
 
         test("renders transformation", function() {

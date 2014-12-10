@@ -832,12 +832,8 @@
         mapStyle: function() {
             var style = PathNode.fn.mapStyle.call(this);
             var font = this.srcElement.options.font;
-            var options = this.root().options;
-            if (options && options.encodeText) {
-                font = kendo.htmlEncode(font);
-            }
 
-            style.push(["font", font]);
+            style.push(["font", kendo.htmlEncode(font)]);
 
             return style;
         },
