@@ -680,6 +680,17 @@
             equal(path.shapeVisual.data(), shape.options.path, "the shape visual should have the same path data");
         });
 
+        test("path shape should be translated to the origin", function() {
+            shape = diagram.addShape({
+                id: "pathShape",
+                path: "M100,100 L 300,300"
+            });
+            var bbox = shape.shapeVisual.drawingContainer().clippedBBox(null);
+
+            equal(bbox.origin.x, 0);
+            equal(bbox.origin.y, 0);
+        });
+
         test("create image shape", function() {
             shape = diagram.addShape({
                 id: "imageShape",

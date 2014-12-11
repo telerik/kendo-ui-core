@@ -944,46 +944,38 @@
         Shape.createShapeVisual = function(options) {
             var diagram = options.diagram;
             delete options.diagram; // avoid stackoverflow and reassign later on again
-            var shapeDefaults = deepExtend({}, options, { x: 0, y: 0 }),
-                visualTemplate = shapeDefaults.visual, // Shape visual should not have position in its parent group.
-                type = shapeDefaults.type;
-
-            function simpleShape(name, shapeDefaults) {
-                switch (name.toLocaleLowerCase()) {
-                    case "rectangle":
-                        return new Rectangle(shapeDefaults);
-                    case "circle":
-                        return new Circle(shapeDefaults);
-                    case "text": // Maybe should be something else.
-                        return new TextBlock(shapeDefaults);
-                    case "image":
-                        return new Image(shapeDefaults);
-                    default:
-                        var p = new Path(shapeDefaults);
-                        return p;
-                }
-            }
-
-            function pathShape(path, shapeDefaults) {
-                shapeDefaults.data = path;
-
-                return new Path(shapeDefaults);
-            }
-
-            function functionShape(func, context, shapeDefaults) {
-                return func.call(context, shapeDefaults);
-            }
+            var shapeDefaults = deepExtend({}, options, { x: 0, y: 0 });
+            var visualTemplate = shapeDefaults.visual; // Shape visual should not have position in its parent group.
+            var type = (shapeDefaults.type + "").toLocaleLowerCase();
+            var shapeVisual;
 
             if (isFunction(visualTemplate)) { // custom template
-                return functionShape(visualTemplate, this, shapeDefaults);
+                shapeVisual = visualTemplate.call(this, shapeDefaults);
             } else if (shapeDefaults.path) {
-                return pathShape(shapeDefaults.path, shapeDefaults);
-            } else if (isString(type)) {
-                return simpleShape(shapeDefaults.type.toLocaleLowerCase(), shapeDefaults);
+                shapeDefaults.data = shapeDefaults.path;
+                shapeVisual = new Path(shapeDefaults);
+                translateToOrigin(shapeVisual);
+            } else if (type == "rectangle"){
+                shapeVisual = new Rectangle(shapeDefaults);
+            } else if (type == "circle") {
+                shapeVisual = new Circle(shapeDefaults);
+            } else if (type == "text") {
+                shapeVisual = new TextBlock(shapeDefaults);
+            } else if (type == "image") {
+                shapeVisual = new Image(shapeDefaults);
             } else {
-                return new Rectangle(shapeDefaults);
+                shapeVisual = new Path(shapeDefaults);
             }
+
+            return shapeVisual;
         };
+
+        function translateToOrigin(visual) {
+            var bbox = visual.drawingContainer().clippedBBox(null);
+            if (bbox.origin.x !== 0 || bbox.origin.y !== 0) {
+                visual.position(-bbox.origin.x, -bbox.origin.y);
+            }
+        }
 
         /**
          * The visual link between two Shapes through the intermediate of Connectors.
