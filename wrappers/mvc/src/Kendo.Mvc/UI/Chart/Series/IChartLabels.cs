@@ -41,6 +41,11 @@ namespace Kendo.Mvc.UI
         string Color { get; set; }
 
         /// <summary>
+        /// Gets or sets a Function that returns the JavaScript handler for the labels color.
+        /// </summary>
+        ClientHandlerDescriptor ColorHandler { get; set; }
+
+        /// <summary>
         /// Gets or sets the label format.
         /// </summary>
         string Format { get; set; }

@@ -1,5 +1,6 @@
 namespace Kendo.Mvc.UI.Tests.Chart
 {
+    using System;
     using Kendo.Mvc.UI;
     using Kendo.Mvc.UI.Fluent;
     using Xunit;
@@ -41,6 +42,14 @@ namespace Kendo.Mvc.UI.Tests.Chart
         {
             builder.Color("Red");
             labels.Color.ShouldEqual("Red");
+        }
+
+        [Fact]
+        public void Color_sets_color_handler()
+        {
+            Func<object, object> fn = o => "colorHandler";
+            builder.Color(fn);
+            labels.ColorHandler.TemplateDelegate.ShouldBeSameAs(fn);
         }
 
         [Fact]

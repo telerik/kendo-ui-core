@@ -105,6 +105,23 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
+        public void Serializes_color_handler()
+        {
+            var clientHandler = new ClientHandlerDescriptor();
+            labels.ColorHandler = clientHandler;
+            GetJson()["color"].ShouldBeSameAs(clientHandler);
+        }
+
+        [Fact]
+        public void Serializes_color_handler_if_both_color_and_color_handler_are_set()
+        {
+            var clientHandler = new ClientHandlerDescriptor();
+            labels.Color = "red";
+            labels.ColorHandler = clientHandler;
+            GetJson()["color"].ShouldBeSameAs(clientHandler);
+        }
+
+        [Fact]
         public void Serializes_margin()
         {
             labels.Margin = new ChartSpacing(20);

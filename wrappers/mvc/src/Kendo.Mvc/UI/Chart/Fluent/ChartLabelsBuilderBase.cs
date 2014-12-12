@@ -119,6 +119,34 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Sets a Function that returns the JavaScript handler for the labels color.
+        /// </summary>
+        /// <param name="handler">The labels text color.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .Series(series => series
+        ///                 .Bar(s => s.Sales)
+        ///                 .Labels(labels => labels
+        ///                     .Color(o => "colorHandler")
+        ///                     .Visible(true);
+        ///                 );
+        ///           )    
+        ///           .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>        
+        public TBuilder Color(Func<object, object> handler)
+        {
+            labels.ColorHandler = new ClientHandlerDescriptor
+            {
+                 TemplateDelegate = handler
+            };
+            return this as TBuilder;
+        }
+
+        /// <summary>
         /// Sets the labels margin
         /// </summary>
         /// <param name="top">The labels top margin.</param>
