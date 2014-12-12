@@ -681,7 +681,7 @@ var __meta__ = {
                     referenceItem.attr(ARIA_EXPANDED, false);
                 }
             } else {
-                if (typeof item == "string" && item[0] != "<") {
+                if (typeof item == "string" && item.charAt(0) != "<") {
                     items = that.element.find(item);
                 } else {
                     items = $(item);
