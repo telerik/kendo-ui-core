@@ -198,6 +198,7 @@ var __meta__ = {
         SELECT_END = "selectEnd",
         SERIES_CLICK = "seriesClick",
         SERIES_HOVER = "seriesHover",
+        START_SCALE = 0.001,
         STEP = "step",
         SMOOTH = "smooth",
         STD_ERR = "stderr",
@@ -3267,7 +3268,7 @@ var __meta__ = {
                 fromOffset[axis] = valueOrDefault(stackBase, origin[axis]) - origin[axis];
 
                 var fromScale = this.fromScale = new geom.Point(1, 1);
-                fromScale[axis] = 0.001;
+                fromScale[axis] = START_SCALE;
 
                 element.transform(geom.transform()
                     .scale(fromScale.x, fromScale.y)
@@ -9739,7 +9740,7 @@ var __meta__ = {
 
         setup: function() {
             this.element.transform(geom.transform()
-                .scale(0, 0, this.options.center)
+                .scale(START_SCALE, START_SCALE, this.options.center)
             );
         },
 
@@ -9759,7 +9760,7 @@ var __meta__ = {
         setup: function() {
             var center = this.center = this.element.bbox().center();
             this.element.transform(geom.transform()
-                .scale(0, 0, center)
+                .scale(START_SCALE, START_SCALE, center)
             );
         },
 

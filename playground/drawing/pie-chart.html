@@ -5,25 +5,114 @@
     <link type="text/css" href="../../styles/web/kendo.silver.css" rel="stylesheet/less"/>
     <link type="text/css" href="../../styles/dataviz/kendo.dataviz.css" rel="stylesheet/less"/>
     <link type="text/css" href="../../styles/dataviz/kendo.dataviz.silver.css" rel="stylesheet"/>
-    <script src="../require.js"></script>
+    
+    <script src="../../src/jquery.js"></script>
+    <script src="../../src/kendo.core.js"></script>
+    <script src="../../src/kendo.color.js"></script>
+                
+    <script src="../../src/kendo.data.js"></script>
+    <script src="../../src/kendo.binder.js"></script>
+               
+    <script src="../../src/kendo.popup.js"></script>
+    <script src="../../src/kendo.userevents.js"></script>
+    <script src="../../src/kendo.draganddrop.js"></script>
+    <script src="../../src/kendo.slider.js"></script>
+    <script src="../../src/kendo.colorpicker.js"></script>
+    <script src="../../src/kendo.button.js"></script>
+    <script src="../../src/kendo.numerictextbox.js"></script>
+    <script src="../../src/kendo.list.js"></script>
+    <script src="../../src/kendo.dropdownlist.js"></script>
+                
+    <script src="../../src/util/main.js"></script>
+    <script src="../../src/mixins/observers.js"></script>
+    <script src="../../src/geometry/main.js"></script>
+    <script src="../../src/drawing/core.js"></script>         
+    <script src="../../src/drawing/mixins.js"></script>
+    <script src="../../src/drawing/text-metrics.js"></script>
+    <script src="../../src/drawing/shapes.js"></script>
+    <script src="../../src/drawing/animation.js"></script>
+    <script src="../../src/drawing/parser.js"></script>
+    <script src="../../src/drawing/svg.js"></script>
+    <script src="../../src/drawing/canvas.js"></script>
+    <script src="../../src/drawing/vml.js"></script>
+                
+    <script src="../../src/kendo.dataviz.core.js"></script>
+    <script src="../../src/kendo.dataviz.chart.js"></script>
+    <script src="../../src/kendo.dataviz.sparkline.js"></script>
+    <script src="../../src/kendo.dataviz.stock.js"></script>
+    <script src="../../src/kendo.dataviz.themes.js"></script>
     <script>
-    require.config({
-        baseUrl: "../../src",
-        paths: {
-            cultures: "cultures"
-        }
-    });
+$(function() {
+        initAreaChart();
+        initPieChart();
+        initBubbleChart();
+        initDonutChart();
+        initColumnChart();
+        initBarChart();
+        initStockChart();
+        initWaterfall();
+        initRangeChart();
+});
 
-    require([ "jquery.min",
-              "kendo.dataviz.stock" ], function(){
+    
+    function initAreaChart() {
 
+        $("#area").kendoChart({
+            title: {
+                text: "Gross domestic product growth \n /GDP annual %/"
+            },
+            legend: {
+                position: "bottom"
+            },
+            seriesDefaults: {
+                type: "area",
+                area: {
+                    line: {
+                        style: "smooth"
+                    }
+                }
+            },
+            series: [{
+                name: "Haiti",
+                data: [-0.253, 0.362, -3.519, 1.799, 2.252, 3.343, 0.843, 2.877, -5.416, 5.590]
+            }, {
+                name: "World",
+                data: [1.988, 2.733, 3.994, 3.464, 4.001, 3.939, 1.333, -2.245, 4.339, 2.727]
+            }, {
+                name: "India",
+                data: [3.907, 7.943, 7.848, 9.284, 9.263, 9.801, 3.890, 8.238, 9.552, 6.855]
+            }],
+            valueAxis: {
+                labels: {
+                    format: "{0}%"
+                },
+                line: {
+                    visible: false
+                },
+                axisCrossingValue: -10
+            },
+            categoryAxis: {
+                categories: [2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011],
+                majorGridLines: {
+                    visible: false
+                }
+            },
+            tooltip: {
+                visible: true,
+                format: "{0}%",
+                template: "#= series.name #: #= value #"
+            }
+        });        
+    }
+    
+    function initPieChart() {
        $("#pie").kendoChart({
             title: {
                 position: "bottom",
                 text: "Share of Internet Population Growth, 2007 - 2012"
             },
             legend: {
-                visible: false
+                visible: true
             },
             chartArea: {
                 background: ""
@@ -40,28 +129,22 @@
                 startAngle: 150,
                 data: [{
                     category: "Asia",
-                    value: 53.8,
-                    color: "#9de219"
+                    value: 53.8
                 },{
                     category: "Europe",
-                    value: 16.1,
-                    color: "#90cc38"
+                    value: 16.1
                 },{
                     category: "Latin America",
-                    value: 11.3,
-                    color: "#068c35"
+                    value: 11.3
                 },{
                     category: "Africa",
-                    value: 9.6,
-                    color: "#006634"
+                    value: 9.6
                 },{
                     category: "Middle East",
-                    value: 5.2,
-                    color: "#004d38"
+                    value: 5.2
                 },{
                     category: "North America",
-                    value: 3.6,
-                    color: "#033939"
+                    value: 3.6
                 }]
             }],
             tooltip: {
@@ -69,6 +152,9 @@
                 format: "{0}%"
             }
         });
+    }
+    
+    function initDonutChart() {
 
         $("#donut").kendoChart({
             title: {
@@ -152,7 +238,10 @@
             }
         });
 
-         $("#column").kendoChart({
+    }
+    
+        function initColumnChart() {
+            $("#column").kendoChart({
                 title: {
                     text: "Site Visitors Stats \n /thousands/"
                 },
@@ -187,9 +276,11 @@
                     visible: true,
                     template: "#= series.name #: #= value #"
                 }
-            });
+            });        
+        }
 
-         $("#bar").kendoChart({
+        function initBarChart() {
+            $("#bar").kendoChart({
                 title: {
                     text: "Site Visitors Stats \n /thousands/"
                 },
@@ -257,7 +348,9 @@
                     }
                 }
             });
+        }
 
+        function initStockChart() {
             $("#stock-chart").kendoStockChart({
                 dataSource: {
                     transport: {
@@ -354,6 +447,9 @@
                     }
                 }
             });
+        }
+            
+        function initWaterfall() {
             $("#water").kendoChart({
                 title: {
                     text: "Inventory"
@@ -377,6 +473,9 @@
                     }
                 }
             });
+        }
+        
+        function initRangeChart() {
             $("#range").kendoChart({
                 title: {
                     text: "Average Weather Conditions"
@@ -407,7 +506,97 @@
                               "Avg Max Temp : #= value.to # °C"
                 }
             });
-    });
+        }
+        
+        function initBubbleChart() {
+             $("#bubble").kendoChart({
+                title: {
+                    text: "Job Growth for 2011"
+                },
+                legend: {
+                    visible: false
+                },
+                seriesDefaults: {
+                    type: "bubble"
+                },
+                series: [{
+                    data: [{
+                        x: -2500,
+                        y: 50000,
+                        size: 500000,
+                        category: "Microsoft"
+                    }, {
+                        x: 500,
+                        y: 110000,
+                        size: 7600000,
+                        category: "Starbucks"
+                    }, {
+                        x: 7000,
+                        y: 19000,
+                        size: 700000,
+                        category: "Google"
+                    }, {
+                        x: 1400,
+                        y: 150000,
+                        size: 700000,
+                        category: "Publix Super Markets"
+                    }, {
+                        x: 2400,
+                        y: 30000,
+                        size: 300000,
+                        category: "PricewaterhouseCoopers"
+                    }, {
+                        x: 2450,
+                        y: 34000,
+                        size: 90000,
+                        category: "Cisco"
+                    }, {
+                        x: 2700,
+                        y: 34000,
+                        size: 400000,
+                        category: "Accenture"
+                    }, {
+                        x: 2900,
+                        y: 40000,
+                        size: 450000,
+                        category: "Deloitte"
+                    }, {
+                        x: 3000,
+                        y: 55000,
+                        size: 900000,
+                        category: "Whole Foods Market"
+                    }]
+                }],
+                xAxis: {
+                    labels: {
+                        format: "{0:N0}",
+                        skip: 1
+                    },
+                    axisCrossingValue: -5000,
+                    majorUnit: 2000,
+                    plotBands: [{
+                        from: -5000,
+                        to: 0,
+                        color: "#00f",
+                        opacity: 0.05
+                    }]
+                },
+                yAxis: {
+                    labels: {
+                        format: "{0:N0}"
+                    },
+                    line: {
+                        width: 0
+                    }
+                },
+                tooltip: {
+                    visible: true,
+                    format: "{3}: {2:N0} applications",
+                    opacity: 1
+                }
+            });
+        }
+    
     </script>
     <style>
         .k-chart {
@@ -423,6 +612,7 @@
     </style>
   </head>
   <body>
+        <div id="area"></div>
       <div id="donut"></div>
       <div id="pie"></div>
       <div id="bar"></div>
@@ -432,6 +622,7 @@
       <div id="water"></div>
       <div id="range"></div>
       <div id="bullet"></div>
+      <div id="bubble"></div>
       <button>redraw</button><br />
       PDF:
       <button onclick="pdf('#donut')"       >donut</button>

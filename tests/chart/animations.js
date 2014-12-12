@@ -3,7 +3,8 @@
         draw = kendo.drawing,
         geom = kendo.geometry,
         Box2D = dataviz.Box2D,
-        Point2D = dataviz.Point2D;
+        Point2D = dataviz.Point2D,
+        START_SCALE = 0.001;
 
     (function() {
         var SIZE = 100,
@@ -43,14 +44,14 @@
         test("setup collapses element (vertical bars)", function() {
             anim.setup();
 
-            deepEqual(visual.transform().matrix(), new geom.Matrix(1, 0, 0, 0.001, 0, 0));
+            deepEqual(visual.transform().matrix(), new geom.Matrix(1, 0, 0, START_SCALE, 0, 0));
         });
 
         test("setup collapses element (horizontal bars)", function() {
             createAnim({vertical: false });
             anim.setup();
 
-            deepEqual(visual.transform().matrix(), new geom.Matrix(0.001, 0, 0, 1, 0, 0));
+            deepEqual(visual.transform().matrix(), new geom.Matrix(START_SCALE, 0, 0, 1, 0, 0));
         });
 
         test("setup calculates fromOffset element (vertical bars)", function() {
@@ -133,9 +134,9 @@
             }
         });
 
-        test("setup scales to 0 around center", function() {
+        test("setup scales to start scale around center", function() {
             anim.setup();
-            ok(visual.transform().equals(geom.transform().scale(0, 0, center)));
+            ok(visual.transform().equals(geom.transform().scale(START_SCALE, START_SCALE, center)));
         });
 
         test("step scales based on progress", function() {
@@ -164,7 +165,7 @@
 
         function createAnim(opacity) {
             visual = draw.Path.fromRect(new geom.Rect([10, 10], [30, 40]));
-       
+
             anim = draw.Animation.create(visual, {
                 type: "bubble",
                 duration: 50
@@ -178,9 +179,9 @@
             }
         });
 
-        test("setup scales to 0 around bbox center", function() {
+        test("setup scales to start scale around bbox center", function() {
             anim.setup();
-            ok(visual.transform().equals(geom.transform().scale(0, 0, center)));
+            ok(visual.transform().equals(geom.transform().scale(START_SCALE, START_SCALE, center)));
         });
 
         test("step scales based on progress", function() {
@@ -200,7 +201,7 @@
             }, 100);
         });
 
-    })();    
+    })();
 
     (function() {
         var SIZE = 100,
