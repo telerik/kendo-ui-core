@@ -2504,7 +2504,28 @@ function pad(number, digits, end) {
             }
 
             if (safe) {
-                expression = wrapExpression(expression.split("."), paramName);
+                // Find all quoted nested fields expressions
+                var dottedFields = expression.match(/'(.*?(\.).*?)'/ig);
+                if (dottedFields != null) {
+                    var shield = "_#_#_DOT_#_#_";
+                    var t;
+                    // Shield dots in nested fields expressions
+                    for (t = 0; t < dottedFields.length; t++) {
+                        var shieldedField = dottedFields[t].replace('.', shield);
+                        expression = expression.replace(dottedFields[t], shieldedField);
+                    }
+
+                    // Split shielded soure string
+                    var parts = expression.split('.');
+                    for (t = 0; t < parts.length; t++) {
+                        // Remove shield sequence from each part
+                        parts[t] = parts[t].replace(shield, '.');
+                     }
+
+                     expression = wrapExpression(parts, paramName);
+                 } else {
+                    expression = wrapExpression(expression.split("."), paramName);
+                 }
             } else {
                 expression = paramName + expression;
             }
