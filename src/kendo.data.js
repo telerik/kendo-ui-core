@@ -4302,7 +4302,7 @@ var __meta__ = {
 
             if (index >= this.total()) {
                 this.trigger("endreached", {index: index });
-                return;
+                return null;
             }
 
             if (!this.useRanges) {
