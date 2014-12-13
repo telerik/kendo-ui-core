@@ -506,7 +506,7 @@ var __meta__ = {
                 url = "/";
             }
 
-            if (url === this.url) {
+            if (url.replace(/^#/, "") === this.url) {
                 this.trigger(SAME_VIEW_REQUESTED);
                 return false;
             }
@@ -520,7 +520,8 @@ var __meta__ = {
                 element = that._findViewElement(url),
                 view = kendo.widgetInstance(element);
 
-            that.url = url;
+            that.url = url.replace(/^#/, "");
+
             that.params = params;
 
             if (view && view.reload) {
