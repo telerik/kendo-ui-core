@@ -61,7 +61,7 @@ var __meta__ = {
         exclusionSelector = ":not(.k-item.k-separator)",
         nextSelector = exclusionSelector + ":eq(0)",
         lastSelector = exclusionSelector + ":last",
-        templateSelector = "div:not(.k-animation-container,.k-list-container)",
+        templateSelector = "> div:not(.k-animation-container,.k-list-container)",
         touchPointerTypes = { "2": 1, "touch": 1 },
 
         templates = {
@@ -804,7 +804,7 @@ var __meta__ = {
                 isTargetLink = (!!targetHref && targetHref !== sampleHref),
                 shouldCloseTheRootItem = (options.openOnClick && childGroupVisible && that._isRootItem(element));
 
-            if (!options.openOnClick && element.children(templateSelector)[0]) {
+            if (target.closest(templateSelector, element[0]).length) {
                 return;
             }
 
