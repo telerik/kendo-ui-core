@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../dist/styles/web/kendo.common.css" />
+    <link rel="stylesheet" href="../dist/styles/web/kendo.default.css" />
+    <!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css"> -->
+
+    <script src="html2canvas.min.js"></script>
+    <script src="loader.js"></script>
+    <script>
+      requireSync([
+        "../src/jquery.js",
+        "../src/kendo.all.js",
+        "./console.time.js",
+        "./test-pdf-helpers.js"
+      ]);
+    </script>
+
+    <script src="./pako.min.js"></script>
+
+    <script>
+        kendo.pdf.defineFont({
+            "Verdana"             : "./Verdana/Verdana.ttf",
+            "Verdana|Bold"        : "./Verdana/Verdana_Bold.ttf",
+            "Verdana|Bold|Italic" : "./Verdana/Verdana_Bold_Italic.ttf",
+            "Verdana|Italic"      : "./Verdana/Verdana_Italic.ttf",
+            // "FontAwesome"         : "http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/fonts/fontawesome-webfont.ttf"
+        });
+    </script>
+
+    <style>
+      body {
+        margin: 0; padding: 1em;
+        font-size: 12px;
+        font-family: Verdana;
+      }
+      .k-widget, button {
+        font-family: Verdana !important;
+      }
+
+      .counters {
+        counter-reset: c1;
+      }
+      .counters .counters {
+        margin-left: 2em;
+      }
+      .counters > item {
+        display: block;
+        counter-increment: c1;
+      }
+      .counters > item::before {
+        content: "[" counters(c1, ".") "] ";
+      }
+
+      .counters2 {
+        counter-reset: c2;
+        margin-left: 12em;
+      }
+      .counters2 > item {
+        display: block;
+        counter-increment: c2;
+        position: relative;
+        padding-left: 0.5em;
+      }
+      .counters2 > item::before {
+        font-weight: bold;
+        color: red;
+        content: "(" attr(label) " » " counter(c2, decimal) ", " counter(c2, upper-alpha) ", " counter(c2, lower-roman) ") ";
+        position: absolute;
+        left: -12em;
+        width: 12em;
+        text-align: right;
+      }
+    </style>
+  </head>
+  <body>
+    Kendo:
+    <button onclick="pdf('#test1')">PDF</button>
+    <button onclick="draw('#test1', 'svg')">SVG</button>
+    <button onclick="draw('#test1', 'canvas')">Canvas</button>
+    |
+    <button onclick="h2c('#test1')">html2canvas</button>
+
+    <div id="test1">
+      <div class="counters">
+        <item>Foo
+          <div class="counters">
+            <item>one</item>
+            <item>two</item>
+            <item>three</item>
+          </div>
+        </item>
+        <item>Bar</item>
+        <item>Baz</item>
+      </div>
+
+      <p></p>
+
+      <div class="counters2">
+        <item label="One">Lorem</item>
+        <item label="Two">Ipsum</item>
+        <item label="Thrww">Dolor</item>
+        <item label="Four">Sit</item>
+        <item label="Five">Amet</item>
+        <item label="Six">Consectetur</item>
+        <item label="Seven">Adipiscing</item>
+        <item label="Eight">Elit</item>
+        <item label="Nine">Phasellus</item>
+        <item label="Ten">Porttitor</item>
+      </div>
+    </div>
+
+  </body>
+</html>

@@ -68,6 +68,7 @@
     drawDOM.getFontFaces = getFontFaces;
 
     var nodeInfo = {};
+    nodeInfo._root = nodeInfo;
 
     var parseGradient = (function(){
         var tok_linear_gradient  = /^((-webkit-|-moz-|-o-|-ms-)?linear-gradient\s*)\(/;
@@ -208,7 +209,7 @@
         function findFonts(rule) {
             var src = getPropertyValue(rule.style, "src");
             if (src) {
-                return splitOnComma(src).reduce(function(a, el){
+                return splitProperty(src).reduce(function(a, el){
                     var font = getTTF(el);
                     if (font) {
                         a.push(font);
@@ -230,7 +231,7 @@
                     break;
                   case 5:       // CSSFontFaceRule
                     var style  = r.style;
-                    var family = splitOnComma(getPropertyValue(style, "font-family"));
+                    var family = splitProperty(getPropertyValue(style, "font-family"));
                     var bold   = /^(400|bold)$/i.test(getPropertyValue(style, "font-weight"));
                     var italic = "italic" == getPropertyValue(style, "font-style");
                     var src    = findFonts(r);
@@ -259,12 +260,67 @@
         }
     }
 
-    function splitOnComma(input) {
+    function hasOwnProperty(obj, key) {
+        return Object.prototype.hasOwnProperty.call(obj, key);
+    }
+
+    function getCounter(name) {
+        name = "_counter_" + name;
+        return nodeInfo[name];
+    }
+
+    function getAllCounters(name) {
+        var values = [], p = nodeInfo;
+        name = "_counter_" + name;
+        while (p) {
+            if (hasOwnProperty(p, name)) {
+                values.push(p[name]);
+            }
+            p = Object.getPrototypeOf(p);
+        }
+        return values.reverse();
+    }
+
+    function incCounter(name, inc) {
+        var p = nodeInfo;
+        name = "_counter_" + name;
+        while (p && !hasOwnProperty(p, name)) {
+            p = Object.getPrototypeOf(p);
+        }
+        if (!p) {
+            p = nodeInfo._root;
+        }
+        p[name] = (p[name] || 0) + (inc == null ? 1 : inc);
+    }
+
+    function resetCounter(name, val) {
+        name = "_counter_" + name;
+        nodeInfo[name] = val == null ? 0 : val;
+    }
+
+    function doCounters(a, f, def) {
+        for (var i = 0; i < a.length;) {
+            var name = a[i++];
+            var val = parseFloat(a[i]);
+            if (isNaN(val)) {
+                f(name, def);
+            } else {
+                f(name, val);
+                ++i;
+            }
+        }
+    }
+
+    function splitProperty(input, separator) {
         var ret = [];
         var last = 0, pos = 0;
         var in_paren = 0;
         var in_string = false;
         var m;
+
+        if (!separator) {
+            separator = /^\s*,\s*/;
+        }
 
         function looking_at(rx) {
             return (m = rx.exec(input.substr(pos)));
@@ -275,14 +331,11 @@
         }
 
         while (pos < input.length) {
-            if (looking_at(/^\s+/)) {
-                pos += m[0].length;
-            }
-            else if (looking_at(/^[\(\[\{]/)) {
+            if (!in_string && looking_at(/^[\(\[\{]/)) {
                 in_paren++;
                 pos++;
             }
-            else if (looking_at(/^[\)\]\}]/)) {
+            else if (!in_string && looking_at(/^[\)\]\}]/)) {
                 in_paren--;
                 pos++;
             }
@@ -304,7 +357,7 @@
                 in_string = false;
                 pos++;
             }
-            else if (looking_at(/^\s*,\s*/)) {
+            else if (looking_at(separator)) {
                 if (!in_string && !in_paren && pos > last) {
                     ret.push(trim(input.substring(last, pos)));
                     last = pos + m[0].length;
@@ -477,8 +530,8 @@
         }
     }
 
-    function getComputedStyle(element) {
-        return window.getComputedStyle(element);
+    function getComputedStyle(element, pseudoElt) {
+        return window.getComputedStyle(element, pseudoElt || null);
     }
 
     function getPropertyValue(style, prop) {
@@ -709,6 +762,107 @@
         return path.close();
     }
 
+    function formatCounter(val, style) {
+        var str = parseFloat(val) + "";
+        switch (style) {
+          case "decimal-leading-zero":
+            if (str.length < 2) {
+                str = "0" + str;
+            }
+            return str;
+          case "lower-roman":
+            return romanNumeral(val);
+          case "upper-roman":
+            return romanNumeral(val).toUpperCase();
+          case "lower-latin":
+          case "lower-alpha":
+            return alphaNumeral(val - 1);
+          case "upper-latin":
+          case "upper-alpha":
+            return alphaNumeral(val - 1).toUpperCase();
+          default:
+            return str;
+        }
+    }
+
+    function evalPseudoElementContent(element, content) {
+        function displayCounter(name, style, separator) {
+            if (!separator) {
+                return formatCounter(getCounter(name) || 0, style);
+            }
+            separator = separator.replace(/^\s*(["'])(.*)\1\s*$/, "$2");
+            return getAllCounters(name).map(function(val){
+                return formatCounter(val, style);
+            }).join(separator);
+        }
+        if (/^(none|normal)$/i.test(content)) {
+            return null;
+        }
+        var a = splitProperty(content, /^\s+/);
+        var result = [], m;
+        a.forEach(function(el){
+            var tmp;
+            if ((m = /^\s*(["'])(.*)\1\s*$/.exec(el))) {
+                result.push(m[2].replace(/\\([0-9a-f]{4})/gi, function(s, p){
+                    return String.fromCharCode(parseInt(p, 16));
+                }));
+            }
+            else if ((m = /^\s*counter\((.*?)\)\s*$/.exec(el))) {
+                tmp = splitProperty(m[1]);
+                result.push(displayCounter(tmp[0], tmp[1]));
+            }
+            else if ((m = /^\s*counters\((.*?)\)\s*$/.exec(el))) {
+                tmp = splitProperty(m[1]);
+                result.push(displayCounter(tmp[0], tmp[2], tmp[1]));
+            }
+            else if ((m = /^\s*attr\((.*?)\)\s*$/.exec(el))) {
+                result.push(element.getAttribute(m[1]) || "");
+            }
+            else {
+                result.push(el);
+            }
+        });
+        return result.join("");
+    }
+
+    function getCssText(style) {
+        if (style.cssText) {
+            return style.cssText;
+        }
+        // Status: NEW.  Report year: 2002.  Current year: 2014.
+        // Nice played, Mozillians.
+        // https://bugzilla.mozilla.org/show_bug.cgi?id=137687
+        var result = [];
+        for (var i = 0; i < style.length; ++i) {
+            result.push(style[i] + ": " + getPropertyValue(style, style[i]));
+        }
+        return result.join(";\n");
+    }
+
+    function _renderWithPseudoElements(element, group) {
+        var fake = [];
+        function pseudo(kind, place) {
+            var style = getComputedStyle(element, kind);
+            var content = evalPseudoElementContent(element, style.content);
+            if (content) {
+                var psel = document.createElement("kendo-pseudo-element");
+                psel.style.cssText = getCssText(style);
+                psel.textContent = content;
+                element.insertBefore(psel, place);
+                if (kind == ":before" && !(/absolute|fixed/.test(getPropertyValue(psel.style, "position")))) {
+                    // we need to shift the "pseudo element" to the left by its width, because we
+                    // created it as a real node and it'll overlap the host element position.
+                    psel.style.marginLeft = parseFloat(getPropertyValue(psel.style, "margin-left")) - psel.offsetWidth + "px";
+                }
+                fake.push(psel);
+            }
+        }
+        pseudo(":before", element.firstChild);
+        _renderElement(element, group);
+        pseudo(":after", null);
+        fake.forEach(function(el){ element.removeChild(el); });
+    }
+
     function _renderElement(element, group) {
         var style = getComputedStyle(element);
 
@@ -727,18 +881,18 @@
         var backgroundColor = getPropertyValue(style, "background-color");
         backgroundColor = parseColor(backgroundColor);
 
-        var backgroundImage = splitOnComma( getPropertyValue(style, "background-image") );
-        var backgroundRepeat = splitOnComma( getPropertyValue(style, "background-repeat") );
-        var backgroundPosition = splitOnComma( getPropertyValue(style, "background-position") );
-        var backgroundOrigin = splitOnComma( getPropertyValue(style, "background-origin") );
-        var backgroundSize = splitOnComma( getPropertyValue(style, "background-size") );
+        var backgroundImage = splitProperty( getPropertyValue(style, "background-image") );
+        var backgroundRepeat = splitProperty( getPropertyValue(style, "background-repeat") );
+        var backgroundPosition = splitProperty( getPropertyValue(style, "background-position") );
+        var backgroundOrigin = splitProperty( getPropertyValue(style, "background-origin") );
+        var backgroundSize = splitProperty( getPropertyValue(style, "background-size") );
 
         if (browser.msie && browser.version < 10) {
             // IE9 hacks.  getPropertyValue won't return the correct
             // value.  Sucks that we have to do it here, I'd prefer to
             // move it in getPropertyValue, but we don't have the
             // element.
-            backgroundPosition = splitOnComma(element.currentStyle.backgroundPosition);
+            backgroundPosition = splitProperty(element.currentStyle.backgroundPosition);
         }
 
         var innerbox = innerBox(element.getBoundingClientRect(), "border-*-width", element);
@@ -1778,6 +1932,18 @@
     }
 
     function renderElement(element, container) {
+        var style = getComputedStyle(element);
+
+        var counterReset = getPropertyValue(style, "counter-reset");
+        if (counterReset) {
+            doCounters(splitProperty(counterReset, /^\s+/), resetCounter, 0);
+        }
+
+        var counterIncrement = getPropertyValue(style, "counter-increment");
+        if (counterIncrement) {
+            doCounters(splitProperty(counterIncrement, /^\s+/), incCounter, 1);
+        }
+
         if (/^(style|script|link|meta|iframe|svg)$/i.test(element.tagName)) {
             return;
         }
@@ -1786,7 +1952,6 @@
             return;
         }
 
-        var style = getComputedStyle(element);
         var opacity = parseFloat(getPropertyValue(style, "opacity"));
         var visibility = getPropertyValue(style, "visibility");
         var display = getPropertyValue(style, "display");
@@ -1819,7 +1984,7 @@
         pushNodeInfo(element, style, group);
 
         if (!tr) {
-            _renderElement(element, group);
+            _renderWithPseudoElements(element, group);
         }
         else {
             saveStyle(element, function(){
@@ -1849,7 +2014,7 @@
 
                 nodeInfo._matrix = nodeInfo._matrix.multiplyCopy(m);
 
-                _renderElement(element, group);
+                _renderWithPseudoElements(element, group);
             });
         }
 
