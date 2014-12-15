@@ -1368,7 +1368,7 @@ var __meta__ = {
                 extend(attr, column.attributes);
             }
 
-            content.push(kendoTextElement(template(aggregates) || ""));
+            content.push(kendoHtmlElement(template(aggregates) || ""));
 
             return kendoDomElement("td", attr, content);
         },

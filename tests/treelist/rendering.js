@@ -444,6 +444,19 @@
         equal(footers.find("td").last().text(), "foo");
     });
 
+    test("footer template as HTML string", function() {
+        createTreeList({
+            columns: [ { field: "id", footerTemplate: "<b>foo</b>" } ],
+            dataSource: {
+                data: [ { id: 1, parentId: null } ]
+            }
+        });
+
+        var footers = instance.content.find("tr.k-footer-template");
+
+        equal(footers.find("td").last().text(), "foo");
+    });
+
     test("footer template is passed aggregate values", function() {
         createTreeList({
             columns: [ { field: "id", footerTemplate: "#= count #" } ],
