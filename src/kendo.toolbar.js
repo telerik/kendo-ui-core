@@ -214,10 +214,22 @@ var __meta__ = {
                     return element;
                 },
                 toolbar: function(options) {
-                   return components.separator.base(options, false);
+                   var element = components.separator.base(options, false);
+
+                   if (options.id) {
+                       element.attr("id", options.id);
+                   }
+
+                   return element;
                 },
                 overflow: function(options) {
-                   return components.separator.base(options, true);
+                    var element = components.separator.base(options, true);
+
+                    if (options.id) {
+                        element.attr("id", options.id + "_overflow");
+                    }
+
+                    return  element;
                 }
             },
 
