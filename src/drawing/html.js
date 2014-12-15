@@ -194,7 +194,13 @@
         return result;
         function doStylesheet(ss) {
             if (ss) {
-                addRules(ss, ss.cssRules);
+                var rules = null;
+                try {
+                    rules = ss.cssRules;
+                } catch(ex) {}
+                if (rules) {
+                    addRules(ss, rules);
+                }
             }
         }
         function getTTF(el){
