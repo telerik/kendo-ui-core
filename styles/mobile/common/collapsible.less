@@ -1,0 +1,49 @@
+.km-collapsible {
+    margin: 1em;
+}
+
+.km-collapsible-header {
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+
+.km-collapsed > .km-collapsible-header {
+    border-radius: 0.5em;
+}
+
+.km-expanded > .km-collapsible-header {
+    border-radius: 0.5em 0.5em 0 0;
+}
+
+.km-collapsible-header .km-icon {
+    display: inline-block;
+    font-size: 0.8em;
+    margin-right: 0.3em;
+}
+
+.km-collapsible-header > h1,
+.km-collapsible-header > h2,
+.km-collapsible-header > h3,
+.km-collapsible-header > h4,
+.km-collapsible-header > h5,
+.km-collapsible-header > h6 {
+    margin: 0;
+}
+
+.km-collapsible-content {
+    border: 1px solid #ddd;
+    border-top: 0;
+    border-radius: 0 0 0.5em 0.5em;
+    padding: 0.4em;
+    overflow: hidden;
+}
+
+.km-collapsed > .km-collapsible-content.km-animated {
+    transform: translateY(-0.8em);
+    border-color: transparent;
+    border-bottom: none;
+}
+
+.km-animated {
+    -webkit-transition : all 0.2s ease-in-out;
+}
