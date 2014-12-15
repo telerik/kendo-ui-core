@@ -1069,6 +1069,16 @@
         ok(container.children(".k-separator").hasClass("foo"));
     });
 
+    test("options.id is attached to the separator element", 1, function() {
+        container.kendoToolBar({
+            items: [
+                { type: "separator", id: "foo" }
+            ]
+        });
+
+        equal(container.children("#foo").length, 1);
+    });
+
     /* COMMAND OVERFLOW */
 
     test("resizable toolbar receives k-toolbar-resizable class", 1, function() {
