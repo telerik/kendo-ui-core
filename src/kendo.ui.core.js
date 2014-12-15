@@ -57,6 +57,7 @@
         "./kendo.mobile.actionsheet",
         "./kendo.mobile.button",
         "./kendo.mobile.buttongroup",
+        "./kendo.mobile.collapsible",
         "./kendo.mobile.listview",
         "./kendo.mobile.navbar",
         "./kendo.mobile.scrollview",
