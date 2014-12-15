@@ -119,10 +119,19 @@
     line-height: 2.6;
 }
 
-.k-grid tr td
+.k-grid-content tr:last-child td {
+    border-bottom-width: 0;
+}
+
+.k-grid tr td,
+.k-pivot-layout .k-grid tr td
 {
-    border-width: 1px 0 0 1px;
+    border-bottom-width: 1px;
     border-style: solid;
+}
+
+.k-grouping-row + tr td {
+    border-top-width: 0;
 }
 
 .k-grid-content table tr:first-child td,
