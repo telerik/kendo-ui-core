@@ -1,120 +1,168 @@
 <div id="example">
-        <div id="gantt"></div>
+    <div id="gantt"></div>
+</div>
 
-        <script>
-            $(document).ready(function() {
-                var serviceRoot = "http://demos.telerik.com/kendo-ui/service";
-                var tasksDataSource = new kendo.data.GanttDataSource({
-                    batch: false,
-                    transport: {
-                        read: {
-                            url: serviceRoot + "/GanttTasks",
-                            dataType: "jsonp"
-                        },
-                        update: {
-                            url: serviceRoot + "/GanttTasks/Update",
-                            dataType: "jsonp"
-                        },
-                        destroy: {
-                            url: serviceRoot + "/GanttTasks/Destroy",
-                            dataType: "jsonp"
-                        },
-                        create: {
-                            url: serviceRoot + "/GanttTasks/Create",
-                            dataType: "jsonp"
-                        },
-                        parameterMap: function(options, operation) {
-                            if (operation !== "read") {
-                                return { models: kendo.stringify(options.models || [options]) };
-                            }
-                        }
-                    },
-                    schema: {
-                        model: {
-                            id: "id",
-                            fields: {
-                                id: { from: "ID", type: "number" },
-                                orderId: { from: "OrderID", type: "number", validation: { required: true } },
-                                parentId: { from: "ParentID", type: "number", defaultValue: null, validation: { required: true } },
-                                start: { from: "Start", type: "date" },
-                                end: { from: "End", type: "date" },
-                                title: { from: "Title", defaultValue: "", type: "string" },
-                                percentComplete: { from: "PercentComplete", type: "number" },
-                                summary: { from: "Summary", type: "boolean" },
-                                expanded: { from: "Expanded", type: "boolean", defaultValue: true }
-                            }
-                        }
-                    }
-                });
+<style scoped>
+    /*
+        Register the DejaVu Sans font
 
-                var dependenciesDataSource = new kendo.data.GanttDependencyDataSource({
-                    transport: {
-                        read: {
-                            url: serviceRoot + "/GanttDependencies",
-                            dataType: "jsonp"
-                        },
-                        update: {
-                            url: serviceRoot + "/GanttDependencies/Update",
-                            dataType: "jsonp"
-                        },
-                        destroy: {
-                            url: serviceRoot + "/GanttDependencies/Destroy",
-                            dataType: "jsonp"
-                        },
-                        create: {
-                            url: serviceRoot + "/GanttDependencies/Create",
-                            dataType: "jsonp"
-                        },
-                        parameterMap: function(options, operation) {
-                            if (operation !== "read" && options.models) {
-                                return { models: kendo.stringify(options.models) };
-                            }
-                        }
-                    },
-                    schema: {
-                        model: {
-                            id: "id",
-                            fields: {
-                                id: { from: "ID", type: "number" },
-                                predecessorId: { from: "PredecessorID", type: "number" },
-                                successorId: { from: "SuccessorID", type: "number" },
-                                type: { from: "Type", type: "number" }
-                            }
-                        }
-                    }
-                });
+        We'll use it for both display and embedding in the PDF file.
+        The standard PDF fonts have no support for Unicode characters.
+    */
+    @@font-face {
+      font-family: "DejaVu Sans";
+      src: url("../content/shared/styles/fonts/DejaVuSans.ttf") format("truetype");
+    }
+    @@font-face {
+      font-family: "DejaVu Sans";
+      font-weight: bold;
+      src: url("../content/shared/styles/fonts/DejaVuSans-Bold.ttf") format("truetype");
+    }
+    @@font-face {
+      font-family: "DejaVu Sans";
+      font-weight: bold;
+      font-style: italic;
+      src: url("../content/shared/styles/fonts/DejaVuSans-BoldOblique.ttf") format("truetype");
+    }
+    @@font-face {
+      font-family: "DejaVu Sans";
+      font-style: italic;
+      src: url("../content/shared/styles/fonts/DejaVuSans-Oblique.ttf") format("truetype");
+    }
 
-                var gantt = $("#gantt").kendoGantt({
-                    dataSource: tasksDataSource,
-                    dependencies: dependenciesDataSource,
-                    views: [
-                        "day",
-                        { type: "week", selected: true },
-                        "month"
-                    ],
-                    columns: [
-                        { field: "id", title: "ID", width: 60 },
-                        { field: "title", title: "Title", editable: true, sortable: true },
-                        { field: "start", title: "Start Time", format: "{0:MM/dd/yyyy}", width: 100, editable: true, sortable: true },
-                        { field: "end", title: "End Time", format: "{0:MM/dd/yyyy}", width: 100, editable: true, sortable: true }
-                    ],
-                    toolbar: ["append", "pdf"],
-                    pdf: {
-                        fileName: "Kendo UI Gantt Export.pdf",
-                        proxyURL: "http://demos.telerik.com/kendo-ui/service/export"
-                    },
-                    height: 700,
+    /* Use the DejaVu Sans font for the Gantt */
+    .k-gantt {
+        font-family: "DejaVu Sans", "Arial", sans-serif;
+        font-size: .9em;
+    }
+</style>
 
-                    showWorkHours: false,
-                    showWorkDays: false,
+<script>
+    // Import DejaVu Sans font for embedding
+    kendo.pdf.defineFont({
+        "DejaVu Sans"             : "../content/shared/styles/fonts/DejaVuSans.ttf",
+        "DejaVu Sans|Bold"        : "../content/shared/styles/fonts/DejaVuSans-Bold.ttf",
+        "DejaVu Sans|Bold|Italic" : "../content/shared/styles/fonts/DejaVuSans-Oblique.ttf",
+        "DejaVu Sans|Italic"      : "../content/shared/styles/fonts/DejaVuSans-Oblique.ttf"
+    });
+</script>
 
-                    snap: false
-                }).data("kendoGantt");
+<!-- Load Pako ZLIB library to enable PDF compression -->
+<script src="../content/shared/js/pako.min.js"></script>
 
-                $(document).bind("kendo:skinChange", function() {
-                    gantt.refresh();
-                });
-            });
-        </script>
-    </div>
+<script>
+$(document).ready(function() {
+    var serviceRoot = "http://demos.telerik.com/kendo-ui/service";
+    var tasksDataSource = new kendo.data.GanttDataSource({
+        batch: false,
+        transport: {
+            read: {
+                url: serviceRoot + "/GanttTasks",
+                dataType: "jsonp"
+            },
+            update: {
+                url: serviceRoot + "/GanttTasks/Update",
+                dataType: "jsonp"
+            },
+            destroy: {
+                url: serviceRoot + "/GanttTasks/Destroy",
+                dataType: "jsonp"
+            },
+            create: {
+                url: serviceRoot + "/GanttTasks/Create",
+                dataType: "jsonp"
+            },
+            parameterMap: function(options, operation) {
+                if (operation !== "read") {
+                    return { models: kendo.stringify(options.models || [options]) };
+                }
+            }
+        },
+        schema: {
+            model: {
+                id: "id",
+                fields: {
+                    id: { from: "ID", type: "number" },
+                    orderId: { from: "OrderID", type: "number", validation: { required: true } },
+                    parentId: { from: "ParentID", type: "number", defaultValue: null, validation: { required: true } },
+                    start: { from: "Start", type: "date" },
+                    end: { from: "End", type: "date" },
+                    title: { from: "Title", defaultValue: "", type: "string" },
+                    percentComplete: { from: "PercentComplete", type: "number" },
+                    summary: { from: "Summary", type: "boolean" },
+                    expanded: { from: "Expanded", type: "boolean", defaultValue: true }
+                }
+            }
+        }
+    });
+
+    var dependenciesDataSource = new kendo.data.GanttDependencyDataSource({
+        transport: {
+            read: {
+                url: serviceRoot + "/GanttDependencies",
+                dataType: "jsonp"
+            },
+            update: {
+                url: serviceRoot + "/GanttDependencies/Update",
+                dataType: "jsonp"
+            },
+            destroy: {
+                url: serviceRoot + "/GanttDependencies/Destroy",
+                dataType: "jsonp"
+            },
+            create: {
+                url: serviceRoot + "/GanttDependencies/Create",
+                dataType: "jsonp"
+            },
+            parameterMap: function(options, operation) {
+                if (operation !== "read" && options.models) {
+                    return { models: kendo.stringify(options.models) };
+                }
+            }
+        },
+        schema: {
+            model: {
+                id: "id",
+                fields: {
+                    id: { from: "ID", type: "number" },
+                    predecessorId: { from: "PredecessorID", type: "number" },
+                    successorId: { from: "SuccessorID", type: "number" },
+                    type: { from: "Type", type: "number" }
+                }
+            }
+        }
+    });
+
+    var gantt = $("#gantt").kendoGantt({
+        dataSource: tasksDataSource,
+        dependencies: dependenciesDataSource,
+        views: [
+            "day",
+            { type: "week", selected: true },
+            "month"
+        ],
+        columns: [
+            { field: "id", title: "ID", width: 60 },
+            { field: "title", title: "Title", editable: true, sortable: true },
+            { field: "start", title: "Start Time", format: "{0:MM/dd/yyyy}", width: 100, editable: true, sortable: true },
+            { field: "end", title: "End Time", format: "{0:MM/dd/yyyy}", width: 100, editable: true, sortable: true }
+        ],
+        toolbar: ["append", "pdf"],
+        pdf: {
+            fileName: "Kendo UI Gantt Export.pdf",
+            proxyURL: "http://demos.telerik.com/kendo-ui/service/export"
+        },
+        height: 700,
+
+        showWorkHours: false,
+        showWorkDays: false,
+
+        snap: false
+    }).data("kendoGantt");
+
+    $(document).bind("kendo:skinChange", function() {
+        gantt.refresh();
+    });
+});
+</script>
 

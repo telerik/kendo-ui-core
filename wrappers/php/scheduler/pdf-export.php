@@ -188,4 +188,51 @@ $scheduler->timezone("Etc/UTC")
 echo $scheduler->render();
 ?>
 
+<style scoped>
+    /*
+        Register the DejaVu Sans font
+
+        We'll use it for both display and embedding in the PDF file.
+        The standard PDF fonts have no support for Unicode characters.
+    */
+    @@font-face {
+      font-family: "DejaVu Sans";
+      src: url("../content/shared/styles/fonts/DejaVuSans.ttf") format("truetype");
+    }
+    @@font-face {
+      font-family: "DejaVu Sans";
+      font-weight: bold;
+      src: url("../content/shared/styles/fonts/DejaVuSans-Bold.ttf") format("truetype");
+    }
+    @@font-face {
+      font-family: "DejaVu Sans";
+      font-weight: bold;
+      font-style: italic;
+      src: url("../content/shared/styles/fonts/DejaVuSans-BoldOblique.ttf") format("truetype");
+    }
+    @@font-face {
+      font-family: "DejaVu Sans";
+      font-style: italic;
+      src: url("../content/shared/styles/fonts/DejaVuSans-Oblique.ttf") format("truetype");
+    }
+
+    /* Use the DejaVu Sans font for the Scheduler */
+    .k-scheduler {
+        font-family: "DejaVu Sans", "Arial", sans-serif;
+    }
+</style>
+
+<script>
+    // Import DejaVu Sans font for embedding
+    kendo.pdf.defineFont({
+        "DejaVu Sans"             : "../content/shared/styles/fonts/DejaVuSans.ttf",
+        "DejaVu Sans|Bold"        : "../content/shared/styles/fonts/DejaVuSans-Bold.ttf",
+        "DejaVu Sans|Bold|Italic" : "../content/shared/styles/fonts/DejaVuSans-Oblique.ttf",
+        "DejaVu Sans|Italic"      : "../content/shared/styles/fonts/DejaVuSans-Oblique.ttf"
+    });
+</script>
+
+<!-- Load Pako ZLIB library to enable PDF compression -->
+<script src="../content/shared/js/pako.min.js"></script>
+
 <?php require_once '../include/footer.php'; ?>

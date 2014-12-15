@@ -8,6 +8,54 @@
 <c:url value="/grid/pdf-export/save" var="saveUrl" />
 
 <demo:header />
+
+<style scoped>
+    /*
+        Register the DejaVu Sans font
+
+        We'll use it for both display and embedding in the PDF file.
+        The standard PDF fonts have no support for Unicode characters.
+    */
+    @font-face {
+      font-family: "DejaVu Sans";
+      src: url("../resources/shared/styles/fonts/DejaVuSans.ttf") format("truetype");
+    }
+    @font-face {
+      font-family: "DejaVu Sans";
+      font-weight: bold;
+      src: url("../resources/shared/styles/fonts/DejaVuSans-Bold.ttf") format("truetype");
+    }
+    @font-face {
+      font-family: "DejaVu Sans";
+      font-weight: bold;
+      font-style: italic;
+      src: url("../resources/shared/styles/fonts/DejaVuSans-BoldOblique.ttf") format("truetype");
+    }
+    @font-face {
+      font-family: "DejaVu Sans";
+      font-style: italic;
+      src: url("../resources/shared/styles/fonts/DejaVuSans-Oblique.ttf") format("truetype");
+    }
+
+    /* Use the DejaVu Sans font for the Grid */
+    .k-grid {
+        font-family: "DejaVu Sans", "Arial", sans-serif;
+    }
+</style>
+
+<script>
+    // Import DejaVu Sans font for embedding
+    kendo.pdf.defineFont({
+        "DejaVu Sans"             : "../resources/shared/styles/fonts/DejaVuSans.ttf",
+        "DejaVu Sans|Bold"        : "../resources/shared/styles/fonts/DejaVuSans-Bold.ttf",
+        "DejaVu Sans|Bold|Italic" : "../resources/shared/styles/fonts/DejaVuSans-Oblique.ttf",
+        "DejaVu Sans|Italic"      : "../resources/shared/styles/fonts/DejaVuSans-Oblique.ttf"
+    });
+</script>
+
+<!-- Load Pako ZLIB library to enable PDF compression -->
+<script src="../resources/shared/js/pako.min.js"></script>
+
     <kendo:grid name="grid" style="width:900px;" rowTemplate="row-template" altRowTemplate="alt-row-template">
         <kendo:grid-toolbar>
         	<kendo:grid-toolbarItem name="pdf" />
@@ -36,9 +84,8 @@
                <img src="<c:url value='/resources/web/Employees/' />#:employeeId#.jpg" alt="#: employeeId #" />
             </td>
             <td class="details">
-               <span class="title">#: title #</span>
-               <span class="description">Name : #: firstName# #: lastName#</span>
-               <span class="description">Country : #: country# </span>
+               <span class="name">#: firstName# #: lastName# </span>
+               <span class="title">Title: #: title #</span>
             </td>
 			<td class="country">
 			   #: country #
@@ -55,9 +102,8 @@
                <img src="<c:url value='/resources/web/Employees/' />#:employeeId#.jpg" alt="#:employeeId #" />
             </td>
             <td class="details">
-               <span class="title">#: title #</span>
-               <span class="description">Name : #: firstName# #: lastName#</span>
-               <span class="description">Country : #: country# </span>
+               <span class="name">#: firstName# #: lastName# </span>
+               <span class="title">Title: #: title #</span>
             </td>
 			<td class="country">
 			   #: country #
@@ -68,44 +114,43 @@
         </tr>
     </script>
     
-   <style scoped="scoped">
-.name {
-    display: block;
-    font-size: 1.6em;
-}
-.title {
-    display: block;
-    padding-top: 1.6em;
-}
-.employeeID,
-.country {
-    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-    font-size: 50px;
-    font-weight: bold;
-    color: #898989;
-}
-td.photo, .employeeID {
-    text-align: center;
-}
-.k-grid-header .k-header {
-    padding: 10px 20px;
-}
-.k-grid td {
-    background: -moz-linear-gradient(top,  rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.15) 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.05)), color-stop(100%,rgba(0,0,0,0.15)));
-    background: -webkit-linear-gradient(top,  rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.15) 100%);
-    background: -o-linear-gradient(top,  rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.15) 100%);
-    background: -ms-linear-gradient(top,  rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.15) 100%);
-    background: linear-gradient(to bottom,  rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.15) 100%);
-    padding: 20px;
-}
-.k-grid .k-alt td {
-    background: -moz-linear-gradient(top,  rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.1) 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.2)), color-stop(100%,rgba(0,0,0,0.1)));
-    background: -webkit-linear-gradient(top,  rgba(0,0,0,0.2) 0%,rgba(0,0,0,0.1) 100%);
-    background: -o-linear-gradient(top,  rgba(0,0,0,0.2) 0%,rgba(0,0,0,0.1) 100%);
-    background: -ms-linear-gradient(top,  rgba(0,0,0,0.2) 0%,rgba(0,0,0,0.1) 100%);
-    background: linear-gradient(to bottom,  rgba(0,0,0,0.2) 0%,rgba(0,0,0,0.1) 100%);
-}
+<style scoped="scoped">
+   .employeeID,
+   .country {
+       font-size: 42px;
+       font-weight: bold;
+       color: #898989;
+   }
+   .name {
+       display: block;
+       font-size: 1.6em;
+   }
+   .title {
+       display: block;
+       padding-top: 1.6em;
+   }
+   td.photo, .employeeID {
+       text-align: center;
+   }
+   .k-grid-header .k-header {
+       padding: 10px 20px;
+   }
+   .k-grid tr {
+       background: -moz-linear-gradient(top,  rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.15) 100%);
+       background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.05)), color-stop(100%,rgba(0,0,0,0.15)));
+       background: -webkit-linear-gradient(top,  rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.15) 100%);
+       background: -o-linear-gradient(top,  rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.15) 100%);
+       background: -ms-linear-gradient(top,  rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.15) 100%);
+       background: linear-gradient(to bottom,  rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.15) 100%);
+       padding: 20px;
+   }
+   .k-grid tr.k-alt {
+       background: -moz-linear-gradient(top,  rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.1) 100%);
+       background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.2)), color-stop(100%,rgba(0,0,0,0.1)));
+       background: -webkit-linear-gradient(top,  rgba(0,0,0,0.2) 0%,rgba(0,0,0,0.1) 100%);
+       background: -o-linear-gradient(top,  rgba(0,0,0,0.2) 0%,rgba(0,0,0,0.1) 100%);
+       background: -ms-linear-gradient(top,  rgba(0,0,0,0.2) 0%,rgba(0,0,0,0.1) 100%);
+       background: linear-gradient(to bottom,  rgba(0,0,0,0.2) 0%,rgba(0,0,0,0.1) 100%);
+   }
 </style>      
 <demo:footer />

@@ -14,6 +14,26 @@
     <servlet-mapping>
         <servlet-name>kendo</servlet-name>
         <url-pattern>/</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping>    
     
+<mime-mapping>
+    <extension>eot</extension>
+    <mime-type>application/vnd.ms-fontobject</mime-type>
+</mime-mapping>
+
+<mime-mapping>
+    <extension>otf</extension>
+    <mime-type>font/opentype</mime-type>
+</mime-mapping>
+
+<mime-mapping>
+    <extension>ttf</extension>
+    <mime-type>font/truetype</mime-type>
+</mime-mapping>
+
+<mime-mapping>
+    <extension>woff</extension>
+    <mime-type>application/font-woff </mime-type>
+</mime-mapping>
+
 </web-app>

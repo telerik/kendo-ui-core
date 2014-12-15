@@ -111,15 +111,61 @@ $grid->dataSource($dataSource)
 echo $grid->render();
 ?>
 
+<style scoped>
+    /*
+        Register the DejaVu Sans font
+
+        We'll use it for both display and embedding in the PDF file.
+        The standard PDF fonts have no support for Unicode characters.
+    */
+    @font-face {
+      font-family: "DejaVu Sans";
+      src: url("../content/shared/styles/fonts/DejaVuSans.ttf") format("truetype");
+    }
+    @font-face {
+      font-family: "DejaVu Sans";
+      font-weight: bold;
+      src: url("../content/shared/styles/fonts/DejaVuSans-Bold.ttf") format("truetype");
+    }
+    @font-face {
+      font-family: "DejaVu Sans";
+      font-weight: bold;
+      font-style: italic;
+      src: url("../content/shared/styles/fonts/DejaVuSans-BoldOblique.ttf") format("truetype");
+    }
+    @font-face {
+      font-family: "DejaVu Sans";
+      font-style: italic;
+      src: url("../content/shared/styles/fonts/DejaVuSans-Oblique.ttf") format("truetype");
+    }
+
+    /* Use the DejaVu Sans font for the Grid */
+    .k-grid {
+        font-family: "DejaVu Sans", "Arial", sans-serif;
+    }
+</style>
+
+<script>
+    // Import DejaVu Sans font for embedding
+    kendo.pdf.defineFont({
+        "DejaVu Sans"             : "../content/shared/styles/fonts/DejaVuSans.ttf",
+        "DejaVu Sans|Bold"        : "../content/shared/styles/fonts/DejaVuSans-Bold.ttf",
+        "DejaVu Sans|Bold|Italic" : "../content/shared/styles/fonts/DejaVuSans-Oblique.ttf",
+        "DejaVu Sans|Italic"      : "../content/shared/styles/fonts/DejaVuSans-Oblique.ttf"
+    });
+</script>
+
+<!-- Load Pako ZLIB library to enable PDF compression -->
+<script src="../content/shared/js/pako.min.js"></script>
+
 <script id="row-template" type="text/x-kendo-template">
   <tr data-uid="#: uid #">
     <td class="photo">
       <img src="../content/web/Employees/#:EmployeeID#.jpg" alt="#: EmployeeID #" />
     </td>
     <td class="details">
-      <span class="title">#: Title #</span>
-      <span class="description">Name : #: FirstName# #: LastName#</span>
-      <span class="description">Country : #: Country# </span>
+       <span class="name">#: FirstName# #: LastName# </span>
+       <span class="title">Title: #: Title #</span>
     </td>
     <td class="country">
       #: Country #
@@ -136,9 +182,8 @@ echo $grid->render();
       <img src="../content/web/Employees/#:EmployeeID#.jpg" alt="#: EmployeeID #" />
     </td>
     <td class="details">
-      <span class="title">#: Title #</span>
-      <span class="description">Name : #: FirstName# #: LastName#</span>
-      <span class="description">Country : #: Country# </span>
+       <span class="name">#: FirstName# #: LastName# </span>
+       <span class="title">Title: #: Title #</span>
     </td>
     <td class="country">
       #: Country #
@@ -150,44 +195,43 @@ echo $grid->render();
 </script>
 
 <style scoped="scoped">
-.name {
-    display: block;
-    font-size: 1.6em;
-}
-.title {
-    display: block;
-    padding-top: 1.6em;
-}
-.employeeID,
-.country {
-    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-    font-size: 50px;
-    font-weight: bold;
-    color: #898989;
-}
-td.photo, .employeeID {
-    text-align: center;
-}
-.k-grid-header .k-header {
-    padding: 10px 20px;
-}
-.k-grid td {
-    background: -moz-linear-gradient(top,  rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.15) 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.05)), color-stop(100%,rgba(0,0,0,0.15)));
-    background: -webkit-linear-gradient(top,  rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.15) 100%);
-    background: -o-linear-gradient(top,  rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.15) 100%);
-    background: -ms-linear-gradient(top,  rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.15) 100%);
-    background: linear-gradient(to bottom,  rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.15) 100%);
-    padding: 20px;
-}
-.k-grid .k-alt td {
-    background: -moz-linear-gradient(top,  rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.1) 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.2)), color-stop(100%,rgba(0,0,0,0.1)));
-    background: -webkit-linear-gradient(top,  rgba(0,0,0,0.2) 0%,rgba(0,0,0,0.1) 100%);
-    background: -o-linear-gradient(top,  rgba(0,0,0,0.2) 0%,rgba(0,0,0,0.1) 100%);
-    background: -ms-linear-gradient(top,  rgba(0,0,0,0.2) 0%,rgba(0,0,0,0.1) 100%);
-    background: linear-gradient(to bottom,  rgba(0,0,0,0.2) 0%,rgba(0,0,0,0.1) 100%);
-}
+    .employeeID,
+    .country {
+        font-size: 50px;
+        font-weight: bold;
+        color: #898989;
+    }
+    .name {
+        display: block;
+        font-size: 1.6em;
+    }
+    .title {
+        display: block;
+        padding-top: 1.6em;
+    }
+    td.photo, .employeeID {
+        text-align: center;
+    }
+    .k-grid-header .k-header {
+        padding: 10px 20px;
+    }
+    .k-grid tr {
+        background: -moz-linear-gradient(top,  rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.15) 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.05)), color-stop(100%,rgba(0,0,0,0.15)));
+        background: -webkit-linear-gradient(top,  rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.15) 100%);
+        background: -o-linear-gradient(top,  rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.15) 100%);
+        background: -ms-linear-gradient(top,  rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.15) 100%);
+        background: linear-gradient(to bottom,  rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.15) 100%);
+        padding: 20px;
+    }
+    .k-grid tr.k-alt {
+        background: -moz-linear-gradient(top,  rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.1) 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.2)), color-stop(100%,rgba(0,0,0,0.1)));
+        background: -webkit-linear-gradient(top,  rgba(0,0,0,0.2) 0%,rgba(0,0,0,0.1) 100%);
+        background: -o-linear-gradient(top,  rgba(0,0,0,0.2) 0%,rgba(0,0,0,0.1) 100%);
+        background: -ms-linear-gradient(top,  rgba(0,0,0,0.2) 0%,rgba(0,0,0,0.1) 100%);
+        background: linear-gradient(to bottom,  rgba(0,0,0,0.2) 0%,rgba(0,0,0,0.1) 100%);
+    }
 </style>
 
 <?php require_once '../include/footer.php'; ?>
