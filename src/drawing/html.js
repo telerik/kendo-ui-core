@@ -191,6 +191,78 @@
         };
     })();
 
+    var splitProperty = (function(){
+        var cache = {};
+        return function(input, separator) {
+            if (!separator) {
+                separator = /^\s*,\s*/;
+            }
+
+            var cacheKey = input + separator;
+
+            if (hasOwnProperty(cache, cacheKey)) {
+                return cache[cacheKey];
+            }
+
+            var ret = [];
+            var last = 0, pos = 0;
+            var in_paren = 0;
+            var in_string = false;
+            var m;
+
+            function looking_at(rx) {
+                return (m = rx.exec(input.substr(pos)));
+            }
+
+            function trim(str) {
+                return str.replace(/^\s+|\s+$/g, "");
+            }
+
+            while (pos < input.length) {
+                if (!in_string && looking_at(/^[\(\[\{]/)) {
+                    in_paren++;
+                    pos++;
+                }
+                else if (!in_string && looking_at(/^[\)\]\}]/)) {
+                    in_paren--;
+                    pos++;
+                }
+                else if (!in_string && looking_at(/^[\"\']/)) {
+                    in_string = m[0];
+                    pos++;
+                }
+                else if (in_string == "'" && looking_at(/^\\\'/)) {
+                    pos += 2;
+                }
+                else if (in_string == '"' && looking_at(/^\\\"/)) {
+                    pos += 2;
+                }
+                else if (in_string == "'" && looking_at(/^\'/)) {
+                    in_string = false;
+                    pos++;
+                }
+                else if (in_string == '"' && looking_at(/^\"/)) {
+                    in_string = false;
+                    pos++;
+                }
+                else if (looking_at(separator)) {
+                    if (!in_string && !in_paren && pos > last) {
+                        ret.push(trim(input.substring(last, pos)));
+                        last = pos + m[0].length;
+                    }
+                    pos += m[0].length;
+                }
+                else {
+                    pos++;
+                }
+            }
+            if (last < pos) {
+                ret.push(trim(input.substring(last, pos)));
+            }
+            return (cache[cacheKey] = ret);
+        };
+    })();
+
     var FONT_URLS_FROM_RULES = {};
 
     // only function definitions after this line.
@@ -332,69 +404,6 @@
                 ++i;
             }
         }
-    }
-
-    function splitProperty(input, separator) {
-        var ret = [];
-        var last = 0, pos = 0;
-        var in_paren = 0;
-        var in_string = false;
-        var m;
-
-        if (!separator) {
-            separator = /^\s*,\s*/;
-        }
-
-        function looking_at(rx) {
-            return (m = rx.exec(input.substr(pos)));
-        }
-
-        function trim(str) {
-            return str.replace(/^\s+|\s+$/g, "");
-        }
-
-        while (pos < input.length) {
-            if (!in_string && looking_at(/^[\(\[\{]/)) {
-                in_paren++;
-                pos++;
-            }
-            else if (!in_string && looking_at(/^[\)\]\}]/)) {
-                in_paren--;
-                pos++;
-            }
-            else if (!in_string && looking_at(/^[\"\']/)) {
-                in_string = m[0];
-                pos++;
-            }
-            else if (in_string == "'" && looking_at(/^\\\'/)) {
-                pos += 2;
-            }
-            else if (in_string == '"' && looking_at(/^\\\"/)) {
-                pos += 2;
-            }
-            else if (in_string == "'" && looking_at(/^\'/)) {
-                in_string = false;
-                pos++;
-            }
-            else if (in_string == '"' && looking_at(/^\"/)) {
-                in_string = false;
-                pos++;
-            }
-            else if (looking_at(separator)) {
-                if (!in_string && !in_paren && pos > last) {
-                    ret.push(trim(input.substring(last, pos)));
-                    last = pos + m[0].length;
-                }
-                pos += m[0].length;
-            }
-            else {
-                pos++;
-            }
-        }
-        if (last < pos) {
-            ret.push(trim(input.substring(last, pos)));
-        }
-        return ret;
     }
 
     function parseColor(str, css) {
