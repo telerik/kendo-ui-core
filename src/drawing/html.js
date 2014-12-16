@@ -1950,7 +1950,7 @@
             doCounters(splitProperty(counterIncrement, /^\s+/), incCounter, 1);
         }
 
-        if (/^(style|script|link|meta|iframe|svg)$/i.test(element.tagName)) {
+        if (/^(style|script|link|meta|iframe|svg|col|colgroup)$/i.test(element.tagName)) {
             return;
         }
 
