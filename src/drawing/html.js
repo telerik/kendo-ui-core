@@ -185,8 +185,26 @@
         };
     })();
 
+    var FONT_URLS_FROM_RULES = {};
+
     // only function definitions after this line.
     return;
+
+    function getFontURL(el){
+        // XXX: for IE we get here the whole cssText of the rule,
+        // because the computedStyle.src is empty.  Next time we need
+        // to fix these regexps we better write a CSS parser. :-\
+        var url = FONT_URLS_FROM_RULES[el];
+        if (!url) {
+            var m;
+            if ((m = /url\((['"]?)([^'")]*?)\1\)\s+format\((['"]?)truetype\3\)/.exec(el))) {
+                url = FONT_URLS_FROM_RULES[el] = m[2];
+            } else if ((m = /url\((['"]?)([^'")]*?\.ttf)\1\)/.exec(el))) {
+                url = FONT_URLS_FROM_RULES[el] = m[2];
+            }
+        }
+        return url;
+    }
 
     function getFontFaces() {
         var result = {};
@@ -205,20 +223,11 @@
                 }
             }
         }
-        function getTTF(el){
-            var m;
-            if ((m = /url\((['"]?)(.*?)\1\)\s+format\((['"]?)truetype\3\)/.exec(el))) {
-                return(m[2]);
-            }
-            else if ((m = /url\((['"]?)(.*?\.ttf)\1\)/.exec(el))) {
-                return(m[2]);
-            }
-        }
         function findFonts(rule) {
             var src = getPropertyValue(rule.style, "src");
             if (src) {
                 return splitProperty(src).reduce(function(a, el){
-                    var font = getTTF(el);
+                    var font = getFontURL(el);
                     if (font) {
                         a.push(font);
                     }
@@ -227,7 +236,7 @@
             } else {
                 // Internet Explorer
                 // XXX: this is gross.  should work though for valid CSS.
-                return [ getTTF(rule.cssText) ];
+                return [ getFontURL(rule.cssText) ];
             }
         }
         function addRules(styleSheet, rules) {
