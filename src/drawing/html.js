@@ -801,9 +801,6 @@
                 return formatCounter(val, style);
             }).join(separator);
         }
-        if (/^(none|normal)$/i.test(content)) {
-            return null;
-        }
         var a = splitProperty(content, /^\s+/);
         var result = [], m;
         a.forEach(function(el){
@@ -846,14 +843,17 @@
     }
 
     function _renderWithPseudoElements(element, group) {
+        if (/^kendo-pseudo-element$/i.test(element.tagName)) {
+            _renderElement(element, group);
+            return;
+        }
         var fake = [];
         function pseudo(kind, place) {
             var style = getComputedStyle(element, kind);
-            var content = evalPseudoElementContent(element, style.content);
-            if (content) {
+            if (style.content && style.content != "normal" && style.content != "none") {
                 var psel = document.createElement("kendo-pseudo-element");
                 psel.style.cssText = getCssText(style);
-                psel.textContent = content;
+                psel.textContent = evalPseudoElementContent(element, style.content);
                 element.insertBefore(psel, place);
                 if (kind == ":before" && !(/absolute|fixed/.test(getPropertyValue(psel.style, "position")))) {
                     // we need to shift the "pseudo element" to the left by its width, because we
@@ -864,8 +864,8 @@
             }
         }
         pseudo(":before", element.firstChild);
-        _renderElement(element, group);
         pseudo(":after", null);
+        _renderElement(element, group);
         fake.forEach(function(el){ element.removeChild(el); });
     }
 
