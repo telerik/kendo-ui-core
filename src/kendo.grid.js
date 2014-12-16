@@ -6151,11 +6151,7 @@ var __meta__ = {
                 if (that.options.scrollable.virtual) {
                     that.content.find(">.k-virtual-scrollable-wrap").trigger("scroll");
                 } else {
-                    if (that.touchScroller) {
-                        that.touchScroller.movable.trigger("change");
-                    } else {
-                        that.content.trigger("scroll");
-                    }
+                    that.content.trigger("scroll");
                 }
             }
 
