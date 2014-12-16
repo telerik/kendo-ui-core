@@ -3488,7 +3488,7 @@
                         var options = deepExtend({}, this.options.connectionDefaults);
                         options.dataItem = dataItem;
                         var connection = new Connection(from, to, options);
-                        connection.type(CASCADING);
+                        connection.type(options.type || CASCADING);
                         this._connectionsDataMap[dataItem.uid] = connection;
                         this.addConnection(connection);
                     }
