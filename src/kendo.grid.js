@@ -2400,7 +2400,9 @@ var __meta__ = {
 
         _syncLockedContentHeight: function() {
             if (this.lockedTable) {
-                this._adjustLockedHorizontalScrollBar();
+                if (!this.touchScroller) {
+                    this._adjustLockedHorizontalScrollBar();
+                }
                 this._adjustRowsHeight(this.table, this.lockedTable);
             }
         },
@@ -6149,7 +6151,11 @@ var __meta__ = {
                 if (that.options.scrollable.virtual) {
                     that.content.find(">.k-virtual-scrollable-wrap").trigger("scroll");
                 } else {
-                    that.content.trigger("scroll");
+                    if (that.touchScroller) {
+                        that.touchScroller.movable.trigger("change");
+                    } else {
+                        that.content.trigger("scroll");
+                    }
                 }
             }
 
