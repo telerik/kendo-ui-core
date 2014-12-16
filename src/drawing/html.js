@@ -20,6 +20,8 @@
     var slice = Array.prototype.slice;
     var browser = kendo.support.browser;
 
+    var KENDO_PSEUDO_ELEMENT = "KENDO-PSEUDO-ELEMENT";
+
     var IMAGE_CACHE = {};
 
     /* -----[ exports ]----- */
@@ -843,7 +845,7 @@
     }
 
     function _renderWithPseudoElements(element, group) {
-        if (/^kendo-pseudo-element$/i.test(element.tagName)) {
+        if (element.tagName == KENDO_PSEUDO_ELEMENT) {
             _renderElement(element, group);
             return;
         }
@@ -851,7 +853,7 @@
         function pseudo(kind, place) {
             var style = getComputedStyle(element, kind);
             if (style.content && style.content != "normal" && style.content != "none") {
-                var psel = document.createElement("kendo-pseudo-element");
+                var psel = document.createElement(KENDO_PSEUDO_ELEMENT);
                 psel.style.cssText = getCssText(style);
                 psel.textContent = evalPseudoElementContent(element, style.content);
                 element.insertBefore(psel, place);
@@ -1267,7 +1269,7 @@
             function _drawBullet(f) {
                 saveStyle(element, function(){
                     element.style.position = "relative";
-                    var bullet = document.createElement("kendo-bullet");
+                    var bullet = document.createElement(KENDO_PSEUDO_ELEMENT);
                     bullet.style.position = "absolute";
                     bullet.style.boxSizing = "border-box";
                     if (listStylePosition == "outside") {
