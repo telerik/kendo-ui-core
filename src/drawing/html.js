@@ -84,8 +84,13 @@
         var tok_pclose           = /^(\))/;
         var tok_comma            = /^(,)/;
 
+        var cache = {};
+
         return function(input) {
             var orig = input;
+            if (hasOwnProperty(cache, orig)) {
+                return cache[orig];
+            }
             function skip_ws() {
                 var m = tok_whitespace.exec(input);
                 if (m) {
@@ -180,8 +185,9 @@
 
             var tok = read(tok_linear_gradient);
             if (tok) {
-                return read_linear_gradient(tok);
+                tok = read_linear_gradient(tok);
             }
+            return (cache[orig] = tok);
         };
     })();
 
