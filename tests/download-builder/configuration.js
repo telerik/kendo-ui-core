@@ -76,7 +76,26 @@
             resolver.addComponent(c.id, features);
 
             var scripts = ["jquery.js", "angular.js"].concat(resolver.scripts);
-            asyncTest(c.id, function() {
+            asyncTest(c.id + " (all features)", function() {
+                loadScripts(scripts,
+                    function loaded(source) {
+                        dryRun(source, scripts);
+                    },
+                    function error(src) {
+                        ok(false, "Unable to load " + src);
+                        start();
+                    }
+                );
+            });
+        });
+
+        $.each(components, function(i, c) {
+            resolver.reset();
+
+            resolver.addComponent(c.id, []);
+
+            var scripts = ["jquery.js", "angular.js"].concat(resolver.scripts);
+            asyncTest(c.id + " (no features)", function() {
                 loadScripts(scripts,
                     function loaded(source) {
                         dryRun(source, scripts);
