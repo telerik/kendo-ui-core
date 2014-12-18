@@ -147,6 +147,45 @@
        equal(toolbar.popup.element.find("#foo_overflow").length, 0, "Button is removed");
     });
 
+    test("remove method removes template items by their ID", 1, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { template: '<span id="template"></span>', id: "foo" }
+            ]
+        }).data("kendoToolBar");
+
+        toolbar.remove("#foo");
+        equal(toolbar.element.find("#template").length, 0);
+    });
+
+    test("remove method removes overflowTemplate items by their ID", 1, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { overflowTemplate: '<span id="template"></span>', id: "foo" }
+            ]
+        }).data("kendoToolBar");
+
+        toolbar.remove("#foo_overflow");
+        equal(toolbar.popup.element.find("#foo_overflow").length, 0);
+    });
+
+    test("remove method removes template and overflow template items by their ID", 2, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                {
+                    template: '<span id="template"></span>',
+                    overflowTemplate: '<span id="template_overflow"></span>',
+                    overflow: "auto",
+                    id: "foo"
+                }
+            ]
+        }).data("kendoToolBar");
+
+        toolbar.remove("#foo");
+        equal(toolbar.element.find("#template").length, 0);
+        equal(toolbar.popup.element.find("#template_overflow").length, 0);
+    });
+
     test("enable method enables button", 2, function() {
         var toolbar = container.kendoToolBar({
             items: [

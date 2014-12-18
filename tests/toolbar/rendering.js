@@ -1213,4 +1213,15 @@
         equal($("#template").parent().data("test"), "test");
     });
 
+    test("id is applied to the wrapper element", 2, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { template: '<span id="template"></span>', id: "foo", attributes: { "class": "foo" } }
+            ]
+        }).data("kendoToolBar");
+
+        ok($("#foo").length);
+        ok($("#foo").hasClass("foo"));
+    });
+
 })();
