@@ -436,6 +436,29 @@
             ok(!areaPath.options.closed);
         });
 
+        test("sets zIndex", function() {
+            setupAreaChart(plotArea, {
+                series: [{
+                    data: [1, 2],
+                    zIndex: 10
+                }]
+            });
+            equal(areaChart._segments[0].visual.options.zIndex, 10);
+        });
+
+        test("sets zIndex for spline segments", function() {
+            setupAreaChart(plotArea, {
+                series: [{
+                    data: [1, 2],
+                    zIndex: 10,
+                    line: {
+                        style: "smooth"
+                    }
+                }]
+            });
+            equal(areaChart._segments[0].visual.options.zIndex, 10);
+        });
+
         // ------------------------------------------------------------
         module("Area Chart / Rendering / Missing Values", {
             setup: function() {

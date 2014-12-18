@@ -5430,7 +5430,9 @@ var __meta__ = {
                 color = defaults.color;
             }
 
-            this.visual = new draw.Group();
+            this.visual = new draw.Group({
+                zIndex: series.zIndex
+            });
 
             this.createFill({
                 fill: {
