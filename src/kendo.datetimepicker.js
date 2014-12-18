@@ -540,7 +540,7 @@ var __meta__ = {
                         e.preventDefault();
                     } else {
 
-                        if (that.element.val() !== that._oldText) {
+                        if (element.val() !== that._oldText) {
                             date = parse(element.val(), options.parseFormats, options.culture);
 
                             that.dateView[date ? "current" : "value"](date);
@@ -607,6 +607,12 @@ var __meta__ = {
                     if (that.trigger(OPEN, timeViewParams)) {
                         e.preventDefault();
                     } else {
+                        if (element.val() !== that._oldText) {
+                            date = parse(element.val(), options.parseFormats, options.culture);
+
+                            that.timeView.value(date);
+                        }
+
                         ul.attr(ARIA_HIDDEN, false);
                         element.attr(ARIA_EXPANDED, true)
                                .attr(ARIA_OWNS, timeView._timeViewID);
