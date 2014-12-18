@@ -9,6 +9,7 @@
     // WARNING: removing the following jshint declaration and turning
     // == into === to make JSHint happy will break functionality.
     /* jshint eqnull:true */
+    /* jshint -W069 */
     /* jshint loopfunc:true */
     /* jshint newcap:false */
     /* global VBArray */
@@ -1801,11 +1802,14 @@
                 name = mkFamily(fontFamily[i]);
                 url = FONT_MAPPINGS[name];
                 if (url) {
-                    return url;
+                    break;
                 }
             }
         } else {
             url = FONT_MAPPINGS[fontFamily.toLowerCase()];
+        }
+        while (typeof url == "function") {
+            url = url();
         }
         if (!url) {
             url = "Times-Roman";
@@ -1832,14 +1836,64 @@
         "zapfdingbats|bold|italic" : "ZapfDingbats"
     };
 
+    function fontAlias(alias, name) {
+        alias = alias.toLowerCase();
+        FONT_MAPPINGS[alias] = function() {
+            return FONT_MAPPINGS[name];
+        };
+        FONT_MAPPINGS[alias + "|bold"] = function() {
+            return FONT_MAPPINGS[name + "|bold"];
+        };
+        FONT_MAPPINGS[alias + "|italic"] = function() {
+            return FONT_MAPPINGS[name + "|italic"];
+        };
+        FONT_MAPPINGS[alias + "|bold|italic"] = function() {
+            return FONT_MAPPINGS[name + "|bold|italic"];
+        };
+    }
+
+    // Let's define some common names to an appropriate replacement.
+    // These are overridable via kendo.pdf.defineFont, should the user
+    // want to include the proper versions.
+
+    fontAlias("Times New Roman" , "serif");
+    fontAlias("Courier New"     , "monospace");
+    fontAlias("Arial"           , "sans-serif");
+    fontAlias("Helvetica"       , "sans-serif");
+    fontAlias("Verdana"         , "sans-serif");
+    fontAlias("Tahoma"          , "sans-serif");
+    fontAlias("Georgia"         , "sans-serif");
+    fontAlias("Monaco"          , "monospace");
+    fontAlias("Andale Mono"     , "monospace");
+
     function defineFont(name, url) {
         if (arguments.length == 1) {
             for (var i in name) {
-                defineFont(i, name[i]);
+                if (hasOwnProperty(name, i)) {
+                    defineFont(i, name[i]);
+                }
             }
         } else {
             name = name.toLowerCase();
             FONT_MAPPINGS[name] = url;
+
+            // special handling for DejaVu fonts: if they get defined,
+            // let them also replace the default families, for good
+            // Unicode support out of the box.
+            switch (name) {
+              case "dejavu sans"               : FONT_MAPPINGS["sans-serif"]              = url; break;
+              case "dejavu sans|bold"          : FONT_MAPPINGS["sans-serif|bold"]         = url; break;
+              case "dejavu sans|italic"        : FONT_MAPPINGS["sans-serif|italic"]       = url; break;
+              case "dejavu sans|bold|italic"   : FONT_MAPPINGS["sans-serif|bold|italic"]  = url; break;
+              case "dejavu serif"              : FONT_MAPPINGS["serif"]                   = url; break;
+              case "dejavu serif|bold"         : FONT_MAPPINGS["serif|bold"]              = url; break;
+              case "dejavu serif|italic"       : FONT_MAPPINGS["serif|italic"]            = url; break;
+              case "dejavu serif|bold|italic"  : FONT_MAPPINGS["serif|bold|italic"]       = url; break;
+              case "dejavu mono"               : FONT_MAPPINGS["monospace"]               = url; break;
+              case "dejavu mono|bold"          : FONT_MAPPINGS["monospace|bold"]          = url; break;
+              case "dejavu mono|italic"        : FONT_MAPPINGS["monospace|italic"]        = url; break;
+              case "dejavu mono|bold|italic"   : FONT_MAPPINGS["monospace|bold|italic"]   = url; break;
+            }
         }
     }
 

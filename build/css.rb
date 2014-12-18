@@ -9,7 +9,10 @@ MIN_CSS = FileList['styles/**/kendo*.less']
     .sub('styles/', 'dist/styles/')
     .uniq
 
-MIN_CSS_RESOURCES = FileList[MIN_CSS + FileList['styles/*/*/*'].sub('styles/', DIST_STYLES_ROOT)].exclude('**/*.less').exclude('**/*.winjs.*')
+MIN_CSS_RESOURCES = FileList[MIN_CSS + FileList['styles/**/*']
+    .keep_if { |f| !File.directory?(f) }
+    .sub('styles/', DIST_STYLES_ROOT)]
+    .exclude('**/*.less').exclude('**/*.winjs.*')
 
 WEB_MIN_CSS = FileList[MIN_CSS_RESOURCES].keep_if { |f| f =~ /styles\/web\// }
 WEB_SRC_CSS = FileList[SRC_CSS].keep_if { |f| f =~ /styles\/(web|common)\// }
