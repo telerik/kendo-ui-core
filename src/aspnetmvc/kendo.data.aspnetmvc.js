@@ -255,7 +255,8 @@
                 read: function(options) {
                     var data = this.options.data,
                         url = this.options.read.url;
-                    if (data) {
+
+                    if (isPlainObject(data)) {
                         if (url) {
                             this.options.data = null;
                         }
@@ -335,7 +336,8 @@
                 read: function(options) {
                     var data = this.options.data,
                         url = this.options.read.url;
-                    if (data) {
+
+                    if (isPlainObject(data)) {
                         if (url) {
                             this.options.data = null;
                         }
