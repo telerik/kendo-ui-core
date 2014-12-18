@@ -674,13 +674,15 @@ var __meta__ = {
         init: function(element, options) {
             Widget.fn.init.call(this, element, options);
 
-            this.element.on("click" + NS, "li:not(.k-separator):not(.k-state-disabled)", "_click");
+            this.element.on("click" + NS, "li.k-item:not(.k-separator):not(.k-state-disabled)", "_click");
         },
 
         events: [ SELECT ],
 
         _click: function(e) {
-            e.preventDefault();
+            if (!$(e.target).is("[type=checkbox]")) {
+                e.preventDefault();
+            }
 
             this.trigger(SELECT, { item: e.currentTarget });
         },
