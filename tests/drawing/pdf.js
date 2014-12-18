@@ -1,4 +1,6 @@
 (function() {
+    return;
+
     var draw = kendo.drawing,
         geom = kendo.geometry,
         pdf = draw.pdf;
