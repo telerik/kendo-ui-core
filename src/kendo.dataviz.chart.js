@@ -6955,7 +6955,7 @@ var __meta__ = {
     deepExtend(PieSegment.fn, PointEventsMixin);
 
     var PieChartMixin = {
-        createLegendItem: function(value, point) {
+        createLegendItem: function(value, point, options) {
             var chart = this,
                 legendOptions = chart.options.legend || {},
                 labelsOptions = legendOptions.labels || {},
@@ -6964,25 +6964,25 @@ var __meta__ = {
                 text, labelTemplate, markerColor, itemLabelOptions,
                 pointVisible;
 
-            if (point && point.visibleInLegend !== false) {
-                pointVisible = point.visible !== false;
-                text = point.category || "";
+            if (options && options.visibleInLegend !== false) {
+                pointVisible = options.visible !== false;
+                text = options.category || "";
                 labelTemplate = pointVisible ? labelsOptions.template :
                     (inactiveItemsLabels.template || labelsOptions.template);
 
                 if (labelTemplate) {
                     text = template(labelTemplate)({
                         text: text,
-                        series: point.series,
-                        dataItem: point.dataItem,
-                        percentage: point.percentage,
+                        series: options.series,
+                        dataItem: options.dataItem,
+                        percentage: options.percentage,
                         value: value
                     });
                 }
 
                 if (pointVisible) {
                     itemLabelOptions = {};
-                    markerColor = (point.series || {}).color;
+                    markerColor = point.color;
                 } else {
                     itemLabelOptions = {
                         color: inactiveItemsLabels.color,
@@ -6993,9 +6993,9 @@ var __meta__ = {
 
                 if (text) {
                     chart.legendItems.push({
-                        pointIndex: point.index,
+                        pointIndex: options.index,
                         text: text,
-                        series: point.series,
+                        series: options.series,
                         markerColor: markerColor,
                         labels: itemLabelOptions
                     });
@@ -7115,14 +7115,14 @@ var __meta__ = {
             var chart = this,
                 segment;
 
-            chart.createLegendItem(value, fields);
+            var segmentOptions = deepExtend({}, fields.series, { index: fields.index });
+            chart.evalSegmentOptions(segmentOptions, value, fields);
+
+            chart.createLegendItem(value, segmentOptions, fields);
 
             if (fields.visible === false) {
                 return;
             }
-
-            var segmentOptions = deepExtend({}, fields.series, { index: fields.index });
-            chart.evalSegmentOptions(segmentOptions, value, fields);
 
             segment = new PieSegment(value, sector, segmentOptions);
             extend(segment, fields);
@@ -7507,14 +7507,14 @@ var __meta__ = {
             var chart = this,
                 segment;
 
-            chart.createLegendItem(value, fields);
+            var segmentOptions = deepExtend({}, fields.series, { index: fields.index });
+            chart.evalSegmentOptions(segmentOptions, value, fields);
+
+            chart.createLegendItem(value, segmentOptions, fields);
 
             if (!value || fields.visible === false) {
                 return;
             }
-
-            var segmentOptions = deepExtend({}, fields.series, { index: fields.index });
-            chart.evalSegmentOptions(segmentOptions, value, fields);
 
             segment = new DonutSegment(value, sector, segmentOptions);
             extend(segment, fields);

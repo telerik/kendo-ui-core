@@ -174,11 +174,12 @@ var __meta__ = {
             var chart = this,
                 segment;
 
-            chart.createLegendItem(value, fields);
+            var seriesOptions = deepExtend({}, fields.series);
+            chart.evalSegmentOptions(seriesOptions,  value, fields);
+
+            chart.createLegendItem(value, seriesOptions, fields);
 
             if (fields.visible !== false) {
-                var seriesOptions = deepExtend({}, fields.series);
-                chart.evalSegmentOptions(seriesOptions,  value, fields);
 
                 segment = new FunnelSegment(value, seriesOptions, fields);
                 extend(segment, fields);
