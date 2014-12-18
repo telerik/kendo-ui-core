@@ -227,11 +227,15 @@ function saveAsPDFTests(name, createWidget) {
     });
 
     test("saveAsPDF passes through forceProxy option", function() {
-        stubMethod(kendo, "saveAs", function(options) {
-            ok(options.forceProxy);
+        stubMethod(draw, "exportPDF", function() {
+            return new draw.Group();
         }, function() {
-            widget.options.pdf.forceProxy = true;
-            widget.saveAsPDF();
+            stubMethod(kendo, "saveAs", function(options) {
+                ok(options.forceProxy);
+            }, function() {
+                widget.options.pdf.forceProxy = true;
+                widget.saveAsPDF();
+            });
         });
     });
 };
