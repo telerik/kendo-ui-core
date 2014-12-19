@@ -1497,6 +1497,88 @@
         equal(rows.eq(2).find("th").eq(1).text(), "master1-child1-child2");
     });
 
+    test("reorder first level header with one child columns to non child target - ltr", function() {
+        var grid = new Grid(div, {
+            columns: [
+                { title: "master", width: 10 },
+                { title: "master1",
+                    columns: [
+                        { title: "master1-child", columns: [{ title: "master1-child-child", width: 20 }, { title: "master1-child-child2", width: 20 }] },
+                        { title: "master1-child1", width: 20 }
+                ] },
+                { title: "master2", width: 30 },
+                { title: "master3",
+                    columns: [
+                        { title: "master3-child", columns: [{ title: "master3-child-child", width: 40 }, { title: "master3-child-child2", width: 40 }] },
+                ] }
+            ],
+            dataSource: {
+                data: data
+            }
+        });
+
+        grid.reorderColumn(2, grid.columns[1]);
+
+        var rows = grid.thead.find("tr");
+
+        equal(rows.eq(0).find("th").eq(0).text(), "master");
+        equal(rows.eq(0).find("th").eq(1).text(), "master2");
+        equal(rows.eq(0).find("th").eq(2).text(), "master1");
+        equal(rows.eq(0).find("th").eq(3).text(), "master3");
+
+        equal(rows.eq(1).find("th").eq(0).text(), "master1-child");
+        equal(rows.eq(1).find("th").eq(1).text(), "master1-child1");
+
+        equal(rows.eq(1).find("th").eq(2).text(), "master3-child");
+
+        equal(rows.eq(2).find("th").eq(0).text(), "master1-child-child");
+        equal(rows.eq(2).find("th").eq(1).text(), "master1-child-child2");
+
+        equal(rows.eq(2).find("th").eq(2).text(), "master3-child-child");
+        equal(rows.eq(2).find("th").eq(3).text(), "master3-child-child2");
+    });
+
+    test("reorder first level header with one child columns to non child target - rtl", function() {
+        var grid = new Grid(div, {
+            columns: [
+                { title: "master", width: 10 },
+                { title: "master1",
+                    columns: [
+                        { title: "master1-child", columns: [{ title: "master1-child-child", width: 20 }, { title: "master1-child-child2", width: 20 }] },
+                        { title: "master1-child1", width: 20 }
+                ] },
+                { title: "master2", width: 30 },
+                { title: "master3",
+                    columns: [
+                        { title: "master3-child", columns: [{ title: "master3-child-child", width: 40 }, { title: "master3-child-child2", width: 40 }] },
+                ] }
+            ],
+            dataSource: {
+                data: data
+            }
+        });
+
+        grid.reorderColumn(2, grid.columns[3], true);
+
+        var rows = grid.thead.find("tr");
+
+        equal(rows.eq(0).find("th").eq(0).text(), "master");
+        equal(rows.eq(0).find("th").eq(1).text(), "master1");
+        equal(rows.eq(0).find("th").eq(2).text(), "master3");
+        equal(rows.eq(0).find("th").eq(3).text(), "master2");
+
+        equal(rows.eq(1).find("th").eq(0).text(), "master1-child");
+        equal(rows.eq(1).find("th").eq(1).text(), "master1-child1");
+
+        equal(rows.eq(1).find("th").eq(2).text(), "master3-child");
+
+        equal(rows.eq(2).find("th").eq(0).text(), "master1-child-child");
+        equal(rows.eq(2).find("th").eq(1).text(), "master1-child-child2");
+
+        equal(rows.eq(2).find("th").eq(2).text(), "master3-child-child");
+        equal(rows.eq(2).find("th").eq(3).text(), "master3-child-child2");
+    });
+
     test("reorder second level header with two source child columns to non child target - rtl", function() {
         var grid = new Grid(div, {
             columns: [

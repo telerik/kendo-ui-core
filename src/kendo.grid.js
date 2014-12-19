@@ -2039,9 +2039,11 @@ var __meta__ = {
                     moveCellsBetweenContainers(sources, target, leafs, that.columns, that.thead, that.lockedHeader.find("thead"), this._groups());
                 }
 
-                target = findReorderTarget(that.columns, target, sources[0], before);
-                if (target) {
-                    that._reorderHeader(leafs, target, before);
+                if (target.columns || sourcePosition.cell - destPosition.cell > 1 || destPosition.cell - sourcePosition.cell > 1) {
+                    target = findReorderTarget(that.columns, target, sources[0], before);
+                    if (target) {
+                        that._reorderHeader(leafs, target, before);
+                    }
                 }
             } else if (sourceLockedColumns !== targetLockedColumns) { // move between containers
                 updateCellRowSpan(ths[sourcePosition.cell], that.columns, sourceLockedColumns);
