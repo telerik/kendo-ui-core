@@ -1,6 +1,4 @@
 (function() {
-    return;
-
     var draw = kendo.drawing,
         geom = kendo.geometry,
         pdf = draw.pdf;
@@ -31,7 +29,7 @@
         var parent = new draw.Group();
         parent.append(group);
 
-        group.append(new draw.Text("Foo", [10, 10]));
+        group.append(new draw.Path().moveTo(0, 0).lineTo(10, 10));
 
         draw.exportPDF(group).done(function() {
             ok(group.parent === parent);
@@ -45,7 +43,7 @@
             }
         });
 
-        group.append(new draw.Text("Foo", [10, 10]));
+        group.append(new draw.Path().moveTo(0, 0).lineTo(10, 10));
 
         draw.exportPDF(group);
     });
