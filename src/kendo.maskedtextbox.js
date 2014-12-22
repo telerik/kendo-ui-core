@@ -264,6 +264,10 @@ var __meta__ = {
             var unmasked;
             var start;
 
+            if (kendo._activeElement() !== element) {
+                return;
+            }
+
             if (value !== that._old && !that._pasting) {
                 start = caret(element)[0];
                 unmasked = that._unmask(value.substring(start), start);
