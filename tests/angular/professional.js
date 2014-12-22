@@ -595,5 +595,25 @@
         equal(wrapper.find("th.k-header").text(), "foo: 1");
         equal(wrapper.find(".k-footer-template").text(), "foo: 1, sum: 3");
     });
+
+    ngTest("Upload template", 1, function(){
+        angular.module("kendo.tests").controller("mine", function($scope) {
+            $scope.options = {
+                template: "{{name}}"
+            };
+        });
+
+        $("<div ng-controller=mine><input kendo-upload='upload' k-options='options'></input></div>").appendTo(QUnit.fixture);
+    }, function () {
+            var uploadElement = QUnit.fixture.find('[data-role=upload]');
+            var upload = uploadElement.getKendoUpload();
+            var clickEvent = $.Event("click");
+            uploadElement.trigger(clickEvent);
+            if (!clickEvent.isDefaultPrevented()) {
+                uploadElement.val("foo.txt").trigger("change");
+            }
+
+            equal($(".k-file").html(), "foo.txt");
+    });
 })();
 

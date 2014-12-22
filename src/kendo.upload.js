@@ -332,6 +332,13 @@ var __meta__ = {
 
                 fileEntry = $("<li class='k-file'>" + template(templateData) + "</li>");
                 fileEntry.find(".k-upload-action").addClass("k-button k-button-bare");
+
+                that.angular("compile", function(){
+                    return {
+                        elements: fileEntry,
+                        data: [ templateData ]
+                    };
+                });
             }
 
             fileEntry
