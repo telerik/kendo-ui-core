@@ -2333,6 +2333,36 @@
             deepEqual(rect.options.stroke.opacity, bar.options.opacity);
         });
 
+        test("aligns bar to pixel", function() {
+            createBar({ vertical: false });
+            bar.reflow(new Box2D(0, 0, 100, 100));
+            bar.renderVisual();
+
+            deepEqual(bar.visual.children[0].segments[0].anchor().toArray(), [0.5, 0.5]);
+        });
+
+        test("does not align bar to pixel if too small", function() {
+            createBar({ vertical: false });
+            bar.reflow(new Box2D(0, 0, 100, 4));
+            bar.renderVisual();
+
+            deepEqual(bar.visual.children[0].segments[0].anchor().toArray(), [0, 0]);
+        });
+
+        test("aligns column to pixel", function() {
+            bar.reflow(new Box2D(0, 0, 100, 100));
+            bar.renderVisual();
+
+            deepEqual(bar.visual.children[0].segments[0].anchor().toArray(), [0.5, 0.5]);
+        });
+
+        test("does not align column to pixel if too small", function() {
+            bar.reflow(new Box2D(0, 0, 4, 100));
+            bar.renderVisual();
+
+            deepEqual(bar.visual.children[0].segments[0].anchor().toArray(), [0, 0]);
+        });
+
         test("createHighlight returns same path with the passed options", function() {
             var highlight = bar.createHighlight({
                 foo: "bar"

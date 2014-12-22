@@ -99,6 +99,7 @@ var __meta__ = {
         FIT = "fit",
         AXIS_LABEL_CLICK = dataviz.AXIS_LABEL_CLICK,
         BAR = "bar",
+        BAR_ALIGN_MIN_WIDTH = 6,
         BAR_BORDER_BRIGHTNESS = 0.8,
         BELOW = "below",
         BLACK = "#000",
@@ -3168,7 +3169,11 @@ var __meta__ = {
                 }
             });
 
-            alignPathToPixel(rect);
+            var size = options.vertical ? this.box.width() : this.box.height();
+            if (size > BAR_ALIGN_MIN_WIDTH) {
+                alignPathToPixel(rect);
+            }
+
             this.visual.append(rect);
 
             if (hasGradientOverlay(options)) {
