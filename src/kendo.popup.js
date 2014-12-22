@@ -104,6 +104,7 @@ var __meta__ = {
             extend(options.animation.open, {
                 complete: function() {
                     that.wrapper.css({ overflow: VISIBLE }); // Forcing refresh causes flickering in mobile.
+                    that._activated = true;
                     that._trigger(ACTIVATE);
                 }
             });
@@ -244,6 +245,8 @@ var __meta__ = {
                     return;
                 }
 
+                that._activated = false;
+
                 if (!options.modal) {
                     DOCUMENT_ELEMENT.unbind(that.downEvent, that._mousedownProxy)
                                 .bind(that.downEvent, that._mousedownProxy);
@@ -371,7 +374,8 @@ var __meta__ = {
                     that._resizeTimeout = null;
                 }, 50);
             } else {
-                if (!that._hovered && !contains(that.element[0], activeElement())) {
+                if ((that._activated && that.element.hasClass("k-list-container")) ||
+                    (!that._hovered && !contains(that.element[0], activeElement()))) {
                     that.close();
                 }
             }
