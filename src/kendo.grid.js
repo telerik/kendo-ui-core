@@ -307,20 +307,16 @@ var __meta__ = {
             }
         },
 
-        refresh: function() {
+        repaintScrollbar: function () {
             var that = this,
                 html = "",
                 maxHeight = 250000,
                 dataSource = that.dataSource,
-                rangeStart = that._rangeStart,
                 scrollbar = !kendo.support.kineticScrollNeeded ? kendo.support.scrollbar() : 0,
                 wrapperElement = that.wrapper[0],
                 totalHeight,
                 idx,
                 itemHeight;
-
-            kendo.ui.progress(that.wrapper.parent(), false);
-            clearTimeout(that._timeout);
 
             itemHeight = that.itemHeight = that.options.itemHeight() || 0;
 
@@ -328,7 +324,7 @@ var __meta__ = {
 
             totalHeight = dataSource.total() * itemHeight + addScrollBarHeight;
 
-            for (idx = 0; idx < math.floor(totalHeight / maxHeight); idx++) {
+            for (idx = 0; idx < math.floor(totalHeight / maxHeight) ; idx++) {
                 html += '<div style="width:1px;height:' + maxHeight + 'px"></div>';
             }
 
@@ -338,6 +334,17 @@ var __meta__ = {
 
             that.verticalScrollbar.html(html);
             wrapperElement.scrollTop = that._scrollTop;
+        },
+
+        refresh: function() {
+            var that = this,
+                dataSource = that.dataSource,
+                rangeStart = that._rangeStart;
+
+            kendo.ui.progress(that.wrapper.parent(), false);
+            clearTimeout(that._timeout);
+
+            that.repaintScrollbar();
 
             if (that.drag) {
                 that.drag.cancel();
@@ -6068,7 +6075,7 @@ var __meta__ = {
                 this._setContentWidth();
             }
             if (this.virtualScrollable) {
-                this.virtualScrollable.refresh();
+                this.virtualScrollable.repaintScrollbar();
             }
         },
 
