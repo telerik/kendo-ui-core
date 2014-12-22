@@ -19,7 +19,7 @@
         }
     });
 
-    test("always select first item on dataSource change", function() {
+   test("always select first item on dataSource change", function() {
         var dropdownlist = new DropDownList(input, ["foo", "bar"]);
 
         ok(dropdownlist.ul.children().eq(0).hasClass(SELECTED));
@@ -595,5 +595,50 @@
         dropdownlist.wrapper.focusout();
 
         ok(!dropdownlist.wrapper.find(".k-dropdown-wrap").hasClass("k-state-focused"));
+    });
+
+    test("DropDownList closes popup with filter input on scroll", 1, function() {
+        input.wrap('<div style="overflow:hidden"></div>');
+        var parent = input.parent();
+
+        var dropdownlist = input.kendoDropDownList({
+            animation: false,
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: [
+                { text: "item1", value: "item1"},
+                { text: "item2", value: "item2"}
+            ],
+            filter: "startswith"
+        }).data("kendoDropDownList");
+
+        dropdownlist.wrapper.focus();
+        dropdownlist.open();
+
+        parent.trigger("scroll");
+
+        ok(!dropdownlist.popup.visible());
+    });
+
+    test("DropDownList does not close popup if still animating", 1, function() {
+        input.wrap('<div style="overflow:hidden"></div>');
+        var parent = input.parent();
+
+        var dropdownlist = input.kendoDropDownList({
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: [
+                { text: "item1", value: "item1"},
+                { text: "item2", value: "item2"}
+            ],
+            filter: "startswith"
+        }).data("kendoDropDownList");
+
+        dropdownlist.wrapper.focus();
+        dropdownlist.open();
+
+        parent.trigger("scroll");
+
+        ok(dropdownlist.popup.visible());
     });
 })();
