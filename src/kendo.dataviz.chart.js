@@ -2744,15 +2744,13 @@ var __meta__ = {
                 delete options.baseUnit;
             }
 
-            return deepExtend({
-                    baseUnit: baseUnit,
-                    min: addDuration(autoMin, -head, baseUnit),
-                    max: addDuration(autoMax, tail, baseUnit),
-                    minorUnit: majorUnit / 5
-                }, options, {
-                    majorUnit: majorUnit
-                }
-            );
+            options.baseUnit  = options.baseUnit  || baseUnit;
+            options.min       = options.min       || addDuration(autoMin, -head, baseUnit);
+            options.max       = options.max       || addDuration(autoMax, tail, baseUnit);
+            options.minorUnit = options.minorUnit || majorUnit / 5;
+            options.majorUnit = majorUnit;
+
+            return options;
         },
 
         range: function() {
@@ -2769,25 +2767,26 @@ var __meta__ = {
         },
 
         getTickPositions: function(step) {
-            var axis = this,
-                options = axis.options,
-                vertical = options.vertical,
-                reverse = options.reverse,
-                lineBox = axis.lineBox(),
-                lineSize = vertical ? lineBox.height() : lineBox.width(),
-                timeRange = duration(options.min, options.max, options.baseUnit),
-                scale = lineSize / timeRange,
-                scaleStep = step * scale,
-                divisions = axis.getDivisions(step),
-                dir = (vertical ? -1 : 1) * (reverse ? -1 : 1),
-                startEdge = dir === 1 ? 1 : 2,
-                pos = lineBox[(vertical ? Y : X) + startEdge],
-                positions = [],
-                i;
+            var options = this.options;
+            var vertical = options.vertical;
+            var reverse = options.reverse;
 
-            for (i = 0; i < divisions; i++) {
+            var lineBox = this.lineBox();
+            var dir = (vertical ? -1 : 1) * (reverse ? -1 : 1);
+            var startEdge = dir === 1 ? 1 : 2;
+            var start = lineBox[(vertical ? Y : X) + startEdge];
+
+            var divisions = this.getDivisions(step);
+            var timeRange = options.max - options.min;
+            var lineSize = vertical ? lineBox.height() : lineBox.width();
+            var scale = lineSize / timeRange;
+
+            var positions = [start];
+            for (var i = 1; i < divisions; i++) {
+                var date = addDuration(options.min, i * options.majorUnit, options.baseUnit);
+                var pos = start + (date - options.min) * scale * dir;
+
                 positions.push(round(pos, COORD_PRECISION));
-                pos = pos + scaleStep * dir;
             }
 
             return positions;
@@ -2822,11 +2821,15 @@ var __meta__ = {
         },
 
         createAxisLabel: function(index, labelOptions) {
-            var options = this.options,
-                offset =  index * options.majorUnit,
-                date = addDuration(options.min, offset, options.baseUnit),
-                unitFormat = labelOptions.dateFormats[options.baseUnit];
+            var options = this.options;
+            var offset = index * options.majorUnit;
 
+            var date = options.min;
+            if (offset > 0) {
+                date = addDuration(date, offset, options.baseUnit);
+            }
+
+            var unitFormat = labelOptions.dateFormats[options.baseUnit];
             labelOptions.format = labelOptions.format || unitFormat;
 
             var text = this.axisLabelText(date, null, labelOptions);

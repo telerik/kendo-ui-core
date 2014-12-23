@@ -1734,6 +1734,53 @@
         });
 
         // ------------------------------------------------------------
+        module("Date Value Axis / Slots / Positions", {
+            setup: function() {
+                createDateValueAxis(new Date("2014/06/01"), new Date("2014/06/15"));
+            }
+        });
+
+        test("first slot is at min axis value", function() {
+            var slot = dateAxis.getSlot("2014/05/25");
+            close(slot.x1, 16, TOLERANCE);
+        });
+
+        test("mid slot position", function() {
+            var slot = dateAxis.getSlot("2014/06/08");
+            close(slot.x1, 400, TOLERANCE);
+        });
+
+        test("last slot is at max axis value", function() {
+            var slot = dateAxis.getSlot("2014/06/22");
+            close(slot.x2, 784, TOLERANCE);
+        });
+
+        // ------------------------------------------------------------
+        module("Date Value Axis / Slots / Positions / Range", {
+            setup: function() {
+                createDateValueAxis(new Date("2014/06/01"), new Date("2014/06/15"), {
+                    min: new Date("2014/06/01"),
+                    max: new Date("2014/06/15")
+                });
+            }
+        });
+
+        test("first slot is at min axis value", function() {
+            var slot = dateAxis.getSlot("2014/06/01");
+            close(slot.x1, 12, TOLERANCE);
+        });
+
+        test("mid slot position", function() {
+            var slot = dateAxis.getSlot("2014/06/08");
+            close(slot.x1, 398, TOLERANCE);
+        });
+
+        test("last slot is at max axis value", function() {
+            var slot = dateAxis.getSlot("2014/06/15");
+            close(slot.x2, 784, TOLERANCE);
+        });
+
+        // ------------------------------------------------------------
         module("Date Value Axis / Range manipulation", {
             setup: function() {
                 createDateValueAxis(new Date("2012/02/01"), new Date("2012/02/10"));
