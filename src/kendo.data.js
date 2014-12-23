@@ -3900,7 +3900,7 @@ var __meta__ = {
     }
 
     var Node = Model.define({
-        id: "id",
+        idField: "id",
 
         init: function(value) {
             var that = this,

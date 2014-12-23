@@ -44,7 +44,14 @@ test("Node serializes id by default", function() {
     equal(node.toJSON().id, 1);
 });
 
-test("Node does not serializes id when idField is changed", function() {
+test("Node does not serialize id when not provided", function() {
+    var node = new Node({ foo: 1 });
+    var json = node.toJSON();
+
+    ok(typeof json.id === "undefined");
+});
+
+test("Node does not serialize id when idField is changed", function() {
     var NewNode = Node.define({ id: "foo" });
 
     var node = new NewNode({ foo: 1 });
