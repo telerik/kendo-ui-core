@@ -51,6 +51,7 @@ Kendo UI Core is a free and open-source subset of Kendo UI. The following table 
 | Scheduler | No | Yes | Yes |
 | Gantt | No | Yes | Yes |
 | TreeView | No | Yes | Yes |
+| TreeList | No | Yes | Yes |
 | TreeMap | No | Yes | Yes |
 | Upload | No | Yes | Yes |
 | **Data Viz** |
