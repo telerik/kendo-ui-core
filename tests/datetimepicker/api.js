@@ -723,7 +723,7 @@ test("setOptions method sets correct timeView min/max values", function() {
         min: min
     });
 
-    deepEqual(datetimepicker.timeView.options.min, new Date(1900, 0, 1));
+    deepEqual(datetimepicker.timeView.options.min, new Date(1800, 0, 1));
 });
 
 test("setOptions rebinds time options", function() {
