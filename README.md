@@ -51,6 +51,7 @@ Kendo UI Core is a free and open-source distribution of Kendo UI. The following 
 | Scheduler | No | Yes | Yes |
 | Gantt | No | Yes | Yes |
 | TreeView | No | Yes | Yes |
+| TreeList | No | Yes | Yes |
 | TreeMap | No | Yes | Yes |
 | Upload | No | Yes | Yes |
 | **Data Viz** |
@@ -60,7 +61,7 @@ Kendo UI Core is a free and open-source distribution of Kendo UI. The following 
 | Bar Code | No | Yes | Yes |
 | **Mobile** |
 | Mobile Widgets | No | Yes | Yes |
-| Mobile Framework Features | No | Yes | Yes | 
+| Mobile Framework Features | No | Yes | Yes |
 | **Official Support** | No | Yes | Yes
 
 ## Compatibility and Requirements
