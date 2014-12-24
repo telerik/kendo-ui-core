@@ -4003,7 +4003,10 @@ function pad(number, digits, end) {
                 scopeSetup(scope);
             }
             $compile(element)(scope);
-            scope.$digest();
+
+            if (!/^\$(digest|apply)$/.test(scope.$$phase)) {
+                scope.$digest();
+            }
         }]);
 
         return kendo.widgetInstance(element, kendo.mobile.ui);

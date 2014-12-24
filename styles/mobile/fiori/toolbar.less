@@ -1,0 +1,89 @@
+@import "../common/navbar.less";
+@import "../../common/transitions.less";
+@import "base.less";
+
+/* ToolBar */
+
+.km-material .k-toolbar
+{
+    line-height: 2.25em;
+}
+
+.km-material .k-toolbar .km-button,
+.km-material .k-toolbar .k-split-button
+{
+    padding-top: 0;
+    padding-bottom: 0;
+    line-height: inherit;
+}
+
+.km-material .k-toolbar .k-button-icon .km-icon,
+.km-material .k-toolbar .k-button-icontext .km-icon,
+.km-material .k-split-button .km-arrowdown
+{
+    width: 1em;
+    height: 1em;
+    font-size: 1.286em;
+    vertical-align: middle;
+
+    margin-top: -7px;
+    margin-bottom: -2px;
+    margin-left: -1px;
+    margin-right: 1px;
+}
+
+.km-material .k-split-button .km-arrowdown
+{
+    margin-left: 2px;
+    margin-right: 1px;
+}
+
+.km-material .k-split-button .k-button-icontext
+{
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.km-material .k-split-button-arrow
+{
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.km-material .km-actionsheet.k-split-container > li > .km-button,
+.km-material .km-actionsheet.k-overflow-container > li > .km-button
+{
+    min-width: 10em;
+    text-align: center;
+    font-size: 1.1em;
+    border: 0;
+    border-radius: 0;
+}
+
+.km-material .km-actionsheet.k-split-container > li > .km-button
+{
+    min-width: 5em;
+}
+
+.km-material .k-split-wrapper .km-actionsheet-wrapper,
+.km-material .k-overflow-wrapper .km-actionsheet-wrapper
+{
+    padding: 1px;
+}
+
+html .km-material .k-split-container.km-actionsheet > li,
+html .km-material .k-overflow-container.km-actionsheet > li
+{
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.km-material .k-split-container.km-actionsheet,
+.km-material .k-overflow-container.km-actionsheet
+{
+    border-top: 0;
+}
+
+.km-material .k-toolbar .k-button-icon {
+    padding: 0 .643em;
+}

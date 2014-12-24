@@ -1,0 +1,84 @@
+@import "../common/switch.less";
+@import "base.less";
+
+/* Switch */
+
+.km-material .km-switch
+{
+    width: 2.25rem;
+    height: .875rem;
+    line-height: .875rem;
+    overflow: visible;
+}
+
+.km-material .km-switch-wrapper
+{
+    overflow: hidden;
+}
+
+.km-material .km-switch-background,
+.km-material .k-slider-selection
+{
+    background-position: 4.25em 0;
+    background-repeat: no-repeat;
+    background-color: currentcolor;
+    margin-left: -1.125rem;
+}
+
+.km-material .km-switch-container
+{
+    padding: 1px 0;
+    border-width: 0;
+    overflow: visible;
+}
+
+.km-material .km-switch-handle
+{
+    width: 1.125em;
+    height: 1.125em;
+    margin: -4px 0 0;
+    border-width: @material-border-width;
+    border-style: solid;
+    border-radius: 50%;
+}
+
+.km-material .km-switch-label-off
+{
+    left: 1.5em;
+}
+
+.km-material .km-switch-label-on
+{
+    left: -2.8em;
+}
+
+.km-material .km-switch-label-on,
+.km-material .km-switch-label-off
+{
+    display: none;
+    text-shadow: none;
+    width: 185%;
+    font-size: 1em;
+    line-height: 1.5em;
+    vertical-align: middle;
+}
+
+.km-material .km-switch-wrapper,
+.km-material .km-switch-container,
+.km-material .km-switch-background
+{
+    border-radius: @material-border-radius + 3px;
+}
+
+.km-material .km-switch-container,
+.km-material .km-switch-wrapper
+{
+    .box-sizing(border-box);
+    border-width: @material-border-width;
+    border-style: solid;
+    background-clip: content-box;
+}
+
+.km-material .km-switch-background {
+    width: 150%;
+}

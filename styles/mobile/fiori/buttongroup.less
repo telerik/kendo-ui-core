@@ -1,0 +1,59 @@
+@import "../common/icons.less";
+@import "../common/buttongroup.less";
+@import "base.less";
+
+/* ButtonGroup */
+
+.km-material .km-buttongroup > *:not(:first-child):not(:last-child)
+{
+    border-radius: 0;
+}
+
+.km-material .km-buttongroup > *:first-child
+{
+    border-radius: @material-border-radius 0 0 @material-border-radius;
+    border-radius: 0;
+}
+
+.km-material .km-buttongroup > *:last-child
+{
+    border-radius: 0 @material-border-radius @material-border-radius 0;
+    border-radius: 0;
+}
+
+.km-material .km-buttongroup {
+	margin: 0;
+}    
+
+.km-material .km-buttongroup {
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	width: 100%;
+	text-align: center;
+}
+
+.km-material .km-buttongroup .km-button {
+	padding: 1.429em 1.267em 1.357em;
+	border-width: 0 0 2px;
+	display: inline-block;
+}
+
+.km-material .km-buttongroup .km-button:last-child
+{
+    border-right-width: 0;
+}
+
+.km-material .km-widget.km-navbar .km-buttongroup {
+	font-size: .875em;
+	line-height: 1em;
+	margin: 0;
+	display: inline-block;
+	top: 0;
+    height: auto;
+    margin-bottom: -1px;
+}
+
+.km-material .km-widget.km-navbar .km-buttongroup > .km-button {
+	font-size: .778em;
+	text-indent: 0;
+}
