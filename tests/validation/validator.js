@@ -281,6 +281,15 @@
         ok(span.eq(1).text(), "invalid");
     });
 
+    test("existing error message element container retains its ID attribute", function() {
+        container.append($('<input type="text" name="foo" required /><span class="k-invalid-msg" id="errSpan" data-kendo-for="foo"/>')),
+        validator = setup(container, { errorTemplate: "<span>${message}</span>" });
+        validator.validate();
+
+        var span = container.find("span");
+        ok(span.eq(0).attr("id"), "errSpan");
+    });
+
     test("existing error message element in multiple containers is reused", function() {
         container.append($('<div></div><div><input type="text" name="foo" required validationMessage="invalid" /><span>some text</span><span class="k-invalid-msg" data-kendo-for="foo"/></div>')),
         validator = setup(container.find("div"), { errorTemplate: "<span>${message}</span>" });
@@ -407,7 +416,7 @@
         ok(!input.next("span:visible").length);
     });
 
-    test("external message element is shown when validating input with specail charecters", function() {
+    test("external message element is shown when validating input with special characters", function() {
         var input = $('<input name="f.b" type="text" required validationMessage="invalid" /><input name="f.b.c" type="hidden" /><span class="k-invalid-msg" data-kendo-for="f.b" id="foo"></span>');
         container.append(input);
         var validator = setup(container);
