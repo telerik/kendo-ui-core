@@ -126,18 +126,7 @@ module.exports = function(grunt) {
                         tests
                     )
                 }
-            },
-            validation: {
-              options: {
-                files: [].concat(
-                  TESTS.beforeTestFiles,
-                  'src/kendo.core.js',
-                  'src/kendo.validator.js',
-                  TESTS.afterTestFiles,
-                  'tests/validation/validator.js'
-                )
-              }
-            },
+            },          
             legacyUnit: {
                 options: {
                     browsers: browserOption ? [ browserOption ] : [],
