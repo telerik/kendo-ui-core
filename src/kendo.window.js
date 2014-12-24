@@ -1009,14 +1009,15 @@ var __meta__ = {
             var that = this,
                 wrapper = that.wrapper,
                 wnd = $(window),
+                zoomLevel = kendo.support.zoomLevel(),
                 w, h;
 
             if (!that.options.isMaximized) {
                 return;
             }
 
-            w = wnd.width();
-            h = wnd.height() - parseInt(wrapper.css("padding-top"), 10);
+            w = wnd.width() / zoomLevel;
+            h = wnd.height() / zoomLevel - parseInt(wrapper.css("padding-top"), 10);
 
             wrapper.css({
                     width: w,
