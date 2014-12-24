@@ -786,13 +786,24 @@
         ok(validator.validate());
     });
 
-    test("validate class is added to the invalid inputs", function() {
+    test("invalid class is added to the invalid inputs", function() {
         var input = $('<input type="text" required />'),
             validator = setup(input);
 
         validator.validate();
 
         ok(input.hasClass("k-invalid"));
+    });
+
+    test("valid class is added to the valid inputs", function() {
+        var input = $('<input type="text" required />'),
+            validator = setup(input);
+
+        input.val(1);
+
+        validator.validate();
+
+        ok(input.hasClass("k-valid"));
     });
 
     test("aria-invalid is added to the invalid input", function() {
@@ -813,7 +824,7 @@
         ok(input.next().filter("[role=alert]").length);
     });
 
-    test("aria-invalid is remove after input become valid", function() {
+    test("aria-invalid is removed after input become valid", function() {
         var input = $('<input type="text" required />'),
             validator = setup(input);
 
@@ -824,7 +835,7 @@
         ok(!input.filter("[aria-invalid]").length);
     });
 
-    test("validate class is not added to the valid inputs", function() {
+    test("invalid class is not added to a valid input", function() {
         var input = $('<input type="text" required />'),
             validator = setup(input);
 
@@ -835,7 +846,16 @@
         ok(!input.hasClass("k-invalid"));
     });
 
-    test("validate class is remove to if invalid inputs pass validation", function() {
+    test("valid class is not added to an invalid input", function() {
+      var input = $('<input type="text" required />'),
+      validator = setup(input);
+
+      validator.validate();
+
+      ok(!input.hasClass("k-valid"));
+    });
+
+    test("invalid class is removed if an invalid input passes validation", function() {
         var input = $('<input type="text" required />'),
             validator = setup(input);
 
@@ -846,6 +866,15 @@
         validator.validate();
 
         ok(!input.hasClass("k-invalid"));
+    });
+
+    test("valid class is removed if a valid input fails validation", function() {
+      var input = $('<input type="text" required />'),
+      validator = setup(input);
+
+      validator.validate();
+
+      ok(!input.hasClass("k-valid"));
     });
 
     test("checkbox field is revalidated on click", function() {

@@ -126,7 +126,7 @@ module.exports = function(grunt) {
                         tests
                     )
                 }
-            },
+            },          
             legacyUnit: {
                 options: {
                     browsers: browserOption ? [ browserOption ] : [],
