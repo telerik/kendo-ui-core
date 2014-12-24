@@ -118,6 +118,23 @@ test('click method on item with URL shouldn\'t call preventDefault method', func
     ok(!isCalled);
 });
 
+test('clicking on item content should do nothing', 1, function() {
+    var element = $("#Menu-4");
+    var isCalled = false;
+    var failHandler = function() {
+        ok(false);
+    };
+
+    var e = { target: element, preventDefault: function () { isCalled = true; }, stopPropagation: function () {} };
+
+    menu.bind("select", failHandler);
+    menu.bind("open", failHandler);
+    menu.bind("close", failHandler);
+    menu._click(e);
+
+    ok(!isCalled);
+});
+
 test('hovering root item does not open it', function() {
     var opened = false,
         item = $("li:first", menu.element)[0],

@@ -1,5 +1,9 @@
 {
    "name": "kendo-ui-core",
+   "repository": {
+       "type": "git",
+       "url": "https://github.com/telerik/kendo-ui-core.git"
+   },
    "version": "1.0.0",
    "dependencies": {
    },

@@ -46,7 +46,7 @@ var __meta__ = {
         ARIA_DISABLED = "aria-disabled",
         ARIA_READONLY = "aria-readonly",
         DATE = Date,
-        MIN = new DATE(1900, 0, 1),
+        MIN = new DATE(1800, 0, 1),
         MAX = new DATE(2099, 11, 31),
         dateViewParams = { view: "date" },
         timeViewParams = { view: "time" },
@@ -540,7 +540,7 @@ var __meta__ = {
                         e.preventDefault();
                     } else {
 
-                        if (that.element.val() !== that._oldText) {
+                        if (element.val() !== that._oldText) {
                             date = parse(element.val(), options.parseFormats, options.culture);
 
                             that.dateView[date ? "current" : "value"](date);
@@ -607,6 +607,12 @@ var __meta__ = {
                     if (that.trigger(OPEN, timeViewParams)) {
                         e.preventDefault();
                     } else {
+                        if (element.val() !== that._oldText) {
+                            date = parse(element.val(), options.parseFormats, options.culture);
+
+                            that.timeView.value(date);
+                        }
+
                         ul.attr(ARIA_HIDDEN, false);
                         element.attr(ARIA_EXPANDED, true)
                                .attr(ARIA_OWNS, timeView._timeViewID);

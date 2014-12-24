@@ -214,10 +214,22 @@ var __meta__ = {
                     return element;
                 },
                 toolbar: function(options) {
-                   return components.separator.base(options, false);
+                   var element = components.separator.base(options, false);
+
+                   if (options.id) {
+                       element.attr("id", options.id);
+                   }
+
+                   return element;
                 },
                 overflow: function(options) {
-                   return components.separator.base(options, true);
+                    var element = components.separator.base(options, true);
+
+                    if (options.id) {
+                        element.attr("id", options.id + "_overflow");
+                    }
+
+                    return  element;
                 }
             },
 
@@ -536,6 +548,10 @@ var __meta__ = {
                 if (options.overflow !== OVERFLOW_NEVER && that.options.resizable) {
                     if (overflowTemplate) { //template command
                         overflowElement = isFunction(overflowTemplate) ? $(overflowTemplate(options)) : $(overflowTemplate);
+
+                        if (options.id) {
+                            overflowElement.attr("id", options.id + "_overflow");
+                        }
                     } else if (component) { //build-in command
                         overflowElement = (component.overflow || $.noop)(options);
                     }
@@ -569,6 +585,9 @@ var __meta__ = {
                         }
 
                         element = element.wrap("<div></div>").parent();
+                        if (options.id) {
+                           element.attr("id", options.id);
+                        }
                         if (options.attributes) {
                             element.attr(options.attributes);
                         }

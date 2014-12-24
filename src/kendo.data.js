@@ -2374,9 +2374,12 @@ var __meta__ = {
         },
 
         _observeView: function(data) {
-            replaceWithObservable(data, this._data, this._ranges, this.reader.model || ObservableObject);
+            var that = this;
+            replaceWithObservable(data, that._data, that._ranges, that.reader.model || ObservableObject);
 
-            return new LazyObservableArray(data, this.reader.model);
+            var view = new LazyObservableArray(data, that.reader.model);
+            view.parent = function() { return that.parent(); };
+            return view;
         },
 
         flatView: function() {
@@ -3897,7 +3900,7 @@ var __meta__ = {
     }
 
     var Node = Model.define({
-        id: "id",
+        idField: "id",
 
         init: function(value) {
             var that = this,
@@ -4299,7 +4302,7 @@ var __meta__ = {
 
             if (index >= this.total()) {
                 this.trigger("endreached", {index: index });
-                return;
+                return null;
             }
 
             if (!this.useRanges) {
