@@ -777,13 +777,24 @@
         ok(validator.validate());
     });
 
-    test("validate class is added to the invalid inputs", function() {
+    test("invalid class is added to the invalid inputs", function() {
         var input = $('<input type="text" required />'),
             validator = setup(input);
 
         validator.validate();
 
         ok(input.hasClass("k-invalid"));
+    });
+
+    test("valid class is added to the valid inputs", function() {
+      var input = $('<input type="text" required />'),
+      validator = setup(input);
+
+      input.val('foo');
+
+      validator.validate();
+
+      ok(input.hasClass("k-valid"));
     });
 
     test("aria-invalid is added to the invalid input", function() {
@@ -815,7 +826,7 @@
         ok(!input.filter("[aria-invalid]").length);
     });
 
-    test("validate class is not added to the valid inputs", function() {
+    test("invalid class is not added to the valid inputs", function() {
         var input = $('<input type="text" required />'),
             validator = setup(input);
 
@@ -826,7 +837,7 @@
         ok(!input.hasClass("k-invalid"));
     });
 
-    test("validate class is remove to if invalid inputs pass validation", function() {
+    test("invalid class is removed if invalid inputs pass validation", function() {
         var input = $('<input type="text" required />'),
             validator = setup(input);
 
