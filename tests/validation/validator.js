@@ -837,6 +837,15 @@
         ok(!input.hasClass("k-invalid"));
     });
 
+    test("valid class is not added to the invalid inputs", function() {
+      var input = $('<input type="text" required />'),
+      validator = setup(input);
+
+      validator.validate();
+
+      ok(!input.hasClass("k-valid"));
+    });
+
     test("invalid class is removed if invalid inputs pass validation", function() {
         var input = $('<input type="text" required />'),
             validator = setup(input);
