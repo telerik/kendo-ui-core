@@ -787,14 +787,14 @@
     });
 
     test("valid class is added to the valid inputs", function() {
-      var input = $('<input type="text" required />'),
-      validator = setup(input);
+        var input = $('<input type="text" required />'),
+            validator = setup(input);
 
-      input.val('foo');
+        input.val(1);
 
-      validator.validate();
+        validator.validate();
 
-      ok(input.hasClass("k-valid"));
+        ok(input.hasClass("k-valid"));
     });
 
     test("aria-invalid is added to the invalid input", function() {
