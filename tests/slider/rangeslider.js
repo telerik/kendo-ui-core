@@ -332,4 +332,34 @@ test("rangeSlider should not modify input value with bg-BG culture", function ()
     kendo.culture("en-US");
 });
 
+asyncTest("range slider should restore its original values on form reset", 2, function () {
+    QUnit.fixture.append('<form id="sliderForm" action=""><div id="rangeSlider"><input value="1" /><input value="9" /></div></form>');
+    var rangeSlider = new RangeSlider($("#rangeSlider")[0], { tooltip: { enabled: false } });
+
+    rangeSlider.values(2, 8);
+    $("#sliderForm")[0].reset();
+
+    setTimeout(function () {
+        start();
+        var values = rangeSlider.values();
+        equal(values[0], 1);
+        equal(values[1], 9);
+    });
+});
+
+asyncTest("range slider should restore its min and max values on form reset when no initial values have been defined", 2, function () {
+    QUnit.fixture.append('<form id="sliderForm" action=""><div id="rangeSlider"><input /><input /></div></form>');
+    var rangeSlider = new RangeSlider($("#rangeSlider")[0], { tooltip: { enabled: false }, min: 1, max: 9 });
+
+    rangeSlider.values(2, 8);
+    $("#sliderForm")[0].reset();
+
+    setTimeout(function () {
+        start();
+        var values = rangeSlider.values();
+        equal(values[0], 1);
+        equal(values[1], 9);
+    });
+});
+
 }());

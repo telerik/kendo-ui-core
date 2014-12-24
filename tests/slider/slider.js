@@ -318,4 +318,30 @@ test("slider should render large ticks with min value bigger then 0 correctly", 
     });
 });
 
+asyncTest("slider should restore its original value on form reset", function () {
+    QUnit.fixture.append('<form id="sliderForm" action=""><div><input id="singleSlider" value="1" /></div></form>');
+    var slider = new Slider($("#singleSlider")[0], { tooltip: { enabled: false } });
+
+    slider.value(2);
+    $("#sliderForm")[0].reset();
+
+    setTimeout(function () {
+        start();
+        equal(slider.value(), 1);
+    });
+});
+
+asyncTest("slider should restore its min value on form reset when no initial value has been defined", function () {
+    QUnit.fixture.append('<form id="sliderForm" action=""><div><input id="singleSlider" /></div></form>');
+    var slider = new Slider($("#singleSlider")[0], { tooltip: { enabled: false }, min: 2 });
+
+    slider.value(3);
+    $("#sliderForm")[0].reset();
+
+    setTimeout(function () {
+        start();
+        equal(slider.value(), 2);
+    });
+});
+
 }());
