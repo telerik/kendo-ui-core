@@ -279,7 +279,7 @@ var __meta__ = {
 
             that._focusProxy = proxy(that._focusHandler, that);
 
-            element.on(POINTERDOWN, that._focusProxy)
+            element.on(POINTERDOWN, itemSelector, that._focusProxy)
                    .on(CLICK + NS, disabledSelector, false)
                    .on(CLICK + NS, itemSelector, proxy(that._click , that))
                    .on("keydown" + NS, proxy(that._keydown, that))
