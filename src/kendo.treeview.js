@@ -1256,15 +1256,10 @@ var __meta__ = {
             return node;
         },
 
-        _updateNode: function(field, items) {
+        _updateNodes: function(items, field) {
             var that = this, i, node, item,
                 isChecked, isCollapsed,
-                context = { treeview: that.options, item: item },
-                shouldUpdate = false;
-
-            function access() {
-                shouldUpdate = true;
-            }
+                context = { treeview: that.options, item: item };
 
             function setCheckedState(root, state) {
                 root.find(".k-checkbox :checkbox")
@@ -1283,26 +1278,15 @@ var __meta__ = {
 
                 if (item[field]) {
                     that.current(node);
-                    node.attr(ARIASELECTED, true);
-                } else {
-                    node.attr(ARIASELECTED, false);
                 }
+
+                node.attr(ARIASELECTED, !!item[field]);
             } else {
-                if ($.inArray(field, that.options.dataTextField) >= 0) {
-                    shouldUpdate = true;
-                } else {
-                    context.item = items[0];
-                    context.item.bind("get", access);
-                    that.templates.itemContent(context);
-                    context.item.unbind("set", access);
-                }
 
                 for (i = 0; i < items.length; i++) {
                     context.item = item = items[i];
 
-                    if (field == "spriteCssClass" || field == "imageUrl" || shouldUpdate) {
-                        that.findByUid(item.uid).find(">div>.k-in").html(that.templates.itemContent(context));
-                    }
+                    that.findByUid(item.uid).find(">div>.k-in").html(that.templates.itemContent(context));
 
                     if (field == CHECKED) {
                         node = that.findByUid(item.uid);
@@ -1388,7 +1372,7 @@ var __meta__ = {
                     return;
                 }
 
-                return this._updateNode(e.field, items);
+                return this._updateNodes(items, e.field);
             }
 
             if (node) {
@@ -1417,6 +1401,8 @@ var __meta__ = {
                 this._appendItems(e.index, items, parentNode);
             } else if (action == "remove") {
                 this._remove(this.findByUid(items[0].uid), false);
+            } else if (action == "itemchange") {
+                this._updateNodes(items);
             } else {
                 if (node) {
                     subGroup(parentNode).empty();

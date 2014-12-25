@@ -793,4 +793,51 @@
         equal(treeviewObject.dataItem(foo.find(".k-item:last")).text, "baz");
     });
 
+    test("pushUpdate updates root node", function() {
+        createTreeView({
+            dataSource: {
+                data: [
+                    { id: 1, text: "foo" },
+                    { id: 2, text: "bar" }
+                ]
+            }
+        });
+
+        treeviewObject.dataSource.pushUpdate({ id: 2, text: "baz" });
+
+        equal(treeview.find(".k-item").length, 2);
+        equal(treeview.find(".k-item:last").text(), "baz");
+    });
+
+    test("pushUpdate updates custom field in template", function() {
+        createTreeView({
+            dataTextField: "foo",
+            template: "#: item.bar #",
+            dataSource: {
+                data: [
+                    { id: 1, bar: "foo" },
+                    { id: 2, bar: "bar" }
+                ]
+            }
+        });
+
+        treeviewObject.dataSource.pushUpdate({ id: 2, bar: "baz" });
+
+        equal(treeview.find(".k-item:last").text(), "baz");
+    });
+
+    test("pushUpdate updates child node", function() {
+        createTreeView({
+            dataSource: [
+                { id: 1, text: "foo", items: [
+                    { id: 2, text: "bar" }
+                ] },
+            ]
+        });
+
+        treeviewObject.dataSource.pushUpdate({ id: 2, text: "baz" });
+
+        equal(treeview.find(".k-item").length, 2);
+        equal(treeview.find(".k-item .k-item:last").text(), "baz");
+    });
 })();

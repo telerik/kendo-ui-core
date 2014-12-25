@@ -140,7 +140,7 @@ var __meta__ = {
                         node: e.node,
                         index: e.index,
                         items: e.items || [this],
-                        action: e.node  ? (e.action || "itemchange") : "itemchange"
+                        action: e.node ? (e.action || "itemloaded") : "itemchange"
                     });
                 });
             }
@@ -2482,7 +2482,7 @@ var __meta__ = {
 
                     target.accept(item);
 
-                    target.trigger("change");
+                    target.trigger(CHANGE);
 
                     this._updatePristineForModel(target, item);
                 } else {
