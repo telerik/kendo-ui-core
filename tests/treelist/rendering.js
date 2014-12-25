@@ -951,4 +951,24 @@
 
         equal(dom.find("td[style]").css("text-align"), "center");
     });
+
+    test("column headerAttributes are rendered on header cells", function() {
+        createTreeList({
+            columns: [
+                { field: "id", headerAttributes: { "foo": "bar" } }
+            ]
+        });
+
+        equal(dom.find("th[foo=bar]").length, 1);
+    });
+
+    test("column headerAttributes render style attribute", function() {
+        createTreeList({
+            columns: [
+                { field: "id", headerAttributes: { "style": "text-align: center;" } }
+            ]
+        });
+
+        equal(dom.find("th[style]").css("text-align"), "center");
+    });
 })();
