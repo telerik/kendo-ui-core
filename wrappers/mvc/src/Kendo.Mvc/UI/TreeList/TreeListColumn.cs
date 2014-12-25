@@ -47,6 +47,8 @@ namespace Kendo.Mvc.UI
         
         public string Format { get; set; }
         
+        public IDictionary<string,object> HeaderAttributes { get; set; }
+        
         public string HeaderTemplate { get; set; }
 
         public string HeaderTemplateId { get; set; }
@@ -124,6 +126,11 @@ namespace Kendo.Mvc.UI
             if (Format.HasValue())
             {
                 json["format"] = Format;
+            }
+            
+            if (HeaderAttributes.Any())
+            {
+                json["headerAttributes"] = HeaderAttributes;
             }
             
             if (!string.IsNullOrEmpty(HeaderTemplateId))

@@ -98,6 +98,15 @@ custom number format, standard date format or a custom date format.
     }
 
     /**
+    * HTML attributes of the table header cell (<th>) rendered for the column.
+    * @param  $value
+    * @return \Kendo\UI\TreeListColumn
+    */
+    public function headerAttributes($value) {
+        return $this->setProperty('headerAttributes', $value);
+    }
+
+    /**
     * Sets the headerTemplate option of the TreeListColumn.
     * The template which renders the column header content. By default the value of the title column option
 is displayed in the column header cell.

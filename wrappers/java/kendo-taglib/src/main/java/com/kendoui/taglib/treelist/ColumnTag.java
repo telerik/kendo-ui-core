@@ -148,6 +148,14 @@ public class ColumnTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         setProperty("format", value);
     }
 
+    public java.lang.Object getHeaderAttributes() {
+        return (java.lang.Object)getProperty("headerAttributes");
+    }
+
+    public void setHeaderAttributes(java.lang.Object value) {
+        setProperty("headerAttributes", value);
+    }
+
     public java.lang.String getHeaderTemplate() {
         return (java.lang.String)getProperty("headerTemplate");
     }

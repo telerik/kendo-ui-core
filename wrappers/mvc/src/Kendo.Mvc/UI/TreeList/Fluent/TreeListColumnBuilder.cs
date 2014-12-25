@@ -164,6 +164,26 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
+        /// HTML attributes of the table header cell (&lt;th&gt;) rendered for the column.
+        /// </summary>
+        /// <param name="value">The value that configures the headerattributes.</param>
+        public TreeListColumnBuilder<T> HeaderAttributes(object value)
+        {
+            return this.HeaderAttributes(value.ToDictionary());
+        }
+        
+        /// <summary>
+        /// HTML attributes of the table header cell (&lt;th&gt;) rendered for the column.
+        /// </summary>
+        /// <param name="value">The value that configures the headerattributes.</param>
+        public TreeListColumnBuilder<T> HeaderAttributes(IDictionary<string,object> value)
+        {
+            container.HeaderAttributes = value;
+
+            return this;
+        }
+        
+        /// <summary>
         /// The template which renders the column header content. By default the value of the title column option
 		/// is displayed in the column header cell.
         /// </summary>

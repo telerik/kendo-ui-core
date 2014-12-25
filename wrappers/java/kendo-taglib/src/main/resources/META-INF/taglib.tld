@@ -674,7 +674,8 @@ If it is not supported by the browser, the Chart will switch to the first availa
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fires when an legend item is clicked.</description>
+            <description>Fires when an legend item is clicked, before the selected series visibility is toggled.
+Can be cancelled.</description>
             <name>legendItemClick</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
@@ -10575,7 +10576,8 @@ body of the chart.</description>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fires when an legend item is clicked.</description>
+        <description>Fires when an legend item is clicked, before the selected series visibility is toggled.
+Can be cancelled.</description>
         <name>chart-legendItemClick</name>
         <tag-class>com.kendoui.taglib.chart.LegendItemClickFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -12584,19 +12586,19 @@ data source is fired. By default the widget will bind to the data source specifi
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>See the dataSource field.</description>
+            <description>Defines the data source of the connections.</description>
             <name>connectionsDataSource</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
         </attribute>
         <attribute>
-            <description>See the dataSource field.</description>
+            <description>Defines the data source of the diagram.</description>
             <name>dataSource</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
         </attribute>
         <attribute>
-            <description>Specifies the shape editable.</description>
+            <description>Defines how the diagram behaves when the user attempts to edit shape content, create new connections, edit connection labels and so on.</description>
             <name>editable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -12644,12 +12646,12 @@ data source is fired. By default the widget will bind to the data source specifi
             <type>float</type>
         </attribute>
         <attribute>
-            <description>Fired when the user add new shape or connection.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+            <description>Fired when the user adds new shape or connection.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>add</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fired when the user clicks the "cancel" button in the popup window.</description>
+            <description>Fired when the user clicks the "cancel" button in the popup window in case the item was added via a toolbar.</description>
             <name>cancel</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
@@ -12694,7 +12696,7 @@ data source is fired. By default the widget will bind to the data source specifi
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fired when the user a shape or connection da is saved.</description>
+            <description>Fired when the user saved a shape or a connection.</description>
             <name>save</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
@@ -12717,13 +12719,13 @@ data source is fired. By default the widget will bind to the data source specifi
     </tag>
 
     <tag>
-        <description>Defines the connections configuration.</description>
+        <description>Defines the defaults of the connections. Whenever a connection is created, the specified connectionDefaults will be used and merged with the (optional) configuration passed through the connection creation method.</description>
         <name>diagram-connectionDefaults</name>
         <tag-class>com.kendoui.taglib.diagram.ConnectionDefaultsTag</tag-class>
         <body-content>JSP</body-content>
 
         <attribute>
-            <description>Defines the shape editable options.</description>
+            <description>Defines the editing behavior of the connections.</description>
             <name>editable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -12744,7 +12746,7 @@ data source is fired. By default the widget will bind to the data source specifi
     </tag>
 
     <tag>
-        <description>Defines the shapes content settings.</description>
+        <description>Defines the label displayed on the connection path.</description>
         <name>diagram-connectionDefaults-content</name>
         <tag-class>com.kendoui.taglib.diagram.ConnectionDefaultsContentTag</tag-class>
         <body-content>JSP</body-content>
@@ -12756,7 +12758,7 @@ data source is fired. By default the widget will bind to the data source specifi
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The text displayed for the connection.</description>
+            <description>The static text displayed on the connection.</description>
             <name>text</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -12772,7 +12774,7 @@ data source is fired. By default the widget will bind to the data source specifi
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Defines the shape editable options.</description>
+        <description>Defines the editing behavior of the connections.</description>
         <name>diagram-connectionDefaults-editable</name>
         <tag-class>com.kendoui.taglib.diagram.ConnectionDefaultsEditableTag</tag-class>
         <body-content>JSP</body-content>
@@ -12813,7 +12815,7 @@ data source is fired. By default the widget will bind to the data source specifi
     </tag>
 
     <tag>
-        <description>Defines the hover stroke configuration.</description>
+        <description>Defines the hover configuration.</description>
         <name>diagram-connectionDefaults-hover-stroke</name>
         <tag-class>com.kendoui.taglib.diagram.ConnectionDefaultsHoverStrokeTag</tag-class>
         <body-content>empty</body-content>
@@ -12937,7 +12939,7 @@ data source is fired. By default the widget will bind to the data source specifi
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Defines the connection from.</description>
+            <description>Defines the source of the connection.</description>
             <name>from</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
@@ -13017,19 +13019,19 @@ data source is fired. By default the widget will bind to the data source specifi
 
 
     <tag>
-        <description>Defines the connection from.</description>
+        <description>Defines the source of the connection.</description>
         <name>diagram-connection-from</name>
         <tag-class>com.kendoui.taglib.diagram.ConnectionFromTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>Defines the point x value.</description>
+            <description>Defines the x-coordinate of the connection source.</description>
             <name>x</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>Defines the point y value.</description>
+            <description>Defines the y-coordinate of the connection source.</description>
             <name>y</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -13078,13 +13080,13 @@ data source is fired. By default the widget will bind to the data source specifi
 
         <body-content>empty</body-content>
         <attribute>
-            <description>Sets the X coordinate of the point.</description>
+            <description>Sets the X coordinate of the intermediate point.</description>
             <name>x</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>Sets the Y coordinate of the point.</description>
+            <description>Sets the Y coordinate of the intermediate point.</description>
             <name>y</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -13224,7 +13226,7 @@ data source is fired. By default the widget will bind to the data source specifi
     </tag>
 
     <tag>
-        <description>Specifies the shape resizing.</description>
+        <description>Defines the look-and-feel of the resizing handles.</description>
         <name>diagram-editable-resize</name>
         <tag-class>com.kendoui.taglib.diagram.EditableResizeTag</tag-class>
         <body-content>JSP</body-content>
@@ -13233,25 +13235,25 @@ data source is fired. By default the widget will bind to the data source specifi
     </tag>
 
     <tag>
-        <description>Specifies the handles style.</description>
+        <description>Specifies the settings of the resizing handles. See the editable.resize configuration for an example.</description>
         <name>diagram-editable-resize-handles</name>
         <tag-class>com.kendoui.taglib.diagram.EditableResizeHandlesTag</tag-class>
         <body-content>JSP</body-content>
 
         <attribute>
-            <description>Specifies the handles fill options.</description>
+            <description>Specifies the fill settings of the resizing handles. See the editable.resize configuration for an example.</description>
             <name>fill</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The hangles height.</description>
+            <description>Specifies the height of the resizing handles. See the editable.resize configuration for an example.</description>
             <name>height</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>The hangles width.</description>
+            <description>Specifies the width of the resizing handles. See the editable.resize configuration for an example.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -13260,19 +13262,19 @@ data source is fired. By default the widget will bind to the data source specifi
     </tag>
 
     <tag>
-        <description>Specifies the handles fill options.</description>
+        <description>Specifies the fill settings of the resizing handles. See the editable.resize configuration for an example.</description>
         <name>diagram-editable-resize-handles-fill</name>
         <tag-class>com.kendoui.taglib.diagram.EditableResizeHandlesFillTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>Specifies the handles fill color.</description>
+            <description>Specifies the fill color of the resizing handles. See the editable.resize configuration for an example.</description>
             <name>color</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Specifies the handles fill opacity.</description>
+            <description>Specifies the fill opacity of the resizing handles. See the editable.resize configuration for an example.</description>
             <name>opacity</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -13282,13 +13284,13 @@ data source is fired. By default the widget will bind to the data source specifi
 
 
     <tag>
-        <description>Set the handles hover styles.</description>
+        <description>Specifies the settings of the resizing handles on hovering over them. See the editable.resize configuration for an example.</description>
         <name>diagram-editable-resize-handles-hover</name>
         <tag-class>com.kendoui.taglib.diagram.EditableResizeHandlesHoverTag</tag-class>
         <body-content>JSP</body-content>
 
         <attribute>
-            <description>Set the handles hover fill options.</description>
+            <description>Specifies the fill settings on hovering over the resizing handles. See the editable.resize configuration for an example.</description>
             <name>fill</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -13297,19 +13299,19 @@ data source is fired. By default the widget will bind to the data source specifi
     </tag>
 
     <tag>
-        <description>Set the handles hover fill options.</description>
+        <description>Specifies the fill settings on hovering over the resizing handles. See the editable.resize configuration for an example.</description>
         <name>diagram-editable-resize-handles-hover-fill</name>
         <tag-class>com.kendoui.taglib.diagram.EditableResizeHandlesHoverFillTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>Set the handles hover fill color.</description>
+            <description>Specifies the fill color on hovering over the resizing handles. See the editable.resize configuration for an example.</description>
             <name>color</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Set the handles hover fill opacity.</description>
+            <description>Specifies the fill opacity on hovering over the resizing handles. See the editable.resize configuration for an example.</description>
             <name>opacity</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -13319,25 +13321,25 @@ data source is fired. By default the widget will bind to the data source specifi
 
 
     <tag>
-        <description>Specifies the handles stroke styles.</description>
+        <description>Specifies the stroke on hovering over the resizing handles. See the editable.resize configuration for an example.</description>
         <name>diagram-editable-resize-handles-hover-stroke</name>
         <tag-class>com.kendoui.taglib.diagram.EditableResizeHandlesHoverStrokeTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>Specifies the handles stroke color.</description>
+            <description>Specifies the stroke color on hovering over the resizing handles. See the editable.resize configuration for an example.</description>
             <name>color</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Specifies the handles stroke dash type.</description>
+            <description>Specifies the stroke dash type on hovering over the resizing handles. See the editable.resize configuration for an example.</description>
             <name>dashType</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Specifies the handles stroke width.</description>
+            <description>Specifies the stroke color on hovering over the resizing handles. See the editable.resize configuration for an example.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -13348,25 +13350,25 @@ data source is fired. By default the widget will bind to the data source specifi
 
 
     <tag>
-        <description>Specifies the handles stroke styles.</description>
+        <description>Specifies the stroke of the resizing handles. See the editable.resize configuration for an example.</description>
         <name>diagram-editable-resize-handles-stroke</name>
         <tag-class>com.kendoui.taglib.diagram.EditableResizeHandlesStrokeTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>Specifies the handles stroke color.</description>
+            <description>Specifies the stroke color of the resizing handles. See the editable.resize configuration for an example.</description>
             <name>color</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Specifies the handles stroke dash type.</description>
+            <description>Specifies the stroke dash type of the resizing handles. See the editable.resize configuration for an example.</description>
             <name>dashType</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Specifies the handles stroke width.</description>
+            <description>Specifies the stroke thickness of the resizing handles. See the editable.resize configuration for an example.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -13407,13 +13409,13 @@ data source is fired. By default the widget will bind to the data source specifi
 
 
     <tag>
-        <description>Specifies the connection editor template.</description>
+        <description>Specifies the connection editor template which shows up when editing the connection via a pop-up editor much like 'editable.template' configuration of the Kendo UI Grid widget.</description>
         <name>diagram-editable-connectionTemplate</name>
         <tag-class>com.kendoui.taglib.diagram.EditableConnectionTemplateFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Specifies the shape editor template.</description>
+        <description>Specifies the shape editor template. See the 'editable.connectionTemplate' for an example.</description>
         <name>diagram-editable-shapeTemplate</name>
         <tag-class>com.kendoui.taglib.diagram.EditableShapeTemplateFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -14009,13 +14011,13 @@ units are "mm", "cm", "in" and "pt" (default).</description>
 
 
     <tag>
-        <description></description>
+        <description>Defines the rotation of the shape.</description>
         <name>diagram-shapeDefaults-rotation</name>
         <tag-class>com.kendoui.taglib.diagram.ShapeDefaultsRotationTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
-            <description></description>
+            <description>Sets the rotational angle of the shape.</description>
             <name>angle</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -14404,13 +14406,13 @@ See visual.</description>
     </tag>
 
     <tag>
-        <description>Fired when the user add new shape or connection.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+        <description>Fired when the user adds new shape or connection.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>diagram-add</name>
         <tag-class>com.kendoui.taglib.diagram.AddFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fired when the user clicks the "cancel" button in the popup window.</description>
+        <description>Fired when the user clicks the "cancel" button in the popup window in case the item was added via a toolbar.</description>
         <name>diagram-cancel</name>
         <tag-class>com.kendoui.taglib.diagram.CancelFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -14464,7 +14466,7 @@ See visual.</description>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fired when the user a shape or connection da is saved.</description>
+        <description>Fired when the user saved a shape or a connection.</description>
         <name>diagram-save</name>
         <tag-class>com.kendoui.taglib.diagram.SaveFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -15553,7 +15555,7 @@ If function is assigned, the current path and image name will be provided.</desc
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The URL which will handle the upload of the new images. If not specified the Upload button will not be displayed.</description>
+            <description>The URL which will handle the upload of the new images. If not specified the Upload button will not be displayed.The requirements for this handler are the same as for the save handler in the Upload widget.</description>
             <name>uploadUrl</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -29679,7 +29681,8 @@ If it is not supported by the browser, the Chart will switch to the first availa
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fires when an legend item is clicked.</description>
+            <description>Fires when an legend item is clicked, before the selected series visibility is toggled.
+Can be cancelled.</description>
             <name>legendItemClick</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
@@ -36623,7 +36626,8 @@ hex and rgb.</description>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fires when an legend item is clicked.</description>
+        <description>Fires when an legend item is clicked, before the selected series visibility is toggled.
+Can be cancelled.</description>
         <name>stockChart-legendItemClick</name>
         <tag-class>com.kendoui.taglib.stockchart.LegendItemClickFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -37939,6 +37943,12 @@ custom number format, standard date format or a custom date format.</description
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>HTML attributes of the table header cell (&lt;th&gt;) rendered for the column.</description>
+            <name>headerAttributes</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
             <description>The template which renders the column header content. By default the value of the title column option
 is displayed in the column header cell.</description>
             <name>headerTemplate</name>
@@ -39118,8 +39128,7 @@ async mode.</description>
         </attribute>
         <attribute>
             <description>Fires when one or more files are about to be uploaded.
-Cancelling the event will prevent the upload.Note: The upload event fires only when the upload is in
-async mode.</description>
+Canceling the event will prevent the upload.</description>
             <name>upload</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
@@ -39320,8 +39329,7 @@ async mode.</description>
     </tag>
     <tag>
         <description>Fires when one or more files are about to be uploaded.
-Cancelling the event will prevent the upload.Note: The upload event fires only when the upload is in
-async mode.</description>
+Canceling the event will prevent the upload.</description>
         <name>upload-upload</name>
         <tag-class>com.kendoui.taglib.upload.UploadFunctionTag</tag-class>
         <body-content>JSP</body-content>
