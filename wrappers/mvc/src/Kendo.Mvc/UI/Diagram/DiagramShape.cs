@@ -33,55 +33,7 @@ namespace Kendo.Mvc.UI
 
         //>> Fields
         
-        public string Id { get; set; }
-        
-        public DiagramShapeEditableSettings Editable
-        {
-            get;
-            set;
-        }
-        
-        public string Path { get; set; }
-        
-        public DiagramShapeStrokeSettings Stroke
-        {
-            get;
-            set;
-        }
-        
-        public string Type { get; set; }
-        
-        public double? X { get; set; }
-        
-        public double? Y { get; set; }
-        
-        public double? MinWidth { get; set; }
-        
-        public double? MinHeight { get; set; }
-        
-        public double? Width { get; set; }
-        
-        public double? Height { get; set; }
-        
-        public DiagramShapeFillSettings Fill
-        {
-            get;
-            set;
-        }
-        
-        public DiagramShapeHoverSettings Hover
-        {
-            get;
-            set;
-        }
-        
         public List<DiagramShapeConnector> Connectors
-        {
-            get;
-            set;
-        }
-        
-        public DiagramShapeRotationSettings Rotation
         {
             get;
             set;
@@ -93,7 +45,55 @@ namespace Kendo.Mvc.UI
             set;
         }
         
+        public DiagramShapeEditableSettings Editable
+        {
+            get;
+            set;
+        }
+        
+        public DiagramShapeFillSettings Fill
+        {
+            get;
+            set;
+        }
+        
+        public double? Height { get; set; }
+        
+        public DiagramShapeHoverSettings Hover
+        {
+            get;
+            set;
+        }
+        
+        public string Id { get; set; }
+        
+        public double? MinHeight { get; set; }
+        
+        public double? MinWidth { get; set; }
+        
+        public string Path { get; set; }
+        
+        public DiagramShapeRotationSettings Rotation
+        {
+            get;
+            set;
+        }
+        
         public string Source { get; set; }
+        
+        public DiagramShapeStrokeSettings Stroke
+        {
+            get;
+            set;
+        }
+        
+        public string Type { get; set; }
+        
+        public double? Width { get; set; }
+        
+        public double? X { get; set; }
+        
+        public double? Y { get; set; }
         
         //<< Fields
 
@@ -103,11 +103,16 @@ namespace Kendo.Mvc.UI
         {
             //>> Serialization
         
-            if (Id.HasValue())
+            var connectors = Connectors.ToJson();
+            if (connectors.Any())
             {
-                json["id"] = Id;
+                json["connectors"] = connectors;
             }
-            
+            var content = Content.ToJson();
+            if (content.Any())
+            {
+                json["content"] = content;
+            }
             var editable = Editable.ToJson();
             if (editable.Any())
             {
@@ -116,9 +121,49 @@ namespace Kendo.Mvc.UI
                 json["editable"] = Editable.Enabled;
             }
 
+            var fill = Fill.ToJson();
+            if (fill.Any())
+            {
+                json["fill"] = fill;
+            }
+            if (Height.HasValue)
+            {
+                json["height"] = Height;
+            }
+                
+            var hover = Hover.ToJson();
+            if (hover.Any())
+            {
+                json["hover"] = hover;
+            }
+            if (Id.HasValue())
+            {
+                json["id"] = Id;
+            }
+            
+            if (MinHeight.HasValue)
+            {
+                json["minHeight"] = MinHeight;
+            }
+                
+            if (MinWidth.HasValue)
+            {
+                json["minWidth"] = MinWidth;
+            }
+                
             if (Path.HasValue())
             {
                 json["path"] = Path;
+            }
+            
+            var rotation = Rotation.ToJson();
+            if (rotation.Any())
+            {
+                json["rotation"] = rotation;
+            }
+            if (Source.HasValue())
+            {
+                json["source"] = Source;
             }
             
             var stroke = Stroke.ToJson();
@@ -131,6 +176,11 @@ namespace Kendo.Mvc.UI
                 json["type"] = Type;
             }
             
+            if (Width.HasValue)
+            {
+                json["width"] = Width;
+            }
+                
             if (X.HasValue)
             {
                 json["x"] = X;
@@ -141,56 +191,6 @@ namespace Kendo.Mvc.UI
                 json["y"] = Y;
             }
                 
-            if (MinWidth.HasValue)
-            {
-                json["minWidth"] = MinWidth;
-            }
-                
-            if (MinHeight.HasValue)
-            {
-                json["minHeight"] = MinHeight;
-            }
-                
-            if (Width.HasValue)
-            {
-                json["width"] = Width;
-            }
-                
-            if (Height.HasValue)
-            {
-                json["height"] = Height;
-            }
-                
-            var fill = Fill.ToJson();
-            if (fill.Any())
-            {
-                json["fill"] = fill;
-            }
-            var hover = Hover.ToJson();
-            if (hover.Any())
-            {
-                json["hover"] = hover;
-            }
-            var connectors = Connectors.ToJson();
-            if (connectors.Any())
-            {
-                json["connectors"] = connectors;
-            }
-            var rotation = Rotation.ToJson();
-            if (rotation.Any())
-            {
-                json["rotation"] = rotation;
-            }
-            var content = Content.ToJson();
-            if (content.Any())
-            {
-                json["content"] = content;
-            }
-            if (Source.HasValue())
-            {
-                json["source"] = Source;
-            }
-            
         //<< Serialization
 
             if (Visual.HasValue())

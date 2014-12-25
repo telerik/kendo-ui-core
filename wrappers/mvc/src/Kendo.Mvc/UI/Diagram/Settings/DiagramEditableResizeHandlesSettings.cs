@@ -29,11 +29,7 @@ namespace Kendo.Mvc.UI
             set;
         }
         
-        public DiagramEditableResizeHandlesStrokeSettings Stroke
-        {
-            get;
-            set;
-        }
+        public double? Height { get; set; }
         
         public DiagramEditableResizeHandlesHoverSettings Hover
         {
@@ -41,9 +37,13 @@ namespace Kendo.Mvc.UI
             set;
         }
         
-        public double? Width { get; set; }
+        public DiagramEditableResizeHandlesStrokeSettings Stroke
+        {
+            get;
+            set;
+        }
         
-        public double? Height { get; set; }
+        public double? Width { get; set; }
         
         //<< Fields
 
@@ -56,24 +56,24 @@ namespace Kendo.Mvc.UI
             {
                 json["fill"] = fill;
             }
-            var stroke = Stroke.ToJson();
-            if (stroke.Any())
+            if (Height.HasValue)
             {
-                json["stroke"] = stroke;
+                json["height"] = Height;
             }
+                
             var hover = Hover.ToJson();
             if (hover.Any())
             {
                 json["hover"] = hover;
             }
+            var stroke = Stroke.ToJson();
+            if (stroke.Any())
+            {
+                json["stroke"] = stroke;
+            }
             if (Width.HasValue)
             {
                 json["width"] = Width;
-            }
-                
-            if (Height.HasValue)
-            {
-                json["height"] = Height;
             }
                 
         //<< Serialization

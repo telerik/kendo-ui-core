@@ -17,15 +17,15 @@ namespace Kendo.Mvc.UI
 
         //>> Fields
         
-        public double? Width { get; set; }
+        public double? ComponentSpacingX { get; set; }
+        
+        public double? ComponentSpacingY { get; set; }
         
         public double? OffsetX { get; set; }
         
         public double? OffsetY { get; set; }
         
-        public double? ComponentSpacingX { get; set; }
-        
-        public double? ComponentSpacingY { get; set; }
+        public double? Width { get; set; }
         
         //<< Fields
 
@@ -33,9 +33,14 @@ namespace Kendo.Mvc.UI
         {
             //>> Serialization
         
-            if (Width.HasValue)
+            if (ComponentSpacingX.HasValue)
             {
-                json["width"] = Width;
+                json["componentSpacingX"] = ComponentSpacingX;
+            }
+                
+            if (ComponentSpacingY.HasValue)
+            {
+                json["componentSpacingY"] = ComponentSpacingY;
             }
                 
             if (OffsetX.HasValue)
@@ -48,14 +53,9 @@ namespace Kendo.Mvc.UI
                 json["offsetY"] = OffsetY;
             }
                 
-            if (ComponentSpacingX.HasValue)
+            if (Width.HasValue)
             {
-                json["componentSpacingX"] = ComponentSpacingX;
-            }
-                
-            if (ComponentSpacingY.HasValue)
-            {
-                json["componentSpacingY"] = ComponentSpacingY;
+                json["width"] = Width;
             }
                 
         //<< Serialization

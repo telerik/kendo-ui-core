@@ -22,7 +22,7 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Fields
         
         /// <summary>
-        /// Defines the hover stroke configuration.
+        /// Defines the hover configuration.
         /// </summary>
         /// <param name="configurator">The action that configures the stroke.</param>
         public DiagramConnectionDefaultsHoverSettingsBuilder<TShapeModel,TConnectionModel> Stroke(Action<DiagramConnectionDefaultsHoverStrokeSettingsBuilder<TShapeModel,TConnectionModel>> configurator)

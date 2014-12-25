@@ -22,7 +22,7 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Fields
         
         /// <summary>
-        /// Specifies the handles fill color.
+        /// Specifies the fill color of the resizing handles. See the editable.resize configuration for an example.
         /// </summary>
         /// <param name="value">The value that configures the color.</param>
         public DiagramEditableResizeHandlesFillSettingsBuilder<TShapeModel,TConnectionModel> Color(string value)
@@ -33,7 +33,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// Specifies the handles fill opacity.
+        /// Specifies the fill opacity of the resizing handles. See the editable.resize configuration for an example.
         /// </summary>
         /// <param name="value">The value that configures the opacity.</param>
         public DiagramEditableResizeHandlesFillSettingsBuilder<TShapeModel,TConnectionModel> Opacity(double value)

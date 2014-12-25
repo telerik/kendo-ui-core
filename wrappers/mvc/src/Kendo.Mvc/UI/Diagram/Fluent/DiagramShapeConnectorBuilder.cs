@@ -22,23 +22,23 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Fields
         
         /// <summary>
-        /// The connector name. Predefined names include:
-        /// </summary>
-        /// <param name="value">The value that configures the name.</param>
-        public DiagramShapeConnectorBuilder<TShapeModel,TConnectionModel> Name(string value)
-        {
-            container.Name = value;
-
-            return this;
-        }
-        
-        /// <summary>
         /// The connector description.
         /// </summary>
         /// <param name="value">The value that configures the description.</param>
         public DiagramShapeConnectorBuilder<TShapeModel,TConnectionModel> Description(string value)
         {
             container.Description = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// The connector name. Predefined names include:
+        /// </summary>
+        /// <param name="value">The value that configures the name.</param>
+        public DiagramShapeConnectorBuilder<TShapeModel,TConnectionModel> Name(string value)
+        {
+            container.Name = value;
 
             return this;
         }

@@ -37,107 +37,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// The zoom step when using the mouse-wheel to zoom in or out.
-        /// </summary>
-        /// <param name="value">The value that configures the zoomrate.</param>
-        public DiagramBuilder<TShapeModel,TConnectionModel> ZoomRate(double value)
-        {
-            container.ZoomRate = value;
-
-            return this;
-        }
-        
-        /// <summary>
-        /// The zoom level in percentages.
-        /// </summary>
-        /// <param name="value">The value that configures the zoom.</param>
-        public DiagramBuilder<TShapeModel,TConnectionModel> Zoom(double value)
-        {
-            container.Zoom = value;
-
-            return this;
-        }
-        
-        /// <summary>
-        /// The zoom min level in percentages.
-        /// </summary>
-        /// <param name="value">The value that configures the zoommin.</param>
-        public DiagramBuilder<TShapeModel,TConnectionModel> ZoomMin(double value)
-        {
-            container.ZoomMin = value;
-
-            return this;
-        }
-        
-        /// <summary>
-        /// The zoom max level in percentages.
-        /// </summary>
-        /// <param name="value">The value that configures the zoommax.</param>
-        public DiagramBuilder<TShapeModel,TConnectionModel> ZoomMax(double value)
-        {
-            container.ZoomMax = value;
-
-            return this;
-        }
-        
-
-        /// <summary>
-        /// Specifies the shape editable.
-        /// </summary>
-        /// <param name="enabled">Enables or disables the editable option.</param>
-        public DiagramBuilder<TShapeModel,TConnectionModel> Editable(bool enabled)
-        {
-            container.Editable.Enabled = enabled;
-            return this;
-        }
-
-        
-        /// <summary>
-        /// Specifies the shape editable.
-        /// </summary>
-        /// <param name="configurator">The action that configures the editable.</param>
-        public DiagramBuilder<TShapeModel,TConnectionModel> Editable(Action<DiagramEditableSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
-        {
-            container.Editable.Enabled = true;
-            
-            configurator(new DiagramEditableSettingsBuilder<TShapeModel,TConnectionModel>(container.Editable));
-            return this;
-        }
-        
-        /// <summary>
-        /// The layout of a diagram consists in arranging the shapes (sometimes also the connections) in some fashion in order to achieve an aesthetically pleasing experience to the user. It aims at giving a more direct insight in the information contained within the diagram and its relational structure.On a technical level, layout consists of a multitude of algorithms and optimizations:and various ad-hoc calculations which depend on the type of layout. The criteria on which an algorithm is based vary but the common denominator is:Kendo diagram includes three of the most used layout algorithms which should cover most of your layout needs - tree layout, force-directed layout and layered layout. Please, check the type property for more details regarding each type.The generic way to apply a layout is by calling the layout() method on the diagram. The method has a single parameter options. It is an object, which can contain parameters which are specific to the layout as well as parameters customizing the global grid layout. Parameters which apply to other layout algorithms can be included but are overlooked if not applicable to the chose layout type. This means that you can define a set of parameters which cover all possible layout types and simply pass it in the method whatever the layout define in the first parameter.
-        /// </summary>
-        /// <param name="configurator">The action that configures the layout.</param>
-        public DiagramBuilder<TShapeModel,TConnectionModel> Layout(Action<DiagramLayoutSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
-        {
-            configurator(new DiagramLayoutSettingsBuilder<TShapeModel,TConnectionModel>(container.Layout));
-            return this;
-        }
-        
-        /// <summary>
-        /// The template which renders the content of the shape when bound to a dataSource. The names you can use in the template correspond to the properties used in the dataSource. See the dataSource topic below for a concrete example.
-        /// </summary>
-        /// <param name="value">The value that configures the template.</param>
-        public DiagramBuilder<TShapeModel,TConnectionModel> Template(string value)
-        {
-            container.Template = value;
-
-            return this;
-        }
-
-        /// <summary>
-        /// The template which renders the content of the shape when bound to a dataSource. The names you can use in the template correspond to the properties used in the dataSource. See the dataSource topic below for a concrete example.
-        /// </summary>
-        /// <param name="value">The value that configures the template.</param>
-        public DiagramBuilder<TShapeModel,TConnectionModel> TemplateId(string value)
-        {
-            container.TemplateId = value;
-
-            return this;
-        }
-        
-        /// <summary>
-        /// Defines the connections configuration.
+        /// Defines the defaults of the connections. Whenever a connection is created, the specified connectionDefaults will be used and merged with the (optional) configuration passed through the connection creation method.
         /// </summary>
         /// <param name="configurator">The action that configures the connectiondefaults.</param>
         public DiagramBuilder<TShapeModel,TConnectionModel> ConnectionDefaults(Action<DiagramConnectionDefaultsSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
@@ -158,25 +58,35 @@ namespace Kendo.Mvc.UI.Fluent
         
 
         /// <summary>
-        /// Defines the selectable options.
+        /// Defines how the diagram behaves when the user attempts to edit shape content, create new connections, edit connection labels and so on.
         /// </summary>
-        /// <param name="enabled">Enables or disables the selectable option.</param>
-        public DiagramBuilder<TShapeModel,TConnectionModel> Selectable(bool enabled)
+        /// <param name="enabled">Enables or disables the editable option.</param>
+        public DiagramBuilder<TShapeModel,TConnectionModel> Editable(bool enabled)
         {
-            container.Selectable.Enabled = enabled;
+            container.Editable.Enabled = enabled;
             return this;
         }
 
         
         /// <summary>
-        /// Defines the selectable options.
+        /// Defines how the diagram behaves when the user attempts to edit shape content, create new connections, edit connection labels and so on.
         /// </summary>
-        /// <param name="configurator">The action that configures the selectable.</param>
-        public DiagramBuilder<TShapeModel,TConnectionModel> Selectable(Action<DiagramSelectableSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
+        /// <param name="configurator">The action that configures the editable.</param>
+        public DiagramBuilder<TShapeModel,TConnectionModel> Editable(Action<DiagramEditableSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
         {
-            container.Selectable.Enabled = true;
+            container.Editable.Enabled = true;
             
-            configurator(new DiagramSelectableSettingsBuilder<TShapeModel,TConnectionModel>(container.Selectable));
+            configurator(new DiagramEditableSettingsBuilder<TShapeModel,TConnectionModel>(container.Editable));
+            return this;
+        }
+        
+        /// <summary>
+        /// The layout of a diagram consists in arranging the shapes (sometimes also the connections) in some fashion in order to achieve an aesthetically pleasing experience to the user. It aims at giving a more direct insight in the information contained within the diagram and its relational structure.On a technical level, layout consists of a multitude of algorithms and optimizations:and various ad-hoc calculations which depend on the type of layout. The criteria on which an algorithm is based vary but the common denominator is:Kendo diagram includes three of the most used layout algorithms which should cover most of your layout needs - tree layout, force-directed layout and layered layout. Please, check the type property for more details regarding each type.The generic way to apply a layout is by calling the layout() method on the diagram. The method has a single parameter options. It is an object, which can contain parameters which are specific to the layout as well as parameters customizing the global grid layout. Parameters which apply to other layout algorithms can be included but are overlooked if not applicable to the chose layout type. This means that you can define a set of parameters which cover all possible layout types and simply pass it in the method whatever the layout define in the first parameter.
+        /// </summary>
+        /// <param name="configurator">The action that configures the layout.</param>
+        public DiagramBuilder<TShapeModel,TConnectionModel> Layout(Action<DiagramLayoutSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
+        {
+            configurator(new DiagramLayoutSettingsBuilder<TShapeModel,TConnectionModel>(container.Layout));
             return this;
         }
         
@@ -214,6 +124,30 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
         
+
+        /// <summary>
+        /// Defines the selectable options.
+        /// </summary>
+        /// <param name="enabled">Enables or disables the selectable option.</param>
+        public DiagramBuilder<TShapeModel,TConnectionModel> Selectable(bool enabled)
+        {
+            container.Selectable.Enabled = enabled;
+            return this;
+        }
+
+        
+        /// <summary>
+        /// Defines the selectable options.
+        /// </summary>
+        /// <param name="configurator">The action that configures the selectable.</param>
+        public DiagramBuilder<TShapeModel,TConnectionModel> Selectable(Action<DiagramSelectableSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
+        {
+            container.Selectable.Enabled = true;
+            
+            configurator(new DiagramSelectableSettingsBuilder<TShapeModel,TConnectionModel>(container.Selectable));
+            return this;
+        }
+        
         /// <summary>
         /// Defines the shape options.
         /// </summary>
@@ -231,6 +165,72 @@ namespace Kendo.Mvc.UI.Fluent
         public DiagramBuilder<TShapeModel,TConnectionModel> Shapes(Action<DiagramShapeFactory<TShapeModel,TConnectionModel>> configurator)
         {
             configurator(new DiagramShapeFactory<TShapeModel,TConnectionModel>(container.Shapes));
+            return this;
+        }
+        
+        /// <summary>
+        /// The template which renders the content of the shape when bound to a dataSource. The names you can use in the template correspond to the properties used in the dataSource. See the dataSource topic below for a concrete example.
+        /// </summary>
+        /// <param name="value">The value that configures the template.</param>
+        public DiagramBuilder<TShapeModel,TConnectionModel> Template(string value)
+        {
+            container.Template = value;
+
+            return this;
+        }
+
+        /// <summary>
+        /// The template which renders the content of the shape when bound to a dataSource. The names you can use in the template correspond to the properties used in the dataSource. See the dataSource topic below for a concrete example.
+        /// </summary>
+        /// <param name="value">The value that configures the template.</param>
+        public DiagramBuilder<TShapeModel,TConnectionModel> TemplateId(string value)
+        {
+            container.TemplateId = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// The zoom level in percentages.
+        /// </summary>
+        /// <param name="value">The value that configures the zoom.</param>
+        public DiagramBuilder<TShapeModel,TConnectionModel> Zoom(double value)
+        {
+            container.Zoom = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// The zoom max level in percentages.
+        /// </summary>
+        /// <param name="value">The value that configures the zoommax.</param>
+        public DiagramBuilder<TShapeModel,TConnectionModel> ZoomMax(double value)
+        {
+            container.ZoomMax = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// The zoom min level in percentages.
+        /// </summary>
+        /// <param name="value">The value that configures the zoommin.</param>
+        public DiagramBuilder<TShapeModel,TConnectionModel> ZoomMin(double value)
+        {
+            container.ZoomMin = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// The zoom step when using the mouse-wheel to zoom in or out.
+        /// </summary>
+        /// <param name="value">The value that configures the zoomrate.</param>
+        public DiagramBuilder<TShapeModel,TConnectionModel> ZoomRate(double value)
+        {
+            container.ZoomRate = value;
+
             return this;
         }
         

@@ -16,18 +16,7 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Handlers
         
         /// <summary>
-        /// Fired when the widget is bound to data from dataDource and connectionsDataSource.The event handler function context (available via the this keyword) will be set to the widget instance.
-        /// </summary>
-        /// <param name="handler">The name of the JavaScript function that will handle the dataBound event.</param>
-        public DiagramEventBuilder DataBound(string handler)
-        {
-            Handler("dataBound", handler);
-
-            return this;
-        }
-        
-        /// <summary>
-        /// Fired when the user add new shape or connection.The event handler function context (available via the this keyword) will be set to the widget instance.
+        /// Fired when the user adds new shape or connection.The event handler function context (available via the this keyword) will be set to the widget instance.
         /// </summary>
         /// <param name="handler">The name of the JavaScript function that will handle the add event.</param>
         public DiagramEventBuilder Add(string handler)
@@ -38,45 +27,12 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// Fired when the user edits a shape or connection.
-        /// </summary>
-        /// <param name="handler">The name of the JavaScript function that will handle the edit event.</param>
-        public DiagramEventBuilder Edit(string handler)
-        {
-            Handler("edit", handler);
-
-            return this;
-        }
-        
-        /// <summary>
-        /// Fired when the user a shape or connection da is saved.
-        /// </summary>
-        /// <param name="handler">The name of the JavaScript function that will handle the save event.</param>
-        public DiagramEventBuilder Save(string handler)
-        {
-            Handler("save", handler);
-
-            return this;
-        }
-        
-        /// <summary>
-        /// Fired when the user clicks the "cancel" button in the popup window.
+        /// Fired when the user clicks the "cancel" button in the popup window in case the item was added via a toolbar.
         /// </summary>
         /// <param name="handler">The name of the JavaScript function that will handle the cancel event.</param>
         public DiagramEventBuilder Cancel(string handler)
         {
             Handler("cancel", handler);
-
-            return this;
-        }
-        
-        /// <summary>
-        /// Fired when the user delete a shape or connection.
-        /// </summary>
-        /// <param name="handler">The name of the JavaScript function that will handle the remove event.</param>
-        public DiagramEventBuilder Remove(string handler)
-        {
-            Handler("remove", handler);
 
             return this;
         }
@@ -88,6 +44,39 @@ namespace Kendo.Mvc.UI.Fluent
         public DiagramEventBuilder Change(string handler)
         {
             Handler("change", handler);
+
+            return this;
+        }
+        
+        /// <summary>
+        /// Fired when the user clicks on a shape or a connection.
+        /// </summary>
+        /// <param name="handler">The name of the JavaScript function that will handle the click event.</param>
+        public DiagramEventBuilder Click(string handler)
+        {
+            Handler("click", handler);
+
+            return this;
+        }
+        
+        /// <summary>
+        /// Fired when the widget is bound to data from dataDource and connectionsDataSource.The event handler function context (available via the this keyword) will be set to the widget instance.
+        /// </summary>
+        /// <param name="handler">The name of the JavaScript function that will handle the dataBound event.</param>
+        public DiagramEventBuilder DataBound(string handler)
+        {
+            Handler("dataBound", handler);
+
+            return this;
+        }
+        
+        /// <summary>
+        /// Fired when the user edits a shape or connection.
+        /// </summary>
+        /// <param name="handler">The name of the JavaScript function that will handle the edit event.</param>
+        public DiagramEventBuilder Edit(string handler)
+        {
+            Handler("edit", handler);
 
             return this;
         }
@@ -126,23 +115,34 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
+        /// Fired when the user delete a shape or connection.
+        /// </summary>
+        /// <param name="handler">The name of the JavaScript function that will handle the remove event.</param>
+        public DiagramEventBuilder Remove(string handler)
+        {
+            Handler("remove", handler);
+
+            return this;
+        }
+        
+        /// <summary>
+        /// Fired when the user saved a shape or a connection.
+        /// </summary>
+        /// <param name="handler">The name of the JavaScript function that will handle the save event.</param>
+        public DiagramEventBuilder Save(string handler)
+        {
+            Handler("save", handler);
+
+            return this;
+        }
+        
+        /// <summary>
         /// Fired when the user selects one or more items.
         /// </summary>
         /// <param name="handler">The name of the JavaScript function that will handle the select event.</param>
         public DiagramEventBuilder Select(string handler)
         {
             Handler("select", handler);
-
-            return this;
-        }
-        
-        /// <summary>
-        /// Fired when the user starts changing the diagram zoom level.
-        /// </summary>
-        /// <param name="handler">The name of the JavaScript function that will handle the zoomStart event.</param>
-        public DiagramEventBuilder ZoomStart(string handler)
-        {
-            Handler("zoomStart", handler);
 
             return this;
         }
@@ -159,12 +159,12 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// Fired when the user clicks on a shape or a connection.
+        /// Fired when the user starts changing the diagram zoom level.
         /// </summary>
-        /// <param name="handler">The name of the JavaScript function that will handle the click event.</param>
-        public DiagramEventBuilder Click(string handler)
+        /// <param name="handler">The name of the JavaScript function that will handle the zoomStart event.</param>
+        public DiagramEventBuilder ZoomStart(string handler)
         {
-            Handler("click", handler);
+            Handler("zoomStart", handler);
 
             return this;
         }

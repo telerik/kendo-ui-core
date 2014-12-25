@@ -19,9 +19,9 @@ namespace Kendo.Mvc.UI
         
         public string Color { get; set; }
         
-        public double? Width { get; set; }
-        
         public string DashType { get; set; }
+        
+        public double? Width { get; set; }
         
         //<< Fields
 
@@ -34,16 +34,16 @@ namespace Kendo.Mvc.UI
                 json["color"] = Color;
             }
             
-            if (Width.HasValue)
-            {
-                json["width"] = Width;
-            }
-                
             if (DashType.HasValue())
             {
                 json["dashType"] = DashType;
             }
             
+            if (Width.HasValue)
+            {
+                json["width"] = Width;
+            }
+                
         //<< Serialization
         }
     }

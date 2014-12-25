@@ -22,7 +22,7 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Fields
         
         /// <summary>
-        /// Defines the point x value.
+        /// Defines the x-coordinate of the connection source.
         /// </summary>
         /// <param name="value">The value that configures the x.</param>
         public DiagramConnectionFromSettingsBuilder<TShapeModel,TConnectionModel> X(double value)
@@ -33,7 +33,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// Defines the point y value.
+        /// Defines the y-coordinate of the connection source.
         /// </summary>
         /// <param name="value">The value that configures the y.</param>
         public DiagramConnectionFromSettingsBuilder<TShapeModel,TConnectionModel> Y(double value)

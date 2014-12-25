@@ -22,7 +22,7 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Fields
         
         /// <summary>
-        /// Sets the X coordinate of the point.
+        /// Sets the X coordinate of the intermediate point.
         /// </summary>
         /// <param name="value">The value that configures the x.</param>
         public DiagramConnectionPointBuilder<TShapeModel,TConnectionModel> X(double value)
@@ -33,7 +33,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// Sets the Y coordinate of the point.
+        /// Sets the Y coordinate of the intermediate point.
         /// </summary>
         /// <param name="value">The value that configures the y.</param>
         public DiagramConnectionPointBuilder<TShapeModel,TConnectionModel> Y(double value)

@@ -21,6 +21,26 @@ namespace Kendo.Mvc.UI.Fluent
 
         //>> Fields
         
+        /// <summary>
+        /// Defines the connectors the shape owns.You can easily define your own custom connectors or mix-match with the above defined custom connectors.Example - custom shape with custom connectorsThe following defines a custom shape with connectors adapted to the shape's outline. Note in particular the various helpful methods (right(), left(), top()) to define positions relative to the shape.
+        /// </summary>
+        /// <param name="configurator">The action that configures the connectors.</param>
+        public DiagramShapeDefaultsSettingsBuilder<TShapeModel,TConnectionModel> Connectors(Action<DiagramShapeDefaultsSettingsConnectorFactory<TShapeModel,TConnectionModel>> configurator)
+        {
+            configurator(new DiagramShapeDefaultsSettingsConnectorFactory<TShapeModel,TConnectionModel>(container.Connectors));
+            return this;
+        }
+        
+        /// <summary>
+        /// Defines the shapes content settings.
+        /// </summary>
+        /// <param name="configurator">The action that configures the content.</param>
+        public DiagramShapeDefaultsSettingsBuilder<TShapeModel,TConnectionModel> Content(Action<DiagramShapeDefaultsContentSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
+        {
+            configurator(new DiagramShapeDefaultsContentSettingsBuilder<TShapeModel,TConnectionModel>(container.Content));
+            return this;
+        }
+        
 
         /// <summary>
         /// Defines the shape editable options.
@@ -46,12 +66,86 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
+        /// Defines the fill options of the shape.
+        /// </summary>
+        /// <param name="configurator">The action that configures the fill.</param>
+        public DiagramShapeDefaultsSettingsBuilder<TShapeModel,TConnectionModel> Fill(Action<DiagramShapeDefaultsFillSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
+        {
+            configurator(new DiagramShapeDefaultsFillSettingsBuilder<TShapeModel,TConnectionModel>(container.Fill));
+            return this;
+        }
+        
+        /// <summary>
+        /// Defines the height of the shape when added to the diagram.
+        /// </summary>
+        /// <param name="value">The value that configures the height.</param>
+        public DiagramShapeDefaultsSettingsBuilder<TShapeModel,TConnectionModel> Height(double value)
+        {
+            container.Height = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// Defines the hover configuration.
+        /// </summary>
+        /// <param name="configurator">The action that configures the hover.</param>
+        public DiagramShapeDefaultsSettingsBuilder<TShapeModel,TConnectionModel> Hover(Action<DiagramShapeDefaultsHoverSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
+        {
+            configurator(new DiagramShapeDefaultsHoverSettingsBuilder<TShapeModel,TConnectionModel>(container.Hover));
+            return this;
+        }
+        
+        /// <summary>
+        /// Defines the minimum height the shape should have, i.e. it cannot be resized to a value smaller than the given one.
+        /// </summary>
+        /// <param name="value">The value that configures the minheight.</param>
+        public DiagramShapeDefaultsSettingsBuilder<TShapeModel,TConnectionModel> MinHeight(double value)
+        {
+            container.MinHeight = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// Defines the minimum width the shape should have, i.e. it cannot be resized to a value smaller than the given one.
+        /// </summary>
+        /// <param name="value">The value that configures the minwidth.</param>
+        public DiagramShapeDefaultsSettingsBuilder<TShapeModel,TConnectionModel> MinWidth(double value)
+        {
+            container.MinWidth = value;
+
+            return this;
+        }
+        
+        /// <summary>
         /// The path option of a Shape is a description of a custom geometry. The format follows the standard SVG format (http://www.w3.org/TR/SVG/paths.html#PathData "SVG Path data.").
         /// </summary>
         /// <param name="value">The value that configures the path.</param>
         public DiagramShapeDefaultsSettingsBuilder<TShapeModel,TConnectionModel> Path(string value)
         {
             container.Path = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// Defines the rotation of the shape.
+        /// </summary>
+        /// <param name="configurator">The action that configures the rotation.</param>
+        public DiagramShapeDefaultsSettingsBuilder<TShapeModel,TConnectionModel> Rotation(Action<DiagramShapeDefaultsRotationSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
+        {
+            configurator(new DiagramShapeDefaultsRotationSettingsBuilder<TShapeModel,TConnectionModel>(container.Rotation));
+            return this;
+        }
+        
+        /// <summary>
+        /// The source of the shape image. Applicable when the type is set to "image".
+        /// </summary>
+        /// <param name="value">The value that configures the source.</param>
+        public DiagramShapeDefaultsSettingsBuilder<TShapeModel,TConnectionModel> Source(string value)
+        {
+            container.Source = value;
 
             return this;
         }
@@ -78,6 +172,17 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
+        /// Defines the width of the shape when added to the diagram.
+        /// </summary>
+        /// <param name="value">The value that configures the width.</param>
+        public DiagramShapeDefaultsSettingsBuilder<TShapeModel,TConnectionModel> Width(double value)
+        {
+            container.Width = value;
+
+            return this;
+        }
+        
+        /// <summary>
         /// Defines the x-coordinate of the shape when added to the diagram.
         /// </summary>
         /// <param name="value">The value that configures the x.</param>
@@ -95,111 +200,6 @@ namespace Kendo.Mvc.UI.Fluent
         public DiagramShapeDefaultsSettingsBuilder<TShapeModel,TConnectionModel> Y(double value)
         {
             container.Y = value;
-
-            return this;
-        }
-        
-        /// <summary>
-        /// Defines the minimum width the shape should have, i.e. it cannot be resized to a value smaller than the given one.
-        /// </summary>
-        /// <param name="value">The value that configures the minwidth.</param>
-        public DiagramShapeDefaultsSettingsBuilder<TShapeModel,TConnectionModel> MinWidth(double value)
-        {
-            container.MinWidth = value;
-
-            return this;
-        }
-        
-        /// <summary>
-        /// Defines the minimum height the shape should have, i.e. it cannot be resized to a value smaller than the given one.
-        /// </summary>
-        /// <param name="value">The value that configures the minheight.</param>
-        public DiagramShapeDefaultsSettingsBuilder<TShapeModel,TConnectionModel> MinHeight(double value)
-        {
-            container.MinHeight = value;
-
-            return this;
-        }
-        
-        /// <summary>
-        /// Defines the width of the shape when added to the diagram.
-        /// </summary>
-        /// <param name="value">The value that configures the width.</param>
-        public DiagramShapeDefaultsSettingsBuilder<TShapeModel,TConnectionModel> Width(double value)
-        {
-            container.Width = value;
-
-            return this;
-        }
-        
-        /// <summary>
-        /// Defines the height of the shape when added to the diagram.
-        /// </summary>
-        /// <param name="value">The value that configures the height.</param>
-        public DiagramShapeDefaultsSettingsBuilder<TShapeModel,TConnectionModel> Height(double value)
-        {
-            container.Height = value;
-
-            return this;
-        }
-        
-        /// <summary>
-        /// Defines the fill options of the shape.
-        /// </summary>
-        /// <param name="configurator">The action that configures the fill.</param>
-        public DiagramShapeDefaultsSettingsBuilder<TShapeModel,TConnectionModel> Fill(Action<DiagramShapeDefaultsFillSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
-        {
-            configurator(new DiagramShapeDefaultsFillSettingsBuilder<TShapeModel,TConnectionModel>(container.Fill));
-            return this;
-        }
-        
-        /// <summary>
-        /// Defines the hover configuration.
-        /// </summary>
-        /// <param name="configurator">The action that configures the hover.</param>
-        public DiagramShapeDefaultsSettingsBuilder<TShapeModel,TConnectionModel> Hover(Action<DiagramShapeDefaultsHoverSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
-        {
-            configurator(new DiagramShapeDefaultsHoverSettingsBuilder<TShapeModel,TConnectionModel>(container.Hover));
-            return this;
-        }
-        
-        /// <summary>
-        /// Defines the connectors the shape owns.You can easily define your own custom connectors or mix-match with the above defined custom connectors.Example - custom shape with custom connectorsThe following defines a custom shape with connectors adapted to the shape's outline. Note in particular the various helpful methods (right(), left(), top()) to define positions relative to the shape.
-        /// </summary>
-        /// <param name="configurator">The action that configures the connectors.</param>
-        public DiagramShapeDefaultsSettingsBuilder<TShapeModel,TConnectionModel> Connectors(Action<DiagramShapeDefaultsSettingsConnectorFactory<TShapeModel,TConnectionModel>> configurator)
-        {
-            configurator(new DiagramShapeDefaultsSettingsConnectorFactory<TShapeModel,TConnectionModel>(container.Connectors));
-            return this;
-        }
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="configurator">The action that configures the rotation.</param>
-        public DiagramShapeDefaultsSettingsBuilder<TShapeModel,TConnectionModel> Rotation(Action<DiagramShapeDefaultsRotationSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
-        {
-            configurator(new DiagramShapeDefaultsRotationSettingsBuilder<TShapeModel,TConnectionModel>(container.Rotation));
-            return this;
-        }
-        
-        /// <summary>
-        /// Defines the shapes content settings.
-        /// </summary>
-        /// <param name="configurator">The action that configures the content.</param>
-        public DiagramShapeDefaultsSettingsBuilder<TShapeModel,TConnectionModel> Content(Action<DiagramShapeDefaultsContentSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
-        {
-            configurator(new DiagramShapeDefaultsContentSettingsBuilder<TShapeModel,TConnectionModel>(container.Content));
-            return this;
-        }
-        
-        /// <summary>
-        /// The source of the shape image. Applicable when the type is set to "image".
-        /// </summary>
-        /// <param name="value">The value that configures the source.</param>
-        public DiagramShapeDefaultsSettingsBuilder<TShapeModel,TConnectionModel> Source(string value)
-        {
-            container.Source = value;
 
             return this;
         }

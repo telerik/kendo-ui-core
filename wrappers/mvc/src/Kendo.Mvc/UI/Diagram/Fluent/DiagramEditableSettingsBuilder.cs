@@ -22,29 +22,7 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Fields
         
         /// <summary>
-        /// Specifies the shape editor template.
-        /// </summary>
-        /// <param name="value">The value that configures the shapetemplate.</param>
-        public DiagramEditableSettingsBuilder<TShapeModel,TConnectionModel> ShapeTemplate(string value)
-        {
-            container.ShapeTemplate = value;
-
-            return this;
-        }
-
-        /// <summary>
-        /// Specifies the shape editor template.
-        /// </summary>
-        /// <param name="value">The value that configures the shapetemplate.</param>
-        public DiagramEditableSettingsBuilder<TShapeModel,TConnectionModel> ShapeTemplateId(string value)
-        {
-            container.ShapeTemplateId = value;
-
-            return this;
-        }
-        
-        /// <summary>
-        /// Specifies the connection editor template.
+        /// Specifies the connection editor template which shows up when editing the connection via a pop-up editor much like 'editable.template' configuration of the Kendo UI Grid widget.
         /// </summary>
         /// <param name="value">The value that configures the connectiontemplate.</param>
         public DiagramEditableSettingsBuilder<TShapeModel,TConnectionModel> ConnectionTemplate(string value)
@@ -55,12 +33,82 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Specifies the connection editor template.
+        /// Specifies the connection editor template which shows up when editing the connection via a pop-up editor much like 'editable.template' configuration of the Kendo UI Grid widget.
         /// </summary>
         /// <param name="value">The value that configures the connectiontemplate.</param>
         public DiagramEditableSettingsBuilder<TShapeModel,TConnectionModel> ConnectionTemplateId(string value)
         {
             container.ConnectionTemplateId = value;
+
+            return this;
+        }
+        
+
+        /// <summary>
+        /// Defines the look-and-feel of the resizing handles.
+        /// </summary>
+        /// <param name="enabled">Enables or disables the resize option.</param>
+        public DiagramEditableSettingsBuilder<TShapeModel,TConnectionModel> Resize(bool enabled)
+        {
+            container.Resize.Enabled = enabled;
+            return this;
+        }
+
+        
+        /// <summary>
+        /// Defines the look-and-feel of the resizing handles.
+        /// </summary>
+        /// <param name="configurator">The action that configures the resize.</param>
+        public DiagramEditableSettingsBuilder<TShapeModel,TConnectionModel> Resize(Action<DiagramEditableResizeSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
+        {
+            container.Resize.Enabled = true;
+            
+            configurator(new DiagramEditableResizeSettingsBuilder<TShapeModel,TConnectionModel>(container.Resize));
+            return this;
+        }
+        
+
+        /// <summary>
+        /// Specifies whether the shapes can be rotated. Note that changing this setting after creating the diagram will have no effect.
+        /// </summary>
+        /// <param name="enabled">Enables or disables the rotate option.</param>
+        public DiagramEditableSettingsBuilder<TShapeModel,TConnectionModel> Rotate(bool enabled)
+        {
+            container.Rotate.Enabled = enabled;
+            return this;
+        }
+
+        
+        /// <summary>
+        /// Specifies whether the shapes can be rotated. Note that changing this setting after creating the diagram will have no effect.
+        /// </summary>
+        /// <param name="configurator">The action that configures the rotate.</param>
+        public DiagramEditableSettingsBuilder<TShapeModel,TConnectionModel> Rotate(Action<DiagramEditableRotateSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
+        {
+            container.Rotate.Enabled = true;
+            
+            configurator(new DiagramEditableRotateSettingsBuilder<TShapeModel,TConnectionModel>(container.Rotate));
+            return this;
+        }
+        
+        /// <summary>
+        /// Specifies the shape editor template. See the 'editable.connectionTemplate' for an example.
+        /// </summary>
+        /// <param name="value">The value that configures the shapetemplate.</param>
+        public DiagramEditableSettingsBuilder<TShapeModel,TConnectionModel> ShapeTemplate(string value)
+        {
+            container.ShapeTemplate = value;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Specifies the shape editor template. See the 'editable.connectionTemplate' for an example.
+        /// </summary>
+        /// <param name="value">The value that configures the shapetemplate.</param>
+        public DiagramEditableSettingsBuilder<TShapeModel,TConnectionModel> ShapeTemplateId(string value)
+        {
+            container.ShapeTemplateId = value;
 
             return this;
         }
@@ -72,30 +120,6 @@ namespace Kendo.Mvc.UI.Fluent
         public DiagramEditableSettingsBuilder<TShapeModel,TConnectionModel> Tools(Action<DiagramEditableSettingsToolFactory<TShapeModel,TConnectionModel>> configurator)
         {
             configurator(new DiagramEditableSettingsToolFactory<TShapeModel,TConnectionModel>(container.Tools));
-            return this;
-        }
-        
-
-        /// <summary>
-        /// Specifies the shape resizing.
-        /// </summary>
-        /// <param name="enabled">Enables or disables the resize option.</param>
-        public DiagramEditableSettingsBuilder<TShapeModel,TConnectionModel> Resize(bool enabled)
-        {
-            container.Resize.Enabled = enabled;
-            return this;
-        }
-
-        
-        /// <summary>
-        /// Specifies the shape resizing.
-        /// </summary>
-        /// <param name="configurator">The action that configures the resize.</param>
-        public DiagramEditableSettingsBuilder<TShapeModel,TConnectionModel> Resize(Action<DiagramEditableResizeSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
-        {
-            container.Resize.Enabled = true;
-            
-            configurator(new DiagramEditableResizeSettingsBuilder<TShapeModel,TConnectionModel>(container.Resize));
             return this;
         }
         

@@ -22,7 +22,7 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Fields
         
         /// <summary>
-        /// Set the handles hover fill options.
+        /// Specifies the fill settings on hovering over the resizing handles. See the editable.resize configuration for an example.
         /// </summary>
         /// <param name="configurator">The action that configures the fill.</param>
         public DiagramEditableResizeHandlesHoverSettingsBuilder<TShapeModel,TConnectionModel> Fill(Action<DiagramEditableResizeHandlesHoverFillSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
@@ -32,7 +32,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// Specifies the handles stroke styles.
+        /// Specifies the stroke on hovering over the resizing handles. See the editable.resize configuration for an example.
         /// </summary>
         /// <param name="configurator">The action that configures the stroke.</param>
         public DiagramEditableResizeHandlesHoverSettingsBuilder<TShapeModel,TConnectionModel> Stroke(Action<DiagramEditableResizeHandlesHoverStrokeSettingsBuilder<TShapeModel,TConnectionModel>> configurator)

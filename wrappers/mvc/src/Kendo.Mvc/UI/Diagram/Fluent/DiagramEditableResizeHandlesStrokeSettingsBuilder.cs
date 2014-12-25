@@ -22,7 +22,7 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Fields
         
         /// <summary>
-        /// Specifies the handles stroke color.
+        /// Specifies the stroke color of the resizing handles. See the editable.resize configuration for an example.
         /// </summary>
         /// <param name="value">The value that configures the color.</param>
         public DiagramEditableResizeHandlesStrokeSettingsBuilder<TShapeModel,TConnectionModel> Color(string value)
@@ -33,23 +33,23 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// Specifies the handles stroke width.
-        /// </summary>
-        /// <param name="value">The value that configures the width.</param>
-        public DiagramEditableResizeHandlesStrokeSettingsBuilder<TShapeModel,TConnectionModel> Width(double value)
-        {
-            container.Width = value;
-
-            return this;
-        }
-        
-        /// <summary>
-        /// Specifies the handles stroke dash type.
+        /// Specifies the stroke dash type of the resizing handles. See the editable.resize configuration for an example.
         /// </summary>
         /// <param name="value">The value that configures the dashtype.</param>
         public DiagramEditableResizeHandlesStrokeSettingsBuilder<TShapeModel,TConnectionModel> DashType(string value)
         {
             container.DashType = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// Specifies the stroke thickness of the resizing handles. See the editable.resize configuration for an example.
+        /// </summary>
+        /// <param name="value">The value that configures the width.</param>
+        public DiagramEditableResizeHandlesStrokeSettingsBuilder<TShapeModel,TConnectionModel> Width(double value)
+        {
+            container.Width = value;
 
             return this;
         }

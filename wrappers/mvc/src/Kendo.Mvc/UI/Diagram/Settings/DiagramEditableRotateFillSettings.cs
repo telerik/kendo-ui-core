@@ -6,9 +6,9 @@ namespace Kendo.Mvc.UI
     using System.Web.Routing;
     using Kendo.Mvc.Extensions;
 
-    public class DiagramShapeDefaultsStrokeSettings : JsonObject
+    public class DiagramEditableRotateFillSettings : JsonObject
     {
-        public DiagramShapeDefaultsStrokeSettings()
+        public DiagramEditableRotateFillSettings()
         {
             //>> Initialization
         
@@ -19,9 +19,7 @@ namespace Kendo.Mvc.UI
         
         public string Color { get; set; }
         
-        public string DashType { get; set; }
-        
-        public double? Width { get; set; }
+        public double? Opacity { get; set; }
         
         //<< Fields
 
@@ -34,14 +32,9 @@ namespace Kendo.Mvc.UI
                 json["color"] = Color;
             }
             
-            if (DashType.HasValue())
+            if (Opacity.HasValue)
             {
-                json["dashType"] = DashType;
-            }
-            
-            if (Width.HasValue)
-            {
-                json["width"] = Width;
+                json["opacity"] = Opacity;
             }
                 
         //<< Serialization

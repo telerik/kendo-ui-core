@@ -25,9 +25,9 @@ namespace Kendo.Mvc.UI
         
         public DateTime? Date { get; set; }
         
-        public bool? ForceProxy { get; set; }
-        
         public string FileName { get; set; }
+        
+        public bool? ForceProxy { get; set; }
         
         public string Keywords { get; set; }
         
@@ -68,16 +68,16 @@ namespace Kendo.Mvc.UI
                 json["date"] = Date;
             }
                 
-            if (ForceProxy.HasValue)
-            {
-                json["forceProxy"] = ForceProxy;
-            }
-                
             if (FileName.HasValue())
             {
                 json["fileName"] = FileName;
             }
             
+            if (ForceProxy.HasValue)
+            {
+                json["forceProxy"] = ForceProxy;
+            }
+                
             if (Keywords.HasValue())
             {
                 json["keywords"] = Keywords;

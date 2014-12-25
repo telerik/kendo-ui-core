@@ -22,7 +22,7 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Fields
         
         /// <summary>
-        /// Specifies the handles style.
+        /// Specifies the settings of the resizing handles. See the editable.resize configuration for an example.
         /// </summary>
         /// <param name="configurator">The action that configures the handles.</param>
         public DiagramEditableResizeSettingsBuilder<TShapeModel,TConnectionModel> Handles(Action<DiagramEditableResizeHandlesSettingsBuilder<TShapeModel,TConnectionModel>> configurator)

@@ -17,19 +17,19 @@ namespace Kendo.Mvc.UI
 
         //>> Fields
         
-        public string Text { get; set; }
-        
-        public string Template { get; set; }
-
-        public string TemplateId { get; set; }
-        
         public string Align { get; set; }
+        
+        public string Color { get; set; }
         
         public string FontFamily { get; set; }
         
         public double? FontSize { get; set; }
         
-        public string Color { get; set; }
+        public string Template { get; set; }
+
+        public string TemplateId { get; set; }
+        
+        public string Text { get; set; }
         
         //<< Fields
 
@@ -37,11 +37,26 @@ namespace Kendo.Mvc.UI
         {
             //>> Serialization
         
-            if (Text.HasValue())
+            if (Align.HasValue())
             {
-                json["text"] = Text;
+                json["align"] = Align;
             }
             
+            if (Color.HasValue())
+            {
+                json["color"] = Color;
+            }
+            
+            if (FontFamily.HasValue())
+            {
+                json["fontFamily"] = FontFamily;
+            }
+            
+            if (FontSize.HasValue)
+            {
+                json["fontSize"] = FontSize;
+            }
+                
             if (!string.IsNullOrEmpty(TemplateId))
             {
                 json["template"] = new ClientHandlerDescriptor {
@@ -56,24 +71,9 @@ namespace Kendo.Mvc.UI
                 json["template"] = Template;
             }
                 
-            if (Align.HasValue())
+            if (Text.HasValue())
             {
-                json["align"] = Align;
-            }
-            
-            if (FontFamily.HasValue())
-            {
-                json["fontFamily"] = FontFamily;
-            }
-            
-            if (FontSize.HasValue)
-            {
-                json["fontSize"] = FontSize;
-            }
-                
-            if (Color.HasValue())
-            {
-                json["color"] = Color;
+                json["text"] = Text;
             }
             
         //<< Serialization

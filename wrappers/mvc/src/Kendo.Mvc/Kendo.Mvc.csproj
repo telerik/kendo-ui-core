@@ -2393,4 +2393,4 @@
     <Compile Include="UI\Gantt\Settings\GanttCurrentTimeMarkerSettings.cs" />
     <Compile Include="UI\Gantt\Fluent\GanttCurrentTimeMarkerSettingsBuilder.cs" />
   </ItemGroup>
-</Project>
+<ItemGroup><Compile Include="UI\Diagram\Settings\DiagramEditableRotateSettings.cs" /><Compile Include="UI\Diagram\Fluent\DiagramEditableRotateSettingsBuilder.cs" /><Compile Include="UI\Diagram\Settings\DiagramEditableRotateFillSettings.cs" /><Compile Include="UI\Diagram\Fluent\DiagramEditableRotateFillSettingsBuilder.cs" /><Compile Include="UI\Diagram\Settings\DiagramEditableRotateStrokeSettings.cs" /><Compile Include="UI\Diagram\Fluent\DiagramEditableRotateStrokeSettingsBuilder.cs" /></ItemGroup></Project>

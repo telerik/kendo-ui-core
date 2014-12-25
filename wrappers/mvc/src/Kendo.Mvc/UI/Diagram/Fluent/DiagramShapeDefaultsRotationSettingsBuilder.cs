@@ -22,7 +22,7 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Fields
         
         /// <summary>
-        /// 
+        /// Sets the rotational angle of the shape.
         /// </summary>
         /// <param name="value">The value that configures the angle.</param>
         public DiagramShapeDefaultsRotationSettingsBuilder<TShapeModel,TConnectionModel> Angle(double value)

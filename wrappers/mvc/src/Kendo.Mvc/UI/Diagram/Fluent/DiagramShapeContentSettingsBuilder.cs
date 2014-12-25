@@ -22,45 +22,23 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Fields
         
         /// <summary>
-        /// The text displayed in the shape.
-        /// </summary>
-        /// <param name="value">The value that configures the text.</param>
-        public DiagramShapeContentSettingsBuilder<TShapeModel,TConnectionModel> Text(string value)
-        {
-            container.Text = value;
-
-            return this;
-        }
-        
-        /// <summary>
-        /// The template which renders the labels.The fields which can be used in the template are:
-        /// </summary>
-        /// <param name="value">The value that configures the template.</param>
-        public DiagramShapeContentSettingsBuilder<TShapeModel,TConnectionModel> Template(string value)
-        {
-            container.Template = value;
-
-            return this;
-        }
-
-        /// <summary>
-        /// The template which renders the labels.The fields which can be used in the template are:
-        /// </summary>
-        /// <param name="value">The value that configures the template.</param>
-        public DiagramShapeContentSettingsBuilder<TShapeModel,TConnectionModel> TemplateId(string value)
-        {
-            container.TemplateId = value;
-
-            return this;
-        }
-        
-        /// <summary>
         /// The alignment of the text inside the shape.
         /// </summary>
         /// <param name="value">The value that configures the align.</param>
         public DiagramShapeContentSettingsBuilder<TShapeModel,TConnectionModel> Align(string value)
         {
             container.Align = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// The color of the shape content text.
+        /// </summary>
+        /// <param name="value">The value that configures the color.</param>
+        public DiagramShapeContentSettingsBuilder<TShapeModel,TConnectionModel> Color(string value)
+        {
+            container.Color = value;
 
             return this;
         }
@@ -88,12 +66,34 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// The color of the shape content text.
+        /// The template which renders the labels.The fields which can be used in the template are:
         /// </summary>
-        /// <param name="value">The value that configures the color.</param>
-        public DiagramShapeContentSettingsBuilder<TShapeModel,TConnectionModel> Color(string value)
+        /// <param name="value">The value that configures the template.</param>
+        public DiagramShapeContentSettingsBuilder<TShapeModel,TConnectionModel> Template(string value)
         {
-            container.Color = value;
+            container.Template = value;
+
+            return this;
+        }
+
+        /// <summary>
+        /// The template which renders the labels.The fields which can be used in the template are:
+        /// </summary>
+        /// <param name="value">The value that configures the template.</param>
+        public DiagramShapeContentSettingsBuilder<TShapeModel,TConnectionModel> TemplateId(string value)
+        {
+            container.TemplateId = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// The text displayed in the shape.
+        /// </summary>
+        /// <param name="value">The value that configures the text.</param>
+        public DiagramShapeContentSettingsBuilder<TShapeModel,TConnectionModel> Text(string value)
+        {
+            container.Text = value;
 
             return this;
         }

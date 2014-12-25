@@ -33,23 +33,23 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// Defines the thickness or width of the shape's stroke.
-        /// </summary>
-        /// <param name="value">The value that configures the width.</param>
-        public DiagramShapeDefaultsStrokeSettingsBuilder<TShapeModel,TConnectionModel> Width(double value)
-        {
-            container.Width = value;
-
-            return this;
-        }
-        
-        /// <summary>
         /// The dash type of the shape.The following dash types are supported:
         /// </summary>
         /// <param name="value">The value that configures the dashtype.</param>
         public DiagramShapeDefaultsStrokeSettingsBuilder<TShapeModel,TConnectionModel> DashType(string value)
         {
             container.DashType = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// Defines the thickness or width of the shape's stroke.
+        /// </summary>
+        /// <param name="value">The value that configures the width.</param>
+        public DiagramShapeDefaultsStrokeSettingsBuilder<TShapeModel,TConnectionModel> Width(double value)
+        {
+            container.Width = value;
 
             return this;
         }

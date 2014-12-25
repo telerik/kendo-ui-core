@@ -22,12 +22,23 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Fields
         
         /// <summary>
-        /// Defines the width of the grid. The bigger this parameter the more components will be organized in an horizontal row. How many components really depends on your diagram and they type of layout applied to each component. The default is set to 800.
+        /// Defines the horizontal spacing between each component. The default is 50.
         /// </summary>
-        /// <param name="value">The value that configures the width.</param>
-        public DiagramLayoutGridSettingsBuilder<TShapeModel,TConnectionModel> Width(double value)
+        /// <param name="value">The value that configures the componentspacingx.</param>
+        public DiagramLayoutGridSettingsBuilder<TShapeModel,TConnectionModel> ComponentSpacingX(double value)
         {
-            container.Width = value;
+            container.ComponentSpacingX = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// Defines the vertical spacing between each component. The default is 50.
+        /// </summary>
+        /// <param name="value">The value that configures the componentspacingy.</param>
+        public DiagramLayoutGridSettingsBuilder<TShapeModel,TConnectionModel> ComponentSpacingY(double value)
+        {
+            container.ComponentSpacingY = value;
 
             return this;
         }
@@ -55,23 +66,12 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// Defines the horizontal spacing between each component. The default is 50.
+        /// Defines the width of the grid. The bigger this parameter the more components will be organized in an horizontal row. How many components really depends on your diagram and they type of layout applied to each component. The default is set to 800.
         /// </summary>
-        /// <param name="value">The value that configures the componentspacingx.</param>
-        public DiagramLayoutGridSettingsBuilder<TShapeModel,TConnectionModel> ComponentSpacingX(double value)
+        /// <param name="value">The value that configures the width.</param>
+        public DiagramLayoutGridSettingsBuilder<TShapeModel,TConnectionModel> Width(double value)
         {
-            container.ComponentSpacingX = value;
-
-            return this;
-        }
-        
-        /// <summary>
-        /// Defines the vertical spacing between each component. The default is 50.
-        /// </summary>
-        /// <param name="value">The value that configures the componentspacingy.</param>
-        public DiagramLayoutGridSettingsBuilder<TShapeModel,TConnectionModel> ComponentSpacingY(double value)
-        {
-            container.ComponentSpacingY = value;
+            container.Width = value;
 
             return this;
         }

@@ -53,23 +53,23 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// If set to true, the content will be forwarded to proxyURL even if the browser supports saving files locally.
-        /// </summary>
-        /// <param name="value">The value that configures the forceproxy.</param>
-        public DiagramPdfSettingsBuilder<TShapeModel,TConnectionModel> ForceProxy(bool value)
-        {
-            container.ForceProxy = value;
-
-            return this;
-        }
-        
-        /// <summary>
         /// Specifies the file name of the exported PDF file.
         /// </summary>
         /// <param name="value">The value that configures the filename.</param>
         public DiagramPdfSettingsBuilder<TShapeModel,TConnectionModel> FileName(string value)
         {
             container.FileName = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// If set to true, the content will be forwarded to proxyURL even if the browser supports saving files locally.
+        /// </summary>
+        /// <param name="value">The value that configures the forceproxy.</param>
+        public DiagramPdfSettingsBuilder<TShapeModel,TConnectionModel> ForceProxy(bool value)
+        {
+            container.ForceProxy = value;
 
             return this;
         }

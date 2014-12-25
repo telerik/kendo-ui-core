@@ -24,10 +24,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="value">The value that configures the name.</param>
-        public DiagramShapeDefaultsSettingsConnectorBuilder<TShapeModel,TConnectionModel> Name(string value)
+        /// <param name="value">The value that configures the description.</param>
+        public DiagramShapeDefaultsSettingsConnectorBuilder<TShapeModel,TConnectionModel> Description(string value)
         {
-            container.Name = value;
+            container.Description = value;
 
             return this;
         }
@@ -35,10 +35,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="value">The value that configures the description.</param>
-        public DiagramShapeDefaultsSettingsConnectorBuilder<TShapeModel,TConnectionModel> Description(string value)
+        /// <param name="value">The value that configures the name.</param>
+        public DiagramShapeDefaultsSettingsConnectorBuilder<TShapeModel,TConnectionModel> Name(string value)
         {
-            container.Description = value;
+            container.Name = value;
 
             return this;
         }

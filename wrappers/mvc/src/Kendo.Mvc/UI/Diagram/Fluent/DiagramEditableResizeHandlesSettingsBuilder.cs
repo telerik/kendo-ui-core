@@ -22,7 +22,7 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Fields
         
         /// <summary>
-        /// Specifies the handles fill options.
+        /// Specifies the fill settings of the resizing handles. See the editable.resize configuration for an example.
         /// </summary>
         /// <param name="configurator">The action that configures the fill.</param>
         public DiagramEditableResizeHandlesSettingsBuilder<TShapeModel,TConnectionModel> Fill(Action<DiagramEditableResizeHandlesFillSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
@@ -32,17 +32,18 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// Specifies the handles stroke styles.
+        /// Specifies the height of the resizing handles. See the editable.resize configuration for an example.
         /// </summary>
-        /// <param name="configurator">The action that configures the stroke.</param>
-        public DiagramEditableResizeHandlesSettingsBuilder<TShapeModel,TConnectionModel> Stroke(Action<DiagramEditableResizeHandlesStrokeSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
+        /// <param name="value">The value that configures the height.</param>
+        public DiagramEditableResizeHandlesSettingsBuilder<TShapeModel,TConnectionModel> Height(double value)
         {
-            configurator(new DiagramEditableResizeHandlesStrokeSettingsBuilder<TShapeModel,TConnectionModel>(container.Stroke));
+            container.Height = value;
+
             return this;
         }
         
         /// <summary>
-        /// Set the handles hover styles.
+        /// Specifies the settings of the resizing handles on hovering over them. See the editable.resize configuration for an example.
         /// </summary>
         /// <param name="configurator">The action that configures the hover.</param>
         public DiagramEditableResizeHandlesSettingsBuilder<TShapeModel,TConnectionModel> Hover(Action<DiagramEditableResizeHandlesHoverSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
@@ -52,23 +53,22 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// The hangles width.
+        /// Specifies the stroke of the resizing handles. See the editable.resize configuration for an example.
+        /// </summary>
+        /// <param name="configurator">The action that configures the stroke.</param>
+        public DiagramEditableResizeHandlesSettingsBuilder<TShapeModel,TConnectionModel> Stroke(Action<DiagramEditableResizeHandlesStrokeSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
+        {
+            configurator(new DiagramEditableResizeHandlesStrokeSettingsBuilder<TShapeModel,TConnectionModel>(container.Stroke));
+            return this;
+        }
+        
+        /// <summary>
+        /// Specifies the width of the resizing handles. See the editable.resize configuration for an example.
         /// </summary>
         /// <param name="value">The value that configures the width.</param>
         public DiagramEditableResizeHandlesSettingsBuilder<TShapeModel,TConnectionModel> Width(double value)
         {
             container.Width = value;
-
-            return this;
-        }
-        
-        /// <summary>
-        /// The hangles height.
-        /// </summary>
-        /// <param name="value">The value that configures the height.</param>
-        public DiagramEditableResizeHandlesSettingsBuilder<TShapeModel,TConnectionModel> Height(double value)
-        {
-            container.Height = value;
 
             return this;
         }

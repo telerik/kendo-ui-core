@@ -19,27 +19,7 @@ namespace Kendo.Mvc.UI
 
         //>> Fields
         
-        public double? HorizontalSeparation { get; set; }
-        
-        public double? VerticalSeparation { get; set; }
-        
-        public double? RadialFirstLevelSeparation { get; set; }
-        
-        public double? RadialSeparation { get; set; }
-        
-        public double? StartRadialAngle { get; set; }
-        
         public double? EndRadialAngle { get; set; }
-        
-        public double? UnderneathVerticalTopOffset { get; set; }
-        
-        public double? UnderneathVerticalSeparation { get; set; }
-        
-        public double? UnderneathHorizontalOffset { get; set; }
-        
-        public double? Iterations { get; set; }
-        
-        public double? NodeDistance { get; set; }
         
         public DiagramLayoutGridSettings Grid
         {
@@ -47,7 +27,27 @@ namespace Kendo.Mvc.UI
             set;
         }
         
+        public double? HorizontalSeparation { get; set; }
+        
+        public double? Iterations { get; set; }
+        
         public double? LayerSeparation { get; set; }
+        
+        public double? NodeDistance { get; set; }
+        
+        public double? RadialFirstLevelSeparation { get; set; }
+        
+        public double? RadialSeparation { get; set; }
+        
+        public double? StartRadialAngle { get; set; }
+        
+        public double? UnderneathHorizontalOffset { get; set; }
+        
+        public double? UnderneathVerticalSeparation { get; set; }
+        
+        public double? UnderneathVerticalTopOffset { get; set; }
+        
+        public double? VerticalSeparation { get; set; }
         
         public DiagramLayoutType? Type { get; set; }
         
@@ -59,14 +59,34 @@ namespace Kendo.Mvc.UI
         {
             //>> Serialization
         
+            if (EndRadialAngle.HasValue)
+            {
+                json["endRadialAngle"] = EndRadialAngle;
+            }
+                
+            var grid = Grid.ToJson();
+            if (grid.Any())
+            {
+                json["grid"] = grid;
+            }
             if (HorizontalSeparation.HasValue)
             {
                 json["horizontalSeparation"] = HorizontalSeparation;
             }
                 
-            if (VerticalSeparation.HasValue)
+            if (Iterations.HasValue)
             {
-                json["verticalSeparation"] = VerticalSeparation;
+                json["iterations"] = Iterations;
+            }
+                
+            if (LayerSeparation.HasValue)
+            {
+                json["layerSeparation"] = LayerSeparation;
+            }
+                
+            if (NodeDistance.HasValue)
+            {
+                json["nodeDistance"] = NodeDistance;
             }
                 
             if (RadialFirstLevelSeparation.HasValue)
@@ -84,14 +104,9 @@ namespace Kendo.Mvc.UI
                 json["startRadialAngle"] = StartRadialAngle;
             }
                 
-            if (EndRadialAngle.HasValue)
+            if (UnderneathHorizontalOffset.HasValue)
             {
-                json["endRadialAngle"] = EndRadialAngle;
-            }
-                
-            if (UnderneathVerticalTopOffset.HasValue)
-            {
-                json["underneathVerticalTopOffset"] = UnderneathVerticalTopOffset;
+                json["underneathHorizontalOffset"] = UnderneathHorizontalOffset;
             }
                 
             if (UnderneathVerticalSeparation.HasValue)
@@ -99,29 +114,14 @@ namespace Kendo.Mvc.UI
                 json["underneathVerticalSeparation"] = UnderneathVerticalSeparation;
             }
                 
-            if (UnderneathHorizontalOffset.HasValue)
+            if (UnderneathVerticalTopOffset.HasValue)
             {
-                json["underneathHorizontalOffset"] = UnderneathHorizontalOffset;
+                json["underneathVerticalTopOffset"] = UnderneathVerticalTopOffset;
             }
                 
-            if (Iterations.HasValue)
+            if (VerticalSeparation.HasValue)
             {
-                json["iterations"] = Iterations;
-            }
-                
-            if (NodeDistance.HasValue)
-            {
-                json["nodeDistance"] = NodeDistance;
-            }
-                
-            var grid = Grid.ToJson();
-            if (grid.Any())
-            {
-                json["grid"] = grid;
-            }
-            if (LayerSeparation.HasValue)
-            {
-                json["layerSeparation"] = LayerSeparation;
+                json["verticalSeparation"] = VerticalSeparation;
             }
                 
             if (Type.HasValue)

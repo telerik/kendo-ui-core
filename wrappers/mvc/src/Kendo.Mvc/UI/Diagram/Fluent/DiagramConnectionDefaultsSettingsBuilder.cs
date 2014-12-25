@@ -22,7 +22,7 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Fields
         
         /// <summary>
-        /// Defines the shapes content settings.
+        /// Defines the label displayed on the connection path.
         /// </summary>
         /// <param name="configurator">The action that configures the content.</param>
         public DiagramConnectionDefaultsSettingsBuilder<TShapeModel,TConnectionModel> Content(Action<DiagramConnectionDefaultsContentSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
@@ -33,7 +33,7 @@ namespace Kendo.Mvc.UI.Fluent
         
 
         /// <summary>
-        /// Defines the shape editable options.
+        /// Defines the editing behavior of the connections.
         /// </summary>
         /// <param name="enabled">Enables or disables the editable option.</param>
         public DiagramConnectionDefaultsSettingsBuilder<TShapeModel,TConnectionModel> Editable(bool enabled)
@@ -44,7 +44,7 @@ namespace Kendo.Mvc.UI.Fluent
 
         
         /// <summary>
-        /// Defines the shape editable options.
+        /// Defines the editing behavior of the connections.
         /// </summary>
         /// <param name="configurator">The action that configures the editable.</param>
         public DiagramConnectionDefaultsSettingsBuilder<TShapeModel,TConnectionModel> Editable(Action<DiagramConnectionDefaultsEditableSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
@@ -52,37 +52,6 @@ namespace Kendo.Mvc.UI.Fluent
             container.Editable.Enabled = true;
             
             configurator(new DiagramConnectionDefaultsEditableSettingsBuilder<TShapeModel,TConnectionModel>(container.Editable));
-            return this;
-        }
-        
-        /// <summary>
-        /// Defines the stroke configuration.
-        /// </summary>
-        /// <param name="configurator">The action that configures the stroke.</param>
-        public DiagramConnectionDefaultsSettingsBuilder<TShapeModel,TConnectionModel> Stroke(Action<DiagramConnectionDefaultsStrokeSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
-        {
-            configurator(new DiagramConnectionDefaultsStrokeSettingsBuilder<TShapeModel,TConnectionModel>(container.Stroke));
-            return this;
-        }
-        
-        /// <summary>
-        /// Defines the hover configuration.
-        /// </summary>
-        /// <param name="configurator">The action that configures the hover.</param>
-        public DiagramConnectionDefaultsSettingsBuilder<TShapeModel,TConnectionModel> Hover(Action<DiagramConnectionDefaultsHoverSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
-        {
-            configurator(new DiagramConnectionDefaultsHoverSettingsBuilder<TShapeModel,TConnectionModel>(container.Hover));
-            return this;
-        }
-        
-        /// <summary>
-        /// The start cap (arrow, head or decoration) of the connection:
-        /// </summary>
-        /// <param name="value">The value that configures the startcap.</param>
-        public DiagramConnectionDefaultsSettingsBuilder<TShapeModel,TConnectionModel> StartCap(string value)
-        {
-            container.StartCap = value;
-
             return this;
         }
         
@@ -98,12 +67,43 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
+        /// Defines the hover configuration.
+        /// </summary>
+        /// <param name="configurator">The action that configures the hover.</param>
+        public DiagramConnectionDefaultsSettingsBuilder<TShapeModel,TConnectionModel> Hover(Action<DiagramConnectionDefaultsHoverSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
+        {
+            configurator(new DiagramConnectionDefaultsHoverSettingsBuilder<TShapeModel,TConnectionModel>(container.Hover));
+            return this;
+        }
+        
+        /// <summary>
         /// Defines the connection selection configuration.
         /// </summary>
         /// <param name="configurator">The action that configures the selection.</param>
         public DiagramConnectionDefaultsSettingsBuilder<TShapeModel,TConnectionModel> Selection(Action<DiagramConnectionDefaultsSelectionSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
         {
             configurator(new DiagramConnectionDefaultsSelectionSettingsBuilder<TShapeModel,TConnectionModel>(container.Selection));
+            return this;
+        }
+        
+        /// <summary>
+        /// The start cap (arrow, head or decoration) of the connection:
+        /// </summary>
+        /// <param name="value">The value that configures the startcap.</param>
+        public DiagramConnectionDefaultsSettingsBuilder<TShapeModel,TConnectionModel> StartCap(string value)
+        {
+            container.StartCap = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// Defines the stroke configuration.
+        /// </summary>
+        /// <param name="configurator">The action that configures the stroke.</param>
+        public DiagramConnectionDefaultsSettingsBuilder<TShapeModel,TConnectionModel> Stroke(Action<DiagramConnectionDefaultsStrokeSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
+        {
+            configurator(new DiagramConnectionDefaultsStrokeSettingsBuilder<TShapeModel,TConnectionModel>(container.Stroke));
             return this;
         }
         

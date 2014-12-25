@@ -67,30 +67,6 @@ namespace Kendo.Mvc.UI
         
         public bool? AutoBind { get; set; }
         
-        public double? ZoomRate { get; set; }
-        
-        public double? Zoom { get; set; }
-        
-        public double? ZoomMin { get; set; }
-        
-        public double? ZoomMax { get; set; }
-        
-        public DiagramEditableSettings<TShapeModel,TConnectionModel> Editable
-        {
-            get;
-            set;
-        }
-        
-        public DiagramLayoutSettings Layout
-        {
-            get;
-            set;
-        }
-        
-        public string Template { get; set; }
-
-        public string TemplateId { get; set; }
-        
         public DiagramConnectionDefaultsSettings ConnectionDefaults
         {
             get;
@@ -103,7 +79,13 @@ namespace Kendo.Mvc.UI
             set;
         }
         
-        public DiagramSelectableSettings Selectable
+        public DiagramEditableSettings<TShapeModel,TConnectionModel> Editable
+        {
+            get;
+            set;
+        }
+        
+        public DiagramLayoutSettings Layout
         {
             get;
             set;
@@ -121,6 +103,12 @@ namespace Kendo.Mvc.UI
             set;
         }
         
+        public DiagramSelectableSettings Selectable
+        {
+            get;
+            set;
+        }
+        
         public DiagramShapeDefaultsSettings ShapeDefaults
         {
             get;
@@ -132,6 +120,18 @@ namespace Kendo.Mvc.UI
             get;
             set;
         }
+        
+        public string Template { get; set; }
+
+        public string TemplateId { get; set; }
+        
+        public double? Zoom { get; set; }
+        
+        public double? ZoomMax { get; set; }
+        
+        public double? ZoomMin { get; set; }
+        
+        public double? ZoomRate { get; set; }
         
         //<< Fields
 
@@ -164,30 +164,51 @@ namespace Kendo.Mvc.UI
                 json["autoBind"] = AutoBind;
             }
                 
-            if (ZoomRate.HasValue)
+            var connectionDefaults = ConnectionDefaults.ToJson();
+            if (connectionDefaults.Any())
             {
-                json["zoomRate"] = ZoomRate;
+                json["connectionDefaults"] = connectionDefaults;
             }
-                
-            if (Zoom.HasValue)
+            var connections = Connections.ToJson();
+            if (connections.Any())
             {
-                json["zoom"] = Zoom;
+                json["connections"] = connections;
             }
-                
-            if (ZoomMin.HasValue)
-            {
-                json["zoomMin"] = ZoomMin;
-            }
-                
-            if (ZoomMax.HasValue)
-            {
-                json["zoomMax"] = ZoomMax;
-            }
-                
             var layout = Layout.ToJson();
             if (layout.Any())
             {
                 json["layout"] = layout;
+            }
+            var pannable = Pannable.ToJson();
+            if (pannable.Any())
+            {
+                json["pannable"] = pannable;
+            } else if (Pannable.Enabled != true) {
+                json["pannable"] = Pannable.Enabled;
+            }
+
+            var pdf = Pdf.ToJson();
+            if (pdf.Any())
+            {
+                json["pdf"] = pdf;
+            }
+            var selectable = Selectable.ToJson();
+            if (selectable.Any())
+            {
+                json["selectable"] = selectable;
+            } else if (Selectable.Enabled != true) {
+                json["selectable"] = Selectable.Enabled;
+            }
+
+            var shapeDefaults = ShapeDefaults.ToJson();
+            if (shapeDefaults.Any())
+            {
+                json["shapeDefaults"] = shapeDefaults;
+            }
+            var shapes = Shapes.ToJson();
+            if (shapes.Any())
+            {
+                json["shapes"] = shapes;
             }
             if (!string.IsNullOrEmpty(TemplateId))
             {
@@ -203,47 +224,26 @@ namespace Kendo.Mvc.UI
                 json["template"] = Template;
             }
                 
-            var connectionDefaults = ConnectionDefaults.ToJson();
-            if (connectionDefaults.Any())
+            if (Zoom.HasValue)
             {
-                json["connectionDefaults"] = connectionDefaults;
+                json["zoom"] = Zoom;
             }
-            var connections = Connections.ToJson();
-            if (connections.Any())
+                
+            if (ZoomMax.HasValue)
             {
-                json["connections"] = connections;
+                json["zoomMax"] = ZoomMax;
             }
-            var selectable = Selectable.ToJson();
-            if (selectable.Any())
+                
+            if (ZoomMin.HasValue)
             {
-                json["selectable"] = selectable;
-            } else if (Selectable.Enabled != true) {
-                json["selectable"] = Selectable.Enabled;
+                json["zoomMin"] = ZoomMin;
             }
-
-            var pannable = Pannable.ToJson();
-            if (pannable.Any())
+                
+            if (ZoomRate.HasValue)
             {
-                json["pannable"] = pannable;
-            } else if (Pannable.Enabled != true) {
-                json["pannable"] = Pannable.Enabled;
+                json["zoomRate"] = ZoomRate;
             }
-
-            var pdf = Pdf.ToJson();
-            if (pdf.Any())
-            {
-                json["pdf"] = pdf;
-            }
-            var shapeDefaults = ShapeDefaults.ToJson();
-            if (shapeDefaults.Any())
-            {
-                json["shapeDefaults"] = shapeDefaults;
-            }
-            var shapes = Shapes.ToJson();
-            if (shapes.Any())
-            {
-                json["shapes"] = shapes;
-            }
+                
         //<< Serialization
 
             if (Editable != null)

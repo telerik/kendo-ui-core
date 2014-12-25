@@ -33,23 +33,23 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// Defines the selection stroke width.
-        /// </summary>
-        /// <param name="value">The value that configures the width.</param>
-        public DiagramSelectableStrokeSettingsBuilder<TShapeModel,TConnectionModel> Width(double value)
-        {
-            container.Width = value;
-
-            return this;
-        }
-        
-        /// <summary>
         /// Defines the selection dash type.
         /// </summary>
         /// <param name="value">The value that configures the dashtype.</param>
         public DiagramSelectableStrokeSettingsBuilder<TShapeModel,TConnectionModel> DashType(string value)
         {
             container.DashType = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// Defines the selection stroke width.
+        /// </summary>
+        /// <param name="value">The value that configures the width.</param>
+        public DiagramSelectableStrokeSettingsBuilder<TShapeModel,TConnectionModel> Width(double value)
+        {
+            container.Width = value;
 
             return this;
         }

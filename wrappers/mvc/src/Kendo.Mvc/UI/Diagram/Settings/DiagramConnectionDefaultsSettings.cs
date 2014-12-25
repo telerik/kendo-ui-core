@@ -39,11 +39,7 @@ namespace Kendo.Mvc.UI
             set;
         }
         
-        public DiagramConnectionDefaultsStrokeSettings Stroke
-        {
-            get;
-            set;
-        }
+        public string EndCap { get; set; }
         
         public DiagramConnectionDefaultsHoverSettings Hover
         {
@@ -51,11 +47,15 @@ namespace Kendo.Mvc.UI
             set;
         }
         
+        public DiagramConnectionDefaultsSelectionSettings Selection
+        {
+            get;
+            set;
+        }
+        
         public string StartCap { get; set; }
         
-        public string EndCap { get; set; }
-        
-        public DiagramConnectionDefaultsSelectionSettings Selection
+        public DiagramConnectionDefaultsStrokeSettings Stroke
         {
             get;
             set;
@@ -80,30 +80,30 @@ namespace Kendo.Mvc.UI
                 json["editable"] = Editable.Enabled;
             }
 
-            var stroke = Stroke.ToJson();
-            if (stroke.Any())
+            if (EndCap.HasValue())
             {
-                json["stroke"] = stroke;
+                json["endCap"] = EndCap;
             }
+            
             var hover = Hover.ToJson();
             if (hover.Any())
             {
                 json["hover"] = hover;
+            }
+            var selection = Selection.ToJson();
+            if (selection.Any())
+            {
+                json["selection"] = selection;
             }
             if (StartCap.HasValue())
             {
                 json["startCap"] = StartCap;
             }
             
-            if (EndCap.HasValue())
+            var stroke = Stroke.ToJson();
+            if (stroke.Any())
             {
-                json["endCap"] = EndCap;
-            }
-            
-            var selection = Selection.ToJson();
-            if (selection.Any())
-            {
-                json["selection"] = selection;
+                json["stroke"] = stroke;
             }
         //<< Serialization
         }

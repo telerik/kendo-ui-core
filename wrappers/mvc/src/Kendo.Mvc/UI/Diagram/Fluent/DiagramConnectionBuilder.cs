@@ -31,26 +31,6 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
         
-        /// <summary>
-        /// Defines the connection from.
-        /// </summary>
-        /// <param name="configurator">The action that configures the from.</param>
-        public DiagramConnectionBuilder<TShapeModel,TConnectionModel> From(Action<DiagramConnectionFromSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
-        {
-            configurator(new DiagramConnectionFromSettingsBuilder<TShapeModel,TConnectionModel>(container.From));
-            return this;
-        }
-        
-        /// <summary>
-        /// Defines the connection to.
-        /// </summary>
-        /// <param name="configurator">The action that configures the to.</param>
-        public DiagramConnectionBuilder<TShapeModel,TConnectionModel> To(Action<DiagramConnectionToSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
-        {
-            configurator(new DiagramConnectionToSettingsBuilder<TShapeModel,TConnectionModel>(container.To));
-            return this;
-        }
-        
 
         /// <summary>
         /// Defines the shape editable options.
@@ -76,12 +56,23 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// Defines the stroke configuration.
+        /// The start cap (arrow, head or decoration) of the connection:Note that you can also use the "ArrowStart" for the endCap but its direction will be inversed.
         /// </summary>
-        /// <param name="configurator">The action that configures the stroke.</param>
-        public DiagramConnectionBuilder<TShapeModel,TConnectionModel> Stroke(Action<DiagramConnectionStrokeSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
+        /// <param name="value">The value that configures the endcap.</param>
+        public DiagramConnectionBuilder<TShapeModel,TConnectionModel> EndCap(string value)
         {
-            configurator(new DiagramConnectionStrokeSettingsBuilder<TShapeModel,TConnectionModel>(container.Stroke));
+            container.EndCap = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// Defines the source of the connection.
+        /// </summary>
+        /// <param name="configurator">The action that configures the from.</param>
+        public DiagramConnectionBuilder<TShapeModel,TConnectionModel> From(Action<DiagramConnectionFromSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
+        {
+            configurator(new DiagramConnectionFromSettingsBuilder<TShapeModel,TConnectionModel>(container.From));
             return this;
         }
         
@@ -92,28 +83,6 @@ namespace Kendo.Mvc.UI.Fluent
         public DiagramConnectionBuilder<TShapeModel,TConnectionModel> Hover(Action<DiagramConnectionHoverSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
         {
             configurator(new DiagramConnectionHoverSettingsBuilder<TShapeModel,TConnectionModel>(container.Hover));
-            return this;
-        }
-        
-        /// <summary>
-        /// The start cap (arrow, head or decoration) of the connection:
-        /// </summary>
-        /// <param name="value">The value that configures the startcap.</param>
-        public DiagramConnectionBuilder<TShapeModel,TConnectionModel> StartCap(string value)
-        {
-            container.StartCap = value;
-
-            return this;
-        }
-        
-        /// <summary>
-        /// The start cap (arrow, head or decoration) of the connection:Note that you can also use the "ArrowStart" for the endCap but its direction will be inversed.
-        /// </summary>
-        /// <param name="value">The value that configures the endcap.</param>
-        public DiagramConnectionBuilder<TShapeModel,TConnectionModel> EndCap(string value)
-        {
-            container.EndCap = value;
-
             return this;
         }
         
@@ -134,6 +103,37 @@ namespace Kendo.Mvc.UI.Fluent
         public DiagramConnectionBuilder<TShapeModel,TConnectionModel> Selection(Action<DiagramConnectionSelectionSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
         {
             configurator(new DiagramConnectionSelectionSettingsBuilder<TShapeModel,TConnectionModel>(container.Selection));
+            return this;
+        }
+        
+        /// <summary>
+        /// The start cap (arrow, head or decoration) of the connection:
+        /// </summary>
+        /// <param name="value">The value that configures the startcap.</param>
+        public DiagramConnectionBuilder<TShapeModel,TConnectionModel> StartCap(string value)
+        {
+            container.StartCap = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// Defines the stroke configuration.
+        /// </summary>
+        /// <param name="configurator">The action that configures the stroke.</param>
+        public DiagramConnectionBuilder<TShapeModel,TConnectionModel> Stroke(Action<DiagramConnectionStrokeSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
+        {
+            configurator(new DiagramConnectionStrokeSettingsBuilder<TShapeModel,TConnectionModel>(container.Stroke));
+            return this;
+        }
+        
+        /// <summary>
+        /// Defines the connection to.
+        /// </summary>
+        /// <param name="configurator">The action that configures the to.</param>
+        public DiagramConnectionBuilder<TShapeModel,TConnectionModel> To(Action<DiagramConnectionToSettingsBuilder<TShapeModel,TConnectionModel>> configurator)
+        {
+            configurator(new DiagramConnectionToSettingsBuilder<TShapeModel,TConnectionModel>(container.To));
             return this;
         }
         

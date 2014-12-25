@@ -20,6 +20,8 @@ namespace Kendo.Mvc.UI
         
             Resize = new DiagramEditableResizeSettings();
                 
+            Rotate = new DiagramEditableRotateSettings();
+                
             Tools = new List<DiagramEditableSettingsTool>();
                 
         //<< Initialization
@@ -30,21 +32,27 @@ namespace Kendo.Mvc.UI
 
         //>> Fields
         
-        public string ShapeTemplate { get; set; }
-
-        public string ShapeTemplateId { get; set; }
-        
         public string ConnectionTemplate { get; set; }
 
         public string ConnectionTemplateId { get; set; }
         
-        public List<DiagramEditableSettingsTool> Tools
+        public DiagramEditableResizeSettings Resize
         {
             get;
             set;
         }
         
-        public DiagramEditableResizeSettings Resize
+        public DiagramEditableRotateSettings Rotate
+        {
+            get;
+            set;
+        }
+        
+        public string ShapeTemplate { get; set; }
+
+        public string ShapeTemplateId { get; set; }
+        
+        public List<DiagramEditableSettingsTool> Tools
         {
             get;
             set;
@@ -82,20 +90,6 @@ namespace Kendo.Mvc.UI
         {
             //>> Serialization
         
-            if (!string.IsNullOrEmpty(ShapeTemplateId))
-            {
-                json["shapeTemplate"] = new ClientHandlerDescriptor {
-                    HandlerName = string.Format(
-                        "jQuery('#{0}').html()",
-                        ShapeTemplateId
-                    )
-                };
-            }
-            else if (!string.IsNullOrEmpty(ShapeTemplate))
-            {
-                json["shapeTemplate"] = ShapeTemplate;
-            }
-                
             if (!string.IsNullOrEmpty(ConnectionTemplateId))
             {
                 json["connectionTemplate"] = new ClientHandlerDescriptor {
@@ -108,6 +102,20 @@ namespace Kendo.Mvc.UI
             else if (!string.IsNullOrEmpty(ConnectionTemplate))
             {
                 json["connectionTemplate"] = ConnectionTemplate;
+            }
+                
+            if (!string.IsNullOrEmpty(ShapeTemplateId))
+            {
+                json["shapeTemplate"] = new ClientHandlerDescriptor {
+                    HandlerName = string.Format(
+                        "jQuery('#{0}').html()",
+                        ShapeTemplateId
+                    )
+                };
+            }
+            else if (!string.IsNullOrEmpty(ShapeTemplate))
+            {
+                json["shapeTemplate"] = ShapeTemplate;
             }
                 
             var tools = Tools.ToJson();

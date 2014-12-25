@@ -20,17 +20,6 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Fields
         
         /// <summary>
-        /// The text displayed for the connection.
-        /// </summary>
-        /// <param name="value">The value that configures the text.</param>
-        public DiagramConnectionContentSettingsBuilder<TShapeModel,TConnectionModel> Text(string value)
-        {
-            container.Text = value;
-
-            return this;
-        }
-        
-        /// <summary>
         /// The template which renders the labels.The fields which can be used in the template are:
         /// </summary>
         /// <param name="value">The value that configures the template.</param>
@@ -48,6 +37,17 @@ namespace Kendo.Mvc.UI.Fluent
         public DiagramConnectionContentSettingsBuilder<TShapeModel,TConnectionModel> TemplateId(string value)
         {
             container.TemplateId = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// The text displayed for the connection.
+        /// </summary>
+        /// <param name="value">The value that configures the text.</param>
+        public DiagramConnectionContentSettingsBuilder<TShapeModel,TConnectionModel> Text(string value)
+        {
+            container.Text = value;
 
             return this;
         }
