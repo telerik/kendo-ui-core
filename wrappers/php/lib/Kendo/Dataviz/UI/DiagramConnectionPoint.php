@@ -6,7 +6,7 @@ class DiagramConnectionPoint extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * Sets the X coordinate of the point.
+    * Sets the X coordinate of the intermediate point.
     * @param float $value
     * @return \Kendo\Dataviz\UI\DiagramConnectionPoint
     */
@@ -15,7 +15,7 @@ class DiagramConnectionPoint extends \Kendo\SerializableObject {
     }
 
     /**
-    * Sets the Y coordinate of the point.
+    * Sets the Y coordinate of the intermediate point.
     * @param float $value
     * @return \Kendo\Dataviz\UI\DiagramConnectionPoint
     */

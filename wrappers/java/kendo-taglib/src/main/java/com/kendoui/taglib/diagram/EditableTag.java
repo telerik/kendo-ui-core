@@ -57,6 +57,10 @@ public class EditableTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         setProperty("resize", value);
     }
 
+    public void setRotate(com.kendoui.taglib.diagram.EditableRotateTag value) {
+        setProperty("rotate", value);
+    }
+
     public void setTools(EditableToolsTag value) {
 
         setProperty("tools", value.tools());
@@ -85,6 +89,14 @@ public class EditableTag extends  BaseTag  /* interfaces */ /* interfaces */ {
 
     public void setResize(boolean value) {
         setProperty("resize", value);
+    }
+
+    public boolean getRotate() {
+        return (boolean)getProperty("rotate");
+    }
+
+    public void setRotate(boolean value) {
+        setProperty("rotate", value);
     }
 
     public java.lang.String getShapeTemplate() {

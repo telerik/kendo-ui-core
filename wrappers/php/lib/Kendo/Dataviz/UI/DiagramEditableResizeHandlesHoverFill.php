@@ -6,7 +6,7 @@ class DiagramEditableResizeHandlesHoverFill extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * Set the handles hover fill color.
+    * Specifies the fill color on hovering over the resizing handles. See the editable.resize configuration for an example.
     * @param string $value
     * @return \Kendo\Dataviz\UI\DiagramEditableResizeHandlesHoverFill
     */
@@ -15,7 +15,7 @@ class DiagramEditableResizeHandlesHoverFill extends \Kendo\SerializableObject {
     }
 
     /**
-    * Set the handles hover fill opacity.
+    * Specifies the fill opacity on hovering over the resizing handles. See the editable.resize configuration for an example.
     * @param float $value
     * @return \Kendo\Dataviz\UI\DiagramEditableResizeHandlesHoverFill
     */

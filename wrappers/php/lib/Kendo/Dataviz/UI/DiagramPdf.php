@@ -33,21 +33,21 @@ class DiagramPdf extends \Kendo\SerializableObject {
     }
 
     /**
-    * If set to true, the content will be forwarded to proxyURL even if the browser supports saving files locally.
-    * @param boolean $value
-    * @return \Kendo\Dataviz\UI\DiagramPdf
-    */
-    public function forceProxy($value) {
-        return $this->setProperty('forceProxy', $value);
-    }
-
-    /**
     * Specifies the file name of the exported PDF file.
     * @param string $value
     * @return \Kendo\Dataviz\UI\DiagramPdf
     */
     public function fileName($value) {
         return $this->setProperty('fileName', $value);
+    }
+
+    /**
+    * If set to true, the content will be forwarded to proxyURL even if the browser supports saving files locally.
+    * @param boolean $value
+    * @return \Kendo\Dataviz\UI\DiagramPdf
+    */
+    public function forceProxy($value) {
+        return $this->setProperty('forceProxy', $value);
     }
 
     /**

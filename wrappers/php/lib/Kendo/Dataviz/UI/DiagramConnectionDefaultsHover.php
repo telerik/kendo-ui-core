@@ -6,7 +6,7 @@ class DiagramConnectionDefaultsHover extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * Defines the hover stroke configuration.
+    * Defines the hover configuration.
     * @param \Kendo\Dataviz\UI\DiagramConnectionDefaultsHoverStroke|array $value
     * @return \Kendo\Dataviz\UI\DiagramConnectionDefaultsHover
     */

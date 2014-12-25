@@ -6,12 +6,21 @@ class DiagramEditableRotate extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * Specifyes the thumb style.
-    * @param \Kendo\Dataviz\UI\DiagramEditableRotateThumb|array $value
+    * Specifies the fill settings of the rotation thumb.
+    * @param \Kendo\Dataviz\UI\DiagramEditableRotateFill|array $value
     * @return \Kendo\Dataviz\UI\DiagramEditableRotate
     */
-    public function thumb($value) {
-        return $this->setProperty('thumb', $value);
+    public function fill($value) {
+        return $this->setProperty('fill', $value);
+    }
+
+    /**
+    * Specifies the stroke settings of the rotation thumb.
+    * @param \Kendo\Dataviz\UI\DiagramEditableRotateStroke|array $value
+    * @return \Kendo\Dataviz\UI\DiagramEditableRotate
+    */
+    public function stroke($value) {
+        return $this->setProperty('stroke', $value);
     }
 
 //<< Properties

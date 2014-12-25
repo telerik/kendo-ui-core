@@ -6,12 +6,39 @@ class DiagramShapeContent extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * The text displayed in the shape.
+    * The alignment of the text inside the shape.
     * @param string $value
     * @return \Kendo\Dataviz\UI\DiagramShapeContent
     */
-    public function text($value) {
-        return $this->setProperty('text', $value);
+    public function align($value) {
+        return $this->setProperty('align', $value);
+    }
+
+    /**
+    * The color of the shape content text.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\DiagramShapeContent
+    */
+    public function color($value) {
+        return $this->setProperty('color', $value);
+    }
+
+    /**
+    * The font family of the shape content text.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\DiagramShapeContent
+    */
+    public function fontFamily($value) {
+        return $this->setProperty('fontFamily', $value);
+    }
+
+    /**
+    * The font size of the shape content text.
+    * @param float $value
+    * @return \Kendo\Dataviz\UI\DiagramShapeContent
+    */
+    public function fontSize($value) {
+        return $this->setProperty('fontSize', $value);
     }
 
     /**
@@ -37,39 +64,12 @@ class DiagramShapeContent extends \Kendo\SerializableObject {
     }
 
     /**
-    * The alignment of the text inside the shape.
+    * The text displayed in the shape.
     * @param string $value
     * @return \Kendo\Dataviz\UI\DiagramShapeContent
     */
-    public function align($value) {
-        return $this->setProperty('align', $value);
-    }
-
-    /**
-    * The font family of the shape content text.
-    * @param string $value
-    * @return \Kendo\Dataviz\UI\DiagramShapeContent
-    */
-    public function fontFamily($value) {
-        return $this->setProperty('fontFamily', $value);
-    }
-
-    /**
-    * The font size of the shape content text.
-    * @param float $value
-    * @return \Kendo\Dataviz\UI\DiagramShapeContent
-    */
-    public function fontSize($value) {
-        return $this->setProperty('fontSize', $value);
-    }
-
-    /**
-    * The color of the shape content text.
-    * @param string $value
-    * @return \Kendo\Dataviz\UI\DiagramShapeContent
-    */
-    public function color($value) {
-        return $this->setProperty('color', $value);
+    public function text($value) {
+        return $this->setProperty('text', $value);
     }
 
 //<< Properties

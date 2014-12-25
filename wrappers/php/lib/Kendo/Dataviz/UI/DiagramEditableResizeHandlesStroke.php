@@ -6,7 +6,7 @@ class DiagramEditableResizeHandlesStroke extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * Specifies the handles stroke color.
+    * Specifies the stroke color of the resizing handles. See the editable.resize configuration for an example.
     * @param string $value
     * @return \Kendo\Dataviz\UI\DiagramEditableResizeHandlesStroke
     */
@@ -15,21 +15,21 @@ class DiagramEditableResizeHandlesStroke extends \Kendo\SerializableObject {
     }
 
     /**
-    * Specifies the handles stroke width.
-    * @param float $value
-    * @return \Kendo\Dataviz\UI\DiagramEditableResizeHandlesStroke
-    */
-    public function width($value) {
-        return $this->setProperty('width', $value);
-    }
-
-    /**
-    * Specifies the handles stroke dash type.
+    * Specifies the stroke dash type of the resizing handles. See the editable.resize configuration for an example.
     * @param string $value
     * @return \Kendo\Dataviz\UI\DiagramEditableResizeHandlesStroke
     */
     public function dashType($value) {
         return $this->setProperty('dashType', $value);
+    }
+
+    /**
+    * Specifies the stroke thickness of the resizing handles. See the editable.resize configuration for an example.
+    * @param float $value
+    * @return \Kendo\Dataviz\UI\DiagramEditableResizeHandlesStroke
+    */
+    public function width($value) {
+        return $this->setProperty('width', $value);
     }
 
 //<< Properties

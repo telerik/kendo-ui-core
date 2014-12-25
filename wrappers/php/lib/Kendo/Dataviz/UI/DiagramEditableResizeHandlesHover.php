@@ -6,7 +6,7 @@ class DiagramEditableResizeHandlesHover extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * Set the handles hover fill options.
+    * Specifies the fill settings on hovering over the resizing handles. See the editable.resize configuration for an example.
     * @param string|\Kendo\Dataviz\UI\DiagramEditableResizeHandlesHoverFill|array $value
     * @return \Kendo\Dataviz\UI\DiagramEditableResizeHandlesHover
     */
@@ -15,7 +15,7 @@ class DiagramEditableResizeHandlesHover extends \Kendo\SerializableObject {
     }
 
     /**
-    * Specifies the handles stroke styles.
+    * Specifies the stroke on hovering over the resizing handles. See the editable.resize configuration for an example.
     * @param \Kendo\Dataviz\UI\DiagramEditableResizeHandlesHoverStroke|array $value
     * @return \Kendo\Dataviz\UI\DiagramEditableResizeHandlesHover
     */

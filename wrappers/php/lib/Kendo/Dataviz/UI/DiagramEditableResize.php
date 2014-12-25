@@ -6,7 +6,7 @@ class DiagramEditableResize extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * Specifies the handles style.
+    * Specifies the settings of the resizing handles. See the editable.resize configuration for an example.
     * @param \Kendo\Dataviz\UI\DiagramEditableResizeHandles|array $value
     * @return \Kendo\Dataviz\UI\DiagramEditableResize
     */

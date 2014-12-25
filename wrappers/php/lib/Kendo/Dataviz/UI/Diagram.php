@@ -19,48 +19,30 @@ data source is fired. By default the widget will bind to the data source specifi
     }
 
     /**
-    * The zoom step when using the mouse-wheel to zoom in or out.
-    * @param float $value
+    * Defines the defaults of the connections. Whenever a connection is created, the specified connectionDefaults will be used and merged with the (optional) configuration passed through the connection creation method.
+    * @param \Kendo\Dataviz\UI\DiagramConnectionDefaults|array $value
     * @return \Kendo\Dataviz\UI\Diagram
     */
-    public function zoomRate($value) {
-        return $this->setProperty('zoomRate', $value);
+    public function connectionDefaults($value) {
+        return $this->setProperty('connectionDefaults', $value);
     }
 
     /**
-    * The zoom level in percentages.
-    * @param float $value
+    * Adds DiagramConnection to the Diagram.
+    * @param \Kendo\Dataviz\UI\DiagramConnection|array,... $value one or more DiagramConnection to add.
     * @return \Kendo\Dataviz\UI\Diagram
     */
-    public function zoom($value) {
-        return $this->setProperty('zoom', $value);
+    public function addConnection($value) {
+        return $this->add('connections', func_get_args());
     }
 
     /**
-    * The zoom min level in percentages.
-    * @param float $value
+    * Defines the data source of the connections.
+    * @param |array| $value
     * @return \Kendo\Dataviz\UI\Diagram
     */
-    public function zoomMin($value) {
-        return $this->setProperty('zoomMin', $value);
-    }
-
-    /**
-    * The zoom max level in percentages.
-    * @param float $value
-    * @return \Kendo\Dataviz\UI\Diagram
-    */
-    public function zoomMax($value) {
-        return $this->setProperty('zoomMax', $value);
-    }
-
-    /**
-    * Specifies the shape editable.
-    * @param boolean|\Kendo\Dataviz\UI\DiagramEditable|array $value
-    * @return \Kendo\Dataviz\UI\Diagram
-    */
-    public function editable($value) {
-        return $this->setProperty('editable', $value);
+    public function connectionsDataSource($value) {
+        return $this->setProperty('connectionsDataSource', $value);
     }
 
     /**
@@ -73,12 +55,12 @@ data source is fired. By default the widget will bind to the data source specifi
     }
 
     /**
-    * See the dataSource field.
-    * @param |array| $value
+    * Defines how the diagram behaves when the user attempts to edit shape content, create new connections, edit connection labels and so on.
+    * @param boolean|\Kendo\Dataviz\UI\DiagramEditable|array $value
     * @return \Kendo\Dataviz\UI\Diagram
     */
-    public function connectionsDataSource($value) {
-        return $this->setProperty('connectionsDataSource', $value);
+    public function editable($value) {
+        return $this->setProperty('editable', $value);
     }
 
     /**
@@ -88,6 +70,51 @@ data source is fired. By default the widget will bind to the data source specifi
     */
     public function layout($value) {
         return $this->setProperty('layout', $value);
+    }
+
+    /**
+    * Defines the pannable options.
+    * @param boolean|\Kendo\Dataviz\UI\DiagramPannable|array $value
+    * @return \Kendo\Dataviz\UI\Diagram
+    */
+    public function pannable($value) {
+        return $this->setProperty('pannable', $value);
+    }
+
+    /**
+    * Configures the export settings for the saveAsPDF method.
+    * @param \Kendo\Dataviz\UI\DiagramPdf|array $value
+    * @return \Kendo\Dataviz\UI\Diagram
+    */
+    public function pdf($value) {
+        return $this->setProperty('pdf', $value);
+    }
+
+    /**
+    * Defines the selectable options.
+    * @param boolean|\Kendo\Dataviz\UI\DiagramSelectable|array $value
+    * @return \Kendo\Dataviz\UI\Diagram
+    */
+    public function selectable($value) {
+        return $this->setProperty('selectable', $value);
+    }
+
+    /**
+    * Defines the shape options.
+    * @param \Kendo\Dataviz\UI\DiagramShapeDefaults|array $value
+    * @return \Kendo\Dataviz\UI\Diagram
+    */
+    public function shapeDefaults($value) {
+        return $this->setProperty('shapeDefaults', $value);
+    }
+
+    /**
+    * Adds DiagramShape to the Diagram.
+    * @param \Kendo\Dataviz\UI\DiagramShape|array,... $value one or more DiagramShape to add.
+    * @return \Kendo\Dataviz\UI\Diagram
+    */
+    public function addShape($value) {
+        return $this->add('shapes', func_get_args());
     }
 
     /**
@@ -113,66 +140,95 @@ data source is fired. By default the widget will bind to the data source specifi
     }
 
     /**
-    * Defines the connections configuration.
-    * @param \Kendo\Dataviz\UI\DiagramConnectionDefaults|array $value
+    * The zoom level in percentages.
+    * @param float $value
     * @return \Kendo\Dataviz\UI\Diagram
     */
-    public function connectionDefaults($value) {
-        return $this->setProperty('connectionDefaults', $value);
+    public function zoom($value) {
+        return $this->setProperty('zoom', $value);
     }
 
     /**
-    * Adds DiagramConnection to the Diagram.
-    * @param \Kendo\Dataviz\UI\DiagramConnection|array,... $value one or more DiagramConnection to add.
+    * The zoom max level in percentages.
+    * @param float $value
     * @return \Kendo\Dataviz\UI\Diagram
     */
-    public function addConnection($value) {
-        return $this->add('connections', func_get_args());
+    public function zoomMax($value) {
+        return $this->setProperty('zoomMax', $value);
     }
 
     /**
-    * Defines the selectable options.
-    * @param boolean|\Kendo\Dataviz\UI\DiagramSelectable|array $value
+    * The zoom min level in percentages.
+    * @param float $value
     * @return \Kendo\Dataviz\UI\Diagram
     */
-    public function selectable($value) {
-        return $this->setProperty('selectable', $value);
+    public function zoomMin($value) {
+        return $this->setProperty('zoomMin', $value);
     }
 
     /**
-    * Defines the pannable options.
-    * @param boolean|\Kendo\Dataviz\UI\DiagramPannable|array $value
+    * The zoom step when using the mouse-wheel to zoom in or out.
+    * @param float $value
     * @return \Kendo\Dataviz\UI\Diagram
     */
-    public function pannable($value) {
-        return $this->setProperty('pannable', $value);
+    public function zoomRate($value) {
+        return $this->setProperty('zoomRate', $value);
     }
 
     /**
-    * Configures the export settings for the saveAsPDF method.
-    * @param \Kendo\Dataviz\UI\DiagramPdf|array $value
+    * Sets the add event of the Diagram.
+    * Fired when the user adds new shape or connection.The event handler function context (available via the this keyword) will be set to the widget instance.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\Dataviz\UI\Diagram
     */
-    public function pdf($value) {
-        return $this->setProperty('pdf', $value);
+    public function addEvent($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('add', $value);
     }
 
     /**
-    * Defines the shape options.
-    * @param \Kendo\Dataviz\UI\DiagramShapeDefaults|array $value
+    * Sets the cancel event of the Diagram.
+    * Fired when the user clicks the "cancel" button in the popup window in case the item was added via a toolbar.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\Dataviz\UI\Diagram
     */
-    public function shapeDefaults($value) {
-        return $this->setProperty('shapeDefaults', $value);
+    public function cancel($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('cancel', $value);
     }
 
     /**
-    * Adds DiagramShape to the Diagram.
-    * @param \Kendo\Dataviz\UI\DiagramShape|array,... $value one or more DiagramShape to add.
+    * Sets the change event of the Diagram.
+    * Fired when an item is added or removed to/from the diagram.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\Dataviz\UI\Diagram
     */
-    public function addShape($value) {
-        return $this->add('shapes', func_get_args());
+    public function change($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('change', $value);
+    }
+
+    /**
+    * Sets the click event of the Diagram.
+    * Fired when the user clicks on a shape or a connection.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\Dataviz\UI\Diagram
+    */
+    public function click($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('click', $value);
     }
 
     /**
@@ -190,20 +246,6 @@ data source is fired. By default the widget will bind to the data source specifi
     }
 
     /**
-    * Sets the add event of the Diagram.
-    * Fired when the user add new shape or connection.The event handler function context (available via the this keyword) will be set to the widget instance.
-    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
-    * @return \Kendo\Dataviz\UI\Diagram
-    */
-    public function addEvent($value) {
-        if (is_string($value)) {
-            $value = new \Kendo\JavaScriptFunction($value);
-        }
-
-        return $this->setProperty('add', $value);
-    }
-
-    /**
     * Sets the edit event of the Diagram.
     * Fired when the user edits a shape or connection.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
@@ -215,62 +257,6 @@ data source is fired. By default the widget will bind to the data source specifi
         }
 
         return $this->setProperty('edit', $value);
-    }
-
-    /**
-    * Sets the save event of the Diagram.
-    * Fired when the user a shape or connection da is saved.
-    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
-    * @return \Kendo\Dataviz\UI\Diagram
-    */
-    public function save($value) {
-        if (is_string($value)) {
-            $value = new \Kendo\JavaScriptFunction($value);
-        }
-
-        return $this->setProperty('save', $value);
-    }
-
-    /**
-    * Sets the cancel event of the Diagram.
-    * Fired when the user clicks the "cancel" button in the popup window.
-    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
-    * @return \Kendo\Dataviz\UI\Diagram
-    */
-    public function cancel($value) {
-        if (is_string($value)) {
-            $value = new \Kendo\JavaScriptFunction($value);
-        }
-
-        return $this->setProperty('cancel', $value);
-    }
-
-    /**
-    * Sets the remove event of the Diagram.
-    * Fired when the user delete a shape or connection.
-    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
-    * @return \Kendo\Dataviz\UI\Diagram
-    */
-    public function remove($value) {
-        if (is_string($value)) {
-            $value = new \Kendo\JavaScriptFunction($value);
-        }
-
-        return $this->setProperty('remove', $value);
-    }
-
-    /**
-    * Sets the change event of the Diagram.
-    * Fired when an item is added or removed to/from the diagram.
-    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
-    * @return \Kendo\Dataviz\UI\Diagram
-    */
-    public function change($value) {
-        if (is_string($value)) {
-            $value = new \Kendo\JavaScriptFunction($value);
-        }
-
-        return $this->setProperty('change', $value);
     }
 
     /**
@@ -316,6 +302,34 @@ data source is fired. By default the widget will bind to the data source specifi
     }
 
     /**
+    * Sets the remove event of the Diagram.
+    * Fired when the user delete a shape or connection.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\Dataviz\UI\Diagram
+    */
+    public function remove($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('remove', $value);
+    }
+
+    /**
+    * Sets the save event of the Diagram.
+    * Fired when the user saved a shape or a connection.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\Dataviz\UI\Diagram
+    */
+    public function save($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('save', $value);
+    }
+
+    /**
     * Sets the select event of the Diagram.
     * Fired when the user selects one or more items.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
@@ -327,20 +341,6 @@ data source is fired. By default the widget will bind to the data source specifi
         }
 
         return $this->setProperty('select', $value);
-    }
-
-    /**
-    * Sets the zoomStart event of the Diagram.
-    * Fired when the user starts changing the diagram zoom level.
-    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
-    * @return \Kendo\Dataviz\UI\Diagram
-    */
-    public function zoomStart($value) {
-        if (is_string($value)) {
-            $value = new \Kendo\JavaScriptFunction($value);
-        }
-
-        return $this->setProperty('zoomStart', $value);
     }
 
     /**
@@ -358,17 +358,17 @@ data source is fired. By default the widget will bind to the data source specifi
     }
 
     /**
-    * Sets the click event of the Diagram.
-    * Fired when the user clicks on a shape or a connection.
+    * Sets the zoomStart event of the Diagram.
+    * Fired when the user starts changing the diagram zoom level.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\Dataviz\UI\Diagram
     */
-    public function click($value) {
+    public function zoomStart($value) {
         if (is_string($value)) {
             $value = new \Kendo\JavaScriptFunction($value);
         }
 
-        return $this->setProperty('click', $value);
+        return $this->setProperty('zoomStart', $value);
     }
 
 

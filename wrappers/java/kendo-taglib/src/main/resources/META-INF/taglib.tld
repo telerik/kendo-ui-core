@@ -13199,25 +13199,31 @@ data source is fired. By default the widget will bind to the data source specifi
 
 
     <tag>
-        <description>Specifies the shape editable.</description>
+        <description>Defines how the diagram behaves when the user attempts to edit shape content, create new connections, edit connection labels and so on.</description>
         <name>diagram-editable</name>
         <tag-class>com.kendoui.taglib.diagram.EditableTag</tag-class>
         <body-content>JSP</body-content>
 
         <attribute>
-            <description>Specifies the connection editor template.</description>
+            <description>Specifies the connection editor template which shows up when editing the connection via a pop-up editor much like 'editable.template' configuration of the Kendo UI Grid widget.</description>
             <name>connectionTemplate</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Specifies the shape resizing.</description>
+            <description>Defines the look-and-feel of the resizing handles.</description>
             <name>resize</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Specifies the shape editor template.</description>
+            <description>Specifies whether the shapes can be rotated. Note that changing this setting after creating the diagram will have no effect.</description>
+            <name>rotate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the shape editor template. See the 'editable.connectionTemplate' for an example.</description>
             <name>shapeTemplate</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -13376,6 +13382,60 @@ data source is fired. By default the widget will bind to the data source specifi
 
     </tag>
 
+
+
+
+    <tag>
+        <description>Specifies whether the shapes can be rotated. Note that changing this setting after creating the diagram will have no effect.</description>
+        <name>diagram-editable-rotate</name>
+        <tag-class>com.kendoui.taglib.diagram.EditableRotateTag</tag-class>
+        <body-content>JSP</body-content>
+
+
+    </tag>
+
+    <tag>
+        <description>Specifies the fill settings of the rotation thumb.</description>
+        <name>diagram-editable-rotate-fill</name>
+        <tag-class>com.kendoui.taglib.diagram.EditableRotateFillTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Specifies the fill color of the rotation thumb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the fill opacity of the rotation thumb.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Specifies the stroke settings of the rotation thumb.</description>
+        <name>diagram-editable-rotate-stroke</name>
+        <tag-class>com.kendoui.taglib.diagram.EditableRotateStrokeTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Specifies the stroke color of the rotation thumb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the stroke thickness of the rotation thumb.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
 
 
 

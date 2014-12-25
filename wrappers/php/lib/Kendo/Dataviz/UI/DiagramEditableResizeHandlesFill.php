@@ -6,7 +6,7 @@ class DiagramEditableResizeHandlesFill extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * Specifies the handles fill color.
+    * Specifies the fill color of the resizing handles. See the editable.resize configuration for an example.
     * @param string $value
     * @return \Kendo\Dataviz\UI\DiagramEditableResizeHandlesFill
     */
@@ -15,7 +15,7 @@ class DiagramEditableResizeHandlesFill extends \Kendo\SerializableObject {
     }
 
     /**
-    * Specifies the handles fill opacity.
+    * Specifies the fill opacity of the resizing handles. See the editable.resize configuration for an example.
     * @param float $value
     * @return \Kendo\Dataviz\UI\DiagramEditableResizeHandlesFill
     */

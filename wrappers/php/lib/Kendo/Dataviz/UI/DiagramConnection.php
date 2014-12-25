@@ -15,24 +15,6 @@ class DiagramConnection extends \Kendo\SerializableObject {
     }
 
     /**
-    * Defines the connection from.
-    * @param string|float|\Kendo\Dataviz\UI\DiagramConnectionFrom|array $value
-    * @return \Kendo\Dataviz\UI\DiagramConnection
-    */
-    public function from($value) {
-        return $this->setProperty('from', $value);
-    }
-
-    /**
-    * Defines the connection to.
-    * @param string|float|\Kendo\Dataviz\UI\DiagramConnectionTo|array $value
-    * @return \Kendo\Dataviz\UI\DiagramConnection
-    */
-    public function to($value) {
-        return $this->setProperty('to', $value);
-    }
-
-    /**
     * Defines the shape editable options.
     * @param boolean|\Kendo\Dataviz\UI\DiagramConnectionEditable|array $value
     * @return \Kendo\Dataviz\UI\DiagramConnection
@@ -42,12 +24,21 @@ class DiagramConnection extends \Kendo\SerializableObject {
     }
 
     /**
-    * Defines the stroke configuration.
-    * @param \Kendo\Dataviz\UI\DiagramConnectionStroke|array $value
+    * The start cap (arrow, head or decoration) of the connection:Note that you can also use the "ArrowStart" for the endCap but its direction will be inversed.
+    * @param string $value
     * @return \Kendo\Dataviz\UI\DiagramConnection
     */
-    public function stroke($value) {
-        return $this->setProperty('stroke', $value);
+    public function endCap($value) {
+        return $this->setProperty('endCap', $value);
+    }
+
+    /**
+    * Defines the source of the connection.
+    * @param string|float|\Kendo\Dataviz\UI\DiagramConnectionFrom|array $value
+    * @return \Kendo\Dataviz\UI\DiagramConnection
+    */
+    public function from($value) {
+        return $this->setProperty('from', $value);
     }
 
     /**
@@ -57,24 +48,6 @@ class DiagramConnection extends \Kendo\SerializableObject {
     */
     public function hover($value) {
         return $this->setProperty('hover', $value);
-    }
-
-    /**
-    * The start cap (arrow, head or decoration) of the connection:
-    * @param string $value
-    * @return \Kendo\Dataviz\UI\DiagramConnection
-    */
-    public function startCap($value) {
-        return $this->setProperty('startCap', $value);
-    }
-
-    /**
-    * The start cap (arrow, head or decoration) of the connection:Note that you can also use the "ArrowStart" for the endCap but its direction will be inversed.
-    * @param string $value
-    * @return \Kendo\Dataviz\UI\DiagramConnection
-    */
-    public function endCap($value) {
-        return $this->setProperty('endCap', $value);
     }
 
     /**
@@ -93,6 +66,33 @@ class DiagramConnection extends \Kendo\SerializableObject {
     */
     public function selection($value) {
         return $this->setProperty('selection', $value);
+    }
+
+    /**
+    * The start cap (arrow, head or decoration) of the connection:
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\DiagramConnection
+    */
+    public function startCap($value) {
+        return $this->setProperty('startCap', $value);
+    }
+
+    /**
+    * Defines the stroke configuration.
+    * @param \Kendo\Dataviz\UI\DiagramConnectionStroke|array $value
+    * @return \Kendo\Dataviz\UI\DiagramConnection
+    */
+    public function stroke($value) {
+        return $this->setProperty('stroke', $value);
+    }
+
+    /**
+    * Defines the connection to.
+    * @param string|float|\Kendo\Dataviz\UI\DiagramConnectionTo|array $value
+    * @return \Kendo\Dataviz\UI\DiagramConnection
+    */
+    public function to($value) {
+        return $this->setProperty('to', $value);
     }
 
 //<< Properties
