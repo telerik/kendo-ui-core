@@ -76,4 +76,25 @@
 
         ok(!button.hasClass("k-state-focused"));
     });
+
+    test("click event should be preventable", function () {
+        var isClickPrevented = false;
+        var fakeEvent = {
+            preventDefault: function () {
+                isClickPrevented = true;
+            }
+        };
+
+        function clickHandler(e) {
+            e.preventDefault();
+        }
+
+        getButton().kendoButton({
+            click: clickHandler
+        });
+
+        button.data("kendoButton")._click(fakeEvent);
+
+        ok(isClickPrevented);
+    });
 })();
