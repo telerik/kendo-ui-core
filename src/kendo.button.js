@@ -79,7 +79,9 @@ var __meta__ = {
 
         _click: function(e) {
             if (this.options.enable) {
-                this.trigger(CLICK, {event: e});
+                if (this.trigger(CLICK, { event: e })) {
+                    e.preventDefault();
+                }
             }
         },
 
