@@ -184,6 +184,7 @@
 }
 
 .k-rtl .k-grid-header .k-header:first-child,
+.k-rtl .k-filter-row th:first-child,
 .k-rtl .k-grid tbody td:first-child,
 .k-rtl .k-grid tfoot td:first-child
 {
@@ -228,6 +229,30 @@
 {
     margin-right: -0.6em;
     margin-left: 1.3em;
+}
+
+.k-rtl .k-filtercell > span
+{
+    padding-right: 0;
+    padding-left: 4.8em;
+}
+
+.k-rtl .k-filtercell > .k-operator-hidden
+{
+    padding-right: 0;
+    padding-left: 2.3em;
+}
+
+.k-filtercell > span > .k-button
+{
+    right: auto;
+    left: 0;
+}
+
+.k-rtl .k-filter-row .k-dropdown-operator
+{
+    right: auto;
+    left: 2.5em;
 }
 
 /* Editing */
