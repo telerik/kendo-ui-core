@@ -16,7 +16,7 @@
     });
 
     function setup(options) {
-        options = $.extend(true, {}, {
+        options = kendo.deepExtend({}, {
             dataSource: {
                 data: data
             },
@@ -211,6 +211,19 @@
         grid.setOptions({ sortable: true });
 
         equal(invoked, 2);
+    });
+
+    test("detaches events used internally by columnMenu", function() {
+        var grid = setup({
+            columns: ["foo"],
+            columnMenu: true
+        });
+        grid.thead.find(".k-header-column-menu").click();
+        equal(grid._events.columnHide.length, 1);
+        grid.setOptions({ sortable: true });
+
+        console.log(kendo.stringify(grid._events));
+        equal(grid._events.columnHide.length, 0);
     });
 
     test("preserves the structure when using div", function() {

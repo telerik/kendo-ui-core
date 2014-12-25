@@ -1400,6 +1400,8 @@ var __meta__ = {
             var that = this,
                 element;
 
+            that._destroyColumnAttachments();
+
             Widget.fn.destroy.call(that);
 
             if (that._resizeHandler) {
@@ -1446,8 +1448,6 @@ var __meta__ = {
             }
 
             that.virtualScrollable = null;
-
-            that._destroyColumnAttachments();
 
             that._destroyEditable();
 
