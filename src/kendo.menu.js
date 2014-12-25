@@ -610,7 +610,7 @@ var __meta__ = {
                                         li.css(ZINDEX, li.data(ZINDEX));
                                         li.removeData(ZINDEX);
 
-                                        if (mobile) {
+                                        if (touch) {
                                             li.removeClass(HOVERSTATE);
                                             that._removeHoverItem();
                                         }
