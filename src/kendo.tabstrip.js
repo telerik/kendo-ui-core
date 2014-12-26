@@ -143,7 +143,7 @@ var __meta__ = {
                 item
                     .contents()      // exclude groups, real links, templates and empty text nodes
                     .filter(function() { return (!this.nodeName.match(excludedNodesRegExp) && !(this.nodeType == 3 && !trim(this.nodeValue))); })
-                    .wrapAll("<a class='" + LINK + "'/>");
+                    .wrapAll("<span class='" + LINK + "'/>");
             }
         });
 
