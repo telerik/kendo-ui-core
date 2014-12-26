@@ -2165,4 +2165,18 @@
         equal(grid.wrapper.find(".k-grid-delete").text(), "bar");
     });
 
+    test("adds column indices when initializing from HTML", function() {
+        var columns = $.map("abcdefghijklm".split(""), function(x) { return { field: x }; });
+        var element = $(
+            "<table><thead><tr>" +
+                $.map(columns, function(x) {
+                    return "<th data-field='" + x.field + "'>" + x.field + "</th>";
+                }).join("") +
+            "</tr></thead></table>"
+        ).appendTo(QUnit.fixture);
+        var grid = new Grid(element, { columns: columns });
+
+        equal(grid.thead.find("th:first").attr("data-kendo-index"), "0");
+    });
+
 })();

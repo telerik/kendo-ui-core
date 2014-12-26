@@ -939,6 +939,7 @@ var __meta__ = {
             b = parseInt($(b).attr(indexAttr), 10);
             return a > b ? 1 : (a < b ? -1 : 0);
         });
+
         return cells;
     }
 
@@ -5340,6 +5341,10 @@ var __meta__ = {
 
                    tr = $(html);
                }
+            } else {
+                tr.children().attr(kendo.attr("index"), function() {
+                    return $(this).index();
+                });
             }
 
             if (hasFilterRow) {
