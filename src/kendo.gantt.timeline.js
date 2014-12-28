@@ -1,4 +1,4 @@
-﻿(function(f, define){
+(function(f, define){
     define([ "./kendo.dom", "./kendo.draganddrop" ], f);
 })(function(){
 
@@ -932,7 +932,7 @@ var __meta__ = {
             });
 
             this.content.append(this._resizeHint);
-            
+
             this._resizeTooltip = $(RESIZE_TOOLTIP_TEMPLATE({
                 styles: styles,
                 start: task.start,
@@ -1521,7 +1521,7 @@ var __meta__ = {
             return rows;
         }
     });
-    
+
     kendo.ui.GanttYearView = GanttView.extend({
         name: "year",
 
@@ -1613,7 +1613,7 @@ var __meta__ = {
 
             this._attachEvents();
         },
-        
+
         options: {
             name: "GanttTimeline",
             messages: {
@@ -1911,7 +1911,7 @@ var __meta__ = {
 
                     var view = that.view();
                     var date = new Date(view._timeByPosition(e.x.location, snap) - startOffset);
-                    
+
                     if (!that.trigger("move", { task: task, start: date })) {
                         currentStart = date;
 

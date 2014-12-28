@@ -1558,7 +1558,7 @@
                     angle -= Math.PI;
                 }
 
-                // limit the angle between 0..2π
+                // limit the angle between 0..2PI
                 angle %= 2 * Math.PI;
                 if (angle < 0) {
                     angle += 2 * Math.PI;
@@ -1580,13 +1580,13 @@
                 // bottom edge.
                 //
                 // A naive approach would use the original angle for these calculations.  Say we'd
-                // like to draw a gradient angled at 45° in a 100x400 box.  When we use
+                // like to draw a gradient angled at 45deg in a 100x400 box.  When we use
                 // objectBoundingBox, the renderer will draw it in a 1x1 *square* box, and then
-                // scale that to the desired dimensions.  The 45° angle will look more like 70°
+                // scale that to the desired dimensions.  The 45deg angle will look more like 70deg
                 // after scaling.  SVG (http://www.w3.org/TR/SVG/pservers.html#LinearGradients) says
                 // the following:
                 //
-                //     When gradientUnits="objectBoundingBox" and ‘gradientTransform’ is the
+                //     When gradientUnits="objectBoundingBox" and 'gradientTransform' is the
                 //     identity matrix, the normal of the linear gradient is perpendicular to the
                 //     gradient vector in object bounding box space (i.e., the abstract coordinate
                 //     system where (0,0) is at the top/left of the object bounding box and (1,1) is
@@ -1611,7 +1611,7 @@
                 var x = len/2 * sin;
                 var y = len/2 * cos;
 
-                // Because of the arctangent, our scaledAngle ends up between -π/2..π/2, possibly
+                // Because of the arctangent, our scaledAngle ends up between -PI/2..PI/2, possibly
                 // losing the intended direction of the gradient.  The following fixes it.
                 if (angle > Math.PI/2 && angle <= 3*Math.PI/2) {
                     x = -x;

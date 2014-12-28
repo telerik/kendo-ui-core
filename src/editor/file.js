@@ -33,7 +33,7 @@ var FileCommand = Command.extend({
     insertFile: function(file, range) {
         var attributes = this.attributes;
         var doc = RangeUtils.documentFromRange(range);
-        
+
         if (attributes.href && attributes.href != "http://") {
 
             if (!file) {

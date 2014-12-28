@@ -1,4 +1,4 @@
-﻿(function(f, define) {
+(function(f, define) {
     define([ "./kendo.dom", "./kendo.touch", "./kendo.draganddrop", "./kendo.columnsorter", "./kendo.datetimepicker", "./kendo.editable" ], f);
 })(function() {
 
@@ -691,7 +691,7 @@ var __meta__ = {
                 var height = $(dropTarget).height();
                 var offsetTop = kendo.getOffset(dropTarget).top;
 
-                extend(dropTarget, { 
+                extend(dropTarget, {
                     beforeLimit: offsetTop + height * 0.25,
                     afterLimit: offsetTop + height * 0.75
                 });
@@ -802,7 +802,7 @@ var __meta__ = {
                                     taskInfo.parentId = target.id;
                                     break;
                                 case "insert-before":
-                                    if (target.parentId === draggedTask.parentId && 
+                                    if (target.parentId === draggedTask.parentId &&
                                         target.orderId > draggedTask.orderId) {
                                             taskInfo.orderId = orderId - 1;
                                     } else {
@@ -810,7 +810,7 @@ var __meta__ = {
                                     }
                                     break;
                                 case "insert-after":
-                                    if (target.parentId === draggedTask.parentId && 
+                                    if (target.parentId === draggedTask.parentId &&
                                         target.orderId > draggedTask.orderId) {
                                             taskInfo.orderId = orderId;
                                     } else {
