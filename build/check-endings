@@ -1,0 +1,18 @@
+#!/bin/bash
+
+check_files () {
+    INCORRECT=`find src/kendo.*.js src/*/*.js | grep -v messages | grep -v cultures | grep -v timezones.js | xargs file | eval $1`
+
+    if [[ -z "$INCORRECT" ]]; then
+        echo "No $2."
+    else
+        echo "$2:"
+        echo $INCORRECT
+        exit 1
+    fi
+}
+
+check_files "grep 'CRLF, LF'"                               "mixed line endings found"
+check_files "grep 'BOM'"                                    "BOM files found"
+check_files "grep -v 'ASCII' | grep -v 'HTML document'"     "Non-ASCII files found"
+check_files "grep -v 'CRLF' | grep -v 'HTML document'"      "UNIX file endings found"
