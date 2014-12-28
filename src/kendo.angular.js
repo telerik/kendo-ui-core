@@ -342,8 +342,8 @@ var __meta__ = {
         widget.$angular_setLogicValue(getter(scope));
 
         // keep in sync
-		
-		scope.$apply(function() {
+
+        scope.$apply(function() {
             var watchHandler = function(newValue, oldValue) {
                 if (newValue === undefined) {
                     // because widget's value() method usually checks if the new value is undefined,
@@ -392,7 +392,7 @@ var __meta__ = {
         return deregister;
     }
 
-    // mutation observers — propagate the original
+    // mutation observers - propagate the original
     // element's class to the widget wrapper.
     function propagateClassToWidgetWrapper(widget, element) {
         if (!(window.MutationObserver && widget.wrapper)) {

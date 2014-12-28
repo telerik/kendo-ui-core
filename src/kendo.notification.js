@@ -1,4 +1,4 @@
-﻿(function(f, define){
+(function(f, define){
     define([ "./kendo.core", "./kendo.popup" ], f);
 })(function(){
 
