@@ -33,7 +33,7 @@ var Serializer = {
 
         return html
             .replace(/<!\[CDATA\[(.*)?\]\]>/g, "<!--[CDATA[$1]]-->")
-            .replace(/<script([^>]*)>(.*)?<\/script>/ig, "<telerik:script$1>$2<\/telerik:script>")
+            .replace(/<script([^>]*)>(.*)?<\/script>/ig, "<k:script$1>$2<\/k:script>")
             .replace(/<img([^>]*)>/ig, function(match) {
                 return match.replace(onerrorRe, "");
             })
@@ -92,8 +92,8 @@ var Serializer = {
                 name = attribute.nodeName;
 
                 if (attribute.specified && /^on/i.test(name)) {
-                    this.removeAttribute(name);
                     this.setAttribute("k-script-" + name, attribute.value);
+                    this.removeAttribute(name);
                 }
             }
         });
@@ -124,7 +124,7 @@ var Serializer = {
         if (legacyIE) {
             dom.remove(root.firstChild);
 
-            $(root).find("telerik\\:script,script,link,img,a").each(function () {
+            $(root).find("k\\:script,script,link,img,a").each(function () {
                 var node = this;
                 if (node[originalHref]) {
                     node.setAttribute("href", node[originalHref]);
@@ -157,7 +157,7 @@ var Serializer = {
     domToXhtml: function(root, options) {
         var result = [];
         var tagMap = {
-            'telerik:script': {
+            'k:script': {
                 start: function (node) { result.push('<script'); attr(node); result.push('>'); },
                 end: function () { result.push('</script>'); },
                 skipEncoding: true
@@ -211,6 +211,9 @@ var Serializer = {
                 }
             }
         };
+
+        tagMap.script = tagMap["k:script"];
+
         options = options || {};
 
         function styleAttr(cssText) {
@@ -371,7 +374,7 @@ var Serializer = {
                     return;
                 }
 
-                if (!options.scripts && tagName == "telerik:script") {
+                if (!options.scripts && (tagName == "script" || tagName == "k:script")) {
                     return;
                 }
 

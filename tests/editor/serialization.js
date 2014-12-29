@@ -9,6 +9,14 @@ editor_module("editor serialization", {
     }
 });
 
+function serializeCycle(html, options) {
+    return Serializer.domToXhtml(Serializer.htmlToDom(html, QUnit.fixture[0]), options);
+}
+
+function verifyCycle(html, options) {
+    equal(serializeCycle(html, options), html);
+}
+
 test('value reciprocity', function() {
     editor.value("<p>and now, for something completely different</p>");
 
@@ -209,7 +217,7 @@ test('attributes starting with underscore moz are removed', function() {
     equal(editor.value(), '<hr />');
 });
 
-test('empty whitespace whitespace trimmed', function() {
+test('empty whitespace trimmed', function() {
     editor.value('<hr />      ');
     equal(editor.value(), '<hr />');
 });
@@ -219,22 +227,17 @@ test('whitespace empty whitespace trimmed', function() {
     equal(editor.value(), '<hr />');
 });
 
-test('whitespace empty inline whitespace trimmed', function() {
+test('empty whitespace before inline marker trimmed', function() {
     editor.value('           <a></a>');
     equal(editor.value(), '<a></a>');
 });
 
-test('whitespace inline whitespace trimmed', function() {
+test('empty whitespace before inline node trimmed', function() {
     editor.value('           <a>foo</a>');
     equal(editor.value(), '<a>foo</a>');
 });
 
-test('empty inline whitespace whitespace trimmed', function() {
-    editor.value('<a></a>     ');
-    equal(editor.value(), '<a></a>');
-});
-
-test('inline whitespace whitespace collapsed', function() {
+test('inline whitespace is collapsed', function() {
     editor.value('<a>foo</a>     ');
     equal(editor.value(), '<a>foo</a> ');
 });
@@ -249,12 +252,12 @@ test('whitespace block whitespace trimmed', function() {
     equal(editor.value(), '<div>foo</div>');
 });
 
-test('empty block whitespace whitespace trimmed', function() {
+test('empty block whitespace trimmed', function() {
     editor.value('<div></div>     ');
     equal(editor.value(), '<div></div>');
 });
 
-test('block whitespace whitespace trimmed', function() {
+test('block whitespace trimmed', function() {
     editor.value('<div>foo</div>     ');
     equal(editor.value(), '<div>foo</div>');
 });
@@ -370,10 +373,6 @@ test('nbsp', function() {
     equal(editor.value(), '&nbsp;&nbsp;&nbsp;');
 });
 
-test('nbsp and whitespace', function() {
-    editor.value('            &nbsp;&nbsp;&nbsp;');
-    equal(editor.value(), ' &nbsp;&nbsp;&nbsp;');
-});
 test('amp', function() {
     editor.value('&amp;');
     equal(editor.value(), '&amp;');
@@ -405,7 +404,7 @@ test('nbsp escaped', function() {
 });
 
 if (!kendo.support.browser.msie) {
-    test('setting empty paragraphs adds line breaks in mozilla', function() {
+    test('setting empty paragraphs adds line breaks', function() {
         editor.value('<p> </p>');
 
         equal(editor.body.firstChild.childNodes.length, 1);
@@ -429,13 +428,13 @@ test('single empty paragraph is considered no value (to enable required field va
 });
 
 test('strips font-size-adjust and font-stretch properties', function() {
-    editor.value('<span style="font:12px/normal Verdana;">foo</span>');
-    equal(editor.value(), '<span style="font:12px/normal Verdana;">foo</span>');
+    editor.value('<span style="font:12px Verdana;">foo</span>');
+    equal(editor.value().replace("/normal", ""), '<span style="font:12px Verdana;">foo</span>');
 });
 
 test('reversing quotes in style attribute', function() {
-    editor.body.innerHTML = '<span style=\'font:12px/normal "Times New Roman";\'>foo</span>';
-    equal(editor.value(), '<span style="font:12px/normal \'Times New Roman\';">foo</span>');
+    editor.body.innerHTML = '<span style=\'font:12px "Times New Roman";\'>foo</span>';
+    equal(editor.value().replace("/normal", ""), '<span style="font:12px \'Times New Roman\';">foo</span>');
 });
 
 test("markers are not serialized", function() {
@@ -470,22 +469,14 @@ test("removes whitespace after images", function() {
 
 test("encodes scripts", function() {
     // prevent execution and losing content in IE
-    equal(Serializer.toEditableHtml('<script>alert(1)</script>'), '<telerik:script>alert(1)</telerik:script>');
-    equal(Serializer.toEditableHtml('<script src="inline.js"></script>'), '<telerik:script src="inline.js"></telerik:script>');
+    equal(Serializer.toEditableHtml('<script>alert(1)</script>'), '<k:script>alert(1)</k:script>');
+    equal(Serializer.toEditableHtml('<script src="inline.js"></script>'), '<k:script src="inline.js"></k:script>');
 });
 
 test("encodes CDATA sections as comments", function() {
     // some browsers do not allow setting CDATA sections through innerHTML
     equal(Serializer.toEditableHtml('<![CDATA[ whatever ]]>'), '<!--[CDATA[ whatever ]]-->');
 });
-
-function serializeCycle(html, options) {
-    return Serializer.domToXhtml(Serializer.htmlToDom(html, QUnit.fixture[0]), options);
-}
-
-function verifyCycle(html, options) {
-    equal(serializeCycle(html, options), html);
-}
 
 test("does not convert relative href/src URLs to absolute", function() {
     // valid for IE < 8
@@ -515,13 +506,13 @@ test("suppresses script execution", function() {
     var fixture = QUnit.fixture;
 
     Serializer.htmlToDom('<span onclick="alert(1)">foo</span>', fixture[0]);
-    ok(!fixture.find("[onclick]").length);
+    ok(!fixture.find("[onclick]").length, "click attribute is persisted");
 
     Serializer.htmlToDom('<div onmouseover="alert(1)">foo</div>', fixture[0]);
-    ok(!fixture.find("[onmouseover]").length);
+    ok(!fixture.find("[onmouseover]").length, "mouseover attribute is persisted");
 
     Serializer.htmlToDom('<script>foo=1</script>', fixture[0]);
-    ok(!fixture.find("script").length);
+    ok(fixture.find("k\\:script").length, "script block is persisted");
 });
 
 test("removes k-paste-container elements from content", function() {
@@ -538,7 +529,7 @@ test("encoding of entities can be prevented", function() {
 });
 
 test("scripts can be permitted through serialization options", function() {
-    verifyCycle('<input onclick="alert(1)" />', { scripts: true });
+    verifyCycle('<input onclick="alert(1)" type="text" />', { scripts: true });
     verifyCycle('<span onmousedown="confirm()"></span>', { scripts: true });
     verifyCycle('<script>var answer=42;<\/script>', { scripts: true });
 });
