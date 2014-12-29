@@ -78,6 +78,18 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Enables or disabled virtual scrolling.
+        /// </summary>
+        /// <param name="value">boolean flag</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Grid(Model)
+        ///             .Name("Grid")
+        ///             .Scrollable(s => s.Virtual(true))
+        /// %&gt;
+        /// </code>
+        /// </example>
         public virtual GridScrollSettingsBuilder Virtual(bool value)
         {
             settings.Virtual = value;
