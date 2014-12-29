@@ -93,7 +93,7 @@ var Serializer = {
 
                 if (attribute.specified && /^on/i.test(name)) {
                     this.removeAttribute(name);
-                    this.setAttribute("k-script-" + name, attribute.nodeValue);
+                    this.setAttribute("k-script-" + name, attribute.value);
                 }
             }
         });
@@ -281,7 +281,7 @@ var Serializer = {
                 attribute = attributes[i];
 
                 name = attribute.nodeName;
-                value = attribute.nodeValue;
+                value = attribute.value;
                 specified = attribute.specified;
 
                 // In IE < 8 the 'value' attribute is not returned as 'specified'. The same goes for type="text"
@@ -321,7 +321,7 @@ var Serializer = {
             for (i = 0, l = specifiedAttributes.length; i < l; i++) {
                 attribute = specifiedAttributes[i];
                 name = attribute.nodeName;
-                value = attribute.nodeValue;
+                value = attribute.value;
 
                 if (name == "class" && value == "k-table") {
                     continue;
@@ -467,6 +467,3 @@ extend(Editor, {
 })(window.kendo.jQuery);
 
 }, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });
-
-
-
