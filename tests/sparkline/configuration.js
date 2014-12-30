@@ -236,5 +236,29 @@
             });
             equal(sparkline.options.categoryAxis.crosshair.visible, true);
         });
+
+        // ------------------------------------------------------------
+        module("Axes", {
+            teardown: destroySparkline
+        });
+
+        test("renders plot bands for value axis", function() {
+            createSparkline({
+                series: [{ data: [1], type: "bar" }],
+                valueAxis: {
+                    plotBands: [{
+                        from: 0,
+                        to: 0.5,
+                        color: "red"
+                    }]
+                }
+            });
+
+            sparkline._plotArea.panes[0].visual.traverse(function(visual) {
+                if (visual.options.fill && visual.options.fill.color === "red") {
+                    ok(true);
+                }
+            });
+        });
     })();
 })();

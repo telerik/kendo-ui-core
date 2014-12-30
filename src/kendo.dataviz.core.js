@@ -1702,10 +1702,15 @@ var __meta__ = {
             return value;
         },
 
+        renderVisual: function() {
+            ChartElement.fn.renderVisual.call(this);
+
+            this.createPlotBands();
+        },
+
         createVisual: function() {
             ChartElement.fn.createVisual.call(this);
 
-            this.createPlotBands();
             this.createBackground();
             this.createLine();
         },
