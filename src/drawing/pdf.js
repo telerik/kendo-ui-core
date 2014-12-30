@@ -595,66 +595,66 @@
         }
 
         function opt(shape) {
-            if (!(shape instanceof drawing.Group || shape instanceof drawing.MultiPath)) {
-                var box = inClipbox(shape);
-                if (!box) {
-                    return change(null);
+            return withClipping(shape, function(){
+                if (!(shape instanceof drawing.Group || shape instanceof drawing.MultiPath)) {
+                    var box = inClipbox(shape);
+                    if (!box) {
+                        return change(null);
+                    }
+                    currentBox = currentBox ? geo.Rect.union(currentBox, box) : box;
                 }
-                currentBox = currentBox ? geo.Rect.union(currentBox, box) : box;
-            }
-            return dispatch({
-                Path: function(shape) {
-                    if (shape.segments.length === 0 || !visible(shape)) {
-                        return change(null);
-                    }
-                    return shape;
-                },
-                MultiPath: function(shape) {
-                    if (!visible(shape)) {
-                        return change(null);
-                    }
-                    var el = new drawing.MultiPath(shape.options);
-                    el.paths = optArray(shape.paths);
-                    if (el.paths.length === 0) {
-                        return change(null);
-                    }
-                    return el;
-                },
-                Circle: function(shape) {
-                    if (!visible(shape)) {
-                        return change(null);
-                    }
-                    return shape;
-                },
-                Arc: function(shape) {
-                    if (!visible(shape)) {
-                        return change(null);
-                    }
-                    return shape;
-                },
-                Text: function(shape) {
-                    if (!/\S/.test(shape.content()) || !visible(shape)) {
-                        return change(null);
-                    }
-                    return shape;
-                },
-                Image: function(shape) {
-                    if (!(shape.visible() && shape.opacity() > 0)) {
-                        return change(null);
-                    }
-                    return shape;
-                },
-                Group: function(shape) {
-                    return withClipping(shape, function(){
+                return dispatch({
+                    Path: function(shape) {
+                        if (shape.segments.length === 0 || !visible(shape)) {
+                            return change(null);
+                        }
+                        return shape;
+                    },
+                    MultiPath: function(shape) {
+                        if (!visible(shape)) {
+                            return change(null);
+                        }
+                        var el = new drawing.MultiPath(shape.options);
+                        el.paths = optArray(shape.paths);
+                        if (el.paths.length === 0) {
+                            return change(null);
+                        }
+                        return el;
+                    },
+                    Circle: function(shape) {
+                        if (!visible(shape)) {
+                            return change(null);
+                        }
+                        return shape;
+                    },
+                    Arc: function(shape) {
+                        if (!visible(shape)) {
+                            return change(null);
+                        }
+                        return shape;
+                    },
+                    Text: function(shape) {
+                        if (!/\S/.test(shape.content()) || !visible(shape)) {
+                            return change(null);
+                        }
+                        return shape;
+                    },
+                    Image: function(shape) {
+                        if (!(shape.visible() && shape.opacity() > 0)) {
+                            return change(null);
+                        }
+                        return shape;
+                    },
+                    Group: function(shape) {
                         var el = new drawing.Group(shape.options);
                         el.children = optArray(shape.children);
                         if (shape !== root && el.children.length === 0) {
                             return change(null);
                         }
                         return el;
-                    });
-                }
-            }, shape);
+                    }
+                }, shape);
+            });
         }
     }
 
