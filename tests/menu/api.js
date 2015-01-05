@@ -171,6 +171,23 @@ test('clicking on sub item should close the menu', function() {
     ok(link.parent().is(":visible"));
 });
 
+test('clicking on item content should do nothing', 1, function() {
+    var element = $("#Menu-4");
+    var isCalled = false;
+    var failHandler = function() {
+        ok(false);
+    };
+
+    var e = { target: element, preventDefault: function () { isCalled = true; }, stopPropagation: function () {} };
+
+    menu.bind("select", failHandler);
+    menu.bind("open", failHandler);
+    menu.bind("close", failHandler);
+    menu._click(e);
+
+    ok(!isCalled);
+});
+
 asyncTest('open should open item even if disabled', function() {
     var item = getRootItem(6).parent();
 
