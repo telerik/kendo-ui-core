@@ -713,6 +713,7 @@ div.submenu-box ol {
 {
     float: left;
     width: 160px;
+    overflow: hidden;
     margin-right: 15px;
     border-width: 0;
     background: none;
@@ -722,8 +723,7 @@ div.submenu-box ol {
 {
     -webkit-columns: 5;
     -moz-columns: 5;
-    columns: 5;
-    width: 100%;
+    width: 780px;
 }
 
 .tc-column h4+ul
@@ -733,7 +733,7 @@ div.submenu-box ol {
 
 .tc-item
 {
-    display: block;
+    display: inline-block;
     width: 132px;
     cursor: pointer;
     line-height: 26px;
