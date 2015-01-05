@@ -126,7 +126,7 @@ var LinkCommand = Command.extend({
                 "<div class='k-edit-label'></div>" +
                 "<div class='k-edit-field'>" +
                     "<input type='checkbox' class='k-checkbox' id='k-editor-link-target'>" +
-                    "<label for='k-editor-link-target'>#: messages.linkOpenInNewWindow #</label>" +
+                    "<label for='k-editor-link-target' class='k-checkbox-label'>#: messages.linkOpenInNewWindow #</label>" +
                 "</div>" +
                 "<div class='k-edit-buttons k-state-default'>" +
                     '<button class="k-dialog-insert k-button k-primary">#: messages.dialogInsert #</button>' +
