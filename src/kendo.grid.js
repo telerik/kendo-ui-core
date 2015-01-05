@@ -4657,7 +4657,7 @@ var __meta__ = {
                 columns = nonLockedColumns(columns);
 
                 if (lockedCols.length > 0 && columns.length === 0) {
-                    throw new Error("There should be at least one non locked columns");
+                    throw new Error("There should be at least one non locked column");
                 }
 
                 normalizeHeaderCells(that.element.find("tr:has(th):first").find("th:not(.k-group-cell)"), initialColumns);
