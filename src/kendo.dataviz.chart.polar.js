@@ -851,7 +851,15 @@ var __meta__ = {
         },
 
         options: {
-            clip: false
+            clip: false,
+            animation: {
+                type: "pie"
+            }
+        },
+
+        createAnimation: function() {
+            this.options.animation.center = this.box.toRect().center();
+            BarChart.fn.createAnimation.call(this);
         }
     });
 
