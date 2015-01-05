@@ -736,7 +736,8 @@ border-color: @panelbar-items-border;
 .k-scheduler .k-header .k-link,
 .k-gantt > .k-header li,
 .k-gantt > .k-header .k-link,
-.k-gantt-toolbar .k-button {
+.k-gantt-toolbar .k-button,
+.km-pane-wrapper .k-header .k-button {
 color: @header-text-color;
 background-color: @header-background-color;
 border-color: @header-background-color;
@@ -749,10 +750,15 @@ border-color: @header-background-color;
 .k-scheduler .k-scheduler-toolbar .k-scheduler-views li.k-state-hover .k-link,
 .k-gantt .k-gantt-toolbar .k-gantt-views li.k-state-hover,
 .k-gantt .k-gantt-toolbar .k-gantt-views li.k-state-hover .k-link,
-.k-gantt .k-gantt-toolbar .k-button:hover
+.k-gantt .k-gantt-toolbar .k-button:hover,
+.km-pane-wrapper .k-header .k-button:hover
 {
 background-color: @secondary-hover-background-color;
 border-color: @secondary-hover-background-color;
+}
+
+.km-pane-wrapper .k-header .k-button:active:hover {
+    color: @header-text-color;
 }
 
 .k-scheduler .k-scheduler-toolbar ul li.k-state-hover,
