@@ -1021,7 +1021,7 @@ var __meta__ = {
             this._trackCrosshairs(coords);
 
             if (this._sharedTooltip()) {
-                this._trackSharedTooltip(coords);
+                this._trackSharedTooltip(coords, e);
             }
         },
 
@@ -1041,7 +1041,7 @@ var __meta__ = {
             }
         },
 
-        _trackSharedTooltip: function(coords) {
+        _trackSharedTooltip: function(coords, e) {
             var chart = this,
                 options = chart.options,
                 plotArea = chart._plotArea,
@@ -1056,7 +1056,14 @@ var __meta__ = {
                 if (index !== chart._tooltipCategoryIx) {
                     points = plotArea.pointsByCategoryIndex(index);
 
-                    if (points.length > 0) {
+                    var pointArgs = $.map(points, function(point) {
+                        return point.eventArgs(e);
+                    });
+
+                    var hoverArgs = pointArgs[0];
+                    hoverArgs.categoryPoints = pointArgs;
+
+                    if (points.length > 0 && !this.trigger(SERIES_HOVER, hoverArgs)) {
                         if (tooltipOptions.visible) {
                             tooltip.showAt(points, coords);
                         }
@@ -2990,35 +2997,32 @@ var __meta__ = {
 
     var PointEventsMixin = {
         click: function(chart, e) {
-            var point = this;
-
-            chart.trigger(SERIES_CLICK, {
-                value: point.value,
-                percentage: point.percentage,
-                category: point.category,
-                series: point.series,
-                dataItem: point.dataItem,
-                runningTotal: point.runningTotal,
-                total: point.total,
-                element: $(e.target),
-                originalEvent: e
-            });
+            return chart.trigger(
+                SERIES_CLICK,
+                this.eventArgs(e)
+            );
         },
 
         hover: function(chart, e) {
-            var point = this;
+            return chart.trigger(
+                SERIES_HOVER,
+                this.eventArgs(e)
+            );
+        },
 
-            return chart.trigger(SERIES_HOVER, {
-                value: point.value,
-                percentage: point.percentage,
-                category: point.category,
-                series: point.series,
-                dataItem: point.dataItem,
-                runningTotal: point.runningTotal,
-                total: point.total,
+        eventArgs: function(e) {
+            return {
+                value: this.value,
+                percentage: this.percentage,
+                category: this.category,
+                series: this.series,
+                dataItem: this.dataItem,
+                runningTotal: this.runningTotal,
+                total: this.total,
                 element: $(e.target),
-                originalEvent: e
-            });
+                originalEvent: e,
+                point: this
+            };
         }
     };
 

@@ -2676,6 +2676,66 @@
             chart._tooltip.show = function() { ok(true); };
             barElement.mouseover();
         });
+
+        // ------------------------------------------------------------
+        function sharedHover() {
+            var e = $.Event("mousemove");
+            e.clientX = 100;
+            e.clientY = 50;
+            barElement.trigger(e);
+        }
+
+        module("Bar Chart / Events / seriesHover / Shared Tooltip", {
+            setup: function() {
+                createBarChart({
+                    series: [{
+                        type: "bar",
+                        data: [1]
+                    }, {
+                        type: "bar",
+                        data: [2]
+                    }],
+                    tooltip: {
+                        visible: true,
+                        shared: true
+                    }
+                });
+            },
+
+            teardown: function() {
+                destroyChart();
+            }
+        });
+
+        test("triggets seriesHover", function() {
+            chart.bind("seriesHover", function(e) {
+                ok(true);
+            });
+
+            sharedHover();
+        });
+
+        test("seriesHover contains all category points", function() {
+            chart.bind("seriesHover", function(e) {
+                equal(e.categoryPoints.length, 2);
+            });
+
+            sharedHover();
+        });
+
+        test("cancelling seriesHover prevents tooltip from opening", 0, function() {
+            chart.bind("seriesHover", function(e) {
+                e.preventDefault();
+            });
+
+            chart._tooltip.showAt = function() { ok(false); };
+            sharedHover();
+        });
+
+        test("tooltip is opened if seriesHover is not cancelled", function() {
+            chart._tooltip.showAt = function() { ok(true); };
+            sharedHover();
+        });
     })();
 
     (function() {
