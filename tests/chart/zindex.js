@@ -27,7 +27,7 @@
         });
 
         test("Chart root has no visual (pass-through to ChartContainer)", function() {
-            ok(!chart.visual);
+            ok(chart.animation || !chart.visual);
         });
 
         test("z-index is applied to points", function() {

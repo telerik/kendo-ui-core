@@ -2902,6 +2902,19 @@ var __meta__ = {
         }
     });
 
+    var PassthroughVisualMixin = {
+        extend: function(proto) {
+            proto.createVisual = this.createVisual;
+            proto.appendVisual = this.appendVisual;
+        },
+
+        createVisual: noop,
+
+        appendVisual: function(childVisual) {
+            this.parent.appendVisual(childVisual);
+        }
+    };
+
     var ClusterLayout = ChartElement.extend({
         options: {
             vertical: false,
@@ -2937,10 +2950,9 @@ var __meta__ = {
 
                 position += slotSize;
             }
-        },
-
-        createVisual: noop
+        }
     });
+    PassthroughVisualMixin.extend(ClusterLayout.fn);
 
     var StackWrap = ChartElement.extend({
         options: {
@@ -2952,7 +2964,6 @@ var __meta__ = {
                 vertical = options.vertical,
                 positionAxis = vertical ? X : Y,
                 stackAxis = vertical ? Y : X,
-                stackBase = targetBox[stackAxis + 2],
                 children = this.children,
                 box = this.box = new Box2D(),
                 childrenCount = children.length,
@@ -2964,10 +2975,6 @@ var __meta__ = {
                 if (currentChild.visible !== false) {
                     childBox = currentChild.box.clone();
                     childBox.snapTo(targetBox, positionAxis);
-                    if (currentChild.options) {
-                        // TODO: Remove stackBase and fix BarAnimation
-                        currentChild.options.stackBase = stackBase;
-                    }
 
                     if (i === 0) {
                         box = this.box = childBox.clone();
@@ -2977,10 +2984,9 @@ var __meta__ = {
                     box.wrap(childBox);
                 }
             }
-        },
-
-        createVisual: noop
+        }
     });
+    PassthroughVisualMixin.extend(StackWrap.fn);
 
     var PointEventsMixin = {
         click: function(chart, e) {
@@ -3059,9 +3065,6 @@ var __meta__ = {
             labels: {
                 visible: false,
                 format: "{0}"
-            },
-            animation: {
-                type: BAR
             },
             opacity: 1,
             notes: {
@@ -3189,20 +3192,6 @@ var __meta__ = {
             }
         },
 
-        createAnimation: function() {
-            var options = this.options;
-
-            deepExtend(options, {
-                animation: {
-                    aboveAxis: this.aboveAxis,
-                    vertical: options.vertical,
-                    stackBase: options.stackBase
-                }
-            });
-
-            ChartElement.fn.createAnimation.call(this);
-        },
-
         createHighlight: function(style) {
             var highlight = draw.Path.fromRect(this.box.toRect(), style);
 
@@ -3256,7 +3245,7 @@ var __meta__ = {
     deepExtend(Bar.fn, PointEventsMixin);
     deepExtend(Bar.fn, NoteMixin);
 
-    var BarAnimation = draw.Animation.extend({
+    var BarChartAnimation = draw.Animation.extend({
         options: {
             duration: INITIAL_ANIMATION_DURATION
         },
@@ -3267,13 +3256,9 @@ var __meta__ = {
 
             var bbox = element.bbox();
             if (bbox) {
-                var origin = this.origin = options.aboveAxis ?
-                    bbox.bottomLeft() : bbox.topRight();
+                var origin = this.origin = options.origin;
 
                 var axis = options.vertical ? Y : X;
-                var stackBase = options.stackBase;
-                var fromOffset = this.fromOffset = new geom.Point();
-                fromOffset[axis] = valueOrDefault(stackBase, origin[axis]) - origin[axis];
 
                 var fromScale = this.fromScale = new geom.Point(1, 1);
                 fromScale[axis] = START_SCALE;
@@ -3289,11 +3274,8 @@ var __meta__ = {
         step: function(pos) {
             var scaleX = interpolate(this.fromScale.x, 1, pos);
             var scaleY = interpolate(this.fromScale.y, 1, pos);
-            var translateX = interpolate(this.fromOffset.x, 0, pos);
-            var translateY = interpolate(this.fromOffset.y, 0, pos);
 
             this.element.transform(geom.transform()
-                .translate(translateX, translateY)
                 .scale(scaleX, scaleY, this.origin)
             );
         },
@@ -3303,7 +3285,48 @@ var __meta__ = {
             this.element.transform(null);
         }
     });
-    draw.AnimationFactory.current.register(BAR, BarAnimation);
+    draw.AnimationFactory.current.register(BAR, BarChartAnimation);
+
+    var BarChartAnimationMixin = {
+        extend: function(proto) {
+            if (proto.createVisual !== noop) {
+                throw new Error("Refusing to override existing createVisual");
+            }
+
+            proto.appendVisual = this.appendVisual;
+            proto.createVisual = this.createVisual;
+            proto._setAnimationOptions = this._setAnimationOptions;
+
+            deepExtend(proto.options, {
+                animation: {
+                    type: BAR
+                }
+            });
+        },
+
+        createVisual: function() {
+            this._setAnimationOptions();
+            ChartElement.fn.createVisual.call(this);
+        },
+
+        appendVisual: function(childVisual) {
+            if (defined(childVisual.options.zIndex)) {
+                childVisual.chartElement.options.animation =
+                    this.options.animation;
+            }
+
+            ChartElement.fn.appendVisual.call(this, childVisual);
+        },
+
+        _setAnimationOptions: function() {
+            var options = this.options;
+            var origin = this.categoryAxis.getSlot(0);
+
+            options.animation = options.animation || {};
+            options.animation.origin = new geom.Point(origin.x1, origin.y1);
+            options.animation.vertical = !this.options.invertAxes;
+        }
+    };
 
     var FadeInAnimation = draw.Animation.extend({
         options: {
@@ -4095,6 +4118,7 @@ var __meta__ = {
             }
         }
     });
+    BarChartAnimationMixin.extend(BarChart.fn);
 
     var RangeBar = Bar.extend({
         defaults: {
@@ -4340,6 +4364,7 @@ var __meta__ = {
             return value > 0;
         }
     });
+    BarChartAnimationMixin.extend(BulletChart.fn);
 
     var Bullet = ChartElement.extend({
         init: function(value, options) {
@@ -4357,9 +4382,6 @@ var __meta__ = {
                 width: 1
             },
             vertical: false,
-            animation: {
-                type: BAR
-            },
             opacity: 1,
             target: {
                 shape: "",

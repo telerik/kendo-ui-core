@@ -15,7 +15,7 @@
             visual = draw.Path.fromRect(new geom.Rect([0, 0], [10, 10]));
             options = $.extend({
                     vertical: true,
-                    aboveAxis: true,
+                    origin: [0, 0],
                     duration: 50,
                     type: "bar"
                 }, options);
@@ -23,7 +23,7 @@
         }
 
         // ------------------------------------------------------------
-        module("BarAnimation", {
+        module("BarChartAnimation", {
             setup: function() {
                 createAnim();
             }
@@ -54,52 +54,12 @@
             deepEqual(visual.transform().matrix(), new geom.Matrix(START_SCALE, 0, 0, 1, 0, 0));
         });
 
-        test("setup calculates fromOffset element (vertical bars)", function() {
-            anim.setup();
-            equal(anim.fromOffset.x, 0);
-            equal(anim.fromOffset.y, 0);
-        });
-
-        test("setup calculates fromOffset element (horizontal bars)", function() {
-            createAnim({vertical: false });
-            anim.setup();
-            equal(anim.fromOffset.x, 0);
-            equal(anim.fromOffset.y, 0);
-        });
-
-        test("setup calculates fromOffset with stack base (vertical bars)", function() {
-            createAnim({stackBase: 10 });
-            anim.setup();
-            equal(anim.fromOffset.x, 0);
-            equal(anim.fromOffset.y, 0);
-        });
-
-        test("setup calculates fromOffset with stack base (horizontal bars)", function() {
-            createAnim({stackBase: 10, vertical: false });
-            anim.setup();
-            equal(anim.fromOffset.x, 10);
-            equal(anim.fromOffset.y, 0);
-        });
-
-        test("setup calculates fromOffset with stack base (vertical bars && below axis)", function() {
-            createAnim({stackBase: 10, aboveAxis: false });
-            anim.setup();
-            equal(anim.fromOffset.x, 0);
-            equal(anim.fromOffset.y, 10);
-        });
-
-        test("setup calculates fromOffset with stack base (horizontal bars)", function() {
-            createAnim({stackBase: 10, aboveAxis: false, vertical: false });
-            anim.setup();
-            equal(anim.fromOffset.x, 0);
-            equal(anim.fromOffset.y, 0);
-        });
-
-        test("step transforms visual based on position ", function() {
-            createAnim({stackBase: 10, vertical: false})
+        test("step transforms visual based on origin", function() {
+            createAnim({ origin: [10, 20] })
             anim.setup();
             anim.step(0.5);
-            ok(visual.transform().equals(geom.transform(new geom.Matrix(0.5, 0, 0, 1, 5, 0))));
+            deepEqual(visual.transform().matrix().toArray(),
+                 [1, 0, 0, 0.5, 0, 10]);
         });
 
         asyncTest("cleans up transformation", function() {
