@@ -2188,6 +2188,15 @@
             equal(legendItems[1].options.text, "item2");
         });
 
+        test("reverses items", function() {
+            createLegendWithItems({
+                reverse: true
+            });
+
+            equal(legendItems[0].options.text, "item2");
+            equal(legendItems[1].options.text, "item1");
+        });
+
         test("sets series", function() {
             deepEqual(legendItems[0].options.series, legendSeries);
             deepEqual(legendItems[1].options.series, legendSeries);

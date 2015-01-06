@@ -292,5 +292,24 @@ namespace Kendo.Mvc.UI.Fluent
             legend.Height = height;
             return this;
         }
+
+        /// <summary>
+        /// Reverses the order of the legend items
+        /// </summary>
+        /// <param name="reverse">True if the items should be reversed; false otherwise.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .Legend(legend => legend.Reverse(true))
+        ///           .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartLegendBuilder Reverse(bool reverse)
+        {
+            legend.Reverse = reverse;
+            return this;
+        }
     }
 }

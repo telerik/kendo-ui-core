@@ -82,6 +82,15 @@ upwards from the current position.
     }
 
     /**
+    * If set to true the legend items will be reversed.Available in versions 2013.3.1306 and later.
+    * @param boolean $value
+    * @return \Kendo\Dataviz\UI\StockChartLegend
+    */
+    public function reverse($value) {
+        return $this->setProperty('reverse', $value);
+    }
+
+    /**
     * The visibility of the legend.
     * @param boolean $value
     * @return \Kendo\Dataviz\UI\StockChartLegend

@@ -8,7 +8,11 @@ class ChartCategoryAxisItem extends \Kendo\SerializableObject {
     /**
     * The discrete categoryAxis.baseUnitStep values when
 either categoryAxis.baseUnit is set to "fit" or
-categoryAxis.baseUnitStep is set to "auto".
+categoryAxis.baseUnitStep is set to "auto".The axis will try to divide the active period into successively larger intervals.
+It will start from x-second intervals, where x is picked from the autoBaseUnitSteps.seconds array.
+Then it will move to minutes, seconds and so on.
+This will continue until the number of intervals is less than
+maxDateGroups.
     * @param \Kendo\Dataviz\UI\ChartCategoryAxisItemAutoBaseUnitSteps|array $value
     * @return \Kendo\Dataviz\UI\ChartCategoryAxisItem
     */

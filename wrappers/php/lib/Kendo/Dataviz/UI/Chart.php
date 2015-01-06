@@ -206,7 +206,8 @@ If it is not supported by the browser, the Chart will switch to the first availa
 
     /**
     * Sets the legendItemClick event of the Chart.
-    * Fires when an legend item is clicked.
+    * Fires when an legend item is clicked, before the selected series visibility is toggled.
+Can be cancelled.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\Dataviz\UI\Chart
     */

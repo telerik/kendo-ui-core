@@ -113,6 +113,14 @@ public class LegendTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("position", value);
     }
 
+    public boolean getReverse() {
+        return (boolean)getProperty("reverse");
+    }
+
+    public void setReverse(boolean value) {
+        setProperty("reverse", value);
+    }
+
     public boolean getVisible() {
         return (boolean)getProperty("visible");
     }

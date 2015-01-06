@@ -148,6 +148,15 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        /// <summary>
+        /// Gets or sets the legend reverse 
+        /// </summary>
+        public bool? Reverse
+        {
+            get;
+            set;
+        }
+
         public IChartSerializer CreateSerializer()
         {
             return new ChartLegendSerializer(this);

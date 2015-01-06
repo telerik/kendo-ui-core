@@ -910,7 +910,11 @@ The axis will be rendered in the first (default) pane if not set.</description>
     <tag>
         <description>The discrete categoryAxis.baseUnitStep values when
 either categoryAxis.baseUnit is set to "fit" or
-categoryAxis.baseUnitStep is set to "auto".</description>
+categoryAxis.baseUnitStep is set to "auto".The axis will try to divide the active period into successively larger intervals.
+It will start from x-second intervals, where x is picked from the autoBaseUnitSteps.seconds array.
+Then it will move to minutes, seconds and so on.
+This will continue until the number of intervals is less than
+maxDateGroups.</description>
         <name>chart-categoryAxisItem-autoBaseUnitSteps</name>
         <tag-class>com.kendoui.taglib.chart.CategoryAxisItemAutoBaseUnitStepsTag</tag-class>
         <body-content>empty</body-content>
@@ -2395,6 +2399,12 @@ A negative value will move the legend upwards from its current position.</descri
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>If set to true the legend items will be reversed.Available in versions 2013.3.1306 and later.</description>
+            <name>reverse</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
             <description>If set to true the chart will display the legend. By default the chart legend is visible.</description>
             <name>visible</name>
             <rtexprvalue>true</rtexprvalue>
@@ -3307,7 +3317,7 @@ The last element is always created like a rectangle since there is no following 
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The distance between the category clusters.</description>
+            <description>The distance between categories expressed as a percentage of the bar width.See the related spacing setting.</description>
             <name>gap</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -3457,7 +3467,7 @@ The last element is always created like a rectangle since there is no following 
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The space between the chart series as proportion of the series width.</description>
+            <description>The distance between series points within a category. Expressed as a percentage of the bar width.See the related gap setting.</description>
             <name>spacing</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -31219,6 +31229,12 @@ upwards from the current position.</description>
             <name>position</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>If set to true the legend items will be reversed.Available in versions 2013.3.1306 and later.</description>
+            <name>reverse</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
         </attribute>
         <attribute>
             <description>The visibility of the legend.</description>

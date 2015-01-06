@@ -109,6 +109,15 @@ A negative value will move the legend upwards from its current position.
     }
 
     /**
+    * If set to true the legend items will be reversed.Available in versions 2013.3.1306 and later.
+    * @param boolean $value
+    * @return \Kendo\Dataviz\UI\ChartLegend
+    */
+    public function reverse($value) {
+        return $this->setProperty('reverse', $value);
+    }
+
+    /**
     * If set to true the chart will display the legend. By default the chart legend is visible.
     * @param boolean $value
     * @return \Kendo\Dataviz\UI\ChartLegend

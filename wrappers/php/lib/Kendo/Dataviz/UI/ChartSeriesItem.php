@@ -342,7 +342,7 @@ The last element is always created like a rectangle since there is no following 
     }
 
     /**
-    * The distance between the category clusters.
+    * The distance between categories expressed as a percentage of the bar width.See the related spacing setting.
     * @param float $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */
@@ -558,7 +558,7 @@ The last element is always created like a rectangle since there is no following 
     }
 
     /**
-    * The space between the chart series as proportion of the series width.
+    * The distance between series points within a category. Expressed as a percentage of the bar width.See the related gap setting.
     * @param float $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */

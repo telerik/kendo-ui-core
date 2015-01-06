@@ -152,5 +152,19 @@ namespace Kendo.Mvc.UI.Tests.Chart
 
             legend.Orientation.ShouldEqual(ChartLegendOrientation.Horizontal);
         }
+
+        [Fact]
+        public void Reverse_sets_reverse()
+        {
+            builder.Reverse(true);
+
+            legend.Reverse.ShouldEqual(true);
+        }
+
+        [Fact]
+        public void Reverse_should_return_builder()
+        {
+            builder.Reverse(true).ShouldBeSameAs(builder);
+        }
     }
 }

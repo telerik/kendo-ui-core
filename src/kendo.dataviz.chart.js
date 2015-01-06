@@ -1965,6 +1965,10 @@ var __meta__ = {
                 spacing: options.spacing
             });
 
+            if (options.reverse) {
+                items = items.slice(0).reverse();
+            }
+
             for (i = 0; i < count; i++) {
                 item = items[i];
 

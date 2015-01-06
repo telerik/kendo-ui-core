@@ -196,5 +196,18 @@ namespace Kendo.Mvc.UI.Tests
         {
             GetJson().ContainsKey("orientation").ShouldBeFalse();
         }
+
+        [Fact]
+        public void Serializes_Reverse()
+        {
+            legend.Reverse = true;
+            GetJson()["reverse"].ShouldEqual(true);
+        }
+
+        [Fact]
+        public void Does_not_serialize_default_reverse()
+        {
+            GetJson().ContainsKey("reverse").ShouldBeFalse();
+        }
     }
 }
