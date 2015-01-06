@@ -1724,13 +1724,14 @@ var __meta__ = {
             var referenceDataItem,
                 destTreeview = this._objectOrSelf(parentNode || group),
                 destDataSource = destTreeview.dataSource;
+            var loadPromise = $.Deferred().resolve().promise();
 
             if (parentNode && parentNode[0] != destTreeview.element[0]) {
                 referenceDataItem = destTreeview.dataItem(parentNode);
 
                 if (!referenceDataItem.loaded()) {
                     destTreeview._progress(parentNode, true);
-                    referenceDataItem.load();
+                    loadPromise = referenceDataItem.load();
                 }
 
                 if (parentNode != this.root) {
@@ -1746,7 +1747,7 @@ var __meta__ = {
 
             nodeData = this._toObservableData(nodeData);
 
-            return callback.call(this, destDataSource, nodeData);
+            return callback.call(this, destDataSource, nodeData, loadPromise);
         },
 
         _toObservableData: function(node) {
@@ -1795,13 +1796,11 @@ var __meta__ = {
             var that = this,
                 group = that.root;
 
-            success = success || $.noop;
-
             if (parentNode) {
                 group = subGroup(parentNode);
             }
 
-            return that._dataSourceMove(nodeData, group, parentNode, function (dataSource, model) {
+            return that._dataSourceMove(nodeData, group, parentNode, function (dataSource, model, loadModel) {
                 var inserted;
 
                 function add() {
@@ -1815,17 +1814,15 @@ var __meta__ = {
                     return that._insert(data, model, index);
                 }
 
-                if (!dataSource.data()) {
-                    dataSource.one(CHANGE, function() {
-                        success(add());
-                    });
+                var inserted;
 
-                    return null;
-                } else {
+                loadModel.then(function() {
                     inserted = add();
+                    success = success || $.noop;
                     success(inserted);
-                    return inserted;
-                }
+                });
+
+                return inserted || null;
             });
         },
 
