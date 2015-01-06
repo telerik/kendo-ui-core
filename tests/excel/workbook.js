@@ -551,6 +551,22 @@ test("toDataUrl sets 'applyAlignment' attribute to '1' if hAlign is set", functi
     equal(dom.find("cellXfs > xf").last().attr("applyAlignment"), 1);
 });
 
+test("toDataUrl sets 'wrapText' attribute to '1' if wrap is set", function() {
+    var workbook = new kendo.ooxml.Workbook({
+        sheets: [ {
+           rows: [
+               { cells: [ { wrap: true, value: "foo" } ] }
+           ]
+        } ]
+    });
+
+    workbook.toDataURL();
+
+    var dom = $(JSZip.prototype.files["styles.xml"]);
+
+    equal(dom.find("cellXfs > xf:last > alignment").attr("wrapText"), 1);
+});
+
 test("toDataUrl sets 'applyAlignment' attribute to '1' if vAlign is set", function() {
     var workbook = new kendo.ooxml.Workbook({
         sheets: [ {

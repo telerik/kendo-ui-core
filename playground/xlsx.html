@@ -26,7 +26,7 @@
     <div id="grid" style="height: 500px;width: 900px"></div>
     <script>
         $("#grid").kendoGrid({
-          toolbar: '<button id="export" class="k-button">Export</button>',
+          toolbar: ["excel"],
           dataSource: {
               type: "odata",
               transport: {
@@ -60,29 +60,14 @@
               width: 500
           }
           ],
+          excelExport: function(e) {
+              e.workbook.sheets[0].rows[1].cells[0].wrap = true;
+          },
           columnMenu: false,
           groupable: true,
           resizable: true,
           reorderable: true
-      })
-
-      $("#export").on("click", excel);
-
-      function excel() {
-        var grid = $("#grid").data("kendoGrid");
-
-        var exporter = new kendo.data.ExcelExporter({
-            columns: grid.columns,
-            dataSource: grid.dataSource,
-            allPages: true,
-            filter: true
-        });
-
-        exporter.workbook().then(function(book) {
-            kendo.saveAs(new kendo.ooxml.Workbook(book).toDataURL(), "Export.xlsx", "http://korchev:88/filesaver");
-        });
-      }
-
-    </script>
+      });
+  </script>
 </body>
 </html>
