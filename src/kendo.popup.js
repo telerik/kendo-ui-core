@@ -374,8 +374,7 @@ var __meta__ = {
                     that._resizeTimeout = null;
                 }, 50);
             } else {
-                if ((that._activated && that.element.hasClass("k-list-container")) ||
-                    (!that._hovered && !contains(that.element[0], activeElement()))) {
+                if (!that._hovered || (that._activated && that.element.hasClass("k-list-container"))) {
                     that.close();
                 }
             }
