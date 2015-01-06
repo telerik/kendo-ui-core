@@ -217,7 +217,7 @@ var __meta__ = {
                 scaledTotal = total * that.scale,
                 size = that.getSize();
 
-            if (total === 0) {
+            if (total === 0 && !that.forcedEnabled) {
                 return; // we are not visible.
             }
 
