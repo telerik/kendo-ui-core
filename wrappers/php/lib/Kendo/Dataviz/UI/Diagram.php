@@ -288,6 +288,34 @@ data source is fired. By default the widget will bind to the data source specifi
     }
 
     /**
+    * Sets the mouseEnter event of the Diagram.
+    * Fired when the mouse enters a shape or a connection.Will not fire for disabled items.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\Dataviz\UI\Diagram
+    */
+    public function mouseEnter($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('mouseEnter', $value);
+    }
+
+    /**
+    * Sets the mouseLeave event of the Diagram.
+    * Fired when the mouse leaves a shape or a connection.Will not fire for disabled items.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\Dataviz\UI\Diagram
+    */
+    public function mouseLeave($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('mouseLeave', $value);
+    }
+
+    /**
     * Sets the pan event of the Diagram.
     * Fired when the user pans the diagram.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.

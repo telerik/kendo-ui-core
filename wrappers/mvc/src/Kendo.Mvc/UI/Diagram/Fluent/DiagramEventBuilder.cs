@@ -104,6 +104,28 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
+        /// Fired when the mouse enters a shape or a connection.Will not fire for disabled items.
+        /// </summary>
+        /// <param name="handler">The name of the JavaScript function that will handle the mouseEnter event.</param>
+        public DiagramEventBuilder MouseEnter(string handler)
+        {
+            Handler("mouseEnter", handler);
+
+            return this;
+        }
+        
+        /// <summary>
+        /// Fired when the mouse leaves a shape or a connection.Will not fire for disabled items.
+        /// </summary>
+        /// <param name="handler">The name of the JavaScript function that will handle the mouseLeave event.</param>
+        public DiagramEventBuilder MouseLeave(string handler)
+        {
+            Handler("mouseLeave", handler);
+
+            return this;
+        }
+        
+        /// <summary>
         /// Fired when the user pans the diagram.
         /// </summary>
         /// <param name="handler">The name of the JavaScript function that will handle the pan event.</param>

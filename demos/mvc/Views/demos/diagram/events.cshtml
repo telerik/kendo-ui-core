@@ -112,6 +112,8 @@
                 dataBound: onDataBound,
                 edit: onEdit,
                 add: onAdd,
+                mouseEnter: onMouseEnter,
+                mouseLeave: onMouseLeave,
                 remove: onRemove,
                 cancel: onCancel
             });
@@ -174,6 +176,14 @@
 
         function onClick(e) {
             kendoConsole.log("Click: " + elementText(e.item));
+        }
+
+        function onMouseEnter(e) {
+            kendoConsole.log("Mouse enter: " + elementText(e.item));
+        }
+
+        function onMouseLeave(e) {
+            kendoConsole.log("Mouse leave: " + elementText(e.item));
         }
 
         var diagram = kendo.dataviz.diagram;

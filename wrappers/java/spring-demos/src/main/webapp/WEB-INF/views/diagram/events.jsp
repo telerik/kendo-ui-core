@@ -75,6 +75,14 @@
 	    kendoConsole.log("Click: " + elementText(e.item));
 	}
 	
+	function onMouseEnter(e) {
+		kendoConsole.log("Mouse enter: " + elementText(e.item));
+	}
+	
+	function onMouseLeave(e) {
+		kendoConsole.log("Mouse leave: " + elementText(e.item));
+	}
+	
 	var diagram = kendo.dataviz.diagram;
 	var Shape = diagram.Shape;
 	var Connection = diagram.Connection;
@@ -134,7 +142,20 @@
 	}
 </script>
 
-<kendo:diagram name="diagram" style="height:600px;" dataBound="onDataBound" edit="onEdit" add="onAdd" remove="onRemove" cancel="onCancel" itemRotate="onItemRotate" pan="onPan" select="onSelect" zoomStart="onZoomStart" zoomEnd="onZoomEnd" click="onClick">
+<kendo:diagram name="diagram" style="height:600px;"
+	dataBound="onDataBound"
+	edit="onEdit"
+	add="onAdd"
+	remove="onRemove" 
+	cancel="onCancel"
+	itemRotate="onItemRotate"
+	pan="onPan"
+	select="onSelect"
+	zoomStart="onZoomStart"
+	zoomEnd="onZoomEnd"
+	click="onClick"
+	mouseEnter="onMouseEnter"
+	mouseLeave="onMouseLeave">
      <kendo:dataSource>
            <kendo:dataSource-transport>
                <kendo:dataSource-transport-create url="${createUrl}" dataType="json" type="POST" contentType="application/json" />

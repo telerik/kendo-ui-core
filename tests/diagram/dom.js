@@ -159,6 +159,83 @@
             diagram._tap(tapEvent(10, 20));
         });
 
+        // ------------------------------------------------------------
+        module("Diagram / tap / mouse*", {
+            setup: function() {
+                setup();
+
+                diagram.addShape({
+                    id: "TestShape",
+                    data: "rectangle",
+                    width: 100, height: 100,
+                    x: 100,
+                    y: 100
+                });
+            },
+            teardown: teardown
+        });
+
+        test("triggers mouseEnter on tap", function(e) {
+            diagram.bind("mouseEnter", function(e) {
+                equal(e.item.id, "TestShape");
+            });
+
+            diagram._tap(tapEvent(150, 150));
+        });
+
+        test("triggers mouseLeave on tap outside of item", function(e) {
+            diagram.bind("mouseLeave", function(e) {
+                equal(e.item.id, "TestShape");
+            });
+
+            diagram._tap(tapEvent(150, 150));
+            diagram._tap(tapEvent(0, 0));
+        });
+
+    })();
+
+    // ------------------------------------------------------------
+    (function() {
+        function move(x, y) {
+            diagram._mouseMove({
+                which: 0,
+                pageX: x,
+                pageY: y,
+                preventDefault: $.noop
+            });
+        }
+
+        module("Diagram / mousemove", {
+            setup: function() {
+                setup();
+
+                diagram.addShape({
+                    id: "TestShape",
+                    data: "rectangle",
+                    width: 100, height: 100,
+                    x: 100,
+                    y: 100
+                });
+            },
+            teardown: teardown
+        });
+
+        test("triggers mouseEnter on mousemove", function(e) {
+            diagram.bind("mouseEnter", function(e) {
+                equal(e.item.id, "TestShape");
+            });
+
+            move(150, 150);
+        });
+
+        test("triggers mouseLeave on tap outside of item", function(e) {
+            diagram.bind("mouseLeave", function(e) {
+                equal(e.item.id, "TestShape");
+            });
+
+            move(150, 150);
+            move(0, 0);
+        });
     })();
 
     // ------------------------------------------------------------

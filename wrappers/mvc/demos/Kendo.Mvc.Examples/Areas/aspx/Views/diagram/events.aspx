@@ -60,6 +60,8 @@
         .Events(events => events
             .ItemRotate("onItemRotate")
             .Pan("onPan")
+            .MouseEnter("onMouseEnter")
+            .MouseLeave("onMouseLeave")
             .Select("onSelect")
             .ZoomStart("onZoomStart")
             .ZoomEnd("onZoomEnd")
@@ -130,6 +132,14 @@
 
     function onClick(e) {
         kendoConsole.log("Click: " + elementText(e.item));
+    }
+
+    function onMouseEnter(e) {
+        kendoConsole.log("Mouse enter: " + elementText(e.item));
+    }
+
+    function onMouseLeave(e) {
+        kendoConsole.log("Mouse leave: " + elementText(e.item));
     }
 
     var diagram = kendo.dataviz.diagram;

@@ -12696,6 +12696,16 @@ data source is fired. By default the widget will bind to the data source specifi
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
+            <description>Fired when the mouse enters a shape or a connection.Will not fire for disabled items.</description>
+            <name>mouseEnter</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fired when the mouse leaves a shape or a connection.Will not fire for disabled items.</description>
+            <name>mouseLeave</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
             <description>Fired when the user pans the diagram.</description>
             <name>pan</name>
             <rtexprvalue>true</rtexprvalue>
@@ -14521,6 +14531,18 @@ See visual.</description>
         <description>Fired when an item is rotated.</description>
         <name>diagram-itemRotate</name>
         <tag-class>com.kendoui.taglib.diagram.ItemRotateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the mouse enters a shape or a connection.Will not fire for disabled items.</description>
+        <name>diagram-mouseEnter</name>
+        <tag-class>com.kendoui.taglib.diagram.MouseEnterFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the mouse leaves a shape or a connection.Will not fire for disabled items.</description>
+        <name>diagram-mouseLeave</name>
+        <tag-class>com.kendoui.taglib.diagram.MouseLeaveFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>

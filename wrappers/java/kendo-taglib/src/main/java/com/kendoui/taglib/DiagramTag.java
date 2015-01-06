@@ -115,6 +115,14 @@ public class DiagramTag extends WidgetTag /* interfaces */implements DataBoundWi
         setEvent("itemRotate", value.getBody());
     }
 
+    public void setMouseEnter(MouseEnterFunctionTag value) {
+        setEvent("mouseEnter", value.getBody());
+    }
+
+    public void setMouseLeave(MouseLeaveFunctionTag value) {
+        setEvent("mouseLeave", value.getBody());
+    }
+
     public void setPan(PanFunctionTag value) {
         setEvent("pan", value.getBody());
     }
@@ -317,6 +325,30 @@ public class DiagramTag extends WidgetTag /* interfaces */implements DataBoundWi
 
     public void setItemRotate(String value) {
         setProperty("itemRotate", new Function(value));
+    }
+
+    public String getMouseEnter() {
+        Function property = ((Function)getProperty("mouseEnter"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setMouseEnter(String value) {
+        setProperty("mouseEnter", new Function(value));
+    }
+
+    public String getMouseLeave() {
+        Function property = ((Function)getProperty("mouseLeave"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setMouseLeave(String value) {
+        setProperty("mouseLeave", new Function(value));
     }
 
     public String getPan() {

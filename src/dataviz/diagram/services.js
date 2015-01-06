@@ -48,6 +48,8 @@
             DEFAULTCONNECTORNAMES = [TOP, RIGHT, BOTTOM, LEFT, AUTO],
             ITEMROTATE = "itemRotate",
             ITEMBOUNDSCHANGE = "itemBoundsChange",
+            MOUSE_ENTER = "mouseEnter",
+            MOUSE_LEAVE = "mouseLeave",
             ZOOM_START = "zoomStart",
             ZOOM_END = "zoomEnd",
             SCROLL_MIN = -20000,
@@ -1012,13 +1014,17 @@
             },
             _updateHoveredItem: function (p) {
                 var hit = this._hitTest(p);
+                var diagram = this.diagram;
 
                 if (hit != this.hoveredItem && (!this.disabledShape || hit != this.disabledShape)) {
                     if (this.hoveredItem) {
+                        diagram.trigger(MOUSE_LEAVE, { item: this.hoveredItem });
                         this.hoveredItem._hover(false);
                     }
 
                     if (hit && hit.options.enable) {
+                        diagram.trigger(MOUSE_ENTER, { item: hit });
+
                         this.hoveredItem = hit; // Shape, connection or connector
                         this.hoveredItem._hover(true);
                     } else {

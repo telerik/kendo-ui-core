@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Chart sandbox</title>
+        <link rel="stylesheet" href="../../dist/styles/web/kendo.common.css" />
+        <link rel="stylesheet" href="../../dist/styles/web/kendo.default.css" />
+        <link rel="stylesheet" href="../../dist/styles/dataviz/kendo.dataviz.css" />
+        <link rel="stylesheet" href="../../dist/styles/dataviz/kendo.dataviz.default.css" />
+        <script src="../loader.js"></script>
+        <script>
+            requireSync([
+            "../../src/jquery.js",
+            "../../src/kendo.all.js"
+            ]);
+        </script>
+    </head>
+    <body>
+        <div id="diagram"></div>
+        <script>
+            var data = [{
+                firstName: "Antonio",
+                lastName: "Moreno",
+                image: "antonio.jpg",
+                title: "Team Lead",
+                colorScheme: "#1696d3",
+                items: [{
+                    firstName: "Elizabeth",
+                    image: "elizabeth.jpg",
+                    lastName: "Brown",
+                    title: "Design Lead",
+                    colorScheme: "#ef6944",
+                    items: [{
+                        firstName: "Ann",
+                        lastName: "Devon",
+                        image: "ann.jpg",
+                        title: "UI Designer",
+                        colorScheme: "#ef6944"
+                    }]
+                    }, {
+                    firstName: "Diego",
+                    lastName: "Roel",
+                    image: "diego.jpg",
+                    title: "QA Engineer",
+                    colorScheme: "#ee587b",
+                    items: [{
+                        firstName: "Fran",
+                        lastName: "Wilson",
+                        image: "fran.jpg",
+                        title: "QA Intern",
+                        colorScheme: "#ee587b"
+                    }]
+                    }, {
+                    firstName: "Felipe",
+                    lastName: "Izquiedro",
+                    image: "felipe.jpg",
+                    title: "Senior Developer",
+                    colorScheme: "#75be16",
+                    items: [{
+                        firstName: "Daniel",
+                        lastName: "Tonini",
+                        image: "daniel.jpg",
+                        title: "Developer",
+                        colorScheme: "#75be16"
+                    }]
+                }]
+            }];
+
+            function visualTemplate(options) {
+                var dataviz = kendo.dataviz;
+                var g = new dataviz.diagram.Group();
+                var dataItem = options.dataItem;
+
+                g.append(new dataviz.diagram.Rectangle({
+                    width: 210,
+                    height: 75,
+                    stroke: {
+                        width: 0
+                    },
+                    fill: dataItem.colorScheme
+                }));
+
+                g.append(new dataviz.diagram.TextBlock({
+                    text: dataItem.firstName + " " + dataItem.lastName,
+                    x: 55,
+                    y: 20,
+                    fill: "#fff"
+                }));
+
+                g.append(new dataviz.diagram.TextBlock({
+                    text: dataItem.title,
+                    x: 55,
+                    y: 40,
+                    fill: "#fff"
+                }));
+
+                return g;
+            }
+
+            function createDiagram() {
+                $("#diagram").kendoDiagram({
+                    dataSource: new kendo.data.HierarchicalDataSource({
+                        data: data,
+                        schema: {
+                            model: {
+                                children: "items"
+                            }
+                        }
+                    }),
+                    layout: {
+                        type: "layered"
+                    },
+                    shapeDefaults: {
+                        visual: visualTemplate
+                    },
+                    connectionDefaults: {
+                        stroke: {
+                            color: "#979797",
+                            width: 2
+                        }
+                    },
+                    mouseenter: function(e) {
+                        console.log("mouseenter", e);
+                    },
+                    mouseleave: function(e) {
+                        console.log("mouseleave", e);
+                    }
+                });
+
+                var diagram = $("#diagram").getKendoDiagram();
+                diagram.bringIntoView(diagram.shapes);
+
+                diagram.shapes[0].options.enable = false;
+                diagram.shapes[0].refresh();
+            }
+
+            $(document).ready(createDiagram);
+        </script>
+    </body>
+</html>
+

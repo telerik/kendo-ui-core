@@ -28,13 +28,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         case 'destroy':
             $result = $result->destroy('OrgChartShapes', $request, 'Id');
             break;
-        case 'createConnection':             
+        case 'createConnection':
             $result = $result->create('OrgChartConnections', $connectionFields, $request, 'Id');
             break;
         case 'readConnections':
             $result = $result->read('OrgChartConnections', $connectionFields, $request);
             break;
-        case 'updateConnection':     
+        case 'updateConnection':
             $result = $result->update('OrgChartConnections', $connectionFields, $request, 'Id');
             break;
         case 'destroyConnection':
@@ -160,7 +160,7 @@ $fromField->type('number')
 $toField = new \Kendo\Data\DataSourceSchemaModelField('to');
 $toField->type('number')
         ->from('ToShapeId');
-        
+
 $fromXField = new \Kendo\Data\DataSourceSchemaModelField('fromX');
 $fromXField->type('number')
           ->from('FromPointX');
@@ -201,7 +201,7 @@ $layout->type('tree')
        ->subtype('tipover')
        ->underneathHorizontalOffset(140);
 
-       
+
 $shapeContent = new \Kendo\Dataviz\UI\DiagramShapeDefaultsContent();
 $shapeContent->template('#:dataItem.JobTitle#')
              ->fontSize(17);
@@ -234,7 +234,9 @@ $diagram->dataSource($dataSource)
         ->select('onSelect')
         ->zoomStart('onZoomStart')
         ->zoomEnd('onZoomEnd')
-        ->click('onClick');
+        ->click('onClick')
+        ->mouseEnter('onMouseEnter')
+        ->mouseLeave('onMouseLeave');
 
 echo $diagram->render();
 ?>
@@ -297,6 +299,14 @@ echo $diagram->render();
 
     function onClick(e) {
         kendoConsole.log("Click: " + elementText(e.item));
+    }
+
+    function onMouseEnter(e) {
+        kendoConsole.log("Mouse enter: " + elementText(e.item));
+    }
+
+    function onMouseLeave(e) {
+        kendoConsole.log("Mouse leave: " + elementText(e.item));
     }
 
     var diagram = kendo.dataviz.diagram;
