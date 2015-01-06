@@ -810,7 +810,8 @@ border-color: @secondary-header-background-color;
 .k-pager-numbers .k-state-selected,
 .k-grid-footer,
 .k-grid-footer td,
-.k-scheduler-header {
+.k-scheduler-header,
+.km-pane-wrapper .k-grid-header .k-header {
 color: @widget-text-color;
 background-color: @secondary-background-color;
 }
@@ -1245,4 +1246,13 @@ div.k-scheduler-marquee:after {
 
 .k-notification.k-group {
     color: @secondary-text-color;
+}
+
+.km-pane-wrapper > .km-pane > .km-view > .km-content {
+    color: @header-background-color;
+    background-color: @header-text-color;
+}
+
+.km-pane-wrapper > .km-pane .km-content .k-mobile-list > ul > li > .k-link {
+    color: @header-background-color;
 }
