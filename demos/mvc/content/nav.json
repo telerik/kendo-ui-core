@@ -2136,99 +2136,6 @@
     "category": "Data Management"
   },
   {
-    "text": "PivotGrid",
-    "name": "pivotgrid",
-    "pro": "true",
-    "api": "web/pivotgrid",
-    "documentation": {
-       "kendo-ui": "getting-started/web/pivotgrid/overview",
-       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/pivotgrid/overview",
-       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/pivotgrid/overview",
-       "php-ui": "getting-started/using-kendo-with/php/widgets/pivotgrid/overview"
-    },
-    "forum": {
-       "kendo-ui": "kendo-ui/pivotgrid",
-       "aspnet-mvc": "aspnet-mvc/pivotgrid",
-       "jsp-ui": "jsp/pivotgrid",
-       "php-ui": "php/pivotgrid"
-    },
-    "codelibrary": {
-       "kendo-ui": "kendo-ui/pivotgrid",
-       "aspnet-mvc": "aspnet-mvc/pivotgrid",
-       "jsp-ui": "jsp/pivotgrid",
-       "php-ui": "php/pivotgrid"
-    },
-    "spriteCssClass": "pivotGridIcon",
-    "items": [
-      {
-        "text": "Basic usage",
-        "url": "pivotgrid/index",
-        "title": {
-            "kendo-ui": "jQuery PivotGrid control example | Kendo UI PivotGrid Demos"
-        },
-        "meta": {
-            "kendo-ui": "This demo for Kendo UI jQuery-based PivotGrid component shows how you can make a data summarization tool."
-        }
-      },
-      {
-        "text": "KPI measures",
-        "url": "pivotgrid/kpi",
-        "title": {
-            "kendo-ui": "Define KPI measures in Kendo UI PivotGrid"
-        },
-        "meta": {
-            "kendo-ui": "This demo for Kendo UI jQuery-based PivotGrid component shows how you can define KPI measures."
-        }
-      },
-      {
-        "text": "Remote binding",
-        "url": "pivotgrid/remote-flat-data-binding",
-        "title": {
-            "kendo-ui": "Binding Pivot Grid to flat remote data"
-        },
-        "meta": {
-            "kendo-ui": "This demo for Kendo UI jQuery-based PivotGrid component shows how you can poplate the widget with remote flat data."
-        }
-      },
-      {
-        "text": "Local binding",
-        "url": "pivotgrid/local-flat-data-binding",
-        "title": {
-            "kendo-ui": "Binding Pivot Grid to local data"
-        },
-        "meta": {
-            "kendo-ui": "This demo for Kendo UI jQuery-based PivotGrid component shows how you can poplate the widget with local flat data."
-        }
-      },
-	  {
-        "text": "Templates",
-        "url": "pivotgrid/templates",
-        "title": {
-            "kendo-ui": "Customizing Pivot Grid apperience"
-        },
-        "meta": {
-            "kendo-ui": "This demo for Kendo UI jQuery-based PivotGrid component shows how you can customize the widget apperience."
-        }
-      },
-      {
-        "text": "AngularJS",
-        "url": "pivotgrid/angular",
-        "title": {
-          "kendo-ui": "AngularJS support in Kendo UI PivotGrid"
-        },
-        "meta": {
-          "kendo-ui": "AngularJS directive support for Kendo UI PivotGrid"
-        },
-        "packages": [
-          "!mvc",
-          "!jsp",
-          "!php"
-        ]
-      }
-    ],
-    "category": "Data Management"
-  },
-  {
     "text": "ListView",
     "name": "listview",
     "api": "web/listview",
@@ -2357,6 +2264,99 @@
         },
         "meta": {
             "kendo-ui": "AngularJS directive support for Kendo UI ListView"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
+      }
+    ],
+    "category": "Data Management"
+  },
+  {
+    "text": "PivotGrid",
+    "name": "pivotgrid",
+    "pro": "true",
+    "api": "web/pivotgrid",
+    "documentation": {
+       "kendo-ui": "getting-started/web/pivotgrid/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/pivotgrid/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/pivotgrid/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/pivotgrid/overview"
+    },
+    "forum": {
+       "kendo-ui": "kendo-ui/pivotgrid",
+       "aspnet-mvc": "aspnet-mvc/pivotgrid",
+       "jsp-ui": "jsp/pivotgrid",
+       "php-ui": "php/pivotgrid"
+    },
+    "codelibrary": {
+       "kendo-ui": "kendo-ui/pivotgrid",
+       "aspnet-mvc": "aspnet-mvc/pivotgrid",
+       "jsp-ui": "jsp/pivotgrid",
+       "php-ui": "php/pivotgrid"
+    },
+    "spriteCssClass": "pivotGridIcon",
+    "items": [
+      {
+        "text": "Basic usage",
+        "url": "pivotgrid/index",
+        "title": {
+            "kendo-ui": "jQuery PivotGrid control example | Kendo UI PivotGrid Demos"
+        },
+        "meta": {
+            "kendo-ui": "This demo for Kendo UI jQuery-based PivotGrid component shows how you can make a data summarization tool."
+        }
+      },
+      {
+        "text": "KPI measures",
+        "url": "pivotgrid/kpi",
+        "title": {
+            "kendo-ui": "Define KPI measures in Kendo UI PivotGrid"
+        },
+        "meta": {
+            "kendo-ui": "This demo for Kendo UI jQuery-based PivotGrid component shows how you can define KPI measures."
+        }
+      },
+      {
+        "text": "Remote binding",
+        "url": "pivotgrid/remote-flat-data-binding",
+        "title": {
+            "kendo-ui": "Binding Pivot Grid to flat remote data"
+        },
+        "meta": {
+            "kendo-ui": "This demo for Kendo UI jQuery-based PivotGrid component shows how you can poplate the widget with remote flat data."
+        }
+      },
+      {
+        "text": "Local binding",
+        "url": "pivotgrid/local-flat-data-binding",
+        "title": {
+            "kendo-ui": "Binding Pivot Grid to local data"
+        },
+        "meta": {
+            "kendo-ui": "This demo for Kendo UI jQuery-based PivotGrid component shows how you can poplate the widget with local flat data."
+        }
+      },
+	  {
+        "text": "Templates",
+        "url": "pivotgrid/templates",
+        "title": {
+            "kendo-ui": "Customizing Pivot Grid apperience"
+        },
+        "meta": {
+            "kendo-ui": "This demo for Kendo UI jQuery-based PivotGrid component shows how you can customize the widget apperience."
+        }
+      },
+      {
+        "text": "AngularJS",
+        "url": "pivotgrid/angular",
+        "title": {
+          "kendo-ui": "AngularJS support in Kendo UI PivotGrid"
+        },
+        "meta": {
+          "kendo-ui": "AngularJS directive support for Kendo UI PivotGrid"
         },
         "packages": [
           "!mvc",
@@ -3253,6 +3253,209 @@
     "category": "Navigation"
   },
   {
+    "packages": [ "!mvc", "!jsp", "!php" ],
+    "text": "Drag & Drop",
+    "name": "dragdrop",
+    "api": "framework/draggable",
+    "documentation": {
+       "kendo-ui": "getting-started/framework/draganddrop/overview"
+    },
+    "forum": {
+       "kendo-ui": "kendo-ui/drag-and-drop"
+    },
+    "codelibrary": {
+       "kendo-ui": "kendo-ui/draganddrop"
+    },
+    "spriteCssClass": "dragDropIcon",
+    "items": [
+      {
+        "text": "Basic usage",
+        "url": "dragdrop/index",
+        "title": {
+            "kendo-ui": "Demo for Drag & Drop Component in Kendo UI jQuery framework"
+        },
+        "meta": {
+            "kendo-ui": "This example illustrates the basic functionality of Kendo UI Drag & Drop component which provides a cross-browser, touch-friendly way to handle mouse and touch drag events."
+        }
+      },
+      {
+        "text": "Container",
+        "url": "dragdrop/container",
+        "title": {
+            "kendo-ui": "Example of Kendo UI Drag and Drop Component in a container"
+        },
+        "meta": {
+            "kendo-ui": "This demo illustrates how Kendo UI Drag and Drop component is used for draggable items in a container."
+        }
+      },
+      {
+        "text": "Area",
+        "url": "dragdrop/area",
+        "title": {
+            "kendo-ui": "Example of jQuery Draggable Area | Kendo UI MVVM Demo"
+        },
+        "meta": {
+            "kendo-ui": "This demo shows how the draggable functionality in an area is enabled in Kendo UI MVVM framework."
+        }
+      },
+      {
+        "text": "Events",
+        "url": "dragdrop/events",
+        "title": {
+            "kendo-ui": "Events example for Kendo UI jQuery Draggable functionality"
+        },
+        "meta": {
+            "kendo-ui": "Learn more about draggable interaction with this events example for Kendo UI Draggable in Kendo UI MVVM."
+        }
+      },
+      {
+        "text": "AngularJS",
+        "url": "dragdrop/angular",
+        "title": {
+            "kendo-ui": "AngularJS support in Kendo UI Drag & Drop"
+        },
+        "meta": {
+            "kendo-ui": "AngularJS directive support for Kendo UI Drag & Drop"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
+      }
+    ],
+    "category": "Interactivity & UX"
+  },
+  {
+    "packages": [ "!mvc", "!jsp", "!php" ],
+    "text": "Effects",
+    "name": "fx",
+    "api": "framework/kendo",
+    "documentation": {
+       "kendo-ui": "getting-started/framework/fx/overview"
+    },
+    "forum": {
+       "kendo-ui": "kendo-ui/effects"
+    },
+    "codelibrary": {
+       "kendo-ui": "kendo-ui/effects"
+    },
+    "spriteCssClass": "effectsIcon",
+    "items": [
+      {
+        "text": "Expand",
+        "url": "fx/expand",
+        "title": {
+            "kendo-ui": "Kendo UI Expand Effect Demo | Kendo UI Web framework"
+        },
+        "meta": {
+            "kendo-ui": "This example demonstrates how the expand effect is applied to jQuery widgets in Kendo UI Web framework."
+        }
+      },
+      {
+        "text": "Fade",
+        "url": "fx/fade",
+        "title": {
+            "kendo-ui": "Effects in Kendo UI Framework | Fade Away Demo"
+        },
+        "meta": {
+            "kendo-ui": "This Kendo UI Web example demonstrates how the elements gradually fade away once the user has clicked on them."
+        }
+      },
+      {
+        "text": "Slide In",
+        "url": "fx/slidein",
+        "title": {
+            "kendo-ui": "Demo for slide-in effect in Kendo UI framework for building HTML5 apps"
+        },
+        "meta": {
+            "kendo-ui": "This example demonstrates how the slide-in effect is applied in Kendo UI Web framework."
+        }
+      },
+      {
+        "text": "Flip",
+        "url": "fx/flip",
+        "title": {
+            "kendo-ui": "Interactive Flip Effect in Kendo UI Web framework"
+        },
+        "meta": {
+            "kendo-ui": "In this Kendo UI Web demo you can play with the powerful flip effect which is supported in the web framework."
+        }
+      },
+      {
+        "text": "Transfer",
+        "url": "fx/transfer",
+        "title": {
+            "kendo-ui": "Transfer effect demo in Kendo UI framework for web development"
+        },
+        "meta": {
+            "kendo-ui": "This example demonstrates how the transfer effect is applied in Kendo UI Web."
+        }
+      },
+      {
+        "text": "Zoom",
+        "url": "fx/zoom",
+        "title": {
+            "kendo-ui": "Zoom effect in Kendo UI Web framework | Kendo UI Web Demo"
+        },
+        "meta": {
+            "kendo-ui": "Just hover the mouse over the image and you will see how the zoom effect is implemented in Kendo UI Web framework."
+        }
+      },
+      {
+        "text": "Page Turn",
+        "url": "fx/pageturn",
+        "title": {
+            "kendo-ui": "Page turn effect in Kendo UI Web app framework | Kendo UI Web Demo"
+        },
+        "meta": {
+            "kendo-ui": "In this interactive demo you will see how the blazing fast page turn effect is supported in Kendo UI Web framework for building apps and modern websites."
+        }
+      },
+      {
+        "text": "Tile",
+        "url": "fx/tile",
+        "title": {
+            "kendo-ui": "Kendo UI Web framework effects | Interactive tile demo"
+        },
+        "meta": {
+            "kendo-ui": "This Kendo UI Web example shows how the tile effect is implemented to enhance end-user experience."
+        }
+      },
+      {
+        "text": "Replace",
+        "url": "fx/replace",
+        "title": {
+            "kendo-ui": "Replace effect"
+        },
+        "meta": {
+            "kendo-ui": "This demo showcases how to create custom CSS class based transition between two HTML elements using Kendo UI Replace effect"
+        }
+      },
+      {
+        "text": "Combined Effects",
+        "url": "fx/combined",
+        "title": {
+            "kendo-ui": "Combined Effects Demo in Kendo UI Web"
+        },
+        "meta": {
+            "kendo-ui": "This demo shows how different combined effects can be used while building apps with Kendo UI Web framework in order to deliver rich end-user experience."
+        }
+      },
+      {
+        "text": "Semantic Zoom",
+        "url": "fx/semantic-zoom",
+        "title": {
+            "kendo-ui": "Semantic Zoom effect"
+        },
+        "meta": {
+            "kendo-ui": "This demo showcases how to implement semantic zoom between views in a single-page Kendo UI application"
+        }
+      }
+    ],
+    "category": "Interactivity & UX"
+  },
+  {
     "text": "ProgressBar",
     "name": "progressbar",
     "api": "web/progressbar",
@@ -3393,6 +3596,137 @@
       }
     ],
     "category": "Interactivity & UX"
+  },
+  {
+    "text": "Gantt",
+    "name": "gantt",
+    "api": "web/gantt",
+    "pro": "true",
+	"disableInMobile" : true,
+    "documentation": {
+       "kendo-ui": "getting-started/web/gantt/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/gantt/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/gantt/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/gantt/overview"
+    },
+    "forum": {
+       "kendo-ui": "kendo-ui/gantt",
+       "aspnet-mvc": "aspnet-mvc/gantt",
+       "jsp-ui": "jsp/gantt",
+       "php-ui": "php/gantt"
+    },
+    "codelibrary": {
+       "kendo-ui": "kendo-ui/gantt",
+       "aspnet-mvc": "aspnet-mvc/gantt",
+       "jsp-ui": "jsp/gantt",
+       "php-ui": "php/gantt"
+    },
+    "spriteCssClass": "ganttIcon",
+    "items": [
+      {
+        "text": "Basic usage",
+        "url": "gantt/index",
+        "title": {
+            "kendo-ui": "Example of Kendo UI jQuery-based Gantt chart"
+        },
+        "meta": {
+            "kendo-ui": "Explore the example of HTML5 gantt chart widget, included in Kendo UI Web, to find how easy it is to add a gantt chart to your website or web app."
+        }
+      },
+      {
+          "text": "Export to PDF",
+          "url": "gantt/pdf-export",
+          "new": true,
+          "title": {
+              "kendo-ui": "Exporting to PDF"
+          },
+          "meta": {
+              "kendo-ui": "Export Kendo UI gantt as PDF file"
+          },
+          "packages": [
+              "!offline"
+          ]
+      },
+      {
+        "text": "Resources",
+        "url": "gantt/resources",
+        "new": true,
+        "title": {
+            "kendo-ui": "Resources in Kendo UI Gantt"
+        },
+        "meta": {
+            "kendo-ui": "This demo shows how to assign resources to gantt tasks."
+        }
+      },
+      {
+        "text": "Events",
+        "url": "gantt/events",
+        "title": {
+            "kendo-ui": "Example of using events in Kendo UI Gantt control"
+        },
+        "meta": {
+            "kendo-ui": "This example demonstrates different events which are available in KendoGantt widget and the code explains how you can use them for your project."
+        }
+      },
+      {
+        "text": "API",
+        "url": "gantt/api",
+        "title": {
+            "kendo-ui": "Kendo UI Gantt API Functions Example"
+        },
+        "meta": {
+            "kendo-ui": "This demo shows API Functions of KendoGantt. Demo Source Code will show you how to call methods on the widget instance to script its behavior."
+        }
+      },
+      {
+        "text": "Keyboard navigation",
+        "url": "gantt/keyboard-navigation",
+        "title": {
+            "kendo-ui": "Keyboard navigation in Kendo UI Gantt"
+        },
+        "meta": {
+            "kendo-ui": "Look at this Kendo UI Gantt demo to learn how different keyboard combinations could be used to navigate in the component."
+        }
+      },
+      {
+        "text": "MVVM",
+        "url": "gantt/mvvm",
+        "title": {
+            "kendo-ui": "MVVM support in Kendo UI Gantt"
+        },
+        "meta": {
+            "kendo-ui": "Events, source and visible MVVM binding support in Kendo UI Gantt"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
+      },
+      {
+        "text": "Server binding",
+        "url": "gantt/serverbinding",
+        "packages": [
+          "mvc-offline"
+        ]
+      },
+      {
+        "text": "AngularJS",
+        "url": "gantt/angular",
+        "title": {
+            "kendo-ui": "AngularJS support in Kendo UI Gantt"
+        },
+        "meta": {
+            "kendo-ui": "AngularJS directive support for Kendo UI Gantt"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
+      }
+    ],
+    "category": "Scheduling"
   },
   {
     "text": "Scheduler",
@@ -3681,137 +4015,6 @@
         },
         "meta": {
             "kendo-ui": "AngularJS directive support for Kendo UI Scheduler"
-        },
-        "packages": [
-          "!mvc",
-          "!jsp",
-          "!php"
-        ]
-      }
-    ],
-    "category": "Scheduling"
-  },
-  {
-    "text": "Gantt",
-    "name": "gantt",
-    "api": "web/gantt",
-    "pro": "true",
-	"disableInMobile" : true,
-    "documentation": {
-       "kendo-ui": "getting-started/web/gantt/overview",
-       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/gantt/overview",
-       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/gantt/overview",
-       "php-ui": "getting-started/using-kendo-with/php/widgets/gantt/overview"
-    },
-    "forum": {
-       "kendo-ui": "kendo-ui/gantt",
-       "aspnet-mvc": "aspnet-mvc/gantt",
-       "jsp-ui": "jsp/gantt",
-       "php-ui": "php/gantt"
-    },
-    "codelibrary": {
-       "kendo-ui": "kendo-ui/gantt",
-       "aspnet-mvc": "aspnet-mvc/gantt",
-       "jsp-ui": "jsp/gantt",
-       "php-ui": "php/gantt"
-    },
-    "spriteCssClass": "ganttIcon",
-    "items": [
-      {
-        "text": "Basic usage",
-        "url": "gantt/index",
-        "title": {
-            "kendo-ui": "Example of Kendo UI jQuery-based Gantt chart"
-        },
-        "meta": {
-            "kendo-ui": "Explore the example of HTML5 gantt chart widget, included in Kendo UI Web, to find how easy it is to add a gantt chart to your website or web app."
-        }
-      },
-      {
-          "text": "Export to PDF",
-          "url": "gantt/pdf-export",
-          "new": true,
-          "title": {
-              "kendo-ui": "Exporting to PDF"
-          },
-          "meta": {
-              "kendo-ui": "Export Kendo UI gantt as PDF file"
-          },
-          "packages": [
-              "!offline"
-          ]
-      },
-      {
-        "text": "Resources",
-        "url": "gantt/resources",
-        "new": true,
-        "title": {
-            "kendo-ui": "Resources in Kendo UI Gantt"
-        },
-        "meta": {
-            "kendo-ui": "This demo shows how to assign resources to gantt tasks."
-        }
-      },
-      {
-        "text": "Events",
-        "url": "gantt/events",
-        "title": {
-            "kendo-ui": "Example of using events in Kendo UI Gantt control"
-        },
-        "meta": {
-            "kendo-ui": "This example demonstrates different events which are available in KendoGantt widget and the code explains how you can use them for your project."
-        }
-      },
-      {
-        "text": "API",
-        "url": "gantt/api",
-        "title": {
-            "kendo-ui": "Kendo UI Gantt API Functions Example"
-        },
-        "meta": {
-            "kendo-ui": "This demo shows API Functions of KendoGantt. Demo Source Code will show you how to call methods on the widget instance to script its behavior."
-        }
-      },
-      {
-        "text": "Keyboard navigation",
-        "url": "gantt/keyboard-navigation",
-        "title": {
-            "kendo-ui": "Keyboard navigation in Kendo UI Gantt"
-        },
-        "meta": {
-            "kendo-ui": "Look at this Kendo UI Gantt demo to learn how different keyboard combinations could be used to navigate in the component."
-        }
-      },
-      {
-        "text": "MVVM",
-        "url": "gantt/mvvm",
-        "title": {
-            "kendo-ui": "MVVM support in Kendo UI Gantt"
-        },
-        "meta": {
-            "kendo-ui": "Events, source and visible MVVM binding support in Kendo UI Gantt"
-        },
-        "packages": [
-          "!mvc",
-          "!jsp",
-          "!php"
-        ]
-      },
-      {
-        "text": "Server binding",
-        "url": "gantt/serverbinding",
-        "packages": [
-          "mvc-offline"
-        ]
-      },
-      {
-        "text": "AngularJS",
-        "url": "gantt/angular",
-        "title": {
-            "kendo-ui": "AngularJS support in Kendo UI Gantt"
-        },
-        "meta": {
-            "kendo-ui": "AngularJS directive support for Kendo UI Gantt"
         },
         "packages": [
           "!mvc",
@@ -5525,39 +5728,111 @@
   },
   {
     "packages": [ "!mvc", "!jsp", "!php" ],
-    "text": "Templates",
-    "name": "templates",
-    "disableInMobile": true,
+    "category": "Framework",
+    "text": "Drawing API",
+    "name": "drawing",
+    "spriteCssClass": "drawingIcon",
+    "items": [
+      {
+        "text": "Basic Usage",
+        "url": "drawing/index",
+        "title": {
+            "kendo-ui": "Kendo UI Drawing API"
+        },
+        "meta": {
+            "kendo-ui": "This demo illustrates how the Kendo UI Drawing API can be used to draw basic shapes."
+        }
+      }, {
+        "text": "Manipulating Paths",
+        "url": "drawing/paths",
+        "title": {
+            "kendo-ui": "Kendo UI Drawing API"
+        },
+        "meta": {
+            "kendo-ui": "This demo illustrates how the Kendo UI Drawing API can be used to manipulate paths."
+        }
+      }, {
+        "text": "Export to PDF, Image, SVG",
+        "url": "drawing/export",
+        "new": true,
+        "packages": [
+          "!mvc"
+        ],
+        "title": {
+            "kendo-ui": "Kendo UI Drawing API Export functionality"
+        },
+        "meta": {
+            "kendo-ui": "This demo shows how to export HTML elements and Drawing surfaces to PDF, PNG Images or SVG and save them directly in the browser."
+        }
+      }, {
+        "text": "PDF Export Customizations",
+        "url": "drawing/custom-pdf-export",
+        "new": true,
+        "packages": [
+          "!mvc"
+        ],
+        "title": {
+            "kendo-ui": "Kendo UI PDF Export customizations"
+        },
+        "meta": {
+            "kendo-ui": "This demo shows how to customize layout and style of PDF exports."
+        }
+      }
+    ]
+  },
+  {
+    "packages": [ "!mvc", "!jsp", "!php" ],
+    "text": "Globalization",
+    "name": "globalization",
     "api": "framework/kendo",
     "documentation": {
-       "kendo-ui": "getting-started/framework/templates/overview"
+       "kendo-ui": "getting-started/framework/globalization/overview"
     },
     "forum": {
-       "kendo-ui": "kendo-ui/templates"
+       "kendo-ui": "kendo-ui/globalization"
     },
     "codelibrary": {
-       "kendo-ui": "kendo-ui/templates"
+       "kendo-ui": "kendo-ui/globalization"
     },
-    "spriteCssClass": "templatesIcon",
+    "spriteCssClass": "globalizationIcon",
     "items": [
       {
         "text": "Basic usage",
-        "url": "templates/index",
+        "url": "globalization/index",
         "title": {
-            "kendo-ui": "Kendo UI jQuery Templates Demo"
+            "kendo-ui": "Globalization example in Kendo UI Web framework"
         },
         "meta": {
-            "kendo-ui": "This example demonstrates the basic functionality of Kendo UI jQuery templates which can be used in Kendo UI Web framework."
+            "kendo-ui": "This is an example of globalization which is supported in Kendo UI Web framework."
+        }
+      }
+    ],
+    "category": "Framework"
+  },
+  {
+    "packages": [ "!mvc", "!jsp", "!php" ],
+    "text": "Integration with JS libraries",
+    "name": "integration",
+    "spriteCssClass": "integrationIcon",
+    "items": [
+      {
+        "text": "Kendo UI + Handlebars",
+        "url": "integration/index",
+        "title": {
+            "kendo-ui": "Integrating Handlebars templates with Kendo UI Web examples"
+        },
+        "meta": {
+            "kendo-ui": "This demo illustrates how Handlebars templates can be integrated with the robust Kendo UI framework for web app development."
         }
       },
       {
-        "text": "Expressions",
-        "url": "templates/expressions",
+        "text": "Kendo UI + Twitter Bootstrap",
+        "url": "integration/bootstrap",
         "title": {
-            "kendo-ui": "Examples of different Kendo UI jQuery templates"
+            "kendo-ui": "Integrating Twitter Bootstrap with Kendo UI responsive webapp example"
         },
         "meta": {
-            "kendo-ui": "These examples show different expressions of Kendo UI Templates which can be represented as a basic template, script elements, encoding HTML and JS code inside the template definition."
+            "kendo-ui": "This demo illustrates how Twitter Bootstrap can be integrated with the Kendo UI framework into a responsive web application."
         }
       }
     ],
@@ -5708,206 +5983,43 @@
   },
   {
     "packages": [ "!mvc", "!jsp", "!php" ],
-"text": "Effects",
-    "name": "fx",
+    "text": "Templates",
+    "name": "templates",
+    "disableInMobile": true,
     "api": "framework/kendo",
     "documentation": {
-       "kendo-ui": "getting-started/framework/fx/overview"
+       "kendo-ui": "getting-started/framework/templates/overview"
     },
     "forum": {
-       "kendo-ui": "kendo-ui/effects"
+       "kendo-ui": "kendo-ui/templates"
     },
     "codelibrary": {
-       "kendo-ui": "kendo-ui/effects"
+       "kendo-ui": "kendo-ui/templates"
     },
-    "spriteCssClass": "effectsIcon",
-    "items": [
-      {
-        "text": "Expand",
-        "url": "fx/expand",
-        "title": {
-            "kendo-ui": "Kendo UI Expand Effect Demo | Kendo UI Web framework"
-        },
-        "meta": {
-            "kendo-ui": "This example demonstrates how the expand effect is applied to jQuery widgets in Kendo UI Web framework."
-        }
-      },
-      {
-        "text": "Fade",
-        "url": "fx/fade",
-        "title": {
-            "kendo-ui": "Effects in Kendo UI Framework | Fade Away Demo"
-        },
-        "meta": {
-            "kendo-ui": "This Kendo UI Web example demonstrates how the elements gradually fade away once the user has clicked on them."
-        }
-      },
-      {
-        "text": "Slide In",
-        "url": "fx/slidein",
-        "title": {
-            "kendo-ui": "Demo for slide-in effect in Kendo UI framework for building HTML5 apps"
-        },
-        "meta": {
-            "kendo-ui": "This example demonstrates how the slide-in effect is applied in Kendo UI Web framework."
-        }
-      },
-      {
-        "text": "Flip",
-        "url": "fx/flip",
-        "title": {
-            "kendo-ui": "Interactive Flip Effect in Kendo UI Web framework"
-        },
-        "meta": {
-            "kendo-ui": "In this Kendo UI Web demo you can play with the powerful flip effect which is supported in the web framework."
-        }
-      },
-      {
-        "text": "Transfer",
-        "url": "fx/transfer",
-        "title": {
-            "kendo-ui": "Transfer effect demo in Kendo UI framework for web development"
-        },
-        "meta": {
-            "kendo-ui": "This example demonstrates how the transfer effect is applied in Kendo UI Web."
-        }
-      },
-      {
-        "text": "Zoom",
-        "url": "fx/zoom",
-        "title": {
-            "kendo-ui": "Zoom effect in Kendo UI Web framework | Kendo UI Web Demo"
-        },
-        "meta": {
-            "kendo-ui": "Just hover the mouse over the image and you will see how the zoom effect is implemented in Kendo UI Web framework."
-        }
-      },
-      {
-        "text": "Page Turn",
-        "url": "fx/pageturn",
-        "title": {
-            "kendo-ui": "Page turn effect in Kendo UI Web app framework | Kendo UI Web Demo"
-        },
-        "meta": {
-            "kendo-ui": "In this interactive demo you will see how the blazing fast page turn effect is supported in Kendo UI Web framework for building apps and modern websites."
-        }
-      },
-      {
-        "text": "Tile",
-        "url": "fx/tile",
-        "title": {
-            "kendo-ui": "Kendo UI Web framework effects | Interactive tile demo"
-        },
-        "meta": {
-            "kendo-ui": "This Kendo UI Web example shows how the tile effect is implemented to enhance end-user experience."
-        }
-      },
-      {
-        "text": "Replace",
-        "url": "fx/replace",
-        "title": {
-            "kendo-ui": "Replace effect"
-        },
-        "meta": {
-            "kendo-ui": "This demo showcases how to create custom CSS class based transition between two HTML elements using Kendo UI Replace effect"
-        }
-      },
-      {
-        "text": "Combined Effects",
-        "url": "fx/combined",
-        "title": {
-            "kendo-ui": "Combined Effects Demo in Kendo UI Web"
-        },
-        "meta": {
-            "kendo-ui": "This demo shows how different combined effects can be used while building apps with Kendo UI Web framework in order to deliver rich end-user experience."
-        }
-      },
-      {
-        "text": "Semantic Zoom",
-        "url": "fx/semantic-zoom",
-        "title": {
-            "kendo-ui": "Semantic Zoom effect"
-        },
-        "meta": {
-            "kendo-ui": "This demo showcases how to implement semantic zoom between views in a single-page Kendo UI application"
-        }
-      }
-    ],
-    "category": "Interactivity & UX"
-  },
-  {
-    "packages": [ "!mvc", "!jsp", "!php" ],
-    "text": "Drag & Drop",
-    "name": "dragdrop",
-    "api": "framework/draggable",
-    "documentation": {
-       "kendo-ui": "getting-started/framework/draganddrop/overview"
-    },
-    "forum": {
-       "kendo-ui": "kendo-ui/drag-and-drop"
-    },
-    "codelibrary": {
-       "kendo-ui": "kendo-ui/draganddrop"
-    },
-    "spriteCssClass": "dragDropIcon",
+    "spriteCssClass": "templatesIcon",
     "items": [
       {
         "text": "Basic usage",
-        "url": "dragdrop/index",
+        "url": "templates/index",
         "title": {
-            "kendo-ui": "Demo for Drag & Drop Component in Kendo UI jQuery framework"
+            "kendo-ui": "Kendo UI jQuery Templates Demo"
         },
         "meta": {
-            "kendo-ui": "This example illustrates the basic functionality of Kendo UI Drag & Drop component which provides a cross-browser, touch-friendly way to handle mouse and touch drag events."
+            "kendo-ui": "This example demonstrates the basic functionality of Kendo UI jQuery templates which can be used in Kendo UI Web framework."
         }
       },
       {
-        "text": "Container",
-        "url": "dragdrop/container",
+        "text": "Expressions",
+        "url": "templates/expressions",
         "title": {
-            "kendo-ui": "Example of Kendo UI Drag and Drop Component in a container"
+            "kendo-ui": "Examples of different Kendo UI jQuery templates"
         },
         "meta": {
-            "kendo-ui": "This demo illustrates how Kendo UI Drag and Drop component is used for draggable items in a container."
+            "kendo-ui": "These examples show different expressions of Kendo UI Templates which can be represented as a basic template, script elements, encoding HTML and JS code inside the template definition."
         }
-      },
-      {
-        "text": "Area",
-        "url": "dragdrop/area",
-        "title": {
-            "kendo-ui": "Example of jQuery Draggable Area | Kendo UI MVVM Demo"
-        },
-        "meta": {
-            "kendo-ui": "This demo shows how the draggable functionality in an area is enabled in Kendo UI MVVM framework."
-        }
-      },
-      {
-        "text": "Events",
-        "url": "dragdrop/events",
-        "title": {
-            "kendo-ui": "Events example for Kendo UI jQuery Draggable functionality"
-        },
-        "meta": {
-            "kendo-ui": "Learn more about draggable interaction with this events example for Kendo UI Draggable in Kendo UI MVVM."
-        }
-      },
-      {
-        "text": "AngularJS",
-        "url": "dragdrop/angular",
-        "title": {
-            "kendo-ui": "AngularJS support in Kendo UI Drag & Drop"
-        },
-        "meta": {
-            "kendo-ui": "AngularJS directive support for Kendo UI Drag & Drop"
-        },
-        "packages": [
-          "!mvc",
-          "!jsp",
-          "!php"
-        ]
       }
     ],
-    "category": "Interactivity & UX"
+    "category": "Framework"
   },
   {
     "packages": [ "!mvc", "!jsp", "!php" ],
@@ -5963,35 +6075,6 @@
       }
     ],
     "category": "Editors"
-  },
-  {
-    "packages": [ "!mvc", "!jsp", "!php" ],
-    "text": "Globalization",
-    "name": "globalization",
-    "api": "framework/kendo",
-    "documentation": {
-       "kendo-ui": "getting-started/framework/globalization/overview"
-    },
-    "forum": {
-       "kendo-ui": "kendo-ui/globalization"
-    },
-    "codelibrary": {
-       "kendo-ui": "kendo-ui/globalization"
-    },
-    "spriteCssClass": "globalizationIcon",
-    "items": [
-      {
-        "text": "Basic usage",
-        "url": "globalization/index",
-        "title": {
-            "kendo-ui": "Globalization example in Kendo UI Web framework"
-        },
-        "meta": {
-            "kendo-ui": "This is an example of globalization which is supported in Kendo UI Web framework."
-        }
-      }
-    ],
-    "category": "Framework"
   },
   {
     "packages": [ "!mvc", "!jsp", "!php" ],
@@ -6053,89 +6136,6 @@
       }
     ],
     "category": "Interactivity & UX"
-  },
-  {
-    "packages": [ "!mvc", "!jsp", "!php" ],
-    "text": "Integration with JS libraries",
-    "name": "integration",
-    "spriteCssClass": "integrationIcon",
-    "items": [
-      {
-        "text": "Kendo UI + Handlebars",
-        "url": "integration/index",
-        "title": {
-            "kendo-ui": "Integrating Handlebars templates with Kendo UI Web examples"
-        },
-        "meta": {
-            "kendo-ui": "This demo illustrates how Handlebars templates can be integrated with the robust Kendo UI framework for web app development."
-        }
-      },
-      {
-        "text": "Kendo UI + Twitter Bootstrap",
-        "url": "integration/bootstrap",
-        "title": {
-            "kendo-ui": "Integrating Twitter Bootstrap with Kendo UI responsive webapp example"
-        },
-        "meta": {
-            "kendo-ui": "This demo illustrates how Twitter Bootstrap can be integrated with the Kendo UI framework into a responsive web application."
-        }
-      }
-    ],
-    "category": "Framework"
-  },
-  {
-    "packages": [ "!mvc", "!jsp", "!php" ],
-    "category": "Framework",
-    "text": "Drawing API",
-    "name": "drawing",
-    "spriteCssClass": "drawingIcon",
-    "items": [
-      {
-        "text": "Basic Usage",
-        "url": "drawing/index",
-        "title": {
-            "kendo-ui": "Kendo UI Drawing API"
-        },
-        "meta": {
-            "kendo-ui": "This demo illustrates how the Kendo UI Drawing API can be used to draw basic shapes."
-        }
-      }, {
-        "text": "Manipulating Paths",
-        "url": "drawing/paths",
-        "title": {
-            "kendo-ui": "Kendo UI Drawing API"
-        },
-        "meta": {
-            "kendo-ui": "This demo illustrates how the Kendo UI Drawing API can be used to manipulate paths."
-        }
-      }, {
-        "text": "Export to PDF, Image, SVG",
-        "url": "drawing/export",
-        "new": true,
-        "packages": [
-          "!mvc"
-        ],
-        "title": {
-            "kendo-ui": "Kendo UI Drawing API Export functionality"
-        },
-        "meta": {
-            "kendo-ui": "This demo shows how to export HTML elements and Drawing surfaces to PDF, PNG Images or SVG and save them directly in the browser."
-        }
-      }, {
-        "text": "PDF Export Customizations",
-        "url": "drawing/custom-pdf-export",
-        "new": true,
-        "packages": [
-          "!mvc"
-        ],
-        "title": {
-            "kendo-ui": "Kendo UI PDF Export customizations"
-        },
-        "meta": {
-            "kendo-ui": "This demo shows how to customize layout and style of PDF exports."
-        }
-      }
-    ]
   },
   {
     "text": "Area Charts",
@@ -6342,7 +6342,7 @@
         "requiresServer": "true"
       }
     ],
-    "category": "Data Visualization"
+    "category": "Charts"
   },
   {
     "text": "Bar Charts",
@@ -6599,7 +6599,92 @@
       }
 
     ],
-    "category": "Data Visualization"
+    "category": "Charts"
+  },
+  {
+    "text": "Barcode",
+    "name": "barcode",
+    "pro": "true",
+    "spriteCssClass": "barcodeIcon",
+    "api": "dataviz/barcode",
+    "documentation": {
+       "kendo-ui": "getting-started/dataviz/barcode/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/barcode/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/barcode/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/barcode/overview"
+    },
+    "forum": {
+       "kendo-ui": "kendo-ui/barcode",
+       "aspnet-mvc": "aspnet-mvc/barcode",
+       "jsp-ui": "jsp/barcode",
+       "php-ui": "php/barcode"
+    },
+    "codelibrary": {
+       "kendo-ui": "kendo-ui/barcode",
+       "aspnet-mvc": "aspnet-mvc/barcode",
+       "jsp-ui": "jsp/barcode",
+       "php-ui": "php/barcode"
+    },
+    "items": [
+      {
+        "text": "Basic usage",
+        "url": "barcode/index",
+        "title": {
+            "kendo-ui": "Kendo UI Barcode Demo",
+			"aspnet-mvc": "ASP.NET MVC Barcode Demo"
+        },
+        "meta": {
+            "kendo-ui": "This sample demonstrates the core functionality of Kendo UI Barcode which helps you easily encode data in machine readable format.",
+			"aspnet-mvc": "This sample demonstrates the core functionality of ASP.NET MVC Barcode which helps you easily encode data in machine readable format."
+        }
+      },
+      {
+        "text": "API",
+        "url": "barcode/api",
+        "title": {
+            "kendo-ui": "Kendo UI Barcode API Demo",
+			"aspnet-mvc": "ASP.NET MVC Barcode API Demo"
+        },
+        "meta": {
+            "kendo-ui": "This sample demonstrates the different symbologies the Barcode support and the different options that could be set",
+			"aspnet-mvc": "This sample demonstrates the different symbologies the ASP.NET MVC Barcode supports and the different options that could be set."
+        },
+        "packages": [
+          "!offline"
+        ]
+      },
+      {
+        "text": "MVVM",
+        "url": "barcode/mvvm",
+        "title": {
+            "kendo-ui": "MVVM support in Kendo UI Barcode"
+        },
+        "meta": {
+            "kendo-ui": "Value MVVM binding support in Kendo UI Barcode"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
+      },
+      {
+        "text": "AngularJS",
+        "url": "barcode/angular",
+        "title": {
+            "kendo-ui": "AngularJS support in Kendo UI Barcode"
+        },
+        "meta": {
+            "kendo-ui": "AngularJS directive support in Kendo UI Barcode"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
+      }
+    ],
+    "category": "Barcode & QR Code"
   },
   {
     "text": "Box Plot Charts",
@@ -6698,7 +6783,7 @@
       }
 
     ],
-    "category": "Data Visualization"
+    "category": "Charts"
   },
   {
     "text": "Bubble Charts",
@@ -6809,7 +6894,7 @@
       }
 
     ],
-    "category": "Data Visualization"
+    "category": "Charts"
   },
   {
     "text": "Bullet Charts",
@@ -6907,7 +6992,102 @@
       }
 
     ],
-    "category": "Data Visualization"
+    "category": "Charts"
+  },
+  {
+    "text": "Chart API",
+    "name": "chart-api",
+    "new": true,
+    "pro": "true",
+    "api": "dataviz/chart",
+    "spriteCssClass": "chartIcon",
+    "documentation": {
+       "kendo-ui": "getting-started/dataviz/chart/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/chart/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/chart/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/chart/overview"
+    },
+    "forum": {
+       "kendo-ui": "kendo-ui/charts",
+       "aspnet-mvc": "aspnet-mvc/chart",
+       "jsp-ui": "jsp/chart",
+       "php-ui": "php/chart"
+    },
+    "codelibrary": {
+       "kendo-ui": "kendo-ui/charts",
+       "aspnet-mvc": "aspnet-mvc/chart",
+       "jsp-ui": "jsp/chart",
+       "php-ui": "php/chart"
+    },
+    "items": [
+      {
+        "text": "Methods",
+        "url": "chart-api/index",
+        "title": {
+            "kendo-ui": "Kendo UI Charts API methods",
+            "aspnet-mvc": " Charting API methods for ASP.NET MVC and jQuery "
+        },
+        "meta": {
+            "kendo-ui": "This demo shows how the API manipulates the methods, applicable to Kendo UI jQuery-based chart components.",
+            "aspnet-mvc": "Play with this demo and explore all API functions of Telerik Charting control for ASP.NET MVC."
+        }
+      },
+      {
+        "text": "Events",
+        "url": "chart-api/events",
+        "title": {
+            "kendo-ui": "Events API for Kendo UI HTML5 charting components | Kendo UI Demos",
+            "aspnet-mvc": "Chart API events in ASP.NET MVC | UI for ASP.NET MVC demos"
+        },
+        "meta": {
+            "kendo-ui": "This sample demonstrates the events which are specific to Kendo UI HTML5 chart components.",
+            "aspnet-mvc": "This demo illustrates the use of Telerik ASP.NET MVC API events."
+        },
+        "requiresServer": "true"
+      },
+      {
+        "text": "PDF Export",
+        "new": true,
+        "url": "chart-api/pdf-export",
+        "title": {
+            "kendo-ui": "Kendo UI Chart saveAsPDF API method"
+        },
+        "meta": {
+            "kendo-ui": "This demo shows how to save the chart as PDF directly in the browser."
+        }
+      },
+      {
+        "text": "Advanced Export",
+        "new": true,
+        "url": "chart-api/export",
+        "title": {
+            "kendo-ui": "Kendo UI Charts Export API methods"
+        },
+        "meta": {
+            "kendo-ui": "This demo shows how to export charts to PDF, PNG Images or SVG and save them directly in the browser."
+        }
+      },
+      {
+        "text": "Selection",
+        "url": "chart-api/selection",
+        "title": {
+            "kendo-ui": "Axis selection in Kendo UI charting components | Kendo UI Demo",
+            "aspnet-mvc": "ASP.NET MVC Chart API Selection Demo"
+        },
+        "meta": {
+            "kendo-ui": "Take a look at this example that illustrates how to configure the axis selection in Kendo UI HTML5-powered charting widgets.",
+            "aspnet-mvc": "In this demo you will see how the API is used for a selection in Telerik ASP.NET MVC Chart."
+        }
+      },
+      {
+        "text": "Benchmark",
+        "packages": [
+          "!mvc"
+        ],
+        "url": "chart-api/benchmark"
+      }
+    ],
+    "category": "Charts"
   },
   {
     "text": "Donut Charts",
@@ -7017,7 +7197,7 @@
       }
 
     ],
-    "category": "Data Visualization"
+    "category": "Charts"
   },
   {
     "text": "Funnel Charts",
@@ -7133,7 +7313,238 @@
       }
 
     ],
-    "category": "Data Visualization"
+    "category": "Charts"
+  },
+  {
+    "text": "Linear Gauge",
+    "name": "linear-gauge",
+    "pro": "true",
+    "spriteCssClass": "gaugeLinearIcon",
+    "api": "dataviz/lineargauge",
+    "documentation": {
+       "kendo-ui": "getting-started/dataviz/lineargauge/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/lineargauge/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/lineargauge/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/lineargauge/overview"
+    },
+    "forum": {
+       "kendo-ui": "kendo-ui/gauges",
+       "aspnet-mvc": "aspnet-mvc/gauge",
+       "jsp-ui": "jsp/gauge",
+       "php-ui": "php/gauge"
+    },
+    "codelibrary": {
+       "kendo-ui": "kendo-ui/gauges",
+       "aspnet-mvc": "aspnet-mvc/gauge",
+       "jsp-ui": "jsp/gauge",
+       "php-ui": "php/gauge"
+    },
+    "items": [
+      {
+        "text": "Basic usage",
+        "url": "linear-gauge/index",
+        "title": {
+            "kendo-ui": "Kendo UI jQuery-powered Linear Gauge Example",
+			"aspnet-mvc": "ASP.NET MVC Linear Gauge Example"
+        },
+        "meta": {
+            "kendo-ui": "This example shows how you can easily implement Kendo UI Linear Gauge in your HTML5 web application. Draw end users attention to a certain range of values.",
+			"aspnet-mvc": "This example shows how you can easily implement ASP.NET MVC Linear Gauge in your MVC web application. Draw end users attention to a certain range of values."
+        }
+      },
+      {
+        "text": "Scale options",
+        "url": "linear-gauge/scale-options",
+        "title": {
+            "kendo-ui": "Scale customization example for Kendo UI Linear Gauge",
+			"aspnet-mvc": "Scale customization example for ASP.NET MVC Linear Gauge"
+        },
+        "meta": {
+            "kendo-ui": "This sample illustrates how you can customize Kendo UI Linear Gauge by changing the location of the gauge scale and its appearance.",
+			"aspnet-mvc": "This sample illustrates how you can customize ASP.NET MVC Linear Gauge by changing the location of the gauge scale and its appearance."
+        }
+      },
+      {
+        "text": "Multiple pointers",
+        "url": "linear-gauge/multiple-pointers",
+        "new": true,
+        "title": {
+            "kendo-ui": "Kendo UI Linear Gauge multiple pointers demo",
+            "aspnet-mvc": "ASP.NET MVC Linear Gauge multiple pointers demo"
+        },
+        "meta": {
+            "kendo-ui": "This example shows how easily you can configure the Linear gauge to use multiple pointers.",
+            "aspnet-mvc": "This example shows how easily you can configure the ASP.NET MVC Linear gauge to use multiple pointers."
+        }
+      },
+      {
+        "text": "Export to PDF, Image, SVG",
+        "url": "linear-gauge/export",
+        "new": true,
+        "title": {
+            "kendo-ui": "Kendo UI Linear Gauge export demo",
+            "aspnet-mvc": "ASP.NET MVC Linear Gauge export demo"
+        },
+        "meta": {
+            "kendo-ui": "This example shows how easily you can export the linear gauge to PDF, Image and SVG.",
+            "aspnet-mvc": "This example shows how easily you can export the ASP.NET MVC linear gauge to PDF, Image and SVG."
+        }
+      },
+      {
+        "text": "MVVM",
+        "url": "linear-gauge/mvvm",
+        "title": {
+            "kendo-ui": "MVVM support in Kendo UI Linear Gauge"
+        },
+        "meta": {
+            "kendo-ui": "Value and visible MVVM binding support in Kendo UI Linear Gauge"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
+      },
+      {
+        "text": "AngularJS",
+        "url": "linear-gauge/angular",
+        "title": {
+            "kendo-ui": "AngularJS support in Kendo UI Linear Gauge"
+        },
+        "meta": {
+            "kendo-ui": "AngularJS directives support in Kendo UI Linear Gauge"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
+      }
+    ],
+    "category": "Gauges"
+  },
+  {
+    "text": "Radial Gauge",
+    "name": "radial-gauge",
+    "pro": "true",
+    "spriteCssClass": "gaugeRadialIcon",
+    "api": "dataviz/radialgauge",
+    "documentation": {
+       "kendo-ui": "getting-started/dataviz/radialgauge/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/radialgauge/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/radialgauge/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/radialgauge/overview"
+    },
+    "forum": {
+       "kendo-ui": "kendo-ui/gauges",
+       "aspnet-mvc": "aspnet-mvc/gauge",
+       "jsp-ui": "jsp/gauge",
+       "php-ui": "php/gauge"
+    },
+    "codelibrary": {
+       "kendo-ui": "kendo-ui/gauges",
+       "aspnet-mvc": "aspnet-mvc/gauge",
+       "jsp-ui": "jsp/gauge",
+       "php-ui": "php/gauge"
+    },
+    "items": [
+      {
+        "text": "Basic usage",
+        "url": "radial-gauge/index",
+        "title": {
+            "kendo-ui": "Demo for core features in Kendo UI Radial Gauge widget",
+			"aspnet-mvc": "Demo for core features in ASP.NET MVC Radial Gauge control"
+        },
+        "meta": {
+            "kendo-ui": "This sample demonstrates the core functionality of Kendo UI Radial Gauge which helps you easily visualize an indicator within a range of values.",
+			"aspnet-mvc": "This sample demonstrates the core functionality of ASP.NET MVC Radial Gauge which helps you easily visualize an indicator within a range of values."
+        }
+      },
+      {
+        "text": "Scale options",
+        "url": "radial-gauge/scale-options",
+        "title": {
+            "kendo-ui": "Kendo UI Radial Gauge scale customization demo",
+			"aspnet-mvc": "ASP.NET MVC Radial Gauge scale customization demo"
+        },
+        "meta": {
+            "kendo-ui": "This example shows how you can easily use simple options to configure the gauge, enable/disable scale ranges and gauge labels.",
+			"aspnet-mvc": "This example shows how you can easily use simple options to configure the ASP.NET MVC radial gauge, enable/disable scale ranges and gauge labels."
+        }
+      },
+      {
+        "text": "Multiple pointers",
+        "url": "radial-gauge/multiple-pointers",
+        "new": true,
+        "title": {
+            "kendo-ui": "Kendo UI Radial Gauge multiple pointers demo",
+            "aspnet-mvc": "ASP.NET MVC Radial Gauge multiple pointers demo"
+        },
+        "meta": {
+            "kendo-ui": "This example shows how easily you can configure the radial gauge to use multiple pointers.",
+            "aspnet-mvc": "This example shows how easily you can configure the ASP.NET MVC radial gauge to use multiple pointers."
+        }
+      },
+      {
+        "text": "Export to PDF, Image, SVG",
+        "url": "radial-gauge/export",
+        "new": true,
+        "title": {
+            "kendo-ui": "Kendo UI Radial Gauge export demo",
+            "aspnet-mvc": "ASP.NET MVC Radial Gauge export demo"
+        },
+        "meta": {
+            "kendo-ui": "This example shows how easily you can export the radial gauge to PDF, Image and SVG.",
+            "aspnet-mvc": "This example shows how easily you can export the ASP.NET MVC radial gauge to PDF, Image and SVG."
+        }
+      },
+      {
+        "text": "MVVM",
+        "url": "radial-gauge/mvvm",
+        "title": {
+            "kendo-ui": "MVVM support in Kendo UI Radial Gauge"
+        },
+        "meta": {
+            "kendo-ui": "Value and visible MVVM binding support in Kendo UI Radial Gauge"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
+      },
+      {
+        "text": "AngularJS",
+        "url": "radial-gauge/angular",
+        "title": {
+            "kendo-ui": "AngularJS support in Kendo UI Radial Gauge"
+        },
+        "meta": {
+            "kendo-ui": "AngularJS directives support in Kendo UI Radial Gauge"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
+      },
+      {
+        "text": "Car Dashboard",
+        "url": "radial-gauge/car-dashboard",
+        "title": {
+            "kendo-ui": "Sample car dashboard, built with Kendo UI DataViz components"
+        },
+        "meta": {
+            "kendo-ui": "This sample demonstrates the use of Kendo UI Gauges"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
+      }
+    ],
+    "category": "Gauges"
   },
   {
     "text": "Line Charts",
@@ -7353,7 +7764,265 @@
       }
 
     ],
-    "category": "Data Visualization"
+    "category": "Charts"
+  },
+  {
+    "text": "Diagram",
+    "name": "diagram",
+    "pro": "true",
+    "api": "dataviz/diagram",
+    "documentation": {
+       "kendo-ui": "getting-started/dataviz/diagram/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/diagram/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/diagram/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/diagram/overview"
+    },
+    "forum": {
+       "kendo-ui": "kendo-ui/diagram",
+       "aspnet-mvc": "aspnet-mvc/diagram",
+       "jsp-ui": "jsp/diagram",
+       "php-ui": "php/diagram"
+    },
+    "codelibrary": {
+       "kendo-ui": "kendo-ui/diagram",
+       "aspnet-mvc": "aspnet-mvc/diagram",
+       "jsp-ui": "jsp/diagram",
+       "php-ui": "php/diagram"
+    },
+    "spriteCssClass": "diagramIcon",
+    "items": [
+      {
+        "text": "Basic usage",
+        "url": "diagram/index",
+        "title": {
+            "kendo-ui": "Example of Kendo UI Diagram with a simple layout",
+			"aspnet-mvc": "Example of ASP.NET MVC Diagram with a simple layout"
+        },
+        "meta": {
+            "kendo-ui": "With this demo built with Kendo UI, you will be able to find out how Kendo UI Diagram widget can be implemented for hierarchical diagrams.",
+			"aspnet-mvc": "With this demo built with ASP.NET MVC, you will be able to find out how ASP.NET MVC Diagram control can be implemented for hierarchical diagrams."
+        }
+      },
+      {
+        "text": "Built-in Layouts",
+        "url": "diagram/layout",
+        "title": {
+            "kendo-ui": "Example of Kendo UI Diagram with different layouts",
+			"aspnet-mvc": "Example of ASP.NET MVC Diagram with different layouts"
+        },
+        "meta": {
+            "kendo-ui": "This sample demonstrates the built-in layouts which are specific to Kendo UI Diagram component.",
+			"aspnet-mvc": "This sample demonstrates the built-in layouts which are specific to ASP.NET MVC Diagram component."
+        }
+      },
+      {
+        "text": "Editing",
+        "new": true,
+        "url": "diagram/editing",
+        "title": {
+            "kendo-ui": "Kendo UI Diagram Editing",
+			"aspnet-mvc": "Example of ASP.NET MVC Diagram with editing"
+        },
+        "meta": {
+            "kendo-ui": "In this example you will learn how you can easily use editing operations in Kendo UI Diagram.",
+			"aspnet-mvc": "In this example you will learn how you can easily use editing operations in ASP.NET MVC Diagram."
+        }
+      },
+      {
+        "text": "PDF Export",
+        "new": true,
+        "url": "diagram/pdf-export",
+        "title": {
+            "kendo-ui": "Kendo UI Diagram saveAsPDF API method"
+        },
+        "meta": {
+            "kendo-ui": "This demo shows how to save the diagram as PDF directly in the browser."
+        }
+      },
+      {
+        "text": "Advanced Export",
+        "new": true,
+        "url": "diagram/export",
+        "title": {
+            "kendo-ui": "Kendo UI Diagram Export API methods"
+        },
+        "meta": {
+            "kendo-ui": "This demo shows how to export diagrams to PDF, PNG Images or SVG and save them directly in the browser."
+        }
+      },
+	  {
+        "text": "Events",
+        "url": "diagram/events",
+        "title": {
+            "kendo-ui": "Example of using events in Kendo UI Diagram control",
+			"aspnet-mvc": "Example of using events in ASP.NET MVC Diagram control"
+        },
+        "meta": {
+            "kendo-ui": "This example demonstrates different events which are available in Kendo UI Diagram widget.",
+			"aspnet-mvc": "This example demonstrates all the different events available in Telerik ASP.NET MVC Diagram control."
+        }
+      },
+	  {
+        "text": "API",
+        "url": "diagram/api",
+        "title": {
+            "kendo-ui": "Example of Kendo UI Diagram API",
+			"aspnet-mvc": "Example of ASP.NET MVC Diagram API"
+        },
+        "meta": {
+            "kendo-ui": "The API Functions of Kendo UI Diagram widget give you the option to add/remove shapes and connections, set the current pan and zoom, select elements.",
+			"aspnet-mvc": "The API Functions of ASP.NET MVC Diagram control give you the option to add/remove shapes and connections, set the current pan and zoom, select elements."
+        }
+      },
+      {
+        "text": "MVVM",
+        "url": "diagram/mvvm",
+        "title": {
+            "kendo-ui": "MVVM support in Kendo UI Diagram"
+        },
+        "meta": {
+            "kendo-ui": "Source, events and visible MVVM binding support in Kendo UI Diagram"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
+      },
+      {
+        "text": "AngularJS",
+        "disableInMobile": true,
+        "url": "diagram/angular",
+        "title": {
+            "kendo-ui": "AngularJS support in Kendo UI Diagram"
+        },
+        "meta": {
+            "kendo-ui": "AngularJS directive support for Kendo UI Diagram"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
+      }
+    ],
+    "category": "Diagrams & Maps"
+
+  },
+  {
+    "text": "Map",
+    "name": "map",
+    "pro": "true",
+    "api": "dataviz/map",
+    "documentation": {
+       "kendo-ui": "getting-started/dataviz/map/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/map/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/map/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/map/overview"
+    },
+    "forum": {
+       "kendo-ui": "kendo-ui/map",
+       "aspnet-mvc": "aspnet-mvc/map",
+       "jsp-ui": "jsp/map",
+       "php-ui": "php/map"
+    },
+    "codelibrary": {
+       "kendo-ui": "kendo-ui/map",
+       "aspnet-mvc": "aspnet-mvc/map",
+       "jsp-ui": "jsp/map",
+       "php-ui": "php/map"
+    },
+    "spriteCssClass": "mapIcon",
+    "items": [
+      {
+        "text": "Basic usage",
+        "url": "map/index",
+        "title": {
+            "kendo-ui": "Example of Kendo UI Map with a simple tile layer",
+			"aspnet-mvc": "Example of ASP.NET MVC Map with a simple tile layer"
+        },
+        "meta": {
+            "kendo-ui": "With this demo built with Kendo UI, you will be able to find out how Kendo UI Map widget can be implemented for tile maps.",
+			"aspnet-mvc": "With this demo built with ASP.NET MVC, you will be able to find out how ASP.NET MVC Map control can be implemented for tile maps."
+        }
+      },
+      {
+        "text": "Bing tile layer",
+        "url": "map/bing",
+		"title": {
+            "kendo-ui": "Bing tile layer in Kendo UI Map",
+			"aspnet-mvc": "Bing tile layer in ASP.NET MVC Map"
+        },
+        "meta": {
+            "kendo-ui": "This demo demostrates how you can use Bing tile layer in your Hendo UI HTML5 Map.",
+			"aspnet-mvc": "This demo demostrates how you can use Bing tile layer in your ASP.NET MVC Map."
+        }
+      },
+      {
+        "text": "Bubble layer",
+        "url": "map/bubble-layer",
+        "title": {
+            "kendo-ui": "Displaying Bubble Kendo UI map layer"
+        },
+        "meta": {
+            "kendo-ui": "This demo illustrates how to bind a Kendo UI bubble map layer to remote data."
+        },
+        "requiresServer": "true"
+      },
+      {
+        "text": "Binding to GeoJSON",
+        "url": "map/geojson",
+        "title": {
+            "kendo-ui": "Displaying GeoJSON shapes Kendo UI map layer",
+			"aspnet-mvc": "Displaying GeoJSON shapes in ASP.NET MVC map"
+        },
+        "meta": {
+            "kendo-ui": "This demo illustrates how to bind a Kendo UI map layer to GeoJSON shapes.",
+			"aspnet-mvc": "This demo illustrates how to bind an ASP.NET MVC map layer to GeoJSON shapes."
+        },
+        "requiresServer": "true"
+      },
+      {
+        "text": "Binding markers to remote data",
+        "url": "map/remote-markers",
+        "title": {
+            "kendo-ui": "Load map markers in a Kendo UI map layer",
+			"aspnet-mvc": "Load map markers in a ASP.NET MVC map layer"
+        },
+        "meta": {
+            "kendo-ui": "This demo illustrates how to bind a Kendo UI marker layer.",
+			"aspnet-mvc": "This demo illustrates how to bind a ASP.NET MVC marker layer."
+        },
+        "requiresServer": "true"
+      },
+      {
+        "text": "Events",
+        "url": "map/events",
+        "title": {
+            "kendo-ui": "Events API for Kendo UI Map component",
+			"aspnet-mvc": "Events API for ASP.NET MVC Map component"
+        },
+        "meta": {
+            "kendo-ui": "This sample demonstrates the events which are specific to Kendo UI Map component.",
+			"aspnet-mvc": "This sample demonstrates the events which are specific to ASP.NET MVC Map component."
+        },
+        "requiresServer": "true"
+      },
+      {
+        "text": "API",
+        "url": "map/api",
+        "title": {
+            "kendo-ui": "API for Kendo UI Map component",
+			"aspnet-mvc": "API for ASP.NET MVC Map component"
+        },
+        "meta": {
+            "kendo-ui": "This sample demonstrates the public methods which are specific to Kendo UI Map component.",
+			"aspnet-mvc": "This sample demonstrates the public methods which are specific to ASP.NET MVC Map component."
+        },
+        "requiresServer": "true"
+      }
+    ],
+    "category": "Diagrams & Maps"
   },
   {
     "text": "Pie Charts",
@@ -7463,7 +8132,7 @@
       }
 
     ],
-    "category": "Data Visualization"
+    "category": "Charts"
   },
   {
     "text": "Polar Charts",
@@ -7597,7 +8266,92 @@
       }
 
     ],
-    "category": "Data Visualization"
+    "category": "Charts"
+  },
+  {
+    "text": "QR Code",
+    "name": "qrcode",
+    "pro": "true",
+    "spriteCssClass": "qrcodeIcon",
+    "api": "dataviz/qrcode",
+    "documentation": {
+       "kendo-ui": "getting-started/dataviz/qrcode/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/rqcode/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/qrcode/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/qrcode/overview"
+    },
+    "forum": {
+       "kendo-ui": "kendo-ui/qrcode",
+       "aspnet-mvc": "aspnet-mvc/qrcode",
+       "jsp-ui": "jsp/qrcode",
+       "php-ui": "php/qrcode"
+    },
+    "codelibrary": {
+       "kendo-ui": "kendo-ui/qrcode",
+       "aspnet-mvc": "aspnet-mvc/qrcode",
+       "jsp-ui": "jsp/qrcode",
+       "php-ui": "php/qrcode"
+    },
+    "items": [
+      {
+        "text": "Basic usage",
+        "url": "qrcode/index",
+        "title": {
+            "kendo-ui": "Kendo UI QRCode Demo",
+			"aspnet-mvc": "ASP.NET MVC QRCode Demo"
+        },
+        "meta": {
+            "kendo-ui": "This sample demonstrates the core functionality of Kendo UI QRCode which helps you easily encode large amounts of data in a machine readable format.",
+			"aspnet-mvc": "This sample demonstrates the core functionality of ASP.NET MVC QRCode which helps you easily encode large amounts of data in a machine readable format."
+        }
+      },
+      {
+        "text": "API",
+        "url": "qrcode/api",
+        "title": {
+            "kendo-ui": "Kendo UI QRCode API demo",
+			"aspnet-mvc": "ASP.NET MVC QRCode API demo"
+        },
+        "meta": {
+            "kendo-ui": "This demo shows how Kendo UI QRCode Widget API works and what kind of functions it supports.",
+			"aspnet-mvc": "This demo shows how ASP.NET MVC QRCode control API works and what kind of functions it supports."
+        },
+        "packages": [
+          "!offline"
+        ]
+      },
+      {
+        "text": "MVVM",
+        "url": "qrcode/mvvm",
+        "title": {
+            "kendo-ui": "MVVM support in Kendo UI QR Code"
+        },
+        "meta": {
+            "kendo-ui": "Value MVVM binding support in Kendo UI QR Code"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
+      },
+      {
+        "text": "AngularJS",
+        "url": "qrcode/angular",
+        "title": {
+            "kendo-ui": "AngularJS support in Kendo UI QR Code"
+        },
+        "meta": {
+            "kendo-ui": "AngularJS directive support in Kendo UI QR Code"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
+      }
+    ],
+    "category": "Barcode & QR Code"
   },
   {
     "text": "Radar Charts",
@@ -7745,10 +8499,10 @@
       }
 
     ],
-    "category": "Data Visualization"
+    "category": "Charts"
   },
   {
-	"text": "Range Bar Charts",
+    "text": "Range Bar Charts",
     "pro": "true",
     "api": "dataviz/chart",
 	"documentation": {
@@ -7804,76 +8558,7 @@
 	],
 	"spriteCssClass": "chartRangeBarIcon",
 	"name": "range-bar-charts",
-	"category": "Data Visualization"
-  },
-  {
-    "text": "Waterfall Charts",
-    "name": "waterfall-charts",
-    "pro": "true",
-    "api": "dataviz/chart",
-    "documentation": {
-       "kendo-ui": "getting-started/dataviz/chart/overview",
-       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/chart/overview",
-       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/chart/overview",
-       "php-ui": "getting-started/using-kendo-with/php/widgets/chart/overview"
-    },
-    "forum": {
-       "kendo-ui": "kendo-ui/charts",
-       "aspnet-mvc": "aspnet-mvc/chart",
-       "jsp-ui": "jsp/chart",
-       "php-ui": "php/chart"
-    },
-    "codelibrary": {
-       "kendo-ui": "kendo-ui/charts",
-       "aspnet-mvc": "aspnet-mvc/chart",
-       "jsp-ui": "jsp/chart",
-       "php-ui": "php/chart"
-    },
-    "items": [
-        {
-            "text": "Basic usage",
-            "url": "waterfall-charts/index",
-            "title": {
-                "kendo-ui": "Demo for Kendo UI Waterfall Chart"
-            },
-            "meta": {
-                "kendo-ui": "This example illustrates the basic usage of Kendo UI Waterfall Chart."
-            }
-        },
-        {
-            "text": "Horizontal Waterfall",
-            "url": "waterfall-charts/horizontal",
-            "title": {
-                "kendo-ui": "Demo for horizontal Kendo UI Waterfall Chart"
-            },
-            "meta": {
-                "kendo-ui": "This example illustrates how to set the Kendo UI Waterfall Chart orientation."
-            }
-        },
-        {
-            "text": "Binding to local data",
-            "url": "waterfall-charts/local-data-binding",
-            "title": {
-                "kendo-ui": "Local data-binding example | Kendo UI Waterfall Charts"
-            },
-            "meta": {
-                "kendo-ui": "This demo shows how the local data-binding is supported in Kendo UI Waterfall Charts. Use the demo source code to try the feature of the widget."
-            }
-        },
-        {
-            "text": "Binding to remote data",
-            "url": "waterfall-charts/remote-data-binding",
-            "title": {
-                "kendo-ui": "Binding to remote data demo | Kendo UI HTML5 jQuery Waterfall Charts"
-            },
-            "meta": {
-                "kendo-ui": "This demo shows how Kendo UI Waterfall Chart widget can be bound to remote data to produce high-performance report in your business app."
-            },
-            "requiresServer": "true"
-        }
-    ],
-    "spriteCssClass": "chartWaterfallIcon",
-    "category": "Data Visualization"
+	"category": "Charts"
   },
   {
     "text": "Scatter Charts",
@@ -8045,7 +8730,7 @@
         "requiresServer": "true"
       }
     ],
-    "category": "Data Visualization"
+    "category": "Charts"
   },
   {
     "text": "Sparklines",
@@ -8141,506 +8826,10 @@
       }
 
     ],
-    "category": "Data Visualization"
+    "category": "Charts"
   },
   {
-    "text": "Chart API",
-    "name": "chart-api",
-    "new": true,
-    "pro": "true",
-    "api": "dataviz/chart",
-    "spriteCssClass": "chartIcon",
-    "documentation": {
-       "kendo-ui": "getting-started/dataviz/chart/overview",
-       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/chart/overview",
-       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/chart/overview",
-       "php-ui": "getting-started/using-kendo-with/php/widgets/chart/overview"
-    },
-    "forum": {
-       "kendo-ui": "kendo-ui/charts",
-       "aspnet-mvc": "aspnet-mvc/chart",
-       "jsp-ui": "jsp/chart",
-       "php-ui": "php/chart"
-    },
-    "codelibrary": {
-       "kendo-ui": "kendo-ui/charts",
-       "aspnet-mvc": "aspnet-mvc/chart",
-       "jsp-ui": "jsp/chart",
-       "php-ui": "php/chart"
-    },
-    "items": [
-      {
-        "text": "Methods",
-        "url": "chart-api/index",
-        "title": {
-            "kendo-ui": "Kendo UI Charts API methods",
-            "aspnet-mvc": " Charting API methods for ASP.NET MVC and jQuery "
-        },
-        "meta": {
-            "kendo-ui": "This demo shows how the API manipulates the methods, applicable to Kendo UI jQuery-based chart components.",
-            "aspnet-mvc": "Play with this demo and explore all API functions of Telerik Charting control for ASP.NET MVC."
-        }
-      },
-      {
-        "text": "Events",
-        "url": "chart-api/events",
-        "title": {
-            "kendo-ui": "Events API for Kendo UI HTML5 charting components | Kendo UI Demos",
-            "aspnet-mvc": "Chart API events in ASP.NET MVC | UI for ASP.NET MVC demos"
-        },
-        "meta": {
-            "kendo-ui": "This sample demonstrates the events which are specific to Kendo UI HTML5 chart components.",
-            "aspnet-mvc": "This demo illustrates the use of Telerik ASP.NET MVC API events."
-        },
-        "requiresServer": "true"
-      },
-      {
-        "text": "PDF Export",
-        "new": true,
-        "url": "chart-api/pdf-export",
-        "title": {
-            "kendo-ui": "Kendo UI Chart saveAsPDF API method"
-        },
-        "meta": {
-            "kendo-ui": "This demo shows how to save the chart as PDF directly in the browser."
-        }
-      },
-      {
-        "text": "Advanced Export",
-        "new": true,
-        "url": "chart-api/export",
-        "title": {
-            "kendo-ui": "Kendo UI Charts Export API methods"
-        },
-        "meta": {
-            "kendo-ui": "This demo shows how to export charts to PDF, PNG Images or SVG and save them directly in the browser."
-        }
-      },
-      {
-        "text": "Selection",
-        "url": "chart-api/selection",
-        "title": {
-            "kendo-ui": "Axis selection in Kendo UI charting components | Kendo UI Demo",
-            "aspnet-mvc": "ASP.NET MVC Chart API Selection Demo"
-        },
-        "meta": {
-            "kendo-ui": "Take a look at this example that illustrates how to configure the axis selection in Kendo UI HTML5-powered charting widgets.",
-            "aspnet-mvc": "In this demo you will see how the API is used for a selection in Telerik ASP.NET MVC Chart."
-        }
-      },
-      {
-        "text": "Benchmark",
-        "packages": [
-          "!mvc"
-        ],
-        "url": "chart-api/benchmark"
-      }
-    ],
-    "category": "Data Visualization"
-  },
-  {
-    "text": "Linear Gauge",
-    "name": "linear-gauge",
-    "pro": "true",
-    "spriteCssClass": "gaugeLinearIcon",
-    "api": "dataviz/lineargauge",
-    "documentation": {
-       "kendo-ui": "getting-started/dataviz/lineargauge/overview",
-       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/lineargauge/overview",
-       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/lineargauge/overview",
-       "php-ui": "getting-started/using-kendo-with/php/widgets/lineargauge/overview"
-    },
-    "forum": {
-       "kendo-ui": "kendo-ui/gauges",
-       "aspnet-mvc": "aspnet-mvc/gauge",
-       "jsp-ui": "jsp/gauge",
-       "php-ui": "php/gauge"
-    },
-    "codelibrary": {
-       "kendo-ui": "kendo-ui/gauges",
-       "aspnet-mvc": "aspnet-mvc/gauge",
-       "jsp-ui": "jsp/gauge",
-       "php-ui": "php/gauge"
-    },
-    "items": [
-      {
-        "text": "Basic usage",
-        "url": "linear-gauge/index",
-        "title": {
-            "kendo-ui": "Kendo UI jQuery-powered Linear Gauge Example",
-			"aspnet-mvc": "ASP.NET MVC Linear Gauge Example"
-        },
-        "meta": {
-            "kendo-ui": "This example shows how you can easily implement Kendo UI Linear Gauge in your HTML5 web application. Draw end users attention to a certain range of values.",
-			"aspnet-mvc": "This example shows how you can easily implement ASP.NET MVC Linear Gauge in your MVC web application. Draw end users attention to a certain range of values."
-        }
-      },
-      {
-        "text": "Scale options",
-        "url": "linear-gauge/scale-options",
-        "title": {
-            "kendo-ui": "Scale customization example for Kendo UI Linear Gauge",
-			"aspnet-mvc": "Scale customization example for ASP.NET MVC Linear Gauge"
-        },
-        "meta": {
-            "kendo-ui": "This sample illustrates how you can customize Kendo UI Linear Gauge by changing the location of the gauge scale and its appearance.",
-			"aspnet-mvc": "This sample illustrates how you can customize ASP.NET MVC Linear Gauge by changing the location of the gauge scale and its appearance."
-        }
-      },
-      {
-        "text": "Multiple pointers",
-        "url": "linear-gauge/multiple-pointers",
-        "new": true,
-        "title": {
-            "kendo-ui": "Kendo UI Linear Gauge multiple pointers demo",
-            "aspnet-mvc": "ASP.NET MVC Linear Gauge multiple pointers demo"
-        },
-        "meta": {
-            "kendo-ui": "This example shows how easily you can configure the Linear gauge to use multiple pointers.",
-            "aspnet-mvc": "This example shows how easily you can configure the ASP.NET MVC Linear gauge to use multiple pointers."
-        }
-      },
-      {
-        "text": "Export to PDF, Image, SVG",
-        "url": "linear-gauge/export",
-        "new": true,
-        "title": {
-            "kendo-ui": "Kendo UI Linear Gauge export demo",
-            "aspnet-mvc": "ASP.NET MVC Linear Gauge export demo"
-        },
-        "meta": {
-            "kendo-ui": "This example shows how easily you can export the linear gauge to PDF, Image and SVG.",
-            "aspnet-mvc": "This example shows how easily you can export the ASP.NET MVC linear gauge to PDF, Image and SVG."
-        }
-      },
-      {
-        "text": "MVVM",
-        "url": "linear-gauge/mvvm",
-        "title": {
-            "kendo-ui": "MVVM support in Kendo UI Linear Gauge"
-        },
-        "meta": {
-            "kendo-ui": "Value and visible MVVM binding support in Kendo UI Linear Gauge"
-        },
-        "packages": [
-          "!mvc",
-          "!jsp",
-          "!php"
-        ]
-      },
-      {
-        "text": "AngularJS",
-        "url": "linear-gauge/angular",
-        "title": {
-            "kendo-ui": "AngularJS support in Kendo UI Linear Gauge"
-        },
-        "meta": {
-            "kendo-ui": "AngularJS directives support in Kendo UI Linear Gauge"
-        },
-        "packages": [
-          "!mvc",
-          "!jsp",
-          "!php"
-        ]
-      }
-    ],
-    "category": "Data Visualization"
-  },
-  {
-    "text": "Radial Gauge",
-    "name": "radial-gauge",
-    "pro": "true",
-    "spriteCssClass": "gaugeRadialIcon",
-    "api": "dataviz/radialgauge",
-    "documentation": {
-       "kendo-ui": "getting-started/dataviz/radialgauge/overview",
-       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/radialgauge/overview",
-       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/radialgauge/overview",
-       "php-ui": "getting-started/using-kendo-with/php/widgets/radialgauge/overview"
-    },
-    "forum": {
-       "kendo-ui": "kendo-ui/gauges",
-       "aspnet-mvc": "aspnet-mvc/gauge",
-       "jsp-ui": "jsp/gauge",
-       "php-ui": "php/gauge"
-    },
-    "codelibrary": {
-       "kendo-ui": "kendo-ui/gauges",
-       "aspnet-mvc": "aspnet-mvc/gauge",
-       "jsp-ui": "jsp/gauge",
-       "php-ui": "php/gauge"
-    },
-    "items": [
-      {
-        "text": "Basic usage",
-        "url": "radial-gauge/index",
-        "title": {
-            "kendo-ui": "Demo for core features in Kendo UI Radial Gauge widget",
-			"aspnet-mvc": "Demo for core features in ASP.NET MVC Radial Gauge control"
-        },
-        "meta": {
-            "kendo-ui": "This sample demonstrates the core functionality of Kendo UI Radial Gauge which helps you easily visualize an indicator within a range of values.",
-			"aspnet-mvc": "This sample demonstrates the core functionality of ASP.NET MVC Radial Gauge which helps you easily visualize an indicator within a range of values."
-        }
-      },
-      {
-        "text": "Scale options",
-        "url": "radial-gauge/scale-options",
-        "title": {
-            "kendo-ui": "Kendo UI Radial Gauge scale customization demo",
-			"aspnet-mvc": "ASP.NET MVC Radial Gauge scale customization demo"
-        },
-        "meta": {
-            "kendo-ui": "This example shows how you can easily use simple options to configure the gauge, enable/disable scale ranges and gauge labels.",
-			"aspnet-mvc": "This example shows how you can easily use simple options to configure the ASP.NET MVC radial gauge, enable/disable scale ranges and gauge labels."
-        }
-      },
-      {
-        "text": "Multiple pointers",
-        "url": "radial-gauge/multiple-pointers",
-        "new": true,
-        "title": {
-            "kendo-ui": "Kendo UI Radial Gauge multiple pointers demo",
-            "aspnet-mvc": "ASP.NET MVC Radial Gauge multiple pointers demo"
-        },
-        "meta": {
-            "kendo-ui": "This example shows how easily you can configure the radial gauge to use multiple pointers.",
-            "aspnet-mvc": "This example shows how easily you can configure the ASP.NET MVC radial gauge to use multiple pointers."
-        }
-      },
-      {
-        "text": "Export to PDF, Image, SVG",
-        "url": "radial-gauge/export",
-        "new": true,
-        "title": {
-            "kendo-ui": "Kendo UI Radial Gauge export demo",
-            "aspnet-mvc": "ASP.NET MVC Radial Gauge export demo"
-        },
-        "meta": {
-            "kendo-ui": "This example shows how easily you can export the radial gauge to PDF, Image and SVG.",
-            "aspnet-mvc": "This example shows how easily you can export the ASP.NET MVC radial gauge to PDF, Image and SVG."
-        }
-      },
-      {
-        "text": "MVVM",
-        "url": "radial-gauge/mvvm",
-        "title": {
-            "kendo-ui": "MVVM support in Kendo UI Radial Gauge"
-        },
-        "meta": {
-            "kendo-ui": "Value and visible MVVM binding support in Kendo UI Radial Gauge"
-        },
-        "packages": [
-          "!mvc",
-          "!jsp",
-          "!php"
-        ]
-      },
-      {
-        "text": "AngularJS",
-        "url": "radial-gauge/angular",
-        "title": {
-            "kendo-ui": "AngularJS support in Kendo UI Radial Gauge"
-        },
-        "meta": {
-            "kendo-ui": "AngularJS directives support in Kendo UI Radial Gauge"
-        },
-        "packages": [
-          "!mvc",
-          "!jsp",
-          "!php"
-        ]
-      },
-      {
-        "text": "Car Dashboard",
-        "url": "radial-gauge/car-dashboard",
-        "title": {
-            "kendo-ui": "Sample car dashboard, built with Kendo UI DataViz components"
-        },
-        "meta": {
-            "kendo-ui": "This sample demonstrates the use of Kendo UI Gauges"
-        },
-        "packages": [
-          "!mvc",
-          "!jsp",
-          "!php"
-        ]
-      }
-    ],
-    "category": "Data Visualization"
-  },
-  {
-    "text": "Barcode",
-    "name": "barcode",
-    "pro": "true",
-    "spriteCssClass": "barcodeIcon",
-    "api": "dataviz/barcode",
-    "documentation": {
-       "kendo-ui": "getting-started/dataviz/barcode/overview",
-       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/barcode/overview",
-       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/barcode/overview",
-       "php-ui": "getting-started/using-kendo-with/php/widgets/barcode/overview"
-    },
-    "forum": {
-       "kendo-ui": "kendo-ui/barcode",
-       "aspnet-mvc": "aspnet-mvc/barcode",
-       "jsp-ui": "jsp/barcode",
-       "php-ui": "php/barcode"
-    },
-    "codelibrary": {
-       "kendo-ui": "kendo-ui/barcode",
-       "aspnet-mvc": "aspnet-mvc/barcode",
-       "jsp-ui": "jsp/barcode",
-       "php-ui": "php/barcode"
-    },
-    "items": [
-      {
-        "text": "Basic usage",
-        "url": "barcode/index",
-        "title": {
-            "kendo-ui": "Kendo UI Barcode Demo",
-			"aspnet-mvc": "ASP.NET MVC Barcode Demo"
-        },
-        "meta": {
-            "kendo-ui": "This sample demonstrates the core functionality of Kendo UI Barcode which helps you easily encode data in machine readable format.",
-			"aspnet-mvc": "This sample demonstrates the core functionality of ASP.NET MVC Barcode which helps you easily encode data in machine readable format."
-        }
-      },
-      {
-        "text": "API",
-        "url": "barcode/api",
-        "title": {
-            "kendo-ui": "Kendo UI Barcode API Demo",
-			"aspnet-mvc": "ASP.NET MVC Barcode API Demo"
-        },
-        "meta": {
-            "kendo-ui": "This sample demonstrates the different symbologies the Barcode support and the different options that could be set",
-			"aspnet-mvc": "This sample demonstrates the different symbologies the ASP.NET MVC Barcode supports and the different options that could be set."
-        },
-        "packages": [
-          "!offline"
-        ]
-      },
-      {
-        "text": "MVVM",
-        "url": "barcode/mvvm",
-        "title": {
-            "kendo-ui": "MVVM support in Kendo UI Barcode"
-        },
-        "meta": {
-            "kendo-ui": "Value MVVM binding support in Kendo UI Barcode"
-        },
-        "packages": [
-          "!mvc",
-          "!jsp",
-          "!php"
-        ]
-      },
-      {
-        "text": "AngularJS",
-        "url": "barcode/angular",
-        "title": {
-            "kendo-ui": "AngularJS support in Kendo UI Barcode"
-        },
-        "meta": {
-            "kendo-ui": "AngularJS directive support in Kendo UI Barcode"
-        },
-        "packages": [
-          "!mvc",
-          "!jsp",
-          "!php"
-        ]
-      }
-    ],
-    "category": "Data Visualization"
-  },
-  {
-    "text": "QR code",
-    "name": "qrcode",
-    "pro": "true",
-    "spriteCssClass": "qrcodeIcon",
-    "api": "dataviz/qrcode",
-    "documentation": {
-       "kendo-ui": "getting-started/dataviz/qrcode/overview",
-       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/rqcode/overview",
-       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/qrcode/overview",
-       "php-ui": "getting-started/using-kendo-with/php/widgets/qrcode/overview"
-    },
-    "forum": {
-       "kendo-ui": "kendo-ui/qrcode",
-       "aspnet-mvc": "aspnet-mvc/qrcode",
-       "jsp-ui": "jsp/qrcode",
-       "php-ui": "php/qrcode"
-    },
-    "codelibrary": {
-       "kendo-ui": "kendo-ui/qrcode",
-       "aspnet-mvc": "aspnet-mvc/qrcode",
-       "jsp-ui": "jsp/qrcode",
-       "php-ui": "php/qrcode"
-    },
-    "items": [
-      {
-        "text": "Basic usage",
-        "url": "qrcode/index",
-        "title": {
-            "kendo-ui": "Kendo UI QRCode Demo",
-			"aspnet-mvc": "ASP.NET MVC QRCode Demo"
-        },
-        "meta": {
-            "kendo-ui": "This sample demonstrates the core functionality of Kendo UI QRCode which helps you easily encode large amounts of data in a machine readable format.",
-			"aspnet-mvc": "This sample demonstrates the core functionality of ASP.NET MVC QRCode which helps you easily encode large amounts of data in a machine readable format."
-        }
-      },
-      {
-        "text": "API",
-        "url": "qrcode/api",
-        "title": {
-            "kendo-ui": "Kendo UI QRCode API demo",
-			"aspnet-mvc": "ASP.NET MVC QRCode API demo"
-        },
-        "meta": {
-            "kendo-ui": "This demo shows how Kendo UI QRCode Widget API works and what kind of functions it supports.",
-			"aspnet-mvc": "This demo shows how ASP.NET MVC QRCode control API works and what kind of functions it supports."
-        },
-        "packages": [
-          "!offline"
-        ]
-      },
-      {
-        "text": "MVVM",
-        "url": "qrcode/mvvm",
-        "title": {
-            "kendo-ui": "MVVM support in Kendo UI QR code"
-        },
-        "meta": {
-            "kendo-ui": "Value MVVM binding support in Kendo UI QR code"
-        },
-        "packages": [
-          "!mvc",
-          "!jsp",
-          "!php"
-        ]
-      },
-      {
-        "text": "AngularJS",
-        "url": "qrcode/angular",
-        "title": {
-            "kendo-ui": "AngularJS support in Kendo UI QR code"
-        },
-        "meta": {
-            "kendo-ui": "AngularJS directive support in Kendo UI QR code"
-        },
-        "packages": [
-          "!mvc",
-          "!jsp",
-          "!php"
-        ]
-      }
-    ],
-    "category": "Data Visualization"
-  },
-  {
-    "text": "Stock Chart",
+    "text": "Stock Charts",
     "name": "financial",
     "pro": "true",
     "api": "dataviz/stock-chart",
@@ -8729,7 +8918,7 @@
         ]
       }
     ],
-    "category": "Data Visualization"
+    "category": "Charts"
   },
   {
     "text": "TreeMap",
@@ -8804,265 +8993,76 @@
       }
     ],
     "name": "treemap",
-    "category": "Data Visualization"
+    "category": "Diagrams & Maps"
   },
   {
-    "text": "Map",
-    "name": "map",
+    "text": "Waterfall Charts",
+    "name": "waterfall-charts",
     "pro": "true",
-    "api": "dataviz/map",
+    "api": "dataviz/chart",
     "documentation": {
-       "kendo-ui": "getting-started/dataviz/map/overview",
-       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/map/overview",
-       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/map/overview",
-       "php-ui": "getting-started/using-kendo-with/php/widgets/map/overview"
+       "kendo-ui": "getting-started/dataviz/chart/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/chart/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/chart/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/chart/overview"
     },
     "forum": {
-       "kendo-ui": "kendo-ui/map",
-       "aspnet-mvc": "aspnet-mvc/map",
-       "jsp-ui": "jsp/map",
-       "php-ui": "php/map"
+       "kendo-ui": "kendo-ui/charts",
+       "aspnet-mvc": "aspnet-mvc/chart",
+       "jsp-ui": "jsp/chart",
+       "php-ui": "php/chart"
     },
     "codelibrary": {
-       "kendo-ui": "kendo-ui/map",
-       "aspnet-mvc": "aspnet-mvc/map",
-       "jsp-ui": "jsp/map",
-       "php-ui": "php/map"
+       "kendo-ui": "kendo-ui/charts",
+       "aspnet-mvc": "aspnet-mvc/chart",
+       "jsp-ui": "jsp/chart",
+       "php-ui": "php/chart"
     },
-    "spriteCssClass": "mapIcon",
     "items": [
-      {
-        "text": "Basic usage",
-        "url": "map/index",
-        "title": {
-            "kendo-ui": "Example of Kendo UI Map with a simple tile layer",
-			"aspnet-mvc": "Example of ASP.NET MVC Map with a simple tile layer"
+        {
+            "text": "Basic usage",
+            "url": "waterfall-charts/index",
+            "title": {
+                "kendo-ui": "Demo for Kendo UI Waterfall Chart"
+            },
+            "meta": {
+                "kendo-ui": "This example illustrates the basic usage of Kendo UI Waterfall Chart."
+            }
         },
-        "meta": {
-            "kendo-ui": "With this demo built with Kendo UI, you will be able to find out how Kendo UI Map widget can be implemented for tile maps.",
-			"aspnet-mvc": "With this demo built with ASP.NET MVC, you will be able to find out how ASP.NET MVC Map control can be implemented for tile maps."
+        {
+            "text": "Horizontal Waterfall",
+            "url": "waterfall-charts/horizontal",
+            "title": {
+                "kendo-ui": "Demo for horizontal Kendo UI Waterfall Chart"
+            },
+            "meta": {
+                "kendo-ui": "This example illustrates how to set the Kendo UI Waterfall Chart orientation."
+            }
+        },
+        {
+            "text": "Binding to local data",
+            "url": "waterfall-charts/local-data-binding",
+            "title": {
+                "kendo-ui": "Local data-binding example | Kendo UI Waterfall Charts"
+            },
+            "meta": {
+                "kendo-ui": "This demo shows how the local data-binding is supported in Kendo UI Waterfall Charts. Use the demo source code to try the feature of the widget."
+            }
+        },
+        {
+            "text": "Binding to remote data",
+            "url": "waterfall-charts/remote-data-binding",
+            "title": {
+                "kendo-ui": "Binding to remote data demo | Kendo UI HTML5 jQuery Waterfall Charts"
+            },
+            "meta": {
+                "kendo-ui": "This demo shows how Kendo UI Waterfall Chart widget can be bound to remote data to produce high-performance report in your business app."
+            },
+            "requiresServer": "true"
         }
-      },
-      {
-        "text": "Bing tile layer",
-        "url": "map/bing",
-		"title": {
-            "kendo-ui": "Bing tile layer in Kendo UI Map",
-			"aspnet-mvc": "Bing tile layer in ASP.NET MVC Map"
-        },
-        "meta": {
-            "kendo-ui": "This demo demostrates how you can use Bing tile layer in your Hendo UI HTML5 Map.",
-			"aspnet-mvc": "This demo demostrates how you can use Bing tile layer in your ASP.NET MVC Map."
-        }
-      },
-      {
-        "text": "Bubble layer",
-        "url": "map/bubble-layer",
-        "title": {
-            "kendo-ui": "Displaying Bubble Kendo UI map layer"
-        },
-        "meta": {
-            "kendo-ui": "This demo illustrates how to bind a Kendo UI bubble map layer to remote data."
-        },
-        "requiresServer": "true"
-      },
-      {
-        "text": "Binding to GeoJSON",
-        "url": "map/geojson",
-        "title": {
-            "kendo-ui": "Displaying GeoJSON shapes Kendo UI map layer",
-			"aspnet-mvc": "Displaying GeoJSON shapes in ASP.NET MVC map"
-        },
-        "meta": {
-            "kendo-ui": "This demo illustrates how to bind a Kendo UI map layer to GeoJSON shapes.",
-			"aspnet-mvc": "This demo illustrates how to bind an ASP.NET MVC map layer to GeoJSON shapes."
-        },
-        "requiresServer": "true"
-      },
-      {
-        "text": "Binding markers to remote data",
-        "url": "map/remote-markers",
-        "title": {
-            "kendo-ui": "Load map markers in a Kendo UI map layer",
-			"aspnet-mvc": "Load map markers in a ASP.NET MVC map layer"
-        },
-        "meta": {
-            "kendo-ui": "This demo illustrates how to bind a Kendo UI marker layer.",
-			"aspnet-mvc": "This demo illustrates how to bind a ASP.NET MVC marker layer."
-        },
-        "requiresServer": "true"
-      },
-      {
-        "text": "Events",
-        "url": "map/events",
-        "title": {
-            "kendo-ui": "Events API for Kendo UI Map component",
-			"aspnet-mvc": "Events API for ASP.NET MVC Map component"
-        },
-        "meta": {
-            "kendo-ui": "This sample demonstrates the events which are specific to Kendo UI Map component.",
-			"aspnet-mvc": "This sample demonstrates the events which are specific to ASP.NET MVC Map component."
-        },
-        "requiresServer": "true"
-      },
-      {
-        "text": "API",
-        "url": "map/api",
-        "title": {
-            "kendo-ui": "API for Kendo UI Map component",
-			"aspnet-mvc": "API for ASP.NET MVC Map component"
-        },
-        "meta": {
-            "kendo-ui": "This sample demonstrates the public methods which are specific to Kendo UI Map component.",
-			"aspnet-mvc": "This sample demonstrates the public methods which are specific to ASP.NET MVC Map component."
-        },
-        "requiresServer": "true"
-      }
     ],
-    "category": "Geo Visualization"
-  },
-  {
-    "text": "Diagram",
-    "name": "diagram",
-    "pro": "true",
-    "api": "dataviz/diagram",
-    "documentation": {
-       "kendo-ui": "getting-started/dataviz/diagram/overview",
-       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/diagram/overview",
-       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/diagram/overview",
-       "php-ui": "getting-started/using-kendo-with/php/widgets/diagram/overview"
-    },
-    "forum": {
-       "kendo-ui": "kendo-ui/diagram",
-       "aspnet-mvc": "aspnet-mvc/diagram",
-       "jsp-ui": "jsp/diagram",
-       "php-ui": "php/diagram"
-    },
-    "codelibrary": {
-       "kendo-ui": "kendo-ui/diagram",
-       "aspnet-mvc": "aspnet-mvc/diagram",
-       "jsp-ui": "jsp/diagram",
-       "php-ui": "php/diagram"
-    },
-    "spriteCssClass": "diagramIcon",
-    "items": [
-      {
-        "text": "Basic usage",
-        "url": "diagram/index",
-        "title": {
-            "kendo-ui": "Example of Kendo UI Diagram with a simple layout",
-			"aspnet-mvc": "Example of ASP.NET MVC Diagram with a simple layout"
-        },
-        "meta": {
-            "kendo-ui": "With this demo built with Kendo UI, you will be able to find out how Kendo UI Diagram widget can be implemented for hierarchical diagrams.",
-			"aspnet-mvc": "With this demo built with ASP.NET MVC, you will be able to find out how ASP.NET MVC Diagram control can be implemented for hierarchical diagrams."
-        }
-      },
-      {
-        "text": "Built-in Layouts",
-        "url": "diagram/layout",
-        "title": {
-            "kendo-ui": "Example of Kendo UI Diagram with different layouts",
-			"aspnet-mvc": "Example of ASP.NET MVC Diagram with different layouts"
-        },
-        "meta": {
-            "kendo-ui": "This sample demonstrates the built-in layouts which are specific to Kendo UI Diagram component.",
-			"aspnet-mvc": "This sample demonstrates the built-in layouts which are specific to ASP.NET MVC Diagram component."
-        }
-      },
-      {
-        "text": "Editing",
-        "new": true,
-        "url": "diagram/editing",
-        "title": {
-            "kendo-ui": "Kendo UI Diagram Editing",
-			"aspnet-mvc": "Example of ASP.NET MVC Diagram with editing"
-        },
-        "meta": {
-            "kendo-ui": "In this example you will learn how you can easily use editing operations in Kendo UI Diagram.",
-			"aspnet-mvc": "In this example you will learn how you can easily use editing operations in ASP.NET MVC Diagram."
-        }
-      },
-      {
-        "text": "PDF Export",
-        "new": true,
-        "url": "diagram/pdf-export",
-        "title": {
-            "kendo-ui": "Kendo UI Diagram saveAsPDF API method"
-        },
-        "meta": {
-            "kendo-ui": "This demo shows how to save the diagram as PDF directly in the browser."
-        }
-      },
-      {
-        "text": "Advanced Export",
-        "new": true,
-        "url": "diagram/export",
-        "title": {
-            "kendo-ui": "Kendo UI Diagram Export API methods"
-        },
-        "meta": {
-            "kendo-ui": "This demo shows how to export diagrams to PDF, PNG Images or SVG and save them directly in the browser."
-        }
-      },
-	  {
-        "text": "Events",
-        "url": "diagram/events",
-        "title": {
-            "kendo-ui": "Example of using events in Kendo UI Diagram control",
-			"aspnet-mvc": "Example of using events in ASP.NET MVC Diagram control"
-        },
-        "meta": {
-            "kendo-ui": "This example demonstrates different events which are available in Kendo UI Diagram widget.",
-			"aspnet-mvc": "This example demonstrates all the different events available in Telerik ASP.NET MVC Diagram control."
-        }
-      },
-	  {
-        "text": "API",
-        "url": "diagram/api",
-        "title": {
-            "kendo-ui": "Example of Kendo UI Diagram API",
-			"aspnet-mvc": "Example of ASP.NET MVC Diagram API"
-        },
-        "meta": {
-            "kendo-ui": "The API Functions of Kendo UI Diagram widget give you the option to add/remove shapes and connections, set the current pan and zoom, select elements.",
-			"aspnet-mvc": "The API Functions of ASP.NET MVC Diagram control give you the option to add/remove shapes and connections, set the current pan and zoom, select elements."
-        }
-      },
-      {
-        "text": "MVVM",
-        "url": "diagram/mvvm",
-        "title": {
-            "kendo-ui": "MVVM support in Kendo UI Diagram"
-        },
-        "meta": {
-            "kendo-ui": "Source, events and visible MVVM binding support in Kendo UI Diagram"
-        },
-        "packages": [
-          "!mvc",
-          "!jsp",
-          "!php"
-        ]
-      },
-      {
-        "text": "AngularJS",
-        "disableInMobile": true,
-        "url": "diagram/angular",
-        "title": {
-            "kendo-ui": "AngularJS support in Kendo UI Diagram"
-        },
-        "meta": {
-            "kendo-ui": "AngularJS directive support for Kendo UI Diagram"
-        },
-        "packages": [
-          "!mvc",
-          "!jsp",
-          "!php"
-        ]
-      }
-    ],
-    "category": "Diagramming"
-
+    "spriteCssClass": "chartWaterfallIcon",
+    "category": "Charts"
   },
   {
     "text": "ActionSheet",
@@ -9122,6 +9122,83 @@
         },
         "meta": {
             "kendo-ui": "AngularJS directive support for Kendo UI Mobile Actionsheet"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
+      }
+    ],
+    "category": "Mobile"
+  },
+  {
+    "text": "Application",
+    "name": "application",
+    "api": "mobile/application",
+    "documentation": {
+       "kendo-ui": "getting-started/mobile/application",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/mobileapplication/overview"
+    },
+    "forum": {
+       "kendo-ui": "kendo-ui/application",
+       "aspnet-mvc": "aspnet-mvc/application"
+    },
+    "codelibrary": {
+       "kendo-ui": "kendo-ui/application",
+       "aspnet-mvc": "aspnet-mvc/application"
+    },
+    "spriteCssClass": "mobileAppIcon",
+    "mobile": true,
+    "packages": [ "!jsp", "!php" ],
+    "items": [
+      {
+        "text": "Overview",
+        "url": "application/index",
+        "title": {
+            "kendo-ui": "Example of a web-based mobile app, built with Kendo UI mobile framework",
+			"aspnet-mvc": "ASP.NET MVC Mobile Application HtmlHelper extension demo"
+        },
+        "meta": {
+            "kendo-ui": "This example shows how Kendo UI Mobile Application provides all tools for native-like web-based mobile app development.",
+			"aspnet-mvc": "ASP.NET MVC MobileApplication extension enables you to configure  Kendo UI Mobile Application widget from server-side code. Explore the demo to learn more."
+        }
+      },
+      {
+        "text": "Loading popup",
+        "url": "application/loadingpopup",
+        "title": {
+            "kendo-ui": "Loading popup demo for Kendo UI Mobile Application",
+		"aspnet-mvc": "Loading popup demo for ASP.NET MVC Mobile Application HTML Helper"
+        },
+        "meta": {
+            "kendo-ui": "This demo illustrates how the loading popup in Kendo UI Mobile application can be disabled/enabled, and how a popup effect can be added by using the respective values.",
+			"aspnet-mvc": "This example shows how the loading popup feature works in Telerik Mobile application extension for ASP.NET MVC."
+        }
+      },
+      {
+        "text": "View transitions",
+        "url": "application/transitions",
+        "title": {
+            "kendo-ui": "View transitions demo for Kendo UI Mobile Application",
+			"aspnet-mvc": "View transition demo for Telerik ASP.NET MVC Mobile Application"
+        },
+        "meta": {
+            "kendo-ui": "This example shows which transition needs to be applied when navigating in Kendo UI Mobile Application.",
+			"aspnet-mvc": "In this example we show the View transition capability of Telerik Mobile Application component for ASP.NET MVC."
+        }
+      },
+      {
+        "text": "AngularJS",
+        "mobile": true,
+        "new": true,
+        "disableInMobile": true,
+        "url": "application/angular",
+        "title": {
+            "kendo-ui": "AngularJS support in Kendo UI Mobile Application"
+        },
+        "meta": {
+            "kendo-ui": "AngularJS directive support for Kendo UI Mobile Application"
         },
         "packages": [
           "!mvc",
@@ -9453,6 +9530,97 @@
         },
         "meta": {
             "kendo-ui": "AngularJS directive support for Kendo UI Mobile Drawer"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
+      }
+    ],
+    "category": "Mobile"
+  },
+  {
+    "text": "Forms",
+    "name": "mobile-forms",
+    "spriteCssClass": "mobileAppIcon",
+    "mobile": true,
+    "packages": ["!mvc", "!jsp", "!php" ],
+    "items": [
+      {
+        "text": "Overview",
+        "url": "mobile-forms/index",
+        "title": {
+            "kendo-ui": "Kendo UI Mobile Forms Demo",
+			"aspnet-mvc": "ASP.NET MVC Mobile Forms Demo"
+        },
+        "meta": {
+            "kendo-ui": "This demo shows which form elements, added to a mobile view, are supported and styled in Kendo UI Mobile framework.",
+			"aspnet-mvc": "This demo shows the basic functionality of Telerik ASP.NET MVC Mobile Forms control."
+        }
+      },
+      {
+        "text": "Checks and Radios",
+        "url": "mobile-forms/checkboxes",
+        "title": {
+            "kendo-ui": "Checkboxes example for Kendo UI Mobile Application",
+			"aspnet-mvc": "Checkboxes example for ASP.NET MVC Mobile Application"
+        },
+        "meta": {
+            "kendo-ui": "This demo illustrates how checkboxes and radio buttons are enabled in Kendo UI Mobile Application.",
+			"aspnet-mvc": "This demo illustrates how checkboxes and radio buttons are enabled in ASP.NET MVC Mobile Application."
+        }
+      },
+      {
+        "text": "Customizing appearance",
+        "url": "mobile-forms/appearance",
+        "title": {
+            "kendo-ui": "Kendo UI Mobile Customizing Form Appearance Demo",
+			"aspnet-mvc": "ASP.NET MVC Mobile Customizing Form Appearance Demo"
+        },
+        "meta": {
+            "kendo-ui": "This demo shows how you can style the labels and form elements in a Kendo UI Mobile application to appear on separate rows.",
+			"aspnet-mvc": "This demo shows how you can style the labels and form elements in a ASP.NET MVC Mobile application to appear on separate rows."
+        }
+      }
+    ],
+    "category": "Mobile"
+  },
+  {
+    "text": "Layout",
+    "name": "mobile-layout",
+    "api": "mobile/layout",
+    "documentation": {
+       "kendo-ui": "getting-started/mobile/layout",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/mobilelayout/overview"
+    },
+    "spriteCssClass": "mobileAppIcon",
+    "mobile": true,
+    "packages": [ "!jsp", "!php" ],
+    "items": [
+      {
+        "text": "Overview",
+        "url": "mobile-layout/index",
+        "title": {
+            "kendo-ui": "Kendo UI jQuery-based Mobile Layout Demo",
+			"aspnet-mvc": "ASP.NET MVC Mobile Layout Demo"
+        },
+        "meta": {
+            "kendo-ui": "This sample shows how Kendo UI Mobile Layout is used to share headers and footers between multiple views on different mobile devices.",
+			"aspnet-mvc": "This sample shows how ASP.NET MVC Mobile Layout is used to share headers and footers between multiple views on different mobile devices."
+        }
+      },
+      {
+        "text": "AngularJS",
+        "mobile": true,
+        "new": true,
+        "disableInMobile": true,
+        "url": "mobile-layout/angular",
+        "title": {
+            "kendo-ui": "AngularJS support in Kendo UI Layout"
+        },
+        "meta": {
+            "kendo-ui": "AngularJS directive support for Kendo UI Layout"
         },
         "packages": [
           "!mvc",
@@ -10107,6 +10275,72 @@
     "category": "Mobile"
   },
   {
+    "text": "SplitView",
+    "name": "SplitView",
+    "api": "mobile/splitview",
+    "documentation": {
+       "kendo-ui": "getting-started/mobile/splitview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/mobilesplitview/overview"
+    },
+    "forum": {
+       "kendo-ui": "kendo-ui/split-view",
+       "aspnet-mvc": "aspnet-mvc/splitview"
+    },
+    "codelibrary": {
+       "kendo-ui": "kendo-ui/splitview",
+       "aspnet-mvc": "aspnet-mvc/splitview"
+    },
+    "spriteCssClass": "mobileSplitViewIcon",
+    "mobile": true,
+    "tablet": true,
+    "packages": [ "!jsp", "!php" ],
+    "items": [
+      {
+        "text": "Overview",
+        "url": "splitview/index",
+        "title": {
+            "kendo-ui": "Kendo UI Mobile SplitView component demo",
+			"aspnet-mvc": "ASP.NET MVC SplitView demo"
+        },
+        "meta": {
+            "kendo-ui": "This example illustrates the core functionality of Kendo UI SplitView which is a tablet-specific view, consisting of two or more jQuery-based mobile pane widgets.",
+			"aspnet-mvc": "This ASP.NET MVC SplitView example illustrates the core functionality of the extension for Kendo UI SplitView widget."
+        }
+      },
+      {
+        "text": "Customizing appearance",
+        "url": "splitview/appearance",
+        "title": {
+            "kendo-ui": "Customizing the appearance of Kendo UI Mobile SplitView",
+			"aspnet-mvc": "Customizing the appearance of ASP.NET MVC Mobile SplitView"
+        },
+        "meta": {
+            "kendo-ui": "This demo shows how the appearance of Kendo UI SplitView widget can be easily customized.",
+			"aspnet-mvc": "This demo shows how the appearance of ASP.NET MVC SplitView control can be easily customized."
+        }
+      },
+      {
+        "text": "AngularJS",
+        "new": true,
+        "mobile": true,
+        "disableInMobile": true,
+        "url": "splitview/angular",
+        "title": {
+            "kendo-ui": "AngularJS support in Kendo UI Mobile SplitView"
+        },
+        "meta": {
+            "kendo-ui": "AngularJS directive support for Kendo UI Mobile SplitView"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
+      }
+    ],
+    "category": "Mobile"
+  },
+  {
     "text": "Switch",
     "name": "switch",
     "api": "mobile/switch",
@@ -10294,129 +10528,6 @@
     "category": "Mobile"
   },
   {
-    "text": "Application",
-    "name": "application",
-    "api": "mobile/application",
-    "documentation": {
-       "kendo-ui": "getting-started/mobile/application",
-       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/mobileapplication/overview"
-    },
-    "forum": {
-       "kendo-ui": "kendo-ui/application",
-       "aspnet-mvc": "aspnet-mvc/application"
-    },
-    "codelibrary": {
-       "kendo-ui": "kendo-ui/application",
-       "aspnet-mvc": "aspnet-mvc/application"
-    },
-    "spriteCssClass": "mobileAppIcon",
-    "mobile": true,
-    "packages": [ "!jsp", "!php" ],
-    "items": [
-      {
-        "text": "Overview",
-        "url": "application/index",
-        "title": {
-            "kendo-ui": "Example of a web-based mobile app, built with Kendo UI mobile framework",
-			"aspnet-mvc": "ASP.NET MVC Mobile Application HtmlHelper extension demo"
-        },
-        "meta": {
-            "kendo-ui": "This example shows how Kendo UI Mobile Application provides all tools for native-like web-based mobile app development.",
-			"aspnet-mvc": "ASP.NET MVC MobileApplication extension enables you to configure  Kendo UI Mobile Application widget from server-side code. Explore the demo to learn more."
-        }
-      },
-      {
-        "text": "Loading popup",
-        "url": "application/loadingpopup",
-        "title": {
-            "kendo-ui": "Loading popup demo for Kendo UI Mobile Application",
-		"aspnet-mvc": "Loading popup demo for ASP.NET MVC Mobile Application HTML Helper"
-        },
-        "meta": {
-            "kendo-ui": "This demo illustrates how the loading popup in Kendo UI Mobile application can be disabled/enabled, and how a popup effect can be added by using the respective values.",
-			"aspnet-mvc": "This example shows how the loading popup feature works in Telerik Mobile application extension for ASP.NET MVC."
-        }
-      },
-      {
-        "text": "View transitions",
-        "url": "application/transitions",
-        "title": {
-            "kendo-ui": "View transitions demo for Kendo UI Mobile Application",
-			"aspnet-mvc": "View transition demo for Telerik ASP.NET MVC Mobile Application"
-        },
-        "meta": {
-            "kendo-ui": "This example shows which transition needs to be applied when navigating in Kendo UI Mobile Application.",
-			"aspnet-mvc": "In this example we show the View transition capability of Telerik Mobile Application component for ASP.NET MVC."
-        }
-      },
-      {
-        "text": "AngularJS",
-        "mobile": true,
-        "new": true,
-        "disableInMobile": true,
-        "url": "application/angular",
-        "title": {
-            "kendo-ui": "AngularJS support in Kendo UI Mobile Application"
-        },
-        "meta": {
-            "kendo-ui": "AngularJS directive support for Kendo UI Mobile Application"
-        },
-        "packages": [
-          "!mvc",
-          "!jsp",
-          "!php"
-        ]
-      }
-    ],
-    "category": "Mobile"
-  },
-  {
-    "text": "Forms",
-    "name": "mobile-forms",
-    "spriteCssClass": "mobileAppIcon",
-    "mobile": true,
-    "packages": ["!mvc", "!jsp", "!php" ],
-    "items": [
-      {
-        "text": "Overview",
-        "url": "mobile-forms/index",
-        "title": {
-            "kendo-ui": "Kendo UI Mobile Forms Demo",
-			"aspnet-mvc": "ASP.NET MVC Mobile Forms Demo"
-        },
-        "meta": {
-            "kendo-ui": "This demo shows which form elements, added to a mobile view, are supported and styled in Kendo UI Mobile framework.",
-			"aspnet-mvc": "This demo shows the basic functionality of Telerik ASP.NET MVC Mobile Forms control."
-        }
-      },
-      {
-        "text": "Checks and Radios",
-        "url": "mobile-forms/checkboxes",
-        "title": {
-            "kendo-ui": "Checkboxes example for Kendo UI Mobile Application",
-			"aspnet-mvc": "Checkboxes example for ASP.NET MVC Mobile Application"
-        },
-        "meta": {
-            "kendo-ui": "This demo illustrates how checkboxes and radio buttons are enabled in Kendo UI Mobile Application.",
-			"aspnet-mvc": "This demo illustrates how checkboxes and radio buttons are enabled in ASP.NET MVC Mobile Application."
-        }
-      },
-      {
-        "text": "Customizing appearance",
-        "url": "mobile-forms/appearance",
-        "title": {
-            "kendo-ui": "Kendo UI Mobile Customizing Form Appearance Demo",
-			"aspnet-mvc": "ASP.NET MVC Mobile Customizing Form Appearance Demo"
-        },
-        "meta": {
-            "kendo-ui": "This demo shows how you can style the labels and form elements in a Kendo UI Mobile application to appear on separate rows.",
-			"aspnet-mvc": "This demo shows how you can style the labels and form elements in a ASP.NET MVC Mobile application to appear on separate rows."
-        }
-      }
-    ],
-    "category": "Mobile"
-  },
-  {
     "text": "Touch Events",
     "name": "touchevents",
     "api": "mobile/touch",
@@ -10522,117 +10633,6 @@
         },
         "meta": {
             "kendo-ui": "AngularJS directive support for Kendo UI Mobile View"
-        },
-        "packages": [
-          "!mvc",
-          "!jsp",
-          "!php"
-        ]
-      }
-    ],
-    "category": "Mobile"
-  },
-  {
-    "text": "SplitView",
-    "name": "SplitView",
-    "api": "mobile/splitview",
-    "documentation": {
-       "kendo-ui": "getting-started/mobile/splitview",
-       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/mobilesplitview/overview"
-    },
-    "forum": {
-       "kendo-ui": "kendo-ui/split-view",
-       "aspnet-mvc": "aspnet-mvc/splitview"
-    },
-    "codelibrary": {
-       "kendo-ui": "kendo-ui/splitview",
-       "aspnet-mvc": "aspnet-mvc/splitview"
-    },
-    "spriteCssClass": "mobileSplitViewIcon",
-    "mobile": true,
-    "tablet": true,
-    "packages": [ "!jsp", "!php" ],
-    "items": [
-      {
-        "text": "Overview",
-        "url": "splitview/index",
-        "title": {
-            "kendo-ui": "Kendo UI Mobile SplitView component demo",
-			"aspnet-mvc": "ASP.NET MVC SplitView demo"
-        },
-        "meta": {
-            "kendo-ui": "This example illustrates the core functionality of Kendo UI SplitView which is a tablet-specific view, consisting of two or more jQuery-based mobile pane widgets.",
-			"aspnet-mvc": "This ASP.NET MVC SplitView example illustrates the core functionality of the extension for Kendo UI SplitView widget."
-        }
-      },
-      {
-        "text": "Customizing appearance",
-        "url": "splitview/appearance",
-        "title": {
-            "kendo-ui": "Customizing the appearance of Kendo UI Mobile SplitView",
-			"aspnet-mvc": "Customizing the appearance of ASP.NET MVC Mobile SplitView"
-        },
-        "meta": {
-            "kendo-ui": "This demo shows how the appearance of Kendo UI SplitView widget can be easily customized.",
-			"aspnet-mvc": "This demo shows how the appearance of ASP.NET MVC SplitView control can be easily customized."
-        }
-      },
-      {
-        "text": "AngularJS",
-        "new": true,
-        "mobile": true,
-        "disableInMobile": true,
-        "url": "splitview/angular",
-        "title": {
-            "kendo-ui": "AngularJS support in Kendo UI Mobile SplitView"
-        },
-        "meta": {
-            "kendo-ui": "AngularJS directive support for Kendo UI Mobile SplitView"
-        },
-        "packages": [
-          "!mvc",
-          "!jsp",
-          "!php"
-        ]
-      }
-    ],
-    "category": "Mobile"
-  },
-  {
-    "text": "Layout",
-    "name": "mobile-layout",
-    "api": "mobile/layout",
-    "documentation": {
-       "kendo-ui": "getting-started/mobile/layout",
-       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/mobilelayout/overview"
-    },
-    "spriteCssClass": "mobileAppIcon",
-    "mobile": true,
-    "packages": [ "!jsp", "!php" ],
-    "items": [
-      {
-        "text": "Overview",
-        "url": "mobile-layout/index",
-        "title": {
-            "kendo-ui": "Kendo UI jQuery-based Mobile Layout Demo",
-			"aspnet-mvc": "ASP.NET MVC Mobile Layout Demo"
-        },
-        "meta": {
-            "kendo-ui": "This sample shows how Kendo UI Mobile Layout is used to share headers and footers between multiple views on different mobile devices.",
-			"aspnet-mvc": "This sample shows how ASP.NET MVC Mobile Layout is used to share headers and footers between multiple views on different mobile devices."
-        }
-      },
-      {
-        "text": "AngularJS",
-        "mobile": true,
-        "new": true,
-        "disableInMobile": true,
-        "url": "mobile-layout/angular",
-        "title": {
-            "kendo-ui": "AngularJS support in Kendo UI Layout"
-        },
-        "meta": {
-            "kendo-ui": "AngularJS directive support for Kendo UI Layout"
         },
         "packages": [
           "!mvc",
