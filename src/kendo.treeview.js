@@ -1814,8 +1814,6 @@ var __meta__ = {
                     return that._insert(data, model, index);
                 }
 
-                var inserted;
-
                 loadModel.then(function() {
                     inserted = add();
                     success = success || $.noop;
