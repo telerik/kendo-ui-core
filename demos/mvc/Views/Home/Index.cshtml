@@ -40,19 +40,31 @@
                     <li><a href="@Url.Widget("grid")">Grid</a></li>
                     <li><a href="@Url.Widget("editor")">Editor</a></li>
                     <li><a href="@Url.Widget("scheduler")">Scheduler</a></li>
-                    <li><a href="@Url.Widget("dropdownlist")">DropDownList</a></li>
-                    <li><a href="@Url.Widget("window")">Window</a></li>
-                    <li><a href="@Url.Widget("datepicker")">DatePicker</a></li>
-                    <li><a href="@Url.Widget("upload")">Upload</a></li>
-                    <li><a href="@Url.Widget("treeview")">TreeView</a></li>
-                    <li><a href="@Url.Widget("tabstrip")">TabStrip</a></li>
                     <li><a href="@Url.Widget("bar-charts")">Bar Charts</a></li>
                     <li><a href="@Url.Widget("line-charts")">Line Charts</a></li>
-                    <li><a href="@Url.Widget("pie-charts")">Pie Charts</a></li>
                     <li><a href="@Url.Widget("financial")">Stock Charts</a></li>
-                    <li><a href="@Url.Widget("drawer")">Drawer</a></li>
-                    <li><a href="@Url.Widget("switch")">Switch</a></li>
+                    <li><a href="@Url.Widget("dropdownlist")">DropDownList</a></li>
+                    <li><a href="@Url.Widget("window")">Window</a></li>
+                    <li><a href="@Url.Widget("upload")">Upload</a></li>
+                    <li><a href="@Url.Widget("treeview")">TreeView</a></li>
                 </ul>
+                <p>
+                    See this page on <br />mobile device.
+                </p>
+                
+                <div id="mobileDemosQR"></div>
+                
+                <script type="text/javascript">
+                    $("#mobileDemosQR").kendoQRCode({
+                        value: window.location.href,
+                        size: 110,
+                        color: "#333333",
+                        border: {
+                            color: "#666666",
+                            width: 1
+                        }
+                    });
+                </script>
         </div>
         <div id="widgets-all">
 
@@ -66,7 +78,7 @@
             new [] {
                 "Charts",
                 "Gauges",
-                "Barcode & QR Code"
+                "Barcodes"
             },
             new [] {
                 "Diagrams & Maps",

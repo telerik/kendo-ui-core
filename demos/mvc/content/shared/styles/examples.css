@@ -2844,7 +2844,19 @@ h5 {
     margin-bottom: 34px;
 }
 
- #overview-widgets h2 strong {
+#most-popular p {
+    font-size: 13px;
+    line-height: 1.4;
+    text-align: left;
+    width: 180px;
+    padding: 43px 0 0 20px;
+}
+
+#mobileDemosQR {
+    margin: 20px 0 0 20px;
+}
+
+#overview-widgets h2 strong {
     font-weight: normal;
 }
 

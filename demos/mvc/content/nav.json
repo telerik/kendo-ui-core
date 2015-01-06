@@ -6684,7 +6684,7 @@
         ]
       }
     ],
-    "category": "Barcode & QR Code"
+    "category": "Barcodes"
   },
   {
     "text": "Box Plot Charts",
@@ -8351,7 +8351,7 @@
         ]
       }
     ],
-    "category": "Barcode & QR Code"
+    "category": "Barcodes"
   },
   {
     "text": "Radar Charts",
@@ -8993,7 +8993,7 @@
       }
     ],
     "name": "treemap",
-    "category": "Diagrams & Maps"
+    "category": "Charts"
   },
   {
     "text": "Waterfall Charts",
