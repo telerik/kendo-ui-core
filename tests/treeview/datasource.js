@@ -793,26 +793,4 @@
         equal(treeviewObject.dataItem(foo.find(".k-item:last")).text, "baz");
     });
 
-    /*
-    test("binding to datasource with parentId", function() {
-        createTreeView({
-            dataSource: {
-                data: [
-                    { id: 1, parentId: 0 },
-                    { id: 2, parentId: 1 }
-                ],
-                schema: {
-                    model: {
-                        id: "id",
-                        parentId: "parentId"
-                    }
-                }
-            },
-            loadOnDemand: false
-        });
-
-        equal(treeview.find(".k-item").length, 2);
-        equal(treeview.find(".k-item .k-item").length, 1);
-    });
-    */
 })();
