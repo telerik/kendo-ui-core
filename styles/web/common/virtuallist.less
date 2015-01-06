@@ -1,0 +1,31 @@
+/* Virtual List */
+
+.k-virtual-list {
+    overflow-y: scroll; /* has to be scroll, not auto */
+    -webkit-overflow-scrolling: touch;
+    position: absolute;
+}
+
+.k-virtual-list > .k-wrapper {
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.k-virtual-list > .k-header {
+    position: fixed;
+    z-index: 2;
+    top: 5px;
+    width: 80%;
+}
+
+.k-virtual-list .k-virtual-item {
+    position: absolute;
+    width: 100%;
+}
+
+.k-virtual-list > .k-group {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
