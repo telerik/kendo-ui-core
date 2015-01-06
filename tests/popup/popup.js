@@ -58,7 +58,7 @@
         ok(!closed);
     });
 
-    test("window.scroll does not close popup when focused", function() {
+    test("window.scroll does not close popup when hovered", function() {
         expect(1);
         popup = new Popup(div, {
             close: function() {
@@ -74,6 +74,22 @@
         ok(popup.visible());
     });
 
+    test("window.scroll closes popup even when the active element is in it", function() {
+        expect(1);
+
+        div.append("<input />");
+
+        popup = new Popup(div, {
+            animation: false
+        });
+
+        popup.open();
+        div.find("input").focus();
+
+        $(window).scroll();
+
+        ok(!popup.visible());
+    });
 
     test("popup appends element to body", function() {
         div.kendoPopup();
