@@ -1183,30 +1183,52 @@ test("child datasources inherit fields", function() {
     equal(dataSource.get(2).text, "bar");
 });
 
-/*
-test("child datasources inherit model", function() {
-    var CustomModel = kendo.data.Node.define({
-        foo: function() {
-            return this.id;
-        }
-    });
-
+test("Node load returns promise", function() {
     var dataSource = new HierarchicalDataSource({
-        data: [
-            { id: 1, items: [
-                { id: 2 }
-            ] }
-        ],
-        schema: {
-            model: CustomModel
+        transport: {
+            read: function(options) {
+                options.success([ { id: 1, hasChildren: true } ]);
+            }
         }
     });
 
     dataSource.read();
-    dataSource.at(0).load();
 
-    ok($.isFunction(dataSource.at(0).children.at(0).foo));
-    equal(dataSource.at(0).children.at(0).foo(), 2);
+    ok($.isFunction(dataSource.get(1).load().then));
 });
-*/
+
+test("Node without children resolves load promise immediately", function() {
+    var node = new Node({ id: 1 });
+
+    var promise = node.load();
+
+    equal(promise.state(), "resolved");
+});
+
+test("load resolves promise upon success", function() {
+    var deferred;
+    var dataSource = new HierarchicalDataSource({
+        transport: {
+            read: function(options) {
+                deferred = $.Deferred();
+                deferred.then(function() {
+                    options.success([ { id: 1, hasChildren: true } ]);
+                });
+            }
+        }
+    });
+
+    dataSource.read();
+
+    deferred.resolve();
+
+    var loadPromise = dataSource.get(1).load();
+
+    equal(loadPromise.state(), "pending");
+
+    deferred.resolve();
+
+    equal(loadPromise.state(), "resolved");
+});
+
 }());

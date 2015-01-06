@@ -4029,7 +4029,7 @@ var __meta__ = {
         load: function() {
             var options = {};
             var method = "_query";
-            var children;
+            var children, promise;
 
             if (this.hasChildren) {
                 this._initChildren();
@@ -4044,10 +4044,13 @@ var __meta__ = {
                 }
 
                 children.one(CHANGE, proxy(this._childrenLoaded, this));
-                children[method](options);
+
+                promise = children[method](options);
             } else {
                 this.loaded(true);
             }
+
+            return promise || $.Deferred().resolve().promise();
         },
 
         parentNode: function() {
