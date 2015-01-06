@@ -37,49 +37,57 @@ var __meta__ = {
         return element;
     }
 
-    function itemAt(dataSource, pageSize, dataAvailableCallback) {
-        var lastRequestedRange = null;
-        var flatGroups = {};
+    // function itemAt(dataSource, pageSize, dataAvailableCallback) {
+    //     var lastRequestedRange = null;
+    //     var flatGroups = {};
 
-        var mute = false;
+    //     var mute = false;
 
-        dataSource.bind("change", function() {
-            if (!mute) {
-                dataAvailableCallback();
-            }
-        });
+    //     dataSource.bind("change", function() {
+    //         if (!mute) {
+    //             dataAvailableCallback();
+    //         }
+    //     });
 
-        return function(index, rangeStart) {
-            if (!dataSource.inRange(rangeStart, pageSize)) {
-                if (lastRequestedRange !== rangeStart) {
-                    lastRequestedRange = rangeStart;
-                    dataSource.range(rangeStart, pageSize);
-                }
+    //     return function(index, rangeStart) {
+    //         if (!dataSource.inRange(rangeStart, pageSize)) {
+    //             if (lastRequestedRange !== rangeStart) {
+    //                 lastRequestedRange = rangeStart;
+    //                 dataSource.range(rangeStart, pageSize);
+    //             }
 
-                return null;
-            } else {
-                if (dataSource.skip() !== rangeStart) {
-                    mute = true;
-                    dataSource.range(rangeStart, pageSize);
-                    mute = false;
-                }
+    //             return null;
+    //         } else {
+    //             if (dataSource.skip() !== rangeStart) {
+    //                 mute = true;
+    //                 dataSource.range(rangeStart, pageSize);
+    //                 mute = false;
+    //             }
 
-                if (!flatGroups[rangeStart]) {
-                    var flatGroup = flatGroups[rangeStart] = [];
-                    var groups = dataSource.view();
-                    for (var i = 0, len = groups.length; i < len; i++) {
-                        var group = groups[i];
-                        for (var j = 0, groupLength = group.items.length; j < groupLength; j++) {
-                            flatGroup.push({ item: group.items[j], group: group.value });
-                        }
-                    }
-                }
+    //             var result;
+    //             debugger;
+    //             if (dataSource.group().length) { //has groups
+    //                 if (!flatGroups[rangeStart]) {
+    //                     var flatGroup = flatGroups[rangeStart] = [];
+    //                     var groups = dataSource.view();
+    //                     for (var i = 0, len = groups.length; i < len; i++) {
+    //                         var group = groups[i];
+    //                         for (var j = 0, groupLength = group.items.length; j < groupLength; j++) {
+    //                             flatGroup.push({ item: group.items[j], group: group.value });
+    //                         }
+    //                     }
+    //                 }
 
-                var result = flatGroups[rangeStart][index - rangeStart];
-                return result;
-            }
-        };
-    }
+    //                 result = flatGroups[rangeStart][index - rangeStart];
+    //             } else { //does not have groups
+    //                 result = dataSource.at(index - rangeStart);
+    //                 console.log(result);
+    //             }
+
+    //             return result;
+    //         }
+    //     };
+    // }
 
     function bufferSizes(screenHeight, listScreens, opposite) { //in pixels
         return {
@@ -111,24 +119,34 @@ var __meta__ = {
         };
     }
 
-    function itemMapper(height) {
+    function itemMapper(height, listType) {
         return function() {
             var group = null;
 
             return function(item, index) {
-                var newGroup;
-                if (item) {
-                    newGroup = index === 0 || (group && group !== item.group);
-                    group = item.group;
-                }
 
-                return {
-                    item: item ? item.item : null,
-                    group: item ? item.group : null,
-                    index: index,
-                    top: index * height,
-                    newGroup: newGroup
-                };
+                if (listType === "group") {
+                    var newGroup;
+                    if (item) {
+                        newGroup = index === 0 || (group && group !== item.group);
+                        group = item.group;
+                    }
+
+                    return {
+                        item: item ? item.item : null,
+                        group: item ? item.group : null,
+                        index: index,
+                        top: index * height,
+                        newGroup: newGroup
+                    };
+                } else {
+                    return {
+                        item: item ? item : null,
+                        index: index,
+                        top: index * height,
+                        newGroup: false
+                    };
+                }
             };
         };
     }
@@ -288,6 +306,7 @@ var __meta__ = {
             threshold: 0.5,
             itemHeight: 40,
             oppositeBuffer: 1,
+            type: "flat",
             template: "#:data#",
             placeholderTemplate: "loading...",
             groupTemplate: "#:group#",
@@ -304,6 +323,7 @@ var __meta__ = {
 
         destroy: function() {
             Widget.fn.destroy.call(this);
+            this.element.unbind("scroll");
         },
 
         setDataSource: function(source) {
@@ -352,6 +372,7 @@ var __meta__ = {
                 itemCount = this.itemCount,
                 dataSource = this.dataSource;
 
+            this.options.type = !!dataSource.group().length ? "group" : "flat";
             this._setHeight(options.itemHeight * dataSource.total());
 
             var that = this;
@@ -396,6 +417,7 @@ var __meta__ = {
         _getter: function(dataAvailableCallback) {
             var lastRequestedRange = null,
                 dataSource = this.dataSource,
+                type = this.options.type,
                 pageSize = this.itemCount,
                 flatGroups = {},
                 mute = false;
@@ -421,18 +443,25 @@ var __meta__ = {
                         mute = false;
                     }
 
-                    if (!flatGroups[rangeStart]) {
-                        var flatGroup = flatGroups[rangeStart] = [];
-                        var groups = dataSource.view();
-                        for (var i = 0, len = groups.length; i < len; i++) {
-                            var group = groups[i];
-                            for (var j = 0, groupLength = group.items.length; j < groupLength; j++) {
-                                flatGroup.push({ item: group.items[j], group: group.value });
+
+                    var result;
+                    if (type === "group") { //grouped list
+                        if (!flatGroups[rangeStart]) {
+                            var flatGroup = flatGroups[rangeStart] = [];
+                            var groups = dataSource.view();
+                            for (var i = 0, len = groups.length; i < len; i++) {
+                                var group = groups[i];
+                                for (var j = 0, groupLength = group.items.length; j < groupLength; j++) {
+                                    flatGroup.push({ item: group.items[j], group: group.value });
+                                }
                             }
                         }
+
+                        result = flatGroups[rangeStart][index - rangeStart];
+                    } else { //flat list
+                        result = dataSource.at(index - rangeStart);
                     }
 
-                    var result = flatGroups[rangeStart][index - rangeStart];
                     return result;
                 }
             };
@@ -475,7 +504,7 @@ var __meta__ = {
                     range(
                         getter,
                         itemCount,
-                        itemMapper(options.itemHeight)
+                        itemMapper(options.itemHeight, options.type)
                     )
                 ),
                 listValidator(options.listScreens, screenHeight, options.threshold)
