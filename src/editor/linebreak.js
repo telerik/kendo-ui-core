@@ -139,14 +139,14 @@ var ParagraphCommand = Command.extend({
 
             next = parent.nextSibling;
 
+            this.clean(previous);
+            this.clean(next, { links: true });
+
             if (dom.is(next, 'li') && next.firstChild && !dom.is(next.firstChild, 'br')) {
                 next = next.firstChild;
             }
 
             dom.remove(parent);
-
-            this.clean(previous);
-            this.clean(next, { links: true });
 
             // normalize updates the caret display in Gecko
             normalize(previous);

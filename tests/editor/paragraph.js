@@ -486,4 +486,12 @@ test("paragraph before input does not clone it", function() {
     equal(editor.value(), '<p></p><p></p><p><input /></p>');
 });
 
+test("paragraph inside list link cleans link on new list item", function() {
+    var range = createRangeFromText(editor, '<ul><li><a href="http://foo">foo||</a></li></ul>');
+
+    createParagraphCommand(range).exec();
+
+    equal(editor.value(), '<ul><li><a href="http://foo">foo</a></li><li></li></ul>');
+});
+
 }());
