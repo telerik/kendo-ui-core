@@ -69,6 +69,7 @@
 
         function createChart() {
             $("#chart").kendoChart({
+              renderAs: "canvas",
               dataSource: {
                 data: data,
                 pageSize: viewSize,
