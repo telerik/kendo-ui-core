@@ -160,7 +160,8 @@ var __meta__ = {
 
         options: {
             name: "VirtualScrollable",
-            itemHeight: $.noop
+            itemHeight: $.noop,
+            prefetch: true
         },
 
         destroy: function() {
@@ -234,6 +235,7 @@ var __meta__ = {
 
         _scroll: function(e) {
             var that = this,
+                delayLoading = !that.options.prefetch,
                 scrollTop = e.currentTarget.scrollTop,
                 dataSource = that.dataSource,
                 rowHeight = that.itemHeight,
@@ -291,6 +293,7 @@ var __meta__ = {
 
         _page: function(skip, take) {
             var that = this,
+                delayLoading = !that.options.prefetch,
                 dataSource = that.dataSource;
 
             clearTimeout(that._timeout);
