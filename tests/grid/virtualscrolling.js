@@ -322,6 +322,30 @@
         equal(take, 4);
     });
 
+    test("fetch does not prefetch the next page if lastRowIndex is after middle of the page when prefetch is off", 0, function() {
+        var MyDataSource = DataSource.extend({
+                prefetch: function() {
+                    ok(true);
+                },
+                _total: 10000
+            }),
+            scroller = new VirtualScrollable(container, {
+                    prefetch: false,
+                    itemHeight: function() {
+                    return 35;
+                },
+                dataSource: new MyDataSource({
+                    pageSize: 4,
+                    page: 1,
+                    data: [ 1,2,3,4,5,6,7,8,9,10 ]
+                })
+            }),
+            firstRowIndex = 0,
+            lastRowIndex = 3;
+
+        scroller._fetch(firstRowIndex, lastRowIndex);
+    });
+
     test("rangeStart is set to the current skip if dataSource is sorted", function() {
         var data = remoteDataSource(),
             scroller = new VirtualScrollable(container, {

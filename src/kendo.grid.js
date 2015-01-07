@@ -249,8 +249,21 @@ var __meta__ = {
             that._scrollTop = scrollTop - (start * rowHeight);
             that._scrollbarTop = scrollTop;
 
+            that._scrolling = delayLoading;
+
             if (!that._fetch(firstItemIndex, lastItemIndex, isScrollingUp)) {
                 that.wrapper[0].scrollTop = that._scrollTop;
+            }
+
+            if (delayLoading) {
+                if (that._scrollingTimeout) {
+                    clearTimeout(that._scrollingTimeout);
+                }
+
+                that._scrollingTimeout = setTimeout(function() {
+                    that._scrolling = false;
+                    that._page(that._rangeStart, that.dataSource.take());
+                }, 100);
             }
         },
 
@@ -278,7 +291,7 @@ var __meta__ = {
                 that._scrollTop = itemHeight;
                 that._page(rangeStart, take);
 
-            } else if (!that._fetching) {
+            } else if (!that._fetching && that.options.prefetch) {
 
                 if (firstItemIndex < (currentSkip + take) - take * prefetchAt && firstItemIndex > take) {
                     dataSource.prefetch(currentSkip - take, take);
@@ -303,9 +316,17 @@ var __meta__ = {
             if (dataSource.inRange(skip, take)) {
                 dataSource.range(skip, take);
             } else {
-                kendo.ui.progress(that.wrapper.parent(), true);
+                if (!delayLoading) {
+                    kendo.ui.progress(that.wrapper.parent(), true);
+                }
+
                 that._timeout = setTimeout(function() {
-                    dataSource.range(skip, take);
+                    if (!that._scrolling) {
+                        if (delayLoading) {
+                            kendo.ui.progress(that.wrapper.parent(), true);
+                        }
+                        dataSource.range(skip, take);
+                    }
                 }, 100);
             }
         },
