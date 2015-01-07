@@ -121,7 +121,7 @@ echo $grid->render();
 
         $orderID = new \Kendo\UI\GridColumn();
         $orderID->field('OrderID')
-            ->width(70)
+            ->width(110)
             ->title('Order ID');
 
         $shipCountry = new \Kendo\UI\GridColumn();

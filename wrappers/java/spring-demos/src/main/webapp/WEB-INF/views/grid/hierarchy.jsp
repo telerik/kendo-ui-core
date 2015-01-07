@@ -41,7 +41,7 @@
 <kendo:grid-detailTemplate id="template">
 	<kendo:grid name="grid_#=employeeId#" pageable="true" sortable="true" scrollable="false">
 		<kendo:grid-columns>
-			<kendo:grid-column title="Order ID" field="orderId" width="70px" />
+			<kendo:grid-column title="Order ID" field="orderId" width="110px" />
 			<kendo:grid-column title="Ship Country" field="shipCountry" width="110px" />
 			<kendo:grid-column title="Ship Address" field="shipAddress" />
 			<kendo:grid-column title="Ship Name" field="shipName" width="200px" />            
