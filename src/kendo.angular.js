@@ -99,9 +99,14 @@ var __meta__ = {
         }
     }
 
-    function createWidget(scope, element, attrs, widget, origAttr) {
+    function createWidget(scope, element, attrs, widget, origAttr, controllers) {
         var kNgDelay = attrs.kNgDelay,
             delayValue = scope.$eval(kNgDelay);
+
+        controllers = controllers || [];
+
+        var ngModel = controllers[0],
+            ngForm = controllers[1];
 
         if (kNgDelay && !delayValue) {
             var root = scope.$root || scope;
@@ -222,6 +227,18 @@ var __meta__ = {
             if (attrs.kRebind) {
                 setupRebind(object, scope, element, originalElement, attrs.kRebind, destroyRegister);
             }
+
+            // kNgModel is used for the "logical" value
+            if (attrs.kNgModel) {
+                bindToKNgModel(object, scope, attrs.kNgModel);
+            }
+
+            // 2 way binding: ngModel <-> widget.value()
+            if (ngModel) {
+                bindToNgModel(object, scope, element, ngModel, ngForm);
+            }
+
+            propagateClassToWidgetWrapper(object, element);
 
             return object;
         }
@@ -347,7 +364,6 @@ var __meta__ = {
         widget.$angular_setLogicValue(getter(scope));
 
         // keep in sync
-
         scope.$apply(function() {
             var watchHandler = function(newValue, oldValue) {
                 if (newValue === undefined) {
@@ -526,8 +542,6 @@ var __meta__ = {
                 }],
 
                 link: function(scope, element, attrs, controllers) {
-                    var ngModel = controllers[0];
-                    var ngForm = controllers[1];
                     var $element = $(element);
 
                     // we must remove data-kendo-widget-name attribute because
@@ -554,23 +568,11 @@ var __meta__ = {
                         if (isVisible) {
                             $element.css("visibility", "");
                         }
-                        var widget = createWidget(scope, element, attrs, role, origAttr);
+                        var widget = createWidget(scope, element, attrs, role, origAttr, controllers);
 
                         if (!widget) {
                             return;
                         }
-
-                        // 2 way binding: ngModel <-> widget.value()
-                        if (ngModel) {
-                            bindToNgModel(widget, scope, element, ngModel, ngForm);
-                        }
-
-                        // kNgModel is used for the "logical" value
-                        if (attrs.kNgModel) {
-                            bindToKNgModel(widget, scope, attrs.kNgModel);
-                        }
-
-                        propagateClassToWidgetWrapper(widget, element);
 
                         --KENDO_COUNT;
                         if (KENDO_COUNT === 0) {
