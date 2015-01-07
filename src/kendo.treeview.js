@@ -497,6 +497,9 @@ var __meta__ = {
                         kendo.attr("uid") + "='#= item.uid #' " +
                         "aria-selected='#= item.selected ? \"true\" : \"false \" #' " +
                         "#=item.enabled === false ? \"aria-disabled='true'\" : ''#" +
+                        "# if (item.expanded) { #" +
+                        "data-expanded='true' aria-expanded='true'" +
+                        "# } #" +
                     ">" +
                         "#= r.itemElement(data) #" +
                     "</li>"

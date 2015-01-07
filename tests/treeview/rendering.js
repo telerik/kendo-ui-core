@@ -428,6 +428,30 @@
         equal(uidNodes.data("kendo-uid"), node.uid);
     });
 
+    test("data-expanded attribute is initially set", function() {
+        treeview.kendoTreeView({
+            dataSource: [
+                { text: "foo", expanded: true, items: [
+                    { text: "bar" }
+                ] }
+            ]
+        });
+
+        equal(treeview.find(".k-item[data-expanded]").length, 1);
+    });
+
+    test("aria-expanded attribute is initially set", function() {
+        treeview.kendoTreeView({
+            dataSource: [
+                { text: "foo", expanded: true, items: [
+                    { text: "bar" }
+                ] }
+            ]
+        });
+
+        equal(treeview.find(".k-item[aria-expanded]").length, 1);
+    });
+
     module("aria generation", moduleOptions);
 
     test("treeview role is added to the root list", function() {
