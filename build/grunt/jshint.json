@@ -9,6 +9,7 @@
     "tests/dataviz/drawing/*.js",
     "demos/mvc/content/shared/js/examples.js",
     "demos/mvc/content/shared/js/console.js",
+    "demos/mvc/content/shared/js/theme-chooser.js",
     "themebuilder/bootstrap.js",
     "themebuilder/scripts/themebuilder.js",
     "themebuilder/scripts/constants.js"
