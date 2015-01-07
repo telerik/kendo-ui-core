@@ -1575,7 +1575,9 @@ var __meta__ = {
             that._resizeHandler = proxy(that.resize, that);
 
             that.wrapper.on("mousedown" + NS + " selectstart" + NS, function(e) {
-                e.preventDefault();
+                if (!$(e.target).is(":kendoFocusable")) {
+                    e.preventDefault();
+                }
             });
 
             if (that.options.editable && that.options.editable.resize !== false) {

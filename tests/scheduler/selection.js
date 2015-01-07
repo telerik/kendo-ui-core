@@ -106,7 +106,22 @@
         equal(selection.groupIndex, slot.groupIndex);
     });
 
-    test("scheduler focuses wrapper on mousedown", function() {
+    test("scheduler focuses wrapper on mousedown", 0, function() {
+        var input = $("<input/>");
+        var td = container.find(".k-scheduler-toolbar").append(input);
+
+        input.mousedown();
+
+        scheduler.wrapper.triggerHandler({
+            type: "mousedown",
+            target: input[0],
+            preventDefault: function() {
+                ok(false);
+            }
+        });
+    });
+
+    test("scheduler focuses input placed in wrapper", function() {
         var td = container.find(".k-scheduler-content td:first");
 
         td.trigger({
