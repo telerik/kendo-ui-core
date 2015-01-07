@@ -146,6 +146,26 @@ namespace Kendo.Extensions
             return category.Contains("applications") || category.Contains("gauges") || category.Contains("financial") || category.Contains("geoviz");
         }
 
+        public static string StyleRel(this HtmlHelper html, string styleName) {
+            if (styleName.ToLowerInvariant().EndsWith("less")) {
+                return "stylesheet/less";
+            }
+
+            return "stylesheet";
+        }
+
+        public static IHtmlString StyleLink(this HtmlHelper html, string styleName) {
+            var urlHelper = new UrlHelper(html.ViewContext.RequestContext);
+            var url = urlHelper.Style(styleName);
+            return html.Raw("<link href=\"" + url + "\" rel=\"" + html.StyleRel(styleName) + "\" />");
+        }
+
+        public static IHtmlString StyleLink(this HtmlHelper html, string styleName, string theme, string common) {
+            var urlHelper = new UrlHelper(html.ViewContext.RequestContext);
+            var url = urlHelper.Style(styleName, theme, common);
+            return html.Raw("<link href=\"" + url + "\" rel=\"" + html.StyleRel(styleName) + "\" />");
+        }
+
         public static string NavigationWrapperClass(this HtmlHelper html, string category)
         {
             var classNames = new List<string> { "floatWrap" };

@@ -9,7 +9,7 @@
     <link rel="canonical" href="@(Request.Url.Scheme + "://" + Request.Url.Authority + Request.Url.AbsolutePath)" />
     @foreach (string styleName in (ViewBag.Mobile == true? Kendo.Models.StyleGroups.Mobile : Kendo.Models.StyleGroups.All))
     {
-    <link href="@Url.Style(styleName).Replace("CURRENT_THEME", ViewBag.Theme).Replace("CURRENT_COMMON", ViewBag.CommonFile)" rel="@(styleName.ToLowerInvariant().EndsWith("less") ? "stylesheet/less" : "stylesheet")" />
+    @Html.StyleLink(styleName, (string)ViewBag.Theme, (string)ViewBag.CommonFile)
     }
 
     @if (ViewBag.Debug)

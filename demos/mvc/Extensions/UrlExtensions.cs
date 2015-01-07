@@ -33,6 +33,13 @@ namespace Kendo.Extensions
             return ResourceUrl(url, "js", file);
         }
 
+        public static string Style(this UrlHelper url, string file, string theme, string commonFile)
+        {
+            return url.Style(file)
+                .Replace("CURRENT_THEME", theme)
+                .Replace("CURRENT_COMMON", commonFile);
+        }
+
         public static string Style(this UrlHelper url, string file)
         {
             return ResourceUrl(url, "styles", file);

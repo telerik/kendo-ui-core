@@ -4,7 +4,7 @@
     <title>ThemeBuilder for Kendo UI</title>
     <link rel="shortcut icon" href="@Url.Content("~/favicon.ico")"/>
     @foreach (string styleName in ViewBag.styles) {
-    <link href="@Url.Style(styleName)" rel="@(styleName.ToLowerInvariant().EndsWith("less") ? "stylesheet/less" : "stylesheet")" />
+    @Html.StyleLink(styleName, (string)ViewBag.Theme, (string)ViewBag.CommonFile)
     }
     @if (ViewBag.Debug) {
     <script src="@Url.Content("~/content/shared/js/less.js")"></script>

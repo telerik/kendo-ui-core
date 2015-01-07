@@ -25,6 +25,8 @@ namespace Kendo.Controllers
             ViewBag.scripts = Kendo.Models.ScriptGroups.All;
             ViewBag.styles = Kendo.Models.StyleGroups.All;
 
+            SetTheme();
+
             return View();
         }
 
