@@ -1252,7 +1252,7 @@ var __meta__ = {
         }
 
         for (idx = 0, length = parts.length; idx < length; idx++) {
-            part = parts[idx];
+            part = $.trim(parts[idx]);
 
             if (part.indexOf("DTSTART") !== -1) {
                 instance.start = parseDateRule(part, zone);
@@ -1262,7 +1262,7 @@ var __meta__ = {
                 instance.exdates = parseDateRule(part, zone);
             } else if (part.indexOf("RRULE") !== -1) {
                 rule = part.substring(6);
-            } else { //improve this. support new row at the end of rule
+            } else if ($.trim(part)) {
                 rule = part;
             }
         }

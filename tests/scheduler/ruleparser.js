@@ -15,6 +15,13 @@
         deepEqual(rrule.start.value[0], new Date(1973, 3, 29, 7));
     });
 
+    test("Parse DTSTART property (line breaks separator in the end too)", function() {
+        var rrule = parse("DTSTART:19730429T070000Z\n\rRRULE:FREQ=DAILY\n\r", "Etc/UTC");
+
+        deepEqual(rrule.start.value[0], new Date(1973, 3, 29, 7));
+        equal(rrule.freq, "daily");
+    });
+
     test("Parse DTSTART property (space separator)", function() {
         var rrule = parse("DTSTART:19730429T070000Z RRULE:FREQ=DAILY", "Etc/UTC");
 
