@@ -756,6 +756,24 @@
         equal(firstColumn[0].offsetWidth, initialWidth + 20);
     });
 
+    test("header and content table have equal width after resize and dataSource is changed", 1, function() {
+         var grid = new Grid(table, {
+            dataSource: [ { foo: "foo", bar: "bar" } ],
+            resizable: true,
+            columns: ["foo", "bar"]
+        }),
+        firstColumn = grid.thead.find("th:first"),
+        initialWidth = firstColumn[0].offsetWidth;
+
+        resizeColumn(grid.wrapper, firstColumn, initialWidth, initialWidth + 10);
+
+        grid.setDataSource(new kendo.data.DataSource({
+            data: [ { foo: "foo", bar: "bar" } ]
+        }));
+
+        equal(grid.thead.parent().width(), grid.table.width());
+    });
+
     asyncTest("handler is added to the header on tap and hold in mobile grid", 1, function() {
         var grid = new Grid(table, {
             mobile: "phone",

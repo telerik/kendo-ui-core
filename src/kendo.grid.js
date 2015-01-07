@@ -3898,6 +3898,9 @@ var __meta__ = {
                 if (isIE7) {
                     table.attr("cellspacing", 0);
                 }
+
+                table.width(that.table[0].style.width);
+
                 table.append(that.thead);
                 header.empty().append($('<div class="k-grid-header-wrap" />').append(table));
 
