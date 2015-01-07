@@ -71,6 +71,12 @@ var __meta__ = {
                             widget.dataSource.data(mew);
                         }
                     }
+                } else {
+                    var widget = kendoWidgetInstance(element);
+
+                    if (widget && typeof widget.dataSource) {
+                        widget.dataSource.data(mew);
+                    }
                 }
             }, true);
             return ds;
