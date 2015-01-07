@@ -66,8 +66,14 @@ var __meta__ = {
                     if (widget && typeof widget.setDataSource == "function") {
                         widget.setDataSource(ds);
                     }
+                } else {
+                    var widget = kendoWidgetInstance(element);
+
+                    if (widget && typeof widget.dataSource) {
+                        widget.dataSource.data(mew);
+                    }
                 }
-            });
+            }, true);
             return ds;
         };
     }());
