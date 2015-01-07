@@ -588,8 +588,10 @@ var __meta__ = {
                 inserted = that._create(tab);
 
             each(inserted.tabs, function (idx) {
+                var contents = inserted.contents[idx];
                 that.tabGroup.append(this);
-                that.wrapper.append(inserted.contents[idx]);
+                that.wrapper.append(contents);
+                that.angular("compile", function(){ return { elements: [ contents ] }; });
             });
 
             updateFirstLast(that.tabGroup);
@@ -606,8 +608,10 @@ var __meta__ = {
                 referenceContent = $(that.contentElement(referenceTab.index()));
 
             each(inserted.tabs, function (idx) {
+                var contents = inserted.contents[idx];
                 referenceTab.before(this);
-                referenceContent.before(inserted.contents[idx]);
+                referenceContent.before(contents);
+                that.angular("compile", function(){ return { elements: [ contents ] }; });
             });
 
             updateFirstLast(that.tabGroup);
@@ -624,8 +628,10 @@ var __meta__ = {
                 referenceContent = $(that.contentElement(referenceTab.index()));
 
             each(inserted.tabs, function (idx) {
+                var contents = inserted.contents[idx];
                 referenceTab.after(this);
-                referenceContent.after(inserted.contents[idx]);
+                referenceContent.after(contents);
+                that.angular("compile", function(){ return { elements: [ contents ] }; });
             });
 
             updateFirstLast(that.tabGroup);
