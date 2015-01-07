@@ -45,7 +45,7 @@ class PatchedBoostrapScriptTask < Rake::FileTask
                 "requiredJs" => '["scripts/themebuilder.all.min.js"]',
                 "requiredCss" => '["styles/themebuilder.all.min.css"]',
                 "bootstrapCss" => '"styles/bootstrap.min.css"',
-                "JQUERY_LOCATION" => '"https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"',
+                "JQUERY_LOCATION" => '"https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"',
                 "KENDO_LOCATION" => "\"#{cdn_root}/\""
             }.map { |variable, value|
                 bootstrap = replace_variable(bootstrap, variable, value)
@@ -67,7 +67,7 @@ class PatchedBoostrapScriptTask < Rake::FileTask
 end
 
 def patched_bootstrap(name, source, cdn_root)
-    task = PatchedBoostrapScriptTask.define_task(name => source)
+    task = PatchedBoostrapScriptTask.define_task(name => [ source, THEME_BUILDER_BUILDFILE ])
     task.cdn_root = cdn_root
     task
 end
