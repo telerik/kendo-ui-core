@@ -60,17 +60,16 @@ var __meta__ = {
 
             // not recursive -- this triggers when the whole data source changed
             scope.$watch(source, function(mew, old){
-                if (mew !== old) {
-                    var ds = toDataSource(mew, type);
-                    var widget = kendoWidgetInstance(element);
-                    if (widget && typeof widget.setDataSource == "function") {
-                        widget.setDataSource(ds);
-                    }
-                } else {
-                    var widget = kendoWidgetInstance(element);
-
-                    if (widget && typeof widget.dataSource) {
-                        widget.dataSource.data(mew);
+                var widget = kendoWidgetInstance(element);
+                if (widget) {
+                    if (mew !== old) {
+                        if (typeof widget.setDataSource == "function") {
+                            widget.setDataSource(toDataSource(mew, type));
+                        }
+                    } else {
+                        if (widget.dataSource && typeof widget.dataSource.data == "function") {
+                            widget.dataSource.data(mew);
+                        }
                     }
                 }
             }, true);
