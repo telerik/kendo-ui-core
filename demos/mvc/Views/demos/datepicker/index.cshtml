@@ -1,12 +1,22 @@
 
         <div id="example">
-            <div id="email-settings">
+<!--            <div id="email-settings">
                 <div class="display-picker">
                     <input id="datepicker" value="10/10/2011" style="width:150px;" />
                 </div>
                 <div class="archive-picker">
                     <input id="monthpicker" value="November 2011" style="width:150px" />
                 </div>
+            </div>-->
+            <div class="demo-section k-header">
+                <h4>E-mail Settings:</h4>
+                <p>
+                    <label datepicker="start">Show e-mails from:</label><input id="datepicker" value="10/10/2011" style="width:200px;" />
+                </p>
+
+                <p>
+                    <label for="monthpicker">Add to archive mail from:</label><input id="monthpicker" value="November 2011" style="width:200px" />
+                </p>
             </div>
         <script>
             $(document).ready(function() {
@@ -26,29 +36,21 @@
             });
         </script>
         <style scoped>
-            #example h2 {
-                font-weight: normal;
+            .demo-section {
+                width: 400px;
             }
-            #email-settings {
-                height: 135px;
-                width: 395px;
-                margin: 30px auto;
-                padding: 110px 0 0 30px;
-                background: url('../content/web/datepicker/mailSettings.png') transparent no-repeat 0 0;
+            .demo-section p {
+                margin-top: 2em;
             }
-            .display-picker {
-                margin-top: -6px;
-                margin-left: 180px
+            .demo-section label {
+                display: inline-block;
+                width: 180px;
+                padding-right: 5px;
+                text-align: right;
             }
-            .archive-picker {
-                margin-top: 59px;
-                margin-left: 180px
-            }
-            html.k-material .display-picker {
-                margin-top: -13px;
-            }
-            html.k-material .archive-picker {
-                margin-top: 47px;
+            
+            #example .k-datepicker {
+                vertical-align: middle;
             }
         </style>
         </div>
