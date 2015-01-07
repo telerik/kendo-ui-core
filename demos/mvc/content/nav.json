@@ -3254,7 +3254,7 @@
   },
   {
     "packages": [ "!mvc", "!jsp", "!php" ],
-    "text": "Drag & Drop",
+    "text": "Drag and Drop",
     "name": "dragdrop",
     "api": "framework/draggable",
     "documentation": {
