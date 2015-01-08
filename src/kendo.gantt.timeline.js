@@ -25,6 +25,9 @@ var __meta__ = {
     var NS = ".kendoGanttTimeline";
     var CLICK = "click";
     var DBLCLICK = "dblclick";
+    var MOUSEMOVE = "mousemove";
+    var MOUSEENTER = "mouseenter";
+    var MOUSELEAVE = "mouseleave";
     var KEYDOWN = "keydown";
     var DOT = ".";
     var TIME_HEADER_TEMPLATE = kendo.template("#=kendo.toString(start, 't')#");
@@ -45,6 +48,14 @@ var __meta__ = {
                                    '<div class="#=styles.tooltipContent#">#=text#%</div>' +
                                    '<div class="#=styles.tooltipCallout#" style="left:13px;"></div>' +
                               '</div>');
+    var TASK_TOOLTIP_TEMPLATE = kendo.template('<div class="#=styles.taskDetails#">' +
+                                    '<strong>#=task.title#</strong>' +
+                                    '<div class="#=styles.taskDetailsPercent#">#=kendo.toString(task.percentComplete, "p0")#</div>' +
+                                    '<ul class="#=styles.reset#">' +
+                                        '<li>#=messages.start#: #=kendo.toString(task.start, "h:mm tt ddd, MMM d")#</li>' +
+                                        '<li>#=messages.end#: #=kendo.toString(task.end, "h:mm tt ddd, MMM d")#</li>' +
+                                    '</ul>' +
+                                '</div>');
 
     var defaultViews = {
         day: {
@@ -96,6 +107,7 @@ var __meta__ = {
 
     var viewStyles = {
         alt: "k-alt",
+        reset: "k-reset",
         nonWorking: "k-nonwork-hour",
         header: "k-header",
         gridHeader: "k-grid-header",
@@ -122,6 +134,8 @@ var __meta__ = {
         taskActions: "k-task-actions",
         taskDelete: "k-task-delete",
         taskComplete: "k-task-complete",
+        taskDetails: "k-task-details",
+        taskDetailsPercent: "k-task-pct",
         link: "k-link",
         icon: "k-icon",
         iconDelete: "k-si-close",
@@ -180,6 +194,7 @@ var __meta__ = {
             this._dragHint = null;
             this._resizeHint = null;
             this._resizeTooltip = null;
+            this._taskTooltip = null;
             this._percentCompleteResizeTooltip = null;
 
             this._headerTree = null;
@@ -1088,6 +1103,51 @@ var __meta__ = {
             this.content.find(DOT + GanttView.styles.dependencyHint).remove();
         },
 
+        _createTaskTooltip: function(task, element, mouseLeft) {
+            var styles = GanttView.styles;
+            var options = this.options;
+            var content = this.content;
+            var contentOffset = this.content.offset();
+            var row = $(element).parents("tr").first();
+            var rowOffset = row.offset();
+            var template = (options.tooltip && options.tooltip.template) ? kendo.template(options.tooltip.template) : TASK_TOOLTIP_TEMPLATE;
+            var left = mouseLeft - (contentOffset.left - content.scrollLeft());
+            var top = (rowOffset.top + row.outerHeight() - contentOffset.top) + content.scrollTop();
+
+            var tooltip = this._taskTooltip = $('<div style="z-index: 100002;" class="' +styles.tooltipWrapper + '" >' +
+                                   '<div class="' + styles.taskContent + '"></div></div>');
+
+            tooltip
+                .css({
+                    "left": left,
+                    "top": top
+                })
+                .appendTo(content)
+                .find(DOT + styles.taskContent)
+                .append(template({
+                    styles: styles,
+                    task: task,
+                    messages: options.messages.views
+                }));
+
+            if (tooltip.outerHeight() < rowOffset.top - contentOffset.top) {
+                tooltip.css("top", ((rowOffset.top - contentOffset.top) - tooltip.outerHeight()) + content.scrollTop());
+            }
+
+            if ((tooltip.outerWidth() + left) - content.scrollLeft() > content.width()) {
+                tooltip.css("left", left - tooltip.outerWidth());
+            }
+
+        },
+
+        _removeTaskTooltip: function() {
+            if (this._taskTooltip) {
+                this._taskTooltip.remove();
+            }
+
+            this._taskTooltip = null;
+        },
+
         _scrollTo: function(element) {
             var elementLeft = element.offset().left;
             var elementWidth = element.width();
@@ -1612,6 +1672,8 @@ var __meta__ = {
             this._createDependencyDraggable();
 
             this._attachEvents();
+
+            this._tooltip();
         },
 
         options: {
@@ -1858,7 +1920,6 @@ var __meta__ = {
             var currentStart;
             var startOffset;
             var snap = this.options.snap;
-            var dragInProgress;
             var styles = GanttTimeline.styles;
 
             var cleanUp = function() {
@@ -1870,7 +1931,7 @@ var __meta__ = {
 
                 element = null;
                 task = null;
-                dragInProgress = false;
+                that.dragInProgress = false;
             };
 
             if (!this.options.editable) {
@@ -1902,10 +1963,11 @@ var __meta__ = {
 
                     element.css("opacity", 0.5);
 
-                    dragInProgress = true;
+                    clearTimeout(that._tooltipTimeout);
+                    that.dragInProgress = true;
                 })
                 .bind("drag", kendo.throttle(function(e) {
-                    if (!dragInProgress) {
+                    if (!that.dragInProgress) {
                         return;
                     }
 
@@ -1939,14 +2001,13 @@ var __meta__ = {
             var currentEnd;
             var resizeStart;
             var snap = this.options.snap;
-            var dragInProgress;
             var styles = GanttTimeline.styles;
 
             var cleanUp = function() {
                 that.view()._removeResizeHint();
                 element = null;
                 task = null;
-                dragInProgress = false;
+                that.dragInProgress = false;
             };
 
             if (!this.options.editable) {
@@ -1977,10 +2038,11 @@ var __meta__ = {
 
                     that.view()._createResizeHint(task);
 
-                    dragInProgress = true;
+                    clearTimeout(that._tooltipTimeout);
+                    that.dragInProgress = true;
                 })
                 .bind("drag", kendo.throttle(function(e) {
-                    if (!dragInProgress) {
+                    if (!that.dragInProgress) {
                         return;
                     }
 
@@ -2031,14 +2093,13 @@ var __meta__ = {
             var currentPercentComplete;
             var tooltipTop;
             var tooltipLeft;
-            var dragInProgress;
             var styles = GanttTimeline.styles;
 
             var cleanUp = function() {
                 that.view()._removePercentCompleteTooltip();
                 taskElement = null;
                 task = null;
-                dragInProgress = false;
+                that.dragInProgress = false;
             };
 
             var updateElement = function(width) {
@@ -2074,10 +2135,11 @@ var __meta__ = {
                     originalPercentWidth = taskElement.find(DOT + styles.taskComplete).width();
                     maxPercentWidth = taskElement.outerWidth();
 
-                    dragInProgress = true;
+                    clearTimeout(that._tooltipTimeout);
+                    that.dragInProgress = true;
                 })
                 .bind("drag", kendo.throttle(function(e) {
-                    if (!dragInProgress) {
+                    if (!that.dragInProgress) {
                         return;
                     }
 
@@ -2112,7 +2174,6 @@ var __meta__ = {
             var originalHandle;
             var hoveredHandle = $();
             var hoveredTask = $();
-            var dragInProgress;
             var startX;
             var startY;
             var content;
@@ -2135,7 +2196,7 @@ var __meta__ = {
 
                 that.view()._removeDependencyDragHint();
 
-                dragInProgress = false;
+                that.dragInProgress = false;
             };
 
             var toggleHandles = function(value) {
@@ -2175,10 +2236,11 @@ var __meta__ = {
                     startX = Math.round(elementOffset.left + content.scrollLeft() - contentOffset.left + (originalHandle.outerHeight() / 2));
                     startY = Math.round(elementOffset.top + content.scrollTop() - contentOffset.top + (originalHandle.outerWidth() / 2));
 
-                    dragInProgress = true;
+                    clearTimeout(that._tooltipTimeout);
+                    that.dragInProgress = true;
                 })
                 .bind("drag", kendo.throttle(function(e) {
-                    if (!dragInProgress) {
+                    if (!that.dragInProgress) {
                         return;
                     }
 
@@ -2335,7 +2397,45 @@ var __meta__ = {
                         }
                     });
             }
+        },
+
+        _tooltip: function() {
+            var that = this;
+            var tooltipOptions = this.options.tooltip;
+            var styles = GanttTimeline.styles;
+            var currentMousePosition;
+            var mouseMoveHandler = function(e) {
+                currentMousePosition = e.clientX;
+            };
+
+            if (tooltipOptions && tooltipOptions.visible === false) {
+                return;
+            }
+
+            this.wrapper
+                    .on(MOUSEENTER + NS, DOT + styles.task, function(e) {
+                        var element = this;
+                        var task = that._taskByUid($(this).attr("data-uid"));
+
+                        if (that.dragInProgress) {
+                            return;
+                        }
+
+                        that._tooltipTimeout = setTimeout(function() {
+                            that.view()._createTaskTooltip(task, element, currentMousePosition);
+                        }, 800);
+
+                        $(this).on(MOUSEMOVE, mouseMoveHandler);
+                    })
+                    .on(MOUSELEAVE + NS, DOT + styles.task, function(e) {
+                        clearTimeout(that._tooltipTimeout);
+
+                        that.view()._removeTaskTooltip();
+
+                        $(this).off(MOUSEMOVE, mouseMoveHandler);
+                    });
         }
+
     });
 
     extend(true, GanttTimeline, { styles: timelineStyles });

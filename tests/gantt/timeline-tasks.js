@@ -210,6 +210,65 @@
     });
 
 
+    module("Task Tooltip", {
+        setup: function() {
+            element = $("<div />");
+            timeline = new Timeline(element);
+            timeline.view("week");
+            tasks = [new GanttTask({
+                start: new Date("2014/04/15"),
+                end: new Date("2014/04/16")
+            })];
+        },
+        teardown: function() {
+            if (timeline) {
+                timeline.destroy();
+            }
+
+            kendo.destroy(element);
+        }
+    });
+
+    test("_createTaskTooltip renders tooltip", function() {
+        timeline._render(tasks);
+
+        var task = timeline._tasks[0];
+        var taskElement = timeline.wrapper.find(".k-task");
+
+        timeline.view()._createTaskTooltip(task, taskElement, 0);
+
+        equal(timeline.wrapper.find(".k-tooltip .k-task-details").length, 1);
+    });
+
+    test("_createTaskTooltip renders tooltip with template if set", function() {
+        timeline._render(tasks);
+
+        var task = timeline._tasks[0];
+        var taskElement = timeline.wrapper.find(".k-task");
+
+        timeline.view().options.tooltip = {
+            template: '<div class="customTemplate" />'
+        };
+
+        timeline.view()._createTaskTooltip(task, taskElement, 0);
+
+        equal(timeline.wrapper.find(".k-tooltip .customTemplate").length, 1);
+    });
+
+    test("_removeTaskTooltip removes tooltip", function() {
+        timeline._render(tasks);
+
+        var task = timeline._tasks[0];
+        var taskElement = timeline.wrapper.find(".k-task");
+
+        timeline.view()._createTaskTooltip(task, taskElement, 0);
+
+        timeline.view()._removeTaskTooltip();
+
+        equal(timeline.wrapper.find(".k-tooltip .k-task-details").length, 0);
+    });
+
+
     module("Single Task Rendering", {
         setup: function() {
             element = $("<div />").appendTo(QUnit.fixture);
