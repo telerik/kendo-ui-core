@@ -653,12 +653,18 @@ var __meta__ = {
                 model.accept(eventInfo);
             }
 
-            if (model.isRecurrenceHead() || model.recurrenceId) {
+            if ((!this._pushCreated && model.isRecurrenceHead()) || model.recurrenceId) {
                 model = model.recurrenceId ? model : model.toOccurrence();
                 this._addExceptionDate(model);
             }
 
             return DataSource.fn.insert.call(this, index, model);
+        },
+
+        pushCreate: function(items) {
+            this._pushCreated = true;
+            DataSource.fn.pushCreate.call(this, items);
+            this._pushCreated = false;
         },
 
         remove: function(model) {

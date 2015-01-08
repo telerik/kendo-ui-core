@@ -1425,4 +1425,51 @@
         ok(true);
     });
 
+    test("SchedulerDataSource pushState method does not create exception from recurrence head", function() {
+        var event = {
+            id: 1,
+            title: "Title",
+            start: new Date(2013, 1, 1, 16, 30),
+            end: new Date(2013, 1, 3, 17, 0),
+            isAllDay: true,
+            recurrenceRule: "FREQ=MONTHLY"
+        };
+
+        var dataSource = createDataSource([]);
+
+        var event = dataSource.pushCreate(event);
+        var data = dataSource.data();
+
+        equal(data.length, 1);
+    });
+
+    test("SchedulerDataSource pushState method updates recurrence head if an occurrence is added", function() {
+        var date = new Date(2013, 1, 1, 16, 30);
+        var recurrenceException = kendo.toString(kendo.timezone.apply(date, "Etc/UTC"), "yyyyMMddTHHmmssZ") + ";";
+        var dataSource = createDataSource([
+            {
+                id: 1,
+                title: "Head",
+                start: date,
+                end: new Date(2013, 1, 1, 17, 0),
+                recurrenceRule: "FREQ=MONTHLY"
+            }
+        ]);
+
+        var head = dataSource.data()[0];
+
+        var occurrence = head.toOccurrence();
+        occurrence.id = 2;
+
+        dataSource.pushCreate(occurrence);
+
+        var data = dataSource.data();
+
+        equal(data.length, 2);
+        equal(data[0].title, head.title);
+        equal(data[0].recurrenceException, recurrenceException);
+
+        equal(data[1].id, occurrence.id);
+        equal(data[1].recurrenceId, occurrence.recurrenceId);
+    });
 })();
