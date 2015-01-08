@@ -104,7 +104,7 @@
         setTimeout(function() {
             start();
             var items = virtualList.items();
-            ok($(items).hasClass("k-virtual-item"));
+            ok(items.hasClass("k-virtual-item"));
         }, 100);
     });
 
@@ -161,7 +161,7 @@
 
         setTimeout(function() {
             start();
-            var items = $(virtualList.items());
+            var items = virtualList.items();
 
             ok(items.find(".foo").length > 0);
             items.each(function(idx, element) {
@@ -198,7 +198,7 @@
 
         setTimeout(function() {
             start();
-            var items = $(virtualList.items());
+            var items = virtualList.items();
 
             ok(items.find(".foo").length > 0);
             items.each(function(idx, element) {
@@ -295,7 +295,7 @@
         setTimeout(function() {
             start();
             scroll(container, 3 * CONTAINER_HEIGHT); //scroll the list 1 screens
-            var lastScreenItems = $(virtualList.items().slice(-10));
+            var lastScreenItems = virtualList.items().slice(-10);
 
             lastScreenItems.each(function(idx, element) {
                 equal($(element).position().top, (4 * CONTAINER_HEIGHT) + (idx * 20));
@@ -337,7 +337,7 @@
             //total placeholders height is 200/20 * 4 = 800
             //threshold is 800 * 0.5 = 400, at 400 + 1 * itemHeight placeholders should re-position
             scroll(container, 2 * CONTAINER_HEIGHT);
-            var items = $(virtualList.items());
+            var items = virtualList.items();
 
             items.each(function(idx, element) {
                 equal($(element).position().top, idx * 20);
@@ -361,7 +361,7 @@
 
             setTimeout(function() {
                 start();
-                var items = $(virtualList.items());
+                var items = virtualList.items();
                 var data = asyncDataSource.data();
 
                 items.each(function(idx, element) {

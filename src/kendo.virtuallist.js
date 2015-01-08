@@ -37,58 +37,6 @@ var __meta__ = {
         return element;
     }
 
-    // function itemAt(dataSource, pageSize, dataAvailableCallback) {
-    //     var lastRequestedRange = null;
-    //     var flatGroups = {};
-
-    //     var mute = false;
-
-    //     dataSource.bind("change", function() {
-    //         if (!mute) {
-    //             dataAvailableCallback();
-    //         }
-    //     });
-
-    //     return function(index, rangeStart) {
-    //         if (!dataSource.inRange(rangeStart, pageSize)) {
-    //             if (lastRequestedRange !== rangeStart) {
-    //                 lastRequestedRange = rangeStart;
-    //                 dataSource.range(rangeStart, pageSize);
-    //             }
-
-    //             return null;
-    //         } else {
-    //             if (dataSource.skip() !== rangeStart) {
-    //                 mute = true;
-    //                 dataSource.range(rangeStart, pageSize);
-    //                 mute = false;
-    //             }
-
-    //             var result;
-    //             debugger;
-    //             if (dataSource.group().length) { //has groups
-    //                 if (!flatGroups[rangeStart]) {
-    //                     var flatGroup = flatGroups[rangeStart] = [];
-    //                     var groups = dataSource.view();
-    //                     for (var i = 0, len = groups.length; i < len; i++) {
-    //                         var group = groups[i];
-    //                         for (var j = 0, groupLength = group.items.length; j < groupLength; j++) {
-    //                             flatGroup.push({ item: group.items[j], group: group.value });
-    //                         }
-    //                     }
-    //                 }
-
-    //                 result = flatGroups[rangeStart][index - rangeStart];
-    //             } else { //does not have groups
-    //                 result = dataSource.at(index - rangeStart);
-    //                 console.log(result);
-    //             }
-
-    //             return result;
-    //         }
-    //     };
-    // }
-
     function bufferSizes(screenHeight, listScreens, opposite) { //in pixels
         return {
             down: screenHeight * opposite,
@@ -318,7 +266,7 @@ var __meta__ = {
         },
 
         items: function() {
-            return this._items;
+            return $(this._items);
         },
 
         destroy: function() {
