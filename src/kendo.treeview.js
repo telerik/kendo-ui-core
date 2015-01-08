@@ -1884,13 +1884,20 @@ var __meta__ = {
             dataSource.bind("change", function expandLevel(e) {
                 // listen to the change event to know when the node has been loaded
                 var id = e.node && e.node.id;
+                var node;
 
                 // proceed if the change is caused by the last fetching
                 if (id && id === path[0]) {
                     path.shift();
 
                     if (path.length) {
-                        dataSource.get(path[0]).set("expanded", true);
+                        node = dataSource.get(path[0]);
+
+                        if (node && !node.loaded()) {
+                            node.set("expanded", true);
+                        } else {
+                            complete.call(treeview);
+                        }
                     } else {
                         complete.call(treeview);
                     }

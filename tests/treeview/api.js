@@ -1170,4 +1170,36 @@
             equal(this, treeviewObject);
         });
     });
+
+    asyncTest("expandPath calls callback if expanded node has no children", function() {
+        var calls = 0;
+
+        createTreeView({
+            dataSource: {
+                transport: {
+                    read: function(options) {
+                        if (!calls) {
+                            options.success([ { id: 1, text: "foo", hasChildren: true } ]);
+                        } else {
+                            options.success([]);
+                        }
+
+                        calls++;
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "id",
+                        hasChildren: "hasChildren"
+                    }
+                }
+            }
+        });
+
+        treeviewObject.expandPath([ 1, 2 ], function() {
+            start();
+
+            ok(true);
+        });
+    });
 })();
