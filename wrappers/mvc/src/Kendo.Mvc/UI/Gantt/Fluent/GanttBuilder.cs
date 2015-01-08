@@ -321,6 +321,16 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
+        /// The task tooltip configuration options.
+        /// </summary>
+        /// <param name="configurator">The action that configures the tooltip.</param>
+        public GanttBuilder<TTaskModel,TDependenciesModel> Tooltip(Action<GanttTooltipSettingsBuilder> configurator)
+        {
+            configurator(new GanttTooltipSettingsBuilder(container.Tooltip));
+            return this;
+        }
+        
+        /// <summary>
         /// The views displayed by the Gantt and their configuration. The array items can be either objects specifying the view configuration or strings representing the view types (assuming default configuration).
 		/// By default the Kendo UI Gantt widget displays "day", "week", and "month" views.
         /// </summary>

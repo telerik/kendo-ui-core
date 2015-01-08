@@ -51,6 +51,8 @@ namespace Kendo.Mvc.UI
                 
             Toolbar = new List<GanttToolbar>();
                 
+            Tooltip = new GanttTooltipSettings();
+                
             Views = new List<GanttView>();
                 
         //<< Initialization
@@ -134,6 +136,12 @@ namespace Kendo.Mvc.UI
         public bool? ShowWorkHours { get; set; }
         
         public List<GanttToolbar> Toolbar
+        {
+            get;
+            set;
+        }
+        
+        public GanttTooltipSettings Tooltip
         {
             get;
             set;
@@ -270,6 +278,11 @@ namespace Kendo.Mvc.UI
             if (toolbar.Any())
             {
                 json["toolbar"] = toolbar;
+            }
+            var tooltip = Tooltip.ToJson();
+            if (tooltip.Any())
+            {
+                json["tooltip"] = tooltip;
             }
             var views = Views.ToJson();
             if (views.Any())
