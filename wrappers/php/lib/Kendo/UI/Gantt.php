@@ -209,6 +209,15 @@ instance.If the dependencies option is set to a JavaScript object or array the w
     }
 
     /**
+    * The task tooltip configuration options.
+    * @param \Kendo\UI\GanttTooltip|array $value
+    * @return \Kendo\UI\Gantt
+    */
+    public function tooltip($value) {
+        return $this->setProperty('tooltip', $value);
+    }
+
+    /**
     * Adds GanttView to the Gantt.
     * @param \Kendo\UI\GanttView|array,... $value one or more GanttView to add.
     * @return \Kendo\UI\Gantt
