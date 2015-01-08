@@ -489,6 +489,51 @@
         ok(scheduler._editor.container.find(".k-scheduler-update").length);
     });
 
+    test("validation rules for description field are executed", function() {
+        var scheduler = setup({
+                dataSource: {
+                    data: [{ start: new Date(), end: new Date(), isAllDay: true, title: "", description: "" }],
+                    schema: {
+                        model: {
+                            fields: {
+                                description: { validation: { required: true} }
+                            }
+                        }
+                    }
+                }
+        });
+        var eventElement = scheduler.dataSource.at(0).uid;
+
+        scheduler.editEvent(eventElement);
+
+        scheduler.saveEvent();
+
+        ok(scheduler._editor.container.find(".k-scheduler-update").length);
+    });
+
+    test("validation attributes for description field are correctly set", function() {
+        var scheduler = setup({
+            dataSource: {
+                data: [{ start: new Date(), end: new Date(), isAllDay: true, title: "", description: "" }],
+                schema: {
+                    model: {
+                        fields: {
+                            description: { validation: { required: true, email: true} }
+                        }
+                    }
+                }
+            }
+        });
+        var eventElement = scheduler.dataSource.at(0).uid;
+
+        scheduler.editEvent(eventElement);
+
+        scheduler.saveEvent();
+
+        equal(scheduler._editor.container.find("[name=description]").attr("data-type"), "email");
+        equal(scheduler._editor.container.find("[name=description]").attr("required"), "required");
+    });
+
     test("saveEvent calls DataSource sync", function() {
         var scheduler = setup(),
             eventElement = scheduler.dataSource.at(0).uid;

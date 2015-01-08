@@ -473,6 +473,77 @@
         equal($(multiselect.items()[1]).text(), "Foo 2");
     });
 
+    test("validation rules for dropdownlist resource editor", function() {
+        var scheduler = new kendo.ui.Scheduler(div, {
+            date: new Date("2013/6/6"),
+            resources: [
+                {
+                    field: "foo",
+                    multiple: true,
+                    dataSource: [
+                        { text: "Foo 1", value: 1, color: "red" },
+                        { text: "Foo 2", value: 2, color: "green" }
+                    ]
+                }
+            ],
+            dataSource: {
+                data: [{ start: new Date(), end: new Date(), isAllDay: true, title: "", description: "", foo: [] }],
+                schema: {
+                    model: {
+                        fields: {
+                            foo: { validation: { required: true} }
+                        }
+                    }
+                }
+            },
+            views: ["day"]
+        });
+
+        var eventElement = scheduler.dataSource.at(0).uid;
+
+        scheduler.editEvent(eventElement);
+
+        scheduler.saveEvent();
+
+        equal(scheduler._editor.container.find("[data-bind='value:foo']").attr("required"), "required");
+        ok(scheduler._editor.container.find(".k-scheduler-update").length);
+    });
+
+    test("validation rules for multiselect resource editor", function() {
+        var scheduler = new kendo.ui.Scheduler(div, {
+            date: new Date("2013/6/6"),
+            resources: [
+                {
+                    field: "foo",
+                    dataSource: [
+                        { text: "Foo 1", value: 1, color: "red" },
+                        { text: "Foo 2", value: 2, color: "green" }
+                    ]
+                }
+            ],
+            dataSource: {
+                data: [{ start: new Date(), end: new Date(), isAllDay: true, title: "", description: "" }],
+                schema: {
+                    model: {
+                        fields: {
+                            foo: { validation: { required: true} }
+                        }
+                    }
+                }
+            },
+            views: ["day"]
+        });
+
+        var eventElement = scheduler.dataSource.at(0).uid;
+
+        scheduler.editEvent(eventElement);
+
+        scheduler.saveEvent();
+
+        equal(scheduler._editor.container.find("[data-bind='value:foo']").attr("required"), "required");
+        ok(scheduler._editor.container.find(".k-scheduler-update").length);
+    });
+
     test("the dropdownlist items have the color of the event", function() {
         var event = new kendo.data.SchedulerEvent({
             start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 11:00"), title: ""

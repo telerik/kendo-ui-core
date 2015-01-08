@@ -773,10 +773,45 @@ var __meta__ = {
         return options;
     }
 
-    function dropDownResourceEditor(resource) {
+    function fieldType(field) {
+        field = field != null ? field : "";
+        return field.type || $.type(field) || "string";
+    }
+
+    function createValidationAttributes(model, field) {
+        var modelField = (model.fields || model)[field];
+        var specialRules = ["url", "email", "number", "date", "boolean"];
+        var validation = modelField ? modelField.validation : {};
+        var type = fieldType(modelField);
+        var datatype = kendo.attr("type");
+        var inArray = $.inArray;
+        var ruleName;
+        var rule;
+
+        var attr = {};
+
+        for (ruleName in validation) {
+            rule = validation[ruleName];
+
+            if (inArray(ruleName, specialRules) >= 0) {
+                attr[datatype] = ruleName;
+            } else if (!kendo.isFunction(rule)) {
+                attr[ruleName] = isPlainObject(rule) ? (rule.value || ruleName) : rule;
+            }
+
+            attr[kendo.attr(ruleName + "-msg")] = rule.message;
+        }
+
+        return attr;
+    }
+
+    function dropDownResourceEditor(resource, model) {
+        var attr = createValidationAttributes(model, resource.field);
+
         return function(container) {
            $(kendo.format('<select data-{0}bind="value:{1}">', kendo.ns, resource.field))
              .appendTo(container)
+             .attr(attr)
              .kendoDropDownList({
                  dataTextField: resource.dataTextField,
                  dataValueField: resource.dataValueField,
@@ -788,7 +823,9 @@ var __meta__ = {
        };
     }
 
-    function dropDownResourceEditorMobile(resource) {
+    function dropDownResourceEditorMobile(resource, model) {
+        var attr = createValidationAttributes(model, resource.field);
+
         return function(container) {
             var options = '';
             var view = resource.dataSource.view();
@@ -801,14 +838,27 @@ var __meta__ = {
             }
 
            $(kendo.format('<select data-{0}bind="value:{1}">{2}</select>', kendo.ns, resource.field, options))
-             .appendTo(container);
+             .appendTo(container)
+             .attr(attr);
        };
     }
 
-    function multiSelectResourceEditor(resource) {
+    function descriptionEditor(options) {
+        var attr = createValidationAttributes(options.model, options.field);
+
+        return function(container) {
+            $('<textarea name="description" class="k-textbox"/>').attr(attr)
+                .appendTo(container);
+        };
+    }
+
+    function multiSelectResourceEditor(resource, model) {
+        var attr = createValidationAttributes(model, resource.field);
+
         return function(container) {
            $(kendo.format('<select data-{0}bind="value:{1}">', kendo.ns, resource.field))
              .appendTo(container)
+             .attr(attr)
              .kendoMultiSelect({
                  dataTextField: resource.dataTextField,
                  dataValueField: resource.dataValueField,
@@ -820,7 +870,9 @@ var __meta__ = {
        };
     }
 
-    function multiSelectResourceEditorMobile(resource) {
+    function multiSelectResourceEditorMobile(resource, model) {
+        var attr = createValidationAttributes(model, resource.field);
+
         return function(container) {
             var options = "";
             var view = resource.dataSource.view();
@@ -838,7 +890,8 @@ var __meta__ = {
                 options,
                 resource.valuePrimitive
              ))
-             .appendTo(container);
+             .appendTo(container)
+             .attr(attr);
        };
     }
 
@@ -865,7 +918,7 @@ var __meta__ = {
             timezonePopUp: MOBILETIMEZONEPOPUP,
             timezone: MOBILETIMEZONEEDITOR,
             recurrence: MOBILERECURRENCEEDITOR,
-            description: '<textarea name="description" class="k-textbox"/>',
+            description: descriptionEditor,
             multipleResources: multiSelectResourceEditorMobile,
             resources: dropDownResourceEditor
         },
@@ -874,7 +927,7 @@ var __meta__ = {
             timezonePopUp: TIMEZONEPOPUP,
             timezone: TIMEZONEEDITOR,
             recurrence: RECURRENCEEDITOR,
-            description: '<textarea name="description" class="k-textbox"/>',
+            description: descriptionEditor,
             multipleResources: multiSelectResourceEditor,
             resources: dropDownResourceEditor
         }
@@ -938,7 +991,7 @@ var __meta__ = {
             }
 
             if ("description" in model) {
-                fields.push({ field: "description", title: messages.editor.description, editor: editors.description });
+                fields.push({ field: "description", title: messages.editor.description, editor: editors.description({model: model, field: "description"}) });
             }
 
             for (var resourceIndex = 0; resourceIndex < this.options.resources.length; resourceIndex++) {
@@ -946,7 +999,7 @@ var __meta__ = {
                 fields.push({
                     field: resource.field,
                     title: resource.title,
-                    editor: resource.multiple? editors.multipleResources(resource) : editors.resources(resource)
+                    editor: resource.multiple? editors.multipleResources(resource, model) : editors.resources(resource, model)
                 });
             }
 

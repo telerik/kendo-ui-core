@@ -71,6 +71,124 @@
         ok(scheduler._editor.container.closest(kendo.roleSelector("view")).length);
     });
 
+    test("validation rules for description field are executed", function() {
+        var scheduler = setup({
+            dataSource: {
+                data: [{ start: new Date(), end: new Date(), isAllDay: true, title: "", description: "" }],
+                schema: {
+                    model: {
+                        fields: {
+                            description: { validation: { required: true} }
+                        }
+                    }
+                }
+            }
+        });
+        var eventElement = scheduler.dataSource.at(0).uid;
+
+        scheduler.editEvent(eventElement);
+
+        scheduler.saveEvent();
+
+        ok(scheduler._editor.container.find(".k-scheduler-update").length);
+    });
+
+    test("validation attributes for description field are correctly set", function() {
+        var scheduler = setup({
+            dataSource: {
+                data: [{ start: new Date(), end: new Date(), isAllDay: true, title: "", description: "" }],
+                schema: {
+                    model: {
+                        fields: {
+                            description: { validation: { required: true, email: true} }
+                        }
+                    }
+                }
+            }
+        });
+        var eventElement = scheduler.dataSource.at(0).uid;
+
+        scheduler.editEvent(eventElement);
+
+        scheduler.saveEvent();
+
+        equal(scheduler._editor.container.find("[name=description]").attr("data-type"), "email");
+        equal(scheduler._editor.container.find("[name=description]").attr("required"), "required");
+    });
+
+    test("validation rules for mobile multiselect resource editor", function() {
+        var scheduler = setup({
+            date: new Date("2013/6/6"),
+            mobile: "phone",
+            resources: [
+                {
+                    multiple: true,
+                    field: "foo",
+                    dataSource: [
+                        { text: "Foo 1", value: 1, color: "red" },
+                        { text: "Foo 2", value: 2, color: "green" }
+                    ]
+                }
+            ],
+            dataSource: {
+                data: [{ start: new Date(), end: new Date(), isAllDay: true, title: "", description: "" }],
+                schema: {
+                    model: {
+                        fields: {
+                            foo: { validation: { required: true} }
+                        }
+                    }
+                }
+            },
+            views: ["day"]
+        });
+
+        var eventElement = scheduler.dataSource.at(0).uid;
+
+        scheduler.editEvent(eventElement);
+
+        scheduler.saveEvent();
+
+        equal(scheduler._editor.container.find("[data-bind='value:foo']").attr("required"), "required");
+        ok(scheduler._editor.container.find(".k-scheduler-update").length);
+    });
+
+    test("validation rules for mobile dropdownlist resource editor", function() {
+        var scheduler = setup({
+            date: new Date("2013/6/6"),
+            mobile: "phone",
+            resources: [
+                {
+                    field: "foo",
+                    dataSource: [
+                        { text: "Foo 1", value: 1, color: "red" },
+                        { text: "Foo 2", value: 2, color: "green" }
+                    ]
+                }
+            ],
+            dataSource: {
+                data: [{ start: new Date(), end: new Date(), isAllDay: true, title: "", description: "" }],
+                schema: {
+                    model: {
+                        fields: {
+                            foo: { validation: { required: true} }
+                        }
+                    }
+                }
+            },
+            views: ["day"]
+        });
+
+        var eventElement = scheduler.dataSource.at(0).uid;
+
+        scheduler.editEvent(eventElement);
+
+        scheduler.saveEvent();
+
+        equal(scheduler._editor.container.find("[data-bind='value:foo']").attr("required"), "required");
+        ok(scheduler._editor.container.find(".k-scheduler-update").length);
+    });
+
     test("data-validate attribute value is set to the date/datetime pickers based on the isAllDay value", 4, function() {
         var scheduler = setup();
         scheduler.dataSource.view()[0].isAllDay = false;
