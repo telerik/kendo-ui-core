@@ -76,12 +76,6 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        string ClientGroupFooterTemplate
-        {
-            get;
-            set;
-        }
-
         HtmlTemplate<GridAggregateResult> GroupFooterTemplate
         {
             get;

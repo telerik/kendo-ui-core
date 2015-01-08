@@ -402,6 +402,18 @@ namespace Kendo.Mvc.UI.Fluent
             return this as TColumnBuilder;
         }
 
+        /// <summary>
+        /// Sets the client group footer template for the column.
+        /// </summary>
+        /// <param name="value">The template</param>
+        /// <returns></returns>
+        public TColumnBuilder ClientGroupFooterTemplate(string template)
+        {
+            Column.ClientGroupFooterTemplate = template;
+
+            return this as TColumnBuilder;
+        }
+
         private static void MergeAttributes(IDictionary<string, object> target, IDictionary<string, object> attributes)
         {
             target.Merge(attributes);

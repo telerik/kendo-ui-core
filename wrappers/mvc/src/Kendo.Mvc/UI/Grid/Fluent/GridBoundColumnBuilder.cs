@@ -222,18 +222,7 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
-        /// <summary>
-        /// Sets the client group footer template for the column.
-        /// </summary>
-        /// <param name="value">The template</param>
-        /// <returns></returns>
-        public GridBoundColumnBuilder<T> ClientGroupFooterTemplate(string value)
-        {
-            Column.ClientGroupFooterTemplate = value;
-
-            return this;
-        }
-                
+               
         /// <summary>
         /// Sets the footer template for the column.
         /// </summary>

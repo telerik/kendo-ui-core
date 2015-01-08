@@ -251,11 +251,6 @@ namespace Kendo.Mvc.UI
                 json["groupHeaderTemplate"] = ClientGroupHeaderTemplate;
             }
 
-            if (ClientGroupFooterTemplate.HasValue())
-            {
-                json["groupFooterTemplate"] = ClientGroupFooterTemplate;
-            }
-
             SerializeValues(json);
         }
 

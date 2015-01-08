@@ -22,7 +22,13 @@ namespace Kendo.Mvc.UI
         {
             get;
             set;
-        }        
+        }
+
+        string ClientGroupFooterTemplate
+        {
+            get;
+            set;
+        }  
         
         HtmlTemplate HeaderTemplate
         {

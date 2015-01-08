@@ -140,6 +140,11 @@ namespace Kendo.Mvc.UI
                 json["footerTemplate"] = HttpUtility.UrlDecode(ClientFooterTemplate);
             }
 
+            if (ClientGroupFooterTemplate.HasValue())
+            {
+                json["groupFooterTemplate"] = ClientGroupFooterTemplate;
+            }
+
             if (!Encoded)
             {
                 json["encoded"] = Encoded;
@@ -235,7 +240,7 @@ namespace Kendo.Mvc.UI
                 Settings.ClientFooterTemplate = value;
             }
         }
-        
+
         public string ClientGroupFooterTemplate
         {
             get
