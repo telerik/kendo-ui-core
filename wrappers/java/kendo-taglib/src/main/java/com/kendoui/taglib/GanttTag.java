@@ -83,6 +83,10 @@ public class GanttTag extends WidgetTag /* interfaces */implements DataBoundWidg
 
     }
 
+    public void setTooltip(com.kendoui.taglib.gantt.TooltipTag value) {
+        setProperty("tooltip", value);
+    }
+
     public void setViews(ViewsTag value) {
 
         setProperty("views", value.views());

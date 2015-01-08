@@ -17166,6 +17166,35 @@ This class can be used to obtain reference to the button after Gantt initializat
     </tag>
 
     <tag>
+        <description>The task tooltip configuration options.</description>
+        <name>gantt-tooltip</name>
+        <tag-class>com.kendoui.taglib.gantt.TooltipTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The template which renders the tooltip.The fields which can be used in the template are:</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>If set to false the gantt will not display the task tooltip. By default the task tooltip is displayed.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The template which renders the tooltip.The fields which can be used in the template are:</description>
+        <name>gantt-tooltip-template</name>
+        <tag-class>com.kendoui.taglib.gantt.TooltipTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+    <tag>
         <description>The views displayed by the Gantt and their configuration. The array items can be either objects specifying the view configuration or strings representing the view types (assuming default configuration).
 By default the Kendo UI Gantt widget displays "day", "week", and "month" views.</description>
         <name>gantt-views</name>
