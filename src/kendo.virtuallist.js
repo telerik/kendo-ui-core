@@ -44,77 +44,9 @@ var __meta__ = {
         };
     }
 
-    function indexConstraint(itemCount, itemHeight, total) {
-        return function(position) {
-            return Math.min(total - itemCount, Math.max(0, Math.floor(position / itemHeight )));
-        };
-    }
-
-    function listIndex(constrain, buffers) {
-        return function(scrollTop, lastScrollTop) {
-            return constrain(scrollTop - ((scrollTop > lastScrollTop) ? buffers.down : buffers.up));
-        };
-    }
-
-    function listAt(index, range) {
-        return function(scrollTop, lastScrollTop) {
-            var items = range(index(scrollTop, lastScrollTop));
-            return {
-                index: items[0].index,
-                top: items[0].top,
-                items: items
-            };
-        };
-    }
-
-    function itemMapper(height, listType) {
-        return function() {
-            var group = null;
-
-            return function(item, index) {
-
-                if (listType === "group") {
-                    var newGroup;
-                    if (item) {
-                        newGroup = index === 0 || (group && group !== item.group);
-                        group = item.group;
-                    }
-
-                    return {
-                        item: item ? item.item : null,
-                        group: item ? item.group : null,
-                        index: index,
-                        top: index * height,
-                        newGroup: newGroup
-                    };
-                } else {
-                    return {
-                        item: item ? item : null,
-                        index: index,
-                        top: index * height,
-                        newGroup: false
-                    };
-                }
-            };
-        };
-    }
-
-    function range(itemAt1, count, mapper) {
-        return function(index) {
-            var map = mapper();
-            var items = [];
-
-            for (var i = index, length = index + count; i < length; i++) {
-                items.push(map(itemAt1(i, index), i));
-            }
-
-            return items;
-        };
-    }
-
-    function listValidator(listScreens, screenHeight, threshold) {
-        var downThreshold = (listScreens - 1 - threshold) * screenHeight;
-        var upThreshold = threshold * screenHeight;
+    function listValidator(options, screenHeight) {
+        var downThreshold = (options.listScreens - 1 - options.threshold) * screenHeight;
+        var upThreshold = options.threshold * screenHeight;
 
         return function(list, scrollTop, lastScrollTop) {
             if (scrollTop > lastScrollTop) {
@@ -122,20 +54,6 @@ var __meta__ = {
             } else {
                 return list.top === 0 || scrollTop - list.top > upThreshold;
             }
-        };
-    }
-
-    function cache(getter, validator) {
-        var result = null;
-        var lastValue;
-
-        return function(value, force) {
-            if (force || !result || !validator(result, value, lastValue)) {
-                result = getter(value, lastValue);
-            }
-
-            lastValue = value;
-            return result;
         };
     }
 
@@ -200,19 +118,6 @@ var __meta__ = {
         }
 
         return range;
-    }
-
-    function range(itemAt1, count, mapper) {
-        return function(index) {
-            var map = mapper();
-            var items = [];
-
-            for (var i = index, length = index + count; i < length; i++) {
-                items.push(map(itemAt1(i, index), i));
-            }
-
-            return items;
-        };
     }
 
     var VirtualList = DataBoundWidget.extend({
@@ -434,29 +339,73 @@ var __meta__ = {
             return list;
         },
 
+        _itemMapper: function(item, index) {
+            var listType = this.options.type,
+                itemHeight = this.options.itemHeight;
+
+            if (listType === "group") {
+                var newGroup;
+                if (item) {
+                    newGroup = index === 0 || (this._currentGroup && this._currentGroup !== item.group);
+                    this._currentGroup = item.group;
+                }
+
+                return {
+                    item: item ? item.item : null,
+                    group: item ? item.group : null,
+                    index: index,
+                    top: index * itemHeight,
+                    newGroup: newGroup
+                };
+            } else {
+                return {
+                    item: item ? item : null,
+                    index: index,
+                    top: index * itemHeight,
+                    newGroup: false
+                };
+            }
+        },
+
+        _range: function(index) {
+            var itemCount = this.itemCount,
+                items = [];
+
+            for (var i = index, length = index + itemCount; i < length; i++) {
+                items.push(this._itemMapper(this.getter(i, index), i));
+            }
+
+            return items;
+        },
+
         _listItems: function(getter) {
             var screenHeight = this.screenHeight,
-                itemCount= this.itemCount,
-                options = this.options;
+                itemCount = this.itemCount,
+                options = this.options,
+                result = null,
+                lastValue;
 
-            return cache(
-                listAt(
-                    listIndex(
-                        indexConstraint(
-                            itemCount,
-                            options.itemHeight,
-                            options.dataSource.total()
-                        ),
-                        this._bufferSizes()
-                    ),
-                    range(
-                        getter,
-                        itemCount,
-                        itemMapper(options.itemHeight, options.type)
-                    )
-                ),
-                listValidator(options.listScreens, screenHeight, options.threshold)
-            );
+            var theGetter = $.proxy(
+                function(scrollTop, lastScrollTop) {
+                    var items = this._range(this._listIndex(scrollTop, lastScrollTop));
+                    return {
+                        index: items[0].index,
+                        top: items[0].top,
+                        items: items
+                    };
+                }
+            , this);
+
+            var theValidator = listValidator(options, screenHeight);
+
+            return $.proxy(function(value, force) {
+                if (force || !result || !theValidator(result, value, lastValue)) {
+                    result = theGetter(value, lastValue);
+                }
+
+                lastValue = value;
+                return result;
+            }, this);
         },
 
         _whenChanged: function(getter, callback) {
