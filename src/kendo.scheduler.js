@@ -7,7 +7,7 @@ var __meta__ = {
     name: "Scheduler",
     category: "web",
     description: "The Scheduler is an event calendar.",
-    depends: [ "dropdownlist", "editable", "multiselect", "window", "datepicker", "scheduler.recurrence", "scheduler.view" ],
+    depends: [ "dropdownlist", "editable", "multiselect", "window", "datepicker", "datetimepicker", "scheduler.recurrence", "scheduler.view" ],
     features: [ {
         id: "scheduler-dayview",
         name: "Scheduler Day View",
