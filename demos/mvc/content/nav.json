@@ -5751,8 +5751,19 @@
         "meta": {
             "kendo-ui": "This demo illustrates how the Kendo UI Drawing API can be used to manipulate paths."
         }
-      }, {
-        "text": "Export to PDF, Image, SVG",
+      }
+    ]
+  },
+  {
+    "packages": [ "!mvc", "!jsp", "!php" ],
+    "category": "Framework",
+    "text": "PDF Export",
+    "new": true,
+    "name": "export",
+    "spriteCssClass": "drawingIcon",
+    "items": [
+      {
+        "text": "Document Export",
         "url": "drawing/export",
         "new": true,
         "packages": [
@@ -5765,7 +5776,7 @@
             "kendo-ui": "This demo shows how to export HTML elements and Drawing surfaces to PDF, PNG Images or SVG and save them directly in the browser."
         }
       }, {
-        "text": "PDF Export Customizations",
+        "text": "Page Layout",
         "url": "drawing/custom-pdf-export",
         "new": true,
         "packages": [
