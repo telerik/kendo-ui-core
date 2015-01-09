@@ -13,6 +13,7 @@ var __meta__ = {
 (function($, undefined) {
     var kendo = window.kendo,
         Widget = kendo.ui.Widget,
+        antiForgeryTokens = kendo.antiForgeryTokens,
         logToConsole = kendo.logToConsole,
         rFileExtension = /\.([^\.]+)$/,
         NS = ".kendoUpload",
@@ -706,7 +707,7 @@ var __meta__ = {
         _submitRemove: function(fileNames, data, onSuccess, onError) {
             var upload = this,
                 removeField = upload.options.async.removeField || "fileNames",
-                params = $.extend(data, getAntiForgeryTokens());
+                params = $.extend(data, antiForgeryTokens());
 
             params[removeField] = fileNames;
 
@@ -851,7 +852,7 @@ var __meta__ = {
                     .attr("action", upload.options.async.saveUrl)
                     .appendTo(document.body);
 
-                e.data = $.extend({ }, e.data, getAntiForgeryTokens());
+                e.data = $.extend({ }, e.data, antiForgeryTokens());
                 for (var key in e.data) {
                     var dataInput = form.find("input[name='" + key + "']");
                     if (dataInput.length === 0) {
@@ -1098,7 +1099,7 @@ var __meta__ = {
                 upload._hideUploadButton();
                 upload._showHeaderUploadStatus();
 
-                e.data = $.extend({ }, e.data, getAntiForgeryTokens());
+                e.data = $.extend({ }, e.data, antiForgeryTokens());
                 for (var key in e.data) {
                     formData.append(key, e.data[key]);
                 }
@@ -1416,21 +1417,6 @@ var __meta__ = {
         return $(e.target).closest(".k-file");
     }
 
-    function getAntiForgeryTokens() {
-        var tokens = { },
-            csrf_token = $("meta[name=csrf-token]").attr("content"),
-            csrf_param = $("meta[name=csrf-param]").attr("content");
-
-        $("input[name^='__RequestVerificationToken']").each(function() {
-            tokens[this.name] = this.value;
-        });
-
-        if (csrf_param !== undefined && csrf_token !== undefined) {
-          tokens[csrf_param] = csrf_token;
-        }
-
-        return tokens;
-    }
     kendo.ui.plugin(Upload);
 })(window.kendo.jQuery);
 
