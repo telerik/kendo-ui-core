@@ -38,7 +38,7 @@
                     read: function(options) {
                         setTimeout(function() {
                             options.success({ groups: groupedData(options.data), hasSubgroups: false, total: 100 });
-                        }, 100);
+                        }, 0);
                     }
                 },
                 serverGrouping: true,
@@ -81,7 +81,7 @@
         setTimeout(function() {
             start();
             equal(virtualList.options.type, "group");
-        }, 150);
+        }, 100);
     });
 
     asyncTest("fixed header displays current visible group", 1, function() {
@@ -92,7 +92,7 @@
         setTimeout(function() {
             start();
             equal($(virtualList.header).text(), virtualList.dataSource.view()[0].value);
-        }, 150);
+        }, 100);
     });
 
     //asyncTest("switches the range when threshold is passed", 2, function() {
