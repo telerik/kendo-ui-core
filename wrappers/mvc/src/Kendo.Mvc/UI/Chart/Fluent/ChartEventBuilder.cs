@@ -780,5 +780,95 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        /// <summary>
+        ///  Defines the name of the JavaScript function that will handle the the NoteClick client-side event.
+        /// </summary>
+        /// <param name="onNoteClickHandlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Events(events => events.NoteClick("onNoteClick"))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartEventBuilder NoteClick(string onNoteClickHandlerName)
+        {
+            Handler("noteClick", onNoteClickHandlerName);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Defines the inline handler of the NoteClick client-side event
+        /// </summary>
+        /// <param name="inlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .Events(events => events.NoteClick(
+        ///                @&lt;text&gt;
+        ///                function(e) {
+        ///                    //event handling code
+        ///                }
+        ///                &lt;/text&gt;
+        ///           ))
+        ///           .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartEventBuilder NoteClick(Func<object, object> inlineCodeBlock)
+        {
+            Handler("noteClick", inlineCodeBlock);
+
+            return this;
+        }
+
+        /// <summary>
+        ///  Defines the name of the JavaScript function that will handle the the NoteHover client-side event.
+        /// </summary>
+        /// <param name="onNoteHoverHandlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Events(events => events.NoteHover("onNoteHover"))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartEventBuilder NoteHover(string onNoteHoverHandlerName)
+        {
+            Handler("noteHover", onNoteHoverHandlerName);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Defines the inline handler of the NoteHover client-side event
+        /// </summary>
+        /// <param name="inlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .Events(events => events.NoteHover(
+        ///                @&lt;text&gt;
+        ///                function(e) {
+        ///                    //event handling code
+        ///                }
+        ///                &lt;/text&gt;
+        ///           ))
+        ///           .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartEventBuilder NoteHover(Func<object, object> inlineCodeBlock)
+        {
+            Handler("noteHover", inlineCodeBlock);
+
+            return this;
+        }
     }
 }
