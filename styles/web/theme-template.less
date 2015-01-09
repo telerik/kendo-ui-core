@@ -2201,6 +2201,12 @@ html .km-pane-wrapper .km-widget,
   box-shadow: @radio-disabled-box-shadow;
 }
 
+.k-checkbox:focus + .k-checkbox-label:after,
+.k-radio:focus + .k-radio-label:before {
+  border-color: @checkbox-active-border-color-after;
+  box-shadow: @checkbox-active-box-shadow;
+}
+
 // Retina sprite
 @media only screen and (-webkit-min-device-pixel-ratio: 2),
        only screen and (min-device-pixel-ratio: 2) {
