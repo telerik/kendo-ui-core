@@ -133,6 +133,42 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.messages,{
 });
 }
 
+/* FilterCell operators */
+
+if (kendo.ui.FilterCell) {
+kendo.ui.FilterCell.prototype.options.operators =
+$.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
+  "string": {
+    "eq": "Is equal to",
+    "neq": "Is not equal to",
+    "startswith": "Starts with",
+    "contains": "Contains",
+    "doesnotcontain": "Does not contain",
+    "endswith": "Ends with"
+  },
+  "number": {
+    "eq": "Is equal to",
+    "neq": "Is not equal to",
+    "gte": "Is greater than or equal to",
+    "gt": "Is greater than",
+    "lte": "Is less than or equal to",
+    "lt": "Is less than"
+  },
+  "date": {
+    "eq": "Is equal to",
+    "neq": "Is not equal to",
+    "gte": "Is after or equal to",
+    "gt": "Is after",
+    "lte": "Is before or equal to",
+    "lt": "Is before"
+  },
+  "enums": {
+    "eq": "Is equal to",
+    "neq": "Is not equal to"
+  }
+});
+}
+
 /* FilterMenu messages */
 
 if (kendo.ui.FilterMenu) {
