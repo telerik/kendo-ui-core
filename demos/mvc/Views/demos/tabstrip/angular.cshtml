@@ -1,21 +1,28 @@
 <div id="example" ng-app="KendoDemos">
-    <div ng-controller="MyCtrl">
-        <div kendo-tab-strip k-content-urls="[ null, null]">
-          <!-- tab list -->
-          <ul>
-            <li class="k-state-active">First tab</li>
-            <li>Second tab</li>
-          </ul>
-      
-          <div style="padding: 1em">
-            This is the first tab
-          </div>
-      
-          <div style="padding: 1em">
-            This is the second tab
-          </div>
+    <div class="demo-section k-header">
+        <div ng-controller="MyCtrl">
+            <div kendo-tab-strip k-content-urls="[ null, null]">
+              <!-- tab list -->
+              <ul>
+                <li class="k-state-active">First tab</li>
+                <li>Second tab</li>
+              </ul>
+          
+              <div style="padding: 1em">
+                This is the first tab
+              </div>
+          
+              <div style="padding: 1em">
+                This is the second tab
+              </div>
+            </div>
         </div>
     </div>
+    <style scoped>
+        .demo-section {
+            width: 600px;
+        }
+    </style>
 </div>
 
 <script>
