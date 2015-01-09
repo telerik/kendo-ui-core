@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.dom", "./kendo.draganddrop" ], f);
+    define([ "./kendo.dom", "./kendo.touch", "./kendo.draganddrop" ], f);
 })(function(){
 
 var __meta__ = {
@@ -7,7 +7,7 @@ var __meta__ = {
     name: "Gantt Timeline",
     category: "web",
     description: "The Gantt Timeline",
-    depends: [ "dom", "draganddrop" ],
+    depends: [ "dom", "touch", "draganddrop" ],
     hidden: true
 };
 
@@ -20,6 +20,7 @@ var __meta__ = {
     var extend = $.extend;
     var proxy = $.proxy;
     var browser = kendo.support.browser;
+    var mobileOS = kendo.support.mobileOS;
     var keys = kendo.keys;
     var Query = kendo.data.Query;
     var NS = ".kendoGanttTimeline";
@@ -1718,6 +1719,10 @@ var __meta__ = {
                 this._dependencyDraggable.destroy();
             }
 
+            if (this.touch) {
+                this.touch.destroy();
+            }
+
             this._headerTree = null;
             this._taskTree = null;
             this._dependencyTree = null;
@@ -2379,11 +2384,6 @@ var __meta__ = {
                         e.stopPropagation();
                         e.preventDefault();
                     })
-                    .on(DBLCLICK + NS, DOT + styles.task, function(e) {
-                        that.trigger("editTask", { uid: $(this).attr("data-uid") });
-                        e.stopPropagation();
-                        e.preventDefault();
-                    })
                     .on(KEYDOWN + NS, function(e) {
                         var selectedDependency;
 
@@ -2396,6 +2396,24 @@ var __meta__ = {
                             }
                         }
                     });
+
+                if (!mobileOS) {
+                    this.wrapper
+                        .on(DBLCLICK + NS, DOT + styles.task, function(e) {
+                            that.trigger("editTask", { uid: $(this).attr("data-uid") });
+
+                            e.stopPropagation();
+                            e.preventDefault();
+                        });
+                } else {
+                    this.touch = this.wrapper
+                        .kendoTouch({
+                            filter: DOT + styles.task,
+                            doubletap: function(e) {
+                                that.trigger("editTask", { uid: $(e.touch.currentTarget).attr("data-uid") });
+                            }
+                        }).data("kendoTouch");
+                }
             }
         },
 
