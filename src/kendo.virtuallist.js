@@ -378,33 +378,32 @@ var __meta__ = {
             return items;
         },
 
+        _getDataItemsCollection: function(scrollTop, lastScrollTop) {
+            var items = this._range(this._listIndex(scrollTop, lastScrollTop));
+            return {
+                index: items[0].index,
+                top: items[0].top,
+                items: items
+            };
+        },
+
         _listItems: function(getter) {
             var screenHeight = this.screenHeight,
                 itemCount = this.itemCount,
-                options = this.options,
-                result = null,
-                lastValue;
-
-            var theGetter = $.proxy(
-                function(scrollTop, lastScrollTop) {
-                    var items = this._range(this._listIndex(scrollTop, lastScrollTop));
-                    return {
-                        index: items[0].index,
-                        top: items[0].top,
-                        items: items
-                    };
-                }
-            , this);
+                options = this.options;
 
             var theValidator = listValidator(options, screenHeight);
 
             return $.proxy(function(value, force) {
-                if (force || !result || !theValidator(result, value, lastValue)) {
-                    result = theGetter(value, lastValue);
+                var result = this.result,
+                    lastScrollTop = this._lastScrollTop
+
+                if (force || !result || !theValidator(result, value, lastScrollTop)) {
+                    result = this._getDataItemsCollection(value, lastScrollTop);
                 }
 
-                lastValue = value;
-                return result;
+                this._lastScrollTop = value;
+                return this.result = result;
             }, this);
         },
 
@@ -461,7 +460,7 @@ var __meta__ = {
                         .html(templates.groupTemplate({ group: item.group }));
                 }
             } else {
-                element.children().first().html(itemTemplate(item.item || {}));
+                element.html(itemTemplate(item.item || {}));
 
                 if (item.newGroup) {
                     if (element.children().length === 2) {
@@ -469,12 +468,8 @@ var __meta__ = {
                             .html(templates.groupTemplate({ group: item.group }));
                     } else {
                         $("<div class=" + GROUPITEM + "></div>")
-                            .appendTo(element)
+                            .insertAfter(element.children().last())
                             .html(templates.groupTemplate({ group: item.group }));
-                    }
-                } else {
-                    if (element.children().length === 2) {
-                        element.find("." + GROUPITEM).remove();
                     }
                 }
             }
