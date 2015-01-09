@@ -39,8 +39,8 @@
     }
 </head>
 <body>
-    @{ WriteTo(new StringWriter(), RenderSection("Description", false)); }
-    @RenderBody()
+@{ WriteTo(new StringWriter(), RenderSection("Description", false)); }
+@RenderBody()
 
     @if (ViewBag.Mobile && !ViewBag.DisableInMobile) {
 <script>
