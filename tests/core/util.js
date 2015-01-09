@@ -59,3 +59,50 @@ test("works with 'view' selector", 1, function() {
 });
 
 }());
+
+// ------------------------------------------------------------
+(function() {
+    var container;
+
+    module("Security tokens", {
+        setup: function() {
+            container = $("<div/>").appendTo(document.body);
+        },
+        teardown: function() {
+            container.remove();
+        }
+    });
+
+    test("Anti-Forgery Token", function() {
+        $(container).append("<input type='hidden' name='__RequestVerificationToken' value='42' />");
+        var tokens = kendo.antiForgeryTokens();
+
+        equal(tokens["__RequestVerificationToken"], 42);
+    });
+
+    test("Rails CSRF token", function() {
+        $(container)
+            .append('<meta content="authenticity_token" name="csrf-param" />')
+            .append('<meta content="42" name="csrf-token" />');
+        var tokens = kendo.antiForgeryTokens();
+
+        equal(tokens["authenticity_token"], "42");
+    });
+
+    test("Anti-Forgery Token with AppPath", function() {
+        $(container).append("<input type='hidden' name='__RequestVerificationToken_test' value='42' />");
+        var tokens = kendo.antiForgeryTokens();
+
+        equal(tokens["__RequestVerificationToken_test"], "42");
+    });
+
+    test("Multiple Anti-Forgery Tokens", function() {
+        $(container)
+            .append("<input type='hidden' name='__RequestVerificationToken_1' value='42' />")
+            .append("<input type='hidden' name='__RequestVerificationToken_2' value='24' />");
+        var tokens = kendo.antiForgeryTokens();
+
+        equal(tokens["__RequestVerificationToken_1"], "42");
+        equal(tokens["__RequestVerificationToken_2"], "24");
+    });
+})();
