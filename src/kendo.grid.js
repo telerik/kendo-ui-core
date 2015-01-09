@@ -1207,6 +1207,26 @@ var __meta__ = {
         }
     }
 
+    function groupRows(data) {
+        var result = [];
+        var item;
+
+        for (var idx = 0; idx < data.length; idx++) {
+            item = data[idx];
+            if (!("field" in item && "value" in item && "items" in item)) {
+                break;
+            }
+
+            result.push(item);
+
+            if (item.hasSubgroups) {
+                result = result.concat(groupRows(item.items));
+            }
+        }
+
+        return result;
+    }
+
     function showColumnCells(rows, columnIndex) {
         var idx = 0,
             length = rows.length,
@@ -6145,6 +6165,7 @@ var __meta__ = {
             }
 
             that._angularItems("cleanup");
+            that._angularGroupItems("cleanup");
 
             if (navigatable && (that._isActiveInTable() || (that._editContainer && that._editContainer.data("kendoWindow")))) {
                 isCurrentInHeader = current.is("th");
@@ -6218,8 +6239,26 @@ var __meta__ = {
             }
 
             that._angularItems("compile");
+            that._angularGroupItems("compile");
 
             that.trigger(DATABOUND);
+       },
+
+       _angularGroupItems: function(cmd) {
+           var that = this;
+
+           if (that._group) {
+
+
+               that.angular(cmd, function(){
+                   return {
+                       elements: that.tbody.children(".k-grouping-row"),
+                       data: $.map(groupRows(that.dataSource.view()), function(dataItem){
+                           return { dataItem: dataItem };
+                       })
+                   };
+               });
+           }
        },
 
        _renderContent: function(data, colspan, groups) {
