@@ -6165,7 +6165,6 @@ var __meta__ = {
             }
 
             that._angularItems("cleanup");
-            that._angularGroupItems("cleanup");
 
             if (navigatable && (that._isActiveInTable() || (that._editContainer && that._editContainer.data("kendoWindow")))) {
                 isCurrentInHeader = current.is("th");
@@ -6239,18 +6238,22 @@ var __meta__ = {
             }
 
             that._angularItems("compile");
-            that._angularGroupItems("compile");
 
             that.trigger(DATABOUND);
+       },
+
+       _angularItems: function(cmd) {
+
+           kendo.ui.DataBoundWidget.fn._angularItems.call(this, cmd);
+
+           this._angularGroupItems(cmd);
        },
 
        _angularGroupItems: function(cmd) {
            var that = this;
 
            if (that._group) {
-
-
-               that.angular(cmd, function(){
+              that.angular(cmd, function(){
                    return {
                        elements: that.tbody.children(".k-grouping-row"),
                        data: $.map(groupRows(that.dataSource.view()), function(dataItem){
