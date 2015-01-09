@@ -220,7 +220,7 @@ var __meta__ = {
                 for (i = 0; i < items.length; i++) {
                     item = $(items[i]);
                     value = that._values[i];
-                    var valueWithoutFraction = removeFraction(value - this.options.min);
+                    var valueWithoutFraction = round(removeFraction(value - this.options.min));
                     if (valueWithoutFraction % removeFraction(options.smallStep) === 0 && valueWithoutFraction % removeFraction(options.largeStep) === 0) {
                         item.addClass("k-tick-large")
                             .html("<span class='k-label'>" + item.attr("title") + "</span>");
