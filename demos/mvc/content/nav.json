@@ -6088,7 +6088,7 @@
     "category": "Editors"
   },
   {
-    "packages": [ "!mvc", "!jsp", "!php" ],
+    "packages": [ "!jsp", "!php" ],
     "text": "Styling",
     "name": "styling",
     "spriteCssClass": "stylingIcon",
@@ -6101,7 +6101,12 @@
         },
         "meta": {
             "kendo-ui": "This example illustrates how jQuery and HTML5-based forms can be styled with Kendo UI Web."
-        }
+        },
+		"packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
       },
       {
         "text": "Panels",
@@ -6111,7 +6116,12 @@
         },
         "meta": {
             "kendo-ui": "This demo shows how different styling can be applied to panels in Kendo UI Web."
-        }
+        },
+		"packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
       },
       {
         "text": "Icons",
@@ -6121,7 +6131,12 @@
         },
         "meta": {
             "kendo-ui": "This example shows how different styling can be applied to icons by using Kendo UI Web framework."
-        }
+        },
+		"packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
       },
       {
         "text": "Checkboxes",

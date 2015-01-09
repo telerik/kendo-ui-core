@@ -216,6 +216,8 @@
     <Compile Include="Controllers\Radial_Gauge\Multiple_PointersController.cs" />
     <Compile Include="Controllers\Scheduler\Pdf_ExportController.cs" />
     <Compile Include="Controllers\Scheduler\TimelineController.cs" />
+    <Compile Include="Controllers\Styling\CheckboxesController.cs" />
+    <Compile Include="Controllers\Styling\RadioButtonsController.cs" />
     <Compile Include="Controllers\TreeList\ApiController.cs" />
     <Compile Include="Controllers\TreeList\AggregatesController.cs" />
     <Compile Include="Controllers\TreeList\EventsController.cs" />
@@ -897,6 +899,8 @@
     <Content Include="Areas\aspx\Views\radial_gauge\multiple_pointers.aspx" />
     <Content Include="Areas\aspx\Views\scheduler\pdf_export.aspx" />
     <Content Include="Areas\aspx\Views\scheduler\timeline.aspx" />
+    <Content Include="Areas\aspx\Views\styling\checkboxes.aspx" />
+    <Content Include="Areas\aspx\Views\styling\radios.aspx" />
     <Content Include="Areas\aspx\Views\treelist\api.aspx" />
     <Content Include="Areas\aspx\Views\treelist\aggregates.aspx" />
     <Content Include="Areas\aspx\Views\treelist\editing_popup.aspx" />
@@ -2657,6 +2661,8 @@
     <Content Include="Areas\razor\Views\linear_gauge\export.cshtml" />
     <Content Include="Areas\razor\Views\radial_gauge\export.cshtml" />
     <Content Include="Areas\razor\Views\scheduler\pdf_export.cshtml" />
+    <Content Include="Areas\razor\Views\styling\checkboxes.cshtml" />
+    <Content Include="Areas\razor\Views\styling\radios.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\razor\Views\map\api.cshtml" />
