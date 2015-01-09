@@ -1252,8 +1252,8 @@ var __meta__ = {
         },
 
         _positionEvent: function(event, element, slotRange) {
-            var start = event.startTime || event.start;
-            var end = event.endTime || event.end;
+            var start = event._startTime || event.start;
+            var end = event._endTime || event.end;
 
             var rect = slotRange.innerRect(start, end, false);
 
@@ -1314,7 +1314,7 @@ var __meta__ = {
 
             var resources = this.eventResources(event);
 
-            if (event.startTime) {
+            if (event._startTime) {
                 eventStartDate = new Date(eventStartTime);
                 eventStartDate = kendo.timezone.apply(eventStartDate, "Etc/UTC");
             }
@@ -1354,8 +1354,8 @@ var __meta__ = {
         _isInTimeSlot: function(event) {
             var slotStartTime = this.startTime(),
                 slotEndTime = this.endTime(),
-                startTime = event.startTime || event.start,
-                endTime = event.endTime || event.end;
+                startTime = event._startTime || event.start,
+                endTime = event._endTime || event.end;
 
             if (getMilliseconds(slotEndTime) === getMilliseconds(kendo.date.getDate(slotEndTime))) {
                 slotEndTime = kendo.date.getDate(slotEndTime);
@@ -1463,7 +1463,7 @@ var __meta__ = {
                                     }
                                 }
 
-                                var occurrence = event.clone({ start: start, end: end, startTime: event.startTime, endTime: event.endTime });
+                                var occurrence = event.clone({ start: start, end: end, _startTime: event._startTime, _endTime: event.endTime });
 
                                 if (this._isInTimeSlot(occurrence)) {
                                     var head = range.head;

@@ -962,8 +962,8 @@ var __meta__ = {
         },
 
         _isInTimeSlot: function(event) {
-            var startTime = event.startTime || kendo.date.toUtcTime(event.start);
-            var endTime = event.endTime || kendo.date.toUtcTime(event.end);
+            var startTime = event._startTime || kendo.date.toUtcTime(event.start);
+            var endTime = event._endTime || kendo.date.toUtcTime(event.end);
 
             var slotRanges = this._slotRanges;
 
@@ -1035,8 +1035,8 @@ var __meta__ = {
             occurrence = event.clone({
                 start: adjustedStartDate ? adjustedStartDate : start,
                 end: adjustedEndDate ? adjustedEndDate : end,
-                startTime: adjustedStartDate ? kendo.date.toUtcTime(adjustedStartDate) : event.startTime,
-                endTime:  adjustedEndDate ? kendo.date.toUtcTime(adjustedEndDate) : event.endTime,
+                _startTime: adjustedStartDate ? kendo.date.toUtcTime(adjustedStartDate) : event._startTime,
+                _endTime:  adjustedEndDate ? kendo.date.toUtcTime(adjustedEndDate) : event._endTime,
                 isAllDay: false
             });
 
@@ -1077,8 +1077,8 @@ var __meta__ = {
                             element.appendTo(container).css({top: 0, height: this.options.eventHeight});
 
                             var eventObject = {
-                                start: adjustedEvent.occurrence.startTime || adjustedEvent.occurrence.start,
-                                end: adjustedEvent.occurrence.endTime || adjustedEvent.occurrence.end,
+                                start: adjustedEvent.occurrence._startTime || adjustedEvent.occurrence.start,
+                                end: adjustedEvent.occurrence._endTime || adjustedEvent.occurrence.end,
                                 element: element,
                                 uid: event.uid,
                                 slotRange: range,
@@ -1121,7 +1121,7 @@ var __meta__ = {
 
             var resources = this.eventResources(event);
 
-            if (event.startTime) {
+            if (event._startTime) {
                 eventStartDate = new Date(eventStartTime);
                 eventStartDate = kendo.timezone.apply(eventStartDate, "Etc/UTC");
             }

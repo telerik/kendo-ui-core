@@ -233,7 +233,7 @@ var __meta__ = {
                     tableRow.push(kendo.format(
                         '<td class="k-scheduler-timecolumn"><div>{0}{1}{2}</div></td><td>{3}</td>',
                         task.tail || task.middle ? '<span class="k-icon k-i-arrow-w"></span>' : "",
-                        this._timeTemplate(task.clone({ start: task.startTime || task.start, end: task.endTime || task.end })),
+                        this._timeTemplate(task.clone({ start: task._startTime || task.start, end: task.endTime || task.end })),
                         task.head || task.middle ? '<span class="k-icon k-i-arrow-e"></span>' : "",
                         this._eventTemplate(task.clone({ showDelete: showDelete }))
                     ));

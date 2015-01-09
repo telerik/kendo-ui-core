@@ -381,8 +381,8 @@ var __meta__ = {
         },
 
         slotRanges: function(event, isDay) {
-            var startTime = event.startTime || kendo.date.toUtcTime(event.start);
-            var endTime = event.endTime || kendo.date.toUtcTime(event.end);
+            var startTime = event._startTime || kendo.date.toUtcTime(event.start);
+            var endTime = event._endTime || kendo.date.toUtcTime(event.end);
 
             if (isDay === undefined) {
                 isDay = event.isMultiDay();

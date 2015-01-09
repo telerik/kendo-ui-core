@@ -1135,12 +1135,12 @@ var __meta__ = {
                     events.push(event.toOccurrence({
                         start: new Date(start),
                         end: endDate,
-                        startTime: startTime,
-                        endTime: endTime
+                        _startTime: startTime,
+                        _endTime: endTime
                     }));
                 } else {
-                    event.startTime = startTime;
-                    event.endTime = endTime;
+                    event._startTime = startTime;
+                    event._endTime = endTime;
                     events.push(event);
                 }
             }

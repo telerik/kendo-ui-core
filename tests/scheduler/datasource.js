@@ -455,28 +455,68 @@
         equal(events[0].uid, schedulerEvent.uid);
     });
 
-    test("SchedulerEvent strips the startTime and endTime properties", function() {
+    test("SchedulerEvent adds _startTime and _endTime properties", function() {
         var schedulerEvent = new SchedulerEvent({
             uid: "id",
             title: "Title",
             start: new Date(2012, 2, 31, 0, 0),
             end: new Date(2012, 2, 31, 1, 0),
-            startTime: new Date(2012, 2, 31, 0, 0),
-            endTime: new Date(2012, 2, 31, 1, 0)
+            recurrenceRule: "freq=daily"
         });
 
-        schedulerEvent.update({
-            start: new Date(),
-            end: new Date()
+        var events = schedulerEvent.expand(new Date(2012, 2, 31), new Date(2012, 3, 2));
+
+        var event0 = events[0];
+        var event1 = events[1];
+
+        ok(event0._startTime);
+        ok(event0._endTime);
+        ok(event1._startTime);
+        ok(event1._endTime);
+    });
+
+    test("SchedulerEvent updates _startTime and _endTime properties", function() {
+        var schedulerEvent = new SchedulerEvent({
+            uid: "id",
+            title: "Title",
+            start: new Date(2012, 2, 31, 0, 0),
+            end: new Date(2012, 2, 31, 1, 0),
+            recurrenceRule: "freq=daily"
         });
 
-        ok(schedulerEvent.startTime);
-        ok(schedulerEvent.endTime);
+        var events = schedulerEvent.expand(new Date(2012, 2, 31), new Date(2012, 3, 2));
 
-        schedulerEvent = schedulerEvent.toJSON();
+        var event0 = events[0];
+        var startTime = event0._startTime;
+        var endTime = event0._endTime;
 
-        ok(!schedulerEvent.startTime);
-        ok(!schedulerEvent.endTime);
+        event0.update({
+            start: new Date(2014, 2, 31),
+            end: new Date(2014, 3, 31)
+        });
+
+        notEqual(event0._startTime, startTime);
+        notEqual(event0._endTime, endTime);
+    });
+
+    test("SchedulerEvent strips the _startTime and _endTime properties", function() {
+        var schedulerEvent = new SchedulerEvent({
+            uid: "id",
+            title: "Title",
+            start: new Date(2012, 2, 31, 0, 0),
+            end: new Date(2012, 2, 31, 1, 0),
+            recurrenceRule: "freq=daily"
+        });
+
+        var events = schedulerEvent.expand(new Date(2012, 2, 31), new Date(2012, 3, 2));
+
+        var event0 = events[0].toJSON();
+        var event1 = events[1].toJSON();
+
+        ok(!event0._startTime);
+        ok(!event0._endTime);
+        ok(!event1._startTime);
+        ok(!event1._endTime);
     });
 
     test("SchedulerEvent reports model as new even when default type is changed", function() {

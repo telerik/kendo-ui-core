@@ -441,7 +441,7 @@ var __meta__ = {
 
         _time: function(field) {
             var date = this[field];
-            var fieldTime = field + "Time";
+            var fieldTime = "_" + field + "Time";
 
             if (this[fieldTime]) {
                 return this[fieldTime] - kendo.date.toUtcTime(kendo.date.getDate(date));
@@ -451,7 +451,7 @@ var __meta__ = {
         },
 
         _date: function(field) {
-            var fieldTime = field + "Time";
+            var fieldTime = "_" + field + "Time";
 
             if (this[fieldTime]) {
                 return this[fieldTime] - this._time(field);
@@ -488,12 +488,12 @@ var __meta__ = {
                 this.set(field, eventInfo[field]);
             }
 
-            if (this.startTime) {
-                this.set("startTime", kendo.date.toUtcTime(this.start));
+            if (this._startTime) {
+                this.set("_startTime", kendo.date.toUtcTime(this.start));
             }
 
-            if (this.endTime) {
-                this.set("endTime", kendo.date.toUtcTime(this.end));
+            if (this._endTime) {
+                this.set("_endTime", kendo.date.toUtcTime(this.end));
             }
         },
 
@@ -533,8 +533,8 @@ var __meta__ = {
             var obj = kendo.data.Model.fn.toJSON.call(this);
             obj.uid = this.uid;
 
-            delete obj.startTime;
-            delete obj.endTime;
+            delete obj._startTime;
+            delete obj._endTime;
 
             return obj;
         },
