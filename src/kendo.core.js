@@ -4012,6 +4012,22 @@ function pad(number, digits, end) {
         return kendo.widgetInstance(element, kendo.mobile.ui);
     };
 
+    kendo.antiForgeryTokens = function() {
+        var tokens = { },
+            csrf_token = $("meta[name=csrf-token]").attr("content"),
+            csrf_param = $("meta[name=csrf-param]").attr("content");
+
+        $("input[name^='__RequestVerificationToken']").each(function() {
+            tokens[this.name] = this.value;
+        });
+
+        if (csrf_param !== undefined && csrf_token !== undefined) {
+          tokens[csrf_param] = csrf_token;
+        }
+
+        return tokens;
+    };
+
     // kendo.saveAs -----------------------------------------------
     (function() {
         function postToProxy(dataURI, fileName, proxyURL) {
@@ -4020,25 +4036,22 @@ function pad(number, digits, end) {
                 method: "POST"
             });
 
+            var data = kendo.antiForgeryTokens();
+            data.fileName = fileName;
+
             var parts = dataURI.split(";base64,");
+            data.contentType = parts[0].replace("data:", "");
+            data.base64 = parts[1];
 
-            $('<input>').attr({
-                value: parts[0].replace("data:", ""),
-                name: "contentType",
-                type: "hidden"
-            }).appendTo(form);
-
-            $('<input>').attr({
-                value: parts[1],
-                name: "base64",
-                type: "hidden"
-            }).appendTo(form);
-
-            $('<input>').attr({
-                value: fileName,
-                name: "fileName",
-                type: "hidden"
-            }).appendTo(form);
+            for (var name in data) {
+                if (data.hasOwnProperty(name)) {
+                    $('<input>').attr({
+                        value: data[name],
+                        name: name,
+                        type: "hidden"
+                    }).appendTo(form);
+                }
+            }
 
             form.appendTo("body").submit().remove();
         }
