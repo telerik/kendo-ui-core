@@ -11,6 +11,8 @@
     border-width: @material-border-width;
     border-radius: @material-border-radius;
     text-transform: uppercase;
+    font-size: .875em;
+    font-weight: 600;
 }
 
 /* Badges and Details */
@@ -53,14 +55,16 @@
     display: none;
 }
 
-.km-material .km-button {
-    font-size: .875em;
-    font-weight: 500;
-}
-
-.km-material .km-navbar .km-button {
+.km-material .km-navbar .km-button
+{
     margin-top: 0;
     margin-bottom: 0;
+}
+
+.km-material .km-navbar .km-button,
+.km-material .km-buttongroup .km-button
+{
+    .box-shadow(none);
 }
 
 .km-material .km-navbar .km-back:before
