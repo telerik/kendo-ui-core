@@ -520,7 +520,7 @@ var __meta__ = {
         digest(scope);
     }
 
-    module.factory('directiveFactory', [ '$compile', function(compile) {
+    module.factory('directiveFactory', [ '$compile', '$rootScope', function(compile, $rootScope) {
         var KENDO_COUNT = 0;
         var RENDERED = false;
 
@@ -578,7 +578,7 @@ var __meta__ = {
                         if (KENDO_COUNT === 0) {
                             if (!RENDERED) {
                                 RENDERED = true;
-                                scope.$emit("kendoRendered");
+                                $rootScope.$broadcast("kendoRendered");
                                 $("form").each(function(){
                                     var form = $(this).controller("form");
                                     if (form) {
