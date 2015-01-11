@@ -1,29 +1,44 @@
 @material-primary-color: #3f51b5;
-@material-primary-inverse-color: rgba(255,255,255,1);
 @material-primary-selected-color: #283593;
 @material-accent-color: #00b0ff;
-@material-main-color: rgba(0,0,0,.87);
+@material-main-color: #333;
 @material-icon-color: rgba(0,0,0,.54);
-@material-disabled-color: #bababa;
+@material-disabled-color: rgba(128,128,128,.3);
+@material-input-text-color: @material-disabled-color;
 @material-border-color: rgba(0,0,0,.12);
 
 
 @material-background: #fafafa;
-@material-selected-background: rgba(0,0,0,.06);
+@material-primary-inverse-color: @material-background;
+@material-selected-background: rgba(128,128,128,.2);
 @material-overlay-background: rgba(0,0,0,.2);
+@material-box-shadow-color: rgba(0,0,0,.4);
 
-@material-dark-color: rgba(0,0,0,1);
+@material-dark-color: #333;
 @material-light-color: rgba(0,0,0,.39);
 
 @material-overlay-shadow: 0 15px 30px 3px rgba(0, 0, 0, 0.30);
 @material-second-active-background: #da2228;
+
+@material-dark-main-color: @material-background;
+@material-dark-icon-color: @material-dark-main-color;
+@material-dark-input-text-color: rgba(128,128,128,.3);
+
+@material-dark-background: #333;
+@material-dark-inverse-color: @material-dark-background;
 
 /* Button */
 
 .km-material .km-button
 {
     background: @material-background;
-    border-color: @material-background;
+    border-color: transparent;
+    .box-shadow(0 1px 4px @material-box-shadow-color);
+}
+
+.km-material-dark .km-button
+{
+    background: @material-primary-color;
 }
 
 /* Badges and Details */
@@ -41,6 +56,11 @@
     background-color: @material-main-color;
 }
 
+.km-material-dark .km-switch-wrapper
+{
+    background-color: @material-dark-main-color;
+}
+
 .km-material .km-switch-handle
 {
     background: @material-primary-color;
@@ -56,28 +76,28 @@
     box-shadow: 0 2px 4px @material-border-color, 0 2px @material-overlay-background;
 }
 
+.km-material-dark .km-switch-off .km-switch-handle
+{
+    background-color: @material-dark-background;
+}
+
 .km-material .km-switch-container,
 .km-material .km-switch-wrapper
 {
     border-color: @material-main-color;
 }
 
+.km-material-dark .km-switch-container,
+.km-material-dark .km-switch-wrapper
+{
+    border-color: @material-dark-main-color;
+}
+
 /* ListView */
-.km-material .km-group-container {
-    border-color: @material-border-color;
-}
-
-.km-material .km-list > li
-{
-    border-color: @material-border-color;
-}
-
+.km-material .km-group-container,
+.km-material .km-list > li,
 .km-material .km-listinset > li:first-child,
-.km-material .km-listgroupinset .km-list > li:first-child
-{
-    border-color: @material-border-color;
-}
-
+.km-material .km-listgroupinset .km-list > li:first-child,
 .km-material .km-listinset > li:last-child,
 .km-material .km-listgroupinset .km-list > li:last-child
 {
@@ -86,25 +106,26 @@
 
 .km-material .km-listview-link:after
 {
-    color: lighten(@material-main-color, 30);
+    color: lighten(@material-main-color, 30%);
 }
 
 .km-material .km-group-title
 {
-    color: @material-primary-color;
-    background: @material-background;
     border-color: @material-border-color;
 }
 
 .km-material .km-filter-wrap:before,
-.km-material .km-filter-reset .km-clear
+.km-material .km-filter-reset .km-clear,
+.km-material .km-filter-wrap > input
 {
     color: @material-main-color;
 }
 
-.km-material .km-filter-wrap > input
+.km-material-dark .km-filter-wrap:before,
+.km-material-dark .km-filter-reset .km-clear,
+.km-material-dark .km-filter-wrap > input
 {
-    color: @material-main-color;
+    color: @material-dark-main-color;
 }
 
 /* ScrollView */
@@ -118,7 +139,7 @@
 
 .km-material .km-list select:not([multiple]) option
 {
-    color: #333;
+    color: @material-dark-background;
 }
 
 /* Checkboxes and Radios */
@@ -130,9 +151,21 @@
     background: @material-primary-inverse-color;
 }
 
+.km-material-dark .km-listview-label input[type=radio],
+.km-material-dark .km-listview-label input[type=checkbox]
+{
+    border-color: @material-dark-icon-color;
+    background: @material-dark-inverse-color;
+}
+
 .km-material .km-listview-label input[type=checkbox]:checked:after
 {
     color: @material-primary-inverse-color;
+}
+
+.km-material-dark .km-listview-label input[type=checkbox]:checked:after
+{
+    color: @material-dark-inverse-color;
 }
 
 /* Shim */
@@ -141,9 +174,15 @@
 {
     background: @material-overlay-background;
 }
+
 .km-phone .km-material .km-actionsheet-wrapper
 {
     background: @material-background;
+}
+
+.km-phone .km-material-dark .km-actionsheet-wrapper
+{
+    background: @material-dark-background;
 }
 
 /* PopUp */
@@ -156,9 +195,22 @@
     border-bottom-color: @material-background;
 }
 
+.km-material-dark .km-popup .k-item,
+.km-material-dark .km-actionsheet > li > a
+{
+    color: @material-dark-main-color;
+    background: @material-dark-background;
+    border-bottom-color: @material-dark-background;
+}
+
 .km-material .km-popup
 {
     background: @material-background;
+}
+
+.km-material-dark .km-popup
+{
+    background: @material-dark-background;
 }
 
 .km-material .km-actionsheet-wrapper,
@@ -169,6 +221,13 @@
     box-shadow: @material-overlay-shadow;
 }
 
+.km-material-dark .km-actionsheet-wrapper,
+.km-material-dark .km-popup .k-list-container
+{
+    background: @material-dark-background;
+    border-top-color: @material-dark-background;
+}
+
 .km-material .km-popup.km-pane,
 .km-tablet .km-material .km-actionsheet-wrapper
 {
@@ -176,9 +235,21 @@
     background-color: @material-background;
 }
 
+.km-material-dark .km-popup.km-pane,
+.km-tablet .km-material-dark .km-actionsheet-wrapper
+{
+    color: @material-dark-main-color;
+    background-color: @material-dark-background;
+}
+
 .km-material .km-popup-arrow:after
 {
     border-color: @material-background;
+}
+
+.km-material-dark .km-popup-arrow:after
+{
+    border-color: @material-dark-background;
 }
 
 .km-material .km-left .km-popup-arrow:after,
@@ -187,16 +258,50 @@
     border-color: transparent @material-background;
 }
 
+.km-material-dark .km-left .km-popup-arrow:after,
+.km-material-dark .km-right .km-popup-arrow:after
+{
+    border-color: transparent @material-dark-background;
+}
+
 /* Loader & Pull-to-refresh */
 
-.km-material .km-loader
+.km-material .km-loading:before
 {
-    background: rgba(0,0,0,.05);
+    border-color: @material-primary-color;
+}
+
+.km-material .km-loading,
+.km-material .km-loader .km-loading-left:before,
+.km-material .km-loader .km-loading-left:after,
+.km-material .km-loader .km-loading-right:before,
+.km-material .km-loader .km-loading-right:after
+{
+    background-color: @material-background;
+}
+
+.km-material-dark .km-loading,
+.km-material-dark .km-loader .km-loading-left:before,
+.km-material-dark .km-loader .km-loading-left:after,
+.km-material-dark .km-loader .km-loading-right:before,
+.km-material-dark .km-loader .km-loading-right:after
+{
+    background-color: @material-dark-background;
+}
+
+.km-material .km-loading
+{
+    .box-shadow(0 1px 4px @material-box-shadow-color);
 }
 
 .km-material .km-loader h1
 {
     color: @material-main-color;
+}
+
+.km-material-dark .km-loader h1
+{
+    color: @material-dark-main-color;
 }
 
 /* Active States */
@@ -205,7 +310,7 @@
 .km-material .km-state-active .km-detail,
 .km-material .km-state-active[style*=background]
 {
-    .box-shadow(inset 0 0 0 1000px rgba(0,0,0,.2));
+    .box-shadow(inset 0 0 0 1000px @material-selected-background);
 }
 
 /* Active States */
@@ -227,12 +332,35 @@
     color: @material-primary-inverse-color;
 }
 
-.km-material .km-loader > *:not(h1),
+.km-material-dark .km-badge,
+.km-material-dark .km-rowinsert,
+.km-material-dark .km-rowdelete,
+.km-material-dark .km-switch-label-on,
+.km-material-dark .km-switch-label-off,
+.km-material-dark .k-slider .k-draghandle,
+.km-material-dark .k-slider .k-draghandle:hover,
+.km-material-dark .km-scroller-pull .km-icon,
+.km-material-dark .km-popup.km-pane .k-toolbar,
+.km-material-dark .km-popup.km-pane .km-tabstrip,
+.km-material-dark .km-popup .k-state-hover,
+.km-material-dark .km-popup .k-state-focused,
+.km-material-dark .km-state-active .km-listview-link:after
+{
+    color: @material-dark-inverse-color;
+}
+
 .km-material .km-filter-wrap > input,
 .km-material .km-switch-handle.km-state-active,
 .km-root .km-material .km-scroller-refresh span:not(.km-template)
 {
     background: @material-primary-inverse-color;
+}
+
+.km-material-dark .km-filter-wrap > input,
+.km-material-dark .km-switch-handle.km-state-active,
+.km-root .km-material-dark .km-scroller-refresh span:not(.km-template)
+{
+    background: @material-dark-inverse-color;
 }
 
 .km-material .km-switch-handle,
@@ -241,18 +369,18 @@
     color: @material-primary-color;
 }
 
-.km-material .km-switch-background {
+.km-material .km-switch-background
+{
     color: lighten(@material-primary-color, 20%);
 }
 
-.km-material .km-switch-off .km-switch-background {
+.km-material .km-switch-off .km-switch-background
+{
     background-color: @material-disabled-color;
 }
 
 .km-material .km-rowinsert,
-.km-material .km-state-active,
 .km-material .km-scroller-pull,
-.km-material .km-loader:before,
 .km-material .k-slider-selection,
 .km-material .km-touch-scrollbar,
 .km-material .km-pages .km-current-page,
@@ -276,91 +404,139 @@
     background: @material-second-active-background;
 }
 
-.km-material .km-button,
-.km-material .km-modalview .km-navbar .km-button {
+.km-material .km-modalview .km-navbar .km-button
+{
     color: @material-primary-color;
     background: transparent;
     border-color: transparent;
 }
 
-.km-material .km-listview .km-state-active,
-.km-material .km-button.km-state-active,
-.km-material li.km-state-active .km-listview-label {
-    background: @material-selected-background;
-}
-
 .km-material .km-state-active,
 .km-material li.km-state-active .km-listview-label,
 .km-material .km-state-active .km-listview-link:after,
-.km-material li.km-state-active .km-listview-link {
+.km-material li.km-state-active .km-listview-link
+{
     color: @material-main-color;
 }
 
-.km-material .km-button.km-state-active {
-    color: @material-primary-color;
+.km-material-dark .km-state-active,
+.km-material-dark li.km-state-active .km-listview-label,
+.km-material-dark .km-state-active .km-listview-link:after,
+.km-material-dark li.km-state-active .km-listview-link
+{
+    color: @material-dark-main-color;
 }
 
-.km-material .km-button.km-state-disabled {
+.km-material .km-button.km-state-active
+{
+    .box-shadow(~"0 1px 3px "@material-box-shadow-color~", 0 5px 8px "@material-box-shadow-color~", inset 0 0 0 1000px "@material-selected-background);
+}
+
+.km-material .km-button.km-state-active[style*=background]
+{
+    .box-shadow(~"0 1px 3px "@material-box-shadow-color~", 0 5px 8px "@material-box-shadow-color~", inset 0 0 0 1000px "darken(@material-selected-background, 40));
+}
+
+.km-material .km-button.km-state-disabled
+{
     color: @material-disabled-color;
     opacity: 1;
 }
 
 .km-material .km-buttongroup,
-.km-material .km-widget.km-navbar .km-buttongroup  {
+.km-material .km-widget.km-navbar .km-buttongroup
+{
     border-color: @material-border-color;
 }
 
-.km-material .km-buttongroup .km-button {
+.km-material .km-buttongroup .km-button
+{
     color: @material-main-color;
 }
 
-.km-material .km-widget.km-navbar .km-buttongroup .km-button {
+.km-material-dark .km-buttongroup .km-button
+{
+    color: @material-dark-main-color;
+}
+
+.km-material .km-widget.km-navbar .km-buttongroup .km-button
+{
     color: @material-primary-inverse-color;
 }
 
-.km-material .km-buttongroup > .km-state-active {
+.km-material-dark .km-widget.km-navbar .km-buttongroup .km-button
+{
+    color: @material-dark-inverse-color;
+}
+
+.km-material .km-buttongroup > .km-state-active
+{
     color: @material-primary-color;
     background-color: transparent;
     border-color: @material-primary-color;
 }
 
-.km-material .km-widget.km-navbar .km-buttongroup .km-state-active {
+.km-material .km-widget.km-navbar .km-buttongroup .km-state-active
+{
     border-color: @material-accent-color;
 }
 
 .km-material .km-listview-label input[type=radio]:checked,
-.km-material .km-listview-label input[type=checkbox]:checked {
+.km-material .km-listview-label input[type=checkbox]:checked
+{
     background-color: @material-primary-color;
     border-color: @material-primary-color;
 }
 
-.km-material .km-content {
+.km-material .km-content,
+.km-material .km-modalview .km-navbar
+{
     color: @material-main-color;
     background-color: @material-background;
 }
 
+.km-material-dark .km-content,
+.km-material-dark .km-modalview .km-navbar
+{
+    color: @material-dark-main-color;
+    background-color: @material-dark-background;
+}
+
 .km-material .km-navbar,
-.km-material .km-navbar .km-view-title,
-.km-material .km-navbar .km-button,
 .km-material .k-toolbar,
-.km-material .k-toolbar .km-button,
+.km-material .km-detail,
+.km-material .km-footer
+{
+    background-color: @material-primary-color;
+    border-color: @material-primary-color;
+}
+
+.km-material .km-navbar,
+.km-material .km-toolbar,
 .km-material .km-detail,
 .km-material .km-footer
 {
     color: @material-primary-inverse-color;
-    background-color: @material-primary-color;
-    border-color: @material-primary-color;
 }
 
 .km-material .km-tabstrip .km-button {
     color: fade(@material-primary-inverse-color, 50%);
 }
 
-.km-material .km-tabstrip .km-button.km-state-active {
+.km-material .km-tabstrip .km-button.km-state-active
+{
     color: @material-primary-inverse-color;
-    border-color: @material-accent-color;
-    background-color: @material-primary-color;
+}
 
+.km-material-dark .km-tabstrip .km-button {
+    color: fade(@material-dark-inverse-color, 50%);
+}
+
+.km-material-dark .km-detail,
+.km-material-dark .km-footer,
+.km-material-dark .km-tabstrip .km-button.km-state-active
+{
+    color: @material-dark-inverse-color;
 }
 
 .km-material .k-toolbar .km-button,
@@ -376,22 +552,26 @@
 }
 
 .km-material .km-popup .k-popup .k-item.k-state-selected,
-.km-material .km-popup .k-popup .k-item.k-state-focused {
+.km-material .km-popup .k-popup .k-item.k-state-focused
+{
     color: @material-main-color;
     background-color: @material-selected-background;
 }
 
-.km-material .km-popup .k-popup .k-item.k-state-hover {
+.km-material .km-popup .k-popup .k-item.k-state-hover
+{
     color: @material-main-color;
+}
+
+.km-material-dark .km-popup .k-popup .k-item.k-state-selected,
+.km-material-dark .km-popup .k-popup .k-item.k-state-focused,
+.km-material-dark .km-popup .k-popup .k-item.k-state-hover
+{
+    color: @material-dark-main-color;
 }
 
 .km-material .km-modalview {
     box-shadow: @material-overlay-shadow;
-}
-
-.km-material .km-modalview .km-navbar {
-    color: @material-main-color;
-    background-color: @material-background; 
 }
 
 .km-material,
@@ -412,12 +592,30 @@
     outline-color: @material-primary-inverse-color;
 }
 
+.km-material-dark,
+.km-material-dark .km-header,
+.km-material-dark .km-content,
+.km-material-dark .km-pane,
+.km-material-dark .km-scroll-header .km-group-title,
+.km-material-dark input[type=password],
+.km-material-dark input[type=search],
+.km-material-dark input[type=number],
+.km-material-dark input[type=tel],
+.km-material-dark input[type=url],
+.km-material-dark input[type=email],
+.km-material-dark input[type=text]:not(.k-input),
+.km-root .km-material-dark textarea
+{
+    background: @material-dark-inverse-color;
+    outline-color: @material-dark-inverse-color;
+}
+
 .km-material input,
 .km-material select,
 .km-material textarea,
 .km-material .k-dropdown .k-input
 {
-    color: @material-disabled-color;
+    color: @material-input-text-color;
     border-color: @material-border-color;
 }
 
@@ -430,7 +628,7 @@
 .km-material input[type=text]:not(.k-input),
 .km-root .km-material textarea
 {
-    color: @material-disabled-color;
+    color: @material-input-text-color;
     border-color: @material-border-color;
 }
 
@@ -439,6 +637,12 @@
 {
     color: @material-main-color;
     border-color: @material-border-color;
+}
+
+.km-material-dark input[type=radio],
+.km-material-dark input[type=checkbox]
+{
+    color: @material-dark-main-color;
 }
 
 .km-material input[type=month],
@@ -476,7 +680,6 @@
 .km-material .km-shim,
 .km-material .km-popup,
 .km-material .k-slider,
-.km-material .km-badge,
 .km-material .km-switch-on,
 .km-material .km-current-page,
 .km-material input:focus,
@@ -487,4 +690,15 @@
 .km-material input[type=text]:not(.k-input):focus
 {
     color: @material-primary-color;
+}
+
+/* Animation effects */
+
+.km-material .km-button[data-animated]
+{
+    -webkit-transition: -webkit-box-shadow 300ms linear;
+    -ms-transition: box-shadow 300ms linear;
+    transition: box-shadow 300ms linear;
+    -webkit-transition-property: -webkit-box-shadow, background-color;
+    transition-property: box-shadow, background-color;
 }

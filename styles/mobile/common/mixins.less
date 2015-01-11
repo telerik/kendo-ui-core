@@ -89,7 +89,6 @@
 
 .transform(...) {
     -webkit-transform: @arguments;
-    -moz-transform: @arguments;
     -ms-transform: @arguments;
     -o-transform: @arguments;
     transform: @arguments;
@@ -97,21 +96,18 @@
 
 .transform-origin(...) {
     -webkit-transform-origin: @arguments;
-    -moz-transform-origin: @arguments;
     -ms-transform-origin: @arguments;
     -o-transform-origin: @arguments;
     transform-origin: @arguments;
 }
 
 .transform-style(...) {
-    -webkit-transform-origin: @arguments;
-    -moz-transform-origin: @arguments;
+    -webkit-transform-style: @arguments;
     transform-style: @arguments;
 }
 
 .transition(...) {
     -webkit-transition: @arguments;
-    -moz-transition: @arguments;
     -ms-transition: @arguments;
     -o-transition: @arguments;
     transition: @arguments;
@@ -119,7 +115,6 @@
 
 .pTransition(...) {
     -webkit-transition: ~"-webkit-@{arguments}";
-    -moz-transition: ~"-moz-@{arguments}";
     -ms-transition: ~"-ms-@{arguments}";
     -o-transition: ~"-o-@{arguments}";
     transition: @arguments;
@@ -134,13 +129,16 @@
 
 .animation(...) {
     animation: @arguments;
-    -moz-animation: @arguments;
     -webkit-animation: @arguments;
+}
+
+.animation-name(...) {
+    animation-name: @arguments;
+    -webkit-animation-name: @arguments;
 }
 
 .animation-delay(...) {
     animation-delay: @arguments;
-    -moz-animation-delay: @arguments;
     -webkit-animation-delay: @arguments;
 }
 
