@@ -1614,8 +1614,7 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
 }
 
 #device-wrapper.flat,
-#device-wrapper.material,
-#device-wrapper.materialblack {
+#device-wrapper.material {
     background-image: url("flat.png");
 }
 
@@ -2945,26 +2944,12 @@ html.k-flat .demo-section.k-header {
   color: #4c5356;
 }
 
-html.k-material #example,
-html.k-materialblack #example {
-    font-family: "Roboto", Helvetica, Arial, sans-serif;
-}
-
 html.k-material .demo-section.k-header,
 html.k-material .demo-section.k-content {
      background-color: #fefefe;
      border-color: #fefefe;
      box-shadow: 0 1px 2px 1px rgba(0,0,0,.10), 0 2px 5px rgba(0,0,0,.10);
      color: #444;
-     font-weight: normal;
-}
-
-html.k-materialblack .demo-section.k-header,
-html.k-materialblack .demo-section.k-content {
-     background-color: #1c1c1c;
-     border-color: #1c1c1c;
-     box-shadow: 0 1px 2px 1px rgba(0,0,0,.10), 0 2px 5px rgba(0,0,0,.10);
-     color: #fff;
      font-weight: normal;
 }
 
