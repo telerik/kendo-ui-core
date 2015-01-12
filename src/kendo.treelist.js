@@ -1545,7 +1545,7 @@ var __meta__ = {
         _filterable: function() {
             var cells = this.header.find("th");
             var filterable = this.options.filterable;
-            var idx, length, column;
+            var idx, length, column, cell, filterMenuInstance;
 
             if (!filterable) {
                 return;
@@ -1557,12 +1557,18 @@ var __meta__ = {
 
             for (idx = 0, length = cells.length; idx < length; idx++) {
                 column = this.columns[idx];
+                cell = cells.eq(idx);
+
+                filterMenuInstance = cell.data("kendoFilterMenu");
+                if (filterMenuInstance) {
+                    filterMenuInstance.destroy();
+                }
 
                 if (column.command || column.filterable === false) {
                     continue;
                 }
 
-                cells.eq(idx).kendoFilterMenu(extend(true, {}, filterable, column.filterable, {
+                cell.kendoFilterMenu(extend(true, {}, filterable, column.filterable, {
                     dataSource: this.dataSource,
                     init: filterInit
                 }));
@@ -1639,6 +1645,8 @@ var __meta__ = {
 
         setDataSource: function(dataSource) {
             this._dataSource(dataSource);
+            this._sortable();
+            this._filterable();
 
             this._contentTree.render([]);
 

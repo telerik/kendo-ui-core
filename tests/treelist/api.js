@@ -172,6 +172,34 @@
         equal(ds.data().length, 0);
     });
 
+    test("setDataSource reinitializes sortable", function() {
+        createTreeList({
+            sortable: true
+        });
+
+        var sortable = instance.header.find("th:first").data("kendoColumnSorter");
+
+        var ds = TreeListDataSource.create([ { id: 3, parentId: null } ]);
+
+        instance.setDataSource(ds);
+
+        ok(instance.header.find("th:first").data("kendoColumnSorter") != sortable, "sorter instance is not changed");
+    });
+
+    test("setDataSource reinitializes filterable", function() {
+        createTreeList({
+            filterable: true
+        });
+
+        var filterMenu = instance.header.find("th:first").data("kendoFilterMenu");
+
+        var ds = TreeListDataSource.create([ { id: 3, parentId: null } ]);
+
+        instance.setDataSource(ds);
+
+        ok(instance.header.find("th:first").data("kendoFilterMenu") != filterMenu, "filter menu instance is not changed");
+    });
+
     test("select calls selectable.value as getter", function() {
         createTreeList({ selectable: true });
 
