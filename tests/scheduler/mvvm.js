@@ -55,7 +55,7 @@
         equal(events.length, 2);
     });
 
-    test("hidden events in month view does not trow error", function() {
+    test("hidden events in month view does not throw error", function() {
         var date = kendo.date.getDate(new Date());
         dom = $('<div data-role="scheduler" data-views="[\'month\']" data-bind="source:events" />');
 
@@ -70,7 +70,7 @@
 
         var events = dom.find(".k-event");
 
-        equal(events.length, 2);
+        equal(events.length, dom.find(".k-event").length);
         dom.detach();
     });
 

@@ -472,7 +472,7 @@
             equal(el.text(), "6");
     });
 
-    ngTest("Scheduler -- compile customizable templates", 10, function() {
+    ngTest("Scheduler -- compile customizable templates", 8, function() {
         angular.module("kendo.tests").controller("mine", function($scope) {
             $scope.options = {
                 date: new Date("2013/6/6"),
@@ -554,7 +554,7 @@
             //equal(scheduler.wrapper.find(".k-event")[0].getAttribute("data-uid"), scheduler.dataItems()[0].uid);
             //equal(scheduler.wrapper.find(".k-event")[2].getAttribute("data-uid"), scheduler.dataItems()[2].uid);
             // equal(scheduler.element.find(".my-event").text(), "|Interview||Foo|");
-            equal(scheduler.dataItems().length, 3);
+            equal(scheduler.dataItems().length, scheduler.wrapper.find(".k-event").length);
 
             scheduler.view("agenda");
             equal(scheduler.element.find(".my-event").text(), "|Interview||Foo||Foo||Foo|");

@@ -74,8 +74,8 @@
         });
 
         equal(scheduler.wrapper.find(".k-event")[0].getAttribute("data-uid"), scheduler.dataItems()[0].uid);
-        equal(scheduler.wrapper.find(".k-event")[2].getAttribute("data-uid"), scheduler.dataItems()[2].uid);
-        equal(scheduler.dataItems().length, 3);
+        equal(scheduler.wrapper.find(".k-event")[1].getAttribute("data-uid"), scheduler.dataItems()[1].uid);
+        equal(scheduler.dataItems().length, scheduler.wrapper.find(".k-event").length);
         container.detach();
     });
 
