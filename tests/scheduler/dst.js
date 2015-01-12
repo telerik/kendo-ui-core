@@ -220,11 +220,17 @@
 
         var slots = div.find(".k-scheduler-content td");
 
+        var diff = slots.eq(0).outerHeight() / 2;
         var event = div.find(".k-event");
 
+        var startOffset = event.offset();
+        var endOffset = $.extend({}, startOffset, { top: startOffset.top + event.outerHeight() });
 
-        equalWithRound(event.offset().top, slots.eq(2).offset().top);
-        equalWithRound(event.offset().top + event.outerHeight(), slots.eq(2).offset().top + slots.eq(2).outerHeight());
+        var startSlot = scheduler.slotByPosition(startOffset.left, startOffset.top + diff);
+        var endSlot = scheduler.slotByPosition(endOffset.left, endOffset.top - diff);
+
+        equal($(startSlot.element).closest("tr").index(), 2);
+        equal($(endSlot.element).closest("tr").index(), 2);
     });
 
     test("dst event is not rendered in month view", function() {
