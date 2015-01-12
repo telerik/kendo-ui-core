@@ -934,23 +934,31 @@ var __meta__ = {
 
         fields: function(editors, model) {
             var that = this;
-            var messages = this.options.messages.editor;
-            var resources = this.options.resources;
+            var options = this.options;
+            var messages = options.messages.editor;
+            var resources = options.resources;
+            var fields;
 
             var click = function(e) {
                 e.preventDefault();
                 resources.editor(that.container.find(DOT + Gantt.styles.popup.resourcesField), model);
             };
 
-            var fields = [
-                { field: "title", title: messages.title },
-                { field: "start", title: messages.start, editor: editors.dateRange },
-                { field: "end", title: messages.end, editor: editors.dateRange },
-                { field: "percentComplete", title: messages.percentComplete, format: PERCENTAGE_FORMAT }
-            ];
+            if (options.editable.template) {
+                fields = $.map(model.fields, function(value, key) {
+                            return { field: key };
+                        });
+            } else {
+                fields = [
+                    { field: "title", title: messages.title },
+                    { field: "start", title: messages.start, editor: editors.dateRange },
+                    { field: "end", title: messages.end, editor: editors.dateRange },
+                    { field: "percentComplete", title: messages.percentComplete, format: PERCENTAGE_FORMAT }
+                ];
 
-            if (model.get(resources.field)) {
-                fields.push({ field: resources.field, title: messages.resources, messages: messages, editor: editors.resources, click: click, styles: Gantt.styles.popup });
+                if (model.get(resources.field)) {
+                    fields.push({ field: resources.field, title: messages.resources, messages: messages, editor: editors.resources, click: click, styles: Gantt.styles.popup });
+                }
             }
 
             return fields;
