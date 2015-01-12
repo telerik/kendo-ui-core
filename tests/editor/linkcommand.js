@@ -29,6 +29,14 @@ test("apply on empty range with innerHTML", function() {
     equal(fixture.text(), "bar");
 });
 
+test("apply on inline nodes creates one link", function() {
+    formatter.apply(rangeFromHtml("|foo<em>bar</em>baz|"), { href: "/foo" });
+
+    equal(fixture.find("a").length, 1);
+    equal(fixture.find("a em").length, 1);
+    equal(fixture.find("a").text(), "foobarbaz");
+});
+
 }());
 
 (function(){
@@ -471,7 +479,7 @@ test("executing command over formatted nodes", function() {
     $("#k-editor-link-url").val("baz");
     $(".k-dialog-insert").click();
 
-    equal(editor.value(), '<a href="baz">foo </a><em><a href="baz">bar</a></em>');
+    equal(editor.value(), '<a href="baz">foo <em>bar</em></a>');
 });
 
 test("text field does not show bom text (focus caret gets lost)", function() {

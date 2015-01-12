@@ -74,6 +74,19 @@ test('apply updates attributes', function() {
     equal(serialize(fixture), '<span id="bar">foo</span>');
 });
 
+test("apply on multiple inline nodes creates one format node", function() {
+    QUnit.fixture.html('<em>foo</em><strong>bar</strong>');
+
+    var formatter = new InlineFormatter([{ tags: ['span']}]);
+
+    var em = QUnit.fixture.find("em")[0];
+    var strong = QUnit.fixture.find("strong")[0];
+
+    formatter.apply([em.firstChild, strong.firstChild]);
+
+    equal(serialize(fixture), '<span><em>foo</em><strong>bar</strong></span>');
+});
+
 test('consolidate merges nodes of same format', function() {
     QUnit.fixture.html('<span style="text-decoration:underline;">f</span><span style="text-decoration:underline;">oo</span>');
 

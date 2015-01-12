@@ -144,6 +144,10 @@ var InlineFormatter = Class.extend({
             if (formatNode) {
                 dom.attr(formatNode, this.attributes);
             } else {
+                while (!dom.isBlock(node.parentNode) && node.parentNode.childNodes.length == 1) {
+                    node = node.parentNode;
+                }
+
                 formatNode = this.wrap(node);
             }
 

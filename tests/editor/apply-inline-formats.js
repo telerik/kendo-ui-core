@@ -57,7 +57,7 @@ test('applyFormat applies format on split text elements', function() {
 
     formatRange(range, editor.options.formats.bold);
 
-    equal(editor.value(), '<p>fo<strong>o</strong><em><strong>bar</strong></em><strong>ba</strong>z</p>');
+    equal(editor.value(), '<p>fo<strong>o<em>bar</em>ba</strong>z</p>');
 });
 
 test('applyFormat uses the supplied selector', function() {
@@ -166,7 +166,7 @@ test('formatRange does not reuse span if tags are specified', function() {
 
     formatRange(range, editor.options.formats.bold);
 
-    equal(editor.value(), '<span><strong>golgafrincham</strong></span>');
+    equal(editor.value(), '<strong><span>golgafrincham</span></strong>');
 });
 
 test('formatRange with inline format on collapsed range formats to word boundary', function() {
