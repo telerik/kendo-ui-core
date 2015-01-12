@@ -968,6 +968,62 @@ test("range with server grouping ranges are not modfied", function() {
     equal(dataSource._flatData(dataSource._ranges[0].data).length, 20);
 });
 
+function groupedData(options) {
+    var groupsDict = {};
+    var groups = [];
+
+    for (var i = options.skip, len = options.skip + options.take; i < len; i++) {
+        var key = Math.floor(i / 30) * 30;
+        var group;
+
+        if (!groupsDict[key]) {
+            groupsDict[key] = {
+                field: "number",
+                items: [],
+                hasSubgroups: false,
+                value: key + " - " + (key + 30)
+            }
+
+            groups.push(groupsDict[key]);
+        }
+
+        groupsDict[key].items.push({
+            id: i,
+            text: " Item " + i
+        });
+    }
+
+    return groups;
+}
+
+test("view returns observable items when range changes and dataSource has server grouping", function() {
+    var totalCount = 47,
+        dataSource = new DataSource({
+            pageSize: 20,
+            serverPaging: true,
+            group: "foo",
+            serverGrouping: true,
+            transport: {
+                read: function(options) {
+                    options.success({ groups: groupedData(options.data), hasSubgroups: false, total: totalCount });
+                }
+            },
+            schema: {
+                data: "data",
+                groups: "groups",
+                total: "total"
+            }
+        });
+
+    dataSource.read();
+    dataSource.range(6, 20);
+    dataSource.range(20, 40);
+    var view = dataSource.view();
+
+    ok(view[0] instanceof kendo.data.ObservableObject, "groups are observable objects");
+    ok(view[0].items[0] instanceof kendo.data.ObservableObject, "group.items contains observable objects");
+});
+
 test("mergeGroup returns a subset of the data", function() {
     var dataSource = new DataSource({
         serverGrouping: true,

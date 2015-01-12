@@ -1994,7 +1994,7 @@ var __meta__ = {
         }
     }
 
-    function replaceWithObservable(view, data, ranges, type) {
+    function replaceWithObservable(view, data, ranges, type, serverGrouping) {
         for (var viewIndex = 0, length = view.length; viewIndex < length; viewIndex++) {
             var item = view[viewIndex];
 
@@ -2002,8 +2002,8 @@ var __meta__ = {
                 continue;
             }
 
-            if (item.hasSubgroups !== undefined) {
-                replaceWithObservable(item.items, data, ranges, type);
+            if (item.hasSubgroups !== undefined && !serverGrouping) {
+                replaceWithObservable(item.items, data, ranges, type, serverGrouping);
             } else {
                 for (var idx = 0; idx < data.length; idx++) {
                     if (data[idx] === item) {
@@ -2375,7 +2375,7 @@ var __meta__ = {
 
         _observeView: function(data) {
             var that = this;
-            replaceWithObservable(data, that._data, that._ranges, that.reader.model || ObservableObject);
+            replaceWithObservable(data, that._data, that._ranges, that.reader.model || ObservableObject, that._isServerGrouped());
 
             var view = new LazyObservableArray(data, that.reader.model);
             view.parent = function() { return that.parent(); };
