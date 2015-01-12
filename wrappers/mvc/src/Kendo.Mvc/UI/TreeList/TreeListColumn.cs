@@ -21,6 +21,8 @@ namespace Kendo.Mvc.UI
         //<< Initialization
 
             HtmlAttributes = new Dictionary<string, object>();
+
+            HeaderAttributes = new Dictionary<string, object>();
         }
 
         //>> Fields
