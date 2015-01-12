@@ -1674,8 +1674,8 @@ var __meta__ = {
             }
 
             var eventsCount = events.length;
-            for (var i = 0; i < eventsCount; i++) {
-                var event = events[i];
+            for (var y = 0; y < eventsCount; y++) {
+                var event = events[y];
                 if (dict[event.uid] !== undefined) {
                     dict[event.uid] = event;
                 }
