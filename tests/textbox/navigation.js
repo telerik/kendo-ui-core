@@ -225,4 +225,20 @@
             }
         });
     });
+
+    test("Focus origin input on touched", 1, function() {
+        kendo.support.mobileOS = true;
+
+        var textbox = new NumericTextBox(input);
+
+        textbox.element.on("focus", function() {
+            ok(true);
+        });
+
+        textbox.wrapper.find(".k-formatted-value").trigger({
+            type: "touchend"
+        });
+
+        kendo.support.mobileOS = true;
+    });
 })();
