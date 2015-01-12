@@ -266,30 +266,44 @@
 
 /* Loader & Pull-to-refresh */
 
-.km-material .km-loading:before
+.km-material .km-loading:before,
+.km-material .km-scroller-refresh .km-icon:before
 {
     border-color: @material-primary-color;
 }
 
+.km-material .km-scroller-pull.km-scroller-refresh .km-icon:before
+{
+    border-color: fade(@material-dark-background, 50%);
+}
+
+.km-material-dark .km-scroller-pull.km-scroller-refresh .km-icon:before
+{
+    border-color: fade(@material-background, 50%);
+}
+
 .km-material .km-loading,
-.km-material .km-loader .km-loading-left:before,
-.km-material .km-loader .km-loading-left:after,
-.km-material .km-loader .km-loading-right:before,
-.km-material .km-loader .km-loading-right:after
+.km-material .km-scroller-refresh .km-icon,
+.km-material .km-loading-left:before,
+.km-material .km-loading-left:after,
+.km-material .km-loading-right:before,
+.km-material .km-loading-right:after
 {
     background-color: @material-background;
 }
 
 .km-material-dark .km-loading,
-.km-material-dark .km-loader .km-loading-left:before,
-.km-material-dark .km-loader .km-loading-left:after,
-.km-material-dark .km-loader .km-loading-right:before,
-.km-material-dark .km-loader .km-loading-right:after
+.km-material-dark .km-scroller-refresh .km-icon,
+.km-material-dark .km-loading-left:before,
+.km-material-dark .km-loading-left:after,
+.km-material-dark .km-loading-right:before,
+.km-material-dark .km-loading-right:after
 {
     background-color: @material-dark-background;
 }
 
-.km-material .km-loading
+.km-material .km-loading,
+.km-material .km-scroller-pull .km-icon
 {
     .box-shadow(0 1px 4px @material-box-shadow-color);
 }
@@ -322,7 +336,6 @@
 .km-material .km-switch-label-off,
 .km-material .k-slider .k-draghandle,
 .km-material .k-slider .k-draghandle:hover,
-.km-material .km-scroller-pull .km-icon,
 .km-material .km-popup.km-pane .k-toolbar,
 .km-material .km-popup.km-pane .km-tabstrip,
 .km-material .km-popup .k-state-hover,
@@ -339,7 +352,6 @@
 .km-material-dark .km-switch-label-off,
 .km-material-dark .k-slider .k-draghandle,
 .km-material-dark .k-slider .k-draghandle:hover,
-.km-material-dark .km-scroller-pull .km-icon,
 .km-material-dark .km-popup.km-pane .k-toolbar,
 .km-material-dark .km-popup.km-pane .km-tabstrip,
 .km-material-dark .km-popup .k-state-hover,
@@ -350,15 +362,13 @@
 }
 
 .km-material .km-filter-wrap > input,
-.km-material .km-switch-handle.km-state-active,
-.km-root .km-material .km-scroller-refresh span:not(.km-template)
+.km-material .km-switch-handle.km-state-active
 {
     background: @material-primary-inverse-color;
 }
 
 .km-material-dark .km-filter-wrap > input,
-.km-material-dark .km-switch-handle.km-state-active,
-.km-root .km-material-dark .km-scroller-refresh span:not(.km-template)
+.km-material-dark .km-switch-handle.km-state-active
 {
     background: @material-dark-inverse-color;
 }
@@ -380,7 +390,6 @@
 }
 
 .km-material .km-rowinsert,
-.km-material .km-scroller-pull,
 .km-material .k-slider-selection,
 .km-material .km-touch-scrollbar,
 .km-material .km-pages .km-current-page,
