@@ -69,9 +69,7 @@ var __meta__ = {
              } else {
                  that._text.on(TOUCHEND + ns + " " + FOCUS + ns, function(e) {
                     that._toggleText(false);
-                    if (e.type === FOCUS) {
-                        element.focus();
-                    }
+                    element.focus();
                  });
              }
 
