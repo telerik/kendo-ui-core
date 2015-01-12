@@ -512,14 +512,17 @@
 }
 
 .km-material .km-navbar,
-.km-material .km-toolbar,
+.km-material .k-toolbar,
 .km-material .km-detail,
 .km-material .km-footer
 {
     color: @material-primary-inverse-color;
 }
 
-.km-material .km-tabstrip .km-button {
+.km-material .km-tabstrip .km-button,
+.km-material .km-navbar .km-button.km-state-active,
+.km-material .k-toolbar .km-button.km-state-active
+{
     color: fade(@material-primary-inverse-color, 50%);
 }
 
@@ -528,7 +531,8 @@
     color: @material-primary-inverse-color;
 }
 
-.km-material-dark .km-tabstrip .km-button {
+.km-material-dark .km-tabstrip .km-button
+{
     color: fade(@material-dark-inverse-color, 50%);
 }
 
@@ -539,7 +543,6 @@
     color: @material-dark-inverse-color;
 }
 
-.km-material .k-toolbar .km-button,
 .km-material .km-popup .k-state-hover,
 .km-material .km-popup .k-state-focused,
 .km-material .km-popup .k-state-selected,
@@ -547,7 +550,8 @@
     border-color: @material-primary-color;
 }
 
-.km-material .k-toolbar .km-state-active {
+.km-material .k-toolbar .km-state-active
+{
     background-color: @material-primary-selected-color;
 }
 
