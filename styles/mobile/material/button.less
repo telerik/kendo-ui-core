@@ -55,19 +55,29 @@
     display: none;
 }
 
-.km-material .km-navbar .km-button
+.km-material .km-navbar .km-button,
+.km-material .k-toolbar .km-button
 {
     margin-top: 0;
     margin-bottom: 0;
 }
 
 .km-material .km-navbar .km-button,
+.km-material .k-toolbar .km-button,
 .km-material .km-buttongroup .km-button
 {
+    background: transparent;
     .box-shadow(none);
 }
 
-.km-material .km-navbar .km-back:before
+.km-material .km-navbar .km-button .km-icon,
+.km-material .k-toolbar .km-button .km-icon
+{
+    font-size: 1.2em;
+}
+
+.km-material .km-navbar .km-back:before,
+.km-material .k-toolbar .km-back:before
 {
     content: "\a0";
     display: inline-block;
@@ -79,6 +89,8 @@
     .transform(rotate(45deg));
 }
 
-.km-material .km-navbar .km-back .km-text {
+.km-material .km-navbar .km-back .km-text,
+.km-material .k-toolbar .km-back .km-text
+{
     display: none;    
 }
