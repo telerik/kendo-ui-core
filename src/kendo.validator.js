@@ -189,7 +189,7 @@ var __meta__ = {
 
                         if (decimals) {
                             raise = Math.pow(10, decimals);
-                            return (((val-min)*raise)%(step*raise)) / Math.pow(100, decimals) === 0;
+                            return ((Math.floor((val-min)*raise))%(step*raise)) / Math.pow(100, decimals) === 0;
                         }
                         return ((val-min)%step) === 0;
                     }

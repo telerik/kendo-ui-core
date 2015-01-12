@@ -646,6 +646,13 @@
         ok(validator.validate());
     });
 
+    test("validate step with number with accuracy problem", function() {
+        var input = $('<input type="number" value="0.56" step="0.01" min="0" max="1" />'),
+            validator = setup(input);
+
+        ok(validator.validate());
+    });
+
     test("validate min defaults to 0 if not set and step is set - invalid value", function() {
         var input = $('<input type="number" value="8" step="3" />'),
             validator = setup(input);
