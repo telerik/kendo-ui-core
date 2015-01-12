@@ -1,6 +1,6 @@
 @material-primary-color: #3f51b5;
 @material-primary-selected-color: #283593;
-@material-accent-color: #00b0ff;
+@material-accent-color: #55c6ff;
 @material-main-color: #333;
 @material-icon-color: rgba(0,0,0,.54);
 @material-disabled-color: rgba(128,128,128,.3);
@@ -279,7 +279,7 @@
 
 .km-material-dark .km-scroller-pull.km-scroller-refresh .km-icon:before
 {
-    border-color: fade(@material-background, 50%);
+    border-color: fade(@material-dark-main-color, 50%);
 }
 
 .km-material .km-loading,
@@ -299,7 +299,13 @@
 .km-material-dark .km-loading-right:before,
 .km-material-dark .km-loading-right:after
 {
-    background-color: @material-dark-background;
+    background-color: @material-primary-color;
+}
+
+.km-material-dark .km-loading:before,
+.km-material-dark .km-scroller-refresh .km-icon:before
+{
+    border-color: @material-dark-main-color;
 }
 
 .km-material .km-loading,
@@ -345,7 +351,6 @@
     color: @material-primary-inverse-color;
 }
 
-.km-material-dark .km-badge,
 .km-material-dark .km-rowinsert,
 .km-material-dark .km-rowdelete,
 .km-material-dark .km-switch-label-on,
@@ -485,8 +490,11 @@
     border-color: @material-primary-color;
 }
 
+.km-material-dark .km-buttongroup > .km-state-active,
 .km-material .km-widget.km-navbar .km-buttongroup .km-state-active
 {
+    color: @material-accent-color;
+    background-color: transparent;
     border-color: @material-accent-color;
 }
 
@@ -509,6 +517,11 @@
 {
     color: @material-dark-main-color;
     background-color: @material-dark-background;
+}
+
+.km-material-dark .km-content button
+{
+    color: @material-dark-main-color;
 }
 
 .km-material .km-navbar,
