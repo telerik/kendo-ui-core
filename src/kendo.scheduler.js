@@ -1666,23 +1666,25 @@ var __meta__ = {
             var eventsUids = $.map(items, function(item) {
                 return $(item).attr("data-uid");
             });
+            var i;
+            var key;
 
             var dict = {};
             var eventsUidsLength = eventsUids.length;
-            for (var i = 0; i < eventsUidsLength; i++) {
+            for (i = 0; i < eventsUidsLength; i++) {
                 dict[eventsUids[i]] = null;
             }
 
             var eventsCount = events.length;
-            for (var y = 0; y < eventsCount; y++) {
-                var event = events[y];
+            for (i = 0; i < eventsCount; i++) {
+                var event = events[i];
                 if (dict[event.uid] !== undefined) {
                     dict[event.uid] = event;
                 }
             }
 
             var sortedData = [];
-            for (var key in dict) {
+            for (key in dict) {
                 sortedData.push(dict[key]);
             }
 
