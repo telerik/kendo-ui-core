@@ -438,7 +438,7 @@
 
 
         var slots = div.find(".k-scheduler-content td");
-        debugger;
+
         dragdrop(scheduler, handle, resizeEnd);
 
         equal(scheduler.dataSource.at(0).end.getHours(), 17);
