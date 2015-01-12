@@ -576,9 +576,9 @@ var __meta__ = {
 
                         --KENDO_COUNT;
                         if (KENDO_COUNT === 0) {
+                            scope.$emit("kendoRendered");
                             if (!RENDERED) {
                                 RENDERED = true;
-                                scope.$emit("kendoRendered");
                                 $("form").each(function(){
                                     var form = $(this).controller("form");
                                     if (form) {
