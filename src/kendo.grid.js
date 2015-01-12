@@ -2108,6 +2108,7 @@ var __meta__ = {
             var that = this;
             var lockedRows = $();
             var source = sources[0];
+            var visibleSources = visibleColumns(sources);
             var sourceIndex = inArray(source, leafColumns(that.columns));
             var destIndex = inArray(destination, leafColumns(that.columns));
 
@@ -2136,14 +2137,14 @@ var __meta__ = {
                 reorder(that.wrapper.find(".k-filter-row th:not(.k-group-cell,.k-hierarchy-cell)"), sourceIndex, destIndex, before, sources.length);
             }
 
-            reorder(elements(that.lockedHeader, that.thead.prev(), "col:not(.k-group-col,.k-hierarchy-col)"), colSourceIndex, headerCol, before, sources.length);
+            reorder(elements(that.lockedHeader, that.thead.prev(), "col:not(.k-group-col,.k-hierarchy-col)"), colSourceIndex, headerCol, before, visibleSources.length);
 
             if (that.options.scrollable) {
-                reorder(elements(that.lockedTable, that.tbody.prev(), "col:not(.k-group-col,.k-hierarchy-col)"), colSourceIndex, colDest, before, sources.length);
+                reorder(elements(that.lockedTable, that.tbody.prev(), "col:not(.k-group-col,.k-hierarchy-col)"), colSourceIndex, colDest, before, visibleSources.length);
             }
 
             if (footer && footer.length) {
-                reorder(elements(that.lockedFooter, footer.find(".k-grid-footer-wrap"), ">table>colgroup>col:not(.k-group-col,.k-hierarchy-col)"), colSourceIndex, footerCol, before, sources.length);
+                reorder(elements(that.lockedFooter, footer.find(".k-grid-footer-wrap"), ">table>colgroup>col:not(.k-group-col,.k-hierarchy-col)"), colSourceIndex, footerCol, before, visibleSources.length);
                 reorder(footer.find(".k-footer-template>td:not(.k-group-cell,.k-hierarchy-cell)"), sourceIndex, destIndex, before, sources.length);
             }
 

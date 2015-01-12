@@ -2151,4 +2151,30 @@
         equal(grid.lockedHeader.find("tr").eq(0).find("th")[0].rowSpan, 1, "locked column 1");
     });
 
+    test("move non-locked multi header column with hidden child to locked single header column updates the col span", function() {
+        var grid = new Grid(div, {
+            columns: [
+                { title: "master", width: 10, locked: true, footerTemplate: "foo" },
+                { title: "master1",
+                    columns: [
+                        { title: "master1-child" },
+                        { title: "master1-child1" },
+                        { title: "master1-child2", hidden: true }
+                ] },
+                { title: "master2", width: 70 }
+            ]
+        });
+
+        grid.reorderColumn(0, grid.columns[1]);
+
+        equal(grid.thead.parent().find("col").length, 1, "non locked header");
+        equal(grid.lockedHeader.find("col").length, 3, "locked header");
+
+        equal(grid.table.find("col").length, 1, "non-locked content");
+        equal(grid.lockedTable.find("col").length, 3, "locked content");
+
+        equal(grid.footer.find(".k-grid-footer-wrap").find("col").length, 1, "non-loocked footer");
+        equal(grid.lockedFooter.find("col").length, 3, "loocked footer");
+    });
+
 })();
