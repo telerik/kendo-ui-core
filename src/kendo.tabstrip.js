@@ -359,9 +359,11 @@ var __meta__ = {
         },
 
         setDataSource: function(dataSource) {
-            this.options.dataSource = dataSource;
-            this._dataSource();
-            dataSource.fetch();
+            var that = this;
+
+            that.options.dataSource = dataSource;
+            that._dataSource();
+            that.dataSource.fetch();
         },
 
         _animations: function(options) {
