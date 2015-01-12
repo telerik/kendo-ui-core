@@ -115,6 +115,18 @@
             set;
         }
 
+        public string MajorTimeHeaderTemplate
+        {
+            get;
+            set;
+        }
+
+        public string MajorTimeHeaderTemplateId
+        {
+            get;
+            set;
+        }
+
         protected override void Serialize(IDictionary<string, object> json)
         {
             base.Serialize(json);
@@ -201,6 +213,16 @@
             if (!string.IsNullOrEmpty(DateHeaderTemplateId))
             {
                 json["dateHeaderTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template(jQuery('{0}{1}').html())", idPrefix, DateHeaderTemplateId) };
+            }
+
+            if (!string.IsNullOrEmpty(MajorTimeHeaderTemplate))
+            {
+                json["majorTimeHeaderTemplate"] = MajorTimeHeaderTemplate;
+            }
+
+            if (!string.IsNullOrEmpty(MajorTimeHeaderTemplateId))
+            {
+                json["majorTimeHeaderTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template(jQuery('{0}{1}').html())", idPrefix, MajorTimeHeaderTemplateId) };
             }
         }
     }

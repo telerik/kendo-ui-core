@@ -364,5 +364,27 @@
 
             return (TTimelineViewBuilder)this;
         }
+
+        /// <summary>
+        /// The template used to render the major ticks.
+        /// </summary>
+        /// <param name="majorTimeHeaderTemplate">The majorTimeHeaderTemplate</param>
+        public TTimelineViewBuilder MajorTimeHeaderTemplate(string majorTimeHeaderTemplate)
+        {
+            view.MajorTimeHeaderTemplate = majorTimeHeaderTemplate;
+
+            return (TTimelineViewBuilder)this;
+        }
+
+        /// <summary>
+        /// The Id of the template used to render the major ticks.
+        /// </summary>
+        /// <param name="majorTimeHeaderTemplateId">The majorTimeHeaderTemplateId</param>
+        public TTimelineViewBuilder MajorTimeHeaderTemplateId(string majorTimeHeaderTemplateId)
+        {
+            view.MajorTimeHeaderTemplateId = majorTimeHeaderTemplateId;
+
+            return (TTimelineViewBuilder)this;
+        }
     }
 }
