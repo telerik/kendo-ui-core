@@ -611,7 +611,6 @@ withAngularTests("Angular (UI Core)", function(runTest){
 
 		expect(2);
         $scope.whenRendered(function(){
-            debugger;
             $scope.multiselect.value([1,2]);
             $scope.multiselect.trigger("change");
 
