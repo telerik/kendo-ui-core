@@ -472,7 +472,7 @@
             equal(el.text(), "6");
     });
 
-    ngTest("Scheduler -- compile customizable templates", 8, function() {
+    ngTest("Scheduler -- compile customizable templates", 10, function() {
         angular.module("kendo.tests").controller("mine", function($scope) {
             $scope.options = {
                 date: new Date("2013/6/6"),
@@ -497,6 +497,18 @@
                         id: 2,
                         start: new Date("2013/6/6 10:00 AM"),
                         end: new Date("2013/6/6 11:00 AM"),
+                        title: "Foo",
+                        isAllDay: false
+                    },{
+                        id: 3,
+                        start: new Date("2013/6/6 10:00 AM"),
+                        end: new Date("2013/6/6 11:00 AM"),
+                        title: "Foo",
+                        isAllDay: false
+                    },{
+                        id: 4,
+                        start: new Date("2013/6/7 10:00 AM"),
+                        end: new Date("2013/6/7 11:00 AM"),
                         title: "Foo",
                         isAllDay: false
                     }
@@ -527,22 +539,25 @@
             }
 
             scheduler.view("day");
-            equal(scheduler.element.find(".my-event").text(), "|Foo|");
+            equal(scheduler.element.find(".my-event").text(), "|Foo||Foo|");
             equal(scheduler.element.find(".my-allday-event").text(), "|Interview|");
 
             scheduler.view("week");
-            equal(scheduler.element.find(".my-event").text(), "|Foo|");
+            equal(scheduler.element.find(".my-event").text(), "|Foo||Foo||Foo|");
             equal(scheduler.element.find(".my-allday-event").text(), "|Interview|");
 
             // month and agenda views will use eventTemplate for all-day events too
             // so both events will be displayed in a <div class="my-event">
 
             scheduler.view("month");
+            equal(scheduler.wrapper.find(".k-event")[0].getAttribute("data-uid"), scheduler.dataItems()[0].uid);
+            equal(scheduler.wrapper.find(".k-event")[2].getAttribute("data-uid"), scheduler.dataItems()[2].uid);
+            equal(scheduler.dataItems().length, 3);
             // Fails in Chrome 33, passes in Chrome 35. Comment for now.
             // equal(scheduler.element.find(".my-event").text(), "|Interview||Foo|");
 
             scheduler.view("agenda");
-            equal(scheduler.element.find(".my-event").text(), "|Interview||Foo|");
+            equal(scheduler.element.find(".my-event").text(), "|Interview||Foo||Foo||Foo|");
 
             scheduler.view("day");
             scheduler.editEvent(scheduler.dataSource.at(0));

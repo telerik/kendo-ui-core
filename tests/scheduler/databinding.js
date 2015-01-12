@@ -47,6 +47,38 @@
         });
     });
 
+    test("dataItems method return valid events", function() {
+        container.appendTo($("body"));
+
+        var scheduler = new Scheduler(container, {
+            views: [ {
+                type: kendo.ui.MonthView,
+                title: "testView"
+                }
+            ],
+            date: new Date(2013, 1, 3, 0, 0, 0),
+            dataSource: {
+                serverFiltering: true,
+                transport: {
+                    read: function(options) {
+                        options.success([
+                            {title: "foo1", start: new Date(2013, 1, 3, 0, 0, 0), end: new Date(2013, 1, 3, 0, 0, 0) },
+                            {title: "foo2", start: new Date(2013, 1, 3, 0, 0, 0), end: new Date(2013, 1, 3, 0, 0, 0) },
+                            {title: "foo3", start: new Date(2013, 1, 3, 0, 0, 0), end: new Date(2013, 1, 3, 0, 0, 0) },
+                            {title: "foo4", start: new Date(2013, 1, 3, 0, 0, 0), end: new Date(2013, 1, 3, 0, 0, 0) },
+                            {title: "foo4", start: new Date(2013, 1, 4, 0, 0, 0), end: new Date(2013, 1, 4, 0, 0, 0) }
+                        ]);
+                    }
+                }
+            }
+        });
+
+        equal(scheduler.wrapper.find(".k-event")[0].getAttribute("data-uid"), scheduler.dataItems()[0].uid);
+        equal(scheduler.wrapper.find(".k-event")[2].getAttribute("data-uid"), scheduler.dataItems()[2].uid);
+        equal(scheduler.dataItems().length, 3);
+        container.detach();
+    });
+
     test("data is filtered before is passed to the view", 1, function() {
         var scheduler = new Scheduler(container, {
             views: [ {

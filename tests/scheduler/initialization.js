@@ -23,6 +23,12 @@
         ok(container.data("kendoScheduler") instanceof Scheduler);
     });
 
+    test("kendoScheduler is DataBound widget", function() {
+        container.kendoScheduler();
+
+        ok(container.data("kendoScheduler") instanceof kendo.ui.DataBoundWidget);
+    });
+
     test("wrapper field is initialized", function() {
        var scheduler = new Scheduler(container);
 

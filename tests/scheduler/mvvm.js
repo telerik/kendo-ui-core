@@ -54,4 +54,44 @@
 
         equal(events.length, 2);
     });
+
+    test("hidden events in month view does not trow error", function() {
+        var date = kendo.date.getDate(new Date());
+        dom = $('<div data-role="scheduler" data-views="[\'month\']" data-bind="source:events" />');
+
+        dom.appendTo($("body"));
+
+        kendo.bind(dom, { events: [
+            { start: date, end: date, title: "foo1" },
+            { start: date, end: date, title: "foo2" },
+            { start: date, end: date, title: "foo3" },
+            { start: date, end: date, title: "foo4" }
+        ] } );
+
+        var events = dom.find(".k-event");
+
+        equal(events.length, 2);
+        dom.detach();
+    });
+
+
+    test("change in event is reflected in the view", function() {
+        var newTitle = "new title";
+        var date = kendo.date.getDate(new Date());
+        dom = $('<div data-role="scheduler" data-bind="source:events"' +
+        'data-views="[{type:\'day\', eventTemplate:kendo.template(template)}]" />');
+        window.template = '<input data-bind="value:title" /><div class="title">#=title#</div>';
+
+        kendo.bind(dom, {
+            events: [
+                { start: date, end: date, title: "foo4" }
+            ]
+        } );
+
+        dom.find(".k-event").find("input").val(newTitle).trigger("change");
+        var title = dom.find(".k-event").find(".title").text();
+        delete window.template;
+
+        equal(title, newTitle);
+    });
 })();

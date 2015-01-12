@@ -53,6 +53,7 @@ var __meta__ = {
         keys = kendo.keys,
         ui = kendo.ui,
         Widget = ui.Widget,
+        DataBoundWidget = ui.DataBoundWidget,
         STRING = "string",
         Popup = ui.Popup,
         Calendar = ui.Calendar,
@@ -1607,7 +1608,7 @@ var __meta__ = {
         }
     });
 
-    var Scheduler = Widget.extend({
+    var Scheduler = DataBoundWidget.extend({
         init: function(element, options) {
             var that = this;
 
@@ -1656,6 +1657,36 @@ var __meta__ = {
             that._ariaId = kendo.guid();
 
             that._createEditor();
+        },
+
+        dataItems: function() {
+            var that = this;
+            var items = that.items();
+            var events = that._data;
+            var eventsUids = $.map(items, function(item) {
+                return $(item).attr("data-uid");
+            });
+
+            var dict = {};
+            var eventsUidsLength = eventsUids.length;
+            for (var i = 0; i < eventsUidsLength; i++) {
+                dict[eventsUids[i]] = null;
+            }
+
+            var eventsCount = events.length;
+            for (var i = 0; i < eventsCount; i++) {
+                var event = events[i];
+                if (dict[event.uid] !== undefined) {
+                    dict[event.uid] = event;
+                }
+            }
+
+            var sortedData = [];
+            for (var key in dict) {
+                sortedData.push(dict[key]);
+            }
+
+            return sortedData;
         },
 
         _isMobile: function() {
@@ -2118,7 +2149,7 @@ var __meta__ = {
         },
 
         items: function() {
-            return this.wrapper.find(".k-event, .k-task");
+            return this.wrapper.find(".k-scheduler-content").children(".k-event, .k-task");
         },
 
         _movable: function() {
