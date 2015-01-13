@@ -516,7 +516,9 @@
                             }
                         }
                     } else {
+                        var dataItem = this.options.dataItem;
                         this.options = deepExtend({}, this.options, modelOptions);
+                        this.options.dataItem = dataItem;
                     }
                 }
             },
