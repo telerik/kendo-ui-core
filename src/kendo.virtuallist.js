@@ -21,7 +21,9 @@ var __meta__ = {
         HEADER = "k-header",
         VIRTUALITEM = "k-virtual-item",
         HEIGHTCONTAINER = "k-height-container",
-        GROUPITEM = "k-group";
+        GROUPITEM = "k-group",
+
+        SELECTED = "k-state-selected";
 
     function getItemCount(screenHeight, listScreens, itemHeight) {
         return Math.ceil(screenHeight * listScreens / itemHeight);
@@ -136,6 +138,7 @@ var __meta__ = {
 
             that._templates();
             that._items = that._generateItems(appendChild(element[0], WRAPPER), itemCount);
+            that._value = that.options.value instanceof Array ? that.options.value : [that.options.value];
 
             that.setDataSource(options.dataSource);
 
@@ -146,6 +149,9 @@ var __meta__ = {
             element.on("scroll", function() {
                 that._renderItems();
             });
+
+            that._selectProxy = $.proxy(that, "_select");
+            element.on("click", "." + VIRTUALITEM, this._selectProxy);
 
             if (!that.wrapper) {
                 kendo.ui.progress(that.element, true);
@@ -160,6 +166,8 @@ var __meta__ = {
             itemHeight: 40,
             oppositeBuffer: 1,
             type: "flat",
+            value: [],
+            dataValueField: null,
             template: "#:data#",
             placeholderTemplate: "loading...",
             groupTemplate: "#:group#",
@@ -190,6 +198,15 @@ var __meta__ = {
                                         kendo.ui.progress(that.element, false);
                                         that._createList();
                                     });
+        },
+
+        value: function(value) {
+            if (value) {
+                this._value = value instanceof Array ? value : [value];
+                this._renderItems(true);
+            } else {
+                return this._value;
+            }
         },
 
         _templates: function() {
@@ -341,7 +358,19 @@ var __meta__ = {
 
         _itemMapper: function(item, index) {
             var listType = this.options.type,
-                itemHeight = this.options.itemHeight;
+                itemHeight = this.options.itemHeight,
+                value = this._value,
+                valueField = this.options.dataValueField,
+                selected = false;
+
+            if (value.length && item) {
+                for (var i = 0; i < value.length; i++) {
+                    if (value[i] === item[valueField]) {
+                        selected = true;
+                        break;
+                    }
+                }
+            }
 
             if (listType === "group") {
                 var newGroup;
@@ -355,14 +384,16 @@ var __meta__ = {
                     group: item ? item.group : null,
                     index: index,
                     top: index * itemHeight,
-                    newGroup: newGroup
+                    newGroup: newGroup,
+                    selected: selected
                 };
             } else {
                 return {
                     item: item ? item : null,
                     index: index,
                     top: index * itemHeight,
-                    newGroup: false
+                    newGroup: false,
+                    selected: selected
                 };
             }
         },
@@ -457,6 +488,10 @@ var __meta__ = {
                     .html(itemTemplate(data.item || {}))
                     .attr("data-uid", data.item ? data.item.uid : "");
 
+                if (data.selected) {
+                    element.addClass(SELECTED);
+                }
+
                 if (data.newGroup) {
                     $("<div class=" + GROUPITEM + "></div>")
                         .appendTo(element)
@@ -466,6 +501,12 @@ var __meta__ = {
                 element
                     .html(itemTemplate(data.item || {}))
                     .attr("data-uid", data.item ? data.item.uid : "");
+
+                if (data.selected) {
+                    element.addClass(SELECTED);
+                } else {
+                    element.removeClass(SELECTED);
+                }
 
                 if (data.newGroup) {
                     if (element.children().length === 2) {
@@ -503,6 +544,21 @@ var __meta__ = {
             position = scrollTop - ((scrollTop > lastScrollTop) ? buffers.down : buffers.up);
 
             return this._indexConstraint(position);
+        },
+
+        _select: function(e) {
+            var target = $(e.target),
+                valueField = this.options.dataValueField,
+                dataSource = this.dataSource,
+                selectedValue = dataSource.getByUid(target.data("uid"))[valueField];
+
+            if (target.hasClass(SELECTED)) {
+                target.removeClass(SELECTED);
+                this._value = this._value.filter(function(i) { return i != selectedValue; });
+            } else {
+                this._value.push(selectedValue);
+                target.addClass(SELECTED);
+            }
         }
 
     });
