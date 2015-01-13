@@ -57,149 +57,149 @@
             </div>
         </div>
     </div>
+
+    <style scoped>
+        /*
+            Use the DejaVu Sans font for display and embedding in the PDF file.
+            The standard PDF fonts have no support for Unicode characters.
+        */
+        .pdf-page {
+            font-family: "DejaVu Sans", "Arial", sans-serif;
+        }
+    </style>
+
+    <!-- Load Pako ZLIB library to enable PDF compression -->
+    <script src="../content/shared/js/pako.min.js"></script>
+
+    <script>
+      function getPDF(selector) {
+        kendo.drawing.drawDOM($(selector)).then(function(group){
+          kendo.drawing.pdf.saveAs(group, "Invoice.pdf");
+        });
+      }
+
+    $(document).ready(function() {
+        var data = [
+          { productName: "QUESO CABRALES", unitPrice: 21, qty: 5 },
+          { productName: "ALICE MUTTON", unitPrice: 39, qty: 7 },
+          { productName: "GENEN SHOUYU", unitPrice: 15.50, qty: 3 },
+          { productName: "CHARTREUSE VERTE", unitPrice: 18, qty: 1 },
+          { productName: "MASCARPONE FABIOLI", unitPrice: 32, qty: 2 },
+          { productName: "VALKOINEN SUKLAA", unitPrice: 16.25, qty: 3 }
+        ];
+        var schema = {
+          model: {
+            productName: { type: "string" },
+            unitPrice: { type: "number", editable: false },
+            qty: { type: "number" }
+          },
+          parse: function (data) {
+                $.each(data, function(){
+                    this.total = this.qty * this.unitPrice;
+                });
+                return data;
+          }
+        };
+        var aggregate = [
+          { field: "qty", aggregate: "sum" },
+          { field: "total", aggregate: "sum" }
+        ];
+        var columns = [
+          { field: "productName", title: "Product", footerTemplate: "Total"},
+          { field: "unitPrice", title: "Price", width: 120},
+          { field: "qty", title: "Pcs.", width: 120, aggregates: ["sum"], footerTemplate: "#=sum#" },
+          { field: "total", title: "Total", width: 120, aggregates: ["sum"], footerTemplate: "#=sum#" }
+        ];
+        var grid = $("#grid").kendoGrid({
+          editable: false,
+          sortable: true,
+          dataSource: {
+            data: data,
+            aggregate: aggregate,
+            schema: schema,
+          },
+          columns: columns
+        });
+
+        $("#paper").kendoDropDownList({
+          change: function() {
+            $(".pdf-page")
+              .removeClass("size-a4")
+              .removeClass("size-letter")
+              .removeClass("size-executive")
+              .addClass(this.value());
+          }
+        });
+    });
+    </script>
+    <style scoped>
+        .pdf-page {
+            margin: 0 auto;
+            box-sizing: border-box;
+            box-shadow: 0 5px 10px 0 rgba(0,0,0,.3);
+            background-color: #fff;
+            color: #333;
+            position: relative;
+        }
+        .pdf-header {
+            position: absolute;
+            top: .5in;
+            height: .6in;
+            left: .5in;
+            right: .5in;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        .invoice-number {
+            padding-top: .17in;
+            float: right;
+        }
+        .pdf-footer {
+            position: absolute;
+            bottom: .5in;
+            height: .6in;
+            left: .5in;
+            right: .5in;
+            padding-top: 10px;
+            border-top: 1px solid #e5e5e5;
+            text-align: left;
+            color: #787878;
+            font-size: 12px;
+        }
+        .pdf-body {
+            position: absolute;
+            top: 3.7in;
+            bottom: 1.2in;
+            left: .5in;
+            right: .5in;
+        }
+
+        .size-a4 { width: 8.3in; height: 11.7in; }
+        .size-letter { width: 8.5in; height: 11in; }
+        .size-executive { width: 7.25in; height: 10.5in; }
+
+        .company-logo {
+            font-size: 30px;
+            font-weight: bold;
+            color: #3aabf0;
+        }
+        .for {
+            position: absolute;
+            top: 1.5in;
+            left: .5in;
+            width: 2.5in;
+        }
+        .from {
+            position: absolute;
+            top: 1.5in;
+            right: .5in;
+            width: 2.5in;
+        }
+        .from p, .for p {
+            color: #787878;
+        }
+        .signature {
+            padding-top: .5in;
+        }
+    </style>
+
 </div>
-
-<style scoped>
-    /*
-        Use the DejaVu Sans font for display and embedding in the PDF file.
-        The standard PDF fonts have no support for Unicode characters.
-    */
-    .pdf-page {
-        font-family: "DejaVu Sans", "Arial", sans-serif;
-    }
-</style>
-
-<!-- Load Pako ZLIB library to enable PDF compression -->
-<script src="../content/shared/js/pako.min.js"></script>
-
-<script>
-  function getPDF(selector) {
-    kendo.drawing.drawDOM($(selector)).then(function(group){
-      kendo.drawing.pdf.saveAs(group, "Invoice.pdf");
-    });
-  }
-
-$(document).ready(function() {
-    var data = [
-      { productName: "QUESO CABRALES", unitPrice: 21, qty: 5 },
-      { productName: "ALICE MUTTON", unitPrice: 39, qty: 7 },
-      { productName: "GENEN SHOUYU", unitPrice: 15.50, qty: 3 },
-      { productName: "CHARTREUSE VERTE", unitPrice: 18, qty: 1 },
-      { productName: "MASCARPONE FABIOLI", unitPrice: 32, qty: 2 },
-      { productName: "VALKOINEN SUKLAA", unitPrice: 16.25, qty: 3 }
-    ];
-    var schema = {
-      model: {
-        productName: { type: "string" },
-        unitPrice: { type: "number", editable: false },
-        qty: { type: "number" }
-      },
-      parse: function (data) {
-            $.each(data, function(){
-                this.total = this.qty * this.unitPrice;
-            });
-            return data;
-      }
-    };
-    var aggregate = [
-      { field: "qty", aggregate: "sum" },
-      { field: "total", aggregate: "sum" }
-    ];
-    var columns = [
-      { field: "productName", title: "Product", footerTemplate: "Total"},
-      { field: "unitPrice", title: "Price", width: 120},
-      { field: "qty", title: "Pcs.", width: 120, aggregates: ["sum"], footerTemplate: "#=sum#" },
-      { field: "total", title: "Total", width: 120, aggregates: ["sum"], footerTemplate: "#=sum#" }
-    ];
-    var grid = $("#grid").kendoGrid({
-      editable: false,
-      sortable: true,
-      dataSource: {
-        data: data,
-        aggregate: aggregate,
-        schema: schema,
-      },
-      columns: columns
-    });
-
-    $("#paper").kendoDropDownList({
-      change: function() {
-        $(".pdf-page")
-          .removeClass("size-a4")
-          .removeClass("size-letter")
-          .removeClass("size-executive")
-          .addClass(this.value());
-      }
-    });
-});
-</script>
-<style scoped>
-    .pdf-page {
-        margin: 0 auto;
-        box-sizing: border-box;
-        box-shadow: 0 5px 10px 0 rgba(0,0,0,.3);
-        background-color: #fff;
-        color: #333;
-        position: relative;
-    }
-    .pdf-header {
-        position: absolute;
-        top: .5in;
-        height: .6in;
-        left: .5in;
-        right: .5in;
-        border-bottom: 1px solid #e5e5e5;
-    }
-    .invoice-number {
-        padding-top: .17in;
-        float: right;
-    }
-    .pdf-footer {
-        position: absolute;
-        bottom: .5in;
-        height: .6in;
-        left: .5in;
-        right: .5in;
-        padding-top: 10px;
-        border-top: 1px solid #e5e5e5;
-        text-align: left;
-        color: #787878;
-        font-size: 12px;
-    }
-    .pdf-body {
-        position: absolute;
-        top: 3.7in;
-        bottom: 1.2in;
-        left: .5in;
-        right: .5in;
-    }
-
-    .size-a4 { width: 8.3in; height: 11.7in; }
-    .size-letter { width: 8.5in; height: 11in; }
-    .size-executive { width: 7.25in; height: 10.5in; }
-
-    .company-logo {
-        font-size: 30px;
-        font-weight: bold;
-        color: #3aabf0;
-    }
-    .for {
-        position: absolute;
-        top: 1.5in;
-        left: .5in;
-        width: 2.5in;
-    }
-    .from {
-        position: absolute;
-        top: 1.5in;
-        right: .5in;
-        width: 2.5in;
-    }
-    .from p, .for p {
-        color: #787878;
-    }
-    .signature {
-        padding-top: .5in;
-    }
-</style>
-
