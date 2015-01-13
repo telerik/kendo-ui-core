@@ -342,6 +342,8 @@
 .km-material .km-switch-label-off,
 .km-material .k-slider .k-draghandle,
 .km-material .k-slider .k-draghandle:hover,
+.km-material .km-actionsheet > li > a:focus,
+.km-material .km-actionsheet > li > a:active,
 .km-material .km-popup.km-pane .k-toolbar,
 .km-material .km-popup.km-pane .km-tabstrip,
 .km-material .km-popup .k-state-hover,
@@ -400,6 +402,8 @@
 .km-material .km-pages .km-current-page,
 .km-material .k-slider .k-draghandle,
 .km-material .k-slider .k-draghandle:hover,
+.km-material .km-actionsheet > li > a:focus,
+.km-material .km-actionsheet > li > a:active,
 .km-material li.km-state-active .km-listview-label,
 .km-material .km-listview-label input[type=radio]:checked,
 .km-material .km-listview-label input[type=checkbox]:checked
@@ -418,11 +422,18 @@
     background: @material-second-active-background;
 }
 
-.km-material .km-modalview .km-navbar .km-button
+.km-material .km-modalview .km-header .km-button,
+.km-material .km-modalview .km-footer .km-button,
+.km-material .km-tabstrip .km-button
 {
     color: @material-primary-color;
-    background: transparent;
-    border-color: transparent;
+}
+
+.km-material-dark .km-modalview .km-header .km-button,
+.km-material-dark .km-modalview .km-footer .km-button,
+.km-material-dark .km-tabstrip .km-button
+{
+    color: @material-accent-color;
 }
 
 .km-material .km-state-active,
@@ -441,17 +452,17 @@
     color: @material-dark-main-color;
 }
 
-.km-material .km-button.km-state-active
+.km-material .km-content .km-button.km-state-active
 {
     .box-shadow(~"0 1px 3px "@material-box-shadow-color~", 0 5px 8px "@material-box-shadow-color~", inset 0 0 0 1000px "@material-selected-background);
 }
 
-.km-material .km-button.km-state-active[style*=background]
+.km-material .km-content .km-button.km-state-active[style*=background]
 {
     .box-shadow(~"0 1px 3px "@material-box-shadow-color~", 0 5px 8px "@material-box-shadow-color~", inset 0 0 0 1000px "darken(@material-selected-background, 40));
 }
 
-.km-material .km-button.km-state-disabled
+.km-root .km-material .km-button.km-state-disabled
 {
     color: @material-disabled-color;
     opacity: 1;
@@ -483,15 +494,15 @@
     color: @material-dark-inverse-color;
 }
 
-.km-material .km-buttongroup > .km-state-active
+.km-root .km-material .km-buttongroup > .km-state-active
 {
     color: @material-primary-color;
     background-color: transparent;
     border-color: @material-primary-color;
 }
 
-.km-material-dark .km-buttongroup > .km-state-active,
-.km-material .km-widget.km-navbar .km-buttongroup .km-state-active
+.km-root .km-material-dark .km-buttongroup > .km-state-active,
+.km-root .km-material .km-widget.km-navbar .km-buttongroup .km-state-active
 {
     color: @material-accent-color;
     background-color: transparent;
@@ -551,18 +562,7 @@
 .km-material .km-tabstrip .km-button.km-state-active
 {
     color: @material-primary-inverse-color;
-}
-
-.km-material-dark .km-tabstrip .km-button
-{
-    color: fade(@material-dark-inverse-color, 50%);
-}
-
-.km-material-dark .km-detail,
-.km-material-dark .km-footer,
-.km-material-dark .km-tabstrip .km-button.km-state-active
-{
-    color: @material-dark-inverse-color;
+    border-color: currentcolor;
 }
 
 .km-material .km-popup .k-state-hover,
