@@ -776,4 +776,25 @@
 
         deepEqual(multiselect.value(), []);
     });
+
+    test("binding to a digit splices model field value correctly", function() {
+        dom = $('<select data-role="multiselect" data-value-primitive="true" multiple="multiple" data-text-field="name" data-value-field="id" data-bind="source:items, value:selectedItem"/>');
+
+        var observable = kendo.observable({
+            items: [  { id: 0, name: "foo" }, { id: 1, name: "bar" }, { id: 2, name: "baz" } ],
+            selectedItem: []
+        });
+
+        kendo.bind(dom, observable);
+        dom.data("kendoMultiSelect").value([0]);
+        dom.data("kendoMultiSelect").trigger("change");
+
+        debugger;
+        dom.data("kendoMultiSelect").value([0, 1]);
+        dom.data("kendoMultiSelect").trigger("change");
+
+        equal(observable.selectedItem.length, 2);
+        equal(observable.selectedItem[0], observable.items[0].id);
+        equal(observable.selectedItem[1], observable.items[1].id);
+    });
 })();
