@@ -41,13 +41,24 @@
     vertical-align: middle;
 }
 
-.km-material .km-icon:before,
+.km-material .km-icon:before
+{
+    margin-top: 0;
+}
+
 .km-material .km-contactadd:before,
 .km-material .km-rowdelete:before,
 .km-material .km-rowinsert:before,
 .km-material .km-detaildisclose:before
 {
-    margin-top: 0;
+    display: none;
+}
+
+.km-material .km-contactadd:after,
+.km-material .km-rowdelete:after,
+.km-material .km-rowinsert:after
+{
+    font-size: 1.4em;
 }
 
 .km-material .km-listview-link,
