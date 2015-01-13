@@ -86,7 +86,7 @@
 .km-material .km-listview-label input[type=radio],
 .km-material .km-listview-label input[type=checkbox]
 {
-    border-width: @material-border-width;
+    border-width: 2px;
     border-style: solid;
     width: 1.2em;
     height: 1.2em;
@@ -97,9 +97,10 @@
 {
     width: 1.2em;
     height: 1.2em;
-    border-radius: 1em;
+    border-radius: 50%;
 }
 
+.km-material .km-listview-label input[type=radio]:checked:after,
 .km-material .km-listview-label input[type=checkbox]:after
 {
     content: "\a0";
@@ -110,14 +111,16 @@
     .transform-origin(10% 50%);
 }
 
-.km-material .km-listview-label input[type=checkbox]:checked:after
+.km-material .km-listview-label input[type=radio]:checked:after
 {
-    font-size: 1.2em;
+    margin: 11% 0 0 11%;
+    height: 85%;
+    border-radius: 50%;
 }
 
-.km-material .km-listview-label input[type=radio]:after
+.km-material .km-listview-label input[type=checkbox]:checked:after
 {
-    color: transparent;
+    font-size: 1em;
 }
 
 .km-material .km-list .km-icon.km-check {
@@ -354,6 +357,7 @@
     opacity: .4;
 }
 
-.km-material .km-popup .k-popup .k-item.k-state-hover {
+.km-material .km-popup .k-popup .k-item.k-state-hover
+{
     cursor: pointer;
 }
