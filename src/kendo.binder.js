@@ -1236,18 +1236,15 @@ var __meta__ = {
                     var idx;
                     var length;
                     var widget = this.widget;
-                    var view = widget.view();
-                    var items = e.addedItems || widget.items();
-                    var dataSource = widget.dataSource;
-                    var groups = dataSource.group() || [];
+                    var elements = e.addedItems || widget.items();
                     var data, parents;
 
-                    if (items.length) {
-                        data = e.addedDataItems || dataSource.expand(view.startDate(), view.endDate());
+                    if (elements.length) {
+                        data = e.addedDataItems || widget.dataItems();
                         parents = this.bindings.source._parents();
 
                         for (idx = 0, length = data.length; idx < length; idx++) {
-                            bindElement(items[idx], data[idx], this._ns(e.ns), [data[idx]].concat(parents));
+                            bindElement(elements[idx], data[idx], this._ns(e.ns), [data[idx]].concat(parents));
                         }
                     }
                 }
