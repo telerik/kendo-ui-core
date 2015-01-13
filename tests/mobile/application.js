@@ -315,6 +315,15 @@
         ok(application.element.hasClass("km-wp-light"));
     });
 
+    test("Setting skin variant without platform sets the variant classes", 2, function() {
+        setup('<div data-role="view" />', {
+            skin: "material-dark"
+        });
+
+        ok(application.element.hasClass("km-material"));
+        ok(application.element.hasClass("km-material-dark"));
+    });
+
     test("Setting the the platform variant sets at least one variant", 1, function() {
         setup('<div data-role="view" />', {
             platform: "wp"
