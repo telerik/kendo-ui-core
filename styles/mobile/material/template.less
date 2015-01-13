@@ -422,18 +422,23 @@
     background: @material-second-active-background;
 }
 
+.km-material .km-tabstrip .km-button,
 .km-material .km-modalview .km-header .km-button,
-.km-material .km-modalview .km-footer .km-button,
-.km-material .km-tabstrip .km-button
+.km-material .km-modalview .km-footer .km-button
 {
     color: @material-primary-color;
 }
 
+.km-material-dark .km-tabstrip .km-button,
 .km-material-dark .km-modalview .km-header .km-button,
-.km-material-dark .km-modalview .km-footer .km-button,
-.km-material-dark .km-tabstrip .km-button
+.km-material-dark .km-modalview .km-footer .km-button
 {
     color: @material-accent-color;
+}
+
+.km-material .km-tabstrip .km-button.km-state-active
+{
+    border-color: currentcolor;
 }
 
 .km-material .km-state-active,
@@ -517,6 +522,7 @@
 }
 
 .km-material .km-content,
+.km-material .km-tabstrip,
 .km-material .km-modalview .km-navbar
 {
     color: @material-main-color;
@@ -524,6 +530,7 @@
 }
 
 .km-material-dark .km-content,
+.km-material-dark .km-tabstrip,
 .km-material-dark .km-modalview .km-navbar
 {
     color: @material-dark-main-color;
@@ -536,39 +543,31 @@
 }
 
 .km-material .km-navbar,
-.km-material .k-toolbar,
-.km-material .km-detail,
-.km-material .km-footer
+.km-material .k-toolbar
 {
     background-color: @material-primary-color;
     border-color: @material-primary-color;
+    color: @material-primary-inverse-color;
 }
 
 .km-material .km-navbar,
 .km-material .k-toolbar,
-.km-material .km-detail,
-.km-material .km-footer
+.km-material .km-tabstrip
 {
-    color: @material-primary-inverse-color;
+    .box-shadow(~"0 0 1px @{material-box-shadow-color}, 0 0 4px @{material-box-shadow-color}");
 }
 
-.km-material .km-tabstrip .km-button,
 .km-material .km-navbar .km-button.km-state-active,
 .km-material .k-toolbar .km-button.km-state-active
 {
     color: fade(@material-primary-inverse-color, 50%);
 }
 
-.km-material .km-tabstrip .km-button.km-state-active
-{
-    color: @material-primary-inverse-color;
-    border-color: currentcolor;
-}
-
 .km-material .km-popup .k-state-hover,
 .km-material .km-popup .k-state-focused,
 .km-material .km-popup .k-state-selected,
-.km-material .km-popup .k-list-container {
+.km-material .km-popup .k-list-container
+{
     border-color: @material-primary-color;
 }
 
