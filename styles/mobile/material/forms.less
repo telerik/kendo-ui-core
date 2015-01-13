@@ -56,12 +56,6 @@
     padding: .2em;
 }
 
-.km-material .km-list .k-dropdown
-{
-    margin-top: -1.05em;
-    font-weight: normal;
-}
-
 .km-material .km-list input[type=color],
 .km-material .km-list input[type=week],
 .km-material .km-list input[type=date],
@@ -172,7 +166,16 @@
 .km-material .km-list .k-dropdown
 {
     margin-top: -1.05em;
+    width: 45%;
+    right: 1em;
     font-size: 1em;
+}
+
+.km-material .km-list .k-dropdown
+{
+    margin-top: -1.5em;
+    font-weight: normal;
+    padding: 0;
 }
 
 .km-native-scrolling .km-material .km-list input[type=password],
@@ -207,6 +210,7 @@
 .km-material textarea {
     outline: none;
     border-width: 0 0 1px;
+    margin-right: 0;
 }
 
 .km-material .k-dropdown .k-input
@@ -273,25 +277,17 @@
 
 .km-material .k-slider-horizontal
 {
-    margin-top: -.5em;
+    margin-top: 0;
     height: .1em;
 }
 
-.km-material .k-slider .k-draghandle,
-.km-material .k-slider .k-draghandle:hover
+.km-material .k-slider .k-draghandle
 {
     width: .857em;
     height: .857em;
     .box-shadow(none);
     border-radius: 5em;
     border: 0;
-}
-
-.km-material .k-slider .k-draghandle.k-state-selected
-{
-    width: 1.286em;
-    height: 1.286em;
-    top: -1px;
 }
 
 .km-material .k-slider-horizontal .k-draghandle
