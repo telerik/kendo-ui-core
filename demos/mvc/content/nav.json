@@ -6543,6 +6543,7 @@
       {
         "text": "Pan and zoom",
         "url": "bar-charts/pan-and-zoom",
+        "disableInMobile": true,
         "title": {
             "kendo-ui": "Pan and zoom in Bar charts | Kendo UI Bar Chart demo"
         },
@@ -8713,6 +8714,7 @@
       {
         "text": "Pan and zoom",
         "url": "scatter-charts/pan-and-zoom",
+        "disableInMobile": true,
         "title": {
             "kendo-ui": "Pan and zoom in Kendo UI Scatter Charts"
         },
