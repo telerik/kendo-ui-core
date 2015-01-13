@@ -3,7 +3,7 @@
 @material-accent-color: #55c6ff;
 @material-main-color: #333;
 @material-icon-color: rgba(0,0,0,.54);
-@material-disabled-color: rgba(0,0,0,.5);
+@material-disabled-color: rgba(128,128,128,.3);
 @material-input-text-color: @material-disabled-color;
 @material-border-color: rgba(0,0,0,.12);
 
@@ -22,7 +22,7 @@
 
 @material-dark-main-color: @material-background;
 @material-dark-icon-color: @material-dark-main-color;
-@material-dark-input-text-color: rgba(128,128,128,.3);
+@material-dark-input-text-color: rgba(255,255,255,.5);
 
 @material-dark-background: #333;
 @material-dark-inverse-color: @material-dark-background;
@@ -390,21 +390,38 @@
 .km-material .km-actionsheet > li > a:focus,
 .km-material .km-actionsheet > li > a:active,
 .km-material li.km-state-active .km-listview-label,
-.km-material .km-listview-label input[type=radio]:checked,
+.km-material .km-listview-label input[type=radio]:checked:after,
 .km-material .km-listview-label input[type=checkbox]:checked
 {
     background: @material-primary-color;
 }
 
-.km-material .k-slider .k-draghandle.k-state-focused,
-.km-material .k-slider .k-draghandle.k-state-selected
-{
-    .box-shadow(0 0 0 .44em fade(@material-primary-color, 20%));
-}
-
-.km-material .km-filter-wrap > input:focus
+.km-material .km-filter-wrap > input:focus,
+.km-material .km-listview-label input[type=radio]:checked,
+.km-material .km-listview-label input[type=checkbox]:checked
 {
     border-color: @material-primary-color;
+}
+
+.km-material-dark .k-slider-selection,
+.km-material-dark .km-touch-scrollbar,
+.km-material-dark .km-pages .km-current-page,
+.km-material-dark .k-slider .k-draghandle,
+.km-material-dark .k-slider .k-draghandle:hover,
+.km-material-dark .km-actionsheet > li > a:focus,
+.km-material-dark .km-actionsheet > li > a:active,
+.km-material-dark li.km-state-active .km-listview-label,
+.km-material-dark .km-listview-label input[type=radio]:checked:after,
+.km-material-dark .km-listview-label input[type=checkbox]:checked
+{
+    background: @material-accent-color;
+}
+
+.km-material-dark .km-filter-wrap > input:focus,
+.km-material-dark .km-listview-label input[type=radio]:checked,
+.km-material-dark .km-listview-label input[type=checkbox]:checked
+{
+    border-color: @material-accent-color;
 }
 
 .km-material .km-badge
@@ -504,13 +521,6 @@
     border-color: @material-accent-color;
 }
 
-.km-material .km-listview-label input[type=radio]:checked,
-.km-material .km-listview-label input[type=checkbox]:checked
-{
-    background-color: @material-primary-color;
-    border-color: @material-primary-color;
-}
-
 .km-material .km-content,
 .km-material .km-tabstrip,
 .km-material .km-modalview .km-navbar
@@ -585,7 +595,8 @@
     color: @material-dark-main-color;
 }
 
-.km-material .km-modalview {
+.km-material .km-modalview
+{
     box-shadow: @material-overlay-shadow;
 }
 
@@ -604,7 +615,6 @@
 .km-root .km-material textarea
 {
     background: @material-primary-inverse-color;
-    outline-color: @material-primary-inverse-color;
 }
 
 .km-material-dark,
@@ -622,18 +632,12 @@
 .km-root .km-material-dark textarea
 {
     background: @material-dark-inverse-color;
-    outline-color: @material-dark-inverse-color;
 }
 
 .km-material input,
 .km-material select,
 .km-material textarea,
-.km-material .k-dropdown .k-input
-{
-    color: @material-input-text-color;
-    border-color: @material-border-color;
-}
-
+.km-material .k-dropdown .k-input,
 .km-material input[type=password],
 .km-material input[type=search],
 .km-material input[type=number],
@@ -644,7 +648,23 @@
 .km-root .km-material textarea
 {
     color: @material-input-text-color;
-    border-color: @material-border-color;
+    border-color: currentcolor;
+}
+
+.km-material-dark input,
+.km-material-dark select,
+.km-material-dark textarea,
+.km-material-dark .k-dropdown .k-input,
+.km-material-dark input[type=password],
+.km-material-dark input[type=search],
+.km-material-dark input[type=number],
+.km-material-dark input[type=tel],
+.km-material-dark input[type=url],
+.km-material-dark input[type=email],
+.km-material-dark input[type=text]:not(.k-input),
+.km-root .km-material-dark textarea
+{
+    color: @material-dark-input-text-color;
 }
 
 .km-material input[type=radio],
@@ -660,38 +680,6 @@
     color: @material-dark-main-color;
 }
 
-.km-material input[type=month],
-.km-material input[type=color],
-.km-material input[type=week],
-.km-material input[type=date],
-.km-material input[type=time],
-.km-material input[type=datetime],
-.km-material input[type=datetime-local],
-.km-material select:not([multiple]),
-.km-material .k-dropdown .k-dropdown-wrap
-{
-    border-bottom-color: @material-border-color;
-    background-size: auto 100%;
-}
-
-.km-material select:focus,
-.km-material textarea:focus,
-.km-material.km-pane input:focus,
-.km-material li.km-actionsheet-title,
-.km-material .k-dropdown .k-state-focused
-{
-    border-color: @material-border-color;
-}
-
-.km-material select:focus,
-.km-material textarea:focus,
-.km-material.km-pane input:focus,
-.km-material li.km-actionsheet-title,
-.km-material .k-dropdown .k-state-focused
-{
-    border-color: @material-primary-color;
-}
-
 .km-material .km-shim,
 .km-material .km-popup,
 .km-material .k-slider,
@@ -705,6 +693,17 @@
 .km-material input[type=text]:not(.k-input):focus
 {
     color: @material-primary-color;
+}
+
+.km-material-dark select:focus,
+.km-material-dark input:checked,
+.km-material-dark textarea:focus,
+.km-material-dark.km-pane input:focus,
+.km-material-dark li.km-actionsheet-title,
+.km-material-dark .k-dropdown .k-state-focused,
+.km-material-dark input[type=text]:not(.k-input):focus
+{
+    color: @material-accent-color;
 }
 
 /* Animation effects */
