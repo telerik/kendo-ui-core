@@ -15,18 +15,21 @@
         <li><label for="username">Username: <input type="text" id="username" /></label></li>
         <li><label for="password">Password: <input type="password" id="password" /></label></li>
     </ul>
-    <a data-click="closeModalViewLogin" id="modalview-login-button" type="button" data-role="button">Login</a>
-    <a data-click="closeModalViewLogin" id="modalview-reg-button" type="button" data-role="button">Register</a>
+    <div data-role="footer">
+        <div data-role="navbar">
+            <a data-click="closeModalViewLogin" id="modalview-login-button" type="button" data-role="button" data-align="right">Login</a>
+            <a data-click="closeModalViewLogin" id="modalview-reg-button" type="button" data-role="button" data-align="right">Register</a>
+        </div>
+    </div>
 </div>
 
 <style scoped>
     #modalview-login-button,
     #modalview-reg-button,
     #modalview-open-button {
-        display: block;
+        display: inline-block;
         text-align: center;
-        margin: .6em .8em;
-        font-size: 1.2em;
+        font-size: 1.1em;
     }
 
    .km-material #modalview-login-button,
