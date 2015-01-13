@@ -51,16 +51,6 @@
 
 /* Switch */
 
-.km-material .km-switch-wrapper
-{
-    background-color: @material-main-color;
-}
-
-.km-material-dark .km-switch-wrapper
-{
-    background-color: @material-dark-main-color;
-}
-
 .km-material .km-switch-handle
 {
     background: @material-primary-color;
@@ -78,7 +68,7 @@
 
 .km-material-dark .km-switch-off .km-switch-handle
 {
-    background-color: @material-dark-background;
+    background-color: darken(@material-dark-background, 7%);
 }
 
 .km-material .km-switch-container,
@@ -104,6 +94,7 @@
     border-color: @material-border-color;
 }
 
+.km-material .km-group-title,
 .km-material .km-listview-link:after
 {
     color: lighten(@material-main-color, 30%);
