@@ -203,7 +203,10 @@ var __meta__ = {
         value: function(value) {
             if (value) {
                 this._value = value instanceof Array ? value : [value];
-                this._renderItems(true);
+
+                if (this._renderItems) {
+                    this._renderItems(true);
+                }
             } else {
                 return this._value;
             }

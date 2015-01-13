@@ -290,4 +290,36 @@
         }, 100);
     });
 
+    asyncTest("value method works if called before the dataSource is fetched and list is created", 1, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            template: "#=text#",
+            dataValueField: "value"
+        });
+
+        virtualList.value(3);
+
+        setTimeout(function() {
+            start();
+            ok(virtualList.items().eq(3).hasClass(SELECTED), "Item 3 is selected");
+        }, 100);
+    });
+
+    asyncTest("value method works if called before the dataSource is fetched and list is created (multiple values)", 3, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            template: "#=text#",
+            dataValueField: "value"
+        });
+
+        virtualList.value([1, 5, 9]);
+
+        setTimeout(function() {
+            start();
+            ok(virtualList.items().eq(1).hasClass(SELECTED), "Item 1 is selected");
+            ok(virtualList.items().eq(5).hasClass(SELECTED), "Item 5 is selected");
+            ok(virtualList.items().eq(9).hasClass(SELECTED), "Item 9 is selected");
+        }, 100);
+    });
+
 })();
