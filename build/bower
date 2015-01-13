@@ -64,9 +64,9 @@ publish_bower() {
 publish_bower "git@github.com:telerik/bower-kendo-ui.git" "bower-repo" "dist/bundles/professional.commercial" "bundle exec rake bundles:professional.commercial"
 
 ssh localhost "
-    cd /var/www/;
+    cd /var/www;
     if [ ! -d /var/www/bower-kendo-ui.git ]; then
-        git clone $1 --bare
+        git clone git@github.com:telerik/bower-kendo-ui.git --bare
     fi
 
     cd bower-kendo-ui.git
