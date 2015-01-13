@@ -12,19 +12,10 @@ fi
 
 echo "This script will build the current repo and publish it to bower."
 echo "The release will be labeled '${VERSION_HUMAN}' and tagged '$TAG'."
-while true; do
-    read -p "Are you sure you want to continue (N/y)? " yn
-    case $yn in
-        [Yy]* ) break;;
-        [Nn]* ) exit;;
-        * ) echo "Please answer Y or N.";;
-    esac
-done
-
 
 publish_bower() {
     echo "Building distribution..."
-    # eval $4 # bundle exec
+    eval $4 # bundle exec
 
     echo "Fetching bower repo..."
     bowergit="git --work-tree=$2 --git-dir=$2/.git"
