@@ -108,6 +108,22 @@
         }, 100);
     });
 
+    asyncTest("adds uid to the item placeholders", function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource
+        });
+
+        setTimeout(function() {
+            start();
+            var items = virtualList.items();
+            var dataItems = asyncDataSource.view();
+
+            items.each(function(idx, element) {
+               ok(items.eq(idx).data("uid") === dataItems[idx].uid);
+            });
+        }, 100);
+    });
+
     //dataBinding
 
     asyncTest("reads the dataSource (autoBind: true by default)", 1, function() {
@@ -368,6 +384,24 @@
                     equal(items.eq(idx).text(), data[idx].text);
                 });
             }, 300);
+        }, 100);
+    });
+
+    asyncTest("updates the uid of the item placeholders after list position changes", function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource
+        });
+
+        setTimeout(function() {
+            scroll(container, 3 * CONTAINER_HEIGHT);
+
+            start();
+            var items = virtualList.items();
+            var dataItems = asyncDataSource.view();
+
+            items.each(function(idx, element) {
+               ok(items.eq(idx).data("uid") === dataItems[idx].uid);
+            });
         }, 100);
     });
 

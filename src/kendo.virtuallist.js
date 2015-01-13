@@ -443,38 +443,43 @@ var __meta__ = {
             };
         },
 
-        _render: function (element, item, templates) {
+        _render: function (element, data, templates) {
             var itemTemplate = templates.template;
 
             element = $(element);
 
-            if (!item.item) {
+            if (!data.item) {
                 itemTemplate = templates.placeholderTemplate;
             }
 
             if (!element.children().length) { // new render
-                element.html(itemTemplate(item.item || {}));
-                if (item.newGroup) {
+                element
+                    .html(itemTemplate(data.item || {}))
+                    .attr("data-uid", data.item ? data.item.uid : "");
+
+                if (data.newGroup) {
                     $("<div class=" + GROUPITEM + "></div>")
                         .appendTo(element)
-                        .html(templates.groupTemplate({ group: item.group }));
+                        .html(templates.groupTemplate({ group: data.group }));
                 }
             } else {
-                element.html(itemTemplate(item.item || {}));
+                element
+                    .html(itemTemplate(data.item || {}))
+                    .attr("data-uid", data.item ? data.item.uid : "");
 
-                if (item.newGroup) {
+                if (data.newGroup) {
                     if (element.children().length === 2) {
                         element.find("." + GROUPITEM)
-                            .html(templates.groupTemplate({ group: item.group }));
+                            .html(templates.groupTemplate({ group: data.group }));
                     } else {
                         $("<div class=" + GROUPITEM + "></div>")
                             .insertAfter(element.children().last())
-                            .html(templates.groupTemplate({ group: item.group }));
+                            .html(templates.groupTemplate({ group: data.group }));
                     }
                 }
             }
 
-            position(element[0], item.top);
+            position(element[0], data.top);
         },
 
         _bufferSizes: function() {
