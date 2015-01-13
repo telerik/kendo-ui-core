@@ -223,4 +223,71 @@
         }, 100);
     });
 
+    asyncTest("setting the initial value selects the item", 1, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            template: "#=text#",
+            dataValueField: "value",
+            value: 6
+        });
+
+        setTimeout(function() {
+            start();
+
+            ok(virtualList.items().eq(6).hasClass(SELECTED), "Item 6 is selected");
+        }, 100);
+    });
+
+    asyncTest("setting the initial value selects the item (multiple selection)", 3, function() {
+        var values = [1, 10, 6];
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            template: "#=text#",
+            dataValueField: "value",
+            value: values
+        });
+
+        setTimeout(function() {
+            start();
+
+            for (var i = 0; i < values.length; i++) {
+                ok(virtualList.items().eq(values[i]).hasClass(SELECTED), "Item " + i + " is selected");
+            }
+        }, 100);
+    });
+
+    asyncTest("setting the value with the value method updates the selection", 1, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            template: "#=text#",
+            dataValueField: "value"
+        });
+
+        setTimeout(function() {
+            start();
+
+            virtualList.value(9);
+
+            ok(virtualList.items().eq(9).hasClass(SELECTED), "Item 9 is selected");
+        }, 100);
+    });
+
+    asyncTest("setting the value with the value method updates the selection (multiple selection)", 3, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            template: "#=text#",
+            dataValueField: "value"
+        });
+
+        setTimeout(function() {
+            start();
+
+            virtualList.value([1, 5, 6]);
+
+            ok(virtualList.items().eq(1).hasClass(SELECTED), "Item 1 is selected");
+            ok(virtualList.items().eq(5).hasClass(SELECTED), "Item 5 is selected");
+            ok(virtualList.items().eq(6).hasClass(SELECTED), "Item 6 is selected");
+        }, 100);
+    });
+
 })();
