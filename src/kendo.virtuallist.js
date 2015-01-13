@@ -483,7 +483,7 @@ var __meta__ = {
                 itemTemplate = templates.placeholderTemplate;
             }
 
-            if (!element.children().length) { // new render
+            if (element.is(":empty")) { // new render
                 element
                     .html(itemTemplate(data.item || {}))
                     .attr("data-uid", data.item ? data.item.uid : "");
