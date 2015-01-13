@@ -3,7 +3,7 @@
 @material-accent-color: #55c6ff;
 @material-main-color: #333;
 @material-icon-color: rgba(0,0,0,.54);
-@material-disabled-color: rgba(128,128,128,.3);
+@material-disabled-color: rgba(0,0,0,.5);
 @material-input-text-color: @material-disabled-color;
 @material-border-color: rgba(0,0,0,.12);
 
@@ -394,6 +394,12 @@
 .km-material .km-listview-label input[type=checkbox]:checked
 {
     background: @material-primary-color;
+}
+
+.km-material .k-slider .k-draghandle.k-state-focused,
+.km-material .k-slider .k-draghandle.k-state-selected
+{
+    .box-shadow(0 0 0 .44em fade(@material-primary-color, 20%));
 }
 
 .km-material .km-filter-wrap > input:focus
