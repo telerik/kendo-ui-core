@@ -1141,7 +1141,7 @@ var __meta__ = {
                         var newValue;
                         var found;
 
-                        while (old) {
+                        while (old !== undefined) {
                             found = false;
                             for (j = 0; j < newLength; j++) {
                                 if (valuePrimitive) {
