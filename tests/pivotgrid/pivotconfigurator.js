@@ -50,6 +50,28 @@
         equal(model.idField, "uniqueName");
     });
 
+    test("treeview uses 'caption' field for dataTextField option", function() {
+        var configurator = createConfigurator();
+
+        var field = configurator.treeView.options.dataTextField;
+
+        equal(field, "caption");
+    });
+
+    test("treeview uses 'name' if caption is not defined in model", function() {
+        var configurator = createConfigurator();
+
+        var treeView = configurator.treeView;
+
+        treeView.dataSource.data([
+            { name: "test" }
+        ]);
+
+        var li = treeView.element.find("li");
+
+        equal(li.text(), "test");
+    });
+
     test("treeview hasChildren returns false for levels", function() {
         var configurator = createConfigurator();
 

@@ -158,6 +158,32 @@
         equal(model.idField, "uniqueName");
     });
 
+    test("treeview uses 'caption' field for dataTextField option", function() {
+        var fieldmenu = createMenu();
+
+        fieldmenu.includeWindow.open();
+
+        var field = fieldmenu.treeView.options.dataTextField;
+
+        equal(field, "caption");
+    });
+
+    test("treeview uses 'name' if caption is not defined in model", function() {
+        var fieldmenu = createMenu();
+
+        fieldmenu.includeWindow.open();
+
+        var treeView = fieldmenu.treeView;
+
+        treeView.dataSource.data([
+            { name: "test" }
+        ]);
+
+        var li = treeView.element.find("li");
+
+        equal(li.text(), "test");
+    });
+
     test("treeview hasChildren returns true for items with childrenCardinality", function() {
         var fieldmenu = createMenu();
 

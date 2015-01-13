@@ -207,12 +207,12 @@ var __meta__ = {
                            '# } else if (item.type && item.type !== "kpi") { #' +
                            '<span class="k-icon k-i-dimension"></span>' +
                            '# } #' +
-                           '#: item.name #';
+                           '#: item.caption || item.name #';
 
             this.treeView = $("<div/>").appendTo(container)
                 .kendoTreeView({
                     template: template,
-                    dataTextField: "name",
+                    dataTextField: "caption",
                     dragAndDrop: true,
                     autoBind: false,
                     dataSource: this._treeViewDataSource(),

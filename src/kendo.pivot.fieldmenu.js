@@ -306,7 +306,8 @@ var __meta__ = {
             that.treeView =  new ui.TreeView(element, {
                 autoBind: false,
                 dataSource: that._treeViewDataSource(),
-                dataTextField: "name",
+                dataTextField: "caption",
+                template: "#: data.item.caption || data.item.name #",
                 checkboxes: {
                     checkChildren: true
                 },
