@@ -552,15 +552,21 @@ var __meta__ = {
         _select: function(e) {
             var target = $(e.target),
                 valueField = this.options.dataValueField,
-                dataSource = this.dataSource,
-                selectedValue = dataSource.getByUid(target.data("uid"))[valueField];
+                dataItem = this.dataSource.getByUid(target.attr("data-uid")),
+                selectedValue;
 
-            if (target.hasClass(SELECTED)) {
-                target.removeClass(SELECTED);
-                this._value = this._value.filter(function(i) { return i != selectedValue; });
-            } else {
-                this._value.push(selectedValue);
-                target.addClass(SELECTED);
+            if (dataItem) {
+                selectedValue = dataItem[valueField];
+            }
+
+            if (selectedValue !== undefined) {
+                if (target.hasClass(SELECTED)) {
+                    target.removeClass(SELECTED);
+                    this._value = this._value.filter(function(i) { return i != selectedValue; });
+                } else {
+                    this._value.push(selectedValue);
+                    target.addClass(SELECTED);
+                }
             }
         }
 
