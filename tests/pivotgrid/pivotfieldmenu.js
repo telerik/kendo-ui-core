@@ -1003,4 +1003,17 @@
         equal(sort[1].field, fieldmenu.currentMember);
         equal(sort[1].dir, "asc");
     });
+
+    test("fieldmenu destroys used widgets", function() {
+        var fieldmenu = createMenu();
+
+        fieldmenu.menu.open();
+        fieldmenu.menu.element.find(".k-include-item").click();
+
+        fieldmenu.destroy();
+
+        ok(!fieldmenu.menu);
+        ok(!fieldmenu.treeView);
+        ok(!fieldmenu.includeWindow);
+    });
 })();

@@ -363,7 +363,7 @@ var __meta__ = {
                 this.menu = null;
             }
 
-            if (this.reeeView) {
+            if (this.treeView) {
                 this.treeView.destroy();
                 this.treeView = null;
             }
