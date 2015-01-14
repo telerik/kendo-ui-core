@@ -5766,6 +5766,7 @@
         "text": "Document Export",
         "url": "pdf-export/index",
         "new": true,
+        "disableInMobile": true,
         "packages": [
           "!mvc"
         ],
@@ -5779,6 +5780,7 @@
         "text": "Page Layout",
         "url": "pdf-export/page-layout",
         "new": true,
+        "disableInMobile": true,
         "packages": [
           "!mvc"
         ],
