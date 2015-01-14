@@ -7795,7 +7795,6 @@ var __meta__ = {
             pane.createTitle();
 
             pane.content = new ChartElement();
-            pane.content.clipRoot = returnSelf;
 
             pane.chartContainer = new ChartContainer({}, pane);
             pane.append(pane.content);
