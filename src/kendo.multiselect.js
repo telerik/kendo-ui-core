@@ -279,7 +279,7 @@ var __meta__ = {
                 wrapper
                     .removeClass(STATEDISABLED)
                     .on(HOVEREVENTS, that._toggleHover)
-                    .on("mousedown" + ns, proxy(that._wrapperMousedown, that));
+                    .on("mousedown" + ns + " touchend" + ns, proxy(that._wrapperMousedown, that));
 
                 that.input.on(KEYDOWN, proxy(that._keydown, that))
                     .on("paste" + ns, proxy(that._search, that))
