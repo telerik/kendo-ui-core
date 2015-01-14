@@ -1060,7 +1060,7 @@ var __meta__ = {
                         return point.eventArgs(e);
                     });
 
-                    var hoverArgs = pointArgs[0];
+                    var hoverArgs = pointArgs[0] || {};
                     hoverArgs.categoryPoints = pointArgs;
 
                     if (points.length > 0 && !this.trigger(SERIES_HOVER, hoverArgs)) {
