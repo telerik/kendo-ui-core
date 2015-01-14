@@ -108,6 +108,7 @@ class AssemblyInfoTask < Rake::FileTask
         assemblyInfo = File.read(name)
 
         assemblyInfo.gsub!(/Version\("(\d+\.){3}(\d+)"\)/,  "Version(\"#{VERSION}.\\2\")")
+        assemblyInfo.gsub!(/2012-\d{4}/, "2012-#{Date.today.year}")
 
         puts "Updating assembly version to #{VERSION}"
 
