@@ -122,6 +122,55 @@ var __meta__ = {
         return range;
     }
 
+    function render(element, data, templates) {
+        var itemTemplate = templates.template;
+
+        element = $(element);
+
+        if (!data.item) {
+            itemTemplate = templates.placeholderTemplate;
+        }
+
+        if (element.is(":empty")) { // new render
+            element
+                .html(itemTemplate(data.item || {}))
+                .attr("data-uid", data.item ? data.item.uid : "");
+
+            if (data.selected) {
+                element.addClass(SELECTED);
+            }
+
+            if (data.newGroup) {
+                $("<div class=" + GROUPITEM + "></div>")
+                    .appendTo(element)
+                    .html(templates.groupTemplate({ group: data.group }));
+            }
+        } else {
+            element
+                .html(itemTemplate(data.item || {}))
+                .attr("data-uid", data.item ? data.item.uid : "");
+
+            if (data.selected) {
+                element.addClass(SELECTED);
+            } else {
+                element.removeClass(SELECTED);
+            }
+
+            if (data.newGroup) {
+                if (element.children().length === 2) {
+                    element.find("." + GROUPITEM)
+                        .html(templates.groupTemplate({ group: data.group }));
+                } else {
+                    $("<div class=" + GROUPITEM + "></div>")
+                        .insertAfter(element.children().last())
+                        .html(templates.groupTemplate({ group: data.group }));
+                }
+            }
+        }
+
+        position(element[0], data.top);
+    }
+
     var VirtualList = DataBoundWidget.extend({
         init: function(element, options) {
             var that = this,
@@ -260,7 +309,7 @@ var __meta__ = {
 
             this._renderItems = this._whenChanged(
                 scrollCallback(element, this._onScroll),
-                syncList(this._reorderList(this._items, this._render))
+                syncList(this._reorderList(this._items, render))
             );
 
             this._renderItems();
@@ -475,55 +524,6 @@ var __meta__ = {
 
                 currentOffset = offset;
             };
-        },
-
-        _render: function (element, data, templates) {
-            var itemTemplate = templates.template;
-
-            element = $(element);
-
-            if (!data.item) {
-                itemTemplate = templates.placeholderTemplate;
-            }
-
-            if (element.is(":empty")) { // new render
-                element
-                    .html(itemTemplate(data.item || {}))
-                    .attr("data-uid", data.item ? data.item.uid : "");
-
-                if (data.selected) {
-                    element.addClass(SELECTED);
-                }
-
-                if (data.newGroup) {
-                    $("<div class=" + GROUPITEM + "></div>")
-                        .appendTo(element)
-                        .html(templates.groupTemplate({ group: data.group }));
-                }
-            } else {
-                element
-                    .html(itemTemplate(data.item || {}))
-                    .attr("data-uid", data.item ? data.item.uid : "");
-
-                if (data.selected) {
-                    element.addClass(SELECTED);
-                } else {
-                    element.removeClass(SELECTED);
-                }
-
-                if (data.newGroup) {
-                    if (element.children().length === 2) {
-                        element.find("." + GROUPITEM)
-                            .html(templates.groupTemplate({ group: data.group }));
-                    } else {
-                        $("<div class=" + GROUPITEM + "></div>")
-                            .insertAfter(element.children().last())
-                            .html(templates.groupTemplate({ group: data.group }));
-                    }
-                }
-            }
-
-            position(element[0], data.top);
         },
 
         _bufferSizes: function() {
