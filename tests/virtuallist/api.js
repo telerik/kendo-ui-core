@@ -77,4 +77,25 @@
         }, 100);
     });
 
+    asyncTest("scrollToIndex methods scrolls to a given record by index", 3, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            template: "#=text#",
+            dataValueField: "value"
+        });
+
+        setTimeout(function() {
+            virtualList.scrollToIndex(76); //scroll to the 76th item
+            equal(virtualList.element[0].scrollTop, 76 * 40); //ITEMHEIGHT = 40
+
+            setTimeout(function() {
+                start();
+                var item76 = virtualList.items().filter(":contains('Item 76')");
+
+                ok(item76.length, "Item 76 is rendered");
+                ok(item76.css("transform").indexOf(76*40) > -1, "Item 76 is positioned at the correct place with translateY");
+            }, 700);
+        }, 100);
+    });
+
 })();

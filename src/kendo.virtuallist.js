@@ -271,6 +271,10 @@ var __meta__ = {
             this.element.scrollTop(y);
         },
 
+        scrollToIndex: function(index) {
+            this.scrollTo(index * this.options.itemHeight);
+        },
+
         _templates: function() {
             var templates = {
                 template: this.options.template,
