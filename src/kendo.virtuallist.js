@@ -267,6 +267,10 @@ var __meta__ = {
             }
         },
 
+        scrollTo: function(y) {
+            this.element.scrollTop(y);
+        },
+
         _templates: function() {
             var templates = {
                 template: this.options.template,
