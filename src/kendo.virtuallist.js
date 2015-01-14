@@ -23,7 +23,9 @@ var __meta__ = {
         HEIGHTCONTAINER = "k-height-container",
         GROUPITEM = "k-group",
 
-        SELECTED = "k-state-selected";
+        SELECTED = "k-state-selected",
+        CHANGE = "change",
+        CLICK = "click";
 
     function getItemCount(screenHeight, listScreens, itemHeight) {
         return Math.ceil(screenHeight * listScreens / itemHeight);
@@ -200,7 +202,7 @@ var __meta__ = {
             });
 
             that._selectProxy = $.proxy(that, "_select");
-            element.on("click", "." + VIRTUALITEM, this._selectProxy);
+            element.on(CLICK, "." + VIRTUALITEM, this._selectProxy);
 
             if (!that.wrapper) {
                 kendo.ui.progress(that.element, true);
@@ -222,6 +224,10 @@ var __meta__ = {
             groupTemplate: "#:group#",
             fixedGroupTemplate: "fixed header template"
         },
+
+        events: [
+            CHANGE
+        ],
 
         setOptions: function(options) {
             Widget.fn.setOptions.call(this, options);
@@ -568,6 +574,8 @@ var __meta__ = {
                     target.addClass(SELECTED);
                 }
             }
+
+            this.trigger(CHANGE);
         }
 
     });

@@ -322,4 +322,41 @@
         }, 100);
     });
 
+    asyncTest("selecting item triggers the change event", 1, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            template: "#=text#",
+            dataValueField: "value",
+            change: function() {
+                ok(true, "change is triggered");
+            }
+        });
+
+        setTimeout(function() {
+            start();
+
+            var element = virtualList.items().first();
+            element.trigger("click");
+        }, 100);
+    });
+
+    asyncTest("de-selecting item triggers the change event", 1, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            template: "#=text#",
+            dataValueField: "value",
+            value: 0,
+            change: function() {
+                ok(true, "change is triggered");
+            }
+        });
+
+        setTimeout(function() {
+            start();
+
+            var element = virtualList.items().first();
+            element.trigger("click");
+        }, 100);
+    });
+
 })();
