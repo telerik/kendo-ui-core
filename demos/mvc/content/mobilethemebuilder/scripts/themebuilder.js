@@ -9,7 +9,7 @@ if (kendo.support.browser.webkit || kendo.support.browser.mozilla || (kendo.supp
             dragging = false,
             globalUndoBuffer = [],
             globalRedoBuffer = [],
-            click = kendo.support.touch ? "touchend" : "click",
+            click = kendo.support.mobileOS ? "touchend" : "click",
             defaultCSS = { cursor: "default", background: "", color: "", "border-color": "", font: "", "text-shadow": "" },
             browsers = [ "-webkit-", "-moz-", "-ms-" ],
             propertyTargets = {
