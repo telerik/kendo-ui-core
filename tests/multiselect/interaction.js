@@ -41,6 +41,17 @@ test("MultiSelect focuses input on click", function() {
     equal(multiselect.input[0], document.activeElement);
 });
 
+test("MultiSelect focuses input on touchend", function() {
+    populateSelect();
+    var multiselect = new MultiSelect(select);
+
+    multiselect.wrapper.trigger({
+        type: "touchend"
+    });
+
+    equal(multiselect.input[0], document.activeElement);
+});
+
 test("MultiSelect opens popup on tag click", function() {
     populateSelect();
     select.val("0");
