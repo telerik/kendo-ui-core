@@ -66,6 +66,7 @@ var __meta__ = {
             options = that.options;
 
             element = that.element;
+            that.wrapper = element;
 
             function eventProxy(name) {
                 return function(e) {
