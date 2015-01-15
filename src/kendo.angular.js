@@ -238,7 +238,9 @@ var __meta__ = {
                 bindToNgModel(object, scope, element, ngModel, ngForm);
             }
 
-            propagateClassToWidgetWrapper(object, element);
+            if (object) {
+                propagateClassToWidgetWrapper(object, element);
+            }
 
             return object;
         }
