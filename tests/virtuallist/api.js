@@ -73,7 +73,7 @@
 
                 ok(item76.length, "Item 76 is rendered");
                 ok(item76.css("transform").indexOf(76*40) > -1, "Item 76 is positioned at the correct place with translateY");
-            }, 700);
+            }, 300);
         }, 100);
     });
 
@@ -94,7 +94,7 @@
 
                 ok(item76.length, "Item 76 is rendered");
                 ok(item76.css("transform").indexOf(76*40) > -1, "Item 76 is positioned at the correct place with translateY");
-            }, 700);
+            }, 300);
         }, 100);
     });
 

@@ -310,11 +310,11 @@
 
         setTimeout(function() {
             start();
-            scroll(container, 3 * CONTAINER_HEIGHT); //scroll the list 1 screens
+            scroll(container, 3 * CONTAINER_HEIGHT); //scroll the list 1 screen
             var lastScreenItems = virtualList.items().slice(-10);
 
             lastScreenItems.each(function(idx, element) {
-                equal($(element).position().top, (4 * CONTAINER_HEIGHT) + (idx * 20));
+                equal($(element).position().top, (5 * CONTAINER_HEIGHT) + (idx * 20));
             });
         }, 100);
     });
@@ -334,8 +334,8 @@
                 ok(true, "request started");
             });
 
-            //threshold is 800 * 0.5 = 400, at 400 + 1 * itemHeight dataSource should request the new range
-            scroll(container, 2 * CONTAINER_HEIGHT + 20); //scroll the list 1 screens
+            //(listScreens - 1 - threshold) * screenHeight
+            scroll(container, (400 - 1 - 0.5) * 200); //scroll the list 1 screens
         }, 100);
     });
 
