@@ -488,6 +488,26 @@ var __meta__ = {
         }
     });
 
+    function destroyDroppable(collection, widget) {
+        var groupName = widget.options.group,
+        droppables = collection[groupName],
+        i;
+
+        Widget.fn.destroy.call(widget);
+
+        if (droppables.length > 1) {
+            for (i = 0; i < droppables.length; i++) {
+                if (droppables[i] == widget) {
+                    droppables.splice(i, 1);
+                    break;
+                }
+            }
+        } else {
+            droppables.length = 0; // WTF, porting this from the previous destroyGroup
+            delete collection[groupName];
+        }
+    }
+
     var DropTarget = Widget.extend({
         init: function(element, options) {
             var that = this;
@@ -515,22 +535,7 @@ var __meta__ = {
         },
 
         destroy: function() {
-            var groupName = this.options.group,
-                group = dropTargets[groupName] || dropAreas[groupName],
-                i;
-
-            if (group.length > 1) {
-                Widget.fn.destroy.call(this);
-
-                for (i = 0; i < group.length; i++) {
-                    if (group[i] == this) {
-                        group.splice(i, 1);
-                        break;
-                    }
-                }
-            } else {
-                DropTarget.destroyGroup(groupName);
-            }
+            destroyDroppable(dropTargets, this);
         },
 
         _trigger: function(eventName, e) {
@@ -593,6 +598,10 @@ var __meta__ = {
             } else {
                 dropAreas[group].push( that );
             }
+        },
+
+        destroy: function() {
+            destroyDroppable(dropAreas, this);
         },
 
         options: {
