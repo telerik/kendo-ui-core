@@ -66,7 +66,8 @@ var __meta__ = {
                         if (typeof widget.setDataSource == "function") {
                             widget.setDataSource(toDataSource(mew, type));
                         }
-                    } else {
+                    } else if (!(mew instanceof kendo.data.DataSource)) {
+
                         if (widget.dataSource && typeof widget.dataSource.data == "function") {
                             widget.dataSource.data(mew);
                         }
