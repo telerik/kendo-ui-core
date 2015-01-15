@@ -493,14 +493,16 @@ var __meta__ = {
 
             return $.proxy(function(value, force) {
                 var result = this.result,
-                    lastScrollTop = this._lastScrollTop
+                    lastScrollTop = this._lastScrollTop;
 
                 if (force || !result || !theValidator(result, value, lastScrollTop)) {
                     result = this._getDataItemsCollection(value, lastScrollTop);
                 }
 
                 this._lastScrollTop = value;
-                return this.result = result;
+                this.result = result;
+
+                return result;
             }, this);
         },
 
