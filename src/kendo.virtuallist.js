@@ -190,6 +190,11 @@ var __meta__ = {
             that._templates();
             that._items = that._generateItems(appendChild(element[0], WRAPPER), itemCount);
             that._value = that.options.value instanceof Array ? that.options.value : [that.options.value];
+            that._selectedDataItem = [];
+
+            for (var i = 0; i < that._value.length; i++) {
+                that._selectedDataItem.push(null);
+            }
 
             that.setDataSource(options.dataSource);
 
@@ -258,6 +263,11 @@ var __meta__ = {
         value: function(value) {
             if (value) {
                 this._value = value instanceof Array ? value : [value];
+                this._selectedDataItem = [];
+
+                for (var i = 0; i < this._value.length; i++) {
+                    this._selectedDataItem.push(null);
+                }
 
                 if (this._renderItems) {
                     this._renderItems(true);
@@ -265,6 +275,10 @@ var __meta__ = {
             } else {
                 return this._value;
             }
+        },
+
+        selectedDataItems: function() {
+            return this._selectedDataItem;
         },
 
         scrollTo: function(y) {
@@ -427,11 +441,20 @@ var __meta__ = {
                 itemHeight = this.options.itemHeight,
                 value = this._value,
                 valueField = this.options.dataValueField,
-                selected = false;
+                selected = false,
+                nullIndex = -1;
 
             if (value.length && item) {
                 for (var i = 0; i < value.length; i++) {
                     if (value[i] === item[valueField]) {
+
+                        nullIndex = this._selectedDataItem.indexOf(null);
+                        if (nullIndex > -1) {
+                            this._selectedDataItem.splice(nullIndex, 1, item);
+                        } else {
+                            this._selectedDataItem.push(item);
+                        }
+
                         selected = true;
                         break;
                     }
@@ -579,8 +602,10 @@ var __meta__ = {
                 if (target.hasClass(SELECTED)) {
                     target.removeClass(SELECTED);
                     this._value = this._value.filter(function(i) { return i != selectedValue; });
+                    this._selectedDataItem = this._selectedDataItem.filter(function(i) { return i[valueField] != selectedValue; });
                 } else {
                     this._value.push(selectedValue);
+                    this._selectedDataItem.push(dataItem);
                     target.addClass(SELECTED);
                 }
             }

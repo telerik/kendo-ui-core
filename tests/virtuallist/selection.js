@@ -359,4 +359,170 @@
         }, 100);
     });
 
+    asyncTest("click on listItem selects it and saves the corresponding dataItem", 2, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            template: "#=text#",
+            dataValueField: "value"
+        });
+
+        setTimeout(function() {
+            start();
+
+            var element = virtualList.items().first();
+            element.trigger("click");
+
+            equal(virtualList.selectedDataItems().length, 1, "One item is selected");
+            equal(virtualList.selectedDataItems()[0], asyncDataSource.data()[0], "First item is selected");
+        }, 100);
+    });
+
+    asyncTest("click on listItem selects it and saves the corresponding dataItem (multiple items)", 3, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            template: "#=text#",
+            dataValueField: "value"
+        });
+
+        setTimeout(function() {
+            start();
+
+            var elements = [];
+            elements.push(virtualList.items().eq(0));
+            elements.push(virtualList.items().eq(1));
+            elements.push(virtualList.items().eq(2));
+
+            for (var i = 0; i < elements.length; i++) {
+                elements[i].trigger("click");
+                equal(virtualList.selectedDataItems()[i], asyncDataSource.data()[i]);
+            }
+        }, 100);
+    });
+
+    asyncTest("saves the dataItems that correspond to the initially set values", 3, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            template: "#=text#",
+            dataValueField: "value",
+            value: [0, 1]
+        });
+
+        setTimeout(function() {
+            start();
+
+            equal(virtualList.selectedDataItems().length, 2);
+            equal(virtualList.selectedDataItems()[0], asyncDataSource.data()[0]);
+            equal(virtualList.selectedDataItems()[1], asyncDataSource.data()[1]);
+        }, 100);
+    });
+
+    asyncTest("click on already selected listItem removes it from stored dataItems", 2, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            template: "#=text#",
+            dataValueField: "value",
+            value: [0, 7]
+        });
+
+        setTimeout(function() {
+            start();
+
+            var element = virtualList.items().eq(0);
+            element.trigger("click");
+
+            equal(virtualList.selectedDataItems().length, 1, "First item is removed");
+            equal(virtualList.selectedDataItems()[0], asyncDataSource.data()[7], "Second item is saved");
+        }, 100);
+    });
+
+    asyncTest("changing the value through the value method updates dataItems collection", 3, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            template: "#=text#",
+            dataValueField: "value"
+        });
+
+        setTimeout(function() {
+            start();
+
+            virtualList.value([0,1]);
+
+            equal(virtualList.selectedDataItems().length, 2);
+            equal(virtualList.selectedDataItems()[0], asyncDataSource.data()[0]);
+            equal(virtualList.selectedDataItems()[1], asyncDataSource.data()[1]);
+        }, 100);
+    });
+
+    asyncTest("changing the value through the value method updates dataItems collection", 3, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            template: "#=text#",
+            dataValueField: "value"
+        });
+
+        setTimeout(function() {
+            start();
+
+            virtualList.value([0,1]);
+
+            equal(virtualList.selectedDataItems().length, 2);
+            equal(virtualList.selectedDataItems()[0], asyncDataSource.data()[0]);
+            equal(virtualList.selectedDataItems()[1], asyncDataSource.data()[1]);
+        }, 100);
+    });
+
+    asyncTest("changing the value through the value method updates dataItems collection (initially set values)", 3, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            template: "#=text#",
+            dataValueField: "value",
+            value: [7]
+        });
+
+        setTimeout(function() {
+            start();
+
+            virtualList.value([0,1]);
+
+            equal(virtualList.selectedDataItems().length, 2);
+            equal(virtualList.selectedDataItems()[0], asyncDataSource.data()[0]);
+            equal(virtualList.selectedDataItems()[1], asyncDataSource.data()[1]);
+        }, 100);
+    });
+
+    asyncTest("not available dataItems are given as null in dataItems collection", 3, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            template: "#=text#",
+            dataValueField: "value"
+        });
+
+        setTimeout(function() {
+            start();
+
+            virtualList.value([7, 256]);
+
+            equal(virtualList.selectedDataItems().length, 2);
+            ok(virtualList.selectedDataItems()[0] != null);
+            ok(virtualList.selectedDataItems()[1] == null);
+        }, 100);
+    });
+
+    asyncTest("not available dataItems are given as null in dataItems collection (initially set items)", 3, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            template: "#=text#",
+            dataValueField: "value",
+            value: [7, 256]
+        });
+
+        setTimeout(function() {
+            start();
+
+            equal(virtualList.selectedDataItems().length, 2);
+            ok(virtualList.selectedDataItems()[0] != null);
+            ok(virtualList.selectedDataItems()[1] == null);
+        }, 100);
+    });
+
 })();
