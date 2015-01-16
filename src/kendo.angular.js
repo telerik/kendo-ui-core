@@ -639,7 +639,7 @@ var __meta__ = {
         'MobilePopOver'
     ];
 
-    angular.forEach(['MobileNavBar', 'MobileButton', 'MobileBackButton', 'MobileDetailButton', 'MobileTabStrip', 'MobileScrollView'], function(widget) {
+    angular.forEach(['MobileNavBar', 'MobileButton', 'MobileBackButton', 'MobileDetailButton', 'MobileTabStrip', 'MobileScrollView', 'MobileScroller'], function(widget) {
         MANUAL_DIRECTIVES.push(widget);
         widget = "kendo" + widget;
         module.directive(widget, function() {
