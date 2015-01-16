@@ -452,6 +452,26 @@
         equal(dataSource.online(), true);
     });
 
+    test("online(true) returns a promise", function() {
+        var dataSource = new kendo.data.DataSource({
+            offlineStorage: "key"
+        });
+
+        var result = dataSource.online(true);
+
+        equal(typeof result.then, "function");
+    });
+
+    test("online(true) returns a promise", function() {
+        var dataSource = new kendo.data.DataSource({
+            offlineStorage: "key"
+        });
+
+        var result = dataSource.online(false);
+
+        equal(typeof result.then, "function");
+    });
+
     test("data source stores its data when it syncs", function() {
         var dataSource = new kendo.data.DataSource({
             offlineStorage: "key",
