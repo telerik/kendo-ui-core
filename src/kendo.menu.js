@@ -1333,9 +1333,9 @@ var __meta__ = {
 
             that._eventOrigin = e;
 
-            if (that.popup.visible() && ((e.which !== 3 && sameTarget) || !sameTarget) && ((that.options.closeOnClick && !touch &&
-                !((pointers || msPointers) && e.originalEvent.pointerType in touchPointerTypes) &&
-                !children[0] && containment) || !containment)) {
+            var normalClick = e.which !== 3;
+
+            if (that.popup.visible() && ((normalClick && sameTarget) || !sameTarget) && ((that.options.closeOnClick && !children[0] && containment) || !containment)) {
                     if (containment) {
                         this.unbind(SELECT, this._closeTimeoutProxy);
                         that.bind(SELECT, that._closeTimeoutProxy);
