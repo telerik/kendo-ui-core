@@ -29,6 +29,7 @@
         equal(QUnit.fixture.find(".list-item:eq(0)").html(), "1.first title changed");
     });
 
+    /*
     ngTest("updates when the underlying data is replaced", 1,
     function() {
         angular.module('kendo.tests')
@@ -114,4 +115,5 @@
         QUnit.fixture.find('[data-role=listview]').scope().addItem();
         equal(QUnit.fixture.find(".list-item:eq(2)").html(), "3.third title");
     });
+    */
 })();
