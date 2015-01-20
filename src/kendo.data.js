@@ -2636,6 +2636,10 @@ var __meta__ = {
                 if (that.options.serverPaging) {
                     that._total = that._pristineTotal;
                 }
+
+                that._ranges = [];
+                that._addRange(that._data);
+
                 that._change();
             }
         },
