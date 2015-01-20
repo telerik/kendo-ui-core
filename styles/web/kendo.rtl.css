@@ -243,7 +243,7 @@
     padding-left: 2.3em;
 }
 
-.k-filtercell > span > .k-button
+.k-rtl .k-filtercell > span > .k-button
 {
     right: auto;
     left: 0;
