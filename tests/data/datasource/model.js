@@ -331,6 +331,44 @@ test("cancelChanges does revert changes for given model if server grouping is en
     equal(dataSource.data()[0].items[0].items.length, 2);
 });
 
+test("item is of correct type after cancelChanges and server grouping", function() {
+    var MyModel = kendo.data.Model.define({ id: "id" });
+
+    var dataSource = new kendo.data.DataSource({
+        schema: {
+            model: MyModel,
+            parse: function(data) {
+                return [{
+                    items: [{
+                        items: [{ bar: "bar", foo: 1, id: 0}, { bar: "bar", foo: 1, id: 1}],
+                        field: "bar",
+                        value: "bar"
+                    }],
+                    field: "foo",
+                    value: 1,
+                    hasSubgroups: true
+                }];
+            },
+            total: function() {
+                return 1;
+            }
+        },
+        serverGrouping: true,
+        group: [{ field: "foo" }, { field: "bar" }]
+    });
+
+    dataSource.read();
+
+    var model = dataSource.get(1);
+
+    model.set("bar", "boo");
+
+    dataSource.cancelChanges();
+
+    ok(dataSource.view()[0].items[0].items[0] instanceof MyModel);
+});
+
+
 test("adding items to array field sets the dirty flag to true", function() {
     var model = new kendo.data.Model({
         foo: []
