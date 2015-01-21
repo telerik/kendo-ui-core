@@ -146,29 +146,6 @@
         ok(!splitter.dom.find(".k-splitbar").hasClass("k-splitbar-horizontal-hover"));
     });
 
-//    test("toggle() without arguments toggles pane collapsed state", function() {
-//        splitter = create({
-//            panes: [ { collapsible: true, collapsed: true }, {} ]
-//        });
-
-//        splitter.object.toggle(".k-pane:first");
-//        ok(!splitter.dom.find(".k-pane:first").data("pane").collapsed);
-
-//        splitter.object.toggle(".k-pane:first");
-//        ok(splitter.dom.find(".k-pane:first").data("pane").collapsed);
-
-//        splitter.dom.remove();
-//        splitter = create({
-//            panes: [ { collapsible: true }, {} ]
-//        });
-
-//        splitter.object.toggle(".k-pane:first");
-//        ok(splitter.dom.find(".k-pane:first").data("pane").collapsed);
-
-//        splitter.object.toggle(".k-pane:first");
-//        ok(!splitter.dom.find(".k-pane:first").data("pane").collapsed);
-//    });
-
     test("toggle() applies selector context", function() {
         splitter = create({
             panes: [{ collapsible: true }, {}]

@@ -314,6 +314,21 @@
         equal(splitter.dom.find(".k-overlay").length, 0);
     });
 
+    test("test name", function() {
+        splitter = create({
+            panes: [ { collapsible: true }, {} ]
+        });
+
+        splitter.dom.find(".k-collapse-prev")
+            .trigger("mousedown")
+
+        splitter.dom.find(".k-overlay:first")
+            .trigger("mouseup")
+            .trigger("click");
+
+        equal(splitter.dom.find(".k-overlay").length, 0);
+    });
+
     test("collapsed panes can be expanded again", function() {
         splitter = create({
             panes: [
