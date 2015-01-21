@@ -356,7 +356,10 @@ div.k-splitbar.k-state-focused .k-icon,
 
 .k-button,
 .k-button:hover,
-.k-button.k-state-hover {
+.k-button.k-state-hover,
+.k-button.k-state-focused,
+.k-button:focus,
+.k-button:focus:not(.k-state-disabled):not([disabled]) {
 	.box-shadow(@focused-shadow);
 }
 
@@ -986,6 +989,12 @@ border-color: @primary-button-border-color;
 .k-upload {
 color: @widget-text-color;
 background-color: @widget-background-color;
+}
+
+.k-upload-files .k-button,
+.k-upload-files .k-button:focus,
+.k-upload-files .k-button:focus:not(.k-state-disabled):not([disabled]) {
+    .box-shadow(none);
 }
 
 /* Gantt */
