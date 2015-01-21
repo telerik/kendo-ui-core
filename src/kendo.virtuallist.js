@@ -253,12 +253,9 @@ var __meta__ = {
             dataSource = $.isArray(dataSource) ? {data: dataSource} : dataSource;
 
             that.dataSource = kendo.data.DataSource.create(dataSource)
-                .one("change", function() {
+                .one("change", function(e) {
                     kendo.ui.progress(that.element, false);
-                    if(this.data().length) {
-                        that._createList();
-                        that.trigger(DATABOUND);
-                    }
+                    that.refresh(e);
                 });
 
             if (that.options.autoBind) {
@@ -268,6 +265,13 @@ var __meta__ = {
 
         _unbindDataSource: function() {
             var that = this;
+        },
+
+        refresh: function(e) {
+            if(this.dataSource.data().length) {
+                this._createList();
+                this.trigger(DATABOUND);
+            }
         },
 
         value: function(value) {
@@ -382,7 +386,7 @@ var __meta__ = {
                 flatGroups = {},
                 mute = false;
 
-            dataSource.bind("change", function() {
+            dataSource.bind("change", function(e) {
                 if (!mute) {
                     dataAvailableCallback();
                 }
