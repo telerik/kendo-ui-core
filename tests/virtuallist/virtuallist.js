@@ -124,6 +124,20 @@
         }, 100);
     });
 
+    asyncTest("updating the model updates the corresponding item", 1, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            template: "#:text#"
+        });
+
+        setTimeout(function() {
+            start();
+            var dataItem = virtualList.dataSource.data()[3];
+            dataItem.set("text", "foo");
+            equal(virtualList.items().eq(3).text(), "foo");
+        }, 100);
+    });
+
     //dataBinding
 
     asyncTest("reads the dataSource (autoBind: true by default)", 1, function() {

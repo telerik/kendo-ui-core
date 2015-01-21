@@ -1684,7 +1684,6 @@ test("models within the range have correct parent - server paging", function() {
     deepEqual(dataSource.view()[0].parent(), dataSource.data());
 });
 
-
 /*test("ranges are updated when model is added after range is called - with local binding", function() {
     var totalCount = 47,
         dataSource = new DataSource({

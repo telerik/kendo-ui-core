@@ -175,6 +175,7 @@ var __meta__ = {
 
     var VirtualList = DataBoundWidget.extend({
         init: function(element, options) {
+            var element = $(element);
             var that = this,
                 screenHeight = that.screenHeight = element.height(),
                 itemCount;
@@ -197,10 +198,6 @@ var __meta__ = {
             }
 
             that.setDataSource(options.dataSource);
-
-            if (options.autoBind) {
-                that.dataSource.read();
-            }
 
             element.on("scroll", function() {
                 that._renderItems();
@@ -256,8 +253,18 @@ var __meta__ = {
             that.dataSource = kendo.data.DataSource.create(dataSource)
                                     .one("change", function() {
                                         kendo.ui.progress(that.element, false);
-                                        that._createList();
+                                        if(this.data().length) {
+                                            that._createList();
+                                        }
                                     });
+
+            if (that.options.autoBind) {
+                that.dataSource.read();
+            }
+        },
+
+        _unbindDataSource: function() {
+            var that = this;
         },
 
         value: function(value) {
@@ -616,6 +623,7 @@ var __meta__ = {
     });
 
     kendo.ui.VirtualList = VirtualList;
+    kendo.ui.plugin(VirtualList);
 
 })(window.kendo.jQuery);
 
