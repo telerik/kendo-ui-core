@@ -111,6 +111,14 @@ var __meta__ = {
             LAYOUTCHANGE
         ],
 
+        _addOverlays: function() {
+            this._panes().append("<div class='k-splitter-overlay k-overlay' />");
+        },
+
+        _removeOverlays: function() {
+            this._panes().children(".k-splitter-overlay").remove();
+        },
+
         _attachEvents: function() {
             var that = this,
                 orientation = that.options.orientation;
@@ -118,7 +126,7 @@ var __meta__ = {
             // do not use delegated events to increase performance of nested elements
             that.element
                 .children(".k-splitbar-draggable-" + orientation)
-                    .on("keydown" + NS, $.proxy(that._keydown, that))
+                    .on("keydown" + NS, proxy(that._keydown, that))
                     .on("mousedown" + NS, function(e) { e.currentTarget.focus(); })
                     .on("focus" + NS, function(e) { $(e.currentTarget).addClass(FOCUSED);  })
                     .on("blur" + NS, function(e) { $(e.currentTarget).removeClass(FOCUSED);
@@ -128,8 +136,7 @@ var __meta__ = {
                     })
                     .on(MOUSEENTER + NS, function() { $(this).addClass("k-splitbar-" + that.orientation + "-hover"); })
                     .on(MOUSELEAVE + NS, function() { $(this).removeClass("k-splitbar-" + that.orientation + "-hover"); })
-                    .on("mousedown" + NS, function() { that._panes().append("<div class='k-splitter-overlay k-overlay' />"); })
-                    .on("mouseup" + NS, function() { that._panes().children(".k-splitter-overlay").remove(); })
+                    .on("mousedown" + NS, proxy(that._addOverlays, that))
                 .end()
                 .children(".k-splitbar")
                     .on("dblclick" + NS, proxy(that._togglePane, that))
@@ -137,7 +144,9 @@ var __meta__ = {
                     .children(".k-expand-next, .k-expand-prev").on(CLICK + NS, that._arrowClick(EXPAND)).end()
                 .end();
 
-            $(window).on("resize" + NS + that._marker, proxy(that.resize, that));
+            $(window)
+                .on("resize" + NS + that._marker, proxy(that.resize, that))
+                .on("mouseup" + NS + that._marker, proxy(that._removeOverlays, that));
         },
 
         _detachEvents: function() {
@@ -373,6 +382,9 @@ var __meta__ = {
             this.element.children(".k-splitbar").remove();
         },
         _panes: function() {
+            if (!this.element) {
+                return $();
+            }
             return this.element.children(PANECLASS);
         },
 
