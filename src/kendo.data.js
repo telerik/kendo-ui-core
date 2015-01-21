@@ -3107,7 +3107,7 @@ var __meta__ = {
                     data.wrapAll(data, data);
                 }
             } else {
-                var arrayType = that.pageSize() ? LazyObservableArray : ObservableArray;
+                var arrayType = that.pageSize() && !that.options.serverPaging ? LazyObservableArray : ObservableArray;
                 data = new arrayType(data, that.reader.model);
                 data.parent = function() { return that.parent(); };
             }

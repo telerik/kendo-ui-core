@@ -1520,6 +1520,77 @@ test("range is reverted when calling cancel changes", function() {
     equal(model.get("ShipAddress"), "Ship Address 10");
 });
 
+test("models within the range have correct parent - local paging", function() {
+    var totalCount = 47,
+        dataSource = new DataSource({
+            pageSize: 20,
+    //        serverPaging: true,
+            transport: {
+                read: function(options) {
+                    var take = options.data.take || totalCount,
+                        skip = options.data.skip || 0;
+
+                    var data = [];
+
+                    for (var i = skip; i < Math.min(skip + take, totalCount); i++) {
+                        data.push({ OrderID: i, ContactName: "Contact " + i, ShipAddress: "Ship Address " + i });
+                    }
+                    options.success({ data: data, total: totalCount });
+                }
+            },
+            schema: {
+                model: {
+                    id: "OrderID"
+                },
+                data: "data",
+                total: "total"
+            }
+        });
+
+    dataSource.read();
+
+    dataSource.range(10, 20);
+    dataSource.range(12, 20);
+
+    deepEqual(dataSource.view()[0].parent(), dataSource.data());
+});
+
+test("models within the range have correct parent - server paging", function() {
+    var totalCount = 47,
+        dataSource = new DataSource({
+            pageSize: 20,
+            serverPaging: true,
+            transport: {
+                read: function(options) {
+                    var take = options.data.take,
+                        skip = options.data.skip;
+
+                    var data = [];
+
+                    for (var i = skip; i < Math.min(skip + take, totalCount); i++) {
+                        data.push({ OrderID: i, ContactName: "Contact " + i, ShipAddress: "Ship Address " + i });
+                    }
+                    options.success({ data: data, total: totalCount });
+                }
+            },
+            schema: {
+                model: {
+                    id: "OrderID"
+                },
+                data: "data",
+                total: "total"
+            }
+        });
+
+    dataSource.read();
+
+    dataSource.range(10, 20);
+    dataSource.range(12, 20);
+
+    deepEqual(dataSource.view()[0].parent(), dataSource.data());
+});
+
+
 /*test("ranges are updated when model is added after range is called - with local binding", function() {
     var totalCount = 47,
         dataSource = new DataSource({
