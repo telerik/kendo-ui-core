@@ -98,4 +98,18 @@
         }, 100);
     });
 
+    //events
+
+    asyncTest("fires the dataBound event", 1, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            dataBound: function() {
+                start();
+                ok(true, "dataBound event is fired");
+            },
+            template: "#=text#",
+            dataValueField: "value"
+        });
+    });
+
 })();

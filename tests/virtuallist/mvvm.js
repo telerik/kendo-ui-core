@@ -29,10 +29,12 @@
 
     module("VirtualList MVVM: ", {
         setup: function() {
-            container = $("<div id='container' data-role='virtuallist' data-bind='source: asyncDataSource' data-template='tmp' data-value-field='value' style='height: " + CONTAINER_HEIGHT + "px;'></div>")
+            container = $("<div id='container' data-role='virtuallist' data-bind='source: asyncDataSource' data-template='tmp' data-value-field='value' data-item-height='20' style='height: " + CONTAINER_HEIGHT + "px;'></div>")
                 .appendTo(QUnit.fixture);
 
-            template = $("<script id='tmp' type='text/x-kendo-template'>#:text#</script>")
+            template = $("<script id='tmp' type='text/x-kendo-template'>" +
+                            "<div data-bind='text: text'></div>" +
+                         "</script>")
                 .appendTo(QUnit.fixture);
 
             asyncDataSource = new kendo.data.DataSource({
@@ -87,24 +89,7 @@
         setTimeout(function() {
             start();
             equal(virtualList.items().eq(0).text(), "Item 0");
-            equal(virtualList.items().last().text(), "Item 19");
-        }, 100);
-    });
-
-    asyncTest("updating the model updates the corresponding item", 1, function() {
-        virtualList = $("#container").getKendoVirtualList();
-        setTimeout(function() {
-            start();
-            var dataItem = virtualList.dataSource.data()[3];
-            dataItem.set("text", "foo");
-            equal(virtualList.items().eq(3).text(), "foo");
-        }, 100);
-    });
-
-    asyncTest("updating the model updates the corresponding item when range was changed", 1, function() {
-        virtualList = $("#container").getKendoVirtualList();
-        setTimeout(function() {
-
+            equal(virtualList.items().last().text(), "Item 39");
         }, 100);
     });
 

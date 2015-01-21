@@ -25,7 +25,8 @@ var __meta__ = {
 
         SELECTED = "k-state-selected",
         CHANGE = "change",
-        CLICK = "click";
+        CLICK = "click",
+        DATABOUND = "dataBound";
 
     function getItemCount(screenHeight, listScreens, itemHeight) {
         return Math.ceil(screenHeight * listScreens / itemHeight);
@@ -228,7 +229,8 @@ var __meta__ = {
         },
 
         events: [
-            CHANGE
+            CHANGE,
+            DATABOUND
         ],
 
         setOptions: function(options) {
@@ -251,12 +253,13 @@ var __meta__ = {
             dataSource = $.isArray(dataSource) ? {data: dataSource} : dataSource;
 
             that.dataSource = kendo.data.DataSource.create(dataSource)
-                                    .one("change", function() {
-                                        kendo.ui.progress(that.element, false);
-                                        if(this.data().length) {
-                                            that._createList();
-                                        }
-                                    });
+                .one("change", function() {
+                    kendo.ui.progress(that.element, false);
+                    if(this.data().length) {
+                        that._createList();
+                        that.trigger(DATABOUND);
+                    }
+                });
 
             if (that.options.autoBind) {
                 that.dataSource.read();
