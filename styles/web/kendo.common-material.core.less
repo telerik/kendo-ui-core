@@ -442,6 +442,15 @@ div.k-window {
 	border-width: 0;
 }
 
+.k-window-title {
+    right: 1.143em;
+    left: 1.143em;
+}
+
+div.k-window-content {
+    padding: 1.333em;
+}
+
 .k-file {
     padding: 0.357em .167em 0.357em .8em;
 }
@@ -649,25 +658,40 @@ div.k-window {
 }
 
 .k-window-titlebar {
-	.k-i-maximize {
-    	background-position: -48px -144px;
-	}
+    .k-i-maximize,
+    .k-link:not(.k-state-disabled):hover > .k-i-maximize {
+        background-position: -48px -144px;
+    }
 
-	.k-i-minimize {
-    	background-position: -80px -288px;
-	}
+    .k-i-minimize,
+    .k-link:not(.k-state-disabled):hover > .k-i-minimize {
+        background-position: -80px -288px;
+    }
 
-	.k-i-pin {
-    	background-position: -176px -256px;
-	}
+    .k-i-pin,
+    .k-link:not(.k-state-disabled):hover > .k-i-pin {
+        background-position: -176px -256px;
+    }
 
-	.k-i-custom {
-    	background-position: -141px -113px;
-	}
+    .k-i-custom,
+    .k-link:not(.k-state-disabled):hover > .k-i-custom {
+        background-position: -141px -113px;
+    }
 
-	.k-i-refresh {
-    	background-position: -48px -112px;
-	}
+    .k-i-refresh,
+    .k-link:not(.k-state-disabled):hover > .k-i-refresh {
+        background-position: -48px -112px;
+    }
+
+    .k-i-close,
+    .k-link:not(.k-state-disabled):hover > .k-i-close {
+        background-position: -48px -16px;
+    }
+
+    .k-i-restore,
+    .k-link:not(.k-state-disabled):hover > .k-i-restore {
+        background-position: -48px -128px;
+    }
 }
 
 .k-calendar .k-icon.k-i-arrow-w,
