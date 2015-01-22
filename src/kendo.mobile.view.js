@@ -198,9 +198,11 @@ var __meta__ = {
         _padIfNativeScrolling: function() {
             if (mobile.appLevelNativeScrolling()) {
                 var isAndroid = kendo.support.mobileOS && kendo.support.mobileOS.android,
-                    isAndroidForced = mobile.application.os.android || (mobile.application.skin() && mobile.application.skin().indexOf("android") > -1),
-                    topContainer = isAndroid || isAndroidForced ? "footer" : "header",
-                    bottomContainer = isAndroid || isAndroidForced ? "header" : "footer";
+                    skin = mobile.application.skin() || "",
+                    isAndroidForced = mobile.application.os.android || (skin.indexOf("android") > -1),
+                    hasPlatformIndependentSkin = skin === "flat" || (skin.indexOf("material") > -1),
+                    topContainer = (isAndroid || isAndroidForced) && (!hasPlatformIndependentSkin) ? "footer" : "header",
+                    bottomContainer = (isAndroid || isAndroidForced) && (!hasPlatformIndependentSkin) ? "header" : "footer";
 
                 this.content.css({
                     paddingTop: this[topContainer].height(),
