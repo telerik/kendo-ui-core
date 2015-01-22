@@ -356,6 +356,34 @@
         equal(contentElement.css("padding-top"), footerElement.css("height"));
     });
 
+    test("useNativeScrolling mode on android with skin: 'flat' pads the content correctly", 2, function() {
+        setup('<div data-role="view"><div data-role="footer">Footer content</div>Content</div>', {
+            platform: "android",
+            skin: "flat",
+            useNativeScrolling: true
+        });
+
+        var contentElement = application.element.find("[data-role=content]"),
+            footerElement = application.element.find("[data-role=footer]");
+
+        equal(contentElement.css("padding-top"), "0px");
+        equal(contentElement.css("padding-bottom"), footerElement.css("height"));
+    });
+
+    test("useNativeScrolling mode on android with skin: 'material' pads the content correctly", 2, function() {
+        setup('<div data-role="view"><div data-role="footer">Footer content</div>Content</div>', {
+            platform: "android",
+            skin: "material",
+            useNativeScrolling: true
+        });
+
+        var contentElement = application.element.find("[data-role=content]"),
+            footerElement = application.element.find("[data-role=footer]");
+
+        equal(contentElement.css("padding-top"), "0px");
+        equal(contentElement.css("padding-bottom"), footerElement.css("height"));
+    });
+
     /*
     if (navigator.__defineGetter__ && !kendo.support.browser.safari) {
         test("Forcing platform layout still reports correct device", 1, function() {
