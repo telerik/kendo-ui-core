@@ -203,6 +203,28 @@
         });
     });
 
+    asyncTest("Allow pasting with Ctrl+V (MacOS)", 0, function() {
+        var maskedtextbox = new MaskedTextBox(input, {
+            mask: "(000) 000-0000"
+        });
+
+        input.focus();
+
+        setTimeout(function() {
+            start();
+            caret(input[0], 7);
+            input.trigger({
+                type: "keypress",
+                which: "c".charCodeAt(0),
+                keyCode: "c".charCodeAt(0),
+                metaKey: true,
+                preventDefault: function() {
+                    ok(false);
+                }
+            });
+        });
+    });
+
     test("MaskedTextBox doesn't show promptChar", 1, function() {
         var maskedtextbox = new MaskedTextBox(input, {
             mask: "(000) 000-0000",
