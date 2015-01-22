@@ -99,7 +99,6 @@
             scroll(container, 620);
             setTimeout(function() {
                 start();
-                console.log(virtualList.items().eq(0).text());
                 equal(virtualList.items().eq(0).text(), "Item 11");
                 equal(virtualList.items().last().text(), "Item 50");
             }, 300)
