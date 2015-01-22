@@ -438,7 +438,7 @@ var __meta__ = {
         },
 
         _keypress: function(e) {
-            if (e.which === 0 || e.ctrlKey || e.keyCode === keys.BACKSPACE || e.keyCode === keys.ENTER) {
+            if (e.which === 0 || e.metaKey || e.ctrlKey || e.keyCode === keys.BACKSPACE || e.keyCode === keys.ENTER) {
                 return;
             }
 

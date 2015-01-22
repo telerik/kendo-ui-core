@@ -226,6 +226,17 @@
         });
     });
 
+    test("Allow pasting with Ctrl+V (MacOS)", 0, function() {
+        var textbox = new NumericTextBox(input);
+
+        input.pressKey("v", {
+            metaKey: true,
+            preventDefault: function() {
+                ok(false);
+            }
+        });
+    });
+
     test("Focus origin input on touched", 1, function() {
         kendo.support.mobileOS = true;
 
