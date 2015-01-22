@@ -26,7 +26,7 @@ var __meta__ = {
         SELECTED = "k-state-selected",
         CHANGE = "change",
         CLICK = "click",
-        DATABOUND = "dataBound";
+        ITEMCHANGE = "itemChange";
 
     function getItemCount(screenHeight, listScreens, itemHeight) {
         return Math.ceil(screenHeight * listScreens / itemHeight);
@@ -80,6 +80,7 @@ var __meta__ = {
         element.style.transform = 'translateY(' + y + "px)";
     }
 
+/*
     function reorderList(list, reorder) {
         var length = list.length;
         var currentOffset = -Infinity;
@@ -102,11 +103,15 @@ var __meta__ = {
             currentOffset = offset;
         };
     }
+*/
 
     function map2(callback, templates) {
         return function(arr1, arr2) {
             for (var i = 0, len = arr1.length; i < len; i++) {
                 callback(arr1[i], arr2[i], templates);
+                if (arr2[i].item) {
+                    this.trigger(ITEMCHANGE, { item: $(arr1[i]), data: arr2[i].item, ns: kendo.ui });
+                }
             }
         };
     }
@@ -176,23 +181,26 @@ var __meta__ = {
 
     var VirtualList = DataBoundWidget.extend({
         init: function(element, options) {
-            var element = $(element);
             var that = this,
-                screenHeight = that.screenHeight = element.height(),
+                screenHeight,
                 itemCount;
 
             Widget.fn.init.call(that, element, options);
 
+            element = that.element;
             options = that.options;
+
+            screenHeight = that.screenHeight = element.height();
             itemCount = that.itemCount = getItemCount(screenHeight, options.listScreens, options.itemHeight);
 
-            that.element.addClass(VIRTUALLIST);
+            element.addClass(VIRTUALLIST);
             that.header = appendChild(element[0], HEADER);
 
             that._templates();
             that._items = that._generateItems(appendChild(element[0], WRAPPER), itemCount);
             that._value = that.options.value instanceof Array ? that.options.value : [that.options.value];
             that._selectedDataItem = [];
+            that._listCreated = false;
 
             for (var i = 0; i < that._value.length; i++) {
                 that._selectedDataItem.push(null);
@@ -208,7 +216,7 @@ var __meta__ = {
             element.on(CLICK, "." + VIRTUALITEM, this._selectProxy);
 
             if (!that.wrapper) {
-                kendo.ui.progress(that.element, true);
+                kendo.ui.progress(element, true);
             }
         },
 
@@ -230,7 +238,7 @@ var __meta__ = {
 
         events: [
             CHANGE,
-            DATABOUND
+            ITEMCHANGE
         ],
 
         setOptions: function(options) {
@@ -270,7 +278,7 @@ var __meta__ = {
         refresh: function(e) {
             if(this.dataSource.data().length) {
                 this._createList();
-                this.trigger(DATABOUND);
+                this._listCreated = true;
             }
         },
 
@@ -381,6 +389,7 @@ var __meta__ = {
         _getter: function(dataAvailableCallback) {
             var lastRequestedRange = null,
                 dataSource = this.dataSource,
+                lastRangeStart = dataSource.skip(),
                 type = this.options.type,
                 pageSize = this.itemCount,
                 flatGroups = {},
@@ -396,14 +405,16 @@ var __meta__ = {
                 if (!dataSource.inRange(rangeStart, pageSize)) {
                     if (lastRequestedRange !== rangeStart) {
                         lastRequestedRange = rangeStart;
+                        lastRangeStart = rangeStart;
                         dataSource.range(rangeStart, pageSize);
                     }
 
                     return null;
                 } else {
-                    if (dataSource.skip() !== rangeStart) {
+                    if (lastRangeStart !== rangeStart) {
                         mute = true;
                         dataSource.range(rangeStart, pageSize);
+                        lastRangeStart = rangeStart;
                         mute = false;
                     }
 
@@ -557,9 +568,10 @@ var __meta__ = {
         },
 
         _reorderList: function(list, reorder) {
+            var that = this;
             var length = list.length;
             var currentOffset = -Infinity;
-            reorder = map2(reorder, this.templates);
+            reorder = $.proxy(map2(reorder, this.templates), this);
 
             return function(list2, offset, force) {
                 var diff = offset - currentOffset;
@@ -573,7 +585,7 @@ var __meta__ = {
                     range2 = diff > 0 ? list2.slice(-diff) : list2.slice(0, -diff);
                 }
 
-                reorder(range, range2);
+                reorder(range, range2, that._listCreated);
 
                 currentOffset = offset;
             };

@@ -100,12 +100,13 @@
 
     //events
 
-    asyncTest("fires the dataBound event", 1, function() {
+    asyncTest("fires the itemChange event", 1, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
-            dataBound: function() {
+            itemChange: function() {
                 start();
-                ok(true, "dataBound event is fired");
+                ok(true, "itemChange event is fired");
+                this.unbind("itemChange");
             },
             template: "#=text#",
             dataValueField: "value"

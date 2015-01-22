@@ -72,7 +72,7 @@
     //rendering
 
     test("widget is initialized via data attributes", 1, function() {
-        virtualList = $("#container").getKendoVirtualList();
+        virtualList = container.getKendoVirtualList();
         ok(virtualList, "widget is initialized");
     });
 
@@ -85,11 +85,24 @@
     });
 
     asyncTest("items are rendered", 2, function() {
-        virtualList = $("#container").getKendoVirtualList();
+        virtualList = container.getKendoVirtualList();
         setTimeout(function() {
             start();
             equal(virtualList.items().eq(0).text(), "Item 0");
             equal(virtualList.items().last().text(), "Item 39");
+        }, 100);
+    });
+
+    asyncTest("items are rebound after re-rendering (list scroll)", 2, function() {
+        virtualList = container.getKendoVirtualList();
+        setTimeout(function() {
+            scroll(container, 620);
+            setTimeout(function() {
+                start();
+                console.log(virtualList.items().eq(0).text());
+                equal(virtualList.items().eq(0).text(), "Item 11");
+                equal(virtualList.items().last().text(), "Item 50");
+            }, 300)
         }, 100);
     });
 
