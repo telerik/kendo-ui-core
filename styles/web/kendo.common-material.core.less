@@ -326,6 +326,7 @@
     border-radius: 1.071em;
     margin: 3px;
     padding: 0 .15em 0 .857em;
+    line-height: 1.86em;
 }
 
 .k-multiselect-wrap li span {
@@ -662,9 +663,12 @@ div.k-window-content {
 }
 
 .k-multiselect {
-    .k-delete,
-    .k-state-hover .k-delete {
-        background-position: -32px -16px;
+    .k-delete {
+        margin-top: -2px;
+    } 
+
+    .k-button:not(.k-state-disabled):hover .k-delete {
+        background-position: -160px -80px;
     }
 }
 
