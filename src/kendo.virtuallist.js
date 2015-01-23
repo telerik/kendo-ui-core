@@ -139,6 +139,10 @@ var __meta__ = {
             itemTemplate = templates.placeholderTemplate;
         }
 
+        this.angular("cleanup", function() {
+            return { elements: [ element ]};
+        });
+
         if (element.is(":empty")) { // new render
             element
                 .html(itemTemplate(data.item || {}))
@@ -172,6 +176,10 @@ var __meta__ = {
         }
 
         position(element[0], data.top);
+
+        this.angular("compile", function() {
+            return { elements: [ element ], data: [ { dataItem: data.item, group: data.group, newGroup: data.newGroup } ]};
+        });
     }
 
     var VirtualList = DataBoundWidget.extend({
@@ -354,7 +362,7 @@ var __meta__ = {
 
             this._renderItems = this._whenChanged(
                 scrollCallback(element, this._onScroll),
-                syncList(this._reorderList(this._items, render))
+                syncList(this._reorderList(this._items, $.proxy(render, this)))
             );
 
             this._renderItems();
