@@ -499,7 +499,7 @@ var __meta__ = {
                     this._currentGroup = item.group;
                 }
 
-                group = item ? item.group : null,
+                group = item ? item.group : null;
                 item = item ? item.item : null;
             }
 
