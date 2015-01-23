@@ -464,9 +464,11 @@ var __meta__ = {
         _itemMapper: function(item, index) {
             var listType = this.options.type,
                 itemHeight = this.options.itemHeight,
-                value = this._value,
                 valueField = this.options.dataValueField,
+                value = this._value,
                 selected = false,
+                newGroup = false,
+                group = null,
                 nullIndex = -1;
 
             if (value.length && item) {
@@ -489,29 +491,23 @@ var __meta__ = {
             }
 
             if (listType === "group") {
-                var newGroup;
                 if (item) {
                     newGroup = index === 0 || (this._currentGroup && this._currentGroup !== item.group);
                     this._currentGroup = item.group;
                 }
 
-                return {
-                    item: item ? item.item : null,
-                    group: item ? item.group : null,
-                    index: index,
-                    top: index * itemHeight,
-                    newGroup: newGroup,
-                    selected: selected
-                };
-            } else {
-                return {
-                    item: item ? item : null,
-                    index: index,
-                    top: index * itemHeight,
-                    newGroup: false,
-                    selected: selected
-                };
+                group = item ? item.group : null,
+                item = item ? item.item : null;
             }
+
+            return {
+                item: item ? item : null,
+                group: group,
+                newGroup: newGroup,
+                selected: selected,
+                index: index,
+                top: index * itemHeight
+            };
         },
 
         _range: function(index) {
