@@ -472,12 +472,14 @@ var __meta__ = {
             if (value.length && item) {
                 for (var i = 0; i < value.length; i++) {
                     if (value[i] === item[valueField]) {
+                        if($.inArray(item, this._selectedDataItem) === -1) { /*check if item is not already added*/
+                            nullIndex = this._selectedDataItem.indexOf(null);
+                            if (nullIndex > -1) {
+                                this._selectedDataItem.splice(nullIndex, 1, item);
+                            } else {
+                                this._selectedDataItem.push(item);
+                            }
 
-                        nullIndex = this._selectedDataItem.indexOf(null);
-                        if (nullIndex > -1) {
-                            this._selectedDataItem.splice(nullIndex, 1, item);
-                        } else {
-                            this._selectedDataItem.push(item);
                         }
 
                         selected = true;

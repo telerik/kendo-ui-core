@@ -20,7 +20,7 @@
                 text: "Item " + i
             });
         }
-        
+
         return items;
     }
 
@@ -111,6 +111,30 @@
             template: "#=text#",
             dataValueField: "value"
         });
+    });
+
+    //methods
+
+    asyncTest("selectedDataItems method returns correct amount of items after scrolling down and up", 2, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            template: "#=text#",
+            dataValueField: "value"
+        });
+
+        setTimeout(function() {
+            virtualList.items().first().trigger("click");
+            equal(virtualList.selectedDataItems().length, 1);
+            scroll(container, 4 * CONTAINER_HEIGHT);
+
+            setTimeout(function() {
+                virtualList.items().last().trigger("click");
+                scroll(container, 0);
+
+                start();
+                equal(virtualList.selectedDataItems().length, 2);
+            }, 300);
+        }, 100);
     });
 
 })();

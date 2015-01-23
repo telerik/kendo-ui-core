@@ -525,4 +525,27 @@
         }, 100);
     });
 
+    asyncTest("selection is persisted accross ranges", 2, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            template: "#=text#",
+            dataValueField: "value"
+        });
+
+        var element;
+
+        setTimeout(function() {
+            element = virtualList.items().first();
+            element.trigger("click");
+            ok(element.hasClass(SELECTED));
+            scroll(container, 4 * CONTAINER_HEIGHT);
+            setTimeout(function() {
+                start();
+                scroll(container, 0);
+
+                ok(element.hasClass(SELECTED), "First item is not selected");
+            }, 300);
+        }, 100);
+    })
+
 })();
