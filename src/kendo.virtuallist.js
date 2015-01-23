@@ -165,14 +165,9 @@ var __meta__ = {
             }
 
             if (data.newGroup) {
-                if (element.children().length === 2) {
-                    element.find("." + GROUPITEM)
-                        .html(templates.groupTemplate({ group: data.group }));
-                } else {
-                    $("<div class=" + GROUPITEM + "></div>")
-                        .insertAfter(element.children().last())
-                        .html(templates.groupTemplate({ group: data.group }));
-                }
+                $("<div class=" + GROUPITEM + "></div>")
+                    .appendTo(element)
+                    .html(templates.groupTemplate({ group: data.group }));
             }
         }
 
