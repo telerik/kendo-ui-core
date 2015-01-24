@@ -80,31 +80,6 @@ var __meta__ = {
         element.style.transform = 'translateY(' + y + "px)";
     }
 
-/*
-    function reorderList(list, reorder) {
-        var length = list.length;
-        var currentOffset = -Infinity;
-        reorder = map2(reorder);
-
-        return function(list2, offset, force) {
-            var diff = offset - currentOffset;
-            var range, range2;
-
-            if (force || Math.abs(diff) >= length) { // full reorder
-                range = list;
-                range2 = list2;
-            } else { // partial reorder
-                range = reshift(list, diff);
-                range2 = diff > 0 ? list2.slice(-diff) : list2.slice(0, -diff);
-            }
-
-            reorder(range, range2);
-
-            currentOffset = offset;
-        };
-    }
-*/
-
     function map2(callback, templates) {
         return function(arr1, arr2) {
             for (var i = 0, len = arr1.length; i < len; i++) {
@@ -143,36 +118,16 @@ var __meta__ = {
             return { elements: [ element ]};
         });
 
-        if (element.is(":empty")) { // new render
-            element
-                .html(itemTemplate(data.item || {}))
-                .attr("data-uid", data.item ? data.item.uid : "");
+        element
+            .html(itemTemplate(data.item || {}))
+            .attr("data-uid", data.item ? data.item.uid : "");
 
-            if (data.selected) {
-                element.addClass(SELECTED);
-            }
+        element.toggleClass(SELECTED, data.selected);
 
-            if (data.newGroup) {
-                $("<div class=" + GROUPITEM + "></div>")
-                    .appendTo(element)
-                    .html(templates.groupTemplate({ group: data.group }));
-            }
-        } else {
-            element
-                .html(itemTemplate(data.item || {}))
-                .attr("data-uid", data.item ? data.item.uid : "");
-
-            if (data.selected) {
-                element.addClass(SELECTED);
-            } else {
-                element.removeClass(SELECTED);
-            }
-
-            if (data.newGroup) {
-                $("<div class=" + GROUPITEM + "></div>")
-                    .appendTo(element)
-                    .html(templates.groupTemplate({ group: data.group }));
-            }
+        if (data.newGroup) {
+            $("<div class=" + GROUPITEM + "></div>")
+                .appendTo(element)
+                .html(templates.groupTemplate({ group: data.group }));
         }
 
         position(element[0], data.top);
@@ -484,7 +439,6 @@ var __meta__ = {
                             } else {
                                 this._selectedDataItem.push(item);
                             }
-
                         }
 
                         selected = true;
