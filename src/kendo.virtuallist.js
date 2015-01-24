@@ -152,6 +152,7 @@ var __meta__ = {
             itemCount = that.itemCount = getItemCount(screenHeight, options.listScreens, options.itemHeight);
 
             element.addClass(VIRTUALLIST);
+            that.wrapper = element;
             that.header = appendChild(element[0], HEADER);
 
             that._templates();
@@ -173,7 +174,7 @@ var __meta__ = {
             that._selectProxy = $.proxy(that, "_select");
             element.on(CLICK, "." + VIRTUALITEM, this._selectProxy);
 
-            if (!that.wrapper) {
+            if (!that._listCreated) {
                 kendo.ui.progress(element, true);
             }
         },
