@@ -148,7 +148,13 @@ var __meta__ = {
             element = that.element;
             options = that.options;
 
-            screenHeight = that.screenHeight = element.height();
+            if (options.height) {
+                element.height(options.height);
+            } else {
+                options.height = element.height();
+            }
+
+            screenHeight = that.screenHeight = options.height;
             itemCount = that.itemCount = getItemCount(screenHeight, options.listScreens, options.itemHeight);
 
             element.addClass(VIRTUALLIST);
@@ -182,6 +188,7 @@ var __meta__ = {
         options: {
             name: "VirtualList",
             autoBind: true,
+            height: null,
             listScreens: 4,
             threshold: 0.5,
             itemHeight: 40,

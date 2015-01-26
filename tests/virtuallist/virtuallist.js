@@ -434,14 +434,6 @@
         }, 150);
     });
 
-    test("gets the container height", 1, function() {
-        var virtualList = new VirtualList(container, {
-            dataSource: asyncDataSource
-        });
-
-        equal(virtualList.screenHeight, 200);
-    });
-
     test("calculates buffer sizes in pixels", 2, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource
@@ -486,6 +478,49 @@
 
         equal(heightPadChildren.first().height(), 250000);
         equal(heightPadChildren.last().height(), 40 * 11);
+    });
+
+    //initialization in hidden container
+
+    test("accepts height option if the wrapper has no specified height", 1, function() {
+        QUnit.fixture.empty();
+        container = $("<div id='container'></div>").appendTo(QUnit.fixture);
+
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            height: 500
+        });
+
+        equal(container.height(), 500);
+    });
+
+    test("gets the container height if no option.height is provided", 1, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource
+        });
+
+        equal(virtualList.screenHeight, 200);
+    });
+
+    test("height option overrides the element height", 1, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            height: 500
+        });
+
+        equal(container.height(), 500);
+    });
+
+    test("can be initialized in a hidden container", 1, function() {
+        QUnit.fixture.empty();
+        container = $("<div id='hidden' style='display: none;'><div id='container'></div></div>").appendTo(QUnit.fixture);
+
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            height: 500
+        });
+
+        equal(container.height(), 500);
     });
 
 })();
