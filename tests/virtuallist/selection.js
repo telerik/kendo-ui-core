@@ -77,7 +77,8 @@
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
             template: "#=text#",
-            dataValueField: "value"
+            dataValueField: "value",
+            selectable: "multiple"
         });
 
         setTimeout(function() {
@@ -118,7 +119,8 @@
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
             template: "#=text#",
-            dataValueField: "value"
+            dataValueField: "value",
+            selectable: "multiple"
         });
 
         setTimeout(function() {
@@ -160,7 +162,8 @@
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
             template: "#=text#",
-            dataValueField: "value"
+            dataValueField: "value",
+            selectable: "multiple"
         });
 
         setTimeout(function() {
@@ -202,7 +205,8 @@
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
             template: "#=text#",
-            dataValueField: "value"
+            dataValueField: "value",
+            selectable: "multiple"
         });
 
         setTimeout(function() {
@@ -244,7 +248,8 @@
             dataSource: asyncDataSource,
             template: "#=text#",
             dataValueField: "value",
-            value: values
+            value: values,
+            selectable: "multiple"
         });
 
         setTimeout(function() {
@@ -276,7 +281,8 @@
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
             template: "#=text#",
-            dataValueField: "value"
+            dataValueField: "value",
+            selectable: "multiple"
         });
 
         setTimeout(function() {
@@ -309,7 +315,8 @@
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
             template: "#=text#",
-            dataValueField: "value"
+            dataValueField: "value",
+            selectable: "multiple"
         });
 
         virtualList.value([1, 5, 9]);
@@ -381,7 +388,8 @@
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
             template: "#=text#",
-            dataValueField: "value"
+            dataValueField: "value",
+            selectable: "multiple"
         });
 
         setTimeout(function() {
@@ -421,6 +429,7 @@
             dataSource: asyncDataSource,
             template: "#=text#",
             dataValueField: "value",
+            selectable: "multiple",
             value: [0, 7]
         });
 
@@ -546,6 +555,25 @@
                 ok(element.hasClass(SELECTED), "First item is not selected");
             }, 300);
         }, 100);
-    })
+    });
+
+    asyncTest("previously selected item is de-selected (single selection)", 1, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            template: "#=text#",
+            dataValueField: "value",
+            selectable: true
+        });
+
+        setTimeout(function() {
+            start();
+            var element1 = virtualList.items().eq(1);
+            var element2 = virtualList.items().eq(2);
+            element1.trigger("click");
+            element2.trigger("click");
+
+            equal(virtualList.items().filter("." + SELECTED).length, 1);
+        }, 100);
+    });
 
 })();

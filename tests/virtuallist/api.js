@@ -119,7 +119,8 @@
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
             template: "#=text#",
-            dataValueField: "value"
+            dataValueField: "value",
+            selectable: "multiple"
         });
 
         setTimeout(function() {

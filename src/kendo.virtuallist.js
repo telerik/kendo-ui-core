@@ -187,6 +187,7 @@ var __meta__ = {
             itemHeight: 40,
             oppositeBuffer: 1,
             type: "flat",
+            selectable: true,
             value: [],
             dataValueField: null,
             template: "#:data#",
@@ -235,7 +236,7 @@ var __meta__ = {
         },
 
         refresh: function(e) {
-            if(this.dataSource.data().length) {
+            if (this.dataSource.data().length) {
                 this._createList();
                 this._listCreated = true;
             }
@@ -571,7 +572,8 @@ var __meta__ = {
         },
 
         _select: function(e) {
-            var target = $(e.target),
+            var singleSelection = this.options.selectable !== "multiple",
+                target = $(e.target),
                 valueField = this.options.dataValueField,
                 dataItem = this.dataSource.getByUid(target.attr("data-uid")),
                 selectedValue;
@@ -583,11 +585,20 @@ var __meta__ = {
             if (selectedValue !== undefined) {
                 if (target.hasClass(SELECTED)) {
                     target.removeClass(SELECTED);
-                    this._value = this._value.filter(function(i) { return i != selectedValue; });
-                    this._selectedDataItem = this._selectedDataItem.filter(function(i) { return i[valueField] != selectedValue; });
+
+                    this._value = singleSelection ? [] : this._value.filter(function(i) { return i != selectedValue; });
+                    this._selectedDataItem = singleSelection ? [] : this._selectedDataItem.filter(function(i) { return i[valueField] != selectedValue; });
                 } else {
-                    this._value.push(selectedValue);
-                    this._selectedDataItem.push(dataItem);
+
+                    if (singleSelection) {
+                        this.items().removeClass(SELECTED);
+                        this._value = [selectedValue];
+                        this._selectedDataItem = [dataItem];
+                    } else {
+                        this._value.push(selectedValue);
+                        this._selectedDataItem.push(dataItem);
+                    }
+
                     target.addClass(SELECTED);
                 }
             }
