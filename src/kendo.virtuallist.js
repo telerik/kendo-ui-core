@@ -26,7 +26,7 @@ var __meta__ = {
         SELECTED = "k-state-selected",
         CHANGE = "change",
         CLICK = "click",
-        LISTBOUND = "listBound";
+        LISTBOUND = "listBound",
         ITEMCHANGE = "itemChange";
 
     function getItemCount(screenHeight, listScreens, itemHeight) {
