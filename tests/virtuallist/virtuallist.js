@@ -138,6 +138,19 @@
         }, 100);
     });
 
+    asyncTest("can be initialized from already loaded dataSource", 1, function() {
+        asyncDataSource.fetch(function() {
+            var virtualList = new VirtualList(container, {
+                dataSource: asyncDataSource,
+                template: "#:text#"
+            });
+
+            start();
+
+            equal(virtualList.items().eq(0).text(), " Item 0");
+        });
+    });
+
     //dataBinding
 
     asyncTest("reads the dataSource (autoBind: true by default)", 1, function() {
