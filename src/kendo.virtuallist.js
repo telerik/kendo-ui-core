@@ -227,14 +227,13 @@ var __meta__ = {
 
             dataSource = $.isArray(dataSource) ? {data: dataSource} : dataSource;
 
-            that.dataSource = kendo.data.DataSource.create(dataSource)
-                .one("change", function(e) {
-                    kendo.ui.progress(that.element, false);
-                    that.refresh(e);
-                });
+            that.dataSource = kendo.data.DataSource.create(dataSource);
 
             if (that.options.autoBind) {
-                that.dataSource.read();
+                that.dataSource.fetch(function() {
+                    kendo.ui.progress(that.element, false);
+                    that.refresh();
+                });
             }
         },
 
@@ -242,7 +241,7 @@ var __meta__ = {
             var that = this;
         },
 
-        refresh: function(e) {
+        refresh: function() {
             if (this.dataSource.data().length) {
                 this._createList();
                 this._listCreated = true;

@@ -250,12 +250,12 @@
             dataSource: asyncDataSource
         });
 
-        asyncDataSource.one("change", function() {
+        ok(virtualList.element.find(".k-loading-mask").length);
+
+        setTimeout(function() {
             start();
             equal(virtualList.element.find(".k-loading-mask").length, 0);
-        });
-
-        ok(virtualList.element.find(".k-loading-mask").length);
+        }, 100);
     });
 
     asyncTest("displays placeholder template when list is scrolled to a not available range", 1, function() {
