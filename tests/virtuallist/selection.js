@@ -576,4 +576,44 @@
         }, 100);
     });
 
+    asyncTest("previously selected value is removed (single selection)", 2, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            template: "#=text#",
+            dataValueField: "value",
+            selectable: true
+        });
+
+        setTimeout(function() {
+            start();
+            var element1 = virtualList.items().eq(1);
+            var element2 = virtualList.items().eq(2);
+            element1.trigger("click");
+            element2.trigger("click");
+
+            equal(virtualList.value().length, 1);
+            equal(virtualList.value()[0], 2);
+        }, 100);
+    });
+
+    asyncTest("previously selected dataItem is removed (single selection)", 2, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            template: "#=text#",
+            dataValueField: "value",
+            selectable: true
+        });
+
+        setTimeout(function() {
+            start();
+            var element1 = virtualList.items().eq(1);
+            var element2 = virtualList.items().eq(2);
+            element1.trigger("click");
+            element2.trigger("click");
+
+            equal(virtualList.selectedDataItems().length, 1);
+            equal(virtualList.selectedDataItems()[0].value, 2);
+        }, 100);
+    });
+
 })();
