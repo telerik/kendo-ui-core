@@ -52,12 +52,12 @@
 
     //rendering
 
-    test("creates list wrapper", 1, function() {
+    test("creates list's content wrapper", 1, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource
         });
 
-        equal(virtualList.element.find(".k-wrapper").length, 1);
+        equal(virtualList.element.find(".k-virtual-content").length, 1);
     });
 
     asyncTest("creates height container", 1, function() {
@@ -91,7 +91,7 @@
 
         setTimeout(function() {
             start();
-            var items = virtualList.element.find(".k-wrapper").children();
+            var items = virtualList.element.find(".k-virtual-content").children();
             equal(items.length, (CONTAINER_HEIGHT/20)*6);
         }, 100);
     });
@@ -281,7 +281,7 @@
         setTimeout(function() {
             start();
             scroll(container, 3 * CONTAINER_HEIGHT + 60);
-            equal(container.find(".k-wrapper").children().first().html(), '<span class="foo">foo...</span>');
+            equal(virtualList.items().last().html(), '<span class="foo">foo...</span>');
         }, 100)
     });
 
@@ -297,7 +297,7 @@
         setTimeout(function() {
             start();
             scroll(container, 3 * CONTAINER_HEIGHT + 60);
-            equal(container.find(".k-wrapper").children().first().html(), '<span class="foo">foo...</span>');
+            equal(virtualList.items().last().html(), '<span class="foo">foo...</span>');
         }, 100)
     });
 

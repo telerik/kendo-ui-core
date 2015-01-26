@@ -68,7 +68,7 @@
             dataSource: asyncDataSource
         });
 
-        equal(virtualList.element.find(".k-header").length, 1);
+        equal(virtualList.element.find(".k-virtual-header").length, 1);
     });
 
     //dataBinding

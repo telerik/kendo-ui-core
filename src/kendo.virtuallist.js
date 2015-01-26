@@ -17,8 +17,8 @@ var __meta__ = {
         DataBoundWidget = ui.DataBoundWidget,
 
         VIRTUALLIST = "k-virtual-list",
-        WRAPPER = "k-wrapper",
-        HEADER = "k-header",
+        CONTENT = "k-virtual-content",
+        HEADER = "k-virtual-header",
         VIRTUALITEM = "k-virtual-item",
         HEIGHTCONTAINER = "k-height-container",
         GROUPITEM = "k-group",
@@ -32,8 +32,8 @@ var __meta__ = {
         return Math.ceil(screenHeight * listScreens / itemHeight);
     }
 
-    function appendChild(parent, className) {
-        var element = document.createElement("div");
+    function appendChild(parent, className, tagName) {
+        var element = document.createElement(tagName || "div");
         if (className) {
             element.className = className;
         }
@@ -160,9 +160,10 @@ var __meta__ = {
             element.addClass(VIRTUALLIST);
             that.wrapper = element;
             that.header = appendChild(element[0], HEADER);
+            that.content = appendChild(element[0], CONTENT, "ul");
 
             that._templates();
-            that._items = that._generateItems(appendChild(element[0], WRAPPER), itemCount);
+            that._items = that._generateItems(that.content, itemCount);
             that._value = that.options.value instanceof Array ? that.options.value : [that.options.value];
             that._selectedDataItem = [];
             that._listCreated = false;
@@ -300,7 +301,7 @@ var __meta__ = {
             var items = [];
 
             while(count-- > 0) {
-                items.push(appendChild(element, VIRTUALITEM));
+                items.push(appendChild(element, VIRTUALITEM, "li"));
             }
 
             return items;
