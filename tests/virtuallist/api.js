@@ -113,6 +113,19 @@
         });
     });
 
+    asyncTest("fires the listBound event", 1, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            listBound: function() {
+                start();
+                ok(true, "listBound event is fired");
+                this.unbind("listBound");
+            },
+            template: "#=text#",
+            dataValueField: "value"
+        });
+    });
+
     //methods
 
     asyncTest("selectedDataItems method returns correct amount of items after scrolling down and up", 2, function() {

@@ -26,6 +26,7 @@ var __meta__ = {
         SELECTED = "k-state-selected",
         CHANGE = "change",
         CLICK = "click",
+        LISTBOUND = "listBound";
         ITEMCHANGE = "itemChange";
 
     function getItemCount(screenHeight, listScreens, itemHeight) {
@@ -206,6 +207,7 @@ var __meta__ = {
 
         events: [
             CHANGE,
+            LISTBOUND,
             ITEMCHANGE
         ],
 
@@ -249,6 +251,9 @@ var __meta__ = {
                 this._createList();
                 this._listCreated = true;
             }
+
+            //TODO: find a better place and name for the event
+            this.trigger("listBound");
         },
 
         value: function(value) {
