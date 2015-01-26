@@ -78,8 +78,8 @@
       "from": "requirejs@~2.1"
     },
     "typescript": {
-      "version": "1.0.1",
-      "from": "typescript@>=1.0.0"
+      "version": "1.4.1",
+      "from": "typescript@1.4.1"
     },
     "xmlbuilder": {
       "version": "0.4.2",
