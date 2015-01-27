@@ -141,6 +141,7 @@ var __meta__ = {
     var VirtualList = DataBoundWidget.extend({
         init: function(element, options) {
             var that = this;
+            that._listCreated = false;
 
             Widget.fn.init.call(that, element, options);
 
@@ -153,7 +154,12 @@ var __meta__ = {
             that.header = appendChild(element[0], HEADER);
             that.content = appendChild(element[0], CONTENT, "ul");
 
-            that._setup();
+            that._value = that.options.value instanceof Array ? that.options.value : [that.options.value];
+            that._selectedDataItems = [];
+
+            for (var i = 0; i < that._value.length; i++) {
+                that._selectedDataItems.push(null);
+            }
 
             that.setDataSource(options.dataSource);
 
@@ -275,13 +281,6 @@ var __meta__ = {
 
             that._templates();
             that._items = that._generateItems(that.content, that.itemCount);
-            that._value = that.options.value instanceof Array ? that.options.value : [that.options.value];
-            that._selectedDataItems = [];
-            that._listCreated = false;
-
-            for (var i = 0; i < that._value.length; i++) {
-                that._selectedDataItems.push(null);
-            }
         },
 
         _screenHeight: function() {
@@ -327,8 +326,9 @@ var __meta__ = {
         _createList: function() {
             var element = this.element.get(0),
                 options = this.options,
-                itemCount = this.itemCount,
                 dataSource = this.dataSource;
+
+            this._setup();
 
             this.options.type = !!dataSource.group().length ? "group" : "flat";
             this._setHeight(options.itemHeight * dataSource.total());

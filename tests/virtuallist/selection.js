@@ -24,7 +24,7 @@
         return items;
     }
 
-    module("VirtualList: ", {
+    module("VirtualList Selection: ", {
         setup: function() {
             container = $("<div id='container' style='height: " + CONTAINER_HEIGHT + "px;'></div>").appendTo(QUnit.fixture);
 

@@ -184,16 +184,19 @@
 
     //templates
     
-    test("initializes the default templates", function() {
+    asyncTest("initializes the default templates", function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource
         });
 
-        ok(virtualList.templates);
+        setTimeout(function() {
+            start();
+            ok(virtualList.templates);
 
-        for (key in virtualList.templates) {
-            equal(typeof virtualList.templates[key], "function");
-        }
+            for (key in virtualList.templates) {
+                equal(typeof virtualList.templates[key], "function");
+            }
+        }, 100);
     });
 
     asyncTest("uses the item template to render items", function() {
@@ -447,15 +450,18 @@
         }, 150);
     });
 
-    test("calculates buffer sizes in pixels", 2, function() {
+    asyncTest("calculates buffer sizes in pixels", 2, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource
         });
 
-        var bufferSizes = virtualList._bufferSizes();
+        setTimeout(function() {
+            start();
+            var bufferSizes = virtualList._bufferSizes();
 
-        equal(bufferSizes.down, 200, "down");
-        equal(bufferSizes.up, 400, "up");
+            equal(bufferSizes.down, 200, "down");
+            equal(bufferSizes.up, 400, "up");
+        }, 100);
     });
 
     //misc
@@ -495,7 +501,7 @@
 
     //initialization in hidden container
 
-    test("accepts height option if the wrapper has no specified height", 1, function() {
+    asyncTest("accepts height option if the wrapper has no specified height", 1, function() {
         QUnit.fixture.empty();
         container = $("<div id='container'></div>").appendTo(QUnit.fixture);
 
@@ -504,27 +510,36 @@
             height: 500
         });
 
-        equal(container.height(), 500);
+        setTimeout(function() {
+            start();
+            equal(container.height(), 500);
+        }, 100);
     });
 
-    test("gets the container height if no option.height is provided", 1, function() {
+    asyncTest("gets the container height if no option.height is provided", 1, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource
         });
 
-        equal(virtualList.screenHeight, 200);
+        setTimeout(function() {
+            start();
+            equal(virtualList.screenHeight, 200);
+        }, 100);
     });
 
-    test("height option overrides the element height", 1, function() {
+    asyncTest("height option overrides the element height", 1, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
             height: 500
         });
 
-        equal(container.height(), 500);
+        setTimeout(function() {
+            start();
+            equal(container.height(), 500);
+        }, 100);
     });
 
-    test("can be initialized in a hidden container", 1, function() {
+    asyncTest("can be initialized in a hidden container", 1, function() {
         QUnit.fixture.empty();
         container = $("<div id='hidden' style='display: none;'><div id='container'></div></div>").appendTo(QUnit.fixture);
 
@@ -533,7 +548,10 @@
             height: 500
         });
 
-        equal(container.height(), 500);
+        setTimeout(function() {
+            start();
+            equal(container.height(), 500);
+        }, 100);
     });
 
 })();
