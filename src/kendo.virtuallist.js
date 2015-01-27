@@ -140,38 +140,20 @@ var __meta__ = {
 
     var VirtualList = DataBoundWidget.extend({
         init: function(element, options) {
-            var that = this,
-                screenHeight,
-                itemCount;
+            var that = this;
 
             Widget.fn.init.call(that, element, options);
 
             element = that.element;
+            element.addClass(VIRTUALLIST);
+
             options = that.options;
 
-            if (options.height) {
-                element.height(options.height);
-            } else {
-                options.height = element.height();
-            }
-
-            screenHeight = that.screenHeight = options.height;
-            itemCount = that.itemCount = getItemCount(screenHeight, options.listScreens, options.itemHeight);
-
-            element.addClass(VIRTUALLIST);
             that.wrapper = element;
             that.header = appendChild(element[0], HEADER);
             that.content = appendChild(element[0], CONTENT, "ul");
 
-            that._templates();
-            that._items = that._generateItems(that.content, itemCount);
-            that._value = that.options.value instanceof Array ? that.options.value : [that.options.value];
-            that._selectedDataItem = [];
-            that._listCreated = false;
-
-            for (var i = 0; i < that._value.length; i++) {
-                that._selectedDataItem.push(null);
-            }
+            that._setup();
 
             that.setDataSource(options.dataSource);
 
@@ -259,10 +241,10 @@ var __meta__ = {
         value: function(value) {
             if (value) {
                 this._value = value instanceof Array ? value : [value];
-                this._selectedDataItem = [];
+                this._selectedDataItems = [];
 
                 for (var i = 0; i < this._value.length; i++) {
-                    this._selectedDataItem.push(null);
+                    this._selectedDataItems.push(null);
                 }
 
                 if (this._renderItems) {
@@ -274,7 +256,7 @@ var __meta__ = {
         },
 
         selectedDataItems: function() {
-            return this._selectedDataItem;
+            return this._selectedDataItems;
         },
 
         scrollTo: function(y) {
@@ -283,6 +265,36 @@ var __meta__ = {
 
         scrollToIndex: function(index) {
             this.scrollTo(index * this.options.itemHeight);
+        },
+
+        _setup: function() {
+            var that = this;
+
+            that._screenHeight();
+            that.itemCount = getItemCount(that.screenHeight, that.options.listScreens, that.options.itemHeight);
+
+            that._templates();
+            that._items = that._generateItems(that.content, that.itemCount);
+            that._value = that.options.value instanceof Array ? that.options.value : [that.options.value];
+            that._selectedDataItems = [];
+            that._listCreated = false;
+
+            for (var i = 0; i < that._value.length; i++) {
+                that._selectedDataItems.push(null);
+            }
+        },
+
+        _screenHeight: function() {
+            var height = this.options.height,
+                element = this.element;
+
+            if (height) {
+                element.height(height);
+            } else {
+                height = element.height();
+            }
+
+            this.screenHeight = height;
         },
 
         _templates: function() {
@@ -448,12 +460,12 @@ var __meta__ = {
             if (value.length && item) {
                 for (var i = 0; i < value.length; i++) {
                     if (value[i] === item[valueField]) {
-                        if($.inArray(item, this._selectedDataItem) === -1) { /*check if item is not already added*/
-                            nullIndex = this._selectedDataItem.indexOf(null);
+                        if($.inArray(item, this._selectedDataItems) === -1) { /*check if item is not already added*/
+                            nullIndex = this._selectedDataItems.indexOf(null);
                             if (nullIndex > -1) {
-                                this._selectedDataItem.splice(nullIndex, 1, item);
+                                this._selectedDataItems.splice(nullIndex, 1, item);
                             } else {
-                                this._selectedDataItem.push(item);
+                                this._selectedDataItems.push(item);
                             }
                         }
 
@@ -601,16 +613,16 @@ var __meta__ = {
                     target.removeClass(SELECTED);
 
                     this._value = singleSelection ? [] : this._value.filter(function(i) { return i != selectedValue; });
-                    this._selectedDataItem = singleSelection ? [] : this._selectedDataItem.filter(function(i) { return i[valueField] != selectedValue; });
+                    this._selectedDataItems = singleSelection ? [] : this._selectedDataItems.filter(function(i) { return i[valueField] != selectedValue; });
                 } else {
 
                     if (singleSelection) {
                         this.items().removeClass(SELECTED);
                         this._value = [selectedValue];
-                        this._selectedDataItem = [dataItem];
+                        this._selectedDataItems = [dataItem];
                     } else {
                         this._value.push(selectedValue);
-                        this._selectedDataItem.push(dataItem);
+                        this._selectedDataItems.push(dataItem);
                     }
 
                     target.addClass(SELECTED);
