@@ -276,11 +276,6 @@ var __meta__ = {
         _setup: function() {
             var that = this;
 
-            that._screenHeight();
-            that.itemCount = getItemCount(that.screenHeight, that.options.listScreens, that.options.itemHeight);
-
-            that._templates();
-            that._items = that._generateItems(that.content, that.itemCount);
         },
 
         _screenHeight: function() {
@@ -324,31 +319,35 @@ var __meta__ = {
         },
 
         _createList: function() {
-            var element = this.element.get(0),
-                options = this.options,
-                dataSource = this.dataSource;
+            var that = this,
+                element = that.element.get(0),
+                options = that.options,
+                dataSource = that.dataSource;
 
-            this._setup();
+            that._screenHeight();
+            that.itemCount = getItemCount(that.screenHeight, options.listScreens, options.itemHeight);
 
-            this.options.type = !!dataSource.group().length ? "group" : "flat";
-            this._setHeight(options.itemHeight * dataSource.total());
+            that._templates();
+            that._items = that._generateItems(that.content, that.itemCount);
 
-            var that = this;
-            this.getter = this._getter(function() {
+            that._setHeight(options.itemHeight * dataSource.total());
+            that.options.type = !!dataSource.group().length ? "group" : "flat";
+
+            that.getter = that._getter(function() {
                 that._renderItems(true);
             });
 
-            this._onScroll = function(scrollTop, force) {
+            that._onScroll = function(scrollTop, force) {
                 var getList = that._listItems(that.getter);
                 return that._fixedHeader(scrollTop, getList(scrollTop, force));
             };
 
-            this._renderItems = this._whenChanged(
-                scrollCallback(element, this._onScroll),
-                syncList(this._reorderList(this._items, $.proxy(render, this)))
+            that._renderItems = that._whenChanged(
+                scrollCallback(element, that._onScroll),
+                syncList(that._reorderList(that._items, $.proxy(render, that)))
             );
 
-            this._renderItems();
+            that._renderItems();
         },
 
         _setHeight: function(height) {
