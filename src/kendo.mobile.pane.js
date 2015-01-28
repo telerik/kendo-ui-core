@@ -286,6 +286,9 @@ var __meta__ = {
                     that._mouseup(e.event);
                 }
             });
+
+            // remove the ms-touch-action added by the user events, breaks native scrolling in WP8
+            this.element.css('-ms-touch-action', '');
         },
 
         _appLinkClick: function (e) {
