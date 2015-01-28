@@ -142,6 +142,7 @@ var __meta__ = {
         init: function(element, options) {
             var that = this;
             that._listCreated = false;
+            that._fetching = false;
 
             Widget.fn.init.call(that, element, options);
 
@@ -210,6 +211,7 @@ var __meta__ = {
         destroy: function() {
             Widget.fn.destroy.call(this);
             this.element.unbind("scroll");
+            this.dataSource.unbind(CHANGE, this._refreshHandler);
         },
 
         setDataSource: function(source) {
@@ -219,13 +221,15 @@ var __meta__ = {
             dataSource = $.isArray(dataSource) ? {data: dataSource} : dataSource;
 
             that.dataSource = kendo.data.DataSource.create(dataSource);
+            that._refreshHandler = $.proxy(that.refresh, that);
+
+            that.dataSource.bind(CHANGE, that._refreshHandler);
 
             if (that.dataSource.view().length !== 0) {
                 that.refresh();
             } else if (that.options.autoBind) {
                 that.dataSource.fetch(function() {
                     kendo.ui.progress(that.element, false);
-                    that.refresh();
                 });
             }
         },
@@ -235,13 +239,18 @@ var __meta__ = {
         },
 
         refresh: function() {
-            if (this.dataSource.data().length) {
+            if (!this._fetching && this.dataSource.data().length) {
                 this._createList();
                 this._listCreated = true;
+            } else {
+                if (this._renderItems && !this._mute) {
+                    this._renderItems(true);
+                }
             }
 
             //TODO: find a better place and name for the event
             this.trigger("listBound");
+            this._fetching = false;
         },
 
         value: function(value) {
@@ -273,9 +282,10 @@ var __meta__ = {
             this.scrollTo(index * this.options.itemHeight);
         },
 
-        _setup: function() {
-            var that = this;
-
+        _clean: function() {
+            this.result = undefined;
+            this._lastScrollTop = undefined;
+            $(this.content).empty();
         },
 
         _screenHeight: function() {
@@ -324,6 +334,10 @@ var __meta__ = {
                 options = that.options,
                 dataSource = that.dataSource;
 
+            if (that._listCreated) {
+                that._clean();
+            }
+
             that._screenHeight();
             that.itemCount = getItemCount(that.screenHeight, options.listScreens, options.itemHeight);
 
@@ -357,7 +371,7 @@ var __meta__ = {
             if (!heightContainer) {
                 heightContainer = this.heightContainer = appendChild(this.element[0], HEIGHTCONTAINER);
             } else {
-                currentHeight = heightContainer.height();
+                currentHeight = heightContainer.offsetHeight;
             }
 
             if (height !== currentHeight) {
@@ -377,30 +391,32 @@ var __meta__ = {
                 lastRangeStart = dataSource.skip(),
                 type = this.options.type,
                 pageSize = this.itemCount,
-                flatGroups = {},
-                mute = false;
+                flatGroups = {};
 
-            dataSource.bind("change", function(e) {
-                if (!mute) {
-                    dataAvailableCallback();
-                }
-            });
+            //dataSource.bind("change", function(e) {
+            //    console.log("2", mute);
+            //    if (!mute) {
+            //        dataAvailableCallback();
+            //    }
+            //});
 
             return function(index, rangeStart) {
                 if (!dataSource.inRange(rangeStart, pageSize)) {
                     if (lastRequestedRange !== rangeStart) {
                         lastRequestedRange = rangeStart;
                         lastRangeStart = rangeStart;
+                        this._fetching = true;
                         dataSource.range(rangeStart, pageSize);
                     }
 
                     return null;
                 } else {
                     if (lastRangeStart !== rangeStart) {
-                        mute = true;
+                        this._mute = true;
+                        this._fetching = true;
                         dataSource.range(rangeStart, pageSize);
                         lastRangeStart = rangeStart;
-                        mute = false;
+                        this._mute = false;
                     }
 
 
