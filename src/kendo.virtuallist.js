@@ -341,6 +341,10 @@ var __meta__ = {
             that._screenHeight();
             that.itemCount = getItemCount(that.screenHeight, options.listScreens, options.itemHeight);
 
+            if (that.itemCount > dataSource.total()) {
+                that.itemCount = dataSource.total();
+            }
+
             that._templates();
             that._items = that._generateItems(that.content, that.itemCount);
 
