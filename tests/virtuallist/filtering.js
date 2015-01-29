@@ -83,7 +83,8 @@
                 dataSource: asyncDataSource,
                 template: "#=text# #=letter#",
                 dataValueField: "value",
-                itemHeight: 50
+                itemHeight: 50,
+                selectable: true
             });
         },
 

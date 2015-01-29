@@ -168,8 +168,7 @@ var __meta__ = {
                 that._renderItems();
             });
 
-            that._selectProxy = $.proxy(that, "_select");
-            element.on(CLICK, "." + VIRTUALITEM, this._selectProxy);
+            that._selectable();
 
             if (!that._listCreated) {
                 kendo.ui.progress(element, true);
@@ -185,7 +184,8 @@ var __meta__ = {
             itemHeight: 40,
             oppositeBuffer: 1,
             type: "flat",
-            selectable: true,
+            selectable: false,
+            navigatable: false,
             value: [],
             dataValueField: null,
             template: "#:data#",
@@ -332,7 +332,8 @@ var __meta__ = {
             var that = this,
                 element = that.element.get(0),
                 options = that.options,
-                dataSource = that.dataSource;
+                dataSource = that.dataSource,
+                total = dataSource.total();
 
             if (that._listCreated) {
                 that._clean();
@@ -614,6 +615,13 @@ var __meta__ = {
             position = scrollTop - ((scrollTop > lastScrollTop) ? buffers.down : buffers.up);
 
             return this._indexConstraint(position);
+        },
+
+        _selectable: function() {
+            if (this.options.selectable) {
+                this._selectProxy = $.proxy(this, "_select");
+                this.element.on(CLICK, "." + VIRTUALITEM, this._selectProxy);
+            }
         },
 
         _select: function(e) {

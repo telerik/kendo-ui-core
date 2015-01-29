@@ -60,7 +60,8 @@
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
             template: "#=text#",
-            dataValueField: "value"
+            dataValueField: "value",
+            selectable: true
         });
 
         setTimeout(function() {
@@ -100,7 +101,8 @@
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
             template: "#=text#",
-            dataValueField: "value"
+            dataValueField: "value",
+            selectable: true
         });
 
         setTimeout(function() {
@@ -145,7 +147,8 @@
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
             template: "#=text#",
-            dataValueField: "value"
+            dataValueField: "value",
+            selectable: true
         });
 
         setTimeout(function() {
@@ -186,7 +189,8 @@
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
             template: "#=text#",
-            dataValueField: "value"
+            dataValueField: "value",
+            selectable: true
         });
 
         setTimeout(function() {
@@ -232,7 +236,8 @@
             dataSource: asyncDataSource,
             template: "#=text#",
             dataValueField: "value",
-            value: 6
+            value: 6,
+            selectable: true
         });
 
         setTimeout(function() {
@@ -265,7 +270,8 @@
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
             template: "#=text#",
-            dataValueField: "value"
+            dataValueField: "value",
+            selectable: true
         });
 
         setTimeout(function() {
@@ -300,7 +306,8 @@
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
             template: "#=text#",
-            dataValueField: "value"
+            dataValueField: "value",
+            selectable: true
         });
 
         virtualList.value(3);
@@ -334,6 +341,7 @@
             dataSource: asyncDataSource,
             template: "#=text#",
             dataValueField: "value",
+            selectable: true,
             change: function() {
                 ok(true, "change is triggered");
             }
@@ -353,6 +361,7 @@
             template: "#=text#",
             dataValueField: "value",
             value: 0,
+            selectable: true,
             change: function() {
                 ok(true, "change is triggered");
             }
@@ -370,7 +379,8 @@
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
             template: "#=text#",
-            dataValueField: "value"
+            dataValueField: "value",
+            selectable: true
         });
 
         setTimeout(function() {
@@ -412,7 +422,8 @@
             dataSource: asyncDataSource,
             template: "#=text#",
             dataValueField: "value",
-            value: [0, 1]
+            value: [0, 1],
+            selectable: true
         });
 
         setTimeout(function() {
@@ -448,7 +459,8 @@
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
             template: "#=text#",
-            dataValueField: "value"
+            dataValueField: "value",
+            selectable: true
         });
 
         setTimeout(function() {
@@ -466,7 +478,8 @@
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
             template: "#=text#",
-            dataValueField: "value"
+            dataValueField: "value",
+            selectable: true
         });
 
         setTimeout(function() {
@@ -485,7 +498,8 @@
             dataSource: asyncDataSource,
             template: "#=text#",
             dataValueField: "value",
-            value: [7]
+            value: [7],
+            selectable: true
         });
 
         setTimeout(function() {
@@ -503,7 +517,8 @@
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
             template: "#=text#",
-            dataValueField: "value"
+            dataValueField: "value",
+            selectable: true
         });
 
         setTimeout(function() {
@@ -522,7 +537,8 @@
             dataSource: asyncDataSource,
             template: "#=text#",
             dataValueField: "value",
-            value: [7, 256]
+            value: [7, 256],
+            selectable: true
         });
 
         setTimeout(function() {
@@ -538,7 +554,8 @@
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
             template: "#=text#",
-            dataValueField: "value"
+            dataValueField: "value",
+            selectable: true
         });
 
         var element;
