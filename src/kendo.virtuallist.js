@@ -24,6 +24,7 @@ var __meta__ = {
         GROUPITEM = "k-group",
 
         SELECTED = "k-state-selected",
+        FOCUSED = "k-state-focused",
         CHANGE = "change",
         CLICK = "click",
         LISTBOUND = "listBound",
@@ -121,7 +122,8 @@ var __meta__ = {
 
         element
             .html(itemTemplate(data.item || {}))
-            .attr("data-uid", data.item ? data.item.uid : "");
+            .attr("data-uid", data.item ? data.item.uid : "")
+            .attr("data-offset-index", data.index);
 
         element.toggleClass(SELECTED, data.selected);
 
@@ -280,6 +282,78 @@ var __meta__ = {
 
         scrollToIndex: function(index) {
             this.scrollTo(index * this.options.itemHeight);
+        },
+
+        focus: function(element) {
+            var dataItem,
+                index,
+                dataSource = this.dataSource;
+            element = $(element);
+
+            if (arguments.length === 0) {
+                return this.content.find("." + FOCUSED);
+            }
+
+            if (!isNaN(element)) {
+                //index is provided
+            }
+
+            if (element.hasClass(FOCUSED)) {
+                return;
+            } else {
+                dataItem = dataSource.getByUid(element.data("uid"));
+                index = parseInt(element.attr("data-offset-index"));
+                this._current = {
+                    element: element,
+                    dataItem: dataItem,
+                    index: index
+                };
+
+                this.items().removeClass(FOCUSED);
+                element.addClass(FOCUSED);
+                this.scrollToIndex(index);
+            }
+        },
+
+        first: function() {
+            console.log("select first element");
+        },
+
+        last: function() {
+            console.log("select last element");
+        },
+
+        prev: function() {
+            var index, element;
+
+            if (this._current) {
+                index = this._current.index;
+
+                element = this.items().filter(function(idx, element) {
+                    return index - 1 === parseInt($(element).attr("data-offset-index"));
+                });
+
+                this.focus(element);
+            }
+        },
+
+        next: function() {
+            var index, element;
+
+            if (this._current) {
+                index = this._current.index;
+
+                element = this.items().filter(function(idx, element) {
+                    return index + 1 === parseInt($(element).attr("data-offset-index"));
+                });
+
+                this.focus(element);
+            }
+        },
+
+        select: function(element) {
+            this.focus(element);
+            this._select(element);
         },
 
         _clean: function() {
@@ -612,16 +686,16 @@ var __meta__ = {
 
         _selectable: function() {
             if (this.options.selectable) {
-                this._selectProxy = $.proxy(this, "_select");
+                this._selectProxy = $.proxy(this, "_clickHandler");
                 this.element.on(CLICK, "." + VIRTUALITEM, this._selectProxy);
             }
         },
 
-        _select: function(e) {
+        _select: function(element) {
             var singleSelection = this.options.selectable !== "multiple",
-                target = $(e.target),
+                element = $(element),
                 valueField = this.options.dataValueField,
-                dataItem = this.dataSource.getByUid(target.attr("data-uid")),
+                dataItem = this.dataSource.getByUid(element.attr("data-uid")),
                 selectedValue;
 
             if (dataItem) {
@@ -629,8 +703,8 @@ var __meta__ = {
             }
 
             if (selectedValue !== undefined) {
-                if (target.hasClass(SELECTED)) {
-                    target.removeClass(SELECTED);
+                if (element.hasClass(SELECTED)) {
+                    element.removeClass(SELECTED);
 
                     this._value = singleSelection ? [] : this._value.filter(function(i) { return i != selectedValue; });
                     this._selectedDataItems = singleSelection ? [] : this._selectedDataItems.filter(function(i) { return i[valueField] != selectedValue; });
@@ -645,10 +719,20 @@ var __meta__ = {
                         this._selectedDataItems.push(dataItem);
                     }
 
-                    target.addClass(SELECTED);
+                    element.addClass(FOCUSED + " " + SELECTED);
                 }
+
+                this._current = {
+                    element: element,
+                    dataItem: dataItem,
+                    index: parseInt(element.attr("data-offset-index"))
+                };
             }
 
+        },
+
+        _clickHandler: function(e) {
+            this._select(e.target);
             this.trigger(CHANGE);
         }
 
