@@ -1,0 +1,44 @@
+/* responsive panel */
+.translateX(@offset) {
+    -webkit-transform: translateX(@offset) translateZ(0);
+    -ms-transform: translateX(@offset) translateZ(0);
+    transform: translateX(@offset) translateZ(0);
+}
+
+.k-rpanel-left {
+    .translateX(-100%);
+    left: 0;
+}
+
+.k-rpanel-right {
+    .translateX(100%);
+    right: 0;
+}
+
+.k-rpanel-left,
+.k-rpanel-right {
+    position: fixed;
+    display: block;
+    overflow: auto;
+    min-width: 320px;
+    height: 100%;
+    top: 0;
+
+    &.k-rpanel-expanded {
+        .translateX(0);
+    }
+
+    & + * {
+        overflow: auto;
+    }
+}
+
+.k-rpanel-top {
+    position: static;
+    overflow: hidden;
+    max-height: 0;
+
+    &.k-rpanel-expanded {
+        max-height: 568px;
+    }
+}

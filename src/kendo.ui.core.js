@@ -38,6 +38,7 @@
         "./kendo.editable",
         "./kendo.panelbar",
         "./kendo.progressbar",
+        "./kendo.responsivepanel",
         "./kendo.tabstrip",
         "./kendo.timepicker",
         "./kendo.datetimepicker",
