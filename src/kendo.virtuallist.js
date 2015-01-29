@@ -398,13 +398,6 @@ var __meta__ = {
                 pageSize = this.itemCount,
                 flatGroups = {};
 
-            //dataSource.bind("change", function(e) {
-            //    console.log("2", mute);
-            //    if (!mute) {
-            //        dataAvailableCallback();
-            //    }
-            //});
-
             return function(index, rangeStart) {
                 if (!dataSource.inRange(rangeStart, pageSize)) {
                     if (lastRequestedRange !== rangeStart) {
