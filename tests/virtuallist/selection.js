@@ -4,6 +4,7 @@
         VirtualList = kendo.ui.VirtualList,
         CONTAINER_HEIGHT = 200,
 
+        FOCUSED = "k-state-focused",
         SELECTED = "k-state-selected";
 
     function scroll(element, height) {
@@ -630,6 +631,101 @@
 
             equal(virtualList.selectedDataItems().length, 1);
             equal(virtualList.selectedDataItems()[0].value, 2);
+        }, 100);
+    });
+
+    asyncTest("select method focuses the element", 1, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            template: "#=text#",
+            dataValueField: "value",
+            selectable: true
+        });
+
+        setTimeout(function() {
+            start();
+            var element = virtualList.items().eq(1);
+            virtualList.select(element);
+
+            ok(element.hasClass(FOCUSED));
+        }, 100);
+    });
+
+    asyncTest("select method selects the element", 3, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            template: "#=text#",
+            dataValueField: "value",
+            selectable: true
+        });
+
+        setTimeout(function() {
+            start();
+            var element = virtualList.items().eq(1);
+            virtualList.select(element);
+
+            ok(element.hasClass(SELECTED));
+            equal(virtualList.value()[0], 1);
+            equal(virtualList.selectedDataItems()[0].value, 1);
+        }, 100);
+    });
+
+    asyncTest("select method changes the focused element", 2, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            template: "#=text#",
+            dataValueField: "value",
+            selectable: true
+        });
+
+        setTimeout(function() {
+            start();
+            var element1 = virtualList.items().eq(1);
+            virtualList.select(element1);
+
+            var element2 = virtualList.items().eq(2);
+            virtualList.select(element2);
+
+            ok(!element1.hasClass(FOCUSED));
+            ok(element2.hasClass(FOCUSED));
+        }, 100);
+    });
+
+    asyncTest("select method changes the value", 2, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            template: "#=text#",
+            dataValueField: "value",
+            selectable: true
+        });
+
+        setTimeout(function() {
+            start();
+            var element1 = virtualList.items().eq(1);
+            virtualList.select(element1);
+
+            var element2 = virtualList.items().eq(2);
+            virtualList.select(element2);
+
+            equal(virtualList.value().length, 1);
+            equal(virtualList.value()[0], 2);
+        }, 100);
+    });
+
+    asyncTest("focus method adds focused class to the element", 2, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            template: "#=text#",
+            dataValueField: "value",
+            selectable: true
+        });
+
+        setTimeout(function() {
+            start();
+            var element1 = virtualList.items().eq(1);
+            virtualList.focus(element1);
+
+            ok(element.hasClass(FOCUSED));
         }, 100);
     });
 
