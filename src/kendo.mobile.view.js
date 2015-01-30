@@ -332,7 +332,7 @@ var __meta__ = {
         },
 
         _callController: function(controller, scope) {
-            this.element.injector().invoke(controller.constructor, null, { $scope: scope });
+            this.element.injector().invoke(controller.constructor, controller, { $scope: scope });
         }
     });
 
