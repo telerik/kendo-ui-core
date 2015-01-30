@@ -76,6 +76,16 @@
         hidden($("#foo"));
     });
 
+    test("prevent default on before hide event handler does not hide view", 2, function() {
+        root.html('<div data-role="view" id="foo">Foo</div><div data-role="view" data-before-hide="kendo.preventDefault" id="bar">Bar</div>').show();
+        viewEngine = new kendo.mobile.ViewEngine({ container: root });
+
+        viewEngine.showView("#bar");
+        viewEngine.showView("#foo");
+        hidden($("#foo"));
+        visible($("#bar"));
+    });
+
     test("after show is triggered after the view transition is finished", 1, function() {
         root.html('<div data-role="view"id="foo">Foo</div><div data-after-show="viewEngineSuccess" data-role="view" id="bar">Bar</div>').show();
         viewEngine = new kendo.mobile.ViewEngine({ container: root });
