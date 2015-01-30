@@ -312,20 +312,27 @@ var __meta__ = {
         },
 
         _invokeNgController: function() {
-            var element = this.element,
-                controller,
+            var controller,
                 scope;
 
             if (this.options.$angular) {
-                controller = element.controller();
-                scope = element.scope();
+                controller = this.element.controller();
+                scope = this.element.scope();
 
                 if (controller) {
-                    scope.$apply(function() {
-                        element.injector().invoke(controller.constructor, null, { $scope: scope });
-                    });
+                    var callback = $.proxy(this, '_callController', controller, scope);
+
+                    if (/^\$(digest|apply)$/.test(scope.$$phase)) {
+                        callback();
+                    } else {
+                        scope.$apply(callback);
+                    }
                 }
             }
+        },
+
+        _callController: function(controller, scope) {
+            this.element.injector().invoke(controller.constructor, null, { $scope: scope });
         }
     });
 
