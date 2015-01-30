@@ -125,6 +125,7 @@ var __meta__ = {
             .attr("data-uid", data.item ? data.item.uid : "")
             .attr("data-offset-index", data.index);
 
+        element.toggleClass(FOCUSED, data.current);
         element.toggleClass(SELECTED, data.selected);
 
         if (data.newGroup) {
@@ -298,7 +299,7 @@ var __meta__ = {
                 //index is provided
             }
 
-            if (element.hasClass(FOCUSED)) {
+            if (element.hasClass(FOCUSED) || !element.length) {
                 return;
             } else {
                 dataItem = dataSource.getByUid(element.data("uid"));
@@ -311,7 +312,15 @@ var __meta__ = {
 
                 this.items().removeClass(FOCUSED);
                 element.addClass(FOCUSED);
-                this.scrollToIndex(index);
+
+                var position = this._getElementLocation(index);
+
+                if (position === "top") {
+                    this.scrollTo(index * this.options.itemHeight);
+                } else if (position === "bottom") {
+                    this.scrollTo(this.element.scrollTop() + this.options.itemHeight);
+                }
+
             }
         },
 
@@ -373,6 +382,26 @@ var __meta__ = {
             }
 
             this.screenHeight = height;
+        },
+
+        _getElementLocation: function(index) {
+            var scrollTop = this.element.scrollTop(),
+                screenHeight = this.screenHeight,
+                itemHeight = this.options.itemHeight,
+                yPosition = index * itemHeight,
+                position;
+
+            if (yPosition === (scrollTop - itemHeight)) {
+                position = "top";
+            } else if (yPosition === scrollTop + screenHeight) {
+                position = "bottom";
+            } else if ((yPosition >= scrollTop) && (yPosition <= scrollTop + (screenHeight - itemHeight))) {
+                position = "inScreen";
+            } else {
+                position = "outScreen";
+            }
+
+            return position;
         },
 
         _templates: function() {
@@ -539,7 +568,9 @@ var __meta__ = {
                 itemHeight = this.options.itemHeight,
                 valueField = this.options.dataValueField,
                 value = this._value,
+                currentDataItem = this._current ? this._current.dataItem : null,
                 selected = false,
+                current = false,
                 newGroup = false,
                 group = null,
                 nullIndex = -1;
@@ -562,6 +593,10 @@ var __meta__ = {
                 }
             }
 
+            if (currentDataItem && (currentDataItem[valueField] === item[valueField])) {
+                current = true;
+            }
+
             if (listType === "group") {
                 if (item) {
                     newGroup = index === 0 || (this._currentGroup && this._currentGroup !== item.group);
@@ -577,6 +612,7 @@ var __meta__ = {
                 group: group,
                 newGroup: newGroup,
                 selected: selected,
+                current: current,
                 index: index,
                 top: index * itemHeight
             };
@@ -719,7 +755,7 @@ var __meta__ = {
                         this._selectedDataItems.push(dataItem);
                     }
 
-                    element.addClass(FOCUSED + " " + SELECTED);
+                    element.addClass(SELECTED);
                 }
 
                 this._current = {
@@ -732,6 +768,7 @@ var __meta__ = {
         },
 
         _clickHandler: function(e) {
+            this.focus(e.target);
             this._select(e.target);
             this.trigger(CHANGE);
         }
