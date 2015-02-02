@@ -121,6 +121,8 @@ var __meta__ = {
             }
         },
         destroy: function() {
+            Widget.fn.destroy.call(this);
+
             $(window).off("resize" + NS, this._resizeHandler);
             $(document.documentElement).off(ACTIVATE_EVENTS, this._closeHandler);
         }
