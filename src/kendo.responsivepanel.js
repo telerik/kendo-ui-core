@@ -15,6 +15,7 @@ var __meta__ = {
     var NS = ".kendoResponsivePanel";
     var OPEN = "open";
     var CLOSE = "close";
+    var ACTIVATE_EVENTS = "click" + NS +" touchstart" + NS;
     var Widget = kendo.ui.Widget;
     var ResponsivePanel = Widget.extend({
         init: function(element, options) {
@@ -23,7 +24,7 @@ var __meta__ = {
             this._toggleHandler = proxy(this._toggleButtonClick, this);
             this._closeHandler = proxy(this._close, this);
 
-            $(document.documentElement).on("click touchstart", ".k-rpanel-toggle", this._toggleHandler);
+            $(document.documentElement).on(ACTIVATE_EVENTS, ".k-rpanel-toggle", this._toggleHandler);
 
             this._registerBreakpoint();
 
@@ -101,7 +102,7 @@ var __meta__ = {
                 this.element.addClass("k-rpanel-animate k-rpanel-expanded");
 
                 if (this.options.autoClose) {
-                    $(document.documentElement).on("click touchstart", this._closeHandler);
+                    $(document.documentElement).on(ACTIVATE_EVENTS, this._closeHandler);
                 }
             }
         },
@@ -109,7 +110,7 @@ var __meta__ = {
             if (!this.trigger(CLOSE)) {
                 this.element.addClass("k-rpanel-animate").removeClass("k-rpanel-expanded");
 
-                $(document.documentElement).off("click touchstart", this._closeHandler);
+                $(document.documentElement).off(ACTIVATE_EVENTS, this._closeHandler);
             }
         },
         _close: function(e) {
@@ -119,8 +120,9 @@ var __meta__ = {
                 this.close();
             }
         },
-        desroy: function() {
+        destroy: function() {
             $(window).off("resize" + NS, this._resizeHandler);
+            $(document.documentElement).off(ACTIVATE_EVENTS, this._closeHandler);
         }
     });
 
