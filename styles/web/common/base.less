@@ -838,6 +838,22 @@ input.k-checkbox,
     display: none;
 }
 
+/* RTL for checkboxes and radio buttons */
+.k-rtl .k-checkbox-label,
+.k-rtl .k-radio-label {      
+    padding-right: 1.5em;       
+}
+
+.k-rtl .k-checkbox-label:before,
+.k-rtl .k-checkbox-label:after,
+.k-rtl .k-radio-label:before {
+    right: 0;           
+}
+
+.k-rtl .k-radio:checked + .k-radio-label:after {
+    right: 3px;
+}
+
 // Avoid double-click bug with checkbox + label combination in Google Chrome
 input.k-checkbox + label{
     -webkit-user-select:none;
