@@ -712,7 +712,24 @@
         }, 100);
     });
 
-    asyncTest("focus method adds focused class to the element", 2, function() {
+    asyncTest("focus method adds focused class to the element", 1, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            template: "#=text#",
+            dataValueField: "value",
+            selectable: true
+        });
+
+        setTimeout(function() {
+            start();
+            var element = virtualList.items().eq(1);
+            virtualList.focus(element);
+
+            ok(element.hasClass(FOCUSED));
+        }, 100);
+    });
+
+    asyncTest("focus method changes the focused element", 2, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
             template: "#=text#",
@@ -725,7 +742,77 @@
             var element1 = virtualList.items().eq(1);
             virtualList.focus(element1);
 
-            ok(element.hasClass(FOCUSED));
+            var element2 = virtualList.items().eq(2);
+            virtualList.focus(element2);
+
+            ok(!element1.hasClass(FOCUSED));
+            ok(element2.hasClass(FOCUSED));
+        }, 100);
+    });
+
+    asyncTest("focus method does not change the selection", 3, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            template: "#=text#",
+            dataValueField: "value",
+            selectable: true
+        });
+
+        setTimeout(function() {
+            start();
+            var element1 = virtualList.items().eq(1);
+            virtualList.select(element1);
+
+            var element2 = virtualList.items().eq(2);
+            virtualList.focus(element2);
+
+            ok(!element1.hasClass(FOCUSED));
+            ok(element1.hasClass(SELECTED));
+            ok(element2.hasClass(FOCUSED));
+        }, 100);
+    });
+
+    asyncTest("next method focuses the next item", 3, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            template: "#=text#",
+            dataValueField: "value",
+            selectable: true
+        });
+
+        setTimeout(function() {
+            start();
+            var element1 = virtualList.items().eq(1);
+            virtualList.select(element1);
+
+            var element2 = virtualList.items().eq(2);
+            virtualList.next();
+
+            ok(!element1.hasClass(FOCUSED));
+            ok(element1.hasClass(SELECTED));
+            ok(element2.hasClass(FOCUSED));
+        }, 100);
+    });
+
+    asyncTest("prev method focuses the prev item", 3, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            template: "#=text#",
+            dataValueField: "value",
+            selectable: true
+        });
+
+        setTimeout(function() {
+            start();
+            var element1 = virtualList.items().eq(2);
+            virtualList.select(element1);
+
+            var element2 = virtualList.items().eq(1);
+            virtualList.prev();
+
+            ok(!element1.hasClass(FOCUSED));
+            ok(element1.hasClass(SELECTED));
+            ok(element2.hasClass(FOCUSED));
         }, 100);
     });
 
