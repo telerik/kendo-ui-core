@@ -223,9 +223,9 @@ var __meta__ = {
              if (first === "=") {
                  return "+(" + rest + ")+";
              } else if (first === ":") {
-                 return "+e(" + rest + ")+";
+                 return "+$kendoHtmlEncode(" + rest + ")+";
              } else {
-                 return ";" + part + ";o+=";
+                 return ";" + part + ";$kendoOutput+=";
              }
          }
      }
@@ -257,7 +257,7 @@ var __meta__ = {
                 paramName = settings.paramName,
                 argumentName = paramName.match(argumentNameRegExp)[0],
                 useWithBlock = settings.useWithBlock,
-                functionBody = "var o,e=kendo.htmlEncode;",
+                functionBody = "var $kendoOutput, $kendoHtmlEncode = kendo.htmlEncode;",
                 fn,
                 parts,
                 idx;
@@ -268,11 +268,11 @@ var __meta__ = {
 
             functionBody += useWithBlock ? "with(" + paramName + "){" : "";
 
-            functionBody += "o=";
+            functionBody += "$kendoOutput=";
 
             parts = template
                 .replace(escapedCurlyRegExp, "__CURLY__")
-                .replace(encodeRegExp, "#=e($1)#")
+                .replace(encodeRegExp, "#=$kendoHtmlEncode($1)#")
                 .replace(curlyRegExp, "}")
                 .replace(escapedSharpRegExp, "__SHARP__")
                 .split("#");
@@ -283,7 +283,7 @@ var __meta__ = {
 
             functionBody += useWithBlock ? ";}" : ";";
 
-            functionBody += "return o;";
+            functionBody += "return $kendoOutput;";
 
             functionBody = functionBody.replace(sharpRegExp, "#");
 
