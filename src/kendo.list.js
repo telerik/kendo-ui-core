@@ -52,16 +52,17 @@ var __meta__ = {
             element = that.element;
 
             that._isSelect = element.is(SELECT);
-            that._template();
+
+            if (that._isSelect && that.element[0].length) {
+                if (!options.dataSource) {
+                    options.dataTextField = options.dataTextField || "text";
+                    options.dataValueField = options.dataValueField || "value";
+                }
+            }
 
             that.ul = $('<ul unselectable="on" class="k-list k-reset"/>')
-                        .css({ overflow: support.kineticScrollNeeded ? "": "auto" })
-                        .on("mouseenter" + ns, LI, function() { $(this).addClass(HOVER); })
-                        .on("mouseleave" + ns, LI, function() { $(this).removeClass(HOVER); })
-                        .on("click" + ns, LI, proxy(that._click, that))
                         .attr({
                             tabIndex: -1,
-                            role: "listbox",
                             "aria-hidden": true
                         });
 
@@ -69,12 +70,25 @@ var __meta__ = {
                         .append(that.ul)
                         .on("mousedown" + ns, proxy(that._listMousedown, that));
 
+            //find a better name
+            var listView;
+
+            if (options.virtual) {
+                listView = new kendo.ui.VirtualList(that.ul, {});
+            } else {
+                listView = new StaticList(that.ul, {
+                    template: "#:" + kendo.expr(options.dataTextField, "data") + "#",
+                    groupTemplate: "#:data#"
+                });
+            }
+
+            that.listView = listView;
+
             id = element.attr(ID);
 
             if (id) {
                 that.list.attr(ID, id + "-list");
                 that.ul.attr(ID, id + "_listbox");
-                that._optionID = id + "_option_selected";
             }
 
             that._header();
@@ -198,7 +212,8 @@ var __meta__ = {
             return this.ul[0].children;
         },
 
-        current: function(candidate) {
+        //TODO: move widget specific logic into event "focus"
+        /*current: function(candidate) {
             var that = this;
             var focused = that._focused.add(that.filterInput);
             var id = that._optionID;
@@ -227,7 +242,7 @@ var __meta__ = {
             } else {
                 return that._current;
             }
-        },
+        },*/
 
         destroy: function() {
             var that = this,
@@ -237,7 +252,8 @@ var __meta__ = {
 
             that._unbindDataSource();
 
-            that.ul.off(ns);
+            //destroy the static/virtual list here
+            //that.ul.off(ns);
             that.list.off(ns);
 
             if (that._touchScroller) {
@@ -300,6 +316,7 @@ var __meta__ = {
             that.ul.attr("aria-live", !options.filter || options.filter === "none" ? "off" : "polite");
         },
 
+        //TODO: this should go into list "change|select" event
         _blur: function() {
             var that = this;
 
@@ -335,12 +352,6 @@ var __meta__ = {
             }
         },
 
-        _click: function(e) {
-            if (!e.isDefaultPrevented()) {
-                this._accept($(e.currentTarget));
-            }
-        },
-
         _data: function() {
             return this.dataSource.view();
         },
@@ -361,7 +372,8 @@ var __meta__ = {
             }
         },
 
-        _focus: function(li) {
+        //TODO: Move this logic in to list "focus" event
+        /*_focus: function(li) {
             var that = this;
             var userTriggered = true;
 
@@ -374,7 +386,7 @@ var __meta__ = {
             that._triggerCascade(userTriggered);
 
             that._blur();
-        },
+        },*/
 
         _index: function(value) {
             var that = this,
@@ -401,6 +413,7 @@ var __meta__ = {
             return value;
         },
 
+        //TODO: find a correct way to calculate height of the ul element!
         _height: function(length) {
             if (length) {
                 var that = this,
@@ -499,10 +512,11 @@ var __meta__ = {
                 isRtl: support.isRtl(that.wrapper)
             }));
 
-            that.popup.one(OPEN, proxy(that._firstOpen, that));
+            //that.popup.one(OPEN, proxy(that._firstOpen, that));
             that._touchScroller = kendo.touchScroller(that.popup.element);
         },
 
+        //TODO: This should be done on every update of VirtualList
         _makeUnselectable: function() {
             if (isIE8) {
                 this.list.find("*").not(".k-textbox").attr("unselectable", "on");
@@ -524,66 +538,6 @@ var __meta__ = {
             }
 
             that[open ? OPEN : CLOSE]();
-        },
-
-        _scroll: function (item) {
-
-            if (!item) {
-                return;
-            }
-
-            if (item[0]) {
-                item = item[0];
-            }
-
-            var ul = this.ul[0],
-                itemOffsetTop = item.offsetTop,
-                itemOffsetHeight = item.offsetHeight,
-                ulScrollTop = ul.scrollTop,
-                ulOffsetHeight = ul.clientHeight,
-                bottomDistance = itemOffsetTop + itemOffsetHeight,
-                touchScroller = this._touchScroller,
-                yDimension, offsetHeight;
-
-            if (touchScroller) {
-                yDimension = touchScroller.dimensions.y;
-
-                if (yDimension.enabled && itemOffsetTop > yDimension.size) {
-                    itemOffsetTop = itemOffsetTop - yDimension.size + itemOffsetHeight + 4;
-
-                    touchScroller.scrollTo(0, -itemOffsetTop);
-                }
-            } else {
-                offsetHeight = this.header ? this.header.outerHeight() : 0;
-                offsetHeight += this.filterInput ? this.filterInput.outerHeight() : 0;
-
-                ul.scrollTop = ulScrollTop > itemOffsetTop ?
-                               (itemOffsetTop - offsetHeight) : bottomDistance > (ulScrollTop + ulOffsetHeight) ?
-                               (bottomDistance - ulOffsetHeight - offsetHeight) : ulScrollTop;
-            }
-        },
-
-        _template: function() {
-            var that = this,
-                options = that.options,
-                template = options.template,
-                hasDataSource = options.dataSource;
-
-            if (that._isSelect && that.element[0].length) {
-                if (!hasDataSource) {
-                    options.dataTextField = options.dataTextField || "text";
-                    options.dataValueField = options.dataValueField || "value";
-                }
-            }
-
-            if (!template) {
-                that.template = kendo.template('<li tabindex="-1" role="option" unselectable="on" class="k-item">${' + kendo.expr(options.dataTextField, "data") + "}</li>", { useWithBlock: false });
-            } else {
-                template = kendo.template(template);
-                that.template = function(data) {
-                    return '<li tabindex="-1" role="option" unselectable="on" class="k-item">' + template(data) + "</li>";
-                };
-            }
         },
 
         _triggerCascade: function(userTriggered) {
@@ -625,6 +579,7 @@ var __meta__ = {
 
     kendo.ui.List = List;
 
+    //Could we remove the SELECT list from here!!!
     ui.Select = List.extend({
         init: function(element, options) {
             List.fn.init.call(this, element, options);
@@ -652,7 +607,13 @@ var __meta__ = {
             if (li === undefined) {
                 return that.selectedIndex;
             } else {
-                that._select(li);
+                /////
+                li = that._get(li);
+                that.listView.select(li);
+                that.selectedIndex = that.listView.selectedIndex;
+                //that._select(li);
+                //
+
                 that._triggerCascade();
                 that._old = that._accessor();
                 that._oldIndex = that.selectedIndex;
@@ -774,17 +735,19 @@ var __meta__ = {
             if (that.dataSource && that._refreshHandler) {
                 that._unbindDataSource();
             } else {
-                that._refreshHandler = proxy(that.refresh, that);
                 that._progressHandler = proxy(that._showBusy, that);
                 that._requestEndHandler = proxy(that._requestEnd, that);
                 that._errorHandler = proxy(that._hideBusy, that);
             }
 
             that.dataSource = kendo.data.DataSource.create(dataSource)
-                                   .bind(CHANGE, that._refreshHandler)
                                    .bind(PROGRESS, that._progressHandler)
                                    .bind(REQUESTEND, that._requestEndHandler)
                                    .bind("error", that._errorHandler);
+
+            that.listView.setOptions({
+                dataSource: that.dataSource
+            });
         },
 
         _get: function(li) {
@@ -816,6 +779,8 @@ var __meta__ = {
             return li;
         },
 
+        //TODO: move to the StaticList - use new API!
+        /*
         _move: function(e) {
             var that = this,
                 key = e.keyCode,
@@ -891,6 +856,7 @@ var __meta__ = {
 
             return pressed;
         },
+        */
 
         _selectItem: function() {
             var that = this,
@@ -939,6 +905,7 @@ var __meta__ = {
             }
         },
 
+        //TODO: Call this in Static/Virtual List "listBound" event
         _options: function(data, optionLabel) {
             var that = this,
                 element = that.element,
@@ -1001,6 +968,7 @@ var __meta__ = {
             }
         },
 
+        //TODO: Refactor
         _cascade: function() {
             var that = this,
                 options = that.options,
@@ -1092,6 +1060,325 @@ var __meta__ = {
             }
         }
     });
+
+    var STATIC_LIST_NS = ".StaticList";
+
+    var StaticList = kendo.ui.DataBoundWidget.extend({
+        init: function(element, options) {
+            Widget.fn.init.call(this, element, options);
+
+            var target = this.options.hoverTarget;
+
+            this.element.attr("role", "listbox")
+                        .css({ overflow: support.kineticScrollNeeded ? "": "auto" })
+                        .on("mouseenter" + STATIC_LIST_NS, target, function() { $(this).addClass(HOVER); })
+                        .on("mouseleave" + STATIC_LIST_NS, target, function() { $(this).removeClass(HOVER); })
+                        .on("click" + STATIC_LIST_NS, target, proxy(this._click, this));
+
+            this.setDataSource(this.options.dataSource);
+
+            this._optionID = kendo.guid();
+            this._templates();
+
+            this._value = [];
+        },
+
+        options: {
+            hoverTarget: "li",
+            name: "StaticList",
+            selectable: true, //true|false|multiple
+            template: null
+        },
+
+        events: [
+           "focus",
+           "change",
+           "listBound"
+        ],
+
+        setDataSource: function(source) {
+            var that = this;
+            var dataSource = source || {};
+
+            dataSource = $.isArray(dataSource) ? { data: dataSource } : dataSource;
+            dataSource = kendo.data.DataSource.create(dataSource);
+
+            if (that._refreshHandler) {
+                dataSource.unbind(CHANGE, that._refreshHandler);
+            } else {
+                that._refreshHandler = proxy(that.refresh, that);
+            }
+
+            that.dataSource = dataSource.bind(CHANGE, that._refreshHandler);
+        },
+
+        //Test this
+        setOptions: function(options) {
+            Widget.fn.setOptions.call(this, options);
+
+            if (options.dataSource) {
+                this.setDataSource(options.dataSource);
+            }
+
+            this._templates();
+        },
+
+        _click: function(e) {
+            if (!e.isDefaultPrevented()) {
+
+                this.focus($(e.currentTarget));
+                this.select(this.current());
+            }
+        },
+
+        current: function(candidate) {
+            var that = this;
+            var id = that._optionID;
+
+            if (candidate !== undefined) {
+                if (that._current) {
+                    that._current
+                        .removeClass(FOCUSED)
+                        .removeAttr("aria-selected")
+                        .removeAttr(ID);
+                }
+
+                if (candidate) {
+                    candidate.addClass(FOCUSED);
+                    that.scroll(candidate);
+
+                    if (id) {
+                        candidate.attr("id", id);
+                    }
+                }
+
+                that._current = candidate;
+            } else {
+                return that._current;
+            }
+        },
+
+        scroll: function (item) {
+            if (!item) {
+                return;
+            }
+
+            if (item[0]) {
+                item = item[0];
+            }
+
+            var ul = this.element[0],
+                itemOffsetTop = item.offsetTop,
+                itemOffsetHeight = item.offsetHeight,
+                ulScrollTop = ul.scrollTop,
+                ulOffsetHeight = ul.clientHeight,
+                bottomDistance = itemOffsetTop + itemOffsetHeight,
+                touchScroller = this._touchScroller,
+                yDimension, offsetHeight;
+
+            if (touchScroller) {
+                yDimension = touchScroller.dimensions.y;
+
+                if (yDimension.enabled && itemOffsetTop > yDimension.size) {
+                    itemOffsetTop = itemOffsetTop - yDimension.size + itemOffsetHeight + 4;
+
+                    touchScroller.scrollTo(0, -itemOffsetTop);
+                }
+            } else {
+                offsetHeight = this.header ? this.header.outerHeight() : 0;
+                offsetHeight += this.filterInput ? this.filterInput.outerHeight() : 0;
+
+                ul.scrollTop = ulScrollTop > itemOffsetTop ?
+                               (itemOffsetTop - offsetHeight) : bottomDistance > (ulScrollTop + ulOffsetHeight) ?
+                               (bottomDistance - ulOffsetHeight - offsetHeight) : ulScrollTop;
+            }
+        },
+
+        //should work with index!
+        focus: function(li) {
+            if (this.trigger("focus", {item: li})) {
+                return;
+            }
+
+            this.current(li);
+        },
+
+        //should work with indexes; select bulk of indexes
+        //
+        //1: keep selected DOM elements. Thus we can de-select them based on selectable option
+        //
+        select: function(li) {
+            var that = this;
+            var current = that._current;
+            var idx;
+
+            if (li && li[0]) {
+                if (current) {
+                    current.removeClass(SELECTED);
+                }
+
+                idx = inArray(li[0], that.element[0]);
+                that.selectedIndex = idx;
+
+                if (idx > -1) {
+                    if (li !== that._current) {
+                        that.current(li);
+                    }
+
+                    li.addClass(SELECTED).attr("aria-selected", true);
+                } else { //support for -1
+                    that.current(null);
+                }
+
+                this.trigger("select"); //Could be 'change' ???
+            }
+        },
+        //
+
+        //should remove as it does not require those fields
+        /*_data: function() {
+            var that = this;
+            var options = that.options;
+            var optionLabel = options.optionLabel;
+            var textField = options.dataTextField;
+            var valueField = options.dataValueField;
+            var data = that.dataSource.view();
+            var length = data.length;
+            var first = optionLabel;
+            var idx = 0;
+
+            if (optionLabel && length) {
+                if (typeof optionLabel === "object") {
+                    first = optionLabel;
+                } else if (textField) {
+                    first = {};
+
+                    textField = textField.split(".");
+                    valueField = valueField.split(".");
+
+                    assign(first, valueField, "");
+                    assign(first, textField, optionLabel);
+                }
+
+                first = new kendo.data.ObservableArray([first]);
+
+                for (; idx < length; idx++) {
+                    first.push(data[idx]);
+                }
+                data = first;
+            }
+
+            return data;
+        },*/
+
+        _template: function() {
+            var that = this;
+            var options = that.options;
+            var template = options.template;
+
+            if (!template) {
+                template = kendo.template('<li tabindex="-1" role="option" unselectable="on" class="k-item">${' + kendo.expr(options.dataTextField, "data") + "}</li>", { useWithBlock: false });
+            } else {
+                template = kendo.template(template);
+                template = function(data) {
+                    return '<li tabindex="-1" role="option" unselectable="on" class="k-item">' + template(data) + "</li>";
+                };
+            }
+
+            return template;
+        },
+
+        _templates: function() {
+            var template;
+            var templates = {
+                template: this.options.template,
+                groupTemplate: this.options.groupTemplate,
+                fixedGroupTemplate: this.options.fixedGroupTemplate
+            };
+
+            for (var key in templates) {
+                template = templates[key];
+                if (template && typeof template !== "function") {
+                    templates[key] = kendo.template(template);
+                }
+            }
+
+            this.templates = templates;
+        },
+
+        _renderItem: function(context) {
+            var item = '<li tabindex="-1" role="option" unselectable="on" class="k-item"';
+
+            item += ' data-offset-index=' + context.index + '">';
+            item += this.templates.template(context.item);
+
+            if (context.group) {
+                item += '<div class="k-group">' + this.templates.groupTemplate(context.group) + '</div>';
+            }
+
+            return item + "</li>";
+        },
+
+        refresh: function() {
+            this._angularItems("cleanup");
+
+            var html = "";
+
+            var idx = 0;
+            var context;
+            var dataContext = [];
+            var view = this.dataSource.view();
+
+            if (!!this.dataSource.group().length) {
+                for (var i = 0; i < view.length; i++) {
+                    var group = view[i];
+
+                    for (var j = 0; j < group.items.length; j++) {
+                        context = { item: group.items[i], group: group.value, index: idx };
+                        dataContext[idx] = context;
+                        idx += 1;
+
+                        html += this._renderItem(context);
+                    }
+                }
+                //grouped
+            } else {
+                for (var i = 0; i < view.length; i++) {
+                    context = { item: view[i], index: i };
+
+                    dataContext[i] = context;
+
+                    html += this._renderItem(context);
+                }
+            }
+
+            this._dataContext = dataContext;
+
+            this.element[0].innerHTML = html; //could be changed with DOM elements creation
+
+            this._angularItems("compile");
+
+            this.trigger("listBound");
+        }
+    });
+
+    ui.plugin(StaticList);
+
+    function inArray(node, parentNode) {
+        var idx, length, siblings = parentNode.children;
+
+        if (!node || node.parentNode !== parentNode) {
+            return -1;
+        }
+
+        for (idx = 0, length = siblings.length; idx < length; idx++) {
+            if (node === siblings[idx]) {
+                return idx;
+            }
+        }
+
+        return -1;
+    }
 
     function removeFiltersForField(expression, field) {
         var filters;

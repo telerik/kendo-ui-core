@@ -84,6 +84,12 @@ var __meta__ = {
 
             that._cascade();
 
+            //
+            that.listView.bind("listBound", function() {
+                that._hideBusy();
+            });
+            //
+
             if (index !== undefined) {
                 options.index = index;
             }
@@ -169,12 +175,19 @@ var __meta__ = {
             Select.fn.destroy.call(that);
         },
 
+        //TODO: refactor
         open: function() {
             var that = this;
 
             if (that.popup.visible()) {
                 return;
             }
+
+            ///
+                that.popup.open();
+                that._focusElement(that.filterInput);
+                return;
+            ///
 
             if (!that.ul[0].firstChild || that._state === STATE_ACCEPT) {
                 that._open = true;
@@ -196,6 +209,7 @@ var __meta__ = {
             this._toggle(toggle, true);
         },
 
+        //TODO: Refactor as part of this was moved into StaticList
         refresh: function() {
             var that = this,
                 data = that._data(),
@@ -419,7 +433,8 @@ var __meta__ = {
                    .attr(ARIA_READONLY, readonly);
         },
 
-        _accept: function(li, key) {
+        //TODO: Refactor as part of this was moved into StaticList
+        /*_accept: function(li, key) {
             var that = this;
             var activeFilter = that.filterInput && that.filterInput[0] === activeElement();
 
@@ -429,7 +444,7 @@ var __meta__ = {
             if (activeFilter && key === keys.TAB) {
                 that.wrapper.focusout();
             }
-        },
+        },*/
 
         _option: function(value, text) {
             return '<option value="' + value + '">' + text + "</option>";
@@ -447,6 +462,7 @@ var __meta__ = {
             return optionLabel;
         },
 
+        //TODO: Find a better way here in order to work with list abstractions
         _data: function() {
             var that = this,
                 options = that.options,
@@ -490,7 +506,9 @@ var __meta__ = {
             }
         },
 
+        //Refactor to work with list abstractions
         _keydown: function(e) {
+            return;
             var that = this;
             var key = e.keyCode;
             var altKey = e.altKey;
@@ -696,6 +714,7 @@ var __meta__ = {
             }
         },
 
+        //TODO: refactor as moved most of this into StaticList
         _select: function(li) {
             var that = this,
                 current = that._current,
@@ -834,6 +853,7 @@ var __meta__ = {
                               });
         },
 
+        //ADD support for this into select method!!!
         _clearSelection: function() {
             var that = this;
             var optionLabel = that.options.optionLabel;
