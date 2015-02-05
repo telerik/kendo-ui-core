@@ -303,12 +303,8 @@ var __meta__ = {
                 return;
             } else {
                 dataItem = dataSource.getByUid(element.data("uid"));
-                index = parseInt(element.attr("data-offset-index"));
-                this._current = {
-                    element: element,
-                    dataItem: dataItem,
-                    index: index
-                };
+                index = parseInt(element.attr("data-offset-index"), 10);
+                this._current = index;
 
                 this.items().removeClass(FOCUSED);
                 element.addClass(FOCUSED);
@@ -325,21 +321,22 @@ var __meta__ = {
         },
 
         first: function() {
-            console.log("select first element");
+            this.scrollTo(0);
+            this.focus(this.items().filter("[data-offset-index='" + 0 + "']"));
         },
 
         last: function() {
-            console.log("select last element");
+            this.scrollTo(this.heightContainer.offsetHeight);
+            this.focus(this.items().filter("[data-offset-index='" + this.dataSource.total() + "']"));
         },
 
         prev: function() {
-            var index, element;
+            var index = this._current,
+                element;
 
-            if (this._current) {
-                index = this._current.index;
-
+            if (!isNaN(index)) {
                 element = this.items().filter(function(idx, element) {
-                    return index - 1 === parseInt($(element).attr("data-offset-index"));
+                    return index - 1 === parseInt($(element).attr("data-offset-index"), 10);
                 });
 
                 this.focus(element);
@@ -347,13 +344,12 @@ var __meta__ = {
         },
 
         next: function() {
-            var index, element;
+            var index = this._current,
+                element;
 
-            if (this._current) {
-                index = this._current.index;
-
+            if (!isNaN(index)) {
                 element = this.items().filter(function(idx, element) {
-                    return index + 1 === parseInt($(element).attr("data-offset-index"));
+                    return index + 1 === parseInt($(element).attr("data-offset-index"), 10);
                 });
 
                 this.focus(element);
@@ -568,7 +564,7 @@ var __meta__ = {
                 itemHeight = this.options.itemHeight,
                 valueField = this.options.dataValueField,
                 value = this._value,
-                currentDataItem = this._current ? this._current.dataItem : null,
+                currentIndex = this._current,
                 selected = false,
                 current = false,
                 newGroup = false,
@@ -593,7 +589,7 @@ var __meta__ = {
                 }
             }
 
-            if (currentDataItem && (currentDataItem[valueField] === item[valueField])) {
+            if (currentIndex === index) {
                 current = true;
             }
 
@@ -727,9 +723,9 @@ var __meta__ = {
             }
         },
 
-        _select: function(element) {
+        _select: function(target) {
             var singleSelection = this.options.selectable !== "multiple",
-                element = $(element),
+                element = $(target),
                 valueField = this.options.dataValueField,
                 dataItem = this.dataSource.getByUid(element.attr("data-uid")),
                 selectedValue;
@@ -758,11 +754,7 @@ var __meta__ = {
                     element.addClass(SELECTED);
                 }
 
-                this._current = {
-                    element: element,
-                    dataItem: dataItem,
-                    index: parseInt(element.attr("data-offset-index"))
-                };
+                this._current = parseInt(element.attr("data-offset-index"), 10);
             }
 
         },
