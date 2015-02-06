@@ -299,9 +299,7 @@ var __meta__ = {
                 index = parseInt($(element).attr("data-offset-index"), 10);
             } else {
                 index = candidate;
-                element = this.items().filter(function(idx, element) {
-                    return index === parseInt($(element).attr("data-offset-index"), 10);
-                });
+                element = this._getElementByIndex(index);
             }
 
             if (element.length) { /*focus rendered item*/
@@ -362,6 +360,14 @@ var __meta__ = {
         select: function(candidate) {
             this.focus(candidate);
             this._select(candidate);
+        },
+
+        _getElementByIndex: function(index) {
+            var element = this.items().filter(function(idx, element) {
+                return index === parseInt($(element).attr("data-offset-index"), 10);
+            });
+
+            return element;
         },
 
         _clean: function() {
@@ -518,7 +524,6 @@ var __meta__ = {
                         lastRangeStart = rangeStart;
                         this._mute = false;
                     }
-
 
                     var result;
                     if (type === "group") { //grouped list
@@ -736,9 +741,7 @@ var __meta__ = {
                 index = parseInt($(element).attr("data-offset-index"), 10);
             } else {
                 index = candidate;
-                element = this.items().filter(function(idx, element) {
-                    return index === parseInt($(element).attr("data-offset-index"), 10);
-                });
+                element = this._getElementByIndex(index);
             }
 
             dataItem = this.dataSource.getByUid(element.attr("data-uid"));
