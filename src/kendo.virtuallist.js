@@ -351,7 +351,7 @@ var __meta__ = {
 
         next: function() {
             var index = this._current,
-                lastIndex = this.dataSource.total();
+                lastIndex = this.dataSource.total() - 1; /* data offset index starts from 0*/
 
             if (!isNaN(index) && index < lastIndex) {
                 this.focus(index + 1);
