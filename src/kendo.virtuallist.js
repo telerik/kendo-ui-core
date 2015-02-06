@@ -724,40 +724,48 @@ var __meta__ = {
             }
         },
 
-        _select: function(target) {
+        _select: function(candidate) {
             var singleSelection = this.options.selectable !== "multiple",
-                element = $(target),
                 valueField = this.options.dataValueField,
-                dataItem = this.dataSource.getByUid(element.attr("data-uid")),
-                selectedValue;
+                element, index, dataItem, selectedValue;
 
-            if (dataItem) {
-                selectedValue = dataItem[valueField];
+            if (isNaN(candidate)) {
+                element = $(candidate);
+                index = parseInt($(element).attr("data-offset-index"), 10);
+            } else {
+                index = candidate;
+                element = this.items().filter(function(idx, element) {
+                    return index === parseInt($(element).attr("data-offset-index"), 10);
+                });
             }
 
-            if (selectedValue !== undefined) {
-                if (element.hasClass(SELECTED)) {
-                    element.removeClass(SELECTED);
+            dataItem = this.dataSource.getByUid(element.attr("data-uid"));
 
-                    this._value = singleSelection ? [] : this._value.filter(function(i) { return i != selectedValue; });
-                    this._selectedDataItems = singleSelection ? [] : this._selectedDataItems.filter(function(i) { return i[valueField] != selectedValue; });
+            selectedValue = dataItem ? dataItem[valueField] : null;
+
+            if (!selectedValue && selectedValue !== 0) {
+                return;
+            }
+
+            if (element.hasClass(SELECTED)) {
+                element.removeClass(SELECTED);
+
+                this._value = singleSelection ? [] : this._value.filter(function(i) { return i != selectedValue; });
+                this._selectedDataItems = singleSelection ? [] : this._selectedDataItems.filter(function(i) { return i[valueField] != selectedValue; });
+            } else {
+                if (singleSelection) {
+                    this.items().removeClass(SELECTED);
+                    this._value = [selectedValue];
+                    this._selectedDataItems = [dataItem];
                 } else {
-
-                    if (singleSelection) {
-                        this.items().removeClass(SELECTED);
-                        this._value = [selectedValue];
-                        this._selectedDataItems = [dataItem];
-                    } else {
-                        this._value.push(selectedValue);
-                        this._selectedDataItems.push(dataItem);
-                    }
-
-                    element.addClass(SELECTED);
+                    this._value.push(selectedValue);
+                    this._selectedDataItems.push(dataItem);
                 }
 
-                this._current = parseInt(element.attr("data-offset-index"), 10);
+                element.addClass(SELECTED);
             }
 
+            this._current = index;
         },
 
         _clickHandler: function(e) {
