@@ -285,74 +285,75 @@ var __meta__ = {
             this.scrollTo(index * this.options.itemHeight);
         },
 
-        focus: function(element) {
-            var dataItem,
+        focus: function(candidate) {
+            var element,
                 index,
                 dataSource = this.dataSource;
-            element = $(element);
 
             if (arguments.length === 0) {
                 return this.content.find("." + FOCUSED);
             }
 
-            if (!isNaN(element)) {
-                //index is provided
+            if (isNaN(candidate)) {
+                element = $(candidate);
+                index = parseInt($(element).attr("data-offset-index"), 10);
+            } else {
+                index = candidate;
+                element = this.items().filter(function(idx, element) {
+                    return index === parseInt($(element).attr("data-offset-index"), 10);
+                });
             }
 
-            if (element.hasClass(FOCUSED) || !element.length) {
-                return;
-            } else {
-                dataItem = dataSource.getByUid(element.data("uid"));
-                index = parseInt(element.attr("data-offset-index"), 10);
-                this._current = index;
+            if (element.length) { /*focus rendered item*/
+                if (element.hasClass(FOCUSED)) {
+                    return;
+                } else {
+                    this._current = index;
 
-                this.items().removeClass(FOCUSED);
-                element.addClass(FOCUSED);
+                    this.items().removeClass(FOCUSED);
+                    element.addClass(FOCUSED);
 
-                var position = this._getElementLocation(index);
+                    var position = this._getElementLocation(index);
 
-                if (position === "top") {
-                    this.scrollTo(index * this.options.itemHeight);
-                } else if (position === "bottom") {
-                    this.scrollTo(this.element.scrollTop() + this.options.itemHeight);
+                    if (position === "top") {
+                        this.scrollTo(index * this.options.itemHeight);
+                    } else if (position === "bottom") {
+                        this.scrollTo(this.element.scrollTop() + this.options.itemHeight);
+                    }
+
                 }
-
+            } else { /*focus non rendered item*/
+                this._current = index;
+                this.items().removeClass(FOCUSED);
+                this.scrollToIndex(index);
             }
         },
 
         first: function() {
             this.scrollTo(0);
-            this.focus(this.items().filter("[data-offset-index='" + 0 + "']"));
+            this.focus(0);
         },
 
         last: function() {
+            var lastIndex = this.dataSource.total();
             this.scrollTo(this.heightContainer.offsetHeight);
-            this.focus(this.items().filter("[data-offset-index='" + this.dataSource.total() + "']"));
+            this.focus(lastIndex);
         },
 
         prev: function() {
-            var index = this._current,
-                element;
+            var index = this._current;
 
-            if (!isNaN(index)) {
-                element = this.items().filter(function(idx, element) {
-                    return index - 1 === parseInt($(element).attr("data-offset-index"), 10);
-                });
-
-                this.focus(element);
+            if (!isNaN(index) && index > 0) {
+                this.focus(index - 1);
             }
         },
 
         next: function() {
             var index = this._current,
-                element;
+                lastIndex = this.dataSource.total();
 
-            if (!isNaN(index)) {
-                element = this.items().filter(function(idx, element) {
-                    return index + 1 === parseInt($(element).attr("data-offset-index"), 10);
-                });
-
-                this.focus(element);
+            if (!isNaN(index) && index < lastIndex) {
+                this.focus(index + 1);
             }
         },
 
