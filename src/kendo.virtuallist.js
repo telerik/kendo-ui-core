@@ -345,6 +345,7 @@ var __meta__ = {
 
             if (!isNaN(index) && index > 0) {
                 this.focus(index - 1);
+                return index - 1;
             }
         },
 
@@ -354,12 +355,13 @@ var __meta__ = {
 
             if (!isNaN(index) && index < lastIndex) {
                 this.focus(index + 1);
+                return index + 1;
             }
         },
 
-        select: function(element) {
-            this.focus(element);
-            this._select(element);
+        select: function(candidate) {
+            this.focus(candidate);
+            this._select(candidate);
         },
 
         _clean: function() {
