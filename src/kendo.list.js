@@ -1080,13 +1080,14 @@ var __meta__ = {
             this._optionID = kendo.guid();
             this._templates();
 
+	    this._selectedItems = [];
             this._value = [];
         },
 
         options: {
             hoverTarget: "li",
             name: "StaticList",
-            selectable: true, //true|false|multiple
+            selectable: "multiple", //true, //true|false|multiple
             template: null
         },
 
@@ -1209,13 +1210,10 @@ var __meta__ = {
         //
         select: function(li) {
             var that = this;
-            var current = that._current;
             var idx;
 
             if (li && li[0]) {
-                if (current) {
-                    current.removeClass(SELECTED);
-                }
+				this._deselect(li.hasClass("k-state-selected") ? li : null);
 
                 idx = inArray(li[0], that.element[0]);
                 that.selectedIndex = idx;
@@ -1225,7 +1223,9 @@ var __meta__ = {
                         that.current(li);
                     }
 
-                    li.addClass(SELECTED).attr("aria-selected", true);
+                    li.addClass("k-state-selected").attr("aria-selected", true);
+
+					this._selectedItems.push(li);
                 } else { //support for -1
                     that.current(null);
                 }
@@ -1233,6 +1233,28 @@ var __meta__ = {
                 this.trigger("select"); //Could be 'change' ???
             }
         },
+
+		_deselect: function(element) {
+			var selectedItems = this._selectedItems;
+			var selectable = this.options.selectable;	
+
+			// single selection
+			if (selectable === true) {
+				for (var idx = 0; idx < selectedItems.length; idx++) {
+					selectedItems[idx].removeClass("k-state-selected");
+				}
+
+				this._selectedItems = [];
+			} else if (selectable === "multiple" && element) {
+				for (var idx = 0; idx < selectedItems.length; idx++) {
+					if (selectedItems[idx][0] === element[0]) {
+						selectedItems[idx].removeClass("k-state-selected");
+						selectedItems.splice(idx, 1);
+						break;
+					}
+				}
+			}
+		},
         //
 
         //should remove as it does not require those fields
