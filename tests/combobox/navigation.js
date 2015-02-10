@@ -515,4 +515,15 @@ test("ComboBox selects an item on ENTER after search ", 1, function() {
     });
 });
 
+test("ComboBox does not focus input if mobile device", 1, function() {
+    var origin = kendo.support.touch;
+    var input = combobox.input;
+
+    kendo.support.touch = true;
+
+    combobox.wrapper.find(".k-icon").click();
+
+    notEqual(combobox.input[0], document.activeElement);
+});
+
 })();
