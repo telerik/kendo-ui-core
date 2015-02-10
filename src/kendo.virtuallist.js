@@ -205,6 +205,14 @@ var __meta__ = {
 
         setOptions: function(options) {
             Widget.fn.setOptions.call(this, options);
+
+            if (this._selectProxy && this.options.selectable === false) {
+                this.element.off(CLICK, "." + VIRTUALITEM, this._selectProxy);
+            } else if (!this._selectProxy && this.options.selectable) {
+                this._selectable();
+            }
+
+            this.refresh();
         },
 
         items: function() {

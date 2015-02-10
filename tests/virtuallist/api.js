@@ -151,4 +151,58 @@
         }, 100);
     });
 
+    //setOptions
+
+    asyncTest("setOptions changes the template", 2, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            template: "#=text#",
+            dataValueField: "value"
+        });
+
+        setTimeout(function() {
+            start();
+            equal(virtualList.items().first().html(), "Item 0");
+
+            virtualList.setOptions({
+                template: "<span class='foo'>#:text#</span>"
+            });
+
+            equal(virtualList.items().first().html(), '<span class="foo">Item 0</span>');
+        }, 100);
+    });
+
+    asyncTest("setOptions turns on the selectable", 1, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            template: "#=text#",
+            dataValueField: "value"
+        });
+
+        setTimeout(function() {
+            start();
+            virtualList.setOptions({ selectable: true });
+
+            virtualList.items().first().trigger("click");
+            equal(virtualList.value()[0], 0);
+        }, 100);
+    });
+
+    asyncTest("setOptions turns off the selectable", 1, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            template: "#=text#",
+            dataValueField: "value",
+            selectable: true
+        });
+
+        setTimeout(function() {
+            start();
+            virtualList.setOptions({ selectable: false });
+
+            virtualList.items().first().trigger("click");
+            equal(virtualList.value().length, 0);
+        }, 100);
+    });
+
 })();
