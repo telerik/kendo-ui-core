@@ -831,7 +831,8 @@ var __meta__ = {
                 that.wrapper.attr("aria-owns", id);
 
                 that._popup = popup = selector.wrapper.kendoPopup({
-                    anchor: that.wrapper
+                    anchor: that.wrapper,
+                    adjustSize: { width: 5, height: 0 }
                 }).data("kendoPopup");
 
                 selector.bind({
