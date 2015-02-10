@@ -577,11 +577,13 @@ var __meta__ = {
                 current = false,
                 newGroup = false,
                 group = null,
-                nullIndex = -1;
+                nullIndex = -1,
+                match = false;
 
             if (value.length && item) {
                 for (var i = 0; i < value.length; i++) {
-                    if (value[i] === item[valueField]) {
+                    match = (typeof item === "string" || typeof item === "number") ? value[i] === item : value[i] === item[valueField];
+                    if (match) {
                         if($.inArray(item, this._selectedDataItems) === -1) { /*check if item is not already added*/
                             nullIndex = this._selectedDataItems.indexOf(null);
                             if (nullIndex > -1) {
@@ -624,10 +626,15 @@ var __meta__ = {
 
         _range: function(index) {
             var itemCount = this.itemCount,
-                items = [];
+                items = [],
+                item;
+
+            this._view = {};
 
             for (var i = index, length = index + itemCount; i < length; i++) {
-                items.push(this._itemMapper(this.getter(i, index), i));
+                item = this._itemMapper(this.getter(i, index), i);
+                items.push(item);
+                this._view[item.index] = item;
             }
 
             return items;
@@ -744,9 +751,13 @@ var __meta__ = {
                 element = this._getElementByIndex(index);
             }
 
-            dataItem = this.dataSource.getByUid(element.attr("data-uid"));
+            dataItem = this._view[index] ? this._view[index].item : null;
 
-            selectedValue = dataItem ? dataItem[valueField] : null;
+            if (typeof dataItem === "string" || typeof dataItem === "number") {
+                selectedValue = dataItem ? dataItem : null;
+            } else {
+                selectedValue = dataItem ? dataItem[valueField] : null;
+            }
 
             if (!selectedValue && selectedValue !== 0) {
                 return;
@@ -755,8 +766,16 @@ var __meta__ = {
             if (element.hasClass(SELECTED)) {
                 element.removeClass(SELECTED);
 
-                this._value = singleSelection ? [] : this._value.filter(function(i) { return i != selectedValue; });
-                this._selectedDataItems = singleSelection ? [] : this._selectedDataItems.filter(function(i) { return i[valueField] != selectedValue; });
+                if (singleSelection) {
+                    this._value = [];
+                    this._selectedDataItems = [];
+                } else {
+                    this._value = this._value.filter(function(i) { return i != selectedValue; });
+                    this._selectedDataItems = this._selectedDataItems.filter(function(i) {
+                        var result = valueField ? (i[valueField] != selectedValue) : (i != selectedValue);
+                        return result;
+                    });
+                }
             } else {
                 if (singleSelection) {
                     this.items().removeClass(SELECTED);
