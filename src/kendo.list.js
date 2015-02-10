@@ -1067,25 +1067,49 @@ var __meta__ = {
         init: function(element, options) {
             Widget.fn.init.call(this, element, options);
 
-            var target = this.options.hoverTarget;
-
             this.element.attr("role", "listbox")
                         .css({ overflow: support.kineticScrollNeeded ? "": "auto" })
-                        .on("mouseenter" + STATIC_LIST_NS, target, function() { $(this).addClass(HOVER); })
-                        .on("mouseleave" + STATIC_LIST_NS, target, function() { $(this).removeClass(HOVER); })
-                        .on("click" + STATIC_LIST_NS, target, proxy(this._click, this));
+                        .on("mouseenter" + STATIC_LIST_NS, "li", function() { $(this).addClass(HOVER); })
+                        .on("mouseleave" + STATIC_LIST_NS, "li", function() { $(this).removeClass(HOVER); })
+                        .on("click" + STATIC_LIST_NS, "li", proxy(this._click, this));
 
             this.setDataSource(this.options.dataSource);
 
             this._optionID = kendo.guid();
+            this._selectedItems = [];
+            this._values = [];
+
+            this._getter();
             this._templates();
 
-	    this._selectedItems = [];
-            this._value = [];
+            var value = this.options.value;
+            if (value) {
+                this._values = $.isArray(value) ? value.slice(0) : [value];
+            }
+        },
+
+        _getter: function() {
+            this._valueGetter = kendo.getter(this.options.dataValueField);
+        },
+
+        _find: function(dataItem, values) {
+            var getter = this._valueGetter;
+            var value = getter(dataItem);
+            var found = false;
+
+            for (var idx = 0; idx < values.length; idx++) {
+                if (value == values[idx]) {
+                    values.splice(idx, 1);
+                    found = true;
+                    break;
+                }
+            }
+
+            return found;
         },
 
         options: {
-            hoverTarget: "li",
+            dataValueField: null,
             name: "StaticList",
             selectable: "multiple", //true, //true|false|multiple
             template: null
@@ -1213,7 +1237,9 @@ var __meta__ = {
             var idx;
 
             if (li && li[0]) {
-				this._deselect(li.hasClass("k-state-selected") ? li : null);
+                if (this._deselect(li.hasClass("k-state-selected") ? li : null)) {
+                    return;
+                }
 
                 idx = inArray(li[0], that.element[0]);
                 that.selectedIndex = idx;
@@ -1225,7 +1251,7 @@ var __meta__ = {
 
                     li.addClass("k-state-selected").attr("aria-selected", true);
 
-					this._selectedItems.push(li);
+                    this._selectedItems.push(li);
                 } else { //support for -1
                     that.current(null);
                 }
@@ -1234,64 +1260,29 @@ var __meta__ = {
             }
         },
 
-		_deselect: function(element) {
-			var selectedItems = this._selectedItems;
-			var selectable = this.options.selectable;	
+        _deselect: function(element) {
+            var selectedItems = this._selectedItems;
+            var selectable = this.options.selectable;
 
-			// single selection
-			if (selectable === true) {
-				for (var idx = 0; idx < selectedItems.length; idx++) {
-					selectedItems[idx].removeClass("k-state-selected");
-				}
-
-				this._selectedItems = [];
-			} else if (selectable === "multiple" && element) {
-				for (var idx = 0; idx < selectedItems.length; idx++) {
-					if (selectedItems[idx][0] === element[0]) {
-						selectedItems[idx].removeClass("k-state-selected");
-						selectedItems.splice(idx, 1);
-						break;
-					}
-				}
-			}
-		},
-        //
-
-        //should remove as it does not require those fields
-        /*_data: function() {
-            var that = this;
-            var options = that.options;
-            var optionLabel = options.optionLabel;
-            var textField = options.dataTextField;
-            var valueField = options.dataValueField;
-            var data = that.dataSource.view();
-            var length = data.length;
-            var first = optionLabel;
-            var idx = 0;
-
-            if (optionLabel && length) {
-                if (typeof optionLabel === "object") {
-                    first = optionLabel;
-                } else if (textField) {
-                    first = {};
-
-                    textField = textField.split(".");
-                    valueField = valueField.split(".");
-
-                    assign(first, valueField, "");
-                    assign(first, textField, optionLabel);
+            // single selection
+            if (selectable === true) {
+                for (var idx = 0; idx < selectedItems.length; idx++) {
+                    selectedItems[idx].removeClass("k-state-selected");
                 }
 
-                first = new kendo.data.ObservableArray([first]);
-
-                for (; idx < length; idx++) {
-                    first.push(data[idx]);
+                this._selectedItems = [];
+            } else if (selectable === "multiple" && element) {
+                for (var idx = 0; idx < selectedItems.length; idx++) {
+                    if (selectedItems[idx][0] === element[0]) {
+                        selectedItems[idx].removeClass("k-state-selected");
+                        selectedItems.splice(idx, 1);
+                        break;
+                    }
                 }
-                data = first;
+
+                return true;
             }
-
-            return data;
-        },*/
+        },
 
         _template: function() {
             var that = this;
@@ -1328,10 +1319,13 @@ var __meta__ = {
             this.templates = templates;
         },
 
-        _renderItem: function(context) {
-            var item = '<li tabindex="-1" role="option" unselectable="on" class="k-item"';
+        _renderItem: function(context, values) {
+            var item = '<li tabindex="-1" role="option" unselectable="on" class="k-item';
+            var found = this._find(context.item, values);
 
-            item += ' data-offset-index=' + context.index + '">';
+            item += found ? ' k-state-selected"' : '"';
+
+            item += ' data-index="' + context.index + '">';
             item += this.templates.template(context.item);
 
             if (context.group) {
@@ -1350,6 +1344,7 @@ var __meta__ = {
             var context;
             var dataContext = [];
             var view = this.dataSource.view();
+            var values = this._values.slice(0);
 
             if (!!this.dataSource.group().length) {
                 for (var i = 0; i < view.length; i++) {
@@ -1360,7 +1355,7 @@ var __meta__ = {
                         dataContext[idx] = context;
                         idx += 1;
 
-                        html += this._renderItem(context);
+                        html += this._renderItem(context, values);
                     }
                 }
                 //grouped
@@ -1370,7 +1365,7 @@ var __meta__ = {
 
                     dataContext[i] = context;
 
-                    html += this._renderItem(context);
+                    html += this._renderItem(context, values);
                 }
             }
 

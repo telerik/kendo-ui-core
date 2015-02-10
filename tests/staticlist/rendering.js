@@ -24,11 +24,17 @@
 
         list.dataSource.read();
 
-        equal(element.html(), '<li tabindex="-1" role="option" unselectable="on" class="k-item">foo</li>');
-    });
-    return;
+        var li = element.children(":first");
 
-    test("kendoStaticList renders a CSS class if item is selected", function() {
+        equal(li.html(), "foo");
+        equal(li.attr("tabindex"), -1);
+        equal(li.attr("role"), "option");
+        equal(li.attr("unselectable"), "on");
+        equal(li.attr("class"), "k-item");
+        equal(li.attr("data-index"), 0);
+    });
+
+    test("kendoStaticList renders selected class if item is selected", function() {
         var list = new StaticList(element, {
             dataSource: ["item"],
             value: ["item"],
@@ -37,7 +43,46 @@
 
         list.dataSource.read();
 
-        equal(element.html(), '<li class="k-state-selected">item</li>');
+        var li = element.children(":first");
+
+        equal(li.attr("class"), "k-item k-state-selected");
+    });
+
+    test("kendoStaticList renders multiple selected class if multiple items are selected", function() {
+        var list = new StaticList(element, {
+            dataSource: ["item1", "item2", "item3"],
+            value: ["item1", "item3"],
+            template: '#:data#'
+        });
+
+        list.dataSource.read();
+
+        var children = element.children();
+
+        equal(children.eq(0).attr("class"), "k-item k-state-selected");
+        equal(children.eq(1).attr("class"), "k-item");
+        equal(children.eq(2).attr("class"), "k-item k-state-selected");
+    });
+
+    test("kendoStaticList renders selected item when object is complex", function() {
+        var list = new StaticList(element, {
+            dataValueField: "name",
+            dataSource: [
+                { name: "item1" },
+                { name: "item2" },
+                { name: "item3" }
+            ],
+            value: ["item1", "item3"],
+            template: '#:data#'
+        });
+
+        list.dataSource.read();
+
+        var children = element.children();
+
+        equal(children.eq(0).attr("class"), "k-item k-state-selected");
+        equal(children.eq(1).attr("class"), "k-item");
+        equal(children.eq(2).attr("class"), "k-item k-state-selected");
     });
 
 })();

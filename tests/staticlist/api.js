@@ -24,7 +24,7 @@
     test("setDataSource method overrides current data source", function() {
         var list = new StaticList(element, {
             dataSource: ["item"],
-            template: "<li>#:data#</li>"
+            template: "#:data#"
         });
 
         list.setDataSource(["1", "2"]);
@@ -36,16 +36,16 @@
 
     test("setOptions re-create templates", function() {
         var list = new StaticList(element, {
-            template: "<li>#:data#</li>"
+            template: "#:data#"
         });
 
         list.setOptions({
             dataSource: ["item"],
-            template: "<li>new #:data#</li>"
+            template: "new #:data#"
         });
 
         list.dataSource.read();
 
-        equal(element.html(), "<li>new item</li>");
+        equal(element.children(":first").html(), "new item");
     });
 })();
