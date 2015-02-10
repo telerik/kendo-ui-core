@@ -147,6 +147,10 @@ var __meta__ = {
             copyAnchorStyles: true,
             autosize: false,
             modal: false,
+            adjustSize: {
+                width: 0,
+                height: 0
+            },
             animation: {
                 open: {
                     effects: "slideIn:down",
@@ -516,14 +520,15 @@ var __meta__ = {
             }
 
             var offsets = extend({}, offset),
-                location = extend({}, pos);
+                location = extend({}, pos),
+                adjustSize = options.adjustSize;
 
             if (collisions[0] === "fit") {
-                location.top += that._fit(offsets.top, wrapper.outerHeight(), viewportHeight / zoomLevel);
+                location.top += that._fit(offsets.top, wrapper.outerHeight() + adjustSize.height, viewportHeight / zoomLevel);
             }
 
             if (collisions[1] === "fit") {
-                location.left += that._fit(offsets.left, wrapper.outerWidth(), viewportWidth / zoomLevel);
+                location.left += that._fit(offsets.left, wrapper.outerWidth() + adjustSize.width, viewportWidth / zoomLevel);
             }
 
             var flipPos = extend({}, location);
