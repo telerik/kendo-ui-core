@@ -305,7 +305,7 @@ $.extend(true, kendo.ui.Upload.prototype.options.localization,{
   "statusUploaded": "hochgeladet",
   "statusUploading": "hochladen",
   "uploadSelectedFiles": "Dateien hochladen",
-  "headerStatusUploaded": "Done",
+  "headerStatusUploaded": "Abgeschlossen",
   "headerStatusUploading": "Hochladen..."
 });
 }
