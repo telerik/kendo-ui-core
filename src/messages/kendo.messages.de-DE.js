@@ -358,8 +358,8 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "workWeek": "Work Week"
   },
   "deleteWindowTitle": "Termin löschen",
-  "showFullDay": "Zeigen ganztags",
-  "showWorkDay": "Zeigen Geschäftszeiten"
+  "showFullDay": "Ganzen Tag anzeigen",
+  "showWorkDay": "Geschäftszeiten anzeigen"
 });
 }
 
