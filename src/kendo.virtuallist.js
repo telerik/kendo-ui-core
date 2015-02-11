@@ -188,7 +188,6 @@ var __meta__ = {
             oppositeBuffer: 1,
             type: "flat",
             selectable: false,
-            navigatable: false,
             value: [],
             dataValueField: null,
             template: "#:data#",
