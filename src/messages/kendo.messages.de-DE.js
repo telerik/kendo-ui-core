@@ -297,7 +297,7 @@ if (kendo.ui.Upload) {
 kendo.ui.Upload.prototype.options.localization =
 $.extend(true, kendo.ui.Upload.prototype.options.localization,{
   "cancel": "Beenden",
-  "dropFilesHere": "Dateien hier fallen lassen zum hochladen",
+  "dropFilesHere": "Dateien hier fallen lassen zum Hochladen",
   "remove": "Löschen",
   "retry": "Wiederholen",
   "select": "Wählen Sie...",
