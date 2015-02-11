@@ -547,7 +547,7 @@ var __meta__ = {
 
                         result = flatGroups[rangeStart][index - rangeStart];
                     } else { //flat list
-                        result = dataSource.at(index - rangeStart);
+                        result = dataSource.view()[index - rangeStart];
                     }
 
                     return result;
