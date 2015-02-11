@@ -1328,7 +1328,7 @@ var __meta__ = {
             item += ' data-index="' + context.index + '">';
             item += this.templates.template(context.item);
 
-            if (context.group) {
+            if (context.newGroup) {
                 item += '<div class="k-group">' + this.templates.groupTemplate(context.group) + '</div>';
             }
 
@@ -1349,13 +1349,15 @@ var __meta__ = {
             if (!!this.dataSource.group().length) {
                 for (var i = 0; i < view.length; i++) {
                     var group = view[i];
+                    var newGroup = true;
 
                     for (var j = 0; j < group.items.length; j++) {
-                        context = { item: group.items[i], group: group.value, index: idx };
+                        context = { item: group.items[j], group: group.value, newGroup: newGroup, index: idx };
                         dataContext[idx] = context;
                         idx += 1;
 
                         html += this._renderItem(context, values);
+                        newGroup = false;
                     }
                 }
                 //grouped
