@@ -1111,7 +1111,7 @@ var __meta__ = {
         options: {
             dataValueField: null,
             name: "StaticList",
-            selectable: "multiple", //true, //true|false|multiple
+            selectable: true, //true, //true|false|multiple
             template: null
         },
 
@@ -1228,35 +1228,31 @@ var __meta__ = {
             this.current(li);
         },
 
-        //should work with indexes; select bulk of indexes
-        //
-        //1: keep selected DOM elements. Thus we can de-select them based on selectable option
-        //
-        select: function(li) {
+        select: function(candidate) {
+            var deselected = false;
             var that = this;
             var idx;
 
-            if (li && li[0]) {
-                if (this._deselect(li.hasClass("k-state-selected") ? li : null)) {
-                    return;
-                }
+            if (typeof candidate === "number") {
+                idx = candidate;
+                candidate = $(this.element[0].children[candidate]);
+            } else {
+                candidate = $(candidate);
+                idx = inArray(candidate[0], that.element[0]);
+            }
 
-                idx = inArray(li[0], that.element[0]);
+            deselected = this._deselect(candidate);
+
+            if (!deselected && candidate[0]) {
                 that.selectedIndex = idx;
 
-                if (idx > -1) {
-                    if (li !== that._current) {
-                        that.current(li);
-                    }
-
-                    li.addClass("k-state-selected").attr("aria-selected", true);
-
-                    this._selectedItems.push(li);
-                } else { //support for -1
-                    that.current(null);
+                if (candidate !== that._current) {
+                    that.current(candidate);
                 }
 
-                this.trigger("select"); //Could be 'change' ???
+                candidate.addClass("k-state-selected").attr("aria-selected", true);
+
+                this._selectedItems.push(candidate);
             }
         },
 
@@ -1271,7 +1267,7 @@ var __meta__ = {
                 }
 
                 this._selectedItems = [];
-            } else if (selectable === "multiple" && element) {
+            } else if (selectable === "multiple" && element.hasClass("k-state-selected")) {
                 for (var idx = 0; idx < selectedItems.length; idx++) {
                     if (selectedItems[idx][0] === element[0]) {
                         selectedItems[idx].removeClass("k-state-selected");
