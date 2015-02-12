@@ -73,7 +73,8 @@
 
     asyncTest("sets the height of the heightContainer", 1, function() {
         var virtualList = new VirtualList(container, {
-            dataSource: asyncDataSource
+            dataSource: asyncDataSource,
+            itemHeight: 40
         });
         
         setTimeout(function() {
@@ -419,7 +420,8 @@
 
     asyncTest("updates the uid of the item placeholders after list position changes", function() {
         var virtualList = new VirtualList(container, {
-            dataSource: asyncDataSource
+            dataSource: asyncDataSource,
+            itemHeight: 40
         });
 
         setTimeout(function() {
@@ -483,7 +485,8 @@
         });
 
         var virtualList = new VirtualList(container, {
-            dataSource: dataSource
+            dataSource: dataSource,
+            itemHeight: 40
         });
         
         //height is dataSource.total() * itemHeight

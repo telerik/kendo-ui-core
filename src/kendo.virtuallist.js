@@ -18,8 +18,10 @@ var __meta__ = {
 
         VIRTUALLIST = "k-virtual-list",
         CONTENT = "k-virtual-content",
+        LIST = "k-list",
         HEADER = "k-virtual-header",
         VIRTUALITEM = "k-virtual-item",
+        ITEM = "k-item",
         HEIGHTCONTAINER = "k-height-container",
         GROUPITEM = "k-group",
 
@@ -42,6 +44,21 @@ var __meta__ = {
         parent.appendChild(element);
 
         return element;
+    }
+
+    function getDefaultItemHeight() {
+        var mockList = $('<div class="k-popup"><ul class="k-list"><li class="k-item"><li></ul></div>'),
+            lineHeight;
+        mockList.css({
+            position: "absolute",
+            left: "-200000px",
+            visibility: "hidden"
+        });
+        mockList.appendTo(document.body);
+        lineHeight = parseFloat(kendo.getComputedStyles(mockList.find(".k-item")[0], ["line-height"])["line-height"]);
+        mockList.remove();
+
+        return lineHeight;
     }
 
     function bufferSizes(screenHeight, listScreens, opposite) { //in pixels
@@ -152,11 +169,15 @@ var __meta__ = {
             element = that.element;
             element.addClass(VIRTUALLIST);
 
+            if (!that.options.itemHeight) {
+                that.options.itemHeight = getDefaultItemHeight();
+            }
+
             options = that.options;
 
             that.wrapper = element;
             that.header = appendChild(element[0], HEADER);
-            that.content = appendChild(element[0], CONTENT, "ul");
+            that.content = appendChild(element[0], CONTENT + " " + LIST, "ul");
 
             that._value = that.options.value instanceof Array ? that.options.value : [that.options.value];
             that._selectedDataItems = [];
@@ -184,7 +205,7 @@ var __meta__ = {
             height: null,
             listScreens: 4,
             threshold: 0.5,
-            itemHeight: 40,
+            itemHeight: null,
             oppositeBuffer: 1,
             type: "flat",
             selectable: false,
@@ -437,7 +458,7 @@ var __meta__ = {
             var items = [];
 
             while(count-- > 0) {
-                items.push(appendChild(element, VIRTUALITEM, "li"));
+                items.push(appendChild(element, VIRTUALITEM + " " + ITEM, "li"));
             }
 
             return items;

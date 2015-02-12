@@ -59,6 +59,7 @@
     asyncTest("scrollTo methods scrolls to a given height", 3, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
+            itemHeight: 40,
             template: "#=text#",
             dataValueField: "value"
         });
@@ -80,6 +81,7 @@
     asyncTest("scrollToIndex methods scrolls to a given record by index", 3, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
+            itemHeight: 40,
             template: "#=text#",
             dataValueField: "value"
         });

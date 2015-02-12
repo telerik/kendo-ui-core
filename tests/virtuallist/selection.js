@@ -554,6 +554,7 @@
     asyncTest("selection is persisted accross ranges", 2, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
+            itemHeight: 40,
             template: "#=text#",
             dataValueField: "value",
             selectable: true
