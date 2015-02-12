@@ -49,6 +49,33 @@
         equal(element.children(":first").html(), "new item");
     });
 
+    test("dataItems method returns list of the selected items", function() {
+        var list = new StaticList(element, {
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "b" },
+                    { name: "item3", type: "a" }
+                ],
+                group: "type"
+            },
+            template: '#:data.name#',
+            groupTemplate: '#:data#',
+            selectable: "multiple"
+        });
+
+        list.dataSource.read();
+
+        list.select(0);
+        list.select(2);
+
+        var dataItems = list.dataItems();
+
+        equal(dataItems.length, 2);
+        equal(dataItems[0], list.dataSource.view()[0].items[0]);
+        equal(dataItems[1], list.dataSource.view()[1].items[0]);
+    });
     test("focus method focuses li element", function() {
         var list = new StaticList(element, {
             dataSource: ["item1", "item2", "item3"],
@@ -300,5 +327,139 @@
         equal(children.eq(0).attr("class"), "k-item");
         equal(children.eq(1).attr("class"), "k-item k-state-focused k-state-selected");
         equal(children.eq(2).attr("class"), "k-item");
+    });
+
+    test("select method works with grouped data source", function() {
+        var list = new StaticList(element, {
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "a" },
+                    { name: "item3", type: "b" }
+                ],
+                group: "type"
+            },
+            template: '#:data.name#',
+            groupTemplate: '#:data#'
+        });
+
+        list.dataSource.read();
+
+        var children = element.children();
+
+        list.select(1);
+
+        equal(children.eq(0).attr("class"), "k-item");
+        equal(children.eq(1).attr("class"), "k-item k-state-focused k-state-selected");
+        equal(children.eq(2).attr("class"), "k-item");
+    });
+
+    test("select method sets selected data items", function() {
+        var list = new StaticList(element, {
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "b" },
+                    { name: "item3", type: "a" }
+                ],
+                group: "type"
+            },
+            template: '#:data.name#',
+            groupTemplate: '#:data#'
+        });
+
+        list.dataSource.read();
+
+        list.select(1);
+
+        var dataItems = list.dataItems();
+
+        equal(dataItems.length, 1);
+        equal(dataItems[0], list.dataSource.view()[0].items[1]);
+    });
+
+    test("select method sets selected data items when multiple elements are selected", function() {
+        var list = new StaticList(element, {
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "b" },
+                    { name: "item3", type: "a" }
+                ],
+                group: "type"
+            },
+            template: '#:data.name#',
+            groupTemplate: '#:data#',
+            selectable: "multiple"
+        });
+
+        list.dataSource.read();
+
+        list.select(1);
+        list.select(0);
+
+        var dataItems = list.dataItems();
+
+        equal(dataItems.length, 2);
+        equal(dataItems[0], list.dataSource.view()[0].items[1]);
+        equal(dataItems[1], list.dataSource.view()[0].items[0]);
+    });
+
+    test("select method removes dataItems on deselect", function() {
+        var list = new StaticList(element, {
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "b" },
+                    { name: "item3", type: "a" }
+                ],
+                group: "type"
+            },
+            template: '#:data.name#',
+            groupTemplate: '#:data#',
+            selectable: "multiple"
+        });
+
+        list.dataSource.read();
+
+        list.select(0);
+        list.select(1);
+
+        list.select(0);
+        list.select(1);
+
+        var dataItems = list.dataItems();
+
+        equal(dataItems.length, 0);
+    });
+
+    test("select method removes dataItems in single mode selection", function() {
+        var list = new StaticList(element, {
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "b" },
+                    { name: "item3", type: "a" }
+                ],
+                group: "type"
+            },
+            template: '#:data.name#',
+            groupTemplate: '#:data#'
+        });
+
+        list.dataSource.read();
+
+        list.select(0);
+        list.select(1);
+
+        var dataItems = list.dataItems();
+
+        equal(dataItems.length, 1);
+        equal(dataItems[0], list.dataSource.view()[0].items[1]);
     });
 })();

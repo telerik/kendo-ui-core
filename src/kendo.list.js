@@ -1076,7 +1076,10 @@ var __meta__ = {
             this.setDataSource(this.options.dataSource);
 
             this._optionID = kendo.guid();
+
             this._selectedItems = [];
+
+            this._dataItems = [];
             this._values = [];
 
             this._getter();
@@ -1219,7 +1222,10 @@ var __meta__ = {
             }
         },
 
-        //should work with index!
+        dataItems: function() {
+            return this._dataItems.slice();
+        },
+
         focus: function(candidate) {
             if (typeof candidate === "number") {
                 candidate = $(this.element[0].children[candidate]);
@@ -1255,10 +1261,12 @@ var __meta__ = {
                 candidate.addClass("k-state-selected").attr("aria-selected", true);
 
                 this._selectedItems.push(candidate);
+                this._dataItems.push(this._dataContext[idx].item);
             }
         },
 
         _deselect: function(element) {
+            var dataItems = this._dataItems;
             var selectedItems = this._selectedItems;
             var selectable = this.options.selectable;
 
@@ -1268,12 +1276,14 @@ var __meta__ = {
                     selectedItems[idx].removeClass("k-state-selected");
                 }
 
+                this._dataItems = [];
                 this._selectedItems = [];
             } else if (selectable === "multiple" && element.hasClass("k-state-selected")) {
                 for (var idx = 0; idx < selectedItems.length; idx++) {
                     if (selectedItems[idx][0] === element[0]) {
                         selectedItems[idx].removeClass("k-state-selected");
                         selectedItems.splice(idx, 1);
+                        dataItems.splice(idx, 1);
                         break;
                     }
                 }
