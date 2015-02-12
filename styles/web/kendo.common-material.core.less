@@ -143,23 +143,41 @@
 }
 
 .k-pager-numbers .k-state-selected {
-    line-height: 2em;
+    line-height: 2.429em;;
     cursor: pointer;
 }
 
 .k-pager-numbers .k-link,
 .k-pager-numbers .k-state-selected {
     border-width: 2px 0 0;
+    padding-top: .7em;
 }
 
 .k-pager-wrap {
-    padding: 0;
+    line-height: 1.286em;
+    padding: .429em 0 .429em .25em;
+}
+
+.k-pager-wrap > .k-link,
+.k-pager-numbers .k-link {
+    height: 2.429em;
+    line-height: 2.429em;
 }
 
 .k-pager-wrap .k-link,
-.k-pager-wrap .k-pager-numbers .k-state-selected,
-.k-pager-sizes{
-    padding: .571em 0 .571em 0.250em;
+.k-pager-sizes {
+    padding: 0;
+    min-width: 2.429em;
+}
+
+.k-pager-wrap .k-pager-numbers .k-state-selected {
+    margin-top: -.4em;
+    padding-top: .4em;
+    min-width: 2.429em;
+}
+
+.k-pager-wrap input.k-textbox {
+    height: 2.571em;
 }
 
 .k-pager-info {
