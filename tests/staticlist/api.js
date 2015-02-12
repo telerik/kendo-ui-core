@@ -49,13 +49,101 @@
         equal(element.children(":first").html(), "new item");
     });
 
-    //cases:
-    //select by index
-    //select by [indexes]
-    //select by item or list of items
-    //select should support different selectable options
-    //
-    //deselect (same as select)
+    test("focus method focuses li element", function() {
+        var list = new StaticList(element, {
+            dataSource: ["item1", "item2", "item3"],
+            template: "#:data#"
+        });
+
+        list.dataSource.read();
+
+        var children = element.children();
+
+        list.focus(children.eq(1));
+
+        equal(children.eq(0).attr("class"), "k-item");
+        equal(children.eq(1).attr("class"), "k-item k-state-focused");
+        equal(children.eq(2).attr("class"), "k-item");
+    });
+
+    test("focus method focuses by index", function() {
+        var list = new StaticList(element, {
+            dataSource: ["item1", "item2", "item3"],
+            template: "#:data#"
+        });
+
+        list.dataSource.read();
+
+        var children = element.children();
+
+        list.focus(1);
+
+        equal(children.eq(0).attr("class"), "k-item");
+        equal(children.eq(1).attr("class"), "k-item k-state-focused");
+        equal(children.eq(2).attr("class"), "k-item");
+    });
+
+    test("focus method clears focus if index is -1", function() {
+        var list = new StaticList(element, {
+            dataSource: ["item1", "item2", "item3"],
+            template: "#:data#"
+        });
+
+        list.dataSource.read();
+
+        var children = element.children();
+
+        list.focus(1);
+        list.focus(-1);
+
+        equal(children.eq(0).attr("class"), "k-item");
+        equal(children.eq(1).attr("class"), "k-item");
+        equal(children.eq(2).attr("class"), "k-item");
+    });
+
+    test("select an item by element", function() {
+        var list = new StaticList(element, {
+            template: "#:data#"
+        });
+
+        list.setOptions({
+            dataSource: ["item1", "item2", "item3"],
+            template: "new #:data#"
+        });
+
+        list.dataSource.read();
+
+        var children = element.children();
+
+        list.select(children.eq(1));
+
+
+        equal(children.eq(0).attr("class"), "k-item");
+        equal(children.eq(1).attr("class"), "k-item k-state-focused k-state-selected");
+        equal(children.eq(2).attr("class"), "k-item");
+    });
+
+    test("select an item by element", function() {
+        var list = new StaticList(element, {
+            template: "#:data#"
+        });
+
+        list.setOptions({
+            dataSource: ["item1", "item2", "item3"],
+            template: "new #:data#"
+        });
+
+        list.dataSource.read();
+
+        var children = element.children();
+
+        list.select(children.eq(1));
+
+
+        equal(children.eq(0).attr("class"), "k-item");
+        equal(children.eq(1).attr("class"), "k-item k-state-focused k-state-selected");
+        equal(children.eq(2).attr("class"), "k-item");
+    });
 
     test("select an item by element", function() {
         var list = new StaticList(element, {

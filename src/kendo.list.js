@@ -1220,12 +1220,14 @@ var __meta__ = {
         },
 
         //should work with index!
-        focus: function(li) {
-            if (this.trigger("focus", {item: li})) {
-                return;
+        focus: function(candidate) {
+            if (typeof candidate === "number") {
+                candidate = $(this.element[0].children[candidate]);
             }
 
-            this.current(li);
+            candidate = $(candidate);
+
+            this.current(candidate);
         },
 
         select: function(candidate) {
