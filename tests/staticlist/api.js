@@ -462,4 +462,102 @@
         equal(dataItems.length, 1);
         equal(dataItems[0], list.dataSource.view()[0].items[1]);
     });
+
+    test("next method focuses first item if no items are focused", function() {
+        var list = new StaticList(element, {
+            dataSource: ["item1", "item2", "item3"],
+            template: "#:data#"
+        });
+
+        list.dataSource.read();
+        list.next();
+
+        var children = element.children();
+
+        equal(children.eq(0).attr("class"), "k-item k-state-focused");
+        equal(children.eq(1).attr("class"), "k-item");
+        equal(children.eq(2).attr("class"), "k-item");
+    });
+
+    test("next method focuses next item", function() {
+        var list = new StaticList(element, {
+            dataSource: ["item1", "item2", "item3"],
+            template: "#:data#"
+        });
+
+        list.dataSource.read();
+        list.focus(0);
+        list.next();
+
+        var children = element.children();
+
+        equal(children.eq(0).attr("class"), "k-item");
+        equal(children.eq(1).attr("class"), "k-item k-state-focused");
+        equal(children.eq(2).attr("class"), "k-item");
+    });
+
+    test("prev method focuses last item if no items are focused", function() {
+        var list = new StaticList(element, {
+            dataSource: ["item1", "item2", "item3"],
+            template: "#:data#"
+        });
+
+        list.dataSource.read();
+        list.prev();
+
+        var children = element.children();
+
+        equal(children.eq(0).attr("class"), "k-item");
+        equal(children.eq(1).attr("class"), "k-item");
+        equal(children.eq(2).attr("class"), "k-item k-state-focused");
+    });
+
+    test("prev method focuses prev item", function() {
+        var list = new StaticList(element, {
+            dataSource: ["item1", "item2", "item3"],
+            template: "#:data#"
+        });
+
+        list.dataSource.read();
+        list.focus(2);
+        list.prev();
+
+        var children = element.children();
+
+        equal(children.eq(0).attr("class"), "k-item");
+        equal(children.eq(1).attr("class"), "k-item k-state-focused");
+        equal(children.eq(2).attr("class"), "k-item");
+    });
+
+    test("first method focuses first item", function() {
+        var list = new StaticList(element, {
+            dataSource: ["item1", "item2", "item3"],
+            template: "#:data#"
+        });
+
+        list.dataSource.read();
+        list.first();
+
+        var children = element.children();
+
+        equal(children.eq(0).attr("class"), "k-item k-state-focused");
+        equal(children.eq(1).attr("class"), "k-item");
+        equal(children.eq(2).attr("class"), "k-item");
+    });
+
+    test("last method focuses last item", function() {
+        var list = new StaticList(element, {
+            dataSource: ["item1", "item2", "item3"],
+            template: "#:data#"
+        });
+
+        list.dataSource.read();
+        list.last();
+
+        var children = element.children();
+
+        equal(children.eq(0).attr("class"), "k-item");
+        equal(children.eq(1).attr("class"), "k-item");
+        equal(children.eq(2).attr("class"), "k-item k-state-focused");
+    });
 })();

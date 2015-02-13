@@ -1226,6 +1226,38 @@ var __meta__ = {
             return this._dataItems.slice();
         },
 
+        next: function() {
+            var current = this.current();
+
+            if (!current) {
+                current = $(this.element[0].children[0]);
+            } else {
+                current = current.next();
+            }
+
+            this.current(current);
+        },
+
+        prev: function() {
+            var current = this.current();
+
+            if (!current) {
+                current = $(this.element[0].children[this.element[0].children.length - 1]);
+            } else {
+                current = current.prev();
+            }
+
+            this.current(current);
+        },
+
+        first: function() {
+            this.focus(this.element[0].children[0]);
+        },
+
+        last: function() {
+            this.focus(this.element[0].children[this.element[0].children.length - 1]);
+        },
+
         focus: function(candidate) {
             if (typeof candidate === "number") {
                 candidate = $(this.element[0].children[candidate]);
