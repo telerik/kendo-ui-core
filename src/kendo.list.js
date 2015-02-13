@@ -1077,7 +1077,7 @@ var __meta__ = {
 
             this._optionID = kendo.guid();
 
-            this._selectedItems = [];
+            this._selectedIndices = [];
 
             this._dataItems = [];
             this._values = [];
@@ -1260,29 +1260,32 @@ var __meta__ = {
 
                 candidate.addClass("k-state-selected").attr("aria-selected", true);
 
-                this._selectedItems.push(candidate);
+                this._selectedIndices.push(idx);
                 this._dataItems.push(this._dataContext[idx].item);
             }
         },
 
         _deselect: function(element) {
             var dataItems = this._dataItems;
-            var selectedItems = this._selectedItems;
+            var selectedIndices = this._selectedIndices;
             var selectable = this.options.selectable;
+            var selectedItem;
 
             // single selection
             if (selectable === true) {
-                for (var idx = 0; idx < selectedItems.length; idx++) {
-                    selectedItems[idx].removeClass("k-state-selected");
+                for (var idx = 0; idx < selectedIndices.length; idx++) {
+                    $(this.element[0].children[selectedIndices[idx]]).removeClass("k-state-selected");
                 }
 
                 this._dataItems = [];
-                this._selectedItems = [];
+                this._selectedIndices = [];
             } else if (selectable === "multiple" && element.hasClass("k-state-selected")) {
-                for (var idx = 0; idx < selectedItems.length; idx++) {
-                    if (selectedItems[idx][0] === element[0]) {
-                        selectedItems[idx].removeClass("k-state-selected");
-                        selectedItems.splice(idx, 1);
+                for (var idx = 0; idx < selectedIndices.length; idx++) {
+                    selectedItem = this.element[0].children[selectedIndices[idx]];
+
+                    if (selectedItem === element[0]) {
+                        $(selectedItem).removeClass("k-state-selected");
+                        selectedIndices.splice(idx, 1);
                         dataItems.splice(idx, 1);
                         break;
                     }
@@ -1331,9 +1334,14 @@ var __meta__ = {
             var item = '<li tabindex="-1" role="option" unselectable="on" class="k-item';
             var found = this._find(context.item, values);
 
-            item += found ? ' k-state-selected"' : '"';
+            if (found) {
+                item += ' k-state-selected';
 
-            item += ' data-index="' + context.index + '">';
+                this._dataItems.push(context.item);
+                this._selectedIndices.push(context.index);
+            }
+
+            item += '" data-index="' + context.index + '">';
             item += this.templates.template(context.item);
 
             if (context.newGroup) {
@@ -1353,6 +1361,9 @@ var __meta__ = {
             var dataContext = [];
             var view = this.dataSource.view();
             var values = this._values.slice(0);
+
+            this._dataItems = [];
+            this._selectedIndices = [];
 
             if (!!this.dataSource.group().length) {
                 for (var i = 0; i < view.length; i++) {

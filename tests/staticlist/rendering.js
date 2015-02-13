@@ -133,4 +133,57 @@
         equal(children.eq(1).attr("class"), "k-item");
         equal(children.eq(2).attr("class"), "k-item k-state-selected");
     });
+
+    test("kendoStaticList sets a data items collection during rendering", function() {
+        var list = new StaticList(element, {
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "a" },
+                    { name: "item3", type: "b" }
+                ],
+                group: "type"
+            },
+            value: ["item1", "item3"],
+            template: '#:data.name#',
+            groupTemplate: '#:data#'
+        });
+
+        list.dataSource.read();
+
+        var dataItems = list.dataItems();
+
+        equal(dataItems.length, 2);
+        equal(dataItems[0], list.dataSource.view()[0].items[0]);
+        equal(dataItems[1], list.dataSource.view()[1].items[0]);
+    });
+
+    test("kendoStaticList persists selected li elements during rendering", function() {
+        var list = new StaticList(element, {
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "a" },
+                    { name: "item3", type: "b" }
+                ],
+                group: "type"
+            },
+            value: ["item1", "item3"],
+            template: '#:data.name#',
+            groupTemplate: '#:data#'
+        });
+
+        list.dataSource.read();
+
+        //select only item checking whether the selected items are pesisted
+        list.select(1);
+
+        var children = element.children();
+
+        equal(children.eq(0).attr("class"), "k-item");
+        equal(children.eq(1).attr("class"), "k-item k-state-focused k-state-selected");
+        equal(children.eq(2).attr("class"), "k-item");
+    });
 })();
