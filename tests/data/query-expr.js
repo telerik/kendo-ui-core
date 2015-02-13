@@ -374,6 +374,52 @@ test("using function as operator", function() {
     }), "(__o[0](d, 0))");
 });
 
+test("using function as operator with string value", function() {
+    equal(compile({
+        logic: "and",
+        filters: [ { value: 'bar', operator: $.noop } ]
+    }), "(__o[0](d, 'bar'))");
+});
+
+test("using function as operator with string value that contains apostrophe", function() {
+    equal(compile({
+        logic: "and",
+        filters: [ { value: "b'ar", operator: $.noop } ]
+    }), "(__o[0](d, 'b\\'ar'))");
+});
+
+test("using function as operator with date value", function() {
+    var date = new Date();
+    equal(compile({
+        logic: "and",
+        filters: [ { value: date, operator: $.noop } ]
+    }), "(__o[0](d, new Date(" + date.getTime() + ")))");
+});
+
+test("using function as operator with boolean value", function() {
+    var date = new Date();
+    equal(compile({
+        logic: "and",
+        filters: [ { value: true, operator: $.noop } ]
+    }), "(__o[0](d, true))");
+});
+
+test("using function as operator with null value", function() {
+    var date = new Date();
+    equal(compile({
+        logic: "and",
+        filters: [ { value: null, operator: $.noop } ]
+    }), "(__o[0](d, null))");
+});
+
+test("using function as operator with undefined value", function() {
+    var date = new Date();
+    equal(compile({
+        logic: "and",
+        filters: [ { value: undefined, operator: $.noop } ]
+    }), "(__o[0](d, undefined))");
+});
+
 test("using function as operator and field", function() {
     equal(compile({
         logic: "and",

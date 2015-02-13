@@ -979,6 +979,17 @@ var __meta__ = {
         }
 
         return {
+            quote: function(value) {
+                if (value && value.getTime) {
+                    return "new Date(" + value.getTime() + ")";
+                }
+
+                if (typeof value == "string") {
+                    return "'" + quote(value) + "'";
+                }
+
+                return "" + value;
+            },
             eq: function(a, b, ignore) {
                 return operator("==", a, b, ignore);
             },
@@ -1102,7 +1113,7 @@ var __meta__ = {
                 }
 
                 if (typeof operator === FUNCTION) {
-                    filter = "__o[" + operatorFunctions.length + "](" + expr + ", " + filter.value + ")";
+                    filter = "__o[" + operatorFunctions.length + "](" + expr + ", " + operators.quote(filter.value) + ")";
                     operatorFunctions.push(operator);
                 } else {
                     filter = operators[(operator || "eq").toLowerCase()](expr, filter.value, filter.ignoreCase !== undefined? filter.ignoreCase : true);
