@@ -463,6 +463,85 @@
         equal(dataItems[0], list.dataSource.view()[0].items[1]);
     });
 
+    test("value method selects an item", function() {
+        var list = new StaticList(element, {
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "b" },
+                    { name: "item3", type: "a" }
+                ],
+                group: "type"
+            },
+            template: '#:data.name#',
+            groupTemplate: '#:data#'
+        });
+
+        list.dataSource.read();
+
+        list.value("item1");
+
+        var dataItems = list.dataItems();
+
+        equal(dataItems.length, 1);
+        equal(dataItems[0], list.dataSource.view()[0].items[0]);
+    });
+
+    test("value method selects multiple items", function() {
+        var list = new StaticList(element, {
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "b" },
+                    { name: "item3", type: "a" }
+                ],
+                group: "type"
+            },
+            template: '#:data.name#',
+            groupTemplate: '#:data#',
+            selectable: "multiple"
+        });
+
+        list.dataSource.read();
+
+        list.value(["item2", "item3"]);
+
+        var dataItems = list.dataItems();
+
+        equal(dataItems.length, 2);
+        equal(dataItems[0], list.dataSource.view()[0].items[1]);
+        equal(dataItems[1], list.dataSource.view()[1].items[0]);
+    });
+
+    test("value method sets selected values", function() {
+        var list = new StaticList(element, {
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "b" },
+                    { name: "item3", type: "a" }
+                ],
+                group: "type"
+            },
+            template: '#:data.name#',
+            groupTemplate: '#:data#',
+            selectable: "multiple"
+        });
+
+        list.value(["item2", "item3"]);
+
+        list.dataSource.read();
+
+        var dataItems = list.dataItems();
+
+        equal(dataItems.length, 2);
+        equal(dataItems[0], list.dataSource.view()[0].items[1]);
+        equal(dataItems[1], list.dataSource.view()[1].items[0]);
+    });
+
     test("next method focuses first item if no items are focused", function() {
         var list = new StaticList(element, {
             dataSource: ["item1", "item2", "item3"],

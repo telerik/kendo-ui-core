@@ -1079,6 +1079,7 @@ var __meta__ = {
 
             this._selectedIndices = [];
 
+            this._dataContext = [];
             this._dataItems = [];
             this._values = [];
 
@@ -1297,6 +1298,26 @@ var __meta__ = {
             }
         },
 
+        value: function(value) {
+            if (value === undefined) {
+                return this._values.slice(0);
+            }
+
+            value = $.isArray(value) ? value.slice(0) : [value];
+
+            this._values = value.slice(0);
+
+            for (var idx = 0; idx < this._dataContext.length; idx++) {
+                if (this._find(this._dataContext[idx].item, value)) {
+                    this.select(idx);
+                }
+
+                if (!value[0]) {
+                    break;
+                }
+            }
+        },
+
         _deselect: function(element) {
             var dataItems = this._dataItems;
             var selectedIndices = this._selectedIndices;
@@ -1392,7 +1413,7 @@ var __meta__ = {
             var context;
             var dataContext = [];
             var view = this.dataSource.view();
-            var values = this._values.slice(0);
+            var values = this.value();
 
             this._dataItems = [];
             this._selectedIndices = [];
