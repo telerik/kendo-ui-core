@@ -49,6 +49,30 @@
         equal(element.children(":first").html(), "new item");
     });
 
+    test("widget focuses last selected item during rendering", function() {
+        var list = new StaticList(element, {
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "b" },
+                    { name: "item3", type: "a" }
+                ],
+                group: "type"
+            },
+            template: '#:data.name#',
+            groupTemplate: '#:data#',
+            selectable: "multiple",
+            value: ["item1", "item3"]
+        });
+
+        list.dataSource.read();
+
+        var current = list.current();
+
+        equal(current[0], list.element[0].children[1]);
+    });
+
     test("dataItems method returns list of the selected items", function() {
         var list = new StaticList(element, {
             dataValueField: "name",
@@ -76,6 +100,7 @@
         equal(dataItems[0], list.dataSource.view()[0].items[0]);
         equal(dataItems[1], list.dataSource.view()[1].items[0]);
     });
+
     test("focus method focuses li element", function() {
         var list = new StaticList(element, {
             dataSource: ["item1", "item2", "item3"],

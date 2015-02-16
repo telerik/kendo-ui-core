@@ -1447,7 +1447,11 @@ var __meta__ = {
 
             this.element[0].innerHTML = html; //could be changed with DOM elements creation
 
-            this._angularItems("compile");
+            if (this._selectedIndices.length) {
+                this.focus(this._selectedIndices[this._selectedIndices.length - 1]);
+            }
+
+            //this._angularItems("compile");
 
             this.trigger("listBound");
         }

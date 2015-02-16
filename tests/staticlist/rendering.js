@@ -45,7 +45,7 @@
 
         var li = element.children(":first");
 
-        equal(li.attr("class"), "k-item k-state-selected");
+        equal(li.attr("class"), "k-item k-state-selected k-state-focused");
     });
 
     test("kendoStaticList renders multiple selected class if multiple items are selected", function() {
@@ -61,7 +61,7 @@
 
         equal(children.eq(0).attr("class"), "k-item k-state-selected");
         equal(children.eq(1).attr("class"), "k-item");
-        equal(children.eq(2).attr("class"), "k-item k-state-selected");
+        equal(children.eq(2).attr("class"), "k-item k-state-selected k-state-focused");
     });
 
     test("kendoStaticList renders selected item when object is complex", function() {
@@ -82,7 +82,7 @@
 
         equal(children.eq(0).attr("class"), "k-item k-state-selected");
         equal(children.eq(1).attr("class"), "k-item");
-        equal(children.eq(2).attr("class"), "k-item k-state-selected");
+        equal(children.eq(2).attr("class"), "k-item k-state-selected k-state-focused");
     });
 
     test("kendoStaticList renders grouped data source", function() {
@@ -131,7 +131,7 @@
 
         equal(children.eq(0).attr("class"), "k-item k-state-selected");
         equal(children.eq(1).attr("class"), "k-item");
-        equal(children.eq(2).attr("class"), "k-item k-state-selected");
+        equal(children.eq(2).attr("class"), "k-item k-state-selected k-state-focused");
     });
 
     test("kendoStaticList sets a data items collection during rendering", function() {
