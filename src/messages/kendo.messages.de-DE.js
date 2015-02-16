@@ -334,7 +334,7 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "timezoneEditorButton": "Zeitzone",
     "timezoneEditorTitle": "Zeitzonen",
     "title": "Titel",
-    "noTimezone": "No timezone"
+    "noTimezone": "Keine Zeitzone"
   },
   "event": "Termin",
   "recurrenceMessages": {
@@ -355,7 +355,7 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "day": "Tag",
     "month": "Monat",
     "week": "Woche",
-    "workWeek": "Work Week"
+    "workWeek": "Arbeitswoche"
   },
   "deleteWindowTitle": "Termin löschen",
   "showFullDay": "Ganzen Tag anzeigen",
