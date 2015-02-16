@@ -272,6 +272,16 @@ $.extend(true, kendo.ui.Groupable.prototype.options.messages,{
 });
 }
 
+/* NumericTextBox messages */
+
+if (kendo.ui.NumericTextBox) {
+kendo.ui.NumericTextBox.prototype.options =
+$.extend(true, kendo.ui.NumericTextBox.prototype.options,{
+  "upArrowText": "Wert erhöhen",
+  "downArrowText": "Wert verringern"
+});
+}
+
 /* Pager messages */
 
 if (kendo.ui.Pager) {
