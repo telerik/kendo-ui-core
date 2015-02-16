@@ -1120,7 +1120,6 @@ var __meta__ = {
         },
 
         events: [
-           "focus",
            "change",
            "listBound"
         ],
@@ -1295,6 +1294,8 @@ var __meta__ = {
 
                 this._selectedIndices.push(idx);
                 this._dataItems.push(this._dataContext[idx].item);
+
+                this.trigger("change");
             }
         },
 
