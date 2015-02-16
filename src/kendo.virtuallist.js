@@ -95,8 +95,12 @@ var __meta__ = {
     }
 
     function position(element, y) {
-        element.style.webkitTransform = 'translateY(' + y + "px)";
-        element.style.transform = 'translateY(' + y + "px)";
+        if (kendo.support.browser.msie && kendo.support.browser.version < 10) {
+            element.style.top = y + "px";
+        } else {
+            element.style.webkitTransform = 'translateY(' + y + "px)";
+            element.style.transform = 'translateY(' + y + "px)";
+        }
     }
 
     function map2(callback, templates) {
