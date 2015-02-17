@@ -727,6 +727,18 @@ test("checked binding binds checkbox by value to array", function() {
     ok(dom.is(":checked"));
 });
 
+test("checked binding binds checkbox by value to array", function() {
+    dom = $('<input type="checkbox" data-bind="value:val, checked:selectedItems"/>');
+
+    var viewModel = kendo.observable({
+        val: "foo",
+        selectedItems: ["foo"]
+    });
+
+    kendo.bind(dom, viewModel);
+    ok(dom.is(":checked"));
+});
+
 test("checked binding checkbox is not checked if value does not exists", function() {
     dom = $('<input type="checkbox" value="foo" data-bind="checked:selectedItems"/>');
 
