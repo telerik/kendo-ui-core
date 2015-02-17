@@ -1310,12 +1310,12 @@ var __meta__ = {
         },
 
         bind: function(bindings) {
-            var nodeName = this.target.nodeName.toLowerCase(),
-                key,
+            var key,
                 hasValue,
                 hasSource,
                 hasEvents,
-                specificBinders = binders[nodeName] || {};
+                hasChecked,
+                specificBinders = this.binders();
 
             for (key in bindings) {
                 if (key == VALUE) {
@@ -1324,6 +1324,8 @@ var __meta__ = {
                     hasSource = true;
                 } else if (key == EVENTS) {
                     hasEvents = true;
+                } else if (key == CHECKED) {
+                    hasChecked = true;
                 } else {
                     this.applyBinding(key, bindings, specificBinders);
                 }
@@ -1337,9 +1339,17 @@ var __meta__ = {
                 this.applyBinding(VALUE, bindings, specificBinders);
             }
 
+            if (hasChecked) {
+                this.applyBinding(CHECKED, bindings, specificBinders);
+            }
+
             if (hasEvents) {
                 this.applyBinding(EVENTS, bindings, specificBinders);
             }
+        },
+
+        binders: function() {
+            return binders[this.target.nodeName.toLowerCase()] || {};
         },
 
         applyBinding: function(name, bindings, specificBinders) {
@@ -1379,30 +1389,8 @@ var __meta__ = {
     });
 
     var WidgetBindingTarget = BindingTarget.extend( {
-        bind: function(bindings) {
-            var that = this,
-                binding,
-                hasValue = false,
-                hasSource = false,
-                specificBinders = binders.widget[that.target.options.name.toLowerCase()] || {};
-
-            for (binding in bindings) {
-                if (binding == VALUE) {
-                    hasValue = true;
-                } else if (binding == SOURCE) {
-                    hasSource = true;
-                } else {
-                    that.applyBinding(binding, bindings, specificBinders);
-                }
-            }
-
-            if (hasSource) {
-                that.applyBinding(SOURCE, bindings, specificBinders);
-            }
-
-            if (hasValue) {
-                that.applyBinding(VALUE, bindings, specificBinders);
-            }
+        binders: function() {
+            return binders.widget[this.target.options.name.toLowerCase()] || {};
         },
 
         applyBinding: function(name, bindings, specificBinders) {
