@@ -1234,8 +1234,18 @@ var __meta__ = {
             }
         },
 
-        dataItems: function() {
-            return this._dataItems.slice();
+        dataItems: function(dataItems) {
+            var getter = this._valueGetter;
+
+            if (dataItems === undefined) {
+                return this._dataItems.slice();
+            }
+
+            this._dataItems = dataItems;
+
+            this._values = $.map(dataItems, function(dataItem) {
+                return getter(dataItem);
+            });
         },
 
         next: function() {

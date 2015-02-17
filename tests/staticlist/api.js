@@ -101,6 +101,33 @@
         equal(dataItems[1], list.dataSource.view()[1].items[0]);
     });
 
+    test("dataItems method sets selected values", function() {
+        var data = [
+            { name: "item1", type: "a" },
+            { name: "item2", type: "b" },
+            { name: "item3", type: "a" }
+        ];
+
+        var list = new StaticList(element, {
+            dataValueField: "name",
+            dataSource: {
+                data: data,
+                group: "type"
+            },
+            template: '#:data.name#',
+            groupTemplate: '#:data#',
+            selectable: "multiple"
+        });
+
+        list.dataItems([data[0], data[2]]);
+
+        var values = list.value();
+
+        equal(values.length, 2);
+        equal(values[0], "item1");
+        equal(values[1], "item3");
+    });
+
     test("focus method focuses li element", function() {
         var list = new StaticList(element, {
             dataSource: ["item1", "item2", "item3"],
