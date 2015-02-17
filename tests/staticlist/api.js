@@ -488,6 +488,137 @@
         equal(dataItems[0], list.dataSource.view()[0].items[1]);
     });
 
+    test("select method sets selected values", function() {
+        var list = new StaticList(element, {
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "b" },
+                    { name: "item3", type: "a" }
+                ],
+                group: "type"
+            },
+            template: '#:data.name#',
+            groupTemplate: '#:data#'
+        });
+
+        list.dataSource.read();
+
+        list.select(1);
+
+        var values = list.value();
+
+        equal(values.length, 1);
+        equal(values[0], list.dataSource.view()[0].items[1].name);
+    });
+
+    test("select method deletes selected value on item unselect", function() {
+        var list = new StaticList(element, {
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "b" },
+                    { name: "item3", type: "a" }
+                ]
+            },
+            template: '#:data.name#',
+            value: ["item2"]
+        });
+
+        list.dataSource.read();
+
+        list.select(-1);
+
+        var values = list.value();
+
+        equal(values.length, 0);
+    });
+
+    test("select method sets selected values when multiple elements are selected", function() {
+        var list = new StaticList(element, {
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "b" },
+                    { name: "item3", type: "a" }
+                ],
+                group: "type"
+            },
+            template: '#:data.name#',
+            groupTemplate: '#:data#',
+            selectable: "multiple"
+        });
+
+        list.dataSource.read();
+
+        list.select(1);
+        list.select(0);
+
+        var values = list.value();
+
+        equal(values.length, 2);
+        equal(values[0], list.dataSource.view()[0].items[1].name);
+        equal(values[1], list.dataSource.view()[0].items[0].name);
+    });
+
+    test("select method removes values on deselect", function() {
+        var list = new StaticList(element, {
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "b" },
+                    { name: "item3", type: "a" }
+                ],
+                group: "type"
+            },
+            template: '#:data.name#',
+            groupTemplate: '#:data#',
+            selectable: "multiple"
+        });
+
+        list.dataSource.read();
+
+        list.select(0);
+        list.select(1);
+
+        list.select(0);
+        list.select(1);
+
+        var values = list.value();
+
+        equal(values.length, 0);
+    });
+
+    test("select method removes values in single mode selection", function() {
+        var list = new StaticList(element, {
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "b" },
+                    { name: "item3", type: "a" }
+                ],
+                group: "type"
+            },
+            template: '#:data.name#',
+            groupTemplate: '#:data#'
+        });
+
+        list.dataSource.read();
+
+        list.select(0);
+        list.select(1);
+
+        var value = list.value();
+
+        equal(value.length, 1);
+        equal(value[0], list.dataSource.view()[0].items[1].name);
+    });
+
     test("value method selects an item", function() {
         var list = new StaticList(element, {
             dataValueField: "name",

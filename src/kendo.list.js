@@ -607,12 +607,7 @@ var __meta__ = {
             if (li === undefined) {
                 return that.selectedIndex;
             } else {
-                /////
-                li = that._get(li);
-                that.listView.select(li);
-                that.selectedIndex = that.listView.selectedIndex;
-                //that._select(li);
-                //
+                this._select(li);
 
                 that._triggerCascade();
                 that._old = that._accessor();
@@ -1269,8 +1264,9 @@ var __meta__ = {
         },
 
         select: function(candidate) {
-            var deselected = false;
             var that = this;
+            var deselected = false;
+            var dataItem;
             var idx;
 
             if (typeof candidate === "number") {
@@ -1283,17 +1279,24 @@ var __meta__ = {
 
             deselected = this._deselect(candidate);
 
-            if (!deselected && candidate[0]) {
+            //Maybe is no needed
+            /*if (this.options.selectable !== "multiple" || idx > -1) {
                 that.selectedIndex = idx;
+            }*/
 
+            if (!deselected && candidate[0]) {
                 if (candidate !== that._current) {
                     that.current(candidate);
                 }
 
                 candidate.addClass("k-state-selected").attr("aria-selected", true);
 
+                dataItem = this._dataContext[idx].item;
+
                 this._selectedIndices.push(idx);
-                this._dataItems.push(this._dataContext[idx].item);
+                this._dataItems.push(dataItem);
+
+                this._values.push(this._valueGetter(dataItem));
 
                 this.trigger("change");
             }
@@ -1320,6 +1323,7 @@ var __meta__ = {
         },
 
         _deselect: function(element) {
+            var values = this._values;
             var dataItems = this._dataItems;
             var selectedIndices = this._selectedIndices;
             var selectable = this.options.selectable;
@@ -1331,6 +1335,7 @@ var __meta__ = {
                     $(this.element[0].children[selectedIndices[idx]]).removeClass("k-state-selected");
                 }
 
+                this._values = [];
                 this._dataItems = [];
                 this._selectedIndices = [];
             } else if (selectable === "multiple" && element.hasClass("k-state-selected")) {
@@ -1341,6 +1346,7 @@ var __meta__ = {
                         $(selectedItem).removeClass("k-state-selected");
                         selectedIndices.splice(idx, 1);
                         dataItems.splice(idx, 1);
+                        values.splice(idx, 1);
                         break;
                     }
                 }
@@ -1416,8 +1422,9 @@ var __meta__ = {
             var view = this.dataSource.view();
             var values = this.value();
 
-            this._dataItems = [];
-            this._selectedIndices = [];
+            //TODO: Do not do this, because filtering will break the case
+            //this._dataItems = [];
+            //this._selectedIndices = [];
 
             if (!!this.dataSource.group().length) {
                 for (var i = 0; i < view.length; i++) {
