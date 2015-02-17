@@ -186,4 +186,69 @@
         equal(children.eq(1).attr("class"), "k-item k-state-focused k-state-selected");
         equal(children.eq(2).attr("class"), "k-item");
     });
+
+    test("StaticList persists selected values on filter", function() {
+        var list = new StaticList(element, {
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "a" },
+                    { name: "item3", type: "b" }
+                ]
+            },
+            value: ["item1", "item3"],
+            template: '#:data.name#'
+        });
+
+        list.dataSource.read();
+
+        list.dataSource.filter({
+            field: "name",
+            operator: "eq",
+            value: "item2"
+        });
+
+        equal(list.dataSource.view().length, 1);
+
+        var dataItems = list.dataItems();
+        var values = list.value();
+
+        equal(dataItems.length, 2);
+        equal(values.length, 2);
+
+        equal(dataItems[0].name, values[0]);
+        equal(dataItems[1].name, values[1]);
+    });
+
+    test("StaticList does not add already selected data item", function() {
+        var list = new StaticList(element, {
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "a" },
+                    { name: "item3", type: "b" }
+                ]
+            },
+            value: ["item1", "item3"],
+            template: '#:data.name#'
+        });
+
+        list.dataSource.read();
+
+        list.dataSource.filter({
+            field: "name",
+            operator: "eq",
+            value: "item1"
+        });
+
+        equal(list.dataSource.view().length, 1);
+
+        var dataItems = list.dataItems();
+        var values = list.value();
+
+        equal(dataItems.length, 2);
+        equal(values.length, 2);
+    });
 })();

@@ -1107,6 +1107,23 @@ var __meta__ = {
             return found;
         },
 
+        _isNew: function(dataItem) {
+            var getter = this._valueGetter;
+            var isNew = true;
+            var idx = 0;
+
+            var value = getter(dataItem);
+
+            for (; idx < this._dataItems.length; idx++) {
+                if (getter(this._dataItems[idx]) === value) {
+                    isNew = false;
+                    break;
+                }
+            }
+
+            return isNew;
+        },
+
         options: {
             dataValueField: null,
             name: "StaticList",
@@ -1393,16 +1410,20 @@ var __meta__ = {
         _renderItem: function(context, values) {
             var item = '<li tabindex="-1" role="option" unselectable="on" class="k-item';
             var found = this._find(context.item, values);
+            var dataItem = context.item;
 
             if (found) {
                 item += ' k-state-selected';
 
-                this._dataItems.push(context.item);
+                if (this._isNew(dataItem)) {
+                    this._dataItems.push(dataItem);
+                }
+
                 this._selectedIndices.push(context.index);
             }
 
             item += '" data-index="' + context.index + '">';
-            item += this.templates.template(context.item);
+            item += this.templates.template(dataItem);
 
             if (context.newGroup) {
                 item += '<div class="k-group">' + this.templates.groupTemplate(context.group) + '</div>';
@@ -1412,7 +1433,7 @@ var __meta__ = {
         },
 
         refresh: function() {
-            this._angularItems("cleanup");
+            //this._angularItems("cleanup");
 
             var html = "";
 
@@ -1422,9 +1443,7 @@ var __meta__ = {
             var view = this.dataSource.view();
             var values = this.value();
 
-            //TODO: Do not do this, because filtering will break the case
-            //this._dataItems = [];
-            //this._selectedIndices = [];
+            this._selectedIndices = [];
 
             if (!!this.dataSource.group().length) {
                 for (var i = 0; i < view.length; i++) {
