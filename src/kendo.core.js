@@ -4014,8 +4014,8 @@ function pad(number, digits, end) {
 
     kendo.antiForgeryTokens = function() {
         var tokens = { },
-            csrf_token = $("meta[name=csrf-token]").attr("content"),
-            csrf_param = $("meta[name=csrf-param]").attr("content");
+            csrf_token = $("meta[name=csrf-token],meta[name=_csrf]").attr("content"),
+            csrf_param = $("meta[name=csrf-param],meta[name=_csrf_header]").attr("content");
 
         $("input[name^='__RequestVerificationToken']").each(function() {
             tokens[this.name] = this.value;
