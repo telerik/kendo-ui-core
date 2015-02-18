@@ -1,9 +1,13 @@
 /* Virtual List */
 
+.k-virtual-wrap {
+    position: relative;
+}
+
 .k-virtual-list {
     overflow-y: scroll; /* has to be scroll, not auto */
     -webkit-overflow-scrolling: touch;
-    position: absolute;
+    position: relative;
 }
 
 .k-virtual-list > .k-virtual-content {
@@ -15,11 +19,13 @@
     list-style-type: none;
 }
 
-.k-virtual-list > .k-virtual-header {
-    position: fixed;
-    z-index: 2;
-    top: 5px;
-    width: 80%;
+.k-virtual-wrap > .k-virtual-header {
+    border-bottom: 1px solid black;
+    text-align: right;
+}
+
+.k-popup .k-list .k-item.k-virtual-item {
+    /*padding: 1px 0;*/
 }
 
 .k-virtual-list .k-virtual-item {

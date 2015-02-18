@@ -16,6 +16,7 @@ var __meta__ = {
         Widget = ui.Widget,
         DataBoundWidget = ui.DataBoundWidget,
 
+        WRAPPER = "k-virtual-wrap",
         VIRTUALLIST = "k-virtual-list",
         CONTENT = "k-virtual-content",
         LIST = "k-list",
@@ -142,16 +143,17 @@ var __meta__ = {
         });
 
         element
-            .html(itemTemplate(data.item || {}))
             .attr("data-uid", data.item ? data.item.uid : "")
-            .attr("data-offset-index", data.index);
+            .attr("data-offset-index", data.index)
+            .find("." + ITEM)
+            .html(itemTemplate(data.item || {}));
 
         element.toggleClass(FOCUSED, data.current);
         element.toggleClass(SELECTED, data.selected);
 
         if (data.newGroup) {
             $("<div class=" + GROUPITEM + "></div>")
-                .appendTo(element)
+                .appendTo(element.find("." + ITEM))
                 .html(templates.groupTemplate({ group: data.group }));
         }
 
@@ -179,9 +181,9 @@ var __meta__ = {
 
             options = that.options;
 
-            that.wrapper = element;
-            that.header = appendChild(element[0], HEADER);
-            that.content = appendChild(element[0], CONTENT + " " + LIST, "ul");
+            that.wrapper = element.wrap("<div class='" + WRAPPER + "'></div>").parent();
+            that.header = element.before("<div class='" + HEADER + "'></div>").prev();
+            that.content = element.append("<ul class='" + CONTENT + " " + LIST + "'></ul>").find("." + CONTENT);
 
             that._value = that.options.value instanceof Array ? that.options.value : [that.options.value];
             that._selectedDataItems = [];
@@ -405,7 +407,7 @@ var __meta__ = {
         _clean: function() {
             this.result = undefined;
             this._lastScrollTop = undefined;
-            $(this.content).empty();
+            this.content.empty();
         },
 
         _screenHeight: function() {
@@ -459,10 +461,16 @@ var __meta__ = {
         },
 
         _generateItems: function(element, count) {
-            var items = [];
+            var items = [],
+                item = "<li class='" + VIRTUALITEM + "'></li>";
 
             while(count-- > 0) {
-                items.push(appendChild(element, VIRTUALITEM + " " + ITEM, "li"));
+                item = document.createElement("li");
+                item.className = VIRTUALITEM;
+                item.innerHTML = "<div class='" + ITEM + "'></div>";
+                element.appendChild(item);
+
+                items.push(item);
             }
 
             return items;
@@ -487,7 +495,7 @@ var __meta__ = {
             }
 
             that._templates();
-            that._items = that._generateItems(that.content, that.itemCount);
+            that._items = that._generateItems(that.content[0], that.itemCount);
 
             that._setHeight(options.itemHeight * dataSource.total());
             that.options.type = !!dataSource.group().length ? "group" : "flat";
@@ -590,8 +598,8 @@ var __meta__ = {
                 var firstVisibleGroup = firstVisibleDataItem.group;
 
                 if (firstVisibleGroup !== group) {
-                    this.header.innerHTML = "";
-                    appendChild(this.header, GROUPITEM).innerHTML = firstVisibleGroup;
+                    this.header[0].innerHTML = "";
+                    appendChild(this.header[0], GROUPITEM).innerHTML = firstVisibleGroup;
                     this.currentVisibleGroup = firstVisibleGroup;
                 }
             }

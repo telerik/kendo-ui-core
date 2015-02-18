@@ -212,12 +212,12 @@
 
             ok(items.find(".foo").length > 0);
             items.each(function(idx, element) {
-                equal(element.innerText, "Item " + idx);
+                equal(element.innerText.trim(), "Item " + idx);
             });
         }, 100);
     });
 
-    asyncTest("wraps the item template in div.k-virtual-item", function() {
+    asyncTest("wraps the item template in li.k-virtual-item > div.k-item", function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
             template: "<span class='foo'>#:text#</span>"
@@ -228,7 +228,7 @@
 
             var items = virtualList.element.find(".foo");
             items.each(function(idx, element) {
-                ok(items.eq(idx).parent().is(".k-virtual-item"));
+                ok(items.eq(idx).parent().is(".k-item") && items.eq(idx).parents(".k-virtual-item").length === 1);
             });
         }, 100);
     });
@@ -249,7 +249,7 @@
 
             ok(items.find(".foo").length > 0);
             items.each(function(idx, element) {
-                equal(element.innerText, "Item " + idx);
+                equal(element.innerText.trim(), "Item " + idx);
             });
         }, 100);
     });
@@ -285,7 +285,7 @@
         setTimeout(function() {
             start();
             scroll(container, 3 * CONTAINER_HEIGHT + 60);
-            equal(virtualList.items().last().html(), '<span class="foo">foo...</span>');
+            equal(virtualList.items().last().find(".k-item").html(), '<span class="foo">foo...</span>');
         }, 100)
     });
 
@@ -301,7 +301,7 @@
         setTimeout(function() {
             start();
             scroll(container, 3 * CONTAINER_HEIGHT + 60);
-            equal(virtualList.items().last().html(), '<span class="foo">foo...</span>');
+            equal(virtualList.items().last().find(".k-item").html(), '<span class="foo">foo...</span>');
         }, 100)
     });
 
@@ -324,7 +324,7 @@
             var lastScreenItems = $(virtualList.items().slice(-10));
 
             lastScreenItems.each(function(idx, element) {
-                equal(element.innerText, "loading data...");
+                equal(element.innerText.trim(), "loading data...");
             });
         }, 100);
     });

@@ -164,13 +164,13 @@
 
         setTimeout(function() {
             start();
-            equal(virtualList.items().first().html(), "Item 0");
+            equal(virtualList.items().first().text(), "Item 0");
 
             virtualList.setOptions({
                 template: "<span class='foo'>#:text#</span>"
             });
 
-            equal(virtualList.items().first().html(), '<span class="foo">Item 0</span>');
+            equal(virtualList.items().first().find(".k-item").html(), '<span class="foo">Item 0</span>');
         }, 100);
     });
 
