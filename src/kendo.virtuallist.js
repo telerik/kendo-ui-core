@@ -670,6 +670,7 @@ var __meta__ = {
                 item;
 
             this._view = {};
+            this._currentGroup = null;
 
             for (var i = index, length = index + itemCount; i < length; i++) {
                 item = this._itemMapper(this.getter(i, index), i);
