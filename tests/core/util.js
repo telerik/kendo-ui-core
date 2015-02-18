@@ -89,6 +89,15 @@ test("works with 'view' selector", 1, function() {
         equal(tokens["authenticity_token"], "42");
     });
 
+    test("Spring CSRF token", function() {
+        $(container)
+            .append('<meta content="authenticity_token" name="_csrf_header" />')
+            .append('<meta content="42" name="_csrf" />');
+        var tokens = kendo.antiForgeryTokens();
+
+        equal(tokens["authenticity_token"], "42");
+    });
+
     test("Anti-Forgery Token with AppPath", function() {
         $(container).append("<input type='hidden' name='__RequestVerificationToken_test' value='42' />");
         var tokens = kendo.antiForgeryTokens();
