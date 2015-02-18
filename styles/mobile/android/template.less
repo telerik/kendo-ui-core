@@ -498,15 +498,31 @@
     border-color: @android-light-background-color;
 }
 
+/* Collapsible */
+
+.km-android .km-collapsible-header,
+.km-android .km-collapsible-content
+{
+    border-color: @android-dark-border-color;
+}
+
+.km-android-light .km-collapsible-header,
+.km-android-light .km-collapsible-content
+{
+    border-color: @android-light-border-color;
+}
+
+.km-android .km-collapsible-header .km-icon
+{
+    color: @android-gray;
+}
+
 /* Tablet Styles */
 
 .km-tablet .km-android *:not(.km-actionsheet-phone) > .km-actionsheet
 {
     .box-shadow(0 0 7px @android-button-color);
 }
-
-
-
 
 /* Active States */
 

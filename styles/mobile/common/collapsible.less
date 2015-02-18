@@ -1,24 +1,41 @@
 .km-collapsible {
+    margin: 1em 0;
+}
+
+.km-collapsible.km-collapsibleinset {
     margin: 1em;
 }
 
+.km-collapsible + .km-collapsible {
+    margin-top: -1em;
+}
+
 .km-collapsible-header {
-    border: 1px solid #ccc;
-    padding: 5px;
+    border-style: solid;
+    border-width: 1px 0;
+    padding: .4em;
 }
 
-.km-collapsed > .km-collapsible-header {
-    border-radius: 0.5em;
+.km-collapsibleinset > .km-collapsible-header {
+    border-width: 1px;
 }
 
-.km-expanded > .km-collapsible-header {
-    border-radius: 0.5em 0.5em 0 0;
+.km-collapsible + .km-collapsible > .km-collapsible-header {
+    border-top-width: 0;
+}
+
+.km-collapsibleinset.km-collapsed > .km-collapsible-header {
+    border-radius: .5em;
+}
+
+.km-collapsibleinset.km-expanded > .km-collapsible-header {
+    border-radius: .5em .5em 0 0;
 }
 
 .km-collapsible-header .km-icon {
     display: inline-block;
-    font-size: 0.8em;
-    margin-right: 0.3em;
+    font-size: .8em;
+    margin-right: .3em;
 }
 
 .km-collapsible-header > h1,
@@ -31,17 +48,23 @@
 }
 
 .km-collapsible-content {
-    border: 1px solid #ddd;
+    border-style: solid;
+    border-width: 1px 0;
     border-top: 0;
-    border-radius: 0 0 0.5em 0.5em;
-    padding: 0.4em;
+    padding: .4em;
     overflow: hidden;
 }
 
+.km-collapsibleinset > .km-collapsible-content {
+    border-radius: 0 0 .5em .5em;
+    border-width: 1px;
+}
+
 .km-collapsed > .km-collapsible-content.km-animated {
-    transform: translateY(-0.8em);
+    transform: translateY(-.8em);
     border-color: transparent;
     border-bottom: none;
+    visibility: hidden;
 }
 
 .km-animated {
