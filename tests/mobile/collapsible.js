@@ -122,6 +122,14 @@
         ok(!panel.content.hasClass("km-animated"));
     });
 
+    test("adds km-inset class when inset option is set to true", 1, function() {
+        var panel = $("#collapsible").kendoMobileCollapsible({
+            inset: true
+        }).data("kendoMobileCollapsible");
+
+        ok(panel.element.hasClass("km-inset"));
+    });
+
     /* UI interactions */
 
     test("clicking the header expands the content when content is hidden", function() {

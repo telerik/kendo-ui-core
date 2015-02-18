@@ -17,6 +17,7 @@ var __meta__ = {
         COLLAPSIBLE = "km-collapsible",
         HEADER = "km-collapsible-header",
         CONTENT = "km-collapsible-content",
+        INSET = "km-inset",
         HEADER_WRAPPER = "<div data-role='collapsible-header' class='" + HEADER + "'></div>",
         CONTENT_WRAPPER = "<div data-role='collapsible-content' class='" + CONTENT + "'></div>",
 
@@ -46,6 +47,10 @@ var __meta__ = {
 
             container.addClass(that.options.collapsed ? COLLAPSED : EXPANDED);
 
+            if (that.options.inset) {
+                container.addClass(INSET);
+            }
+
             if (that.options.animation) {
                 that.content.addClass(ANIMATED);
                 that.content.height(0);
@@ -64,7 +69,8 @@ var __meta__ = {
             collapsed: true,
             collapseIcon: "minus",
             expandIcon: "plus",
-            animation: true
+            animation: true,
+            inset: false
         },
 
         destroy: function() {
