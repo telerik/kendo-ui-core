@@ -1315,6 +1315,7 @@ var __meta__ = {
                 hasSource,
                 hasEvents,
                 hasChecked,
+                widgetBinding = this instanceof WidgetBindingTarget,
                 specificBinders = this.binders();
 
             for (key in bindings) {
@@ -1322,7 +1323,7 @@ var __meta__ = {
                     hasValue = true;
                 } else if (key == SOURCE) {
                     hasSource = true;
-                } else if (key == EVENTS) {
+                } else if (key == EVENTS && !widgetBinding) {
                     hasEvents = true;
                 } else if (key == CHECKED) {
                     hasChecked = true;
@@ -1330,7 +1331,6 @@ var __meta__ = {
                     this.applyBinding(key, bindings, specificBinders);
                 }
             }
-
             if (hasSource) {
                 this.applyBinding(SOURCE, bindings, specificBinders);
             }
@@ -1343,7 +1343,7 @@ var __meta__ = {
                 this.applyBinding(CHECKED, bindings, specificBinders);
             }
 
-            if (hasEvents) {
+            if (hasEvents && !widgetBinding) {
                 this.applyBinding(EVENTS, bindings, specificBinders);
             }
         },
