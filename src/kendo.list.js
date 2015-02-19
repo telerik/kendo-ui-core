@@ -1129,6 +1129,16 @@ var __meta__ = {
             this._templates();
         },
 
+        destroy: function() {
+            this.element.off(STATIC_LIST_NS);
+
+            if (this._refreshHandler) {
+                this.dataSource.unbind(CHANGE, this._refreshHandler);
+            }
+
+            Widget.fn.destroy.call(this);
+        },
+
         _click: function(e) {
             if (!e.isDefaultPrevented()) {
 
