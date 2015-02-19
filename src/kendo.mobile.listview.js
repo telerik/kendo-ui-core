@@ -796,7 +796,8 @@ var __meta__ = {
         init: function(listView) {
             var filter = this,
                 filterable = listView.options.filterable,
-                events = "change paste";
+                events = "change paste",
+                that = this;
 
             this.listView = listView;
             this.options = filterable;
@@ -822,6 +823,21 @@ var __meta__ = {
             this.clearButton = listView.wrapper.find(".km-filter-reset")
                 .on(CLICK, proxy(this, "_clearFilter"))
                 .hide();
+
+             this._dataSourceChange = $.proxy(this._refreshInput, this);
+             listView.bind("_dataSource", function(e) {
+                 e.dataSource.bind("change", that._dataSourceChange);
+             });
+        },
+
+        _refreshInput: function() {
+            var appliedFilters = this.listView.dataSource.filter();
+            var searchInput = this.listView._filter.searchInput;
+            if (appliedFilters) {
+                searchInput.val(appliedFilters.filters[0].value);
+            } else {
+                searchInput.val("");
+            }
         },
 
         _search: function(expr) {

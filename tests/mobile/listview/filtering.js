@@ -24,6 +24,19 @@
         return new ListView(ul, options);
     }
 
+    test("clears input when filters are removed", function() {
+            var listview = filterableListview({
+                dataSource: {
+                    data: ["foo", "bar"]
+                }
+            }),
+            input = listview.wrapper.find("input");
+            input.val("foo");
+            listview.dataSource.filter({});
+            equal(input.val().length, 0);
+     });
+
+
     test("filterable creates search input", function() {
         var listview = filterableListview();
 
