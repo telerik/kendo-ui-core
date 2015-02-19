@@ -35,7 +35,7 @@ var __meta__ = {
             that._sizingDom = that.orientation == HORIZONTAL ? "outerWidth" : "outerHeight";
 
             that.draggable = new ui.Draggable(element, {
-                distance: 0,
+                distance: 1,
                 filter: options.handle,
                 drag: proxy(that._resize, that),
                 dragcancel: proxy(that._cancel, that),
