@@ -85,4 +85,33 @@
 
         ok(list.dataSource);
     });
+
+    test("pointer over li should add hover state", function() {
+        var list = new StaticList(element, {
+            dataSource: ["item"],
+            template: "#:data#"
+        });
+
+        list.dataSource.read();
+
+        var li = list.element.children().eq(0);
+        li.mouseenter();
+
+        ok(li.hasClass("k-state-hover"));
+    });
+
+    test("leave li should remove hover state", function() {
+        var list = new StaticList(element, {
+            dataSource: ["item"],
+            template: "#:data#"
+        });
+
+        list.dataSource.read();
+
+        var li = list.element.children().eq(0);
+        li.mouseenter();
+        li.mouseleave();
+
+        ok(!li.hasClass("k-state-hover"));
+    });
 })();
