@@ -1286,11 +1286,6 @@ var __meta__ = {
 
             deselected = this._deselect(candidate);
 
-            //Maybe is no needed
-            /*if (this.options.selectable !== "multiple" || idx > -1) {
-                that.selectedIndex = idx;
-            }*/
-
             if (!deselected && candidate[0]) {
                 if (candidate !== that._current) {
                     that.current(candidate);
