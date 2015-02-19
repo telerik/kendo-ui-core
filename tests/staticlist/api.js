@@ -240,9 +240,46 @@
 
         list.select(children.eq(1));
 
+        equal(children.eq(0).attr("class"), "k-item");
+        equal(children.eq(1).attr("class"), "k-item k-state-focused k-state-selected");
+        equal(children.eq(2).attr("class"), "k-item");
+    });
+
+    test("select an item by predicate", function() {
+        var list = new StaticList(element, {
+            dataSource: ["item1", "item2", "item3"],
+            template: "new #:data#"
+        });
+
+        list.dataSource.read();
+
+        list.select(function(data) {
+            return data === "item2";
+        });
+
+        var children = element.children();
 
         equal(children.eq(0).attr("class"), "k-item");
         equal(children.eq(1).attr("class"), "k-item k-state-focused k-state-selected");
+        equal(children.eq(2).attr("class"), "k-item");
+    });
+
+    test("select method deselects items if predicate does not find item", function() {
+        var list = new StaticList(element, {
+            dataSource: ["item1", "item2", "item3"],
+            template: "new #:data#"
+        });
+
+        list.dataSource.read();
+
+        list.select(function(data) {
+            return data === "test";
+        });
+
+        var children = element.children();
+
+        equal(children.eq(0).attr("class"), "k-item");
+        equal(children.eq(1).attr("class"), "k-item");
         equal(children.eq(2).attr("class"), "k-item");
     });
 

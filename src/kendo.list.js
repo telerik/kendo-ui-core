@@ -1268,12 +1268,28 @@ var __meta__ = {
 
         select: function(candidate) {
             var that = this;
+            var data = that._dataContext;
             var deselected = false;
+            var found = false;
             var dataItem;
             var idx;
 
             if (candidate === undefined) {
                 return that._selectedIndices.slice();
+            }
+
+            if (typeof candidate === "function") {
+                for (idx = 0; idx < data.length; idx++) {
+                    if (candidate(data[idx].item)) {
+                        candidate = idx;
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (!found) {
+                    candidate = -1;
+                }
             }
 
             if (typeof candidate === "number") {
@@ -1293,7 +1309,7 @@ var __meta__ = {
 
                 candidate.addClass("k-state-selected").attr("aria-selected", true);
 
-                dataItem = this._dataContext[idx].item;
+                dataItem = data[idx].item;
 
                 this._selectedIndices.push(idx);
                 this._dataItems.push(dataItem);
