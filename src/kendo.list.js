@@ -1109,8 +1109,8 @@ var __meta__ = {
             dataSource = $.isArray(dataSource) ? { data: dataSource } : dataSource;
             dataSource = kendo.data.DataSource.create(dataSource);
 
-            if (that._refreshHandler) {
-                dataSource.unbind(CHANGE, that._refreshHandler);
+            if (that.dataSource) {
+                that.dataSource.unbind(CHANGE, that._refreshHandler);
             } else {
                 that._refreshHandler = proxy(that.refresh, that);
             }
