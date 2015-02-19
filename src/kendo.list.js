@@ -1272,6 +1272,10 @@ var __meta__ = {
             var dataItem;
             var idx;
 
+            if (candidate === undefined) {
+                return that._selectedIndices.slice();
+            }
+
             if (typeof candidate === "number") {
                 idx = candidate;
                 candidate = $(this.element[0].children[candidate]);

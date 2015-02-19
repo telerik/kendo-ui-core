@@ -646,6 +646,31 @@
         equal(value[0], list.dataSource.view()[0].items[1].name);
     });
 
+    test("select method returns selected indices", function() {
+        var list = new StaticList(element, {
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "b" },
+                    { name: "item3", type: "a" }
+                ],
+                group: "type"
+            },
+            template: '#:data.name#',
+            groupTemplate: '#:data#'
+        });
+
+        list.dataSource.read();
+
+        list.select(1);
+
+        var indices = list.select();
+
+        equal(indices.length, 1);
+        equal(indices[0], 1);
+    });
+
     test("value method selects an item", function() {
         var list = new StaticList(element, {
             dataValueField: "name",
