@@ -251,4 +251,84 @@
         equal(dataItems.length, 2);
         equal(values.length, 2);
     });
+
+    //option label
+    test("StaticList renders an optionLabel in the beginning", function() {
+        var list = new StaticList(element, {
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "a" },
+                    { name: "item3", type: "b" }
+                ]
+            },
+            optionLabel: {
+                name: "Select...",
+                value: ""
+            },
+            template: '#:data.name#'
+        });
+
+        list.dataSource.read();
+
+        var children = list.element.children();
+        var first = children.eq(0);
+
+        equal(children.length, 4);
+        equal(first.html(), "Select...");
+    });
+
+    test("StaticList selects the optionLabel", function() {
+        var list = new StaticList(element, {
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "a" },
+                    { name: "item3", type: "b" }
+                ]
+            },
+            optionLabel: {
+                name: "Select...",
+                value: ""
+            },
+            template: '#:data.name#'
+        });
+
+        list.dataSource.read();
+
+        list.select(0);
+
+        var first = list.element.children().eq(0);
+
+        equal(first.html(), "Select...");
+        ok(first.hasClass("k-state-selected"));
+    });
+
+    test("StaticList returns the value of the selected optionLabel", function() {
+        var list = new StaticList(element, {
+            dataValueField: "value",
+            dataSource: {
+                data: [
+                    { name: "item1", value: 1, type: "a" },
+                    { name: "item2", value: 2, type: "a" },
+                    { name: "item3", value: 3, type: "b" }
+                ]
+            },
+            optionLabel: {
+                name: "Select...",
+                value: ""
+            },
+            template: '#:data.name#'
+        });
+
+        list.dataSource.read();
+
+        list.select(1);
+        list.select(0); //select optionLabel
+
+        equal(list.value().length, 1);
+        equal(list.value()[0], list.options.optionLabel.value);
+    });
 })();

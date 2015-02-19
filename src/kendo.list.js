@@ -1087,48 +1087,14 @@ var __meta__ = {
             }
         },
 
-        _getter: function() {
-            this._valueGetter = kendo.getter(this.options.dataValueField);
-        },
-
-        _find: function(dataItem, values) {
-            var getter = this._valueGetter;
-            var value = getter(dataItem);
-            var found = false;
-
-            for (var idx = 0; idx < values.length; idx++) {
-                if (value == values[idx]) {
-                    values.splice(idx, 1);
-                    found = true;
-                    break;
-                }
-            }
-
-            return found;
-        },
-
-        _isNew: function(dataItem) {
-            var getter = this._valueGetter;
-            var isNew = true;
-            var idx = 0;
-
-            var value = getter(dataItem);
-
-            for (; idx < this._dataItems.length; idx++) {
-                if (getter(this._dataItems[idx]) === value) {
-                    isNew = false;
-                    break;
-                }
-            }
-
-            return isNew;
-        },
-
         options: {
-            dataValueField: null,
             name: "StaticList",
+            dataValueField: null,
+            optionLabel: null,
             selectable: true, //true, //true|false|multiple
-            template: null
+            template: null,
+            groupTemplate: null,
+            fixedGroupTemplate: null
         },
 
         events: [
@@ -1349,6 +1315,62 @@ var __meta__ = {
             }
         },
 
+        data: function() {
+            var that = this;
+            var data = that.dataSource.view();
+            var first = that.options.optionLabel;
+            var length = data.length;
+            var idx = 0;
+
+            if (first && length) {
+                first = new kendo.data.ObservableArray([first]);
+
+                for (; idx < length; idx++) {
+                    first.push(data[idx]);
+                }
+                data = first;
+            }
+
+            return data;
+        },
+
+        _getter: function() {
+            this._valueGetter = kendo.getter(this.options.dataValueField);
+        },
+
+        _find: function(dataItem, values) {
+            var getter = this._valueGetter;
+            var value = getter(dataItem);
+            var found = false;
+
+            for (var idx = 0; idx < values.length; idx++) {
+                if (value == values[idx]) {
+                    values.splice(idx, 1);
+                    found = true;
+                    break;
+                }
+            }
+
+            return found;
+        },
+
+        _isNew: function(dataItem) {
+            var getter = this._valueGetter;
+            var isNew = true;
+            var idx = 0;
+
+            var value = getter(dataItem);
+
+            for (; idx < this._dataItems.length; idx++) {
+                if (getter(this._dataItems[idx]) === value) {
+                    isNew = false;
+                    break;
+                }
+            }
+
+            return isNew;
+        },
+
         _deselect: function(element) {
             var values = this._values;
             var dataItems = this._dataItems;
@@ -1450,7 +1472,7 @@ var __meta__ = {
             var idx = 0;
             var context;
             var dataContext = [];
-            var view = this.dataSource.view();
+            var view = this.data();
             var values = this.value();
 
             this._selectedIndices = [];
