@@ -833,10 +833,11 @@ var __meta__ = {
         _refreshInput: function() {
             var appliedFilters = this.listView.dataSource.filter();
             var searchInput = this.listView._filter.searchInput;
-            if (appliedFilters) {
-                searchInput.val(appliedFilters.filters[0].value);
-            } else {
+
+            if (!appliedFilters || appliedFilters.filters[0].field !== this.listView.options.filterable.field)  {
                 searchInput.val("");
+            } else {
+                searchInput.val(appliedFilters.filters[0].value);
             }
         },
 
