@@ -36,6 +36,38 @@
             equal(input.val().length, 0);
      });
 
+     test("clears input when filtered by non-existent field", function() {
+            var listview = filterableListview({
+                    template: "#:name#",
+                    filterable : {
+                        field: "name"
+                    },
+                    dataSource: {
+                        data: [{id:1, name: "foo"}, {id:2, name: "bar"}]
+                    }
+                }),
+            input = listview.wrapper.find("input");
+            input.val("foo");
+            listview.dataSource.filter({field: "bar", operator: "eq", value: "baz"});
+            equal(input.val().length, 0);
+     });
+
+     test("clears input when filtered by non-existent field", function() {
+            var listview = filterableListview({
+                    template: "#:data#",
+                    filterable : true,
+                    dataSource: {
+                        data: ["foo", "bar"]
+                    }
+                }),
+            input = listview.wrapper.find("input");
+            input.val("foo");
+            listview.dataSource.filter({field: "bar", operator: "eq", value: "baz"});
+            equal(input.val().length, 0);
+     });
+
+
+
 
     test("filterable creates search input", function() {
         var listview = filterableListview();
