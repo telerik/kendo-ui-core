@@ -515,7 +515,7 @@ var __meta__ = {
 
         _toggle: function(open, preventFocus) {
             var that = this;
-            var touchEnabled = support.touch || support.MSPointers || support.pointers;
+            var touchEnabled = support.mobileOS && (support.touch || support.MSPointers || support.pointers);
 
             open = open !== undefined? open : !that.popup.visible();
 
