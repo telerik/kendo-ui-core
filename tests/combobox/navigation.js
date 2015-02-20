@@ -519,6 +519,8 @@ test("ComboBox does not focus input if mobile device", 1, function() {
     var origin = kendo.support.touch;
     var input = combobox.input;
 
+    kendo.support.mobileOS = true;
+
     kendo.support.touch = true;
 
     combobox.wrapper.find(".k-icon").click();
