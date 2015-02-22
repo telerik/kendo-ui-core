@@ -115,31 +115,6 @@ var __meta__ = {
             });
         },
 
-        _click: function(e) {
-            if (!e.isDefaultPrevented()) {
-                var element = $(e.currentTarget);
-
-                if (this.trigger(SELECT, { item: element })) {
-                    this.close();
-                    return;
-                }
-
-                this._select(element);
-                this._focusElement(this.wrapper);
-
-                //this._userTriggered = true; ???
-                this._triggerCascade(true);
-
-                var activeFilter = this.filterInput && this.filterInput[0] === activeElement();
-
-                if (activeFilter && key === keys.TAB) {
-                    this.wrapper.focusout();
-                } else {
-                    this._blur();
-                }
-            }
-        },
-
         _listMousedown: function(e) {
             if (!this.filterInput || this.filterInput[0] !== e.target) {
                 e.preventDefault();

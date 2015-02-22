@@ -665,6 +665,31 @@ var __meta__ = {
             this.popup.one("open", proxy(this._popupOpen, this));
         },
 
+        _click: function(e) {
+            if (!e.isDefaultPrevented()) {
+                var element = $(e.currentTarget);
+
+                if (this.trigger("select", { item: element })) {
+                    this.close();
+                    return;
+                }
+
+                this._select(element);
+                this._focusElement(this.wrapper);
+
+                //this._userTriggered = true; ???
+                this._triggerCascade(true);
+
+                var activeFilter = this.filterInput && this.filterInput[0] === activeElement();
+
+                if (activeFilter && key === keys.TAB) {
+                    this.wrapper.focusout();
+                } else {
+                    this._blur();
+                }
+            }
+        },
+
         _focusElement: function(element) {
             var active = activeElement();
             var wrapper = this.wrapper;
