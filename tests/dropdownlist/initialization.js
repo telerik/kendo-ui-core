@@ -149,9 +149,9 @@
     });
 
     test("data source is initialized from OPTION items", function() {
-        var select = $("<select><option value=1>Chai</option><option value=2 selected='selected'>Chai</option></select>").appendTo(QUnit.fixture),
-        dropdownlist = new DropDownList(select),
-        data;
+        var select = $("<select><option value=1>Chai</option><option value=2 selected='selected'>Chai</option></select>").appendTo(QUnit.fixture);
+        var dropdownlist = new DropDownList(select);
+        var data;
 
         data = dropdownlist.dataSource.view();
 
@@ -179,9 +179,9 @@
         equal(dropdownlist.options.index, 2);
     });
 
-    test("selected index is get from select element", function() {
-        var select = $("<select><option value='1'>Chai</option><option value='2' selected='selected'>Chai</option></select>").appendTo(QUnit.fixture),
-            dropdownlist = new DropDownList(select);
+    test("selected index is got from select element", function() {
+        var select = $("<select><option value='1'>Chai</option><option value='2' selected='selected'>Chai</option></select>").appendTo(QUnit.fixture);
+        var dropdownlist = new DropDownList(select);
 
         equal(select[0].selectedIndex, 1);
         equal(dropdownlist.options.index, 1);
@@ -252,6 +252,7 @@
     test("dropdownlist populates its list when the datasource changes", function() {
         var dropdownlist = new DropDownList(input, {
             dataTextField: "text",
+            dataValueField: "text",
             dataSource: [{text: "foo"}, {text:2}]
         });
 
@@ -261,36 +262,67 @@
         equal(dropdownlist.ul.children("li").first().text(), "foo");
     });
 
-    test("template should render item directly if datatextField is empty string", function(){
-        var dropdownlist = new DropDownList(input, { dataTextField : ""});
+    test("dropdownlist creates static list view", function() {
+        var dropdownlist = new DropDownList(input);
 
-        equal(dropdownlist.template("foo"), '<li tabindex="-1" role="option" unselectable="on" class="k-item">foo</li>');
+        ok(dropdownlist.listView instanceof kendo.ui.StaticList);
     });
 
-    test("template should use defined datatextField", function(){
+    test("dropdownlist sets default item template", function() {
         var dropdownlist = new DropDownList(input, {
-            dataTextField : "ProductName"
         });
 
-        equal(dropdownlist.template({ProductName: "foo"}), '<li tabindex="-1" role="option" unselectable="on" class="k-item">foo</li>');
+        var template = dropdownlist.listView.options.template;
+
+        equal(template, "#:data#");
     });
 
-    test("setting dataTextField to array accessor", function(){
+    test("dropdownlist sets default item template using dataTextField option", function() {
         var dropdownlist = new DropDownList(input, {
-            dataTextField : "['ProductName']"
+            dataTextField: "test"
         });
 
-        equal(dropdownlist.template({ProductName: "foo"}), '<li tabindex="-1" role="option" unselectable="on" class="k-item">foo</li>');
+        var template = dropdownlist.listView.options.template;
+
+        equal(template, "#:data.test#");
     });
 
-    test("changing the template", function() {
+    test("dropdownlist sets a default group template", function() {
         var dropdownlist = new DropDownList(input, {
-            datatextField: "",
-            template: "#= data.toUpperCase() #"
         });
 
-        equal(dropdownlist.template("foo"), '<li tabindex="-1" role="option" unselectable="on" class="k-item">FOO</li>');
-        equal(dropdownlist.options.template, "#= data.toUpperCase() #");
+        var template = dropdownlist.listView.options.groupTemplate;
+
+        equal(template, "#:data#");
+    });
+
+    test("dropdownlist supports setting a custom group template", function() {
+        var dropdownlist = new DropDownList(input, {
+            groupTemplate: "#= data.toUpperCase() #"
+        });
+
+        var template = dropdownlist.listView.options.groupTemplate;
+
+        equal(template, "#= data.toUpperCase() #");
+    });
+
+    test("dropdownlist sets a default fixed group template", function() {
+        var dropdownlist = new DropDownList(input, {
+        });
+
+        var template = dropdownlist.listView.options.fixedGroupTemplate;
+
+        equal(template, "#:data#");
+    });
+
+    test("dropdownlist supports setting a custom fixed group template", function() {
+        var dropdownlist = new DropDownList(input, {
+            fixedGroupTemplate: "#= data.toUpperCase() #"
+        });
+
+        var template = dropdownlist.listView.options.fixedGroupTemplate;
+
+        equal(template, "#= data.toUpperCase() #");
     });
 
     test("defining header template", function() {
@@ -386,31 +418,6 @@
         ok(!wrap.hasClass("k-state-hover"));
     });
 
-    test("pointer over li should add hover state", function() {
-        var data = [{text: 1, value: 1}, {text:2, value:2}],
-        dropdownlist = new DropDownList(input, {
-            dataSource: data
-        });
-
-        var li = dropdownlist.ul.show().children().eq(0);
-        li.mouseenter();
-
-        ok(li.hasClass("k-state-hover"));
-    });
-
-    test("leave li should remove hover state", function() {
-        var data = [{text: 1, value: 1}, {text:2, value:2}],
-        dropdownlist = new DropDownList(input, {
-            dataSource: data
-        });
-
-        var li = dropdownlist.ul.show().children().eq(0);
-        li.mouseenter();
-        li.mouseleave();
-
-        ok(!li.hasClass("k-state-hover"));
-    });
-
     test("add k-list class to the UL", function() {
         var data = [{text: 1, value: 1}, {text:2, value:2}],
         dropdownlist = new DropDownList(input, {
@@ -436,6 +443,20 @@
         equal(dropdownlist.list.height(), 50);
     });
 
+    test("widget creates optionLabel object during init", function() {
+        var dropdownlist = new DropDownList(select, {
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: [{text: 1, value: 1}, {text:2, value:2}],
+            optionLabel: "Select..."
+        });
+
+        var optionLabel = dropdownlist.listView.options.optionLabel;
+
+        equal(optionLabel.text, "Select...");
+        equal(optionLabel.value, "");
+    });
+
     test("persist selected index on rebind", function() {
         var dropdownlist = new DropDownList(select, {
             dataTextField: "text",
@@ -446,21 +467,8 @@
 
         dropdownlist.dataSource.fetch();
 
-        equal(dropdownlist.value(), "");
         equal(dropdownlist.text(), "Select...");
-    });
-
-    test("optionLabel should create empty item", function() {
-        var data = [{text: 1, value: 1}, {text:2, value:2}],
-        dropdownlist = new DropDownList(input, {
-            dataTextField: "text",
-            dataValueField: "value",
-            dataSource: data,
-            optionLabel: "Select..."
-        });
-
-        equal(dropdownlist._data()[0].text, "Select...");
-        equal(dropdownlist._data()[0].value, "");
+        equal(dropdownlist.value(), "");
     });
 
     test("optionLabel is not lost when textField and valueField are equal", function() {
@@ -472,24 +480,25 @@
             optionLabel: "Select..."
         });
 
-        equal(dropdownlist._data()[0].text, "Select...");
+        equal(dropdownlist.text(), "Select...");
+        equal(dropdownlist.value(), "Select...");
     });
 
     test("optionLabel should create complex empty item", function() {
-        var data = [{text: 1, value: 1}, {text:2, value:2}],
-        dropdownlist = new DropDownList(input, {
-            dataTextField: "Order.Ship.City",
-            dataValueField: "Order1.Ship1.City1",
+        var data = [{text: 1, value: 1}, {text:2, value:2}];
+        var dropdownlist = new DropDownList(input, {
+            dataTextField: "Order.Ship.Desc",
+            dataValueField: "Order.Ship.City",
             dataSource: [
                 { Order: { Ship: { City: "1"} } }
             ],
             optionLabel: "Select..."
         });
 
-        var first = dropdownlist._data()[0];
+        var first = dropdownlist.listView.data()[0];
 
-        equal(first.Order.Ship.City, "Select...");
-        equal(first.Order1.Ship1.City1, "");
+        equal(first.Order.Ship.Desc, "Select...");
+        equal(first.Order.Ship.City, "");
     });
 
     test("Use optionLabel directly if object", function() {
@@ -505,9 +514,11 @@
             }
         });
 
-        equal(dropdownlist._data()[0].text, "Select...");
-        equal(dropdownlist._data()[0].value, "");
-        equal(dropdownlist._data()[0].test, "test");
+        var first = dropdownlist.listView.data()[0];
+
+        equal(first.text, "Select...");
+        equal(first.value, "");
+        equal(first.test, "test");
     });
 
     test("_options should render option with value if optionLabel", function() {
@@ -702,7 +713,7 @@
 
         var dataSource = dropdownlist.dataSource;
 
-        dropdownlist._dataSource();
+        dropdownlist.setDataSource([]);
 
         dropdownlist.bind("dataBound", function() {
             ok(false, "Change event is not detached");

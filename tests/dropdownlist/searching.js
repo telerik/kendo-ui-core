@@ -127,9 +127,10 @@
     test("loop items on search trigger change event", 1, function() {
         var dropdownlist = new DropDownList(input, {
             dataSource: ["text1", "text2", "text3"],
-            change: function() {
-                ok(true);
-            }
+        });
+
+        dropdownlist.bind("change", function() {
+            ok(true);
         });
 
         input.press("t");

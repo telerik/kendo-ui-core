@@ -50,6 +50,7 @@ var __meta__ = {
 
             Widget.fn.init.call(that, element, options);
             element = that.element;
+            options = that.options;
 
             that._isSelect = element.is(SELECT);
 
@@ -61,6 +62,7 @@ var __meta__ = {
             }
 
             that.ul = $('<ul unselectable="on" class="k-list k-reset"/>')
+                        .on("click" + ns, "li", proxy(this._click, this))
                         .attr({
                             tabIndex: -1,
                             "aria-hidden": true
@@ -69,20 +71,6 @@ var __meta__ = {
             that.list = $("<div class='k-list-container'/>")
                         .append(that.ul)
                         .on("mousedown" + ns, proxy(that._listMousedown, that));
-
-            //find a better name
-            var listView;
-
-            if (options.virtual) {
-                listView = new kendo.ui.VirtualList(that.ul, {});
-            } else {
-                listView = new StaticList(that.ul, {
-                    template: "#:" + kendo.expr(options.dataTextField, "data") + "#",
-                    groupTemplate: "#:data#"
-                });
-            }
-
-            that.listView = listView;
 
             id = element.attr(ID);
 
@@ -125,6 +113,31 @@ var __meta__ = {
                 readonly: false,
                 disable: !(enable = enable === undefined ? true : enable)
             });
+        },
+
+        _click: function(e) {
+            if (!e.isDefaultPrevented()) {
+                var element = $(e.currentTarget);
+
+                if (this.trigger(SELECT, { item: element })) {
+                    this.close();
+                    return;
+                }
+
+                this._select(element);
+                this._focusElement(this.wrapper);
+
+                //this._userTriggered = true; ???
+                this._triggerCascade(true);
+
+                var activeFilter = this.filterInput && this.filterInput[0] === activeElement();
+
+                if (activeFilter && key === keys.TAB) {
+                    this.wrapper.focusout();
+                } else {
+                    this._blur();
+                }
+            }
         },
 
         _listMousedown: function(e) {
@@ -208,52 +221,23 @@ var __meta__ = {
             }
         },
 
+        current: function(candidate) {
+            return this.listView.current(candidate);
+        },
+
         items: function() {
             return this.ul[0].children;
         },
 
-        //TODO: move widget specific logic into event "focus"
-        /*current: function(candidate) {
-            var that = this;
-            var focused = that._focused.add(that.filterInput);
-            var id = that._optionID;
-
-            if (candidate !== undefined) {
-                if (that._current) {
-                    that._current
-                        .removeClass(FOCUSED)
-                        .removeAttr("aria-selected")
-                        .removeAttr(ID);
-
-                    focused.removeAttr("aria-activedescendant");
-                }
-
-                if (candidate) {
-                    candidate.addClass(FOCUSED);
-                    that._scroll(candidate);
-
-                    if (id) {
-                        candidate.attr("id", id);
-                        focused.attr("aria-activedescendant", id);
-                    }
-                }
-
-                that._current = candidate;
-            } else {
-                return that._current;
-            }
-        },*/
-
         destroy: function() {
-            var that = this,
-                ns = that.ns;
+            var that = this;
+            var ns = that.ns;
 
             Widget.fn.destroy.call(that);
 
             that._unbindDataSource();
 
-            //destroy the static/virtual list here
-            //that.ul.off(ns);
+            that.listView.destroy();
             that.list.off(ns);
 
             if (that._touchScroller) {
@@ -277,7 +261,9 @@ var __meta__ = {
                 index = $(that.items()).index(index);
             }
 
-            return that._data()[index];
+            //return that._data()[index];
+            //TODO: use listView dataItems method instead;
+            return that.listView.data()[index];
         },
 
         _accessors: function() {
@@ -372,37 +358,6 @@ var __meta__ = {
             }
         },
 
-        //TODO: Move this logic in to list "focus" event
-        /*_focus: function(li) {
-            var that = this;
-            var userTriggered = true;
-
-            if (that.popup.visible() && li && that.trigger(SELECT, {item: li})) {
-                that.close();
-                return;
-            }
-
-            that._select(li);
-            that._triggerCascade(userTriggered);
-
-            that._blur();
-        },*/
-
-        _index: function(value) {
-            var that = this,
-                idx,
-                length,
-                data = that._data();
-
-            for (idx = 0, length = data.length; idx < length; idx++) {
-                if (that._dataValue(data[idx]) == value) {
-                    return idx;
-                }
-            }
-
-            return -1;
-        },
-
         _dataValue: function(dataItem) {
             var value = this._value(dataItem);
 
@@ -413,7 +368,7 @@ var __meta__ = {
             return value;
         },
 
-        //TODO: find a correct way to calculate height of the ul element!
+        //TODO: call this after ListView binding
         _height: function(length) {
             if (length) {
                 var that = this,
@@ -497,8 +452,9 @@ var __meta__ = {
             }
         },
 
+        //use length of the items in ListView
         _firstOpen: function() {
-            this._height(this._data().length);
+            this._height(this.listView.data().length);
         },
 
         _popup: function() {
@@ -512,7 +468,7 @@ var __meta__ = {
                 isRtl: support.isRtl(that.wrapper)
             }));
 
-            //that.popup.one(OPEN, proxy(that._firstOpen, that));
+            that.popup.one(OPEN, proxy(that._firstOpen, that));
             that._touchScroller = kendo.touchScroller(that.popup.element);
         },
 
@@ -552,8 +508,7 @@ var __meta__ = {
         _unbindDataSource: function() {
             var that = this;
 
-            that.dataSource.unbind(CHANGE, that._refreshHandler)
-                           .unbind(PROGRESS, that._progressHandler)
+            that.dataSource.unbind(PROGRESS, that._progressHandler)
                            .unbind(REQUESTEND, that._requestEndHandler)
                            .unbind("error", that._errorHandler);
         }
@@ -591,6 +546,8 @@ var __meta__ = {
 
             this._dataSource();
             this._bound = false;
+
+            this.listView.setDataSource(this.dataSource);
 
             if (this.options.autoBind) {
                 this.dataSource.fetch();
@@ -727,7 +684,7 @@ var __meta__ = {
                                      { field: options.dataValueField }];
             }
 
-            if (that.dataSource && that._refreshHandler) {
+            if (that.dataSource) {
                 that._unbindDataSource();
             } else {
                 that._progressHandler = proxy(that._showBusy, that);
@@ -739,59 +696,49 @@ var __meta__ = {
                                    .bind(PROGRESS, that._progressHandler)
                                    .bind(REQUESTEND, that._requestEndHandler)
                                    .bind("error", that._errorHandler);
-
-            that.listView.setOptions({
-                dataSource: that.dataSource
-            });
         },
 
-        _get: function(li) {
-            var that = this,
-                data = that._data(),
-                idx, length;
-
-            if (typeof li === "function") {
-                for (idx = 0, length = data.length; idx < length; idx++) {
-                    if (li(data[idx])) {
-                        li = idx;
-                        break;
-                    }
-                }
-            }
-
-            if (typeof li === "number") {
-                if (li < 0) {
-                    return $();
-                }
-
-                li = $(that.ul[0].children[li]);
-            }
-
-            if (li && li.nodeType) {
-                li = $(li);
-            }
-
-            return li;
-        },
-
-        //TODO: move to the StaticList - use new API!
-        /*
         _move: function(e) {
-            var that = this,
-                key = e.keyCode,
-                ul = that.ul[0],
-                methodName = that.popup.visible() ? "_select" : "_accept",
-                current = that._current,
-                down = key === keys.DOWN,
-                firstChild,
-                pressed;
+            var that = this;
+            var key = e.keyCode;
+            var ul = that.ul[0];
+            var down = key === keys.DOWN;
+            var firstChild;
+            var pressed;
+            var current;
 
             if (key === keys.UP || down) {
                 if (e.altKey) {
                     that.toggle(down);
                 } else {
-                    firstChild = ul.firstChild;
-                    if (!firstChild && !that._accessor() && that._state !== "filter") {
+                    current = that.listView.current();
+
+                    if (down) {
+                        that.listView.next();
+
+                        if (!that.listView.current()[0]) {
+                            that.listView.last();
+                        }
+                    } else {
+                        that.listView.prev();
+
+                        if (!that.listView.current()[0]) {
+                            that.listView.first();
+                        }
+                    }
+
+                    if (that.trigger(SELECT, { item: that.listView.current() })) {
+                        that.listView.current(current); //revert focus
+                        return;
+                    }
+
+                    that.listView.select(that.listView.current());
+
+                    if (!this.popup.visible()) {
+                        this._blur();
+                    }
+
+                    /*if (!firstChild && !that._accessor() && that._state !== "filter") {
                         if (!that._fetch) {
                             that.dataSource.one(CHANGE, function() {
                                 that._move(e);
@@ -805,27 +752,7 @@ var __meta__ = {
                         e.preventDefault();
 
                         return true; //pressed
-                    }
-
-                    if (down) {
-                        if (!current || (that.selectedIndex === -1 && !that.value() && current[0] === firstChild)) {
-                            current = firstChild;
-                        } else {
-                            current = current[0].nextSibling;
-                            if (!current && firstChild === ul.lastChild) {
-                                current = firstChild;
-                            }
-                        }
-
-                        that[methodName](current);
-                    } else {
-                        current = current ? current[0].previousSibling : ul.lastChild;
-                        if (!current && firstChild === ul.lastChild) {
-                            current = firstChild;
-                        }
-
-                        that[methodName](current);
-                    }
+                    }*/
                 }
 
                 e.preventDefault();
@@ -835,11 +762,29 @@ var __meta__ = {
                     e.preventDefault();
                 }
 
+                current = this.listView.current();
+
+                if (that.trigger(SELECT, { item: current })) {
+                    return;
+                }
+
+                //TODO: Refactor. it is used because of the filtering, but we will need to find a better way
                 if (!that.popup.visible() && (!current || !current.hasClass("k-state-selected"))) {
                     current = null;
                 }
 
-                that._accept(current, key);
+                var activeFilter = that.filterInput && that.filterInput[0] === activeElement();
+
+                this._select(current);
+                that._focusElement(that.wrapper);
+
+                if (activeFilter && key === keys.TAB) {
+                    that.wrapper.focusout();
+                } else {
+                    that._blur();
+                }
+
+                that.close();
                 pressed = true;
             } else if (key === keys.ESC) {
                 if (that.popup.visible()) {
@@ -851,15 +796,15 @@ var __meta__ = {
 
             return pressed;
         },
-        */
 
         _selectItem: function() {
-            var that = this,
-                notBound = that._bound === undefined,
-                options = that.options,
-                useOptionIndex,
-                value;
+            var that = this;
+            var notBound = that._bound === undefined;
+            var options = that.options;
+            var useOptionIndex;
+            var value;
 
+            //TODO: find a way to remove this!
             useOptionIndex = that._isSelect && !that._initial && !options.value && options.index && !that._bound;
 
             if (!useOptionIndex) {
@@ -874,8 +819,8 @@ var __meta__ = {
         },
 
         _fetchItems: function(value) {
-            var that = this,
-                hasItems = that.ul[0].firstChild;
+            var that = this;
+            var hasItems = !!that.dataSource.view()[0];
 
             //if request is started avoid datasource.fetch
             if (that._request) {
@@ -900,7 +845,6 @@ var __meta__ = {
             }
         },
 
-        //TODO: Call this in Static/Virtual List "listBound" event
         _options: function(data, optionLabel) {
             var that = this,
                 element = that.element,
@@ -973,7 +917,7 @@ var __meta__ = {
                 change;
 
             if (cascade) {
-                that._selectedValue = options.value || that._accessor();
+                that.listView.value(options.value || that._accessor());
 
                 parentElement = $("#" + cascade);
                 parent = parentElement.data("kendo" + options.name);
@@ -992,7 +936,7 @@ var __meta__ = {
                 change = function() {
                     that.dataSource.unbind(CHANGE, change);
 
-                    var value = that._selectedValue || that.value();
+                    var value = that.listView.value[0];
                     if (that._userTriggered) {
                         that._clearSelection(parent, true);
                     } else if (value) {
@@ -1065,8 +1009,7 @@ var __meta__ = {
             this.element.attr("role", "listbox")
                         .css({ overflow: support.kineticScrollNeeded ? "": "auto" })
                         .on("mouseenter" + STATIC_LIST_NS, "li", function() { $(this).addClass(HOVER); })
-                        .on("mouseleave" + STATIC_LIST_NS, "li", function() { $(this).removeClass(HOVER); })
-                        .on("click" + STATIC_LIST_NS, "li", proxy(this._click, this));
+                        .on("mouseleave" + STATIC_LIST_NS, "li", function() { $(this).removeClass(HOVER); });
 
             this.setDataSource(this.options.dataSource);
 
@@ -1099,6 +1042,8 @@ var __meta__ = {
 
         events: [
            "change",
+           "activate",
+           "deactivate",
            "listBound"
         ],
 
@@ -1139,14 +1084,6 @@ var __meta__ = {
             Widget.fn.destroy.call(this);
         },
 
-        _click: function(e) {
-            if (!e.isDefaultPrevented()) {
-
-                this.focus($(e.currentTarget));
-                this.select(this.current());
-            }
-        },
-
         current: function(candidate) {
             var that = this;
             var id = that._optionID;
@@ -1157,18 +1094,20 @@ var __meta__ = {
                         .removeClass(FOCUSED)
                         .removeAttr("aria-selected")
                         .removeAttr(ID);
+
+                    that.trigger("deactivate");
                 }
 
                 if (candidate) {
                     candidate.addClass(FOCUSED);
                     that.scroll(candidate);
 
-                    if (id) {
-                        candidate.attr("id", id);
-                    }
+                    candidate.attr("id", id);
                 }
 
                 that._current = candidate;
+
+                that.trigger("activate");
             } else {
                 return that._current;
             }
@@ -1296,16 +1235,21 @@ var __meta__ = {
                 idx = candidate;
                 candidate = $(this.element[0].children[candidate]);
             } else {
-                candidate = $(candidate);
                 idx = inArray(candidate[0], that.element[0]);
+                if (idx === -1) { //does not exist in list
+                    candidate = null;
+                }
+
+                candidate = $(candidate);
             }
 
             deselected = this._deselect(candidate);
 
             if (!deselected && candidate[0]) {
-                if (candidate !== that._current) {
-                    that.current(candidate);
-                }
+                //Write test for this case
+                //if (candidate !== that._current) {
+                that.current(candidate);
+                //}
 
                 candidate.addClass("k-state-selected").attr("aria-selected", true);
 
@@ -1315,9 +1259,9 @@ var __meta__ = {
                 this._dataItems.push(dataItem);
 
                 this._values.push(this._valueGetter(dataItem));
-
-                this.trigger("change");
             }
+
+            this.trigger("change");
         },
 
         value: function(value) {
@@ -1479,7 +1423,8 @@ var __meta__ = {
                 this._selectedIndices.push(context.index);
             }
 
-            item += '" data-index="' + context.index + '">';
+            item += '"' + (found ? ' aria-selected="true"' : "") + ' data-index="' + context.index + '">';
+
             item += this.templates.template(dataItem);
 
             if (context.newGroup) {
@@ -1490,7 +1435,7 @@ var __meta__ = {
         },
 
         refresh: function() {
-            //this._angularItems("cleanup");
+            this._angularItems("cleanup");
 
             var html = "";
 
@@ -1535,7 +1480,7 @@ var __meta__ = {
                 this.focus(this._selectedIndices[this._selectedIndices.length - 1]);
             }
 
-            //this._angularItems("compile");
+            this._angularItems("compile");
 
             this.trigger("listBound");
         }

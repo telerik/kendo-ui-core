@@ -41,4 +41,48 @@
 
         list.select(0);
     });
+
+    test("widget triggers change event when item is deselected", 1, function() {
+        var list = new StaticList(element, {
+            dataSource: ["item"],
+            template: "#:data#",
+            change: function() {
+                ok(true);
+            },
+            value: ["item"]
+        });
+
+        list.dataSource.read();
+
+        list.select(-1);
+    });
+
+    test("widget triggers activate event when the item is focused", 1, function() {
+        var list = new StaticList(element, {
+            dataSource: ["item"],
+            template: "#:data#",
+            activate: function() {
+                ok(true);
+            }
+        });
+
+        list.dataSource.read();
+
+        list.current($(list.element[0].children[0]));
+    });
+
+    test("widget triggers deactivate event when the item is unfocused", 1, function() {
+        var list = new StaticList(element, {
+            dataSource: ["item"],
+            template: "#:data#",
+            deactivate: function() {
+                ok(true);
+            },
+            value: ["item"]
+        });
+
+        list.dataSource.read();
+
+        list.current(null);
+    });
 })();

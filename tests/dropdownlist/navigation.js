@@ -168,8 +168,6 @@
     test("press home should focus first item and update text and value", function() {
         var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
 
-        dropdownlist.dataSource.read();
-
         dropdownlist.select(1);
         dropdownlist.wrapper.focus().press(keys.HOME);
 
@@ -210,9 +208,10 @@
         var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
 
         dropdownlist.popup.bind("close", function(){
-            equal(dropdownlist._current.index(), 1);
-            ok(dropdownlist._current.hasClass("k-state-focused"));
-            ok(dropdownlist._current.hasClass("k-state-selected"));
+            var current = dropdownlist.current();
+            equal(current.index(), 1);
+            ok(current.hasClass("k-state-focused"));
+            ok(current.hasClass("k-state-selected"));
         });
 
         dropdownlist.popup.open();
@@ -253,9 +252,10 @@
 
         dropdownlist.ul.show();
 
-        equal(dropdownlist._current.index(), 1);
-        ok(dropdownlist._current.hasClass("k-state-focused"));
-        ok(dropdownlist._current.hasClass("k-state-selected"));
+        var current = dropdownlist.current();
+        equal(current.index(), 1);
+        ok(current.hasClass("k-state-focused"));
+        ok(current.hasClass("k-state-selected"));
     });
 
 
@@ -272,18 +272,17 @@
         dropdownlist.wrapper.focus().press(keys.ESC);
     });
 
-    test("pressing enter calls _blur", function() {
-        var blurWasCalled, dropdownlist = new DropDownList(input, {
+    test("pressing enter closes popup", function() {
+        var dropdownlist = new DropDownList(input, {
+            animation: false,
             dataSource: data
         });
 
-        dropdownlist._blur = function(li) {
-            blurWasCalled = true;
-        };
+        dropdownlist.open();
 
-        dropdownlist._current = dropdownlist.ul.children().first();
         dropdownlist.wrapper.focus().press(kendo.keys.ENTER);
-        ok(blurWasCalled);
+
+        ok(!dropdownlist.popup.visible());
     });
 
     test("pressing alt + down should open popup", 1, function() {
@@ -460,7 +459,7 @@
             altKey: true
         });
 
-        equal(dropdownlist.wrapper[0], document.activeElement);
+        equal(document.activeElement, dropdownlist.wrapper[0]);
     });
 
     asyncTest("DropDownList returns focus to wrapper on ENTER", 1, function() {

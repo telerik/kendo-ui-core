@@ -41,9 +41,9 @@ var __meta__ = {
 
     var DropDownList = Select.extend( {
         init: function(element, options) {
-            var that = this,
-                index = options && options.index,
-                optionLabel, useOptionLabel, text;
+            var that = this;
+            var index = options && options.index;
+            var optionLabel, useOptionLabel, text;
 
             that.ns = ns;
             options = $.isArray(options) ? { dataSource: options } : options;
@@ -82,21 +82,21 @@ var __meta__ = {
 
             that._oldIndex = that.selectedIndex = -1;
 
-            that._cascade();
-
-            //
-            that.listView.bind("listBound", function() {
-                that._hideBusy();
-            });
-            //
-
             if (index !== undefined) {
                 options.index = index;
             }
 
+            that._initialIndex = options.index;
+            this._optionLabel();
+            this._initList();
+
+            that._cascade();
+
             if (options.autoBind) {
                 that.dataSource.fetch();
-            } else if (that.selectedIndex === -1) {
+            } else { //if (that.selectedIndex === -1) {
+
+                //TODO: Refactor
                 text = options.text || "";
                 if (!text) {
                     optionLabel = options.optionLabel;
@@ -117,6 +117,26 @@ var __meta__ = {
             }
 
             kendo.notify(that);
+        },
+
+        _optionLabel: function() {
+            var options = this.options;
+            var optionLabel = options.optionLabel;
+            var textField = options.dataTextField;
+            var valueField = options.dataValueField;
+            var optionInstance = {};
+
+            if (optionLabel && textField && typeof optionLabel !== "object") {
+                textField = textField.split(".");
+                valueField = valueField.split(".");
+
+                assign(optionInstance, valueField, "");
+                assign(optionInstance, textField, optionLabel);
+
+                optionLabel = optionInstance;
+            }
+
+            this.optionLabel = optionLabel;
         },
 
         options: {
@@ -154,7 +174,8 @@ var __meta__ = {
         setOptions: function(options) {
             Select.fn.setOptions.call(this, options);
 
-            this._template();
+            this.listView.setOptions(options);
+
             this._inputTemplate();
             this._accessors();
             this._filterHeader();
@@ -183,15 +204,9 @@ var __meta__ = {
                 return;
             }
 
-            ///
-                that.popup.open();
-                that._focusElement(that.filterInput);
-                return;
-            ///
-
-            if (!that.ul[0].firstChild || that._state === STATE_ACCEPT) {
+            if (!this.dataSource.view()[0] || that._state === STATE_ACCEPT) {
                 that._open = true;
-                that._state = "rebind";
+                that._state = "rebind"; // do we need _state ???
 
                 if (that.filterInput) {
                     that.filterInput.val("");
@@ -201,7 +216,7 @@ var __meta__ = {
             } else {
                 that.popup.open();
                 that._focusElement(that.filterInput);
-                that._scroll(that._current);
+                //that._scroll(that._current); // maybe is not required!
             }
         },
 
@@ -209,28 +224,58 @@ var __meta__ = {
             this._toggle(toggle, true);
         },
 
-        //TODO: Refactor as part of this was moved into StaticList
-        refresh: function() {
-            var that = this,
-                data = that._data(),
-                length = data.length,
-                optionLabel = that.options.optionLabel,
-                filtered = that._state === STATE_FILTER,
-                element = that.element[0],
-                selectedIndex,
-                value;
+        _initList: function() {
+            var that = this;
+            var options = this.options;
 
+            if (options.virtual) {
+                this.listView = new kendo.ui.VirtualList(this.ul, {});
+            } else {
+                this.listView = new kendo.ui.StaticList(this.ul, {
+                    dataValueField: options.dataValueField,
+                    dataSource: this.dataSource,
+                    optionLabel: this.optionLabel,
+                    groupTemplate: options.groupTemplate || "#:data#",
+                    fixedGroupTemplate: options.fixedGroupTemplate || "#:data#",
+                    template: options.template || "#:" + kendo.expr(options.dataTextField, "data") + "#",
+                    activate: function() {
+                        var current = this.current();
+                        if (current) {
+                            that._focused.add(that.filterInput).attr("aria-activedescendant", current.attr("id"));
+                        }
+                    },
+                    change: function() {
+                        var dataItem = this.dataItems()[0];
 
-            that.trigger("dataBinding");
-            if (that._current) {
-                that.current(null);
+                        that._selectValue(dataItem);
+                    },
+                    deactivate: function() {
+                        //probably we should use _focused!:w
+                        //
+                        that.wrapper.removeAttr("aria-activedescendant");
+                    }
+                });
             }
 
-            that._angularItems("cleanup");
-            that.ul[0].innerHTML = kendo.render(that.template, data);
-            that._angularItems("compile");
+            this.listView.bind("listBound", $.proxy(this._listBound, this));
+            this.listView.bind("change", $.proxy(this._listChange, this));
 
-            that._height(filtered ? (length || 1) : length);
+            this.listView.value(this.options.value || this._accessor());
+        },
+
+        _listBound: function() {
+            var that = this;
+            var data = that.listView.data();
+            var length = data.length;
+            var optionLabel = that.options.optionLabel;
+            var filtered = that._state === STATE_FILTER;
+            var element = that.element[0];
+            var selectedIndex;
+            var value;
+
+            that.trigger("dataBinding"); //make it preventable
+
+            that._height(filtered ? (length || 1) : length); //????
 
             if (that.popup.visible()) {
                 that.popup._position();
@@ -242,7 +287,7 @@ var __meta__ = {
 
                 if (length) {
                     if (optionLabel) {
-                        optionLabel = that._option("", that._optionLabelText(optionLabel));
+                        optionLabel = that._option("", this._text(optionLabel));
                     }
                 } else if (value) {
                     selectedIndex = 0;
@@ -256,6 +301,7 @@ var __meta__ = {
             that._hideBusy();
             that._makeUnselectable();
 
+            //TODO: avoid using filtered check!
             if (!filtered) {
                 if (that._open) {
                     that.toggle(!!length);
@@ -265,18 +311,37 @@ var __meta__ = {
 
                 if (!that._fetch) {
                     if (length) {
-                        that._selectItem();
-                    } else if (that._textAccessor() !== optionLabel) {
-                        that.element.val("");
-                        that._textAccessor("");
+                        var dataItem = this.listView.dataItems()[0]; //this will not work well in filtered list
+
+                        if (dataItem) {
+                            that._selectValue(dataItem);
+                            this._triggerCascade();
+                            this._oldIndex = this.selectedIndex;
+                        } else if (this.selectedIndex === -1 && this._initialIndex !== null) {
+                            this._select(this._initialIndex);
+                            this._triggerEvents();
+                        }
+
+                        this._initialIndex = null;
+                    } else {
+                        this.listView.select(-1);
                     }
                 }
             } else {
-                that.current($(that.ul[0].firstChild));
+                this.listView.first();
             }
 
             that._bound = !!length;
             that.trigger("dataBound");
+        },
+
+        _listChange: function() {
+            this._selectValue(this.listView.dataItems()[0]);
+        },
+
+        //TODO: Refactor as part of this was moved into StaticList
+        refresh: function() {
+            this.listView.refresh();
         },
 
         text: function (text) {
@@ -312,24 +377,29 @@ var __meta__ = {
         },
 
         value: function(value) {
-            var that = this,
-                idx, hasValue;
+            var that = this;
+            var hasValue;
 
             if (value !== undefined) {
                 if (value !== null) {
                     value = value.toString();
                 }
 
+                //Probably not need any more if value is set to the listView
                 that._selectedValue = value;
+                that.listView.value(value);
 
                 hasValue = value || (that.options.optionLabel && !that.element[0].disabled && value === "");
                 if (hasValue && that._fetchItems(value)) {
                     return;
                 }
 
-                idx = that._index(value);
-                that.select(idx > -1 ? idx : 0);
+                that.select(function(data) {
+                    return that._dataValue(data) == value;
+                });
             } else {
+                //TODO: return selectedValue, if not bound!
+                //
                 return that._accessor();
             }
         },
@@ -349,8 +419,9 @@ var __meta__ = {
             var isIFrame = window.self !== window.top;
 
             if (!that._prevent) {
+                //TODO: Try to refactor
                 if (filtered) {
-                    that._select(that._current);
+                    that._select(that.listView.current());
                 }
 
                 if (!filtered || that.dataItem()) {
@@ -381,12 +452,12 @@ var __meta__ = {
         },
 
         _editable: function(options) {
-            var that = this,
-                element = that.element,
-                disable = options.disable,
-                readonly = options.readonly,
-                wrapper = that.wrapper.add(that.filterInput).off(ns),
-                dropDownWrapper = that._inputWrapper.off(HOVEREVENTS);
+            var that = this;
+            var element = that.element;
+            var disable = options.disable;
+            var readonly = options.readonly;
+            var wrapper = that.wrapper.add(that.filterInput).off(ns);
+            var dropDownWrapper = that._inputWrapper.off(HOVEREVENTS);
 
             if (!readonly && !disable) {
                 element.removeAttr(DISABLED).removeAttr(READONLY);
@@ -434,81 +505,32 @@ var __meta__ = {
         },
 
         //TODO: Refactor as part of this was moved into StaticList
-        /*_accept: function(li, key) {
+        //TODO: Move the logic from _focus here!
+        _accept: function(li, key) {
             var that = this;
             var activeFilter = that.filterInput && that.filterInput[0] === activeElement();
 
-            that._focus(li);
+            if (that.popup.visible() && li && that.trigger(SELECT, {item: li})) {
+                that.close();
+                return;
+            }
+
+            this.listView.select(li);
             that._focusElement(that.wrapper);
 
             if (activeFilter && key === keys.TAB) {
                 that.wrapper.focusout();
+            } else {
+                that._blur();
             }
-        },*/
+        },
 
         _option: function(value, text) {
             return '<option value="' + value + '">' + text + "</option>";
         },
 
-        _optionLabelText: function() {
-            var options = this.options,
-                dataTextField = options.dataTextField,
-                optionLabel = options.optionLabel;
-
-            if (optionLabel && dataTextField && typeof optionLabel === "object") {
-                return this._text(optionLabel);
-            }
-
-            return optionLabel;
-        },
-
-        //TODO: Find a better way here in order to work with list abstractions
-        _data: function() {
-            var that = this,
-                options = that.options,
-                optionLabel = options.optionLabel,
-                textField = options.dataTextField,
-                valueField = options.dataValueField,
-                data = that.dataSource.view(),
-                length = data.length,
-                first = optionLabel,
-                idx = 0;
-
-            if (optionLabel && length) {
-                if (typeof optionLabel === "object") {
-                    first = optionLabel;
-                } else if (textField) {
-                    first = {};
-
-                    textField = textField.split(".");
-                    valueField = valueField.split(".");
-
-                    assign(first, valueField, "");
-                    assign(first, textField, optionLabel);
-                }
-
-                first = new kendo.data.ObservableArray([first]);
-
-                for (; idx < length; idx++) {
-                    first.push(data[idx]);
-                }
-                data = first;
-            }
-
-            return data;
-        },
-
-        _selectItem: function() {
-            Select.fn._selectItem.call(this);
-
-            if (!this.current()) {
-                this.select(0);
-            }
-        },
-
         //Refactor to work with list abstractions
         _keydown: function(e) {
-            return;
             var that = this;
             var key = e.keyCode;
             var altKey = e.altKey;
@@ -523,22 +545,29 @@ var __meta__ = {
 
             e.keyCode = key;
 
+            if (altKey && key === keys.UP) {
+                that._focusElement(that.wrapper);
+            }
+
             handled = that._move(e);
+
+            if (handled) {
+                return;
+            }
 
             if (!that.popup.visible() || !that.filterInput) {
                 if (key === keys.HOME) {
                     handled = true;
-                    e.preventDefault();
-                    that._select(ul.firstChild);
+                    that.listView.first();
                 } else if (key === keys.END) {
                     handled = true;
-                    e.preventDefault();
-                    that._select(ul.lastChild);
+                    that.listView.last();
                 }
-            }
 
-            if (altKey && key === keys.UP) {
-                that._focusElement(that.wrapper);
+                if (handled) {
+                    that._select(that.listView.current());
+                    e.preventDefault();
+                }
             }
 
             if (!altKey && !handled && that.filterInput) {
@@ -549,7 +578,7 @@ var __meta__ = {
         _selectNext: function(word, index) {
             var that = this, text,
                 startIndex = index,
-                data = that._data(),
+                data = that.listView.data(),
                 length = data.length,
                 ignoreCase = that.options.ignoreCase,
                 action = function(text, index) {
@@ -714,49 +743,40 @@ var __meta__ = {
             }
         },
 
-        //TODO: refactor as moved most of this into StaticList
-        _select: function(li) {
-            var that = this,
-                current = that._current,
-                data = null,
-                value,
-                idx;
+        _select: function(candidate) {
+            this.listView.select(candidate);
 
-            li = that._get(li);
-
-            if (li && li[0] && !li.hasClass(SELECTED)) {
-                if (that._state === STATE_FILTER) {
-                    that._state = STATE_ACCEPT;
-                }
-
-                if (current) {
-                    current.removeClass(SELECTED);
-                }
-
-                idx = ui.List.inArray(li[0], that.ul[0]);
-                if (idx > -1) {
-                    that.selectedIndex = idx;
-
-                    data = that._data()[idx];
-                    value = that._value(data);
-
-                    if (value === null) {
-                        value = "";
-                    }
-
-                    that._textAccessor(data);
-                    that._accessor(value !== undefined ? value : that._text(data), idx);
-                    that._selectedValue = that._accessor();
-
-                    that.current(li.addClass(SELECTED));
-
-                    if (that._optionID) {
-                        that._current.attr("aria-selected", true);
-                    }
-                }
+            if (this._state === STATE_FILTER) {
+                this._state = STATE_ACCEPT;
             }
 
-            return data;
+            return this.listView.dataItems()[0]; //TODO: remove the need to return selected data Item
+        },
+
+        _selectValue: function(dataItem) {
+            var value = "";
+            var text = "";
+            var idx = this.listView.select();
+
+            idx = idx[idx.length - 1];
+            if (idx === undefined) {
+                idx = -1;
+            }
+
+            this.selectedIndex = idx;
+
+            if (dataItem) {
+                value = this._dataValue(dataItem);
+                text = dataItem;
+            }
+
+            if (value === null) {
+                value = "";
+            }
+
+            this._textAccessor(text);
+            this._accessor(value, idx); //TODO: test this how it works with filtered datasource
+            this._selectedValue = this._accessor();
         },
 
         _triggerEvents: function() {
