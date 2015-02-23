@@ -72,8 +72,8 @@ var __meta__ = {
         options: {
             name: "Collapsible",
             collapsed: true,
-            collapseIcon: "minus",
-            expandIcon: "plus",
+            collapseIcon: "arrow-n",
+            expandIcon: "arrow-s",
             iconPosition: LEFT,
             animation: true,
             inset: false
