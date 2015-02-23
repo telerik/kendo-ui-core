@@ -892,7 +892,7 @@ var __meta__ = {
                 change;
 
             if (cascade) {
-                that.listView.value(options.value || that._accessor());
+                //that.listView.value(options.value || that._accessor());
 
                 parentElement = $("#" + cascade);
                 parent = parentElement.data("kendo" + options.name);
@@ -911,7 +911,7 @@ var __meta__ = {
                 change = function() {
                     that.dataSource.unbind(CHANGE, change);
 
-                    var value = that.listView.value[0];
+                    var value = that.listView.value()[0];
                     if (that._userTriggered) {
                         that._clearSelection(parent, true);
                     } else if (value) {
@@ -919,7 +919,7 @@ var __meta__ = {
                         if (!that.dataSource.view()[0] || that.selectedIndex === -1) {
                             that._clearSelection(parent, true);
                         }
-                    } else {
+                    } else if (that.listView.data().length) {
                         that.select(options.index);
                     }
 
@@ -1019,7 +1019,8 @@ var __meta__ = {
            "change",
            "activate",
            "deactivate",
-           "listBound"
+           "dataBinding",
+           "dataBound"
         ],
 
         setDataSource: function(source) {
@@ -1410,6 +1411,7 @@ var __meta__ = {
         },
 
         refresh: function() {
+            this.trigger("dataBinding");
             this._angularItems("cleanup");
 
             var html = "";
@@ -1457,7 +1459,7 @@ var __meta__ = {
 
             this._angularItems("compile");
 
-            this.trigger("listBound");
+            this.trigger("dataBound");
         }
     });
 

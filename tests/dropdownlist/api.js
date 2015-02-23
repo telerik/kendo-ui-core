@@ -129,12 +129,6 @@
        equal(dropdownlist.select(), 1);
    });
 
-    //TODO: rewrite to not test with private methods
-    /*asyncTest("open should call _scroll method", 1, function () {
-        dropdownlist._scroll = function() { ok(true); start(); };
-        dropdownlist.open();
-    });*/
-
     test("open should open popup", 1, function () {
         dropdownlist = createDropDownList();
         dropdownlist.bind("open", function(){

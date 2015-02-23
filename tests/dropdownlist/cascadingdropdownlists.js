@@ -48,9 +48,6 @@
        }
     });
 
-    return;
-    //TODO: Fix broken tests!
-
     test("Clear child ddl if no data after filtration", function() {
         parent.kendoDropDownList({
             dataTextField: "parentID",

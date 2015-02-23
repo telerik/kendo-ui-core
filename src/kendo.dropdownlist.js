@@ -94,7 +94,7 @@ var __meta__ = {
 
             if (options.autoBind) {
                 that.dataSource.fetch();
-            } else { //if (that.selectedIndex === -1) {
+            } else if (that.selectedIndex === -1) { //selectedIndex !== -1 when cascade functionality happens instantly
 
                 //TODO: Refactor
                 text = options.text || "";
@@ -244,23 +244,18 @@ var __meta__ = {
                             that._focused.add(that.filterInput).attr("aria-activedescendant", current.attr("id"));
                         }
                     },
-                    change: function() {
-                        var dataItem = this.dataItems()[0];
-
-                        that._selectValue(dataItem);
-                    },
+                    change: $.proxy(this._listChange, this),
                     deactivate: function() {
-                        //probably we should use _focused!:w
-                        //
-                        that.wrapper.removeAttr("aria-activedescendant");
-                    }
+                        that._focused.add(that.filterInput).removeAttr("aria-activedescendant");
+                    },
+                    dataBinding: function() {
+                        that.trigger("dataBinding"); //TODO: make preventable
+                    },
+                    dataBound: $.proxy(this._listBound, this)
                 });
             }
 
-            this.listView.bind("listBound", $.proxy(this._listBound, this));
-            this.listView.bind("change", $.proxy(this._listChange, this));
-
-            this.listView.value(this.options.value || this._accessor());
+            this.listView.value(this.options.value);
         },
 
         _listBound: function() {
@@ -272,8 +267,6 @@ var __meta__ = {
             var element = that.element[0];
             var selectedIndex;
             var value;
-
-            that.trigger("dataBinding"); //make it preventable
 
             that._height(filtered ? (length || 1) : length); //????
 
@@ -315,16 +308,17 @@ var __meta__ = {
 
                         if (dataItem) {
                             that._selectValue(dataItem);
-                            this._triggerCascade();
                             this._oldIndex = this.selectedIndex;
+                            this._triggerCascade(that._userTriggered);
                         } else if (this.selectedIndex === -1 && this._initialIndex !== null) {
                             this._select(this._initialIndex);
                             this._triggerEvents();
                         }
 
                         this._initialIndex = null;
-                    } else {
+                    } else if (this._textAccessor() !== optionLabel) {
                         this.listView.select(-1);
+                        //this._triggerCascade(that._userTriggered);
                     }
                 }
             } else {
@@ -385,8 +379,6 @@ var __meta__ = {
                     value = value.toString();
                 }
 
-                //Probably not need any more if value is set to the listView
-                that._selectedValue = value;
                 that.listView.value(value);
 
                 hasValue = value || (that.options.optionLabel && !that.element[0].disabled && value === "");
@@ -801,7 +793,6 @@ var __meta__ = {
 
             this._textAccessor(text);
             this._accessor(value, idx); //TODO: test this how it works with filtered datasource
-            this._selectedValue = this._accessor();
         },
 
         _triggerEvents: function() {
@@ -904,17 +895,13 @@ var __meta__ = {
             var optionLabel = that.options.optionLabel;
 
             that.options.value = "";
-            that._selectedValue = "";
 
             if (that.dataSource.view()[0] && (optionLabel || that._userTriggered)) {
                 that.select(0);
-                return;
+            } else {
+                that.select(-1);
+                that._textAccessor(that.options.optionLabel);
             }
-
-            that.selectedIndex = -1;
-
-            that.element.val("");
-            that._textAccessor(that.options.optionLabel);
         },
 
         _inputTemplate: function() {

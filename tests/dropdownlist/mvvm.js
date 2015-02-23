@@ -192,7 +192,6 @@
         equal($.trim(dom.data("kendoDropDownList").ul.children().eq(0).text()), "baz");
     });
 
-    /* TODO: fix, because it is broken now!
     test("destroying binding targets when the datasource changes", function() {
         dom = $('<select data-role="dropdownlist" data-template="template-with-attributes" data-bind="source:items" />');
 
@@ -203,7 +202,6 @@
 
         equal(observable.items[0]._events["change"].length, 2); //1 for the text binding and 1 for the ObservableArray
     });
-    */
 
     test("DropDownList is not replaced", function() {
         dom = $('<select data-role="dropdownlist" data-template="template-with-attributes" data-bind="source:items" />');

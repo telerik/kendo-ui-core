@@ -537,16 +537,17 @@
 
     test("Dropdownlist with enabled filter triggers change on TAB", 1, function() {
         var dropdownlist = new DropDownList(input, {
-            value: "foo",
+            animation: false,
             filter: "startswith",
             dataSource: ["foo", "bar"],
             change: function() {
                 equal(dropdownlist.value(), "bar");
-            }
+            },
+            value: "foo"
         });
 
         dropdownlist.open();
-        dropdownlist.filterInput.focus().trigger({
+        dropdownlist.filterInput.focusin().trigger({
             type: "keydown",
             keyCode: kendo.keys.DOWN
         });
