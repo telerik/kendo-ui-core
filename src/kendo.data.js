@@ -3416,6 +3416,7 @@ var __meta__ = {
             }
 
             that._query({ filter: val, page: 1 });
+            that.trigger("reset");
         },
 
         group: function(val) {
