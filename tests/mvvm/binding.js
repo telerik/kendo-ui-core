@@ -391,7 +391,7 @@ test("splicing items from array removes option elements without destroying the e
     equal(dom.find("option")[1], lastOption);
 });
 
-test("removing items from data source removes option elements without destroing the existing ones", function() {
+test("removing items from data source removes option elements without destroying the existing ones", function() {
     dom = $('<select data-template="select-template" data-bind="source:foo"/>');
 
     var viewModel = kendo.observable( {
@@ -644,6 +644,64 @@ test("binding multi select value to multiple objects", function() {
 
     kendo.bind(dom, viewModel);
     ok(dom.find("option").eq(1).is(":selected"));
+    ok(dom.find("option").eq(2).is(":selected"));
+});
+
+test("binding multiple select value to date array (with source binding)", function() {
+    dom = $('<select multiple="multiple" data-value-field="text" data-type="date" data-bind="source:items, value:selectedItems"/>');
+
+    var viewModel = kendo.observable({
+        items: [{text: "2015-01-01"}, {text:"2014-01-01"}, {text:"2014-12-31"}],
+        selectedItems: []
+    });
+
+    kendo.bind(dom, viewModel);
+    viewModel.set("selectedItems", [kendo.parseDate(viewModel.items[0].text, "yyyy-MM-dd"), kendo.parseDate(viewModel.items[2].text, "yyyy-MM-dd")]);
+
+    ok(dom.find("option").eq(0).is(":selected"));
+    ok(dom.find("option").eq(2).is(":selected"));
+});
+
+test("binding multiple select value to date array", function() {
+    dom = $('<select multiple="multiple" data-type="date" data-bind="value:selectedItems"><option value="2015-01-01"></option><option value="2014-1-1"></option><option value="2014-12-31"></option></select>');
+
+    var viewModel = kendo.observable({
+        selectedItems: []
+    });
+
+    kendo.bind(dom, viewModel);
+    viewModel.set("selectedItems", [kendo.parseDate("2015-01-01"), kendo.parseDate("2014-12-31")]);
+
+    ok(dom.find("option").eq(0).is(":selected"));
+    ok(dom.find("option").eq(2).is(":selected"));
+});
+
+test("binding multiple select value to number array (with source binding) ", function() {
+    dom = $('<select multiple="multiple" data-value-field="text" data-type="number" data-bind="source:items, value:selectedItems"/>');
+
+    var viewModel = kendo.observable({
+        items: [{text: "123"}, {text:"14.5"}, {text:"-3.14"}],
+        selectedItems: []
+    });
+
+    kendo.bind(dom, viewModel);
+    viewModel.set("selectedItems", [123, -3.14]);
+
+    ok(dom.find("option").eq(0).is(":selected"));
+    ok(dom.find("option").eq(2).is(":selected"));
+});
+
+test("binding multiple select value to number array", function() {
+    dom = $('<select multiple="multiple" data-type="number" data-bind="value:selectedItems"><option value="123"></option><option value="14.5"></option><option value="-3.14"></option></select></select>');
+
+    var viewModel = kendo.observable({
+        selectedItems: []
+    });
+
+    kendo.bind(dom, viewModel);
+    viewModel.set("selectedItems", [123, -3.14]);
+
+    ok(dom.find("option").eq(0).is(":selected"));
     ok(dom.find("option").eq(2).is(":selected"));
 });
 
@@ -1470,12 +1528,203 @@ test("source binding destroy unbinds other change handlers", 1, function() {
     viewModel.get("foo").push(3);
 });
 
+
+test("checked binding removing the item unchecks the checkbox", function() {
+    var dom = $('<input type="checkbox" value="foo" data-bind="checked:selectedItems"/>');
+
+    var viewModel = kendo.observable({
+        selectedItems: ["foo"]
+    });
+
+    kendo.bind(dom, viewModel);
+
+    viewModel.selectedItems.splice(0,1);
+
+    ok(!dom.is(":checked"));
+});
+
+test("checked binding adding a date item should check the checkbox", function() {
+    var dom = $('<input type="checkbox" value="2015-1-1" data-type="date" data-bind="checked:selectedItems"/>');
+
+    var viewModel = kendo.observable({
+        selectedItems: [kendo.parseDate(dom.val(), "yyyy-MM-dd")]
+    });
+
+    kendo.bind(dom, viewModel);
+
+    ok(dom.is(":checked"));
+});
+
+test("checked binding adding a date item should check the radiobutton", function() {
+    var dom = $('<input type="radio" value="2015-01-15" data-type="date" data-bind="checked:selectedItems"/>');
+
+    var viewModel = kendo.observable({
+        selectedItems: kendo.parseDate(dom.val(), "yyyy-MM-dd")
+    });
+
+    kendo.bind(dom, viewModel);
+
+    ok(dom.is(":checked"));
+});
+
+test("checked binding removing a date item should uncheck the checkbox", function() {
+    var dom = $('<input type="checkbox" value="2015-1-1" data-type="date" data-bind="checked:selectedItems"/>');
+
+    var viewModel = kendo.observable({
+        selectedItems: [kendo.parseDate(dom.val(), "yyyy-MM-dd")]
+    });
+
+    kendo.bind(dom, viewModel);
+
+    viewModel.selectedItems.splice(0,1);
+
+    ok(!dom.is(":checked"));
+});
+
+test("checked binding removing a date item should uncheck the radiobutton", function() {
+    var dom = $('<input type="radio" value="2015-1-1" data-type="date" data-bind="checked:selectedItems"/>');
+
+    var viewModel = kendo.observable({
+        selectedItems: [kendo.parseDate(dom.val(), "yyyy-MM-dd")]
+    });
+
+    kendo.bind(dom, viewModel);
+
+    viewModel.selectedItems.splice(0,1);
+
+    ok(!dom.is(":checked"));
+});
+
+test("checked binding adding a boolean item should check the checkbox", function() {
+    var dom = $('<input type="checkbox" value="false" data-type="boolean" data-bind="checked:selectedItems"/>');
+
+    var viewModel = kendo.observable({
+        selectedItems: [false]
+    });
+
+    kendo.bind(dom, viewModel);
+
+    ok(dom.is(":checked"));
+});
+
+test("checked binding adding a boolean item should check the radiobutton", function() {
+    var dom = $('<input type="radio" value="true" data-type="boolean" data-bind="checked:selectedItems"/>');
+
+    var viewModel = kendo.observable({
+        selectedItems: true
+    });
+
+    kendo.bind(dom, viewModel);
+
+    ok(dom.is(":checked"));
+});
+
+test("checked binding removing a boolean item should uncheck the checkbox", function() {
+    var dom = $('<input type="checkbox" value="true" data-type="boolean" data-bind="checked:selectedItems"/>');
+
+    var viewModel = kendo.observable({
+        selectedItems: [true]
+    });
+
+    kendo.bind(dom, viewModel);
+
+    viewModel.selectedItems.splice(0,1);
+
+    ok(!dom.is(":checked"));
+});
+
+test("checked binding removing a boolean item should uncheck the radiobutton", function() {
+    var dom = $('<input type="radio" value="true" data-type="boolean" data-bind="checked:selectedItems"/>');
+
+    var viewModel = kendo.observable({
+        selectedItems: [false]
+    });
+
+    kendo.bind(dom, viewModel);
+
+    viewModel.selectedItems.splice(0,1);
+
+    ok(!dom.is(":checked"));
+});
+
+test("checked binding adding a number item should check the checkbox", function() {
+    var dom = $('<input type="checkbox" value="1.23" data-type="number" data-bind="checked:selectedItems"/>');
+
+    var viewModel = kendo.observable({
+        selectedItems: [kendo.parseFloat(dom.val())]
+    });
+
+    kendo.bind(dom, viewModel);
+
+    ok(dom.is(":checked"));
+});
+
+test("checked binding adding a number item should check the radiobutton", function() {
+    var dom = $('<input type="radio" value="1.23" data-type="number" data-bind="checked:selectedItems"/>');
+
+    var viewModel = kendo.observable({
+        selectedItems: kendo.parseFloat(dom.val())
+    });
+
+    kendo.bind(dom, viewModel);
+
+    ok(dom.is(":checked"));
+});
+
+test("checked binding removing a number item should uncheck the checkbox", function() {
+    var dom = $('<input type="checkbox" value="1.23" data-type="number" data-bind="checked:selectedItems"/>');
+
+    var viewModel = kendo.observable({
+        selectedItems: [kendo.parseFloat(dom.val())]
+    });
+
+    kendo.bind(dom, viewModel);
+
+    viewModel.selectedItems.splice(0,1);
+
+    ok(!dom.is(":checked"));
+});
+
+test("checked binding removing a number item should uncheck the radiobutton", function() {
+    var dom = $('<input type="radio" value="1.23" data-type="number" data-bind="checked:selectedItems"/>');
+
+    var viewModel = kendo.observable({
+        selectedItems: [kendo.parseFloat(dom.val())]
+    });
+
+    kendo.bind(dom, viewModel);
+
+    viewModel.selectedItems.splice(0,1);
+
+    ok(!dom.is(":checked"));
+});
+
 if (kendo.support.input.date) {
     test("input type date value binding", function() {
         dom = $('<input type="date" data-bind="value: date">');
 
         kendo.bind(dom, {
             date: new Date("2013/6/3")
+        });
+
+        equal(dom.val(), "2013-06-03");
+    });
+
+    test("input type date value binding explicit 'date' data-type", function() {
+        dom = $('<input type="date" data-type="date" data-bind="value: date">');
+
+        kendo.bind(dom, {
+            date: new Date("2013/6/3")
+        });
+
+        equal(dom.val(), "2013-06-03");
+    });
+
+    test("input type date value binding explicit 'text' data-type", function() {
+        dom = $('<input type="date" data-type="text" data-bind="value: date">');
+
+        kendo.bind(dom, {
+            date: kendo.toString(new Date("2013/6/3"), "yyyy-MM-dd")
         });
 
         equal(dom.val(), "2013-06-03");
@@ -1492,11 +1741,73 @@ if (kendo.support.input.datetimelocal) {
 
         equal(dom.val(), "2013-06-03T20:30:52");
     });
+
+    test("checked binding adding a datetime-local item should check the checkbox", function() {
+        var dom = $('<input type="checkbox" value="2013-06-05T23:13:40" data-type="datetime-local" data-bind="checked:selectedItems"/>');
+
+        var viewModel = kendo.observable({
+            selectedItems: [kendo.parseDate(dom.val(), ["yyyy-MM-ddTHH:mm:ss", "yyyy-MM-ddTHH:mm"])]
+        });
+
+        kendo.bind(dom, viewModel);
+
+        ok(dom.is(":checked"));
+    });
+
+    test("checked binding adding a datetime-local item should check the radiobutton", function() {
+        var dom = $('<input type="radio" value="2013-06-05T23:13:40" data-type="datetime-local" data-bind="checked:selectedItems"/>');
+
+        var viewModel = kendo.observable({
+            selectedItems: kendo.parseDate(dom.val(), ["yyyy-MM-ddTHH:mm:ss", "yyyy-MM-ddTHH:mm"])
+        });
+
+        kendo.bind(dom, viewModel);
+
+        ok(dom.is(":checked"));
+    });
+
+    test("checked binding removing a datetime-local item should uncheck the checkbox", function() {
+        var dom = $('<input type="checkbox" value="2013-06-05T23:13:40" data-type="datetime-local" data-bind="checked:selectedItems"/>');
+
+        var viewModel = kendo.observable({
+            selectedItems: [kendo.parseDate(dom.val(), ["yyyy-MM-ddTHH:mm:ss", "yyyy-MM-ddTHH:mm"])]
+        });
+
+        kendo.bind(dom, viewModel);
+
+        viewModel.selectedItems.splice(0,1);
+
+        ok(!dom.is(":checked"));
+    });
+
+    test("checked binding removing a datetime-local item should uncheck the radiobutton", function() {
+        var dom = $('<input type="radio" value="2013-06-05T23:13:40" data-type="datetime-local" data-bind="checked:selectedItems"/>');
+
+        var viewModel = kendo.observable({
+            selectedItems: [kendo.parseDate(dom.val(), ["yyyy-MM-ddTHH:mm:ss", "yyyy-MM-ddTHH:mm"])]
+        });
+
+        kendo.bind(dom, viewModel);
+
+        viewModel.selectedItems.splice(0,1);
+
+        ok(!dom.is(":checked"));
+    });
 }
 
 if (kendo.support.input.number) {
     test("input type number value binding", function() {
         dom = $('<input type="number" data-bind="value: number">');
+
+        kendo.bind(dom, {
+            number: 3.14
+        });
+
+        equal(dom.val(), "3.14");
+    });
+
+    test("input type number value binding explicit 'text' data-type", function() {
+        dom = $('<input type="number" data-type="text" data-bind="value: number">');
 
         kendo.bind(dom, {
             number: 3.14

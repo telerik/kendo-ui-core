@@ -494,6 +494,45 @@ test("changing the value updates the view model", function() {
     equal(viewModel.foo, "bar");
 });
 
+test("changing the number type input value updates the view model", function() {
+    var dom = $('<input data-type="number" data-bind="value:foo" />');
+
+    var viewModel = kendo.observable( { foo: -1.23 });
+
+    kendo.bind(dom, viewModel);
+
+    dom.val(5.4321);
+    dom.trigger("change");
+
+    equal(viewModel.foo, 5.4321);
+});
+
+test("changing the date type input value updates the view model", function() {
+    var dom = $('<input data-type="date" data-bind="value:foo" />');
+
+    var viewModel = kendo.observable( { foo: new Date() });
+
+    kendo.bind(dom, viewModel);
+
+    dom.val("2015-01-31");
+    dom.trigger("change");
+
+    deepEqual(viewModel.foo, kendo.parseDate("2015-01-31"));
+});
+
+test("changing the boolean type input value updates the view model", function() {
+    var dom = $('<input data-type="boolean" data-bind="value:foo" />');
+
+    var viewModel = kendo.observable( { foo: false });
+
+    kendo.bind(dom, viewModel);
+
+    dom.val(true);
+    dom.trigger("change");
+
+    equal(viewModel.foo, true);
+});
+
 test("changing the input value updates dependent observable", 1, function() {
     var dom = $('<input data-bind="value:foo" />');
 
@@ -567,6 +606,47 @@ test("changing the value of pre populated multi select updates the view model", 
     equal(viewModel.foo[0], "bar");
 });
 
+test("changing the value of pre populated number type multi select updates the view model", function() {
+    var dom = $('<select multiple="multiple" data-type="number" data-bind="value:foo"><option value="1">1</option><option value="-1.23">2</option>');
+
+    var viewModel = kendo.observable( { foo: [] });
+
+    kendo.bind(dom, viewModel);
+
+    dom.find("option:last").attr("selected", "selected");
+    dom.trigger("change");
+
+    strictEqual(viewModel.foo[0], -1.23);
+});
+
+test("changing the value of pre populated boolean type multi select updates the view model", function() {
+    var dom = $('<select multiple="multiple" data-type="boolean" data-bind="value:foo"><option value="0">1</option><option value="true">2</option>');
+
+    var viewModel = kendo.observable( { foo: [] });
+
+    kendo.bind(dom, viewModel);
+
+    dom.find("option").attr("selected", "selected");
+    dom.trigger("change");
+
+    strictEqual(viewModel.foo[0], false);
+    strictEqual(viewModel.foo[1], true);
+});
+
+test("changing the value of pre populated date type multi select updates the view model", function() {
+    var dom = $('<select multiple="multiple" data-type="date" data-bind="value:foo"><option value="2015-1-1">1</option><option value="2015-11-1">2</option>');
+
+    var viewModel = kendo.observable( { foo: [] });
+
+    kendo.bind(dom, viewModel);
+
+    dom.find("option").attr("selected", "selected");
+    dom.trigger("change");
+
+    deepEqual(viewModel.foo[0], kendo.parseDate("2015-1-1", "yyyy-MM-dd"));
+    deepEqual(viewModel.foo[1], kendo.parseDate("2015-11-1", "yyyy-MM-dd"));
+});
+
 test("changing radiobutton value updates the view model", function() {
     var dom = $('<input type="radio" value="bar"  data-bind="checked:foo"/>');
 
@@ -578,6 +658,45 @@ test("changing radiobutton value updates the view model", function() {
     dom.trigger("change");
 
     equal(viewModel.foo, "bar");
+});
+
+test("changing radiobutton number value updates the view model", function() {
+    var dom = $('<input type="radio" data-type="number" value="-3.14"  data-bind="checked:foo"/>');
+
+    var viewModel = kendo.observable( { foo: 123 });
+
+    kendo.bind(dom, viewModel);
+
+    dom.attr("checked", true);
+    dom.trigger("change");
+
+    strictEqual(viewModel.foo, -3.14);
+});
+
+test("changing radiobutton boolean value updates the view model", function() {
+    var dom = $('<input type="radio" data-type="boolean" value="false"  data-bind="checked:foo"/>');
+
+    var viewModel = kendo.observable( { foo: true });
+
+    kendo.bind(dom, viewModel);
+
+    dom.attr("checked", true);
+    dom.trigger("change");
+
+    strictEqual(viewModel.foo, false);
+});
+
+test("changing radiobutton date value updates the view model", function() {
+    var dom = $('<input type="radio" data-type="date" value="2015-1-1"  data-bind="checked:foo"/>');
+
+    var viewModel = kendo.observable( { foo: new Date() });
+
+    kendo.bind(dom, viewModel);
+
+    dom.attr("checked", true);
+    dom.trigger("change");
+
+    deepEqual(viewModel.foo, kendo.parseDate("2015-1-1", "yyyy-MM-dd"));
 });
 
 test("changing checkbox value updates the view model", function() {
@@ -617,6 +736,58 @@ test("changing checkbox value updates the view model with the checked state", fu
     dom.trigger("change");
 
     equal(viewModel.foo, true);
+});
+
+test("checking checkbox adds the number value to the view model", function() {
+    var dom = $('<input type="checkbox" data-type="number" value="-3.14" data-bind="checked:foo"/>');
+
+    var viewModel = kendo.observable( { foo: [] });
+
+    kendo.bind(dom, viewModel);
+
+    dom.attr("checked", true);
+    dom.trigger("change");
+
+    strictEqual(viewModel.foo[0], -3.14);
+});
+
+test("checking checkbox adds the boolean value to the view model", function() {
+    var dom = $('<input type="checkbox" data-type="boolean" value="true" data-bind="checked:foo"/>');
+
+    var viewModel = kendo.observable( { foo: [] });
+
+    kendo.bind(dom, viewModel);
+
+    dom.attr("checked", true);
+    dom.trigger("change");
+
+    strictEqual(viewModel.foo[0], true);
+});
+
+test("checking checkbox w/ numberic value adds a boolean value to the view model", function() {
+    var dom = $('<input type="checkbox" data-type="boolean" value="0" data-bind="checked:foo"/>');
+
+    var viewModel = kendo.observable( { foo: [] });
+
+    kendo.bind(dom, viewModel);
+
+    dom.attr("checked", true);
+    dom.trigger("change");
+
+    strictEqual(viewModel.foo[0], false);
+});
+
+test("checking checkbox adds the date value to the view model", function() {
+    var dom = $('<input type="checkbox" data-type="date" value="2015-1-1" data-bind="checked:foo"/>');
+
+    var viewModel = kendo.observable( { foo: [] });
+
+    kendo.bind(dom, viewModel);
+
+    dom.attr("checked", true);
+    dom.trigger("change");
+
+    deepEqual(viewModel.foo[0], kendo.parseDate("2015-1-1", "yyyy-MM-dd"));
 });
 
 test("checking checkbox adds the value to the view model", function() {
@@ -961,21 +1132,8 @@ test("tracking changes in dependent fields", function() {
     equal($.trim(dom.text()), "boobar");
 });
 
-test("checked binding removing the item unchecks the checkbox", function() {
-    var dom = $('<input type="checkbox" value="foo" data-bind="checked:selectedItems"/>');
 
-    var viewModel = kendo.observable({
-        selectedItems: ["foo"]
-    });
-
-    kendo.bind(dom, viewModel);
-
-    viewModel.selectedItems.splice(0,1);
-
-    ok(!dom.is(":checked"));
-});
-
-test("model is not updated after target is destoryed", function() {
+test("model is not updated after target is destroyed", function() {
     var dom = $('<input data-bind="value:foo" />');
 
     var viewModel = kendo.observable( { foo: "foo" });
@@ -1004,7 +1162,7 @@ test("UI element is not updated after unbind", function() {
     equal(dom.val(), "foo");
 });
 
-test("changing a field does not triger changing of another field starting with the same name", function() {
+test("changing a field does not trigger changing of another field starting with the same name", function() {
     var viewModel = kendo.observable({
         foo1: [{ name: "foo" }, { name: "bar" }]
     });
@@ -1200,6 +1358,61 @@ if (date[0].type == "date") {
 var datetime = $('<input type="datetime-local">');
 
 if (datetime[0].type == "datetime-local") {
+
+
+    test("checking checkbox adds the datetime-local value to the view model", function() {
+        var dom = $('<input type="checkbox" data-type="datetime-local" value="2015-02-13T01:00:00" data-bind="checked:foo"/>');
+
+        var viewModel = kendo.observable( { foo: [] });
+
+        kendo.bind(dom, viewModel);
+
+        dom.attr("checked", true);
+        dom.trigger("change");
+
+        deepEqual(viewModel.foo[0], kendo.parseDate("2015-02-13T01:00:00", ["yyyy-MM-ddTHH:mm:ss", "yyyy-MM-ddTHH:mm"]));
+    });
+
+    test("changing radiobutton datetime-local value updates the view model", function() {
+        var dom = $('<input type="radio" data-type="datetime-local" value="2015-02-13T01:00:00"  data-bind="checked:foo"/>');
+
+        var viewModel = kendo.observable( { foo: new Date() });
+
+        kendo.bind(dom, viewModel);
+
+        dom.attr("checked", true);
+        dom.trigger("change");
+
+        deepEqual(viewModel.foo, kendo.parseDate("2015-02-13T01:00:00", ["yyyy-MM-ddTHH:mm:ss", "yyyy-MM-ddTHH:mm"]));
+    });
+
+    test("changing the datetime-local type input value updates the view model", function() {
+        var dom = $('<input type="datetime-local" data-type="datetime-local" data-bind="value:foo" />');
+
+        var viewModel = kendo.observable( { foo: new Date() });
+
+        kendo.bind(dom, viewModel);
+
+        dom.val("2015-02-13T01:00:00");
+        dom.trigger("change");
+
+        deepEqual(viewModel.foo, kendo.parseDate("2015-02-13T01:00:00", ["yyyy-MM-ddTHH:mm:ss", "yyyy-MM-ddTHH:mm"]));
+    });
+
+    test("changing the value of pre populated datetime-local type multi select updates the view model", function() {
+        var dom = $('<select multiple="multiple" data-type="datetime-local" data-bind="value:foo"><option value="2015-02-13T01:00:00">1</option><option value="2015-01-13T01:00:00">2</option>');
+
+        var viewModel = kendo.observable( { foo: [] });
+
+        kendo.bind(dom, viewModel);
+
+        dom.find("option").attr("selected", "selected");
+        dom.trigger("change");
+
+        deepEqual(viewModel.foo[0], kendo.parseDate("2015-02-13T01:00:00", ["yyyy-MM-ddTHH:mm:ss", "yyyy-MM-ddTHH:mm"]));
+        deepEqual(viewModel.foo[1], kendo.parseDate("2015-01-13T01:00:00", ["yyyy-MM-ddTHH:mm:ss", "yyyy-MM-ddTHH:mm"]));
+    });
+
     test("changing the value of input type datetime-local updates the view model with a valid JavaScript Date", function() {
         var observable = kendo.observable({
             date: new Date("2013/5/4")
@@ -1235,6 +1448,7 @@ if (datetime[0].type == "datetime-local") {
         equal(observable.date.getMinutes(), 13);
         equal(observable.date.getSeconds(), 00);
     });
+
 }
 
 var number = $('<input type="number">');
@@ -1252,6 +1466,20 @@ if (number[0].type == "number") {
         dom.val("3.14").trigger("change");
 
         strictEqual(observable.number, 3.14);
+    });
+
+    test("changing the value of input type number and data-type 'boolean' updates the view model with a valid Boolean", function() {
+        var dom = $('<input type="number" data-type="boolean" data-bind="value: number">');
+
+        var observable = kendo.observable({
+            number: 0
+        });
+
+        kendo.bind(dom, observable);
+
+        dom.val(1).trigger("change");
+
+        strictEqual(observable.number, true);
     });
 }
 

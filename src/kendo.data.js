@@ -198,7 +198,7 @@ var __meta__ = {
                 });
 
                 for (i = 0, len = result.length; i < len; i++) {
-                    if (result[i].children) {
+                    if (result[i] && result[i].children) {
                         result[i].unbind(CHANGE);
                     }
                 }
