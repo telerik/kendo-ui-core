@@ -49,8 +49,11 @@ var __meta__ = {
 
             that._userEvents = new kendo.UserEvents(that.element, {
                 press: function(e) { that._activate(e); },
-                tap: function(e) { that._release(e); },
                 release: function(e) { highlightButton(that, e, false); }
+            });
+
+            that._userEvents.bind(this.options.clickOn === "up" ? "tap" : "press", function(e) {
+                that._release(e);
             });
 
             if (ANDROID3UP) {
@@ -72,6 +75,7 @@ var __meta__ = {
             icon: "",
             style: "",
             badge: "",
+            clickOn: "up",
             enable: true
         },
 

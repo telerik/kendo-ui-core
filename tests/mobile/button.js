@@ -72,6 +72,18 @@
         click(dom);
     });
 
+    test("raises click event on touchstart when pressed and configured", 1, function() {
+        dom = $("<button>foo</button>");
+
+        var button = new Button(dom, { clickOn: "down" });
+
+        button.bind("click", function() {
+            ok(true, "Should raise the click event");
+        });
+
+        dom.trigger(MOUSEDOWN);
+    });
+
     test("Sets active css class on 'down'", 1, function() {
         dom = $("<button>foo</button>");
 
