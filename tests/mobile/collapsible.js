@@ -130,6 +130,20 @@
         ok(panel.element.hasClass("km-collapsibleinset"));
     });
 
+    test("default icon position is left", 1, function() {
+        var panel = $("#collapsible").kendoMobileCollapsible().data("kendoMobileCollapsible");
+
+        ok(panel.header.hasClass("km-icon-left"));
+    });
+
+    test("icon position can be configured through the options", 1, function() {
+        var panel = $("#collapsible").kendoMobileCollapsible({
+            iconPosition: "right"
+        }).data("kendoMobileCollapsible");
+
+        ok(panel.header.hasClass("km-icon-right"));
+    });
+
     /* UI interactions */
 
     test("clicking the header expands the content when content is hidden", function() {

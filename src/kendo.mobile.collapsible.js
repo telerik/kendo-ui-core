@@ -25,6 +25,11 @@ var __meta__ = {
         EXPANDED = "km-expanded",
         ANIMATED = "km-animated",
 
+        //icon position
+        LEFT = "left",
+        RIGHT = "right",
+        TOP = "top",
+
         //events
         EXAPND = "expand",
         COLLAPSE = "collapse";
@@ -69,6 +74,7 @@ var __meta__ = {
             collapsed: true,
             collapseIcon: "minus",
             expandIcon: "plus",
+            iconPosition: LEFT,
             animation: true,
             inset: false
         },
@@ -138,7 +144,8 @@ var __meta__ = {
         _buildHeader: function() {
             var header = this.element.children(":header").wrapAll(HEADER_WRAPPER),
                 iconSpan = $('<span class="km-icon"/>'),
-                icon = this.options.collapsed ? this.options.expandIcon : this.options.collapseIcon;
+                icon = this.options.collapsed ? this.options.expandIcon : this.options.collapseIcon,
+                iconPosition = this.options.iconPosition;
 
             if (icon) {
                 header.prepend(iconSpan);
@@ -146,6 +153,7 @@ var __meta__ = {
             }
 
             this.header = header.parent();
+            this.header.addClass("km-icon-" + iconPosition);
         },
 
         _getContentHeight: function() {
