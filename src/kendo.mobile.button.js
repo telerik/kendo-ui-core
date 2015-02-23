@@ -40,9 +40,14 @@ var __meta__ = {
             var that = this;
 
             Widget.fn.init.call(that, element, options);
+            var useTap = that.options.clickOn === "up";
 
             that._wrap();
             that._style();
+
+            if (!useTap) {
+                that.element.attr("data-navigate-on-press", true);
+            }
 
             that.options.enable = that.options.enable && !that.element.attr(DISABLED);
             that.enable(that.options.enable);
@@ -52,7 +57,7 @@ var __meta__ = {
                 release: function(e) { highlightButton(that, e, false); }
             });
 
-            that._userEvents.bind(this.options.clickOn === "up" ? "tap" : "press", function(e) {
+            that._userEvents.bind(useTap ? "tap" : "press", function(e) {
                 that._release(e);
             });
 

@@ -276,7 +276,7 @@ var __meta__ = {
         _setupAppLinks: function() {
             var that = this;
             this.element.handler(this)
-                .on("down", roleSelector(linkRoles), "_mouseup")
+                .on("down", roleSelector(linkRoles)+",[data-navigate-on-press]", "_mouseup")
                 .on("click", roleSelector(linkRoles + " " + buttonRoles), "_appLinkClick");
 
             this.userEvents = new kendo.UserEvents(this.element, {

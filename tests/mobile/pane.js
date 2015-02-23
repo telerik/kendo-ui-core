@@ -64,9 +64,16 @@
         visible("#bar");
     });
 
-    test("navigates when a button is pressed", 1, function() {
+    test("navigates when a button is tapped", 1, function() {
         pane = buildPane('<div data-role="view" id="foo"><a data-role="button" id="barButton" href="#bar">Go to Bar</a></div><div data-role="view" id="bar">Bar</div>');
         tap(root.find("#barButton"));
+        visible("#bar");
+    });
+
+    test("navigates when a button is pressed (and config is set)", 1, function() {
+        pane = buildPane('<div data-role="view" id="foo"><a data-role="button" data-click-on="down" id="barButton" href="#bar">Go to Bar</a></div><div data-role="view" id="bar">Bar</div>');
+        pane.navigate("") // instantiate the button widget
+        press(root.find("#barButton"), 0, 0);
         visible("#bar");
     });
 
