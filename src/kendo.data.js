@@ -4557,7 +4557,7 @@ var __meta__ = {
             for (var i = 0; i < take; i++) {
                 item = buffer.at(skip + i);
 
-                if (item === undefined) {
+                if (item === null) {
                     break;
                 }
 
