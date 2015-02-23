@@ -17,7 +17,7 @@ var __meta__ = {
         COLLAPSIBLE = "km-collapsible",
         HEADER = "km-collapsible-header",
         CONTENT = "km-collapsible-content",
-        INSET = "km-inset",
+        INSET = "km-collapsibleinset",
         HEADER_WRAPPER = "<div data-role='collapsible-header' class='" + HEADER + "'></div>",
         CONTENT_WRAPPER = "<div data-role='collapsible-content' class='" + CONTENT + "'></div>",
 
