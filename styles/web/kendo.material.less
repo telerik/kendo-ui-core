@@ -874,8 +874,14 @@ color: @header-text-color;
 .k-gantt .k-treelist .k-state-selected td,
 .k-gantt .k-treelist .k-alt.k-state-selected,
 .k-gantt .k-treelist .k-alt.k-state-selected > td,
-.k-listview > .k-state-selected {
+.k-listview > .k-state-selected,
+.k-state-selected.k-line {
 background-color: @accent-color; 
+}
+
+.k-state-selected.k-line
+{
+    color: @accent-color;
 }
 
 .k-grid tr.k-state-selected,
@@ -885,12 +891,19 @@ color: @inverse-text-color;
 }
 
 .k-grid-header .k-header .k-link,
+.k-grid-header .k-header,
 .k-grid-header .k-link,
 .k-grid-header .k-link:link,
 .k-pager-info,
 .k-scheduler-header,
 .k-scheduler-agendaview .k-scheduler-datecolumn {
 color: @primary-disabled-text-color;
+}
+
+.k-gantt {
+    .k-task-draghandle {
+        border-color: @accent-color;
+    }
 }
 
 .k-grid-pager .k-link,
