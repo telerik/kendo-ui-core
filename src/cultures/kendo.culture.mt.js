@@ -8,7 +8,7 @@
             ".": ".",
             groupSize: [3],
             percent: {
-                pattern: ["-%n","%n"],
+                pattern: ["-n %","n %"],
                 decimals: 2,
                 ",": ",",
                 ".": ".",
@@ -29,11 +29,11 @@
                 days: {
                     names: ["Il-Ħadd","It-Tnejn","It-Tlieta","L-Erbgħa","Il-Ħamis","Il-Ġimgħa","Is-Sibt"],
                     namesAbbr: ["Ħad","Tne","Tli","Erb","Ħam","Ġim","Sib"],
-                    namesShort: ["I","I","I","L","I","I","I"]
+                    namesShort: ["Ħd","Tn","Tl","Er","Ħm","Ġi","Si"]
                 },
                 months: {
-                    names: ["Jannar","Frar","Marzu","April","Mejju","Ġunju","Lulju","Awissu","Settembru","Ottubru","Novembru","Diċembru",""],
-                    namesAbbr: ["Jan","Fra","Mar","Apr","Mej","Ġun","Lul","Awi","Set","Ott","Nov","Diċ",""]
+                    names: ["Jannar","Frar","Marzu","April","Mejju","Ġunju","Lulju","Awwissu","Settembru","Ottubru","Novembru","Diċembru",""],
+                    namesAbbr: ["Jan","Fra","Mar","Apr","Mej","Ġun","Lul","Aww","Set","Ott","Nov","Diċ",""]
                 },
                 AM: ["AM","am","AM"],
                 PM: ["PM","pm","PM"],

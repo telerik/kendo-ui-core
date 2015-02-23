@@ -43,8 +43,8 @@
                     F: "dddd, dd' de 'MMMM' de 'yyyy H:mm:ss",
                     g: "dd/MM/yyyy H:mm",
                     G: "dd/MM/yyyy H:mm:ss",
-                    m: "dd MMMM",
-                    M: "dd MMMM",
+                    m: "d' de 'MMMM",
+                    M: "d' de 'MMMM",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
                     t: "H:mm",
                     T: "H:mm:ss",
@@ -54,7 +54,7 @@
                 },
                 "/": "/",
                 ":": ":",
-                firstDay: 0
+                firstDay: 1
             }
         }
     }

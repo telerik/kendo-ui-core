@@ -29,7 +29,7 @@
                 days: {
                     names: ["Sul","Lun","Meurzh","Merc\u0027her","Yaou","Gwener","Sadorn"],
                     namesAbbr: ["Sul","Lun","Meu.","Mer.","Yaou","Gwe.","Sad."],
-                    namesShort: ["Su","Lu","Mz","Mc","Ya","Gw","Sa"]
+                    namesShort: ["Su","L","Mz","Mc","Y","G","Sa"]
                 },
                 months: {
                     names: ["Genver","C\u0027hwevrer","Meurzh","Ebrel","Mae","Mezheven","Gouere","Eost","Gwengolo","Here","Du","Kerzu",""],

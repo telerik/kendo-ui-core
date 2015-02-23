@@ -29,22 +29,22 @@
                 days: {
                     names: ["iSonto","uMsombuluko","uLwesibili","uLwesithathu","uLwesine","uLwesihlanu","uMgqibelo"],
                     namesAbbr: ["Son.","Mso.","Bi.","Tha.","Ne.","Hla.","Mgq."],
-                    namesShort: ["Su","Mo","Tu","We","Th","Fr","Sa"]
+                    namesShort: ["So","Ms","Bi","Th","Ne","Hl","Mg"]
                 },
                 months: {
-                    names: ["uMasingana","uNhlolanja","uNdasa","uMbaso","uNhlaba","uNhlangulana","uNtulikazi","uNcwaba","uMandulo","uMfumfu","uLwezi","uZibandlela",""],
-                    namesAbbr: ["Mas.","Nhlo.","Nda.","Mba.","Nhla.","Nhlang.","Ntu.","Ncwa.","Man.","Mfu.","Lwe.","Zib.",""]
+                    names: ["Januwari","Febhuwari","Mashi","Ephreli","Meyi","Juni","Julayi","Agasti","Septemba","Okthoba","Novemba","Disemba",""],
+                    namesAbbr: ["Jan","Feb","Mas","Eph","Mey","Jun","Jul","Agas","Sep","Okt","Nov","Dis",""]
                 },
-                AM: ["AM","am","AM"],
-                PM: ["PM","pm","PM"],
+                AM: ["Ntambama","ntambama","NTAMBAMA"],
+                PM: ["Ekuseni","ekuseni","EKUSENI"],
                 patterns: {
-                    d: "yyyy/MM/dd",
+                    d: "dd-MM-yyyy",
                     D: "dd MMMM yyyy",
                     F: "dd MMMM yyyy hh:mm:ss tt",
-                    g: "yyyy/MM/dd hh:mm tt",
-                    G: "yyyy/MM/dd hh:mm:ss tt",
-                    m: "dd MMMM",
-                    M: "dd MMMM",
+                    g: "dd-MM-yyyy hh:mm tt",
+                    G: "dd-MM-yyyy hh:mm:ss tt",
+                    m: "d MMMM",
+                    M: "d MMMM",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
                     t: "hh:mm tt",
                     T: "hh:mm:ss tt",
@@ -52,7 +52,7 @@
                     y: "MMMM yyyy",
                     Y: "MMMM yyyy"
                 },
-                "/": "/",
+                "/": "-",
                 ":": ":",
                 firstDay: 0
             }

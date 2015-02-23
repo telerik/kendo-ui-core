@@ -33,18 +33,18 @@
                 },
                 months: {
                     names: ["ođđajagemánnu","guovvamánnu","njukčamánnu","cuoŋománnu","miessemánnu","geassemánnu","suoidnemánnu","borgemánnu","čakčamánnu","golggotmánnu","skábmamánnu","juovlamánnu",""],
-                    namesAbbr: ["ođđj","guov","njuk","cuo","mies","geas","suoi","borg","čakč","golg","skáb","juov",""]
+                    namesAbbr: ["ođđj","guov","njuk","cuoŋ","mies","geas","suoi","borg","čakč","golg","skáb","juov",""]
                 },
                 AM: [""],
                 PM: [""],
                 patterns: {
                     d: "yyyy-MM-dd",
-                    D: "MMMM d'. b. 'yyyy",
-                    F: "MMMM d'. b. 'yyyy HH:mm:ss",
+                    D: "dddd, MMMM d'. b. 'yyyy",
+                    F: "dddd, MMMM d'. b. 'yyyy HH:mm:ss",
                     g: "yyyy-MM-dd HH:mm",
                     G: "yyyy-MM-dd HH:mm:ss",
-                    m: "MMMM d'. b. '",
-                    M: "MMMM d'. b. '",
+                    m: "MMMM d'. b.'",
+                    M: "MMMM d'. b.'",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
                     t: "HH:mm",
                     T: "HH:mm:ss",

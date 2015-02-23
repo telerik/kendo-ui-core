@@ -16,7 +16,7 @@
                 symbol: "%"
             },
             currency: {
-                pattern: ["($ n)","$ n"],
+                pattern: ["-$ n","$ n"],
                 decimals: 2,
                 ",": ".",
                 ".": ",",
@@ -33,21 +33,21 @@
                 },
                 months: {
                     names: ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre",""],
-                    namesAbbr: ["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic",""]
+                    namesAbbr: ["ene","feb","mar","abr","may","jun","jul","ago","set","oct","nov","dic",""]
                 },
-                AM: ["a.m.","a.m.","A.M."],
-                PM: ["p.m.","p.m.","P.M."],
+                AM: ["a. m.","a. m.","A. M."],
+                PM: ["p. m.","p. m.","P. M."],
                 patterns: {
                     d: "dd/MM/yyyy",
                     D: "dddd, dd' de 'MMMM' de 'yyyy",
-                    F: "dddd, dd' de 'MMMM' de 'yyyy hh:mm:ss tt",
-                    g: "dd/MM/yyyy hh:mm tt",
-                    G: "dd/MM/yyyy hh:mm:ss tt",
-                    m: "dd MMMM",
-                    M: "dd MMMM",
+                    F: "dddd, dd' de 'MMMM' de 'yyyy H:mm:ss",
+                    g: "dd/MM/yyyy H:mm",
+                    G: "dd/MM/yyyy H:mm:ss",
+                    m: "d' de 'MMMM",
+                    M: "d' de 'MMMM",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
-                    t: "hh:mm tt",
-                    T: "hh:mm:ss tt",
+                    t: "H:mm",
+                    T: "H:mm:ss",
                     u: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
                     y: "MMMM' de 'yyyy",
                     Y: "MMMM' de 'yyyy"

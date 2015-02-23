@@ -21,7 +21,7 @@
                 ",": ",",
                 ".": ".",
                 groupSize: [3,2],
-                symbol: "रु"
+                symbol: "₹"
             }
         },
         calendars: {

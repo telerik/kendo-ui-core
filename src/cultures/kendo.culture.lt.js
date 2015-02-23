@@ -4,13 +4,13 @@
         numberFormat: {
             pattern: ["-n"],
             decimals: 2,
-            ",": ".",
+            ",": " ",
             ".": ",",
             groupSize: [3],
             percent: {
-                pattern: ["-n%","n%"],
+                pattern: ["-n %","n %"],
                 decimals: 2,
-                ",": ".",
+                ",": " ",
                 ".": ",",
                 groupSize: [3],
                 symbol: "%"
@@ -18,7 +18,7 @@
             currency: {
                 pattern: ["-n $","n $"],
                 decimals: 2,
-                ",": ".",
+                ",": " ",
                 ".": ",",
                 groupSize: [3],
                 symbol: "Lt"
@@ -38,11 +38,11 @@
                 AM: [""],
                 PM: [""],
                 patterns: {
-                    d: "yyyy.MM.dd",
+                    d: "yyyy-MM-dd",
                     D: "yyyy 'm.' MMMM d 'd.'",
                     F: "yyyy 'm.' MMMM d 'd.' HH:mm:ss",
-                    g: "yyyy.MM.dd HH:mm",
-                    G: "yyyy.MM.dd HH:mm:ss",
+                    g: "yyyy-MM-dd HH:mm",
+                    G: "yyyy-MM-dd HH:mm:ss",
                     m: "MMMM d 'd.'",
                     M: "MMMM d 'd.'",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
@@ -52,7 +52,7 @@
                     y: "yyyy 'm.' MMMM",
                     Y: "yyyy 'm.' MMMM"
                 },
-                "/": ".",
+                "/": "-",
                 ":": ":",
                 firstDay: 1
             }

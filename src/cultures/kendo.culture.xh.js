@@ -28,23 +28,23 @@
             standard: {
                 days: {
                     names: ["iCawa","uMvulo","uLwesibini","uLwesithathu","uLwesine","uLwesihlanu","uMgqibelo"],
-                    namesAbbr: ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],
+                    namesAbbr: ["iCa.","uMv.","uLwesib.","uLwesith.","uLwesin.","uLwesihl.","uMgq."],
                     namesShort: ["Ca","Mv","Lb","Lt","Ln","Lh","Mg"]
                 },
                 months: {
-                    names: ["Mqungu","Mdumba","Kwindla","Tshazimpuzi","Canzibe","Silimela","Khala","Thupha","Msintsi","Dwarha","Nkanga","Mnga",""],
-                    namesAbbr: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec",""]
+                    names: ["uJanuwari","uFebuwari","uMatshi","uAprili","uMeyi","uJuni","uJulayi","uAgasti","uSeptemba","uOktobha","uNovemba","uDisemba",""],
+                    namesAbbr: ["uJan.","uFeb.","uMat.","uEpr.","uMey.","uJun.","uJul.","uAg.","uSep.","uOkt.","uNov.","uDis.",""]
                 },
-                AM: ["AM","am","AM"],
-                PM: ["PM","pm","PM"],
+                AM: ["Ekuseni","ekuseni","EKUSENI"],
+                PM: ["Emva Kwemini","emva kwemini","EMVA KWEMINI"],
                 patterns: {
                     d: "yyyy/MM/dd",
                     D: "dd MMMM yyyy",
                     F: "dd MMMM yyyy hh:mm:ss tt",
                     g: "yyyy/MM/dd hh:mm tt",
                     G: "yyyy/MM/dd hh:mm:ss tt",
-                    m: "dd MMMM",
-                    M: "dd MMMM",
+                    m: "d MMMM",
+                    M: "d MMMM",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
                     t: "hh:mm tt",
                     T: "hh:mm:ss tt",

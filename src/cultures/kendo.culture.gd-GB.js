@@ -27,13 +27,13 @@
         calendars: {
             standard: {
                 days: {
-                    names: ["Didòmhnaich","Diluain","Dimàirt","Diciadain","Diardaoin","Dihaoine","Disathairne"],
-                    namesAbbr: ["Dòm","Lua","Mài","Cia","Ard","Hao","Sat"],
-                    namesShort: ["D","L","M","C","A","H","S"]
+                    names: ["DiDòmhnaich","DiLuain","DiMàirt","DiCiadain","DiarDaoin","DihAoine","DiSathairne"],
+                    namesAbbr: ["DiD","DiL","DiM","DiC","Dia","Dih","DiS"],
+                    namesShort: ["Dò","Lu","Mà","Ci","Da","Ao","Sa"]
                 },
                 months: {
                     names: ["Am Faoilleach","An Gearran","Am Màrt","An Giblean","An Cèitean","An t-Ògmhios","An t-Iuchar","An Lùnastal","An t-Sultain","An Dàmhair","An t-Samhain","An Dùbhlachd",""],
-                    namesAbbr: ["Fao","Gea","Màr","Gib","Cèi","Ògm","Iuc","Lùn","Sul","Dàm","Sam","Dùb",""]
+                    namesAbbr: ["Faoi","Gear","Màrt","Gibl","Cèit","Ògmh","Iuch","Lùn","Sult","Dàmh","Samh","Dùbh",""]
                 },
                 AM: ["m","m","M"],
                 PM: ["f","f","F"],
@@ -43,8 +43,8 @@
                     F: "dd MMMM yyyy HH:mm:ss",
                     g: "dd/MM/yyyy HH:mm",
                     G: "dd/MM/yyyy HH:mm:ss",
-                    m: "dd MMMM",
-                    M: "dd MMMM",
+                    m: "d MMMM",
+                    M: "d MMMM",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
                     t: "HH:mm",
                     T: "HH:mm:ss",

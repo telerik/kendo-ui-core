@@ -8,7 +8,7 @@
             ".": ".",
             groupSize: [3],
             percent: {
-                pattern: ["-n %","n %"],
+                pattern: ["-n%","n%"],
                 decimals: 2,
                 ",": ",",
                 ".": ".",
@@ -16,7 +16,7 @@
                 symbol: "%"
             },
             currency: {
-                pattern: ["($ n)","$ n"],
+                pattern: ["($n)","$n"],
                 decimals: 2,
                 ",": ",",
                 ".": ".",
@@ -39,18 +39,18 @@
                 PM: ["p.m.","p.m.","P.M."],
                 patterns: {
                     d: "dd/MM/yyyy",
-                    D: "dddd, dd' de 'MMMM' de 'yyyy",
-                    F: "dddd, dd' de 'MMMM' de 'yyyy hh:mm:ss tt",
+                    D: "dddd, d' de 'MMMM' de 'yyyy",
+                    F: "dddd, d' de 'MMMM' de 'yyyy hh:mm:ss tt",
                     g: "dd/MM/yyyy hh:mm tt",
                     G: "dd/MM/yyyy hh:mm:ss tt",
-                    m: "dd MMMM",
-                    M: "dd MMMM",
+                    m: "d' de 'MMMM",
+                    M: "d' de 'MMMM",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
                     t: "hh:mm tt",
                     T: "hh:mm:ss tt",
                     u: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
-                    y: "MMMM' de 'yyyy",
-                    Y: "MMMM' de 'yyyy"
+                    y: "MMMM' del 'yyyy",
+                    Y: "MMMM' del 'yyyy"
                 },
                 "/": "/",
                 ":": ":",

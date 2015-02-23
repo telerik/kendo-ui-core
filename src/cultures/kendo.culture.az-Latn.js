@@ -27,27 +27,27 @@
         calendars: {
             standard: {
                 days: {
-                    names: ["Bazar","Bazar ertəsi","Çərşənbə axşamı","Çərşənbə","Cümə axşamı","Cümə","Şənbə"],
+                    names: ["bazar","Bazar ertəsi","çərşənbə axşamı","çərşənbə","Cümə axşamı","Cümə","şənbə"],
                     namesAbbr: ["B","Be","Ça","Ç","Ca","C","Ş"],
                     namesShort: ["B","Be","Ça","Ç","Ca","C","Ş"]
                 },
                 months: {
-                    names: ["Yanvar","Fevral","Mart","Aprel","May","İyun","İyul","Avgust","Sentyabr","Oktyabr","Noyabr","Dekabr",""],
+                    names: ["yanvar","fevral","mart","aprel","may","iyun","iyul","avgust","sentyabr","oktyabr","noyabr","dekabr",""],
                     namesAbbr: ["Yan","Fev","Mar","Apr","May","İyun","İyul","Avg","Sen","Okt","Noy","Dek",""]
                 },
                 AM: [""],
                 PM: [""],
                 patterns: {
                     d: "dd.MM.yyyy",
-                    D: "d MMMM yyyy",
-                    F: "d MMMM yyyy H:mm:ss",
-                    g: "dd.MM.yyyy H:mm",
-                    G: "dd.MM.yyyy H:mm:ss",
+                    D: "dd MMMM yyyy'-cü il'",
+                    F: "dd MMMM yyyy'-cü il' HH:mm:ss",
+                    g: "dd.MM.yyyy HH:mm",
+                    G: "dd.MM.yyyy HH:mm:ss",
                     m: "d MMMM",
                     M: "d MMMM",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
-                    t: "H:mm",
-                    T: "H:mm:ss",
+                    t: "HH:mm",
+                    T: "HH:mm:ss",
                     u: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
                     y: "MMMM yyyy",
                     Y: "MMMM yyyy"

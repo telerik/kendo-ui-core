@@ -39,8 +39,8 @@
                 PM: [""],
                 patterns: {
                     d: "dd/MM/yyyy",
-                    D: "dddd d MMMM yyyy",
-                    F: "dddd d MMMM yyyy HH:mm:ss",
+                    D: "dddd', le 'd MMMM yyyy",
+                    F: "dddd', le 'd MMMM yyyy HH:mm:ss",
                     g: "dd/MM/yyyy HH:mm",
                     G: "dd/MM/yyyy HH:mm:ss",
                     m: "d MMMM",

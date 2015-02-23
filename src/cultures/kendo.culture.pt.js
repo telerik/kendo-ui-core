@@ -4,24 +4,24 @@
         numberFormat: {
             pattern: ["-n"],
             decimals: 2,
-            ",": " ",
+            ",": ".",
             ".": ",",
             groupSize: [3],
             percent: {
                 pattern: ["-n%","n%"],
                 decimals: 2,
-                ",": " ",
+                ",": ".",
                 ".": ",",
                 groupSize: [3],
                 symbol: "%"
             },
             currency: {
-                pattern: ["-n $","n $"],
+                pattern: ["-$ n","$ n"],
                 decimals: 2,
-                ",": " ",
+                ",": ".",
                 ".": ",",
                 groupSize: [3],
-                symbol: "€"
+                symbol: "R$"
             }
         },
         calendars: {
@@ -38,11 +38,11 @@
                 AM: [""],
                 PM: [""],
                 patterns: {
-                    d: "yyyy-MM-dd",
-                    D: "d' de 'MMMM' de 'yyyy",
-                    F: "d' de 'MMMM' de 'yyyy HH:mm:ss",
-                    g: "yyyy-MM-dd HH:mm",
-                    G: "yyyy-MM-dd HH:mm:ss",
+                    d: "dd/MM/yyyy",
+                    D: "dddd, d' de 'MMMM' de 'yyyy",
+                    F: "dddd, d' de 'MMMM' de 'yyyy HH:mm:ss",
+                    g: "dd/MM/yyyy HH:mm",
+                    G: "dd/MM/yyyy HH:mm:ss",
                     m: "d' de 'MMMM",
                     M: "d' de 'MMMM",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
@@ -52,7 +52,7 @@
                     y: "MMMM' de 'yyyy",
                     Y: "MMMM' de 'yyyy"
                 },
-                "/": "-",
+                "/": "/",
                 ":": ":",
                 firstDay: 0
             }

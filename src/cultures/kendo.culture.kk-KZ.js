@@ -21,38 +21,38 @@
                 ",": " ",
                 ".": "-",
                 groupSize: [3],
-                symbol: "Т"
+                symbol: "₸"
             }
         },
         calendars: {
             standard: {
                 days: {
                     names: ["Жексенбі","Дүйсенбі","Сейсенбі","Сәрсенбі","Бейсенбі","Жұма","Сенбі"],
-                    namesAbbr: ["Жк","Дс","Сс","Ср","Бс","Жм","Сн"],
+                    namesAbbr: ["Жек","Дүй","Сей","Сәр","Бей","Жұм","Сен"],
                     namesShort: ["Жк","Дс","Сс","Ср","Бс","Жм","Сн"]
                 },
                 months: {
                     names: ["қаңтар","ақпан","наурыз","сәуір","мамыр","маусым","шілде","тамыз","қыркүйек","қазан","қараша","желтоқсан",""],
-                    namesAbbr: ["Қаң","Ақп","Нау","Сәу","Мам","Мау","Шіл","Там","Қыр","Қаз","Қар","Жел",""]
+                    namesAbbr: ["қаң","ақп","нау","сәу","мам","мау","шіл","там","қыр","қаз","қар","жел",""]
                 },
                 AM: [""],
                 PM: [""],
                 patterns: {
-                    d: "dd.MM.yyyy",
+                    d: "d-MMM-yy",
                     D: "d MMMM yyyy 'ж.'",
-                    F: "d MMMM yyyy 'ж.' H:mm:ss",
-                    g: "dd.MM.yyyy H:mm",
-                    G: "dd.MM.yyyy H:mm:ss",
+                    F: "d MMMM yyyy 'ж.' HH:mm:ss",
+                    g: "d-MMM-yy HH:mm",
+                    G: "d-MMM-yy HH:mm:ss",
                     m: "d MMMM",
                     M: "d MMMM",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
-                    t: "H:mm",
-                    T: "H:mm:ss",
+                    t: "HH:mm",
+                    T: "HH:mm:ss",
                     u: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
                     y: "MMMM yyyy",
                     Y: "MMMM yyyy"
                 },
-                "/": ".",
+                "/": "-",
                 ":": ":",
                 firstDay: 1
             }

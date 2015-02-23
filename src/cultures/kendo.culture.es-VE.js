@@ -21,7 +21,7 @@
                 ",": ".",
                 ".": ",",
                 groupSize: [3],
-                symbol: "Bs. F."
+                symbol: "Bs.F."
             }
         },
         calendars: {
@@ -38,13 +38,13 @@
                 AM: ["a.m.","a.m.","A.M."],
                 PM: ["p.m.","p.m.","P.M."],
                 patterns: {
-                    d: "dd/MM/yyyy",
+                    d: "dd-MM-yyyy",
                     D: "dddd, dd' de 'MMMM' de 'yyyy",
                     F: "dddd, dd' de 'MMMM' de 'yyyy hh:mm:ss tt",
-                    g: "dd/MM/yyyy hh:mm tt",
-                    G: "dd/MM/yyyy hh:mm:ss tt",
-                    m: "dd MMMM",
-                    M: "dd MMMM",
+                    g: "dd-MM-yyyy hh:mm tt",
+                    G: "dd-MM-yyyy hh:mm:ss tt",
+                    m: "d' de 'MMMM",
+                    M: "d' de 'MMMM",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
                     t: "hh:mm tt",
                     T: "hh:mm:ss tt",
@@ -52,7 +52,7 @@
                     y: "MMMM' de 'yyyy",
                     Y: "MMMM' de 'yyyy"
                 },
-                "/": "/",
+                "/": "-",
                 ":": ":",
                 firstDay: 0
             }

@@ -8,7 +8,7 @@
             ".": ",",
             groupSize: [3],
             percent: {
-                pattern: ["-%n","%n"],
+                pattern: ["-n%","n%"],
                 decimals: 2,
                 ",": ".",
                 ".": ",",
@@ -16,7 +16,7 @@
                 symbol: "%"
             },
             currency: {
-                pattern: ["($ n)","$ n"],
+                pattern: ["$ -n","$ n"],
                 decimals: 2,
                 ",": ".",
                 ".": ",",
@@ -27,13 +27,13 @@
         calendars: {
             standard: {
                 days: {
-                    names: ["intichaw","killachaw","atipachaw","quyllurchaw","Ch\u0027 askachaw","Illapachaw","k\u0027uychichaw"],
-                    namesAbbr: ["int","kil","ati","quy","Ch\u0027","Ill","k\u0027u"],
-                    namesShort: ["d","k","a","m","h","b","k"]
+                    names: ["inti","awaki","wanra","chillay","kullka","chaska","wakma"],
+                    namesAbbr: ["int","awk","wan","chy","kuk","cha","wak"],
+                    namesShort: ["in","aw","wn","cy","ku","ck","wk"]
                 },
                 months: {
-                    names: ["Qulla puquy","Hatun puquy","Pauqar waray","ayriwa","Aymuray","Inti raymi","Anta Sitwa","Qhapaq Sitwa","Uma raymi","Kantaray","Ayamarq\u0027a","Kapaq Raymi",""],
-                    namesAbbr: ["Qul","Hat","Pau","ayr","Aym","Int","Ant","Qha","Uma","Kan","Aya","Kap",""]
+                    names: ["kulla","panchi","pawkar","ayriwa","aymuray","raymi","sitwa","karwa","kuski","wayru","sasi","kapak",""],
+                    namesAbbr: ["kull","pan","paw","ayr","aym","ray","sit","kar","kus","way","sas","kap",""]
                 },
                 AM: [""],
                 PM: [""],
@@ -43,8 +43,8 @@
                     F: "dddd, dd' de 'MMMM' de 'yyyy H:mm:ss",
                     g: "dd/MM/yyyy H:mm",
                     G: "dd/MM/yyyy H:mm:ss",
-                    m: "MMMM dd",
-                    M: "MMMM dd",
+                    m: "d' de 'MMMM",
+                    M: "d' de 'MMMM",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
                     t: "H:mm",
                     T: "H:mm:ss",

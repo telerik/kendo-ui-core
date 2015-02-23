@@ -27,13 +27,13 @@
         calendars: {
             standard: {
                 days: {
-                    names: ["Snein","Moandei","Tiisdei","Woansdei","Tongersdei","Freed","Sneon"],
-                    namesAbbr: ["Sn","Mo","Ti","Wo","To","Fr","Sn"],
-                    namesShort: ["S","M","T","W","T","F","S"]
+                    names: ["snein","moandei","tiisdei","woansdei","tongersdei","freed","sneon"],
+                    namesAbbr: ["sni","moa","tii","woa","ton","fre","sno"],
+                    namesShort: ["si","mo","ti","wo","to","fr","so"]
                 },
                 months: {
                     names: ["jannewaris","febrewaris","maart","april","maaie","juny","july","augustus","septimber","oktober","novimber","desimber",""],
-                    namesAbbr: ["jann","febr","mrt","apr","maaie","jun","jul","aug","sept","okt","nov","des",""]
+                    namesAbbr: ["jan","feb","mrt","apr","maa","jun","jul","aug","sep","okt","nov","des",""]
                 },
                 AM: [""],
                 PM: [""],
@@ -43,8 +43,8 @@
                     F: "dddd d MMMM yyyy H:mm:ss",
                     g: "d-M-yyyy H:mm",
                     G: "d-M-yyyy H:mm:ss",
-                    m: "dd MMMM",
-                    M: "dd MMMM",
+                    m: "d MMMM",
+                    M: "d MMMM",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
                     t: "H:mm",
                     T: "H:mm:ss",

@@ -28,7 +28,7 @@
             standard: {
                 days: {
                     names: ["söndag","måndag","tisdag","onsdag","torsdag","fredag","lördag"],
-                    namesAbbr: ["sö","må","ti","on","to","fr","lö"],
+                    namesAbbr: ["sön","mån","tis","ons","tor","fre","lör"],
                     namesShort: ["sö","må","ti","on","to","fr","lö"]
                 },
                 months: {

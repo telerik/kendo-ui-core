@@ -8,7 +8,7 @@
             ".": ",",
             groupSize: [3],
             percent: {
-                pattern: ["-n %","n %"],
+                pattern: ["-n%","n%"],
                 decimals: 2,
                 ",": " ",
                 ".": ",",
@@ -27,33 +27,33 @@
         calendars: {
             standard: {
                 days: {
-                    names: ["dimenge","diluns","dimars","dimècres","dijòus","divendres","dissabte"],
-                    namesAbbr: ["dim.","lun.","mar.","mèc.","jòu.","ven.","sab."],
-                    namesShort: ["di","lu","ma","mè","jò","ve","sa"]
+                    names: ["dimenge","diluns","dimarts","dimècres","dijòus","divendres","dissabte"],
+                    namesAbbr: ["dg.","dl.","dma.","dmc.","dj.","dv.","ds."],
+                    namesShort: ["dg","dl","da","dc","dj","dv","ds"]
                 },
                 months: {
-                    names: ["genier","febrier","març","abril","mai","junh","julh","agost","setembre","octobre","novembre","desembre",""],
-                    namesAbbr: ["gen.","feb.","mar.","abr.","mai.","jun.","jul.","ag.","set.","oct.","nov.","des.",""]
+                    names: ["genièr","febrièr","març","abril","mai","junh","julhet","agost","setembre","octobre","novembre","decembre",""],
+                    namesAbbr: ["gen.","feb.","març","abr.","mai","junh","julh","ag.","set.","oct.","nov.","dec.",""]
                 },
-                AM: [""],
-                PM: [""],
+                AM: ["AM","am","AM"],
+                PM: ["PM","pm","PM"],
                 patterns: {
                     d: "dd/MM/yyyy",
-                    D: "dddd,' lo 'd MMMM' de 'yyyy",
-                    F: "dddd,' lo 'd MMMM' de 'yyyy HH:mm:ss",
-                    g: "dd/MM/yyyy HH:mm",
-                    G: "dd/MM/yyyy HH:mm:ss",
+                    D: "dddd d MMMM' de 'yyyy",
+                    F: "dddd d MMMM' de 'yyyy HH.mm.ss",
+                    g: "dd/MM/yyyy HH' h 'mm",
+                    G: "dd/MM/yyyy HH.mm.ss",
                     m: "d MMMM",
                     M: "d MMMM",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
-                    t: "HH:mm",
-                    T: "HH:mm:ss",
+                    t: "HH' h 'mm",
+                    T: "HH.mm.ss",
                     u: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
-                    y: "MMMM yyyy",
-                    Y: "MMMM yyyy"
+                    y: "MMMM' de 'yyyy",
+                    Y: "MMMM' de 'yyyy"
                 },
                 "/": "/",
-                ":": ":",
+                ":": ".",
                 firstDay: 1
             }
         }

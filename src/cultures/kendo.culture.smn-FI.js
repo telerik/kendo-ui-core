@@ -27,13 +27,13 @@
         calendars: {
             standard: {
                 days: {
-                    names: ["pasepeivi","vuossargâ","majebargâ","koskokko","tuorâstâh","vástuppeivi","lávárdâh"],
-                    namesAbbr: ["pa","vu","ma","ko","tu","vá","lá"],
+                    names: ["pasepeivi","vuossargâ","majebargâ","koskokko","tuorâstâh","vástuppeivi","lávurdâh"],
+                    namesAbbr: ["pas","vuo","maj","kos","tuo","vás","láv"],
                     namesShort: ["p","v","m","k","t","v","l"]
                 },
                 months: {
                     names: ["uđđâivemáánu","kuovâmáánu","njuhčâmáánu","cuáŋuimáánu","vyesimáánu","kesimáánu","syeinimáánu","porgemáánu","čohčâmáánu","roovvâdmáánu","skammâmáánu","juovlâmáánu",""],
-                    namesAbbr: ["uđiv","kuov","njuh","cuoŋ","vyes","kesi","syei","porg","čoh","roov","ska","juov",""]
+                    namesAbbr: ["uđiv","kuov","njuh","cuáŋ","vyes","kesi","syei","porg","čohč","roov","skam","juov",""]
                 },
                 AM: [""],
                 PM: [""],

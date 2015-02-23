@@ -21,7 +21,7 @@
                 ",": ",",
                 ".": ".",
                 groupSize: [3],
-                symbol: "Php"
+                symbol: "₱"
             }
         },
         calendars: {
@@ -43,8 +43,8 @@
                     F: "dddd, MMMM dd, yyyy h:mm:ss tt",
                     g: "M/d/yyyy h:mm tt",
                     G: "M/d/yyyy h:mm:ss tt",
-                    m: "MMMM dd",
-                    M: "MMMM dd",
+                    m: "MMMM d",
+                    M: "MMMM d",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
                     t: "h:mm tt",
                     T: "h:mm:ss tt",

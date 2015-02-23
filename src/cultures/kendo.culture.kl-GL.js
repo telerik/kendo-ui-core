@@ -28,23 +28,23 @@
             standard: {
                 days: {
                     names: ["sapaat","ataasinngorneq","marlunngorneq","pingasunngorneq","sisamanngorneq","tallimanngorneq","arfininngorneq"],
-                    namesAbbr: ["sap","ata","mar","ping","sis","tal","arf"],
+                    namesAbbr: ["sap.","at.","marl.","ping.","sis.","tall.","arf."],
                     namesShort: ["sa","at","ma","pi","si","ta","ar"]
                 },
                 months: {
-                    names: ["januari","februari","martsi","apriili","maaji","juni","juli","aggusti","septembari","oktobari","novembari","decembari",""],
+                    names: ["januaari","februaari","marsi","apriili","maaji","juuni","juuli","aggusti","septembari","oktobari","novembari","decembari",""],
                     namesAbbr: ["jan","feb","mar","apr","mai","jun","jul","aug","sep","okt","nov","dec",""]
                 },
                 AM: [""],
                 PM: [""],
                 patterns: {
                     d: "dd-MM-yyyy",
-                    D: "d. MMMM yyyy",
-                    F: "d. MMMM yyyy HH:mm:ss",
+                    D: "MMMM d'.-at, 'yyyy",
+                    F: "MMMM d'.-at, 'yyyy HH:mm:ss",
                     g: "dd-MM-yyyy HH:mm",
                     G: "dd-MM-yyyy HH:mm:ss",
-                    m: "d. MMMM",
-                    M: "d. MMMM",
+                    m: "MMMM d'.-at'",
+                    M: "MMMM d'.-at'",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
                     t: "HH:mm",
                     T: "HH:mm:ss",

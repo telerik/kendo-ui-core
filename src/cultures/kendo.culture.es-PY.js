@@ -17,11 +17,11 @@
             },
             currency: {
                 pattern: ["($ n)","$ n"],
-                decimals: 2,
+                decimals: 0,
                 ",": ".",
                 ".": ",",
                 groupSize: [3],
-                symbol: "Gs"
+                symbol: "₲"
             }
         },
         calendars: {
@@ -43,8 +43,8 @@
                     F: "dddd, dd' de 'MMMM' de 'yyyy hh:mm:ss tt",
                     g: "dd/MM/yyyy hh:mm tt",
                     G: "dd/MM/yyyy hh:mm:ss tt",
-                    m: "dd MMMM",
-                    M: "dd MMMM",
+                    m: "d' de 'MMMM",
+                    M: "d' de 'MMMM",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
                     t: "hh:mm tt",
                     T: "hh:mm:ss tt",

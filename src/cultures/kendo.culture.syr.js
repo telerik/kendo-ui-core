@@ -16,12 +16,12 @@
                 symbol: "%"
             },
             currency: {
-                pattern: ["$n-","$ n"],
+                pattern: ["-n $","n $"],
                 decimals: 2,
                 ",": ",",
                 ".": ".",
                 groupSize: [3],
-                symbol: "ل.س.‏"
+                symbol: "ܠ.ܣ.‏"
             }
         },
         calendars: {
@@ -43,8 +43,8 @@
                     F: "dd MMMM, yyyy hh:mm:ss tt",
                     g: "dd/MM/yyyy hh:mm tt",
                     G: "dd/MM/yyyy hh:mm:ss tt",
-                    m: "dd MMMM",
-                    M: "dd MMMM",
+                    m: "MMMM dd",
+                    M: "MMMM dd",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
                     t: "hh:mm tt",
                     T: "hh:mm:ss tt",
@@ -54,7 +54,7 @@
                 },
                 "/": "/",
                 ":": ":",
-                firstDay: 6
+                firstDay: 0
             }
         }
     }

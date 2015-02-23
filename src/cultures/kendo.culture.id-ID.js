@@ -8,7 +8,7 @@
             ".": ",",
             groupSize: [3],
             percent: {
-                pattern: ["-n %","n %"],
+                pattern: ["-n%","n%"],
                 decimals: 2,
                 ",": ".",
                 ".": ",",
@@ -28,12 +28,12 @@
             standard: {
                 days: {
                     names: ["Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"],
-                    namesAbbr: ["Minggu","Sen","Sel","Rabu","Kamis","Jumat","Sabtu"],
+                    namesAbbr: ["Mgg","Sen","Sel","Rab","Kam","Jum","Sab"],
                     namesShort: ["M","S","S","R","K","J","S"]
                 },
                 months: {
-                    names: ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","Nopember","Desember",""],
-                    namesAbbr: ["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agust","Sep","Okt","Nop","Des",""]
+                    names: ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember",""],
+                    namesAbbr: ["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agu","Sep","Okt","Nov","Des",""]
                 },
                 AM: [""],
                 PM: [""],

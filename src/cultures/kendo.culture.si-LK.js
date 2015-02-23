@@ -33,21 +33,21 @@
                 },
                 months: {
                     names: ["ජනවාරි","පෙබරවාරි","මාර්තු","අ‌ප්‍රේල්","මැයි","ජූනි","ජූලි","අ‌ගෝස්තු","සැප්තැම්බර්","ඔක්තෝබර්","නොවැම්බර්","දෙසැම්බර්",""],
-                    namesAbbr: ["ජන.","පෙබ.","මාර්තු.","අප්‍රේල්.","මැයි.","ජූනි.","ජූලි.","අගෝ.","සැප්.","ඔක්.","නොවැ.","දෙසැ.",""]
+                    namesAbbr: ["ජන.","පෙබ.","මාර්තු.","අප්‍රේල්.","මැයි","ජූනි","ජූලි","අගෝ.","සැප්.","ඔක්.","නොවැ.","දෙසැ.",""]
                 },
                 AM: ["පෙ.ව.","පෙ.ව.","පෙ.ව."],
                 PM: ["ප.ව.","ප.ව.","ප.ව."],
                 patterns: {
                     d: "yyyy-MM-dd",
                     D: "yyyy MMMM' මස 'dd' වැනිදා 'dddd",
-                    F: "yyyy MMMM' මස 'dd' වැනිදා 'dddd h:mm:ss tt",
-                    g: "yyyy-MM-dd h:mm tt",
-                    G: "yyyy-MM-dd h:mm:ss tt",
+                    F: "yyyy MMMM' මස 'dd' වැනිදා 'dddd tt h:mm:ss",
+                    g: "yyyy-MM-dd tt h:mm",
+                    G: "yyyy-MM-dd tt h:mm:ss",
                     m: "MMMM dd",
                     M: "MMMM dd",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
-                    t: "h:mm tt",
-                    T: "h:mm:ss tt",
+                    t: "tt h:mm",
+                    T: "tt h:mm:ss",
                     u: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
                     y: "yyyy MMMM",
                     Y: "yyyy MMMM"

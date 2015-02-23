@@ -28,7 +28,7 @@
             standard: {
                 days: {
                     names: ["Chủ Nhật","Thứ Hai","Thứ Ba","Thứ Tư","Thứ Năm","Thứ Sáu","Thứ Bảy"],
-                    namesAbbr: ["CN","Hai","Ba","Tư","Năm","Sáu","Bảy"],
+                    namesAbbr: ["CN","T2","T3","Tư","Năm","Sáu","Bảy"],
                     namesShort: ["C","H","B","T","N","S","B"]
                 },
                 months: {

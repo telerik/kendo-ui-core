@@ -6,13 +6,13 @@
             decimals: 2,
             ",": " ",
             ".": ",",
-            groupSize: [3,0],
+            groupSize: [3],
             percent: {
                 pattern: ["-n%","n%"],
                 decimals: 2,
                 ",": " ",
                 ".": ",",
-                groupSize: [3,0],
+                groupSize: [3],
                 symbol: "%"
             },
             currency: {
@@ -20,8 +20,8 @@
                 decimals: 2,
                 ",": " ",
                 ".": ",",
-                groupSize: [3,0],
-                symbol: "һ."
+                groupSize: [3],
+                symbol: "₽"
             }
         },
         calendars: {
@@ -43,8 +43,8 @@
                     F: "d MMMM yyyy 'й' H:mm:ss",
                     g: "dd.MM.yy H:mm",
                     G: "dd.MM.yy H:mm:ss",
-                    m: "MMMM dd",
-                    M: "MMMM dd",
+                    m: "d MMMM",
+                    M: "d MMMM",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
                     t: "H:mm",
                     T: "H:mm:ss",

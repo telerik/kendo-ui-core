@@ -5,13 +5,13 @@
             pattern: ["-n"],
             decimals: 2,
             ",": " ",
-            ".": ".",
+            ".": ",",
             groupSize: [3],
             percent: {
                 pattern: ["-n%","n%"],
                 decimals: 2,
                 ",": " ",
-                ".": ".",
+                ".": ",",
                 groupSize: [3],
                 symbol: "%"
             },
@@ -38,13 +38,13 @@
                 AM: ["AM","am","AM"],
                 PM: ["PM","pm","PM"],
                 patterns: {
-                    d: "yyyy/MM/dd",
+                    d: "yyyy-MM-dd",
                     D: "dd MMMM yyyy",
                     F: "dd MMMM yyyy hh:mm:ss tt",
-                    g: "yyyy/MM/dd hh:mm tt",
-                    G: "yyyy/MM/dd hh:mm:ss tt",
-                    m: "dd MMMM",
-                    M: "dd MMMM",
+                    g: "yyyy-MM-dd hh:mm tt",
+                    G: "yyyy-MM-dd hh:mm:ss tt",
+                    m: "MMMM d",
+                    M: "MMMM d",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
                     t: "hh:mm tt",
                     T: "hh:mm:ss tt",
@@ -52,9 +52,9 @@
                     y: "MMMM yyyy",
                     Y: "MMMM yyyy"
                 },
-                "/": "/",
+                "/": "-",
                 ":": ":",
-                firstDay: 0
+                firstDay: 1
             }
         }
     }

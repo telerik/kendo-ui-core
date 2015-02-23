@@ -4,19 +4,19 @@
         numberFormat: {
             pattern: ["-n"],
             decimals: 2,
-            ",": ".",
+            ",": " ",
             ".": ",",
             groupSize: [3],
             percent: {
                 pattern: ["-n%","n%"],
                 decimals: 2,
-                ",": ".",
+                ",": " ",
                 ".": ",",
                 groupSize: [3],
                 symbol: "%"
             },
             currency: {
-                pattern: ["-$ n","$ n"],
+                pattern: ["-n $","n $"],
                 decimals: 2,
                 ",": ".",
                 ".": ",",
@@ -43,8 +43,8 @@
                     F: "dddd, dd. MMMM yyyy HH:mm:ss",
                     g: "dd.MM.yyyy HH:mm",
                     G: "dd.MM.yyyy HH:mm:ss",
-                    m: "dd MMMM",
-                    M: "dd MMMM",
+                    m: "d. MMMM",
+                    M: "d. MMMM",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
                     t: "HH:mm",
                     T: "HH:mm:ss",

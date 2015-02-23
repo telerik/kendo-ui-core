@@ -8,7 +8,7 @@
             ".": ".",
             groupSize: [3],
             percent: {
-                pattern: ["-n %","n %"],
+                pattern: ["-n%","n%"],
                 decimals: 2,
                 ",": ",",
                 ".": ".",
@@ -28,26 +28,26 @@
             standard: {
                 days: {
                     names: ["domingo","lunes","martes","miércoles","jueves","viernes","sábado"],
-                    namesAbbr: ["dom","lun","mar","mié","jue","vie","sáb"],
-                    namesShort: ["do","lu","ma","mi","ju","vi","sá"]
+                    namesAbbr: ["dom.","lun.","mar.","mié.","jue.","vie.","sáb."],
+                    namesShort: ["do.","lu.","ma.","mi.","ju.","vi.","sá."]
                 },
                 months: {
                     names: ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre",""],
-                    namesAbbr: ["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic",""]
+                    namesAbbr: ["ene.","feb.","mar.","abr.","may.","jun.","jul.","ago.","sep.","oct.","nov.","dic.",""]
                 },
-                AM: ["a.m.","a.m.","A.M."],
-                PM: ["p.m.","p.m.","P.M."],
+                AM: ["a. m.","a. m.","A. M."],
+                PM: ["p. m.","p. m.","P. M."],
                 patterns: {
-                    d: "MM/dd/yyyy",
+                    d: "d/M/yy",
                     D: "dddd, dd' de 'MMMM' de 'yyyy",
-                    F: "dddd, dd' de 'MMMM' de 'yyyy hh:mm:ss tt",
-                    g: "MM/dd/yyyy hh:mm tt",
-                    G: "MM/dd/yyyy hh:mm:ss tt",
-                    m: "dd MMMM",
-                    M: "dd MMMM",
+                    F: "dddd, dd' de 'MMMM' de 'yyyy h:mm:ss tt",
+                    g: "d/M/yy h:mm tt",
+                    G: "d/M/yy h:mm:ss tt",
+                    m: "d' de 'MMMM",
+                    M: "d' de 'MMMM",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
-                    t: "hh:mm tt",
-                    T: "hh:mm:ss tt",
+                    t: "h:mm tt",
+                    T: "h:mm:ss tt",
                     u: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
                     y: "MMMM' de 'yyyy",
                     Y: "MMMM' de 'yyyy"

@@ -8,7 +8,7 @@
             ".": ".",
             groupSize: [3],
             percent: {
-                pattern: ["-n %","n %"],
+                pattern: ["-n%","n%"],
                 decimals: 2,
                 ",": ",",
                 ".": ".",
@@ -27,8 +27,8 @@
         calendars: {
             standard: {
                 days: {
-                    names: ["Dé Domhnaigh","Dé Luain","Dé Máirt","Dé Céadaoin","Déardaoin","Dé hAoine","Dé Sathairn"],
-                    namesAbbr: ["Domh","Luan","Máir","Céad","Déar","Aoi","Sath"],
+                    names: ["Domhnach","Luan","Máirt","Céadaoin","Déardaoin","Aoine","Satharn"],
+                    namesAbbr: ["Domh","Luan","Máirt","Céad","Déar","Aoi","Sath"],
                     namesShort: ["Do","Lu","Má","Cé","De","Ao","Sa"]
                 },
                 months: {
@@ -43,8 +43,8 @@
                     F: "d MMMM yyyy HH:mm:ss",
                     g: "dd/MM/yyyy HH:mm",
                     G: "dd/MM/yyyy HH:mm:ss",
-                    m: "dd MMMM",
-                    M: "dd MMMM",
+                    m: "d MMMM",
+                    M: "d MMMM",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
                     t: "HH:mm",
                     T: "HH:mm:ss",

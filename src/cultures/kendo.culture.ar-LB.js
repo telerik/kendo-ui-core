@@ -21,7 +21,7 @@
                 ",": ",",
                 ".": ".",
                 groupSize: [3],
-                symbol: "ل.ل.‏"
+                symbol: "ل.ل.‏‏"
             }
         },
         calendars: {

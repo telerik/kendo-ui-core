@@ -21,7 +21,7 @@
                 ",": ",",
                 ".": ".",
                 groupSize: [3],
-                symbol: "S"
+                symbol: "KSh"
             }
         },
         calendars: {
@@ -32,7 +32,7 @@
                     namesShort: ["P","T","N","T","A","I","M"]
                 },
                 months: {
-                    names: ["Januari","Februari","Machi","Aprili","Mei","Juni","Julai","Agosti","Septemba","Oktoba","Novemba","Decemba",""],
+                    names: ["Januari","Februari","Machi","Aprili","Mei","Juni","Julai","Agosti","Septemba","Oktoba","Novemba","Desemba",""],
                     namesAbbr: ["Jan","Feb","Mac","Apr","Mei","Jun","Jul","Ago","Sep","Okt","Nov","Dec",""]
                 },
                 AM: ["AM","am","AM"],

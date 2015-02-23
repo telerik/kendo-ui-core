@@ -21,7 +21,7 @@
                 ",": ".",
                 ".": ",",
                 groupSize: [3],
-                symbol: "TL"
+                symbol: "₺"
             }
         },
         calendars: {
@@ -38,13 +38,13 @@
                 AM: [""],
                 PM: [""],
                 patterns: {
-                    d: "dd.MM.yyyy",
-                    D: "dd MMMM yyyy dddd",
-                    F: "dd MMMM yyyy dddd HH:mm:ss",
-                    g: "dd.MM.yyyy HH:mm",
-                    G: "dd.MM.yyyy HH:mm:ss",
-                    m: "dd MMMM",
-                    M: "dd MMMM",
+                    d: "d.M.yyyy",
+                    D: "d MMMM yyyy dddd",
+                    F: "d MMMM yyyy dddd HH:mm:ss",
+                    g: "d.M.yyyy HH:mm",
+                    G: "d.M.yyyy HH:mm:ss",
+                    m: "d MMMM",
+                    M: "d MMMM",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
                     t: "HH:mm",
                     T: "HH:mm:ss",

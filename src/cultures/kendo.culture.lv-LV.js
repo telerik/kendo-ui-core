@@ -21,7 +21,7 @@
                 ",": " ",
                 ".": ",",
                 groupSize: [3],
-                symbol: "Ls"
+                symbol: "€"
             }
         },
         calendars: {
@@ -38,19 +38,19 @@
                 AM: [""],
                 PM: [""],
                 patterns: {
-                    d: "yyyy.MM.dd.",
+                    d: "dd.MM.yyyy.",
                     D: "dddd, yyyy'. gada 'd. MMMM",
                     F: "dddd, yyyy'. gada 'd. MMMM H:mm:ss",
-                    g: "yyyy.MM.dd. H:mm",
-                    G: "yyyy.MM.dd. H:mm:ss",
+                    g: "dd.MM.yyyy. H:mm",
+                    G: "dd.MM.yyyy. H:mm:ss",
                     m: "d. MMMM",
                     M: "d. MMMM",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
                     t: "H:mm",
                     T: "H:mm:ss",
                     u: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
-                    y: "yyyy. MMMM",
-                    Y: "yyyy. MMMM"
+                    y: "yyyy'. gada 'MMMM",
+                    Y: "yyyy'. gada 'MMMM"
                 },
                 "/": ".",
                 ":": ":",
