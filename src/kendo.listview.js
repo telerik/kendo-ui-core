@@ -532,11 +532,14 @@ var __meta__ = {
                }
 
                if (valid) {
+                   data = that._modelFromElement(editable.element);
+
+                   that.dataSource.cancelChanges(data);
+
                    if (editable.element.index() % 2) {
                        template = that.altTemplate;
                    }
 
-                   data = that._modelFromElement(editable.element);
                    that._destroyEditable();
 
                    index = editable.element.index();
@@ -598,6 +601,8 @@ var __meta__ = {
                dataSource = that.dataSource,
                data = that._modelFromElement(item);
 
+           that._closeEditable(false);
+
            if (!that.trigger(REMOVE, { model: data, item: item })) {
                item.hide();
                dataSource.remove(data);
@@ -628,7 +633,6 @@ var __meta__ = {
                var model = that._modelFromElement(container);
 
                if (!that.trigger(CANCEL, { model: model, container: container})) {
-                   dataSource.cancelChanges(model);
                    that._closeEditable(false);
                }
            }
