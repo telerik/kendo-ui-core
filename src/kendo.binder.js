@@ -757,7 +757,8 @@ var __meta__ = {
 
                     for (valueIndex = 0; valueIndex < values.length; valueIndex++) {
                         for (idx = 0, length = source.length; idx < length; idx++) {
-                            if (this._parseValue(source[idx].get(field), this.dataType()) === values[valueIndex]) {
+                            var match = valuePrimitive ? (this._parseValue(values[valueIndex], this.dataType()) === source[idx].get(field)) : (this._parseValue(source[idx].get(field), this.dataType()).toString() === values[valueIndex]);
+                            if (match) {
                                 values[valueIndex] = source[idx];
                                 break;
                             }
@@ -778,6 +779,7 @@ var __meta__ = {
                 var optionIndex,
                     element = this.element,
                     options = element.options,
+                    valuePrimitive = this.options.valuePrimitive,
                     value = this.bindings[VALUE].get(),
                     values = value,
                     field = this.options.valueField || this.options.textField,
