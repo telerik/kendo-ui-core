@@ -16,8 +16,8 @@
                     read: function(options) {
                         options.success(data);
                     },
-                    destroy: function() {
-                    }
+                    destroy: $.noop,
+                    update: $.noop
                 },
                 schema: {
                     model: {
@@ -312,6 +312,20 @@
         listView.remove(listView.element.children().first());
 
         ok(syncMethod.calls("sync"));
+    });
+
+    test("remove reverts currently edited item", function() {
+        var listView = setup({
+            editTemplate: "<li>${foo}</li>"
+        });
+
+        listView.edit(listView.element.children().eq(0));
+
+        dataSource.get(0).set("foo", "bar");
+
+        listView.remove(listView.element.children().last());
+
+        equal(dataSource.get(0).foo, "foo 0");
     });
 
     test("add adds new model in DataSource", function() {
