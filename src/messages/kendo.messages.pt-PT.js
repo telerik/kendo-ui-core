@@ -1,15 +1,3 @@
-/*
-* Kendo UI v2014.3.1314 (http://www.telerik.com/kendo-ui)
-* Copyright 2015 Telerik AD. All rights reserved.
-*
-* Kendo UI commercial licenses may be obtained at
-* http://www.telerik.com/purchase/license-agreement/kendo-ui-complete
-* If you do not own a commercial license, this file shall be governed by the trial license terms.
-*/
-(function(f, define){
-    define([], f);
-})(function(){
-
 /* FlatColorPicker messages */
 
 if (kendo.ui.FlatColorPicker) {
@@ -98,7 +86,7 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "linkWebAddress": "Endereço Web",
   "linkText": "Texto",
   "linkToolTip": "ToolTip",
-  "linkOpenInNewWindow": "Abrir endereço numa nova janela",
+  "linkOpenInNewWindow": "Abrir ligação numa nova janela",
   "dialogUpdate": "Atualizar",
   "dialogInsert": "Inserir",
   "dialogButtonSeparator": "ou",
@@ -126,8 +114,8 @@ $.extend(true, kendo.ui.FileBrowser.prototype.options.messages,{
   "emptyFolder": "Pasta Vazia",
   "deleteFile": 'Tem a certeza que quer eliminar "{0}"?',
   "invalidFileType": "O ficheiro selecionado \"{0}\" não é válido. Tipos suportados são {1}.",
-  "overwriteFile": "Um ficheiro com o nome \"{0}\" já existe na pasta atual. Quer substituí-lo?",
-  "dropFilesHere": "largue um ficheiro aqui para o submeter",
+  "overwriteFile": "Um ficheiro com o nome \"{0}\" já existe nesta pasta. Quer substituí-lo?",
+  "dropFilesHere": "Largue um ficheiro aqui para o submeter",
   "search": "Pesquisar"
 });
 }
@@ -293,7 +281,7 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
   },
   "editable": {
     "cancelDelete": "Cancelar",
-    "confirmation": "Tem a certeza que pretende elininar este registo?",
+    "confirmation": "Tem a certeza que pretende eliminar este registo?",
     "confirmDelete": "Eliminar"
   }
 });
@@ -342,9 +330,9 @@ $.extend(true, kendo.ui.Pager.prototype.options.messages,{
 if (kendo.ui.PivotGrid) {
 kendo.ui.PivotGrid.prototype.options.messages =
 $.extend(true, kendo.ui.PivotGrid.prototype.options.messages,{
-  "measureFields": "Largue Campos de Dados Aqui",
-  "columnFields": "Largue Campos de Colunas Aqui",
-  "rowFields": "Largue Campos de Linhas Aqui"
+  "measureFields": "Largue campos de dados aqui",
+  "columnFields": "Largue campos de colunas aqui",
+  "rowFields": "Largue campos de linhas aqui"
 });
 }
 
@@ -412,7 +400,7 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
   },
   "end": {
     "label": "Fim:",
-    "mobileLabel": "Ends",
+    "mobileLabel": "Fim",
     "never": "Nunca",
     "after": "Depois",
     "occurrence": " ocorrência(s)",
@@ -460,7 +448,7 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "month": "Mês"
   },
   "recurrenceMessages": {
-    "deleteWindowTitle": "Eliminar Item Recorrente",
+    "deleteWindowTitle": "Eliminar item recorrente",
     "deleteWindowOccurrence": "Eliminar ocorrência atual",
     "deleteWindowSeries": "Eliminar série de ocorrências",
     "editWindowTitle": "Editar Item Recorrente",
@@ -471,19 +459,19 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   },
   "editor": {
     "title": "Titulo",
-    "start": "Inicio",
+    "start": "Início",
     "end": "Fim",
     "allDayEvent": "Evento todo o dia",
     "description": "Descrição",
     "repeat": "Repetição",
     "timezone": " ",
-    "startTimezone": "Início do Fuso horário",
+    "startTimezone": "Início do fuso horário",
     "endTimezone": "Fim do fuso horário",
-    "separateTimezones": "Usar Fusos Horários de inicio e fim separados",
+    "separateTimezones": "Usar fusos horários de início e fim separados",
     "timezoneEditorTitle": "Fusos Horários",
     "timezoneEditorButton": "Fuso horário",
     "timezoneTitle": "Fusos Horários",
-    "noTimezone": "Sem Fuso Horário",
+    "noTimezone": "Sem fuso horário",
     "editorTitle": "Evento"
   }
 });
@@ -545,8 +533,3 @@ $.extend(true, kendo.ui.Validator.prototype.options.messages,{
   "date": "{0} não é uma data válida"
 });
 }
-
-
-return window.kendo;
-
-}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });
