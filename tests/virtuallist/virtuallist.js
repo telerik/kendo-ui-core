@@ -169,6 +169,18 @@
         }, 100);
     });
 
+    asyncTest("does not render if no optionLabel is specified", 1, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            template: "#:text#"
+        });
+
+        setTimeout(function() {
+            start();
+            ok(!virtualList.optionLabel);
+        }, 100);
+    });
+
     //dataBinding
 
     asyncTest("reads the dataSource (autoBind: true by default)", 1, function() {

@@ -184,8 +184,7 @@ var __meta__ = {
             options = that.options;
 
             that.wrapper = element.wrap("<div class='" + WRAPPER + "'></div>").parent();
-            that.optionLabel = element.before("<div class='" + LIST + "'><div class='" + ITEM + "'></div></div>").prev();
-            that.header = element.before("<div class='" + HEADER + "'></div>").prev();
+            that.header = that.element.before("<div class='" + HEADER + "'></div>").prev();
             that.content = element.append("<ul class='" + CONTENT + " " + LIST + "'></ul>").find("." + CONTENT);
 
             that._value = that.options.value instanceof Array ? that.options.value : [that.options.value];
@@ -429,6 +428,10 @@ var __meta__ = {
         _clean: function() {
             this.result = undefined;
             this._lastScrollTop = undefined;
+            if (this.optionLabel) {
+                this.optionLabel.remove();
+                this.optionLabel = undefined;
+            }
             this.content.empty();
         },
 
@@ -866,6 +869,7 @@ var __meta__ = {
             var optionInstance = this.options.optionLabel;
 
             if (optionInstance && typeof optionInstance === "object") {
+                this.optionLabel = this.element.before("<div class='" + LIST + "'><div class='" + ITEM + "'></div></div>").prev();
                 render.call(this, this.optionLabel, { index: -1, top: null, selected: false, current: false, item: optionInstance }, this.templates);
                 this.optionInstance = optionInstance;
             } else {
