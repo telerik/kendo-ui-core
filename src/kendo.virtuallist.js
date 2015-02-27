@@ -23,6 +23,7 @@ var __meta__ = {
         HEADER = "k-virtual-header",
         VIRTUALITEM = "k-virtual-item",
         ITEM = "k-item",
+        OPTIONLABEL = "k-virtual-option-label",
         HEIGHTCONTAINER = "k-height-container",
         GROUPITEM = "k-group",
 
@@ -869,7 +870,7 @@ var __meta__ = {
             var optionInstance = this.options.optionLabel;
 
             if (optionInstance && typeof optionInstance === "object") {
-                this.optionLabel = this.element.before("<div class='" + LIST + "'><div class='" + ITEM + "'></div></div>").prev();
+                this.optionLabel = this.element.before("<ul class='" + OPTIONLABEL + " " + LIST + "'><li class='" + ITEM + "'></li></ul>").prev();
                 render.call(this, this.optionLabel, { index: -1, top: null, selected: false, current: false, item: optionInstance }, this.templates);
                 this.optionInstance = optionInstance;
             } else {
