@@ -157,7 +157,9 @@ var __meta__ = {
                 .html(templates.groupTemplate({ group: data.group }));
         }
 
-        position(element[0], data.top);
+        if (data.top) {
+            position(element[0], data.top);
+        }
 
         this.angular("compile", function() {
             return { elements: [ element ], data: [ { dataItem: data.item, group: data.group, newGroup: data.newGroup } ]};
@@ -182,6 +184,7 @@ var __meta__ = {
             options = that.options;
 
             that.wrapper = element.wrap("<div class='" + WRAPPER + "'></div>").parent();
+            that.optionLabel = element.before("<div class='" + LIST + "'><div class='" + ITEM + "'></div></div>").prev();
             that.header = element.before("<div class='" + HEADER + "'></div>").prev();
             that.content = element.append("<ul class='" + CONTENT + " " + LIST + "'></ul>").find("." + CONTENT);
 
@@ -220,7 +223,8 @@ var __meta__ = {
             template: "#:data#",
             placeholderTemplate: "loading...",
             groupTemplate: "#:group#",
-            fixedGroupTemplate: "fixed header template"
+            fixedGroupTemplate: "fixed header template",
+            optionLabel: null
         },
 
         events: [
@@ -396,6 +400,24 @@ var __meta__ = {
             this._select(candidate);
         },
 
+        data: function() {
+            var data = this.dataSource.view(),
+                first = this.optionInstance,
+                length = data.length,
+                idx = 0;
+
+            if (first && length) {
+                first = new kendo.data.ObservableArray([first]);
+
+                for (; idx < length; idx++) {
+                    first.push(data[idx]);
+                }
+                data = first;
+            }
+
+            return data;
+        },
+
         _getElementByIndex: function(index) {
             var element = this.items().filter(function(idx, element) {
                 return index === parseInt($(element).attr("data-offset-index"), 10);
@@ -495,6 +517,7 @@ var __meta__ = {
             }
 
             that._templates();
+            that._optionLabel();
             that._items = that._generateItems(that.content[0], that.itemCount);
 
             that._setHeight(options.itemHeight * dataSource.total());
@@ -837,6 +860,18 @@ var __meta__ = {
             this.focus(e.target);
             this._select(e.target);
             this.trigger(CHANGE);
+        },
+
+        _optionLabel: function() {
+            var optionInstance = this.options.optionLabel;
+
+            if (optionInstance && typeof optionInstance === "object") {
+                render.call(this, this.optionLabel, { index: -1, top: null, selected: false, current: false, item: optionInstance }, this.templates);
+                this.optionInstance = optionInstance;
+            } else {
+                this.optionInstance = null;
+            }
+
         }
 
     });
