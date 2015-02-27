@@ -157,7 +157,7 @@ var __meta__ = {
                 .html(templates.groupTemplate({ group: data.group }));
         }
 
-        if (data.top) {
+        if (typeof data.top !== "undefined") {
             position(element[0], data.top);
         }
 
