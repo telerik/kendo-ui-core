@@ -832,12 +832,11 @@ var __meta__ = {
             }
 
             if (element.hasClass(SELECTED)) {
-                element.removeClass(SELECTED);
-
                 if (singleSelection) {
-                    this._value = [];
-                    this._selectedDataItems = [];
+                    // this._value = [];
+                    // this._selectedDataItems = [];
                 } else {
+                    element.removeClass(SELECTED);
                     this._value = this._value.filter(function(i) { return i != selectedValue; });
                     this._selectedDataItems = this._selectedDataItems.filter(function(i) {
                         var result = valueField ? (i[valueField] != selectedValue) : (i != selectedValue);

@@ -92,7 +92,7 @@
         }, 100);
     });
 
-    asyncTest("click on already selected listItem deselects it as a value of the list", 2, function() {
+    asyncTest("click on already selected listItem does not deselect it as a value of the list", 2, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
             template: "#=data#",
@@ -107,7 +107,7 @@
             equal(virtualList.value()[0], "Item 0");
 
             element.trigger("click");
-            equal(virtualList.value().length, 0);
+            equal(virtualList.value()[0], "Item 0");
         }, 100);
     });
 
