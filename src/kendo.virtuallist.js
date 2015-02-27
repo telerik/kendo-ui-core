@@ -860,8 +860,8 @@ var __meta__ = {
         },
 
         _clickHandler: function(e) {
-            this.focus(e.target);
-            this._select(e.target);
+            this.focus(e.currentTarget);
+            this._select(e.currentTarget);
             this.trigger(CHANGE);
         },
 
