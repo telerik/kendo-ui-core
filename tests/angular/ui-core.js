@@ -65,6 +65,16 @@ withAngularTests("Angular (UI Core)", function(runTest){
         });
     });
 
+    runTest("store widget reference in $scope with tag", function(dom, $scope){
+        $("<kendo-window k-scope-field='window' k-title='\"Reference\"'></div>").appendTo(dom);
+        expect(2);
+        $scope.whenRendered(function(){
+            ok($scope.window instanceof kendo.ui.Window);
+            equal($scope.window.title(), "Reference");
+            start();
+        });
+    });
+
     runTest("handle k-options", function(dom, $scope){
         var w1 = $("<div kendo-window k-options='windowOptions'></div>").appendTo(dom);
         var w2 = $("<div kendo-window k-title='windowOptions.title'></div>").appendTo(dom);

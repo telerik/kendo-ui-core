@@ -152,7 +152,7 @@ var __meta__ = {
             var widgetEvents = ctor.widget.prototype.events;
 
             $.each(attrs, function(name, value) {
-                if (name === "source" || name === "kDataSource") {
+                if (name === "source" || name === "kDataSource" || name === "kScopeField") {
                     return;
                 }
 
@@ -681,7 +681,9 @@ var __meta__ = {
                         replace  : true,
                         template : function(element, attributes) {
                             var tag = TAGNAMES[className] || "div";
-                            return "<" + tag + " " + dashed + ">" + element.html() + "</" + tag + ">";
+                            var scopeField = attributes.kScopeField;
+
+                            return "<" + tag + " " + dashed + (scopeField ? ('="' + scopeField + '"') : "") + ">" + element.html() + "</" + tag + ">";
                         }
                     };
                 });
