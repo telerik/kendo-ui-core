@@ -1619,6 +1619,21 @@ test("query raised requestEnd", 1, function() {
     dataSource.query();
 });
 
+test("query raised requestEnd with correct operation type", 1, function() {
+    var called = false,
+        dataSource = new DataSource({
+            data: [{age: 1}, {age: 2},{age: 3}, {age: 4},{age: 5}, {age: 6},{age: 7}, {age: 8}]
+        });
+
+    dataSource.read();
+
+    dataSource.bind("requestEnd", function(e) {
+        ok(e.type, "read");
+    });
+
+    dataSource.query();
+});
+
 test("fetch persists dataSource options", function() {
     var dataSource = new DataSource({
         serverPaging: true,
