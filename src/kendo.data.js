@@ -3300,7 +3300,7 @@ var __meta__ = {
 
                 this._aggregateResult = this._calculateAggregates(this._data, options);
                 this.view(result.data);
-                this.trigger(REQUESTEND, { });
+                this.trigger(REQUESTEND, { type: "read" });
                 this.trigger(CHANGE, { items: result.data });
             }
 
