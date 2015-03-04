@@ -536,6 +536,10 @@ var __meta__ = {
                        template = that.altTemplate;
                    }
 
+                   that.angular("cleanup", function() {
+                       return { elements: [ editable.element ]};
+                   });
+
                    data = that._modelFromElement(editable.element);
                    that._destroyEditable();
 
@@ -547,6 +551,10 @@ var __meta__ = {
                    if (that._hasBindingTarget()) {
                         kendo.bind(item, data);
                    }
+
+                   that.angular("compile", function() {
+                       return { elements: [ item ], data: [ { dataItem: data } ]};
+                   });
                }
            }
 
