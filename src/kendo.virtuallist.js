@@ -32,7 +32,10 @@ var __meta__ = {
         CHANGE = "change",
         CLICK = "click",
         LISTBOUND = "listBound",
-        ITEMCHANGE = "itemChange";
+        ITEMCHANGE = "itemChange",
+
+        ACTIVATE = "activate",
+        DEACTIVATE = "deactivate";
 
     function getItemCount(screenHeight, listScreens, itemHeight) {
         return Math.ceil(screenHeight * listScreens / itemHeight);
@@ -230,7 +233,9 @@ var __meta__ = {
         events: [
             CHANGE,
             LISTBOUND,
-            ITEMCHANGE
+            ITEMCHANGE,
+            ACTIVATE,
+            DEACTIVATE
         ],
 
         setOptions: function(options) {
@@ -344,9 +349,13 @@ var __meta__ = {
                 if (element.hasClass(FOCUSED)) {
                     return;
                 } else {
+                    if (typeof this._current !== "undefined") {
+                        this.items().add(this.optionLabel).removeClass(FOCUSED);
+                        this.trigger(DEACTIVATE);
+                    }
+
                     this._current = index;
 
-                    this.items().add(this.optionLabel).removeClass(FOCUSED);
                     element.addClass(FOCUSED);
 
                     var position = this._getElementLocation(index);
@@ -357,6 +366,7 @@ var __meta__ = {
                         this.scrollTo(this.element.scrollTop() + this.options.itemHeight);
                     }
 
+                    this.trigger(ACTIVATE);
                 }
             } else { /*focus non rendered item*/
                 this._current = index;

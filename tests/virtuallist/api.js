@@ -128,6 +128,47 @@
         });
     });
 
+    asyncTest("fires the activate event", 1, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            activate: function() {
+                start();
+                ok(true, "activate event is fired");
+                this.unbind("activate");
+            },
+            template: "#=text#",
+            dataValueField: "value",
+            selectable: true
+        });
+
+        setTimeout(function() {
+            var item = virtualList.items().first();
+
+            item.trigger("click");
+        }, 300);
+    });
+
+    asyncTest("fires the deactivate event", 1, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            deactivate: function() {
+                start();
+                ok(true, "deactivate event is fired");
+                this.unbind("deactivate");
+            },
+            template: "#=text#",
+            dataValueField: "value",
+            selectable: true
+        });
+
+        setTimeout(function() {
+            var item = virtualList.items().first();
+
+            item.trigger("click");
+            item.next().trigger("click");
+        }, 300);
+    });
+
     //methods
 
     asyncTest("selectedDataItems method returns correct amount of items after scrolling down and up", 2, function() {
