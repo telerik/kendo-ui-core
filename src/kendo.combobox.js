@@ -308,8 +308,8 @@ var __meta__ = {
                 }
 
                 var keepState = true;
-                var custom = that._option;
-                that._option = undefined;
+                var custom = that._customOption;
+                that._customOption = undefined;
                 that._options(data);
 
                 //TODO: find a way how to remove keepState

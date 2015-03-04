@@ -625,12 +625,12 @@ var __meta__ = {
         _custom: function(value) {
             var that = this;
             var element = that.element;
-            var custom = that._option;
+            var custom = that._customOption;
             var idx = element[0].children.length - 1;
 
             if (!custom) {
                 custom = $("<option/>");
-                that._option = custom;
+                that._customOption = custom;
 
                 element.append(custom);
                 idx += 1;
@@ -779,7 +779,7 @@ var __meta__ = {
                 idx = idx[idx.length - 1];
 
                 var dataItem = this.listView.data()[idx];
-                if (!that.popup.visible() && (!dataItem || this.input.val() !== that._text(dataItem))) {
+                if (!that.popup.visible() && (!dataItem || this.text() !== that._text(dataItem))) {
                     selectItem = false;
                     current = null;
                 }
