@@ -817,4 +817,50 @@
         }, 100);
     });
 
+    asyncTest("select method focuses the optionLabel", 1, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            template: "#=text#",
+            dataValueField: "value",
+            selectable: true,
+            optionLabel: {
+                value: "",
+                text: "Option Label"
+            }
+        });
+
+        setTimeout(function() {
+            start();
+            virtualList.select(-1);
+
+            var optionLabel = virtualList.optionLabel;
+
+            ok(optionLabel.hasClass(FOCUSED));
+        }, 100);
+    });
+
+    asyncTest("select method selects the optionLabel", 3, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            template: "#=text#",
+            dataValueField: "value",
+            selectable: true,
+            optionLabel: {
+                value: "",
+                text: "Option Label"
+            }
+        });
+
+        setTimeout(function() {
+            start();
+            virtualList.select(-1);
+
+            var optionLabel = virtualList.optionLabel;
+
+            ok(optionLabel.hasClass(FOCUSED));
+            ok(optionLabel.hasClass(SELECTED));
+            equal()
+        }, 100);
+    });
+
 })();

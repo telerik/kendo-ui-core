@@ -370,7 +370,7 @@ var __meta__ = {
                 }
             } else { /*focus non rendered item*/
                 this._current = index;
-                this.items().removeClass(FOCUSED);
+                this.items().add(this.optionLabel).removeClass(FOCUSED);
                 this.scrollToIndex(index);
             }
         },
@@ -429,9 +429,15 @@ var __meta__ = {
         },
 
         _getElementByIndex: function(index) {
-            var element = this.items().filter(function(idx, element) {
-                return index === parseInt($(element).attr("data-offset-index"), 10);
-            });
+            var element;
+
+            if (index === -1) {
+                element = this.optionLabel;
+            } else {
+                element = this.items().filter(function(idx, element) {
+                    return index === parseInt($(element).attr("data-offset-index"), 10);
+                });
+            }
 
             return element;
         },
