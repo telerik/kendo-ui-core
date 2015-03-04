@@ -187,12 +187,13 @@ var __meta__ = {
 
             options = that.options;
 
-            that.wrapper = element.wrap("<div class='" + WRAPPER + "'></div>").parent();
+            that.wrapper = element.wrap("<div class='" + WRAPPER + "' role='listbox'></div>").parent();
             that.header = that.element.before("<div class='" + HEADER + "'></div>").prev();
             that.content = element.append("<ul class='" + CONTENT + " " + LIST + "'></ul>").find("." + CONTENT);
 
             that._value = that.options.value instanceof Array ? that.options.value : [that.options.value];
             that._selectedDataItems = [];
+            that._optionID = kendo.guid();
 
             for (var i = 0; i < that._value.length; i++) {
                 that._selectedDataItems.push(null);
@@ -331,7 +332,9 @@ var __meta__ = {
         focus: function(candidate) {
             var element,
                 index,
-                dataSource = this.dataSource;
+                dataSource = this.dataSource,
+                current,
+                id = this._optionID;
 
             if (arguments.length === 0) {
                 return this.content.find("." + FOCUSED);
@@ -350,13 +353,19 @@ var __meta__ = {
                     return;
                 } else {
                     if (typeof this._current !== "undefined") {
-                        this.items().add(this.optionLabel).removeClass(FOCUSED);
+                        current = this._getElementByIndex(this._current);
+                        current
+                            .removeClass(FOCUSED)
+                            .removeAttr("id");
+
                         this.trigger(DEACTIVATE);
                     }
 
                     this._current = index;
 
-                    element.addClass(FOCUSED);
+                    element
+                        .addClass(FOCUSED)
+                        .attr("id", id);
 
                     var position = this._getElementLocation(index);
 
@@ -504,11 +513,13 @@ var __meta__ = {
 
         _generateItems: function(element, count) {
             var items = [],
-                item = "<li class='" + VIRTUALITEM + "'></li>";
+                item;
 
             while(count-- > 0) {
                 item = document.createElement("li");
+                item.tabIndex = -1;
                 item.className = VIRTUALITEM;
+                item.setAttribute("role", "option");
                 item.innerHTML = "<div class='" + ITEM + "'></div>";
                 element.appendChild(item);
 
@@ -890,7 +901,7 @@ var __meta__ = {
 
             if (optionInstance && typeof optionInstance === "object") {
                 this.element
-                    .before("<ul class='" + LIST + "'><li class='" + OPTIONLABEL + "'><div class='" + ITEM + "'></div></li></ul>");
+                    .before("<ul class='" + LIST + "'><li tabindex='-1' class='" + OPTIONLABEL + "' role='option'><div class='" + ITEM + "'></div></li></ul>");
 
                 this.optionLabel = this.wrapper.find("." + OPTIONLABEL);
                 render.call(this, this.optionLabel, { index: -1, top: null, selected: false, current: false, item: optionInstance }, this.templates);
