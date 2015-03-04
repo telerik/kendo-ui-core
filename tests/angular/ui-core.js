@@ -504,7 +504,226 @@ withAngularTests("Angular (UI Core)", function(runTest){
         });
     });
 
-	runTest("Mutliselect value updated when k-ng-model is changed when value is non-primitive", function(dom, $scope, $timeout){
+    runTest("Widget does not set disabled attribute to non-input widgets", function(dom, $scope){
+        $scope.disabled = true;
+
+        $("<div>" +
+          "  <ul kendo-panelbar='kpb' k-ng-disabled='disabled'" +
+          "<li id='item1'>Item 1</li></ul></div>").appendTo(dom);
+
+		expect(1);
+        $scope.whenRendered(function(){
+            var disabled = $scope.kpb.element.prop("disabled");
+            equal(undefined,disabled);
+            start();
+        });
+    });
+
+
+     runTest("Widget respects k-ng-disabled attribue when initially is true", function(dom, $scope){
+        $scope.options = {
+                    dataSource: {
+                        data: [{ContactName: "Name", CustomerID: 1}]
+                    },
+                    dataTextField: "ContactName",
+                    dataValueField: "CustomerID"
+                };
+
+        $scope.disabled = true;
+
+        $("<div>" +
+          "  <select kendo-drop-down-list='ddl' k-options='options' k-ng-disabled='disabled'></select>" +
+          "</div>").appendTo(dom);
+
+		expect(1);
+        $scope.whenRendered(function(){
+            var disabled = $scope.ddl.element.prop("disabled");
+            equal(disabled, $scope.disabled);
+            start();
+        });
+    });
+
+    runTest("Widget respects k-ng-disabled attribue when initially is false", function(dom, $scope){
+        $scope.options = {
+                    dataSource: {
+                        data: [{ContactName: "Name", CustomerID: 1}]
+                    },
+                    dataTextField: "ContactName",
+                    dataValueField: "CustomerID"
+                };
+
+        $scope.disabled = false;
+
+        $("<div>" +
+          "  <select kendo-drop-down-list='ddl' k-options='options' k-ng-disabled='disabled'></select>" +
+          "</div>").appendTo(dom);
+
+		expect(1);
+        $scope.whenRendered(function(){
+            var disabled = $scope.ddl.element.prop("disabled");
+            equal(disabled, $scope.disabled);
+            start();
+        });
+    });
+
+    runTest("Widget respects k-ng-disabled attribue change to true", function(dom, $scope){
+        $scope.options = {
+                    dataSource: {
+                        data: [{ContactName: "Name", CustomerID: 1}]
+                    },
+                    dataTextField: "ContactName",
+                    dataValueField: "CustomerID"
+                };
+
+        $scope.disabled = true;
+
+        $("<div>" +
+          "  <select kendo-drop-down-list='ddl' k-options='options' k-ng-disabled='disabled'></select>" +
+          "</div>").appendTo(dom);
+
+		expect(1);
+        $scope.whenRendered(function(){
+            $scope.$apply(function() {
+                $scope.disabled = false;
+            })
+            var disabled = $scope.ddl.element.prop("disabled");
+            equal(disabled, $scope.disabled);
+            start();
+        });
+    });
+
+    runTest("Widget respects k-ng-disabled attribue change to true", function(dom, $scope){
+        $scope.options = {
+                    dataSource: {
+                        data: [{ContactName: "Name", CustomerID: 1}]
+                    },
+                    dataTextField: "ContactName",
+                    dataValueField: "CustomerID"
+                };
+
+        $scope.disabled = false;
+
+        $("<div>" +
+          "  <select kendo-drop-down-list='ddl' k-options='options' k-ng-disabled='disabled'></select>" +
+          "</div>").appendTo(dom);
+
+		expect(1);
+        $scope.whenRendered(function(){
+            $scope.$apply(function() {
+                $scope.disabled = true;
+            })
+            var disabled = $scope.ddl.element.prop("disabled");
+            equal(disabled, $scope.disabled);
+            start();
+        });
+    });
+
+    runTest("Widget respects k-ng-readonly attribue set to true", function(dom, $scope){
+        $scope.options = {
+                    value: new Date()
+                };
+
+        $scope.readonly = true;
+
+        $("<div>" +
+          "  <input kendo-date-picker='kdp' k-options='options' k-ng-readonly='readonly' />" +
+          "</div>").appendTo(dom);
+
+		expect(1);
+        $scope.whenRendered(function(){
+            var isReadonly = $scope.kdp.element.prop("readonly");
+            equal(isReadonly, $scope.readonly);
+            start();
+        });
+    });
+
+    runTest("Widget respects k-ng-readonly attribue set to false", function(dom, $scope){
+        $scope.options = {
+                    value: new Date()
+                };
+
+        $scope.readonly = false;
+
+        $("<div>" +
+          "  <input kendo-date-picker='kdp' k-options='options' k-ng-readonly='readonly' />" +
+          "</div>").appendTo(dom);
+
+		expect(1);
+        $scope.whenRendered(function(){
+            var isReadonly = $scope.kdp.element.prop("readonly");
+            equal(isReadonly, $scope.readonly);
+            start();
+        });
+    });
+
+    runTest("Widget respects k-ng-readonly attribue change from true to false", function(dom, $scope){
+        $scope.options = {
+                    value: new Date()
+                };
+
+        $scope.readonly = true;
+
+        $("<div>" +
+          "  <input kendo-date-picker='kdp' k-options='options' k-ng-readonly='readonly' />" +
+          "</div>").appendTo(dom);
+
+		expect(1);
+        $scope.whenRendered(function(){
+            $scope.$apply(function() {
+                $scope.readonly = false;
+            })
+            var isReadonly = $scope.kdp.element.prop("readonly");
+            equal(isReadonly, $scope.readonly);
+            start();
+        });
+    });
+
+    runTest("Widget respects k-ng-readonly attribue change from true to false", function(dom, $scope){
+        $scope.options = {
+                    value: new Date()
+                };
+
+        $scope.readonly = false;
+
+        $("<div>" +
+          "  <input kendo-date-picker='kdp' k-options='options' k-ng-readonly='readonly' />" +
+          "</div>").appendTo(dom);
+
+		expect(1);
+        $scope.whenRendered(function(){
+            $scope.$apply(function() {
+                $scope.readonly = true;
+            })
+            var isReadonly = $scope.kdp.element.prop("readonly");
+            equal(isReadonly, $scope.readonly);
+            start();
+        });
+    });
+
+     runTest("Initialized from custom element with k-ng-disabled", function(dom, $scope){
+        $scope.options = {
+                    value: new Date()
+                };
+
+        $scope.disabled = true;
+
+        $("<div>" +
+          "  <kendo-date-picker id='kdp' k-options='options' k-ng-disabled='disabled'></kendo-date-picker>" +
+          "</div>").appendTo(dom);
+
+		expect(1);
+        $scope.whenRendered(function(){
+            $scope.$apply(function() {
+                $scope.disabled = false;
+            })
+            var isEnabled = $("[data-role=datepicker]").prop("disabled");
+            equal(isEnabled, $scope.disabled);
+            start();
+        });
+    });
+
+
+	runTest("Mutliselect value updated when k-ng-model is changed when value is non-primitive", function(dom, $scope){
         $scope.selectOptions = {
                     dataTextField: "ProductName",
                     dataValueField: "ProductID",
@@ -536,7 +755,7 @@ withAngularTests("Angular (UI Core)", function(runTest){
         });
     });
 
-    runTest("Mutliselect value updated when k-ng-model is changed when value is primitive", function(dom, $scope, $timeout){
+    runTest("Mutliselect value updated when k-ng-model is changed when value is primitive", function(dom, $scope){
         $scope.selectOptions = {
                     dataTextField: "ProductName",
                     dataValueField: "ProductID",
@@ -568,7 +787,7 @@ withAngularTests("Angular (UI Core)", function(runTest){
         });
     });
 
-    runTest("Mutliselect value updated when k-ng-model is changed to empty array", function(dom, $scope, $timeout){
+    runTest("Mutliselect value updated when k-ng-model is changed to empty array", function(dom, $scope){
         $scope.selectOptions = {
                     dataTextField: "ProductName",
                     dataValueField: "ProductID",
@@ -600,7 +819,7 @@ withAngularTests("Angular (UI Core)", function(runTest){
         });
     });
 
-    runTest("Mutliselect value updated when k-ng-model is changed after new items is selected", function(dom, $scope, $timeout){
+    runTest("Mutliselect value updated when k-ng-model is changed after new items is selected", function(dom, $scope){
         $scope.selectOptions = {
                     dataTextField: "ProductName",
                     dataValueField: "ProductID",
