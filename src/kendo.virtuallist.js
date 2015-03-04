@@ -237,7 +237,7 @@ var __meta__ = {
             Widget.fn.setOptions.call(this, options);
 
             if (this._selectProxy && this.options.selectable === false) {
-                this.element.off(CLICK, "." + VIRTUALITEM, this._selectProxy);
+                this.wrapper.off(CLICK, "." + VIRTUALITEM + ". ," + OPTIONLABEL, this._selectProxy);
             } else if (!this._selectProxy && this.options.selectable) {
                 this._selectable();
             }
@@ -346,7 +346,7 @@ var __meta__ = {
                 } else {
                     this._current = index;
 
-                    this.items().removeClass(FOCUSED);
+                    this.items().add(this.optionLabel).removeClass(FOCUSED);
                     element.addClass(FOCUSED);
 
                     var position = this._getElementLocation(index);
@@ -430,7 +430,7 @@ var __meta__ = {
             this.result = undefined;
             this._lastScrollTop = undefined;
             if (this.optionLabel) {
-                this.optionLabel.remove();
+                this.optionLabel.parent().remove();
                 this.optionLabel = undefined;
             }
             this.content.empty();
@@ -802,7 +802,7 @@ var __meta__ = {
         _selectable: function() {
             if (this.options.selectable) {
                 this._selectProxy = $.proxy(this, "_clickHandler");
-                this.element.on(CLICK, "." + VIRTUALITEM, this._selectProxy);
+                this.wrapper.on(CLICK, "." + VIRTUALITEM + ", ." + OPTIONLABEL, this._selectProxy);
             }
         },
 
@@ -828,7 +828,11 @@ var __meta__ = {
             }
 
             if (!selectedValue && selectedValue !== 0) {
-                return;
+                if (index === -1 && this.optionInstance) { //option label is selected
+                    selectedValue = this.optionInstance.value;
+                } else {
+                    return;
+                }
             }
 
             if (element.hasClass(SELECTED)) {
@@ -845,7 +849,7 @@ var __meta__ = {
                 }
             } else {
                 if (singleSelection) {
-                    this.items().removeClass(SELECTED);
+                    this.items().add(this.optionLabel).removeClass(SELECTED);
                     this._value = [selectedValue];
                     this._selectedDataItems = [dataItem];
                 } else {
@@ -869,7 +873,10 @@ var __meta__ = {
             var optionInstance = this.options.optionLabel;
 
             if (optionInstance && typeof optionInstance === "object") {
-                this.optionLabel = this.element.before("<ul class='" + OPTIONLABEL + " " + LIST + "'><li class='" + ITEM + "'></li></ul>").prev();
+                this.element
+                    .before("<ul class='" + LIST + "'><li class='" + OPTIONLABEL + "'><div class='" + ITEM + "'></div></li></ul>");
+
+                this.optionLabel = this.wrapper.find("." + OPTIONLABEL);
                 render.call(this, this.optionLabel, { index: -1, top: null, selected: false, current: false, item: optionInstance }, this.templates);
                 this.optionInstance = optionInstance;
             } else {
