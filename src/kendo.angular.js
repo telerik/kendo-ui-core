@@ -95,8 +95,8 @@ var __meta__ = {
     }
 
     function createWidget(scope, element, attrs, widget, origAttr, controllers) {
-        if (!element.is) {
-            throw new Error("The angular.js script is included before the jQuery one. For the kendo directives to work properly, the jQuery script (jquery.js) should be included before angular.js");
+        if (!(element instanceof jQuery)) {
+            throw new Error("The Kendo UI directives require jQuery to be available before AngularJS. Please include jquery before angular in the document.");
         }
         var kNgDelay = attrs.kNgDelay,
             delayValue = scope.$eval(kNgDelay);
