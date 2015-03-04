@@ -121,6 +121,7 @@ var __meta__ = {
             }
         },
 
+        //TODO: should return promises
         _filterSource: function(filter, force) {
             var that = this;
             var options = that.options;
@@ -575,39 +576,70 @@ var __meta__ = {
         },
 
         _accessor: function(value, idx) {
-            var element = this.element[0],
-                isSelect = this._isSelect,
-                selectedIndex = element.selectedIndex,
-                option;
+            return this[this._isSelect ? "_accessorSelect" : "_accessorInput"](value, idx);
+        },
+
+        _accessorInput: function(value) {
+            var element = this.element[0];
 
             if (value === undefined) {
-                if (isSelect) {
-                    if (selectedIndex > -1) {
-                        option = element.options[selectedIndex];
-
-                        if (option) {
-                            value = option.value;
-                        }
-                    }
-                } else {
-                    value = element.value;
-                }
-                return value;
+                return element.value;
             } else {
-                if (isSelect) {
-                    if (selectedIndex > -1) {
-                        element.options[selectedIndex].removeAttribute(SELECTED);
-                    }
+                element.value = value;
+            }
+        },
 
-                    element.selectedIndex = idx;
-                    option = element.options[idx];
-                    if (option) {
-                       option.setAttribute(SELECTED, SELECTED);
-                    }
-                } else {
-                    element.value = value;
+        _accessorSelect: function(value, idx) {
+            var element = this.element[0];
+            var selectedIndex = element.selectedIndex;
+            var option;
+
+            if (value === undefined) {
+                option = element.options[selectedIndex];
+
+                if (option) {
+                    value = option.value;
+                }
+                return value || "";
+            } else {
+                if (selectedIndex > -1) {
+                    element.options[selectedIndex].removeAttribute(SELECTED);
+                }
+
+                if (idx === undefined) {
+                    idx = -1;
+                }
+
+                if (idx == -1 && value !== "") {
+                    idx = this._custom(value);
+                }
+
+                element.selectedIndex = idx;
+                option = element.options[idx];
+                if (option) {
+                   option.setAttribute(SELECTED, SELECTED);
                 }
             }
+        },
+
+        _custom: function(value) {
+            var that = this;
+            var element = that.element;
+            var custom = that._option;
+            var idx = element[0].children.length - 1;
+
+            if (!custom) {
+                custom = $("<option/>");
+                that._option = custom;
+
+                element.append(custom);
+                idx += 1;
+            }
+
+            custom.text(value);
+            custom[0].selected = true;
+
+            return idx;
         },
 
         _hideBusy: function () {
@@ -686,19 +718,37 @@ var __meta__ = {
                 if (e.altKey) {
                     that.toggle(down);
                 } else {
+                    if (!this.listView.isBound()) {
+                        if (!this._fetch) {
+                            this.dataSource.one(CHANGE, function() {
+                                that._move(e);
+                                that._fetch = false;
+                            });
+
+                            that._fetch = true;
+                            that._filterSource();
+                        }
+
+                        e.preventDefault();
+
+                        return true; //pressed
+                    }
+
                     current = that.listView.current();
 
-                    if (down) {
-                        that.listView.next();
+                    if (!this._fetch) {
+                        if (down) {
+                            that.listView.next();
 
-                        if (!that.listView.current()[0]) {
-                            that.listView.last();
-                        }
-                    } else {
-                        that.listView.prev();
+                            if (!that.listView.current()) {
+                                that.listView.last();
+                            }
+                        } else {
+                            that.listView.prev();
 
-                        if (!that.listView.current()[0]) {
-                            that.listView.first();
+                            if (!that.listView.current()) {
+                                that.listView.first();
+                            }
                         }
                     }
 
@@ -712,22 +762,6 @@ var __meta__ = {
                     if (!this.popup.visible()) {
                         this._blur();
                     }
-
-                    /*if (!firstChild && !that._accessor() && that._state !== "filter") {
-                        if (!that._fetch) {
-                            that.dataSource.one(CHANGE, function() {
-                                that._move(e);
-                                that._fetch = false;
-                            });
-
-                            that._fetch = true;
-                            that._filterSource();
-                        }
-
-                        e.preventDefault();
-
-                        return true; //pressed
-                    }*/
                 }
 
                 e.preventDefault();
@@ -739,19 +773,34 @@ var __meta__ = {
 
                 current = this.listView.current();
 
+                //TODO: Refactor. it is used because of the filtering, but we will need to find a better way
+                var selectItem = true;
+                var idx = this.listView.select();
+                idx = idx[idx.length - 1];
+
+                var dataItem = this.listView.data()[idx];
+                if (!that.popup.visible() && (!dataItem || this.input.val() !== that._text(dataItem))) {
+                    selectItem = false;
+                    current = null;
+                }
+
                 if (that.trigger(SELECT, { item: current })) {
                     return;
                 }
 
-                //TODO: Refactor. it is used because of the filtering, but we will need to find a better way
-                if (!that.popup.visible() && (!current || !current.hasClass("k-state-selected"))) {
-                    current = null;
-                }
-
                 var activeFilter = that.filterInput && that.filterInput[0] === activeElement();
 
-                this._select(current);
-                that._focusElement(that.wrapper);
+                if (selectItem) {
+                    this._select(current);
+                } else {
+                    //set custom value here!
+                    this._accessor(this.input.val());
+                }
+
+                //TODO: refactor
+                if (this._focusElement) {
+                    this._focusElement(that.wrapper);
+                }
 
                 if (activeFilter && key === keys.TAB) {
                     that.wrapper.focusout();
@@ -988,6 +1037,8 @@ var __meta__ = {
 
             this.setDataSource(this.options.dataSource);
 
+            this._bound = false;
+
             this._optionID = kendo.guid();
 
             this._selectedIndices = [];
@@ -1085,7 +1136,8 @@ var __meta__ = {
 
                 that.trigger("activate");
             } else {
-                return that._current;
+                candidate = that._current;
+                return candidate && candidate[0] ? candidate : null;
             }
         },
 
@@ -1171,27 +1223,10 @@ var __meta__ = {
             this.focus(this.element[0].children[this.element[0].children.length - 1]);
         },
 
-        focus: function(candidate) {
-            if (typeof candidate === "number") {
-                candidate = $(this.element[0].children[candidate]);
-            }
-
-            candidate = $(candidate);
-
-            this.current(candidate);
-        },
-
-        select: function(candidate) {
-            var that = this;
-            var data = that._dataContext;
-            var deselected = false;
+        _get: function(candidate) {
+            var data = this._dataContext;
             var found = false;
-            var dataItem;
             var idx;
-
-            if (candidate === undefined) {
-                return that._selectedIndices.slice();
-            }
 
             if (typeof candidate === "function") {
                 for (idx = 0; idx < data.length; idx++) {
@@ -1209,15 +1244,42 @@ var __meta__ = {
 
             if (typeof candidate === "number") {
                 idx = candidate;
-                candidate = $(this.element[0].children[candidate]);
+                candidate = this.element[0].children[candidate];
             } else {
-                idx = inArray(candidate[0], that.element[0]);
+                idx = inArray($(candidate)[0], this.element[0]);
                 if (idx === -1) { //does not exist in list
                     candidate = null;
                 }
-
-                candidate = $(candidate);
             }
+
+            return {
+                item: $(candidate),
+                index: idx
+            };
+        },
+
+        focus: function(candidate) {
+            candidate = this._get(candidate);
+
+            this.current(candidate.item);
+        },
+
+        select: function(candidate) {
+            var that = this;
+            var data = that._dataContext;
+            var deselected = false;
+            var found = false;
+            var dataItem;
+            var idx;
+
+            if (candidate === undefined) {
+                return that._selectedIndices.slice();
+            }
+
+            candidate = this._get(candidate);
+
+            idx = candidate.index;
+            candidate = candidate.item;
 
             deselected = this._deselect(candidate);
 
@@ -1455,11 +1517,20 @@ var __meta__ = {
 
             if (this._selectedIndices.length) {
                 this.focus(this._selectedIndices[this._selectedIndices.length - 1]);
+            } else {
+                //TODO: test this
+                this.focus(null);
             }
 
+            this._bound = true;
             this._angularItems("compile");
 
             this.trigger("dataBound");
+        },
+
+        //TODO: test
+        isBound: function() {
+            return this._bound;
         }
     });
 

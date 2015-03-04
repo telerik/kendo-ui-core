@@ -49,8 +49,7 @@ test("ComboBox adds aria-activedescentant", function() {
 
     equal(combobox.selectedIndex, 1);
     equal(combobox.ul.children().eq(0).attr("id"), undefined);
-    equal(combobox.ul.children().eq(1).attr("id"), "test_option_selected");
-    equal(combobox.input.attr("aria-activedescendant"), "test_option_selected");
+    equal(combobox.input.attr("aria-activedescendant"), combobox.ul.children().eq(1).attr("id"));
 });
 
 test("ComboBox adds aria-disabled='true'", function() {

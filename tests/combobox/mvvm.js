@@ -2,7 +2,7 @@
 
 var dom;
 
-module("autocomplete mvvm", {
+module("combobox mvvm", {
   setup: function() {
       QUnit.fixture.append(
         '<script id="template" type="text/x-kendo-template">' +

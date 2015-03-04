@@ -32,6 +32,12 @@ test("kendoComboBox extends passed options", function() {
     equal(options.test, 1);
 });
 
+test("combobox creates static list view", function() {
+    combobox = new ComboBox(input);
+
+    ok(combobox.listView instanceof kendo.ui.StaticList);
+});
+
 test("wraps element if no wrapper span.k-widget and hide element", function() {
    input.wrap("<span class='test'/>");
 
@@ -47,7 +53,7 @@ test("wraps element if no wrapper span.k-widget and hide element", function() {
    input.parent().remove();
 });
 
-test("create text input", function() {
+test("create a text input", function() {
    combobox = new ComboBox(input.attr("name", "combo1"), {
        text: "test"
    });
@@ -56,6 +62,7 @@ test("create text input", function() {
 
    ok(text.is("input"));
    ok(text.hasClass("k-input"));
+
    equal(text.val(), "test");
    equal(text.attr("autocomplete"), "off");
    equal(text.attr("name"), "combo1_input");
@@ -91,7 +98,7 @@ test("text input should copy value of the hidden input on create", function() {
    equal(combobox.input.val(), input.val());
 });
 
-test("data source is when pass DataSource", function() {
+test("data source instance reference is preserved when pass DataSource", function() {
    var dataSource = kendo.data.DataSource.create([{text: 1, value: 1}, {text:2, value:2}]);
 
    combobox = new ComboBox(input, {dataSource: dataSource});
@@ -138,7 +145,7 @@ test("data source is initialized from options.dataSource", function() {
 });
 
 test("data source is initialized from OPTION items + one custom OPTION", function() {
-   var select = $("<select><option value=1>Chai</option><option value=1 selected='selected'>Chai</option></select>");
+   var select = $("<select><option value=1>Chai</option><option value=1 selected='selected'>Chai</option></select>").appendTo(QUnit.fixture);
 
    combobox = new ComboBox(select);
 
@@ -152,7 +159,7 @@ test("data source is initialized from OPTION items + one custom OPTION", functio
 });
 
 test("ComboBox persists custom value after re-bind", function() {
-   var select = $("<select></select>");
+   var select = $("<select></select>").appendTo(QUnit.fixture);
 
    combobox = new ComboBox(select);
 
@@ -163,7 +170,7 @@ test("ComboBox persists custom value after re-bind", function() {
 });
 
 test("selected index is get from select element", function() {
-   var select = $("<select><option value=1>Chai</option><option value=1 selected='selected'>Chai</option></select>");
+   var select = $("<select><option value=1>Chai</option><option value=1 selected='selected'>Chai</option></select>").appendTo(QUnit.fixture);
 
    combobox = new ComboBox(select);
 
@@ -171,7 +178,7 @@ test("selected index is get from select element", function() {
 });
 
 test("set text if select and not autoBind", function() {
-   var select = $("<select><option value=1>Chai</option><option value=1 selected='selected'>Chai</option></select>");
+   var select = $("<select><option value=1>Chai</option><option value=1 selected='selected'>Chai</option></select>").appendTo(QUnit.fixture);
 
    combobox = new ComboBox(select, {autoBind: false});
 
@@ -179,8 +186,8 @@ test("set text if select and not autoBind", function() {
 });
 
 test("retrived data from OPTIONS does not override options.dataSource", function() {
-   var select = $("<select><option value=1>Chai</option><option value=2 selected='selected'>Beverages</option></select>"),
-       data = [{text: "Foo", value: "Foo"}];
+   var select = $("<select><option value=1>Chai</option><option value=2 selected='selected'>Beverages</option></select>").appendTo(QUnit.fixture);
+   var data = [{text: "Foo", value: "Foo"}];
 
    combobox = new ComboBox(select, {
        dataSource: {
@@ -199,7 +206,7 @@ test("retrived data from OPTIONS does not override options.dataSource", function
 });
 
 test("combobox does not select first item if initialized from empty select", function() {
-   var select = $("<select></select>");
+   var select = $("<select></select>").appendTo(QUnit.fixture);
 
    combobox = new ComboBox(select, {
        dataSource: [{text: "Foo", value: "Foo"}],
@@ -212,7 +219,7 @@ test("combobox does not select first item if initialized from empty select", fun
 });
 
 test("combobox selects first item when initalized from select with TEXT node", function() {
-   var select = $("<select></select>");
+   var select = $("<select></select>").appendTo(QUnit.fixture);
 
    select.append(document.createTextNode(""));
 
@@ -299,10 +306,12 @@ test("combobox populates its list when the datasource changes", function() {
    equal(combobox.ul.children("li").first().text(), "foo");
 });
 
-test("template should render item directly if datatextField is empty string", function(){
-    combobox = new ComboBox(input, { dataTextField : ""});
+test("combobox sets default item template", function(){
+    combobox = new ComboBox(input, { });
 
-    equal(combobox.template("foo"), '<li tabindex="-1" role="option" unselectable="on" class="k-item">foo</li>');
+    var template = combobox.listView.options.template;
+
+    equal(template, "#:data#");
 });
 
 test("template should use defined datatextField", function(){
@@ -310,7 +319,9 @@ test("template should use defined datatextField", function(){
         dataTextField : "ProductName"
     });
 
-    equal(combobox.template({ProductName: "foo"}), '<li tabindex="-1" role="option" unselectable="on" class="k-item">foo</li>');
+    var template = combobox.listView.options.template;
+
+    equal(template, "#:data.ProductName#");
 });
 
 test("changing the template", function() {
@@ -319,8 +330,9 @@ test("changing the template", function() {
         template: "#= data.toUpperCase() #"
     });
 
-    equal(combobox.template("foo"), '<li tabindex="-1" role="option" unselectable="on" class="k-item">FOO</li>');
-    equal(combobox.options.template, "#= data.toUpperCase() #");
+    var template = combobox.listView.options.template;
+
+    equal(template, "#= data.toUpperCase() #");
 });
 
 test("defining header template", function() {
@@ -527,7 +539,7 @@ test("resetting dataSource detaches the previouse events", 0, function() {
 
     var dataSource = combobox.dataSource;
 
-    combobox._dataSource();
+    combobox.setDataSource([]);
 
     combobox.bind("dataBound", function() {
         ok(false, "Change event is not detached");
