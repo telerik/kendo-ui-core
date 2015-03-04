@@ -29,6 +29,39 @@
         equal(QUnit.fixture.find(".list-item:eq(0)").html(), "1.first title changed");
     });
 
+    ngTest("re-renders when cancel editing", 1,
+    function() {
+        angular.module('kendo.tests')
+        .controller('MyListCtrl', ['$scope', function ($scope) {
+
+            $scope.listWidget = null;
+            $scope.listItemTemplate = '<p class="list-item">{{dataItem.number}}.{{dataItem.title}}</p>';
+            $scope.listEditTemplate = '<p class="list-item">dummy edit template</p>';
+
+            $scope.dataSource = new kendo.data.DataSource({
+                data: [
+                    {number: 1, title: 'first title'},
+                    {number: 2, title: 'second title'}
+                ],
+                schema: {
+                    model: {
+                        id: "number"
+                    }
+                }
+            });
+        }]);
+
+    var markup = '<div ng-controller="MyListCtrl"><div kendo-listview="listWidget" k-data-source="dataSource" k-template="listItemTemplate" k-edit-template="listEditTemplate"></div></div>';
+        QUnit.fixture.html(markup);
+    },
+    function() {
+        var widget = QUnit.fixture.find('[data-role=listview]').data("kendoListView");
+        debugger;
+        widget.edit(widget.element.children().first());
+        widget.cancel();
+        equal(QUnit.fixture.find(".list-item:eq(0)").html(), "1.first title");
+    });
+
     /*
     ngTest("updates when the underlying data is replaced", 1,
     function() {
