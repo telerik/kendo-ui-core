@@ -232,6 +232,7 @@ var __meta__ = {
             if (options.virtual) {
                 console.log("init virtual list");
                 this.listView = new kendo.ui.VirtualList(this.ul, {
+                    autoBind: false, //dropdownlist fetches the data
                     dataValueField: options.dataValueField,
                     dataSource: this.dataSource,
                     optionLabel: this.optionLabel,
