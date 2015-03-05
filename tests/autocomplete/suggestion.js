@@ -399,4 +399,18 @@ test("suggest method append text without modifying the user input", 1, function(
     equal(autocomplete.value(), "foo");
 });
 
+test("suggest method accepts an object", 1, function() {
+    var autocomplete = new AutoComplete(input, {
+        dataSource: [{ name: "Foo" }, { name: "Bar" }],
+        dataTextField: "name",
+        suggest: true
+    });
+
+    autocomplete.dataSource.read();
+
+    autocomplete.suggest(autocomplete.dataSource.view()[0]);
+
+    equal(autocomplete.value(), "Foo");
+});
+
 }());

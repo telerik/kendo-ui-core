@@ -716,6 +716,7 @@ var __meta__ = {
                     that.toggle(down);
                 } else {
                     if (!this.listView.isBound()) {
+                        //TODO: move this outside and accept callback. Thus value method can use it too.
                         if (!this._fetch) {
                             this.dataSource.one(CHANGE, function() {
                                 that._move(e);

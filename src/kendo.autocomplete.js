@@ -293,13 +293,11 @@ var __meta__ = {
             word = word || "";
 
             if (typeof word !== "string") {
-                idx = List.inArray(word[0], that.ul[0]);
-
-                if (idx > -1) {
-                    word = that._text(that._data()[idx]);
-                } else {
-                    word = "";
+                if (word[0]) {
+                    word = that.dataSource.view()[List.inArray(word[0], that.ul[0])];
                 }
+
+                word = word ? that._text(word) : "";
             }
 
             if (caretIdx <= 0) {
@@ -417,7 +415,6 @@ var __meta__ = {
                 }
 
                 if (options.suggest && isActive) {
-                    //TODO: Add test for passing complex object here!
                     that.suggest(data[0]);
                 }
             }
