@@ -918,4 +918,22 @@
         }, 100);
     });
 
+    asyncTest("selecting by index works even if the item is not currently available", 2, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            template: "#=text#",
+            dataValueField: "value",
+            selectable: true
+        });
+
+        setTimeout(function() {
+            virtualList.select(97);
+            setTimeout(function() {
+                start();
+                equal(virtualList.select(), 97);
+                equal(virtualList.value()[0], 97);
+            }, 300);
+        }, 100);
+    });
+
 })();

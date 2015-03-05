@@ -114,6 +114,9 @@ var __meta__ = {
                 callback(arr1[i], arr2[i], templates);
                 if (arr2[i].item) {
                     this.trigger(ITEMCHANGE, { item: $(arr1[i]), data: arr2[i].item, ns: kendo.ui });
+                    if (arr2[i].index === this._selectedIndex) {
+                        this.select(this._selectedIndex);
+                    }
                 }
             }
         };
@@ -322,7 +325,7 @@ var __meta__ = {
         },
 
         scrollTo: function(y) {
-            this.element.scrollTop(y);
+            this.element.scrollTop(y); //works only if the element is visible
         },
 
         scrollToIndex: function(index) {
@@ -426,11 +429,22 @@ var __meta__ = {
         },
 
         select: function(candidate) {
+            var success = false;
+
             if (candidate === undefined) {
                 return this._focusedIndex;
             }
+
             this.focus(candidate);
-            this._select(candidate);
+            success = this._select(candidate);
+
+            if (typeof candidate === "number" && !success) {
+                this._selectedIndex = candidate;
+            } else {
+                this._selectedIndex = null;
+            }
+
+            return success;
         },
 
         data: function() {
@@ -882,7 +896,7 @@ var __meta__ = {
                 if (index === -1 && this.optionInstance) { //option label is selected
                     selectedValue = this.optionInstance.value;
                 } else {
-                    return;
+                    return false; //return false if there is no item to select
                 }
             }
 
@@ -912,6 +926,7 @@ var __meta__ = {
             }
 
             this._focusedIndex = index;
+            return true; //return true if item was selected
         },
 
         _clickHandler: function(e) {
