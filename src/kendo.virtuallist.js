@@ -332,12 +332,23 @@ var __meta__ = {
         focus: function(candidate) {
             var element,
                 index,
+                data,
                 dataSource = this.dataSource,
                 current,
                 id = this._optionID;
 
             if (candidate === undefined) {
                 return this.content.find("." + FOCUSED);
+            }
+
+            if (typeof candidate === "function") {
+                data = this.data();
+                for (idx = 0; idx < data.length; idx++) {
+                    if (candidate(data[idx])) {
+                        candidate = idx;
+                        break;
+                    }
+                }
             }
 
             if (isNaN(candidate)) {
@@ -836,7 +847,17 @@ var __meta__ = {
         _select: function(candidate) {
             var singleSelection = this.options.selectable !== "multiple",
                 valueField = this.options.dataValueField,
-                element, index, dataItem, selectedValue;
+                element, index, data, dataItem, selectedValue;
+
+            if (typeof candidate === "function") {
+                data = this.data();
+                for (idx = 0; idx < data.length; idx++) {
+                    if (candidate(data[idx])) {
+                        candidate = idx;
+                        break;
+                    }
+                }
+            }
 
             if (isNaN(candidate)) {
                 element = $(candidate);

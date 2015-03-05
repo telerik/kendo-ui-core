@@ -713,6 +713,27 @@
         }, 100);
     });
 
+    asyncTest("select method accepts predicate function", 3, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            template: "#=text#",
+            dataValueField: "value",
+            selectable: true
+        });
+
+        setTimeout(function() {
+            start();
+            virtualList.select(function(dataItem) {
+                return dataItem.value === 2;
+            });
+
+            var element = virtualList.items().eq(2);
+            ok(element.hasClass(FOCUSED));
+            ok(element.hasClass(SELECTED));
+            equal(virtualList.value()[0], 2);
+        }, 100);
+    });
+
     asyncTest("focus method adds focused class to the element", 1, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
@@ -770,6 +791,25 @@
             ok(!element1.hasClass(FOCUSED));
             ok(element1.hasClass(SELECTED));
             ok(element2.hasClass(FOCUSED));
+        }, 100);
+    });
+
+    asyncTest("focus method accepts predicate function", 1, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            template: "#=text#",
+            dataValueField: "value",
+            selectable: true
+        });
+
+        setTimeout(function() {
+            start();
+            virtualList.focus(function(dataItem) {
+                return dataItem.value === 1;
+            });
+
+            var element = virtualList.items().eq(1);
+            ok(element.hasClass(FOCUSED));
         }, 100);
     });
 
