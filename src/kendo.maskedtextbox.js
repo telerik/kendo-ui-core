@@ -139,6 +139,11 @@ var __meta__ = {
             Widget.fn.destroy.call(that);
         },
 
+        raw: function() {
+            var unmasked = this._unmask(this.element.val(), 0);
+            return unmasked.replace(new RegExp(this.options.promptChar, "g"), "");
+        },
+
         value: function(value) {
             var element = this.element;
             var emptyMask = this._emptyMask;

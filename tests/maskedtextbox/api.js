@@ -134,6 +134,23 @@
         equal(input.val(), "");
     });
 
+    test("raw method returns unmasked widget value", function() {
+        var maskedtextbox = new MaskedTextBox(input, {
+            mask: "(00-00)",
+            value: "99-9"
+        });
+
+        equal(maskedtextbox.raw(), "999");
+    });
+
+    test("raw method returns empty value if widget has no value", function() {
+        var maskedtextbox = new MaskedTextBox(input, {
+            mask: "(00-00)"
+        });
+
+        equal(maskedtextbox.raw(), "");
+    });
+
     test("enable method with false disables widget", function() {
         var maskedtextbox = new MaskedTextBox(input, {
             mask: "(00-00)"
