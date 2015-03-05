@@ -239,7 +239,7 @@ var __meta__ = {
                     fixedGroupTemplate: options.fixedGroupTemplate || "#:data#",
                     template: options.template || "#:" + kendo.expr(options.dataTextField, "data") + "#",
                     activate: function() {
-                        var current = this.current();
+                        var current = this.focus();
                         if (current) {
                             that._focused.add(that.filterInput).attr("aria-activedescendant", current.attr("id"));
                         }
@@ -268,7 +268,10 @@ var __meta__ = {
             var selectedIndex;
             var value;
 
-            that._height(filtered ? (length || 1) : length); //????
+            //TODO: test this
+            if (!this.options.virtual) {
+                that._height(filtered ? (length || 1) : length); //????
+            }
 
             if (that.popup.visible()) {
                 that.popup._position();
@@ -304,7 +307,7 @@ var __meta__ = {
 
                 if (!that._fetch) {
                     if (length) {
-                        var dataItem = this.listView.dataItems()[0]; //this will not work well in filtered list
+                        var dataItem = this.listView.selectedDataItems()[0]; //this will not work well in filtered list
 
                         if (dataItem) {
                             that._selectValue(dataItem);
@@ -330,7 +333,7 @@ var __meta__ = {
         },
 
         _listChange: function() {
-            this._selectValue(this.listView.dataItems()[0]);
+            this._selectValue(this.listView.selectedDataItems()[0]);
         },
 
         //TODO: Refactor as part of this was moved into StaticList
@@ -413,7 +416,7 @@ var __meta__ = {
             if (!that._prevent) {
                 //TODO: Try to refactor
                 if (filtered) {
-                    that._select(that.listView.current());
+                    that._select(that.listView.focus());
                 }
 
                 if (!filtered || that.dataItem()) {
@@ -557,7 +560,7 @@ var __meta__ = {
                 }
 
                 if (handled) {
-                    that._select(that.listView.current());
+                    that._select(that.listView.focus());
                     e.preventDefault();
                 }
             }
@@ -767,7 +770,7 @@ var __meta__ = {
                 this._state = STATE_ACCEPT;
             }
 
-            return this.listView.dataItems()[0]; //TODO: remove the need to return selected data Item
+            return this.listView.selectedDataItems()[0]; //TODO: remove the need to return selected data Item
         },
 
         _selectValue: function(dataItem) {

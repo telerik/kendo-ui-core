@@ -152,7 +152,7 @@
 
         list.dataSource.read();
 
-        var dataItems = list.dataItems();
+        var dataItems = list.selectedDataItems();
 
         equal(dataItems.length, 2);
         equal(dataItems[0], list.dataSource.view()[0].items[0]);
@@ -211,7 +211,7 @@
 
         equal(list.dataSource.view().length, 1);
 
-        var dataItems = list.dataItems();
+        var dataItems = list.selectedDataItems();
         var values = list.value();
 
         equal(dataItems.length, 2);
@@ -245,7 +245,7 @@
 
         equal(list.dataSource.view().length, 1);
 
-        var dataItems = list.dataItems();
+        var dataItems = list.selectedDataItems();
         var values = list.value();
 
         equal(dataItems.length, 2);

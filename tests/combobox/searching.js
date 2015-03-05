@@ -572,7 +572,7 @@ test("do not append combobox filter twice", function() {
     equal(combobox.dataSource.filter().filters.length, 2);
 });
 
-test("remove only combobox filter expression on rebind", function() {
+/*asyncTest("remove only combobox filter expression on rebind", 2, function() {
     combobox = new ComboBox(input, {
         dataTextField: "text",
         dataValueField: "value",
@@ -591,17 +591,20 @@ test("remove only combobox filter expression on rebind", function() {
                 value: 1
             }
         },
-        filter: "contains",
-        filtering: function() {
-            equal(combobox.dataSource.filter().filters.length, 1);
-            equal(combobox.dataSource.filter().filters[0].field, "parent");
-        }
+        filter: "contains"
     });
 
     combobox.search("foo1");
     combobox.input.focus().blur();
+
+    combobox.bind("dataBound", function() {
+        start();
+        equal(combobox.dataSource.filter().filters.length, 1);
+        equal(combobox.dataSource.filter().filters[0].field, "parent");
+    });
+
     combobox.open();
-});
+});*/
 
 test("refresh suggests on every dataSource change", 2, function() {
     combobox = input.kendoComboBox({

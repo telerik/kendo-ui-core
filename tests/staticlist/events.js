@@ -16,11 +16,11 @@
         }
     });
 
-    test("widget triggers listBound event", 1, function() {
+    test("widget triggers dataBound event", 1, function() {
         var list = new StaticList(element, {
             dataSource: ["item"],
             template: "#:data#",
-            listBound: function() {
+            dataBound: function() {
                 ok(true);
             }
         });
@@ -57,7 +57,7 @@
         list.select(-1);
     });
 
-    test("widget triggers activate event when the item is focused", 1, function() {
+    test("widget triggers activate event when the item is focused", 2, function() {
         var list = new StaticList(element, {
             dataSource: ["item"],
             template: "#:data#",
@@ -68,7 +68,7 @@
 
         list.dataSource.read();
 
-        list.current($(list.element[0].children[0]));
+        list.focus($(list.element[0].children[0]));
     });
 
     test("widget triggers deactivate event when the item is unfocused", 1, function() {
@@ -83,6 +83,6 @@
 
         list.dataSource.read();
 
-        list.current(null);
+        list.focus(null);
     });
 })();

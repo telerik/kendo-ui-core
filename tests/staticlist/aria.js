@@ -25,6 +25,6 @@
 
       staticlist.dataSource.read();
 
-      equal(staticlist.current().attr("aria-selected"), "true");
+      equal(staticlist.focus().attr("aria-selected"), "true");
   });
 })();

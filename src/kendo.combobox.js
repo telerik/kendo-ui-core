@@ -266,7 +266,7 @@ var __meta__ = {
                     fixedGroupTemplate: options.fixedGroupTemplate || "#:data#",
                     template: options.template || "#:" + kendo.expr(options.dataTextField, "data") + "#",
                     activate: function() {
-                        var current = this.current();
+                        var current = this.focus();
                         if (current) {
                             that._focused.add(that.filterInput).attr("aria-activedescendant", current.attr("id"));
                         }
@@ -324,7 +324,7 @@ var __meta__ = {
             that._makeUnselectable();
 
             if (!filtered && !that._fetch) {
-                var dataItem = this.listView.dataItems()[0]; //this will not work well in filtered list
+                var dataItem = this.listView.selectedDataItems()[0]; //this will not work well in filtered list
 
                 if (dataItem) {
                     that._selectValue(dataItem);
@@ -341,14 +341,14 @@ var __meta__ = {
                 this._initialIndex = null;
             } else if (filtered) {
                 //TODO: should clear selected value here!
-                var current = this.listView.current();
+                var current = this.listView.focus();
                 if (current) {
                     current.removeClass("k-state-selected"); //pretty ugly to be honest
                 }
             }
 
             if (length) {
-                var current = this.listView.current();
+                var current = this.listView.focus();
 
                 if (options.highlightFirst && !current) {
                     that.listView.first();
@@ -382,7 +382,7 @@ var __meta__ = {
         },
 
         _listChange: function() {
-            this._selectValue(this.listView.dataItems()[0]);
+            this._selectValue(this.listView.selectedDataItems()[0]);
         },
 
         _select: function(candidate) {
@@ -392,7 +392,7 @@ var __meta__ = {
                 this._state = STATE_ACCEPT;
             }
 
-            return this.listView.dataItems()[0]; //TODO: remove the need to return selected data Item
+            return this.listView.selectedDataItems()[0]; //TODO: remove the need to return selected data Item
         },
 
         _selectValue: function(dataItem) {
@@ -652,7 +652,7 @@ var __meta__ = {
 
             this.listView.focus(predicate);
 
-            var current = this.listView.current();
+            var current = this.listView.focus();
 
             if (current) {
                 if (options.suggest) {

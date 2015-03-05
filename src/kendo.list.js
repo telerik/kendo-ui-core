@@ -198,7 +198,7 @@ var __meta__ = {
         },
 
         current: function(candidate) {
-            return this.listView.current(candidate);
+            return this.listView.focus(candidate);
         },
 
         items: function() {
@@ -230,15 +230,12 @@ var __meta__ = {
         dataItem: function(index) {
             var that = this;
 
-
             if (index === undefined) {
                 index = that.selectedIndex;
             } else if (typeof index !== "number") {
                 index = $(that.items()).index(index);
             }
 
-            //return that._data()[index];
-            //TODO: use listView dataItems method instead;
             return that.listView.data()[index];
         },
 
@@ -734,30 +731,30 @@ var __meta__ = {
                         return true; //pressed
                     }
 
-                    current = that.listView.current();
+                    current = that.listView.focus();
 
                     if (!this._fetch) {
                         if (down) {
                             that.listView.next();
 
-                            if (!that.listView.current()) {
+                            if (!that.listView.focus()) {
                                 that.listView.last();
                             }
                         } else {
                             that.listView.prev();
 
-                            if (!that.listView.current()) {
+                            if (!that.listView.focus()) {
                                 that.listView.first();
                             }
                         }
                     }
 
-                    if (that.trigger(SELECT, { item: that.listView.current() })) {
-                        that.listView.current(current); //revert focus
+                    if (that.trigger(SELECT, { item: that.listView.focus() })) {
+                        that.listView.focus(current); //revert focus
                         return;
                     }
 
-                    that.listView.select(that.listView.current());
+                    that.listView.select(that.listView.focus());
 
                     if (!this.popup.visible()) {
                         this._blur();
@@ -771,7 +768,7 @@ var __meta__ = {
                     e.preventDefault();
                 }
 
-                current = this.listView.current();
+                current = this.listView.focus();
 
                 //TODO: Refactor. it is used because of the filtering, but we will need to find a better way
                 var selectItem = true;
@@ -1111,36 +1108,6 @@ var __meta__ = {
             Widget.fn.destroy.call(this);
         },
 
-        current: function(candidate) {
-            var that = this;
-            var id = that._optionID;
-
-            if (candidate !== undefined) {
-                if (that._current) {
-                    that._current
-                        .removeClass(FOCUSED)
-                        .removeAttr("aria-selected")
-                        .removeAttr(ID);
-
-                    that.trigger("deactivate");
-                }
-
-                if (candidate) {
-                    candidate.addClass(FOCUSED);
-                    that.scroll(candidate);
-
-                    candidate.attr("id", id);
-                }
-
-                that._current = candidate;
-
-                that.trigger("activate");
-            } else {
-                candidate = that._current;
-                return candidate && candidate[0] ? candidate : null;
-            }
-        },
-
         scroll: function (item) {
             if (!item) {
                 return;
@@ -1177,7 +1144,7 @@ var __meta__ = {
             }
         },
 
-        dataItems: function(dataItems) {
+        selectedDataItems: function(dataItems) {
             var getter = this._valueGetter;
 
             if (dataItems === undefined) {
@@ -1192,7 +1159,7 @@ var __meta__ = {
         },
 
         next: function() {
-            var current = this.current();
+            var current = this.focus();
 
             if (!current) {
                 current = $(this.element[0].children[0]);
@@ -1200,11 +1167,11 @@ var __meta__ = {
                 current = current.next();
             }
 
-            this.current(current);
+            this.focus(current);
         },
 
         prev: function() {
-            var current = this.current();
+            var current = this.focus();
 
             if (!current) {
                 current = $(this.element[0].children[this.element[0].children.length - 1]);
@@ -1212,7 +1179,7 @@ var __meta__ = {
                 current = current.prev();
             }
 
-            this.current(current);
+            this.focus(current);
         },
 
         first: function() {
@@ -1259,9 +1226,35 @@ var __meta__ = {
         },
 
         focus: function(candidate) {
-            candidate = this._get(candidate);
+            var that = this;
+            var id = that._optionID;
 
-            this.current(candidate.item);
+            if (candidate === undefined) {
+                candidate = that._current;
+                return candidate && candidate[0] ? candidate : null;
+            }
+
+            candidate = this._get(candidate).item;
+
+            if (that._current) {
+                that._current
+                    .removeClass(FOCUSED)
+                    .removeAttr("aria-selected")
+                    .removeAttr(ID);
+
+                that.trigger("deactivate");
+            }
+
+            if (candidate) {
+                candidate.addClass(FOCUSED);
+                that.scroll(candidate);
+
+                candidate.attr("id", id);
+            }
+
+            that._current = candidate;
+
+            that.trigger("activate");
         },
 
         select: function(candidate) {
@@ -1286,7 +1279,7 @@ var __meta__ = {
             if (!deselected && candidate[0]) {
                 //Write test for this case
                 //if (candidate !== that._current) {
-                that.current(candidate);
+                that.focus(candidate);
                 //}
 
                 candidate.addClass("k-state-selected").attr("aria-selected", true);
@@ -1513,7 +1506,7 @@ var __meta__ = {
 
             this._dataContext = dataContext;
 
-            this.element[0].innerHTML = html; //could be changed with DOM elements creation
+            this.element[0].innerHTML = html;
 
             if (this._selectedIndices.length) {
                 this.focus(this._selectedIndices[this._selectedIndices.length - 1]);

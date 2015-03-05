@@ -68,7 +68,7 @@
 
         list.dataSource.read();
 
-        var current = list.current();
+        var current = list.focus();
 
         equal(current[0], list.element[0].children[1]);
     });
@@ -94,7 +94,7 @@
         list.select(0);
         list.select(2);
 
-        var dataItems = list.dataItems();
+        var dataItems = list.selectedDataItems();
 
         equal(dataItems.length, 2);
         equal(dataItems[0], list.dataSource.view()[0].items[0]);
@@ -119,7 +119,7 @@
             selectable: "multiple"
         });
 
-        list.dataItems([data[0], data[2]]);
+        list.selectedDataItems([data[0], data[2]]);
 
         var values = list.value();
 
@@ -463,7 +463,7 @@
 
         list.select(1);
 
-        var dataItems = list.dataItems();
+        var dataItems = list.selectedDataItems();
 
         equal(dataItems.length, 1);
         equal(dataItems[0], list.dataSource.view()[0].items[1]);
@@ -490,7 +490,7 @@
         list.select(1);
         list.select(0);
 
-        var dataItems = list.dataItems();
+        var dataItems = list.selectedDataItems();
 
         equal(dataItems.length, 2);
         equal(dataItems[0], list.dataSource.view()[0].items[1]);
@@ -521,7 +521,7 @@
         list.select(0);
         list.select(1);
 
-        var dataItems = list.dataItems();
+        var dataItems = list.selectedDataItems();
 
         equal(dataItems.length, 0);
     });
@@ -546,7 +546,7 @@
         list.select(0);
         list.select(1);
 
-        var dataItems = list.dataItems();
+        var dataItems = list.selectedDataItems();
 
         equal(dataItems.length, 1);
         equal(dataItems[0], list.dataSource.view()[0].items[1]);
@@ -727,7 +727,7 @@
 
         list.value("item1");
 
-        var dataItems = list.dataItems();
+        var dataItems = list.selectedDataItems();
 
         equal(dataItems.length, 1);
         equal(dataItems[0], list.dataSource.view()[0].items[0]);
@@ -753,7 +753,7 @@
 
         list.value(["item2", "item3"]);
 
-        var dataItems = list.dataItems();
+        var dataItems = list.selectedDataItems();
 
         equal(dataItems.length, 2);
         equal(dataItems[0], list.dataSource.view()[0].items[1]);
@@ -780,7 +780,7 @@
 
         list.dataSource.read();
 
-        var dataItems = list.dataItems();
+        var dataItems = list.selectedDataItems();
 
         equal(dataItems.length, 2);
         equal(dataItems[0], list.dataSource.view()[0].items[1]);
