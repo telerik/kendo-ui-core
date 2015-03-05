@@ -343,7 +343,7 @@ var __meta__ = {
 
             if (typeof candidate === "function") {
                 data = this.data();
-                for (idx = 0; idx < data.length; idx++) {
+                for (var idx = 0; idx < data.length; idx++) {
                     if (candidate(data[idx])) {
                         candidate = idx;
                         break;
@@ -851,7 +851,7 @@ var __meta__ = {
 
             if (typeof candidate === "function") {
                 data = this.data();
-                for (idx = 0; idx < data.length; idx++) {
+                for (var idx = 0; idx < data.length; idx++) {
                     if (candidate(data[idx])) {
                         candidate = idx;
                         break;
