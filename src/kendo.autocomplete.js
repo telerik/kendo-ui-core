@@ -119,6 +119,8 @@ var __meta__ = {
 
             that._placeholder();
 
+            that._initList();
+
             kendo.notify(that);
         },
 
@@ -140,25 +142,26 @@ var __meta__ = {
             value: null
         },
 
+        //Use Select._dataSource method here!
         _dataSource: function() {
             var that = this;
 
             if (that.dataSource && that._refreshHandler) {
                 that._unbindDataSource();
             } else {
-                that._refreshHandler = proxy(that.refresh, that);
                 that._progressHandler = proxy(that._showBusy, that);
             }
 
             that.dataSource = DataSource.create(that.options.dataSource)
-                .bind("change", that._refreshHandler)
                 .bind("progress", that._progressHandler);
         },
 
+        //TODO: Use Select.setDataSource method here
         setDataSource: function(dataSource) {
             this.options.dataSource = dataSource;
-
             this._dataSource();
+
+            this.listView.setDataSource(this.dataSource);
         },
 
         events: [
@@ -174,7 +177,8 @@ var __meta__ = {
         setOptions: function(options) {
             List.fn.setOptions.call(this, options);
 
-            this._template();
+            this.listView.setOptions(options);
+
             this._accessors();
             this._aria();
         },
@@ -229,58 +233,9 @@ var __meta__ = {
             List.fn.destroy.call(that);
         },
 
-        refresh: function () {
-            var that = this,
-            ul = that.ul[0],
-            popup = that.popup,
-            options = that.options,
-            data = that._data(),
-            length = data.length,
-            isActive = that.element[0] === activeElement(),
-            action;
-
-            that._angularItems("cleanup");
-            that.trigger("dataBinding");
-
-            ul.innerHTML = kendo.render(that.template, data);
-
-            that._height(length);
-
-            if (popup.visible()) {
-                popup._position();
-            }
-
-            if (length) {
-                if (options.highlightFirst) {
-                    that.current($(ul.firstChild));
-                }
-
-                if (options.suggest && isActive) {
-                    that.suggest($(ul.firstChild));
-                }
-            }
-
-            if (that._open) {
-                that._open = false;
-                action = length ? "open" : "close";
-
-                if (that._typing && !isActive) {
-                    action = "close";
-                }
-
-                popup[action]();
-                that._typing = undefined;
-            }
-
-            if (that._touchScroller) {
-                that._touchScroller.reset();
-            }
-
-            that._makeUnselectable();
-
-            that._hideBusy();
-            that._angularItems("compile");
-            that.trigger("dataBound");
+        //TODO: Refactor as part of this was moved into StaticList
+        refresh: function() {
+            this.listView.refresh();
         },
 
         select: function (li) {
@@ -389,6 +344,131 @@ var __meta__ = {
             }
         },
 
+        _click: function(e) {
+            if (!e.isDefaultPrevented()) {
+                var element = $(e.currentTarget);
+
+                if (this.trigger("select", { item: element })) {
+                    this.close();
+                    return;
+                }
+
+                this._select(element);
+                this._blur();
+
+                caret(element, element.val().length);
+            }
+        },
+
+        _initList: function() {
+            var that = this;
+            var options = this.options;
+
+            if (options.virtual) {
+                this.listView = new kendo.ui.VirtualList(this.ul, {});
+            } else {
+                this.listView = new kendo.ui.StaticList(this.ul, {
+                    dataValueField: options.dataValueField,
+                    dataSource: this.dataSource,
+                    optionLabel: this.optionLabel,
+                    groupTemplate: options.groupTemplate || "#:data#",
+                    fixedGroupTemplate: options.fixedGroupTemplate || "#:data#",
+                    template: options.template || "#:" + kendo.expr(options.dataTextField, "data") + "#",
+                    activate: function() {
+                        var current = this.focus();
+                        if (current) {
+                            that._focused.add(that.filterInput).attr("aria-activedescendant", current.attr("id"));
+                        }
+                    },
+                    change: $.proxy(this._listChange, this),
+                    deactivate: function() {
+                        that._focused.add(that.filterInput).removeAttr("aria-activedescendant");
+                    },
+                    dataBinding: function() {
+                        that.trigger("dataBinding"); //TODO: make preventable
+                    },
+                    dataBound: $.proxy(this._listBound, this)
+                });
+            }
+
+            this.listView.value(this.options.value);
+        },
+
+        _listBound: function() {
+            var that = this;
+            var popup = that.popup;
+            var options = that.options;
+            var data = that.listView.data();
+            var length = data.length;
+            var isActive = that.element[0] === activeElement();
+            var action;
+
+            that._height(length);
+
+            if (popup.visible()) {
+                popup._position();
+            }
+
+            if (length) {
+                var current = this.listView.focus();
+
+                if (options.highlightFirst && !current) {
+                    that.listView.first();
+                }
+
+                if (options.suggest && isActive) {
+                    //TODO: Add test for passing complex object here!
+                    that.suggest(data[0]);
+                }
+            }
+
+            if (that._open) {
+                that._open = false;
+                action = length ? "open" : "close";
+
+                if (that._typing && !isActive) {
+                    action = "close";
+                }
+
+                popup[action]();
+                that._typing = undefined;
+            }
+
+            if (that._touchScroller) {
+                that._touchScroller.reset();
+            }
+
+            that._makeUnselectable();
+
+            that._hideBusy();
+            that.trigger("dataBound");
+        },
+
+        _listChange: function() {
+            this._selectValue(this.listView.selectedDataItems()[0]);
+        },
+
+        _selectValue: function(dataItem) {
+            var separator = this.options.separator;
+            var text = "";
+
+            if (dataItem) {
+                text = this._text(dataItem);
+            }
+
+            if (text === null) {
+                text = "";
+            }
+
+            if (separator) {
+                text = replaceWordAtCaret(caret(this.element)[0], this._accessor(), text, separator);
+            }
+
+            this._prev = text;
+            this._accessor(text);
+            this._placeholder();
+        },
+
         _accessor: function (value) {
             var that = this,
                 element = that.element[0];
@@ -411,41 +491,38 @@ var __meta__ = {
             }
         },
 
-        _accept: function (li) {
-            var element = this.element;
-
-            this._focus(li);
-            caret(element, element.val().length);
-        },
-
         _keydown: function (e) {
-            var that = this,
-                ul = that.ul[0],
-                key = e.keyCode,
-                current = that._current,
-                visible = that.popup.visible();
+            var that = this;
+            var key = e.keyCode;
+            var visible = that.popup.visible();
+            var current = this.listView.focus();
 
             that._last = key;
 
             if (key === keys.DOWN) {
                 if (visible) {
-                    that._move(current ? current.next() : $(ul.firstChild));
+                    this._move(current ? "next" : "first");
                 }
                 e.preventDefault();
             } else if (key === keys.UP) {
                 if (visible) {
-                    that._move(current ? current.prev() : $(ul.lastChild));
+                    this._move(current ? "prev" : "last");
                 }
                 e.preventDefault();
             } else if (key === keys.ENTER || key === keys.TAB) {
 
-                if (key === keys.ENTER && that.popup.visible()) {
+                if (key === keys.ENTER && visible) {
                     e.preventDefault();
                 }
 
-                that._accept(current);
+                //TODO: Trigger select event here!
+                if (visible) {
+                    this._select(current);
+                }
+
+                this._blur();
             } else if (key === keys.ESC) {
-                if (that.popup.visible()) {
+                if (visible) {
                     e.preventDefault();
                 }
                 that.close();
@@ -454,15 +531,11 @@ var __meta__ = {
             }
         },
 
-        _move: function (li) {
-            var that = this;
+        _move: function (action) {
+            this.listView[action]();
 
-            li = li[0] ? li : null;
-
-            that.current(li);
-
-            if (that.options.suggest) {
-                that.suggest(li);
+            if (this.options.suggest) {
+                this.suggest(this.listView.focus());
             }
         },
 
@@ -537,31 +610,8 @@ var __meta__ = {
             }, that.options.delay);
         },
 
-        _select: function (li) {
-            var that = this,
-                separator = that.options.separator,
-                data = that._data(),
-                text,
-                idx;
-
-            li = $(li);
-
-            if (li[0] && !li.hasClass(SELECTED)) {
-                idx = List.inArray(li[0], that.ul[0]);
-
-                if (idx > -1) {
-                    data = data[idx];
-                    text = that._text(data);
-
-                    if (separator) {
-                        text = replaceWordAtCaret(caret(that.element)[0], that._accessor(), text, separator);
-                    }
-
-                    that._accessor(text);
-                    that._prev = that._accessor();
-                    that.current(li.addClass(SELECTED));
-                }
-            }
+        _select: function(candidate) {
+            this.listView.select(candidate);
         },
 
         _loader: function() {
