@@ -158,7 +158,8 @@ var __meta__ = {
             ignoreCase: true,
             animation: {},
             filter: "none",
-            minLength: 1
+            minLength: 1,
+            virtual: false
         },
         events: [
             "open",
@@ -229,7 +230,34 @@ var __meta__ = {
             var options = this.options;
 
             if (options.virtual) {
-                this.listView = new kendo.ui.VirtualList(this.ul, {});
+                console.log("init virtual list");
+                this.listView = new kendo.ui.VirtualList(this.ul, {
+                    dataValueField: options.dataValueField,
+                    dataSource: this.dataSource,
+                    optionLabel: this.optionLabel,
+                    selectable: true,
+                    height: this.options.height,
+                    groupTemplate: options.groupTemplate || "#:data#",
+                    fixedGroupTemplate: options.fixedGroupTemplate || "#:data#",
+                    template: options.template || "#:" + kendo.expr(options.dataTextField, "data") + "#",
+                    activate: function() {
+                        var current = this.focus();
+                        if (current) {
+                            that._focused.add(that.filterInput).attr("aria-activedescendant", current.attr("id"));
+                        }
+                    },
+                    change: $.proxy(this._listChange, this),
+                    deactivate: function() {
+                        that._focused.add(that.filterInput).removeAttr("aria-activedescendant");
+                    },
+                    listBound: $.proxy(this._listBound, this)
+                    /*
+                    dataBinding: function() {
+                        that.trigger("dataBinding"); //TODO: make preventable
+                    },
+                    dataBound: $.proxy(this._listBound, this)
+                    */
+                });
             } else {
                 this.listView = new kendo.ui.StaticList(this.ul, {
                     dataValueField: options.dataValueField,
