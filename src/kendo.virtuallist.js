@@ -209,10 +209,6 @@ var __meta__ = {
             });
 
             that._selectable();
-
-            if (!that._listCreated) {
-                kendo.ui.progress(element, true);
-            }
         },
 
         options: {
@@ -278,9 +274,7 @@ var __meta__ = {
             if (that.dataSource.view().length !== 0) {
                 that.refresh();
             } else if (that.options.autoBind) {
-                that.dataSource.fetch(function() {
-                    kendo.ui.progress(that.element, false);
-                });
+                that.dataSource.fetch();
             }
         },
 

@@ -283,27 +283,6 @@
         }, 100);
     });
 
-    test("displays a loading animation until the dataSource's data is fetched", 1, function() {
-        var virtualList = new VirtualList(container, {
-            dataSource: asyncDataSource
-        });
-
-        ok(virtualList.element.find(".k-loading-mask").length);
-    });
-
-    asyncTest("hides the loading animation when dataSource's data is fetched", 2, function() {
-        var virtualList = new VirtualList(container, {
-            dataSource: asyncDataSource
-        });
-
-        ok(virtualList.element.find(".k-loading-mask").length);
-
-        setTimeout(function() {
-            start();
-            equal(virtualList.element.find(".k-loading-mask").length, 0);
-        }, 100);
-    });
-
     asyncTest("displays placeholder template when list is scrolled to a not available range", 1, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
