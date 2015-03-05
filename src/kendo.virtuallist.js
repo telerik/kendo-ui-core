@@ -363,8 +363,8 @@ var __meta__ = {
                 if (element.hasClass(FOCUSED)) {
                     return;
                 } else {
-                    if (this._current !== undefined) {
-                        current = this._getElementByIndex(this._current);
+                    if (this._focusedIndex !== undefined) {
+                        current = this._getElementByIndex(this._focusedIndex);
                         current
                             .removeClass(FOCUSED)
                             .removeAttr("id");
@@ -372,7 +372,7 @@ var __meta__ = {
                         this.trigger(DEACTIVATE);
                     }
 
-                    this._current = index;
+                    this._focusedIndex = index;
 
                     element
                         .addClass(FOCUSED)
@@ -389,7 +389,7 @@ var __meta__ = {
                     this.trigger(ACTIVATE);
                 }
             } else { /*focus non rendered item*/
-                this._current = index;
+                this._focusedIndex = index;
                 this.items().add(this.optionLabel).removeClass(FOCUSED);
                 this.scrollToIndex(index);
             }
@@ -407,7 +407,7 @@ var __meta__ = {
         },
 
         prev: function() {
-            var index = this._current;
+            var index = this._focusedIndex;
 
             if (!isNaN(index) && index > 0) {
                 this.focus(index - 1);
@@ -416,7 +416,7 @@ var __meta__ = {
         },
 
         next: function() {
-            var index = this._current,
+            var index = this._focusedIndex,
                 lastIndex = this.dataSource.total() - 1; /* data offset index starts from 0*/
 
             if (!isNaN(index) && index < lastIndex) {
@@ -427,7 +427,7 @@ var __meta__ = {
 
         select: function(candidate) {
             if (candidate === undefined) {
-                return this._current;
+                return this._focusedIndex;
             }
             this.focus(candidate);
             this._select(candidate);
@@ -680,7 +680,7 @@ var __meta__ = {
                 itemHeight = this.options.itemHeight,
                 valueField = this.options.dataValueField,
                 value = this._value,
-                currentIndex = this._current,
+                currentIndex = this._focusedIndex,
                 selected = false,
                 current = false,
                 newGroup = false,
@@ -911,7 +911,7 @@ var __meta__ = {
                 element.addClass(SELECTED);
             }
 
-            this._current = index;
+            this._focusedIndex = index;
         },
 
         _clickHandler: function(e) {
