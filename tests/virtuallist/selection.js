@@ -903,4 +903,19 @@
         }, 100);
     });
 
+    asyncTest("select method returns currently selected index", 1, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            template: "#=text#",
+            dataValueField: "value",
+            selectable: true
+        });
+
+        setTimeout(function() {
+            start();
+            virtualList.select(3);
+            equal(virtualList.select(), 3);
+        }, 100);
+    });
+
 })();

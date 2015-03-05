@@ -426,6 +426,9 @@ var __meta__ = {
         },
 
         select: function(candidate) {
+            if (candidate === undefined) {
+                return this._current;
+            }
             this.focus(candidate);
             this._select(candidate);
         },
