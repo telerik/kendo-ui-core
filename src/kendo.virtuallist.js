@@ -161,7 +161,7 @@ var __meta__ = {
                 .html(templates.groupTemplate({ group: data.group }));
         }
 
-        if (typeof data.top !== "undefined") {
+        if (data.top !== undefined) {
             position(element[0], data.top);
         }
 
@@ -336,7 +336,7 @@ var __meta__ = {
                 current,
                 id = this._optionID;
 
-            if (arguments.length === 0) {
+            if (candidate === undefined) {
                 return this.content.find("." + FOCUSED);
             }
 
@@ -352,7 +352,7 @@ var __meta__ = {
                 if (element.hasClass(FOCUSED)) {
                     return;
                 } else {
-                    if (typeof this._current !== "undefined") {
+                    if (this._current !== undefined) {
                         current = this._getElementByIndex(this._current);
                         current
                             .removeClass(FOCUSED)
