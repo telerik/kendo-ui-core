@@ -270,4 +270,29 @@
         }, 100);
     });
 
+    test("isBound returns false if the list is not bound yet", 1, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            template: "#=text#",
+            dataValueField: "value",
+            selectable: true
+        });
+
+        ok(!virtualList.isBound());
+    });
+
+    asyncTest("isBound returns true if the list is bound", 1, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            template: "#=text#",
+            dataValueField: "value",
+            selectable: true
+        });
+
+        setTimeout(function() {
+            start();
+            ok(virtualList.isBound());
+        }, 100);
+    });
+
 })();

@@ -459,6 +459,10 @@ var __meta__ = {
             return data;
         },
 
+        isBound: function() {
+            return this._listCreated;
+        },
+
         _getElementByIndex: function(index) {
             var element;
 
