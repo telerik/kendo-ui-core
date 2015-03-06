@@ -769,26 +769,22 @@ var __meta__ = {
                     e.preventDefault();
                 }
 
+                var dataItem = this.listView.selectedDataItems();
+                dataItem = dataItem[dataItem.length - 1];
+
                 current = this.listView.focus();
 
-                //TODO: Refactor. it is used because of the filtering, but we will need to find a better way
-                var selectItem = true;
-                var idx = this.listView.select();
-                idx = idx[idx.length - 1];
-
-                var dataItem = this.listView.data()[idx];
                 if (!that.popup.visible() && (!dataItem || this.text() !== that._text(dataItem))) {
-                    selectItem = false;
                     current = null;
-                }
-
-                if (that.trigger(SELECT, { item: current })) {
-                    return;
                 }
 
                 var activeFilter = that.filterInput && that.filterInput[0] === activeElement();
 
-                if (selectItem) {
+                if (current) {
+                    if (that.trigger(SELECT, { item: current })) {
+                        return;
+                    }
+
                     this._select(current);
                 } else {
                     //set custom value here!

@@ -418,6 +418,45 @@ test("click item raises select event", 1, function() {
     combobox.ul.children().first().trigger(CLICK);
 });
 
+test("select event is not raised when custom value is entered", 0, function() {
+    combobox = input.kendoComboBox({
+        highlightFirst: true,
+        dataSource: ["foo"],
+        select: function(e) {
+            ok(false);
+        }
+    }).data("kendoComboBox");
+
+    combobox.input.val("custom");
+    combobox.input.press(kendo.keys.ENTER);
+});
+
+test("select event is not raised no item is focused", 0, function() {
+    combobox = input.kendoComboBox({
+        highlightFirst: false,
+        dataSource: ["foo"],
+        select: function(e) {
+            ok(false);
+        }
+    }).data("kendoComboBox");
+
+    combobox.open();
+    combobox.input.press(kendo.keys.ENTER);
+});
+
+test("select is raised when down arrow is clicked", 1, function() {
+    combobox = input.kendoComboBox({
+        highlightFirst: false,
+        dataSource: ["foo"],
+        select: function(e) {
+            ok(true);
+        }
+    }).data("kendoComboBox");
+
+    combobox.open();
+    combobox.input.press(kendo.keys.DOWN);
+});
+
 test("prevent select event should only close the popup", 2, function() {
     combobox = input.kendoComboBox({
         dataSource: ["foo"],
@@ -434,6 +473,23 @@ test("prevent select event should only close the popup", 2, function() {
     combobox.ul.children().first().trigger(CLICK);
 
     ok(!combobox.popup.visible());
+});
+
+test("preventing select event during navigation reverts selection", 2, function() {
+    var combobox = input.kendoComboBox({
+        dataSource: ["foo", "bar"],
+        select: function(e) {
+            e.preventDefault()
+        }
+    }).data("kendoComboBox");
+
+    combobox.input.focus();
+    combobox.wrapper.press(kendo.keys.DOWN);
+
+    var current = combobox.current();
+
+    ok(current.hasClass("k-state-focused"));
+    equal(current.html(), "foo");
 });
 
 test("ComboBox trigger blur of the hidden input", 1, function() {

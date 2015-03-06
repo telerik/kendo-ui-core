@@ -233,7 +233,6 @@ var __meta__ = {
             List.fn.destroy.call(that);
         },
 
-        //TODO: Refactor as part of this was moved into StaticList
         refresh: function() {
             this.listView.refresh();
         },
@@ -512,8 +511,11 @@ var __meta__ = {
                     e.preventDefault();
                 }
 
-                //TODO: Trigger select event here!
-                if (visible) {
+                if (visible && current) {
+                    if (that.trigger("select", { item: current })) {
+                        return;
+                    }
+
                     this._select(current);
                 }
 

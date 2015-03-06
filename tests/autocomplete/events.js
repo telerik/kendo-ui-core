@@ -254,6 +254,24 @@ test("select event is not raised when custom value is entered", 0, function() {
     });
 });
 
+test("select event is raised when first item is entered", 1, function() {
+    var autocomplete = input.kendoAutoComplete({
+        dataSource: ["foo"],
+        select: function(e) {
+            ok(true);
+        }
+    }).data("kendoAutoComplete");
+
+    autocomplete.dataSource.read();
+    autocomplete.popup.open();
+    autocomplete.listView.focus(0);
+
+    autocomplete.element.trigger({
+        type: "keydown",
+        keyCode: kendo.keys.ENTER
+    });
+});
+
 test("AutoComplete triggers filtering event on data source filter", 3, function() {
     var autocomplete = input.kendoAutoComplete({
         dataSource: ["foo", "bar"],
