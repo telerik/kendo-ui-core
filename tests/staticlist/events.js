@@ -65,7 +65,7 @@
                 var removed = e.removed;
 
                 equal(removed.length, 1);
-                equal(removed[0], 0);
+                equal(removed[0].index, 0);
             },
             value: ["item"]
         });
@@ -83,8 +83,8 @@
                 var removed = e.removed;
 
                 equal(removed.length, 2);
-                equal(removed[0], 1);
-                equal(removed[1], 2);
+                equal(removed[0].index, 1);
+                equal(removed[1].index, 2);
             },
             selectable: "multiple",
             value: ["item2", "item3"]
@@ -103,8 +103,8 @@
                 var added = e.added;
 
                 equal(added.length, 2);
-                equal(added[0], 1);
-                equal(added[1], 2);
+                equal(added[0].index, 1);
+                equal(added[1].index, 2);
             },
             selectable: "multiple"
         });

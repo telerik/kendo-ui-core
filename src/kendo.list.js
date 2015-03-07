@@ -1314,12 +1314,16 @@ var __meta__ = {
 
                     entry.element.addClass("k-state-selected").attr("aria-selected", true);
 
-                    added.push(index);
                     this._selectedIndices.push(index);
 
                     dataItem = dataItem.item;
                     this._dataItems.push(dataItem);
                     this._values.push(this._valueGetter(dataItem));
+
+                    added.push({
+                        index: index,
+                        dataItem: dataItem
+                    });
                 }
             }
 
@@ -1430,9 +1434,11 @@ var __meta__ = {
             if (selectable === true) {
                 for (var idx = 0; idx < selectedIndices.length; idx++) {
                     $(this.element[0].children[selectedIndices[idx]]).removeClass("k-state-selected");
+                    removed.push({
+                        index: selectedIndices[idx],
+                        dataItem: this._dataItems[idx]
+                    });
                 }
-
-                removed = selectedIndices.slice();
 
                 this._values = [];
                 this._dataItems = [];
@@ -1451,10 +1457,12 @@ var __meta__ = {
                         if (selectedItem === itemElement[0]) {
                             $(selectedItem).removeClass("k-state-selected");
 
-                            removed.push(selectedIndices.splice(j, 1));
+                            removed.push({
+                                index: selectedIndices.splice(j, 1),
+                                dataItem: dataItems.splice(j, 1)
+                            });
 
                             candidate.splice(i, 1);
-                            dataItems.splice(j, 1);
                             values.splice(j, 1);
 
                             i -= 1;
