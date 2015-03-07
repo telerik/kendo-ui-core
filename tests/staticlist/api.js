@@ -202,49 +202,6 @@
         equal(children.eq(2).attr("class"), "k-item");
     });
 
-    test("select an item by element", function() {
-        var list = new StaticList(element, {
-            template: "#:data#"
-        });
-
-        list.setOptions({
-            dataSource: ["item1", "item2", "item3"],
-            template: "new #:data#"
-        });
-
-        list.dataSource.read();
-
-        var children = element.children();
-
-        list.select(children.eq(1));
-
-
-        equal(children.eq(0).attr("class"), "k-item");
-        equal(children.eq(1).attr("class"), "k-item k-state-focused k-state-selected");
-        equal(children.eq(2).attr("class"), "k-item");
-    });
-
-    test("select an item by element", function() {
-        var list = new StaticList(element, {
-            template: "#:data#"
-        });
-
-        list.setOptions({
-            dataSource: ["item1", "item2", "item3"],
-            template: "new #:data#"
-        });
-
-        list.dataSource.read();
-
-        var children = element.children();
-
-        list.select(children.eq(1));
-
-        equal(children.eq(0).attr("class"), "k-item");
-        equal(children.eq(1).attr("class"), "k-item k-state-focused k-state-selected");
-        equal(children.eq(2).attr("class"), "k-item");
-    });
-
     test("select an item by predicate", function() {
         var list = new StaticList(element, {
             dataSource: ["item1", "item2", "item3"],
@@ -303,6 +260,78 @@
         equal(children.eq(0).attr("class"), "k-item");
         equal(children.eq(1).attr("class"), "k-item k-state-focused k-state-selected");
         equal(children.eq(2).attr("class"), "k-item");
+    });
+
+    test("selects a single item if selectable is single", function() {
+        var list = new StaticList(element, {
+            dataSource: ["item1", "item2", "item3"],
+            selectable: true,
+            template: "#:data#"
+        });
+
+        list.dataSource.read();
+
+        var children = element.children();
+
+        list.select([1, 2]);
+
+        equal(children.eq(0).attr("class"), "k-item");
+        equal(children.eq(1).attr("class"), "k-item");
+        equal(children.eq(2).attr("class"), "k-item k-state-focused k-state-selected");
+    });
+
+    test("select items by indices", function() {
+        var list = new StaticList(element, {
+            dataSource: ["item1", "item2", "item3"],
+            selectable: "multiple",
+            template: "#:data#"
+        });
+
+        list.dataSource.read();
+
+        var children = element.children();
+
+        list.select([1, 2]);
+
+        equal(children.eq(0).attr("class"), "k-item");
+        equal(children.eq(1).attr("class"), "k-item k-state-selected");
+        equal(children.eq(2).attr("class"), "k-item k-state-focused k-state-selected");
+    });
+
+    test("select method handles unexisting indices", function() {
+        var list = new StaticList(element, {
+            dataSource: ["item1", "item2", "item3"],
+            selectable: "multiple",
+            template: "#:data#",
+            value: ["item1", "item3"]
+        });
+
+        list.dataSource.read();
+
+        var children = element.children();
+
+        list.select([3]);
+
+        ok(true);
+    });
+
+    test("deselect items by indices", function() {
+        var list = new StaticList(element, {
+            dataSource: ["item1", "item2", "item3"],
+            selectable: "multiple",
+            template: "#:data#",
+            value: ["item1", "item3"]
+        });
+
+        list.dataSource.read();
+
+        var children = element.children();
+
+        list.select([0, 2]);
+
+        equal(children.eq(0).attr("class"), "k-item");
+        equal(children.eq(1).attr("class"), "k-item");
+        equal(children.eq(2).attr("class"), "k-item k-state-focused");
     });
 
     test("select method deselects previous item", function() {
@@ -785,6 +814,58 @@
         equal(dataItems.length, 2);
         equal(dataItems[0], list.dataSource.view()[0].items[1]);
         equal(dataItems[1], list.dataSource.view()[1].items[0]);
+    });
+
+    test("value method deselects an item", function() {
+        var list = new StaticList(element, {
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "b" },
+                    { name: "item3", type: "a" }
+                ],
+                group: "type"
+            },
+            template: '#:data.name#',
+            groupTemplate: '#:data#',
+            value: "item1"
+        });
+
+        list.dataSource.read();
+
+        list.value([]);
+
+        var dataItems = list.selectedDataItems();
+
+        equal(dataItems.length, 0);
+    });
+
+    test("value method removes multiple values", function() {
+        var list = new StaticList(element, {
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "b" },
+                    { name: "item3", type: "a" }
+                ],
+                group: "type"
+            },
+            template: '#:data.name#',
+            groupTemplate: '#:data#',
+            selectable: "multiple",
+            value: ["item1", "item2", "item3"]
+        });
+
+        list.dataSource.read();
+
+        list.value(["item3"]);
+
+        var dataItems = list.selectedDataItems();
+
+        equal(dataItems.length, 1);
+        equal(dataItems[0].name, "item3");
     });
 
     test("next method focuses first item if no items are focused", function() {

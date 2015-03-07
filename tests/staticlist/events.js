@@ -57,6 +57,63 @@
         list.select(-1);
     });
 
+    test("widget passes deselected index", 2, function() {
+        var list = new StaticList(element, {
+            dataSource: ["item"],
+            template: "#:data#",
+            change: function(e) {
+                var removed = e.removed;
+
+                equal(removed.length, 1);
+                equal(removed[0], 0);
+            },
+            value: ["item"]
+        });
+
+        list.dataSource.read();
+
+        list.select(-1);
+    });
+
+    test("widget passes deselected indices when multiple selection is enabled", 3, function() {
+        var list = new StaticList(element, {
+            dataSource: ["item1", "item2", "item3"],
+            template: "#:data#",
+            change: function(e) {
+                var removed = e.removed;
+
+                equal(removed.length, 2);
+                equal(removed[0], 1);
+                equal(removed[1], 2);
+            },
+            selectable: "multiple",
+            value: ["item2", "item3"]
+        });
+
+        list.dataSource.read();
+
+        list.select([1, 2]);
+    });
+
+    test("widget passes selected indices", 3, function() {
+        var list = new StaticList(element, {
+            dataSource: ["item1", "item2", "item3"],
+            template: "#:data#",
+            change: function(e) {
+                var added = e.added;
+
+                equal(added.length, 2);
+                equal(added[0], 1);
+                equal(added[1], 2);
+            },
+            selectable: "multiple"
+        });
+
+        list.dataSource.read();
+
+        list.value(["item2", "item3"]);
+    });
+
     test("widget triggers activate event when the item is focused", 2, function() {
         var list = new StaticList(element, {
             dataSource: ["item"],
