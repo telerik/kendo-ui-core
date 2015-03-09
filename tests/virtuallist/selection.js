@@ -33,7 +33,7 @@
                 transport: {
                     read: function(options) {
                         setTimeout(function() {
-                            options.success({ data: generateData(options.data), total: 100 });
+                            options.success({ data: generateData(options.data), total: 300 });
                         }, 0);
                     }
                 },
@@ -514,23 +514,25 @@
         }, 100);
     });
 
-    asyncTest("not available dataItems are given as null in dataItems collection", 3, function() {
+    asyncTest("not available dataItems set as values are prefetched", 3, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
             template: "#=text#",
             dataValueField: "value",
-            selectable: true
+            selectable: true,
+            valueMapper: function(o) {
+                o.success([7, 256]);
+            }
         });
 
-        setTimeout(function() {
-            start();
-
-            virtualList.value([7, 256]);
-
-            equal(virtualList.selectedDataItems().length, 2);
-            ok(virtualList.selectedDataItems()[0] != null);
-            ok(virtualList.selectedDataItems()[1] == null);
-        }, 100);
+        asyncDataSource.one("change", function() {
+            virtualList.value([7, 256]).then(function() {
+                start();
+                equal(virtualList.selectedDataItems().length, 2);
+                ok(virtualList.selectedDataItems()[0].value === 7);
+                ok(virtualList.selectedDataItems()[1].value === 256);
+            });
+        });
     });
 
     asyncTest("not available dataItems are given as null in dataItems collection (initially set items)", 3, function() {

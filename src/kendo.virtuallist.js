@@ -394,6 +394,7 @@ var __meta__ = {
                         dataSource.range(skip, take); //switch the range to get the dataItem
                         that._selectedDataItems.push(that._findDataItem([index - skip]));
                         dataSource.range(oldSkip, take); //switch back the range
+                        dataSource.enableRequestsInProgress();
                     });
                     deferred.resolve();
                 });

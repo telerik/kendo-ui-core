@@ -376,14 +376,14 @@
             }
         });
 
-        setTimeout(function() {
+        asyncDataSource.one("change", function() {
             virtualList.value(["Item 7", "Item 256"]).then(function() {
                 start();
                 equal(virtualList.selectedDataItems().length, 2);
                 ok(virtualList.selectedDataItems()[0] === "Item 7");
                 ok(virtualList.selectedDataItems()[1] === "Item 256");
             });
-        }, 100);
+        });
     });
 
     asyncTest("not available dataItems are given as null in dataItems collection (initially set items)", 3, function() {
