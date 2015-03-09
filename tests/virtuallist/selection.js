@@ -25,6 +25,10 @@
         return items;
     }
 
+    function valueMapper(o) {
+        o.success(o.value);
+    }
+
     module("VirtualList Selection: ", {
         setup: function() {
             container = $("<div id='container' style='height: " + CONTAINER_HEIGHT + "px;'></div>").appendTo(QUnit.fixture);
@@ -238,6 +242,7 @@
             template: "#=text#",
             dataValueField: "value",
             value: 6,
+            valueMapper: valueMapper,
             selectable: true
         });
 
@@ -255,6 +260,7 @@
             template: "#=text#",
             dataValueField: "value",
             value: values,
+            valueMapper: valueMapper,
             selectable: "multiple"
         });
 
@@ -272,7 +278,8 @@
             dataSource: asyncDataSource,
             template: "#=text#",
             dataValueField: "value",
-            selectable: true
+            selectable: true,
+            valueMapper: valueMapper
         });
 
         setTimeout(function() {
@@ -289,7 +296,8 @@
             dataSource: asyncDataSource,
             template: "#=text#",
             dataValueField: "value",
-            selectable: "multiple"
+            selectable: "multiple",
+            valueMapper: valueMapper
         });
 
         setTimeout(function() {
@@ -308,7 +316,8 @@
             dataSource: asyncDataSource,
             template: "#=text#",
             dataValueField: "value",
-            selectable: true
+            selectable: true,
+            valueMapper: valueMapper
         });
 
         virtualList.value(3);
@@ -324,7 +333,8 @@
             dataSource: asyncDataSource,
             template: "#=text#",
             dataValueField: "value",
-            selectable: "multiple"
+            selectable: "multiple",
+            valueMapper: valueMapper
         });
 
         virtualList.value([1, 5, 9]);
@@ -424,6 +434,7 @@
             template: "#=text#",
             dataValueField: "value",
             value: [0, 1],
+            valueMapper: valueMapper,
             selectable: true
         });
 
@@ -461,7 +472,8 @@
             dataSource: asyncDataSource,
             template: "#=text#",
             dataValueField: "value",
-            selectable: true
+            selectable: true,
+            valueMapper: valueMapper
         });
 
         setTimeout(function() {
@@ -480,7 +492,8 @@
             dataSource: asyncDataSource,
             template: "#=text#",
             dataValueField: "value",
-            selectable: true
+            selectable: true,
+            valueMapper: valueMapper
         });
 
         setTimeout(function() {
@@ -500,6 +513,7 @@
             template: "#=text#",
             dataValueField: "value",
             value: [7],
+            valueMapper: valueMapper,
             selectable: true
         });
 
@@ -519,7 +533,7 @@
             dataSource: asyncDataSource,
             template: "#=text#",
             dataValueField: "value",
-            selectable: true,
+            selectable: "multiple",
             valueMapper: function(o) {
                 o.success([7, 256]);
             }
@@ -541,16 +555,17 @@
             template: "#=text#",
             dataValueField: "value",
             value: [7, 256],
-            selectable: true
+            valueMapper: valueMapper,
+            selectable: "multiple"
         });
 
-        setTimeout(function() {
+        virtualList.bind("listBound", function() {
             start();
 
             equal(virtualList.selectedDataItems().length, 2);
-            ok(virtualList.selectedDataItems()[0] != null);
-            ok(virtualList.selectedDataItems()[1] == null);
-        }, 100);
+            ok(virtualList.selectedDataItems()[0].value === 7);
+            ok(virtualList.selectedDataItems()[1].value === 256);
+        });
     });
 
     asyncTest("selection is persisted accross ranges", 2, function() {

@@ -391,16 +391,19 @@
             dataSource: asyncDataSource,
             template: "#=data#",
             value: ["Item 7", "Item 256"],
+            valueMapper: function(o) {
+                o.success([7, 256]);
+            },
             selectable: true
         });
 
-        setTimeout(function() {
+        virtualList.bind("listBound", function() {
             start();
 
             equal(virtualList.selectedDataItems().length, 2);
-            ok(virtualList.selectedDataItems()[0] != null);
-            ok(virtualList.selectedDataItems()[1] == null);
-        }, 100);
+            ok(virtualList.selectedDataItems()[0] === "Item 7");
+            ok(virtualList.selectedDataItems()[1] === "Item 256");
+        })
     });
 
     asyncTest("selection is persisted accross ranges", 2, function() {

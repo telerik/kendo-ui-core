@@ -84,7 +84,10 @@
                 template: "#=text# #=letter#",
                 dataValueField: "value",
                 itemHeight: 50,
-                selectable: true
+                selectable: true,
+                valueMapper: function(o) {
+                    o.success(o.value);
+                }
             });
         },
 
