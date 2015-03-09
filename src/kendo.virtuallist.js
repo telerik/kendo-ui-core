@@ -42,6 +42,10 @@ var __meta__ = {
         return value = value instanceof Array ? value : [value];
     }
 
+    function isPrimitive(dataItem) {
+        return typeof dataItem === "string" || typeof dataItem === "number" || typeof dataItem === "boolean";
+    }
+
     function getItemCount(screenHeight, listScreens, itemHeight) {
         return Math.ceil(screenHeight * listScreens / itemHeight);
     }
@@ -203,10 +207,6 @@ var __meta__ = {
             that._selectedDataItems = [];
             that._optionID = kendo.guid();
 
-            for (var i = 0; i < that._value.length; i++) {
-                that._selectedDataItems.push(null);
-            }
-
             that.setDataSource(options.dataSource);
 
             element.on("scroll", function() {
@@ -289,56 +289,73 @@ var __meta__ = {
         },
 
         refresh: function() {
-            if (this._mute) {
-                return;
-            }
+            var that = this;
 
-            if (!this._fetching && this.dataSource.data().length) {
-                this._createList();
-                this._listCreated = true;
-            } else {
-                if (this._renderItems) {
-                    this._renderItems(true);
+            if (that._mute) { return; }
+
+            if (!that._fetching && that.dataSource.data().length) {
+                that._createList();
+                if (that._value.length) {
+                    that._prefetchByValue(that._value).then(function() {
+                        that._listCreated = true;
+
+                        //TODO: find a better place and name for the event
+                        that.trigger("listBound");
+                    });
+                } else {
+                    that._listCreated = true;
+
+                    //TODO: find a better place and name for the event
+                    that.trigger("listBound");
                 }
+            } else {
+                if (that._renderItems) {
+                    that._renderItems(true);
+                }
+
+                //TODO: find a better place and name for the event
+                that.trigger("listBound");
             }
 
-            //TODO: find a better place and name for the event
-            this.trigger("listBound");
-            this._fetching = false;
+            that._fetching = false;
         },
 
         value: function(candidate) {
             var that = this,
                 dataSource = that.dataSource,
-                dataView = that._dataView,
                 value = candidate,
-                valueField = that.options.dataValueField,
-                deferred = $.Deferred(),
-                found = false, counter = 0, item, match = false;
+                deferred = $.Deferred();
 
             if (value === undefined) {
                 return that._value;
-            }
-
-            if (!that.isBound()) {
-                //set values after list is bound
-                that.one(LISTBOUND, function() {
-                    that.value(candidate);
-                });
-
-                return;
             }
 
             that._promisesList = [];
             that._selectedDataItems = [];
             that._value = value = toArray(value);
 
+            if (that.isBound()) {
+                that._prefetchByValue(value).then(function() {
+                    deferred.resolve();
+                });
+            }
+
+            return deferred.promise();
+        },
+
+        _prefetchByValue: function(value) {
+            var that = this,
+                dataView = that._dataView,
+                valueField = that.options.dataValueField,
+                found = false, counter = 0, item, match = false,
+                deferred = $.Deferred();
+
+            //try to find the items in the loaded data
             if (dataView && dataView.length) {
-                //try to find the dataItems
                 for (var i = 0; i < value.length; i++) {
                     for (var idx = 0; idx < dataView.length; idx++) {
                         item = dataView[idx].item;
-                        match = (typeof item === "string" || typeof item === "number") ? value[i] === item : value[i] === item[valueField];
+                        match = isPrimitive(item) ? value[i] === item : value[i] === item[valueField];
 
                         if (item && match) {
                             that._selectedDataItems.push(item);
@@ -350,6 +367,7 @@ var __meta__ = {
                 found = counter === value.length;
             }
 
+            //prefetch the items
             if (!found) {
                 that._selectedDataItems = [];
                 if (typeof that.options.valueMapper === "function") {
@@ -374,6 +392,7 @@ var __meta__ = {
 
             return deferred.promise();
         },
+
 
         _valueMapperSuccessHandler: function(indexes) {
             var that = this,
@@ -559,10 +578,6 @@ var __meta__ = {
             this._mute = true;
             proxy(callback(), this);
             this._mute = false;
-        },
-
-        _preferchByIndex: function() {
-            
         },
 
         _getElementByIndex: function(index) {
@@ -804,17 +819,8 @@ var __meta__ = {
 
             if (value.length && item) {
                 for (var i = 0; i < value.length; i++) {
-                    match = (typeof item === "string" || typeof item === "number") ? value[i] === item : value[i] === item[valueField];
+                    match = isPrimitive(item) ? value[i] === item : value[i] === item[valueField];
                     if (match) {
-                        if($.inArray(item, this._selectedDataItems) === -1) { /*check if item is not already added*/
-                            nullIndex = this._selectedDataItems.indexOf(null);
-                            if (nullIndex > -1) {
-                                this._selectedDataItems.splice(nullIndex, 1, item);
-                            } else {
-                                this._selectedDataItems.push(item);
-                            }
-                        }
-
                         selected = true;
                         break;
                     }
