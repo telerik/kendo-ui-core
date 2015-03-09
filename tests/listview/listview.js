@@ -156,6 +156,22 @@
         ok(listView.selectable.options.multiple);
     });
 
+    test("setOptions changes the selectable configuration", function() {
+        var listView = setup({ selectable: true }).data("kendoListView");
+
+        listView.setOptions({ "selectable": "multiple" });
+
+        ok(listView.selectable.options.multiple);
+    });
+
+    test("setOptions disables the selectable", function() {
+        var listView = setup({ selectable: true }).data("kendoListView");
+
+        listView.setOptions({ selectable: false });
+
+        ok(!listView.selectable);
+    });
+
     test("focusing grid element focus first item ", function() {
         var listView = setup();
         listView.focus();
