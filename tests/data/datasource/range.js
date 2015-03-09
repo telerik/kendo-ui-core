@@ -929,6 +929,54 @@ test("range with server grouping", function() {
     equal(view[0].items[0].foo, 6);
 });
 
+test("range with server grouping second page with two groups", function() {
+    var totalCount = 10,
+        dataSource = new DataSource({
+            pageSize: 2,
+            serverPaging: true,
+            group: [{ field: "foo"}, { field: "bar" }],
+            serverGrouping: true,
+            transport: {
+                read: function(options) {
+                    var skip = options.data.skip;
+                    var take = options.data.take;
+                    var group = [];
+
+                    for (var i = skip; i < Math.min(skip + take, totalCount); i++) {
+                        group.push( {
+                            "value": i,
+                            "field": "ID",
+                            "hasSubgroups": true,
+                            "items": [{
+                                "value": i*2,
+                                "field": "UnitPrice",
+                                "hasSubgroups": false,
+                                "items": [{
+                                    "ID": 11,
+                                    "Name": "Product11",
+                                    "UnitPrice": 34.54,
+                                    "UnitsOnOrder": 11
+                                }]
+                            }]
+                        });
+                    }
+                    options.success({ groups: group, total: totalCount });
+                }
+            },
+            schema: {
+                data: "data",
+                groups: "groups",
+                total: "total"
+            }
+        });
+
+    dataSource.read();
+    dataSource.range(1, 2);
+    var view = dataSource.view();
+
+    equal(view.length, 2);
+});
+
 test("range with server grouping ranges are not modfied", function() {
     var totalCount = 47,
         dataSource = new DataSource({
