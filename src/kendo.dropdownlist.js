@@ -228,10 +228,10 @@ var __meta__ = {
         _initList: function() {
             var that = this;
             var options = this.options;
+            var virtualOptions;
 
             if (options.virtual) {
-                console.log("init virtual list");
-                this.listView = new kendo.ui.VirtualList(this.ul, {
+                virtualOptions = {
                     autoBind: false, //dropdownlist fetches the data
                     dataValueField: options.dataValueField,
                     dataSource: this.dataSource,
@@ -258,7 +258,13 @@ var __meta__ = {
                     },
                     dataBound: $.proxy(this._listBound, this)
                     */
-                });
+                };
+
+                if (typeof options.virtual === "object") {
+                    $.extend(virtualOptions, options.virtual);
+                }
+
+                this.listView = new kendo.ui.VirtualList(this.ul, virtualOptions);
             } else {
                 this.listView = new kendo.ui.StaticList(this.ul, {
                     dataValueField: options.dataValueField,
