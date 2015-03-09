@@ -366,21 +366,23 @@
         }, 100);
     });
 
-    asyncTest("not available dataItems are given as null in dataItems collection", 3, function() {
+    asyncTest("not available dataItems are retrieved by the value method", 3, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
             template: "#=data#",
-            selectable: true
+            selectable: "multiple",
+            valueMapper: function(o) {
+                o.success([7, 256]);
+            }
         });
 
         setTimeout(function() {
-            start();
-
-            virtualList.value(["Item 7", "Item 256"]);
-
-            equal(virtualList.selectedDataItems().length, 2);
-            ok(virtualList.selectedDataItems()[0] != null);
-            ok(virtualList.selectedDataItems()[1] == null);
+            virtualList.value(["Item 7", "Item 256"]).then(function() {
+                start();
+                equal(virtualList.selectedDataItems().length, 2);
+                ok(virtualList.selectedDataItems()[0] === "Item 7");
+                ok(virtualList.selectedDataItems()[1] === "Item 256");
+            });
         }, 100);
     });
 

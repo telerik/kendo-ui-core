@@ -15,6 +15,7 @@ var __meta__ = {
         ui = kendo.ui,
         Widget = ui.Widget,
         DataBoundWidget = ui.DataBoundWidget,
+        proxy = $.proxy,
 
         WRAPPER = "k-virtual-wrap",
         VIRTUALLIST = "k-virtual-list",
@@ -36,6 +37,10 @@ var __meta__ = {
 
         ACTIVATE = "activate",
         DEACTIVATE = "deactivate";
+
+    function toArray(value) {
+        return value = value instanceof Array ? value : [value];
+    }
 
     function getItemCount(screenHeight, listScreens, itemHeight) {
         return Math.ceil(screenHeight * listScreens / itemHeight);
@@ -194,7 +199,7 @@ var __meta__ = {
             that.header = that.element.before("<div class='" + HEADER + "'></div>").prev();
             that.content = element.append("<ul class='" + CONTENT + " " + LIST + "'></ul>").find("." + CONTENT);
 
-            that._value = that.options.value instanceof Array ? that.options.value : [that.options.value];
+            that._value = toArray(that.options.value);
             that._selectedDataItems = [];
             that._optionID = kendo.guid();
 
@@ -227,7 +232,8 @@ var __meta__ = {
             placeholderTemplate: "loading...",
             groupTemplate: "#:group#",
             fixedGroupTemplate: "fixed header template",
-            optionLabel: null
+            optionLabel: null,
+            valueMapper: null
         },
 
         events: [
@@ -283,11 +289,15 @@ var __meta__ = {
         },
 
         refresh: function() {
+            if (this._mute) {
+                return;
+            }
+
             if (!this._fetching && this.dataSource.data().length) {
                 this._createList();
                 this._listCreated = true;
             } else {
-                if (this._renderItems && !this._mute) {
+                if (this._renderItems) {
                     this._renderItems(true);
                 }
             }
@@ -297,21 +307,102 @@ var __meta__ = {
             this._fetching = false;
         },
 
-        value: function(value) {
-            if (value) {
-                this._value = value instanceof Array ? value : [value];
-                this._selectedDataItems = [];
+        value: function(candidate) {
+            var that = this,
+                dataSource = that.dataSource,
+                dataView = that._dataView,
+                value = candidate,
+                valueField = that.options.dataValueField,
+                deferred = $.Deferred(),
+                found = false, counter = 0, item, match = false;
 
-                for (var i = 0; i < this._value.length; i++) {
-                    this._selectedDataItems.push(null);
-                }
-
-                if (this._renderItems) {
-                    this._renderItems(true);
-                }
-            } else {
-                return this._value;
+            if (value === undefined) {
+                return that._value;
             }
+
+            if (!that.isBound()) {
+                //set values after list is bound
+                that.one(LISTBOUND, function() {
+                    that.value(candidate);
+                });
+
+                return;
+            }
+
+            that._promisesList = [];
+            that._selectedDataItems = [];
+            that._value = value = toArray(value);
+
+            if (dataView && dataView.length) {
+                //try to find the dataItems
+                for (var i = 0; i < value.length; i++) {
+                    for (var idx = 0; idx < dataView.length; idx++) {
+                        item = dataView[idx].item;
+                        match = (typeof item === "string" || typeof item === "number") ? value[i] === item : value[i] === item[valueField];
+
+                        if (item && match) {
+                            that._selectedDataItems.push(item);
+                            counter++;
+                        }
+                    }
+                }
+
+                found = counter === value.length;
+            }
+
+            if (!found) {
+                that._selectedDataItems = [];
+                if (typeof that.options.valueMapper === "function") {
+                    that.options.valueMapper({
+                        value: (this.options.selectable === "multiple") ? value : value[0],
+                        success: function(indexes) {
+                            that._valueMapperSuccessHandler(toArray(indexes));
+                        }
+                    });
+                } else {
+                    throw new Error("valueMapper is not provided");
+                }
+            }
+
+            $.when.apply($, this._promisesList).then(function() {
+                if (that._renderItems) {
+                    that._renderItems(true);
+                }
+
+                deferred.resolve();
+            });
+
+            return deferred.promise();
+        },
+
+        _valueMapperSuccessHandler: function(indexes) {
+            var that = this,
+                dataSource = this.dataSource,
+                take = that.itemCount,
+                skip, index;
+
+            for (var i = 0; i < indexes.length; i++) {
+                index = indexes[i];
+                skip = (Math.ceil(index / take) - 1) * take;
+
+                var deferred = $.Deferred();
+                this._promisesList.push(deferred);
+
+                dataSource.prefetch(skip, take, function() {
+                    that.mute(function() {
+                        var oldSkip = dataSource.skip();
+                        dataSource.range(skip, take); //switch the range to get the dataItem
+                        that._selectedDataItems.push(that._findDataItem([index - skip]));
+                        dataSource.range(oldSkip, take); //switch back the range
+                    });
+                    deferred.resolve();
+                });
+            }
+        },
+
+        _findDataItem: function(index) {
+            //TODO: implement getting dataItem from grouped data
+            return this.dataSource.view()[index];
         },
 
         selectedDataItems: function() {
@@ -461,6 +552,16 @@ var __meta__ = {
 
         isBound: function() {
             return this._listCreated;
+        },
+
+        mute: function(callback) {
+            this._mute = true;
+            proxy(callback(), this);
+            this._mute = false;
+        },
+
+        _preferchByIndex: function() {
+            
         },
 
         _getElementByIndex: function(index) {
@@ -758,7 +859,7 @@ var __meta__ = {
                 this._view[item.index] = item;
             }
 
-            return items;
+            return this._dataView = items;
         },
 
         _getDataItemsCollection: function(scrollTop, lastScrollTop) {
