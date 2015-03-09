@@ -1291,7 +1291,8 @@ div.k-scheduler-marquee:after {
 }
 
 /* Responsive styles */
-@media (max-width: 1000px) {
+
+@media only screen and (max-width: 1024px) {
     
     /* Responsive Scheduler */
     
@@ -1369,9 +1370,11 @@ div.k-scheduler-marquee:after {
     
     /* Responsive Pager */
 
-    .k-pager-wrap>.k-link {
+    .k-pager-wrap .k-pager-nav,
+    .k-pager-input {
         float:none;
         display: inline-block;
+        vertical-align: top;
     }
     
     .k-pager-numbers,
@@ -1474,7 +1477,19 @@ div.k-scheduler-marquee:after {
         .box-shadow(0 2px 2px 0 @shadow-color);
     }
     
-    .k-pager-numbers.k-state-expanded li{
+    .k-pager-numbers.k-state-expanded li {
         display: inline-block;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .k-pager-sizes {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 320px) {
+    .k-pager-info {
+        display: none;
     }
 }

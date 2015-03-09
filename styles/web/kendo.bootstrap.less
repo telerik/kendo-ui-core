@@ -846,20 +846,23 @@ td.k-state-focused.k-state-selected,
 }
 
 .k-button:active:hover,
-.k-button.k-state-active:hover {
+.k-button.k-state-active:hover
+{
     color: @widget-text-color;
     border-color: @hover-border-color;
     background-color: @hover-background-color;
 }
 
 
-/* responsive styles  */
+/* Responsive styles  */
  
-@media (max-width: 1000px){
-    .k-pager-wrap>.k-link
+@media only screen and (max-width: 1024px) {
+    .k-pager-wrap .k-pager-nav,
+    .k-pager-input
     {
-        float: none;
+        float:none;
         display: inline-block;
+        vertical-align: top;
     }
     
     .k-pager-numbers,
@@ -902,6 +905,7 @@ td.k-state-focused.k-state-selected,
         color: @widget-text-color;
         background-color: @widget-background-color;
     }
+    
     .k-pager-numbers .k-link {
         color: @widget-text-color;
     }
@@ -910,6 +914,7 @@ td.k-state-focused.k-state-selected,
         border-right: 1px solid @secondary-border-color;
         border-radius: 0 @main-border-radius @main-border-radius 0;
     }
+    
     .k-pager-numbers + .k-link {
         margin-left: 5.1em;
         border-radius: @main-border-radius 0 0 @main-border-radius;
@@ -942,19 +947,38 @@ td.k-state-focused.k-state-selected,
         border-radius: 0 0 @main-border-radius @main-border-radius;
     }
     
-    .k-pager-numbers.k-state-expanded li {
+    .k-pager-numbers.k-state-expanded li
+    {
         display: inline-block;
     }
-    .k-pager-numbers.k-state-expanded li:not(.k-current-page) .k-link {
+    .k-pager-numbers.k-state-expanded li:not(.k-current-page) .k-link
+    {
         border: 0;
         background-color: @widget-background-color;
         border-radius: @inner-border-radius;
     }
-    .k-pager-numbers .k-state-selected {
+    
+    .k-pager-numbers .k-state-selected
+    {
         border-radius: @inner-border-radius;
     }
-    .k-pager-numbers.k-state-expanded li:not(.k-current-page) .k-link:hover {
+    .k-pager-numbers.k-state-expanded li:not(.k-current-page) .k-link:hover
+    {
         color: @hover-text-color;
         background-color: @hover-background-color;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .k-pager-sizes
+    {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 320px) {
+    .k-pager-info
+    {
+        display: none;
     }
 }
