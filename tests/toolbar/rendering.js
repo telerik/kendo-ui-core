@@ -1224,4 +1224,22 @@
         ok($("#foo").hasClass("foo"));
     });
 
+    /* MISC */
+
+    test("DOM click event of disabled button is prevented", 0, function() {
+        container.kendoToolBar({
+            items: [
+                { type: "button", id: "foo", text: "foo", enable: false }
+            ]
+        });
+
+        var button = container.find("#foo");
+
+        button.click(function() {
+            ok(false, "click is fired");
+        });
+
+        click(button);
+    });
+
 })();
