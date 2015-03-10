@@ -95,18 +95,6 @@ test("MultiSelect selects item on click", function() {
     ok(multiselect.tagList.children(":first")[0]);
 });
 
-test("MultiSelect hides selected item", function() {
-    populateSelect();
-    var multiselect = new MultiSelect(select);
-    multiselect.input.mousedown();
-
-    var item = multiselect.ul.children().eq(1);
-
-    item.click();
-
-    equal(item[0].style.display, "none");
-});
-
 test("MultiSelect hides popup on click", function() {
     populateSelect();
     var multiselect = new MultiSelect(select);
@@ -191,7 +179,7 @@ test("MultiSelect persists selected data items", function() {
     multiselect.ul.children().eq(1).click();
 
     //TODO: use method instead of _dataItems
-    equal(multiselect._dataItems.length, 1);
+    equal(multiselect.dataItems().length, 1);
 });
 
 test("MultiSelect removes corresponding data item", function() {
@@ -207,8 +195,8 @@ test("MultiSelect removes corresponding data item", function() {
     multiselect.tagList.children().first().find(".k-delete").click();
 
     //TODO: use method instead of _dataItems
-    equal(multiselect._dataItems.length, 1);
-    equal(multiselect._dataItems[0].value, 0);
+    equal(multiselect.dataItems().length, 1);
+    equal(multiselect.dataItems()[0].value, 0);
 });
 
 test("MultiSelect clears input on selection", function() {
@@ -311,7 +299,9 @@ test("MultiSelect unselects custom option", function() {
 
     multiselect.tagList.children().first().find(".k-delete").click();
 
-    ok(!select[0].children[2].selected);
+    ok(select[0].children[0].selected); //item3
+    ok(!select[0].children[1].selected); //item4
+    ok(select[0].children[2].selected); //item2
 });
 
 test("MultiSelect closes popup on blur", function() {
@@ -323,34 +313,6 @@ test("MultiSelect closes popup on blur", function() {
     multiselect.input.blur();
 
     ok(!multiselect.popup.visible());
-});
-
-test("MultiSelect sets height on select", function() {
-    populateSelect();
-    var multiselect = new MultiSelect(select);
-
-    stub(multiselect, {
-        _height: multiselect._height
-    });
-
-    multiselect._select(0);
-
-    equal(multiselect.calls("_height"), 1);
-});
-
-test("MultiSelect sets height on unselect", function() {
-    populateSelect();
-    var multiselect = new MultiSelect(select, {
-        value: "0"
-    });
-
-    stub(multiselect, {
-        _height: multiselect._height
-    });
-
-    multiselect._unselect(multiselect.tagList.children(":first"));
-
-    equal(multiselect.calls("_height"), 1);
 });
 
 test("MultiSelect honours minLength on click", function() {

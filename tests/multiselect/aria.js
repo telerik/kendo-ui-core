@@ -121,11 +121,12 @@
 
     test("MultiSelect sets activedescendant on refresh", function() {
         var multiselect = new MultiSelect(input.attr("id", "test"), {
+            highlightFirst: false,
             dataSource: ["item1", "item2"],
             filter: "startswith"
         });
 
-        equal(multiselect.input.attr("aria-activedescendant"), undefined);
+        ok(!multiselect.input.attr("aria-activedescendant"));
     });
 
     test("MultiSelect makes first item active on open", function() {
@@ -138,7 +139,7 @@
         equal(multiselect.input.attr("aria-activedescendant"), multiselect.current().attr("id"));
     });
 
-    test("MultiSelect remove aria-activedescendant on close", function() {
+    test("MultiSelect persists aria-activedescendant on close", function() {
         var multiselect = new MultiSelect(input.attr("id", "test"), {
             dataSource: ["item1", "item2"],
             value: "item1"
@@ -146,7 +147,7 @@
 
         multiselect.open();
         multiselect.close();
-        equal(multiselect.input.attr("aria-activedescendant"), undefined);
+        ok(multiselect.input.attr("aria-activedescendant"));
     });
 
     test("MultiSelect sets aria-activedescendant attr to the last li of tagList", function() {

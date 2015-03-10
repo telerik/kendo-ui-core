@@ -84,8 +84,36 @@
     test("MultiSelect builds templates", function() {
         var multiselect = new MultiSelect(select);
 
-        ok(multiselect.itemTemplate);
         ok(multiselect.tagTemplate);
+    });
+
+    test("multiselect sets default item template", function(){
+        multiselect = new MultiSelect(select);
+
+        var template = multiselect.listView.options.template;
+
+        equal(template, "#:data#");
+    });
+
+    test("template should use defined datatextField", function(){
+        multiselect = new MultiSelect(select, {
+            dataTextField : "ProductName"
+        });
+
+        var template = multiselect.listView.options.template;
+
+        equal(template, "#:data.ProductName#");
+    });
+
+    test("changing the template", function() {
+        multiselect = new MultiSelect(select, {
+            datatextField: "",
+            template: "#= data.toUpperCase() #"
+        });
+
+        var template = multiselect.listView.options.template;
+
+        equal(template, "#= data.toUpperCase() #");
     });
 
     test("MultiSelect renders header template", function() {
@@ -159,7 +187,6 @@
         equal(searchText.css("letter-spacing"), input.css("letter-spacing"));
     });
 
-
     /*test("multiselect can be initialized in hidden container", function() {
         popuplateSelect();
 
@@ -225,13 +252,6 @@
         ok(multiselect._loading);
     });
 
-    test("MultiSelect creates loading element", function() {
-        popuplateSelect();
-        var multiselect = new MultiSelect(select);
-
-        ok(multiselect._loading);
-    });
-
     test("MultiSelect disables widget on init", function() {
         popuplateSelect();
         var multiselect = new MultiSelect(select.attr("disabled", "disabled"));
@@ -245,7 +265,7 @@
        });
 
        ok(select.data("kendoMultiSelect").input.attr("disabled"));
-   });
+    });
 
     asyncTest("MultiSelect shows loading icon on progress", function() {
         popuplateSelect();

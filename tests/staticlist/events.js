@@ -83,8 +83,8 @@
                 var removed = e.removed;
 
                 equal(removed.length, 2);
-                equal(removed[0].index, 1);
-                equal(removed[1].index, 2);
+                equal(removed[0].index, 0);
+                equal(removed[1].index, 1);
             },
             selectable: "multiple",
             value: ["item2", "item3"]
@@ -111,7 +111,7 @@
 
         list.dataSource.read();
 
-        list.value(["item2", "item3"]);
+        list.select([1, 2]);
     });
 
     test("widget triggers activate event when the item is focused", 2, function() {

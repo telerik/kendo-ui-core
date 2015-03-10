@@ -18,6 +18,7 @@ var __meta__ = {
         support = kendo.support,
         htmlEncode = kendo.htmlEncode,
         activeElement = kendo._activeElement,
+        ObservableArray = kendo.data.ObservableArray,
         ID = "id",
         LI = "li",
         CHANGE = "change",
@@ -782,6 +783,8 @@ var __meta__ = {
 
                 if (current) {
                     if (that.trigger(SELECT, { item: current })) {
+                        //TODO: Shouuld we close the popup
+                        //that.close();
                         return;
                     }
 
@@ -1092,6 +1095,7 @@ var __meta__ = {
                 this.setDataSource(options.dataSource);
             }
 
+            this._getter(); //TODO: test this
             this._templates();
         },
 
@@ -1249,8 +1253,7 @@ var __meta__ = {
             var length;
 
             if (candidate === undefined) {
-                candidate = that._current;
-                return candidate && candidate[0] ? candidate : null;
+                return that._current;
             }
 
             candidate = that._get(candidate);
@@ -1272,9 +1275,9 @@ var __meta__ = {
                 that.scroll(candidate);
 
                 candidate.attr("id", id);
-
-                that._current = candidate;
             }
+
+            that._current = candidate && candidate[0] ? candidate : null;
 
             that.trigger("activate");
         },
@@ -1327,40 +1330,35 @@ var __meta__ = {
                 }
             }
 
-            this.trigger("change", {
-                added: added,
-                removed: removed
-            });
+            //TODO: Test this
+            if (added.length || removed.length) {
+                this.trigger("change", {
+                    added: added,
+                    removed: removed
+                });
+            }
         },
 
+        //TODO: Support value selection/unselect .... or always use select method
         value: function(value) {
-            var indices = [];
-            var data = this._dataContext;
-            var idx;
-
             if (value === undefined) {
                 return this._values.slice(0);
             }
 
-            value = $.isArray(value) ? value.slice(0) : [value];
+            //TODO: test for null value
+            if (value === null) {
+                value = [];
+            }
+
+            value = $.isArray(value) || value instanceof ObservableArray ? value.slice(0) : [value];
 
             this._values = value.slice(0);
+            this._dataItems = [];
 
-            for (idx = 0; idx < data.length; idx++) {
-                if (this._find(data[idx].item, value)) {
-                    indices.push(idx);
-                }
-
-                if (!value[0]) {
-                    break;
-                }
+            //TODO: Test this
+            if (this.isBound()) {
+                this.refresh();
             }
-
-            if (this._selectedIndices.length && this.options.selectable === "multiple") {
-                this.select(this._selectedIndices); //deselects old items
-            }
-
-            this.select(indices);
         },
 
         data: function() {
@@ -1371,7 +1369,7 @@ var __meta__ = {
             var idx = 0;
 
             if (first && length) {
-                first = new kendo.data.ObservableArray([first]);
+                first = new ObservableArray([first]);
 
                 for (; idx < length; idx++) {
                     first.push(data[idx]);
@@ -1428,6 +1426,7 @@ var __meta__ = {
             var removed = [];
             var selectedItem;
             var itemElement;
+            var removedIndices = 0;
             var i, j;
 
             // single selection
@@ -1435,7 +1434,7 @@ var __meta__ = {
                 for (var idx = 0; idx < selectedIndices.length; idx++) {
                     $(this.element[0].children[selectedIndices[idx]]).removeClass("k-state-selected");
                     removed.push({
-                        index: selectedIndices[idx],
+                        index: idx,
                         dataItem: this._dataItems[idx]
                     });
                 }
@@ -1458,15 +1457,17 @@ var __meta__ = {
                             $(selectedItem).removeClass("k-state-selected");
 
                             removed.push({
-                                index: selectedIndices.splice(j, 1),
-                                dataItem: dataItems.splice(j, 1)
+                                index: j + removedIndices,
+                                dataItem: dataItems.splice(j, 1)[0]
                             });
 
+                            selectedIndices.splice(j, 1);
                             candidate.splice(i, 1);
                             values.splice(j, 1);
 
                             i -= 1;
                             j -= 1;
+                            removedIndices += 1;
                             break;
                         }
                     }
