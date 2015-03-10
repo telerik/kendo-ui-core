@@ -41,7 +41,7 @@ var __meta__ = {
         VIRTUAL_LIST_NS = ".VirtualList";
 
     function toArray(value) {
-        return value = value instanceof Array ? value : [value];
+        return value instanceof Array ? value : [value];
     }
 
     function isPrimitive(dataItem) {
@@ -405,7 +405,7 @@ var __meta__ = {
                 }
             }
 
-            if (counter === value.length) {
+            if (counter === indexes.length) {
                 that._renderItems(true);
                 deferred.resolve();
                 return deferred.promise();
@@ -902,7 +902,8 @@ var __meta__ = {
                 this._view[item.index] = item;
             }
 
-            return this._dataView = items;
+            this._dataView = items;
+            return items;
         },
 
         _getDataItemsCollection: function(scrollTop, lastScrollTop) {
@@ -1036,7 +1037,7 @@ var __meta__ = {
                 element, index, data, dataItem, selectedValue;
 
             for (var i = 0; i < indicies.length; i++) {
-                index = indicies[i]
+                index = indicies[i];
                 dataItem = this._view[index] ? this._view[index].item : null;
 
                 if (isPrimitive(dataItem)) {
@@ -1089,9 +1090,6 @@ var __meta__ = {
 
         _clickHandler: function(e) {
             this.select($(e.currentTarget));
-            //TODO: change this, probably use the 'select' method
-            //this.focus(e.currentTarget);
-            //this._select(e.currentTarget);
             this.trigger(CHANGE);
         },
 
