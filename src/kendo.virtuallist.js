@@ -207,6 +207,7 @@ var __meta__ = {
 
             that._value = toArray(that.options.value);
             that._selectedDataItems = [];
+            that._selectedIndices = [];
             that._optionID = kendo.guid();
 
             that.setDataSource(options.dataSource);
@@ -324,6 +325,7 @@ var __meta__ = {
             }
 
             that._selectedDataItems = [];
+            that._selectedIndices = [];
             that._value = value = toArray(value);
 
             if (that.isBound()) {
@@ -352,6 +354,7 @@ var __meta__ = {
 
                     if (item && match) {
                         that._selectedDataItems.push(item);
+                        that._selectedIndices.push(idx);
                         counter++;
                     }
                 }
@@ -365,6 +368,7 @@ var __meta__ = {
 
             //prefetch the items
             that._selectedDataItems = [];
+            that._selectedIndices = [];
             if (typeof that.options.valueMapper === "function") {
                 that.options.valueMapper({
                     value: (this.options.selectable === "multiple") ? value : value[0],
@@ -395,6 +399,7 @@ var __meta__ = {
                 for (var idx = 0; idx < dataView.length; idx++) {
                     if (indexes[i] === dataView[idx].index && dataView[idx].item) {
                         that._selectedDataItems.push(item);
+                        that._selectedIndices.push(idx);
                         counter++;
                     }
                 }
@@ -408,6 +413,7 @@ var __meta__ = {
 
             //prefetch the items
             that._selectedDataItems = [];
+            that._selectedIndices = [];
             that._valueMapperSuccessHandler(toArray(indexes));
             $.when.apply($, this._promisesList).then(function() {
                 that._renderItems(true);
@@ -435,6 +441,7 @@ var __meta__ = {
                         var oldSkip = dataSource.skip();
                         dataSource.range(skip, take); //switch the range to get the dataItem
                         that._selectedDataItems.push(that._findDataItem([index - skip]));
+                        that._selectedIndices.push(index);
                         dataSource.range(oldSkip, take); //switch back the range
                         dataSource.enableRequestsInProgress();
                     });
@@ -560,7 +567,7 @@ var __meta__ = {
             var success = false;
 
             if (candidate === undefined) {
-                return this._focusedIndex;
+                return this._selectedIndices;
             }
 
             this.focus(candidate);
