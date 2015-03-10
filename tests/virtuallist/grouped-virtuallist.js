@@ -1,6 +1,7 @@
 (function() {
     var container,
         asyncDataSource,
+        virtualSettings,
         VirtualList = kendo.ui.VirtualList,
         CONTAINER_HEIGHT = 200;
 
@@ -23,7 +24,7 @@
                 groups.push(groupsDict[key]);
             }
 
-            groupsDict[key].items.push({ text: " Item " + i });
+            groupsDict[key].items.push({ text: " Item " + i, value: i });
         }
 
         return groups;
@@ -37,7 +38,7 @@
                 transport: {
                     read: function(options) {
                         setTimeout(function() {
-                            options.success({ groups: groupedData(options.data), hasSubgroups: false, total: 100 });
+                            options.success({ groups: groupedData(options.data), hasSubgroups: false, total: 300 });
                         }, 0);
                     }
                 },
@@ -50,6 +51,13 @@
                     total: "total"
                 }
             });
+
+            virtualSettings = {
+                autoBind: false,
+                dataSource: asyncDataSource,
+                template: "#:text#",
+                dataValueField: "value"
+            };
         },
 
         teardown: function() {
@@ -64,74 +72,53 @@
     //rendering
 
     test("creates list header", 1, function() {
-        var virtualList = new VirtualList(container, {
-            dataSource: asyncDataSource
-        });
+        var virtualList = new VirtualList(container, virtualSettings);
 
+        asyncDataSource.read();
         equal(virtualList.wrapper.find(".k-virtual-header").length, 1);
     });
 
     //dataBinding
 
     asyncTest("detects that the dataSource is grouped", 1, function() {
-        var virtualList = new VirtualList(container, {
-            dataSource: asyncDataSource
-        });
+        var virtualList = new VirtualList(container, virtualSettings);
 
-        setTimeout(function() {
+        asyncDataSource.read().then(function() {
             start();
             equal(virtualList.options.type, "group");
-        }, 100);
+        });
     });
 
     asyncTest("fixed header displays current visible group", 1, function() {
-        var virtualList = new VirtualList(container, {
-            dataSource: asyncDataSource
-        });
-        
-        setTimeout(function() {
+        var virtualList = new VirtualList(container, virtualSettings);
+
+        asyncDataSource.read().then(function() {
             start();
             equal($(virtualList.header).text(), virtualList.dataSource.view()[0].value);
-        }, 100);
+        });
     });
-
-    //asyncTest("switches the range when threshold is passed", 2, function() {
-    //    var virtualList = new VirtualList(container, {
-    //        dataSource: asyncDataSource,
-    //        listScreens: 4,
-    //        itemHeight: 20,
-    //        threshold: 1
-    //    });
-
-
-    //    setTimeout(function() {
-    //        start();
-    //        scroll(container, 630);
-    //        equal(asyncDataSource._ranges.length, 2);
-    //        equal(asyncDataSource._ranges[1].start, 40);
-    //    }, 150);
-    //});
-
-    //templates
-    
-    //test("uses group template to render group items", 2, function() {
-    //    var virtualList = new VirtualList(container, {
-    //        dataSource: dataSource,
-    //        groupTemplate: "<span class='foo'>#:group#</span>"
-    //    });
-
-    //    var firstVisibleItem = $(virtualList.items()[0]);
-
-    //    equal(firstVisibleItem.find(".foo").length, 1);
-    //    equal(firstVisibleItem.find(".foo").text(), "0 - 30");
-    //});
 
     //grouping
     
-
-
     //scrolling
     
     //utilities
+
+    asyncTest("fixed header displays current visible group", 1, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            value: 89,
+            valueMapper: function(operation) {
+                setTimeout(function() {
+                    operation.success([89]);
+                }, 0);
+            }
+        }));
+
+        asyncDataSource.read();
+        virtualList.bind("listBound", function() {
+            start();
+            equal(virtualList.selectedDataItems()[0].value, 89);
+        });
+    });
 
 })();

@@ -451,8 +451,23 @@ var __meta__ = {
         },
 
         _findDataItem: function(index) {
-            //TODO: implement getting dataItem from grouped data
-            return this.dataSource.view()[index];
+            var view = this.dataSource.view(),
+                group;
+
+            //find in grouped view
+            if (this.options.type === "group") {
+                for (var i = 0; i < view.length; i++) {
+                    group = view[i].items;
+                    if (group.length < index) {
+                        index = index - group.length;
+                    } else {
+                        return group[index];
+                    }
+                }
+            }
+
+            //find in flat view
+            return view[index];
         },
 
         selectedDataItems: function() {
