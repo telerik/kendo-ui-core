@@ -36,7 +36,9 @@ var __meta__ = {
         ITEMCHANGE = "itemChange",
 
         ACTIVATE = "activate",
-        DEACTIVATE = "deactivate";
+        DEACTIVATE = "deactivate",
+
+        VIRTUAL_LIST_NS = ".VirtualList";
 
     function toArray(value) {
         return value = value instanceof Array ? value : [value];
@@ -209,7 +211,7 @@ var __meta__ = {
 
             that.setDataSource(options.dataSource);
 
-            element.on("scroll", function() {
+            element.on("scroll" + VIRTUAL_LIST_NS, function() {
                 that._renderItems();
             });
 
@@ -261,9 +263,10 @@ var __meta__ = {
         },
 
         destroy: function() {
-            Widget.fn.destroy.call(this);
-            this.element.unbind("scroll");
+            this.wrapper.off(VIRTUAL_LIST_NS);
+            this.element.off(VIRTUAL_LIST_NS);
             this.dataSource.unbind(CHANGE, this._refreshHandler);
+            Widget.fn.destroy.call(this);
         },
 
         setDataSource: function(source) {
@@ -993,7 +996,7 @@ var __meta__ = {
         _selectable: function() {
             if (this.options.selectable) {
                 this._selectProxy = $.proxy(this, "_clickHandler");
-                this.wrapper.on(CLICK, "." + VIRTUALITEM + ", ." + OPTIONLABEL, this._selectProxy);
+                this.wrapper.on(CLICK + VIRTUAL_LIST_NS, "." + VIRTUALITEM + ", ." + OPTIONLABEL, this._selectProxy);
             }
         },
 
