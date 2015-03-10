@@ -287,10 +287,6 @@ var __meta__ = {
             }
         },
 
-        _unbindDataSource: function() {
-            var that = this;
-        },
-
         refresh: function() {
             var that = this;
 
