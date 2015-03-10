@@ -542,7 +542,7 @@ var __meta__ = {
                     value = value.toString();
                 }
 
-                that.listView.value(value);
+                //that.listView.value(value);
 
                 if (!that._open && value && that._fetchItems(value)) {
                     return;

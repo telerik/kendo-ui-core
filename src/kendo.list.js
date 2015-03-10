@@ -1346,7 +1346,7 @@ var __meta__ = {
             }
 
             //TODO: test for null value
-            if (value === null) {
+            if (value === "" || value === null) {
                 value = [];
             }
 

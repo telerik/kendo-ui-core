@@ -356,15 +356,12 @@
             dataSource: [
                 { text: "item1", value: "item1"},
                 { text: "item2", value: "item2"}
-            ],
-            change: function() {
-                dropdownlist.dataSource.read();
-            }
+            ]
         }).data("kendoDropDownList");
 
         dropdownlist.select(1);
         dropdownlist.select(0);
-        dropdownlist.trigger("change");
+        dropdownlist.dataSource.read();
 
         ok(dropdownlist.current());
         equal(dropdownlist.current().text(), "Any");
