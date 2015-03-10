@@ -489,6 +489,10 @@ var __meta__ = {
                 }
             }
 
+            if (candidate instanceof Array) {
+                candidate = candidate[candidate.length - 1];
+            }
+
             if (isNaN(candidate)) {
                 element = $(candidate);
                 index = parseInt($(element).attr("data-offset-index"), 10);
@@ -564,22 +568,24 @@ var __meta__ = {
         },
 
         select: function(candidate) {
-            var success = false;
+            var removed;
 
             if (candidate === undefined) {
-                return this._selectedIndices;
+                return this._selectedIndices.slice();
             }
 
-            this.focus(candidate);
-            success = this._select(candidate);
+            candidate = this._getIndecies(candidate);
+            //TODO: implement _deselect
+            //removed = this._deselect(candidate);
 
-            if (typeof candidate === "number" && !success) {
-                this._selectedIndex = candidate;
-            } else {
-                this._selectedIndex = null;
+            if (candidate.length) {
+                if (this.options.selectable !== "multiple") {
+                    candidate = [candidate[candidate.length - 1]];
+                }
+
+                this.focus(candidate);
+                this._select(candidate);
             }
-
-            return success;
         },
 
         data: function() {
@@ -997,77 +1003,95 @@ var __meta__ = {
             }
         },
 
-        _select: function(candidate) {
-            var singleSelection = this.options.selectable !== "multiple",
-                valueField = this.options.dataValueField,
-                element, index, data, dataItem, selectedValue;
+        _getIndecies: function(candidate) {
+            var result = [], data;
 
             if (typeof candidate === "function") {
                 data = this.data();
                 for (var idx = 0; idx < data.length; idx++) {
                     if (candidate(data[idx])) {
-                        candidate = idx;
+                        result.push(idx);
                         break;
                     }
                 }
             }
 
-            if (isNaN(candidate)) {
-                element = $(candidate);
-                index = parseInt($(element).attr("data-offset-index"), 10);
-            } else {
-                index = candidate;
+            if (typeof candidate === "number") {
+                result.push(candidate);
+            }
+
+            if (candidate instanceof jQuery) {
+                candidate = parseInt(candidate.attr("data-offset-index"), 10);
+                if (!isNaN(candidate)) {
+                    result.push(candidate);
+                }
+            }
+
+            return result;
+        },
+
+        _select: function(indicies) {
+            var singleSelection = this.options.selectable !== "multiple",
+                valueField = this.options.dataValueField,
+                element, index, data, dataItem, selectedValue;
+
+            for (var i = 0; i < indicies.length; i++) {
+                index = indicies[i]
+                dataItem = this._view[index] ? this._view[index].item : null;
+
+                if (isPrimitive(dataItem)) {
+                    selectedValue = dataItem ? dataItem : null;
+                } else {
+                    selectedValue = dataItem ? dataItem[valueField] : null;
+                }
+
+                if (!selectedValue && selectedValue !== 0) {
+                    if (index === -1 && this.optionInstance) { //option label is selected
+                        selectedValue = this.optionInstance.value;
+                    } else {
+                        return false; //return false if there is no item to select
+                    }
+                }
+
                 element = this._getElementByIndex(index);
-            }
 
-            dataItem = this._view[index] ? this._view[index].item : null;
-
-            if (typeof dataItem === "string" || typeof dataItem === "number") {
-                selectedValue = dataItem ? dataItem : null;
-            } else {
-                selectedValue = dataItem ? dataItem[valueField] : null;
-            }
-
-            if (!selectedValue && selectedValue !== 0) {
-                if (index === -1 && this.optionInstance) { //option label is selected
-                    selectedValue = this.optionInstance.value;
+                if (element.hasClass(SELECTED)) {
+                    if (singleSelection) {
+                        // this._value = [];
+                        // this._selectedDataItems = [];
+                    } else {
+                        element.removeClass(SELECTED);
+                        this._value = this._value.filter(function(i) { return i != selectedValue; });
+                        this._selectedDataItems = this._selectedDataItems.filter(function(i) {
+                            var result = valueField ? (i[valueField] != selectedValue) : (i != selectedValue);
+                            return result;
+                        });
+                    }
                 } else {
-                    return false; //return false if there is no item to select
-                }
-            }
+                    if (singleSelection) {
+                        this.items().add(this.optionLabel).removeClass(SELECTED);
+                        this._value = [selectedValue];
+                        this._selectedDataItems = [dataItem];
+                    } else {
+                        this._value.push(selectedValue);
+                        this._selectedDataItems.push(dataItem);
+                    }
 
-            if (element.hasClass(SELECTED)) {
-                if (singleSelection) {
-                    // this._value = [];
-                    // this._selectedDataItems = [];
-                } else {
-                    element.removeClass(SELECTED);
-                    this._value = this._value.filter(function(i) { return i != selectedValue; });
-                    this._selectedDataItems = this._selectedDataItems.filter(function(i) {
-                        var result = valueField ? (i[valueField] != selectedValue) : (i != selectedValue);
-                        return result;
-                    });
-                }
-            } else {
-                if (singleSelection) {
-                    this.items().add(this.optionLabel).removeClass(SELECTED);
-                    this._value = [selectedValue];
-                    this._selectedDataItems = [dataItem];
-                } else {
-                    this._value.push(selectedValue);
-                    this._selectedDataItems.push(dataItem);
+                    element.addClass(SELECTED);
                 }
 
-                element.addClass(SELECTED);
+                //this should not be here
+                this._focusedIndex = index;
             }
-
-            this._focusedIndex = index;
+            this._selectedIndices = indicies;
             return true; //return true if item was selected
         },
 
         _clickHandler: function(e) {
-            this.focus(e.currentTarget);
-            this._select(e.currentTarget);
+            this.select($(e.currentTarget));
+            //TODO: change this, probably use the 'select' method
+            //this.focus(e.currentTarget);
+            //this._select(e.currentTarget);
             this.trigger(CHANGE);
         },
 
