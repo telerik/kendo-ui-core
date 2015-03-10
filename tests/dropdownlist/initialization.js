@@ -831,18 +831,10 @@
         equal(dropdownlist.value(), "1");
     });
 
-    function generate() {
-        var data = [];
-        for (var idx = 0; idx < 20; idx++) {
-            data.push("item" + idx);
-        }
-        return data;
-    }
-
     test("DropDownList set height on first open", function() {
         var fixture = $("#qunit-fixture").hide();
         var dropdownlist = new DropDownList(input, {
-            dataSource: generate(),
+            dataSource: generate(20),
             popup: {
                 appendTo: "#qunit-fixture"
             }
