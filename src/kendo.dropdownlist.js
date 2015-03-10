@@ -205,7 +205,7 @@ var __meta__ = {
                 return;
             }
 
-            if (!this.dataSource.view()[0] || that._state === STATE_ACCEPT) {
+            if (!this.dataSource.view().length || that._state === STATE_ACCEPT) {
                 that._open = true;
                 that._state = "rebind"; // do we need _state ???
 
@@ -217,7 +217,7 @@ var __meta__ = {
             } else {
                 that.popup.open();
                 that._focusElement(that.filterInput);
-                //that._scroll(that._current); // maybe is not required!
+                that.listView.focus(that.listView.focus());
             }
         },
 
@@ -349,8 +349,8 @@ var __meta__ = {
 
                         this._initialIndex = null;
                     } else if (this._textAccessor() !== optionLabel) {
-                        this.listView.select(-1);
-                        //this._triggerCascade(that._userTriggered);
+                        this._accessor("");
+                        this._textAccessor("");
                     }
                 }
             } else {

@@ -979,4 +979,24 @@
         equal(dropdownlist.options.dataTextField, "Orders.ShipCity");
         equal(dropdownlist.options.dataValueField, "OrderID");
     });
+
+    function generate(count) {
+        var data = [];
+        for (var idx = 0; idx < count; idx++) {
+            data.push(idx);
+        }
+
+        return data;
+    }
+
+    test("DropDownList scrolls list to the focused element", function() {
+        var dropdownlist = new DropDownList(input, {
+            dataSource: generate(50)
+        });
+
+        dropdownlist.value("30");
+        dropdownlist.open();
+
+        ok(dropdownlist.ul[0].scrollTop > 50);
+    });
 })();
