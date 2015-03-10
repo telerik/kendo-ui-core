@@ -1,6 +1,7 @@
 (function() {
     var container,
         asyncDataSource,
+        virtualSettings,
         VirtualList = kendo.ui.VirtualList,
         CONTAINER_HEIGHT = 200,
 
@@ -43,6 +44,14 @@
                     total: "total"
                 }
             });
+
+            virtualSettings = {
+                autoBind: false,
+                dataSource: asyncDataSource,
+                itemHeight: 40,
+                template: "#=text#",
+                dataValueField: "value"
+            };
         },
 
         teardown: function() {
@@ -57,14 +66,9 @@
     //rendering
 
     asyncTest("scrollTo methods scrolls to a given height", 3, function() {
-        var virtualList = new VirtualList(container, {
-            dataSource: asyncDataSource,
-            itemHeight: 40,
-            template: "#=text#",
-            dataValueField: "value"
-        });
+        var virtualList = new VirtualList(container, virtualSettings);
 
-        setTimeout(function() {
+        asyncDataSource.read().then(function() {
             virtualList.scrollTo(76 * 40); //scroll to the 76th item (76 * ITEMHEIGHT)
             equal(virtualList.element[0].scrollTop, 76 * 40);
 
@@ -75,18 +79,13 @@
                 ok(item76.length, "Item 76 is rendered");
                 ok(item76.css("transform").indexOf(76*40) > -1, "Item 76 is positioned at the correct place with translateY");
             }, 300);
-        }, 100);
+        });
     });
 
     asyncTest("scrollToIndex methods scrolls to a given record by index", 3, function() {
-        var virtualList = new VirtualList(container, {
-            dataSource: asyncDataSource,
-            itemHeight: 40,
-            template: "#=text#",
-            dataValueField: "value"
-        });
+        var virtualList = new VirtualList(container, virtualSettings);
 
-        setTimeout(function() {
+        asyncDataSource.read().then(function() {
             virtualList.scrollToIndex(76); //scroll to the 76th item
             equal(virtualList.element[0].scrollTop, 76 * 40); //ITEMHEIGHT = 40
 
@@ -97,89 +96,75 @@
                 ok(item76.length, "Item 76 is rendered");
                 ok(item76.css("transform").indexOf(76*40) > -1, "Item 76 is positioned at the correct place with translateY");
             }, 300);
-        }, 100);
+        });
     });
 
     //events
 
     asyncTest("fires the itemChange event", 1, function() {
-        var virtualList = new VirtualList(container, {
-            dataSource: asyncDataSource,
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             itemChange: function() {
                 start();
                 ok(true, "itemChange event is fired");
                 this.unbind("itemChange");
-            },
-            template: "#=text#",
-            dataValueField: "value"
-        });
+            }
+        }));
+        asyncDataSource.read();   
     });
 
     asyncTest("fires the listBound event", 1, function() {
-        var virtualList = new VirtualList(container, {
-            dataSource: asyncDataSource,
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             listBound: function() {
                 start();
                 ok(true, "listBound event is fired");
                 this.unbind("listBound");
-            },
-            template: "#=text#",
-            dataValueField: "value"
-        });
+            }
+        }));
+        asyncDataSource.read();   
     });
 
     asyncTest("fires the activate event", 1, function() {
-        var virtualList = new VirtualList(container, {
-            dataSource: asyncDataSource,
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             activate: function() {
                 start();
                 ok(true, "activate event is fired");
                 this.unbind("activate");
             },
-            template: "#=text#",
-            dataValueField: "value",
             selectable: true
-        });
+        }));
 
-        setTimeout(function() {
+        asyncDataSource.read().then(function() {
             var item = virtualList.items().first();
-
             item.trigger("click");
-        }, 300);
+        });
     });
 
     asyncTest("fires the deactivate event", 1, function() {
-        var virtualList = new VirtualList(container, {
-            dataSource: asyncDataSource,
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             deactivate: function() {
                 start();
                 ok(true, "deactivate event is fired");
                 this.unbind("deactivate");
             },
-            template: "#=text#",
-            dataValueField: "value",
             selectable: true
-        });
-
-        setTimeout(function() {
+        }));
+        
+        asyncDataSource.read().then(function() {
             var item = virtualList.items().first();
 
             item.trigger("click");
             item.next().trigger("click");
-        }, 300);
+        });
     });
 
     //methods
 
     asyncTest("selectedDataItems method returns correct amount of items after scrolling down and up", 2, function() {
-        var virtualList = new VirtualList(container, {
-            dataSource: asyncDataSource,
-            template: "#=text#",
-            dataValueField: "value",
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             selectable: "multiple"
-        });
+        }));
 
-        setTimeout(function() {
+        asyncDataSource.read().then(function() {
             virtualList.items().first().trigger("click");
             equal(virtualList.selectedDataItems().length, 1);
             scroll(container, 4 * CONTAINER_HEIGHT);
@@ -191,21 +176,18 @@
                 start();
                 equal(virtualList.selectedDataItems().length, 2);
             }, 300);
-        }, 100);
+        });
     });
 
     asyncTest("data method returns current the optionLabel + dataSource.view", 4, function() {
-        var virtualList = new VirtualList(container, {
-            dataSource: asyncDataSource,
-            template: "#=text#",
-            dataValueField: "value",
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             optionLabel: {
                 text: "option label",
                 value: ""
             }
-        });
+        }));
 
-        setTimeout(function() {
+        asyncDataSource.read().then(function() {
             start();
             var data = virtualList.data();
 
@@ -213,86 +195,61 @@
             equal(data[0].value, "");
             equal(data[1].text, "Item 0");
             equal(data[1].value, 0);
-        }, 100);
+        });
     });
 
     //setOptions
 
     asyncTest("setOptions changes the template", 2, function() {
-        var virtualList = new VirtualList(container, {
-            dataSource: asyncDataSource,
-            template: "#=text#",
-            dataValueField: "value"
-        });
+        var virtualList = new VirtualList(container, virtualSettings);
 
-        setTimeout(function() {
+        asyncDataSource.read().then(function() {
             start();
             equal(virtualList.items().first().text(), "Item 0");
 
             virtualList.setOptions({
                 template: "<span class='foo'>#:text#</span>"
             });
-
             equal(virtualList.items().first().find(".k-item").html(), '<span class="foo">Item 0</span>');
-        }, 100);
+        });
     });
 
     asyncTest("setOptions turns on the selectable", 1, function() {
-        var virtualList = new VirtualList(container, {
-            dataSource: asyncDataSource,
-            template: "#=text#",
-            dataValueField: "value"
-        });
+        var virtualList = new VirtualList(container, virtualSettings);
 
-        setTimeout(function() {
+        asyncDataSource.read().then(function() {
             start();
             virtualList.setOptions({ selectable: true });
-
             virtualList.items().first().trigger("click");
             equal(virtualList.value()[0], 0);
-        }, 100);
+        });
     });
 
     asyncTest("setOptions turns off the selectable", 1, function() {
-        var virtualList = new VirtualList(container, {
-            dataSource: asyncDataSource,
-            template: "#=text#",
-            dataValueField: "value",
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             selectable: true
-        });
+        }));
 
-        setTimeout(function() {
+        asyncDataSource.read().then(function() {
             start();
             virtualList.setOptions({ selectable: false });
-
             virtualList.items().first().trigger("click");
             equal(virtualList.value().length, 0);
-        }, 100);
+        });
     });
 
     test("isBound returns false if the list is not bound yet", 1, function() {
-        var virtualList = new VirtualList(container, {
-            dataSource: asyncDataSource,
-            template: "#=text#",
-            dataValueField: "value",
-            selectable: true
-        });
-
+        var virtualList = new VirtualList(container, virtualSettings);
+        asyncDataSource.read();
         ok(!virtualList.isBound());
     });
 
     asyncTest("isBound returns true if the list is bound", 1, function() {
-        var virtualList = new VirtualList(container, {
-            dataSource: asyncDataSource,
-            template: "#=text#",
-            dataValueField: "value",
-            selectable: true
-        });
-
-        setTimeout(function() {
+        var virtualList = new VirtualList(container, virtualSettings);
+        asyncDataSource.read().then(function() {
             start();
             ok(virtualList.isBound());
-        }, 100);
+        });
     });
 
 })();
