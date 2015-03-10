@@ -58,7 +58,7 @@ var __meta__ = {
                     "-ms-transform: translateX(0) translateZ(0);" +
                     "transform: translateX(0) translateZ(0);" +
                 "} " +
-                ".k-rpanel-top { max-height: initial; }" +
+                ".k-rpanel-top { max-height: none; }" +
             "}",
         _registerBreakpoint: function() {
             this._registerStyle(kendo.template(this._mediaQuery)({
