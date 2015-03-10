@@ -297,23 +297,17 @@ var __meta__ = {
                 if (that._value.length) {
                     that._prefetchByValue(that._value).then(function() {
                         that._listCreated = true;
-
-                        //TODO: find a better place and name for the event
-                        that.trigger("listBound");
+                        that.trigger(LISTBOUND);
                     });
                 } else {
                     that._listCreated = true;
-
-                    //TODO: find a better place and name for the event
-                    that.trigger("listBound");
+                    that.trigger(LISTBOUND);
                 }
             } else {
                 if (that._renderItems) {
                     that._renderItems(true);
                 }
-
-                //TODO: find a better place and name for the event
-                that.trigger("listBound");
+                that.trigger(LISTBOUND);
             }
 
             that._fetching = false;
