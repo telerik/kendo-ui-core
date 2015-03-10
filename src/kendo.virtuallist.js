@@ -330,7 +330,6 @@ var __meta__ = {
                 return that._value;
             }
 
-            that._promisesList = [];
             that._selectedDataItems = [];
             that._value = value = toArray(value);
 
@@ -347,52 +346,83 @@ var __meta__ = {
             var that = this,
                 dataView = that._dataView,
                 valueField = that.options.dataValueField,
-                found = false, counter = 0, item, match = false,
+                counter = 0, item, match = false,
+                deferred = $.Deferred();
+                
+            that._promisesList = [];
+
+            //try to find the items in the loaded data
+            for (var i = 0; i < value.length; i++) {
+                for (var idx = 0; idx < dataView.length; idx++) {
+                    item = dataView[idx].item;
+                    match = isPrimitive(item) ? value[i] === item : value[i] === item[valueField];
+
+                    if (item && match) {
+                        that._selectedDataItems.push(item);
+                        counter++;
+                    }
+                }
+            }
+
+            if (counter === value.length) {
+                that._renderItems(true);
+                deferred.resolve();
+                return deferred.promise();
+            } 
+
+            //prefetch the items
+            that._selectedDataItems = [];
+            if (typeof that.options.valueMapper === "function") {
+                that.options.valueMapper({
+                    value: (this.options.selectable === "multiple") ? value : value[0],
+                    success: function(indexes) {
+                        that._valueMapperSuccessHandler(toArray(indexes));
+                        $.when.apply($, that._promisesList).then(function() {
+                            that._renderItems(true);
+                            deferred.resolve();
+                        });
+                    }
+                });
+            } else {
+                throw new Error("valueMapper is not provided");
+            }
+
+            return deferred.promise();
+        },
+
+        _prefetchByIndex: function(indexes) {
+            var that = this,
+                dataView = that._dataView,
+                valueField = that.options.dataValueField,
+                counter = 0, item, match = false,
                 deferred = $.Deferred();
 
             //try to find the items in the loaded data
-            if (dataView && dataView.length) {
-                for (var i = 0; i < value.length; i++) {
-                    for (var idx = 0; idx < dataView.length; idx++) {
-                        item = dataView[idx].item;
-                        match = isPrimitive(item) ? value[i] === item : value[i] === item[valueField];
-
-                        if (item && match) {
-                            that._selectedDataItems.push(item);
-                            counter++;
-                        }
+            for (var i = 0; i < indexes.length; i++) {
+                for (var idx = 0; idx < dataView.length; idx++) {
+                    if (indexes[i] === dataView[idx].index && dataView[idx].item) {
+                        that._selectedDataItems.push(item);
+                        counter++;
                     }
                 }
+            }
 
-                found = counter === value.length;
+            if (counter === value.length) {
+                that._renderItems(true);
+                deferred.resolve();
+                return deferred.promise();
             }
 
             //prefetch the items
-            if (!found) {
-                that._selectedDataItems = [];
-                if (typeof that.options.valueMapper === "function") {
-                    that.options.valueMapper({
-                        value: (this.options.selectable === "multiple") ? value : value[0],
-                        success: function(indexes) {
-                            that._valueMapperSuccessHandler(toArray(indexes));
-                        }
-                    });
-                } else {
-                    throw new Error("valueMapper is not provided");
-                }
-            }
-
+            that._selectedDataItems = [];
+            that._valueMapperSuccessHandler(toArray(indexes));
             $.when.apply($, this._promisesList).then(function() {
-                if (that._renderItems) {
-                    that._renderItems(true);
-                }
-
+                that._renderItems(true);
                 deferred.resolve();
             });
 
             return deferred.promise();
         },
-
 
         _valueMapperSuccessHandler: function(indexes) {
             var that = this,

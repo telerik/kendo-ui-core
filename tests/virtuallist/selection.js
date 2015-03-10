@@ -26,7 +26,9 @@
     }
 
     function valueMapper(o) {
-        o.success(o.value);
+        setTimeout(function() {
+            o.success(o.value);
+        }, 0);
     }
 
     module("VirtualList Selection: ", {
