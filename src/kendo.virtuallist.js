@@ -426,17 +426,15 @@ var __meta__ = {
         _valueMapperSuccessHandler: function(indexes) {
             var that = this,
                 dataSource = this.dataSource,
-                take = that.itemCount,
-                skip, index;
+                take = that.itemCount;
 
-            for (var i = 0; i < indexes.length; i++) {
-                index = indexes[i];
-                skip = (Math.ceil(index / take) - 1) * take;
+            $.each(indexes, function(_, index) {
+                var skip = (Math.ceil(index / take) - 1) * take;
 
                 var deferred = $.Deferred();
-                this._promisesList.push(deferred);
+                that._promisesList.push(deferred);
 
-                dataSource.prefetch(skip, take, function() {
+                dataSource.immediatePrefetch(skip, take, function() {
                     that.mute(function() {
                         var oldSkip = dataSource.skip();
                         dataSource.range(skip, take); //switch the range to get the dataItem
@@ -447,7 +445,7 @@ var __meta__ = {
                     });
                     deferred.resolve();
                 });
-            }
+            });
         },
 
         _findDataItem: function(index) {

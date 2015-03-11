@@ -38,6 +38,7 @@
                 transport: {
                     read: function(options) {
                         setTimeout(function() {
+                            console.log("read", options.data.skip, options.data.take);
                             options.success({ groups: groupedData(options.data), hasSubgroups: false, total: 300 });
                         }, 0);
                     }
@@ -104,8 +105,9 @@
     
     //utilities
 
-    asyncTest("fixed header displays current visible group", 1, function() {
+    asyncTest("prefetches value in grouped dataSource", 1, function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: true,
             value: 89,
             valueMapper: function(operation) {
                 setTimeout(function() {
@@ -118,6 +120,26 @@
         virtualList.bind("listBound", function() {
             start();
             equal(virtualList.selectedDataItems()[0].value, 89);
+        });
+    });
+
+    asyncTest("prefetches values in grouped dataSource (multiple selection)", 2, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: "multiple",
+            value: [88, 89],
+            valueMapper: function(operation) {
+                console.log("valueMapper");
+                setTimeout(function() {
+                    operation.success([88, 89]);
+                }, 0);
+            }
+        }));
+
+        asyncDataSource.read();
+        virtualList.bind("listBound", function() {
+            start();
+            equal(virtualList.selectedDataItems()[0].value, 88);
+            equal(virtualList.selectedDataItems()[1].value, 89);
         });
     });
 
