@@ -434,7 +434,7 @@ var __meta__ = {
                 var deferred = $.Deferred();
                 that._promisesList.push(deferred);
 
-                dataSource.immediatePrefetch(skip, take, function() {
+                dataSource._multiplePrefetch(skip, take, function() {
                     that.mute(function() {
                         var oldSkip = dataSource.skip();
                         dataSource.range(skip, take); //switch the range to get the dataItem
