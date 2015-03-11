@@ -301,7 +301,8 @@ test("MultiSelect unselects custom option", function() {
 
     ok(select[0].children[0].selected); //item3
     ok(!select[0].children[1].selected); //item4
-    ok(select[0].children[2].selected); //item2
+    ok(!select[0].children[2].selected); //item1
+    ok(select[0].children[3].selected); //item2
 });
 
 test("MultiSelect closes popup on blur", function() {

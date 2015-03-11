@@ -213,14 +213,13 @@ var __meta__ = {
         },
 
         close: function () {
-            var that = this,
-                current = that._current;
+            var that = this;
+            var current = that.listView.focus();
 
             if (current) {
                 current.removeClass(SELECTED);
             }
 
-            that.current(null);
             that.popup.close();
         },
 
@@ -249,8 +248,6 @@ var __meta__ = {
             length;
 
             word = word || that._accessor();
-
-            that._current = null;
 
             clearTimeout(that._typing);
 
@@ -334,6 +331,8 @@ var __meta__ = {
 
         value: function (value) {
             if (value !== undefined) {
+                this.listView.value(value);
+
                 this._accessor(value);
                 this._old = this._accessor();
             } else {
@@ -342,19 +341,18 @@ var __meta__ = {
         },
 
         _click: function(e) {
-            if (!e.isDefaultPrevented()) {
-                var element = $(e.currentTarget);
+            var item = e.item;
+            var element = this.element;
 
-                if (this.trigger("select", { item: element })) {
-                    this.close();
-                    return;
-                }
-
-                this._select(element);
-                this._blur();
-
-                caret(element, element.val().length);
+            if (this.trigger("select", { item: item })) {
+                this.close();
+                return;
             }
+
+            this._select(item);
+            this._blur();
+
+            caret(element, element.val().length);
         },
 
         _initList: function() {
@@ -377,6 +375,7 @@ var __meta__ = {
                             that._focused.add(that.filterInput).attr("aria-activedescendant", current.attr("id"));
                         }
                     },
+                    click: $.proxy(this._click, this),
                     change: $.proxy(this._listChange, this),
                     deactivate: function() {
                         that._focused.add(that.filterInput).removeAttr("aria-activedescendant");
@@ -633,12 +632,8 @@ var __meta__ = {
                 wrapper = element.wrap("<span />").parent();
             }
 
-            //aria
-
             wrapper.attr("tabindex", -1);
             wrapper.attr("role", "presentation");
-
-            //end
 
             wrapper[0].style.cssText = DOMelement.style.cssText;
             element.css({

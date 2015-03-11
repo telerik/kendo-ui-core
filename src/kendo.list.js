@@ -63,7 +63,6 @@ var __meta__ = {
             }
 
             that.ul = $('<ul unselectable="on" class="k-list k-reset"/>')
-                        .on("click" + ns, "li", proxy(this._click, this))
                         .attr({
                             tabIndex: -1,
                             "aria-hidden": true
@@ -783,14 +782,11 @@ var __meta__ = {
 
                 if (current) {
                     if (that.trigger(SELECT, { item: current })) {
-                        //TODO: Shouuld we close the popup
-                        //that.close();
                         return;
                     }
 
                     this._select(current);
                 } else {
-                    //set custom value here!
                     this._accessor(this.input.val());
                 }
 
@@ -818,51 +814,20 @@ var __meta__ = {
             return pressed;
         },
 
-        _selectItem: function() {
+        _fetchData: function() {
             var that = this;
-            var notBound = that._bound === undefined;
-            var options = that.options;
-            var useOptionIndex;
-            var value;
-
-            //TODO: find a way to remove this!
-            useOptionIndex = that._isSelect && !that._initial && !options.value && options.index && !that._bound;
-
-            if (!useOptionIndex) {
-                value = that._selectedValue || (notBound && options.value) || that._accessor();
-            }
-
-            if (value) {
-                that.value(value);
-            } else if (notBound) {
-                that.select(options.index);
-            }
-        },
-
-        _fetchItems: function(value) {
-            var that = this;
-            var hasItems = !!that.dataSource.view()[0];
+            var hasItems = !!that.dataSource.view().length;
 
             //if request is started avoid datasource.fetch
-            if (that._request) {
-                return true;
+            if (that.element[0].disabled || that._request || that.options.cascadeFrom) {
+                return;
             }
 
             if (!that._bound && !that._fetch && !hasItems) {
-                if (that.options.cascadeFrom) {
-                    return !hasItems;
-                }
-
-                that.dataSource.one(CHANGE, function() {
-                    that._old = undefined;
-                    that.value(value);
+                that._fetch = true;
+                that.dataSource.fetch().done(function() {
                     that._fetch = false;
                 });
-
-                that._fetch = true;
-                that.dataSource.fetch();
-
-                return true;
             }
         },
 
@@ -1029,6 +994,7 @@ var __meta__ = {
 
             this.element.attr("role", "listbox")
                         .css({ overflow: support.kineticScrollNeeded ? "": "auto" })
+                        .on("click" + STATIC_LIST_NS, "li", proxy(this._click, this))
                         .on("mouseenter" + STATIC_LIST_NS, "li", function() { $(this).addClass(HOVER); })
                         .on("mouseleave" + STATIC_LIST_NS, "li", function() { $(this).removeClass(HOVER); });
 
@@ -1057,13 +1023,14 @@ var __meta__ = {
             name: "StaticList",
             dataValueField: null,
             optionLabel: null,
-            selectable: true, //true, //true|false|multiple
+            selectable: true,
             template: null,
             groupTemplate: null,
             fixedGroupTemplate: null
         },
 
         events: [
+           "click",
            "change",
            "activate",
            "deactivate",
@@ -1189,6 +1156,12 @@ var __meta__ = {
 
         last: function() {
             this.focus(this.element[0].children[this.element[0].children.length - 1]);
+        },
+
+        _click: function(e) {
+            if (!e.isDefaultPrevented()) {
+                this.trigger("click", { item: $(e.currentTarget) });
+            }
         },
 
         _get: function(candidate) {
@@ -1339,11 +1312,12 @@ var __meta__ = {
             }
         },
 
-        //TODO: Support value selection/unselect .... or always use select method
         value: function(value) {
             if (value === undefined) {
                 return this._values.slice(0);
             }
+
+            this._deferredValue = $.Deferred();
 
             //TODO: test for null value
             if (value === "" || value === null) {
@@ -1357,8 +1331,10 @@ var __meta__ = {
 
             //TODO: Test this
             if (this.isBound()) {
-                this.refresh();
+                this._render();
             }
+
+            return this._deferredValue.promise();
         },
 
         data: function() {
@@ -1538,10 +1514,7 @@ var __meta__ = {
             return item + "</li>";
         },
 
-        refresh: function() {
-            this.trigger("dataBinding");
-            this._angularItems("cleanup");
-
+        _render: function() {
             var html = "";
 
             var idx = 0;
@@ -1550,6 +1523,7 @@ var __meta__ = {
             var view = this.data();
             var values = this.value();
 
+            this._angularItems("cleanup");
             this._selectedIndices = [];
 
             if (!!this.dataSource.group().length) {
@@ -1583,8 +1557,19 @@ var __meta__ = {
 
             this.focus(this._selectedIndices);
 
-            this._bound = true;
             this._angularItems("compile");
+
+            if (this._deferredValue) {
+                this._deferredValue.resolve();
+            }
+        },
+
+        refresh: function() {
+            this.trigger("dataBinding");
+
+            this._render();
+
+            this._bound = true;
 
             this.trigger("dataBound");
         },

@@ -197,7 +197,6 @@ var __meta__ = {
             Select.fn.destroy.call(that);
         },
 
-        //TODO: refactor
         open: function() {
             var that = this;
 
@@ -207,7 +206,7 @@ var __meta__ = {
 
             if (!this.dataSource.view().length || that._state === STATE_ACCEPT) {
                 that._open = true;
-                that._state = "rebind"; // do we need _state ???
+                that._state = "rebind";
 
                 if (that.filterInput) {
                     that.filterInput.val("");
@@ -279,6 +278,7 @@ var __meta__ = {
                             that._focused.add(that.filterInput).attr("aria-activedescendant", current.attr("id"));
                         }
                     },
+                    click: $.proxy(this._click, this),
                     change: $.proxy(this._listChange, this),
                     deactivate: function() {
                         that._focused.add(that.filterInput).removeAttr("aria-activedescendant");
@@ -293,85 +293,6 @@ var __meta__ = {
             this.listView.value(this.options.value);
         },
 
-        _listBound: function() {
-            var that = this;
-            var data = that.listView.data();
-            var length = data.length;
-            var optionLabel = that.options.optionLabel;
-            var filtered = that._state === STATE_FILTER;
-            var element = that.element[0];
-            var selectedIndex;
-            var value;
-
-            //TODO: test this
-            if (!this.options.virtual) {
-                that._height(filtered ? (length || 1) : length); //????
-            }
-
-            if (that.popup.visible()) {
-                that.popup._position();
-            }
-
-            if (that._isSelect) {
-                selectedIndex = element.selectedIndex;
-                value = that.value();
-
-                if (length) {
-                    if (optionLabel) {
-                        optionLabel = that._option("", this._text(optionLabel));
-                    }
-                } else if (value) {
-                    selectedIndex = 0;
-                    optionLabel = that._option(value, that.text());
-                }
-
-                that._options(data, optionLabel);
-                element.selectedIndex = selectedIndex === -1 ? 0 : selectedIndex;
-            }
-
-            that._hideBusy();
-            that._makeUnselectable();
-
-            //TODO: avoid using filtered check!
-            if (!filtered) {
-                if (that._open) {
-                    that.toggle(!!length);
-                }
-
-                that._open = false;
-
-                if (!that._fetch) {
-                    if (length) {
-                        var dataItem = this.listView.selectedDataItems()[0]; //this will not work well in filtered list
-
-                        if (dataItem) {
-                            that._selectValue(dataItem);
-                            this._oldIndex = this.selectedIndex;
-                            this._triggerCascade(that._userTriggered);
-                        } else if (this.selectedIndex === -1 && this._initialIndex !== null) {
-                            this._select(this._initialIndex);
-                            this._triggerEvents();
-                        }
-
-                        this._initialIndex = null;
-                    } else if (this._textAccessor() !== optionLabel) {
-                        this._accessor("");
-                        this._textAccessor("");
-                    }
-                }
-            } else {
-                this.listView.first();
-            }
-
-            that._bound = !!length;
-            that.trigger("dataBound");
-        },
-
-        _listChange: function() {
-            this._selectValue(this.listView.selectedDataItems()[0]);
-        },
-
-        //TODO: Refactor as part of this was moved into StaticList
         refresh: function() {
             this.listView.refresh();
         },
@@ -410,28 +331,103 @@ var __meta__ = {
 
         value: function(value) {
             var that = this;
-            var hasValue;
 
-            if (value !== undefined) {
-                if (value !== null) {
-                    value = value.toString();
-                }
-
-                that.listView.value(value);
-
-                hasValue = value || (that.options.optionLabel && !that.element[0].disabled && value === "");
-                if (hasValue && that._fetchItems(value)) {
-                    return;
-                }
-
-                that.select(function(data) {
-                    return that._dataValue(data) == value;
-                });
-            } else {
-                //TODO: return selectedValue, if not bound!
-                //
-                return that._accessor();
+            //TODO: Test this functionality... return cached value before request
+            if (value === undefined) {
+                value = that._accessor() || that.listView.value()[0];
+                return value === undefined || value === null ? "" : value;
             }
+
+            if (value !== null) {
+                value = value.toString();
+            }
+
+            this.listView.value(value).done(function() {
+                that._selectValue(that.listView.selectedDataItems()[0]);
+                that._triggerCascade();
+
+                that._old = that._accessor();
+                that._oldIndex = that.selectedIndex;
+            });
+
+            that._fetchData();
+        },
+
+        _listBound: function() {
+            var that = this;
+            var data = that.listView.data();
+            var length = data.length;
+            var optionLabel = that.options.optionLabel;
+            var filtered = that._state === STATE_FILTER;
+            var element = that.element[0];
+            var selectedIndex;
+            var value;
+
+            //TODO: test this
+            if (!this.options.virtual) {
+                that._height(filtered ? (length || 1) : length);
+            }
+
+            if (that.popup.visible()) {
+                that.popup._position();
+            }
+
+            if (that._isSelect) {
+                selectedIndex = element.selectedIndex;
+                value = that.value();
+
+                if (length) {
+                    if (optionLabel) {
+                        optionLabel = that._option("", this._text(optionLabel));
+                    }
+                } else if (value) {
+                    selectedIndex = 0;
+                    optionLabel = that._option(value, that.text());
+                }
+
+                that._options(data, optionLabel);
+                element.selectedIndex = selectedIndex === -1 ? 0 : selectedIndex;
+            }
+
+            that._hideBusy();
+            that._makeUnselectable();
+
+            if (!filtered) {
+                if (that._open) {
+                    that.toggle(!!length);
+                }
+
+                that._open = false;
+
+                if (!that._fetch) {
+                    if (length) {
+                        var dataItem = this.listView.selectedDataItems()[0];
+
+                        if (dataItem) {
+                            that._selectValue(dataItem);
+                            this._oldIndex = this.selectedIndex;
+                            this._triggerCascade(that._userTriggered);
+                        } else if (this.selectedIndex === -1 && this._initialIndex !== null) {
+                            this._select(this._initialIndex);
+                            this._triggerEvents();
+                        }
+
+                        this._initialIndex = null;
+                    } else if (this._textAccessor() !== optionLabel) {
+                        this.listView.value("");
+                        this._selectValue(null);
+                    }
+                }
+            } else {
+                this.listView.first();
+            }
+
+            that._bound = !!length;
+            that.trigger("dataBound");
+        },
+
+        _listChange: function() {
+            this._selectValue(this.listView.selectedDataItems()[0]);
         },
 
         _focusHandler: function() {
@@ -449,7 +445,6 @@ var __meta__ = {
             var isIFrame = window.self !== window.top;
 
             if (!that._prevent) {
-                //TODO: Try to refactor
                 if (filtered) {
                     that._select(that.listView.focus());
                 }
@@ -534,32 +529,10 @@ var __meta__ = {
                    .attr(ARIA_READONLY, readonly);
         },
 
-        //TODO: Refactor as part of this was moved into StaticList
-        //TODO: Move the logic from _focus here!
-        _accept: function(li, key) {
-            var that = this;
-            var activeFilter = that.filterInput && that.filterInput[0] === activeElement();
-
-            if (that.popup.visible() && li && that.trigger(SELECT, {item: li})) {
-                that.close();
-                return;
-            }
-
-            this.listView.select(li);
-            that._focusElement(that.wrapper);
-
-            if (activeFilter && key === keys.TAB) {
-                that.wrapper.focusout();
-            } else {
-                that._blur();
-            }
-        },
-
         _option: function(value, text) {
             return '<option value="' + value + '">' + text + "</option>";
         },
 
-        //Refactor to work with list abstractions
         _keydown: function(e) {
             var that = this;
             var key = e.keyCode;
@@ -696,27 +669,24 @@ var __meta__ = {
         },
 
         _click: function(e) {
-            if (!e.isDefaultPrevented()) {
-                var element = $(e.currentTarget);
+            var item = e.item;
 
-                if (this.trigger("select", { item: element })) {
-                    this.close();
-                    return;
-                }
+            if (this.trigger("select", { item: item })) {
+                this.close();
+                return;
+            }
 
-                this._select(element);
-                this._focusElement(this.wrapper);
+            this._select(item);
+            this._focusElement(this.wrapper);
 
-                //this._userTriggered = true; ???
-                this._triggerCascade(true);
+            this._triggerCascade(true);
 
-                var activeFilter = this.filterInput && this.filterInput[0] === activeElement();
+            var activeFilter = this.filterInput && this.filterInput[0] === activeElement();
 
-                if (activeFilter && key === keys.TAB) {
-                    this.wrapper.focusout();
-                } else {
-                    this._blur();
-                }
+            if (activeFilter && key === keys.TAB) {
+                this.wrapper.focusout();
+            } else {
+                this._blur();
             }
         },
 
@@ -804,8 +774,6 @@ var __meta__ = {
             if (this._state === STATE_FILTER) {
                 this._state = STATE_ACCEPT;
             }
-
-            return this.listView.selectedDataItems()[0]; //TODO: remove the need to return selected data Item
         },
 
         _selectValue: function(dataItem) {
@@ -927,7 +895,6 @@ var __meta__ = {
                               });
         },
 
-        //ADD support for this into select method!!!
         _clearSelection: function() {
             var that = this;
             var optionLabel = that.options.optionLabel;

@@ -233,21 +233,23 @@ var __meta__ = {
             var that = this;
             var state = that._state;
             var serverFiltering = that.dataSource.options.serverFiltering;
+            var listView = that.listView;
+            var focusedItem;
 
             if (that.popup.visible()) {
                 return;
             }
 
-            //TODO: Check how to remove this check ???
-            /*if ((!that.ul[0].firstChild && state !== STATE_FILTER) ||
-                (state === STATE_ACCEPT && !serverFiltering)) {*/
-
-            if ((!this.dataSource.view()[0] && state !== STATE_FILTER) || that._state === STATE_ACCEPT) {
+            if ((!this.dataSource.view().length && state !== STATE_FILTER) || (state === STATE_ACCEPT && !serverFiltering)) {
                 that._open = true;
                 that._state = STATE_REBIND;
                 that._filterSource();
             } else {
+                //TODO: Use same logic for other widgets
+                focusedItem = listView.focus();
+
                 that.popup.open();
+                that.listView.focus(focusedItem ? [focusedItem.data("index")] : listView.select());
             }
         },
 
@@ -271,6 +273,7 @@ var __meta__ = {
                             that._focused.add(that.filterInput).attr("aria-activedescendant", current.attr("id"));
                         }
                     },
+                    click: $.proxy(this._click, this),
                     change: $.proxy(this._listChange, this),
                     deactivate: function() {
                         that._focused.add(that.filterInput).removeAttr("aria-activedescendant");
@@ -324,7 +327,7 @@ var __meta__ = {
             that._makeUnselectable();
 
             if (!filtered && !that._fetch) {
-                var dataItem = this.listView.selectedDataItems()[0]; //this will not work well in filtered list
+                var dataItem = this.listView.selectedDataItems()[0];
 
                 if (dataItem) {
                     that._selectValue(dataItem);
@@ -332,18 +335,15 @@ var __meta__ = {
                     this._triggerCascade(that._userTriggered);
                 } else if (this.selectedIndex === -1 && this._initialIndex > -1 && this._initialIndex !== null) {
                     this._select(this._initialIndex);
-                    //this._triggerEvents();
-                    //
                     this._triggerCascade();
                     this._change();
                 }
 
                 this._initialIndex = null;
             } else if (filtered) {
-                //TODO: should clear selected value here!
                 var current = this.listView.focus();
                 if (current) {
-                    current.removeClass("k-state-selected"); //pretty ugly to be honest
+                    current.removeClass("k-state-selected");
                 }
             }
 
@@ -371,13 +371,11 @@ var __meta__ = {
                 that._typing = null;
             }
 
-            //TODO: Why we do not do this in DropDownList too!
             if (that._touchScroller) {
                 that._touchScroller.reset();
             }
 
             that._bound = true;
-            //that._bound = !!length;
             that.trigger("dataBound");
         },
 
@@ -391,14 +389,12 @@ var __meta__ = {
             if (this._state === STATE_FILTER) {
                 this._state = STATE_ACCEPT;
             }
-
-            return this.listView.selectedDataItems()[0]; //TODO: remove the need to return selected data Item
         },
 
         _selectValue: function(dataItem) {
+            var idx = this.listView.select();
             var value = "";
             var text = "";
-            var idx = this.listView.select();
 
             idx = idx[idx.length - 1];
             if (idx === undefined) {
@@ -409,7 +405,6 @@ var __meta__ = {
 
             if (dataItem) {
                 value = this._dataValue(dataItem);
-                //text = dataItem;
                 text = this._text(dataItem);
             }
 
@@ -417,21 +412,15 @@ var __meta__ = {
                 value = "";
             }
 
-            /*this._textAccessor(text);
-            this._accessor(value, idx); //TODO: test this how it works with filtered datasource
-            */
-
             this._prev = this.input[0].value = text;
             this._accessor(value !== undefined ? value : text, idx);
-            this._placeholder(); //this is diff than DropDownList
+            this._placeholder();
         },
 
-        //TODO: Refactor as part of this was moved into StaticList
         refresh: function() {
             this.listView.refresh();
         },
 
-        //TODO: add support for data item
         suggest: function(word) {
             var that = this;
             var element = that.input[0];
@@ -532,31 +521,26 @@ var __meta__ = {
             this._toggle(toggle, true);
         },
 
-        //TODO: refactor
         value: function(value) {
             var that = this;
             var options = that.options;
 
-            if (value !== undefined) {
-                if (value !== null) {
-                    value = value.toString();
-                }
+            //TODO: Test this functionality... return cached value before request
+            if (value === undefined) {
+                value = that._accessor() || that.listView.value()[0];
+                return value === undefined || value === null ? "" : value;
+            }
 
-                //that.listView.value(value);
+            if (value !== null) {
+                value = value.toString();
+            }
 
-                if (!that._open && value && that._fetchItems(value)) {
-                    return;
-                }
+            if (value === options.value && that.input.val() === options.text) {
+                return;
+            }
 
-                //if options.value and options.text are defined do not clear it
-                //TODO: probably it is not needed anymore
-                if (value === options.value && that.input.val() === options.text) {
-                    return;
-                }
-
-                that.select(function(data) {
-                    return that._dataValue(data) == value;
-                });
+            this.listView.value(value).done(function() {
+                that._selectValue(that.listView.selectedDataItems()[0]);
 
                 if (that.selectedIndex === -1) {
                     that.listView.focus(-1);
@@ -564,56 +548,28 @@ var __meta__ = {
                     that.text(value);
 
                     that._placeholder();
-
-                    /*if (options.value !== value || options.text !== that.input.val()) {
-                        that.text(value);
-                        that._placeholder();
-                    }*/
-
-                    that._old = that._accessor();
-                    that._oldIndex = that.selectedIndex;
                 }
-            } else {
-                //TODO: return selectedValue, if not bound!
-                //
-                return that._accessor();
-            }
-        },
 
-        _accept: function(li) {
-            var that = this;
+                that._triggerCascade();
 
-            if (li) {
-                that._focus(li);
-            } else {
-                that.text(that.text());
-                that._change();
-            }
+                that._old = that._accessor();
+                that._oldIndex = that.selectedIndex;
+            });
+
+            that._fetchData();
         },
 
         _click: function(e) {
-            if (!e.isDefaultPrevented()) {
-                var element = $(e.currentTarget);
+            var item = e.item;
 
-                if (this.trigger("select", { item: element })) {
-                    this.close();
-                    return;
-                }
-
-                this._select(element);
-                //this._focusElement(this.wrapper);
-
-                //this._userTriggered = true; ???
-                this._triggerCascade(true);
-
-                /*var activeFilter = this.filterInput && this.filterInput[0] === activeElement();
-
-                if (activeFilter && key === keys.TAB) {
-                    this.wrapper.focusout();
-                } else {*/
-                this._blur();
-                //}
+            if (this.trigger("select", { item: item })) {
+                this.close();
+                return;
             }
+
+            this._select(item);
+            this._triggerCascade(true);
+            this._blur();
         },
 
         _filter: function(word) {
@@ -811,9 +767,9 @@ var __meta__ = {
         },
 
         _clearSelection: function(parent, isFiltered) {
-            var that = this,
-                hasValue = parent._selectedValue || parent.value(),
-                custom = hasValue && parent.selectedIndex === -1;
+            var that = this;
+            var hasValue = parent.value();
+            var custom = hasValue && parent.selectedIndex === -1;
 
             if (isFiltered || !hasValue || custom) {
                 that.value("");
