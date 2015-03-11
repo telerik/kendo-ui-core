@@ -1060,6 +1060,10 @@ var __meta__ = {
                 }
             }
 
+            if (candidate instanceof Array) {
+                result = candidate;
+            }
+
             return result;
         },
 
@@ -1080,7 +1084,7 @@ var __meta__ = {
                     this._getElementByIndex(selectedIndex).removeClass(SELECTED);
 
                     removed.push({
-                        index: index,
+                        index: selectedIndex,
                         dataItem: this._selectedDataItems[position]
                     });
 
@@ -1101,6 +1105,7 @@ var __meta__ = {
                         dataItem = this._selectedDataItems.splice(position, 1);
 
                         indicies.splice(i, 1);
+                        i--;
 
                         removed.push({
                             index: selectedIndex,
@@ -1116,7 +1121,6 @@ var __meta__ = {
         _select: function(indicies) {
             var singleSelection = this.options.selectable !== "multiple",
                 valueField = this.options.dataValueField,
-                element, index, data, dataItem, selectedValue,
                 added = [];
 
             for (var i = 0; i < indicies.length; i++) {

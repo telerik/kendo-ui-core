@@ -753,6 +753,7 @@
         }, 100);
     });
 
+    /* Temporary remove this tests, optionLabel will not be supported in Q1 2015
     asyncTest("select method focuses the optionLabel", 1, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
@@ -798,6 +799,7 @@
             equal()
         }, 100);
     });
+    */
 
     asyncTest("select method returns currently selected index", 1, function() {
         var virtualList = new VirtualList(container, {

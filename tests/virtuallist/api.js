@@ -157,6 +157,91 @@
         });
     });
 
+    asyncTest("fires the change event on select", 1, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            change: function() {
+                start();
+                ok(true, "change event is fired");
+            },
+            selectable: true
+        }));
+        
+        asyncDataSource.read().then(function() {
+            virtualList.select(0);
+        });
+    });
+
+    asyncTest("fires the change event on deselect", 1, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            change: function() {
+                start();
+                ok(true, "change event is fired");
+            },
+            selectable: true,
+            value: 0
+        }));
+        
+        asyncDataSource.read().then(function() {
+            virtualList.select(-1);
+        });
+    });
+
+    asyncTest("in the change event widget passes deselected index", 2, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            change: function(e) {
+                start();
+                var removed = e.removed;
+
+                equal(removed.length, 1);
+                equal(removed[0].index, 0);
+            },
+            selectable: true,
+            value: 0
+        }));
+        
+        asyncDataSource.read().then(function() {
+            virtualList.select(-1);
+        });
+    });
+
+    asyncTest("in the change event widget passes deselected indices when multiple selection is enabled", 3, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            change: function(e) {
+                start();
+                var removed = e.removed;
+
+                equal(removed.length, 2);
+                equal(removed[0].index, 2);
+                equal(removed[1].index, 7);
+            },
+            selectable: "multiple",
+            value: [2, 7]
+        }));
+        
+        asyncDataSource.read().then(function() {
+        debugger;
+            virtualList.select([2, 7]);
+        });
+    });
+
+    asyncTest("in the change event widget passes the selected indicies", 3, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            change: function(e) {
+                start();
+                var added = e.added;
+
+                equal(added.length, 2);
+                equal(added[0].index, 2);
+                equal(added[1].index, 7);
+            },
+            selectable: "multiple"
+        }));
+        
+        asyncDataSource.read().then(function() {
+            virtualList.select([2, 7]);
+        });
+    });
+
     //methods
 
     asyncTest("selectedDataItems method returns correct amount of items after scrolling down and up", 2, function() {
