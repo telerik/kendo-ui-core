@@ -599,7 +599,6 @@ var __meta__ = {
             }
 
             candidate = this._getIndecies(candidate);
-            //TODO: implement _deselect
             removed = this._deselect(candidate);
 
             if (candidate.length) {
@@ -611,7 +610,6 @@ var __meta__ = {
                 added = this._select(candidate);
             }
 
-            //TODO: add test for this
             if (added.length || removed.length) {
                 this.trigger(CHANGE, {
                     added: added,
