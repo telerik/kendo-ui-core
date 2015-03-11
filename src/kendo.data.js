@@ -2,6 +2,8 @@
     define([ "./kendo.core", "./kendo.data.odata", "./kendo.data.xml" ], f);
 })(function(){
 
+var A = 0;
+
 var __meta__ = {
     id: "data",
     name: "Data source",
@@ -3747,6 +3749,32 @@ var __meta__ = {
                         }
                     });
                 }, 100);
+            } else if (callback) {
+                callback();
+            }
+        },
+
+        _multiplePrefetch: function(skip, take, callback) {
+            var that = this,
+                size = math.min(skip + take, that.total()),
+                options = {
+                    take: take,
+                    skip: skip,
+                    page: skip / take + 1,
+                    pageSize: take,
+                    sort: that._sort,
+                    filter: that._filter,
+                    group: that._group,
+                    aggregate: that._aggregate
+                };
+
+            if (!that._rangeExists(skip, size)) {
+                if (!that.trigger(REQUESTSTART, { type: "read" })) {
+                    that.transport.read({
+                        data: that._params(options),
+                        success: that._prefetchSuccessHandler(skip, size, callback)
+                    });
+                }
             } else if (callback) {
                 callback();
             }
