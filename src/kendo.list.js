@@ -1411,6 +1411,7 @@ var __meta__ = {
                     $(this.element[0].children[selectedIndices[idx]]).removeClass("k-state-selected");
                     removed.push({
                         index: idx,
+                        orderIndex: idx, //TODO: Test this
                         dataItem: this._dataItems[idx]
                     });
                 }
@@ -1433,11 +1434,11 @@ var __meta__ = {
                             $(selectedItem).removeClass("k-state-selected");
 
                             removed.push({
-                                index: j + removedIndices,
+                                index: selectedIndices.splice(j, 1),
+                                orderIndex: j + removedIndices, //TODO: test this
                                 dataItem: dataItems.splice(j, 1)[0]
                             });
 
-                            selectedIndices.splice(j, 1);
                             candidate.splice(i, 1);
                             values.splice(j, 1);
 

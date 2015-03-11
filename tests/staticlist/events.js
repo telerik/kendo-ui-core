@@ -75,6 +75,23 @@
         list.select(-1);
     });
 
+    test("widget passes deselected order index", 1, function() {
+        var list = new StaticList(element, {
+            dataSource: ["item"],
+            template: "#:data#",
+            change: function(e) {
+                var removed = e.removed;
+
+                equal(removed[0].orderIndex, 0);
+            },
+            value: ["item"]
+        });
+
+        list.dataSource.read();
+
+        list.select(-1);
+    });
+
     test("widget passes deselected indices when multiple selection is enabled", 3, function() {
         var list = new StaticList(element, {
             dataSource: ["item1", "item2", "item3"],
@@ -83,8 +100,28 @@
                 var removed = e.removed;
 
                 equal(removed.length, 2);
-                equal(removed[0].index, 0);
-                equal(removed[1].index, 1);
+                equal(removed[0].index, 1);
+                equal(removed[1].index, 2);
+            },
+            selectable: "multiple",
+            value: ["item2", "item3"]
+        });
+
+        list.dataSource.read();
+
+        list.select([1, 2]);
+    });
+
+    test("widget passes deselected order indices when multiple selection is enabled", 3, function() {
+        var list = new StaticList(element, {
+            dataSource: ["item1", "item2", "item3"],
+            template: "#:data#",
+            change: function(e) {
+                var removed = e.removed;
+
+                equal(removed.length, 2);
+                equal(removed[0].orderIndex, 0);
+                equal(removed[1].orderIndex, 1);
             },
             selectable: "multiple",
             value: ["item2", "item3"]
