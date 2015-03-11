@@ -38,7 +38,6 @@
                 transport: {
                     read: function(options) {
                         setTimeout(function() {
-                            console.log("read", options.data.skip, options.data.take);
                             options.success({ groups: groupedData(options.data), hasSubgroups: false, total: 300 });
                         }, 0);
                     }
@@ -126,11 +125,10 @@
     asyncTest("prefetches values in grouped dataSource (multiple selection)", 2, function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             selectable: "multiple",
-            value: [88, 89],
+            value: [88, 143],
             valueMapper: function(operation) {
-                console.log("valueMapper");
                 setTimeout(function() {
-                    operation.success([88, 89]);
+                    operation.success([88, 143]);
                 }, 0);
             }
         }));
@@ -139,7 +137,7 @@
         virtualList.bind("listBound", function() {
             start();
             equal(virtualList.selectedDataItems()[0].value, 88);
-            equal(virtualList.selectedDataItems()[1].value, 89);
+            equal(virtualList.selectedDataItems()[1].value, 143);
         });
     });
 
