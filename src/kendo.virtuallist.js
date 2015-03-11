@@ -518,6 +518,12 @@ var __meta__ = {
                 element = this._getElementByIndex(index);
             }
 
+            if (index === -1) { //this will be in conflict with the optionLabel
+                this.content.find("." + FOCUSED).removeClass(FOCUSED);
+                this._focusedIndex = undefined;
+                return;
+            }
+
             if (element.length) { /*focus rendered item*/
                 if (element.hasClass(FOCUSED)) {
                     return;
@@ -585,7 +591,8 @@ var __meta__ = {
         },
 
         select: function(candidate) {
-            var removed;
+            var added = [],
+                removed = [];
 
             if (candidate === undefined) {
                 return this._selectedIndices.slice();
@@ -593,7 +600,7 @@ var __meta__ = {
 
             candidate = this._getIndecies(candidate);
             //TODO: implement _deselect
-            //removed = this._deselect(candidate);
+            removed = this._deselect(candidate);
 
             if (candidate.length) {
                 if (this.options.selectable !== "multiple") {
@@ -601,7 +608,15 @@ var __meta__ = {
                 }
 
                 this.focus(candidate);
-                this._select(candidate);
+                added = this._select(candidate);
+            }
+
+            //TODO: add test for this
+            if (added.length || removed.length) {
+                this.trigger(CHANGE, {
+                    added: added,
+                    removed: removed
+                });
             }
         },
 
@@ -1048,10 +1063,61 @@ var __meta__ = {
             return result;
         },
 
+        _deselect: function(indicies) {
+            var removed = [],
+                index,
+                selectedIndex,
+                dataItem,
+                selectedIndices = this._selectedIndices,
+                position = 0,
+                selectable = this.options.selectable;
+
+            if (selectable === true) {
+                index = indicies[position];
+                selectedIndex = selectedIndices[position];
+
+                if (selectedIndex !== undefined && (index !== selectedIndex || index === -1)) {
+                    this._getElementByIndex(selectedIndex).removeClass(SELECTED);
+
+                    removed.push({
+                        index: index,
+                        dataItem: this._selectedDataItems[position]
+                    });
+
+                    this._value = [];
+                    this._selectedDataItems = [];
+                    this._selectedIndices = [];
+                    indicies = [];
+                }
+            } else if (selectable === "multiple") {
+                for (var i = 0; i < indicies.length; i++) {
+                    position = $.inArray(indicies[i], selectedIndices);
+                    selectedIndex = selectedIndices[position];
+
+                    if (selectedIndex !== undefined) {
+                        this._getElementByIndex(selectedIndex).removeClass(SELECTED);
+                        this._value.splice(position, 1);
+                        this._selectedIndices.splice(position, 1);
+                        dataItem = this._selectedDataItems.splice(position, 1);
+
+                        indicies.splice(i, 1);
+
+                        removed.push({
+                            index: selectedIndex,
+                            dataItem: dataItem
+                        });
+                    }
+                }
+            }
+
+            return removed;
+        },
+
         _select: function(indicies) {
             var singleSelection = this.options.selectable !== "multiple",
                 valueField = this.options.dataValueField,
-                element, index, data, dataItem, selectedValue;
+                element, index, data, dataItem, selectedValue,
+                added = [];
 
             for (var i = 0; i < indicies.length; i++) {
                 index = indicies[i];
@@ -1074,6 +1140,7 @@ var __meta__ = {
                 element = this._getElementByIndex(index);
 
                 if (element.hasClass(SELECTED)) {
+                    /*
                     if (singleSelection) {
                         // this._value = [];
                         // this._selectedDataItems = [];
@@ -1085,29 +1152,38 @@ var __meta__ = {
                             return result;
                         });
                     }
+                    */
                 } else {
                     if (singleSelection) {
                         this.items().add(this.optionLabel).removeClass(SELECTED);
                         this._value = [selectedValue];
                         this._selectedDataItems = [dataItem];
+                        this._selectedIndices = [index];
+
                     } else {
                         this._value.push(selectedValue);
                         this._selectedDataItems.push(dataItem);
+                        this._selectedIndices.push(index);
                     }
 
                     element.addClass(SELECTED);
+
+                    added.push({
+                        index: index,
+                        dataItem: dataItem
+                    });
                 }
 
                 //this should not be here
                 this._focusedIndex = index;
             }
-            this._selectedIndices = indicies;
-            return true; //return true if item was selected
+
+            return added;
         },
 
         _clickHandler: function(e) {
             this.select($(e.currentTarget));
-            this.trigger(CHANGE);
+            //this.trigger(CHANGE);
         },
 
         _optionLabel: function() {

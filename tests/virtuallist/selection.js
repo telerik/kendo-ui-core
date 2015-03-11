@@ -368,7 +368,7 @@
         }, 100);
     });
 
-    asyncTest("de-selecting item triggers the change event", 1, function() {
+    asyncTest("selecting already selected item does not trigger the change event", 0, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
             template: "#=text#",
@@ -376,15 +376,13 @@
             value: 0,
             selectable: true,
             change: function() {
-                ok(true, "change is triggered");
+                ok(false, "change is triggered");
             }
         });
 
         setTimeout(function() {
             start();
-
-            var element = virtualList.items().first();
-            element.trigger("click");
+            virtualList.select(0);
         }, 100);
     });
 
@@ -654,6 +652,8 @@
         }, 100);
     });
 
+    /* select method */
+
     asyncTest("select method focuses the element", 1, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
@@ -752,6 +752,123 @@
             equal(virtualList.value()[0], 2);
         }, 100);
     });
+
+    asyncTest("select method focuses the optionLabel", 1, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            template: "#=text#",
+            dataValueField: "value",
+            selectable: true,
+            optionLabel: {
+                value: "",
+                text: "Option Label"
+            }
+        });
+
+        setTimeout(function() {
+            start();
+            virtualList.select(-1);
+
+            var optionLabel = virtualList.optionLabel;
+
+            ok(optionLabel.hasClass(FOCUSED));
+        }, 100);
+    });
+
+    asyncTest("select method selects the optionLabel", 3, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            template: "#=text#",
+            dataValueField: "value",
+            selectable: true,
+            optionLabel: {
+                value: "",
+                text: "Option Label"
+            }
+        });
+
+        setTimeout(function() {
+            start();
+            virtualList.select(-1);
+
+            var optionLabel = virtualList.optionLabel;
+
+            ok(optionLabel.hasClass(FOCUSED));
+            ok(optionLabel.hasClass(SELECTED));
+            equal()
+        }, 100);
+    });
+
+    asyncTest("select method returns currently selected index", 1, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            template: "#=text#",
+            dataValueField: "value",
+            selectable: true
+        });
+
+        setTimeout(function() {
+            start();
+            virtualList.select(3);
+            equal(virtualList.select(), 3);
+        }, 100);
+    });
+
+    asyncTest("select method deletes selected value when -1 is passed", 1, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            template: "#=text#",
+            dataValueField: "value",
+            selectable: true
+        });
+
+        setTimeout(function() {
+            start();
+            virtualList.select(-1);
+            equal(virtualList.value().length, 0);
+        }, 100);
+    });
+
+    asyncTest("select method sets selected values when multiple elements are selected", 3, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            template: "#=text#",
+            dataValueField: "value",
+            selectable: "multiple"
+        });
+
+        setTimeout(function() {
+            start();
+            virtualList.select(1);
+            virtualList.select(0);
+
+            equal(virtualList.value().length, 2);
+            equal(virtualList.value()[0], 1);
+            equal(virtualList.value()[1], 0);
+        }, 100);
+    });
+
+    asyncTest("select method removes values on deselect", function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            template: "#=text#",
+            dataValueField: "value",
+            selectable: "multiple"
+        });
+
+        setTimeout(function() {
+            start();
+            virtualList.select(0);
+            virtualList.select(1);
+
+            virtualList.select(0);
+            virtualList.select(1);
+
+            equal(virtualList.value().length, 0);
+        }, 100);
+    });
+
+    /* select method */
 
     asyncTest("focus method adds focused class to the element", 1, function() {
         var virtualList = new VirtualList(container, {
@@ -873,67 +990,6 @@
             ok(!element1.hasClass(FOCUSED));
             ok(element1.hasClass(SELECTED));
             ok(element2.hasClass(FOCUSED));
-        }, 100);
-    });
-
-    asyncTest("select method focuses the optionLabel", 1, function() {
-        var virtualList = new VirtualList(container, {
-            dataSource: asyncDataSource,
-            template: "#=text#",
-            dataValueField: "value",
-            selectable: true,
-            optionLabel: {
-                value: "",
-                text: "Option Label"
-            }
-        });
-
-        setTimeout(function() {
-            start();
-            virtualList.select(-1);
-
-            var optionLabel = virtualList.optionLabel;
-
-            ok(optionLabel.hasClass(FOCUSED));
-        }, 100);
-    });
-
-    asyncTest("select method selects the optionLabel", 3, function() {
-        var virtualList = new VirtualList(container, {
-            dataSource: asyncDataSource,
-            template: "#=text#",
-            dataValueField: "value",
-            selectable: true,
-            optionLabel: {
-                value: "",
-                text: "Option Label"
-            }
-        });
-
-        setTimeout(function() {
-            start();
-            virtualList.select(-1);
-
-            var optionLabel = virtualList.optionLabel;
-
-            ok(optionLabel.hasClass(FOCUSED));
-            ok(optionLabel.hasClass(SELECTED));
-            equal()
-        }, 100);
-    });
-
-    asyncTest("select method returns currently selected index", 1, function() {
-        var virtualList = new VirtualList(container, {
-            dataSource: asyncDataSource,
-            template: "#=text#",
-            dataValueField: "value",
-            selectable: true
-        });
-
-        setTimeout(function() {
-            start();
-            virtualList.select(3);
-            equal(virtualList.select(), 3);
         }, 100);
     });
 
