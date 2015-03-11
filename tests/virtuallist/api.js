@@ -33,7 +33,7 @@
                 transport: {
                     read: function(options) {
                         setTimeout(function() {
-                            options.success({ data: generateData(options.data), total: 100 });
+                            options.success({ data: generateData(options.data), total: 300 });
                         }, 0);
                     }
                 },
@@ -250,6 +250,43 @@
             start();
             ok(virtualList.isBound());
         });
+    });
+
+    asyncTest("value method prefetches values (single selection)", 1, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: true,
+            valueMapper: function(operation) {
+                setTimeout(function() {
+                    operation.success(123);
+                }, 0);
+            }
+        }));
+
+        virtualList.value(123).then(function() {
+            start();
+            equal(virtualList.selectedDataItems()[0].value, 123);
+        });
+
+        asyncDataSource.read();
+    });
+
+    asyncTest("value method prefetches values (multiple selection)", 2, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: true,
+            valueMapper: function(operation) {
+                setTimeout(function() {
+                    operation.success([74, 123]);
+                }, 0);
+            }
+        }));
+
+        virtualList.value([74, 123]).then(function() {
+            start();
+            equal(virtualList.selectedDataItems()[0].value, 74);
+            equal(virtualList.selectedDataItems()[1].value, 123);
+        });
+
+        asyncDataSource.read();
     });
 
 })();

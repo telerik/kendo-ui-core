@@ -299,6 +299,9 @@ var __meta__ = {
                     that._prefetchByValue(that._value).then(function() {
                         that._listCreated = true;
                         that.trigger(LISTBOUND);
+                        if (that._valueDeferred) {
+                            that._valueDeferred.resolve();
+                        }
                     });
                 } else {
                     that._listCreated = true;
@@ -334,6 +337,7 @@ var __meta__ = {
                 });
             }
 
+            this._valueDeferred = deferred;
             return deferred.promise();
         },
 
