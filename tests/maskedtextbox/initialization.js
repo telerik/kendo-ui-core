@@ -219,4 +219,41 @@
             start();
         }, 100);
     });
+
+    test("unmask value on form post", 1, function() {
+        input.attr("value", "1234");
+
+        var form = $("<form/>").appendTo(QUnit.fixture).append(input);
+
+        var maskedtextbox = new MaskedTextBox(input, {
+            mask: "00-00",
+            unmaskOnPost: true
+        });
+
+        form.submit(function(e) {
+            e.preventDefault();
+
+            equal(input.val(), "1234");
+        });
+
+        form.submit();
+    });
+
+    test("do not unmask value on form post if unmaskOnPost is false", 1, function() {
+        input.attr("value", "1234");
+
+        var form = $("<form/>").appendTo(QUnit.fixture).append(input);
+
+        var maskedtextbox = new MaskedTextBox(input, {
+            mask: "00-00"
+        });
+
+        form.submit(function(e) {
+            e.preventDefault();
+
+            equal(input.val(), "12-34");
+        });
+
+        form.submit();
+    });
 })();
