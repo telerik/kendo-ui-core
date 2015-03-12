@@ -240,23 +240,18 @@ var __meta__ = {
                     groupTemplate: options.groupTemplate || "#:data#",
                     fixedGroupTemplate: options.fixedGroupTemplate || "#:data#",
                     template: options.template || "#:" + kendo.expr(options.dataTextField, "data") + "#",
+                    change: $.proxy(this._listChange, this),
+                    click: $.proxy(this._click, this),
                     activate: function() {
                         var current = this.focus();
                         if (current) {
                             that._focused.add(that.filterInput).attr("aria-activedescendant", current.attr("id"));
                         }
                     },
-                    change: $.proxy(this._listChange, this),
                     deactivate: function() {
                         that._focused.add(that.filterInput).removeAttr("aria-activedescendant");
                     },
                     listBound: $.proxy(this._listBound, this)
-                    /*
-                    dataBinding: function() {
-                        that.trigger("dataBinding"); //TODO: make preventable
-                    },
-                    dataBound: $.proxy(this._listBound, this)
-                    */
                 };
 
                 if (typeof options.virtual === "object") {
