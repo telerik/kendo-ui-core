@@ -884,6 +884,16 @@ var __meta__ = {
                 nullIndex = -1,
                 match = false;
 
+            if (listType === "group") {
+                if (item) {
+                    newGroup = index === 0 || (this._currentGroup && this._currentGroup !== item.group);
+                    this._currentGroup = item.group;
+                }
+
+                group = item ? item.group : null;
+                item = item ? item.item : null;
+            }
+
             if (value.length && item) {
                 for (var i = 0; i < value.length; i++) {
                     match = isPrimitive(item) ? value[i] === item : value[i] === item[valueField];
@@ -896,16 +906,6 @@ var __meta__ = {
 
             if (currentIndex === index) {
                 current = true;
-            }
-
-            if (listType === "group") {
-                if (item) {
-                    newGroup = index === 0 || (this._currentGroup && this._currentGroup !== item.group);
-                    this._currentGroup = item.group;
-                }
-
-                group = item ? item.group : null;
-                item = item ? item.item : null;
             }
 
             return {
