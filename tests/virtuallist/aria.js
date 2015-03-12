@@ -81,7 +81,7 @@
     asyncTest("currently focused item receives ID attribute", 1, function() {
         setTimeout(function() {
             start();
-            virtualList.items().eq(1).trigger("click");
+            virtualList.select(virtualList.items().eq(1));
             equal(virtualList.focus().attr("id"), virtualList._optionID);
         }, 100);
     });

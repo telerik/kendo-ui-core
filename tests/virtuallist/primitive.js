@@ -52,7 +52,7 @@
 
     //selection
 
-    asyncTest("click on listItem selects it as a value of the list", 1, function() {
+    asyncTest("selecting listItem selects it as a value of the list", 1, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
             template: "#=data#",
@@ -63,13 +63,13 @@
             start();
 
             var element = virtualList.items().first();
-            element.trigger("click");
+            virtualList.select(element);
 
             equal(virtualList.value()[0], "Item 0");
         }, 100);
     });
 
-    asyncTest("click on listItem selects it as a value of the list (multiple selection)", 1, function() {
+    asyncTest("selecting listItem selects it as a value of the list (multiple selection)", 1, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
             template: "#=data#",
@@ -85,14 +85,14 @@
             elements.push(virtualList.items().eq(7));
 
             for (var i = 0; i < elements.length; i++) {
-                elements[i].trigger("click");
+                virtualList.select(elements[i]);
             }
 
             equal(kendo.stringify(virtualList.value()), kendo.stringify(["Item 1", "Item 2", "Item 7"]));
         }, 100);
     });
 
-    asyncTest("click on already selected listItem does not deselect it as a value of the list", 2, function() {
+    asyncTest("selecting already selected listItem does not deselect it as a value of the list", 2, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
             template: "#=data#",
@@ -103,15 +103,15 @@
             start();
 
             var element = virtualList.items().first();
-            element.trigger("click");
+            virtualList.select(element);
             equal(virtualList.value()[0], "Item 0");
 
-            element.trigger("click");
+            virtualList.select(element);
             equal(virtualList.value()[0], "Item 0");
         }, 100);
     });
 
-    asyncTest("click on already selected listItem deselects it as a value of the list (multiple selection)", 1, function() {
+    asyncTest("selecting already selected listItem deselects it as a value of the list (multiple selection)", 1, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
             template: "#=data#",
@@ -127,10 +127,10 @@
             elements.push(virtualList.items().eq(7));
 
             for (var i = 0; i < elements.length; i++) {
-                elements[i].trigger("click");
+                virtualList.select(elements[i]);
             }
 
-            elements[1].trigger("click");
+            virtualList.select(elements[1]);
 
             equal(kendo.stringify(virtualList.value()), kendo.stringify(["Item 1", "Item 7"]));
         }, 100);
@@ -235,7 +235,7 @@
         }, 100);
     });
 
-    asyncTest("click on listItem selects it and saves the corresponding dataItem", 2, function() {
+    asyncTest("selecting listItem selects it and saves the corresponding dataItem", 2, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
             template: "#=data#",
@@ -246,14 +246,14 @@
             start();
 
             var element = virtualList.items().first();
-            element.trigger("click");
+            virtualList.select(element);
 
             equal(virtualList.selectedDataItems().length, 1, "One item is selected");
             equal(virtualList.selectedDataItems()[0], asyncDataSource.data()[0], "First item is selected");
         }, 100);
     });
 
-    asyncTest("click on listItem selects it and saves the corresponding dataItem (multiple items)", 3, function() {
+    asyncTest("selecting listItem selects it and saves the corresponding dataItem (multiple items)", 3, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
             template: "#=data#",
@@ -269,7 +269,7 @@
             elements.push(virtualList.items().eq(2));
 
             for (var i = 0; i < elements.length; i++) {
-                elements[i].trigger("click");
+                virtualList.select(elements[i]);
                 equal(virtualList.selectedDataItems()[i], asyncDataSource.data()[i]);
             }
         }, 100);
@@ -292,7 +292,7 @@
         }, 100);
     });
 
-    asyncTest("click on already selected listItem removes it from stored dataItems", 2, function() {
+    asyncTest("selecting already selected listItem removes it from stored dataItems", 2, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
             template: "#=data#",
@@ -304,7 +304,7 @@
             start();
 
             var element = virtualList.items().eq(0);
-            element.trigger("click");
+            virtualList.select(element);
 
             equal(virtualList.selectedDataItems().length, 1, "First item is removed");
             equal(virtualList.selectedDataItems()[0], asyncDataSource.data()[7], "Second item is saved");
@@ -418,7 +418,7 @@
 
         setTimeout(function() {
             element = virtualList.items().first();
-            element.trigger("click");
+            virtualList.select(element);
             ok(element.hasClass(SELECTED));
             scroll(container, 4 * CONTAINER_HEIGHT);
             setTimeout(function() {
@@ -441,8 +441,8 @@
             start();
             var element1 = virtualList.items().eq(1);
             var element2 = virtualList.items().eq(2);
-            element1.trigger("click");
-            element2.trigger("click");
+            virtualList.select(element1);
+            virtualList.select(element2);
 
             equal(virtualList.items().filter("." + SELECTED).length, 1);
         }, 100);
@@ -459,8 +459,8 @@
             start();
             var element1 = virtualList.items().eq(1);
             var element2 = virtualList.items().eq(2);
-            element1.trigger("click");
-            element2.trigger("click");
+            virtualList.select(element1);
+            virtualList.select(element2);
 
             equal(virtualList.value().length, 1);
             equal(virtualList.value()[0], "Item 2");
@@ -478,8 +478,8 @@
             start();
             var element1 = virtualList.items().eq(1);
             var element2 = virtualList.items().eq(2);
-            element1.trigger("click");
-            element2.trigger("click");
+            virtualList.select(element1);
+            virtualList.select(element2);
 
             equal(virtualList.selectedDataItems().length, 1);
             equal(virtualList.selectedDataItems()[0], "Item 2");

@@ -241,6 +241,7 @@ var __meta__ = {
 
         events: [
             CHANGE,
+            CLICK,
             LISTBOUND,
             ITEMCHANGE,
             ACTIVATE,
@@ -1189,8 +1190,9 @@ var __meta__ = {
         },
 
         _clickHandler: function(e) {
-            this.select($(e.currentTarget));
-            //this.trigger(CHANGE);
+            if (!e.isDefaultPrevented()) {
+                this.trigger(CLICK, { item: $(e.currentTarget) });
+            }
         },
 
         _optionLabel: function() {

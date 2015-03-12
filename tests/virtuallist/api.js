@@ -135,7 +135,7 @@
 
         asyncDataSource.read().then(function() {
             var item = virtualList.items().first();
-            item.trigger("click");
+            virtualList.select(item);
         });
     });
 
@@ -152,8 +152,8 @@
         asyncDataSource.read().then(function() {
             var item = virtualList.items().first();
 
-            item.trigger("click");
-            item.next().trigger("click");
+            virtualList.select(item);
+            virtualList.select(item.next());
         });
     });
 
@@ -277,6 +277,36 @@
         });
     });
 
+    asyncTest("fires the click event", 1, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            click: function() {
+                start();
+                ok(true, "click event is fired");
+            },
+            selectable: true
+        }));
+
+        asyncDataSource.read().then(function() {
+            var item = virtualList.items().first();
+            item.trigger("click");
+        });
+    });
+
+    asyncTest("passes the item in click event handler", 1, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            click: function(e) {
+                start();
+                equal(e.item.text(), this.items().first().text());
+            },
+            selectable: true
+        }));
+
+        asyncDataSource.read().then(function() {
+            var item = virtualList.items().first();
+            item.trigger("click");
+        });
+    });
+
     //methods
 
     asyncTest("selectedDataItems method returns correct amount of items after scrolling down and up", 2, function() {
@@ -285,12 +315,12 @@
         }));
 
         asyncDataSource.read().then(function() {
-            virtualList.items().first().trigger("click");
+            virtualList.select(virtualList.items().first());
             equal(virtualList.selectedDataItems().length, 1);
             scroll(container, 4 * CONTAINER_HEIGHT);
 
             setTimeout(function() {
-                virtualList.items().last().trigger("click");
+                virtualList.select(virtualList.items().last());
                 scroll(container, 0);
 
                 start();
@@ -336,25 +366,29 @@
 
     asyncTest("setOptions turns on the selectable", 1, function() {
         var virtualList = new VirtualList(container, virtualSettings);
+        virtualList.bind("click", function() {
+            ok(true);
+        });
 
         asyncDataSource.read().then(function() {
             start();
             virtualList.setOptions({ selectable: true });
             virtualList.items().first().trigger("click");
-            equal(virtualList.value()[0], 0);
         });
     });
 
-    asyncTest("setOptions turns off the selectable", 1, function() {
+    asyncTest("setOptions turns off the selectable", 0, function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            selectable: true
+            selectable: true,
+            click: function() {
+                ok(false);
+            }
         }));
 
         asyncDataSource.read().then(function() {
             start();
             virtualList.setOptions({ selectable: false });
             virtualList.items().first().trigger("click");
-            equal(virtualList.value().length, 0);
         });
     });
 

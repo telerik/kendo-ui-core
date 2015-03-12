@@ -196,7 +196,7 @@
 
     asyncTest("keeps selection after filtering", 1, function() {
         setTimeout(function() {
-            virtualList.items().first().trigger("click");
+            virtualList.select(virtualList.items().first());
             asyncDataSource.filter({ field: "letter", operator: "eq", value: "a" });
 
             setTimeout(function() {
