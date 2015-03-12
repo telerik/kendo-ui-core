@@ -310,22 +310,22 @@ var __meta__ = {
             var that = this;
             var listView = that.listView;
             var value = listView.value().slice();
-            var orderIndex = tag.index();
+            var position = tag.index();
 
-            var dataItem = listView.selectedDataItems()[orderIndex];
+            var dataItem = listView.selectedDataItems()[position];
             var index = that._customOptions[that._value(dataItem)];
 
             if (index === undefined) {
-                index = listView.select()[orderIndex];
+                index = listView.select()[position];
             }
 
             var removed = [{
                 dataItem: dataItem,
                 index: index,
-                orderIndex: orderIndex
+                position: position
             }];
 
-            value.splice(orderIndex, 1);
+            value.splice(position, 1);
 
             listView.value(value).done(function() {
                 that._selectValue([], removed);
@@ -482,7 +482,7 @@ var __meta__ = {
                 return {
                     dataItem: dataItem,
                     index: index, //data index
-                    orderIndex: idx
+                    position: idx
                 };
             });
 
@@ -937,7 +937,7 @@ var __meta__ = {
             for (idx = removed.length - 1; idx > -1; idx--) {
                 removedItem = removed[idx];
 
-                tagList[0].removeChild(tagList[0].children[removedItem.orderIndex]);
+                tagList[0].removeChild(tagList[0].children[removedItem.position]);
 
                 if (removedItem.index !== undefined) {
                     this.element[0].children[removedItem.index].selected = false;
