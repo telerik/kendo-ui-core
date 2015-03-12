@@ -491,6 +491,7 @@ var __meta__ = {
                 data,
                 dataSource = this.dataSource,
                 current,
+                itemHeight = this.options.itemHeight,
                 id = this._optionID;
 
             if (candidate === undefined) {
@@ -547,9 +548,9 @@ var __meta__ = {
                     var position = this._getElementLocation(index);
 
                     if (position === "top") {
-                        this.scrollTo(index * this.options.itemHeight);
+                        this.scrollTo(index * itemHeight);
                     } else if (position === "bottom") {
-                        this.scrollTo(this.element.scrollTop() + this.options.itemHeight);
+                        this.scrollTo((index * itemHeight + itemHeight) - this.screenHeight);
                     }
 
                     this.trigger(ACTIVATE);
@@ -689,11 +690,13 @@ var __meta__ = {
                 screenHeight = this.screenHeight,
                 itemHeight = this.options.itemHeight,
                 yPosition = index * itemHeight,
+                yDownPostion = yPosition + itemHeight,
+                screenEnd = scrollTop + screenHeight,
                 position;
 
-            if (yPosition === (scrollTop - itemHeight)) {
+            if (yPosition === (scrollTop - itemHeight) || (yDownPostion > scrollTop && yPosition < scrollTop)) {
                 position = "top";
-            } else if (yPosition === scrollTop + screenHeight) {
+            } else if (yPosition === screenEnd || (yPosition < screenEnd && screenEnd < yDownPostion)) {
                 position = "bottom";
             } else if ((yPosition >= scrollTop) && (yPosition <= scrollTop + (screenHeight - itemHeight))) {
                 position = "inScreen";
