@@ -348,6 +348,17 @@
         });
     });
 
+    asyncTest("focus method returns null if there is no focused item", 1, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: true
+        }));
+
+        asyncDataSource.read().then(function() {
+            start();
+            equal(virtualList.focus(), null);
+        });
+    });
+
     //setOptions
 
     asyncTest("setOptions changes the template", 2, function() {

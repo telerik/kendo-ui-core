@@ -495,7 +495,8 @@ var __meta__ = {
                 id = this._optionID;
 
             if (candidate === undefined) {
-                return this.content.find("." + FOCUSED);
+                current = this.content.find("." + FOCUSED);
+                return current.length ? current : null;
             }
 
             if (typeof candidate === "function") {
