@@ -225,36 +225,47 @@ var __meta__ = {
             var options = this.options;
             var template = options.template || options.itemTemplate || "#:" + kendo.expr(options.dataTextField, "data") + "#";
 
-            if (options.virtual) {
-                this.listView = new kendo.ui.VirtualList(this.ul, {});
-            } else {
-                this.listView = new kendo.ui.StaticList(this.ul, {
-                    selectable: "multiple",
-                    dataValueField: options.dataValueField,
-                    dataSource: this.dataSource,
-                    optionLabel: this.optionLabel,
-                    groupTemplate: options.groupTemplate || "#:data#",
-                    fixedGroupTemplate: options.fixedGroupTemplate || "#:data#",
-                    template: template,
-                    activate: function() {
-                        var current = this.focus();
-                        if (current) {
-                            that._focused.add(that.filterInput).attr("aria-activedescendant", current.attr("id"));
-                        }
+            var listOptions = {
+                autoBind: false,
+                selectable: "multiple",
+                height: options.height,
+                dataValueField: options.dataValueField,
+                dataSource: this.dataSource,
+                optionLabel: this.optionLabel,
+                groupTemplate: options.groupTemplate || "#:data#",
+                fixedGroupTemplate: options.fixedGroupTemplate || "#:data#",
+                template: template,
+                activate: function() {
+                    var current = this.focus();
+                    if (current) {
+                        that._focused.add(that.filterInput).attr("aria-activedescendant", current.attr("id"));
+                    }
 
-                        that.currentTag(null);
-                    },
-                    click: $.proxy(this._click, this),
-                    change: $.proxy(this._listChange, this),
-                    deactivate: function() {
-                        that._focused.add(that.filterInput).removeAttr("aria-activedescendant");
-                    },
-                    dataBinding: function() {
-                        that.trigger("dataBinding"); //TODO: make preventable
-                        that._angularItems("cleanup");
-                    },
-                    dataBound: $.proxy(this._listBound, this)
-                });
+                    that.currentTag(null);
+                },
+                click: $.proxy(this._click, this),
+                change: $.proxy(this._listChange, this),
+                deactivate: function() {
+                    that._focused.add(that.filterInput).removeAttr("aria-activedescendant");
+                },
+                dataBinding: function() {
+                    that.trigger("dataBinding"); //TODO: make preventable
+                    that._angularItems("cleanup");
+                },
+                listBound: $.proxy(this._listBound, this),
+                dataBound: $.proxy(this._listBound, this)
+            };
+
+            if (options.virtual) {
+                if (typeof options.virtual === "object") {
+                    $.extend(listOptions, {
+                        listBound: $.proxy(this._listBound, this)
+                    }, options.virtual);
+                }
+
+                this.listView = new kendo.ui.VirtualList(this.ul, listOptions);
+            } else {
+                this.listView = new kendo.ui.StaticList(this.ul, listOptions);
             }
 
             this.listView.value(this._initialValues || this.options.value);
@@ -410,7 +421,7 @@ var __meta__ = {
                 that._filterSource();
             } else if (that._allowSelection()) {
                 that.popup.open();
-                this.listView.focus(this.listView.focus());
+                that._focusItem();
             }
         },
 

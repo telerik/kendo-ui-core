@@ -572,6 +572,7 @@ test("do not append combobox filter twice", function() {
     equal(combobox.dataSource.filter().filters.length, 2);
 });
 
+//TODO: investigate
 /*asyncTest("remove only combobox filter expression on rebind", 2, function() {
     combobox = new ComboBox(input, {
         dataTextField: "text",

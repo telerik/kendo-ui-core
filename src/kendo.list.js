@@ -425,6 +425,24 @@ var __meta__ = {
             }
         },
 
+        _focusItem: function() {
+            var listView = this.listView;
+            var focusedItem = listView.focus();
+            var index = listView.select();
+
+            index = index[index.length - 1];
+
+            if (index === undefined && this.options.highlightFirst && !focusedItem) {
+                index = 0;
+            }
+
+            if (index !== undefined) {
+                listView.focus(index);
+            } else {
+                listView.scrollToIndex(0);
+            }
+        },
+
         //use length of the items in ListView
         _firstOpen: function() {
             this._height(this.listView.data().length);
@@ -441,7 +459,10 @@ var __meta__ = {
                 isRtl: support.isRtl(that.wrapper)
             }));
 
-            that.popup.one(OPEN, proxy(that._firstOpen, that));
+            if (!that.options.virtual) {
+                that.popup.one(OPEN, proxy(that._firstOpen, that));
+            }
+
             that._touchScroller = kendo.touchScroller(that.popup.element);
         },
 
@@ -788,6 +809,7 @@ var __meta__ = {
                     this._select(current);
                 } else {
                     this._accessor(this.input.val());
+                    this.listView.value(this.input.val());
                 }
 
                 //TODO: refactor

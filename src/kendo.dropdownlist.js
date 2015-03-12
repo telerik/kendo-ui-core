@@ -216,7 +216,7 @@ var __meta__ = {
             } else {
                 that.popup.open();
                 that._focusElement(that.filterInput);
-                that.listView.focus(that.listView.select());
+                that._focusItem();
             }
         },
 

@@ -232,58 +232,66 @@ var __meta__ = {
         open: function() {
             var that = this;
             var state = that._state;
-            var serverFiltering = that.dataSource.options.serverFiltering;
             var listView = that.listView;
             var focusedItem;
+            var index;
 
             if (that.popup.visible()) {
                 return;
             }
 
-            if ((!this.dataSource.view().length && state !== STATE_FILTER) || (state === STATE_ACCEPT && !serverFiltering)) {
+            if ((!this.dataSource.view().length && state !== STATE_FILTER) || state === STATE_ACCEPT) {
                 that._open = true;
                 that._state = STATE_REBIND;
                 that._filterSource();
             } else {
-                //TODO: Use same logic for other widgets
-                focusedItem = listView.focus();
-
                 that.popup.open();
-                that.listView.focus(focusedItem ? [focusedItem.data("index")] : listView.select());
+                that._focusItem();
             }
         },
 
         _initList: function() {
             var that = this;
             var options = this.options;
+            var listOptions = {
+                autoBind: false,
+                selectable: true,
+                height: options.height,
+                dataValueField: options.dataValueField,
+                dataSource: this.dataSource,
+                optionLabel: this.optionLabel,
+                groupTemplate: options.groupTemplate || "#:data#",
+                fixedGroupTemplate: options.fixedGroupTemplate || "#:data#",
+                template: options.template || "#:" + kendo.expr(options.dataTextField, "data") + "#",
+                activate: function() {
+                    var current = this.focus();
+                    if (current) {
+                        that._focused.add(that.filterInput).attr("aria-activedescendant", current.attr("id"));
+                    }
+                },
+                click: $.proxy(this._click, this),
+                change: $.proxy(this._listChange, this),
+                deactivate: function() {
+                    that._focused.add(that.filterInput).removeAttr("aria-activedescendant");
+                },
+                dataBinding: function() {
+                    that.trigger("dataBinding"); //TODO: make preventable
+                    that._angularItems("cleanup");
+                },
+                listBound: $.proxy(this._listBound, this),
+                dataBound: $.proxy(this._listBound, this)
+            };
 
             if (options.virtual) {
-                this.listView = new kendo.ui.VirtualList(this.ul, {});
+                if (typeof options.virtual === "object") {
+                    $.extend(listOptions, {
+                        listBound: $.proxy(this._listBound, this)
+                    }, options.virtual);
+                }
+
+                this.listView = new kendo.ui.VirtualList(this.ul, listOptions);
             } else {
-                this.listView = new kendo.ui.StaticList(this.ul, {
-                    dataValueField: options.dataValueField,
-                    dataSource: this.dataSource,
-                    optionLabel: this.optionLabel,
-                    groupTemplate: options.groupTemplate || "#:data#",
-                    fixedGroupTemplate: options.fixedGroupTemplate || "#:data#",
-                    template: options.template || "#:" + kendo.expr(options.dataTextField, "data") + "#",
-                    activate: function() {
-                        var current = this.focus();
-                        if (current) {
-                            that._focused.add(that.filterInput).attr("aria-activedescendant", current.attr("id"));
-                        }
-                    },
-                    click: $.proxy(this._click, this),
-                    change: $.proxy(this._listChange, this),
-                    deactivate: function() {
-                        that._focused.add(that.filterInput).removeAttr("aria-activedescendant");
-                    },
-                    dataBinding: function() {
-                        that.trigger("dataBinding"); //TODO: make preventable
-                        that._angularItems("cleanup");
-                    },
-                    dataBound: $.proxy(this._listBound, this)
-                });
+                this.listView = new kendo.ui.StaticList(this.ul, listOptions);
             }
 
             this.listView.value(this.options.value);
@@ -301,7 +309,9 @@ var __meta__ = {
 
             that._angularItems("compile");
 
-            that._height(length);
+            if (!options.virtual) {
+                that._height(length);
+            }
 
             if (that.popup.visible()) {
                 that.popup._position();
@@ -623,7 +633,7 @@ var __meta__ = {
                 this.open();
             }
 
-            if (this.options.highlightFirst && !current) {
+            if (this.options.highlightFirst && !word) {
                 this.listView.first();
             }
 
