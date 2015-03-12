@@ -137,4 +137,16 @@
 
         ok(dom.hasClass("k-rpanel-expanded"));
     });
+
+    test("does not close panel if closing event is prevented", function() {
+        var panel = new ResponsivePanel(dom);
+
+        panel.open();
+        panel._close({
+            target: document.body,
+            isDefaultPrevented: function() { return true }
+        });
+
+        ok(dom.hasClass("k-rpanel-expanded"));
+    });
 })();

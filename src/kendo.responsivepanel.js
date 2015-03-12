@@ -24,7 +24,7 @@ var __meta__ = {
             this._toggleHandler = proxy(this._toggleButtonClick, this);
             this._closeHandler = proxy(this._close, this);
 
-            $(document.documentElement).on(ACTIVATE_EVENTS, ".k-rpanel-toggle", this._toggleHandler);
+            $(document.documentElement).on(ACTIVATE_EVENTS, this.options.toggleButton, this._toggleHandler);
 
             this._registerBreakpoint();
 
@@ -49,7 +49,7 @@ var __meta__ = {
                 "}" +
             "} " +
             "@media (min-width: #= breakpoint #px) {" +
-                ".k-rpanel-toggle { display: none; } " +
+                "#= toggleButton # { display: none; } " +
                 ".k-rpanel-left { float: left; } " +
                 ".k-rpanel-right { float: right; } " +
                 ".k-rpanel-left, .k-rpanel-right {" +
@@ -61,8 +61,11 @@ var __meta__ = {
                 ".k-rpanel-top { max-height: none; }" +
             "}",
         _registerBreakpoint: function() {
+            var options = this.options;
+
             this._registerStyle(kendo.template(this._mediaQuery)({
-                breakpoint: this.options.breakpoint
+                breakpoint: options.breakpoint,
+                toggleButton: options.toggleButton
             }));
         },
         _registerStyle: function(cssText) {
@@ -80,6 +83,7 @@ var __meta__ = {
         options: {
             name: "ResponsivePanel",
             orientation: "left",
+            toggleButton: ".k-rpanel-toggle",
             breakpoint: 640,
             autoClose: true
         },
@@ -90,7 +94,9 @@ var __meta__ = {
         _resize: function() {
             this.element.removeClass("k-rpanel-animate");
         },
-        _toggleButtonClick: function() {
+        _toggleButtonClick: function(e) {
+            e.preventDefault();
+
             if (this.element.hasClass("k-rpanel-expanded")) {
                 this.close();
             } else {
@@ -114,9 +120,10 @@ var __meta__ = {
             }
         },
         _close: function(e) {
-            var container = $(e.target).closest(".k-rpanel-toggle,.k-rpanel");
+            var prevented = e.isDefaultPrevented();
+            var container = $(e.target).closest(this.options.toggleButton + ",.k-rpanel");
 
-            if (!container.length) {
+            if (!container.length && !prevented) {
                 this.close();
             }
         },
