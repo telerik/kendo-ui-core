@@ -547,6 +547,7 @@ var __meta__ = {
             }
 
             e.keyCode = key;
+            that._key = key;
 
             if (altKey && key === keys.UP) {
                 that._focusElement(that.wrapper);
@@ -683,11 +684,13 @@ var __meta__ = {
 
             var activeFilter = this.filterInput && this.filterInput[0] === activeElement();
 
-            if (activeFilter && key === keys.TAB) {
+            if (activeFilter && this._key === keys.TAB) {
                 this.wrapper.focusout();
             } else {
                 this._blur();
             }
+
+            this._key = null;
         },
 
         _focusElement: function(element) {

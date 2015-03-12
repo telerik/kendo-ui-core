@@ -295,6 +295,7 @@ var __meta__ = {
             var length = data.length;
             var filtered = that._state === STATE_FILTER;
             var element = that.element[0];
+            var current;
             var value;
 
             that._height(length);
@@ -341,14 +342,14 @@ var __meta__ = {
 
                 this._initialIndex = null;
             } else if (filtered) {
-                var current = this.listView.focus();
+                current = this.listView.focus();
                 if (current) {
                     current.removeClass("k-state-selected");
                 }
             }
 
             if (length) {
-                var current = this.listView.focus();
+                current = this.listView.focus();
 
                 if (options.highlightFirst && !current) {
                     that.listView.first();
@@ -427,6 +428,7 @@ var __meta__ = {
             var value = that.text();
             var caretIdx = caret(element)[0];
             var key = that._last;
+            var idx;
 
             if (key == keys.BACKSPACE || key == keys.DELETE) {
                 that._last = undefined;

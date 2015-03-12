@@ -1518,6 +1518,7 @@ var __meta__ = {
         _render: function() {
             var html = "";
 
+            var i = 0;
             var idx = 0;
             var context;
             var dataContext = [];
@@ -1527,12 +1528,14 @@ var __meta__ = {
             this._angularItems("cleanup");
             this._selectedIndices = [];
 
-            if (!!this.dataSource.group().length) {
-                for (var i = 0; i < view.length; i++) {
-                    var group = view[i];
-                    var newGroup = true;
+            var group, newGroup, j;
 
-                    for (var j = 0; j < group.items.length; j++) {
+            if (!!this.dataSource.group().length) {
+                for (i = 0; i < view.length; i++) {
+                    group = view[i];
+                    newGroup = true;
+
+                    for (j = 0; j < group.items.length; j++) {
                         context = { item: group.items[j], group: group.value, newGroup: newGroup, index: idx };
                         dataContext[idx] = context;
                         idx += 1;
@@ -1541,9 +1544,8 @@ var __meta__ = {
                         newGroup = false;
                     }
                 }
-                //grouped
             } else {
-                for (var i = 0; i < view.length; i++) {
+                for (i = 0; i < view.length; i++) {
                     context = { item: view[i], index: i };
 
                     dataContext[i] = context;
