@@ -82,7 +82,7 @@
             change: function(e) {
                 var removed = e.removed;
 
-                equal(removed[0].orderIndex, 0);
+                equal(removed[0].position, 0);
             },
             value: ["item"]
         });
@@ -120,8 +120,8 @@
                 var removed = e.removed;
 
                 equal(removed.length, 2);
-                equal(removed[0].orderIndex, 0);
-                equal(removed[1].orderIndex, 1);
+                equal(removed[0].position, 0);
+                equal(removed[1].position, 1);
             },
             selectable: "multiple",
             value: ["item2", "item3"]

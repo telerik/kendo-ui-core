@@ -1076,6 +1076,14 @@ var __meta__ = {
             Widget.fn.destroy.call(this);
         },
 
+        scrollToIndex: function(index) {
+            var item = this.element[0].children[index];
+
+            if (item) {
+                this.scroll(item);
+            }
+        },
+
         scroll: function (item) {
             if (!item) {
                 return;

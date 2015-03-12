@@ -965,4 +965,24 @@
         equal(children.eq(1).attr("class"), "k-item");
         equal(children.eq(2).attr("class"), "k-item k-state-focused");
     });
+
+    test("scrollToIndex passes the correct item to scroll method", function() {
+        var list = new StaticList(element, {
+            dataSource: ["item1", "item2", "item3"],
+            template: "#:data#"
+        });
+
+        stub(list, {
+            scroll: list.scroll
+        });
+
+        list.dataSource.read();
+
+        list.scrollToIndex(2);
+
+        var children = element[0].children;
+
+        equal(list.calls("scroll"), 1);
+        equal(list.args("scroll")[0], children[2]);
+    });
 })();
