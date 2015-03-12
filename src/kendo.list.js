@@ -1363,17 +1363,17 @@ var __meta__ = {
         _find: function(dataItem, values) {
             var getter = this._valueGetter;
             var value = getter(dataItem);
-            var found = false;
+            var index = -1;
 
             for (var idx = 0; idx < values.length; idx++) {
                 if (value == values[idx]) {
                     values.splice(idx, 1);
-                    found = true;
+                    index = idx;
                     break;
                 }
             }
 
-            return found;
+            return index;
         },
 
         _isNew: function(dataItem) {
@@ -1384,7 +1384,9 @@ var __meta__ = {
             var value = getter(dataItem);
 
             for (; idx < this._dataItems.length; idx++) {
-                if (getter(this._dataItems[idx]) === value) {
+                dataItem = this._dataItems[idx];
+
+                if (dataItem && getter(this._dataItems[idx]) === value) {
                     isNew = false;
                     break;
                 }
@@ -1489,19 +1491,46 @@ var __meta__ = {
             this.templates = templates;
         },
 
+        _normalizeDataItems: function() {
+            var dataItems = this._dataItems;
+            var indices = this._selectedIndices;
+
+            var newDataItems = [];
+            var newIndices = [];
+
+            for (var idx = 0; idx < dataItems.length; idx++) {
+                if (dataItems[idx] !== undefined) {
+                    newDataItems.push(dataItems[idx]);
+                    newIndices.push(indices[idx]);
+                }
+            }
+
+            this._dataItems = newDataItems;
+            this._selectedIndices = newIndices;
+        },
+
         _renderItem: function(context, values) {
             var item = '<li tabindex="-1" role="option" unselectable="on" class="k-item';
-            var found = this._find(context.item, values);
+            var index = this._find(context.item, values);
             var dataItem = context.item;
+            var found = index !== -1;
 
             if (found) {
                 item += ' k-state-selected';
 
                 if (this._isNew(dataItem)) {
-                    this._dataItems.push(dataItem);
+                    if (this._dataItems[index] === undefined) {
+                        this._dataItems[index] = dataItem;
+                    } else {
+                        this._dataItems.push(dataItem);
+                    }
                 }
 
-                this._selectedIndices.push(context.index);
+                if (this._selectedIndices[index] === undefined) {
+                    this._selectedIndices[index] = context.index;
+                } else {
+                    this._selectedIndices.push(context.index);
+                }
             }
 
             item += '"' + (found ? ' aria-selected="true"' : "") + ' data-index="' + context.index + '">';
@@ -1525,7 +1554,6 @@ var __meta__ = {
             var view = this.data();
             var values = this.value();
 
-            this._angularItems("cleanup");
             this._selectedIndices = [];
 
             var group, newGroup, j;
@@ -1554,13 +1582,13 @@ var __meta__ = {
                 }
             }
 
+            this._normalizeDataItems();
+
             this._dataContext = dataContext;
 
             this.element[0].innerHTML = html;
 
             this.focus(this._selectedIndices);
-
-            this._angularItems("compile");
 
             if (this._deferredValue) {
                 this._deferredValue.resolve();

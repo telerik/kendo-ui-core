@@ -251,6 +251,7 @@ var __meta__ = {
                     },
                     dataBinding: function() {
                         that.trigger("dataBinding"); //TODO: make preventable
+                        that._angularItems("cleanup");
                     },
                     dataBound: $.proxy(this._listBound, this)
                 });
@@ -427,6 +428,8 @@ var __meta__ = {
             var that = this;
             var data = this.listView.data();
             var length = data.length;
+
+            that._angularItems("compile");
 
             that._render(data);
 

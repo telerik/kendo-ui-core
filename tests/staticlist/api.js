@@ -785,11 +785,11 @@
         var dataItems = list.selectedDataItems();
 
         equal(dataItems.length, 2);
-        equal(dataItems[0], list.dataSource.view()[0].items[1]);
-        equal(dataItems[1], list.dataSource.view()[1].items[0]);
+        equal(dataItems[0], list.dataSource.view()[1].items[0]);
+        equal(dataItems[1], list.dataSource.view()[0].items[1]);
     });
 
-    test("value method sets selected values", function() {
+    test("value method sets selected indeces", function() {
         var list = new StaticList(element, {
             dataValueField: "name",
             dataSource: {
@@ -809,11 +809,11 @@
 
         list.dataSource.read();
 
-        var dataItems = list.selectedDataItems();
+        var indices = list.select();
 
-        equal(dataItems.length, 2);
-        equal(dataItems[0], list.dataSource.view()[0].items[1]);
-        equal(dataItems[1], list.dataSource.view()[1].items[0]);
+        equal(indices.length, 2);
+        equal(indices[0], 2); //Item2
+        equal(indices[1], 1); //Item3 (this is before item 2 in grouped list)
     });
 
     test("value method deselects an item", function() {

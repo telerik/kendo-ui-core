@@ -285,6 +285,7 @@ var __meta__ = {
                     },
                     dataBinding: function() {
                         that.trigger("dataBinding"); //TODO: make preventable
+                        that._angularItems("cleanup");
                     },
                     dataBound: $.proxy(this._listBound, this)
                 });
@@ -362,6 +363,8 @@ var __meta__ = {
             var element = that.element[0];
             var selectedIndex;
             var value;
+
+            that._angularItems("compile");
 
             //TODO: test this
             if (!this.options.virtual) {
