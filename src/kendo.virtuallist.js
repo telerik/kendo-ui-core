@@ -205,9 +205,9 @@ var __meta__ = {
             that.header = that.element.before("<div class='" + HEADER + "'></div>").prev();
             that.content = element.append("<ul class='" + CONTENT + " " + LIST + "'></ul>").find("." + CONTENT);
 
-            that._value = toArray(that.options.value);
+            that._values = toArray(that.options.value);
             that._selectedDataItems = [];
-            that._selectedIndices = [];
+            that._selectedIndexes = [];
             that._optionID = kendo.guid();
 
             that.setDataSource(options.dataSource);
@@ -296,8 +296,8 @@ var __meta__ = {
 
             if (!that._fetching && that.dataSource.data().length) {
                 that._createList();
-                if (that._value.length) {
-                    that._prefetchByValue(that._value).then(function() {
+                if (that._values.length) {
+                    that._prefetchByValue(that._values).then(function() {
                         that._listCreated = true;
                         that.trigger(LISTBOUND);
                         if (that._valueDeferred) {
@@ -325,12 +325,12 @@ var __meta__ = {
                 deferred = $.Deferred();
 
             if (value === undefined) {
-                return that._value;
+                return that._values;
             }
 
             that._selectedDataItems = [];
-            that._selectedIndices = [];
-            that._value = value = toArray(value);
+            that._selectedIndexes = [];
+            that._values = value = toArray(value);
 
             if (that.isBound()) {
                 that._prefetchByValue(value).then(function() {
@@ -359,7 +359,7 @@ var __meta__ = {
 
                     if (item && match) {
                         that._selectedDataItems.push(item);
-                        that._selectedIndices.push(idx);
+                        that._selectedIndexes.push(idx);
                         counter++;
                     }
                 }
@@ -373,7 +373,7 @@ var __meta__ = {
 
             //prefetch the items
             that._selectedDataItems = [];
-            that._selectedIndices = [];
+            that._selectedIndexes = [];
             if (typeof that.options.valueMapper === "function") {
                 that.options.valueMapper({
                     value: (this.options.selectable === "multiple") ? value : value[0],
@@ -404,7 +404,7 @@ var __meta__ = {
                 for (var idx = 0; idx < dataView.length; idx++) {
                     if (indexes[i] === dataView[idx].index && dataView[idx].item) {
                         that._selectedDataItems.push(item);
-                        that._selectedIndices.push(idx);
+                        that._selectedIndexes.push(idx);
                         counter++;
                     }
                 }
@@ -418,7 +418,7 @@ var __meta__ = {
 
             //prefetch the items
             that._selectedDataItems = [];
-            that._selectedIndices = [];
+            that._selectedIndexes = [];
             that._valueMapperSuccessHandler(toArray(indexes));
             $.when.apply($, this._promisesList).then(function() {
                 that._renderItems(true);
@@ -444,7 +444,7 @@ var __meta__ = {
                         var oldSkip = dataSource.skip();
                         dataSource.range(skip, take); //switch the range to get the dataItem
                         that._selectedDataItems.push(that._findDataItem([index - skip]));
-                        that._selectedIndices.push(index);
+                        that._selectedIndexes.push(index);
                         dataSource.range(oldSkip, take); //switch back the range
                         dataSource.enableRequestsInProgress();
                     });
@@ -596,7 +596,7 @@ var __meta__ = {
                 removed = [];
 
             if (candidate === undefined) {
-                return this._selectedIndices.slice();
+                return this._selectedIndexes.slice();
             }
 
             candidate = this._getIndecies(candidate);
@@ -875,7 +875,7 @@ var __meta__ = {
             var listType = this.options.type,
                 itemHeight = this.options.itemHeight,
                 valueField = this.options.dataValueField,
-                value = this._value,
+                value = this._values,
                 currentIndex = this._focusedIndex,
                 selected = false,
                 current = false,
@@ -1066,18 +1066,18 @@ var __meta__ = {
             return result;
         },
 
-        _deselect: function(indicies) {
+        _deselect: function(indexes) {
             var removed = [],
                 index,
                 selectedIndex,
                 dataItem,
-                selectedIndices = this._selectedIndices,
+                selectedIndices = this._selectedIndexes,
                 position = 0,
                 selectable = this.options.selectable,
-                removedIndiciesCounter = 0;
+                removedindexesCounter = 0;
 
             if (selectable === true) {
-                index = indicies[position];
+                index = indexes[position];
                 selectedIndex = selectedIndices[position];
 
                 if (selectedIndex !== undefined && (index !== selectedIndex || index === -1)) {
@@ -1089,31 +1089,31 @@ var __meta__ = {
                         dataItem: this._selectedDataItems[position]
                     });
 
-                    this._value = [];
+                    this._values = [];
                     this._selectedDataItems = [];
-                    this._selectedIndices = [];
-                    indicies = [];
+                    this._selectedIndexes = [];
+                    indexes = [];
                 }
             } else if (selectable === "multiple") {
-                for (var i = 0; i < indicies.length; i++) {
-                    position = $.inArray(indicies[i], selectedIndices);
+                for (var i = 0; i < indexes.length; i++) {
+                    position = $.inArray(indexes[i], selectedIndices);
                     selectedIndex = selectedIndices[position];
 
                     if (selectedIndex !== undefined) {
                         this._getElementByIndex(selectedIndex).removeClass(SELECTED);
-                        this._value.splice(position, 1);
-                        this._selectedIndices.splice(position, 1);
+                        this._values.splice(position, 1);
+                        this._selectedIndexes.splice(position, 1);
                         dataItem = this._selectedDataItems.splice(position, 1);
 
-                        indicies.splice(i, 1);
+                        indexes.splice(i, 1);
 
                         removed.push({
                             index: selectedIndex,
-                            position: position + removedIndiciesCounter,
+                            position: position + removedindexesCounter,
                             dataItem: dataItem
                         });
 
-                        removedIndiciesCounter++;
+                        removedindexesCounter++;
                         i--;
                     }
                 }
@@ -1122,13 +1122,14 @@ var __meta__ = {
             return removed;
         },
 
-        _select: function(indicies) {
+        _select: function(indexes) {
             var singleSelection = this.options.selectable !== "multiple",
                 valueField = this.options.dataValueField,
+                index, dataItem, selectedValue, element,
                 added = [];
 
-            for (var i = 0; i < indicies.length; i++) {
-                index = indicies[i];
+            for (var i = 0; i < indexes.length; i++) {
+                index = indexes[i];
                 dataItem = this._view[index] ? this._view[index].item : null;
 
                 if (isPrimitive(dataItem)) {
@@ -1147,31 +1148,17 @@ var __meta__ = {
 
                 element = this._getElementByIndex(index);
 
-                if (element.hasClass(SELECTED)) {
-                    /*
-                    if (singleSelection) {
-                        // this._value = [];
-                        // this._selectedDataItems = [];
-                    } else {
-                        element.removeClass(SELECTED);
-                        this._value = this._value.filter(function(i) { return i != selectedValue; });
-                        this._selectedDataItems = this._selectedDataItems.filter(function(i) {
-                            var result = valueField ? (i[valueField] != selectedValue) : (i != selectedValue);
-                            return result;
-                        });
-                    }
-                    */
-                } else {
+                if (!element.hasClass(SELECTED)) {
                     if (singleSelection) {
                         this.items().add(this.optionLabel).removeClass(SELECTED);
-                        this._value = [selectedValue];
+                        this._values = [selectedValue];
                         this._selectedDataItems = [dataItem];
-                        this._selectedIndices = [index];
+                        this._selectedIndexes = [index];
 
                     } else {
-                        this._value.push(selectedValue);
+                        this._values.push(selectedValue);
                         this._selectedDataItems.push(dataItem);
-                        this._selectedIndices.push(index);
+                        this._selectedIndexes.push(index);
                     }
 
                     element.addClass(SELECTED);
