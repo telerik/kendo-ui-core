@@ -219,7 +219,6 @@
         }));
         
         asyncDataSource.read().then(function() {
-        debugger;
             virtualList.select([2, 7]);
         });
     });
@@ -239,6 +238,42 @@
         
         asyncDataSource.read().then(function() {
             virtualList.select([2, 7]);
+        });
+    });
+
+    asyncTest("widget passes deselected order index", 1, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            change: function(e) {
+                start();
+                var removed = e.removed;
+
+                equal(removed[0].position, 0);
+            },
+            selectable: true,
+            value: 0
+        }));
+
+        asyncDataSource.read().then(function() {
+            virtualList.select(-1);
+        });
+    });
+
+    asyncTest("widget passes deselected order indices when multiple selection is enabled", 3, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            change: function(e) {
+                start();
+                var removed = e.removed;
+
+                equal(removed.length, 2);
+                equal(removed[0].position, 0);
+                equal(removed[1].position, 2);
+            },
+            selectable: "multiple",
+            value: [1, 2, 8, 10]
+        }));
+
+        asyncDataSource.read().then(function() {
+            virtualList.select([1, 8]);
         });
     });
 

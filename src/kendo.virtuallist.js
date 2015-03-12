@@ -1072,7 +1072,8 @@ var __meta__ = {
                 dataItem,
                 selectedIndices = this._selectedIndices,
                 position = 0,
-                selectable = this.options.selectable;
+                selectable = this.options.selectable,
+                removedIndiciesCounter = 0;
 
             if (selectable === true) {
                 index = indicies[position];
@@ -1083,6 +1084,7 @@ var __meta__ = {
 
                     removed.push({
                         index: selectedIndex,
+                        position: position,
                         dataItem: this._selectedDataItems[position]
                     });
 
@@ -1103,12 +1105,15 @@ var __meta__ = {
                         dataItem = this._selectedDataItems.splice(position, 1);
 
                         indicies.splice(i, 1);
-                        i--;
 
                         removed.push({
                             index: selectedIndex,
+                            position: position + removedIndiciesCounter,
                             dataItem: dataItem
                         });
+
+                        removedIndiciesCounter++;
+                        i--;
                     }
                 }
             }
