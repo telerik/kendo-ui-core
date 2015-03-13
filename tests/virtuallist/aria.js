@@ -41,6 +41,7 @@
             });
 
             virtualList = new VirtualList(container, {
+                autoBind: false,
                 dataSource: asyncDataSource,
                 itemHeight: 40,
                 template: "#=text#",
@@ -65,25 +66,25 @@
     });
 
     asyncTest("items receive role='option' attribute", 1, function() {
-        setTimeout(function() {
+        asyncDataSource.read().then(function() {
             start();
             equal(virtualList.items().first().attr("role"), "option");
-        }, 100);
+        });
     });
 
     asyncTest("optionLabel receive role='option' attribute", 1, function() {
-        setTimeout(function() {
+        asyncDataSource.read().then(function() {
             start();
             equal(virtualList.items().first().attr("role"), "option");
-        }, 100);
+        });
     });
 
     asyncTest("currently focused item receives ID attribute", 1, function() {
-        setTimeout(function() {
+        asyncDataSource.read().then(function() {
             start();
             virtualList.select(virtualList.items().eq(1));
             equal(virtualList.focus().attr("id"), virtualList._optionID);
-        }, 100);
+        });
     });
 
 })();
