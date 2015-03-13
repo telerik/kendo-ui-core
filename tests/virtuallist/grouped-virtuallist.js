@@ -116,7 +116,7 @@
         }));
 
         asyncDataSource.read();
-        virtualList.bind("listBound", function() {
+        virtualList.bind("change", function() {
             start();
             equal(virtualList.selectedDataItems()[0].value, 89);
         });
@@ -134,7 +134,7 @@
         }));
 
         asyncDataSource.read();
-        virtualList.bind("listBound", function() {
+        virtualList.bind("change", function() {
             start();
             equal(virtualList.selectedDataItems()[0].value, 88);
             equal(virtualList.selectedDataItems()[1].value, 143);

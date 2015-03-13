@@ -173,106 +173,105 @@
 
     asyncTest("fires the change event on deselect", 1, function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            change: function() {
-                start();
-                ok(true, "change event is fired");
-            },
             selectable: true,
             value: 0
         }));
         
         asyncDataSource.read().then(function() {
+            virtualList.bind("change", function() {
+                start();
+                ok(true, "change event is fired");
+            })
             virtualList.select(-1);
         });
     });
 
     asyncTest("in the change event widget passes deselected index", 2, function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            change: function(e) {
-                start();
-                var removed = e.removed;
-
-                equal(removed.length, 1);
-                equal(removed[0].index, 0);
-            },
             selectable: true,
             value: 0
         }));
         
         asyncDataSource.read().then(function() {
+            virtualList.bind("change", function(e) {
+                start();
+                var removed = e.removed;
+
+                equal(removed.length, 1);
+                equal(removed[0].index, 0);
+            });
             virtualList.select(-1);
         });
     });
 
     asyncTest("in the change event widget passes deselected indices when multiple selection is enabled", 3, function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            change: function(e) {
+            selectable: "multiple",
+            value: [2, 7]
+        }));
+        
+        asyncDataSource.read().then(function() {
+            virtualList.bind("change", function(e) {
                 start();
                 var removed = e.removed;
 
                 equal(removed.length, 2);
                 equal(removed[0].index, 2);
                 equal(removed[1].index, 7);
-            },
-            selectable: "multiple",
-            value: [2, 7]
-        }));
-        
-        asyncDataSource.read().then(function() {
+            });
             virtualList.select([2, 7]);
         });
     });
 
     asyncTest("in the change event widget passes the selected indicies", 3, function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            change: function(e) {
+            selectable: "multiple"
+        }));
+        
+        asyncDataSource.read().then(function() {
+            virtualList.bind("change", function(e) {
                 start();
                 var added = e.added;
 
                 equal(added.length, 2);
                 equal(added[0].index, 2);
                 equal(added[1].index, 7);
-            },
-            selectable: "multiple"
-        }));
-        
-        asyncDataSource.read().then(function() {
+            });
             virtualList.select([2, 7]);
         });
     });
 
     asyncTest("widget passes deselected order index", 1, function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            change: function(e) {
-                start();
-                var removed = e.removed;
-
-                equal(removed[0].position, 0);
-            },
             selectable: true,
             value: 0
         }));
 
         asyncDataSource.read().then(function() {
+            virtualList.bind("change", function(e) {
+                start();
+                var removed = e.removed;
+                equal(removed[0].position, 0);
+            });
             virtualList.select(-1);
         });
     });
 
     asyncTest("widget passes deselected order indices when multiple selection is enabled", 3, function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            change: function(e) {
+            selectable: "multiple",
+            value: [1, 2, 8, 10]
+        }));
+
+        asyncDataSource.read().then(function() {
+            virtualList.bind("change", function(e) {
                 start();
                 var removed = e.removed;
 
                 equal(removed.length, 2);
                 equal(removed[0].position, 0);
                 equal(removed[1].position, 2);
-            },
-            selectable: "multiple",
-            value: [1, 2, 8, 10]
-        }));
-
-        asyncDataSource.read().then(function() {
+            });
             virtualList.select([1, 8]);
         });
     });
@@ -424,33 +423,33 @@
                 setTimeout(function() {
                     operation.success(123);
                 }, 0);
+            },
+            change: function() {
+                start();
+                equal(virtualList.selectedDataItems()[0].value, 123);
             }
         }));
 
-        virtualList.value(123).then(function() {
-            start();
-            equal(virtualList.selectedDataItems()[0].value, 123);
-        });
-
+        virtualList.value(123)
         asyncDataSource.read();
     });
 
     asyncTest("value method prefetches values (multiple selection)", 2, function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            selectable: true,
+            selectable: "multiple",
             valueMapper: function(operation) {
                 setTimeout(function() {
                     operation.success([74, 123]);
                 }, 0);
+            },
+            change: function() {
+                start();
+                equal(virtualList.selectedDataItems()[0].value, 74);
+                equal(virtualList.selectedDataItems()[1].value, 123);
             }
         }));
 
-        virtualList.value([74, 123]).then(function() {
-            start();
-            equal(virtualList.selectedDataItems()[0].value, 74);
-            equal(virtualList.selectedDataItems()[1].value, 123);
-        });
-
+        virtualList.value([74, 123]);
         asyncDataSource.read();
     });
 

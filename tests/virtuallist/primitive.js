@@ -280,16 +280,15 @@
             dataSource: asyncDataSource,
             template: "#=data#",
             value: ["Item 0", "Item 1"],
-            selectable: true
+            selectable: "multiple",
+            change: function() {
+                start();
+
+                equal(virtualList.selectedDataItems().length, 2);
+                equal(virtualList.selectedDataItems()[0], asyncDataSource.data()[0]);
+                equal(virtualList.selectedDataItems()[1], asyncDataSource.data()[1]);
+            }
         });
-
-        setTimeout(function() {
-            start();
-
-            equal(virtualList.selectedDataItems().length, 2);
-            equal(virtualList.selectedDataItems()[0], asyncDataSource.data()[0]);
-            equal(virtualList.selectedDataItems()[1], asyncDataSource.data()[1]);
-        }, 100);
     });
 
     asyncTest("selecting already selected listItem removes it from stored dataItems", 2, function() {
@@ -311,7 +310,7 @@
         }, 100);
     });
 
-    asyncTest("changing the value through the value method updates dataItems collection", 3, function() {
+    asyncTest("changing the value through the value method updates dataItems collection", 2, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
             template: "#=data#",
@@ -321,11 +320,11 @@
         setTimeout(function() {
             start();
 
-            virtualList.value(["Item 0", "Item 1"]);
-
-            equal(virtualList.selectedDataItems().length, 2);
-            equal(virtualList.selectedDataItems()[0], asyncDataSource.data()[0]);
-            equal(virtualList.selectedDataItems()[1], asyncDataSource.data()[1]);
+            virtualList.bind("change", function() {
+                equal(virtualList.selectedDataItems().length, 1);
+                equal(virtualList.selectedDataItems()[0], asyncDataSource.data()[0]);
+            });
+            virtualList.value("Item 0");
         }, 100);
     });
 
@@ -333,17 +332,18 @@
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
             template: "#=data#",
-            selectable: true
+            selectable: "multiple"
         });
 
         setTimeout(function() {
             start();
 
+            virtualList.bind("change", function() {
+                equal(virtualList.selectedDataItems().length, 2);
+                equal(virtualList.selectedDataItems()[0], asyncDataSource.data()[0]);
+                equal(virtualList.selectedDataItems()[1], asyncDataSource.data()[1]);
+            });
             virtualList.value(["Item 0", "Item 1"]);
-
-            equal(virtualList.selectedDataItems().length, 2);
-            equal(virtualList.selectedDataItems()[0], asyncDataSource.data()[0]);
-            equal(virtualList.selectedDataItems()[1], asyncDataSource.data()[1]);
         }, 100);
     });
 
@@ -352,17 +352,18 @@
             dataSource: asyncDataSource,
             template: "#=data#",
             value: ["Item 7"],
-            selectable: true
+            selectable: "multiple"
         });
 
         setTimeout(function() {
             start();
 
+            virtualList.bind("change", function() {
+                equal(virtualList.selectedDataItems().length, 2);
+                equal(virtualList.selectedDataItems()[0], asyncDataSource.data()[0]);
+                equal(virtualList.selectedDataItems()[1], asyncDataSource.data()[1]);
+            });
             virtualList.value(["Item 0", "Item 1"]);
-
-            equal(virtualList.selectedDataItems().length, 2);
-            equal(virtualList.selectedDataItems()[0], asyncDataSource.data()[0]);
-            equal(virtualList.selectedDataItems()[1], asyncDataSource.data()[1]);
         }, 100);
     });
 
@@ -377,12 +378,13 @@
         });
 
         asyncDataSource.one("change", function() {
-            virtualList.value(["Item 7", "Item 256"]).then(function() {
+            virtualList.bind("change", function() {
                 start();
                 equal(virtualList.selectedDataItems().length, 2);
                 ok(virtualList.selectedDataItems()[0] === "Item 7");
                 ok(virtualList.selectedDataItems()[1] === "Item 256");
             });
+            virtualList.value(["Item 7", "Item 256"]);
         });
     });
 
@@ -394,16 +396,15 @@
             valueMapper: function(o) {
                 o.success([7, 256]);
             },
-            selectable: true
+            selectable: "multiple",
+            change: function() {
+                start();
+
+                equal(virtualList.selectedDataItems().length, 2);
+                ok(virtualList.selectedDataItems()[0] === "Item 7");
+                ok(virtualList.selectedDataItems()[1] === "Item 256");
+            }
         });
-
-        virtualList.bind("listBound", function() {
-            start();
-
-            equal(virtualList.selectedDataItems().length, 2);
-            ok(virtualList.selectedDataItems()[0] === "Item 7");
-            ok(virtualList.selectedDataItems()[1] === "Item 256");
-        })
     });
 
     asyncTest("selection is persisted accross ranges", 2, function() {

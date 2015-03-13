@@ -40,6 +40,10 @@ var __meta__ = {
 
         VIRTUAL_LIST_NS = ".VirtualList";
 
+    function lastFrom(array) {
+        return array[array.length - 1];
+    }
+
     function toArray(value) {
         return value instanceof Array ? value : [value];
     }
@@ -208,6 +212,9 @@ var __meta__ = {
             that._values = toArray(that.options.value);
             that._selectedDataItems = [];
             that._selectedIndexes = [];
+            that._rangesList = {};
+            that._activeDeferred = null;
+            that._promisesList = [];
             that._optionID = kendo.guid();
 
             that.setDataSource(options.dataSource);
@@ -297,17 +304,10 @@ var __meta__ = {
             if (!that._fetching && that.dataSource.data().length) {
                 that._createList();
                 if (that._values.length) {
-                    that._prefetchByValue(that._values).then(function() {
-                        that._listCreated = true;
-                        that.trigger(LISTBOUND);
-                        if (that._valueDeferred) {
-                            that._valueDeferred.resolve();
-                        }
-                    });
-                } else {
-                    that._listCreated = true;
-                    that.trigger(LISTBOUND);
+                    that._prefetchByValue(that._values);
                 }
+                that._listCreated = true;
+                that.trigger(LISTBOUND);
             } else {
                 if (that._renderItems) {
                     that._renderItems(true);
@@ -333,24 +333,17 @@ var __meta__ = {
             that._values = value = toArray(value);
 
             if (that.isBound()) {
-                that._prefetchByValue(value).then(function() {
-                    deferred.resolve();
-                });
+                that._prefetchByValue(value);
             }
-
-            this._valueDeferred = deferred;
-            return deferred.promise();
         },
 
         _prefetchByValue: function(value) {
             var that = this,
                 dataView = that._dataView,
                 valueField = that.options.dataValueField,
-                counter = 0, item, match = false,
-                deferred = $.Deferred();
+                item, match = false,
+                forSelection = [];
                 
-            that._promisesList = [];
-
             //try to find the items in the loaded data
             for (var i = 0; i < value.length; i++) {
                 for (var idx = 0; idx < dataView.length; idx++) {
@@ -358,99 +351,66 @@ var __meta__ = {
                     match = isPrimitive(item) ? value[i] === item : value[i] === item[valueField];
 
                     if (item && match) {
-                        that._selectedDataItems.push(item);
-                        that._selectedIndexes.push(idx);
-                        counter++;
+                        forSelection.push(idx);
                     }
                 }
             }
 
-            if (counter === value.length) {
-                that._renderItems(true);
-                deferred.resolve();
-                return deferred.promise();
+            if (forSelection.length === value.length) {
+                that.select(forSelection);
+                return;
             } 
 
             //prefetch the items
-            that._selectedDataItems = [];
-            that._selectedIndexes = [];
             if (typeof that.options.valueMapper === "function") {
                 that.options.valueMapper({
                     value: (this.options.selectable === "multiple") ? value : value[0],
                     success: function(indexes) {
-                        that._valueMapperSuccessHandler(toArray(indexes));
-                        $.when.apply($, that._promisesList).then(function() {
-                            that._renderItems(true);
-                            deferred.resolve();
-                        });
+                        that.select(toArray(indexes));
                     }
                 });
             } else {
                 throw new Error("valueMapper is not provided");
             }
-
-            return deferred.promise();
         },
 
-        _prefetchByIndex: function(indexes) {
-            var that = this,
-                dataView = that._dataView,
-                valueField = that.options.dataValueField,
-                counter = 0, item, match = false,
-                deferred = $.Deferred();
-
-            //try to find the items in the loaded data
-            for (var i = 0; i < indexes.length; i++) {
-                for (var idx = 0; idx < dataView.length; idx++) {
-                    if (indexes[i] === dataView[idx].index && dataView[idx].item) {
-                        that._selectedDataItems.push(item);
-                        that._selectedIndexes.push(idx);
-                        counter++;
-                    }
-                }
-            }
-
-            if (counter === indexes.length) {
-                that._renderItems(true);
-                deferred.resolve();
-                return deferred.promise();
-            }
-
-            //prefetch the items
-            that._selectedDataItems = [];
-            that._selectedIndexes = [];
-            that._valueMapperSuccessHandler(toArray(indexes));
-            $.when.apply($, this._promisesList).then(function() {
-                that._renderItems(true);
-                deferred.resolve();
-            });
-
-            return deferred.promise();
-        },
-
-        _valueMapperSuccessHandler: function(indexes) {
+        prefetch: function(indexes) {
             var that = this,
                 dataSource = this.dataSource,
+                isEmptyList = !that._promisesList.length,
                 take = that.itemCount;
 
+            if (!that._activeDeferred) {
+                that._activeDeferred = $.Deferred();
+                that._promisesList = [];
+            }
+
             $.each(indexes, function(_, index) {
-                var skip = (Math.ceil(index / take) - 1) * take;
+                var page = index < take ? 1 : Math.floor(index / take) + 1;
+                var skip = (page - 1) * take;
+                var deferred;
 
-                var deferred = $.Deferred();
-                that._promisesList.push(deferred);
+                if (!that._rangesList[skip] && that._rangesList[skip] !== skip + take) {
+                    that._rangesList[skip] = skip + take;
+                    deferred = $.Deferred();
+                    that._promisesList.push(deferred);
 
-                dataSource._multiplePrefetch(skip, take, function() {
-                    that.mute(function() {
-                        var oldSkip = dataSource.skip();
-                        dataSource.range(skip, take); //switch the range to get the dataItem
-                        that._selectedDataItems.push(that._findDataItem([index - skip]));
-                        that._selectedIndexes.push(index);
-                        dataSource.range(oldSkip, take); //switch back the range
-                        dataSource.enableRequestsInProgress();
+                    dataSource._multiplePrefetch(skip, take, function() {
+                        deferred.resolve();
                     });
-                    deferred.resolve();
-                });
+                }
             });
+
+            if (isEmptyList) {
+                $.when.apply($, that._promisesList).done(function() {
+                    //that._renderItems(true);
+                    that._activeDeferred.resolve();
+                    that._activeDeferred = null;
+                    that._promisesList = [];
+                });
+            }
+
+            return this._activeDeferred;
         },
 
         _findDataItem: function(index) {
@@ -594,30 +554,56 @@ var __meta__ = {
         },
 
         select: function(candidate) {
-            var added = [],
+            var that = this;
+            var indexes,
+                singleSelection = this.options.selectable !== "multiple",
+                prefetchStarted = !!this._activeDeferred,
+                deferred,
+                added = [],
                 removed = [];
 
             if (candidate === undefined) {
                 return this._selectedIndexes.slice();
             }
 
-            candidate = this._getIndecies(candidate);
-            removed = this._deselect(candidate);
+            indexes = this._getIndecies(candidate);
 
-            if (candidate.length) {
-                if (this.options.selectable !== "multiple") {
-                    candidate = [candidate[candidate.length - 1]];
-                }
+            if (!indexes.length || (singleSelection && lastFrom(indexes) === lastFrom(this._selectedIndexes))) { return; } 
 
-                this.focus(candidate);
-                added = this._select(candidate);
-            }
+            removed = this._deselect(indexes);
 
-            if (added.length || removed.length) {
+            if (!indexes.length) {
                 this.trigger(CHANGE, {
                     added: added,
                     removed: removed
                 });
+            } else {
+                if (singleSelection) {
+                    this._activeDeferred = null;
+                    indexes = [indexes[indexes.length - 1]];
+                }
+
+                var done = function() {
+                    added = that._select(indexes); //???
+                    that.focus(indexes);
+
+                    if (added.length || removed.length) {
+                        that.trigger(CHANGE, {
+                            added: added,
+                            removed: removed
+                        });
+                    }
+                };
+
+                deferred = this.prefetch(indexes);
+
+                if (!prefetchStarted) {
+                    if (deferred) {
+                        deferred.done(done);
+                    } else {
+                        done();
+                    }
+                }
             }
         },
 
@@ -743,6 +729,15 @@ var __meta__ = {
             return items;
         },
 
+        _saveInitialRanges: function() {
+            var ranges = this.dataSource._ranges;
+
+            this._rangesList = {};
+            for (var i = 0; i < ranges.length; i++) {
+                this._rangesList[ranges[i].start] = ranges[i].end;
+            }
+        },
+
         _createList: function() {
             var that = this,
                 element = that.element.get(0),
@@ -754,6 +749,7 @@ var __meta__ = {
                 that._clean();
             }
 
+            that._saveInitialRanges();
             that._screenHeight();
             that.itemCount = getItemCount(that.screenHeight, options.listScreens, options.itemHeight);
 
@@ -1075,16 +1071,35 @@ var __meta__ = {
                 index,
                 selectedIndex,
                 dataItem,
-                selectedIndices = this._selectedIndexes,
+                selectedIndexes = this._selectedIndexes,
                 position = 0,
                 selectable = this.options.selectable,
                 removedindexesCounter = 0;
 
+            if (indexes[position] === -1) { //deselect everything
+                for (var idx = 0; idx < selectedIndexes.length; idx++) {
+                    selectedIndex = selectedIndexes[idx];
+
+                    removed.push({
+                        index: selectedIndex,
+                        position: idx,
+                        dataItem: this._selectedDataItems[idx]
+                    });
+                }
+
+                this._values = [];
+                this._selectedDataItems = [];
+                this._selectedIndexes = [];
+                indexes.splice(0, indexes.length);
+
+                return removed;
+            }
+
             if (selectable === true) {
                 index = indexes[position];
-                selectedIndex = selectedIndices[position];
+                selectedIndex = selectedIndexes[position];
 
-                if (selectedIndex !== undefined && (index !== selectedIndex || index === -1)) {
+                if (selectedIndex !== undefined && index !== selectedIndex) {
                     this._getElementByIndex(selectedIndex).removeClass(SELECTED);
 
                     removed.push({
@@ -1096,12 +1111,11 @@ var __meta__ = {
                     this._values = [];
                     this._selectedDataItems = [];
                     this._selectedIndexes = [];
-                    indexes = [];
                 }
             } else if (selectable === "multiple") {
                 for (var i = 0; i < indexes.length; i++) {
-                    position = $.inArray(indexes[i], selectedIndices);
-                    selectedIndex = selectedIndices[position];
+                    position = $.inArray(indexes[i], selectedIndexes);
+                    selectedIndex = selectedIndexes[position];
 
                     if (selectedIndex !== undefined) {
                         this._getElementByIndex(selectedIndex).removeClass(SELECTED);
@@ -1127,55 +1141,69 @@ var __meta__ = {
         },
 
         _select: function(indexes) {
-            var singleSelection = this.options.selectable !== "multiple",
+            var that = this,
+                singleSelection = this.options.selectable !== "multiple",
                 valueField = this.options.dataValueField,
+                dataSource = this.dataSource,
                 index, dataItem, selectedValue, element,
+                page, skip, oldSkip,
+                take = this.itemCount,
                 added = [];
 
+            if (singleSelection) {
+                that._selectedIndexes = [];
+                that._selectedDataItems = [];
+                that._values = [];
+            }
+
+            oldSkip = dataSource.skip();
+/*
             for (var i = 0; i < indexes.length; i++) {
                 index = indexes[i];
-                dataItem = this._view[index] ? this._view[index].item : null;
+                page = index < take ? 1 : Math.floor(index / take) + 1;
+                skip = (page - 1) * take;
 
-                if (isPrimitive(dataItem)) {
-                    selectedValue = dataItem ? dataItem : null;
-                } else {
-                    selectedValue = dataItem ? dataItem[valueField] : null;
-                }
+                that.mute(function() {
+                    dataSource.range(skip, take); //switch the range to get the dataItem
 
-                if (!selectedValue && selectedValue !== 0) {
-                    if (index === -1 && this.optionInstance) { //option label is selected
-                        selectedValue = this.optionInstance.value;
-                    } else {
-                        return false; //return false if there is no item to select
-                    }
-                }
-
-                element = this._getElementByIndex(index);
-
-                if (!element.hasClass(SELECTED)) {
-                    if (singleSelection) {
-                        this.items().add(this.optionLabel).removeClass(SELECTED);
-                        this._values = [selectedValue];
-                        this._selectedDataItems = [dataItem];
-                        this._selectedIndexes = [index];
-
-                    } else {
-                        this._values.push(selectedValue);
-                        this._selectedDataItems.push(dataItem);
-                        this._selectedIndexes.push(index);
-                    }
-
-                    element.addClass(SELECTED);
+                    dataItem = that._findDataItem([index - skip]);
+                    that._selectedIndexes.push(index);
+                    that._selectedDataItems.push(dataItem);
+                    that._values.push(isPrimitive(dataItem) ? dataItem : dataItem[valueField]);
 
                     added.push({
                         index: index,
                         dataItem: dataItem
                     });
-                }
 
-                //this should not be here
-                this._focusedIndex = index;
+                    that._getElementByIndex(index).addClass(SELECTED);
+
+                    dataSource.range(oldSkip, take); //switch back the range
+                });
             }
+*/
+            $.each(indexes, function(_, index) {
+                var page = index < take ? 1 : Math.floor(index / take) + 1;
+                var skip = (page - 1) * take;
+
+                that.mute(function() {
+                    dataSource.range(skip, take); //switch the range to get the dataItem
+
+                    dataItem = that._findDataItem([index - skip]);
+                    that._selectedIndexes.push(index);
+                    that._selectedDataItems.push(dataItem);
+                    that._values.push(isPrimitive(dataItem) ? dataItem : dataItem[valueField]);
+
+                    added.push({
+                        index: index,
+                        dataItem: dataItem
+                    });
+
+                    that._getElementByIndex(index).addClass(SELECTED);
+
+                    dataSource.range(oldSkip, take); //switch back the range
+                });
+            });
 
             return added;
         },
