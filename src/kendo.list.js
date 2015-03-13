@@ -35,6 +35,7 @@ var __meta__ = {
         WIDTH = "width",
         extend = $.extend,
         proxy = $.proxy,
+        isArray = $.isArray,
         browser = support.browser,
         isIE8 = browser.msie && browser.version < 9,
         quotRegExp = /"/g,
@@ -121,7 +122,6 @@ var __meta__ = {
             }
         },
 
-        //TODO: should return promises
         _filterSource: function(filter, force) {
             var that = this;
             var options = that.options;
@@ -275,7 +275,6 @@ var __meta__ = {
             that.ul.attr("aria-live", !options.filter || options.filter === "none" ? "off" : "polite");
         },
 
-        //TODO: this should go into list "change|select" event
         _blur: function() {
             var that = this;
 
@@ -341,7 +340,6 @@ var __meta__ = {
             return value;
         },
 
-        //TODO: call this after ListView binding
         _height: function(length) {
             if (length) {
                 var that = this,
@@ -466,7 +464,6 @@ var __meta__ = {
             that._touchScroller = kendo.touchScroller(that.popup.element);
         },
 
-        //TODO: This should be done on every update of VirtualList
         _makeUnselectable: function() {
             if (isIE8) {
                 this.list.find("*").not(".k-textbox").attr("unselectable", "on");
@@ -737,7 +734,6 @@ var __meta__ = {
                     that.toggle(down);
                 } else {
                     if (!this.listView.isBound()) {
-                        //TODO: move this outside and accept callback. Thus value method can use it too.
                         if (!this._fetch) {
                             this.dataSource.one(CHANGE, function() {
                                 that._move(e);
@@ -812,7 +808,6 @@ var __meta__ = {
                     this.listView.value(this.input.val());
                 }
 
-                //TODO: refactor
                 if (this._focusElement) {
                     this._focusElement(that.wrapper);
                 }
@@ -915,7 +910,6 @@ var __meta__ = {
             }
         },
 
-        //TODO: Refactor
         _cascade: function() {
             var that = this,
                 options = that.options,
@@ -925,8 +919,6 @@ var __meta__ = {
                 change;
 
             if (cascade) {
-                //that.listView.value(options.value || that._accessor());
-
                 parentElement = $("#" + cascade);
                 parent = parentElement.data("kendo" + options.name);
 
@@ -1031,7 +1023,7 @@ var __meta__ = {
 
             this._selectedIndices = [];
 
-            this._dataContext = [];
+            this._view = [];
             this._dataItems = [];
             this._values = [];
 
@@ -1090,7 +1082,6 @@ var __meta__ = {
             that.dataSource = dataSource.bind(CHANGE, that._refreshHandler);
         },
 
-        //Test this
         setOptions: function(options) {
             Widget.fn.setOptions.call(this, options);
 
@@ -1099,8 +1090,8 @@ var __meta__ = {
             }
 
 
-            this._fixedHeader(); //TODO: test this
-            this._getter(); //TODO: test this
+            this._fixedHeader();
+            this._getter();
             this._templates();
         },
 
@@ -1176,7 +1167,7 @@ var __meta__ = {
             var current = this.focus();
 
             if (!current) {
-                current = $(this.element[0].children[0]);
+                current = 0;
             } else {
                 current = current.next();
             }
@@ -1188,7 +1179,7 @@ var __meta__ = {
             var current = this.focus();
 
             if (!current) {
-                current = $(this.element[0].children[this.element[0].children.length - 1]);
+                current = this.element[0].children.length - 1;
             } else {
                 current = current.prev();
             }
@@ -1204,15 +1195,304 @@ var __meta__ = {
             this.focus(this.element[0].children[this.element[0].children.length - 1]);
         },
 
+        focus: function(candidate) {
+            var that = this;
+            var id = that._optionID;
+            var hasCandidate;
+
+            if (candidate === undefined) {
+                return that._current;
+            }
+
+            candidate = that._get(candidate);
+            candidate = candidate[candidate.length - 1];
+            candidate = $(this.element[0].children[candidate]);
+
+            if (that._current) {
+                that._current
+                    .removeClass(FOCUSED)
+                    .removeAttr("aria-selected")
+                    .removeAttr(ID);
+
+                that.trigger("deactivate");
+            }
+
+            hasCandidate = !!candidate[0];
+
+            if (hasCandidate) {
+                candidate.addClass(FOCUSED);
+                that.scroll(candidate);
+
+                candidate.attr("id", id);
+            }
+
+            that._current = hasCandidate ? candidate : null;
+            that.trigger("activate");
+        },
+
+        select: function(indices) {
+            var selectable = this.options.selectable;
+            var singleSelection = selectable !== "multiple" && selectable !== false;
+
+            var added = [];
+            var removed;
+
+            if (indices === undefined) {
+                return this._selectedIndices.slice();
+            }
+
+            indices = this._get(indices);
+
+            if (singleSelection) {
+                if ($.inArray(indices[indices.length - 1], this._selectedIndices) !== -1) {
+                    return;
+                }
+            }
+
+            removed = this._deselect(indices);
+
+            if (indices.length) {
+                if (singleSelection) {
+                    indices = [indices[indices.length - 1]];
+                }
+
+                added = this._select(indices);
+            }
+
+            if (added.length || removed.length) {
+                this.trigger("change", {
+                    added: added,
+                    removed: removed
+                });
+            }
+        },
+
+        value: function(value) {
+            if (value === undefined) {
+                return this._values.slice(0);
+            }
+
+            if (value === "" || value === null) {
+                value = [];
+            }
+
+            value = $.isArray(value) || value instanceof ObservableArray ? value.slice(0) : [value];
+            value = value.slice(0);
+
+            this._values = value;
+            this._selectedIndices = [];
+            this._dataItems = [];
+
+            if (this.isBound()) {
+                this._values = []; //select will set value again
+                this.select(this._valueIndices(value));
+            }
+        },
+
+        data: function() {
+            var that = this;
+            var data = that.dataSource.view();
+            var first = that.options.optionLabel;
+            var length = data.length;
+            var idx = 0;
+
+            if (first && length) {
+                first = new ObservableArray([first]);
+
+                for (; idx < length; idx++) {
+                    first.push(data[idx]);
+                }
+                data = first;
+            }
+
+            return data;
+        },
+
+        filter: function(isFilter) {
+            this._isFilter = isFilter;
+        },
+
         _click: function(e) {
             if (!e.isDefaultPrevented()) {
                 this.trigger("click", { item: $(e.currentTarget) });
             }
         },
 
+        _dataItemPosition: function(dataItem, values) {
+            var value = this._valueGetter(dataItem);
+            var index = -1;
+
+            for (var idx = 0; idx < values.length; idx++) {
+                if (value == values[idx]) {
+                    index = idx;
+                    break;
+                }
+            }
+
+            return index;
+        },
+
+        _valueIndices: function(values) {
+            var data = this._view;
+            var indices = [];
+            var idx = 0;
+            var index;
+
+            if (!values.length) {
+                return [];
+            }
+
+            for (; idx < data.length; idx++) {
+                index = this._dataItemPosition(data[idx].item, values);
+
+                indices[index] = idx;
+            }
+
+            return this._normalizeIndices(indices);
+        },
+
+        _getter: function() {
+            this._valueGetter = kendo.getter(this.options.dataValueField);
+        },
+
+        _isNew: function(dataItem) {
+            var getter = this._valueGetter;
+            var isNew = true;
+            var idx = 0;
+
+            var value = getter(dataItem);
+
+            for (; idx < this._dataItems.length; idx++) {
+                dataItem = this._dataItems[idx];
+
+                if (dataItem && getter(this._dataItems[idx]) === value) {
+                    isNew = false;
+                    break;
+                }
+            }
+
+            return isNew;
+        },
+
+        _deselect: function(indices) {
+            var selectable = this.options.selectable;
+            var removed = [];
+
+            if (selectable === true) {
+                removed = this._singleDeselect();
+            } else if (selectable === "multiple") {
+                removed = this._multipleDeselect(indices);
+            }
+
+            return removed;
+        },
+
+        _singleDeselect: function() {
+            var children = this.element[0].children;
+            var selectedIndices = this._selectedIndices;
+            var removed = [];
+            var idx = 0;
+
+            for (; idx < selectedIndices.length; idx++) {
+                $(children[selectedIndices[idx]]).removeClass("k-state-selected");
+
+                removed.push({
+                    position: idx,
+                    dataItem: this._dataItems[idx]
+                });
+            }
+
+            this._values = [];
+            this._dataItems = [];
+            this._selectedIndices = [];
+
+            return removed;
+        },
+
+        _multipleDeselect: function(indices) {
+            var selectedIndices = this._selectedIndices;
+            var children = this.element[0].children;
+            var dataItems = this._dataItems;
+            var values = this._values;
+            var removed = [];
+
+            var index, selectedIndex;
+            var removedIndices = 0;
+            var i, j;
+
+            for (i = 0; i < indices.length; i++) {
+                index = indices[i];
+
+                if (!$(children[index]).hasClass("k-state-selected")) {
+                    continue;
+                }
+
+                for (j = 0; j < selectedIndices.length; j++) {
+                    selectedIndex = selectedIndices[j];
+
+                    if (selectedIndex === index) {
+                        $(children[selectedIndex]).removeClass("k-state-selected");
+
+                        removed.push({
+                            position: j + removedIndices,
+                            dataItem: dataItems.splice(j, 1)[0]
+                        });
+
+                        selectedIndices.splice(j, 1);
+
+                        indices.splice(i, 1);
+                        values.splice(j, 1);
+
+                        removedIndices += 1;
+                        i -= 1;
+                        j -= 1;
+                        break;
+                    }
+                }
+            }
+
+            return removed;
+        },
+
+        _select: function(indices) {
+            var children = this.element[0].children;
+            var data = this._view;
+            var dataItem, index;
+            var added = [];
+            var idx = 0;
+
+            if (indices[indices.length - 1] !== -1) {
+                this.focus(indices);
+            }
+
+            for (; idx < indices.length; idx++) {
+                index = indices[idx];
+                dataItem = data[index];
+
+                if (index === -1 || !dataItem) {
+                    continue;
+                }
+
+                dataItem = dataItem.item;
+
+                this._selectedIndices.push(index);
+                this._dataItems.push(dataItem);
+                this._values.push(this._valueGetter(dataItem));
+
+                $(children[index]).addClass("k-state-selected").attr("aria-selected", true);
+
+                added.push({
+                    dataItem: dataItem
+                });
+            }
+
+            return added;
+        },
+
+        /*
         _get: function(candidate) {
             var isArray = $.isArray(candidate);
-            var data = this._dataContext;
+            var data = this._view;
             var found = false;
             var result = [];
             var i, idx;
@@ -1264,242 +1544,22 @@ var __meta__ = {
             }
 
             return result;
-        },
+        },*/
 
-        focus: function(candidate) {
-            var that = this;
-            var id = that._optionID;
-            var length;
+        _get: function(candidate) {
+            if (typeof candidate === "number") {
+                candidate = [candidate];
+            } else if (!isArray(candidate)) {
+                candidate = $(candidate).data("index");
 
-            if (candidate === undefined) {
-                return that._current;
-            }
-
-            candidate = that._get(candidate);
-
-            if (that._current) {
-                that._current
-                    .removeClass(FOCUSED)
-                    .removeAttr("aria-selected")
-                    .removeAttr(ID);
-
-                that.trigger("deactivate");
-            }
-
-            length = candidate.length;
-
-            if (length) {
-                candidate = candidate[length - 1].element;
-                candidate.addClass(FOCUSED);
-                that.scroll(candidate);
-
-                candidate.attr("id", id);
-            }
-
-            that._current = candidate && candidate[0] ? candidate : null;
-
-            that.trigger("activate");
-        },
-
-        select: function(candidate) {
-            var data = this._dataContext;
-            var added = [];
-            var removed;
-            var dataItem;
-            var entry;
-            var index;
-            var idx;
-
-            if (candidate === undefined) {
-                return this._selectedIndices.slice();
-            }
-
-            candidate = this._get(candidate);
-
-            removed = this._deselect(candidate);
-
-            if (candidate.length) {
-                if (this.options.selectable !== "multiple") {
-                    candidate = [candidate[candidate.length - 1]];
+                if (candidate === undefined) {
+                    candidate = -1;
                 }
 
-                this.focus(candidate);
-
-                for (idx = 0; idx < candidate.length; idx++) {
-                    entry = candidate[idx];
-                    index = entry.index;
-                    dataItem = data[index];
-
-                    if (index === -1 || !dataItem) {
-                        continue;
-                    }
-
-                    entry.element.addClass("k-state-selected").attr("aria-selected", true);
-
-                    this._selectedIndices.push(index);
-
-                    dataItem = dataItem.item;
-                    this._dataItems.push(dataItem);
-                    this._values.push(this._valueGetter(dataItem));
-
-                    added.push({
-                        index: index,
-                        dataItem: dataItem
-                    });
-                }
+                candidate = [candidate];
             }
 
-            //TODO: Test this
-            if (added.length || removed.length) {
-                this.trigger("change", {
-                    added: added,
-                    removed: removed
-                });
-            }
-        },
-
-        value: function(value) {
-            if (value === undefined) {
-                return this._values.slice(0);
-            }
-
-            this._deferredValue = $.Deferred();
-
-            //TODO: test for null value
-            if (value === "" || value === null) {
-                value = [];
-            }
-
-            value = $.isArray(value) || value instanceof ObservableArray ? value.slice(0) : [value];
-
-            this._values = value.slice(0);
-            this._dataItems = [];
-
-            //TODO: Test this
-            if (this.isBound()) {
-                this._render();
-            }
-
-            return this._deferredValue.promise();
-        },
-
-        data: function() {
-            var that = this;
-            var data = that.dataSource.view();
-            var first = that.options.optionLabel;
-            var length = data.length;
-            var idx = 0;
-
-            if (first && length) {
-                first = new ObservableArray([first]);
-
-                for (; idx < length; idx++) {
-                    first.push(data[idx]);
-                }
-                data = first;
-            }
-
-            return data;
-        },
-
-        _getter: function() {
-            this._valueGetter = kendo.getter(this.options.dataValueField);
-        },
-
-        _find: function(dataItem, values) {
-            var getter = this._valueGetter;
-            var value = getter(dataItem);
-            var index = -1;
-
-            for (var idx = 0; idx < values.length; idx++) {
-                if (value == values[idx]) {
-                    values.splice(idx, 1);
-                    index = idx;
-                    break;
-                }
-            }
-
-            return index;
-        },
-
-        _isNew: function(dataItem) {
-            var getter = this._valueGetter;
-            var isNew = true;
-            var idx = 0;
-
-            var value = getter(dataItem);
-
-            for (; idx < this._dataItems.length; idx++) {
-                dataItem = this._dataItems[idx];
-
-                if (dataItem && getter(this._dataItems[idx]) === value) {
-                    isNew = false;
-                    break;
-                }
-            }
-
-            return isNew;
-        },
-
-        _deselect: function(candidate) {
-            var element = this.element[0];
-            var dataItems = this._dataItems;
-            var selectedIndices = this._selectedIndices;
-            var selectable = this.options.selectable;
-            var values = this._values;
-            var removed = [];
-            var selectedItem;
-            var itemElement;
-            var removedIndices = 0;
-            var i, j;
-
-            // single selection
-            if (selectable === true) {
-                for (var idx = 0; idx < selectedIndices.length; idx++) {
-                    $(this.element[0].children[selectedIndices[idx]]).removeClass("k-state-selected");
-                    removed.push({
-                        index: idx,
-                        position: idx, //TODO: Test this
-                        dataItem: this._dataItems[idx]
-                    });
-                }
-
-                this._values = [];
-                this._dataItems = [];
-                this._selectedIndices = [];
-            } else if (selectable === "multiple") {
-                for (i = 0; i < candidate.length; i++) {
-                    itemElement = candidate[i].element;
-
-                    if (!itemElement.hasClass("k-state-selected")) {
-                        continue;
-                    }
-
-                    for (j = 0; j < selectedIndices.length; j++) {
-                        selectedItem = element.children[selectedIndices[j]];
-
-                        if (selectedItem === itemElement[0]) {
-                            $(selectedItem).removeClass("k-state-selected");
-
-                            removed.push({
-                                index: selectedIndices.splice(j, 1),
-                                position: j + removedIndices, //TODO: test this
-                                dataItem: dataItems.splice(j, 1)[0]
-                            });
-
-                            candidate.splice(i, 1);
-                            values.splice(j, 1);
-
-                            i -= 1;
-                            j -= 1;
-                            removedIndices += 1;
-                            break;
-                        }
-                    }
-                }
-            }
-
-            return removed;
+            return candidate;
         },
 
         _template: function() {
@@ -1537,22 +1597,17 @@ var __meta__ = {
             this.templates = templates;
         },
 
-        _normalizeDataItems: function() {
-            var dataItems = this._dataItems;
-            var indices = this._selectedIndices;
-
-            var newDataItems = [];
+        _normalizeIndices: function(indices) {
             var newIndices = [];
+            var idx = 0;
 
-            for (var idx = 0; idx < dataItems.length; idx++) {
-                if (dataItems[idx] !== undefined) {
-                    newDataItems.push(dataItems[idx]);
+            for (; idx < indices.length; idx++) {
+                if (indices[idx] !== undefined) {
                     newIndices.push(indices[idx]);
                 }
             }
 
-            this._dataItems = newDataItems;
-            this._selectedIndices = newIndices;
+            return newIndices;
         },
 
         _firstVisibleItem: function() {
@@ -1579,7 +1634,7 @@ var __meta__ = {
                 }
             }
 
-            return this._dataContext[$(item).data("index")];
+            return this._view[$(item).data("index")];
         },
 
         _fixedHeader: function() {
@@ -1605,26 +1660,12 @@ var __meta__ = {
 
         _renderItem: function(context, values) {
             var item = '<li tabindex="-1" role="option" unselectable="on" class="k-item';
-            var index = this._find(context.item, values);
+
             var dataItem = context.item;
-            var found = index !== -1;
+            var found = this._isFilter && this._dataItemPosition(dataItem, values) !== -1;
 
             if (found) {
                 item += ' k-state-selected';
-
-                if (this._isNew(dataItem)) {
-                    if (this._dataItems[index] === undefined) {
-                        this._dataItems[index] = dataItem;
-                    } else {
-                        this._dataItems.push(dataItem);
-                    }
-                }
-
-                if (this._selectedIndices[index] === undefined) {
-                    this._selectedIndices[index] = context.index;
-                } else {
-                    this._selectedIndices.push(context.index);
-                }
             }
 
             item += '"' + (found ? ' aria-selected="true"' : "") + ' data-index="' + context.index + '">';
@@ -1677,20 +1718,12 @@ var __meta__ = {
                 }
             }
 
-            this._normalizeDataItems();
-
-            this._dataContext = dataContext;
+            this._view = dataContext;
 
             this.element[0].innerHTML = html;
 
-            this.focus(this._selectedIndices);
-
             if (isGrouped && dataContext.length) {
                 this._renderHeader();
-            }
-
-            if (this._deferredValue) {
-                this._deferredValue.resolve();
             }
         },
 
@@ -1702,9 +1735,12 @@ var __meta__ = {
             this._bound = true;
 
             this.trigger("dataBound");
+
+            if (!this._isFilter) {
+                this.value(this._values);
+            }
         },
 
-        //TODO: test
         isBound: function() {
             return this._bound;
         }

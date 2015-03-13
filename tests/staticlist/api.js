@@ -202,7 +202,25 @@
         equal(children.eq(2).attr("class"), "k-item");
     });
 
-    test("select an item by predicate", function() {
+    test("select method does not unselect already selected item", 0, function() {
+        var list = new StaticList(element, {
+            dataSource: ["item1", "item2", "item3"],
+            template: "#:data#"
+        });
+
+        list.dataSource.read();
+
+        list.select(1);
+
+        list.bind("change", function() {
+            ok(false);
+        });
+
+        list.select(1); //select again
+    });
+
+    //TODO: move to dropdownlist
+    /*test("select an item by predicate", function() {
         var list = new StaticList(element, {
             dataSource: ["item1", "item2", "item3"],
             template: "new #:data#"
@@ -239,6 +257,7 @@
         equal(children.eq(1).attr("class"), "k-item");
         equal(children.eq(2).attr("class"), "k-item");
     });
+    */
 
     test("select an item by index", function() {
         var list = new StaticList(element, {
@@ -789,6 +808,32 @@
         equal(dataItems[1], list.dataSource.view()[0].items[1]);
     });
 
+    test("value method clears selected items", function() {
+        var list = new StaticList(element, {
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "b" },
+                    { name: "item3", type: "a" }
+                ],
+                group: "type"
+            },
+            template: '#:data.name#',
+            groupTemplate: '#:data#',
+            selectable: "multiple",
+            value: ["item2", "item3"]
+        });
+
+        list.dataSource.read();
+
+        list.value([]);
+
+        var dataItems = list.selectedDataItems();
+
+        equal(dataItems.length, 0);
+    });
+
     test("value method sets selected indeces", function() {
         var list = new StaticList(element, {
             dataValueField: "name",
@@ -866,6 +911,50 @@
 
         equal(dataItems.length, 1);
         equal(dataItems[0].name, "item3");
+    });
+
+    test("value method supports null", function() {
+        var list = new StaticList(element, {
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "b" },
+                    { name: "item3", type: "a" }
+                ],
+                group: "type"
+            },
+            template: '#:data.name#',
+            groupTemplate: '#:data#'
+        });
+
+        list.dataSource.read();
+
+        list.value(null);
+
+        ok($.isArray(list.value()));
+    });
+
+    test("value method supports empty string", function() {
+        var list = new StaticList(element, {
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "b" },
+                    { name: "item3", type: "a" }
+                ],
+                group: "type"
+            },
+            template: '#:data.name#',
+            groupTemplate: '#:data#'
+        });
+
+        list.dataSource.read();
+
+        list.value("");
+
+        ok($.isArray(list.value()));
     });
 
     test("next method focuses first item if no items are focused", function() {
@@ -984,5 +1073,18 @@
 
         equal(list.calls("scroll"), 1);
         equal(list.args("scroll")[0], children[2]);
+    });
+
+    test("isBound returns bound state of the list", function() {
+        var list = new StaticList(element, {
+            dataSource: ["item1", "item2", "item3"],
+            template: "#:data#"
+        });
+
+        equal(list.isBound(), false);
+
+        list.dataSource.read();
+
+        equal(list.isBound(), true);
     });
 })();
