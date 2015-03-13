@@ -341,7 +341,7 @@ var __meta__ = {
         _prefetchByValue: function(value) {
             var that = this,
                 dataView = that._dataView,
-                valueField = that.options.dataValueField,
+                valueGetter = that._valueGetter,
                 item, match = false,
                 forSelection = [];
                 
@@ -349,7 +349,7 @@ var __meta__ = {
             for (var i = 0; i < value.length; i++) {
                 for (var idx = 0; idx < dataView.length; idx++) {
                     item = dataView[idx].item;
-                    match = isPrimitive(item) ? value[i] === item : value[i] === item[valueField];
+                    match = isPrimitive(item) ? value[i] === item : value[i] === valueGetter(item);
 
                     if (item && match) {
                         forSelection.push(idx);
@@ -759,6 +759,7 @@ var __meta__ = {
 
             that._saveInitialRanges();
             that._screenHeight();
+            that._buildValueGetter();
             that.itemCount = getItemCount(that.screenHeight, options.listScreens, options.itemHeight);
 
             if (that.itemCount > dataSource.total()) {
@@ -882,7 +883,6 @@ var __meta__ = {
         _itemMapper: function(item, index) {
             var listType = this.options.type,
                 itemHeight = this.options.itemHeight,
-                valueField = this.options.dataValueField,
                 value = this._values,
                 currentIndex = this._focusedIndex,
                 selected = false,
@@ -890,7 +890,8 @@ var __meta__ = {
                 newGroup = false,
                 group = null,
                 nullIndex = -1,
-                match = false;
+                match = false,
+                valueGetter = this._valueGetter;
 
             if (listType === "group") {
                 if (item) {
@@ -904,7 +905,7 @@ var __meta__ = {
 
             if (value.length && item) {
                 for (var i = 0; i < value.length; i++) {
-                    match = isPrimitive(item) ? value[i] === item : value[i] === item[valueField];
+                    match = isPrimitive(item) ? value[i] === item : value[i] === valueGetter(item);
                     if (match) {
                         selected = true;
                         break;
@@ -1151,11 +1152,11 @@ var __meta__ = {
         _select: function(indexes) {
             var that = this,
                 singleSelection = this.options.selectable !== "multiple",
-                valueField = this.options.dataValueField,
                 dataSource = this.dataSource,
                 index, dataItem, selectedValue, element,
                 page, skip, oldSkip,
                 take = this.itemCount,
+                valueGetter = this._valueGetter,
                 added = [];
 
             if (singleSelection) {
@@ -1176,7 +1177,7 @@ var __meta__ = {
                     dataItem = that._findDataItem([index - skip]);
                     that._selectedIndexes.push(index);
                     that._selectedDataItems.push(dataItem);
-                    that._values.push(isPrimitive(dataItem) ? dataItem : dataItem[valueField]);
+                    that._values.push(isPrimitive(dataItem) ? dataItem : valueGetter(dataItem));
 
                     added.push({
                         index: index,
@@ -1212,7 +1213,11 @@ var __meta__ = {
                 this.optionInstance = null;
             }
 
-        }
+        },
+
+        _buildValueGetter: function() {
+            this._valueGetter = kendo.getter(this.options.dataValueField);
+        },
 
     });
 
