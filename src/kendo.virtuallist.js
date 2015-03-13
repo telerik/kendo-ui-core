@@ -302,7 +302,7 @@ var __meta__ = {
 
             if (that._mute) { return; }
 
-            if (!that._fetching && that.dataSource.data().length) {
+            if (!that._fetching) {
                 that._createList();
                 if (that._values.length && !that._filter) {
                     that._prefetchByValue(that._values);
@@ -874,7 +874,7 @@ var __meta__ = {
                 firstVisibleDataItemIndex = Math.floor((scrollTop - list.top) / itemHeight),
                 firstVisibleDataItem = list.items[firstVisibleDataItemIndex];
 
-            if (firstVisibleDataItem.item) {
+            if (firstVisibleDataItem && firstVisibleDataItem.item) {
                 var firstVisibleGroup = firstVisibleDataItem.group;
 
                 if (firstVisibleGroup !== group) {
@@ -956,8 +956,8 @@ var __meta__ = {
         _getDataItemsCollection: function(scrollTop, lastScrollTop) {
             var items = this._range(this._listIndex(scrollTop, lastScrollTop));
             return {
-                index: items[0].index,
-                top: items[0].top,
+                index: items.length ? items[0].index : 0,
+                top: items.length ? items[0].top : 0,
                 items: items
             };
         },
