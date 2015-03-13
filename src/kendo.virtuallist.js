@@ -471,7 +471,7 @@ var __meta__ = {
             }
 
             if (candidate instanceof Array) {
-                candidate = candidate[candidate.length - 1];
+                candidate = lastFrom(candidate);
             }
 
             if (isNaN(candidate)) {
@@ -581,7 +581,7 @@ var __meta__ = {
             } else {
                 if (singleSelection) {
                     this._activeDeferred = null;
-                    indexes = [indexes[indexes.length - 1]];
+                    indexes = [lastFrom(indexes)];
                 }
 
                 var done = function() {
