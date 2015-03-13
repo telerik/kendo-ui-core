@@ -219,46 +219,6 @@
         list.select(1); //select again
     });
 
-    //TODO: move to dropdownlist
-    /*test("select an item by predicate", function() {
-        var list = new StaticList(element, {
-            dataSource: ["item1", "item2", "item3"],
-            template: "new #:data#"
-        });
-
-        list.dataSource.read();
-
-        list.select(function(data) {
-            return data === "item2";
-        });
-
-        var children = element.children();
-
-        equal(children.eq(0).attr("class"), "k-item");
-        equal(children.eq(1).attr("class"), "k-item k-state-focused k-state-selected");
-        equal(children.eq(2).attr("class"), "k-item");
-    });
-
-    test("select method deselects items if predicate does not find item", function() {
-        var list = new StaticList(element, {
-            dataSource: ["item1", "item2", "item3"],
-            template: "new #:data#"
-        });
-
-        list.dataSource.read();
-
-        list.select(function(data) {
-            return data === "test";
-        });
-
-        var children = element.children();
-
-        equal(children.eq(0).attr("class"), "k-item");
-        equal(children.eq(1).attr("class"), "k-item");
-        equal(children.eq(2).attr("class"), "k-item");
-    });
-    */
-
     test("select an item by index", function() {
         var list = new StaticList(element, {
             template: "#:data#"
@@ -443,7 +403,7 @@
         equal(children.eq(2).attr("class"), "k-item");
     });
 
-    test("select method does nothing in 'multiple' mode if index is -1", function() {
+    test("select method unselects items if empty array is passed", function() {
         var list = new StaticList(element, {
             template: "#:data#"
         });
@@ -459,10 +419,10 @@
         var children = element.children();
 
         list.select(1);
-        list.select(-1);
+        list.select([]);
 
         equal(children.eq(0).attr("class"), "k-item");
-        equal(children.eq(1).attr("class"), "k-item k-state-focused k-state-selected");
+        equal(children.eq(1).attr("class"), "k-item k-state-focused");
         equal(children.eq(2).attr("class"), "k-item");
     });
 
@@ -955,6 +915,28 @@
         list.value("");
 
         ok($.isArray(list.value()));
+    });
+
+    test("value method deselects deselects all items if value is []", function() {
+        var list = new StaticList(element, {
+            template: "#:data#"
+        });
+
+        list.setOptions({
+            dataSource: ["item1", "item2", "item3"],
+            template: "new #:data#"
+        });
+
+        list.dataSource.read();
+
+        var children = element.children();
+
+        list.select(1);
+        list.value([]);
+
+        equal(children.eq(0).attr("class"), "k-item");
+        equal(children.eq(1).attr("class"), "k-item k-state-focused");
+        equal(children.eq(2).attr("class"), "k-item");
     });
 
     test("next method focuses first item if no items are focused", function() {

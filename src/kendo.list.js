@@ -1235,7 +1235,8 @@ var __meta__ = {
             var singleSelection = selectable !== "multiple" && selectable !== false;
 
             var added = [];
-            var removed;
+            var removed = [];
+            var result;
 
             if (indices === undefined) {
                 return this._selectedIndices.slice();
@@ -1243,13 +1244,18 @@ var __meta__ = {
 
             indices = this._get(indices);
 
-            if (singleSelection) {
-                if ($.inArray(indices[indices.length - 1], this._selectedIndices) !== -1) {
-                    return;
-                }
+            if (indices.length === 1 && indices[0] === -1) {
+                indices = [];
             }
 
-            removed = this._deselect(indices);
+            if (singleSelection && $.inArray(indices[indices.length - 1], this._selectedIndices) !== -1) {
+                return;
+            }
+
+            result = this._deselect(indices);
+
+            removed = result.removed;
+            indices = result.indices;
 
             if (indices.length) {
                 if (singleSelection) {
@@ -1259,8 +1265,7 @@ var __meta__ = {
                 added = this._select(indices);
             }
 
-            if (this._clearedValue || added.length || removed.length) {
-                this._clearedValue = false;
+            if (added.length || removed.length) {
                 this.trigger("change", {
                     added: added,
                     removed: removed
@@ -1278,12 +1283,10 @@ var __meta__ = {
             }
 
             value = $.isArray(value) || value instanceof ObservableArray ? value.slice(0) : [value];
-            value = value.slice(0);
 
-            if (this._values.length && !value.length) {
-                this._clearedValue = true;
-            } else {
-                this._clearedValue = false;
+            if (!value.length) {
+                this.select([]);
+                return;
             }
 
             this._values = value;
@@ -1364,103 +1367,70 @@ var __meta__ = {
             this._valueGetter = kendo.getter(this.options.dataValueField);
         },
 
-        _isNew: function(dataItem) {
-            var getter = this._valueGetter;
-            var isNew = true;
-            var idx = 0;
-
-            var value = getter(dataItem);
-
-            for (; idx < this._dataItems.length; idx++) {
-                dataItem = this._dataItems[idx];
-
-                if (dataItem && getter(this._dataItems[idx]) === value) {
-                    isNew = false;
-                    break;
-                }
-            }
-
-            return isNew;
-        },
-
         _deselect: function(indices) {
+            var children = this.element[0].children;
             var selectable = this.options.selectable;
-            var removed = [];
-
-            if (selectable === true) {
-                removed = this._singleDeselect();
-            } else if (selectable === "multiple") {
-                removed = this._multipleDeselect(indices);
-            }
-
-            return removed;
-        },
-
-        _singleDeselect: function() {
-            var children = this.element[0].children;
             var selectedIndices = this._selectedIndices;
-            var removed = [];
-            var idx = 0;
-
-            for (; idx < selectedIndices.length; idx++) {
-                $(children[selectedIndices[idx]]).removeClass("k-state-selected");
-
-                removed.push({
-                    position: idx,
-                    dataItem: this._dataItems[idx]
-                });
-            }
-
-            this._values = [];
-            this._dataItems = [];
-            this._selectedIndices = [];
-
-            return removed;
-        },
-
-        _multipleDeselect: function(indices) {
-            var selectedIndices = this._selectedIndices;
-            var children = this.element[0].children;
             var dataItems = this._dataItems;
             var values = this._values;
             var removed = [];
+            var i = 0;
+            var j;
 
-            var index, selectedIndex;
-            var removedIndices = 0;
-            var i, j;
+            indices = indices.slice();
 
-            for (i = 0; i < indices.length; i++) {
-                index = indices[i];
+            if (selectable === true || !indices.length) {
+                for (; i < selectedIndices.length; i++) {
+                    $(children[selectedIndices[i]]).removeClass("k-state-selected");
 
-                if (!$(children[index]).hasClass("k-state-selected")) {
-                    continue;
+                    removed.push({
+                        position: i,
+                        dataItem: dataItems[i]
+                    });
                 }
 
-                for (j = 0; j < selectedIndices.length; j++) {
-                    selectedIndex = selectedIndices[j];
+                this._values = [];
+                this._dataItems = [];
+                this._selectedIndices = [];
+            } else if (selectable === "multiple") {
+                var index, selectedIndex;
+                var removedIndices = 0;
 
-                    if (selectedIndex === index) {
-                        $(children[selectedIndex]).removeClass("k-state-selected");
+                for (; i < indices.length; i++) {
+                    index = indices[i];
 
-                        removed.push({
-                            position: j + removedIndices,
-                            dataItem: dataItems.splice(j, 1)[0]
-                        });
+                    if (!$(children[index]).hasClass("k-state-selected")) {
+                        continue;
+                    }
 
-                        selectedIndices.splice(j, 1);
+                    for (j = 0; j < selectedIndices.length; j++) {
+                        selectedIndex = selectedIndices[j];
 
-                        indices.splice(i, 1);
-                        values.splice(j, 1);
+                        if (selectedIndex === index) {
+                            $(children[selectedIndex]).removeClass("k-state-selected");
 
-                        removedIndices += 1;
-                        i -= 1;
-                        j -= 1;
-                        break;
+                            removed.push({
+                                position: j + removedIndices,
+                                dataItem: dataItems.splice(j, 1)[0]
+                            });
+
+                            selectedIndices.splice(j, 1);
+                            indices.splice(i, 1);
+                            values.splice(j, 1);
+
+                            removedIndices += 1;
+                            i -= 1;
+                            j -= 1;
+                            break;
+                        }
                     }
                 }
             }
 
-            return removed;
+            return {
+                indices: indices,
+                removed: removed
+            };
         },
 
         _select: function(indices) {
