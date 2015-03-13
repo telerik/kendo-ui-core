@@ -1020,6 +1020,9 @@ var __meta__ = {
                         .on("mouseenter" + STATIC_LIST_NS, "li", function() { $(this).addClass(HOVER); })
                         .on("mouseleave" + STATIC_LIST_NS, "li", function() { $(this).removeClass(HOVER); });
 
+
+            this.header = this.element.before('<div class="k-static-header"></div>').prev();
+
             this.setDataSource(this.options.dataSource);
 
             this._bound = false;
@@ -1034,6 +1037,17 @@ var __meta__ = {
 
             this._getter();
             this._templates();
+
+            this._onScroll = proxy(function() {
+                var that = this;
+                clearTimeout(that._scrollId);
+
+                that._scrollId = setTimeout(function() {
+                    that._renderHeader();
+                }, 100);
+            }, this);
+
+            this._fixedHeader();
 
             var value = this.options.value;
             if (value) {
@@ -1084,6 +1098,8 @@ var __meta__ = {
                 this.setDataSource(options.dataSource);
             }
 
+
+            this._fixedHeader(); //TODO: test this
             this._getter(); //TODO: test this
             this._templates();
         },
@@ -1539,6 +1555,54 @@ var __meta__ = {
             this._selectedIndices = newIndices;
         },
 
+        _firstVisibleItem: function() {
+            var element = this.element[0];
+            var scrollTop = element.scrollTop;
+            var itemHeight = $(element.children[0]).height();
+            var itemIndex = Math.floor(scrollTop / itemHeight) || 0;
+            var item = element.children[itemIndex];
+            var forward = item.offsetTop < scrollTop;
+
+            while (item) {
+                if (forward) {
+                    if (item.offsetTop >= scrollTop || !item.nextSibling) {
+                        break;
+                    }
+
+                    item = item.nextSibling;
+                } else {
+                    if (item.offsetTop <= scrollTop || !item.previousSibling) {
+                        break;
+                    }
+
+                    item = item.previousSibling;
+                }
+            }
+
+            return this._dataContext[$(item).data("index")];
+        },
+
+        _fixedHeader: function() {
+            if (this.templates.fixedGroupTemplate) {
+                this.element.scroll(this._onScroll);
+            } else {
+                this.element.off("scroll", this._onScroll);
+            }
+        },
+
+        _renderHeader: function() {
+            var template = this.templates.fixedGroupTemplate;
+            if (!template) {
+                return;
+            }
+
+            var visibleItem = this._firstVisibleItem();
+
+            if (visibleItem) {
+                this.header.html(template(visibleItem.group));
+            }
+        },
+
         _renderItem: function(context, values) {
             var item = '<li tabindex="-1" role="option" unselectable="on" class="k-item';
             var index = this._find(context.item, values);
@@ -1587,8 +1651,9 @@ var __meta__ = {
             this._selectedIndices = [];
 
             var group, newGroup, j;
+            var isGrouped = this.dataSource.group().length;
 
-            if (!!this.dataSource.group().length) {
+            if (isGrouped) {
                 for (i = 0; i < view.length; i++) {
                     group = view[i];
                     newGroup = true;
@@ -1619,6 +1684,10 @@ var __meta__ = {
             this.element[0].innerHTML = html;
 
             this.focus(this._selectedIndices);
+
+            if (isGrouped && dataContext.length) {
+                this._renderHeader();
+            }
 
             if (this._deferredValue) {
                 this._deferredValue.resolve();

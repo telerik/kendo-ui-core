@@ -78,6 +78,16 @@
         ok(list.templates.fixedGroupTemplate);
     });
 
+    test("StaticList appends fixed header element before element", function() {
+        var list = new StaticList(element, {
+            fixedGroupTemplate: "test"
+        });
+
+        var header = element.prev();
+
+        ok(header.hasClass("k-static-header"));
+    });
+
     test("StaticList creates a dataSource", function() {
         var list = new StaticList(element, {
             dataSource: ["item"]

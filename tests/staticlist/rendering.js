@@ -109,6 +109,105 @@
         ok(children.eq(2).children(".k-group")[0]);
     });
 
+    test("kendoStaticList renders fixed grouped header", function() {
+        var list = new StaticList(element, {
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "a" },
+                    { name: "item3", type: "b" }
+                ],
+                group: "type"
+            },
+            template: '#:data.name#',
+            groupTemplate: '#:data#',
+            fixedGroupTemplate: '#:data#'
+        });
+
+        list.dataSource.read();
+
+        var header = list.header;
+
+        equal(header.html(), "a");
+    });
+
+    test("kendoStaticList does not render fixed grouped header if no data", function() {
+        var list = new StaticList(element, {
+            dataValueField: "name",
+            dataSource: {
+                data: [ ],
+                group: "type"
+            },
+            template: '#:data.name#',
+            groupTemplate: '#:data#',
+            fixedGroupTemplate: '#:data#'
+        });
+
+        list.dataSource.read();
+
+        var header = list.header;
+
+        equal(header.html(), "");
+    });
+
+    test("kendoStaticList does not render fixed grouped header if data is not grouped", function() {
+        var list = new StaticList(element, {
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "a" },
+                    { name: "item3", type: "b" }
+                ]
+            },
+            template: '#:data.name#',
+            groupTemplate: '#:data#',
+            fixedGroupTemplate: '#:data#'
+        });
+
+        list.dataSource.read();
+
+        var header = list.header;
+
+        equal(header.html(), "");
+    });
+
+    test("kendoStaticList renders fixed header to first visible item after scroll", function() {
+        var wrapper = $('<div style="overflow:hidden;height:60px;position:absolute;"/>').appendTo(QUnit.fixture).append(element.height("100%"));
+
+        var list = new StaticList(element, {
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "a" },
+                    { name: "item3", type: "b" },
+                    { name: "item4", type: "a" },
+                    { name: "item5", type: "a" },
+                    { name: "item6", type: "b" },
+                    { name: "item7", type: "a" },
+                    { name: "item8", type: "a" },
+                    { name: "item9", type: "b" }
+                ],
+                group: "type"
+            },
+            template: '#:data.name#',
+            groupTemplate: '#:data#',
+            fixedGroupTemplate: '#:data#'
+        });
+
+        list.dataSource.read();
+
+        element[0].scrollTop = 145; //scroll
+
+        list.refresh();
+
+        var header = list.header;
+
+        equal(header.html(), "b");
+    });
+
     test("kendoStaticList renders selected items during rendering of a grouped data source", function() {
         var list = new StaticList(element, {
             dataValueField: "name",
