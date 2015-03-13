@@ -1224,7 +1224,7 @@ var __meta__ = {
 
         _buildValueGetter: function() {
             this._valueGetter = kendo.getter(this.options.dataValueField);
-        },
+        }
 
     });
 
