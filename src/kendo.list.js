@@ -1259,7 +1259,8 @@ var __meta__ = {
                 added = this._select(indices);
             }
 
-            if (added.length || removed.length) {
+            if (this._clearedValue || added.length || removed.length) {
+                this._clearedValue = false;
                 this.trigger("change", {
                     added: added,
                     removed: removed
@@ -1278,6 +1279,12 @@ var __meta__ = {
 
             value = $.isArray(value) || value instanceof ObservableArray ? value.slice(0) : [value];
             value = value.slice(0);
+
+            if (this._values.length && !value.length) {
+                this._clearedValue = true;
+            } else {
+                this._clearedValue = false;
+            }
 
             this._values = value;
             this._selectedIndices = [];
@@ -1345,7 +1352,9 @@ var __meta__ = {
             for (; idx < data.length; idx++) {
                 index = this._dataItemPosition(data[idx].item, values);
 
-                indices[index] = idx;
+                if (index !== -1) {
+                    indices[index] = idx;
+                }
             }
 
             return this._normalizeIndices(indices);

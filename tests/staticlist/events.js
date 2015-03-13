@@ -187,6 +187,23 @@
         list.select([1, 2]);
     });
 
+    test("widget triggers change when value is cleared", 1, function() {
+        var list = new StaticList(element, {
+            dataSource: ["item1", "item2", "item3"],
+            template: "#:data#",
+            selectable: "multiple",
+            value: ["item1"]
+        });
+
+        list.dataSource.read();
+
+        list.bind("change", function(e) {
+            ok(true);
+        });
+
+        list.value([]);
+    });
+
     test("widget triggers activate event when the item is focused", 1, function() {
         var list = new StaticList(element, {
             dataSource: ["item"],
