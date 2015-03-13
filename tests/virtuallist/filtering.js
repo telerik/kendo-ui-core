@@ -80,6 +80,7 @@
             });
 
             virtualList = new VirtualList(container, {
+                autoBind: false,
                 dataSource: asyncDataSource,
                 template: "#=text# #=letter#",
                 dataValueField: "value",
@@ -103,107 +104,98 @@
     //rendering
 
     asyncTest("items are rendered after data is filtered", 1, function() {
-        setTimeout(function() {
-            asyncDataSource.filter({ field: "letter", operator: "eq", value: "b" });
-
-            setTimeout(function() {
+        asyncDataSource.read().then(function() {
+            virtualList.one("listBound", function() {
                 start();
                 equal(virtualList.items().first().text(), "Item 1 b");
-            }, 300);
-        }, 100);
+            });
+            asyncDataSource.filter({ field: "letter", operator: "eq", value: "b" });
+        });
     });
 
     asyncTest("itemCount changes after filtering", 2, function() {
-        setTimeout(function() {
-            equal(virtualList.itemCount, 16);
-            asyncDataSource.filter({ field: "letter", operator: "eq", value: "a" });
-
-            setTimeout(function() {
+        asyncDataSource.read().then(function() {
+            virtualList.one("listBound", function() {
                 start();
                 equal(virtualList.itemCount, 9);
-            }, 300);
-        }, 100);
+            });
+            equal(virtualList.itemCount, 16);
+            asyncDataSource.filter({ field: "letter", operator: "eq", value: "a" });
+        });
     });
 
     asyncTest("itemCount changes after filtering", 2, function() {
-        setTimeout(function() {
-            equal(virtualList.itemCount, 16);
-            asyncDataSource.filter({ field: "letter", operator: "eq", value: "a" });
-
-            setTimeout(function() {
+        asyncDataSource.read().then(function() {
+            virtualList.one("listBound", function() {
                 start();
                 equal(virtualList.itemCount, 9);
-            }, 300);
-        }, 100);
+            });
+            equal(virtualList.itemCount, 16);
+            asyncDataSource.filter({ field: "letter", operator: "eq", value: "a" });
+        });
     });
 
     asyncTest("list renders only the required amount of item placeholders after filtering", 2, function() {
-        setTimeout(function() {
-            equal(virtualList.items().length, 16);
-            asyncDataSource.filter({ field: "letter", operator: "eq", value: "a" });
-
-            setTimeout(function() {
+        asyncDataSource.read().then(function() {
+            virtualList.one("listBound", function() {
                 start();
                 equal(virtualList.items().length, 9);
-            }, 300);
-        }, 100);
+            });
+            equal(virtualList.items().length, 16);
+            asyncDataSource.filter({ field: "letter", operator: "eq", value: "a" });
+        });
     });
 
     asyncTest("works if the dataSource is filtered before list is created", 2, function() {
         asyncDataSource.filter({ field: "letter", operator: "eq", value: "a" });
-
-        setTimeout(function() {
+        virtualList.one("listBound", function() {
             start();
             equal(virtualList.items().length, 9);
             equal(virtualList.items().first().text(), "Item 0 a");
-        }, 100);
+        });
     });
 
     asyncTest("sets the correct container height after filtering", 1, function() {
-        setTimeout(function() {
-            asyncDataSource.filter({ field: "letter", operator: "eq", value: "a" });
-
-            setTimeout(function() {
+        asyncDataSource.read().then(function() {
+            virtualList.one("listBound", function() {
                 start();
                 equal(virtualList.heightContainer.offsetHeight, 9 * 50);
-            }, 300);
-        }, 100);
+            });
+            asyncDataSource.filter({ field: "letter", operator: "eq", value: "a" });
+        });
     });
 
     asyncTest("can be scrolled after dataSource is filtered", 1, function() {
-        setTimeout(function() {
-            asyncDataSource.filter({ field: "letter", operator: "eq", value: "b" });
-
-            setTimeout(function() {
+        asyncDataSource.read().then(function() {
+            virtualList.one("listBound", function() {
                 start();
                 scroll(container, 4 * CONTAINER_HEIGHT);
                 equal(virtualList.items().last().text(), "Item 29 b");
-            }, 300);
-        }, 100);
+            });
+            asyncDataSource.filter({ field: "letter", operator: "eq", value: "b" });
+        });
     });
 
     asyncTest("does not clear the values after filtering", 1, function() {
-        setTimeout(function() {
-            virtualList.value([0]);
-            asyncDataSource.filter({ field: "letter", operator: "eq", value: "b" });
-
-            setTimeout(function() {
+        asyncDataSource.read().then(function() {
+            virtualList.one("listBound", function() {
                 start();
                 equal(virtualList.value()[0], 0);
-            }, 300);
-        }, 100);
+            });
+            virtualList.value([0]);
+            asyncDataSource.filter({ field: "letter", operator: "eq", value: "b" });
+        });
     });
 
     asyncTest("keeps selection after filtering", 1, function() {
-        setTimeout(function() {
-            virtualList.select(virtualList.items().first());
-            asyncDataSource.filter({ field: "letter", operator: "eq", value: "a" });
-
-            setTimeout(function() {
+        asyncDataSource.read().then(function() {
+            virtualList.one("listBound", function() {
                 start();
                 ok(virtualList.items().first().hasClass(SELECTED), "item is selected");
-            }, 300);
-        }, 100);
+            });
+            virtualList.select(virtualList.items().first());
+            asyncDataSource.filter({ field: "letter", operator: "eq", value: "a" });
+        });
     });
 
 })();

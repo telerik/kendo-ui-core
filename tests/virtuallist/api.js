@@ -416,6 +416,15 @@
         });
     });
 
+    asyncTest("filter method sets the filter state", 1, function() {
+        var virtualList = new VirtualList(container, virtualSettings);
+        asyncDataSource.read().then(function() {
+            start();
+            virtualList.filter(true);
+            ok(virtualList.filter());
+        });
+    });
+
     asyncTest("value method prefetches values (single selection)", 1, function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             selectable: true,

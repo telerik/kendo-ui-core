@@ -193,6 +193,7 @@ var __meta__ = {
             var that = this;
             that._listCreated = false;
             that._fetching = false;
+            that._filter = false;
 
             Widget.fn.init.call(that, element, options);
 
@@ -303,7 +304,7 @@ var __meta__ = {
 
             if (!that._fetching && that.dataSource.data().length) {
                 that._createList();
-                if (that._values.length) {
+                if (that._values.length && !that._filter) {
                     that._prefetchByValue(that._values);
                 }
                 that._listCreated = true;
@@ -633,6 +634,13 @@ var __meta__ = {
             this._mute = true;
             proxy(callback(), this);
             this._mute = false;
+        },
+
+        filter: function(filter) {
+            if (filter === undefined) {
+                return this._filter;
+            }
+            this._filter = filter;
         },
 
         _getElementByIndex: function(index) {
@@ -1157,31 +1165,7 @@ var __meta__ = {
             }
 
             oldSkip = dataSource.skip();
-/*
-            for (var i = 0; i < indexes.length; i++) {
-                index = indexes[i];
-                page = index < take ? 1 : Math.floor(index / take) + 1;
-                skip = (page - 1) * take;
 
-                that.mute(function() {
-                    dataSource.range(skip, take); //switch the range to get the dataItem
-
-                    dataItem = that._findDataItem([index - skip]);
-                    that._selectedIndexes.push(index);
-                    that._selectedDataItems.push(dataItem);
-                    that._values.push(isPrimitive(dataItem) ? dataItem : dataItem[valueField]);
-
-                    added.push({
-                        index: index,
-                        dataItem: dataItem
-                    });
-
-                    that._getElementByIndex(index).addClass(SELECTED);
-
-                    dataSource.range(oldSkip, take); //switch back the range
-                });
-            }
-*/
             $.each(indexes, function(_, index) {
                 var page = index < take ? 1 : Math.floor(index / take) + 1;
                 var skip = (page - 1) * take;
