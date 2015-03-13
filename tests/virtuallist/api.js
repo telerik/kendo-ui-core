@@ -479,4 +479,35 @@
         });
     });
 
+    asyncTest("when empty array is passed to the value method removed items are available in the change event", 1, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: "multiple",
+            value: [1, 2, 3]
+        }));
+
+        asyncDataSource.read().then(function() {
+            virtualList.bind("change", function(e) {
+                start();
+                equal(e.removed.length, 3);
+            });
+            virtualList.value([]);
+        });
+    });
+
+    asyncTest("value method clears previous values and dataItems", 2, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: "multiple",
+            value: [1, 2, 3]
+        }));
+
+        asyncDataSource.read().then(function() {
+            virtualList.bind("change", function() {
+                start();
+                equal(this.value().length, 2);
+                equal(this.selectedDataItems().length, 2);
+            });
+            virtualList.value([4, 5]);
+        });
+    });
+
 })();

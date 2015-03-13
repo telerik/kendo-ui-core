@@ -363,6 +363,7 @@ var __meta__ = {
             }
 
             if (forSelection.length === value.length) {
+                that._values = [];
                 that.select(forSelection);
                 return;
             } 
@@ -372,6 +373,7 @@ var __meta__ = {
                 that.options.valueMapper({
                     value: (this.options.selectable === "multiple") ? value : value[0],
                     success: function(indexes) {
+                        that._values = [];
                         that.select(toArray(indexes));
                     }
                 });

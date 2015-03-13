@@ -183,6 +183,7 @@
                 equal(virtualList.value()[0], 0);
             });
             virtualList.value([0]);
+            virtualList.filter(true);
             asyncDataSource.filter({ field: "letter", operator: "eq", value: "b" });
         });
     });
