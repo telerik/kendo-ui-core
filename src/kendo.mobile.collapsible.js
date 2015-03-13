@@ -59,6 +59,9 @@ var __meta__ = {
             if (that.options.animation) {
                 that.content.addClass(ANIMATED);
                 that.content.height(0);
+                if (that.options.collapsed) {
+                    that.content.hide();
+                }
             } else if (that.options.collapsed) {
                 that.content.hide();
             }
