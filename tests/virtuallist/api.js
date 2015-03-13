@@ -462,4 +462,21 @@
         asyncDataSource.read();
     });
 
+    asyncTest("when empty array is passed to the value method all values are cleared", 3, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: "multiple",
+            value: [1, 2, 3]
+        }));
+
+        asyncDataSource.read().then(function() {
+            virtualList.bind("change", function() {
+                start();
+                ok(true, "change is fired");
+                equal(this.value().length, 0);
+                equal(this.selectedDataItems().length, 0);
+            });
+            virtualList.value([]);
+        });
+    });
+
 })();

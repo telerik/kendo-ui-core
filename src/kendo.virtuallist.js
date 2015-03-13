@@ -329,6 +329,11 @@ var __meta__ = {
                 return that._values;
             }
 
+            if (value instanceof Array && !value.length) {
+                that.select(-1);
+                return;
+            }
+
             that._selectedDataItems = [];
             that._selectedIndexes = [];
             that._values = value = toArray(value);
