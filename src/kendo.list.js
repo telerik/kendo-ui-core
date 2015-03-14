@@ -1050,7 +1050,6 @@ var __meta__ = {
         options: {
             name: "StaticList",
             dataValueField: null,
-            optionLabel: null,
             selectable: true,
             template: null,
             groupTemplate: null,
@@ -1301,21 +1300,22 @@ var __meta__ = {
 
         data: function() {
             var that = this;
-            var data = that.dataSource.view();
-            var first = that.options.optionLabel;
+            var data = that._view;
             var length = data.length;
-            var idx = 0;
+            var result = [];
+            var idx;
 
-            if (first && length) {
-                first = new ObservableArray([first]);
-
-                for (; idx < length; idx++) {
-                    first.push(data[idx]);
+            if (length) {
+                for (idx = 0; idx < length; idx++) {
+                    result.push(data[idx].item);
                 }
-                data = first;
             }
 
-            return data;
+            return result;
+        },
+
+        view: function() {
+
         },
 
         filter: function(isFilter) {
@@ -1665,7 +1665,7 @@ var __meta__ = {
             var idx = 0;
             var context;
             var dataContext = [];
-            var view = this.data();
+            var view = this.dataSource.view();
             var values = this.value();
 
             this._selectedIndices = [];

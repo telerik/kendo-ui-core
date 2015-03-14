@@ -1069,4 +1069,43 @@
 
         equal(list.isBound(), true);
     });
+
+    test("filter method prevent value selection on re-bind", function() {
+        var list = new StaticList(element, {
+            value: "item2",
+            dataSource: ["item1", "item2", "item3"],
+            template: "#:data#"
+        });
+
+        list.filter(true);
+        list.dataSource.filter({
+            field: "",
+            operator: "eq",
+            value: "item1"
+        });
+
+        equal(list.value(), "item2");
+    });
+
+    test("data method returns list of the flatten data", function() {
+        var list = new StaticList(element, {
+            template: "#:data#",
+            groupTemplate: '#:data#',
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "b" },
+                    { name: "item3", type: "a" }
+                ],
+                group: "type"
+            }
+        });
+
+        list.dataSource.read();
+
+        var data = list.data();
+
+        equal(data.length, 3);
+    });
 })();
