@@ -1619,6 +1619,10 @@ var __meta__ = {
             var dataItem = context.item;
             var found = this._isFilter && this._dataItemPosition(dataItem, values) !== -1;
 
+            if (context.newGroup) {
+                item += ' k-first';
+            }
+
             if (found) {
                 item += ' k-state-selected';
             }

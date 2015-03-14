@@ -447,9 +447,9 @@
 
         list.select(1);
 
-        equal(children.eq(0).attr("class"), "k-item");
+        equal(children.eq(0).attr("class"), "k-item k-first");
         equal(children.eq(1).attr("class"), "k-item k-state-focused k-state-selected");
-        equal(children.eq(2).attr("class"), "k-item");
+        equal(children.eq(2).attr("class"), "k-item k-first");
     });
 
     test("select method sets selected data items", function() {
