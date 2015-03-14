@@ -712,4 +712,20 @@
         ok(!optionLabel.hasClass("k-state-focused"));
         ok(!optionLabel.hasClass("k-state-selected"));
     });
+
+    test("widget sets option label value if complex object", function() {
+        var dropdownlist = new DropDownList(input, {
+            dataValueField: "value",
+            dataTextField: "text",
+            dataSource: [{
+                text: "text", value: "value"
+            }],
+            optionLabel: {
+                text: "Any",
+                value: 0
+            }
+        });
+
+        equal(dropdownlist.value(), "0");
+    });
 })();

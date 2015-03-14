@@ -951,7 +951,7 @@ var __meta__ = {
             var value = "";
             var text = "";
             var idx = this.listView.select();
-            var optionLabel = this.optionLabel;
+            var optionLabel = this.options.optionLabel;
 
             idx = idx[idx.length - 1];
             if (idx === undefined) {
@@ -961,13 +961,18 @@ var __meta__ = {
             if (dataItem) {
                 text = dataItem;
                 value = this._dataValue(dataItem);
-                if (optionLabel[0]) {
+                if (optionLabel) {
                     idx += 1;
                 }
-            } else if (optionLabel[0]) {
-                this._focus(optionLabel);
+            } else if (optionLabel) {
+                this._focus(this.optionLabel);
                 text = this._optionLabelText();
-                value = "";
+                if (typeof optionLabel === "string") {
+                    value = "";
+                } else {
+                    value = this._value(optionLabel);
+                }
+
                 idx = 0;
             }
 
