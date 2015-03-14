@@ -401,7 +401,7 @@ var __meta__ = {
             }
 
             that.optionLabelTemplate = template;
-            that.optionLabel = $('<span class="k-list-option">' + template(optionLabel) + '</span>')
+            that.optionLabel = $('<div class="k-list-option">' + template(optionLabel) + '</div>')
                                 .prependTo(that.list)
                                 .click($.proxy(this._click, this));
 
