@@ -637,4 +637,79 @@
 
         ok(dropdownlist.popup.visible());
     });
+
+    //option label
+    test("option label is focused if defined", function() {
+        var dropdownlist = new DropDownList(input, {
+            dataSource: data,
+            optionLabel: "Any"
+        });
+
+        var current = dropdownlist.current();
+
+        ok(current.hasClass("k-list-option"));
+        ok(current.hasClass("k-state-focused"));
+    });
+
+    test("first item is selected on down when option label is focused", function() {
+        var dropdownlist = new DropDownList(input, {
+            dataSource: data,
+            optionLabel: "Any"
+        });
+
+        dropdownlist.wrapper.focus().press(keys.DOWN);
+
+        var current = dropdownlist.current();
+
+        equal(current[0], dropdownlist.ul.children()[0]);
+    });
+
+    test("focus option label on UP when first LI element is focused", function() {
+        var dropdownlist = new DropDownList(input, {
+            dataSource: data,
+            optionLabel: "Any",
+            index: 1
+        });
+
+        dropdownlist.wrapper.focus().press(keys.UP);
+
+        var current = dropdownlist.current();
+
+        ok(current.hasClass("k-list-option"));
+        ok(current.hasClass("k-state-focused"));
+        ok(current.hasClass("k-state-selected"));
+    });
+
+    test("focus optionLabel on HOME", function() {
+        var dropdownlist = new DropDownList(input, {
+            dataSource: data,
+            optionLabel: "Any",
+            index: 1
+        });
+
+        dropdownlist.wrapper.focus().press(keys.HOME);
+
+        var current = dropdownlist.current();
+
+        ok(current.hasClass("k-list-option"));
+        ok(current.hasClass("k-state-focused"));
+        ok(current.hasClass("k-state-selected"));
+    });
+
+    test("unfocus optionLabel on END", function() {
+        var dropdownlist = new DropDownList(input, {
+            dataSource: data,
+            optionLabel: "Any"
+        });
+
+        dropdownlist.wrapper.focus().press(keys.END);
+
+        var optionLabel = dropdownlist.optionLabel;
+        var current = dropdownlist.current();
+
+        equal(current[0], dropdownlist.ul.children()[data.length - 1]);
+
+        ok(!optionLabel.hasClass("k-state-focused"));
+        ok(!optionLabel.hasClass("k-state-selected"));
+    });
 })();

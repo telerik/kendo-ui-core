@@ -336,6 +336,30 @@
         equal(list.children()[0].outerHTML, "<div>Header</div>");
     });
 
+    test("defining option label template", function() {
+        var dropdownlist = new DropDownList(input, {
+            optionLabel: "Select...",
+            optionLabelTemplate: "#= data.toUpperCase() #",
+            headerTemplate: "<div>Header</div>"
+        });
+
+        var optionHeader = dropdownlist.list.children(":first");
+
+        equal(optionHeader[0].outerHTML, '<span class="k-list-option k-state-focused">SELECT...</span>');
+    });
+
+    test("optionLabel template supports complex object", function() {
+        var dropdownlist = new DropDownList(input, {
+            dataTextField: "name",
+            optionLabel: { name: "Select..." },
+            headerTemplate: "<div>Header</div>",
+        });
+
+        var optionHeader = dropdownlist.list.children(":first");
+
+        equal(optionHeader[0].outerHTML, '<span class="k-list-option k-state-focused">Select...</span>');
+    });
+
     test("defining input template", function() {
         var dropdownlist = new DropDownList(input, {
             valueTemplate: "#= data #",
@@ -443,21 +467,9 @@
         equal(dropdownlist.list.height(), 50);
     });
 
-    test("widget creates optionLabel object during init", function() {
-        var dropdownlist = new DropDownList(select, {
-            dataTextField: "text",
-            dataValueField: "value",
-            dataSource: [{text: 1, value: 1}, {text:2, value:2}],
-            optionLabel: "Select..."
-        });
-
-        var optionLabel = dropdownlist.listView.options.optionLabel;
-
-        equal(optionLabel.text, "Select...");
-        equal(optionLabel.value, "");
-    });
-
     test("persist selected index on rebind", function() {
+        select[0].selectedIndex = -1;
+
         var dropdownlist = new DropDownList(select, {
             dataTextField: "text",
             dataValueField: "value",
@@ -472,8 +484,8 @@
     });
 
     test("optionLabel is not lost when textField and valueField are equal", function() {
-        var data = [{text: 1, value: 1}, {text:2, value:2}],
-        dropdownlist = new DropDownList(input, {
+        var data = [{text: 1, value: 1}, {text:2, value:2}];
+        var dropdownlist = new DropDownList(input, {
             dataTextField: "text",
             dataValueField: "text",
             dataSource: data,
@@ -481,44 +493,22 @@
         });
 
         equal(dropdownlist.text(), "Select...");
-        equal(dropdownlist.value(), "Select...");
+        equal(dropdownlist.value(), "");
     });
 
-    test("optionLabel should create complex empty item", function() {
+    test("dropdownlist supports complex optionLabel", function() {
         var data = [{text: 1, value: 1}, {text:2, value:2}];
         var dropdownlist = new DropDownList(input, {
             dataTextField: "Order.Ship.Desc",
             dataValueField: "Order.Ship.City",
             dataSource: [
-                { Order: { Ship: { City: "1"} } }
+                { Order: { Ship: { Desc: "City1", City: "1" } } }
             ],
-            optionLabel: "Select..."
+            optionLabel: { Order: { Ship: { Desc: "Select..." } } }
         });
 
-        var first = dropdownlist.listView.data()[0];
-
-        equal(first.Order.Ship.Desc, "Select...");
-        equal(first.Order.Ship.City, "");
-    });
-
-    test("Use optionLabel directly if object", function() {
-        var data = [{text: 1, value: 1}, {text:2, value:2}],
-        dropdownlist = new DropDownList(input, {
-            dataTextField: "text",
-            dataValueField: "value",
-            dataSource: data,
-            optionLabel: {
-                text: "Select...",
-                value: "",
-                test: "test"
-            }
-        });
-
-        var first = dropdownlist.listView.data()[0];
-
-        equal(first.text, "Select...");
-        equal(first.value, "");
-        equal(first.test, "test");
+        equal(dropdownlist.text(), "Select...");
+        equal(dropdownlist.value(), "");
     });
 
     test("_options should render option with value if optionLabel", function() {
@@ -645,7 +635,8 @@
     });
 
     test("set selected text on init if autoBind:false (select)", function() {
-        var dropdownlist = new DropDownList($("<select><option>text</option></select>").appendTo(QUnit.fixture), {
+        var select = $("<select><option>text</option></select>").appendTo(QUnit.fixture);
+        var dropdownlist = new DropDownList(select, {
             autoBind: false,
             optionLabel: "Select...",
             index: 1
@@ -919,7 +910,7 @@
             filter: "startswith"
         });
 
-        var filterHeader = dropdownlist.list.children().first();
+        var filterHeader = dropdownlist.list.find(".k-list-filter");
 
         ok(filterHeader.hasClass("k-list-filter"));
         ok(filterHeader.find("input")[0]);
@@ -950,7 +941,7 @@
             filter: "startswith"
         });
 
-        var filterHeader = dropdownlist.list.children().first();
+        var filterHeader = dropdownlist.list.find(".k-list-filter");
         var icon = filterHeader.find("input").next();
 
         ok(icon[0]);

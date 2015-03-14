@@ -462,7 +462,7 @@
     asyncTest("DropDownList trigger change on loop", 2, function() {
         var cascade;
 
-        input.kendoDropDownList({
+        var dropdownlist = new DropDownList(input, {
             dataSource: ["too", "too1"],
             value: "too",
             cascade: function() {

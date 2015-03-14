@@ -198,7 +198,7 @@ var __meta__ = {
         },
 
         current: function(candidate) {
-            return this.listView.focus(candidate);
+            return this._focus(candidate);
         },
 
         items: function() {
@@ -231,8 +231,10 @@ var __meta__ = {
             var that = this;
 
             if (index === undefined) {
-                index = that.selectedIndex;
-            } else if (typeof index !== "number") {
+                return that.listView.selectedDataItems()[0];
+            }
+
+            if (typeof index !== "number") {
                 index = $(that.items()).index(index);
             }
 
@@ -283,13 +285,13 @@ var __meta__ = {
         },
 
         _change: function() {
-            var that = this,
-                index = that.selectedIndex,
-                optionValue = that.options.value,
-                value = that.value(),
-                trigger;
+            var that = this;
+            var index = that.selectedIndex;
+            var optionValue = that.options.value;
+            var value = that.value();
+            var trigger;
 
-            if (that._isSelect && !that._bound && optionValue) {
+            if (that._isSelect && !that.listView.isBound() && optionValue) {
                 value = optionValue;
             }
 
@@ -487,12 +489,12 @@ var __meta__ = {
             that[open ? OPEN : CLOSE]();
         },
 
-        _triggerCascade: function(userTriggered) {
-            var that = this,
-                value = that.value();
+        _triggerCascade: function() {
+            var that = this;
 
-            if ((!that._bound && value) || that._old !== value) {
-                that.trigger("cascade", { userTriggered: userTriggered });
+            if (!that._bound || that._old !== that.value()) {
+                that._bound = true;
+                that.trigger("cascade", { userTriggered: that._userTriggered });
             }
         },
 
@@ -549,15 +551,14 @@ var __meta__ = {
             this.popup.close();
         },
 
-        select: function(li) {
+        select: function(candidate) {
             var that = this;
 
-            if (li === undefined) {
+            if (candidate === undefined) {
                 return that.selectedIndex;
             } else {
-                this._select(li);
+                that._select(candidate);
 
-                that._triggerCascade();
                 that._old = that._accessor();
                 that._oldIndex = that.selectedIndex;
             }
@@ -576,6 +577,7 @@ var __meta__ = {
 
             if (!length || length >= options.minLength) {
                 that._state = "filter";
+                that.listView.filter(true);
                 if (filter === "none") {
                     that._filter(word);
                 } else {
@@ -720,12 +722,32 @@ var __meta__ = {
                                    .bind("error", that._errorHandler);
         },
 
+        _firstItem: function() {
+            this.listView.first();
+        },
+
+        _lastItem: function() {
+            this.listView.last();
+        },
+
+        _nextItem: function() {
+            this.listView.next();
+        },
+
+        _prevItem: function() {
+            this.listView.prev();
+        },
+
+        _focus: function(candidate) {
+            return this.listView.focus(candidate);
+        },
+
         _move: function(e) {
             var that = this;
             var key = e.keyCode;
             var ul = that.ul[0];
             var down = key === keys.DOWN;
-            var firstChild;
+            var dataItem;
             var pressed;
             var current;
 
@@ -733,9 +755,9 @@ var __meta__ = {
                 if (e.altKey) {
                     that.toggle(down);
                 } else {
-                    if (!this.listView.isBound()) {
-                        if (!this._fetch) {
-                            this.dataSource.one(CHANGE, function() {
+                    if (!that.listView.isBound()) {
+                        if (!that._fetch) {
+                            that.dataSource.one(CHANGE, function() {
                                 that._move(e);
                                 that._fetch = false;
                             });
@@ -749,33 +771,34 @@ var __meta__ = {
                         return true; //pressed
                     }
 
-                    current = that.listView.focus();
+                    current = that._focus();
 
-                    if (!this._fetch) {
+                    if (!that._fetch) {
                         if (down) {
-                            that.listView.next();
+                            that._nextItem();
 
-                            if (!that.listView.focus()) {
-                                that.listView.last();
+                            if (!that._focus()) {
+                                that._lastItem();
                             }
                         } else {
-                            that.listView.prev();
+                            that._prevItem();
 
-                            if (!that.listView.focus()) {
-                                that.listView.first();
+                            if (!that._focus()) {
+                                that._firstItem();
                             }
                         }
                     }
 
                     if (that.trigger(SELECT, { item: that.listView.focus() })) {
-                        that.listView.focus(current); //revert focus
+                        that._focus(current); //revert focus
                         return;
                     }
 
-                    that.listView.select(that.listView.focus());
+                    that._select(that._focus(), true);
+                    //that.listView.select(that.listView.focus());
 
-                    if (!this.popup.visible()) {
-                        this._blur();
+                    if (!that.popup.visible()) {
+                        that._blur();
                     }
                 }
 
@@ -786,12 +809,10 @@ var __meta__ = {
                     e.preventDefault();
                 }
 
-                var dataItem = this.listView.selectedDataItems();
-                dataItem = dataItem[dataItem.length - 1];
+                current = that._focus();
+                dataItem = that.dataItem();
 
-                current = this.listView.focus();
-
-                if (!that.popup.visible() && (!dataItem || this.text() !== that._text(dataItem))) {
+                if (!that.popup.visible() && (!dataItem || that.text() !== that._text(dataItem))) {
                     current = null;
                 }
 
@@ -802,14 +823,14 @@ var __meta__ = {
                         return;
                     }
 
-                    this._select(current);
+                    that._select(current);
                 } else {
-                    this._accessor(this.input.val());
-                    this.listView.value(this.input.val());
+                    that._accessor(that.input.val());
+                    that.listView.value(that.input.val());
                 }
 
-                if (this._focusElement) {
-                    this._focusElement(that.wrapper);
+                if (that._focusElement) {
+                    that._focusElement(that.wrapper);
                 }
 
                 if (activeFilter && key === keys.TAB) {
@@ -840,7 +861,7 @@ var __meta__ = {
                 return;
             }
 
-            if (!that._bound && !that._fetch && !hasItems) {
+            if (!that.listView.isBound() && !that._fetch && !hasItems) {
                 that._fetch = true;
                 that.dataSource.fetch().done(function() {
                     that._fetch = false;
@@ -860,7 +881,6 @@ var __meta__ = {
                 idx = 0;
 
             if (optionLabel) {
-                idx = 1;
                 options = optionLabel;
             }
 
@@ -949,7 +969,7 @@ var __meta__ = {
                     }
 
                     that.enable();
-                    that._triggerCascade(that._userTriggered);
+                    that._triggerCascade();
                     that._userTriggered = false;
                 };
                 select = function() {
@@ -980,7 +1000,7 @@ var __meta__ = {
                     } else {
                         that.enable(false);
                         that._clearSelection(parent);
-                        that._triggerCascade(that._userTriggered);
+                        that._triggerCascade();
                         that._userTriggered = false;
                     }
                 };
@@ -991,7 +1011,7 @@ var __meta__ = {
                 });
 
                 //refresh was called
-                if (parent._bound) {
+                if (parent.listView.isBound()) {
                     select();
                 } else if (!parent.value()) {
                     that.enable(false);
@@ -1165,9 +1185,13 @@ var __meta__ = {
         next: function() {
             var current = this.focus();
 
-            if (!current) {
+            /*if (!current) {
                 current = 0;
             } else {
+                current = current.next();
+            }*/
+
+            if (current) {
                 current = current.next();
             }
 
@@ -1177,9 +1201,13 @@ var __meta__ = {
         prev: function() {
             var current = this.focus();
 
-            if (!current) {
+            /*if (!current) {
                 current = this.element[0].children.length - 1;
             } else {
+                current = current.prev();
+            }*/
+
+            if (current) {
                 current = current.prev();
             }
 
@@ -1467,63 +1495,6 @@ var __meta__ = {
 
             return added;
         },
-
-        /*
-        _get: function(candidate) {
-            var isArray = $.isArray(candidate);
-            var data = this._view;
-            var found = false;
-            var result = [];
-            var i, idx;
-
-            if (isArray && $.isPlainObject(candidate[0])) {
-                return candidate;
-            }
-
-            if (typeof candidate === "function") {
-                for (idx = 0; idx < data.length; idx++) {
-                    if (candidate(data[idx].item)) {
-                        candidate = idx;
-                        found = true;
-                        break;
-                    }
-                }
-
-                if (!found) {
-                    candidate = -1;
-                }
-            }
-
-            if (typeof candidate === "number") {
-                candidate = [candidate];
-                isArray = true;
-            }
-
-            if (isArray) {
-                for (i = 0; i < candidate.length; i++) {
-                    idx = candidate[i];
-
-                    if (idx > -1) {
-                        result.push({
-                            index: idx,
-                            element: $(this.element[0].children[idx])
-                        });
-                    }
-                }
-            } else {
-                candidate = $(candidate);
-                idx = inArray(candidate[0], this.element[0]);
-
-                if (idx > -1) {
-                    result.push({
-                        index : idx,
-                        element: candidate
-                    });
-                }
-            }
-
-            return result;
-        },*/
 
         _get: function(candidate) {
             if (typeof candidate === "number") {

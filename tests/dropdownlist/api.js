@@ -63,7 +63,7 @@
 
        dropdownlist.value(0);
 
-       ok(dropdownlist.ul.children().eq(2).hasClass(SELECTED));
+       ok(dropdownlist.ul.children().eq(1).hasClass(SELECTED));
 
        equal(dropdownlist.value(), "0");
        equal(dropdownlist.text(), "2");
@@ -408,6 +408,7 @@
 
     test("value method with empty string calls dataSource.fetch if no data", function() {
         dropdownlist = new DropDownList(input, {
+            autoBind: false,
             optionLabel: "Select"
         });
 
@@ -421,7 +422,9 @@
     });
 
     test("value(value) calls dataSource.fetch if no data", function() {
-        dropdownlist = new DropDownList(input);
+        dropdownlist = new DropDownList(input, {
+            autoBind: false
+        });
 
         stub(dropdownlist.dataSource, {
             fetch: dropdownlist.dataSource.fetch
@@ -433,7 +436,9 @@
     });
 
     test("value method with 0 argument calls dataSource.fetch if no data", function() {
-        dropdownlist = new DropDownList(input);
+        dropdownlist = new DropDownList(input, {
+            autoBind: false
+        });
 
         stub(dropdownlist.dataSource, {
             fetch: dropdownlist.dataSource.fetch
@@ -550,12 +555,13 @@
 
     test("dataItem() returns an empty object if optionLabel", function() {
         var select = $("<select><option value=''>Chai</option><option>Bar</option></select>").appendTo(QUnit.fixture);
+
         dropdownlist = new DropDownList(select, {
             optionLabel: "Select..."
         });
 
         equal(dropdownlist.selectedIndex, 0);
-        equal(dropdownlist.dataItem().text, dropdownlist.listView.data()[0].text);
+        equal(dropdownlist.dataItem().text, "Select...");
     });
 
     test("dataItem() returns dataItem depending on passed index", function() {
