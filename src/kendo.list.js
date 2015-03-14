@@ -1056,7 +1056,7 @@ var __meta__ = {
 
                 that._scrollId = setTimeout(function() {
                     that._renderHeader();
-                }, 100);
+                }, 50);
             }, this);
 
             this._fixedHeader();
