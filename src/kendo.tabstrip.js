@@ -176,6 +176,8 @@ var __meta__ = {
 
             that._updateClasses();
 
+            that._tabPosition();
+
             that._dataSource();
 
             if (options.dataSource) {
@@ -503,6 +505,7 @@ var __meta__ = {
             dataUrlField: "",
             dataSpriteCssClass: "",
             dataContentUrlField: "",
+            tabPosition: "top",
             animation: {
                 open: {
                     effects: "expand:vertical fadeIn",
@@ -598,6 +601,7 @@ var __meta__ = {
 
             updateFirstLast(that.tabGroup);
             that._updateContentElements();
+            that.resize(true);
 
             return that;
         },
@@ -618,6 +622,7 @@ var __meta__ = {
 
             updateFirstLast(that.tabGroup);
             that._updateContentElements();
+            that.resize(true);
 
             return that;
         },
@@ -638,6 +643,7 @@ var __meta__ = {
 
             updateFirstLast(that.tabGroup);
             that._updateContentElements();
+            that.resize(true);
 
             return that;
         },
@@ -663,6 +669,7 @@ var __meta__ = {
             contents.remove();
 
             that._updateContentElements();
+            that.resize(true);
 
             return that;
         },
@@ -836,8 +843,54 @@ var __meta__ = {
             }
         },
 
-        _sizeScrollWrap: function(element) {
-            this.scrollWrap.css("height", Math.floor(element.outerHeight(true)) + this.tabsHeight).css("height");
+        _tabPosition: function() {
+            var that = this,
+                tabPosition = that.options.tabPosition,
+                tabGroup = that.tabGroup;
+
+            that.wrapper.addClass("k-floatwrap k-tabstrip-" + tabPosition);
+
+            if (tabPosition == "bottom") {
+                that.tabGroup.appendTo(that.wrapper);
+            }
+
+            that.resize(true);
+        },
+
+        _setContentElementsDimensions: function () {
+            var that = this,
+                tabPosition = that.options.tabPosition;
+
+            if (tabPosition == "left" || tabPosition == "right") {
+                var contentDivs = that.wrapper.children(".k-content"),
+                    activeDiv = contentDivs.filter(":visible"),
+                    marginStyleProperty = "margin-" + tabPosition,
+                    tabGroup = that.tabGroup,
+                    margin = tabGroup.outerWidth();
+
+                var minHeight = Math.ceil(tabGroup.height()) -
+                    parseInt(activeDiv.css("padding-top"), 10) -
+                    parseInt(activeDiv.css("padding-bottom"), 10) -
+                    parseInt(activeDiv.css("border-top-width"), 10) -
+                    parseInt(activeDiv.css("border-bottom-width"), 10);
+
+                setTimeout(function () {
+                    contentDivs.css(marginStyleProperty, margin).css("min-height", minHeight);
+                });
+            }
+        },
+
+        _resize: function() {
+            this._setContentElementsDimensions();
+        },
+
+        _sizeScrollWrap: function (element) {
+            if (element.is(":visible")) {
+                var tabPosition = this.options.tabPosition;
+                var h = Math.floor(element.outerHeight(true)) + (tabPosition === "left" || tabPosition === "right" ? 2 : this.tabsHeight);
+
+                this.scrollWrap.css("height", h).css("height");
+            }
         },
 
         _toggleHover: function(e) {

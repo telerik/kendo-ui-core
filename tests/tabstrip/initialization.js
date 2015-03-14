@@ -58,4 +58,22 @@ test("removes its scrolling wrapper on destroy", function() {
     ok(!tabstrip.wrapper.parent().is(".km-tabstrip-wrapper"), "Unwraps the wrapper");
 });
 
+test("applies a default top tab position CSS class", function () {
+    var tabstrip = new kendo.ui.TabStrip(dom);
+
+    ok(tabstrip.wrapper.hasClass("k-tabstrip-top"), "CSS class is applied");
+});
+
+test("applies a top tab position CSS class", function () {
+    var tabstrip = new kendo.ui.TabStrip(dom, {tabPosition: "left"});
+
+    ok(tabstrip.wrapper.hasClass("k-tabstrip-left"), "CSS class is applied");
+});
+
+test("moves tabs at the bottom when bottom tab position is defined", function () {
+    var tabstrip = new kendo.ui.TabStrip(dom, { tabPosition: "bottom" });
+
+    ok(tabstrip.wrapper.children().last().is(".k-tabstrip-items"), "Tabs are at the bottom");
+});
+
 })();
