@@ -1132,6 +1132,17 @@ var __meta__ = {
             }
         },
 
+        _offsetHeight: function() {
+            var offsetHeight = 0;
+            var siblings = this.element.prevAll();
+
+            siblings.each(function() {
+                offsetHeight += $(this).outerHeight();
+            });
+
+            return offsetHeight;
+        },
+
         scroll: function (item) {
             if (!item) {
                 return;
@@ -1159,13 +1170,15 @@ var __meta__ = {
                     touchScroller.scrollTo(0, -itemOffsetTop);
                 }
             } else {
-                offsetHeight = this.header ? this.header.outerHeight() : 0;
-                offsetHeight += this.filterInput ? this.filterInput.outerHeight() : 0;
+                offsetHeight = this._offsetHeight();
+                if (ulScrollTop > (itemOffsetTop - offsetHeight)) {
+                    ulScrollTop = (itemOffsetTop - offsetHeight);
+                } else if (bottomDistance > (ulScrollTop + ulOffsetHeight + offsetHeight)) {
+                    ulScrollTop = (bottomDistance - ulOffsetHeight - offsetHeight);
+                }
 
-                ul.scrollTop = ulScrollTop > itemOffsetTop ?
-                               (itemOffsetTop - offsetHeight) : bottomDistance > (ulScrollTop + ulOffsetHeight) ?
-                               (bottomDistance - ulOffsetHeight - offsetHeight) : ulScrollTop;
-            }
+                ul.scrollTop = ulScrollTop;
+           }
         },
 
         selectedDataItems: function(dataItems) {
@@ -1185,13 +1198,9 @@ var __meta__ = {
         next: function() {
             var current = this.focus();
 
-            /*if (!current) {
+            if (!current) {
                 current = 0;
             } else {
-                current = current.next();
-            }*/
-
-            if (current) {
                 current = current.next();
             }
 
@@ -1201,13 +1210,9 @@ var __meta__ = {
         prev: function() {
             var current = this.focus();
 
-            /*if (!current) {
+            if (!current) {
                 current = this.element[0].children.length - 1;
             } else {
-                current = current.prev();
-            }*/
-
-            if (current) {
                 current = current.prev();
             }
 
