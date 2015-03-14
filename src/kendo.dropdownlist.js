@@ -175,6 +175,8 @@ var __meta__ = {
             that._arrow.off();
             that._arrow = null;
 
+            that.optionLabel.off();
+
             Select.fn.destroy.call(that);
         },
 
