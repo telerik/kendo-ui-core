@@ -680,6 +680,21 @@
         ok(current.hasClass("k-state-selected"));
     });
 
+    test("stays on option label on UP", function() {
+        var dropdownlist = new DropDownList(input, {
+            dataSource: data,
+            optionLabel: "Any"
+        });
+
+        dropdownlist.wrapper.focus().press(keys.UP);
+
+        var current = dropdownlist.current();
+
+        ok(current.hasClass("k-list-option"));
+        ok(current.hasClass("k-state-focused"));
+        ok(current.hasClass("k-state-selected"));
+    });
+
     test("focus optionLabel on HOME", function() {
         var dropdownlist = new DropDownList(input, {
             dataSource: data,

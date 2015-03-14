@@ -872,6 +872,10 @@ var __meta__ = {
         },
 
         _prevItem: function() {
+            if (this.optionLabel.hasClass("k-state-focused")) {
+                return;
+            }
+
             this.listView.prev();
             if (!this.listView.focus()) {
                 this.optionLabel.addClass("k-state-focused");
@@ -937,7 +941,7 @@ var __meta__ = {
                 this.listView.filter(false);
             }
 
-            optionLabel.removeClass("k-state-selected");
+            optionLabel.removeClass("k-state-focused k-state-selected");
 
             this.listView.select(candidate);
 
