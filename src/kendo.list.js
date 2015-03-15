@@ -1305,11 +1305,11 @@ var __meta__ = {
             }
         },
 
-        value: function(value) {
+        value: function(value, silent) {
             var indices;
 
             if (value === undefined) {
-                return this._values.slice(0);
+                return this._values.slice();
             }
 
             if (value === "" || value === null) {
@@ -1319,6 +1319,10 @@ var __meta__ = {
             value = $.isArray(value) || value instanceof ObservableArray ? value.slice(0) : [value];
 
             this._values = value;
+
+            if (silent) {
+                return;
+            }
 
             if (this.isBound()) {
                 indices = this._valueIndices(value);

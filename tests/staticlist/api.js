@@ -939,6 +939,26 @@
         equal(children.eq(2).attr("class"), "k-item");
     });
 
+    test("value method allows to update value slitenly", function() {
+        var list = new StaticList(element, {
+            template: "#:data#"
+        });
+
+        list.setOptions({
+            dataSource: ["item1", "item2", "item3"],
+            template: "new #:data#"
+        });
+
+        list.dataSource.read();
+
+        list.value(["custom"], true);
+
+        var value = list.value();
+
+        equal(value.length, 1);
+        equal(value[0], "custom");
+    });
+
     test("next method focuses first item if no items are focused", function() {
         var list = new StaticList(element, {
             dataSource: ["item1", "item2", "item3"],
