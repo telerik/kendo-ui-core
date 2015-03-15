@@ -362,11 +362,9 @@ var __meta__ = {
 
             var listOptions = {
                 autoBind: false,
-                selectable: "multiple",
                 height: options.height,
                 dataValueField: options.dataValueField,
                 dataSource: this.dataSource,
-                optionLabel: this.optionLabel,
                 groupTemplate: options.groupTemplate || "#:data#",
                 fixedGroupTemplate: options.fixedGroupTemplate || "#:data#",
                 template: template,

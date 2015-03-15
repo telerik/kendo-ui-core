@@ -197,6 +197,10 @@ var __meta__ = {
             }
         },
 
+        _focus: function(candidate) {
+            return this.listView.focus(candidate);
+        },
+
         current: function(candidate) {
             return this._focus(candidate);
         },
@@ -736,10 +740,6 @@ var __meta__ = {
 
         _prevItem: function() {
             this.listView.prev();
-        },
-
-        _focus: function(candidate) {
-            return this.listView.focus(candidate);
         },
 
         _move: function(e) {
