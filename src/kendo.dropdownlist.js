@@ -377,7 +377,6 @@ var __meta__ = {
             var options = that.options;
             var optionLabel = options.optionLabel;
             var template = options.optionLabelTemplate;
-            var optionLabel;
 
             if (!optionLabel) {
                 that.optionLabel = $();
@@ -824,6 +823,8 @@ var __meta__ = {
         },
 
         _get: function(candidate) {
+            var data, found, idx;
+
             if (this.optionLabel[0]) {
                 if (typeof candidate === "number") {
                     candidate -= 1;

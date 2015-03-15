@@ -400,7 +400,7 @@ var __meta__ = {
         },
 
         _get: function(candidate) {
-            var data, found;
+            var data, found, idx;
 
             if (typeof candidate === "function") {
                 data = this.listView.data();
