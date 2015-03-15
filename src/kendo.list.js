@@ -1306,6 +1306,8 @@ var __meta__ = {
         },
 
         value: function(value) {
+            var indices;
+
             if (value === undefined) {
                 return this._values.slice(0);
             }
@@ -1316,18 +1318,21 @@ var __meta__ = {
 
             value = $.isArray(value) || value instanceof ObservableArray ? value.slice(0) : [value];
 
-            if (!value.length) {
-                this.select([]);
-                return;
-            }
-
             this._values = value;
-            this._selectedIndices = [];
-            this._dataItems = [];
 
             if (this.isBound()) {
-                this._values = []; //select will set value again
-                this.select(this._valueIndices(value));
+                indices = this._valueIndices(value);
+
+                if (!indices.length) {
+                    this.select([]);
+                    return;
+                }
+
+                this._selectedIndices = [];
+                this._dataItems = [];
+                this._values = [];
+
+                this.select(indices);
             }
         },
 
@@ -1691,9 +1696,9 @@ var __meta__ = {
 
             this._render();
 
-            this._bound = true;
-
             this.trigger("dataBound");
+
+            this._bound = true;
 
             if (!this._isFilter) {
                 this.value(this._values);

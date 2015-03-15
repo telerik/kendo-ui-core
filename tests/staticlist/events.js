@@ -88,6 +88,22 @@
         list.select(-1);
     });
 
+    test("widget triggers change event when change value to a custom one", 1, function() {
+        var list = new StaticList(element, {
+            dataSource: ["item"],
+            template: "#:data#",
+            value: ["item"]
+        });
+
+        list.dataSource.read();
+
+        list.bind("change", function() {
+            ok(true);
+        });
+
+        list.value("custom");
+    });
+
     test("widget passes deselected dataItem", 2, function() {
         var list = new StaticList(element, {
             dataSource: ["item"],
