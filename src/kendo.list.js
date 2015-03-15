@@ -1352,10 +1352,6 @@ var __meta__ = {
             return result;
         },
 
-        view: function() {
-
-        },
-
         filter: function(isFilter) {
             this._isFilter = isFilter;
         },
@@ -1696,9 +1692,9 @@ var __meta__ = {
 
             this._render();
 
-            this.trigger("dataBound");
-
             this._bound = true;
+
+            this.trigger("dataBound");
 
             if (!this._isFilter) {
                 this.value(this._values);
