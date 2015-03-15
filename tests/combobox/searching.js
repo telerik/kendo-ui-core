@@ -572,7 +572,7 @@ test("do not append combobox filter twice", function() {
     equal(combobox.dataSource.filter().filters.length, 2);
 });
 
-//TODO: investigate
+//TODO: Fails when all tests are run. Needs to refactor
 /*asyncTest("remove only combobox filter expression on rebind", 2, function() {
     combobox = new ComboBox(input, {
         dataTextField: "text",
@@ -599,9 +599,10 @@ test("do not append combobox filter twice", function() {
     combobox.input.focus().blur();
 
     combobox.bind("dataBound", function() {
-        start();
         equal(combobox.dataSource.filter().filters.length, 1);
         equal(combobox.dataSource.filter().filters[0].field, "parent");
+
+        start();
     });
 
     combobox.open();
@@ -616,6 +617,7 @@ test("refresh suggests on every dataSource change", 2, function() {
         delay: 0
     }).data("kendoComboBox");
 
+    combobox.input.focus();
     combobox.input.val("t");
     combobox.search("t");
     combobox.input.val("3");

@@ -224,7 +224,7 @@ test("suggest(text) should only append the rest of the text (filter:contains)", 
     var origin = window.setTimeout;
     window.setTimeout = function(func) { func() };
 
-    combobox.input.val("o").keydown();
+    combobox.input.focus().val("o").keydown();
 
     equal(combobox.text(), "oo");
 
@@ -245,6 +245,7 @@ test("refresh method suggests if no item is highlighted", 2, function() {
     var origin = window.setTimeout;
     window.setTimeout = function(func) { func() };
 
+    combobox.input.focus();
     combobox.input.val("f");
     combobox.search("f");
 

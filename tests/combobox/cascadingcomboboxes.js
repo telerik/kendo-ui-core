@@ -200,6 +200,8 @@ test("Child clear selection if not items left after filtering", function() {
 
 test("Use index if no value", function() {
     parent.kendoComboBox({
+        autoBind: false,
+        index: 0,
         dataTextField: "parentID",
         dataValueField: "parentID",
         dataSource: [
@@ -226,8 +228,7 @@ test("Use index if no value", function() {
         childCB = child.data("kendoComboBox"),
         ds = childCB.dataSource;
 
-    parentCB.select(0);
-    parentCB.trigger("change");
+    parentCB.dataSource.read();
 
     equal(childCB.selectedIndex, 0);
 });
@@ -490,7 +491,6 @@ test("Support for cascadeFromField option", function() {
     child.val("2").kendoComboBox({
         dataTextField: "name",
         dataValueField: "modelId",
-        optionLabel: { name: "", modelId: ""},
         cascadeFrom: "parent", // cascade from the brands dropdownlist
         cascadeFromField: "brandId",
         dataSource: models // bind it to the models array

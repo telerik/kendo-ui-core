@@ -101,16 +101,6 @@ test("_change does not raise change event if value has't changed", 0, function()
     combobox._change();
 });
 
-/* Looks as a very odd test! TODO: Find what is the correct behavior
-test("_old is initialzed on refresh", function() {
-    combobox = new ComboBox(input, {autoBind: false} );
-
-    input.val("foo");
-    combobox._filterSource();
-    equal(combobox._old, "foo");
-});
-*/
-
 test("select does not raise the change event", 0, function() {
     combobox = new ComboBox(input, {
         dataSource: [{text: "foo"}, {text: "bar"}],
@@ -189,19 +179,6 @@ test("_change raises change event if selectedIndex has changed", 1, function() {
 
     combobox.selectedIndex = 1;
     combobox._change();
-});
-
-test("change event is raised on initial load if value is set internally by index", 1, function() {
-    var select = $("<select><option value=1>foo1</option><option value=3>foo3</option></select>").appendTo(QUnit.fixture)
-                    .bind("change", function() {
-                        ok(true);
-                    });
-
-    combobox = new ComboBox(select, {
-        dataTextField: "text",
-        dataValueField: "value",
-        dataSource: [{text: "foo"}, {text: "bar"}]
-    });
 });
 
 test("clicking an item raises the change event of HTML select", 1, function() {
