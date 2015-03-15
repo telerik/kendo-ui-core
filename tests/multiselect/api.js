@@ -49,17 +49,6 @@
         ok(multiselect.ul.children().length);
     });
 
-    //TODO: Not relevant anymore. Should test the opposite
-    /*test("MultiSelect do not call popup.open method if no visible items", function() {
-        popuplateSelect(1);
-        var multiselect = new MultiSelect(select);
-
-        multiselect.value("0");
-        multiselect.open();
-
-        ok(!multiselect.popup.visible());
-    });*/
-
     test("MultiSelect does not rebind on open if no filtration", function() {
         popuplateSelect();
         var multiselect = new MultiSelect(select, {

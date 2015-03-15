@@ -152,6 +152,7 @@ test("MultiSelect selects corresponding option", function() {
     populateSelect();
 
     var multiselect = new MultiSelect(select);
+
     multiselect.input.mousedown();
     multiselect.ul.children().eq(1).click();
 
@@ -215,19 +216,19 @@ test("MultiSelect clears input on selection", function() {
 test("MultiSelect clears input on blur", function() {
     var multiselect = new MultiSelect(select);
 
-    multiselect.input.focus().val("test").blur();
+    multiselect.input.focus().val("test").focusout();
 
     equal(multiselect.input.val(), "");
 });
 
-test("MultiSelect shows all available items if input is clear", function() {
+test("MultiSelect shows all available items if input is cleared", function() {
     populateSelect();
     var multiselect = new MultiSelect(select);
 
     multiselect.input.focus().val("nothing");
     multiselect.search("nothing");
 
-    multiselect.input.blur();
+    multiselect.input.focusout();
 
     multiselect.open();
 
@@ -294,9 +295,10 @@ test("MultiSelect unselects custom option", function() {
         value: ["item1", "item2"]
     });
 
+    multiselect.listView.filter(true);
     multiselect.dataSource.data(["item3", "item4"]);
-    multiselect.ul.children().eq(0).click();
 
+    multiselect.ul.children().eq(0).click();
     multiselect.tagList.children().first().find(".k-delete").click();
 
     ok(select[0].children[0].selected); //item3
@@ -305,13 +307,32 @@ test("MultiSelect unselects custom option", function() {
     ok(select[0].children[3].selected); //item2
 });
 
+test("MultiSelect removes value matching custom option", function() {
+    var multiselect = new MultiSelect(select, {
+        dataSource: ["item1", "item2"],
+        value: ["item1", "item2"]
+    });
+
+    multiselect.listView.filter(true);
+    multiselect.dataSource.data(["item3", "item4"]);
+
+    multiselect.ul.children().eq(0).click();
+    multiselect.tagList.children().first().find(".k-delete").click();
+
+    var value = multiselect.value();
+
+    equal(value.length, 2);
+    equal(value[0], "item2");
+    equal(value[1], "item3");
+});
+
 test("MultiSelect closes popup on blur", function() {
     populateSelect();
     var multiselect = new MultiSelect(select);
 
     multiselect.input.focus();
     multiselect.open();
-    multiselect.input.blur();
+    multiselect.input.focusout();
 
     ok(!multiselect.popup.visible());
 });
@@ -341,7 +362,7 @@ test("MultiSelect triggers blur event of the hidden element", 1, function() {
         ok(true);
     });
 
-    multiselect.input.focus().blur();
+    multiselect.input.focus().focusout();
 });
 
 test("MultiSelect calls dataSource fetch if autoBind:false", 1, function() {
@@ -382,7 +403,7 @@ test("MultiSelect removes focused clas on blur", function() {
     var multiselect = new MultiSelect(select);
 
     multiselect.input.focus();
-    multiselect.input.blur();
+    multiselect.input.focusout();
 
     ok(!multiselect.wrapper.hasClass("k-state-focused"));
 });
