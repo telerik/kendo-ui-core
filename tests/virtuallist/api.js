@@ -109,7 +109,7 @@
                 this.unbind("itemChange");
             }
         }));
-        asyncDataSource.read();   
+        asyncDataSource.read();
     });
 
     asyncTest("fires the listBound event", 1, function() {
@@ -120,7 +120,7 @@
                 this.unbind("listBound");
             }
         }));
-        asyncDataSource.read();   
+        asyncDataSource.read();
     });
 
     asyncTest("fires the activate event", 1, function() {
@@ -148,7 +148,7 @@
             },
             selectable: true
         }));
-        
+
         asyncDataSource.read().then(function() {
             var item = virtualList.items().first();
 
@@ -165,7 +165,7 @@
             },
             selectable: true
         }));
-        
+
         asyncDataSource.read().then(function() {
             virtualList.select(0);
         });
@@ -176,7 +176,7 @@
             selectable: true,
             value: 0
         }));
-        
+
         asyncDataSource.read().then(function() {
             virtualList.bind("change", function() {
                 start();
@@ -191,7 +191,7 @@
             selectable: true,
             value: 0
         }));
-        
+
         asyncDataSource.read().then(function() {
             virtualList.bind("change", function(e) {
                 start();
@@ -209,7 +209,7 @@
             selectable: "multiple",
             value: [2, 7]
         }));
-        
+
         asyncDataSource.read().then(function() {
             virtualList.bind("change", function(e) {
                 start();
@@ -227,7 +227,7 @@
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             selectable: "multiple"
         }));
-        
+
         asyncDataSource.read().then(function() {
             virtualList.bind("change", function(e) {
                 start();
@@ -508,6 +508,30 @@
             });
             virtualList.value([4, 5]);
         });
+    });
+
+
+    asyncTest("value method sets widget value silently", 2, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: true,
+            valueMapper: function(operation) {
+                setTimeout(function() {
+                    operation.success(123);
+                }, 0);
+            },
+            change: function() {
+                ok(true);
+            }
+        }));
+
+        virtualList.value(123, true)
+
+        asyncDataSource.read();
+
+        setTimeout(function() {
+            start();
+            equal(virtualList.value()[0], 123);
+        }, 100);
     });
 
 })();

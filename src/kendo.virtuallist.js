@@ -319,14 +319,18 @@ var __meta__ = {
             that._fetching = false;
         },
 
-        value: function(candidate) {
+        value: function(value, silent) {
             var that = this,
                 dataSource = that.dataSource,
-                value = candidate,
                 deferred = $.Deferred();
 
             if (value === undefined) {
                 return that._values;
+            }
+
+            if (silent) {
+                that._values = value = toArray(value);
+                return;
             }
 
             if (value instanceof Array && !value.length) {
@@ -349,7 +353,7 @@ var __meta__ = {
                 valueGetter = that._valueGetter,
                 item, match = false,
                 forSelection = [];
-                
+
             //try to find the items in the loaded data
             for (var i = 0; i < value.length; i++) {
                 for (var idx = 0; idx < dataView.length; idx++) {
@@ -366,7 +370,7 @@ var __meta__ = {
                 that._values = [];
                 that.select(forSelection);
                 return;
-            } 
+            }
 
             //prefetch the items
             if (typeof that.options.valueMapper === "function") {
@@ -576,7 +580,7 @@ var __meta__ = {
 
             indexes = this._getIndecies(candidate);
 
-            if (!indexes.length || (singleSelection && lastFrom(indexes) === lastFrom(this._selectedIndexes))) { return; } 
+            if (!indexes.length || (singleSelection && lastFrom(indexes) === lastFrom(this._selectedIndexes))) { return; }
 
             removed = this._deselect(indexes);
 
