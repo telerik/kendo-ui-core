@@ -531,7 +531,6 @@ var __meta__ = {
 
     kendo.ui.List = List;
 
-    //Could we remove the SELECT list from here!!!
     ui.Select = List.extend({
         init: function(element, options) {
             List.fn.init.call(this, element, options);
