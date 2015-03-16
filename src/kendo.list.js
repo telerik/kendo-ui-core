@@ -1032,7 +1032,7 @@ var __meta__ = {
                         .on("mouseleave" + STATIC_LIST_NS, "li", function() { $(this).removeClass(HOVER); });
 
 
-            this.header = this.element.before('<div class="k-static-header"></div>').prev();
+            this.header = this.element.before('<div class="k-static-header" style="display:none"></div>').prev();
 
             this.setDataSource(this.options.dataSource);
 
@@ -1136,7 +1136,14 @@ var __meta__ = {
             var siblings = this.element.prevAll();
 
             siblings.each(function() {
-                offsetHeight += $(this).outerHeight();
+                var element = $(this);
+                if (element.is(":visible")) {
+                    if (element.hasClass("k-list-filter")) {
+                        offsetHeight += element.children().height();
+                    } else {
+                        offsetHeight += element.outerHeight();
+                    }
+                }
             });
 
             return offsetHeight;
@@ -1602,8 +1609,10 @@ var __meta__ = {
 
         _fixedHeader: function() {
             if (this.dataSource.group().length && this.templates.fixedGroupTemplate) {
+                this.header.show();
                 this.element.scroll(this._onScroll);
             } else {
+                this.header.hide();
                 this.element.off("scroll", this._onScroll);
             }
         },

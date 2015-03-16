@@ -156,6 +156,29 @@
         var header = list.header;
 
         equal(header.html(), "a");
+        ok(!header[0].style.display);
+    });
+
+    test("kendoStaticList hides fixed group header container if datasource is not grouped", function() {
+        var list = new StaticList(element, {
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "a" },
+                    { name: "item3", type: "b" }
+                ]
+            },
+            template: '#:data.name#',
+            groupTemplate: '#:data#',
+            fixedGroupTemplate: '#:data#'
+        });
+
+        list.dataSource.read();
+
+        var header = list.header;
+
+        equal(header[0].style.display, "none");
     });
 
     test("kendoStaticList does not render fixed grouped header if no data", function() {
