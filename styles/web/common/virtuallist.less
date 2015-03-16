@@ -45,8 +45,15 @@
     box-sizing: border-box;
 }
 
-.k-virtual-list .k-group {
+.k-virtual-item > .k-item > .k-group {
+    background: none;
     position: absolute;
     top: 0;
-    right: 0;
+    right: .3em;
+}
+
+.k-virtual-item.k-first
+{
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
 }
