@@ -199,7 +199,8 @@
         equal(header.html(), "");
     });
 
-    test("kendoStaticList renders fixed header to first visible item after scroll", function() {
+    //TODO: Fix as it is unstable
+    /*test("kendoStaticList renders fixed header to first visible item after scroll", function() {
         var wrapper = $('<div style="overflow:hidden;height:60px;position:absolute;"/>').appendTo(QUnit.fixture).append(element.height("100%"));
 
         var list = new StaticList(element, {
@@ -232,7 +233,7 @@
         var header = list.header;
 
         equal(header.html(), "b");
-    });
+    });*/
 
     test("kendoStaticList renders selected items during rendering of a grouped data source", function() {
         var list = new StaticList(element, {
