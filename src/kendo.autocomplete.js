@@ -373,6 +373,7 @@ var __meta__ = {
                 groupTemplate: options.groupTemplate || "#:data#",
                 fixedGroupTemplate: options.fixedGroupTemplate || "#:data#",
                 template: template,
+                selectable: true,
                 activate: function() {
                     var current = this.focus();
                     if (current) {
