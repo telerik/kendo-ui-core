@@ -250,4 +250,29 @@ asyncTest("remove input value clears filter even with minLength option", 2, func
     input.val("").trigger({ type: "keydown", keyCode: kendo.keys.BACKSPACE });
 });
 
+test("select item after filtering", function() {
+    var autocomplete = new AutoComplete(input, {
+        dataTextField: "text",
+        dataSource: {
+            data: [
+                {text: "foo", value: "1", parent: 1},
+                {text: "foo1", value: "2", parent: 1},
+                {text: "foo2", value: "3", parent: 1},
+                {text: "foo3", value: "4", parent: 2},
+                {text: "foo4", value: "5", parent: 2},
+                {text: "foo5", value: "6", parent: 3},
+            ]
+        },
+        filter: "contains"
+    });
+
+    autocomplete.search("foo1");
+    autocomplete.ul.children(":first").click();
+
+    autocomplete.search("foo2");
+    autocomplete.ul.children(":first").click();
+
+    equal(autocomplete.value(), "foo2");
+});
+
 }());

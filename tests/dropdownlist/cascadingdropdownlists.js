@@ -533,6 +533,5 @@
 
         categories.open();
         categories.filterInput.focus().val("not found").keydown();
-
     });
 })();

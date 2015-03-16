@@ -1355,6 +1355,10 @@ var __meta__ = {
             return result;
         },
 
+        clearIndices: function() {
+            this._selectedIndices = [];
+        },
+
         filter: function(isFilter) {
             this._isFilter = isFilter;
         },

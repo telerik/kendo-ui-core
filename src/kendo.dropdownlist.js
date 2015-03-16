@@ -509,8 +509,10 @@ var __meta__ = {
             var isIFrame = window.self !== window.top;
 
             if (!that._prevent) {
+                clearTimeout(that._typing);
+
                 if (filtered) {
-                    that._select(that._focus());
+                    that._select(that._focus(), !that.listView.dataItems()[0]);
                 }
 
                 if (!filtered || that.dataItem()) {
@@ -945,8 +947,10 @@ var __meta__ = {
             candidate = this._get(candidate);
 
             if (!keepState && this._state === STATE_FILTER) {
-                this._state = STATE_ACCEPT;
+                this.listView.clearIndices();
                 this.listView.filter(false);
+
+                this._state = STATE_ACCEPT;
             }
 
             optionLabel.removeClass("k-state-focused k-state-selected");
