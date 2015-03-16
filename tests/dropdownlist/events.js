@@ -55,11 +55,11 @@
         dropdownlist._blur();
     });
 
-    test("change event is raised on load when value is selected by index", 1, function() {
+    test("change event is not raised on load when value is selected by index", 0, function() {
         var dropdownlist = new DropDownList(input, {
             dataSource: ["foo", "bar"],
             change: function() {
-                ok(true);
+                ok(false);
             }
         });
     });
@@ -100,19 +100,6 @@
         dropdownlist._old = "foo";
         dropdownlist._change();
         ok(changeWasCalled);
-    });
-
-    test("change events is raised when widget sets value manually", 1, function() {
-        var changeWasCalled = false, dropdownlist = new DropDownList(input, {
-            dataSource: ["foo", "bar"],
-            autoBind: false,
-            change: function() {
-                ok(true);
-            }
-        });
-
-        dropdownlist.wrapper.focus().trigger(CLICK);
-        dropdownlist._change();
     });
 
     test("_change does not raise change event if value has't changed", 0, function() {

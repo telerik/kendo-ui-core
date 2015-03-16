@@ -469,8 +469,7 @@ var __meta__ = {
                 if (!that._fetch) {
                     if (length) {
                         if (!this.listView.value().length && this._initialIndex > -1 && this._initialIndex !== null) {
-                            this._select(this._initialIndex);
-                            this._change();
+                            this.select(this._initialIndex);
                         }
 
                         this._initialIndex = null;

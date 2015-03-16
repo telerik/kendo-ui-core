@@ -29,6 +29,7 @@
         var ddl = select.data("kendoDropDownList");
 
         ddl.open();
+        ddl.ul.find("li:first").click();
         ddl.ul.find("li:last").click();
 
         ok(viewModel.chosenTicket())

@@ -338,7 +338,6 @@ var __meta__ = {
                 that._customOption = undefined;
                 that._options(data);
 
-                //TODO: find a way how to remove keepState
                 if (custom && custom[0].selected) {
                     that._custom(custom.val(), keepState);
                 } else if (!hasChild) {
@@ -352,8 +351,7 @@ var __meta__ = {
             if (!filtered && !that._fetch) {
                 if (!this.listView.value().length) {
                     if (this._initialIndex > -1 && this._initialIndex !== null) {
-                        this._select(this._initialIndex);
-                        this._change();
+                        this.select(this._initialIndex);
                     } else if (this._accessor()) {
                         this.listView.value(this._accessor());
                     }
