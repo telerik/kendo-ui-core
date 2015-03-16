@@ -658,6 +658,10 @@ var __meta__ = {
             this._filter = filter;
         },
 
+        clearIndices: function() {
+            this._selectedIndexes = [];
+        },
+
         _getElementByIndex: function(index) {
             var element;
 
