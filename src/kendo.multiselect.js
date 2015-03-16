@@ -33,6 +33,7 @@ var __meta__ = {
         LI = "li",
         ACCEPT = "accept",
         FILTER = "filter",
+        REBIND = "rebind",
         OPEN = "open",
         CLOSE = "close",
         CHANGE = "change",
@@ -278,7 +279,7 @@ var __meta__ = {
         },
 
         _listChange: function(e) {
-            if (this._state === "rebind") {
+            if (this._state === REBIND) {
                 this._state = "";
                 e.added = [];
             }
@@ -424,7 +425,7 @@ var __meta__ = {
                 that.listView.filter(false);
 
                 that._open = true;
-                that._state = "rebind";
+                that._state = REBIND;
                 that._retrieveData = false;
                 that._filterSource();
             } else if (that._allowSelection()) {
@@ -970,6 +971,10 @@ var __meta__ = {
         _select: function(candidate) {
             var that = this;
             var idx;
+
+            if (that._state === REBIND) {
+                that._state = "";
+            }
 
             if (!that._allowSelection()) {
                 return;

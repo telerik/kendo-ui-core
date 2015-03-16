@@ -110,6 +110,22 @@
         equal(multiselect.tagList.children().length, 1);
     });
 
+    test("MultiSelect allows selection after filter rebind", function() {
+        popuplateSelect();
+
+        var multiselect = new MultiSelect(select, {
+            delay: 0
+        });
+
+        multiselect.search("Option1");
+        multiselect.input.blur();
+        multiselect.open();
+
+        multiselect.ul.children().first().click();
+
+        equal(multiselect.tagList.children().length, 1);
+    });
+
     test("MultiSelect hides popup if no data", function() {
         popuplateSelect();
         var multiselect = new MultiSelect(select);
