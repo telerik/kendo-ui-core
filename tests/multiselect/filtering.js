@@ -80,7 +80,7 @@
         ok(select[0].children[1].selected);
     });
 
-    test("MultiSelect filters data and hides already clicked items", function() {
+    test("MultiSelect filters data renders all datasource view data", function() {
         popuplateSelect();
 
         var multiselect = new MultiSelect(select, {
@@ -93,6 +93,21 @@
         var children = multiselect.ul.children();
 
         equal(children.length, multiselect.dataSource.view().length);
+    });
+
+    test("MultiSelect does not append tags on list rebind after filter", function() {
+        popuplateSelect();
+
+        var multiselect = new MultiSelect(select, {
+            delay: 0
+        });
+
+        multiselect.search("Option1");
+        multiselect.ul.children().first().click();
+
+        multiselect.open();
+
+        equal(multiselect.tagList.children().length, 1);
     });
 
     test("MultiSelect hides popup if no data", function() {

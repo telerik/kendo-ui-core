@@ -278,6 +278,11 @@ var __meta__ = {
         },
 
         _listChange: function(e) {
+            if (this._state === "rebind") {
+                this._state = "";
+                e.added = [];
+            }
+
             this._selectValue(e.added, e.removed);
         },
 
