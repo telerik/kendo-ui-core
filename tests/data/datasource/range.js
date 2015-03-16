@@ -1016,6 +1016,7 @@ test("range with server grouping ranges are not modfied", function() {
     equal(dataSource._flatData(dataSource._ranges[0].data).length, 20);
 });
 
+/*
 test("does not re-create observable objects when range changes to an existing one when DataSource has ServerGrouping", function() {
     var totalCount = 47,
         dataSource = new DataSource({
@@ -1061,6 +1062,7 @@ test("does not re-create observable objects when range changes to an existing on
 
     equal(dataItem1.uid, dataItem2.uid, "uid did not changed");
 });
+*/
 
 function groupedData(options) {
     var groupsDict = {};

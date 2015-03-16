@@ -3647,7 +3647,8 @@ var __meta__ = {
 
         _mergeGroups: function(data, range, skip, take) {
             if (this._isServerGrouped()) {
-                var temp = cloneGroups(range),
+                //var temp = cloneGroups(range),
+                var temp = range.toJSON(),
                     prevGroup;
 
                 if (data.length) {
