@@ -1601,7 +1601,7 @@ var __meta__ = {
         },
 
         _fixedHeader: function() {
-            if (this.templates.fixedGroupTemplate) {
+            if (this.dataSource.group().length && this.templates.fixedGroupTemplate) {
                 this.element.scroll(this._onScroll);
             } else {
                 this.element.off("scroll", this._onScroll);
