@@ -353,7 +353,7 @@ if (kendo.ui.Scheduler) {
             "day": "Dag",
             "month": "Måned",
             "week": "Uke",
-            "workWeek": "Arbeids uke"
+            "workWeek": "Arbeidsuke"
         },
         "deleteWindowTitle": "Slett oppgave",
         "showFullDay": "Vis full dag",
