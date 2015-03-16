@@ -647,7 +647,7 @@
 
         var current = dropdownlist.current();
 
-        ok(current.hasClass("k-list-option"));
+        ok(current.hasClass("k-list-optionlabel"));
         ok(current.hasClass("k-state-focused"));
     });
 
@@ -675,7 +675,7 @@
 
         var current = dropdownlist.current();
 
-        ok(current.hasClass("k-list-option"));
+        ok(current.hasClass("k-list-optionlabel"));
         ok(current.hasClass("k-state-focused"));
         ok(current.hasClass("k-state-selected"));
     });
@@ -690,7 +690,7 @@
 
         var current = dropdownlist.current();
 
-        ok(current.hasClass("k-list-option"));
+        ok(current.hasClass("k-list-optionlabel"));
         ok(current.hasClass("k-state-focused"));
         ok(current.hasClass("k-state-selected"));
     });
@@ -706,7 +706,7 @@
 
         var current = dropdownlist.current();
 
-        ok(current.hasClass("k-list-option"));
+        ok(current.hasClass("k-list-optionlabel"));
         ok(current.hasClass("k-state-focused"));
         ok(current.hasClass("k-state-selected"));
     });
