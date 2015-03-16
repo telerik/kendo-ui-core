@@ -796,7 +796,8 @@ td.k-state-focused.k-state-selected
     background-color: @hover-background-color;
 }
 
-.k-list>.k-state-selected.k-state-focused
+.k-list>.k-state-selected.k-state-focused,
+.k-list-optionlabel.k-state-selected.k-state-focused
 {
     .box-shadow(none);
 }
@@ -1612,6 +1613,7 @@ div.k-filebrowser-dropzone em
 .k-list .k-state-highlight,
 .k-list .k-state-selected,
 .k-fieldselector .k-list .k-item,
+.k-list-optionlabel,
 .k-dropzone
 {
     .guarded-border-radius(@list-border-radius);

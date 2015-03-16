@@ -405,7 +405,7 @@ var __meta__ = {
             }
 
             that.optionLabelTemplate = template;
-            that.optionLabel = $('<div class="k-list-option">' + template(optionLabel) + '</div>')
+            that.optionLabel = $('<div class="k-list-optionlabel">' + template(optionLabel) + '</div>')
                                 .prependTo(that.list)
                                 .click($.proxy(this._click, this));
 
@@ -833,7 +833,7 @@ var __meta__ = {
             if (this.optionLabel[0]) {
                 if (typeof candidate === "number") {
                     candidate -= 1;
-                } else if (candidate instanceof jQuery && candidate.hasClass("k-list-option")) {
+                } else if (candidate instanceof jQuery && candidate.hasClass("k-list-optionlabel")) {
                     candidate = -1;
                 }
             }
