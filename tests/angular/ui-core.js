@@ -504,22 +504,6 @@ withAngularTests("Angular (UI Core)", function(runTest){
         });
     });
 
-    runTest("Widget does not set disabled attribute to non-input widgets", function(dom, $scope){
-        $scope.disabled = true;
-
-        $("<div>" +
-          "  <ul kendo-panelbar='kpb' k-ng-disabled='disabled'" +
-          "<li id='item1'>Item 1</li></ul></div>").appendTo(dom);
-
-		expect(1);
-        $scope.whenRendered(function(){
-            var disabled = $scope.kpb.element.prop("disabled");
-            equal(undefined,disabled);
-            start();
-        });
-    });
-
-
      runTest("Widget respects k-ng-disabled attribue when initially is true", function(dom, $scope){
         $scope.options = {
                     dataSource: {
