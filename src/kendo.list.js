@@ -1652,8 +1652,6 @@ var __meta__ = {
             var view = this.dataSource.view();
             var values = this.value();
 
-            this._selectedIndices = [];
-
             var group, newGroup, j;
             var isGrouped = this.dataSource.group().length;
 

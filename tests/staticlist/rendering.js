@@ -313,9 +313,11 @@
 
         equal(list.dataSource.view().length, 1);
 
+        var indices = list.select();
         var dataItems = list.selectedDataItems();
         var values = list.value();
 
+        equal(indices.length, 2);
         equal(dataItems.length, 2);
         equal(values.length, 2);
 
