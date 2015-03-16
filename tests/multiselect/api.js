@@ -49,16 +49,6 @@
         ok(multiselect.ul.children().length);
     });
 
-    test("MultiSelect do not call popup.open method if no visible items", function() {
-        popuplateSelect(1);
-        var multiselect = new MultiSelect(select);
-
-        multiselect.value("0");
-        multiselect.open();
-
-        ok(!multiselect.popup.visible());
-    });
-
     test("MultiSelect does not rebind on open if no filtration", function() {
         popuplateSelect();
         var multiselect = new MultiSelect(select, {
@@ -124,26 +114,14 @@
 
     test("MultiSelect supports ObservableArray value", function() {
         popuplateSelect();
-        var multiselect = new MultiSelect(select),
-            value = new kendo.data.ObservableArray(["0"]);
+        var multiselect = new MultiSelect(select);
+        var value = new kendo.data.ObservableArray(["0"]);
 
         multiselect.value(value);
 
         equal(multiselect.tagList.children().length, 1);
         equal(multiselect.tagList.children(":first").find("span").html(), "Option0");
         ok(multiselect.element[0].children[0].selected);
-    });
-
-    test("MultiSelect hides corresponding LI elements when set value", function() {
-        popuplateSelect();
-        var multiselect = new MultiSelect(select);
-
-        multiselect.value(["0", "1"]);
-
-        var items = multiselect.ul.children();
-
-        equal(items.eq(0).css("display"), "none");
-        equal(items.eq(1).css("display"), "none");
     });
 
     test("MultiSelect returns array with selected values", function() {
@@ -198,16 +176,6 @@
         multiselect.open();
 
         equal(multiselect.ul.children().length, 5);
-    });
-
-    test("MultiSelect does not open list if there are no visible items", function() {
-        popuplateSelect(1);
-        var multiselect = new MultiSelect(select, {
-            value: "0"
-        });
-        multiselect.open();
-
-        ok(!multiselect.popup.visible());
     });
 
     test("MultiSelect closes popup", 1, function() {

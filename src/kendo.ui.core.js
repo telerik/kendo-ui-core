@@ -45,6 +45,7 @@
         "./kendo.slider",
         "./kendo.splitter",
         "./kendo.window",
+        "./kendo.virtuallist",
         "./kendo.mobile.popover",
         "./kendo.mobile.loader",
         "./kendo.mobile.scroller",

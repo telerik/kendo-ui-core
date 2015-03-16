@@ -789,7 +789,6 @@
         dom.data("kendoMultiSelect").value([0]);
         dom.data("kendoMultiSelect").trigger("change");
 
-        debugger;
         dom.data("kendoMultiSelect").value([0, 1]);
         dom.data("kendoMultiSelect").trigger("change");
 

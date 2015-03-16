@@ -60,7 +60,7 @@
 
         multiselect.open();
 
-        ok(!multiselect.ul.children().eq(1).is(":visible"));
+        equal(multiselect.dataSource.filter().filters.length, 0);
     });
 
     test("MultiSelect filters data using selected items too", function() {
@@ -75,9 +75,6 @@
         multiselect.ul.children().first().click();
 
         multiselect.input.click();
-
-        ok(!multiselect.ul.children().eq(0).is(":visible"));
-        ok(!multiselect.ul.children().eq(1).is(":visible"));
 
         ok(select[0].children[0].selected);
         ok(select[0].children[1].selected);
@@ -96,8 +93,6 @@
         var children = multiselect.ul.children();
 
         equal(children.length, multiselect.dataSource.view().length);
-        ok(!children.eq(0).is(":visible"));
-        ok(!children.eq(1).is(":visible"));
     });
 
     test("MultiSelect hides popup if no data", function() {

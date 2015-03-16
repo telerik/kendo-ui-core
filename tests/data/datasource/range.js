@@ -906,7 +906,7 @@ test("range with server grouping", function() {
                 read: function(options) {
                     var skip = options.data.skip;
                     var take = options.data.take;
-                    var group = { items: [] };
+                    var group = { items: [], field: "foo", value: 1 };
                     for (var i = skip; i < Math.min(skip + take, totalCount); i++) {
                         group.items.push({ foo: i });
                     }
@@ -990,13 +990,13 @@ test("range with server grouping ranges are not modfied", function() {
                     var take = options.data.take;
                     var data = [];
 
-                    var group = { items: [] };
+                    var group = { items: [], field: "foo", value: 1 };
                     for (var i = 0; i < 10; i++) {
                         group.items.push({ foo: i });
                     }
                     data.push(group);
 
-                    group = { items: [] };
+                    group = { items: [], field: "foo", value: 2 };
                     for (var i = 0; i < 10; i++) {
                         group.items.push({ foo: i });
                     }
@@ -1015,6 +1015,54 @@ test("range with server grouping ranges are not modfied", function() {
     dataSource.range(6, 20);
     equal(dataSource._flatData(dataSource._ranges[0].data).length, 20);
 });
+
+/*
+test("does not re-create observable objects when range changes to an existing one when DataSource has ServerGrouping", function() {
+    var totalCount = 47,
+        dataSource = new DataSource({
+            pageSize: 20,
+            serverPaging: true,
+            group: "foo",
+            serverGrouping: true,
+            transport: {
+                read: function(options) {
+                    var skip = options.data.skip;
+                    var take = options.data.take;
+                    var data = [];
+
+                    var group = { items: [], field: "foo", value: 1 };
+                    for (var i = 0; i < 10; i++) {
+                        group.items.push({ foo: i });
+                    }
+                    data.push(group);
+
+                    group = { items: [], field: "foo", value: 2 };
+                    for (var i = 0; i < 10; i++) {
+                        group.items.push({ foo: i });
+                    }
+                    data.push(group);
+                    options.success({ groups: data, total: totalCount });
+                }
+            },
+            schema: {
+                data: "data",
+                groups: "groups",
+                total: "total",
+                schema: { model: { id: "foo" } }
+            }
+        });
+
+    dataSource.read();
+    dataSource.range(0, 20);
+    var dataItem1 = dataSource.data()[0].items[0];
+
+    dataSource.range(20, 20);
+    dataSource.range(0, 20);
+    var dataItem2 = dataSource.data()[0].items[0];
+
+    equal(dataItem1.uid, dataItem2.uid, "uid did not changed");
+});
+*/
 
 function groupedData(options) {
     var groupsDict = {};
@@ -1044,7 +1092,7 @@ function groupedData(options) {
     return groups;
 }
 
-test("view returns observable items when range changes and dataSource has server grouping", function() {
+test("dataSource does not re-initialize ObservableObjects when range changes to an existing one and dataSource has server grouping", function() {
     var totalCount = 47,
         dataSource = new DataSource({
             pageSize: 20,
@@ -1637,7 +1685,6 @@ test("models within the range have correct parent - server paging", function() {
 
     deepEqual(dataSource.view()[0].parent(), dataSource.data());
 });
-
 
 /*test("ranges are updated when model is added after range is called - with local binding", function() {
     var totalCount = 47,

@@ -2,6 +2,8 @@
     define([ "./kendo.core", "./kendo.data.odata", "./kendo.data.xml" ], f);
 })(function(){
 
+var A = 0;
+
 var __meta__ = {
     id: "data",
     name: "Data source",
@@ -1888,6 +1890,34 @@ var __meta__ = {
         }
     });
 
+    function cloneGroups(groups) {
+        var result = [];
+        var item;
+        var group;
+
+        for (var idx = 0, length = groups.length; idx < length; idx++) {
+            item = groups[idx];
+            if (!("field" in item && "items" in item && "value" in item)) {
+                break;
+            }
+
+            group = {};
+            for (var field in item) {
+                var shouldSerialize = item.shouldSerialize ? item.shouldSerialize : item.hasOwnProperty;
+                if (shouldSerialize.call(item, field)) {
+                    group[field] = item[field];
+                }
+            }
+
+            result.push(group);
+
+            if (group.hasSubgroups) {
+                result = result.concat(cloneGroups(group.items));
+            }
+        }
+        return result;
+    }
+
     function mergeGroups(target, dest, skip, take) {
         var group,
             idx = 0,
@@ -3617,6 +3647,7 @@ var __meta__ = {
 
         _mergeGroups: function(data, range, skip, take) {
             if (this._isServerGrouped()) {
+                //var temp = cloneGroups(range),
                 var temp = range.toJSON(),
                     prevGroup;
 
@@ -3719,6 +3750,32 @@ var __meta__ = {
                         }
                     });
                 }, 100);
+            } else if (callback) {
+                callback();
+            }
+        },
+
+        _multiplePrefetch: function(skip, take, callback) {
+            var that = this,
+                size = math.min(skip + take, that.total()),
+                options = {
+                    take: take,
+                    skip: skip,
+                    page: skip / take + 1,
+                    pageSize: take,
+                    sort: that._sort,
+                    filter: that._filter,
+                    group: that._group,
+                    aggregate: that._aggregate
+                };
+
+            if (!that._rangeExists(skip, size)) {
+                if (!that.trigger(REQUESTSTART, { type: "read" })) {
+                    that.transport.read({
+                        data: that._params(options),
+                        success: that._prefetchSuccessHandler(skip, size, callback)
+                    });
+                }
             } else if (callback) {
                 callback();
             }

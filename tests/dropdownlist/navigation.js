@@ -168,8 +168,6 @@
     test("press home should focus first item and update text and value", function() {
         var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
 
-        dropdownlist.dataSource.read();
-
         dropdownlist.select(1);
         dropdownlist.wrapper.focus().press(keys.HOME);
 
@@ -210,9 +208,10 @@
         var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
 
         dropdownlist.popup.bind("close", function(){
-            equal(dropdownlist._current.index(), 1);
-            ok(dropdownlist._current.hasClass("k-state-focused"));
-            ok(dropdownlist._current.hasClass("k-state-selected"));
+            var current = dropdownlist.current();
+            equal(current.index(), 1);
+            ok(current.hasClass("k-state-focused"));
+            ok(current.hasClass("k-state-selected"));
         });
 
         dropdownlist.popup.open();
@@ -253,9 +252,10 @@
 
         dropdownlist.ul.show();
 
-        equal(dropdownlist._current.index(), 1);
-        ok(dropdownlist._current.hasClass("k-state-focused"));
-        ok(dropdownlist._current.hasClass("k-state-selected"));
+        var current = dropdownlist.current();
+        equal(current.index(), 1);
+        ok(current.hasClass("k-state-focused"));
+        ok(current.hasClass("k-state-selected"));
     });
 
 
@@ -272,18 +272,17 @@
         dropdownlist.wrapper.focus().press(keys.ESC);
     });
 
-    test("pressing enter calls _blur", function() {
-        var blurWasCalled, dropdownlist = new DropDownList(input, {
+    test("pressing enter closes popup", function() {
+        var dropdownlist = new DropDownList(input, {
+            animation: false,
             dataSource: data
         });
 
-        dropdownlist._blur = function(li) {
-            blurWasCalled = true;
-        };
+        dropdownlist.open();
 
-        dropdownlist._current = dropdownlist.ul.children().first();
         dropdownlist.wrapper.focus().press(kendo.keys.ENTER);
-        ok(blurWasCalled);
+
+        ok(!dropdownlist.popup.visible());
     });
 
     test("pressing alt + down should open popup", 1, function() {
@@ -357,15 +356,12 @@
             dataSource: [
                 { text: "item1", value: "item1"},
                 { text: "item2", value: "item2"}
-            ],
-            change: function() {
-                dropdownlist.dataSource.read();
-            }
+            ]
         }).data("kendoDropDownList");
 
         dropdownlist.select(1);
         dropdownlist.select(0);
-        dropdownlist.trigger("change");
+        dropdownlist.dataSource.read();
 
         ok(dropdownlist.current());
         equal(dropdownlist.current().text(), "Any");
@@ -460,7 +456,7 @@
             altKey: true
         });
 
-        equal(dropdownlist.wrapper[0], document.activeElement);
+        equal(document.activeElement, dropdownlist.wrapper[0]);
     });
 
     asyncTest("DropDownList returns focus to wrapper on ENTER", 1, function() {
@@ -640,5 +636,111 @@
         parent.trigger("scroll");
 
         ok(dropdownlist.popup.visible());
+    });
+
+    //option label
+    test("option label is focused if defined", function() {
+        var dropdownlist = new DropDownList(input, {
+            dataSource: data,
+            optionLabel: "Any"
+        });
+
+        var current = dropdownlist.current();
+
+        ok(current.hasClass("k-list-option"));
+        ok(current.hasClass("k-state-focused"));
+    });
+
+    test("first item is selected on down when option label is focused", function() {
+        var dropdownlist = new DropDownList(input, {
+            dataSource: data,
+            optionLabel: "Any"
+        });
+
+        dropdownlist.wrapper.focus().press(keys.DOWN);
+
+        var current = dropdownlist.current();
+
+        equal(current[0], dropdownlist.ul.children()[0]);
+    });
+
+    test("focus option label on UP when first LI element is focused", function() {
+        var dropdownlist = new DropDownList(input, {
+            dataSource: data,
+            optionLabel: "Any",
+            index: 1
+        });
+
+        dropdownlist.wrapper.focus().press(keys.UP);
+
+        var current = dropdownlist.current();
+
+        ok(current.hasClass("k-list-option"));
+        ok(current.hasClass("k-state-focused"));
+        ok(current.hasClass("k-state-selected"));
+    });
+
+    test("stays on option label on UP", function() {
+        var dropdownlist = new DropDownList(input, {
+            dataSource: data,
+            optionLabel: "Any"
+        });
+
+        dropdownlist.wrapper.focus().press(keys.UP);
+
+        var current = dropdownlist.current();
+
+        ok(current.hasClass("k-list-option"));
+        ok(current.hasClass("k-state-focused"));
+        ok(current.hasClass("k-state-selected"));
+    });
+
+    test("focus optionLabel on HOME", function() {
+        var dropdownlist = new DropDownList(input, {
+            dataSource: data,
+            optionLabel: "Any",
+            index: 1
+        });
+
+        dropdownlist.wrapper.focus().press(keys.HOME);
+
+        var current = dropdownlist.current();
+
+        ok(current.hasClass("k-list-option"));
+        ok(current.hasClass("k-state-focused"));
+        ok(current.hasClass("k-state-selected"));
+    });
+
+    test("unfocus optionLabel on END", function() {
+        var dropdownlist = new DropDownList(input, {
+            dataSource: data,
+            optionLabel: "Any"
+        });
+
+        dropdownlist.wrapper.focus().press(keys.END);
+
+        var optionLabel = dropdownlist.optionLabel;
+        var current = dropdownlist.current();
+
+        equal(current[0], dropdownlist.ul.children()[data.length - 1]);
+
+        ok(!optionLabel.hasClass("k-state-focused"));
+        ok(!optionLabel.hasClass("k-state-selected"));
+    });
+
+    test("widget sets option label value if complex object", function() {
+        var dropdownlist = new DropDownList(input, {
+            dataValueField: "value",
+            dataTextField: "text",
+            dataSource: [{
+                text: "text", value: "value"
+            }],
+            optionLabel: {
+                text: "Any",
+                value: 0
+            }
+        });
+
+        equal(dropdownlist.value(), "0");
     });
 })();

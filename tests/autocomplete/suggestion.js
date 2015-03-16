@@ -69,31 +69,30 @@ module("kendo.ui.AutoComplete suggestion", {
     }
 });
 
-test("pressing enter calls _blur", 1, function() {
+test("pressing enter calls triggers change", 1, function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["baz", "bar"],
-        suggest: true
+        suggest: true,
+        change: function() {
+            ok(true);
+        }
     });
 
-    autocomplete._blur = function(li) {
-        ok(true);
-    };
-
-    autocomplete.current = autocomplete.ul.children().first();
-    input.focus().press(kendo.keys.ENTER);
+    autocomplete.search("b");
+    input.focus().press(kendo.keys.DOWN);
+    input.press(kendo.keys.ENTER);
 });
 
-test("pressing enter calls _blur when no item is selected", 1, function() {
+test("pressing enter triggers change when custom value is entered", 1, function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["baz", "bar"],
-        suggest: true
+        suggest: true,
+        change: function() {
+            ok(true);
+        }
     });
 
-    autocomplete._blur = function(li) {
-        ok(true);
-    };
-
-    input.focus().press(kendo.keys.ENTER);
+    input.focus().val("test").press(kendo.keys.ENTER);
 });
 
 test("pressing tab calls _blur", 1, function() {
@@ -398,6 +397,20 @@ test("suggest method append text without modifying the user input", 1, function(
     autocomplete.search("f");
 
     equal(autocomplete.value(), "foo");
+});
+
+test("suggest method accepts an object", 1, function() {
+    var autocomplete = new AutoComplete(input, {
+        dataSource: [{ name: "Foo" }, { name: "Bar" }],
+        dataTextField: "name",
+        suggest: true
+    });
+
+    autocomplete.dataSource.read();
+
+    autocomplete.suggest(autocomplete.dataSource.view()[0]);
+
+    equal(autocomplete.value(), "Foo");
 });
 
 }());

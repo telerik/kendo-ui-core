@@ -104,7 +104,7 @@ test("pressing enter closes the dropdown", 1, function() {
     input.press(kendo.keys.DOWN);
     input.press(kendo.keys.ENTER);
 
-    ok(!autocomplete.ul.is(":visible"));
+    ok(!autocomplete.popup.visible());
 });
 
 test("press enter should call preventDefault when popup is visible", 1, function() {

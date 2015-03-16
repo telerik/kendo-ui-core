@@ -19,7 +19,8 @@ test("kendoAutoComplete attaches a autocomplete object to target", function() {
 });
 
 test("data source is initialized from options.dataSource when array is passed", function() {
-    var data = [1, 2], autocomplete = new AutoComplete(input, {
+    var data = [1, 2];
+    var autocomplete = new AutoComplete(input, {
         dataSource: data
     });
 
@@ -88,12 +89,70 @@ test("autocomplete populates its list when the datasource changes", function() {
     equal(autocomplete.ul.children("li").first().text(), "foo");
 });
 
-test("changing the template", function() {
+test("autocomplete sets default item template", function() {
+    var autocomplete = new AutoComplete(input);
+
+    var template = autocomplete.listView.options.template;
+
+    equal(template, "#:data#");
+});
+
+test("autocomplete sets default item template using dataTextField option", function() {
     var autocomplete = new AutoComplete(input, {
-        template: kendo.template("#= data.toUpperCase() #")
+        dataTextField: "test"
     });
 
-    equal(autocomplete.template("foo"), '<li tabindex="-1" role="option" unselectable="on" class="k-item">FOO</li>');
+    var template = autocomplete.listView.options.template;
+
+    equal(template, "#:data.test#");
+});
+
+test("autocomplete sets custom item template", function() {
+    var autocomplete = new AutoComplete(input, {
+        template: "#= data.toUpperCase() #"
+    });
+
+    var template = autocomplete.listView.options.template;
+
+    equal(template, "#= data.toUpperCase() #");
+});
+
+test("autocomplete sets a default group template", function() {
+    var autocomplete = new AutoComplete(input, {
+    });
+
+    var template = autocomplete.listView.options.groupTemplate;
+
+    equal(template, "#:data#");
+});
+
+test("autocomplete supports setting a custom group template", function() {
+    var autocomplete = new AutoComplete(input, {
+        groupTemplate: "#= data.toUpperCase() #"
+    });
+
+    var template = autocomplete.listView.options.groupTemplate;
+
+    equal(template, "#= data.toUpperCase() #");
+});
+
+test("autocomplete sets a default fixed group template", function() {
+    var autocomplete = new AutoComplete(input, {
+    });
+
+    var template = autocomplete.listView.options.fixedGroupTemplate;
+
+    equal(template, "#:data#");
+});
+
+test("autocomplete supports setting a custom fixed group template", function() {
+    var autocomplete = new AutoComplete(input, {
+        fixedGroupTemplate: "#= data.toUpperCase() #"
+    });
+
+    var template = autocomplete.listView.options.fixedGroupTemplate;
+
+    equal(template, "#= data.toUpperCase() #");
 });
 
 test("defining header template", function() {
@@ -123,7 +182,7 @@ test("resetting dataSource detaches the previouse events", 0, function() {
 
     var dataSource = autocomplete.dataSource;
 
-    autocomplete._dataSource();
+    autocomplete.setDataSource({});
 
     autocomplete.bind("dataBound", function() {
         ok(false, "Change event is not detached");

@@ -69,20 +69,17 @@
             ]
         });
 
-        var parentCB = parent.data("kendoDropDownList"),
-            childCB = child.data("kendoDropDownList");
+        var parentCB = parent.data("kendoDropDownList");
+        var childCB = child.data("kendoDropDownList");
 
         //select first item
         parentCB.select(0);
-        parentCB.trigger("change");
 
         //select first item
         childCB.select(0);
-        parentCB.trigger("change");
 
         //select second item
         parentCB.select(1);
-        parentCB.trigger("change");
 
         equal(childCB.value(), "");
         equal(childCB.text(), "Select");
@@ -203,7 +200,6 @@
             dataTextField: "text",
             dataSource: datasource,
             cascadeFrom: "parent",
-            autoBind: false,
             cascade: function() {
                 start();
 
@@ -288,7 +284,7 @@
             autoBind: false
         });
 
-        var ddl3 = new DropDownList($("<input />"), {
+        var ddl3 = new DropDownList(third, {
             optionLabel: "Select",
             dataValueField: "text",
             dataTextField: "text",
@@ -308,7 +304,12 @@
 
         ddl.value("");
 
-        equal(ddl2.value(), "Select");
+        equal(ddl2.text(), "Select");
+        equal(ddl2.value(), "");
+
+        equal(ddl3.text(), "Select");
+        equal(ddl3.value(), "");
+
         ddl.destroy();
         ddl2.destroy();
         ddl3.destroy();
@@ -328,7 +329,6 @@
         });
 
         var ddl2 = new DropDownList(child.attr("id", "child"), {
-            optionLabel: "Select",
             dataValueField: "text",
             dataTextField: "text",
             dataSource: [

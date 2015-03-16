@@ -221,7 +221,7 @@
 
         kendo.bind(dom, observable);
 
-        dom.kendoDropDownList();
+        new kendo.ui.DropDownList(dom);
 
         observable.items.splice(0,1);
 

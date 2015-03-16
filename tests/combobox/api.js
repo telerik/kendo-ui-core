@@ -120,7 +120,6 @@ test("value('') clear selection", function() {
     combobox.value("");
 
     ok(!combobox.ul.children().hasClass(SELECTED));
-    ok(!combobox._current);
     equal(combobox.value(), "");
     equal(combobox.text(), "");
     equal(combobox._old, "");
@@ -156,6 +155,7 @@ test("value method should select item with 0 value", function() {
         dataValueField: "value",
         dataSource: [{text: "foo", value: 1}, {text:2, value:0}]
     });
+
     combobox.value(0);
 
     ok(combobox.ul.children().eq(1).hasClass(SELECTED));
@@ -164,7 +164,7 @@ test("value method should select item with 0 value", function() {
     equal(combobox._old, 0);
 });
 
-test("select item with index -1 should not select anything", function() {
+test("select item with index -1 should clear selection", function() {
     var combobox = new ComboBox(input, {
         dataTextField: "text",
         dataValueField: "value",
@@ -172,13 +172,11 @@ test("select item with index -1 should not select anything", function() {
     });
 
     combobox.select(0);
-
     combobox.select(-1);
 
-    equal(combobox.value(), "1");
-    equal(combobox.text(), "foo");
+    equal(combobox.value(), "");
+    equal(combobox.text(), "");
 });
-
 
 test("select should select item by predicate", function() {
     var combobox = new ComboBox(input, {
@@ -235,18 +233,6 @@ test("select method does not trigger change event", 0, function() {
 
     combobox.select(1);
     combobox._change();
-});
-
-asyncTest("open should call _scroll method", 1, function () {
-    var combobox = new ComboBox(input, {
-        dataTextField: "text",
-        dataValueField: "value",
-        dataSource: [{text: "foo", value: 1}, {text:2, value:2}]
-    });
-
-    combobox.select(0);
-    combobox._scroll = function() { ok(true); start(); };
-    combobox.open();
 });
 
 test("open should open popup", 1,  function () {
@@ -636,7 +622,7 @@ test("ComboBox does not select correct item after filter() and value()", functio
     combobox.search("item1");
     combobox.close();
 
-    combobox.value("item1");
+    combobox.value("Item1");
 
     combobox.open();
 
@@ -680,5 +666,42 @@ test("ComboBox does not change text if custom value is equal to options.value", 
 
     equal(combobox.value(), "value");
     equal(combobox.text(), "text");
+});
+
+test("suggest method outputs word parameter", function() {
+    var combobox = new ComboBox(input, {
+        dataSource: ["Item1", "Item2"]
+    });
+
+    combobox.input.focus();
+    combobox.suggest("item1");
+
+    equal(combobox.text(), "item1");
+});
+
+test("suggest method accepts a jQuery element", function() {
+    var combobox = new ComboBox(input, {
+        dataSource: ["Item1", "Item2"]
+    });
+
+    combobox.suggest(combobox.ul.children(":last"));
+
+    equal(combobox.text(), "Item2");
+});
+
+test("suggest method accepts a data item", function() {
+    var combobox = new ComboBox(input, {
+        dataValueField: "text",
+        dataTextField: "text",
+        dataSource: [{
+            text: "Item1"
+        }, {
+            text: "Item2"
+        }]
+    });
+
+    combobox.suggest(combobox.dataSource.data()[1]);
+
+    equal(combobox.text(), "Item2");
 });
 })();

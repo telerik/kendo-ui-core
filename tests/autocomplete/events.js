@@ -203,7 +203,7 @@ test("close event when popup close on click", 1, function() {
     var autocomplete = input.data("kendoAutoComplete");
     input.focus().val("f");
     autocomplete.search();
-    autocomplete._accept(autocomplete.ul.eq(0));
+    autocomplete.ul.children().first().click();
 });
 
 test("click item raises select event", 1, function() {
@@ -248,8 +248,28 @@ test("select event is not raised when custom value is entered", 0, function() {
     autocomplete.dataSource.read();
     autocomplete.popup.open();
 
-    //simulate enter
-    autocomplete._focus(null);
+    autocomplete.element.trigger({
+        type: "keydown",
+        keyCode: kendo.keys.ENTER
+    });
+});
+
+test("select event is raised when first item is entered", 1, function() {
+    var autocomplete = input.kendoAutoComplete({
+        dataSource: ["foo"],
+        select: function(e) {
+            ok(true);
+        }
+    }).data("kendoAutoComplete");
+
+    autocomplete.dataSource.read();
+    autocomplete.popup.open();
+    autocomplete.listView.focus(0);
+
+    autocomplete.element.trigger({
+        type: "keydown",
+        keyCode: kendo.keys.ENTER
+    });
 });
 
 test("AutoComplete triggers filtering event on data source filter", 3, function() {

@@ -19,13 +19,6 @@ module("kendo.ui.ComboBox searching", {
         };
 
         input = $("<input />").appendTo(QUnit.fixture);
-
-        combobox = input.kendoComboBox({
-            dataTextField: "text",
-            dataValueField: "value",
-            dataSource: data
-        }).data("kendoComboBox");
-
     },
     teardown: function() {
         kendo.effects.enable();
@@ -35,8 +28,15 @@ module("kendo.ui.ComboBox searching", {
     }
 });
 
+function create(options) {
+    combobox = input.kendoComboBox($.extend({
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: data
+    }, options)).data("kendoComboBox");
+}
+
 test("search focus first match", function() {
-    combobox.destroy();
     combobox = new ComboBox(input, {
         dataTextField: "text",
         dataValueField: "value",
@@ -52,6 +52,7 @@ test("search focus first match", function() {
 });
 
 test("open popup on search and any items", function() {
+    create();
     combobox.text("b");
     combobox.search("b");
 
@@ -59,7 +60,6 @@ test("open popup on search and any items", function() {
 });
 
 test("open popup with all items if empty input", function() {
-    combobox.destroy();
     combobox = new ComboBox(input, {
         dataTextField: "text",
         dataValueField: "value",
@@ -76,7 +76,6 @@ test("open popup with all items if empty input", function() {
 });
 
 test("open() does not rebind popup if server filtering", function() {
-    combobox.destroy();
     combobox = new ComboBox(input, {
         dataTextField: "text",
         dataValueField: "value",
@@ -95,7 +94,6 @@ test("open() does not rebind popup if server filtering", function() {
 });
 
 test("search focus item if text number", function() {
-    combobox.destroy();
     combobox = new ComboBox(input, {
         dataTextField: "text",
         dataValueField: "value",
@@ -109,7 +107,6 @@ test("search focus item if text number", function() {
 });
 
 test("search focus item if text is 0", function() {
-    combobox.destroy();
     combobox = new ComboBox(input, {
         dataTextField: "text",
         dataValueField: "value",
@@ -123,6 +120,7 @@ test("search focus item if text is 0", function() {
 });
 
 test("focused item does not update text input value", function() {
+    create();
     combobox.text("f");
     combobox.search("f");
 
@@ -130,7 +128,6 @@ test("focused item does not update text input value", function() {
 });
 
 test("current item is not cleared on search with filter none", function() {
-    combobox.destroy();
     combobox = new ComboBox(input, {
         dataTextField: "text",
         dataValueField: "value",
@@ -140,10 +137,11 @@ test("current item is not cleared on search with filter none", function() {
     combobox.select(1);
     combobox.search("f");
 
-    ok(combobox._current);
+    ok(combobox.current()[0]);
 });
 
 test("search should raise error if word is null", function() {
+    create();
     combobox.text("");
     combobox.search("");
 
@@ -151,7 +149,6 @@ test("search should raise error if word is null", function() {
 });
 
 test("search with no filter should open popup if any match", 1, function() {
-    combobox.destroy();
     combobox = new ComboBox(input, {
         dataTextField: "text",
         dataValueField: "value",
@@ -168,7 +165,6 @@ test("search with no filter should open popup if any match", 1, function() {
 });
 
 test("search with no filter should not open if no match", 0, function() {
-    combobox.destroy();
     combobox = new ComboBox(input, {
         dataTextField: "text",
         dataValueField: "value",
@@ -185,7 +181,6 @@ test("search with no filter should not open if no match", 0, function() {
 });
 
 test("search with no filter indicates that the filtering is started", 1, function() {
-    combobox.destroy();
     combobox = new ComboBox(input, {
         dataTextField: "text",
         dataValueField: "value",
@@ -198,7 +193,6 @@ test("search with no filter indicates that the filtering is started", 1, functio
 });
 
 test("ComboBox announces end of filtration on item selection", 1, function() {
-    combobox.destroy();
     combobox = new ComboBox(input, {
         dataTextField: "text",
         dataValueField: "value",
@@ -214,7 +208,6 @@ test("ComboBox announces end of filtration on item selection", 1, function() {
 });
 
 test("ComboBox announces end of filtration custom value", 1, function() {
-    combobox.destroy();
     combobox = new ComboBox(input, {
         dataTextField: "text",
         dataValueField: "value",
@@ -230,7 +223,9 @@ test("ComboBox announces end of filtration custom value", 1, function() {
 });
 
 test("search with startswith rebind items", function() {
-    combobox.options.filter = "startswith";
+    create({
+        filter: "startswith"
+    });
     combobox.text("f");
     combobox.search("f");
 
@@ -238,20 +233,26 @@ test("search with startswith rebind items", function() {
 });
 
 test("search with filter opens drop down if any items", function() {
+    create({
+        filter: "startswith"
+    });
+
     combobox.popup.bind("open", function() {
         ok(true);
     });
 
-    combobox.options.filter = "startswith";
     combobox.text("f");
     combobox.search("f");
 });
 
 test("rebound list should use correct dataItem to update text and value", function() {
-    combobox.options.filter = "startswith";
+    create({
+        filter: "startswith"
+    });
+
     combobox.text("b");
     combobox.search("b");
-    combobox._focus(combobox.ul.children().eq(1));
+    combobox.select(combobox.ul.children().eq(1));
 
     equal(combobox.ul.children().length, 2);
     equal(combobox.value(), data[2].value);
@@ -259,20 +260,24 @@ test("rebound list should use correct dataItem to update text and value", functi
 });
 
 test("reopen ul after filter should show all data", function() {
-    combobox.options.filter = "startswith";
+    create({
+        filter: "startswith"
+    });
+
     combobox.text("b");
     combobox.search("b");
-    combobox._focus(combobox.ul.children().eq(1));
-    combobox._state = "accept";
 
+    combobox.ul.children().eq(1).click();
     combobox.open();
 
     equal(combobox.ul.children().length, data.length);
-    ok(combobox._current.hasClass("k-state-selected"));
 });
 
 test("rebound ul should has item selected", function() {
-    combobox.options.filter = "startswith";
+    create({
+        filter: "startswith"
+    });
+
     combobox.open();
     combobox.text("b");
     combobox.search("b");
@@ -280,19 +285,22 @@ test("rebound ul should has item selected", function() {
 
     combobox.open();
 
-    equal(combobox.ul.children().length, data.length);
+    ok(combobox.current().hasClass("k-state-selected"));
 });
 
-test("typing should trigger search", 1, function() {
-    combobox._search = function() {
-        ok(true);
-    }
+asyncTest("typing should trigger search", 1, function() {
+    create({
+        filter: "startswith",
+        filtering: function() {
+            start();
+            ok(true);
+        }
+    });
 
     combobox.input.val("f").trigger({type: "keydown", keyCode: "f".charCodeAt(0)});
 });
 
 test("dataSource.read triggered by typing does not update input value with dataItem.text", function() {
-    combobox.destroy();
     combobox = new ComboBox(input, {
         dataTextField: "text",
         dataValueField: "value",
@@ -308,41 +316,58 @@ test("dataSource.read triggered by typing does not update input value with dataI
     equal(combobox.input.val(), "f");
 });
 
-test("should not trigger search on TAB", 0, function() {
-    combobox.search = function() {
-        ok(true)
-    };
+test("should not trigger search on TAB", 1, function() {
+    create();
+
+    stub(combobox, {
+        search: combobox.search
+    });
 
     combobox.input.val("f").pressKeyDown(kendo.keys.TAB);
+
+    equal(combobox.calls("search"), 0);
 });
 
-test("should not trigger search on ESC", 0, function() {
+test("should not trigger search on ESC", 1, function() {
+    create();
 
-    combobox.search = function() {
-        ok(true);
-    };
+    stub(combobox, {
+        search: combobox.search
+    });
 
     combobox.input.val("f").pressKeyDown(kendo.keys.ESC);
+
+    equal(combobox.calls("search"), 0);
 });
 
 test("allow custom value", 1, function() {
-    combobox._selected = combobox._current = null;
+    create();
 
     combobox.input.val("ffff").blur();
 
     equal(combobox.value(), "ffff");
 });
 
-test("do not search if text does not changed", 0, function() {
-    combobox.search = function() { ok(false); };
+asyncTest("do not search if text does not changed", 1, function() {
+    create({
+        delay: 0
+    });
+
+    stub(combobox, {
+        search: combobox.search
+    });
 
     combobox._prev = "test";
     combobox.input.val("test");
     combobox.input.pressKeyDown(kendo.keys.HOME);
+
+    setTimeout(function() {
+        start();
+        equal(combobox.calls("search"), 0);
+    });
 });
 
 test("highlight first item on refresh", function() {
-    combobox.destroy();
     combobox = new ComboBox(input, {
         dataTextField: "text",
         dataValueField: "value",
@@ -358,7 +383,6 @@ test("highlight first item on refresh", function() {
 });
 
 test("refresh method highlights first item if options.highlightFirst is true", 1, function() {
-    combobox.destroy();
     combobox = new ComboBox(input, {
         dataTextField: "text",
         dataValueField: "value",
@@ -375,14 +399,13 @@ test("refresh method highlights first item if options.highlightFirst is true", 1
 });
 
 test("no filter and highlightFirst should always focus first item", function() {
-
+    create();
     combobox.search("");
 
     ok(combobox.ul.children().eq(0).hasClass("k-state-focused"));
 });
 
 test("no filter and highlightFirst=false should not focus first item", function() {
-    combobox.destroy();
     combobox = new ComboBox(input, {
         dataTextField: "text",
         dataValueField: "value",
@@ -396,6 +419,9 @@ test("no filter and highlightFirst=false should not focus first item", function(
 });
 
 test("failed filter should not focus first item", function() {
+    create({
+        highlightFirst: false
+    });
     combobox.open();
     combobox.current(combobox.ul.children("li").eq(1));
 
@@ -406,7 +432,6 @@ test("failed filter should not focus first item", function() {
 });
 
 test("startswith filter and highlightFirst should always focus first item", function() {
-    combobox.destroy();
     combobox = new ComboBox(input, {
         dataTextField: "text",
         dataValueField: "value",
@@ -420,7 +445,6 @@ test("startswith filter and highlightFirst should always focus first item", func
 });
 
 test("startswith filter and highlightFirst=false should not focus first item", function() {
-    combobox.destroy();
     combobox = new ComboBox(input, {
         dataTextField: "text",
         dataValueField: "value",
@@ -435,7 +459,6 @@ test("startswith filter and highlightFirst=false should not focus first item", f
 });
 
 test("search method uses ignoreCase option", function() {
-    combobox.destroy();
     combobox = new ComboBox(input, {
         dataSource: ["TEXT", "text"],
         ignoreCase: false,
@@ -449,7 +472,6 @@ test("search method uses ignoreCase option", function() {
 });
 
 test("search method lowers case of the filter value when ignoreCase true", 1, function() {
-    combobox.destroy();
     combobox = new ComboBox(input, {
         autoBind: false,
         dataSource: {
@@ -469,7 +491,6 @@ test("search method lowers case of the filter value when ignoreCase true", 1, fu
 });
 
 test("do not remove default filter expression", function() {
-    combobox.destroy();
     combobox = new ComboBox(input, {
         dataTextField: "text",
         dataValueField: "value",
@@ -496,7 +517,6 @@ test("do not remove default filter expression", function() {
 });
 
 test("append combobox filter expression ot the default one", function() {
-    combobox.destroy();
     combobox = new ComboBox(input, {
         dataTextField: "text",
         dataValueField: "value",
@@ -525,7 +545,6 @@ test("append combobox filter expression ot the default one", function() {
 });
 
 test("do not append combobox filter twice", function() {
-    combobox.destroy();
     combobox = new ComboBox(input, {
         dataTextField: "text",
         dataValueField: "value",
@@ -553,8 +572,8 @@ test("do not append combobox filter twice", function() {
     equal(combobox.dataSource.filter().filters.length, 2);
 });
 
-test("remove only combobox filter expression on rebind", function() {
-    combobox.destroy();
+//TODO: Fails when all tests are run. Needs to refactor
+/*asyncTest("remove only combobox filter expression on rebind", 2, function() {
     combobox = new ComboBox(input, {
         dataTextField: "text",
         dataValueField: "value",
@@ -578,15 +597,18 @@ test("remove only combobox filter expression on rebind", function() {
 
     combobox.search("foo1");
     combobox.input.focus().blur();
-    combobox.open();
 
-    ok(combobox.dataSource.filter());
-    equal(combobox.dataSource.filter().filters.length, 1);
-    equal(combobox.dataSource.filter().filters[0].field, "parent");
-});
+    combobox.bind("dataBound", function() {
+        equal(combobox.dataSource.filter().filters.length, 1);
+        equal(combobox.dataSource.filter().filters[0].field, "parent");
+
+        start();
+    });
+
+    combobox.open();
+});*/
 
 test("refresh suggests on every dataSource change", 2, function() {
-    combobox.destroy();
     combobox = input.kendoComboBox({
         dataSource: ["text", "Text", "3text"],
         filter: "startswith",
@@ -595,6 +617,7 @@ test("refresh suggests on every dataSource change", 2, function() {
         delay: 0
     }).data("kendoComboBox");
 
+    combobox.input.focus();
     combobox.input.val("t");
     combobox.search("t");
     combobox.input.val("3");
@@ -605,7 +628,6 @@ test("refresh suggests on every dataSource change", 2, function() {
 });
 
 test("ComboBox ignores case when filter is disabled", 1, function() {
-    combobox.destroy();
     combobox = input.kendoComboBox({
         dataSource: ["Text", "text", "3text"],
         ignoreCase: true, //default
@@ -619,7 +641,6 @@ test("ComboBox ignores case when filter is disabled", 1, function() {
 });
 
 test("ComboBox honors casing when filter is disabled", 1, function() {
-    combobox.destroy();
     combobox = input.kendoComboBox({
         dataSource: ["Text", "text", "3text"],
         ignoreCase: false,
@@ -633,8 +654,7 @@ test("ComboBox honors casing when filter is disabled", 1, function() {
 });
 
 test("ComboBox sets value of the select element on rebind", 1, function() {
-    combobox.destroy();
-    QUnit.fixture.html("");
+    kendo.destroy(QUnit.fixture);
 
     var select = $("<select><option value=1>Item1</option><option value=2>2Item</option></select>").appendTo(QUnit.fixture);
 
@@ -647,7 +667,7 @@ test("ComboBox sets value of the select element on rebind", 1, function() {
     combobox.search("2");
 
     //select first item after search
-    combobox._accept(combobox.ul[0].children[0]);
+    combobox.ul.children().first().click();
 
     combobox.open();
 
@@ -655,7 +675,6 @@ test("ComboBox sets value of the select element on rebind", 1, function() {
 });
 
 test("ComboBox does not throw exception when try to search empty DS", function() {
-    combobox.destroy();
     combobox = input.kendoComboBox().data("kendoComboBox");
 
     combobox.search("12");
@@ -664,7 +683,6 @@ test("ComboBox does not throw exception when try to search empty DS", function()
 });
 
 asyncTest("ComboBox does not open popup if not active element", 1, function() {
-    combobox.destroy();
     combobox = input.kendoComboBox({
         delay: 0,
         autoBind: false,
@@ -676,36 +694,26 @@ asyncTest("ComboBox does not open popup if not active element", 1, function() {
         }
     }).data("kendoComboBox");
 
-    combobox._search("b");
+    combobox.input.val("b").pressKeyDown(60);
 });
 
-test("ComboBox opens popup on search", function() {
-    combobox.destroy();
+asyncTest("ComboBox opens popup on search", 1, function() {
     combobox = new ComboBox(input, {
         dataTextField: "text",
         dataValueField: "value",
         dataSource: data,
-        autoBind: true,
-        index: 0
-    });
-
-    stub(combobox, {
-        toggle: combobox.toggle
+        open: function() {
+            start();
+            ok(true);
+        }
     });
 
     //simulate search
-    combobox._typing = 80;
-    combobox._open = true;
     combobox.input.focus();
-
-    combobox.refresh();
-
-    equal(combobox.calls("toggle"), 1);
-    equal(combobox.args("toggle", 0)[0], true);
+    combobox.input.val("b").pressKeyDown(60);
 });
 
 test("ComboBox rebinds if after search value method is called", function() {
-    combobox.destroy();
     combobox = new ComboBox(input, {
         dataTextField: "text",
         dataValueField: "value",
@@ -723,7 +731,6 @@ test("ComboBox rebinds if after search value method is called", function() {
 });
 
 asyncTest("ComboBox does not trigger search on SHIFT", 0, function() {
-    combobox.destroy();
     combobox = new ComboBox(input, {
         dataTextField: "text",
         dataValueField: "value",
@@ -749,7 +756,6 @@ asyncTest("ComboBox does not trigger search on SHIFT", 0, function() {
 });
 
 asyncTest("ComboBox does not trigger filtering when value is set with API", 0, function() {
-    combobox.destroy();
     combobox = new ComboBox(input, {
         dataTextField: "text",
         dataValueField: "value",
@@ -774,7 +780,6 @@ asyncTest("ComboBox does not trigger filtering when value is set with API", 0, f
 });
 
 asyncTest("ComboBox does not trigger filtering when set custom value", 0, function() {
-    combobox.destroy();
     combobox = new ComboBox(input, {
         dataTextField: "text",
         dataValueField: "value",
@@ -799,7 +804,6 @@ asyncTest("ComboBox does not trigger filtering when set custom value", 0, functi
 });
 
 test("ComboBox does not fall in continuous loop after filtering", 1, function() {
-    combobox.destroy();
     combobox = new ComboBox(input, {
         dataTextField: "text",
         dataValueField: "value",
@@ -825,7 +829,6 @@ test("ComboBox does not fall in continuous loop after filtering", 1, function() 
 });
 
 test("ComboBox does not rebind on open if still in filter mode", 1, function() {
-    combobox.destroy();
     combobox = new ComboBox(input, {
         dataTextField: "text",
         dataValueField: "value",

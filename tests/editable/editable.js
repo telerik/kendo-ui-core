@@ -512,6 +512,8 @@
     });
 
     test("dropdown is displayed if field values are set", function() {
+        defaultModel.foo = "foo";
+
         var editable = div.append($('<div></div>')).kendoEditable({
             fields: { field: "foo", values: [ { text: "bar", value: "foo" }] },
             model: defaultModel

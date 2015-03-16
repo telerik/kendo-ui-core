@@ -1,0 +1,52 @@
+/* Virtual List */
+
+.k-virtual-wrap {
+    position: relative;
+}
+
+.k-virtual-wrap > .k-list {
+    margin: 0;
+    padding: 0;
+}
+
+.k-virtual-list {
+    overflow-y: scroll; /* has to be scroll, not auto */
+    -webkit-overflow-scrolling: touch;
+    position: relative;
+}
+
+.k-virtual-list > .k-virtual-content {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.k-virtual-option-label {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.k-virtual-wrap > .k-virtual-header {
+    text-align: right;
+}
+
+.k-popup .k-list .k-item.k-virtual-item {
+    /*padding: 1px 0;*/
+}
+
+.k-virtual-list .k-virtual-item {
+    position: absolute;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.k-virtual-list .k-group {
+    position: absolute;
+    top: 0;
+    right: 0;
+}

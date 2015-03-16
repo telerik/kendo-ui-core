@@ -101,14 +101,6 @@ test("_change does not raise change event if value has't changed", 0, function()
     combobox._change();
 });
 
-test("_old is initialzed on refresh", function() {
-    combobox = new ComboBox(input, {autoBind: false} );
-
-    input.val("foo");
-    combobox._filterSource();
-    equal(combobox._old, "foo");
-});
-
 test("select does not raise the change event", 0, function() {
     combobox = new ComboBox(input, {
         dataSource: [{text: "foo"}, {text: "bar"}],
@@ -197,8 +189,7 @@ test("clicking an item raises the change event of HTML select", 1, function() {
 
     combobox = new ComboBox(select, {
         dataTextField: "text",
-        dataValueField: "value",
-        dataSource: [{text: "foo"}, {text: "bar"}]
+        dataValueField: "value"
     });
 
     combobox.input.focus();
@@ -223,18 +214,16 @@ test("raise change on custom value", 3, function() {
             .focusout();
 });
 
-test("raise change on custom value if element is select", 3, function() {
-    var select = $("<select><option value=1>foo1</option><option value=3>foo3</option></select>")
-                    .bind("change", function() {
-                        ok(true);
-                        equal(combobox.value(), "custom value");
-                        equal(combobox._old, "custom value");
-                    });
+test("raise change on custom value if element is select", 2, function() {
+    var select = $("<select><option value=1>foo1</option><option value=3>foo3</option></select>");
     combobox = new ComboBox(select, {
         dataSource: [{text: "foo"}, {text: "bar"}]
     });
 
-    combobox._current = null;
+    select.bind("change", function() {
+        equal(combobox.value(), "custom value");
+        equal(combobox._old, "custom value");
+    });
 
     combobox.input
             .focus()
@@ -243,14 +232,14 @@ test("raise change on custom value if element is select", 3, function() {
 
 });
 
-test("raise change if empty input after selection", 2, function() {
+test("raise change if empty input after selection", 1, function() {
     var select = $("<select><option value=1>foo1</option><option value=3>foo3</option></select>")
+                    .appendTo(QUnit.fixture)
                     .bind("change", function() {
-                        ok(true);
                         equal(combobox.value(), "");
                     });
+
     combobox = new ComboBox(select, {
-        dataSource: [{text: "foo"}, {text: "bar"}],
         dataValueField: "text",
         dataTextField: "text"
     });
@@ -261,24 +250,28 @@ test("raise change if empty input after selection", 2, function() {
 
 });
 
-test("change on custom value and ENTER", 3, function() {
-    var select = $("<select><option value=1>foo1</option><option value=3>foo3</option></select>")
-                    .bind("change", function() {
-                        ok(true);
-                        equal(combobox.value(), "test");
-                        equal(combobox.text(), "test");
-                    });
-    combobox = new ComboBox(select, {
-        dataSource: [{text: "foo"}, {text: "bar"}]
+asyncTest("change on custom value and ENTER", 2, function() {
+    var select = $("<select><option value=1>foo1</option><option value=3>foo3</option></select>").appendTo(QUnit.fixture);
+
+    select.bind("change", function() {
+        start();
+        equal(combobox.value(), "test");
+        equal(combobox.text(), "test");
     });
 
-    combobox._old = "";
-    combobox._current = null;
-    combobox.input.focus().val("test").press(kendo.keys.ENTER);
+    combobox = new ComboBox(select, {
+        delay: 0
+    });
+
+    combobox.input.focus();
+    combobox.input.val("test");
+    combobox.input.press(60); //some letter
+    combobox.input.press(kendo.keys.ENTER);
 });
 
 test("open event when click _arrow", 2, function() {
     combobox = input.kendoComboBox({
+        animation: false,
         dataSource: [{text: "foo"}, {text: "bar"}],
         open: function() {
             ok(true);
@@ -286,7 +279,7 @@ test("open event when click _arrow", 2, function() {
         }
     }).data("kendoComboBox");
 
-    input.data("kendoComboBox")._arrow.trigger(CLICK);
+    input.data("kendoComboBox").wrapper.find(".k-icon").trigger(CLICK);
 });
 
 test("open event should be cancellable", function() {
@@ -402,6 +395,45 @@ test("click item raises select event", 1, function() {
     combobox.ul.children().first().trigger(CLICK);
 });
 
+test("select event is not raised when custom value is entered", 0, function() {
+    combobox = input.kendoComboBox({
+        highlightFirst: true,
+        dataSource: ["foo"],
+        select: function(e) {
+            ok(false);
+        }
+    }).data("kendoComboBox");
+
+    combobox.input.val("custom");
+    combobox.input.press(kendo.keys.ENTER);
+});
+
+test("select event is not raised no item is focused", 0, function() {
+    combobox = input.kendoComboBox({
+        highlightFirst: false,
+        dataSource: ["foo"],
+        select: function(e) {
+            ok(false);
+        }
+    }).data("kendoComboBox");
+
+    combobox.open();
+    combobox.input.press(kendo.keys.ENTER);
+});
+
+test("select is raised when down arrow is clicked", 1, function() {
+    combobox = input.kendoComboBox({
+        highlightFirst: false,
+        dataSource: ["foo"],
+        select: function(e) {
+            ok(true);
+        }
+    }).data("kendoComboBox");
+
+    combobox.open();
+    combobox.input.press(kendo.keys.DOWN);
+});
+
 test("prevent select event should only close the popup", 2, function() {
     combobox = input.kendoComboBox({
         dataSource: ["foo"],
@@ -418,6 +450,23 @@ test("prevent select event should only close the popup", 2, function() {
     combobox.ul.children().first().trigger(CLICK);
 
     ok(!combobox.popup.visible());
+});
+
+test("preventing select event during navigation reverts selection", 2, function() {
+    var combobox = input.kendoComboBox({
+        dataSource: ["foo", "bar"],
+        select: function(e) {
+            e.preventDefault()
+        }
+    }).data("kendoComboBox");
+
+    combobox.input.focus();
+    combobox.wrapper.press(kendo.keys.DOWN);
+
+    var current = combobox.current();
+
+    ok(current.hasClass("k-state-focused"));
+    equal(current.html(), "foo");
 });
 
 test("ComboBox trigger blur of the hidden input", 1, function() {
