@@ -172,6 +172,7 @@ var __meta__ = {
 
         element.toggleClass(FOCUSED, data.current);
         element.toggleClass(SELECTED, data.selected);
+        element.toggleClass("k-first", data.newGroup);
 
         if (data.newGroup) {
             $("<div class=" + GROUPITEM + "></div>")
