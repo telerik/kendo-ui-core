@@ -88,6 +88,19 @@
         equal(view.render().html(), "<span>foo</span>");
     });
 
+    test("evaluates template with a multiple elements in the string", 1, function() {
+        var view = new kendo.View("<div>Foo</div><div>Bar</div>", { evalTemplate: true });
+
+        equal(view.render().html(), "<div>Foo</div><div>Bar</div>");
+    });
+
+    test("evaluates template with an element in the dom", 1, function() {
+        QUnit.fixture.append("<div id=foo>#: foo #</div>")
+        var view = new kendo.View("#foo", { model: { foo: "foo" }, evalTemplate: true });
+        view.render();
+        equal(QUnit.fixture.find("#foo").html(), "foo");
+    });
+
     test("can skip wrapping", 2, function() {
         var view = new kendo.View("<span id='foo'>Foo</span>", { wrap: false });
 

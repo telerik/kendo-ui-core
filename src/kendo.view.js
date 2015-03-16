@@ -162,7 +162,14 @@ var __meta__ = {
             } else {
                 element = content;
                 if (that._evalTemplate) {
-                    element.html(kendo.template(element.html())(that.model || {}));
+                    var result = $(kendo.template($("<div />").append(element.clone(true)).html())(that.model || {}));
+
+                    // template uses DOM
+                    if ($.contains(document, element[0])) {
+                        element.replaceWith(result);
+                    }
+
+                    element = result;
                 }
                 if (that._wrap) {
                     element = element.wrapAll(wrapper).parent();
