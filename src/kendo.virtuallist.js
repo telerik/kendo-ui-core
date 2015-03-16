@@ -333,6 +333,10 @@ var __meta__ = {
                 return;
             }
 
+            if (value === "" || value === null) {
+                value = [];
+            }
+
             if (value instanceof Array && !value.length) {
                 that.select(-1);
                 return;
