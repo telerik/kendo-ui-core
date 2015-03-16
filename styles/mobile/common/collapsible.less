@@ -11,9 +11,10 @@
 }
 
 .km-collapsible-header {
+    position: relative;
     border-style: solid;
     border-width: 1px 0;
-    padding: .4em;
+    padding: .4em 20px;
 }
 
 .km-collapsibleinset > .km-collapsible-header {
@@ -55,20 +56,30 @@
     overflow: hidden;
 }
 
+.km-collapsible-header .km-arrow-s,
+.km-collapsible-header .km-arrow-n
+{
+    position: absolute;
+    top: .4em;
+}
+
+.km-icon-left .km-arrow-s,
+.km-icon-left .km-arrow-n
+{
+    left: .2em;
+}
+
 .km-icon-right .km-arrow-s,
 .km-icon-right .km-arrow-n
 {
-    float: right;
-}
-
-.km-icon-right + .km-collapsible-content
-{
-    clear: right;
+    left: auto;
+    right: .2em;
 }
 
 .km-icon-top .km-arrow-s,
 .km-icon-top .km-arrow-n
 {
+    position: static;
     display: block;
     margin: 0 auto;
     width: 1em;
