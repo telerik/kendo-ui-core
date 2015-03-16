@@ -13,6 +13,11 @@ var __meta__ = {
         name: "Mobile scroller",
         description: "Support for kinetic scrolling in mobile device",
         depends: [ "mobile.scroller" ]
+    }, {
+        id: "virtualization",
+        name: "VirtualList",
+        description: "Support for virtualization",
+        depends: [ "virtuallist" ]
     } ]
 };
 
