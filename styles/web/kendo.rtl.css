@@ -73,6 +73,12 @@
     margin: 0 2px 0 0;
 }
 
+.k-rtl.k-popup > .k-static-header
+{
+    text-align: left;
+    padding-left: 22px;
+}
+
 /* Calendar */
 
 .k-rtl .k-widget.k-calendar .k-nav-prev { left: auto; right: 1%; }
