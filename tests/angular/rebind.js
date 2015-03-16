@@ -39,7 +39,7 @@
         });
 
         QUnit.fixture.html('<div ng-controller=mine><select kendo-drop-down-list k-options="productsOptions" k-ng-model="selectedProduct" k-ng-delay="productsOptions"></select></div>'); },
-    function() {
+        function() {
         var scope = QUnit.fixture.find("select").scope();
 
         scope.$apply(function(){
@@ -138,4 +138,28 @@
         }, 100);
     });
 
+    ngTest("ng-rebind persists the template", 2, function() {
+        angular.module('kendo.tests').controller('mine', function($scope) {
+            $scope.foo = new kendo.data.ObservableArray([1]);
+            $scope.state = "a";
+        });
+
+        QUnit.fixture.html('<div ng-controller=mine><div kendo-list-view k-rebind="state" k-data-source="foo"><div k-template="" class="item">{{dataItem}}</div></div>');
+    },
+    function() {
+        equal(QUnit.fixture.find(".item").text(), "1");
+        var scope = QUnit.fixture.find(".item").parent().scope();
+
+        scope.$apply(function() {
+            scope.foo = new kendo.data.ObservableArray([2]);
+            scope.state = "b";
+        });
+
+        stop();
+
+        setTimeout(function() {
+            start();
+            equal(QUnit.fixture.find(".item").text(), "2");
+        });
+    });
 })();

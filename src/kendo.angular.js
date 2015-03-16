@@ -223,7 +223,7 @@ var __meta__ = {
             var destroyRegister = destroyWidgetOnScopeDestroy(scope, object);
 
             if (attrs.kRebind) {
-                setupRebind(object, scope, element, originalElement, attrs.kRebind, destroyRegister);
+                setupRebind(object, scope, element, originalElement, attrs.kRebind, destroyRegister, attrs);
             }
 
             if (attrs.kNgDisabled) {
@@ -530,7 +530,7 @@ var __meta__ = {
         widget.first("destroy", suspend);
     }
 
-    function setupRebind(widget, scope, element, originalElement, rebindAttr, destroyRegister) {
+    function setupRebind(widget, scope, element, originalElement, rebindAttr, destroyRegister, attrs) {
         // watch for changes on the expression passed in the k-rebind attribute
         var unregister = scope.$watch(rebindAttr, function(newValue, oldValue) {
             if (newValue !== oldValue) {
@@ -544,6 +544,18 @@ var __meta__ = {
                 //
                 // kRebind is probably impossible to get right at the moment.
                 ****************************************************************/
+
+                var templateOptions = WIDGET_TEMPLATE_OPTIONS[widget.options.name];
+
+                if (templateOptions) {
+                    templateOptions.forEach(function(name) {
+                        var templateContents = scope.$eval(attrs["k" + name]);
+
+                        if (templateContents) {
+                            originalElement.append($(templateContents).attr(kendo.toHyphens("k" + name), ""));
+                        }
+                    });
+                }
 
                 var _wrapper = $(widget.wrapper)[0];
                 var _element = $(widget.element)[0];
