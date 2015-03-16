@@ -362,10 +362,12 @@ var __meta__ = {
             for (var i = 0; i < value.length; i++) {
                 for (var idx = 0; idx < dataView.length; idx++) {
                     item = dataView[idx].item;
-                    match = isPrimitive(item) ? value[i] === item : value[i] === valueGetter(item);
+                    if (item) {
+                        match = isPrimitive(item) ? value[i] === item : value[i] === valueGetter(item);
 
-                    if (item && match) {
-                        forSelection.push(idx);
+                        if (match) {
+                            forSelection.push(idx);
+                        }
                     }
                 }
             }
