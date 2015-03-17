@@ -397,29 +397,44 @@ var __meta__ = {
             var dataSource = this.dataSource;
             var take = this.itemCount;
             var ranges = this._rangesList;
+            var result = $.Deferred();
+            var defs = [];
 
-            var page = index < take ? 1 : Math.floor(index / take) + 1;
-            var skip = (page - 1) * take;
-            var end = skip + take;
-            var existingRange = ranges[skip];
-            var deferred;
 
-            if (!existingRange || (existingRange.end !== end)) {
-                deferred = $.Deferred();
-                ranges[skip] = { end: end, deferred: deferred };
+            var low = Math.floor(index / take) * take;
+            var high = Math.ceil(index / take) * take;
 
-                dataSource._multiplePrefetch(skip, take, function() {
-                    deferred.resolve();
-                });
-            } else {
-                deferred = existingRange.deferred;
-            }
+            var pages = high  === low ? [ high ] : [ low, high ];
 
-            return deferred;
+            $.each(pages, function(_, skip) {
+                var end = skip + take;
+                var existingRange = ranges[skip];
+                var deferred;
+
+                if (!existingRange || (existingRange.end !== end)) {
+                    deferred = $.Deferred();
+                    ranges[skip] = { end: end, deferred: deferred };
+
+                    dataSource._multiplePrefetch(skip, take, function() {
+                        deferred.resolve();
+                    });
+                } else {
+                    deferred = existingRange.deferred;
+                }
+
+                defs.push(deferred);
+            });
+
+            $.when.apply($, defs).then(function() {
+                result.resolve();
+            });
+
+            return result;
         },
 
         prefetch: function(indexes) {
             var that = this,
+                take = this.itemCount,
                 dataSource = this.dataSource,
                 isEmptyList = !that._promisesList.length;
 
@@ -429,7 +444,8 @@ var __meta__ = {
             }
 
             $.each(indexes, function(_, index) {
-                that._promisesList.push(that.deferredRange(index));
+                var rangeStart = Math.floor(index / take) * take;
+                that._promisesList.push(that.deferredRange(rangeStart));
             });
 
             if (isEmptyList) {
@@ -611,6 +627,7 @@ var __meta__ = {
             } else {
                 if (singleSelection) {
                     this._activeDeferred = null;
+                    prefetchStarted = false;
                     indexes = [lastFrom(indexes)];
                 }
 
@@ -847,7 +864,7 @@ var __meta__ = {
             }
         },
 
-        _getter: function(dataAvailableCallback) {
+        _getter: function() {
             var lastRequestedRange = null,
                 dataSource = this.dataSource,
                 lastRangeStart = dataSource.skip(),
@@ -856,12 +873,16 @@ var __meta__ = {
                 flatGroups = {};
 
             return function(index, rangeStart) {
+                var that = this;
                 if (!dataSource.inRange(rangeStart, pageSize)) {
                     if (lastRequestedRange !== rangeStart) {
                         lastRequestedRange = rangeStart;
                         lastRangeStart = rangeStart;
                         this._fetching = true;
-                        dataSource.range(rangeStart, pageSize);
+                        this.deferredRange(rangeStart).then(function() {
+                            that._fetching = true;
+                            dataSource.range(rangeStart, pageSize);
+                        });
                     }
 
                     return null;

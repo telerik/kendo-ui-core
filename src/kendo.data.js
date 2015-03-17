@@ -3527,7 +3527,6 @@ var __meta__ = {
             data = that._findRange(skip, math.min(skip + take, that.total()));
 
             if (data.length) {
-
                 that._skipRequestsInProgress = true;
                 that._pending = undefined;
 
@@ -3675,7 +3674,7 @@ var __meta__ = {
             return this._take || this._pageSize;
         },
 
-        _prefetchSuccessHandler: function (skip, size, callback) {
+        _prefetchSuccessHandler: function (skip, size, callback, force) {
             var that = this;
 
             return function(data) {
@@ -3711,7 +3710,7 @@ var __meta__ = {
                 that._ranges.sort( function(x, y) { return x.start - y.start; } );
                 that._total = that.reader.total(data);
 
-                if (!that._skipRequestsInProgress) {
+                if (force || !that._skipRequestsInProgress) {
                     if (callback && temp.length) {
                         callback();
                     } else {
@@ -3773,7 +3772,7 @@ var __meta__ = {
                 if (!that.trigger(REQUESTSTART, { type: "read" })) {
                     that.transport.read({
                         data: that._params(options),
-                        success: that._prefetchSuccessHandler(skip, size, callback)
+                        success: that._prefetchSuccessHandler(skip, size, callback, true)
                     });
                 }
             } else if (callback) {
