@@ -417,7 +417,7 @@ var __meta__ = {
                 this.element.style.display = "none";
             }
         }
-    });
+  });
 
     binders.html = Binder.extend({
         refresh: function() {
@@ -1725,3 +1725,4 @@ return window.kendo;
 
 
 }, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });
+;
