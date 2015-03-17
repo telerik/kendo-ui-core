@@ -543,7 +543,7 @@ var __meta__ = {
                     .removeClass(FOCUSEDCLASS);
             }
 
-            if (candidate) {
+            if ($(candidate).length) {
                 id = candidate[0].id || id;
 
                 candidate.attr("id", id)
