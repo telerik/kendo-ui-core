@@ -759,4 +759,48 @@ test("ComboBox sets options.value to input value on init", function() {
     equal(combobox.options.value, "1");
 });
 
+test("ComboBox adds scrollbar width to the fixed group header padding", function() {
+    var dataSource = new kendo.data.DataSource({
+        data: [
+            { value: 1 },
+            { value: 2 },
+            { value: 3 },
+            { value: 4 },
+            { value: 5 }
+        ],
+        group: "value"
+    });
+
+    combobox = input.kendoComboBox({
+        dataSource: dataSource,
+        height: 50
+    }).data("kendoComboBox");
+
+    var padding = combobox.list.find(".k-static-header").css("padding-right");
+
+    ok(parseFloat(padding) > 15);
+});
+
+test("ComboBox does not add scrollbar width to the fixed group header padding if popup has not scroll", function() {
+    var dataSource = new kendo.data.DataSource({
+        data: [
+            { value: 1 },
+            { value: 2 },
+            { value: 3 },
+            { value: 4 },
+            { value: 5 }
+        ],
+        group: "value"
+    });
+
+    combobox = input.kendoComboBox({
+        dataSource: dataSource,
+        height: 350
+    }).data("kendoComboBox");
+
+    var padding = combobox.list.find(".k-static-header").css("padding-right");
+
+    ok(parseFloat(padding) < 15);
+});
+
 })();

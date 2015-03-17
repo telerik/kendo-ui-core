@@ -453,7 +453,7 @@ var __meta__ = {
 
             that._render(data);
 
-            that._height(length);
+            that._calculateGroupPadding(that._height(length));
 
             if (that._open) {
                 that._open = false;

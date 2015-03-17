@@ -347,14 +347,14 @@ var __meta__ = {
         },
 
         _height: function(length) {
-            if (length) {
-                var that = this,
-                    list = that.list,
-                    height = that.options.height,
-                    visible = that.popup.visible(),
-                    offsetTop,
-                    popups;
+            var that = this;
+            var list = that.list;
+            var height = that.options.height;
+            var visible = that.popup.visible();
+            var offsetTop;
+            var popups;
 
+            if (length) {
                 popups = list.add(list.parent(".k-animation-container")).show();
 
                 height = that.ul[0].scrollHeight > height ? height : "auto";
@@ -375,6 +375,8 @@ var __meta__ = {
                     popups.hide();
                 }
             }
+
+            return height;
         },
 
         _adjustListWidth: function() {
@@ -447,9 +449,27 @@ var __meta__ = {
             }
         },
 
+        _calculateGroupPadding: function(height) {
+            var ul = this.ul;
+            var li = $(ul[0].firstChild);
+            var groupHeader = ul.prev(".k-static-header");
+            var padding = 0;
+
+            if (groupHeader[0].style.display !== "none") {
+                if (height !== "auto") {
+                    padding = kendo.support.scrollbar();
+                }
+
+                padding += parseFloat(li.css("border-right-width"), 10) + parseFloat(li.children(".k-group").css("right"), 10);
+
+                groupHeader.css("padding-right", padding);
+            }
+        },
+
         //use length of the items in ListView
         _firstOpen: function() {
-            this._height(this.listView.data().length);
+            var height = this._height(this.listView.data().length);
+            this._calculateGroupPadding(height);
         },
 
         _popup: function() {

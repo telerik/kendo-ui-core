@@ -385,4 +385,51 @@ test("AutoComplete uses input value if options.value is null", function() {
     equal(input.val(), "test");
 });
 
+test("AutoComplete adds scrollbar width to the fixed group header padding", function() {
+    var dataSource = new kendo.data.DataSource({
+        data: [
+            { value: 1 },
+            { value: 2 },
+            { value: 3 },
+            { value: 4 },
+            { value: 5 }
+        ],
+        group: "value"
+    });
+
+    var autocomplete = input.kendoAutoComplete({
+        dataSource: dataSource,
+        height: 50
+    }).data("kendoAutoComplete");
+
+    var padding = autocomplete.list.find(".k-static-header").css("padding-right");
+
+    ok(parseFloat(padding) > 15);
+});
+
+test("AutoComplete does not add scrollbar width if popup is shorter then options.height", function() {
+    var dataSource = new kendo.data.DataSource({
+        data: [
+            { value: 1 },
+            { value: 2 },
+            { value: 3 },
+            { value: 4 },
+            { value: 5 }
+        ],
+        group: "value"
+    });
+
+    var autocomplete = input.kendoAutoComplete({
+        dataSource: dataSource,
+        height: 350
+    }).data("kendoAutoComplete");
+
+    autocomplete.dataSource.read();
+    autocomplete.popup.open();
+
+    var padding = autocomplete.list.find(".k-static-header").css("padding-right");
+
+    ok(parseFloat(padding) < 15);
+});
+
 }());

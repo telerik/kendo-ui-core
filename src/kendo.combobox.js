@@ -318,7 +318,7 @@ var __meta__ = {
             that._angularItems("compile");
 
             if (!options.virtual) {
-                that._height(length);
+                that._calculateGroupPadding(that._height(length));
             }
 
             if (that.popup.visible()) {

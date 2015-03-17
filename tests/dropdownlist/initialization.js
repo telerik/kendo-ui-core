@@ -985,4 +985,48 @@
 
         ok(dropdownlist.ul[0].scrollTop > 50);
     });
+
+    test("DropDownList adds scrollbar width to the fixed group header padding", function() {
+        var dataSource = new kendo.data.DataSource({
+            data: [
+                { value: 1 },
+                { value: 2 },
+                { value: 3 },
+                { value: 4 },
+                { value: 5 }
+            ],
+            group: "value"
+        });
+
+        var dropdownlist = input.kendoDropDownList({
+            dataSource: dataSource,
+            height: 50
+        }).data("kendoDropDownList");
+
+        var padding = dropdownlist.list.find(".k-static-header").css("padding-right");
+
+        ok(parseFloat(padding) > 15);
+    });
+
+    test("DropDownList does not add scrollbar width to the fixed group header padding if popup has not scroll", function() {
+        var dataSource = new kendo.data.DataSource({
+            data: [
+                { value: 1 },
+                { value: 2 },
+                { value: 3 },
+                { value: 4 },
+                { value: 5 }
+            ],
+            group: "value"
+        });
+
+        var dropdownlist = input.kendoDropDownList({
+            dataSource: dataSource,
+            height: 350
+        }).data("kendoDropDownList");
+
+        var padding = dropdownlist.list.find(".k-static-header").css("padding-right");
+
+        ok(parseFloat(padding) < 15);
+    });
 })();

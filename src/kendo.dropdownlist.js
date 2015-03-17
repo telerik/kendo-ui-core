@@ -427,12 +427,14 @@ var __meta__ = {
             var filtered = that._state === STATE_FILTER;
             var element = that.element[0];
             var selectedIndex;
+            var height;
             var value;
 
             that._angularItems("compile");
 
-            if (!this.options.virtual) {
-                that._height(filtered ? (length || 1) : length);
+            if (!that.options.virtual) {
+                height = that._height(filtered ? (length || 1) : length);
+                that._calculateGroupPadding(height);
             }
 
             if (that.popup.visible()) {

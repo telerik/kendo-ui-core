@@ -419,7 +419,7 @@ var __meta__ = {
 
             that._angularItems("compile");
 
-            that._height(length);
+            that._calculateGroupPadding(that._height(length));
 
             if (popup.visible()) {
                 popup._position();
