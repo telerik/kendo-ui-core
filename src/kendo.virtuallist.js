@@ -393,11 +393,35 @@ var __meta__ = {
             }
         },
 
+        deferredRange: function(index) {
+            var dataSource = this.dataSource;
+            var take = this.itemCount;
+            var ranges = this._rangesList;
+
+            var page = index < take ? 1 : Math.floor(index / take) + 1;
+            var skip = (page - 1) * take;
+            var end = skip + take;
+            var existingRange = ranges[skip];
+            var deferred;
+
+            if (!existingRange || (existingRange.end !== end)) {
+                deferred = $.Deferred();
+                ranges[skip] = { end: end, deferred: deferred };
+
+                dataSource._multiplePrefetch(skip, take, function() {
+                    deferred.resolve();
+                });
+            } else {
+                deferred = existingRange.deferred;
+            }
+
+            return deferred;
+        },
+
         prefetch: function(indexes) {
             var that = this,
                 dataSource = this.dataSource,
-                isEmptyList = !that._promisesList.length,
-                take = that.itemCount;
+                isEmptyList = !that._promisesList.length;
 
             if (!that._activeDeferred) {
                 that._activeDeferred = $.Deferred();
@@ -405,19 +429,7 @@ var __meta__ = {
             }
 
             $.each(indexes, function(_, index) {
-                var page = index < take ? 1 : Math.floor(index / take) + 1;
-                var skip = (page - 1) * take;
-                var deferred;
-
-                if (!that._rangesList[skip] && that._rangesList[skip] !== skip + take) {
-                    that._rangesList[skip] = skip + take;
-                    deferred = $.Deferred();
-                    that._promisesList.push(deferred);
-
-                    dataSource._multiplePrefetch(skip, take, function() {
-                        deferred.resolve();
-                    });
-                }
+                that._promisesList.push(that.deferredRange(index));
             });
 
             if (isEmptyList) {
@@ -761,10 +773,12 @@ var __meta__ = {
 
         _saveInitialRanges: function() {
             var ranges = this.dataSource._ranges;
+            var deferred = $.Deferred();
+            deferred.resolve();
 
             this._rangesList = {};
             for (var i = 0; i < ranges.length; i++) {
-                this._rangesList[ranges[i].start] = ranges[i].end;
+                this._rangesList[ranges[i].start] = { end: ranges[i].end, deferred: deferred };
             }
         },
 
