@@ -455,7 +455,7 @@ var __meta__ = {
             var groupHeader = ul.prev(".k-static-header");
             var padding = 0;
 
-            if (groupHeader[0].style.display !== "none") {
+            if (groupHeader[0] && groupHeader[0].style.display !== "none") {
                 if (height !== "auto") {
                     padding = kendo.support.scrollbar();
                 }
