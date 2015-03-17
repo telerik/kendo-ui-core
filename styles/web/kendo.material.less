@@ -1499,6 +1499,16 @@ div.k-scheduler-marquee:after {
     }    
 }
 
+@media only screen and (max-width: 640px) {
+    .k-webkit,
+    .k-ff,
+    .k-ie11 {
+        .k-pager-info {
+            display: none;
+        }
+    }    
+}
+
 @media only screen and (max-width: 480px) {
     .k-webkit,
     .k-ff,
@@ -1506,12 +1516,5 @@ div.k-scheduler-marquee:after {
         .k-pager-sizes {
             display: none;
         }
-    }
-    .k-webkit,
-    .k-ff,
-    .k-ie11 {
-        .k-pager-info {
-            display: none;
-        }
-    }
+    }    
 }

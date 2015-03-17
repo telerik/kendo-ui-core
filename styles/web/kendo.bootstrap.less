@@ -1009,6 +1009,16 @@ td.k-state-focused.k-state-selected,
     }
 }
 
+@media only screen and (max-width: 640px) {
+    .k-webkit,
+    .k-ff,
+    .k-ie11 {
+        .k-pager-info {
+            display: none;
+        }
+    }    
+}
+
 @media only screen and (max-width: 480px) {
     .k-webkit,
     .k-ff,
@@ -1016,12 +1026,5 @@ td.k-state-focused.k-state-selected,
         .k-pager-sizes {
             display: none;
         }
-    }
-    .k-webkit,
-    .k-ff,
-    .k-ie11 {
-        .k-pager-info {
-            display: none;
-        }
-    }
+    }    
 }
