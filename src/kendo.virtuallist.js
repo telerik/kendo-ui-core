@@ -314,7 +314,7 @@ var __meta__ = {
                 if (that._renderItems) {
                     that._renderItems(true);
                 }
-                that.trigger(LISTBOUND);
+                //that.trigger(LISTBOUND);
             }
 
             that._fetching = false;
