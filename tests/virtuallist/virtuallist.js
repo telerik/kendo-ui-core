@@ -64,7 +64,7 @@
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource
         });
-        
+
         setTimeout(function() {
             start();
             equal(virtualList.element.find(".k-height-container").length, 1);
@@ -76,7 +76,7 @@
             dataSource: asyncDataSource,
             itemHeight: 40
         });
-        
+
         setTimeout(function() {
             start();
             equal(virtualList.element.find(".k-height-container").height(), 4000); //dataSource.total() * itemHeight
@@ -178,6 +178,36 @@
         setTimeout(function() {
             start();
             ok(!virtualList.optionLabel);
+        }, 100);
+    });
+
+    asyncTest("adds k-state-hover class on mouseenter", 1, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            template: "#:text#"
+        });
+
+        setTimeout(function() {
+            start();
+            var element = virtualList.items().first();
+            element.trigger("mouseover");
+            ok(element.hasClass("k-state-hover"));
+        }, 100);
+    });
+
+    asyncTest("removes k-state-hover class on mouseleave", 2, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: asyncDataSource,
+            template: "#:text#"
+        });
+
+        setTimeout(function() {
+            start();
+            var element = virtualList.items().first();
+            element.trigger("mouseover");
+            ok(element.hasClass("k-state-hover"));
+            element.trigger("mouseleave");
+            ok(!element.hasClass("k-state-hover"));
         }, 100);
     });
 

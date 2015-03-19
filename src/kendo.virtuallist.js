@@ -30,6 +30,7 @@ var __meta__ = {
 
         SELECTED = "k-state-selected",
         FOCUSED = "k-state-focused",
+        HOVER = "k-state-hover",
         CHANGE = "change",
         CLICK = "click",
         LISTBOUND = "listBound",
@@ -210,6 +211,9 @@ var __meta__ = {
             that.wrapper = element.wrap("<div class='" + WRAPPER + "' role='listbox'></div>").parent();
             that.header = that.element.before("<div class='" + HEADER + "'></div>").prev();
             that.content = element.append("<ul class='" + CONTENT + " " + LIST + "'></ul>").find("." + CONTENT);
+
+            that.content.on("mouseenter" + VIRTUAL_LIST_NS, "li", function() { $(this).addClass(HOVER); })
+                        .on("mouseleave" + VIRTUAL_LIST_NS, "li", function() { $(this).removeClass(HOVER); });
 
             that._values = toArray(that.options.value);
             that._selectedDataItems = [];
