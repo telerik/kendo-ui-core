@@ -336,7 +336,7 @@ test("ComboBox selects first item on down arrow even when it is highlighted", fu
     equal(combobox.value(), "foo");
 });
 
-test("ComboBox selects next after search", function() {
+test("ComboBox selects focused item after search", function() {
     combobox = new ComboBox(input, {
         dataSource: ["foo", "bar", "baz"]
     });
@@ -348,7 +348,7 @@ test("ComboBox selects next after search", function() {
         keyCode: kendo.keys.DOWN
     });
 
-    equal(combobox.value(), "baz");
+    equal(combobox.value(), "bar");
 });
 
 test("ComboBox bind widget on DOWN arrow", 1, function() {
@@ -514,6 +514,21 @@ test("ComboBox does not focus input if mobile device", 1, function() {
     combobox.wrapper.find(".k-icon").click();
 
     notEqual(combobox.input[0], document.activeElement);
+});
+
+test("Selects first item if it is focused but not selected", 2, function() {
+    var combobox = new ComboBox(input, {
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: data
+    });
+
+    combobox.input.focus().press(keys.DOWN);
+
+    var current = combobox.current();
+
+    equal(current.index(), 0);
+    ok(current.hasClass("k-state-selected"));
 });
 
 })();
