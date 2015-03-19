@@ -135,6 +135,7 @@ test("change should be raised on enter", 1, function() {
         }
     });
 
+    combobox.open();
     combobox.input.focus();
     combobox.input.press(kendo.keys.DOWN);
     combobox.input.press(kendo.keys.ENTER);

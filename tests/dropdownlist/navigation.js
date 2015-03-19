@@ -743,4 +743,19 @@
 
         equal(dropdownlist.value(), "0");
     });
+
+    test("Selects first item if it is focused but not selected", 2, function() {
+        var dropdownlist = new DropDownList(input, {
+            dataSource: data,
+            index: -1
+        });
+
+        dropdownlist.listView.first();
+        dropdownlist.wrapper.focus().press(keys.DOWN);
+
+        var current = dropdownlist.current();
+
+        equal(current.index(), 0);
+        ok(current.hasClass("k-state-selected"));
+    });
 })();
