@@ -72,10 +72,12 @@ module("mvvm binding", {
 });
 
 test("text binding", function() {
-    dom = $('<span data-bind="text:foo"/>');
-
-    kendo.bind(dom, { foo: "foo" });
-    equal(dom.text(), "foo");
+    dom = $('<span data-bind="text:text"/>');
+    var vm = kendo.observable({
+        text: "Comment\nwith\nbreakline <bold>TEST HTML</bold>"
+    });
+    kendo.bind(dom, vm);
+    equal(dom.text(), vm.get("text"));
 });
 
 test("html binding", function() {

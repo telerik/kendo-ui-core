@@ -21,7 +21,6 @@ var __meta__ = {
         binders = {},
         slice = Array.prototype.slice,
         Class = kendo.Class,
-        innerText,
         proxy = $.proxy,
         VALUE = "value",
         SOURCE = "source",
@@ -32,12 +31,6 @@ var __meta__ = {
 
     (function() {
         var a = document.createElement("a");
-
-        if (a.innerText !== undefined) {
-            innerText = "innerText";
-        } else if (a.textContent !== undefined) {
-            innerText = "textContent";
-        }
 
         try {
             delete a.test;
@@ -395,7 +388,7 @@ var __meta__ = {
                 text = "";
             }
 
-            this.element[innerText] = text;
+            $(this.element).text(text);
         }
     });
 
