@@ -939,7 +939,7 @@
         equal(children.eq(2).attr("class"), "k-item");
     });
 
-    test("value method allows to update value slitenly", function() {
+    test("value method allows to update value silently", function() {
         var list = new StaticList(element, {
             template: "#:data#"
         });
@@ -957,6 +957,32 @@
 
         equal(value.length, 1);
         equal(value[0], "custom");
+    });
+
+    test("value method returns promise", 1, function() {
+        var list = new StaticList(element, {
+            dataSource: ["item1", "item2", "item3"],
+            template: "#:data#"
+        });
+
+        list.dataSource.read();
+
+        list.value("item").done(function() {
+            ok(true);
+        });
+    });
+
+    test("value method returns promise that is resolved on bind", 1, function() {
+        var list = new StaticList(element, {
+            dataSource: ["item1", "item2", "item3"],
+            template: "#:data#"
+        });
+
+        list.value("item").done(function() {
+            ok(true);
+        });
+
+        list.dataSource.read();
     });
 
     test("next method focuses first item if no items are focused", function() {

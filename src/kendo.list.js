@@ -1350,20 +1350,27 @@ var __meta__ = {
                 return;
             }
 
+            if (!this._deferredValue || this._deferredValue.state() === "resolved") {
+                this._deferredValue = $.Deferred();
+            }
+
             if (this.isBound()) {
                 indices = this._valueIndices(value);
 
                 if (!indices.length) {
                     this.select([]);
-                    return;
+                } else {
+                    this._selectedIndices = [];
+                    this._dataItems = [];
+                    this._values = [];
+
+                    this.select(indices);
                 }
 
-                this._selectedIndices = [];
-                this._dataItems = [];
-                this._values = [];
-
-                this.select(indices);
+                this._deferredValue.resolve();
             }
+
+            return this._deferredValue;
         },
 
         data: function() {
@@ -1732,6 +1739,10 @@ var __meta__ = {
 
             if (!this._isFilter) {
                 this.value(this._values);
+            }
+
+            if (this._deferredValue) {
+                this._deferredValue.resolve();
             }
         },
 
