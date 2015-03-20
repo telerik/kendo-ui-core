@@ -865,7 +865,14 @@ var __meta__ = {
                     dataSource = widget[fieldName],
                     view,
                     parents,
-                    groups = dataSource.group() || [];
+                    groups = dataSource.group() || [],
+                    hds = kendo.data.HierarchicalDataSource;
+
+                if (hds && dataSource instanceof hds) {
+                    // suppress binding of HDS items, because calling view() on root
+                    // will return only root items, and widget.items() returns all items
+                    return;
+                }
 
                 if (items.length) {
                     view = e.addedDataItems || dataSource.flatView();
