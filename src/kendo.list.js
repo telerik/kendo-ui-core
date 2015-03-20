@@ -1288,6 +1288,30 @@ var __meta__ = {
             that.trigger("activate");
         },
 
+        clearIndices: function() {
+            this._selectedIndices = [];
+        },
+
+        data: function() {
+            var that = this;
+            var data = that._view;
+            var length = data.length;
+            var result = [];
+            var idx;
+
+            if (length) {
+                for (idx = 0; idx < length; idx++) {
+                    result.push(data[idx].item);
+                }
+            }
+
+            return result;
+        },
+
+        filter: function(isFilter) {
+            this._isFilter = isFilter;
+        },
+
         select: function(indices) {
             var selectable = this.options.selectable;
             var singleSelection = selectable !== "multiple" && selectable !== false;
@@ -1332,10 +1356,12 @@ var __meta__ = {
         },
 
         value: function(value, silent) {
+            var that = this;
+            var deferred = that._valueDeferred;
             var indices;
 
             if (value === undefined) {
-                return this._values.slice();
+                return that._values.slice();
             }
 
             if (value === "" || value === null) {
@@ -1344,57 +1370,33 @@ var __meta__ = {
 
             value = $.isArray(value) || value instanceof ObservableArray ? value.slice(0) : [value];
 
-            this._values = value;
+            that._values = value;
 
             if (silent) {
                 return;
             }
 
-            if (!this._deferredValue || this._deferredValue.state() === "resolved") {
-                this._deferredValue = $.Deferred();
+            if (!deferred || deferred.state() === "resolved") {
+                that._valueDeferred = deferred = $.Deferred();
             }
 
-            if (this.isBound()) {
-                indices = this._valueIndices(value);
+            if (that.isBound()) {
+                indices = that._valueIndices(value);
 
                 if (!indices.length) {
-                    this.select([]);
+                    that.select([]);
                 } else {
-                    this._selectedIndices = [];
-                    this._dataItems = [];
-                    this._values = [];
+                    that._selectedIndices = [];
+                    that._dataItems = [];
+                    that._values = [];
 
-                    this.select(indices);
+                    that.select(indices);
                 }
 
-                this._deferredValue.resolve();
+                deferred.resolve();
             }
 
-            return this._deferredValue;
-        },
-
-        data: function() {
-            var that = this;
-            var data = that._view;
-            var length = data.length;
-            var result = [];
-            var idx;
-
-            if (length) {
-                for (idx = 0; idx < length; idx++) {
-                    result.push(data[idx].item);
-                }
-            }
-
-            return result;
-        },
-
-        clearIndices: function() {
-            this._selectedIndices = [];
-        },
-
-        filter: function(isFilter) {
-            this._isFilter = isFilter;
+            return deferred;
         },
 
         _click: function(e) {
@@ -1443,14 +1445,18 @@ var __meta__ = {
         },
 
         _deselect: function(indices) {
-            var children = this.element[0].children;
-            var selectable = this.options.selectable;
-            var selectedIndices = this._selectedIndices;
-            var dataItems = this._dataItems;
-            var values = this._values;
+            var that = this;
+            var children = that.element[0].children;
+            var selectable = that.options.selectable;
+            var selectedIndices = that._selectedIndices;
+            var dataItems = that._dataItems;
+            var values = that._values;
             var removed = [];
             var i = 0;
             var j;
+
+            var index, selectedIndex;
+            var removedIndices = 0;
 
             indices = indices.slice();
 
@@ -1464,13 +1470,10 @@ var __meta__ = {
                     });
                 }
 
-                this._values = [];
-                this._dataItems = [];
-                this._selectedIndices = [];
+                that._values = [];
+                that._dataItems = [];
+                that._selectedIndices = [];
             } else if (selectable === "multiple") {
-                var index, selectedIndex;
-                var removedIndices = 0;
-
                 for (; i < indices.length; i++) {
                     index = indices[i];
 
@@ -1509,14 +1512,15 @@ var __meta__ = {
         },
 
         _select: function(indices) {
-            var children = this.element[0].children;
-            var data = this._view;
+            var that = this;
+            var children = that.element[0].children;
+            var data = that._view;
             var dataItem, index;
             var added = [];
             var idx = 0;
 
             if (indices[indices.length - 1] !== -1) {
-                this.focus(indices);
+                that.focus(indices);
             }
 
             for (; idx < indices.length; idx++) {
@@ -1529,9 +1533,9 @@ var __meta__ = {
 
                 dataItem = dataItem.item;
 
-                this._selectedIndices.push(index);
-                this._dataItems.push(dataItem);
-                this._values.push(this._valueGetter(dataItem));
+                that._selectedIndices.push(index);
+                that._dataItems.push(dataItem);
+                that._values.push(that._valueGetter(dataItem));
 
                 $(children[index]).addClass("k-state-selected").attr("aria-selected", true);
 
@@ -1729,20 +1733,22 @@ var __meta__ = {
         },
 
         refresh: function() {
-            this.trigger("dataBinding");
+            var that = this;
 
-            this._render();
+            that.trigger("dataBinding");
 
-            this._bound = true;
+            that._render();
 
-            this.trigger("dataBound");
+            that._bound = true;
 
-            if (!this._isFilter) {
-                this.value(this._values);
+            that.trigger("dataBound");
+
+            if (!that._isFilter) {
+                that.value(that._values);
             }
 
-            if (this._deferredValue) {
-                this._deferredValue.resolve();
+            if (that._valueDeferred) {
+                that._valueDeferred.resolve();
             }
         },
 
