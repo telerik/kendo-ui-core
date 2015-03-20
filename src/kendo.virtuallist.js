@@ -943,7 +943,7 @@ var __meta__ = {
 
                 if (firstVisibleGroup !== group) {
                     this.header[0].innerHTML = "";
-                    appendChild(this.header[0], GROUPITEM).innerHTML = firstVisibleGroup;
+                    appendChild(this.header[0], GROUPITEM).innerHTML = firstVisibleGroup || "";
                     this.currentVisibleGroup = firstVisibleGroup;
                 }
             }
