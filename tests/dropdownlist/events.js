@@ -650,4 +650,19 @@
         dropdownlist.open();
         dropdownlist.filterInput.focus().val("bar").keydown();
     });
+
+    test("DropDownList with option lable raises change event on first click", 1, function() {
+        var changeWasCalled = false, dropdownlist = new DropDownList(input, {
+            optionLabel: "Select...",
+            dataSource: ["foo", "bar"],
+            change: function() {
+                ok(true);
+            }
+        });
+
+        dropdownlist.value("");
+
+        dropdownlist.open();
+        dropdownlist.ul.children(":first").click();
+    });
 })();

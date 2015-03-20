@@ -365,14 +365,12 @@ var __meta__ = {
                 value = "";
             }
 
-            value = value.toString();
+            that.listView.value(value.toString()).done(function() {
+                that._triggerCascade();
 
-            that.listView.one("change", function() {
                 that._old = that._accessor();
                 that._oldIndex = that.selectedIndex;
             });
-
-            that.listView.value(value);
 
             that._fetchData();
         },
@@ -514,10 +512,6 @@ var __meta__ = {
 
                 if (filtered) {
                     that._select(that._focus(), !that.listView.dataItems()[0]);
-                }
-
-                if (!filtered || that.dataItem()) {
-                    //that._triggerCascade();
                 }
 
                 if (kendo.support.mobileOS.ios && isIFrame) {

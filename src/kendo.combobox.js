@@ -583,7 +583,6 @@ var __meta__ = {
         value: function(value) {
             var that = this;
             var options = that.options;
-            var index;
 
             if (value === undefined) {
                 value = that._accessor() || that.listView.value()[0];
@@ -603,19 +602,15 @@ var __meta__ = {
             that.input.val(value);
             that._accessor(value);
 
-            that.listView.value(value);
-            that._triggerCascade();
+            that.listView.value(value).done(function() {
+                that._triggerCascade();
 
-            index = that.listView.select()[0];
-            if (index === undefined) {
-                index = -1;
-            }
+                that._old = that._accessor();
+                that._oldIndex = that.selectedIndex;
 
-            that._old = that._accessor();
-            that._oldIndex = that.selectedIndex = index;
-
-            that._prev = that.input.val();
-            that._state = STATE_ACCEPT;
+                that._prev = that.input.val();
+                that._state = STATE_ACCEPT;
+            });
 
             that._fetchData();
         },
