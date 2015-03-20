@@ -325,12 +325,15 @@ var __meta__ = {
         },
 
         value: function(value, silent) {
-            var that = this,
-                dataSource = that.dataSource,
-                deferred = $.Deferred();
+            var that = this;
+            var dataSource = that.dataSource;
 
             if (value === undefined) {
                 return that._values;
+            }
+
+            if (!that._valueDeferred || that._valueDeferred.state() === "resolved") {
+                that._valueDeferred = $.Deferred();
             }
 
             if (silent) {
@@ -354,6 +357,8 @@ var __meta__ = {
             if (that.isBound()) {
                 that._prefetchByValue(value);
             }
+
+            return that._valueDeferred;
         },
 
         _prefetchByValue: function(value) {
@@ -605,8 +610,8 @@ var __meta__ = {
         },
 
         select: function(candidate) {
-            var that = this;
-            var indexes,
+            var that = this,
+                indexes,
                 singleSelection = this.options.selectable !== "multiple",
                 prefetchStarted = !!this._activeDeferred,
                 deferred,
@@ -636,8 +641,13 @@ var __meta__ = {
                 }
 
                 var done = function() {
-                    added = that._select(indexes); //???
+                    var added = that._select(indexes);
+
                     that.focus(indexes);
+
+                    if (that._valueDeferred) {
+                        that._valueDeferred.resolve();
+                    }
 
                     if (added.length || removed.length) {
                         that.trigger(CHANGE, {

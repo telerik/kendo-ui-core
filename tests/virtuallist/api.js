@@ -534,4 +534,43 @@
         }, 100);
     });
 
+    asyncTest("value method return resolved promise", 1, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: true,
+            valueMapper: function(operation) {
+                setTimeout(function() {
+                    operation.success(20);
+                }, 0);
+            }
+        }));
+
+        asyncDataSource.read().done(function() {
+            virtualList.value(20).done(function() {
+                start();
+                ok(true);
+            });
+        });
+    });
+
+    asyncTest("value method returns promise resolved after data prefetch", 2, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: true,
+            valueMapper: function(operation) {
+                setTimeout(function() {
+                    operation.success(123);
+                }, 0);
+            }
+        }));
+
+        virtualList.value(123).done(function() {
+            var indices = virtualList.select();
+
+            equal(indices.length, 1);
+            equal(indices[0], 123);
+
+            start();
+        });
+
+        asyncDataSource.read();
+    });
 })();
