@@ -1,0 +1,355 @@
+# The public documentation URL, used for sitemap.xml
+url: "http://docs.telerik.com/kendo-ui"
+
+# Exclude files which should not be in the output
+exclude: [readme.md, Gemfile, Gemfile.lock,api_sort.rb]
+navigation:
+## List your directory names and order here, like this:
+    "*excel":
+        title: "Excel"
+    "*how-to":
+        title: "How To"
+        position: 1
+    "framework/datasource":
+        title: "DataSource"
+        position: 1
+    "framework/draganddrop":
+        title: "Drag and Drop"
+        position: 2
+    "framework/excel":
+        title: "Create Excel Documents"
+        position: 4
+    "framework/save-files":
+        title: "Save Files"
+    "*install":
+        title: "Install and Upgrade"
+        position: 3
+    "*basics":
+        title: "The Basics"
+        position: 4
+    "web":
+        title: "Web Widgets"
+        position: 5
+    "dataviz":
+        title: "Data Visualization"
+        position: 6
+    "mobile":
+        title: "Mobile Framework and Widgets"
+        position: 7
+    "framework":
+        title: "Framework and Utilities"
+        position: 8
+    "AngularJS":
+        title: "AngularJS Directives"
+        position: 10
+    "aspnet-mvc":
+        title: "UI for ASP.NET MVC"
+        position: 11
+    "aspnet-mvc/mvc-6":
+        title: "ASP.NET MVC 6"
+        position: 4
+    "jsp":
+        title: "UI for JSP"
+        position: 12
+    "php":
+        title: "UI for PHP"
+        position: 13
+    "*pdf-export":
+        title: "PDF Export"
+    "webforms":
+        title: "Use in ASP.NET Web Forms"
+        position: 14
+    "api":
+        title: "API Reference"
+        position: -15
+    "accessibility":
+        title: "Accessibility Features"
+        position: 18
+    "mobile/listview":
+        title: "Mobile ListView"
+        position: 9
+    "*typescript":
+    "*asp.net":
+        title: "ASP.NET"
+    "*widgets":
+        title: "Widgets"
+    "*tags":
+        title: "Tags"
+    "*angular":
+        title: "AngularJS"
+    "*mobileactionsheet":
+        title: "MobileActionSheet"
+    "*mobileapplication":
+        title: "MobileApplication"
+    "*mobilebuttongroup":
+        title: "MobileButtonGroup"
+    "*mobiledrawer":
+        title: "MobileDrawer"
+    "*mobilenavbar":
+        title: "MobileNavBar"
+    "*mobilelayout":
+        title: "MobileLayout"
+    "*mobilemodalview":
+        title: "MobileModalView"
+    "*mobilepopover":
+        title: "MobilePopOver"
+    "*mobilescrollview":
+        title: "MobileScrollView"
+    "*mobilesplitview":
+        title: "MobileSplitView"
+    "*mobileswitch":
+        title: "MobileSwitch"
+    "*mobiletabstrip":
+        title: "MobileTabStrip"
+    "*mobilelistview":
+        title: "MobileListView"
+    "*mobileview":
+        title: "MobileView"
+    "*mobilebutton":
+        title: "MobileButton"
+    "*barcode":
+        title: "Barcode"
+    "*stockchart":
+        title: "Stock Chart"
+    "*chart":
+        title: "Chart"
+    "*lineargauge":
+        title: "LinearGauge"
+    "*treemap":
+        title: "TreeMap"
+    "*qrcode":
+        title: "QRCode"
+    "*radialgauge":
+        title: "RadialGauge"
+    "*sparkline":
+        title: "Sparkline"
+    "*stockchart":
+        title: "StockChart"
+    "*map":
+        title: "Map"
+    "*diagram":
+        title: "Diagram"
+    "*hierarchicaldatasource":
+        title: "HierarchicalDataSource"
+    "*datasource":
+        title: "DataSource"
+    "*draganddrop":
+        title: "Drag and Drop"
+    "*fx":
+        title: "FX"
+    "*globalization":
+        title: "Globalization"
+    "*mvvm":
+        title: "MVVM"
+    "*spa":
+        title: "SPA"
+    "*templates":
+        title: "Templates"
+    "*validator":
+        title: "Validator"
+    "*autocomplete":
+        title: "AutoComplete"
+    "*button":
+        title: "Button"
+    "*calendar":
+        title: "Calendar"
+    "*colorpalette":
+        title: "ColorPalette"
+    "*flatcolorpicker":
+        title: "FlatColorPicker"
+    "*colorpicker":
+        title: "ColorPicker"
+    "*combobox":
+        title: "ComboBox"
+    "*datepicker":
+        title: "DatePicker"
+    "*datetimepicker":
+        title: "DateTimePicker"
+    "*dropdownlist":
+        title: "DropDownList"
+    "*editor":
+        title: "Editor"
+    "*gantt":
+        title: "Gantt"
+    "*pivotgrid":
+        title: "PivotGrid"
+    "*grid":
+        title: "Grid"
+    "*listview":
+        title: "ListView"
+    "*maskedtextbox":
+        title: "MaskedTextBox"
+    "*menu":
+        title: "Menu"
+    "*multiselect":
+        title: "MultiSelect"
+    "*notification":
+        title: "Notification"
+    "*numerictextbox":
+        title: "NumericTextBox"
+    "*panelbar":
+        title: "PanelBar"
+    "*pivotdatasource":
+        title: "PivotDataSource"
+    "*pivotconfigurator":
+        title: "PivotConfigurator"
+    "*progressbar":
+        title: "ProgressBar"
+    "*rangeslider":
+        title: "RangeSlider"
+    "*responsivepanel":
+        title: "ResponsivePanel"
+    "*scheduler":
+        title: "Scheduler"
+    "*slider":
+        title: "Slider"
+    "*sortable":
+        title: "Sortable"
+    "*splitter":
+        title: "Splitter"
+    "*tabstrip":
+        title: "TabStrip"
+    "*timepicker":
+        title: "TimePicker"
+    "*tooltip":
+        title: "Tooltip"
+    "*toolbar":
+        title: "ToolBar"
+    "*treelist":
+        title: "TreeList"
+    "*treeview":
+        title: "TreeView"
+    "*upload":
+        title: "Upload"
+    "*window":
+        title: "Window"
+    "*hello-kendo-ui":
+        title: "Hello Kendo UI"
+    "*home-page":
+        title: "Home Page"
+    "*order-page":
+        title: "Order Page"
+    "*localization":
+        title: "Localization"
+    "aspnet-mvc/vs-integration":
+        title: "Visual Studio Integration"
+        position: 9
+    "aspnet-mvc/migration":
+        title: "Migrate From Telerik Extensions"
+        position: 12
+    "aspnet-mvc/helpers":
+        title: "View Helpers"
+        position: 11
+    "aspnet-mvc/tutorial-saleshub":
+        title: "Tutorial: Build the Sales Hub Project"
+        position: 20
+    "aspnet-mvc/tutorial-kendo-music-store":
+        title: "Tutorial: Build the Kendo Music Store"
+        position: 20
+    "aspnet-mvc/tutorial-kendo-music-store/music-store-web":
+        title: "Build the Web Application"
+        position: 2
+    "aspnet-mvc/tutorial-kendo-music-store/music-store-dashboard":
+        title: "Build the Dashboard"
+        position: 3
+    "api/javascript":
+        title: "JavaScript"
+        position: 2
+    "api/aspnet-mvc":
+        title: "ASP.NET MVC"
+        position: 3
+    "api/jsp":
+        title: "JSP"
+        position: 4
+    "api/php":
+        title: "PHP"
+        position: 5
+    "framework/drawing":
+        title: "Drawing API"
+    "framework/geometry":
+        title: "Geometry"
+
+## The application virtual path
+baseurl: /kendo-ui
+
+## Assign layout and category per different paths
+defaults:
+-
+    scope:
+        path: ""
+    values:
+        layout: "page"
+        category: "default"
+        product: "kendo-ui"
+        editable: true
+-
+    scope:
+        path: "aspnet-mvc"
+    values:
+        product: "aspnet-mvc"
+-
+    scope:
+        path: "api/aspnet-mvc"
+    values:
+        product: "aspnet-mvc"
+        editable: false
+-
+    scope:
+        path: "php"
+    values:
+        product: "php-ui"
+-
+    scope:
+        path: "api/php"
+    values:
+        product: "php-ui"
+        editable: false
+-
+    scope:
+        path: "api/jsp"
+    values:
+        product: "jsp-ui"
+        editable: false
+-
+    scope:
+        path: "jsp"
+    values:
+        product: "jsp-ui"
+-
+    scope:
+        path: "api"
+    values:
+        kind: "api"
+-
+    scope:
+        path: "api/javascript"
+    values:
+        editableExample: "true"
+
+type_links:
+    "kendo.Class": "/api/javascript/class"
+    "kendo.data.DataSource": "/api/javascript/data/datasource"
+    "Array": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array"
+    "Boolean": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean"
+    "Function": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function"
+    "jQuery": "http://api.jquery.com/Types/#jQuery"
+    "Promise": "http://api.jquery.com/Types/#Promise"
+    "Object": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object"
+    "Number": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number"
+    "String": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String"
+
+# Aliases available in the markdown template. The below will expand {{site.foo}} to Bar in the output
+# "foo": "Bar"
+
+# The google services configuration
+google_tag_manager: GTM-6X92
+google_custom_search: '001595215763381649090:eblhnfskwrk'
+
+# Assets pipeline configuration
+assets:
+    cachebust: soft
+    js_compressor: uglifier
+
+## Do not edit below this line
+safe: false
+markdown: MarkdownProcessor

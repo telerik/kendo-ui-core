@@ -1,0 +1,30 @@
+#!/bin/sh
+
+usage() {
+    echo "Usage: $0 -u <url> [-d <depth>]" 1>&2;
+    exit 1;
+}
+
+DEPTH=1
+
+while getopts ":u:d:" o; do
+    case "${o}" in
+        u)
+            URL=${OPTARG}
+            ;;
+        d)
+            DEPTH=${OPTARG}
+            ;;
+        *)
+            usage
+            ;;
+    esac
+done
+shift $((OPTIND-1))
+
+if [ -z "${URL}" ]; then
+    usage
+fi
+
+wget --spider --recursive --level $DEPTH --no-verbose --page-requisites $URL
+

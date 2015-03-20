@@ -1,0 +1,11 @@
+---
+title: Ajax editing with localized enums
+page_title: Ajax editing with localized enums
+description: Ajax editing with localized enums
+---
+
+# Ajax editing with localized enums
+
+The example below demonstrates how to create a column bind to enum field which to display localized texts for corresponding value. The example also demonstrates how to edit this column using DropDownList.
+
+[Ajax editing with localized enums](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/grid-enum-editing-with-dropdownlist-enum-localization)
