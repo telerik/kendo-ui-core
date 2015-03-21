@@ -588,6 +588,7 @@
 
     test("DropDownList selects correct item if element is select", function() {
         var select = $('<select><option value="1">United Arab Emirates</option><option selected="selected" value="2">United Kingdom</option><option value="3">United States</option></select>').appendTo(QUnit.fixture);
+
         dropdownlist = new DropDownList(select, { optionLabel: "Select..." });
 
         equal(dropdownlist.value(), "2");
