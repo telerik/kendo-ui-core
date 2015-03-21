@@ -466,7 +466,6 @@ var __meta__ = {
             }
         },
 
-        //use length of the items in ListView
         _firstOpen: function() {
             var height = this._height(this.listView.data().length);
             this._calculateGroupPadding(height);
