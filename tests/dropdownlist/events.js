@@ -446,7 +446,7 @@
         });
     });
 
-    asyncTest("DropDownList trigger change on loop", 2, function() {
+    asyncTest("DropDownList trigger change on loop", 4, function() {
         var cascade;
 
         var dropdownlist = new DropDownList(input, {
@@ -455,10 +455,13 @@
             cascade: function() {
                 cascade = true;
             },
-            change: function() {
+            change: function(e) {
                 ok(cascade);
                 ok(true);
-                start();
+
+                if (e.sender.value() === "too") {
+                    start();
+                }
             }
         });
 
