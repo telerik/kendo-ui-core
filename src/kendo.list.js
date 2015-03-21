@@ -1312,7 +1312,7 @@ var __meta__ = {
         },
 
         filter: function(isFilter) {
-            this._isFilter = isFilter;
+            this._filtered = isFilter;
         },
 
         select: function(indices) {
@@ -1668,7 +1668,7 @@ var __meta__ = {
             var item = '<li tabindex="-1" role="option" unselectable="on" class="k-item';
 
             var dataItem = context.item;
-            var found = this._isFilter && this._dataItemPosition(dataItem, values) !== -1;
+            var found = this._filtered && this._dataItemPosition(dataItem, values) !== -1;
 
             if (context.newGroup) {
                 item += ' k-first';
@@ -1744,8 +1744,10 @@ var __meta__ = {
 
             that._bound = true;
 
-            if (!that._isFilter) {
+            if (!that._filtered) {
                 that.value(that._values);
+            } else {
+                that.focus(0);
             }
 
             if (that._valueDeferred) {

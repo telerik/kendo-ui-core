@@ -380,4 +380,58 @@
         equal(dataItems.length, 2);
         equal(values.length, 2);
     });
+
+    test("StaticList focuses first item on filter", function() {
+        var list = new StaticList(element, {
+            selectable: "multiple",
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "a" },
+                    { name: "item3", type: "b" }
+                ]
+            },
+            value: ["item1", "item3"],
+            template: '#:data.name#'
+        });
+
+        list.dataSource.read();
+
+        list.filter(true);
+        list.dataSource.filter({
+            field: "name",
+            operator: "eq",
+            value: "item1"
+        });
+
+        equal(list.focus()[0], list.element.children()[0]);
+    });
+
+    test("StaticList clears focused item when data source is empty", function() {
+        var list = new StaticList(element, {
+            selectable: "multiple",
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "a" },
+                    { name: "item3", type: "b" }
+                ]
+            },
+            value: ["item1", "item3"],
+            template: '#:data.name#'
+        });
+
+        list.dataSource.read();
+
+        list.filter(true);
+        list.dataSource.filter({
+            field: "name",
+            operator: "eq",
+            value: "item11"
+        });
+
+        equal(list.focus(), null);
+    });
 })();
