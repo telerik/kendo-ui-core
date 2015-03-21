@@ -673,4 +673,15 @@
 
         ok(dropdownlist.popup.visible());
     });
+
+    test("Open popup when filter is enabled event if data source is empty", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            dataSource: [],
+            filter: "contains"
+        });
+
+        dropdownlist.open();
+
+        ok(dropdownlist.popup.visible());
+    });
 })();

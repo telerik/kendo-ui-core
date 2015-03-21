@@ -213,7 +213,7 @@ var __meta__ = {
         },
 
         _allowOpening: function(length) {
-            return this.optionLabel[0] || this.dataSource.view().length;
+            return this.optionLabel[0] || this.filterInput || this.dataSource.view().length;
         },
 
         _initList: function() {
