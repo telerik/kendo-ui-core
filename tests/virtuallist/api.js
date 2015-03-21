@@ -171,6 +171,24 @@
         });
     });
 
+    asyncTest("fires the change event when list is filtered", 1, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: true
+        }));
+
+        asyncDataSource.read().then(function() {
+            virtualList.select(0);
+
+            virtualList.bind("change", function() {
+                start();
+                ok(true);
+            });
+
+            virtualList.filter(true);
+            virtualList.select(0);
+        });
+    });
+
     asyncTest("fires the change event on deselect", 1, function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             selectable: true,
