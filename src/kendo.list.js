@@ -1741,8 +1741,6 @@ var __meta__ = {
 
             that._bound = true;
 
-            that.trigger("dataBound");
-
             if (!that._isFilter) {
                 that.value(that._values);
             }
@@ -1750,6 +1748,8 @@ var __meta__ = {
             if (that._valueDeferred) {
                 that._valueDeferred.resolve();
             }
+
+            that.trigger("dataBound");
         },
 
         isBound: function() {
