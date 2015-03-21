@@ -1333,7 +1333,7 @@ var __meta__ = {
                 indices = [];
             }
 
-            if (singleSelection && $.inArray(indices[indices.length - 1], this._selectedIndices) !== -1) {
+            if (singleSelection && !this._filtered && $.inArray(indices[indices.length - 1], this._selectedIndices) !== -1) {
                 return;
             }
 
