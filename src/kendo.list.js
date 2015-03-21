@@ -650,14 +650,20 @@ var __meta__ = {
                     idx = -1;
                 }
 
-                if (idx == -1 && value !== "") {
-                    idx = this._custom(value);
-                }
+                if (value !== "" && idx == -1) {
+                    this._custom(value);
+                } else {
+                    if (value) {
+                        element.value = value;
+                    } else if (idx > -1) {
+                        element.selectedIndex = idx;
+                    }
 
-                element.selectedIndex = idx;
-                option = element.options[idx];
-                if (option) {
-                   option.setAttribute(SELECTED, SELECTED);
+                    option = element.options[element.selectedIndex];
+
+                    if (option) {
+                       option.setAttribute(SELECTED, SELECTED);
+                    }
                 }
             }
         },
@@ -666,20 +672,16 @@ var __meta__ = {
             var that = this;
             var element = that.element;
             var custom = that._customOption;
-            var idx = element[0].children.length - 1;
 
             if (!custom) {
                 custom = $("<option/>");
                 that._customOption = custom;
 
                 element.append(custom);
-                idx += 1;
             }
 
             custom.text(value);
-            custom[0].selected = true;
-
-            return idx;
+            custom[0].setAttribute(SELECTED, SELECTED);
         },
 
         _hideBusy: function () {
@@ -888,7 +890,7 @@ var __meta__ = {
             }
         },
 
-        _options: function(data, optionLabel) {
+        _options: function(data, optionLabel, value) {
             var that = this,
                 element = that.element,
                 length = data.length,
@@ -930,6 +932,7 @@ var __meta__ = {
             }
 
             element.html(options);
+            element.val(value);
         },
 
         _reset: function() {
@@ -1012,7 +1015,7 @@ var __meta__ = {
                             change.apply(that, arguments);
                         };
 
-                        that.first("dataBound", handler);
+                        that.bind("dataBound", handler);
 
                         that.dataSource.filter(filters);
 
