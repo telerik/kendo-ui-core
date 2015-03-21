@@ -636,34 +636,44 @@ var __meta__ = {
             }
         },
 
-        _selectNext: function(word, index) {
-            var that = this, text;
+        _matchText: function(text, index) {
+            var that = this;
+            var ignoreCase = that.options.ignoreCase;
+            var found = false;
+
+            text = text + "";
+
+            if (ignoreCase) {
+                text = text.toLowerCase();
+            }
+
+            if (text.indexOf(that._word) === 0) {
+                if (that.optionLabel[0]) {
+                    index += 1;
+                }
+
+                that._select(index);
+                if (!that.popup.visible()) {
+                    that._change();
+                }
+
+                found = true;
+            }
+
+            return found;
+        },
+
+        _selectNext: function(index) {
+            var that = this;
             var startIndex = index;
             var data = that.listView.data();
             var length = data.length;
-            var ignoreCase = that.options.ignoreCase;
-            var action = function(text, index) {
-                text = text + "";
-                if (ignoreCase) {
-                    text = text.toLowerCase();
-                }
-
-                if (text.indexOf(word) === 0) {
-                    if (that.optionLabel[0]) {
-                        index += 1;
-                    }
-
-                    that._select(index);
-                    if (!that.popup.visible()) {
-                        that._change();
-                    }
-                    return true;
-                }
-            };
+            var text;
 
             for (; index < length; index++) {
                 text = that._text(data[index]);
-                if (text && action(text, index) && !(word.length === 1 && startIndex === index)) {
+
+                if (text && that._matchText(text, index) && !(that._word.length === 1 && startIndex === index)) {
                     return true;
                 }
             }
@@ -672,7 +682,7 @@ var __meta__ = {
                 index = 0;
                 for (; index <= startIndex; index++) {
                     text = that._text(data[index]);
-                    if (text && action(text, index)) {
+                    if (text && that._matchText(text, index)) {
                         return true;
                     }
                 }
@@ -690,7 +700,7 @@ var __meta__ = {
 
             var character = String.fromCharCode(e.charCode || e.keyCode);
             var index = that.selectedIndex;
-            var word = that._word;
+            var length = that._word.length;
 
             if (that.options.ignoreCase) {
                 character = character.toLowerCase();
@@ -700,17 +710,20 @@ var __meta__ = {
                 e.preventDefault();
             }
 
-            if (that._last === character && word.length <= 1 && index > -1) {
-                if (!word) {
-                    word = character;
-                }
+            if (!length) {
+                that._word = character;
+            }
 
-                if (that._selectNext(word, index)) {
+            if (that._last === character && length <= 1 && index > -1) {
+                if (that._selectNext(index)) {
                     return;
                 }
             }
 
-            that._word = word + character;
+            if (length) {
+                that._word += character;
+            }
+
             that._last = character;
 
             that._search();
@@ -785,10 +798,9 @@ var __meta__ = {
         },
 
         _search: function() {
-            var that = this,
-                dataSource = that.dataSource,
-                index = that.selectedIndex,
-                word = that._word;
+            var that = this;
+            var dataSource = that.dataSource;
+            var index = that.selectedIndex;
 
             clearTimeout(that._typing);
 
@@ -813,15 +825,15 @@ var __meta__ = {
                 }
 
                 if (!that.ul[0].firstChild) {
-                    dataSource.one(CHANGE, function () {
+                    dataSource.fetch().done(function () {
                         if (dataSource.data()[0] && index > -1) {
-                            that._selectNext(word, index);
+                            that._selectNext(index);
                         }
-                    }).fetch();
+                    });
                     return;
                 }
 
-                that._selectNext(word, index);
+                that._selectNext(index);
             }
         },
 
