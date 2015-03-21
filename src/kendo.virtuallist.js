@@ -623,7 +623,7 @@ var __meta__ = {
 
             indexes = this._getIndecies(candidate);
 
-            if (!indexes.length || (singleSelection && lastFrom(indexes) === lastFrom(this._selectedIndexes))) { return; }
+            if (!indexes.length || (singleSelection && !that._filter && lastFrom(indexes) === lastFrom(this._selectedIndexes))) { return; }
 
             removed = this._deselect(indexes);
 
