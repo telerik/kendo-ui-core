@@ -209,7 +209,7 @@ test("press down selects only LI which is focused", function() {
     });
 
     combobox.value("1");
-    combobox.search("F");
+    combobox.search("B");
     combobox.input.focus().press(keys.DOWN);
 
     ok(combobox.ul.children().eq(0).hasClass(SELECTED));

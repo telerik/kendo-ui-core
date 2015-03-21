@@ -434,8 +434,8 @@ test("Clear child combo if no data after filtration", function() {
         ]
     });
 
-    var parentCB = parent.data("kendoComboBox"),
-        childCB = child.data("kendoComboBox");
+    var parentCB = parent.data("kendoComboBox");
+    var childCB = child.data("kendoComboBox");
 
     parentCB.select(0);
     childCB.select(0);
@@ -524,8 +524,8 @@ test("dataBound event of child is raised after cascading is finished", 2, functi
         }
     });
 
-    var parentCB = parent.data("kendoComboBox"),
-        childCB = child.data("kendoComboBox");
+    var parentCB = parent.data("kendoComboBox");
+    var childCB = child.data("kendoComboBox");
 
     parentCB.select(0);
 
