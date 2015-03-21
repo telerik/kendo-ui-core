@@ -192,17 +192,16 @@ var __meta__ = {
                 return;
             }
 
-            if (!this.dataSource.view().length || that._state === STATE_ACCEPT) {
+            if (!that.listView.isBound() || that._state === STATE_ACCEPT) {
                 that._open = true;
                 that._state = "rebind";
-                //that.listView.focus(false);
 
                 if (that.filterInput) {
                     that.filterInput.val("");
                 }
 
                 that._filterSource();
-            } else {
+            } else if (that._allowOpening()) {
                 that.popup.open();
                 that._focusElement(that.filterInput);
                 that._focusItem();
@@ -211,6 +210,10 @@ var __meta__ = {
 
         toggle: function(toggle) {
             this._toggle(toggle, true);
+        },
+
+        _allowOpening: function(length) {
+            return this.optionLabel[0] || this.dataSource.view().length;
         },
 
         _initList: function() {
@@ -419,11 +422,14 @@ var __meta__ = {
 
         _listBound: function() {
             var that = this;
-            var data = that.listView.data();
-            var length = data.length;
+            var initialIndex = that._initialIndex;
             var optionLabel = that.options.optionLabel;
             var filtered = that._state === STATE_FILTER;
             var element = that.element[0];
+
+            var data = that.listView.data();
+            var length = data.length;
+
             var height;
             var value;
 
@@ -460,21 +466,21 @@ var __meta__ = {
 
             if (!filtered) {
                 if (that._open) {
-                    that.toggle(!!length);
+                    that.toggle(that._allowOpening());
                 }
 
                 that._open = false;
 
                 if (!that._fetch) {
                     if (length) {
-                        if (!this.listView.value().length && this._initialIndex > -1 && this._initialIndex !== null) {
-                            this.select(this._initialIndex);
+                        if (!that.listView.value().length && initialIndex > -1 && initialIndex !== null) {
+                            that.select(initialIndex);
                         }
 
-                        this._initialIndex = null;
-                    } else if (this._textAccessor() !== optionLabel) {
-                        this.listView.value("");
-                        this._selectValue(null);
+                        that._initialIndex = null;
+                    } else if (that._textAccessor() !== optionLabel) {
+                        that.listView.value("");
+                        that._selectValue(null);
                     }
                 }
             }
