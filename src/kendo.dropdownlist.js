@@ -1083,8 +1083,8 @@ var __meta__ = {
                               });
         },
 
-        _clearSelection: function() {
-            this.select(0);
+        _clearSelection: function(parent) {
+            this.select(parent.value() ? 0 : -1);
         },
 
         _inputTemplate: function() {

@@ -582,4 +582,52 @@
         ddl2.destroy();
         ddl3.destroy();
     });
+
+    test("DropDownList clears selected value when parent has no value", function() {
+        var ddl = new DropDownList(parent, {
+            optionLabel: "Select",
+            dataValueField: "id",
+            dataTextField: "text2",
+            dataSource: [
+                {text: "item1", id: "1", text2: "i"},
+                {text: "item3", id: "2", text2: "i"}
+            ]
+        });
+
+        var ddl2 = new DropDownList(child.attr("id", "child"), {
+            dataValueField: "text",
+            dataTextField: "text",
+            dataSource: [
+                {text: "item1", id: "1"},
+                {text: "item2", id: "1"},
+                {text: "item3", id: "2"},
+                {text: "item4", id: "2"}
+            ],
+            cascadeFrom: "parent",
+            autoBind: false
+        });
+
+        var ddl3 = new DropDownList(third, {
+            dataValueField: "text",
+            dataTextField: "text",
+            dataSource: [
+                {text: "item1", id: "1"},
+                {text: "item2", id: "1"},
+                {text: "item3", id: "2"},
+                {text: "item4", id: "2"}
+            ],
+            cascadeFrom: "child",
+            autoBind: false
+        });
+
+        ddl.ul.children(":last").click();
+        ddl.value("");
+
+        equal(ddl2.value(), "");
+        equal(ddl3.value(), "");
+
+        ddl.destroy();
+        ddl2.destroy();
+        ddl3.destroy();
+    });
 })();
