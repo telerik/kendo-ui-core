@@ -663,7 +663,7 @@ var __meta__ = {
 
             for (; index < length; index++) {
                 text = that._text(data[index]);
-                if (text && action(text, index)) {
+                if (text && action(text, index) && !(word.length === 1 && startIndex === index)) {
                     return true;
                 }
             }
@@ -705,7 +705,7 @@ var __meta__ = {
                     word = character;
                 }
 
-                if (that._selectNext(word, index + 1)) {
+                if (that._selectNext(word, index)) {
                     return;
                 }
             }

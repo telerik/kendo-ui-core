@@ -96,35 +96,38 @@
         input.press("t");
         input.press("t");
 
+        equal(dropdownlist.selectedIndex, 2);
+    });
+
+    test("keep selection if typed text is 0ame as current data item", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            dataSource: ["test", "500.122", "500.123"]
+        });
+
+        dropdownlist.select(0);
+
+        input.press("5");
+        input.press("0");
+
         equal(dropdownlist.selectedIndex, 1);
     });
 
-    test("keep selection if typed text is same as current data item", 1, function() {
+    test("keep selection if typed text differs", 2, function() {
         var dropdownlist = new DropDownList(input, {
             dataSource: ["500.122", "500.123"]
         });
 
         input.press("5");
+        equal(dropdownlist.selectedIndex, 1);
+
+        input.press("0");
         input.press("0");
         input.press("0");
 
-        equal(dropdownlist.selectedIndex, 0);
+        equal(dropdownlist.selectedIndex, 1);
     });
 
-    test("keep selection if typed text differs", 1, function() {
-        var dropdownlist = new DropDownList(input, {
-            dataSource: ["500.122", "500.123"]
-        });
-
-        input.press("5");
-        input.press("0");
-        input.press("0");
-        input.press("0");
-
-        equal(dropdownlist.selectedIndex, 0);
-    });
-
-    test("loop items on search trigger change event", 1, function() {
+    test("1oop items on search trigger change event", 2, function() {
         var dropdownlist = new DropDownList(input, {
             dataSource: ["text1", "text2", "text3"],
         });
@@ -133,8 +136,8 @@
             ok(true);
         });
 
-        input.press("t");
-        input.press("t");
+        input.press("t"); //selects text2
+        input.press("t"); //selects text3
     });
 
     test("looping through items honors ignoreCase option", 1, function() {
@@ -145,10 +148,10 @@
 
         dropdownlist.select(1);
 
-        input.press("t");
-        input.press("t");
+        input.press("t"); //selects Text3
+        input.press("t"); //selects text1
 
-        equal(dropdownlist.selectedIndex, 2);
+        equal(dropdownlist.selectedIndex, 0);
     });
 
     test("prevent default behavior of SPACEBAR", 1, function() {
@@ -170,7 +173,7 @@
 
     test("typing same letter does not move to next item", 1, function() {
         var dropdownlist = new DropDownList(input, {
-            dataSource: ["Bill 1", "Bill 2", "Label"],
+            dataSource: ["test", "Bill 1", "Bill 2", "Label"],
             ignoreCase: true
         });
 
@@ -179,7 +182,7 @@
         input.press("l");
         input.press("l");
 
-        equal(dropdownlist.selectedIndex, 0);
+        equal(dropdownlist.selectedIndex, 1);
     });
 
     test("search supports space", 1, function() {
@@ -198,7 +201,7 @@
         equal(dropdownlist.selectedIndex, 1);
     });
 
-    asyncTest("search supports space", 1, function() {
+    asyncTest("get next item after delay elapsed", 1, function() {
         var dropdownlist = new DropDownList(input, {
             dataSource: ["Bill 1", "Bill 2", "Label"],
             ignoreCase: true,
@@ -211,7 +214,7 @@
         setTimeout(function() {
             start();
             input.press("b");
-            equal(dropdownlist.selectedIndex, 0);
+            equal(dropdownlist.selectedIndex, 1);
         }, 100);
     });
 
@@ -257,6 +260,24 @@
     });
 
     test("searching for nonexisting item when last item is selected does not raise error", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            dataSource: [
+                { text: "Black", value: "1" },
+                { text: "Orange", value: "2" },
+                { text: "Grey", value: "3" }
+            ],
+            dataTextField: "text",
+            dataValueField: "value",
+            index: 2
+        });
+
+        input.press("z");
+        input.press("z");
+
+        ok(true);
+    });
+
+    test("searching always start from next item", 1, function() {
         var dropdownlist = new DropDownList(input, {
             dataSource: [
                 { text: "Black", value: "1" },
