@@ -650,4 +650,27 @@
 
         equal(list.find(".k-textbox").length, 1);
     });
+
+    test("Open popup when option label is defined", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            dataSource: [],
+            optionLabel: "Select..."
+        });
+
+        dropdownlist.open();
+
+        ok(dropdownlist.popup.visible());
+    });
+
+    test("Open popup when option label is defined and widget is not bound", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            dataSource: [],
+            optionLabel: "Select...",
+            autoBind: false
+        });
+
+        dropdownlist.open();
+
+        ok(dropdownlist.popup.visible());
+    });
 })();
