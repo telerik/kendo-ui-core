@@ -28,7 +28,7 @@ layout: index
         </script>
     </div>
 
-    {% if page.editable %}<a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-docs/edit/master{{ page.url | replace: '.html','' }}.md">Edit this page</a>{% endif %}
+    {% if page.editable %}<a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs/{{ page.url | replace: '.html','' }}.md">Edit this page</a>{% endif %}
 
     {% if page.kind == "api" %}<div id="markdown-toc"></div>{% endif %}
 
