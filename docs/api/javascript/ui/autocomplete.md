@@ -531,6 +531,11 @@ The widget will pass the selected value(s) in the `valueMapper` function. In tur
                             type: "GET",
                             data: convertValues(options.value),
                             success: function (data) {
+                                //the **data** is either index or array of indices.
+                                //Example:
+                                // "Ernst Handel" -> 10 (index in the Orders collection)
+                                // ["Ernst Handel", "Que Delícia"] -> [10, 14] (indices in the Orders collection)
+
                                 options.success(data);
                             }
                         })
