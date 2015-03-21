@@ -202,7 +202,7 @@
         equal(children.eq(2).attr("class"), "k-item");
     });
 
-    test("select method does not unselect already selected item", 0, function() {
+    test("select method does not unselect already selected item (single selection)", 0, function() {
         var list = new StaticList(element, {
             dataSource: ["item1", "item2", "item3"],
             template: "#:data#"
@@ -216,6 +216,24 @@
             ok(false);
         });
 
+        list.select(1); //select again
+    });
+
+    test("select method selects same index if filtered", 1, function() {
+        var list = new StaticList(element, {
+            dataSource: ["item1", "item2", "item3"],
+            template: "#:data#"
+        });
+
+        list.dataSource.read();
+
+        list.select(1);
+
+        list.bind("change", function() {
+            ok(true);
+        });
+
+        list.filter(true);
         list.select(1); //select again
     });
 
