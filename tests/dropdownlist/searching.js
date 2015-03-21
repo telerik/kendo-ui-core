@@ -274,6 +274,19 @@
         ok(true);
     });
 
+    test("search honors optionLabel header", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            optionLabel: "Select item...",
+            dataSource: ["foo", "bar", "baz"],
+        });
+
+        dropdownlist.bind("change", function() {
+            equal(dropdownlist.value(), "bar");
+        });
+
+        input.press("b");
+    });
+
     asyncTest("filter items on user input", 2, function() {
         var dropdownlist = new DropDownList(input, {
             filter: "startswith",
