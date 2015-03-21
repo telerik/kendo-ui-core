@@ -477,8 +477,6 @@ var __meta__ = {
                         this._selectValue(null);
                     }
                 }
-            } else {
-                this.listView.first();
             }
 
             that.trigger("dataBound");
@@ -509,8 +507,8 @@ var __meta__ = {
             if (!that._prevent) {
                 clearTimeout(that._typing);
 
-                if (filtered) {
-                    that._select(that._focus(), !that.listView.dataItems()[0]);
+                if (filtered && that._focus()) {
+                    that._select(that._focus(), !that.dataSource.view().length);
                 }
 
                 if (kendo.support.mobileOS.ios && isIFrame) {
