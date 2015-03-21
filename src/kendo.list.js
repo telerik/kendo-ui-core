@@ -655,7 +655,7 @@ var __meta__ = {
                 } else {
                     if (value) {
                         element.value = value;
-                    } else if (idx > -1) {
+                    } else {
                         element.selectedIndex = idx;
                     }
 
@@ -811,12 +811,11 @@ var __meta__ = {
                     }
 
                     if (that.trigger(SELECT, { item: that.listView.focus() })) {
-                        that._focus(current); //revert focus
+                        that._focus(current);
                         return;
                     }
 
                     that._select(that._focus(), true);
-                    //that.listView.select(that.listView.focus());
 
                     if (!that.popup.visible()) {
                         that._blur();
@@ -932,7 +931,10 @@ var __meta__ = {
             }
 
             element.html(options);
-            element.val(value);
+
+            if (value !== undefined) {
+                element.val(value);
+            }
         },
 
         _reset: function() {
@@ -978,11 +980,15 @@ var __meta__ = {
                 change = function() {
                     that.dataSource.unbind(CHANGE, change);
 
-                    var value = that.listView.value()[0];
+                    var value = that._accessor();
+
                     if (that._userTriggered) {
                         that._clearSelection(parent, true);
                     } else if (value) {
-                        that.value(value);
+                        if (value !== that.listView.value()[0]) {
+                            that.value(value);
+                        }
+
                         if (!that.dataSource.view()[0] || that.selectedIndex === -1) {
                             that._clearSelection(parent, true);
                         }
@@ -1015,7 +1021,7 @@ var __meta__ = {
                             change.apply(that, arguments);
                         };
 
-                        that.bind("dataBound", handler);
+                        that.first("dataBound", handler);
 
                         that.dataSource.filter(filters);
 

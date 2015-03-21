@@ -234,11 +234,11 @@ test("raise change on custom value if element is select", 2, function() {
 });
 
 test("raise change if empty input after selection", 1, function() {
-    var select = $("<select><option value=1>foo1</option><option value=3>foo3</option></select>")
-                    .appendTo(QUnit.fixture)
-                    .bind("change", function() {
-                        equal(combobox.value(), "");
-                    });
+    var select = $("<select><option value=1>foo1</option><option value=3>foo3</option></select>").appendTo(QUnit.fixture);
+
+    select.bind("change", function() {
+        equal(combobox.value(), "");
+    });
 
     combobox = new ComboBox(select, {
         dataValueField: "text",

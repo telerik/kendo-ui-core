@@ -645,7 +645,7 @@ test("ComboBox copies maxlength attr to the fake input", function() {
     equal(combobox.input.attr("maxLength"), 10);
 });
 
-test("ComboBox set value on refresh", function() {
+test("ComboBox sets value on refresh", function() {
     input.val("Foo");
     combobox = new kendo.ui.ComboBox(input);
 
