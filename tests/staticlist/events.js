@@ -41,17 +41,17 @@
         list.dataSource.read();
     });
 
-    test("widget triggers dataBound event before change", 1, function() {
+    test("widget triggers change bofore dataBound", 1, function() {
         var triggered = false;
         var list = new StaticList(element, {
             dataSource: ["item"],
             template: "#:data#",
             value: ["item"],
             dataBound: function() {
-                triggered = true;
+                ok(triggered);
             },
             change: function() {
-                ok(triggered);
+                triggered = true;
             }
         });
 
