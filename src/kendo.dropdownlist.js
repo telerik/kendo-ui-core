@@ -637,25 +637,29 @@ var __meta__ = {
         },
 
         _selectNext: function(word, index) {
-            var that = this, text,
-                startIndex = index,
-                data = that.listView.data(),
-                length = data.length,
-                ignoreCase = that.options.ignoreCase,
-                action = function(text, index) {
-                    text = text + "";
-                    if (ignoreCase) {
-                        text = text.toLowerCase();
+            var that = this, text;
+            var startIndex = index;
+            var data = that.listView.data();
+            var length = data.length;
+            var ignoreCase = that.options.ignoreCase;
+            var action = function(text, index) {
+                text = text + "";
+                if (ignoreCase) {
+                    text = text.toLowerCase();
+                }
+
+                if (text.indexOf(word) === 0) {
+                    if (that.optionLabel[0]) {
+                        index += 1;
                     }
 
-                    if (text.indexOf(word) === 0) {
-                        that._select(index);
-                        if (!that.popup.visible()) {
-                            that._change();
-                        }
-                        return true;
+                    that._select(index);
+                    if (!that.popup.visible()) {
+                        that._change();
                     }
-                };
+                    return true;
+                }
+            };
 
             for (; index < length; index++) {
                 text = that._text(data[index]);
