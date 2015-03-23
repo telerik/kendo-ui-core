@@ -1325,8 +1325,12 @@ var __meta__ = {
             return result;
         },
 
-        filter: function(isFilter) {
-            this._filtered = isFilter;
+        filter: function(filter) {
+            if (filter === undefined) {
+                return this._filtered;
+            }
+
+            this._filtered = filter;
         },
 
         select: function(indices) {

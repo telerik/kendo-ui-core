@@ -275,4 +275,54 @@ test("select item after filtering", function() {
     equal(autocomplete.value(), "foo2");
 });
 
+test("AutoComplete does not revert input value on search", function() {
+    var autocomplete = new AutoComplete(input, {
+        dataTextField: "text",
+        dataSource: {
+            data: [
+                {text: "foo", value: "1", parent: 1},
+                {text: "foo1", value: "2", parent: 1},
+                {text: "foo2", value: "3", parent: 1},
+                {text: "foo3", value: "4", parent: 2},
+                {text: "foo4", value: "5", parent: 2},
+                {text: "foo5", value: "6", parent: 3},
+            ]
+        },
+        filter: "contains"
+    });
+
+    autocomplete.search("foo1");
+    autocomplete.ul.children(":first").click();
+
+    autocomplete.element.val("fo");
+    autocomplete.search("fo");
+
+    equal(autocomplete.value(), "fo");
+});
+
+test("AutoComplete resets list value on refresh", function() {
+    var autocomplete = new AutoComplete(input, {
+        dataTextField: "text",
+        dataSource: {
+            data: [
+                {text: "foo", value: "1", parent: 1},
+                {text: "foo1", value: "2", parent: 1},
+                {text: "foo2", value: "3", parent: 1},
+                {text: "foo3", value: "4", parent: 2},
+                {text: "foo4", value: "5", parent: 2},
+                {text: "foo5", value: "6", parent: 3},
+            ]
+        },
+        filter: "contains"
+    });
+
+    autocomplete.search("foo1");
+    autocomplete.ul.children(":first").click();
+
+    autocomplete.element.val("fo");
+    autocomplete.search("fo");
+
+    equal(autocomplete.listView.value().length, 0);
+});
+
 }());
