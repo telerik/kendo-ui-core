@@ -34,6 +34,41 @@
         equal(list.dataSource.view().length, 2);
     });
 
+    test("setDataSource method clears value before setting the new source", 1, function() {
+        var list = new StaticList(element, {
+            dataSource: ["item"],
+            template: "#:data#",
+            value: "item"
+        });
+
+        list.dataSource.read();
+
+        list.bind("change", function() {
+            equal(list.value().length, 0);
+        });
+
+        list.setDataSource(["1", "2"]);
+    });
+
+    test("setDataSource method sets value silently after source is changed", 3, function() {
+        var list = new StaticList(element, {
+            dataSource: ["item"],
+            template: "#:data#",
+            value: "item"
+        });
+
+        list.dataSource.read();
+
+        list.bind("change", function() {
+            ok(true); //called only once
+        });
+
+        list.setDataSource(["1", "2"]);
+
+        equal(list.value().length, 1);
+        equal(list.value()[0], "item");
+    });
+
     test("setOptions re-create templates", function() {
         var list = new StaticList(element, {
             template: "#:data#"
