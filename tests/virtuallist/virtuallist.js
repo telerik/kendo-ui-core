@@ -152,35 +152,6 @@
         });
     });
 
-    asyncTest("renders optionLabel", 1, function() {
-        var virtualList = new VirtualList(container, {
-            dataSource: asyncDataSource,
-            template: "#:text#",
-            optionLabel: {
-                text: "option label",
-                value: ""
-            }
-        });
-
-        setTimeout(function() {
-            start();
-            var optionLabel = virtualList.optionLabel;
-            equal(optionLabel.text(), "option label");
-        }, 100);
-    });
-
-    asyncTest("does not render if no optionLabel is specified", 1, function() {
-        var virtualList = new VirtualList(container, {
-            dataSource: asyncDataSource,
-            template: "#:text#"
-        });
-
-        setTimeout(function() {
-            start();
-            ok(!virtualList.optionLabel);
-        }, 100);
-    });
-
     asyncTest("adds k-state-hover class on mouseenter", 1, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
@@ -501,24 +472,6 @@
 
             equal(bufferSizes.down, 200, "down");
             equal(bufferSizes.up, 400, "up");
-        }, 100);
-    });
-
-    asyncTest("holds reference to the optionLabel instance", 2, function() {
-        var virtualList = new VirtualList(container, {
-            dataSource: asyncDataSource,
-            template: "#:text#",
-            optionLabel: {
-                text: "option label",
-                value: ""
-            }
-        });
-
-        setTimeout(function() {
-            start();
-            var optionInstance = virtualList.optionInstance;
-            equal(optionInstance.text, "option label");
-            equal(optionInstance.value, "");
         }, 100);
     });
 
