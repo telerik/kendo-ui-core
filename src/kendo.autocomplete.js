@@ -265,6 +265,7 @@ var __meta__ = {
             if (!length || length >= options.minLength) {
                 that._open = true;
 
+                that.listView.filter(true);
                 that._filterSource({
                     value: ignoreCase ? word.toLowerCase() : word,
                     operator: options.filter,
@@ -419,6 +420,12 @@ var __meta__ = {
 
             that._angularItems("compile");
 
+            //reset list value
+            that.listView.value([]);
+            that.listView.focus(-1);
+
+            that.listView.filter(false);
+
             that._calculateGroupPadding(that._height(length));
 
             if (popup.visible()) {
@@ -454,13 +461,15 @@ var __meta__ = {
             }
 
             that._makeUnselectable();
-
             that._hideBusy();
+
             that.trigger("dataBound");
         },
 
         _listChange: function() {
-            this._selectValue(this.listView.selectedDataItems()[0]);
+            if (!this.listView.filter()) {
+                this._selectValue(this.listView.selectedDataItems()[0]);
+            }
         },
 
         _selectValue: function(dataItem) {
