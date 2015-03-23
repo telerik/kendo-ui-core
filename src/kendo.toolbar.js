@@ -595,10 +595,11 @@ var __meta__ = {
                         element = isFunction(template) ? template(options) : template;
 
                         if (!(element instanceof jQuery)) {
-                            element = $(element.replace(/^\s+|\s+$/g, ''));
+                            element = $("<div></div>").html(element);
+                        } else {
+                            element = element.wrap("<div></div>").parent();
                         }
 
-                        element = element.wrap("<div></div>").parent();
                         if (options.id) {
                            element.attr("id", options.id);
                         }
