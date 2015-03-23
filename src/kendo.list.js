@@ -634,7 +634,9 @@ var __meta__ = {
             var option;
 
             if (value === undefined) {
-                option = element.options[selectedIndex];
+                if (selectedIndex > -1) {
+                    option = element.options[selectedIndex];
+                }
 
                 if (option) {
                     value = option.value;
@@ -658,7 +660,9 @@ var __meta__ = {
                         element.selectedIndex = idx;
                     }
 
-                    option = element.options[element.selectedIndex];
+                    if (element.selectedIndex > -1) {
+                        option = element.options[element.selectedIndex];
+                    }
 
                     if (option) {
                        option.setAttribute(SELECTED, SELECTED);
