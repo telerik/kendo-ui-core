@@ -591,4 +591,92 @@
 
         asyncDataSource.read();
     });
+
+    asyncTest("widget does not trigger change when new item is added to the source", 0, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: "multiple",
+            value: "1",
+            valueMapper: function(operation) {
+                operation.success(1);
+            }
+        }));
+
+        asyncDataSource.read()
+        virtualList.one("listBound", function() {
+            virtualList.bind("change", function() {
+                ok(false);
+            });
+
+            virtualList.dataSource.add("new item");
+
+            start();
+        });
+    });
+
+    asyncTest("widget does not trigger change when an item is removed from the source", 0, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: "multiple",
+            value: "1",
+            valueMapper: function(operation) {
+                operation.success(1);
+            }
+        }));
+
+        asyncDataSource.read();
+
+        virtualList.one("listBound", function() {
+            virtualList.bind("change", function() {
+                ok(false);
+            });
+
+            virtualList.dataSource.remove(virtualList.dataSource.at(0));
+
+            start();
+        });
+    });
+
+    asyncTest("setDataSource method clears value before setting the new source", 1, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: "multiple",
+            value: "1",
+            valueMapper: function(operation) {
+                operation.success(1);
+            }
+        }));
+
+        virtualList.one("listBound", function() {
+            virtualList.bind("change", function() {
+                equal(virtualList.value().length, 0);
+                start();
+            });
+
+            virtualList.setDataSource(["1", "2"]);
+        });
+
+        asyncDataSource.read();
+    });
+
+    asyncTest("setDataSource method sets value silently after source is changed", 3, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: "multiple",
+            value: "1",
+            valueMapper: function(operation) {
+                operation.success(1);
+            }
+        }));
+
+        virtualList.one("listBound", function() {
+            virtualList.bind("change", function() {
+                ok(true);
+            });
+
+            virtualList.setDataSource(["1", "2"]);
+
+            equal(virtualList.value().length, 1);
+            equal(virtualList.value()[0], "1");
+            start();
+        });
+
+        asyncDataSource.read();
+    });
 })();
