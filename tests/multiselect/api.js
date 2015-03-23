@@ -354,4 +354,14 @@
         ok(multiselect.popup.visible());
     });
 
+    test("MultiSelect does not append already selected items", function() {
+        popuplateSelect();
+        var multiselect = new MultiSelect(select);
+
+        multiselect.value(["0", "1"]);
+
+        multiselect.setDataSource(multiselect.dataSource);
+
+        equal(multiselect.tagList.children().length, 2);
+    });
 })();
