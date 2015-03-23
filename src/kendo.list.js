@@ -1062,8 +1062,6 @@ var __meta__ = {
 
             this.header = this.element.before('<div class="k-static-header" style="display:none"></div>').prev();
 
-            this.setDataSource(this.options.dataSource);
-
             this._bound = false;
 
             this._optionID = kendo.guid();
@@ -1073,6 +1071,13 @@ var __meta__ = {
             this._view = [];
             this._dataItems = [];
             this._values = [];
+
+            var value = this.options.value;
+            if (value) {
+                this._values = $.isArray(value) ? value.slice(0) : [value];
+            }
+
+            this.setDataSource(this.options.dataSource);
 
             this._getter();
             this._templates();
@@ -1087,11 +1092,6 @@ var __meta__ = {
             }, this);
 
             this._fixedHeader();
-
-            var value = this.options.value;
-            if (value) {
-                this._values = $.isArray(value) ? value.slice(0) : [value];
-            }
         },
 
         options: {
@@ -1115,12 +1115,17 @@ var __meta__ = {
         setDataSource: function(source) {
             var that = this;
             var dataSource = source || {};
+            var value;
 
             dataSource = $.isArray(dataSource) ? { data: dataSource } : dataSource;
             dataSource = kendo.data.DataSource.create(dataSource);
 
             if (that.dataSource) {
                 that.dataSource.unbind(CHANGE, that._refreshHandler);
+
+                value = that.value();
+                that.value([]);
+                that.value(value, true);
             } else {
                 that._refreshHandler = proxy(that.refresh, that);
             }
@@ -1740,7 +1745,7 @@ var __meta__ = {
             }
         },
 
-        refresh: function() {
+        refresh: function(e) {
             var that = this;
 
             that.trigger("dataBinding");
@@ -1749,10 +1754,10 @@ var __meta__ = {
 
             that._bound = true;
 
-            if (!that._filtered) {
-                that.value(that._values);
-            } else {
+            if (that._filtered) {
                 that.focus(0);
+            } else if (!e || !e.action) {
+                that.value(that._values);
             }
 
             if (that._valueDeferred) {

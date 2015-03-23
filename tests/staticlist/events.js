@@ -104,6 +104,38 @@
         list.value("custom");
     });
 
+    test("widget does not trigger change when new item is added to the source", 0, function() {
+        var list = new StaticList(element, {
+            dataSource: ["item"],
+            template: "#:data#",
+            value: ["item"]
+        });
+
+        list.dataSource.read();
+
+        list.bind("change", function() {
+            ok(false);
+        });
+
+        list.dataSource.add("new item");
+    });
+
+    test("widget does not trigger change when an item is removed from the source", 0, function() {
+        var list = new StaticList(element, {
+            dataSource: ["item", "item1"],
+            template: "#:data#",
+            value: ["item"]
+        });
+
+        list.dataSource.read();
+
+        list.bind("change", function() {
+            ok(false);
+        });
+
+        list.dataSource.remove(list.dataSource.at(0));
+    });
+
     test("widget passes deselected dataItem", 2, function() {
         var list = new StaticList(element, {
             dataSource: ["item"],
