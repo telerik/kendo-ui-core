@@ -1391,9 +1391,11 @@ var __meta__ = {
                 if (!indices.length) {
                     that.select([]);
                 } else {
-                    that._selectedIndices = [];
-                    that._dataItems = [];
-                    that._values = [];
+                    if (that.options.selectable === "multiple") {
+                        that._selectedIndices = [];
+                        that._dataItems = [];
+                        that._values = [];
+                    }
 
                     that.select(indices);
                 }

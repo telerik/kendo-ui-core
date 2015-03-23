@@ -1038,6 +1038,20 @@
         list.dataSource.read();
     });
 
+    test("value method clears previous selected items (single selection)", 1, function() {
+        var list = new StaticList(element, {
+            dataSource: ["item1", "item2", "item3"],
+            template: "#:data#"
+        });
+
+        list.dataSource.read();
+
+        list.value("item1");
+        list.value("item2");
+
+        equal(list.element.children(".k-state-selected").length, 1);
+    });
+
     test("next method focuses first item if no items are focused", function() {
         var list = new StaticList(element, {
             dataSource: ["item1", "item2", "item3"],
