@@ -7,7 +7,7 @@ publish: false
 
 Welcome to the GitHub repo for [Kendo UI](http://www.telerik.com/kendo-ui) documentation. This repository contains the source content — written in Markdown — that we use to power the Kendo UI Documentation at [docs.telerik.com/kendo-ui](http://docs.telerik.com/kendo-ui/). If you've arrived here wanting to search and peruse our docs, you'd be better served heading over to [docs.telerik.com/kendo-ui](http://docs.telerik.com/kendo-ui) where our content is prettified and searchable.
 
-We believe that the documentation for a product is at its best when the content is a collaboration between the builders and consumers of that product. As such, this documentation is both public, and open sourced under and MIT license (see below). That means you can clone this repository, read the docs off line, or even load the entire thing to an Apple Newton, if that's your thing.
+We believe that the documentation for a product is at its best when the content is a collaboration between the builders and consumers of that product. As such, this documentation is both public, and open sourced under a MIT license (see below). That means you can clone this repository, read the docs off line, or even load the entire thing to an Apple Newton, if that's your thing.
 
 It also means that you can play a role in making our docs better for everyone, and if helping us make the Kendo UI docs better sounds interesting to you, read on.
 
@@ -15,10 +15,10 @@ It also means that you can play a role in making our docs better for everyone, a
 
 There are two ways you can contribute to the public Kendo UI documentation: either create an issue in this repository, or fork the repo, make the change and send us a pull request!
 
-* **Create an issue** - If you find an issue with our docs that needs to be addressed, the best way to let us know about it is by [creating an issue in this repository](https://github.com/telerik/kendo-docs/issues?state=open). When creating an issue, provide a descriptive title, be as specific as possible and link to the document in question (If you can provide a link to the closest anchor to the issue, all the better). Here's an example:
+* **Create an issue** - If you find an issue with our docs that needs to be addressed, the best way to let us know about it is by [creating an issue in this repository](https://github.com/telerik/kendo-ui-core/issues?state=open). When creating an issue, provide a descriptive title, be as specific as possible and link to the document in question (If you can provide a link to the closest anchor to the issue, all the better). Here's an example:
 
         Title: api/DataViz/chart.md is missing an image
-        Description: Example 3 is missing an image right after the code sample. https://github.com/telerik/kendo-docs/issues?state=open
+        Description: Example 3 is missing an image right after the code sample. https://github.com/telerik/kendo-ui-core/issues?state=open
 
 > Note: When creating issues, please don't modify the assignee or milestone fields. Also, please create one issue per fix or change. "Bundled" entries will be deleted.
 
@@ -26,11 +26,11 @@ There are two ways you can contribute to the public Kendo UI documentation: eith
 
     Once you've read these — or you've already memorized them — you're ready to contribute to the Kendo docs. Start by creating a local clone of our repo either using [GitHub for Windows](http://windows.github.com/), [GitHub for Mac](http://mac.github.com/) or your friendly command-line:
 
-        git clone git@github.com:telerik/kendo-docs.git
+        git clone git@github.com:telerik/kendo-ui-core.git
 
     Then, open up the kendo-docs folder in your favorite text editor and contribute away! Of course, as you work with the docs, we do ask that you follow a couple of ground rules:
 
-    - The [documentation Wiki](https://github.com/telerik/kendo-docs/wiki) contains the latest authoring guidelines.
+    - The [documentation Wiki](https://github.com/telerik/kendo-ui-core/wiki) contains the latest authoring guidelines.
     - Fixing grammar, punctuation and other general errors is always appreciated. So are changes that expand on key ideas or correct errors in logic phrasing or otherwise. If your ambitions are greater, however, and you want to add completely new content to the site — like a new tutorial on using Kendo UI with an Atari 2600, for instance — we suggest you contact a member of the team first (or enter an issue!) to vet your idea. [Burke Holland](http://twitter.com/burkeholland), [Todd Anglin](http://twitter.com/toddanglin) and [Brandon Satrom](http://twitter.com/brandonsatrom) would all be happy to hear your idea and offer advice.
     - Each document in this repo contains a section of YAML Front Matter at the very top. This content, which looks like the text below, is used by our auto-import tool when content is processed for the live documentation site. Please don't edit the content in this section of a document.
 
@@ -51,9 +51,9 @@ There are two ways you can contribute to the public Kendo UI documentation: eith
 
 You can generate a static web site from the Kendo UI the documentation and browse it locally.
 
-1. Clone the repository `git clone git@github.com:telerik/kendo-docs.git`
+1. Clone the repository `git clone git@github.com:telerik/kendo-ui-core.git`
 2. Run `bundle install` (you must have ruby and bundler installed beforehand)
-3. Run `jekyll serve`
+3. Run `jekyll serve` under /docs
 4. Open "http://localhost:4000/kendo-ui/introduction.html" in your browser
 
 ## License
