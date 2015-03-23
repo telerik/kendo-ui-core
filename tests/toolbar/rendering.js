@@ -1200,6 +1200,17 @@
         ok($("#template").parent().data("uid"));
     });
 
+    test("Text in template that is not wrapped in an HTML element is rendered", 1, function() {
+        var toolbar = container.kendoToolBar({
+            items: [{
+                id: "foo",
+                template: "<span>foo</span>bar"
+            }]
+        }).data("kendoToolBar");
+
+        equal($("#foo").text(), "foobar");
+    });
+
     /* TEMPLATES */
 
     test("attributes are applied to the wrapper element", 2, function() {
