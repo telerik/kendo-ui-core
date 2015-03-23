@@ -24,7 +24,6 @@ var __meta__ = {
         HEADER = "k-virtual-header",
         VIRTUALITEM = "k-virtual-item",
         ITEM = "k-item",
-        OPTIONLABEL = "k-virtual-option-label",
         HEIGHTCONTAINER = "k-height-container",
         GROUPITEM = "k-group",
 
@@ -248,7 +247,6 @@ var __meta__ = {
             placeholderTemplate: "loading...",
             groupTemplate: "#:group#",
             fixedGroupTemplate: "fixed header template",
-            optionLabel: null,
             valueMapper: null
         },
 
@@ -265,7 +263,7 @@ var __meta__ = {
             Widget.fn.setOptions.call(this, options);
 
             if (this._selectProxy && this.options.selectable === false) {
-                this.wrapper.off(CLICK, "." + VIRTUALITEM + ", ." + OPTIONLABEL, this._selectProxy);
+                this.wrapper.off(CLICK, "." + VIRTUALITEM, this._selectProxy);
             } else if (!this._selectProxy && this.options.selectable) {
                 this._selectable();
             }
@@ -545,7 +543,7 @@ var __meta__ = {
                 element = this._getElementByIndex(index);
             }
 
-            if (index === -1) { //this will be in conflict with the optionLabel
+            if (index === -1) {
                 this.content.find("." + FOCUSED).removeClass(FOCUSED);
                 this._focusedIndex = undefined;
                 return;
@@ -582,7 +580,7 @@ var __meta__ = {
                 }
             } else { /*focus non rendered item*/
                 this._focusedIndex = index;
-                this.items().add(this.optionLabel).removeClass(FOCUSED);
+                this.items().removeClass(FOCUSED);
                 this.scrollToIndex(index);
             }
         },
@@ -717,26 +715,14 @@ var __meta__ = {
         },
 
         _getElementByIndex: function(index) {
-            var element;
-
-            if (index === -1) {
-                element = this.optionLabel;
-            } else {
-                element = this.items().filter(function(idx, element) {
-                    return index === parseInt($(element).attr("data-offset-index"), 10);
-                });
-            }
-
-            return element;
+            return this.items().filter(function(idx, element) {
+                return index === parseInt($(element).attr("data-offset-index"), 10);
+            });
         },
 
         _clean: function() {
             this.result = undefined;
             this._lastScrollTop = undefined;
-            if (this.optionLabel) {
-                this.optionLabel.parent().remove();
-                this.optionLabel = undefined;
-            }
             this.content.empty();
         },
 
@@ -842,7 +828,6 @@ var __meta__ = {
             }
 
             that._templates();
-            that._optionLabel();
             that._items = that._generateItems(that.content[0], that.itemCount);
 
             that._setHeight(options.itemHeight * dataSource.total());
@@ -1119,7 +1104,7 @@ var __meta__ = {
         _selectable: function() {
             if (this.options.selectable) {
                 this._selectProxy = $.proxy(this, "_clickHandler");
-                this.wrapper.on(CLICK + VIRTUAL_LIST_NS, "." + VIRTUALITEM + ", ." + OPTIONLABEL, this._selectProxy);
+                this.wrapper.on(CLICK + VIRTUAL_LIST_NS, "." + VIRTUALITEM, this._selectProxy);
             }
         },
 
@@ -1276,22 +1261,6 @@ var __meta__ = {
             if (!e.isDefaultPrevented()) {
                 this.trigger(CLICK, { item: $(e.currentTarget) });
             }
-        },
-
-        _optionLabel: function() {
-            var optionInstance = this.options.optionLabel;
-
-            if (optionInstance && typeof optionInstance === "object") {
-                this.element
-                    .before("<ul class='" + LIST + "'><li tabindex='-1' class='" + OPTIONLABEL + "' role='option'><div class='" + ITEM + "'></div></li></ul>");
-
-                this.optionLabel = this.wrapper.find("." + OPTIONLABEL);
-                render.call(this, this.optionLabel, { index: -1, top: null, selected: false, current: false, item: optionInstance }, this.templates);
-                this.optionInstance = optionInstance;
-            } else {
-                this.optionInstance = null;
-            }
-
         },
 
         _buildValueGetter: function() {

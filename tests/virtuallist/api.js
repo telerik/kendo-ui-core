@@ -346,22 +346,17 @@
         });
     });
 
-    asyncTest("data method returns current the optionLabel + dataSource.view", 4, function() {
-        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            optionLabel: {
-                text: "option label",
-                value: ""
-            }
-        }));
+    asyncTest("data method returns current dataSource.view", 4, function() {
+        var virtualList = new VirtualList(container, virtualSettings);
 
         asyncDataSource.read().then(function() {
             start();
             var data = virtualList.data();
 
-            equal(data[0].text, "option label");
-            equal(data[0].value, "");
-            equal(data[1].text, "Item 0");
-            equal(data[1].value, 0);
+            equal(data[0].text, "Item 0");
+            equal(data[0].value, 0);
+            equal(data[1].text, "Item 1");
+            equal(data[1].value, 1);
         });
     });
 
