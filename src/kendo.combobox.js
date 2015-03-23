@@ -603,11 +603,13 @@ var __meta__ = {
                 return;
             }
 
-            that.input.val(value);
             that._accessor(value);
+            that.input.val(value);
 
             that.listView.value(value).done(function() {
                 that._triggerCascade();
+
+                that._selectValue(that.listView.selectedDataItems()[0]);
 
                 that._old = that._accessor();
                 that._oldIndex = that.selectedIndex;
