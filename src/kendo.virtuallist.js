@@ -285,15 +285,24 @@ var __meta__ = {
         },
 
         setDataSource: function(source) {
-            var that = this,
-                dataSource = source || {};
+            var that = this;
+            var dataSource = source || {};
+            var value;
 
             dataSource = $.isArray(dataSource) ? {data: dataSource} : dataSource;
+            dataSource = kendo.data.DataSource.create(dataSource);
 
-            that.dataSource = kendo.data.DataSource.create(dataSource);
-            that._refreshHandler = $.proxy(that.refresh, that);
+            if (that.dataSource) {
+                that.dataSource.unbind(CHANGE, that._refreshHandler);
 
-            that.dataSource.bind(CHANGE, that._refreshHandler);
+                value = that.value();
+                that.value([]);
+                that.value(value, true);
+            } else {
+                that._refreshHandler = $.proxy(that.refresh, that);
+            }
+
+            that.dataSource = dataSource.bind(CHANGE, that._refreshHandler);
 
             if (that.dataSource.view().length !== 0) {
                 that.refresh();
@@ -302,14 +311,14 @@ var __meta__ = {
             }
         },
 
-        refresh: function() {
+        refresh: function(e) {
             var that = this;
 
             if (that._mute) { return; }
 
             if (!that._fetching) {
                 that._createList();
-                if (that._values.length && !that._filter) {
+                if ((!e || !e.action) && that._values.length && !that._filter) {
                     that._prefetchByValue(that._values);
                 }
                 that._listCreated = true;
