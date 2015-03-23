@@ -128,6 +128,26 @@
         click(toolbar.popup.element.find("#foo_overflow"));
     });
 
+    test("click event (button level) is not fired for initially disabled buttons localted in the overflow popup", 0, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                {
+                    type: "button",
+                    id: "foo",
+                    text: "foo",
+                    click: function() {
+                        ok(false, "Click event should not be fired for disabled button.");
+                    },
+                    enable: false,
+                    overflow: "always"
+                }
+            ]
+        }).data("kendoToolBar");
+
+        toolbar.popup.open();
+        click(toolbar.popup.element.find("#foo_overflow"));
+    });
+
     test("click on toggleButton changes its state", 2, function() {
         container.kendoToolBar({
             items: [
