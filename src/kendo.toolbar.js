@@ -570,6 +570,11 @@ var __meta__ = {
                             overflowElement.removeAttr(KENDO_UID_ATTR);
                             overflowElement = overflowElement.wrap("<li></li>").parent();
                             overflowElement.attr(KENDO_UID_ATTR, options.uid);
+
+                            if (options.type === "button" && options.enable === false) {
+                                overflowElement.find("." + BUTTON).removeClass(STATE_DISABLED);
+                                overflowElement.addClass(STATE_DISABLED);
+                            }
                         }
                         that._attributes(overflowElement, options);
                         overflowElement.addClass(itemClasses).appendTo(that.popup.container);
