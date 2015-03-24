@@ -1000,7 +1000,7 @@ Controls whether the widget is editable or readonly.
 #### Example
 
     // get a reference to the dropdownlist widget
-    var dropdownlist = $("dropdownlist").data("kendoDropDownList");
+    var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
 
     // makes dropdownlist readonly
     dropdownlist.readonly();
