@@ -10,7 +10,7 @@ before_install:
   - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
   - sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
   - sudo apt-get update
-  - sudo apt-get install google-chrome-stable
+  - sudo apt-get install --allow-unauthenticated google-chrome-stable
   - export CHROME_SANDBOX=/opt/google/chrome/chrome-sandbox
   - sudo cp -f build/chrome-sandbox $CHROME_SANDBOX
   - sudo chown root:root $CHROME_SANDBOX; sudo chmod 4755 $CHROME_SANDBOX
