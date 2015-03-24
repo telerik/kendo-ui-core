@@ -22,7 +22,7 @@
                 text: "Item " + i
             });
         }
-        
+
         return items;
     }
 
@@ -585,6 +585,7 @@
     });
 
     asyncTest("changing the value through the value method updates dataItems collection (initially set values)", 3, function() {
+        var count = 1;
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             value: [7],
             valueMapper: valueMapper,
@@ -594,10 +595,13 @@
         asyncDataSource.read().then(function() {
             start();
 
-            virtualList.one("change", function() {
-                equal(virtualList.selectedDataItems().length, 2);
-                equal(virtualList.selectedDataItems()[0], asyncDataSource.data()[0]);
-                equal(virtualList.selectedDataItems()[1], asyncDataSource.data()[1]);
+            virtualList.bind("change", function() {
+                if (count > 1) { //skip first change when value is cleared
+                    equal(virtualList.selectedDataItems().length, 2);
+                    equal(virtualList.selectedDataItems()[0], asyncDataSource.data()[0]);
+                    equal(virtualList.selectedDataItems()[1], asyncDataSource.data()[1]);
+                }
+                count += 1;
             });
             virtualList.value([0,1]);
         });

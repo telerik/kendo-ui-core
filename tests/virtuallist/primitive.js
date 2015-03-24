@@ -328,7 +328,7 @@
         }, 100);
     });
 
-    asyncTest("changing the value through the value method updates dataItems collection", 3, function() {
+    asyncTest("changing the value through the value method updates dataItems collection (multiple)", 3, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
             template: "#=data#",
@@ -348,6 +348,7 @@
     });
 
     asyncTest("changing the value through the value method updates dataItems collection (initially set values)", 3, function() {
+        var count = 1;
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
             template: "#=data#",
@@ -359,9 +360,13 @@
             start();
 
             virtualList.bind("change", function() {
-                equal(virtualList.selectedDataItems().length, 2);
-                equal(virtualList.selectedDataItems()[0], asyncDataSource.data()[0]);
-                equal(virtualList.selectedDataItems()[1], asyncDataSource.data()[1]);
+                if (count !== 1) {
+                    equal(virtualList.selectedDataItems().length, 2);
+                    equal(virtualList.selectedDataItems()[0], asyncDataSource.data()[0]);
+                    equal(virtualList.selectedDataItems()[1], asyncDataSource.data()[1]);
+                }
+
+                count += 1; //first change is triggered because of dataitems removal
             });
             virtualList.value(["Item 0", "Item 1"]);
         }, 100);
