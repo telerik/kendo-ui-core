@@ -3259,6 +3259,19 @@ The HTML element which represents the editor content area.
     editor.body.style.backgroundColor = "#f00";
     </script>
 
+### toolbar `Element`
+
+The HTML element which represents the editor toolbar.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor();
+    var editor = $("#editor").data("kendoEditor");
+    editor.toolbar.hide();
+    </script>
+
 ## Methods
 
 ### createRange
