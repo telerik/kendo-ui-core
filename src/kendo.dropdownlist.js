@@ -679,7 +679,7 @@ var __meta__ = {
             for (; index < length; index++) {
                 text = that._text(data[index]);
 
-                if (text && that._matchText(text, index) && !(that._word.length === 1 && startIndex === index)) {
+                if (text && that._matchText(text, index) && !(that._word.length === 1 && startIndex === that.selectedIndex)) {
                     return true;
                 }
             }

@@ -99,6 +99,19 @@
         equal(dropdownlist.selectedIndex, 2);
     });
 
+    test("select next item if starts with same character (option label)", 2, function() {
+        var dropdownlist = new DropDownList(input, {
+            optionLabel: "select...",
+            dataSource: ["text1", "text2"]
+        });
+
+        input.press("t");
+        equal(dropdownlist.value(), "text1");
+
+        input.press("t");
+        equal(dropdownlist.value(), "text2");
+    });
+
     test("keep selection if typed text is 0ame as current data item", 1, function() {
         var dropdownlist = new DropDownList(input, {
             dataSource: ["test", "500.122", "500.123"]
