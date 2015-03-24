@@ -21,7 +21,7 @@ var __meta__ = {
         VIRTUALLIST = "k-virtual-list",
         CONTENT = "k-virtual-content",
         LIST = "k-list",
-        HEADER = "k-virtual-header",
+        HEADER = "k-group-header",
         VIRTUALITEM = "k-virtual-item",
         ITEM = "k-item",
         HEIGHTCONTAINER = "k-height-container",
@@ -167,7 +167,6 @@ var __meta__ = {
         element
             .attr("data-uid", data.item ? data.item.uid : "")
             .attr("data-offset-index", data.index)
-            .find("." + ITEM)
             .html(itemTemplate(data.item || {}));
 
         element.toggleClass(FOCUSED, data.current);
@@ -176,7 +175,7 @@ var __meta__ = {
 
         if (data.newGroup) {
             $("<div class=" + GROUPITEM + "></div>")
-                .appendTo(element.find("." + ITEM))
+                .appendTo(element)
                 .html(templates.groupTemplate({ group: data.group }));
         }
 
@@ -198,20 +197,18 @@ var __meta__ = {
 
             Widget.fn.init.call(that, element, options);
 
-            element = that.element;
-            element.addClass(VIRTUALLIST);
-
             if (!that.options.itemHeight) {
                 that.options.itemHeight = getDefaultItemHeight();
             }
 
             options = that.options;
 
-            that.wrapper = element.wrap("<div class='" + WRAPPER + "' role='listbox'></div>").parent();
-            that.header = that.element.before("<div class='" + HEADER + "'></div>").prev();
-            that.content = element.append("<ul class='" + CONTENT + " " + LIST + "'></ul>").find("." + CONTENT);
+            that.element.addClass(LIST + " " + VIRTUALLIST);
+            that.content = that.element.wrap("<div class='" + CONTENT + "'></div>").parent();
+            that.wrapper = that.content.wrap("<div class='" + WRAPPER + "' role='listbox'></div>").parent();
+            that.header = that.content.before("<div class='" + HEADER + "'></div>").prev();
 
-            that.content.on("mouseenter" + VIRTUAL_LIST_NS, "li", function() { $(this).addClass(HOVER); })
+            that.element.on("mouseenter" + VIRTUAL_LIST_NS, "li", function() { $(this).addClass(HOVER); })
                         .on("mouseleave" + VIRTUAL_LIST_NS, "li", function() { $(this).removeClass(HOVER); });
 
             that._values = toArray(that.options.value);
@@ -224,7 +221,7 @@ var __meta__ = {
 
             that.setDataSource(options.dataSource);
 
-            element.on("scroll" + VIRTUAL_LIST_NS, function() {
+            that.content.on("scroll" + VIRTUAL_LIST_NS, function() {
                 that._renderItems();
             });
 
@@ -263,7 +260,7 @@ var __meta__ = {
             Widget.fn.setOptions.call(this, options);
 
             if (this._selectProxy && this.options.selectable === false) {
-                this.wrapper.off(CLICK, "." + VIRTUALITEM, this._selectProxy);
+                this.element.off(CLICK, "." + VIRTUALITEM, this._selectProxy);
             } else if (!this._selectProxy && this.options.selectable) {
                 this._selectable();
             }
@@ -277,7 +274,6 @@ var __meta__ = {
 
         destroy: function() {
             this.wrapper.off(VIRTUAL_LIST_NS);
-            this.element.off(VIRTUAL_LIST_NS);
             this.dataSource.unbind(CHANGE, this._refreshHandler);
             Widget.fn.destroy.call(this);
         },
@@ -499,7 +495,7 @@ var __meta__ = {
         },
 
         scrollTo: function(y) {
-            this.element.scrollTop(y); //works only if the element is visible
+            this.content.scrollTop(y); //works only if the element is visible
         },
 
         scrollToIndex: function(index) {
@@ -516,7 +512,7 @@ var __meta__ = {
                 id = this._optionID;
 
             if (candidate === undefined) {
-                current = this.content.find("." + FOCUSED);
+                current = this.element.find("." + FOCUSED);
                 return current.length ? current : null;
             }
 
@@ -543,7 +539,7 @@ var __meta__ = {
             }
 
             if (index === -1) {
-                this.content.find("." + FOCUSED).removeClass(FOCUSED);
+                this.element.find("." + FOCUSED).removeClass(FOCUSED);
                 this._focusedIndex = undefined;
                 return;
             }
@@ -699,24 +695,22 @@ var __meta__ = {
         _clean: function() {
             this.result = undefined;
             this._lastScrollTop = undefined;
-            this.content.empty();
+            $(this.heightContainer).remove();
+            this.heightContainer = undefined;
+            this.element.empty();
         },
 
         _screenHeight: function() {
             var height = this.options.height,
-                element = this.element;
+                element = this.element,
+                content = this.content;
 
-            if (height) {
-                element.height(height);
-            } else {
-                height = element.height();
-            }
-
+            content.height(height);
             this.screenHeight = height;
         },
 
         _getElementLocation: function(index) {
-            var scrollTop = this.element.scrollTop(),
+            var scrollTop = this.content.scrollTop(),
                 screenHeight = this.screenHeight,
                 itemHeight = this.options.itemHeight,
                 yPosition = index * itemHeight,
@@ -761,9 +755,8 @@ var __meta__ = {
             while(count-- > 0) {
                 item = document.createElement("li");
                 item.tabIndex = -1;
-                item.className = VIRTUALITEM;
+                item.className = VIRTUALITEM + " " + ITEM;
                 item.setAttribute("role", "option");
-                item.innerHTML = "<div class='" + ITEM + "'></div>";
                 element.appendChild(item);
 
                 items.push(item);
@@ -785,7 +778,7 @@ var __meta__ = {
 
         _createList: function() {
             var that = this,
-                element = that.element.get(0),
+                content = that.content.get(0),
                 options = that.options,
                 dataSource = that.dataSource,
                 total = dataSource.total();
@@ -804,7 +797,7 @@ var __meta__ = {
             }
 
             that._templates();
-            that._items = that._generateItems(that.content[0], that.itemCount);
+            that._items = that._generateItems(that.element[0], that.itemCount);
 
             that._setHeight(options.itemHeight * dataSource.total());
             that.options.type = !!dataSource.group().length ? "group" : "flat";
@@ -819,7 +812,7 @@ var __meta__ = {
             };
 
             that._renderItems = that._whenChanged(
-                scrollCallback(element, that._onScroll),
+                scrollCallback(content, that._onScroll),
                 syncList(that._reorderList(that._items, $.proxy(render, that)))
             );
 
@@ -831,7 +824,7 @@ var __meta__ = {
                 heightContainer = this.heightContainer;
 
             if (!heightContainer) {
-                heightContainer = this.heightContainer = appendChild(this.element[0], HEIGHTCONTAINER);
+                heightContainer = this.heightContainer = appendChild(this.content[0], HEIGHTCONTAINER);
             } else {
                 currentHeight = heightContainer.offsetHeight;
             }
@@ -911,8 +904,7 @@ var __meta__ = {
                 var firstVisibleGroup = firstVisibleDataItem.group;
 
                 if (firstVisibleGroup !== group) {
-                    this.header[0].innerHTML = "";
-                    appendChild(this.header[0], GROUPITEM).innerHTML = firstVisibleGroup || "";
+                    this.header[0].innerHTML = firstVisibleGroup || "";
                     this.currentVisibleGroup = firstVisibleGroup;
                 }
             }
@@ -1080,7 +1072,7 @@ var __meta__ = {
         _selectable: function() {
             if (this.options.selectable) {
                 this._selectProxy = $.proxy(this, "_clickHandler");
-                this.wrapper.on(CLICK + VIRTUAL_LIST_NS, "." + VIRTUALITEM, this._selectProxy);
+                this.element.on(CLICK + VIRTUAL_LIST_NS, "." + VIRTUALITEM, this._selectProxy);
             }
         },
 

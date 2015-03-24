@@ -3,6 +3,7 @@
         asyncDataSource,
         virtualSettings,
         VirtualList = kendo.ui.VirtualList,
+        ITEM_HEIGHT = 40,
         CONTAINER_HEIGHT = 200;
 
     function groupedData(options) {
@@ -32,7 +33,7 @@
 
     module("Grouped VirtualList: ", {
         setup: function() {
-            container = $("<div id='container' style='height: " + CONTAINER_HEIGHT + "px;'></div>").appendTo(QUnit.fixture);
+            container = $("<div id='container'></div>").appendTo(QUnit.fixture);
 
             asyncDataSource = new kendo.data.DataSource({
                 transport: {
@@ -54,6 +55,7 @@
 
             virtualSettings = {
                 autoBind: false,
+                height: CONTAINER_HEIGHT,
                 dataSource: asyncDataSource,
                 template: "#:text#",
                 dataValueField: "value"
@@ -75,7 +77,7 @@
         var virtualList = new VirtualList(container, virtualSettings);
 
         asyncDataSource.read();
-        equal(virtualList.wrapper.find(".k-virtual-header").length, 1);
+        equal(virtualList.wrapper.find(".k-group-header").length, 1);
     });
 
     //dataBinding

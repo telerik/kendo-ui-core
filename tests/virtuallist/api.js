@@ -3,6 +3,7 @@
         asyncDataSource,
         virtualSettings,
         VirtualList = kendo.ui.VirtualList,
+        ITEM_HEIGHT = 40,
         CONTAINER_HEIGHT = 200,
 
         SELECTED = "k-state-selected";
@@ -27,7 +28,7 @@
 
     module("VirtualList API: ", {
         setup: function() {
-            container = $("<div id='container' style='height: " + CONTAINER_HEIGHT + "px;'></div>").appendTo(QUnit.fixture);
+            container = $("<div id='container'></div>").appendTo(QUnit.fixture);
 
             asyncDataSource = new kendo.data.DataSource({
                 transport: {
@@ -48,7 +49,8 @@
             virtualSettings = {
                 autoBind: false,
                 dataSource: asyncDataSource,
-                itemHeight: 40,
+                itemHeight: ITEM_HEIGHT,
+                height: CONTAINER_HEIGHT,
                 template: "#=text#",
                 dataValueField: "value"
             };
@@ -70,7 +72,7 @@
 
         asyncDataSource.read().then(function() {
             virtualList.scrollTo(76 * 40); //scroll to the 76th item (76 * ITEMHEIGHT)
-            equal(virtualList.element[0].scrollTop, 76 * 40);
+            equal(virtualList.content[0].scrollTop, 76 * 40);
 
             setTimeout(function() {
                 start();
@@ -87,7 +89,7 @@
 
         asyncDataSource.read().then(function() {
             virtualList.scrollToIndex(76); //scroll to the 76th item
-            equal(virtualList.element[0].scrollTop, 76 * 40); //ITEMHEIGHT = 40
+            equal(virtualList.content[0].scrollTop, 76 * 40); //ITEMHEIGHT = 40
 
             setTimeout(function() {
                 start();
@@ -369,7 +371,8 @@
             virtualList.setOptions({
                 template: "<span class='foo'>#:text#</span>"
             });
-            equal(virtualList.items().first().find(".k-item").html(), '<span class="foo">Item 0</span>');
+
+            equal(virtualList.items().first().html(), '<span class="foo">Item 0</span>');
         });
     });
 

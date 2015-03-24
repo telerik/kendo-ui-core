@@ -3,6 +3,7 @@
         asyncDataSource,
         virtualList,
         VirtualList = kendo.ui.VirtualList,
+        ITEM_HEIGHT = 50,
         CONTAINER_HEIGHT = 200,
 
         SELECTED = "k-state-selected";
@@ -48,7 +49,7 @@
 
     module("VirtualList Filtering: ", {
         setup: function() {
-            container = $("<div id='container' style='height: " + CONTAINER_HEIGHT + "px;'></div>").appendTo(QUnit.fixture);
+            container = $("<div id='container'></div>").appendTo(QUnit.fixture);
 
             asyncDataSource = new kendo.data.DataSource({
                 transport: {
@@ -84,7 +85,8 @@
                 dataSource: asyncDataSource,
                 template: "#=text# #=letter#",
                 dataValueField: "value",
-                itemHeight: 50,
+                height: CONTAINER_HEIGHT,
+                itemHeight: ITEM_HEIGHT,
                 selectable: true,
                 valueMapper: function(o) {
                     o.success(o.value);
@@ -169,7 +171,7 @@
         asyncDataSource.read().then(function() {
             virtualList.one("listBound", function() {
                 start();
-                scroll(container, 4 * CONTAINER_HEIGHT);
+                scroll(virtualList.content, 4 * CONTAINER_HEIGHT);
                 equal(virtualList.items().last().text(), "Item 29 b");
             });
             asyncDataSource.filter({ field: "letter", operator: "eq", value: "b" });

@@ -3,6 +3,7 @@
         asyncDataSource,
         VirtualList = kendo.ui.VirtualList,
         virtualSettings = {},
+        ITEM_HEIGHT = 20,
         CONTAINER_HEIGHT = 200,
 
         FOCUSED = "k-state-focused",
@@ -34,7 +35,7 @@
 
     module("VirtualList Selection: ", {
         setup: function() {
-            container = $("<div id='container' style='height: " + CONTAINER_HEIGHT + "px;'></div>").appendTo(QUnit.fixture);
+            container = $("<div id='container'></div>").appendTo(QUnit.fixture);
 
             asyncDataSource = new kendo.data.DataSource({
                 transport: {
@@ -55,7 +56,8 @@
             virtualSettings = {
                 autoBind: false,
                 dataSource: asyncDataSource,
-                itemHeight: 20,
+                height: CONTAINER_HEIGHT,
+                itemHeight: ITEM_HEIGHT,
                 template: "#=text#",
                 dataValueField: "value"
             }
