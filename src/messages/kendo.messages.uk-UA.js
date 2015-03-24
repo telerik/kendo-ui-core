@@ -191,7 +191,7 @@ if (kendo.ui.FilterCell) {
 kendo.ui.FilterCell.prototype.options.messages =
 $.extend(true, kendo.ui.FilterCell.prototype.options.messages,{
   "filter": "фільтрувати",
-  "clear": "очистити фільтр",
+  "clear": "очистити",
   "isFalse": "хиба",
   "isTrue": "істина",
   "operator": "Oператор"
@@ -205,7 +205,7 @@ kendo.ui.FilterMenu.prototype.options.messages =
 $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "filter": "фільтрувати",
   "and": "І",
-  "clear": "очистити фільтр",
+  "clear": "очистити",
   "info": "Рядки із записами",
   "selectValue": "-виберіть-",
   "isFalse": "хиба",
