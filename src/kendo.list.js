@@ -1388,17 +1388,11 @@ var __meta__ = {
             if (that.isBound()) {
                 indices = that._valueIndices(value);
 
-                if (!indices.length) {
-                    that.select([]);
-                } else {
-                    if (that.options.selectable === "multiple") {
-                        that._selectedIndices = [];
-                        that._dataItems = [];
-                        that._values = [];
-                    }
-
-                    that.select(indices);
+                if (that.options.selectable === "multiple") {
+                    that.select(-1);
                 }
+
+                that.select(indices);
 
                 deferred.resolve();
             }

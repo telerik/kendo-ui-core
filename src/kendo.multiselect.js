@@ -416,17 +416,24 @@ var __meta__ = {
 
         open: function() {
             var that = this;
+            var listView = that.listView;
+            var value;
 
             if (that._request) {
                 that._retrieveData = false;
             }
 
-            if (that._retrieveData || !this.listView.isBound() || that._state === ACCEPT) {
-                that.listView.filter(false);
-
+            if (that._retrieveData || !listView.isBound() || that._state === ACCEPT) {
                 that._open = true;
                 that._state = REBIND;
                 that._retrieveData = false;
+
+                value = listView.value().slice();
+
+                listView.filter(false);
+                listView.value([]);
+                listView.value(value, true);
+
                 that._filterSource();
             } else if (that._allowSelection()) {
                 that.popup.open();
@@ -529,14 +536,6 @@ var __meta__ = {
 
             if (maxSelectedItems !== null && value.length > maxSelectedItems) {
                 value = value.slice(0, maxSelectedItems);
-            }
-
-            if (value.length && oldValue.length) {
-                for (idx = 0; idx < oldValue.length; idx++) {
-                    that._setOption(oldValue[idx], false);
-                }
-
-                that.tagList.html("");
             }
 
             that.listView.value(value);
