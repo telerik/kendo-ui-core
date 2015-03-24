@@ -246,6 +246,8 @@ The Splitter pane settings (`collapsible` and `resizable`) can be changed with J
     splitterObject.options.panes[0].resizable = true;
     splitterObject.resize(true);
 
+The `resize()` method of the Splitter causes the pane sizes to be recalculated, and the splitbars to be rendered with the current widget settings.
+
 ## Allow an element to overflow a Splitter pane
 
 Splitter panes are either scrollable (have an `overflow:auto` style) or they clip overflowing content (have an `overflow:hidden` style). In either case, nothing is allowed to be displayed outside the pane boundaries.
