@@ -312,6 +312,7 @@ $.extend(true, kendo.ui.Upload.prototype.options.localization,{
   "retry": "Wiederholen",
   "select": "Wählen Sie...",
   "statusFailed": "nicht erfolgreich",
+  "statusWarning": "warnung",
   "statusUploaded": "hochgeladet",
   "statusUploading": "hochladen",
   "uploadSelectedFiles": "Dateien hochladen",
