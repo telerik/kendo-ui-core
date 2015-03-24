@@ -999,6 +999,18 @@ Controls whether the widget is editable or readonly.
 
 #### Example
 
+    <input id="dropdownlist" />
+    <script>
+    $("#dropdownlist").kendoDropDownList({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      dataValueField: "id",
+      index: 1
+    });
+
     // get a reference to the dropdownlist widget
     var dropdownlist = $("dropdownlist").data("kendoDropDownList");
 
@@ -1007,6 +1019,7 @@ Controls whether the widget is editable or readonly.
 
     // makes dropdownlist editable
     dropdownlist.readonly(false);
+    </script>
 
 #### Parameters
 
