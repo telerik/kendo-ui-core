@@ -522,7 +522,7 @@ var __meta__ = {
             }
 
             if (typeof candidate === "function") {
-                data = this.data();
+                data = this.dataSource.flatView();
                 for (var idx = 0; idx < data.length; idx++) {
                     if (candidate(data[idx])) {
                         candidate = idx;
@@ -673,24 +673,6 @@ var __meta__ = {
                     }
                 }
             }
-        },
-
-        data: function() {
-            var data = this.dataSource.view(),
-                first = this.optionInstance,
-                length = data.length,
-                idx = 0;
-
-            if (first && length) {
-                first = new kendo.data.ObservableArray([first]);
-
-                for (; idx < length; idx++) {
-                    first.push(data[idx]);
-                }
-                data = first;
-            }
-
-            return data;
         },
 
         isBound: function() {
@@ -1112,7 +1094,7 @@ var __meta__ = {
             var result = [], data;
 
             if (typeof candidate === "function") {
-                data = this.data();
+                data = this.dataSource.flatView();
                 for (var idx = 0; idx < data.length; idx++) {
                     if (candidate(data[idx])) {
                         result.push(idx);

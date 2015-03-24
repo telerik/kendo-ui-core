@@ -314,7 +314,7 @@ var __meta__ = {
 
             var listView = that.listView;
             var focusedItem = listView.focus();
-            var data = listView.data();
+            var data = this.dataSource.flatView();
             var length = data.length;
             var value;
 
@@ -410,7 +410,7 @@ var __meta__ = {
             var data, found, idx;
 
             if (typeof candidate === "function") {
-                data = this.listView.data();
+                data = this.dataSource.flatView();
 
                 for (idx = 0; idx < data.length; idx++) {
                     if (candidate(data[idx])) {

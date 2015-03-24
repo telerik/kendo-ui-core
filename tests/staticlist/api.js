@@ -1186,25 +1186,4 @@
         equal(list.value(), "item2");
     });
 
-    test("data method returns list of the flatten data", function() {
-        var list = new StaticList(element, {
-            template: "#:data#",
-            groupTemplate: '#:data#',
-            dataValueField: "name",
-            dataSource: {
-                data: [
-                    { name: "item1", type: "a" },
-                    { name: "item2", type: "b" },
-                    { name: "item3", type: "a" }
-                ],
-                group: "type"
-            }
-        });
-
-        list.dataSource.read();
-
-        var data = list.data();
-
-        equal(data.length, 3);
-    });
 })();

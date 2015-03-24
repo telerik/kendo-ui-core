@@ -446,7 +446,7 @@ var __meta__ = {
 
         _listBound: function() {
             var that = this;
-            var data = this.listView.data();
+            var data = this.dataSource.flatView();
             var length = data.length;
 
             that._angularItems("compile");

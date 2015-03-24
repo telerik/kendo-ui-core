@@ -346,20 +346,6 @@
         });
     });
 
-    asyncTest("data method returns current dataSource.view", 4, function() {
-        var virtualList = new VirtualList(container, virtualSettings);
-
-        asyncDataSource.read().then(function() {
-            start();
-            var data = virtualList.data();
-
-            equal(data[0].text, "Item 0");
-            equal(data[0].value, 0);
-            equal(data[1].text, "Item 1");
-            equal(data[1].value, 1);
-        });
-    });
-
     asyncTest("focus method returns null if there is no focused item", 1, function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             selectable: true

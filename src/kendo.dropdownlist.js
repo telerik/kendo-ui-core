@@ -315,7 +315,7 @@ var __meta__ = {
                 index = $(that.items()).index(index);
             }
 
-            return that.listView.data()[index];
+            return that.dataSource.flatView()[index];
         },
 
         refresh: function() {
@@ -427,7 +427,7 @@ var __meta__ = {
             var filtered = that._state === STATE_FILTER;
             var element = that.element[0];
 
-            var data = that.listView.data();
+            var data = that.dataSource.flatView();
             var length = data.length;
 
             var height;
@@ -672,7 +672,7 @@ var __meta__ = {
         _selectNext: function(index) {
             var that = this;
             var startIndex = index;
-            var data = that.listView.data();
+            var data = that.dataSource.flatView();
             var length = data.length;
             var text;
 
@@ -855,7 +855,7 @@ var __meta__ = {
             }
 
             if (typeof candidate === "function") {
-                data = this.listView.data();
+                data = this.dataSource.flatView();
 
                 for (idx = 0; idx < data.length; idx++) {
                     if (candidate(data[idx])) {
