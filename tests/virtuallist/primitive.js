@@ -22,7 +22,7 @@
 
     module("VirtualList Primitive Data: ", {
         setup: function() {
-            container = $("<div id='container' style='height: " + CONTAINER_HEIGHT + "px;'></div>").appendTo(QUnit.fixture);
+            container = $("<div id='container'></div>").appendTo(QUnit.fixture);
 
             asyncDataSource = new kendo.data.DataSource({
                 transport: {
@@ -55,6 +55,7 @@
     asyncTest("selecting listItem selects it as a value of the list", 1, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
+            height: CONTAINER_HEIGHT,
             template: "#=data#",
             selectable: true
         });
@@ -72,6 +73,7 @@
     asyncTest("selecting listItem selects it as a value of the list (multiple selection)", 1, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
+            height: CONTAINER_HEIGHT,
             template: "#=data#",
             selectable: "multiple"
         });
@@ -95,6 +97,7 @@
     asyncTest("selecting already selected listItem does not deselect it as a value of the list", 2, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
+            height: CONTAINER_HEIGHT,
             template: "#=data#",
             selectable: true
         });
@@ -114,6 +117,7 @@
     asyncTest("selecting already selected listItem deselects it as a value of the list (multiple selection)", 1, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
+            height: CONTAINER_HEIGHT,
             template: "#=data#",
             selectable: "multiple"
         });
@@ -139,6 +143,7 @@
     asyncTest("setting the initial value selects the item", 1, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
+            height: CONTAINER_HEIGHT,
             template: "#=data#",
             value: "Item 6",
             selectable: true
@@ -155,6 +160,7 @@
         var values = ["Item 1", "Item 10", "Item 6"];
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
+            height: CONTAINER_HEIGHT,
             template: "#=data#",
             value: values,
             selectable: "multiple"
@@ -172,6 +178,7 @@
     asyncTest("setting the value with the value method updates the selection", 1, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
+            height: CONTAINER_HEIGHT,
             template: "#=data#",
             selectable: true
         });
@@ -188,6 +195,7 @@
     asyncTest("setting the value with the value method updates the selection (multiple selection)", 3, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
+            height: CONTAINER_HEIGHT,
             template: "#=data#",
             selectable: "multiple"
         });
@@ -206,6 +214,7 @@
     asyncTest("value method works if called before the dataSource is fetched and list is created", 1, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
+            height: CONTAINER_HEIGHT,
             template: "#=data#",
             selectable: true
         });
@@ -221,6 +230,7 @@
     asyncTest("value method works if called before the dataSource is fetched and list is created (multiple values)", 3, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
+            height: CONTAINER_HEIGHT,
             template: "#=data#",
             selectable: "multiple"
         });
@@ -238,6 +248,7 @@
     asyncTest("selecting listItem selects it and saves the corresponding dataItem", 2, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
+            height: CONTAINER_HEIGHT,
             template: "#=data#",
             selectable: true
         });
@@ -256,6 +267,7 @@
     asyncTest("selecting listItem selects it and saves the corresponding dataItem (multiple items)", 3, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
+            height: CONTAINER_HEIGHT,
             template: "#=data#",
             selectable: "multiple"
         });
@@ -278,6 +290,7 @@
     asyncTest("saves the dataItems that correspond to the initially set values", 3, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
+            height: CONTAINER_HEIGHT,
             template: "#=data#",
             value: ["Item 0", "Item 1"],
             selectable: "multiple",
@@ -294,6 +307,7 @@
     asyncTest("selecting already selected listItem removes it from stored dataItems", 2, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
+            height: CONTAINER_HEIGHT,
             template: "#=data#",
             selectable: "multiple",
             value: ["Item 0", "Item 7"]
@@ -313,6 +327,7 @@
     asyncTest("changing the value through the value method updates dataItems collection", 2, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
+            height: CONTAINER_HEIGHT,
             template: "#=data#",
             selectable: true
         });
@@ -331,6 +346,7 @@
     asyncTest("changing the value through the value method updates dataItems collection (multiple)", 3, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
+            height: CONTAINER_HEIGHT,
             template: "#=data#",
             selectable: "multiple"
         });
@@ -351,6 +367,7 @@
         var count = 1;
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
+            height: CONTAINER_HEIGHT,
             template: "#=data#",
             value: ["Item 7"],
             selectable: "multiple"
@@ -375,6 +392,7 @@
     asyncTest("not available dataItems are retrieved by the value method", 3, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
+            height: CONTAINER_HEIGHT,
             template: "#=data#",
             selectable: "multiple",
             valueMapper: function(o) {
@@ -396,6 +414,7 @@
     asyncTest("not available dataItems are given as null in dataItems collection (initially set items)", 3, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
+            height: CONTAINER_HEIGHT,
             template: "#=data#",
             value: ["Item 7", "Item 256"],
             valueMapper: function(o) {
@@ -415,6 +434,7 @@
     asyncTest("selection is persisted accross ranges", 2, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
+            height: CONTAINER_HEIGHT,
             itemHeight: 40,
             template: "#=data#",
             selectable: true
@@ -439,6 +459,7 @@
     asyncTest("previously selected item is de-selected (single selection)", 1, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
+            height: CONTAINER_HEIGHT,
             template: "#=data#",
             selectable: true
         });
@@ -457,6 +478,7 @@
     asyncTest("previously selected value is removed (single selection)", 2, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
+            height: CONTAINER_HEIGHT,
             template: "#=data#",
             selectable: true
         });
@@ -476,6 +498,7 @@
     asyncTest("previously selected dataItem is removed (single selection)", 2, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
+            height: CONTAINER_HEIGHT,
             template: "#=data#",
             selectable: true
         });
@@ -495,6 +518,7 @@
     asyncTest("select method selects the element", 3, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
+            height: CONTAINER_HEIGHT,
             template: "#=data#",
             selectable: true
         });
@@ -513,6 +537,7 @@
     asyncTest("select method changes the value", 2, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
+            height: CONTAINER_HEIGHT,
             template: "#=data#",
             selectable: true
         });

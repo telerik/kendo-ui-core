@@ -29,7 +29,7 @@
 
     module("VirtualList MVVM: ", {
         setup: function() {
-            container = $("<div id='container' data-role='virtuallist' data-bind='source: asyncDataSource' data-template='tmp' data-value-field='value' data-item-height='20' style='height: " + CONTAINER_HEIGHT + "px;'></div>")
+            container = $("<div id='container' data-role='virtuallist' data-bind='source: asyncDataSource' data-template='tmp' data-value-field='value' data-item-height='20' data-height='200'></div>")
                 .appendTo(QUnit.fixture);
 
             template = $("<script id='tmp' type='text/x-kendo-template'>" +
@@ -96,7 +96,7 @@
     asyncTest("items are rebound after re-rendering (list scroll)", 2, function() {
         virtualList = container.getKendoVirtualList();
         setTimeout(function() {
-            scroll(container, 620);
+            scroll(virtualList.content, 620);
             setTimeout(function() {
                 start();
                 equal(virtualList.items().eq(0).text(), "Item 11");

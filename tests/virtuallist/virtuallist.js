@@ -22,7 +22,7 @@
 
     module("VirtualList: ", {
         setup: function() {
-            container = $("<div id='container' style='height: " + CONTAINER_HEIGHT + "px;'></div>").appendTo(QUnit.fixture);
+            container = $("<div id='container'></div>").appendTo(QUnit.fixture);
 
             asyncDataSource = new kendo.data.DataSource({
                 transport: {
@@ -54,32 +54,35 @@
 
     test("creates list's content wrapper", 1, function() {
         var virtualList = new VirtualList(container, {
-            dataSource: asyncDataSource
+            dataSource: asyncDataSource,
+            height: CONTAINER_HEIGHT
         });
 
-        equal(virtualList.element.find(".k-virtual-content").length, 1);
+        equal(virtualList.wrapper.find(".k-virtual-content").length, 1);
     });
 
     asyncTest("creates height container", 1, function() {
         var virtualList = new VirtualList(container, {
-            dataSource: asyncDataSource
+            dataSource: asyncDataSource,
+            height: CONTAINER_HEIGHT
         });
 
         setTimeout(function() {
             start();
-            equal(virtualList.element.find(".k-height-container").length, 1);
+            equal(virtualList.wrapper.find(".k-height-container").length, 1);
         }, 100);
     });
 
     asyncTest("sets the height of the heightContainer", 1, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
+            height: CONTAINER_HEIGHT,
             itemHeight: 40
         });
 
         setTimeout(function() {
             start();
-            equal(virtualList.element.find(".k-height-container").height(), 4000); //dataSource.total() * itemHeight
+            equal(virtualList.wrapper.find(".k-height-container").height(), 4000); //dataSource.total() * itemHeight
         }, 100);
     });
 
@@ -87,19 +90,21 @@
         var virtualList = new VirtualList(container, {
             listScreens: 6,
             itemHeight: 20,
-            dataSource: asyncDataSource
+            dataSource: asyncDataSource,
+            height: CONTAINER_HEIGHT
         });
 
         setTimeout(function() {
             start();
-            var items = virtualList.element.find(".k-virtual-content").children();
+            var items = virtualList.items();
             equal(items.length, (CONTAINER_HEIGHT/20)*6);
         }, 100);
     });
 
     asyncTest("adds .k-virtual-item class to the item placeholders", 1, function() {
         var virtualList = new VirtualList(container, {
-            dataSource: asyncDataSource
+            dataSource: asyncDataSource,
+            height: CONTAINER_HEIGHT
         });
 
         setTimeout(function() {
@@ -111,7 +116,8 @@
 
     asyncTest("adds uid to the item placeholders", function() {
         var virtualList = new VirtualList(container, {
-            dataSource: asyncDataSource
+            dataSource: asyncDataSource,
+            height: CONTAINER_HEIGHT
         });
 
         setTimeout(function() {
@@ -128,6 +134,7 @@
     asyncTest("updating the model updates the corresponding item", 1, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
+            height: CONTAINER_HEIGHT,
             template: "#:text#"
         });
 
@@ -143,6 +150,7 @@
         asyncDataSource.fetch(function() {
             var virtualList = new VirtualList(container, {
                 dataSource: asyncDataSource,
+                height: CONTAINER_HEIGHT,
                 template: "#:text#"
             });
 
@@ -155,6 +163,7 @@
     asyncTest("adds k-state-hover class on mouseenter", 1, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
+            height: CONTAINER_HEIGHT,
             template: "#:text#"
         });
 
@@ -169,6 +178,7 @@
     asyncTest("removes k-state-hover class on mouseleave", 2, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
+            height: CONTAINER_HEIGHT,
             template: "#:text#"
         });
 
@@ -191,7 +201,8 @@
         });
 
         var virtualList = new VirtualList(container, {
-            dataSource: asyncDataSource
+            dataSource: asyncDataSource,
+            height: CONTAINER_HEIGHT
         });
     });
 
@@ -217,7 +228,8 @@
     
     asyncTest("initializes the default templates", function() {
         var virtualList = new VirtualList(container, {
-            dataSource: asyncDataSource
+            dataSource: asyncDataSource,
+            height: CONTAINER_HEIGHT
         });
 
         setTimeout(function() {
@@ -233,6 +245,7 @@
     asyncTest("uses the item template to render items", function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
+            height: CONTAINER_HEIGHT,
             template: "<span class='foo'>#:text#</span>"
         });
 
@@ -250,6 +263,7 @@
     asyncTest("wraps the item template in li.k-virtual-item > div.k-item", function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
+            height: CONTAINER_HEIGHT,
             template: "<span class='foo'>#:text#</span>"
         });
 
@@ -270,6 +284,7 @@
 
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
+            height: CONTAINER_HEIGHT,
             template: myTemplate
         });
 
@@ -287,20 +302,22 @@
     asyncTest("displays placeholder template when list is scrolled to a not available range", 1, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
+            height: CONTAINER_HEIGHT,
             placeholderTemplate: "<span class='foo'>foo...</span>",
             itemHeight: 20
         });
 
         setTimeout(function() {
             start();
-            scroll(container, 3 * CONTAINER_HEIGHT + 60);
-            equal(virtualList.items().last().find(".k-item").html(), '<span class="foo">foo...</span>');
+            scroll(virtualList.content, 3 * CONTAINER_HEIGHT + 60);
+            equal(virtualList.items().last().html(), '<span class="foo">foo...</span>');
         }, 100)
     });
 
     asyncTest("accepts function as placeholderTemplate", 1, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
+            height: CONTAINER_HEIGHT,
             placeholderTemplate: function() {
                 return "<span class='foo'>foo...</span>";  
             },
@@ -309,8 +326,8 @@
 
         setTimeout(function() {
             start();
-            scroll(container, 3 * CONTAINER_HEIGHT + 60);
-            equal(virtualList.items().last().find(".k-item").html(), '<span class="foo">foo...</span>');
+            scroll(virtualList.content, 3 * CONTAINER_HEIGHT + 60);
+            equal(virtualList.items().last().html(), '<span class="foo">foo...</span>');
         }, 100)
     });
 
@@ -319,6 +336,7 @@
     asyncTest("loads new items when list is scrolled", function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
+            height: CONTAINER_HEIGHT,
             template: "#:text#",
             placeholderTemplate: "loading data...",
             listScreens: 4,
@@ -329,7 +347,7 @@
         setTimeout(function() {
             start();
 
-            scroll(container, 3 * CONTAINER_HEIGHT); //scroll the list 3 screens down
+            scroll(virtualList.content, 3 * CONTAINER_HEIGHT); //scroll the list 3 screens down
             var lastScreenItems = $(virtualList.items().slice(-10));
 
             lastScreenItems.each(function(idx, element) {
@@ -342,6 +360,7 @@
     asyncTest("shifts the position of item placeholders", function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
+            height: CONTAINER_HEIGHT,
             template: "#:text#",
             placeholderTemplate: "loading data...",
             listScreens: 4,
@@ -350,11 +369,13 @@
 
         setTimeout(function() {
             start();
-            scroll(container, 3 * CONTAINER_HEIGHT); //scroll the list 1 screen
+            scroll(virtualList.content, 3 * CONTAINER_HEIGHT); //scroll the list 1 screen
             var lastScreenItems = virtualList.items().slice(-10);
 
             lastScreenItems.each(function(idx, element) {
-                equal($(element).position().top, (5 * CONTAINER_HEIGHT) + (idx * 20));
+                var transform = $(element).css("transform");
+                var translateY = parseInt(transform.substring(transform.lastIndexOf(",") + 2, transform.length - 1), 10);
+                equal(translateY, (5 * CONTAINER_HEIGHT) + (idx * 20));
             });
         }, 100);
     });
@@ -362,6 +383,7 @@
     asyncTest("starts dataSource request to fetch the next range when threshold is passed", function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
+            height: CONTAINER_HEIGHT,
             template: "#:text#",
             placeholderTemplate: "loading data...",
             listScreens: 4,
@@ -375,13 +397,14 @@
             });
 
             //(listScreens - 1 - threshold) * screenHeight
-            scroll(container, (400 - 1 - 0.5) * 200); //scroll the list 1 screens
+            scroll(virtualList.content, (400 - 1 - 0.5) * 200); //scroll the list 1 screens
         }, 100);
     });
 
     asyncTest("does not shift the position of item placeholders until threshold is passed", function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
+            height: CONTAINER_HEIGHT,
             template: "#:text#",
             placeholderTemplate: "loading data...",
             listScreens: 4,
@@ -404,6 +427,7 @@
     asyncTest("user is able to jump to the bottom of the list", function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
+            height: CONTAINER_HEIGHT,
             template: "#:text#",
             placeholderTemplate: "loading data...",
             listScreens: 4,
@@ -430,6 +454,7 @@
     asyncTest("updates the uid of the item placeholders after list position changes", function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
+            height: CONTAINER_HEIGHT,
             itemHeight: 40
         });
 
@@ -452,7 +477,8 @@
         var virtualList = new VirtualList(container, {
             listScreens: 6,
             itemHeight: 20,
-            dataSource: asyncDataSource
+            dataSource: asyncDataSource,
+            height: CONTAINER_HEIGHT
         });
         
         setTimeout(function() {
@@ -463,7 +489,8 @@
 
     asyncTest("calculates buffer sizes in pixels", 2, function() {
         var virtualList = new VirtualList(container, {
-            dataSource: asyncDataSource
+            dataSource: asyncDataSource,
+            height: CONTAINER_HEIGHT
         });
 
         setTimeout(function() {
@@ -495,13 +522,14 @@
 
         var virtualList = new VirtualList(container, {
             dataSource: dataSource,
+            height: CONTAINER_HEIGHT,
             itemHeight: 40
         });
         
         //height is dataSource.total() * itemHeight
-        equal(virtualList.element.find(".k-height-container").height(), 100011 * 40);
+        equal(virtualList.content.find(".k-height-container").height(), 100011 * 40);
 
-        heightPadChildren = virtualList.element.find(".k-height-container").children();
+        heightPadChildren = virtualList.content.find(".k-height-container").children();
 
         //heightPad container is expanded by elements with max height of 250000
         //dataSource.total() * itemHeight / MaxHeightElement + 1 ("1" is added because the total height is not devided by 250000)
@@ -519,18 +547,20 @@
 
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
+            height: CONTAINER_HEIGHT,
             height: 500
         });
 
         setTimeout(function() {
             start();
-            equal(container.height(), 500);
+            equal(virtualList.content.height(), 500);
         }, 100);
     });
 
     asyncTest("gets the container height if no option.height is provided", 1, function() {
         var virtualList = new VirtualList(container, {
-            dataSource: asyncDataSource
+            dataSource: asyncDataSource,
+            height: CONTAINER_HEIGHT
         });
 
         setTimeout(function() {
@@ -542,12 +572,13 @@
     asyncTest("height option overrides the element height", 1, function() {
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
+            height: CONTAINER_HEIGHT,
             height: 500
         });
 
         setTimeout(function() {
             start();
-            equal(container.height(), 500);
+            equal(virtualList.content.height(), 500);
         }, 100);
     });
 
@@ -557,12 +588,13 @@
 
         var virtualList = new VirtualList(container, {
             dataSource: asyncDataSource,
+            height: CONTAINER_HEIGHT,
             height: 500
         });
 
         setTimeout(function() {
             start();
-            equal(container.height(), 500);
+            equal(virtualList.content.height(), 500);
         }, 100);
     });
 

@@ -2,6 +2,7 @@
     var container,
         asyncDataSource,
         VirtualList = kendo.ui.VirtualList,
+        ITEM_HEIGHT = 20,
         CONTAINER_HEIGHT = 200;
 
     function generateData(parameters) {
@@ -18,7 +19,7 @@
 
     module("VirtualList AngularJS integration", {
         setup: function() {
-            container = "<div id='container' kendo-virtual-list k-options='virtualOptions' style='height: " + CONTAINER_HEIGHT + "px;'></div>";
+            container = "<div id='container' kendo-virtual-list k-options='virtualOptions'></div>";
 
             asyncDataSource = new kendo.data.DataSource({
                 transport: {
@@ -46,7 +47,8 @@
         angular.module("kendo.tests").controller("mine", function($scope) {
             $scope.virtualOptions = {
                 dataSource: asyncDataSource,
-                itemHeight: 20,
+                height: CONTAINER_HEIGHT,
+                itemHeight: ITEM_HEIGHT,
                 dataValueField: "value",
                 template: "<span>{{dataItem.text}}</span>"
             };
@@ -70,7 +72,8 @@
 
             $scope.virtualOptions = {
                 dataSource: asyncDataSource,
-                itemHeight: 20,
+                height: CONTAINER_HEIGHT,
+                itemHeight: ITEM_HEIGHT,
                 dataValueField: "value",
                 template: "<span>{{foo}}{{dataItem.text}}</span>"
             };
