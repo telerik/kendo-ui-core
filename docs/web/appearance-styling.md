@@ -29,13 +29,15 @@ Setting a Kendo UI **Web** theme (i.e. excluding Mobile and DataViz) requires th
 The appearance of the **Kendo UI** widgets depends entirely on styles defined by the applied CSS classes.
 No inline styles are used, except for some very specific cases in which these styles must be set with Javascript, depending on the browser or configuration.
 
-Some themes require a different "common" stylesheet that applies different dimensions. There are three "common" styleshees shipped with Kendo UI:
+Some themes require a different "common" stylesheet that applies different dimensions. There are four "common" styleshees shipped with Kendo UI:
 
 * **kendo.common.css** - The default base stylesheet.
 
 * **kendo.common-bootstrap.css** - The base stylesheet for the Bootstrap theme. Use this file instead of kendo.common.css and only with kendo.bootstrap.css theme file to achieve Bootstrap like widget dimensions.
 
 * **kendo.common-material.css** - The base stylesheet for the Material and MaterialBlack themes. Use this file instead of kendo.common.css and only with kendo.material.css or kendo.materialblack.css theme files.
+
+* **kendo.common-fiori.css** - The base stylesheet for the Fiori theme available in Kendo UI Professional. Use this file instead of kendo.common.css and only with kendo.fiori.css.
 
 ## Primitives
 
