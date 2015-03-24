@@ -493,7 +493,25 @@
         });
     });
 
-    asyncTest("value method clears previous values and dataItems", 2, function() {
+    asyncTest("value method clears previous values and dataItems (single selection)", 3, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: true,
+            value: [1]
+        }));
+
+        asyncDataSource.read().then(function() {
+            virtualList.bind("change", function() {
+                start(); //select new values
+                equal(this.selectedDataItems().length, 1);
+                equal(this.value().length, 1);
+                equal(this.value()[0], 4);
+            });
+            virtualList.value([4]);
+        });
+    });
+
+    asyncTest("value method clears previous values and dataItems (multiple)", 4, function() {
+        var count = 1;
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             selectable: "multiple",
             value: [1, 2, 3]
@@ -501,14 +519,37 @@
 
         asyncDataSource.read().then(function() {
             virtualList.bind("change", function() {
-                start();
-                equal(this.value().length, 2);
-                equal(this.selectedDataItems().length, 2);
+                if (count === 1) { //first change de-selects all items
+                    equal(this.value().length, 0);
+                    equal(this.selectedDataItems().length, 0);
+                    count += 1;
+                } else {
+                    start(); //select new values
+                    equal(this.value().length, 2);
+                    equal(this.selectedDataItems().length, 2);
+                }
             });
             virtualList.value([4, 5]);
         });
     });
 
+    asyncTest("value method clears previous values and dataItems", 3, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: true,
+            value: [1]
+        }));
+
+        asyncDataSource.read().then(function() {
+            virtualList.bind("change", function() {
+                start();
+                equal(this.value().length, 1);
+                equal(this.value()[0], 2);
+
+                equal(this.element.find(".k-state-selected").length, 1);
+            });
+            virtualList.value([2]);
+        });
+    });
 
     asyncTest("value method sets widget value silently", 2, function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {

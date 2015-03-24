@@ -351,14 +351,13 @@ var __meta__ = {
                 value = [];
             }
 
-            if (value instanceof Array && !value.length) {
+            value = toArray(value);
+
+            if (!value.length || that.options.selectable === "multiple") {
                 that.select(-1);
-                return;
             }
 
-            that._selectedDataItems = [];
-            that._selectedIndexes = [];
-            that._values = value = toArray(value);
+            that._values = value;
 
             if (that.isBound()) {
                 that._prefetchByValue(value);
@@ -634,43 +633,38 @@ var __meta__ = {
 
             removed = this._deselect(indexes);
 
-            if (!indexes.length) {
-                this.trigger(CHANGE, {
-                    added: added,
-                    removed: removed
-                });
-            } else {
-                if (singleSelection) {
-                    this._activeDeferred = null;
-                    prefetchStarted = false;
+            if (singleSelection) {
+                that._activeDeferred = null;
+                prefetchStarted = false;
+                if (indexes.length) {
                     indexes = [lastFrom(indexes)];
                 }
+            }
 
-                var done = function() {
-                    var added = that._select(indexes);
+            var done = function() {
+                var added = that._select(indexes);
 
-                    that.focus(indexes);
+                that.focus(indexes);
 
-                    if (that._valueDeferred) {
-                        that._valueDeferred.resolve();
-                    }
+                if (that._valueDeferred) {
+                    that._valueDeferred.resolve();
+                }
 
-                    if (added.length || removed.length) {
-                        that.trigger(CHANGE, {
-                            added: added,
-                            removed: removed
-                        });
-                    }
-                };
+                if (added.length || removed.length) {
+                    that.trigger(CHANGE, {
+                        added: added,
+                        removed: removed
+                    });
+                }
+            };
 
-                deferred = this.prefetch(indexes);
+            deferred = this.prefetch(indexes);
 
-                if (!prefetchStarted) {
-                    if (deferred) {
-                        deferred.done(done);
-                    } else {
-                        done();
-                    }
+            if (!prefetchStarted) {
+                if (deferred) {
+                    deferred.done(done);
+                } else {
+                    done();
                 }
             }
         },
