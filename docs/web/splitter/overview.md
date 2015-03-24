@@ -229,6 +229,23 @@ This is useful when the Splitter has been initialized in an invisible container 
     
 On a side note, changing the pane sizes manually is not recommended. Use the [`size()`](/api/web/splitter#methods-size) method for that.
 
+## Change pane settings after initialization
+
+The Splitter pane settings (`collapsible` and `resizable`) can be changed with Javascript after the Splitter has been initialized. For example:
+
+    $("#SplitterID").kendoSplitter({
+        panes: [
+            { collapsible: false, resizable: false, size: 100 },
+            { }
+        ]
+    });
+
+    var splitterObject = $("#SplitterID").data("kendoSplitter");
+
+    splitterObject.options.panes[0].collapsible = true;
+    splitterObject.options.panes[0].resizable = true;
+    splitterObject.resize(true);
+
 ## Allow an element to overflow a Splitter pane
 
 Splitter panes are either scrollable (have an `overflow:auto` style) or they clip overflowing content (have an `overflow:hidden` style). In either case, nothing is allowed to be displayed outside the pane boundaries.
