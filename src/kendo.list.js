@@ -242,7 +242,7 @@ var __meta__ = {
                 index = $(that.items()).index(index);
             }
 
-            return that.listView.data()[index];
+            return that.dataSource.flatView()[index];
         },
 
         _accessors: function() {
@@ -467,7 +467,7 @@ var __meta__ = {
         },
 
         _firstOpen: function() {
-            var height = this._height(this.listView.data().length);
+            var height = this._height(this.dataSource.flatView().length);
             this._calculateGroupPadding(height);
         },
 
@@ -995,7 +995,7 @@ var __meta__ = {
                         if (!that.dataSource.view()[0] || that.selectedIndex === -1) {
                             that._clearSelection(parent, true);
                         }
-                    } else if (that.listView.data().length) {
+                    } else if (that.dataSource.flatView().length) {
                         that.select(options.index);
                     }
 
@@ -1307,22 +1307,6 @@ var __meta__ = {
 
         clearIndices: function() {
             this._selectedIndices = [];
-        },
-
-        data: function() {
-            var that = this;
-            var data = that._view;
-            var length = data.length;
-            var result = [];
-            var idx;
-
-            if (length) {
-                for (idx = 0; idx < length; idx++) {
-                    result.push(data[idx].item);
-                }
-            }
-
-            return result;
         },
 
         filter: function(filter) {
