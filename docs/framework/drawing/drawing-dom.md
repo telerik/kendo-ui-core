@@ -247,6 +247,8 @@ Images are safe to add here.
 
 - images hosted on different domains might not be rendered, unless permissive [Cross-Origin HTTP headers](https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image) are provided by the server.  Similarly, fonts might not be possible to load cross-domain.
 
+  Even with the proper CORS headers, IE9 will *not* be able to load images or fonts from another domain, and could raise an uncatcheable security exception.  If you need to support IE9, make sure to host images and fonts on the same domain as the application.
+
 - when the generated document is opened with Acrobat Reader and you try to use the `Save As` option from the file menu an error is thrown.
 `"The document could not be saved. There was a problem reading(23)"`. The solution is to open Acrobat Reader options (Edit → Preferences) and in the "Documents" section uncheck “Save As optimizes for Fast Web View”, which is enabled by default. After this, Save As will work without errors.
 
