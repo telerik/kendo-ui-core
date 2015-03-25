@@ -350,6 +350,29 @@
         equal(multiselect.tagList.children().length, 1);
     });
 
+    test("MultiSelect deletes focused tag when source is filtered", function() {
+        var multiselect = new MultiSelect(select);
+
+        multiselect.search("Option1");
+        multiselect.ul.children(":first").click();
+
+        multiselect.search("Option2");
+        multiselect.ul.children(":first").click();
+
+        multiselect.currentTag(multiselect.tagList.children().first());
+
+        multiselect.input.trigger({
+            type: "keydown",
+            keyCode: keys.DELETE
+        });
+
+        multiselect.open();
+
+        equal(multiselect.currentTag(), null);
+        equal(multiselect.tagList.children().length, 1);
+        equal(multiselect.tagList.children().eq(0).text().indexOf("Option2"), 0);
+    });
+
     test("MultiSelect deletes last tag on BACKSPACE if input is empty", function() {
         var multiselect = new MultiSelect(select);
 
