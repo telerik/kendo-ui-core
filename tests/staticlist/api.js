@@ -1204,4 +1204,20 @@
         equal(indices[0], 0);
         equal(dataItems[0], "item1");
     });
+
+    test("removeAt method returns removed dataItem", 2, function() {
+        var list = new StaticList(element, {
+            selectable: "multiple",
+            dataSource: ["item1", "item2", "item3"],
+            template: "#:data#",
+            value: ["item2", "item1"]
+        });
+
+        list.dataSource.read();
+
+        var removed = list.removeAt(0);
+
+        equal(removed.position, 0);
+        equal(removed.dataItem, "item2");
+    });
 })();
