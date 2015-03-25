@@ -414,23 +414,16 @@ var __meta__ = {
 
         open: function() {
             var that = this;
-            var listView = that.listView;
-            var value;
 
             if (that._request) {
                 that._retrieveData = false;
             }
 
-            if (that._retrieveData || !listView.isBound() || that._state === ACCEPT) {
+            if (that._retrieveData || !that.listView.isBound() || that._state === ACCEPT) {
                 that._open = true;
                 that._state = REBIND;
                 that._retrieveData = false;
-
-                value = listView.value().slice();
-
-                listView.filter(false);
-                listView.value([]);
-                listView.value(value, true);
+                that.listView.filter(false);
 
                 that._filterSource();
             } else if (that._allowSelection()) {

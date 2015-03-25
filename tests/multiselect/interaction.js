@@ -399,13 +399,44 @@ test("MultiSelect add focused class on focus", function() {
     ok(multiselect.wrapper.hasClass("k-state-focused"));
 });
 
-test("MultiSelect removes focused clas on blur", function() {
+test("MultiSelect removes focused class on blur", function() {
     var multiselect = new MultiSelect(select);
 
     multiselect.input.focus();
     multiselect.input.focusout();
 
     ok(!multiselect.wrapper.hasClass("k-state-focused"));
+});
+
+test("MultiSelect removes selected item from tag list (filtered)", function() {
+    populateSelect();
+    var multiselect = new MultiSelect(select, {
+        value: ["1", "2"]
+    });
+
+    multiselect.search("Option2");
+    multiselect.ul.find(".k-state-selected").click();
+
+    var tags = multiselect.tagList.children();
+
+    equal(tags.length, 1);
+    equal(tags.children(":first").text(), "Option1");
+});
+
+test("MultiSelect persists selected tags on rebind", function() {
+    populateSelect();
+    var multiselect = new MultiSelect(select, {
+        value: ["1", "2"]
+    });
+
+    multiselect.search("Option2");
+    multiselect.ul.find(".k-state-selected").click();
+    multiselect.open();
+
+    var tags = multiselect.tagList.children();
+
+    equal(tags.length, 1);
+    equal(tags.children(":first").text(), "Option1");
 });
 
 })();
