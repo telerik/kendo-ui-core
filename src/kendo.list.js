@@ -1128,8 +1128,11 @@ var __meta__ = {
                 that.dataSource.unbind(CHANGE, that._refreshHandler);
 
                 value = that.value();
+
                 that.value([]);
-                that.value(value, true);
+                that._bound = false;
+
+                that.value(value);
             } else {
                 that._refreshHandler = proxy(that.refresh, that);
             }
@@ -1360,7 +1363,13 @@ var __meta__ = {
             }
         },
 
-        value: function(value, silent) {
+        removeAt: function(position) {
+            this._selectedIndices.splice(position, 1);
+            this._dataItems.splice(position, 1);
+            this._values.splice(position, 1);
+        },
+
+        value: function(value) {
             var that = this;
             var deferred = that._valueDeferred;
             var indices;
@@ -1376,10 +1385,6 @@ var __meta__ = {
             value = $.isArray(value) || value instanceof ObservableArray ? value.slice(0) : [value];
 
             that._values = value;
-
-            if (silent) {
-                return;
-            }
 
             if (!deferred || deferred.state() === "resolved") {
                 that._valueDeferred = deferred = $.Deferred();

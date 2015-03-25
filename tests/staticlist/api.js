@@ -847,7 +847,7 @@
         equal(dataItems.length, 0);
     });
 
-    test("value method sets selected indeces", function() {
+    test("value method sets selected indices", function() {
         var list = new StaticList(element, {
             dataValueField: "name",
             dataSource: {
@@ -990,26 +990,6 @@
         equal(children.eq(0).attr("class"), "k-item");
         equal(children.eq(1).attr("class"), "k-item k-state-focused");
         equal(children.eq(2).attr("class"), "k-item");
-    });
-
-    test("value method allows to update value silently", function() {
-        var list = new StaticList(element, {
-            template: "#:data#"
-        });
-
-        list.setOptions({
-            dataSource: ["item1", "item2", "item3"],
-            template: "new #:data#"
-        });
-
-        list.dataSource.read();
-
-        list.value(["custom"], true);
-
-        var value = list.value();
-
-        equal(value.length, 1);
-        equal(value[0], "custom");
     });
 
     test("value method returns promise", 1, function() {
@@ -1200,4 +1180,28 @@
         equal(list.value(), "item2");
     });
 
+    test("removeAt method removes values at current position", function() {
+        var list = new StaticList(element, {
+            selectable: "multiple",
+            dataSource: ["item1", "item2", "item3"],
+            template: "#:data#",
+            value: ["item2", "item1"]
+        });
+
+        list.dataSource.read();
+
+        list.removeAt(0);
+
+        var value = list.value();
+        var indices = list.select();
+        var dataItems = list.selectedDataItems();
+
+        equal(value.length, 1);
+        equal(indices.length, 1);
+        equal(dataItems.length, 1);
+
+        equal(value[0], "item1");
+        equal(indices[0], 0);
+        equal(dataItems[0], "item1");
+    });
 })();
