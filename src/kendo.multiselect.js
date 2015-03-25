@@ -334,18 +334,16 @@ var __meta__ = {
             var that = this;
             var position = tag.index();
             var listView = that.listView;
-            var value = listView.value();
-
-            var customIndex = that._customOptions[value[position]];
+            var customIndex = that._customOptions[listView.value()[position]];
             var option;
 
             if (customIndex !== undefined) {
-                value.splice(position, 1);
-                listView.value(value, true);
-
                 option = that.element[0].children[customIndex];
                 option.removeAttribute("selected");
                 option.selected = false;
+
+                listView.removeAt(position);
+                tag.remove();
             } else {
                 listView.select(listView.select()[position]);
             }
