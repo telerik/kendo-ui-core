@@ -1212,9 +1212,15 @@ The culture to use when formatting date values. See the [globalization overview]
 
 ### categoryAxis.labels.dateFormats `Object`
 
-The format used to display the labels when the categories are dates. Uses [kendo.format](/api/framework/kendo#methods-format). Contains one placeholder ("{0}") which represents the category value.
+The format used to display labels for [date category axis](#configuration-categoryAxis.type).
+The `{0}` placeholder represents the category value.
 
-> The chart will choose the appropriate format for the current [categoryAxis.baseUnit](#configuration-categoryAxis.baseUnit). Setting the [categoryAxis.labels.format](#configuration-categoryAxis.labels.format) option will override the date formats.
+The chart will choose the appropriate format for the current [categoryAxis.baseUnit](#configuration-categoryAxis.baseUnit).
+Setting the [categoryAxis.labels.format](#configuration-categoryAxis.labels.format) option will override the date formats.
+
+See also: [kendo.format](/api/framework/kendo#methods-format).
+
+> Not supported for radar charts. Use [categoryAxis.labels.format](#configuration-categoryAxis.labels.format) instead.
 
 #### Example - set category axis date formats
 
