@@ -769,6 +769,48 @@
         equal(indices[0], 1);
     });
 
+    test("select method de-selects item when filtered (multiple selection)", 5, function() {
+        var list = new StaticList(element, {
+            selectable: "multiple",
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "b" },
+                    { name: "item3", type: "a" }
+                ],
+                group: "type"
+            },
+            template: '#:data.name#',
+            groupTemplate: '#:data#',
+            value: ["item2", "item3"]
+        });
+
+        list.dataSource.read();
+
+        list.filter(true);
+        list.dataSource.filter({
+            field: "name",
+            operator: "eq",
+            value: "item2"
+        });
+
+        list.bind("change", function(e) {
+            var added = e.added;
+            var removed = e.removed;
+
+            equal(added.length, 0);
+
+            equal(removed.length, 1);
+            equal(removed[0].position, 0);
+            equal(removed[0].dataItem.name, "item2");
+
+            equal(list.element.find(".k-state-selected").length, 0);
+        });
+
+        list.select(0);
+    });
+
     test("value method selects an item", function() {
         var list = new StaticList(element, {
             dataValueField: "name",
@@ -1205,7 +1247,7 @@
         equal(dataItems[0], "item1");
     });
 
-    test("removeAt method returns removed dataItem", 2, function() {
+    test("removeAt method returns removed dataItem", 3, function() {
         var list = new StaticList(element, {
             selectable: "multiple",
             dataSource: ["item1", "item2", "item3"],
@@ -1219,5 +1261,6 @@
 
         equal(removed.position, 0);
         equal(removed.dataItem, "item2");
+        ok(!$.isArray(removed.dataItem));
     });
 })();

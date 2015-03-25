@@ -1338,6 +1338,10 @@ var __meta__ = {
                 indices = [];
             }
 
+            if (this.filter() && !singleSelection && this._deselectFiltered(indices)) {
+                return;
+            }
+
             if (singleSelection && !this._filtered && $.inArray(indices[indices.length - 1], this._selectedIndices) !== -1) {
                 return;
             }
@@ -1369,7 +1373,7 @@ var __meta__ = {
 
             return {
                 position: position,
-                dataItem: this._dataItems.splice(position, 1)
+                dataItem: this._dataItems.splice(position, 1)[0]
             };
         },
 
@@ -1519,6 +1523,35 @@ var __meta__ = {
                 indices: indices,
                 removed: removed
             };
+        },
+
+        _deselectFiltered: function(indices) {
+            var children = this.element[0].children;
+            var dataItem, index, position;
+            var removed = [];
+            var idx = 0;
+
+            for (; idx < indices.length; idx++) {
+                index = indices[idx];
+                dataItem = this._view[index].item;
+                position = this._dataItemPosition(dataItem, this._values);
+
+                if (position > -1) {
+                    removed.push(this.removeAt(position));
+                    $(children[index]).removeClass("k-state-selected");
+                }
+            }
+
+            if (removed.length) {
+                this.trigger("change", {
+                    added: [],
+                    removed: removed
+                });
+
+                return true;
+            }
+
+            return false;
         },
 
         _select: function(indices) {
