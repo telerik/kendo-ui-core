@@ -290,8 +290,11 @@ var __meta__ = {
                 that.dataSource.unbind(CHANGE, that._refreshHandler);
 
                 value = that.value();
+
                 that.value([]);
-                that.value(value, true);
+                that.mute(function() {
+                    that.value(value);
+                });
             } else {
                 that._refreshHandler = $.proxy(that.refresh, that);
             }
@@ -326,7 +329,13 @@ var __meta__ = {
             that._fetching = false;
         },
 
-        value: function(value, silent) {
+        removeAt: function(position) {
+            this._selectedIndexes.splice(position, 1);
+            this._selectedDataItems.splice(position, 1);
+            this._values.splice(position, 1);
+        },
+
+        value: function(value) {
             var that = this;
             var dataSource = that.dataSource;
 
@@ -336,11 +345,6 @@ var __meta__ = {
 
             if (!that._valueDeferred || that._valueDeferred.state() === "resolved") {
                 that._valueDeferred = $.Deferred();
-            }
-
-            if (silent) {
-                that._values = value = toArray(value);
-                return;
             }
 
             if (value === "" || value === null) {
@@ -355,7 +359,7 @@ var __meta__ = {
 
             that._values = value;
 
-            if (that.isBound()) {
+            if (that.isBound() && !that._mute) {
                 that._prefetchByValue(value);
             }
 

@@ -554,29 +554,6 @@
         });
     });
 
-    asyncTest("value method sets widget value silently", 2, function() {
-        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            selectable: true,
-            valueMapper: function(operation) {
-                setTimeout(function() {
-                    operation.success(123);
-                }, 0);
-            },
-            change: function() {
-                ok(true);
-            }
-        }));
-
-        virtualList.value(123, true)
-
-        asyncDataSource.read();
-
-        setTimeout(function() {
-            start();
-            equal(virtualList.value()[0], 123);
-        }, 100);
-    });
-
     asyncTest("value method return resolved promise", 1, function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             selectable: true,
@@ -703,5 +680,35 @@
         });
 
         asyncDataSource.read();
+    });
+
+    asyncTest("removeAt method removes values at current position", 6, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: "multiple",
+            valueMapper: function(operation) {
+                operation.success([123, 223]);
+            },
+            change: function() {
+                start();
+
+                virtualList.removeAt(0);
+
+                var value = virtualList.value();
+                var indices = virtualList.select();
+                var dataItems = virtualList.selectedDataItems();
+
+                equal(value.length, 1);
+                equal(indices.length, 1);
+                equal(dataItems.length, 1);
+
+                equal(value[0], 223);
+                equal(indices[0], 223);
+                equal(dataItems[0].value, 223);
+            }
+        }));
+
+        virtualList.value([123, 223]);
+
+        asyncDataSource.read()
     });
 })();
