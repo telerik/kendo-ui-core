@@ -331,8 +331,12 @@ var __meta__ = {
 
         removeAt: function(position) {
             this._selectedIndexes.splice(position, 1);
-            this._selectedDataItems.splice(position, 1);
             this._values.splice(position, 1);
+
+            return {
+                position: position,
+                dataItem: this._selectedDataItems.splice(position, 1)[0]
+            };
         },
 
         value: function(value) {

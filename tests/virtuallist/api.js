@@ -711,4 +711,26 @@
 
         asyncDataSource.read()
     });
+
+    asyncTest("removeAt method returns deleted data item", 3, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: "multiple",
+            valueMapper: function(operation) {
+                operation.success([123, 223]);
+            },
+            change: function() {
+                start();
+
+                var removed = virtualList.removeAt(0);
+
+                equal(removed.position, 0);
+                equal(removed.dataItem.value, 123);
+                ok(!$.isArray(removed.dataItem));
+            }
+        }));
+
+        virtualList.value([123, 223]);
+
+        asyncDataSource.read()
+    });
 })();
