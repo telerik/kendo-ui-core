@@ -191,6 +191,45 @@
         });
     });
 
+    asyncTest("select method deselects selected item when filtered (multiple)", 5, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: "multiple",
+            valueMapper: function(options) {
+                options.success([1, 2]);
+            }
+        }));
+
+        virtualList.one("change", function() {
+            virtualList.filter(true);
+            virtualList.dataSource.filter({
+                field: "value",
+                operator: "eq",
+                value: 2
+            });
+
+            virtualList.dataSource.one("change", function() {
+                virtualList.bind("change", function(e) {
+                    start()
+
+                    var added = e.added;
+                    var removed = e.removed;
+
+                    equal(added.length, 0);
+                    equal(removed.length, 1);
+
+                    equal(removed[0].position, 1);
+                    equal(removed[0].dataItem.text, "Item 2");
+                    equal(virtualList.element.find(".k-state-selected").length, 0);
+                });
+
+                virtualList.select(0);
+            });
+        });
+
+        virtualList.value([1, 2]);
+        asyncDataSource.read()
+    });
+
     asyncTest("fires the change event on deselect", 1, function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             selectable: true,
