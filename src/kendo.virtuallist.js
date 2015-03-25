@@ -620,35 +620,41 @@ var __meta__ = {
 
         select: function(candidate) {
             var that = this,
-                indexes,
-                singleSelection = this.options.selectable !== "multiple",
-                prefetchStarted = !!this._activeDeferred,
+                indices,
+                singleSelection = that.options.selectable !== "multiple",
+                prefetchStarted = !!that._activeDeferred,
                 deferred,
                 added = [],
                 removed = [];
 
             if (candidate === undefined) {
-                return this._selectedIndexes.slice();
+                return that._selectedIndexes.slice();
             }
 
-            indexes = this._getIndecies(candidate);
+            indices = that._getIndecies(candidate);
 
-            if (!indexes.length || (singleSelection && !that._filter && lastFrom(indexes) === lastFrom(this._selectedIndexes))) { return; }
+            if (that._filter && !singleSelection && that._deselectFiltered(indices)) {
+                return;
+            }
 
-            removed = this._deselect(indexes);
+            if (!indices.length || (singleSelection && !that._filter && lastFrom(indices) === lastFrom(this._selectedIndexes))) {
+                return;
+            }
+
+            removed = that._deselect(indices);
 
             if (singleSelection) {
                 that._activeDeferred = null;
                 prefetchStarted = false;
-                if (indexes.length) {
-                    indexes = [lastFrom(indexes)];
+                if (indices.length) {
+                    indices = [lastFrom(indices)];
                 }
             }
 
             var done = function() {
-                var added = that._select(indexes);
+                var added = that._select(indices);
 
-                that.focus(indexes);
+                that.focus(indices);
 
                 if (that._valueDeferred) {
                     that._valueDeferred.resolve();
@@ -662,7 +668,7 @@ var __meta__ = {
                 }
             };
 
-            deferred = this.prefetch(indexes);
+            deferred = that.prefetch(indices);
 
             if (!prefetchStarted) {
                 if (deferred) {
@@ -1187,6 +1193,44 @@ var __meta__ = {
             }
 
             return removed;
+        },
+
+        _deselectFiltered: function(indices) {
+            var children = this.element[0].children;
+            var value, index, position;
+            var values = this._values;
+            var removed = [];
+            var idx = 0;
+            var j;
+
+            for (; idx < indices.length; idx++) {
+                position = -1;
+                index = indices[idx];
+                value = this._valueGetter(this._view[index].item);
+
+                for (j = 0; j < values.length; j++) {
+                    if (value == values[j]) {
+                        position = j;
+                        break;
+                    }
+                }
+
+                if (position > -1) {
+                    removed.push(this.removeAt(position));
+                    $(children[index]).removeClass("k-state-selected");
+                }
+            }
+
+            if (removed.length) {
+                this.trigger("change", {
+                    added: [],
+                    removed: removed
+                });
+
+                return true;
+            }
+
+            return false;
         },
 
         _select: function(indexes) {
