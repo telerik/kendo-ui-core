@@ -410,7 +410,8 @@ var __meta__ = {
             that.optionLabelTemplate = template;
             that.optionLabel = $('<div class="k-list-optionlabel">' + template(optionLabel) + '</div>')
                                 .prependTo(that.list)
-                                .click($.proxy(this._click, this));
+                                .click($.proxy(that._click, that))
+                                .on(HOVEREVENTS, that._toggleHover);
 
             that.angular("compile", function(){
                 return { elements: that.optionLabel };
