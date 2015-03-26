@@ -147,7 +147,7 @@ The supported values are:
 
 > Using Canvas rendering disables most interactive features.
 
-### Example - Render as Canvas, if supported
+#### Example - Render as Canvas, if supported
 
     <div id="gauge"></div>
     <script>
