@@ -96,6 +96,36 @@ Allows customization of "Apply" / "Cancel" labels.
     });
     </script>
 
+### messages.apply `String`
+Allows customization of "Apply" label.
+
+#### Example
+
+    <div id="flatpicker"></div>
+    <script>
+    $("#flatpicker").kendoFlatColorPicker({
+      buttons: true,
+      messages: {
+        apply: "Update"
+      }
+    });
+    </script>
+
+### messages.cancel `String`
+Allows customization of "Cancel" label.
+
+#### Example
+
+    <div id="flatpicker"></div>
+    <script>
+    $("#flatpicker").kendoFlatColorPicker({
+      buttons: true,
+      messages: {
+        cancel: "Discard"
+      }
+    });
+    </script>
+
 ## Methods
 
 ### focus
