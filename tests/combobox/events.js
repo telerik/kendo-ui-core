@@ -251,6 +251,26 @@ test("raise change if empty input after selection", 1, function() {
 
 });
 
+asyncTest("change with custom value on blur", 2, function() {
+    var select = $("<select><option value=1>foo1</option><option value=3>foo3</option></select>").appendTo(QUnit.fixture);
+
+    combobox = new ComboBox(select, {
+        delay: 0
+    });
+
+    combobox.input.focus();
+    combobox.input.val("test");
+    combobox.input.press(60); //some letter
+
+    combobox.bind("change", function() {
+        start();
+        equal(combobox.value(), "test");
+        equal(combobox.text(), "test");
+    });
+
+    combobox.input.focusout();
+});
+
 asyncTest("change on custom value and ENTER", 2, function() {
     var select = $("<select><option value=1>foo1</option><option value=3>foo3</option></select>").appendTo(QUnit.fixture);
 
@@ -504,6 +524,7 @@ test("ComboBox trigger change on blur after filtration", 1, function() {
         suggest: true
     }).data("kendoComboBox");
 
+    combobox.input.focus();
     combobox.value("foo");
 
     combobox.bind("change", function() {

@@ -281,6 +281,27 @@
         });
     });
 
+    asyncTest("select method selects same index when filtered (single selection)", 1, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: true,
+            valueMapper: function(options) {
+                options.success([1]);
+            }
+        }));
+
+        asyncDataSource.read().done(function() {
+            virtualList.select(0);
+
+            virtualList.filter(true);
+            virtualList.bind("change", function(e) {
+                start()
+                ok(true);
+            });
+
+            virtualList.select(0);
+        });
+    });
+
     asyncTest("in the change event widget passes deselected index", 2, function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             selectable: true,

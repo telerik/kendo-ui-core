@@ -962,24 +962,23 @@ var __meta__ = {
         },
 
         _select: function(candidate, keepState) {
-            var optionLabel = this.optionLabel;
-
-            candidate = this._get(candidate);
-
-            if (!keepState && this._state === STATE_FILTER) {
-                this.listView.clearIndices();
-                this.listView.filter(false);
-
-                this._state = STATE_ACCEPT;
-            }
+            var that = this;
+            var optionLabel = that.optionLabel;
 
             optionLabel.removeClass("k-state-focused k-state-selected");
 
-            this.listView.select(candidate);
+            candidate = that._get(candidate);
+
+            that.listView.select(candidate);
+
+            if (!keepState && that._state === STATE_FILTER) {
+                that.listView.filter(false);
+                that._state = STATE_ACCEPT;
+            }
 
             if (candidate === -1) {
-                this._selectValue(null);
-                this._focus(optionLabel.addClass("k-state-selected"));
+                that._selectValue(null);
+                that._focus(optionLabel.addClass("k-state-selected"));
             }
         },
 
