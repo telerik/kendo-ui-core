@@ -847,7 +847,7 @@ var __meta__ = {
             }
 
             if (selected) {
-                option += ' selected="selected"';
+                option += ' selected';
             }
 
             option += ">";
@@ -881,7 +881,7 @@ var __meta__ = {
                     value = values[idx];
                     custom[value] = idx + length;
                     optionsMap[value] = idx + length;
-                    options += this._option(value, true);
+                    options += '<option selected="selected" value="' + value + '"></option>';
                 }
             }
 
