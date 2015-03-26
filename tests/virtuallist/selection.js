@@ -1017,4 +1017,26 @@
         });
     });
 
+    asyncTest("focus method scrolls to the focused item in case the List is in hidden container", 1, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: true
+        }));
+
+        asyncDataSource.read().then(function() {
+            start();
+            virtualList.select(0);
+
+            virtualList.wrapper.hide();
+
+            virtualList.select(9);
+            virtualList.select(10);
+            virtualList.select(11);
+            virtualList.select(12);
+
+            virtualList.wrapper.show();
+            virtualList.focus(12);
+            equal(virtualList.content.scrollTop(), 12 * ITEM_HEIGHT);
+        });
+    });
+
 })();
