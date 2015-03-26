@@ -1077,6 +1077,7 @@ var __meta__ = {
             this._values = [];
 
             var value = this.options.value;
+
             if (value) {
                 this._values = $.isArray(value) ? value.slice(0) : [value];
             }
@@ -1142,11 +1143,6 @@ var __meta__ = {
 
         setOptions: function(options) {
             Widget.fn.setOptions.call(this, options);
-
-            if (options.dataSource) {
-                this.setDataSource(options.dataSource);
-            }
-
 
             this._fixedHeader();
             this._getter();
