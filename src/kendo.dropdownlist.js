@@ -221,6 +221,17 @@ var __meta__ = {
             return this.optionLabel[0] || this.filterInput || this.dataSource.view().length;
         },
 
+        _activateItem: function() {
+            var current = this.listView.focus();
+            if (current) {
+                this._focused.add(this.filterInput).attr("aria-activedescendant", current.attr("id"));
+            }
+        },
+
+        _deactivateItem: function() {
+            this._focused.add(this.filterInput).removeAttr("aria-activedescendant");
+        },
+
         _initList: function() {
             var that = this;
             var options = this.options;
@@ -236,52 +247,38 @@ var __meta__ = {
                     groupTemplate: options.groupTemplate || "#:data#",
                     fixedGroupTemplate: options.fixedGroupTemplate || "#:data#",
                     template: options.template || "#:" + kendo.expr(options.dataTextField, "data") + "#",
-                    change: $.proxy(this._listChange, this),
-                    click: $.proxy(this._click, this),
-                    activate: function() {
-                        var current = this.focus();
-                        if (current) {
-                            that._focused.add(that.filterInput).attr("aria-activedescendant", current.attr("id"));
-                        }
-                    },
-                    deactivate: function() {
-                        that._focused.add(that.filterInput).removeAttr("aria-activedescendant");
-                    },
-                    listBound: $.proxy(this._listBound, this)
+                    click: $.proxy(that._click, that),
+                    change: $.proxy(that._listChange, that),
+                    activate: $.proxy(that._activateItem, that),
+                    deactivate: $.proxy(that._deactivateItem, that),
+                    listBound: $.proxy(that._listBound, that)
                 };
 
                 if (typeof options.virtual === "object") {
                     $.extend(virtualOptions, options.virtual);
                 }
 
-                this.listView = new kendo.ui.VirtualList(this.ul, virtualOptions);
+                that.listView = new kendo.ui.VirtualList(that.ul, virtualOptions);
             } else {
-                this.listView = new kendo.ui.StaticList(this.ul, {
+                that.listView = new kendo.ui.StaticList(that.ul, {
                     dataValueField: options.dataValueField,
-                    dataSource: this.dataSource,
+                    dataSource: that.dataSource,
                     groupTemplate: options.groupTemplate || "#:data#",
                     fixedGroupTemplate: options.fixedGroupTemplate || "#:data#",
                     template: options.template || "#:" + kendo.expr(options.dataTextField, "data") + "#",
-                    activate: function() {
-                        var current = this.focus();
-                        if (current) {
-                            that._focused.add(that.filterInput).attr("aria-activedescendant", current.attr("id"));
-                        }
-                    },
-                    click: $.proxy(this._click, this),
-                    change: $.proxy(this._listChange, this),
-                    deactivate: function() {
-                        that._focused.add(that.filterInput).removeAttr("aria-activedescendant");
-                    },
+                    click: $.proxy(that._click, that),
+                    change: $.proxy(that._listChange, that),
+                    activate: $.proxy(that._activateItem, that),
+                    deactivate: $.proxy(that._deactivateItem, that),
                     dataBinding: function() {
                         that.trigger("dataBinding");
                         that._angularItems("cleanup");
                     },
-                    dataBound: $.proxy(this._listBound, this)
+                    dataBound: $.proxy(that._listBound, that)
                 });
             }
 
-            this.listView.value(this.options.value);
+            that.listView.value(that.options.value);
         },
 
         current: function(candidate) {
@@ -965,8 +962,6 @@ var __meta__ = {
             var that = this;
             var optionLabel = that.optionLabel;
 
-            optionLabel.removeClass("k-state-focused k-state-selected");
-
             candidate = that._get(candidate);
 
             that.listView.select(candidate);
@@ -978,49 +973,53 @@ var __meta__ = {
 
             if (candidate === -1) {
                 that._selectValue(null);
-                that._focus(optionLabel.addClass("k-state-selected"));
             }
         },
 
         _selectValue: function(dataItem) {
+            var that = this;
+            var optionLabel = that.options.optionLabel;
+            var labelElement = that.optionLabel;
+            var idx = that.listView.select();
+
             var value = "";
             var text = "";
-            var idx = this.listView.select();
-            var optionLabel = this.options.optionLabel;
 
             idx = idx[idx.length - 1];
             if (idx === undefined) {
                 idx = -1;
             }
 
+            labelElement.removeClass("k-state-focused k-state-selected");
+
             if (dataItem) {
                 text = dataItem;
-                value = this._dataValue(dataItem);
+                value = that._dataValue(dataItem);
                 if (optionLabel) {
                     idx += 1;
                 }
             } else if (optionLabel) {
-                this._focus(this.optionLabel);
-                text = this._optionLabelText();
+                that._focus(labelElement.addClass("k-state-selected"));
+                text = that._optionLabelText();
                 if (typeof optionLabel === "string") {
                     value = "";
                 } else {
-                    value = this._value(optionLabel);
+                    value = that._value(optionLabel);
                 }
 
                 idx = 0;
             }
 
-            this.selectedIndex = idx;
+            that.selectedIndex = idx;
 
             if (value === null) {
                 value = "";
             }
 
-            this._textAccessor(text);
-            this._accessor(value, idx);
+            that._textAccessor(text);
+            that._accessor(value, idx);
 
-            this._triggerCascade();
+            that._triggerCascade();
         },
 
         _mobile: function() {

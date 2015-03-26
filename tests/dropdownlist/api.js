@@ -522,6 +522,34 @@
         equal(dropdownlist.dataSource.calls("fetch"), 0);
     });
 
+   test("value method de-selects option label", function() {
+       dropdownlist = new DropDownList(input, {
+           optionLabel: "select",
+           dataTextField: "text",
+           dataValueField: "value",
+           dataSource: [{text: "foo", value: 1}, {text:2, value:0}]
+       });
+
+       dropdownlist.value(1);
+
+       ok(!dropdownlist.optionLabel.hasClass(SELECTED));
+       ok(dropdownlist.ul.children().eq(0).hasClass(SELECTED));
+   });
+
+   test("value method selects option label", function() {
+       dropdownlist = new DropDownList(input, {
+           optionLabel: "select",
+           dataTextField: "text",
+           dataValueField: "value",
+           index: 1,
+           dataSource: [{text: "foo", value: 1}, {text:2, value:0}]
+       });
+
+       dropdownlist.value("");
+
+       ok(dropdownlist.optionLabel.hasClass(SELECTED));
+   });
+
     test("value() returns value of the OPTION element", function() {
         var select = $("<select><option value=''>Chai</option><option>Bar</option></select>").appendTo(QUnit.fixture);
         dropdownlist = new DropDownList(select);

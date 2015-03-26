@@ -345,7 +345,7 @@
 
         var optionHeader = dropdownlist.list.children(":first");
 
-        equal(optionHeader[0].outerHTML, '<div class="k-list-optionlabel k-state-focused">SELECT...</div>');
+        equal(optionHeader[0].outerHTML, '<div class="k-list-optionlabel k-state-selected k-state-focused">SELECT...</div>');
     });
 
     test("optionLabel template supports complex object", function() {
@@ -357,7 +357,7 @@
 
         var optionHeader = dropdownlist.list.children(":first");
 
-        equal(optionHeader[0].outerHTML, '<div class="k-list-optionlabel k-state-focused">Select...</div>');
+        equal(optionHeader[0].outerHTML, '<div class="k-list-optionlabel k-state-selected k-state-focused">Select...</div>');
     });
 
     test("defining input template", function() {
