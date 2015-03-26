@@ -71,11 +71,11 @@
 
     test("setOptions re-create templates", function() {
         var list = new StaticList(element, {
+            dataSource: ["item"],
             template: "#:data#"
         });
 
         list.setOptions({
-            dataSource: ["item"],
             template: "new #:data#"
         });
 
@@ -217,12 +217,8 @@
 
     test("select an item by element", function() {
         var list = new StaticList(element, {
-            template: "#:data#"
-        });
-
-        list.setOptions({
             dataSource: ["item1", "item2", "item3"],
-            template: "new #:data#"
+            template: "#:data#"
         });
 
         list.dataSource.read();
@@ -274,12 +270,8 @@
 
     test("select an item by index", function() {
         var list = new StaticList(element, {
-            template: "#:data#"
-        });
-
-        list.setOptions({
             dataSource: ["item1", "item2", "item3"],
-            template: "new #:data#"
+            template: "#:data#"
         });
 
         list.dataSource.read();
@@ -368,12 +360,8 @@
 
     test("select method deselects previous item", function() {
         var list = new StaticList(element, {
-            template: "#:data#"
-        });
-
-        list.setOptions({
             dataSource: ["item1", "item2", "item3"],
-            template: "new #:data#"
+            template: "#:data#"
         });
 
         list.dataSource.read();
@@ -390,12 +378,8 @@
 
     test("select method deselects selected items is index is -1", function() {
         var list = new StaticList(element, {
-            template: "#:data#"
-        });
-
-        list.setOptions({
             dataSource: ["item1", "item2", "item3"],
-            template: "new #:data#"
+            template: "#:data#"
         });
 
         list.dataSource.read();
@@ -412,13 +396,9 @@
 
     test("select method selects multiple items", function() {
         var list = new StaticList(element, {
-            template: "#:data#"
-        });
-
-        list.setOptions({
             dataSource: ["item1", "item2", "item3"],
             selectable: "multiple",
-            template: "new #:data#"
+            template: "#:data#"
         });
 
         list.dataSource.read();
@@ -435,13 +415,9 @@
 
     test("select method deselects item in 'multiple' mode", function() {
         var list = new StaticList(element, {
-            template: "#:data#"
-        });
-
-        list.setOptions({
             dataSource: ["item1", "item2", "item3"],
             selectable: "multiple",
-            template: "new #:data#"
+            template: "#:data#"
         });
 
         list.dataSource.read();
@@ -458,13 +434,9 @@
 
     test("select method unselects items if empty array is passed", function() {
         var list = new StaticList(element, {
-            template: "#:data#"
-        });
-
-        list.setOptions({
             dataSource: ["item1", "item2", "item3"],
             selectable: "multiple",
-            template: "new #:data#"
+            template: "#:data#"
         });
 
         list.dataSource.read();
@@ -1014,12 +986,8 @@
 
     test("value method deselects deselects all items if value is []", function() {
         var list = new StaticList(element, {
-            template: "#:data#"
-        });
-
-        list.setOptions({
             dataSource: ["item1", "item2", "item3"],
-            template: "new #:data#"
+            template: "#:data#"
         });
 
         list.dataSource.read();
