@@ -521,7 +521,8 @@ var __meta__ = {
                 dataSource = this.dataSource,
                 current,
                 itemHeight = this.options.itemHeight,
-                id = this._optionID;
+                id = this._optionID,
+                triggerEvent = true;
 
             if (candidate === undefined) {
                 current = this.element.find("." + FOCUSED);
@@ -558,31 +559,36 @@ var __meta__ = {
 
             if (element.length) { /*focus rendered item*/
                 if (element.hasClass(FOCUSED)) {
-                    return;
-                } else {
-                    if (this._focusedIndex !== undefined) {
-                        current = this._getElementByIndex(this._focusedIndex);
-                        current
-                            .removeClass(FOCUSED)
-                            .removeAttr("id");
+                    triggerEvent = false;
+                }
+                if (this._focusedIndex !== undefined) {
+                    current = this._getElementByIndex(this._focusedIndex);
+                    current
+                        .removeClass(FOCUSED)
+                        .removeAttr("id");
 
+                    if (triggerEvent) {
                         this.trigger(DEACTIVATE);
                     }
+                }
 
-                    this._focusedIndex = index;
+                this._focusedIndex = index;
 
-                    element
-                        .addClass(FOCUSED)
-                        .attr("id", id);
+                element
+                    .addClass(FOCUSED)
+                    .attr("id", id);
 
-                    var position = this._getElementLocation(index);
+                var position = this._getElementLocation(index);
 
-                    if (position === "top") {
-                        this.scrollTo(index * itemHeight);
-                    } else if (position === "bottom") {
-                        this.scrollTo((index * itemHeight + itemHeight) - this.screenHeight);
-                    }
+                if (position === "top") {
+                    this.scrollTo(index * itemHeight);
+                } else if (position === "bottom") {
+                    this.scrollTo((index * itemHeight + itemHeight) - this.screenHeight);
+                } else if (position === "outScreen") {
+                    this.scrollTo(index * itemHeight);
+                }
 
+                if (triggerEvent) {
                     this.trigger(ACTIVATE);
                 }
             } else { /*focus non rendered item*/
