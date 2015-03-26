@@ -1,5 +1,5 @@
 ---
-title: Kendo UI Bootstrapper Tool
+title: Bootstrapper Tool
 page_title: Kendo UI Bootstrapper Tool
 position: 250
 ---
