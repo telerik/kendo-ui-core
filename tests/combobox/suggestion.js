@@ -255,4 +255,21 @@ test("refresh method suggests if no item is highlighted", 2, function() {
     window.setTimeout = origin;
 });
 
+test("widget does not suggest when input is empty", 1, function() {
+    combobox = input.kendoComboBox({
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: data,
+        suggest: true,
+        delay: 0,
+        index: 0
+    }).data("kendoComboBox");
+
+    combobox.input.focus();
+    combobox.input.val("");
+    combobox.refresh();
+
+    equal(combobox.text(), "");
+});
+
 })();
