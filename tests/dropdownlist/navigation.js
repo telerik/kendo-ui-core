@@ -367,7 +367,7 @@
         equal(dropdownlist.current().text(), "Any");
     });
 
-    test("DropDownList focuses filter input on open", 1, function() {
+    asyncTest("DropDownList focuses filter input on open", 1, function() {
         var dropdownlist = input.kendoDropDownList({
             dataTextField: "text",
             dataValueField: "value",
@@ -381,7 +381,10 @@
         dropdownlist.wrapper.focus();
         dropdownlist.open();
 
-        equal(document.activeElement, dropdownlist.filterInput[0]);
+        dropdownlist.popup.one("activate", function () {
+            equal(document.activeElement, dropdownlist.filterInput[0]);
+            start();
+        });       
     });
 
     test("DropDownList does not filter on altKey", 1, function() {
@@ -436,7 +439,7 @@
         equal(dropdownlist.calls("_select"), 0);
     });
 
-    test("DropDownList returns focus to wrapper on ALT+UP", 1, function() {
+    asyncTest("DropDownList returns focus to wrapper on ALT+UP", 1, function() {
         var dropdownlist = input.kendoDropDownList({
             dataTextField: "text",
             dataValueField: "value",
@@ -450,13 +453,17 @@
         dropdownlist.wrapper.focus();
         dropdownlist.open();
 
-        dropdownlist.filterInput.trigger({
-            type: "keydown",
-            keyCode: kendo.keys.UP,
-            altKey: true
-        });
+        dropdownlist.popup.one("activate", function () {
+            dropdownlist.filterInput.trigger({
+                type: "keydown",
+                keyCode: kendo.keys.UP,
+                altKey: true
+            });
 
-        equal(document.activeElement, dropdownlist.wrapper[0]);
+            equal(document.activeElement, dropdownlist.wrapper[0]);
+
+            start();
+        });
     });
 
     asyncTest("DropDownList returns focus to wrapper on ENTER", 1, function() {
@@ -473,14 +480,16 @@
         dropdownlist.wrapper.focus();
         dropdownlist.open();
 
-        dropdownlist.filterInput.trigger({
-            type: "keydown",
-            keyCode: kendo.keys.ENTER
-        });
+        dropdownlist.popup.one("activate", function () {
+            dropdownlist.filterInput.trigger({
+                type: "keydown",
+                keyCode: kendo.keys.ENTER
+            });
 
-        setTimeout(function() {
-            start();
-            equal(dropdownlist.wrapper[0], document.activeElement);
+            setTimeout(function () {
+                start();
+                equal(dropdownlist.wrapper[0], document.activeElement);
+            });
         });
     });
 
@@ -555,10 +564,11 @@
         });
     });
 
-    test("DropDownList do not loose focus on double wrapper click", 1, function() {
+    test("DropDownList does not lose focus on double wrapper click", 1, function() {
         var dropdownlist = input.kendoDropDownList({
             dataTextField: "text",
             dataValueField: "value",
+            animation: false,
             dataSource: [
                 { text: "item1", value: "item1"},
                 { text: "item2", value: "item2"}

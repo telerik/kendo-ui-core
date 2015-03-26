@@ -58,6 +58,7 @@ var __meta__ = {
             options = that.options;
             element = that.element.on("focus" + ns, proxy(that._focusHandler, that));
 
+            that._focusInputHandler = $.proxy(that._focusInput, that);
             that._inputTemplate();
 
             that._reset();
@@ -202,10 +203,14 @@ var __meta__ = {
 
                 that._filterSource();
             } else if (that._allowOpening()) {
+                that.popup.one("activate", that._focusInputHandler);
                 that.popup.open();
-                that._focusElement(that.filterInput);
                 that._focusItem();
             }
+        },
+
+        _focusInput: function () {
+            this._focusElement(this.filterInput);
         },
 
         toggle: function(toggle) {
@@ -536,6 +541,7 @@ var __meta__ = {
 
         _wrapperClick: function(e) {
             e.preventDefault();
+            this.popup.unbind("activate", this._focusInputHandler);
             this._focused = this.wrapper;
             this._toggle();
         },
@@ -751,7 +757,7 @@ var __meta__ = {
             this.popup.one("open", proxy(this._popupOpen, this));
         },
 
-        _click: function(e) {
+        _click: function (e) {
             var item = e.item || $(e.currentTarget);
 
             if (this.trigger("select", { item: item })) {
