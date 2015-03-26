@@ -4133,6 +4133,8 @@ Fired when a remote service request is finished.
 
 The event handler function context (available via the `this` keyword) will be set to the data source instance.
 
+> The "response" argument is not available for local operations.
+
 #### Event Data
 
 ##### e.response `Object`
@@ -4161,6 +4163,25 @@ The type of the request. Set to "create", "read", "update" or "destroy".
         var type = e.type;
         console.log(type); // displays "read"
         console.log(response.length); // displays "77"
+      }
+    });
+    dataSource.fetch();
+    </script>
+
+#### Example - subscribe to the "requestEnd" event to catch only "read" requests
+    <script>
+    var dataSource = new kendo.data.DataSource({
+      transport: {
+        read: {
+          url: "http://demos.telerik.com/kendo-ui/service/products",
+          dataType: "jsonp"
+        }
+      },
+      requestEnd: function(e) {
+        //check the "response" argument to skip the local operations
+        if (e.type === "read" && e.response) {
+            console.log("Current request is 'read'.");
+        }
       }
     });
     dataSource.fetch();
