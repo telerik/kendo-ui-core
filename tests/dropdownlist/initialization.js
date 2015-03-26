@@ -1029,4 +1029,33 @@
 
         ok(parseFloat(padding) < 15);
     });
+
+    test("pointer over optionLabel should adds hover state", function() {
+        var dropdownlist = new DropDownList(input, {
+            optionLabel: "Select..."
+        });
+
+        dropdownlist.open();
+
+        var optionLabel = dropdownlist.optionLabel;
+
+        optionLabel.mouseenter();
+
+        ok(optionLabel.hasClass("k-state-hover"));
+    });
+
+    test("leave optionLabel should remove hover state", function() {
+        var dropdownlist = new DropDownList(input, {
+            optionLabel: "Select..."
+        });
+
+        dropdownlist.open();
+
+        var optionLabel = dropdownlist.optionLabel;
+
+        optionLabel.mouseenter();
+        optionLabel.mouseleave();
+
+        ok(!optionLabel.hasClass("k-state-hover"));
+    });
 })();
