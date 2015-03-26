@@ -198,4 +198,26 @@
 
         multiselect.input.focus().val("baz").keydown();
     });
+
+    test("MultiSelect renders value of the custom options on filter", 3, function() {
+        var multiselect = new MultiSelect(select, {
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: [
+                { text: "text", value: "1" },
+                { text: "text2", value: "2" },
+                { text: "text3", value: "3" },
+                { text: "text4", value: "4" }
+            ],
+            value: ["1"]
+        });
+
+        multiselect.search("text2");
+
+        var options = select.children();
+
+        equal(options.length, 2);
+        equal(options[0].value, "2");
+        equal(options[1].value, "1");
+    });
 })();
