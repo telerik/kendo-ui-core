@@ -1,14 +1,18 @@
 ---
-title: Kendo UI and Responsive Web Design
-description: How to auto-resize kendo widgets when put in resizable containers (splitter or window).
+title: Responsive Web Design
+description: How to implement responsive web design with Kendo UI widgets.
 position: 190
 ---
 
-# Using Kendo with In Responsive Web Pages
+#Responsive Web Design concepts
 
-Most Kendo UI Widgets work and auto-resize when used in responsive web pages out of the box. Several widgets will need an additonal [kendo.resize](/api/framework/kendo#methods-resize) in case their dimensions are set to percentage values.
+By definition, responsive web design or responsiveness is an approach to web design aimed at crafting sites to provide an optimal viewing experience - easy reading and navigation with a minimum of resizing, panning, and scrolling — across a wide range of devices (from desktop computer monitors to mobile phones). Responsive web design is the foundation of modern UX practices for building applications for the mobile web.
 
-## Widgets that do not suppport auto resizing when container is resized: ##
+# Using Kendo UI in Responsive Web Pages
+
+Most Kendo UI Widgets work and auto-resize when used in responsive web pages out of the box. Several widgets will need an additional [kendo.resize](/api/framework/kendo#methods-resize) in case their dimensions are set to percentage values.
+
+## Widgets that do not support auto resizing when container is resized: ##
 
 * All DataViz Widgets
 * Mobile Actionsheet
@@ -102,4 +106,9 @@ Kendo UI uses media queries to enhance the behavior of Kendo UI widgets on diffe
         }
     }
 
-Kendo UI responsive styles use the Non-Mobile First Method with media queries having max-width breakpoints. Max-width refers to every window or device with width or screen-width of less than or equal to the amount given. That said, styles written e.g. under 480px breakpoint will override the base styles on screens of max-width equal to 480px or less. 
+Kendo UI responsive styles use the Non-Mobile First Method with media queries having max-width breakpoints. Max-width refers to every window or device with width or screen-width of less than or equal to the amount given. That said, styles written e.g. under 480px breakpoint will override the base styles on screens of max-width equal to 480px or less.
+
+# Responsive UI enhancements 
+These utilize media queries and include built-in UI enhancements for scalability and improved user experience on different form factors. 
+
+Such features are available for widgets like grid, scheduler, etc., and you can see them in action [here](http://demos.telerik.com/kendo-ui/responsive/).
