@@ -515,8 +515,8 @@ var __meta__ = {
         _triggerCascade: function() {
             var that = this;
 
-            if (!that._bound || that._old !== that.value()) {
-                that._bound = true;
+            if (!that._cascadeTriggered || that._old !== that.value()) {
+                that._cascadeTriggered = true;
                 that.trigger("cascade", { userTriggered: that._userTriggered });
             }
         },
@@ -560,7 +560,6 @@ var __meta__ = {
             this.options.dataSource = dataSource;
 
             this._dataSource();
-            this._bound = false;
 
             this.listView.setDataSource(this.dataSource);
 
@@ -1302,10 +1301,6 @@ var __meta__ = {
 
             that._current = hasCandidate ? candidate : null;
             that.trigger("activate");
-        },
-
-        clearIndices: function() {
-            this._selectedIndices = [];
         },
 
         filter: function(filter) {

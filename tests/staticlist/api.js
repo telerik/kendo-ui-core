@@ -259,6 +259,7 @@
         list.dataSource.read();
 
         list.select(1);
+        console.log(list.select());
 
         list.bind("change", function() {
             ok(true);
