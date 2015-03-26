@@ -125,6 +125,42 @@
         asyncDataSource.read();
     });
 
+    asyncTest("listBound event is fired after all values are prefetched", 2, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: true,
+            valueMapper: function(o) {
+                o.success(256);
+            },
+            value: 256,
+            listBound: function() {
+                start();
+                equal(virtualList.value()[0], 256);
+                equal(virtualList.select()[0], 256);
+            }
+        }));
+        asyncDataSource.read();
+    });
+
+// fails because select(-1) resolves the promise
+/*
+    asyncTest("listBound event is fired after all values are prefetched (multi selection)", 3, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: "multiple",
+            valueMapper: function(o) {
+                o.success([7, 256]);
+            },
+            value: [7, 256],
+            listBound: function() {
+                start();
+                equal(virtualList.value().length, 2);
+                equal(virtualList.select().length, 2);
+                equal(virtualList.selectedDataItems().length, 2);
+            }
+        }));
+        asyncDataSource.read();
+    });
+*/
+
     asyncTest("fires the activate event", 1, function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             activate: function() {

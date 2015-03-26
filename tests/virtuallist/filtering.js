@@ -192,7 +192,7 @@
 
     asyncTest("keeps selection after filtering", 1, function() {
         asyncDataSource.read().then(function() {
-            virtualList.one("listBound", function() {
+            virtualList.one("change", function() {
                 start();
                 ok(virtualList.items().first().hasClass(SELECTED), "item is selected");
             });

@@ -316,10 +316,14 @@ var __meta__ = {
             if (!that._fetching) {
                 that._createList();
                 if ((!e || !e.action) && that._values.length && !that._filter) {
-                    that._prefetchByValue(that._values);
+                    that.value(that._values, true).done(function() {
+                        that._listCreated = true;
+                        that.trigger(LISTBOUND);
+                    });
+                } else {
+                    that._listCreated = true;
+                    that.trigger(LISTBOUND);
                 }
-                that._listCreated = true;
-                that.trigger(LISTBOUND);
             } else {
                 if (that._renderItems) {
                     that._renderItems(true);
@@ -339,7 +343,7 @@ var __meta__ = {
             };
         },
 
-        value: function(value) {
+        value: function(value, _forcePrefetch) {
             var that = this;
             var dataSource = that.dataSource;
 
@@ -363,7 +367,7 @@ var __meta__ = {
 
             that._values = value;
 
-            if (that.isBound() && !that._mute) {
+            if ((that.isBound() && !that._mute) || _forcePrefetch) {
                 that._prefetchByValue(value);
             }
 
