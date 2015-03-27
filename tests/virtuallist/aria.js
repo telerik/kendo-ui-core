@@ -63,8 +63,8 @@
 
     //rendering
 
-    test("wrapper renders role='listbox' attribute", 1, function() {
-        equal(virtualList.wrapper.attr("role"), "listbox");
+    test("elements received role='listbox' attribute", 1, function() {
+        equal(virtualList.element.attr("role"), "listbox");
     });
 
     asyncTest("items receive role='option' attribute", 1, function() {
