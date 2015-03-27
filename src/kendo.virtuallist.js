@@ -203,9 +203,9 @@ var __meta__ = {
 
             options = that.options;
 
-            that.element.addClass(LIST + " " + VIRTUALLIST);
+            that.element.addClass(LIST + " " + VIRTUALLIST).attr("role", "listbox");
             that.content = that.element.wrap("<div class='" + CONTENT + "'></div>").parent();
-            that.wrapper = that.content.wrap("<div class='" + WRAPPER + "' role='listbox'></div>").parent();
+            that.wrapper = that.content.wrap("<div class='" + WRAPPER + "'></div>").parent();
             that.header = that.content.before("<div class='" + HEADER + "'></div>").prev();
 
             that.element.on("mouseenter" + VIRTUAL_LIST_NS, "li", function() { $(this).addClass(HOVER); })
