@@ -679,6 +679,57 @@
         equal(list.find(".k-textbox").length, 1);
     });
 
+    test("setOptions hides option optionLabel", function() {
+        dropdownlist = new DropDownList(input, {
+            optionLabel: "Select...",
+            dataSource: ["item1", "item2"],
+            filter: "startswith"
+        });
+
+        dropdownlist.setOptions({
+            optionLabel: ""
+        });
+
+        var list = dropdownlist.list;
+
+        equal(list.children(".k-list-optionlabel").length, 0);
+    });
+
+    test("setOptions shows option optionLabel", function() {
+        dropdownlist = new DropDownList(input, {
+            dataSource: ["item1", "item2"],
+            filter: "startswith"
+        });
+
+        dropdownlist.setOptions({
+            optionLabel: "Select..."
+        });
+
+        var list = dropdownlist.list;
+
+        equal(list.children(".k-list-optionlabel").length, 1);
+    });
+
+    test("setOptions updates optionLabel text", function() {
+        dropdownlist = new DropDownList(input, {
+            dataSource: ["item1", "item2"],
+            filter: "startswith"
+        });
+
+        dropdownlist.setOptions({
+            optionLabel: "Select..."
+        });
+
+        dropdownlist.setOptions({
+            optionLabel: "Select"
+        });
+
+        var list = dropdownlist.list;
+
+        equal(list.children(".k-list-optionlabel").length, 1);
+        equal(list.children(".k-list-optionlabel").text(), "Select");
+    });
+
     test("Open popup when option label is defined", 1, function() {
         var dropdownlist = new DropDownList(input, {
             dataSource: [],
