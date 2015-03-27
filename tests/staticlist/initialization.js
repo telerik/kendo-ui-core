@@ -85,7 +85,7 @@
 
         var header = element.prev();
 
-        ok(header.hasClass("k-static-header"));
+        ok(header.hasClass("k-group-header"));
     });
 
     test("StaticList creates a dataSource", function() {

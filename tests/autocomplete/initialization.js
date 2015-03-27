@@ -402,8 +402,9 @@ test("AutoComplete adds scrollbar width to the fixed group header padding", func
         height: 50
     }).data("kendoAutoComplete");
 
-    var padding = autocomplete.list.find(".k-static-header").css("padding-right");
+    var padding = autocomplete.list.find(".k-group-header").css("padding-right");
 
+    console.log(parseFloat(padding));
     ok(parseFloat(padding) > 15);
 });
 
@@ -427,7 +428,7 @@ test("AutoComplete does not add scrollbar width if popup is shorter then options
     autocomplete.dataSource.read();
     autocomplete.popup.open();
 
-    var padding = autocomplete.list.find(".k-static-header").css("padding-right");
+    var padding = autocomplete.list.find(".k-group-header").css("padding-right");
 
     ok(parseFloat(padding) < 15);
 });
