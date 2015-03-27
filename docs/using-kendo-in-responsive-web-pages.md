@@ -111,4 +111,16 @@ Kendo UI responsive styles use the Non-Mobile First Method with media queries ha
 # Responsive UI enhancements 
 These utilize media queries and include built-in UI enhancements for scalability and improved user experience on different form factors. 
 
-Such features are available for widgets like grid, scheduler, etc., and you can see them in action [here](http://demos.telerik.com/kendo-ui/responsive/).
+
+Such features are available for widgets like grid, scheduler, treelist, etc. 
+
+#### Responsive UI features in widgets ####
+* Grid: Integrates a responsive pager, which automatically adjusts on different screen widths and provides the ability to define which columns to be hidden on small view ports. This makes them more flexible for mobile web usage. 
+* Scheduler: provides mechanism to overflow its View selection options into a dropdown on small screen estates. Additionally, it can apply short date/month/year abbreviations where applicable. Thus, its visual presentation is fine-tuned for usage in responsive web scenarios. 
+
+We also have a responsive panel widget which is a responsive container component. Its sole purpose is providing the necessary plumbing for hiding content on small screens when the specified width boundary is passed, and showing this content when its "hamburger" icon button is clicked.
+
+You can see them in action [here](http://demos.telerik.com/kendo-ui/responsive/).
+
+##See Also
+[Twitter Bootstrap Integration](http://docs.telerik.com/kendo-ui/using-kendo-with-twitter-bootstrap)
