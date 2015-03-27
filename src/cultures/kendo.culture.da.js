@@ -32,8 +32,8 @@
                     namesShort: ["sø","ma","ti","on","to","fr","lø"]
                 },
                 months: {
-                    names: ["januar","februar","marts","april","maj","juni","juli","august","september","oktober","november","december",""],
-                    namesAbbr: ["jan","feb","mar","apr","maj","jun","jul","aug","sep","okt","nov","dec",""]
+                    names: ["januar","februar","marts","april","maj","juni","juli","august","september","oktober","november","december"],
+                    namesAbbr: ["jan","feb","mar","apr","maj","jun","jul","aug","sep","okt","nov","dec"]
                 },
                 AM: [""],
                 PM: [""],

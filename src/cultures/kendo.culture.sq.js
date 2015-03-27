@@ -32,8 +32,8 @@
                     namesShort: ["D","H","M","M","E","P","Sh"]
                 },
                 months: {
-                    names: ["janar","shkurt","mars","prill","maj","qershor","korrik","gusht","shtator","tetor","nëntor","dhjetor",""],
-                    namesAbbr: ["Jan","Shk","Mar","Pri","Maj","Qer","Krr","Gsh","Sht","Tet","Nën","Dhj",""]
+                    names: ["janar","shkurt","mars","prill","maj","qershor","korrik","gusht","shtator","tetor","nëntor","dhjetor"],
+                    namesAbbr: ["Jan","Shk","Mar","Pri","Maj","Qer","Krr","Gsh","Sht","Tet","Nën","Dhj"]
                 },
                 AM: ["PD","pd","PD"],
                 PM: ["MD","md","MD"],

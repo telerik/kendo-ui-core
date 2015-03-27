@@ -32,8 +32,8 @@
                     namesShort: ["So","Ms","Lb","Lr","Ln","Lt","Ma"]
                 },
                 months: {
-                    names: ["Ferikgong","Tlhakole","Mopitlwe","Moranang","Motsheganong","Seetebosigo","Phukwi","Phatwe","Lwetse","Diphalane","Ngwanatsele","Sedimothole",""],
-                    namesAbbr: ["Fer.","Tlh.","Mop.","Mor.","Motsh.","Seet.","Phk.","Pht.","Lwetse.","Diph.","Ngwn.","Sed.",""]
+                    names: ["Ferikgong","Tlhakole","Mopitlwe","Moranang","Motsheganong","Seetebosigo","Phukwi","Phatwe","Lwetse","Diphalane","Ngwanatsele","Sedimothole"],
+                    namesAbbr: ["Fer.","Tlh.","Mop.","Mor.","Motsh.","Seet.","Phk.","Pht.","Lwetse.","Diph.","Ngwn.","Sed."]
                 },
                 AM: ["Mo Mosong","mo mosong","MO MOSONG"],
                 PM: ["Mo Maitseboeng","mo maitseboeng","MO MAITSEBOENG"],

@@ -32,8 +32,8 @@
                     namesShort: ["sa","at","ma","pi","si","ta","ar"]
                 },
                 months: {
-                    names: ["januaari","februaari","marsi","apriili","maaji","juuni","juuli","aggusti","septembari","oktobari","novembari","decembari",""],
-                    namesAbbr: ["jan","feb","mar","apr","mai","jun","jul","aug","sep","okt","nov","dec",""]
+                    names: ["januaari","februaari","marsi","apriili","maaji","juuni","juuli","aggusti","septembari","oktobari","novembari","decembari"],
+                    namesAbbr: ["jan","feb","mar","apr","mai","jun","jul","aug","sep","okt","nov","dec"]
                 },
                 AM: [""],
                 PM: [""],

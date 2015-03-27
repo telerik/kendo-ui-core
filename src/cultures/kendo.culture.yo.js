@@ -32,8 +32,8 @@
                     namesShort: ["Àì","Aj","Ìṣ","Ọj","Ọb","Ẹt","Àb"]
                 },
                 months: {
-                    names: ["Oṣu Muharram","Oṣu Safar","Oṣu R Awwal","Oṣu R Aakhir","Oṣu J Awwal","Oṣu J Aakhira","Oṣu Rajab","Oṣu Sha\u0027baan","Oṣu Ramadhan","Oṣu Shawwal","Oṣu Dhul Qa\u0027dah","Oṣu Dhul Hijjah",""],
-                    namesAbbr: ["Oṣu Muharram","Oṣu Safar","Oṣu R Awwal","Oṣu R Aakhir","Oṣu J Awwal","Oṣu J Aakhira","Oṣu Rajab","Oṣu Sha\u0027baan","Oṣu Ramadhan","Oṣu Shawwal","Oṣu Dhul Qa\u0027dah","Oṣu Dhul Hijjah",""]
+                    names: ["Oṣu Muharram","Oṣu Safar","Oṣu R Awwal","Oṣu R Aakhir","Oṣu J Awwal","Oṣu J Aakhira","Oṣu Rajab","Oṣu Sha\u0027baan","Oṣu Ramadhan","Oṣu Shawwal","Oṣu Dhul Qa\u0027dah","Oṣu Dhul Hijjah"],
+                    namesAbbr: ["Oṣu Muharram","Oṣu Safar","Oṣu R Awwal","Oṣu R Aakhir","Oṣu J Awwal","Oṣu J Aakhira","Oṣu Rajab","Oṣu Sha\u0027baan","Oṣu Ramadhan","Oṣu Shawwal","Oṣu Dhul Qa\u0027dah","Oṣu Dhul Hijjah"]
                 },
                 AM: ["Òwúrọ́","òwúrọ́","ÒWÚRỌ́"],
                 PM: ["Alẹ̀","alẹ̀","ALẸ̀"],

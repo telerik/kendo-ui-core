@@ -32,8 +32,8 @@
                     namesShort: ["Sọ","Mọ","Tu","We","Tọs","Fra","Sa"]
                 },
                 months: {
-                    names: ["Jenụwarị","Febụwarị","Machị","Eprelu","Mey","Juun","Julaị","Ọgọst","Septemba","Ọcktọba","Nọvemba","Disemba",""],
-                    namesAbbr: ["Jen","Feb","Mac","Epr","Mey","Jun","Jul","Ọgọ","Sep","Ọkt","Nọv","Dis",""]
+                    names: ["Jenụwarị","Febụwarị","Machị","Eprelu","Mey","Juun","Julaị","Ọgọst","Septemba","Ọcktọba","Nọvemba","Disemba"],
+                    namesAbbr: ["Jen","Feb","Mac","Epr","Mey","Jun","Jul","Ọgọ","Sep","Ọkt","Nọv","Dis"]
                 },
                 AM: ["Ụtụtụ","ụtụtụ","ỤTỤTỤ"],
                 PM: ["Ehihie","ehihie","EHIHIE"],

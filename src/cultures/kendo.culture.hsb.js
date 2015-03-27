@@ -32,8 +32,8 @@
                     namesShort: ["n","p","w","s","š","p","s"]
                 },
                 months: {
-                    names: ["januar","februar","měrc","apryl","meja","junij","julij","awgust","september","oktober","nowember","december",""],
-                    namesAbbr: ["jan","feb","měr","apr","mej","jun","jul","awg","sep","okt","now","dec",""]
+                    names: ["januar","februar","měrc","apryl","meja","junij","julij","awgust","september","oktober","nowember","december"],
+                    namesAbbr: ["jan","feb","měr","apr","mej","jun","jul","awg","sep","okt","now","dec"]
                 },
                 AM: [""],
                 PM: [""],

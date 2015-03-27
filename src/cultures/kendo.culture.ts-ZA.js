@@ -32,8 +32,8 @@
                     namesShort: ["Son","Mus","Bir","Har","Ne","Tlh","Mug"]
                 },
                 months: {
-                    names: ["Sunguti","Nyenyenyani","Nyenyankulu","Dzivamisoko","Mudyaxihi","Khotavuxika","Mawuwani","Mhawuri","Ndzhati","Nhlangula","Hukuri","N\u0027wendzamhala",""],
-                    namesAbbr: ["Sun","Yan","Kul","Dzi","Mud","Kho","Maw","Mha","Ndz","Nhl","Huk","N\u0027w",""]
+                    names: ["Sunguti","Nyenyenyani","Nyenyankulu","Dzivamisoko","Mudyaxihi","Khotavuxika","Mawuwani","Mhawuri","Ndzhati","Nhlangula","Hukuri","N\u0027wendzamhala"],
+                    namesAbbr: ["Sun","Yan","Kul","Dzi","Mud","Kho","Maw","Mha","Ndz","Nhl","Huk","N\u0027w"]
                 },
                 AM: ["AM","am","AM"],
                 PM: ["PM","pm","PM"],

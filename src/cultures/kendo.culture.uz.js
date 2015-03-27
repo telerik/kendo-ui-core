@@ -32,8 +32,8 @@
                     namesShort: ["Ya","D","S","Ch","P","J","Sh"]
                 },
                 months: {
-                    names: ["yanvar","fevral","mart","aprel","may","iyun","iyul","avgust","sentyabr","oktyabr","noyabr","dekabr",""],
-                    namesAbbr: ["Yan","Fev","Mar","Apr","May","Iyn","Iyl","Avg","Sen","Okt","Noy","Dek",""]
+                    names: ["yanvar","fevral","mart","aprel","may","iyun","iyul","avgust","sentyabr","oktyabr","noyabr","dekabr"],
+                    namesAbbr: ["Yan","Fev","Mar","Apr","May","Iyn","Iyl","Avg","Sen","Okt","Noy","Dek"]
                 },
                 AM: [""],
                 PM: [""],

@@ -32,8 +32,8 @@
                     namesShort: ["Du","Lu","Ma","Mi","Jo","Vi","Sâ"]
                 },
                 months: {
-                    names: ["ianuarie","februarie","martie","aprilie","mai","iunie","iulie","august","septembrie","octombrie","noiembrie","decembrie",""],
-                    namesAbbr: ["ian.","feb.","mar.","apr.","mai","iun.","iul.","aug.","sept.","oct.","nov.","dec.",""]
+                    names: ["ianuarie","februarie","martie","aprilie","mai","iunie","iulie","august","septembrie","octombrie","noiembrie","decembrie"],
+                    namesAbbr: ["ian.","feb.","mar.","apr.","mai","iun.","iul.","aug.","sept.","oct.","nov.","dec."]
                 },
                 AM: ["AM","am","AM"],
                 PM: ["PM","pm","PM"],
