@@ -863,7 +863,7 @@
     margin: 0 -1px 0 0;
 }
 
-.k-rtl .k-overflow-container .k-overflow-button,
+.k-rtl.k-overflow-container .k-overflow-button,
 .k-rtl .k-split-container .k-button
 {
     text-align: right;
