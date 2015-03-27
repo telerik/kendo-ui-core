@@ -58,6 +58,8 @@ var __meta__ = {
             options = that.options;
             element = that.element.on("focus" + ns, proxy(that._focusHandler, that));
 
+            that._clickHandler = $.proxy(that._click, that);
+
             that._focusInputHandler = $.proxy(that._focusInput, that);
             that._inputTemplate();
 
@@ -65,6 +67,7 @@ var __meta__ = {
 
             that._prev = "";
             that._word = "";
+            that.optionLabel = $();
 
             that._wrapper();
 
@@ -164,6 +167,7 @@ var __meta__ = {
 
             this.listView.setOptions(options);
 
+            this._optionLabel();
             this._inputTemplate();
             this._accessors();
             this._filterHeader();
@@ -247,7 +251,7 @@ var __meta__ = {
                     groupTemplate: options.groupTemplate || "#:data#",
                     fixedGroupTemplate: options.fixedGroupTemplate || "#:data#",
                     template: options.template || "#:" + kendo.expr(options.dataTextField, "data") + "#",
-                    click: $.proxy(that._click, that),
+                    click: that._clickHandler,
                     change: $.proxy(that._listChange, that),
                     activate: $.proxy(that._activateItem, that),
                     deactivate: $.proxy(that._deactivateItem, that),
@@ -266,7 +270,7 @@ var __meta__ = {
                     groupTemplate: options.groupTemplate || "#:data#",
                     fixedGroupTemplate: options.fixedGroupTemplate || "#:data#",
                     template: options.template || "#:" + kendo.expr(options.dataTextField, "data") + "#",
-                    click: $.proxy(that._click, that),
+                    click: that._clickHandler,
                     change: $.proxy(that._listChange, that),
                     activate: $.proxy(that._activateItem, that),
                     deactivate: $.proxy(that._deactivateItem, that),
@@ -387,6 +391,7 @@ var __meta__ = {
             var template = options.optionLabelTemplate;
 
             if (!optionLabel) {
+                that.optionLabel.off().remove();
                 that.optionLabel = $();
                 return;
             }
@@ -408,10 +413,15 @@ var __meta__ = {
             }
 
             that.optionLabelTemplate = template;
-            that.optionLabel = $('<div class="k-list-optionlabel">' + template(optionLabel) + '</div>')
-                                .prependTo(that.list)
-                                .click($.proxy(that._click, that))
-                                .on(HOVEREVENTS, that._toggleHover);
+
+            if (!that.optionLabel[0]) {
+                that.optionLabel = $('<div class="k-list-optionlabel"></div>').prependTo(that.list);
+            }
+
+            that.optionLabel.html(template(optionLabel))
+                            .off()
+                            .click(that._clickHandler)
+                            .on(HOVEREVENTS, that._toggleHover);
 
             that.angular("compile", function(){
                 return { elements: that.optionLabel };
