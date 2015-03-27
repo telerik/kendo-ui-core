@@ -849,6 +849,26 @@
     margin: -3px -6px 0 3px;
 }
 
+/* ToolBar */
+
+.k-rtl .k-overflow-anchor
+{
+    float: left;
+    border-width: 0 1px 0 0;
+}
+
+.k-rtl .k-toolbar .k-button-group .k-button,
+.k-rtl .k-toolbar .k-split-button .k-split-button-arrow
+{
+    margin: 0 -1px 0 0;
+}
+
+.k-rtl .k-overflow-container .k-overflow-button,
+.k-rtl .k-split-container .k-button
+{
+    text-align: right;
+}
+
 /* ToolTip */
 
 .k-rtl .k-tooltip-button
