@@ -253,7 +253,7 @@
             height: 50
         }).data("kendoMultiSelect");
 
-        var padding = multiselect.list.find(".k-static-header").css("padding-right");
+        var padding = multiselect.list.find(".k-group-header").css("padding-right");
 
         ok(parseFloat(padding) > 15);
     });
@@ -275,7 +275,7 @@
             height: 350
         }).data("kendoMultiSelect");
 
-        var padding = multiselect.list.find(".k-static-header").css("padding-right");
+        var padding = multiselect.list.find(".k-group-header").css("padding-right");
 
         ok(parseFloat(padding) < 15);
     });

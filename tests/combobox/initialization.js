@@ -776,7 +776,7 @@ test("ComboBox adds scrollbar width to the fixed group header padding", function
         height: 50
     }).data("kendoComboBox");
 
-    var padding = combobox.list.find(".k-static-header").css("padding-right");
+    var padding = combobox.list.find(".k-group-header").css("padding-right");
 
     ok(parseFloat(padding) > 15);
 });
@@ -798,7 +798,7 @@ test("ComboBox does not add scrollbar width to the fixed group header padding if
         height: 350
     }).data("kendoComboBox");
 
-    var padding = combobox.list.find(".k-static-header").css("padding-right");
+    var padding = combobox.list.find(".k-group-header").css("padding-right");
 
     ok(parseFloat(padding) < 15);
 });
