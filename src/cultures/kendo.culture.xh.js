@@ -32,8 +32,8 @@
                     namesShort: ["Ca","Mv","Lb","Lt","Ln","Lh","Mg"]
                 },
                 months: {
-                    names: ["uJanuwari","uFebuwari","uMatshi","uAprili","uMeyi","uJuni","uJulayi","uAgasti","uSeptemba","uOktobha","uNovemba","uDisemba",""],
-                    namesAbbr: ["uJan.","uFeb.","uMat.","uEpr.","uMey.","uJun.","uJul.","uAg.","uSep.","uOkt.","uNov.","uDis.",""]
+                    names: ["uJanuwari","uFebuwari","uMatshi","uAprili","uMeyi","uJuni","uJulayi","uAgasti","uSeptemba","uOktobha","uNovemba","uDisemba"],
+                    namesAbbr: ["uJan.","uFeb.","uMat.","uEpr.","uMey.","uJun.","uJul.","uAg.","uSep.","uOkt.","uNov.","uDis."]
                 },
                 AM: ["Ekuseni","ekuseni","EKUSENI"],
                 PM: ["Emva Kwemini","emva kwemini","EMVA KWEMINI"],

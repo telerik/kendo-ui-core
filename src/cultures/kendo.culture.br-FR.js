@@ -32,8 +32,8 @@
                     namesShort: ["Su","L","Mz","Mc","Y","G","Sa"]
                 },
                 months: {
-                    names: ["Genver","C\u0027hwevrer","Meurzh","Ebrel","Mae","Mezheven","Gouere","Eost","Gwengolo","Here","Du","Kerzu",""],
-                    namesAbbr: ["Gen.","C\u0027hwe.","Meur.","Ebr.","Mae","Mezh.","Goue.","Eost","Gwen.","Here","Du","Kzu",""]
+                    names: ["Genver","C\u0027hwevrer","Meurzh","Ebrel","Mae","Mezheven","Gouere","Eost","Gwengolo","Here","Du","Kerzu"],
+                    namesAbbr: ["Gen.","C\u0027hwe.","Meur.","Ebr.","Mae","Mezh.","Goue.","Eost","Gwen.","Here","Du","Kzu"]
                 },
                 AM: [""],
                 PM: [""],

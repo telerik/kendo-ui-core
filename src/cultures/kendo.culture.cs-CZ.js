@@ -32,8 +32,8 @@
                     namesShort: ["ne","po","út","st","čt","pá","so"]
                 },
                 months: {
-                    names: ["leden","únor","březen","duben","květen","červen","červenec","srpen","září","říjen","listopad","prosinec",""],
-                    namesAbbr: ["I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII",""]
+                    names: ["leden","únor","březen","duben","květen","červen","červenec","srpen","září","říjen","listopad","prosinec"],
+                    namesAbbr: ["I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII"]
                 },
                 AM: ["dop.","dop.","DOP."],
                 PM: ["odp.","odp.","ODP."],

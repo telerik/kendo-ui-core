@@ -32,8 +32,8 @@
                     namesShort: ["in","aw","wn","cy","ku","ck","wk"]
                 },
                 months: {
-                    names: ["kulla","panchi","pawkar","ayriwa","aymuray","raymi","sitwa","karwa","kuski","wayru","sasi","kapak",""],
-                    namesAbbr: ["kull","pan","paw","ayr","aym","ray","sit","kar","kus","way","sas","kap",""]
+                    names: ["kulla","panchi","pawkar","ayriwa","aymuray","raymi","sitwa","karwa","kuski","wayru","sasi","kapak"],
+                    namesAbbr: ["kull","pan","paw","ayr","aym","ray","sit","kar","kus","way","sas","kap"]
                 },
                 AM: [""],
                 PM: [""],

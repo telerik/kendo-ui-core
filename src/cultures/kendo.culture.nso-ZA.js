@@ -32,8 +32,8 @@
                     namesShort: ["La","Mo","Lb","Lr","Ln","Lh","Mk"]
                 },
                 months: {
-                    names: ["Janaware","Feberware","Matšhe","Aprele","Mei","June","Julae","Agostose","Setemere","Oktoboro","Nofemere","Disemere",""],
-                    namesAbbr: ["Jan","Feb","Matš","Apr","Mei","June","Julae","Agost","Set","Oky","Nof","Dis",""]
+                    names: ["Janaware","Feberware","Matšhe","Aprele","Mei","June","Julae","Agostose","Setemere","Oktoboro","Nofemere","Disemere"],
+                    namesAbbr: ["Jan","Feb","Matš","Apr","Mei","June","Julae","Agost","Set","Oky","Nof","Dis"]
                 },
                 AM: ["MS","ms","MS"],
                 PM: ["TP","tp","TP"],

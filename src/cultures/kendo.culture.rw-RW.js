@@ -32,8 +32,8 @@
                     namesShort: ["cy","mb","ka","ga","ka","ga","ga"]
                 },
                 months: {
-                    names: ["Mutarama","Gashyantare","Werurwe","Mata","Gicurasi","Kamena","Nyakanga","Kanama","Nzeli","Ukwakira","Ugushyingo","Ukuboza",""],
-                    namesAbbr: ["Mut","Gas","Wer","Mat","Gic","Kam","Nyak","Kan","Nze","Ukwak","Ugus","Ukub",""]
+                    names: ["Mutarama","Gashyantare","Werurwe","Mata","Gicurasi","Kamena","Nyakanga","Kanama","Nzeli","Ukwakira","Ugushyingo","Ukuboza"],
+                    namesAbbr: ["Mut","Gas","Wer","Mat","Gic","Kam","Nyak","Kan","Nze","Ukwak","Ugus","Ukub"]
                 },
                 AM: ["z.m","z.m","Z.M"],
                 PM: ["z.n","z.n","Z.N"],

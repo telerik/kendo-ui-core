@@ -32,8 +32,8 @@
                     namesShort: ["So","Ms","Bi","Th","Ne","Hl","Mg"]
                 },
                 months: {
-                    names: ["Januwari","Febhuwari","Mashi","Ephreli","Meyi","Juni","Julayi","Agasti","Septemba","Okthoba","Novemba","Disemba",""],
-                    namesAbbr: ["Jan","Feb","Mas","Eph","Mey","Jun","Jul","Agas","Sep","Okt","Nov","Dis",""]
+                    names: ["Januwari","Febhuwari","Mashi","Ephreli","Meyi","Juni","Julayi","Agasti","Septemba","Okthoba","Novemba","Disemba"],
+                    namesAbbr: ["Jan","Feb","Mas","Eph","Mey","Jun","Jul","Agas","Sep","Okt","Nov","Dis"]
                 },
                 AM: ["Ntambama","ntambama","NTAMBAMA"],
                 PM: ["Ekuseni","ekuseni","EKUSENI"],

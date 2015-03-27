@@ -32,8 +32,8 @@
                     namesShort: ["Son","Mma","Bed","Rar","Ne","Hla","Moq"]
                 },
                 months: {
-                    names: ["Phesekgong","Hlakola","Hlakubele","Mmese","Motsheanong","Phupjane","Phupu","Phata","Leotshe","Mphalane","Pundungwane","Tshitwe",""],
-                    namesAbbr: ["Phe","Kol","Ube","Mme","Mot","Jan","Upu","Pha","Leo","Mph","Pun","Tsh",""]
+                    names: ["Phesekgong","Hlakola","Hlakubele","Mmese","Motsheanong","Phupjane","Phupu","Phata","Leotshe","Mphalane","Pundungwane","Tshitwe"],
+                    namesAbbr: ["Phe","Kol","Ube","Mme","Mot","Jan","Upu","Pha","Leo","Mph","Pun","Tsh"]
                 },
                 AM: ["AM","am","AM"],
                 PM: ["PM","pm","PM"],

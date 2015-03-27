@@ -32,8 +32,8 @@
                     namesShort: ["do","lu","ma","mé","xo","ve","sá"]
                 },
                 months: {
-                    names: ["xaneiro","febreiro","marzo","abril","maio","xuño","xullo","agosto","setembro","outubro","novembro","decembro",""],
-                    namesAbbr: ["xan","feb","mar","abr","maio","xuño","xul","ago","set","out","nov","dec",""]
+                    names: ["xaneiro","febreiro","marzo","abril","maio","xuño","xullo","agosto","setembro","outubro","novembro","decembro"],
+                    namesAbbr: ["xan","feb","mar","abr","maio","xuño","xul","ago","set","out","nov","dec"]
                 },
                 AM: ["a.m.","a.m.","A.M."],
                 PM: ["p.m.","p.m.","P.M."],

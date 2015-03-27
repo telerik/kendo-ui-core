@@ -32,8 +32,8 @@
                     namesShort: ["dg","dl","da","dc","dj","dv","ds"]
                 },
                 months: {
-                    names: ["genièr","febrièr","març","abril","mai","junh","julhet","agost","setembre","octobre","novembre","decembre",""],
-                    namesAbbr: ["gen.","feb.","març","abr.","mai","junh","julh","ag.","set.","oct.","nov.","dec.",""]
+                    names: ["genièr","febrièr","març","abril","mai","junh","julhet","agost","setembre","octobre","novembre","decembre"],
+                    namesAbbr: ["gen.","feb.","març","abr.","mai","junh","julh","ag.","set.","oct.","nov.","dec."]
                 },
                 AM: ["AM","am","AM"],
                 PM: ["PM","pm","PM"],

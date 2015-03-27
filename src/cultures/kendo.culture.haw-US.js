@@ -32,8 +32,8 @@
                     namesShort: ["Lp","P1","P2","P3","P4","P5","P6"]
                 },
                 months: {
-                    names: ["Ianuali","Pepeluali","Malaki","ʻApelila","Mei","Iune","Iulai","ʻAukake","Kepakemapa","ʻOkakopa","Nowemapa","Kekemapa",""],
-                    namesAbbr: ["Ian","Pep","Mal","ʻAp","Mei","Iun","Iul","ʻAuk","Kep","ʻOk","Now","Kek",""]
+                    names: ["Ianuali","Pepeluali","Malaki","ʻApelila","Mei","Iune","Iulai","ʻAukake","Kepakemapa","ʻOkakopa","Nowemapa","Kekemapa"],
+                    namesAbbr: ["Ian","Pep","Mal","ʻAp","Mei","Iun","Iul","ʻAuk","Kep","ʻOk","Now","Kek"]
                 },
                 AM: ["AM","am","AM"],
                 PM: ["PM","pm","PM"],

@@ -32,8 +32,8 @@
                     namesShort: ["L","L","T","L","A","J","A"]
                 },
                 months: {
-                    names: ["Janairu","Fabrairu","Maris","Afrilu","Mayu","Yuni","Yuli","Agusta","Satumba","Oktoba","Nuwamba","Disamba",""],
-                    namesAbbr: ["Jan","Fab","Mar","Afr","May","Yun","Yul","Agu","Sat","Okt","Nuw","Dis",""]
+                    names: ["Janairu","Fabrairu","Maris","Afrilu","Mayu","Yuni","Yuli","Agusta","Satumba","Oktoba","Nuwamba","Disamba"],
+                    namesAbbr: ["Jan","Fab","Mar","Afr","May","Yun","Yul","Agu","Sat","Okt","Nuw","Dis"]
                 },
                 AM: ["Safe","safe","SAFE"],
                 PM: ["Yamma","yamma","YAMMA"],

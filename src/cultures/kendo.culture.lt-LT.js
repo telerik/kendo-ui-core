@@ -21,7 +21,7 @@
                 ",": " ",
                 ".": ",",
                 groupSize: [3],
-                symbol: "Lt"
+                symbol: "€"
             }
         },
         calendars: {
@@ -32,8 +32,8 @@
                     namesShort: ["S","P","A","T","K","Pn","Š"]
                 },
                 months: {
-                    names: ["sausis","vasaris","kovas","balandis","gegužė","birželis","liepa","rugpjūtis","rugsėjis","spalis","lapkritis","gruodis",""],
-                    namesAbbr: ["Sau","Vas","Kov","Bal","Geg","Bir","Lie","Rgp","Rgs","Spl","Lap","Grd",""]
+                    names: ["sausis","vasaris","kovas","balandis","gegužė","birželis","liepa","rugpjūtis","rugsėjis","spalis","lapkritis","gruodis"],
+                    namesAbbr: ["Sau","Vas","Kov","Bal","Geg","Bir","Lie","Rgp","Rgs","Spl","Lap","Grd"]
                 },
                 AM: [""],
                 PM: [""],

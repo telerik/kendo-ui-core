@@ -32,8 +32,8 @@
                     namesShort: ["ju","ka","ox","kj","jo","wa","wu"]
                 },
                 months: {
-                    names: ["nab\u0027e ik\u0027","ukab\u0027 ik\u0027","urox ik\u0027","ukaj ik\u0027","uro ik\u0027","uwaq ik\u0027","uwuq ik\u0027","uwajxaq ik\u0027","ub\u0027elej ik\u0027","ulaj ik\u0027","ujulaj ik\u0027","ukab\u0027laj ik\u0027",""],
-                    namesAbbr: ["nab\u0027e","ukab\u0027","urox","ukaj","uro","uwaq","uwuq","uwajxaq","ub\u0027elej","ulaj","ujulaj","ukab\u0027laj",""]
+                    names: ["nab\u0027e ik\u0027","ukab\u0027 ik\u0027","urox ik\u0027","ukaj ik\u0027","uro ik\u0027","uwaq ik\u0027","uwuq ik\u0027","uwajxaq ik\u0027","ub\u0027elej ik\u0027","ulaj ik\u0027","ujulaj ik\u0027","ukab\u0027laj ik\u0027"],
+                    namesAbbr: ["nab\u0027e","ukab\u0027","urox","ukaj","uro","uwaq","uwuq","uwajxaq","ub\u0027elej","ulaj","ujulaj","ukab\u0027laj"]
                 },
                 AM: ["a.m.","a.m.","A.M."],
                 PM: ["p.m.","p.m.","P.M."],

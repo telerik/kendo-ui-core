@@ -32,8 +32,8 @@
                     namesShort: ["Al","Te","Ta","Al","Al","Ju","As"]
                 },
                 months: {
-                    names: ["samwiee","feeburyee","marsa","awril","me","suyeŋ","sulyee","ut","satambara","oktoobar","nowamburu","deesamburu",""],
-                    namesAbbr: ["samw","feeb","mar","awr","me","suy","sul","ut","sat","okt","now","dees",""]
+                    names: ["samwiee","feeburyee","marsa","awril","me","suyeŋ","sulyee","ut","satambara","oktoobar","nowamburu","deesamburu"],
+                    namesAbbr: ["samw","feeb","mar","awr","me","suy","sul","ut","sat","okt","now","dees"]
                 },
                 AM: [""],
                 PM: [""],

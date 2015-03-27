@@ -32,8 +32,8 @@
                     namesShort: ["Svo","Muv","Chip","Chit","Chin","Chis","Mug"]
                 },
                 months: {
-                    names: ["Ndira","Kukadzi","Kurume","Kubvumbi","Chivabvu","Chikumi","Chikunguru","Nyamavhuvhu","Gunyana","Gumiguru","Mbudzi","Zvita",""],
-                    namesAbbr: ["Ndi","Kuk","Kur","Kub","Chv","Chk","Chg","Nya","Gun","Gum","Mb","Zvi",""]
+                    names: ["Ndira","Kukadzi","Kurume","Kubvumbi","Chivabvu","Chikumi","Chikunguru","Nyamavhuvhu","Gunyana","Gumiguru","Mbudzi","Zvita"],
+                    namesAbbr: ["Ndi","Kuk","Kur","Kub","Chv","Chk","Chg","Nya","Gun","Gum","Mb","Zvi"]
                 },
                 AM: ["AM","am","AM"],
                 PM: ["PM","pm","PM"],
