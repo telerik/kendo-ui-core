@@ -51,7 +51,8 @@
 }
 
 .k-popup .k-item > .k-group,
-.k-popup > .k-static-header
+.k-popup > .k-group-header,
+.k-popup > .k-virtual-wrap > .k-group-header
 {
     text-transform: uppercase;
     font-size: .857em;
@@ -68,7 +69,7 @@
     right: 3px;
 }
 
-.k-static-header + .k-list > .k-item.k-first,
+.k-group-header + .k-list > .k-item.k-first,
 .k-virtual-item.k-first
 {
     border-top-style: solid;
@@ -76,7 +77,8 @@
     padding-top: 0;
 }
 
-.k-popup > .k-static-header
+.k-popup > .k-group-header,
+.k-popup > .k-virtual-wrap > .k-group-header
 {
     text-align: right;
 }
