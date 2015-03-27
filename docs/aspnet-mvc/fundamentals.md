@@ -113,8 +113,8 @@ To subscribe to the client-side events exposed by a Kendo UI widget use the **Ev
 ## Client-side object
 
 You can get a reference to the client-side object initialized by the server-side wrapper via the [data](http://api.jquery.com/data/) jQuery method.
-Use the `Name` of the widget to form the jQuery selector and obtain the reference in a `document.ready` handler, which is placed **after the widget declaration**.
-After you get the reference, you can use the widget client-side API.
+Use the `Name` of the widget to form the jQuery selector and obtain the reference in a `document.ready` handler, which is placed or called **after the widget declaration**.
+This will ensure that the client-side object has already been created. After you get the object reference, you can use the widget client-side API.
 
     @(Html.Kendo().NumericTextBox()
         .Name("age")
@@ -133,6 +133,8 @@ If you have deferred the initialization of the widget, make sure you get its ins
         .Name("age")
         .Deferred()
     )
+    
+    .....
     
     @Html.Kendo().DeferredScripts()
     
