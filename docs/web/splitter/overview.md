@@ -129,8 +129,9 @@ use the API to control its behavior.
 
 When making the Splitter 100% high, one should keep in mind that web standards require elements with percentage height to have a parent element with an explicit height.
 In this case the parent of the Splitter is the `body`, so it receives a `height:100%` style, which in turn results in the `html` element obtaining the style as well. If the requirement is not met,
-the Splitter's computed height will fallback to `auto` and the widget may collapse completely, depending ot its content. In addition, the Splitter should have its border removed, as 100% high elements
-cannot have borders, margins or paddings. In a nested Splitters scenario, the inner Splitters remove their borders automatically, given that each Splitter is a direct child of a parent pane.
+the Splitter's computed height will fallback to `auto` and the widget may collapse completely, depending ot its content. In addition, the Splitter should have its border removed. 100% high elements
+cannot have borders, margins, paddings and sibling elements. In a nested Splitters scenario, the inner Splitters remove their borders automatically,
+given that each Splitter is a direct child of a parent pane.
 
 ### HTML Markup
 
