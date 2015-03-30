@@ -191,14 +191,27 @@ versions, so it is advisable to always use the [iframe configuration option](#if
 Template for the content of a **Window**. Returned data from the server will be given as the `data` of this template.
 Note that if the returned data is JSON, the [`dataType` parameter](http://api.jquery.com/jQuery.ajax/) should be passed, so that the data gets parsed by jQuery.
 
+If the URL contains a protocol, set `iframe` to `false`, otherwise the JSON response will be injected "as is" in the Window content area.
+
 #### Example - fetch JSON and display it through a template
 
-    <div id="dialog"></div>
+    <div id="dialog">
+        <p><strong>This example will not work, unless you define a valid JSON service URL for `content.url`.</p>
+        <p>The expected JSON response is:
+            <pre>
+            
+            { username: "...my username here..." }
+            
+            </pre>
+        </strong></p>    
+    </div>
+    
     <script>
     $("#dialog").kendoWindow({
       content: {
         url: "/userDetails",
         dataType: "json",
+        iframe: false,
         template: "User name: #= data.username #"
       }
     });
