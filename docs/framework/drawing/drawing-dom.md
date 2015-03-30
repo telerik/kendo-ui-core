@@ -221,7 +221,7 @@ The reason is that images are cached upfront, and this one will miss.  The next 
 
 This only works when multi-page documents are requested (thus, only when one of `forcePageBreak` or `paperSize` is given).  To make it work if you only need a single page, you can pass some dummy value to `forcePageBreak`, e.g.: `forcePageBreak: "-"`.
 
-In such case, the DOM renderer will create a clone of the element (in order to be able to do page breaking without destroying the original content) and it will place it inside a custom `<kendo-pdf-document>` element, which is hidden from the view.  Therefore, you can apply custom styles by retricting the rules to elements under `kendo-pdf-document`.  Example:
+In such case, the DOM renderer will create a clone of the element (in order to be able to do page breaking without destroying the original content) and it will place it inside a custom `<kendo-pdf-document>` element, which is hidden from the view.  Therefore, you can apply custom styles by restricting the rules to elements under `kendo-pdf-document`.  Example:
 
     <style>
       kendo-pdf-document p {
