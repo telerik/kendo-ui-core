@@ -3029,7 +3029,7 @@ Gets or sets the filter configuration.
 
 ##### value `Object` *(optional)*
 
-The filter configuration. Accepts the same values as the [filter](#configuration-filter) option (**check there fo more examples**).
+The filter configuration. Accepts the same values as the [filter](#configuration-filter) option (**check there for more examples**).
 
 #### Returns
 
