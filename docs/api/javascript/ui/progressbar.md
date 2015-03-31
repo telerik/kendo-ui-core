@@ -101,7 +101,7 @@ The minimum value of the **ProgressBar**.
 	<div id="progressbar"></div>
 	<script>
 	  $("#progressbar").kendoProgressBar({
-	    min: 10    
+	    min: 10,    
 	    max: 50
 	  });  
 	</script>
@@ -162,7 +162,7 @@ Specifies the type of the **ProgressBar**. The supported types are **value**, **
 
 ### value `Number`
 
-The underlying value of the **ProgressBar**.
+The underlying value of the **ProgressBar**. It should be a number or `false`. Setting the value to `false` will set the state of the ProgressBar to indeterminate.
 
 #### Example - set the initial ProgressBar value
 
