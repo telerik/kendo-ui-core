@@ -533,6 +533,31 @@ The value of the cell. Numbers and dates will be formatted as strings. String va
     });
     </script>
 
+### sheets.title `String`
+
+Sets the title of the exported workbook sheet.
+
+#### Example - set the sheet title
+
+    <script>
+  		var workbook = new kendo.ooxml.Workbook({
+   		 sheets: [
+        	{
+            	columns: [ { autoWidth: true } ],
+          		title: "My custom sheet title",
+            	rows: [
+              		{ cells: [ { value: "short" } ] },
+              		{ cells: [ { value: "longer text value" } ] }
+            	]
+        	}
+    	]
+  	});
+  	kendo.saveAs({
+    	dataURI: workbook.toDataURL(),
+    	fileName: "Test.xlsx"
+  	});
+  </script>
+
 ## Methods
 
 ### toDataURL
