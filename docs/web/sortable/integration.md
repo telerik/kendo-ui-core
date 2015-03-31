@@ -143,6 +143,8 @@ If paging or virtual scrolling are turned on, the Grid widget will render only t
 The Sortable widget uses the index of the DOM elements.
 When the Grid displays grouped data, the index of the DOM element does not match the index of the corresponding data item in the DataSource. This makes updating the order in the DataSource impossible.
 
+- The Sortable widget does not work with Grid that has locked(frozen) columns
+
 ## Reorder Kendo UI ListView Items using the Sortable widget
 
 >**Important:** The Sortable widget reorders the HTML DOM elements. It will not automatically update the order of the items in the DataSource. It is up to the developer to implement this behaviour.
