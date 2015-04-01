@@ -173,6 +173,10 @@ var __meta__ = {
             this._filterHeader();
             this._enable();
             this._aria();
+
+            if (!this.value() && this.optionLabel[0]) {
+                this.select(0);
+            }
         },
 
         destroy: function() {
