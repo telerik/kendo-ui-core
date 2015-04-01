@@ -1398,7 +1398,7 @@ asyncTest("query does not aggregate data if serverAggregate is true", 1, functio
     }).bind("change", function() {
         start();
 
-        ok($.isEmptyObject(dataSource.aggregates()));
+        equal(dataSource.aggregates().foo.sum, 0);
     });
 
     $.mockjax({
