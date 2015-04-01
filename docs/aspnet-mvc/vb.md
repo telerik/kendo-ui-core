@@ -39,6 +39,36 @@ The following examples show the correct Visual Basic (VB) syntax when using [lam
 
     End Code
 
+## TabStrip
+
+    @Code
+        
+        Dim tab As Kendo.Mvc.UI.Fluent.TabStripBuilder = Html.Kendo().TabStrip().Name("TabStrip1")
+        
+        tab.Items(Function(f) f.Add().Text("tab 1").Content(Sub()
+                                @<text>HTML content</text>
+                                                            End Sub))
+        tab.Items(Function(f) f.Add().Text("tab 2").Selected(True).Content("<div>HTML content</div>"))
+        tab.Render()
+
+    End Code
+
+    @Code
+        Html.Kendo().TabStrip() _
+            .Name("TabStrip2") _
+            .Items(Function(tabstrip) tabstrip.Add().Text("tab text") _
+                .Selected(True) _
+                .Content(Sub()@<text>html content</text>
+                        End Sub)) _
+            .Render()
+    End Code
+
+    @(Html.Kendo().TabStrip() _
+        .Name("TabStrip3") _
+        .Items(Function(tabstrip) tabstrip.Add().Text("tab text") _
+        .Selected(True) _
+        .Content("string content")))
+
 ## Grid
 
 ### View
