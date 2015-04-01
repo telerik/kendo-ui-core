@@ -4510,6 +4510,62 @@ Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
  The width of the border.
 
+### legend.item `Object`
+
+The chart legend item configuration.
+
+### legend.item.cursor `String`
+The [cursor style](https://developer.mozilla.org/en-US/docs/Web/CSS/cursor) of the legend item.
+
+### legend.item.visual `Function`
+
+A function that can be used to create a custom visual for the legend items. The available argument fields are:
+
+* options - the item options.
+* createVisual - a function that can be used to get the default visual.
+
+#### Example - using custom visual for the legend items
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoStockChart({
+        legend: {
+          item: {
+            visual: function (e) {
+              var color = e.options.markers.background;
+              var labelColor = e.options.labels.color;
+              var rect = new kendo.geometry.Rect([0, 0], [100, 50]);
+              var layout = new kendo.drawing.Layout(rect, {
+                spacing: 5,
+                alignItems: "center"
+              });
+
+              var marker = new kendo.drawing.Path({
+                fill: {
+                  color: color
+                }
+              }).moveTo(10, 0).lineTo(15, 10).lineTo(5, 10).close();
+
+              var label = new kendo.drawing.Text(e.series.name, [0, 0], {
+                fill: {
+                  color: labelColor
+                }
+              });
+
+              layout.append(marker, label);
+              layout.reflow()
+
+              return layout;
+            }
+          }
+        },
+        series: [
+          { name: "Series 1", data: [1, 2, 3] },
+          { name: "Series 2", data: [3, 4, 5] }
+        ]
+      });
+    </script>
+
 ### legend.labels `Object`
 
 Configures the legend labels.

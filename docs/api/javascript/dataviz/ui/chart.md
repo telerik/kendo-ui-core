@@ -5823,6 +5823,9 @@ The fields which can be used in the template are:
 
 The chart legend item configuration.
 
+### legend.item.cursor `String`
+The [cursor style](https://developer.mozilla.org/en-US/docs/Web/CSS/cursor) of the legend item.
+
 ### legend.item.visual `Function`
 
 A function that can be used to create a custom visual for the legend items. The available argument fields are:
