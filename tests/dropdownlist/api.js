@@ -598,6 +598,15 @@
         equal(dropdownlist.dataItem(1), dropdownlist.dataSource.view()[1]);
     });
 
+    test("dataItem() returns optionLabel data item", function() {
+        dropdownlist = new DropDownList(input, {
+            dataSource: ["item1", "item2"],
+            optionLabel: "Select..."
+        });
+
+        equal(dropdownlist.dataItem(0), "Select...");
+    });
+
     test("DropDownList re-binds on dataSource.data([])", function() {
         dropdownlist = new DropDownList(input, ["item1", "item2"]);
 
