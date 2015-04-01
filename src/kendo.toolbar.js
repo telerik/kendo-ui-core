@@ -465,7 +465,7 @@ var __meta__ = {
                         tap: proxy(that._toggleOverflow, that)
                     });
 
-                    kendo.onResize(function() {
+                    that._resizeHandler = kendo.onResize(function() {
                         that.resize();
                     });
                 } else {
@@ -527,6 +527,7 @@ var __meta__ = {
                 that.userEvents.destroy();
 
                 if (that.options.resizable) {
+                    kendo.unbindResize(that._resizeHandler);
                     that.overflowUserEvents.destroy();
                     that.popup.destroy();
                 }
