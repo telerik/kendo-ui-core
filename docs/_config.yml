@@ -68,6 +68,9 @@ navigation:
     "mobile/listview":
         title: "Mobile ListView"
         position: 9
+    "mobile/collapsible":
+        title: "Mobile Collapsible"
+        position: 14
     "*typescript":
     "*asp.net":
         title: "ASP.NET"
