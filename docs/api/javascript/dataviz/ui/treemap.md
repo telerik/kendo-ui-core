@@ -81,22 +81,48 @@ The fields which can be used in the template are:
 
 ### colors `Array`
 
-The default colors for the treemap tiles. When all colors are used, new colors are pulled from the start again.
+The default colors for the treemap tiles. When all colors are used, new colors are pulled from the start again. Can be set to array of specific colors or array of color ranges.
 
 #### Example - set the treemap tile colors
+
     <div id="treemap"></div>
     <script>
-    $("#treemap").kendoTreeMap({
+      $("#treemap").kendoTreeMap({
         dataSource: {
-            data: [{
-                name: "foo",
-                value: 1
-            }]
+          data: [{
+            name: "Root",
+            items: [{ name: "foo", value: 1 }, { name: "bar", value: 2 }, { name: "baz", value: 3 }]
+          }]
         },
         valueField: "value",
         textField: "name",
         colors: ["red", "green"]
-    });
+      });
+    </script>
+
+#### Example - set the treemap color ranges
+
+    <div id="treemap"></div>
+    <script>
+      $("#treemap").kendoTreeMap({
+        dataSource: {
+          data: [{
+            name: "Root",
+            items: [{
+              name: "Group A",
+              value: 1,
+              items: [{ name: "foo", value: 1 }, { name: "bar", value: 2 }, { name: "baz", value: 3 }]
+            }, {
+              name: "Group B",
+              value: 1,
+              items: [{ name: "foo", value: 1 }, { name: "bar", value: 2 }, { name: "baz", value: 3 }]
+            }]
+          }]
+        },
+        valueField: "value",
+        textField: "name",
+        colors: [["#ff6666", "#ff0000"], ["#7fb17f", "#006400"]]
+      });
     </script>
 
 ## Events
