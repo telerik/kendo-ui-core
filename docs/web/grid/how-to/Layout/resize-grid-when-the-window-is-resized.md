@@ -24,7 +24,7 @@ In the latter case the BODY and HTML elements need a 100% height style as well. 
         margin: 0;
         padding: 0;
         border-width: 0;
-        height: 100%;
+        height: 100%; /* DO NOT USE !important for setting the Grid height! */
       }
 
       html
