@@ -5834,6 +5834,77 @@ Fires the [edit](#events-edit) event.
     var grid = $("#grid").data("kendoGrid");
     grid.addRow();
 
+### autoFitColumn
+
+Applies the minimum possible width for the specified column, so that all text fits without wrapping.
+
+#### Parameters
+
+##### column `Number|String|Object`
+
+The index of the column, or the [field](#configuration-columns.field) to which the columns is bound, or the column object obtained from the [columns](#fields-columns) collection.
+
+When using multicolumn headers, using an index is not allowed. In such scenarios, please use a field name or a column object as a method argument.
+
+#### Example - autofit a column by index
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: [
+          { name: "Jane Doe", age: 30 },
+          { name: "John Doe", age: 33 }
+      ]
+    });
+    var grid = $("#grid").data("kendoGrid");
+    grid.autoFitColumn(1);
+    </script>
+
+#### Example - autofit a column by field
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: [
+          { name: "Jane Doe", age: 30 },
+          { name: "John Doe", age: 33 }
+      ]
+    });
+    var grid = $("#grid").data("kendoGrid");
+    grid.autoFitColumn("age");
+    </script>
+
+#### Example - autofit a column by column object reference
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+        columns: [{
+            title: "Person",
+            columns: [
+                { field: "fname", title: "First name"},
+                { field: "lname", title: "Last name"}
+            ]}, {
+                field: "age"
+            }
+        ],
+        dataSource: [
+            { fname: "Jane", lname: "Smith", age: 30 },
+            { fname: "John", lname: "Stevens", age: 33 }
+        ]
+    });
+    var grid = $("#grid").data("kendoGrid");
+    grid.autoFitColumn(grid.columns[0].columns[1]);
+    </script>
+
 ### cancelChanges
 
 Cancels any pending changes in the data source. Deleted data items are restored, new data items are removed and updated data items are restored to their initial state.
