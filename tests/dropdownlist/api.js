@@ -730,6 +730,39 @@
         equal(list.children(".k-list-optionlabel").text(), "Select");
     });
 
+    test("setOptions selects optionLabel on add if widget's value is empty string", function() {
+        dropdownlist = new DropDownList(input, {
+            dataSource: ["item1", "item2"],
+            filter: "startswith"
+        });
+
+        dropdownlist.value("");
+        dropdownlist.setOptions({
+            optionLabel: "Select..."
+        });
+
+        var current = dropdownlist.current();
+
+        ok(current.hasClass("k-list-optionlabel"));
+        ok(current.hasClass("k-state-selected"));
+        equal(dropdownlist.text(), "Select...");
+    });
+
+    test("setOptions keeps selected item when optionLabel is added", function() {
+        dropdownlist = new DropDownList(input, {
+            dataSource: ["item1", "item2"],
+            filter: "startswith"
+        });
+
+        dropdownlist.setOptions({
+            optionLabel: "Select..."
+        });
+
+        var current = dropdownlist.current();
+
+        equal(dropdownlist.text(), "item1");
+    });
+
     test("Open popup when option label is defined", 1, function() {
         var dropdownlist = new DropDownList(input, {
             dataSource: [],
