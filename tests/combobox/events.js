@@ -517,6 +517,31 @@ test("ComboBox trigger cascade on TAB", 1, function() {
     combobox.text(combobox.text());
 });
 
+test("ComboBox trigger cascade when selected index is changed", 2, function() {
+    combobox = input.kendoComboBox({
+        dataSource: [
+            { text: "foo", value: "1" },
+            { text: "bar", value: "2" }
+        ],
+        dataTextField: "text",
+        dataValueField: "value",
+        filter: "contains",
+        suggest: true
+    }).data("kendoComboBox");
+
+    combobox.input.focus().val("1");
+    combobox.search("1");
+    combobox.input.blur();
+
+    combobox.bind("cascade", function() {
+        equal(combobox.value(), "1");
+        equal(combobox.text(), "foo");
+    });
+
+    combobox.search("f");
+    combobox.ul.children(":first").click();
+});
+
 test("ComboBox trigger change on blur after filtration", 1, function() {
     combobox = input.kendoComboBox({
         dataSource: ["foo", "bar"],
@@ -536,6 +561,31 @@ test("ComboBox trigger change on blur after filtration", 1, function() {
     combobox.suggest("bar");
 
     combobox.input.focusout();
+});
+
+test("ComboBox trigger change when selected index is changed", 2, function() {
+    combobox = input.kendoComboBox({
+        dataSource: [
+            { text: "foo", value: "1" },
+            { text: "bar", value: "2" }
+        ],
+        dataTextField: "text",
+        dataValueField: "value",
+        filter: "contains",
+        suggest: true
+    }).data("kendoComboBox");
+
+    combobox.input.focus().val("1");
+    combobox.search("1");
+    combobox.input.blur();
+
+    combobox.bind("change", function() {
+        equal(combobox.value(), "1");
+        equal(combobox.text(), "foo");
+    });
+
+    combobox.search("f");
+    combobox.ul.children(":first").click();
 });
 
 test("ComboBox triggers filtering event on data source filter", 3, function() {

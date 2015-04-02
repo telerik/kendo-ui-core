@@ -515,7 +515,7 @@ var __meta__ = {
         _triggerCascade: function() {
             var that = this;
 
-            if (!that._cascadeTriggered || that._old !== that.value()) {
+            if (!that._cascadeTriggered || that._old !== that.value() || that._oldIndex !== that.selectedIndex) {
                 that._cascadeTriggered = true;
                 that.trigger("cascade", { userTriggered: that._userTriggered });
             }
