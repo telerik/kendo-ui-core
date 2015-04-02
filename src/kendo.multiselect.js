@@ -332,10 +332,16 @@ var __meta__ = {
 
         _removeTag: function(tag) {
             var that = this;
+            var state = that._state;
             var position = tag.index();
             var listView = that.listView;
-            var customIndex = that._customOptions[listView.value()[position]];
+            var value = listView.value()[position];
+            var customIndex = that._customOptions[value];
             var option;
+
+            if (customIndex === undefined && (state === ACCEPT || state === FILTER)) {
+                customIndex = that._optionsMap[value];
+            }
 
             if (customIndex !== undefined) {
                 option = that.element[0].children[customIndex];

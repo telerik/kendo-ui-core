@@ -439,4 +439,35 @@ test("MultiSelect persists selected tags on rebind", function() {
     equal(tags.children(":first").text(), "Option1");
 });
 
+test("MultiSelect unselects item on tag remove", function() {
+    populateSelect();
+    var multiselect = new MultiSelect(select, {
+        dataSource: ["foo", "bar", "baz"],
+        value: ["foo"]
+    });
+
+    multiselect.tagList.children(":first").find(".k-delete").click();
+
+    var selectedItems = multiselect.ul.children(".k-state-selected");
+
+    equal(selectedItems.length, 0);
+});
+
+test("MultiSelect removes selected item that exist in datasource from tagList (filtered)", function() {
+    populateSelect();
+    var multiselect = new MultiSelect(select, {
+        dataSource: ["foo", "bar", "baz", "item1", "item2"],
+        value: ["item1", "bar"]
+    });
+
+    multiselect.search("item");
+    multiselect.ul.children(":last").click();
+    multiselect.tagList.children(":first").find(".k-delete").click();
+
+    var tags = multiselect.tagList.children();
+
+    equal(tags.length, 2);
+    equal(tags.children(":first").text(), "bar");
+});
+
 })();
