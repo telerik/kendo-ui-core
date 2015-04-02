@@ -412,6 +412,7 @@ var __meta__ = {
 
             text[0].tabIndex = element.tabIndex;
             text[0].style.cssText = element.style.cssText;
+            text[0].title = element.title;
             text.prop("placeholder", that.options.placeholder);
 
             if (accessKey) {

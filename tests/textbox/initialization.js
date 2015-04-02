@@ -232,4 +232,11 @@
 
         equal(numerictextbox.element.val(), "0.0000001");
     });
+
+    test("NumericTextBox copies input title attribute to the visible input", function() {
+        var numerictextbox = input.attr("title", "foo").kendoNumericTextBox().data("kendoNumericTextBox");
+        var title = input.attr("title");
+
+        equal(numerictextbox.wrapper.find(".k-formatted-value").attr("title"), title);
+    });
 })();

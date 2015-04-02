@@ -710,6 +710,7 @@ var __meta__ = {
             }
 
             input[0].style.cssText = element.style.cssText;
+            input[0].title = element.title;
 
             if (element.maxLength > -1) {
                 input[0].maxLength = element.maxLength;

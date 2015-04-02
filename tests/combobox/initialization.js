@@ -422,7 +422,17 @@ test("copy input styles to the visible input", function() {
 
    equal(combobox.input.css("color"), color);
    ok(combobox.input.is(":visible"));
+});
 
+test("copy input title attribute to the visible input", function() {
+   input.attr("title", "foo").kendoComboBox();
+
+   var title = input.attr("title");
+
+   combobox = input.data("kendoComboBox");
+
+   equal(combobox.input.attr("title"), title);
+   ok(combobox.input.is(":visible"));
 });
 
 test("copy input className to the visible input", function() {

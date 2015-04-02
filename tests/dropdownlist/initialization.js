@@ -1058,4 +1058,11 @@
 
         ok(!optionLabel.hasClass("k-state-hover"));
     });
+
+    test("copy input title attribute to the visible input", function() {
+        var dropdown = input.attr("title", "foo").kendoDropDownList(["item"]).data("kendoDropDownList");
+        var title = input.attr("title");
+        
+        equal(dropdown.wrapper.attr("title"), title);
+    });
 })();

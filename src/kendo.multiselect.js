@@ -1050,6 +1050,7 @@ var __meta__ = {
             if (!wrapper[0]) {
                 wrapper = element.wrap('<div class="k-widget k-multiselect k-header" unselectable="on" />').parent();
                 wrapper[0].style.cssText = element[0].style.cssText;
+                wrapper[0].title = element[0].title;
 
                 $('<div class="k-multiselect-wrap k-floatwrap" unselectable="on" />').insertBefore(element);
             }

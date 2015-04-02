@@ -560,4 +560,12 @@
 
         multiselect.search("test");
     });
+
+    test("copy select title attribute to the visible input", function() {
+        popuplateSelect();
+        var multiselect = select.attr("title", "foo").kendoMultiSelect().data("kendoMultiSelect");
+        var title = select.attr("title");
+
+        equal(multiselect.wrapper.attr("title"), title);
+    });
 })();
