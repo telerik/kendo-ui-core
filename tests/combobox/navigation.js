@@ -395,6 +395,20 @@ test("ComboBox bind widget on UP arrow", 1, function() {
     });
 });
 
+test("ComboBox selects previous item on UP arrow", 1, function() {
+    combobox = new ComboBox(input, {
+        dataSource: ["foo", "bar", "baz"],
+        index: 2
+    });
+
+    combobox.input.focus().trigger({
+        type: "keydown",
+        keyCode: kendo.keys.UP
+    });
+
+    equal(combobox.value(), "bar");
+});
+
 test("Empty comboBox does not raise exception on navigate", 1, function() {
     combobox = new ComboBox(input, {
         dataSource: [],
