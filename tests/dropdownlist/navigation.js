@@ -155,6 +155,21 @@
         ok(dropdownlist.ul.children().eq(0).hasClass(SELECTED));
     });
 
+    test("press right arrow should allow default when filter input is focused", function() {
+        var dropdownlist = input.kendoDropDownList({
+            dataSource: data,
+            filter: "startswith"
+        }).data("kendoDropDownList");
+
+        dropdownlist.wrapper.focus();
+        dropdownlist.open();
+
+        dropdownlist.filterInput.focus().val("test");
+        dropdownlist.filterInput.press(keys.RIGHT);
+
+        ok(dropdownlist.ul.children().eq(0).hasClass(SELECTED));
+    });
+
     test("press up arrow when first item is selected should not do anything", function() {
         var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
 
@@ -384,7 +399,7 @@
         dropdownlist.popup.one("activate", function () {
             equal(document.activeElement, dropdownlist.filterInput[0]);
             start();
-        });       
+        });
     });
 
     test("DropDownList does not filter on altKey", 1, function() {
