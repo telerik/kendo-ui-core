@@ -6638,7 +6638,7 @@ A promise that will be resolved when the export completes.
 
 ### remove
 
-Fired when the user clicks the "destroy" button.
+Fired when the user performs "destroy" action.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 
