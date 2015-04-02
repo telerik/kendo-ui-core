@@ -207,6 +207,7 @@ var __meta__ = {
 
                 if (that.filterInput) {
                     that.filterInput.val("");
+                    that._prev = "";
                 }
 
                 that._filterSource();
