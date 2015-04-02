@@ -1184,6 +1184,7 @@ var __meta__ = {
             if (dataTextField) {
                 assign(dataItem, dataTextField.split("."), text);
                 assign(dataItem, this.options.dataValueField.split("."), value);
+                dataItem = new kendo.data.ObservableObject(dataItem);
             } else {
                 dataItem = text;
             }

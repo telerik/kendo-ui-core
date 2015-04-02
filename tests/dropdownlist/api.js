@@ -607,6 +607,21 @@
         equal(dropdownlist.dataItem(0), "Select...");
     });
 
+    test("dataItem() returns optionLabel data item as ObservableObject instance", function() {
+        dropdownlist = new DropDownList(input, {
+            dataSource: [
+                { item: "item1" },
+                { item: "item2" }
+            ],
+            dataTextField: "item",
+            dataValueField: "item",
+            optionLabel: "Select..."
+        });
+
+        ok(dropdownlist.dataItem() instanceof kendo.data.ObservableObject);
+        equal(JSON.stringify(dropdownlist.dataItem().toJSON()), '{"item":""}');
+    });
+
     test("DropDownList re-binds on dataSource.data([])", function() {
         dropdownlist = new DropDownList(input, ["item1", "item2"]);
 
