@@ -61,8 +61,7 @@
         }, 100);
     });
 
-    //TODO: Fix this
-    /*ngTest("ng delay works with an assigned kmodel", 2, function(){
+    ngTest("ng delay works with an assigned kmodel", 2, function(){
         angular.module('kendo.tests').controller('mine', function($scope) {
             $scope.productsDataSource = new kendo.data.ObservableArray([
               { ProductID: 1, ProductName: "ProductName1" },
@@ -94,7 +93,7 @@
             ok(QUnit.fixture.find("select").getKendoDropDownList());
             equal(QUnit.fixture.find("select").getKendoDropDownList().value(), 3);
         }, 100);
-    });*/
+    });
 
     ngTest("ng delay will not delay if value is set", 1, function(){
         angular.module('kendo.tests').controller('mine', function($scope) {
