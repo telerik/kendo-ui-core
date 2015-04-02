@@ -1121,6 +1121,7 @@ var __meta__ = {
             if (!wrapper.is("span.k-widget")) {
                 wrapper = element.wrap("<span />").parent();
                 wrapper[0].style.cssText = DOMelement.style.cssText;
+                wrapper[0].title = DOMelement.title;
             }
 
             element.hide();
