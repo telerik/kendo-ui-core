@@ -355,6 +355,7 @@ var __meta__ = {
                 if (!listView.value().length) {
                     if (initialIndex !== null && initialIndex > -1) {
                         that.select(initialIndex);
+                        focusedItem = listView.focus();
                     } else if (that._accessor()) {
                         listView.value(that._accessor());
                     }
