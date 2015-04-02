@@ -401,10 +401,6 @@ var __meta__ = {
 
         _listChange: function() {
             this._selectValue(this.listView.selectedDataItems()[0]);
-
-            if (this._old && this._oldIndex === -1) {
-                this._oldIndex = this.selectedIndex;
-            }
         },
 
         _get: function(candidate) {
