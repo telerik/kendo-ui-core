@@ -471,4 +471,18 @@
         });
     });
 
+    asyncTest("group header is hidden when type: flat", 1, function() {
+        QUnit.fixture.empty();
+        container = $("<div id='hidden' style='display: none;'><div id='container'></div></div>").appendTo(QUnit.fixture);
+
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            height: 500
+        }));
+
+        asyncDataSource.read().then(function() {
+            start();
+            ok(virtualList.header.is(":hidden"));
+        });
+    });
+
 })();

@@ -826,6 +826,12 @@ var __meta__ = {
             that._setHeight(options.itemHeight * dataSource.total());
             that.options.type = !!dataSource.group().length ? "group" : "flat";
 
+            if (that.options.type === "flat") {
+                that.header.hide();
+            } else {
+                that.header.show();
+            }
+
             that.getter = that._getter(function() {
                 that._renderItems(true);
             });
