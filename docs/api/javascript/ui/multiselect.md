@@ -1116,15 +1116,15 @@ Defines the whether to open/close the drop-down list.
 
 ### value
 
-Gets or sets the value of the MultiSelect. Accepts <i>string</i> value or <i>Array of strings</i>.
+Gets or sets the value of the MultiSelect.
 
-> **Important:** If no items, value method will pre-fetch the data before continue with the value setting.
+> **Important:** If there are no items, the value method will pre-fetch the data before continue with the value setting.
 
 #### Parameters
 
 ##### value `Array|String`
 
-The value to set.
+The value to set. A *String* value or an *Array of strings* is accepted. To clear the value, pass an empty array.
 
 #### Returns
 
