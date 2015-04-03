@@ -1,12 +1,12 @@
 ---
-title: Global events in Angular-Kendo
+title: Global Kendo UI events in AngularJS
 ---
 
 {% raw %}
 
-# Global events in Angular-Kendo
+# Global Kendo UI events in AngularJS
 
-Angular-Kendo emits a `"kendoWidgetCreated"` event for each widget which is created, and a `"kendoRendered"` event after all widgets defined in the page were created.
+The Kendo UI directives emit a `"kendoWidgetCreated"` event for each widget which is created, and a `"kendoRendered"` event after all widgets defined in the page were created.
 
 ## `kendoWidgetCreated`
 
