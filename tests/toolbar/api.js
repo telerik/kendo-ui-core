@@ -284,4 +284,16 @@
         ok($("#foo_overflow").hasClass("k-state-active"));
     });
 
+    test("Hide method hides an item", 2, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", id: "foo", text: "foo" },
+                { type: "button", id: "bar", text: "bar" }
+            ]
+        }).data("kendoToolBar");
+
+        toolbar.hide("#foo");
+        ok($("#foo").hasClass("k-state-hidden"));
+        ok($("#foo").is(":hidden"));
+    });
 })();

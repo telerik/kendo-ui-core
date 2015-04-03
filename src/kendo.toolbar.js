@@ -29,6 +29,7 @@ var __meta__ = {
         RESIZABLE_TOOLBAR = "k-toolbar-resizable",
         STATE_ACTIVE = "k-state-active",
         STATE_DISABLED = "k-state-disabled",
+        STATE_HIDDEN = "k-state-hidden",
         GROUP_START = "k-group-start",
         GROUP_END = "k-group-end",
         PRIMARY = "k-primary",
@@ -642,16 +643,16 @@ var __meta__ = {
                 }
             },
 
-            remove: function(element) {
+            _getItem: function(candidate) {
                 var toolbarElement,
                     overflowElement,
                     isResizable = this.options.resizable,
                     type, uid;
 
-                toolbarElement = this.element.find(element);
+                toolbarElement = this.element.find(candidate);
 
-                if (isResizable) {
-                    overflowElement = this.popup.element.find(element);
+                if (!toolbarElement.length && isResizable) {
+                    overflowElement = this.popup.element.find(candidate);
                 }
 
                 if (toolbarElement.length) {
@@ -676,12 +677,31 @@ var __meta__ = {
                     toolbarElement = this.element.find("div." + SPLIT_BUTTON + "[" + KENDO_UID_ATTR + "='" + uid + "']");
                 }
 
-                if (type === "splitButton" && toolbarElement.data("kendoPopup")) {
-                    toolbarElement.data("kendoPopup").destroy();
+                return {
+                    type: type,
+                    toolbar: toolbarElement,
+                    overflow: overflowElement
+                };
+            },
+
+            remove: function(candidate) {
+                var item = this._getItem(candidate);
+
+                if (item.type === "splitButton" && item.toolbar.data("kendoPopup")) {
+                    item.toolbar.data("kendoPopup").destroy();
                 }
 
-                toolbarElement.remove();
-                overflowElement.remove();
+                item.toolbar.remove();
+                item.overflow.remove();
+            },
+
+            hide: function(candidate) {
+                var item = this._getItem(candidate);
+
+                item.toolbar.addClass(STATE_HIDDEN).hide();
+                item.overflow.addClass(STATE_HIDDEN).hide();
+
+                this.resize(true);
             },
 
             enable: function(element, enable) {
@@ -913,7 +933,7 @@ var __meta__ = {
             _childrenWidth: function() {
                 var childrenWidth = 0;
 
-                this.element.children(":visible").each(function() {
+                this.element.children(":visible:not('." + STATE_HIDDEN + "')").each(function() {
                     childrenWidth += $(this).outerWidth(true);
                 });
 
@@ -943,7 +963,7 @@ var __meta__ = {
                     hiddenCommands;
 
                 if (containerWidth > this._childrenWidth()) {
-                    hiddenCommands = this.element.children(":hidden");
+                    hiddenCommands = this.element.children(":hidden:not('." + STATE_HIDDEN + "')");
 
                     for (var i = 0; i < hiddenCommands.length ; i++) {
                         commandElement = hiddenCommands.eq(i);
