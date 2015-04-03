@@ -11,6 +11,7 @@
             $.fn.press = function(key) {
                 return this.trigger({ type: "keydown", keyCode: key } );
             };
+
             input = $("<input />").appendTo(QUnit.fixture);
         },
         teardown: function() {
@@ -782,5 +783,25 @@
 
         equal(current.index(), 0);
         ok(current.hasClass("k-state-selected"));
+    });
+
+    test("DropDownList does not focus filter input if mobile device", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            animation: false,
+            dataSource: data,
+            filter: "contains"
+        });
+
+        var filterInput = dropdownlist.filterInput;
+
+        kendo.support.mobileOS = true;
+        kendo.support.touch = true;
+
+        dropdownlist.wrapper.focus().click();
+
+        notEqual(filterInput[0], document.activeElement);
+
+        kendo.support.mobileOS = false;
+        kendo.support.touch = false;
     });
 })();
