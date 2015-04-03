@@ -173,7 +173,7 @@ var __meta__ = {
         element.toggleClass(SELECTED, data.selected);
         element.toggleClass("k-first", data.newGroup);
 
-        if (data.newGroup) {
+        if (data.index !== 0 && data.newGroup) {
             $("<div class=" + GROUPITEM + "></div>")
                 .appendTo(element)
                 .html(templates.groupTemplate({ group: data.group }));

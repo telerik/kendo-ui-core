@@ -80,6 +80,15 @@
         equal(virtualList.wrapper.find(".k-group-header").length, 1);
     });
 
+    asyncTest("does not render item level group label for the first item (offset index 0)", 1, function() {
+        var virtualList = new VirtualList(container, virtualSettings);
+
+        asyncDataSource.read().then(function() {
+            start();
+            equal(virtualList.items().first().find(".k-group").length, 0);
+        });
+    });
+
     //dataBinding
 
     asyncTest("detects that the dataSource is grouped", 1, function() {
