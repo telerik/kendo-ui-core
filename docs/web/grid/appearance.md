@@ -280,6 +280,9 @@ The above ensures that at least one non-locked column is always visible and hori
 
 Row template and detail features are not supported in combination with column locking.
 
+Frozen columns cannot be touch-scrolled, because they are wrapped in a container with an `overflow:hidden` style.
+This limitation is worked around on desktop devices with the help of the mousewheel event, but it does not exist on touch devices.
+
 > The [Grid API](/api/javascript/ui/grid) allows columns to be locked and unlocked on the fly.
 However, this is possible only if at least one column is locked initially during initialization.
 The HTML output and script behavior of the Grid are very different when frozen columns are used,
