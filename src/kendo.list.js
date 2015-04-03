@@ -1699,9 +1699,10 @@ var __meta__ = {
             var item = '<li tabindex="-1" role="option" unselectable="on" class="k-item';
 
             var dataItem = context.item;
+            var notFirstItem = context.index !== 0;
             var found = this._filtered && this._dataItemPosition(dataItem, values) !== -1;
 
-            if (context.newGroup) {
+            if (notFirstItem && context.newGroup) {
                 item += ' k-first';
             }
 
@@ -1713,7 +1714,7 @@ var __meta__ = {
 
             item += this.templates.template(dataItem);
 
-            if (context.newGroup) {
+            if (notFirstItem && context.newGroup) {
                 item += '<div class="k-group">' + this.templates.groupTemplate(context.group) + '</div>';
             }
 

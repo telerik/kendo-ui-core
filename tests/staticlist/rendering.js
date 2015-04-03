@@ -106,7 +106,7 @@
 
         var children = element.children();
 
-        ok(children.eq(0).children(".k-group")[0]);
+        ok(!children.eq(0).children(".k-group")[0]);
         ok(!children.eq(1).children(".k-group")[0]);
         ok(children.eq(2).children(".k-group")[0]);
     });
@@ -130,9 +130,33 @@
 
         var children = element.children();
 
-        ok(children.eq(0).hasClass("k-first"));
+        ok(!children.eq(0).hasClass("k-first"));
         ok(!children.eq(1).hasClass("k-first"));
         ok(children.eq(2).hasClass("k-first"));
+    });
+
+    test("kendoStaticList renders fixed grouped header", function() {
+        var list = new StaticList(element, {
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "a" },
+                    { name: "item3", type: "b" }
+                ],
+                group: "type"
+            },
+            template: '#:data.name#',
+            groupTemplate: '#:data#',
+            fixedGroupTemplate: '#:data#'
+        });
+
+        list.dataSource.read();
+
+        var header = list.header;
+
+        equal(header.html(), "a");
+        ok(!header[0].style.display);
     });
 
     test("kendoStaticList renders fixed grouped header", function() {
@@ -279,7 +303,7 @@
 
         var children = element.children();
 
-        equal(children.eq(0).attr("class"), "k-item k-first k-state-selected");
+        equal(children.eq(0).attr("class"), "k-item k-state-selected");
         equal(children.eq(1).attr("class"), "k-item");
         equal(children.eq(2).attr("class"), "k-item k-first k-state-focused k-state-selected");
     });
