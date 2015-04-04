@@ -381,8 +381,14 @@ var __meta__ = {
                 value = "";
             }
 
+            that._initialIndex = null;
+
             that.listView.value(value.toString()).done(function() {
                 that._triggerCascade();
+
+                if (that.selectedIndex === -1 && that.text()) {
+                    that.text("");
+                }
 
                 that._old = that._accessor();
                 that._oldIndex = that.selectedIndex;

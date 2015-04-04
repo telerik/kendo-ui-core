@@ -561,6 +561,33 @@
         equal(dropdownlist.value(), "Bar");
     });
 
+    test("value method resets default selected index (input)", function() {
+        dropdownlist = new DropDownList(input, {
+            dataSource: ["foo", "bar", "baz"],
+            autoBind: false
+        });
+
+        dropdownlist.value("");
+
+        equal(dropdownlist.value(), "");
+        equal(dropdownlist.text(), "");
+        equal(dropdownlist.selectedIndex, -1);
+    });
+
+    test("value method resets default selected index (select)", function() {
+        var select = $("<select><option value=''>Chai</option><option>Bar</option></select>").appendTo(QUnit.fixture);
+
+        dropdownlist = new DropDownList(select, {
+            autoBind: false
+        });
+
+        dropdownlist.value("");
+
+        equal(dropdownlist.value(), "");
+        equal(dropdownlist.text(), "");
+        equal(dropdownlist.selectedIndex, -1);
+    });
+
     test("dataItem() returns dataItem of the selected LI on init", function() {
         var select = $("<select><option value=''>Chai</option><option>Bar</option></select>").appendTo(QUnit.fixture);
         dropdownlist = new DropDownList(select);
