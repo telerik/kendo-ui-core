@@ -451,7 +451,7 @@ var __meta__ = {
 
         _calculateGroupPadding: function(height) {
             var ul = this.ul;
-            var li = $(ul[0].firstChild);
+            var li = ul.children(".k-first:first");
             var groupHeader = ul.prev(".k-group-header");
             var padding = 0;
 
