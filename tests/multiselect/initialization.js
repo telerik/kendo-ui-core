@@ -255,7 +255,7 @@
 
         var padding = multiselect.list.find(".k-group-header").css("padding-right");
 
-        ok(parseFloat(padding) > 15);
+        ok(parseFloat(padding) >= kendo.support.scrollbar());
     });
 
     test("MultiSelect does not add scrollbar width to the fixed group header padding if popup has not scroll", function() {
