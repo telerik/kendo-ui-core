@@ -550,6 +550,23 @@ withAngularTests("Angular (UI Core)", function(runTest){
         });
     });
 
+    runTest("Widget respects k-ng-disabled attribue when set as expression", function(dom, $scope){
+
+        $scope.disabled = false;
+
+         $("<div>" +
+          "<button kendo-button='kb' k-ng-disabled='!disabled'></button>" +
+          "</div>").appendTo(dom);
+
+		expect(1);
+        $scope.whenRendered(function(){
+            var disabled = $scope.kb.element.prop("disabled");
+            equal(!disabled, $scope.disabled);
+            start();
+        });
+    });
+
+
     runTest("Widget respects k-ng-disabled attribue change to true", function(dom, $scope){
         $scope.options = {
                     dataSource: {
