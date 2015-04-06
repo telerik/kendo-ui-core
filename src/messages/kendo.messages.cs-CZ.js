@@ -313,7 +313,9 @@ kendo.ui.Scheduler.prototype.options.messages =
 $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "allDay": "celý den",
   "cancel": "Zrušit",
-  "confirmation": "Opravdu chcete smazat tuto událost?",
+  "editable": {
+    "confirmation": "Opravdu chcete smazat tuto událost?"
+  },
   "date": "Datum",
   "destroy": "Smazat",
   "editor": {

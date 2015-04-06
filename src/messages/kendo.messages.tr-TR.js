@@ -298,7 +298,9 @@ kendo.ui.Scheduler.prototype.options.messages =
 $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "allDay": "Tüm gün",
   "cancel": "İptal Et",
-  "confirmation": "Bu etkinliği silmek istediğinizden emin misiniz?",
+  "editable": {
+    "confirmation": "Bu etkinliği silmek istediğinizden emin misiniz?"
+  },
   "date": "Tarih",
   "deleteWindowTitle": "Etkinliği sil",
   "destroy": "Sil",
