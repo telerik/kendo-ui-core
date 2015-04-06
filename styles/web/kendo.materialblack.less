@@ -1336,6 +1336,26 @@ div.k-scheduler-marquee:after {
     color: @secondary-text-color;
 }
 
+.k-virtual-item.k-first,
+.k-group-header + .k-list > .k-item.k-first,
+.k-static-header + .k-list > .k-item.k-first
+{
+    border-top-color: @alt-background-color;
+}
+
+.k-popup > .k-group-header,
+.k-popup > .k-virtual-wrap > .k-group-header
+{
+    background: @alt-background-color;
+    color: @widget-text-color;
+}
+
+.k-popup .k-item > .k-group
+{
+    background: @alt-background-color;
+    color: @widget-text-color;
+}
+
 /* Responsive styles */
 
 @media only screen and (max-width: 1024px) {
