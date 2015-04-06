@@ -1499,7 +1499,6 @@ var __meta__ = {
                 }
 
                 that._setValueInRange(round(selectionStartValue), round(selectionEndValue));
-                // that._setValueInRange(selectionStartValue, selectionEndValue);
 
                 dragSelectionStart = Math.max(selectionStartValue, that.options.selectionStart);
                 dragSelectionEnd = Math.min(selectionEndValue, that.options.selectionEnd);
