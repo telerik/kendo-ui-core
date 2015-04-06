@@ -756,7 +756,21 @@ html .km-pane-wrapper .k-header
 .k-group-header + .k-list > .k-item.k-first,
 .k-static-header + .k-list > .k-item.k-first
 {
-    border-top-color: @disabled-text-color;
+    border-top-color: @hover-border-color;
+}
+
+.k-popup > .k-group-header,
+.k-popup > .k-virtual-wrap > .k-group-header
+{
+    background: @hover-border-color;
+    color: @selected-text-color;
+}
+
+.k-popup .k-item > .k-group
+{
+    background: @hover-border-color;
+    color: @selected-text-color;
+    border-bottom-left-radius: @inner-border-radius;
 }
 
 .k-marquee-text
