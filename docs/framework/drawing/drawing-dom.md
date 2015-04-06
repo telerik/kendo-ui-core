@@ -233,6 +233,51 @@ In such case, the DOM renderer will create a clone of the element (in order to b
 Images are safe to add here.
 
 
+### Dimensions and CSS units for PDF output
+
+If you target PDF output, the only unit which is safe to use in CSS is `px`.
+Using `cm`, `in`, `mm`, `pt` etc. will have unpredictable results.  This
+section explains this counter-intuitive fact.
+
+In order to draw the DOM, we inspect the computed styles of the elements,
+and at that stage all dimensions are converted to pixels.  For example,
+let's look at a `<div style='width: 1cm'>` — assuming correct display DPI
+setting, this element should be rendered by the browser *on screen* such
+that it will be `1cm` wide.  When we query the width in its computed style,
+however, we get back `37.78125px` (it may vary depending on the display).
+
+For simplicity, and since computed style yields back pixels, the PDF
+generator keeps a 1:1 mapping between screen pixels and the default PDF
+unit, which is the
+[typographic point](http://en.wikipedia.org/wiki/Point_%28typography%29)
+(`pt`).  This means that the same element will be rendered into PDF with a
+length of `37.78125pt`.  Here are the conversion rules for these units:
+
+- `1 pt = 1/72 in` (points to inches)
+- `1 in = 2.54 cm` (inches to centimeters)
+
+If we put them together, we get:
+
+```
+37.78125 pt = 37.78125/72 in
+            = 2.54 * 37.78125/72 cm
+            = 1.33 cm
+```
+
+So we specified we want 1 cm but the actual size on PDF will be 1.33 cm —
+quite a difference.
+
+In conclusion, in order to get predictable layout in PDF you must use pixels
+for all your dimensions.  Use the following rules to calculate the values:
+
+- `N cm = N * 72/2.54 px`
+- `N in = N * 72 px`
+
+An exception to this is the `paperSize` and `margin` options that you pass
+to `drawDOM` — it is safe to use any units there, since they have nothing to
+do with CSS or display resolution.
+
+
 ### Known limitations
 
 - no rendering of shadow DOM
