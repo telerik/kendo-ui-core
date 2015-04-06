@@ -18,6 +18,59 @@ function newRangeSlider(options, newDiv) {
     return new RangeSlider((newDiv || div).appendTo(QUnit.fixture)[0], options);
 }
 
+test('range slider should properly round decimals in the change event when using the keyboard', function () {
+    var upArrow = "38", // up arrow
+        downArrow = "40", // down arrow
+        value = 0,
+        rangeSlider = newRangeSlider({ tooltip: { enabled: false }, selectionStart: 0, selectionEnd: 6, smallStep: 0.1, largeStep: 1, min: 0, max: 6 }),
+        dragHandles = rangeSlider.wrapper.find(".k-draghandle");
+
+        
+    rangeSlider.bind("change", function(e){
+        value = e.value;
+    });
+    //left drag handle
+    dragHandles.eq(0).focus().trigger({ type: "keydown",
+        keyCode: upArrow,
+        preventDefault: function () {
+            isDefaultPrevent = true;
+        }
+    });
+
+    ok(isDefaultPrevent);
+    deepEqual(value, [ 0.1, 6 ]);
+
+    dragHandles.eq(0).focus().trigger({ type: "keydown",
+        keyCode: upArrow,
+        preventDefault: function () {
+            isDefaultPrevent = true;
+        }
+    });
+
+    ok(isDefaultPrevent);
+    deepEqual(value, [ 0.2, 6 ]);
+
+    dragHandles.eq(0).focus().trigger({ type: "keydown",
+        keyCode: upArrow,
+        preventDefault: function () {
+            isDefaultPrevent = true;
+        }
+    });
+
+    ok(isDefaultPrevent);
+    deepEqual(value, [ 0.3, 6 ]);
+    
+    dragHandles.eq(0).focus().trigger({ type: "keydown",
+        keyCode: upArrow,
+        preventDefault: function () { 
+            isDefaultPrevent = true;
+        }
+    });
+
+    ok(isDefaultPrevent);
+    deepEqual(value, [ 0.4, 6 ]);
+});
+
 test('range slider should decrease value with a small step when down and left arrow keyboard is clicked', function () {
     var downArrow = "40"; // down arrow
         leftArrow = "37", // left arrow
