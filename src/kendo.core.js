@@ -3992,16 +3992,12 @@ function pad(number, digits, end) {
         return start;
     };
 
-    kendo.compileMobileDirective = function(element, scopeSetup) {
+    kendo.compileMobileDirective = function(element, scope) {
         var angular = window.angular;
 
         element.attr("data-" + kendo.ns + "role", element[0].tagName.toLowerCase().replace('kendo-mobile-', '').replace('-', ''));
 
         angular.element(element).injector().invoke(["$compile", function($compile) {
-            var scope = angular.element(element).scope();
-            if (scopeSetup) {
-                scopeSetup(scope);
-            }
             $compile(element)(scope);
 
             if (!/^\$(digest|apply)$/.test(scope.$$phase)) {
