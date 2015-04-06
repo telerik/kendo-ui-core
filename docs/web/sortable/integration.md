@@ -25,12 +25,27 @@ The Sortable widget should be initialized on the Grid's [`table element`](../../
 In the general case, the `filter` property of the Sortable widget should select all `tr` elements that are direct children of the table's `tbody` element. For example: `filter: ">tbody >tr"`.
 
 **If the Grid's editing is enabled**, you should use a more specific filter selector that excludes the item that is currently in edit mode.
-For example `.filter(">tbody >tr:not(.k-grid-edit-row)"`. In this way the Sortable functionality will not interfere with Grid's editing feature.
+For example `.filter(">tbody >tr:not(.k-grid-edit-rowa)")`. In this way the Sortable functionality will not interfere with Grid's editing feature.
 
 **If the Grid is configured to display details**, you should use a selector that matches only the master Grid rows. For example: `filter: ">tbody >tr.k-master-row"`.
 In this way the detail rows will not be draggable.
 
 For more information check the [Sortable events](../../../api/web/sortable#events) and the [Grid/Sortable integration demo](http://demos.telerik.com/kendo-ui/web/sortable/integration-grid.html).
+
+## Sortable with editing
+
+In order the draggable functionality to work we prevent the mouse down event.
+This causes the editor input to not fire its change event which in turns prevents the MVVM from saving the updated value.
+
+In case you use `inline` or `popup` editing mode you should set a more specific filter that excludes the item that is currently in edit mode.
+
+    .filter(">tbody >tr:not(.k-grid-edit-rowa)")
+
+The above will **not work** in case you use **`batch`/`incell` editing** mode.
+In such case the solution is to use [custom editors](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.editor) and configure them to [update when the input event fires](http://docs.telerik.com/kendo-ui/framework/mvvm/bindings/value#controlling-when-the-view-model-is-updated) (by default framework listens for the change event).
+To do that you should add `data-value-update="input"` attribute to the editor inputs. The downside of this approach is that the input event will not work for old IE browsers.
+
+> Widgets do not support `data-value-update` attribute! The `data-value-update` approach **will work with regular inputs but not widgets**. You should update the widget manually.
 
 ## Reorder the items in the DataSource
 
