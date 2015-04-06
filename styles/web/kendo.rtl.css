@@ -79,6 +79,22 @@
     padding-left: 22px;
 }
 
+.k-rtl.k-popup .k-item > .k-group {
+    right: auto;
+    left: 0;
+}
+
+.k-rtl.k-popup .k-state-hover > .k-group {
+    right: auto;
+    left: -1px;
+}
+
+.k-rtl.k-popup > .k-group-header,
+.k-rtl.k-popup > .k-virtual-wrap > .k-group-header
+{
+    text-align: left;
+}
+
 /* Calendar */
 
 .k-rtl .k-widget.k-calendar .k-nav-prev { left: auto; right: 1%; }
