@@ -439,7 +439,9 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "deleteWindowTitle": "Eliminar evento",
   "ariaSlotLabel": "Selecionado entre {0:t} e {1:t}",
   "ariaEventLabel": "{0} em {1:D} às {2:t}",
-  "confirmation": "Tem a certeza que quer eliminar este evento?",
+  "editable": {
+    "confirmation": "Tem a certeza que quer eliminar este evento?"
+  },
   "views": {
     "day": "Dia",
     "week": "Semana",

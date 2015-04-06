@@ -439,7 +439,9 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "deleteWindowTitle": "Delete event",
   "ariaSlotLabel": "Selected from {0:t} to {1:t}",
   "ariaEventLabel": "{0} on {1:D} at {2:t}",
-  "confirmation": "Are you sure you want to delete this event?",
+  "editable": {
+    "confirmation": "Are you sure you want to delete this event?"
+  },
   "views": {
     "day": "Day",
     "week": "Week",
@@ -530,6 +532,7 @@ $.extend(true, kendo.ui.Validator.prototype.options.messages,{
   "step": "{0} is not valid",
   "email": "{0} is not valid email",
   "url": "{0} is not valid URL",
-  "date": "{0} is not valid date"
+  "date": "{0} is not valid date",
+  "dateCompare": "End date should be greater than or equal to the start date"
 });
 }

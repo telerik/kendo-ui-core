@@ -302,7 +302,9 @@ kendo.ui.Scheduler.prototype.options.messages =
 $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "allDay": "all day",
   "cancel": "Скасувати",
-  "confirmation": "Are you sure you want to delete this event?",
+  "editable": {
+    "confirmation": "Are you sure you want to delete this event?"
+  },
   "date": "Date",
   "destroy": "Delete",
   "editor": {

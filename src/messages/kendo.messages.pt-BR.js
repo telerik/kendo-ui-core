@@ -293,7 +293,9 @@ kendo.ui.Scheduler.prototype.options.messages =
 $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "allDay": "dia inteiro",
   "cancel": "Cancelar",
-  "confirmation": "Tem certeza que deseja excluir este evento?",
+  "editable": {
+    "confirmation": "Tem certeza que deseja excluir este evento?"
+  },
   "date": "Data",
   "deleteWindowTitle": "Excluir evento",
   "destroy": "Excluir",

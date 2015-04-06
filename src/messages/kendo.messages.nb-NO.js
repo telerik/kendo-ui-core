@@ -315,7 +315,9 @@ if (kendo.ui.Scheduler) {
     $.extend(true, kendo.ui.Scheduler.prototype.options.messages, {
         "allDay": "hele dagen",
         "cancel": "Avbryt",
-        "confirmation": "Er du sikker på at du vil slette denne oppgaven?",
+        "editable": {
+            "confirmation": "Er du sikker på at du vil slette denne oppgaven?"
+        },
         "date": "Dato",
         "destroy": "Slett",
         "editor": {

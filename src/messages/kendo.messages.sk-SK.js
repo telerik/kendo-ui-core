@@ -451,7 +451,9 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "deleteWindowTitle": "Odstránenie udalosti",
   "ariaSlotLabel": "Vybraté od {0:t} do {1:t}",
   "ariaEventLabel": "{0} dňa {1:D} o {2:t}",
-  "confirmation": "Naozaj chcete odstrániť túto udalosť?",
+  "editable": {
+    "confirmation": "Naozaj chcete odstrániť túto udalosť?"
+  },
   "views": {
     "day": "Deň",
     "week": "Týždeň",

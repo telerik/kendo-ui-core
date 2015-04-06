@@ -328,9 +328,11 @@ kendo.ui.Scheduler.prototype.options.messages =
 $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "allDay": "Ganzer Tag",
   "cancel": "Abbrechen",
-  "confirmation": "Möchten Sie diesen Termin wirklich löschen?",
   "date": "Datum",
   "destroy": "Löschen",
+  "editable": {
+    "confirmation": "Möchten Sie diesen Termin wirklich löschen?"
+  },
   "editor": {
     "allDayEvent": "Ganztägiger Termin",
     "description": "Beschreibung",
