@@ -342,6 +342,12 @@ var ngTestModule = $.noop, ngTest = $.noop, ngScope;
 
     var app = angular.module('kendo.tests', [ 'kendo.directives' ]);
 
+    /*
+    app.config(['$compileProvider', function($compileProvider) {
+        $compileProvider.debugInfoEnabled(false);
+    }]);
+    */
+
     ngTestModule = function(name, config) {
         if (!config) {
             config = {};
