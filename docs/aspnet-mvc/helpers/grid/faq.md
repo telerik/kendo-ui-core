@@ -407,7 +407,7 @@ the `error` event of the DataSource will be raised.
 
 The Kendo Grid for ASP.NET MVC uses `Html.EditorForModel` to create the editing form. That method relies on ASP.NET MVC editor templates. To create a custom editor template
 you should create a partial view under the **~/Views/Shared/EditorTemplates** folder and specify it via the `UIHint` attribute. The [Custom Object Templates](http://bradwilson.typepad.com/blog/2009/10/aspnet-mvc-2-templates-part-4-custom-object-templates.html)
-blog post contains a lot of information about creating a custom editor template. The [Custom Popup Editor](http://www.telerik.com/support/code-library/aspnet-mvc/custom-popup-editor) code library project contains a ready-to-run project.
+blog post contains a lot of information about creating a custom editor template. The [Custom Popup Editor](http://docs.telerik.com/kendo-ui/aspnet-mvc/helpers/grid/how-to/editing/custom-popup-editor) code library project contains a ready-to-run project.
 
 > **Important**: `Html.EditorForModel` is used only in popup edit mode. In-cell and in-line edit modes use `Html.EditorFor` and pass the expression used to declare the bound column e.g. `Html.EditorFor(o => o.OrderDate)`
 
