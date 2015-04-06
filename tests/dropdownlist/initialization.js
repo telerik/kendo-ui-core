@@ -1062,7 +1062,27 @@
     test("copy input title attribute to the visible input", function() {
         var dropdown = input.attr("title", "foo").kendoDropDownList(["item"]).data("kendoDropDownList");
         var title = input.attr("title");
-        
+
         equal(dropdown.wrapper.attr("title"), title);
+    });
+
+    test("DropDownList displays optionLabel when autoBind: false and text is not defined", function() {
+        var data = [
+            { text: "Black", value: "1" },
+            { text: "Orange", value: "2" },
+            { text: "Grey", value: "3" }
+        ];
+
+        var optionLabel = "Select color...";
+
+        var dropdownlist = input.val("0").kendoDropDownList({
+            autoBind: false,
+            optionLabel: optionLabel,
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: data
+        }).data("kendoDropDownList");
+
+        equal(dropdownlist.text(), optionLabel);
     });
 })();
