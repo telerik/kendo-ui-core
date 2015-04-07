@@ -184,6 +184,86 @@
         });
     });
 
+    asyncTest("adds k-state-hover class on mouseenter", 1, function() {
+        var virtualList = new VirtualList(container, virtualSettings);
+
+        asyncDataSource.read().then(function() {
+            start();
+            var element = virtualList.items().first();
+            element.trigger("mouseover");
+            ok(element.hasClass("k-state-hover"));
+        });
+    });
+
+    asyncTest("render k-loading-item class to placeholder element", 1, function() {
+        var requestTimeout = 100;
+
+        asyncDataSource = createAsyncDataSource({
+            transport: {
+                read: function(options) {
+                    setTimeout(function() {
+                        options.success({ data: generateData(options.data), total: 1000 });
+                    }, requestTimeout);
+                }
+            }
+        });
+
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            dataSource: asyncDataSource,
+            listScreens: 4,
+            itemHeight: 20
+        }));
+
+        asyncDataSource.read().then(function() {
+            start();
+
+            scroll(virtualList.content, 3 * CONTAINER_HEIGHT + 60);
+
+            var li = virtualList.element
+                                .children()
+                                .filter(function() {
+                                    return $(this).position().top >= 0;
+                                }).first();
+
+            ok(li.hasClass("k-loading-item"));
+        });
+    });
+
+    asyncTest("widget does not show hover state on loading item hover", 1, function() {
+        var requestTimeout = 100;
+
+        asyncDataSource = createAsyncDataSource({
+            transport: {
+                read: function(options) {
+                    setTimeout(function() {
+                        options.success({ data: generateData(options.data), total: 1000 });
+                    }, requestTimeout);
+                }
+            }
+        });
+
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            dataSource: asyncDataSource,
+            listScreens: 4,
+            itemHeight: 20
+        }));
+
+        asyncDataSource.read().then(function() {
+            start();
+
+            scroll(virtualList.content, 3 * CONTAINER_HEIGHT + 60);
+
+            var li = virtualList.element
+                                .children()
+                                .filter(function() {
+                                    return $(this).position().top >= 0;
+                                }).first();
+
+            li.trigger("mouseover");
+            ok(!li.hasClass("k-state-hover"));
+        });
+    });
+
     //dataBinding
 
     asyncTest("reads the dataSource (autoBind: true by default)", 1, function() {
