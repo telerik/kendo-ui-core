@@ -259,7 +259,7 @@ test("AutoComplete creates loading element", function() {
 
     ok(autocomplete._loading);
 });
-
+/*
 asyncTest("AutoComplete shows loading icon on progress", 1, function() {
     var autocomplete = new AutoComplete(input);
 
@@ -283,7 +283,7 @@ asyncTest("AutoComplete hides loading icon on dataSource change", 1, function() 
         start();
     }, 200);
 });
-
+*/
 test("AutoComplete sets ignoreCase option to false", function() {
     var autocomplete = new AutoComplete(input, {
         dataTextField: "ID",

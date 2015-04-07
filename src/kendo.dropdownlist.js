@@ -81,6 +81,7 @@ var __meta__ = {
             that._mobile();
 
             that._dataSource();
+
             that._ignoreCase();
 
             that._filterHeader();
@@ -482,7 +483,6 @@ var __meta__ = {
                 }
             }
 
-            that._hideBusy();
             that._makeUnselectable();
 
             if (!filtered) {

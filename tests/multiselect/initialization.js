@@ -310,7 +310,7 @@
 
        ok(select.data("kendoMultiSelect").input.attr("disabled"));
     });
-
+/*
     asyncTest("MultiSelect shows loading icon on progress", function() {
         popuplateSelect();
         var multiselect = new MultiSelect(select);
@@ -335,7 +335,7 @@
             start();
         }, 200);
     });
-
+*/
     asyncTest("form reset support", 2, function() {
         popuplateSelect();
 

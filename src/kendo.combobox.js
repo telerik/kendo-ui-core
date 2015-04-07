@@ -348,7 +348,6 @@ var __meta__ = {
                 }
             }
 
-            that._hideBusy();
             that._makeUnselectable();
 
             if (!filtered && !that._fetch) {
@@ -680,8 +679,6 @@ var __meta__ = {
             if (this.options.highlightFirst && !word) {
                 this.listView.first();
             }
-
-            that._hideBusy();
         },
 
         _input: function() {

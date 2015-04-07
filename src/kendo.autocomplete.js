@@ -461,7 +461,6 @@ var __meta__ = {
             }
 
             that._makeUnselectable();
-            that._hideBusy();
 
             that.trigger("dataBound");
         },
