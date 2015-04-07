@@ -641,13 +641,6 @@ border-color: @selected-background-color;
 	.box-shadow(none);
 }
 
-.k-list>.k-state-hover,
-.k-list>.k-state-selected.k-state-hover
-{
-background-color: @hover-background-color;
-border-color: @hover-background-color;
-}
-
 .k-list-container
 {
 border-color: @form-widgets-border-color;
@@ -1216,8 +1209,8 @@ table.k-editor {
 
 .k-list > .k-state-hover {
 	color: @widget-text-color;
-	background-color: @hover-background-color;
-	border-color: @hover-background-color;
+	background-color: @select-hover-background-color;
+    border-color: @select-hover-background-color;
 	.box-shadow(none);
 	cursor: pointer;
 }
