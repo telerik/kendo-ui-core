@@ -205,7 +205,7 @@ var __meta__ = {
             options = that.options;
 
             that.element.addClass(LIST + " " + VIRTUALLIST).attr("role", "listbox");
-            that.content = that.element.wrap("<div class='" + CONTENT + "'></div>").parent();
+            that.content = that.element.wrap("<div unselectable='on' class='" + CONTENT + "'></div>").parent();
             that.wrapper = that.content.wrap("<div class='" + WRAPPER + "'></div>").parent();
             that.header = that.content.before("<div class='" + HEADER + "'></div>").prev();
 
