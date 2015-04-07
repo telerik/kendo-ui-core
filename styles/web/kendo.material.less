@@ -590,9 +590,12 @@ border-color: @widget-background-color;
 }
 
 .k-list > .k-state-selected.k-state-focused {
-background-color: @selected-background-color;
-border-color: @selected-background-color;
 .box-shadow(none);
+color: @selected-text-color;
+}
+
+.k-list > .k-state-selected {
+    .box-shadow(none);
 }
 
 .k-list > .k-state-focused {
