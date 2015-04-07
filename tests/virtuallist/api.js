@@ -422,49 +422,22 @@
         });
     });
 
-    /* TODO: this test passes in both cases.
     asyncTest("click event is not triggered if item does not have data-uid", 0, function() {
-        var requestTimeout = 0;
-        var asyncDataSource = new kendo.data.DataSource({
-            transport: {
-                read: function(options) {
-                    setTimeout(function() {
-                        options.success({ data: generateData(options.data), total: 300 });
-                    }, requestTimeout);
-                }
-            },
-            serverPaging: true,
-            pageSize: 40,
-            schema: {
-                data: "data",
-                total: "total"
-            }
-        });
-
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            dataSource: asyncDataSource,
-            listScreens: 4,
-            itemHeight: 20,
+            selectable: true,
             click: function() {
                 ok(false);
             }
         }));
 
         asyncDataSource.read().then(function() {
+            scroll(virtualList.content, 5000);
+            var item = virtualList.items().first();
+
             start();
-
-            requestTimeout = 50;
-            scroll(virtualList.content, 1000);
-
-            var item = virtualList.items()
-                                  .filter(function() {
-                                    return $(this).position().top >= 0;
-                                  }).first();
-
-            item.click();
+            item.trigger("click");
         });
     });
-    */
 
     //methods
 
