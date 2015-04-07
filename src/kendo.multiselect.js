@@ -476,6 +476,7 @@ var __meta__ = {
                 that._touchScroller.reset();
             }
 
+            that._hideBusy();
             that._makeUnselectable();
 
             that.trigger("dataBound");

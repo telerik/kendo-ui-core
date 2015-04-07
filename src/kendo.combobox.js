@@ -395,6 +395,7 @@ var __meta__ = {
                 that._touchScroller.reset();
             }
 
+            that._hideBusy();
             that.trigger("dataBound");
         },
 
