@@ -200,6 +200,10 @@ Defines the highlight color when the pointer is hovering over the connection.
                 endCap: "ArrowEnd"
             }
 
+### connectionDefaults.selectable `Boolean` *(default: true)*
+
+Specifies if the connection can be selected.
+
 ### connectionDefaults.selection `Object`
 
 Defines the connection selection configuration.
@@ -1734,6 +1738,10 @@ Defines the rotation of the shape.
 ### shapeDefaults.rotation.angle `Number` *(default: 0)*
 
 Sets the rotational angle of the shape.
+
+### shapeDefaults.selectable `Boolean` *(default: true)*
+
+Specifies if the shape can be selected.
 
 ### shapeDefaults.source `String`
 
