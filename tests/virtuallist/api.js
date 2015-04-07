@@ -302,6 +302,41 @@
         });
     });
 
+    asyncTest("select method selects same index when filtered (multiple selection)", 2, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: "multiple",
+            valueMapper: function(options) {
+                options.success([1]);
+            }
+        }));
+
+        asyncDataSource.read().done(function() {
+            virtualList.select(0);
+
+            virtualList.dataSource.one("change", function() {
+                virtualList.bind("change", function(e) {
+                    start();
+
+                    var added = e.added;
+                    var removed = e.removed;
+
+                    equal(added.length, 1);
+                    equal(removed.length, 0);
+                });
+
+                virtualList.select(0);
+            });
+
+            virtualList.filter(true);
+            virtualList.dataSource.filter({
+                field: "text",
+                operator: "contains",
+                value: "Item 10"
+            });
+
+        });
+    });
+
     asyncTest("in the change event widget passes deselected index", 2, function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             selectable: true,
