@@ -1330,7 +1330,7 @@ var __meta__ = {
                 indices = [];
             }
 
-            if (this.filter() && !singleSelection && this._deselectFiltered(indices)) {
+            if (this._filtered && !singleSelection && this._deselectFiltered(indices)) {
                 return;
             }
 
