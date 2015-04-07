@@ -748,9 +748,10 @@ var __meta__ = {
                     that.hint.removeAttr("ng-repeat");
                     var scopeTarget = $(e.target);
 
-                    while (!scopeTarget.data("$$kendoScope") && scopeTarget) {
+                    while (!scopeTarget.data("$$kendoScope") && scopeTarget.length) {
                         scopeTarget = scopeTarget.parent();
                     }
+
                     return {
                         elements: that.hint.get(),
                         scopeFrom: scopeTarget.data("$$kendoScope")
