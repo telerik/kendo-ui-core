@@ -887,8 +887,12 @@ var __meta__ = {
                         lastRangeStart = rangeStart;
                         this._fetching = true;
                         this.deferredRange(rangeStart).then(function() {
-                            that._fetching = true;
-                            dataSource.range(rangeStart, pageSize);
+                            var firstItemIndex = that._indexConstraint(that.content[0].scrollTop);
+
+                            if (rangeStart <= firstItemIndex && firstItemIndex <= (rangeStart + pageSize)) {
+                                that._fetching = true;
+                                dataSource.range(rangeStart, pageSize);
+                            }
                         });
                     }
 

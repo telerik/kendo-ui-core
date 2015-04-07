@@ -18,7 +18,7 @@
                 text: " Item " + i
             });
         }
-        
+
         return items;
     }
 
@@ -59,6 +59,24 @@
             QUnit.fixture.empty();
         }
     });
+
+    function createAsyncDataSource(options) {
+        return new kendo.data.DataSource($.extend({
+            transport: {
+                read: function(options) {
+                    setTimeout(function() {
+                        options.success({ data: generateData(options.data), total: 100 });
+                    }, 0);
+                }
+            },
+            serverPaging: true,
+            pageSize: 40,
+            schema: {
+                data: "data",
+                total: "total"
+            }
+        }, options));
+    }
 
     //rendering
 
@@ -180,7 +198,7 @@
     });
 
     //templates
-    
+
     asyncTest("initializes the default templates", function() {
         var virtualList = new VirtualList(container, virtualSettings);
 
@@ -261,7 +279,7 @@
     asyncTest("accepts function as placeholderTemplate", 1, function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             placeholderTemplate: function() {
-                return "<span class='foo'>foo...</span>";  
+                return "<span class='foo'>foo...</span>";
             },
             itemHeight: 20
         }));
@@ -274,7 +292,7 @@
     });
 
     //scrolling
-    
+
     asyncTest("loads new items when list is scrolled", function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             placeholderTemplate: "loading data...",
@@ -392,6 +410,258 @@
         });
     });
 
+    asyncTest("renders only datasource range relevant to the scrollTop 2000px (first request comes later)", 1, function() {
+        var requestTimeout = 0;
+
+        asyncDataSource = createAsyncDataSource({
+            transport: {
+                read: function(options) {
+                    setTimeout(function() {
+                        options.success({ data: generateData(options.data), total: 1000 });
+                    }, requestTimeout);
+                }
+            }
+        });
+
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            dataSource: asyncDataSource,
+            listScreens: 4,
+            itemHeight: 20
+        }));
+
+        asyncDataSource.read().then(function() {
+            requestTimeout = 50;
+            scroll(virtualList.content, 5 * CONTAINER_HEIGHT); //scroll the list 5 screens down
+
+            requestTimeout = 10;
+            scroll(virtualList.content, 10 * CONTAINER_HEIGHT); //scroll the list 10 screens down
+
+            setTimeout(function() {
+                start();
+
+                var li = virtualList.element
+                                    .children()
+                                    .filter(function() {
+                                        return $(this).position().top >= 0;
+                                    }).first();
+
+                equal(li.text().trim(), "Item 100");
+            }, 100);
+        });
+    });
+
+    asyncTest("renders only datasource range relevant to the scrollTop 2000px (second request comes later)", 1, function() {
+        var requestTimeout = 0;
+
+        asyncDataSource = createAsyncDataSource({
+            transport: {
+                read: function(options) {
+                    setTimeout(function() {
+                        options.success({ data: generateData(options.data), total: 1000 });
+                    }, requestTimeout);
+                }
+            }
+        });
+
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            dataSource: asyncDataSource,
+            listScreens: 4,
+            itemHeight: 20
+        }));
+
+        asyncDataSource.read().then(function() {
+            requestTimeout = 10;
+            scroll(virtualList.content, 5 * CONTAINER_HEIGHT); //scroll the list 5 screens down
+
+            requestTimeout = 50;
+            scroll(virtualList.content, 10 * CONTAINER_HEIGHT); //scroll the list 10 screens down
+
+            setTimeout(function() {
+                start();
+
+                var li = virtualList.element
+                                    .children()
+                                    .filter(function() {
+                                        return $(this).position().top >= 0;
+                                    }).first();
+
+                equal(li.text().trim(), "Item 100");
+            }, 100);
+        });
+    });
+
+    asyncTest("renders only datasource range relevant to the scrollTop 1000px (second request comes later)", 1, function() {
+        var requestTimeout = 0;
+
+        asyncDataSource = createAsyncDataSource({
+            transport: {
+                read: function(options) {
+                    setTimeout(function() {
+                        options.success({ data: generateData(options.data), total: 1000 });
+                    }, requestTimeout);
+                }
+            }
+        });
+
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            dataSource: asyncDataSource,
+            listScreens: 4,
+            itemHeight: 20
+        }));
+
+        asyncDataSource.read().then(function() {
+            requestTimeout = 10;
+            scroll(virtualList.content, 10 * CONTAINER_HEIGHT); //scroll the list 10 screens down
+
+            requestTimeout = 50;
+            scroll(virtualList.content, 5 * CONTAINER_HEIGHT); //scroll the list 5 screens down
+
+            setTimeout(function() {
+                start();
+
+                var li = virtualList.element
+                                    .children()
+                                    .filter(function() {
+                                        return $(this).position().top >= 0;
+                                    }).first();
+
+                equal(li.text().trim(), "Item 50");
+            }, 100);
+        });
+    });
+
+    asyncTest("renders only datasource range relevant to the scrollTop 1000px (first request comes later)", 1, function() {
+        var requestTimeout = 0;
+
+        asyncDataSource = createAsyncDataSource({
+            transport: {
+                read: function(options) {
+                    setTimeout(function() {
+                        options.success({ data: generateData(options.data), total: 1000 });
+                    }, requestTimeout);
+                }
+            }
+        });
+
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            dataSource: asyncDataSource,
+            listScreens: 4,
+            itemHeight: 20
+        }));
+
+        asyncDataSource.read().then(function() {
+            requestTimeout = 50;
+            scroll(virtualList.content, 10 * CONTAINER_HEIGHT); //scroll the list 10 screens down
+
+            requestTimeout = 10;
+            scroll(virtualList.content, 5 * CONTAINER_HEIGHT); //scroll the list 5 screens down
+
+            setTimeout(function() {
+                start();
+
+                var li = virtualList.element
+                                    .children()
+                                    .filter(function() {
+                                        return $(this).position().top >= 0;
+                                    }).first();
+
+                equal(li.text().trim(), "Item 50");
+            }, 100);
+        });
+    });
+
+    asyncTest("renders only datasource range relevant to the scrollTop 700px (four mixed request, last comes last)", 1, function() {
+        var requestTimeout = 0;
+
+        asyncDataSource = createAsyncDataSource({
+            transport: {
+                read: function(options) {
+                    setTimeout(function() {
+                        options.success({ data: generateData(options.data), total: 1000 });
+                    }, requestTimeout);
+                }
+            }
+        });
+
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            dataSource: asyncDataSource,
+            listScreens: 4,
+            itemHeight: 20
+        }));
+
+        asyncDataSource.read().then(function() {
+            requestTimeout = 0;
+            scroll(virtualList.content, 500);
+
+            requestTimeout = 20;
+            scroll(virtualList.content, 1000);
+
+            requestTimeout = 10;
+            scroll(virtualList.content, 2000);
+
+            requestTimeout = 50;
+            scroll(virtualList.content, 700);
+
+            setTimeout(function() {
+                start();
+
+                var li = virtualList.element
+                                    .children()
+                                    .filter(function() {
+                                        return $(this).position().top >= 0;
+                                    }).first();
+
+                equal(li.text().trim(), "Item 35");
+            }, 100);
+        });
+    });
+
+    asyncTest("renders only datasource range relevant to the scrollTop 700px (four mixed request, last comes first)", 1, function() {
+        var requestTimeout = 0;
+
+        asyncDataSource = createAsyncDataSource({
+            transport: {
+                read: function(options) {
+                    setTimeout(function() {
+                        options.success({ data: generateData(options.data), total: 1000 });
+                    }, requestTimeout);
+                }
+            }
+        });
+
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            dataSource: asyncDataSource,
+            listScreens: 4,
+            itemHeight: 20
+        }));
+
+        asyncDataSource.read().then(function() {
+            requestTimeout = 10;
+            scroll(virtualList.content, 500);
+
+            requestTimeout = 10;
+            scroll(virtualList.content, 1000);
+
+            requestTimeout = 20;
+            scroll(virtualList.content, 2000);
+
+            requestTimeout = 0;
+            scroll(virtualList.content, 700);
+
+            setTimeout(function() {
+                start();
+
+                var li = virtualList.element
+                                    .children()
+                                    .filter(function() {
+                                        return $(this).position().top >= 0;
+                                    }).first();
+
+                equal(li.text().trim(), "Item 35");
+            }, 100);
+        });
+    });
+
     //utilities
 
     asyncTest("calculates the item count", 1, function() {
@@ -441,7 +711,7 @@
             height: CONTAINER_HEIGHT,
             itemHeight: 40
         });
-        
+
         //height is dataSource.total() * itemHeight
         equal(virtualList.content.find(".k-height-container").height(), 100011 * 40);
 
