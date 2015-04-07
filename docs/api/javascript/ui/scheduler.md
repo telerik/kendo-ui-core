@@ -1340,6 +1340,41 @@ The text similar to "Today" displayed in scheduler.
     });
     </script>
 
+### messages.editable 'Object'
+
+The configuration of the scheduler editable messages. Use this option to customize or localize the scheduler editable messages.
+
+### messages.editable.confirmation 'String'
+
+The text similar to "Are you sure you want to delete this event?" displayed in scheduler.
+
+#### Example - set delete confirmation text
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      date: new Date("2013/6/6"),
+      messages: {
+        editable: {
+          confirmation: "Are you sure you want to delete this meeting?"
+        }
+      },
+      views: [
+        {
+          type: "day"
+        }
+      ],
+      dataSource: [
+        {
+          id: 1,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Interview"
+        }
+      ]
+    });
+    </script>
+
 ### messages.editor `Object`
 
 The configuration of the scheduler editor messages. Use this option to customize or localize the scheduler editor messages.
