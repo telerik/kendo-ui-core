@@ -152,6 +152,10 @@ The text displayed in the shape.
 
 The alignment of the text inside the shape.
 
+### selectable `Boolean` *(default: true)*
+
+Specifies if the shape can be selected.
+
 ### visual `Function`
 
 A function returning a visual element to render for this shape.

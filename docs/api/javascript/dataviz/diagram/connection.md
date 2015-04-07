@@ -212,6 +212,10 @@ Sets the X coordinate of the point.
 
 Sets the Y coordinate of the point.
 
+### selectable `Boolean` *(default: true)*
+
+Specifies if the connection can be selected.
+
 ## Methods
 
 ### source
