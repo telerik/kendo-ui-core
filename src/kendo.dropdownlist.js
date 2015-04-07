@@ -506,6 +506,7 @@ var __meta__ = {
                 }
             }
 
+            that._hideBusy();
             that.trigger("dataBound");
         },
 
