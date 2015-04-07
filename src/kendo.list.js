@@ -1650,18 +1650,19 @@ var __meta__ = {
             var scrollTop = element.scrollTop;
             var itemHeight = $(element.children[0]).height();
             var itemIndex = Math.floor(scrollTop / itemHeight) || 0;
-            var item = element.children[itemIndex];
-            var forward = item.offsetTop < scrollTop;
+            var item = element.children[itemIndex] || element.lastChild;
+            var offsetHeight = this._offsetHeight();
+            var forward = (item.offsetTop - offsetHeight) < scrollTop;
 
             while (item) {
                 if (forward) {
-                    if (item.offsetTop >= scrollTop || !item.nextSibling) {
+                    if ((item.offsetTop + itemHeight - offsetHeight) > scrollTop || !item.nextSibling) {
                         break;
                     }
 
                     item = item.nextSibling;
                 } else {
-                    if (item.offsetTop <= scrollTop || !item.previousSibling) {
+                    if ((item.offsetTop - offsetHeight) <= scrollTop || !item.previousSibling) {
                         break;
                     }
 
