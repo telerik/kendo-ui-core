@@ -1039,4 +1039,75 @@
         });
     });
 
+    asyncTest("next method does not focus next item if it is not loaded", 1, function() {
+        var asyncDataSource = new kendo.data.DataSource({
+            transport: {
+                read: function(options) {
+                    setTimeout(function() {
+                        options.success({ data: generateData(options.data), total: 300 });
+                    }, 100);
+                }
+            },
+            serverPaging: true,
+            pageSize: 40,
+            schema: {
+                data: "data",
+                total: "total"
+            }
+        });
+
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: true,
+            dataSource: asyncDataSource
+        }));
+
+        asyncDataSource.read().then(function() {
+            virtualList.select(39);
+
+            setTimeout(function() {
+                start();
+
+                var current = virtualList.focus();
+                virtualList.next();
+
+                equal(virtualList.focus()[0], current[0], "incorrect item is focused");
+            });
+        });
+    });
+
+    asyncTest("prev method does not focus prev item if it is not loaded", 1, function() {
+        var asyncDataSource = new kendo.data.DataSource({
+            transport: {
+                read: function(options) {
+                    setTimeout(function() {
+                        options.success({ data: generateData(options.data), total: 300 });
+                    }, 100);
+                }
+            },
+            serverPaging: true,
+            pageSize: 40,
+            schema: {
+                data: "data",
+                total: "total"
+            }
+        });
+
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: true,
+            dataSource: asyncDataSource
+        }));
+
+        asyncDataSource.read().then(function() {
+            virtualList.select(201);
+
+            setTimeout(function() {
+                start();
+
+                var current = virtualList.focus();
+                virtualList.prev();
+
+                equal(virtualList.focus()[0], current[0], "incorrect item is focused");
+            }, 150);
+        });
+    });
 })();
