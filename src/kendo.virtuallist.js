@@ -1299,8 +1299,10 @@ var __meta__ = {
         },
 
         _clickHandler: function(e) {
-            if (!e.isDefaultPrevented()) {
-                this.trigger(CLICK, { item: $(e.currentTarget) });
+            var item = $(e.currentTarget);
+
+            if (!e.isDefaultPrevented() && item.data("uid")) {
+                this.trigger(CLICK, { item: item });
             }
         },
 
