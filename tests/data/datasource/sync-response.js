@@ -792,4 +792,138 @@ test("sync model custom field mapping is persisted after sync with empty respons
     equal(dataSource.get(1).baz, "foo");
 });
 
+test("sync submit promises are rejected on success", 1, function() {
+    setup({
+        batch: true,
+        data: [ { id: 1, foo: "bar" } ],
+        schema: {
+            model: {
+                id: "id"
+            }
+        }
+    });
+
+    stub(dataSource.transport, {
+        submit: function(options) {
+            options.error({});
+        }
+    });
+
+    var initial = dataSource.get(1);
+    initial.set("baz", "foo" );
+
+    dataSource.add({});
+
+    dataSource.bind("error", function() {
+        ok(true);
+    });
+
+    dataSource.sync();
+});
+
+test("sync submit promises are resloved on success", 1, function() {
+    setup({
+        batch: true,
+        data: [ { id: 1, foo: "bar" } ],
+        schema: {
+            model: {
+                id: "id"
+            }
+        }
+    });
+
+    stub(dataSource.transport, {
+        submit: function(options) {
+            options.success([], "update");
+            options.success([], "create");
+            options.success([], "destroy");
+        }
+    });
+
+    var initial = dataSource.get(1);
+    initial.set("baz", "foo" );
+
+    dataSource.add({});
+
+    dataSource.bind("sync", function() {
+        ok(true);
+    });
+
+    dataSource.sync();
+});
+
+test("sync submit applies server changes to correct items", 5, function() {
+    setup({
+        batch: true,
+        data: [ { id: 1, foo: "bar" }, { id: 2, foo: "boo" }  ],
+        schema: {
+            model: {
+                id: "id"
+            }
+        }
+    });
+
+    stub(dataSource.transport, {
+        submit: function(options) {
+            options.success([{ id: 1, foo: "baz"} ], "update");
+            options.success([{ id: 3, foo: "created" } ], "create");
+            options.success(null, "destroy");
+        }
+    });
+
+    var initial = dataSource.get(1);
+
+    initial.set("foo", "foo" );
+
+    dataSource.remove(dataSource.get(2));
+
+    dataSource.add({});
+
+    dataSource.sync();
+
+    ok(!dataSource.hasChanges());
+
+    equal(dataSource.get(1).foo, "baz");
+    equal(dataSource.get(3).foo, "created");
+    ok(dataSource.get(2) === undefined);
+    equal(dataSource.data().length, 2);
+});
+
+test("sync submit changes are accepted with no server response", 5, function() {
+    setup({
+        batch: true,
+        data: [ { id: 1, foo: "bar" }, { id: 2, foo: "boo" }  ],
+        schema: {
+            model: {
+                id: "id"
+            }
+        }
+    });
+
+    stub(dataSource.transport, {
+        submit: function(options) {
+            options.success([], "update");
+            options.success({ id: 3 }, "create");
+            options.success(null, "destroy");
+        }
+    });
+
+    var initial = dataSource.get(1);
+
+    initial.set("foo", "foo" );
+
+    dataSource.remove(dataSource.get(2));
+
+    dataSource.add({});
+
+    dataSource.sync();
+
+    ok(!dataSource.hasChanges());
+
+    equal(dataSource.get(1).foo, "foo");
+    ok(dataSource.get(3) !== undefined);
+    ok(dataSource.get(2) === undefined);
+    equal(dataSource.data().length, 2);
+});
+
 }());
