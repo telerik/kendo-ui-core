@@ -301,53 +301,53 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
 if (kendo.ui.Scheduler) {
 kendo.ui.Scheduler.prototype.options.messages =
 $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
-  "allDay": "all day",
+  "allDay": "todo el día",
   "cancel": "Cancelar",
   "editable": {
-    "confirmation": "Are you sure you want to delete this event?"
+    "confirmation": "¿Está seguro que quiere eliminar este evento?"
   },
-  "date": "Date",
-  "destroy": "Delete",
+  "date": "Fecha",
+  "destroy": "Eliminar",
   "editor": {
-    "allDayEvent": "All day event",
-    "description": "Description",
-    "editorTitle": "Event",
-    "end": "End",
-    "endTimezone": "End timezone",
-    "repeat": "Repeat",
-    "separateTimezones": "Use separate start and end time zones",
-    "start": "Start",
-    "startTimezone": "Start timezone",
+    "allDayEvent": "Todo el día",
+    "description": "Descripción",
+    "editorTitle": "Evento",
+    "end": "Fin",
+    "endTimezone": "Zona horaria de fin",
+    "repeat": "Repetir",
+    "separateTimezones": "Usar zonas horarias separadas para el inicio y el fin",
+    "start": "Inicio",
+    "startTimezone": "Zona horaria de inicio",
     "timezone": " ",
-    "timezoneEditorButton": "Time zone",
-    "timezoneEditorTitle": "Timezones",
-    "title": "Title",
-    "noTimezone": "No timezone"
+    "timezoneEditorButton": "Zona horaria",
+    "timezoneEditorTitle": "Zonas horarias",
+    "title": "Título",
+    "noTimezone": "Sin zona horaria"
   },
-  "event": "Event",
+  "event": "Evento",
   "recurrenceMessages": {
-    "deleteRecurring": "Do you want to delete only this event occurrence or the whole series?",
-    "deleteWindowOccurrence": "Delete current occurrence",
-    "deleteWindowSeries": "Delete the series",
-    "deleteWindowTitle": "Delete Recurring Item",
-    "editRecurring": "Do you want to edit only this event occurrence or the whole series?",
-    "editWindowOccurrence": "Edit current occurrence",
-    "editWindowSeries": "Edit the series",
-    "editWindowTitle": "Edit Recurring Item"
+    "deleteRecurring": "¿Quiere eliminar esta ocurrencia del evento o la serie completa?",
+    "deleteWindowOccurrence": "Eliminar ocurrencia actual",
+    "deleteWindowSeries": "Eliminar la serie",
+    "deleteWindowTitle": "Eliminar elemento recurrente",
+    "editRecurring": "¿Quiere editar esta ocurrencia del evento o la serie completa?",
+    "editWindowOccurrence": "Editar ocurrencia actual",
+    "editWindowSeries": "Editar la serie",
+    "editWindowTitle": "Editar elemento recurrente"
   },
-  "save": "Save",
-  "time": "Time",
-  "today": "Today",
+  "save": "Guardar",
+  "time": "Hora",
+  "today": "Hoy",
   "views": {
     "agenda": "Agenda",
-    "day": "Day",
-    "month": "Month",
-    "week": "Week",
-    "workWeek": "Work Week"
+    "day": "Día",
+    "month": "Mes",
+    "week": "Semana",
+    "workWeek": "Semana laboral"
   },
-  "deleteWindowTitle": "Delete event",
-  "showFullDay": "Show full day",
-  "showWorkDay": "Show business hours"
+  "deleteWindowTitle": "Eliminar evento",
+  "showFullDay": "Mostrar día completo",
+  "showWorkDay": "Mostrar horas laborables"
 });
 }
 
