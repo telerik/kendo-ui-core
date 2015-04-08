@@ -325,6 +325,25 @@ test("pushing items to array creates new option elements without destroying the 
     equal(dom.find("option").eq(3).text(), "4");
     equal(dom.find("option")[0], option);
 });
+test("changing items to the data source updated option elements without destroying the existing ones", function() {
+    dom = $('<select data-text-field="name" data-value-field="id" data-bind="source:optionsArray"/>');
+
+    var viewModel = kendo.observable( {
+        optionsArray: [
+                { id: 1, name: "option 1" },
+                { id: 2, name: "option 2" },
+            ]
+    });
+
+    kendo.bind(dom, viewModel);
+
+    var option = dom.find("option")[0];
+
+    viewModel.optionsArray[0].set("name", "new value");
+
+    equal(dom.find("option").length, viewModel.optionsArray.length);
+    equal(dom.find("option:first").text(), "new value");
+});
 
 test("adding items to the data source creates new option elements without destroying the existing ones", function() {
     dom = $('<select data-template="select-template" data-bind="source:foo"/>');

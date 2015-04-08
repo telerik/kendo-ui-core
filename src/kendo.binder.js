@@ -487,7 +487,7 @@ var __meta__ = {
                     that.add(e.index, e.items);
                 } else if (e.action == "remove") {
                     that.remove(e.index, e.items);
-                } else if (e.action != "itemchange") {
+                } else if (e.action == "itemchange" || e.action === undefined) {
                     that.render();
                 }
             } else {

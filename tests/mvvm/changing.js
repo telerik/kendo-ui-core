@@ -1169,7 +1169,7 @@ test("changing a field does not trigger changing of another field starting with 
 
     var calls = 0;
 
-    kendo.data.binders.source = kendo.data.Binder.extend({
+    kendo.data.binders.select.source = kendo.data.Binder.extend({
         refresh: function() {
             calls ++;
         }
