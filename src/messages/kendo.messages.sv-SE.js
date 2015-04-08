@@ -1,5 +1,3 @@
-
-
 /* Filter cell operator messages */
 
 if (kendo.ui.FilterCell) {
