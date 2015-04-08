@@ -775,4 +775,108 @@ test("sync returns promise when offline", 2, function() {
     promise.then($.proxy(ok, this, true));
 });
 
+test("sync calls the create method of the transport if submit is defined but not in batch mode", function() {
+    setup({ batch: false });
+
+    stub(dataSource.transport, "create");
+
+    dataSource.add(new Model());
+    dataSource.add(new Model());
+    dataSource.sync();
+
+    equal(dataSource.transport.calls("create"), 2);
+});
+
+test("sync does not call the submit method of the transport if defined and not in batch mode", function() {
+    setup({ batch: false });
+
+    stub(dataSource.transport, "submit");
+
+    dataSource.add(new Model());
+    dataSource.add(new Model());
+    dataSource.sync();
+
+    equal(dataSource.transport.calls("submit"), 0);
+});
+
+test("sync calls the submit method of the transport if defined", function() {
+    setup({ batch: true });
+
+    stub(dataSource.transport, "submit");
+
+    dataSource.add(new Model());
+    dataSource.add(new Model());
+    dataSource.sync();
+
+    equal(dataSource.transport.calls("submit"), 1);
+});
+
+test("sync calls the submit method passing the created records", function() {
+    setup({ batch: true });
+
+    stub(dataSource.transport, "submit");
+
+    dataSource.add(new Model({ foo: "bar" }));
+    dataSource.add(new Model({ foo: "baz" }));
+    dataSource.sync();
+
+    var models = dataSource.transport.args("submit")[0].data.created;
+    equal(models.length, 2);
+    equal(models[0].foo, "bar");
+    equal(models[1].foo, "baz");
+});
+
+test("sync calls the submit method passing the updated records", function() {
+    setup({ batch: true });
+
+    stub(dataSource.transport, "submit");
+
+    dataSource.at(0).set("foo", "bar");
+
+    dataSource.sync();
+
+    var models = dataSource.transport.args("submit")[0].data.updated;
+    equal(models.length, 1);
+    equal(models[0].foo, "bar");
+});
+
+test("sync calls the submit method passing the removed records", function() {
+    setup({ batch: true });
+
+    stub(dataSource.transport, "submit");
+
+    dataSource.remove(dataSource.at(0));
+
+    dataSource.sync();
+
+    var models = dataSource.transport.args("submit")[0].data.destroyed;
+    equal(models.length, 1);
+    equal(models[0].foo, "foo");
+});
+
+
+test("sync calls the submit method passing the removed, updated and created records", function() {
+    setup({ batch: true, data: [{ id: 1, foo: "foo" }, { id: 2, foo: "deleted" }] });
+
+    stub(dataSource.transport, "submit");
+
+    dataSource.at(0).set("foo", "updated");
+
+    dataSource.remove(dataSource.at(1));
+
+    dataSource.add(new Model({ foo: "created" }));
+
+    dataSource.sync();
+
+    var changes = dataSource.transport.args("submit")[0].data;
+
+    equal(changes.created.length, 1);
+    equal(changes.destroyed.length, 1);
+    equal(changes.updated.length, 1);
+
+    equal(changes.created[0].foo, "created");
+    equal(changes.updated[0].foo, "updated");
+    equal(changes.destroyed[0].foo, "deleted");
+});
+
 }());
