@@ -887,7 +887,9 @@ var __meta__ = {
 
             if (this.optionLabel[0]) {
                 if (typeof candidate === "number") {
-                    candidate -= 1;
+                    if (candidate > -1) {
+                        candidate -= 1;
+                    }
                 } else if (candidate instanceof jQuery && candidate.hasClass("k-list-optionlabel")) {
                     candidate = -1;
                 }

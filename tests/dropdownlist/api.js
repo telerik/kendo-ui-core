@@ -129,6 +129,28 @@
        equal(dropdownlist.select(), 1);
    });
 
+   test("select method passes index -1 when optionLabel is enabled", function() {
+       dropdownlist = createDropDownList({
+           index: -1,
+           optionLabel: "Select...",
+           dataTextField: "text",
+           dataValueField: "value",
+           dataSource: data
+       });
+
+       var listView = dropdownlist.listView;
+
+       stub(listView, {
+           select: listView.select
+       });
+
+       dropdownlist.select(-1);
+
+       var args = listView.args("select", 0);
+
+       equal(args[0], -1);
+   });
+
     test("open should open popup", 1, function () {
         dropdownlist = createDropDownList();
         dropdownlist.bind("open", function(){
