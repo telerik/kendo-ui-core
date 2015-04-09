@@ -31,7 +31,7 @@ var __meta__ = {
             this.element
                 .addClass("k-rpanel k-rpanel-" + this.options.orientation);
 
-            this._resizeHandler = proxy(this.resize, this);
+            this._resizeHandler = proxy(this.resize, this, false);
             $(window).on("resize" + NS, this._resizeHandler);
         },
         _mediaQuery:

@@ -145,7 +145,7 @@ var __meta__ = {
                 .end();
 
             $(window)
-                .on("resize" + NS + that._marker, proxy(that.resize, that))
+                .on("resize" + NS + that._marker, proxy(that.resize, that, false))
                 .on("mouseup" + NS + that._marker, proxy(that._removeOverlays, that));
         },
 
