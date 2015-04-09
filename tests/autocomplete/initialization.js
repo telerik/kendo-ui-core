@@ -404,7 +404,6 @@ test("AutoComplete adds scrollbar width to the fixed group header padding", func
 
     var padding = autocomplete.list.find(".k-group-header").css("padding-right");
 
-    console.log(parseFloat(padding));
     ok(parseFloat(padding) > 15);
 });
 
@@ -431,6 +430,38 @@ test("AutoComplete does not add scrollbar width if popup is shorter then options
     var padding = autocomplete.list.find(".k-group-header").css("padding-right");
 
     ok(parseFloat(padding) < 15);
+});
+
+test("setOptions updates listView template when dataTextField is set", function() {
+    var autocomplete = new AutoComplete(input, {
+        dataSource: [{ name: "item1", anotherName: "anotherItem1" }],
+        dataTextField: "name",
+        filter: "startswith"
+    });
+
+    autocomplete.dataSource.read();
+
+    autocomplete.setOptions({
+        dataTextField: "anotherName"
+    });
+
+    equal(autocomplete.listView.options.template, "#:data.anotherName#");
+});
+
+test("setOptions updates listView dataValueField when dataTextField is set", function() {
+    var autocomplete = new AutoComplete(input, {
+        dataSource: [{ name: "item1", anotherName: "anotherItem1" }],
+        dataTextField: "name",
+        filter: "startswith"
+    });
+
+    autocomplete.dataSource.read();
+
+    autocomplete.setOptions({
+        dataTextField: "anotherName"
+    });
+
+    equal(autocomplete.listView.options.dataValueField, "anotherName");
 });
 
 }());

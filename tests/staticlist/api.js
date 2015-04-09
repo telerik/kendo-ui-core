@@ -75,11 +75,11 @@
             template: "#:data#"
         });
 
+        list.dataSource.read();
+
         list.setOptions({
             template: "new #:data#"
         });
-
-        list.dataSource.read();
 
         equal(element.children(":first").html(), "new item");
     });

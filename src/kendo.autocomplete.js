@@ -134,6 +134,8 @@ var __meta__ = {
             enabled: true,
             suggest: false,
             template: "",
+            groupTemplate: "#:data#",
+            fixedGroupTemplate: "#:data#",
             dataTextField: "",
             minLength: 1,
             delay: 200,
@@ -161,7 +163,6 @@ var __meta__ = {
                 .bind("progress", that._progressHandler);
         },
 
-        //TODO: Use Select.setDataSource method here
         setDataSource: function(dataSource) {
             this.options.dataSource = dataSource;
             this._dataSource();
@@ -180,10 +181,13 @@ var __meta__ = {
         ],
 
         setOptions: function(options) {
+            var listOptions = this._listOptions(options);
+
             List.fn.setOptions.call(this, options);
 
-            this.listView.setOptions(options);
+            listOptions.dataValueField = listOptions.dataTextField;
 
+            this.listView.setOptions(listOptions);
             this._accessors();
             this._aria();
         },
@@ -363,50 +367,38 @@ var __meta__ = {
 
         _initList: function() {
             var that = this;
-            var options = this.options;
-            var template = options.template || options.itemTemplate || "#:" + kendo.expr(options.dataTextField, "data") + "#";
+            var virtual = that.options.virtual;
+            var hasVirtual = !!virtual;
+
+            var listBoundHandler = proxy(that._listBound, that);
 
             var listOptions = {
                 autoBind: false,
-                height: options.height,
-                dataValueField: options.dataValueField,
-                dataSource: this.dataSource,
-                groupTemplate: options.groupTemplate || "#:data#",
-                fixedGroupTemplate: options.fixedGroupTemplate || "#:data#",
-                template: template,
                 selectable: true,
-                activate: function() {
-                    var current = this.focus();
-                    if (current) {
-                        that._focused.add(that.filterInput).attr("aria-activedescendant", current.attr("id"));
-                    }
-                },
-                click: $.proxy(this._click, this),
-                change: $.proxy(this._listChange, this),
-                deactivate: function() {
-                    that._focused.add(that.filterInput).removeAttr("aria-activedescendant");
-                },
+                dataSource: that.dataSource,
+                click: $.proxy(that._click, this),
+                change: $.proxy(that._listChange, this),
+                activate: proxy(that._activateItem, that),
+                deactivate: proxy(that._deactivateItem, that),
                 dataBinding: function() {
-                    that.trigger("dataBinding"); //TODO: make preventable
+                    that.trigger("dataBinding");
                     that._angularItems("cleanup");
                 },
-                listBound: $.proxy(this._listBound, this),
-                dataBound: $.proxy(this._listBound, this)
+                dataBound: listBoundHandler,
+                listBound: listBoundHandler
             };
 
-            if (options.virtual) {
-                if (typeof options.virtual === "object") {
-                    $.extend(listOptions, {
-                        listBound: $.proxy(this._listBound, this)
-                    }, options.virtual);
-                }
+            listOptions = $.extend(that._listOptions(), listOptions, typeof virtual === "object" ? virtual : {});
 
-                this.listView = new kendo.ui.VirtualList(this.ul, listOptions);
+            listOptions.dataValueField = listOptions.dataTextField;
+
+            if (!hasVirtual) {
+                that.listView = new kendo.ui.StaticList(that.ul, listOptions);
             } else {
-                this.listView = new kendo.ui.StaticList(this.ul, listOptions);
+                that.listView = new kendo.ui.VirtualList(that.ul, listOptions);
             }
 
-            this.listView.value(this.options.value);
+            that.listView.value(that.options.value);
         },
 
         _listBound: function() {

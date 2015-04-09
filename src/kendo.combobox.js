@@ -91,7 +91,7 @@ var __meta__ = {
             that._cascade();
 
             if (options.autoBind) {
-                that._filterSource(); //TODO: diff when just bind and actually filter
+                that._filterSource();
             } else {
                 text = options.text;
 
@@ -133,10 +133,8 @@ var __meta__ = {
             ignoreCase: true,
             animation: {},
             template: null,
-            valueTemplate: null,
-            optionLabelTemplate: null,
-            groupTemplate: null,
-            fixedGroupTemplate: null
+            groupTemplate: "#:data#",
+            fixedGroupTemplate: "#:data#"
         },
 
         events:[
@@ -259,50 +257,58 @@ var __meta__ = {
             }
         },
 
+        _listOptions: function(options) {
+            var currentOptions = this.options;
+
+            options = options || {};
+            options = {
+                height: options.height || currentOptions.height,
+                dataValueField: options.dataValueField || currentOptions.dataValueField,
+                dataTextField: options.dataTextField || currentOptions.dataTextField,
+                groupTemplate: options.groupTemplate || currentOptions.groupTemplate,
+                fixedGroupTemplate: options.fixedGroupTemplate || currentOptions.fixedGroupTemplate,
+                template: options.template || currentOptions.template
+            };
+
+            if (!options.template) {
+                options.template = "#:" + kendo.expr(options.dataTextField, "data") + "#";
+            }
+
+            return options;
+        },
+
         _initList: function() {
             var that = this;
-            var options = this.options;
+            var virtual = that.options.virtual;
+            var hasVirtual = !!virtual;
+
+            var listBoundHandler = proxy(that._listBound, that);
+
             var listOptions = {
                 autoBind: false,
                 selectable: true,
-                height: options.height,
-                dataValueField: options.dataValueField,
-                dataSource: this.dataSource,
-                groupTemplate: options.groupTemplate || "#:data#",
-                fixedGroupTemplate: options.fixedGroupTemplate || "#:data#",
-                template: options.template || "#:" + kendo.expr(options.dataTextField, "data") + "#",
-                activate: function() {
-                    var current = this.focus();
-                    if (current) {
-                        that._focused.add(that.filterInput).attr("aria-activedescendant", current.attr("id"));
-                    }
-                },
-                click: $.proxy(this._click, this),
-                change: $.proxy(this._listChange, this),
-                deactivate: function() {
-                    that._focused.add(that.filterInput).removeAttr("aria-activedescendant");
-                },
+                dataSource: that.dataSource,
+                click: proxy(that._click, that),
+                change: proxy(that._listChange, that),
+                activate: proxy(that._activateItem, that),
+                deactivate: proxy(that._deactivateItem, that),
                 dataBinding: function() {
-                    that.trigger("dataBinding"); //TODO: make preventable
+                    that.trigger("dataBinding");
                     that._angularItems("cleanup");
                 },
-                listBound: $.proxy(this._listBound, this),
-                dataBound: $.proxy(this._listBound, this)
+                dataBound: listBoundHandler,
+                listBound: listBoundHandler
             };
 
-            if (options.virtual) {
-                if (typeof options.virtual === "object") {
-                    $.extend(listOptions, {
-                        listBound: $.proxy(this._listBound, this)
-                    }, options.virtual);
-                }
+            listOptions = $.extend(that._listOptions(), listOptions, typeof virtual === "object" ? virtual : {});
 
-                this.listView = new kendo.ui.VirtualList(this.ul, listOptions);
+            if (!hasVirtual) {
+                that.listView = new kendo.ui.StaticList(that.ul, listOptions);
             } else {
-                this.listView = new kendo.ui.StaticList(this.ul, listOptions);
+                that.listView = new kendo.ui.VirtualList(that.ul, listOptions);
             }
 
-            this.listView.value(this.options.value);
+            that.listView.value(that.options.value);
         },
 
         _listBound: function() {

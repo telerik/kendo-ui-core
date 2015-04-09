@@ -364,4 +364,20 @@
 
         equal(multiselect.tagList.children().length, 2);
     });
+
+    test("setOptions updates listView template when dataTextField is set", function() {
+        var multiselect = new MultiSelect(select, {
+            dataSource: [{ name: "item1", anotherName: "anotherItem1" }],
+            dataTextField: "name",
+            dataValueField: "name",
+            filter: "startswith"
+        });
+
+        multiselect.setOptions({
+            dataTextField: "anotherName"
+        });
+
+
+        equal(multiselect.listView.options.template, "#:data.anotherName#");
+    });
 })();

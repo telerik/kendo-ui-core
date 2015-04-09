@@ -287,7 +287,6 @@ test("dataBound event is raised if attached as option", 1, function() {
     kendo.bind(dom, observable);
 });
 
-
 test("dataBound event is raised if attached as option to a already initialized autocomplete", 1, function() {
     dom = $('<div data-bound="dataBound" data-bind="source:items" />').kendoAutoComplete();
 

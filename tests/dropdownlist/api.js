@@ -836,6 +836,22 @@
         equal(dropdownlist.text(), "item1");
     });
 
+    test("setOptions updates listView template when dataTextField is set", function() {
+        dropdownlist = new DropDownList(input, {
+            dataSource: [{ name: "item1", anotherName: "anotherItem1" }],
+            dataTextField: "name",
+            dataValueField: "name",
+            filter: "startswith"
+        });
+
+        dropdownlist.setOptions({
+            dataTextField: "anotherName"
+        });
+
+
+        equal(dropdownlist.listView.options.template, "#:data.anotherName#");
+    });
+
     test("Open popup when option label is defined", 1, function() {
         var dropdownlist = new DropDownList(input, {
             dataSource: [],
