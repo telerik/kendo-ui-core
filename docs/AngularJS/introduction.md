@@ -392,6 +392,74 @@ To watch multiple options for change, just use `k-options` and pass the same var
 
     <ul kendo-menu k-options="menuOptions" k-rebind="menuOptions"> ... </ul>
 
+### Change widget state using k-ng-disbaled and k-ng-readonly
+
+With the 2015 Q1 release support for `k-ng-disabled` and `k-ng-readonly` directives has been introduced. Using them you can change the disabled/readonly state of the widget based on a scope variabled.
+
+#### Change disabled state
+
+```html
+    <div id="example" ng-app="KendoDemos">
+      <div class="demo-section k-content" ng-controller="MyCtrl">
+        <select id="customers"
+                kendo-drop-down-list
+                k-ng-disabled = "isDisabled"
+                k-options="customOptions"></select>
+      </div>
+    </div>
+
+    <script>
+      angular.module("KendoDemos", [ "kendo.directives" ])
+      .controller("MyCtrl", function($scope){
+        $scope.isDisabled = true;
+        $scope.customOptions = {
+          dataSource: {
+            transport: {
+              read: {
+                dataType: "jsonp",
+                url: "http://demos.telerik.com/kendo-ui/service/Customers",
+              }
+            }
+          },
+          dataTextField: "ContactName",
+          dataValueField: "CustomerID"
+        };
+      })
+    </script>
+```
+
+#### Change readonly state
+
+```html
+    <div id="example" ng-app="KendoDemos">
+      <div class="demo-section k-content" ng-controller="MyCtrl">
+        <select id="customers"
+                kendo-drop-down-list
+                k-ng-readonly = "isReadonly"
+                k-options="customOptions"></select>
+      </div>
+    </div>
+
+    <script>
+      angular.module("KendoDemos", [ "kendo.directives" ])
+      .controller("MyCtrl", function($scope){
+        $scope.isReadonly = true;
+        $scope.customOptions = {
+          dataSource: {
+            transport: {
+              read: {
+                dataType: "jsonp",
+                url: "http://demos.telerik.com/kendo-ui/service/Customers",
+              }
+            }
+          },
+          dataTextField: "ContactName",
+          dataValueField: "CustomerID"
+        };
+      })
+    </script>
+```
+
 ### Delaying widget initialization
 
 It's sometimes useful to postpone creating a widget until after some asynchronously-loaded data is available.  For example you would need this to initialize a Grid widget when you load the column definitions from server (as the Grid does not support re-defining the columns after the widget is instantiated).
@@ -465,7 +533,7 @@ Sometimes you might need a reference to the widgets in order to call methods on 
 
 ```html
 <div ng-app="app" ng-controller="MyCtrl">
-  <kendo-date-picker k-scope-field="datePicker" k-on-change="onChange()"></kendo-date-picker>
+  <kendo-date-picker k-scope-field="datePicker" k-on-change="onChange()">
 </div>
 <script>
   angular.module("app", [ "kendo.directives" ]).controller("MyCtrl", function($scope) {
