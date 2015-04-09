@@ -533,7 +533,7 @@ Sometimes you might need a reference to the widgets in order to call methods on 
 
 ```html
 <div ng-app="app" ng-controller="MyCtrl">
-  <kendo-date-picker k-scope-field="datePicker" k-on-change="onChange()">
+  <kendo-date-picker k-scope-field="datePicker" k-on-change="onChange()"></kend-date-picker>
 </div>
 <script>
   angular.module("app", [ "kendo.directives" ]).controller("MyCtrl", function($scope) {
