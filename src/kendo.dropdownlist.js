@@ -58,8 +58,6 @@ var __meta__ = {
             options = that.options;
             element = that.element.on("focus" + ns, proxy(that._focusHandler, that));
 
-            that._clickHandler = $.proxy(that._click, that);
-
             that._focusInputHandler = $.proxy(that._focusInput, that);
             that._inputTemplate();
 
@@ -144,9 +142,10 @@ var __meta__ = {
             template: null,
             valueTemplate: null,
             optionLabelTemplate: null,
-            groupTemplate: null,
-            fixedGroupTemplate: null
+            groupTemplate: "#:data#",
+            fixedGroupTemplate: "#:data#"
         },
+
         events: [
             "open",
             "close",
@@ -161,7 +160,7 @@ var __meta__ = {
         setOptions: function(options) {
             Select.fn.setOptions.call(this, options);
 
-            this.listView.setOptions(options);
+            this.listView.setOptions(this._listOptions(options));
 
             this._optionLabel();
             this._inputTemplate();
@@ -224,66 +223,6 @@ var __meta__ = {
 
         _allowOpening: function(length) {
             return this.optionLabel[0] || this.filterInput || this.dataSource.view().length;
-        },
-
-        _activateItem: function() {
-            var current = this.listView.focus();
-            if (current) {
-                this._focused.add(this.filterInput).attr("aria-activedescendant", current.attr("id"));
-            }
-        },
-
-        _deactivateItem: function() {
-            this._focused.add(this.filterInput).removeAttr("aria-activedescendant");
-        },
-
-        _initList: function() {
-            var that = this;
-            var options = this.options;
-            var virtualOptions;
-
-            if (options.virtual) {
-                virtualOptions = {
-                    autoBind: false, //dropdownlist fetches the data
-                    dataValueField: options.dataValueField,
-                    dataSource: this.dataSource,
-                    selectable: true,
-                    height: this.options.height,
-                    groupTemplate: options.groupTemplate || "#:data#",
-                    fixedGroupTemplate: options.fixedGroupTemplate || "#:data#",
-                    template: options.template || "#:" + kendo.expr(options.dataTextField, "data") + "#",
-                    click: that._clickHandler,
-                    change: $.proxy(that._listChange, that),
-                    activate: $.proxy(that._activateItem, that),
-                    deactivate: $.proxy(that._deactivateItem, that),
-                    listBound: $.proxy(that._listBound, that)
-                };
-
-                if (typeof options.virtual === "object") {
-                    $.extend(virtualOptions, options.virtual);
-                }
-
-                that.listView = new kendo.ui.VirtualList(that.ul, virtualOptions);
-            } else {
-                that.listView = new kendo.ui.StaticList(that.ul, {
-                    dataValueField: options.dataValueField,
-                    dataSource: that.dataSource,
-                    groupTemplate: options.groupTemplate || "#:data#",
-                    fixedGroupTemplate: options.fixedGroupTemplate || "#:data#",
-                    template: options.template || "#:" + kendo.expr(options.dataTextField, "data") + "#",
-                    click: that._clickHandler,
-                    change: $.proxy(that._listChange, that),
-                    activate: $.proxy(that._activateItem, that),
-                    deactivate: $.proxy(that._deactivateItem, that),
-                    dataBinding: function() {
-                        that.trigger("dataBinding");
-                        that._angularItems("cleanup");
-                    },
-                    dataBound: $.proxy(that._listBound, that)
-                });
-            }
-
-            that.listView.value(that.options.value);
         },
 
         current: function(candidate) {
@@ -429,7 +368,7 @@ var __meta__ = {
 
             that.optionLabel.html(template(optionLabel))
                             .off()
-                            .click(that._clickHandler)
+                            .click(proxy(that._click, that))
                             .on(HOVEREVENTS, that._toggleHover);
 
             that.angular("compile", function(){

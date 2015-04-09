@@ -116,6 +116,60 @@ var __meta__ = {
             });
         },
 
+        _listOptions: function(options) {
+            var currentOptions = this.options;
+
+            options = options || {};
+            options = {
+                height: options.height || currentOptions.height,
+                dataValueField: options.dataValueField || currentOptions.dataValueField,
+                dataTextField: options.dataTextField || currentOptions.dataTextField,
+                groupTemplate: options.groupTemplate || currentOptions.groupTemplate,
+                fixedGroupTemplate: options.fixedGroupTemplate || currentOptions.fixedGroupTemplate,
+                template: options.template || currentOptions.template
+            };
+
+            if (!options.template) {
+                options.template = "#:" + kendo.expr(options.dataTextField, "data") + "#";
+            }
+
+            return options;
+        },
+
+        _initList: function() {
+            var that = this;
+            var virtual = that.options.virtual;
+            var hasVirtual = !!virtual;
+
+            var listBoundHandler = proxy(that._listBound, that);
+
+            var listOptions = {
+                autoBind: false,
+                selectable: true,
+                dataSource: that.dataSource,
+                click: proxy(that._click, that),
+                change: proxy(that._listChange, that),
+                activate: proxy(that._activateItem, that),
+                deactivate: proxy(that._deactivateItem, that),
+                dataBinding: function() {
+                    that.trigger("dataBinding");
+                    that._angularItems("cleanup");
+                },
+                dataBound: listBoundHandler,
+                listBound: listBoundHandler
+            };
+
+            listOptions = $.extend(that._listOptions(), listOptions, typeof virtual === "object" ? virtual : {});
+
+            if (!hasVirtual) {
+                that.listView = new kendo.ui.StaticList(that.ul, listOptions);
+            } else {
+                that.listView = new kendo.ui.VirtualList(that.ul, listOptions);
+            }
+
+            that.listView.value(that.options.value);
+        },
+
         _listMousedown: function(e) {
             if (!this.filterInput || this.filterInput[0] !== e.target) {
                 e.preventDefault();
@@ -243,6 +297,17 @@ var __meta__ = {
             }
 
             return that.dataSource.flatView()[index];
+        },
+
+        _activateItem: function() {
+            var current = this.listView.focus();
+            if (current) {
+                this._focused.add(this.filterInput).attr("aria-activedescendant", current.attr("id"));
+            }
+        },
+
+        _deactivateItem: function() {
+            this._focused.add(this.filterInput).removeAttr("aria-activedescendant");
         },
 
         _accessors: function() {
@@ -1147,6 +1212,10 @@ var __meta__ = {
             this._fixedHeader();
             this._getter();
             this._templates();
+
+            this._mute = true;
+            this.refresh();
+            this._mute = false;
         },
 
         destroy: function() {
@@ -1788,7 +1857,9 @@ var __meta__ = {
                 that._valueDeferred.resolve();
             }
 
-            that.trigger("dataBound");
+            if (!that._mute) {
+                that.trigger("dataBound");
+            }
         },
 
         isBound: function() {
