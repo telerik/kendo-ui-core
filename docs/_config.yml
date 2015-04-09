@@ -275,6 +275,9 @@ navigation:
 ## The application virtual path
 baseurl: /kendo-ui
 
+## The Kendo UI version used
+cdnVersion: "2015.1.408"
+
 ## Assign layout and category per different paths
 defaults:
 -
