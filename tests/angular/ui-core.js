@@ -854,4 +854,19 @@ withAngularTests("Angular (UI Core)", function(runTest){
         });
     });
 
-});
+     runTest("k-ng-model change updates form status", function(dom, $scope){
+
+        $("<form name='myForm'>" +
+          "  <input kendo-numeric-text-box='ktb' k-ng-model='value' />" +
+          "</form>").appendTo(dom);
+
+		expect(1);
+        $scope.whenRendered(function(){
+            $scope.ktb.value(1);
+            $scope.ktb.trigger('change');
+            var dirty = $scope[$("form").attr("name")].$dirty;
+            equal(dirty, true);
+            start();
+        });
+    });
+    });
