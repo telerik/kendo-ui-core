@@ -2653,7 +2653,7 @@ function pad(number, digits, end) {
             var size = this.getSize(),
                 currentSize = this._size;
 
-            if (force || !currentSize || size.width !== currentSize.width || size.height !== currentSize.height) {
+            if (force || (size.width > 0 || size.height > 0) && (!currentSize || size.width !== currentSize.width || size.height !== currentSize.height)) {
                 this._size = size;
                 this._resize(size);
                 this.trigger("resize", size);
