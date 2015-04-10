@@ -394,7 +394,7 @@ To watch multiple options for change, just use `k-options` and pass the same var
 
 ### Change widget state using k-ng-disbaled and k-ng-readonly
 
-With the 2015 Q1 release support for `k-ng-disabled` and `k-ng-readonly` directives has been introduced. Using them you can change the disabled/readonly state of the widget based on a scope variabled.
+With the 2015 Q1 release support for `k-ng-disabled` and `k-ng-readonly` directives has been introduced. Using them you can change the disabled/readonly state of the widget based on a scope variable.
 
 #### Change disabled state
 
