@@ -404,6 +404,8 @@ var __meta__ = {
             return;
         }
 
+        var form  = $(widget.element).parents("form");
+        var ngForm = scope[form.attr("name")];
         var getter = $parse(kNgModel);
         var setter = getter.assign;
         var updating = false;
@@ -436,6 +438,11 @@ var __meta__ = {
 
         widget.first("change", function(){
             updating = true;
+
+            if (ngForm && ngForm.$pristine) {
+                ngForm.$setDirty();
+            }
+
             scope.$apply(function(){
                 setter(scope, widget.$angular_getLogicValue());
             });
