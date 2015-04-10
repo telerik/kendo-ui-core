@@ -14,6 +14,7 @@ var __meta__ = {
     var kendo = window.kendo,
         support = kendo.support,
         document = window.document,
+        $window = $(window),
         Class = kendo.Class,
         Widget = kendo.ui.Widget,
         Observable = kendo.Observable,
@@ -655,6 +656,7 @@ var __meta__ = {
             filter: null,
             ignore: null,
             holdToDrag: false,
+            autoScroll: false,
             dropped: false
         },
 
@@ -792,7 +794,9 @@ var __meta__ = {
 
             e.preventDefault();
 
-            that._withDropTarget(e, function(target, targetElement) {
+            var cursorElement = this._elementUnderCursor(e);
+
+            that._withDropTarget(cursorElement, function(target, targetElement) {
                 if (!target) {
                     if (lastDropTarget) {
                         lastDropTarget._trigger(DRAGLEAVE, extend(e, { dropTarget: $(lastDropTarget.targetElement) }));
@@ -813,30 +817,99 @@ var __meta__ = {
                 lastDropTarget = extend(target, { targetElement: targetElement });
             });
 
-            that._trigger(DRAG, extend(e, { dropTarget: lastDropTarget }));
+            that._trigger(DRAG, extend(e, { dropTarget: lastDropTarget, elementUnderCursor: cursorElement }));
+
+            if (this.options.autoScroll) {
+                if (this._cursorElement !== cursorElement) {
+                    this._scrollableParent = findScrollableParent(cursorElement);
+                    this._cursorElement = cursorElement;
+                }
+
+                // chrome seems to trigger mousemove when mouse is moved outside of the window (over the Chrome), too.
+                if (this._scrollableParent[0]) {
+                    var velocity = autoScrollVelocity(e.x.location, e.y.location, scrollableViewPort(this._scrollableParent));
+
+                    this._scrollCompenstation = $.extend({}, this.hintOffset);
+                    this._scrollVelocity = velocity;
+
+                    if (velocity.y === 0 && velocity.x === 0) {
+                        clearInterval(this._scrollInterval);
+                        this._scrollInterval = null;
+                    } else if(!this._scrollInterval) {
+                        this._scrollInterval = setInterval($.proxy(this, "_autoScroll"), 50);
+                    }
+                }
+            }
 
             if (that.hint) {
                 that._updateHint(e);
             }
         },
 
-        _end: function(e) {
-            var that = this;
+        _autoScroll: function() {
+            var parent = this._scrollableParent[0],
+                velocity = this._scrollVelocity,
+                compensation = this._scrollCompenstation;
 
-            that._withDropTarget(e, function(target, targetElement) {
+            if (!parent) {
+                return;
+            }
+
+            var yIsScrollable, xIsScrollable;
+            var isBody = parent === document.body;
+
+            if (isBody) {
+                yIsScrollable = document.body.offsetHeight > $window.height();
+                xIsScrollable = document.body.offsetWidth > $window.width();
+            } else {
+                yIsScrollable = parent.offsetHeight <= parent.scrollHeight;
+                xIsScrollable = parent.offsetWidth <= parent.scrollWidth;
+            }
+
+            var yDelta = parent.scrollTop + velocity.y;
+            var yInBounds = yIsScrollable && yDelta > 0 && yDelta < parent.scrollHeight;
+
+            var xDelta = parent.scrollLeft + velocity.x;
+            var xInBounds = xIsScrollable && xDelta > 0 && xDelta < parent.scrollWidth;
+
+            if (yInBounds) {
+                parent.scrollTop += velocity.y;
+            }
+
+            if (xInBounds) {
+                parent.scrollLeft += velocity.x;
+            }
+
+            if (isBody && (xInBounds || yInBounds)) {
+                if (yInBounds) {
+                    compensation.top += velocity.y;
+                }
+
+                if (xInBounds) {
+                    compensation.left += velocity.x;
+                }
+
+                this.hint.css(compensation);
+            }
+        },
+
+        _end: function(e) {
+            this._withDropTarget(this._elementUnderCursor(e), function(target, targetElement) {
                 if (target) {
                     target._drop(extend({}, e, { dropTarget: $(targetElement) }));
                     lastDropTarget = null;
                 }
             });
 
-            that._trigger(DRAGEND, e);
-            that._cancel(e.event);
+            this._trigger(DRAGEND, e);
+            this._cancel(e.event);
         },
 
         _cancel: function() {
             var that = this;
 
+            that._scrollableParent = null;
+            clearInterval(this._scrollInterval);
             that._activated = false;
 
             if (that.hint && !that.dropped) {
@@ -861,33 +934,37 @@ var __meta__ = {
                     y: e.y,
                     currentTarget: that.currentTarget,
                     initialTarget: e.touch ? e.touch.initialTouch : null,
-                    dropTarget: e.dropTarget
+                    dropTarget: e.dropTarget,
+                    elementUnderCursor: e.elementUnderCursor
                 }
             ));
         },
 
-        _withDropTarget: function(e, callback) {
-            var that = this,
-                target, result,
-                options = that.options,
-                targets = dropTargets[options.group],
-                areas = dropAreas[options.group];
+        _elementUnderCursor: function(e) {
+            var target = elementUnderCursor(e),
+                hint = this.hint;
+
+            if (hint && contains(hint[0], target)) {
+                hint.hide();
+                target = elementUnderCursor(e);
+                // IE8 does not return the element in iframe from first attempt
+                if (!target) {
+                    target = elementUnderCursor(e);
+                }
+                hint.show();
+            }
+
+            return target;
+        },
+
+        _withDropTarget: function(element, callback) {
+            var result,
+                group = this.options.group,
+                targets = dropTargets[group],
+                areas = dropAreas[group];
 
             if (targets && targets.length || areas && areas.length) {
-
-                target = elementUnderCursor(e);
-
-                if (that.hint && contains(that.hint[0], target)) {
-                    that.hint.hide();
-                    target = elementUnderCursor(e);
-                    // IE8 does not return the element in iframe from first attempt
-                    if (!target) {
-                        target = elementUnderCursor(e);
-                    }
-                    that.hint.show();
-                }
-
-                result = checkTarget(target, targets, areas);
+                result = checkTarget(element, targets, areas);
 
                 if (result) {
                     callback(result.target, result.targetElement);
@@ -905,6 +982,10 @@ var __meta__ = {
             that._afterEnd();
 
             that.userEvents.destroy();
+
+            this._scrollableParent = null;
+            this._cursorElement = null;
+            clearInterval(this._scrollInterval);
 
             that.currentTarget = null;
         },
@@ -935,6 +1016,75 @@ var __meta__ = {
         PaneDimensions: PaneDimensions,
         Movable: Movable
     });
+
+    function scrollableViewPort(element) {
+        var body = document.body,
+            offset,
+            top,
+            left;
+
+        if (element[0] === body) {
+            top = body.scrollTop;
+            left = body.scrollLeft;
+
+            return {
+                top: top,
+                left: left,
+                bottom: top + $window.height(),
+                right: left + $window.width()
+            };
+        } else {
+            offset = element.offset();
+            offset.bottom = offset.top + element.height();
+            offset.right =  offset.left + element.width();
+            return offset;
+        }
+    }
+
+    function isRootNode(element) {
+        return element === document.body || element === document.documentElement || element === document;
+    }
+
+    function findScrollableParent(element) {
+        if (!element || isRootNode(element)) {
+            return $(document.body);
+        }
+
+        var parent = $(element)[0];
+
+        while (!kendo.isScrollable(parent) && !isRootNode(parent)) {
+            parent = parent.parentNode;
+        }
+
+        return $(parent);
+    }
+
+    function autoScrollVelocity(mouseX, mouseY, rect) {
+        var velocity = { x: 0, y: 0 };
+
+        var AUTO_SCROLL_AREA = 50;
+
+        if (mouseX - rect.left < AUTO_SCROLL_AREA) {
+            velocity.x = -(AUTO_SCROLL_AREA - (mouseX - rect.left));
+        } else if (rect.right - mouseX < AUTO_SCROLL_AREA) {
+            velocity.x = AUTO_SCROLL_AREA - (rect.right - mouseX);
+        }
+
+        if (mouseY - rect.top < AUTO_SCROLL_AREA) {
+            velocity.y = -(AUTO_SCROLL_AREA - (mouseY - rect.top));
+        } else if (rect.bottom - mouseY < AUTO_SCROLL_AREA) {
+            velocity.y = AUTO_SCROLL_AREA - (rect.bottom - mouseY);
+        }
+
+        return velocity;
+    }
+
+    // export for testing
+    kendo.ui.Draggable.utils = {
+        autoScrollVelocity: autoScrollVelocity,
+        scrollableViewPort: scrollableViewPort,
+        findScrollableParent: findScrollableParent
+    }
 
  })(window.kendo.jQuery);
 

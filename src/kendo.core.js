@@ -1832,6 +1832,10 @@ function pad(number, digits, end) {
         return styles;
     }
 
+    function isScrollable(element) {
+        return getComputedStyles(element, ["overflow"]).overflow != "visible";
+    }
+
     (function () {
         support._scrollbar = undefined;
 
@@ -2470,6 +2474,7 @@ function pad(number, digits, end) {
         wrap: wrap,
         deepExtend: deepExtend,
         getComputedStyles: getComputedStyles,
+        isScrollable: isScrollable,
         size: size,
         toCamelCase: toCamelCase,
         toHyphens: toHyphens,
