@@ -27,6 +27,37 @@ Constrains the hint movement to either the horizontal (x) or vertical (y) axis. 
          });
     </script>
 
+### autoScroll `Boolean`*(default: false)*
+
+If set to `true` the widget will auto-scroll the container when the mouse/finger is close to the top/bottom of it.
+
+#### Example - use autoScroll in a scrollable container
+
+    <div style="width: 200px; height: 200px; overflow: auto">
+        <div style="width: 1000px; height: 1000px;">
+            <div id="sortable">
+                <span>Item 1</span>
+                <span>Item 2</span>
+                <span>Item 3</span>
+                <span>Item 4</span>
+                <span>Item 5</span>
+                <span>Item 6</span>
+                <span>Item 7</span>
+                <span>Item 8</span>
+                <span>Item 9</span>
+                <span>Item 10</span>
+                <span>Item 11</span>
+                <span>Item 12</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $("#sortable").kendoSortable({
+            autoScroll: true
+         });
+    </script>
+
 ### container `String | jQuery`*(default: null)*
 
 Selector that determines the container to which boundaries the hint movement will be constrained.
