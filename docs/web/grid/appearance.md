@@ -138,6 +138,15 @@ The `resize` method will work for Kendo UI versions **Q3 2013 or later**. For ol
 
 The "[How to resize the Grid when the window is resized](/web/grid/how-to/Layout/resize-grid-when-the-window-is-resized)" documentation page contains a runnable example of the discussed scenario.
 
+### Grid Loading Indicator
+
+The Grid uses internally the [`kendo.ui.progress`](/api/javascript/ui/ui#methods-progress) method to display a loading overlay during remote read requests.
+If Grid scrolling is disabled, the overlay is displayed over the whole Grid. If scrolling is enabled, the overlay is displayed over the scrollable data area.
+If Grid scrolling is enabled and the Grid has no height, the data area will initially have a zero height,
+which will make the loading overlay invisible during the first remote request.
+This issue can be resolved in two ways - set some Grid height, or apply a `min-height` style to the `div.k-grid-content` element
+(see [example above](/web/grid/appearance#allow-the-grid-height-to-vary-within-certain-limits)).
+
 ## Initialize the Grid inside a hidden container
 
 Depending on the Grid configuration, the widget may need to perform Javascript calculations to adjust its layout during initialization
