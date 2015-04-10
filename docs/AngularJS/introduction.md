@@ -130,7 +130,7 @@ The data-bound container widgets may have their template options specified as ne
     <div class="product" k-template>
         <img ng-src="http://demos.telerik.com/kendo-ui/content/web/foods/{{dataItem.ProductID}}.jpg" alt=" {{dataItem.ProductName}} image" />
         <h3>{{ dataItem.ProductName }}</h3>
-        <p>{{ kendo.toString(dataItem.UnitPrice, "c") }}</p>
+        <p>{{ dataItem.UnitPrice | currency:"USD$":0 }}</p>
     </div>
   </div>
 </div>
