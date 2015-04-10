@@ -33,6 +33,31 @@ description: Configuration steps and types of events which are triggered in Kend
       }
     </style>
 
+### autoScroll `Boolean`*(default: false)*
+
+If set to `true` the widget will auto-scroll the container when the mouse/finger is close to the top/bottom of it.
+
+#### Example - use autoScroll in a scrollable container
+
+    <div style="width: 200px; height: 200px; overflow: auto">
+        <div style="width: 1000px; height: 1000px;">
+            <div id="draggable"></div>
+        </div>
+    </div>
+
+    <script>
+      $("#draggable").kendoDraggable({ hint: function(element) { return element.clone(); }, autoScroll: true });
+    </script>
+
+    <style>
+      #draggable {
+        width: 50px;
+        height: 50px;
+        background-color: orange;
+        border: 2px solid green;
+      }
+    </style>
+
 ### container `jQuery`
 
 If set, the hint movement is constrained to the container boundaries.
