@@ -9,7 +9,12 @@ position: 1
 
 # Using Kendo with AngularJS
 
-Kendo UI can be used seamlessly with AngularJS.  The two frameworks have some overlapping features though; if you are using AngularJS then you probably want to use Angular's own routing mechanism and data binding.  Do not mix that with Kendo MVVM.
+Kendo UI can be used seamlessly with AngularJS. The two frameworks have some overlapping features though.
+If you are using AngularJS then you probably want to use Angular's own routing mechanism and data binding. Do not mix that with Kendo MVVM.
+
+> AngularJS Kendo UI widget initialization is not designed to be integrated with the Kendo UI server wrappers.
+Using wrappers is equivalent to [jQuery plugin syntax initialization](/basics/jquery-initialization). If you want to create Kendo UI widgets via the
+AngularJS pattern, then do not use server wrappers.
 
 ## Using Angular-Kendo bindings
 
