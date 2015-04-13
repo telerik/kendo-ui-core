@@ -39,6 +39,14 @@ Inherited from [Element.clip](element#configuration-clip)
 ### fill `kendo.drawing.FillOptions`
 The fill options of the text.
 
+### font `String`
+The font to use for rendering the text.
+Accepts the standard [CSS font syntax](https://developer.mozilla.org/en-US/docs/Web/CSS/font#Syntax).
+
+Examples of valid font values:
+* Size and family: "2em 'Open Sans', sans-serif"
+* Style, size and family: "italic 2em 'Open Sans', sans-serif"
+
 ### opacity `Number`
 The element opacity.
 Inherited from [Element.opacity](element#configuration-opacity)
