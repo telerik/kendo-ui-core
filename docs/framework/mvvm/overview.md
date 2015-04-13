@@ -4,12 +4,17 @@ page_title: Kendo UI MVVM pattern, integrated with Kendo UI jQuery-powered frame
 description: Kendo UI Model View ViewModel is an implementation of the MVVM pattern, integrated with Kendo UI framework.
 position: 1
 ---
+
 # Kendo MVVM Overview
 
 Model View ViewModel ([MVVM](http://en.wikipedia.org/wiki/Model_View_ViewModel)) is a design pattern which helps developers separate the Model (the data) from the View (the UI).
 The View-Model part of MVVM is responsible for exposing the data objects from the Model in such a way that those objects are easily consumed in the View.
 
 Kendo MVVM is an implementation of the MVVM pattern which seamlessly integrates with the rest of the Kendo framework (widgets and DataSource).
+
+> Kendo UI MVVM initialization is not designed to be integrated with the Kendo UI server wrappers.
+Using wrappers is equivalent to [jQuery plugin syntax initialization](/basics/jquery-initialization). If you want to create Kendo UI widgets via
+MVVM pattern, then do not use server wrappers.
 
 ## Getting Started
 

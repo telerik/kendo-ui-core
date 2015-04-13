@@ -15,9 +15,14 @@ position: 2
 
 In addition to the [jQuery plugin syntax](/basics/jquery-initialization), the Kendo UI widgets may be instantiated based on custom HTML attributes in several ways:
 
-* The [View](/framework/spa/view) and the [mobile Application](/getting-started/mobile/application) instantiate widgets based on `role` **HTML 5 data attributes**. Both use the [MVVM](/getting-started/framework/mvvm/overview) internally;
+* The [View](/framework/spa/view) and the [mobile Application](/getting-started/mobile/application) instantiate widgets based on `role` **HTML 5 data attributes**.
+Both use the [MVVM](/getting-started/framework/mvvm/overview) internally;
 * The `kendo.bind` method will scan the passed DOM element contents for `data-role` attributes and will instantiate the respective widgets;
 * The Kendo UI [**AngularJS**](/AngularJS/introduction) directives support declarative initialization based on **custom element attributes** or **custom tag names**.
+
+> Data attribute initialization is not designed to be integrated with the Kendo UI server wrappers.
+Using wrappers is equivalent to the [jQuery plugin syntax initialization](/basics/jquery-initialization). If you want to create Kendo UI widgets via the
+[MVVM](/getting-started/framework/mvvm/overview) or [AngularJS](/AngularJS/introduction) mechanisms, then do not use server wrappers.
 
 ## A SPA View With an AutoComplete Widget in the Template
 
