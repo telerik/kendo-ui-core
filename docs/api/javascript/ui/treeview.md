@@ -16,7 +16,7 @@ A collection of visual animations used when items are expanded or collapsed thro
 Setting this option to **false** will disable all animations.
 
 #### Example - disable animation of subnodes
-
+
     <div id="treeview"></div>
     <script>
     $("#treeview").kendoTreeView({
@@ -451,7 +451,8 @@ Disables (**false**) or enables (**true**) drag-and-drop of the nodes.
 
 Indicates whether the child DataSources should be fetched lazily when parent groups get expanded.
 Setting this to false causes all child DataSources to be loaded at initialization time.
-Note: when initializing the widget from an array (rather than from a HierarchicalDataSource instance), this option defaults to false, rather than true.
+
+> Note: when initializing the widget from an array (rather than from a HierarchicalDataSource instance), this option defaults to false, rather than true.
 
 #### Example - force lazy loading of sublevels
 
@@ -1175,6 +1176,8 @@ If provided, the node that should be selected.
 ### setDataSource
 
 Sets and binds a dataSource to the widget.
+
+> Note: Calling this method with an array will not change the loadOnDemand flag, unlike initialization with an array option.
 
 #### Parameters
 
