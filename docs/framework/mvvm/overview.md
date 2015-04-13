@@ -12,9 +12,9 @@ The View-Model part of MVVM is responsible for exposing the data objects from th
 
 Kendo MVVM is an implementation of the MVVM pattern which seamlessly integrates with the rest of the Kendo framework (widgets and DataSource).
 
-> Kendo UI MVVM initialization is not designed to be integrated with the Kendo UI server wrappers.
-Using wrappers is equivalent to [jQuery plugin syntax initialization](/basics/jquery-initialization). If you want to create Kendo UI widgets via
-MVVM pattern, then do not use server wrappers.
+> Kendo UI MVVM initialization is not designed to be combined with the Kendo UI server wrappers.
+Using wrappers is equivalent to [jQuery plugin syntax initialization](/basics/jquery-initialization).
+If you want to create Kendo UI widget instances via the MVVM pattern, then do not use server wrappers for these instances.
 
 ## Getting Started
 

@@ -20,9 +20,9 @@ Both use the [MVVM](/getting-started/framework/mvvm/overview) internally;
 * The `kendo.bind` method will scan the passed DOM element contents for `data-role` attributes and will instantiate the respective widgets;
 * The Kendo UI [**AngularJS**](/AngularJS/introduction) directives support declarative initialization based on **custom element attributes** or **custom tag names**.
 
-> Data attribute initialization is not designed to be integrated with the Kendo UI server wrappers.
-Using wrappers is equivalent to the [jQuery plugin syntax initialization](/basics/jquery-initialization). If you want to create Kendo UI widgets via the
-[MVVM](/getting-started/framework/mvvm/overview) or [AngularJS](/AngularJS/introduction) mechanisms, then do not use server wrappers.
+> Data attribute initialization is not designed to be combined with the Kendo UI server wrappers.
+Using wrappers is equivalent to [jQuery plugin syntax initialization](/basics/jquery-initialization). If you want to create Kendo UI widget instances via the
+[MVVM](/getting-started/framework/mvvm/overview) or [AngularJS](/AngularJS/introduction) mechanisms, then do not use server wrappers for these instances.
 
 ## A SPA View With an AutoComplete Widget in the Template
 
