@@ -27,6 +27,7 @@ var __meta__ = {
         Select = ui.Select,
         support = kendo.support,
         activeElement = kendo._activeElement,
+        ObservableObject = kendo.data.ObservableObject,
         keys = kendo.keys,
         ns = ".kendoDropDownList",
         DISABLED = "disabled",
@@ -245,12 +246,17 @@ var __meta__ = {
             var that = this;
             var dataItem = null;
             var hasOptionLabel = !!that.optionLabel[0];
+            var optionLabel = that.options.optionLabel;
 
             if (index === undefined) {
                 dataItem = that.listView.selectedDataItems()[0];
             } else {
                 if (typeof index !== "number") {
-                    index = $(that.items()).index(index);
+                    if (index.hasClass("k-list-optionlabel")) {
+                        index = -1;
+                    } else {
+                        index = $(that.items()).index(index);
+                    }
                 } else if (hasOptionLabel) {
                     index -= 1;
                 }
@@ -258,9 +264,8 @@ var __meta__ = {
                 dataItem = that.dataSource.flatView()[index];
             }
 
-
             if (!dataItem && hasOptionLabel) {
-                dataItem = that._assignInstance(that._optionLabelText(), "");
+                dataItem = $.isPlainObject(optionLabel) ? new ObservableObject(optionLabel) : that._assignInstance(that._optionLabelText(), "");
             }
 
             return dataItem;
@@ -1114,7 +1119,7 @@ var __meta__ = {
             var span = this.span;
 
             if (text !== undefined) {
-                if ($.isPlainObject(text) || text instanceof kendo.data.ObservableObject) {
+                if ($.isPlainObject(text) || text instanceof ObservableObject) {
                     dataItem = text;
                 } else if (optionLabel && this._optionLabelText() === text) {
                     dataItem = optionLabel;
@@ -1146,7 +1151,7 @@ var __meta__ = {
             if (dataTextField) {
                 assign(dataItem, dataTextField.split("."), text);
                 assign(dataItem, this.options.dataValueField.split("."), value);
-                dataItem = new kendo.data.ObservableObject(dataItem);
+                dataItem = new ObservableObject(dataItem);
             } else {
                 dataItem = text;
             }
