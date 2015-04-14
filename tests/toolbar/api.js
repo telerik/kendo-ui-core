@@ -102,7 +102,7 @@
             ]
        }).data("kendoToolBar");
 
-       toolbar.remove($("#splitButton_overflow"));
+       toolbar.remove($("#splitButton"));
 
        equal(toolbar.element.find(".k-split-button").length, 0, "SplitButton is removed from the toolbar");
        equal(toolbar.popup.element.find(".k-split-button").length, 0, "SplitButton is removed from the overflow container");
@@ -221,7 +221,7 @@
 
         toolbar.enable("#foo_overflow", false);
 
-        ok($("#foo_overflow").parent("li").hasClass("k-state-disabled"), "Overflow button have k-state-disabled class");
+        ok($("#foo_overflow").hasClass("k-state-disabled"), "Overflow button have k-state-disabled class");
     });
 
     test("enable method disables SplitButton", 2, function() {
@@ -260,7 +260,7 @@
         equal(selected.attr("id"), "bar");
     });
 
-    test("Chanding the toggle state of a button is propagated to the twin element located in the command overflow popup", 2, function() {
+    test("Changing the toggle state of a button is propagated to the twin element located in the command overflow popup", 2, function() {
         var toolbar = container.kendoToolBar({
             items: [
                 { type: "button", id: "foo", text: "foo", togglable: true }
@@ -272,7 +272,7 @@
         ok($("#foo_overflow").hasClass("k-state-active"));
     });
 
-    test("Chanding the toggle state of an overflow button is propagated to the twin element located in the toolbar wrapper", 2, function() {
+    test("Changing the toggle state of an overflow button is propagated to the twin element located in the toolbar wrapper", 2, function() {
         var toolbar = container.kendoToolBar({
             items: [
                 { type: "button", id: "foo", text: "foo", togglable: true }
@@ -284,7 +284,7 @@
         ok($("#foo_overflow").hasClass("k-state-active"));
     });
 
-    test("Hide method hides an item", 2, function() {
+    test("Hide method hides a button", 4, function() {
         var toolbar = container.kendoToolBar({
             items: [
                 { type: "button", id: "foo", text: "foo" },
@@ -293,7 +293,29 @@
         }).data("kendoToolBar");
 
         toolbar.hide("#foo");
+
         ok($("#foo").hasClass("k-state-hidden"));
         ok($("#foo").is(":hidden"));
+
+        ok($("#foo_overflow").hasClass("k-state-hidden"));
+        ok($("#foo_overflow").is(":hidden"));
+    });
+
+    test("Hide method hides a button from Button group", 3, function() {
+        var toolbar = container.kendoToolBar({
+            items: [{
+                type: "buttonGroup",
+                buttons: [
+                    { text: "foo", id: "foo" },
+                    { text: "bar", id: "bar" }
+                ]
+            }]
+        }).data("kendoToolBar");
+
+        toolbar.hide("#foo");
+        ok($("#foo").is(":hidden"));
+
+        ok($("#foo_overflow").hasClass("k-state-hidden"));
+        ok($("#foo_overflow").is(":hidden"));
     });
 })();

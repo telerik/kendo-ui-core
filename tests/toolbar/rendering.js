@@ -125,11 +125,11 @@
             }]
         });
 
-        var button = $("#foo");
-        var overflowButton = $("#foo_overflow");
+        var clickHandler = $("#foo").data("button").clickHandler;
+        var overflowClickHandler = $("#foo_overflow").data("button").clickHandler;
 
-        ok(kendo.isFunction(button.data("click")), "Click event handler is saved in the data of the button element");
-        ok(kendo.isFunction(overflowButton.data("click")), "Click event handler is saved in the data of the overflowButton element");
+        ok(kendo.isFunction(clickHandler), "Click event handler is saved in the data of the button element");
+        ok(kendo.isFunction(overflowClickHandler), "Click event handler is saved in the data of the overflowButton element");
     });
 
     test("url sets a href to the button element if it is an anchor", function() {
@@ -401,7 +401,7 @@
         }).data("kendoToolBar");
 
         var button = toolbar.element.find("#foo");
-        var overflowButton = toolbar.popup.element.children().eq(0);
+        var overflowButton = toolbar.popup.element.children().eq(0).find("a.k-button");
 
         equal(button.text(), "");
         equal(overflowButton.text(), "foo");
@@ -414,12 +414,12 @@
             ]
         }).data("kendoToolBar");
 
-        var icon = toolbar.element.find("#foo").children("span.k-icon");
+        var icon = toolbar.element.find("#foo").find("span.k-icon");
 
         equal(icon.length, 1);
         ok(icon.hasClass("k-i-foo"));
 
-        icon = toolbar.popup.element.find("#foo_overflow").children("span.k-icon");
+        icon = toolbar.popup.element.find("#foo_overflow").find("span.k-icon");
 
         equal(icon.length, 1);
         ok(icon.hasClass("k-i-foo"));
@@ -449,11 +449,11 @@
             ]
         }).data("kendoToolBar");
 
-        var icon = toolbar.element.find("#foo").children("span.k-icon");
+        var icon = toolbar.element.find("#foo").find("span.k-icon");
 
         equal(icon.length, 0);
 
-        icon = toolbar.popup.element.find("#foo_overflow").children("span.k-icon");
+        icon = toolbar.popup.element.find("#foo_overflow").find("span.k-icon");
 
         equal(icon.length, 1);
         ok(icon.hasClass("k-i-foo"));
@@ -560,11 +560,11 @@
             }]
         });
 
-        var button = $("#foo");
-        var overflowButton = $("#foo_overflow");
+        var toggleHandler = $("#foo").data("button").toggleHandler;
+        var overflowToggleHandler = $("#foo_overflow").data("button").toggleHandler;
 
-        ok(kendo.isFunction(button.data("toggle")), "Toggle event handler is saved in the data of the button element");
-        ok(kendo.isFunction(overflowButton.data("toggle")), "Toggle event handler is saved in the data of the overflowButton element");
+        ok(kendo.isFunction(toggleHandler), "Toggle event handler is saved in the data of the button element");
+        ok(kendo.isFunction(overflowToggleHandler), "Toggle event handler is saved in the data of the overflowButton element");
     });
 
     /* BUTTON GROUP */
