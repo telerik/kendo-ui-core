@@ -30,8 +30,9 @@ position: 2
 
 ### Important Notes
 
+* IE11 was released in October 2013. For IE11 support use Q3 2013 SP2 (2013.3.1324) or a newer Kendo UI version.
 * Browsers in beta stage are not supported;
-* [Quirks mode](http://www.quirksmode.org/css/quirksmode.html) is not supported. Always specify a [DOCTYPE](http://reference.sitepoint.com/html/doctypes).
+* **[Quirks mode](http://www.quirksmode.org/css/quirksmode.html) is not supported.** Always specify a [DOCTYPE](http://reference.sitepoint.com/html/doctypes).
 Recommended DOCTYPES include `HTML5`, `XHTML 1.1`, `XHTML 1.0 Strict` and `HTML4 Strict`. The `HTML4 Transitional` DOCTYPE triggers quirks mode and should not be used.
 `XHTML 1.0 Transitional` works well in most cases, but may cause issues with vertical positioning of icons.
 The correct syntax for [all DOCTYPES](http://www.w3.org/QA/2002/04/valid-dtd-list.html) is provided on the W3C website.
