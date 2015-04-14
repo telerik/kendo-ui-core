@@ -1084,7 +1084,7 @@ var __meta__ = {
         autoScrollVelocity: autoScrollVelocity,
         scrollableViewPort: scrollableViewPort,
         findScrollableParent: findScrollableParent
-    }
+    };
 
  })(window.kendo.jQuery);
 
