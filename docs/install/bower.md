@@ -36,6 +36,8 @@ You can also add the package in the `bower.json` file:
 
 Upon install/update you will be prompted for your Telerik username and password.
 
+> The professional bower package is available only for licensed user accounts; *it is not accessible for trial accounts*.
+
 ## Automate Kendo UI Professional package install on production servers
 
 To avoid retyping the user name/password entry when deploying, store the credentials in a [.netrc file](http://www.gnu.org/software/inetutils/manual/html_node/The-_002enetrc-File.html)
