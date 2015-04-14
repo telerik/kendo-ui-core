@@ -181,6 +181,29 @@ data source is fired. By default the widget will bind to the data source specifi
     dataSource.read(); // "read()" will fire the "change" event of the dataSource and the widget will be bound
     </script>
 
+### autoScroll `Boolean`*(default: false)*
+
+If set to `true` the widget will auto-scroll the containing element when the mouse/finger is close to the top/bottom of it.
+
+#### Example - use autoScroll in a scrollable container
+
+    <div style="height: 200px; overflow: auto">
+        <div style="height:1500px">
+            <div id="treeview"></div>
+        </div>
+    </div>
+    <script>
+    var dataSource = new kendo.data.HierarchicalDataSource({
+      data: [ { text: "Jane Doe" }, { text: "John Doe" }]
+    });
+
+    $("#treeview").kendoTreeView({
+      autoScroll: true,
+      dataSource: dataSource
+    });
+    dataSource.read(); // "read()" will fire the "change" event of the dataSource and the widget will be bound
+    </script>
+
 ### checkboxes `Boolean|Object`
 
 If `true` or an object, renders checkboxes beside each node.
