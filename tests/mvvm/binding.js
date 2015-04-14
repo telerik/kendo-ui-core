@@ -262,6 +262,18 @@ test("select binding", function() {
     equal(dom.find("option").last().text(), "2");
 });
 
+test("select source binding - no option should be selected if the model's field value is empty", function() {
+    dom = $('<select data-bind="value:product.name, source:dataSource"/>');
+
+    var vm = kendo.observable({
+        product: {name: null},
+        dataSource: []
+    });
+    kendo.bind(dom, vm);
+    vm.set("dataSource", [1,2,3,4]);
+    equal(dom.val(), vm.product.name);
+});
+
 test("select binding with template", function() {
     dom = $('<select data-template="select-template" data-bind="source:foo"/>');
 
