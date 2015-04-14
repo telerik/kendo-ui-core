@@ -235,7 +235,7 @@ var getKendoFile = (function() {
                 file: this.filename().replace(/\.js$/i, ".min.js"),
                 orig_line_diff: 8,
                 dest_line_diff: 8,
-                root: "../src/src/"
+                root: "../src/js/"
             });
             return this.buildMinAST().print_to_string({
                 source_map: source_map
@@ -728,7 +728,7 @@ function bundleFiles(files, filename, min) {
             file: filename,
             orig_line_diff: 8,
             dest_line_diff: 8,
-            root: "../src/src/"
+            root: "../src/js/"
         });
         code = ast.print_to_string({ source_map: map });
         return {
