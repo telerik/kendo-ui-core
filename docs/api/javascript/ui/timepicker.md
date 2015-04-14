@@ -132,7 +132,7 @@ The duration of the open animation in milliseconds.
     $("#timepicker").kendoTimePicker({
         dates: [
             new Date(2000, 10, 10, 10, 0, 0),
-            new Date(2000, 10, 10, 30, 0)
+            new Date(2000, 10, 10, 10, 30, 0)
         ] //the drop-down list will consist only two entries - "10:00 AM" and "10:30 AM"
     });
     </script>
