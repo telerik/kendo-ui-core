@@ -31,7 +31,7 @@
         equal(li.attr("role"), "option");
         equal(li.attr("unselectable"), "on");
         equal(li.attr("class"), "k-item");
-        equal(li.attr("data-index"), 0);
+        equal(li.attr("data-offset-index"), 0);
     });
 
     test("kendoStaticList renders selected class if item is selected", function() {
