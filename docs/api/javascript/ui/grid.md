@@ -6372,9 +6372,10 @@ Expands specified master row.
 
 ### getOptions
 
-Retrieves the options that are currently enabled or disabled on the Grid, also gives the current state of the dataSource. Use this method if you want to save the state of the Grid into a variable.
+Retrieves the options that are currently enabled or disabled on the Grid, also gives the current state of the dataSource.
+Use this method if you want to save the state of the Grid into a variable.
 
-> Notice that when the options object is retrieved and then serialized into a string through JSON.stringify(options), then each field that is a function will be lost. This is limitation of the serialization that the JSON.stringify does. You need to either explicitly set the fields that were functions after parsing the object back or you need to use some [custom implementation](https://github.com/tarruda/super-json) for serialization to handle the serialization of the JavaScript functions.
+> Please refer to the [`setOptions()`](#methods-setOptions) method documentation for more important information.
 
 #### Parameters
 
@@ -6820,9 +6821,20 @@ The data source to which the widget should be bound.
 
 ### setOptions
 
-Sets the options of the Grid. Use this method if you want to enable/disable a particular feature/option or to load the complete state retrieved via the [`getOptions`](#getOptions) method.
+Sets the options of the Grid. Use this method if you want to enable/disable a particular feature/option or to load
+the complete state obtained previously with the [`getOptions`](#methods-getOptions) method.
 
-> An important limitation when using the `setOptions` method in combination with the MVC wrappers is that any toolbar or header server templates (razor syntax @<text></text>) will be lost and the layout will become incorrect once the method is invoked. Those options cannot be persisted because there is no JavaScript equivalent option for them since they contain server side logic. Consider using JavaScript initialization (instead of the MVC wrapper). An alternative is to specify the same option with the JavaScript equivalent.
+> There are two important things to keep in mind when using `getOptions` and `setOptions`.
+> 
+> * `JSON.stringify()` cannot serialize function references (e.g. event handlers), so if stringification is used for the retrieved Grid state,
+> all configuration fields, which represent function references, will be lost. You have two options to avoid this limitation:
+> use a [custom implementation](https://github.com/tarruda/super-json) to serialize JavaScript functions, or
+> add the function references back to the deserialized configuration object before passing it to the `setOptions` method.
+> * When using the Grid MVC wrapper, any server templates will not be retrieved by the `getOptions` method (e.g. toolbar or header templates with `@<text></text>` razor syntax).
+> This is because the server templates are rendered server-side and do not have corresponding configuration options included in the JavaScript initialization statement that creates the
+> Grid object client-side. As a result, the templates will be lost once the `setOptions()` method is invoked.
+> There are two options to avoid the issue - use JavaScript initialization instead of an MVC wrapper, or add template configuration to the retrieved Grid state with the JavaScript
+> equivalent syntax (e.g. [`headerTemplate`](/api/javascript/ui/grid#configuration-columns.headerTemplate) and [`toolbar`](/api/javascript/ui/grid#configuration-toolbar)).
 
 #### Parameters
 
