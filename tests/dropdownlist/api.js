@@ -671,6 +671,60 @@
         equal(JSON.stringify(dropdownlist.dataItem().toJSON()), '{"item":""}');
     });
 
+    test("dataItem method returns a dataItem based on LI element", function() {
+        dropdownlist = new DropDownList(input, {
+            dataSource: [
+                { item: "item1" },
+                { item: "item2" }
+            ],
+            dataTextField: "item",
+            dataValueField: "item",
+            optionLabel: "Select..."
+        });
+
+        var dataItem = dropdownlist.dataItem(dropdownlist.ul.children(":first"));
+
+        ok(dataItem instanceof kendo.data.ObservableObject);
+        equal(JSON.stringify(dataItem.toJSON()), '{"item":"item1"}');
+    });
+
+    test("dataItem method returns a dataItem based on OptionLabel element", function() {
+        dropdownlist = new DropDownList(input, {
+            dataSource: [
+                { item: "item1" },
+                { item: "item2" }
+            ],
+            dataTextField: "item",
+            dataValueField: "item",
+            optionLabel: "Select..."
+        });
+
+        var dataItem = dropdownlist.dataItem(dropdownlist.optionLabel);
+
+        ok(dataItem instanceof kendo.data.ObservableObject);
+        equal(JSON.stringify(dataItem.toJSON()), '{"item":""}');
+    });
+
+    test("dataItem method returns options.optionLabel based on OptionLabel element", function() {
+        dropdownlist = new DropDownList(input, {
+            dataSource: [
+                { item: "item1" },
+                { item: "item2" }
+            ],
+            dataTextField: "item",
+            dataValueField: "item",
+            optionLabel: {
+              item: "Select...",
+              custom: "custom"
+            }
+        });
+
+        var dataItem = dropdownlist.dataItem(dropdownlist.optionLabel);
+
+        ok(dataItem instanceof kendo.data.ObservableObject);
+        equal(JSON.stringify(dataItem.toJSON()), '{"item":"Select...","custom":"custom"}');
+    });
+
     test("DropDownList re-binds on dataSource.data([])", function() {
         dropdownlist = new DropDownList(input, ["item1", "item2"]);
 
