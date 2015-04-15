@@ -1,5 +1,5 @@
+(function ($, undefined) {
 /* Validator */
-
 if (kendo.ui.Validator) {
 kendo.ui.Validator.prototype.options.messages =
 $.extend(true, kendo.ui.Validator.prototype.options.messages,{
@@ -512,3 +512,4 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "showWorkDay": "Покажи работни часове"
 });
 }
+})(window.kendo.jQuery);
