@@ -329,6 +329,36 @@
         equal(dom.data("kendoMultiSelect").value().length, 1);
         equal(dom.data("kendoMultiSelect").value()[0], "bar");
     });
+    ////
+
+    test("value binding fetches the data when valuePrimitive:true and autoBind:false", function() {
+        dom = $('<select data-role="multiselect" data-value-field="value" data-text-field="text" data-value-primitive="true" data-bind="value:value, source:items"></select>');
+
+        var observable = kendo.observable({ items: [{text:"foo", value: "foo"}, {text:"bar", value: "bar"}], value: ["bar"] });
+
+        kendo.bind(dom, observable);
+
+        var widget = dom.data("kendoMultiSelect");
+
+        equal(widget.dataSource.view().length, 2);
+    });
+
+    test("value binding honors autoBind:false option when valuePrimitive is false", function() {
+        dom = $('<select data-role="multiselect" data-value-field="value" data-text-field="text" data-auto-bind="false" data-value-primitive="false" data-bind="value:value, source:items"></select>');
+
+        var observable = kendo.observable({ items: [{text:"foo", value: "1" }, {text:"bar", value: "2"}] });
+        observable.value = observable.items[1];
+
+        kendo.bind(dom, observable);
+
+        var widget = dom.data("kendoMultiSelect");
+        var tags = widget.tagList.children();
+
+        equal(widget.dataSource.view().length, 1);
+
+        equal(tags.length, 1);
+        equal(tags.first().children("span:first").text(), "bar");
+    });
 
     test("binding template", function() {
         dom = $('<select data-item-template="template" data-role="multiselect" data-bind="source:items" />');

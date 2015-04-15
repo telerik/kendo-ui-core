@@ -69,7 +69,7 @@ var __meta__ = {
 
     var MultiSelect = List.extend({
         init: function(element, options) {
-            var that = this, id, data;
+            var that = this, id;
 
             that.ns = ns;
             List.fn.init.call(that, element, options);
@@ -87,7 +87,6 @@ var __meta__ = {
 
             element = that.element.attr("multiple", "multiple").hide();
             options = that.options;
-            data = options.value;
 
             if (!options.placeholder) {
                 options.placeholder = element.data("placeholder");
@@ -116,19 +115,25 @@ var __meta__ = {
 
             if (options.autoBind) {
                 that.dataSource.fetch();
-            } else if (data) {
-                if (!isArray(data)) {
-                    data = [data];
-                }
-
-                if ($.isPlainObject(data[0]) || !options.dataValueField) {
-                    that._retrieveData = true;
-                    that.dataSource.data(data);
-                    that.value(that._initialValues);
-                }
+            } else if (options.value) {
+                that._preselect(options.value);
             }
 
             kendo.notify(that);
+        },
+
+        _preselect: function(data, value) {
+            var that = this;
+
+            if (!isArray(data)) {
+                data = [data];
+            }
+
+            if ($.isPlainObject(data[0]) || data[0] instanceof kendo.data.ObservableObject || !that.options.dataValueField) {
+                that._retrieveData = true;
+                that.dataSource.data(data);
+                that.value(value || that._initialValues);
+            }
         },
 
         options: {

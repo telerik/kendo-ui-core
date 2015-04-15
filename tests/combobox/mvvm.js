@@ -150,6 +150,46 @@ test("binding combobox initialized after binding", function() {
     equal(dom.data("kendoComboBox").value(), "bar");
 });
 
+test("value binding honors autoBind:false option when valuePrimitive is true", function() {
+    dom = $('<input data-role="combobox" data-value-field="text" data-text-field="text" data-auto-bind="false" data-value-primitive="true" data-bind="value:value, source:items" />');
+
+    var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}], value: "bar" });
+
+    kendo.bind(dom, observable);
+
+    var widget = dom.data("kendoComboBox");
+
+    equal(widget.value(), "bar");
+    equal(widget.text(), "");
+});
+
+test("value binding displays options.text when autoBind:false and valuePrimitive is true", function() {
+    dom = $('<input data-role="combobox" data-value-field="text" data-text-field="text" data-auto-bind="false" data-text="selected text" data-value-primitive="true" data-bind="value:value, source:items" />');
+
+    var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}], value: "bar" });
+
+    kendo.bind(dom, observable);
+
+    var widget = dom.data("kendoComboBox");
+
+    equal(widget.value(), "bar");
+    equal(widget.text(), "selected text");
+});
+
+test("value binding honors autoBind:false option when valuePrimitive is false", function() {
+    dom = $('<input data-role="combobox" data-value-field="value" data-text-field="text" data-auto-bind="false" data-value-primitive="false" data-bind="value:value, source:items" />');
+
+    var observable = kendo.observable({ items: [{text:"foo", value: "1" }, {text:"bar", value: "2"}] });
+    observable.value = observable.items[1];
+
+    kendo.bind(dom, observable);
+
+    var widget = dom.data("kendoComboBox");
+
+    equal(widget.value(), "2");
+    equal(widget.text(), "bar");
+});
+
 test("binding template", function() {
     dom = $('<select data-template="template" data-role="combobox" data-bind="source:items" />');
 
