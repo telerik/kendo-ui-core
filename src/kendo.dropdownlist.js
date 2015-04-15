@@ -443,7 +443,7 @@ var __meta__ = {
                         }
 
                         that._initialIndex = null;
-                    } else if (that._textAccessor() !== optionLabel) {
+                    } else if (that._textAccessor() !== that._optionLabelText()) {
                         that.listView.value("");
                         that._selectValue(null);
                     }
@@ -1112,7 +1112,7 @@ var __meta__ = {
         },
 
         _textAccessor: function(text) {
-            var dataItem = this.listView.selectedDataItems()[0];
+            var dataItem = null;
             var template = this.valueTemplate;
             var options = this.options;
             var optionLabel = options.optionLabel;
@@ -1126,7 +1126,7 @@ var __meta__ = {
                     template = this.optionLabelTemplate;
                 }
 
-                if (dataItem === undefined) {
+                if (!dataItem) {
                     dataItem = this._assignInstance(text, this._accessor());
                 }
 
@@ -1142,6 +1142,11 @@ var __meta__ = {
             } else {
                 return span.text();
             }
+        },
+
+        _preselect: function(value, text) {
+            this._accessor(value);
+            this._textAccessor(text);
         },
 
         _assignInstance: function(text, value) {

@@ -1150,28 +1150,36 @@ var __meta__ = {
             },
 
             refresh: function() {
-
                 if (!this._initChange) {
-                    var field = this.options.dataValueField || this.options.dataTextField,
-                        value = this.bindings.value.get(),
-                              idx = 0, length,
-                              values = [];
+                    var widget = this.widget;
+                    var textField = this.options.dataTextField;
+                    var valueField = this.options.dataValueField || textField;
+                    var value = this.bindings.value.get();
+                    var text = this.options.text || "";
+                    var idx = 0, length;
+                    var values = [];
 
                     if (value === undefined) {
                         value = null;
                     }
 
-                    if (field) {
+                    if (valueField) {
                         if (value instanceof ObservableArray) {
                             for (length = value.length; idx < length; idx++) {
-                                values[idx] = value[idx].get(field);
+                                values[idx] = value[idx].get(valueField);
                             }
                             value = values;
                         } else if (value instanceof ObservableObject) {
-                            value = value.get(field);
+                            text = value.get(textField);
+                            value = value.get(valueField);
                         }
                     }
-                    this.widget.value(value);
+
+                    if (widget.options.autoBind === false) {
+                        widget._preselect(value, text);
+                    } else {
+                        widget.value(value);
+                    }
                 }
 
                 this._initChange = false;
@@ -1280,6 +1288,7 @@ var __meta__ = {
                     if (!this._initChange) {
                         var field = this.options.dataValueField || this.options.dataTextField,
                             value = this.bindings.value.get(),
+                            data = value,
                             idx = 0, length,
                             values = [],
                             selectedValue;
@@ -1300,7 +1309,11 @@ var __meta__ = {
                             }
                         }
 
-                        this.widget.value(value);
+                        if (this.options.autoBind === false && this.options.valuePrimitive !== true) {
+                            this.widget._preselect(data, value);
+                        } else {
+                            this.widget.value(value);
+                        }
                     }
                 },
 
