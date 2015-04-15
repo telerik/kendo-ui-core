@@ -72,7 +72,6 @@
     });
 
     test("click() select li and set date", function() {
-    debugger;
         var tv = new TimeView({
             anchor: input,
             format: "h:mm tt",
