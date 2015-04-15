@@ -6,11 +6,12 @@ description: Use Kendo UI Inline Editor inside a Window
 
 # Use Kendo UI Inline Editor inside a Window
 
-The inline Editor uses a floating toolbar, which is placed inside a Kendo UI Window instance.
-When several Kendo UI Window instances are open, the last focused one goes on top of all others, which can lead to the Editor toolbar being hidden behind
+The inline Editor uses a popup toolbar, which is placed inside a Kendo UI Window instance.
+When several Kendo UI Window instances are open, the last focused one always moves on top of all others, which can lead to the Editor toolbar being hidden behind
 the Window instance that holds the Editor.
 
-The example below demonstrates how to handle such a scenario by forcing a fixed z-index style to the Window, which holds the Editor.
+The example below demonstrates how to handle such a scenario. A fixed `z-index` style should be enforced to the Window, which holds the Editor.
+An `!important` clause should be used with the `z-index` style.
 
 #### Example
 
@@ -19,7 +20,9 @@ The example below demonstrates how to handle such a scenario by forcing a fixed 
 
 .zIndexEnforce
 {
-    z-index: 2999 !important;
+    /* '!important' is required to override an existsing inline style */
+    /* the z-index value itself can be arbitrary */
+    z-index: 12345 !important;
 }
 
 </style>
