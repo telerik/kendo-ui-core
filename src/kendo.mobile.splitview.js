@@ -61,6 +61,10 @@ var __meta__ = {
                     pane = kendo.compileMobileDirective($(this), options.$angular[0]);
                     that.panes.push(pane);
                 });
+
+                that.element.children(kendo.directiveSelector("header footer")).each(function() {
+                    kendo.compileMobileDirective($(this), options.$angular[0]);
+                });
             }
 
             that.expandedPaneShim = $(EXPANED_PANE_SHIM).appendTo(that.element);
