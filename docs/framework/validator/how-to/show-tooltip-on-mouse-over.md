@@ -21,6 +21,11 @@ The example below demonstrates how to show the validation tooltip only when movi
       {
         border: 1px solid red;
       }
+      .k-widget > span.k-invalid,
+      input.k-invalid
+      {
+        border: 1px solid red !important;
+      }
       .k-textbox {
         width: 11.8em;
       }
@@ -88,6 +93,18 @@ The example below demonstrates how to show the validation tooltip only when movi
                 <input type="text" id="fullname" name="fullname" class="k-textbox" placeholder="Full name" required validationMessage="Enter {0}" style="width: 200px;" />
               </div>
             </li>
+            <li>
+              <label for="email" class="required">Email</label>
+              <div style="display:inline-block">
+                <input type="email" id="email" name="email" class="k-textbox" placeholder="Email" required style="width: 200px;" />
+              </div>
+            </li>
+            <li>
+              <label for="age" class="required">Age</label>
+              <div style="display:inline-block">
+                <input id="age" name="age" placeholder="Age" style="width: 200px;" required />
+              </div>
+            </li>
             <li  class="accept">
               <button class="k-button" type="submit">Submit</button>
             </li>
@@ -108,12 +125,18 @@ The example below demonstrates how to show the validation tooltip only when movi
             errorTemplate: errorTemplate
           }).data("kendoValidator");
 
+          $("#age").kendoNumericTextBox();
+
           var tooltip = $("#tickets").kendoTooltip({
             filter: ".k-invalid",
             content: function(e) {
-              var errorMessage = $("#tickets").find("[data-for=" + e.target.attr("name") + "]");
+              var name = e.target.attr("name") || e.target.closest(".k-widget").find(".k-invalid:input").attr("name");
+              var errorMessage = $("#tickets").find("[data-for=" + name + "]");
 
               return '<span class="k-icon k-warning"> </span>' + errorMessage.text();
+            },
+            show: function() {
+              this.refresh();
             }
           });
 
@@ -131,6 +154,46 @@ The example below demonstrates how to show the validation tooltip only when movi
               .addClass("invalid");
             }
           });
+
+          var elements = $("#tickets").find("[data-role=autocomplete],[data-role=combobox],[data-role=dropdownlist],[data-role=numerictextbox]");
+
+          //correct mutation event detection
+          var hasMutationEvents = ("MutationEvent" in window),
+              MutationObserver = window.WebKitMutationObserver || window.MutationObserver;
+
+          if (MutationObserver) {
+            var observer = new MutationObserver(function (mutations) {
+              var idx = 0,
+                  mutation,
+                  length = mutations.length;
+
+              for (; idx < length; idx++) {
+                mutation = mutations[idx];
+                if (mutation.attributeName === "class") {
+                  updateCssOnPropertyChange(mutation);
+                }
+              }
+            }),
+                config = { attributes: true, childList: false, characterData: false };
+
+            elements.each(function () {
+              observer.observe(this, config);
+            });
+          } else if (hasMutationEvents) {
+            elements.bind("DOMAttrModified", updateCssOnPropertyChange);
+          } else {
+            elements.each(function () {
+              this.attachEvent("onpropertychange", updateCssOnPropertyChange);
+            });
+          }
+
+          function updateCssOnPropertyChange (e) {
+            var element = $(e.target || e.srcElement);
+
+            element.siblings("span.k-dropdown-wrap")
+            .add(element.parent("span.k-numeric-wrap"))
+            .toggleClass("k-invalid", element.hasClass("k-invalid"));
+          }
         });
       </script>
     </div>
