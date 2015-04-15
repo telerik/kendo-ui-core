@@ -4,7 +4,7 @@ page_title: Drag and Drop Markers
 description: This article demonstrates how to integrate the Draggable widget with the Map
 ---
 
-# Zoom on Map Area
+# How to integrate the Kendo UI Draggable widget with the Map
 
 This article demonstrates how to integrate the Draggable widget with the Map.
 
