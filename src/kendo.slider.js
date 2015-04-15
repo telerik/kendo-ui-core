@@ -1299,7 +1299,7 @@ var __meta__ = {
             firstInput.type = "text";
             secondInput.type = "text";
 
-            if (options.showButtons) {
+            if (options && options.showButtons) {
                 if (window.console) {
                     window.console.warn("showbuttons option is not supported for the range slider, ignoring");
                 }
