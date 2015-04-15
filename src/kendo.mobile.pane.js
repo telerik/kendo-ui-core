@@ -30,14 +30,10 @@ var __meta__ = {
         SAME_VIEW_REQUESTED = "sameViewRequested",
         OS = kendo.support.mobileOS,
         SKIP_TRANSITION_ON_BACK_BUTTON = OS.ios && !OS.appMode && OS.flatVersion >= 700,
-
         WIDGET_RELS = /popover|actionsheet|modalview|drawer/,
         BACK = "#:back",
 
-        attrValue = kendo.attrValue,
-        // navigation element roles
-        buttonRoles = "button backbutton detailbutton listview-link",
-        linkRoles = "tab";
+        attrValue = kendo.attrValue;
 
     var Pane = Widget.extend({
         init: function(element, options) {
@@ -274,13 +270,18 @@ var __meta__ = {
         },
 
         _setupAppLinks: function() {
-            var that = this;
+            var that = this,
+                linkRoles = "tab",
+                pressedButtonSelector = "[data-" + kendo.ns + "navigate-on-press]",
+                buttonSelector = roleSelector("button") + ":not(" + pressedButtonSelector + ")",
+                buttonSelectors = roleSelector("backbutton detailbutton listview-link") + "," + buttonSelector;
+
             this.element.handler(this)
-                .on("down", roleSelector(linkRoles)+",[data-navigate-on-press]", "_mouseup")
-                .on("click", roleSelector(linkRoles + " " + buttonRoles), "_appLinkClick");
+                .on("down", roleSelector(linkRoles) + "," + pressedButtonSelector, "_mouseup")
+                .on("click", roleSelector(linkRoles) + " " + buttonSelectors, "_appLinkClick");
 
             this.userEvents = new kendo.UserEvents(this.element, {
-                filter: roleSelector(buttonRoles),
+                filter: buttonSelectors,
                 tap: function(e) {
                     e.event.currentTarget = e.touch.currentTarget;
                     that._mouseup(e.event);
@@ -304,6 +305,8 @@ var __meta__ = {
             if (e.which > 1 || e.isDefaultPrevented()) {
                 return;
             }
+
+            console.log("navigate");
 
             var pane = this,
                 link = $(e.currentTarget),
