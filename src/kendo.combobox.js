@@ -844,7 +844,7 @@ var __meta__ = {
         _preselect: function(value, text) {
             this._accessor(value);
             this.input.val(text);
-        },
+        }
     });
 
     ui.plugin(ComboBox);
