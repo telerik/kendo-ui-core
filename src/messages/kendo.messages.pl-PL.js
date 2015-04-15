@@ -1,3 +1,4 @@
+(function ($, undefined) {
 /* Filter cell operator messages */
 
 if (kendo.ui.FilterCell) {
@@ -388,3 +389,4 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "showWorkDay": "Show business hours"
 });
 }
+})(window.kendo.jQuery);

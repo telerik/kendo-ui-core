@@ -1,3 +1,4 @@
+(function ($, undefined) {
 /* Filter cell operator messages */
 
 if (kendo.ui.FilterCell) {
@@ -268,7 +269,7 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "dialogCancel": "Fermer",
   "dialogInsert": "Insérer",
   "imageAltText": "Le texte de remplacement",
-  "imageWebAddress": "Adresse Web",  
+  "imageWebAddress": "Adresse Web",
   "imageWidth": "Largeur (px)",
   "imageHeight": "Hauteur (px)",
   "linkOpenInNewWindow": "Ouvrir dans une nouvelle fenêtre",
@@ -391,3 +392,4 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "showWorkDay": "Montrer les heures ouvrables"
 });
 }
+})(window.kendo.jQuery);

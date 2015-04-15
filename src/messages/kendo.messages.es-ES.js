@@ -1,3 +1,4 @@
+(function ($, undefined) {
 /* Filter cell operator messages */
 
 if (kendo.ui.FilterCell) {
@@ -367,3 +368,4 @@ $.extend(true, kendo.ui.Upload.prototype.options.localization,{
   "uploadSelectedFiles": "Subir archivos"
 });
 }
+})(window.kendo.jQuery);

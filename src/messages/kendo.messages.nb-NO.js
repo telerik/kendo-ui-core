@@ -1,4 +1,5 @@
-﻿/* Filter cell operator messages */
+﻿function ($, undefined) {
+/* Filter cell operator messages */
 
 if (kendo.ui.FilterCell) {
     kendo.ui.FilterCell.prototype.options.operators =
@@ -362,3 +363,4 @@ if (kendo.ui.Scheduler) {
         "showWorkDay": "Vis arbeidstimer"
     });
 }
+})(window.kendo.jQuery);
