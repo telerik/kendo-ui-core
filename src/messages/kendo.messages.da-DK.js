@@ -363,4 +363,4 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "showWorkDay": "Show business hours"
 });
 }
-})(window.kendo.jQuery)
+})(window.kendo.jQuery);

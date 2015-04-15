@@ -418,4 +418,4 @@ $.extend(true, kendo.ui.Validator.prototype.options.messages,{
   "date": "{0} ist kein gültiges Datum"
 });
 }
-})(window.kendo.jQuery)
+})(window.kendo.jQuery);
