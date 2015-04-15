@@ -8198,7 +8198,7 @@ The event handler function context (available via the `this` keyword) will be se
 
 ##### e.model `kendo.data.Model`
 
-The data item to which the table row is bound.
+The data item to which the table row is bound. If `e.model.id` is null, then a newly created row is being saved.
 
 ##### e.container `jQuery`
 
