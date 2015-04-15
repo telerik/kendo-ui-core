@@ -306,8 +306,6 @@ var __meta__ = {
                 return;
             }
 
-            console.log("navigate");
-
             var pane = this,
                 link = $(e.currentTarget),
                 transition = attrValue(link, "transition"),
