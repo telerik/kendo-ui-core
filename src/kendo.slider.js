@@ -1299,6 +1299,14 @@ var __meta__ = {
             firstInput.type = "text";
             secondInput.type = "text";
 
+            if (options.showButtons) {
+                if (window.console) {
+                    window.console.warn("showbuttons option is not supported for the range slider, ignoring");
+                }
+
+                options.showButtons = false;
+            }
+
             options = extend({}, {
                 selectionStart: parseAttr(firstInput, "value"),
                 min: parseAttr(firstInput, "min"),
