@@ -49,6 +49,25 @@
             });
     });
 
+    test("dragenter is not raised for elements outside of the drop target area", 0, function() {
+        target = new DropTargetArea(targetElement, { filter: ".test1", dragenter: function(e) { ok(false); } });
+
+        draggable = new Draggable(span, {});
+
+        bogus = $("<div class=test1>Foo</div>").prependTo(QUnit.fixture);
+
+        var offset = kendo.getOffset(bogus);
+
+        trigger("mousedown", { pageX: 1, pageY: 1, clientX: 1, clientY: 1 });
+
+        trigger("mousemove", {
+            pageX: offset.left,
+            pageY: offset.top,
+            clientX: offset.left,
+            clientY: offset.top
+        });
+    });
+
     test("dragleave is raised, passing the draggable and the dropTarget", 2, function() {
         setup( {
                 filter: ".test1",
