@@ -101,12 +101,12 @@
             filter: "startswith"
         });
 
-        multiselect._showBusy();
+        multiselect.dataSource.trigger("progress");
 
         setTimeout(function() {
             start();
             equal(multiselect.input.attr("aria-busy"), "true");
-        }, 150);
+        }, 200);
     });
 
     test("MultiSelect adds aria-busy=false when loader is hidden", 1, function() {
