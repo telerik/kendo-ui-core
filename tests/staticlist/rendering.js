@@ -45,7 +45,7 @@
 
         var li = element.children(":first");
 
-        equal(li.attr("class"), "k-item k-state-focused k-state-selected");
+        equal(li.attr("class"), "k-item k-state-selected k-state-focused");
     });
 
     test("kendoStaticList renders multiple selected class if multiple items are selected", function() {
@@ -62,7 +62,7 @@
 
         equal(children.eq(0).attr("class"), "k-item k-state-selected");
         equal(children.eq(1).attr("class"), "k-item");
-        equal(children.eq(2).attr("class"), "k-item k-state-focused k-state-selected");
+        equal(children.eq(2).attr("class"), "k-item k-state-selected k-state-focused");
     });
 
     test("kendoStaticList renders selected item when object is complex", function() {
@@ -84,7 +84,7 @@
 
         equal(children.eq(0).attr("class"), "k-item k-state-selected");
         equal(children.eq(1).attr("class"), "k-item");
-        equal(children.eq(2).attr("class"), "k-item k-state-focused k-state-selected");
+        equal(children.eq(2).attr("class"), "k-item k-state-selected k-state-focused");
     });
 
     test("kendoStaticList renders grouped data source", function() {
@@ -305,7 +305,7 @@
 
         equal(children.eq(0).attr("class"), "k-item k-state-selected");
         equal(children.eq(1).attr("class"), "k-item");
-        equal(children.eq(2).attr("class"), "k-item k-first k-state-focused k-state-selected");
+        equal(children.eq(2).attr("class"), "k-item k-first k-state-selected k-state-focused");
     });
 
     test("kendoStaticList sets a data items collection during rendering", function() {
@@ -457,5 +457,63 @@
         });
 
         equal(list.focus(), null);
+    });
+
+    test("StaticList does not render selected items on filter (single selection)", 1, function() {
+        var list = new StaticList(element, {
+            selectable: true,
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "a" },
+                    { name: "item3", type: "b" }
+                ]
+            },
+            value: "item2",
+            template: '#:data.name#',
+        });
+
+        list.dataSource.read();
+
+        list.filter(true);
+        list.dataSource.filter({
+            field: "name",
+            operator: "eq",
+            value: "item2"
+        });
+
+        var selectedItems = list.element.find(".k-state-selected");
+
+        equal(selectedItems.length, 0);
+    });
+
+    test("StaticList renders selected items on filter (multiple selection)", 1, function() {
+        var list = new StaticList(element, {
+            selectable: "multiple",
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "a" },
+                    { name: "item3", type: "b" }
+                ]
+            },
+            value: ["item2"],
+            template: '#:data.name#',
+        });
+
+        list.dataSource.read();
+
+        list.filter(true);
+        list.dataSource.filter({
+            field: "name",
+            operator: "eq",
+            value: "item2"
+        });
+
+        var selectedItems = list.element.find(".k-state-selected");
+
+        equal(selectedItems.length, 1);
     });
 })();

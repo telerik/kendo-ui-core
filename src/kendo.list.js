@@ -1776,24 +1776,22 @@ var __meta__ = {
             }
         },
 
-        _renderItem: function(context, values) {
+        _renderItem: function(context) {
             var item = '<li tabindex="-1" role="option" unselectable="on" class="k-item';
 
             var dataItem = context.item;
             var notFirstItem = context.index !== 0;
-            var found = this._dataItemPosition(dataItem, values) !== -1;
-
-            //this._filtered &&
+            var selected = context.selected;
 
             if (notFirstItem && context.newGroup) {
                 item += ' k-first';
             }
 
-            if (found) {
+            if (selected) {
                 item += ' k-state-selected';
             }
 
-            item += '"' + (found ? ' aria-selected="true"' : "") + ' data-offset-index="' + context.index + '">';
+            item += '"' + (selected ? ' aria-selected="true"' : "") + ' data-offset-index="' + context.index + '">';
 
             item += this.templates.template(dataItem);
 
@@ -1823,21 +1821,26 @@ var __meta__ = {
                     newGroup = true;
 
                     for (j = 0; j < group.items.length; j++) {
-                        context = { item: group.items[j], group: group.value, newGroup: newGroup, index: idx };
+                        context = {
+                            selected: this._selected(group.items[j], values),
+                            item: group.items[j],
+                            group: group.value,
+                            newGroup: newGroup,
+                            index: idx };
                         dataContext[idx] = context;
                         idx += 1;
 
-                        html += this._renderItem(context, values);
+                        html += this._renderItem(context);
                         newGroup = false;
                     }
                 }
             } else {
                 for (i = 0; i < view.length; i++) {
-                    context = { item: view[i], index: i };
+                    context = { selected: this._selected(view[i], values), item: view[i], index: i };
 
                     dataContext[i] = context;
 
-                    html += this._renderItem(context, values);
+                    html += this._renderItem(context);
                 }
             }
 
@@ -1848,6 +1851,11 @@ var __meta__ = {
             if (isGrouped && dataContext.length) {
                 this._renderHeader();
             }
+        },
+
+        _selected: function(dataItem, values) {
+            var select = !this._filtered || this.options.selectable === "multiple";
+            return select && this._dataItemPosition(dataItem, values) !== -1;
         },
 
         refresh: function(e) {
