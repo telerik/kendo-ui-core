@@ -240,6 +240,32 @@ Defines if numeric portion of the pager will be shown.
         dataSource.read();
     </script>
 
+### allPages `Boolean` *(default: false)*
+If pageSizes and allPages options are enabled item which represents maximum pageSize will be added as first item in the pageSizes dropdownlist.
+
+#### Example - show the page size DropDownList
+    <div id="pager"></div>
+
+    <script>
+        var dataSource = new kendo.data.DataSource({
+          data: [
+            { productName: "Tea", category: "Beverages" },
+            { productName: "Coffee", category: "Beverages" },
+            { productName: "Ham", category: "Food" },
+            { productName: "Bread", category: "Food" }
+          ],
+          pageSize: 2
+        });
+
+        $("#pager").kendoPager({
+          dataSource: dataSource,
+          pageSizes: true,
+          allPages: true
+        });
+
+        dataSource.read();
+    </script>
+
 ### pageSizes `Boolean|Array` *(default: false)*
 Displays a list with predefined page sizes. An array of values to be displayed can be provided. If `pageSize` option is provided for DataSource then this `pageSize` value will be automatically selected in created selectbox.
 
@@ -394,6 +420,34 @@ The text displayed when the DataSource view does no contain items.
           dataSource: dataSource,
           messages: {
             empty: "No data"
+          }
+        });
+
+        dataSource.read();
+    </script>
+
+### messages.allPages `String`*(default: "All")*,
+The text displayed for the item that represents the allPages option when allPages is enabled.
+
+#### Example - set the label before the pager input
+    <div id="pager"></div>
+
+    <script>
+        var dataSource = new kendo.data.DataSource({
+          data: [
+            { productName: "Tea", category: "Beverages" },
+            { productName: "Coffee", category: "Beverages" },
+            { productName: "Ham", category: "Food" },
+            { productName: "Bread", category: "Food" }
+          ],
+          pageSize: 2
+        });
+
+        $("#pager").kendoPager({
+          dataSource: dataSource,
+          input: true,
+          messages: {
+            allPages: "All Pages"
           }
         });
 
