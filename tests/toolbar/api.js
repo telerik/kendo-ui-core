@@ -281,7 +281,7 @@
 
         toolbar.toggle("#foo_overflow");
         ok($("#foo").hasClass("k-state-active"));
-        ok($("#foo_overflow").hasClass("k-state-active"));
+        ok($("#foo_overflow > .k-button").hasClass("k-state-active"));
     });
 
     test("Hide method hides a button", 4, function() {

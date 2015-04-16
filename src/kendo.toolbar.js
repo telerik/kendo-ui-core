@@ -110,6 +110,21 @@ var __meta__ = {
                 }
                 this.element.toggleClass(STATE_DISABLED, !isEnabled);
                 this.options.enable = isEnabled;
+            },
+
+            twin: function() {
+                var uid = this.element.attr(KENDO_UID_ATTR);
+                if (this.overflow) {
+                    return this.toolbar
+                            .element
+                            .find("[" + KENDO_UID_ATTR + "='" + uid + "']")
+                            .data(this.options.type);
+                } else if (this.toolbar.options.resizable) {
+                    return this.toolbar
+                            .popup.element
+                            .find("[" + KENDO_UID_ATTR + "='" + uid + "']")
+                            .data(this.options.type);
+                }
             }
         });
 
@@ -119,6 +134,7 @@ var __meta__ = {
 
                 this.element = element;
                 this.options = options;
+                this.toolbar = toolbar;
 
                 this.attributes();
 
@@ -140,7 +156,9 @@ var __meta__ = {
 
                 if (options.group) {
                     element.attr(kendo.attr("group"), options.group);
-                    this.group = toolbar.addToGroup(this, options.group);
+                    if ((this.overflow && this.options.overflow === OVERFLOW_ALWAYS) || !this.overflow) {
+                        this.group = this.toolbar.addToGroup(this, options.group);
+                    }
                 }
 
                 if (!options.togglable && options.click && isFunction(options.click)) {
@@ -152,7 +170,7 @@ var __meta__ = {
                 }
             },
 
-            toggle: function(state) {
+            toggle: function(state, propagate) {
                 state = !!state;
 
                 if (this.group && state) {
@@ -160,18 +178,10 @@ var __meta__ = {
                 } else if (!this.group) {
                     this.select(state);
                 }
-            },
 
-            select: function(selected) {
-                if (selected === undefined) {
-                    selected = false;
+                if (propagate && this.twin()) {
+                    this.twin().toggle(state);
                 }
-                if (this.overflow === true) {
-                    this.element.find(".k-button").toggleClass(STATE_ACTIVE, selected);
-                } else {
-                    this.element.toggleClass(STATE_ACTIVE, selected);
-                }
-                this.options.selected = selected;
             },
 
             _addGraphics: function() {
@@ -255,11 +265,22 @@ var __meta__ = {
                     type: "button",
                     button: this
                 });
+            },
+
+            select: function(selected) {
+                if (selected === undefined) {
+                    selected = false;
+                }
+
+                this.element.toggleClass(STATE_ACTIVE, selected);
+                this.options.selected = selected;
             }
         });
 
         var OverflowButton = Button.extend({
             init: function(options, toolbar) {
+                this.overflow = true;
+
                 Button.fn.init.call(this, options, toolbar);
 
                 var element = this.element;
@@ -289,8 +310,6 @@ var __meta__ = {
                 this.addOverflowAttr();
                 this.enable(options.enable);
 
-                this.overflow = true;
-
                 this.element.data({
                     type: "button",
                     button: this
@@ -303,11 +322,24 @@ var __meta__ = {
 
             overflowHidden: function() {
                 this.element.addClass(OVERFLOW_HIDDEN);
+            },
+
+            select: function(selected) {
+                if (selected === undefined) {
+                    selected = false;
+                }
+
+                if (this.options.isChild) {
+                    this.element.toggleClass(STATE_ACTIVE, selected);
+                } else {
+                    this.element.find(".k-button").toggleClass(STATE_ACTIVE, selected);
+                }
+                this.options.selected = selected;
             }
         });
 
         var ButtonGroup = Item.extend({
-            createButtons: function(buttonConstructor, toolbar) {
+            createButtons: function(buttonConstructor) {
                 var options = this.options;
                 var items = options.buttons || [];
                 var item;
@@ -316,7 +348,7 @@ var __meta__ = {
                     if (!items[i].uid) {
                         items[i].uid = kendo.guid();
                     }
-                    item = new buttonConstructor($.extend({ mobile: options.mobile, isChild: true }, items[i]), toolbar);
+                    item = new buttonConstructor($.extend({ mobile: options.mobile, isChild: true, type: "button" }, items[i]), this.toolbar);
                     item.element.appendTo(this.element);
                 }
             },
@@ -331,6 +363,7 @@ var __meta__ = {
             init: function(options, toolbar) {
                 var element = this.element = $('<div></div>');
                 this.options = options;
+                this.toolbar = toolbar;
 
                 this.addIdAttr();
 
@@ -338,7 +371,7 @@ var __meta__ = {
                     element.addClass("k-align-" + options.align);
                 }
 
-                this.createButtons(ToolBarButton, toolbar);
+                this.createButtons(ToolBarButton);
                 this.attributes();
                 this.addUidAttr();
                 this.addOverflowAttr();
@@ -357,10 +390,12 @@ var __meta__ = {
             init: function(options, toolbar) {
                 var element = this.element = $('<li></li>');
                 this.options = options;
+                this.toolbar = toolbar;
+                this.overflow = true;
 
                 this.addOverflowIdAttr();
 
-                this.createButtons(OverflowButton, toolbar);
+                this.createButtons(OverflowButton);
                 this.attributes();
                 this.addUidAttr();
                 this.addOverflowAttr();
@@ -384,6 +419,7 @@ var __meta__ = {
                 var element = this.element = $('<div class="' + SPLIT_BUTTON + '"></div>');
 
                 this.options = options;
+                this.toolbar = toolbar;
 
                 this.mainButton = new ToolBarButton(options, toolbar);
                 this.arrowButton = $('<a class="' + BUTTON + " " + SPLIT_BUTTON_ARROW + '"><span class="' + (options.mobile ? "km-icon km-arrowdown" : "k-icon k-i-arrow-s") + '"></span></a>');
@@ -406,7 +442,7 @@ var __meta__ = {
                 this.addOverflowAttr();
                 this.addUidAttr();
 
-                this.createMenuButtons(toolbar);
+                this.createMenuButtons();
                 this.createPopup();
 
                 this.mainButton.main = true;
@@ -418,13 +454,13 @@ var __meta__ = {
                 });
             },
 
-            createMenuButtons: function(toolbar) {
+            createMenuButtons: function() {
                 var options = this.options;
                 var items = options.menuButtons;
                 var item;
 
                 for (var i = 0; i < items.length; i++) {
-                    item = new ToolBarButton($.extend({ mobile: options.mobile, click: options.click }, items[i]), toolbar);
+                    item = new ToolBarButton($.extend({ mobile: options.mobile, type: "button", click: options.click }, items[i]), this.toolbar);
                     item.element.wrap("<li></li>").parent().appendTo(this.popupElement);
                 }
             },
@@ -476,12 +512,14 @@ var __meta__ = {
                     item;
 
                 this.options = options;
+                this.toolbar = toolbar;
+                this.overflow = true;
 
                 this.mainButton = new OverflowButton($.extend({ isChild: true }, options));
                 this.mainButton.element.appendTo(element);
 
                 for (var i = 0; i < items.length; i++) {
-                    item = new OverflowButton($.extend({ mobile: options.mobile, isChild: true }, items[i]), toolbar);
+                    item = new OverflowButton($.extend({ mobile: options.mobile, isChild: true }, items[i]), this.toolbar);
                     item.element.appendTo(element);
                 }
 
@@ -502,11 +540,13 @@ var __meta__ = {
         });
 
         var ToolBarSeparator = Item.extend({
-            init: function(options) {
+            init: function(options, toolbar) {
                 var element = this.element = $('<div>&nbsp;</div>');
 
                 this.element = element;
                 this.options = options;
+                this.toolbar = toolbar;
+
                 this.attributes();
                 this.addIdAttr();
                 this.addUidAttr();
@@ -522,11 +562,14 @@ var __meta__ = {
         });
 
         var OverflowSeparator = Item.extend({
-            init: function(options) {
+            init: function(options, toolbar) {
                 var element = this.element = $('<li>&nbsp;</li>');
 
                 this.element = element;
                 this.options = options;
+                this.toolbar = toolbar;
+                this.overflow = true;
+
                 this.attributes();
                 this.addOverflowIdAttr();
                 this.addUidAttr();
@@ -546,7 +589,7 @@ var __meta__ = {
         });
 
         var TemplateItem = Item.extend({
-            init: function(template, options) {
+            init: function(template, options, toolbar) {
                 var element = isFunction(template) ? template(options) : template;
 
                 if (!(element instanceof jQuery)) {
@@ -557,6 +600,7 @@ var __meta__ = {
 
                 this.element = element;
                 this.options = options;
+                this.toolbar = toolbar;
 
                 this.attributes();
                 this.addUidAttr();
@@ -571,7 +615,7 @@ var __meta__ = {
         });
 
         var OverflowTemplateItem = Item.extend({
-            init: function(template, options) {
+            init: function(template, options, toolbar) {
                 var element = isFunction(template) ? $(template(options)) : $(template);
 
                 if (!(element instanceof jQuery)) {
@@ -582,6 +626,8 @@ var __meta__ = {
 
                 this.element = element;
                 this.options = options;
+                this.toolbar = toolbar;
+                this.overflow = true;
 
                 this.attributes();
                 this.addUidAttr();
@@ -678,9 +724,10 @@ var __meta__ = {
 
             select: function(button) {
                 for (var i = 0; i < this.buttons.length; i ++) {
-                    var theButton = this.buttons[i];
-                    theButton.select(theButton == button);
+                    this.buttons[i].select(false);
                 }
+
+                button.select(true);
             }
         });
 
@@ -952,7 +999,7 @@ var __meta__ = {
                     item = element.data("button");
 
                 if (item.options.togglable) {
-                    item.toggle(checked);
+                    item.toggle(checked ? checked : !item.options.selectable, true);
                 }
             },
 
@@ -1057,7 +1104,7 @@ var __meta__ = {
                 if (item.options.togglable) {
                     handler = isFunction(item.toggleHandler) ? item.toggleHandler : null;
 
-                    item.toggle(!item.options.selected);
+                    item.toggle(!item.options.selected, true);
                     eventData = { target: target, group: item.options.group, checked: item.options.selected, id: item.options.id };
 
                     if (handler) { handler.call(that, eventData); }
