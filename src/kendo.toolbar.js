@@ -571,7 +571,6 @@ var __meta__ = {
                 this.overflow = true;
 
                 this.attributes();
-                this.addOverflowIdAttr();
                 this.addUidAttr();
                 this.addOverflowIdAttr();
 
@@ -600,6 +599,7 @@ var __meta__ = {
 
                 this.element = element;
                 this.options = options;
+                this.options.type = "template";
                 this.toolbar = toolbar;
 
                 this.attributes();
@@ -626,12 +626,13 @@ var __meta__ = {
 
                 this.element = element;
                 this.options = options;
+                this.options.type = "template";
                 this.toolbar = toolbar;
                 this.overflow = true;
 
                 this.attributes();
                 this.addUidAttr();
-                this.addIdAttr();
+                this.addOverflowIdAttr();
                 this.addOverflowAttr();
 
                 element.data({
@@ -877,7 +878,7 @@ var __meta__ = {
                 //add the command in the overflow popup
                 if (options.overflow !== OVERFLOW_NEVER && that.options.resizable) {
                     if (overflowTemplate) { //template command
-                         overflowTool = new OverflowTemplateItem(overflowTemplate, options);
+                         overflowTool = new OverflowTemplateItem(overflowTemplate, options, that);
                     } else if (component) { //build-in command
                         overflowTool = new component.overflow(options, that);
                         overflowTool.element.addClass(itemClasses);
@@ -898,7 +899,7 @@ var __meta__ = {
                 //add the command in the toolbar container
                 if (options.overflow !== OVERFLOW_ALWAYS) {
                     if (template) { //template command
-                        tool = new TemplateItem(template, options);
+                        tool = new TemplateItem(template, options, that);
                     } else if (component) { //build-in command
                         tool = new component.toolbar(options, that);
                     }
@@ -948,10 +949,8 @@ var __meta__ = {
                     overflowItem = element.data(type);
                 }
 
-                if (toolbarItem) {
-                    uid = element.attr(KENDO_UID_ATTR);
-                    element = isResizable ? this.popup.element.find("[" + KENDO_UID_ATTR + "='" + uid + "']") : $([]);
-                    overflowItem = element.data(type);
+                if (toolbarItem && isResizable) {
+                    overflowItem = toolbarItem.twin();
                 }
 
                 return {
