@@ -4254,7 +4254,7 @@ The type of the request. Set to "create", "read", "update" or "destroy".
         }
       }
     });
-    dataSource.bind("requestEnd", dataSource_requestStart);
+    dataSource.bind("requestStart", dataSource_requestStart);
     dataSource.fetch();
     </script>
 
