@@ -368,28 +368,52 @@ This is a shorthand method for [`show(data, "error")`](#methods-show)
 
 Returns a jQuery collection of all visible notifications, displayed by the given widget instance. Each item in the collection is a `div.k-notification` element.
 
+If you will be using this method to dispose of all visible messages, (e.g. before showing new ones), then **remove** them from the DOM
+instead of [hiding](#methods-hide) them, unless animations are disabled. This is because animations are asynchronous and the new messages
+will be shown on the wrong places before the old ones have been hidden. Another thing to keep in mind is that when using
+[**popup**](/web/notification/overview#popup-messages) notification messages, you should remove the [**parent**](/web/notification/overview#html-output)
+of each member of the collection, returned by the `getNotifications()` method. In this case the parent will be a `div.k-animation-container` element.
+
 #### Example
 
     <span id="notification"></span>
+    <button id="removeMessages" type="button" class="k-button">Remove messages and show new ones</button>
+    
     <script>
+    
     var notificationWidget = $("#notification").kendoNotification({
         button: false,
         hideOnClick: false,
         autoHideAfter: 0
     }).data("kendoNotification");
+    
+    var messageCount = 1;
 
-    notificationWidget.show("foo");
-    notificationWidget.show("bar");
+    notificationWidget.show("foo " + messageCount);
+    notificationWidget.show("bar " + messageCount);
 
-    // since there is no way for the user to hide notifications,
-    // the following expression will return two elements, no matter when it is executed
-    var elements = notificationWidget.getNotifications();
+    $("#removeMessages").click(function(){
+        // since there is no way for the user to hide notifications,
+        // the following expression will return two elements, no matter when it is executed
+        var elements = notificationWidget.getNotifications();
+        
+        // remove the two messages from the DOM
+        elements.each(function(){
+            $(this).parent().remove();
+        });
+        
+        messageCount++;
+        
+        // show two new messages
+        notificationWidget.show("foo " + messageCount);
+        notificationWidget.show("bar " + messageCount);
+    });
+    
     </script>
 
 #### Returns
 
 `jQuery` A collection of all visible notifications.
-
 
 ### hide
 
