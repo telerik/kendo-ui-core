@@ -303,7 +303,7 @@
 
             ok(items.find(".foo").length > 0);
             items.each(function(idx, element) {
-                equal(element.innerText.trim(), "Item " + idx);
+                equal($(element).text().trim(), "Item " + idx);
             });
         });
     });
@@ -338,7 +338,7 @@
 
             ok(items.find(".foo").length > 0);
             items.each(function(idx, element) {
-                equal(element.innerText.trim(), "Item " + idx);
+                equal($(element).text().trim(), "Item " + idx);
             });
         });
     });
@@ -387,7 +387,7 @@
             var lastScreenItems = $(virtualList.items().slice(-10));
 
             lastScreenItems.each(function(idx, element) {
-                equal(element.innerText.trim(), "loading data...");
+                equal($(element).text().trim(), "loading data...");
             });
         });
     });
