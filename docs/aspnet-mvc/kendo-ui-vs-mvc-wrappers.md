@@ -35,3 +35,5 @@ When using plain (non-wrapper) Kendo UI widgets, you write the initialization sc
 * Integration with [MVVM](/framework/mvvm/overview), [AngularJS](/AngularJS/introduction) and [Single Page Application](/framework/spa/overview) development patterns.
 Server wrappers are not intended to be used with those.
 * [Visual Studio Intellisense](/vs-intellisense) for the client-side API.
+
+Finally, there is no problem to use UI for ASP.NET MVC helpers and vanilla Kendo UI widgets **at the same time on the same page**, if a specific scenario requires that.
