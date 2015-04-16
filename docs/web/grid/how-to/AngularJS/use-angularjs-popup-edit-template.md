@@ -8,6 +8,8 @@ description: Kendo UI Grid example that demontrates how to use AngularJS in Grid
 
 The example below demonstrates how to use AngularJS directives in custom Grid popup editor template.
 
+The dataItem is made dirty via `ng-change` (for HTML elements) and `k-on-change` (for Kendo UI widget). Otherwise the DataSource will not update modified data items.
+
 #### Example:
 
 ```html
@@ -16,13 +18,12 @@ The example below demonstrates how to use AngularJS directives in custom Grid po
         <kendo-grid options="mainGridOptions"></kendo-grid>
 
         <script type="text/x-kendo-template" id="template">
-            <label>Product Name <input kendo-dropdownlist k-data-source="productNames" ng-model="dataItem.ProductName" /><label>
+            <label>Product Name <input k-on-change="dataItem.dirty=true" kendo-dropdownlist k-data-source="productNames" ng-model="dataItem.ProductName" /><label>
             <br />
-            <label>Unit Price <input kendo-numeric-text-box k-ng-model="dataItem.UnitPrice" /></label>
+            <label>Unit Price <input k-on-change="dataItem.dirty=true" kendo-numeric-text-box k-ng-model="dataItem.UnitPrice" /></label>
             <br />
-            <label my-directive>Discontinued <input type="checkbox" ng-model="dataItem.Discontinued" /></label>
+            <label my-directive>Discontinued <input type="checkbox" ng-change="dataItem.dirty=true" ng-model="dataItem.Discontinued" /></label>
         </script>
-
       </div>
     </div>
 
