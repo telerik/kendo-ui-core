@@ -105,7 +105,7 @@ Specifies the selector for the toggle button that will show and hide the respons
     <script>
         $("#navigation").kendoResponsivePanel({
             orientation: "top",
-            toggleButton: "toggle-button"
+            toggleButton: ".toggle-button"
         });
     </script>
 
