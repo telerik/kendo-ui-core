@@ -90,8 +90,14 @@ var __meta__ = {
                 }
             },
 
+            show: function() {
+                this.element.removeClass(STATE_HIDDEN).show();
+                this.options.hidden = true;
+            },
+
             hide: function() {
                 this.element.addClass(STATE_HIDDEN).hide();
+                this.options.hidden = true;
             },
 
             remove: function() {
@@ -108,7 +114,7 @@ var __meta__ = {
         });
 
         var Button = Item.extend({
-            init: function(options) {
+            init: function(options, toolbar) {
                 var element = options.useButtonTag ? $('<button></button>') : $('<a></a>');
 
                 this.element = element;
@@ -122,9 +128,7 @@ var __meta__ = {
 
                 if (options.togglable) {
                     element.addClass(TOGGLE_BUTTON);
-                    if (options.selected) {
-                        element.addClass(STATE_ACTIVE);
-                    }
+                    this.toggle(options.selected);
                 }
 
                 if (options.url !== undefined && !options.useButtonTag) {
@@ -136,8 +140,8 @@ var __meta__ = {
 
                 if (options.group) {
                     element.attr(kendo.attr("group"), options.group);
+                    this.group = toolbar.addToGroup(this, options.group);
                 }
-
 
                 if (!options.togglable && options.click && isFunction(options.click)) {
                     this.clickHandler = options.click;
@@ -146,6 +150,28 @@ var __meta__ = {
                 if (options.togglable && options.toggle && isFunction(options.toggle)) {
                     this.toggleHandler = options.toggle;
                 }
+            },
+
+            toggle: function(state) {
+                state = !!state;
+
+                if (this.group && state) {
+                    this.group.select(this);
+                } else if (!this.group) {
+                    this.select(state);
+                }
+            },
+
+            select: function(selected) {
+                if (selected === undefined) {
+                    selected = false;
+                }
+                if (this.overflow === true) {
+                    this.element.find(".k-button").toggleClass(STATE_ACTIVE, selected);
+                } else {
+                    this.element.toggleClass(STATE_ACTIVE, selected);
+                }
+                this.options.selected = selected;
             },
 
             _addGraphics: function() {
@@ -194,8 +220,8 @@ var __meta__ = {
         });
 
         var ToolBarButton = Button.extend({
-            init: function(options) {
-                Button.fn.init.call(this, options);
+            init: function(options, toolbar) {
+                Button.fn.init.call(this, options, toolbar);
 
                 var element = this.element;
 
@@ -233,8 +259,8 @@ var __meta__ = {
         });
 
         var OverflowButton = Button.extend({
-            init: function(options) {
-                Button.fn.init.call(this, options);
+            init: function(options, toolbar) {
+                Button.fn.init.call(this, options, toolbar);
 
                 var element = this.element;
 
@@ -263,6 +289,8 @@ var __meta__ = {
                 this.addOverflowAttr();
                 this.enable(options.enable);
 
+                this.overflow = true;
+
                 this.element.data({
                     type: "button",
                     button: this
@@ -279,7 +307,7 @@ var __meta__ = {
         });
 
         var ButtonGroup = Item.extend({
-            createButtons: function(buttonConstructor) {
+            createButtons: function(buttonConstructor, toolbar) {
                 var options = this.options;
                 var items = options.buttons || [];
                 var item;
@@ -288,7 +316,7 @@ var __meta__ = {
                     if (!items[i].uid) {
                         items[i].uid = kendo.guid();
                     }
-                    item = new buttonConstructor($.extend({ mobile: options.mobile, isChild: true }, items[i]));
+                    item = new buttonConstructor($.extend({ mobile: options.mobile, isChild: true }, items[i]), toolbar);
                     item.element.appendTo(this.element);
                 }
             },
@@ -300,7 +328,7 @@ var __meta__ = {
         });
 
         var ToolBarButtonGroup = ButtonGroup.extend({
-            init: function(options) {
+            init: function(options, toolbar) {
                 var element = this.element = $('<div></div>');
                 this.options = options;
 
@@ -310,7 +338,7 @@ var __meta__ = {
                     element.addClass("k-align-" + options.align);
                 }
 
-                this.createButtons(ToolBarButton);
+                this.createButtons(ToolBarButton, toolbar);
                 this.attributes();
                 this.addUidAttr();
                 this.addOverflowAttr();
@@ -326,13 +354,13 @@ var __meta__ = {
         });
 
         var OverflowButtonGroup = ButtonGroup.extend({
-            init: function(options) {
+            init: function(options, toolbar) {
                 var element = this.element = $('<li></li>');
                 this.options = options;
 
                 this.addOverflowIdAttr();
 
-                this.createButtons(OverflowButton);
+                this.createButtons(OverflowButton, toolbar);
                 this.attributes();
                 this.addUidAttr();
                 this.addOverflowAttr();
@@ -352,12 +380,12 @@ var __meta__ = {
         });
 
         var ToolBarSplitButton = Item.extend({
-            init: function(options) {
+            init: function(options, toolbar) {
                 var element = this.element = $('<div class="' + SPLIT_BUTTON + '"></div>');
 
                 this.options = options;
 
-                this.mainButton = new ToolBarButton(options);
+                this.mainButton = new ToolBarButton(options, toolbar);
                 this.arrowButton = $('<a class="' + BUTTON + " " + SPLIT_BUTTON_ARROW + '"><span class="' + (options.mobile ? "km-icon km-arrowdown" : "k-icon k-i-arrow-s") + '"></span></a>');
                 this.popupElement = $('<ul class="' + LIST_CONTAINER + '"></ul>');
 
@@ -378,7 +406,7 @@ var __meta__ = {
                 this.addOverflowAttr();
                 this.addUidAttr();
 
-                this.createMenuButtons();
+                this.createMenuButtons(toolbar);
                 this.createPopup();
 
                 this.mainButton.main = true;
@@ -390,13 +418,13 @@ var __meta__ = {
                 });
             },
 
-            createMenuButtons: function() {
+            createMenuButtons: function(toolbar) {
                 var options = this.options;
                 var items = options.menuButtons;
                 var item;
 
                 for (var i = 0; i < items.length; i++) {
-                    item = new ToolBarButton($.extend({ mobile: options.mobile, click: options.click }, items[i]));
+                    item = new ToolBarButton($.extend({ mobile: options.mobile, click: options.click }, items[i]), toolbar);
                     item.element.wrap("<li></li>").parent().appendTo(this.popupElement);
                 }
             },
@@ -442,7 +470,7 @@ var __meta__ = {
         });
 
         var OverflowSplitButton = Item.extend({
-            init: function(options) {
+            init: function(options, toolbar) {
                 var element = this.element = $('<li class="' + SPLIT_BUTTON + '"></li>'),
                     items = options.menuButtons,
                     item;
@@ -453,7 +481,7 @@ var __meta__ = {
                 this.mainButton.element.appendTo(element);
 
                 for (var i = 0; i < items.length; i++) {
-                    item = new OverflowButton($.extend({ mobile: options.mobile, isChild: true }, items[i]));
+                    item = new OverflowButton($.extend({ mobile: options.mobile, isChild: true }, items[i]), toolbar);
                     item.element.appendTo(element);
                 }
 
@@ -633,6 +661,29 @@ var __meta__ = {
             overflowContainer: '<ul class="k-overflow-container k-list-container"></ul>'
         };
 
+        var Group = Class.extend({
+            init: function(name) {
+                this.name = name;
+                this.buttons = [];
+            },
+
+            add: function(button) {
+                this.buttons[this.buttons.length] = button;
+            },
+
+            remove: function(button) {
+                var index = $.inArray(button, this.buttons);
+                this.buttons.splice(index, 1);
+            },
+
+            select: function(button) {
+                for (var i = 0; i < this.buttons.length; i ++) {
+                    var theButton = this.buttons[i];
+                    theButton.select(theButton == button);
+                }
+            }
+        });
+
         var ToolBar = Widget.extend({
             init: function(element, options) {
                 var that = this;
@@ -645,6 +696,7 @@ var __meta__ = {
                 element.addClass(TOOLBAR + " k-widget");
 
                 this.uid = kendo.guid();
+                this._groups = {};
                 element.attr(KENDO_UID_ATTR, this.uid);
 
                 that.isMobile = (typeof options.mobile === "boolean") ? options.mobile : that.element.closest(".km-root")[0];
@@ -723,6 +775,19 @@ var __meta__ = {
                 mobile: null
             },
 
+            addToGroup: function(button, groupName) {
+                var group;
+
+                if (!this._groups[groupName]) {
+                    group = this._groups[groupName] = new Group();
+                } else {
+                    group = this._groups[groupName];
+                }
+
+                group.add(button);
+                return group;
+            },
+
             destroy: function() {
                 var that = this;
 
@@ -767,7 +832,7 @@ var __meta__ = {
                     if (overflowTemplate) { //template command
                          overflowTool = new OverflowTemplateItem(overflowTemplate, options);
                     } else if (component) { //build-in command
-                        overflowTool = new component.overflow(options);
+                        overflowTool = new component.overflow(options, that);
                         overflowTool.element.addClass(itemClasses);
                     }
 
@@ -788,7 +853,7 @@ var __meta__ = {
                     if (template) { //template command
                         tool = new TemplateItem(template, options);
                     } else if (component) { //build-in command
-                        tool = new component.toolbar(options);
+                        tool = new component.toolbar(options, that);
                     }
 
                     if (tool) {
@@ -884,36 +949,11 @@ var __meta__ = {
 
             toggle: function(button, checked) {
                 var element = $(button),
-                    uid = element.data("uid"),
-                    group = element.data("group"),
-                    twinElement;
+                    item = element.data("button");
 
-                if (element.hasClass(TOGGLE_BUTTON)) {
-
-                    if (group) { //find all buttons from the same group
-                        this.element
-                            .add(this.popup.element)
-                            .find("." + TOGGLE_BUTTON + "[data-group='" + group + "']")
-                            .filter("." + STATE_ACTIVE)
-                            .removeClass(STATE_ACTIVE);
-                    }
-
-                    if ($.contains(this.element[0], element[0])) {
-                        twinElement = this.popup.element.find("[" + KENDO_UID_ATTR + "='" + uid + "']");
-                        if (twinElement.prop("tagName") === "LI") {
-                            twinElement = twinElement.find("." + TOGGLE_BUTTON + ":first");
-                        }
-                    } else {
-                        uid = uid ? uid : element.parent().data("uid");
-                        twinElement = this.element.find("[" + KENDO_UID_ATTR + "='" + uid + "']");
-                    }
-
-                    element.add(twinElement).toggleClass(STATE_ACTIVE, checked);
+                if (item.options.togglable) {
+                    item.toggle(checked);
                 }
-            },
-
-            _attributes: function(element, options) {
-                element.attr(kendo.attr("overflow"), options.overflow || OVERFLOW_AUTO);
             },
 
             _renderOverflow: function() {
@@ -964,7 +1004,7 @@ var __meta__ = {
                 } else {
                     that.popup.container = that.popup.element;
                 }
-                
+
                 that.popup.container.attr(KENDO_UID_ATTR, this.uid);
                 that.popup.element.toggleClass("k-rtl", kendo.support.isRtl(that.element));
             },
@@ -985,11 +1025,17 @@ var __meta__ = {
 
             _buttonClick: function(e) {
                 var that = this, popup,
-                    target, splitContainer,
-                    isDisabled, isChecked,
-                    group, handler, eventData, id;
+                    target, item, splitContainer,
+                    isDisabled,
+                    isSplitButtonArrow = e.target.closest("." + SPLIT_BUTTON_ARROW).length,
+                    handler, eventData;
 
                 e.preventDefault();
+
+                if (isSplitButtonArrow) {
+                    that._toggle(e);
+                    return;
+                }
 
                 target = $(e.target).closest("." + BUTTON, that.element);
 
@@ -997,36 +1043,28 @@ var __meta__ = {
                     return;
                 }
 
-                if (!target.length && that.popup) {
+                item = target.data("button");
+
+                if (!item && that.popup) {
                     target = $(e.target).closest("." + OVERFLOW_BUTTON, that.popup.container);
+                    item = target.parent("li").data("button");
                 }
 
-                isDisabled = target.hasClass(OVERFLOW_BUTTON) ? target.parent("li").hasClass(STATE_DISABLED) : target.hasClass(STATE_DISABLED);
-
-                if (isDisabled) {
+                if (!item.options.enable) {
                     return;
                 }
 
-                if (e.target.closest("." + SPLIT_BUTTON_ARROW).length) {
-                    that._toggle(e);
-                    return;
-                }
+                if (item.options.togglable) {
+                    handler = isFunction(item.toggleHandler) ? item.toggleHandler : null;
 
-                id = target.attr("id") ? target.attr("id").replace(/(_overflow$)/, "") : undefined;
-
-                if (target.hasClass(TOGGLE_BUTTON)) {
-                    group = target.data("group");
-                    handler = isFunction(target.data("button").toggleHandler) ? target.data("button").toggleHandler : null;
-
-                    that.toggle(target);
-                    isChecked = target.hasClass(STATE_ACTIVE);
-                    eventData = { target: target, group: group, checked: isChecked, id: id };
+                    item.toggle(!item.options.selected);
+                    eventData = { target: target, group: item.options.group, checked: item.options.selected, id: item.options.id };
 
                     if (handler) { handler.call(that, eventData); }
                     that.trigger(TOGGLE, eventData);
                 } else {
-                    handler = isFunction(target.data("button").clickHandler) ? target.data("button").clickHandler : null;
-                    eventData = { target: target, id: id };
+                    handler = isFunction(item.clickHandler) ? item.clickHandler : null;
+                    eventData = { target: target, id: item.options.id };
 
                     if (handler) { handler.call(that, eventData); }
                     that.trigger(CLICK, eventData);

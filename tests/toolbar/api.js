@@ -269,7 +269,7 @@
 
         toolbar.toggle("#foo");
         ok($("#foo").hasClass("k-state-active"));
-        ok($("#foo_overflow").hasClass("k-state-active"));
+        ok($("#foo_overflow > .k-button").hasClass("k-state-active"));
     });
 
     test("Changing the toggle state of an overflow button is propagated to the twin element located in the toolbar wrapper", 2, function() {
