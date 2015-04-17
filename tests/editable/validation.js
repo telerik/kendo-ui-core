@@ -508,182 +508,191 @@
         ok(editable.end());
     });
 
-    test("changing model field validates the input", function() {
-        var MyModel = Model.define({
-            fields: {
-                foo: {
-                    field: "foo",
-                    validation: {
-                        required: true
-                    }
-                },
-                bar: {
-                    field: "bar",
-                    validation: {
-                        required: true
-                    }
-                }
-            }
-        }),
-        model = new MyModel({ foo: "bar" }),
-        editable = new Editable(div, { fields: ["foo", "bar"], model: model }),
-        validateInput = stub(editable.validatable, "validateInput");
+    (function() {
 
-        model.set("foo", "baz");
-
-        equal(validateInput.calls("validateInput"), 1);
-        equal(validateInput.args("validateInput", 0)[0].data("bind"), "value:foo");
-    });
-
-    test("changing model field does not validate the input if it has data-validate attribute set to false", function() {
-        var MyModel = Model.define({
-            fields: {
-                foo: {
-                    field: "foo",
-                    validation: {
-                        required: true
+        function assertValidatesInput(assert, fooEditor, barEditor) {
+            var MyModel = Model.define({
+                fields: {
+                    foo: {
+                        field: "foo",
+                        validation: {
+                            required: true
+                        }
+                    },
+                    bar: {
+                        field: "bar",
+                        validation: {
+                            required: true
+                        }
                     }
                 }
+            }),
+            model = new MyModel({ foo: "bar" }),
+            editable = new Editable(div, { fields: [{
+                field: "foo",
+                editor: function(container) {
+                    container.append($(fooEditor || '<input data-bind="value:foo" />'));
+                }
+            }, {
+                field: "bar",
+                editor: function(container) {
+                    container.append($(barEditor || '<input data-bind="value:bar" />'));
+                }
+            }], model: model }),
+            validateInput = stub(editable.validatable, "validateInput");
+
+            model.set("foo", "baz");
+
+            assert(validateInput);
+        }
+
+        module("kendo.ui.Editable/ change", {
+            setup: function() {
+                div = $("<div />").appendTo(QUnit.fixture);
+            },
+            teardown: function() {
+                kendo.destroy(QUnit.fixture);
             }
-        }),
-        model = new MyModel({ foo: "bar" }),
-        editable = new Editable(div, { fields: [{
-            field: "foo",
-            editor: function(container) {
-                container.append($('<input data-bind="value:foo" data-validate="false" />'));
-            }
-        }], model: model }),
-        validateInput = stub(editable.validatable, "validateInput");
+        });
 
-        model.set("foo", "baz");
+        test("changing model field validates the input", function() {
+            assertValidatesInput(function(validateInput) {
+                equal(validateInput.calls("validateInput"), 1);
+                equal(validateInput.args("validateInput", 0)[0].data("bind"), "value:foo");
+            });
+        });
 
-        equal(validateInput.args("validateInput", 0)[0].length, 0);
-    });
+        test("changing model field does not validate the input if it has data-validate attribute set to false", function() {
+            assertValidatesInput(function(validateInput) {
+                equal(validateInput.args("validateInput", 0)[0].length, 0);
+            }, '<input data-bind="value:foo" data-validate="false" />');
+        });
 
-    test("changing model field validates the input when it has other bindings besides value", function() {
-        var MyModel = Model.define({
-            fields: {
-                foo: {
-                    field: "foo",
-                    validation: {
-                        required: true
+        test("changing model field validates the input when it has other bindings besides value", function() {
+            assertValidatesInput(function(validateInput) {
+               equal(validateInput.args("validateInput", 0)[0].length, 1);
+            }, '<input data-bind="value:foo,disabled:bar" />');
+        });
+
+        test("changing model field validates the input when it has other bindings besides value and is at last position", function() {
+            assertValidatesInput(function(validateInput) {
+               equal(validateInput.args("validateInput", 0)[0].length, 1);
+            }, '<input data-bind="disabled:bar,value:foo" />');
+        });
+
+        test("changing model field validates the input when there are spaces in the binding definition", function() {
+            assertValidatesInput(function(validateInput) {
+               equal(validateInput.args("validateInput", 0)[0].length, 1);
+            }, '<input data-bind="value: foo" />');
+        });
+
+        test("changing model field does not validate inputs with bindings different than value for the same field", function() {
+            assertValidatesInput(function(validateInput) {
+               equal(validateInput.args("validateInput", 0)[0].length, 0);
+            }, '<input data-bind="visible:foo" />');
+        });
+
+        test("changing model field validates only inputs with the same field name when there are other fields with the same start of the name", function() {
+            var MyModel = Model.define({
+                fields: {
+                    foo: {
+                        field: "foo",
+                        validation: {
+                            required: true
+                        }
                     }
                 }
-            }
-        }),
-        model = new MyModel({ foo: "bar" }),
-        editable = new Editable(div, { fields: [{
-            field: "foo",
-            editor: function(container) {
-                container.append($('<input data-bind="value:foo,disabled:bar" />'));
-            }
-        }], model: model }),
-        validateInput = stub(editable.validatable, "validateInput");
+            }),
+            model = new MyModel({ foo: "bar", fooOther: "bar" }),
+            editable = new Editable(div, { fields: [{
+                field: "foo",
+                editor: function(container) {
+                    container.append($('<input data-bind="value:foo" />'));
+                }
+            }, {
+                field: "fooOther",
+                editor: function(container) {
+                    container.append($('<input data-bind="value:fooOther" />'));
+                }
+            }], model: model }),
+            validateInput = stub(editable.validatable, "validateInput");
 
-        model.set("foo", "baz");
+            model.set("foo", "baz");
+            equal(validateInput.args("validateInput", 0)[0].length, 1);
+        });
 
-        equal(validateInput.args("validateInput", 0)[0].length, 1);
-    });
-
-    test("changing model field validates only inputs with the same field name when there are other fields with the same start of the name", function() {
-        var MyModel = Model.define({
-            fields: {
-                foo: {
-                    field: "foo",
-                    validation: {
-                        required: true
+        test("changing boolean model field validates the input", function() {
+            var MyModel = Model.define({
+                fields: {
+                    foo: {
+                        field: "foo",
+                        type: "boolean"
+                    },
+                    bar: {
+                        field: "bar",
+                        validation: {
+                            required: true
+                        }
                     }
                 }
-            }
-        }),
-        model = new MyModel({ foo: "bar", fooOther: "bar" }),
-        editable = new Editable(div, { fields: [{
-            field: "foo",
-            editor: function(container) {
-                container.append($('<input data-bind="value:foo" />'));
-            }
-        }, {
-            field: "fooOther",
-            editor: function(container) {
-                container.append($('<input data-bind="value:fooOther" />'));
-            }
-        }], model: model }),
-        validateInput = stub(editable.validatable, "validateInput");
+            }),
+            model = new MyModel({ foo: false }),
+            editable = new Editable(div, { fields: ["foo", "bar"], model: model }),
+            validateInput = stub(editable.validatable, "validateInput");
 
-        model.set("foo", "baz");
-        equal(validateInput.args("validateInput", 0)[0].length, 1);
-    });
+            model.set("foo", true);
 
-    test("changing boolean model field validates the input", function() {
-        var MyModel = Model.define({
-            fields: {
-                foo: {
-                    field: "foo",
-                    type: "boolean"
-                },
-                bar: {
-                    field: "bar",
-                    validation: {
-                        required: true
+            equal(validateInput.calls("validateInput"), 1);
+            equal(validateInput.args("validateInput", 0)[0].data("bind"), "checked:foo");
+        });
+
+        test("changing non boolean model field validates radio inputs with checked binding", function() {
+            var MyModel = Model.define({
+                fields: {
+                    foo: {
+                        type: "number"
                     }
                 }
-            }
-        }),
-        model = new MyModel({ foo: false }),
-        editable = new Editable(div, { fields: ["foo", "bar"], model: model }),
-        validateInput = stub(editable.validatable, "validateInput");
-
-        model.set("foo", true);
-
-        equal(validateInput.calls("validateInput"), 1);
-        equal(validateInput.args("validateInput", 0)[0].data("bind"), "checked:foo");
-    });
-
-    test("changing non boolean model field validates radio inputs with checked binding", function() {
-        var MyModel = Model.define({
-            fields: {
-                foo: {
-                    type: "number"
+            }),
+            model = new MyModel({ foo: 1 }),
+            editable = new Editable(div, { fields: [{
+                field: "foo",
+                editor: function(container) {
+                    container.append($('<input type="radio" data-bind="checked:foo" value="1" />'));
+                    container.append($('<input type="radio" data-bind="checked:foo" value="2" />'));
+                    container.append($('<input type="radio" data-bind="checked:foo" value="3" />'));
                 }
-            }
-        }),
-        model = new MyModel({ foo: 1 }),
-        editable = new Editable(div, { fields: [{
-            field: "foo",
-            editor: function(container) {
-                container.append($('<input type="radio" data-bind="checked:foo" value="1" />'));
-                container.append($('<input type="radio" data-bind="checked:foo" value="2" />'));
-                container.append($('<input type="radio" data-bind="checked:foo" value="3" />'));
-            }
-        }], model: model }),
-        validateInput = stub(editable.validatable, "validateInput");
+            }], model: model }),
+            validateInput = stub(editable.validatable, "validateInput");
 
-        model.set("foo", 2);
-        equal(validateInput.calls("validateInput"), 1);
-    });
+            model.set("foo", 2);
+            equal(validateInput.calls("validateInput"), 1);
+        });
 
-    test("changing non boolean model field passes the radio input with same value to the validator", function() {
-        var MyModel = Model.define({
-            fields: {
-                foo: {
-                    type: "number"
+        test("changing non boolean model field passes the radio input with same value to the validator", function() {
+            var MyModel = Model.define({
+                fields: {
+                    foo: {
+                        type: "number"
+                    }
                 }
-            }
-        }),
-        model = new MyModel({ foo: 1 }),
-        editable = new Editable(div, { fields: [{
-            field: "foo",
-            editor: function(container) {
-                container.append($('<input type="radio" data-bind="checked:foo" value="1" />'));
-                container.append($('<input type="radio" data-bind="checked:foo" value="2" />'));
-                container.append($('<input type="radio" data-bind="checked:foo" value="3" />'));
-            }
-        }], model: model }),
-        validateInput = stub(editable.validatable, "validateInput");
+            }),
+            model = new MyModel({ foo: 1 }),
+            editable = new Editable(div, { fields: [{
+                field: "foo",
+                editor: function(container) {
+                    container.append($('<input type="radio" data-bind="checked:foo" value="1" />'));
+                    container.append($('<input type="radio" data-bind="checked:foo" value="2" />'));
+                    container.append($('<input type="radio" data-bind="checked:foo" value="3" />'));
+                }
+            }], model: model }),
+            validateInput = stub(editable.validatable, "validateInput");
 
-        model.set("foo", 2);
-        var input = validateInput.args("validateInput", 0)[0];
-        equal(input.length, 1);
-        equal(input.val(), "2");
-    });
+            model.set("foo", 2);
+            var input = validateInput.args("validateInput", 0)[0];
+            equal(input.length, 1);
+            equal(input.val(), "2");
+        });
+
+    })();
 })();

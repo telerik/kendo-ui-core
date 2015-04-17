@@ -209,19 +209,18 @@ var __meta__ = {
                 values = {},
                 bindAttribute = kendo.attr("bind"),
                 fieldName = e.field.replace(nameSpecialCharRegExp, "\\$1"),
-                checkedBinding = 'checked:' + fieldName,
-                valueBinding = 'value:' + fieldName;
+                bindingRegex = new RegExp("(value|checked)\\s*:\\s*" + fieldName + "\\s*(,|$)");
 
             values[e.field] = e.value;
 
-            input = $(':input[' + bindAttribute + '*="' + valueBinding + '"],:input[' + bindAttribute + '*="' + checkedBinding + '"]', that.element)
-                .filter("[" + kendo.attr("validate") + "!='false']");
+            input = $(':input[' + bindAttribute + '*="' + fieldName + '"]', that.element)
+                .filter("[" + kendo.attr("validate") + "!='false']").filter(function(element) {
+                   return bindingRegex.test($(this).attr(bindAttribute));
+                });
             if (input.length > 1) {
                 input = input.filter(function () {
                     var element = $(this);
-                    var bindings = element.attr(bindAttribute).split(",");
-                    var matchesBinding = inArray(valueBinding, bindings) >= 0 || inArray(checkedBinding, bindings) >= 0;
-                    return matchesBinding && (!element.is(":radio") || element.val() == value);
+                    return !element.is(":radio") || element.val() == value;
                 });
             }
 
