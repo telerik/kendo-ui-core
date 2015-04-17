@@ -280,4 +280,58 @@
 
         list.focus(null);
     });
+
+    test("widget triggers selectedItemChange event when the selected item has changed (single selection)", 3, function() {
+        var list = new StaticList(element, {
+            dataSource: [{ value: "item" }],
+            template: "#:data.value#",
+            dataValueField: "value",
+            selectedItemChange: function(e) {
+                var items = e.items;
+
+                equal(items.length, 1);
+                equal(items[0].index, 0);
+                equal(items[0].item, this.dataSource.view()[0]);
+            },
+            value: ["item"]
+        });
+
+        list.dataSource.read();
+        list.dataSource.view()[0].set("value", "updated");
+    });
+
+    test("widget does not trigger selectedItemChange event when updated item is not updated", 0, function() {
+        var list = new StaticList(element, {
+            dataSource: [{ value: "item1" }, { value: "item2" }],
+            template: "#:data.value#",
+            dataValueField: "value",
+            selectedItemChange: function(e) {
+                ok(false);
+            },
+            value: ["item1"]
+        });
+
+        list.dataSource.read();
+        list.dataSource.view()[1].set("value", "updated");
+    });
+
+    test("widget passes only the changed items in the selectedItemChange event (multiple selection)", 3, function() {
+        var list = new StaticList(element, {
+            selectable: "multiple",
+            dataSource: [{ value: "item1" }, { value: "item2" }],
+            template: "#:data.value#",
+            dataValueField: "value",
+            selectedItemChange: function(e) {
+                var items = e.items;
+
+                equal(items.length, 1);
+                equal(items[0].index, 1);
+                equal(items[0].item, this.dataSource.view()[1]);
+            },
+            value: ["item1", "item2"]
+        });
+
+        list.dataSource.read();
+        list.dataSource.view()[1].set("value", "updated");
+    });
 })();

@@ -157,6 +157,7 @@ var __meta__ = {
                 },
                 dataBound: listBoundHandler,
                 listBound: listBoundHandler
+                //itemChange: proxy(that._listChange, that)
             };
 
             listOptions = $.extend(that._listOptions(), listOptions, typeof virtual === "object" ? virtual : {});
@@ -1179,7 +1180,8 @@ var __meta__ = {
            "activate",
            "deactivate",
            "dataBinding",
-           "dataBound"
+           "dataBound",
+           "selectedItemChange"
         ],
 
         setDataSource: function(source) {
@@ -1860,6 +1862,8 @@ var __meta__ = {
 
         refresh: function(e) {
             var that = this;
+            var changedItems;
+            var action = e && e.action;
 
             that.trigger("dataBinding");
 
@@ -1867,13 +1871,20 @@ var __meta__ = {
 
             that._bound = true;
 
-            if (that._filtered || that._skipUpdate) {
+            if (action === "itemchange") {
+                changedItems = findChangedItems(that._dataItems, e.items);
+                if (changedItems.length) {
+                    that.trigger("selectedItemChange", {
+                        items: changedItems
+                    });
+                }
+            } else if (that._filtered || that._skipUpdate) {
                 that.focus(0);
                 if (that._skipUpdate) {
                     that._skipUpdate = false;
                     that._updateIndices(that._selectedIndices, that._values);
                 }
-            } else if (!e || !e.action) {
+            } else if (!action) {
                 that.value(that._values);
             }
 
@@ -1893,25 +1904,26 @@ var __meta__ = {
 
     ui.plugin(StaticList);
 
-    function compare(a, b) {
-        var length;
+    function findChangedItems(selected, changed) {
+        var changedLength = changed.length;
+        var result = [];
+        var dataItem;
+        var i, j;
 
-        if ((a === null && b !== null) || (a !== null && b === null)) {
-            return false;
-        }
+        for (i = 0; i < selected.length; i++) {
+            dataItem = selected[i];
 
-        length = a.length;
-        if (length !== b.length) {
-            return false;
-        }
-
-        while (length--) {
-            if (a[length] !== b[length]) {
-                return false;
+            for (j = 0; j < changedLength; j++) {
+                if (dataItem === changed[j]) {
+                    result.push({
+                        index: i,
+                        item: dataItem
+                    });
+                }
             }
         }
 
-        return true;
+        return result;
     }
 
     function removeFiltersForField(expression, field) {
