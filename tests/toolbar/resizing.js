@@ -224,14 +224,14 @@
         container.width(150);
         toolbar.resize();
 
-        ok($("#bar_overflow").parent().hasClass("k-toolbar-first-visible"), "#bar is the first visible button in the command overflow popup");
-        ok($("#qux_overflow").parent().hasClass("k-toolbar-last-visible"), "#qux is the last visible button in the command overflow popup");
+        ok($("#bar_overflow").hasClass("k-toolbar-first-visible"), "#bar is the first visible button in the command overflow popup");
+        ok($("#qux_overflow").hasClass("k-toolbar-last-visible"), "#qux is the last visible button in the command overflow popup");
 
         container.width(260);
         toolbar.resize();
 
-        ok($("#baz_overflow").parent().hasClass("k-toolbar-first-visible"), "#baz is the first visible button in the command overflow popup");
-        ok($("#qux_overflow").parent().hasClass("k-toolbar-last-visible"), "#qux is the last visible button in the command overflow popup");
+        ok($("#baz_overflow").hasClass("k-toolbar-first-visible"), "#baz is the first visible button in the command overflow popup");
+        ok($("#qux_overflow").hasClass("k-toolbar-last-visible"), "#qux is the last visible button in the command overflow popup");
     });
 
     test("Overflow anchor is not shown when the overflow container is empty", 1, function() {

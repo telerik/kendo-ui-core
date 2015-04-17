@@ -480,7 +480,7 @@
             }
         }).data("kendoToolBar");
 
-        var button = toolbar.popup.element.find("#foo_overflow");
+        var button = toolbar.popup.element.find("#foo_overflow > .k-button");
 
         click(button);
     });
@@ -492,7 +492,8 @@
             ]
         }).data("kendoToolBar");
 
-        var button = toolbar.popup.element.find("#foo_overflow");
+        var button = toolbar.popup.element.find("#foo_overflow > .k-button");
+        debugger;
 
         ok(!button.hasClass("k-state-active"));
         click(button);
@@ -633,7 +634,7 @@
             }
         }).data("kendoToolBar");
 
-        var button = toolbar.popup.element.find("#foo_overflow");
+        var button = toolbar.popup.element.find("#foo_overflow > .k-button");
 
         click(button);
     });
