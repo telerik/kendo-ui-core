@@ -517,12 +517,12 @@ var __meta__ = {
 
             if (key === keys.DOWN) {
                 if (visible) {
-                    this._move(current ? "next" : "first");
+                    this._move(current, current ? "next" : "first");
                 }
                 e.preventDefault();
             } else if (key === keys.UP) {
                 if (visible) {
-                    this._move(current ? "prev" : "last");
+                    this._move(current, current ? "prev" : "last");
                 }
                 e.preventDefault();
             } else if (key === keys.ENTER || key === keys.TAB) {
@@ -550,11 +550,19 @@ var __meta__ = {
             }
         },
 
-        _move: function (action) {
-            this.listView[action]();
+        _move: function (current, action) {
+            var that = this;
+            var listView = that.listView;
 
-            if (this.options.suggest) {
-                this.suggest(this.listView.focus());
+            listView[action]();
+
+            if (that.trigger("select", { item: listView.focus() })) {
+                listView.focus(current);
+                return;
+            }
+
+            if (that.options.suggest) {
+                that.suggest(listView.focus());
             }
         },
 
