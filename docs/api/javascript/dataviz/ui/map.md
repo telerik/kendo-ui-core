@@ -6,6 +6,11 @@ description: Learn how to configure Kendo UI Javascript chart widget in a few ea
 
 # kendo.dataviz.ui.Map
 
+## Fields
+
+### layers `Array`
+The [Map layers](/api/javascript/dataviz/map/layer) ordered by index.
+
 ## Configuration
 
 ### center `Array|kendo.dataviz.map.Location`
