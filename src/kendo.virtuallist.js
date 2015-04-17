@@ -724,9 +724,7 @@ var __meta__ = {
             this._filter = filter;
         },
 
-        clearIndices: function() {
-            this._selectedIndexes = [];
-        },
+        skipUpdate: $.noop,
 
         _getElementByIndex: function(index) {
             return this.items().filter(function(idx, element) {
