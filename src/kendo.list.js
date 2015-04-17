@@ -1373,12 +1373,16 @@ var __meta__ = {
             that.trigger("activate");
         },
 
-        filter: function(filter) {
+        filter: function(filter, skipValueUpdate) {
             if (filter === undefined) {
                 return this._filtered;
             }
 
             this._filtered = filter;
+        },
+
+        skipUpdate: function(skipUpdate) {
+            this._skipUpdate = skipUpdate;
         },
 
         select: function(indices) {
@@ -1471,6 +1475,8 @@ var __meta__ = {
                 deferred.resolve();
             }
 
+            that._skipUpdate = false;
+
             return deferred;
         },
 
@@ -1494,9 +1500,8 @@ var __meta__ = {
             return index;
         },
 
-        _valueIndices: function(values) {
+        _updateIndices: function(indices, values) {
             var data = this._view;
-            var indices = [];
             var idx = 0;
             var index;
 
@@ -1513,6 +1518,11 @@ var __meta__ = {
             }
 
             return this._normalizeIndices(indices);
+        },
+
+        _valueIndices: function(values) {
+            var indices = [];
+            return this._updateIndices(indices, values);
         },
 
         _getter: function() {
@@ -1766,22 +1776,22 @@ var __meta__ = {
             }
         },
 
-        _renderItem: function(context, values) {
+        _renderItem: function(context) {
             var item = '<li tabindex="-1" role="option" unselectable="on" class="k-item';
 
             var dataItem = context.item;
             var notFirstItem = context.index !== 0;
-            var found = this._filtered && this._dataItemPosition(dataItem, values) !== -1;
+            var selected = context.selected;
 
             if (notFirstItem && context.newGroup) {
                 item += ' k-first';
             }
 
-            if (found) {
+            if (selected) {
                 item += ' k-state-selected';
             }
 
-            item += '"' + (found ? ' aria-selected="true"' : "") + ' data-offset-index="' + context.index + '">';
+            item += '"' + (selected ? ' aria-selected="true"' : "") + ' data-offset-index="' + context.index + '">';
 
             item += this.templates.template(dataItem);
 
@@ -1811,21 +1821,26 @@ var __meta__ = {
                     newGroup = true;
 
                     for (j = 0; j < group.items.length; j++) {
-                        context = { item: group.items[j], group: group.value, newGroup: newGroup, index: idx };
+                        context = {
+                            selected: this._selected(group.items[j], values),
+                            item: group.items[j],
+                            group: group.value,
+                            newGroup: newGroup,
+                            index: idx };
                         dataContext[idx] = context;
                         idx += 1;
 
-                        html += this._renderItem(context, values);
+                        html += this._renderItem(context);
                         newGroup = false;
                     }
                 }
             } else {
                 for (i = 0; i < view.length; i++) {
-                    context = { item: view[i], index: i };
+                    context = { selected: this._selected(view[i], values), item: view[i], index: i };
 
                     dataContext[i] = context;
 
-                    html += this._renderItem(context, values);
+                    html += this._renderItem(context);
                 }
             }
 
@@ -1838,6 +1853,11 @@ var __meta__ = {
             }
         },
 
+        _selected: function(dataItem, values) {
+            var select = !this._filtered || this.options.selectable === "multiple";
+            return select && this._dataItemPosition(dataItem, values) !== -1;
+        },
+
         refresh: function(e) {
             var that = this;
 
@@ -1847,8 +1867,12 @@ var __meta__ = {
 
             that._bound = true;
 
-            if (that._filtered) {
+            if (that._filtered || that._skipUpdate) {
                 that.focus(0);
+                if (that._skipUpdate) {
+                    that._skipUpdate = false;
+                    that._updateIndices(that._selectedIndices, that._values);
+                }
             } else if (!e || !e.action) {
                 that.value(that._values);
             }
@@ -1869,20 +1893,25 @@ var __meta__ = {
 
     ui.plugin(StaticList);
 
-    function inArray(node, parentNode) {
-        var idx, length, siblings = parentNode.children;
+    function compare(a, b) {
+        var length;
 
-        if (!node || node.parentNode !== parentNode) {
-            return -1;
+        if ((a === null && b !== null) || (a !== null && b === null)) {
+            return false;
         }
 
-        for (idx = 0, length = siblings.length; idx < length; idx++) {
-            if (node === siblings[idx]) {
-                return idx;
+        length = a.length;
+        if (length !== b.length) {
+            return false;
+        }
+
+        while (length--) {
+            if (a[length] !== b[length]) {
+                return false;
             }
         }
 
-        return -1;
+        return true;
     }
 
     function removeFiltersForField(expression, field) {

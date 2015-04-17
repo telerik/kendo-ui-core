@@ -337,6 +337,7 @@ var __meta__ = {
             if (that._state === FILTER) {
                 that._state = ACCEPT;
                 that.listView.filter(false);
+                that.listView.skipUpdate(true);
             }
 
             that.element.blur();
@@ -441,7 +442,9 @@ var __meta__ = {
                 that._open = true;
                 that._state = REBIND;
                 that._retrieveData = false;
+
                 that.listView.filter(false);
+                that.listView.skipUpdate(true);
 
                 that._filterSource();
             } else if (that._allowSelection()) {
@@ -995,6 +998,7 @@ var __meta__ = {
             if (that._state === FILTER) {
                 that._state = ACCEPT;
                 that.listView.filter(false);
+                that.listView.skipUpdate(true);
             }
         },
 
