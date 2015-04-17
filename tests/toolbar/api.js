@@ -373,4 +373,91 @@
        ok($("#splitButton_wrapper").hasClass("k-state-hidden"));
     });
 
+    test("Show method shows hidden button", 3, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", id: "foo", hidden: true, text: "foo" },
+                { type: "button", id: "bar", text: "bar" }
+            ]
+        }).data("kendoToolBar");
+
+        toolbar.show("#foo");
+
+        ok(!($("#foo").hasClass("k-state-hidden")));
+        ok($("#foo").is(":visible"));
+
+        ok(!($("#foo_overflow").hasClass("k-state-hidden")));
+    });
+
+    test("Show method shows hidden button from Button group", 2, function() {
+        var toolbar = container.kendoToolBar({
+            items: [{
+                type: "buttonGroup",
+                buttons: [
+                    { text: "foo", hidden: true, id: "foo" },
+                    { text: "bar", id: "bar" }
+                ]
+            }]
+        }).data("kendoToolBar");
+
+        toolbar.show("#foo");
+        ok($("#foo").is(":visible"));
+
+        ok(!($("#foo_overflow").hasClass("k-state-hidden")));
+    });
+
+    test("After showing hidden button the button group updates k-group-start button", 2, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "buttonGroup", buttons: [
+                        { id: "btn1", hidden: true, text: "Btn1" },
+                        { id: "btn2", text: "Btn2" },
+                        { id: "btn3", text: "Btn3" }
+                    ]
+                }
+            ]
+        }).data("kendoToolBar");
+
+        toolbar.show("#btn1");
+        ok($("#btn1").hasClass("k-group-start"));
+
+        ok($("#btn1_overflow").hasClass("k-group-start"));
+    });
+
+    test("After showing hidden button the button group updates k-group-end button", 2, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "buttonGroup", buttons: [
+                        { id: "btn1", text: "Btn1" },
+                        { id: "btn2", text: "Btn2" },
+                        { id: "btn3", hidden: true, text: "Btn3" }
+                    ]
+                }
+            ]
+        }).data("kendoToolBar");
+
+        toolbar.show("#btn3");
+        ok($("#btn3").hasClass("k-group-end"));
+
+        ok($("#btn3_overflow").hasClass("k-group-end"));
+    });
+
+    test("Show method shows hidden SplitButton", 1, function() {
+       var toolbar = container.kendoToolBar({
+            items: [
+                { type: "splitButton", hidden: true, id: "splitButton", text: "Split Button", menuButtons: [
+                        { id: "option1", text: "Option 1" },
+                        { id: "option2", text: "Option 2" },
+                        { id: "option3", text: "Option 3" },
+                        { id: "option4", text: "Option 4" }
+                    ]
+                }
+            ]
+       }).data("kendoToolBar");
+
+       toolbar.show($("#splitButton_wrapper"));
+
+       ok(!($("#splitButton_wrapper").hasClass("k-state-hidden")));
+    });
+
 })();

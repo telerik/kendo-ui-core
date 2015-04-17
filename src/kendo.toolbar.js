@@ -986,17 +986,40 @@ var __meta__ = {
             hide: function(candidate) {
                 var item = this._getItem(candidate);
 
-                if (item.toolbar) { 
+                if (item.toolbar) {
                     item.toolbar.hide();
 
-                    if (item.toolbar.options.type = "button" && item.toolbar.options.isChild) {
+                    if (item.toolbar.options.type === "button" && item.toolbar.options.isChild) {
                         item.toolbar.getParentGroup().refresh();
                     }
                 }
+
                 if (item.overflow) {
                     item.overflow.hide();
 
-                    if (item.overflow.options.type = "button" && item.overflow.options.isChild) {
+                    if (item.overflow.options.type === "button" && item.overflow.options.isChild) {
+                        item.overflow.getParentGroup().refresh();
+                    }
+                }
+
+                this.resize(true);
+            },
+
+            show: function(candidate) {
+                var item = this._getItem(candidate);
+
+                if (item.toolbar) { 
+                    item.toolbar.show();
+
+                    if (item.toolbar.options.type === "button" && item.toolbar.options.isChild) {
+                        item.toolbar.getParentGroup().refresh();
+                    }
+                }
+
+                if (item.overflow) {
+                    item.overflow.show();
+
+                    if (item.overflow.options.type === "button" && item.overflow.options.isChild) {
                         item.overflow.getParentGroup().refresh();
                     }
                 }
