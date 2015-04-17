@@ -492,6 +492,21 @@
         ok(button.hasClass("foo"));
     });
 
+    test("button is initially hidden if hidden option is set to true", 3, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", id: "foo", text: "foo", hidden: true }
+            ]
+        }).data("kendoToolBar");
+
+        var button = toolbar.element.find("#foo");
+        ok(button.hasClass("k-state-hidden"));
+        ok(button.is(":hidden"));
+
+        var overflowButton = toolbar.popup.element.find("#foo_overflow");
+        ok(overflowButton.hasClass("k-state-hidden"));
+    });
+
     /* TOGGLE BUTTON */
 
     test("toggleButton has k-toggle-button class", 2, function() {
@@ -796,6 +811,63 @@
         } catch (e) {
             ok(false);
         }
+    });
+
+    test("hides button with hidden: true", 2, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "buttonGroup", buttons: [
+                        { id: "btn1", text: "Btn1" },
+                        { id: "btn2", hidden: true, text: "Btn2" },
+                        { id: "btn3", text: "Btn3" }
+                    ]
+                }
+            ]
+        }).data("kendoToolBar");
+
+        var button = toolbar.element.find("#btn2");
+        ok(button.hasClass("k-state-hidden"));
+
+        var overflowButton = toolbar.popup.element.find("#btn2_overflow");
+        ok(overflowButton.hasClass("k-state-hidden"));
+    });
+
+    test("k-group-start class is set to the first visible button from the group", 2, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "buttonGroup", buttons: [
+                        { id: "btn1", hidden: true, text: "Btn1" },
+                        { id: "btn2", text: "Btn2" },
+                        { id: "btn3", text: "Btn3" }
+                    ]
+                }
+            ]
+        }).data("kendoToolBar");
+
+        var button = toolbar.element.find("#btn2");
+        ok(button.hasClass("k-group-start"));
+
+        var overflowButton = toolbar.popup.element.find("#btn2_overflow");
+        ok(overflowButton.hasClass("k-group-start"));
+    });
+
+    test("k-group-end class is set to the last visible button from the group", 2, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "buttonGroup", buttons: [
+                        { id: "btn1", text: "Btn1" },
+                        { id: "btn2", text: "Btn2" },
+                        { id: "btn3", hidden: true, text: "Btn3" }
+                    ]
+                }
+            ]
+        }).data("kendoToolBar");
+
+        var button = toolbar.element.find("#btn2");
+        ok(button.hasClass("k-group-end"));
+
+        var overflowButton = toolbar.popup.element.find("#btn2_overflow");
+        ok(overflowButton.hasClass("k-group-end"));
     });
 
     /* SPLIT BUTTON */

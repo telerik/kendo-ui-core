@@ -318,4 +318,59 @@
         ok($("#foo_overflow").hasClass("k-state-hidden"));
         ok($("#foo_overflow").is(":hidden"));
     });
+
+    test("After hiding a button the button group updates k-group-start button", 2, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "buttonGroup", buttons: [
+                        { id: "btn1", text: "Btn1" },
+                        { id: "btn2", text: "Btn2" },
+                        { id: "btn3", text: "Btn3" }
+                    ]
+                }
+            ]
+        }).data("kendoToolBar");
+
+        toolbar.hide("#btn1");
+        ok($("#btn2").hasClass("k-group-start"));
+
+        ok($("#btn2_overflow").hasClass("k-group-start"));
+    });
+
+    test("After hiding a button the button group updates k-group-end button", 2, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "buttonGroup", buttons: [
+                        { id: "btn1", text: "Btn1" },
+                        { id: "btn2", text: "Btn2" },
+                        { id: "btn3", text: "Btn3" }
+                    ]
+                }
+            ]
+        }).data("kendoToolBar");
+
+        toolbar.hide("#btn3");
+        ok($("#btn2").hasClass("k-group-end"));
+
+        ok($("#btn2_overflow").hasClass("k-group-end"));
+    });
+
+    test("Hide method hides a SplitButton", 1, function() {
+       var toolbar = container.kendoToolBar({
+            items: [
+                { type: "splitButton", id: "splitButton", text: "Split Button", menuButtons: [
+                        { id: "option1", text: "Option 1" },
+                        { id: "option2", text: "Option 2" },
+                        { id: "option3", text: "Option 3" },
+                        { id: "option4", text: "Option 4" }
+                    ]
+                }
+            ]
+       }).data("kendoToolBar");
+
+       toolbar.hide($("#splitButton_wrapper"));
+
+       ok($("#splitButton_wrapper").hasClass("k-state-hidden"));
+    });
+
 })();

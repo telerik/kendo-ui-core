@@ -92,7 +92,7 @@ var __meta__ = {
 
             show: function() {
                 this.element.removeClass(STATE_HIDDEN).show();
-                this.options.hidden = true;
+                this.options.hidden = false;
             },
 
             hide: function() {
@@ -184,6 +184,12 @@ var __meta__ = {
                 }
             },
 
+            getParentGroup: function() {
+                if (this.options.isChild) {
+                    return this.element.closest("." + BUTTON_GROUP).data("buttonGroup");
+                }
+            },
+
             _addGraphics: function() {
                 var element = this.element,
                     icon = this.options.icon,
@@ -261,6 +267,10 @@ var __meta__ = {
                 this.addOverflowAttr();
                 this.enable(options.enable);
 
+                if (options.hidden) {
+                    this.hide();
+                }
+
                 this.element.data({
                     type: "button",
                     button: this
@@ -310,6 +320,10 @@ var __meta__ = {
                 this.addOverflowAttr();
                 this.enable(options.enable);
 
+                if (options.hidden) {
+                    this.hide();
+                }
+
                 this.element.data({
                     type: "button",
                     button: this
@@ -354,8 +368,8 @@ var __meta__ = {
             },
 
             refresh: function() {
-                this.element.children().first().addClass(GROUP_START);
-                this.element.children().last().addClass(GROUP_END);
+                this.element.children().filter(":not('." + STATE_HIDDEN + "'):first").addClass(GROUP_START);
+                this.element.children().filter(":not('." + STATE_HIDDEN + "'):last").addClass(GROUP_END);
             }
         });
 
@@ -972,8 +986,20 @@ var __meta__ = {
             hide: function(candidate) {
                 var item = this._getItem(candidate);
 
-                if (item.toolbar) { item.toolbar.hide(); }
-                if (item.overflow) { item.overflow.hide(); }
+                if (item.toolbar) { 
+                    item.toolbar.hide();
+
+                    if (item.toolbar.options.type = "button" && item.toolbar.options.isChild) {
+                        item.toolbar.getParentGroup().refresh();
+                    }
+                }
+                if (item.overflow) {
+                    item.overflow.hide();
+
+                    if (item.overflow.options.type = "button" && item.overflow.options.isChild) {
+                        item.overflow.getParentGroup().refresh();
+                    }
+                }
 
                 this.resize(true);
             },
