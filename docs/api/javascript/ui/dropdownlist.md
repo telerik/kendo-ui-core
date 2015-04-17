@@ -1485,7 +1485,7 @@ The widget instance which fired the event.
 
 ### select
 
-Fired when an item from the popup is selected by the user.
+Fired when an item from the popup is selected by the user either with mouse/tap or with keyboard navigation.
 
 > **Important:** The event is not fired when an item is selected programmatically.
 
@@ -1494,6 +1494,10 @@ Fired when an item from the popup is selected by the user.
 ##### e.item `jQuery`
 
 The jQuery object which represents the selected item.
+
+##### e.preventDefault `Function`
+
+If invoked prevents the select action. The widget will retain the previous selected item.
 
 ##### e.sender `kendo.ui.DropDownList`
 
