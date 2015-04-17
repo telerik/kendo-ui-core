@@ -237,42 +237,6 @@ test("prevent select event should only close the popup", function() {
     ok(!autocomplete.popup.visible());
 });
 
-test("DOWN keydown raises select event", 1, function() {
-    var autocomplete = input.kendoAutoComplete({
-        dataSource: ["foo"],
-        select: function(e) {
-            ok(e.item);
-        }
-    }).data("kendoAutoComplete");
-
-    input.focus().val("f");
-    autocomplete.search();
-
-    autocomplete.element.trigger({
-        type: "keydown",
-        keyCode: kendo.keys.DOWN
-    });
-});
-
-test("Select event prevents item focus with UP/DOWN arrow", 1, function() {
-    var autocomplete = input.kendoAutoComplete({
-        dataSource: ["foo"],
-        select: function(e) {
-            e.preventDefault();
-        }
-    }).data("kendoAutoComplete");
-
-    input.focus().val("f");
-    autocomplete.search();
-
-    autocomplete.element.trigger({
-        type: "keydown",
-        keyCode: kendo.keys.DOWN
-    });
-
-    ok(!autocomplete.current());
-});
-
 test("select event is not raised when custom value is entered", 0, function() {
     var autocomplete = input.kendoAutoComplete({
         dataSource: ["foo"],
