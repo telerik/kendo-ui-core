@@ -268,6 +268,7 @@ Virtual scrolling relies on a fake scrollbar. Its size is not determined by the 
 As a result, variable row heights may cause unexpected behavior, such as inability to scroll to the last rows on the last page.
 
 > The Grid page size must be large-enough, so that the table rows do not fit in the scrollable data area. Otherwise the virtual vertical scrollbar will not be created.
+> We recommend setting the page size in such a way, so that only **one third** of the items are visible in the scrollable data area.
 
 Due to height-related browser limitations, which cannot be avoided, virtual scrolling works with up to a couple of million records (depending on the browser).
 Using a larger row count than that can produce unexpected behavior or Javascript errors.
