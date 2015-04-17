@@ -412,9 +412,14 @@ The minimum number of characters the user must type before a filter is performed
  Define the text of the default empty item. If the value is an object, then the widget will use it a valid data item.
  Note that the optionLabel will not be available if the widget is empty.
 
+> **Important:** Since Q1 2015 (2015.1.318), the option label is rendered as a separate header template. The benefits of this change are:
+- the widget's value will be empty string even when `dataValueField` and `dataTextField` options are equal or not defined
+- the widget will not throw an exception when a custom item template is used and `optionLabel` is string
+- option label has a separate template, that gives more freedom for customization
+
 > **Important:** If `optionLabel` is an object, it needs to have at least `dataValueField` and `dataTextField` properties. Otherwise, widget will show `undefined`.
 
-> **Important:** Widget's value will be equal to the `optionLabel` if the `dataValueField` and `dataTextField` options are equal or not defined
+> **Important:** [Not relevant after Q1 2015] Widget's value will be equal to the `optionLabel` if the `dataValueField` and `dataTextField` options are equal or not defined
 
 #### Example - specify optionLabel as a string
 
