@@ -1085,4 +1085,27 @@
 
         equal(dropdownlist.text(), optionLabel);
     });
+
+    test("DropDownList updates selected text when selected item is changed", function() {
+        var dataSource = new kendo.data.DataSource({
+            data: [
+                { text: "item1", value: 1 },
+                { text: "item2", value: 2 },
+                { text: "item3", value: 3 },
+                { text: "item4", value: 4 },
+                { text: "item5", value: 5 }
+            ]
+        });
+
+        dropdownlist = input.kendoDropDownList({
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: dataSource,
+            value: "3"
+        }).data("kendoDropDownList");
+
+        dataSource.view()[2].set("text", "updated");
+
+        equal(dropdownlist.span.text(), "updated");
+    });
 })();
