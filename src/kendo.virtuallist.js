@@ -334,6 +334,7 @@ var __meta__ = {
         refresh: function(e) {
             var that = this;
             var action = e && e.action;
+            var changedItems;
 
             if (that._mute) { return; }
 
