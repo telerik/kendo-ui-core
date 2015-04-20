@@ -109,7 +109,7 @@
             value: ["1", "2"]
         });
 
-        multiselect.tagList.find(".k-delete").first().click();
+        multiselect.tagList.find(".k-i-close").first().click();
     });
 
     test("MultiSelect raises select event", 1, function() {

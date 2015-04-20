@@ -69,7 +69,7 @@ test("MultiSelect do not open on tag delete", function() {
 
     var multiselect = new MultiSelect(select);
 
-    multiselect.tagList.find(".k-delete").click();
+    multiselect.tagList.find(".k-i-close").click();
 
     ok(!multiselect.popup.visible());
 });
@@ -80,7 +80,7 @@ test("MultiSelect do not focus on delete", function() {
 
     var multiselect = new MultiSelect(select);
 
-    multiselect.tagList.find(".k-delete").mousedown();
+    multiselect.tagList.find(".k-i-close").mousedown();
 
     notEqual(multiselect.input[0], document.activeElement);
 });
@@ -117,7 +117,7 @@ test("MultiSelect deletes tag on delete button click", function() {
     multiselect.ul.children().eq(0).click();
 
     var tag = multiselect.tagList.children().first();
-    tag.find(".k-delete").click();
+    tag.find(".k-i-close").click();
 
     ok(!tag.parent()[0]);
 });
@@ -131,7 +131,7 @@ test("MultiSelect shows clicked item on delete", function() {
     var item = multiselect.ul.children().eq(1).click();
     multiselect.ul.children().eq(0).click();
 
-    multiselect.tagList.children().first().find(".k-delete").click();
+    multiselect.tagList.children().first().find(".k-i-close").click();
     multiselect.popup.open();
 
     notEqual(item[0].style.display, "none");
@@ -166,7 +166,7 @@ test("MultiSelect unselects option", function() {
     multiselect.input.mousedown();
     multiselect.ul.children().eq(1).click();
 
-    multiselect.tagList.children().first().find(".k-delete").click();
+    multiselect.tagList.children().first().find(".k-i-close").click();
 
     ok(!select[0].children[1].selected);
 });
@@ -193,7 +193,7 @@ test("MultiSelect removes corresponding data item", function() {
     multiselect.ul.children().eq(0).click();
 
     //unselect item
-    multiselect.tagList.children().first().find(".k-delete").click();
+    multiselect.tagList.children().first().find(".k-i-close").click();
 
     //TODO: use method instead of _dataItems
     equal(multiselect.dataItems().length, 1);
@@ -253,7 +253,7 @@ test("MultiSelect focuses input on click", function() {
     multiselect.ul.children().eq(0).click();
     multiselect.open();
 
-    multiselect.tagList.children().first().find(".k-delete").click();
+    multiselect.tagList.children().first().find(".k-i-close").click();
 
     ok(!multiselect.popup.visible());
 });
@@ -299,7 +299,7 @@ test("MultiSelect unselects custom option", function() {
     multiselect.dataSource.data(["item3", "item4"]);
 
     multiselect.ul.children().eq(0).click();
-    multiselect.tagList.children().first().find(".k-delete").click();
+    multiselect.tagList.children().first().find(".k-i-close").click();
 
     ok(select[0].children[0].selected); //item3
     ok(!select[0].children[1].selected); //item4
@@ -317,7 +317,7 @@ test("MultiSelect removes value matching custom option", function() {
     multiselect.dataSource.data(["item3", "item4"]);
 
     multiselect.ul.children().eq(0).click();
-    multiselect.tagList.children().first().find(".k-delete").click();
+    multiselect.tagList.children().first().find(".k-i-close").click();
 
     var value = multiselect.value();
 
@@ -393,11 +393,14 @@ test("MultiSelect does not prevent default when click input", 0, function() {
 
 test("MultiSelect add focused class on focus", function() {
     var multiselect = new MultiSelect(select);
+    debugger;
 
     multiselect.wrapper.mousedown();
 
     ok(multiselect.wrapper.hasClass("k-state-focused"));
 });
+
+return;
 
 test("MultiSelect removes focused class on blur", function() {
     var multiselect = new MultiSelect(select);
@@ -446,7 +449,7 @@ test("MultiSelect unselects item on tag remove", function() {
         value: ["foo"]
     });
 
-    multiselect.tagList.children(":first").find(".k-delete").click();
+    multiselect.tagList.children(":first").find(".k-i-close").click();
 
     var selectedItems = multiselect.ul.children(".k-state-selected");
 
@@ -462,7 +465,7 @@ test("MultiSelect removes selected item that exist in datasource from tagList (f
 
     multiselect.search("item");
     multiselect.ul.children(":last").click();
-    multiselect.tagList.children(":first").find(".k-delete").click();
+    multiselect.tagList.children(":first").find(".k-i-close").click();
 
     var tags = multiselect.tagList.children();
 

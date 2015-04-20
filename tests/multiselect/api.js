@@ -194,7 +194,7 @@
 
         multiselect.enable(false);
 
-        multiselect.tagList.find(".k-delete").click();
+        multiselect.tagList.find(".k-i-close").click();
 
         equal(multiselect.tagList.children().length, 1);
         ok(multiselect.wrapper.hasClass("k-state-disabled"));
@@ -209,7 +209,7 @@
         multiselect.enable(false);
         multiselect.enable(true);
 
-        multiselect.tagList.find(".k-delete").click();
+        multiselect.tagList.find(".k-i-close").click();
         multiselect.wrapper.mousedown();
 
         equal(multiselect.tagList.children().length, 0);
