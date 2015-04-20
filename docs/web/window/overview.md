@@ -238,6 +238,18 @@ If the Window is displaying a page in an iframe and the page needs to access the
 
 > Please note that iframe-parent access is possible only if the iframe and the parent page belong to the same domain.
 	
+### Accessing the Window DOM elements
+
+Similar to other Kendo UI widgets, the Window has two DOM elements, which you may want to access and use to customize the appearance of the widget or its content.
+These are the widget's [`wrapper` and `element`](/framework/widgets/wrapper-element), which are provided as fields of the widget object. In specific scenarios,
+the Window wrapper can be used to tweak the widget's position or size, although this should normally be done via the API and the
+[`setOptions` method](/api/javascript/ui/window#methods-setOptions).
+
+    var win = $("#window").data("kendoWindow");
+    var winWrapper = win.wrapper;
+    
+    winWrapper.addClass("myWindowClass");
+    
 ## Using Kendo UI Window with a form
 
 This section applies only to cases when the Window is *not* using an `iframe`.
