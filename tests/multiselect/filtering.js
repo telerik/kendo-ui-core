@@ -322,7 +322,7 @@
 
         multiselect.open();
 
-        multiselect.tagList.children().last().find(".k-delete").click();
+        multiselect.tagList.children().last().find(".k-i-close").click();
 
         var tags = multiselect.tagList.children();
         var values = multiselect.value();
@@ -363,7 +363,7 @@
 
         multiselect.open();
 
-        multiselect.tagList.children().first().find(".k-delete").click();
+        multiselect.tagList.children().first().find(".k-i-close").click();
 
         var tags = multiselect.tagList.children();
         var values = multiselect.value();
@@ -404,8 +404,8 @@
 
         multiselect.open();
 
-        multiselect.tagList.children().last().find(".k-delete").click();
-        multiselect.tagList.children().last().find(".k-delete").click();
+        multiselect.tagList.children().last().find(".k-i-close").click();
+        multiselect.tagList.children().last().find(".k-i-close").click();
 
         var tags = multiselect.tagList.children();
         var values = multiselect.value();

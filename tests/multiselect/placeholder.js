@@ -75,6 +75,7 @@
 
     test("MultiSelect hides placeholder on focus", function() {
         var multiselect = new MultiSelect(select.data("placeholder", "Select..."));
+        debugger;
 
         multiselect.input.focus();
 

@@ -319,7 +319,7 @@ var __meta__ = {
                 e.preventDefault();
             }
 
-            if (e.target.className.indexOf("k-delete") === -1) {
+            if (e.target.className.indexOf("k-i-close") === -1 || e.target.className.indexOf("k-select")) {
                 if (that.input[0] !== activeElement() && notInput) {
                     that.input.focus();
                 }
@@ -415,7 +415,7 @@ var __meta__ = {
                 tagList
                     .on(MOUSEENTER, LI, function() { $(this).addClass(HOVERCLASS); })
                     .on(MOUSELEAVE, LI, function() { $(this).removeClass(HOVERCLASS); })
-                    .on(CLICK, ".k-delete", proxy(that._tagListClick, that));
+                    .on(CLICK, "li.k-button .k-select", proxy(that._tagListClick, that));
             } else {
                 if (disable) {
                     wrapper.addClass(STATEDISABLED);
@@ -1059,7 +1059,7 @@ var __meta__ = {
 
             that.tagTextTemplate = tagTemplate;
             that.tagTemplate = function(data) {
-                return '<li class="k-button" unselectable="on"><span unselectable="on">' + tagTemplate(data) + '</span><span unselectable="on" class="k-icon k-delete">delete</span></li>';
+                return '<li class="k-button" unselectable="on"><span unselectable="on">' + tagTemplate(data) + '</span><span unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-close">delete</span></span></li>';
             };
         },
 
