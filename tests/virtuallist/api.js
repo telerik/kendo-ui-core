@@ -103,6 +103,71 @@
 
     //events
 
+    asyncTest("widget triggers selectedItemChange event when the selected item has changed (single selection)", 3, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            value: [0]
+        }));
+
+        virtualList.one("listBound", function() {
+
+            virtualList.one("selectedItemChange", function(e) {
+                start();
+                var items = e.items;
+
+                equal(items.length, 1);
+                equal(items[0].index, 0);
+                equal(items[0].item, this.dataSource.view()[0]);
+            });
+
+            virtualList.dataSource.view()[0].set("text", "updated");
+        });
+
+        virtualList.dataSource.read();
+    });
+
+    test("widget does not trigger selectedItemChange event when updated item is not updated", 0, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            value: [0]
+        }));
+
+        virtualList.one("listBound", function() {
+
+            virtualList.one("selectedItemChange", function(e) {
+                ok(false);
+            });
+
+            virtualList.dataSource.view()[1].set("text", "updated");
+
+            start();
+        });
+
+        virtualList.dataSource.read();
+    });
+
+    asyncTest("widget passes only the changed items in the selectedItemChange event (multiple selection)", 3, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: "multiple",
+            value: [0, 1]
+        }));
+
+        virtualList.one("listBound", function() {
+
+            virtualList.one("selectedItemChange", function(e) {
+                var items = e.items;
+
+                equal(items.length, 1);
+                equal(items[0].index, 1);
+                equal(items[0].item, this.dataSource.view()[1]);
+            });
+
+            virtualList.dataSource.view()[1].set("text", "updated");
+
+            start();
+        });
+
+        virtualList.dataSource.read();
+    });
+
     asyncTest("fires the itemChange event", 1, function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             itemChange: function() {
