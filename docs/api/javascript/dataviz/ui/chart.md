@@ -13745,7 +13745,7 @@ The supported values are:
         noteTextField: "noteText",
         notes: {
           icon: {
-            shape: "triangle"
+            type: "triangle"
           }
         }
       }]
