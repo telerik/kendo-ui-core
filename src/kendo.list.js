@@ -156,8 +156,8 @@ var __meta__ = {
                     that._angularItems("cleanup");
                 },
                 dataBound: listBoundHandler,
-                listBound: listBoundHandler
-                //itemChange: proxy(that._listChange, that)
+                listBound: listBoundHandler,
+                selectedItemChange: proxy(that._listChange, that)
             };
 
             listOptions = $.extend(that._listOptions(), listOptions, typeof virtual === "object" ? virtual : {});

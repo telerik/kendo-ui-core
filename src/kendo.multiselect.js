@@ -274,7 +274,8 @@ var __meta__ = {
                     that._angularItems("cleanup");
                 },
                 dataBound: listBoundHandler,
-                listBound: listBoundHandler
+                listBound: listBoundHandler,
+                selectedItemChange: proxy(that._selectedItemChange, that)
             };
 
             listOptions = $.extend(that._listOptions(), listOptions, typeof virtual === "object" ? virtual : {});
@@ -297,6 +298,17 @@ var __meta__ = {
             }
 
             this._selectValue(e.added, e.removed);
+        },
+
+        _selectedItemChange: function(e) {
+            var items = e.items;
+            var context;
+            var idx;
+
+            for (idx = 0; idx < items.length; idx++) {
+                context = items[idx];
+                this.tagList.children().eq(context.index).children("span:first").html(this.tagTextTemplate(context.item));
+            }
         },
 
         _wrapperMousedown: function(e) {
@@ -1044,6 +1056,7 @@ var __meta__ = {
 
             tagTemplate = tagTemplate ? kendo.template(tagTemplate) : kendo.template("#:" + kendo.expr(options.dataTextField, "data") + "#", { useWithBlock: false });
 
+            that.tagTextTemplate = tagTemplate;
             that.tagTemplate = function(data) {
                 return '<li class="k-button" unselectable="on"><span unselectable="on">' + tagTemplate(data) + '</span><span unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-close">delete</span></span></li>';
             };

@@ -568,4 +568,55 @@
 
         equal(multiselect.wrapper.attr("title"), title);
     });
+
+    test("MultiSelect updates selected text when selected items are changed", function() {
+        var dataSource = new kendo.data.DataSource({
+            data: [
+                { text: "item1", value: 1 },
+                { text: "item2", value: 2 },
+                { text: "item3", value: 3 },
+                { text: "item4", value: 4 },
+                { text: "item5", value: 5 }
+            ]
+        });
+
+        var multiselect = new MultiSelect(select, {
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: dataSource,
+            value: ["1", "3", "5"]
+        });
+
+        dataSource.view()[2].set("text", "updated");
+
+        var tags = multiselect.tagList.children();
+
+        equal(tags.length, 3);
+        equal(tags.eq(1).children(":first").text(), "updated");
+    });
+
+    test("MultiSelect updates selected value when selected items are changed", function() {
+        var dataSource = new kendo.data.DataSource({
+            data: [
+                { text: "item1", value: 1 },
+                { text: "item2", value: 2 },
+                { text: "item3", value: 3 },
+                { text: "item4", value: 4 },
+                { text: "item5", value: 5 }
+            ]
+        });
+
+        var multiselect = new MultiSelect(select, {
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: dataSource,
+            value: [1, 3, 5]
+        });
+
+        dataSource.view()[2].set("value", "updated");
+
+        var options = multiselect.element.children();
+
+        equal(options.eq(2).val(), "updated");
+    });
 })();
