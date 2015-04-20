@@ -274,6 +274,13 @@
         ok(current.hasClass("k-state-selected"));
     });
 
+    test("press enter should not throw an error", 1, function() {
+        var dropdownlist = input.kendoDropDownList().data("kendoDropDownList");
+
+        dropdownlist.wrapper.focus().press(keys.ENTER);
+
+        ok(true);
+    });
 
     test("press esc should close popup when no change in selection", 1, function() {
         var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");

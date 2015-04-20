@@ -913,7 +913,7 @@ var __meta__ = {
                     }
 
                     that._select(current);
-                } else {
+                } else if (that.input) {
                     that._accessor(that.input.val());
                     that.listView.value(that.input.val());
                 }
