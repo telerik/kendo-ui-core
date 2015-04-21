@@ -383,12 +383,12 @@ var __meta__ = {
     binders.text = Binder.extend({
         refresh: function() {
             var text = this.bindings.text.get();
-
+            var dataFormat = this.element.getAttribute("data-format") || "";
             if (text == null) {
                 text = "";
             }
 
-            $(this.element).text(text);
+            $(this.element).text(kendo.toString(text, dataFormat));
         }
     });
 
