@@ -1363,7 +1363,8 @@ prevent the user from locking or unlocking this column using the user interface.
 
 ### columns.minScreenWidth `Number`
 
-The width in pixels below which the column will become hidden.
+The pixel screen width below which the column will be hidden. The setting takes precedence over the [`hidden`](/api/javascript/ui/grid#configuration-columns.hidden) setting,
+so the two should not be used at the same time.
 
 #### Example - lockable columns
     <div id="grid"></div>
