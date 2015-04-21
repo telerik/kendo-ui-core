@@ -166,6 +166,7 @@ var __meta__ = {
 
             if (!hasVirtual) {
                 that.listView = new kendo.ui.StaticList(that.ul, listOptions);
+                that.listView.setTouchScroller(that._touchScroller);
             } else {
                 that.listView = new kendo.ui.VirtualList(that.ul, listOptions);
             }
@@ -1271,6 +1272,10 @@ var __meta__ = {
             return offsetHeight;
         },
 
+        setTouchScroller: function (touchScroller) {
+            this._touchScroller = touchScroller;
+        },
+
         scroll: function (item) {
             if (!item) {
                 return;
@@ -1291,6 +1296,7 @@ var __meta__ = {
 
             if (touchScroller) {
                 yDimension = touchScroller.dimensions.y;
+                yDimension.update(true);
 
                 if (yDimension.enabled && itemOffsetTop > yDimension.size) {
                     itemOffsetTop = itemOffsetTop - yDimension.size + itemOffsetHeight + 4;
