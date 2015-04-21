@@ -316,7 +316,7 @@ var __meta__ = {
             var notInput = e.target.nodeName.toLowerCase() !== "input";
             var closeButton = $(e.target).hasClass("k-select") || $(e.target).parent().hasClass("k-select");
 
-            if (notInput) {
+            if (notInput && !kendo.support.mobileOS && closeButton) {
                 e.preventDefault();
             }
 
