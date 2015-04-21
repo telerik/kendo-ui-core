@@ -552,19 +552,25 @@ var __meta__ = {
             }
 
             that._accessor(value);
-            that.input.val(value);
 
-            that.listView.value(value).done(function() {
-                that._triggerCascade();
+            that.listView
+                .value(value)
+                .done(function() {
+                    that._triggerCascade();
 
-                that._selectValue(that.listView.selectedDataItems()[0]);
+                    that._selectValue(that.listView.selectedDataItems()[0]);
 
-                that._old = that._accessor();
-                that._oldIndex = that.selectedIndex;
+                    if (that.selectedIndex === -1) {
+                        that._accessor(value);
+                        that.input.val(value);
+                    }
 
-                that._prev = that.input.val();
-                that._state = STATE_ACCEPT;
-            });
+                    that._old = that._accessor();
+                    that._oldIndex = that.selectedIndex;
+
+                    that._prev = that.input.val();
+                    that._state = STATE_ACCEPT;
+                });
 
             that._fetchData();
         },

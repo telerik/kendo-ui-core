@@ -138,8 +138,10 @@ var __meta__ = {
 
         _initList: function() {
             var that = this;
-            var virtual = that.options.virtual;
+            var options = that.options;
+            var virtual = options.virtual;
             var hasVirtual = !!virtual;
+            var value = options.value;
 
             var listBoundHandler = proxy(that._listBound, that);
 
@@ -168,7 +170,20 @@ var __meta__ = {
                 that.listView = new kendo.ui.VirtualList(that.ul, listOptions);
             }
 
-            that.listView.value(that.options.value);
+            if (value !== undefined) {
+                that.listView.value(value).done(function() {
+                    var text = options.text;
+
+                    if (that.input && that.selectedIndex === -1) {
+                        if (text === undefined || text === null) {
+                            text = value;
+                        }
+
+                        that._accessor(value);
+                        that.input.val(text);
+                    }
+                });
+            }
         },
 
         _listMousedown: function(e) {
