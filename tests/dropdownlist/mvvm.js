@@ -200,6 +200,27 @@
         equal(widget.text(), "bar");
     });
 
+    test("source binding updates widgets value if value binding exists", function() {
+        dom = $('<input data-role="dropdownlist" data-value-field="value" data-text-field="text" data-value-primitive="true" data-bind="value:value, source:items" />').appendTo(QUnit.fixture);
+
+        var data = [{text:"foo", value: "foo"}, {text:"bar", value: "bar"}];
+
+        var observable = kendo.observable({
+            items: [],
+            value: ""
+        });
+
+        kendo.bind(dom, observable);
+
+        observable.set("value", "bar");
+        observable.set("items", data);
+
+        var widget = dom.data("kendoDropDownList");
+
+        equal(widget.value(), "bar");
+        equal(widget.text(), "bar");
+    });
+
     test("binding template", function() {
         dom = $('<select data-role="dropdownlist" data-template="template" data-bind="source:items" />');
 

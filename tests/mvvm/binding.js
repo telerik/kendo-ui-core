@@ -304,6 +304,27 @@ test("select binding to data source", function() {
     equal(dom.find("option").val(), "1");
 });
 
+test("select binding sets option when value is set before source", 1, function() {
+    dom = $('<select data-text-field="name" data-value-field="id" data-bind="source:source, value:value"/>');
+
+    var data = [{
+        id: 1,
+        name: "foo"
+    }];
+
+    var model = kendo.observable({
+        source: [],
+        value: ""
+    });
+
+    kendo.bind(dom, model);
+
+    model.set("value", 1);
+    model.set("source", data);
+
+    equal(dom.val(), "1");
+});
+
 test("data source data isn't fetched if the auto-bind attribute is set to false", function() {
     dom = $('<select data-template="select-template" data-auto-bind="false" data-bind="source:foo"/>');
 

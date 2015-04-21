@@ -281,7 +281,7 @@ var __meta__ = {
 
     var TypedBinder = Binder.extend({
         dataType: function() {
-            var dataType = this.element.getAttribute("data-type") || this.element.type || "text"; 
+            var dataType = this.element.getAttribute("data-type") || this.element.type || "text";
             return dataType.toLowerCase();
         },
 
@@ -929,6 +929,10 @@ var __meta__ = {
                             widget[setter](source._dataSource);
                         } else {
                             widget[fieldName].data(source);
+
+                            if (that.bindings.value) {
+                                that.bindings.value.source.trigger("change", { field: that.bindings.value.path });
+                            }
                         }
                     }
                 }
