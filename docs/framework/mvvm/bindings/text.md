@@ -44,3 +44,20 @@ If the View-Model value contains HTML tags those will be output verbatim. For ex
 
 
 will output visible HTML tags.
+
+## Text formatting
+Since the 2015 Q2 release, custom formats can be applied using the data-format attribute:
+```html
+<div id="view">
+    <span data-format="c2" data-bind="text: price"></span><br/>
+    <span data-format="dd-MM-yyyy" data-bind="text: purchaseDate"></span>
+</div>
+
+<script type="text/javascript">
+    var viewModel = kendo.observable({
+        price: 98.99,
+        purchaseDate: new Date(),
+    });
+    kendo.bind($("#view"), viewModel);
+</script>
+```
