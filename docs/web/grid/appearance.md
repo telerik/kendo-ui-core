@@ -283,7 +283,7 @@ The Grid supports frozen columns on one side of the table. In order to work prop
 
 * [scrolling](#scrolling) must be enabled
 * the Grid should have a height set
-* all columns should have explicit **pixel** widths set
+* all columns should have explicit **pixel** widths set, so that the Grid can adjust the layout of the frozen and non-frozen table parts
 * the total width of all locked columns should be equal to or less than the Grid width minus three times the scrollbar width
 
 The above ensures that at least one non-locked column is always visible and horizontal scrolling of the non-locked columns is possible.
