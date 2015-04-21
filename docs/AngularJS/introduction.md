@@ -397,6 +397,8 @@ To watch multiple options for change, just use `k-options` and pass the same var
 
     <ul kendo-menu k-options="menuOptions" k-rebind="menuOptions"> ... </ul>
 
+> `k-rebind` will destroy the current widget, remove its wrapper element from the DOM and initialize a new widget based on the original element.
+
 ### Change widget state using k-ng-disbaled and k-ng-readonly
 
 With the 2015 Q1 release support for `k-ng-disabled` and `k-ng-readonly` directives has been introduced. Using them you can change the disabled/readonly state of the widget based on a scope variable.
