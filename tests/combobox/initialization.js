@@ -836,4 +836,45 @@ test("ComboBox updates selected text when selected item is changed", function() 
     equal(combobox.input.val(), "updated");
 });
 
+test("ComboBox shows the custom value if source is empty", function() {
+   var select = $("<select></select>").appendTo(QUnit.fixture);
+
+   combobox = new ComboBox(select, { value: "custom" });
+
+   equal(combobox.text(), "custom");
+});
+
+test("ComboBox shows the custom text if source is empty", function() {
+   var select = $("<select></select>").appendTo(QUnit.fixture);
+
+   combobox = new ComboBox(select, { value: "custom", text: "custom text" });
+
+   equal(combobox.value(), "custom");
+   equal(combobox.text(), "custom text");
+});
+
+asyncTest("ComboBox shows the custom text if source is empty", 2, function() {
+   var select = $("<select></select>").appendTo(QUnit.fixture);
+
+   combobox = new ComboBox(select, {
+       autoBind: false,
+       dataSource: {
+           transport: {
+                read: function(options) {
+                    setTimeout(function() {
+                        options.success([]);
+                        start();
+                    }, 100);
+                }
+           }
+
+       }
+   });
+
+   combobox.value("custom");
+
+   equal(combobox.value(), "custom");
+   equal(combobox.text(), "");
+});
+
 })();

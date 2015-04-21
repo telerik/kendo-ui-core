@@ -286,7 +286,7 @@ test("expressions are destroyed", 1, function() {
 });
 
 test("destroys detaches the events to widget", function() {
-    dom = $('<div data-role="combobox" data-bind="source:items" />');
+    dom = $('<select data-role="combobox" data-bind="source:items" />');
 
     var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
 
@@ -301,7 +301,7 @@ test("destroys detaches the events to widget", function() {
 
 
 test("dataBound event is raised if attached as option", 2, function() {
-    dom = $('<div data-role="combobox" data-bound="dataBound" data-bind="source:items" />');
+    dom = $('<select data-role="combobox" data-bound="dataBound" data-bind="source:items" />');
 
     var observable = kendo.observable({
         items: [{text:"foo"}, {text:"bar"}]
@@ -311,7 +311,7 @@ test("dataBound event is raised if attached as option", 2, function() {
 });
 
 test("dataBound event is raised if attached as option to a already initialized combobox", 1, function() {
-    dom = $('<div data-bound="dataBound" data-bind="source:items" />').kendoComboBox();
+    dom = $('<select data-bound="dataBound" data-bind="source:items" />').kendoComboBox();
 
     var observable = kendo.observable({
         items: [{text:"foo"}, {text:"bar"}]
