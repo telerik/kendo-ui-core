@@ -485,9 +485,10 @@ body .k-datetimepicker .k-select
 .k-multiselect-wrap li
 {
     margin: 1px 0 1px 1px;
-    padding: .1em .15em .1em .4em;
+    padding: .1em 1.6em .1em .4em;
     line-height: (@input-height - .15);
     float: left;
+    position: relative;
 }
 
 .k-autocomplete .k-loading,
@@ -501,6 +502,15 @@ body .k-datetimepicker .k-select
 .k-multiselect .k-loading-hidden
 {
     visibility: hidden;
+}
+
+.k-multiselect-wrap .k-select
+{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    padding: .1em .2em;
 }
 
 /* Date/Time Pickers */
