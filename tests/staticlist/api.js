@@ -85,6 +85,19 @@
         equal(element.children(":first").html(), "new item");
     });
 
+    test("setOptions does not update bound state", function() {
+        var list = new StaticList(element, {
+            dataSource: ["item"],
+            template: "#:data#"
+        });
+
+        list.setOptions({
+            template: "new #:data#"
+        });
+
+        ok(!list.isBound());
+    });
+
     test("widget focuses last selected item during rendering", function() {
         var list = new StaticList(element, {
             dataValueField: "name",

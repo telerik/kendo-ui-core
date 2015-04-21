@@ -1230,10 +1230,7 @@ var __meta__ = {
             this._fixedHeader();
             this._getter();
             this._templates();
-
-            this._mute = true;
-            this.refresh();
-            this._mute = false;
+            this._render();
         },
 
         destroy: function() {
@@ -1913,9 +1910,7 @@ var __meta__ = {
                 that._valueDeferred.resolve();
             }
 
-            if (!that._mute) {
-                that.trigger("dataBound");
-            }
+            that.trigger("dataBound");
         },
 
         isBound: function() {
