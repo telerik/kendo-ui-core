@@ -930,7 +930,7 @@ var __meta__ = {
                         } else {
                             widget[fieldName].data(source);
 
-                            if (that.bindings.value) {
+                            if (that.bindings.value && widget instanceof kendo.ui.Select) {
                                 that.bindings.value.source.trigger("change", { field: that.bindings.value.path });
                             }
                         }
