@@ -314,12 +314,13 @@ var __meta__ = {
         _wrapperMousedown: function(e) {
             var that = this;
             var notInput = e.target.nodeName.toLowerCase() !== "input";
+            var closeButton = $(e.target).hasClass("k-select") || $(e.target).parent().hasClass("k-select");
 
             if (notInput) {
                 e.preventDefault();
             }
 
-            if (e.target.className.indexOf("k-i-close") === -1 || e.target.className.indexOf("k-select")) {
+            if (!closeButton) {
                 if (that.input[0] !== activeElement() && notInput) {
                     that.input.focus();
                 }
