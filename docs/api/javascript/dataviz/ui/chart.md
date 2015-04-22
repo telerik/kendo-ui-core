@@ -19991,7 +19991,7 @@ If the [valueAxis.type](#configuration-valueAxis.type) is set to `"log"`, the mi
     });
     </script>
 
-### valueAxis.name `Object` *(default: "primary")*
+### valueAxis.name `String` *(default: "primary")*
 
 The unique axis name. Used to associate a series with a value axis using the [series.axis](#configuration-series.axis) option.
 
@@ -24637,7 +24637,7 @@ If the [xAxis.type](#configuration-xAxis.type) is set to `"log"`, the minorUnit 
     });
     </script>
 
-### xAxis.name `Object` *(default: "primary")*
+### xAxis.name `String` *(default: "primary")*
 
 The unique axis name. Used to associate a series with a x axis using the [series.xAxis](#configuration-series.xAxis) option.
 
@@ -29327,7 +29327,7 @@ If the [yAxis.type](#configuration-yAxis.type) is set to `"log"`, the minorUnit 
     });
     </script>
 
-### yAxis.name `Object` *(default: "primary")*
+### yAxis.name `String` *(default: "primary")*
 
 The unique axis name. Used to associate a series with a y axis using the [series.yAxis](#configuration-series.yAxis) option.
 
