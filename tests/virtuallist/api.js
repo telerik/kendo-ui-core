@@ -946,4 +946,21 @@
 
         asyncDataSource.read()
     });
+
+    asyncTest("setValue method updates values of the widget silently", 3, function() {
+        var virtualList = new VirtualList(container, virtualSettings);
+
+        asyncDataSource.read().then(function() {
+            start();
+            virtualList.setValue("item");
+
+            var value = virtualList.value();
+            var indices = virtualList.select();
+
+            equal(indices.length, 0);
+
+            equal(value.length, 1);
+            equal(value[0], "item");
+        });
+    });
 })();

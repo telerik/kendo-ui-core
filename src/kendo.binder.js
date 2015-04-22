@@ -1179,7 +1179,7 @@ var __meta__ = {
                         }
                     }
 
-                    if (widget.options.autoBind === false) {
+                    if (widget.options.autoBind === false && widget.listView && !widget.listView.isBound()) {
                         widget._preselect(value, text);
                     } else {
                         widget.value(value);

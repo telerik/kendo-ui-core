@@ -377,6 +377,14 @@ var __meta__ = {
             };
         },
 
+        setValue: function(value) {
+            if (value === "" || value === null) {
+                value = [];
+            }
+
+            this._values = toArray(value);
+        },
+
         value: function(value, _forcePrefetch) {
             var that = this;
             var dataSource = that.dataSource;
