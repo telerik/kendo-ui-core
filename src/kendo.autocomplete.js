@@ -149,7 +149,6 @@ var __meta__ = {
             value: null
         },
 
-        //Use Select._dataSource method here!
         _dataSource: function() {
             var that = this;
 
