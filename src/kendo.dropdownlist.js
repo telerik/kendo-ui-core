@@ -1147,6 +1147,11 @@ var __meta__ = {
         _preselect: function(value, text) {
             this._accessor(value);
             this._textAccessor(text);
+
+            this._old = this._accessor();
+            this._oldIndex = this.selectedIndex;
+
+            this.listView.setValue(value);
         },
 
         _assignInstance: function(text, value) {

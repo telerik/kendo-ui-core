@@ -484,48 +484,52 @@ var __meta__ = {
             var dataItem;
             var value;
 
-            if (text !== undefined) {
-                dataItem = that.dataItem();
-
-                if (dataItem && that._text(dataItem) === text) {
-                    value = that._value(dataItem);
-                    if (value === null) {
-                        value = "";
-                    } else {
-                        value += "";
-                    }
-
-                    if (value === that._old) {
-                        that._triggerCascade();
-                        return;
-                    }
-                }
-
-                if (ignoreCase) {
-                    loweredText = loweredText.toLowerCase();
-                }
-
-                that._select(function(data) {
-                    data = that._text(data);
-
-                    if (ignoreCase) {
-                        data = (data + "").toLowerCase();
-                    }
-
-                    return data === loweredText;
-                });
-
-                if (that.selectedIndex < 0) {
-                    that._accessor(text);
-                    input.value = text;
-
-                    that._triggerCascade();
-                }
-
-                that._prev = input.value;
-            } else {
+            if (text === undefined) {
                 return input.value;
             }
+
+            dataItem = that.dataItem();
+
+            if (that.options.autoBind === false && !that.listView.isBound()) {
+                return;
+            }
+
+            if (dataItem && that._text(dataItem) === text) {
+                value = that._value(dataItem);
+                if (value === null) {
+                    value = "";
+                } else {
+                    value += "";
+                }
+
+                if (value === that._old) {
+                    that._triggerCascade();
+                    return;
+                }
+            }
+
+            if (ignoreCase) {
+                loweredText = loweredText.toLowerCase();
+            }
+
+            that._select(function(data) {
+                data = that._text(data);
+
+                if (ignoreCase) {
+                    data = (data + "").toLowerCase();
+                }
+
+                return data === loweredText;
+            });
+
+            if (that.selectedIndex < 0) {
+                that._accessor(text);
+                input.value = text;
+
+                that._triggerCascade();
+            }
+
+            that._prev = input.value;
         },
 
         toggle: function(toggle) {
@@ -794,8 +798,13 @@ var __meta__ = {
         },
 
         _preselect: function(value, text) {
-            this._accessor(value);
             this.input.val(text);
+            this._accessor(value);
+
+            this._old = this._accessor();
+            this._oldIndex = this.selectedIndex;
+
+            this.listView.setValue(value);
         }
     });
 
