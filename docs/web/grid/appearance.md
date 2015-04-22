@@ -32,7 +32,7 @@ The two tables may need to be taken into account when making some manual Javascr
         </div>
     </div>
 
-> In order to ensure maximum Grid accessibility with assistive technology, disable the scrolling feature.
+> If you want to allow maximum Grid accessibility with assistive technologies, disable the scrolling feature.
 
 ### Remove the vertical scrollbar
 
