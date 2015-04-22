@@ -1290,7 +1290,9 @@ var __meta__ = {
 
                 refresh: function() {
                     if (!this._initChange) {
-                        var field = this.options.dataValueField || this.options.dataTextField,
+                        var options = this.options,
+                            widget = this.widget,
+                            field = options.dataValueField || options.dataTextField,
                             value = this.bindings.value.get(),
                             data = value,
                             idx = 0, length,
@@ -1313,10 +1315,10 @@ var __meta__ = {
                             }
                         }
 
-                        if (this.options.autoBind === false && this.options.valuePrimitive !== true) {
-                            this.widget._preselect(data, value);
+                        if (options.autoBind === false && options.valuePrimitive !== true && !widget.listView.isBound()) {
+                            widget._preselect(data, value);
                         } else {
-                            this.widget.value(value);
+                            widget.value(value);
                         }
                     }
                 },
