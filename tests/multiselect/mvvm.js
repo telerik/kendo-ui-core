@@ -347,7 +347,7 @@
 
         var items = new kendo.data.ObservableArray([{text:"foo", value: 1}, {text:"bar", value: 2}]);
         var observable = kendo.observable({
-            items: items
+            items: new kendo.data.DataSource({ data: items })
         });
         observable.value = items[1];
 
