@@ -94,4 +94,42 @@
         multiSelect.trigger("change");
         equal(JSON.stringify(scope.selectedColors), JSON.stringify([]));
     });
+
+    ngTest("multiselect with autoBind:false fetches when value is primitive", 2, function() {
+        angular.module("kendo.tests").controller("mine", function($scope) {
+            $scope.colors = [ { color: "red" }, { color: "green" }, { color: "blue" } ];
+            $scope.selectedColors = ["green"];
+        });
+
+        QUnit.fixture.html('<div ng-controller=mine><select kendo-multiselect k-value-primitive="true" k-auto-bind="false" k-ng-model=selectedColors k-data-source=colors k-data-value-field="\'color\'"></select></div>');
+    },
+
+    function() {
+        var multiSelect = QUnit.fixture.find("select").getKendoMultiSelect();
+
+        equal(multiSelect.value()[0], "green");
+        equal(multiSelect.listView.isBound(), true);
+    });
+
+    ngTest("multiselect honors autoBind:false option when valuePrimitive is false", 4, function() {
+        angular.module("kendo.tests").controller("mine", function($scope) {
+            var colors = new kendo.data.ObservableArray([ { color: "red" }, { color: "green" }, { color: "blue" } ]);
+
+            $scope.colors = new kendo.data.DataSource({ data: colors });
+            $scope.selectedColors = [ colors[0], colors[1] ];
+        });
+
+        QUnit.fixture.html('<div ng-controller=mine><select kendo-multiselect k-auto-bind="false" k-ng-model=selectedColors k-data-source=colors k-data-value-field="\'color\'"></select></div>');
+    },
+
+    function() {
+        var multiSelect = QUnit.fixture.find("select").getKendoMultiSelect();
+        var values = multiSelect.value();
+
+        equal(values.length, 2);
+        equal(values[0], "red");
+        equal(values[1], "green");
+
+        equal(multiSelect.dataSource.view().length, 2);
+    });
 })();
