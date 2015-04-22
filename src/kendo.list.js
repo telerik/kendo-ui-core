@@ -1462,6 +1462,16 @@ var __meta__ = {
             };
         },
 
+        setValue: function(value) {
+            if (value === "" || value === null) {
+                value = [];
+            }
+
+            value = $.isArray(value) || value instanceof ObservableArray ? value.slice(0) : [value];
+
+            this._values = value;
+        },
+
         value: function(value) {
             var that = this;
             var deferred = that._valueDeferred;
@@ -1471,20 +1481,14 @@ var __meta__ = {
                 return that._values.slice();
             }
 
-            if (value === "" || value === null) {
-                value = [];
-            }
-
-            value = $.isArray(value) || value instanceof ObservableArray ? value.slice(0) : [value];
-
-            that._values = value;
+            that.setValue(value);
 
             if (!deferred || deferred.state() === "resolved") {
                 that._valueDeferred = deferred = $.Deferred();
             }
 
             if (that.isBound()) {
-                indices = that._valueIndices(value);
+                indices = that._valueIndices(that._values);
 
                 if (that.options.selectable === "multiple") {
                     that.select(-1);

@@ -98,6 +98,23 @@
         ok(!list.isBound());
     });
 
+    test("setValue method updates values of the widget silently", function() {
+        var list = new StaticList(element, {
+            dataSource: ["item"],
+            template: "#:data#"
+        });
+
+        list.setValue("item");
+
+        var value = list.value();
+        var indices = list.select();
+
+        equal(indices.length, 0);
+
+        equal(value.length, 1);
+        equal(value[0], "item");
+    });
+
     test("widget focuses last selected item during rendering", function() {
         var list = new StaticList(element, {
             dataValueField: "name",
