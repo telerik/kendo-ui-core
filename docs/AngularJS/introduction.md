@@ -370,7 +370,7 @@ The `kendoEvent` is available as well.
 
 ### Updating widgets when options change
 
-You can use the special `k-rebind` attribute to create a widget which automatically updates when some scope variable changes:
+You can use the special `k-rebind` attribute to create a widget which automatically updates when some scope variable changes. This option will destroy the original widget, and will recreate it using the changed options.
 
 #### Update widget options from controller
 
