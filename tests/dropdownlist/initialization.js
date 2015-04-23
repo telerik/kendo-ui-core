@@ -218,7 +218,7 @@
         ok(dropdownlist.ul);
         ok(dropdownlist.ul.is("ul"));
         ok(dropdownlist.list.attr("id"), input.attr("id") + "-list");
-        equal(dropdownlist.ul.css("overflow"), "auto");
+        equal(dropdownlist.listView.content.css("overflow"), "auto");
     });
 
     test("dropdownlist initializes a popup for its items", function() {
@@ -737,16 +737,6 @@
         equal(dropdownlist.popup.options.appendTo[0], $(appendTo)[0]);
     });
 
-    test("dropdownlist initializes a touch scroller when in mobile", function() {
-        kendo.support.kineticScrollNeeded = true;
-        kendo.support.mobileOS = kendo.support.detectOS("iPhone OS 4_3");
-
-        var dropdownlist = new DropDownList($("<input/>").appendTo(QUnit.fixture));
-
-        ok(dropdownlist.popup.element.hasClass("km-scroll-wrapper"));
-        kendo.support.kineticScrollNeeded = false;
-    });
-
     test("dropdownlist can be initialized in hidden container", function() {
         var div = $("<div style='display: none'></div>").appendTo(QUnit.fixture),
             dropdown = input.appendTo(div).kendoDropDownList().data("kendoDropDownList");
@@ -983,7 +973,7 @@
         dropdownlist.value("30");
         dropdownlist.open();
 
-        ok(dropdownlist.ul[0].scrollTop > 50);
+        ok(dropdownlist.listView.content[0].scrollTop > 50);
     });
 
     test("DropDownList adds scrollbar width to the fixed group header padding", function() {

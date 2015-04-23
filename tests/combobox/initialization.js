@@ -238,7 +238,7 @@ test("combobox initializes an UL for its items", function() {
 
      ok(combobox.ul);
      ok(combobox.ul.is("ul"));
-     equal(combobox.ul.css("overflow"), "auto");
+     equal(combobox.listView.content.css("overflow"), "auto");
 });
 
 test("combobox initializes a popup for its items", function() {
@@ -269,7 +269,7 @@ test("combobox shrink ul if the height of the items is more then options.height"
       equal(combobox.list.css("height"), "100px");
 });
 
-test("combobox substracts height of header from list", function() {
+test("combobox substracts height of header from list content", function() {
    var data = [{text: "foo", value: 1},
                {text:2, value:2},
                {text:2, value:2},
@@ -290,7 +290,7 @@ test("combobox substracts height of header from list", function() {
       combobox.dataSource.read();
       combobox.open();
 
-      equal(combobox.ul.height(), 100 - combobox.ul[0].offsetTop);
+      equal(combobox.listView.content.height(), 100 - combobox.listView.content[0].offsetTop);
 });
 
 test("combobox populates its list when the datasource changes", function() {

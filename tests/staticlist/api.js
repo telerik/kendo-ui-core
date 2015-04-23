@@ -1262,28 +1262,4 @@
         equal(removed.dataItem, "item2");
         ok(!$.isArray(removed.dataItem));
     });
-
-    test("touchScroller dimension is refreshed when scroll method is called", 1, function() {
-        var list = new StaticList(element, {
-            dataSource: ["item1", "item2", "item3", "item4", "item5"],
-            template: "#:data#"
-        });
-
-        var wrapper = element.wrap("<div></div>").parent();
-
-        kendo.support.kineticScrollNeeded = true;
-
-        var touchScroller = kendo.touchScroller(wrapper);
-
-        list.setTouchScroller(touchScroller);
-        list.dataSource.read();
-
-        stub(touchScroller.dimensions.y, "update");
-
-        list.scrollToIndex(2);
-
-        equal(touchScroller.dimensions.y.calls("update"), 1);
-
-        touchScroller.destroy();
-    });
 })();

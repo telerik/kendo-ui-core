@@ -204,7 +204,7 @@
         multiselect.value(["30"]);
         multiselect.open();
 
-        ok(multiselect.ul[0].scrollTop > 50);
+        ok(multiselect.listView.content[0].scrollTop > 50);
     });
 
     module("kendo.ui.MultiSelect tag navigation", {

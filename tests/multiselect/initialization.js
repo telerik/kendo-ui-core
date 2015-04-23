@@ -156,7 +156,7 @@
         ok(multiselect.ul);
         ok(multiselect.ul.is("ul"));
         ok(multiselect.list.attr("id"), select.attr("id") + "-list");
-        equal(multiselect.ul.css("overflow"), "auto");
+        equal(multiselect.listView.content.css("overflow"), "auto");
     });
 
     test("MultiSelect calls value method on init", function() {

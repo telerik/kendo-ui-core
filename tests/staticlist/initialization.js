@@ -36,22 +36,10 @@
         equal(element.attr("role"), "listbox");
     });
 
-    test("StaticList sets overflow style to the element", function() {
+    test("StaticList sets overflow style to the content element", function() {
         var list = new StaticList(element);
 
-        equal(element.css("overflow"), "auto");
-    });
-
-    test("StaticList sets overflow style to the element", function() {
-        var list = new StaticList(element);
-
-        equal(element.css("overflow"), "auto");
-    });
-
-    test("StaticList sets overflow style to the element", function() {
-        var list = new StaticList(element);
-
-        equal(element.css("overflow"), "auto");
+        equal(list.content.css("overflow"), "auto");
     });
 
     test("StaticList builds a template", function() {
@@ -78,12 +66,12 @@
         ok(list.templates.fixedGroupTemplate);
     });
 
-    test("StaticList appends fixed header element before element", function() {
+    test("StaticList appends fixed header element before content element", function() {
         var list = new StaticList(element, {
             fixedGroupTemplate: "test"
         });
 
-        var header = element.prev();
+        var header = list.content.prev();
 
         ok(header.hasClass("k-group-header"));
     });
