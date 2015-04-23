@@ -1706,4 +1706,20 @@ test("models within the range have correct parent - server paging", function() {
     equal(dataSource.data().length, 46);
 });*/
 
+test("error event is raised if error occurs during fetching", 1, function() {
+    var dataSource = new DataSource({
+        error: function() {
+            ok(true);
+        },
+        transport: {
+            read: function(options) {
+                options.error({});
+            }
+        }
+    });
+
+    dataSource.prefetch(0, 1);
+});
+
+
 }());
