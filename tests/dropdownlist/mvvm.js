@@ -266,6 +266,36 @@
         widget.wrapper.focus().blur();
     });
 
+    test("initialized widget with autoBind:false does not raise change on initial binding after value binding is applied", 0, function() {
+        dom = $('<input data-value-primitive="false" data-bind="value:value"/>').appendTo(QUnit.fixture);
+
+        var items = new kendo.data.ObservableArray([{text:"foo", value: 1}, {text:"bar", value: 2}]);
+        var observable = kendo.observable({
+            value: items[1]
+        });
+
+        dom.kendoDropDownList({
+            autoBind: false,
+            animation: false,
+            optionLabel: { text:"Select a category...", value: -1 },
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: new kendo.data.DataSource({ data: items })
+        });
+
+        kendo.bind(dom, observable);
+
+        var widget = dom.data("kendoDropDownList");
+
+        widget.bind("change", function() {
+            ok(false);
+        });
+
+        widget.wrapper.focus();
+        widget.open();
+        widget.wrapper.focusout();
+    });
+
     asyncTest("widget does not loose selected value on first bound when autoBind: false is used", 3, function() {
         dom = $('<input data-role="dropdownlist" data-value-field="value" data-text-field="text" data-auto-bind="false" data-value-primitive="false" data-bind="value:value, source:items" />');
 
