@@ -877,4 +877,22 @@ asyncTest("ComboBox shows the custom text if source is empty", 2, function() {
    equal(combobox.text(), "");
 });
 
+test("ComboBox with autoBind:false reads datasource ", 1, function() {
+   var select = $("<select></select>").appendTo(QUnit.fixture);
+   var dataSource = new kendo.data.DataSource({
+       data: ["Item1", "Item2"]
+   });
+
+   dataSource.read();
+
+   combobox = new ComboBox(select, {
+       autoBind: false,
+       dataSource: dataSource
+   });
+
+   combobox.open();
+
+   equal(combobox.ul.children().length, 2);
+});
+
 })();
