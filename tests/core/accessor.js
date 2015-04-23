@@ -137,4 +137,13 @@ test("expr with custom parameter name", function() {
 test("safe expr with custom parameter name", function() {
     equal("(data.foo)", kendo.expr("foo", true, "data"));
 });
+
+test("safe expr with array accessor and \" ", function() {
+    equal(kendo.expr('["foo.bar"].baz', true), '((d["foo.bar"] || {}).baz)');
+});
+
+test("safe expr with array accessor and ' ", function() {
+    equal(kendo.expr("['foo.bar'].baz", true), "((d['foo.bar'] || {}).baz)");
+});
+
 }());
