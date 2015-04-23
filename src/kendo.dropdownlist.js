@@ -401,6 +401,8 @@ var __meta__ = {
 
             that._angularItems("compile");
 
+            that._presetValue = false;
+
             if (!that.options.virtual) {
                 height = that._height(filtered ? (length || 1) : length);
                 that._calculateGroupPadding(height);
@@ -457,7 +459,7 @@ var __meta__ = {
         _listChange: function() {
             this._selectValue(this.listView.selectedDataItems()[0]);
 
-            if (this._old && this._oldIndex === -1) {
+            if (this._presetValue || (this._old && this._oldIndex === -1)) {
                 this._oldIndex = this.selectedIndex;
             }
         },
@@ -1152,6 +1154,8 @@ var __meta__ = {
             this._oldIndex = this.selectedIndex;
 
             this.listView.setValue(value);
+
+            this._presetValue = true;
         },
 
         _assignInstance: function(text, value) {

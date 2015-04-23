@@ -272,6 +272,8 @@ var __meta__ = {
 
             that._angularItems("compile");
 
+            that._presetValue = false;
+
             if (!options.virtual) {
                 that._calculateGroupPadding(that._height(length));
             }
@@ -353,6 +355,10 @@ var __meta__ = {
 
         _listChange: function() {
             this._selectValue(this.listView.selectedDataItems()[0]);
+
+            if (this._presetValue) {
+                this._oldIndex = this.selectedIndex;
+            }
         },
 
         _get: function(candidate) {
@@ -805,6 +811,8 @@ var __meta__ = {
             this._oldIndex = this.selectedIndex;
 
             this.listView.setValue(value);
+
+            this._presetValue = true;
         }
     });
 
