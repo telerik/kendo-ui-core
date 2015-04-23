@@ -822,7 +822,7 @@ Fires before a sub menu gets closed. You can cancel this event to prevent closur
 
 #### Event Data
 
-##### e.item `Element`
+##### e.item `HTMLElement`
 
 The closed item
 
@@ -886,7 +886,7 @@ Fires before a sub menu gets opened. You can cancel this event to prevent openin
 
 #### Event Data
 
-##### e.item `Element`
+##### e.item `HTMLElement`
 
 The opened item
 
@@ -950,7 +950,7 @@ Fires when a sub menu gets opened and its animation finished.
 
 #### Event Data
 
-##### e.item `Element`
+##### e.item `HTMLElement`
 
 The activated item
 
@@ -1014,7 +1014,7 @@ Fires when a sub menu gets closed and its animation finished.
 
 #### Event Data
 
-##### e.item `Element`
+##### e.item `HTMLElement`
 
 The deactivated item
 
@@ -1078,7 +1078,7 @@ Fires when a menu item gets selected.
 
 #### Event Data
 
-##### e.item `Element`
+##### e.item `HTMLElement`
 
 The selected item
 
