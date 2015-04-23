@@ -246,7 +246,7 @@ var __meta__ = {
                 return;
             }
 
-            if ((!this.dataSource.view().length && state !== STATE_FILTER) || state === STATE_ACCEPT) {
+            if ((!that.listView.isBound() && state !== STATE_FILTER) || state === STATE_ACCEPT) {
                 that._open = true;
                 that._state = STATE_REBIND;
                 that.listView.filter(false);
