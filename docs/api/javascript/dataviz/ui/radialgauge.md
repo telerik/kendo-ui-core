@@ -70,7 +70,7 @@ the horizontal one is 60px.
 
 ### gaugeArea.margin `Number|Object`*(default: 5)*
 
- The margin of the gauge area.
+The margin of the gauge area.
 
 #### Example
 
@@ -80,6 +80,22 @@ the horizontal one is 60px.
     // sets the top and left margin to 1px
     // margin right and bottom are with 5px (by default)
     margin: { top: 1, left: 1 }
+
+### gaugeArea.margin.top `Number`
+
+The top margin of the gauge area.
+
+### gaugeArea.margin.bottom `Number`
+
+The bottom margin of the gauge area.
+
+### gaugeArea.margin.left `Number`
+
+The left margin of the gauge area.
+
+### gaugeArea.margin.right `Number`
+
+The right margin of the gauge area.
 
 ### gaugeArea.width `Number`
 
@@ -254,9 +270,41 @@ The format of the labels.
 
  The margin of the labels.
 
+### scale.labels.margin.top `Number`
+
+The top margin of the labels.
+
+### scale.labels.margin.bottom `Number`
+
+The bottom margin of the labels.
+
+### scale.labels.margin.left `Number`
+
+The left margin of the labels.
+
+### scale.labels.margin.right `Number`
+
+The right margin of the labels.
+
 ### scale.labels.padding `Number | Object`*(default: 0)*
 
  The padding of the labels.
+
+### scale.labels.padding.top `Number`
+
+The top padding of the labels.
+
+### scale.labels.padding.bottom `Number`
+
+The bottom padding of the labels.
+
+### scale.labels.padding.left `Number`
+
+The left padding of the labels.
+
+### scale.labels.padding.right `Number`
+
+The right padding of the labels.
 
 ### scale.labels.position `String`*(default: "inside")*
 
