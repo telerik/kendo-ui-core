@@ -163,7 +163,7 @@ test("value binding honors autoBind:false option when valuePrimitive is true", f
     var widget = dom.data("kendoComboBox");
 
     equal(widget.value(), "bar");
-    equal(widget.text(), "");
+    equal(widget.text(), "bar");
 });
 
 test("value binding displays options.text when autoBind:false and valuePrimitive is true", function() {
