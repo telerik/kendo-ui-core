@@ -131,6 +131,19 @@
 
     });
 
+    test("press down arrow fetches the source and select first item", function() {
+        var dropdownlist = new DropDownList(input, {
+            autoBind: false,
+            dataSource: new kendo.data.DataSource({
+                data: data
+            })
+        });
+
+        dropdownlist.wrapper.focus().press(keys.DOWN);
+
+        equal(dropdownlist.select(), 0);
+    });
+
     test("press up arrow should focus prev item and update text and value", function() {
         var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
 
