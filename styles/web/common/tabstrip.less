@@ -147,25 +147,25 @@
     margin: .286em .3em;
 }
 
-.k-tabstrip-left .k-tabstrip-items .k-item,
-.k-tabstrip-right .k-tabstrip-items .k-item
+.k-tabstrip-left > .k-tabstrip-items .k-item,
+.k-tabstrip-right > .k-tabstrip-items .k-item
 {
     display: block;
     margin-bottom: -1px;
 }
 
-.k-tabstrip-left .k-tabstrip-items .k-link,
-.k-tabstrip-right .k-tabstrip-items .k-link
+.k-tabstrip-left > .k-tabstrip-items .k-link,
+.k-tabstrip-right > .k-tabstrip-items .k-link
 {
     display: block;
 }
 
-.k-tabstrip-left .k-tabstrip-items .k-tab-on-top,
-.k-tabstrip-right .k-tabstrip-items .k-tab-on-top,
-.k-tabstrip-left .k-tabstrip-items .k-state-active,
-.k-tabstrip-right .k-tabstrip-items .k-state-active,
-.k-tabstrip-left .k-panelbar .k-tabstrip-items .k-state-active,
-.k-tabstrip-right .k-panelbar .k-tabstrip-items .k-state-active
+.k-tabstrip-left > .k-tabstrip-items .k-tab-on-top,
+.k-tabstrip-right > .k-tabstrip-items .k-tab-on-top,
+.k-tabstrip-left > .k-tabstrip-items .k-state-active,
+.k-tabstrip-right > .k-tabstrip-items .k-state-active,
+.k-panelbar .k-tabstrip-left > .k-tabstrip-items .k-state-active,
+.k-panelbar .k-tabstrip-right > .k-tabstrip-items .k-state-active
 {
     margin-bottom: -1px;
     padding-bottom: 0;
@@ -173,26 +173,26 @@
 
 /* left tabs */
 
-.k-tabstrip-left .k-tabstrip-items
+.k-tabstrip-left > .k-tabstrip-items
 {
     float: left;
     padding: .25em 0 .3em .3em;
 }
 
-.k-tabstrip-left .k-tabstrip-items .k-item
+.k-tabstrip-left > .k-tabstrip-items .k-item
 {
     border-width: 1px 0 1px 1px;
     border-radius: 3px 0 0 3px;
 }
 
-.k-tabstrip-left .k-tabstrip-items .k-state-active
+.k-tabstrip-left > .k-tabstrip-items .k-state-active
 {
     border-width: 1px 0 1px 1px;
 }
 
-.k-tabstrip-left .k-tabstrip-items .k-tab-on-top,
-.k-tabstrip-left .k-tabstrip-items .k-state-active,
-.k-tabstrip-left .k-panelbar .k-tabstrip-items .k-state-active
+.k-tabstrip-left > .k-tabstrip-items .k-tab-on-top,
+.k-tabstrip-left > .k-tabstrip-items .k-state-active,
+.k-panelbar .k-tabstrip-left > .k-tabstrip-items .k-state-active
 {
     margin-right: -2px;
     padding-right: 1px;
@@ -200,26 +200,26 @@
 
 /* right tabs */
 
-.k-tabstrip-right .k-tabstrip-items
+.k-tabstrip-right > .k-tabstrip-items
 {
     float: right;
     padding: .25em .3em .3em 0;
 }
 
-.k-tabstrip-right .k-tabstrip-items .k-item
+.k-tabstrip-right > .k-tabstrip-items .k-item
 {
     border-width: 1px 1px 1px 0;
     border-radius: 0 3px 3px 0;
 }
 
-.k-tabstrip-right .k-tabstrip-items .k-state-active
+.k-tabstrip-right > .k-tabstrip-items .k-state-active
 {
     border-width: 1px 1px 1px 0;
 }
 
-.k-tabstrip-right .k-tabstrip-items .k-tab-on-top,
-.k-tabstrip-right .k-tabstrip-items .k-state-active,
-.k-tabstrip-right .k-panelbar .k-tabstrip-items .k-state-active
+.k-tabstrip-right > .k-tabstrip-items .k-tab-on-top,
+.k-tabstrip-right > .k-tabstrip-items .k-state-active,
+.k-panelbar .k-tabstrip-right > .k-tabstrip-items .k-state-active
 {
     margin-left: -1px;
     padding-left: 1px;
@@ -259,7 +259,7 @@
     min-height: 100px;
 }
 
-.k-tabstrip-bottom .k-tabstrip-items .k-loading
+.k-tabstrip-bottom > .k-tabstrip-items .k-loading
 {
     top: auto;
     bottom: 0;
