@@ -498,4 +498,42 @@
         equal(dataItems[0].value, "4");
         equal(dataItems[1].value, "3");
     });
+
+    test("MultiSelect render the option text and value of the custom values", 5, function() {
+        var values = [
+            [{ text: "text1", value: "2" }, { text: "text1", value: "1" }],
+            [{ text: "text4", value: "4" }]
+        ];
+
+        var multiselect = new MultiSelect(select, {
+            autoBind: false,
+            animation: false,
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: {
+                serverFiltering: true,
+                transport: {
+                    read: function(options) {
+                        options.success(values.shift());
+                    }
+                }
+            }
+        });
+
+        multiselect.search("text1");
+        multiselect.ul.children(":last").click();
+
+        multiselect.search("text4");
+        multiselect.ul.children(":first").click();
+
+        var options = select.children();
+
+        equal(options.length, 2);
+
+        equal(options[0].text, "text4");
+        equal(options[0].value, "4");
+
+        equal(options[1].text, "text1");
+        equal(options[1].value, "1");
+    });
 })();
