@@ -1180,6 +1180,10 @@ var __meta__ = {
                     }
 
                     if (widget.options.autoBind === false && widget.listView && !widget.listView.isBound()) {
+                        if (textField === valueField && !text) {
+                            text = value;
+                        }
+
                         widget._preselect(value, text);
                     } else {
                         widget.value(value);
