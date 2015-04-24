@@ -59,9 +59,13 @@ Specifies a line consisting of a repeating pattern of long-dash-dot.
 
 Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
+### gaugeArea.border.opacity `Number` *(default: 1)*
+
+The opacity of the border. By default the border is opaque.
+
 ### gaugeArea.border.width `Number`*(default: 0)*
 
- The width of the border.
+The width of the border.
 
 ### gaugeArea.height `Number`
 
@@ -237,6 +241,10 @@ Specifies a line consisting of a repeating pattern of long-dash-dot.
 #### *"longDashDotDot"*
 
 Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
+
+### scale.labels.border.opacity `Number` *(default: 1)*
+
+The opacity of the border. By default the border is opaque.
 
 ### scale.labels.border.width `Number`*(default: 0)*
 
