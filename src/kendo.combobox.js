@@ -815,6 +815,7 @@ var __meta__ = {
 
             this.listView.setValue(value);
 
+            this._initialIndex = null;
             this._presetValue = true;
         }
     });

@@ -622,4 +622,20 @@ test("Enter custom value after re bind", function() {
     equal(combobox.value(), "custom2");
 });
 
+test("widget with autoBind:false does not select first item when model value is null", function() {
+    dom = $('<input data-index="0" data-auto-bind="false" data-text-field="text" data-value-field="text" data-bind="value:bar,source:items" data-role="combobox" />');
+
+    var observable = kendo.observable({
+        items: new kendo.data.DataSource({ data: [{text:"foo"}, {text:"bar"}] }),
+        bar: null
+    });
+
+    kendo.bind(dom, observable);
+    var combobox = dom.data("kendoComboBox");
+
+    combobox.dataSource.read();
+
+    equal(combobox.select(), -1);
+});
+
 })();
