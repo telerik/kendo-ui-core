@@ -672,4 +672,20 @@
         equal(dropdownlist.select(), 0);
         equal(dropdownlist.text(), "test");
     });
+
+    test("widget with autoBind:false does not select first item when model value is null", function() {
+        dom = $('<input data-auto-bind="false" data-text-field="text" data-value-field="text" data-bind="value:bar,source:items" data-role="dropdownlist" />');
+
+        var observable = kendo.observable({
+            items: new kendo.data.DataSource({ data: [{text:"foo"}, {text:"bar"}] }),
+            bar: null
+        });
+
+        kendo.bind(dom, observable);
+        dropdownlist = dom.data("kendoDropDownList");
+
+        dropdownlist.dataSource.read();
+
+        equal(dropdownlist.select(), -1);
+    });
 })();
