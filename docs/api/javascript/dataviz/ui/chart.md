@@ -1807,10 +1807,14 @@ If set to `true` the chart will display the category axis labels. By default the
 
 A function that can be used to create a custom visual for the labels. The available argument fields are:
 
-* text - the label text.
-* rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
-* options - the label options.
 * createVisual - a function that can be used to get the default visual.
+* culture - the default culture (if set) on the label
+* dataItem - the data item, in case a field has been specified
+* format - the default format of the label
+* options - the label options.
+* rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* text - the label text.
+* value - the category value
 
 #### Example - using custom visual for the labels
 
@@ -18952,10 +18956,13 @@ If set to `true` the chart will display the value axis labels. By default the ca
 
 A function that can be used to create a custom visual for the labels. The available argument fields are:
 
-* text - the label text.
-* rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
-* options - the label options.
 * createVisual - a function that can be used to get the default visual.
+* culture - the default culture (if set) on the label
+* format - the default format of the label
+* options - the label options.
+* rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* text - the label text.
+* value - the category value
 
 #### Example - using custom visual for the labels
 
@@ -23589,10 +23596,13 @@ If set to `true` the chart will display the x axis labels. By default the x axis
 
 A function that can be used to create a custom visual for the labels. The available argument fields are:
 
-* text - the label text.
-* rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
-* options - the label options.
 * createVisual - a function that can be used to get the default visual.
+* culture - the default culture (if set) on the label
+* format - the default format of the label
+* options - the label options.
+* rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* text - the label text.
+* value - the category value
 
 #### Example - using custom visual for the labels
 
@@ -28276,10 +28286,13 @@ If set to `true` the chart will display the y axis labels. By default the y axis
 
 A function that can be used to create a custom visual for the labels. The available argument fields are:
 
-* text - the label text.
-* rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
-* options - the label options.
 * createVisual - a function that can be used to get the default visual.
+* culture - the default culture (if set) on the label
+* format - the default format of the label
+* options - the label options.
+* rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* text - the label text.
+* value - the category value
 
 #### Example - using custom visual for the labels
 
