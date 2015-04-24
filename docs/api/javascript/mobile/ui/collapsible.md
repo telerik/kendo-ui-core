@@ -225,6 +225,30 @@ When set to true the expand action will be performed without animation.
         }
     </script>
 
+### resize
+
+Recalculates the content height.
+
+#### Example
+
+    <div id="home" data-role="view">
+        <div id="collapsible" data-role="collapsible" data-expand="onExpand">
+            <h2>Header</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+    </div>
+
+    <script>
+        var app = new kendo.mobile.Application();
+
+        function onExpand() {
+            var that = this;
+            setTimeout(function() {
+                that.refresh();
+            });
+        }
+    </script>
+
 ### toggle
 
 Toggles the content visibility.
