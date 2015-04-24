@@ -161,4 +161,12 @@ test("kendo.resize resizes nested widgets", 1, function() {
     kendo.resize(QUnit.fixture);
 });
 
+test("resize passes force value to widget's internal _resize method", 1, function () {
+    widget._resize = function (size, force) {
+        ok(force);
+    }
+
+    widget.resize(true);
+});
+
 }());
