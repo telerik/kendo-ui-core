@@ -216,6 +216,7 @@ var __meta__ = {
             }
         },
 
+        //TODO: refactor
         _header: function() {
             var that = this;
             var template = that.options.headerTemplate;
@@ -1161,10 +1162,10 @@ var __meta__ = {
                 this._values = $.isArray(value) ? value.slice(0) : [value];
             }
 
-            this.setDataSource(this.options.dataSource);
-
             this._getter();
             this._templates();
+
+            this.setDataSource(this.options.dataSource);
 
             this._onScroll = proxy(function() {
                 var that = this;
@@ -1219,6 +1220,7 @@ var __meta__ = {
             }
 
             that.dataSource = dataSource.bind(CHANGE, that._refreshHandler);
+            that._fixedHeader();
         },
 
         setOptions: function(options) {

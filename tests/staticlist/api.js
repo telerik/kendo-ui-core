@@ -70,6 +70,21 @@
         equal(list.value()[0], "item");
     });
 
+    test("setDataSource method shows fixed header", 1, function() {
+        var list = new StaticList(element, {
+            fixedGroupTemplate: "#:data#",
+            template: "#:data#",
+            value: "item"
+        });
+
+        list.setDataSource({
+            data: [{ text: "item" }],
+            group: { field: "text" }
+        });
+
+        ok(list.header.is(":visible"));
+    });
+
     test("setOptions re-create templates", function() {
         var list = new StaticList(element, {
             dataSource: ["item"],
