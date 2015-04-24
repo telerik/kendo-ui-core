@@ -67,7 +67,7 @@ each tab.
       });
     </script>
 
-Initialization of a TaStrip should occur after the DOM is fully loaded. It is recommended that initialization the TaStrip is done within a $(document).ready() statement.
+Initialization of a TabStrip should occur after the DOM is fully loaded. It is recommended that initialization the TabStrip is done within a $(document).ready() statement.
     
 The tabs of a TabStrip are not required to have content. Should a tab have no content, it is safe to omit its associated div.
 
