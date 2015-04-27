@@ -54,7 +54,7 @@ The following mask rules are available:
 
 - **0** - Digit. Accepts any digit between 0 and 9.
 - **9** - Digit or space. Accepts any digit between 0 and 9 or space.
-- **#** - Digit or space. Like **9** rule, but allows also (+) and (-) sings.
+- **#** - Digit or space. Like **9** rule, but allows also (+) and (-) signs.
 - **L** - Letter. Restricts input to letters a-z and A-Z. This rule is equivalent to [a-zA-Z] in regular expressions.
 - **?** - Letter or space. Restricts input to letters a-z and A-Z. This rule is equivalent to [a-zA-Z] in regular expressions.
 - **&** - Character. Accepts any character. The rule is equivalent to *\S* in regular expressions.
