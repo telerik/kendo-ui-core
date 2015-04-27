@@ -201,4 +201,59 @@
         });
     });
 
+    asyncTest("does not fetch negative page on scroll and filter", 2, function() {
+        var requestOptions;
+        var dataSource = new kendo.data.DataSource({
+            transport: {
+                read: function(options) {
+                    requestOptions = options;
+
+                    setTimeout(function() {
+                        var filter = options.data.filter;
+                        var myData;
+
+                        if (filter) {
+                            var filterValue = options.data.filter.filters[0].value;
+                            myData = data.filter(function(item) {
+                                return item.letter === filterValue;
+                            });
+                        } else {
+                            myData = data;
+                        }
+
+                        options.success({ data: myData.slice(options.data.skip, options.data.skip + options.data.take), total: myData.length });
+                    }, 0);
+                }
+            },
+            serverPaging: true,
+            serverFiltering: true,
+            pageSize: 80,
+            schema: {
+                data: "data",
+                total: "total"
+            }
+        });
+
+        virtualList.setDataSource(dataSource);
+
+        dataSource.read().then(function() {
+            virtualList.one("listBound", function() {
+                start();
+
+                var skip = requestOptions.data.skip;
+
+                notEqual(1/skip, -Infinity);
+                ok(skip >= 0);
+            });
+
+            virtualList.focus(30);
+            virtualList.filter(true);
+
+            stub(dataSource, {
+                total: function() { return 1; /*return less items*/ }
+            });
+
+            dataSource.filter({ field: "letter", operator: "eq", value: "b" });
+        });
+    });
 })();
