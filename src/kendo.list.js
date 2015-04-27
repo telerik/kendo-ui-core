@@ -439,14 +439,6 @@ var __meta__ = {
 
                 popups.height(height);
 
-                if (height !== "auto") {
-                    offsetTop = that.listView.content[0].offsetTop;
-
-                    if (offsetTop) {
-                        height = list.height() - offsetTop;
-                    }
-                }
-
                 that.listView.content.height(height);
 
                 if (!visible) {
