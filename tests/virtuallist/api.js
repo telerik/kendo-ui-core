@@ -346,6 +346,22 @@
         });
     });
 
+    asyncTest("removes selected class when all items are de-selected", 1, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: true,
+            value: 0
+        }));
+
+        asyncDataSource.read().then(function() {
+            virtualList.bind("change", function() {
+                start();
+
+                equal(container.find(".k-state-selected").length, 0);
+            })
+            virtualList.select(-1);
+        });
+    });
+
     asyncTest("select method selects same index when filtered (single selection)", 1, function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             selectable: true,
