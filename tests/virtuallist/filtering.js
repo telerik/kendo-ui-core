@@ -256,4 +256,100 @@
             dataSource.filter({ field: "letter", operator: "eq", value: "b" });
         });
     });
+
+    var localDataSource;
+
+    module("VirtualList Filtering (local data): ", {
+        setup: function() {
+            container = $("<div id='container'></div>").appendTo(QUnit.fixture);
+
+            var data = [], i;
+            for(i = 0; i < 5000; i++) {
+                data.push({text: 'Item ' + i, value: i.toString()});
+            }
+
+            localDataSource = new kendo.data.DataSource({
+                data: data,
+                schema: {
+                    model: {
+                        fields: {
+                            text: { type: "string" },
+                            value: { type: "string" }
+                        }
+                    }
+                }
+            });
+
+            virtualList = new VirtualList(container, {
+                dataSource: localDataSource,
+                template: "#=text#",
+                dataValueField: "value",
+                height: CONTAINER_HEIGHT,
+                itemHeight: ITEM_HEIGHT,
+                selectable: true,
+                valueMapper: function(options) {
+                    var data = this.dataSource.data();
+                    var values = $.isArray(options.value) ? options.value : [options.value];
+                    var res = [], i, j, l = values.length, dl = data.length;
+
+                    for (i = 0; i < l; i++) {
+                        for (j = 0; j < dl; j++) {
+                            if (data[j].value === values[i]) {
+                                res[i] = j;
+                                break;
+                            }
+                        }
+                    }
+
+                    options.success(res);
+                }
+            });
+        },
+
+        teardown: function() {
+            if (container.data("kendoVirtualList")) {
+                container.data("kendoVirtualList").destroy();
+            }
+
+            QUnit.fixture.empty();
+        }
+    });
+
+    asyncTest("displays result after subsequent filtering", 3, function() {
+        virtualList.one("listBound", function() {
+            equal(this.items().first().text(), "Item 200");
+        });
+        virtualList.filter(true);
+        localDataSource.filter({field: "text", operator: "contains", value: "200"});
+
+        virtualList.one("listBound", function() {
+            equal(this.items().first().text(), "Item 0");
+        });
+        localDataSource.filter([]);
+
+        virtualList.one("listBound", function() {
+            equal(this.items().first().text(), "Item 1234");
+
+            start();
+        });
+        virtualList.filter(true);
+        localDataSource.filter({field: "text", operator: "contains", value: "1234"});
+    });
+
+    asyncTest("set focus to the first item after subsequent filtering", 1, function() {
+        virtualList.filter(true);
+        localDataSource.filter({field: "text", operator: "contains", value: "200"});
+
+        virtualList.filter(true);
+        localDataSource.filter([]);
+
+        virtualList.one("listBound", function() {
+            equal(this.focus().first().text(), "Item 1234");
+
+            start();
+        });
+        virtualList.filter(true);
+        localDataSource.filter({field: "text", operator: "contains", value: "1234"});
+    });
+
 })();
