@@ -38,7 +38,9 @@ var __meta__ = {
                     if (model.fields) {
                         each(model.fields, function(field, value) {
                             if (isPlainObject(value) && value.field) {
-                                value = extend(value, { field: that.getter(value.field) });
+                                if (!$.isFunction(value.field)) {
+                                    value = extend(value, { field: that.getter(value.field) });
+                                }
                             } else {
                                 value = { field: that.getter(value) };
                             }
