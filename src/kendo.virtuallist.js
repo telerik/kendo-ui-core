@@ -767,6 +767,7 @@ var __meta__ = {
             if (filter === undefined) {
                 return this._filter;
             }
+
             this._filter = filter;
         },
 
@@ -1156,7 +1157,7 @@ var __meta__ = {
                 itemHeight = this.options.itemHeight,
                 total = this.dataSource.total();
 
-            return Math.min(total - itemCount, Math.max(0, Math.floor(position / itemHeight )));
+            return Math.min(Math.max(total - itemCount, 0), Math.max(0, Math.floor(position / itemHeight )));
         },
 
         _listIndex: function(scrollTop, lastScrollTop) {
