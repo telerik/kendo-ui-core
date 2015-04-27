@@ -81,6 +81,22 @@ the horizontal one is 60px.
     // margin right and bottom are with 5px (by default)
     margin: { top: 1, left: 1 }
 
+### gaugeArea.margin.top `Number`
+
+The top margin of the gauge area.
+
+### gaugeArea.margin.bottom `Number`
+
+The bottom margin of the gauge area.
+
+### gaugeArea.margin.left `Number`
+
+The left margin of the gauge area.
+
+### gaugeArea.margin.right `Number`
+
+The right margin of the gauge area.
+
 ### gaugeArea.width `Number`
 
 The width of the gauge area.  By default the vertical gauge is 60px and
@@ -438,9 +454,41 @@ The format of the labels.
     // margin right and bottom are with 5px (by default)
     margin: { top: 1, left: 1 }
 
+### scale.labels.margin.top `Number`
+
+The top margin of the labels.
+
+### scale.labels.margin.bottom `Number`
+
+The bottom margin of the labels.
+
+### scale.labels.margin.left `Number`
+
+The left margin of the labels.
+
+### scale.labels.margin.right `Number`
+
+The right margin of the labels.
+
 ### scale.labels.padding `Number | Object`*(default: 0)*
 
  The padding of the labels.
+
+### scale.labels.padding.top `Number`
+
+The top padding of the labels.
+
+### scale.labels.padding.bottom `Number`
+
+The bottom padding of the labels.
+
+### scale.labels.padding.left `Number`
+
+The left padding of the labels.
+
+### scale.labels.padding.right `Number`
+
+The right padding of the labels.
 
 ### scale.labels.template `String|Function`
 
