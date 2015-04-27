@@ -1221,6 +1221,8 @@ var __meta__ = {
                 for (var idx = 0; idx < selectedIndexes.length; idx++) {
                     selectedIndex = selectedIndexes[idx];
 
+                    this._getElementByIndex(selectedIndex).removeClass(SELECTED);
+
                     removed.push({
                         index: selectedIndex,
                         position: idx,
