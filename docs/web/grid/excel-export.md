@@ -65,13 +65,13 @@ With the default configuration Kendo UI Grid exports the current page of the dat
 
 The grid uses the current column order, visibility and dimensions to generate the Excel file.
 
-The grid doesn't export the current CSS theme in the Excel file. Check [Customzie the Excel Document](customize-the-excel-document) for information about changing the visual appearance of the Excel document.
+The grid doesn't export the current CSS theme in the Excel file. Check [Customize the Excel Document](#customize-the-excel-document) for information about changing the visual appearance of the Excel document.
 
 The grid exports only data-bound columns. All columns that don't have their [field](/api/javascript/ui/grid#configuration-columns.field) option set are ignored.
 
 The [format](/api/javascript/ui/grid#configuration-columns.format) option is **not** used during export. Check [Column Format](#column-format) for more info.
 
-The [template](/api/javascript/ui/grid#configuration-columns.template) option is **not** used during export. Check [Column Template](#column-template) for more info.
+The [template](/api/javascript/ui/grid#configuration-columns.template) option is **not** used during export. Check [Column Templates](#column-templates) for more info.
 
 The [detailTemplate](/api/javascript/ui/grid#configuration-detailTemplate) option is **not** used during export. Check [Detail Template](#detail-template) for more info.
 
