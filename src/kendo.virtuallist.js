@@ -339,6 +339,11 @@ var __meta__ = {
             if (that._mute) { return; }
 
             if (!that._fetching) {
+                //TODO: Test this #714
+                if (that._filter) {
+                    that.focus(0);
+                }
+
                 that._createList();
                 if (!action && that._values.length && !that._filter) {
                     that.value(that._values, true).done(function() {
@@ -960,6 +965,8 @@ var __meta__ = {
                         this._fetching = true;
                         dataSource.range(rangeStart, pageSize);
                         lastRangeStart = rangeStart;
+                        //TODO: Test this #714
+                        this._fetching = false;
                         this._mute = false;
                     }
 
