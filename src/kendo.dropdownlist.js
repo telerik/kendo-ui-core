@@ -477,12 +477,13 @@ var __meta__ = {
             var that = this;
             var filtered = that._state === STATE_FILTER;
             var isIFrame = window.self !== window.top;
+            var focusedItem = that._focus();
 
             if (!that._prevent) {
                 clearTimeout(that._typing);
 
-                if (filtered && that._focus()) {
-                    that._select(that._focus(), !that.dataSource.view().length);
+                if (filtered && focusedItem && !that.trigger("select", { item: focusedItem })) {
+                    that._select(focusedItem, !that.dataSource.view().length);
                 }
 
                 if (support.mobileOS.ios && isIFrame) {
