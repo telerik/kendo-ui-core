@@ -476,9 +476,10 @@ var __meta__ = {
             this.listView.refresh();
         },
 
-        _listBound: function() {
+        _listBound: function(e) {
             var that = this;
-            var data = this.dataSource.flatView();
+            var data = that.dataSource.flatView();
+            var page = that.dataSource.page();
             var length = data.length;
 
             that._angularItems("compile");
@@ -496,7 +497,7 @@ var __meta__ = {
                 that.popup._position();
             }
 
-            if (that.options.highlightFirst) {
+            if (that.options.highlightFirst && (page === undefined || page === 1)) {
                 that.listView.first();
             }
 
@@ -865,10 +866,8 @@ var __meta__ = {
             that.input.width(textWidth > wrapperWidth ? wrapperWidth : textWidth);
         },
 
-        _option: function(dataItem, selected) {
-            var option = "<option",
-                dataText = this._text(dataItem),
-                dataValue = this._value(dataItem);
+        _option: function(dataValue, dataText, selected) {
+            var option = "<option";
 
             if (dataValue !== undefined) {
                 dataValue += "";
@@ -895,6 +894,7 @@ var __meta__ = {
 
         _render: function(data) {
             var selectedItems = this.listView.selectedDataItems();
+            var values = this.listView.value();
             var length = data.length;
             var selectedIndex;
             var options = "";
@@ -907,14 +907,21 @@ var __meta__ = {
 
             for (idx = 0; idx < length; idx++) {
                 dataItem = data[idx];
-                selectedIndex = this._selectedIndex(dataItem, selectedItems);
+                value = this._value(dataItem);
 
+                selectedIndex = this._selectedItemIndex(value, selectedItems);
                 if (selectedIndex !== -1) {
                     selectedItems.splice(selectedIndex, 1);
+                    values.splice(selectedIndex, 1);
+                } else {
+                    selectedIndex = this._selectedValueIndex(value, values);
+                    if (selectedIndex !== -1) {
+                        values.splice(selectedIndex, 1);
+                    }
                 }
 
-                optionsMap[this._value(dataItem)] = idx;
-                options += this._option(dataItem, selectedIndex !== -1);
+                optionsMap[value] = idx;
+                options += this._option(value, this._text(dataItem), selectedIndex !== -1);
             }
 
             if (selectedItems.length) {
@@ -925,7 +932,18 @@ var __meta__ = {
                     custom[value] = idx + length;
                     optionsMap[value] = idx + length;
 
-                    options += '<option selected="selected" value="' + value + '">' + this._text(dataItem) + '</option>';
+                    options += this._option(value, this._text(dataItem), true);
+                }
+            }
+
+            if (values.length) {
+                for (idx = 0; idx < values.length; idx++) {
+                    value = values[idx];
+
+                    custom[value] = idx + length;
+                    optionsMap[value] = idx + length;
+
+                    options += this._option(value, value, true);
                 }
             }
 
@@ -935,13 +953,23 @@ var __meta__ = {
             this.element.html(options);
         },
 
-        _selectedIndex: function(dataItem, selectedItems) {
+        _selectedItemIndex: function(value, selectedItems) {
             var valueGetter = this._value;
-            var value = valueGetter(dataItem);
             var idx = 0;
 
             for (; idx < selectedItems.length; idx++) {
                 if (value === valueGetter(selectedItems[idx])) {
+                    return idx;
+                }
+            }
+
+            return -1;
+        },
+
+        _selectedValueIndex: function(value, values) {
+
+            for (var idx = 0; idx < values.length; idx++) {
+                if (value === values[idx]) {
                     return idx;
                 }
             }
