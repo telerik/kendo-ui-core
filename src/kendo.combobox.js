@@ -293,7 +293,7 @@ var __meta__ = {
                 var custom = that._customOption;
 
                 that._customOption = undefined;
-                that._options(data);
+                that._options(data, "", that.value());
 
                 if (custom && custom[0].selected) {
                     that._custom(custom.val(), keepState);
