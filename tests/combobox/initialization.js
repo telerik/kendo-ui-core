@@ -269,30 +269,6 @@ test("combobox shrink ul if the height of the items is more then options.height"
       equal(combobox.list.css("height"), "100px");
 });
 
-test("combobox substracts height of header from list", function() {
-   var data = [{text: "foo", value: 1},
-               {text:2, value:2},
-               {text:2, value:2},
-               {text:2, value:2},
-               {text:2, value:2},
-               {text:2, value:2},
-               {text:2, value:2},
-               {text:2, value:2},
-               {text:2, value:2}];
-
-      combobox = new ComboBox(input, {
-          dataSource: data,
-          headerTemplate: "<div>Header</div>"
-      });
-
-      combobox.options.height = 100;
-
-      combobox.dataSource.read();
-      combobox.open();
-
-      equal(combobox.ul.height(), 100 - combobox.ul[0].offsetTop);
-});
-
 test("combobox populates its list when the datasource changes", function() {
    combobox = new ComboBox(input, {
        dataTextField: "text",
