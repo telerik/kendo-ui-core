@@ -668,4 +668,37 @@
         dropdownlist.open();
         dropdownlist.ul.children(":first").click();
     });
+
+    test("DropDownList triggers select event on blur after filtration", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            filter: "startswith",
+            optionLabel: "Select...",
+            dataSource: ["foo", "bar"],
+            select: function(e) {
+                equal(e.item[0], dropdownlist.ul.children(":first")[0]);
+            }
+        });
+
+        dropdownlist.wrapper.focus();
+        dropdownlist.open();
+        dropdownlist.search("bar");
+        dropdownlist.element.focusout();
+    });
+
+    test("DropDownList does not select focused item on blur when select event is prevented", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            filter: "startswith",
+            dataSource: ["foo", "bar"],
+            select: function(e) {
+                e.preventDefault();
+            }
+        });
+
+        dropdownlist.wrapper.focus();
+        dropdownlist.open();
+        dropdownlist.search("bar");
+        dropdownlist.element.focusout();
+
+        equal(dropdownlist.value(), "foo");
+    });
 })();
