@@ -424,6 +424,23 @@ var __meta__ = {
             return value;
         },
 
+        _offsetHeight: function() {
+            var offsetHeight = 0;
+            var siblings = this.listView.content.prevAll(":visible");
+
+            siblings.each(function() {
+                var element = $(this);
+
+                if (element.hasClass("k-list-filter")) {
+                    offsetHeight += element.children().outerHeight();
+                } else {
+                    offsetHeight += element.outerHeight();
+                }
+            });
+
+            return offsetHeight;
+        },
+
         _height: function(length) {
             var that = this;
             var list = that.list;
@@ -438,6 +455,14 @@ var __meta__ = {
                 height = that.listView.content[0].scrollHeight > height ? height : "auto";
 
                 popups.height(height);
+
+                if (height !== "auto") {
+                    offsetTop = that._offsetHeight();
+
+                    if (offsetTop) {
+                        height -= offsetTop;
+                    }
+                }
 
                 that.listView.content.height(height);
 
