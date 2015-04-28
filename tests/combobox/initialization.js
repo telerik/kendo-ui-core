@@ -158,6 +158,14 @@ test("data source is initialized from OPTION items + one custom OPTION", functio
 
 });
 
+test("ComboBox selects correct option on init", function() {
+   var select = $("<select><option value=1>Chai</option><option value=2 selected='selected'>Chang</option></select>").appendTo(QUnit.fixture);
+
+   combobox = new ComboBox(select);
+
+   equal(select.val(), "2");
+});
+
 test("ComboBox persists custom value after re-bind", function() {
    var select = $("<select></select>").appendTo(QUnit.fixture);
 
