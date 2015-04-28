@@ -38,7 +38,10 @@ In addition, each of the combined script files should not be registered together
 
 ## Build a Custom Combined Script With the Kendo UI Download Builder
 
-Users with a commercial license may use the [custom download builder tool](http://www.telerik.com/download/custom-download) to create a single JavaScript file which contains only the required widgets and features.
+Users with a commercial license may use the [custom download builder tool](http://www.telerik.com/download/custom-download) to create
+a single JavaScript file which contains only the required widgets and features.
+
+> Do not use multiple custom combined scripts, as they will contain duplicate code. Instead, create **one** combined script file, which includes everything you need.
 
 ## Use Grunt to Build a Custom Script
 
@@ -54,12 +57,14 @@ shipped source, run the following shell commands:
     grunt custom:autocomplete,dropdownlist
 ```
 
-list the components you want to be included in the custom build, separated with comma (`,`). The example above will build a custom minified script
+List the components you want to be included in the custom build, separated with comma (`,`). The example above will build a custom minified script
 which includes the AutoComplete and the DropDownList widgets.
 
 > When complete, the grunt command will output a `kendo.custom.min.js` file in the `src/dist` directory.
 
 > The grunt build task **automatically resolves** the needed dependencies for each component, so you don't have to list them.
+
+> Do not use multiple custom combined scripts, as they will contain duplicate code. Instead, create **one** combined script file, which includes everything you need.
 
 ## Include Individual Widget Scripts
 
