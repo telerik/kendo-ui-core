@@ -2,6 +2,8 @@
     var MultiSelect = kendo.ui.MultiSelect,
         select;
 
+    var CONTAINER_HEIGHT = 200;
+
     function popuplateSelect() {
         var options = [];
         for (var i=0; i < 5; i++) {
@@ -637,34 +639,5 @@
         var options = multiselect.element.children();
 
         equal(options.eq(2).val(), "updated");
-    });
-
-    test("MultiSelect renders option value if only values are available", 5, function() {
-        var multiselect = new MultiSelect(select, {
-            autoBind: false,
-            animation: false,
-            dataTextField: "text",
-            dataValueField: "value",
-            dataSource: {
-                data: [{ text: "text1", value: "1" }, { text: "text2", value: "2" }],
-                pageSize: 1
-            }
-        });
-
-        debugger;
-        multiselect.value("1");
-        multiselect.dataSource.page(2);
-
-        var options = multiselect.element.children();
-
-        console.log(select[0]);
-
-        equal(options.length, 2);
-
-        equal(options[0].text, "text2");
-        equal(options[0].value, "2");
-
-        equal(options[1].text, "");
-        equal(options[1].value, "1");
     });
 })();

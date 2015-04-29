@@ -902,6 +902,10 @@ var __meta__ = {
             var value;
             var idx;
 
+            if (values.length !== selectedItems.length) {
+                selectedItems = this._buildSelectedItems(values);
+            }
+
             var custom = {};
             var optionsMap = {};
 
@@ -912,12 +916,6 @@ var __meta__ = {
                 selectedIndex = this._selectedItemIndex(value, selectedItems);
                 if (selectedIndex !== -1) {
                     selectedItems.splice(selectedIndex, 1);
-                    values.splice(selectedIndex, 1);
-                } else {
-                    selectedIndex = this._selectedValueIndex(value, values);
-                    if (selectedIndex !== -1) {
-                        values.splice(selectedIndex, 1);
-                    }
                 }
 
                 optionsMap[value] = idx;
@@ -929,21 +927,11 @@ var __meta__ = {
                     dataItem = selectedItems[idx];
 
                     value = this._value(dataItem);
-                    custom[value] = idx + length;
-                    optionsMap[value] = idx + length;
+                    custom[value] = length;
+                    optionsMap[value] = length;
 
+                    length += 1;
                     options += this._option(value, this._text(dataItem), true);
-                }
-            }
-
-            if (values.length) {
-                for (idx = 0; idx < values.length; idx++) {
-                    value = values[idx];
-
-                    custom[value] = idx + length;
-                    optionsMap[value] = idx + length;
-
-                    options += this._option(value, value, true);
                 }
             }
 
@@ -953,23 +941,29 @@ var __meta__ = {
             this.element.html(options);
         },
 
+        _buildSelectedItems: function(values) {
+            var valueField = this.options.dataValueField;
+            var textField = this.options.dataTextField;
+            var result = [];
+            var item;
+
+            for (var idx = 0; idx < values.length; idx++) {
+                item = {};
+                item[valueField] = values[idx];
+                item[textField] = values[idx];
+
+                result.push(item);
+            }
+
+            return result;
+        },
+
         _selectedItemIndex: function(value, selectedItems) {
             var valueGetter = this._value;
             var idx = 0;
 
             for (; idx < selectedItems.length; idx++) {
                 if (value === valueGetter(selectedItems[idx])) {
-                    return idx;
-                }
-            }
-
-            return -1;
-        },
-
-        _selectedValueIndex: function(value, values) {
-
-            for (var idx = 0; idx < values.length; idx++) {
-                if (value === values[idx]) {
                     return idx;
                 }
             }
