@@ -196,14 +196,39 @@
             valueMapper: function(o) {
                 o.success(256);
             },
-            value: 256,
-            listBound: function() {
+            value: 256
+        }));
+
+        virtualList.one("listBound", function() {
+            start();
+            equal(virtualList.value()[0], 256);
+            equal(virtualList.select()[0], 256);
+        });
+
+        asyncDataSource.read();
+    });
+
+    asyncTest("listBound event is fired when range is changed", 3, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: true,
+            valueMapper: function(o) {
+                o.success(256);
+            }
+        }));
+
+        asyncDataSource.read().then(function() {
+            var page = asyncDataSource.page();
+
+            virtualList.one("listBound", function() {
                 start();
                 equal(virtualList.value()[0], 256);
                 equal(virtualList.select()[0], 256);
-            }
-        }));
-        asyncDataSource.read();
+
+                notEqual(asyncDataSource.page(), page);
+            });
+
+            virtualList.value(256);
+        });
     });
 
 // fails because select(-1) resolves the promise
@@ -654,6 +679,23 @@
             virtualList.filter(true);
             ok(virtualList.filter());
         });
+    });
+
+    test("value method returns a new array copy", 1, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: true,
+            valueMapper: function(operation) {
+                setTimeout(function() {
+                    operation.success(123);
+                }, 0);
+            }
+        }));
+
+        virtualList.value(123)
+
+        var value = virtualList.value();
+
+        notEqual(value, virtualList.value());
     });
 
     asyncTest("value method prefetches values (single selection)", 1, function() {

@@ -237,7 +237,7 @@
         virtualList.setDataSource(dataSource);
 
         dataSource.read().then(function() {
-            virtualList.one("listBound", function() {
+            virtualList.bind("listBound", function() {
                 start();
 
                 var skip = requestOptions.data.skip;

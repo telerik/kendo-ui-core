@@ -2,6 +2,8 @@
     var MultiSelect = kendo.ui.MultiSelect,
         select;
 
+    var CONTAINER_HEIGHT = 200;
+
     function popuplateSelect() {
         var options = [];
         for (var i=0; i < 5; i++) {
@@ -417,6 +419,25 @@
         multiselect.refresh();
 
         equal(multiselect.current(), null);
+    });
+
+    test("do not highlight when source is paged", function() {
+        var multiselect = new MultiSelect(select, {
+            dataSource: {
+                data: ["Item1", "Item2", "Item3", "Item4", "Item5", "Item6", "Item7", "Item8"],
+                pageSize: 2
+            }
+        });
+
+        stub(multiselect.listView, {
+            first: multiselect.listView.first
+        });
+
+        multiselect.dataSource.read();
+
+        multiselect.dataSource.page(2);
+
+        equal(multiselect.listView.calls("first"), 1);
     });
 
     test("Copy accesskey to the visible input", function() {
