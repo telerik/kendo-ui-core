@@ -1027,7 +1027,52 @@
 
         list.value("");
 
-        ok($.isArray(list.value()));
+        var value = list.value();
+        ok($.isArray(value));
+        equal(value.length, 0);
+    });
+
+    test("value method selects an item with empty string value", function() {
+        var list = new StaticList(element, {
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "", type: "a" },
+                    { name: "item2", type: "b" },
+                    { name: "item3", type: "a" }
+                ],
+                group: "type"
+            },
+            template: '#:data.name#',
+            groupTemplate: '#:data#'
+        });
+
+        list.dataSource.read();
+
+        list.value("");
+
+        equal(list.select()[0], 0);
+    });
+
+    test("value method selects an item with null value", function() {
+        var list = new StaticList(element, {
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: null, type: "b" },
+                    { name: "item3", type: "a" }
+                ]
+            },
+            template: '#:data.name#',
+            groupTemplate: '#:data#'
+        });
+
+        list.dataSource.read();
+
+        list.value(null);
+
+        equal(list.select()[0], 1);
     });
 
     test("value method deselects deselects all items if value is []", function() {

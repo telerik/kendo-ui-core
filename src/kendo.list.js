@@ -1450,10 +1450,6 @@ var __meta__ = {
         },
 
         setValue: function(value) {
-            if (value === "" || value === null) {
-                value = [];
-            }
-
             value = $.isArray(value) || value instanceof ObservableArray ? value.slice(0) : [value];
 
             this._values = value;
