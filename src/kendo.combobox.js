@@ -267,6 +267,7 @@ var __meta__ = {
             var listView = that.listView;
             var focusedItem = listView.focus();
             var data = this.dataSource.flatView();
+            var page = this.dataSource.page();
             var length = data.length;
             var value;
 
@@ -320,7 +321,7 @@ var __meta__ = {
                 focusedItem.removeClass("k-state-selected");
             }
 
-            if (length) {
+            if (length && (page === undefined || page === 1)) {
                 if (options.highlightFirst) {
                     if (!focusedItem) {
                         listView.focus(0);
@@ -580,7 +581,10 @@ var __meta__ = {
                     that._oldIndex = that.selectedIndex;
 
                     that._prev = that.input.val();
-                    that._state = STATE_ACCEPT;
+
+                    if (that._state === STATE_FILTER) {
+                        that._state = STATE_ACCEPT;
+                    }
                 });
 
             that._fetchData();
