@@ -681,6 +681,23 @@
         });
     });
 
+    test("value method returns a new array copy", 1, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: true,
+            valueMapper: function(operation) {
+                setTimeout(function() {
+                    operation.success(123);
+                }, 0);
+            }
+        }));
+
+        virtualList.value(123)
+
+        var value = virtualList.value();
+
+        notEqual(value, virtualList.value());
+    });
+
     asyncTest("value method prefetches values (single selection)", 1, function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             selectable: true,

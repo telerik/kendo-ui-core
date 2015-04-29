@@ -409,7 +409,7 @@ var __meta__ = {
             var dataSource = that.dataSource;
 
             if (value === undefined) {
-                return that._values;
+                return that._values.slice();
             }
 
             if (!that._valueDeferred || that._valueDeferred.state() === "resolved") {
