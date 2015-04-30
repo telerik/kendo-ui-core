@@ -227,7 +227,7 @@
     });
 
     test("changing a value updates ObservableArray property when multiselect is filtered", function() {
-        dom = $('<select data-role="multiselect" multiple="multiple" data-text-field="name" data-value-field="name" data-bind="source:items, value:selectedItem"/>');
+        dom = $('<select data-role="multiselect" multiple="multiple" data-text-field="name" data-value-field="name" data-bind="source:items, value:selectedItem"/>').appendTo(QUnit.fixture);
 
         var items = [  { name: "foo" }, { name: "bar" }, { name: "baz" } ],
             multiselect;
@@ -360,6 +360,28 @@
 
         equal(tags.length, 1);
         equal(tags.first().children("span:first").text(), "bar");
+    });
+
+    test("source binding updates widgets value if value binding exists", function() {
+        dom = $('<select data-role="multiselect" data-value-field="value" data-text-field="text" data-value-primitive="true" data-bind="value:value, source:items"></select>');
+
+        var data = [{text:"foo", value: "foo"}, {text:"bar", value: "bar"}];
+
+        var observable = kendo.observable({
+            items: [],
+            value: ""
+        });
+
+        kendo.bind(dom, observable);
+
+        observable.set("value", "bar");
+        observable.set("items", data);
+
+        var widget = dom.data("kendoMultiSelect");
+        var values = widget.value();
+
+        equal(values.length, 1);
+        equal(values[0], "bar");
     });
 
     test("binding template", function() {
