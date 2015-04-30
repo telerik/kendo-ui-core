@@ -369,6 +369,8 @@ var __meta__ = {
         },
 
         _resize: function(e) {
+            console.log("resize");
+
             var that = this;
 
             if (e.type === "resize") {
@@ -410,6 +412,8 @@ var __meta__ = {
         },
 
         _fit: function(position, size, viewPortSize) {
+            console.log("fit");
+
             var output = 0;
 
             if (position + size > viewPortSize) {
@@ -467,6 +471,10 @@ var __meta__ = {
             // $(window).height() uses documentElement to get the height
             viewportWidth = isWindow ? window.innerWidth : viewport.width();
             viewportHeight = isWindow ? window.innerHeight : viewport.height();
+
+            if (isWindow && document.documentElement.offsetWidth - document.documentElement.clientWidth > 0) {
+                viewportWidth -= kendo.support.scrollbar();
+            }
 
             siblingContainer = anchor.parents().filter(wrapper.siblings());
 
