@@ -369,8 +369,6 @@ var __meta__ = {
         },
 
         _resize: function(e) {
-            console.log("resize");
-
             var that = this;
 
             if (e.type === "resize") {
@@ -412,8 +410,6 @@ var __meta__ = {
         },
 
         _fit: function(position, size, viewPortSize) {
-            console.log("fit");
-
             var output = 0;
 
             if (position + size > viewPortSize) {
