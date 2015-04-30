@@ -32,13 +32,7 @@ Defines the fill opacity of the connector.
 
 ### position
 
-Gets or sets the position of the Connector.
-
-#### Parameters
-
-##### position `kendo.dataviz.diagram.Point`
-
-The new position of the connector.
+Gets the position of the Connector.
 
 #### Returns
 

@@ -1624,11 +1624,11 @@ The following defines a custom shape with connectors adapted to the shape's outl
 
 ### shapeDefaults.connectors.name `String`
 
+The connector name.
 
+### shapeDefaults.connectors.position `Function`
 
-### shapeDefaults.connectors.position `String|Function`
-
-
+The function that positions the connector.
 
 ### shapeDefaults.content `Object`
 
@@ -1866,7 +1866,7 @@ The connector name. Predefined names include:
 * "left" - left connector.
 * "auto" - auto connector.
 
-### shapes.connectors.position `String|Function`
+### shapes.connectors.position `Function`
 
 The function that positions the connector.
 
