@@ -382,8 +382,9 @@ var __meta__ = {
 
             that.currentTag(null);
             that._change();
-            if(that.popup.visible())
+            if(that.popup.visible()) {
                 that._close();
+            }
         },
 
         _tagListClick: function(e) {
