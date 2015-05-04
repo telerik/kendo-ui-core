@@ -409,7 +409,7 @@ The minimum number of characters the user must type before a filter is performed
 
 ### optionLabel `String | Object`*(default: "")*
 
- Define the text of the default empty item. If the value is an object, then the widget will use it a valid data item.
+ Define the text of the default empty item. If the value is an object, then the widget will use it as a valid data item.
  Note that the optionLabel will not be available if the widget is empty.
 
 > **Important:** Since Q1 2015 (2015.1.318), the option label is rendered as a separate header template. The benefits of this change are:
