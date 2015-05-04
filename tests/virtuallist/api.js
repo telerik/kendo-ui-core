@@ -250,7 +250,6 @@
         asyncDataSource.read();
     });
 */
-
     asyncTest("fires the activate event", 1, function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             activate: function() {
@@ -824,6 +823,63 @@
         });
     });
 
+    asyncTest("valueDeffered is resolved immediately if empty array is passed", 2, function() {
+        var count = 1;
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: "multiple",
+            value: [1, 2, 3]
+        }));
+
+        asyncDataSource.read().then(function() {
+            virtualList.value([]).done(function() {
+                start();
+                ok(true, "done callback");
+                equal(virtualList.value().length, 0);
+            })
+        });
+    });
+
+    asyncTest("valueDeffered object is not resolved immediately after clearing the values (multiple selection)", 3, function() {
+        var count = 1;
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: "multiple",
+            value: [1, 2, 3]
+        }));
+
+        virtualList.value([4, 5]).done(function() {
+            start();
+
+            equal(virtualList.select().length, 2);
+            equal(virtualList.select()[0], 4);
+            equal(virtualList.select()[1], 5);
+        });
+
+        asyncDataSource.read();
+    });
+
+    asyncTest("valueDeffered object is not resolved immediately after clearing the values (multiple selection + valueMapper)", 3, function() {
+        var count = 1;
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: "multiple",
+            valueMapper: function(operation) {
+                setTimeout(function() {
+                    operation.success([89, 91]);
+                }, 0);
+            },
+            value: [1, 2, 3]
+        }));
+
+        virtualList.value([89, 91]).done(function() {
+            start();
+
+            equal(virtualList.select().length, 2);
+            equal(virtualList.select()[0], 89);
+            equal(virtualList.select()[1], 91);
+        });
+
+        asyncDataSource.read();
+    });
+
     asyncTest("value method clears previous values and dataItems", 3, function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             selectable: true,
@@ -880,6 +936,161 @@
         });
 
         asyncDataSource.read();
+    });
+
+    asyncTest("value method selects an item with empty string value", 2, function() {
+
+        var generateDataWithEmptyStringValue = function (parameters) {
+            var items = [];
+            for (var i = parameters.skip, len = parameters.skip + parameters.take; i < len; i++) {
+                items.push({
+                    id: i,
+                    value: (i === 0) ? "" : i,
+                    text: "Item " + i
+                });
+            }
+
+            return items;
+        }
+
+        var emptyStringDataSource = new kendo.data.DataSource({
+            transport: {
+                read: function(options) {
+                    setTimeout(function() {
+                        options.success({ data: generateDataWithEmptyStringValue(options.data), total: 300 });
+                    }, 0);
+                }
+            },
+            serverPaging: true,
+            pageSize: 40,
+            schema: {
+                data: "data",
+                total: "total"
+            }
+        });
+
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: true,
+            dataSource: emptyStringDataSource
+        }));
+
+        virtualList.value("").done(function() {
+            var indices = virtualList.select();
+
+            equal(indices.length, 1);
+            equal(indices[0], 0);
+
+            start();
+        });
+
+        emptyStringDataSource.read();
+    });
+
+    asyncTest("value method selects an item with empty string value (valueMapper is invoked)", 2, function() {
+
+        var generateDataWithEmptyStringValue = function (parameters) {
+            var items = [];
+            for (var i = parameters.skip, len = parameters.skip + parameters.take; i < len; i++) {
+                items.push({
+                    id: i,
+                    value: (i === 123) ? "" : i,
+                    text: "Item " + i
+                });
+            }
+
+            return items;
+        }
+
+        var emptyStringDataSource = new kendo.data.DataSource({
+            transport: {
+                read: function(options) {
+                    setTimeout(function() {
+                        options.success({ data: generateDataWithEmptyStringValue(options.data), total: 300 });
+                    }, 0);
+                }
+            },
+            serverPaging: true,
+            pageSize: 40,
+            schema: {
+                data: "data",
+                total: "total"
+            }
+        });
+
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: true,
+            dataSource: emptyStringDataSource,
+            valueMapper: function(operation) {
+                setTimeout(function() {
+                    operation.success(123);
+                }, 0);
+            }
+        }));
+
+        virtualList.value("").done(function() {
+            var indices = virtualList.select();
+
+            equal(indices.length, 1);
+            equal(indices[0], 123);
+
+            start();
+        });
+
+        emptyStringDataSource.read();
+    });
+
+    asyncTest("value method selects an item with empty string value (multiple selection + valueMapper)", 3, function() {
+
+        var generateDataWithEmptyStringValue = function (parameters) {
+            var items = [];
+            for (var i = parameters.skip, len = parameters.skip + parameters.take; i < len; i++) {
+                items.push({
+                    id: i,
+                    value: (i === 123) ? "" : i,
+                    text: "Item " + i
+                });
+            }
+
+            return items;
+        }
+
+        emptyStringDataSource = new kendo.data.DataSource({
+            transport: {
+                read: function(options) {
+                    setTimeout(function() {
+                        options.success({ data: generateDataWithEmptyStringValue(options.data), total: 300 });
+                    }, 0);
+                }
+            },
+            serverPaging: true,
+            pageSize: 40,
+            schema: {
+                data: "data",
+                total: "total"
+            }
+        });
+
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: "multiple",
+            dataSource: emptyStringDataSource,
+            valueMapper: function(operation) {
+                setTimeout(function() {
+                    operation.success([89, 123]);
+                }, 0);
+            }
+        }));
+
+        virtualList.value([89, ""]).done(function() {
+            var indices = virtualList.select();
+
+            equal(indices.length, 2);
+            equal(indices[0], 89);
+            equal(indices[1], 123);
+
+            start();
+        });
+
+        emptyStringDataSource.read();
     });
 
     asyncTest("widget does not trigger change when new item is added to the source", 0, function() {
