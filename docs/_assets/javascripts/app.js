@@ -15,6 +15,10 @@ function expandNavigation(url) {
 
         node.set("selected", true);
 
+        var li = this.element.find("li[data-uid='" + node.uid + "']");
+
+        $("#page-nav").scrollTop(li.offset().top - this.element.offset().top - $("#page-nav").outerHeight() / 2);
+
         this.unbind("dataBound", arguments.callee);
     }
 }
