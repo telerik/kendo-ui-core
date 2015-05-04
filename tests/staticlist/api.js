@@ -881,6 +881,33 @@
         equal(dataItems[1], list.dataSource.view()[0].items[1]);
     });
 
+    test("value method does not immediately resolves the valueDeffered object in multiple selection mode", function() {
+        var list = new StaticList(element, {
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "b" },
+                    { name: "item3", type: "a" }
+                ],
+                group: "type"
+            },
+            template: '#:data.name#',
+            groupTemplate: '#:data#',
+            selectable: "multiple"
+        });
+
+        list.dataSource.read();
+
+        list.value(["item2", "item3"]).done(function() {
+            var selected = list.select();
+
+            equal(selected.length, 2);
+            equal(selected[0], 2);
+            equal(selected[1], 1);
+        });
+    });
+
     test("value method clears selected items", function() {
         var list = new StaticList(element, {
             dataValueField: "name",
