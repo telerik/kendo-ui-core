@@ -112,4 +112,26 @@
 
         ok(!li.hasClass("k-state-hover"));
     });
+
+    test("re-set value when add new item to the source", function() {
+        var list = new StaticList(element, {
+            dataSource: {
+                data: [
+                    { name: "item", value: 1, group: "a" },
+                    { name: "item2", value: 2, group: "b" }
+                ],
+                group: { field: "group" }
+            },
+            dataValueField: "value",
+            groupTemplate: "#:data#",
+            template: "#:data.name#",
+            value: 1
+        });
+
+        list.dataSource.read();
+
+        list.dataSource.add({ name: "item3", value: 3, group: "" });
+
+        equal(list.select()[0], 1);
+    });
 })();

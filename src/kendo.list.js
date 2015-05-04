@@ -1887,7 +1887,7 @@ var __meta__ = {
                     that._skipUpdate = false;
                     that._updateIndices(that._selectedIndices, that._values);
                 }
-            } else if (!action) {
+            } else if (!action || action === "add") {
                 that.value(that._values);
             }
 
