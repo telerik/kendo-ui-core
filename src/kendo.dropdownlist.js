@@ -831,13 +831,14 @@ var __meta__ = {
 
         _get: function(candidate) {
             var data, found, idx;
+            var jQueryCandidate = $(candidate);
 
             if (this.optionLabel[0]) {
                 if (typeof candidate === "number") {
                     if (candidate > -1) {
                         candidate -= 1;
                     }
-                } else if (candidate instanceof jQuery && candidate.hasClass("k-list-optionlabel")) {
+                } else if (jQueryCandidate.hasClass("k-list-optionlabel")) {
                     candidate = -1;
                 }
             }
