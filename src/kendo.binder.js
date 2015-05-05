@@ -26,6 +26,7 @@ var __meta__ = {
         SOURCE = "source",
         EVENTS = "events",
         CHECKED = "checked",
+        CSS = "css",
         deleteExpando = true,
         CHANGE = "change";
 
@@ -311,6 +312,23 @@ var __meta__ = {
     binders.attr = Binder.extend({
         refresh: function(key) {
             this.element.setAttribute(key, this.bindings.attr[key].get());
+        }
+    });
+
+    binders.css = Binder.extend({
+        init: function(element, bindings, options) {
+            Binder.fn.init.call(this, element, bindings, options);
+            this.classes = {};
+        },
+        refresh: function(className) {
+            var element = $(this.element),
+                binding = this.bindings.css[className],
+                hasClass = this.classes[className] = binding.get();
+            if(hasClass){
+                element.addClass(className);
+            }else{
+                element.removeClass(className);
+            }
         }
     });
 
@@ -1418,6 +1436,7 @@ var __meta__ = {
                 hasSource,
                 hasEvents,
                 hasChecked,
+                hasCss,
                 widgetBinding = this instanceof WidgetBindingTarget,
                 specificBinders = this.binders();
 
@@ -1430,6 +1449,8 @@ var __meta__ = {
                     hasEvents = true;
                 } else if (key == CHECKED) {
                     hasChecked = true;
+                } else if (key == CSS) {
+                    hasCss = true;
                 } else {
                     this.applyBinding(key, bindings, specificBinders);
                 }
@@ -1448,6 +1469,10 @@ var __meta__ = {
 
             if (hasEvents && !widgetBinding) {
                 this.applyBinding(EVENTS, bindings, specificBinders);
+            }
+
+            if (hasCss && !widgetBinding) {
+                this.applyBinding(CSS, bindings, specificBinders);
             }
         },
 
@@ -1633,6 +1658,10 @@ var __meta__ = {
 
             if (bind.events) {
                 bindings.events = createBindings(bind.events, parents, EventBinding);
+            }
+
+            if (bind.css) {
+                bindings.css = createBindings(bind.css, parents, Binding);
             }
 
             target.bind(bindings);

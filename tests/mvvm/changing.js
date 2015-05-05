@@ -52,6 +52,17 @@ module("mvvm observing", {
     }
 });
 
+test("changing a view model field updates the CSS classes in the UI", function() {
+    var viewModel = kendo.observable( {
+        foo: false
+    });
+
+    var dom = $('<span data-bind="css:{active: foo}">Test CSS class</span>');
+    kendo.bind(dom, viewModel);
+    viewModel.set("foo", true);
+    equal(dom.hasClass("active"), true);
+});
+
 test("changing a view model field reflects UI", function() {
     var viewModel = kendo.observable( {
         foo: "foo"
