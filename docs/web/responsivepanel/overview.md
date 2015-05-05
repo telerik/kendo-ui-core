@@ -10,6 +10,8 @@ position: 1
 The ReponsivePanel widget allows you to hide part of the content of the page on small screens.
 This allows more screen estate for content for mobile users.
 
+> CSS3 media queries are supported in IE9 and above, so this widget does not support IE7 and IE8.
+
 ## Configuring the ResponsivePanel
 
 You can specify the page width when the content will become hidden via the breakpoint configuration option, and the placement of the expandable content via the orientation configuration option.
