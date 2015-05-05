@@ -134,4 +134,34 @@
 
         equal(list.select()[0], 1);
     });
+
+    test("update selected data item on datasource read", function() {
+        var data = [
+            { name: "item", value: 1, group: "a" },
+            { name: "item2", value: 2, group: "b" }
+        ];
+
+        var list = new StaticList(element, {
+            dataSource: {
+                transport: {
+                    read: function(options) {
+                        options.success(data);
+                    }
+                }
+            },
+            dataValueField: "value",
+            template: "#:data.name#",
+            value: 1
+        });
+
+        list.dataSource.read();
+
+        data[0].name = "Item new";
+
+        list.dataSource.read();
+
+        var selectedItem = list.selectedDataItems()[0];
+
+        equal(selectedItem.name, "Item new");
+    });
 })();
