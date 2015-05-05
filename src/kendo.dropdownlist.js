@@ -1156,6 +1156,10 @@ var __meta__ = {
         },
 
         _preselect: function(value, text) {
+            if (!value && !text) {
+                text = this._optionLabelText();
+            }
+
             this._accessor(value);
             this._textAccessor(text);
 
