@@ -1124,4 +1124,36 @@
 
         equal(dropdownlist.text(), "Item new");
     });
+
+    asyncTest("DropDownList displays optionLabel when value is cleared until the widget is not bound", 1, function() {
+        dropdownlist = input.kendoDropDownList({
+          optionLabel: "--Select Value--",
+          dataTextField: "Name",
+          dataValueField: "Name",
+          dataSource: new kendo.data.DataSource({
+            schema: {
+              model: {
+                id: "StateId"
+              }
+            },
+            transport: {
+              read: function(options) {
+                setTimeout(function() {
+                  options.success([
+                    { Name: "foo" }
+                  ]);
+                });
+              }
+            }
+          })
+        }).data("kendoDropDownList");
+
+        dropdownlist.one("dataBound", function() {
+            start();
+
+            equal(dropdownlist.text(), dropdownlist.options.optionLabel);
+        });
+
+        dropdownlist.value("");
+    });
 })();
