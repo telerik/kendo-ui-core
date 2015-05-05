@@ -178,13 +178,19 @@ Shared components providing behaviors, data access and other services
 1. jquery.js
 1. kendo.core.js
 1. kendo.color.js
-1. kendo.pdf.js (PDF export feature)
 1. kendo.drawing.js
 
 ### Effects
 1. jquery.js
 1. kendo.core.js
 1. kendo.fx.js
+
+### PDF export
+1. jquery.js
+1. kendo.core.js
+1. kendo.color.js
+1. kendo.drawing.js
+1. kendo.pdf.js
 
 ### Router
 1. jquery.js
@@ -220,6 +226,7 @@ Desktop UI Widgets for mobile-ready Web Sites and Applications
 1. kendo.userevents.js (Mobile scroller feature)
 1. kendo.draganddrop.js (Mobile scroller feature)
 1. kendo.mobile.scroller.js (Mobile scroller feature)
+1. kendo.virtuallist.js (VirtualList feature)
 1. kendo.autocomplete.js
 
 ### Button
@@ -252,6 +259,7 @@ Desktop UI Widgets for mobile-ready Web Sites and Applications
 1. kendo.userevents.js (Mobile scroller feature)
 1. kendo.draganddrop.js (Mobile scroller feature)
 1. kendo.mobile.scroller.js (Mobile scroller feature)
+1. kendo.virtuallist.js (VirtualList feature)
 1. kendo.combobox.js
 
 ### DatePicker
@@ -280,6 +288,7 @@ Desktop UI Widgets for mobile-ready Web Sites and Applications
 1. kendo.userevents.js (Mobile scroller feature)
 1. kendo.draganddrop.js (Mobile scroller feature)
 1. kendo.mobile.scroller.js (Mobile scroller feature)
+1. kendo.virtuallist.js (VirtualList feature)
 1. kendo.dropdownlist.js
 
 ### Editor
@@ -301,6 +310,9 @@ Desktop UI Widgets for mobile-ready Web Sites and Applications
 1. kendo.upload.js (Image Browser feature)
 1. kendo.filebrowser.js (Image Browser feature)
 1. kendo.imagebrowser.js (Image Browser feature)
+1. kendo.resizable.js (Resize handle feature)
+1. kendo.drawing.js (PDF export feature)
+1. kendo.pdf.js (PDF export feature)
 1. kendo.editor.js
 
 ### Gantt
@@ -350,6 +362,7 @@ Desktop UI Widgets for mobile-ready Web Sites and Applications
 1. kendo.numerictextbox.js (Filtering feature)
 1. kendo.list.js (Filtering feature)
 1. kendo.dropdownlist.js (Filtering feature)
+1. kendo.binder.js (Filtering feature)
 1. kendo.filtermenu.js (Filtering feature)
 1. kendo.popup.js (Column menu feature)
 1. kendo.calendar.js (Column menu feature)
@@ -358,6 +371,7 @@ Desktop UI Widgets for mobile-ready Web Sites and Applications
 1. kendo.numerictextbox.js (Column menu feature)
 1. kendo.list.js (Column menu feature)
 1. kendo.dropdownlist.js (Column menu feature)
+1. kendo.binder.js (Column menu feature)
 1. kendo.filtermenu.js (Column menu feature)
 1. kendo.menu.js (Column menu feature)
 1. kendo.columnmenu.js (Column menu feature)
@@ -392,9 +406,10 @@ Desktop UI Widgets for mobile-ready Web Sites and Applications
 1. kendo.mobile.actionsheet.js (Grid adaptive rendering feature)
 1. kendo.ooxml.js (Excel export feature)
 1. kendo.excel.js (Excel export feature)
-1. kendo.pdf.js (PDF export feature)
 1. kendo.color.js (PDF export feature)
 1. kendo.drawing.js (PDF export feature)
+1. kendo.pdf.js (PDF export feature)
+1. kendo.progressbar.js (PDF export feature)
 1. kendo.grid.js
 
 ### ListView
@@ -434,6 +449,7 @@ Desktop UI Widgets for mobile-ready Web Sites and Applications
 1. kendo.userevents.js (Mobile scroller feature)
 1. kendo.draganddrop.js (Mobile scroller feature)
 1. kendo.mobile.scroller.js (Mobile scroller feature)
+1. kendo.virtuallist.js (VirtualList feature)
 1. kendo.multiselect.js
 
 ### Notification
@@ -478,9 +494,9 @@ Desktop UI Widgets for mobile-ready Web Sites and Applications
 1. kendo.dropdownlist.js (Filtering feature)
 1. kendo.pivot.fieldmenu.js (Filtering feature)
 1. kendo.ooxml.js (Excel export feature)
-1. kendo.pdf.js (PDF export feature)
 1. kendo.color.js (PDF export feature)
 1. kendo.drawing.js (PDF export feature)
+1. kendo.pdf.js (PDF export feature)
 1. kendo.fx.js (Mobile scroller feature)
 1. kendo.mobile.scroller.js (Mobile scroller feature)
 1. kendo.pivotgrid.js
@@ -489,6 +505,11 @@ Desktop UI Widgets for mobile-ready Web Sites and Applications
 1. jquery.js
 1. kendo.core.js
 1. kendo.progressbar.js
+
+### Responsive Panel
+1. jquery.js
+1. kendo.core.js
+1. kendo.responsive-panel.js
 
 ### Scheduler
 1. jquery.js
@@ -507,6 +528,8 @@ Desktop UI Widgets for mobile-ready Web Sites and Applications
 1. kendo.multiselect.js
 1. kendo.draganddrop.js
 1. kendo.window.js
+1. kendo.timepicker.js
+1. kendo.datetimepicker.js
 1. kendo.scheduler.recurrence.js
 1. kendo.scheduler.view.js
 1. kendo.scheduler.dayview.js (Scheduler Day View feature)
@@ -522,9 +545,9 @@ Desktop UI Widgets for mobile-ready Web Sites and Applications
 1. kendo.mobile.popover.js (Scheduler adaptive rendering feature)
 1. kendo.mobile.shim.js (Scheduler adaptive rendering feature)
 1. kendo.mobile.actionsheet.js (Scheduler adaptive rendering feature)
-1. kendo.pdf.js (PDF export feature)
 1. kendo.color.js (PDF export feature)
 1. kendo.drawing.js (PDF export feature)
+1. kendo.pdf.js (PDF export feature)
 1. kendo.scheduler.js
 
 ### Slider
@@ -578,6 +601,7 @@ Desktop UI Widgets for mobile-ready Web Sites and Applications
 1. kendo.numerictextbox.js (Filtering feature)
 1. kendo.list.js (Filtering feature)
 1. kendo.dropdownlist.js (Filtering feature)
+1. kendo.binder.js (Filtering feature)
 1. kendo.filtermenu.js (Filtering feature)
 1. kendo.calendar.js (Editing feature)
 1. kendo.popup.js (Editing feature)
@@ -591,11 +615,14 @@ Desktop UI Widgets for mobile-ready Web Sites and Applications
 1. kendo.window.js (Editing feature)
 1. kendo.userevents.js (Selection feature)
 1. kendo.selectable.js (Selection feature)
+1. kendo.userevents.js (Column resizing feature)
+1. kendo.draganddrop.js (Column resizing feature)
+1. kendo.resizable.js (Column resizing feature)
 1. kendo.ooxml.js (Excel export feature)
 1. kendo.excel.js (Excel export feature)
-1. kendo.pdf.js (PDF export feature)
 1. kendo.color.js (PDF export feature)
 1. kendo.drawing.js (PDF export feature)
+1. kendo.pdf.js (PDF export feature)
 1. kendo.treelist.js
 
 ### TreeView
@@ -793,6 +820,12 @@ Framework and Widgets for Mobile Applications
 1. kendo.core.js
 1. kendo.mobile.buttongroup.js
 
+### Collapsible
+1. jquery.js
+1. kendo.core.js
+1. kendo.userevents.js
+1. kendo.mobile.collapsible.js
+
 ### Drawer
 1. jquery.js
 1. kendo.core.js
@@ -915,4 +948,5 @@ Supplementary scripts for integration with server-side technologies
 1. kendo.multiselect.js
 1. kendo.validator.js
 1. kendo.aspnetmvc.js
+
 
