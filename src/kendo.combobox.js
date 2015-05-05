@@ -580,6 +580,7 @@ var __meta__ = {
                     if (that.selectedIndex === -1) {
                         that._accessor(value);
                         that.input.val(value);
+                        that._placeholder(true);
                     }
 
                     that._old = that._accessor();
