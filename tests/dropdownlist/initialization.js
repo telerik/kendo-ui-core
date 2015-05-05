@@ -1098,4 +1098,30 @@
 
         equal(dropdownlist.span.text(), "updated");
     });
+
+    test("DropDownList updates the selected text on source rebind", function() {
+        var data = [
+            { name: "item", value: 1, group: "a" },
+            { name: "item2", value: 2, group: "b" }
+        ];
+
+        dropdownlist = input.kendoDropDownList({
+            dataSource: {
+                transport: {
+                    read: function(options) {
+                        options.success(data);
+                    }
+                }
+            },
+            dataValueField: "value",
+            dataTextField: "name",
+            value: 1
+        }).data("kendoDropDownList");
+
+        data[0].name = "Item new";
+
+        dropdownlist.dataSource.read();
+
+        equal(dropdownlist.text(), "Item new");
+    });
 })();

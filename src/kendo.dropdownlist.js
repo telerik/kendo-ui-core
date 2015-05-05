@@ -395,6 +395,7 @@ var __meta__ = {
 
             var data = that.dataSource.flatView();
             var length = data.length;
+            var dataItem;
 
             var height;
             var value;
@@ -445,6 +446,10 @@ var __meta__ = {
                         }
 
                         that._initialIndex = null;
+                        dataItem = that.listView.selectedDataItems()[0];
+                        if (dataItem && that.text() !== that._text(dataItem)) {
+                            that._selectValue(dataItem);
+                        }
                     } else if (that._textAccessor() !== that._optionLabelText()) {
                         that.listView.value("");
                         that._selectValue(null);

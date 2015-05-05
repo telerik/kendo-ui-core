@@ -903,4 +903,30 @@ test("ComboBox with autoBind:false reads datasource ", 1, function() {
    equal(combobox.ul.children().length, 2);
 });
 
+test("ComboBox updates the selected text on source rebind", function() {
+    var data = [
+        { name: "item", value: 1, group: "a" },
+        { name: "item2", value: 2, group: "b" }
+    ];
+
+    combobox = input.kendoComboBox({
+        dataSource: {
+            transport: {
+                read: function(options) {
+                    options.success(data);
+                }
+            }
+        },
+        dataValueField: "value",
+        dataTextField: "name",
+        value: 1
+    }).data("kendoComboBox");
+
+    data[0].name = "Item new";
+
+    combobox.dataSource.read();
+
+    equal(combobox.text(), "Item new");
+});
+
 })();
