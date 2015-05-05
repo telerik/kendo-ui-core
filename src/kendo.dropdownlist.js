@@ -320,7 +320,9 @@ var __meta__ = {
                 value = "";
             }
 
-            that._initialIndex = null;
+            if (value) {
+                that._initialIndex = null;
+            }
 
             that.listView.value(value.toString()).done(function() {
                 that._triggerCascade();
