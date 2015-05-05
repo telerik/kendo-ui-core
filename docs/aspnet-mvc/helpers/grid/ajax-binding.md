@@ -303,3 +303,14 @@ can be changed by disabling `ServerOperation`.
           .Pageable()
           .Sortable()
     )
+
+## Customize the Rendered Content and Attach Event Handlers on the Fly
+
+In addition using [server](/aspnet-mvc/helpers/grid/configuration#template) and [client](/aspnet-mvc/helpers/grid/configuration#clienttemplate) column templates,
+in some cases you may need to customize the Grid data rows' appearance or content with Javascript - hide, show or modify some content, attach custom event handlers, etc.
+When using client-side databinding for the Grid, all these customizations should be performed in the Grid's [dataBound](/aspnet-mvc/helpers/grid/overview#handling-kendo-ui-grid-events) event.
+If the custom code is executed earlier (e.g. in document.ready), it is very likely to have no effect, because the table rows are still not rendered at that time.
+
+There is one exception to the above - delegated event handlers will work, because they are attached to an ancestor element of the data rows
+(e.g. the Grid [`table`](/api/javascript/ui/grid#fields-table), [`tbody`](/api/javascript/ui/grid#fields-tbody) or [`wrapper`](/framework/widgets/wrapper-element)),
+and the event handler code should check what is the event target.
