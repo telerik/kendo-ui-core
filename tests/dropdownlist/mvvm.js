@@ -102,6 +102,17 @@
         equal(observable.value, observable.items[0].text);
     });
 
+    test("display optionLabel when value and text are not defined", function() {
+        dom = $('<select data-value-field="value" data-text-field="text" data-auto-bind="false" data-option-label="test" data-value-primitive="true" data-role="dropdownlist" data-bind="value:value,source:items" />');
+
+        var observable = kendo.observable({ items: new kendo.data.DataSource([{text:"foo", value: 1}, {text:"bar", value:2}]), value: null });
+
+        kendo.bind(dom, observable);
+        var widget = dom.data("kendoDropDownList");
+
+        equal(widget.text(), "test");
+    });
+
     test("widget datasource is use if source binding is not set", function() {
         var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}], value: null });
             observable.value = observable.items[1];
