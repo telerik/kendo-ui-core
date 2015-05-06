@@ -141,7 +141,7 @@ Each time the url fragment changes, the router triggers a `change` event. callin
     <script>
     var router = new kendo.Router({
         change: function(e) {
-            console.log(url);
+            console.log(e.url);
             e.preventDefault();
         }
     });
