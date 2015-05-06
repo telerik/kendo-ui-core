@@ -19,10 +19,16 @@ To access the combined minified javascript for Kendo UI Core (available since Q1
 
     http://cdn.kendostatic.com/2014.1.416/js/kendo.ui.core.min.js
 
-> **Important:** in order to use **HTTPS**, you need to directly access the CloudFront CDN, or [use your own domain and SSL certificate](http://aws.amazon.com/cloudfront/custom-ssl-domains/).
+## HTTPS
+
+In order to use **HTTPS**, you need to directly access the CloudFront CDN, or [use your own domain and SSL certificate](http://aws.amazon.com/cloudfront/custom-ssl-domains/).
 
     https://da7xgjtj801h2.cloudfront.net/$VERSION$/js/$FILENAME$.min.js
     https://da7xgjtj801h2.cloudfront.net/$VERSION$/styles/$FILENAME$.min.css
+
+You can also use a protocol relative url:
+
+    <script src="//da7xgjtj801h2.cloudfront.net/2014.1.318/js/kendo.all.min.js"></script>
 
 ## CDN Fallback and Troubleshooting
 
