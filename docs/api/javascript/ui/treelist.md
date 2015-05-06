@@ -652,6 +652,36 @@ Each table row consists of table cells (`<td>`) which represent the treelist col
     });
     </script>
 
+#### Example - external template with conditional formatting and button handler
+
+    <div id="treelist"></div>
+
+    <script type="text/x-kendo-template" id="template">
+        # if (data.allowVote) { #
+            <button class='k-button btn-vote'>Vote</button>
+        # } #
+    </script>
+
+    <script>
+    $("#treelist")
+      .kendoTreeList({
+        columns: [
+          { field: "name" },
+          { template: $("#template").html() }
+        ],
+        dataSource: [
+          { allowVote: true, name: "Jane Doe" },
+          { allowVote: true, name: "Joseph Doe" },
+          { name: "John Doe" }
+        ]
+      })
+      .on("click", ".btn-vote", function(e) {
+        var treelist = $(e.delegateTarget).data("kendoTreeList");
+        var dataItem = treelist.dataItem(e.currentTarget);
+        alert("Voted for " + dataItem.name)
+      });
+    </script>
+
 ### columns.title `String`
 
 The text that is displayed in the column header cell. If not set the [field](#configuration-columns.field) is used.
