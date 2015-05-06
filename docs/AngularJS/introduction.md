@@ -12,6 +12,20 @@ position: 1
 Kendo UI can be used seamlessly with AngularJS. The two frameworks have some overlapping features though.
 If you are using AngularJS then you probably want to use Angular's own routing mechanism and data binding. Do not mix that with Kendo MVVM.
 
+- [Creating widgets the Angular way](#creating-widgets-the-angular-way)
+- [Widget options in HTML](#widget-options-in-html)
+- [Widget configuration in controller](#widget-configuration-in-controller)
+- [Template Directives](#template-directives)
+- [Form validation](#form-validation)
+- [Scope bindings (`ng-model`)](#scope-bindings-ng-model)
+- [Scope bindings (`k-ng-model`)](#scope-bindings-k-ng-model)
+- [The k-value-primitive attribute](#the-k-value-primitive-attribute)
+- [Event handlers](#event-handlers)
+- [Updating widgets when options change](#updating-widgets-when-options-change)
+- [Change widget state using k-ng-disbaled and k-ng-readonly](#change-widget-state-using-k-ng-disbaled-and-k-ng-readonly)
+- [Delaying widget initialization](#delaying-widget-initialization)
+- [Getting widget references](#getting-widget-references)
+
 > AngularJS Kendo UI widget initialization is not designed to be combined with the Kendo UI server wrappers.
 Using wrappers is equivalent to [jQuery plugin syntax initialization](/basics/jquery-initialization).
 If you want to create Kendo UI widget instances with AngularJS, then do not use server wrappers for these instances.
@@ -238,9 +252,13 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
 
 The directive will update the `birthday` variable with the selected `Date` object whenever the `change` event occurs on the widget.
 
-### Changed in Kendo UI 2014.3.1119
+### The k-value-primitive attribute
 
-Starting with the Q3 release - 2014.3.1119 the `k-value-primitve` attribue has been introduced for DropDownList, ComboBox, MultiSelect and AutoComplete widgets. With this option you can set the widget to either use primitive or object values. It will work in a similar way to `data-value-primitive` option in the [MVVM value binding](http://docs.telerik.com/kendo-ui/framework/mvvm/bindings/value#use-the-value-binding-with-a-select-widget-to-update-the-view-model-field-with-the-value-field-when-the-initial-value-is-null). Using this option you can always use the `k-ng-model` attribute no matter if you are using primitive or non-primitive values. By default the attribute is set to false.
+Starting with the 2014.3.1119 release the `k-value-primitve` attribue has been introduced for DropDownList, ComboBox, MultiSelect and AutoComplete widgets.
+
+With this option you can set the widget to either use primitive or object values. It will work in a similar way to `data-value-primitive` option in the [MVVM value binding](http://docs.telerik.com/kendo-ui/framework/mvvm/bindings/value#use-the-value-binding-with-a-select-widget-to-update-the-view-model-field-with-the-value-field-when-the-initial-value-is-null).
+
+Using this option you can always use the `k-ng-model` attribute no matter if you are using primitive or non-primitive values. By default the attribute is set to false.
 
 Setting the `k-value-primitive` to `false` will force the widget to accept/return an object, or an array of objects for the MultiSelect, holding the current value selected. Here is an example:
 
