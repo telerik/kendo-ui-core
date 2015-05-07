@@ -879,4 +879,117 @@ test("sync calls the submit method passing the removed, updated and created reco
     equal(changes.destroyed[0].foo, "deleted");
 });
 
+test("destoyed method returns the removed items", function() {
+    setup();
+
+    var removed = dataSource.at(0);
+    dataSource.remove(removed);
+    var result = dataSource.destroyed();
+
+    equal(result.length, 1);
+    deepEqual(removed, result[0]);
+});
+
+test("created method returns the added items", function() {
+    setup();
+
+    var first = dataSource.add();
+    var second = dataSource.add();
+
+    var result = dataSource.created();
+
+    equal(result.length, 2);
+    deepEqual(result[1], first);
+    deepEqual(result[0], second);
+});
+
+test("updated method returns the modified items", function() {
+    setup({ data: [{ id: 1, foo: "foo" }, { id: 2, foo: "foo2" }] });
+
+    var first = dataSource.at(0);
+    first.set("foo", 1);
+
+    var second = dataSource.at(1);
+    second.set("foo", 2);
+
+    var result = dataSource.updated();
+
+    equal(result.length, 2);
+    deepEqual(result[0], first);
+    deepEqual(result[1], second);
+});
+
+test("updated method does not return the dirty added items", function() {
+    setup({ data: [{ id: 1, foo: "foo" }, { id: 2, foo: "foo2" }] });
+
+    var first = dataSource.add();
+
+    first.set("foo", 1);
+
+    var result = dataSource.updated();
+
+    ok(!result.length);
+});
+
+test("updated method returns modified records if server grouping is enabled", function() {
+    var dataSource = new DataSource({
+            schema: {
+                model: { id: "id" },
+                groups: function(data) {
+                    return [{
+                        items: [{ foo: 1, id: 0}],
+                        field: "foo",
+                        value: "bar"
+                    }];
+                },
+                total: function() {
+                    return 1;
+                }
+            },
+            batch: true,
+            serverGrouping: true,
+            group: { field: "foo" }
+        });
+
+    dataSource.read();
+
+    dataSource.get(0).set("foo", 2);
+
+    var updated = dataSource.updated();
+
+    equal(updated.length, 1);
+    equal(updated[0], dataSource.get(0));
+});
+
+test("created method returns added records if server grouping is enabled", function() {
+    var dataSource = new DataSource({
+            schema: {
+                model: { id: "id" },
+                groups: function(data) {
+                    return [{
+                        items: [{ foo: 1, id: 0}],
+                        field: "foo",
+                        value: "bar"
+                    }];
+                },
+                total: function() {
+                    return 1;
+                }
+            },
+            batch: true,
+            serverGrouping: true,
+            group: { field: "foo" }
+        });
+
+    dataSource.read();
+
+    var added = dataSource.add();
+
+    var created = dataSource.created();
+
+    equal(created.length, 1);
+    equal(created[0], added);
+});
+
+
 }());
