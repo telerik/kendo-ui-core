@@ -38,13 +38,18 @@ Upon install/update you will be prompted for your Telerik username and password.
 
 > The professional bower package is available only for licensed user accounts; *it is not accessible for trial accounts*.
 
-## Automate Kendo UI Professional package install on production servers
+## Storing repository credentials
 
 To avoid retyping the user name/password entry when deploying, store the credentials in a [.netrc file](http://www.gnu.org/software/inetutils/manual/html_node/The-_002enetrc-File.html)
 
-### .netrc file contents
+This file must be located at your home directory. That would be `~/.netrc` for \*NIX systems and `%HOME%\_netrc` for Windows.
 
-```sh
+You can use Git credential helpers as an alternative to storing the password as plain text.
+See the discussion in [on Stack Overflow](http://stackoverflow.com/questions/5343068/is-there-a-way-to-skip-password-typing-when-using-https-github).
+
+### Sample ~/.netrc file contents
+
+```
 machine bower.telerik.com
         login my-telerik.identity@example.com
         password mysecret
