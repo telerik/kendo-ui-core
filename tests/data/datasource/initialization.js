@@ -5,6 +5,15 @@ var RemoteTransport = kendo.data.RemoteTransport;
 var Model = kendo.data.Model;
 var DataSource = kendo.data.DataSource;
 
+module("DataSource initialization", {
+    setup: function() {
+    },
+    teardown: function() {
+        delete kendo.data.transports["my-custom-transport"];
+    }
+});
+
+
 function setup(source) {
     data = source || [{ id:1, bar: "foo" },{ id: 2, bar: "foo" }];
 
@@ -424,6 +433,31 @@ test("re-read does not remove the parent of the observable array", function() {
 
     deepEqual(arr[0].parent(), arr);
     deepEqual(arr[1].parent(), arr);
+});
+
+test("dataSource instance is passed as option to the custom transport", 2, function() {
+    var MyTransport = RemoteTransport.extend({
+        init: function(options) {
+            ok(options.dataSource);
+            ok(options.dataSource instanceof DataSource);
+        }
+    });
+
+    kendo.data.transports["my-custom-transport"] = MyTransport;
+
+    var dataSource = new DataSource({
+        transport: {},
+        type: "my-custom-transport"
+    });
+});
+
+test("dataSource instance is passed as option to the built-in remote transport", 2, function() {
+    var dataSource = new DataSource({
+        transport: {},
+    });
+
+    ok(dataSource.transport.options.dataSource instanceof DataSource);
+    equal(dataSource.transport.options.dataSource, dataSource);
 });
 
 }());
