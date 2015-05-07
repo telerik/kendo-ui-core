@@ -2615,6 +2615,38 @@ var __meta__ = {
             return model;
         },
 
+        destroyed: function() {
+            return this._destroyed;
+        },
+
+        created: function() {
+            var idx,
+                length,
+                result = [],
+                data = this._flatData(this._data);
+
+            for (idx = 0, length = data.length; idx < length; idx++) {
+                if (data[idx].isNew && data[idx].isNew()) {
+                    result.push(data[idx]);
+                }
+            }
+            return result;
+        },
+
+        updated: function() {
+            var idx,
+                length,
+                result = [],
+                data = this._flatData(this._data);
+
+            for (idx = 0, length = data.length; idx < length; idx++) {
+                if ((data[idx].isNew && !data[idx].isNew()) && data[idx].dirty) {
+                    result.push(data[idx]);
+                }
+            }
+            return result;
+        },
+
         sync: function() {
             var that = this,
                 idx,
@@ -2632,13 +2664,8 @@ var __meta__ = {
                     return promise;
                 }
 
-                for (idx = 0, length = data.length; idx < length; idx++) {
-                    if (data[idx].isNew()) {
-                        created.push(data[idx]);
-                    } else if (data[idx].dirty) {
-                        updated.push(data[idx]);
-                    }
-                }
+                created = that.created();
+                updated = that.updated();
 
                 var promises = [];
 
@@ -2697,7 +2724,7 @@ var __meta__ = {
         hasChanges: function() {
             var idx,
                 length,
-                data = this._data;
+                data = this._flatData(this._data);
 
             if (this._destroyed.length) {
                 return true;
