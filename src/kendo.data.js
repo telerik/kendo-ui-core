@@ -2223,7 +2223,7 @@ var __meta__ = {
 
             Observable.fn.init.call(that);
 
-            that.transport = Transport.create(options, data);
+            that.transport = Transport.create(options, data, that);
 
             if (isFunction(that.transport.push)) {
                 that.transport.push({
@@ -3961,12 +3961,16 @@ var __meta__ = {
 
     var Transport = {};
 
-    Transport.create = function(options, data) {
+    Transport.create = function(options, data, dataSource) {
         var transport,
             transportOptions = options.transport;
 
         if (transportOptions) {
             transportOptions.read = typeof transportOptions.read === STRING ? { url: transportOptions.read } : transportOptions.read;
+
+            if (dataSource) {
+                transportOptions.dataSource = dataSource;
+            }
 
             if (options.type) {
                 kendo.data.transports = kendo.data.transports || {};
