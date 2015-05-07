@@ -1028,7 +1028,7 @@ var __meta__ = {
             element.html(options);
 
             if (value !== undefined) {
-                element.val(value);
+                element[0].value = value;
             }
         },
 
@@ -1495,10 +1495,19 @@ var __meta__ = {
 
         _dataItemPosition: function(dataItem, values) {
             var value = this._valueGetter(dataItem);
+            var selectedValue;
             var index = -1;
 
             for (var idx = 0; idx < values.length; idx++) {
-                if (value == values[idx]) {
+                selectedValue = values[idx];
+
+                if (selectedValue !== "" && selectedValue !== null) {
+                    if (typeof value === "number") {
+                        selectedValue = parseFloat(selectedValue);
+                    }
+                }
+
+                if (value === selectedValue) {
                     index = idx;
                     break;
                 }

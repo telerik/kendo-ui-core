@@ -572,7 +572,35 @@
        ok(dropdownlist.optionLabel.hasClass(SELECTED));
    });
 
-    test("value() returns value of the OPTION element", function() {
+   test("value method selects item with empty string value", function() {
+       dropdownlist = new DropDownList(input, {
+           dataTextField: "text",
+           dataValueField: "value",
+           dataSource: [{text: "foo", value: ""}, {text:2, value:0}],
+           value: 0
+       });
+
+       dropdownlist.value("");
+
+       equal(dropdownlist.selectedIndex, 0);
+       ok(dropdownlist.ul.children(":first").hasClass("k-state-selected"));
+   });
+
+   test("value method selects item with null value", function() {
+       dropdownlist = new DropDownList(input, {
+           dataTextField: "text",
+           dataValueField: "value",
+           dataSource: [{text: "foo", value: null}, {text:2, value:0}],
+           value: 0
+       });
+
+       dropdownlist.value(null);
+
+       equal(dropdownlist.selectedIndex, 0);
+       ok(dropdownlist.ul.children(":first").hasClass("k-state-selected"));
+   });
+
+   test("value() returns value of the OPTION element", function() {
         var select = $("<select><option value=''>Chai</option><option>Bar</option></select>").appendTo(QUnit.fixture);
         dropdownlist = new DropDownList(select);
 
@@ -597,7 +625,7 @@
     });
 
     test("value method resets default selected index (select)", function() {
-        var select = $("<select><option value=''>Chai</option><option>Bar</option></select>").appendTo(QUnit.fixture);
+        var select = $("<select><option>Chai</option><option>Bar</option></select>").appendTo(QUnit.fixture);
 
         dropdownlist = new DropDownList(select, {
             autoBind: false
@@ -631,10 +659,11 @@
     });
 
     test("dataItem() returns an empty object if optionLabel", function() {
-        var select = $("<select><option value=''>Chai</option><option>Bar</option></select>").appendTo(QUnit.fixture);
+        var select = $("<select><option>Chai</option><option>Bar</option></select>").appendTo(QUnit.fixture);
 
         dropdownlist = new DropDownList(select, {
-            optionLabel: "Select..."
+            optionLabel: "Select...",
+            value: ""
         });
 
         equal(dropdownlist.selectedIndex, 0);
