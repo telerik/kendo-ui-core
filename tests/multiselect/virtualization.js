@@ -87,7 +87,7 @@
 
                 equal(options.length, 1);
 
-                equal(options[0].text, "0");
+                equal(options[0].text, "Item 0");
                 equal(options[0].value, "0");
             }, 300);
 
@@ -124,7 +124,7 @@
                 equal(options[0].text, "Item 15");
                 equal(options[0].value, "15");
 
-                equal(options[1].text, "0");
+                equal(options[1].text, "Item 0");
                 equal(options[1].value, "0");
             }, 300);
 
