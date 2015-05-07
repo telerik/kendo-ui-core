@@ -602,6 +602,23 @@
         });
     });
 
+    test("selectedDataItems method returns a new array copy", 1, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: true,
+            valueMapper: function(operation) {
+                setTimeout(function() {
+                    operation.success(123);
+                }, 0);
+            }
+        }));
+
+        virtualList.value(123)
+
+        var items = virtualList.selectedDataItems();
+
+        notEqual(items, virtualList.selectedDataItems());
+    });
+
     asyncTest("focus method returns null if there is no focused item", 1, function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             selectable: true
