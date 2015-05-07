@@ -17,6 +17,7 @@ Kendo UI Grid can export its data as Excel document since the Q3 2014 (2014.3.11
     - [Column Format](#column-format)
     - [Detail Template](#detail-template)
     - [Export Multiple Grids](#export-multiple-grids)
+    - [Save File on Server](#save-file-on-server)
 - [Troubleshooting](#troubleshooting)
 - [Further Reading](#further-reading)
 
@@ -183,6 +184,45 @@ If the detail template contains another grid you can follow the [Detail Grid Exp
 ### Export Multiple Grids
 
 The [Multiple Grid Export](/web/grid/how-to/excel/multiple-grid-export) tutorial shows how to export multiple grids in a single Excel document. Each grid is exported in a separate Excel sheet.
+
+### Save File on Server
+
+In some cases it is useful to send the generated file to a remote service. This can be done by preventing the default file saving and posting the base64 encoded contents.
+
+#### Example - post file to server
+
+    <div id="grid"></div>
+    <script>
+        $("#grid").kendoGrid({
+            toolbar: ["excel"],
+            dataSource: {
+                type: "odata",
+                transport: {
+                    read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                },
+                pageSize: 7
+            },
+            pageable: true,
+            columns: [
+                { width: 300, field: "ProductName", title: "Product Name" },
+                { field: "UnitsOnOrder", title: "Units On Order" },
+                { field: "UnitsInStock", title: "Units In Stock" }
+            ],
+            excelExport: function(e) {
+                // Prevent the default behavior which will prompt the user to save the generated file.
+                e.preventDefault();
+                // Get the Excel file as a data URL.
+                var dataURL = new kendo.ooxml.Workbook(e.workbook).toDataURL();
+                // Strip the data URL prologue.
+                var base64 = dataURL.split(";base64,")[1];
+                // Post the base64 encoded content to the server which can save it.
+                $.post("/server/save", {
+                    base64: base64,
+                    fileName: "ExcelExport.xlsx"
+                });
+            }
+        });
+    </script>
 
 ## Troubleshooting
 
