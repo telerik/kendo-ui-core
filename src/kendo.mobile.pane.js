@@ -278,7 +278,7 @@ var __meta__ = {
 
             this.element.handler(this)
                 .on("down", roleSelector(linkRoles) + "," + pressedButtonSelector, "_mouseup")
-                .on("click", roleSelector(linkRoles) + " " + buttonSelectors, "_appLinkClick");
+                .on("click", roleSelector(linkRoles) + "," + buttonSelectors + "," + pressedButtonSelector, "_appLinkClick");
 
             this.userEvents = new kendo.UserEvents(this.element, {
                 filter: buttonSelectors,
