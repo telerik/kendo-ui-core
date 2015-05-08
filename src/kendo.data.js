@@ -3233,6 +3233,16 @@ var __meta__ = {
             return false;
         },
 
+        _shouldWrap: function(data) {
+            var model = this.reader.model;
+
+            if (model && data.length) {
+                return !(data[0] instanceof model);
+            }
+
+            return false;
+        },
+
         _observe: function(data) {
             var that = this,
                 model = that.reader.model,
@@ -3240,13 +3250,9 @@ var __meta__ = {
 
             that._shouldDetachObservableParents = true;
 
-            if (model && data.length) {
-                wrap = !(data[0] instanceof model);
-            }
-
             if (data instanceof ObservableArray) {
                 that._shouldDetachObservableParents = false;
-                if (wrap) {
+                if (that._shouldWrap(data)) {
                     data.type = that.reader.model;
                     data.wrapAll(data, data);
                 }
