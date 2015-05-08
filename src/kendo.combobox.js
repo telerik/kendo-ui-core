@@ -558,12 +558,6 @@ var __meta__ = {
                 return value === undefined || value === null ? "" : value;
             }
 
-            if (value === null) {
-                value = "";
-            }
-
-            value = value.toString();
-
             if (value === options.value && that.input.val() === options.text) {
                 return;
             }
