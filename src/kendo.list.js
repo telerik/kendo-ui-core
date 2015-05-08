@@ -1493,6 +1493,47 @@ var __meta__ = {
             }
         },
 
+        _valueExpr: function(type, values) {
+            var that = this;
+            var selectedValue;
+            var index = -1;
+            var idx = 0;
+
+            var body = "";
+
+            if (!that._valueType  || that._valueType !== type) {
+                that._valueType = type;
+
+                for (; idx < values.length; idx++) {
+                    selectedValue = values[idx];
+
+                    if (selectedValue === undefined) {
+                        selectedValue = "";
+                    }
+
+                    if (selectedValue !== "" && selectedValue !== null) {
+                        if (typeof value === "string") {
+                            selectedValue = selectedValue.toString();
+                        } else if (typeof value === "number") {
+                            selectedValue = parseFloat(selectedValue);
+                        }
+                    }
+
+                    if (body) {
+                        body += " else ";
+                    }
+
+                    body += "if (value === " + selectedValue + ") { return " + idx + "; }";
+                }
+
+                body += " return -1;";
+
+                that._valueCheck = new Function("value", body);
+            }
+
+            return that._valueCheck;
+        },
+
         _dataItemPosition: function(dataItem, values) {
             var value = this._valueGetter(dataItem);
             var selectedValue;
@@ -1545,6 +1586,9 @@ var __meta__ = {
 
         _valueIndices: function(values) {
             var indices = [];
+
+            this._valueType = ""; //clear type to recreate the valueExpr
+
             return this._updateIndices(indices, values);
         },
 
