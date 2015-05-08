@@ -279,6 +279,55 @@ var __meta__ = {
             return result;
         },
 
+        reduce: function(callback, initialValue) {
+            var idx = 0,
+                result,
+                length = this.length;
+
+            if (arguments.length == 2) {
+                result = arguments[1];
+            } else {
+                while (idx < length && !(idx in this)) {
+                    idx++; 
+                }
+                if (idx < length) {
+                    result = this[idx++];
+                }
+            }
+
+            for (; idx < length; idx++) {
+                if (idx in this) {
+                    result = callback(result, this[idx], idx, this);
+                }
+            }
+
+            return result;
+        };
+
+        reduceRight: function(callback, initialValue) {
+            var idx = this.length,
+                result;
+
+            if (arguments.length == 2) {
+                result = arguments[1];
+            } else {
+                while (idx >= 0 && !(idx in this)) {
+                    idx--; 
+                }
+                if (idx > 0) {
+                    result = this[idx--];
+                }
+            }
+
+            for (; idx >= 0; idx--) {
+                if (idx in this) {
+                    result = callback(result, this[idx], idx, this);
+                }
+            }
+
+            return result;
+        };
+
         filter: function(callback) {
             var idx = 0,
                 result = [],
