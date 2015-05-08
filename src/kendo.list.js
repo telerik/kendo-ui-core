@@ -1502,7 +1502,9 @@ var __meta__ = {
                 selectedValue = values[idx];
 
                 if (selectedValue !== "" && selectedValue !== null) {
-                    if (typeof value === "number") {
+                    if (typeof value === "string") {
+                        selectedValue = selectedValue.toString();
+                    } else if (typeof value === "number") {
                         selectedValue = parseFloat(selectedValue);
                     }
                 }
@@ -1516,6 +1518,7 @@ var __meta__ = {
             return index;
         },
 
+        //TODO: Rename !!!
         _updateIndices: function(indices, values) {
             var data = this._view;
             var idx = 0;

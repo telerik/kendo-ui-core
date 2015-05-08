@@ -600,6 +600,19 @@
        ok(dropdownlist.ul.children(":first").hasClass("k-state-selected"));
    });
 
+   test("value method selects item when item field is string and value is number", function() {
+       dropdownlist = new DropDownList(input, {
+           dataTextField: "text",
+           dataValueField: "value",
+           dataSource: [{text: "foo", value: "1" }, {text:2, value: "2"}]
+       });
+
+       dropdownlist.value(2);
+
+       equal(dropdownlist.selectedIndex, 1);
+       ok(dropdownlist.ul.children(":last").hasClass("k-state-selected"));
+   });
+
    test("value() returns value of the OPTION element", function() {
         var select = $("<select><option value=''>Chai</option><option>Bar</option></select>").appendTo(QUnit.fixture);
         dropdownlist = new DropDownList(select);
