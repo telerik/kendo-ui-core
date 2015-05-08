@@ -1501,6 +1501,10 @@ var __meta__ = {
             for (var idx = 0; idx < values.length; idx++) {
                 selectedValue = values[idx];
 
+                if (selectedValue === undefined) {
+                    selectedValue = "";
+                }
+
                 if (selectedValue !== "" && selectedValue !== null) {
                     if (typeof value === "string") {
                         selectedValue = selectedValue.toString();
