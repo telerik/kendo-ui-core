@@ -12,9 +12,10 @@ The example below demonstrates how to use [FontAwesome icons](http://fortawesome
 
 ```html
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
     <style>
-      .k-sprite,
-      .k-sprite::before {
+      .fa.k-sprite,
+      .fa.k-sprite::before {
         font-size: 12px;
         line-height: 12px;
         vertical-align: middle;
