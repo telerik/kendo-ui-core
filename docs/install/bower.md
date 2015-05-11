@@ -37,6 +37,8 @@ You can also add the package in the `bower.json` file:
 Upon install/update you will be prompted for your Telerik username and password.
 
 > The professional bower package is available only for licensed user accounts; *it is not accessible for trial accounts*.
+> The initial installation may **request your password multiple times**. You may avoid this by [persisting your password](persisting your password).
+
 
 ## Storing repository credentials
 
@@ -56,3 +58,14 @@ machine bower.telerik.com
 ```
 
 > Make sure that you set the `.netrc` file permissions file to being readable only [from your current user](http://www.mavetju.org/unix/netrc.php).
+
+### Troubleshooting
+
+Bower on Windows may have troubles installing the repository, failing with
+
+```sh
+fatal: unable to access 'https://bower.telerik.com/bower-kendo-ui.git/': SSL certificate problem: unable to get local issuer certificate
+```
+
+The cause of this issue is the underlying git installation is missing the certificate bundle.
+To resolve the issue, [follow the steps in this help article](http://blogs.msdn.com/b/phkelley/archive/2014/01/20/adding-a-corporate-or-self-signed-certificate-authority-to-git-exe-s-store.aspx).
