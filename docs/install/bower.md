@@ -37,7 +37,7 @@ You can also add the package in the `bower.json` file:
 Upon install/update you will be prompted for your Telerik username and password.
 
 > The professional bower package is available only for licensed user accounts; *it is not accessible for trial accounts*.
-> The initial installation may **request your password multiple times**. You may avoid this by [persisting your password](persisting your password).
+> The initial installation may **request your password multiple times**. You may avoid this by [persisting your password](http://stackoverflow.com/questions/2233590/is-there-a-way-to-make-git-remember-the-password-for-webdav-remotes).
 
 
 ## Storing repository credentials
