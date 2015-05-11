@@ -286,43 +286,29 @@ var __meta__ = {
 
             if (arguments.length == 2) {
                 result = arguments[1];
-            } else {
-                while (idx < length && !(idx in this)) {
-                    idx++; 
-                }
-                if (idx < length) {
-                    result = this[idx++];
-                }
+            } else if (idx < length) {
+                result = this[idx++];
             }
 
             for (; idx < length; idx++) {
-                if (idx in this) {
-                    result = callback(result, this[idx], idx, this);
-                }
+                result = callback(result, this[idx], idx, this);
             }
 
             return result;
         };
 
         reduceRight: function(callback, initialValue) {
-            var idx = this.length,
+            var idx = this.length - 1,
                 result;
 
             if (arguments.length == 2) {
                 result = arguments[1];
-            } else {
-                while (idx >= 0 && !(idx in this)) {
-                    idx--; 
-                }
-                if (idx > 0) {
-                    result = this[idx--];
-                }
+            } else if (idx > 0) {
+                result = this[idx--];
             }
 
             for (; idx >= 0; idx--) {
-                if (idx in this) {
-                    result = callback(result, this[idx], idx, this);
-                }
+                result = callback(result, this[idx], idx, this);
             }
 
             return result;
