@@ -364,6 +364,17 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.messages,{
 });
 }
 
+/* FilterMultiCheck messages */
+
+if (kendo.ui.FilterMultiCheck) {
+kendo.ui.FilterMultiCheck.prototype.options.messages =
+$.extend(true, kendo.ui.FilterMultiCheck.prototype.options.messages,{
+  "checkAll": "Избери всички",
+  "clear": "Премахни филтър",
+  "filter": "Филтрирай"
+});
+}
+
 /* Groupable messages */
 
 if (kendo.ui.Groupable) {
