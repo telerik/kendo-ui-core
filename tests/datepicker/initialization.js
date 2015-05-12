@@ -305,6 +305,12 @@ test("DatePicker uses disabled attr over the readonly", function() {
     equal(input.attr("readonly"), undefined);
 });
 
+test("DatePicker is disabled when placed in disabled fieldset", function() {
+    $(input).wrap('<fieldset disabled="disabled"></fieldset>');
+    input.kendoDatePicker().data("kendoDatePicker");
+    equal(input.attr("disabled"), "disabled");
+});
+
 test("DatePicker does not remove input text on initialization if not valid value", function() {
     var datepicker = input.val("test").kendoDatePicker().data("kendoDatePicker");
 
