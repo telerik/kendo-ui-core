@@ -90,7 +90,7 @@ var __meta__ = {
 
             that._midnight = getMilliseconds(options.min) + getMilliseconds(options.max) === 0;
 
-            disabled = element.is("[disabled]");
+            disabled = element.is("[disabled]") || $(that.element).parents("fieldset").is(':disabled');
             if (disabled) {
                 that.enable(false);
             } else {

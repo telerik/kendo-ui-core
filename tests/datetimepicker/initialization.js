@@ -320,4 +320,10 @@ test("DateTimePicker sets max from max attribute", function() {
     deepEqual(datetimepicker.max(), date);
 });
 
+test("DateTimePicker is disabled when placed in disabled fieldset", function() {
+    $(input).wrap('<fieldset disabled="disabled"></fieldset>');
+    input.kendoDateTimePicker().data("kendoDateTimePicker");
+    equal(input.attr("disabled"), "disabled");
+});
+
 })();
