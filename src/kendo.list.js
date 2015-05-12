@@ -1544,32 +1544,6 @@ var __meta__ = {
             return valueExpr(value);
         },
 
-        //TODO: Rename !!!
-        _updateIndices: function(indices, values) {
-            var data = this._view;
-            var idx = 0;
-            var index;
-
-            if (!values.length) {
-                return [];
-            }
-
-            for (; idx < data.length; idx++) {
-                index = this._dataItemPosition(data[idx].item, values);
-
-                if (index !== -1) {
-                    indices[index] = idx;
-                }
-            }
-
-            return this._normalizeIndices(indices);
-        },
-
-        _valueIndices: function(values) {
-            var indices = [];
-            return this._updateIndices(indices, values);
-        },
-
         _getter: function() {
             this._valueGetter = kendo.getter(this.options.dataValueField);
         },
@@ -1770,6 +1744,28 @@ var __meta__ = {
             return newIndices;
         },
 
+        _valueIndices: function(values, indices) {
+            var data = this._view;
+            var idx = 0;
+            var index;
+
+            indices = indices ? indices.slice() : [];
+
+            if (!values.length) {
+                return [];
+            }
+
+            for (; idx < data.length; idx++) {
+                index = this._dataItemPosition(data[idx].item, values);
+
+                if (index !== -1) {
+                    indices[index] = idx;
+                }
+            }
+
+            return this._normalizeIndices(indices);
+        },
+
         _firstVisibleItem: function() {
             var element = this.element[0];
             var content = this.content[0];
@@ -1925,7 +1921,7 @@ var __meta__ = {
                 that.focus(0);
                 if (that._skipUpdate) {
                     that._skipUpdate = false;
-                    that._updateIndices(that._selectedIndices, that._values);
+                    that._selectedIndices = that._valueIndices(that._values, that._selectedIndices);
                 }
             } else if (!action || action === "add") {
                 that.value(that._values);
