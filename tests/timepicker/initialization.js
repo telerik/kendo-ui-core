@@ -330,4 +330,10 @@
 
         equal(timepicker.timeView.ul.height(), 200)
     });
+
+    test("TimePicker is disabled when placed in disabled fieldset", function() {
+        $(input).wrap('<fieldset disabled="disabled"></fieldset>');
+        input.kendoTimePicker().data("kendoTimePicker");
+        equal(input.attr("disabled"), "disabled");
+    });
 })();
