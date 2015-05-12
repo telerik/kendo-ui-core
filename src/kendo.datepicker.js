@@ -326,7 +326,7 @@ var __meta__ = {
             that._reset();
             that._template();
 
-            disabled = element.is("[disabled]");
+            disabled = element.is("[disabled]") || $(that.element).parents("fieldset").is(':disabled');
             if (disabled) {
                 that.enable(false);
             } else {
