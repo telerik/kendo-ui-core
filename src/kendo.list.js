@@ -10,6 +10,7 @@ var __meta__ = {
     hidden: true
 };
 
+/*jshint evil: true*/
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
