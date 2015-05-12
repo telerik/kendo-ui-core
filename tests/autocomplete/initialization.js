@@ -464,4 +464,10 @@ test("setOptions updates listView dataValueField when dataTextField is set", fun
     equal(autocomplete.listView.options.dataValueField, "anotherName");
 });
 
+test("AutoComlete is disabled when placed in disabled fieldset", function() {
+     $(input).wrap('<fieldset disabled="disabled"></fieldset>');
+     input.kendoAutoComplete().data("kendoAutoComplete");
+     equal(input.attr("disabled"), "disabled");
+});
+
 }());

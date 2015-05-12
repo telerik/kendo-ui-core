@@ -66,7 +66,7 @@ var __meta__ = {
 
     var AutoComplete = List.extend({
         init: function (element, options) {
-            var that = this, wrapper;
+            var that = this, wrapper, disabled;
 
             that.ns = ns;
             options = $.isArray(options) ? { dataSource: options} : options;
@@ -125,6 +125,12 @@ var __meta__ = {
             that._placeholder();
 
             that._initList();
+
+            disabled = $(that.element).parents("fieldset").is(':disabled');
+
+            if (disabled) {
+                that.enable(false);
+            }
 
             kendo.notify(that);
         },
