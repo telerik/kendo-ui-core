@@ -1432,6 +1432,7 @@ var __meta__ = {
             }
 
             if (added.length || removed.length) {
+                that._valueComparer = null;
                 that.trigger("change", {
                     added: added,
                     removed: removed
@@ -1453,6 +1454,8 @@ var __meta__ = {
             value = $.isArray(value) || value instanceof ObservableArray ? value.slice(0) : [value];
 
             this._values = value;
+
+            this._valueComparer = null;
         },
 
         value: function(value) {
@@ -1501,21 +1504,19 @@ var __meta__ = {
 
             var body = "";
 
-            if (!that._valueType  || that._valueType !== type) {
+            if (!that._valueComparer  || that._valueType !== type) {
                 that._valueType = type;
 
                 for (; idx < values.length; idx++) {
                     selectedValue = values[idx];
 
-                    if (selectedValue === undefined) {
-                        selectedValue = "";
-                    }
-
-                    if (selectedValue !== "" && selectedValue !== null) {
-                        if (typeof value === "string") {
-                            selectedValue = selectedValue.toString();
-                        } else if (typeof value === "number") {
-                            selectedValue = parseFloat(selectedValue);
+                    if (selectedValue === undefined || selectedValue === "") {
+                        selectedValue = '""';
+                    } else if (selectedValue !== null) {
+                        if ((type !== "boolean" && type !== "number") || typeof selectedValue === "object") {
+                            selectedValue = '"' + selectedValue + '"';
+                        } else if (type === "number" && isNaN(selectedValue)) {
+                            continue;
                         }
                     }
 
@@ -1528,39 +1529,18 @@ var __meta__ = {
 
                 body += " return -1;";
 
-                that._valueCheck = new Function("value", body);
+                that._valueComparer = new Function("value", body);
             }
 
-            return that._valueCheck;
+            return that._valueComparer;
         },
 
         _dataItemPosition: function(dataItem, values) {
             var value = this._valueGetter(dataItem);
-            var selectedValue;
-            var index = -1;
 
-            for (var idx = 0; idx < values.length; idx++) {
-                selectedValue = values[idx];
+            var valueExpr = this._valueExpr(typeof value, values);
 
-                if (selectedValue === undefined) {
-                    selectedValue = "";
-                }
-
-                if (selectedValue !== "" && selectedValue !== null) {
-                    if (typeof value === "string") {
-                        selectedValue = selectedValue.toString();
-                    } else if (typeof value === "number") {
-                        selectedValue = parseFloat(selectedValue);
-                    }
-                }
-
-                if (value === selectedValue) {
-                    index = idx;
-                    break;
-                }
-            }
-
-            return index;
+            return valueExpr(value);
         },
 
         //TODO: Rename !!!
@@ -1586,9 +1566,6 @@ var __meta__ = {
 
         _valueIndices: function(values) {
             var indices = [];
-
-            this._valueType = ""; //clear type to recreate the valueExpr
-
             return this._updateIndices(indices, values);
         },
 
