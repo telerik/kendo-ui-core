@@ -73,7 +73,7 @@ var __meta__ = {
                     that._togglePrompt();
                 });
 
-             var disabled = element.is("[disabled]");
+             var disabled = element.is("[disabled]") || $(that.element).parents("fieldset").is(':disabled');
 
              if (disabled) {
                  that.enable(false);

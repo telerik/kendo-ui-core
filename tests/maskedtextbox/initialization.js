@@ -256,4 +256,10 @@
 
         form.submit();
     });
+
+    test("MaskedTextBox is disabled when placed in disabled fieldset", function() {
+        $(input).wrap('<fieldset disabled="disabled"></fieldset>');
+        input.kendoMaskedTextBox().data("kendoMaskedTextBox");
+        equal(input.attr("disabled"), "disabled");
+    });
 })();
