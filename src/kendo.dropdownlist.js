@@ -414,9 +414,7 @@ var __meta__ = {
                 that._calculateGroupPadding(height);
             }
 
-            if (that.popup.visible()) {
-                that.popup._position();
-            }
+            that.popup.position();
 
             if (that._isSelect) {
                 value = that.value();
