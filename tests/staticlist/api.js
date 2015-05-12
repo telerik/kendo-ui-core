@@ -881,6 +881,33 @@
         equal(dataItems[1], list.dataSource.view()[0].items[1]);
     });
 
+    test("value method does not immediately resolves the valueDeffered object in multiple selection mode", function() {
+        var list = new StaticList(element, {
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "b" },
+                    { name: "item3", type: "a" }
+                ],
+                group: "type"
+            },
+            template: '#:data.name#',
+            groupTemplate: '#:data#',
+            selectable: "multiple"
+        });
+
+        list.dataSource.read();
+
+        list.value(["item2", "item3"]).done(function() {
+            var selected = list.select();
+
+            equal(selected.length, 2);
+            equal(selected[0], 2);
+            equal(selected[1], 1);
+        });
+    });
+
     test("value method clears selected items", function() {
         var list = new StaticList(element, {
             dataValueField: "name",
@@ -1027,7 +1054,52 @@
 
         list.value("");
 
-        ok($.isArray(list.value()));
+        var value = list.value();
+        ok($.isArray(value));
+        equal(value.length, 0);
+    });
+
+    test("value method selects an item with empty string value", function() {
+        var list = new StaticList(element, {
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "", type: "a" },
+                    { name: "item2", type: "b" },
+                    { name: "item3", type: "a" }
+                ],
+                group: "type"
+            },
+            template: '#:data.name#',
+            groupTemplate: '#:data#'
+        });
+
+        list.dataSource.read();
+
+        list.value("");
+
+        equal(list.select()[0], 0);
+    });
+
+    test("value method selects an item with null value", function() {
+        var list = new StaticList(element, {
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: null, type: "b" },
+                    { name: "item3", type: "a" }
+                ]
+            },
+            template: '#:data.name#',
+            groupTemplate: '#:data#'
+        });
+
+        list.dataSource.read();
+
+        list.value(null);
+
+        equal(list.select()[0], 1);
     });
 
     test("value method deselects deselects all items if value is []", function() {

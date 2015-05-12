@@ -397,10 +397,6 @@ var __meta__ = {
         },
 
         setValue: function(value) {
-            if (value === "" || value === null) {
-                value = [];
-            }
-
             this._values = toArray(value);
         },
 
@@ -412,17 +408,17 @@ var __meta__ = {
                 return that._values.slice();
             }
 
+            value = toArray(value);
+
+            if (that.options.selectable === "multiple" && that.select().length && value.length) {
+                that.select(-1);
+            }
+
             if (!that._valueDeferred || that._valueDeferred.state() === "resolved") {
                 that._valueDeferred = $.Deferred();
             }
 
-            if (value === "" || value === null) {
-                value = [];
-            }
-
-            value = toArray(value);
-
-            if (!value.length || that.options.selectable === "multiple") {
+            if (!value.length) {
                 that.select(-1);
             }
 

@@ -125,6 +125,47 @@ test("value('') clear selection", function() {
     equal(combobox._old, "");
 });
 
+   test("value method selects item with empty string value", function() {
+       combobox = new ComboBox(input, {
+           dataTextField: "text",
+           dataValueField: "value",
+           dataSource: [{text: "foo", value: ""}, {text:2, value:0}],
+           value: 0
+       });
+
+       combobox.value("");
+
+       equal(combobox.selectedIndex, 0);
+       ok(combobox.ul.children(":first").hasClass("k-state-selected"));
+   });
+
+   test("value method selects item with null value", function() {
+       combobox = new ComboBox(input, {
+           dataTextField: "text",
+           dataValueField: "value",
+           dataSource: [{text: "foo", value: null}, {text:2, value:0}],
+           value: 0
+       });
+
+       combobox.value(null);
+
+       equal(combobox.selectedIndex, 0);
+       ok(combobox.ul.children(":first").hasClass("k-state-selected"));
+   });
+
+   test("value method selects item when item field is string and value is number", function() {
+       combobox = new ComboBox(input, {
+           dataTextField: "text",
+           dataValueField: "value",
+           dataSource: [{text: "foo", value: "1" }, {text:2, value: "2"}]
+       });
+
+       combobox.value(2);
+
+       equal(combobox.selectedIndex, 1);
+       ok(combobox.ul.children(":last").hasClass("k-state-selected"));
+   });
+
 test("should select jquery object", function() {
     var combobox = new ComboBox(input, {
         dataTextField: "text",
