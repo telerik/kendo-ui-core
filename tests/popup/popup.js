@@ -429,6 +429,24 @@
         equal(div.parent().offset().left + Math.round(div.outerWidth() / 2), anchor.offset().left + Math.round(anchor.outerWidth() / 2));
     });
 
+    test("position method updates popup position", function() {
+        popup = new Popup(div, {
+            animation: false,
+            collision: "flip",
+            anchor: anchor,
+            origin: "bottom left"
+        });
+
+        popup.open();
+        popup.setOptions({
+            origin: "top left"
+        });
+
+        popup.position();
+
+        equal(round100(div.parent().offset().top), round100(anchor.offset().top), 2);
+    });
+
     test("toggleEvent is click by default", function() {
         popup = new Popup(div);
 
