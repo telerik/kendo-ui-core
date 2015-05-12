@@ -929,4 +929,11 @@ test("ComboBox updates the selected text on source rebind", function() {
     equal(combobox.text(), "Item new");
 });
 
+test("ComboBox is disabled when placed in disabled fieldset", function() {
+     $(input).wrap('<fieldset disabled="disabled"></fieldset>');
+     input.kendoComboBox().data("kendoComboBox");
+     equal(input.attr("disabled"), "disabled");
+     $(".k-list-container").remove()
+});
+
 })();
