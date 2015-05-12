@@ -52,7 +52,7 @@ var __meta__ = {
 
     var ComboBox = Select.extend({
         init: function(element, options) {
-            var that = this, text;
+            var that = this, text, disabled;
 
             that.ns = ns;
 
@@ -107,6 +107,12 @@ var __meta__ = {
 
             if (!text) {
                 that._placeholder();
+            }
+
+            disabled = $(that.element).parents("fieldset").is(':disabled');
+
+            if (disabled) {
+                that.enable(false);
             }
 
             kendo.notify(that);
