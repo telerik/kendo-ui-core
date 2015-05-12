@@ -640,4 +640,10 @@
 
         equal(options.eq(2).val(), "updated");
     });
+
+    test("MultiSelect is disabled when placed in disabled fieldset", function() {
+        $(select).wrap('<fieldset disabled="disabled"></fieldset>');
+        select.kendoMultiSelect().data("kendoMultiSelect");
+        equal(select.attr("disabled"), "disabled");
+    });
 })();
