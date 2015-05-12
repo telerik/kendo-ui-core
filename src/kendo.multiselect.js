@@ -69,7 +69,7 @@ var __meta__ = {
 
     var MultiSelect = List.extend({
         init: function(element, options) {
-            var that = this, id;
+            var that = this, id, disabled;
 
             that.ns = ns;
             List.fn.init.call(that, element, options);
@@ -117,6 +117,12 @@ var __meta__ = {
                 that.dataSource.fetch();
             } else if (options.value) {
                 that._preselect(options.value);
+            }
+
+            disabled = $(that.element).parents("fieldset").is(':disabled');
+
+            if (disabled) {
+                that.enable(false);
             }
 
             kendo.notify(that);
