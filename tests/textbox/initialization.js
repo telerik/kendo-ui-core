@@ -239,4 +239,10 @@
 
         equal(numerictextbox.wrapper.find(".k-formatted-value").attr("title"), title);
     });
+
+     test("NumericTextBox is disabled when placed in disabled fieldset", function() {
+        $(input).wrap('<fieldset disabled="disabled"></fieldset>');
+        input.kendoNumericTextBox().data("kendoNumericTextBox");
+        equal(input.attr("disabled"), "disabled");
+    });
 })();
