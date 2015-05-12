@@ -49,7 +49,7 @@ var __meta__ = {
         init: function(element, options) {
             var that = this;
             var index = options && options.index;
-            var optionLabel, text;
+            var optionLabel, text, disabled;
 
             that.ns = ns;
             options = $.isArray(options) ? { dataSource: options } : options;
@@ -115,6 +115,12 @@ var __meta__ = {
                 }
 
                 that._textAccessor(text);
+            }
+
+            disabled = $(that.element).parents("fieldset").is(':disabled');
+
+            if (disabled) {
+                that.enable(false);
             }
 
             kendo.notify(that);
