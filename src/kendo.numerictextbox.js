@@ -97,7 +97,8 @@ var __meta__ = {
              value = options.value;
              that.value(value !== NULL ? value : element.val());
 
-             disabled = element.is("[disabled]");
+             disabled = element.is("[disabled]") || $(that.element).parents("fieldset").is(':disabled');
+			 
              if (disabled) {
                  that.enable(false);
              } else {
