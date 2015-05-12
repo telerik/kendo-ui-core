@@ -1156,4 +1156,11 @@
 
         dropdownlist.value("");
     });
+
+    test("DropDownList is disabled when placed in disabled fieldset", function() {
+         $(input).wrap('<fieldset disabled="disabled"></fieldset>');
+         input.kendoDropDownList().data("kendoDropDownList");
+         equal(input.attr("disabled"), "disabled");
+    });
+
 })();
