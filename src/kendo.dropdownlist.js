@@ -317,19 +317,16 @@ var __meta__ = {
                 return value === undefined || value === null ? "" : value;
             }
 
-            if (value === null) {
-                value = "";
-            }
-
             if (value) {
                 that._initialIndex = null;
             }
 
-            that.listView.value(value.toString()).done(function() {
+            that.listView.value(value).done(function() {
                 that._triggerCascade();
 
                 if (that.selectedIndex === -1 && that.text()) {
                     that.text("");
+                    that._accessor("", -1);
                 }
 
                 that._old = that._accessor();
@@ -427,9 +424,6 @@ var __meta__ = {
                 }
 
                 that._options(data, optionLabel, value);
-                if (element.selectedIndex === -1) {
-                    element.selectedIndex = 0;
-                }
             }
 
             that._makeUnselectable();

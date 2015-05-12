@@ -10,6 +10,7 @@ var __meta__ = {
     hidden: true
 };
 
+/*jshint evil: true*/
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
@@ -1028,7 +1029,7 @@ var __meta__ = {
             element.html(options);
 
             if (value !== undefined) {
-                element.val(value);
+                element[0].value = value;
             }
         },
 
@@ -1432,6 +1433,7 @@ var __meta__ = {
             }
 
             if (added.length || removed.length) {
+                that._valueComparer = null;
                 that.trigger("change", {
                     added: added,
                     removed: removed
@@ -1450,13 +1452,11 @@ var __meta__ = {
         },
 
         setValue: function(value) {
-            if (value === "" || value === null) {
-                value = [];
-            }
-
             value = $.isArray(value) || value instanceof ObservableArray ? value.slice(0) : [value];
 
             this._values = value;
+
+            this._valueComparer = null;
         },
 
         value: function(value) {
@@ -1497,43 +1497,51 @@ var __meta__ = {
             }
         },
 
+        _valueExpr: function(type, values) {
+            var that = this;
+            var selectedValue;
+            var index = -1;
+            var idx = 0;
+
+            var body = "";
+
+            if (!that._valueComparer  || that._valueType !== type) {
+                that._valueType = type;
+
+                for (; idx < values.length; idx++) {
+                    selectedValue = values[idx];
+
+                    if (selectedValue === undefined || selectedValue === "") {
+                        selectedValue = '""';
+                    } else if (selectedValue !== null) {
+                        if ((type !== "boolean" && type !== "number") || typeof selectedValue === "object") {
+                            selectedValue = '"' + selectedValue + '"';
+                        } else if (type === "number" && isNaN(selectedValue)) {
+                            continue;
+                        }
+                    }
+
+                    if (body) {
+                        body += " else ";
+                    }
+
+                    body += "if (value === " + selectedValue + ") { return " + idx + "; }";
+                }
+
+                body += " return -1;";
+
+                that._valueComparer = new Function("value", body);
+            }
+
+            return that._valueComparer;
+        },
+
         _dataItemPosition: function(dataItem, values) {
             var value = this._valueGetter(dataItem);
-            var index = -1;
 
-            for (var idx = 0; idx < values.length; idx++) {
-                if (value == values[idx]) {
-                    index = idx;
-                    break;
-                }
-            }
+            var valueExpr = this._valueExpr(typeof value, values);
 
-            return index;
-        },
-
-        _updateIndices: function(indices, values) {
-            var data = this._view;
-            var idx = 0;
-            var index;
-
-            if (!values.length) {
-                return [];
-            }
-
-            for (; idx < data.length; idx++) {
-                index = this._dataItemPosition(data[idx].item, values);
-
-                if (index !== -1) {
-                    indices[index] = idx;
-                }
-            }
-
-            return this._normalizeIndices(indices);
-        },
-
-        _valueIndices: function(values) {
-            var indices = [];
-            return this._updateIndices(indices, values);
+            return valueExpr(value);
         },
 
         _getter: function() {
@@ -1736,6 +1744,28 @@ var __meta__ = {
             return newIndices;
         },
 
+        _valueIndices: function(values, indices) {
+            var data = this._view;
+            var idx = 0;
+            var index;
+
+            indices = indices ? indices.slice() : [];
+
+            if (!values.length) {
+                return [];
+            }
+
+            for (; idx < data.length; idx++) {
+                index = this._dataItemPosition(data[idx].item, values);
+
+                if (index !== -1) {
+                    indices[index] = idx;
+                }
+            }
+
+            return this._normalizeIndices(indices);
+        },
+
         _firstVisibleItem: function() {
             var element = this.element[0];
             var content = this.content[0];
@@ -1891,7 +1921,7 @@ var __meta__ = {
                 that.focus(0);
                 if (that._skipUpdate) {
                     that._skipUpdate = false;
-                    that._updateIndices(that._selectedIndices, that._values);
+                    that._selectedIndices = that._valueIndices(that._values, that._selectedIndices);
                 }
             } else if (!action || action === "add") {
                 that.value(that._values);
