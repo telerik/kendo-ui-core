@@ -425,9 +425,7 @@ var __meta__ = {
 
             that._calculateGroupPadding(that._height(length));
 
-            if (popup.visible()) {
-                popup._position();
-            }
+            popup.position();
 
             if (length) {
                 var current = this.listView.focus();

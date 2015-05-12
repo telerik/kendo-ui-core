@@ -286,9 +286,7 @@ var __meta__ = {
                 that._calculateGroupPadding(that._height(length));
             }
 
-            if (that.popup.visible()) {
-                that.popup._position();
-            }
+            that.popup.position();
 
             if (that._isSelect) {
                 var hasChild = that.element[0].children[0];

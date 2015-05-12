@@ -442,7 +442,7 @@ var __meta__ = {
             if (that.options.autoClose) {
                 that.close();
             } else {
-                that.popup._position();
+                that.popup.position();
             }
         },
 
@@ -499,9 +499,7 @@ var __meta__ = {
                 that.toggle(length);
             }
 
-            if (that.popup.visible()) {
-                that.popup._position();
-            }
+            that.popup.position();
 
             if (that.options.highlightFirst && (page === undefined || page === 1)) {
                 that.listView.first();
