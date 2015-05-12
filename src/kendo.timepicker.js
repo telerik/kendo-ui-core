@@ -586,7 +586,7 @@ var __meta__ = {
                         "aria-owns": timeView._timeViewID
                    });
 
-            disabled = element.is("[disabled]");
+            disabled = element.is("[disabled]") || $(that.element).parents("fieldset").is(':disabled');
             if (disabled) {
                 that.enable(false);
             } else {
