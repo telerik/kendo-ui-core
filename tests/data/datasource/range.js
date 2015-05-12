@@ -709,6 +709,10 @@ test("range existing range is requested while remote is fetched - remote request
                 total: "total"
             }
         });
+
+    var counter = 0;
+    stub(dataSource, {_timeStamp: function() { return counter++; } });
+
     dataSource.page(1);
 
     dataSource.range(20, 10);
@@ -748,6 +752,10 @@ test("range existing range is requested while multiple remote requests are fetch
                 total: "total"
             }
         });
+
+    var counter = 0;
+    stub(dataSource, {_timeStamp: function() { return counter++; } });
+
     dataSource.page(1);
 
     dataSource.range(20, 10);
@@ -787,6 +795,10 @@ test("range request made after remote requests are cancelled as existing range i
                 total: "total"
             }
         });
+
+    var counter = 0;
+    stub(dataSource, {_timeStamp: function() { return counter++; } });
+
     dataSource.page(1);
 
     dataSource.range(20, 10);
