@@ -189,6 +189,9 @@ This tutorial will show how to use view models and Kendo UI Grid for ASP.NET MVC
 
 To pass additional parameters to the action use the `Data` method. Provide the name of a JavaScript function which will return a JavaScript object with the additional data:
 
+The custom parameter names must not match reserved words, which are used by the Kendo UI DataSource for
+[sorting](/api/javascript/data/datasource#configuration-serverSorting), [filtering](/api/javascript/data/datasource#configuration-serverFiltering),
+[paging](/api/javascript/data/datasource#configuration-serverPaging) and [grouping](/api/javascript/data/datasource#configuration-serverGrouping).
 
 ### Example - add the additional parameters to the action method:
 
