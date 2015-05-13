@@ -71,7 +71,7 @@
         ok(!window.options.isMaximized);
     });
 
-    test('document scroll position is preserved on maximize and restore', function () {
+    test('document vertical scroll position is preserved on maximize and restore', function () {
         var window = createWindow();
 
         var div = $("<div style='height:2000px' />").appendTo(QUnit.fixture.height(2010)),
@@ -86,7 +86,24 @@
         equal($(QUnit.fixture[0].ownerDocument).scrollTop(), scrollPosition);
     });
 
-    test("destroying a modal window moves overlay before previous window", function() {
+    test('document horizontal scroll position is preserved on maximize and restore', function () {
+        var window = createWindow();
+
+        var div = $("<div style='width:5000px' />").appendTo(QUnit.fixture.width(5020)),
+            scrollPosition = 1300;
+
+        $(QUnit.fixture[0].ownerDocument).scrollLeft(scrollPosition);
+
+        window.center();
+
+        window.maximize();
+
+        window.restore();
+
+        equal($(QUnit.fixture[0].ownerDocument).scrollLeft(), scrollPosition);
+    });
+
+    test("destroying a modal window moves overlay before previous window", function () {
         var dialog = createWindow({
                 modal: true
             }),
