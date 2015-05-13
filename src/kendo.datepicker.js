@@ -58,7 +58,13 @@ var __meta__ = {
 
         calendar.normalize(options);
 
+
         parseFormats = $.isArray(parseFormats) ? parseFormats : [parseFormats];
+
+        if (!parseFormats.length) {
+            parseFormats.push("yyyy-MM-dd");
+        }
+
         if ($.inArray(format, parseFormats) === -1) {
             parseFormats.splice(0, 0, options.format);
         }
