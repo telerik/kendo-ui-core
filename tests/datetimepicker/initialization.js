@@ -326,4 +326,13 @@ test("DateTimePicker is disabled when placed in disabled fieldset", function() {
     equal(input.attr("disabled"), "disabled");
 });
 
+test("DateTimePicker parseFormats contains default ISO formats if no parseFromats are configured", function() {
+    var datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker");
+    var dateFormat = $.inArray('yyyy-MM-dd', datetimepicker.options.parseFormats) > -1
+    var timeFormat = $.inArray('yyyy-MM-ddTHH:mm:ss', datetimepicker.options.parseFormats) > -1
+
+    equal(dateFormat, true);
+    equal(timeFormat, true);
+});
+
 })();
