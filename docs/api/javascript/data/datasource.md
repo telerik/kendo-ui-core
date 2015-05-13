@@ -1484,7 +1484,8 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 
 ### transport.create.data `Object|Function`
 
-Additional parameters which are sent to the remote service.
+Additional parameters which are sent to the remote service. The parameter names must not match reserved words, which are used by the Kendo UI DataSource for
+[sorting](#configuration-serverSorting), [filtering](#configuration-serverFiltering), [paging](#configuration-serverPaging) and [grouping](#configuration-serverGrouping).
 
 Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
 
@@ -1747,7 +1748,8 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 
 ### transport.destroy.data `Object|Function`
 
-Additional parameters which are sent to the remote service.
+Additional parameters which are sent to the remote service. The parameter names must not match reserved words, which are used by the Kendo UI DataSource for
+[sorting](#configuration-serverSorting), [filtering](#configuration-serverFiltering), [paging](#configuration-serverPaging) and [grouping](#configuration-serverGrouping).
 
 Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
 
@@ -2185,7 +2187,8 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 
 ### transport.read.data `Object|Function`
 
-Additional parameters which are sent to the remote service.
+Additional parameters which are sent to the remote service. The parameter names must not match reserved words, which are used by the Kendo UI DataSource for
+[sorting](#configuration-serverSorting), [filtering](#configuration-serverFiltering), [paging](#configuration-serverPaging) and [grouping](#configuration-serverGrouping).
 
 Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
 
@@ -2514,7 +2517,8 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 
 ### transport.update.data `Object|Function`
 
-Additional parameters which are sent to the remote service.
+Additional parameters which are sent to the remote service. The parameter names must not match reserved words, which are used by the Kendo UI DataSource for
+[sorting](#configuration-serverSorting), [filtering](#configuration-serverFiltering), [paging](#configuration-serverPaging) and [grouping](#configuration-serverGrouping).
 
 Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
 
