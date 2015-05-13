@@ -28,6 +28,9 @@ module("mvvm binding", {
         kendo.ui.plugin(ParentWidget);
 
         QUnit.fixture.append(
+            '<script id="select-element-template" type="text/x-kendo-template">' +
+            '<select data-value-field="Value" data-text-field="Text" data-bind="source: values, value: currentValue"></select>' +
+            '</script>' +
             '<script id="mobile-widget-template" type="text/x-kendo-template">' +
             '<span data-role="testwidget" />' +
             '</script>' +
@@ -1420,6 +1423,26 @@ test("nested template without source with event binding",1, function() {
     dom.find("li").click();
 });
 
+test("select with source and value binding in template with source binding", function() {
+    dom = $('<div data-template="select-element-template" data-bind="source:items"/>');
+    var vm = kendo.observable({
+        items: [
+          {
+            values: [{Text: "ItemA", Value: "AAA"}, {Text: "ItemB", Value: "BBB"}],
+            currentValue: "AAA"
+          },
+          {
+            values: [{Text: "ItemA", Value: "AAA"}, {Text: "ItemB", Value: "BBB"}],
+            currentValue: "BBB"
+          }
+        ]
+    });
+
+    kendo.bind(dom, vm);
+
+    equal(dom.find("select:first").val(), "AAA");
+    equal(dom.find("select:last").val(), "BBB");
+});
 test("text binding displays undefined fields as empty string", function() {
     dom = $('<span data-bind="text:foo"></span>');
     kendo.bind(dom, {});
