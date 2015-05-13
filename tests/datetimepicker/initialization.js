@@ -331,8 +331,8 @@ test("DateTimePicker parseFormats contains default ISO formats if no parseFromat
     var dateFormat = $.inArray('yyyy-MM-dd', datetimepicker.options.parseFormats) > -1
     var timeFormat = $.inArray('yyyy-MM-ddTHH:mm:ss', datetimepicker.options.parseFormats) > -1
 
-    equal(dateFormat, true);
-    equal(timeFormat, true);
+    ok(dateFormat);
+    ok(timeFormat);
 });
 
 })();
