@@ -336,4 +336,10 @@ test("DatePicker sets max from max attribute", function() {
     deepEqual(datepicker.max(), date);
 });
 
+test("DatePicker parseFormats contains default ISO format if no parseFromats are configured", function() {
+    var datepicker = input.kendoDatePicker().data("kendoDatePicker");
+    var ISOFormat = $.inArray('yyyy-MM-dd', datepicker.options.parseFormats) > -1
+    equal(ISOFormat, true)
+});
+
 })();
