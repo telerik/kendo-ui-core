@@ -4,7 +4,7 @@ page_title: Use Kendo UI With The Open Access ORM Tool
 position: 240
 ---
 
-In this article you will learn how [OpenAccess ORM](http://www.telerik com/products/orm.aspx) can be leveraged on the backend, and [Kendo UI](http://www.telerik.com/kendo-ui) can take care of the UI.
+In this article you will learn how [OpenAccess ORM](http://www.telerik./com/products/orm.aspx) can be leveraged on the backend, and [Kendo UI](http://www.telerik.com/kendo-ui) can take care of the UI.
 
 ## Set up the project
 
@@ -69,7 +69,7 @@ Now all that is left to do is configure the front end.  For now we will wire up 
 
 First thing we need to do is edit the *Global.asax.cs* file and add the following route configuration in RegisterRoutes method:
 
-    routes.IgnoreRoute("EntitiesModelService.svc/{*pathInfo}"); //here you need to specify the correct service path
+    RouteTable.Routes.IgnoreRoute("EntitiesModelService.svc/{*pathInfo}"); //here you need to specify the correct service path
 
 Next, we need to set up the grid.  Kendo UI's web site provides many [great examples](http://demos.telerik.com/kendo-ui/web/grid/index.html) of how to configure binding; so I won't go into too much detail here.  The basic idea is that we need a div that will be used as the container for the Kendo UI grid, and then we just have to configure the grid in script.
 
