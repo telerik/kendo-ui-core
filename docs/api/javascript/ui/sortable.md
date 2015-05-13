@@ -86,7 +86,7 @@ Selector that determines the container to which boundaries the hint movement wil
         }
     </style>
 
-### connectWith `String | jQuery`*(default: null)*
+### connectWith `String`*(default: null)*
 
 Selector which determines if items from the current Sortable widget can be accepted from another Sortable container(s). The `connectWith` option describes **one way** relationship, if the developer wants a two way connection then the connectWith option should be set on both widgets.
 
@@ -108,7 +108,7 @@ Selector which determines if items from the current Sortable widget can be accep
 
     <script>
         $("#listA").kendoSortable({
-            connectWith: $("#listB")
+            connectWith: "#listB"
         });
 
         $("#listB").kendoSortable();
@@ -135,11 +135,11 @@ Selector which determines if items from the current Sortable widget can be accep
 
     <script>
         $("#listA").kendoSortable({
-            connectWith: $("#listB")
+            connectWith: "#listB"
         });
 
         $("#listB").kendoSortable({
-            connectWith: $("#listA")
+            connectWith: "#listA"
         });
     </script>
 
