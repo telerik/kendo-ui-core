@@ -958,9 +958,17 @@ var __meta__ = {
                     if (lastRequestedRange !== rangeStart) {
                         lastRequestedRange = rangeStart;
                         lastRangeStart = rangeStart;
-                        this._fetching = true;
-                        this.deferredRange(rangeStart).then(function() {
+                        that._fetching = true;
+
+                        if (that._getterDeferred) {
+                            that._getterDeferred.reject();
+                        }
+
+                        that._getterDeferred = that.deferredRange(rangeStart);
+                        that._getterDeferred.then(function() {
                             var firstItemIndex = that._indexConstraint(that.content[0].scrollTop);
+
+                            that._getterDeferred = null;
 
                             if (rangeStart <= firstItemIndex && firstItemIndex <= (rangeStart + pageSize)) {
                                 that._fetching = true;

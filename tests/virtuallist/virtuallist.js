@@ -742,6 +742,61 @@
         });
     });
 
+    function deferredScroll(list, scrollTop, timeout) {
+        setTimeout(function() {
+            list.content[0].scrollTop = scrollTop;
+        }, timeout);
+    }
+
+    asyncTest("renders only the last retrieved range", 1, function() {
+        var asyncDataSource = createAsyncDataSource({
+            transport: {
+                read: function(options) {
+                    setTimeout(function() {
+                        options.success({ data: generateData(options.data), total: 830 });
+                    }, 100);
+                }
+            },
+            schema: {
+                data: "data",
+                total: "total"
+            },
+            pageSize: 80,
+            serverPaging: true,
+            serverFiltering: true
+        });
+
+        var virtualList = new VirtualList(container, {
+            autoBind: false,
+            dataSource: asyncDataSource,
+            height: 520,
+            itemHeight: 26,
+            valueMapper: function(options) {
+                setTimeout(function() {
+                    options.success(options.value);
+                }, 0);
+            },
+            template: '#:text#',
+            selectable: true
+        });
+
+        asyncDataSource.read().then(function() {
+            setTimeout(function() {
+                start();
+
+                var item100 = virtualList.items().filter(function() {
+                    return $(this).data("offsetIndex") == 100;
+                });
+
+                equal(item100.text(), " Item 100");
+            }, 600);
+
+            deferredScroll(virtualList, 1481, 60);
+            deferredScroll(virtualList, 1885, 70);
+            deferredScroll(virtualList, 2335, 90);
+        });
+    });
+
     //utilities
 
     asyncTest("calculates the item count", 1, function() {
