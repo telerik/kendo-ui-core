@@ -453,6 +453,7 @@ var __meta__ = {
                     } else if (that._textAccessor() !== that._optionLabelText()) {
                         that.listView.value("");
                         that._selectValue(null);
+                        that._oldIndex = that.selectedIndex;
                     }
                 }
             }

@@ -1157,6 +1157,21 @@
         dropdownlist.value("");
     });
 
+    test("DropDownList does not trigger cascade event on click when source is empty", 0, function() {
+        dropdownlist = input.kendoDropDownList({
+          optionLabel: "--Select Value--",
+          dataTextField: "Name",
+          dataValueField: "Name",
+          dataSource: []
+        }).data("kendoDropDownList");
+
+        dropdownlist.one("cascade", function() {
+            ok(false);
+        });
+
+        dropdownlist.wrapper.click();
+    });
+
     test("DropDownList is disabled when placed in disabled fieldset", function() {
          $(input).wrap('<fieldset disabled="disabled"></fieldset>');
          input.kendoDropDownList().data("kendoDropDownList");
