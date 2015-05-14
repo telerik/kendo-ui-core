@@ -530,6 +530,8 @@ var __meta__ = {
 
             normalize(options);
 
+            that._initialOptions = extend({}, options);
+
             that._wrapper();
 
             that.timeView = timeView = new TimeView(extend({}, options, {
@@ -883,6 +885,8 @@ var __meta__ = {
             if (form[0]) {
                 that._resetHandler = function() {
                     that.value(element[0].defaultValue);
+                    that.max(that._initialOptions.max);
+                    that.min(that._initialOptions.min);
                 };
 
                 that._form = form.on("reset", that._resetHandler);

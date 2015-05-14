@@ -336,4 +336,21 @@
         input.kendoTimePicker().data("kendoTimePicker");
         equal(input.attr("disabled"), "disabled");
     });
+
+    test("DateTimePicker max and min values are reset to initial when form is reset", function() {
+        $(input).wrap("<form id='form'></form>");
+        var timepicker = input.kendoTimePicker({
+            min: new Date(2000, 0, 1, 22, 0, 0),
+            max: new Date(2000, 0, 2, 22, 0, 0)
+        }).data("kendoTimePicker")
+
+        timepicker.setOptions({
+            max: new Date(2000, 0, 1, 23, 0, 0)
+        });
+
+        $("form")[0].reset();
+        deepEqual(timepicker.options.max, new Date(2000, 0, 2, 22, 0, 0));
+    });
+
+
 })();
