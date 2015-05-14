@@ -599,7 +599,9 @@ var __meta__ = {
             open = open !== undefined? open : !that.popup.visible();
 
             if (!preventFocus && !touchEnabled && that._focused[0] !== activeElement()) {
+                that._prevent = true;
                 that._focused.focus();
+                that._prevent = false;
             }
 
             that[open ? OPEN : CLOSE]();
