@@ -504,6 +504,7 @@
         });
 
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            delay: 0,
             dataSource: asyncDataSource,
             listScreens: 4,
             itemHeight: 20
@@ -544,6 +545,7 @@
         });
 
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            delay: 0,
             dataSource: asyncDataSource,
             listScreens: 4,
             itemHeight: 20
@@ -584,6 +586,7 @@
         });
 
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            delay: 0,
             dataSource: asyncDataSource,
             listScreens: 4,
             itemHeight: 20
@@ -624,6 +627,7 @@
         });
 
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            delay: 0,
             dataSource: asyncDataSource,
             listScreens: 4,
             itemHeight: 20
@@ -664,6 +668,7 @@
         });
 
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            delay: 0,
             dataSource: asyncDataSource,
             listScreens: 4,
             itemHeight: 20
@@ -710,6 +715,7 @@
         });
 
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            delay: 0,
             dataSource: asyncDataSource,
             listScreens: 4,
             itemHeight: 20
@@ -767,6 +773,7 @@
         });
 
         var virtualList = new VirtualList(container, {
+            delay: 0,
             autoBind: false,
             dataSource: asyncDataSource,
             height: 520,
@@ -788,7 +795,7 @@
                     return $(this).data("offsetIndex") == 100;
                 });
 
-                equal(item100.text(), " Item 100");
+                equal(item100.text().trim(), "Item 100");
             }, 600);
 
             deferredScroll(virtualList, 1481, 60);
