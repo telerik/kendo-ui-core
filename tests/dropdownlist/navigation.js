@@ -233,6 +233,23 @@
         dropdownlist.wrapper.focus().press(keys.ENTER);
     });
 
+    test("press enter should keep popup opened if filter is typed and source is not loaded yet", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            animation: false,
+            dataSource: data,
+            delay: 500,
+            filter: "startswith"
+        });
+
+        dropdownlist.open();
+        dropdownlist.filterInput.focus().val("test");
+        dropdownlist.filterInput.trigger("keydown");
+
+        dropdownlist.filterInput.press(keys.ENTER);
+
+        ok(dropdownlist.popup.visible());
+    });
+
     test("press enter should select current item", 3, function() {
         var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
 

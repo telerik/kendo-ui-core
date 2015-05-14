@@ -581,6 +581,8 @@ var __meta__ = {
             var isInputActive;
             var handled;
 
+            var isPopupVisible = that.popup.visible();
+
             if (that.filterInput) {
                 isInputActive = that.filterInput[0] === activeElement();
             }
@@ -603,13 +605,18 @@ var __meta__ = {
                 that._focusElement(that.wrapper);
             }
 
+            if (key === keys.ENTER && that._typing && that.filterInput && isPopupVisible) {
+                e.preventDefault();
+                return;
+            }
+
             handled = that._move(e);
 
             if (handled) {
                 return;
             }
 
-            if (!that.popup.visible() || !that.filterInput) {
+            if (!isPopupVisible || !that.filterInput) {
                 if (key === keys.HOME) {
                     handled = true;
                     that._firstItem();
