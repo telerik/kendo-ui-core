@@ -629,8 +629,6 @@
         });
     });
 
-    //setOptions
-
     asyncTest("setOptions changes the template", 2, function() {
         var virtualList = new VirtualList(container, virtualSettings);
 
@@ -823,6 +821,25 @@
         });
     });
 
+    asyncTest("value method clears previous values if value mapper returns an empty array", 1, function() {
+        var count = 1;
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: "multiple",
+            valueMapper: function(operation) {
+                setTimeout(function() {
+                    operation.success([]); //explicitly return empty array
+                }, 0);
+            },
+            value: [1000, 2000, 3000],
+            listBound: function() {
+                start();
+                equal(virtualList.value().length, 0);
+            }
+        }));
+
+        asyncDataSource.read();
+    });
+
     asyncTest("valueDeffered is resolved immediately if empty array is passed", 2, function() {
         var count = 1;
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
@@ -837,6 +854,25 @@
                 equal(virtualList.value().length, 0);
             })
         });
+    });
+
+    asyncTest("valueDeffered is resolved immediately if value mapper returns an empty array", 1, function() {
+        var count = 1;
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            valueMapper: function(operation) {
+                setTimeout(function() {
+                    operation.success([]);
+                }, 0);
+            },
+            selectable: true
+        }));
+
+        virtualList.value([""]).done(function() {
+            start();
+            ok(true);
+        });
+
+        asyncDataSource.read();
     });
 
     asyncTest("valueDeffered object is not resolved immediately after clearing the values (multiple selection)", 3, function() {
