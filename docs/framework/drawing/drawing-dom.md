@@ -280,6 +280,8 @@ do with CSS or display resolution.
 
 ### Known limitations
 
+- no support for RTL text
+
 - no rendering of shadow DOM
 
 - no CSS box-shadow, text-shadow, gradients
