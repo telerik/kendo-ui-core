@@ -240,9 +240,25 @@
         equal(numerictextbox.wrapper.find(".k-formatted-value").attr("title"), title);
     });
 
-     test("NumericTextBox is disabled when placed in disabled fieldset", function() {
+    test("NumericTextBox is disabled when placed in disabled fieldset", function() {
         $(input).wrap('<fieldset disabled="disabled"></fieldset>');
         input.kendoNumericTextBox().data("kendoNumericTextBox");
         equal(input.attr("disabled"), "disabled");
     });
+
+    asyncTest("Numerictextbox max and min values are reset to initial when form is reset", 1, function() {
+        $(input).wrap("<form id='form'></form>");
+        var numeric = input.kendoNumericTextBox({
+            min: 0,
+            max: 4
+        }).data("kendoNumericTextBox")
+
+        numeric.max(2);
+        $("form")[0].reset();
+        setTimeout(function() {
+            equal(numeric.options.max, 4)
+            start();
+        },200)
+    });
+
 })();

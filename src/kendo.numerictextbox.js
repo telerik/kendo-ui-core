@@ -42,7 +42,8 @@ var __meta__ = {
         ARIA_READONLY = "aria-readonly",
         INTEGER_REGEXP = /^(-)?(\d*)$/,
         NULL = null,
-        proxy = $.proxy;
+        proxy = $.proxy,
+        extend = $.extend;
 
     var NumericTextBox = Widget.extend({
          init: function(element, options) {
@@ -58,6 +59,8 @@ var __meta__ = {
                            .attr("role", "spinbutton");
 
              options.placeholder = options.placeholder || element.attr("placeholder");
+
+             that._initialOptions = extend({}, options);
 
              that._reset();
              that._wrapper();
@@ -98,7 +101,7 @@ var __meta__ = {
              that.value(value !== NULL ? value : element.val());
 
              disabled = element.is("[disabled]") || $(that.element).parents("fieldset").is(':disabled');
-			 
+
              if (disabled) {
                  that.enable(false);
              } else {
@@ -652,6 +655,8 @@ var __meta__ = {
                 that._resetHandler = function() {
                     setTimeout(function() {
                         that.value(element[0].value);
+                        that.max(that._initialOptions.max);
+                        that.min(that._initialOptions.min);
                     });
                 };
 

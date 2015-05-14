@@ -335,4 +335,19 @@ test("DateTimePicker parseFormats contains default ISO formats if no parseFromat
     ok(timeFormat);
 });
 
+test("DateTimePicker max and min values are reset to initial when form is reset", function() {
+    $(input).wrap("<form id='form'></form>");
+    var datetimepicker = input.kendoDateTimePicker({
+        min: new Date(2000, 0, 1, 22, 0, 0),
+        max: new Date(2000, 0, 2, 22, 0, 0)
+    }).data("kendoDateTimePicker")
+
+    datetimepicker.setOptions({
+        max: new Date(2000, 0, 1, 23, 0, 0)
+    });
+
+    $("form")[0].reset();
+    deepEqual(datetimepicker.options.max, new Date(2000, 0, 2, 22, 0, 0));
+});
+
 })();
