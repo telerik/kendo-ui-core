@@ -244,9 +244,9 @@ var __meta__ = {
 
             that.setDataSource(options.dataSource);
 
-            that.content.on("scroll" + VIRTUAL_LIST_NS, function() {
+            that.content.on("scroll" + VIRTUAL_LIST_NS, kendo.throttle(function() {
                 that._renderItems();
-            });
+            }, options.delay));
 
             that._selectable();
         },
@@ -254,6 +254,7 @@ var __meta__ = {
         options: {
             name: "VirtualList",
             autoBind: true,
+            delay: 100,
             height: null,
             listScreens: 4,
             threshold: 0.5,
