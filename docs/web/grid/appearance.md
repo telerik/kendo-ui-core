@@ -192,7 +192,8 @@ If needed, a fixed table layout can be applied to a non-scrollable Grid:
         table-layout: fixed;
     }
 
-When creating the Grid from an HTML `table`, column widths can be set via the `col` elements.
+Column widths must be set only via the `width` property of the Grid columns. Using table cell width styles is incorrect.
+When creating the Grid from an HTML `table`, column widths can be set via width styles of the table `col` elements.
 
 > [Scrolling makes the Grid render separate tables for the header and data area](#scrolling) and naturally, these tables should have synchronized column widths.
 This can be ensured only when the `table-layout` is `fixed`. As a result, it is not possible to have a scrollable Grid with automatic table layout
