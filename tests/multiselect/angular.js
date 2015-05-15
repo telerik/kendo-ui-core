@@ -132,4 +132,26 @@
 
         equal(multiSelect.dataSource.view().length, 2);
     });
+
+    ngTest("multiselect compiles tag templates", 2, function() {
+        angular.module("kendo.tests").controller("mine", function($scope) {
+            $scope.selectedColors = [ "red", "green" ];
+
+            $scope.selectOptions = {
+                dataSource: [ "red", "green", "blue" ],
+                tagTemplate: "#:data# - {{text}}",
+                valuePrimitive: true
+            };
+
+            $scope.text = "My text";
+        });
+
+        QUnit.fixture.html('<div ng-controller=mine><select kendo-multiselect k-ng-model=selectedColors k-options=selectOptions></select></div>');
+    },
+
+    function() {
+        var tags = QUnit.fixture.find("select").getKendoMultiSelect().tagList.children();
+        equal(tags.eq(0).children("span:first").text(), "red - My text");
+        equal(tags.eq(1).children("span:first").text(), "green - My text");
+    });
 })();
