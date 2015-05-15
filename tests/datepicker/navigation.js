@@ -623,6 +623,28 @@ test("Esc should close dateView", function() {
     equal(dateview.popup.calls("close"), 1);
 });
 
+test("DateView prevents default action when ESC is pressed and popup is opened", 1, function() {
+    var event = {
+        keyCode: keys.ESC,
+        preventDefault: function() {
+            ok(true);
+        }
+    };
+
+    dateview = new DateView({
+        anchor: anchor,
+        value: new Date(2000, 10, 10),
+        min: new Date(1900, 10, 10),
+        max: new Date(2100, 10, 10),
+        start: "month",
+        depth: "month"
+    });
+
+    dateview.open();
+
+    dateview.move(event);
+});
+
 test("type invalide date does not clear input", function() {
     datepicker = input.kendoDatePicker({value: new Date()}).data("kendoDatePicker");
 

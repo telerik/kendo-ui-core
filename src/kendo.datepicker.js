@@ -188,11 +188,6 @@ var __meta__ = {
                 calendar = that.calendar,
                 selectIsClicked = e.ctrlKey && key == keys.DOWN || key == keys.ENTER;
 
-            if (key == keys.ESC) {
-                that.close();
-                return;
-            }
-
             if (e.altKey) {
                 if (key == keys.DOWN) {
                     that.open();
@@ -201,20 +196,17 @@ var __meta__ = {
                     that.close();
                     e.preventDefault();
                 }
-                return;
-            }
 
-            if (!that.popup.visible()){
-                return;
-            }
+            } else if (that.popup.visible()) {
 
-            if (selectIsClicked && calendar._cell.hasClass(SELECTED)) {
-                that.close();
-                e.preventDefault();
-                return;
-            }
+                if (key == keys.ESC || (selectIsClicked && calendar._cell.hasClass(SELECTED))) {
+                    that.close();
+                    e.preventDefault();
+                    return;
+                }
 
-            that._current = calendar._move(e);
+                that._current = calendar._move(e);
+            }
         },
 
         current: function(date) {
