@@ -272,4 +272,18 @@ test("widget does not suggest when input is empty", 1, function() {
     equal(combobox.text(), "");
 });
 
+test("suggest int values on search", function() {
+    combobox = new ComboBox(input, {
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: [{text: 1, value: "1"}],
+        suggest: true
+    });
+
+    combobox.input.type("1");
+    combobox.search("1");
+
+    equal(combobox.input.val(), "1");
+});
+
 })();
