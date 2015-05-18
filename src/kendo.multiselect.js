@@ -1124,13 +1124,13 @@ var __meta__ = {
                     return '<li class="k-button" unselectable="on"><span unselectable="on">' + tagTemplate(data) + '</span><span unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-close">delete</span></span></li>';
                 };
             } else {
-                //tagTemplate = kendo.template("#:values.length# / #:total#");
-                tagTemplate = kendo.template("#:values.length# selected...");
+                tagTemplate = kendo.template("#:values.length# / #:total#");
+                //tagTemplate = kendo.template("#:values.length# selected...");
 
                 that.tagTextTemplate = tagTemplate;
 
                 that.tagTemplate = function(data) {
-                    return '<li class="k-button" unselectable="on"><span unselectable="on">' + tagTemplate(data) + '</span></li>';
+                    return '<li class="k-button" unselectable="on"><span unselectable="on">' + tagTemplate(data) + '</span><span unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-arrow-s">open</span></span></li>';
                 };
             }
         },
