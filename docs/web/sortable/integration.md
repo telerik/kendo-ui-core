@@ -25,7 +25,7 @@ The Sortable widget should be initialized on the Grid's [`table element`](../../
 In the general case, the `filter` property of the Sortable widget should select all `tr` elements that are direct children of the table's `tbody` element. For example: `filter: ">tbody >tr"`.
 
 **If the Grid's editing is enabled**, you should use a more specific filter selector that excludes the item that is currently in edit mode.
-For example `.filter(">tbody >tr:not(.k-grid-edit-rowa)")`. In this way the Sortable functionality will not interfere with Grid's editing feature.
+For example `.filter(">tbody >tr:not(.k-grid-edit-row)")`. In this way the Sortable functionality will not interfere with Grid's editing feature.
 
 **If the Grid is configured to display details**, you should use a selector that matches only the master Grid rows. For example: `filter: ">tbody >tr.k-master-row"`.
 In this way the detail rows will not be draggable.
