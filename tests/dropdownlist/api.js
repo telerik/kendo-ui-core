@@ -961,6 +961,22 @@
         equal(dropdownlist.listView.options.template, "#:data.anotherName#");
     });
 
+    test("setDataSource triggers cascade event of the parent widget", 1, function() {
+        var parent = $("<input id='parent' />").appendTo(QUnit.fixture).kendoDropDownList().data("kendoDropDownList");
+
+        dropdownlist = new DropDownList(input, {
+            cascadeFrom: "parent"
+        });
+
+        parent.bind("cascade", function() {
+            ok(true);
+        });
+
+        dropdownlist.setDataSource({
+            data: ["item1", "item2"]
+        });
+    });
+
     test("Open popup when option label is defined", 1, function() {
         var dropdownlist = new DropDownList(input, {
             dataSource: [],
