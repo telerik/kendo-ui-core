@@ -1575,11 +1575,21 @@ The text similar to "Assign" displayed in Gantt task editor.
          start: new Date("2014/6/17 9:00"),
          end: new Date("2014/6/17 11:00")
       }],
+	  resources: {
+        dataColorField: "key",
+        dataSource: [
+          { id: 0, name: "Resource 1", key: "green" },
+          { id: 1, name: "Resource 2", key: "#32cd32" }
+        ]
+      },
+      assignments: {
+        dataSource: [
+          { taskId: 0, resourceId: 1, value: 1 }
+        ]
+      },
       messages: {
-        views: {
-          editor: {
-            assignButton:"Assign Resources"
-          }
+        editor: {
+          assignButton:"Assign Resources"
         }
       }
     });
@@ -1603,10 +1613,8 @@ The text similar to "Task" displayed in Gantt task editor.
          end: new Date("2014/6/17 11:00")
       }],
       messages: {
-        views: {
-          editor: {
-            editorTitle:"Edit Task"
-          }
+        editor: {
+          editorTitle:"Edit Task"
         }
       }
     });
@@ -1630,10 +1638,8 @@ The text similar to "End" displayed in Gantt task editor.
          end: new Date("2014/6/17 11:00")
       }],
       messages: {
-        views: {
-          editor: {
-            end:"Task End"
-          }
+        editor: {
+          end:"Task End"
         }
       }
     });
@@ -1657,10 +1663,8 @@ The text similar to "Complete" displayed in Gantt task editor.
          end: new Date("2014/6/17 11:00")
       }],
       messages: {
-        views: {
-          editor: {
-            percentComplete:"Task Progress"
-          }
+        editor: {
+          percentComplete:"Task Progress"
         }
       }
     });
@@ -1683,11 +1687,21 @@ The text similar to "Resources" displayed in Gantt task editor.
          start: new Date("2014/6/17 9:00"),
          end: new Date("2014/6/17 11:00")
       }],
+      resources: {
+        dataColorField: "key",
+        dataSource: [
+          { id: 0, name: "Resource 1", key: "green" },
+          { id: 1, name: "Resource 2", key: "#32cd32" }
+        ]
+      },
+      assignments: {
+        dataSource: [
+          { taskId: 0, resourceId: 1, value: 1 }
+        ]
+      },
       messages: {
-        views: {
-          editor: {
-            resources:"Task Resources"
-          }
+        editor: {
+          resources:"Task Resources"
         }
       }
     });
@@ -1710,11 +1724,21 @@ The text similar to "Resources" displayed in Gantt task editor.
          start: new Date("2014/6/17 9:00"),
          end: new Date("2014/6/17 11:00")
       }],
+	  resources: {
+        dataColorField: "key",
+        dataSource: [
+          { id: 0, name: "Resource 1", key: "green" },
+          { id: 1, name: "Resource 2", key: "#32cd32" }
+        ]
+      },
+      assignments: {
+        dataSource: [
+          { taskId: 0, resourceId: 1, value: 1 }
+        ]
+      },
       messages: {
-        views: {
-          editor: {
-            resourcesEditorTitle:"Assign Task Resources"
-          }
+        editor: {
+          resourcesEditorTitle:"Assign Task Resources"
         }
       }
     });
@@ -1737,11 +1761,21 @@ The text similar to "Resources" displayed in Gantt task editor.
          start: new Date("2014/6/17 9:00"),
          end: new Date("2014/6/17 11:00")
       }],
+	  resources: {
+        dataColorField: "key",
+        dataSource: [
+          { id: 0, name: "Resource 1", key: "green" },
+          { id: 1, name: "Resource 2", key: "#32cd32" }
+        ]
+      },
+      assignments: {
+        dataSource: [
+          { taskId: 0, resourceId: 1, value: 1 }
+        ]
+      },
       messages: {
-        views: {
-          editor: {
-            resourcesHeader:"Available Resources"
-          }
+        editor: {
+          resourcesHeader:"Available Resources"
         }
       }
     });
@@ -1765,10 +1799,8 @@ The text similar to "Start" displayed in Gantt task editor.
          end: new Date("2014/6/17 11:00")
       }],
       messages: {
-        views: {
-          editor: {
-            start:"Task Start"
-          }
+        editor: {
+          start:"Task Start"
         }
       }
     });
@@ -1792,10 +1824,8 @@ The text similar to "Title" displayed in Gantt task editor.
          end: new Date("2014/6/17 11:00")
       }],
       messages: {
-        views: {
-          editor: {
-            title:"Task Title"
-          }
+        editor: {
+          title:"Task Title"
         }
       }
     });
@@ -1818,11 +1848,21 @@ The text similar to "Units" displayed in Gantt task editor.
          start: new Date("2014/6/17 9:00"),
          end: new Date("2014/6/17 11:00")
       }],
+	  resources: {
+        dataColorField: "key",
+        dataSource: [
+          { id: 0, name: "Resource 1", key: "green" },
+          { id: 1, name: "Resource 2", key: "#32cd32" }
+        ]
+      },
+      assignments: {
+        dataSource: [
+          { taskId: 0, resourceId: 1, value: 1 }
+        ]
+      },
       messages: {
-        views: {
-          editor: {
-            unitsHeader:"Resource Units"
-          }
+        editor: {
+          unitsHeader:"Resource Units"
         }
       }
     });
