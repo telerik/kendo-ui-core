@@ -1158,10 +1158,11 @@ var __meta__ = {
             refresh: function() {
                 if (!this._initChange) {
                     var widget = this.widget;
-                    var textField = this.options.dataTextField;
-                    var valueField = this.options.dataValueField || textField;
+                    var options = widget.options;
+                    var textField = options.dataTextField;
+                    var valueField = options.dataValueField || textField;
                     var value = this.bindings.value.get();
-                    var text = this.options.text || "";
+                    var text = options.text || "";
                     var idx = 0, length;
                     var values = [];
 
@@ -1181,7 +1182,7 @@ var __meta__ = {
                         }
                     }
 
-                    if (widget.options.autoBind === false && widget.listView && !widget.listView.isBound()) {
+                    if (options.autoBind === false && !options.cascadeFrom && widget.listView && !widget.listView.isBound()) {
                         if (textField === valueField && !text) {
                             text = value;
                         }
