@@ -110,16 +110,20 @@ You can use the `.k-grid` class instead of the Grid ID to target all widget inst
 
 This section is applicable to **scrollable** Grids only.
 
-In order to configure the Grid to be 100% high and resize together with its parent element on browser window resize, the first and most important thing to do is
-make the Grid wrapper `div` 100% high. According to web standards, **elements with a percentage height require their parent to have an explicit height**.
-This requirement applies recursively until an element with a pixel height is reached, or until the `html` element is reached.
-100% high elements cannot have margins, paddings, borders or sibling elements, so the default border of the Grid should be removed as well.
+In order to configure the Grid to be 100% high and resize together with its parent element, the first and most important thing to do is
+make the Grid [wrapper `<div>`](/framework/widgets/wrapper-element) 100% high. According to web standards,
+**elements with a percentage height require their parent to have an explicit height**. This requirement applies recursively
+until an element with a pixel height is reached, or until the `html` element is reached. 100% high elements cannot have margins, paddings, borders or sibling elements,
+so the default border of the Grid should be removed as well.
 
-The second step is to subscribe to the browser window's `resize` event and execute the Grid's [`resize`](/using-kendo-in-responsive-web-pages) method.
-It will take care of measuring the height of the Grid and adjusting the height of the scrollable data area.
+The second step is to ensure that the inner Grid layout adapts to changes in the height of the widget's wrapper `<div>`.
+If those changes are triggered by browser window resizing, then subscribe to the browser window's `resize` event and execute the Grid's
+[`resize`](/using-kendo-in-responsive-web-pages) method. The `resize` method will take care of measuring the height of the Grid `div` and
+adjusting the height of the scrollable data area. The `resize` method doesn't have to be called if the Grid is placed inside a Kendo UI Splitter,
+because the Splitter will execute it automatically. The method is also not needed if locked (frozen) columns are used.
 
-The `resize` method doesn't have to be called if the Grid is placed inside a Kendo UI Splitter, because the Splitter will execute it automatically.
-It is also not needed if locked (frozen) columns are used.
+If the available vertical space for the Grid depends on some custom layout resizing controlled by the user, then use a suitable event or method, which is related to the layout changes,
+to execute the Grid's `resize` method. In this case, call the `resize` method even if using locked (frozen) columns.
 
 The `resize` method will work for Kendo UI versions **Q3 2013 or later**. For older versions, the following Javascript code must be used instead or `resize`, which practically does the same:
 
