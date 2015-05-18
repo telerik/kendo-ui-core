@@ -78,7 +78,7 @@ Most Kendo UI Widgets work and auto-resize when used in responsive web pages out
 ## Individual widget resizing
 
 Each Kendo UI widget has a `resize()` method, which can be used to trigger a layout readjustment, instead of using `kendo.resize`.
-The widget `resize` method accepts a single boolean parameter, which defines whether the widget should execute its layout adjustment algorithm
+The widget's `resize` method accepts a single boolean parameter, which defines whether the widget should execute its layout adjustment algorithm
 even if the widget's dimensions have not changed ("force" mode).
 
 #### Example: using widget `resize()`
@@ -93,6 +93,9 @@ even if the widget's dimensions have not changed ("force" mode).
     gridWidget.resize(true);
 
 The code above uses a `wrapper` field, which is documented in the [Widget wrapper and widget element](/framework/widgets/wrapper-element) page.
+
+If the widget wrapper has a `height:100%` style and resizes automatically with its parent,
+then setting an explicit pixel height for the `wrapper` is not required before executing the `resize` method.
 
 ## Kendo UI and media queries
 
