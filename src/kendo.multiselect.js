@@ -144,6 +144,7 @@ var __meta__ = {
 
         options: {
             name: "MultiSelect",
+            renderMode: "multiline",
             enabled: true,
             autoBind: true,
             autoClose: true,
@@ -704,6 +705,10 @@ var __meta__ = {
             var isRtl = kendo.support.isRtl(that.wrapper);
             var visible = that.popup.visible();
 
+            if (that.options.renderMode !== "multiline") {
+                tag = null;
+            }
+
             if (key === keys.DOWN) {
                 e.preventDefault();
 
@@ -1015,20 +1020,33 @@ var __meta__ = {
 
             that._angularTagItems("cleanup");
 
-            for (idx = removed.length - 1; idx > -1; idx--) {
-                removedItem = removed[idx];
+            if (that.options.renderMode === "multiline") {
+                for (idx = removed.length - 1; idx > -1; idx--) {
+                    removedItem = removed[idx];
 
-                tagList[0].removeChild(tagList[0].children[removedItem.position]);
+                    tagList[0].removeChild(tagList[0].children[removedItem.position]);
 
-                that._setOption(getter(removedItem.dataItem), false);
-            }
+                    that._setOption(getter(removedItem.dataItem), false);
+                }
 
-            for (idx = 0; idx < added.length; idx++) {
-                addedItem = added[idx];
+                for (idx = 0; idx < added.length; idx++) {
+                    addedItem = added[idx];
 
-                tagList.append(that.tagTemplate(addedItem.dataItem));
+                    tagList.append(that.tagTemplate(addedItem.dataItem));
 
-                that._setOption(getter(addedItem.dataItem), true);
+                    that._setOption(getter(addedItem.dataItem), true);
+                }
+            } else {
+                var values = that.value();
+
+                tagList.html("");
+
+                if (values.length) {
+                    tagList.append(that.tagTemplate({
+                        values: values,
+                        total: that.dataSource.total()
+                    }));
+                }
             }
 
             that._angularTagItems("compile");
@@ -1098,12 +1116,23 @@ var __meta__ = {
                 options.dataValueField = options.dataValueField || "value";
             }
 
-            tagTemplate = tagTemplate ? kendo.template(tagTemplate) : kendo.template("#:" + kendo.expr(options.dataTextField, "data") + "#", { useWithBlock: false });
+            if (options.renderMode === "multiline") {
+                tagTemplate = tagTemplate ? kendo.template(tagTemplate) : kendo.template("#:" + kendo.expr(options.dataTextField, "data") + "#", { useWithBlock: false });
+                that.tagTextTemplate = tagTemplate;
 
-            that.tagTextTemplate = tagTemplate;
-            that.tagTemplate = function(data) {
-                return '<li class="k-button" unselectable="on"><span unselectable="on">' + tagTemplate(data) + '</span><span unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-close">delete</span></span></li>';
-            };
+                that.tagTemplate = function(data) {
+                    return '<li class="k-button" unselectable="on"><span unselectable="on">' + tagTemplate(data) + '</span><span unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-close">delete</span></span></li>';
+                };
+            } else {
+                //tagTemplate = kendo.template("#:values.length# / #:total#");
+                tagTemplate = kendo.template("#:values.length# selected...");
+
+                that.tagTextTemplate = tagTemplate;
+
+                that.tagTemplate = function(data) {
+                    return '<li class="k-button" unselectable="on"><span unselectable="on">' + tagTemplate(data) + '</span></li>';
+                };
+            }
         },
 
         _loader: function() {
