@@ -10,7 +10,7 @@ workbook of the detail grids. The event is prevented to avoid saving an Excel fi
 
 > This project requires UI for ASP.NET MVC version 2014.3.1125 and up. Earlier versions don't have the `ExcelExport` event exposed via the fluent API.
 
-[Detail Grid Excel Export Visual Studio Project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/detail-grid-excel-export)
+[Detail Grid Excel Export All Expanded Detail Grids Visual Studio Project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/detail-grid-excel-export)
 
-[Detail Grid Excel Export All Pages Visual Studio Project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/detail-grid-excel-export-all-pages-all-details)
+[Detail Grid Excel Export All Pages and All Detail Grids Visual Studio Project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/detail-grid-excel-export-all-pages-all-details)
 
