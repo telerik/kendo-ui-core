@@ -869,4 +869,16 @@ withAngularTests("Angular (UI Core)", function(runTest){
             start();
         });
     });
+	
+	runTest("ng-dirty/ng-pristine class are applied correctly on the autocomplete widget", function(dom, $scope){
+        $("<input id='kac' kendo-auto-complete='ac' ng-model='country'/>").appendTo(dom);
+		expect(1);
+        $scope.whenRendered(function(){
+			$("#kac").val("USA").trigger("change");
+            var ngDirty = $("#kac").hasClass("ng-dirty");
+            equal(ngDirty, true);
+            start();
+        });
     });
+	
+});
