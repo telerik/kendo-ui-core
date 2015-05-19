@@ -60,26 +60,32 @@ Notes:
 
 ### Multi-page PDF output
 
-`drawing.drawDOM` allows you to create a [multi-page PDF](/framework/drawing/pdf-output.html#multiple-pages-output) by specifying manual page breaks.  For this, pass a second options argument which contains `forcePageBreak` — a CSS selector.  Here is an example which draws a grid on a multi-page PDF:
+`drawing.drawDOM` allows you to create a [multi-page PDF](/framework/drawing/pdf-output.html#multiple-pages-output) by specifying manual page breaks.
 
-    <div id="grid"></div>
+A page break will occur **before** each element that matches the `forcePageBreak` CSS selector.
+
+#### Example - draw a multi-page Grid
+```html
+    <div id="grid" style="width: 900px;"></div>
 
     <script>
-      var data = [];
-      for (var i = 1; i < 50; ++i) {
-        data.push({ title: "Item " + i, id: i });
-      }
+      $(document).ready(function() {
+        var data = [];
+        for (var i = 1; i < 50; ++i) {
+          data.push({ title: "Item " + i, id: i });
+        }
 
-      $("#grid").kendoGrid({
-        dataSource: data,
-        rowTemplate: $("#rowTemplate").html()
-      });
+        $("#grid").kendoGrid({
+          dataSource: data,
+          rowTemplate: $("#rowTemplate").html()
+        });
 
-      kendo.drawing
+        kendo.drawing
         .drawDOM("#grid", { forcePageBreak: ".page-break" })
         .then(function(group){
-          drawing.pdf.saveAs(group, "multipage.pdf")
+          kendo.drawing.pdf.saveAs(group, "multipage.pdf")
         });
+      });
     </script>
 
     <script id="rowTemplate" type="x/kendo-template">
@@ -89,6 +95,7 @@ Notes:
         <td>#: id #</td>
       </tr>
     </script>
+```
 
 
 ### Automatic page breaking (Q1 2015)
