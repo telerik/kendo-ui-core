@@ -579,6 +579,55 @@
         });
     });
 
+    asyncTest("click event fires after rapid scrolling forward and backwards of onloaded items", 1, function() {
+
+        var dataSource = new kendo.data.DataSource({
+            transport: {
+                read: function(options) {
+                    setTimeout(function() {
+                        options.success({ data: generateData(options.data), total: 300 });
+                    }, 200);
+                }
+            },
+            serverPaging: true,
+            pageSize: 40,
+            schema: {
+                data: "data",
+                total: "total"
+            }
+        });
+
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            dataSource: dataSource,
+            selectable: true,
+            click: function() {
+                ok(true);
+            }
+        }));
+
+        var item;
+
+        dataSource.read();
+
+        virtualList.one("listBound", function() {
+            virtualList.scrollTo(240 * 40); //scroll to the 260th item (should be loading...)
+            setTimeout(function() {
+                virtualList.scrollTo(155 * 40); //scroll to the 155th item (should be loading...)
+                setTimeout(function() {
+                    item = virtualList.items().filter("[data-offset-index=155]");
+                    item.trigger("click"); //trigger the 'click' before item is loaded
+
+                    virtualList.one("listBound", function() {
+                        start();
+                        item.trigger("click"); //trigger the 'click' after item is loaded
+                    });
+                });
+            }, 100);
+        });
+
+        asyncDataSource.read();
+    });
+
     //methods
 
     asyncTest("selectedDataItems method returns correct amount of items after scrolling down and up", 2, function() {
