@@ -830,6 +830,18 @@
         });
     });
 
+    asyncTest("forces the placeholder itemHeight", 2, function() {
+        var virtualList = new VirtualList(container, virtualSettings);
+
+        asyncDataSource.read().then(function() {
+            start();
+            var items = virtualList.items();
+
+            equal(items.eq(0).css("height"), "40px");
+            equal(items.eq(0).css("minHeight"), "40px");
+        });
+    });
+
     //misc
 
     test("does not create elements with height larger than 250000px", 4, function() {

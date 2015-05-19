@@ -854,13 +854,16 @@ var __meta__ = {
 
         _generateItems: function(element, count) {
             var items = [],
-                item;
+                item,
+                itemHeight = this.options.itemHeight + "px";
 
             while(count-- > 0) {
                 item = document.createElement("li");
                 item.tabIndex = -1;
                 item.className = VIRTUALITEM + " " + ITEM;
                 item.setAttribute("role", "option");
+                item.style.height = itemHeight;
+                item.style.minHeight = itemHeight;
                 element.appendChild(item);
 
                 items.push(item);
