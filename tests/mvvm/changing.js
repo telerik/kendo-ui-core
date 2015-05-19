@@ -4,6 +4,19 @@ module("mvvm observing", {
     setup: function() {
         this.sourceBinder = kendo.data.binders.source;
         QUnit.fixture.append(
+            '<script id="src-bind-template" type="text/x-kendo-template">' +
+            '  <div>' +
+            '    <input data-bind="value: value" />' +
+            '    <span class="val" data-bind="text: value"></span>' +
+            '  </div>' +
+            '</script>' +
+            '<script id="src-bind-template-w-select" type="text/x-kendo-template">' +
+            '  <div>' +
+            '    <input data-bind="value: value" />' +
+            '    <span class="val" data-bind="text: value"></span>' +
+            '    <select data-bind="source: options" data-text-field="name" data-value-field="uid"></select>'+
+            '  </div>' +
+            '</script>' +
             '<script id="array-template" type="text/x-kendo-template">' +
             '<li data-bind="text:name"></li>' +
             '</script>' +
@@ -51,6 +64,42 @@ module("mvvm observing", {
         kendo.data.binders.source = this.sourceBinder;
     }
 });
+
+test("changing a view model observable array updates the select options within a template", 3, function() {
+    var viewModel = kendo.observable( {
+      data: [
+        {"value": 1, options: [{name: 1},{name: 2}]},
+        {"value": 2, options: [{name: 1},{name: 2}]}
+      ]
+    });
+
+    var dom = $('<div data-bind="source: data" data-template="src-bind-template-w-select"></div>');
+    kendo.bind(dom, viewModel);
+    viewModel.data[1].value = 1000;
+    viewModel.set("data[0].options[0].name", "TEST1");
+    viewModel.set("data[0].options[1].name", "TEST2");
+
+    equal(dom.find("option:eq(0)").text(), "TEST1");
+    equal(dom.find("option:eq(1)").text(), "TEST2");
+    equal(dom.find(".val:eq(1)").text(), "2");
+});
+
+test("changing a view model observable array updates only the value bound elements instead of the whole template", function() {
+    var viewModel = kendo.observable( {
+      data: [
+        {"value": 1 },
+        {"value": 2 }
+      ]
+    });
+
+    var dom = $('<div data-bind="source: data" data-template="src-bind-template"></div>');
+    kendo.bind(dom, viewModel);
+    viewModel.data[1].value = 1000;
+    viewModel.set("data[0].value", 5);
+
+    equal(dom.find(".val:eq(1)").text(), "2");
+});
+
 
 test("changing a view model field updates the CSS classes in the UI", function() {
     var viewModel = kendo.observable( {

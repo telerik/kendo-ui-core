@@ -505,7 +505,7 @@ var __meta__ = {
                     that.add(e.index, e.items);
                 } else if (e.action == "remove") {
                     that.remove(e.index, e.items);
-                } else if (e.action == "itemchange" || e.action === undefined) {
+                } else if (e.action != "itemchange") {
                     that.render();
                 }
             } else {
