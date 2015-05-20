@@ -33,16 +33,6 @@
     -webkit-animation-delay: @arguments;
 }
 
-.box-orient(@direction) {
-    -moz-box-orient: @direction;
-    -webkit-box-orient: @direction;
-}
-
-.box-direction(@direction) {
-    -moz-box-direction: @direction;
-    -webkit-box-direction: @direction;
-}
-
 .flex-direction(@direction) {
     -webkit-flex-direction: @direction;
     -ms-flex-direction: @direction;
@@ -140,4 +130,117 @@
     -ms-transition: @arguments;
     -o-transition: @arguments;
     transition: @arguments;
+}
+
+.box-orient(@direction) {
+    -moz-box-orient: @direction;
+    -webkit-box-orient: @direction;
+    -ms-box-orient: @direction;
+    box-orient: @direction;
+}
+
+.box(@type) {
+    display: ~"-moz-@{type}";
+    display: ~"-webkit-@{type}";
+    display: ~"-ms-@{type}";
+    display: @type;
+}
+
+.box-direction(@direction) {
+    -moz-box-direction: @direction;
+    -webkit-box-direction: @direction;
+    -ms-box-direction: @direction;
+    box-direction: @direction;
+}
+
+.box-flex(@amount) {
+    -moz-box-flex: @amount;
+    -webkit-box-flex: @amount;
+    -ms-box-flex: @amount;
+    box-flex: @amount;
+}
+
+.box-align(@alignment) {
+    -moz-box-align: @alignment;
+    -webkit-box-align: @alignment;
+    -ms-box-align: @alignment;
+    box-align: @alignment;
+}
+
+.box-pack(@pack) {
+    -moz-box-pack: @pack;
+    -webkit-box-pack: @pack;
+    -ms-box-pack: @pack;
+    box-pack: @pack;
+}
+
+.guarded-border-radius(@value) when (@value < 0) {
+    border-radius: 0;
+}
+
+.guarded-border-radius(@value) when (@value >= 0) {
+    border-radius: @value;
+}
+
+.box-shadow(...) {
+    -webkit-box-shadow: @arguments;
+    box-shadow: @arguments;
+}
+
+.window-shadow(@shadow-color) when not (@shadow-color = transparent) {
+    border-color: @shadow-color;
+    .box-shadow(@window-shadow-style lighten(@shadow-color, 50%));
+
+    &.k-state-focused {
+        border-color: @shadow-color;
+        .box-shadow(@window-shadow-style @shadow-color);
+    }
+}
+
+.window-shadow(@shadow-color) when (@shadow-color = transparent) and (lightness(@widget-background-color) < 50%) {
+    border-color: @widget-border-color;
+
+    &.k-state-focused {
+        border-color: lighten(@widget-border-color, 20%);
+    }
+}
+
+.window-shadow(@shadow-color) when (@shadow-color = transparent) and (lightness(@widget-background-color) >= 50%) {
+    border-color: @widget-border-color;
+
+    &.k-state-focused {
+        border-color: darken(@widget-border-color, 10%);
+    }
+}
+
+.background-clip(@type) {
+    -moz-background-clip: @type;
+    -webkit-background-clip: @type;
+    background-clip: @type;
+}
+
+.composite-background(@gradient) when (@gradient = none) {
+    background-image: @texture;
+}
+
+.composite-background(@gradient) when not (@gradient = none) {
+    background-image: @fallback-texture;
+    background-image: @texture, -webkit-linear-gradient(top, ~"@{gradient}");
+    background-image: @texture,    -moz-linear-gradient(top, ~"@{gradient}");
+    background-image: @texture,      -o-linear-gradient(top, ~"@{gradient}");
+    background-image: @texture,       ~"linear-gradient(to bottom, @{gradient})";
+}
+
+.selection(@color) {
+    ::selection {
+        background-color: @color;
+        text-shadow: none;
+        color: #fff;
+    }
+
+    ::-moz-selection {
+        background-color: @color;
+        text-shadow: none;
+        color: #fff;
+    }
 }

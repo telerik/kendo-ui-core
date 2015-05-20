@@ -1,198 +1,198 @@
-@widget-background-color: @base;
-@widget-border-color: contrast(@base, lighten(@base, 14%), darken(@base, 14%), 0.5);
-@widget-text-color: @normal-text-color;
-@inverse-text-color: contrast(@normal-text-color);
-@hover-border-color: @hover-background;
-@selected-background-color: @accent;
-@active-background-color: lighten(@base, 6%);
-@active-border-color: @accent;
-@active-text-color: contrast(@base);
-@error-background-color: @error;
-@error-border-color: #e20000;
-@error-text-color: contrast(@base, lighten(@normal-text-color, 1%), darken(@normal-text-color, 20%), 0.5);
-@disabled-text-color: #cccccc;
-@validation-background-color: @warning;
-@validation-border-color: @warning;
-@validation-text-color: darken(@base, 29%);
-@notification-info-background-color: @info;
-@notification-info-text-color: contrast(@base, lighten(@normal-text-color, 1%), darken(@normal-text-color, 7%), 0.5);
-@notification-info-border-color: contrast(@base, lighten(@info, 1%), darken(@info, 11%), 0.5);
-@notification-success-background-color: @success;
-@notification-success-text-color: contrast(@base, lighten(@normal-text-color, 1%), darken(@normal-text-color, 3%), 0.5);
-@notification-success-border-color: contrast(@base, lighten(@success, 1%), darken(@success, 11%), 0.5);
-@notification-warning-background-color: contrast(@base, lighten(@error, 27%), darken(@error, 4%), 0.5);
-@notification-warning-text-color: contrast(@base, lighten(@normal-text-color, 1%), darken(@normal-text-color, 7%), 0.5);
-@notification-warning-border-color: contrast(@base, lighten(@error, 27%), darken(@error, 6%), 0.5);
-@notification-error-background-color: contrast(@base, lighten(@error, 15%), darken(@error, 9%), 0.5);
-@notification-error-text-color: saturate(@normal-text-color, 12%);
-@notification-error-border-color: contrast(@base, lighten(@error, 15%), darken(@error, 20%), 0.5);
-@tooltip-background-color: lighten(@hover-background, 1%);
-@draghandle-border-color: saturate(@hover-background, 1%);
-@draghandle-shadow: 0 1px 1px 0 fadeout(darken(@normal-text-color, 10%), 70%);
-@draghandle-hover-border-color: @accent;
-@draghandle-hover-shadow: @draghandle-shadow;
-@alt-background-color: contrast(@base, lighten(@base, 6%), darken(@base, 4%), 0.5);
-@nested-alt-background-color: contrst(@normal-text-color, darken(@alt-background-color, 8%), lighten(@alt-background-color, 8%), 0.5);
-@column-highlight-background-color: contrast(@base, lighten(@base, 8%), darken(@base, 1%), 0.5);
-@active-filter-background-color: contrast(@base, lighten(@base, 6%), darken(@base, 6%), 0.5);
-@event-text-color: #ffffff;
-@event-inverse-text-color: darken(@success, 29%);
-@event-background-color: @accent;
-@scheduler-nonwork-background-color: contrast(@base, lighten(@base, 17%), darken(@base, 4%), 0.5);
-@resize-background-color: @normal-text-color;
-@input-background-color: @base;
-@shadow-color: fadeout(contrast(@base), 80%);
-@upload-progress-background-color: contrast(@base, lighten(@info, 2%), darken(@info, 2%), 0.5);
-@upload-progress-text-color: contrast(@base, lighten(@normal-text-color, 1%), darken(@normal-text-color, 14%), 0.5);
-@upload-success-background-color: contrast(@base, lighten(@success, 4%), darken(@success, 1%), 0.5);
-@upload-success-text-color: contrast(@base, lighten(@normal-text-color, 1%), darken(@normal-text-color, 15%), 0.5);
-@upload-error-background-color: contrast(@base, lighten(@base, 26%), darken(@base, 10%), 0.5);
-@upload-error-text-color: contrast(@base, lighten(@normal-text-color, 1%), darken(@normal-text-color, 23%), 0.5);
-@task-summary-color: contrast(@base, lighten(@widget-text-color, 25%), darken(@widget-text-color, 25%), 0.5);
-@task-summary-selected-color: contrast(@base, lighten(@selected-background-color, 15%), darken(@selected-background-color, 25%), 0.5);
-@loading-panel-color: @base;
-@splitbar-background-color: contrast(@base, lighten(@base, 1%), darken(@base, 14%), 0.5);
-@disabled-background-color: @base;
-@disabled-border-color: contrast(@base, lighten(@base, 14%), darken(@base, 10%), 0.5);
-@disabled-gradient: none;
-@tabstrip-active-background: lighten(@base, 6%);
-@primary-button-text-color: #ffffff;
-@primary-button-background-color: @accent;
-@primary-button-border-color: @accent;
-@primary-hover-text-color: #ffffff;
-@primary-hover-background-color: @hover-background;
-@primary-hover-border-color: @hover-background;
-@primary-hover-shadow: none;
-@primary-focused-color: #ffffff;
-@primary-focused-border-color: contrast(@base, lighten(@accent, 16%), darken(@accent, 29%), 0.5);
-@primary-active-background-color: @accent;
-@primary-disabled-text-color: contrast(@base, lighten(@base, 1%), darken(@base, 17%), 0.5);
-@primary-disabled-background-color: lighten(@accent, 2%);
-@primary-disabled-border-color: lighten(@accent, 2%);
-@checkbox-border-color-before: transparent;
-@checkbox-border-color-after: contrast(@base, lighten(@base, 28%), darken(@base, 14%), 0.5);
-@checkbox-border-radius-before: 0;
-@checkbox-background-color: @base;
-@checkbox-hover-border-color: @hover-background;
-@checkbox-hover-box-shadow: none;
-@checkbox-checked-border-color-after: contrast(@base, lighten(@base, 28%), darken(@base, 14%), 0.5);
-@checkbox-checked-border-radius-after: 0;
-@checkbox-checked-background-color-after: @base;
-@checkbox-checked-color-after: contrast(@base, lighten(@hover-background, 1%), darken(@hover-background, 4%), 0.5);
-@checkbox-active-border-color-before: transparent;
-@checkbox-active-border-color-after: @hover-background;
-@checkbox-active-border-radius: 0;
-@checkbox-active-border-radius-after: 0;
-@checkbox-active-box-shadow: none;
-@checkbox-checked-active-border-radius-before: 0;
-@checkbox-checked-active-box-shadow: none;
-@checkbox-checked-disabled-color-after: contrast(@base, lighten(@base, 14%), darken(@base, 21%), 0.5);
-@checkbox-disabled-background-color-after: @base;
-@checkbox-disabled-color: contrast(@base, lighten(@success, 7%), darken(@success, 17%), 0.5);
-@checkbox-disabled-box-shadow: none;
-@checkbox-disabled-border-color-before: contrast(@base, lighten(@base, 14%), darken(@base, 21%), 0.5);
-@radio-border-color-before: contrast(@base, lighten(@base, 28%), darken(@base, 14%), 0.5);
-@radio-background-color: @base;
-@radio-border-width-before: 1px;
-@radio-hover-border-color: @hover-background;
-@radio-hover-box-shadow: none;
-@radio-checked-border-color-before: contrast(@base, lighten(@base, 28%), darken(@base, 14%), 0.5);
-@radio-checked-background-color-after: contrast(@base, lighten(@hover-background, 1%), darken(@hover-background, 4%), 0.5);
-@radio-active-border-color-before: @hover-background;
-@radio-active-box-shadow: none;
-@radio-checked-active-border-color-before: @hover-background;
-@radio-checked-active-box-shadow: none;
-@radio-disabled-background-color-after: @base;
-@radio-disabled-color: contrast(@base, lighten(@success, 7%), darken(@success, 17%), 0.5);
-@radio-disabled-box-shadow: none;
-@radio-disabled-background-color-before: @base;
 @tooltip-texture: none;
+@widget-text-color: @normal-text-color;
+@inverse-text-color: @background;
+@widget-background-color: @background;
+@widget-border-color: darken(@background, 20%);
 @widget-gradient: none;
 @widget-shadow: none;
 @hover-shadow: none;
 @selected-shadow: none;
 @active-gradient: none;
 @active-shadow: none;
-@selected-border-color: @accent;
-@focused-border-color: @hover-background;
-@focused-shadow: none;
-@focused-item-shadow: inset 0 0 0 1px @hover-border-color;
-@focused-active-item-shadow: inset 0 0 3px 1px darken(@selected-border-color, 15%);
-@main-border-radius: 0;
-@list-border-radius: 0;
-@inner-border-radius: 0;
-@slider-border-radius: 13px;
-@draghandle-border-radius: 0;
-@default-icon-opacity: 1;
-@header-background-color: @base;
-@header-text-color: @normal-text-color;
-@button-background-color: @base;
-@button-text-color: @normal-text-color;
-@group-background-color: @base;
-@group-border-color: contrast(@base, lighten(@base, 14%), darken(@base, 14%), 0.5);
-@content-background-color: @base;
-@select-border-color: contrast(@base, lighten(@base, 14%), darken(@base, 14%), 0.5);
-@select-background-color: @base;
-@select-group-background-color: @base;
-@select-hover-background-color: @hover-background;
 @hover-background-color: @hover-background;
-@shadow-inset-color: transparent;
+@hover-border-color: @hover-background;
+@select-background-color: @base;
+@select-border-color: @hover-background;
+@select-hover-background-color: @hover-background;
+@select-group-background-color: @base;
+@button-background-color: @base;
+@button-text-color: @background;
+@group-background-color: @base;
+@group-border-color: @base;
+@content-background-color: @background;
+@selected-background-color: @accent;
+@selected-border-color: @accent;
+@active-background-color: @accent;
+@active-border-color: @accent;
+@active-text-color: @background;
+@error-background-color: @background;
+@error-border-color: lighten(@base, 4%);
+@error-text-color: lighten(@base, 4%);
+@disabled-text-color: darken(@background, 24%);
+@validation-background-color: darken(@warning, 20%);
+@validation-border-color: darken(@warning, 20%);
+@validation-text-color: @normal-text-color;
+@tooltip-background-color: @base;
+@tooltip-border-color: @base;
+@tooltip-text-color: @background;
+@notification-info-background-color: @info;
+@notification-info-text-color: darken(@accent, 11%);
+@notification-info-border-color: darken(@info, 11%);
+@notification-success-background-color: @success;
+@notification-success-text-color: darken(@hover-background, 8%);
+@notification-success-border-color: darken(@success, 11%);
+@notification-warning-background-color: @warning;
+@notification-warning-text-color: darken(@error, 27%);
+@notification-warning-border-color: darken(@warning, 3%);
+@notification-error-background-color: @error;
+@notification-error-text-color: lighten(@normal-text-color, 13%);
+@notification-error-border-color: darken(@error, 10%);
+@draghandle-border-radius: 13px;
+@draghandle-border-color: @accent;
+@draghandle-background-color: @accent;
+@draghandle-shadow: 0 0 0 0;
+@draghandle-hover-border-color: @hover-background;
+@draghandle-hover-background-color: @hover-background;
+@draghandle-hover-shadow: 0 0 0;
+@alt-background-color: darken(@background, 4%);
+@nested-alt-background-color: darken(@alt-background-color, 8%);
+@active-filter-background-color: @accent;
+@cell-border-color: darken(@background, 20%);
+@column-highlight-background-color: darken(@background, 3%);
+@input-background-color: @background;
 @input-text-color: @normal-text-color;
-@link-text-color: @normal-text-color;
-@cell-border-color: contrast(@base, lighten(@base, 14%), darken(@base, 14%), 0.5);
-@scheduler-background-color: @base;
-@current-time-color: #e20000;
-@tooltip-border-color: lighten(@hover-background, 1%);
-@tooltip-text-color: #ffffff;
-@draghandle-background-color: saturate(@hover-background, 1%);
-@draghandle-hover-background-color: @accent;
-@calendar-border-radius: 0;
+@shadow-color: rgba(0,0,0,.25);
+@shadow-inset-color: transparent;
+@link-text-color: @background;
+@loading-panel-color: @background;
+@splitbar-background-color: darken(@background, 20%);
+@default-icon-opacity: 1;
+@scheduler-background-color: @background;
+@current-time-color: lighten(@base, 4%);
+@event-background-color: @hover-background;
+@event-text-color: @background;
+@event-inverse-text-color: @normal-text-color;
+@scheduler-nonwork-background-color: darken(@background, 4%);
+@resize-background-color: @background;
+@upload-progress-background-color: darken(@info, 2%);
+@upload-progress-text-color: darken(@accent, 17%);
+@upload-success-background-color: darken(@success, 1%);
+@upload-success-text-color: darken(@hover-background, 18%);
+@upload-error-background-color: @error;
+@upload-error-text-color: darken(@normal-text-color, 8%);
+@task-summary-color: lighten(@widget-text-color, 25%);
+@task-summary-selected-color: lighten(@selected-background-color, 25%);
+@main-border-radius: @border-radius;
+@list-border-radius: @main-border-radius - 1;
+@inner-border-radius: @main-border-radius - 1.2;
+@slider-border-radius: 13px;
+@header-text-color: @background;
+@header-background-color: @base;
+@focused-border-color: darken(@accent, 11%);
+@focused-shadow: none;
+@focused-item-shadow: inset 0 0 0 1px darken(@accent, 11%);
+@focused-active-item-shadow: inset 0 0 0 1px darken(@accent, 11%);
+@calendar-border-radius: 13px;
 @calendar-content-text-color: @normal-text-color;
 @calendar-footer-background: @base;
 @calendar-footer-text-decoration: none;
-@calendar-footer-hover-text-decoration: underline;
-@calendar-footer-hover-background: @base;
-@calendar-header-hover-text-decoration: none;
-@calendar-header-hover-background: @hover-background;
-@calendar-footer-active-background: @base;
-@calendar-group-background-color: @base;
-@button-border-color: contrast(@base, lighten(@base, 14%), darken(@base, 14%), 0.5);
-@menu-border-color: contrast(@base, lighten(@base, 14%), darken(@base, 14%), 0.5);
-@tabstrip-items-border: contrast(@base, lighten(@base, 14%), darken(@base, 14%), 0.5);
-@tabstrip-tabs-color: @normal-text-color;
-@form-widget-color: @normal-text-color;
-@drop-down-border-color: contrast(@base, lighten(@base, 14%), darken(@base, 14%), 0.5);
-@drop-down-hover-border-color: contrast(@base, lighten(@base, 14%), darken(@base, 14%), 0.5);
-@drop-down-focused-border-color: contrast(@base, lighten(@base, 14%), darken(@base, 14%), 0.5);
-@drop-down-background: @base;
-@drop-down-text-color: @normal-text-color;
-@secondary-border-color: contrast(@base, lighten(@base, 14%), darken(@base, 14%), 0.5);
-@secondary-text-color: @normal-text-color;
-@numeric-selected-background: @accent;
-@panelbar-items-border: contrast(@base, lighten(@base, 14%), darken(@base, 14%), 0.5);
+@calendar-footer-hover-text-decoration: none;
+@calendar-footer-hover-background: @hover-background;
+@calendar-header-hover-text-decoration: underline;
+@calendar-header-hover-background: @base;
+@calendar-footer-active-background: @accent;
+@calendar-group-background-color: @background;
+@button-border-color: @base;
+@menu-border-color: @base;
+@tabstrip-items-border: @base;
+@tabstrip-active-background: @background;
+@tabstrip-tabs-color: @background;
+@form-widget-color: @background;
+@drop-down-border-color: @accent;
+@drop-down-hover-border-color: @hover-background;
+@drop-down-focused-border-color: darken(@accent, 11%);
+@drop-down-background: @accent;
+@drop-down-text-color: @background;
+@secondary-border-color: lighten(@base, 18%);
+@secondary-text-color: @background;
+@numeric-selected-background: @base;
+@panelbar-items-border: lighten(@base, 18%);
 @panelbar-content-background: @base;
-@panelbar-content-color: @normal-text-color;
-@window-shadow-style: 1px 1px 7px 1px;
+@panelbar-content-color: @background;
+@window-shadow-style: 0 0 0 1px;
 @filter-menu-content-background: @base;
-@icon-background-color: transparent;
+@icon-background-color: darken(@background, 20%);
+@disabled-background-color: darken(@background, 4%);
+@disabled-border-color: darken(@background, 20%);
+@disabled-gradient: none;
+@primary-button-text-color: @background;
+@primary-button-background-color: @accent;
+@primary-button-border-color: @accent;
 @primary-gradient: none;
-@primary-hover-gradient: none;
-@primary-focused-gradient: none;
-@primary-active-text-color: #ffffff;
-@primary-active-gradient: none;
-@primary-focused-active-item-shadow: none;
-@primary-active-border-color: @accent;
-@primary-disabled-gradient: none;
-@primary-active-shadow: none;
 @primary-shadow: none;
-@button-hover-text-color: #ffffff;
+@primary-hover-text-color: @background;
+@primary-hover-background-color: @hover-background;
+@primary-hover-border-color: @hover-background;
+@primary-hover-gradient: none;
+@primary-hover-shadow: none;
+@primary-focused-color: @background;
+@primary-focused-border-color: @base;
+@primary-focused-gradient: none;
+@primary-focused-active-item-shadow: none;
+@primary-active-text-color: @background;
+@primary-active-background-color: @base;
+@primary-active-gradient: none;
+@primary-active-border-color: @base;
+@primary-active-shadow: none;
+@primary-disabled-text-color: darken(@background, 24%);
+@primary-disabled-background-color: darken(@background, 4%);
+@primary-disabled-border-color: darken(@background, 20%);
+@primary-disabled-gradient: none;
+@button-hover-text-color: @background;
 @button-hover-background-color: @hover-background;
 @button-hover-border-color: @hover-background;
 @button-active-background: @accent;
 @button-active-border-color: @accent;
-@button-focused-border-color: contrast(@base, lighten(@base, 14%), darken(@base, 14%), 0.5);
-@button-focused-shadow: inset 0 0 0 1px @hover-border-color;
-@button-focused-active-shadow: inset 0 0 3px 1px darken(@selected-border-color, 15%);
+@button-focused-border-color: darken(@accent, 11%);
+@button-focused-shadow: none;
+@button-focused-active-shadow: none;
+@checkbox-border-color-before: transparent;
+@checkbox-border-color-after: @accent;
+@checkbox-border-radius-before: 1px;
+@checkbox-background-color: @background;
+@checkbox-hover-border-color: lighten(@hover-background, 8%);
+@checkbox-hover-box-shadow: none;
+@checkbox-checked-border-color-after: @accent;
+@checkbox-checked-border-radius-after: 1px;
+@checkbox-checked-background-color-after: @background;
+@checkbox-checked-color-after: @accent;
+@checkbox-active-border-color-before: transparent;
+@checkbox-active-border-color-after: @base;
+@checkbox-active-border-radius: 1px;
+@checkbox-active-border-radius-after: 1px;
+@checkbox-active-box-shadow: none;
+@checkbox-checked-active-border-radius-before: 1px;
+@checkbox-checked-active-box-shadow: none;
+@checkbox-checked-disabled-color-after: darken(@background, 24%);
+@checkbox-disabled-background-color-after: @background;
+@checkbox-disabled-color: darken(@background, 24%);
+@checkbox-disabled-box-shadow: none;
+@checkbox-disabled-border-color-before: darken(@background, 20%);
+@radio-border-color-before: @accent;
+@radio-background-color: @background;
+@radio-border-width-before: 1px;
+@radio-hover-border-color: lighten(@hover-background, 8%);
+@radio-hover-box-shadow: none;
+@radio-checked-border-color-before: @accent;
+@radio-checked-background-color-after: @accent;
+@radio-active-border-color-before: @base;
+@radio-active-box-shadow: none;
+@radio-checked-active-border-color-before: @base;
+@radio-checked-active-box-shadow: none;
+@radio-disabled-background-color-after: @background;
+@radio-disabled-color: darken(@background, 24%);
+@radio-disabled-box-shadow: none;
+@radio-disabled-background-color-before: @background;
 /* Kendo skin */
 
 // Mixins
@@ -961,7 +961,7 @@ html .km-pane-wrapper .k-header
     color: @selected-text-color;
 }
 
-.k-popup .k-item > .k-group
+.k-popup .k-list .k-item > .k-group
 {
     background: @hover-border-color;
     color: @selected-text-color;
@@ -1202,25 +1202,6 @@ div.k-filebrowser-dropzone em
 .k-progressbar-indeterminate .k-state-selected
 {
     display: none;
-}
-
-.k-progressbar-horizontal > .k-state-selected,
-.k-rtl .k-progressbar-horizontal.k-progressbar-reverse > .k-state-selected,
-.k-progressbar-horizontal.k-progressbar-reverse > .k-state-selected,
-.k-rtl .k-progressbar-horizontal > .k-state-selected,
-.k-progressbar-vertical > .k-state-selected,
-.k-progressbar-vertical.k-progressbar-reverse > .k-state-selected,
-.k-progressbar > .k-state-selected.k-complete,
-.k-rtl .k-progressbar > .k-state-selected.k-complete,
-.k-progressbar-horizontal .k-first,
-.k-rtl .k-progressbar-horizontal .k-last,
-.k-rtl .k-progressbar-horizontal.k-progressbar-reverse .k-last,
-.k-progressbar-horizontal .k-last,
-.k-rtl .k-progressbar-horizontal .k-first,
-.k-progressbar-vertical .k-first,
-.k-progressbar-vertical .k-last
-{
-    border-radius: 0;
 }
 
 /* Slider */
@@ -2678,4 +2659,99 @@ html .km-pane-wrapper .km-widget,
             .guarded-border-radius(@list-border-radius);
         }
     }
+}
+
+
+.k-button-group .k-tool,
+.k-toolbar,
+.k-grid-toolbar .k-button
+{
+    border-color: @secondary-border-color;
+}
+
+.k-grid-toolbar .k-button:hover,
+.k-grid-toolbar .k-button.k-state-hovered
+{
+    border-color: @button-hover-border-color;
+}
+
+.k-grid-toolbar .k-button:focus,
+.k-grid-toolbar .k-button.k-state-focused
+{
+	border-color: @button-focused-border-color;
+}
+
+.k-grid-toolbar,
+.k-grid,
+.k-editor-toolbar
+{
+	.k-autocomplete,
+    .k-picker-wrap,
+    .k-numeric-wrap,
+    .k-dropdown-wrap
+    {
+        background-color: @header-background-color;
+        .composite-background(@hover-gradient);
+        background-position: 50% 50%;
+        border-color: @secondary-border-color;
+    }
+
+    .k-autocomplete.k-state-hover,
+    .k-picker-wrap.k-state-hover,
+    .k-numeric-wrap.k-state-hover,
+    .k-dropdown-wrap.k-state-hover
+    {
+        background-color: @select-hover-background-color;
+        .composite-background(@hover-gradient);
+        background-position: 50% 50%;
+        border-color: @drop-down-hover-border-color;
+    }
+
+    .k-autocomplete.k-state-focused,
+    .k-picker-wrap.k-state-focused,
+    .k-numeric-wrap.k-state-focused,
+    .k-dropdown-wrap.k-state-focused
+    {
+        background-color: @select-border-color;
+        .composite-background(@hover-gradient);
+        background-position: 50% 50%;
+        border-color: @select-border-color;
+    }
+}
+
+.k-popup.k-group
+{
+
+    color: @secondary-text-color;
+    border-color: @group-border-color;
+}
+
+.k-popup.k-group
+{
+	.k-state-default > .k-select
+    {
+        border-color: @secondary-border-color;
+    }
+
+    .k-state-hover > .k-select
+    {
+        border-color: @hover-border-color;
+    }
+
+    .k-state-focused > .k-select
+    {
+        border-color: @drop-down-border-color;
+    }
+}    
+
+.k-grid-toolbar,
+.k-dropdown .k-input,
+.k-dropdown .k-state-focused .k-input,
+.k-menu .k-popup
+{
+    color: @secondary-text-color;
+}
+
+.k-checkbox:checked + .k-checkbox-label:active:after {
+    border-color: @checkbox-active-border-color-after; 
 }

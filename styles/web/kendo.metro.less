@@ -1,136 +1,27 @@
-@image-folder: "Metro";
-@fallback-texture: url('textures/highlight.png');
-@hover-gradient: "#8ebc00 0%, #8ebc00 100%";
-@widget-background-color: #fff;
-@widget-border-color: #dadada;
-@widget-text-color: #787878;
-@inverse-text-color: #fff;
-@hover-border-color: #8ebc00;
+@accent: #7ea700;
+@base: #fff;
+@background: #fff;
+
+@border-radius: 0;
+
+@normal-background: #fff;
+@normal-text-color: #787878;
+@normal-gradient: none;
+@hover-background: #8ebc00;
 @hover-text-color: #fff;
-@selected-background-color: #7ea700;
+@hover-gradient: "#8ebc00 0%, #8ebc00 100%";
+@selected-background: #7ea700;
 @selected-text-color: #fff;
-@active-background-color: #fff;
-@active-border-color: #7ea700;
-@active-text-color: #000000;
-@error-background-color: #fff;
-@error-border-color: #e20000;
-@error-text-color: #e20000;
-@disabled-text-color: #ccc;
-@validation-background-color: #ffe13a;
-@validation-border-color: #ffe13a;
-@validation-text-color: #787878;
-@notification-info-background-color: #e5f5fa;
-@notification-info-text-color: #0487c4;
-@notification-info-border-color: #b7e1f0;
-@notification-success-background-color: #eaf7ec;
-@notification-success-text-color: #349946;
-@notification-success-border-color: #c3e8ca;
-@notification-warning-background-color: #fff4d9;
-@notification-warning-text-color: #0487c4;
-@notification-warning-border-color: #fff0c8;
-@notification-error-background-color: #ffe0d9;
-@notification-error-text-color: #ef470a;
-@notification-error-border-color: #ffb7a8;
-@tooltip-background-color: #99c319;
-@draghandle-border-color: #8EBC00;
-@draghandle-shadow: 0 1px 1px 0 #676767;
-@draghandle-hover-border-color: #7ea700;
-@draghandle-hover-shadow: 0 1px 1px 0 #676767;
-@alt-background-color: #f5f5f5;
-@nested-alt-background-color: darken(@alt-background-color, 8%);
-@column-highlight-background-color: #fbfbfb;
-@active-filter-background-color: #efefef;
-@event-text-color: @selected-text-color;
-@event-inverse-text-color: @widget-text-color;
-@event-background-color: #7ea700;
-@scheduler-nonwork-background-color: #f4f4f4;
-@resize-background-color: #787878;
-@input-background-color: #fff;
-@shadow-color: rgba(0, 0, 0, 0.3);
-@upload-progress-background-color: #d0f8ff;
-@upload-progress-text-color: #06c;
-@upload-success-background-color: #ddffd0;
-@upload-success-text-color: #28760b;
-@upload-error-background-color: #ffded7;
-@upload-error-text-color: #c00;
-@task-summary-color: lighten(@widget-text-color, 25%);
-@task-summary-selected-color: lighten(@selected-background-color, 15%);
-@loading-panel-color: #fff;
-@splitbar-background-color: #dadada;
-@disabled-background-color: @button-background-color;
-@disabled-border-color: #e5e5e5;
-@disabled-gradient: @widget-gradient;
+@selected-gradient: none;
 
-@tabstrip-active-background: @widget-background-color;
+@error: #fff;
+@warning: #ffe13a;
+@success: #eaf7ec;
+@info: #e5f5fa;
 
-@primary-button-text-color: #fff;
-@primary-button-background-color: #7ea700;
-@primary-button-border-color: #7ea700;
-
-@primary-hover-text-color: @primary-button-text-color;
-@primary-hover-background-color: #8ebc00;
-@primary-hover-border-color: #8ebc00;
-@primary-hover-shadow:none;
-
-@primary-focused-color: @primary-button-text-color; 
-@primary-focused-border-color: #000;
-
-@primary-active-background-color: #7ea700;
-
-@primary-disabled-text-color: #d1dfa3;
-@primary-disabled-background-color: #8bb019;
-@primary-disabled-border-color: @primary-disabled-background-color;
-
-//Checkboxes
-@checkbox-border-color-before: transparent;
-@checkbox-border-color-after: #dadada;
-@checkbox-border-radius-before: 0;
-@checkbox-background-color: @widget-background-color;
-
-@checkbox-hover-border-color: #8ebc00;
-@checkbox-hover-box-shadow: none;
-
-@checkbox-checked-border-color-after: #dadada;
-@checkbox-checked-border-radius-after: 0;
-@checkbox-checked-background-color-after: #fff;
-@checkbox-checked-color-after: #7ea700;
-
-@checkbox-active-border-color-before: transparent;
-@checkbox-active-border-color-after: #8ebc00;
-@checkbox-active-border-radius: 0;
-@checkbox-active-border-radius-after: 0;
-@checkbox-active-box-shadow: none;
-
-@checkbox-checked-active-border-radius-before: 0;
-@checkbox-checked-active-box-shadow: @checkbox-active-box-shadow;
-
-@checkbox-checked-disabled-color-after: #cacaca;
-@checkbox-disabled-background-color-after: #fff;
-@checkbox-disabled-color: #cacaca;
-@checkbox-disabled-box-shadow: none;
-@checkbox-disabled-border-color-before: #cacaca;
-
-//Radio buttons
-@radio-border-color-before: #dadada;
-@radio-background-color: @widget-background-color;
-@radio-border-width-before: 1px;
-
-@radio-hover-border-color: #8ebc00;
-@radio-hover-box-shadow:none;
-
-@radio-checked-border-color-before: #dadada;
-@radio-checked-background-color-after: #7ea700;
-
-@radio-active-border-color-before: #8ebc00;
-@radio-active-box-shadow: none;
-
-@radio-checked-active-border-color-before: #8ebc00;
-@radio-checked-active-box-shadow: none;
-
-@radio-disabled-background-color-after: #fff;
-@radio-disabled-color: #cacaca;
-@radio-disabled-box-shadow: none;
-@radio-disabled-background-color-before: #fff;
+// graphics
+@image-folder: "Metro";
+@texture: none;
+@fallback-texture: url('textures/highlight.png');
 
 @import "type-metro.less";
-@import "theme-template.less";

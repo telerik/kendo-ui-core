@@ -1,136 +1,27 @@
-@image-folder: "MetroBlack";
-@fallback-texture: none;
-@hover-gradient: none;
-@widget-background-color: #0e0e0e;
-@widget-border-color: #333333;
-@widget-text-color: #fff;
-@inverse-text-color: #000;
-@hover-border-color: #00aba9;
+@accent: #086;
+@base: #0e0e0e;
+@background: #0e0e0e;
+
+@border-radius: 0;
+
+@normal-background: #0e0e0e;
+@normal-text-color: #fff;
+@normal-gradient: none;
+@hover-background: #00aba9;
 @hover-text-color: #fff;
-@selected-background-color: #086;
+@hover-gradient: none;
+@selected-background: #086;
 @selected-text-color: #fff;
-@active-background-color: #1e1e1e;
-@active-border-color: #086;
-@active-text-color: #fff;
-@error-background-color: #e20000;
-@error-border-color: #e20000;
-@error-text-color: #fff;
-@disabled-text-color: rgba(170,170,170,0.4);
-@validation-background-color: #ff9900;
-@validation-border-color: #ff9900;
-@validation-text-color: #000;
-@notification-info-background-color: #0c779b;
-@notification-info-text-color: @widget-text-color;
-@notification-info-border-color: @notification-info-background-color;
-@notification-success-background-color: #2b893c;
-@notification-success-text-color: @widget-text-color;
-@notification-success-border-color: @notification-success-background-color;
-@notification-warning-background-color: #be9938;
-@notification-warning-text-color: @widget-text-color;
-@notification-warning-border-color: @notification-warning-background-color;
-@notification-error-background-color: #be5138;
-@notification-error-text-color: @widget-text-color;
-@notification-error-border-color: @notification-error-background-color;
-@tooltip-background-color: #00aba9;
-@draghandle-border-color: #00aba9;
-@draghandle-shadow: 0 1px 1px 0 rgba(0,0,0,0.5);
-@draghandle-hover-border-color: #086;
-@draghandle-hover-shadow: 0 1px 1px 0 rgba(0,0,0,0.5);
-@alt-background-color: #1e1e1e;
-@nested-alt-background-color: lighten(@alt-background-color, 8%);
-@active-filter-background-color: @active-background-color;
-@column-highlight-background-color: #232323;
-@event-text-color: @widget-text-color;
-@event-inverse-text-color: @scheduler-background-color;
-@event-background-color: #086;
-@scheduler-nonwork-background-color: #393939;
-@resize-background-color: #fff;
-@input-background-color: #0e0e0e;
-@shadow-color: rgba(255,255,255,.1);
-@upload-progress-background-color: #366ba0;
-@upload-progress-text-color: @widget-text-color;
-@upload-success-background-color: #3f8b66;
-@upload-success-text-color: @widget-text-color;
-@upload-error-background-color: #aa2929;
-@upload-error-text-color: @widget-text-color;
-@task-summary-color: darken(@widget-text-color, 25%);
-@task-summary-selected-color: darken(@selected-background-color, 25%);
-@loading-panel-color: #0e0e0e;
-@splitbar-background-color: #111;
-@disabled-background-color: @button-background-color;
-@disabled-border-color: @widget-border-color;
-@disabled-gradient: @widget-gradient;
+@selected-gradient: none;
 
-@tabstrip-active-background: @active-background-color;
+@error: #e20000;
+@warning: #ff9900;
+@success: #2b893c;
+@info: #0c779b;
 
-@primary-button-text-color: #fff;
-@primary-button-background-color: #086;
-@primary-button-border-color: #086;
-
-@primary-hover-text-color: @primary-button-text-color;
-@primary-hover-background-color: #00aba9;
-@primary-hover-border-color: #00aba9;
-@primary-hover-shadow:none;
-
-@primary-focused-color: @primary-button-text-color; 
-@primary-focused-border-color: #00d1cf;
-
-@primary-active-background-color: #086;
-
-@primary-disabled-text-color: #0e0e0e;
-@primary-disabled-background-color: #065756;
-@primary-disabled-border-color: @primary-disabled-background-color;
-
-//Checkboxes
-@checkbox-border-color-before: transparent;
-@checkbox-border-color-after: #565656;
-@checkbox-border-radius-before: 0;
-@checkbox-background-color: @widget-background-color;
-
-@checkbox-hover-border-color: #00aba9;
-@checkbox-hover-box-shadow: none;
-
-@checkbox-checked-border-color-after: #565656;
-@checkbox-checked-border-radius-after: 0;
-@checkbox-checked-background-color-after: #0e0e0e;
-@checkbox-checked-color-after: #00aba9;
-
-@checkbox-active-border-color-before: transparent;
-@checkbox-active-border-color-after: #00aba9;
-@checkbox-active-border-radius: 0;
-@checkbox-active-border-radius-after: 0;
-@checkbox-active-box-shadow: none;
-
-@checkbox-checked-active-border-radius-before: 0;
-@checkbox-checked-active-box-shadow: @checkbox-active-box-shadow;
-
-@checkbox-checked-disabled-color-after: #333333;
-@checkbox-disabled-background-color-after: #0e0e0e;
-@checkbox-disabled-color: #787878;
-@checkbox-disabled-box-shadow: none;
-@checkbox-disabled-border-color-before: #333333;
-
-//Radio buttons
-@radio-border-color-before: #565656;
-@radio-background-color: @widget-background-color;
-@radio-border-width-before: 1px;
-
-@radio-hover-border-color: #00aba9;
-@radio-hover-box-shadow:none;
-
-@radio-checked-border-color-before: #565656;
-@radio-checked-background-color-after: #00aba9;
-
-@radio-active-border-color-before: #00aba9;
-@radio-active-box-shadow: none;
-
-@radio-checked-active-border-color-before: #00aba9;
-@radio-checked-active-box-shadow: none;
-
-@radio-disabled-background-color-after: #0e0e0e;
-@radio-disabled-color: #787878;
-@radio-disabled-box-shadow: none;
-@radio-disabled-background-color-before: #0e0e0e;
+// graphics
+@image-folder: "MetroBlack";
+@texture: none;
+@fallback-texture: none;
 
 @import "type-metro.less";
-@import "theme-template.less";
