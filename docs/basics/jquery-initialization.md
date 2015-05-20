@@ -95,7 +95,7 @@ This example sets the [height](/api/web/grid#height-numberstring), [columns](/ap
 
 Please be careful **not** to initialize a widget on the same DOM element **more than once**.
 That often happens when using Kendo UI server wrappers (they are initialized automatically), or scenarios in which a widget is created in an event handler executed multiple times.
-A common mistake is to recreate a widget instance when the goal is to get the instance object. **Duplicate initialization is not supported** and results in unexpected side effects.
+A common mistake is to recreate a widget instance when the goal is only to get the instance object. **Duplicate initialization is not supported** and results in unexpected side effects.
 
 ### Example - Incorrect Duplicate Initialization
 
