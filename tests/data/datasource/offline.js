@@ -125,6 +125,21 @@
         equal(dataSource.offlineData()[0].foo, data[0].foo);
     });
 
+    test("state is passed via the reader serialize prior to saving", 1, function() {
+        var state = [ { foo: "foo" } ];
+
+        var dataSource = new DataSource({
+            offlineStorage: "key",
+            schema: {
+                serialize: function(data) {
+                    strictEqual(state, data);
+                }
+            }
+        });
+
+        dataSource.offlineData(state);
+    });
+
     function serverGroupedDataSource(data) {
         return new DataSource({
             offlineStorage: "key",
