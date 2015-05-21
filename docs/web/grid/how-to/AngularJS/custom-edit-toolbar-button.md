@@ -18,9 +18,11 @@ The example below demonstrates how to create custom edit button in the Grid's to
     </div>
 
     <script>
-      angular.module("KendoDemos", [ "kendo.directives" ]);
+      angular.module("KendoDemos", [ "kendo.directives" ])
+             .controller("MyCtrl", MyCtrl);
+
       function MyCtrl($scope) {
-				$scope.crudServiceBaseUrl = "http://demos.telerik.com/kendo-ui/service"
+        $scope.crudServiceBaseUrl = "http://demos.telerik.com/kendo-ui/service";
         $scope.dataSource = new kendo.data.DataSource({
           transport: {
             read:  {
@@ -81,11 +83,11 @@ The example below demonstrates how to create custom edit button in the Grid's to
               e.preventDefault();
               var selected = $scope.myGrid.select();
               if(selected.length == 0){
-              	alert('No record selected')
+                alert('No record selected')
               } else {
-              	$scope.myGrid.editRow(selected);
+                $scope.myGrid.editRow(selected);
               }
-              
+
             });
           }
         });

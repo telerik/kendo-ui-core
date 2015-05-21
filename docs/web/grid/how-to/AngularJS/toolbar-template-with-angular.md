@@ -25,14 +25,14 @@ The example below demonstrates how to create custom Grid ToolBar template in Ang
 </div>
 
 <script>
-    angular.module("KendoDemos", ["kendo.directives"]);
     function MyCtrl($scope) {
-
         $scope.data = new kendo.data.DataSource({ data: [{foo: "foo", bar: "bar"}] });
         $scope.gridName = "My Grid";
         $scope.toolbarTemplate = $("#template").html();
         $scope.toolbarClick = function() { console.log("click"); }
-
     }
+
+    angular.module("KendoDemos", ["kendo.directives"])
+           .controller("MyCtrl", MyCtrl);
 </script>
 ```
