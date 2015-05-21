@@ -212,7 +212,7 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "cancel": "Annuller",
   "operator": "Operatør",
   "value": "Value",
-  "or": "Or"
+  "or": "Eller"
 });
 }
 
