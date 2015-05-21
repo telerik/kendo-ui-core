@@ -343,6 +343,11 @@ var __meta__ = {
             if (val === undefined) {
                 val = ngModel.$modelValue;
             }
+
+            if (val === undefined) {
+                val = null;
+            }
+
             setTimeout(function(){
                 if (widget) { // might have been destroyed in between. :-(
                     widget.value(val);
