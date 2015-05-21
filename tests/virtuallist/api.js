@@ -585,8 +585,9 @@
             transport: {
                 read: function(options) {
                     setTimeout(function() {
+                        console.log("VirtualList rapid scrolling: transport success");
                         options.success({ data: generateData(options.data), total: 300 });
-                    }, 200);
+                    }, 400);
                 }
             },
             serverPaging: true,
@@ -612,13 +613,16 @@
         virtualList.one("listBound", function() {
             virtualList.scrollTo(240 * 40); //scroll to the 260th item (should be loading...)
             setTimeout(function() {
+                console.log("VirtualList rapid scrolling: scroll to loading records");
                 virtualList.scrollTo(155 * 40); //scroll to the 155th item (should be loading...)
                 setTimeout(function() {
+                    console.log("VirtualList rapid scrolling: scroll up to loading records");
                     item = virtualList.items().filter("[data-offset-index=155]");
                     item.trigger("click"); //trigger the 'click' before item is loaded
 
                     virtualList.one("listBound", function() {
                         start();
+                        console.log("VirtualList rapid scrolling: after transport success");
                         item.trigger("click"); //trigger the 'click' after item is loaded
                     });
                 });
