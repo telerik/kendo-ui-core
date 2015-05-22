@@ -290,6 +290,20 @@ tzTest("Sofia", "month view renders empty string if date is not in range", funct
     equal(div.find("tbody").find("a:last").html(), max.getDate() + "");
 });
 
+tzTest("Brazil", "last day of March is rendered as part of the current month", function() {
+    var today = new Date(2015, 2, 31),
+    max = new Date(2015, 3, 1);
+
+    div.html(calendar.views[0].content({
+        date: today,
+        empty: template.empty,
+        min: new Date(today),
+        max: max,
+        content: template.content
+    }));
+    equal($("[data-value='2015/2/31']").parent().hasClass("k-other-month"), false);
+});
+
 test("month view should render data-val attribute", function() {
     var max = new Date(2011, 9, 19),
         today = new Date(2011, 9, 10),
