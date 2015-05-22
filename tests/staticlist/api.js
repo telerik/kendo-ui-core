@@ -1160,6 +1160,19 @@
         equal(list.element.children(".k-state-selected").length, 1);
     });
 
+    test("value method selects item with unescaped characters", 1, function() {
+        var list = new StaticList(element, {
+            dataSource: ["item1\"", "item2", "item3"],
+            template: "#:data#"
+        });
+
+        list.dataSource.read();
+
+        list.value("item1\"");
+
+        equal(list.element.children(".k-state-selected").length, 1);
+    });
+
     test("next method focuses first item if no items are focused", function() {
         var list = new StaticList(element, {
             dataSource: ["item1", "item2", "item3"],
