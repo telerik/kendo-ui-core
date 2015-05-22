@@ -144,7 +144,7 @@ var __meta__ = {
 
         options: {
             name: "MultiSelect",
-            renderMode: "multiline",
+            tagMode: "multiple", //single
             enabled: true,
             autoBind: true,
             autoClose: true,
@@ -705,7 +705,7 @@ var __meta__ = {
             var isRtl = kendo.support.isRtl(that.wrapper);
             var visible = that.popup.visible();
 
-            if (that.options.renderMode !== "multiline") {
+            if (that.options.tagMode !== "multiline") {
                 tag = null;
             }
 
@@ -1020,7 +1020,7 @@ var __meta__ = {
 
             that._angularTagItems("cleanup");
 
-            if (that.options.renderMode === "multiline") {
+            if (that.options.tagMode === "multiline") {
                 for (idx = removed.length - 1; idx > -1; idx--) {
                     removedItem = removed[idx];
 
@@ -1116,7 +1116,7 @@ var __meta__ = {
                 options.dataValueField = options.dataValueField || "value";
             }
 
-            if (options.renderMode === "multiline") {
+            if (options.tagMode === "multiline") {
                 tagTemplate = tagTemplate ? kendo.template(tagTemplate) : kendo.template("#:" + kendo.expr(options.dataTextField, "data") + "#", { useWithBlock: false });
                 that.tagTextTemplate = tagTemplate;
 
