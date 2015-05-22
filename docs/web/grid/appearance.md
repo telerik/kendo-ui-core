@@ -188,6 +188,7 @@ All set column widths will be obeyed no matter what the cell content is. If the 
 * When Grid **scrolling is disabled**, the `table-layout` style is set to `auto`. This is the default behavior of HTML tables.
 The column widths are determined by the browser and cell content, if not set explicitly.
 The browser will try to obey all set column widths, but may readjust some columns, depending on their content.
+The column widths may change on paging, sorting and other data operations.
 
 If needed, a fixed table layout can be applied to a non-scrollable Grid:
 
