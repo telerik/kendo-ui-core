@@ -5,8 +5,11 @@ description: How to download, install Telerik UI for ASP.NET MVC 6 and run the s
 position: -1
 ---
 
-# Telerik UI for ASP.NET MVC - Beta
+# Telerik UI for ASP.NET MVC 6 - Beta 3
 This tutorial shows how to use Telerik UI for ASP.NET MVC in ASP.NET MVC 6 applications.
+
+> An update to Beta 4 is in the works and will be released shortly.
+
 
 > The ASP.NET 5 Framework is still actively developed. Tooling and APIs change frequently, often requiring extensive changes.
 See [Known Issues](known-issues) for up-to-date information.
