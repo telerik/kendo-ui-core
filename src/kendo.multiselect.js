@@ -131,7 +131,7 @@ var __meta__ = {
         _preselect: function(data, value) {
             var that = this;
 
-            if (!isArray(data)) {
+            if (!isArray(data) && !(data instanceof kendo.data.ObservableArray)) {
                 data = [data];
             }
 
