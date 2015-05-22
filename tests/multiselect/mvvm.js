@@ -362,6 +362,28 @@
         equal(tags.first().children("span:first").text(), "bar");
     });
 
+    test("value binding honors value as ObservableArray and autoBind:false option", function() {
+        dom = $('<select data-role="multiselect" data-value-field="value" data-text-field="text" data-auto-bind="false" data-value-primitive="false" data-bind="value:value, source:items"></select>');
+
+        var items = new kendo.data.ObservableArray([{text:"foo", value: 1}, {text:"bar", value: 2}]);
+        var observable = kendo.observable({
+            items: new kendo.data.DataSource({ data: items })
+        });
+
+        observable.value = new kendo.data.ObservableArray(items);
+
+        kendo.bind(dom, observable);
+
+        var widget = dom.data("kendoMultiSelect");
+        var tags = widget.tagList.children();
+
+        equal(widget.dataSource.view().length, 2);
+
+        equal(tags.length, 2);
+        equal(tags.first().children("span:first").text(), "foo");
+        equal(tags.last().children("span:first").text(), "bar");
+    });
+
     test("source binding updates widgets value if value binding exists", function() {
         dom = $('<select data-role="multiselect" data-value-field="value" data-text-field="text" data-value-primitive="true" data-bind="value:value, source:items"></select>');
 
