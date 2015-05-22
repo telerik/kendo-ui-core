@@ -718,6 +718,9 @@ var __meta__ = {
             if (value === undefined) {
                 return element.value;
             } else {
+                if (value === null) {
+                    value = "";
+                }
                 element.value = value;
             }
         },
