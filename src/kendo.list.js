@@ -1535,7 +1535,7 @@ var __meta__ = {
                         selectedValue = '""';
                     } else if (selectedValue !== null) {
                         if ((type !== "boolean" && type !== "number") || typeof selectedValue === "object") {
-                            selectedValue = '"' + selectedValue + '"';
+                            selectedValue = '"' + selectedValue.replace(/"/g, "\\\"") + '"';
                         } else if (type === "number" && isNaN(selectedValue)) {
                             continue;
                         }
