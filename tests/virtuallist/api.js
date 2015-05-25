@@ -579,6 +579,7 @@
         });
     });
 
+/*
     asyncTest("click event fires after rapid scrolling forward and backwards of onloaded items", 1, function() {
 
         var dataSource = new kendo.data.DataSource({
@@ -628,9 +629,8 @@
                 });
             }, 100);
         });
-
-        asyncDataSource.read();
     });
+*/
 
     //methods
 
