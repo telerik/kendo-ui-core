@@ -6155,7 +6155,7 @@ The widget instance which fired the event.
         }
       ],
       dataBinding: function(e) {
-        console.log("dataBinding"));
+        console.log("dataBinding");
       }
     });
     </script>
