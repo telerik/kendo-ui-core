@@ -844,4 +844,19 @@ test("ComboBox does not rebind on open if still in filter mode", 1, function() {
     equal(combobox.ul.children().length, 0);
 });
 
+test("ComboBox keeps the user input on inital bind", 1, function() {
+    combobox = new ComboBox(input, {
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: data,
+        autoBind: false,
+        delay: 0
+    });
+
+    combobox.input.val("unknown");
+    combobox.search();
+
+    equal(combobox.input.val(), "unknown");
+});
+
 })();
