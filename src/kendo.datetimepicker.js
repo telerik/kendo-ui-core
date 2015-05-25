@@ -405,6 +405,8 @@ var __meta__ = {
                 isSameType = (date === null && current === null) || (date instanceof Date && current instanceof Date),
                 rebind, timeViewOptions, old, skip, formattedValue;
 
+            that._midnight = getMilliseconds(options.min) + getMilliseconds(options.max) === 0;
+
             if (+date === +current && isSameType) {
                 formattedValue = kendo.toString(date, options.format, options.culture);
 
