@@ -345,30 +345,27 @@
         equal(multiselect.ul.children().length, 0);
     });
 
-    asyncTest("MultiSelect does not request source for second time if already started", 1, function() {
+    test("MultiSelect does not request source for second time if already started", 1, function() {
         popuplateSelect();
 
+        var def = $.Deferred();
         var source =  new kendo.data.DataSource({
             transport: {
                 read: function(options) {
-                    setTimeout(function() {
-                        start();
+                    ok(true);
+
+                    def.done(function() {
                         options.success([]);
-                    }, 10);
+                    });
                 }
             }
         });
 
         var multiselect = new MultiSelect(select);
 
-        stub(source, {
-            fetch: source.fetch
-        })
-
         multiselect.setDataSource(source);
         multiselect.value([1]);
-
-        equal(source.calls("fetch"), 1);
+        def.resolve();
     });
 
     test("MultiSelect toggles popup element", function() {
