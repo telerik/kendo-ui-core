@@ -800,4 +800,17 @@ test("setOptions updates options.dates", 1, function() {
     equal(datetimepicker.options.dates.length, 2);
 });
 
+test("setOptions updates max option correctly", 1, function() {
+    var datetimepicker = new DateTimePicker(input, {
+    });
+
+    var max = new Date(new Date().getTime() + (5 * 3600000));
+
+    datetimepicker.setOptions({
+        max: max
+    });
+    datetimepicker.value(max);
+    ok(datetimepicker.timeView.ul.children().length > 1);
+});
+
 })();
