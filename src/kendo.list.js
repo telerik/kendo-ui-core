@@ -175,7 +175,7 @@ var __meta__ = {
                 that.listView.value(value).done(function() {
                     var text = options.text;
 
-                    if (that.input && that.selectedIndex === -1) {
+                    if (!that.listView.filter() && that.input && that.selectedIndex === -1) {
                         if (text === undefined || text === null) {
                             text = value;
                         }
