@@ -838,6 +838,7 @@ The event handler function context (available via the `this` keyword) will be se
             //handle event
         }
     });
+	var listView = $("#listView").data("kendoListView");
     listView.edit(listView.element.children().first());
     </script>
 
