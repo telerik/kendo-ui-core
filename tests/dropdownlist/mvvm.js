@@ -171,27 +171,32 @@
         equal(dom.data("kendoDropDownList").value(), "bar");
     });
 
-    test("value binding honors autoBind:false option when valuePrimitive is true", function() {
+    test("value binding with autobind:false and valueprimitive:true binds source when selected text is not defined", function() {
         dom = $('<input data-role="dropdownlist" data-value-field="value" data-text-field="text" data-auto-bind="false" data-value-primitive="true" data-bind="value:value, source:items" />');
 
         var observable = kendo.observable({
-            items: new kendo.data.DataSource([{text:"foo"}, {text:"bar"}]),
-            value: "bar"
+            items: new kendo.data.DataSource({
+                data: [{text:"foo", value:"1"}, {text:"bar", value: "2"}]
+            }),
+            value: "2"
         });
 
         kendo.bind(dom, observable);
 
         var widget = dom.data("kendoDropDownList");
 
-        equal(widget.value(), "bar");
-        equal(widget.text(), "");
+        equal(widget.dataSource.view().length, 2);
+        equal(widget.value(), "2");
+        equal(widget.text(), "bar");
     });
 
     test("value binding displays options.text when autoBind:false and valuePrimitive is true", function() {
         dom = $('<input data-role="dropdownlist" data-value-field="value" data-text-field="text" data-auto-bind="false" data-text="selected text" data-value-primitive="true" data-bind="value:value, source:items" />');
 
         var observable = kendo.observable({
-            items: new kendo.data.DataSource([{text:"foo"}, {text:"bar"}]),
+            items: new kendo.data.DataSource({
+                data: [{text:"foo"}, {text:"bar"}]
+            }),
             value: "bar"
         });
 
@@ -199,6 +204,7 @@
 
         var widget = dom.data("kendoDropDownList");
 
+        equal(widget.dataSource.view().length, 0);
         equal(widget.value(), "bar");
         equal(widget.text(), "selected text");
     });
