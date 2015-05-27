@@ -118,7 +118,7 @@
         equal(widget.text(), "green");
     });
 
-    ngTest("dropdown with autoBind:false and primitiveValue:false skips binding when value is set", 3, function() {
+    ngTest("dropdown with autoBind:false and primitiveValue:true binds source if selected text is missing", 3, function() {
         angular.module("kendo.tests").controller("mine", function($scope) {
             var colors = new kendo.data.ObservableArray([ { color: "red", value: 1 }, { color: "green", value: 2 }, { color: "blue", value: 3 } ]);
 
@@ -132,9 +132,9 @@
     function() {
         var widget = QUnit.fixture.find("select").getKendoDropDownList();
 
-        equal(widget.listView.isBound(), false);
+        equal(widget.dataSource.view().length, 3);
         equal(widget.value(), 2);
-        equal(widget.text(), "");
+        equal(widget.text(), "green");
     });
 
     ngTest("dropdown with autoBind:false sets text to options.text", 3, function() {
