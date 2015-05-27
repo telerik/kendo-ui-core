@@ -978,7 +978,11 @@ var __meta__ = {
         }
 
         if (self.options.autoBind === false && !self.listView.isBound()) {
-            self._preselect(val, text);
+            if (!text && val && options.valuePrimitive) {
+                self.value(val);
+            } else {
+                self._preselect(val, text);
+            }
         } else {
             self.value(val);
         }
