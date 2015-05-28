@@ -290,7 +290,7 @@ html body .k-button-bare.k-upload-button:hover
 }
 
 // outputs background-position and hover state background position, aligned in a grid
-.sprite-hoverable(@row, @column, @size: @grid-size) when not (ispixel(@column)) {
+.sprite-hoverable(@row, @column, @size: @grid-size) when not (ispixel(@column)) and not (@icon-positioning = "material") {
     .sprite-position(@row, @column, @size);
 
     .k-link:not(.k-state-disabled):hover > &,
@@ -300,10 +300,20 @@ html body .k-button-bare.k-upload-button:hover
     .k-textbox:hover &,
     .k-button:active & {
         .sprite-position(@row + 1, @column, @size);
+    }
+}
 
-        & when (@icon-positioning = "material") {
-            .sprite-position(@row, @column);
-        }
+// sprite positioning for material theme
+.sprite-hoverable(@row, @column, @size: @grid-size) when not (ispixel(@column)) and (@icon-positioning = "material") {
+    .sprite-position(@row, @column, @size);
+
+    .k-link:not(.k-state-disabled):hover > &,
+    .k-state-hover > &,
+    .k-state-hover > * > &,
+    .k-button:not(.k-state-disabled):hover &,
+    .k-textbox:hover &,
+    .k-button:active & {
+        .sprite-position(@row, @column, @size);
     }
 }
 
