@@ -589,7 +589,7 @@ test("ComboBox trigger change when selected index is changed", 2, function() {
 });
 
 test("ComboBox triggers filtering event on data source filter", 3, function() {
-    var combobox = input.kendoComboBox({
+    combobox = input.kendoComboBox({
         autoBind: false,
         dataSource: ["foo", "bar"],
         filter: "contains",
@@ -606,7 +606,7 @@ test("ComboBox triggers filtering event on data source filter", 3, function() {
 });
 
 test("modifying filter expression in filtering event changes datasource result", 2, function() {
-    var combobox = input.kendoComboBox({
+    combobox = input.kendoComboBox({
         autoBind: false,
         dataSource: ["foo", "bar"],
         filter: "contains",
@@ -624,7 +624,7 @@ test("modifying filter expression in filtering event changes datasource result",
 });
 
 test("ComboBox filtering event can be prevented", 0, function() {
-    var combobox = input.kendoComboBox({
+    combobox = input.kendoComboBox({
         dataSource: ["foo", "bar"],
         filter: "contains",
         filtering: function(e) {
@@ -637,6 +637,18 @@ test("ComboBox filtering event can be prevented", 0, function() {
     });
 
     combobox.search("baz");
+});
+
+test("ComboBox does not trigger change event on blur after initialization (<select>)", 0, function() {
+    var select = $('<select id="combobox"><option selected></option><option value="1">Value1</option></select>');
+
+    combobox = select.kendoComboBox({
+        change: function(e) {
+            ok(false);
+        }
+    }).data("kendoComboBox");
+
+    combobox.input.focus().blur();
 });
 
 })();
