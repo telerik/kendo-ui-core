@@ -4042,6 +4042,35 @@ function pad(number, digits, end) {
         return tokens;
     };
 
+    kendo.cycleForm = function(form) {
+        var firstElement = form.find("input, .k-widget").first();
+        var lastElement = form.find("button, .k-button").last();
+
+        function focus(el) {
+            var widget = kendo.widgetInstance(el);
+
+            if (widget && widget.focus) {
+              widget.focus();
+            } else {
+              el.focus();
+            }
+        }
+
+        lastElement.on("keydown", function(e) {
+          if (e.keyCode == kendo.keys.TAB && !e.shiftKey) {
+            e.preventDefault();
+            focus(firstElement);
+          }
+        });
+
+        firstElement.on("keydown", function(e) {
+          if (e.keyCode == kendo.keys.TAB && e.shiftKey) {
+            e.preventDefault();
+            focus(lastElement);
+          }
+        });
+    };
+
     // kendo.saveAs -----------------------------------------------
     (function() {
         function postToProxy(dataURI, fileName, proxyURL, proxyTarget) {
