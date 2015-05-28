@@ -782,6 +782,7 @@ var __meta__ = {
 
             custom.text(value);
             custom[0].setAttribute(SELECTED, SELECTED);
+            custom[0].selected = true;
         },
 
         _hideBusy: function () {

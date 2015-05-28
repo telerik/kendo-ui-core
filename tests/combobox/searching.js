@@ -859,4 +859,30 @@ test("ComboBox keeps the user input on inital bind", 1, function() {
     equal(combobox.input.val(), "unknown");
 });
 
+test("text method should set custom value to already added custom option", 2, function() {
+    var values = ["unknown", "unknown2"];
+    var select = $("<select></select>");
+
+    combobox = new ComboBox(select, {
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: data,
+        filter: "contains",
+        delay: 0,
+        change: function() {
+            equal(this.value(), values.shift());
+        }
+    });
+
+    var input = combobox.input;
+
+    input.focus().val("unknown");
+    combobox.search();
+    input.blur();
+
+    input.focus().val("unknown2");
+    combobox.search();
+    input.blur();
+});
+
 })();
