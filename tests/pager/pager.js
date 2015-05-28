@@ -604,7 +604,7 @@
         dataSource.read();
 
         var select = pager.find(".k-pager-sizes select");
-        select.val(select.find("options:first").val()).trigger("change");
+        select.val("all").trigger("change");
 
         equal(dataSource.pageSize(), 5);
     });
