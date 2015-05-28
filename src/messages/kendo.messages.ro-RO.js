@@ -295,7 +295,7 @@ $.extend(true, kendo.ui.Pager.prototype.options.messages,{
 if (kendo.ui.Scheduler) {
 kendo.ui.Scheduler.prototype.options.messages =
 $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
-  "allDay": "toate zilele",
+  "allDay": "toată ziua",
   "cancel": "Anulează",
   "editable": {
     "confirmation": "Are you sure you want to delete this event?"
