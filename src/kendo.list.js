@@ -175,13 +175,17 @@ var __meta__ = {
                 that.listView.value(value).done(function() {
                     var text = options.text;
 
-                    if (!that.listView.filter() && that.input && that.selectedIndex === -1) {
-                        if (text === undefined || text === null) {
-                            text = value;
-                        }
+                    if (!that.listView.filter() && that.input) {
+                        if (that.selectedIndex === -1) {
+                            if (text === undefined || text === null) {
+                                text = value;
+                            }
 
-                        that._accessor(value);
-                        that.input.val(text);
+                            that._accessor(value);
+                            that.input.val(text);
+                        } else if (that._oldIndex === -1) {
+                            that._oldIndex = that.selectedIndex;
+                        }
                     }
                 });
             }
