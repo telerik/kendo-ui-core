@@ -1218,8 +1218,6 @@ var __meta__ = {
                     that._renderHeader();
                 }, 50);
             }, this);
-
-            this._fixedHeader();
         },
 
         options: {
@@ -1269,7 +1267,6 @@ var __meta__ = {
         setOptions: function(options) {
             Widget.fn.setOptions.call(this, options);
 
-            this._fixedHeader();
             this._getter();
             this._templates();
             this._render();
@@ -1936,6 +1933,8 @@ var __meta__ = {
             var action = e && e.action;
 
             that.trigger("dataBinding");
+
+            that._fixedHeader();
 
             that._render();
 

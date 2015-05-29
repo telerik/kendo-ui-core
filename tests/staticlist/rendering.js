@@ -159,23 +159,25 @@
         ok(!header[0].style.display);
     });
 
-    test("kendoStaticList renders fixed grouped header", function() {
+    test("kendoStaticList renders fixed grouped header when source is grouped dynamically", function() {
+        var data = [
+            { name: "item1", type: "a" },
+            { name: "item2", type: "a" },
+            { name: "item3", type: "b" }
+        ];
+
         var list = new StaticList(element, {
             dataValueField: "name",
-            dataSource: {
-                data: [
-                    { name: "item1", type: "a" },
-                    { name: "item2", type: "a" },
-                    { name: "item3", type: "b" }
-                ],
-                group: "type"
-            },
+            dataSource: { },
             template: '#:data.name#',
             groupTemplate: '#:data#',
             fixedGroupTemplate: '#:data#'
         });
 
         list.dataSource.read();
+
+        list.dataSource.group({ field: "type" });
+        list.dataSource.data(data);
 
         var header = list.header;
 
