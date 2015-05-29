@@ -1260,6 +1260,10 @@ function pad(number, digits, end) {
                         calendar._lowerDays = lowerLocalInfo(calendar.days);
                     }
 
+                    if (day !== null && count > 2) {
+                        continue;
+                    }
+
                     day = count < 3 ? getNumber(2) : getIndexByName(calendar._lowerDays[count == 3 ? "namesAbbr" : "names"], true);
 
                     if (day === null || outOfRange(day, 1, 31)) {

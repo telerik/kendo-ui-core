@@ -336,10 +336,16 @@ test('parse Croatian Language date format', function () {
     var result = parse("5.3.2008.", dateFormat);
     ok(isValidDate(2008, 3, 5, result));
 });
-test('parse Invariant Language long date format', function () { // Also: Persian
 
+test('parse Invariant Language long date format', function () { // Also: Persian
     var dateFormat = "dddd, dd MMMM yyyy";
     var result = parse("Saturday, 23 December 2000", dateFormat);
+    ok(isValidDate(2000, 12, 23, result));
+});
+
+test('parse method skips dddd in favor of dd value', function () { // Also: Persian
+    var dateFormat = "dd MMMM yyyy, dddd";
+    var result = parse("23 December 2000, Saturday", dateFormat);
     ok(isValidDate(2000, 12, 23, result));
 });
 
