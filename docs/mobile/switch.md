@@ -13,7 +13,7 @@ The mobile Switch can be created from `input` element of type `checkbox`.
 
 ## Getting Started
 
-The Kendo Mobile Application will automatically initialize a mobile Switch for every element with `role` data attribute set to `swtich` present in the views/layouts markup.
+The Kendo Mobile Application will automatically initialize a mobile Switch for every element with `role` data attribute set to `switch` present in the views/layouts markup.
 Alternatively, it can be initialized using jQuery plugin syntax in the containing mobile View **init event handler**.
 
 ### Initialize mobile Switch based on role data attribute
