@@ -516,4 +516,27 @@
 
         equal(selectedItems.length, 1);
     });
+
+    test("StaticList supports group value set to undefined", function() {
+        var data = [
+            { name: "item", value: 1, group: "a" },
+            { name: "item2", value: 2, group: "b" }
+        ];
+
+        var list = new StaticList(element, {
+            dataSource: {
+                transport: {
+                    read: function(options) {
+                        options.success(data);
+                    }
+                }
+            },
+            template: '#:data.name#',
+            dataValueField: "value"
+        });
+
+        list.dataSource.query({ filter: null });
+
+        ok(true);
+    });
 })();
