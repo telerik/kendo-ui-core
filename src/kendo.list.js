@@ -1826,7 +1826,7 @@ var __meta__ = {
         },
 
         _fixedHeader: function() {
-            if (this.dataSource.group().length && this.templates.fixedGroupTemplate) {
+            if (this.isGrouped() && this.templates.fixedGroupTemplate) {
                 this.header.show();
                 this.content.scroll(this._onScroll);
             } else {
@@ -1885,7 +1885,7 @@ var __meta__ = {
             var values = this.value();
 
             var group, newGroup, j;
-            var isGrouped = this.dataSource.group().length;
+            var isGrouped = this.isGrouped();
 
             if (isGrouped) {
                 for (i = 0; i < view.length; i++) {
@@ -1967,6 +1967,10 @@ var __meta__ = {
 
         isBound: function() {
             return this._bound;
+        },
+
+        isGrouped: function() {
+            return (this.dataSource.group() || []).length;
         }
     });
 

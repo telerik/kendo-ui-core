@@ -909,4 +909,36 @@
         });
     });
 
+    asyncTest("VirtualList supports group value set to undefined", function() {
+        QUnit.fixture.empty();
+        container = $("<div id='hidden' style='display: none;'><div id='container'></div></div>").appendTo(QUnit.fixture);
+
+        var data = [
+            { text: "item", value: 1, group: "a" },
+            { text: "item2", value: 2, group: "b" }
+        ];
+
+        var virtualList = new VirtualList(container, {
+            dataSource: {
+                transport: {
+                    read: function(options) {
+                        options.success(data);
+                    }
+                }
+            },
+            autoBind: false,
+            dataSource: asyncDataSource,
+            itemHeight: ITEM_HEIGHT,
+            height: CONTAINER_HEIGHT,
+            template: "#:text#"
+        });
+
+        virtualList.dataSource.one("change", function() {
+            start();
+            ok(true);
+        });
+
+        virtualList.dataSource.query({ filter: null });
+    });
+
 })();
