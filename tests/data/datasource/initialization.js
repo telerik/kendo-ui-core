@@ -178,6 +178,52 @@ test("infer from html select skips disabled options", function() {
     equal(dataSource.data()[0].value, "2");
 });
 
+test("infer from grouped html select", function() {
+    var select = $("<select><optgroup label='group1'><option value=1>foo1</option></optgroup><optgroup label='group2'><option value=2>foo2</option></optgroup></select>"),
+        dataSource = DataSource.create({
+            select: select,
+            fields: [ { field: "text" }, { field: "value" } ]
+        });
+
+    dataSource.read();
+
+    var data = dataSource.data();
+
+    equal(data.length, 2);
+    equal(data[0].optgroup, "group1");
+    equal(data[1].optgroup, "group2");
+});
+
+test("infer from grouped html select skips disabled groups", function() {
+    var select = $("<select><optgroup disabled label='group1'><option value=1>foo1</option></optgroup><optgroup label='group2'><option value=2>foo2</option></optgroup></select>"),
+        dataSource = DataSource.create({
+            select: select,
+            fields: [ { field: "text" }, { field: "value" } ]
+        });
+
+    dataSource.read();
+
+    var data = dataSource.data();
+
+    equal(data.length, 1);
+    equal(data[0].optgroup, "group2");
+});
+
+
+test("infering from grouped html select sets group option", function() {
+    var select = $("<select><optgroup label='group1'><option value=1>foo1</option></optgroup><optgroup label='group2'><option value=2>foo2</option></optgroup></select>"),
+        dataSource = DataSource.create({
+            select: select,
+            fields: [ { field: "text" }, { field: "value" } ]
+        });
+
+    dataSource.read();
+
+    var group = dataSource.group();
+    equal(group.length, 1);
+    equal(group[0].field, "optgroup");
+});
+
 test("initialize data source from array", function() {
     var data = [1, 2],
         dataSource = DataSource.create(data);
