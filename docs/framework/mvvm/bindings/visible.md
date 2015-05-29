@@ -24,7 +24,7 @@ target DOM element will be shown. If the value is `false` the target DOM element
         }
     });
 
-    kendo.bind($("#div"), viewModel);
+    kendo.bind($("div"), viewModel);
     </script>
      </div>
 
