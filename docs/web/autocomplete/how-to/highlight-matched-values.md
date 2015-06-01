@@ -14,7 +14,7 @@ The example below demonstrates how to highlight the matched values from the Auto
       <div id="shipping">
         <label for="countries" class="info">Choose shipping countries:</label>
         <input id="countries" />
-        <div class="hint">Start typing the name of an European country</div>
+        <div class="hint">Start typing the name of a European country</div>
       </div>
       <script>
         $(document).ready(function () {
