@@ -168,7 +168,12 @@ test("$orderby when there are multiple order by expressions", function() {
 
 test("parametterMap does not add $filter if no filters is applied", function() {
     var result = parameterMap({ filter: null });
-    equal(typeof result.filter, "undefined");
+    equal(typeof result["$filter"], "undefined");
+});
+
+test("parametterMap does not add $filter if empty filter object is applied", function() {
+    var result = parameterMap({ filter: {logic: "and", filters: []} });
+    equal(typeof result["$filter"], "undefined");
 });
 
 test("parameterMap adds $filter if filter is specified", function() {

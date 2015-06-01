@@ -33,7 +33,10 @@ var __meta__ = {
             page: $.noop,
             filter: function(params, filter, useVersionFour) {
                 if (filter) {
-                    params.$filter = toOdataFilter(filter, useVersionFour);
+                    filter = toOdataFilter(filter, useVersionFour);
+                    if (filter) {
+                        params.$filter = filter;
+                    }
                 }
             },
             sort: function(params, orderby) {
