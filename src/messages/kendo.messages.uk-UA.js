@@ -153,6 +153,8 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "canceledit": "Скасувати",
     "update": "Оновити",
     "edit": "Редагувати",
+    "excel": "Export to Excel",
+    "pdf": "Export to PDF",
     "select": "Вибрати",
     "cancel": "Cancel Changes",
     "save": "Save Changes"

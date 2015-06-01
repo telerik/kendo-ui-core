@@ -185,6 +185,8 @@ if (kendo.ui.Grid) {
             "create": "Legg til post",
             "destroy": "Slett",
             "edit": "Endre",
+            "excel": "Export to Excel",
+            "pdf": "Export to PDF",
             "save": "Lagre",
             "select": "Velg",
             "update": "Oppdater"

@@ -276,6 +276,8 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "create": "Pridať nový záznam",
     "destroy": "Odstrániť",
     "edit": "Upraviť",
+    "excel": "Export to Excel",
+    "pdf": "Export to PDF",
     "save": "Uložiť zmeny",
     "select": "Vybrať",
     "update": "Uložiť"

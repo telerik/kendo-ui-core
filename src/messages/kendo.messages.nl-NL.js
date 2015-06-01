@@ -250,6 +250,8 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "create": "Item toevoegen",
     "destroy": "Verwijderen",
     "edit": "Bewerken",
+    "excel": "Export to Excel",
+    "pdf": "Export to PDF",
     "save": "Wijzigingen opslaan",
     "select": "Selecteren",
     "update": "Bijwerken"

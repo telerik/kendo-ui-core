@@ -276,6 +276,8 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "create": "Adicionar novo registo",
     "destroy": "Eliminar",
     "edit": "Editar",
+    "excel": "Export to Excel",
+    "pdf": "Export to PDF",
     "save": "Guardar alterações",
     "select": "Selecionar",
     "update": "Atualizar"

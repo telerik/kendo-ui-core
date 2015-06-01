@@ -250,6 +250,8 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "create": "Yeni Kayıt Ekle",
     "destroy": "Sil",
     "edit": "Düzenle",
+    "excel": "Export to Excel",
+    "pdf": "Export to PDF",
     "save": "Değişiklikleri Kaydet",
     "select": "Seçiniz",
     "update": "Güncelle"
