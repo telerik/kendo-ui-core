@@ -275,6 +275,8 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "create": "新規レコードを追加",
     "destroy": "削除",
     "edit": "編集",
+    "excel": "Export to Excel",
+    "pdf": "Export to PDF",
     "save": "変更の保存",
     "select": "選択",
     "update": "更新"

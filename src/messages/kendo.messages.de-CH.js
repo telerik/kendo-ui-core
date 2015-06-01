@@ -278,6 +278,8 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "create": "Neuen Datensatz hinzufügen",
     "destroy": "Löschen",
     "edit": "Bearbeiten",
+    "excel": "Export to Excel",
+    "pdf": "Export to PDF",
     "save": "Änderungen speichern",
     "select": "Wähle",
     "update": "Aktualisiere"

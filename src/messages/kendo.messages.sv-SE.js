@@ -185,6 +185,8 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "create": "Lägg till post",
     "destroy": "Radera",
     "edit": "Ändra",
+    "excel": "Export to Excel",
+    "pdf": "Export to PDF",
     "save": "Spara ändringar",
     "select": "Välj",
     "update": "Spara"

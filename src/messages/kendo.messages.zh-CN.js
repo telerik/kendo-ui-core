@@ -257,6 +257,8 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "create": "新增",
     "destroy": "删除",
     "edit": "编辑",
+    "excel": "Export to Excel",
+    "pdf": "Export to PDF",
     "save": "保存",
     "select": "选择",
     "update": "更新"

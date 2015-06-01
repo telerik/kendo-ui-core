@@ -153,6 +153,8 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "canceledit": "Fortryd",
     "update": "Opdatér",
     "edit": "Redigér",
+    "excel": "Export to Excel",
+    "pdf": "Export to PDF",
     "select": "Vælg",
     "cancel": "Fortryd ændringer",
     "save": "Gem ændringer"

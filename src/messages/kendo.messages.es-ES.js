@@ -153,6 +153,8 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "canceledit": "Cancelar",
     "update": "Actualizar",
     "edit": "Editar",
+    "excel": "Export to Excel",
+    "pdf": "Export to PDF",
     "select": "Seleccionar",
     "cancel": "Cancelar Cambios",
     "save": "Guardar Cambios"

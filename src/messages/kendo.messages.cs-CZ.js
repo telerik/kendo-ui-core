@@ -183,6 +183,8 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "create": "Přidat nový záznam",
     "destroy": "Smazat",
     "edit": "Upravit",
+    "excel": "Export to Excel",
+    "pdf": "Export to PDF",
     "save": "Uložit změny",
     "select": "Vybrat",
     "update": "Odemknout"
