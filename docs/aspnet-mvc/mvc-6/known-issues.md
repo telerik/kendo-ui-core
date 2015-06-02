@@ -15,7 +15,6 @@ Come back often for updates.
 ## ASP.NET 5 / MVC 6 Framework
 
 - Data Tables are not supported. See [dotnet/corefx#1039](https://github.com/dotnet/corefx/issues/1039)
-- UIHint does not work in MVC Beta 3. See [aspnet/Mvc#963](https://github.com/aspnet/Mvc/issues/963)
 - Localization resources are not supported. See [dotnet/corefx#947](https://github.com/dotnet/corefx/issues/947).
 
 ## UI Helpers
