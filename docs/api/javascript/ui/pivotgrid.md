@@ -903,6 +903,8 @@ If set to `true` the user can get the pivotgrid in unsorted state by clicking th
 
 The width of the table columns. Value is treated as pixels.
 
+> This option defines the **minimum** width of the column. If the widget is wider then (column numbers * column width) then the columns will be wider then the defined value. This is done to occupy all available space in the widget wrapper.
+
 #### Example - set the column width as a number
 
     <div id="pivotgrid"></div>
