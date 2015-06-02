@@ -45,7 +45,7 @@ If you have a way of fetching data that cannot be achieved through the default [
     </script>
 
 
-## Fetching a complete hierarchy though a single request
+## Fetching a complete hierarchy through a single request
 
 Because the HierarchicalDataSource loads data on demand, loading all available data can result in multiple requests to the server. In order to prevent this, you can make a single AJAX request to get all the data, and then provide it to the datasource.
 
