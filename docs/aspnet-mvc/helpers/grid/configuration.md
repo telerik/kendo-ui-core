@@ -166,6 +166,8 @@ Sets the initial grouping configuration of the data source.
 
 Configures the model of the data source.
 
+The data field names must be valid Javascript identifiers and should contain no spaces, no special characters, and the first character should be a letter.
+
 #### Example - configure the model
 
     @(Html.Kendo().Grid<Product>()
@@ -343,7 +345,10 @@ The [Columns](/api/wrappers/aspnet-mvc/Kendo.Mvc.UI.Fluent/GridBuilder#methods-C
 
 ## Bound Column Settings
 
-A bound column is declared via the `Bound` method. It has the following settings:
+A bound column is declared via the `Bound` method, which specifies a data field. The data field names must be valid Javascript identifiers and
+should contain no spaces, no special characters, and the first character should be a letter.
+
+Bound columns have the following settings:
 
 ### ClientTemplate
 
