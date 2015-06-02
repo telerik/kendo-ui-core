@@ -189,10 +189,16 @@ The following events are supported in server binding mode:
 
 - Change
 - ColumnHide
+- ColumnLock
+- ColumnMenuInit
 - ColumnReorder
 - ColumnResize
 - ColumnShow
+- ColumnUnlock
 - DetailCollapse
 - DetailExpand
+- ExcelExport
+- FilterMenuInit
+- PdfExport
 
-The other client-side events will **not** be raised when the grid is configured for server binding.
+The other client-side events (which are related to data-binding and CRUD operations) will **not** be raised when the grid is configured for server binding.

@@ -8038,7 +8038,7 @@ This allows you to change paper size, orientation and apply transformations on e
 
 ### filterMenuInit
 
-Fired when the grid filter menu is initialized.
+Fired when the grid filter menu is initialized, when it is opened for the first time.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 
