@@ -869,7 +869,7 @@ withAngularTests("Angular (UI Core)", function(runTest){
             start();
         });
     });
-	
+
 	runTest("ng-dirty/ng-pristine class are applied correctly on the autocomplete widget", function(dom, $scope){
         $("<input id='kac' kendo-auto-complete='ac' ng-model='country'/>").appendTo(dom);
 		expect(1);
@@ -880,5 +880,18 @@ withAngularTests("Angular (UI Core)", function(runTest){
             start();
         });
     });
-	
+
+    runTest("k-ng-model is updated when primitive values are used", function(dom, $scope){
+        $("<input kendo-drop-down-list='ddl' k-ng-model='foo' k-value-primitive='true' k-data-source='[\"one\", \"two\"]'/>").appendTo(dom);
+		expect(1);
+        $scope.whenRendered(function(){
+            $scope.ddl.value("two");
+            $scope.ddl.trigger("change");
+            equal($scope.foo, "two");
+            start();
+        });
+    });
+
+
+
 });
