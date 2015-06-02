@@ -953,7 +953,7 @@ var __meta__ = {
 
     defadvice("ui.Select", "$angular_getLogicValue", function(){
         var item = this.self.dataItem(),
-            valueField = this.self.options.valueValueField;
+            valueField = this.self.options.dataValueField;
 
         if (item) {
             if (this.self.options.valuePrimitive) {
