@@ -27,12 +27,12 @@ To define a new model use the `Model.define` method.
             }
         }
     });
-    
+
     var person = new Person({
         name: "John Doe",
         age: 42
     });
-    
+
     console.log(person.get("name")); // outputs "John Doe"
     console.log(person.get("age")); // outputs 42
     </script>
@@ -59,13 +59,13 @@ The name of the Model's ID field. This field is available **only** if the `id` i
             }
         }
     });
-    
+
     var person = new Person({
         personId: 1,
         name: "John Doe",
         age: 42
     });
-    
+
     console.log(person.id); // outputs 1
     console.log(person.idField); // outputs "personId"
     </script>
@@ -85,7 +85,7 @@ Indicates whether the model is modified.
     var model = new kendo.data.Model({
         name: "John Doe"
     });
-    
+
     console.log(model.dirty); // outputs "false"
     model.set("name", "Jane Doe");
     console.log(model.dirty); // outputs "true"
@@ -144,7 +144,7 @@ Specifies the field of the original record whose value is used to populate the M
 
 ##### options.fields.fieldName.validation `Object`
 
-Specifies the validation options which will be used by [Kendo Validator](/api/framework/validator).
+Specifies the validation options which will be used by [Kendo Validator](/api/javascript/ui/validator).
 
 #### Example - define the fields of a model
 
