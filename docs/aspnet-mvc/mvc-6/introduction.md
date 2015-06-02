@@ -5,18 +5,15 @@ description: How to download, install Telerik UI for ASP.NET MVC 6 and run the s
 position: -1
 ---
 
-# Telerik UI for ASP.NET MVC 6 - Beta 3
+# Telerik UI for ASP.NET MVC 6 - Beta 4
 This tutorial shows how to use Telerik UI for ASP.NET MVC in ASP.NET MVC 6 applications.
-
-> An update to Beta 4 is in the works and will be released shortly.
-
 
 > The ASP.NET 5 Framework is still actively developed. Tooling and APIs change frequently, often requiring extensive changes.
 See [Known Issues](known-issues) for up-to-date information.
 
 # Requirements and Supported Environments
 
-We target the stable release of the ASP.NET 5 framework. At the time of this writing this is Beta 3.
+We target the stable release of the ASP.NET 5 framework. At the time of this writing this is Beta 4.
 
 The target runtime is [CoreCLR](https://github.com/dotnet/coreclr). The full desktop CLR is also supported.
 
@@ -25,22 +22,18 @@ The target runtime is [CoreCLR](https://github.com/dotnet/coreclr). The full des
 The following repositories contain source code, instructions and issue trackers for the ASP.NET project.
 These are immensely useful when you need to track down particular issues or behaviors.
 
-- [ASP.NET Home](https://github.com/aspnet/home#install-the-net-execution-environment-dnx) on GitHub
-- [ASP.NET MVC](https://github.com/aspnet/home#install-the-net-execution-environment-dnx) on GitHub
+- [ASP.NET Home](https://github.com/aspnet/home) on GitHub
+- [ASP.NET MVC](https://github.com/aspnet/Mvc) on GitHub
 
-# Running the sample application
+# Running the Sample Application on Windows
 
-- Install the CTP 6 release of [Visual Studio 2015](https://www.visualstudio.com/en-us/downloads/visual-studio-2015-ctp-vs.aspx)
-- Install the stable version of the [.NET Version Manager](https://github.com/aspnet/home#install-the-net-version-manager-dnvm (KVM))
-- Issue the following commands to install the stable version of the [.NET Execution Environment](https://github.com/aspnet/home#install-the-net-execution-environment-dnx (KRE))
-```
-C:\> kvm upgrade -r CoreCLR
-C:\> kvm upgrade -r CLR
-```
-- Move the project from `C:\Program Files (x86)\Telerik\UI for ASP.NET MVC Q1 2015\wrappers\aspnetmvc\Examples\VS2015` to a shorter path, e.g. `C:\Kendo`.
-
-The default installation location is too long and will go over the 256-character path length limit. Alternatively, change the installation path during setup.
-
-- Open the `Kendo.Mvc.Examples.kproj` project in Visual Studio.
+- Install [Visual Studio 2015 RC](https://www.visualstudio.com/en-us/downloads/visual-studio-2015-downloads-vs.aspx)
+- Download the `telerik.ui.for.aspnetmvc` commercial or trial package version `2015.2.602` or newer.
+- Extract the `wrappers\aspnetmvc\Examples\VS2015` folder into `C:\MVC6` or similar.
+- Open the `C:\MVC6\Kendo.Mvc.Examples\Kendo.Mvc.Examples.xproj` project in Visual Studio.
 - Wait for the packages to restore and run the application.
 
+# See Also
+
+- [Installing Telerik UI for ASP.NET MVC in an MVC 6 project](getting-started)
+- [ASP.NET 5 Documentation](http://docs.asp.net/en/latest/index.html)
