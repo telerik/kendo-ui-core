@@ -876,6 +876,21 @@
         equal(dialog.wrapper.css("top"), "10px");
     });
 
+    test("setOptions resets maximized state", function() {
+        var dialog = createWindow();
+
+        dialog.maximize();
+
+        dialog.setOptions({
+            position: {
+                width: 100,
+                height: 200
+            }
+        });
+
+        ok(!dialog.options.isMaximized);
+    });
+
     test("setting new title updates widget options", function() {
         var newTitle = "foo",
             dialog = createWindow();
