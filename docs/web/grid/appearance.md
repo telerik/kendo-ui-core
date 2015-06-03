@@ -252,6 +252,8 @@ otherwise the tables will be 100% wide (as wide as the Grid) and the columns wil
 
 Virtual scrolling is an alternative to paging. When enabled, the Grid will load data from the remote data source as the user scrolls vertically (horizontal scrolling is not virtualized).
 
+Either enable virtual scrolling, or paging, but not both features at the same time.
+
 When virtual scrolling is used, the HTML output is a little different, compared to standard scrolling:
 
     <div class="k-widget k-grid">
