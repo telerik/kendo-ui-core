@@ -20,7 +20,7 @@ var __meta__ = {
         DEFAULT_OS = "ios7",
         OS = support.mobileOS,
         BERRYPHONEGAP = OS.device == "blackberry" && OS.flatVersion >= 600 && OS.flatVersion < 1000 && OS.appMode,
-        FONT_SIZE_COEF = 0.92,
+        FONT_SIZE_COEF = 0.93,
         VERTICAL = "km-vertical",
         CHROME =  OS.browser === "chrome",
         BROKEN_WEBVIEW_RESIZE = OS.ios && OS.flatVersion >= 700 && OS.flatVersion < 800 && (OS.appMode || CHROME),
