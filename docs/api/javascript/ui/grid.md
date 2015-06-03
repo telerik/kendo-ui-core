@@ -4402,9 +4402,13 @@ If set to `true` the pager will display an input element which allows the user t
 
 ### pageable.pageSizes `Boolean|Array` *(default: false)*
 
-If set to `true` the pager will display a DropDownList which allows the user to pick a page size. By default the page size DropDownList is not displayed.
+If set to `true` the pager will display a drop-down which allows the user to pick a page size.
+By default the page size drop-down is not displayed.
 
-Can be set to an array with the available page sizes.
+Can be set to an array of predefined page sizes to override the default list.
+A special `all` value is supported. It sets the page size to the total number of records.
+
+If a `pageSize` setting is provided for the data source then this value will be selected initially.
 
 #### Example - show the page size DropDownList
 
@@ -4422,7 +4426,6 @@ Can be set to an array with the available page sizes.
         { productName: "Bread", category: "Food" }
       ],
       pageable: {
-        pageSize: 2,
         pageSizes: true
       }
     });
@@ -4444,8 +4447,7 @@ Can be set to an array with the available page sizes.
         { productName: "Bread", category: "Food" }
       ],
       pageable: {
-        pageSize: 2,
-        pageSizes: [2, 3, 4]
+        pageSizes: [2, 3, 4, "all"]
       }
     });
     </script>

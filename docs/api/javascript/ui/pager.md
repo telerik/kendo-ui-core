@@ -240,36 +240,17 @@ Defines if numeric portion of the pager will be shown.
         dataSource.read();
     </script>
 
-### allPages `Boolean` *(default: false)*
-If pageSizes and allPages options are enabled item which represents maximum pageSize will be added as first item in the pageSizes dropdownlist.
-
-#### Example - show the page size DropDownList
-    <div id="pager"></div>
-
-    <script>
-        var dataSource = new kendo.data.DataSource({
-          data: [
-            { productName: "Tea", category: "Beverages" },
-            { productName: "Coffee", category: "Beverages" },
-            { productName: "Ham", category: "Food" },
-            { productName: "Bread", category: "Food" }
-          ],
-          pageSize: 2
-        });
-
-        $("#pager").kendoPager({
-          dataSource: dataSource,
-          pageSizes: true,
-          allPages: true
-        });
-
-        dataSource.read();
-    </script>
 
 ### pageSizes `Boolean|Array` *(default: false)*
-Displays a list with predefined page sizes. An array of values to be displayed can be provided. If `pageSize` option is provided for DataSource then this `pageSize` value will be automatically selected in created selectbox.
+If set to `true` the pager will display a drop-down which allows the user to pick a page size.
+By default the page size drop-down is not displayed.
 
-#### Example - show the page size DropDownList
+Can be set to an array of predefined page sizes to override the default list.
+A special `all` value is supported. It sets the page size to the total number of records.
+
+If a `pageSize` setting is provided for the data source then this value will be selected initially.
+
+#### Example - show the page size drop-down with default values
     <div id="pager"></div>
 
     <script>
@@ -291,7 +272,7 @@ Displays a list with predefined page sizes. An array of values to be displayed c
         dataSource.read();
     </script>
 
-#### Example - show the page size DropDownList with custom values
+#### Example - show the page size drop-down with custom values
     <div id="pager"></div>
 
     <script>
@@ -307,7 +288,7 @@ Displays a list with predefined page sizes. An array of values to be displayed c
 
         $("#pager").kendoPager({
           dataSource: dataSource,
-          pageSizes: [2, 3, 4]
+          pageSizes: [2, 3, 4, "all"]
         });
 
         dataSource.read();
