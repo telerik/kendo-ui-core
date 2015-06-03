@@ -536,13 +536,13 @@
     test("default page sizes", function() {
         var pager = setup({}, { pageSizes: true });
 
-        equal(pager.find(".k-pager-sizes select option").text(), "51020");
+        equal(pager.find(".k-pager-sizes select option").text(), "All51020");
     });
 
-    test("adds all-pages option when enabled", function() {
-        var pager = setup({}, { pageSizes: true, allPages: true });
+    test("all-pages option can be removed", function() {
+        var pager = setup({}, { pageSizes: [5, 10, 20] });
 
-        equal(pager.find(".k-pager-sizes select option").text(), "All51020");
+        equal(pager.find(".k-pager-sizes select option").text(), "51020");
     });
 
     test("pageSizes can be array with numbers specifying custom page sizes", function() {
@@ -565,8 +565,8 @@
         equal(pager.find(".k-pager-sizes select").val(), "2");
     });
 
-    test("changing page size selects all pages", function() {
-        var pager = setup({}, { pageSizes: [1, 2], allPages: true });
+    test("changing page size to include all items selects all pages", function() {
+        var pager = setup({}, { pageSizes: ["all", 1, 2] });
 
         dataSource.pageSize(5);
 
@@ -600,7 +600,7 @@
     });
 
     test("selecting all pages from the select changes the page size in the data source", function() {
-        var pager = setup({}, { pageSizes: [1, 2], allPages: true });
+        var pager = setup({}, { pageSizes: ["all", 1, 2] });
         dataSource.read();
 
         var select = pager.find(".k-pager-sizes select");

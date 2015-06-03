@@ -135,21 +135,21 @@ var __meta__ = {
                 }
             }
 
-            var span;
             if (options.pageSizes){
                 if (!that.element.find(".k-pager-sizes").length){
-                    span = $('<span class="k-pager-sizes k-label"><select/>' + options.messages.itemsPerPage + "</span>")
-                        .appendTo(that.element)
-                        .find("select")
-                        .html($.map($.isArray(options.pageSizes) ? options.pageSizes : [5,10,20], function(page){
-                            return "<option>" + page + "</option>";
-                        }).join(""))
-                        .end()
-                        .appendTo(that.element);
-                }
+                    var pageSizes = options.pageSizes.length ? options.pageSizes : ["all", 5, 10, 20];
+                    var pageItems = $.map(pageSizes, function(size) {
+                        if (size.toLowerCase && size.toLowerCase() === "all") {
+                            return "<option value='all'>" + options.messages.allPages + "</option>";
+                        }
 
-                if (options.allPages && span) {
-                    span.find("select").prepend("<option value='all'>" + options.messages.allPages + "</option>");
+                        return "<option>" + size + "</option>";
+                    });
+
+                    $('<span class="k-pager-sizes k-label"><select/>' + options.messages.itemsPerPage + "</span>")
+                        .appendTo(that.element)
+                        .find("select").html(pageItems.join("")).end()
+                        .appendTo(that.element);
                 }
 
                 that.element.find(".k-pager-sizes select").val(that.pageSize());
@@ -219,7 +219,6 @@ var __meta__ = {
             previousNext: true,
             pageSizes: false,
             refresh: false,
-            allPages: false,
             messages: {
                 allPages: "All",
                 display: "{0} - {1} of {2} items",
@@ -334,9 +333,10 @@ var __meta__ = {
             }
 
             if (options.pageSizes) {
-                var allSelect = options.allPages && pageSize === this.dataSource.total();
+                var hasAll = that.element.find(".k-pager-sizes option[value='all']").length > 0;
+                var selectAll = hasAll && pageSize === this.dataSource.total();
                 var text = pageSize;
-                if (allSelect) {
+                if (selectAll) {
                     pageSize = "all";
                     text = options.messages.allPages;
                 }
