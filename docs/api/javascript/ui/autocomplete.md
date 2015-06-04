@@ -292,6 +292,8 @@ If set to `false` case-sensitive search will be performed to find suggestions. T
 
 The minimum number of characters the user must type before a search is performed. Set to higher value than `1` if the search could match a lot of items.
 
+> Widget will initiate a request when input value is cleared. If you would like to prevent this behavior please check the [filtering](#events-filtering) event for more details.
+
 #### Example - set minLength
 
     <input id="autocomplete" />
@@ -1056,6 +1058,23 @@ The filter descriptor that will be used to filter the data source.
     });
     var autocomplete = $("#autocomplete").data("kendoAutoComplete");
     autocomplete.bind("filtering", autocomplete_filtering);
+    </script>
+
+#### Example - prevent filtering event when filter value is empty
+
+    <input id="autocomplete" />
+    <script>
+    $("#autocomplete").kendoAutoComplete({
+      dataSource: [ "Apples", "Oranges" ],
+      filtering: function(e) {
+          var filter = e.filter;
+
+          if (!filter.value) {
+            //prevent filtering if the filter does not value
+            e.preventDefault();
+          }
+      }
+    });
     </script>
 
 ### open

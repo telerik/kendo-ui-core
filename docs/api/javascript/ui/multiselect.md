@@ -383,6 +383,8 @@ If set to `false` case-sensitive search will be performed to find suggestions. T
 The minimum number of characters the user must type before a search is performed. Set to a higher value if the search could match a lot of items.
 A zero value means that a request will be made as soon as the user focuses the widget.
 
+> Widget will initiate a request when input value is cleared. If you would like to prevent this behavior please check the [filtering](#events-filtering) event for more details.
+
 #### Example - set minLength
 
     <select id="multiselect" multiple="multiple">
@@ -1351,6 +1353,26 @@ The filter descriptor that will be used to filter the data source.
     });
     var multiselect = $("#multiselect").data("kendoMultiSelect");
     multiselect.bind("filtering", multiselect_filtering);
+    </script>
+
+#### Example - prevent filtering event when filter value is empty
+
+    <select id="multiselect" multiple="multiple">
+        <option>Item1</option>
+        <option>Item2</option>
+    </select>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+      filter: "startswith",
+      filtering: function(e) {
+          var filter = e.filter;
+
+          if (!filter.value) {
+            //prevent filtering if the filter does not value
+            e.preventDefault();
+          }
+      }
+    });
     </script>
 
 ### open
