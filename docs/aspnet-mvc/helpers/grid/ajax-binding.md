@@ -317,3 +317,7 @@ If the custom code is executed earlier (e.g. in document.ready), it is very like
 There is one exception to the above - delegated event handlers will work, because they are attached to an ancestor element of the data rows
 (e.g. the Grid [`table`](/api/javascript/ui/grid#fields-table), [`tbody`](/api/javascript/ui/grid#fields-tbody) or [`wrapper`](/framework/widgets/wrapper-element)),
 and the event handler code should check what is the event target.
+
+## Prevent Ajax response caching
+
+See the [FAQ section - How to prevent Ajax response caching?](/aspnet-mvc/helpers/grid/faq#how-to-prevent-ajax-response-caching)
