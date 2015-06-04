@@ -16,86 +16,39 @@ The virtualization feature combines **Data** and **UI** virtualization in order 
 - [What is Data virtualization](#what-is-data-virtualization)
 - [What is UI virtualization](#what-is-ui-virtualization)
 - [How Data and UI virtualization is combined](#how-the-data-and-ui-virtualization-is-combined)
-- [ValueMapper and its purpose](#valuemapper-and-its-purpose)
-    - [What should return the valueMapper service](#what-should-return-the-valuemapper-service)
-    - [How to implement a valueMapper service](#how-to-implement-a-valuemapper-service)
 - [How to configure](#how-to-configure)
     - [Item height](#itemheight)
     - [Container height](#container-height)
     - [Page size](#pagesize)
     - [Value mapper](#valuemapper)
+- [In depth review of the valueMapper option](#in-depth-review-of-the-valuemapper-option)
+    - [What should return the valueMapper service](#what-should-return-the-valuemapper-service)
+    - [How to implement a valueMapper service](#how-to-implement-a-valuemapper-service)
 - [Kendo UI ComboBox with enabled virtualization](#kendo-ui-combobox-with-remote-transport-and-virtualization-enabled)
 - [Known limitation](#known-limitation)
 - [Further Reading](#further-reading)
 
-## What is Data virtualization?
+## What is Data virtualization
 
 In the context of the widget, the **Data** virtualization is accomplished using the DataSource paging functionality and remote data retrieval.
 Thus the widget will retrieve only a concrete data page instead of requesting the whole data set at once. The DataSource paging should be configured **correctly**
-in order to ensure the proper widget's work.
+in order to ensure the proper widget's work. Please refer to the [server paging](/kendo-ui/api/javascript/data/datasource#configuration-serverPaging) configuration for more details.
 
-## What is UI virtualization?
+## What is UI virtualization
 
-The widget uses a specific strategy of reusing a list of DOM elements in order to display the corresponding data chuck. The number of those elements is determined based on the [height](http://docs.telerik.com/kendo-ui/api/javascript/ui/combobox#configuration-height)
+The widget uses a specific strategy of reusing a list of DOM elements in order to display the corresponding data chuck. The number of those elements is determined based on the [height](/kendo-ui/api/javascript/ui/combobox#configuration-height)
 and [itemHeight](#itemheight) options. Once the number is calculated, the widget creates those elements and starts re-using them to display the current *data source page*.
 
-## How the Data and UI virtualization is combined?
+## How the Data and UI virtualization is combined
 
-To ensure the correct work of the widget, the DataSource pageSize value is calculated **automatically**, based on the ([height](http://docs.telerik.com/kendo-ui/api/javascript/ui/combobox#configuration-height)
+To ensure the correct work of the widget, the DataSource pageSize value is calculated **automatically**, based on the ([height](/kendo-ui/api/javascript/ui/combobox#configuration-height)
 / [itemHeight](#itemheight)) formula. This is done by the widget itself, and the defined pageSize value will be overriden if it does not match the calculated one.
 
 > To avoid multiple initial requests, define a correct **pageSize** value.
 
-## ValueMapper and its purpose?
+## How to configure the virtualization feature
 
-The ValueMapper was introduced, because unlike simple Data + UI virtualization, ComboBox needs to **maintain the selected item** and also to display the selected data item based only on value.
-In order to display the selected text widget needs to retrieve the selected data item, which is part of a particular data page that is *unknown* to us. The required information is gathered exactly with the [valueMapper](#valuemapper) callback,
-that passes the **selected value** and requests the corresponding *row/dataitem index* of that value. From this index, we can calculate the page number and thus pre-fetch only that page with additional Ajax request.
-
-The **valueMapper** will be called when we need to select a dataitem that is not present in the data source. To make that procress clearer, let's image the following case:
-
-- widget has one page of 50 items
-- the selected value is "1250"
-- widget will call the **valueMapper**, passing this "1250" value asking the remote service to return the **row index** that corresponds to the selected value (or data item).
-- the valueMapper returns index 1250 (We assume that *row index* and *value* are equal to be easier for understanding)
-- this index corresponds to 25th page (1250 / 50 = 25).
-- Once the page is calculated the widget will retrieve it and will select the correct data item.
-
-### What should return the valueMapper service?
-
-The valueMapper callback expects to receive a row index or list of indices (when multiple selection is available). That being said, the service should return either index (number) or list of indices.
-For instance, you can examine the result of [the test service](http://demos.telerik.com/kendo-ui/service/Orders/ValueMapper) used in the online demos:
-
-```javascript
-$.ajax({
-    url: "http://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
-    type: "GET",
-    dataType: "jsonp",
-    data: { "values[0]": "10661" }
-    success: function (data) {
-        //returned data is [413]
-        options.success(data);
-    }
-})
-```
-
-Basically the Ajax method calls URL like so:
-
-    http://demos.telerik.com/kendo-ui/service/Orders/ValueMapper?values[0]=10661
-
-and the result is:
-
-    callback([413]) //the result is JSONP
-
-### How to implement a valueMapper service?
-
-As mentioned in the previous section, the service should map the selected value to a concrete row index. How this functionality will be implemented is in the developer's control. The most simplified implementation will include
-iteration of all items counting the index of the rows.
-
-The more optimized solution will be to use a dedicated SQL method that handles this action internally. One option is to use [ROW_NUMBER()](https://msdn.microsoft.com/en-us/library/ms186734.aspx) function.
-
-## How to configure
-
+The following list describes how to configure the virtualization specific options:
 
 ### itemHeight
 
@@ -133,6 +86,54 @@ The widget will pass the selected value(s) in the `valueMapper` function. In tur
         })
     }
 ```
+
+## In depth review of the valueMapper option
+
+The valueMapper was introduced, because unlike simple Data + UI virtualization, ComboBox needs to **maintain the selected item** and also to display the selected data item based only on value.
+In order to display the selected text widget needs to retrieve the selected data item, which is part of a particular data page that is *unknown* to us. The required information is gathered exactly with the [valueMapper](#valuemapper) callback,
+that passes the **selected value** and requests the corresponding *row/dataitem index* of that value. From this index, we can calculate the page number and thus pre-fetch only that page with additional Ajax request.
+
+The **valueMapper** will be called when we need to select a dataitem that is not present in the data source. To make that procress clearer, let's image the following case:
+
+- widget has one page of 50 items
+- the selected value is "1250"
+- widget will call the **valueMapper**, passing this "1250" value asking the remote service to return the **row index** that corresponds to the selected value (or data item).
+- the valueMapper returns index 1250 (We assume that *row index* and *value* are equal to be easier for understanding)
+- this index corresponds to 25th page (1250 / 50 = 25).
+- Once the page is calculated the widget will retrieve it and will select the correct data item.
+
+### What should return the valueMapper service?
+
+The valueMapper callback expects to receive a row index or list of indices (when multiple selection is available). That being said, the service should return either index (number) or list of indices.
+For instance, you can examine the result of [the test service](/kendo-ui/service/Orders/ValueMapper) used in the online demos:
+
+```javascript
+$.ajax({
+    url: "http://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
+    type: "GET",
+    dataType: "jsonp",
+    data: { "values[0]": "10661" }
+    success: function (data) {
+        //returned data is [413]
+        options.success(data);
+    }
+})
+```
+
+Basically the Ajax method calls URL like so:
+
+    http://demos.telerik.com/kendo-ui/service/Orders/ValueMapper?values[0]=10661
+
+and the result is:
+
+    callback([413]) //the result is JSONP
+
+### How to implement a valueMapper service?
+
+As mentioned in the previous section, the service should map the selected value to a concrete row index. How this functionality will be implemented is in the developer's control. The most simplified implementation will include
+iteration of all items counting the index of the rows.
+
+The more optimized solution will be to use a dedicated SQL method that handles this action internally. One option is to use [ROW_NUMBER()](https://msdn.microsoft.com/en-us/library/ms186734.aspx) function.
 
 ## Kendo UI ComboBox with remote transport and virtualization enabled
 
@@ -190,7 +191,8 @@ The example below demonstrates the minimal widget and DataSource configuration r
 
 ## Known limitation
 
-The virtualization feature can work with **objects**. Virtualization of **primitive values** is not supported.
+- The virtualization feature can work with **objects**. Virtualization of **primitive values** is not supported.
+- The rendered items should have equal height. In other words, every single item in the virtualized list will have height set through [itemHeight](#itemheight) option.
 
 ## Further Reading
 
