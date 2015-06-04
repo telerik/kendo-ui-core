@@ -122,5 +122,17 @@ In IIS OPTIONS method behavior should be configured via **OPTIONSVerbHandler** m
     </tbody>
 </table>
 
+### Access the cube securely
+
+There are two possible approaches to implement a secured access to the OLAP instance:
+
+- Use a proxy service which communicates with the cube on a secured protocol. This proxy should support the XMLA protocol. In the Microsoft world, the solution is to use [ADOMD.NET](https://technet.microsoft.com/en-us/library/ms123483%28v=sql.110%29.aspx).
+You can check this [forum thread](http://www.telerik.com/forums/securing-access-to-msmdpump-dll) for more details.
+
+- The other option is to send the credentials with a request header, even though thus the **username** and **password** will be visible on the client side (browser).
+If this is the way you would like to go, then I will suggest you review this [StackOverflow discussion](http://stackoverflow.com/questions/14579478/how-to-pass-credentials-for-a-webservice-using-jquery-ajax-call)
+to understand how to pass credentials with request headers. You can define the required callbacks and settings directly in the [transport.read](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-transport.read) object,
+as they will be passed to the $.ajax method.
+
 ## Next steps:
 - [Getting started](/web/pivotgrid/overview)

@@ -26,6 +26,10 @@ and value of the *Axis format* should be **TupleFormat**:
        <AxisFormat>TupleFormat</AxisFormat>
     </PropertyList>
 
+## Q: How to connect to a secured OLAP instance?
+
+A: Please check the [Access the cube securely](/kendo-ui/web/pivotgrid/olap-cube-setup#access-the-cube-securely) section.
+
 ## Q: I don't have OLAP cube, can I still use Kendo UI PivotGrid?
 
 A: Currently, the Kendo UI PivotDataSource has limited support for [binding to flat data](http://demos.telerik.com/kendo-ui/pivotgrid/local-flat-data-binding). Note that in this scenario not all of the features avialable when bound to a OLAP cube are supported. Those includes filtering, sorting, hierarchies and etc.
