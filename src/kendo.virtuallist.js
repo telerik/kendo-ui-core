@@ -804,8 +804,23 @@ var __meta__ = {
             this.element.empty();
         },
 
+        _height: function() {
+            var hasData = !!this.dataSource.view().length,
+                height = this.options.height,
+                itemHeight = this.options.itemHeight,
+                total = this.dataSource.total();
+
+            if (!hasData) {
+                height = 0;
+            } else if (height/itemHeight > total) {
+                height = total * itemHeight;
+            }
+
+            return height;
+        },
+
         _screenHeight: function() {
-            var height = this.options.height,
+            var height = this._height(),
                 element = this.element,
                 content = this.content;
 

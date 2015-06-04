@@ -103,6 +103,41 @@
         });
     });
 
+    asyncTest("sets the height of the content wrapper", 1, function() {
+        var virtualList = new VirtualList(container, virtualSettings);
+
+        asyncDataSource.read().then(function() {
+            start();
+            equal(virtualList.content.height(), CONTAINER_HEIGHT);
+        });
+    });
+
+    asyncTest("sets the height of the content wrapper to 0 when dataSource has no data", 1, function() {
+        var virtualList = new VirtualList(container, virtualSettings);
+
+        asyncDataSource.read().then(function() {
+            start();
+            asyncDataSource.data([]);
+            equal(virtualList.content.height(), 0);
+        });
+    });
+
+    asyncTest("sets the height of the content wrapper to total*itemHeight if total height of items is less that the height option", 1, function() {
+        var virtualList = new VirtualList(container, virtualSettings);
+
+        asyncDataSource.read().then(function() {
+            start();
+            asyncDataSource.data([
+                { text: " Item 1" },
+                { text: " Item 2" },
+                { text: " Item 3" },
+                { text: " Item 4" },
+                { text: " Item 5" }
+            ]);
+            equal(virtualList.content.height(), 5 * ITEM_HEIGHT);
+        });
+    });
+
     asyncTest("initially builds the listScreens", 1, function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             listScreens: 6,
