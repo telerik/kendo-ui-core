@@ -22,13 +22,13 @@ The target runtime is [CoreCLR](https://github.com/dotnet/coreclr). The full des
 The following repositories contain source code, instructions and issue trackers for the ASP.NET project.
 These are immensely useful when you need to track down particular issues or behaviors.
 
-- [ASP.NET Home](https://github.com/aspnet/home) on GitHub
-- [ASP.NET MVC](https://github.com/aspnet/Mvc) on GitHub
+- ASP.NET [Home on GitHub](https://github.com/aspnet/home)
+- ASP.NET [MVC on GitHub](https://github.com/aspnet/Mvc)
 
 # Running the Sample Application on Windows
 
 - Install [Visual Studio 2015 RC](https://www.visualstudio.com/en-us/downloads/visual-studio-2015-downloads-vs.aspx)
-- Download the `telerik.ui.for.aspnetmvc` commercial or trial package version `2015.2.602` or newer.
+- Download the `telerik.ui.for.aspnetmvc` commercial or trial package.
 - Extract the `wrappers\aspnetmvc\Examples\VS2015` folder into `C:\MVC6` or similar.
 - Open the `C:\MVC6\Kendo.Mvc.Examples\Kendo.Mvc.Examples.xproj` project in Visual Studio.
 - Wait for the packages to restore and run the application.
