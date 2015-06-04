@@ -152,4 +152,26 @@
         });
     });
 
+    asyncTest("can select item when value resolves to an index equal to the length of the first group", 2, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            height: 400,
+            itemHeight: 20,
+            selectable: "multiple",
+            valueMapper: function(operation) {
+                setTimeout(function() {
+                    operation.success(30);
+                }, 0);
+            }
+        }));
+
+        asyncDataSource.pageSize(80);
+        virtualList.value(30);
+        asyncDataSource.read();
+        virtualList.bind("listBound", function() {
+            start();
+            ok(this.selectedDataItems().length);
+            equal(this.value()[0], 30);
+        });
+    });
+
 })();
