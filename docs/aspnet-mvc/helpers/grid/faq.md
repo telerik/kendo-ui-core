@@ -374,6 +374,27 @@ To prevent that call the `ServerOperation` method and pass `false` as the argume
         .ServerOperation(false)
      // -- removed for brevity
 
+
+### How to prevent Ajax response caching?
+
+There are several ways to prevent Ajax responses from being cached and reused by the browser.
+
+* Use an `OutputCache` attribute for the action method.
+
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
+        public JsonResult MyReadMethod()
+        {
+            /* ... */
+        }
+    
+* Configure the Kendo UI DataSource to make POST Ajax requests for the Read action, instead of GET requests.
+
+* Use jQuery's [`ajaxSetup`](https://api.jquery.com/jquery.ajaxsetup/) configuration method. This will influence all Ajax requests that the web application performs.
+
+        $.ajaxSetup ({
+           cache: false
+        });
+
 ## Editing
 
 ### How do I display model state errors?
