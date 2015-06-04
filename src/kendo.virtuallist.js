@@ -553,7 +553,7 @@ var __meta__ = {
             if (this.options.type === "group") {
                 for (var i = 0; i < view.length; i++) {
                     group = view[i].items;
-                    if (group.length < index) {
+                    if (group.length <= index) {
                         index = index - group.length;
                     } else {
                         return group[index];
