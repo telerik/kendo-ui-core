@@ -408,6 +408,8 @@ The index of the initially selected item. The index is `0` based.
 
 The minimum number of characters the user must type before a search is performed. Set to higher value than `1` if the search could match a lot of items.
 
+> Widget will initiate a request when input value is cleared. If you would like to prevent this behavior please check the [filtering](#events-filtering) event for more details.
+
 #### Example - set minLength
 
     <input id="combobox" />
@@ -1372,6 +1374,24 @@ The filter descriptor that will be used to filter the data source.
     });
     var combobox = $("#combobox").data("kendoComboBox");
     combobox.bind("filtering", combobox_filtering);
+    </script>
+
+#### Example - prevent filtering event when filter value is empty
+
+    <input id="combobox" />
+    <script>
+    $("#combobox").kendoComboBox({
+      dataSource: [ "Apples", "Oranges" ],
+      filter: "startswith",
+      filtering: function(e) {
+          var filter = e.filter;
+
+          if (!filter.value) {
+            //prevent filtering if the filter does not value
+            e.preventDefault();
+          }
+      }
+    });
     </script>
 
 ### open
