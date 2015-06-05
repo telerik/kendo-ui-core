@@ -92,21 +92,28 @@ Template of the tooltip. The following variables are passed by the Slider and ar
 *   **selectionStart** and **selectionEnd** - the current values when using a range slider
 
 #### Example - using RangeSlider template
+    
+	<div id="rangeslider" class="humidity">
+      <input />
+      <input />
+    </div>
 
-	// the following template definitions are identical and represent the default RangeSlider template
+    <script>
+      // the following template definitions are identical and represent the default RangeSlider template
 
-	var templateString = "#= selectionStart # - #= selectionEnd #";
-	// or
-	// var templateString = "# return selectionStart  + ' - ' + selectionEnd #";
+      var templateString = "#= selectionStart # - #= selectionEnd #";
+      // or
+      // var templateString = "# return selectionStart  + ' - ' + selectionEnd #";
 
-	$("#rangeslider").kendoRangeSlider({
-		min: 0,
-		max: 100,
-		tooltip: {
-			template: kendo.template(templateString)
-		}
-	});
-
+      $("#rangeslider").kendoRangeSlider({
+        min: 0,
+        max: 100,
+        tooltip: {
+          template: kendo.template(templateString)
+        }
+      });
+    </script>
+	
 ### value `Number`
 
 The underlying value of the **Slider**.
