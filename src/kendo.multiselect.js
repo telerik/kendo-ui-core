@@ -321,7 +321,10 @@ var __meta__ = {
         _wrapperMousedown: function(e) {
             var that = this;
             var notInput = e.target.nodeName.toLowerCase() !== "input";
-            var closeButton = $(e.target).hasClass("k-select") || $(e.target).parent().hasClass("k-select");
+            var target = $(e.target);
+
+            //TODO: Allow open when k-i-arrow-s is clicked
+            var closeButton = target.hasClass("k-select") || target.parent().hasClass("k-select");
 
             if (notInput && !(closeButton && kendo.support.mobileOS)) {
                 e.preventDefault();
@@ -393,7 +396,12 @@ var __meta__ = {
         },
 
         _tagListClick: function(e) {
-            this._removeTag($(e.target).closest(LI));
+            var target = $(e.currentTarget);
+
+            //TODO: Test this
+            if (!target.children(".k-i-arrow-s").length) {
+                this._removeTag(target.closest(LI));
+            }
         },
 
         _editable: function(options) {
@@ -1038,13 +1046,20 @@ var __meta__ = {
                 }
             } else {
                 var values = that.value();
+                var total = that.dataSource.total();
+
+                if (!that._maxTotal || that._maxTotal < total) {
+                    that._maxTotal = total;
+                }
 
                 tagList.html("");
 
                 if (values.length) {
                     tagList.append(that.tagTemplate({
                         values: values,
-                        total: that.dataSource.total()
+                        dataItems: that.dataItems(),
+                        currentTotal: that.dataSource.total(),
+                        maxTotal: that._maxTotal
                     }));
                 }
             }
@@ -1124,7 +1139,7 @@ var __meta__ = {
                     return '<li class="k-button" unselectable="on"><span unselectable="on">' + tagTemplate(data) + '</span><span unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-close">delete</span></span></li>';
                 };
             } else {
-                tagTemplate = kendo.template("#:values.length# / #:total#");
+                tagTemplate = kendo.template("#:values.length# selected of #:maxTotal#");
                 //tagTemplate = kendo.template("#:values.length# selected...");
 
                 that.tagTextTemplate = tagTemplate;
