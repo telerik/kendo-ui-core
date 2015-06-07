@@ -95,12 +95,14 @@ that passes the **selected value** and requests the corresponding *row/dataitem 
 
 The **valueMapper** will be called when we need to select a dataitem that is not present in the data source. To make that procress clearer, let's image the following case:
 
-- widget has one page of 50 items
+- the widget has one page of 50 items
 - the selected value is "1250"
-- widget will call the **valueMapper**, passing this "1250" value asking the remote service to return the **row index** that corresponds to the selected value (or data item).
+- the widget will call the **valueMapper** (1), passing this "1250" value (2) asking the remote service to return the **row index** (3) that corresponds to the selected value (or data item).
 - the valueMapper returns index 1250 (We assume that *row index* and *value* are equal to be easier for understanding)
-- this index corresponds to 25th page (1250 / 50 = 25).
-- Once the page is calculated the widget will retrieve it and will select the correct data item.
+- this index corresponds to 25th page (1250 / 50 = 25) (4).
+- Once the page is calculatedi (5) the widget will retrieve it (6) and will select the correct data item (7, 8).
+
+![Virtualization process](/web/combobox/virtualization.png)
 
 ### What should return the valueMapper service?
 
