@@ -96,14 +96,22 @@ The valueMapper was introduced, because unlike simple Data + UI virtualization, 
 In order to display the selected text widget needs to retrieve the selected data item, which is part of a particular data page that is *unknown* to us. The required information is gathered exactly with the [valueMapper](#valuemapper) callback,
 that passes the **selected value** and requests the corresponding *row/dataitem index* of that value. From this index, we can calculate the page number and thus pre-fetch only that page with additional Ajax request.
 
-The **valueMapper** will be called when we need to select a dataitem that is not present in the data source. To make that procress clearer, let's image the following case:
+The **valueMapper** will be called when we need to select a dataitem that is not present in the data source. To make that process clearer, let's imagine the following case:
 
-- the widget has one page of 50 items
-- the selected value is "1250"
-- the widget will call the **valueMapper** (1), passing this "1250" value (2) asking the remote service to return the **row index** (3) that corresponds to the selected value (or data item).
-- the valueMapper returns index 1250 (We assume that *row index* and *value* are equal to be easier for understanding)
-- this index corresponds to 25th page (1250 / 50 = 25) (4).
-- Once the page is calculatedi (5) the widget will retrieve it (6) and will select the correct data item (7, 8).
+Widget's configuration is as follows:
+- the **pageSize** is set to `50`
+- the selected value is `foo`
+
+On initial load, the widget will check whether the selected value is present in the loaded data. If it isn't, then it will perform the following actions:
+
+1. It will call the **valueMapper** requesting a **row index** that corresponds to the selected value `foo`
+2. The **valuMapper** will call the `service 1`, passing the selected value `foo` to it
+3. The `service 1` will find the row index that corresponds to the `foo` value. In this case it is `1250`
+4. The valueMapper function will return that row index to the widget
+5. The widget will calculate the page number, `25` in this case.
+6. Then it will request it from the `service 2` using the dataSource
+7. The `service 2` will return the corresponding 25th page
+8. The dataSource will change the page to `25` and will display the items showing the selected item too.
 
 ![Virtualization process](/web/combobox/virtualization.png)
 
