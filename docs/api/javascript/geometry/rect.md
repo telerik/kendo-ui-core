@@ -21,12 +21,23 @@ A rectangle with set origin (top-left corner) and size.
             var rect = new geom.Rect([10, 10], [20, 20]);
         </script>
 
+
+## Constructor Parameters
+
+### origin `kendo.geometry.Point|Array`
+
+The origin (top-left corner) of the rectangle or equivalent [x, y] array.
+
+### size `kendo.geometry.Size|Array`
+
+The size of the rectangle or an equivalent [width, height] array.
+
+
 ## Fields
 
 ### origin `kendo.geometry.Point`
 
 The origin (top-left corner) of the rectangle.
-
 
 ### size `kendo.geometry.Size`
 
