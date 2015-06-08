@@ -41,8 +41,8 @@ and [itemHeight](#itemheight) options. Once the number is calculated, the widget
 
 ## How the Data and UI virtualization is combined
 
-To ensure the correct work of the widget, the DataSource pageSize value is calculated **automatically**, based on the ([height](/kendo-ui/api/javascript/ui/combobox#configuration-height)
-/ [itemHeight](#itemheight)) formula. This is done by the widget itself, and the defined pageSize value will be overriden if it does not match the calculated one.
+To ensure the correct work of the widget, the DataSource pageSize value is calculated **automatically**, based on the (([height](/kendo-ui/api/javascript/ui/combobox#configuration-height)
+/ [itemHeight](#itemheight)) * 4) formula. This is done by the widget itself, and the defined pageSize value will be overriden if it does not match the calculated one.
 
 > To avoid multiple initial requests, define a correct **pageSize** value.
 
@@ -62,12 +62,15 @@ The virtualized list container **must** have a `height` option set (in pixels). 
 
 ### pageSize
 
-The DataSource `pageSize` configuration should be set to the virtual list `height/itemHeight * 4`.
-For example, if the `height` is `520` and `itemHeight` is `26`, `pageSize` should be set to `80`.
+The virtualized widget will *calculate* the **pageSize** value automatically based on the (([height](/kendo-ui/api/javascript/ui/combobox#configuration-height) / [itemHeight](#itemheight)) * 4) formula
+and will *override* the custom defined pageSize value. This is done to ensure the proper work of the virtualized list.
 
-> Setting the correct page size is important for the functionality of the widget and will prevent the DataSource from **making multiple requests** for the same data.
+Let's consider the following scenario:
+- widget has height of `520px`
+- itemHeight is `26`
+- The **pageSize** will be set to `80`, because ((520 / 26) * 4) is equal to `80`
 
-> The widget controls the page size for all DataSource requests and will change the DataSource `pageSize` if it does not match the formula above.
+> To prevent the DataSource from **making multiple requests** for the same data, set the correct **pageSize** value using the aforementioned formula.
 
 ### valueMapper
 
