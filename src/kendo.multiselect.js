@@ -144,7 +144,7 @@ var __meta__ = {
 
         options: {
             name: "MultiSelect",
-            tagMode: "multiple", //single
+            tagMode: "multiple",
             enabled: true,
             autoBind: true,
             autoClose: true,
@@ -714,10 +714,6 @@ var __meta__ = {
             var isRtl = kendo.support.isRtl(that.wrapper);
             var visible = that.popup.visible();
 
-            if (that.options.tagMode !== "multiple") {
-                tag = null;
-            }
-
             if (key === keys.DOWN) {
                 e.preventDefault();
 
@@ -1021,6 +1017,8 @@ var __meta__ = {
 
         _selectValue: function(added, removed) {
             var that = this;
+            var values = that.value();
+            var total = that.dataSource.total();
             var tagList = that.tagList;
             var getter = that._value;
             var removedItem;
@@ -1046,9 +1044,6 @@ var __meta__ = {
                     that._setOption(getter(addedItem.dataItem), true);
                 }
             } else {
-                var values = that.value();
-                var total = that.dataSource.total();
-
                 if (!that._maxTotal || that._maxTotal < total) {
                     that._maxTotal = total;
                 }
@@ -1126,27 +1121,25 @@ var __meta__ = {
             var options = that.options;
             var tagTemplate = options.tagTemplate;
             var hasDataSource = options.dataSource;
+            var isMultiple = options.tagMode === "multiple";
+            var defaultTemplate;
 
             if (that.element[0].length && !hasDataSource) {
                 options.dataTextField = options.dataTextField || "text";
                 options.dataValueField = options.dataValueField || "value";
             }
 
-            if (options.tagMode === "multiple") {
-                tagTemplate = tagTemplate ? kendo.template(tagTemplate) : kendo.template("#:" + kendo.expr(options.dataTextField, "data") + "#", { useWithBlock: false });
-                that.tagTextTemplate = tagTemplate;
+            defaultTemplate = isMultiple ? kendo.template("#:" + kendo.expr(options.dataTextField, "data") + "#", { useWithBlock: false }) : kendo.template("#:values.length# item(s) selected");
 
-                that.tagTemplate = function(data) {
-                    return '<li class="k-button" unselectable="on"><span unselectable="on">' + tagTemplate(data) + '</span><span unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-close">delete</span></span></li>';
-                };
-            } else {
-                tagTemplate = tagTemplate ? kendo.template(tagTemplate) : kendo.template("#:values.length# selected");
-                that.tagTextTemplate = tagTemplate;
+            that.tagTextTemplate = tagTemplate = tagTemplate ? kendo.template(tagTemplate) : defaultTemplate;
 
-                that.tagTemplate = function(data) {
-                    return '<li class="k-button" unselectable="on"><span unselectable="on">' + tagTemplate(data) + '</span><span unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-arrow-s">open</span></span></li>';
-                };
-            }
+            that.tagTemplate = function(data) {
+                return '<li class="k-button" unselectable="on"><span unselectable="on">' +
+                        tagTemplate(data) +
+                        '</span><span unselectable="on" class="k-select"><span unselectable="on" class="k-icon ' +
+                        (isMultiple ? "k-i-close" : "k-i-arrow-s") +
+                        '">delete</span></span></li>';
+            };
         },
 
         _loader: function() {
