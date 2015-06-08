@@ -66,16 +66,16 @@ head.
 
 ### Add Kendo UI
 
-Add Kendo UI to your project by installing it from NuGet.  This will also
+Add the open source Kendo UI version to your project by installing it from NuGet.  This will also
 install jQuery.  Right-click the project and select **add library package
 reference**. Select **online** from the left-hand side and search for
 **kendoui.**  Select the package and choose **install.**
 
-**While you are free to install and try out Kendo UI, please make sure that
-you have a licensed copy before using Kendo UI in a production application.
+**While you are free to install and try out Kendo UI Core, please make sure that
+you have a licensed copy before using Kendo UI Professional (including grid, dataviz widgets, etc.) in a production application.
 Click [here][11] for more information on Kendo UI licensing.**
 
-![kendo-ui-nuget](/images/webforms/kendo-ui-nuget.png)
+[kendo-ui-core-nuget](http://www.nuget.org/packages/KendoUICore/)
 
 Notice that you now have a **Content** folder that contains a **kendo**
 subfolder.  You also have a **Scripts** folder which also has a **kendo**
