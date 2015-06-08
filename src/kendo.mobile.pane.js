@@ -273,8 +273,10 @@ var __meta__ = {
             var that = this,
                 linkRoles = "tab",
                 pressedButtonSelector = "[data-" + kendo.ns + "navigate-on-press]",
-                buttonSelector = roleSelector("button") + ":not(" + pressedButtonSelector + ")",
-                buttonSelectors = roleSelector("backbutton detailbutton listview-link") + "," + buttonSelector;
+
+                buttonSelectors = $.map(["button", "backbutton", "detailbutton", "listview-link"] , function(role) {
+                    return roleSelector(role) + ":not(" + pressedButtonSelector + ")";
+                }).join(",");
 
             this.element.handler(this)
                 .on("down", roleSelector(linkRoles) + "," + pressedButtonSelector, "_mouseup")
