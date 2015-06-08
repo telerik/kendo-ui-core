@@ -322,9 +322,11 @@ var __meta__ = {
             var that = this;
             var notInput = e.target.nodeName.toLowerCase() !== "input";
             var target = $(e.target);
+            var closeButton = target.hasClass("k-select") || target.hasClass("k-icon");
 
-            //TODO: Allow open when k-i-arrow-s is clicked
-            var closeButton = target.hasClass("k-select") || target.parent().hasClass("k-select");
+            if (closeButton) {
+                closeButton = !target.closest(".k-select").children(".k-i-arrow-s").length;
+            }
 
             if (notInput && !(closeButton && kendo.support.mobileOS)) {
                 e.preventDefault();
@@ -398,7 +400,6 @@ var __meta__ = {
         _tagListClick: function(e) {
             var target = $(e.currentTarget);
 
-            //TODO: Test this
             if (!target.children(".k-i-arrow-s").length) {
                 this._removeTag(target.closest(LI));
             }
@@ -1058,8 +1059,8 @@ var __meta__ = {
                     tagList.append(that.tagTemplate({
                         values: values,
                         dataItems: that.dataItems(),
-                        currentTotal: that.dataSource.total(),
-                        maxTotal: that._maxTotal
+                        maxTotal: that._maxTotal,
+                        currentTotal: total
                     }));
                 }
             }
@@ -1139,9 +1140,7 @@ var __meta__ = {
                     return '<li class="k-button" unselectable="on"><span unselectable="on">' + tagTemplate(data) + '</span><span unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-close">delete</span></span></li>';
                 };
             } else {
-                tagTemplate = kendo.template("#:values.length# selected of #:maxTotal#");
-                //tagTemplate = kendo.template("#:values.length# selected...");
-
+                tagTemplate = tagTemplate ? kendo.template(tagTemplate) : kendo.template("#:values.length# selected");
                 that.tagTextTemplate = tagTemplate;
 
                 that.tagTemplate = function(data) {
