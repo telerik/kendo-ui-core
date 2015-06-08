@@ -1673,9 +1673,9 @@ The top padding of the labels.
     });
     </script>
 
-### categoryAxis.labels.rotation `Number` *(default: 0)*
+### categoryAxis.labels.rotation `Number|String|Object` *(default: 0)*
 
-The rotation angle of the labels. By default the labels are not rotated.
+The rotation angle of the labels. By default the labels are not rotated. Can be set to `"auto"` if the axis is horizontal in which case the labels will be rotated only if the slot size is not sufficient for the entire labels.
 
 #### Example - rotate the category axis labels
 
@@ -1692,6 +1692,70 @@ The rotation angle of the labels. By default the labels are not rotated.
         data: [1, 2, 3]
       }]
     });
+    </script>
+
+#### Example - enable auto rotation for the category axis labels
+
+    <div id="chart" style="width:200px;"></div>
+    <script>
+      $("#chart").kendoChart({
+        categoryAxis: [{
+          labels: {
+            rotation: "auto"
+          },
+          categories: ["Category A", "Category B", "Category C"]
+        }],
+        series: [{
+          data: [1, 2, 3]
+        }]
+      });
+    </script>
+
+### categoryAxis.labels.rotation.align `String` *(default: "end")*
+
+The alignment of the rotated labels relative to the slot center. The supported values are `"end"` and `"center"`. By default the closest end of the label will be aligned to the center. If set to `"center"`, the center of the rotated label will be aligned instead.
+
+#### Example - align the rotated category axis labels center
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        categoryAxis: [{
+          labels: {
+            rotation: {
+              angle: 45,
+              align: "center"
+            }
+          },
+          categories: ["Category A", "Category B", "Category C"]
+        }],
+        series: [{
+          data: [1, 2, 3]
+        }]
+      });
+    </script>
+
+### categoryAxis.labels.rotation.angle `Number|String` *(default: 0)*
+
+The rotation angle of the labels. By default the labels are not rotated. Can be set to `"auto"` if the axis is horizontal in which case the labels will be rotated only if the slot size is not sufficient for the entire labels.
+
+#### Example - rotate the category axis labels
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        categoryAxis: [{
+          labels: {
+            rotation: {
+              angle: 90
+            }
+          },
+          categories: ["2011", "2012", "2013"]
+        }],
+        series: [{
+          data: [1, 2, 3]
+        }]
+      });
     </script>
 
 ### categoryAxis.labels.skip `Number` *(default: 0)*
@@ -18827,11 +18891,9 @@ The top padding of the labels.
     });
     </script>
 
-### valueAxis.labels.rotation `Number` *(default: 0)*
+### valueAxis.labels.rotation `Number|String|Object` *(default: 0)*
 
-The rotation angle (in degrees) of the labels. By default the labels are not rotated.
-
-Angles increase clockwise and zero is to the left. Negative values are acceptable.
+The rotation angle (in degrees) of the labels. By default the labels are not rotated. Angles increase clockwise and zero is to the left. Negative values are acceptable. Can be set to `"auto"` if the axis is horizontal in which case the labels will be rotated only if the slot size is not sufficient for the entire labels.
 
 #### Example - rotate the value axis labels
 
@@ -18847,6 +18909,49 @@ Angles increase clockwise and zero is to the left. Negative values are acceptabl
         { data: [1, 2, 3] }
       ]
     });
+    </script>
+
+### valueAxis.labels.rotation.align `String` *(default: "end")*
+
+The alignment of the rotated labels relative to the slot center. The supported values are `"end"` and `"center"`. By default the closest end of the label will be aligned to the center. If set to `"center"`, the center of the rotated label will be aligned instead.
+
+#### Example - align the rotated category axis labels center
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        valueAxis: [{
+          labels: {
+            rotation: 45,
+            align: "center"
+          }
+        }],
+        series: [
+          { data: [1, 2, 3] }
+        ]
+      });
+    </script>
+
+### categoryAxis.labels.rotation.angle `Number|String` *(default: 0)*
+
+The rotation angle of the labels. By default the labels are not rotated. Can be set to `"auto"` if the axis is horizontal in which case the labels will be rotated only if the slot size is not sufficient for the entire labels.
+
+#### Example - rotate the value axis labels
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        valueAxis: [{
+          labels: {
+            rotation: {
+              angle: 90
+            }
+          }
+        }],
+        series: [
+          { data: [1, 2, 3] }
+        ]
+      });
     </script>
 
 ### valueAxis.labels.skip `Number` *(default: 0)*
@@ -23465,9 +23570,9 @@ The top padding of the labels.
     });
     </script>
 
-### xAxis.labels.rotation `Number` *(default: 0)*
+### xAxis.labels.rotation `Number|String|Object` *(default: 0)*
 
-The rotation angle of the labels. By default the labels are not rotated.
+The rotation angle of the labels. By default the labels are not rotated. Can be set to `"auto"` in which case the labels will be rotated only if the slot size is not sufficient for the entire labels.
 
 #### Example - set the scatter chart x axis label rotation
 
@@ -23483,6 +23588,84 @@ The rotation angle of the labels. By default the labels are not rotated.
         }
       }
     });
+    </script>
+
+#### Example - enable auto rotation for the x axis labels
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [
+          {
+            type: "scatter",
+            data: [
+              [new Date("01/01/2013"), 2],
+              [new Date("01/02/2013"), 2],
+              [new Date("01/03/2013"), 2]
+            ]
+          }
+        ],
+        xAxis: {
+          type: "date",
+          labels: {
+            rotation: "auto",
+            format: "F"
+          }
+        }
+      });
+    </script>
+
+### xAxis.labels.rotation.align `String` *(default: "end")*
+
+The alignment of the rotated labels relative to the slot center. The supported values are `"end"` and `"center"`. By default the closest end of the label will be aligned to the center. If set to `"center"`, the center of the rotated label will be aligned instead.
+
+#### Example - align the rotated x axis labels
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [
+          {
+            type: "scatter",
+            data: [
+              [new Date("01/01/2013"), 2],
+              [new Date("01/02/2013"), 2],
+              [new Date("01/03/2013"), 2]
+            ]
+          }
+        ],
+        xAxis: {
+          type: "date",
+          labels: {
+            rotation: {
+              angle: -45,
+              align: "center"
+            }
+          }
+        }
+      });
+    </script>
+
+### categoryAxis.labels.rotation.angle `Number|String` *(default: 0)*
+
+The rotation angle of the labels. By default the labels are not rotated. Can be set to `"auto"` in which case the labels will be rotated only if the slot size is not sufficient for the entire labels.
+
+#### Example - set the scatter chart x axis label rotation angle
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [
+          { type: "scatter", data: [[1, 2]] }
+        ],
+        xAxis: {
+          labels: {
+            rotation: {
+              angle: 90
+            }
+          }
+        }
+      });
     </script>
 
 ### xAxis.labels.skip `Number` *(default: 1)*
@@ -28155,7 +28338,7 @@ The top padding of the labels.
     });
     </script>
 
-### yAxis.labels.rotation `Number` *(default: 0)*
+### yAxis.labels.rotation `Number|Object` *(default: 0)*
 
 The rotation angle of the labels. By default the labels are not rotated.
 
@@ -28174,6 +28357,41 @@ The rotation angle of the labels. By default the labels are not rotated.
       }
     });
     </script>
+
+### yAxis.labels.rotation.align `String` *(default: "end")*
+
+The alignment of the rotated labels relative to the slot center. The supported values are `"end"` and `"center"`. By default the closest end of the label will be aligned to the center. If set to `"center"`, the center of the rotated label will be aligned instead.
+
+#### Example - align the rotated x axis labels center
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [
+          {
+            type: "scatter",
+            data: [
+              [2, new Date("01/01/2013")],
+              [2, new Date("01/02/2013")],
+              [2, new Date("01/03/2013")]
+            ]
+          }
+        ],
+        yAxis: {
+          type: "date",
+          labels: {
+            rotation: {
+              angle: -45,
+              align: "center"
+            }
+          }
+        }
+      });
+    </script>
+
+### yAxis.labels.rotation.angle `Number` *(default: 0)*
+
+The rotation angle of the labels. By default the labels are not rotated.
 
 ### yAxis.labels.skip `Number` *(default: 1)*
 
