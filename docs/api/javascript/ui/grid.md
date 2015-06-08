@@ -4176,6 +4176,35 @@ Defines the text of the "Update" button that is rendered in `inline` or `popup` 
     });
     </script>
 
+### messages.noRecords `String`
+
+Defines the text of the "noRecords" option that is rendered when no records are available in current view. The "noRecords" options should be set to `true`.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" },
+        { command: ["edit", "destroy"] }
+      ],
+      dataSource: {
+        data: [
+          { name: "Jane Doe", age: 30 },
+          { name: "John Doe", age: 33 }
+        ],
+        page: 2,
+        pageSize: 10
+      },
+      noRecords: true,
+      messages: {
+        noRecords: "There is no data on current page"
+      }
+    });
+    </script>
+
 ### mobile `Boolean|String` *(default: false)*
 
 If set to `true` and the grid is viewed on mobile browser it will use adaptive rendering.
@@ -4244,6 +4273,49 @@ If set to `true` the use could navigate the widget using the keyboard navigation
     </script>
 
 > Check [Keyboard navigation](http://demos.telerik.com/kendo-ui/web/grid/navigation.html) for a live demo.
+
+### noRecords `Boolean|Object` *(default: false)*
+
+If set to `true` and current view contains no records, message similar to "No records available" will be displayed. By default this option is disabled.
+
+#### Example - enable noRecords message
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      noRecords: true,
+      dataSource: []
+    });
+    </script>
+
+### noRecords.template `String|Function`
+
+The [template](/api/framework/kendo#methods-template) which is rendered when current view contains no records.
+
+#### Example - customize the noRecords message
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      pageable: true,
+      noRecords: {
+        template: "No data available on current page. Current page is: #=this.dataSource.page()#"
+      },
+      dataSource: {
+        data: [{name: "John", age: 29}],
+        page: 2,
+        pageSize: 10
+      }
+    });
+    </script>
 
 ### pageable `Boolean|Object` *(default: false)*
 
