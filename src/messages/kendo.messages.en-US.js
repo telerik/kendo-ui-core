@@ -297,7 +297,8 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "cancelDelete": "Cancel",
     "confirmation": "Are you sure you want to delete this record?",
     "confirmDelete": "Delete"
-  }
+  },
+  "noRecords": "No records available."
 });
 }
 

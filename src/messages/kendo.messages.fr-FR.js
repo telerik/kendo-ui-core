@@ -163,7 +163,8 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "confirmation": "Êtes-vous sûr de vouloir supprimer cet enregistrement?",
     "cancelDelete": "Annuler",
     "confirmDelete": "Effacer"
-  }
+  },
+  "noRecords": "Aucun enregistrement disponible."
 });
 }
 

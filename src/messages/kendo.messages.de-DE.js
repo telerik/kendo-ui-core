@@ -288,7 +288,8 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "confirmation": "Sind Sie sicher, dass Sie diesen Datensatz löschen wollen?",
     "cancelDelete": "Abbrechen",
     "confirmDelete": "Löschen"
-  }
+  },
+  "noRecords": "Keine Aufzeichnungen zur Verfügung."
 });
 }
 

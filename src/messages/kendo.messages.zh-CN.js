@@ -267,7 +267,8 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "cancelDelete": "取消",
     "confirmation": "确定要删除吗？",
     "confirmDelete": "删除"
-  }
+  },
+  "noRecords": "没有可用的记录。"
 });
 }
 

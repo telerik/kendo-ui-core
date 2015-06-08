@@ -164,7 +164,8 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "confirmation": "Вы уверены, что хотите удалить эту запись?",
     "cancelDelete": "Отмена",
     "confirmDelete": "Удалить"
-  }
+  },
+  "noRecords": "Нет записей доступны."
 });
 }
 

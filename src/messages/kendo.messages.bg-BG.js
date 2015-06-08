@@ -311,7 +311,8 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "cancelDelete": "Откажи",
     "confirmation": "Сигурни ли сте, че искате да изтриете записа?",
     "confirmDelete": "Изтрий"
-  }
+  },
+  "noRecords": "Няма налични записи."
 });
 }
 
