@@ -22,6 +22,7 @@ The Kendo Mobile ScrollView widget is used to scroll content wider than the devi
       - [Multiple items template](#multiple-items-template)
     - [Displaying incomplete pages](#displaying-incomplete-pages)
       - [Template with JavaScript for loop](#template-with-javascript-for-loop)
+  - [Nova theme features](#nova-theme-features)
   - [Troubleshooting](#troubleshooting)
 
 ## Initialization
@@ -268,6 +269,21 @@ One possible approach is to use JavaScript logic (for loop) inside the template.
 
         var app = new kendo.mobile.Application();
     </script>
+
+## Nova theme features
+
+### Pager overlay
+
+![ScrollView pager overlay](/mobile/scrollview/pager-overlay.png)
+
+To activate the feature add `km-scrollview-overlay` class to the ScrollView element.
+
+#### Pager overlay - example
+
+    <div data-role="scrollView" class="km-scrollview-overlay">
+        <div data-role="page">Foo</div>
+        <div data-role="page">Bar</div>
+    </div>
 
 ## Troubleshooting
 
