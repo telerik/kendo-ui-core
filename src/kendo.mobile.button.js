@@ -53,6 +53,7 @@ var __meta__ = {
             that.enable(that.options.enable);
 
             that._userEvents = new kendo.UserEvents(that.element, {
+                allowSelection: !useTap,
                 press: function(e) {
                     that._activate(e);
                 },
