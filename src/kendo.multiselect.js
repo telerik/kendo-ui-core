@@ -713,7 +713,7 @@ var __meta__ = {
             var isRtl = kendo.support.isRtl(that.wrapper);
             var visible = that.popup.visible();
 
-            if (that.options.tagMode !== "multiline") {
+            if (that.options.tagMode !== "multiple") {
                 tag = null;
             }
 
@@ -1028,7 +1028,7 @@ var __meta__ = {
 
             that._angularTagItems("cleanup");
 
-            if (that.options.tagMode === "multiline") {
+            if (that.options.tagMode === "multiple") {
                 for (idx = removed.length - 1; idx > -1; idx--) {
                     removedItem = removed[idx];
 
@@ -1131,7 +1131,7 @@ var __meta__ = {
                 options.dataValueField = options.dataValueField || "value";
             }
 
-            if (options.tagMode === "multiline") {
+            if (options.tagMode === "multiple") {
                 tagTemplate = tagTemplate ? kendo.template(tagTemplate) : kendo.template("#:" + kendo.expr(options.dataTextField, "data") + "#", { useWithBlock: false });
                 that.tagTextTemplate = tagTemplate;
 
