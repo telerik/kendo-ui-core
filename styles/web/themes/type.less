@@ -1,0 +1,29 @@
+@sprite-image: url('@{image-folder}/sprite.png');
+
+.ktb-theme-id-@{theme-name} {
+    opacity: 0;
+}
+
+// serialize original values
+.ktb-var-accent              { color: @accent; }
+.ktb-var-base                { color: @base; }
+.ktb-var-background          { color: @background; }
+
+.ktb-var-border-radius       { border-radius: @border-radius; }
+
+.ktb-var-normal-background   { color: @normal-background; }
+.ktb-var-normal-gradient     { .composite-background(@normal-gradient); }
+.ktb-var-normal-text-color   { color: @normal-text-color; }
+
+.ktb-var-hover-background    { color: @hover-background; }
+.ktb-var-hover-gradient      { .composite-background(@hover-gradient); }
+.ktb-var-hover-text-color    { color: @hover-text-color; }
+
+.ktb-var-selected-background { color: @selected-background; }
+.ktb-var-selected-gradient   { .composite-background(@selected-gradient); }
+.ktb-var-selected-text-color { color: @selected-text-color; }
+
+.ktb-var-error               { color: @error; }
+.ktb-var-warning             { color: @warning; }
+.ktb-var-success             { color: @success; }
+.ktb-var-info                { color: @info; }
