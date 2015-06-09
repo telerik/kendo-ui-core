@@ -1137,8 +1137,9 @@ var __meta__ = {
                 return '<li class="k-button" unselectable="on"><span unselectable="on">' +
                         tagTemplate(data) +
                         '</span><span unselectable="on" class="k-select"><span unselectable="on" class="k-icon ' +
-                        (isMultiple ? "k-i-close" : "k-i-arrow-s") +
-                        '">delete</span></span></li>';
+                        (isMultiple ? "k-i-close" : "k-i-arrow-s") + '">' +
+                        (isMultiple ? "delete" : "open") +
+                        '</span></span></li>';
             };
         },
 

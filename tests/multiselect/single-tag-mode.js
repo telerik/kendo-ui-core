@@ -44,6 +44,7 @@
         equal(tag.children().length, 2);
         equal(tag.children().eq(0).html(), "1 item(s) selected");
         equal(tag.find(".k-select").children(".k-i-arrow-s").length, 1);
+        equal(tag.find(".k-select").children(".k-i-arrow-s").html(), "open");
     });
 
     test("Widget renders a single tag using a custom template with 'values' and 'maxTotal'", function() {
