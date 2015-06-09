@@ -147,4 +147,19 @@ test("DateTimePicker triggers close event when dateView is opened", 2, function(
     datetimepicker.dateView.popup.close();
 });
 
+test("does not force element's DOM change event when the user manually edits the value and presses 'Enter'", 0, function() {
+    input.kendoDateTimePicker({
+        value: new Date(2000, 10, 10, 10, 0, 0)
+    });
+
+    input.bind("change", function() {
+        ok(false);
+    });
+
+    input.focus()
+        .trigger($.Event("keydown", {keyCode: 8}))
+        .val("10/10/2010")
+        .trigger($.Event("keydown", {keyCode: 13}));
+});
+
 })();

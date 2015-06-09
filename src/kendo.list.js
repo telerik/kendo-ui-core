@@ -392,11 +392,15 @@ var __meta__ = {
                 that._old = value;
                 that._oldIndex = index;
 
-                // trigger the DOM change event so any subscriber gets notified
-                that.element.trigger(CHANGE);
+                if (!that._typing) {
+                    // trigger the DOM change event so any subscriber gets notified
+                    that.element.trigger(CHANGE);
+                }
 
                 that.trigger(CHANGE);
             }
+
+            that.typing = false;
         },
 
         _data: function() {
@@ -702,7 +706,7 @@ var __meta__ = {
             var filter = options.filter;
             var field = options.dataTextField;
 
-            clearTimeout(that._typing);
+            clearTimeout(that._typingTimeout);
 
             if (!length || length >= options.minLength) {
                 that._state = "filter";

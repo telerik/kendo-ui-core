@@ -236,7 +236,7 @@ var __meta__ = {
                 ns = that.ns;
 
             clearTimeout(that._busy);
-            clearTimeout(that._typing);
+            clearTimeout(that._typingTimeout);
 
             that.wrapper.off(ns);
             that.tagList.off(ns);
@@ -352,7 +352,7 @@ var __meta__ = {
         _inputFocusout: function() {
             var that = this;
 
-            clearTimeout(that._typing);
+            clearTimeout(that._typingTimeout);
 
             that.wrapper.removeClass(FOCUSEDCLASS);
 
@@ -539,7 +539,7 @@ var __meta__ = {
                 inputValue = "";
             }
 
-            clearTimeout(that._typing);
+            clearTimeout(that._typingTimeout);
 
             word = typeof word === "string" ? word : inputValue;
 
@@ -807,7 +807,7 @@ var __meta__ = {
                     that._removeTag(tag);
                 }
             } else {
-                clearTimeout(that._typing);
+                clearTimeout(that._typingTimeout);
                 setTimeout(function() { that._scale(); });
                 that._search();
             }
@@ -988,7 +988,7 @@ var __meta__ = {
         _search: function() {
             var that = this;
 
-            that._typing = setTimeout(function() {
+            that._typingTimeout = setTimeout(function() {
                 var value = that.input.val();
                 if (that._prev !== value) {
                     that._prev = value;

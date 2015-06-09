@@ -49,6 +49,21 @@ test("raise DOM change event", function() {
     datepicker._change("10/10/2000");
 });
 
+test("does not force element's DOM change event when the user manually edits the value and presses 'Enter'", 0, function() {
+    input.kendoDatePicker({
+        value: new Date(2000, 10, 10, 10, 0, 0)
+    });
+
+    input.bind("change", function() {
+        ok(false);
+    });
+
+    input.focus()
+        .trigger($.Event("keydown", {keyCode: 8}))
+        .val("10/10/2010")
+        .trigger($.Event("keydown", {keyCode: 13}));
+});
+
 test("do not raise change event when use API", 1, function() {
     datepicker = input.kendoDatePicker({
                                 change: function() {
