@@ -256,8 +256,7 @@
 
 .km-nova .km-group-title,
 .km-nova .km-list fieldset legend,
-.km-nova .km-shim li.km-actionsheet-title,
-.km-nova .km-popup .k-item {
+.km-nova .km-shim li.km-actionsheet-title {
     background: @base;
     border-color: hsv(hsvHue(@base) , hsvSaturation(@base), hsvValue(@base) - 13);
     color: @normal-text-color;
@@ -408,7 +407,8 @@
 }
 
 /* ActionSheet, Footer */
-.km-nova .km-actionsheet > li > a {
+.km-nova .km-actionsheet > li > a,
+.km-nova .km-popup .k-item {
     color: @normal-text-color;
     background: @background;
 }
