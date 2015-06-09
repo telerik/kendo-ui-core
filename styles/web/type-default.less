@@ -2535,3 +2535,73 @@ html .km-pane-wrapper .km-widget,
         }
     }
 }
+
+.k-chart .k-mask {
+    background-color: @background;
+    filter: alpha(opacity=68);
+    -moz-opacity: 0.68;
+    opacity: 0.68;
+}
+
+.k-chart .k-selection {
+    border-color: rgba(0,0,0,.2);
+    -moz-box-shadow: inset 0 1px 8px rgba(0,0,0,.1);
+    -webkit-box-shadow: inset 0 1px 8px rgba(0,0,0,.1);
+    box-shadow: inset 0 1px 8px rgba(0,0,0,.1);
+    transition: box-shadow .2s linear, border-color .2s linear;
+    -moz-transition: box-shadow .2s linear, border-color .2s linear;
+    -webkit-transition: box-shadow .2s linear, border-color .2s linear;
+    -o-transition: box-shadow .2s linear, border-color .2s linear;
+}
+
+.k-chart .k-selection:hover {
+    border-color: rgba(0,0,0,.3);
+    -moz-box-shadow: inset 0 3px 8px rgba(0,0,0,.2);
+    -webkit-box-shadow: inset 0 3px 8px rgba(0,0,0,.2);
+    box-shadow: inset 0 3px 8px rgba(0,0,0,.2);
+}
+
+.k-chart .k-handle {
+    background-color: #fcfcfc;
+    -moz-box-shadow: 0 0 0 1px rgba(0,0,0,.1);
+    -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,.1);
+    box-shadow: 0 0 0 1px rgba(0,0,0,.1);
+}
+
+.k-chart .k-handle:hover {
+    background-color: #ffffff;
+    border-color: #b8b8b8;
+    -moz-box-shadow: 0 0 0 2px rgba(111,101,96,.5);
+    -webkit-box-shadow: 0 0 0 2px rgba(111,101,96,.5);
+    box-shadow: 0 0 0 2px rgba(111,101,96,.5);
+}
+.k-chart .k-navigator-hint .k-tooltip {
+    border: 3px solid #ffffff;
+    -moz-box-shadow: 0 0 0 3px rgba(0,0,0,.2);
+    -webkit-box-shadow: 0 0 0 3px rgba(0,0,0,.2);
+    box-shadow: 0 0 0 3px rgba(0,0,0,.2);
+    background: #ffffff;
+    color: #242424;
+}
+
+.k-chart .k-navigator-hint .k-scroll {
+    background: fadeout(@accent, 30%);
+    height: 4px;
+}
+
+/* Map */
+
+.k-map .k-marker {
+    background-image: url("@{image-folder}/markers.png");
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2),
+       only screen and (min-device-pixel-ratio: 2) {
+    .k-map .k-marker {
+        background-image: url("@{image-folder}/markers_2x.png");
+    }
+}
+
+.k-map .k-attribution {
+    color: #666666;
+}

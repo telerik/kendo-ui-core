@@ -2630,3 +2630,75 @@ html .km-pane-wrapper .km-widget,
 .k-checkbox:checked + .k-checkbox-label:active:after {
     border-color: @checkbox-active-border-color-after; 
 }
+
+.k-chart .k-mask {
+    background-color: #fff;
+    filter: alpha(opacity=70);
+    -moz-opacity: 0.70;
+    opacity: 0.70;
+}
+
+.k-chart .k-selection {
+    border-color: #c7c7c7;
+    transition: box-shadow .2s linear, border-color .2s linear;
+    -moz-transition: box-shadow .2s linear, border-color .2s linear;
+    -webkit-transition: box-shadow .2s linear, border-color .2s linear;
+    -o-transition: box-shadow .2s linear, border-color .2s linear;
+}
+
+.k-chart .k-selection:hover {
+    border-color: #2eb3a6;
+    -moz-box-shadow: inset 0 0 0 30px rgba(46, 179, 166,.5);
+    -webkit-box-shadow: inset 0 0 0 30px rgba(46, 179, 166,.5);
+    box-shadow: inset 0 0 0 30px rgba(46, 179, 166,.5);
+}
+
+.k-chart .k-handle {
+    background-color: #10c4b2;
+    width: 1px;
+}
+
+.k-chart .k-handle:hover {
+    background-color: #2eb3a6;
+    width: 3px;
+    border-radius: 0;
+}
+
+.k-chart .k-navigator-hint .k-tooltip {
+    border: 0;
+    background: #10c4b2;
+    color: #ffffff;
+    border-radius: 0;
+}
+
+.k-chart .k-navigator-hint .k-scroll {
+    background: rgba(0,0,0,0);
+    height: 4px;
+    border-radius: 0;
+}
+
+.k-chart .k-tooltip,
+.k-sparkline .k-tooltip {
+    background-image: none;
+    border-radius: 0;
+}
+
+.k-chart .k-tooltip{
+    -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+}
+
+.k-navigator-hint .k-tooltip {
+    box-shadow: 0 0 0 rgba(0,0,0,0);
+    background: #fff;
+}
+
+.k-map .k-marker {
+    background-image: url("@{image-folder}/markers.png");
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2) {
+    .k-map .k-marker {
+        background-image: url("@{image-folder}/markers_2x.png");
+    }
+}

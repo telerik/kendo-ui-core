@@ -3293,3 +3293,75 @@ td.k-state-focused.k-state-selected,
         }
     }    
 }
+
+.k-chart .k-selection {
+    border-color: #cccccc;
+    transition: box-shadow .2s linear, border-color .2s linear;
+    -moz-transition: box-shadow .2s linear, border-color .2s linear;
+    -webkit-transition: box-shadow .2s linear, border-color .2s linear;
+    -o-transition: box-shadow .2s linear, border-color .2s linear;
+}
+
+.k-chart .k-selection:hover {
+    border-color: #9e9e9e;
+}
+
+.k-chart .k-handle {
+    background-color: #ffffff;
+    width: 15px;
+    height: 15px;
+    -moz-box-shadow: 0 0 0 2px rgba(0,0,0,.1);
+    -webkit-box-shadow: 0 0 0 2px rgba(0,0,0,.1);
+    box-shadow: 0 0 0 2px rgba(0,0,0,.1);
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+.k-chart .k-handle:hover {
+    background-color: #ffffff;
+    border-color: #cccccc;
+    -moz-box-shadow: 0 0 0 2px rgba(0,0,0,.3);
+    -webkit-box-shadow: 0 0 0 2px rgba(0,0,0,.3);
+    box-shadow: 0 0 0 2px rgba(0,0,0,.3);
+}
+
+.k-chart .k-leftHandle {
+    left: -8px;
+}
+
+.k-chart .k-rightHandle {
+    right: -8px;
+}
+
+.k-chart .k-navigator-hint .k-tooltip {
+    border: 3px solid #ffffff;
+    -moz-box-shadow: 0 0 0 3px rgba(0,0,0,.2);
+    -webkit-box-shadow: 0 0 0 3px rgba(0,0,0,.2);
+    box-shadow: 0 0 0 3px rgba(0,0,0,.2);
+    background: #ffffff;
+    color: #676767;
+}
+
+.k-chart .k-navigator-hint .k-scroll {
+    background: rgba(0,124,204,.7);
+    height: 4px;
+}
+
+.k-chart .k-tooltip,
+.k-sparkline .k-tooltip {
+  background-image: none;
+}
+
+/* Map */
+
+.k-map .k-marker {
+    background-image: url("@{image-folder}/markers.png");
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2) {
+    .k-map .k-marker {
+        background-image: url("@{image-folder}/markers_2x.png");
+    }
+}
+

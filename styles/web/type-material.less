@@ -3798,3 +3798,121 @@ div.k-scheduler-marquee:after {
         }
     }
 }
+/* Default Theme */
+
+.k-chart .k-mask {
+    background-color: #fff;
+    filter: alpha(opacity=68);
+    -moz-opacity: 0.68;
+    opacity: 0.68;
+}
+
+.k-chart .k-selection {
+    border-color: #e5e5e5;
+}
+
+.k-chart .k-handle {
+    width: 15px;
+    height: 15px;
+    background-color: #00b0ff;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+.k-chart .k-leftHandle {
+    left: -8px;
+}
+
+.k-chart .k-rightHandle {
+    right: -8px;
+}
+
+.k-chart .k-handle:hover {
+    background-color: #00b0ff;
+    border-color: #00b0ff;
+}
+
+.k-chart .k-navigator-hint .k-tooltip {
+    border: 3px solid #ffffff;
+    -moz-box-shadow: 0 0 0 3px rgba(0,0,0,.2);
+    -webkit-box-shadow: 0 0 0 3px rgba(0,0,0,.2);
+    box-shadow: 0 0 0 3px rgba(0,0,0,.2);
+    background: #ffffff;
+    color: #242424;
+}
+
+.k-chart .k-navigator-hint .k-scroll {
+    background: #3f51b5;
+    height: 4px;
+}
+
+.k-chart-tooltip {
+    background-image: none;
+}
+
+/* Map */
+
+.k-map .k-marker {
+    background-image: url("@{image-folder}/markers.png");
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2) {
+    .k-map .k-marker {
+        background-image: url("@{image-folder}/markers_2x.png");
+    }
+}
+
+.k-map .k-attribution {
+    color: #666666;
+}
+
+.k-map .k-shadow {
+    background-color: #f9f9f9;
+    border-color: #f9f9f9;
+}
+
+.k-map .k-zoom-control {
+    border-color: #fff;
+    -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 2px;
+}
+
+.k-map .k-map-controls .k-button {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.k-map .k-map-controls .k-button:focus,
+.k-map .k-map-controls .k-button:active,
+.k-map .k-map-controls .k-button:focus:active {
+    background-color: #d6d6d6;
+    border-color: #d6d6d6;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.k-buttons-horizontal .k-zoom-out {
+    border-radius: 0 2px 2px 0;
+}
+
+.k-buttons-horizontal :first-child
+{
+    border-radius: 2px 0 0 2px;
+}
+
+.k-rtl .k-buttons-horizontal .k-zoom-out
+{
+    border-radius: 2px 0 0 2px;
+}
+
+.k-rtl .k-buttons-horizontal :first-child
+{
+    border-radius: 0 2px 2px 0;
+}
+
+.k-button-wrap .k-button {
+    font-size: 21px;
+    padding: 7px 13px;
+}
