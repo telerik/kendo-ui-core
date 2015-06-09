@@ -18932,7 +18932,7 @@ The alignment of the rotated labels relative to the slot center. The supported v
       });
     </script>
 
-### categoryAxis.labels.rotation.angle `Number|String` *(default: 0)*
+### valueAxis.labels.rotation.angle `Number|String` *(default: 0)*
 
 The rotation angle of the labels. By default the labels are not rotated. Can be set to `"auto"` if the axis is horizontal in which case the labels will be rotated only if the slot size is not sufficient for the entire labels.
 
@@ -23646,7 +23646,7 @@ The alignment of the rotated labels relative to the slot center. The supported v
       });
     </script>
 
-### categoryAxis.labels.rotation.angle `Number|String` *(default: 0)*
+### xAxis.labels.rotation.angle `Number|String` *(default: 0)*
 
 The rotation angle of the labels. By default the labels are not rotated. Can be set to `"auto"` in which case the labels will be rotated only if the slot size is not sufficient for the entire labels.
 
