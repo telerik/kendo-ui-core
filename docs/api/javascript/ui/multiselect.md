@@ -507,13 +507,13 @@ The [template](/api/framework/kendo#methods-template) used to render the items i
 
 The [template](/api/framework/kendo#methods-template) used to render the tags.
 
-#### Template Data for the 'multiple' tagMode
+#### Template Data for the 'multiple' [tagMode](#configuration-tagMode)
 
 ##### data `Object`
 
 The dataitem that corresponds to the selected value.
 
-#### Template Data for the 'single' tagMode
+#### Template Data for the 'single' [tagMode](#configuration-tagMode)
 
 ##### data.values `Array`
 
@@ -525,11 +525,12 @@ A list of the selected data items.
 
 ##### data.currentTotal `Array`
 
-The current total value of the dataSource.
+The current dataSource total value. If it is server filtered, it will show the current length of the [view](/api/javascript/data/datasource#methods-view).
 
 ##### data.maxTotal `Array`
 
-The max total value of the dataSource. Usable when the tag shows the absolute total of the available items.
+The maximum total value of the dataSource. Unlike the `currentTotal`, this value will keep the maximum reached total value.
+Usable when the tag shows the total of the available items.
 
 #### Example - specify template as a function
 
