@@ -81,7 +81,7 @@
             start();
             equal(application.view().id, "/");
             application.destroy();
-        }, 400);
+        }, 600);
     });
 
     if (kendo.support.mobileOS.android) {
