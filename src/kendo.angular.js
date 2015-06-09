@@ -982,7 +982,9 @@ var __meta__ = {
         var valueField = options.dataValueField;
         var text = options.text || "";
 
-        val = val || "";
+        if (val === undefined) {
+            value = "";
+        }
 
         if (valueField && !options.valuePrimitive && val) {
             text = val[options.dataTextField] || "";

@@ -78,6 +78,20 @@
         equal(JSON.stringify(scope.selectedColor), JSON.stringify('blue'));
     });
 
+    ngTest("dropdown selects value with '0'", 1, function() {
+        angular.module("kendo.tests").controller("mine", function($scope) {
+            $scope.colors = [ { color: 1 }, { color: 0 }, { color: 2 } ];
+            $scope.selectedColor = 0;
+        });
+
+        QUnit.fixture.html('<div ng-controller=mine><select kendo-drop-down-list k-value-primitive="true" k-ng-model=selectedColor k-data-source=colors k-data-value-field="\'color\'"></select></div>');
+    },
+
+    function() {
+        var dropdown = QUnit.fixture.find("select").getKendoDropDownList();
+        equal(dropdown.select(), 1);
+    });
+
     ngTest("dropdown sets optionLabel object to the model", 1, function() {
         angular.module("kendo.tests").controller("mine", function($scope) {
             $scope.colors = [ { color: "red" }, { color: "green" }, { color: "blue" } ];
