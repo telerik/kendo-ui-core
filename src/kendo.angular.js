@@ -983,7 +983,7 @@ var __meta__ = {
         var text = options.text || "";
 
         if (val === undefined) {
-            value = "";
+            val = "";
         }
 
         if (valueField && !options.valuePrimitive && val) {
