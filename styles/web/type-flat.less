@@ -2647,32 +2647,32 @@ html .km-pane-wrapper .km-widget,
 }
 
 .k-chart .k-selection:hover {
-    border-color: #2eb3a6;
-    -moz-box-shadow: inset 0 0 0 30px rgba(46, 179, 166,.5);
-    -webkit-box-shadow: inset 0 0 0 30px rgba(46, 179, 166,.5);
-    box-shadow: inset 0 0 0 30px rgba(46, 179, 166,.5);
+    border-color: @hover-background;
+    -moz-box-shadow: inset 0 0 0 30px fadeout(@hover-background, 50%);
+    -webkit-box-shadow: inset 0 0 0 30px fadeout(@hover-background, 50%);
+    box-shadow: inset 0 0 0 30px fadeout(@hover-background, 50%);
 }
 
 .k-chart .k-handle {
-    background-color: #10c4b2;
+    background-color: @selected-background;
     width: 1px;
 }
 
 .k-chart .k-handle:hover {
-    background-color: #2eb3a6;
+    background-color: @hover-background;
     width: 3px;
     border-radius: 0;
 }
 
 .k-chart .k-navigator-hint .k-tooltip {
     border: 0;
-    background: #10c4b2;
+    background: @selected-background;
     color: #ffffff;
     border-radius: 0;
 }
 
 .k-chart .k-navigator-hint .k-scroll {
-    background: rgba(0,0,0,0);
+    background: fadeout(@accent, 50%);
     height: 4px;
     border-radius: 0;
 }

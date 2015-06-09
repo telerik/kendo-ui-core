@@ -3801,7 +3801,7 @@ div.k-scheduler-marquee:after {
 /* Default Theme */
 
 .k-chart .k-mask {
-    background-color: #fff;
+    background-color: @background;
     filter: alpha(opacity=68);
     -moz-opacity: 0.68;
     opacity: 0.68;
@@ -3814,9 +3814,7 @@ div.k-scheduler-marquee:after {
 .k-chart .k-handle {
     width: 15px;
     height: 15px;
-    background-color: #00b0ff;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
+    background-color: contrast(@base, @selected-text-color, @selected-background, 0.5);
     border-radius: 10px;
 }
 
@@ -3829,8 +3827,8 @@ div.k-scheduler-marquee:after {
 }
 
 .k-chart .k-handle:hover {
-    background-color: #00b0ff;
-    border-color: #00b0ff;
+    background-color: @selected-background;
+    border-color: @selected-background;
 }
 
 .k-chart .k-navigator-hint .k-tooltip {
@@ -3843,7 +3841,7 @@ div.k-scheduler-marquee:after {
 }
 
 .k-chart .k-navigator-hint .k-scroll {
-    background: #3f51b5;
+    background: @accent;
     height: 4px;
 }
 
