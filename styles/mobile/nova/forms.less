@@ -2,8 +2,7 @@
 @import "base.less";
 
 /* Forms */
-.km-nova .k-slider .k-draghandle
-{
+.km-nova .k-slider .k-draghandle {
     width: .857em;
     height: .857em;
     .box-shadow(none);
@@ -13,107 +12,69 @@
 
 .km-nova .km-list .km-full-width-slider {    
     position: relative;
-    //margin-top: 1.09em;
-    //margin-bottom: 1.23em;
     margin-top: 0;
     padding: 1.55em 0;
     width: auto;
     display: block;
 }
 
-.km-nova .k-slider-horizontal .k-draghandle
-{
+.km-nova .k-slider-horizontal .k-draghandle {
     top: 2px;
 }
 
-.km-nova .k-slider-vertical .k-draghandle
-{
+.km-nova .k-slider-vertical .k-draghandle {
     left: -.5em;
 }
 
-.km-nova .k-slider-horizontal .k-slider-selection
-{
+.km-nova .k-slider-horizontal .k-slider-selection {
     margin-top: 0;
 }
 
-.km-nova .k-slider-vertical .k-slider-selection
-{
+.km-nova .k-slider-vertical .k-slider-selection {
     margin-left: -.1em;
     width: .29rem;
 }
 
-.km-nova .k-slider-horizontal .k-slider-track
-{
+.km-nova .k-slider-horizontal .k-slider-track {
     height: .29rem;
 }
 
-.km-nova .k-slider-vertical .k-slider-track
-{
+.km-nova .k-slider-vertical .k-slider-track {
     width: .29rem;
 }
 
-.km-nova .k-slider-selection
-{
+.km-nova .k-slider-selection {
     margin-left: 0;
 }
 
 .km-nova .k-slider .k-draghandle,
-.km-nova .k-slider .k-draghandle:hover
-{
+.km-nova .k-slider .k-draghandle:hover {
     margin-top: -.5em;
     padding: 0;
     background-clip: content-box;
     -webkit-background-clip: content-box;
 }
 
-/*.km-nova .k-slider .k-draghandle:before
-{
-    content: "\a0";
-    display: block;
-    margin-top: -.5em;
-    margin-left: -.5em;
-    width: 100%;
-    height: 100%;
-    opacity: .3;
-    border-radius: 5em;
-    padding: .5em;
-    margin-bottom: .5em;
-}*/
-
-.km-nova .k-slider .k-draghandle:active:before
-{
+.km-nova .k-slider .k-draghandle:active:before {
     opacity: .4;
-}
-
-
+} 
 
 .km-nova .k-slider .k-draghandle,
-.km-nova .k-slider .k-draghandle:hover
-{
+.km-nova .k-slider .k-draghandle:hover {
     border: 0;
     border-radius: 5em;
     .box-shadow(0 1px 6px 1px currentcolor);
 }
 
-.km-nova .k-slider-track
-{
-    //margin: -.5em .5em 0 0;
+.km-nova .k-slider-track {
     .box-sizing(content-box);
     border-radius: .5em;
     border-width: 0;
-    //background-color: @flat-second-color;
 }
 
-.km-nova .k-slider-selection
-{
+.km-nova .k-slider-selection {
     margin-left: 0;
 }
-
-/* Forms */
-
-/*.km-nova .km-list > li label {
-    display: inline-block;
-}*/
 
 .km-nova .km-list input[type=password],
 .km-nova .km-list input[type=search],
@@ -131,30 +92,23 @@
 .km-nova .km-list input[type=text]:not(.k-input),
 .km-nova .km-list select:not([multiple]),
 .km-nova .km-list .k-dropdown-wrap,
-.km-nova .km-list textarea
-{
+.km-nova .km-list textarea {
     .appearance(none);
     font-size: 1.2rem;
     min-width: 6em;
     border: 0;
-    //padding: .4em;
     outline: none;
     background: transparent;
     margin-top: 0;
-    //transform: translateY(-50%);
-    //text-align: right;
     transform: translateY(-50%);
     -webkit-transform: translateY(-50%);
 }
 
-.km-nova .km-list .k-dropdown-wrap
-{
+.km-nova .km-list .k-dropdown-wrap {
     padding: .2em;
 }
 
-.km-nova .km-list .k-dropdown
-{
-    //margin-top: -1.05em;
+.km-nova .km-list .k-dropdown {
     font-weight: normal;
     transform: translateY(50%);
     -webkit-transform: translateY(50%);
@@ -167,24 +121,15 @@
 .km-nova .km-list input[type=month],
 .km-nova .km-list input[type=datetime],
 .km-nova .km-list input[type=datetime-local],
-.km-nova .km-list .k-dropdown
-{
+.km-nova .km-list .k-dropdown {
     text-align: left;
 }
 
-.km-nova .km-list .k-dropdown .k-dropdown-wrap
-{
+.km-nova .km-list .k-dropdown .k-dropdown-wrap {
     display: block;
     border-radius: 0;
     background: transparent;
     .box-shadow(none);
-}
-
-
-
-// New styles
-.km-nova .km-list label {
-    //font-size: .72em;
 }
 
 .km-nova .km-label-above {
@@ -225,17 +170,12 @@
 .km-nova .km-list .km-label-above select:not([multiple]),
 .km-nova .km-list .km-label-above .k-dropdown,
 .km-nova .km-list .km-label-above textarea {
-    //position: relative;
     width: 100%;
     right: 0;
     padding-left: 0;
-    //margin-top: .3em;
-    //top: 0;
     left: .89em;
-    //top: 1.7em;
     transform: translateY(0);
     -webkit-transform: translateY(0);
-
 }
 
 .km-nova label.km-required:after {
@@ -251,7 +191,6 @@
 
 .km-nova .km-icon-label:before {
     display: inline-block;
-   // content: "\e044";
     width: 1em;
     height: 1em;
     font: 1em/1em "Kendo UI";
@@ -326,7 +265,6 @@
 
 .km-nova .km-list fieldset textarea {
     width: 100%;
-    //margin-right: -1.2em;
     transform: translateY(0);
     -webkit-transform: translateY(0);
     margin-right: 0;
@@ -351,12 +289,10 @@
 .km-nova .km-list fieldset .k-dropdown-wrap,
 .km-nova .km-list fieldset textarea {
     width: 100%;
-    //padding: 0;
     position: relative;
 }
 
 .km-nova .km-list fieldset legend {
-    //font-size: 1.2em;
     text-indent: 0;
     margin: 0 -1.61em;
     font-weight: normal;
@@ -389,7 +325,6 @@
 
 .km-nova .km-list fieldset .km-inline-field:first-of-type {
     padding-left: 0;
-    //margin-left: 2.16em;
 }
 
 .km-nova .km-inline-field.km-label-above {
@@ -443,10 +378,9 @@
     padding-left: 0;
 }
 
-/* Checkboxes inside ListView - Old rendering */
+/* Checkboxes and RadioButtons inside ListView */
 .km-nova input[type=radio],
-.km-nova input[type=checkbox]
-{
+.km-nova input[type=checkbox] {
     border-width: 2px;
     border-style: solid;
     height: 28px;
@@ -462,30 +396,25 @@
     right: 0;
 }
 
-.km-nova input[type=radio]
-{
+.km-nova input[type=radio] {
     height: 28px;
     width: 28px;
     border-radius: 50%;
 }
 
 .km-nova input[type=radio].km-check:checked:after,
-.km-nova input[type=checkbox].km-check:after
-{
+.km-nova input[type=checkbox].km-check:after {
     content: "\a0";
     display: block;
     font-size: 1.2em;
     text-align: center;
-    //.transform(scale(.9,1));
-    //.transform-origin(10% 50%);
 }
 
 .km-nova input[type=checkbox].km-check:checked:after {
    margin-left: -1px;
 }
 
-.km-nova input[type=radio].km-check:checked:after
-{
+.km-nova input[type=radio].km-check:checked:after {
     margin-top: 4px;
     margin-left: 4px;
     width: 16px;
@@ -493,18 +422,13 @@
     border-radius: 50%;
 }
 
-/*.km-nova .km-list .km-check {
-    left: auto;
-}*/
-
-/* Checkboxes and RadioButtons */
+/* Standalone Checkboxes and RadioButtons */
 .km-nova input.km-checkbox,
 .km-nova input.km-radio {
     display: inline;
     opacity: 0;
     width: 0;
     margin: 0;
-    //position: absolute;
 }
 
 .km-nova .km-checkbox-label,
@@ -516,7 +440,7 @@
    font-size: 1.2em;
 }
 
-.km-nova .km-checkbox-label:after{
+.km-nova .km-checkbox-label:after {
   content: "";
   position: absolute;
   top: 0;
@@ -844,41 +768,3 @@
 .km-nova .km-icon-label.k-i-subscript:before { content: "\E117"; }
 .km-nova .km-icon-label.k-i-superscript:before { content: "\E118"; }
 .km-nova .km-icon-label.k-i-drophere:before { content: "\E119"; }
-/*.km-contactadd:before, .km-rowinsert:before { content: "\E039"; }
-.km-rowdelete:before { content: "\E03a"; }
-.km-detaildisclose:before { content: "\E0E2"; }
-.km-action:before { content: "\e0ca"; }
-.km-add:before { content: "\e0cb"; }
-.km-battery:before { content: "\e0ce"; }
-.km-bookmarks:before { content: "\e0cf"; }
-.km-camera:before { content: "\e0d0"; }
-.km-cart:before { content: "\e0d1"; }
-.km-edit:before, .km-compose:before { content: "\e0d5"; }
-.km-contacts:before { content: "\e0e4"; }
-.km-trash:before, .km-delete:before { content: "\e0ec"; }
-.km-details:before { content: "\e0e2"; }
-.km-download:before, .km-downloads:before { content: "\e0d4"; }
-.km-fastforward:before { content: "\e0d9"; }
-.km-toprated:before, .km-favorites:before { content: "\e0d7"; }
-.km-featured:before { content: "\e0d8"; }
-.km-globe:before { content: "\e0dc"; }
-.km-history:before { content: "\e0e7"; }
-.km-home:before { content: "\e0dd"; }
-.km-info:before, .km-about:before { content: "\e0de"; }
-.km-more:before { content: "\e0e0"; }
-.km-mostrecent:before { content: "\e0cc"; }
-.km-mostviewed:before { content: "\e0d6"; }
-.km-organize:before { content: "\e0eb"; }
-.km-pause:before { content: "\e0e3"; }
-.km-play:before { content: "\e0e5"; }
-.km-recents:before { content: "\e0d2"; }
-.km-refresh:before { content: "\e0e6"; }
-.km-reply:before { content: "\e0ed"; }
-.km-rewind:before { content: "\e0e8"; }
-.km-search:before { content: "\e0e9"; }
-.km-settings:before { content: "\e0da"; }
-.km-share:before { content: "\e0df"; }
-.km-sounds:before, .km-volume:before { content: "\e0ef"; }
-.km-stop:before { content: "\e0ea"; }
-.km-wifi:before { content: "\e0f0"; }
-.km-phone:before { content: "\e326"; }*/

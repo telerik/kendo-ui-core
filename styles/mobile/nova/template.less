@@ -1,21 +1,20 @@
 @accent: #ff4350;
-@base: #f8fafb; // ListView background
+@base: #f8fafb;
 @background: #fff;
 
 @border-radius: 4px;
 
 @normal-background: #fff;
-@normal-text-color: #32364c; //Dark text color
+@normal-text-color: #32364c;
 @normal-gradient: none;
 
-@hover-background: #f8fafb; //Normal button background
-@hover-text-color: #888e90; //Hover button color
+@hover-background: #f8fafb;
+@hover-text-color: #888e90;
 @hover-gradient: none;
 
-@selected-background: #f5f6f6; // Button pressed
+@selected-background: #f5f6f6;
 @selected-text-color: #888e90;
 @selected-gradient: none;
-
 
 @accentSecond: #00acc1;
 
@@ -42,7 +41,7 @@
     background: rgba(0,0,0,.4);
 }
 
-// Button
+/* Button */
 .km-nova .km-button {
     color: @hover-text-color;
     background: @background;
@@ -53,7 +52,7 @@
     background: @selected-background;
 }
 
-// Primary Button
+/* Primary Button */
 .km-nova .km-primary {
     color: @background;
     background: @accent;
@@ -65,7 +64,7 @@
     border-color: hsv(hsvHue(@accent), hsvSaturation(@accent), hsvValue(@accent) - 10);
 }
 
-// Link button => km-link-button
+/* Link button */
 .km-nova .km-link-button {
     color: @accentSecond;
     border-color: transparent;
@@ -75,7 +74,7 @@
     color: @accentSecond;
 }
 
-// TabStrip
+/* TabStrip */
 .km-nova .km-footer {
     background: @normal-text-color;
 }
@@ -133,8 +132,7 @@
 }
 
 .km-nova .km-light.k-toolbar,
-.km-nova .km-light.km-tabstrip
-{
+.km-nova .km-light.km-tabstrip {
     background: @background;
     .box-shadow(0 1px 40px 4px @hover-background);
 }
@@ -165,7 +163,7 @@
     .box-shadow(none);
 }
 
-// ButtonGroup
+/* ButtonGroup */
 .km-nova .km-buttongroup .km-state-active {
     color: @background;
     background-color: darken(@selected-background, 33%);
@@ -203,7 +201,6 @@
     color: @accent;
     background-color: @background;
 }
-/* ... */
 
 /* Accent NavBar */
 .km-nova .km-accent.km-navbar,
@@ -289,8 +286,7 @@
     border-color: lighten(@normal-text-color, 5%);
 }
 
-.km-nova  .km-drawer .km-list > li {
-    //background-color: @normal-text-color;
+.km-nova .km-drawer .km-list > li {
     border-color: lighten(@normal-text-color, 5%);
 }
 
@@ -305,11 +301,8 @@
     border-color: hsv(hsvHue(@base) , hsvSaturation(@base), hsvValue(@base) - 13);
 }
 
-.km-nova .km-listview-link:after
-{
+.km-nova .km-listview-link:after {
     color: hsv(hsvHue(@base) , hsvSaturation(@base), hsvValue(@base) - 13);
-    //-webkit-box-shadow: inset -.2rem .2rem 0 @ios7-lighter-background;
-    //box-shadow: inset -.2rem .2rem 0 @ios7-lighter-background;
 }
 
 /* Slider */
@@ -317,20 +310,17 @@
     background-color: hsv(hsvHue(@base) , hsvSaturation(@base), hsvValue(@base) - 13);
 }
 
-.km-nova .k-slider-selection
-{
+.km-nova .k-slider-selection {
     background-color: @accent;
 }
 
 .km-nova .k-slider .k-draghandle,
-.km-nova .k-slider .k-draghandle:hover
-{
+.km-nova .k-slider .k-draghandle:hover {
     background-color: @background;
 }
 
 /* Switch */
-.km-nova span.km-switch
-{
+.km-nova span.km-switch {
     color: @accent;
 }
 
@@ -338,19 +328,10 @@
     color: @base;
 }
 
-.km-nova .km-switch-handle
-{
+.km-nova .km-switch-handle {
     background: @background;
-    //-webkit-box-shadow: 0 3px 8px brown, 0 0 0 1px currentcolor;
-    //box-shadow: 0 3px 8px lightBlue, 0 0 0 1px currentcolor;
     .box-shadow(0 2px 5px 0 rgba(0,0,0,.3));
     border-color: darken(@base, 8%);
-}
-
-.km-nova .km-switch-off .km-switch-handle
-{
-    //-webkit-box-shadow: 0 3px 8px lightBlue, 0 0 0 1px lightGreen;
-    //box-shadow: 0 3px 8px blue, 0 0 0 1px lightGreen;
 }
 
 .km-nova .km-switch-off .km-switch-container {
@@ -358,11 +339,9 @@
 }
 
 .km-nova .km-switch-container,
-.km-nova .km-switch-wrapper
-{
+.km-nova .km-switch-wrapper {
     border-color: currentcolor;
 }
-
 
 /* ScrollView */
 .km-nova .km-scrollview {
@@ -375,17 +354,14 @@
 
 .km-nova .km-pages li {
     background: rgba(255, 255, 255, 0.5);
-    //border-color: rgba(255, 255, 255, 0.5);
     border-color: hsv(hsvHue(@base) , hsvSaturation(@base), hsvValue(@base) - 13);
 }
 
 .km-nova .km-pages .km-current-page {
-    //background: rgba(255, 255, 255, 1);
-    //border-color: rgba(255, 255, 255, 1);
     background: hsv(hsvHue(@base) , hsvSaturation(@base), hsvValue(@base) - 13);
 }
 
-/* Checkboxes and RadioButtons - old rendering */
+/* Checkboxes and RadioButtons inside ListView */
 .km-nova input[type=radio],
 .km-nova input[type=checkbox] {
    color: @accent;
@@ -400,7 +376,7 @@
     background: @accent;
 }
 
-/* Checkboxes and radio buttons */
+/* Standalone Checkboxes and RadioButtons */
 .km-nova .km-checkbox:checked + .km-checkbox-label:after {
     color: @accent;
     border-color: darken(@base, 8%);
@@ -421,27 +397,23 @@
     background: @background;
 }
 
-.km-nova .km-modalview .km-footer .km-button
-{
-    color: darken(@base, 50%); // Calculate to #455a64;
+.km-nova .km-modalview .km-footer .km-button {
+    color: darken(@base, 50%);
     border-color: hsv(hsvHue(@base) , hsvSaturation(@base), hsvValue(@base) - 13);
 }
 
 .km-nova .km-modalview .km-footer .km-rightitem .km-button:last-child,
-.km-nova .km-modalview .km-footer .km-button.km-state-active
-{
+.km-nova .km-modalview .km-footer .km-button.km-state-active {
     color: @accentSecond;
 }
 
 /* ActionSheet, Footer */
-.km-nova .km-actionsheet > li > a
-{
+.km-nova .km-actionsheet > li > a {
     color: @normal-text-color;
     background: @background;
 }
 
-.km-nova .km-actionsheet > li:nth-last-child(2) > a
-{
+.km-nova .km-actionsheet > li:nth-last-child(2) > a {
     border-image: none;
 }
 
@@ -454,23 +426,18 @@
     border-color: hsv(hsvHue(@base) , hsvSaturation(@base), hsvValue(@base) - 13);
 }
 
-.km-nova .km-actionsheet > .km-actionsheet-cancel > a
-{
+.km-nova .km-actionsheet > .km-actionsheet-cancel > a {
     color: @normal-text-color;
 }
 
 .km-nova .km-popup.km-pane,
-.km-tablet .km-nova .km-actionsheet-wrapper
-{
+.km-tablet .km-nova .km-actionsheet-wrapper {
     background-color: @background;
 }
 
-
 /* Collapsible */
-
 .km-nova .km-collapsible-header,
-.km-nova .km-collapsible-content
-{
+.km-nova .km-collapsible-content {
     color: @normal-text-color;
     border-color: darken(@base, 8%);
 }
@@ -480,22 +447,13 @@
     color: darken(@base, 8%);
 }
 
-/* Copy from Kamen*/
-/* PopUp */
-.km-nova .km-actionsheet-root .km-popup-arrow:after {
-    border-color: transparent purple;
-}
-
 /* Loader & Pull-to-refresh */
-
-.km-nova .km-loader
-{
+.km-nova .km-loader {
     background: rgba(0,0,0,.05);
 }
 
 .km-nova .km-badge,
-.km-nova .km-rowdelete
-{
+.km-nova .km-rowdelete {
     color: @background;
     background: @accent;
     border-color: @accent;

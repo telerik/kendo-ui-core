@@ -10,60 +10,51 @@
 }
 
 /* ListView */
-
 .km-nova .km-listinset,
-.km-nova .km-listgroupinset
-{
+.km-nova .km-listgroupinset {
     margin: 0;
 }
 
-.km-nova .km-list > li
-{
+.km-nova .km-list > li {
     font-size: 1.2em;
-    padding-left: 0.89em;
+    padding-left: .89em;
     background: transparent;
     border-radius: 0;
     border-width: 1px 0 0;
     border-style: solid;
-
     line-height: 1.5em;
-    padding: 1.09em 0.84em 1.23em 0.84em;
+    padding: 1.09em .84em 1.23em .84em;
 }
 
-.km-nova .km-list:not(.km-virtual-list) > li:last-child
-{
+.km-nova .km-list:not(.km-virtual-list) > li:last-child {
     border-bottom-width: 1px;
 }
 
 .km-nova .km-list > .km-load-more+li {
     border-top: 0;
 }
-.km-nova .km-listview-link:after
-{
+
+.km-nova .km-listview-link:after {
     border-width: .2rem .2rem 0 0;
 }
 
 .km-nova .km-listinset li:first-child > .km-listview-link,
-.km-nova .km-listgroupinset li:first-child > .km-listview-link
-{
+.km-nova .km-listgroupinset li:first-child > .km-listview-link {
     border-radius: @nova-inline-border-radius @nova-inline-border-radius 0 0;
 }
 
 .km-nova .km-listinset li:last-child > .km-listview-link,
-.km-nova .km-listgroupinset li:last-child > .km-listview-link
-{
+.km-nova .km-listgroupinset li:last-child > .km-listview-link {
     border-radius: 0 0 @nova-inline-border-radius @nova-inline-border-radius;
 }
 
 .km-nova .km-listinset li:first-child:last-child > .km-listview-link,
-.km-nova .km-listgroupinset li:first-child:last-child > .km-listview-link
-{
+.km-nova .km-listgroupinset li:first-child:last-child > .km-listview-link {
     border-radius: @nova-inline-border-radius;
 }
 
 .km-nova .km-listview-link:after,
-.km-nova .km-listview-label:after
-{
+.km-nova .km-listview-label:after {
     border-color: hsv(hsvHue(@base) , hsvSaturation(@base), hsvValue(@base) - 13);
 }
 
@@ -72,15 +63,13 @@
     border-color: @background;
 }
 
-.km-nova .km-list li > .km-listview-link
-{
+.km-nova .km-list li > .km-listview-link {
     margin-left: -1em;
     padding-left: 1em;
     border-radius: 0;
 }
 
-.km-nova .km-group-title
-{
+.km-nova .km-group-title {
     font-size: 1.2em;
     position: -webkit-sticky;
     text-indent: 0;
@@ -88,7 +77,7 @@
     font-weight: normal;
     border-bottom-width: 1px;
     border-bottom-style: solid;
-    padding: 1.17em 0.84em .39em;
+    padding: 1.17em .84em .39em;
 }
 
 .km-nova .km-listview-icons .km-group-title {
@@ -107,28 +96,23 @@
 }
 
 .km-nova .km-listgroup .km-group-title,
-.km-nova .km-listgroupinset .km-group-title
-{
+.km-nova .km-listgroupinset .km-group-title {
     line-height: 1.5em;
     border-top-width: 0px;
     border-top-style: solid;
 }
 
-.km-nova .km-listview .km-switch
-{
+.km-nova .km-listview .km-switch {
     margin-top: -1.3rem;
 }
 
 /* Filter box */
-
-.km-nova .km-filter-wrap
-{
+.km-nova .km-filter-wrap {
     color: inherit;
     background: currentcolor;
 }
 
-.km-nova .km-filter-wrap > input
-{
+.km-nova .km-filter-wrap > input {
     padding: 0 1.8em;
     color: transparent;
     background: transparent;
@@ -143,20 +127,17 @@
 .km-nova .km-filter-wrap > input:focus::-ms-input-placeholder { text-align: left; }
 
 .km-nova .km-filter-wrap:before,
-.km-nova .km-filter-reset .km-clear
-{
+.km-nova .km-filter-reset .km-clear {
     position: absolute;
     top: 50%;
     margin-top: -.55em;
 }
 
-.km-nova .km-filter-wrap:before
-{
+.km-nova .km-filter-wrap:before {
     font-size: 1em;
     content: "\e21e";
 }
 
-.km-nova .km-filter-wrap .km-clear:after
-{
+.km-nova .km-filter-wrap .km-clear:after {
     content: "\e031";
 }
