@@ -343,12 +343,8 @@
 }
 
 /* ScrollView */
-.km-nova .km-scrollview {
+.km-nova .km-scrollview-dark {
     background-color: @normal-text-color;
-}
-
-.km-nova .km-scrollview-light {
-    background-color: @base;
 }
 
 .km-nova .km-pages li {
@@ -452,8 +448,13 @@
     background: rgba(0,0,0,.05);
 }
 
-.km-nova .km-badge,
-.km-nova .km-rowdelete {
+.km-nova .km-detail,
+.km-nova .km-detail .km-icon:after {
+    color: @accent;
+    background: @background;
+}
+
+.km-nova .km-badge {
     color: @background;
     background: @accent;
     border-color: @accent;
