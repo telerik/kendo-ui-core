@@ -507,6 +507,31 @@ The [template](/api/framework/kendo#methods-template) used to render the items i
 
 The [template](/api/framework/kendo#methods-template) used to render the tags.
 
+#### Template Data for the 'multiple' [tagMode](#configuration-tagMode)
+
+##### data `Object`
+
+The dataitem that corresponds to the selected value.
+
+#### Template Data for the 'single' [tagMode](#configuration-tagMode)
+
+##### data.values `Array`
+
+A list of the selected values.
+
+##### data.dataItems `Array`
+
+A list of the selected data items.
+
+##### data.currentTotal `Array`
+
+The current dataSource total value. If it is server filtered, it will show the current length of the [view](/api/javascript/data/datasource#methods-view).
+
+##### data.maxTotal `Array`
+
+The maximum total value of the dataSource. Unlike the `currentTotal`, this value will keep the maximum reached total value.
+Usable when the tag shows the total of the available items.
+
 #### Example - specify template as a function
 
     <select id="multiselect" multiple="multiple"></select>
@@ -542,6 +567,41 @@ The [template](/api/framework/kendo#methods-template) used to render the tags.
       tagTemplate: '<span><img src="/img/#: id #.png" alt="#: name #" />#: name #</span>'
     });
     </script>
+
+#### Example - specify a template displaying the number of the selected values
+
+    <select id="multiselect" multiple="multiple"></select>
+    <script id="tagTemplate" type="text/x-kendo-template">
+        # if (values.length < 3) { #
+            # for (var idx = 0; idx < values.length; idx++) { #
+                #:values[idx]#
+                # if (idx < values.length - 1) {#, # } #
+            # } #
+        # } else { #
+           #:values.length# out of #:maxTotal#
+        # } #
+    </script>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" },
+        { id: 2, name: "Bananas" }
+      ],
+      dataTextField: "name",
+      dataValueField: "id",
+      tagTemplate: kendo.template($("#tagTemplate").html())
+    });
+    </script>
+
+### tagMode `String`*(default: "multiple")*
+
+The mode used to render the selected tags. The available modes are:
+- `multiple` - renders a tag for every selected value
+- `single` - renders only one tag that shows the number of the selected values
+
+> Every tagMode has a specific `tagTemplate` value. If you would like to control the content of the rendered tags,
+set a custom a [tagTemplate](#configuration-tagTemplate) value.
 
 ### value `Array`*(default: [])*
 
