@@ -1,0 +1,549 @@
+@import "../common/base.less";
+
+@nova-border-width: 1px;
+@nova-border-radius: 2px;
+@nova-inline-border-radius: @nova-border-radius - 1px;
+
+.km-nova
+{
+    font: normal 1em "Helvetica Neue","Helvetica","Roboto Light","Arial","Verdana","sans-serif";
+    line-height: 1.2;
+}
+
+/* General content */
+.km-nova h1 {
+    font-size: 1.47em; //22px;
+}
+
+.km-nova h2 {
+    font-size: 1.2em; //18px;
+}
+
+.km-nova h3 {
+    font-size: 1.07em; //16px;
+}
+
+.km-nova h4 {
+    font-size: 0.9em; //14px;
+}
+
+.km-nova h5 {
+    font-size: 0.87em; //13px;
+}
+
+.km-nova h6 {
+    font-size: 0.67em; //10px;
+}
+
+.km-nova p {
+    font-size: 0.87em; //13px;
+}
+
+.km-nova .km-detail .km-icon,
+.km-nova .km-button .km-icon,
+.km-nova .km-list .km-icon {
+    margin-right: 1.6em;
+}
+
+/* Copy from base.less - office365 */
+
+/* override transform options for performance */
+.km-root .km-nova.km-pane,
+.km-root .km-nova .km-view,
+.km-root .km-nova .km-slider,
+.km-root .km-nova .km-switch,
+.km-root .km-nova .km-group-title,
+.km-root .km-nova .km-filter-reset,
+.km-root .km-nova .km-shim .k-animation-container
+{
+    -webkit-transform: none;
+}
+
+.km-nova,
+.km-nova *
+{
+    .box-sizing(border-box);
+    .background-clip(border-box);
+}
+
+/* Revert box/clip for Web widgets */
+.km-nova [class^=k-]
+{
+    .box-sizing(content-box);
+}
+
+
+.km-nova .km-tabstrip .km-button
+{
+    background: none;
+}
+
+/* PopUp */
+
+.km-nova .km-popup .k-popup
+{
+    font-size: 1em !important;
+}
+
+.km-nova .km-popup .k-item,
+.km-nova .km-actionsheet > li > a {
+    display: block;
+    text-decoration: none;
+    border-radius: 0;
+    border-width: 0 0 1px;
+    border-style: solid;
+    .box-sizing(border-box);
+    font-size: 1.2em;    
+    line-height: 1.5em;
+    padding: 1.14em 1.61em;
+}
+
+.km-nova .km-popup
+{
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    .box-sizing(border-box);
+}
+
+.km-nova .km-popup .k-list-container
+{
+    width: 100% !important;
+    height: auto !important;
+    padding: 0;
+}
+
+.km-nova .km-actionsheet,
+.km-nova .km-popup .k-list-container
+{
+    max-height: 80%;
+}
+
+.km-nova .km-actionsheet-wrapper,
+.km-nova .km-popup .k-list-container
+{
+    bottom: 0;
+    //border-width: @office365-border-width 0 0;
+    border-style: solid;
+    border-radius: 0;
+    .box-sizing(border-box);
+    border-width: 1px;
+}
+
+.km-nova .km-shim .k-animation-container
+{
+    left: 0;
+    top: auto;
+    bottom: 0;
+}
+
+.km-nova .km-popup-wrapper
+{
+    padding: 15px;
+}
+
+.km-nova .km-view-title,
+.km-nova .km-dialog-title {
+    //font-size: 1.125em;
+    //line-height: 2.78em;
+}
+
+/* Color Template */
+@import "template.less";
+
+/* Tablet Styles */
+
+.km-tablet .km-nova.km-horizontal .km-navbar .km-button,
+.km-tablet .km-nova.km-horizontal .km-toolbar .km-button
+{
+    margin-top: .2rem;
+    margin-bottom: .2rem;
+}
+
+.km-nova .km-icon:before,
+.km-nova .km-contactadd:before,
+.km-nova .km-rowdelete:before,
+.km-nova .km-rowinsert:before,
+.km-nova .km-detaildisclose:before {
+    margin-top: 0;
+}
+
+/* Loader & Pull-to-refresh */
+.km-nova .km-load-more
+{
+    height: 3.4em;
+}
+
+.km-nova .km-load-more .km-button
+{
+    margin: 0 .8em;
+    display: block;
+}
+
+.km-nova .km-scroller-refresh.km-load-more,
+.km-nova .km-scroller-pull
+{
+    border-radius: 50%;
+    overflow: visible;
+}
+
+.km-nova .km-loader
+{
+    left: 45%;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background: none;
+}
+
+.km-nova .km-loader .km-loading {
+    .animation(none);
+    display: none;
+}
+
+.km-nova .km-loading-left,
+.km-nova .km-loading-right {
+    background: none;
+}
+
+.km-nova .km-loading-left,
+.km-nova .km-loading-right,
+.km-nova .km-scroller-refresh .km-icon
+{
+    position: absolute;
+    top: 50%;
+    left: 45%;
+}
+
+.km-nova .km-scroller-pull .km-loading-left,
+.km-nova .km-scroller-pull .km-loading-right,
+.km-nova .km-scroller-refresh > .km-icon
+{
+    display: none;
+}
+
+.km-nova .km-scroller-refresh .km-loading-left,
+.km-nova .km-scroller-refresh .km-loading-right
+{
+    display: block;
+}
+
+.km-nova .km-scroller-refresh .km-loading-left,
+.km-nova .km-scroller-refresh .km-loading-right,
+.km-nova .km-scroller-refresh .km-icon
+{
+    top: 0;
+    left: 0;
+}
+
+.km-nova .km-scroller-refresh .km-icon:before
+{
+    content: "\a0";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 12px;
+    height: 12px;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 50%;
+}
+
+.km-root .km-nova .km-scroller-pull .km-icon
+{
+    -webkit-background-clip: inherit;
+    background-size: inherit;
+    border-radius: 50%;
+}
+
+.km-nova .km-loading:after
+{
+    display: none;
+}
+
+.km-nova .km-scroller-refresh.km-load-more
+{
+    padding: 0;
+    position: relative;
+    margin: auto;
+}
+
+.km-nova .km-scroller-refresh.km-load-more,
+.km-nova .km-scroller-pull
+{
+    font-size: 1em;
+    width: 2.5em;
+    height: 2.5em;
+    top: .25em;
+    white-space: nowrap;
+}
+
+.km-nova .km-scroller-pull
+{
+    left: 50%;
+    margin: 0 0 0 -90px;
+}
+
+.km-nova .km-loader h1
+{
+    display: none;
+    font-size: 1em;
+    position: absolute;
+    left: -50%;
+    width: 200%;
+    top: 55%;
+}
+
+.km-nova .km-scroller-pull .km-template
+{
+    position: absolute;
+    line-height: 2em;
+    font-size: 1.2em;
+    min-width: 0;
+    top: 0;
+    left: 3em;
+}
+
+.km-nova .km-scroller-pull .km-icon
+{
+    margin-right: 0;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -1rem;
+    margin-top: -1rem;
+}
+
+.km-nova .km-scroller-pull .km-icon:after
+{
+    content: "\e012";
+    margin-left: -3px;
+}
+
+.km-nova .km-scroller-refresh .km-icon
+{
+    display: none;
+}
+
+.km-nova .km-load-more .km-icon,
+.km-nova .km-scroller-pull .km-icon
+{
+    .transform(rotate(0deg));
+    .pTransition(none);
+}
+
+.km-nova .km-load-more .km-icon:after,
+.km-nova .km-scroller-pull .km-icon:after
+{
+    .transform(rotate(0deg));
+    .transform-origin(62% 50%);
+    .pTransition(~"transform 300ms linear");
+}
+
+.km-nova .km-scroller-release .km-icon:after
+{
+    .transform(rotate(180deg));
+}
+
+.km-nova .km-scroller-refresh .km-icon:after
+{
+    .transition(none);
+}
+
+/* .... */
+
+/* New styles */
+.km-nova .km-icon-left .km-arrow-n:after {
+    content: "\e012";
+}
+
+.km-nova .km-icon-left .km-arrow-s:after {
+    content: "\e010";
+}
+
+.km-nova .km-icon-right .km-arrow-n:after {
+    content: "\e011";
+}
+
+.km-nova .km-icon-right .km-arrow-s:after {
+    content: "\e012";
+}
+
+/* transitions */
+.km-root .km-nova.k-fx-slide {
+    &.k-fx-end .k-fx-current .km-content {
+        .transform(translatex(-50%));
+        -webkit-filter: brightness(70%);
+    }
+
+    /* left reverse */
+    &.k-fx-reverse {
+        &.k-fx-end .k-fx-next {
+            box-shadow: none;
+        }
+
+
+        &.k-fx-end .k-fx-current .km-content {
+            .transform(translatex(100%));
+            -webkit-filter: none;
+        }
+
+        &.k-fx-start .k-fx-next .km-content {
+            .transform(translatex(-50%));
+            -webkit-filter: brightness(70%);
+        }
+    }
+
+    /* right */
+    &.k-fx-right {
+        &.k-fx-end .k-fx-current .km-content {
+            .transform(translatex(50%));
+        }
+
+        /* right reverse */
+        &.k-fx-reverse {
+            &.k-fx-end .k-fx-current .km-content {
+                .transform(translatex(-100%));
+                -webkit-filter: none;
+            }
+
+            &.k-fx-start .k-fx-next .km-content {
+                .transform(translatex(50%));
+            }
+        }
+    }
+}
+
+/* Loader */
+.km-nova .km-loader {
+    top: 0;
+    left: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background: none;
+}
+
+.km-nova .km-loader .km-loading {
+    .animation(none);
+    display: none;
+}
+
+.km-nova .km-loading-left,
+.km-nova .km-loading-right {
+    width: 1.33em;
+    height: 1.33em;
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    bottom: 0;
+    right: 0;
+}
+
+@-webkit-keyframes animate_left {
+    0% {
+        -webkit-transform: translate3d(0, -0.67em, 0);
+    }
+    100% {
+        -webkit-transform: translate3d(0, 0.67em, 0);
+    }
+}
+
+@-ms-keyframes animate_left {
+    0% {
+        -ms-transform: translate3d(0, -0.67em, 0);
+    }
+    100% {
+        -ms-transform: translate3d(0, 0.67em, 0);
+    }
+}
+
+@keyframes animate_left {
+    0% {
+        transform: translate3d(0, -0.67em, 0);
+    }
+    100% {
+        transform: translate3d(0, 0.67em, 0);
+    }
+}
+
+.km-nova .km-loading-left:before,
+.km-nova .km-loading-left:after {
+  position: absolute;
+  content: "";
+  width: 1.33em;
+  border-radius: 50%;
+  height: 1.33rem;
+  z-index: 1;
+  display: block;
+  animation: animate_left 0.8s cubic-bezier(0.445, 0.05, 0.55, 0.95) infinite alternate;
+  -webkit-animation: animate_left 0.8s cubic-bezier(0.445, 0.05, 0.55, 0.95) infinite alternate;
+}
+
+.km-nova .km-loading-left:before {
+  //background: #32364c;
+  right: 0;
+  bottom: 0;
+  animation-direction: alternate-reverse;
+  -webkit-animation-direction: alternate-reverse;
+}
+
+.km-nova .km-loading-left:after {
+  //background: #cfd8dc;
+  left: 0;
+  top: 0;
+}
+
+@-webkit-keyframes animate_right {
+    0% {
+        -webkit-transform: scale(0.01, 0.01) rotateY(0);
+        -webkit-animation-timing-function: cubic-bezier(0.47, 0, 0.745, 0.715);
+    }
+    50% {
+        -webkit-transform: scale(1, 1) rotateY(0);
+        -webkit-animation-timing-function: cubic-bezier(0.39, 0.575, 0.565, 1);
+    }
+    100% {
+        -webkit-transform: scale(0.01, 0.01) rotateY(0);
+    }
+}
+
+@-ms-keyframes animate_right {
+    0% {
+        -ms-transform: scale(0.01, 0.01) rotateY(0);
+        -ms-animation-timing-function: cubic-bezier(0.47, 0, 0.745, 0.715);
+     }
+    50% {
+        -ms-transform: scale(1, 1) rotateY(0);
+        -ms-animation-timing-function: cubic-bezier(0.39, 0.575, 0.565, 1);
+    }
+    100% {
+        -ms-transform: scale(0.01, 0.01) rotateY(0);
+    }
+}
+
+@keyframes animate_right {
+    0% {
+        transform: scale(0.01, 0.01) rotateY(0);
+        animation-timing-function: cubic-bezier(0.47, 0, 0.745, 0.715);
+    }
+    50% {
+        transform: scale(1, 1) rotateY(0);
+        animation-timing-function: cubic-bezier(0.39, 0.575, 0.565, 1);
+    }
+    100% {
+        transform: scale(0.01, 0.01) rotateY(0);
+    }
+}
+
+.km-nova .km-loading-right {
+  //background: #fff;
+  z-index: 2;
+  border-radius: 50%;
+  animation: animate_right 0.8s ease-in infinite;
+  -webkit-animation: animate_right 0.8s ease-in infinite;
+}

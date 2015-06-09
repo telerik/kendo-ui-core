@@ -1,0 +1,166 @@
+@import "../common/navbar.less";
+@import "base.less";
+
+/* NavBar */
+.km-nova .km-view-title,
+.km-nova .km-navbar .km-no-title,
+.km-nova .km-navbar .km-no-title > [data-role='view-title'] {
+    font-size: 1.2em;
+    line-height: 2.78em;
+}
+
+.km-nova .km-view-subtitle {
+    font-size: .47em;
+    display: block;
+    line-height: 1.2;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: .75em;
+}
+
+.km-nova .km-navbar .km-buttongroup {
+    display: table;
+    //background: green;
+    width: 100%;
+}
+
+.km-nova .km-navbar .km-buttongroup .km-button {
+    display: inline-block;
+}
+
+/* NavBar with title and ButtonGroup */
+.km-nova .km-navbar .km-buttongroup {
+    margin: 0;
+}
+
+.km-nova .km-widget.km-navbar-buttongroup .km-buttongroup {
+    padding: 0.77em;
+    display: table;
+}
+
+.km-nova .km-no-title .km-buttongroup {
+    padding: 0;
+}
+
+.km-nova .km-navbar-buttongroup .km-buttongroup > .km-button,
+.km-nova .km-no-title .km-buttongroup > .km-button {
+    font-size: 1.2em;
+    padding: 1.02rem;
+    -webkit-transform: translatez(0); /* Crime against humanity. iPhones go nuts otherwise */
+}
+
+.km-nova .km-leftitem {
+    left: 0;
+}
+
+.km-nova .km-rightitem {
+    right: 0;
+}
+
+/* iOS 7 transitions styles */
+
+.km-nova.k-fx-slide {
+    &.k-fx-end .k-fx-next .km-view-title,
+    &.k-fx-end .k-fx-next .km-leftitem,
+    &.k-fx-end .k-fx-current .km-view-title,
+    &.k-fx-end .k-fx-current .km-leftitem
+    {
+        .transition(all @duration ease-out);
+    }
+
+    /* left */
+    &.k-fx-start .k-fx-next .km-view-title {
+        .transform(translatex(100%));
+    }
+
+    &.k-fx-start .k-fx-next .km-leftitem {
+        .transform(translatex(50%));
+        opacity: 0;
+    }
+
+    &.k-fx-end .k-fx-current .km-view-title {
+        .transform(translatex(-50%));
+    }
+
+    &.k-fx-end .k-fx-current .km-leftitem {
+        .transform(translatex(-100%));
+    }
+
+    /* left reverse */
+    &.k-fx-reverse {
+        &.k-fx-start .k-fx-next .km-leftitem {
+            .transform(translatex(-100%));
+        }
+
+        &.k-fx-end .k-fx-current .km-view-title {
+            .transform(translatex(100%));
+        }
+
+        &.k-fx-start .k-fx-next .km-view-title {
+            .transform(translatex(-50%));
+        }
+
+        &.k-fx-end .k-fx-current .km-leftitem {
+            .transform(translatex(50%));
+            opacity: 0;
+        }
+
+        &.k-fx-end .k-fx-current .km-view-title {
+            .transform(translatex(100%));
+        }
+
+        &.k-fx-start .k-fx-current .km-leftitem {
+            .transform(translatex(-100%));
+        }
+    }
+
+    /* right */
+    &.k-fx-right {
+        /* left */
+        &.k-fx-start .k-fx-next .km-view-title {
+            .transform(translatex(-100%));
+        }
+
+        &.k-fx-start .k-fx-next .km-leftitem {
+            .transform(translatex(-50%));
+        }
+
+        &.k-fx-end .k-fx-current .km-view-title {
+            .transform(translatex(50%));
+        }
+
+        &.k-fx-end .k-fx-current .km-leftitem {
+            .transform(translatex(100%));
+        }
+
+        /* right reverse */
+        &.k-fx-reverse {
+            &.k-fx-start .k-fx-next .km-leftitem {
+                .transform(translatex(100%));
+            }
+
+            &.k-fx-end .k-fx-current .km-view-title {
+                .transform(translatex(-100%));
+            }
+
+            &.k-fx-start .k-fx-next .km-view-title {
+                .transform(translatex(50%));
+            }
+
+            &.k-fx-end .k-fx-current .km-leftitem {
+                .transform(translatex(-50%));
+                opacity: 0;
+            }
+
+            &.k-fx-end .k-fx-current .km-view-title {
+                .transform(translatex(-100%));
+            }
+
+            &.k-fx-start .k-fx-current .km-leftitem {
+                .transform(translatex(100%));
+            }
+        }
+    }
+}

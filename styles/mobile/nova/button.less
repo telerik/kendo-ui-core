@@ -1,0 +1,75 @@
+@import "../common/icons.less";
+@import "../common/button.less";
+@import "base.less";
+
+/* Button */
+/* Medium button - default state */
+.km-nova .km-button,
+.km-nova .km-buttongroup .km-button {
+    //font-size: 1rem;
+    padding: .6em .93em;
+    border-radius: @border-radius;
+    border-width: 1px;
+    border-style: solid;
+    vertical-align: middle;
+}
+
+.km-nova .km-buttongroup .km-button {
+    border-width: 1px 0 1px 1px;
+}
+
+/* Small button */
+.km-nova .km-button.km-small,
+.km-nova .km-buttongroup.km-small .km-button {
+    font-size: .8em;
+    padding: .35em .7em;
+    line-height: 1.5em;
+}
+
+/* Large button */
+.km-nova .km-button.km-large,
+.km-nova .km-buttongroup.km-large .km-button {
+   // font-size: 1.067em;
+    padding: .85em;
+    font-size: 1.07em 1.25em;
+}
+
+/* NavBar button */
+.km-nova .km-navbar .km-back:before,
+.km-nova .k-toolbar .km-back:before {
+    content: "\a0";
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    border-width: 0;
+    box-shadow: inset .2rem -.2rem 0 currentcolor;
+    .transform(rotate(45deg));
+}
+
+.km-nova .km-navbar .km-back .km-text,
+.km-nova .k-toolbar .km-back .km-text {
+    display: none;
+}
+
+.km-nova .km-justified {
+    display: block;
+}
+
+/* Badges and Details */
+
+.km-nova .km-badge,
+.km-nova .km-detail {
+    border: 0;
+    min-width: 1.8em;
+    height: 1.8em;
+    line-height: 1.8em;
+    border-radius: 5em;
+}
+
+.km-nova .km-button-right {
+    float: right;
+}
+
+.km-nova .km-button-left {
+    float: left;
+}
