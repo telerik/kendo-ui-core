@@ -186,15 +186,18 @@ var __meta__ = {
             var that = this,
                 key = e.keyCode,
                 calendar = that.calendar,
-                selectIsClicked = e.ctrlKey && key == keys.DOWN || key == keys.ENTER;
+                selectIsClicked = e.ctrlKey && key == keys.DOWN || key == keys.ENTER,
+                handled = false;
 
             if (e.altKey) {
                 if (key == keys.DOWN) {
                     that.open();
                     e.preventDefault();
+                    handled = true;
                 } else if (key == keys.UP) {
                     that.close();
                     e.preventDefault();
+                    handled = true;
                 }
 
             } else if (that.popup.visible()) {
@@ -202,11 +205,14 @@ var __meta__ = {
                 if (key == keys.ESC || (selectIsClicked && calendar._cell.hasClass(SELECTED))) {
                     that.close();
                     e.preventDefault();
-                    return;
+                    return true;
                 }
 
                 that._current = calendar._move(e);
+                handled = true;
             }
+
+            return handled;
         },
 
         current: function(date) {
@@ -516,23 +522,32 @@ var __meta__ = {
                 that._old = value;
                 that._oldText = that.element.val();
 
-                // trigger the DOM change event so any subscriber gets notified
-                that.element.trigger(CHANGE);
+                if (!that._typing) {
+                    // trigger the DOM change event so any subscriber gets notified
+                    that.element.trigger(CHANGE);
+                }
 
                 that.trigger(CHANGE);
             }
+
+            that._typing = false;
         },
 
         _keydown: function(e) {
             var that = this,
                 dateView = that.dateView,
-                value = that.element.val();
+                value = that.element.val(),
+                handled = false;
 
             if (!dateView.popup.visible() && e.keyCode == keys.ENTER && value !== that._oldText) {
                 that._change(value);
             } else {
-                dateView.move(e);
+                handled = dateView.move(e);
                 that._updateARIA(dateView._current);
+
+                if (!handled) {
+                    that._typing = true;
+                }
             }
         },
 

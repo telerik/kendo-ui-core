@@ -158,6 +158,21 @@ test("clicking an item raises the change event of the dom element", 1, function(
     autocomplete.ul.children().first().trigger(CLICK);
 });
 
+test("does not force element's DOM change event when the user manually edits the value and presses 'Enter'", 0, function() {
+    input.kendoAutoComplete({
+        dataSource: ["foo"]
+    });
+
+    input.bind("change", function() {
+        ok(false);
+    });
+
+    input.focus()
+        .trigger($.Event("keydown", {keyCode: 70}))
+        .val("f")
+        .trigger($.Event("keydown", {keyCode: 13}));
+});
+
 test("open event when open popup on search", 1, function() {
     input.kendoAutoComplete({
         delay: 0,

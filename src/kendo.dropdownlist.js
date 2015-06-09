@@ -486,7 +486,7 @@ var __meta__ = {
             var focusedItem = that._focus();
 
             if (!that._prevent) {
-                clearTimeout(that._typing);
+                clearTimeout(that._typingTimeout);
 
                 if (filtered && focusedItem && !that.trigger("select", { item: focusedItem })) {
                     that._select(focusedItem, !that.dataSource.view().length);
@@ -605,7 +605,7 @@ var __meta__ = {
                 that._focusElement(that.wrapper);
             }
 
-            if (key === keys.ENTER && that._typing && that.filterInput && isPopupVisible) {
+            if (key === keys.ENTER && that._typingTimeout && that.filterInput && isPopupVisible) {
                 e.preventDefault();
                 return;
             }
@@ -807,10 +807,10 @@ var __meta__ = {
             var dataSource = that.dataSource;
             var index = that.selectedIndex;
 
-            clearTimeout(that._typing);
+            clearTimeout(that._typingTimeout);
 
             if (that.options.filter !== "none") {
-                that._typing = setTimeout(function() {
+                that._typingTimeout = setTimeout(function() {
                     var value = that.filterInput.val();
 
                     if (that._prev !== value) {
@@ -818,10 +818,10 @@ var __meta__ = {
                         that.search(value);
                     }
 
-                    that._typing = null;
+                    that._typingTimeout = null;
                 }, that.options.delay);
             } else {
-                that._typing = setTimeout(function() {
+                that._typingTimeout = setTimeout(function() {
                     that._word = "";
                 }, that.options.delay);
 

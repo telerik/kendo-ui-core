@@ -67,6 +67,21 @@
         input.focus().blur();
     });
 
+    test("does not force element's DOM change event when the user manually edits the value and presses 'Enter'", 0, function() {
+        input.kendoTimePicker({
+            value: new Date(2000, 10, 10, 10, 0, 0)
+        });
+
+        input.bind("change", function() {
+            ok(false);
+        });
+
+        input.focus()
+            .trigger($.Event("keydown", {keyCode: 8}))
+            .val("10:00 A")
+            .trigger($.Event("keydown", {keyCode: 13}));
+    });
+
     test("click li raises change event", 1, function() {
         var timepicker = input.kendoTimePicker({
                                     change: function() {

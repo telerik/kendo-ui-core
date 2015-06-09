@@ -773,11 +773,15 @@ var __meta__ = {
                 that._old = value;
                 that._oldText = that.element.val();
 
-                // trigger the DOM change event so any subscriber gets notified
-                that.element.trigger(CHANGE);
+                if (!that._typing) {
+                    // trigger the DOM change event so any subscriber gets notified
+                    that.element.trigger(CHANGE);
+                }
 
                 that.trigger(CHANGE);
             }
+
+            that._typing = false;
         },
 
         _icon: function() {
@@ -807,6 +811,8 @@ var __meta__ = {
                 timeView.move(e);
             } else if (key === keys.ENTER && value !== that._oldText) {
                 that._change(value);
+            } else {
+                that._typing = true;
             }
         },
 

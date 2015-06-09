@@ -33,6 +33,18 @@
         textbox._change("22");
     });
 
+    test("does not force element's DOM change event when the user manually edits the value and presses 'Enter'", 0, function() {
+        var textbox = new NumericTextBox(input);
+
+        input.bind("change", function() {
+            ok(false);
+        });
+
+        input.focus().val(1)
+            .trigger($.Event("keydown", {keyCode: 49}))
+            .trigger($.Event("keydown", {keyCode: 13}));
+    });
+
     test("raise change on enter", 2, function() {
         var textbox = new NumericTextBox(input);
 
