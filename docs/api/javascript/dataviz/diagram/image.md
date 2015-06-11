@@ -30,16 +30,36 @@ The source URL of the image.
 
 ## Methods
 
-### visible
+### position
+Get or sets the element position.
 
-Gets or sets the visibilty of the current element.
+#### Parameters
+
+##### offset `kendo.dataviz.diagram.Point`
+The origin of the element.
+
+
+### rotate
+Rotates the element with the specified parameters.
+
+#### Parameters
+
+##### angle `Number`
+The angle of rotation in decimal degrees.
+Measured in clockwise direction with 0 pointing "right".
+Negative values or values greater than 360 will be normalized.
+
+##### center `kendo.dataviz.diagram.Point`
+The center of rotation.
+
+
+### visible
+Gets or sets the visibility of the current element.
 
 #### Parameters
 
 ##### visible `Boolean`
-
 The new visibility state.
 
 #### Returns
-
 `Boolean` True if the element is visible, false otherwise.
