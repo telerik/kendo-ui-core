@@ -259,6 +259,21 @@
         });
     });*/
 
+    asyncTest("throws ListBound event after filter is cleared", 1, function() {
+        asyncDataSource.read().then(function() {
+            virtualList.one("listBound", function() {
+                virtualList.one("listBound", function() {
+                   start(); 
+                   ok(true, "listBound is fired");
+                });
+                virtualList.filter(false);
+                asyncDataSource.filter([]);
+            });
+            virtualList.filter(true);
+            asyncDataSource.filter({ field: "letter", operator: "eq", value: "b" });
+        });
+    });
+
     var localDataSource;
 
     module("VirtualList Filtering (local data): ", {

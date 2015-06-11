@@ -81,4 +81,30 @@
 
         combobox.value("0");
     });
+
+    asyncTest("widget dropdown is opened after filtering", 1, function() {
+        var combobox = new ComboBox(select, {
+            height: CONTAINER_HEIGHT,
+            animation: false,
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: createAsyncDataSource(),
+            virtual: {
+                valueMapper: function(o) { o.success(o.value); },
+                itemHeight: 40
+            }
+        });
+
+        combobox.one("dataBound", function() {
+            combobox.search("Item");
+            combobox.select(0);
+            combobox.close();
+            combobox.open();
+
+            setTimeout(function() {
+                start();
+                ok(combobox.list.is(":visible"));
+            }, 100);
+        });
+    });
 })();
