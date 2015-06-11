@@ -704,21 +704,24 @@ return the aggregate results from the response.
 
 > The `aggregates` option is used only when the [serverAggregates](#configuration-serverAggregates) option is set to `true`.
 
-The result of the function should be a JavaScript object which contains the aggregate results for every fields in the following format:
+The result of the function should be a JavaScript object which contains the aggregate results   
+for every fields in the following format:
 
+```js
     {
-      FIEL1DNAME: {
-        FUNCTON1NAME: FUNCTION1VALUE,
-        FUNCTON2NAME: FUNCTION2VALUE
+      Field1Name: {
+        Function1Name: Function1Value,
+        Function2Name: Function2Value
       },
-      FIELD2NAME: {
-        FUNCTON1NAME: FUNCTION1VALUE
+      Field2Name: {
+        Function1Name: Function1Value
       }
     }
+```
 
 For example if the data source is configured like this:
 
-    <script>
+```js
     var dataSource = new kendo.data.DataSource({
       transport: {
         /* transport configuration */
@@ -730,10 +733,11 @@ For example if the data source is configured like this:
         { field: "ProductName", aggregate: "count" }
       ]
     });
-    </script>
+```
 
 The aggregate results should have the following format:
 
+```js
     {
       unitPrice: {
           max: 100,
@@ -743,7 +747,8 @@ The aggregate results should have the following format:
           count: 42
       }
     }
-
+```
+    
 #### Example - set aggregates as a string
 
     <script>
