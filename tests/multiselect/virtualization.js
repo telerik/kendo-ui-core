@@ -97,6 +97,7 @@
         multiselect.open();
     });
 
+    /*
     asyncTest("MultiSelect renders part of the selected data items and values", 5, function() {
         var multiselect = new MultiSelect(select, {
             close: function(e) { e.preventDefault(); },
@@ -133,4 +134,5 @@
         multiselect.value(["0", "15"]);
         multiselect.open();
     });
+    */
 })();
