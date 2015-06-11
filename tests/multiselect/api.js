@@ -229,6 +229,16 @@
         equal(dataItems[0].text, "Option1");
     });
 
+    test("MultiSelect fetches item if widget is disabled and value is set", function() {
+        popuplateSelect();
+        var multiselect = new MultiSelect(select.attr("disabled", true), { autoBind: false });
+
+        multiselect.value("1");
+
+        equal(multiselect.dataSource.view().length, 5);
+        equal(multiselect.value().length, 1);
+    });
+
     test("MultiSelect fetches item if autoBind is set to false when value is set", function() {
         popuplateSelect();
         var multiselect = new MultiSelect(select, { autoBind: false });

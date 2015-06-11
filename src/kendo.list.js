@@ -995,8 +995,7 @@ var __meta__ = {
             var that = this;
             var hasItems = !!that.dataSource.view().length;
 
-            //if request is started avoid datasource.fetch
-            if (that.element[0].disabled || that._request || that.options.cascadeFrom) {
+            if (that._request || that.options.cascadeFrom) {
                 return;
             }
 

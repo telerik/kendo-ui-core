@@ -604,7 +604,7 @@ var __meta__ = {
             var hasItems = !!that.dataSource.view().length;
             var isEmptyArray = that.listView.value().length === 0;
 
-            if (isEmptyArray || that.element[0].disabled || that._request) {
+            if (isEmptyArray || that._request) {
                 return;
             }
 

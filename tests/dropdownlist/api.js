@@ -428,6 +428,21 @@
         ok(!select[0].options[0].getAttribute("selected"));
     });
 
+    test("value method calls dataSource.fetch when element is disabled", function() {
+        dropdownlist = new DropDownList(input.attr("disabled", true), {
+            autoBind: false,
+            optionLabel: "Select"
+        });
+
+        stub(dropdownlist.dataSource, {
+            fetch: dropdownlist.dataSource.fetch
+        });
+
+        dropdownlist.value("");
+
+        equal(dropdownlist.dataSource.calls("fetch"), 1);
+    });
+
     test("value method with empty string calls dataSource.fetch if no data", function() {
         dropdownlist = new DropDownList(input, {
             autoBind: false,
