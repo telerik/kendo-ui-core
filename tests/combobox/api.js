@@ -587,6 +587,20 @@ test("dataItem() returns dataItem depending on passed index", function() {
     equal(combobox.dataItem(1), combobox.dataSource.view()[1]);
 });
 
+test("value(value) calls dataSource.fetch when element is disabled", function() {
+    var combobox = new ComboBox(input.attr("disabled", true), {
+        autoBind: false
+    });
+
+    stub(combobox.dataSource, {
+        fetch: combobox.dataSource.fetch
+    });
+
+    combobox.value("1");
+
+    equal(combobox.dataSource.calls("fetch"), 1);
+});
+
 test("value(value) calls dataSource.fetch if no data", function() {
     var combobox = new ComboBox(input, {
         autoBind: false
