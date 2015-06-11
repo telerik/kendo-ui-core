@@ -19,39 +19,55 @@ The Y position of the top-left corner of the group.
 ## Methods
 
 ### append
-
 Appends the given element to the group
 
 #### Parameters
 
 ##### element `Object`
-
 The element to append.
 
 ### clear
-
 Removes all elements from the group.
 
 ### remove
-
 Removes the given element from the group
 
 #### Parameters
 
 ##### element `Object`
-
 The element to remove.
 
-### visible
 
-Gets or sets the visibilty of the current element.
+### position
+Get or sets the element position.
+
+#### Parameters
+
+##### offset `kendo.dataviz.diagram.Point`
+The origin of the element.
+
+
+### rotate
+Rotates the element with the specified parameters.
+
+#### Parameters
+
+##### angle `Number`
+The angle of rotation in decimal degrees.
+Measured in clockwise direction with 0 pointing "right".
+Negative values or values greater than 360 will be normalized.
+
+##### center `kendo.dataviz.diagram.Point`
+The center of rotation.
+
+
+### visible
+Gets or sets the visibility of the current element.
 
 #### Parameters
 
 ##### visible `Boolean`
-
 The new visibility state.
 
 #### Returns
-
 `Boolean` True if the element is visible, false otherwise.
