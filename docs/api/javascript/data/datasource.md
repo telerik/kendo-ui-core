@@ -704,10 +704,9 @@ return the aggregate results from the response.
 
 > The `aggregates` option is used only when the [serverAggregates](#configuration-serverAggregates) option is set to `true`.
 
-The result of the function should be a JavaScript object which contains the aggregate results   
-for every fields in the following format:
+The result of the function should be a JavaScript object which contains the aggregate results for every fields in the following format:
 
-```js
+```pseudo
     {
       Field1Name: {
         Function1Name: Function1Value,
@@ -721,7 +720,7 @@ for every fields in the following format:
 
 For example if the data source is configured like this:
 
-```js
+```pseudo
     var dataSource = new kendo.data.DataSource({
       transport: {
         /* transport configuration */
@@ -737,7 +736,7 @@ For example if the data source is configured like this:
 
 The aggregate results should have the following format:
 
-```js
+```pseudo
     {
       unitPrice: {
           max: 100,

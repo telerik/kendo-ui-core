@@ -1,5 +1,5 @@
 jQuery(function() {
-   $("body").find(".prettyprint").each(function() {
+   $("body").find(".prettyprint").not("[lang='pseudo']").each(function() {
        dojoApi.showHintButton(this, "Edit this example");
    });
 
