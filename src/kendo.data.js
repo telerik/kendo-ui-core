@@ -2042,26 +2042,6 @@ var __meta__ = {
         }
     }
 
-    function wrapInEmptyGroup(groups, model) {
-        var parent,
-            group,
-            idx,
-            length;
-
-        for (idx = groups.length-1, length = 0; idx >= length; idx--) {
-            group = groups[idx];
-            parent = {
-                value: model.get(group.field),
-                field: group.field,
-                items: parent ? [parent] : [model],
-                hasSubgroups: !!parent,
-                aggregates: {}
-            };
-        }
-
-        return parent;
-    }
-
     function indexOfPristineModel(data, model) {
         if (model) {
             return indexOf(data, function(item) {
@@ -2435,7 +2415,7 @@ var __meta__ = {
             }
 
             if (this._isServerGrouped()) {
-                this._data.splice(index, 0, wrapInEmptyGroup(this.group(), model));
+                this._data.splice(index, 0, this._wrapInEmptyGroup(model));
             } else {
                 this._data.splice(index, 0, model);
             }
@@ -2463,7 +2443,7 @@ var __meta__ = {
                     var pristine = result.toJSON();
 
                     if (this._isServerGrouped()) {
-                        pristine = wrapInEmptyGroup(this.group(), pristine);
+                        pristine = this._wrapInEmptyGroup(pristine);
                     }
 
                     this._pristineData.push(pristine);
@@ -2746,7 +2726,7 @@ var __meta__ = {
                     models[idx].accept(response[idx]);
 
                     if (type === "create") {
-                        pristine.push(serverGroup ? wrapInEmptyGroup(that.group(), models[idx]) : response[idx]);
+                        pristine.push(serverGroup ? that._wrapInEmptyGroup(models[idx]) : response[idx]);
                     } else if (type === "update") {
                         that._updatePristineForModel(models[idx], response[idx]);
                     }
@@ -3580,6 +3560,27 @@ var __meta__ = {
             }
 
             return result;
+        },
+
+        _wrapInEmptyGroup: function(model) {
+            var groups = this.group(),
+                parent,
+                group,
+                idx,
+                length;
+
+            for (idx = groups.length-1, length = 0; idx >= length; idx--) {
+                group = groups[idx];
+                parent = {
+                    value: model.get(group.field),
+                    field: group.field,
+                    items: parent ? [parent] : [model],
+                    hasSubgroups: !!parent,
+                    aggregates: this._emptyAggregates(group.aggregates)
+                };
+            }
+
+            return parent;
         },
 
         totalPages: function() {

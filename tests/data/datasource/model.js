@@ -401,4 +401,53 @@ test("accept does not wrap field with underscore", function() {
     equal(model._foo.foo, "foo1");
 });
 
+test("insert wraps the record in a group when servergrouping is enabled", function() {
+    var dataSource = new kendo.data.DataSource({
+        schema: {
+            model: {
+                id: "foo"
+            }
+        },
+        serverGrouping: true,
+        group: [{ field: "foo" }]
+    });
+
+    dataSource.insert(0, { foo: "bar" } );
+
+    var group = dataSource.view()[0];
+
+    equal(group.field, "foo");
+    equal(group.value, "bar");
+    equal(group.items.length, 1);
+    ok(!group.hasSubgroups);
+    ok(group.aggregates);
+});
+
+test("insert wraps the record in a group with correct default aggregates when servergrouping is enabled", function() {
+    var dataSource = new kendo.data.DataSource({
+        schema: {
+            model: {
+                id: "foo"
+            }
+        },
+        serverGrouping: true,
+        group: {
+            field: "foo", aggregates: [
+                { field: "foo", aggregate: "count" }
+            ]
+        }
+    });
+
+    dataSource.insert(0, { foo: "bar" } );
+
+    var group = dataSource.view()[0];
+
+    equal(group.field, "foo");
+    equal(group.value, "bar");
+    equal(group.items.length, 1);
+    ok(!group.hasSubgroups);
+
+    equal(group.aggregates.foo.count, 0);
+});
+
 }());
