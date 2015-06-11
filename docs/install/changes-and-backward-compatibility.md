@@ -7,6 +7,32 @@ previous_url: /changes-and-backward-compatibility
 
 # Kendo UI Framework Changes and Backwards Compatibility
 
+## Kendo UI 2015 Q1 SP2
+
+### Changes from 2015 Q1 (2015.1.318)
+
+#### Breaking changes
+
+* **AutoComplete/DropDownList/ComboBox/MultiSelect**: Change in rendering of widget's list - widget's ul element is wrapped inside a scrollable container.
+
+-Old rendering:
+
+    <div class="k-list-container k-popup">
+        <div class="k-group-header"></div>
+        <ul class="k-list">
+        </ul>
+    </div>
+
+-New rendering:
+
+    <div class="k-list-container k-popup">
+        <div class="k-group-header"></div>
+        <div style="overflow: auto; position: relative; height: 104px">
+            <ul class="k-list">
+            </ul>
+        </div>
+    </div>
+
 ## Kendo UI 2015 Q1
 
 ### Changes from 2014 Q3 SP2 (2014.3.1411)

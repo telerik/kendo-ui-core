@@ -1413,9 +1413,81 @@ The text similar to "Cancel" displayed in Gantt.
     });
     </script>
 
+### messages.deleteDependencyConfirmation `String` *(default: "Are you sure you want to delete this dependency?")*
+
+The text similar to "Are you sure you want to delete this dependency?" displayed in Gantt dependency delete dialog.
+
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+      dataSource: [{
+         id: 1,
+         orderId: 0,
+         parentId: null,
+         title: "Task1",
+         start: new Date("2014/6/17 9:00"),
+         end: new Date("2014/6/17 10:00")
+      }, {
+         id: 2,
+         orderId: 0,
+         parentId: null,
+         title: "Task2",
+         start: new Date("2014/6/17 11:00"),
+         end: new Date("2014/6/17 12:00")
+      }],
+      dependencies: [{
+         id: 1,
+         type: 1,
+         predecessorId: 1,
+         successorId: 2
+      }],
+      messages: {
+        deleteDependencyConfirmation: "Proceed with dependency deletion?"
+      }
+    });
+    </script>
+
 ### messages.deleteDependencyWindowTitle `String` *(default: "Delete dependency")*
 
-The text similar to "Delete dependency" displayed in Gantt dependency delete dialog.
+The text similar to "Delete dependency" displayed in Gantt dependency delete dialog title.
+
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+      dataSource: [{
+         id: 1,
+         orderId: 0,
+         parentId: null,
+         title: "Task1",
+         start: new Date("2014/6/17 9:00"),
+         end: new Date("2014/6/17 10:00")
+      }, {
+         id: 2,
+         orderId: 0,
+         parentId: null,
+         title: "Task2",
+         start: new Date("2014/6/17 11:00"),
+         end: new Date("2014/6/17 12:00")
+      }],
+      dependencies: [{
+         id: 1,
+         type: 1,
+         predecessorId: 1,
+         successorId: 2
+      }],
+      messages: {
+        deleteDependencyWindowTitle: "Delete dependency?"
+      }
+    });
+    </script>
+
+### messages.deleteTaskConfirmation `String` *(default: "Are you sure you want to delete this task?")*
+
+The text similar to "Are you sure you want to delete this task?" displayed in Gantt task delete dialog.
 
 #### Example
 
@@ -1431,14 +1503,14 @@ The text similar to "Delete dependency" displayed in Gantt dependency delete dia
          end: new Date("2014/6/17 11:00")
       }],
       messages: {
-        deleteDependencyWindowTitle: "Delete dependency?"
+        deleteTaskConfirmation: "Proceed with task deletion?"
       }
     });
     </script>
 
 ### messages.deleteTaskWindowTitle `String` *(default: "Delete task")*
 
-The text similar to "Delete task" displayed in Gantt task delete dialog.
+The text similar to "Delete task" displayed in Gantt task delete dialog title.
 
 #### Example
 

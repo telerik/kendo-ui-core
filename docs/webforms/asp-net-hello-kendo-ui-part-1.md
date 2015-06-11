@@ -76,11 +76,8 @@ you have a licensed copy before using Kendo UI Professional (including grid, dat
 Click [here][11] for more information on Kendo UI licensing.**
 
 [kendo-ui-core-nuget](http://www.nuget.org/packages/KendoUICore/)
-<<<<<<< HEAD
-=======
 
 [Hosting Kendo UI Professional in your project](http://docs.telerik.com/kendo-ui/install/onsite#add-kendo-ui-css-and-javascript-references-to-your-project)
->>>>>>> 17094bc... Nuget section > interval added
 
 Notice that you now have a **Content** folder that contains a **kendo**
 subfolder.  You also have a **Scripts** folder which also has a **kendo**

@@ -140,6 +140,12 @@ If set to true, the application router instance will use the [history pushState 
 
 Applicable if `pushState` is used and the application is deployed to a path different than `/`. If the application start page is hosted on `http://foo.com/myapp/`, the root option should be set to `/myapp/`.
 
+### retina `Boolean`*(default: true)*
+
+If set to `true`, the application will set the meta viewport tag scale value according to the device pixel ratio, and re-scale the app by setting root element font size to the respective value.
+This will result in the widget borders/separators being **real 1px  wide**.
+For example, in iPhone 4/5, the device pixel ratio is `2`, which means that the scale will be set to `0.5`, while the app root will receive a font-size: `2 * 0.92` inline style set.
+
 ### serverNavigation `Boolean` **(default: false)**
 
 If set to true, the application will not use AJAX to load remote views.

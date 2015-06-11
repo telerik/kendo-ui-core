@@ -578,6 +578,28 @@ is displayed in the column header cell.
         });
     </script>
 
+### columns.minScreenWidth `Number`
+
+The pixel screen width below which the column will be hidden. The setting takes precedence over the [`hidden`](/api/javascript/ui/grid#configuration-columns.hidden) setting,
+so the two should not be used at the same time.
+
+#### Example - lockable columns
+
+    <div id="treelist"></div>
+    <script>
+        $("#treelist").kendoTreeList({
+          columns: [
+            { field: "id", width: 250, minScreenWidth: 500 }, //column will become hidden if screen size is less than 500px
+            { field: "name", width: 250 }, //column will always be visible
+            { field: "age", width: 250, minScreenWidth: 750 } //column will become hidden if screen size is less than 750px
+          ],
+          dataSource: [
+              { id: 1, name: "Jane Doe", age: 31, city: "Boston" },
+              { id: 2, name: "John Doe", age: 55, city: "New York" }
+          ]
+        });
+    </script>
+
 ### columns.sortable `Boolean|Object` *(default: true)*
 
 If set to `true` the user can click the column header and sort the treelist by the column [field](#configuration-columns.field) when sorting is enabled. If set to `false` sorting will

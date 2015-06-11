@@ -151,3 +151,9 @@ The sample above performs in the same way. Nodes are retained, but collecting th
 Based on this research, we consider the memory usage of the Kendo UI directives (although not perfect) to be unavoidable given the AngularJS context.
 
 > Worth noticing is that the majority of the Kendo UI Widgets do not exhibit such leaks outside of the AngularJS context.
+
+One fix that has worked has been to clean up before a route change. So wherever we change to a new route via $location.path('/my/new/route'), we execute some extra code to clear out the HTML in the prior view using: 
+
+    kendo.destroy(document.body);
+    $('.view-root-node').html('');
+    

@@ -14,6 +14,7 @@ The New Project wizard is used for creation of a new Telerik UI for ASP.NET MVC 
 
 Using the options in the Telerik UI for ASP.NET MVC Project Settings page you can modify various project-wide settings:
 
+-   **Choose project type** - Choose what project type to create: Empty, Standard, Grid and Menu, Mobile with Ajax Navigation or Mobile with Server Navigation
 -   **Version** - Choose which version of Telerik UI for ASP.NET MVC to use
 -   **Add referenced assemblies to solution** - Choose whether to copy referenced assemblies to your solution folder. The assemblies will automatically get added to source control when using Microsoft Team Foundation Server.
 -   **Target ASP.NET MVC Version** - Choose the targeted ASP.NET MVC version

@@ -4176,6 +4176,35 @@ Defines the text of the "Update" button that is rendered in `inline` or `popup` 
     });
     </script>
 
+### messages.noRecords `String`
+
+Defines the text of the "noRecords" option that is rendered when no records are available in current view. The "noRecords" options should be set to `true`.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" },
+        { command: ["edit", "destroy"] }
+      ],
+      dataSource: {
+        data: [
+          { name: "Jane Doe", age: 30 },
+          { name: "John Doe", age: 33 }
+        ],
+        page: 2,
+        pageSize: 10
+      },
+      noRecords: true,
+      messages: {
+        noRecords: "There is no data on current page"
+      }
+    });
+    </script>
+
 ### mobile `Boolean|String` *(default: false)*
 
 If set to `true` and the grid is viewed on mobile browser it will use adaptive rendering.
@@ -4244,6 +4273,49 @@ If set to `true` the use could navigate the widget using the keyboard navigation
     </script>
 
 > Check [Keyboard navigation](http://demos.telerik.com/kendo-ui/web/grid/navigation.html) for a live demo.
+
+### noRecords `Boolean|Object` *(default: false)*
+
+If set to `true` and current view contains no records, message similar to "No records available" will be displayed. By default this option is disabled.
+
+#### Example - enable noRecords message
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      noRecords: true,
+      dataSource: []
+    });
+    </script>
+
+### noRecords.template `String|Function`
+
+The [template](/api/framework/kendo#methods-template) which is rendered when current view contains no records.
+
+#### Example - customize the noRecords message
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      pageable: true,
+      noRecords: {
+        template: "No data available on current page. Current page is: #=this.dataSource.page()#"
+      },
+      dataSource: {
+        data: [{name: "John", age: 29}],
+        page: 2,
+        pageSize: 10
+      }
+    });
+    </script>
 
 ### pageable `Boolean|Object` *(default: false)*
 
@@ -4402,9 +4474,13 @@ If set to `true` the pager will display an input element which allows the user t
 
 ### pageable.pageSizes `Boolean|Array` *(default: false)*
 
-If set to `true` the pager will display a DropDownList which allows the user to pick a page size. By default the page size DropDownList is not displayed.
+If set to `true` the pager will display a drop-down which allows the user to pick a page size.
+By default the page size drop-down is not displayed.
 
-Can be set to an array with the available page sizes.
+Can be set to an array of predefined page sizes to override the default list.
+A special `all` value is supported. It sets the page size to the total number of records.
+
+If a `pageSize` setting is provided for the data source then this value will be selected initially.
 
 #### Example - show the page size DropDownList
 
@@ -4422,7 +4498,6 @@ Can be set to an array with the available page sizes.
         { productName: "Bread", category: "Food" }
       ],
       pageable: {
-        pageSize: 2,
         pageSizes: true
       }
     });
@@ -4444,8 +4519,7 @@ Can be set to an array with the available page sizes.
         { productName: "Bread", category: "Food" }
       ],
       pageable: {
-        pageSize: 2,
-        pageSizes: [2, 3, 4]
+        pageSizes: [2, 3, 4, "all"]
       }
     });
     </script>

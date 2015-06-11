@@ -1270,6 +1270,21 @@ If enabled, the editor renders a resize handle to allow users to resize it.
     });
     </script>
 
+### resizable.content `Boolean`
+
+If enabled, the editor renders a resize handle to allow users to resize it.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      resizable: {
+          content: true
+      }
+    });
+    </script>
+
 ### resizable.min `Number`
 
 The minimum height that the editor can be resized to.
@@ -1296,6 +1311,23 @@ The maximum height that the editor can be resized to.
     $("#editor").kendoEditor({
       resizable: {
         max: 600
+      }
+    });
+    </script>
+
+### resizable.toolbar `Boolean`
+
+If `resizable` is set to `true` the widget will detect changes in the viewport width and will hide the overflowing controls in the tool overflow popup.
+
+> Tools are shown/hidden on tool group level. Tools with popup such as `fontName`, `fontSize`, `fontColor`, `backColor` and `formatting` will be hidden but **not** moved to the tool overflow popup.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      resizable: {
+          toolbar: true
       }
     });
     </script>
