@@ -235,7 +235,14 @@
 }
 
 .km-nova .km-list > li > .km-listview-link,
-.km-nova .km-legend-button {
+.km-nova .km-legend-button,
+.km-nova .km-collapsible-header,
+.km-nova .km-collapsible-header h1,
+.km-nova .km-collapsible-header h2,
+.km-nova .km-collapsible-header h3,
+.km-nova .km-collapsible-header h4,
+.km-nova .km-collapsible-header h5,
+.km-nova .km-collapsible-header h6 {
     color: @accent;
 }
 
@@ -439,9 +446,13 @@
 
 /* Collapsible */
 .km-nova .km-collapsible-header,
+.km-nova .km-collapsible-content {    
+    background: @background;
+    border-color: darken(@base, 8%);
+}
+
 .km-nova .km-collapsible-content {
     color: @normal-text-color;
-    border-color: darken(@base, 8%);
 }
 
 .km-nova .km-collapsible-header .km-icon,
