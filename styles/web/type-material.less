@@ -3498,7 +3498,9 @@ table.k-editor {
 
 .k-filter-menu .k-button,
 .k-edit-form-container .k-button,
+.k-popup .k-button,
 .k-popup .k-primary:active,
+.k-popup .k-primary:active:hover,
 .k-edit-form-container .k-primary:active {
     color: @widget-text-color;
     background-color: @secondary-background-color;
@@ -3509,6 +3511,8 @@ table.k-editor {
 .k-popup .k-primary,
 .k-edit-form-container .k-primary {
     color: @primary-button-background-color;
+    background-color: @secondary-background-color;
+    border-color: @secondary-background-color;
 }
 
 .k-popup .k-button:focus:active:not(.k-state-disabled):not([disabled]),
