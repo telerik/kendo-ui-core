@@ -320,10 +320,12 @@ var __meta__ = {
                 var itemWidth = candidate.outerWidth();
                 var itemOffset = candidate.position().left - tabGroup.children().first().position().left;
                 var tabGroupWidth = tabGroup[0].offsetWidth;
+                var tabGroupPadding = Math.ceil(parseFloat(tabGroup.css("padding-left")));
+
                 if (currentScrollOffset + tabGroupWidth < itemOffset + itemWidth) {
-                    tabGroup.finish().animate({ "scrollLeft": itemOffset + itemWidth - tabGroupWidth }, "fast", "linear");
+                    that._scrollTabsToPosition(itemOffset + itemWidth - tabGroupWidth + tabGroupPadding * 2);
                 } else if (currentScrollOffset > itemOffset) {
-                    tabGroup.finish().animate({ "scrollLeft": itemOffset }, "fast", "linear");
+                    that._scrollTabsToPosition(itemOffset - tabGroupPadding);
                 }
             }
 
@@ -978,12 +980,12 @@ var __meta__ = {
 
                 scrollPrevButton.mousedown(function () {
                     that._nowScrollingTabs = true;
-                    that._scrollTabs(-options.scrollable.distance);
+                    that._scrollTabsByDelta(-options.scrollable.distance);
                 });
 
                 scrollNextButton.mousedown(function () {
                     that._nowScrollingTabs = true;
-                    that._scrollTabs(options.scrollable.distance);
+                    that._scrollTabsByDelta(options.scrollable.distance);
                 });
 
                 scrollPrevButton.add(scrollNextButton).mouseup(function () {
@@ -993,16 +995,31 @@ var __meta__ = {
             }
         },
 
-        _scrollTabs: function (delta) {
+        _scrollTabsToPosition: function (position) {
+            var that = this;
+            this.tabGroup.finish().animate({ "scrollLeft": position }, "fast", "linear", function () {
+                that._toggleScrollButtons();
+            });
+        },
+
+        _scrollTabsByDelta: function (delta) {
             var that = this;
             var tabGroup = that.tabGroup;
-            tabGroup.finish();
             var scrLeft = tabGroup.scrollLeft();
-            tabGroup.animate({ "scrollLeft": scrLeft + delta }, "fast", "linear", function () {
+
+            tabGroup.finish().animate({ "scrollLeft": scrLeft + delta }, "fast", "linear", function () {
                 if (that._nowScrollingTabs) {
-                    that._scrollTabs(delta);
+                    that._scrollTabsByDelta(delta);
+                } else {
+                    that._toggleScrollButtons();
                 }
             });
+        },
+
+        _toggleScrollButtons: function () {
+            var that = this;
+            that.wrapper.children(".k-tabstrip-prev").toggle(that.tabGroup.scrollLeft() !== 0);
+            that.wrapper.children(".k-tabstrip-next").toggle(that.tabGroup.scrollLeft() !== that.tabGroup[0].scrollWidth - that.tabGroup[0].offsetWidth);
         },
 
         deactivateTab: function (item) {
