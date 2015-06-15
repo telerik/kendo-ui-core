@@ -13,7 +13,7 @@ This tutorial will walk you through building an HTML5 application in ASP.NET.  I
 - How to use jQuery with WebForms
 - How to use the IE F12 Developer Tools
 
-This module will covers the very basic information that you will need to know
+This module covers the very basic information that you will need to know
 about [jQuery](http://jquery.com/) and how to use it inside of Visual Studio / Internet
 Explorer. There are some good tips on things you can do with the [IE Developer Tools](http://msdn.microsoft.com/en-us/library/dd565628.aspx) here as well. Check out the screencast, or skip to the written
 summary below.
