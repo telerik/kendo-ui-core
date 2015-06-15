@@ -465,6 +465,9 @@ var __meta__ = {
                     value: (this.options.selectable === "multiple") ? value : value[0],
                     success: function(indexes) {
                         that._values = [];
+                        that._selectedIndexes = [];
+                        that._selectedDataItems = [];
+
                         indexes = toArray(indexes);
 
                         if (!indexes.length) {

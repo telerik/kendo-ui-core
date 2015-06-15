@@ -369,4 +369,20 @@
         localDataSource.filter({field: "text", operator: "contains", value: "1234"});
     });
 
+    asyncTest("selects item that was previously selected after filter is cleared", 1, function() {
+        virtualList.one("listBound", function() {
+            virtualList.select(0);
+
+            virtualList.one("listBound", function() {
+                start();
+                ok(virtualList.items().eq(0).hasClass("k-state-selected"));
+            });
+
+            virtualList.filter(false);
+            localDataSource.filter([]);
+        });
+        virtualList.filter(true);
+        localDataSource.filter({field: "text", operator: "contains", value: "0"});
+    });
+
 })();

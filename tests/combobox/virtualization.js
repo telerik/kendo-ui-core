@@ -107,4 +107,33 @@
             }, 100);
         });
     });
+
+    asyncTest("after filtering widget's list selects item that was selected from filtered data set and is part of the first DataSource page ", 2, function() {
+        var combobox = new ComboBox(select, {
+            height: CONTAINER_HEIGHT,
+            animation: false,
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: createAsyncDataSource(),
+            virtual: {
+                valueMapper: function(o) { o.success(o.value); },
+                itemHeight: 40
+            }
+        });
+
+        combobox.one("dataBound", function() {
+            combobox.search("0");
+            combobox.select(0);
+
+            ok(combobox.listView.items().eq(0).hasClass("k-state-selected"));
+
+            combobox.close();
+            combobox.open();
+
+            setTimeout(function() {
+                start();
+                ok(combobox.listView.items().eq(0).hasClass("k-state-selected"));
+            }, 100);
+        });
+    });
 })();
