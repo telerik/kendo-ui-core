@@ -339,7 +339,7 @@ var __meta__ = {
             var that = this;
             var page = that.dataSource.page();
 
-            if (that._rangeChange === true && that._lastPage !== page) {
+            if (that.isBound() && that._rangeChange === true && that._lastPage !== page) {
                 that._lastPage = page;
                 that.trigger(LISTBOUND);
             }
