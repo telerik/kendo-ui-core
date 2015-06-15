@@ -411,9 +411,18 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "save": "保存",
   "cancel": "取消",
   "destroy": "删除",
+  "allDay": "整天",
+  "date": "日期",
+  "event": "事件",
+  "time": "時間",
+  "showFullDay": "顯示整天",
+  "showWorkDay": "顯示營業時間",
   "deleteWindowTitle": "删除事件",
   "ariaSlotLabel": "选择从 {0:t} 到 {1:t}",
   "ariaEventLabel": "{0} on {1:D} at {2:t}",
+  "editable": {
+    "confirmation": "你確定你要刪除這個活動？"
+  },
   "views": {
     "day": "日",
     "week": "周",
@@ -427,7 +436,9 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "deleteWindowSeries": "删除序列",
     "editWindowTitle": "修改周期条目",
     "editWindowOccurrence": "修改当前事件",
-    "editWindowSeries": "修改序列"
+    "editWindowSeries": "修改序列",
+    "deleteRecurring": "你想刪除僅此事件發生或整個系列？",
+    "editRecurring": "你想，僅編輯此次事件發生或整個系列？"
   },
   "editor": {
     "title": "标题",
