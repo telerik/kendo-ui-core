@@ -5758,7 +5758,7 @@ The end time in which the selection of the slots ends. If 'events' argument is p
 
 Allows selection of slots in day and time slots of the view (applicable in day/week/workweek views).
 
-#### Example - set the data source
+#### Example - select event
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
