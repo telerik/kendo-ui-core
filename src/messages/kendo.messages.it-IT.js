@@ -143,11 +143,11 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
 });
 }
 
-/* FilterCenn messages */
+/* FilterCell messages */
 
-if (kendo.ui.FilterCenn) {
-kendo.ui.FilterCenn.prototype.options.messages =
-$.extend(true, kendo.ui.FilterCenn.prototype.options.messages,{
+if (kendo.ui.FilterCell) {
+kendo.ui.FilterCell.prototype.options.messages =
+$.extend(true, kendo.ui.FilterCell.prototype.options.messages,{
   "clear": "Rimuovi",
   "filter": "Filtro",
   "isFalse": "è falso",
