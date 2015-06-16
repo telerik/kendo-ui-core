@@ -118,7 +118,7 @@ added as a WebAPI controller that will respond to requests, inherit from the
 **ApiController** class. If **ApiController** is not recognized for you, hover
 over the word until you get the context menu. This will give you the option to
 include `System.Web.Http` Optionally, you can achieve the same result by
-click **Alt+Shift+F10**, which will bring up the same context menu.
+pressing **Alt+Shift+F10**, which will bring up the same context menu.
 
 ![Employee Controller Inherits ApiController Class](/images/webforms/hello-services-employee-controller-class-inherit.png)
 
@@ -175,7 +175,7 @@ respond to by decorating the method with the correct attribute (i.e. HttpPut).
 
 ### Setup Routing
 
-Before WebAPI can return return results via a URL, a route needs to be setup
+Before WebAPI can return results via a URL, a route needs to be setup
 so that the application knows to map a specific route back to the
 `EmployeesController.cs` file in the **Controllers** folder.
 
