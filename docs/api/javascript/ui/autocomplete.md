@@ -609,7 +609,7 @@ An object, which holds the options of the widget.
     var element = autocomplete.element;
 
     var options = autocomplete.options;
-    <script>
+    </script>
 
 ### list `jQuery`
 A jQuery object of the drop-down list element.
@@ -623,7 +623,7 @@ A jQuery object of the drop-down list element.
     var autocomplete = $("#autocomplete").data("kendoAutoComplete");
 
     var list = autocomplete.list;
-    <script>
+    </script>
 
 ### ul `jQuery`
 A jQuery object of the `ul` element, which holds the available options.
@@ -637,7 +637,7 @@ A jQuery object of the `ul` element, which holds the available options.
     var autocomplete = $("#autocomplete").data("kendoAutoComplete");
 
     var ul = autocomplete.ul;
-    <script>
+    </script>
 
 ## Methods
 
