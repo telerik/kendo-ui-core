@@ -9,6 +9,33 @@ previous_url: /api/introduction
 
 ## Methods
 
+### antiForgeryTokens
+Returns an object that contains common
+[CSRF tokens](https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)_Prevention_Cheat_Sheet)
+found on the page.
+
+These include tokens used by ASP.NET, Ruby on Rails and others.
+
+#### Example - Send CSRF tokens in DataSource read request
+    <script>
+    var dataSource = new kendo.data.DataSource({
+      transport: {
+        read: {
+          url: "http://demos.telerik.com/kendo-ui/service/twitter/search",
+          dataType: "jsonp",
+          data: function() {
+            return kendo.antiForgeryTokens();
+          }
+        }
+      }
+    });
+
+    dataSource.fetch();
+    </script>
+
+#### Returns
+`Object` An object that contains common CSRF tokens found on the page
+
 ### bind
 Binds a HTML View to a View-Model.
 
