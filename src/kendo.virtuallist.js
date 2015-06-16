@@ -1069,10 +1069,9 @@ var __meta__ = {
             return list;
         },
 
-        _itemMapper: function(item, index) {
+        _itemMapper: function(item, index, value) {
             var listType = this.options.type,
                 itemHeight = this.options.itemHeight,
-                value = this._values,
                 currentIndex = this._focusedIndex,
                 selected = false,
                 current = false,
@@ -1096,6 +1095,7 @@ var __meta__ = {
                 for (var i = 0; i < value.length; i++) {
                     match = isPrimitive(item) ? value[i] === item : value[i] === valueGetter(item);
                     if (match) {
+                        value.splice(i , 1);
                         selected = true;
                         break;
                     }
@@ -1119,6 +1119,7 @@ var __meta__ = {
 
         _range: function(index) {
             var itemCount = this.itemCount,
+                value = this._values.slice(),
                 items = [],
                 item;
 
@@ -1126,7 +1127,7 @@ var __meta__ = {
             this._currentGroup = null;
 
             for (var i = index, length = index + itemCount; i < length; i++) {
-                item = this._itemMapper(this.getter(i, index), i);
+                item = this._itemMapper(this.getter(i, index), i, value);
                 items.push(item);
                 this._view[item.index] = item;
             }

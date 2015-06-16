@@ -79,4 +79,53 @@
 
         autocomplete.search("Item");
     });
+
+    asyncTest("does not select duplicated values", 2, function() {
+        var autocomplete = new AutoComplete(select, {
+            close: function(e) { e.preventDefault(); },
+            height: CONTAINER_HEIGHT,
+            animation: false,
+            dataTextField: "text",
+            dataSource: {
+                transport: {
+                    read: function(options) {
+                        setTimeout(function() {
+                            options.success({ 
+                                data: [
+                                    { id: 1, text: "Item " + 1 },
+                                    { id: 11, text: "Item " + 1 },
+                                    { id: 111, text: "Item " + 1 },
+                                    { id: 1111, text: "Item " + 1 },
+                                    { id: 11111, text: "Item " + 1 },
+                                    { id: 111111, text: "Item " + 1 }
+                                ],
+                                total: 6 
+                            });
+                        }, 0);
+                    }
+                },
+                serverPaging: true,
+                pageSize: 40,
+                schema: {
+                    data: "data",
+                    total: "total"
+                }
+            },
+            virtual: {
+                valueMapper: function(o) { o.success(o.value); },
+                itemHeight: 40
+            },
+            value: "Item 1"
+        });
+
+        autocomplete.one("dataBound", function() {
+            var selectedCount = autocomplete.listView.items().filter(".k-state-selected").length
+
+            start();
+            equal(selectedCount, 1);
+            ok(autocomplete.listView.items().eq(0).hasClass("k-state-selected"));
+        });
+
+        autocomplete.search("Item");
+    });
 })();
