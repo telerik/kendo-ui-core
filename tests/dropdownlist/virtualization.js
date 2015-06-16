@@ -81,4 +81,27 @@
 
         dropdownlist.value("0");
     });
+
+    asyncTest("DropDownList selects correct item when optionLabel is defined", 1, function() {
+        var dropdownlist = new DropDownList(select, {
+            optionLabel: "test",
+            height: CONTAINER_HEIGHT,
+            autoBind: false,
+            animation: false,
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: createAsyncDataSource(),
+            virtual: {
+                valueMapper: function(o) { o.success(o.value); },
+                itemHeight: 40
+            }
+        });
+
+        dropdownlist.one("dataBound", function() {
+            start();
+            equal(dropdownlist.value(), 100);
+        });
+
+        dropdownlist.value("100");
+    });
 })();

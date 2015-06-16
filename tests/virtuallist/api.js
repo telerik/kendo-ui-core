@@ -682,6 +682,46 @@
         });
     });
 
+    asyncTest("focusIndex method returns focused index", 1, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: true
+        }));
+
+        asyncDataSource.read().then(function() {
+            start();
+
+            virtualList.focus(0);
+            equal(virtualList.focusIndex(), 0);
+        });
+    });
+
+    asyncTest("focusIndex method returns focused index event if the item is not yet loaded", 1, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: true
+        }));
+
+        asyncDataSource.read().then(function() {
+            virtualList.one("listBound", function() {
+                start();
+                equal(virtualList.focusIndex(), 100);
+            })
+            virtualList.select(100);
+        });
+    });
+
+    asyncTest("focusIndex method returns undefined if no item is selected", 1, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: true
+        }));
+
+        asyncDataSource.read().then(function() {
+            start();
+            virtualList.select(1);
+            virtualList.select(-1)
+            ok(!virtualList.focusIndex());
+        });
+    });
+
     asyncTest("setOptions changes the template", 2, function() {
         var virtualList = new VirtualList(container, virtualSettings);
 
