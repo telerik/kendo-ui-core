@@ -754,15 +754,15 @@ var __meta__ = {
 
                 that.focus(indices);
 
-                if (that._valueDeferred) {
-                    that._valueDeferred.resolve();
-                }
-
                 if (added.length || removed.length) {
                     that.trigger(CHANGE, {
                         added: added,
                         removed: removed
                     });
+                }
+
+                if (that._valueDeferred) {
+                    that._valueDeferred.resolve();
                 }
             };
 
