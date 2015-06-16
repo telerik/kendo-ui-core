@@ -261,6 +261,36 @@
         equal(children.eq(2).attr("class"), "k-item");
     });
 
+    test("focusIndex returns the index of the focused item", function() {
+        var list = new StaticList(element, {
+            dataSource: ["item1", "item2", "item3"],
+            template: "#:data#"
+        });
+
+        list.dataSource.read();
+
+        var children = element.children();
+
+        list.focus(children.eq(1));
+        equal(list.focusIndex(), 1);
+    });
+
+    test("focusIndex returns undefined if no item is focused", function() {
+        var list = new StaticList(element, {
+            dataSource: ["item1", "item2", "item3"],
+            template: "#:data#"
+        });
+
+        list.dataSource.read();
+
+        var children = element.children();
+
+        list.focus(1);
+        list.focus(-1);
+
+        ok(!list.focusIndex());
+    });
+
     test("select an item by element", function() {
         var list = new StaticList(element, {
             dataSource: ["item1", "item2", "item3"],

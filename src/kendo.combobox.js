@@ -332,7 +332,7 @@ var __meta__ = {
 
             if (length && (page === undefined || page === 1)) {
                 if (options.highlightFirst) {
-                    if (!focusedItem) {
+                    if (!focusedItem && !listView.focusIndex()) {
                         listView.focus(0);
                     }
                 } else {
