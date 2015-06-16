@@ -1,6 +1,6 @@
 (function(f, define){
-    define([], f);
-})(function(){
+    define(['jquery'], f);
+})(function(jQuery){
 
 var __meta__ = {
     id: "core",
@@ -4158,4 +4158,4 @@ function pad(number, digits, end) {
 
 return window.kendo;
 
-}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(jQuery); });
