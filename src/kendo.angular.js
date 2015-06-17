@@ -420,28 +420,26 @@ var __meta__ = {
         widget.$angular_setLogicValue(getter(scope));
 
         // keep in sync
-        scope.$apply(function() {
-            var watchHandler = function(newValue, oldValue) {
-                if (newValue === undefined) {
-                    // because widget's value() method usually checks if the new value is undefined,
-                    // in which case it returns the current value rather than clearing the field.
-                    // https://github.com/telerik/kendo-ui-core/issues/299
-                    newValue = null;
-                }
-                if (updating) {
-                    return;
-                }
-                if (newValue === oldValue) {
-                    return;
-                }
-                widget.$angular_setLogicValue(newValue);
-            };
-            if (kendo.ui.MultiSelect && widget instanceof kendo.ui.MultiSelect) {
-                scope.$watchCollection(kNgModel, watchHandler);
-            } else {
-                scope.$watch(kNgModel, watchHandler);
+        var watchHandler = function(newValue, oldValue) {
+            if (newValue === undefined) {
+                // because widget's value() method usually checks if the new value is undefined,
+                // in which case it returns the current value rather than clearing the field.
+                // https://github.com/telerik/kendo-ui-core/issues/299
+                newValue = null;
             }
-        });
+            if (updating) {
+                return;
+            }
+            if (newValue === oldValue) {
+                return;
+            }
+            widget.$angular_setLogicValue(newValue);
+        };
+        if (kendo.ui.MultiSelect && widget instanceof kendo.ui.MultiSelect) {
+            scope.$watchCollection(kNgModel, watchHandler);
+        } else {
+            scope.$watch(kNgModel, watchHandler);
+        }
 
         widget.first("change", function(){
             updating = true;
@@ -594,14 +592,13 @@ var __meta__ = {
     }
 
     module.factory('directiveFactory', [ '$compile', function(compile) {
-        var KENDO_COUNT = 0;
+        var kendoRenderedTimeout;
         var RENDERED = false;
 
         // caching $compile for the dirty hack upstairs. This is awful, but we happen to have elements outside of the bootstrapped root :(.
         $defaultCompile = compile;
 
         var create = function(role, origAttr) {
-
             return {
                 // Parse the directive for attributes and classes
                 restrict: "AC",
@@ -632,39 +629,30 @@ var __meta__ = {
                     // but we still keep the attribute without the
                     // `data-` prefix, so k-rebind would work.
                     var roleattr = role.replace(/([A-Z])/g, "-$1");
-                    var isVisible = $element.css("visibility") !== "hidden";
 
                     $element.attr(roleattr, $element.attr("data-" + roleattr));
                     $element[0].removeAttribute("data-" + roleattr);
 
-                    if (isVisible) {
-                        $element.css("visibility", "hidden");
+                    var widget = createWidget(scope, element, attrs, role, origAttr, controllers);
+
+                    if (!widget) {
+                        return;
                     }
 
-                    ++KENDO_COUNT;
+                    if (kendoRenderedTimeout) {
+                        clearTimeout(kendoRenderedTimeout);
+                    }
 
-                    $timeout(function() {
-                        if (isVisible) {
-                            $element.css("visibility", "");
-                        }
-                        var widget = createWidget(scope, element, attrs, role, origAttr, controllers);
-
-                        if (!widget) {
-                            return;
-                        }
-
-                        --KENDO_COUNT;
-                        if (KENDO_COUNT === 0) {
-                            scope.$emit("kendoRendered");
-                            if (!RENDERED) {
-                                RENDERED = true;
-                                $("form").each(function(){
-                                    var form = $(this).controller("form");
-                                    if (form) {
-                                        form.$setPristine();
-                                    }
-                                });
-                            }
+                    kendoRenderedTimeout = setTimeout(function() {
+                        scope.$emit("kendoRendered");
+                        if (!RENDERED) {
+                            RENDERED = true;
+                            $("form").each(function(){
+                                var form = $(this).controller("form");
+                                if (form) {
+                                    form.$setPristine();
+                                }
+                            });
                         }
                     });
                 }

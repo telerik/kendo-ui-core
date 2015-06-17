@@ -45,7 +45,9 @@ function spy(that, methods) {
             }
 
             callback.calls++;
-            callback.args.push(Array.prototype.splice.call(arguments));
+            var args = Array.prototype.slice.call(arguments);
+            callback.args.push(args);
+            callback.lastArgs = args;
         };
 
         callback.calls = 0;
@@ -80,8 +82,9 @@ function arrayClose(a, b, tolerance) {
 
 function tzTest(tzAlias, testName, expected, callback ) {
     var TZ_NAMES = {
-        "Brazil": ["BRST", "BRT", "South America Daylight Time", "South America Standard Time", "GMT-0300"],
-        "Sofia": ["EET", "EEST", "Eastern European Time", "Eastern European Summer Time", "Eastern Europe Daylight Time"]
+        "Brazil": ["BRST", "BRT", "South America Daylight Time", "South America Standard Time"],
+        "Sofia": ["EET", "EEST", "Eastern European Time", "Eastern European Summer Time"],
+        "Moscow": ["MSK", "RTZ2", "Russia TZ 2 Standard Time"]
     };
 
     function tzMatch(alias) {
@@ -235,6 +238,11 @@ QUnit.extend( QUnit, {
 
     notClose: function(actual, expected, minDifference, message) {
         QUnit.push(Math.abs(actual - expected) > minDifference, actual, expected, message);
+    },
+
+    contains: function(actual, substring, message) {
+        var passes = actual.indexOf(substring) !== -1;
+        QUnit.push(passes, actual, substring, message);
     }
 });
 
@@ -376,6 +384,22 @@ var ngTestModule = $.noop, ngTest = $.noop, ngScope;
                 start();
                 check();
             }, 100);
+        });
+    }
+
+    ngTest2 = function(name, assertions, theTest) {
+        test(name, assertions, function() {
+            var root = $('<div ng-controller=main></div>').appendTo(QUnit.fixture);
+
+            var scopeSetup = $.noop;
+
+            angular.module('kendo.tests').controller('main', function($scope) {
+                scopeSetup($scope);
+            });
+
+            theTest(root, function(setup) { scopeSetup = setup }, function() { angular.bootstrap(root, [ 'kendo.tests' ]); });
+            kendo.destroy(root);
+            root.remove();
         });
     }
 })();

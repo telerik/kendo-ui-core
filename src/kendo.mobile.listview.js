@@ -927,6 +927,17 @@ var __meta__ = {
 
             this._style();
 
+            if (this.options.$angular && (this.virtual || this.options.pullToRefresh)) {
+                setTimeout($.proxy(this, "_start"));
+            } else {
+                this._start();
+            }
+
+        },
+
+        _start: function() {
+            var options = this.options;
+
             if (this.options.filterable) {
                 this._filter = new ListViewFilter(this);
             }
