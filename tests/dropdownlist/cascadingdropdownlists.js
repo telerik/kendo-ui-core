@@ -630,4 +630,64 @@
         ddl2.destroy();
         ddl3.destroy();
     });
+
+    asyncTest("child widget selects its value after parents starts cascade", 2, function() {
+        var deferred = $.Deferred();
+
+        var ddl = new DropDownList(parent, {
+            optionLabel: "Select",
+            dataTextField: "CategoryName",
+            dataValueField: "CategoryID",
+            dataSource: [
+                { CategoryID: 1, CategoryName: "Cat1" },
+                { CategoryID: 2, CategoryName: "Cat2" }
+            ]
+        });
+
+        var ddl2 = new DropDownList(child, {
+            optionLabel: "Select",
+            dataTextField: "ProductName",
+            dataValueField: "ProductID",
+            dataSource: {
+                transport: {
+                    read: function(options) {
+                        setTimeout(function() {
+                            switch (ddl.value()) {
+                                case "1": options.success([
+                                            { ProductID: 1, ProductName: "Prod1", CategoryID: 1 },
+                                            { ProductID: 2, ProductName: "Prod2", CategoryID: 1 }
+                                        ]);
+                                        break;
+
+                                case "2": options.success([
+                                            { ProductID: 3, ProductName: "Prod3", CategoryID: 2 },
+                                            { ProductID: 4, ProductName: "Prod4", CategoryID: 2 }
+                                        ]);
+                                        break;
+                            }
+
+                        });
+
+                        deferred.resolve();
+                    }
+                }
+            },
+            cascadeFrom: "parent",
+            autoBind: false
+        });
+
+        ddl.value(1);
+        ddl2.value(1);
+
+        deferred.then(function() {
+            ddl.value(2);
+            ddl2.value(3);
+
+            setTimeout(function() {
+                start();
+                equal(ddl2.value(), "3");
+                equal(ddl2.text(), "Prod3");
+            }, 100);
+        });
+    });
 })();

@@ -608,4 +608,62 @@ test("third combo is bound when only local data is used", function() {
     ok(!orders.element.is("[disabled]"));
 });
 
+    asyncTest("child widget selects its value after parents starts cascade", 2, function() {
+        var deferred = $.Deferred();
+
+        var combo1 = new ComboBox(parent, {
+            dataTextField: "CategoryName",
+            dataValueField: "CategoryID",
+            dataSource: [
+                { CategoryID: 1, CategoryName: "Cat1" },
+                { CategoryID: 2, CategoryName: "Cat2" }
+            ]
+        });
+
+        var combo2 = new ComboBox(child, {
+            dataTextField: "ProductName",
+            dataValueField: "ProductID",
+            dataSource: {
+                transport: {
+                    read: function(options) {
+                        setTimeout(function() {
+                            switch (combo1.value()) {
+                                case "1": options.success([
+                                            { ProductID: 1, ProductName: "Prod1", CategoryID: 1 },
+                                            { ProductID: 2, ProductName: "Prod2", CategoryID: 1 }
+                                        ]);
+                                        break;
+
+                                case "2": options.success([
+                                            { ProductID: 3, ProductName: "Prod3", CategoryID: 2 },
+                                            { ProductID: 4, ProductName: "Prod4", CategoryID: 2 }
+                                        ]);
+                                        break;
+                            }
+
+                        });
+
+                        deferred.resolve();
+                    }
+                }
+            },
+            cascadeFrom: "parent",
+            autoBind: false
+        });
+
+        combo1.value(1);
+        combo2.value(1);
+
+        deferred.then(function() {
+            combo1.value(2);
+            combo2.value(3);
+
+            setTimeout(function() {
+                start();
+                equal(combo2.value(), "3");
+                equal(combo2.text(), "Prod3");
+            }, 100);
+        });
+    });
+
 })();
