@@ -786,7 +786,7 @@ The configuration of the scheduler resource(s) grouping.
 
 An array of resource names by which the scheduler events will be grouped.
 
-#### Example - disable delete confirmation
+#### Example - define groups
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -828,7 +828,7 @@ An array of resource names by which the scheduler events will be grouped.
 
 The orientation of the group headers. Supported values are *horizontal* or *vertical*. Note that the agenda view is always in vertical orientation.
 
-#### Example - disable delete confirmation
+#### Example - define group orientation
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
