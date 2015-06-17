@@ -297,16 +297,23 @@ span.k-datetimepicker .k-select+.k-select
     margin: 0;
 }
 
-/* fix missing bottom border on browser zoom in Chrome */
-.k-webkit .k-combobox .k-dropdown-wrap:before,
-.k-webkit .k-picker-wrap:before,
-.k-webkit .k-numeric-wrap:before
+.k-combobox .k-dropdown-wrap:before,
+.k-picker-wrap:before,
+.k-numeric-wrap:before
 {
     content: "\a0";
     display: inline-block;
     width: 0;
     height: @input-height;
-    padding-bottom: 0.4em;
+    padding-bottom: 0.3em;
+}
+
+/* fix missing bottom border on browser zoom in Chrome */
+.k-webkit .k-combobox .k-dropdown-wrap:before,
+.k-webkit .k-picker-wrap:before,
+.k-webkit .k-numeric-wrap:before
+{
+    padding-bottom: 0.38em;
 }
 
 /* above style breaks NumericTextBox layout due display:block style applied to the input */
