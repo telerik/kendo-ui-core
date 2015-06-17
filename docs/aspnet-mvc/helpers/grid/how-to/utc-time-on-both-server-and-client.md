@@ -1,18 +1,18 @@
 ---
-title: Using UTC time on both client and server sides.
-description: Using UTC time on both client and server sides.
+title: Using UTC time on both the client and the server.
+description: Using UTC time on both the client and the server.
 ---
 
-# Using UTC time on both server and client sides.
+# Using UTC time on both the client and the server.
 
-This project shows how to keep a `DateTime` property in `UTC` format on both server and client sides when using a Grid with Ajax binding and editing.
+This project shows how to keep a `DateTime` property in `UTC` format on both server and client side when using a Grid with Ajax binding and editing.
 Every time a date is being retrieved from the database or received from the client, on the server side the DateTime Kind property is left unspecified. The .NET framework implicitly converts such dates to local format.
 
 Similar thing happens on the client side. Browsers convert all dates according to local time when the Date is parsed from Number to Date object.
 
 For examle when you create a JavaScript date like this `new Date(1353397262112)` browsers on the different machinves which use different TimeZone system settings will show different string representations.
 
-In order to keep time in UTC, explicit transformation should be applied to the dates on both client and server sides.
+In order to keep time in UTC, explicit transformation should be applied to the dates on both client and server side.
 
 Hence there are two steps to be covered:
 
@@ -32,7 +32,16 @@ Hence there are two steps to be covered:
 2. Use [requestEnd](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#requestend) event of the DataSource to intercept and replace the incoming Date field with the time difference.
 
 ```
-    window.onRequestEnd = function(e) {
+@(Html.Kendo().Grid<KendoUIMVC5.Models.Person>().Name("persons")
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .Events(ev=>ev.RequestEnd("onRequestEnd"))
+    )
+    // ...
+)
+
+<script>
+    function onRequestEnd = function(e) {
         if (e.response.Data && e.response.Data.length) {
             var data = e.response.Data;
             if (this.group().length && e.type == "read") {
@@ -73,6 +82,9 @@ Hence there are two steps to be covered:
             }
         }
     }
+</script>
 ```
 
-[Project - UTC on both client and server sides](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/)
+# Sample project on GitHub
+
+[Using UTC time on both the client and the server](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/utc-on-server-and-client)
