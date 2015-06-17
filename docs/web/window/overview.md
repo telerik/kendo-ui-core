@@ -190,6 +190,8 @@ This behavior can be controlled explicitly via the widget configuration.
 
 > Loading HTML fragments (partial content) inside an iframe is incorrect. Iframe pages should include a DOCTYPE, `html`, `head` and `body` tags, just like a standard web page does.
 
+> Using iframes on iOS devices is not recommended. Iframes on these devices are not scrollable and always expand to match the content.
+
 ### Accessing the `window` and `document` objects inside the `iframe`
 
 In order to access content and script objects inside the Kendo UI Window `iframe`, the nested page must belong to the **same domain** as the main page.

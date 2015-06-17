@@ -232,7 +232,7 @@ Enables (**true**) or disables (**false**) the ability for users to move/drag th
 
 ### iframe `Boolean`
 
-Explicitly states whether content iframe should be created.
+Explicitly states whether a content iframe should be created. For more information, please read [Using iframes](/web/window/overview#using-iframes).
 
 #### Example - load full page
 
