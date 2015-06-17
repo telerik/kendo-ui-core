@@ -224,12 +224,12 @@ var __meta__ = {
             this._focusElement(this.filterInput);
         },
 
-        toggle: function(toggle) {
-            this._toggle(toggle, true);
-        },
-
         _allowOpening: function(length) {
             return this.optionLabel[0] || this.filterInput || this.dataSource.view().length;
+        },
+
+        toggle: function(toggle) {
+            this._toggle(toggle, true);
         },
 
         current: function(candidate) {
@@ -317,6 +317,7 @@ var __meta__ = {
 
         value: function(value) {
             var that = this;
+            var dataSource = that.dataSource;
 
             if (value === undefined) {
                 value = that._accessor() || that.listView.value()[0];
@@ -325,6 +326,17 @@ var __meta__ = {
 
             if (value) {
                 that._initialIndex = null;
+            }
+
+            if (that._request && that.options.cascadeFrom && that.listView.isBound()) {
+                if (that._valueSetter) {
+                    dataSource.unbind(CHANGE, that._valueSetter);
+                }
+
+                that._valueSetter = proxy(function() { that.value(value); }, that);
+
+                dataSource.one(CHANGE, that._valueSetter);
+                return;
             }
 
             that.listView.value(value).done(function() {
