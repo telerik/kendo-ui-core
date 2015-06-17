@@ -573,8 +573,6 @@ var __meta__ = {
             that.listView
                 .value(value)
                 .done(function() {
-                    that._triggerCascade();
-
                     that._selectValue(that.listView.selectedDataItems()[0]);
 
                     if (that.selectedIndex === -1) {

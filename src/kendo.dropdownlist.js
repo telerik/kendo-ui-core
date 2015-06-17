@@ -339,8 +339,6 @@ var __meta__ = {
             }
 
             that.listView.value(value).done(function() {
-                that._triggerCascade();
-
                 if (that.selectedIndex === -1 && that.text()) {
                     that.text("");
                     that._accessor("", -1);

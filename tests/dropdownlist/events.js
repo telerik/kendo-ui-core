@@ -701,4 +701,22 @@
 
         equal(dropdownlist.value(), "foo");
     });
+
+    test("widget triggers cascade only once on value set", 1, function() {
+        var ddl = new DropDownList(input, {
+            optionLabel: "Select",
+            dataTextField: "CategoryName",
+            dataValueField: "CategoryID",
+            dataSource: [
+                { CategoryID: 1, CategoryName: "Cat1" },
+                { CategoryID: 2, CategoryName: "Cat2" }
+            ]
+        });
+
+        ddl.bind("cascade", function() {
+            ok(true);
+        });
+
+        ddl.value(1);
+    });
 })();
