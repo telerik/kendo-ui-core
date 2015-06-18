@@ -4512,14 +4512,18 @@ If a `pageSize` setting is provided for the data source then this value will be 
         { field: "productName" },
         { field: "category" }
       ],
-      dataSource: [
+      dataSource: {
+        data: [
         { productName: "Tea", category: "Beverages" },
         { productName: "Coffee", category: "Beverages" },
         { productName: "Ham", category: "Food" },
         { productName: "Bread", category: "Food" }
-      ],
+        ],
+        pageSize: 1
+      },
       pageable: {
-        pageSizes: [2, 3, 4, "all"]
+        pageSizes: [2, 3, 4, "all"],
+        numeric: false
       }
     });
     </script>
