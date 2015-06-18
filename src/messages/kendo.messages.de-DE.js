@@ -404,7 +404,7 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "timeline": "Zeitstrahl",
     "timelineWeek": "Zeitstrahl Woche",
     "timelineWorkWeek": "Zeitstrahl Arbeitswoche",
-    "timelineMonth": "Zeitstrahl Monat",
+    "timelineMonth": "Zeitstrahl Monat"
   },
   "deleteWindowTitle": "Termin löschen",
   "showFullDay": "Ganzen Tag anzeigen",
