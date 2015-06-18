@@ -6,6 +6,9 @@ description: Display tab buttons at the bottom
 
 # Display tab buttons at the bottom
 
+> This example is now obsolete. Use the [**tabPosition**](/api/javascript/ui/tabstrip#configuration-tabPosition) property instead,
+except when working with a very old Kendo UI version.
+
 The following runnable sample demonstrates how to display the tab buttons at the bottom of the widget.
 
 #### Example:

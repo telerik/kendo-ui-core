@@ -1,16 +1,30 @@
 ---
-title: Expand the tab heigh to 100%
-page_title: Expand the tab heigh to 100%
-description: Expand the tab heigh to 100%
+title: Expand the TabStrip height to 100%
+page_title: Expand the TabStrip height to 100%
+description: Expand the TabStrip height to 100%
 ---
 
-# Expand the tab heigh to 100%
+# Expand the TabStrip height to 100%
 
-The following runnable sample demonstrates how to expand the tab heigh to 100% of the parent container.
+The following runnable sample demonstrates how to make the TabStrip widget 100% high and resize together with the browser window.
 
 #### Example:
 
 ```html
+    <style>
+
+    html,
+    body,
+    #tabstrip-parent,
+    #tabstrip {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      border-width: 0;
+    }
+
+    </style>
+    
     <div id="tabstrip">
       <ul>
         <li class="k-state-active">Item 1</li>
@@ -24,6 +38,7 @@ The following runnable sample demonstrates how to expand the tab heigh to 100% o
         Content 2
       </div>
     </div>
+    
     <script>
       var resizeAll = function() {
         expandContentDivs(tabStripElement.children(".k-content")); 
@@ -36,14 +51,16 @@ The following runnable sample demonstrates how to expand the tab heigh to 100% o
           }
         }
       });
+      
+      tabStripElement.parent().attr("id", "tabstrip-parent");
+      
       var tabStrip = tabStripElement.data("kendoTabStrip");
 
       var expandContentDivs = function(divs) {
         divs.height(tabStripElement.innerHeight() - tabStripElement.children(".k-tabstrip-items").outerHeight() - 16);
+          // 16px are substracted to compensate for content div vertical paddings and borders
+          // This amount can be calculated instead of hard-coded, if needed.
       }
-      // 16px are substracted to compensate for content div vertical paddings and borders
-
-      tabStripElement.parent().attr("id", "tabstrip-parent");
 
       resizeAll();
 
