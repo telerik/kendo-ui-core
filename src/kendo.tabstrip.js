@@ -315,17 +315,19 @@ var __meta__ = {
                     that.element.attr("aria-activedescendant", id);
                 }
 
-                var tabGroup = that.tabGroup;
-                var currentScrollOffset = tabGroup.scrollLeft();
-                var itemWidth = candidate.outerWidth();
-                var itemOffset = candidate.position().left - tabGroup.children().first().position().left;
-                var tabGroupWidth = tabGroup[0].offsetWidth;
-                var tabGroupPadding = Math.ceil(parseFloat(tabGroup.css("padding-left")));
+                if (that._scrollableMode()) {
+                    var tabGroup = that.tabGroup;
+                    var currentScrollOffset = tabGroup.scrollLeft();
+                    var itemWidth = candidate.outerWidth();
+                    var itemOffset = candidate.position().left - tabGroup.children().first().position().left;
+                    var tabGroupWidth = tabGroup[0].offsetWidth;
+                    var tabGroupPadding = Math.ceil(parseFloat(tabGroup.css("padding-left")));
 
-                if (currentScrollOffset + tabGroupWidth < itemOffset + itemWidth) {
-                    that._scrollTabsToPosition(itemOffset + itemWidth - tabGroupWidth + tabGroupPadding * 2);
-                } else if (currentScrollOffset > itemOffset) {
-                    that._scrollTabsToPosition(itemOffset - tabGroupPadding);
+                    if (currentScrollOffset + tabGroupWidth < itemOffset + itemWidth) {
+                        that._scrollTabsToPosition(itemOffset + itemWidth - tabGroupWidth + tabGroupPadding * 2);
+                    } else if (currentScrollOffset > itemOffset) {
+                        that._scrollTabsToPosition(itemOffset - tabGroupPadding);
+                    }
                 }
             }
 
@@ -538,7 +540,7 @@ var __meta__ = {
             navigatable: true,
             contentUrls: false,
             scrollable: {
-                distance: 100
+                distance: 200
             }
         },
 
@@ -966,33 +968,40 @@ var __meta__ = {
             var that = this,
                 options = that.options;
 
-            //debugger;
+            if (that._scrollableMode()) {
 
-            if ((options.tabPosition == "top" || options.tabPosition == "bottom") && that.tabGroup[0].scrollWidth > that.wrapper[0].offsetWidth) {
-                that._nowScrollingTabs = false;
+                that.wrapper.addClass("k-tabstrip-scrollable");
 
-                that.wrapper.append(scrollButtonHtml("prev", "k-i-arrow-w") + scrollButtonHtml("next", "k-i-arrow-e"));
-
-                var scrollPrevButton = that.wrapper.children(".k-tabstrip-prev");
-                var scrollNextButton = that.wrapper.children(".k-tabstrip-next");
-
-                that.tabGroup.css({ marginLeft: scrollPrevButton.outerWidth() + 9, marginRight: scrollNextButton.outerWidth() + 12 });
-
-                scrollPrevButton.mousedown(function () {
-                    that._nowScrollingTabs = true;
-                    that._scrollTabsByDelta(-options.scrollable.distance);
-                });
-
-                scrollNextButton.mousedown(function () {
-                    that._nowScrollingTabs = true;
-                    that._scrollTabsByDelta(options.scrollable.distance);
-                });
-
-                scrollPrevButton.add(scrollNextButton).mouseup(function () {
+                if (that.tabGroup[0].scrollWidth > that.wrapper[0].offsetWidth) {
                     that._nowScrollingTabs = false;
-                });
 
+                    that.wrapper.append(scrollButtonHtml("prev", "k-i-arrow-w") + scrollButtonHtml("next", "k-i-arrow-e"));
+
+                    var scrollPrevButton = that.wrapper.children(".k-tabstrip-prev");
+                    var scrollNextButton = that.wrapper.children(".k-tabstrip-next");
+
+                    that.tabGroup.css({ marginLeft: scrollPrevButton.outerWidth() + 9, marginRight: scrollNextButton.outerWidth() + 12 });
+
+                    scrollPrevButton.mousedown(function () {
+                        that._nowScrollingTabs = true;
+                        that._scrollTabsByDelta(-options.scrollable.distance);
+                    });
+
+                    scrollNextButton.mousedown(function () {
+                        that._nowScrollingTabs = true;
+                        that._scrollTabsByDelta(options.scrollable.distance);
+                    });
+
+                    scrollPrevButton.add(scrollNextButton).mouseup(function () {
+                        that._nowScrollingTabs = false;
+                    });
+                }
             }
+        },
+
+        _scrollableMode: function() {
+            var options = this.options;
+            return options.scrollable && !isNaN(options.scrollable.distance) && (options.tabPosition == "top" || options.tabPosition == "bottom");
         },
 
         _scrollTabsToPosition: function (position) {
