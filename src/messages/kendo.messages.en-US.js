@@ -503,6 +503,28 @@ $.extend(true, kendo.ui.Slider.prototype.options,{
 });
 }
 
+/* TreeList messages */
+
+if (kendo.ui.TreeList) {
+kendo.ui.TreeList.prototype.options.messages =
+$.extend(true, kendo.ui.TreeList.prototype.options.messages,{
+  "noRows": "No records to display",
+  "loading": "Loading...",
+  "requestFailed": "Request failed.",
+  "retry": "Retry",
+  "commands": {
+      "edit": "Edit",
+      "update": "Update",
+      "canceledit": "Cancel",
+      "create": "Add new record",
+      "createchild": "Add child record",
+      "destroy": "Delete",
+      "excel": "Export to Excel",
+      "pdf": "Export to PDF"
+  }
+});
+}
+
 /* TreeView messages */
 
 if (kendo.ui.TreeView) {
