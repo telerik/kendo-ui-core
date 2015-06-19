@@ -87,12 +87,12 @@
 .km-nova .km-navbar,
 .km-nova .k-toolbar,
 .km-nova .km-tabstrip {
-    background-image: -ms-linear-gradient(top, @normal-text-color 0%, #0B1F31 100%);
-    background-image: -moz-linear-gradient(top, @normal-text-color 0%, #0B1F31 100%);
-    background-image: -o-linear-gradient(top, @normal-text-color 0%, #0B1F31 100%);
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, @normal-text-color), color-stop(1, #0B1F31));
-    background-image: -webkit-linear-gradient(top, @normal-text-color 0%, #0B1F31 100%);
-    background-image: linear-gradient(top, @normal-text-color 0%, #0B1F31 100%);
+    background-image: -ms-linear-gradient(top, darken(@normal-text-color, 2%) 0%, darken(@normal-text-color, 7%) 100%);
+    background-image: -moz-linear-gradient(top, darken(@normal-text-color, 2%) 0%, darken(@normal-text-color, 7%) 100%);
+    background-image: -o-linear-gradient(top, darken(@normal-text-color, 2%) 0%, darken(@normal-text-color, 7%) 100%);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, darken(@normal-text-color, 2%)), color-stop(1, darken(@normal-text-color, 7%)));
+    background-image: -webkit-linear-gradient(top, darken(@normal-text-color, 2%) 0%, darken(@normal-text-color, 7%) 100%);
+    background-image: linear-gradient(top, darken(@normal-text-color, 2%) 0%, darken(@normal-text-color, 7%) 100%);
 }
 
 .km-nova .km-vertical-tabstrip {
@@ -129,7 +129,7 @@
 .km-nova .km-drawer .km-navbar,
 .km-nova .km-drawer .km-vertical-tabstrip .km-button.km-state-active,
 .km-nova .km-drawer .km-listview li.km-state-active {
-    background: darken(@normal-text-color, 15%);
+    background: darken(@normal-text-color, 10%);
 }
 
 .km-nova .km-light .km-view-title {
@@ -246,6 +246,10 @@
     color: @normal-text-color;
 }
 
+.km-nova .km-list > li.km-load-more {
+    border-color: transparent;
+}
+
 .km-nova .km-list > li > .km-listview-link,
 .km-nova .km-legend-button,
 .km-nova .km-collapsible-header,
@@ -296,11 +300,11 @@
 /* Drawer */
 .km-nova .km-drawer {
     color: @background;
-    background-color: darken(@normal-text-color, 7%);
+    background-color: darken(@normal-text-color, 4%);
 }
 
 .km-nova .km-drawer .km-content {
-    background-color: darken(@normal-text-color, 7%);
+    background-color: darken(@normal-text-color, 4%);
 }
 
 /* ListView in Drawer */
