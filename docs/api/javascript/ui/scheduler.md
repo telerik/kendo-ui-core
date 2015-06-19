@@ -5903,6 +5903,39 @@ The view type to select.
     scheduler.view("month");
     </script>
 
+### viewName
+
+The name of the current view. Can be used for refreshing the current view data.
+
+#### Returns
+
+`String` the name of the current scheduler view.
+
+#### Example - change scheduler options and refresh the view
+    <div id="scheduler"></div>
+    <script>
+      $("#scheduler").kendoScheduler({
+        date: new Date("2013/6/6"),
+        dataSource: [
+          {
+            id: 1,
+            start: new Date("2013/6/6 08:00 AM"),
+            end: new Date("2013/6/6 09:00 AM"),
+            title: "Interview"
+          }
+        ]
+      });
+      var scheduler = $("#scheduler").data("kendoScheduler");
+
+      scheduler.setOptions({
+        startTime: new Date("2015/1/1 14:00"),
+        endTime: new Date("2015/1/1 18:00")
+      });
+
+      scheduler.view(scheduler.viewName());
+    </script>
+
+
 ## Events
 
 ### add
