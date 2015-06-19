@@ -151,6 +151,17 @@
     background: @accent;
 }
 
+.km-nova .km-listview-link:after,
+.km-nova .km-listview-label:after {
+    border-color: hsv(hsvHue(@base) , hsvSaturation(@base), hsvValue(@base) - 13);
+}
+
+.km-nova .km-drawer .km-list .km-listview-link:after,
+.km-nova .km-drawer .km-list .km-listview-label:after {
+    border-color: @background;
+    opacity: .3;
+}
+
 .km-nova .km-touch-scrollbar {
     background: @normal-text-color;
 }
