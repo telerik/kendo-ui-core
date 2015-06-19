@@ -218,6 +218,7 @@ var __meta__ = {
             this.pageSize = options.pageSize || 1;
             this.contentHeight = options.contentHeight;
             this.enablePager = options.enablePager;
+            this.pagerOverlay = options.pagerOverlay;
         },
 
         scrollTo: function(page, instant) {
@@ -280,7 +281,7 @@ var __meta__ = {
 
                 if (this.enablePager === true) {
                     var pager = this.element.parent().find("ol.km-pages");
-                    if (pager.length) {
+                    if (!this.pagerOverlay && pager.length) {
                         containerHeight -= pager.outerHeight(true);
                     }
                 }
@@ -421,7 +422,7 @@ var __meta__ = {
 
                 if (this.options.enablePager === true) {
                     var pager = this.element.parent().find("ol.km-pages");
-                    if (pager.length) {
+                    if (!this.options.pagerOverlay && pager.length) {
                         containerHeight -= pager.outerHeight(true);
                     }
                 }
@@ -665,6 +666,10 @@ var __meta__ = {
 
             if (this.options.enablePager) {
                 this.pager = new Pager(this);
+
+                if (this.options.pagerOverlay) {
+                    element.addClass("km-scrollview-overlay");
+                }
             }
 
             that.inner = element.children().first();
@@ -737,6 +742,7 @@ var __meta__ = {
             itemsPerPage: 1,
             bounceVelocityThreshold: 1.6,
             enablePager: true,
+            pagerOverlay: false,
             autoBind: true,
             template: "",
             emptyTemplate: ""

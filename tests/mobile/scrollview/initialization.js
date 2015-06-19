@@ -25,4 +25,18 @@
         equal(scrollview.items()[2].innerHTML, "empty");
         scrollview.destroy();
     });
+
+    test("adds km-scrollview-overlay class when pager and pagerOverlay are enabled", function() {
+        var div = $("<div />");
+
+        var scrollview = new kendo.mobile.ui.ScrollView(div, {
+            dataSource: [1, 2, 3, 4],
+            template: "#: data #",
+            enablePager: true,
+            pagerOverlay: true
+        });
+
+        ok(scrollview.element.hasClass("km-scrollview-overlay"));
+        scrollview.destroy();
+    });
 })();
