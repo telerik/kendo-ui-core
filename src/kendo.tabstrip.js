@@ -1026,9 +1026,12 @@ var __meta__ = {
         },
 
         _toggleScrollButtons: function () {
-            var that = this;
-            that.wrapper.children(".k-tabstrip-prev").toggle(that.tabGroup.scrollLeft() !== 0);
-            that.wrapper.children(".k-tabstrip-next").toggle(that.tabGroup.scrollLeft() !== that.tabGroup[0].scrollWidth - that.tabGroup[0].offsetWidth);
+            var that = this,
+                ul = that.tabGroup,
+                scrollLeft = ul.scrollLeft();
+
+            that.wrapper.children(".k-tabstrip-prev").toggle(scrollLeft !== 0);
+            that.wrapper.children(".k-tabstrip-next").toggle(scrollLeft < ul[0].scrollWidth - ul[0].offsetWidth - 1);
         },
 
         deactivateTab: function (item) {
