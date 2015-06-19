@@ -5,11 +5,42 @@
     margin: 0;
     padding: 0;
     zoom: 1;
+    position: relative;
 }
 
-.k-tabstrip .k-tabstrip-items
+.k-tabstrip-scrollable .k-tabstrip-items
 {
     padding: 0.3em 0.3em 0;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.k-tabstrip > .k-button
+{
+    position: absolute;
+    top: .4em;
+    z-index: 2;
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.k-tabstrip-bottom > .k-button
+{
+    top: auto;
+    bottom: .4em;
+}
+
+.k-tabstrip-prev
+{
+    left: .4em;
+}
+
+.k-tabstrip-next
+{
+    right: .4em;
 }
 
 .k-tabstrip-items .k-item,
@@ -109,6 +140,7 @@
 .k-tabstrip > .k-content
 {
     display: none;
+    overflow: auto;
 }
 
 .k-tabstrip > .k-content.km-scroll-wrapper

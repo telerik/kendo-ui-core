@@ -158,6 +158,10 @@ var __meta__ = {
         tabs.filter(":last-child").addClass(LAST);
     }
 
+    function scrollButtonHtml(buttonClass, iconClass) {
+        return "<span class='k-button k-button-icon k-button-bare k-tabstrip-" + buttonClass + "' unselectable='on'><span class='k-icon " + iconClass + "'></span></span>";
+    }
+
     var TabStrip = Widget.extend({
         init: function(element, options) {
             var that = this;
@@ -183,6 +187,8 @@ var __meta__ = {
             }
 
             that._tabPosition();
+
+            that._scrollable();
 
             if (that.options.contentUrls) {
                 that.wrapper.find(".k-tabstrip-items > .k-item")
@@ -241,7 +247,7 @@ var __meta__ = {
             kendo.notify(that);
         },
 
-        _active: function() {
+        _active: function () {
             var item = this.tabGroup.children().filter("." + ACTIVESTATE);
 
             item = item[0] ? item : this._endItem("first");
@@ -279,7 +285,7 @@ var __meta__ = {
             return item;
         },
 
-        _current: function(candidate) {
+        _current: function (candidate) {
             var that = this,
                 focused = that._focused,
                 id = that._ariaId;
@@ -307,6 +313,21 @@ var __meta__ = {
                 if (id) {
                     candidate.attr("id", id);
                     that.element.attr("aria-activedescendant", id);
+                }
+
+                if (that._scrollableMode()) {
+                    var tabGroup = that.tabGroup;
+                    var currentScrollOffset = tabGroup.scrollLeft();
+                    var itemWidth = candidate.outerWidth();
+                    var itemOffset = candidate.position().left - tabGroup.children().first().position().left;
+                    var tabGroupWidth = tabGroup[0].offsetWidth;
+                    var tabGroupPadding = Math.ceil(parseFloat(tabGroup.css("padding-left")));
+
+                    if (currentScrollOffset + tabGroupWidth < itemOffset + itemWidth) {
+                        that._scrollTabsToPosition(itemOffset + itemWidth - tabGroupWidth + tabGroupPadding * 2);
+                    } else if (currentScrollOffset > itemOffset) {
+                        that._scrollTabsToPosition(itemOffset - tabGroupPadding);
+                    }
                 }
             }
 
@@ -517,7 +538,10 @@ var __meta__ = {
             },
             collapsible: false,
             navigatable: true,
-            contentUrls: false
+            contentUrls: false,
+            scrollable: {
+                distance: 200
+            }
         },
 
         destroy: function() {
@@ -938,6 +962,73 @@ var __meta__ = {
             }
 
             return prevent;
+        },
+        
+        _scrollable: function() {
+            var that = this,
+                options = that.options;
+
+            if (that._scrollableMode()) {
+
+                that.wrapper.addClass("k-tabstrip-scrollable");
+
+                if (that.tabGroup[0].scrollWidth > that.wrapper[0].offsetWidth) {
+                    that._nowScrollingTabs = false;
+
+                    that.wrapper.append(scrollButtonHtml("prev", "k-i-arrow-w") + scrollButtonHtml("next", "k-i-arrow-e"));
+
+                    var scrollPrevButton = that.wrapper.children(".k-tabstrip-prev");
+                    var scrollNextButton = that.wrapper.children(".k-tabstrip-next");
+
+                    that.tabGroup.css({ marginLeft: scrollPrevButton.outerWidth() + 9, marginRight: scrollNextButton.outerWidth() + 12 });
+
+                    scrollPrevButton.mousedown(function () {
+                        that._nowScrollingTabs = true;
+                        that._scrollTabsByDelta(-options.scrollable.distance);
+                    });
+
+                    scrollNextButton.mousedown(function () {
+                        that._nowScrollingTabs = true;
+                        that._scrollTabsByDelta(options.scrollable.distance);
+                    });
+
+                    scrollPrevButton.add(scrollNextButton).mouseup(function () {
+                        that._nowScrollingTabs = false;
+                    });
+                }
+            }
+        },
+
+        _scrollableMode: function() {
+            var options = this.options;
+            return options.scrollable && !isNaN(options.scrollable.distance) && (options.tabPosition == "top" || options.tabPosition == "bottom");
+        },
+
+        _scrollTabsToPosition: function (position) {
+            var that = this;
+            this.tabGroup.finish().animate({ "scrollLeft": position }, "fast", "linear", function () {
+                that._toggleScrollButtons();
+            });
+        },
+
+        _scrollTabsByDelta: function (delta) {
+            var that = this;
+            var tabGroup = that.tabGroup;
+            var scrLeft = tabGroup.scrollLeft();
+
+            tabGroup.finish().animate({ "scrollLeft": scrLeft + delta }, "fast", "linear", function () {
+                if (that._nowScrollingTabs) {
+                    that._scrollTabsByDelta(delta);
+                } else {
+                    that._toggleScrollButtons();
+                }
+            });
+        },
+
+        _toggleScrollButtons: function () {
+            var that = this;
+            that.wrapper.children(".k-tabstrip-prev").toggle(that.tabGroup.scrollLeft() !== 0);
+            that.wrapper.children(".k-tabstrip-next").toggle(that.tabGroup.scrollLeft() !== that.tabGroup[0].scrollWidth - that.tabGroup[0].offsetWidth);
         },
 
         deactivateTab: function (item) {
