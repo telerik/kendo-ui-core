@@ -3172,7 +3172,7 @@ The grouping configuration. Accepts the same values as the [group](#configuratio
 
 ### hasChanges `Boolean`
 
-Cheks if the data itams have changed.
+Checks if the data items have changed.
 
 #### Returns
 
