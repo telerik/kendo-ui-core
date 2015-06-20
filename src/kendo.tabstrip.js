@@ -316,18 +316,7 @@ var __meta__ = {
                 }
 
                 if (that._scrollableMode()) {
-                    var tabGroup = that.tabGroup;
-                    var currentScrollOffset = tabGroup.scrollLeft();
-                    var itemWidth = candidate.outerWidth();
-                    var itemOffset = candidate.position().left - tabGroup.children().first().position().left;
-                    var tabGroupWidth = tabGroup[0].offsetWidth;
-                    var tabGroupPadding = Math.ceil(parseFloat(tabGroup.css("padding-left")));
-
-                    if (currentScrollOffset + tabGroupWidth < itemOffset + itemWidth) {
-                        that._scrollTabsToPosition(itemOffset + itemWidth - tabGroupWidth + tabGroupPadding * 2);
-                    } else if (currentScrollOffset > itemOffset) {
-                        that._scrollTabsToPosition(itemOffset - tabGroupPadding);
-                    }
+                    that._scrollTabsToItem(candidate);
                 }
             }
 
@@ -1004,9 +993,23 @@ var __meta__ = {
             return options.scrollable && !isNaN(options.scrollable.distance) && (options.tabPosition == "top" || options.tabPosition == "bottom");
         },
 
-        _scrollTabsToPosition: function (position) {
-            var that = this;
-            this.tabGroup.finish().animate({ "scrollLeft": position }, "fast", "linear", function () {
+        _scrollTabsToItem: function (item) {
+            var that = this,
+                tabGroup = that.tabGroup,
+                currentScrollOffset = tabGroup.scrollLeft(),
+                itemWidth = item.outerWidth(),
+                itemOffset = item.position().left - tabGroup.children().first().position().left,
+                tabGroupWidth = tabGroup[0].offsetWidth,
+                tabGroupPadding = Math.ceil(parseFloat(tabGroup.css("padding-left"))),
+                itemPosition;
+
+            if (currentScrollOffset + tabGroupWidth < itemOffset + itemWidth) {
+                itemPosition = itemOffset + itemWidth - tabGroupWidth + tabGroupPadding * 2;
+            } else if (currentScrollOffset > itemOffset) {
+                itemPosition = itemOffset - tabGroupPadding;
+            }
+
+            tabGroup.finish().animate({ "scrollLeft": itemPosition }, "fast", "linear", function () {
                 that._toggleScrollButtons();
             });
         },
