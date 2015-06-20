@@ -304,10 +304,6 @@ var __meta__ = {
             if (candidate) {
                 if (!candidate.hasClass(ACTIVESTATE)) {
                     candidate.addClass(FOCUSEDSTATE);
-                } else {
-                    if (that._scrollableModeActive) {
-                        that._scrollTabsToItem(candidate);
-                    }
                 }
 
                 that.element.removeAttr("aria-activedescendant");
@@ -999,6 +995,8 @@ var __meta__ = {
                     });
 
                     that._scrollableModeActive = true;
+
+                    that._toggleScrollButtons();
                 } else if (that._scrollableModeActive && tabGroupScrollWidth <= wrapperOffsetWidth) {
                     that._scrollableModeActive = false;
 
@@ -1050,9 +1048,6 @@ var __meta__ = {
         },
 
         _toggleScrollButtons: function () {
-            if (kendo.support.browser.msie) {
-                return;
-            }
             var that = this,
                 ul = that.tabGroup,
                 scrollLeft = ul.scrollLeft();
@@ -1131,6 +1126,10 @@ var __meta__ = {
 
                 that.trigger("change");
 
+                if (that._scrollableModeActive) {
+                    that._scrollTabsToItem(item);
+                }
+
                 return false;
             }
 
@@ -1206,6 +1205,11 @@ var __meta__ = {
                             that.trigger("change");
                         });
                     }
+
+                    if (that._scrollableModeActive) {
+                        that._scrollTabsToItem(item);
+                    }
+
                 };
 
             visibleContents
