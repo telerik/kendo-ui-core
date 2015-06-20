@@ -3,8 +3,8 @@
 
 /* NavBar */
 .km-nova .km-navbar .km-no-title {
-    padding-top: .5rem;
-    padding-bottom: .5rem;
+    padding-top: .35rem;
+    padding-bottom: .35rem;
 }
 
 .km-nova .km-view-title,
@@ -56,10 +56,10 @@
 }
 
 .km-nova .km-no-title .km-buttongroup {
-    margin-top: -0.5rem;
-    margin-bottom: -0.5rem;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
+    margin-top: -0.35rem;
+    margin-bottom: -0.35rem;
+    padding-top: 0.35rem;
+    padding-bottom: 0.35rem;
     border-radius: 0;
     top: auto;
 }
@@ -75,6 +75,20 @@
     font-size: 1.2em;
     line-height: 2.05em;
     padding: 0 .9em 0 .8em;
+    border-width: 1px 0 1px 1px;
+    border-style: solid;
+}
+
+.km-nova .km-navbar .km-no-title .km-buttongroup > *:first-child {
+    border-radius: 4px 0 0 4px;
+}
+
+.km-nova .km-navbar .km-no-title .km-buttongroup .km-button:last-child {
+    border-right-width: 1px;
+}
+
+.km-nova .km-navbar .km-no-title .km-buttongroup > *:last-child {
+    border-radius: 0 4px 4px 0;
 }
 
 .km-nova .km-leftitem {
