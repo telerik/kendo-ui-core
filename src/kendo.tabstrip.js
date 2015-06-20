@@ -304,6 +304,10 @@ var __meta__ = {
             if (candidate) {
                 if (!candidate.hasClass(ACTIVESTATE)) {
                     candidate.addClass(FOCUSEDSTATE);
+                } else {
+                    if (that._scrollableModeActive) {
+                        that._scrollTabsToItem(candidate);
+                    }
                 }
 
                 that.element.removeAttr("aria-activedescendant");
@@ -313,10 +317,6 @@ var __meta__ = {
                 if (id) {
                     candidate.attr("id", id);
                     that.element.attr("aria-activedescendant", id);
-                }
-
-                if (that._scrollableMode()) {
-                    that._scrollTabsToItem(candidate);
                 }
             }
 
@@ -544,6 +544,11 @@ var __meta__ = {
 
             that.wrapper.off(NS);
             that.wrapper.children(".k-tabstrip-items").off(NS);
+
+            if (that._scrollableModeActive) {
+                that._scrollPrevButton.off().remove();
+                that._scrollNextButton.off().remove();
+            }
 
             that.scrollWrap.children(".k-tabstrip").unwrap();
 
@@ -895,6 +900,7 @@ var __meta__ = {
 
         _resize: function() {
             this._setContentElementsDimensions();
+            this._scrollable();
         },
 
         _sizeScrollWrap: function (element) {
@@ -955,40 +961,55 @@ var __meta__ = {
         
         _scrollable: function() {
             var that = this,
-                options = that.options;
+                options = that.options,
+                wrapperOffsetWidth,
+                tabGroupScrollWidth,
+                scrollPrevButton,
+                scrollNextButton;
 
-            if (that._scrollableMode()) {
+            if (that._scrollableAllowed()) {
 
                 that.wrapper.addClass("k-tabstrip-scrollable");
 
-                if (that.tabGroup[0].scrollWidth > that.wrapper[0].offsetWidth) {
+                wrapperOffsetWidth = that.wrapper[0].offsetWidth;
+                tabGroupScrollWidth = that.tabGroup[0].scrollWidth;
+
+                if (tabGroupScrollWidth > wrapperOffsetWidth && !that._scrollableModeActive) {
                     that._nowScrollingTabs = false;
 
                     that.wrapper.append(scrollButtonHtml("prev", "k-i-arrow-w") + scrollButtonHtml("next", "k-i-arrow-e"));
 
-                    var scrollPrevButton = that.wrapper.children(".k-tabstrip-prev");
-                    var scrollNextButton = that.wrapper.children(".k-tabstrip-next");
+                    scrollPrevButton = that._scrollPrevButton = that.wrapper.children(".k-tabstrip-prev");
+                    scrollNextButton = that._scrollNextButton = that.wrapper.children(".k-tabstrip-next");
 
                     that.tabGroup.css({ marginLeft: scrollPrevButton.outerWidth() + 9, marginRight: scrollNextButton.outerWidth() + 12 });
 
-                    scrollPrevButton.mousedown(function () {
+                    scrollPrevButton.on("mousedown" + NS, function () {
                         that._nowScrollingTabs = true;
                         that._scrollTabsByDelta(-options.scrollable.distance);
                     });
 
-                    scrollNextButton.mousedown(function () {
+                    scrollNextButton.on("mousedown" + NS, function () {
                         that._nowScrollingTabs = true;
                         that._scrollTabsByDelta(options.scrollable.distance);
                     });
 
-                    scrollPrevButton.add(scrollNextButton).mouseup(function () {
+                    scrollPrevButton.add(scrollNextButton).on("mouseup" + NS, function () {
                         that._nowScrollingTabs = false;
                     });
+
+                    that._scrollableModeActive = true;
+                } else if (that._scrollableModeActive && tabGroupScrollWidth <= wrapperOffsetWidth) {
+                    that._scrollableModeActive = false;
+
+                    that._scrollPrevButton.off().remove();
+                    that._scrollNextButton.off().remove();
+                    that.tabGroup.css({ marginLeft: "", marginRight: "" });
                 }
             }
         },
 
-        _scrollableMode: function() {
+        _scrollableAllowed: function() {
             var options = this.options;
             return options.scrollable && !isNaN(options.scrollable.distance) && (options.tabPosition == "top" || options.tabPosition == "bottom");
         },
@@ -1029,12 +1050,15 @@ var __meta__ = {
         },
 
         _toggleScrollButtons: function () {
+            if (kendo.support.browser.msie) {
+                return;
+            }
             var that = this,
                 ul = that.tabGroup,
                 scrollLeft = ul.scrollLeft();
 
-            that.wrapper.children(".k-tabstrip-prev").toggle(scrollLeft !== 0);
-            that.wrapper.children(".k-tabstrip-next").toggle(scrollLeft < ul[0].scrollWidth - ul[0].offsetWidth - 1);
+            that._scrollPrevButton.toggle(scrollLeft !== 0);
+            that._scrollNextButton.toggle(scrollLeft < ul[0].scrollWidth - ul[0].offsetWidth - 1);
         },
 
         deactivateTab: function (item) {
