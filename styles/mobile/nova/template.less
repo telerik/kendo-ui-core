@@ -334,6 +334,17 @@
     color: hsv(hsvHue(@base) , hsvSaturation(@base), hsvValue(@base) - 10);
 }
 
+/* Filter box */
+.km-nova .km-filter-wrap {
+    background: @base;
+    color: @normal-text-color;
+}
+
+.km-nova .km-filter-wrap:before,
+.km-nova .km-filter-wrap .km-clear {
+    color: lighten(@selected-text-color, 25%);
+}
+
 /* Slider */
 .km-nova .k-slider .k-slider-track {
     background-color: hsv(hsvHue(@base) , hsvSaturation(@base), hsvValue(@base) - 10);
@@ -474,7 +485,7 @@
 
 .km-nova .km-collapsible-header .km-icon,
 .km-nova .km-expanded .km-collapsible-header .km-icon {
-    color: darken(@base, 8%);
+    color: lighten(@selected-text-color, 25%);
 }
 
 /* Loader & Pull-to-refresh */
