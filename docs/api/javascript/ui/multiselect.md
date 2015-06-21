@@ -442,6 +442,30 @@ The hint displayed by the widget when it is empty. Not set by default.
     $("#multiselect").kendoMultiSelect();
     </script>
 
+### popup `Object`
+
+The options that will be used for the popup initialization. For more details about the available options
+refer to [Popup](/api/javascript/ui/popup) documentation.
+
+#### Example - append the popup to a specific element
+
+    <div id="container">
+        <select id="multiselect"></select>
+    </div>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      dataValueField: "id",
+      popup: {
+        appendTo: $("#container")
+      }
+    });
+    </script>
+
 ### headerTemplate `String|Function`
 
 Specifies a static HTML content, which will be rendered as a header of the popup element.

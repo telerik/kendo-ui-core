@@ -442,6 +442,31 @@ The hint displayed by the widget when it is empty. Not set by default.
     });
     </script>
 
+### popup `Object`
+
+The options that will be used for the popup initialization. For more details about the available options
+refer to [Popup](/api/javascript/ui/popup) documentation.
+
+#### Example - append the popup to a specific element
+
+    <div id="container">
+        <input id="combobox" />
+    </div>
+    <script>
+    $("#combobox").kendoCombobox({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      dataValueField: "id",
+      popup: {
+        appendTo: $("#container")
+      }
+    });
+    </script>
+
+
 ### suggest `Boolean`*(default: false)*
 
 If set to `true` the widget will automatically use the first suggestion as its value.

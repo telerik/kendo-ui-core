@@ -325,6 +325,29 @@ The Kendo UI AutoComplete widget could also use the value of the `placeholder` H
     $("#autocomplete").kendoAutoComplete();
     </script>
 
+### popup `Object`
+
+The options that will be used for the popup initialization. For more details about the available options
+refer to [Popup](/api/javascript/ui/popup) documentation.
+
+#### Example - append the popup to a specific element
+
+    <div id="container">
+        <input id="autocomplete" />
+    </div>
+    <script>
+    $("#autocomplete").kendoAutoComplete({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      popup: {
+        appendTo: $("#container")
+      }
+    });
+    </script>
+
 ### separator `String` *(default: "")*
 
 The character used to separate multiple values. Empty by default.

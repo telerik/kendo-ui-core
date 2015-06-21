@@ -175,7 +175,7 @@ shows the decades from the century
 
 #### Example - set navigation depth of the calendar popup
 
-    <div id="datepicker"></div>
+    <input id="datepicker"/>
     <script>
     $("#datepicker").kendoDatePicker({
         depth: "year"

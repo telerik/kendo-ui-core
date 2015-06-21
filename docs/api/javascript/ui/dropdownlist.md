@@ -409,6 +409,31 @@ The minimum number of characters the user must type before a filter is performed
     });
     </script>
 
+### popup `Object`
+
+The options that will be used for the popup initialization. For more details about the available options
+refer to [Popup](/api/javascript/ui/popup) documentation.
+
+#### Example - append the popup to a specific element
+
+    <div id="container">
+        <input id="dropdownlist" />
+    </div>
+    <script>
+    $("#dropdownlist").kendoDropDownList({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      dataValueField: "id",
+      popup: {
+        appendTo: $("#container")
+      }
+    });
+    </script>
+
+
 ### optionLabel `String | Object`*(default: "")*
 
  Define the text of the default empty item. If the value is an object, then the widget will use it as a valid data item.

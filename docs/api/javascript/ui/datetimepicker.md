@@ -164,7 +164,7 @@ settings are available for the **depth** value:
 
 #### Example - set navigation depth of the calendar popup
 
-    <div id="datetimepicker"></div>
+    <input id="datetimepicker"/>
     <script>
     $("#datetimepicker").kendoDateTimePicker({
         depth: "year"
