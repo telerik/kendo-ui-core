@@ -18,6 +18,11 @@
 
 @accentSecond: #00acc1;
 
+@error: #f44336;
+@warning: #f9a825;
+@success: #00c853;
+@info: #2196f3;
+
 .km-nova h1,
 .km-nova h2,
 .km-nova h3,
@@ -501,6 +506,26 @@
 .km-nova .km-detail .km-icon:after {
     color: @accent;
     background: @background;
+}
+
+.km-nova .km-list > li .km-style-default .km-icon:after {
+    color: @normal-text-color;
+}
+
+.km-nova .km-list > li .km-style-info .km-icon:after { 
+    color: @info;
+}
+
+.km-nova .km-list > li .km-style-success .km-icon:after { 
+    color: @success;
+}
+
+.km-nova .km-list > li .km-style-warning .km-icon:after { 
+    color: @warning;
+}
+
+.km-nova .km-list > li .km-style-error .km-icon:after {
+    color: @error;
 }
 
 .km-nova .km-badge {
