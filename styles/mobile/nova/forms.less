@@ -411,7 +411,7 @@
 }
 
 .km-nova input[type=checkbox].km-check:checked:after {
-   margin-left: -1px;
+    margin-left: -1px;
 }
 
 .km-nova input[type=radio].km-check:checked:after {
@@ -429,61 +429,81 @@
     opacity: 0;
     width: 0;
     margin: 0;
+    height: 0;
 }
 
 .km-nova .km-checkbox-label,
 .km-nova .km-radio-label {
-   display: block;
-   position: relative;
-   vertical-align: middle;
-   padding: 0 .7em;
-   font-size: 1.2em;
+    display: block;
+    position: relative;
+    vertical-align: middle;
+    font-size: 1.2em;
+    line-height: 1.5em;
+    padding-left: 2.5em;
+    margin-left: .89em;
+}
+
+.km-nova .km-checkbox-label:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1.613rem;
+    height: 1.613rem;
+    border-width: 0.133rem;
+    border-style: solid;
+    border-radius: 3px;
 }
 
 .km-nova .km-checkbox-label:after {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 1.882rem;
-  width: 1.613rem;
-  height: 1.613rem;
-  border-width: 2px;
-  border-style: solid;
-  border-radius: 3px;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1.613rem;
+    height: 1.613rem;
+    border-width: 0.133rem;
+    border-style: solid;
+    border-radius: 3px;
 }
 
 .km-nova input.km-checkbox:checked + .km-checkbox-label:after {
-  content: "\2713";
-  width: 1.613rem;
-  height: 1.613rem;
-  position: absolute;
-  top: 0;
-  right: 1.882rem;
-  text-align: center;
-  font-size: 1.2em;
+    content: "\e227";
+    font-size: 1.2em;
+    line-height: 1em;
+    font-family: "Kendo UI";  
 }
 
 //Radio buttons
-.km-nova .km-radio-label:after {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 1.882rem;
-  width: 1.613rem;
-  height: 1.613rem;
-  border-style: solid;
-  border-radius: 50%;
-  border-width: 2px;
+.km-nova .km-radio-label {
+    position: relative;
+    padding-left: 2.5em;
+    vertical-align: middle;
+    line-height: 1.5em;  
 }
 
-.km-nova input.km-radio:checked + .km-radio-label:before {
-  content: "";
-  width: 1.075rem;
-  height: 1.075rem;
-  position: absolute;
-  top: 0.403rem;
-  right: 2.285rem;
-  border-radius: 50%;
+.km-nova .km-radio-label:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1.6rem;
+    height: 1.6rem;
+    border-width: 0.133rem;
+    border-style: solid;
+    border-radius: 50%;
+}
+
+.km-nova input.km-radio:checked + .km-radio-label:after {
+    content: "";
+    width: 1.067rem;
+    height: 1.067rem;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    left: 0.365rem;
+    border-radius: 50%;
 }
 
 .km-nova .km-icon-label.k-i-arrow-e:before { content: "\E000"; }

@@ -418,12 +418,16 @@
     border-color: darken(@base, 8%);
 }
 
+.km-nova .km-checkbox-label:before {
+    border-color: transparent;
+}
+
 .km-nova .km-checkbox-label:after,
 .km-nova .km-radio-label:after {
     color: darken(@base, 8%);
 }
 
-.km-nova .km-radio:checked + .km-radio-label:before {
+.km-nova .km-radio:checked + .km-radio-label:after {
     background: @accent;
 }
 
