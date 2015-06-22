@@ -1739,6 +1739,62 @@ Defines the fill color of the shape.
 
 Defines the fill opacity of the shape.
 
+### shapeDefaults.fill.gradient `Object`
+
+Defines the gradient fill of the shape.
+
+### shapeDefaults.fill.gradient.type `String` *(default: "linear")*
+The type of the gradient. Supported values are:
+
+* linear
+* radial
+
+Note that support for radial gradients in VML (IE8 and below) is limited.
+Not all configurations are guaranteed to work.
+
+### shapeDefaults.fill.gradient.center `Array`
+The center of the radial gradient.
+
+Coordinates are relative to the shape bounding box.
+For example [0, 0] is top left and [1, 1] is bottom right.
+
+### shapeDefaults.fill.gradient.radius `Number` *(default: 1)*
+The radius of the radial gradient relative to the shape bounding box.
+
+### shapeDefaults.fill.gradient.start `Array`
+The start point of the linear gradient.
+
+Coordinates are relative to the shape bounding box.
+For example [0, 0] is top left and [1, 1] is bottom right.
+
+### shapeDefaults.fill.gradient.end `Array`
+The end point of the linear gradient.
+
+Coordinates are relative to the shape bounding box.
+For example [0, 0] is top left and [1, 1] is bottom right.
+
+### shapeDefaults.fill.gradient.stops `Array`
+The array of gradient color stops.
+
+### shapeDefaults.fill.gradient.stops.offset `Number`
+The stop offset from the start of the element.
+Ranges from 0 (start of gradient) to 1 (end of gradient).
+
+### shapeDefaults.fill.gradient.stops.color `String`
+The color in any of the following formats.
+
+| Format         | Description
+| ---            | --- | ---
+| red            | [Basic](http://www.w3.org/TR/css3-color/#html4) or [Extended](http://www.w3.org/TR/css3-color/#svg-color) CSS Color name
+| #ff0000        | Hex RGB value
+| rgb(255, 0, 0) | RGB value
+
+Specifying 'none', 'transparent' or '' (empty string) will clear the fill.
+
+### shapeDefaults.fill.gradient.stops.opacity `Number`
+The fill opacity.
+Ranges from 0 (completely transparent) to 1 (completely opaque).
+
 ### shapeDefaults.height `Number` *(default: 100)*
 
 Defines the height of the shape when added to the diagram.
@@ -1978,6 +2034,62 @@ Defines the fill color of the shape.
 ### shapes.fill.opacity `Number` *(default: 1)*
 
 Defines the fill opacity of the shape.
+
+### shapes.fill.gradient `Object`
+
+Defines the gradient fill of the shape.
+
+### shapes.fill.gradient.type `String` *(default: "linear")*
+The type of the gradient. Supported values are:
+
+* linear
+* radial
+
+Note that support for radial gradients in VML (IE8 and below) is limited.
+Not all configurations are guaranteed to work.
+
+### shapes.fill.gradient.center `Array`
+The center of the radial gradient.
+
+Coordinates are relative to the shape bounding box.
+For example [0, 0] is top left and [1, 1] is bottom right.
+
+### shapes.fill.gradient.radius `Number` *(default: 1)*
+The radius of the radial gradient relative to the shape bounding box.
+
+### shapes.fill.gradient.start `Array`
+The start point of the linear gradient.
+
+Coordinates are relative to the shape bounding box.
+For example [0, 0] is top left and [1, 1] is bottom right.
+
+### shapes.fill.gradient.end `Array`
+The end point of the linear gradient.
+
+Coordinates are relative to the shape bounding box.
+For example [0, 0] is top left and [1, 1] is bottom right.
+
+### shapes.fill.gradient.stops `Array`
+The array of gradient color stops.
+
+### shapes.fill.gradient.stops.offset `Number`
+The stop offset from the start of the element.
+Ranges from 0 (start of gradient) to 1 (end of gradient).
+
+### shapes.fill.gradient.stops.color `String`
+The color in any of the following formats.
+
+| Format         | Description
+| ---            | --- | ---
+| red            | [Basic](http://www.w3.org/TR/css3-color/#html4) or [Extended](http://www.w3.org/TR/css3-color/#svg-color) CSS Color name
+| #ff0000        | Hex RGB value
+| rgb(255, 0, 0) | RGB value
+
+Specifying 'none', 'transparent' or '' (empty string) will clear the fill.
+
+### shapes.fill.gradient.stops.opacity `Number`
+The fill opacity.
+Ranges from 0 (completely transparent) to 1 (completely opaque).
 
 ### shapes.height `Number` *(default: 100)*
 
