@@ -54,6 +54,30 @@
         equal(dataSource.at(0).foo, "bar");
     });
 
+    test("deleted items are synced correctly when online", function() {
+        var dataSource = new DataSource({
+            offlineStorage: "key",
+            schema: {
+                model: {
+                    id: "foo",
+                    fields: {}
+                }
+            },
+            data: [
+                { id: 1, foo: "foo" }
+            ]
+        });
+
+        dataSource.read();
+        dataSource.online(false);
+        dataSource.remove(dataSource.at(0));
+        dataSource.sync();
+        dataSource.read();
+        dataSource.read();
+
+        equal(dataSource._destroyed.length, 1);
+    });
+
     test("replaced data is stored offline", function() {
         var dataSource = new DataSource({
             offlineStorage: "key"
