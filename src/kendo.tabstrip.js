@@ -972,6 +972,7 @@ var __meta__ = {
 
                 if (tabGroupScrollWidth > wrapperOffsetWidth && !that._scrollableModeActive) {
                     that._nowScrollingTabs = false;
+                    that._isRtl = kendo.support.isRtl(that.element);
 
                     that.wrapper.append(scrollButtonHtml("prev", "k-i-arrow-w") + scrollButtonHtml("next", "k-i-arrow-e"));
 
@@ -982,12 +983,12 @@ var __meta__ = {
 
                     scrollPrevButton.on("mousedown" + NS, function () {
                         that._nowScrollingTabs = true;
-                        that._scrollTabsByDelta(-options.scrollable.distance);
+                        that._scrollTabsByDelta(options.scrollable.distance * (that._isRtl ? 1 : -1));
                     });
 
                     scrollNextButton.on("mousedown" + NS, function () {
                         that._nowScrollingTabs = true;
-                        that._scrollTabsByDelta(options.scrollable.distance);
+                        that._scrollTabsByDelta(options.scrollable.distance * (that._isRtl ? -1 : 1));
                     });
 
                     scrollPrevButton.add(scrollNextButton).on("mouseup" + NS, function () {
@@ -1017,15 +1018,23 @@ var __meta__ = {
                 tabGroup = that.tabGroup,
                 currentScrollOffset = tabGroup.scrollLeft(),
                 itemWidth = item.outerWidth(),
-                itemOffset = item.position().left - tabGroup.children().first().position().left,
+                itemOffset = that._isRtl ? item.position().left : item.position().left - tabGroup.children().first().position().left,
                 tabGroupWidth = tabGroup[0].offsetWidth,
                 tabGroupPadding = Math.ceil(parseFloat(tabGroup.css("padding-left"))),
                 itemPosition;
 
-            if (currentScrollOffset + tabGroupWidth < itemOffset + itemWidth) {
-                itemPosition = itemOffset + itemWidth - tabGroupWidth + tabGroupPadding * 2;
-            } else if (currentScrollOffset > itemOffset) {
-                itemPosition = itemOffset - tabGroupPadding;
+            if (that._isRtl) {
+                if (itemOffset < 0) {
+                    itemPosition = currentScrollOffset + itemOffset - (tabGroupWidth - currentScrollOffset) - tabGroupPadding;
+                } else if (itemOffset + itemWidth > tabGroupWidth) {
+                    itemPosition = currentScrollOffset + itemOffset - itemWidth + tabGroupPadding * 2;
+                }
+            } else {
+                if (currentScrollOffset + tabGroupWidth < itemOffset + itemWidth) {
+                    itemPosition = itemOffset + itemWidth - tabGroupWidth + tabGroupPadding * 2;
+                } else if (currentScrollOffset > itemOffset) {
+                    itemPosition = itemOffset - tabGroupPadding;
+                }
             }
 
             tabGroup.finish().animate({ "scrollLeft": itemPosition }, "fast", "linear", function () {
@@ -1052,8 +1061,8 @@ var __meta__ = {
                 ul = that.tabGroup,
                 scrollLeft = ul.scrollLeft();
 
-            that._scrollPrevButton.toggle(scrollLeft !== 0);
-            that._scrollNextButton.toggle(scrollLeft < ul[0].scrollWidth - ul[0].offsetWidth - 1);
+            that._scrollPrevButton.toggle(that._isRtl ? scrollLeft < ul[0].scrollWidth - ul[0].offsetWidth - 1 : scrollLeft !== 0);
+            that._scrollNextButton.toggle(that._isRtl ? scrollLeft !== 0 : scrollLeft < ul[0].scrollWidth - ul[0].offsetWidth - 1);
         },
 
         deactivateTab: function (item) {

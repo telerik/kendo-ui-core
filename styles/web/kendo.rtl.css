@@ -868,6 +868,18 @@
     margin: -3px -6px 0 3px;
 }
 
+.k-rtl .k-tabstrip-prev
+{
+    left: auto;
+    right: .4em;
+}
+
+.k-rtl .k-tabstrip-next
+{
+    right: auto;
+    left: .4em;
+}
+
 /* ToolBar */
 
 .k-rtl .k-overflow-anchor
