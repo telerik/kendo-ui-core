@@ -187,6 +187,10 @@
 }
 
 /* ButtonGroup */
+.km-nova .km-buttongroup .km-button {
+    border-color: darken(@selected-background, 33%);
+}
+
 .km-nova .km-buttongroup .km-state-active {
     color: @background;
     background-color: darken(@selected-background, 33%);
@@ -353,15 +357,18 @@
 /* Slider */
 .km-nova .k-slider .k-slider-track {
     background-color: hsv(hsvHue(@base) , hsvSaturation(@base), hsvValue(@base) - 10);
+    .box-shadow(none);
 }
 
 .km-nova .k-slider-selection {
     background-color: @accent;
+    .box-shadow(none);
 }
 
 .km-nova .k-slider .k-draghandle,
 .km-nova .k-slider .k-draghandle:hover {
     background-color: @background;
+    .box-shadow(0 0.202rem 0.403rem 0 rgba(0, 0, 0, 0.3));
 }
 
 /* Switch */
