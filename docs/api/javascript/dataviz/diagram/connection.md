@@ -216,6 +216,10 @@ Sets the Y coordinate of the point.
 
 Specifies if the connection can be selected.
 
+### type `String`
+
+Specifies the connection type. The supported values are `"polyline"` and `"cascading"`.
+
 ## Methods
 
 ### source

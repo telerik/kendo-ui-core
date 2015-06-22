@@ -325,6 +325,10 @@ Defines the stroke or line color of the connection.
 
 Defines the stroke width of the connection.
 
+### connectionDefaults.type `String` *(default: "cascading")*
+
+Specifies the connections type. The supported values are `"polyline"` and `"cascading"`.
+
 ### connections `Array`
 
 Defines the connections configuration.
@@ -618,6 +622,10 @@ Defines the point x value.
 ### connections.to.y `Number`
 
 Defines the point y value.
+
+### connections.type `String`
+
+Specifies the connection type. The supported values are `"polyline"` and `"cascading"`.
 
 ### connectionsDataSource `Object|Array|kendo.data.DataSource`
 
