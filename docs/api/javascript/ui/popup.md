@@ -97,7 +97,7 @@ The effect(s) to use when playing the open animation. Multiple effects should be
 
 The duration of the open animation in milliseconds.
 
-### anchor `jQuery`
+### anchor `String|jQuery`
 
 Specifies the element that will be used as an anchor. The widget will open next to that element.
 
@@ -112,7 +112,7 @@ Specifies the element that will be used as an anchor. The widget will open next 
         });
     </script>
 
-### appendTo `jQuery`*(default: document.body)*
+### appendTo `String|jQuery`*(default: document.body)*
 
 Which element the popup will be appended to.
 
