@@ -98,6 +98,14 @@ The static text displayed on the connection.
 
 Defines the editing behavior of the connections.
 
+### connectionDefaults.editable.drag `Boolean` *(default: true)*
+
+Specifies if the connections can be dragged.
+
+### connectionDefaults.editable.remove `Boolean` *(default: true)*
+
+Specifies if the connections can be removed.
+
 ### connectionDefaults.editable.tools `Array`
 
 Specifies the the toolbar tools. Predefined tools are:
@@ -783,6 +791,22 @@ These can be edited by setting a Kendo template and a diagram configuration as f
     </script>
 
 See also the Kendo data-bound sample for a similar example.
+
+### editable.drag `Boolean|Object` *(default: true)*
+
+Specifies if the shapes and connections can be dragged.
+
+### editable.drag.snap `Boolean|Object` *(default: true)*
+
+Specifies the shapes drag snap options.
+
+### editable.drag.snap.size `Number` *(default: 10)*
+
+Specifies the shapes drag snap size.
+
+### editable.remove `Boolean` *(default: true)*
+
+Specifies if the shapes and connections can be removed.
 
 ### editable.resize `Boolean|Object` *(default: true)*
 
@@ -1677,6 +1701,14 @@ Defines the shape editable options.
 ### shapeDefaults.editable.connect `Boolean` *(default: true)*
 
 Specifies whether the connectors should appear on hover.
+
+### shapeDefaults.editable.drag `Boolean` *(default: true)*
+
+Specifies if the shapes can be dragged.
+
+### shapeDefaults.editable.remove `Boolean` *(default: true)*
+
+Specifies if the shapes can be removed.
 
 ### shapeDefaults.editable.tools `Array`
 
