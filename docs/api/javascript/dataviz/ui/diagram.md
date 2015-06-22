@@ -2981,6 +2981,68 @@ The event handler function context (available via the `this` keyword) will be se
 
 ##### e.sender `kendo.ui.Diagram`
 
+### drag
+
+Fired when dragging shapes or connection.
+
+#### Event Data
+
+##### e.connections `Array`
+
+An array with the dragged connection.
+
+##### e.shapes `Array`
+
+An array with the dragged shapes.
+
+##### e.sender `kendo.ui.Diagram`
+
+The widget instance which fired the event.
+
+### dragEnd
+
+Fired after finishing dragging shapes or connection.
+
+#### Event Data
+
+##### e.connections `Array`
+
+An array with the dragged connection.
+
+##### e.shapes `Array`
+
+An array with the dragged shapes.
+
+##### e.sender `kendo.ui.Diagram`
+
+The widget instance which fired the event.
+
+##### e.preventDefault `Function`
+
+A function that can be used prevent the default action. If invoked, the dragged elements will be returned to their original state.
+
+### dragStart
+
+Fired before starting dragging shapes or connection.
+
+#### Event Data
+
+##### e.connections `Array`
+
+An array with the dragged connection.
+
+##### e.shapes `Array`
+
+An array with the dragged shapes.
+
+##### e.sender `kendo.ui.Diagram`
+
+The widget instance which fired the event.
+
+##### e.preventDefault `Function`
+
+A function that can be used prevent the default action. If invoked, the element(s) will not be dragged.
+
 ### edit
 
 Fired when the user edits a shape or connection.
