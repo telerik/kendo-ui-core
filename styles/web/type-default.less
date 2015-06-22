@@ -18,7 +18,7 @@
 @button-background-color: saturate(@base, 1%);
 @group-background-color: contrast(@base, lighten(@background, 4%), darken(@background, 4%), 0.5);
 @group-border-color: contrast(@base, lighten(@base, 1%), darken(@base, 14%), 0.5);
-@content-background-color: saturate(@background, 22%);
+@content-background-color: @background;
 @hover-background-color: @hover-background;
 @hover-border-color: contrast(@base, lighten(@base, 1%), darken(@base, 20%), 0.5);
 @hover-shadow: none;
@@ -69,11 +69,11 @@
 @cell-border-color: contrast(@base, lighten(@base, 12%), darken(@base, 14%), 0.5);
 @column-highlight-background-color: contrast(@selected-background, lighten(@base, 6%), darken(@base, 3%), 0.5);
 @active-filter-background-color: desaturate(@background, 1%);
-@scheduler-background-color: saturate(@background, 28%);
+@scheduler-background-color: contrast(@normal-text-color, @background, darken(@background, 10%), 0.5);
 @current-time-color: darken(@error, 29%);
 @event-background-color: contrast(@selected-background, lighten(@hover-background, 10%), darken(@hover-background, 12%), 0.5);
 @event-text-color: @normal-text-color;
-@event-inverse-text-color: saturate(@background, 28%);
+@event-inverse-text-color: contrast(@normal-text-color, @background, darken(@background, 10%), 0.5);
 @scheduler-nonwork-background-color: contrast(@selected-background, lighten(@base, 3%), darken(@base, 5%), 0.5);
 @resize-background-color: contrast(@hover-background, lighten(@normal-text-color, 29%), darken(@normal-text-color, 1%), 0.5);
 @upload-progress-background-color: contrast(@base, lighten(@base, 23%), darken(@base, 1%), 0.5);
@@ -117,10 +117,10 @@
 @secondary-text-color: @normal-text-color;
 @numeric-selected-background: @accent;
 @panelbar-items-border: contrast(@base, lighten(@base, 1%), darken(@base, 14%), 0.5);
-@panelbar-content-background: saturate(@background, 22%);
+@panelbar-content-background: @background;
 @panelbar-content-color: @normal-text-color;
 @window-shadow-style: 1px 1px 7px 1px;
-@filter-menu-content-background: saturate(@background, 22%);
+@filter-menu-content-background: @background;
 @icon-background-color: transparent;
 @disabled-background-color: saturate(@base, 1%);
 @disabled-border-color: contrast(@base, lighten(@base, 1%), darken(@base, 14%), 0.5);
