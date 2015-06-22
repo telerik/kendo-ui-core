@@ -747,7 +747,7 @@ The aggregate results should have the following format:
       }
     }
 ```
-    
+
 #### Example - set aggregates as a string
 
     <script>
@@ -3068,7 +3068,7 @@ The filter configuration. Accepts the same values as the [filter](#configuration
     });
     var filter = dataSource.filter();
     console.log(filter.logic);  // displays "and"
-    console.log(filter.filters[0]); displays '{field: "name", operator: "startswith", value: "Jane"}'
+    console.log(filter.filters[0]); //displays '{field: "name", operator: "startswith", value: "Jane"}'
     </script>
 
 ### get
