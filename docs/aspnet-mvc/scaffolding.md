@@ -8,7 +8,7 @@ position: 0
 # Kendo UI Scaffolder Visual Studio extension
 
 Since the **Q1 2015** release, **Telerik UI for ASP.NET MVC** contains the **Kendo UI Scaffolder** extension. It 
-allows the developer to generate an MVC wrapper widget declarations together with the related Controller action methods. Currently only the Kendo UI Grid widget can be scaffolded. More widgets will be added in future releases.
+allows the developer to generate an MVC wrapper widget declarations together with the related Controller action methods. Currently the Kendo UI Grid and Chart widgets can be scaffolded. More widgets will be added in future releases.
 
 # Requirements and Supported Environments
 
@@ -33,7 +33,11 @@ Select the **Kendo UI Scaffolder** from the next menu:
 
 ![Kendo UI Scaffolder](/aspnet-mvc/images/scaffolding/kendo_ui_scaffolder.png)
 
-This will bring up the **Kendo UI Grid** scaffolding configuration panel. Detailed information about the possible configuration options could be found in the [scaffolding section of the Grid Helper documentation](/aspnet-mvc/helpers/grid/scaffolding). The Grid Controller will be generated in the currently selected location along with the corresponding view.
+This will bring up the **Kendo UI** scaffolding configuration panel to choose between Kendo UI Grid or Chart:
+
+![Kendo UI Scaffolder Widget Selection](/aspnet-mvc/images/scaffolding/widget_select.png)
+
+Detailed information about the possible configuration options could be found in the [scaffolding section of the Grid Helper documentation](/aspnet-mvc/helpers/grid/scaffolding) and [scaffolding section of the Chart Helper documentation](/aspnet-mvc/helpers/chart/scaffolding). The Controller will be generated in the currently selected location along with the corresponding view.
 
 # Troubleshooting
 
