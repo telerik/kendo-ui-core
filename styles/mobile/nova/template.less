@@ -372,6 +372,17 @@
 }
 
 /* Switch */
+.km-nova .km-switch-wrapper {
+    border-color: @accent;
+    background-color: @accent;
+}
+
+.km-nova .km-switch-off .km-switch-container {
+    .box-shadow(inset 0 0.202rem 0.403rem 0 darken(@base, 8%));
+    border-color: @base;
+    background-color: @base;
+}
+
 .km-nova span.km-switch {
     color: @accent;
 }
@@ -380,19 +391,15 @@
     color: @base;
 }
 
+.km-nova .km-switch-off .km-switch-wrapper {
+    background-color: @base;
+    border-color: @base;
+}
+
 .km-nova .km-switch-handle {
     background: @background;
     .box-shadow(0 0.202rem 0.403rem 0 rgba(0,0,0,.3));
     border-color: darken(@base, 8%);
-}
-
-.km-nova .km-switch-off .km-switch-container {
-    .box-shadow(inset 0 0.202rem 0.403rem 0 darken(@base, 8%));
-}
-
-.km-nova .km-switch-container,
-.km-nova .km-switch-wrapper {
-    border-color: currentcolor;
 }
 
 /* ScrollView */
