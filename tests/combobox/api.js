@@ -153,6 +153,20 @@ test("value('') clear selection", function() {
        ok(combobox.ul.children(":first").hasClass("k-state-selected"));
    });
 
+   test("value method does not add item with custom value 'null' (select)", function() {
+       select = $("<select><option value=1>foo1</option><option value=3>foo3</option></select>");
+
+       combobox = new ComboBox(select, {
+           dataTextField: "text",
+           dataValueField: "value"
+       });
+
+       combobox.value(null);
+
+       equal(combobox.selectedIndex, -1);
+       equal(combobox.value(), "");
+   });
+
    test("value method selects item when item field is string and value is number", function() {
        combobox = new ComboBox(input, {
            dataTextField: "text",

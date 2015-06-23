@@ -765,7 +765,7 @@ var __meta__ = {
                     idx = -1;
                 }
 
-                if (value !== "" && idx == -1) {
+                if (value !== null && value !== "" && idx == -1) {
                     this._custom(value);
                 } else {
                     if (value) {
