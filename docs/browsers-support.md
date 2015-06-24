@@ -13,9 +13,9 @@ position: 2
 | ---               | ---
 | Internet Explorer | 7 and later
 | Chrome            | 21 and later
-| Firefox           | 24 and later, [ESR](https://www.mozilla.org/en-US/firefox/organizations/faq/)
+| Firefox           | [current and ESR releases](https://en.wikipedia.org/wiki/History_of_Firefox#Release_history) ([What is ESR?](https://www.mozilla.org/en-US/firefox/organizations/faq/))
 | Opera             | 15 and later
-| OS X Safari       | 5 and later
+| OS X Safari       | [6.2.6 and later](https://en.wikipedia.org/wiki/Safari_version_history#Mac)
 
 ### Mobile widgets
 | Browser           | Supported versions
