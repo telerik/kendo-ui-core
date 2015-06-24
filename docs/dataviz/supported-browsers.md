@@ -12,11 +12,11 @@ The Data Visualization widgets are fully functional in the browsers listed below
 | ---               | ---
 | Internet Explorer | 9 and later
 | Chrome            | 21 and later
-| Firefox           | 24 and later, [ESR](https://www.mozilla.org/en-US/firefox/organizations/faq/)
+| Firefox           | [current and ESR releases](https://en.wikipedia.org/wiki/History_of_Firefox#Release_history) ([What is ESR?](https://www.mozilla.org/en-US/firefox/organizations/faq/))
 | Opera             | 15 and later
-| OS X Safari       | 5 and later
-| iOS Safari        | 4 and later
-| Chrome for Mobile | 4 and later
+| OS X Safari       | [6.2.6 and later](https://en.wikipedia.org/wiki/Safari_version_history#Mac)
+| iOS Safari        | iOS 8 and later
+| Chrome for Mobile | same as desktop Chrome
 
 # Browsers with Limited support
 
