@@ -288,7 +288,8 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "confirmation": "Sind Sie sicher, dass Sie diesen Datensatz löschen wollen?",
     "cancelDelete": "Abbrechen",
     "confirmDelete": "Löschen"
-  }
+  },
+  "noRecords": "Keine Aufzeichnungen zur Verfügung."
 });
 }
 
@@ -359,6 +360,7 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "cancel": "Abbrechen",
   "date": "Datum",
   "destroy": "Löschen",
+  "pdf": "Exportieren als PDF",
   "editable": {
     "confirmation": "Möchten Sie diesen Termin wirklich löschen?"
   },
@@ -367,6 +369,7 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "description": "Beschreibung",
     "editorTitle": "Termin",
     "end": "Beenden",
+    "timezoneTitle": "Zeitzone",
     "endTimezone": "Zeitzone Ende",
     "repeat": "Wiederholen",
     "separateTimezones": "Unterschiedliche Start- und Endzeitzonen benutzen",
@@ -397,11 +400,17 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "day": "Tag",
     "month": "Monat",
     "week": "Woche",
-    "workWeek": "Arbeitswoche"
+    "workWeek": "Arbeitswoche",
+    "timeline": "Zeitstrahl",
+    "timelineWeek": "Zeitstrahl Woche",
+    "timelineWorkWeek": "Zeitstrahl Arbeitswoche",
+    "timelineMonth": "Zeitstrahl Monat"
   },
   "deleteWindowTitle": "Termin löschen",
   "showFullDay": "Ganzen Tag anzeigen",
-  "showWorkDay": "Geschäftszeiten anzeigen"
+  "showWorkDay": "Geschäftszeiten anzeigen",
+  "ariaSlotLabel": "Ausgewählt von {0:t} bis {1:t}",
+  "ariaEventLabel": "{0} am {1:D} um {2:t}"
 });
 }
 

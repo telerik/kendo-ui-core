@@ -163,7 +163,8 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "confirmation": "Êtes-vous sûr de vouloir supprimer cet enregistrement?",
     "cancelDelete": "Annuler",
     "confirmDelete": "Effacer"
-  }
+  },
+  "noRecords": "Aucun enregistrement disponible."
 });
 }
 
@@ -215,6 +216,17 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "cancel": "Annuler",
   "operator": "Opérateur",
   "value": "Valeur"
+});
+}
+
+/* FilterMultiCheck messages */
+
+if (kendo.ui.FilterMultiCheck) {
+kendo.ui.FilterMultiCheck.prototype.options.messages =
+$.extend(true, kendo.ui.FilterMultiCheck.prototype.options.messages,{
+  "checkAll": "Choisir toutes",
+  "clear": "Effacer filtre",
+  "filter": "Filtrer"
 });
 }
 
