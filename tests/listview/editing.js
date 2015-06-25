@@ -232,6 +232,19 @@
         ok(listView.element.children().eq(0).data("kendoEditable"));
     });
 
+    test("save event is not triggerd if validation fails", 0, function() {
+        var listView = setup({ editTemplate: '<li><input data-value="foo" required/></li>' });
+
+        listView.edit(listView.element.children().eq(0));
+        listView.element.find(":input").val("");
+
+        listView.bind("save", function() {
+            ok(false);
+        });
+
+        listView.save();
+    });
+
     test("save calls DataSource sync", function() {
         var listView = setup({ editTemplate: '<li><input data-value="foo"/></li>' }),
         sync = stub(dataSource, "sync");
