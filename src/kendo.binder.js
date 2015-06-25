@@ -1132,7 +1132,7 @@ var __meta__ = {
                         value = null;
                     } else {
                         if (!source || source instanceof kendo.data.DataSource) {
-                            source = this.widget.dataSource.view();
+                            source = this.widget.dataSource.flatView();
                         }
 
                         if (isArray) {
