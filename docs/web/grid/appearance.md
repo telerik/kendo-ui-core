@@ -273,7 +273,20 @@ Due to the specifics of its behavior and implementation, the virtual scrolling i
 It cannot be used together with grouping, hierarchy, keyboard navigation, batch editing and inline editing.
 
 Virtual scrolling relies on a fake scrollbar. Its size is not determined by the browser, but calculated based on the average row height of already loaded data.
-As a result, variable row heights may cause unexpected behavior, such as inability to scroll to the last rows on the last page.
+As a result, variable row heights may cause unexpected behavior, such as inability to scroll to the last rows on the last page. There are two ways to ensure that
+all table rows have the same heights - disable text wrapping, or set an explicit large-enough row height:
+
+    .k-virtual-scrollable-wrap tr
+    {
+        height: 3em;
+    }
+
+    /* or */
+
+    .k-virtual-scrollable-wrap td
+    {
+        white-space: nowrap;
+    }
 
 > The Grid page size must be large-enough, so that the table rows do not fit in the scrollable data area. Otherwise the virtual vertical scrollbar will not be created.
 > We recommend setting a page size, which is at least **three times larger** than the number of visible table rows in the data area.
