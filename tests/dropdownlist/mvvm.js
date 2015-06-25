@@ -89,6 +89,25 @@
         equal(observable.value, observable.items[0]);
     });
 
+    test("changing a value updates the view model with object when source is grouped", function() {
+        dom = $('<select data-value-field="text" data-role="dropdownlist" data-bind="value:value,source:items" />');
+
+        var data = new kendo.data.ObservableArray([{text:"foo", value: 1}, {text:"bar", value: 2}]);
+        var observable = kendo.observable({
+            items: new kendo.data.DataSource({
+                data: data,
+                group: { field: "value" }
+            }),
+            value: null
+        });
+
+        kendo.bind(dom, observable);
+        dom.data("kendoDropDownList").select(0);
+        dom.data("kendoDropDownList").trigger("change");
+
+        equal(observable.value, data[0]);
+    });
+
     test("uses data value field if data-value-primitive is set to true", function() {
         dom = $('<select data-value-field="text" data-value-primitive="true" data-role="dropdownlist" data-bind="value:value,source:items" />');
 
