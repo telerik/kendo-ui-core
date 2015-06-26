@@ -6277,7 +6277,6 @@ The fields which can be used in the template are:
 *   series - the data series.
 *   value - the point value. (only for donut and pie charts)
 *   percentage - the point value represented as a percentage value. Available only for donut, pie and 100% stacked charts.
-*   dataItem - the original data item used to construct the point.
 
 > The text can be split into multiple lines by using line feed characters ("\n").
 
@@ -12456,7 +12455,8 @@ The fields which can be used in the template are:
 *   series - the series options
 *   group - the data group
 *   group.field - the name of the field used for grouping
-*   group.value - the field value for this group.
+*   group.value - the field value for this group
+*   group.items - the data items in this group
 
 #### Example - set the chart series group name template
     <div id="chart"></div>
@@ -12464,15 +12464,15 @@ The fields which can be used in the template are:
     $("#chart").kendoChart({
       dataSource: {
         data: [
-          { value: 1, category: "One"},
-          { value: 2, category: "Two"}
+          { value: 1, category: "One", title: "Series One" },
+          { value: 2, category: "Two", title: "Series Two" }
         ],
         group: { field: "category" }
       },
       series: [
         {
           field: "value",
-          name: "Category: #: group.value #"
+          name: "Category: #: group.items[0].title #"
         }
       ]
     });
