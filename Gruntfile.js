@@ -132,15 +132,13 @@ module.exports = function(grunt) {
                     browsers: browserOption ? [ browserOption ] : [],
 
                     files: [].concat(
-                        TESTS.beforeTestFiles.filter(function(x) {
-                            return !/angular/i.test(x);
-                        }),
+                        TESTS.beforeTestFiles,
                         allKendoFiles,
-                        TESTS.afterTestFiles.filter(function(x) {
-                            return !/(themeuilder|less)\.js/i.test(x);
-                        }),
+                        TESTS.afterTestFiles,
                         tests
-                    )
+                    ).filter(function(x) {
+                        return !/(themeuilder|less)\.js|angular/i.test(x);
+                    })
                 }
             }
         },
