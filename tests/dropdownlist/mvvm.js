@@ -209,6 +209,25 @@
         equal(widget.text(), "bar");
     });
 
+    test("value binding with autobind:false and valueprimitive:true binds source when selected text is not defined and value is '0'", function() {
+        dom = $('<input data-role="dropdownlist" data-value-field="value" data-text-field="text" data-auto-bind="false" data-value-primitive="true" data-bind="value:value, source:items" />');
+
+        var observable = kendo.observable({
+            items: new kendo.data.DataSource({
+                data: [{text:"foo", value:"1"}, {text:"bar", value: 0 }]
+            }),
+            value: 0
+        });
+
+        kendo.bind(dom, observable);
+
+        var widget = dom.data("kendoDropDownList");
+
+        equal(widget.dataSource.view().length, 2);
+        equal(widget.value(), "0");
+        equal(widget.text(), "bar");
+    });
+
     test("value binding displays options.text when autoBind:false and valuePrimitive is true", function() {
         dom = $('<input data-role="dropdownlist" data-value-field="value" data-text-field="text" data-auto-bind="false" data-text="selected text" data-value-primitive="true" data-bind="value:value, source:items" />');
 
