@@ -893,6 +893,21 @@ asyncTest("Progress wrapper width stays the same when the ProgressBar wrapper is
     }, 30);
 });
 
+test("Progress status text displays 100% even when floating point calculation precision fails", 2, function () {
+    pb = createProgressbar({
+        min: 0,
+        max: 7,
+        value: 7,
+        animation: false,
+        type: "percent",
+        showStatus: true
+    });
+
+    var statuses = pb.progressStatus;
+    equal(statuses.eq(0).text(), "100%");
+    equal(statuses.eq(1).text(), "100%");
+});
+
 asyncTest("Progress status holder wrapper width stays the same when the ProgressBar wrapper is resized (type='percent')", function() {
     pb = createProgressbar({
         min: 0,
