@@ -4199,6 +4199,7 @@ Defines the text of the "noRecords" option that is rendered when no records are 
         pageSize: 10
       },
       noRecords: true,
+      height: 200,
       messages: {
         noRecords: "There is no data on current page"
       }
