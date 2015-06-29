@@ -573,6 +573,11 @@
         equal(pager.find(".k-pager-sizes select").kendoDropDownList("text"), "All");
     });
 
+    test("totalPages returns 0 when showing all pages of an empty data source", function() {
+        setup({ data: [], pageSize: 0 }, { pageSizes: true });
+        equal(pager.totalPages(), 0);
+    });
+
     test("changing the page size of the data source selects the corresponding option", 2, function() {
         var pager = setup({}, { pageSizes: [1, 2] });
 
