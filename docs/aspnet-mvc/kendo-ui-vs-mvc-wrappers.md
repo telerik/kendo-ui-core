@@ -25,7 +25,7 @@ In the latter case, you will have to repeat the model and data field configurati
 or automatic updating of the Kendo UI version.
 * Use [Scaffolding](/aspnet-mvc/scaffolding) to generate widget declarations and related controller action methods.
 
-The vanilla HTML/JavaScript Kendo UI widgets provide the following benefits:
+The vanilla HTML/JavaScript Kendo UI widgets (**"Kendo UI Professional"**) provide the following benefits:
 
 * Complete server platform independence. The widgets can be used with any web server and server framework (**including ASP.NET MVC**).
 For example, you can build Single Page Applications with any RESTful back-end.
