@@ -30,14 +30,11 @@ To use Kendo UI in your project, you need to include the required JavaScript and
         <html>
         <head>
             <title>Welcome to Kendo UI!</title>
-            <!-- Common Kendo UI CSS -->
+            <!-- Common Kendo UI CSS for web and dataviz widgets -->
             <link href="styles/kendo.common.min.css" rel="stylesheet" />
 
-            <!-- Default Kendo UI theme CSS -->
+            <!-- Default Kendo UI theme CSS for web and dataviz widgets -->
             <link href="styles/kendo.default.min.css" rel="stylesheet" />
-
-            <!-- (optional) Kendo UI DataViz CSS, include only if you will use the data visualisation features -->
-            <link href="styles/kendo.dataviz.min.css" rel="stylesheet" />
 
             <!-- (optional) Kendo UI Mobile CSS, include only if you will use the mobile devices features -->
             <link href="styles/kendo.default.mobile.min.css" rel="stylesheet" type="text/css" />

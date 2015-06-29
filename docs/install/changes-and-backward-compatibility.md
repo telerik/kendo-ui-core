@@ -7,6 +7,13 @@ previous_url: /changes-and-backward-compatibility
 
 # Kendo UI Framework Changes and Backwards Compatibility
 
+## Kendo UI 2015 Q2
+
+### Changes from 2015 Q1 SP2 (2015.1.429)
+
+All Dataviz-related CSS code has been moved into the web widgets' CSS files. Please remove any references to **kendo.dataviz.css** and **kendo.dataviz.[theme].css**.
+Use only **kendo.common.css** and **kendo.[theme].css**.
+
 ## Kendo UI 2015 Q1 SP2
 
 ### Changes from 2015 Q1 (2015.1.318)
