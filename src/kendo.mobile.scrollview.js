@@ -697,6 +697,7 @@ var __meta__ = {
             content.page = that.page;
 
             content.bind("reset", function() {
+                this._pendingPageRefresh = false;
                 that._syncWithContent();
                 that.trigger(REFRESH, { pageCount: content.pageCount, page: content.page });
             });
