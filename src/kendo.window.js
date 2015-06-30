@@ -578,8 +578,13 @@ var __meta__ = {
 
         _object: function(element) {
             var content = element.children(KWINDOWCONTENT);
+            var widget = kendo.widgetInstance(content);
 
-            return content.data("kendoWindow") || content.data("kendo" + this.options.name);
+            if (widget instanceof Window) {
+                return widget;
+            }
+
+            return undefined;
         },
 
         center: function () {
