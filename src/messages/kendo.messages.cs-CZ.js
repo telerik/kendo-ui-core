@@ -7,7 +7,7 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
   "date": {
     "eq": "Je rovno",
     "gt": "Začíná po",
-    "gte": "Začáná od",
+    "gte": "Začíná od",
     "lt": "Končí po",
     "lte": "Končí do",
     "neq": "Je různá od"
@@ -42,7 +42,7 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
   "date": {
     "eq": "Je rovno",
     "gt": "Začíná po",
-    "gte": "Začáná od",
+    "gte": "Začíná od",
     "lt": "Končí po",
     "lte": "Končí do",
     "neq": "Je různá od"
@@ -183,8 +183,8 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "create": "Přidat nový záznam",
     "destroy": "Smazat",
     "edit": "Upravit",
-    "excel": "Export to Excel",
-    "pdf": "Export to PDF",
+    "excel": "Export do Excelu",
+    "pdf": "Export do PDF",
     "save": "Uložit změny",
     "select": "Vybrat",
     "update": "Odemknout"
@@ -235,7 +235,7 @@ $.extend(true, kendo.ui.Upload.prototype.options.localization,{
   "select": "Vyberte...",
   "remove": "Smazat",
   "uploadSelectedFiles": "Nahrát soubory",
-  "dropFilesHere": "Pro nahrátí přetáhněte soubory sem",
+  "dropFilesHere": "Pro nahrání přetáhněte soubory sem",
   "statusFailed": "chyba",
   "statusUploaded": "nahráno",
   "statusUploading": "nahrávám",
@@ -274,8 +274,8 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "underline": "Podtržené",
   "unlink": "Zrušit odkaz",
   "deleteFile": "Opravdu chcete smazat \"{0}\"?",
-  "directoryNotFound": "Adresář zadaného názvu nebyl nalezen.",
-  "emptyFolder": "Prázný adresář",
+  "directoryNotFound": "Adresář se zadaným názvem nebyl nalezen.",
+  "emptyFolder": "Prázdný adresář",
   "invalidFileType": "Vybraný soubor s příponou \"{0}\" není podporovaný. Podporované soubory jsou {1}.",
   "orderBy": "Seřadit dle:",
   "orderByName": "Jména",
@@ -303,7 +303,7 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "deleteColumn": "Smazat soupec",
   "deleteRow": "Smazat řádek",
   "formatting": "Formátování",
-  "insertFile": "Insert file"
+  "insertFile": "Vložit soubor"
 });
 }
 
@@ -326,12 +326,12 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "end": "Konec",
     "endTimezone": "Časové pásmo konce",
     "repeat": "Opakování",
-    "separateTimezones": "Různé časové pásma pro začátek a konec",
+    "separateTimezones": "Různá časové pásma pro začátek a konec",
     "start": "Začátek",
     "startTimezone": "Časové pásmo začátku",
     "timezone": " Časové pásmo",
     "timezoneEditorButton": "Časové pásmo",
-    "timezoneEditorTitle": "Časové pásma",
+    "timezoneEditorTitle": "Časová pásma",
     "title": "Nadpis"
   },
   "event": "Událost",
@@ -342,8 +342,8 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "editWindowOccurrence": "Upravit jen vybranou událost",
     "editWindowSeries": "Upravit vše",
     "editWindowTitle": "Upravit opakující se událost",
-    "deleteRecurring": "Chcete smazat jen vybranou událost, nebo i všechny opakování?",
-    "editRecurring": "Chcete upravit jen vybranou událost, nebo i všechny opakování?"
+    "deleteRecurring": "Chcete smazat jen vybranou událost, nebo i všechna opakování?",
+    "editRecurring": "Chcete upravit jen vybranou událost, nebo i všechna opakování?"
   },
   "save": "Uložit",
   "time": "Čas",
