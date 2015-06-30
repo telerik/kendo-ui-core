@@ -976,7 +976,7 @@
         equal(dropdownlist.listView.options.template, "#:data.anotherName#");
     });
 
-    test("setDataSource triggers cascade event of the parent widget", 1, function() {
+    test("setDataSource does not trigger cascade event of the parent widget", 0, function() {
         var parent = $("<input id='parent' />").appendTo(QUnit.fixture).kendoDropDownList().data("kendoDropDownList");
 
         dropdownlist = new DropDownList(input, {
@@ -984,7 +984,7 @@
         });
 
         parent.bind("cascade", function() {
-            ok(true);
+            ok(false);
         });
 
         dropdownlist.setDataSource({

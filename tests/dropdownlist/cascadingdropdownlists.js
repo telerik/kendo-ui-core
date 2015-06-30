@@ -690,4 +690,40 @@
             }, 100);
         });
     });
+
+    test("setDataSource re-filters the source based on parent value", 1, function() {
+        var ddl = new DropDownList(parent, {
+            optionLabel: "Select",
+            dataValueField: "id",
+            dataTextField: "text2",
+            dataSource: [
+                {text: "item1", id: "1", text2: "i"},
+                {text: "item3", id: "2", text2: "i"}
+            ],
+            value: "2"
+        });
+
+        var ddl2 = new DropDownList(child.attr("id", "child"), {
+            dataValueField: "text",
+            dataTextField: "text",
+            cascadeFrom: "parent"
+        });
+
+        var source = new kendo.data.DataSource({
+            data: [
+                {text: "item1", id: "1"},
+                {text: "item2", id: "1"},
+                {text: "item3", id: "2"},
+                {text: "item4", id: "2"}
+            ]
+        });
+
+        stub(source, {
+            filter: source.filter
+        });
+
+        ddl2.setDataSource(source);
+
+        ok(source.calls("filter") !== 0);
+    });
 })();
