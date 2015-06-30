@@ -21,6 +21,7 @@ with Kendo UI service packs. We can do this for major releases.
 
 The following list provides jQuery compatibility information about the major Kendo UI releases and their corresponding service packs:
 
+* Kendo UI 2015.2.624 (Q2 2015) - jQuery 1.9.1 (also works with 1.10.x and 2.0.x)
 * Kendo UI 2015.1.318 (Q1 2015) - jQuery 1.9.1 (also works with 1.10.x and 2.0.x)
 * Kendo UI 2014.3.1119 (Q3 2014) - jQuery 1.9.1 (also works with 1.10.x and 2.0.x)
 * Kendo UI 2014.2.716 (Q2 2014) - jQuery 1.9.1 (also works with 1.10.x and 2.0.x)
@@ -48,6 +49,8 @@ Just like jQuery, the Kendo UI bundles include the corresponding AngularJS minif
 
 ### Supported AngularJS versions
 
+* Kendo UI 2015.2.624 (Q2 2015) - AngularJS 1.3.16
+* Kendo UI 2015.1.318 (Q1 2015) - AngularJS 1.3.0
 * Kendo UI 2014.3.1119 (Q3 2014) - AngularJS 1.3.0
 * Kendo UI 2014.2.716 (Q2 2014) - AngularJS 1.2.16 (upgraded to 1.2.21 in subsequent internal builds)
 
