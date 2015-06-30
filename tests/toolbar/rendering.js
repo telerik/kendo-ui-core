@@ -481,6 +481,18 @@
         ok(button.hasClass("foo"));
     });
 
+    test("options.attributes does not remove build-in button attributes", 2, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", id: "foo", text: "foo", attributes: { "class": "foo" } }
+            ]
+        }).data("kendoToolBar");
+
+        var button = toolbar.element.find("#foo");
+        ok(button.hasClass("k-button"));
+        ok(button.hasClass("foo"));
+    });
+
     test("options.attributes are attached to the button element located in the overflow popup", 1, function() {
         var toolbar = container.kendoToolBar({
             items: [
@@ -490,6 +502,21 @@
 
         var button = toolbar.popup.element.find("#foo_overflow");
         ok(button.hasClass("foo"));
+    });
+
+    test("options.attributes does not remove build-in overflow button attributes", 4, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", id: "foo", text: "foo", attributes: { "class": "foo" } }
+            ]
+        }).data("kendoToolBar");
+
+        var button = toolbar.popup.element.find("#foo_overflow");
+        ok(button.hasClass("k-item"));
+        ok(button.hasClass("foo"));
+
+        ok(button.children().hasClass("k-overflow-button"));
+        ok(button.children().hasClass("foo"));
     });
 
     test("button is initially hidden if hidden option is set to true", 3, function() {
