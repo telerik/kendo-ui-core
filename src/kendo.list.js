@@ -676,7 +676,7 @@ var __meta__ = {
             parent = that._parentWidget();
 
             if (parent) {
-                parent.trigger("cascade");
+                that._cascadeSelect(parent);
             }
         },
 
@@ -1099,75 +1099,76 @@ var __meta__ = {
                 }
 
                 options.autoBind = false;
-                valueField = options.cascadeFromField || parent.options.dataValueField;
-
-                change = function() {
-                    that.dataSource.unbind(CHANGE, change);
-
-                    var value = that._accessor();
-
-                    if (that._userTriggered) {
-                        that._clearSelection(parent, true);
-                    } else if (value) {
-                        if (value !== that.listView.value()[0]) {
-                            that.value(value);
-                        }
-
-                        if (!that.dataSource.view()[0] || that.selectedIndex === -1) {
-                            that._clearSelection(parent, true);
-                        }
-                    } else if (that.dataSource.flatView().length) {
-                        that.select(options.index);
-                    }
-
-                    that.enable();
-                    that._triggerCascade();
-                    that._userTriggered = false;
-                };
-                select = function() {
-                    var dataItem = parent.dataItem(),
-                        filterValue = dataItem ? parent._value(dataItem) : null,
-                        expressions, filters;
-
-                    if (filterValue || filterValue === 0) {
-                        expressions = that.dataSource.filter() || {};
-                        removeFiltersForField(expressions, valueField);
-                        filters = expressions.filters || [];
-
-                        filters.push({
-                            field: valueField,
-                            operator: "eq",
-                            value: filterValue
-                        });
-
-                        var handler = function() {
-                            that.unbind("dataBound", handler);
-                            change.apply(that, arguments);
-                        };
-
-                        that.first("dataBound", handler);
-
-                        that.dataSource.filter(filters);
-
-                    } else {
-                        that.enable(false);
-                        that._clearSelection(parent);
-                        that._triggerCascade();
-                        that._userTriggered = false;
-                    }
-                };
 
                 parent.first("cascade", function(e) {
                     that._userTriggered = e.userTriggered;
-                    select();
+                    that._cascadeSelect(parent);
                 });
 
                 //refresh was called
                 if (parent.listView.isBound()) {
-                    select();
+                    that._cascadeSelect(parent);
                 } else if (!parent.value()) {
                     that.enable(false);
                 }
+            }
+        },
+
+        _cascadeChange: function(parent) {
+            var that = this;
+            var value = that._accessor();
+
+            if (that._userTriggered) {
+                that._clearSelection(parent, true);
+            } else if (value) {
+                if (value !== that.listView.value()[0]) {
+                    that.value(value);
+                }
+
+                if (!that.dataSource.view()[0] || that.selectedIndex === -1) {
+                    that._clearSelection(parent, true);
+                }
+            } else if (that.dataSource.flatView().length) {
+                that.select(that.options.index);
+            }
+
+            that.enable();
+            that._triggerCascade();
+            that._userTriggered = false;
+        },
+
+        _cascadeSelect: function(parent) {
+            var that = this;
+            var dataItem = parent.dataItem();
+            var filterValue = dataItem ? parent._value(dataItem) : null;
+            var valueField = that.options.cascadeFromField || parent.options.dataValueField;
+            var expressions, filters;
+
+            if (filterValue || filterValue === 0) {
+                expressions = that.dataSource.filter() || {};
+                removeFiltersForField(expressions, valueField);
+                filters = expressions.filters || [];
+
+                filters.push({
+                    field: valueField,
+                    operator: "eq",
+                    value: filterValue
+                });
+
+                var handler = function() {
+                    that.unbind("dataBound", handler);
+                    that._cascadeChange(parent);
+                };
+
+                that.first("dataBound", handler);
+
+                that.dataSource.filter(filters);
+
+            } else {
+                that.enable(false);
+                that._clearSelection(parent);
+                that._triggerCascade();
+                that._userTriggered = false;
             }
         }
     });
