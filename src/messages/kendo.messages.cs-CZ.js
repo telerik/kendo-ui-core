@@ -178,8 +178,8 @@ if (kendo.ui.Grid) {
 kendo.ui.Grid.prototype.options.messages =
 $.extend(true, kendo.ui.Grid.prototype.options.messages,{
   "commands": {
-    "canceledit": "Zrušit",
     "cancel": "Zrušit",
+    "canceledit": "Zrušit",
     "create": "Přidat nový záznam",
     "destroy": "Smazat",
     "edit": "Upravit",
@@ -187,13 +187,14 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "pdf": "Export do PDF",
     "save": "Uložit změny",
     "select": "Vybrat",
-    "update": "Odemknout"
+    "update": "Aktualizovat"
   },
   "editable": {
-    "confirmation": "Opravdu chcete smazat tento záznam?",
     "cancelDelete": "Zrušit",
+    "confirmation": "Opravdu chcete smazat tento záznam?",
     "confirmDelete": "Smazat"
-  }
+  },
+  "noRecords": "Žádné záznamy."
 });
 }
 
