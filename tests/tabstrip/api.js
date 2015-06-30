@@ -382,4 +382,83 @@ test("remove method removes the content of the tab", function() {
     var items = tabStrip.element.find("div");
     equal(items.text(), "fcontent");
 });
+
+test("append method appends content containers at the end of the wrapper by default", function () {
+    var tabStrip = createTabStrip({
+        dataSource: [
+            { text: "foo", content: "fcontent" },
+            { text: "bar", content: "bcontent" }
+        ]
+    });
+
+    tabStrip.append({
+        text: "baz",
+        content: "zcontent"
+    });
+
+    var newDiv = tabStrip.element.children().last();
+    equal(newDiv.text(), "zcontent");
+});
+
+test("append method appends content containers before the scroll buttons when scrolling mode is active", function () {
+    QUnit.fixture.append(
+        '<div id="scrollable-tabstrip" style="width:200px;">' +
+        '    <ul>' +
+        '        <li class="k-state-active">some item text 1</li>' +
+        '        <li>some item text 2</li>' +
+        '        <li>some item text 3</li>' +
+        '        <li>some item text 4</li>' +
+        '        <li>some item text 5</li>' +
+        '        <li>some item text 6</li>' +
+        '        <li>some item text 7</li>' +
+        '        <li>some item text 8</li>' +
+        '        <li>some item text 9</li>' +
+        '        <li>some item text 10</li>' +
+        '    </ul>' +
+        '    <div>content 1</div>' +
+        '    <div>content 2</div>' +
+        '    <div>content 3</div>' +
+        '    <div>content 4</div>' +
+        '    <div>content 5</div>' +
+        '    <div>content 6</div>' +
+        '    <div>content 7</div>' +
+        '    <div>content 8</div>' +
+        '    <div>content 9</div>' +
+        '    <div>content 10</div>' +
+        '</div>'
+    );
+
+    var tabStrip = $("#scrollable-tabstrip").kendoTabStrip({
+        animation: false
+    }).data("kendoTabStrip");
+
+    tabStrip.append({
+        text: "baz",
+        content: "zcontent"
+    });
+
+    var newDiv = tabStrip.element.children("div").last();
+    ok(newDiv.next().is(".k-tabstrip-prev"));
+});
+
+test("append method appends content containers before the tabGroup when tabPosition is bottom", function () {
+    var tabStrip = createTabStrip({
+        tabPosition: "bottom",
+        dataSource: [
+            { text: "foo", content: "fcontent" },
+            { text: "bar", content: "bcontent" }
+        ]
+    });
+
+    tabStrip.append({
+        text: "baz",
+        content: "zcontent"
+    });
+
+    var newDiv = tabStrip.element.find("div").last();
+    ok(newDiv.next().is("ul.k-tabstrip-items"));
+});
+
+
+
 })();
