@@ -816,12 +816,15 @@ var __meta__ = {
             }
         },
 
-        _deactivate: function() {
-            this.wrapper.hide().css("opacity","");
-            this.trigger(DEACTIVATE);
-            var lastModal = this._object(this._modals().last());
-            if (lastModal) {
-                lastModal.toFront();
+        _deactivate: function () {
+            var that = this;
+            that.wrapper.hide().css("opacity", "");
+            that.trigger(DEACTIVATE);
+            if (that.options.modal) {
+                var lastModal = that._object(that._modals().last());
+                if (lastModal) {
+                    lastModal.toFront();
+                }
             }
         },
 

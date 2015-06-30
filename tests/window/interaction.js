@@ -54,6 +54,25 @@
         dialog.resize();
     });
 
+    test("closing a non-modal Window does not execute toFront() of the other modal instance", function () {
+        var executed = false;
+
+        modalDialog = createWindow({
+            modal: true
+        });
+        nonModalDialog = createWindow({
+            modal: false
+        });
+
+        modalDialog.toFront = function () {
+            executed = true;
+        }
+
+        nonModalDialog.close();
+
+        ok(!executed);
+    });
+
     var initialSize = 200;
     var resizeChange = 20;
 
