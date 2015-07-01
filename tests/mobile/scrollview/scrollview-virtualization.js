@@ -28,6 +28,12 @@
             };
 
             element = $("<div style='width: 400px;' />").appendTo("#qunit-fixture").wrap("<div style='width: 400px;' />");
+        },
+
+        teardown: function() {
+            if (scrollview) {
+                scrollview.destroy();
+            }
         }
     });
 
@@ -46,6 +52,6 @@
         setTimeout(function() {
             start();
             equal($(".bar").length, 1);
-        }, 100);
+        }, 300);
     });
 })();
