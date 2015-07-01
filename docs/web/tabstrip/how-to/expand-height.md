@@ -8,6 +8,12 @@ description: Expand the TabStrip height to 100%
 
 The following runnable sample demonstrates how to make the TabStrip widget 100% high and resize together with the browser window.
 
+When implementing the same behavior in a more complex client-side environment (HTML markup), take into account the following:
+
+*Web standards require each element with a percentage height to have a parent element with explicit height. The rule applies recursively,
+until an element with a pixel height is reached, or until the `html` element is reached (which would require a height style too).
+Elements with a 100% height cannot have borders, paddings, margins or visible siblings.*
+
 #### Example:
 
 ```html
