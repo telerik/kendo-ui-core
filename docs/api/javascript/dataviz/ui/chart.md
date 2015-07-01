@@ -4613,7 +4613,7 @@ The size of the icon.
     });
     </script>
 
-### categoryAxis.notes.data.icon.type `String` *(default: "circle")*
+### categoryAxis.notes.data.icon.shape `String` *(default: "circle")*
 
 The icon shape.
 
