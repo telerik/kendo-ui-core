@@ -37,7 +37,9 @@
         }
     });
 
-    asyncTest("initializes pages correctly", 1, function() {
+/* commented due to random fails on the build machine, see telerik/kendo-ui-core#899
+
+    asyncTest("initial change event provides the right element", 1, function() {
         var options = {
             dataSource: dataSourceConfig,
             template: "<div class='foo'>#: foo #</div>",
@@ -54,4 +56,6 @@
             equal($(".bar").length, 1);
         }, 300);
     });
+*/
+
 })();
