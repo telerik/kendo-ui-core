@@ -620,6 +620,7 @@ var __meta__ = {
 
        add: function() {
            var that = this,
+               dataItem,
                dataSource = that.dataSource,
                index = dataSource.indexOf((dataSource.view() || [])[0]);
 
@@ -628,8 +629,8 @@ var __meta__ = {
            }
 
            that.cancel();
-           dataSource.insert(index, {});
-           that.edit(that.element.children().first());
+           dataItem = dataSource.insert(index, {});
+           that.edit(that.element.find("[data-uid='" + dataItem.uid + "']"));
        },
 
        cancel: function() {
