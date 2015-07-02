@@ -1837,6 +1837,10 @@ function pad(number, digits, end) {
     }
 
     function isScrollable(element) {
+        if (element.className.indexOf("k-auto-scrollable") > -1) {
+            return true;
+        }
+
         var overflow = getComputedStyles(element, ["overflow"]).overflow;
         return overflow == "auto" || overflow == "scroll";
     }
