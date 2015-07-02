@@ -573,6 +573,19 @@
         equal(pager.find(".k-pager-sizes select").kendoDropDownList("text"), "All");
     });
 
+    test("changing page size to All with upper case letter sets page size to all pages", function() {
+        var pager = setup({}, { pageSizes: [1, 2, "All"]});
+        var dropdownlist = pager.find(".k-pager-sizes select").data("kendoDropDownList");
+        dataSource.read();
+        dropdownlist.dataSource.at(2).set("value", "All");
+
+        dropdownlist.value("All");
+
+        dropdownlist.element.trigger("change");
+
+        equal(dataSource.pageSize(), dataSource.total());
+    });
+
     test("totalPages returns 0 when showing all pages of an empty data source", function() {
         setup({ data: [], pageSize: 0 }, { pageSizes: true });
         equal(pager.totalPages(), 0);
