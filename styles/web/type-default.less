@@ -50,9 +50,9 @@
 @notification-error-background-color: @error;
 @notification-error-text-color: contrast(@selected-background, lighten(@hover-text-color, 25%), darken(@hover-text-color, 1%), 0.5);
 @notification-error-border-color: darken(@error, 10%);
-@tooltip-text-color: @selected-text-color;
-@tooltip-background-color: @selected-background;
-@tooltip-border-color: contrast(@selected-background, lighten(@selected-background, 3%), darken(@selected-background, 3%), 0.5);
+@tooltip-text-color: @header-text-color;
+@tooltip-background-color: @header-background-color;
+@tooltip-border-color: @secondary-border-color;
 @validation-text-color: contrast(@base, lighten(@accent, 1%), darken(@accent, 23%), 0.5);
 @validation-background-color: contrast(@base, lighten(@background, 1%), darken(@background, 5%), 0.5);
 @validation-border-color: contrast(@base, lighten(@warning, 14%), darken(@warning, 10%), 0.5);
@@ -427,11 +427,6 @@ textarea.k-textbox:hover,
     .composite-background(@widget-gradient);
     background-position: 50% 50%;
     background-color: @header-background-color;
-}
-
-.k-widget.k-tooltip
-{
-    background-image: @tooltip-texture;
 }
 
 .k-block,
@@ -1102,9 +1097,12 @@ div.k-filebrowser-dropzone em
 /* Tooltip */
 .k-widget.k-tooltip
 {
-    border-color: @tooltip-border-color;
+    .composite-background(@widget-gradient);
+    background-position: 50% 50%;
     background-color: @tooltip-background-color;
     color: @tooltip-text-color;
+    border-color: transparent;
+    .box-shadow(0 4px 6px @shadow-color);
 }
 
 .k-widget.k-tooltip-validation
@@ -1125,22 +1123,22 @@ div.k-filebrowser-dropzone em
 
 .k-callout-n
 {
-    border-bottom-color: @tooltip-border-color;
+    border-bottom-color: @tooltip-background-color;
 }
 
 .k-callout-w
 {
-    border-right-color: @tooltip-border-color;
+    border-right-color: @tooltip-background-color;
 }
 
 .k-callout-s
 {
-    border-top-color: @tooltip-border-color;
+    border-top-color: @tooltip-background-color;
 }
 
 .k-callout-e
 {
-    border-left-color: @tooltip-border-color;
+    border-left-color: @tooltip-background-color;
 }
 
 .k-tooltip-validation .k-callout-n
