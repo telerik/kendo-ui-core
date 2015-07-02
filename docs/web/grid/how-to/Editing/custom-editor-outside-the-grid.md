@@ -11,62 +11,112 @@ The following runnable sample demonstrates how to use custom editor outside the 
 #### Example: 
 
 ```html
-     <form id="gridEditor">
-      <input type="text" name="ProductName" data-bind="value: ProductName">
-      <input type="checkbox" name="Discontinued" data-bind="checked: Discontinued">
+    <style>
+      label{display:block;width:25em;position:relative;line-height:2.6;}
+      label > .k-textbox, label > .k-button, label > .k-widget{position:absolute;right:0;width:15em;}
+      label > .checkbox{position:absolute;right:12.4em;top:.3em;font-size:1.1em;}
+      #grid{margin:2em 0 0;}
+    </style>
 
-    </form>
+    <div id="example">
 
-    <div id="validator">
+      <form id="gridEditor">
+        <label>ProductName <input type="text" name="ProductName" data-bind="value: ProductName" required="true" class="k-textbox" /></label>
+        <label>UnitsInStock <input type="number" name="UnitsInStock" data-role="numerictextbox" required="true" min="0" data-bind="value: UnitsInStock" /></label>
+        <label>Discontinued <input type="checkbox" name="Discontinued" data-bind="checked: Discontinued" class="checkbox" /></label>
+        <label>Save changes <button type="button" id="saveChanges" class="k-button">Submit</button></label>
+        <span class="k-invalid-msg" data-for="ProductName"></span>
+        <span class="k-invalid-msg" data-for="UnitsInStock"></span>
+      </form>
+
       <div id="grid"></div>
-    </div>
-    
-    <script src="http://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
-    <script>
-      $(document).ready(function () { 
 
-        var selectedRow = null;
-        var dataSource = new kendo.data.DataSource({
-          data: products,
-          schema: {
-            model: {
-              fields: {
-                ProductName: { type: "string" },
-                UnitPrice: { type: "number" },
-                UnitsInStock: { type: "number" },
-                Discontinued: { type: "boolean" }
-              }}
-          },
-          pageSize: 20
+      <script>
+        $(document).ready(function () {
+          var crudServiceBaseUrl = "http://demos.telerik.com/kendo-ui/service",
+              dataSource = new kendo.data.DataSource({
+                transport: {
+                  read:  {
+                    url: crudServiceBaseUrl + "/Products",
+                    dataType: "jsonp"
+                  },
+                  update: {
+                    url: crudServiceBaseUrl + "/Products/Update",
+                    dataType: "jsonp"
+                  },
+                  destroy: {
+                    url: crudServiceBaseUrl + "/Products/Destroy",
+                    dataType: "jsonp"
+                  },
+                  create: {
+                    url: crudServiceBaseUrl + "/Products/Create",
+                    dataType: "jsonp"
+                  },
+                  parameterMap: function(options, operation) {
+                    if (operation !== "read" && options.models) {
+                      return {models: kendo.stringify(options.models)};
+                    }
+                  }
+                },
+                batch: true,
+                pageSize: 10,
+                schema: {
+                  model: {
+                    id: "ProductID",
+                    fields: {
+                      ProductID: { editable: false, nullable: true },
+                      ProductName: { validation: { required: true } },
+                      Discontinued: { type: "boolean" },
+                      UnitsInStock: { type: "number", validation: { min: 0, required: true } }
+                    }
+                  }
+                }
+              });
+
+          var selectedRow = null;
+          
+          $("#gridEditor").kendoValidator();
+
+          var grid = $("#grid").kendoGrid({
+            dataSource: dataSource,
+            change: function(e){
+              selectedRow = e.sender.select();
+              var item = e.sender.dataItem(selectedRow);
+              kendo.bind($("#gridEditor"), item); 
+            },
+            dataBound: function(e){
+              if (selectedRow) {
+                var tr = $("[data-uid='"+ selectedRow.attr("data-uid") +"']");
+                e.sender.select(tr);
+              }
+              if (!selectedRow || !tr[0]) {
+                grid.select(grid.tbody.children().eq(0));
+              }
+            },
+            pageable: true,
+            selectable: true,
+            height: 400,
+            toolbar: [{template: "<button id='addNew' type='button' class='k-button'>Add new record</button>"}],
+            columns: [
+              { field: "ProductName", title: "Product Name"},
+              { field: "UnitsInStock", title:"Units In Stock", width: 200 },
+              { field: "Discontinued", width: 200 }]
+          }).data("kendoGrid");
+
+          $("#addNew").click(function(){
+            var newItem = grid.dataSource.insert({},0);
+            grid.dataSource.page(1);
+            grid.select($("[data-uid='"+ newItem.uid +"']"));
+          });
+
+          $("#saveChanges").click(function(){
+            grid.dataSource.one("requestEnd", function(e) {
+              alert("Success");
+            });
+            grid.saveChanges();
+          });
+
         });
-
-        var grid = $("#grid").kendoGrid({
-          change: function(e){
-            selectedRow = this.select();
-            var item = this.dataItem(selectedRow);
-            kendo.bind($("#gridEditor"), item); 
-          },
-          dataBound: function(e){
-            if(selectedRow){ 
-              this.select($("#grid tr[data-uid='"+ selectedRow.attr("data-uid") +"']"));
-            }
-          },
-          dataSource: dataSource,
-          selectable: true,
-          pageable: true,
-          height: 500,
-          toolbar: [{template: "<input id='addNew' type='button' class='k-button' value='Add new'/>"}],
-          columns: [
-            { field: "ProductName", title: "Product Name", width: "100px" }, 
-            { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: "100px" },
-            { field: "UnitsInStock", title:"Units In Stock", width: "100px" },
-            { field: "Discontinued", width: "100px" }]
-        }).data("kendoGrid");
-
-        $("#addNew").click(function(){
-          var newItem = grid.dataSource.insert({},0);
-          grid.select($("#grid tr[data-uid='"+ newItem.uid +"']"));
-        })
-      });
-    </script>
+      </script>
+    </div>
 ```
