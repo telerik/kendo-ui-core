@@ -718,20 +718,6 @@ html .km-pane-wrapper .k-header
     background-color: @primary-hover-background-color;
 }
 
-.k-button[disabled],
-.k-button.k-state-disabled,
-.k-state-disabled .k-button,
-.k-state-disabled .k-button:hover,
-.k-button.k-state-disabled:hover,
-.k-state-disabled .k-button:active,
-.k-button.k-state-disabled:active
-{
-    color: @disabled-text-color;
-    border-color: @disabled-border-color;
-    background-color: @disabled-background-color;
-	.composite-background(@disabled-gradient);
-}
-
 .k-button:focus:not(.k-state-disabled):not([disabled])
 {
     .box-shadow(@button-focused-shadow);
@@ -3120,6 +3106,20 @@ td.k-state-focused.k-state-selected,
     background-color: @hover-background-color;
 }
 
+.k-button[disabled],
+.k-button.k-state-disabled,
+.k-state-disabled .k-button,
+.k-state-disabled .k-button:hover,
+.k-button.k-state-disabled:hover,
+.k-state-disabled .k-button:active,
+.k-button.k-state-disabled:active,
+.k-button.k-state-disabled:active:hover
+{
+    color: @disabled-text-color;
+    border-color: @disabled-border-color;
+    background-color: @disabled-background-color;
+    .composite-background(@disabled-gradient);
+}
 
 /* Responsive styles  */
  

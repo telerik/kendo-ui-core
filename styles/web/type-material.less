@@ -721,20 +721,6 @@ html .km-pane-wrapper .k-header
     background-color: @primary-hover-background-color;
 }
 
-.k-button[disabled],
-.k-button.k-state-disabled,
-.k-state-disabled .k-button,
-.k-state-disabled .k-button:hover,
-.k-button.k-state-disabled:hover,
-.k-state-disabled .k-button:active,
-.k-button.k-state-disabled:active
-{
-    color: @disabled-text-color;
-    border-color: @disabled-border-color;
-    background-color: @disabled-background-color;
-    .composite-background(@disabled-gradient);
-}
-
 .k-button:focus:not(.k-state-disabled):not([disabled])
 {
     .box-shadow(@button-focused-shadow);
@@ -2646,21 +2632,6 @@ background-color: @button-active-background;
     background-color: @button-hover-background-color;
 }
 
-.k-button[disabled],
-.k-button.k-state-disabled,
-.k-state-disabled .k-button,
-.k-state-disabled .k-button:hover,
-.k-button.k-state-disabled:hover,
-.k-state-disabled .k-button:active,
-.k-button.k-state-disabled:active
-{
-    color: @disabled-text-color;
-    border-color: @disabled-border-color;
-    background-color: @disabled-background-color;
-    .composite-background(@disabled-gradient);
-    .box-shadow(none);
-}
-
 .k-primary:active,
 .k-primary.k-state-active,
 .k-primary:focus,
@@ -2720,6 +2691,22 @@ background-color: @button-active-background;
     color: @button-hover-text-color;
     border-color: @button-hover-border-color;
     background-color: @button-hover-background-color;
+}
+
+.k-button[disabled],
+.k-button.k-state-disabled,
+.k-state-disabled .k-button,
+.k-state-disabled .k-button:hover,
+.k-button.k-state-disabled:hover,
+.k-state-disabled .k-button:active,
+.k-button.k-state-disabled:active,
+.k-button.k-state-disabled:active:hover
+{
+    color: @disabled-text-color;
+    border-color: @disabled-border-color;
+    background-color: @disabled-background-color;
+    .composite-background(@disabled-gradient);
+    .box-shadow(none);
 }
 
 .k-dropdown .k-state-default
