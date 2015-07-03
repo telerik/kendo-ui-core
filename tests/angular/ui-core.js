@@ -800,161 +800,137 @@ withAngularTests("Angular (UI Core)", function(runTest){
         });
     });
 
+    ngTest2("Widget respects k-ng-disabled attribue change to true", 1, function(dom, controller, bootstrap) {
+        controller(function($scope) {
+            $scope.disabled = true;
+            $scope.options = {
+                dataSource: {
+                    data: [{ContactName: "Name", CustomerID: 1}]
+                },
+                dataTextField: "ContactName",
+                dataValueField: "CustomerID"
+            };
+        });
 
-    runTest("Widget respects k-ng-disabled attribue change to true", function(dom, $scope){
-        $scope.options = {
-                    dataSource: {
-                        data: [{ContactName: "Name", CustomerID: 1}]
-                    },
-                    dataTextField: "ContactName",
-                    dataValueField: "CustomerID"
-                };
-
-        $scope.disabled = true;
-
-        $("<div>" +
+         $("<div>" +
           "  <select kendo-drop-down-list='ddl' k-options='options' k-ng-disabled='disabled'></select>" +
           "</div>").appendTo(dom);
 
-		expect(1);
-        $scope.whenRendered(function(){
-            $scope.$apply(function() {
-                $scope.disabled = false;
-            })
-            var disabled = $scope.ddl.element.prop("disabled");
-            equal(disabled, $scope.disabled);
-            start();
-        });
+        bootstrap();
+        var $scope = dom.scope();
+        $scope.$apply(function() {
+            $scope.disabled = false;
+        })
+        equal($scope.ddl.element.prop("disabled"), $scope.disabled);
     });
 
-    runTest("Widget respects k-ng-disabled attribue change to true", function(dom, $scope){
-        $scope.options = {
-                    dataSource: {
-                        data: [{ContactName: "Name", CustomerID: 1}]
-                    },
-                    dataTextField: "ContactName",
-                    dataValueField: "CustomerID"
-                };
+    ngTest2("Widget respects k-ng-disabled attribue change to true", 1, function(dom, controller, bootstrap) {
+        controller(function($scope) {
+            $scope.disabled = false;
+            $scope.options = {
+                dataSource: {
+                    data: [{ContactName: "Name", CustomerID: 1}]
+                },
+                dataTextField: "ContactName",
+                dataValueField: "CustomerID"
+            };
+        });
 
-        $scope.disabled = false;
-
-        $("<div>" +
+         $("<div>" +
           "  <select kendo-drop-down-list='ddl' k-options='options' k-ng-disabled='disabled'></select>" +
           "</div>").appendTo(dom);
 
-		expect(1);
-        $scope.whenRendered(function(){
-            $scope.$apply(function() {
-                $scope.disabled = true;
-            })
-            var disabled = $scope.ddl.element.prop("disabled");
-            equal(disabled, $scope.disabled);
-            start();
-        });
+        bootstrap();
+        var $scope = dom.scope();
+        $scope.$apply(function() {
+            $scope.disabled = true;
+        })
+        equal($scope.ddl.element.prop("disabled"), $scope.disabled);
     });
 
-    runTest("Widget respects k-ng-readonly attribue set to true", function(dom, $scope){
-        $scope.options = {
-                    value: new Date()
-                };
+    ngTest2("Widget respects k-ng-readonly attribue set to false", 1, function(dom, controller, bootstrap) {
+        controller(function($scope) {
+            $scope.readonly = false;
+            $scope.options = {
+                value: new Date()
+            };
+        });
 
-        $scope.readonly = true;
-
-        $("<div>" +
-          "  <input kendo-date-picker='kdp' k-options='options' k-ng-readonly='readonly' />" +
+          $("<div>" +
+            "  <input kendo-date-picker='kdp' k-options='options' k-ng-readonly='readonly' />" +
           "</div>").appendTo(dom);
 
-		expect(1);
-        $scope.whenRendered(function(){
-            var isReadonly = $scope.kdp.element.prop("readonly");
-            equal(isReadonly, $scope.readonly);
-            start();
-        });
+      bootstrap();
+
+      var $scope = dom.scope();
+      $scope.$apply(function() {
+          $scope.readonly = true;
+      });
+
+      equal($scope.kdp.element.prop("readonly"), $scope.readonly);
     });
 
-    runTest("Widget respects k-ng-readonly attribue set to false", function(dom, $scope){
-        $scope.options = {
-                    value: new Date()
-                };
 
-        $scope.readonly = false;
+    ngTest2("Widget respects k-ng-readonly attribue set to true", 1, function(dom, controller, bootstrap) {
+        controller(function($scope) {
+            $scope.readonly = true;
+            $scope.options = {
+                value: new Date()
+            };
+        });
 
-        $("<div>" +
-          "  <input kendo-date-picker='kdp' k-options='options' k-ng-readonly='readonly' />" +
+          $("<div>" +
+            "  <input kendo-date-picker='kdp' k-options='options' k-ng-readonly='readonly' />" +
           "</div>").appendTo(dom);
 
-		expect(1);
-        $scope.whenRendered(function(){
-            var isReadonly = $scope.kdp.element.prop("readonly");
-            equal(isReadonly, $scope.readonly);
-            start();
-        });
+      bootstrap();
+
+      var $scope = dom.scope();
+      $scope.$apply(function() {
+          $scope.readonly = false;
+      });
+
+      equal($scope.kdp.element.prop("readonly"), $scope.readonly);
     });
 
-    runTest("Widget respects k-ng-readonly attribue change from true to false", function(dom, $scope){
-        $scope.options = {
-                    value: new Date()
-                };
+    ngTest2("Widget respects k-ng-readonly attribue set to true", 1, function(dom, controller, bootstrap) {
+        controller(function($scope) {
+            $scope.readonly = true;
+            $scope.options = {
+                value: new Date()
+            };
+        });
 
-        $scope.readonly = true;
-
-        $("<div>" +
-          "  <input kendo-date-picker='kdp' k-options='options' k-ng-readonly='readonly' />" +
+          $("<div>" +
+            "  <input kendo-date-picker='kdp' k-options='options' k-ng-readonly='readonly' />" +
           "</div>").appendTo(dom);
 
-		expect(1);
-        $scope.whenRendered(function(){
-            $scope.$apply(function() {
-                $scope.readonly = false;
-            })
-            var isReadonly = $scope.kdp.element.prop("readonly");
-            equal(isReadonly, $scope.readonly);
-            start();
-        });
+      bootstrap();
+
+      var $scope = dom.scope();
+      equal($scope.kdp.element.prop("readonly"), $scope.readonly);
     });
 
-    runTest("Widget respects k-ng-readonly attribue change from true to false", function(dom, $scope){
-        $scope.options = {
-                    value: new Date()
-                };
-
-        $scope.readonly = false;
-
-        $("<div>" +
-          "  <input kendo-date-picker='kdp' k-options='options' k-ng-readonly='readonly' />" +
-          "</div>").appendTo(dom);
-
-		expect(1);
-        $scope.whenRendered(function(){
-            $scope.$apply(function() {
-                $scope.readonly = true;
-            })
-            var isReadonly = $scope.kdp.element.prop("readonly");
-            equal(isReadonly, $scope.readonly);
-            start();
+    ngTest2("Initialized from custom element with k-ng-disabled", 1, function(dom, controller, bootstrap) {
+        controller(function($scope) {
+            $scope.options = {
+                value: new Date()
+            };
+            $scope.disabled = true;
         });
-    });
 
-     runTest("Initialized from custom element with k-ng-disabled", function(dom, $scope){
-        $scope.options = {
-                    value: new Date()
-                };
-
-        $scope.disabled = true;
-
-        $("<div>" +
+       $("<div>" +
           "  <kendo-date-picker id='kdp' k-options='options' k-ng-disabled='disabled'></kendo-date-picker>" +
           "</div>").appendTo(dom);
 
-		expect(1);
-        $scope.whenRendered(function(){
-            $scope.$apply(function() {
-                $scope.disabled = false;
-            })
-            var isEnabled = $("[data-role=datepicker]").prop("disabled");
-            equal(isEnabled, $scope.disabled);
-            start();
-        });
+      bootstrap();
+
+      var $scope = dom.scope();
+      $scope.$apply(function() {
+          $scope.disabled = false;
+      })
+      var isEnabled = $("[data-role=datepicker]").prop("disabled");
+      equal(isEnabled, $scope.disabled);
     });
 
     runTest("k-ng-model change updates form status", function(dom, $scope){
