@@ -284,6 +284,31 @@
         ok($("#foo_overflow > .k-button").hasClass("k-state-active"));
     });
 
+    test("toggle method selects togglable button", function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", id: "foo", text: "foo", togglable: true }
+            ]
+        }).data("kendoToolBar");
+
+        toolbar.toggle("#foo_overflow", true);
+        ok($("#foo").hasClass("k-state-active"));
+        ok($("#foo_overflow > .k-button").hasClass("k-state-active"));
+    });
+
+    test("toggle method deselects togglable button", function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", id: "foo", text: "foo", togglable: true }
+            ]
+        }).data("kendoToolBar");
+
+        toolbar.toggle("#foo_overflow", true);
+        toolbar.toggle("#foo_overflow", false);
+        ok(!$("#foo").hasClass("k-state-active"));
+        ok(!$("#foo_overflow > .k-button").hasClass("k-state-active"));
+    });
+
     test("Hide method hides a button", 4, function() {
         var toolbar = container.kendoToolBar({
             items: [
