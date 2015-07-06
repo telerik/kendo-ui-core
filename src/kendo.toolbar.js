@@ -1046,7 +1046,7 @@ var __meta__ = {
                     item = element.data("button");
 
                 if (item.options.togglable) {
-                    item.toggle(checked ? checked : !item.options.selectable, true);
+                    item.toggle(checked ? checked : !item.options.selected, true);
                 }
             },
 
