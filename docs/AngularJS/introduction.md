@@ -419,6 +419,8 @@ To watch multiple options for change, just use `k-options` and pass the same var
 
 With the 2015 Q1 release support for `k-ng-disabled` and `k-ng-readonly` directives has been introduced. Using them you can change the disabled/readonly state of the widget based on a scope variable.
 
+`k-ng-disabled` is supported by all widgets containing an `enabled` method, `k-ng-readonly` by all widgets containing an `readonly` method.
+
 #### Change disabled state
 
 ```html
