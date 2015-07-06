@@ -90,6 +90,18 @@ Inherited from [Element.clippedBBox](element#methods-clippedBBox)
 `kendo.geometry.Rect` The bounding box of the element with clipping transformations applied.
 
 
+### insert
+Inserts an element at the specified position.
+
+#### Parameters
+
+##### position `Number`
+The position to insert the element at. Existing children beyond this position will be shifted right.
+
+##### element `kendo.drawing.Element`
+The element to insert.
+
+
 ### opacity
 Gets or sets the group opacity.
 Inherited from [Element.opacity](element#methods-opacity)
