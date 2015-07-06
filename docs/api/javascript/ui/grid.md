@@ -4398,6 +4398,8 @@ If set to `true` the pager will display buttons for going to the first, previous
 
 If set to `true` the pager will display buttons for navigating to specific pages. By default those buttons are displayed.
 
+Using `pageable.numeric` and [`pageable.input`](#configuration-pageable.input) at the same time is not recommended.
+
 #### Example - hide the numeric pager buttons
 
     <div id="grid"></div>
@@ -4449,6 +4451,8 @@ The maximum number of buttons displayed in the numeric pager. The pager will dis
 ### pageable.input `Boolean` *(default: false)*
 
 If set to `true` the pager will display an input element which allows the user to type a specific page number. By default the page input is not displayed.
+
+Using `pageable.input` and [`pageable.numeric`](#configuration-pageable.numeric) at the same time is not recommended.
 
 #### Example - show the pager input
 
