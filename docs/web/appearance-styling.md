@@ -33,7 +33,7 @@ No inline styles are used, except for some very specific cases in which these st
 
 Some themes require a different "common" (base) stylesheet that applies different dimensions. There are four "common" styleshees shipped with Kendo UI:
 
-* **kendo.common.css** - The default base stylesheet.
+* **kendo.common.css** - The default base stylesheet, which is required by the majority of the Kendo UI themes.
 
 * **kendo.common-bootstrap.css** - The base stylesheet for the Bootstrap theme. Use this file instead of kendo.common.css and only with kendo.bootstrap.css theme file to achieve Bootstrap like widget dimensions.
 
