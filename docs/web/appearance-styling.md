@@ -11,7 +11,7 @@ Kendo UI widgets arrive with a number of predefined themes:
 ![Kendo UI DataViz Themes](/web/web-themes.png)
 
 
-Setting a Kendo UI **Web** theme (i.e. excluding Mobile and DataViz) requires the inclusion of two stylesheets to your project:
+Setting a Kendo UI **Web** or **DataViz** theme (i.e. excluding Mobile) requires the inclusion of two stylesheets to your project:
 
 * **kendo.common.css** - This common (base) stylesheet applies styles related to element positioning and widget dimensions. It is a mandatory stylesheet for the widgets to look correct and function properly.
 
@@ -29,7 +29,9 @@ Setting a Kendo UI **Web** theme (i.e. excluding Mobile and DataViz) requires th
 The appearance of the **Kendo UI** widgets depends entirely on styles defined by the applied CSS classes.
 No inline styles are used, except for some very specific cases in which these styles must be set with Javascript, depending on the browser or configuration.
 
-Some themes require a different "common" stylesheet that applies different dimensions. There are four "common" styleshees shipped with Kendo UI:
+## Common CSS files
+
+Some themes require a different "common" (base) stylesheet that applies different dimensions. There are four "common" styleshees shipped with Kendo UI:
 
 * **kendo.common.css** - The default base stylesheet.
 

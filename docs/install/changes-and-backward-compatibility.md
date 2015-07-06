@@ -12,7 +12,7 @@ previous_url: /changes-and-backward-compatibility
 ### Changes from 2015 Q1 SP2 (2015.1.429)
 
 All Dataviz-related CSS code has been moved into the web widgets' CSS files. Please remove any references to **kendo.dataviz.css** and **kendo.dataviz.[theme].css**.
-Use only **kendo.common.css** and **kendo.[theme].css**.
+For more information, refer to [Data Visualization / Appearance and Styling](/dataviz/appearance-styling#themes-and-stylesheets).
 
 ## Kendo UI 2015 Q1 SP2
 
