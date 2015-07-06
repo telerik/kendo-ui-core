@@ -263,7 +263,7 @@ var __meta__ = {
     }
 
     function bindToKNgDisabled(widget, scope, element, kNgDisabled) {
-        if ((kendo.ui.PanelBar && widget instanceof kendo.ui.PanelBar) || (kendo.ui.Menu && widget instanceof kendo.ui.Menu)) {
+        if (typeof widget.enable != "function") {
             $log.warn("k-ng-disabled specified on a widget that does not have the enable() method: " + (widget.options.name));
             return;
         }
