@@ -264,7 +264,7 @@ var __meta__ = {
 
     function bindToKNgDisabled(widget, scope, element, kNgDisabled) {
         if ((kendo.ui.PanelBar && widget instanceof kendo.ui.PanelBar) || (kendo.ui.Menu && widget instanceof kendo.ui.Menu)) {
-            $log.warn("k-ng-disabled specified on a widget that does not have the enable() method: " + (widget.options.name));
+            $log.warn((widget.options.name) + " does not support k-ng-disabled.");
             return;
         }
         scope.$watch(kNgDisabled, function(newValue, oldValue) {
