@@ -28,7 +28,7 @@ Setting a Kendo UI DataViz theme is a two-step process:
 
 * Include stylesheets:
 
-1. **kendo.common.css**
+1. **kendo.common.css** OR the [common stylesheet, which is required by the respective theme stylesheet](/web/appearance-styling#common-css-files)
 1. **kendo.[theme].css**
 
 Some Kendo UI Web widgets are used internally to implement features such as tooltips, buttons, etc.
