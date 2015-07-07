@@ -176,3 +176,14 @@ Both approaches will produce the same result.
             tabstrip.select(0);
         });
     </script>
+
+## Scrollable Tabs
+
+As of Q2 2015 (version **2015.2.624**), the Kendo UI TabStrip supports scrollable tabs for `tabPosition` of `"top"` and `"bottom"`.
+During initialization, the widget will check if the tabs fit in the available horizontal space and if not, scroll buttons will appear on the widget sides.
+This behavior is enabled by default, but [can be disabled](/api/javascript/ui/tabstrip#configuration-scrollable).
+
+If the TabStrip has no fixed width and is placed in a fluid layout, it can re-check if tab scrolling becomes necessary, or is no longer required.
+To achieve this, execute the widget's [`resize()`](/using-kendo-in-responsive-web-pages#individual-widget-resizing) method, e.g. in `window.resize`.
+
+Check the [TabStrip API](/api/javascript/ui/tabstrip) for additional information about the widget configuration, events and methods.
