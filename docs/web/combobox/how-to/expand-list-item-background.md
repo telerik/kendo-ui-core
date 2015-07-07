@@ -48,7 +48,7 @@ HTML elements expand in general. There are two ways to overcome this phenomenon.
           $("#combo2").kendoComboBox({
             open: function(e){
               setTimeout(function(){
-                var list = e.sender.list.children("ul");
+                var list = e.sender.list.find("> div > ul");
                 var w = list[0].scrollWidth;
                 list.children().width(w);
               });
