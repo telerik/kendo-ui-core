@@ -135,6 +135,27 @@ for more information about ASP.NET MVC Authorization. The Menu will hide the men
 [HttpUnauthorizedResult](http://msdn.microsoft.com/en-us/library/system.web.mvc.httpunauthorizedresult.aspx). If you need to use custom AuthorizeAttribute check this
 [link](https://github.com/telerik/kendo-examples-asp-net-mvc/tree/master/kendo-menu-with-custom-authorization-attribute), which shows how to achieve your goal.
 
+## Using a form inside the TabStrip
+
+If `Html.BeginForm()` or `Ajax.BeginForm()` should be included inside a TabStrip `.Content()`, the correct way to do it is to use the TabStrip's `.Render()` method, as shown below.
+Otherwise the form will be rendered outside the TabStrip and data will not be submitted correctly.
+
+    @{Html.Kendo().TabStrip()
+        .Name("TabStrip1")
+        .Items(tabstrip =>
+        {
+            tabstrip.Add().Text("Tab 1")
+                .Content(@<text>
+                    @using (Ajax.BeginForm("...", "..."))
+                    {
+                        ...
+                    }
+                </text>);
+        }).Render();
+    }
+
+The above implementation is not required if the form is placed inside a partial view, which is loaded with Ajax via `.LoadContentFrom()`, or if a plain HTML `<form>` tag is used.
+    
 ## Accessing an Existing TabStrip
 
 You can reference an existing TabStrip instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
