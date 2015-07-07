@@ -60,6 +60,22 @@
         trigger("mousemove", { pageX: 10, pageY: 1 });
     });
 
+    test("prevent default from drag start event does not trigger drag cancel event when pressing escape", 1, function() {
+        setup({
+            dragstart: function(e) {
+                e.preventDefault();
+                ok(true);
+            },
+            dragcancel: function() {
+                ok(false);
+            }
+        });
+
+        trigger("mousedown", { pageX: 1, pageY: 1 });
+        trigger("mousemove", { pageX: 10, pageY: 1 });
+        trigger("keyup", { keyCode: 27 });
+    });
+
     test("drag event is raised during dragging", 2, function() {
             setup({
                 drag: function() {
