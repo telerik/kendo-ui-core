@@ -42,6 +42,9 @@ var __meta__ = {
                     "-ms-transition: -ms-transform .2s ease-out;" +
                     "transition: transform .2s ease-out;" +
                 "} " +
+                ".k-rpanel-top {" +
+                    "overflow: hidden;" +
+                "}" +
                 ".k-rpanel-animate.k-rpanel-top {" +
                     "-webkit-transition: max-height .2s linear;" +
                     "-ms-transition: max-height .2s linear;" +
