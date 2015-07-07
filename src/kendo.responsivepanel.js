@@ -21,6 +21,8 @@ var __meta__ = {
         init: function(element, options) {
             Widget.fn.init.call(this, element, options);
 
+            this._guid = "_" + kendo.guid();
+
             this._toggleHandler = proxy(this._toggleButtonClick, this);
             this._closeHandler = proxy(this._close, this);
 
@@ -29,23 +31,23 @@ var __meta__ = {
             this._registerBreakpoint();
 
             this.element
-                .addClass("k-rpanel k-rpanel-" + this.options.orientation);
+                .addClass("k-rpanel k-rpanel-" + this.options.orientation + " " + this._guid);
 
             this._resizeHandler = proxy(this.resize, this, false);
             $(window).on("resize" + NS, this._resizeHandler);
         },
         _mediaQuery:
             "@media (max-width: #= breakpoint-1 #px) {" +
-                ".k-rpanel-animate.k-rpanel-left," +
-                ".k-rpanel-animate.k-rpanel-right {" +
+                ".#= guid #.k-rpanel-animate.k-rpanel-left," +
+                ".#= guid #.k-rpanel-animate.k-rpanel-right {" +
                     "-webkit-transition: -webkit-transform .2s ease-out;" +
                     "-ms-transition: -ms-transform .2s ease-out;" +
                     "transition: transform .2s ease-out;" +
                 "} " +
-                ".k-rpanel-top {" +
+                ".#= guid #.k-rpanel-top {" +
                     "overflow: hidden;" +
                 "}" +
-                ".k-rpanel-animate.k-rpanel-top {" +
+                ".#= guid #.k-rpanel-animate.k-rpanel-top {" +
                     "-webkit-transition: max-height .2s linear;" +
                     "-ms-transition: max-height .2s linear;" +
                     "transition: max-height .2s linear;" +
@@ -53,22 +55,23 @@ var __meta__ = {
             "} " +
             "@media (min-width: #= breakpoint #px) {" +
                 "#= toggleButton # { display: none; } " +
-                ".k-rpanel-left { float: left; } " +
-                ".k-rpanel-right { float: right; } " +
-                ".k-rpanel-left, .k-rpanel-right {" +
+                ".#= guid #.k-rpanel-left { float: left; } " +
+                ".#= guid #.k-rpanel-right { float: right; } " +
+                ".#= guid #.k-rpanel-left, .#= guid #.k-rpanel-right {" +
                     "position: relative;" +
                     "-webkit-transform: translateX(0) translateZ(0);" +
                     "-ms-transform: translateX(0) translateZ(0);" +
                     "transform: translateX(0) translateZ(0);" +
                 "} " +
-                ".k-rpanel-top { max-height: none; }" +
+                ".#= guid #.k-rpanel-top { max-height: none; }" +
             "}",
         _registerBreakpoint: function() {
             var options = this.options;
 
             this._registerStyle(kendo.template(this._mediaQuery)({
                 breakpoint: options.breakpoint,
-                toggleButton: options.toggleButton
+                toggleButton: options.toggleButton,
+                guid: this._guid
             }));
         },
         _registerStyle: function(cssText) {
