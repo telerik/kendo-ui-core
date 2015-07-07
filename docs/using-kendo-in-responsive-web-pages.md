@@ -6,11 +6,14 @@ position: 190
 
 #Responsive Web Design concepts
 
-By definition, responsive web design or responsiveness is an approach to web design aimed at crafting sites to provide an optimal viewing experience - easy reading and navigation with a minimum of resizing, panning, and scrolling — across a wide range of devices (from desktop computer monitors to mobile phones). Responsive web design is the foundation of modern UX practices for building applications for the mobile web.
+By definition, responsive web design or responsiveness is an approach to web design aimed at crafting sites to provide an optimal viewing experience -
+easy reading and navigation with a minimum of resizing, panning, and scrolling — across a wide range of devices (from desktop computer monitors to mobile phones).
+Responsive web design is the foundation of modern UX practices for building applications for the mobile web.
 
 # Using Kendo UI in Responsive Web Pages
 
-Most Kendo UI Widgets work and auto-resize when used in responsive web pages out of the box. Several widgets will need an additional [kendo.resize](/api/framework/kendo#methods-resize) in case their dimensions are set to percentage values.
+Most Kendo UI Widgets work and auto-resize when used in responsive web pages out of the box. Several widgets will need an additional
+[kendo.resize](/api/framework/kendo#methods-resize) in case their dimensions are set to percentage values.
 
 ## Widgets that do not support auto resizing when container is resized: ##
 
@@ -23,6 +26,7 @@ Most Kendo UI Widgets work and auto-resize when used in responsive web pages out
 * Scheduler
 * Slider
 * Splitter
+* TabStrip
 * Window
 
 #### Auto resizing chart with 100% width
@@ -77,7 +81,7 @@ Most Kendo UI Widgets work and auto-resize when used in responsive web pages out
 
 ## Individual widget resizing
 
-Each Kendo UI widget has a `resize()` method, which can be used to trigger a layout readjustment, instead of using `kendo.resize`.
+Each Kendo UI widget has a `resize()` method, which can be used to trigger a layout readjustment, instead of using [`kendo.resize`](/api/framework/kendo#methods-resize).
 The widget's `resize` method accepts a single boolean parameter, which defines whether the widget should execute its layout adjustment algorithm
 even if the widget's dimensions have not changed ("force" mode).
 
@@ -94,8 +98,8 @@ even if the widget's dimensions have not changed ("force" mode).
 
 The code above uses a `wrapper` field, which is documented in the [Widget wrapper and widget element](/framework/widgets/wrapper-element) page.
 
-If the widget wrapper has a `height:100%` style and resizes automatically with its parent,
-then setting an explicit pixel height for the `wrapper` is not required before executing the `resize` method.
+If the widget wrapper resizes automatically with its parent element during browser window resize,
+then setting new dimensions for the `wrapper` before executing the `resize` method, or using "force" mode, is not required.
 
 ## Kendo UI and media queries
 
