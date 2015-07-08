@@ -2080,11 +2080,7 @@ var __meta__ = {
     function indexOfPristineModel(data, model) {
         if (model) {
             return indexOf(data, function(item) {
-                if (item.uid) {
-                    return item.uid == model.uid;
-                }
-
-                return item[model.idField] === model.id;
+                return (item.uid && item.uid == model.uid) || (item[model.idField] === model.id && model.id !== model._defaultId);
             });
         }
         return -1;

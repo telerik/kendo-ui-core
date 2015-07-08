@@ -644,6 +644,36 @@
         equal(dataSource.at(0).foo, "foo");
     });
 
+    test("cancelChanges reverts item state after read is called", function() {
+        var dataSource = new kendo.data.DataSource({
+            offlineStorage: "key",
+            schema: {
+                model: {
+                    id: "id"
+                }
+            },
+            transport: {
+                read: function(options) {
+                   options.success([
+                       {
+                           id: 1,
+                           name: "foo"
+                       }
+                   ]);
+                }
+            }
+        });
+
+        dataSource.read();
+        dataSource.online(false);
+        dataSource.read();
+        var model = dataSource.get(1);
+        model.set("name", "bar");
+        dataSource.cancelChanges(model);
+
+        equal(dataSource.data().length, 1);
+    });
+
     test("read resolves promise when pushing data to offline storage", function() {
         var dataSource = new kendo.data.DataSource({
             offlineStorage: "key"
