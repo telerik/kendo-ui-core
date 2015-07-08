@@ -32,7 +32,7 @@
                     namesShort: ["ne","po","ut","st","št","pi","so"]
                 },
                 months: {
-                    names: ["január","február","marec","apríl","máj","jún","júl","august","september","október","november","december"],
+                    names: ["január","február","marec","apríl","máj","jún","júl","august","septembra","október","november","december"],
                     namesAbbr: ["1","2","3","4","5","6","7","8","9","10","11","12"]
                 },
                 AM: ["dop.","dop.","DOP."],
