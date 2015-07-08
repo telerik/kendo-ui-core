@@ -872,8 +872,6 @@ An array of the selected files. Each item of the array is an object with the fol
 
 Fires when an upload / remove operation has been completed successfully.
 
-
-
 Note: The success event fires only when the upload is in
 [async mode](/web/upload/modes#asynchronous-mode).
 
@@ -903,19 +901,17 @@ Note: The success event fires only when the upload is in
 
 ##### e.files `Array`
 
-List of the files that were uploaded or removed . Each file has:
-
+List of the files that were uploaded or removed. Each file has:
 
 *   name
-*   extension - the file extension
-        including the leading dot - ".jpg", ".png", etc.
+*   extension - the file extension including the leading dot - ".jpg", ".png", etc.
 *   size - the file size in bytes (null if not available)
 
 ##### e.operation `String`
 
 "upload" or "remove".
 
-##### e.response `String`
+##### e.response `Object`
 
 The response object returned by the server.
 
