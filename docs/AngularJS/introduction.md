@@ -22,7 +22,7 @@ If you are using AngularJS then you probably want to use Angular's own routing m
 - [The k-value-primitive attribute](#the-k-value-primitive-attribute)
 - [Event handlers](#event-handlers)
 - [Updating widgets when options change](#updating-widgets-when-options-change)
-- [Change widget state using k-ng-disbaled and k-ng-readonly](#change-widget-state-using-k-ng-disbaled-and-k-ng-readonly)
+- [Change widget state using k-ng-disabled and k-ng-readonly](#change-widget-state-using-k-ng-disabled-and-k-ng-readonly)
 - [Delaying widget initialization](#delaying-widget-initialization)
 - [Getting widget references](#getting-widget-references)
 
@@ -254,7 +254,7 @@ The directive will update the `birthday` variable with the selected `Date` objec
 
 ### The k-value-primitive attribute
 
-Starting with the 2014.3.1119 release the `k-value-primitve` attribue has been introduced for DropDownList, ComboBox, MultiSelect and AutoComplete widgets.
+Starting with the 2014.3.1119 release the `k-value-primitve` attribute has been introduced for DropDownList, ComboBox, MultiSelect and AutoComplete widgets.
 
 With this option you can set the widget to either use primitive or object values. It will work in a similar way to `data-value-primitive` option in the [MVVM value binding](http://docs.telerik.com/kendo-ui/framework/mvvm/bindings/value#use-the-value-binding-with-a-select-widget-to-update-the-view-model-field-with-the-value-field-when-the-initial-value-is-null).
 
@@ -415,7 +415,7 @@ To watch multiple options for change, just use `k-options` and pass the same var
 
     <ul kendo-menu k-options="menuOptions" k-rebind="menuOptions"> ... </ul>
 
-### Change widget state using k-ng-disbaled and k-ng-readonly
+### Change widget state using k-ng-disabled and k-ng-readonly
 
 With the 2015 Q1 release support for `k-ng-disabled` and `k-ng-readonly` directives has been introduced. Using them you can change the disabled/readonly state of the widget based on a scope variable.
 
