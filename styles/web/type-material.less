@@ -3633,7 +3633,6 @@ div.k-scheduler-marquee:after {
 
         .k-pager-wrap .k-pager-nav,
         .k-pager-input {
-            float:none;
             display: inline-block;
             vertical-align: top;
         }
@@ -3647,11 +3646,15 @@ div.k-scheduler-marquee:after {
             display: inline-flex;
             -webkit-flex-direction: column-reverse;
             flex-direction: column-reverse;
+            overflow: visible;
+            height: auto;
+        }
+
+        .k-pager-numbers.k-state-expanded,
+        .k-grid .k-pager-numbers.k-state-expanded {
             -webkit-transform: translatey(-100%);
             -moz-transform: translatey(-100%);
             transform: translatey(-100%);
-            overflow: visible;
-            height: auto;
         }
 
         .km-pane-wrapper .k-pager-numbers .k-link,
