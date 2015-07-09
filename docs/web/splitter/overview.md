@@ -11,7 +11,6 @@ children of an HTML element in to the interactive layout, adding resize and coll
 configuration. A **Splitter** can be mixed in a vertical or horizontal orientation to build
 complex layouts.
 
-
 ## Getting Started
 
 The layout and structure of a **Splitter** is defined within the DOM as a div with child elements.
@@ -46,8 +45,6 @@ options may be overriden to control the following properties:
 *   Resizable and collapsible/expandable pane behaviors
 *   Orientation (horizontal or vertical)
 
-
-
 The properties of a pane must be set during initialization and set for each individual pane in a
 **Splitter**.
 
@@ -60,7 +57,6 @@ The properties of a pane must be set during initialization and set for each indi
         ],
         orientation: "vertical"
     });
-
 
 ## Nested Splitter Layouts
 
@@ -88,7 +84,6 @@ Nested Splitters will be sized automatically to match the parent pane's height i
 We recommend using a nested Splitter, which is a direct child of the parent Splitter's pane.
 
 ## Loading Content with AJAX
-
 
 While any valid technique for loading content via AJAX may be used, **Splitter** provides built-in
 support for asynchronously loading content from URLs. These URLs should return HTML fragments that can be
@@ -127,87 +122,7 @@ use the API to control its behavior.
 
 ## Make the Splitter expand to 100% height
 
-When making the Splitter 100% high, one should keep in mind that web standards require elements with percentage height to have a parent element with an explicit height.
-In this case the parent of the Splitter is the `body`, so it receives a `height:100%` style, which in turn results in the `html` element obtaining the style as well. If the requirement is not met,
-the Splitter's computed height will fallback to `auto` and the widget may collapse completely, depending ot its content. In addition, the Splitter should have its border removed. 100% high elements
-cannot have borders, margins, paddings and sibling elements. In a nested Splitters scenario, the inner Splitters remove their borders automatically,
-given that each Splitter is a direct child of a parent pane.
-
-### HTML Markup
-
-    <body>
-      <div id="vertical">
-        <div>
-            <p>
-                Outer splitter : top pane (resizable and collapsible)
-            </p>
-        </div>
-        <div>
-            <div id="horizontal">
-                <div>
-                    <p>
-                        Inner splitter :: left pane
-                    </p>
-                </div>
-                <div>
-                        Inner splitter :: center pane
-                </div>
-                <div>
-                    <p>
-                        Inner splitter :: right pane
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div>
-            <p>
-                Outer splitter : bottom pane (non-resizable, non-collapsible)
-            </p>
-        </div>
-    </div>
-
-    </body>
-
-### Javascript code
-
-    $("#vertical").kendoSplitter({
-        orientation: "vertical",
-        panes: [
-            { collapsible: true, size: "60px" },
-            { collapsible: false },
-            { collapsible: false, resizable: false, size: "10%" }
-        ]
-    });
-
-    $("#horizontal").kendoSplitter({
-        panes: [
-            { collapsible: true, size: "100px" },
-            { collapsible: false },
-            { collapsible: true, size: "20%" }
-        ]
-    });
-
-### CSS code
-
-    html,
-    body
-    {
-        height:100%;
-        margin:0;
-        padding:0;
-        overflow:hidden;
-    }
-
-    #vertical,
-    #horizontal
-    {
-        height:100%;
-    }
-
-    #vertical
-    {
-        border-width: 0;
-    }
+Check the example: [Expand the Splitter to 100% Height and Make it Resize Automatically](/web/splitter/how-to/expand-splitter-to-100-height)
 
 ## Resizing a Splitter manually
 
