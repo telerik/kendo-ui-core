@@ -354,7 +354,9 @@ Bound columns have the following settings:
 
 A [Kendo UI template](/framework/templates/overview) which specifies the way the column is displayed.
 
-> The `ClientTemplate` is used when he grid is configured for **[ajax binding](/aspnet-mvc/helpers/grid/ajax-binding)**.
+> The `ClientTemplate` is used when the grid is configured for **[ajax binding](/aspnet-mvc/helpers/grid/ajax-binding)**
+or when [**server binding**](/aspnet-mvc/helpers/grid/server-binding) is combined with **client-side data operations**
+(i.e. [`ServerOperation` is set to `false`](/aspnet-mvc/helpers/grid/ajax-binding#enable-client-data-processing-during-ajax-binding)).
 
 Client templates defined in server-side code are URL encoded before sent to the client.
 As a result, a plus sign, which is used **inside a binding expression**, will be lost (e.g. `"#= 3 + 5 #"`).
@@ -477,8 +479,13 @@ Enables or disables sorting by that column.
     )
 
 ###  Template
+
 Sets the server template which will be used when displaying the bound field.
+
 > The `Template` is used when he grid is configured for [server binding](/aspnet-mvc/helpers/grid/ajax-binding).
+If client-side data operations are enabled
+([`ServerOperation` is set to `false`](/aspnet-mvc/helpers/grid/ajax-binding#enable-client-data-processing-during-ajax-binding)),
+you will also need a [`ClientTemplate`](#clienttemplate).
 
 In WebForms the template is a [server side code block](http://msdn.microsoft.com/en-us/library/ms178135%28vs.80%29.aspx).
 In Razor the template is a [templated razor delegate](http://haacked.com/archive/2011/02/27/templated-razor-delegates.aspx).
