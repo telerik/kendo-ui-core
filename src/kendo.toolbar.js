@@ -497,7 +497,13 @@ var __meta__ = {
                     isRtl: this.toolbar._isRtl,
                     copyAnchorStyles: false,
                     animation: options.animation,
-                    open: adjustPopupWidth
+                    open: adjustPopupWidth,
+                    activate: function() {
+                        this.element.find(":kendoFocusable").first().focus();
+                    },
+                    close: function() {
+                        element.focus();
+                    }
                 }).data("kendoPopup");
             },
 
@@ -735,7 +741,7 @@ var __meta__ = {
                 overflow: OverflowSeparator
             },
 
-            overflowAnchor: '<div class="k-overflow-anchor"></div>',
+            overflowAnchor: '<a href class="k-overflow-anchor"></a>',
             overflowContainer: '<ul class="k-overflow-container k-list-container"></ul>'
         };
 
@@ -1110,10 +1116,37 @@ var __meta__ = {
                             e.preventDefault();
                         }
                     },
+                    activate: function() {
+                        this.element.find(":kendoFocusable").first().focus();
+                    },
                     close: function (e) {
                         if (that.trigger(OVERFLOW_CLOSE)) {
                             e.preventDefault();
                         }
+
+                        this.element.focus();
+                    }
+                });
+
+                that.popup.element.on("keydown", "." + BUTTON, function(e) {
+                    var target = $(e.target),
+                        li = target.parent(),
+                        isComplexTool = li.is("." + BUTTON_GROUP) || li.is("." + SPLIT_BUTTON),
+                        element;
+
+                    e.preventDefault();
+
+                    if (e.keyCode === keys.ESC || e.keyCode === keys.TAB || (e.altKey && e.keyCode === keys.UP)) {
+                        that._toggleOverflow();
+                        that.overflowAnchor.focus();
+                    } else if (e.keyCode === keys.DOWN) {
+                        element = !isComplexTool || (isComplexTool && target.is(":last-child")) ? li : target;
+                        findFocusableSibling(element, "next").focus();
+                    } else if (e.keyCode === keys.UP) {
+                        element = !isComplexTool || (isComplexTool && target.is(":first-child")) ? li : target;
+                        findFocusableSibling(element, "prev").focus();
+                    } else if (e.keyCode === keys.SPACEBAR || e.keyCode === keys.ENTER) {
+                        that.userEvents.trigger("tap", { target: $(e.target) });
                     }
                 });
 
