@@ -440,7 +440,7 @@ var __meta__ = {
                 this.popupElement = $('<ul class="' + LIST_CONTAINER + '"></ul>');
 
                 this.mainButton.element
-                    .removeAttr("href")
+                    .removeAttr("href tabindex")
                     .appendTo(element);
 
                 this.arrowButton.appendTo(element);
