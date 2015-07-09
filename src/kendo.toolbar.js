@@ -130,7 +130,7 @@ var __meta__ = {
 
         var Button = Item.extend({
             init: function(options, toolbar) {
-                var element = options.useButtonTag ? $('<button></button>') : $('<a></a>');
+                var element = options.useButtonTag ? $('<button tabindex="0"></button>') : $('<a href tabindex="0"></a>');
 
                 this.element = element;
                 this.options = options;
