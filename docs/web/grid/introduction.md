@@ -112,7 +112,7 @@ When creating the Grid from an existing table, the following **column** settings
 
 All attributes should be applied to the `<th>` elements, except the column width styles.
 
-All other column-related settings cannot be defined via HTML attributes in the <table>. If such settings must be used (e.g. commands, locking, editors, etc.)
+All other column-related settings cannot be defined via HTML attributes in the `<table>`. If such settings must be used (e.g. commands, locking, editors, etc.)
 then the above attribute configuration should be abandoned and all settings should be included in the Grid's Javascript initialization statement
 (when using declarative widget initialization, the column properties should be set via the `data-columns` attribute).
 
