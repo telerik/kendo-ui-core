@@ -895,7 +895,7 @@
 }
 
 .k-rtl.k-overflow-container .k-overflow-button,
-.k-rtl .k-split-container .k-button
+.k-rtl.k-split-container .k-button
 {
     text-align: right;
 }
