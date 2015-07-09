@@ -430,7 +430,7 @@ var __meta__ = {
 
         var ToolBarSplitButton = Item.extend({
             init: function(options, toolbar) {
-                var element = this.element = $('<div class="' + SPLIT_BUTTON + '"></div>');
+                var element = this.element = $('<div class="' + SPLIT_BUTTON + '" tabindex="0"></div>');
 
                 this.options = options;
                 this.toolbar = toolbar;
@@ -439,7 +439,10 @@ var __meta__ = {
                 this.arrowButton = $('<a class="' + BUTTON + " " + SPLIT_BUTTON_ARROW + '"><span class="' + (options.mobile ? "km-icon km-arrowdown" : "k-icon k-i-arrow-s") + '"></span></a>');
                 this.popupElement = $('<ul class="' + LIST_CONTAINER + '"></ul>');
 
-                this.mainButton.element.appendTo(element);
+                this.mainButton.element
+                    .removeAttr("href")
+                    .appendTo(element);
+
                 this.arrowButton.appendTo(element);
                 this.popupElement.appendTo(element);
 
@@ -458,6 +461,7 @@ var __meta__ = {
 
                 this.createMenuButtons();
                 this.createPopup();
+                this._navigatable();
 
                 this.mainButton.main = true;
 
@@ -465,6 +469,27 @@ var __meta__ = {
                     type: "splitButton",
                     splitButton: this,
                     kendoPopup: this.popup
+                });
+            },
+
+            _navigatable: function() {
+                var that = this;
+
+                that.popupElement.on("keydown", "." + BUTTON, function(e) {
+                    var li = $(e.target).parent();
+
+                    e.preventDefault();
+
+                    if (e.keyCode === keys.ESC || e.keyCode === keys.TAB || (e.altKey && e.keyCode === keys.UP)) {
+                        that.toggle();
+                        that.focus();
+                    } else if (e.keyCode === keys.DOWN) {
+                        findFocusableSibling(li, "next").focus();
+                    } else if (e.keyCode === keys.UP) {
+                        findFocusableSibling(li, "prev").focus();
+                    } else if (e.keyCode === keys.SPACEBAR || e.keyCode === keys.ENTER) {
+                            that.toolbar.userEvents.trigger("tap", { target: $(e.target) });
+                    }
                 });
             },
 
@@ -522,8 +547,11 @@ var __meta__ = {
                 }
                 this.mainButton.enable(isEnabled);
                 this.options.enable = isEnabled;
-            }
+            },
 
+            focus: function() {
+                this.element.focus();
+            }
         });
 
         var OverflowSplitButton = Item.extend({
