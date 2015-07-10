@@ -81,7 +81,7 @@ $.extend(true, kendo.ui.Gantt.prototype.options.messages,{
   "cancel": "בטל",
   "deleteDependencyWindowTitle": "מחיקה",
   "deleteTaskWindowTitle": "מחיקה",
-  "destroy": "Изтрий",
+  "destroy": "Delete",
   "editor": {
     "assingButton": "שייך",
     "editorTitle": "כותרת",
