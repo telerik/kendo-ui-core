@@ -14,11 +14,16 @@ var __meta__ = {
         description: "Support for accessing Open Data Protocol (OData) services.",
         depends: [ "data.odata" ]
     }, {
+        id: "data-signalr",
+        name: "SignalR",
+        description: "Support for binding to SignalR hubs.",
+        depends: [ "data.signalr" ]
+    }, {
         id: "data-XML",
         name: "XML",
         description: "Support for binding to XML.",
         depends: [ "data.xml" ]
-    } ]
+    }]
 };
 
 /*jshint eqnull: true, loopfunc: true, evil: true */
