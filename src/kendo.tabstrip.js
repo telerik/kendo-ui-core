@@ -1007,9 +1007,13 @@ var __meta__ = {
                 } else if (that._scrollableModeActive && tabGroupScrollWidth <= wrapperOffsetWidth) {
                     that._scrollableModeActive = false;
 
+                    that.wrapper.removeClass("k-tabstrip-scrollable");
+
                     that._scrollPrevButton.off().remove();
                     that._scrollNextButton.off().remove();
                     that.tabGroup.css({ marginLeft: "", marginRight: "" });
+                } else if (!that._scrollableModeActive) {
+                    that.wrapper.removeClass("k-tabstrip-scrollable");
                 }
             }
         },
