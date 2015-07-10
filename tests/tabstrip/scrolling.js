@@ -14,7 +14,7 @@ function createNonScrollableTabStrip(options) {
     }, options));
 }
 
-module('tabstrip ajax loading', {
+module('tabstrip scrolling', {
     setup: function() {
         kendo.effects.disable();
 
@@ -77,7 +77,7 @@ test('scrolling CSS class is applied to TabStrip if tabPosition is top', 1, func
 });
 
 test('scrolling CSS class is applied to TabStrip if tabPosition is bottom', 1, function () {
-    createTabStrip({ tabPosition: "top" });
+    createTabStrip({ tabPosition: "bottom" });
 
     ok(tabstrip.wrapper.hasClass("k-tabstrip-scrollable"));
 });
@@ -90,6 +90,18 @@ test('scrolling CSS class is not applied to TabStrip if tabPosition is left', 1,
 
 test('scrolling CSS class is not applied to TabStrip if tabPosition is right', 1, function () {
     createTabStrip({ tabPosition: "right" });
+
+    ok(!tabstrip.wrapper.hasClass("k-tabstrip-scrollable"));
+});
+
+test('scrolling CSS class is not applied to TabStrip if not needed and tabPosition is top', 1, function () {
+    createNonScrollableTabStrip({ tabPosition: "top" });
+
+    ok(!tabstrip.wrapper.hasClass("k-tabstrip-scrollable"));
+});
+
+test('scrolling CSS class is not applied to TabStrip if not needed and tabPosition is bottom', 1, function () {
+    createNonScrollableTabStrip({ tabPosition: "bottom" });
 
     ok(!tabstrip.wrapper.hasClass("k-tabstrip-scrollable"));
 });
