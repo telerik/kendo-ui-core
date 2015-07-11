@@ -401,6 +401,25 @@ test("select uses data value field if data-value-primitive is set to true", func
     strictEqual(viewModel.selectedItem, viewModel.foo[1].text);
 });
 
+test("select with souce binding and value primitive", function() {
+    var viewModel = kendo.observable( {
+        foo: [ { id: 1, name: "foo" }, { id: new Date(), name: "bar" } ],
+        selectedItem: null
+    });
+
+    var dom = $('<select data-value-primitive="true" data-text-field="name" data-value-field="id" data-bind="source: foo, value: selectedItem"> </select>');
+
+    kendo.bind(dom, viewModel);
+
+    dom.find("option:first")[0].selected = false;
+    dom.find("option:last")[0].selected = true;
+
+    dom.trigger("change");
+    dom.triggerHandler("change");
+
+    strictEqual(viewModel.selectedItem, viewModel.foo[1].id);
+});
+
 test("select uses data value field if data-value-primitive is set to true with data source", function() {
     var viewModel = kendo.observable( {
         foo: new kendo.data.DataSource({ data: [ { text: "foo" }, { text: "bar" } ]}),
