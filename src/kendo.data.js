@@ -2262,6 +2262,10 @@ var __meta__ = {
             batch: false
         },
 
+        clone: function() {
+            return this;
+        },
+
         online: function(value) {
             if (value !== undefined) {
                 if (this._online != value) {

@@ -52,4 +52,19 @@ test("Clones objects with clone method", function() {
     ok(dst.foo);
 });
 
+test("Does not mangle DataSource instances", function() {
+    var ds = new kendo.data.DataSource();
+    deepExtend(dst, { ds: ds });
+
+    equal(dst.ds, ds);
+});
+
+test("Does not mangle custom DataSource instances", function() {
+    var MyDataSource = kendo.data.DataSource.extend({});
+    var ds = new MyDataSource();
+    deepExtend(dst, { ds: ds });
+
+    equal(dst.ds, ds);
+});
+
 }());
