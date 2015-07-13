@@ -224,8 +224,6 @@ span.k-dropdown,
     background: transparent;
 }
 
-.k-ie7 .k-picker-wrap .k-input, .k-ie7 .k-numeric-wrap .k-input, .k-ie7 .k-combobox .k-input { margin: -1px 0; } /* removes excessive spacing */
-
 .k-picker-wrap .k-select,
 .k-numeric-wrap .k-select,
 .k-dropdown-wrap .k-select
@@ -331,15 +329,6 @@ span.k-datetimepicker .k-select+.k-select
     display: inline;
 }
 
-.k-ie7 .k-autocomplete .k-input,
-.k-ie7 .k-picker-wrap .k-input,
-.k-ie7 .k-numeric-wrap .k-input,
-.k-ie7 .k-dropdown-wrap .k-input,
-.k-ie7 .k-selectbox .k-input
-{
-    text-indent: 0;
-}
-
 .k-picker-wrap .k-select,
 .k-numeric-wrap .k-select,
 .k-dropdown-wrap .k-select
@@ -361,15 +350,6 @@ span.k-datetimepicker .k-select+.k-select
 body .k-datetimepicker .k-select
 {
     border-radius: 0;
-}
-
-.k-ie7 .k-picker-wrap .k-icon,
-.k-ie7 .k-dropdown-wrap .k-icon
-{
-    line-height: 2em;
-    font-size: 1em;
-    padding-top: 16px;
-    height: 0;
 }
 
 .k-combobox .k-icon,
@@ -604,17 +584,9 @@ input.k-textbox
     height: 2.17em;
 }
 
-.k-ie7 input.k-textbox { line-height: 1.72em; height: 1.72em; text-indent: @input-indent; }
-
 textarea.k-textbox
 {
     height: auto;
-}
-
-.k-ie7 .k-textbox
-{
-    padding: 1px 0;
-    text-indent: 0;
 }
 
 /* NumericTextBox */
@@ -900,7 +872,7 @@ span.k-numerictextbox
     }
 }
 
-.k-ie7, .k-ie8 {
+.k-ie8 {
     .k-flatcolorpicker {
         .k-hue-slider {
             .k-slider-track {
