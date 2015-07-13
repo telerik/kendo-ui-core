@@ -1046,7 +1046,6 @@ div.k-filebrowser-dropzone em
     opacity:.7;
 }
 
-.k-ie7 .k-state-disabled,
 .k-ie8 .k-state-disabled
 {
     filter:alpha(opacity=70);
@@ -2006,6 +2005,8 @@ html .km-pane-wrapper .km-widget,
     border-color: @hover-border-color;
 }
 
+.k-tabstrip-items .k-state-active,
+.k-panelbar .k-tabstrip-items .k-state-active,
 .k-ie7 .k-tabstrip-items .k-state-active .k-loading
 {
     background-color: @active-background-color;
@@ -2912,7 +2913,7 @@ border-radius: 0;
     border-radius: 0;
 }
 
-.k-tabstrip-items li.k-state-active {
+.k-tabstrip-items .k-state-active {
 background-color: @header-background-color;
 .composite-background(@active-gradient);
 border-color: @selected-background;

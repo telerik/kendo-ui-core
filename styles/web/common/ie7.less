@@ -85,17 +85,281 @@
 .k-ie7 .k-task-summary,
 .k-ie7 .k-task-actions:first-child > .k-link,
 .k-ie7 .k-task-wrap:hover .k-task-delete,
-.k-ie7 .k-task-wrap-active .k-task-delete
+.k-ie7 .k-task-wrap-active .k-task-delete,
+
+.k-ie7 .k-navigator,
+.k-ie7 .k-zoom-control
 
 { display: inline; zoom: 1; }
 
+/* IE7 zooms */
+
 .k-ie7 .k-treeview .k-item,
 .k-ie7 .k-treeview .k-group
-{
-    zoom: 1;
-}
+{ zoom: 1; }
 
-.k-ie7 .k-edit-field > .k-textbox
+/* IE7 textboxes */
+
+.k-ie7 .k-edit-field > .k-textbox { text-indent: 0; }
+
+/* IE7 icons */
+
+.k-ie7 .k-icon, .k-ie7 .k-sprite { text-indent: 0; }
+
+/* IE7 disabled state */
+
+.k-ie7 .k-state-disabled { filter: alpha(opacity=70); }
+
+/* IE7 Button */
+
+.k-ie7 .k-button { line-height: normal; overflow: visible; margin-right: 4px; }
+.k-ie7 a.k-button { line-height: 1.6; padding-left: 7px; padding-right: 7px;/*+1*/ }
+.k-ie7 .k-button-expand { margin-left: 0; margin-right: 0; }
+.k-ie7 a.k-button-icon { padding-left: 5px; padding-right: 5px;/*+1*/ }
+
+/* IE7 input widgets */
+
+.k-ie7 .k-picker-wrap .k-input, .k-ie7 .k-numeric-wrap .k-input, .k-ie7 .k-combobox .k-input { margin: -1px 0; } /* removes excessive spacing */
+
+.k-ie7 .k-autocomplete .k-input,
+.k-ie7 .k-picker-wrap .k-input,
+.k-ie7 .k-numeric-wrap .k-input,
+.k-ie7 .k-dropdown-wrap .k-input,
+.k-ie7 .k-selectbox .k-input
 {
     text-indent: 0;
 }
+
+.k-ie7 .k-picker-wrap .k-icon,
+.k-ie7 .k-dropdown-wrap .k-icon
+{
+    /*use alternative approach for vertical expansion, instead of min-height and height*/
+    line-height: 2em;
+    font-size: 1em;
+    padding-top: 16px;
+    height: 0;
+}
+
+.k-ie7 input.k-textbox { line-height: 1.72em; height: 1.72em; text-indent: .33em; }
+
+.k-ie7 .k-textbox
+{
+    padding: 1px 0;
+    text-indent: 0;
+}
+
+/*IE7 ColorPicker*/
+
+.k-ie7 {
+    .k-flatcolorpicker {
+        .k-hue-slider {
+            .k-slider-track {
+                background: url("textures/hue.png") repeat 0 50%;
+            }
+        }
+        .k-transparency-slider {
+            .k-slider-track {
+                background: url("textures/transparency.png") repeat 0 50%;
+            }
+        }
+        .k-hsv-gradient {
+            filter: ~"progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff',endColorstr='#00ffffff',GradientType=1) progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000',endColorstr='#ff000000',GradientType=0)";
+        }
+    }
+}
+
+/*IE7 Editor*/
+
+.k-ie7 .k-editor-toolbar li
+{
+    display: inline; /* required. Floats and the inline-block hack break it */
+}
+
+.k-ie7 .k-filebrowser .k-upload-button, .k-ie7 .k-filebrowser .k-upload .k-icon { vertical-align: baseline; position: relative; top: 1px; }
+
+.k-ie7 .k-filebrowser .k-upload .k-icon { top: 2px; }
+
+.k-ie7 .k-filebrowser .k-filebrowser-toolbar .k-button-icon { vertical-align: middle; }
+
+/*IE7 Gantt*/
+
+.k-ie7 .k-task-milestone
+{
+    margin-left: 1px;/*+1*/
+}
+
+/* IE7 Grid */
+
+.k-ie7 .k-grid-content table { width: auto; }
+
+.k-ie7 .k-pager-wrap .k-textbox
+{
+    height:1.3333em;
+    margin-top:0.16666em;
+    display:inline;
+}
+
+.k-ie7 .k-pager-sizes
+{
+    float:left;
+}
+
+.k-ie7 .k-dirty-cell
+{
+    position: relative;
+}
+
+.k-ie7 .k-dirty
+{
+    top: 5px;
+}
+
+.k-ie7 .k-grid-actions{ vertical-align: bottom; }
+
+.k-ie7 .k-grid tbody a.k-button
+{
+    min-width: 62px;/*-2*/
+}
+
+.k-ie7 .k-edit-cell>.text-box,
+.k-ie7 .k-edit-cell>.k-textbox,
+.k-ie7 .k-edit-cell>.k-widget,
+.k-ie7 .k-grid-edit-row>td>.k-textbox,
+.k-ie7 .k-grid-edit-row>td>.k-widget,
+.k-ie7 .k-grid-edit-row>td>.text-box,
+{
+    display: block;
+    width: 90%;
+}
+
+/*IE7 Menu*/
+
+.k-ie7 .k-menu .k-item .k-item
+{
+    zoom: normal;
+}
+
+.k-ie7 .k-menu .k-item > .k-link > .k-i-arrow-s,
+.k-ie7 .k-menu .k-image,
+.k-ie7 .k-menu .k-sprite { margin-top: 0; /*+2*/ }
+
+.k-ie7 .k-menu .k-menu-group .k-link
+{
+    width: 100%;
+}
+
+/*IE7 ProgressBar */
+
+.k-ie7 .k-progressbar-vertical .k-progress-status
+{
+    /*instead of transforms*/
+    writing-mode: tb-rl;
+    padding: .5em 0;
+}
+
+/*IE7 Scheduler*/
+
+.k-ie7 .k-scheduler-toolbar .k-nav-prev .k-link,
+.k-ie7 .k-scheduler-toolbar .k-nav-next .k-link
+{
+    height: 2.3em;
+    margin-top: -1px;
+    vertical-align: middle;
+}
+
+.k-ie7 .k-scheduler-toolbar .k-nav-prev .k-link .k-icon,
+.k-ie7 .k-scheduler-toolbar .k-nav-next .k-link .k-icon
+{
+    margin-top: .5em;
+}
+
+.k-ie7 .k-scheduler-content .k-scheduler-table
+{
+    width: auto;
+}
+
+/* IE7 Slider */
+
+.k-ie7 .k-slider .k-icon { margin-top: 2px; }
+
+/* fixes ticks position and removes spacing between them in IE7 */
+.k-ie7 .k-slider-vertical .k-tick { float: left; clear: left; width: 100%; }
+
+.k-ie7 .k-slider a.k-button { height: 22px; line-height: 22px; padding: 0; }
+
+/*IE7 TabStrip */
+
+.k-ie7 .k-tabstrip-items .k-item .k-image,
+.k-ie7 .k-tabstrip-items .k-item .k-sprite
+{
+    margin-top: -1px;
+    vertical-align: top;
+}
+
+/* IE7 Upload */
+
+.k-ie7 .k-dropzone em, .k-ie7 .k-upload-button { vertical-align: baseline; }
+
+.k-ie7 .k-upload-button
+{
+    margin: .8em;
+}
+
+.k-ie7 .k-upload-files .k-button{line-height: 1;} /*IE7*/
+
+.k-ie7 .k-upload-selected { min-width: 100px; }
+
+/* IE7 Window */
+
+/* Compensate for content padding in IE7 */
+.k-ie7 .k-window { padding-bottom: 1.16em; }
+.k-ie7 .k-window-titleless { padding-bottom: 0; }
+
+/* IE7 Map */
+
+.k-ie7 .k-navigator > button
+{
+    border-width: 0;
+    display: block;
+}
+
+.k-ie7 .k-navigator > button > span
+{
+    vertical-align: top;
+    display: block;
+}
+
+.k-ie7 div.k-navigator .k-navigator-n,
+.k-ie7 div.k-navigator .k-navigator-s
+{ margin-left: -8px;/*+1*/ }
+
+.k-ie7 div.k-navigator .k-navigator-w,
+.k-ie7 div.k-navigator .k-navigator-e
+{ margin-top: -8px;/*+1*/ }
+
+.k-ie7 .k-zoom-control .k-button
+{ margin: 0;/*-14*/ }
+
+/*IE7 TreeMap */
+
+.k-ie7 .k-treemap .k-treemap-tile
+{
+    border-width: 0;
+    padding: 0;
+}
+
+.k-ie7 .k-treemap .k-leaf > div
+{
+    padding: 7px;
+}
+
+.k-ie7 .k-treemap .k-leaf.k-state-hover
+{
+    border-width: 1px;
+}
+
+.k-ie7 .k-treemap .k-leaf.k-state-hover > div
+{
+    padding: 6px;
+}
+
