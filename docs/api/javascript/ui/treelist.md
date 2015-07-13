@@ -1271,6 +1271,30 @@ The editing mode to use. The supported editing modes are "inline" and "popup".
         });
     </script>
 
+### editable.move `Boolean` *(default: false)*
+
+Enables drag&drop UI of rows between parents.
+
+#### Example - use drag&drop for editing row parent node
+
+    <div id="treeList"></div>
+    <script>
+        $("#treeList").kendoTreeList({
+          columns: [
+            { field: "name" },
+            { field: "age" },
+            { command: [ "edit" ] }
+          ],
+          editable: {
+            move: true
+          },
+          dataSource: [
+              { name: "Jane Doe", age: 30 },
+              { name: "John Doe", age: 33 }
+          ]
+        });
+    </script>
+
 ### editable.template `String|Function`
 
 The [template](/api/framework/kendo#methods-template) which renders the popup editor.
