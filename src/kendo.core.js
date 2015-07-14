@@ -3214,7 +3214,7 @@ function pad(number, digits, end) {
     }
 
     function visible(element) {
-        return $.expr.filters.hidden(element) &&
+        return $.expr.filters.visible(element) &&
             !$(element).parents().addBack().filter(function() {
                 return $.css(this,"visibility") === "hidden";
             }).length;
