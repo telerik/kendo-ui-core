@@ -21,7 +21,9 @@ The title of the increase button of the **Slider**.
 ### largeStep `Number`*(default: 5)*
 
 The delta with which the value will change when the user presses the Page Up or Page Down key (the drag
-handle must be focused). Note: The allied `largeStep` will also set large tick for every large step.
+handle must be focused). Note: `largeStep` will also set a large tick for every large step.
+
+Must be a positive number, larger than [smallStep](#configuration-smallStep).
 
 ### max `Number`*(default: 10)*
 
@@ -42,9 +44,13 @@ increase and decrease buttons of a **Slider**.
 
 ### smallStep `Number`*(default: 1)*
 
-The small step value of the **Slider**. The underlying value will be changed when the end user
-(1) clicks on the increase or decrease buttons of the **Slider**, (2) presses the arrow keys
-(the drag handle must be focused), or (3) drags the drag handle.
+The small step value of the **Slider**. Must be a positive number, otherwise an Javascript exception will be thrown.
+
+The small step value determines the amount of Slider value change when the end user
+
+* clicks on the increase or decrease buttons of the **Slider**;
+* presses the arrow keys (the drag handle must be focused);
+* drags the drag handle.
 
 ### tickPlacement `String`*(default: "both")*
 
