@@ -46,10 +46,10 @@ The second element.
     <div id="foo" style="position: absolute; top:10px; left: 10px; height: 200px; width: 200px"></div>
     <div id="bar" style="position: absolute; top:10px; left: 10px; height: 100px; width: 50px"></div>
     <script>
-        var fooBox = kendo.effects.box($("#foo")),
+        var fooBox = kendo.effects.box($("#foo"));
         var barBox = kendo.effects.box($("#bar"));
 
-        console.log(kendo.effects.fillScale(bar, foo); // 0.5;
+        console.log(kendo.effects.fillScale(barBox, fooBox)); // 0.25;
     </script>
 
 ### fitScale
@@ -71,10 +71,10 @@ The second element.
     <div id="foo" style="position: absolute; top:10px; left: 10px; height: 200px; width: 200px"></div>
     <div id="bar" style="position: absolute; top:10px; left: 10px; height: 100px; width: 50px"></div>
     <script>
-        var fooBox = kendo.effects.box($("#foo")),
+        var fooBox = kendo.effects.box($("#foo"));
         var barBox = kendo.effects.box($("#bar"));
 
-        console.log(kendo.effects.fitScale(bar, foo); // 0.25;
+        console.log(kendo.effects.fitScale(barBox, fooBox)); // 0.5;
     </script>
 
 ### transformOrigin
