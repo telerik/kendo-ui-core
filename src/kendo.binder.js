@@ -942,7 +942,8 @@ var __meta__ = { // jshint ignore:line
             refresh: function(e) {
                 var that = this,
                     source,
-                    widget = that.widget;
+                    widget = that.widget,
+                    select, multiselect;
 
                 e = e || {};
 
@@ -963,7 +964,10 @@ var __meta__ = { // jshint ignore:line
                         } else {
                             widget[fieldName].data(source);
 
-                            if (that.bindings.value && (widget instanceof kendo.ui.Select || widget instanceof kendo.ui.MultiSelect)) {
+                            select = kendo.ui.Select && widget instanceof kendo.ui.Select;
+                            multiselect = kendo.ui.MultiSelect && widget instanceof kendo.ui.MultiSelect;
+
+                            if (that.bindings.value && (select || multiselect)) {
                                 widget.value(retrievePrimitiveValues(that.bindings.value.get(), widget.options.dataValueField));
                             }
                         }
