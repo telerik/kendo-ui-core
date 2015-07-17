@@ -260,6 +260,28 @@
         equal($(".k-notification").length, 0);
     });
 
+    test("new popup ignores old ones that are currently being hidden", 3, function () {
+        createNotification();
+
+        kendo.effects.enable();
+
+        notification.show("foo");
+        var popup1 = $(".k-notification").last();
+        var offset1 = popup1.offset();
+        var text1 = popup1.text();
+
+        notification.hide();
+
+        notification.show("bar");
+        var popup2 = $(".k-notification").last();
+        var offset2 = popup2.offset();
+        var text2 = popup2.text();
+
+        ok(text1.indexOf("foo") >= 0);
+        ok(text2.indexOf("bar") >= 0);
+        equal(offset2.top, offset1.top);
+    });
+
     test("shortcut show methods call show method with appropriate arguments", 8, function () {
         var defaultArgs = [null, null],
             methods = ["info", "success", "warning", "error"],
@@ -278,6 +300,19 @@
             equal(args[0], "foo");
             equal(args[1], methods[j]);
         }
+    });
+
+    test("popup notifications receive a k-hiding CSS class while being hidden", function () {
+        createNotification({
+            autoHideAfter: 0
+        });
+
+        kendo.effects.enable();
+
+        notification.show("foo");
+        notification.hide();
+
+        ok($(".k-notification").parent().hasClass("k-hiding"));
     });
 
     test("hide method hides all popup notifications", function() {
