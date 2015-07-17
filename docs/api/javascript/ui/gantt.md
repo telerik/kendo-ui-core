@@ -236,6 +236,29 @@ data source is fired. By default the widget will bind to the data source specifi
     });
     </script>
 
+### columnResizeHandleWidth `Number` *(default: 3)*
+
+Defines the width of the column resize handle in pixels. Apply a larger value for easier grasping.
+
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+      columns: ["title", "start", "end"],
+      dataSource: [{
+         id: 1,
+         orderId: 0,
+         parentId: null,
+         title: "Task1",
+         start: new Date("2014/6/17 9:00"),
+         end: new Date("2014/6/17 11:00")
+      }],
+      resizable: true,
+      columnResizeHandleWidth: 6
+    });
+    </script>
+
 ### columns `Array`
 
 The configuration of the Gantt columns. An array of JavaScript objects or strings. A JavaScript objects are interpreted as column configurations. Strings are interpreted as the
