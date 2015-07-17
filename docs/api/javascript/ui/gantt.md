@@ -2401,6 +2401,28 @@ Sets the title of the PDF file.
         ]
     });
     </script>
+    
+### resizable `Boolean` *(default: false)*
+
+If set to `true` allows users to resize columns by dragging their header borders. By default resizing is disabled.    
+
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+      columns: ["title", "start", "end"],
+      dataSource: [{
+         id: 1,
+         orderId: 0,
+         parentId: null,
+         title: "Task1",
+         start: new Date("2014/6/17 9:00"),
+         end: new Date("2014/6/17 11:00")
+      }],
+      resizable: true
+    });
+    </script>
 
 ### selectable `Boolean` *(default: true)*
 
@@ -4384,6 +4406,74 @@ The widget instance which fired the event.
     });
     var gantt = $("#gantt").data("kendoGantt");
     gantt.bind("change", gantt_change);
+    </script>
+       
+### columnResize
+
+Fired when the user resizes a column.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.column `Object`
+
+A JavaScript object which represents the [column](#configuration-columns) configuration.
+
+##### e.newWidth `Number`
+
+The new column width.
+
+##### e.oldWidth `Number`
+
+The previous column width.
+
+##### e.sender `kendo.ui.Gantt`
+
+The widget instance which fired the event.
+
+#### Example - subscribe to the "columnResize" event during initialization
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+      columns: ["title", "start", "end"],
+      dataSource: [{
+         id: 1,
+         orderId: 0,
+         parentId: null,
+         title: "Task1",
+         start: new Date("2014/6/17 9:00"),
+         end: new Date("2014/6/17 11:00")
+      }],
+      resizable: true,
+      columnResize: function(e) {
+        console.log(e.column.field, e.newWidth, e.oldWidth);
+      }
+    });
+    </script>
+
+#### Example - subscribe to the "columnResize" event after initialization
+
+    <div id="gantt"></div>
+    <script>
+    function gantt_columnResize(e) {
+      console.log(e.column.field, e.newWidth, e.oldWidth);
+    }
+    $("#gantt").kendoGantt({
+      columns: ["title", "start", "end"],
+      dataSource: [{
+         id: 1,
+         orderId: 0,
+         parentId: null,
+         title: "Task1",
+         start: new Date("2014/6/17 9:00"),
+         end: new Date("2014/6/17 11:00")
+      }],
+      resizable: true
+    });
+    var gantt = $("#gantt").data("kendoGantt");
+    gantt.bind("columnResize", gantt_columnResize);
     </script>
 
 ### navigate
