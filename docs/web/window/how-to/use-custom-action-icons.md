@@ -41,7 +41,7 @@ non-Kendo UI icons, custom CSS is required, so that the generated CSS class is a
       $(document).ready(function() {
         var win = $("#window").kendoWindow({
           width: 300,
-          actions: ["foo", "clock"], // action names generate icons with a match
+          actions: ["foo", "clock"], // action names generate icons with corresponding CSS classes
           title: "Window Title"
         }).data("kendoWindow");
 
