@@ -368,7 +368,7 @@ This is a shorthand method for [`show(data, "error")`](#methods-show)
 
 Returns a jQuery collection of all visible notifications, displayed by the given widget instance. Each item in the collection is a `div.k-notification` element.
 
-If you will be using this method to dispose of all visible messages, (e.g. before showing new ones), then **remove** them from the DOM
+This method is useful for quick removal of all visible messages before showing new ones. After obtaining all visible messages, **remove** them from the DOM
 instead of [hiding](#methods-hide) them, unless animations are disabled. This is because animations are asynchronous and the new messages
 will be shown on the wrong places before the old ones have been hidden. Another thing to keep in mind is that when using
 [**popup**](/web/notification/overview#popup-messages) notification messages, you should remove the [**parent**](/web/notification/overview#html-output)
@@ -418,6 +418,9 @@ of each member of the collection, returned by the `getNotifications()` method. I
 ### hide
 
 Hides all notifications from the given widget instance.
+
+If you intend to use this method to dispose of all visible messages before showing new ones,
+then use the [`getNotifications()`](#methods-getNotifications) method instead, unless animations are disabled.
 
 #### Example
 
