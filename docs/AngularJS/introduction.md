@@ -568,4 +568,30 @@ Sometimes you might need a reference to the widgets in order to call methods on 
   });
 </script>
 ```
+
+Setting the options of the widget, in a custom directive - with the Q2 2015 release the timeout initialization of the widgets has been removed. So in order to set the options as part of the link function of a custom directive `k-ng-delay` and `timeout` should be used:
+
+#### Set options in link function
+
+````html
+<div id="example" ng-app="KendoDemos">
+    <div class="demo-section k-header" ng-controller="MyCtrl">
+        <my-custom-directive />
+    </div>
+</div>
+<script>
+    angular.module("KendoDemos", [ "kendo.directives" ])
+        .directive('myCustomDirective', function($timeout) {
+            return {
+                template: '<input kendo-auto-complete k-options="options" k-ng-delay="options" style="width: 100%;" />',
+                link: function (scope) {
+                $timeout(function() {
+                    scope.options = { placeholder: 'placeholder text here'};
+                })
+            }
+        };
+    })
+    .controller("MyCtrl", function($scope){});
+</script>
+````
 {% endraw %}
