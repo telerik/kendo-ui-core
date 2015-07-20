@@ -1302,6 +1302,18 @@ is displayed in the column header cell.
       dataSource: [ { name: "Jane Doe" }, { name: "John Doe" } ]
     });
     </script>
+    
+#### Example - column header template as a Kendo UI template function with conditional logic
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [ {
+        field: "name",
+        headerTemplate: kendo.template('# if (true) { # <input type="checkbox" id="check-all" /><label for="check-all">Check All</label> # } else { # this will never be displayed # } #')
+      }],
+      dataSource: [ { name: "Jane Doe" }, { name: "John Doe" } ]
+    });
+    </script>
 
 ### columns.hidden `Boolean` *(default: false)*
 
