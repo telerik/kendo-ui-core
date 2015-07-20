@@ -563,6 +563,21 @@ test('parse MMMM yyyy date format', function () {
     ok(isValidDate(2000, 1, 1, result));
 });
 
+test('parse MMMM yyyy date format if the current culture contains months with names that start with the same letters', function () {
+    var dateFormat = "MMMM yyyy";
+    var calendar = kendo.culture().calendar;
+    var monthNames = (calendar._lowerMonths || calendar.months).names;
+    var originalMonthName = monthNames[5];
+    try {
+        monthNames[5] = monthNames[6].substr(0, monthNames[6].length - 1);
+        var result = parse(monthNames[6] + " 2000", dateFormat);
+        ok(isValidDate(2000, 7, 1, result));
+    }
+    finally {
+        monthNames[5] = originalMonthName;
+    }
+});
+
 test('parse should return null if only year is passed', function () {
     var dateFormat = "M/dd/yyyy";
 
