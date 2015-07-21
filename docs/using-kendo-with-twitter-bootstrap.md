@@ -28,10 +28,30 @@ Other Bootstrap themes should (or can) be used with any other Kendo UI theme, or
 Using the responsive features of Bootstrap does not differ from other responsive sites;
 refer to the help topic on [how to use Kendo UI in responsive web pages](./using-kendo-in-responsive-web-pages).
 
-## Using a customized version of Bootstrap
+## Using a custom Bootstrap theme with Kendo UI
 
-If you have customized the colors of Bootstrap before using it, and need Kendo UI to match the newly chosen colors,
-you will need to customize Kendo UI's bootstrap theme through the [Kendo UI ThemeBuilder](http://demos.telerik.com/kendo-ui/themebuilder/web.html).
+If you have customized the Bootstrap color scheme, and need Kendo UI to match it, you have two options:
+
+* customize Kendo UI's Bootstrap theme through the [Kendo UI ThemeBuilder](http://demos.telerik.com/kendo-ui/themebuilder/web.html);
+* compile a custom version of the Kendo UI Bootstrap theme by using the Bootstrap Less file and an auxiliary file that we provide, which maps Bootstrap Less variables to Kendo UI variables.
+
+The second option assumes that one is familiar with the process of generating CSS files from Less files, and requires the following steps:
+
+1. Locate the `kendo.bootstrap.less` file in the Kendo UI installation folder. The Less file is placed in `src/styles/web/`.
+Also check the [Less Structure documentation section](/web/appearance-styling#less-structure).
+1. Open the `kendo.bootstrap.less` file and uncomment the two `@import` statements at the bottom.
+
+        /*@import "bootstrap-variables.less";*/
+        /*@import "bootstrap-mapper.less";*/
+
+1. Make sure that the two files, which the above two `@imports` reference, exist at the specified locations.
+`bootstrap-variables.less` is a file that you need to take from the Bootstrap source code.
+`bootstrap-mapper.less` exists in the same folder as `kendo.bootstrap.less`.
+1. Compile your custom Kendo UI Bootstrap theme and use it together with [`kendo.common-bootstrap.min.css`](/web/appearance-styling#common-css-files).
+1. There is no straight-forward relationship between all Bootstrap Less variables and all Kendo UI Less variables.
+The variable mappings inside `bootstrap-mapper.less` have been created to achieve a decent level of compatibility and follow common sense logic.
+It is possible to change a specific mapping to change the logic by which the custom Kendo UI theme is generated.
+We also accept suggestions for improvements via [pull requests to the Kendo UI Core repository](https://github.com/telerik/kendo-ui-core/blob/master/styles/web/bootstrap-mapper.less).
 
 ## Nesting Kendo UI widgets and Bootstrap Grid layout
 
