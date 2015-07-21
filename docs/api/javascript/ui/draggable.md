@@ -561,9 +561,9 @@ The `hold` event represents a jQuery `mousedown` event and contains all the even
         hint: function(element) {
           var hintElement = $("<div id='hint'></div>");
           hintElement.css({
-            "background-image": "url('http://www.telerik.com/image/kendo-logo.png')",
-            "width": "230px",
-            "height": "80px"
+            "background-image": "url('http://demos.telerik.com/kendo-ui/content/web/combobox/tShirt.png')",
+        	"width": "248px",
+        	"height": "289px"
           });
           return hintElement;
         }
