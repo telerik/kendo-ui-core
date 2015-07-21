@@ -4778,6 +4778,78 @@ The widget instance which fired the event.
         treelist.bind("columnReorder", treelist_columnReorder);
     </script>
 
+### columnResize
+
+Fired when the user resizes a column.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.column `Object`
+
+A JavaScript object which represents the [column](#configuration-columns) configuration.
+
+##### e.newWidth `Number`
+
+The new column width.
+
+##### e.oldWidth `Number`
+
+The previous column width.
+
+##### e.sender `kendo.ui.TreeList`
+
+The widget instance which fired the event.
+
+#### Example - subscribe to the "columnResize" event during initialization
+
+    <div id="treeList"></div>
+    <script>
+        $("#treeList").kendoTreeList({
+            columns: [
+                { field: "name" },
+                { field: "age" }
+            ],
+            dataSource: {
+                data: [
+                    { id: 1, parentId: null, name: "Jane Doe", age: 22 },
+                    { id: 2, parentId: 1, name: "John Doe", age: 24 }
+                ]
+            },
+            resizable: true,
+            columnResize: function(e) {
+                console.log(e.column.field, e.newWidth, e.oldWidth);
+            }
+        });
+    </script>
+
+#### Example - subscribe to the "columnResize" event after initialization
+
+    <div id="treeList"></div>
+    <script>
+        function treelist_columnResize(e) {
+          console.log(e.column.field, e.newWidth, e.oldWidth);
+        }
+
+        $("#treeList").kendoTreeList({
+            columns: [
+                { field: "name" },
+                { field: "age" }
+            ],
+            dataSource: {
+                data: [
+                    { id: 1, parentId: null, name: "Jane Doe", age: 22 },
+                    { id: 2, parentId: 1, name: "John Doe", age: 24 }
+                ]
+            },
+            resizable: true
+        });
+
+        var treelist = $("#treeList").data("kendoTreeList");
+        treelist.bind("columnResize", treelist_columnResize);
+    </script>
+
 ### columnMenuInit
 
 Fired when the column menu is initialized.
