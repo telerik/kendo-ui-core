@@ -48,9 +48,6 @@ The example below demonstrates how to create custom editor in Kendo Grid using A
       $scope.categoryDropDownEditor = function(container, options) {
         var editor = $('<input kendo-drop-down-list required k-data-text-field="\'CategoryName\'" k-data-value-field="\'CategoryID\'" k-data-source="ddlDataSource" data-bind="value:' + options.field + '"/>')
         .appendTo(container);
-
-        $compile(editor)($scope);
-        editor.css("visibility", "visible");
       }
 
       $scope.mainGridOptions = {
