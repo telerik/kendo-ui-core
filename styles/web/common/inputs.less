@@ -188,6 +188,15 @@ span.k-dropdown,
     right: 3px;
 }
 
+/*prevent missing bottom border at some zoom levels*/
+span.k-textbox:after
+{
+  content: "\a0";
+  display: block;
+  height: .4px;
+  overflow: hidden;
+}
+
 .k-autocomplete,
 .k-dropdown-wrap.k-state-focused,
 .k-dropdown-wrap.k-state-hover,
