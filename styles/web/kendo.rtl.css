@@ -930,7 +930,6 @@
 .k-rtl .k-treeview .k-plus-disabled,
 .k-rtl .k-treeview .k-minus-disabled
 {
-    float: right;
     margin-left: 0;
     margin-right: -16px;
 }
