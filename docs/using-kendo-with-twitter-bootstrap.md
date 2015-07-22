@@ -51,7 +51,8 @@ Also check the [Less Structure documentation section](/web/appearance-styling#le
 1. There is no straight-forward relationship between all Bootstrap Less variables and all Kendo UI Less variables.
 The variable mappings inside `bootstrap-mapper.less` have been created to achieve a decent level of compatibility and follow common sense logic.
 It is possible to change a specific mapping to change the logic by which the custom Kendo UI theme is generated.
-We also accept suggestions for improvements via [pull requests to the Kendo UI Core repository](https://github.com/telerik/kendo-ui-core/blob/master/styles/web/bootstrap-mapper.less).
+We also accept suggestions for improvements to the [`bootstrap-mapper.less` file](https://github.com/telerik/kendo-ui-core/blob/master/styles/web/bootstrap-mapper.less)
+via [pull requests to the Kendo UI Core repository](https://github.com/telerik/kendo-ui-core/#how-to-contribute).
 
 ## Nesting Kendo UI widgets and Bootstrap Grid layout
 
