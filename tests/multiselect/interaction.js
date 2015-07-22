@@ -307,6 +307,35 @@ test("MultiSelect unselects custom option", function() {
     ok(select[0].children[3].selected); //item2
 });
 
+test("MultiSelect removed custom option is not selected on list rebind", function() {
+    var multiselect = new MultiSelect(select, {
+        dataValueField: "value",
+        dataTextField: "text",
+        dataSource: [
+            { text: "item1", value: "1" },
+            { text: "item2", value: "2" }
+        ],
+        value: ["1", "2"]
+    });
+
+    multiselect.open();
+    multiselect.listView.filter(true);
+    multiselect.dataSource.filter({
+        field: "text",
+        operator: "eq",
+        value: "item1"
+    });
+
+    multiselect.ul.children().eq(0).click();
+    multiselect.listView.filter(false);
+    multiselect.dataSource.filter({});
+
+    var li = multiselect.ul.find(".k-state-selected");
+
+    equal(li.length, 1);
+    equal(li.text(), "item2");
+});
+
 test("MultiSelect removes value matching custom option", function() {
     var multiselect = new MultiSelect(select, {
         dataSource: ["item1", "item2"],
