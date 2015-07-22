@@ -1018,7 +1018,7 @@ which field to update. The other option is to use [MVVM](/framework/mvvm/overvie
           start: new Date("2014/6/17 9:00"),
           end: new Date("2014/6/17 11:00")
         }
-      ]
+      ],
       editable: {
       	template: $("#editor").html()
       }
@@ -1050,7 +1050,7 @@ which field to update. The other option is to use [MVVM](/framework/mvvm/overvie
           start: new Date("2014/6/17 9:00"),
           end: new Date("2014/6/17 11:00")
         }
-      ]
+      ],
       editable: {
       	template: $("#editor").html()
       }
