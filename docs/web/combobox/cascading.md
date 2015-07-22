@@ -56,6 +56,17 @@ And here are the paramenters of this request:
 
 > Please note that the filter operator will always be "eq". The child combobox will use the `dataValueField` option of the parent combobox in order to filter the data.
 
+## Kendo MVVM and cascading widgets
+
+The MVVM [value](/framework/mvvm/bindings/value) binding updates the **model** when UI element triggers `change` event. When widgets cascades, however, they will not raise change event and thus the model will not be updated.
+For those who need synced **model**, please review the following demo which shows how to implement a [custom MVVM binding](/framework/mvvm/bindings/custom) that will update the model accordingly:
+
+- [http://dojo.telerik.com/@ggkrustev/aSAlU](http://dojo.telerik.com/@ggkrustev/aSAlU)
+
+For more details, why the widgets does not trigger `change` event refer to this Github discussion:
+
+- [http://github.com/telerik/kendo-ui-core/issues/661](http://github.com/telerik/kendo-ui-core/issues/661)
+
 ####FAQ
 
 Q: I am using cascading comboboxes with `"autoBind: true"` option set and I need to pre-set the selected items. How to do that?
@@ -67,7 +78,7 @@ A: You need to set the value of the comboboxes. For instance, you can define it 
 
     <script>
        $("#parent").kendoComboBox();
-       
+
        $("#child").kendoComboBox({
                 cascadeFrom: "parent"
        });
