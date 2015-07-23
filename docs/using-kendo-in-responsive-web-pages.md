@@ -23,6 +23,7 @@ Most Kendo UI Widgets work and auto-resize when used in responsive web pages out
 * Mobile ScrollView
 * MobileSwitch
 * Grid
+* PivotGrid
 * Scheduler
 * Slider
 * Splitter
@@ -88,11 +89,11 @@ even if the widget's dimensions have not changed ("force" mode).
 #### Example: using widget `resize()`
 
     var gridWidget = $("#GridID").data("kendoGrid");
-    
+
     // apply new height and trigger layout readjustment
     gridWidget.wrapper.height(800);
     gridWidget.resize();
-    
+
     // force layout readjustment without setting a new height
     gridWidget.resize(true);
 
@@ -115,15 +116,15 @@ Kendo UI uses media queries to enhance the behavior of Kendo UI widgets on diffe
 
 Kendo UI responsive styles use the Non-Mobile First Method with media queries having max-width breakpoints. Max-width refers to every window or device with width or screen-width of less than or equal to the amount given. That said, styles written e.g. under 480px breakpoint will override the base styles on screens of max-width equal to 480px or less.
 
-# Responsive UI enhancements 
-These utilize media queries and include built-in UI enhancements for scalability and improved user experience on different form factors. 
+# Responsive UI enhancements
+These utilize media queries and include built-in UI enhancements for scalability and improved user experience on different form factors.
 
 
-Such features are available for widgets like grid, scheduler, treelist, etc. 
+Such features are available for widgets like grid, scheduler, treelist, etc.
 
 #### Responsive UI features in widgets ####
-* Grid: Integrates a responsive pager, which automatically adjusts on different screen widths and provides the ability to define which columns to be hidden on small view ports. This makes them more flexible for mobile web usage. 
-* Scheduler: provides mechanism to overflow its View selection options into a dropdown on small screen estates. Additionally, it can apply short date/month/year abbreviations where applicable. Thus, its visual presentation is fine-tuned for usage in responsive web scenarios. 
+* Grid: Integrates a responsive pager, which automatically adjusts on different screen widths and provides the ability to define which columns to be hidden on small view ports. This makes them more flexible for mobile web usage.
+* Scheduler: provides mechanism to overflow its View selection options into a dropdown on small screen estates. Additionally, it can apply short date/month/year abbreviations where applicable. Thus, its visual presentation is fine-tuned for usage in responsive web scenarios.
 
 We also have a responsive panel widget which is a responsive container component. Its sole purpose is providing the necessary plumbing for hiding content on small screens when the specified width boundary is passed, and showing this content when its "hamburger" icon button is clicked.
 
