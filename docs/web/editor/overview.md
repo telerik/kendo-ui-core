@@ -39,6 +39,8 @@ influence the editable content. If custom styles need to be applied to the edita
 The Editor tools are only visible when the widget is focused. The Editor's content resides on the main web page, so the page styling can influence the editable content.
 [Inline Editor Demo](http://demos.telerik.com/kendo-ui/web/editor/inline-editing.html)
 
+> Due to the iOS Safari browser's limited iframe support, it is recommended to use the Editor's **inline mode** on iOS devices.
+
 ## Configuring the Editor
 
 The editor tools can be configured through the [`tools` configuration option](/api/web/editor#tools).
