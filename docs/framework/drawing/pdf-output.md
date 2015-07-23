@@ -142,7 +142,7 @@ Compression can make a big difference in the output file size when you're using 
 
 > **Note:** besides drastically reducing the output size, Pako enables the browser to use less memory while rendering
 > the PDF.  Chrome is known to crash on generating very large PDF-s and simply including this library will mitigate the
-> problem.  It is bundled with Kendo as `pako_deflate.min.js`.
+> problem.  It is bundled with Kendo UI as `pako_deflate.min.js`.
 
 
 ## Supported browsers
